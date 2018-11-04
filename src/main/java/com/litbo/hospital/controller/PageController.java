@@ -5,6 +5,5 @@ public class PageController {
         System.out.println("test");
         System.out.println("zjc");
         System.out.println("test1");
-        System.out.println("test2");
     }
 }
