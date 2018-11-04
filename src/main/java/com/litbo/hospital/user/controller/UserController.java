@@ -1,4 +1,4 @@
-package com.litbo.hospital.controller;
+package com.litbo.hospital.user.controller;
 
 public class UserController {
     private String name;
