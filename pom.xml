@@ -59,12 +59,7 @@
             <artifactId>druid</artifactId>
             <version>1.1.0</version>
         </dependency>
-        <!--mybatis-->
-       <!-- <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
-        </dependency>-->
+
         <!--导出文档-->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -77,11 +72,17 @@
             <artifactId>pagehelper</artifactId>
             <version>3.2.1</version>
         </dependency>
-
+        <!--数据库驱动-->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
     </dependencies>
