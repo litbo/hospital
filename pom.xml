@@ -66,6 +66,12 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.9</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
         <!--分页-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -78,7 +84,7 @@
             <artifactId>mssql-jdbc</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!--mybatis-->
+        <!--mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
