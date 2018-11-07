@@ -10,7 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.List;
+
 public class ExportExcelUtil {
+    /**
+     *
+     * @param response
+     * @param fileName 文件名
+     * @param data 需要导出的数据
+     * @throws Exception
+     */
     public static void exportExcel(HttpServletResponse response, String fileName, ExcelData data) throws Exception {
         // 告诉浏览器用什么软件可以打开此文件
         response.setHeader("content-Type", "application/vnd.ms-excel");
@@ -18,21 +26,31 @@ public class ExportExcelUtil {
         response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(fileName, "utf-8"));
         exportExcel(data, response.getOutputStream());
     }
+
+    /**
+     *
+     * @param data
+     * @param out
+     * @throws Exception
+     */
     public static void exportExcel(ExcelData data, OutputStream out) throws Exception {
         HSSFWorkbook wb = new HSSFWorkbook();
-        try {
-            String sheetName = data.getName();
-            if (null == sheetName) {
-                sheetName = "Sheet1";
-            }
-           HSSFSheet sheet = wb.createSheet(sheetName);
-            writeExcel(wb, sheet, data);
-
-            wb.write(out);
-        } catch (Exception e) {
-            System.out.println(e);
+        String sheetName = data.getName();
+        if (null == sheetName) {
+            sheetName = "Sheet1";
         }
+       HSSFSheet sheet = wb.createSheet(sheetName);
+        writeExcel(wb, sheet, data);
+        wb.write(out);
+
     }
+
+    /**
+     *
+     * @param wb
+     * @param sheet
+     * @param data
+     */
     private static void writeExcel(HSSFWorkbook wb, Sheet sheet, ExcelData data) {
         int rowIndex = 0;
         rowIndex = writeTitlesToExcel(wb, sheet, data.getTitles());
@@ -41,6 +59,13 @@ public class ExportExcelUtil {
 
     }
 
+    /**
+     *
+     * @param wb
+     * @param sheet
+     * @param titles
+     * @return
+     */
     private static int writeTitlesToExcel(HSSFWorkbook wb, Sheet sheet, List<String> titles) {//增加标题内容以及样式
         int rowIndex = 0;
         int colIndex = 0;
@@ -54,6 +79,15 @@ public class ExportExcelUtil {
         rowIndex++;
         return rowIndex;
     }
+
+    /**
+     *
+     * @param wb
+     * @param sheet
+     * @param rows
+     * @param rowIndex
+     * @return
+     */
     private static int writeRowsToExcel(HSSFWorkbook wb, Sheet sheet, List<List<Object>> rows, int rowIndex) {
         int colIndex = 0;
 
@@ -74,7 +108,11 @@ public class ExportExcelUtil {
         return rowIndex;
     }
 
-
+    /**
+     *
+     * @param sheet
+     * @param columnNumber
+     */
     private static void autoSizeColumns(Sheet sheet, int columnNumber) {
         for (int i = 0; i < columnNumber; i++) {
             int orgWidth = sheet.getColumnWidth(i);
