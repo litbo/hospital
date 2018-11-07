@@ -1,7 +1,9 @@
 package com.litbo.hospital.common.utils.poi;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +19,7 @@ import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
 /**
  * 读取execl
  */
-public class ImportExcelUtils {
+public class ImportExcelUtil {
 
     /**
      * 读取Xlsx
@@ -28,6 +30,11 @@ public class ImportExcelUtils {
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(file);
+            if (JudgeExcelVesion.isExcel2007(file.getCanonicalPath())) {//2007版本
+                workbook = new XSSFWorkbook(inputStream);
+            } else {
+                workbook = new HSSFWorkbook(inputStream);
+            }
             workbook = WorkbookFactory.create(inputStream);
             inputStream.close();
             //工作表对象
