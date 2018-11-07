@@ -1,13 +1,15 @@
 package com.litbo.hospital.common.utils.poi;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
-import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.List;
 public class ExportExcelUtils {
     public static void exportExcel(HttpServletResponse response, String fileName, ExcelData data) throws Exception {
         // 告诉浏览器用什么软件可以打开此文件
@@ -71,6 +73,7 @@ public class ExportExcelUtils {
         }
         return rowIndex;
     }
+
 
     private static void autoSizeColumns(Sheet sheet, int columnNumber) {
         for (int i = 0; i < columnNumber; i++) {

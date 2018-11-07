@@ -14,4 +14,8 @@ public class ExcelData implements Serializable {
     private List<List<Object>> rows;
     // 页签名称
     private String name;
+    //返回信息
+    private String message="成功";
+    //状态
+    private boolean status=true;
 }
