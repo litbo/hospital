@@ -12,6 +12,16 @@ public class User {
 
     private String addr;
 
+    public User() {
+    }
+
+    public User(Integer id, String username, Integer age, String addr) {
+        this.id = id;
+        this.username = username;
+        this.age = age;
+        this.addr = addr;
+    }
+
     @Override
     public String toString() {
         return "User{" +
