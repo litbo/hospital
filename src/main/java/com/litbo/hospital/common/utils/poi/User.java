@@ -24,7 +24,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "LifeManage{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", age=" + age +

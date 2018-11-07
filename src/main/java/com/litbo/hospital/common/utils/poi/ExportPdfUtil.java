@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -46,27 +47,43 @@ public class ExportPdfUtil {
      */
     private static void exportPdf(PdfData data, OutputStream out) throws DocumentException, IOException, IllegalAccessException {
         Document document = new Document();
+        PdfPCell cell;
         // A4纸张
         document.setPageSize(PageSize.A4);
 
         PdfWriter.getInstance(document, out);
         document.open();
+
         List<String> titles = data.getTitles();
         List rows = data.getRows();
+        String name = data.getName();
 
         PdfPTable table = new PdfPTable(titles.size());
-
-        for (String title : titles) {
-            PdfPCell cell = new PdfPCell();
-            cell.setPhrase(new Paragraph(title, setChineseFont()));
-            table.addCell(cell);
-
+        /*添加标题*/
+        if(StringUtils.isNotBlank(name)){
+            Paragraph paragraph = new Paragraph(name, setNameFont());
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(paragraph);
+            /*设置与表格之间的距离*/
+            document.add(new Paragraph(" "));
         }
-        for (Object obj : rows) {
-            List<String> values = getValue(obj);
+        /*添加表头*/
+        for (String title : titles) {
+            cell = new PdfPCell();
+            cell.setPhrase(new Paragraph(title, setChineseFont()));
+            cell.setBackgroundColor(new BaseColor(235,235,235));
+            table.addCell(cell);
+        }
+        /*添加表内容*/
+        for (int i = 0;i<rows.size();i++) {
+            List<String> values = getValue(rows.get(i));
             for (String value : values) {
-                PdfPCell cell = new PdfPCell();
+                cell = new PdfPCell();
                 cell.setPhrase(new Paragraph(value, setChineseFont()));
+                /*设置间隔背景色*/
+                if (i % 2 != 0) {
+                    cell.setBackgroundColor(new BaseColor(235, 235, 235));
+                }
                 table.addCell(cell);
             }
         }
@@ -82,7 +99,17 @@ public class ExportPdfUtil {
      */
     private static Font setChineseFont() throws IOException, DocumentException {
         BaseFont bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-        return new Font(bf, 12, Font.NORMAL);
+        return new Font(bf, 6, Font.NORMAL);
+    }
+    /**
+     * 设置文件标题字体样式
+     * @return Font 返回字体样式
+     * @throws IOException IO异常
+     * @throws DocumentException 文档异常
+     */
+    private static Font setNameFont() throws IOException, DocumentException {
+        BaseFont bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+        return new Font(bf, 10, Font.BOLD);
     }
 
     /**
@@ -98,7 +125,7 @@ public class ExportPdfUtil {
         List<String> values = new ArrayList<>();
         for (Field f : field) {
             f.setAccessible(true);
-            String value = (String) f.get(object);
+            String value = String.valueOf(f.get(object));
             values.add(value);
         }
         return values;
