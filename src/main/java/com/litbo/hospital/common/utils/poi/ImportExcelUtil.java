@@ -17,7 +17,7 @@ import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
 /**
  * 读取execl
  */
-public class ImportExcelUtils {
+public class ImportExcelUtil {
 
     /**
      * 读取Xlsx
