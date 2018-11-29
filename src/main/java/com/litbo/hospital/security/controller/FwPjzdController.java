@@ -1,5 +1,4 @@
 package com.litbo.hospital.security.controller;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.CodeMsg;
@@ -13,24 +12,14 @@ import org.springframework.web.bind.annotation.*;
 public class FwPjzdController {
     @Autowired
     private FwPjzdService pjzdService;
-    @RequestMapping("/listPjzd")
+    @RequestMapping(value = "/listFwPjzd",method = RequestMethod.GET)
     public Result listPjzd(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
-        PageHelper.startPage(pageNum,pageSize);
-        PageInfo pageInfo = new PageInfo(pjzdService.listPjzd());
-        return Result.success(pageInfo);
+        return Result.success(pjzdService.listFwPjzd(pageNum,pageSize));
     }
     @RequestMapping("/insertFwPjzd")
-    public Result getAllFwPjzd(FwPjzd pjzd){
-        try {
-            Integer res = pjzdService.insetFwPjzd(pjzd);
-            if(res == 1){
-                return Result.success(null);
-            }else {
-                return Result.error(CodeMsg.SERVER_ERROR);
-            }
-        }catch (Exception e){
-            return Result.error(CodeMsg.PARAM_ERROR);
-        }
+    public Result insertFwPjzd(FwPjzd pjzd){
+        System.out.println(pjzd);
+        return Result.success(pjzdService.insertFwPjzd(pjzd));
     }
 }

@@ -1,7 +1,9 @@
-package com.litbo.hospital.security.service.serviceImpl;
+package com.litbo.hospital.security.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.result.CodeMsg;
+import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.dao.FwPjzdDao;
 import com.litbo.hospital.security.service.FwPjzdService;
@@ -14,14 +16,13 @@ import java.util.List;
 public class FwPjzdServiceImpl implements FwPjzdService {
     @Autowired
     private FwPjzdDao pjzdDao;
-    public List<FwPjzd> listPjzd(){
-
-        List<FwPjzd> list = pjzdDao.listPjzd();
-        return  list;
+    public PageInfo listFwPjzd(int pageNum,int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        return  new PageInfo(pjzdDao.listFwPjzd());
     }
-
     @Override
-    public int insetFwPjzd(FwPjzd pjzd) {
+    public int insertFwPjzd(FwPjzd pjzd) {
         return pjzdDao.insertPjzd(pjzd);
+
     }
 }
