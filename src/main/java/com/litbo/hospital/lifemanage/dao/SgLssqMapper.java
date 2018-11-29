@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgLssq;
-import com.litbo.hospital.lifemanage.bean.SgLssqExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 临时采购授权表
  */
+@Mapper
 public interface SgLssqMapper {
+    /*
     int countByExample(SgLssqExample example);
 
     int deleteByExample(SgLssqExample example);
@@ -30,4 +29,5 @@ public interface SgLssqMapper {
     int updateByPrimaryKeySelective(SgLssq record);
 
     int updateByPrimaryKey(SgLssq record);
+     */
 }

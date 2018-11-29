@@ -1,15 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgKstl;
-import com.litbo.hospital.lifemanage.bean.SgKstlExample;
-
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 科室讨论表
  */
+@Mapper
 public interface SgKstlMapper {
+    /*
     int countByExample(SgKstlExample example);
 
     int deleteByExample(SgKstlExample example);
@@ -37,4 +35,5 @@ public interface SgKstlMapper {
     int updateByPrimaryKeyWithBLOBs(SgKstlExample record);
 
     int updateByPrimaryKey(SgKstl record);
+     */
 }

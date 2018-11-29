@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgTlPmExample;
-import com.litbo.hospital.lifemanage.bean.SgTlPm;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 讨论申购设备关联表
  */
+@Mapper
 public interface SgTlPmMapper {
+    /*
     int countByExample(SgTlPmExample example);
 
     int deleteByExample(SgTlPmExample example);
@@ -24,4 +23,5 @@ public interface SgTlPmMapper {
     int updateByExampleSelective(@Param("record") SgTlPm record, @Param("example") SgTlPmExample example);
 
     int updateByExample(@Param("record") SgTlPm record, @Param("example") SgTlPmExample example);
+     */
 }

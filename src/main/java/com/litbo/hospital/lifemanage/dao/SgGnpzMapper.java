@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgGnpz;
-import com.litbo.hospital.lifemanage.bean.SgGnpzExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 功能配置表
  */
+@Mapper
 public interface SgGnpzMapper {
+    /*
     int countByExample(SgGnpzExample example);
 
     int deleteByExample(SgGnpzExample example);
@@ -30,4 +29,5 @@ public interface SgGnpzMapper {
     int updateByPrimaryKeySelective(SgGnpz record);
 
     int updateByPrimaryKey(SgGnpz record);
+     */
 }

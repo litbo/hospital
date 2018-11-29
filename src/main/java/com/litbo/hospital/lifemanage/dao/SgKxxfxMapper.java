@@ -1,15 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgKxxfx;
-import com.litbo.hospital.lifemanage.bean.SgKxxfxExample;
-
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 可行性分析表
  */
+@Mapper
 public interface SgKxxfxMapper {
+    /*
     int countByExample(SgKxxfxExample example);
 
     int deleteByExample(SgKxxfxExample example);
@@ -37,4 +35,5 @@ public interface SgKxxfxMapper {
     int updateByPrimaryKeyWithBLOBs(SgKxxfxExample record);
 
     int updateByPrimaryKey(SgKxxfx record);
+     */
 }

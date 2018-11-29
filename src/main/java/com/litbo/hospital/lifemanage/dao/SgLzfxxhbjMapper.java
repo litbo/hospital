@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgLzfxxhbj;
-import com.litbo.hospital.lifemanage.bean.SgLzfxxhbjExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 论证分析参考型号及报价表
  */
+@Mapper
 public interface SgLzfxxhbjMapper {
+    /*
     int countByExample(SgLzfxxhbjExample example);
 
     int deleteByExample(SgLzfxxhbjExample example);
@@ -36,4 +35,5 @@ public interface SgLzfxxhbjMapper {
     int updateByPrimaryKeyWithBLOBs(SgLzfxxhbj record);
 
     int updateByPrimaryKey(SgLzfxxhbj record);
+     */
 }
