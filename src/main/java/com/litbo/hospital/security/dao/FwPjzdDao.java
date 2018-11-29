@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface FwPjzdDao {
     @Select("SELECT * FROM fw_pjzd")
-    List<FwPjzd> listPjzd();
+    List<FwPjzd> listFwPjzd();
 
     @Insert("INSERT INTO fw_pjzd(pjfl_id, pj_kw,  pj_scqy_id, pj_ghs_id, sb_id, pj_name, zb_time,"+
             " pj_ggxh,pj_bzdw, pj_zczh, pj_zcz_dq_time, pj_xg_time, pj_cj_time, pj_szm) "+
