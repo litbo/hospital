@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 商务/临床/技术验收表
+ * 商务/临床/技术验收表Mapper类
  */
 @Mapper
 public interface SgYsMapper {

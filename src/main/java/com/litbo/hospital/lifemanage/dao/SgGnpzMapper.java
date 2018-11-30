@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 功能配置表
+ * 功能配置表Mapper接口
  */
 @Mapper
 public interface SgGnpzMapper {

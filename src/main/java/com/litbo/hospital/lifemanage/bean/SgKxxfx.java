@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 可行性分析表
+ * 可行性分析表实体类
  */
 @Data
 public class SgKxxfx {

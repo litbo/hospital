@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 装备委员会会议信息表
+ * 装备委员会会议信息表Mapper类
  */
 @Mapper
 public interface SgZbwyhhyMapper {

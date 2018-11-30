@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 准入评价报告表
+ * 准入评价报告表实体类
  */
 @Data
 public class SgZrpjbg {

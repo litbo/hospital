@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 /**
- * 参考厂商设备表
+ * 参考厂商设备表实体类
  */
 @Data
 public class SgCkcssb {

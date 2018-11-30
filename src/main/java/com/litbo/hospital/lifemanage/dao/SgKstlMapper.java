@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 科室讨论表
+ * 科室讨论表Mapper接口
  */
 @Mapper
 public interface SgKstlMapper {

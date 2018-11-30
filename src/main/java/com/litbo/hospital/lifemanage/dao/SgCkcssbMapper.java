@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * 参考厂商设备表
+ * 参考厂商设备表Mapper接口
  */
 @Mapper
 public interface SgCkcssbMapper {
@@ -36,7 +36,7 @@ public interface SgCkcssbMapper {
             "   #{ckcssbXh,jdbcType=VARCHAR}, #{ckcssbGg,jdbcType=VARCHAR}, #{ckcssbSl,jdbcType=INTEGER}, \n" +
             "   #{ckcssbGj,jdbcType=DECIMAL}, #{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}\n" +
             ")")
-    int insert(SgCkcssb record);
+    int insertSgCkcssb(SgCkcssb record);
 /*
     int deleteByExample(SgCkcssbExample example);
 

@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.bean;
 import lombok.Data;
 
 /**
- * 论证分析表
+ * 论证分析表实体类
  */
 @Data
 public class SgLzfx {

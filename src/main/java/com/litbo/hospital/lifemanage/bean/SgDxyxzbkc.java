@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 大型医学装备考察报告表
+ * 大型医学装备考察报告表实体类
  */
 @Data
 public class SgDxyxzbkc {

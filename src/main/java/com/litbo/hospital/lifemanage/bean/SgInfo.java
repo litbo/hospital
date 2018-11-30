@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 /**
- * 申购单表
+ * 申购单表实体类
  */
 @Data
 public class SgInfo {

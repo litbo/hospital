@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 准入评价报告表
+ * 准入评价报告表Mapper类
  */
 @Mapper
 public interface SgZrpjbgMapper {

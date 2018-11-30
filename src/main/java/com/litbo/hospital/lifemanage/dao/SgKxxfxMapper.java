@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 可行性分析表
+ * 可行性分析表Mapper接口
  */
 @Mapper
 public interface SgKxxfxMapper {

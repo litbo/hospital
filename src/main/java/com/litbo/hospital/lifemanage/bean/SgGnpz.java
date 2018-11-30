@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.bean;
 import lombok.Data;
 
 /**
- * 功能配置表
+ * 功能配置表实体类
  */
 @Data
 public class SgGnpz {
