@@ -8,6 +8,8 @@ public class WordToPinYin {
     * @return  结果为大写
     * */
     public static String toPinYin(String words){
+       if(words==null||"".equals(words))
+            return "";
         String convert = "";
         int j = 0;
         for(int len = words.length(); j < len; j++) {
