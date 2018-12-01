@@ -8,7 +8,7 @@ public class DbIdProvider {
 
     public String queryDbId(String DbTable,String idName){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("select top 1 "+idName+" from "+ DbTable);
+        stringBuilder.append("select top 1 "+idName+" from "+ DbTable + " order by " + idName + " desc");
         return stringBuilder.toString();
     }
 }

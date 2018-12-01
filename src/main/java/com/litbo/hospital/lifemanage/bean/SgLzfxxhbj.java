@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 /**
- * 论证分析参考型号及报价表
+ * 论证分析参考型号及报价表实体类
  */
 @Data
 public class SgLzfxxhbj {

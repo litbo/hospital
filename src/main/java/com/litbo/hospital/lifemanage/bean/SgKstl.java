@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- *科室讨论表
+ *科室讨论表实体类
  */
 @Data
 public class SgKstl {

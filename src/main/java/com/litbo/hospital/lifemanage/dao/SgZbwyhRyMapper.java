@@ -1,27 +1,27 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgZbwyhRyExample;
-import com.litbo.hospital.lifemanage.bean.SgZbwyhRy;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 参加装备委员会会议人员关联表
+ * 参加装备委员会会议人员关联表Mapper接口
  */
+@Mapper
 public interface SgZbwyhRyMapper {
+    /*
     int countByExample(SgZbwyhRyExample example);
 
     int deleteByExample(SgZbwyhRyExample example);
 
-    int deleteByPrimaryKey(SgZbwyhRy key);
+    int deleteByPrimaryKey(SgZbwyhRyKey key);
 
-    int insert(SgZbwyhRy record);
+    int insert(SgZbwyhRyKey record);
 
-    int insertSelective(SgZbwyhRy record);
+    int insertSelective(SgZbwyhRyKey record);
 
-    List<SgZbwyhRy> selectByExample(SgZbwyhRyExample example);
+    List<SgZbwyhRyKey> selectByExample(SgZbwyhRyExample example);
 
-    int updateByExampleSelective(@Param("record") SgZbwyhRy record, @Param("example") SgZbwyhRyExample example);
+    int updateByExampleSelective(@Param("record") SgZbwyhRyKey record, @Param("example") SgZbwyhRyExample example);
 
-    int updateByExample(@Param("record") SgZbwyhRy record, @Param("example") SgZbwyhRyExample example);
+    int updateByExample(@Param("record") SgZbwyhRyKey record, @Param("example") SgZbwyhRyExample example);
+     */
 }

@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgInfo;
-import com.litbo.hospital.lifemanage.bean.SgInfoExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 申购单表
+ * 申购单表Mapper接口
  */
+@Mapper
 public interface SgInfoMapper {
+    /*
     int countByExample(SgInfoExample example);
 
     int deleteByExample(SgInfoExample example);
@@ -36,4 +35,5 @@ public interface SgInfoMapper {
     int updateByPrimaryKeyWithBLOBs(SgInfoExample record);
 
     int updateByPrimaryKey(SgInfo record);
+     */
 }

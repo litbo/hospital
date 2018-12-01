@@ -1,27 +1,27 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgTlPmExample;
-import com.litbo.hospital.lifemanage.bean.SgTlPm;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 讨论申购设备关联表
+ * 讨论申购设备关联表Mapper接口
  */
+@Mapper
 public interface SgTlPmMapper {
+    /*
     int countByExample(SgTlPmExample example);
 
     int deleteByExample(SgTlPmExample example);
 
-    int deleteByPrimaryKey(SgTlPm key);
+    int deleteByPrimaryKey(SgTlPmKey key);
 
-    int insert(SgTlPm record);
+    int insert(SgTlPmKey record);
 
-    int insertSelective(SgTlPm record);
+    int insertSelective(SgTlPmKey record);
 
-    List<SgTlPm> selectByExample(SgTlPmExample example);
+    List<SgTlPmKey> selectByExample(SgTlPmExample example);
 
-    int updateByExampleSelective(@Param("record") SgTlPm record, @Param("example") SgTlPmExample example);
+    int updateByExampleSelective(@Param("record") SgTlPmKey record, @Param("example") SgTlPmExample example);
 
-    int updateByExample(@Param("record") SgTlPm record, @Param("example") SgTlPmExample example);
+    int updateByExample(@Param("record") SgTlPmKey record, @Param("example") SgTlPmExample example);
+     */
 }

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 商务/临床/技术验收表
+ * 商务/临床/技术验收表实体类
  */
 @Data
 public class SgYs {

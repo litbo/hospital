@@ -3,6 +3,9 @@ package com.litbo.hospital.security.dao;
 import com.litbo.hospital.security.bean.JhZd;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author zjc
@@ -21,4 +24,7 @@ public interface JhZdDao {
             "      #{userId}, #{pxZjr}, #{pxAddr}, \n" +
             "      #{pxNr})")
     public int addJhZd(JhZd jhZd);
+
+    @Select("select * from jh_zd")
+    public List<JhZd> jhzdList();
 }

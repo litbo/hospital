@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgDxyxzbkc;
-import com.litbo.hospital.lifemanage.bean.SgDxyxzbkcExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 大型医学装备考察报告表
+ * 大型医学装备考察报告表Mapper接口
  */
+@Mapper
 public interface SgDxyxzbkcMapper {
+    /*
     int countByExample(SgDxyxzbkcExample example);
 
     int deleteByExample(SgDxyxzbkcExample example);
@@ -36,4 +35,5 @@ public interface SgDxyxzbkcMapper {
     int updateByPrimaryKeyWithBLOBs(SgDxyxzbkcExample record);
 
     int updateByPrimaryKey(SgDxyxzbkc record);
+     */
 }

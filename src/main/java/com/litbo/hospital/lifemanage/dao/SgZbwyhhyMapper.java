@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgZbwyhhy;
-import com.litbo.hospital.lifemanage.bean.SgZbwyhhyExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 装备委员会会议信息表
+ * 装备委员会会议信息表Mapper类
  */
+@Mapper
 public interface SgZbwyhhyMapper {
+    /*
     int countByExample(SgZbwyhhyExample example);
 
     int deleteByExample(SgZbwyhhyExample example);
@@ -36,4 +35,5 @@ public interface SgZbwyhhyMapper {
     int updateByPrimaryKeyWithBLOBs(SgZbwyhhy record);
 
     int updateByPrimaryKey(SgZbwyhhy record);
+     */
 }

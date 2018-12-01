@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 到货登记表
+ * 到货登记表实体类
  */
 @Data
 public class SgDhdj {

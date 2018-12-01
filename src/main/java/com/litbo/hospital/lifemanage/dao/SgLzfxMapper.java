@@ -1,15 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgLzfx;
-import com.litbo.hospital.lifemanage.bean.SgLzfxExample;
-
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 论证分析表
+ * 论证分析表Mapper接口
  */
+@Mapper
 public interface SgLzfxMapper {
+    /*
     int countByExample(SgLzfxExample example);
 
     int deleteByExample(SgLzfxExample example);
@@ -37,4 +35,5 @@ public interface SgLzfxMapper {
     int updateByPrimaryKeyWithBLOBs(SgLzfxExample record);
 
     int updateByPrimaryKey(SgLzfx record);
+     */
 }

@@ -1,14 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgDhdj;
-import com.litbo.hospital.lifemanage.bean.SgDhdjExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 到货登记表
+ * 到货登记表Mapper接口
  */
+@Mapper
 public interface SgDhdjMapper {
+    /*
     int countByExample(SgDhdjExample example);
 
     int deleteByExample(SgDhdjExample example);
@@ -30,4 +29,5 @@ public interface SgDhdjMapper {
     int updateByPrimaryKeySelective(SgDhdj record);
 
     int updateByPrimaryKey(SgDhdj record);
+     */
 }

@@ -1,15 +1,13 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.SgYs;
-import com.litbo.hospital.lifemanage.bean.SgYsExample;
-
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 商务/临床/技术验收表
+ * 商务/临床/技术验收表Mapper类
  */
+@Mapper
 public interface SgYsMapper {
+    /*
     int countByExample(SgYsExample example);
 
     int deleteByExample(SgYsExample example);
@@ -37,4 +35,5 @@ public interface SgYsMapper {
     int updateByPrimaryKeyWithBLOBs(SgYsExample record);
 
     int updateByPrimaryKey(SgYs record);
+     */
 }
