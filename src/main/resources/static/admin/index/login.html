@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/login.css"/>
+</head>
+
+<body>
+<div class="m-login-bg">
+    <div class="m-login">
+
+        <div class="m-login-warp">
+            <h3 style="color:#000;">系统登录</h3>
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <input id="user" type="text" name="username" lay-verify="required|username" placeholder="用户名"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <input type="text" name="password" lay-verify="required|password" placeholder="密码"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item m-login-btn">
+                    <div class="layui-inline subBut">
+                        <button class="layui-btn layui-btn-normal btn" lay-submit lay-filter="login" id="check-btn">登录
+                        </button>
+                    </div>
+                </div>
+                <div class="div-logo"><img src="../../static/admin/images/footerlogo.png" class="logo-img"></div>
+            </form>
+        </div>
+        <p class="copyright"><span class="sign">***</span> 初次登录，用户名和密码均使用员工号 <span class="sign">***</span></p>
+    </div>
+</div>
+<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            username: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                    return '用户名不能有特殊字符';
+                }
+                if(/(^\_)|(\_\_)|(\_+$)/.test(value)){
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if(/^\d+\d+\d$/.test(value)){
+                    return '用户名不能全为数字';
+                }
+            }
+            , password: [
+                /(.+){6,12}$/
+                , '密码必须6到12位'
+            ]
+        });
+
+        //监听提交
+        form.on('submit(login)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+    });
+
+</script>
+</body>
+</html>

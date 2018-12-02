@@ -1,0 +1,332 @@
+> Markdown说明：本文档使用 Typora 编写，如格式出现错误，请尝试使用 Typora 打开本文档
+>
+> 作者：张小富
+>
+> 创建时间：2018-11-16
+
+# main_list - 数组类型
+
+`main_list`变量用于定义页面中的列表项（左侧主列表和右侧副列表），并且通过改变页面URL参数的方式切换不同的页面
+
+
+
+**<u>`nav.js`</u>中的`addList`函数通过调用`main_list`变量来渲染页面列表**
+
+
+
+> `main_list`变量存在于 `list.js` 文件中
+
+—–END—–
+
+## main_list[0] - JSON类型
+
+`main_list[0]`用于定义页面返回首页列表项，只做页面引导无数据引导。
+
+> **由于所有页面均含有首页，并且首页功能单一，所以在修改代码逻辑后已弃用`main_list[0]`渲染返回首页列表，但渲染代码中任然支持使用`main_list[0]`向页面中渲染返回首页列表。如需启用，可在`addList`函数中恰当位置直接使用`addSample`函数添加，添加示例：**
+>
+> ```javascript
+> addSample(main_list[0]);
+> ```
+
+*示例:*
+
+```javascript
+{
+    "title": "首页",
+            "url": "?p=home",
+            "href":"?p=home",
+            "id": "1",
+            "icon": "home",
+            "shiro":"a",
+            "func":function(){
+                var location = window.location.origin + window.location.pathname;
+                window.location.href = location;
+            }
+}
+```
+JSON属性说明：
+
+| 属性名 | 是否启用 | 含义                                     |
+| :----: | :------: | :--------------------------------------- |
+|  url   |    是    | 标签中"`data-url`"的属性值               |
+|  href  |    否    | a标签的href值自定义                      |
+|   id   |    是    | 标签中"`data-id`"的属性值                |
+|  icon  |    是    | 列表中图标的名称(图标名来自Font Awesome) |
+| shiro  |    是    | 权限管理模块判断当前用户是否可见         |
+|  func  |    否    | 列表点击事件                             |
+
+—–END—–
+
+## main_list[1-n] - JSON类型
+
+除首页外其余所有页面列表的动态生成均遵循以下统一格式
+> 以下将所有除了首页的页面索引值统称为 **`x`**
+> 即 `main_list[x]` 代表除首页外所有的单一页面
+
+—–END—–
+
+### main_list[x] - JSON类型
+
+`main_list[x]`表示除了首页外的所有页面
+
+*示例:*
+
+```javascript
+{
+    "page":"home",
+    "tools":[...],
+    "items":[...]
+}
+//...表示具体内容省略
+
+```
+
+JSON属性说明：
+
+| 属性名 | 是否启用 | 含义                     |
+| :----: | :------: | ------------------------ |
+|  page  |    是    | 页面的名称（对应名见下） |
+| tools  |    是    | 页面右侧小列表的定义     |
+| items  |    是    | 页面左侧主列表的定义     |
+
+> **tools和items必须至少有一项为空，不能不能全部为空。**
+>
+> **未填写请用 []（空数组）占位**
+
+page对应页面：
+
+| page名 | 对应页面        |
+| :----: | --------------- |
+|  home  | 首页具体列表 项 |
+|  data  | 数据收集 项     |
+|  life  | 全生命管理 项   |
+|  safe  | 安全管理 项     |
+| beneft | 效益管理 项     |
+| admin  | 行政管理 项     |
+| system | 系统管理 项     |
+
+—–END—–
+
+#### main_list[x].tools - 数组类型
+
+`main_list[x].tools`定义了当前页面的右侧小列表的内容
+
+*示例:*
+
+```javascript
+[
+    {
+        "title": "联网设备",
+        "icon": "globe-asia",
+        "shiro": "a",
+        "content": [...]
+    },
+    {...}
+]
+```
+
+JSON属性说明：
+
+| 属性名  | 是否启用 | 含义                                        |
+| :-----: | :------: | ------------------------------------------- |
+|  title  |    是    | 标签中"`data-text`"的属性值并且也是列表名称 |
+|  icon   |    是    | 列表中图标的名称(图标名来自FontAwesome)     |
+|  shiro  |    是    | 权限管理模块判断当前用户是否可见            |
+| content |    是    | 列表字列表项内容                            |
+
+—–END—–
+
+##### main_list[x].tools[y].content - 数组类型
+
+`main_list[x].tools[y].content`表示一个右侧小列表项下的子列表项
+
+*示例:*
+
+```javascript
+[
+    {
+        "title": "运行记录",
+        "url": "data&t=0&n=0",
+        "shiro": "a",
+        "id": "1",
+        "items":[...]
+    }
+]
+```
+
+
+JSON属性说明：
+
+| 属性名 | 是否启用 | 含义                                        |
+| :----: | :------: | ------------------------------------------- |
+| title  |    是    | 标签中"`data-text`"的属性值并且也是列表名称 |
+|  url   |    是    | 标签中"`data-url`"的属性值（URL组成见下）   |
+|   id   |    是    | 标签中"`data-id`"的属性值                   |
+| shiro  |    是    | 权限管理模块判断当前用户是否可见            |
+| items  |    是    | 子列表项选择后主列表项展示的列表            |
+
+URL组成说明：
+
+| 名称 | 含义                                           |
+| :--: | ---------------------------------------------- |
+| data | 列表所属页面名称（错误填写将导致页面错误跳转） |
+|  t   | 右侧小列表的序号（从0开始）                    |
+|  n   | 右侧小列表的子列序号（从0开始）                |
+
+> URL数值如不按格式填写将会导致页面判断URL无效而跳转首页
+
+**强烈推荐 `t`  `n`序号按顺序排列**
+
+—–END—–
+
+##### main_list[x].tools[y].content[z].items - 数组类型
+
+`main_list[x].tools[y].content[z].items`表示子项点击后页面主列表项的填充内容
+
+> 由于main_list[x].tools[y].content[z].items内容与main_list[x].items相同，所以不再赘述，参见main_list[x].items内容
+
+—–END—–
+
+#### main_list[x].items - 数组类型
+`main_list[x].items`表示页面默认左侧主列表项内容，如为空则默认将右侧列表的第一个小列表项中的主列表内容设置为默认主列表项内容
+
+*示例:*
+
+```javascript
+[
+    {
+        "title": "所有任务",
+        "url": "javascript:",
+        "id": "2",
+        "icon": "calendar-check",
+        "shiro":"a",
+        "list": [...]
+    }
+]
+
+```
+JSON属性说明：
+
+| 属性名 | 是否启用 | 含义                                        |
+| :----: | :------: | ------------------------------------------- |
+| title  |    是    | 标签中"`data-text`"的属性值并且也是列表名称 |
+|  url   |    是    | 标签中"`data-url`"的属性值（URL组成见下）   |
+|  icon  |    是    | 列表中图标的名称(图标名来自FontAwesome)     |
+|   id   |    是    | 标签中"`data-id`"的属性值                   |
+| shiro  |    是    | 权限管理模块判断当前用户是否可见            |
+|  list  | **可选** | 列表项的子列表项                            |
+
+> 如无子列表项则不要写list，否则列表可能会乱
+> URL默认请填写 `javascrip:void(0)；`
+
+—–END—–
+
+##### main_list[x].items[y].list - 数组类型
+`main_list[x].items[y].list` 表示主列表的列表项下的子列表内容。
+
+> **如果列表有子列表请填写此项，如果列表没有子列表，请不要填写list（包括属性名不写）**
+
+*示例:*
+
+```javascript
+[
+    {
+        "title": "通知公告",
+        "url": "./page.html",
+        "id": "2",
+        "shiro":"a"
+    }
+]
+
+```
+JSON属性说明：
+
+| 属性名 | 是否启用 | 含义                                        |
+| :----: | :------: | ------------------------------------------- |
+| title  |    是    | 标签中"`data-text`"的属性值并且也是列表名称 |
+|  url   |    是    | 标签中"`data-url`"的属性值（URL组成见下）   |
+|   id   |    是    | 标签中"`data-id`"的属性值                   |
+| shiro  |    是    | 权限管理模块判断当前用户是否可见            |
+
+—–END—–
+
+# 完整格式示例
+
+```javascript
+var main_list =
+    [
+        {
+            "title": "首页",
+            "url": "?p=home",
+            "href":"?p=home",
+            "id": "1",
+            "icon": "home",
+            "shiro":"a",
+            "func":function(){
+                console.log("HOME");
+            }
+        },
+        {
+            "page":"home",
+            "tools":[
+                {
+                    "title": "联网设备",
+                    "icon": "globe-asia",
+                    "shiro": "a",
+                    "content": [
+                        {
+                            "title": "运行记录",
+                            "url": "data&t=0&n=0",
+                            "shiro": "a",
+                            "id": "2",
+                            "items": [
+                                {
+                                    "title": "运行记录",
+                                    "url": "javascript:void(0);",
+                                    "icon":"book-open",
+                                    "id": "20",
+                                    "shiro": "a",
+                                    "list": [
+                                        {
+                                            "title": "单机运行设备",
+                                            "url": "./page.html",
+                                            "id": "21",
+                                            "shiro": "a"
+                                        },
+                                        {...}
+                                    ]
+                                },
+                                {...}
+                            ]
+                        },
+                        {...},
+                        {...}
+                    ]
+                }
+            ],
+            "items":[
+                {
+                    "title": "所有任务",
+                    "url": "javascript:",
+                    "id": "2",
+                    "icon": "calendar-check",
+                    "shiro":"a",
+                    "list": [
+                        {
+                            "title": "待办任务",
+                            "url": "javascript:",
+                            "id": "2",
+                            "shiro":"a"
+                        },
+                        {...},
+                        {...}
+                    ]
+                },
+                {...},
+                {...}
+            ]
+        },
+        {...},
+        {...}
+    ];
+```
