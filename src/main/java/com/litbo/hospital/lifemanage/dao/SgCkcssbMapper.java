@@ -3,7 +3,6 @@ package com.litbo.hospital.lifemanage.dao;
 import com.litbo.hospital.lifemanage.bean.SgCkcssb;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -13,6 +12,11 @@ import java.util.List;
  */
 @Mapper
 public interface SgCkcssbMapper {
+    /**
+     * 分页查询所有厂商设备表信息
+     *
+     * @return List<SgCkcssb> 查询的信息
+     */
     @Select("SELECT\n" +
             "dbo.sg_ckcssb.ckcssb_id,\n" +
             "dbo.sg_ckcssb.sg_id,\n" +
@@ -28,6 +32,12 @@ public interface SgCkcssbMapper {
             "dbo.sg_ckcssb")
     List<SgCkcssb> selectSgCkcssbs();
 
+    /**
+     * 添加厂商设备表信息
+     *
+     * @param sgCkcssb 厂商设备表实体类
+     * @return int 添加信息总条数
+     */
     @Insert("INSERT INTO sg_ckcssb (ckcssb_id, sg_id, sbcs_id, \n" +
             "   ckcssb_xh, ckcssb_gg, ckcssb_sl, \n" +
             "   ckcssb_gj, extend_one, extend_two\n" +
@@ -36,7 +46,7 @@ public interface SgCkcssbMapper {
             "   #{ckcssbXh,jdbcType=VARCHAR}, #{ckcssbGg,jdbcType=VARCHAR}, #{ckcssbSl,jdbcType=INTEGER}, \n" +
             "   #{ckcssbGj,jdbcType=DECIMAL}, #{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}\n" +
             ")")
-    int insertSgCkcssb(SgCkcssb record);
+    int insertSgCkcssb(SgCkcssb sgCkcssb);
 /*
     int deleteByExample(SgCkcssbExample example);
 

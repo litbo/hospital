@@ -7,8 +7,13 @@ import lombok.Data;
  */
 @Data
 public class SgTlPm {
+    /**
+     * 科室主键id
+     */
     private String kstlId;
-
+    /**
+     * 设备品名表id
+     */
     private Integer eqPmId;
 
 }
