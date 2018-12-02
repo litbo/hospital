@@ -1,0 +1,234 @@
+//welcome
+.welcome-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 15px 0;
+}
+/***********welcome***********/
+.welcome-left-container {
+    .data-show {
+        li {
+            height: 95px;
+            margin-bottom: 15px;
+        }
+        a {
+            display: block;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ebeaea;
+            .box-sizing(border-box);
+        }
+        .icon-bg {
+            width: 68px;
+            height: 68px;
+            text-align: center;
+            .border-radius(70px);
+            .iconfont {
+                color: #fff;
+                font-size: 36px;
+                position: relative;
+                top: 15px;
+            }
+        }
+        .bg-org {
+            background: #f8bb74;
+        }
+        .bg-blue {
+            background: #86d2ee;
+        }
+        .bg-green {
+            background: #94e0e1;
+        }
+        .right-text-con {
+            padding-left: 78px;
+        }
+        p {
+            margin: 0;
+            color: #a0a8b4;
+        }
+        .color-org,
+        .color-blue,
+        .color-green {
+            font-size: 28px;
+            padding-right: 10px;
+            font-family: "arial";
+        }
+        .color-org {
+            color: #f8bb74;
+        }
+        .color-blue {
+            color: #86d2ee;
+        }
+        .color-green {
+            color: #94e0e1;
+        }
+        .name {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555555;
+        }
+    }
+    .chart-panel {
+        margin: 0px 15px 15px;
+    }
+    .server-panel {
+        margin: 15px;
+        .panel-header{
+            padding-bottom: 0;
+        }
+        .panel-body {
+            div {
+                padding: 0;
+            }
+        }
+        .title {
+            background: #f2f2f2;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 15px;
+            margin: 0;
+        }
+        span {
+            height: 30px;
+            padding-top: 10px;
+            padding-left: 15px;
+            display: block;
+            background: #fafafa;
+        }
+    }
+}
+.welcome-edge {
+    padding: 0 30px 15px 0;
+    .commentbox {
+        background: #fff;
+    }
+    .comment-panel {
+        .panel-body {
+            padding-top: 10px;
+        }
+        .commentList .item {
+            margin: 0 0 20px;
+        }
+    }
+    .contact-panel {
+        margin-top: 15px;
+        .panel-header{
+            padding-bottom: 0;
+        }
+    }
+}
+
+@media all and (max-width:1200px){
+    .welcome-edge{padding: 0 30px 15px 30px;}
+}
+
+/*添加*/
+
+/*右侧公告栏列表*/
+
+#ul_Style1 #ul_Style2 li{
+    margin-bottom:0;
+}
+#ul_Style2 {
+    height:240px;
+}
+#ul_Style2 li{
+    height:40px;
+    color:#333;
+    line-height:40px;
+    padding-left:8px;
+    border-radius:5px;
+}
+#ul_Style1 li a{
+    cursor:default;
+}
+.li_first{
+    background-color:#d2d2d2;
+}
+
+.li_first_left{
+    color:#333;
+    font-weight:bold;
+}
+.li_first_right{
+    float:right;
+    color:#666;
+    padding-right:5px;
+    /*cursor:pointer;*/
+}
+.li_show_left{
+    color:#333;
+}
+.li_show_right{
+    color:#999;
+    float:right;
+}
+
+/*左侧待办任务*/
+.li_first_l1{
+    background-color:#FFB800;
+}
+.li_first_l2{
+    background-color:#FF5722;
+}
+.li_first_l3{
+    background-color:#5FB878;
+}
+
+.welcome-right-container>ul>li {
+    min-height: 200px;
+    max-height: 250px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.panel_title {
+    width: 100%;
+    height: 30px;
+    vertical-align: central;
+    line-height: 30px;
+}
+
+.h_pad0 {
+    padding: 0;
+    min-height: 150px;
+}
+
+.h_panels {
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.panel_con {
+    padding: 10px;
+    overflow: hidden;
+    height: 200px;
+    background: #fff;
+}
+.h_panels1{
+    padding:0 15px;
+}
+.h_panels1>li{
+    border:1px solid #ccc;
+}
+.h_right{
+    text-align: right;
+}
+.h_ovf{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:#279ac5e8;
+}
+.h_ovf:hover{
+    text-decoration: underline;
+    color:#1b82f1;
+}
+.panel_con span{
+    padding:0;
+    line-height:1.5;
+    margin:4px 0;
+}
