@@ -8,6 +8,6 @@ public class JhRy {
 
     private String userId;
 
-    private Integer jhryId;
+    private Integer jhrylrId;
 
 }

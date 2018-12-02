@@ -16,6 +16,7 @@ public class DictServiceImpl implements DictService{
 
     @Override
     public List<EqZjly> listZjlys() {
+
         return dictDao.listZjlys();
     }
 

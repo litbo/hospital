@@ -1,8 +1,11 @@
 package com.litbo.hospital.user.dao;
 
 import com.litbo.hospital.user.bean.*;
+import com.litbo.hospital.user.dao.provider.DictProvider;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 
@@ -18,4 +21,6 @@ public interface DictDao {
     List<EqQdfs> listQdfs();
     @Select("select * from eq_gzlb")
     List<EqGzlb> listGzlb();
+    @SelectProvider(type = DictProvider.class, method = "selectZjlyByX")
+    List<EqZjly> listZjlysByX(EqZjly eqZjl);
 }
