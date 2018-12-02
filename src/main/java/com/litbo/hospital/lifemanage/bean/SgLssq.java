@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 临时采购授权表
+ * 临时采购授权表实体类
  */
 @Data
 public class SgLssq {

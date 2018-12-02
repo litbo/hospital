@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 装备委员会会议信息表
+ * 装备委员会会议信息表实体类
  */
 @Data
 public class SgZbwyhhy {

@@ -3,7 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 大型医学装备考察报告表
+ * 大型医学装备考察报告表Mapper接口
  */
 @Mapper
 public interface SgDxyxzbkcMapper {

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 院办公会会议信息表
+ * 院办公会会议信息表实体类
  */
 @Data
 public class SgYbghhy {
