@@ -1,9 +1,12 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.JhRylr;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author zjc
@@ -12,15 +15,23 @@ import org.apache.ibatis.annotations.Options;
 @Mapper
 public interface JhRyLrDao {
 
-    @Insert("insert into jh_rylr (jhlr_pxgw, jh_id, \n" +
+    @Insert(" insert into jh_rylr (jhlr_pxgw, jh_id, \n" +
             "      jhlr_cj, jhlr_sgzmc, jhlr_zjURL, \n" +
             "      sb_id, jhlr_fzdw, jhlr_fz_time, \n" +
-            "      jhlr_yxq)\n" +
+            "      jhlr_yxq, emp_id)\n" +
             "    values (#{jhlrPxgw,jdbcType=VARCHAR}, #{jhId,jdbcType=INTEGER}, \n" +
             "      #{jhlrCj,jdbcType=DOUBLE}, #{jhlrSgzmc,jdbcType=VARCHAR}, #{jhlrZjurl,jdbcType=VARCHAR}, \n" +
             "      #{sbId,jdbcType=INTEGER}, #{jhlrFzdw,jdbcType=VARCHAR}, #{jhlrFzTime,jdbcType=TIMESTAMP}, \n" +
-            "      #{jhlrYxq,jdbcType=TIMESTAMP})")
-    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
-    public int addJhRyLr(JhRylr jhRylr);
+            "      #{jhlrYxq,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR})")
+    public void addJhRyLr(JhRylr jhRylr);
+
+    @Delete("delete from jh_rylr where id = #{id}")
+    public void deleteJhRyLr(int id);
+
+    @Select("select * from jh_rylr where jh_id=#{jhId}")
+    public List<JhRylr> getJhRyLrById(int jhId);
+
+    @Select("select * from jh_rylr where emp_id=#{empId}")
+    public List<JhRylr> getJhRyLrByEmpId(String empId);
 
 }
