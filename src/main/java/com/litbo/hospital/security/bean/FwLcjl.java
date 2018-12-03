@@ -11,6 +11,7 @@ public class FwLcjl {
 
     private Date creatTime;
 
+
     private String bxId;
 
     private String lc;
