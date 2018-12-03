@@ -1,5 +1,6 @@
 package com.litbo.hospital.security.bean;
 
+import com.litbo.hospital.security.enums.EnumStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;

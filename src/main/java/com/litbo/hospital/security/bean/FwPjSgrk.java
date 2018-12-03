@@ -12,7 +12,7 @@ public class FwPjSgrk {
     private Date pjRkTime;
 
     private String userId2;
-
+    
     private Date sgShTime;
 
     private Integer sgStatus;
