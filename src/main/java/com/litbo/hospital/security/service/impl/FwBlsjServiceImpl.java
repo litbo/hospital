@@ -27,7 +27,6 @@ public class FwBlsjServiceImpl implements FwBlsjService {
     @Override
     public int insertFwBlsj(FwBlsj blsj) {
         blsj.setBgTime(new Date());
-
         if(StringUtils.isNotBlank(blsj.getBxdh())){
             FwLcjl lcjl = new FwLcjl();
             lcjl.setCreatTime(new Date());
