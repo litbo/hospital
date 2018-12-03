@@ -1,6 +1,6 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.dao.mapper.SgTiPmSql;
+import com.litbo.hospital.lifemanage.dao.mapper.SgTiPmProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,7 +18,7 @@ public interface SgTlPmMapper {
      * @param pmId 设备品名ID
      * @return 添加的数据的数量
      */
-    @InsertProvider(type = SgTiPmSql.class, method = "insertSgTiPmSql")
+    @InsertProvider(type = SgTiPmProvider.class, method = "insertSgTiPmSql")
     public int insertSgTlPm(String kstlId, List<Integer> pmId);
     /*
     int countByExample(SgTlPmExample example);

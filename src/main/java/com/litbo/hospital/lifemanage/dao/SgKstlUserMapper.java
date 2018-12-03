@@ -1,6 +1,6 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.dao.mapper.SgKstlUserSql;
+import com.litbo.hospital.lifemanage.dao.mapper.SgKstlUserProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,7 +19,7 @@ public interface SgKstlUserMapper {
      * @param usersId 参加讨论的人员集合
      * @return 插入条数
      */
-    @InsertProvider(type = SgKstlUserSql.class,method = "insertSgKstlUserSql")
+    @InsertProvider(type = SgKstlUserProvider.class,method = "insertSgKstlUserSql")
     int insertSgKstlUser(@Param("kstlId") String kstlId,@Param("usersId") List<String> usersId);
     /*
     int countByExample(SgKstlUserExample example);

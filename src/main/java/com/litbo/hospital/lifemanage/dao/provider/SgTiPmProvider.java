@@ -1,4 +1,4 @@
-package com.litbo.hospital.lifemanage.dao.mapper;
+package com.litbo.hospital.lifemanage.dao.provider;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 科室讨论申购设备关联表sql语句
  */
-public class SgTiPmSql {
+public class SgTiPmProvider {
     /**
      * 申购设备关联信息批量添加拼接的sql语句
      *

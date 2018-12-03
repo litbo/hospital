@@ -13,7 +13,7 @@ public class SgLssq {
 
     private String lssqSqr;
 
-    private String lssqBsqr;
+    private String lssqBsqks;
 
     private Date lssqSqrq;
 

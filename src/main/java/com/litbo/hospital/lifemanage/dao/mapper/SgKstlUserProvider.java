@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 科室讨论会议人员关联表sql语句
  */
-public class SgKstlUserSql {
+public class SgKstlUserProvider {
     /**
      * 添加科室讨论人员信息批量添加拼接的sql语句
      *
