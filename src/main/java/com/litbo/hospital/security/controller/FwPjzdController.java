@@ -1,12 +1,9 @@
 package com.litbo.hospital.security.controller;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
-import com.litbo.hospital.security.enums.EnumStatus;
 import com.litbo.hospital.security.service.FwPjzdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("security/fw")
