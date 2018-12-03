@@ -17,7 +17,7 @@ public class JhZdProvider {
                     WHERE("jh_kstime>#{createdate}");
                 }
                 if(jhName != null){
-                    WHERE("jh_name=#{jhName}");
+                    WHERE("jh_name like %+#{jhName}+%");
                 }
             }
 

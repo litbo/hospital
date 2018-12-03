@@ -2,10 +2,7 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.JhZd;
 import com.litbo.hospital.security.dao.sqlprovider.JhZdProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -29,4 +26,7 @@ public interface JhZdDao {
 
     @SelectProvider(type = JhZdProvider.class,method = "findList")
     public List<JhZd> jhzdList(@Param("createdate") String createdate,@Param("jhName") String jhName);
+
+    @Select("select * from jh_zd where id = #{id}")
+    public JhZd getJhzdById(Integer id);
 }
