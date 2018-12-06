@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class SgTlPmController {
     @PostMapping("insertSgTlPm")
     public Result insertSgTlPm(@RequestParam(name = "kstlId") String kstlId,@RequestParam(name = "pmId") List<Integer> pmId){
         System.out.println(kstlId);
-        boolean insert = sgTlPmService.insertSgTlPm(kstlId, pmId);
+        boolean insert = sgTlPmService.insertSgTlPm(kstlId, pmId,new Date());
         if (insert){
             return Result.success();
         }else {

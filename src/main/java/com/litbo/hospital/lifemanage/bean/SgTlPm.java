@@ -2,6 +2,8 @@ package com.litbo.hospital.lifemanage.bean;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * 讨论申购设备关联表实体类
  */
@@ -15,5 +17,8 @@ public class SgTlPm {
      * 设备品名表id
      */
     private Integer eqPmId;
-
+    /**
+     * 科室讨论时间
+     */
+    private Date kstlSj;
 }

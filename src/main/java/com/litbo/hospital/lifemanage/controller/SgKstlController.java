@@ -26,13 +26,32 @@ public class SgKstlController {
      * @return 添加科室讨论信息成功/添加科室讨论信息失败
      */
     @PostMapping("/insertSgKstl")
-    public Result insertSgKstl(@RequestBody SgKstl sgKstl, @RequestParam(name = "usersId") List<String> usersId, @RequestParam(name = "pmId") List<Integer> pmId){
+    public Result insertSgKstl(@RequestBody SgKstl sgKstl, @RequestParam(name = "usersId") List<String> usersId, @RequestParam(name = "pmId") List<Integer> pmId) {
         boolean result = sgKstlService.insertSgKstl(sgKstl, usersId, pmId);
-        if (result){
+        if (result) {
             return Result.success();
-        }else {
+        } else {
             return Result.error("添加信息错误");
         }
+    }
+
+    /**
+     * 显示部门下的所有讨论的设备
+     *
+     * @param bmId     部门id
+     * @param eqPmName 设备名称
+     * @param eqPmJc   设备简称
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
+     * @return SgKstlVO
+     */
+    @GetMapping("/selectSgKstlSbs")
+    public Result selectSgKstlSbs(@RequestParam(name = "bmId") String bmId,
+                                  @RequestParam(required = false, name = "eqPmName") String eqPmName,
+                                  @RequestParam(required = false, name = "eqPmJc") String eqPmJc,
+                                  @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
+                                  @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
+        return Result.success(sgKstlService.selectSgKstlSbs(bmId, eqPmName, eqPmJc, pageNum, pageSize));
     }
 
 }

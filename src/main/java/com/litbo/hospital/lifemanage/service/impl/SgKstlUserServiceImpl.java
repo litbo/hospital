@@ -27,7 +27,10 @@ public class SgKstlUserServiceImpl implements SgKstlUserService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public boolean insertSgKstlUser(String kstlId, List<String> usersId) {
-        int i = sgKstlUserMapper.insertSgKstlUser(kstlId, usersId);
-        return usersId.size()==i;
+        int sgKstlUserNum = 0;
+        for (String userId : usersId) {
+            sgKstlUserNum += sgKstlUserMapper.insertSgKstlUser(kstlId, userId);
+        }
+        return usersId.size()==sgKstlUserNum;
     }
 }

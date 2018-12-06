@@ -1,9 +1,11 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.dao.mapper.SgTiPmProvider;
-import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,27 +16,27 @@ public interface SgTlPmMapper {
     /**
      * 申购设备关联信息批量添加
      *
-     * @param kstlId  科室讨论的ID
-     * @param pmId 设备品名ID
+     * @param kstlId 科室讨论的ID
+     * @param pmId   设备品名ID
      * @return 添加的数据的数量
      */
-    @InsertProvider(type = SgTiPmProvider.class, method = "insertSgTiPmSql")
-    public int insertSgTlPm(String kstlId, List<Integer> pmId);
-    /*
-    int countByExample(SgTlPmExample example);
+    @Insert({
+            "insert into sg_tl_pm (kstl_id, eq_pm_id,kstl_sj)",
+            "values (#{kstlId,jdbcType=VARCHAR}, #{eqPmId,jdbcType=INTEGER},#{kstlSj,jdbcType=TIMESTAMP})"
+    })
+    int insertSgTlPm(@Param("kstlId") String kstlId, @Param("eqPmId") Integer pmId, @Param("kstlSj")Date kstlSj);
 
-    int deleteByExample(SgTlPmExample example);
-
-    int deleteByPrimaryKey(SgTlPmKey key);
-
-    int insert(SgTlPmKey record);
-
-    int insertSelective(SgTlPmKey record);
-
-    List<SgTlPmKey> selectByExample(SgTlPmExample example);
-
-    int updateByExampleSelective(@Param("record") SgTlPmKey record, @Param("example") SgTlPmExample example);
-
-    int updateByExample(@Param("record") SgTlPmKey record, @Param("example") SgTlPmExample example);
+    /**
+     * 通过科室讨论ID查询讨论的品名ID
+     *
+     * @param kstlId 科室讨论ID
+     * @return 同一个讨论的所有品名ID
      */
+    @Select("SELECT\n" +
+            "sg_tl_pm.eq_pm_id\n" +
+            "FROM\n" +
+            "sg_tl_pm\n" +
+            "WHERE\n" +
+            "sg_tl_pm.kstl_id = #{kstlId}\n")
+    List<Integer> selectSgTlPmPmIdsByTlId(String kstlId);
 }
