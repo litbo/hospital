@@ -6,9 +6,11 @@ import lombok.Data;
 public class FwWxnrzd {
     private Integer id;
 
-    private String wxnrzdTest;
+    private String wxnrzdText;
 
     private Integer parentId;
+
+    private Integer type;
 
 
 }
