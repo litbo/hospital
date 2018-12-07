@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/lifeManage")
 public class SgCkcssbController {
     @Autowired
-    SgCkcssbService sgCkcssbService;
+    private SgCkcssbService sgCkcssbService;
 
     /**
      * 分页查询所有厂商设备表信息
@@ -24,7 +24,10 @@ public class SgCkcssbController {
      * @return Result 查询的信息
      */
     @GetMapping("/selectSgCkcssbs")
-    public Result selectSgCkcssbs(@RequestParam(required = false, name = "pageSize", defaultValue = "10") int pageSize, @RequestParam(required = false, name = "pageNum", defaultValue = "1") int pageNum) {
+    public Result selectSgCkcssbs(
+            @RequestParam(required = false, name = "pageSize", defaultValue = "10") int pageSize,
+            @RequestParam(required = false, name = "pageNum", defaultValue = "1") int pageNum
+    ) {
         PageHelper.startPage(pageNum, pageSize);
         List<SgCkcssb> sgCkcssbs = sgCkcssbService.selectSgCkcssbs();
         System.out.println(sgCkcssbs);
@@ -38,10 +41,10 @@ public class SgCkcssbController {
      * @return Result 添加厂商设备信息成功/添加厂商设备信息失败
      */
     @PostMapping("/insertSgCkcssb")
-    public Result insertSgCkcssb(SgCkcssb sgCkcssb) {
-        int insert = sgCkcssbService.insertSgCkcssb(sgCkcssb);
+    public Result insertSgCkcssb(@RequestBody SgCkcssb sgCkcssb) {
+        boolean insert = sgCkcssbService.insertSgCkcssb(sgCkcssb);
         System.out.println(insert);
-        if (insert == 1) {
+        if (insert) {
             return Result.success();
         } else {
             return Result.error("添加厂商设备信息失败");

@@ -1,39 +1,26 @@
 package com.litbo.hospital.lifemanage.dao;
 
+import com.litbo.hospital.lifemanage.bean.SgInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 申购单表Mapper接口
  */
 @Mapper
 public interface SgInfoMapper {
-    /*
-    int countByExample(SgInfoExample example);
 
-    int deleteByExample(SgInfoExample example);
-
-    int deleteByPrimaryKey(String id);
-
-    int insert(SgInfoExample record);
-
-    int insertSelective(SgInfoExample record);
-
-    List<SgInfoExample> selectByExampleWithBLOBs(SgInfoExample example);
-
-    List<SgInfo> selectByExample(SgInfoExample example);
-
-    SgInfoExample selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") SgInfoExample record, @Param("example") SgInfoExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") SgInfoExample record, @Param("example") SgInfoExample example);
-
-    int updateByExample(@Param("record") SgInfo record, @Param("example") SgInfoExample example);
-
-    int updateByPrimaryKeySelective(SgInfoExample record);
-
-    int updateByPrimaryKeyWithBLOBs(SgInfoExample record);
-
-    int updateByPrimaryKey(SgInfo record);
+    /**
+     * 通过品名Id查询申购单表信息
+     * @param pmId 品名ID
+     * @return 返回申购单内容
      */
+    @Select("SELECT\n" +
+            "dbo.sg_info.id,\n" +
+            "dbo.sg_info.bh\n" +
+            "FROM\n" +
+            "dbo.sg_info\n" +
+            "WHERE\n" +
+            "dbo.sg_info.eq_pm_id = #{pmId,jdbcType=INTEGER}")
+    SgInfo selectSgInfoByPmId(Integer pmId);
 }

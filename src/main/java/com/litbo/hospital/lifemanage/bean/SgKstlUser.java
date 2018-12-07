@@ -7,8 +7,13 @@ import lombok.Data;
  */
 @Data
 public class SgKstlUser {
+    /**
+     * 科室讨论id
+     */
     private String kstlId;
-
+    /**
+     * 员工表id
+     */
     private String userId;
 
 }

@@ -3,10 +3,7 @@ package com.litbo.hospital.security.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
-import com.litbo.hospital.security.bean.JhRy;
-import com.litbo.hospital.security.bean.JhRylr;
 import com.litbo.hospital.security.bean.JhZd;
-import com.litbo.hospital.security.dao.JhRyDao;
 import com.litbo.hospital.security.dao.JhRyLrDao;
 import com.litbo.hospital.security.dao.JhZdDao;
 import com.litbo.hospital.security.service.JhZdService;
@@ -27,9 +24,6 @@ public class JhZdServiceImpl implements JhZdService {
 
     @Autowired
     private JhRyLrDao jhRyLrDao;
-
-    @Autowired
-    private JhRyDao jhRyDao;
 
     /**
      * 计划添加
@@ -56,20 +50,4 @@ public class JhZdServiceImpl implements JhZdService {
         return Result.success(pageInfo);
     }
 
-    /**
-     *
-     * @param jhRylr
-     * @param userIds
-     */
-    @Override
-    @Transactional
-    public void addJhRyLr(JhRylr jhRylr, String[] userIds) {
-        int i = jhRyLrDao.addJhRyLr(jhRylr);
-        for (String userId : userIds) {
-            JhRy jhRy = new JhRy();
-            jhRy.setUserId(userId);
-            jhRy.setJhrylrId(jhRylr.getId());
-            jhRyDao.addJhRy(jhRy);
-        }
-    }
 }

@@ -18,15 +18,27 @@ public class SgCkcssbServiceImpl implements SgCkcssbService {
     @Autowired
     private SgCkcssbMapper sgCkcssbMapper;
 
+    /**
+     * 分页查询所有厂商设备表信息
+     *
+     * @return List<SgCkcssb> 查询的信息
+     */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<SgCkcssb> selectSgCkcssbs() {
         return sgCkcssbMapper.selectSgCkcssbs();
     }
 
+    /**
+     * 添加厂商设备表信息
+     *
+     * @param sgCkcssb 厂商设备表实体类
+     * @return boolean 是否添加信息成功
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public int insertSgCkcssb(SgCkcssb sgCkcssb) {
-        return sgCkcssbMapper.insertSgCkcssb(sgCkcssb);
+    public boolean insertSgCkcssb(SgCkcssb sgCkcssb) {
+        int i = sgCkcssbMapper.insertSgCkcssb(sgCkcssb);
+        return i > 0;
     }
 }
