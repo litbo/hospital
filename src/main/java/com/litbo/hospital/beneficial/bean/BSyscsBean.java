@@ -1,5 +1,9 @@
 package com.litbo.hospital.beneficial.bean;
 
+/*
+*
+* 系统参数
+* */
 public class BSyscsBean {
 
     private Integer aId;

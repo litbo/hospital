@@ -2,7 +2,9 @@ package com.litbo.hospital.beneficial.bean;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
+/*
+* 设备财务
+* */
 public class BSbcwBean {
     private Integer aId;
 
@@ -19,6 +21,10 @@ public class BSbcwBean {
     private BigDecimal kmValue;
 
     private Integer kmCjdm;
+
+    private String bmName;
+
+    private String eqName;
 
     public Integer getaId() {
         return aId;
@@ -82,5 +88,21 @@ public class BSbcwBean {
 
     public void setKmCjdm(Integer kmCjdm) {
         this.kmCjdm = kmCjdm;
+    }
+
+    public String getBmName() {
+        return bmName;
+    }
+
+    public void setBmName(String bmName) {
+        this.bmName = bmName;
+    }
+
+    public String getEqName() {
+        return eqName;
+    }
+
+    public void setEqName(String eqName) {
+        this.eqName = eqName;
     }
 }

@@ -7,60 +7,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
+@RequestMapping(value = "/benefical")
 public class SyscsController {
 
     @Autowired
     private SyscsService syscsService;
 
     /*
-    * 设置会计结账日
-    * */
-    @RequestMapping(value = "/benefical/syscs/insertKjjzr")
-    public Result insertKjjzr(Integer kjjzr){
+     * 设置会计结账日
+     * */
+    @RequestMapping(value = "/updateKjjzr")
 
-        Map<String, Object> dataMap = new HashMap<String, Object>();
-
-        /*
-        * 会计结账日只能是1-30之间的数字
-        * */
+    public Result updateKjjzr(Integer kjjzr) {
         try {
-            if((kjjzr>30)||(kjjzr<1)){
+            Integer res = syscsService.UpdateKjjzr(kjjzr);
+            if (res == 1) {
+                return Result.success(null);
+            } else {
                 return Result.error(CodeMsg.SERVER_ERROR);
             }
-            syscsService.InsertKjjzr(kjjzr);
-        }catch (Exception e){
-                Result.error(CodeMsg.SERVER_ERROR);
+        } catch (Exception e) {
+            return Result.error(CodeMsg.SERVER_ERROR);
         }
-        dataMap.put("kjjzr", kjjzr);
-        Result result = Result.success(dataMap);
-        return result;
     }
 
+
     /*
-    * 设置风险基金提取与收入的比例
-    * */
-    @RequestMapping(value = "/benefical/syscs/insertYlfx")
-    public Result insertYlfx(float ylfx){
-
-        Map<String, Object> dataMap = new HashMap<String, Object>();
-
-        /*
-        * 按规定，此比例应在1%-3%之间
-        * */
+     * 设置风险基金提取与收入的比例
+     * */
+    @RequestMapping(value = "/updateYlfx")
+    public Result updateYlfx(String ylfx) {
+        float ylfxBaifen = new Float(ylfx.substring(0, ylfx.indexOf("%"))) / 100;
         try {
-            if((ylfx>0.03)||(ylfx<0.01)){
+            Integer res = syscsService.UpdateYlfx(ylfxBaifen);
+            if (res == 1) {
+                return Result.success(null);
+            } else {
                 return Result.error(CodeMsg.SERVER_ERROR);
             }
-           // syscsService.InsertKjjzr(ylfx);
-        }catch (Exception e){
-            Result.error(CodeMsg.SERVER_ERROR);
+        } catch (Exception e) {
+            return Result.error(CodeMsg.SERVER_ERROR);
         }
-        dataMap.put("ylfx", ylfx);
-        Result result = Result.success(dataMap);
-        return result;
     }
 }
