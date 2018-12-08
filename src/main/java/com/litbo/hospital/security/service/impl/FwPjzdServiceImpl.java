@@ -22,11 +22,12 @@ public class FwPjzdServiceImpl implements FwPjzdService {
 
     @Override
     public PageInfo listFwPjzd(String pjSzm,int pageNum,int pageSize,String pjfl) {
-        PageHelper.startPage(pageNum,pageSize);
+       /* PageHelper.startPage(pageNum,pageSize);
         if(pjSzm!=null)
             return new PageInfo(pjzdDao.listFwPjzd(pjSzm.toUpperCase(),pjfl));
         else
             return new PageInfo(pjzdDao.listFwPjzd(pjSzm,pjfl));
+    }*/
+        return null;
     }
-
 }

@@ -1,10 +1,8 @@
 package com.litbo.hospital.security.dao;
 
-import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwPjzd;
-import org.apache.ibatis.annotations.*;
-
-import java.util.List;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface FwPjzdDao {
@@ -19,6 +17,6 @@ public interface FwPjzdDao {
     int insertPjzd(FwPjzd pjzd);
 
 
-    @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjzdSqlProvider.class,method="listFwPjzd")
-    List<FwPjzd> listFwPjzd(@Param("pjSzm") String pjSzm,@Param("pjfl") String pjfl);
+  //  @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjzdSqlProvider.class,method="listFwPjzd")
+  //  List<FwPjzd> listFwPjzd(@Param("pjSzm") String pjSzm,@Param("pjfl") String pjfl);
 }
