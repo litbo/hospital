@@ -41,8 +41,9 @@ public class Swagger2 {
         pars.add(userIdHeader.build());
 		
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("com.litbo.hospital.lifemanage.controller"))
-//				.apis(RequestHandlerSelectors.basePackage("com.litbo.hospital.beneficial.controller"))
+
+				// 添加自己的包路径
+				.apis(RequestHandlerSelectors.basePackage("com.litbo.hospital"))
 				.paths(PathSelectors.any()).build()
 				.globalOperationParameters(pars);
 	}
@@ -53,11 +54,11 @@ public class Swagger2 {
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				// 设置页面标题
-				.title("使用swagger2构建后端api接口文档")
+				.title("医院设备管理系统后端api接口文档")
 				// 设置联系人
-				.contact(new Contact("马少鹏", "http://www.mashaopeng.com", "1293826968@qq.com"))
+				.contact(new Contact("", "", ""))
 				// 描述
-				.description("这里是描述信息")
+				.description("")
 				// 定义版本号
 				.version("1.0").build();
 	}
