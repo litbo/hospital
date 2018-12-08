@@ -1,11 +1,10 @@
-package com.litbo.hospital.supervise.controller;
+package com.litbo.hospital.common.utils;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 
-public class TestController {
-
+public class StringCutUtils {
 
     public static List<String> stringToList(String s){
         List<String> result = new ArrayList<>();
@@ -22,9 +21,13 @@ public class TestController {
         return result;
     }
 
-    public static void main(String[] args) {
-        String bm_id = "0201050200";
-        System.out.println("hh");
-        System.out.println(stringToList(bm_id));
+    public static Integer getCeng_id(String bm_id){
+        List<String> idcuts = StringCutUtils.stringToList(bm_id);
+        for(int i=idcuts.size()-1;i>0;i--){
+            if(idcuts.get(i)!="00") ;
+            return Integer.parseInt(idcuts.get(i));
+        }
+        return 0;
     }
+
 }

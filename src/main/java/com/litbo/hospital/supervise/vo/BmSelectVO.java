@@ -1,7 +1,7 @@
 package com.litbo.hospital.supervise.vo;
 
 public class BmSelectVO {
-    private String bmName;   //部门名称
+    private String bmName;   //部门名称关键词
     private String bmlb;    //部门类别
     private String gklb;    //归口类别
     private String isWx;   //是否维修
@@ -27,7 +27,7 @@ public class BmSelectVO {
     }
 
     public void setGklb(String gklb) {
-        this.gklb = "%"+bmlb+"%";
+        this.gklb = gklb+"%";
     }
 
     public String getIsWx() {
