@@ -5,9 +5,11 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
+import com.litbo.hospital.supervise.vo.SetBmVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 @Controller
 @RequestMapping("/supervise/bmgl")
 public class BmController {
@@ -27,10 +29,10 @@ public class BmController {
         return Result.success(date);
     }
 
-    @GetMapping("/getBmsById")
+    @GetMapping("/getBmByOid")
     @ResponseBody
-    public Result getBmListById(@RequestParam String bm_id){
-        SBm date = bmService.getBmListById(bm_id);
+    public Result getBmByOid(@RequestParam String oid){
+        SBm date = bmService.getBmByOid(oid);
         return Result.success(date);
     }
 
@@ -52,6 +54,8 @@ public class BmController {
         return Result.success(date);
     }
 
+
+
     @PostMapping("/saveBm")
     @ResponseBody
     public Result saveBm(@RequestBody SBm bm){
@@ -59,10 +63,26 @@ public class BmController {
         return Result.success();
     }
 
-    @GetMapping("/removeBm")
+    @GetMapping("/removeBmByOid")
     @ResponseBody
-    public Result removeBm(@RequestParam String bm_id){
-        bmService.removeBm(bm_id);
+    public Result removeBmByOid(@RequestParam String oid){
+        boolean flag = true;
+        flag = bmService.isZJD(oid);
+        if(!flag) return Result.error("删除部门必须为叶子部门！！");
+        bmService.removeBmByOid(oid);
+        return Result.success();
+    }
+
+
+    @PostMapping("/setBmBeto")
+    @ResponseBody
+    public Result setBmBeto(@RequestBody SetBmVO bmVO){
+        boolean flag = true;
+        flag = bmService.isAllZJD(bmVO.getObm_ids());
+        //判断部门是否为叶子部门
+        if(!flag) return Result.error("部门必须为叶子部门！！");
+        //调整部门
+        bmService.setBmsBeto(bmVO);
         return Result.success();
     }
 
