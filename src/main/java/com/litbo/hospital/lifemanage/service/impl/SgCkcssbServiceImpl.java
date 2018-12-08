@@ -43,4 +43,14 @@ public class SgCkcssbServiceImpl implements SgCkcssbService {
         sgCkcssb.setCkcssbId(UUID.randomUUID().toString());
         return sgCkcssbMapper.insertSgCkcssb(sgCkcssb) > 0;
     }
+
+    /**
+     * 根据主键删除参考厂商设备信息
+     *
+     * @param sgCkcssbId 参考厂商设备id
+     */
+    @Override
+    public void deleteSgCkcssbById(String sgCkcssbId) {
+        sgCkcssbMapper.deleteSgCkcssbById(sgCkcssbId);
+    }
 }

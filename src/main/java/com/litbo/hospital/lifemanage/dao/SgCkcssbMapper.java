@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgCkcssb;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -46,4 +47,13 @@ public interface SgCkcssbMapper {
             "   #{ckcssbGj,jdbcType=DECIMAL}, #{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}\n" +
             ")")
     int insertSgCkcssb(SgCkcssb sgCkcssb);
+
+    /**
+     * 根据主键删除参考厂商设备信息
+     *
+     * @param sgCkcssbId 参考厂商设备id
+     * @return 删除信息的条数
+     */
+    @Delete("DELETE FROM sg_ckcssb WHERE ckcssb_id = #{sgCkcssbId,jdbcType=VARCHAR}")
+    int deleteSgCkcssbById(String sgCkcssbId);
 }
