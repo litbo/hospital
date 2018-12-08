@@ -16,8 +16,6 @@
 
 > `nav_list`变量存在于`list.js` 文件中
 
-—–END—–
-
 ## nav_list[x] - JSON类型
 
 `nav_list[x]`控制单个导航列表项
@@ -39,5 +37,3 @@ JSON属性说明：
 |  page  |    是    | 页面的名称（URL跳转指向） |
 | title  |    是    | 导航名称                  |
 |  icon  |    是    | 导航图标                  |
-
-—–END—–

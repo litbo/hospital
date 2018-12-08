@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface SgCkcssbMapper {
     /**
-     * 分页查询所有厂商设备表信息
+     * 根据申购单ID查询所有厂商设备表信息
      *
      * @return List<SgCkcssb> 查询的信息
      */
@@ -27,10 +27,9 @@ public interface SgCkcssbMapper {
             "dbo.sg_ckcssb.ckcssb_gj,\n" +
             "dbo.sg_ckcssb.extend_one,\n" +
             "dbo.sg_ckcssb.extend_two\n" +
-            "\n" +
-            "FROM\n" +
-            "dbo.sg_ckcssb")
-    List<SgCkcssb> selectSgCkcssbs();
+            "FROM dbo.sg_ckcssb\n" +
+            "WHERE dbo.sg_ckcssb.sg_id = #{sgInfoId,jdbcType=VARCHAR}")
+    List<SgCkcssb> selectSgCkcssbBySgInfoId(String sgInfoId);
 
     /**
      * 添加厂商设备表信息

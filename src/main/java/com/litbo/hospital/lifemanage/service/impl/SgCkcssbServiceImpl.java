@@ -26,8 +26,8 @@ public class SgCkcssbServiceImpl implements SgCkcssbService {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<SgCkcssb> selectSgCkcssbs() {
-        return sgCkcssbMapper.selectSgCkcssbs();
+    public List<SgCkcssb> selectSgCkcssbBySgInfoId(String sgInfoId) {
+        return sgCkcssbMapper.selectSgCkcssbBySgInfoId(sgInfoId);
     }
 
     /**

@@ -37,6 +37,8 @@ html{
   .m-logo img{
     width:100%;
     height:100%;
+    padding: 5px;
+    box-sizing: border-box;
   }
     .layui-nav{
         background: @sideColor;
@@ -81,9 +83,6 @@ html{
     .layui-nav-tree .layui-nav-child .layui-this>a{
             background-color: #56595a;
             color: @blue;
-//          .l-line {
-//              background: url("../images/l-line-white.png") left center no-repeat;
-//          }
     }
     .layui-nav-tree .layui-this>a{
         background-color: rgba(0, 181, 249, 0.8);
@@ -141,7 +140,7 @@ html{
     }
     .menu-btn {
         float: left;
-        width: @num;
+        width: 70px;
         height: @num;
         line-height: 60px;
         text-align: center;
@@ -258,62 +257,7 @@ html{
     bottom: 0;
     background: rgba(0,0,0,0.3);
 }
-@media (max-width: 768px) {
-    .main-layout-side{
-        position: fixed;
-        left: -@BarWindth;
-        overflow: auto;
-        overflow-x: hidden;
-        z-index: 100;
-    }
-    .main-layout-container{
-        position: absolute;
-        left:0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-    }
-    .main-layout.hide-side {
-        .main-layout-side{
-            left: 0;
-        }
-        .main-mask{
-            display: block;
-        }
-    }
-    ::-webkit-scrollbar{width:2px;height:10px}
-    .menus{
-      width: 70%;
-      overflow: scroll;
-      float:left;
-    }
-    .menus_con{
-      width:200%;
-    }
-    .conts{
-      width: 100%;
-      z-index: 106;
-      background: #fff!important;
-      margin-top: -10px;
-      display: none;
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
-    }
-    .info1{
-      width:14%;
-      overflow: hidden;
-      float:left;
-    }
-    .conts{
-      width: 100%;
-      position: absolute;
-      top: 70px;
-      left: 0;
-    }
-    #hideBtn{
-      width:15%;
-    }
-}
+
 
 //style
 .cts2{
@@ -416,16 +360,16 @@ html{
   display: block;
 }
 .jlsj{
-  width:@BarWindth;
-  height:90px;
+  width:150px;
   position: fixed;
-  bottom:0;
+  bottom:10px;
   text-align: center;
-  right:10px;
+  right:20px;
   z-index:99999;
 }
 .jlsj img{
-  margin:15px 0 0;
+  width:100%;
+  height:100%;
 }
 .jlsj p{
   font-size:1.1rem;
@@ -486,4 +430,86 @@ html{
 }
 #sbars{
   font-size:1.8rem!important;
+}
+
+#h_tips {
+  position: fixed;
+  left: 40%;
+  top: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  min-width: 150px;
+  padding: 10px;
+  border-radius: 10px;
+  display:none;
+}
+
+.tip_title {
+  width: 60px;
+}
+
+.tip_conts {
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .main-layout-side{
+    position: fixed;
+    left: -@BarWindth;
+    overflow: auto;
+    overflow-x: hidden;
+    z-index: 100;
+  }
+  .main-layout-container{
+    position: absolute;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .main-layout.hide-side {
+    .main-layout-side{
+      left: 0;
+    }
+    .main-mask{
+      display: block;
+    }
+  }
+  ::-webkit-scrollbar{width:2px;height:10px}
+  .menus{
+    width: 70%;
+    overflow: scroll;
+    float:left;
+  }
+  .menus_con{
+    width:200%;
+  }
+  .conts{
+    width: 100%;
+    z-index: 106;
+    background: #fff!important;
+    margin-top: -10px;
+    display: none;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+  .info1{
+    width:14%;
+    overflow: hidden;
+    float:left;
+  }
+  .conts{
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    left: 0;
+  }
+  #hideBtn{
+    width:15%;
+  }
+  .jlsj{
+    width:100px;
+    bottom:5px;
+    right:5px;
+  }
 }

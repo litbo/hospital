@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>健龙世纪管理中心</title>
+    <title>医疗设备智能管理系统</title>
     <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
     <link rel="stylesheet" href="../../static/admin/css/all.min.css"/>
@@ -14,10 +14,9 @@
     <!--[if IE 8]>
     <script type="text/javascript" src="../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-
     <style>
         .loading{
-            font-size:3rem;
+            font-size:2.5rem;
             color:#fff;
             text-align: center;
             vertical-align: middle;
@@ -30,18 +29,7 @@
     </style>
 </head>
 <body>
-<div class="begin"></div>
-<script>
-    var timer = null;
-    $(".begin").append($("<div>").attr("class","main-mask").css({"display":"block","background":"rgba(0,0,0,0.6)"})
-        .append($("<p>").attr("class","loading").html("<br /> 页面加载中，请稍等。。。")
-            .prepend($("<i>").attr("class","layui-icon layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"))
-        ))
-    clearTimeout(timer);
-    timer = setTimeout(function(){
-        $(".begin").html("");
-    },3000);
-</script>
+<script>markPage();</script>
 <div class="main-layout" id='main-layout'>
     <!--侧边栏-->
     <div class="main-layout-side">
@@ -87,7 +75,7 @@
                         </a>
                     </li>
                     <li class="layui-nav-item items1">
-                        <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息" style="padding:0 10px;">
+                        <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息" style="padding:0 10px;overflow:hidden;">
                             <img src="../../static/admin/images/man.png" class="user_head" alt="用户头像">
                             <p class="names">
                                 <span class="h_name">李医生</span>
@@ -119,7 +107,6 @@
 
                     </ul>
                 </div>
-
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
                         <!--内容页-->
@@ -129,42 +116,46 @@
                 </div>
             </div>
         </div>
-        <div class="jlsj">
+        <!--<div class="jlsj">
             <img src="../../static/admin/images/footerlogo.png" alt="健龙世纪">
-            <!--<p>医疗设备数字化管理产品和服务的</p>-->
-            <!--<p><b>开拓者 领航者</b></p>-->
-        </div>
+            &lt;!&ndash;<p>医疗设备数字化管理产品和服务的</p>&ndash;&gt;
+            &lt;!&ndash;<p><b>开拓者 领航者</b></p>&ndash;&gt;
+        </div>-->
     </div>
     <!--遮罩-->
-    <!--<div class="main-mask" style="display:block; opacity: 0.9">-->
-        <!--<p class="loading"><i class="layui-icon layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"></i> 页面加载中，请稍后。。。</p>-->
-    <!--</div>-->
+    <div class="main-mask"></div>
 </div>
 <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../static/admin/js/list.js"></script>
-<script src="../../static/admin/js/nav.js"></script>
+<script src="../../static/admin/js/list.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../static/admin/js/nav.js" type="text/javascript" charset="utf-8"></script>
 <script>
     $("#refresh_home").on('click',function(){
         var homes = document.getElementById('home') ;
         if(!$("#refresh_home").hasClass("layui-this")){
             try{
                 homes.contentWindow.location.reload();
-            }catch{
+            }catch (er){
                 alert("当前页面显示不正确，可能会出现显示错乱，请使用服务器访问当前页面！");
-                console.error("由于跨域问题，当前页面在本地访问时将出现显示错误，请使用服务器访问！");
+                console.error("此功能无法正常在本地使用，请使用服务器访问！");
             }
 
         }
     })
     window.onload = function(){
-        var f = $.cookie("f");
-        $.cookie("f", null);
-        if(f !== null && typeof Number(f) === "number"){
-            $("a[data-id='"+Number(f)+"']")[0].click();
+        if($(".layui-nav-item a span").length <= 0){
+            location.reload();
         }
-        $(".begin").html("");
+        try{
+            var f = $.cookie("f");
+            $.cookie("f", null);
+            if(f !== null && typeof Number(f) === "number"){
+                $("a[data-id='"+Number(f)+"']")[0].click();
+            }
+        }catch(er){
+            console.log("no COOKIES")
+        }
     }
 </script>
 </body>

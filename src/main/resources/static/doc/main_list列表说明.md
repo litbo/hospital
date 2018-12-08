@@ -8,15 +8,9 @@
 
 `main_list`变量用于定义页面中的列表项（左侧主列表和右侧副列表），并且通过改变页面URL参数的方式切换不同的页面
 
-
-
 **<u>`nav.js`</u>中的`addList`函数通过调用`main_list`变量来渲染页面列表**
 
-
-
 > `main_list`变量存在于 `list.js` 文件中
-
-—–END—–
 
 ## main_list[0] - JSON类型
 
@@ -55,15 +49,11 @@ JSON属性说明：
 | shiro  |    是    | 权限管理模块判断当前用户是否可见         |
 |  func  |    否    | 列表点击事件                             |
 
-—–END—–
-
 ## main_list[1-n] - JSON类型
 
 除首页外其余所有页面列表的动态生成均遵循以下统一格式
 > 以下将所有除了首页的页面索引值统称为 **`x`**
 > 即 `main_list[x]` 代表除首页外所有的单一页面
-
-—–END—–
 
 ### main_list[x] - JSON类型
 
@@ -105,8 +95,6 @@ page对应页面：
 | admin  | 行政管理 项     |
 | system | 系统管理 项     |
 
-—–END—–
-
 #### main_list[x].tools - 数组类型
 
 `main_list[x].tools`定义了当前页面的右侧小列表的内容
@@ -133,8 +121,6 @@ JSON属性说明：
 |  icon   |    是    | 列表中图标的名称(图标名来自FontAwesome)     |
 |  shiro  |    是    | 权限管理模块判断当前用户是否可见            |
 | content |    是    | 列表字列表项内容                            |
-
-—–END—–
 
 ##### main_list[x].tools[y].content - 数组类型
 
@@ -175,17 +161,13 @@ URL组成说明：
 
 > URL数值如不按格式填写将会导致页面判断URL无效而跳转首页
 
-**强烈推荐 `t`  `n`序号按顺序排列**
-
-—–END—–
+**强烈推荐 `t`  `n`序号按顺序排列，否则很可能跳转会乱**
 
 ##### main_list[x].tools[y].content[z].items - 数组类型
 
 `main_list[x].tools[y].content[z].items`表示子项点击后页面主列表项的填充内容
 
 > 由于main_list[x].tools[y].content[z].items内容与main_list[x].items相同，所以不再赘述，参见main_list[x].items内容
-
-—–END—–
 
 #### main_list[x].items - 数组类型
 `main_list[x].items`表示页面默认左侧主列表项内容，如为空则默认将右侧列表的第一个小列表项中的主列表内容设置为默认主列表项内容
@@ -219,8 +201,6 @@ JSON属性说明：
 > 如无子列表项则不要写list，否则列表可能会乱
 > URL默认请填写 `javascrip:void(0)；`
 
-—–END—–
-
 ##### main_list[x].items[y].list - 数组类型
 `main_list[x].items[y].list` 表示主列表的列表项下的子列表内容。
 
@@ -247,8 +227,6 @@ JSON属性说明：
 |  url   |    是    | 标签中"`data-url`"的属性值（URL组成见下）   |
 |   id   |    是    | 标签中"`data-id`"的属性值                   |
 | shiro  |    是    | 权限管理模块判断当前用户是否可见            |
-
-—–END—–
 
 # 完整格式示例
 

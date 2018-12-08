@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>网站后台管理模版</title>
     <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
@@ -15,10 +14,12 @@
         }
     </style>
     <script src="../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
     <script src="../../static/admin/js/basic.js"></script>
 </head>
 <body>
-
 <div class="wrap-container welcome-container">
     <div class="row">
         <div class="welcome-left-container col-lg-8">
@@ -29,8 +30,8 @@
             <div class="h_panels chart-panel panel panel-default">
                 <div class="h_pad0 col-xs-12">
                     <div class="panel_title li_first_l1">
-                        <span class="li_first_left col-lg-11">待办任务</span>
-                        <a href="javascrip:;" class="h_more li_first_right col-lg-1" data-id="11">更多 &gt;&gt;</a>
+                        <span class="li_first_left col-lg-11">我的任务</span>
+                        <a href="javascrip:void(0);" class="h_more li_first_right col-lg-1" data-id="11">更多 &gt;&gt;</a>
                     </div>
                     <div class="panel_con" h_name="need_do">
                         <ul>
@@ -39,44 +40,28 @@
                     </div>
                 </div>
             </div>
-            <div class="h_panels chart-panel panel panel-default">
-                <div class="h_pad0 col-xs-12">
-                    <div class="clearfix">
-                        <div class="panel_title li_first_l2">
-                            <span class="li_first_left col-lg-11">专项&临时任务</span>
-                            <a href="javascrip:;" class="h_more li_first_right col-lg-1" data-id="12">更多 &gt;&gt;</a>
-                        </div>
-                        <div class="panel_con" h_name="other_do">
-                            <ul>
-                                <li>暂无内容</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="h_panels chart-panel panel panel-default">
-                <div class="h_pad0 col-xs-12">
-                    <div class="clearfix">
-                        <div class="panel_title li_first_l3">
-                            <span class="li_first_left col-lg-11">个人工作记录</span>
-                            <a href="javascrip:;" class="h_more li_first_right col-lg-1" data-id="14">更多 &gt;&gt;</a>
-                        </div>
-                        <div class="panel_con" h_name="personal_record">
-                            <ul>
-                                <li>暂无内容</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="welcome-right-container col-lg-4">
             <ul class="h_panels1">
+
+                    <li class="h_panels h_pad0 col-lg-12 col-sm-12 col-md-4 col-xs-12">
+                        <div class="clearfix">
+                            <div class="panel_title li_first_l3">
+                                <span class="li_first_left col-lg-9">提醒事项</span>
+                                <a href="javascrip:void(0);" class="h_more li_first_right col-lg-3" data-id="12">更多 &gt;&gt;</a>
+                            </div>
+                            <div class="panel_con" h_name="personal_record">
+                                <ul>
+                                    <li>暂无内容</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
                 <li class="h_panels h_pad0 col-lg-12 col-sm-12 col-md-4 col-xs-12">
                     <div class="clearfix">
                         <div class="panel_title li_first">
-                            <span class="col-lg-9 li_first_left">公告栏</span>
-                            <a href="javascrip:;" class="h_more col-lg-3 li_first_right" data-id="16">更多 &gt;&gt;</a>
+                            <span class="col-lg-9 li_first_left">通知公告</span>
+                            <a href="javascrip:void(0);" class="h_more col-lg-3 li_first_right" data-id="14">更多 &gt;&gt;</a>
                         </div>
                         <div class="panel_con" h_name="announce">
                             <ul>
@@ -88,21 +73,8 @@
                 <li class="h_panels h_pad0 col-lg-12 col-sm-12 col-md-4 col-xs-12">
                     <div class="clearfix">
                         <div class="panel_title li_first">
-                            <span class="col-lg-9 li_first_left">系统消息</span>
-                            <a href="javascript:;" class="h_more col-lg-3 li_first_right" data-id="17">更多 &gt;&gt;</a>
-                        </div>
-                        <div class="panel_con" h_name="sys_info">
-                            <ul>
-                                <li>暂无内容</li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="h_panels h_pad0 col-lg-12 col-sm-12 col-md-4 col-xs-12">
-                    <div class="clearfix">
-                        <div class="panel_title li_first">
                             <span class="col-lg-9 li_first_left">公共信息</span>
-                            <a href="javascript:" class="h_more col-lg-3 li_first_right" data-id="18">更多 &gt;&gt;</a>
+                            <a href="javascript:void(0);" class="h_more col-lg-3 li_first_right" data-id="15">更多 &gt;&gt;</a>
                         </div>
                         <div class="panel_con" h_name="public_info">
                             <ul>
@@ -118,13 +90,12 @@
 <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/lib/echarts/echarts.js"></script>
 <script type="text/javascript">
-    layui.use(['layer', 'jquery','element'], function () {
+    layui.use(['layer', 'jquery','element','layer'], function () {
         var layer = layui.layer
             ,$ = layui.jquery
             ,element = layui.element
             ,myChart;
         //图表
-
         require.config({
             paths: {
                 echarts: '../../static/admin/lib/echarts'
@@ -303,6 +274,21 @@
                     myChart1.resize();
                 })
             });
+        $(function(){
+            $(".panel_con a").on('click',function(){
+                var w = document.body.clientWidth - 20
+                    ,h = document.body.clientHeight - 20;
+                layer.open({
+                    type:2,
+                    title:"详情信息",
+                    content:$(this).attr("href"),
+                    area:[w+"px",h+"px"],
+                    resize:false,
+                    move:false
+                })
+                return false;
+            })
+        })
     });
     $(function(){
         var data = {
@@ -310,70 +296,37 @@
                 [
                     {
                         "item": "通知公告",
-                        "src": "#",
+                        "src": "./repair.html",
                         "time": "2018-04-12"
                     },
                     {
                         "item": "通知公告2",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     },
                     {
                         "item": "通知公告3",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     }
                 ],
                 [
                     {
                         "item": "通知公告22",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     },
                     {
                         "item": "通知公告222",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     },
                     {
                         "item": "通知公告223",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    }
-                ],
-                [
-                    {
-                        "item": "通知公告33",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    },
-                    {
-                        "item": "通知公告332",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    },
-                    {
-                        "item": "通知公告333",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    },
-                    {
-                        "item": "通知公告33",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    },
-                    {
-                        "item": "通知公告332",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    },
-                    {
-                        "item": "通知公告333",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     }
                 ]
-
             ],
             "public": [
                 [
@@ -384,74 +337,62 @@
                     },
                     {
                         "item": "通知公告2",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     },
                     {
                         "item": "通知公告3",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     }
                 ],
                 [
                     {
                         "item": "通知公告22",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     },
                     {
                         "item": "通知公告222",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     },
                     {
                         "item": "通知公告223",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    }
-                ],
-                [
-                    {
-                        "item": "通知公告33",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    },
-                    {
-                        "item": "通知公告332",
-                        "src": "#",
-                        "time": "2018-04-12"
-                    },
-                    {
-                        "item": "通知公告333",
-                        "src": "#",
+                        "src": "./table.html",
                         "time": "2018-04-12"
                     }
                 ]
-
             ]
         }
-        var h_name = [["need_do","other_do","personal_record"],["announce","sys_info","public_info"]],id=0;
+        var h_name = [["need_do","personal_record"],["announce","public_info"]],id=0;
         getData(data);
         $(".h_more").click(function(){
             var page = $.getUrlParam("p",1);
             id = $(this).attr("data-id");
-            //console.log($(".layui-nav-item a[data-id='"+14+"']",window.parent.document));
             if(page === "home"){
-                $(".layui-nav-item a[data-id='"+id+"']",window.parent.document)[0].click();
+                try{
+                    $(".layui-nav-item a[data-id='"+id+"']",window.parent.document)[0].click();
+
+                }catch(er){
+                    alert("当前页面显示不正确，可能会出现显示错乱，请使用服务器访问当前页面！");
+                    console.error("此功能无法正常在本地使用，请使用服务器访问！")
+                }
             }else{
-                $.cookie("f", id, { expires: 1, domain: 'localhost' });
-                //window.cookie = encodeURIComponent("$(\".layui-nav-item a[data-id='"+id+"']\",window.parent.document)[0].click();");
+                $.cookie("f", id, { expires: 1 });
                 window.parent.location.search = "?p=home";
             }
 
         })
+
+        //5：welcome数据添加
         function getData(data) {
             addData(h_name[0],data.task);
             addData(h_name[1],data.public);
             function addData(name,d){
                 for(var j=0;j<name.length;j++){
-                    var containers = $("div[h_name='"+name[j]+"'] ul"),n=0;//n: 限制显示信息条数 7 条
-                    containers.html("");
+                    var containers = $("div[h_name='"+name[j]+"'] ul"),n=0;
+                    containers.html("");//清空已有内容，避免数据污染
                     for(var i=0;i<d[j].length;i++){
                         if(n <= 7){//只渲染7条数据（一个数据框内最多只能容纳7条数据）
                             n++;

@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface SgCkcssbService {
     /**
-     * 分页查询所有厂商设备表信息
+     * 根据申购单id查询所有厂商设备表信息
      *
      * @return List<SgCkcssb> 查询的信息
      */
-    List<SgCkcssb> selectSgCkcssbs();
+    List<SgCkcssb> selectSgCkcssbBySgInfoId(String sgInfoId);
 
     /**
      * 添加厂商设备表信息
