@@ -7,6 +7,7 @@ import com.litbo.hospital.security.bean.FwPjzd;
 import java.util.List;
 
 public interface FwPjzdService {
-    PageInfo listFwPjzd(int pageNum, int pageSize);
     int insertFwPjzd(FwPjzd pjzd);
+
+    PageInfo listFwPjzd(String pjSzm,int pageNum,int pageSize,String pjfl);
 }

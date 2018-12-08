@@ -7,7 +7,7 @@ import java.util.Date;
 public class FwPjzd {
     private Integer id;
 
-    private Integer pjflId;
+    private String pjfl;
 
     private Integer pjKw;
 
@@ -32,5 +32,7 @@ public class FwPjzd {
     private Date pjXgTime;
 
     private Date pjCjTime;
+
+    private String pjSzm;
 
 }

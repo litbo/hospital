@@ -11,6 +11,9 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.List;
 
+/**
+ * 数据转化成excel  导出excel
+ */
 public class ExportExcelUtil {
     /**
      *
