@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 参考厂商设备表Service实现类
@@ -19,7 +20,7 @@ public class SgCkcssbServiceImpl implements SgCkcssbService {
     private SgCkcssbMapper sgCkcssbMapper;
 
     /**
-     * 分页查询所有厂商设备表信息
+     * 分页查询所有参考厂商设备表信息
      *
      * @return List<SgCkcssb> 查询的信息
      */
@@ -32,13 +33,14 @@ public class SgCkcssbServiceImpl implements SgCkcssbService {
     /**
      * 添加厂商设备表信息
      *
-     * @param sgCkcssb 厂商设备表实体类
+     * @param sgCkcssb 参考厂商设备表实体类
      * @return boolean 是否添加信息成功
      */
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public boolean insertSgCkcssb(SgCkcssb sgCkcssb) {
-        int i = sgCkcssbMapper.insertSgCkcssb(sgCkcssb);
-        return i > 0;
+        //添加参考厂商ID
+        sgCkcssb.setCkcssbId(UUID.randomUUID().toString());
+        return sgCkcssbMapper.insertSgCkcssb(sgCkcssb) > 0;
     }
 }

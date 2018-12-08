@@ -1,5 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
+import com.litbo.hospital.lifemanage.bean.SgGnpz;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -7,27 +9,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface SgGnpzMapper {
-    /*
-    int countByExample(SgGnpzExample example);
 
-    int deleteByExample(SgGnpzExample example);
-
-    int deleteByPrimaryKey(String gnpzId);
-
-    int insert(SgGnpz record);
-
-    int insertSelective(SgGnpz record);
-
-    List<SgGnpz> selectByExample(SgGnpzExample example);
-
-    SgGnpz selectByPrimaryKey(String gnpzId);
-
-    int updateByExampleSelective(@Param("record") SgGnpz record, @Param("example") SgGnpzExample example);
-
-    int updateByExample(@Param("record") SgGnpz record, @Param("example") SgGnpzExample example);
-
-    int updateByPrimaryKeySelective(SgGnpz record);
-
-    int updateByPrimaryKey(SgGnpz record);
-     */
+    @Insert("insert into sg_gnpz (gnpz_id, ckcssb_id, gnpz_mc, \n" +
+            "   gnpz_ms, gnpz_issy, extend_one, \n" +
+            "   extend_two)\n" +
+            "values (#{gnpzId,jdbcType=VARCHAR}, #{ckcssbId,jdbcType=VARCHAR}, #{gnpzMc,jdbcType=VARCHAR}, \n" +
+            "   #{gnpzMs,jdbcType=VARCHAR}, #{gnpzIssy,jdbcType=CHAR}, #{extendOne,jdbcType=VARCHAR}, \n" +
+            "   #{extendTwo,jdbcType=VARCHAR})")
+    int insertSgGnpz(SgGnpz sgGnpz);
 }

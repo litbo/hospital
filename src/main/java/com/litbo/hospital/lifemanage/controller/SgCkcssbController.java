@@ -43,7 +43,6 @@ public class SgCkcssbController {
     @PostMapping("/insertSgCkcssb")
     public Result insertSgCkcssb(@RequestBody SgCkcssb sgCkcssb) {
         boolean insert = sgCkcssbService.insertSgCkcssb(sgCkcssb);
-        System.out.println(insert);
         if (insert) {
             return Result.success();
         } else {

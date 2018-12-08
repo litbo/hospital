@@ -40,12 +40,12 @@ public interface SgKstlService {
     /**
      * 显示部门下的所有讨论的设备
      *
-     * @param bmId     部门id
+     * @param userId     登陆人id
      * @param eqPmName 设备名称
      * @param eqPmJc   设备简称
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return SgKstlVO
      */
-    PageInfo<SgKstlVO> selectSgKstlSbs(String bmId,String eqPmName,String eqPmJc,Integer pageNum,Integer pageSize);
+    PageInfo<SgKstlVO> selectSgKstlSbs(String userId,String eqPmName,String eqPmJc,Integer pageNum,Integer pageSize);
 }

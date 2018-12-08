@@ -47,25 +47,4 @@ public interface SgCkcssbMapper {
             "   #{ckcssbGj,jdbcType=DECIMAL}, #{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}\n" +
             ")")
     int insertSgCkcssb(SgCkcssb sgCkcssb);
-/*
-    int deleteByExample(SgCkcssbExample example);
-
-    int deleteByPrimaryKey(String ckcssbId);
-
-    int insert(SgCkcssb record);
-
-    int insertSelective(SgCkcssb record);
-
-    List<SgCkcssb> selectByExample(SgCkcssbExample example);
-
-    SgCkcssb selectByPrimaryKey(String ckcssbId);
-
-    int updateByExampleSelective(@Param("record") SgCkcssb record, @Param("example") SgCkcssbExample example);
-
-    int updateByExample(@Param("record") SgCkcssb record, @Param("example") SgCkcssbExample example);
-
-    int updateByPrimaryKeySelective(SgCkcssb record);
-
-    int updateByPrimaryKey(SgCkcssb record);
-     */
 }
