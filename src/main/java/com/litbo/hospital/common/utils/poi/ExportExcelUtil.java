@@ -1,5 +1,6 @@
 package com.litbo.hospital.common.utils.poi;
 
+import com.litbo.hospital.security.bean.FwPjsg;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -8,13 +9,20 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
  * 数据转化成excel  导出excel
  */
 public class ExportExcelUtil {
+
+
+
     /**
      *
      * @param response
@@ -128,6 +136,8 @@ public class ExportExcelUtil {
             }
         }
     }
+
+
 
 
 }
