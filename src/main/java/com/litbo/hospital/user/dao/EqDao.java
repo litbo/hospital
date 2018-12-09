@@ -27,4 +27,7 @@ public interface EqDao {
     String getLastId();
     @Select("SELECT COUNT(*) FROM eq_info")
     Integer countEq();
+
+    @Select("SELECT * FROM eq_info where eq_id =#{id}")
+    EqInfo getEqById(String id);
 }
