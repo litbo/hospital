@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>基础字典</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table_basic" lay-filter="basic"></table>
+    </div>
+</div>
+<script type="text/html" id="toolBar">
+    <form class="layui-form">
+        字典分类：
+        <div class="layui-inline">
+            <select name="classify" lay-verify="">
+                <option>请选择分类</option>
+                <option>专项任务来源</option>
+                <option>临床应用培训</option>
+                <option>人员证件类型</option>
+                <option>保养维修培训</option>
+                <option>公告类型</option>
+                <option>取得方式</option>
+                <option>台账类别</option>
+                <option>固定资产分类</option>
+                <option>培训性质</option>
+                <option>培训类型</option>
+                <option>处置方式</option>
+                <option>工作量单位</option>
+                <option>报废原因</option>
+                <option>操作使用培训</option>
+                <option>支付方式</option>
+                <option>文档类型</option>
+                <option>标准类型</option>
+                <option>监测结果</option>
+                <option>检测规范</option>
+                <option>清理原因</option>
+                <option>经费来源</option>
+                <option>维保单位</option>
+                <option>维护保养项目分类</option>
+                <option>计量监测单位</option>
+                <option>设备使用范围</option>
+                <option>设备分类</option>
+                <option>诊疗单位</option>
+                <option>配件库位</option>
+                <option>配件类型</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </form>
+</script>
+    <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        layui.use('table',function(){
+            var table = layui.table;
+
+            //方法级渲染
+            table.render({
+                elem:'#table_basic'
+               ,page:'true'
+               ,height:'full-25'
+               ,minWidth:1000
+               ,toolbar:'#toolBar'
+               ,cols: [[ //表头
+                    {checkbox:true,fixed:true}
+                    , {field: 'dictionary-name', title: '字典名称', width: '70%', minWidth: 400}
+                    , {field: 'dictionary-type', title: '字典类型', minWidth: 150}
+                ]]
+               , "data": [
+                    {
+                        "dictionary-name": '公告',
+                        "dictionary-type": "公告类型"
+                    },
+                    {"dictionary-name": '通知',
+                        "dictionary-type": "公告类型"
+                    },
+                    {
+                        "dictionary-name": '通告',
+                        "dictionary-type": "公告类型"
+                    }
+                    ]
+               })
+        })
+    </script>
+</body>
+</html>

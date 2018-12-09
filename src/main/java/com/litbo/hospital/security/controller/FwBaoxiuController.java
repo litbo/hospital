@@ -21,6 +21,11 @@ public class FwBaoxiuController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 添加报修单
+     * @param fwBaoxiu
+     * @return
+     */
     @PostMapping("/addBaoxiu")
     public Result addBaoxiu(FwBaoxiu fwBaoxiu){
         try {
@@ -32,6 +37,12 @@ public class FwBaoxiuController {
         }
     }
 
+    /**
+     * 更改状态
+     * @param id
+     * @param baoxiuStatus
+     * @return
+     */
     @GetMapping("/updateBaoxiuStatus")
     public Result updateBaoxiuStatus(String id,Integer baoxiuStatus){
         try {

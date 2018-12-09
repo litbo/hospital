@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.bean;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,13 +12,15 @@ import java.util.Date;
     **/
 @Data
 public class EqInfo {
-    private Integer eqId;
+    private String eqId;
+    //设备名称
+    private String eqName;
     //设备编号
     private String eqSbbh;
     //资产编号
     private String eqZcbh;
     //品名id
-    private Integer eqPmId;
+    private String eqPmId;
     //设备规格
     private String eqGg;
     //设备型号
@@ -31,8 +34,10 @@ public class EqInfo {
     //台账类别
     private String eqTzlb;
     //保修开始时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqBxkssj;
     //保修结束时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqBxjssj;
     //保修响应时间
     private Integer eqBxxysj;
@@ -45,6 +50,7 @@ public class EqInfo {
     //查询分类id  (设备分类)
     private String eqCxflId;
     //启用时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqQysj;
     //注册证编号
     private String eqZczbh;
@@ -65,10 +71,12 @@ public class EqInfo {
     //合同编号
     private String eqHtbh;
     //采购日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqCgrq;
     //使用部门负责人
     private String eqSybmfzr;
     //安装日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqAzrq;
     //安装位置
     private String eqAzwz;
@@ -79,6 +87,7 @@ public class EqInfo {
     //建档人
     private String userId;
     //建档日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqJdrq;
     //卷宗编号
     private String eqJzbh;

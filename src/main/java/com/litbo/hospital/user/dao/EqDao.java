@@ -22,4 +22,12 @@ public interface EqDao {
 
     @SelectProvider(type = EqProvider.class , method = "selectEqByX")
     List<EqShowVo> listEqByX(SelectVo selectVo);
+
+    @Select("select top 1 eq_id FROM eq_info  ORDER BY eq_id desc")
+    String getLastId();
+    @Select("SELECT COUNT(*) FROM eq_info")
+    Integer countEq();
+
+    @Select("SELECT * FROM eq_info where eq_id =#{id}")
+    EqInfo getEqById(String id);
 }

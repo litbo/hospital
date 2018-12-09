@@ -20,4 +20,12 @@ public class EqZjly {
     public void setZjlyName(String zjlyName) {
         this.zjlyName = zjlyName == null ? null : zjlyName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "EqZjly{" +
+                "zjlyId=" + zjlyId +
+                ", zjlyName='" + zjlyName + '\'' +
+                '}';
+    }
 }

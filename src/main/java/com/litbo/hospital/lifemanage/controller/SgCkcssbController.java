@@ -25,21 +25,33 @@ public class SgCkcssbController {
      * @param sgCkcssb 厂商设备表实体类
      * @return Result 添加厂商设备信息成功/添加厂商设备信息失败
      */
-    @ApiOperation(value = "添加参考厂商设备表信息",notes = "添加参考厂商设备表信息业务")
+    @ApiOperation(value = "添加参考厂商设备表信息", notes = "添加参考厂商设备表信息业务")
     @PostMapping("/insertSgCkcssb")
     public Result insertSgCkcssb(@RequestBody SgCkcssb sgCkcssb) {
-        boolean insert = sgCkcssbService.insertSgCkcssb(sgCkcssb);
-        if (insert) {
-            return Result.success();
-        } else {
-            return Result.error("添加厂商设备信息失败");
-        }
-
+        sgCkcssbService.insertSgCkcssb(sgCkcssb);
+        return Result.success();
     }
 
+    /**
+     * 根据申购单id查询所有厂商设备表信息
+     *
+     * @return List<SgCkcssb> 查询的信息
+     */
     @GetMapping("selectSgCkcssbBySgInfoId")
-    public Result selectSgCkcssbBySgInfoId(@RequestParam(name = "SgInfoId")String sgInfoId){
+    public Result selectSgCkcssbBySgInfoId(@RequestParam(name = "SgInfoId") String sgInfoId) {
         return Result.success(sgCkcssbService.selectSgCkcssbBySgInfoId(sgInfoId));
+    }
+
+    /**
+     * 根据主键删除参考厂商设备信息
+     *
+     * @param sgCkcssbId 参考厂商设备id
+     * @return Result
+     */
+    @GetMapping("deleteSgCkcssbById")
+    public Result deleteSgCkcssbById(@RequestParam(name = "sgCkcssbId") String sgCkcssbId) {
+        sgCkcssbService.deleteSgCkcssbById(sgCkcssbId);
+        return Result.success();
     }
 
 }

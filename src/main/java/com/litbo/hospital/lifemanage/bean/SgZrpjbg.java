@@ -9,19 +9,36 @@ import java.util.Date;
  */
 @Data
 public class SgZrpjbg {
+    /**
+     * 准入评价报考主键
+     */
     private String pjbgId;
-
+    /**
+     * 准入评价报告单位
+     */
     private String pjbgDw;
-
+    /**
+     * 准入评价报告装备项目
+     */
     private String pjbgZbxm;
-
+    /**
+     * 准入评价报告部门负责人
+     */
     private String pjbgBmfzr;
-
+    /**
+     * 准入评价报告制表单位
+     */
     private String pjbgZbdw;
-
+    /**
+     * 准入评价报告日期
+     */
     private Date pjbgRq;
-
+    /**
+     * 准入评价报告扩展名1
+     */
     private String extendOne;
-
+    /**
+     * 准入评价报告扩展名2
+     */
     private String extendTwo;
 }
