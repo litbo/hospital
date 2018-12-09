@@ -67,7 +67,7 @@ public class ImportExcelUtil {
      * @param rowNum
      * @return
      */
-    private static int getRowIsNull(Row row,int rowNum) {
+    public static int getRowIsNull(Row row,int rowNum) {
         int num = 0;        //空单元格的数量
 
         for (int i = 0 ; i < rowNum ; i ++ ){
@@ -89,7 +89,7 @@ public class ImportExcelUtil {
      * @param cellNum
      * @return
      */
-    private static List<String> readTitlesToExcel(Workbook wb, Sheet sheet,Row row,int cellNum){
+    public static List<String> readTitlesToExcel(Workbook wb, Sheet sheet,Row row,int cellNum){
         //Row row = sheet.getRow(0);
         //row.getCell(0);
         List list = new ArrayList<String>();
@@ -111,7 +111,7 @@ public class ImportExcelUtil {
      * @param rowNum
      * @return
      */
-    private static List<List<Object>> readRowsToExcel(Workbook wb, Sheet sheetAt,Row row,int rowNum){
+    public static List<List<Object>> readRowsToExcel(Workbook wb, Sheet sheetAt,Row row,int rowNum){
         short cellNum = row.getLastCellNum();
         Cell cell = null;
         List list = new ArrayList<>();
@@ -141,7 +141,7 @@ public class ImportExcelUtil {
     测试
      */
     public static void main(String[] args) {
-        File file = new File("E:\\test\\test.xlsx");
+        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\");
         Workbook workbook = null;
         InputStream inputStream = null;
         try {
@@ -166,6 +166,7 @@ public class ImportExcelUtil {
             List<Map<String, Object>> mapList = listToMap(lists, list);
             for (Map<String, Object> map : mapList) {
                 User user = parseMap2Object(map, User.class);
+
                 System.out.println(user);
             }
 

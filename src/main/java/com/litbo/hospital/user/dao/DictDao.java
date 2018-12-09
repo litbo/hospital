@@ -3,9 +3,7 @@ package com.litbo.hospital.user.dao;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.DictProvider;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -23,4 +21,7 @@ public interface DictDao {
     List<EqGzlb> listGzlb();
     @SelectProvider(type = DictProvider.class, method = "selectZjlyByX")
     List<EqZjly> listZjlysByX(EqZjly eqZjl);
+    @Insert(" insert into eq_zjly (zjly_id, zjly_name)\n" +
+            "    values (#{zjlyId,jdbcType=INTEGER}, #{zjlyName,jdbcType=VARCHAR})")
+    Integer addEqZjly(EqZjly eqZjly);
 }

@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.bean;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,13 +12,13 @@ import java.util.Date;
     **/
 @Data
 public class EqInfo {
-    private Integer eqId;
+    private String eqId;
     //设备编号
     private String eqSbbh;
     //资产编号
     private String eqZcbh;
     //品名id
-    private Integer eqPmId;
+    private String eqPmId;
     //设备规格
     private String eqGg;
     //设备型号
@@ -31,8 +32,10 @@ public class EqInfo {
     //台账类别
     private String eqTzlb;
     //保修开始时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqBxkssj;
     //保修结束时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eqBxjssj;
     //保修响应时间
     private Integer eqBxxysj;
