@@ -22,4 +22,11 @@ public interface SgCkcssbService {
      * @return boolean 是否添加信息成功
      */
     boolean insertSgCkcssb(SgCkcssb sgCkcssb);
+
+    /**
+     * 根据主键删除参考厂商设备信息
+     *
+     * @param sgCkcssbId 参考厂商设备id
+     */
+    void deleteSgCkcssbById(String sgCkcssbId);
 }

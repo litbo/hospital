@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>项目方案录入</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 10px!important;
+        }
+        .title{
+            width:96.5%;
+            height:50px;
+            background-color:#eeeeee;
+            margin:0 auto;
+            border-radius:5px;
+            margin-top:20px;
+            margin-bottom:20px;
+            line-height:50px;
+            font-size:18px;
+            padding-left:15px;
+        }
+        .sign{
+            color:red;
+        }
+        .layui-form-item{
+            margin-bottom:25px
+        }
+        .input-c{
+            width:70%;
+            float:left;
+        }
+        .input-s{
+            width:30%;
+            float:left;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>项目基本方案录入</legend>
+        </fieldset>
+        <div class="title">
+            核心假设
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目编号<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" autocomplete="off" class="layui-input" value="20181205193153">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">投资金额<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <select name="" lay-filter="">
+                            <option value="">元</option>
+                            <option value="0">万元</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">使用年限<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <input type="text" name="" autocomplete="off" class="layui-input" value="年" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年工作日<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <input type="text" name="" autocomplete="off" class="layui-input" value="天" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">日工作量<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <select name="" lay-filter="">
+                            <option value=""></option>
+                            <option value="">例次</option>
+                            <option value="">小时</option>
+                            <option value="">曝光次</option>
+                            <option value="">部位次</option>
+                            <option value="">野次</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">收费标准<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <input type="text" name="" autocomplete="off" class="layui-input" value="元" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">创建时间<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="date" id="date"  placeholder="2018-12-04" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年运行费用<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <select name="" lay-filter="">
+                            <option value="">元</option>
+                            <option value="0">万元</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">大修年度<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <select name="" lay-filter="">
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                        <option value="">5</option>
+                        <option value="">6</option>
+                        <option value="">7</option>
+                        <option value="">8</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">大修费用</label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <select name="" lay-filter="">
+                            <option value="">元</option>
+                            <option value="0">万元</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年贴现率<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <input type="text" name="" autocomplete="off" class="layui-input" value="%" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">期望年利润</label>
+                <div class="layui-input-block">
+                    <div class="input-c">
+                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="input-s">
+                        <select name="" lay-filter="">
+                            <option value="">元</option>
+                            <option value="0">万元</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <div class="layui-form-item" style="margin-left:35%;margin-top:25px">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="tips">
+
+</div>
+
+
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date',
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+
+
+        frame_all("back");
+    });
+</script>
+</body>
+
+</html>

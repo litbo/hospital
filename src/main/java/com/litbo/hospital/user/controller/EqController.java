@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.PageRowBounds;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,9 +57,9 @@ public class EqController {
     *   @return
     **/
     @RequestMapping(value = "/addEq")
-    public Result addEq(EqInfo eqInfo){
+    public Result addEq(EqInfo eqInfo, @RequestParam("sbzp") MultipartFile sbzp,@RequestParam("mpzp") MultipartFile mpzp){
 
-        if(es.addEq(eqInfo)>0){
+        if(es.addEq(eqInfo,sbzp,mpzp)>0){
             return Result.success();
         }
         return Result.error();

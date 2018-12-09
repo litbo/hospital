@@ -1,12 +1,13 @@
 package com.litbo.hospital.security.bean;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
 @Data
 public class FwWeixiu {
-    private Integer fwId;
+    private String fwId;
 
     private Integer xxsbStatus;
 
@@ -36,10 +37,13 @@ public class FwWeixiu {
 
     private Integer zjStatus;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gztjTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fwksTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date pcwcTime;
 
 }
