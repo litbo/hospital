@@ -2,18 +2,23 @@ package com.litbo.hospital.security.bean;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
+import java.util.Date;
 @Data
 public class FwPjsg {
     private Integer id;
 
-    private Integer pjzdId;
+    private String userId1;
 
-    private Integer sgrkId;
+    private Date pjRkTime;
 
-    private Integer pjsgCount;
+    private String userId2;
+    
+    private Date sgShTime;
 
-    private BigDecimal pisgPrice;
+    private Integer sgStatus;
 
+    private String sgYy;
+
+    private String sgSqsx;
 
 }

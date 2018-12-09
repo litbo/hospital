@@ -4,6 +4,7 @@ import com.litbo.hospital.security.bean.FwPjqlZjb;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -16,5 +17,8 @@ public interface FwPjqlZjbDao {
             "</script>"
     })
     int insertFwPjqlZjbList(@Param("fwPjqlZjbs") List<FwPjqlZjb> fwPjqlZjbs);
+
+    @Select("select * from fw_pjql_zjb where pjql_id=#{id}")
+    List<FwPjqlZjb> listFwPjqlByBjqlId(Integer id);
 
 }
