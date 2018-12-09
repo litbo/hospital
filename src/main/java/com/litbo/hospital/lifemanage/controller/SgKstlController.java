@@ -38,7 +38,7 @@ public class SgKstlController {
     /**
      * 显示部门下的所有讨论的设备
      *
-     * @param bmId     部门id
+     * @param userId    登陆人id
      * @param eqPmName 设备名称
      * @param eqPmJc   设备简称
      * @param pageNum  页数
@@ -46,12 +46,12 @@ public class SgKstlController {
      * @return SgKstlVO
      */
     @GetMapping("/selectSgKstlSbs")
-    public Result selectSgKstlSbs(@RequestParam(name = "bmId") String bmId,
+    public Result selectSgKstlSbs(@RequestParam(name = "userId") String userId,
                                   @RequestParam(required = false, name = "eqPmName") String eqPmName,
                                   @RequestParam(required = false, name = "eqPmJc") String eqPmJc,
                                   @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
                                   @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
-        return Result.success(sgKstlService.selectSgKstlSbs(bmId, eqPmName, eqPmJc, pageNum, pageSize));
+        return Result.success(sgKstlService.selectSgKstlSbs(userId, eqPmName, eqPmJc, pageNum, pageSize));
     }
 
 }

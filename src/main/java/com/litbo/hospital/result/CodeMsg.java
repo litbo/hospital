@@ -1,5 +1,4 @@
 package com.litbo.hospital.result;
-
 import lombok.Data;
 
 @Data

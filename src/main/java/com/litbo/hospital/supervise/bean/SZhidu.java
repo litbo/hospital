@@ -17,6 +17,12 @@ public class SZhidu {
 
     private String zdContent;
 
+    private String isBeian;
+
+    private Integer syTianshu;
+
+    private Integer sySyts;
+
     public Integer getZdId() {
         return zdId;
     }
@@ -71,5 +77,29 @@ public class SZhidu {
 
     public void setZdContent(String zdContent) {
         this.zdContent = zdContent == null ? null : zdContent.trim();
+    }
+
+    public String getIsBeian() {
+        return isBeian;
+    }
+
+    public void setIsBeian(String isBeian) {
+        this.isBeian = isBeian;
+    }
+
+    public Integer getSyTianshu() {
+        return syTianshu;
+    }
+
+    public void setSyTianshu(Integer syTianshu) {
+        this.syTianshu = syTianshu;
+    }
+
+    public Integer getSySyts() {
+        return sySyts;
+    }
+
+    public void setSySyts(Integer sySyts) {
+        this.sySyts = sySyts;
     }
 }

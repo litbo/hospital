@@ -1,6 +1,9 @@
 package com.litbo.hospital.supervise.bean;
 
 public class SBm {
+
+    private String obmId;
+
     private String bmId;
 
     private String bmName;
@@ -14,6 +17,8 @@ public class SBm {
     private String wxFlag;
 
     private String pBmId;
+
+    private String xbmFlag;
 
     public String getBmId() {
         return bmId;
@@ -69,5 +74,21 @@ public class SBm {
 
     public void setpBmId(String pBmId) {
         this.pBmId = pBmId == null ? null : pBmId.trim();
+    }
+
+    public String getObmId() {
+        return obmId;
+    }
+
+    public void setObmId(String obmId) {
+        this.obmId = obmId;
+    }
+
+    public String getXbmFlag() {
+        return xbmFlag;
+    }
+
+    public void setXbmFlag(String xbmFlag) {
+        this.xbmFlag = xbmFlag;
     }
 }

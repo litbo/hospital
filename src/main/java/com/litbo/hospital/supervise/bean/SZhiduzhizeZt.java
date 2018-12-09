@@ -11,7 +11,11 @@ public class SZhiduzhizeZt {
 
     private Date ztDate;
 
-    private String ztName;
+    private String ztCzname;
+
+    private String ztCzzt;
+
+    private String zt_shyj;
 
     public Integer getZtId() {
         return ztId;
@@ -45,11 +49,27 @@ public class SZhiduzhizeZt {
         this.ztDate = ztDate;
     }
 
-    public String getZtName() {
-        return ztName;
+    public String getZtCzname() {
+        return ztCzname;
     }
 
-    public void setZtName(String ztName) {
-        this.ztName = ztName == null ? null : ztName.trim();
+    public void setZtCzname(String ztCzname) {
+        this.ztCzname = ztCzname;
+    }
+
+    public String getZtCzzt() {
+        return ztCzzt;
+    }
+
+    public void setZtCzzt(String ztCzzt) {
+        this.ztCzzt = ztCzzt;
+    }
+
+    public String getZt_shyj() {
+        return zt_shyj;
+    }
+
+    public void setZt_shyj(String zt_shyj) {
+        this.zt_shyj = zt_shyj;
     }
 }

@@ -36,6 +36,7 @@ public class SgKstlSqlProvider {
             SELECT("eq_pm.eq_pm_jc");
             SELECT("eq_ylqxfl.eqfl_id");
             SELECT("eq_ylqxfl.eqfl_name");
+            SELECT("sg_info.id as sgInfoId");
             SELECT("sg_info.bh");
             SELECT("sg_tl_pm.kstl_sj");
             FROM("eq_pm");
@@ -52,6 +53,7 @@ public class SgKstlSqlProvider {
                 }
                 WHERE("sg_info.eq_pm_id IN (" + sb.toString() + ")");
             }
+            ORDER_BY("kstl_sj desc");
         }}.toString();
     }
 

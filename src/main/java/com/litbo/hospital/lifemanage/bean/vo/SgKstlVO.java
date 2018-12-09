@@ -29,6 +29,10 @@ public class SgKstlVO {
      */
     private String eqFlName;
     /**
+     * 申购单id
+     */
+    private String sgInfoId;
+    /**
      * 申购单编号
      */
     private String bh;

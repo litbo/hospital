@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgCkcssb;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -13,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface SgCkcssbMapper {
     /**
-     * 分页查询所有厂商设备表信息
+     * 根据申购单ID查询所有厂商设备表信息
      *
      * @return List<SgCkcssb> 查询的信息
      */
@@ -27,10 +28,9 @@ public interface SgCkcssbMapper {
             "dbo.sg_ckcssb.ckcssb_gj,\n" +
             "dbo.sg_ckcssb.extend_one,\n" +
             "dbo.sg_ckcssb.extend_two\n" +
-            "\n" +
-            "FROM\n" +
-            "dbo.sg_ckcssb")
-    List<SgCkcssb> selectSgCkcssbs();
+            "FROM dbo.sg_ckcssb\n" +
+            "WHERE dbo.sg_ckcssb.sg_id = #{sgInfoId,jdbcType=VARCHAR}")
+    List<SgCkcssb> selectSgCkcssbBySgInfoId(String sgInfoId);
 
     /**
      * 添加厂商设备表信息
@@ -47,25 +47,13 @@ public interface SgCkcssbMapper {
             "   #{ckcssbGj,jdbcType=DECIMAL}, #{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}\n" +
             ")")
     int insertSgCkcssb(SgCkcssb sgCkcssb);
-/*
-    int deleteByExample(SgCkcssbExample example);
 
-    int deleteByPrimaryKey(String ckcssbId);
-
-    int insert(SgCkcssb record);
-
-    int insertSelective(SgCkcssb record);
-
-    List<SgCkcssb> selectByExample(SgCkcssbExample example);
-
-    SgCkcssb selectByPrimaryKey(String ckcssbId);
-
-    int updateByExampleSelective(@Param("record") SgCkcssb record, @Param("example") SgCkcssbExample example);
-
-    int updateByExample(@Param("record") SgCkcssb record, @Param("example") SgCkcssbExample example);
-
-    int updateByPrimaryKeySelective(SgCkcssb record);
-
-    int updateByPrimaryKey(SgCkcssb record);
+    /**
+     * 根据主键删除参考厂商设备信息
+     *
+     * @param sgCkcssbId 参考厂商设备id
+     * @return 删除信息的条数
      */
+    @Delete("DELETE FROM sg_ckcssb WHERE ckcssb_id = #{sgCkcssbId,jdbcType=VARCHAR}")
+    int deleteSgCkcssbById(String sgCkcssbId);
 }

@@ -41,6 +41,7 @@ public class SgTlPmServiceImpl implements SgTlPmService {
      * @param kstlId 科室讨论ID
      * @return 同一个讨论的所有品名ID
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Integer> selectSgTlPmPmIdsByTlId(String kstlId) {
         return sgTlPmMapper.selectSgTlPmPmIdsByTlId(kstlId);
