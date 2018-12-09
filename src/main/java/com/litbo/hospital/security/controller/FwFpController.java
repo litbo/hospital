@@ -7,18 +7,19 @@ import com.litbo.hospital.security.bean.FwFp;
 import com.litbo.hospital.security.service.FwFpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
-@RequestMapping("security/fw")
+@RequestMapping("security/fp")
 public class FwFpController {
     @Autowired
     private FwFpService fpService;
-    @RequestMapping("listFwFp")
+    @RequestMapping(value = "listFwFp",method = RequestMethod.GET)
     public Result listFwFp(){
         PageInfo pageInfo = fpService.listFwFp();
         return Result.success(pageInfo);
     }
-    @RequestMapping("insertFwFp")
+    @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
     public Result insertFwFp(FwFp fp){
         Integer res = fpService.insertFwFp(fp);
         if(res==1){

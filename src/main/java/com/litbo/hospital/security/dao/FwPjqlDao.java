@@ -1,11 +1,10 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwPjql;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.StatementType;
+
+import java.util.Date;
 
 @Mapper
 public interface FwPjqlDao {
@@ -19,4 +18,10 @@ public interface FwPjqlDao {
     })
     @Options(useGeneratedKeys = true, keyColumn = "id")
     Integer insertFwPjql(FwPjql pjql);
+
+    @Update("update fw_pjql set sq_status = #{status}, qr_time = #{date} where qrr_id = #{qrrId} and id = #{id} and sq_status == 0")
+    int updateFwPjqlSqStatus(@Param("status") Integer status, @Param("id") Integer id, @Param("qrrId") String qrrId, @Param("date") Date date);
+
+    @Select("select fw_id from fw_pjql where id = #{id}")
+    String selectFwIdById(Integer id);
 }

@@ -35,4 +35,6 @@ public class FwPjzd {
 
     private String pjSzm;
 
+    private String pjbh;
+
 }
