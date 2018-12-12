@@ -6,7 +6,10 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ListFwPjzdVo {
+public class ListFwPjkVo {
+    private  Integer id;
+
+    private  Integer pjkSl;
 
     private String pjbh;
 
@@ -15,6 +18,7 @@ public class ListFwPjzdVo {
     private String pjGgxh;
 
     private String pjZczh;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date pjZczDqTime;
 

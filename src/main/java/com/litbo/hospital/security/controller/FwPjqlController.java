@@ -21,6 +21,7 @@ public class FwPjqlController {
     public Result insertFwPjql(@RequestBody InsertFwPjqlVo fwPjqlVo){
         try {
             //TODO 此处配件请领人从session中获取，并存入Pjql表中
+            String qrrId = "2";
             int res = pjqlService.insertFwPjql(fwPjqlVo);
             if(res>0){
                 return Result.success();

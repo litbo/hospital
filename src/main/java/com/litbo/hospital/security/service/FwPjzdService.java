@@ -13,4 +13,5 @@ public interface FwPjzdService {
     PageInfo listFwPjzd(String pjSzm,int pageNum,int pageSize,String pjfl);
 
     List listFwPjzdExport(String pjSzm, String pjfl);
+
 }
