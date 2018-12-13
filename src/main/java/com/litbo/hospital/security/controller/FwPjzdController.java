@@ -1,4 +1,5 @@
 package com.litbo.hospital.security.controller;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.poi.ExcelData;
 import com.litbo.hospital.common.utils.poi.ExportExcelUtil;
 import com.litbo.hospital.result.CodeMsg;
@@ -60,7 +61,8 @@ public class FwPjzdController {
                               @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
                               @RequestParam(value = "pjfl" ,required = false) String pjfl){
         try {
-            return Result.success(pjzdService.listFwPjzd( pjSzm, pageNum, pageSize, pjfl));
+            PageInfo pageInfo = pjzdService.listFwPjzd( pjSzm, pageNum, pageSize, pjfl);
+            return Result.success(pageInfo);
         }catch (Exception e){
             return Result.error(CodeMsg.SERVER_ERROR);
         }
@@ -75,16 +77,20 @@ public class FwPjzdController {
      */
     @ApiOperation(value = "导出配件字典到excel")
     @RequestMapping(value = "/listFwPjzdExport",method = RequestMethod.GET)
-    public void listFwPjzdExport(@RequestParam(value = "pjSzm",required = false) String pjSzm,
+
+    public Result listFwPjzdExport(@RequestParam(value = "pjSzm",required = false) String pjSzm,
                                    @RequestParam(value = "pjfl" ,required = false) String pjfl,
                                  HttpServletResponse response,@RequestParam(value = "fileName",required = true) String fileName){
-        List<String> titles = Arrays.asList(new ExcelData().getFiledName(FwPjzd.class));
-        ExcelData data = new ExcelData(titles,pjzdService.listFwPjzdExport(pjSzm , pjfl),"sheet");
+        List<String> titles = Arrays.asList("配件编号","配件名称","型号规格","注册证号","注册证到期日期","生产厂家","供货商");
+        List pjzds = pjzdService.listFwPjzdExport(pjSzm , pjfl);
+        ExcelData data = new ExcelData(titles,pjzds,"sheet");
         try {
             ExportExcelUtil.exportExcel(response,fileName,data);
+            return Result.success();
         }catch (Exception e){
-
+            return Result.error(CodeMsg.SERVER_ERROR);
         }
+
 
     }
 
