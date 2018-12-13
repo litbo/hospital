@@ -7,6 +7,7 @@ public class Result<T> {
     private String msg;
     private int code;
     private T data;
+
     //成功的时候调用此方法
     public static <T> Result<T> success(T data){
         return new Result<T>(data);

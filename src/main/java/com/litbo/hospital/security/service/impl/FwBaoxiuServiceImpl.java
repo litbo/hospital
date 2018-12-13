@@ -7,6 +7,7 @@ import com.litbo.hospital.security.dao.FwBaoxiuDao;
 import com.litbo.hospital.security.dao.FwLcjlDao;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwBaoxiuService;
+import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,15 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
 
     @Autowired
     private FwLcjlDao fwLcjlDao;
+
+
+    @Override
+    public FwBaoxiuIndexVo baoxiuIndex(String eqId, String empId) {
+
+        FwBaoxiuIndexVo baoxiuIndexVo = fwBaoxiuDao.findBaoxiuIndexVo(eqId, empId);
+
+        return baoxiuIndexVo;
+    }
 
     @Transactional
     @Override
@@ -50,4 +60,6 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     public void updateBaoxiuStatusById(String id, Integer baoxiuStatus) {
         fwBaoxiuDao.updateBaoxiuStatus(id,baoxiuStatus);
     }
+
+
 }
