@@ -4,7 +4,6 @@ import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /**
@@ -40,8 +39,5 @@ public interface FwWeixiuDao {
 
     @Update("update fw_wxqs set qsShr = #{userId} and qs_shtime = (select GETDATE()) where fw_id = #{fwId}")
     public void updateFwWxsh(String userId,String fwId);
-
-    @Select("select * from fw_weixiu where fw_id = #{fwId}")
-    public FwWeixiu findWeixiuOne(String fwId);
 
 }
