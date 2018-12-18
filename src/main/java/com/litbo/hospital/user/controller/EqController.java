@@ -1,19 +1,17 @@
 package com.litbo.hospital.user.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageRowBounds;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
-import com.litbo.hospital.user.vo.EqShowVo;
 import com.litbo.hospital.user.vo.EqVo;
-import com.litbo.hospital.user.vo.SelectVo;
-import org.apache.ibatis.annotations.Param;
+import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SetPmVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,8 +44,8 @@ public class EqController {
     @RequestMapping("/listEqByX")
     public Result listEqByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                            SelectVo selectVo){
-        PageInfo pageInfo =  es.listEqByX(pageNum ,pageSize,selectVo);
+                            SelectEqVo selectEqVo){
+        PageInfo pageInfo =  es.listEqByX(pageNum ,pageSize, selectEqVo);
         return Result.success(pageInfo);
     }
 
@@ -64,6 +62,24 @@ public class EqController {
         }
         return Result.error();
     }
+    @RequestMapping("/setPm")
+    public Result setPm(@RequestBody SetPmVo setPmVo){
+
+        if(es.setPm(setPmVo)<0){
+            return Result.error();
+        }
+        return Result.success();
+    }
+
+    //Excel导入设备信息
+    @RequestMapping("/importEq")
+    public Result importEq(MultipartFile file){
+       if(es.importEq(file)<0){
+           return Result.error();
+       }
+       return Result.success();
+    }
+
 
     /**
     *

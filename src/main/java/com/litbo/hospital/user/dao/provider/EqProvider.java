@@ -2,7 +2,7 @@ package com.litbo.hospital.user.dao.provider;
 
 
 import com.litbo.hospital.user.bean.EqInfo;
-import com.litbo.hospital.user.vo.SelectVo;
+import com.litbo.hospital.user.vo.SelectEqVo;
 
 public class EqProvider {
 
@@ -70,6 +70,7 @@ public class EqProvider {
                 "\te.eq_id,\n" +
                 "\te.eq_sbbh,\n" +
                 "\te.eq_zcbh,\n" +
+                "  e.eq_name, " +
                 "\tp.eq_pm_name,\n" +
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
@@ -119,11 +120,12 @@ public class EqProvider {
 
     }
 
-    public String selectEqByX(SelectVo selectVo){
+    public String selectEqByX(SelectEqVo selectEqVo){
         StringBuffer sql = new StringBuffer("SELECT\n" +
                 "\te.eq_id,\n" +
                 "\te.eq_sbbh,\n" +
                 "\te.eq_zcbh,\n" +
+                "  e.eq_name," +
                 "\tp.eq_pm_name,\n" +
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
@@ -134,10 +136,10 @@ public class EqProvider {
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
                 "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id\n" +
                 "WHERE 1=1" );
-        if(selectVo.getBmName()!=null)  sql.append(" and bm_name Like #{bmName}");
-        if(selectVo.getEqPmPym()!=null) sql.append(" and eq_pm_pym Like #{eqPmPym}");
-        if(selectVo.getEqSbbh()!=null)  sql.append(" and eq_sbbh LIKE #{eqSbbh}" );
-        if(selectVo.getEqZcbh()!=null)  sql.append(" and eq_zcbh Like #{eqZcbh}");
+        if(selectEqVo.getBmName()!=null)  sql.append(" and bm_name Like #{bmName}");
+        if(selectEqVo.getEqPmPym()!=null) sql.append(" and eq_pm_pym Like #{eqPmPym}");
+        if(selectEqVo.getEqSbbh()!=null)  sql.append(" and eq_sbbh LIKE #{eqSbbh}" );
+        if(selectEqVo.getEqZcbh()!=null)  sql.append(" and eq_zcbh Like #{eqZcbh}");
         return sql.toString();
 
     }

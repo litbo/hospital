@@ -3,7 +3,7 @@ package com.litbo.hospital.user.bean;
 import lombok.Data;
 
 @Data
-public class Right {
+public class SRight {
 
     private String rightId;
     private String rightName;

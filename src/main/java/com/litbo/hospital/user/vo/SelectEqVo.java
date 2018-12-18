@@ -8,7 +8,7 @@ import lombok.Data;
  *  @version :
  * * @author : ljl
 **/
-public class SelectVo {
+public class SelectEqVo {
 
     private String bmName;
     private String eqPmPym;
