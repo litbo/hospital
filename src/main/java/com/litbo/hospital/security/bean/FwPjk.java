@@ -7,7 +7,7 @@ import java.util.Date;
 public class FwPjk {
     private Integer id;
 
-    private String pjkSl;
+    private Integer pjkSl;
 
     private Date createTime;
 

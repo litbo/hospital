@@ -1,20 +1,15 @@
 package com.litbo.hospital.security.service.impl;
 
-import com.litbo.hospital.security.bean.FwLcjl;
-import com.litbo.hospital.security.bean.FwPjql;
-import com.litbo.hospital.security.bean.FwPjqlZjb;
-import com.litbo.hospital.security.dao.FwBaoxiuDao;
-import com.litbo.hospital.security.dao.FwLcjlDao;
-import com.litbo.hospital.security.dao.FwPjqlDao;
-import com.litbo.hospital.security.dao.FwPjqlZjbDao;
+import com.litbo.hospital.security.bean.*;
+import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.enums.EnumProcess;
-import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.service.FwPjqlService;
 import com.litbo.hospital.security.vo.InsertFwPjqlVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.Date;
 import java.util.List;
@@ -29,8 +24,12 @@ public class FwPjqlServiceImpl implements FwPjqlService {
     private FwBaoxiuDao baoxiuDao;
     @Autowired
     private FwLcjlDao lcjlDao;
+    @Autowired
+    private FwPjkDao pjkDao;
+    @Autowired
+    private FwPjckDao pjckDao;
     /***
-     *
+     *插入配件请领信息
      * @param insertFwPjqlVo
      * @return
      */
@@ -52,9 +51,43 @@ public class FwPjqlServiceImpl implements FwPjqlService {
             res = pjqlZjbDao.insertFwPjqlZjbList(fwPjqlZjbs);
         }
         //修改报修表状态
-        baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL.getCode());
+//      baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL.getCode());
         //流程表记录
-        lcjlDao.insertFwLcjl(new FwLcjl(pjql.getQlrId(),new Date(), pjql.getFwId(),EnumProcess.FW_PJ_QL.getMessage()));
+//      res = lcjlDao.insertFwLcjl(new FwLcjl(pjql.getQlrId(),new Date(), pjql.getFwId(),EnumProcess.FW_PJ_QL.getMessage()));
         return res;
+    }
+    @Transactional
+    @Override
+    public int updateFwPjqlSqStatus(Integer status, Integer id, String qrrId, String shyy) {
+        //根据主键查询报修单id
+        String fwId = pjqlDao.selectFwIdById(id);
+        if(status == EnumApplyStatus.APPLY_APPROVAL.getCode()){
+            //检查配件库库存是否足够
+            List<FwPjqlZjb> pjqlZjbs = pjqlZjbDao.listFwPjqlByBjqlId(id);
+            for(FwPjqlZjb pjqlZjb:pjqlZjbs){
+                if(pjkDao.reduceFwPjkSl(pjqlZjb.getPjId(),pjqlZjb.getPjCount())==0){//如果数量不足，则回滚事务，并返回 审核失败
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                    return -1;
+                }
+            }
+            //库存如果足够，完成出库，并存入出库信息
+            FwPjck pjck = new FwPjck();
+            pjck.setShyy(shyy);
+            pjck.setPjCkTime(new Date());
+            pjck.setUserId(qrrId);
+            pjck.setQlId(id);
+            pjckDao.insertFwPjck(pjck);
+            //流程表记录
+            lcjlDao.insertFwLcjl(new FwLcjl(qrrId,new Date(),fwId,EnumProcess.FW_PJ_QL_SH_TG.getMessage()));
+            //修改报修表状态
+            baoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_GZ_JX.getCode());
+        }else {
+            //流程表记录
+            lcjlDao.insertFwLcjl(new FwLcjl(qrrId,new Date(),fwId,EnumProcess.FW_PJ_QL_SH_WTG.getMessage()));
+            //修改报修表状态
+            baoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_GZ_JX.getCode());
+        }
+
+        return pjqlDao.updateFwPjqlSqStatus(status,id,qrrId,new Date());
     }
 }

@@ -6,11 +6,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -108,6 +110,10 @@ public class ExportExcelUtil {
             for (Object cellData : rowData) {
                 Cell cell = dataRow.createCell(colIndex);
                 if (cellData != null) {
+                    if(cellData instanceof Date){
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        cellData = formatter.format(cellData);
+                    }
                     cell.setCellValue(cellData.toString());
                 } else {
                     cell.setCellValue("");

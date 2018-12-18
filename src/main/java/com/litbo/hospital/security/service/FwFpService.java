@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwFp;
 
 public interface FwFpService {
-    PageInfo listFwFp();
+    PageInfo listFwFpByWaitExamine();
 
     Integer insertFwFp(FwFp fp);
 }

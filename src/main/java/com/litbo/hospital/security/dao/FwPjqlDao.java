@@ -1,11 +1,11 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwPjql;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.mapping.StatementType;
+import com.litbo.hospital.security.vo.PjVo;
+import org.apache.ibatis.annotations.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface FwPjqlDao {
@@ -19,4 +19,17 @@ public interface FwPjqlDao {
     })
     @Options(useGeneratedKeys = true, keyColumn = "id")
     Integer insertFwPjql(FwPjql pjql);
+
+    @Update("update fw_pjql set sq_status = #{status}, qr_time = #{date} where qrr_id = #{qrrId} and id = #{id} and sq_status == 0")
+    int updateFwPjqlSqStatus(@Param("status") Integer status, @Param("id") Integer id, @Param("qrrId") String qrrId, @Param("date") Date date);
+
+    @Select("select fw_id from fw_pjql where id = #{id}")
+    String selectFwIdById(Integer id);
+
+    @Select("SELECT pjzd.pj_name,pjzd.pjbh,pjzd.pj_ggxh,cs.sbcs_name,pjql_zjb.pj_count from fw_pjql pjql \n" +
+            "INNER JOIN fw_pjql_zjb pjql_zjb ON pjql.id=pjql_zjb.pjql_id\n" +
+            "INNER JOIN fw_pjzd pjzd ON pjzd.id = pjql_zjb.pj_id \n" +
+            "INNER JOIN eq_cs cs ON cs.sbcs_id = pjzd.pj_ghs_id\n" +
+            "WHERE pjql.fw_id = #{fwId}")
+    List<PjVo> selectPjVo(String fwId);
 }

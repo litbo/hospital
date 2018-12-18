@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("security/fw")
+@RequestMapping("security/blsj")
 public class FwBlsjController {
     @Autowired
     private FwBlsjService blsjService;
-    @RequestMapping("insertFwBlsj")
+    @RequestMapping(value = "insertFwBlsj",method = RequestMethod.POST)
     public Result insertFwBlsj(FwBlsj blsj){
             return Result.success(blsjService.insertFwBlsj(blsj));
     }
