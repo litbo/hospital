@@ -1,9 +1,18 @@
 package com.litbo.hospital.supervise.bean;
 
-public class SGroupUsers {
+public class SGroupUser {
+    private Integer guId;
     private Integer groupId;
     private String userId;
     private Integer gwId;
+
+    public Integer getGuId() {
+        return guId;
+    }
+
+    public void setGuId(Integer guId) {
+        this.guId = guId;
+    }
 
     public Integer getGroupId() {
         return groupId;
