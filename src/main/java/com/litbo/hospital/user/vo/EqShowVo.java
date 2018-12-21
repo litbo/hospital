@@ -16,6 +16,8 @@ public class EqShowVo {
 
     private String eqSbbh;
 
+    private String eqName;
+
     private String eqZcbh;
 
     private String eqPmName;

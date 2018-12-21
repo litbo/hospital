@@ -2,10 +2,12 @@ package com.litbo.hospital.user.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.user.bean.EqInfo;
-import com.litbo.hospital.user.vo.EqShowVo;
 import com.litbo.hospital.user.vo.EqVo;
-import com.litbo.hospital.user.vo.SelectVo;
+import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SetPmVo;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface EqService {
@@ -15,7 +17,25 @@ public interface EqService {
 
     PageInfo listShowEqs(int pageNum, int pageSize);
 
-    int addEq(EqInfo eqInfo);
+    int addEq(EqInfo eqInfo, MultipartFile sbzp, MultipartFile mpzp);
 
-    PageInfo listEqByX(int pageNum, int pageSize, SelectVo selectVo);
+    PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo);
+
+    Integer importEq(MultipartFile file) ;
+
+    Integer setPm(SetPmVo setPmVo);
+
+    Integer updateEq(EqInfo eqInfo);
+
+    EqInfo getEqById(String eqId);
+
+    PageInfo listPms(int pageNum, int pageSize);
+
+    PageInfo listFlEq(int pageNum, int pageSize);
+
+    PageInfo listWFlEq(int pageNum, int pageSize);
+
+    Integer cancelFl(String eqId);
+
+    PageInfo listPmsByPym(int pageNum, int pageSize, String pym);
 }

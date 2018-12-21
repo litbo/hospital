@@ -1,8 +1,12 @@
 package com.litbo.hospital.user.dao.provider;
 
 
+import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.user.bean.EqInfo;
-import com.litbo.hospital.user.vo.SelectVo;
+import com.litbo.hospital.user.vo.SelectEqVo;
+import org.apache.ibatis.jdbc.SQL;
+
+import java.lang.reflect.Field;
 
 public class EqProvider {
 
@@ -70,6 +74,7 @@ public class EqProvider {
                 "\te.eq_id,\n" +
                 "\te.eq_sbbh,\n" +
                 "\te.eq_zcbh,\n" +
+                "  e.eq_name, " +
                 "\tp.eq_pm_name,\n" +
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
@@ -98,7 +103,7 @@ public class EqProvider {
                 "      eq_dabh, eq_yq, eq_sbzp, \n" +
                 "      eq_mpzp, qdfs_id, gzlb_id, \n" +
                 "      eq_usewater, eq_dcysl, eq_edgl, \n" +
-                "      eq_bz, eq_azhjyq)\n" +
+                "      eq_bz, eq_azhjyq,eq_name,eq_pym)\n" +
                 "    values (#{eqId,jdbcType=INTEGER}, #{eqSbbh,jdbcType=VARCHAR}, #{eqZcbh,jdbcType=VARCHAR}, \n" +
                 "      #{eqPmId,jdbcType=INTEGER}, #{eqGg,jdbcType=VARCHAR}, #{eqXh,jdbcType=VARCHAR}, \n" +
                 "      #{zjlyId,jdbcType=CHAR}, #{eqJldwId,jdbcType=CHAR}, #{eqPrice,jdbcType=DECIMAL}, \n" +
@@ -114,16 +119,17 @@ public class EqProvider {
                 "      #{eqDabh,jdbcType=VARCHAR}, #{eqYq,jdbcType=VARCHAR}, #{eqSbzp,jdbcType=VARCHAR}, \n" +
                 "      #{eqMpzp,jdbcType=VARCHAR}, #{qdfsId,jdbcType=INTEGER}, #{gzlbId,jdbcType=INTEGER}, \n" +
                 "      #{eqUsewater,jdbcType=CHAR}, #{eqDcysl,jdbcType=INTEGER}, #{eqEdgl,jdbcType=INTEGER}, \n" +
-                "      #{eqBz,jdbcType=LONGVARCHAR}, #{eqAzhjyq,jdbcType=LONGVARCHAR})";
+                "      #{eqBz,jdbcType=LONGVARCHAR}, #{eqAzhjyq,jdbcType=LONGVARCHAR} ,#{eqName},#{eqPym})";
         return SQL;
 
     }
 
-    public String selectEqByX(SelectVo selectVo){
+    public String selectEqByX(SelectEqVo selectEqVo){
         StringBuffer sql = new StringBuffer("SELECT\n" +
                 "\te.eq_id,\n" +
                 "\te.eq_sbbh,\n" +
                 "\te.eq_zcbh,\n" +
+                "  e.eq_name," +
                 "\tp.eq_pm_name,\n" +
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
@@ -134,10 +140,220 @@ public class EqProvider {
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
                 "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id\n" +
                 "WHERE 1=1" );
-        if(selectVo.getBmName()!=null)  sql.append(" and bm_name Like #{bmName}");
-        if(selectVo.getEqPmPym()!=null) sql.append(" and eq_pm_pym Like #{eqPmPym}");
-        if(selectVo.getEqSbbh()!=null)  sql.append(" and eq_sbbh LIKE #{eqSbbh}" );
-        if(selectVo.getEqZcbh()!=null)  sql.append(" and eq_zcbh Like #{eqZcbh}");
+        if(selectEqVo.getBmName()!=null)  sql.append(" and bm_name Like #{bmName}");
+        if(selectEqVo.getEqPym()!=null) sql.append(" and eq_pym Like #{eqPym}");
+        if(selectEqVo.getEqSbbh()!=null)  sql.append(" and eq_sbbh LIKE #{eqSbbh}" );
+        if(selectEqVo.getEqZcbh()!=null)  sql.append(" and eq_zcbh Like #{eqZcbh}");
+        return sql.toString();
+
+    }
+
+    public String updateEq(EqInfo eqInfo) {
+        return new SQL() {
+            {
+                UPDATE("eq_info");
+                if(eqInfo.getEqName()!=null) {
+                    SET("eq_name=#{eqName}");
+                }
+                if(eqInfo.getEqPym()!=null) {
+                    SET("eq_pym=#{eqPym}");
+                }
+                if(eqInfo.getEqSbbh()!=null) {
+                    SET("eq_sbbh=#{eqSbbh}");
+                }
+                if(eqInfo.getEqZcbh()!=null) {
+                    SET("eq_zcbh=#{eqZcbh}");
+                }
+
+                //再议
+                if(eqInfo.getEqPmId()!=null) {
+                    SET("eq_pm_id=#{eqPmId}");
+                }
+
+                if(eqInfo.getEqGg()!=null) {
+                    SET("eq_gg=#{eqGg}");
+                }
+                if(eqInfo.getEqXh()!=null) {
+                    SET("eq_xh=#{eqXh}");
+                }
+                if(eqInfo.getZjlyId()!=null) {
+                    SET("zjly_id=#{zjlyId}");
+                }
+                if(eqInfo.getEqJldwId()!=null) {
+                    SET("eq_jldw_id=#{eqJldwId}");
+                }
+
+                if(eqInfo.getEqPrice()!=null) {
+                    SET("eq_price=#{eqPrice}");
+                }
+
+                if(eqInfo.getEqTzlb()!=null) {
+                    SET("eq_tzlb=#{eqTzlb}");
+                }
+                if(eqInfo.getEqBxkssj()!=null) {
+                    SET("eq_bxkssj=#{eqBxkssj}");
+                }
+                if(eqInfo.getEqBxjssj()!=null) {
+                    SET("eq_bxjssj=#{eqBxjssj}");
+                }
+                if(eqInfo.getEqBxxysj()!=null) {
+                    SET("eq_bxxysj=#{eqBxxysj}");
+                }
+
+                if(eqInfo.getSbcsIdWxs()!=null) {
+                    SET("sbcs_id_wxs=#{sbcsIdWxs}");
+                }
+
+                if(eqInfo.getEqBmid()!=null) {
+                    SET("eq_bmid=#{eqBmid}");
+                }
+                if(eqInfo.getEqGlgk()!=null) {
+                    SET("eq_glgk=#{eqGlgk}");
+                }
+                if(eqInfo.getEqCxflId()!=null) {
+                    SET("eq_cxfl_id=#{eqCxflId}");
+                }
+                if(eqInfo.getEqQysj()!=null) {
+                    SET("eq_qysj=#{eqQysj}");
+                }
+
+                if(eqInfo.getEqZczbh()!=null) {
+                    SET("eq_zczbh=#{eqZczbh}");
+                }
+
+                if(eqInfo.getEqZczmc()!=null) {
+                    SET("eq_zczmc=#{eqZczmc}");
+                }
+                if(eqInfo.getSbcsIdScs()!=null) {
+                    SET("sbcs_id_scs=#{sbcsIdScs}");
+                }
+                if(eqInfo.getEqPp()!=null) {
+                    SET("eq_pp=#{eqPp}");
+                }
+                if(eqInfo.getEqScbh()!=null) {
+                    SET("eq_scbh=#{eqScbh}");
+                }
+
+
+                if(eqInfo.getEqPz()!=null) {
+                    SET("eq_pz=#{eqPz}");
+                }
+                if(eqInfo.getEqSynx()!=null) {
+                    SET("eq_synx=#{eqSynx}");
+                }
+                if(eqInfo.getSbcsIdGys()!=null) {
+                    SET("sbcs_id_gys=#{sbcsIdGys}");
+                }
+                if(eqInfo.getEqHtbh()!=null) {
+                    SET("eq_htbh=#{eqHtbh}");
+                }
+
+                if(eqInfo.getEqSybmfzr()!=null) {
+                    SET("eq_sybmfzr=#{eqSybmfzr}");
+                }
+
+                if(eqInfo.getEqAzwz()!=null) {
+                    SET("eq_azwz=#{eqAzwz}");
+                }
+                if(eqInfo.getEqZblx()!=null) {
+                    SET("eq_zblx=#{eqZblx}");
+                }
+                if(eqInfo.getEqZjl()!=null) {
+                    SET("eq_zjl=#{eqZjl}");
+                }
+                if(eqInfo.getUserId()!=null) {
+                    SET("user_id=#{userId}");
+                }
+
+                if(eqInfo.getEqJdrq()!=null) {
+                    SET("eq_jdrq=#{eqJdrq}");
+                }
+
+                if(eqInfo.getEqJzbh()!=null) {
+                    SET("eq_jzbh=#{eqJzbh}");
+                }
+                if(eqInfo.getEqDabh()!=null) {
+                    SET("eq_dabh=#{eqDabh}");
+                }
+                if(eqInfo.getEqYq()!=null) {
+                    SET("eq_yq=#{eqYq}");
+                }
+                if(eqInfo.getEqSbzp()!=null) {
+                    SET("eq_sbzp=#{eqSbzp}");
+                }
+                if(eqInfo.getEqMpzp()!=null) {
+                    SET("eq_mpzp=#{eqMpzp}");
+                }
+                if(eqInfo.getEqAzhjyq()!=null) {
+                    SET("eq_azhjyq=#{eqAzhjyq}");
+                }
+                if(eqInfo.getQdfsId()!=null) {
+                    SET("qdfs_id=#{qdfsId}");
+                }
+
+                if(eqInfo.getGzlbId()!=null) {
+                    SET("gzlb_id=#{gzlbId}");
+                }
+                if(eqInfo.getEqUsewater()!=null) {
+                    SET("eq_usewater=#{eqUsewater}");
+                }
+                if(eqInfo.getEqDcysl()!=null) {
+                    SET("eq_dcysl=#{eqDcysl}");
+                }
+                if(eqInfo.getEqEdgl()!=null) {
+                    SET("eq_edgl=#{eqEdgl}");
+                }
+                if(eqInfo.getEqBz()!=null) {
+                    SET("eq_bz=#{eqBz}");
+                }
+                WHERE("eq_id=#{eqId}");
+            }
+        }.toString();
+    }
+
+    public String listFlEq(){
+        String SQL = "SELECT\n" +
+                "\te.eq_id,\n" +
+                "\te.eq_sbbh,\n" +
+                "\te.eq_zcbh,\n" +
+                "  e.eq_name, " +
+                "\tp.eq_pm_name,\n" +
+                "\te.eq_gg,\n" +
+                "\te.eq_xh,\n" +
+                "\te.eq_qysj,\n" +
+                "\tb.bm_name \n" +
+                "FROM\n" +
+                "\tdbo.eq_info AS e\n" +
+                "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
+                " where e.eq_pm_id is not NULL";
+
+        return SQL;
+    }
+    public String listWFlEq(){
+        String SQL = "SELECT\n" +
+                "\te.eq_id,\n" +
+                "\te.eq_sbbh,\n" +
+                "\te.eq_zcbh,\n" +
+                "  e.eq_name, " +
+                "\tp.eq_pm_name,\n" +
+                "\te.eq_gg,\n" +
+                "\te.eq_xh,\n" +
+                "\te.eq_qysj,\n" +
+                "\tb.bm_name \n" +
+                "FROM\n" +
+                "\tdbo.eq_info AS e\n" +
+                "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
+                " where e.eq_pm_id is  NULL";
+
+        return SQL;
+    }
+
+    public String listPmsByPym(String pym){
+        StringBuffer sql = new StringBuffer("select * from eq_pm where 1=1");
+        if(pym!=null)  sql.append(" and pym Like #{pym}");
+        sql.append(" and len(eq_pm_id)=10");
         return sql.toString();
 
     }

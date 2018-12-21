@@ -4,22 +4,32 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwFp;
+import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwFpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
+
 @RestController
-@RequestMapping("security/fw")
+@RequestMapping("security/fp")
 public class FwFpController {
     @Autowired
     private FwFpService fpService;
-    @RequestMapping("listFwFp")
+    @RequestMapping(value = "listFwFp",method = RequestMethod.GET)
     public Result listFwFp(){
-        PageInfo pageInfo = fpService.listFwFp();
+        PageInfo pageInfo = fpService.listFwFpByWaitExamine();
         return Result.success(pageInfo);
     }
-    @RequestMapping("insertFwFp")
+    @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
     public Result insertFwFp(FwFp fp){
+        //TODO 从session获取用户id
+        String djrId = "2";
+        fp.setFpShrId(djrId);
+        fp.setFpSdTime(new Date());
+        fp.setFpStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());
         Integer res = fpService.insertFwFp(fp);
         if(res==1){
             return Result.success();

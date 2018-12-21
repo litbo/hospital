@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>填写申购单</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="detail">填表说明</a>
+    <div class="layui-inline">
+        <input class="layui-input" name="search" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
+    </div>
+    <div class="layui-inline">
+        <input class="layui-input" name="search" id="test" placeholder="设备简称" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">查找</button>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase">申购单</a>
+</script>
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#table'
+            , page: true //开启分页
+            , limit:15
+            , limits:[15,25,35,45,55,65,75,85,95]
+            , toolbar: '#toolBar'
+            , height: 'full-25'
+            , title: '数据表'
+            , minWidth: 1200
+            , cols: [[ //表头
+                {field: 'eqPmName', title: '设备名称', width: '53%', minWidth: 400, event: 'openLink'}
+                , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
+                , {field: 'eqFlName', title: '卫标分类', minWidth: 150, sort: true}
+                , {field: 'bh', title: '申购单编号', minWidth: 150}
+                , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
+            ]]
+            ,url:"http://118.24.9.22/lifeManage/selectSgKstlSbs"
+            ,request:{
+                pageName : 'pageNum',
+                limitName : 'pageSize'
+            }
+            ,where:{
+                bmId : "01001"
+            }
+            ,
+            text: {
+                none: "暂时还没有数据哦！"
+            }, done: function (obj) {
+                frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+            }
+        });
+
+    });
+</script>
+</body>
+
+</html>

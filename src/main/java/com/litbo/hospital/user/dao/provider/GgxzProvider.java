@@ -48,4 +48,22 @@ public class GgxzProvider {
         return sql;
     }
 
+    public String getGgxzById(Integer id){
+        String sql = "SELECT\n" +
+                "sys_ggxz.id,\n" +
+                "sys_ggxz.wjmc,\n" +
+                "sys_ggxz.scrq,\n" +
+                "sys_ggxz.scr,\n" +
+                "sys_ggxz.url,\n" +
+                "sys_ggxz.wjsm,\n" +
+                "sys_ggxz.status,\n" +
+                "sys_ggxz.scsj\n" +
+                "\n" +
+                "FROM\n" +
+                "sys_ggxz\n" +
+                "\n" +
+                "WHERE id =#{id}";
+        return sql;
+    }
+
 }

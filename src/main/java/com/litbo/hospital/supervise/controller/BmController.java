@@ -6,13 +6,16 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/supervise/bmgl")
+@Api(tags = "部门管理")
 public class BmController {
+
     @Autowired
     private BmService bmService;
 
@@ -85,5 +88,13 @@ public class BmController {
         bmService.setBmsBeto(bmVO);
         return Result.success();
     }
+
+    @GetMapping("/setWxbm")
+    @ResponseBody
+    public Result setWxbm(@RequestParam String obmid){
+        bmService.setWxbm(obmid);
+        return Result.success();
+    }
+
 
 }

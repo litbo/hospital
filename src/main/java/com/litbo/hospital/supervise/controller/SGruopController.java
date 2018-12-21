@@ -17,20 +17,5 @@ public class SGruopController {
     @Autowired
     private GroupService groupService;
 
-    @GetMapping("/ListGroups")
-    @ResponseBody
-    public Result getGroups(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                    @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
-        PageInfo pageInfo = groupService.getGroups(pageNum,pageSize);
-        return Result.success(pageInfo);
-    }
 
-    @GetMapping("/GetGroupById")
-    @ResponseBody
-    public Result getGroupById(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                    @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                                @RequestParam String group_id){
-        SGroup date = groupService.getGroupById(pageNum, pageSize, group_id);
-        return Result.success(date);
-    }
 }

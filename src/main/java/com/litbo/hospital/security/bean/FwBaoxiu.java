@@ -3,11 +3,12 @@ package com.litbo.hospital.security.bean;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class FwBaoxiu {
     private String id;
 
-    private Integer eqId;
+    private String eqId;
 
     private String bxrId;
 
@@ -15,7 +16,7 @@ public class FwBaoxiu {
 
     private String bxrdh;
 
-    private String bxks;
+    private String bxksId;
 
     private String bxksdh;
 
@@ -27,7 +28,7 @@ public class FwBaoxiu {
 
     private Integer bxStatus;
 
-    private Integer gzxx;
+    private String gzxx;
 
     private Integer zzStatus;
 

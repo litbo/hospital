@@ -12,6 +12,21 @@ public interface BmDao {
 
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm")
     List<SBm> getBmList();
+    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
+            " where xbm_flag=1  ")
+    List<SBm> getXBmList();
+
+    @Select("select s_bm.bm_id, s_bm.bm_name, s_bm.user_id, s_bm.bm_tel, s_bm.bm_addr, s_bm.wx_flag, s_bm.p_bm_id,s_bm.obm_id,s_bm.xbm_flag \n" +
+            "from s_bm  LEFT JOIN s_gcs_bm on (s_bm.bm_id=s_gcs_bm.bm_id)\n" +
+            "where wx_flag = 1 and xbm_flag=0  and s_gcs_bm.bm_id is NULL")
+    List<SBm> getWxBms();
+    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
+            " where wx_flag=0 and xbm_flag=0 ")
+    List<SBm> getFwxBms();
+
+    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
+            " where xbm_flag=0")
+    List<SBm> getYZBmList();
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where p_bm_id=#{pid}")
     List<SBm> getBmListByPid(String pid);
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where obm_id=#{id}")
@@ -38,4 +53,8 @@ public interface BmDao {
 
     @Update("update s_bm set bm_id=#{bmId} where obm_id=#{obmId}")
     void setBmIdByOid(@Param("obmId") String obmId,@Param("bmId") String bmId);
+    @Update("update s_bm set wx_flag=1 where obm_id=#{obmId}")
+    void setWxbm(String obmid);
+
+
 }

@@ -19,6 +19,8 @@ public class SGroup {
 
     private String shFlag;
 
+    private String shYj;
+
     public Integer getGroupId() {
         return groupId;
     }
@@ -81,5 +83,13 @@ public class SGroup {
 
     public void setShFlag(String shFlag) {
         this.shFlag = shFlag == null ? null : shFlag.trim();
+    }
+
+    public String getShYj() {
+        return shYj;
+    }
+
+    public void setShYj(String shYj) {
+        this.shYj = shYj;
     }
 }

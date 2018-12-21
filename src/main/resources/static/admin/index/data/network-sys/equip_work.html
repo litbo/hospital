@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>设备值班排班设置</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="fas fa-plus"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="moreBtn hidden-xs">
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="设备拼音码" id="test-table-de" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>
+</script>
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#table'
+            , page: true //开启分页
+            , toolbar: '#toolBar'
+            , height: 'full-25'
+            , title: '数据表'
+            , minWidth: 1200
+            , cols: [[ //表头
+                  {type:"checkbox"}
+                , {field: 'equip_number', title: '设备编号', minWidth: 150}
+                , {field: 'equip_short', title: '设备简称', minWidth: 150}
+                , {field: 'work_type', title: '值班类型', minWidth: 150, sort: true}
+                , {field: 'week1', title: '周一', minWidth: 100}
+                , {field: 'week2', title: '周二', minWidth: 100}
+                , {field: 'week3', title: '周三', minWidth: 100}
+                , {field: 'week4', title: '周四', minWidth: 100}
+                , {field: 'week5', title: '周五', minWidth: 100}
+                , {field: 'week6', title: '周六', minWidth: 100}
+                , {field: 'week7', title: '周日', minWidth: 100}
+                , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar"}
+            ]]
+            , "data": [
+                {
+                    "equip_number": '100001000065456465',
+                    "equip_short": "CT",
+                    "work_type": "24小时班",
+                    "week1": "值班",
+                    "week2": "值班",
+                    "week3": "值班",
+                    "week4": "值班",
+                    "week5": "值班",
+                    "week6": "值班",
+                    "week7": "值班"
+                },{
+                    "equip_number": '100001000065456465',
+                    "equip_short": "CT",
+                    "work_type": "24小时班",
+                    "week1": "值班",
+                    "week2": "值班",
+                    "week3": "值班",
+                    "week4": "值班",
+                    "week5": "值班",
+                    "week6": "值班",
+                    "week7": "值班"
+                },{
+                    "equip_number": '100001000065456465',
+                    "equip_short": "CT",
+                    "work_type": "24小时班",
+                    "week1": "值班",
+                    "week2": "值班",
+                    "week3": "值班",
+                    "week4": "值班",
+                    "week5": "值班",
+                    "week6": "值班",
+                    "week7": "值班"
+                },{
+                    "equip_number": '100001000065456465',
+                    "equip_short": "MSI",
+                    "work_type": "24小时班",
+                    "week1": "值班",
+                    "week2": "值班",
+                    "week3": "值班",
+                    "week4": "值班",
+                    "week5": "值班",
+                    "week6": "值班",
+                    "week7": "值班"
+                },{
+                    "equip_number": '100001000065456465',
+                    "equip_short": "CT",
+                    "work_type": "24小时班",
+                    "week1": "值班",
+                    "week2": "值班",
+                    "week3": "值班",
+                    "week4": "值班",
+                    "week5": "值班",
+                    "week6": "值班",
+                    "week7": "值班"
+                },{
+                    "equip_number": '100001000065456465',
+                    "equip_short": "DSA",
+                    "work_type": "24小时班",
+                    "week1": "值班",
+                    "week2": "值班",
+                    "week3": "值班",
+                    "week4": "值班",
+                    "week5": "值班",
+                    "week6": "值班",
+                    "week7": "值班"
+                }]
+            ,
+            text: {
+                none: "暂时还没有数据哦！"
+            }, done: function (obj) {
+                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
+            }
+        });
+
+    });
+</script>
+</body>
+
+</html>

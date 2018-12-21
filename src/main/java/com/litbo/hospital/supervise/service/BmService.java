@@ -4,10 +4,20 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
+import java.util.List;
 
 public interface BmService {
     //返回所有部门
     PageInfo getBmList(int pageNum, int pageSize);
+    //返回所有虚部门
+    PageInfo getXBmList(int pageNum, int pageSize);
+    //返回所有叶子部门
+    PageInfo getYZBmList(int pageNum, int pageSize);
+    //返回所有虚部门
+    List<SBm> getXBmList();
+    //返回所有叶子部门
+    List<SBm> getYZBmList();
+
     //保存部门
     void saveBm(SBm bm);
     //根据父节点查部门
@@ -25,7 +35,12 @@ public interface BmService {
     //设置部门归属
     void setBmsBeto(SetBmVO bmVO);
     void setBmBeto(String obm_id, String new_pbm_id );
-
+    //设置为维修部门
+    void setWxbm(String obmid);
+    //获取所有维修部门
+    List<SBm> getWxBms();
+    //获取所有非维修部门
+    List<SBm> getFwxBms();
 
     //通过父布门递归删除
 //    void removeBmByPid(String pid);

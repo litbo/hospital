@@ -12,13 +12,20 @@ public class FwFp {
 
     private BigDecimal fpPrice;
 
-    private Date fpSdtime;
+    private Date fpSdTime;
 
     private Integer fpStatus;
 
     private String userId;
 
-    private Date fpCjTime;
+    private Date fpShTime;
+
+    private String shyj;
+
+    private String fpShrId;
+
+    private String fwHm;
+
 
 
 }

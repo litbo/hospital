@@ -1,6 +1,6 @@
 package com.litbo.hospital.user.service.impl;
 
-import com.litbo.hospital.user.bean.User;
+import com.litbo.hospital.user.bean.SUser;
 import com.litbo.hospital.user.dao.UserDao;
 import com.litbo.hospital.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,24 @@ public class UserServiceImpl implements UserService {
    private UserDao userDao;
 
     @Override
-    public User getUserByUsername(String username) {
+    public SUser getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
+    }
+
+    @Override
+    public Integer setUser(String userId) {
+
+        SUser u =new SUser();
+        u.setUserId(userId);
+        u.setUserName(userId);
+        u.setUserPwd(userId);
+        //修改emp表中标记值   未写
+        return userDao.addUser(u);
+    }
+
+    @Override
+    public Integer updatePwd(String userId, String userPwd) {
+
+        return userDao.updatePwd(userId,userPwd);
     }
 }

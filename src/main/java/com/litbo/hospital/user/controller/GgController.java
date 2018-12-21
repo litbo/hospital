@@ -49,6 +49,12 @@ public class GgController {
 
     }
 
+    //通过Id查询公告信息
+    @RequestMapping("/getGgById")
+    public Result getGgById(Integer id){
+
+        return Result.success(ggService.getGgById(id));
+    }
 
 
 }

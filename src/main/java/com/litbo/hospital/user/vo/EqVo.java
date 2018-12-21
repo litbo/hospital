@@ -7,13 +7,13 @@ import java.util.Date;
 @Data
 public class EqVo {
 
-    private Integer eqId;
+    private String eqId;
 
     private String eqSbbh;
 
     private String eqZcbh;
 
-    private Integer eqPmId;
+    private String eqPmId;
 
     private String eqGg;
 
