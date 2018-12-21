@@ -1,19 +1,19 @@
-package com.litbo.hospital.supervise.bean;
+package com.litbo.hospital.supervise.vo;
 
 import java.util.Date;
 
-public class SZhiduzhizeZt {
+public class SZhiduzhizeZtSelect {
     private Integer ztId;
 
     private Integer zdId;
 
-    private String userId;
+    private String userXm;
 
     private Date ztDate;
 
     private String ztCzname;
 
-    private Integer ztCzzt;
+    private String ztCzzt;
 
     private String ztShyj;
 
@@ -33,12 +33,12 @@ public class SZhiduzhizeZt {
         this.zdId = zdId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserXm() {
+        return userXm;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserXm(String userXm) {
+        this.userXm = userXm;
     }
 
     public Date getZtDate() {
@@ -57,11 +57,11 @@ public class SZhiduzhizeZt {
         this.ztCzname = ztCzname;
     }
 
-    public Integer getZtCzzt() {
+    public String getZtCzzt() {
         return ztCzzt;
     }
 
-    public void setZtCzzt(Integer ztCzzt) {
+    public void setZtCzzt(String ztCzzt) {
         this.ztCzzt = ztCzzt;
     }
 

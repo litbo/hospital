@@ -1,15 +1,15 @@
-package com.litbo.hospital.supervise.bean;
+package com.litbo.hospital.supervise.vo;
 
 import java.util.Date;
 
-public class SZhidu {
+public class SZhiduSelect {
     private Integer zdId;
 
     private String bmId;
 
     private String zdName;
 
-    private String userId;
+    private String userXm;
 
     private String docUrl;
 
@@ -17,7 +17,7 @@ public class SZhidu {
 
     private String zdContent;
 
-    private Integer zdZt;
+    private String zdZt;
 
     private Integer syTianshu;
 
@@ -48,12 +48,12 @@ public class SZhidu {
         this.zdName = zdName == null ? null : zdName.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserXm() {
+        return userXm;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserXm(String userXm) {
+        this.userXm = userXm;
     }
 
     public String getDocUrl() {
@@ -80,11 +80,11 @@ public class SZhidu {
         this.zdContent = zdContent == null ? null : zdContent.trim();
     }
 
-    public Integer getZdZt() {
+    public String getZdZt() {
         return zdZt;
     }
 
-    public void setZdZt(Integer zdZt) {
+    public void setZdZt(String zdZt) {
         this.zdZt = zdZt;
     }
 

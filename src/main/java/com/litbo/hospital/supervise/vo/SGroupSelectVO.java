@@ -1,19 +1,22 @@
-package com.litbo.hospital.supervise.bean;
+package com.litbo.hospital.supervise.vo;
 
 import java.util.Date;
 
-public class SGroup {
+public class SGroupSelectVO {
     private Integer groupId;
 
     private String bmId;
+    private String bmName;
 
     private String groupName;
 
     private String userId1;
+    private String userName1;
 
     private Date createTime;
 
     private String userId2;
+    private String userName2;
 
     private Date shTime;
 
@@ -29,12 +32,12 @@ public class SGroup {
         this.groupId = groupId;
     }
 
-    public String getBmId() {
-        return bmId;
+    public String getBmName() {
+        return bmName;
     }
 
-    public void setBmId(String bmId) {
-        this.bmId = bmId == null ? null : bmId.trim();
+    public void setBmName(String bmName) {
+        this.bmName = bmName;
     }
 
     public String getGroupName() {
@@ -42,7 +45,7 @@ public class SGroup {
     }
 
     public void setGroupName(String groupName) {
-        this.groupName = groupName == null ? null : groupName.trim();
+        this.groupName = groupName;
     }
 
     public String getUserId1() {
@@ -50,7 +53,7 @@ public class SGroup {
     }
 
     public void setUserId1(String userId1) {
-        this.userId1 = userId1 == null ? null : userId1.trim();
+        this.userId1 = userId1;
     }
 
     public Date getCreateTime() {
@@ -66,7 +69,7 @@ public class SGroup {
     }
 
     public void setUserId2(String userId2) {
-        this.userId2 = userId2 == null ? null : userId2.trim();
+        this.userId2 = userId2;
     }
 
     public Date getShTime() {
@@ -82,7 +85,7 @@ public class SGroup {
     }
 
     public void setShFlag(String shFlag) {
-        this.shFlag = shFlag == null ? null : shFlag.trim();
+        this.shFlag = shFlag;
     }
 
     public String getShYj() {
@@ -91,5 +94,29 @@ public class SGroup {
 
     public void setShYj(String shYj) {
         this.shYj = shYj;
+    }
+
+    public String getBmId() {
+        return bmId;
+    }
+
+    public void setBmId(String bmId) {
+        this.bmId = bmId;
+    }
+
+    public String getUserName1() {
+        return userName1;
+    }
+
+    public void setUserName1(String userName1) {
+        this.userName1 = userName1;
+    }
+
+    public String getUserName2() {
+        return userName2;
+    }
+
+    public void setUserName2(String userName2) {
+        this.userName2 = userName2;
     }
 }
