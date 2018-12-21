@@ -16,7 +16,7 @@ public class SgTlPm {
     /**
      * 设备品名表id
      */
-    private Integer eqPmId;
+    private String eqPmId;
     /**
      * 科室讨论时间
      */

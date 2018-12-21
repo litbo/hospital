@@ -21,21 +21,4 @@ public interface SgKstlUserMapper {
             "values (#{kstlId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})"
     })
     int insertSgKstlUser(@Param("kstlId") String kstlId,@Param("userId") String usersId);
-    /*
-    int countByExample(SgKstlUserExample example);
-
-    int deleteByExample(SgKstlUserExample example);
-
-    int deleteByPrimaryKey(SgKstlUserKey key);
-
-
-
-    int insertSelective(SgKstlUserKey record);
-
-    List<SgKstlUserKey> selectByExample(SgKstlUserExample example);
-
-    int updateByExampleSelective(@Param("record") SgKstlUserKey record, @Param("example") SgKstlUserExample example);
-
-    int updateByExample(@Param("record") SgKstlUserKey record, @Param("example") SgKstlUserExample example);
-     */
 }

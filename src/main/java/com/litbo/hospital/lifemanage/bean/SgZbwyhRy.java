@@ -7,8 +7,13 @@ import lombok.Data;
  */
 @Data
 public class SgZbwyhRy {
+    /**
+     * 装备委员会id
+     */
     private String zbwyhhyId;
-
+    /**
+     * 人员表id
+     */
     private String userId;
 
 }
