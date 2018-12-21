@@ -24,4 +24,18 @@ public interface EqService {
     Integer importEq(MultipartFile file) ;
 
     Integer setPm(SetPmVo setPmVo);
+
+    Integer updateEq(EqInfo eqInfo);
+
+    EqInfo getEqById(String eqId);
+
+    PageInfo listPms(int pageNum, int pageSize);
+
+    PageInfo listFlEq(int pageNum, int pageSize);
+
+    PageInfo listWFlEq(int pageNum, int pageSize);
+
+    Integer cancelFl(String eqId);
+
+    PageInfo listPmsByPym(int pageNum, int pageSize, String pym);
 }

@@ -14,7 +14,7 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @PostMapping("/setUser")
+    @RequestMapping("/setUser")
     public Result setUser(String userId){
 
         if(userService.setUser(userId)>0){
@@ -41,7 +41,5 @@ public class UserController {
 
         return Result.success();
     }
-
-
 
 }

@@ -11,7 +11,8 @@ import lombok.Data;
 public class SelectEqVo {
 
     private String bmName;
-    private String eqPmPym;
+
+    private String eqPym;
     private String eqSbbh;
     private String eqZcbh;
 
@@ -24,13 +25,15 @@ public class SelectEqVo {
         this.bmName = "%"+bmName+"%";
     }
 
-    public String getEqPmPym() {
-        return eqPmPym;
+    public String getEqPym() {
+        return eqPym;
     }
 
-    public void setEqPmPym(String eqPmPym) {
-        this.eqPmPym = "%"+eqPmPym+"%";
+    public void setEqPym(String eqPym) {
+        this.eqPym ="%"+ eqPym + "%";
     }
+
+
 
     public String getEqSbbh() {
         return eqSbbh;

@@ -20,4 +20,7 @@ public interface GgxzDao {
     int ggxzFail(Integer id);
     @SelectProvider(type = GgxzProvider.class , method = "listWaits")
     List<SysGgxz> listWaits();
+
+    @SelectProvider(type = GgxzProvider.class , method = "getGgxzById")
+    SysGgxz getGgxzById(Integer id);
 }

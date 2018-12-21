@@ -59,6 +59,9 @@ public class EqServiceImpl implements EqService {
         String eqMpzp =  UploadFile.upload(path,mpzp);
         eqInfo.setEqSbzp(eqSbzp);
         eqInfo.setEqMpzp(eqMpzp);
+        //设置设备拼音码
+        String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
+        eqInfo.setEqPym(pym);
         //初始化设备流水号
         if(eqDao.countEq()==0){
            String eqId ="10000";
@@ -152,6 +155,55 @@ public class EqServiceImpl implements EqService {
             }
         }
         return 1;
+    }
+
+    @Override
+    public Integer updateEq(EqInfo eqInfo) {
+        if(eqInfo.getEqName()!=null){
+            String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
+            eqInfo.setEqPym(pym);
+        }
+        return eqDao.updateEq(eqInfo);
+    }
+
+    @Override
+    public EqInfo getEqById(String eqId) {
+
+        return eqDao.getEqById(eqId);
+    }
+
+    @Override
+    public PageInfo listPms(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listPms());
+    }
+
+    @Override
+    public PageInfo listFlEq(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listFlEq());
+    }
+
+    @Override
+    public PageInfo listWFlEq(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listWFlEq());
+    }
+
+    @Override
+    public Integer cancelFl(String eqId) {
+
+        return eqDao.cancelFl(eqId);
+    }
+
+    @Override
+    public PageInfo listPmsByPym(int pageNum, int pageSize, String pym) {
+        PageHelper.startPage(pageNum,pageSize);
+        if(pym!=null){
+            String newPym = "%"+pym+"%";
+            return new PageInfo(eqDao.listPmsByPym(newPym));
+        }
+       return new PageInfo(eqDao.listPmsByPym(pym));
     }
 
 

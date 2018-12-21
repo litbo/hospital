@@ -62,4 +62,10 @@ public class GgxzServiceImpl implements GgxzService {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(ggxzDao.listWaits());
     }
+
+    @Override
+    public SysGgxz getGgxzById(Integer id) {
+
+        return ggxzDao.getGgxzById(id);
+    }
 }
