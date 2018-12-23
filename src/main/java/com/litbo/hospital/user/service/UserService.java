@@ -1,10 +1,13 @@
 package com.litbo.hospital.user.service;
 
-import com.litbo.hospital.user.bean.User;
-
+import com.litbo.hospital.user.bean.SUser;
 
 
 public interface UserService {
 
-    User getUserByUsername(String username);
+    SUser getUserByUsername(String username);
+
+    Integer setUser(String userId);
+
+    Integer updatePwd(String userId, String userPwd);
 }

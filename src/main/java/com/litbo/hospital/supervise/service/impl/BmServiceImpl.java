@@ -10,7 +10,6 @@ import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.expression.Ids;
 
 import java.util.List;
 @Service
@@ -23,6 +22,30 @@ public class BmServiceImpl implements BmService {
         PageHelper.startPage(pageNum,pageSize);
         List<SBm> date = bmDao.getBmList();
         return new PageInfo(date);
+    }
+
+    @Override
+    public PageInfo getXBmList(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> date = bmDao.getXBmList();
+        return new PageInfo(date);
+    }
+
+    @Override
+    public PageInfo getYZBmList(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> date = bmDao.getYZBmList();
+        return new PageInfo(date);
+    }
+
+    @Override
+    public List<SBm>  getXBmList() {
+        return bmDao.getXBmList();
+    }
+
+    @Override
+    public List<SBm>  getYZBmList() {
+        return bmDao.getYZBmList();
     }
 
     @Override
@@ -129,5 +152,22 @@ public class BmServiceImpl implements BmService {
             }
         }
         return idmaxbm;
+    }
+
+    @Override
+    public void setWxbm(String obmid) {
+        bmDao.setWxbm(obmid);
+    }
+
+    @Override
+    public List<SBm> getWxBms() {
+
+        return bmDao.getWxBms();
+    }
+
+    @Override
+    public List<SBm> getFwxBms() {
+
+        return bmDao.getFwxBms();
     }
 }

@@ -3,21 +3,36 @@ package com.litbo.hospital.user.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.UploadFile;
+import com.litbo.hospital.common.utils.WordToPinYin;
+import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
+import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.EqDao;
 import com.litbo.hospital.user.dao.PmDao;
 import com.litbo.hospital.user.service.EqService;
-import com.litbo.hospital.user.vo.EqShowVo;
 import com.litbo.hospital.user.vo.EqVo;
-import com.litbo.hospital.user.vo.SelectVo;
+import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SetPmVo;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
+import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
+
 @Service
 public class EqServiceImpl implements EqService {
 
@@ -44,6 +59,9 @@ public class EqServiceImpl implements EqService {
         String eqMpzp =  UploadFile.upload(path,mpzp);
         eqInfo.setEqSbzp(eqSbzp);
         eqInfo.setEqMpzp(eqMpzp);
+        //设置设备拼音码
+        String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
+        eqInfo.setEqPym(pym);
         //初始化设备流水号
         if(eqDao.countEq()==0){
            String eqId ="10000";
@@ -69,10 +87,123 @@ public class EqServiceImpl implements EqService {
 
 
     @Override
-    public PageInfo listEqByX(int pageNum, int pageSize, SelectVo selectVo) {
+    public PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo) {
         PageHelper.startPage(pageNum,pageSize);
 
-        return new PageInfo(eqDao.listEqByX(selectVo));
+        return new PageInfo(eqDao.listEqByX(selectEqVo));
+    }
+
+    @Override
+    public Integer importEq(MultipartFile file)  {
+
+        Workbook workbook = null;
+        InputStream inputStream = null;
+
+        try {
+            inputStream = new ByteArrayInputStream(file.getBytes());
+            workbook = WorkbookFactory.create(inputStream);
+            inputStream.close();
+            //工作表对象
+            Sheet sheetAt = workbook.getSheetAt(0);
+            Row row = sheetAt.getRow(0);
+            int rowNum = sheetAt.getLastRowNum() + 1;
+            short cellNum = row.getLastCellNum();
+            /*int rowIsNull = getRowIsNull(row, rowNum);
+            System.out.println(rowIsNull);*/
+            List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+
+            List<Map<String, Object>> mapList = listToMap(lists, list);
+
+            for (Map<String, Object> map : mapList) {
+                /*SUser user = parseMap2Object(map, SUser.class);*/
+                EqInfo eqInfo = parseMap2Object(map,EqInfo.class);
+
+                //初始化设备流水号
+                if(eqDao.countEq()==0){
+                    String eqId ="10000";
+                    eqInfo.setEqId(eqId);
+                }else{
+                    Integer eqId1 = Integer.parseInt(eqDao.getLastId())+1;
+                    String  eqId = eqId1.toString();
+                    eqInfo.setEqId(eqId);
+                }
+
+               if(eqDao.addEq(eqInfo)<0){
+                    return -1;
+               }
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
+    @Override
+    public Integer setPm(SetPmVo setPmVo) {
+        List<String> eqIds = setPmVo.getEqIds();
+        for (String eqId : eqIds) {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
+            String time1 = sf.format(new Date());
+            String time = time1.substring(2,4)+time1.substring(5,time1.length());
+            EqPm pm = pmDao.getPmById(setPmVo.getEqPmId());
+            String sbbh =time+pm.getPid()+pm.getGlh()+eqId;
+            if(eqDao.setPm(setPmVo.getEqPmId(),eqId,sbbh)<0){
+                return -1;
+            }
+        }
+        return 1;
+    }
+
+    @Override
+    public Integer updateEq(EqInfo eqInfo) {
+        if(eqInfo.getEqName()!=null){
+            String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
+            eqInfo.setEqPym(pym);
+        }
+        return eqDao.updateEq(eqInfo);
+    }
+
+    @Override
+    public EqInfo getEqById(String eqId) {
+
+        return eqDao.getEqById(eqId);
+    }
+
+    @Override
+    public PageInfo listPms(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listPms());
+    }
+
+    @Override
+    public PageInfo listFlEq(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listFlEq());
+    }
+
+    @Override
+    public PageInfo listWFlEq(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listWFlEq());
+    }
+
+    @Override
+    public Integer cancelFl(String eqId) {
+
+        return eqDao.cancelFl(eqId);
+    }
+
+    @Override
+    public PageInfo listPmsByPym(int pageNum, int pageSize, String pym) {
+        PageHelper.startPage(pageNum,pageSize);
+        if(pym!=null){
+            String newPym = "%"+pym+"%";
+            return new PageInfo(eqDao.listPmsByPym(newPym));
+        }
+       return new PageInfo(eqDao.listPmsByPym(pym));
     }
 
 

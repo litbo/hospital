@@ -79,10 +79,10 @@ public class GgxzController {
         }
     }
 
+    @RequestMapping("/getGgxzById")
+    public Result getGgxzById(Integer id){
 
-
-    @RequestMapping()
-    public String to(){
-        return "uploadimg.html";
+        return Result.success(ggxzService.getGgxzById(id));
     }
+
 }

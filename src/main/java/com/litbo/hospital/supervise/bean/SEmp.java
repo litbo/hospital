@@ -43,6 +43,9 @@ public class SEmp {
 
     private String zp;
 
+    private String status;
+
+
     public String getUserId() {
         return userId;
     }
@@ -209,5 +212,13 @@ public class SEmp {
 
     public void setZp(String zp) {
         this.zp = zp == null ? null : zp.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

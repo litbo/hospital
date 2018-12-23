@@ -1,9 +1,9 @@
 package com.litbo.hospital.common.utils.Realm;
 
 
-import com.litbo.hospital.user.bean.Right;
-import com.litbo.hospital.user.bean.Role;
-import com.litbo.hospital.user.bean.User;
+import com.litbo.hospital.user.bean.SRight;
+import com.litbo.hospital.user.bean.SRole;
+import com.litbo.hospital.user.bean.SUser;
 import com.litbo.hospital.user.service.RightService;
 import com.litbo.hospital.user.service.RoleService;
 import com.litbo.hospital.user.service.UserService;
@@ -37,11 +37,11 @@ public class UserRealm extends AuthorizingRealm
         String username = (String) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> roles = new HashSet<>();
-        List<Role> rolesByUsername = roleService.getRoleByUsername(username);
-        for (Role role : rolesByUsername) {
+        List<SRole> rolesByUsername = roleService.getRoleByUsername(username);
+        for (SRole role : rolesByUsername) {
             roles.add(role.getRoleName());
-            List<Right> rightsByUsername = rightService.getRightsByRolename(role.getRoleName());
-            for (Right right : rightsByUsername) {
+            List<SRight> rightsByUsername = rightService.getRightsByRolename(role.getRoleName());
+            for (SRight right : rightsByUsername) {
                 info.addStringPermission(right.getRightName());
             }
         }
@@ -55,7 +55,7 @@ public class UserRealm extends AuthorizingRealm
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
         String username = token.getPrincipal().toString();
-        User user = userService.getUserByUsername(username);
+        SUser user = userService.getUserByUsername(username);
 
         if(user!=null){
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getUserPwd(),getName());

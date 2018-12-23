@@ -3,6 +3,9 @@ package com.litbo.hospital.security.dao;
 import com.litbo.hospital.security.bean.FwShouli;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author zjc
@@ -19,4 +22,10 @@ public interface FwShouLiDao {
             "      #{slTime,jdbcType=TIMESTAMP}, #{wxfs,jdbcType=VARCHAR}, #{slrId,jdbcType=VARCHAR}, \n" +
             "      #{ydwxTime,jdbcType=TIMESTAMP}, #{slBz,jdbcType=LONGVARCHAR})")
     public void addShouLi(FwShouli fwShouli);
+
+    @Select("select * from fw_shouli where id = #{fwId}")
+    public FwShouli findShouli(String fwId);
+
+    @Select("select id from fw_shouli where slr_id = #{userId}")
+    public List<String> findFwId(String userId);
 }

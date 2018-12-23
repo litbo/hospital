@@ -12,5 +12,13 @@ public interface SgZrpjbgService {
      *
      * @param sgZrpjbg 准入评价报告
      */
-    void insertSgZrpjbg(SgZrpjbg sgZrpjbg);
+    void insertOrUpdateSgZrpjbg(SgZrpjbg sgZrpjbg);
+
+    /**
+     * 根据申购单id查询准入评价报告信息
+     *
+     * @param sgInfoId 申购单id
+     * @return 评价报告信息
+     */
+    SgZrpjbg selectSgZrpjbgBySgInfoId(String sgInfoId);
 }

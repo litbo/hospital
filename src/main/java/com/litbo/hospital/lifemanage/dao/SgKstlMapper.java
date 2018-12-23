@@ -1,7 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgKstl;
-import com.litbo.hospital.lifemanage.bean.vo.SgKstlVO;
+import com.litbo.hospital.lifemanage.bean.vo.SgKstlAddSgInfoVO;
 import com.litbo.hospital.lifemanage.dao.provider.SgKstlSqlProvider;
 import org.apache.ibatis.annotations.*;
 
@@ -46,8 +46,8 @@ public interface SgKstlMapper {
      * 通过品名id查询SgKstlVO
      *
      * @param pmIds 品名id
-     * @return SgKstlVO
+     * @return SgKstlAddSgInfoVO
      */
     @SelectProvider(type = SgKstlSqlProvider.class,method = "selectSgKstlVOByEqPmIds")
-    List<SgKstlVO> selectSgKstlVOByPmIds(@Param("pmIds") List<Integer> pmIds);
+    List<SgKstlAddSgInfoVO> selectSgKstlVOByPmIds(@Param("pmIds") List<String> pmIds);
 }

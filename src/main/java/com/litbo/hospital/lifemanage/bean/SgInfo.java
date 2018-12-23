@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.bean;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 申购单表实体类
@@ -24,7 +25,7 @@ public class SgInfo {
     /**
      * 品名表主键id
      */
-    private Integer eqPmId;
+    private String eqPmId;
     /**
      * 托管科室id
      */
@@ -62,9 +63,17 @@ public class SgInfo {
      */
     private BigDecimal priceGjMy;
     /**
+     * 检测量/日
+     */
+    private String jcl;
+    /**
      * 设计使用率
      */
     private String syl;
+    /**
+     * 科室讨论表id
+     */
+    private String kstlId;
     /**
      * 准入评价报告表id
      */
@@ -78,13 +87,33 @@ public class SgInfo {
      */
     private String dxzbId;
     /**
+     * 论证分析表id
+     */
+    private String lzfxId;
+    /**
      * 是否通过科室审核
      */
     private String iskssh;
     /**
+     * 科室审核时间
+     */
+    private Date ksshsj;
+    /**
+     * 科室审核人
+     */
+    private String ksshr;
+    /**
+     * 科室审核意见
+     */
+    private String ksshyj;
+    /**
      * 是否通过医学工程处审核
      */
     private String isyxgccsh;
+    /**
+     * 医学工程处审核时间
+     */
+    private Date yxgccshsj;
     /**
      * 是否通过装备委员会审核
      */

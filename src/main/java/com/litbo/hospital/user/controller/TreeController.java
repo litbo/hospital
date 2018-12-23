@@ -16,12 +16,13 @@ import java.util.List;
   * @author : ljl
 **/
 @RestController
+@RequestMapping("tree")
 public class TreeController {
 
     @Autowired
     private TreeDao treeDao;
 
-    @RequestMapping("/tree")
+    @RequestMapping("/wbfl")
     public Result listNoteByPid(String pid){
         List<TreeVo> T1 = treeDao.listNoteByPid("68");
 

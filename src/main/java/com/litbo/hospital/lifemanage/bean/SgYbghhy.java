@@ -9,19 +9,40 @@ import java.util.Date;
  */
 @Data
 public class SgYbghhy {
+    /**
+     * 院办公会会议id
+     */
     private String ybghhyId;
-
-    private String ybghhySjy;
-
-    private Date ybghhySj;
-
-    private String ybghhyDd;
-
-    private String extendOne;
-
-    private String extendTwo;
-
+    /**
+     * 申购单id
+     */
+    private String sgId;
+    /**
+     * 参会人员
+     */
     private String ybghhyChry;
-
+    /**
+     * 书记员
+     */
+    private String ybghhySjy;
+    /**
+     * 时间
+     */
+    private Date ybghhySj;
+    /**
+     * 地点
+     */
+    private String ybghhyDd;
+    /**
+     * 内容
+     */
     private String ybghhyNr;
+    /**
+     * 扩展一
+     */
+    private String extendOne;
+    /**
+     * 扩展二
+     */
+    private String extendTwo;
 }

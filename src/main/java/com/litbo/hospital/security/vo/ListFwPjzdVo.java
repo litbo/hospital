@@ -1,7 +1,7 @@
 package com.litbo.hospital.security.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,7 +15,7 @@ public class ListFwPjzdVo {
     private String pjGgxh;
 
     private String pjZczh;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date pjZczDqTime;
 
     private String ghsName;

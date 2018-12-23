@@ -2,38 +2,56 @@ package com.litbo.hospital.lifemanage.bean.vo;
 
 import lombok.Data;
 
+import java.util.Date;
+import java.util.List;
+
 /**
- * 申购单表实体类
+ * 科室讨论表实体类
  */
 @Data
 public class SgKstlVO {
-
     /**
-     * 设备品名ID
+     * 科室讨论主键id
      */
-    private Integer eqPmId;
+    private String kstlId;
     /**
-     * 设备品名
+     * 记录人id关联员工表id
      */
-    private String eqPmName;
+    private String userIdJl;
     /**
-     * 设备简称
+     * 部门id关联部门表id
      */
-    private String eqPmJc;
+    private String bmId;
     /**
-     * 卫标分类编号
+     * 科室讨论时间
      */
-    private Integer eqFlId;
+    private Date kstlTime;
     /**
-     * 卫标分类名称
+     * 地点
      */
-    private String eqFlName;
+    private String kstlAddr;
     /**
-     * 申购单id
+     * 意见
      */
-    private String sgInfoId;
+    private String kstlYj;
     /**
-     * 申购单编号
+     * 内容
      */
-    private String bh;
+    private String kstlContent;
+    /**
+     * 扩展一
+     */
+    private String extendOne;
+    /**
+     * 扩展二
+     */
+    private String extendTwo;
+    /**
+     * 科室讨论参与人员
+     */
+    List<String> usersId;
+    /**
+     * 讨论的品名列表
+     */
+    List<String> pmsId;
 }

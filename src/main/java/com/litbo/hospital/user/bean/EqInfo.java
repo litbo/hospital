@@ -12,9 +12,13 @@ import java.util.Date;
     **/
 @Data
 public class EqInfo {
+
+    //流水号
     private String eqId;
     //设备名称
     private String eqName;
+    //拼音码
+    private String eqPym;
     //设备编号
     private String eqSbbh;
     //资产编号

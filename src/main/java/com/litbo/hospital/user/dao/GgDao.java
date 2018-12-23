@@ -18,4 +18,7 @@ public interface GgDao {
     List<SysGgVo> listShowGgs();
     @UpdateProvider(type = GgProvider.class , method = "checkGg")
     int checkGg(Integer id);
+
+    @SelectProvider(type = GgProvider.class , method = "getGgById")
+    SysGgVo getGgById(Integer id);
 }

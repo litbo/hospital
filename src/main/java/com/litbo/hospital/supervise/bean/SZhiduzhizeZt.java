@@ -13,9 +13,9 @@ public class SZhiduzhizeZt {
 
     private String ztCzname;
 
-    private String ztCzzt;
+    private Integer ztCzzt;
 
-    private String zt_shyj;
+    private String ztShyj;
 
     public Integer getZtId() {
         return ztId;
@@ -57,19 +57,19 @@ public class SZhiduzhizeZt {
         this.ztCzname = ztCzname;
     }
 
-    public String getZtCzzt() {
+    public Integer getZtCzzt() {
         return ztCzzt;
     }
 
-    public void setZtCzzt(String ztCzzt) {
+    public void setZtCzzt(Integer ztCzzt) {
         this.ztCzzt = ztCzzt;
     }
 
-    public String getZt_shyj() {
-        return zt_shyj;
+    public String getZtShyj() {
+        return ztShyj;
     }
 
-    public void setZt_shyj(String zt_shyj) {
-        this.zt_shyj = zt_shyj;
+    public void setZtShyj(String ztShyj) {
+        this.ztShyj = ztShyj;
     }
 }
