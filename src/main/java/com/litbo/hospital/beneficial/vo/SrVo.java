@@ -18,6 +18,8 @@ public class SrVo {
 
     private BigDecimal mzsr;
 
+    private BigDecimal kjxmsr;
+
     private BigDecimal zysr;
 
     private BigDecimal qt;

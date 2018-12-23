@@ -34,4 +34,11 @@ public interface SbcwDao {
     @SelectProvider(type = CwProvider.class , method = "listXyFxByX")
     List<XyFxVo> listXyFxByX(CbMhVo cbMhVo);
 
+    @SelectProvider(type = CwProvider.class , method = "listXyPj")
+    List<XyPjVo> listXyPj();
+
+    @SelectProvider(type = CwProvider.class , method = "listXyPjByX")
+    List<XyPjVo> listXyPjByX(CbMhVo cbMhVo);
+
+
 }

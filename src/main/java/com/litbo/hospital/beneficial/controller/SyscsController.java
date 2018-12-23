@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/benefical")
+@RequestMapping(value = "/benefical/syscs")
 public class SyscsController {
 
     @Autowired
