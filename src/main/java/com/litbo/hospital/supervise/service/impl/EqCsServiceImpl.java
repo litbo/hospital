@@ -2,8 +2,8 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.EqCsDao;
+import com.litbo.hospital.supervise.service.EqCsService;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
 import com.litbo.hospital.user.bean.EqCs;

@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.service.ZhiduService;
-import com.litbo.hospital.supervise.vo.ShDetailMsg;
+import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ShMsgVO;
 import com.litbo.hospital.supervise.vo.ZhiduSubmitVO;
 import io.swagger.annotations.Api;
@@ -53,7 +53,6 @@ public class ZhiduController {
 
     @PostMapping("/reSubmit")
     public Result reSubmit(@RequestBody ZhiduSubmitVO zhiduSubmitVO){
-        //提交时 SZhidu对象包括信息 bmid  zdname  zdcontent  docurl  userid createTime
         zhiduService.reSubmit(zhiduSubmitVO);
         return Result.success();
     }
@@ -68,7 +67,7 @@ public class ZhiduController {
     //通过审核人id获取待审核的制度的信息
     @GetMapping("/getShDetailMgs")
     public Result getShDetailMgsByZdId(@RequestParam Integer zdId,@RequestParam String shrId){
-        ShDetailMsg date = zhiduService.getShDetailMgsByZdId(zdId,shrId);
+        ZdShDetailMsg date = zhiduService.getShDetailMgsByZdId(zdId,shrId);
         return Result.success(date);
     }
 

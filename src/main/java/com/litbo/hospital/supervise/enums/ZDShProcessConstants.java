@@ -1,25 +1,10 @@
 package com.litbo.hospital.supervise.enums;
 
-import com.litbo.hospital.supervise.dao.ZhiduDao;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class ShProcessConstants {
+public class ZDShProcessConstants {
 
-    @Autowired
-    private ZhiduDao zhiduDao;
-
-//    ZD_SHZT_KEMUBX(0,"编写"),
-//    ZD_SHZT_KSMUXG(1,"科室秘书编写"),
-//    ZD_SHZT_SYQXG(2,"试用期修改"),
-//
-//
-//    ZD_SHZT_KESH(3,"科长审核"),
-//    ZD_SHZT_CZSH(4,"处长审核"),
-//    ZD_SHZT_SY(5,"试用"),
-//    ZD_SHZT_BA(6,"备案");
 
         /** 当前状态 */
         public static  int PROCESS_CODE = 0;     // 当前状态
@@ -34,19 +19,16 @@ public class ShProcessConstants {
         public static final int ZD_SHZT_SYQXG = 2;
 
 
-
-
         /** 科长审核 */
         public static final int ZD_SHZT_KESH = 3;
-
         /** 处长审核 */
         public static final int ZD_SHZT_CZSH = 4;
-
+        /** 院长审核 */
+        public static final int ZD_SHZT_YZSH = 5;
         /** 试用 */
-        public static final int ZD_SHZT_SY = 5;
-
+        public static final int ZD_SHZT_SY = 6;
         /** 备案*/
-        public static final int ZD_SHZT_BA = 6;
+        public static final int ZD_SHZT_BA = 7;
 
 
         public static final Map<Integer, String> SH_PROCESS = new HashMap<Integer, String>();
@@ -59,6 +41,7 @@ public class ShProcessConstants {
 
             SH_PROCESS.put(ZD_SHZT_KESH, "科长审核");
             SH_PROCESS.put(ZD_SHZT_CZSH, "处长审核");
+            SH_PROCESS.put(ZD_SHZT_YZSH, "院长审核");
             SH_PROCESS.put(ZD_SHZT_SY, "试用");
             SH_PROCESS.put(ZD_SHZT_BA, "备案");
 

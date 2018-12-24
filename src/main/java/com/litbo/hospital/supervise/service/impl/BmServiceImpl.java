@@ -61,6 +61,12 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
+    public SBm getBmByid(String bmid) {
+        SBm date = bmDao.getBmBybmid(bmid);
+        return date;
+    }
+
+    @Override
     public void saveBm(SBm bm) {
         bmDao.saveBm(bm);
     }
@@ -94,10 +100,10 @@ public class BmServiceImpl implements BmService {
 
     @Override
     public void setBmsBeto(SetBmVO bmVO) {
-        String new_pbm_id = bmVO.getPbm_id();
-        String[] obm_ids = bmVO.getObm_ids();
+        String new_pbm_id = bmVO.getPbm_id();   //获取父部门
+        String[] obm_ids = bmVO.getObm_ids();   //获取子部门
         for(String obm_id:obm_ids){
-            setBmBeto(obm_id,new_pbm_id);
+            setBmBeto(obm_id,new_pbm_id);       //设置归属
         }
     }
 
@@ -107,8 +113,8 @@ public class BmServiceImpl implements BmService {
         List<SBm> old_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的部门信息
         List<SBm> new_bmListByPid = bmDao.getBmListByPid(new_pbm_id); //获取平级下的部门信息
 
-        SBm old_idmax_mb = getMaxBm(old_bmListByPid);
-        SBm new_idmax_mb = getMaxBm(new_bmListByPid);
+        SBm old_idmax_mb = getMaxBm(old_bmListByPid);    //
+        SBm new_idmax_mb = getMaxBm(new_bmListByPid);    //
 
         String new_bm_id = createNewBmId(new_idmax_mb);
         bmDao.setBmBeto(obm_id,new_bm_id,new_pbm_id);
@@ -135,7 +141,7 @@ public class BmServiceImpl implements BmService {
         else
             bmid_cuted.add(l-1,Integer.toString(mb));
         bmid_cuted.remove(l);
-        System.out.println(bmid_cuted);
+//        System.out.println(bmid_cuted);
 
         StringBuffer new_bmid = new StringBuffer();
         for(String s:bmid_cuted){

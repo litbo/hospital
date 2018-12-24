@@ -31,6 +31,8 @@ public interface BmDao {
     List<SBm> getBmListByPid(String pid);
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where obm_id=#{id}")
     SBm getBmByOid(String id);
+    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where bm_id=#{bmid}")
+    SBm getBmBybmid(String bmid);
     @Insert("insert into s_bm (bm_id, bm_name, user_id, \n" +
             "      bm_tel, bm_addr, wx_flag, \n" +
             "      p_bm_id)\n" +
