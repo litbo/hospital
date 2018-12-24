@@ -11,10 +11,6 @@ import java.util.List;
 @Data
 public class SgLzfxVO {
     /**
-     * 论证分析主键
-     */
-    private String lzfxId;
-    /**
      * 申购单id
      */
     private String sgId;
@@ -54,14 +50,6 @@ public class SgLzfxVO {
      * 专家签字
      */
     private String lzfxZjqz;
-    /**
-     * 扩展一
-     */
-    private String extendOne;
-    /**
-     * 扩展二
-     */
-    private String extendTwo;
     /**
      * 参考型号及报价列表
      */

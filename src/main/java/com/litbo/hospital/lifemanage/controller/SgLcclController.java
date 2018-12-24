@@ -95,8 +95,8 @@ public class SgLcclController {
      * 审核上报
      */
     @PostMapping("updateSgLccLByEqId")
-    public Result updateSgLccLByEqId(@RequestBody SgLccl SgLccl){
-        sgLcclService.updateSgLccLByEqId(SgLccl);
+    public Result updateSgLccLByEqId(@RequestBody SgLccl sgLccl){
+        sgLcclService.updateSgLccLByEqId(sgLccl);
         return Result.success();
     }
 

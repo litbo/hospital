@@ -21,7 +21,7 @@ public class SgDictController {
      * 查询申购字典信息
      * @return Result
      */
-    @PostMapping("selectSgDict")
+    @PostMapping("/selectSgDict")
     public Result selectSgDict(){
         return Result.success(sgDictService.selectSgDict());
     }
@@ -31,8 +31,8 @@ public class SgDictController {
      * @param sgDict 字典信息
      * @return Result
      */
-    @PostMapping("updateSgDict")
-    public Result updateSgDict(@RequestBody SgDict sgDict){
+    @PostMapping("/updateSgDict")
+    public Result updateSgDict(SgDict sgDict){
         sgDictService.updateSgDict(sgDict);
         return Result.success();
     }

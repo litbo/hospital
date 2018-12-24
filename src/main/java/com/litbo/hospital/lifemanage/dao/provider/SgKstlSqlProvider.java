@@ -20,14 +20,11 @@ public class SgKstlSqlProvider {
             SELECT("eq_pm.eq_pm_id");
             SELECT("eq_pm.eq_pm_name");
             SELECT("eq_pm.eq_pm_jc");
-            SELECT("eq_ylqxfl.eqfl_id");
-            SELECT("eq_ylqxfl.eqfl_name");
             SELECT("sg_info.id as sgInfoId");
             SELECT("sg_info.bh");
             SELECT("sg_tl_pm.kstl_sj");
             FROM("eq_pm");
             INNER_JOIN("sg_info ON eq_pm.eq_pm_id = sg_info.eq_pm_id");
-            INNER_JOIN("eq_ylqxfl ON eq_pm.eq_fl_id = eq_ylqxfl.eqfl_id");
             INNER_JOIN("sg_tl_pm ON eq_pm.eq_pm_id = sg_tl_pm.eq_pm_id");
             if (pmIds != null && pmIds.size() > 0) {
                 StringBuilder sb = new StringBuilder();

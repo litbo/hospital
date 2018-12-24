@@ -65,4 +65,17 @@ public interface SgCkcssbMapper {
      */
     @Delete("DELETE FROM sg_ckcssb WHERE sg_id = #{sgInfoId,jdbcType=VARCHAR}")
     int deleteSgCkcssbBySgInfoId(String sgInfoId);
+
+    /**
+     * 通过id获取品名名称
+     * @param pmId 品名id
+     * @return 品名名称
+     */
+    @Select("SELECT\n" +
+            "dbo.eq_pm.eq_pm_name\n" +
+            "FROM\n" +
+            "dbo.eq_pm\n" +
+            "WHERE\n" +
+            "dbo.eq_pm.eq_pm_id = #{pmId,jdbcType=VARCHAR}")
+    String getEqPmNameById(String pmId);
 }

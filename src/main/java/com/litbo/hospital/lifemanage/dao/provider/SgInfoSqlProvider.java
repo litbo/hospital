@@ -19,23 +19,41 @@ public class SgInfoSqlProvider {
     public String updateSgInfoById(SgInfo sgInfo) {
         return new SQL() {{
             UPDATE("sg_info");
-            SET("tg_bm_id = #{sgInfo.tgBmId,jdbcType=CHAR}");   //托管科室id
-            SET("gzlb_id = #{sgInfo.gzlbId,jdbcType=INTEGER}"); //购置类别id
-            SET("zjly_id = #{sgInfo.zjlyId,jdbcType=INTEGER}"); //资金来源id
-            SET("syxz_id = #{sgInfo.syxzId,jdbcType=INTEGER}"); //使用性质id
-            SET("num = #{sgInfo.num,jdbcType=INTEGER}");        //数量
-            SET("price_wd = #{sgInfo.priceWd,jdbcType=DECIMAL}");//外地价格
-            SET("price_sn = #{sgInfo.priceSn,jdbcType=DECIMAL}");//省内价格
-            SET("price_gj_y = #{sgInfo.priceGjY,jdbcType=DECIMAL}");//估价元
-            SET("price_gj_my = #{sgInfo.priceGjMy,jdbcType=DECIMAL}");//估价美元
-            SET("jcl = #{sgInfo.jcl,jdbcType=VARCHAR}");//检测量/日
-            SET("syl = #{sgInfo.syl,jdbcType=VARCHAR}"); //设计使用率
-            SET("gzll = #{sgInfo.gzll,jdbcType=LONGVARCHAR}"); //购置理由
-            SET("xxyt = #{sgInfo.xxyt,jdbcType=LONGVARCHAR}"); //详细用途
-            SET("mdyt = #{sgInfo.mdyt,jdbcType=LONGVARCHAR}"); //目的用途
-            SET("jxkylcqk = #{sgInfo.jxkylcqk,jdbcType=LONGVARCHAR}"); //目前教学科研临床应用情况
-            SET("jbcsyq = #{sgInfo.jbcsyq,jdbcType=LONGVARCHAR}");//基本参数要求
-            SET("pzxq = #{sgInfo.pzxq,jdbcType=LONGVARCHAR}"); //配置详细需求
+            SET("bh = #{sgInfo.bh,jdbcType=VARCHAR}");
+            //托管科室id
+            SET("tg_bm_id = #{sgInfo.tgBmId,jdbcType=CHAR}");
+            //购置类别id
+            SET("gzlb_id = #{sgInfo.gzlbId,jdbcType=INTEGER}");
+            //资金来源id
+            SET("zjly_id = #{sgInfo.zjlyId,jdbcType=INTEGER}");
+            //使用性质id
+            SET("syxz_id = #{sgInfo.syxzId,jdbcType=INTEGER}");
+            //数量
+            SET("num = #{sgInfo.num,jdbcType=INTEGER}");
+            //外地价格
+            SET("price_wd = #{sgInfo.priceWd,jdbcType=DECIMAL}");
+            //省内价格
+            SET("price_sn = #{sgInfo.priceSn,jdbcType=DECIMAL}");
+            //估价元
+            SET("price_gj_y = #{sgInfo.priceGjY,jdbcType=DECIMAL}");
+            //估价美元
+            SET("price_gj_my = #{sgInfo.priceGjMy,jdbcType=DECIMAL}");
+            //检测量/日
+            SET("jcl = #{sgInfo.jcl,jdbcType=VARCHAR}");
+            //设计使用率
+            SET("syl = #{sgInfo.syl,jdbcType=VARCHAR}");
+            //购置理由
+            SET("gzll = #{sgInfo.gzll,jdbcType=LONGVARCHAR}");
+            //详细用途
+            SET("xxyt = #{sgInfo.xxyt,jdbcType=LONGVARCHAR}");
+            //目的用途
+            SET("mdyt = #{sgInfo.mdyt,jdbcType=LONGVARCHAR}");
+            //目前教学科研临床应用情况
+            SET("jxkylcqk = #{sgInfo.jxkylcqk,jdbcType=LONGVARCHAR}");
+            //基本参数要求
+            SET("jbcsyq = #{sgInfo.jbcsyq,jdbcType=LONGVARCHAR}");
+            //配置详细需求
+            SET("pzxq = #{sgInfo.pzxq,jdbcType=LONGVARCHAR}");
             WHERE("id = #{sgInfo.id,jdbcType=VARCHAR}");
         }}.toString();
     }
@@ -85,12 +103,11 @@ public class SgInfoSqlProvider {
     }
 
     /**
-     * 显示科室汇总审核列表
+     * 显示工程处审核列表
      *
-     * @param sgInfoBh 申购单编号
-     * @param pmList   品名列表
+     * @param bmId 查看具体部门id
      */
-    public String selectSgInfoGccshList(String sgInfoBh, List<String> pmList) {
+    public String selectSgInfoGccshList(String bmId) {
         return new SQL() {{
             SELECT("dbo.sg_info.id");
             SELECT("dbo.sg_info.bm_id");
@@ -107,18 +124,8 @@ public class SgInfoSqlProvider {
             FROM("dbo.sg_info");
             INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
             WHERE("dbo.sg_info.bh IS NOT NULL");
-            if (StringUtils.isNotBlank(sgInfoBh)) {
-                WHERE("dbo.sg_info.bh like #{sgInfoBh,jdbcType=VARCHAR}");
-            }
-            if (pmList != null && pmList.size() > 0) {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < pmList.size(); i++) {
-                    sb.append(pmList.get(i));
-                    if (pmList.size() != (i + 1)) {
-                        sb.append(",");
-                    }
-                }
-                WHERE("dbo.sg_info.eq_pm_id IN (" + sb.toString() + ")");
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id like #{bmId,jdbcType=VARCHAR}");
             }
             WHERE("dbo.sg_info.isyxgccsh IS NULL AND dbo.sg_info.iskssh = 1");
         }}.toString();
@@ -127,10 +134,10 @@ public class SgInfoSqlProvider {
     /**
      * 显示申购单装备委员会审核列表
      *
-     * @param sgInfoBh 申购单编号
-     * @param pmList   品名列表
+     * @param bmId 部门id
+     * @param bh   申购单编号
      */
-    public String selectSgInfoSgZbwyhhyList(String sgInfoBh, List<String> pmList) {
+    public String selectSgInfoSgZbwyhhyList(String bmId, String bh) {
         return new SQL() {{
             SELECT("dbo.sg_info.id");
             SELECT("dbo.sg_info.bm_id");
@@ -147,18 +154,11 @@ public class SgInfoSqlProvider {
             FROM("dbo.sg_info");
             INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
             WHERE("dbo.sg_info.bh IS NOT NULL");
-            if (StringUtils.isNotBlank(sgInfoBh)) {
+            if (StringUtils.isNotBlank(bh)) {
                 WHERE("dbo.sg_info.bh like #{sgInfoBh,jdbcType=VARCHAR}");
             }
-            if (pmList != null && pmList.size() > 0) {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < pmList.size(); i++) {
-                    sb.append(pmList.get(i));
-                    if (pmList.size() != (i + 1)) {
-                        sb.append(",");
-                    }
-                }
-                WHERE("dbo.sg_info.eq_pm_id IN (" + sb.toString() + ")");
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
             }
             WHERE("dbo.sg_info.iszbwyhsh IS NULL AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1");
         }}.toString();
@@ -167,10 +167,10 @@ public class SgInfoSqlProvider {
     /**
      * 显示申购单院办公会审核列表
      *
-     * @param sgInfoBh 申购单编号
-     * @param pmList   品名列表
+     * @param bmId 部门id
+     * @param bh   申购单编号
      */
-    public String selectSgInfoYbgsShList(String sgInfoBh, List<String> pmList) {
+    public String selectSgInfoYbgsShList(String bmId, String bh) {
         return new SQL() {{
             SELECT("dbo.sg_info.id");
             SELECT("dbo.sg_info.bm_id");
@@ -187,18 +187,11 @@ public class SgInfoSqlProvider {
             FROM("dbo.sg_info");
             INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
             WHERE("dbo.sg_info.bh IS NOT NULL");
-            if (StringUtils.isNotBlank(sgInfoBh)) {
+            if (StringUtils.isNotBlank(bh)) {
                 WHERE("dbo.sg_info.bh like #{sgInfoBh,jdbcType=VARCHAR}");
             }
-            if (pmList != null && pmList.size() > 0) {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < pmList.size(); i++) {
-                    sb.append(pmList.get(i));
-                    if (pmList.size() != (i + 1)) {
-                        sb.append(",");
-                    }
-                }
-                WHERE("dbo.sg_info.eq_pm_id IN (" + sb.toString() + ")");
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
             }
             WHERE("dbo.sg_info.isybghsh IS NULL AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1");
         }}.toString();
@@ -228,12 +221,12 @@ public class SgInfoSqlProvider {
             INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
             WHERE("dbo.sg_info.bh IS NOT NULL");
             if (StringUtils.isNotBlank(year)) {
-                WHERE("dbo.sg_info.id = (SELECT dbo.sg_zbwyhhy.sg_id FROM dbo.sg_zbwyhhy WHERE YEAR(dbo.sg_zbwyhhy.zbwyhhy_sj) = #{year,jdbcType=VARCHAR})");
+                WHERE("dbo.sg_info.id IN (SELECT dbo.sg_zbwyhhy.sg_id FROM dbo.sg_zbwyhhy WHERE dbo.sg_zbwyhhy.zbwyhhy_nd = #{year,jdbcType=VARCHAR})");
             }
             if (StringUtils.isNotBlank(bmId)) {
                 WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
             }
-            WHERE("dbo.sg_info.isybghsh = 1 AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1");
+            WHERE("dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1");
         }}.toString();
     }
 
@@ -261,7 +254,7 @@ public class SgInfoSqlProvider {
             INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
             WHERE("dbo.sg_info.bh IS NOT NULL");
             if (StringUtils.isNotBlank(year)) {
-                WHERE("dbo.sg_info.id = (SELECT dbo.sg_ybghhy.sg_id FROM dbo.sg_ybghhy WHERE YEAR(dbo.sg_ybghhy.ybghhy_sj) = #{year,jdbcType=VARCHAR})");
+                WHERE("dbo.sg_info.id IN (SELECT dbo.sg_ybghhy.sg_id FROM dbo.sg_ybghhy WHERE YEAR(dbo.sg_ybghhy.ybghhy_sj) = #{year,jdbcType=VARCHAR})");
             }
             if (StringUtils.isNotBlank(bmId)) {
                 WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
@@ -289,7 +282,7 @@ public class SgInfoSqlProvider {
                     "FROM dbo.sg_ybghhy " +
                     "INNER JOIN dbo.sg_info ON dbo.sg_ybghhy.sg_id = dbo.sg_info.id " +
                     "WHERE year(dbo.sg_ybghhy.ybghhy_sj) = #{year,jdbcType=VARCHAR}" +
-            ")");
+                    ")");
             if (StringUtils.isNotBlank(bmId)) {
                 WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
             }
@@ -310,12 +303,12 @@ public class SgInfoSqlProvider {
             SELECT("Sum(dbo.sg_info.price_gj_y) AS ysy");
             SELECT("Sum(dbo.sg_info.price_gj_my) AS ysmy");
             FROM("dbo.sg_info");
-            WHERE("dbo.sg_info.isybghsh = '1'");
+            WHERE("dbo.sg_info.iszbwyhsh = '1'");
             WHERE("dbo.sg_info.id IN (" +
                     "SELECT dbo.sg_zbwyhhy.sg_id " +
                     "FROM dbo.sg_zbwyhhy " +
                     "INNER JOIN dbo.sg_info ON dbo.sg_zbwyhhy.sg_id = dbo.sg_info.id " +
-                    "WHERE year(dbo.sg_zbwyhhy.zbwyhhy_sj) = #{year,jdbcType=VARCHAR}" +
+                    "WHERE dbo.sg_zbwyhhy.zbwyhhy_nd = #{year,jdbcType=VARCHAR}" +
                     ")");
             if (StringUtils.isNotBlank(bmId)) {
                 WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
