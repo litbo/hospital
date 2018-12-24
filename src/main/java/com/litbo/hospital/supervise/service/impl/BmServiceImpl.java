@@ -61,7 +61,7 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
-    public SBm getBmByid(String bmid) {
+    public SBm getBmByBmId(String bmid) {
         SBm date = bmDao.getBmBybmid(bmid);
         return date;
     }

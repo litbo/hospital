@@ -25,7 +25,7 @@ public interface BmService {
     //根据oid查部门
     SBm getBmByOid(String id);
     //根据id查部门
-    SBm getBmByid(String bmid);
+    SBm getBmByBmId(String bmid);
     //模糊查詢
     PageInfo getBmListByX(int pageNum, int pageSize, BmSelectVO selectVo);
     //通过部门id刪除
