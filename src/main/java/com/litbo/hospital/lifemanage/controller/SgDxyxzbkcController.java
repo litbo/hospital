@@ -21,7 +21,7 @@ public class SgDxyxzbkcController {
      * @param sgDxyxzbkcVO 大型医学装备考察报告信息
      * @return Result
      */
-    @PostMapping("insertSgDxyxzbkc")
+    @PostMapping("/insertSgDxyxzbkc")
     public Result insertSgDxyxzbkc(@RequestBody SgDxyxzbkcVO sgDxyxzbkcVO) {
         sgDxyxzbkcService.insertOrUpdateSgDxyxzbkc(sgDxyxzbkcVO);
         return Result.success();
@@ -33,7 +33,7 @@ public class SgDxyxzbkcController {
      * @param sgInfoId 根据申购单id
      * @return SgDxyxzbkcVO
      */
-    @PostMapping("selectSgDxyxzbkc")
+    @PostMapping("/selectSgDxyxzbkc")
     public Result selectSgDxyxzbkc(@RequestParam("sgInfoId") String sgInfoId) {
         SgDxyxzbkcVO sgDxyxzbkcVO = sgDxyxzbkcService.selectSgDxyxzbkc(sgInfoId);
         if(sgDxyxzbkcVO != null){

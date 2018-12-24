@@ -9,6 +9,8 @@ import com.litbo.hospital.lifemanage.bean.vo.SgDhdjVO;
 import com.litbo.hospital.lifemanage.dao.SgDhdjMapper;
 import com.litbo.hospital.lifemanage.dao.SgDjhwMapper;
 import com.litbo.hospital.lifemanage.service.SgDhdjService;
+import com.litbo.hospital.supervise.bean.SBm;
+import com.litbo.hospital.supervise.dao.EmpDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,8 @@ public class SgDhdjServiceImpl implements SgDhdjService {
     private SgDhdjMapper sgDhdjMapper;
     @Autowired
     private SgDjhwMapper sgDjhwMapper;
+    @Autowired
+    private EmpDao empDao;
 
     /**
      * 添加到货登记信息
@@ -62,11 +66,12 @@ public class SgDhdjServiceImpl implements SgDhdjService {
      */
     @Override
     public PageInfo<DhdjksjsVO> selectDjhwKsjs(String userId, Integer pageNum, Integer pageSize) {
-        //TODO 通过用户id查询所在的科室id
-        String ksId = "1000011";
+        //通过用户id查询所在的部门id
+        SBm bm = empDao.getBmByEmpId(userId);
+        String bmId = bm.getBmId();
 
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(sgDhdjMapper.selectDjhwKsjs(ksId));
+        return new PageInfo<>(sgDhdjMapper.selectDjhwKsjs(bmId));
     }
 
     /**

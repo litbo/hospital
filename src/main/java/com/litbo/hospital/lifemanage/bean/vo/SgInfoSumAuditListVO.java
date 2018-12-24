@@ -14,10 +14,6 @@ public class SgInfoSumAuditListVO {
      */
     private String id;
     /**
-     * 申购部门id
-     */
-    private String bmId;
-    /**
      * 申购部门名字
      */
     private String bmName;
@@ -37,29 +33,4 @@ public class SgInfoSumAuditListVO {
      * 估价(元)
      */
     private BigDecimal priceGjY;
-    /**
-     * 审核状态
-     */
-    private String zt;
-    /**
-     * 科室讨论表id
-     */
-    private String kstlId;
-    /**
-     * 准入评价报告表id
-     */
-    private String pjbgId;
-    /**
-     * 可行性分析表id
-     */
-    private String kxfxId;
-    /**
-     * 大型医学装备考察报告表id
-     */
-    private String dxzbId;
-    /**
-     * 论证分析表id
-     */
-    private String lzfxId;
-
 }

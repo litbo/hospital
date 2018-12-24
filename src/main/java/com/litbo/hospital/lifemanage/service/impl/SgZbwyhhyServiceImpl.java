@@ -49,8 +49,10 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
         //在申购单中添加装备委员会会议id
         sgInfoMapper.updateSgInfoZbwyhhyIdById(sgZbwyhhy.getSgId(), zbwyhId);
         //添加会议人员信息
-        for (SgZbwyhRy sgZbwyhRy : sgZbwyhhyVO.getSgZbwyhRys()) {
-            sgZbwyhRy.setZbwyhhyId(zbwyhId);
+        SgZbwyhRy sgZbwyhRy = new SgZbwyhRy();
+        sgZbwyhRy.setZbwyhhyId(zbwyhId);
+        for (String ryId : sgZbwyhhyVO.getSgZbwyhRys()) {
+            sgZbwyhRy.setUserId(ryId);
             sgZbwyhRyMapper.insertZbwyhhyRy(sgZbwyhRy);
         }
     }
@@ -89,6 +91,12 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
     @Override
     public PageInfo<YearBudgetVO> selectSgZbwyhYearBudget(String year, String bmId, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo<>(sgInfoMapper.selectSgZbwyhYearBudget(year,bmId));
+        List<YearBudgetVO> yearBudgetVOS = sgInfoMapper.selectSgZbwyhYearBudget(year, bmId);
+        for (YearBudgetVO yearBudgetVO : yearBudgetVOS) {
+            //TODO 根据部门id查询部门名称
+            // selectKsShHz.getBmId();
+            yearBudgetVO.setBmName("部门1");
+        }
+        return new PageInfo<>(yearBudgetVOS);
     }
 }

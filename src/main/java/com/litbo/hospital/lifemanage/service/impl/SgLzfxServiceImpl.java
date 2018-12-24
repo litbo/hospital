@@ -47,6 +47,7 @@ public class SgLzfxServiceImpl implements SgLzfxService {
         //添加论证分析参考型号及报价表信息
         for (SgLzfxxhbj sgLzfxxhbj:sgLzfxxhbjs){
             sgLzfxxhbj.setLzfxId(sgLzfxId);
+            sgLzfxxhbj.setXhbjId(UUID.randomUUID().toString());
             sgLzfxxhbjMapper.insertSgLzfxxhbj(sgLzfxxhbj);
         }
     }

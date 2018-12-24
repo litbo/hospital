@@ -78,12 +78,13 @@ public class SgDxyxzbkcServiceImpl implements SgDxyxzbkcService {
         SgDxyxzbkcVO sgDxyxzbkcVO = new SgDxyxzbkcVO();
         //查询大型医学装备考察报告信息
         SgDxyxzbkc sgDxyxzbkc = SgDxyxzbkcMapper.selectSgDxyxzbkcBySgInfoId(sgInfoId);
-        BeanUtils.copyProperties(sgDxyxzbkc,sgDxyxzbkcVO);
-
-        //查询大型医学装备考察报告信息人员信息
-        List<String> userIds = sgDxzbUserMapper.selectSgDxzbUserBySgDxyxzbkcId(sgDxyxzbkc.getDxzbId());
-        sgDxyxzbkcVO.setUserIds(userIds);
-        return sgDxyxzbkcVO;
-
+        if (sgDxyxzbkc != null){
+            BeanUtils.copyProperties(sgDxyxzbkc,sgDxyxzbkcVO);
+            //查询大型医学装备考察报告信息人员信息
+            List<String> userIds = sgDxzbUserMapper.selectSgDxzbUserBySgDxyxzbkcId(sgDxyxzbkc.getDxzbId());
+            sgDxyxzbkcVO.setUserIds(userIds);
+            return sgDxyxzbkcVO;
+        }
+        return null;
     }
 }

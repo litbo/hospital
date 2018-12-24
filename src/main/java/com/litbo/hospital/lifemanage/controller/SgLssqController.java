@@ -21,8 +21,8 @@ public class SgLssqController {
      * @param sgLssq 临时授权信息
      * @return Result
      */
-    @PostMapping("insertSgLssq")
-    public Result insertSgLssq(@RequestBody SgLssq sgLssq) {
+    @PostMapping("/insertSgLssq")
+    public Result insertSgLssq(SgLssq sgLssq) {
         sgLssqService.insertSgLssq(sgLssq);
         return Result.success();
     }
@@ -36,10 +36,11 @@ public class SgLssqController {
      * @param pageSize 每页的记录数
      * @return Result
      */
-    @PostMapping("selectSgLssq")
+    @PostMapping("/selectSgLssq")
     public Result selectSgLssq(@RequestParam(name = "ksId", required = false) String ksId,
                                @RequestParam(name = "isKsg", required = false) String isKsg,
-                               @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum, @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+                               @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         return Result.success(sgLssqService.selectSgLssq(ksId, isKsg, pageNum, pageSize));
     }
 }

@@ -10,10 +10,6 @@ import java.util.Date;
 @Data
 public class SgYbghhyVO {
     /**
-     * 院办公会会议id
-     */
-    private String ybghhyId;
-    /**
      * 申购单id
      */
     private String sgId;
@@ -37,14 +33,6 @@ public class SgYbghhyVO {
      * 内容
      */
     private String ybghhyNr;
-    /**
-     * 扩展一
-     */
-    private String extendOne;
-    /**
-     * 扩展二
-     */
-    private String extendTwo;
     /**
      * 审核信息
      */

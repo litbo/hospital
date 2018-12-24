@@ -1,6 +1,5 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
-import com.litbo.hospital.lifemanage.bean.SgZbwyhRy;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,10 +10,6 @@ import java.util.List;
  */
 @Data
 public class SgZbwyhhyVO {
-    /**
-     * 主键id
-     */
-    private String zbwyhhyId;
     /**
      * 申购单id
      */
@@ -56,17 +51,9 @@ public class SgZbwyhhyVO {
      */
     private String zbwyhhyNr;
     /**
-     * 扩展一
-     */
-    private String extendOne;
-    /**
-     * 扩展二
-     */
-    private String extendTwo;
-    /**
      * 装备委员会参加人员
      */
-    private List<SgZbwyhRy> sgZbwyhRys;
+    private List<String> sgZbwyhRys;
     /**
      * 审核信息
      */
