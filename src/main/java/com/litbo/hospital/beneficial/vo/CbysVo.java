@@ -13,4 +13,6 @@ public class CbysVo {
     private String eqName;
 
     private String eqXh;
+
+    private String eqId;
 }

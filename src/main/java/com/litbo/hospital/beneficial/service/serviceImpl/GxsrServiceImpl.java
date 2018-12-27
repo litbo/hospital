@@ -60,6 +60,7 @@ public class GxsrServiceImpl implements GxsrService {
             bSbcwBean.setKsId(insertSbcwVo.getBmId());
             bSbcwBean.setBmName(insertSbcwVo.getBmName());
             bSbcwBean.setKmSj(insertSbcwVo.getKmSj());
+            bSbcwBean.setQjlc(insertSbcwVo.getQjlc());
             /*if(kmName3=="管理费用"||kmName3=="辅助科室分摊"){
                 bSbcwBean.setKmCjdm(2);
             }*/

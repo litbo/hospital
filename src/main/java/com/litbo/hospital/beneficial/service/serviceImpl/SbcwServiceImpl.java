@@ -146,7 +146,12 @@ public class SbcwServiceImpl implements SbcwService {
             //获取启用年份
             Date qyDate = xyPjVo.getEqQysj();
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(qyDate);
+            if(qyDate==null){
+                calendar.setTime(new Date());
+            }
+            else {
+                calendar.setTime(qyDate);
+            }
             String year1 = String.valueOf(calendar.get(Calendar.YEAR));
             //使用多少年
             int y = Integer.parseInt(year) - Integer.parseInt(year1) + 1;
@@ -186,7 +191,12 @@ public class SbcwServiceImpl implements SbcwService {
             //获取启用年份
             Date qyDate = xyPjVo.getEqQysj();
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(qyDate);
+            if(qyDate==null){
+                calendar.setTime(new Date());
+            }
+            else {
+                calendar.setTime(qyDate);
+            }
             String year1 = String.valueOf(calendar.get(Calendar.YEAR));
             //使用多少年
             int y = Integer.parseInt(year) - Integer.parseInt(year1) + 1;

@@ -39,7 +39,7 @@ public class CbMhVo {
     }
 
     public void setBmNameByx(String bmNameByx) {
-        this.bmNameByx = '%'+bmNameByx+'%';
+        this.bmNameByx = bmNameByx;
     }
 
     public String getEqNameByx() {
@@ -47,7 +47,7 @@ public class CbMhVo {
     }
 
     public void setEqNameByx(String eqNameByx) {
-        this.eqNameByx = '%'+eqNameByx+'%';
+        this.eqNameByx = eqNameByx;
     }
 
 }

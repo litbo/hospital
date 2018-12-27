@@ -26,6 +26,8 @@ public class BSbcwBean {
 
     private String eqName;
 
+    private Integer qjlc;
+
     public Integer getaId() {
         return aId;
     }
@@ -104,5 +106,13 @@ public class BSbcwBean {
 
     public void setEqName(String eqName) {
         this.eqName = eqName;
+    }
+
+    public Integer getQjlc() {
+        return qjlc;
+    }
+
+    public void setQjlc(Integer qjlc) {
+        this.qjlc = qjlc;
     }
 }

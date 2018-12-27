@@ -22,7 +22,7 @@ public class BAccountController {
     /*
     * 成本科目列表
     * */
-    @RequestMapping(value = "listCbAccount")
+    @RequestMapping(value = "/listCbAccount")
     public Result listCbAccount(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
     @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         return Result.success(bAccountService.listCbAccount(pageNum,pageSize));
@@ -31,7 +31,7 @@ public class BAccountController {
     /*
      * 收入科目列表
      * */
-    @RequestMapping(value = "listSrAccount")
+    @RequestMapping(value = "/listSrAccount")
     public Result listSrAccount(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         return Result.success(bAccountService.listSrAccount(pageNum,pageSize));

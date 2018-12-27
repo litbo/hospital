@@ -1,6 +1,7 @@
 package com.litbo.hospital.beneficial.dao.provider;
 
 import com.litbo.hospital.beneficial.vo.CbMhVo;
+import org.apache.commons.lang3.StringUtils;
 
 public class CbxySzProvider {
 
@@ -9,7 +10,8 @@ public class CbxySzProvider {
         String sql = "SELECT "+
                 "Max(dbo.b_sbcw.bm_name) AS bmName, "+
                 "Max(dbo.b_sbcw.eq_name) AS eqName, "+
-                "Max(dbo.eq_info.eq_xh) AS eqXh "+
+                "Max(dbo.eq_info.eq_xh) AS eqXh, "+
+                "Max(dbo.eq_info.eq_id) AS eqId "+
                 "FROM "+
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
@@ -29,7 +31,8 @@ public class CbxySzProvider {
         StringBuffer sql = new StringBuffer("SELECT "+
                 "Max(dbo.b_sbcw.bm_name) AS bmName, "+
                 "Max(dbo.b_sbcw.eq_name) AS eqName, "+
-                "Max(dbo.eq_info.eq_xh) AS eqXh "+
+                "Max(dbo.eq_info.eq_xh) AS eqXh, "+
+                "Max(dbo.eq_info.eq_id) AS eqId "+
 
                 "FROM "+
                 "dbo.b_sbcw , "+
@@ -40,22 +43,21 @@ public class CbxySzProvider {
                 "dbo.b_sbcw.km_cjdm =2) "
         );
 
-        if(cbMhVo.getBmNameByx()!=null) {
-            sql.append("and dbo.b_sbcw.bm_name Like #{bmNameByx}");
+        if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
+            sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
         }
-        if(cbMhVo.getEqNameByx()!=null){
-            sql.append("and dbo.b_sbcw.eq_name Like #{eqNameByx}");
+        if(StringUtils.isNotBlank(cbMhVo.getEqNameByx())){
+            sql.append("and dbo.b_sbcw.eq_name Like '%'+ #{eqNameByx}+'%' " );
         }
-       /* if((cbMhVo.getKssj()!=null)&&(cbMhVo.getJssj()==null)){
+      /*  if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
         }
-        if((cbMhVo.getKssj()==null)&&(cbMhVo.getJssj()!=null)){
+        if((StringUtils.isBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN '1900-1-1' AND #{jssj}" );
         }
-        if((cbMhVo.getKssj()!=null)&&(cbMhVo.getJssj()!=null)){
+        if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
         }*/
-
         sql.append("GROUP BY " +
                 "dbo.b_sbcw.eq_id ");
 
@@ -88,7 +90,8 @@ public class CbxySzProvider {
         String sql = "SELECT "+
                 "Max(dbo.b_sbcw.bm_name) AS bmName, "+
                 "Max(dbo.b_sbcw.eq_name) AS eqName, "+
-                "Max(dbo.eq_info.eq_xh) AS eqXh "+
+                "Max(dbo.eq_info.eq_xh) AS eqXh, "+
+                "Max(dbo.eq_info.eq_id) AS eqId "+
                 "FROM "+
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
@@ -107,7 +110,8 @@ public class CbxySzProvider {
         StringBuffer sql = new StringBuffer("SELECT "+
                 "Max(dbo.b_sbcw.bm_name) AS bmName, "+
                 "Max(dbo.b_sbcw.eq_name) AS eqName, "+
-                "Max(dbo.eq_info.eq_xh) AS eqXh "+
+                "Max(dbo.eq_info.eq_xh) AS eqXh， "+
+                "Max(dbo.eq_info.eq_id) AS eqId "+
 
                 "FROM "+
                 "dbo.b_sbcw , "+
@@ -117,19 +121,19 @@ public class CbxySzProvider {
                 "dbo.b_sbcw.km_cjdm =3 "
         );
 
-        if(cbMhVo.getBmNameByx()!=null) {
-            sql.append("and dbo.b_sbcw.bm_name Like #{bmNameByx}");
+        if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
+            sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
         }
-        if(cbMhVo.getEqNameByx()!=null){
-            sql.append("and dbo.b_sbcw.eq_name Like #{eqNameByx}");
+        if(StringUtils.isNotBlank(cbMhVo.getEqNameByx())){
+            sql.append("and dbo.b_sbcw.eq_name Like '%'+ #{eqNameByx}+'%' " );
         }
-       /* if((cbMhVo.getKssj()!=null)&&(cbMhVo.getJssj()==null)){
+        /*if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
         }
-        if((cbMhVo.getKssj()==null)&&(cbMhVo.getJssj()!=null)){
+        if((StringUtils.isBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN '1900-1-1' AND #{jssj}" );
         }
-        if((cbMhVo.getKssj()!=null)&&(cbMhVo.getJssj()!=null)){
+        if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
         }*/
 

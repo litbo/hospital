@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
+/*
+*
+* 增删改查设备成本
+* */
+
 @RestController
-@RequestMapping(value = "/benefical/gxsr")
+@RequestMapping(value = "/benefical/gxcb")
 public class GxcbController {
 
     @Autowired
@@ -44,6 +49,7 @@ public class GxcbController {
         }
         return  Result.error();
     }
+
 
 
 }

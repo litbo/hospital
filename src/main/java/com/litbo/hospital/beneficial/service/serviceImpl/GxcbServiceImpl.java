@@ -58,11 +58,12 @@ public class GxcbServiceImpl implements GxcbService {
             bSbcwBean.setKsId(insertSbcwVo.getBmId());
             bSbcwBean.setBmName(insertSbcwVo.getBmName());
             bSbcwBean.setKmSj(insertSbcwVo.getKmSj());
+            bSbcwBean.setQjlc(0);
             if(kmName3=="管理费用"||kmName3=="辅助科室分摊"){
                 bSbcwBean.setKmCjdm(2);
             }
             bSbcwBean.setKmCjdm(1);
-            bSbcwBean.setaId(i+20);
+            bSbcwBean.setaId(i+30);
 
             if( gxcbDao.insertCb(bSbcwBean)>0){
                 if(i == insertSbcwVo.getKmNameAndValue().size()) {
