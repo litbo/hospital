@@ -115,6 +115,10 @@ public class SgInfo {
      */
     private Date yxgccshsj;
     /**
+     * 医学工程处审核意见
+     */
+    private String yxgccshyj;
+    /**
      * 是否通过装备委员会审核
      */
     private String iszbwyhsh;

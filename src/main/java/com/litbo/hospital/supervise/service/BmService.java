@@ -22,8 +22,10 @@ public interface BmService {
     void saveBm(SBm bm);
     //根据父节点查部门
     PageInfo getBmListByPid(int pageNum, int pageSize, String pid);
-    //根据id查部门
+    //根据oid查部门
     SBm getBmByOid(String id);
+    //根据id查部门
+    SBm getBmByBmId(String bmid);
     //模糊查詢
     PageInfo getBmListByX(int pageNum, int pageSize, BmSelectVO selectVo);
     //通过部门id刪除

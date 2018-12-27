@@ -1,6 +1,6 @@
 package com.litbo.hospital.supervise.vo;
 
-public class SelectAsBaseShMsg {
+public class ZDSelectAsBaseShMsg {
     private Integer zdId;    //制度编号
     private String zdName;  // 制度名称
     private String ztCzname;    //制度状态操作名称

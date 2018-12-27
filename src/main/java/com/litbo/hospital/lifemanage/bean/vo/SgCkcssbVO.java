@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.bean.vo;
 import com.litbo.hospital.lifemanage.bean.SgGnpz;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -10,15 +11,7 @@ import java.util.List;
  * 参考厂商设备VO
  */
 @Data
-public class SgCkcssbVO {
-    /**
-     * 参考厂商设备主键
-     */
-    private String ckcssbId;
-    /**
-     * 申购单id
-     */
-    private String sgId;
+public class SgCkcssbVO implements Serializable {
     /**
      * 设备厂商id
      */
@@ -39,14 +32,6 @@ public class SgCkcssbVO {
      * 估价
      */
     private BigDecimal ckcssbGj;
-    /**
-     * 扩展列1
-     */
-    private String extendOne;
-    /**
-     * 扩展列2
-     */
-    private String extendTwo;
     /**
      * 参考厂商对应的功能配置
      */

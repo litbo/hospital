@@ -23,9 +23,11 @@ public class SgYbghhyController {
      * @param pageSize 每页显示的记录数
      * @return Result
      */
-    @PostMapping("selectSgYbghhyYearPurchase")
-    public Result selectSgYbghhyYearPurchase(@RequestParam(name = "year") String year, @RequestParam(name = "bmId", required = false) String bmId,
-                                             @RequestParam(name = "pageNum", defaultValue = "1", required = false) Integer pageNum, @RequestParam(name = "pageSize", defaultValue = "1", required = false) Integer pageSize) {
+    @PostMapping("/selectSgYbghhyYearPurchase")
+    public Result selectSgYbghhyYearPurchase(@RequestParam(name = "year") String year,
+                                             @RequestParam(name = "bmId", required = false) String bmId,
+                                             @RequestParam(name = "pageNum", defaultValue = "1", required = false) Integer pageNum,
+                                             @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize) {
         return Result.success(sgYbghhyService.selectSgYbghhyYearPurchase(year, bmId, pageNum, pageSize));
     }
 
@@ -38,9 +40,11 @@ public class SgYbghhyController {
      * @param pageSize 每页显示的记录数
      * @return Result
      */
-    @PostMapping("selectSgYbghhyYearBudget")
-    public Result selectSgYbghhyYearBudget(@RequestParam(name = "year") String year, @RequestParam(name = "bmId", required = false) String bmId,
-                                           @RequestParam(name = "pageNum", defaultValue = "1", required = false) Integer pageNum, @RequestParam(name = "pageSize", defaultValue = "1", required = false) Integer pageSize) {
+    @PostMapping("/selectSgYbghhyYearBudget")
+    public Result selectSgYbghhyYearBudget(@RequestParam(name = "year") String year,
+                                           @RequestParam(name = "bmId", required = false) String bmId,
+                                           @RequestParam(name = "pageNum", defaultValue = "1", required = false) Integer pageNum,
+                                           @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize) {
         return Result.success(sgYbghhyService.selectSgYbghhyYearBudget(year, bmId, pageNum, pageSize));
     }
 }

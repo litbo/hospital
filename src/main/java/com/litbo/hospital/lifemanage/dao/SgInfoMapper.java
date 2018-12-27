@@ -1,10 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgInfo;
-import com.litbo.hospital.lifemanage.bean.vo.SgInfoLzfxVO;
-import com.litbo.hospital.lifemanage.bean.vo.SgInfoSumAuditListVO;
-import com.litbo.hospital.lifemanage.bean.vo.ShVO;
-import com.litbo.hospital.lifemanage.bean.vo.YearBudgetVO;
+import com.litbo.hospital.lifemanage.bean.vo.*;
 import com.litbo.hospital.lifemanage.dao.provider.SgInfoSqlProvider;
 import com.litbo.hospital.lifemanage.dao.provider.SimpleWhereInExtendedLanguageDriver;
 import org.apache.ibatis.annotations.*;
@@ -184,12 +181,11 @@ public interface SgInfoMapper {
     /**
      * 显示申购单工程处审核列表
      *
-     * @param bh     编号
-     * @param pmList 品名列表
+     * @param bmId 查看具体部门id
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoGccshList")
-    List<SgInfoSumAuditListVO> selectSgInfoGccshList(@Param("bh") String bh, @Param("pmList") List<String> pmList);
+    List<SgInfoSumAuditListVO> selectSgInfoGccshList(String bmId);
 
     /**
      * 医学工程处审核
@@ -221,12 +217,12 @@ public interface SgInfoMapper {
     /**
      * 显示申购单装备委员会审核列表
      *
-     * @param bh     编号
-     * @param pmList 品名列表
+     * @param bh   申购单编号
+     * @param bmId 部门id
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoSgZbwyhhyList")
-    List<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(@Param("bh") String bh, @Param("pmList") List<String> pmList);
+    List<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(@Param("bmId") String bmId, @Param("bh") String bh);
 
     /**
      * 装备委员会审核
@@ -257,12 +253,12 @@ public interface SgInfoMapper {
     /**
      * 显示申购单院办公会审核列表
      *
-     * @param bh     编号
-     * @param pmList 品名列表
+     * @param bh   编号
+     * @param bmId 部门id
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoYbgsShList")
-    List<SgInfoSumAuditListVO> selectSgInfoYbgsShList(@Param("bh") String bh, @Param("pmList") List<String> pmList);
+    List<SgInfoSumAuditListVO> selectSgInfoYbgsShList(@Param("bmId") String bmId, @Param("bh") String bh);
 
     /**
      * 院办公会会审核
@@ -346,4 +342,79 @@ public interface SgInfoMapper {
             "WHERE\n" +
             "dbo.sg_info.price_gj_y >= #{lzfxPrice,jdbcType=DECIMAL}")
     List<SgInfoLzfxVO> selectSgInfoLzfx(String lzfxPrice);
+
+    /**
+     * 申购设备公示查询列表
+     *
+     * @param isSh   是否通过审核
+     * @param bmId   部门id
+     * @param bh     申购单编号
+     * @param sbName 设备拼音码
+     * @return List<SgInfoListVO>
+     */
+    @Select("<script>" +
+            "SELECT\n" +
+            "dbo.sg_info.id,\n" +
+            "dbo.s_bm.bm_name,\n" +
+            "dbo.sg_info.bh,\n" +
+            "dbo.eq_pm.eq_pm_name,\n" +
+            "dbo.sg_info.num,\n" +
+            "dbo.sg_info.price_gj_y,\n" +
+            "dbo.sg_info.zt,\n" +
+            "dbo.sg_info.kstl_id,\n" +
+            "dbo.sg_info.pjbg_id,\n" +
+            "dbo.sg_info.kxfx_id,\n" +
+            "dbo.sg_info.dxzb_id,\n" +
+            "dbo.sg_info.lzfx_id,\n" +
+            "dbo.sg_info.zbwyhhy_id,\n" +
+            "dbo.sg_info.ybghhy_id\n" +
+            "FROM\n" +
+            "dbo.sg_info\n" +
+            "INNER JOIN dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id\n" +
+            "INNER JOIN dbo.s_bm ON dbo.sg_info.bm_id = dbo.s_bm.bm_id" +
+            "<where>" +
+            //通过审核
+            "<if test=\"isSh == '1'\">" +
+            "dbo.sg_info.isybghsh = 1" +
+            "</if>" +
+            //未通过审核
+            "<if test=\"isSh == '0'\">" +
+            "AND dbo.sg_info.iskssh = 0 OR dbo.sg_info.isyxgccsh = 0 OR " +
+            "dbo.sg_info.iszbwyhsh = 0 OR dbo.sg_info.isybghsh = 0" +
+            "</if>" +
+            //通过科室查找
+            "<if test=\"bmId != null\">" +
+            "AND dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}" +
+            "</if>" +
+            //通过申购单编号查找
+            "<if test=\"bh != null\">" +
+            "AND dbo.sg_info.bh = #{bh,jdbcType=VARCHAR}" +
+            "</if>" +
+            //通过设备拼音码查找
+            "<if test=\"sbName != null\">" +
+            "AND pym Like #{sbName,jdbcType=VARCHAR}" +
+            "</if>" +
+            "</where>" +
+            "</script>")
+    List<SgInfoListVO> selectSgInfoList(@Param("isSh") String isSh, @Param("bmId") String bmId, @Param("bh") String bh, @Param("sbName") String sbName);
+
+    /**
+     * 查询未通过原因
+     * @param id 申购单id
+     * @return 未通过原因
+     */
+    @Select("SELECT\n" +
+            "dbo.sg_info.iskssh,\n" +
+            "dbo.sg_info.ksshyj,\n" +
+            "dbo.sg_info.isyxgccsh,\n" +
+            "dbo.sg_info.yxgccyj,\n" +
+            "dbo.sg_info.iszbwyhsh,\n" +
+            "dbo.sg_info.zbwyhyj,\n" +
+            "dbo.sg_info.isybghsh,\n" +
+            "dbo.sg_info.ybghyj\n" +
+            "FROM\n" +
+            "dbo.sg_info\n" +
+            "WHERE\n" +
+            "dbo.sg_info.id = #{sbName,jdbcType=VARCHAR}")
+    SgInfoReasonVO getReason(String id);
 }

@@ -15,17 +15,9 @@ public class SgInfoVO {
      */
     private String id;
     /**
-     * 部门id 关联s_bm表
+     * 品名表名称
      */
-    private String bmId;
-    /**
-     * 申购单编号
-     */
-    private String bh;
-    /**
-     * 品名表主键id
-     */
-    private String eqPmId;
+    private String eqPmName;
     /**
      * 托管科室id
      */

@@ -1,10 +1,7 @@
 package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.lifemanage.bean.vo.SgInfoLzfxVO;
-import com.litbo.hospital.lifemanage.bean.vo.SgInfoSumAuditListVO;
-import com.litbo.hospital.lifemanage.bean.vo.SgInfoVO;
-import com.litbo.hospital.lifemanage.bean.vo.ShVO;
+import com.litbo.hospital.lifemanage.bean.vo.*;
 
 /**
  * 申购单表Service接口
@@ -35,23 +32,24 @@ public interface SgInfoService {
     /**
      * 显示申购单科室审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param userId               登陆人id
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param eqPmName 设备名称
+     * @param bh       申购单编号
+     * @param userId   登陆人id
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
      */
-    PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(SgInfoSumAuditListVO sgInfoSumAuditListVO, String userId, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(String eqPmName, String bh, String userId, Integer pageNum, Integer pageSize);
 
     /**
      * 显示申购单工程处审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param bmId     查看具体部门id
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
      */
-    PageInfo<SgInfoSumAuditListVO> selectSgInfoGccshList(SgInfoSumAuditListVO sgInfoSumAuditListVO, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoSumAuditListVO> selectSgInfoGccshList(String bmId, Integer pageNum, Integer pageSize);
 
     /**
      * 医学工程处审核
@@ -63,12 +61,13 @@ public interface SgInfoService {
     /**
      * 显示申购单装备委员会审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param bmId     部门id
+     * @param bh       申购单编号
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
      */
-    PageInfo<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(SgInfoSumAuditListVO sgInfoSumAuditListVO, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(String bmId, String bh, Integer pageNum, Integer pageSize);
 
     /**
      * 装备委员会审核
@@ -80,12 +79,13 @@ public interface SgInfoService {
     /**
      * 显示申购单院办公室审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param bmId     部门id
+     * @param bh       申购单编号
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return PageInfo<SgInfoSumAuditListVO>
      */
-    PageInfo<SgInfoSumAuditListVO> selectSgInfoYbgsShList(SgInfoSumAuditListVO sgInfoSumAuditListVO, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoSumAuditListVO> selectSgInfoYbgsShList(String bmId, String bh, Integer pageNum, Integer pageSize);
 
     /**
      * 院办公会审核
@@ -102,4 +102,17 @@ public interface SgInfoService {
      * @return PageInfo<SgInfoLzfxVO>
      */
     PageInfo<SgInfoLzfxVO> selectSgInfoLzfx(Integer pageNum, Integer pageSize);
+
+    /**
+     * 申购设备公示查询列表
+     *
+     * @param isSh     是否通过审核
+     * @param bmId     部门id
+     * @param bh       申购单编号
+     * @param sbName   设备拼音码
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
+     * @return PageInfo<SgInfoListVO>
+     */
+    PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbName, Integer pageNum, Integer pageSize);
 }

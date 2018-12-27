@@ -21,8 +21,8 @@ public class SgKxxfxController {
      * @param sgKxxfx 可行性分析信息
      * @return Result
      */
-    @PostMapping("insertSgKxxfx")
-    public Result insertSgKxxfx(@RequestBody SgKxxfx sgKxxfx) {
+    @PostMapping("/insertSgKxxfx")
+    public Result insertSgKxxfx(SgKxxfx sgKxxfx) {
         sgKxxfxService.insertOrUpdateSgKxxfx(sgKxxfx);
         return Result.success();
     }
@@ -32,7 +32,7 @@ public class SgKxxfxController {
      * @param sgInfoId 申购单主键
      * @return Result 可行性分析信息
      */
-    @PostMapping("selectSgKxxfxBySgInfoId")
+    @PostMapping("/selectSgKxxfxBySgInfoId")
     public Result selectSgKxxfxBySgInfoId(@RequestParam("sgInfoId") String sgInfoId) {
         SgKxxfx sgKxxfx = sgKxxfxService.selectSgKxxfxBySgInfoId(sgInfoId);
         if (sgKxxfx != null){

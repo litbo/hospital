@@ -10,6 +10,10 @@ import com.litbo.hospital.lifemanage.dao.SgKstlMapper;
 import com.litbo.hospital.lifemanage.dao.SgKstlUserMapper;
 import com.litbo.hospital.lifemanage.dao.SgTlPmMapper;
 import com.litbo.hospital.lifemanage.service.SgKstlService;
+import com.litbo.hospital.supervise.bean.SBm;
+import com.litbo.hospital.supervise.dao.EmpDao;
+import com.litbo.hospital.user.bean.EqPm;
+import com.litbo.hospital.user.dao.EqDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +35,10 @@ public class SgKstlServiceImpl implements SgKstlService {
     private SgTlPmMapper sgTlPmMapper;
     @Autowired
     private SgInfoMapper sgInfoMapper;
-
+    @Autowired
+    private EmpDao empDao;
+    @Autowired
+    private EqDao eqDao;
     /**
      * 添加科室讨论信息
      *
@@ -113,20 +120,24 @@ public class SgKstlServiceImpl implements SgKstlService {
      */
     @Override
     public PageInfo<SgKstlAddSgInfoVO> selectSgKstlSbs(String userId, String eqPmName, String eqPmJc, Integer pageNum, Integer pageSize) {
-        //TODO 调用用户表方法 通过人员表id获取所在部门
-        String bmId = "01001";
+        //通过人员表id获取所在部门
+        SBm bm = empDao.getBmByEmpId(userId);
+        String bmId = bm.getBmId();
+
         List<String> pmList1 = selectSgTlPmPmIdsByBmId(bmId);
-        //TODO 调用品名的模糊查询 获得查询到的品名ID
+        //调用品名的模糊查询 获得查询到的品名ID
+        List<EqPm> pmList = eqDao.listPmsByPym(eqPmName);
         List<String> pmList2 = new ArrayList<>();
-        pmList2.add("6803010101");
-        pmList2.add("6803010102");  //TODO 模拟数据
+        for (EqPm eqPm : pmList) {
+            pmList2.add(eqPm.getEqPmId());
+        }
 
         // 把通过部门查询的品名list和模糊查询到的品名list 合成一个list 使用set去重
-        Set<String> pmids = new HashSet<>();
-        pmids.addAll(pmList1);
-        pmids.addAll(pmList2);
+        Set<String> pmIds = new HashSet<>();
+        pmIds.addAll(pmList1);
+        pmIds.addAll(pmList2);
 
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(selectSgKstlVOByPmIds(new ArrayList<>(pmids)));
+        return new PageInfo<>(selectSgKstlVOByPmIds(new ArrayList<>(pmIds)));
     }
 }

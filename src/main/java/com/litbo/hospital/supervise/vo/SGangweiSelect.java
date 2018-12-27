@@ -1,8 +1,8 @@
-package com.litbo.hospital.supervise.bean;
+package com.litbo.hospital.supervise.vo;
 
 import java.util.Date;
 
-public class SGangwei {
+public class SGangweiSelect {
     private Integer gwId;
     private String gwName;
     private String gwLevel;

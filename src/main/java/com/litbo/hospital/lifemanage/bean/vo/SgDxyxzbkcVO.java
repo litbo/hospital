@@ -11,11 +11,6 @@ import java.util.List;
 @Data
 public class SgDxyxzbkcVO {
     /**
-     * 主键
-     */
-    private String dxzbId;
-
-    /**
      * 申购单id
      */
     private String sgId;
@@ -23,14 +18,6 @@ public class SgDxyxzbkcVO {
      * 时间
      */
     private Date dxzbSj;
-    /**
-     * 扩展一
-     */
-    private String extendOne;
-    /**
-     * 扩展二
-     */
-    private String extendTwo;
     /**
      * 考察地点及内容
      */

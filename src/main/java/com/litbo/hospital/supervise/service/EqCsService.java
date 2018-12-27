@@ -1,4 +1,4 @@
-package com.litbo.hospital.supervise.service.impl;
+package com.litbo.hospital.supervise.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;

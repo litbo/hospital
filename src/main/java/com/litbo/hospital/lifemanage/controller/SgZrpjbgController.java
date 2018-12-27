@@ -20,8 +20,8 @@ public class SgZrpjbgController {
      *
      * @param sgZrpjbg 准入评价报告
      */
-    @PostMapping("insertSgZrpjbg")
-    public Result insertSgZrpjbg(@RequestBody SgZrpjbg sgZrpjbg){
+    @PostMapping("/insertSgZrpjbg")
+    public Result insertSgZrpjbg(SgZrpjbg sgZrpjbg){
         sgZrpjbgService.insertOrUpdateSgZrpjbg(sgZrpjbg);
         return Result.success();
     }
@@ -31,7 +31,7 @@ public class SgZrpjbgController {
      * @param sgInfoId 申购单id
      * @return Result 评价报告信息
      */
-    @PostMapping("selectSgZrpjbgBySgInfoId")
+    @PostMapping("/selectSgZrpjbgBySgInfoId")
     public Result selectSgZrpjbgBySgInfoId(@RequestParam("sgInfoId")String sgInfoId){
         SgZrpjbg sgZrpjbg = sgZrpjbgService.selectSgZrpjbgBySgInfoId(sgInfoId);
         if(sgZrpjbg != null){

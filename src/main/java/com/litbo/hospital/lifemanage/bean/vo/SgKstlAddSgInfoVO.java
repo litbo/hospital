@@ -7,11 +7,10 @@ import lombok.Data;
  */
 @Data
 public class SgKstlAddSgInfoVO {
-
     /**
-     * 设备品名ID
+     * 申购单id
      */
-    private String eqPmId;
+    private String sgInfoId;
     /**
      * 设备品名
      */
@@ -21,17 +20,9 @@ public class SgKstlAddSgInfoVO {
      */
     private String eqPmJc;
     /**
-     * 卫标分类编号
+     * 设备品名ID
      */
-    private Integer eqFlId;
-    /**
-     * 卫标分类名称
-     */
-    private String eqFlName;
-    /**
-     * 申购单id
-     */
-    private String sgInfoId;
+    private String eqPmId;
     /**
      * 申购单编号
      */

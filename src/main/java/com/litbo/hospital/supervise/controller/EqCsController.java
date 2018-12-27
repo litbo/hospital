@@ -2,7 +2,7 @@ package com.litbo.hospital.supervise.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
-import com.litbo.hospital.supervise.service.impl.EqCsService;
+import com.litbo.hospital.supervise.service.EqCsService;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
 import com.litbo.hospital.user.bean.EqCs;

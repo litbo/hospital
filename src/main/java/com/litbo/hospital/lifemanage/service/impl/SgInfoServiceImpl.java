@@ -13,6 +13,11 @@ import com.litbo.hospital.lifemanage.dao.SgDictMapper;
 import com.litbo.hospital.lifemanage.dao.SgGnpzMapper;
 import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
 import com.litbo.hospital.lifemanage.service.SgInfoService;
+import com.litbo.hospital.supervise.bean.SBm;
+import com.litbo.hospital.supervise.dao.BmDao;
+import com.litbo.hospital.supervise.dao.EmpDao;
+import com.litbo.hospital.user.bean.EqPm;
+import com.litbo.hospital.user.dao.EqDao;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +42,12 @@ public class SgInfoServiceImpl implements SgInfoService {
     private SgGnpzMapper sgGnpzMapper;
     @Autowired
     private SgDictMapper sgDictMapper;
+    @Autowired
+    private BmDao bmDao;
+    @Autowired
+    private EqDao eqDao;
+    @Autowired
+    private EmpDao empDao;
 
     /**
      * 根据申购单ID查询申购单信息
@@ -59,11 +70,12 @@ public class SgInfoServiceImpl implements SgInfoService {
         for (SgCkcssb sgCkcssb : sgCkcssbs) {
             BeanUtils.copyProperties(sgCkcssb, sgCkcssbVO);
             //参考厂商设备信息对应的功能配置
-            sgCkcssbVO.setSgGnpzs(sgGnpzMapper.selectSgGnpzBySgCkcssbId(sgCkcssbVO.getCkcssbId()));
+            sgCkcssbVO.setSgGnpzs(sgGnpzMapper.selectSgGnpzBySgCkcssbId(sgCkcssb.getCkcssbId()));
             sgCkcssbVOS.add(sgCkcssbVO);
         }
 
         sgInfoVO.setSgCkcssbVOs(sgCkcssbVOS);
+        sgInfoVO.setEqPmName(sgCkcssbMapper.getEqPmNameById(sgInfo.getEqPmId()));
         return sgInfoVO;
     }
 
@@ -143,29 +155,33 @@ public class SgInfoServiceImpl implements SgInfoService {
     /**
      * 显示申购单科室审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param userId               登陆人id
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param eqPmName 设备名称
+     * @param bh       申购单编号
+     * @param userId   登陆人id
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
      */
     @Override
-    public PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(SgInfoSumAuditListVO sgInfoSumAuditListVO, String userId, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(String eqPmName, String bh, String userId, Integer pageNum, Integer pageSize) {
 
-        //TODO 调用用户表方法 通过人员表id获取所在部门id和名字
-        String bmId = "1000011";
-        String bmName = "部门名称";
-        //TODO 根据品名名称模糊查询 找到对应的id
-        List<String> pmList = new ArrayList<>();
-        //TODO 模拟数据
-        pmList.add("6803010101");
-        pmList.add("6803010102");
+        //调用用户表方法 通过人员表id获取所在部门id和名字
+        SBm bm = empDao.getBmByEmpId(userId);
+        String bmName = bm.getBmName();
+        String bmId = bm.getBmId();
 
-        if (StringUtils.isNotBlank(sgInfoSumAuditListVO.getBh())) {
-            sgInfoSumAuditListVO.setBh("%" + sgInfoSumAuditListVO.getBh() + "%");
+        //根据品名名称模糊查询 找到对应的id
+        List<EqPm> pmList = eqDao.listPmsByPym(eqPmName);
+        List<String> pmIds = new ArrayList<>();
+        for (EqPm eqPm : pmList) {
+            pmIds.add(eqPm.getEqPmId());
+        }
+
+        if (StringUtils.isNotBlank(bh)) {
+            bh = "%" + bh + "%";
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoKsshList(bmId, sgInfoSumAuditListVO.getBh(), pmList);
+        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoKsshList(bmId, bh, pmIds);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
             selectKsShHz.setBmName(bmName);
         }
@@ -175,28 +191,18 @@ public class SgInfoServiceImpl implements SgInfoService {
     /**
      * 显示申购单工程处审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param bmId     查看具体部门id
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
      */
     @Override
-    public PageInfo<SgInfoSumAuditListVO> selectSgInfoGccshList(SgInfoSumAuditListVO sgInfoSumAuditListVO, Integer pageNum, Integer pageSize) {
-        //TODO 根据品名名称模糊查询 找到对应的id
-        List<String> pmList = new ArrayList<>();
-        //TODO 模拟数据
-        pmList.add("6803010101");
-        pmList.add("6803010102");
-
-        if (StringUtils.isNotBlank(sgInfoSumAuditListVO.getBh())) {
-            sgInfoSumAuditListVO.setBh("%" + sgInfoSumAuditListVO.getBh() + "%");
-        }
+    public PageInfo<SgInfoSumAuditListVO> selectSgInfoGccshList(String bmId, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoGccshList(sgInfoSumAuditListVO.getBh(), pmList);
+        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoGccshList(bmId);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
             //TODO 根据部门id查询部门名称
-//            selectKsShHz.getBmId();
-            selectKsShHz.setBmName("部门1");
+            selectKsShHz.setBmName(bmDao.getBmByOid(bmId).getBmName());
         }
         return new PageInfo<>(selectKsShHzs);
     }
@@ -220,28 +226,22 @@ public class SgInfoServiceImpl implements SgInfoService {
     /**
      * 显示申购单装备委员会审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param bmId     部门id
+     * @param bh       申购单编号
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return PageInfo<SgInfoSumAuditListVO>
      */
     @Override
-    public PageInfo<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(SgInfoSumAuditListVO sgInfoSumAuditListVO, Integer pageNum, Integer pageSize) {
-        //TODO 根据品名名称模糊查询 找到对应的id
-        List<String> pmList = new ArrayList<>();
-        pmList.add("6803010101");
-        //TODO 模拟数据
-        pmList.add("6803010102");
-
-        if (StringUtils.isNotBlank(sgInfoSumAuditListVO.getBh())) {
-            sgInfoSumAuditListVO.setBh("%" + sgInfoSumAuditListVO.getBh() + "%");
+    public PageInfo<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(String bmId, String bh, Integer pageNum, Integer pageSize) {
+        if (StringUtils.isNotBlank(bh)) {
+            bh = ("%" + bh + "%");
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoSgZbwyhhyList(sgInfoSumAuditListVO.getBh(), pmList);
+        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoSgZbwyhhyList(bmId, bh);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
             //TODO 根据部门id查询部门名称
-            // selectKsShHz.getBmId();
-            selectKsShHz.setBmName("部门1");
+            selectKsShHz.setBmName(bmDao.getBmByOid(bmId).getBmName());
         }
         return new PageInfo<>(selectKsShHzs);
     }
@@ -265,28 +265,27 @@ public class SgInfoServiceImpl implements SgInfoService {
     /**
      * 显示申购单院办公室审核列表
      *
-     * @param sgInfoSumAuditListVO 条件信息
-     * @param pageNum              页数
-     * @param pageSize             每页显示记录数
+     * @param bmId     部门id
+     * @param bh       申购单编号
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
      * @return PageInfo<SgInfoSumAuditListVO>
      */
     @Override
-    public PageInfo<SgInfoSumAuditListVO> selectSgInfoYbgsShList(SgInfoSumAuditListVO sgInfoSumAuditListVO, Integer pageNum, Integer pageSize) {
-        //TODO 根据品名名称模糊查询 找到对应的id
-        List<String> pmList = new ArrayList<>();
-        pmList.add("6803010101");
-        //TODO 模拟数据
-        pmList.add("6803010102");
-
-        if (StringUtils.isNotBlank(sgInfoSumAuditListVO.getBh())) {
-            sgInfoSumAuditListVO.setBh("%" + sgInfoSumAuditListVO.getBh() + "%");
+    public PageInfo<SgInfoSumAuditListVO> selectSgInfoYbgsShList(String bmId, String bh, Integer pageNum, Integer pageSize) {
+        if (StringUtils.isNotBlank(bh)) {
+            bh = ("%" + bh + "%");
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoYbgsShList(sgInfoSumAuditListVO.getBh(), pmList);
+        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoYbgsShList(bmId, bh);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
             //TODO 根据部门id查询部门名称
-            // selectKsShHz.getBmId();
-            selectKsShHz.setBmName("部门1");
+            SBm bmByOid = bmDao.getBmByOid(bmId);
+            if (bmByOid != null) {
+                selectKsShHz.setBmName(bmByOid.getBmName());
+            } else {
+                selectKsShHz.setBmName(null);
+            }
         }
         return new PageInfo<>(selectKsShHzs);
     }
@@ -318,7 +317,51 @@ public class SgInfoServiceImpl implements SgInfoService {
     public PageInfo<SgInfoLzfxVO> selectSgInfoLzfx(Integer pageNum, Integer pageSize) {
         //查询论证分析字典金额
         SgDict sgDict = sgDictMapper.selectSgDict();
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(sgInfoMapper.selectSgInfoLzfx(sgDict.getLzfxPrice()));
+    }
+
+    /**
+     * 申购设备公示查询列表
+     *
+     * @param isSh     是否通过审核
+     * @param bmId     部门id
+     * @param bh       申购单编号
+     * @param sbName   设备拼音码
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
+     * @return PageInfo<SgInfoListVO>
+     */
+    @Override
+    public PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbName, Integer pageNum, Integer pageSize) {
+        if (StringUtils.isNotBlank(sbName)) {
+            sbName = "%" + sbName + "%";
+        }
+        PageHelper.startPage(pageNum, pageSize);
+        List<SgInfoListVO> sgInfoListVOS = sgInfoMapper.selectSgInfoList(isSh, bmId, bh, sbName);
+
+        List<SgInfoListVO> sgList = new ArrayList<>();
+        for (SgInfoListVO sgInfoListVO : sgInfoListVOS) {
+            SgInfoReasonVO reason = sgInfoMapper.getReason(sgInfoListVO.getId());
+            //科室审核未通过
+            if ("0".equals(reason.getIskssh())){
+                sgInfoListVO.setReason(reason.getKsshyj());
+            }
+            //医学工程处审核未通过
+            else if("0".equals(reason.getIsyxgccsh())){
+                sgInfoListVO.setReason(reason.getYxgccshyj());
+            }
+            //装备委员会审核未通过
+            else if("0".equals(reason.getIszbwyhsh())){
+                sgInfoListVO.setReason(reason.getZbwyhyj());
+            }
+            //院办公会审核未通过
+            else if("0".equals(reason.getIsybghsh())){
+                sgInfoListVO.setReason(reason.getYbghyj());
+            }
+            sgList.add(sgInfoListVO);
+        }
+
+        return new PageInfo<>(sgList);
     }
 }
