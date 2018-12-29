@@ -11,6 +11,7 @@ import com.litbo.hospital.supervise.vo.SetBmVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class BmServiceImpl implements BmService {
@@ -127,7 +128,7 @@ public class BmServiceImpl implements BmService {
     }
 
     private String createNewBmId(SBm idmax_mb) {
-        List<String> bmid_cuted = StringCutUtils.stringToList(idmax_mb.getBmId());
+        /**  List<String> bmid_cuted = StringCutUtils.stringToList(idmax_mb.getBmId());
         System.out.println(bmid_cuted);
         int l=0;
         for(String s:bmid_cuted){
@@ -147,13 +148,45 @@ public class BmServiceImpl implements BmService {
         for(String s:bmid_cuted){
             new_bmid.append(s);
         }
+        return new_bmid.toString();  */
+
+        List<Integer> bmid_cuted = StringCutUtils.stringToIntList(idmax_mb.getBmId());
+        System.out.println(bmid_cuted);
+        int l=0;
+        for(Integer s:bmid_cuted){
+            if(s!=0) l++;
+        }
+        System.out.println(l);
+//        18 10 6 0 0 0
+
+        List<String> bmidc = new ArrayList<>();
+        bmid_cuted.set(l-1,bmid_cuted.get(l - 1)+1);
+        for(int j = 0;j<5;j++){
+            Integer teni = bmid_cuted.get(j);
+            String hexi = Integer.toHexString(teni);
+            if(hexi.length()==1){
+                bmidc.add(j,"0"+hexi);
+            }else{
+                bmidc.add(j,hexi);
+            }
+        }
+
+        StringBuffer new_bmid = new StringBuffer();
+        for(String s:bmidc){
+            new_bmid.append(s);
+        }
         return new_bmid.toString();
     }
 
     private SBm getMaxBm(List<SBm> bms) {
+
         SBm idmaxbm = bms.get(0);
         for (SBm bm:bms){
-            if(Integer.parseInt(bm.getBmId())>Integer.parseInt(idmaxbm.getBmId())){
+            System.out.println(Long.parseLong(bm.getBmId(),16));
+//            if(Integer.parseInt(bm.getBmId())>Integer.parseInt(idmaxbm.getBmId())){
+//                idmaxbm = bm;
+//            }
+            if(Long.parseLong(bm.getBmId(),16)>Long.parseLong(idmaxbm.getBmId(),16)){
                 idmaxbm = bm;
             }
         }
@@ -161,8 +194,10 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
-    public void setWxbm(String obmid) {
-        bmDao.setWxbm(obmid);
+    public void setWxbm(List<String> obmids, int fwFlag) {
+        for(String obmid:obmids){
+            bmDao.setWxbm(obmid,fwFlag);
+        }
     }
 
     @Override

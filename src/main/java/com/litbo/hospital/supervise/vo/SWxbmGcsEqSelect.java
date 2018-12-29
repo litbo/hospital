@@ -1,10 +1,13 @@
-package com.litbo.hospital.supervise.bean;
+package com.litbo.hospital.supervise.vo;
 
-public class SWxbmGcsEq {
+public class SWxbmGcsEqSelect {
     private Integer bgId;
     private String bmId;
+    private String bmName;
     private String userId;
+    private String userXm;
     private Integer eqId;
+    private String eqName;
 
     public Integer getBgId() {
         return bgId;
@@ -35,5 +38,29 @@ public class SWxbmGcsEq {
 
     public void setEqId(Integer eqId) {
         this.eqId = eqId;
+    }
+
+    public String getBmName() {
+        return bmName;
+    }
+
+    public void setBmName(String bmName) {
+        this.bmName = bmName;
+    }
+
+    public String getUserXm() {
+        return userXm;
+    }
+
+    public void setUserXm(String userXm) {
+        this.userXm = userXm;
+    }
+
+    public String getEqName() {
+        return eqName;
+    }
+
+    public void setEqName(String eqName) {
+        this.eqName = eqName;
     }
 }

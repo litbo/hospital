@@ -4,10 +4,7 @@ import com.litbo.hospital.supervise.bean.SGroup;
 import com.litbo.hospital.supervise.bean.SGroupUser;
 import com.litbo.hospital.supervise.vo.GroupUserSelectVO;
 import com.litbo.hospital.supervise.vo.SGroupSelectVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -30,6 +27,9 @@ public interface GroupDao {
     @Select("select group_id, bm_id, group_name, user_id1, create_time, user_id2, sh_time, sh_flag ,sh_yj " +
             "from s_group where sh_flag=0")
     List<SGroup> getYTHGroup();
+    @Select("select group_id, bm_id, group_name, user_id1, create_time, user_id2, sh_time, sh_flag ,sh_yj " +
+            "from s_group where sh_flag=0 and user_id1=#{createId}")
+    List<SGroup> getYTHGroupByCId(String createId);
 
     @Insert("insert into s_group (group_id, bm_id, group_name, user_id1, create_time, user_id2, sh_time, sh_flag,sh_yj) " +
             " values(#{groupId},#{bmId},#{groupName},#{userId1},#{createTime},#{userId2},#{shTime},#{shFlag},#{shYj}) ")
@@ -67,7 +67,11 @@ public interface GroupDao {
             " where gu_id = #{guId}")
     void updateGroupUser(SGroupUser user);
 
-
+    @Select("select emp.user_xm " +
+            " from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) " +
+            " INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) " +
+            " WHERE gw.gw_name=#{gwName} and users.group_id=#{groupId}")
+    String[] getEmpXMByGIdAndGWXm(@Param("groupId") Integer groupId, @Param("gwName") String gwName);
 
 //    SELECT * from s_group_users u INNER JOIN s_emp emp on (u.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (u.gw_id=gw.gw_id)gw_id
 }

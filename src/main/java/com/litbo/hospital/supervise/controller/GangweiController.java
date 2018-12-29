@@ -9,6 +9,8 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/supervise/gwgl")  //行政岗位管理
 @Api(tags = "岗位和岗位职责管理")
@@ -41,12 +43,17 @@ public class GangweiController {
         return Result.success(date);
     }
 
+    @GetMapping("/getGwByGwLevel")
+    public Result getGwByGwLevel(@RequestParam String gw_level){
+        List<SGangwei> date = gangweiService.getGwByGwLevel(gw_level);
+        return Result.success(date);
+    }
+
     @GetMapping("/getGwsByGwZzZt")
     public Result getGwsByGwZzZt(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,
                                @RequestParam Integer gwZzZt){
         PageInfo date = gangweiService.getGwsByGwZzZt(pageNum,pageSize,gwZzZt);
-
         return Result.success(date);
     }
 

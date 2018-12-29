@@ -55,8 +55,8 @@ public interface BmDao {
 
     @Update("update s_bm set bm_id=#{bmId} where obm_id=#{obmId}")
     void setBmIdByOid(@Param("obmId") String obmId,@Param("bmId") String bmId);
-    @Update("update s_bm set wx_flag=1 where obm_id=#{obmId}")
-    void setWxbm(String obmid);
+    @Update("update s_bm set wx_flag=#{fwFlag} where obm_id=#{obmId}")
+    void setWxbm(@Param("obmId")String obmId, @Param("fwFlag")int fwFlag);
 
 
 }
