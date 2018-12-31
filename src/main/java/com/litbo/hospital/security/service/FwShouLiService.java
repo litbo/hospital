@@ -16,10 +16,9 @@ public interface FwShouLiService {
      * 页面会先数据封装
      * @param fwId
      * @param userId
-     * @param slrUserName
      * @return
      */
-    public ShouliIndexVo shouliIndex(String fwId, String userId, String slrUserName);
+    public ShouliIndexVo shouliIndex(String fwId, String userId);
 
     /**
      * 保修单受理

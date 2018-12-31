@@ -2,6 +2,7 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
+import com.litbo.hospital.security.vo.FwInfoVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,7 +25,7 @@ public interface FwWeixiuDao {
             "    values (#{fwId,jdbcType=VARCHAR}, #{xxsbStatus,jdbcType=INTEGER}, #{gzpc,jdbcType=VARCHAR}, \n" +
             "      #{gzyyId,jdbcType=INTEGER}, #{gzmxId,jdbcType=INTEGER}, #{gzbwId,jdbcType=INTEGER}, \n" +
             "      #{gzwxFs,jdbcType=INTEGER}, #{wxgznr,jdbcType=INTEGER}, #{wxrId,jdbcType=VARCHAR}, \n" +
-            "      #{wxsyTime,jdbcType=DOUBLE}, #{wxPrice,jdbcType=DECIMAL}, #{fzwxId,jdbcType=INTEGER}, \n" +
+            "      #{wxsyTime,jdbcType=DOUBLE}, #{wxPrice,jdbcType=DECIMAL}, #{fzwxId,jdbcType=VARCHAR}, \n" +
             "      #{wxjg,jdbcType=VARCHAR}, #{gcsjy,jdbcType=VARCHAR}, #{zjStatus,jdbcType=INTEGER}, \n" +
             "      #{gztjTime,jdbcType=TIMESTAMP}, #{fwksTime,jdbcType=TIMESTAMP}, #{pcwcTime,jdbcType=TIMESTAMP}\n" +
             "      )")
@@ -43,5 +44,14 @@ public interface FwWeixiuDao {
 
     @Select("select * from fw_weixiu where fw_id = #{fwId}")
     public FwWeixiu findWeixiuOne(String fwId);
+
+    @Select("SELECT eq.eq_name,bx.eq_id,bx.bxr_id,emp.user_xm AS bxrName,sl.slr_id,slEmp.user_xm AS slrName,sl.ydwx_time,bx.bx_time,sl.sl_time,\n" +
+            "\twx.fwks_time,wxEmp.user_xm AS wxrName,wxgzyy.wxnrzd_text AS gzyy,wxgzmx.wxnrzd_text AS gzmx \n" +
+            "FROM dbo.fw_baoxiu AS bx,dbo.eq_info AS eq,dbo.s_emp AS emp,dbo.fw_shouli AS sl,\n" +
+            "\tdbo.s_emp AS slEmp,dbo.fw_weixiu AS wx,dbo.s_emp AS wxEmp,dbo.fw_wxnrzd AS wxgzyy,dbo.fw_wxnrzd AS wxgzmx \n" +
+            "WHERE\n" +
+            "\tbx.eq_id = eq.eq_id AND bx.bxr_id = emp.user_id AND sl.id = bx.id AND slEmp.user_id = sl.slr_id AND wx.fw_id = bx.id \n" +
+            "\tAND wxEmp.user_id = wx.wxr_id AND wx.gzyy_id = wxgzyy.id AND wx.gzmx_id = wxgzmx.id AND bx.id = '201812000006'")
+    public FwInfoVo findFwInfo(String fwId);
 
 }

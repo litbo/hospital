@@ -19,6 +19,8 @@ public interface GroupService {
     void shrShGroup(GroupInsertDetailVO groupInsertDetailVO);
     //获取已退回的管理队伍
     PageInfo getYTHGroup(int pageNum, int pageSize);
-
-
+    //通过创建人获得已退回的团队信息
+    PageInfo getYTHGroupByCId(int pageNum, int pageSize, String createId);
+    //获得所有管理部门的基本详情信息
+    PageInfo getGroupsMSGDetail(int pageNum, int pageSize);
 }

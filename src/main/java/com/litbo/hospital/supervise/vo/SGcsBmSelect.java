@@ -1,12 +1,11 @@
-package com.litbo.hospital.supervise.bean;
+package com.litbo.hospital.supervise.vo;
 
-public class SGcsBm {
-
+public class SGcsBmSelect {
     private Integer gbId;
-
     private String userId;
-
+    private String userXm;
     private String bmId;
+    private String bmName;
 
     public Integer getGbId() {
         return gbId;
@@ -30,5 +29,21 @@ public class SGcsBm {
 
     public void setBmId(String bmId) {
         this.bmId = bmId == null ? null : bmId.trim();
+    }
+
+    public String getUserXm() {
+        return userXm;
+    }
+
+    public void setUserXm(String userXm) {
+        this.userXm = userXm;
+    }
+
+    public String getBmName() {
+        return bmName;
+    }
+
+    public void setBmName(String bmName) {
+        this.bmName = bmName;
     }
 }

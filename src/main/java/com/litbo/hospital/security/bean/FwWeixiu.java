@@ -29,7 +29,7 @@ public class FwWeixiu {
 
     private BigDecimal wxPrice;
 
-    private Integer fzwxId;
+    private String fzwxId;
 
     private String wxjg;
 
