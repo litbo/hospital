@@ -5,9 +5,7 @@ import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwWeixiuService;
 import com.litbo.hospital.security.utils.WxGetNameUtils;
-import com.litbo.hospital.security.vo.FwInfoVo;
-import com.litbo.hospital.security.vo.FwVo;
-import com.litbo.hospital.security.vo.WeixiuIndexVo;
+import com.litbo.hospital.security.vo.*;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,25 +39,17 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Autowired
     private EmpDao empDao;
 
+    @Autowired
+    private FwPjqlDao fwPjqlDao;
+
     @Override
-    public FwInfoVo wxqsIndex(String fwId){
-        FwInfoVo fwInfoVo = new FwInfoVo();
-
-        FwBaoxiu fwBaoxiu = fwBaoxiuDao.findFwBaoxiu(fwId);
-        FwVo fwVo = WxGetNameUtils.getName(fwBaoxiu.getBxrId(), fwBaoxiu.getEqId());
-        fwInfoVo.setFwVo(fwVo);
-        fwInfoVo.setFwBaoxiu(fwBaoxiu);
-
-        FwShouli shouli = fwShouLiDao.findShouli(fwId);
-        fwInfoVo.setFwShouli(shouli);
-        fwInfoVo.setSlrUserName(empDao.getEmpByUserId(shouli.getSlrId()).getUserXm());
-
-        FwWeixiu fwWeixiu = fwWeixiuDao.findWeixiuOne(fwId);
-        if(fwWeixiu.getWxrId() != null){
-            fwInfoVo.setGcsName(empDao.getEmpByUserId(fwWeixiu.getWxrId()).getUserXm());
-        }
-
-        return fwInfoVo;
+    public WxqrIndex wxqsIndex(String fwId){
+        WxqrIndex wxqrIndex = new WxqrIndex();
+        FwInfoVo fwInfo = fwWeixiuDao.findFwInfo(fwId);
+        wxqrIndex.setFwInfoVo(fwInfo);
+        List<PjVo> pjVos = fwPjqlDao.selectPjVo(fwId);
+        wxqrIndex.setPjVoList(pjVos);
+        return wxqrIndex;
     }
 
     @Override

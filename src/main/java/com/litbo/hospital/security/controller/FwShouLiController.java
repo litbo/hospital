@@ -29,9 +29,9 @@ public class FwShouLiController {
             /*Session session = SecurityUtils.getSubject().getSession();
             session.getAttribute("");
             session.getAttribute("");*/
-            String userId = "1615925008";
-            String slrName = "2";
-            ShouliIndexVo shouliIndexVo = fwShouLiService.shouliIndex(fwId,userId,slrName);
+            String userId = "1615925023";
+            //String slrName = "";
+            ShouliIndexVo shouliIndexVo = fwShouLiService.shouliIndex(fwId,userId);
             return Result.success(shouliIndexVo);
         } catch (Exception e) {
             e.printStackTrace();
