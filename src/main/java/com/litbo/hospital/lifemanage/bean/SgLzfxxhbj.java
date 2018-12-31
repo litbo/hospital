@@ -9,19 +9,36 @@ import java.math.BigDecimal;
  */
 @Data
 public class SgLzfxxhbj {
+    /**
+     * 主键
+     */
     private String xhbjId;
-
+    /**
+     * 论证分析id
+     */
     private String lzfxId;
-
+    /**
+     * 设备厂商id
+     */
     private Integer sbcsId;
-
+    /**
+     * 型号
+     */
     private String xhbjXh;
-
+    /**
+     * 报价
+     */
     private BigDecimal xhbjBj;
-
-    private String extendOne;
-
-    private String extendTwo;
-
+    /**
+     * 技术参数性能指标
+     */
     private String xhbjJszb;
+    /**
+     * 扩展一
+     */
+    private String extendOne;
+    /**
+     * 扩展二
+     */
+    private String extendTwo;
 }

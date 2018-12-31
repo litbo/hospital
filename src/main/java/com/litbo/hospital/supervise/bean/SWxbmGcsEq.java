@@ -1,9 +1,18 @@
 package com.litbo.hospital.supervise.bean;
 
 public class SWxbmGcsEq {
+    private Integer bgId;
     private String bmId;
     private String userId;
     private Integer eqId;
+
+    public Integer getBgId() {
+        return bgId;
+    }
+
+    public void setBgId(Integer bgId) {
+        this.bgId = bgId;
+    }
 
     public String getBmId() {
         return bmId;

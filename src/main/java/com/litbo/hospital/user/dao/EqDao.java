@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.dao;
 
 import com.litbo.hospital.user.bean.EqInfo;
+import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.provider.EqProvider;
 import com.litbo.hospital.user.vo.EqShowVo;
 import com.litbo.hospital.user.vo.EqVo;
@@ -34,4 +35,18 @@ public interface EqDao {
 
     @Update("UPDATE eq_info SET eq_pm_id =#{eqPmId},eq_sbbh =#{sbbh} WHERE eq_id =#{eqId}")
     Integer setPm(@Param("eqPmId") String eqPmId,@Param("eqId") String eqId,@Param("sbbh") String sbbh);
+    @UpdateProvider(type = EqProvider.class , method = "updateEq")
+    Integer updateEq(EqInfo eqInfo);
+    @Select("SELECT * FROM eq_pm WHERE len(eq_pm_id)=10")
+    List<EqPm> listPms();
+
+    @SelectProvider(type = EqProvider.class , method = "listFlEq")
+    List<EqShowVo> listFlEq();
+    @SelectProvider(type = EqProvider.class , method = "listWFlEq")
+    List<EqShowVo> listWFlEq();
+    @Update("UPDATE eq_info SET eq_pm_id = null , eq_sbbh = null WHERE eq_id = #{eqId}")
+    Integer cancelFl(String eqId);
+
+    @SelectProvider(type = EqProvider.class  , method = "listPmsByPym")
+    List<EqPm> listPmsByPym(@Param("pym") String pym);
 }

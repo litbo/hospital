@@ -17,12 +17,13 @@ public class SZhidu {
 
     private String zdContent;
 
-    private String isBeian;
+    private Integer zdZt;
 
     private Integer syTianshu;
 
     private Integer sySyts;
 
+    private Integer zdXgcs;
     public Integer getZdId() {
         return zdId;
     }
@@ -79,12 +80,12 @@ public class SZhidu {
         this.zdContent = zdContent == null ? null : zdContent.trim();
     }
 
-    public String getIsBeian() {
-        return isBeian;
+    public Integer getZdZt() {
+        return zdZt;
     }
 
-    public void setIsBeian(String isBeian) {
-        this.isBeian = isBeian;
+    public void setZdZt(Integer zdZt) {
+        this.zdZt = zdZt;
     }
 
     public Integer getSyTianshu() {
@@ -101,5 +102,13 @@ public class SZhidu {
 
     public void setSySyts(Integer sySyts) {
         this.sySyts = sySyts;
+    }
+
+    public Integer getZdXgcs() {
+        return zdXgcs;
+    }
+
+    public void setZdXgcs(Integer zdXgcs) {
+        this.zdXgcs = zdXgcs;
     }
 }

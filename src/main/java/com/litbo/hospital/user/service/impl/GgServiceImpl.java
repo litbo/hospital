@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.user.bean.SysGg;
 import com.litbo.hospital.user.dao.GgDao;
 import com.litbo.hospital.user.service.GgService;
+import com.litbo.hospital.user.vo.SysGgVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,11 @@ public class GgServiceImpl implements GgService {
     @Override
     public int checkGg(Integer id) {
         return ggDao.checkGg(id);
+    }
+
+    @Override
+    public SysGgVo getGgById(Integer id) {
+
+        return ggDao.getGgById(id);
     }
 }

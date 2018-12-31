@@ -22,9 +22,9 @@ public interface SgTlPmMapper {
      */
     @Insert({
             "insert into sg_tl_pm (kstl_id, eq_pm_id,kstl_sj)",
-            "values (#{kstlId,jdbcType=VARCHAR}, #{eqPmId,jdbcType=INTEGER},#{kstlSj,jdbcType=TIMESTAMP})"
+            "values (#{kstlId,jdbcType=VARCHAR}, #{eqPmId,jdbcType=VARCHAR},#{kstlSj,jdbcType=TIMESTAMP})"
     })
-    int insertSgTlPm(@Param("kstlId") String kstlId, @Param("eqPmId") Integer pmId, @Param("kstlSj")Date kstlSj);
+    int insertSgTlPm(@Param("kstlId") String kstlId, @Param("eqPmId") String pmId, @Param("kstlSj")Date kstlSj);
 
     /**
      * 通过科室讨论ID查询讨论的品名ID
@@ -38,5 +38,5 @@ public interface SgTlPmMapper {
             "sg_tl_pm\n" +
             "WHERE\n" +
             "sg_tl_pm.kstl_id = #{kstlId}\n")
-    List<Integer> selectSgTlPmPmIdsByTlId(String kstlId);
+    List<String> selectSgTlPmPmIdsByTlId(String kstlId);
 }

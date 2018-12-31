@@ -10,8 +10,8 @@ import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.expression.Ids;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class BmServiceImpl implements BmService {
@@ -26,6 +26,30 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
+    public PageInfo getXBmList(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> date = bmDao.getXBmList();
+        return new PageInfo(date);
+    }
+
+    @Override
+    public PageInfo getYZBmList(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> date = bmDao.getYZBmList();
+        return new PageInfo(date);
+    }
+
+    @Override
+    public List<SBm>  getXBmList() {
+        return bmDao.getXBmList();
+    }
+
+    @Override
+    public List<SBm>  getYZBmList() {
+        return bmDao.getYZBmList();
+    }
+
+    @Override
     public PageInfo getBmListByPid(int pageNum, int pageSize, String pid) {
         PageHelper.startPage(pageNum,pageSize);
         List<SBm> date = bmDao.getBmListByPid(pid);
@@ -34,6 +58,12 @@ public class BmServiceImpl implements BmService {
     @Override
     public SBm getBmByOid(String id) {
         SBm date = bmDao.getBmByOid(id);
+        return date;
+    }
+
+    @Override
+    public SBm getBmByBmId(String bmid) {
+        SBm date = bmDao.getBmBybmid(bmid);
         return date;
     }
 
@@ -71,10 +101,10 @@ public class BmServiceImpl implements BmService {
 
     @Override
     public void setBmsBeto(SetBmVO bmVO) {
-        String new_pbm_id = bmVO.getPbm_id();
-        String[] obm_ids = bmVO.getObm_ids();
+        String new_pbm_id = bmVO.getPbm_id();   //获取父部门
+        String[] obm_ids = bmVO.getObm_ids();   //获取子部门
         for(String obm_id:obm_ids){
-            setBmBeto(obm_id,new_pbm_id);
+            setBmBeto(obm_id,new_pbm_id);       //设置归属
         }
     }
 
@@ -84,8 +114,8 @@ public class BmServiceImpl implements BmService {
         List<SBm> old_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的部门信息
         List<SBm> new_bmListByPid = bmDao.getBmListByPid(new_pbm_id); //获取平级下的部门信息
 
-        SBm old_idmax_mb = getMaxBm(old_bmListByPid);
-        SBm new_idmax_mb = getMaxBm(new_bmListByPid);
+        SBm old_idmax_mb = getMaxBm(old_bmListByPid);    //
+        SBm new_idmax_mb = getMaxBm(new_bmListByPid);    //
 
         String new_bm_id = createNewBmId(new_idmax_mb);
         bmDao.setBmBeto(obm_id,new_bm_id,new_pbm_id);
@@ -98,7 +128,7 @@ public class BmServiceImpl implements BmService {
     }
 
     private String createNewBmId(SBm idmax_mb) {
-        List<String> bmid_cuted = StringCutUtils.stringToList(idmax_mb.getBmId());
+        /**  List<String> bmid_cuted = StringCutUtils.stringToList(idmax_mb.getBmId());
         System.out.println(bmid_cuted);
         int l=0;
         for(String s:bmid_cuted){
@@ -112,22 +142,73 @@ public class BmServiceImpl implements BmService {
         else
             bmid_cuted.add(l-1,Integer.toString(mb));
         bmid_cuted.remove(l);
-        System.out.println(bmid_cuted);
+//        System.out.println(bmid_cuted);
 
         StringBuffer new_bmid = new StringBuffer();
         for(String s:bmid_cuted){
+            new_bmid.append(s);
+        }
+        return new_bmid.toString();  */
+
+        List<Integer> bmid_cuted = StringCutUtils.stringToIntList(idmax_mb.getBmId());
+        System.out.println(bmid_cuted);
+        int l=0;
+        for(Integer s:bmid_cuted){
+            if(s!=0) l++;
+        }
+        System.out.println(l);
+//        18 10 6 0 0 0
+
+        List<String> bmidc = new ArrayList<>();
+        bmid_cuted.set(l-1,bmid_cuted.get(l - 1)+1);
+        for(int j = 0;j<5;j++){
+            Integer teni = bmid_cuted.get(j);
+            String hexi = Integer.toHexString(teni);
+            if(hexi.length()==1){
+                bmidc.add(j,"0"+hexi);
+            }else{
+                bmidc.add(j,hexi);
+            }
+        }
+
+        StringBuffer new_bmid = new StringBuffer();
+        for(String s:bmidc){
             new_bmid.append(s);
         }
         return new_bmid.toString();
     }
 
     private SBm getMaxBm(List<SBm> bms) {
+
         SBm idmaxbm = bms.get(0);
         for (SBm bm:bms){
-            if(Integer.parseInt(bm.getBmId())>Integer.parseInt(idmaxbm.getBmId())){
+            System.out.println(Long.parseLong(bm.getBmId(),16));
+//            if(Integer.parseInt(bm.getBmId())>Integer.parseInt(idmaxbm.getBmId())){
+//                idmaxbm = bm;
+//            }
+            if(Long.parseLong(bm.getBmId(),16)>Long.parseLong(idmaxbm.getBmId(),16)){
                 idmaxbm = bm;
             }
         }
         return idmaxbm;
+    }
+
+    @Override
+    public void setWxbm(List<String> obmids, int fwFlag) {
+        for(String obmid:obmids){
+            bmDao.setWxbm(obmid,fwFlag);
+        }
+    }
+
+    @Override
+    public List<SBm> getWxBms() {
+
+        return bmDao.getWxBms();
+    }
+
+    @Override
+    public List<SBm> getFwxBms() {
+
+        return bmDao.getFwxBms();
     }
 }

@@ -16,21 +16,21 @@ public class LogoController {
     private LogoService logoService;
 
     @RequestMapping("/setLogo")
-    public Result setLogo(@RequestParam("file") MultipartFile multipartFile,SysLogo logo){
+    public Result setLogo(@RequestParam("logoFile") MultipartFile multipartFile,SysLogo logo){
         if(logoService.setLogo(logo,multipartFile)>0){
             return Result.success();
         }
         return Result.error();
     }
     @RequestMapping("/setBbtt")
-    public Result setBbtt(@RequestParam("file") MultipartFile multipartFile,SysLogo logo){
+    public Result setBbtt(@RequestParam("bbtt") MultipartFile multipartFile,SysLogo logo){
         if(logoService.setBbtt(logo,multipartFile)>0){
             return Result.success();
         }
         return Result.error();
     }
     @RequestMapping("/setSbbqtt")
-    public Result setSbbqtt(@RequestParam("file") MultipartFile multipartFile,SysLogo logo){
+    public Result setSbbqtt(@RequestParam("sbbqtt") MultipartFile multipartFile,SysLogo logo){
         if(logoService.setSbbqtt(logo,multipartFile)>0){
             return Result.success();
         }
