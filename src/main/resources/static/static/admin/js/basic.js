@@ -94,7 +94,7 @@ function Type(value) {
 function subUp(value,data) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据)
     //判断必填项是否为空
-    if (!value.data || !value.url) {
+    if (!value.url && (value.switch !=="xhr" && value.switch !=="html" && value.data)) {
         return false;
     }
     //判断是否需要自动获取表单数据(根据input的name属性自动获取所有的数据)
@@ -106,14 +106,16 @@ function subUp(value,data) {
             }else{
                 dataP.value.data[i] = data.field[value.data[i]];
             }
-
+        }
+        for(var names in add){
+            dataP[names] = add[names];
         }
     }
     //判断当前数据上传类型(默认以JQajax提交)
     if (value.switch === "xhr") {//以原生JS形式异步提交数据(基本代码)
-        if (value.data.file) {//！！！！！代码未完善！！！！！
-            var formData = new FormData();
-            formData.append(value.data.name, $(value.data.file)[0].files[0]);
+        //if (value.data.file) {//！！！！！代码未完善！！！！！
+            //var formData = new FormData();
+            //formData.append(value.data.name, $(value.data.file)[0].files[0]);
             //console.log(formData);
             // XMLHttpRequest 对象
             var xhr = new XMLHttpRequest();
@@ -122,45 +124,44 @@ function subUp(value,data) {
                 alert("上传完成!");
             };
             xhr.send(form);
-        }
+        //}
     } else if (value.switch === "html") {//以HTML默认的方式提交数据
         //使用HTML默认提交方式提交数据（使用新建内嵌框架实现不跳转新页面）
         //使用不可见iframe获取返回数据，但由于未知原因(暂未知)无法获取iframe内返回的数据，故目前只能提交则成功
         //form标签无需添加method和url，只需在数据中填写则可以自动渲染
-        var frameName = "framesXXX";
+        var frameName = value.target || "framesXXX";
         $("body").append($("<iframe>").attr({
             "name": frameName,
             "style": "display:none;width:1px;height:1px;",
             "id": "framesX"
         }));
         var $form = $("#form");
-        $form.attr({"method": value.method || "GET", "action": value.url, "target": value.target || frameName});
+        $form.attr({"method": value.method || "GET", "action": value.url, "target": frameName});
         $form[0].submit();
         alert("提交成功！");
         window.location.reload();
     } else {//以ajax形式提交数据(默认)
         //以参数形式调用获取的数据解决异步数据不可外部调用与修改
-        var backData = function (callback) {
-            $.ajax({
-                url: value.url,
-                cache: value.cache || true,
-                method: value.method || "GET",
-                data: dataP || value.data,
-                processData: value.processData || true,
-                contentType: value.contentType,
-                success: callback || function (data) {
-                    //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
-                    if (data.code === 0) {
-                        alert("提交成功！");
-                    } else if (data.code === 1) {
-                        alert("提交失败，请重试！");
-                    }
-                    value.done || value.done()
-                }, error: function (er) {
+        var ajaxOptions = {
+            success:function (data) {
+                //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
+                if (data.code === 0) {
+                    alert("提交成功！");
+                } else if (data.code === 1) {
                     alert("提交失败，请重试！");
-                    console.log(er);
                 }
-            })
+                value.done || value.done();
+            },
+            error: function (er) {
+                alert("提交失败，请重试！");
+                console.log(er);
+                value.fine || value.fine(er);
+            }
+        };
+        var backData = function (callback) {
+            compereData(value,ajaxOptions);
+            value.data = dataP || value.data;
+            $.ajax(value);
         };
         backData(value.success);
     }
