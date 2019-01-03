@@ -26,21 +26,31 @@
         <div class="layui-row">
             <div class="col-xs-12">
                 <fieldset class="layui-elem-field layui-field-title">
-                    <legend>文件版本设置</legend>
+                    <legend>LOGO设置</legend>
                 </fieldset>
             </div>
             <div class="col-xs-12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">LOGO</label>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">选择</label>
                     <div class="layui-input-block">
-                        <input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
+                        <!--<input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">-->
+                    </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">预览</label>
+                    <div class="layui-input-block">
+                        <div class="img_show">
+
+                        </div>
+                        <!--<input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">-->
                     </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="submit" id="sub">提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -52,12 +62,20 @@
 <script>
     renderMod = {
         form:{
-            submit:{
-                filter:"submit",
-                form:{
-                    switch:"html",
-                    url:"#",
-                    data:["logoFile","name"]
+            file:{
+                elem:"#selec1",
+                url:"/logo/setLogo",
+                accept:"images",
+                acceptMime:"image/*",
+                auto:false,
+                bindAction:"#sub",
+                data:{},
+                choose:function(obj){
+                    obj.preview(function(index,file,result){
+                        $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
+                    })
+                },done:function(obj){
+                    //layui.closeAll("loading");
                 }
             }
         }

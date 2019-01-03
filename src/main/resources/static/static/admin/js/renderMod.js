@@ -22,6 +22,12 @@ $(function () {
                     value: today,
                     format: "y-M-d"
                 },//默认的日期选择器
+                nor_up = {
+                    elem:"#up",
+                    multiple:false,
+                    accept:"file"
+
+                },
                 nor_ver = {},//默认添加的表单验证数据
                 //日期选择
                 date = formAction.date,
@@ -31,6 +37,8 @@ $(function () {
                 ver = formAction.ver,
                 //提交选择
                 sub = formAction.submit,
+                //文件上传
+                file = formAction.file,
                 //提交选择
                 eve = formAction.event,
                 //默认不添加选择器
@@ -40,7 +48,17 @@ $(function () {
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
                 if (val.filter && val.options && Type(val.options) === "json") {
-                    form.val(val.filter, val.options);
+                    if(val.get){
+                        val.get.success = function(data){
+                            for(var name in data){
+                                form.val(val.filter, data[name]);
+                            }
+                        };
+                        subUp(val.get)
+                    }else{
+                        form.val(val.filter, val.options);
+                    }
+                    //form.val(val.filter, val.options);
                 } else {
                     console.error("formNormal.js遇到一个无法处理的错误：");
                     console.error("formAction.val参数传递错误,请参考相关文档！");
@@ -49,7 +67,7 @@ $(function () {
 
             //日期选择器渲染
             //支持 默认渲染 单选择器渲染 多选择器渲染
-            if (date !== false) {
+            if (date && date !== false) {
                 //当 data = true 时使用默认的参数渲染数据
                 if (date === true) {
                     a(nor_date);
@@ -94,6 +112,32 @@ $(function () {
                 }
             }
 
+            //文件上传
+            if(file && file !== false){
+                if (file === true) {
+                    //渲染默认上传域
+                    //严重不推荐使用rue
+                    cUp(nor_up);
+                    //渲染单个上传域
+                } else if (Type(file) === "json") {
+                    cUp(file);
+                    //渲染多个上传域
+                } else if (Type(file) === "array") {
+                    for (var ff = 0; ff < file.length; ff++) {
+                        if (Type(file[ff]) === "json") {
+                            cUp(file[ff]);
+                        }
+                    }
+                }
+
+                function cUp(options){
+                    //console.log(options);
+                    upload.render(options);
+                    file.func && file.func();
+                }
+
+            }
+
             //表单按钮点击事件
             if (sub && sub !== false) {
                 //设定固定的提交按钮事件还是所有的提交按钮的事件
@@ -101,42 +145,20 @@ $(function () {
                     //当sub.filter = true时则使用默认的过滤字符，否则使用自定义的字符
                     sub.filter === true ? filter = '(' + normal.filter + ')' : filter = '(' + sub.filter + ')';
                 }
+
                 form.on('submit' + filter, function (data) {
                     //data：表单所有数据,包含内容如下
                     //-----elem:被执行事件的DOM对象（点击的按钮）
                     //-----form:表单dorm组建，没有form标签则不存在
                     //-----field:容器内的所有表单字段 {name: value}
 
-                    var uploadInst = upload.render({
-                        elem: '#test1'
-                        , url: '/upload/'
-                        , before: function (obj) {
-                            //预读本地文件示例，不支持ie8
-                            obj.preview(function (index, file, result) {
-                                $('#demo1').attr('src', result); //图片链接（base64）
-                            });
-                        }
-                        , done: function (res) {
-                            //如果上传失败
-                            if (res.code > 0) {
-                                return layer.msg('上传失败');
-                            }
-                            //上传成功
-                        }
-                        , error: function () {
-                            //演示失败状态，并实现重传
-                            var demoText = $('#demoText');
-                            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-                            demoText.find('.demo-reload').on('click', function () {
-                                uploadInst.upload();
-                            });
-                        }
-                    });
-
+                    //表单提交前处理事件
+                    var bef =true;
+                    bef = (sub.before && sub.before(data));
                     //表单提交事件（处理在subUp函数内部处理）
-                    sub.form && subUp(sub.form, data);
-                    //如果存在函数则执行函数
-                    sub.func || sub.func(data);
+                    sub.form && bef &&subUp(sub.form, data);
+                    //表单提交后处理事件(不推荐使用，推荐使用ajax success/error处理)
+                    sub.func && sub.func(data);
                     //阻止按钮默认事件
                     return false;
                 })

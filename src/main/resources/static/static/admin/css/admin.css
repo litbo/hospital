@@ -2083,11 +2083,17 @@ html {
 .padRight .layui-table-tool-temp {
   padding-right: 0;
 }
-.layui-layer-shade{
+.layui-layer-shade {
   z-index: 666!important;
 }
-.layui-layer-page .hidden-xs{
+.layui-layer-page .hidden-xs {
   display: block!important;
+}
+a.layui-btn-fluid {
+  margin-top: 35px;
+}
+.layui-input-block img {
+  max-height: 200px;
 }
 @media (max-width: 768px) {
   .main-layout-side {
@@ -2614,3 +2620,4 @@ html {
     margin-left: 80px;
   }
 }
+/*# sourceMappingURL=admin.css.map */
