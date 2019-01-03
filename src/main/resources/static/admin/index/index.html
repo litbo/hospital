@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>医疗设备智能管理系统</title>
@@ -59,8 +60,10 @@
             </div>
             <!--顶部导航-->
             <div class="menus">
-                <div class="menus_con">
+                <div class="layui-nav">
+                    <div class="menus_con">
 
+                    </div>
                 </div>
             </div>
             <!--用户信息-->
@@ -95,7 +98,7 @@
         <div class="main-layout-body">
             <!--tab 切换-->
             <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true" style="background:#fff;">
-                <ul class="layui-tab-title" style="margin-right:40px;">
+                <ul class="layui-tab-title navs" style="margin-right:40px;">
                     <li class="layui-this welcome" id="refresh_home">系统主页</li>
                 </ul>
                 <!--右侧折叠副列表-->
@@ -125,36 +128,44 @@
     <!--遮罩-->
     <div class="main-mask"></div>
 </div>
-<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/list.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/nav.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    $("#refresh_home").on('click',function(){
-        var homes = document.getElementById('home') ;
-        if(!$("#refresh_home").hasClass("layui-this")){
-            try{
-                homes.contentWindow.location.reload();
-            }catch (er){
-                alert("当前页面显示不正确，可能会出现显示错乱，请使用服务器访问当前页面！");
-                console.error("此功能无法正常在本地使用，请使用服务器访问！");
-            }
+    layui.use('element',function(){
+        var element = layui.element;
+    });
 
-        }
-    })
     window.onload = function(){
-        if($(".layui-nav-item a span").length <= 0){
+            var homes = document.getElementById('home');
+        //判断当前页面渲染是否正确，不正确的话将刷新页面重新渲染
+        if($('.layui-nav-tree .layui-nav-child').length >0 && $('.layui-nav-tree .layui-nav-child').prev().children("span").length <= 0){
             location.reload();
         }
+        //判断主页点击时渲染是否正确，不正确重载主页
+        $("#refresh_home").click(function(){
+            if($(this).hasClass("layui-this") || $.cookie("ww") > 100 ){
+                return false;
+            }
+            setTimeout(function(){
+                try{
+                    homes.contentWindow.location.reload();
+                }catch (er){
+                    alert("当前页面显示不正确，可能会出现显示错乱，请使用服务器访问当前页面！");
+                    console.error("此功能无法正常在本地使用，请使用服务器访问！");
+                }
+            },10)
+        });
+        //展开第一项列表
         try{
             var f = $.cookie("f");
             $.cookie("f", null);
             if(f !== null && typeof Number(f) === "number"){
                 $("a[data-id='"+Number(f)+"']")[0].click();
-            }
+            }//读取cookies跳转页面
         }catch(er){
-            console.log("no COOKIES")
+            console.log("no COOKIES");
         }
     }
 </script>

@@ -208,7 +208,7 @@ function addMaps(con, x) {//con:包含位置地图的容器名 x:当前页面的
 
 function addNav(con) {//con包含导航菜单的容器名
     for (var i = 0; i < nav_list.length; i++) {
-        con.append($("<div>").attr("class", "menu-btn")
+        con.append($("<li>").attr("class", "layui-nav-item menu-btn")
             .append($("<a>").attr("href", "?p=" + nav_list[i].page)
                 .append($("<i>").attr("class", nav_list[i].icon))
                 .append($("<p>").attr("class", "menu-tit").html(nav_list[i].title))

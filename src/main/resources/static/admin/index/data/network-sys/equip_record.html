@@ -23,32 +23,47 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="hidden-xs">
-        检索：
-        <div class="layui-inline">
-            <input class="layui-input" name="search" id="test-table-demoReload" autocomplete="off">
+    <div class="mini_select">
+        <div class="layui-input-inline">
+            <select name="modules66" >
+                <option value="day">日</option>
+                <option value="month">月</option>
+                <option value="year">年</option>
+            </select>
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
     </div>
+    <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-input-inline">
+            <select name="modules" lay-verify="required" lay-search="">
+                <option value="">输入搜索部门</option>
+                <option value="1">CT室</option>
+                <option value="2">核磁公正室</option>
+                <option value="3">摄片室</option>
+                <option value="4">内外导管室</option>
+                <option value="5">心外ICU</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="品名拼音码" autocomplete="off">
+        </div>
+        <div class="layui-input-inline">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
+        </div>
+    </form>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">过程记录</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="record">过程记录</a>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
-                 {field: 'equip_room', title: '所在科室', minWidth: 150, sort: true}
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {field: 'equip_room', title: '所在科室', minWidth: 150, sort: true}
                 , {field: 'equip_number', title: '设备编号', minWidth: 150}
                 , {field: 'equip_name', title: '设备名称',width:"35%", minWidth: 150}
                 , {field: 'equip_id', title: '型号', minWidth: 150, sort: true}
@@ -73,14 +88,24 @@
                     "equip_wtime": "17H",
                     "equip_long": "14H"
                 }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
+            , done: function (obj) {
+                tableFunc({
+                    "obj":obj,
+                    "toolFunc":{
+                        "filter":"table1",
+                        "event":"record",
+                        "title":"详细内容",
+                        "type":2,
+                        "content":"../../repair.html"
+                    }
+                })
             }
-        });
-    });
+        },
+        date :{
+            elem : "#date1"
+        }
+    }
+
 </script>
 </body>
 

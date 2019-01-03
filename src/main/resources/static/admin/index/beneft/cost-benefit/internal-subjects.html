@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>内置科目</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <link rel="stylesheet" href="./treeNode/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+
+    <script type="text/javascript" src="./treeNode/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./treeNode/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="./treeNode/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="./treeNode/js/jquery.ztree.exedit.js"></script>
+</head>
+
+<body>
+    <div class="layui-row"  style="padding: 10px;margin:0px auto;">
+        <div class="col-xs-12 layui-elem-quote layui-text">
+            <h2>内置科目展示</h2>
+        </div>
+        <div class="col-xs-12">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    <!--
+    var setting = {
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            selectedMulti: false
+        },
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        edit: {
+            enable: true
+        }
+    };
+
+    var zNodes =[
+        {id:1, pId:0, name:"科目||", open:false},
+
+        {id:11, pId:1, name:"费用类||"},
+        {id:12, pId:1, name:"收入类||"},
+        {id:13, pId:1, name:"账款类||"},
+
+        {id:5001, pId:11, name:"医疗业务成本II5001"},
+        {id:5201, pId:11, name:"科教项目支出||5201"},
+        {id:5301, pId:11, name:"管理费用||5301"},
+        {id:5302, pId:11, name:"其他支出||5302"},
+
+        {id:4001, pId:12, name:"医疗业务收入||4001"},
+        {id:4201, pId:12, name:"科教项目收入||4201"},
+        {id:4301, pId:12, name:"其他收入||4301"},
+
+        {id:1001, pId:13, name:"库存现金||1001"},
+        {id:1002, pId:13, name:"银行存款||1002"},
+        {id:2201, pId:13, name:"应付票据||2201"},
+
+        {id:500101,pId:5001,name:"人员经费||500101"},
+        {id:500102,pId:5001,name:"卫生材料费||500102"},
+        {id:500103,pId:5001,name:"药品费||500103"},
+        {id:500104,pId:5001,name:"固定资产折旧||500104"},
+        {id:500105,pId:5001,name:"无形资产摊销||500105"},
+        {id:500106,pId:5001,name:"医疗风险基金提取||500106"},
+        {id:500109,pId:5001,name:"其它费用||500109"},
+
+        {id:520101,pId:5201,name:"科研项目支出||520101"},
+        {id:520102,pId:5201,name:"教学项目支出||520102"},
+
+        {id:530201,pId:5302,name:"辅助科室分摊||530201"},
+
+        {id:400101,pId:4001,name:"门诊收入||400101"},
+        {id:400102,pId:4001,name:"住院收入||400102"},
+
+        {id:420101,pId:4201,name:"科研项目收入||420101"},
+        {id:420102,pId:4201,name:"教学项目收入||420102"},
+
+        {id:100101,pId:1001,name:"现金||100101"},
+        {id:100102,pId:1001,name:"现金支票||100102"},
+
+        {id:100201,pId:1002,name:"转账支票||100201"},
+        {id:100202,pId:1002,name:"电汇||100202"},
+
+        {id:220101,pId:2201,name:"承兑汇票||220101"},
+
+        {id:50010101,pId:500101,name:"基本工资||50010101"},
+        {id:50010102,pId:500101,name:"岗位||50010102"},
+        {id:50010103,pId:500101,name:"津贴||50010103"},
+        {id:50010104,pId:500101,name:"奖金||50010104"},
+        {id:50010105,pId:500101,name:"其它||50010105"},
+
+        {id:50010401,pId:500104,name:"医疗设备折旧||50010401"},
+        {id:50010402,pId:500104,name:"附属设备折旧||50010402"},
+        {id:50010403,pId:500104,name:"占用房屋折旧||50010403"},
+        {id:50010404,pId:500104,name:"办公设备折旧||50010404"},
+        {id:50010405,pId:500104,name:"环境设施折旧||50010405"},
+        {id:50010406,pId:500104,name:"其它折旧||50010406"},
+
+        {id:50010901,pId:500109,name:"维保费||50010901"},
+        {id:50010902,pId:500109,name:"电费||50010902"},
+        {id:50010903,pId:500109,name:"水费||50010903"},
+        {id:50010904,pId:500109,name:"维修费||50010904"},
+        {id:50010909,pId:500109,name:"其它||50010909"}
+    ];
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    });
+
+    var newCount = 1;
+    function addHoverDom(treeId, treeNode) {
+        var sObj = $("#" + treeNode.tId + "_span");
+        if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+        var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+            + "' title='add node' onfocus='this.blur();'></span>";
+        sObj.after(addStr);
+        var btn = $("#addBtn_"+treeNode.tId);
+        if (btn) btn.bind("click", function(){
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+            return false;
+        });
+    };
+    function removeHoverDom(treeId, treeNode) {
+        $("#addBtn_"+treeNode.tId).unbind().remove();
+    };
+    //-->
+</script>
+</html>

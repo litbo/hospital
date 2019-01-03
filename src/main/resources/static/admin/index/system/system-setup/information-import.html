@@ -15,7 +15,6 @@
     <script src="../../../../static/admin/js/basic.js"></script>
     <style type="text/css">
         .title{
-            width:90%;
             height:50px;
             background-color:#eeeeee;
             margin:0 auto;
@@ -33,12 +32,32 @@
     <div class="col-xs-12">
         <div class="title">设备信息导入</div>
     </div>
+    <div class="col-xs-12">
+        <div class="layui-upload" style="margin-top:60px;">
+            <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
+            <button type="button" class="layui-btn" id="startUploadFile">提交文件</button>
+        </div>
+    </div>
 </div>
 
 
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
+layui.use('upload',function(){
+   var upload = layui.upload;
 
+    //上传文件
+    upload.render({
+        elem:'#selectFile',
+        url:'/upload/',
+        auto:false,
+        bindAction:'#startUploadFile',
+        size:1024*40,//限制文件大小，单位kb
+        done:function(res){
+            console.log(res);
+        }
+    })
+})
 </script>
 </body>
 </html>

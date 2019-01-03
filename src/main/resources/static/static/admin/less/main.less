@@ -51,7 +51,7 @@ html{
         }
     }
     .layui-nav-itemed>a{
-        background: @sideColor!important;
+        background: #4E5465;
     }
     .layui-nav-item a i{
       margin-right: 10px;
@@ -71,7 +71,7 @@ html{
             line-height: @40px;
             height: @40px;
             float: left;
-          font-size:20px;
+            font-size:20px;
             margin-right: 10px;
             margin-left: 30px;
             background: url("../images/l-line.png") left center no-repeat;
@@ -81,8 +81,9 @@ html{
         background-color: @sideColor;
     }
     .layui-nav-tree .layui-nav-child .layui-this>a{
-            background-color: #56595a;
-            color: @blue;
+      background-color:#4E5465;
+            //background-color: #56595a;
+            //color: @blue;
     }
     .layui-nav-tree .layui-this>a{
         background-color: rgba(0, 181, 249, 0.8);
@@ -106,7 +107,7 @@ html{
 .layui-nav-tree .layui-nav-item{line-height: 55px;}
 .menu-btn{position: relative;}
 .menu-btn i{font-size: 1.6rem !important;color: #8f94a1;margin-top: 20px;}
-.menu-btn a{width: 100%;height: 100%;display: block;}
+.menu-btn a{width: 100%;height: 100%;display: block;padding:0!important;}
 .menu-btn1 span{font-size: 1.8rem !important;}
 .menu-tit {
     position: absolute;
@@ -164,7 +165,9 @@ html{
             color: #00b5f9;
         }
         .layui-nav-bar{
-            display: none;
+            //display: none;
+          height: 2px;
+          background-color: #177fea;
         }
         .layui-this:after{
             height: 0;
@@ -452,6 +455,75 @@ html{
   width: auto;
 }
 
+.addBtn{
+  margin-bottom:5px;
+}
+
+.sign{
+  color:red;
+  margin-left:5px;
+}
+.layui-field-title{
+  margin-top: 20px;
+}
+
+.layui-tab-content{
+  padding:0!important;
+}
+
+.subBtn{
+  width: 180px;
+  margin: 25px auto;
+}
+.subBtn>div{
+  margin:0!important;
+}
+
+.input_area{
+  min-height:38px;
+  max-height:100px;
+}
+
+.layui-input-block button{
+  margin: 7px 10px;
+}
+
+.mini_select input{
+  width:60px;
+  height:30px;
+}
+
+.layui-colla-content{
+  overflow: hidden;
+}
+
+.layui-field-title{
+  margin-top:20px;
+}
+
+.hidden{
+  display: none;
+}
+
+.showBlock{
+  display: block;
+}
+
+.showInline{
+  display: inline;
+}
+
+.padRight .layui-table-tool-temp{
+  padding-right: 0;
+}
+
+.layui-layer-shade{
+  z-index: 666!important;
+}
+.layui-layer-page .hidden-xs{
+  display: block!important;
+}
+
 @media (max-width: 768px) {
   .main-layout-side{
     position: fixed;
@@ -511,5 +583,19 @@ html{
     width:100px;
     bottom:5px;
     right:5px;
+  }
+  .layui-table-page>div{
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 36px!important;
+  }
+  .xs-100{
+    width:100%!important;
+  }
+  .mar10-0{
+    margin:10px 0!important;
+  }
+  .pad0-10{
+    padding: 0 10px!important;
   }
 }

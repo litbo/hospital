@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>作息时间</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style type="text/css">
+        .title{
+            height:50px;
+            background-color:#eeeeee;
+            border-radius:5px;
+            margin-top:20px;
+            line-height:50px;
+            font-size:18px;
+        }
+        .layui-form-item{
+            margin-top:30px;
+        }
+        .layui-form-label{
+            width:150px;
+            padding: 8px 10px!important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layui-row">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-row">
+            <div class="col-xs-12">
+                <div class="title"><span style="margin-left:15px;">上午</span></div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上午上班时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" autocomplete="off" value="4" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上午下班时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" autocomplete="" value="14:00:00" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-row">
+            <div class="col-xs-12">
+                <div class="title"><span style="margin-left:15px;">下午</span></div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">下午上班时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" autocomplete="off" value="14:00:00" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">下午下班时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" autocomplete="" value="18:00:00" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+</script>
+</body>
+</html>

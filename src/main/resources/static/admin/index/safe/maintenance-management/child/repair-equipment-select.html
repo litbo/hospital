@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>报修设备-选择</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class=" hidden-xs"  id="hideXs">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-input-inline xs-100 mar10-0 pad0-10">
+                <input class="layui-input" name="" placeholder="院内编号" autocomplete="off">
+            </div>
+            <div class="layui-input-inline xs-100 mar10-0 pad0-10" style="width: 120px;">
+                <select id="department" name="" lay-search="">
+                    <option value="" >请选择部门</option>
+                    <option value="0000"  >aaa</option>
+                    <option value="0001"  >病案室</option>
+                    <option value="0002"  >病案质控室</option>
+                    <option value="1061100"  >鼻病门诊</option>
+                    <option value="0003"  >B超室</option>
+                    <option value="0004"  >病房临床检验室</option>
+                    <option value="0005"  >病房消化内镜室</option>
+                    <option value="0243"  >保管(固定资产)</option>
+                    <option value="0242"  >保管(维修配件)</option>
+                    <option value="1020807"  >瘢痕门诊</option>
+                    <option value="0006"  >保健科全科医学病区</option>
+                    <option value="0329"  >保健科全科医学</option>
+                    <option value="0007"  >保健科全科医学门诊</option>
+                    <option value="0008"  >病理科</option>
+                    <option value="0381"  >便民科</option>
+                    <option value="1051300"  >白内障门诊</option>
+                    <option value="0360"  >变态反应科</option>
+                    <option value="0361"  >变态反应科病房</option>
+                    <option value="0009"  >变态反应（哮喘）门诊</option>
+                    <option value="0010"  >保卫处</option>
+                    <option value="0324"  >不孕不育(男)门诊</option>
+                    <option value="0325"  >不孕不育(女)门诊</option>
+                    <option value="1010808"  >痤疮门诊</option>
+                    <option value="0011"  >肠道检验室</option>
+                    <option value="0288"  >肠道门诊</option>
+                    <option value="0012"  >产房</option>
+                    <option value="1040401"  >产房病区</option>
+                    <option value="0369"  >出国人员</option>
+                    <option value="1040804"  >产后康复门诊</option>
+                    <option value="0013"  >产科二病区</option>
+                    <option value="1041200"  >产科急诊</option>
+                    <option value="0014"  >产科门诊</option>
+                    <option value="0015"  >产科三病区</option>
+                    <option value="0016"  >产科一病区</option>
+                    <option value="2250100"  >产科营养门诊</option>
+                    <option value="0017"  >产前筛查实验室</option>
+                    <option value="1040805"  >产前诊断门诊</option>
+                    <option value="0313"  >创伤骨科</option>
+                    <option value="0018"  >创伤骨科病房</option>
+                    <option value="1021502"  >创伤骨科门诊</option>
+                    <option value="1021503"  >创伤骨科手术室</option>
+                    <option value="1340200"  >超声介入门诊</option>
+                    <option value="0019"  >CT室</option>
+                    <option value="0020"  >财务处</option>
+                    <option value="0021"  >档案室</option>
+                    <option value="0241"  >档案/信息化管理</option>
+                    <option value="0022"  >第二餐厅</option>
+                    <option value="0350"  >导管室</option>
+                    <option value="0023"  >电工组</option>
+                    <option value="0024"  >电话室</option>
+                    <option value="0377"  >调离</option>
+                    <option value="0025"  >大楼管理科</option>
+                    <option value="0274"  >内科系统</option>
+                    <option value="0026"  >东区病房手术室</option>
+                    <option value="0027"  >东区超声科</option>
+                    <option value="0028"  >东区消毒供应中心</option>
+                    <option value="0029"  >动态心电图室</option>
+                    <option value="0030"  >电梯组</option>
+                    <option value="0031"  >党委办公室</option>
+                    <option value="0293"  >外科系统</option>
+                    <option value="0390"  >动物实验室</option>
+                    <option value="2070002"  >动物实验室</option>
+                    <option value="1630000"  >多学科综合门诊</option>
+                    <option value="1010604"  >癫痫门诊</option>
+                    <option value="0032"  >第一餐厅</option>
+                    <option value="1021205"  >大隐静脉曲张门诊</option>
+                    <option value="0033"  >打字室</option>
+                    <option value="0237"  >电子设备科</option>
+                    <option value="2140100"  >电子设备科</option>
+                    <option value="0034"  >耳鼻喉电测听室</option>
+                    <option value="1060800"  >耳鼻喉科内镜室</option>
+                    <option value="0035"  >耳鼻喉科实验室</option>
+                    <option value="1060700"  >耳鼻喉科特检室</option>
+                    <option value="0252"  >耳鼻喉听力检测室</option>
+                    <option value="1061300"  >耳病门诊</option>
+                    <option value="0327"  >耳鼻咽喉科</option>
+                    <option value="0036"  >耳鼻咽喉科二病区</option>
+                    <option value="0037"  >耳鼻咽喉科门诊</option>
+                    <option value="0038"  >耳鼻咽喉科一病区</option>
+                    <option value="0039"  >儿内科门诊</option>
+                    <option value="1031000"  >儿科内分泌门诊</option>
+                    <option value="1032100"  >儿科神经门诊</option>
+                    <option value="0040"  >儿科输液室</option>
+                    <option value="1031200"  >儿科手足口病门诊</option>
+                    <option value="1032200"  >儿科肾脏遗尿门诊</option>
+                    <option value="0320"  >儿科哮喘慢咳门诊</option>
+                    <option value="1032000"  >儿科消化门诊</option>
+                    <option value="1030900"  >儿科心血管门诊</option>
+                    <option value="0322"  >儿科血液病门诊</option>
+                    <option value="0349"  >二楼超声科</option>
+                    <option value="0319"  >儿内科</option>
+                    <option value="0041"  >儿内科二病区</option>
+                    <option value="0042"  >儿内科三病区</option>
+                    <option value="0043"  >儿内科一病区</option>
+                    <option value="0044"  >儿童保健门诊</option>
+                    <option value="1031500"  >儿童康复门诊</option>
+                    <option value="1031700"  >儿童口腔保健门诊</option>
+                    <option value="1031800"  >儿童听力保健门诊</option>
+                    <option value="1030800"  >儿童心理行为障碍门诊</option>
+                    <option value="1031900"  >儿童眼保健门诊</option>
+                    <option value="0323"  >妇产科</option>
+                    <option value="1010407"  >房颤门诊</option>
+                    <option value="0047"  >房产物业科</option>
+                    <option value="1010203"  >肺功能室</option>
+                    <option value="1010207"  >肺结节肺癌专病门诊</option>
+                    <option value="0048"  >妇科二病区</option>
+                    <option value="0049"  >妇科美容整形手术室</option>
+                    <option value="0050"  >妇科门诊</option>
+                    <option value="0051"  >妇科腔镜培训基地</option>
+                    <option value="0052"  >妇科三病区</option>
+                    <option value="0053"  >妇科一病区</option>
+                    <option value="0054"  >妇科治疗室</option>
+                    <option value="0265"  >肿瘤内二科</option>
+                    <option value="2520000"  >放疗科</option>
+                    <option value="0055"  >放疗科病区</option>
+                    <option value="0266"  >放疗科二病区</option>
+                    <option value="0271"  >放疗科三病区</option>
+                    <option value="0256"  >放疗科一病区</option>
+                    <option value="0362"  >放疗室</option>
+                    <option value="0056"  >法律事务处</option>
+                    <option value="1010303"  >腹膜透析门诊</option>
+                    <option value="0289"  >发热门诊</option>
+                    <option value="0286"  >风湿免疫科</option>
+                    <option value="0057"  >风湿免疫科病房</option>
+                    <option value="0058"  >风湿免疫科门诊</option>
+                    <option value="10n0000"  >放射系统</option>
+                    <option value="0366"  >缝衣房</option>
+                    <option value="0380"  >法医科</option>
+                    <option value="20m0000"  >分院系统</option>
+                    <option value="0059"  >分子生物学检验科</option>
+                    <option value="0263"  >肛肠科</option>
+                    <option value="0060"  >肛肠科病房</option>
+                    <option value="0061"  >肛肠科门诊</option>
+                    <option value="0299"  >肝胆外科</option>
+                    <option value="0062"  >肝胆外科二病区</option>
+                    <option value="0063"  >肝胆外科门诊</option>
+                    <option value="0064"  >肝胆外科一病区</option>
+                    <option value="0309"  >关节外科门诊</option>
+                    <option value="0065"  >公共卫生科</option>
+                    <option value="0066"  >工会</option>
+                    <option value="0364"  >挂号室</option>
+                    <option value="0308"  >关节外科</option>
+                    <option value="0067"  >关节外科病房</option>
+                    <option value="0068"  >锅炉房</option>
+                    <option value="1011700"  >感染性疾病科</option>
+                    <option value="0291"  >感染性疾病科病房</option>
+                    <option value="0069"  >感染性疾病科门诊</option>
+                    <option value="0310"  >骨伤外科</option>
+                    <option value="0311"  >骨伤外科病房</option>
+                    <option value="0312"  >骨伤外科门诊</option>
+                    <option value="1031600"  >高危儿门诊</option>
+                    <option value="0070"  >干细胞移植中心</option>
+                    <option value="1051100"  >干眼病门诊</option>
+                    <option value="0071"  >供氧房</option>
+                    <option value="0370"  >供应科</option>
+                    <option value="1021504"  >骨与软组织肿瘤门诊</option>
+                    <option value="10r0000"  >供应系统</option>
+                    <option value="0072"  >高压氧</option>
+                    <option value="0073"  >核磁共振室</option>
+                    <option value="0074"  >HIV实验室</option>
+                    <option value="0240"  >会计</option>
+                    <option value="0075"  >护理部</option>
+                    <option value="1250100"  >华茂医院</option>
+                    <option value="0076"  >核素制剂室</option>
+                    <option value="0276"  >呼吸内科</option>
+                    <option value="0077"  >呼吸内科病房</option>
+                    <option value="0255"  >呼吸内科二病区</option>
+                    <option value="0078"  >呼吸内科门诊</option>
+                    <option value="0254"  >呼吸内科一病区</option>
+                    <option value="0079"  >呼吸重症监护室</option>
+                    <option value="0292"  >呼吸重症监护室</option>
+                    <option value="0080"  >核医学科</option>
+                    <option value="1021203"  >颈动脉狭窄门诊</option>
+                    <option value="0368"  >接待室</option>
+                    <option value="0247"  >机电制冷</option>
+                    <option value="0081"  >经管办</option>
+                    <option value="0082"  >基建处</option>
+                    <option value="10e0000"  >急救系统</option>
+                    <option value="0083"  >急诊ICU</option>
+                    <option value="0084"  >急救中心手术室</option>
+                    <option value="0339"  >急救中心外科病房</option>
+                    <option value="0244"  >计量检定室</option>
+                    <option value="0358"  >静脉用药调配中心</option>
+                    <option value="1340500"  >介入超声科</option>
+                    <option value="0307"  >介入治疗科</option>
+                    <option value="0085"  >介入治疗科病区</option>
+                    <option value="0086"  >介入治疗门诊</option>
+                    <option value="0087"  >计算机中心</option>
+                    <option value="1050900"  >近视眼手术门诊</option>
+                    <option value="0287"  >家庭病床科</option>
+                    <option value="1022703"  >肩痛门诊</option>
+                    <option value="0245"  >机械维修室</option>
+                    <option value="0088"  >教育处</option>
+                    <option value="0089"  >检验中心</option>
+                    <option value="1010204"  >戒烟门诊</option>
+                    <option value="10k0000"  >检验系统</option>
+                    <option value="1060500"  >急诊耳鼻喉科门诊</option>
+                    <option value="1041100"  >急诊妇产科门诊</option>
+                    <option value="1020707"  >减重及代谢外科门诊</option>
+                    <option value="0090"  >急诊检验室</option>
+                    <option value="0091"  >急诊科</option>
+                    <option value="0092"  >急诊科病房</option>
+                    <option value="1110600"  >急诊科门诊</option>
+                    <option value="1070104"  >急诊口腔科门诊</option>
+                    <option value="0337"  >急诊内科门诊</option>
+                    <option value="1021803"  >甲状旁腺门诊</option>
+                    <option value="0253"  >急诊手术室</option>
+                    <option value="0314"  >脊柱外科</option>
+                    <option value="0093"  >脊柱外科病房</option>
+                    <option value="0338"  >急诊外科门诊</option>
+                    <option value="1021602"  >脊柱外科门诊</option>
+                    <option value="1021800"  >甲状腺外科</option>
+                    <option value="0315"  >甲状腺外科病区</option>
+                    <option value="1021802"  >甲状腺外科门诊</option>
+                    <option value="1050400"  >急诊眼科门诊</option>
+                    <option value="0246"  >空调净化</option>
+                    <option value="0167"  >库房</option>
+                    <option value="0343"  >康复科门诊</option>
+                    <option value="0371"  >开发区</option>
+                    <option value="0342"  >康复心理医学科</option>
+                    <option value="0094"  >康复心理医学科病房</option>
+                    <option value="1070106"  >口腔颌面外科门诊</option>
+                    <option value="0345"  >口腔技工</option>
+                    <option value="0328"  >口腔科</option>
+                    <option value="0095"  >口腔科病房</option>
+                    <option value="0096"  >口腔科技工</option>
+                    <option value="0097"  >口腔科门诊</option>
+                    <option value="0344"  >口腔门诊</option>
+                    <option value="1070105"  >口腔正畸门诊</option>
+                    <option value="0098"  >科研处</option>
+                    <option value="1010506"  >淋巴瘤门诊</option>
+                    <option value="1021702"  >淋巴水肿医护联合门诊</option>
+                    <option value="0357"  >药学研究室GCP办公室</option>
+                    <option value="0099"  >临床药学科</option>
+                    <option value="2250200"  >临床营养科</option>
+                    <option value="0100"  >老干部处</option>
+                    <option value="0101"  >理疗室</option>
+                    <option value="0341"  >理疗室</option>
+                    <option value="0383"  >莱山分院</option>
+                    <option value="0389"  >莱山分院迁建项目部</option>
+                    <option value="0378"  >临时工合同制</option>
+                    <option value="2360400"  >临时工</option>
+                    <option value="20j0000"  >离退休人员</option>
+                    <option value="0375"  >离休</option>
+                    <option value="0102"  >木工组</option>
+                    <option value="0374"  >灭菌制剂室</option>
+                    <option value="0297"  >泌尿外科</option>
+                    <option value="0103"  >泌尿外科二病区</option>
+                    <option value="0104"  >泌尿外科门诊</option>
+                    <option value="0262"  >泌尿外科三病区</option>
+                    <option value="0318"  >泌尿外科三病区</option>
+                    <option value="0105"  >泌尿外科一病区</option>
+                    <option value="0106"  >泌尿外科研究所</option>
+                    <option value="0316"  >泌尿系结石门诊</option>
+                    <option value="0107"  >免疫室</option>
+                    <option value="0108"  >门诊部</option>
+                    <option value="1461100"  >门诊调剂科</option>
+                    <option value="2210300"  >门诊服务中心</option>
+                    <option value="0109"  >门诊检验科东区</option>
+                    <option value="0110"  >麻醉科东区</option>
+                    <option value="0268"  >麻醉科西区</option>
+                    <option value="0111"  >麻醉科中区</option>
+                    <option value="0112"  >门诊临床检验室</option>
+                    <option value="0113"  >门诊手术室</option>
+                    <option value="0114"  >门诊消化内镜室</option>
+                    <option value="0115"  >西药房</option>
+                    <option value="0116"  >中药房</option>
+                    <option value="0117"  >脑电图室</option>
+                    <option value="1410100"  >尿毒症、血液透析门诊</option>
+                    <option value="0280"  >内分泌科</option>
+                    <option value="0118"  >内分泌科病房</option>
+                    <option value="0119"  >内分泌科门诊</option>
+                    <option value="0120"  >内科门诊</option>
+                    <option value="1022002"  >男科门诊</option>
+                    <option value="1230100"  >内科治疗室</option>
+                    <option value="0321"  >脑瘫门诊</option>
+                    <option value="0121"  >PCR室</option>
+                    <option value="0122"  >PET-CT中心</option>
+                    <option value="1010805"  >皮肤激光美容门诊</option>
+                    <option value="0123"  >皮肤激光室</option>
+                    <option value="0281"  >皮肤科</option>
+                    <option value="0124"  >皮肤科病房</option>
+                    <option value="0125"  >皮肤科门诊</option>
+                    <option value="1010605"  >帕金森病门诊</option>
+                    <option value="0126"  >普通材料供应科</option>
+                    <option value="0385"  >普通材料供应科</option>
+                    <option value="0235"  >普通设备科</option>
+                    <option value="2140400"  >普通设备科</option>
+                    <option value="0295"  >普通外科门诊</option>
+                    <option value="0355"  >普通制剂室</option>
+                    <option value="0294"  >普外儿外科</option>
+                    <option value="0127"  >普外儿外科病房</option>
+                    <option value="0258"  >培训部</option>
+                    <option value="1010406"  >起搏器随访门诊</option>
+                    <option value="0128"  >汽车班</option>
+                    <option value="1050800"  >全飞秒激光门诊</option>
+                    <option value="1051600"  >全飞秒屈光手术室</option>
+                    <option value="1051400"  >青光眼门诊</option>
+                    <option value="1022800"  >器官移植科</option>
+                    <option value="0391"  >器官移植科病区</option>
+                    <option value="0129"  >器官移植中心</option>
+                    <option value="1520100"  >器官移植中心门诊</option>
+                    <option value="2510000"  >腔镜培训中心</option>
+                    <option value="1022003"  >前列腺肿瘤门诊</option>
+                    <option value="20e0000"  >其他科室</option>
+                    <option value="20h0000"  >其他人员</option>
+                    <option value="0130"  >人工肾</option>
+                    <option value="0131"  >人事处</option>
+                    <option value="1020703"  >乳腺病、胃肠道肿瘤外科门诊</option>
+                    <option value="1020705"  >乳腺科门诊</option>
+                    <option value="1021700"  >乳腺外科</option>
+                    <option value="0132"  >乳腺外科病区</option>
+                    <option value="2210400"  >入院准备中心</option>
+                    <option value="0134"  >设备科待报废库</option>
+                    <option value="0239"  >设备科库</option>
+                    <option value="2140300"  >设备综合科</option>
+                    <option value="1021904"  >食道裂孔疝门诊</option>
+                    <option value="0135"  >收费处</option>
+                    <option value="0136"  >生化室</option>
+                    <option value="0137"  >审计处</option>
+                    <option value="0138"  >神经科ICU</option>
+                    <option value="1010603"  >神经科记忆障碍门诊</option>
+                    <option value="1012400"  >神经科重症监护室</option>
+                    <option value="1012402"  >神经科重症监护室手术室</option>
+                    <option value="0279"  >神经内科</option>
+                    <option value="0139"  >神经内科病房</option>
+                    <option value="0140"  >神经内科二病区</option>
+                    <option value="0141"  >神经内科门诊</option>
+                    <option value="0306"  >神经外科</option>
+                    <option value="0142"  >神经外科二病区</option>
+                    <option value="0143"  >神经外科二病区(停)</option>
+                    <option value="0317"  >神经外科二病区(停)</option>
+                    <option value="0144"  >神经外科门诊</option>
+                    <option value="0145"  >神经外科一病区</option>
+                    <option value="0384"  >试剂中心</option>
+                    <option value="0305"  >伤口治疗中心(普通)</option>
+                    <option value="1020805"  >伤口治疗中心(PICC)</option>
+                    <option value="0269"  >肾内科</option>
+                    <option value="0146"  >肾内科病房</option>
+                    <option value="0147"  >肾内科门诊</option>
+                    <option value="0148"  >摄片室</option>
+                    <option value="0387"  >膳食科</option>
+                    <option value="0388"  >膳食科办公室</option>
+                    <option value="0149"  >烧伤门诊</option>
+                    <option value="0150"  >碎石室</option>
+                    <option value="10h0000"  >手术系统</option>
+                    <option value="0303"  >烧伤整形美容科</option>
+                    <option value="0151"  >烧伤整形美容科病房</option>
+                    <option value="0304"  >烧伤整形美容科门诊</option>
+                    <option value="0330"  >涉外门诊</option>
+                    <option value="0152"  >生物芯片实验室</option>
+                    <option value="0153"  >生物治疗室</option>
+                    <option value="0154"  >声像室</option>
+                    <option value="2070001"  >声像室</option>
+                    <option value="0155"  >输液室</option>
+                    <option value="0300"  >手足外科</option>
+                    <option value="0156"  >手足外科病房</option>
+                    <option value="0301"  >骨伤外科门诊</option>
+                    <option value="1020603"  >手足外科门诊</option>
+                    <option value="0157"  >生殖医学科</option>
+                    <option value="0158"  >生殖医学科病房</option>
+                    <option value="0267"  >生殖医学科手术室</option>
+                    <option value="1020809"  >体表肿瘤门诊</option>
+                    <option value="2231200"  >停车场</option>
+                    <option value=""  >te</option>
+                    <option value="0367"  >托儿所</option>
+                    <option value="1010807"  >脱发门诊</option>
+                    <option value="1011203"  >痛风门诊</option>
+                    <option value="0159"  >体检检验室</option>
+                    <option value="2401300"  >体检科乳腺触诊成像室</option>
+                    <option value="10p0000"  >特检系统</option>
+                    <option value="1060900"  >头颈肿瘤门诊</option>
+                    <option value="0160"  >体检中心</option>
+                    <option value="1340100"  >体检中心B超室</option>
+                    <option value="2400600"  >体检中心耳鼻喉科</option>
+                    <option value="2400400"  >体检中心妇科</option>
+                    <option value="2400100"  >体检中心基础检查室</option>
+                    <option value="2400800"  >体检中心口腔科</option>
+                    <option value="2400200"  >体检中心内科</option>
+                    <option value="2400700"  >体检中心皮肤科</option>
+                    <option value="2401100"  >体检中心乳透室</option>
+                    <option value="2401200"  >体检中心摄片室</option>
+                    <option value="2400300"  >体检中心外科</option>
+                    <option value="1370100"  >体检中心心电图室</option>
+                    <option value="2400500"  >体检中心眼科</option>
+                    <option value="0283"  >糖尿病病房</option>
+                    <option value="1021204"  >糖尿病足门诊</option>
+                    <option value="0282"  >糖尿病中心</option>
+                    <option value="0161"  >推拿门诊</option>
+                    <option value="0162"  >图书馆</option>
+                    <option value="1022600"  >疼痛科</option>
+                    <option value="1022601"  >疼痛科病房</option>
+                    <option value="1022602"  >疼痛科治疗室</option>
+                    <option value="1011800"  >疼痛科门诊</option>
+                    <option value="0376"  >退休</option>
+                    <option value="0373"  >停薪留职</option>
+                    <option value="0163"  >外宾保健病房</option>
+                    <option value="1021903"  >胃肠道间质瘤门诊</option>
+                    <option value="0379"  >外出服务</option>
+                    <option value="0257"  >微创介入门诊</option>
+                    <option value="0272"  >胃肠外二科</option>
+                    <option value="0164"  >胃肠外二科病区</option>
+                    <option value="0045"  >胃肠外一科</option>
+                    <option value="0046"  >胃肠外一科病区</option>
+                    <option value="1021902"  >胃肠外一科门诊</option>
+                    <option value="1020706"  >胃肠肿瘤外科门诊</option>
+                    <option value="10a0000"  >五管系统</option>
+                    <option value="1020605"  >腕踝疾病门诊</option>
+                    <option value="0165"  >物价管理科</option>
+                    <option value="0166"  >外科门诊</option>
+                    <option value="1240100"  >外科治疗室</option>
+                    <option value="0248"  >物流传输</option>
+                    <option value="0168"  >污水处理</option>
+                    <option value="1012000"  >问题奶粉患儿门诊</option>
+                    <option value="0169"  >物资采购供应处</option>
+                    <option value="1010804"  >性病门诊</option>
+                    <option value="0170"  >细胞室</option>
+                    <option value="0171"  >宣传处</option>
+                    <option value="1010208"  >哮喘咳嗽专病门诊</option>
+                    <option value="0172"  >心电图室</option>
+                    <option value="0296"  >普通外科、小儿外科门诊</option>
+                    <option value="1020808"  >血管瘤门诊</option>
+                    <option value="0259"  >血管外科</option>
+                    <option value="0173"  >血管外科病房</option>
+                    <option value="0174"  >血管外科门诊</option>
+                    <option value="0275"  >消化内科</option>
+                    <option value="0175"  >消化内科病房</option>
+                    <option value="0176"  >消化内科门诊</option>
+                    <option value="0177"  >微生物室</option>
+                    <option value="0178"  >血库</option>
+                    <option value="0179"  >修理组</option>
+                    <option value="0180"  >心理咨询门诊</option>
+                    <option value="2231300"  >项目部</option>
+                    <option value="0181"  >心内导管室</option>
+                    <option value="1640000"  >血尿联合门诊</option>
+                    <option value="0251"  >西区病房手术室</option>
+                    <option value="0182"  >西区消毒供应中心</option>
+                    <option value="0183"  >新生儿病区</option>
+                    <option value="0359"  >新生儿神经听觉保健中心</option>
+                    <option value="1051200"  >斜视弱视视光门诊</option>
+                    <option value="1650000"  >胸痛联合门诊</option>
+                    <option value="1022900"  >心外二科</option>
+                    <option value="0392"  >心外二科病区</option>
+                    <option value="0184"  >心外ICU</option>
+                    <option value="1020404"  >心外ICU手术室</option>
+                    <option value="0270"  >心外科</option>
+                    <option value="0298"  >胸外科</option>
+                    <option value="0185"  >心外科病房</option>
+                    <option value="0186"  >胸外科病房</option>
+                    <option value="0187"  >心外门诊</option>
+                    <option value="0188"  >胸外门诊</option>
+                    <option value="0189"  >心血管超声室</option>
+                    <option value="0277"  >心血管内科</option>
+                    <option value="0190"  >心血管内科CCU</option>
+                    <option value="0191"  >心血管内科二病区</option>
+                    <option value="0192"  >心血管内科门诊</option>
+                    <option value="0393"  >心血管内科特需病区</option>
+                    <option value="0193"  >心血管内科一病区</option>
+                    <option value="0194"  >信息科</option>
+                    <option value="0372"  >下乡/外出进修/帮忙</option>
+                    <option value="0347"  >心胸外科门诊</option>
+                    <option value="0195"  >洗衣房</option>
+                    <option value="1061000"  >眩晕门诊</option>
+                    <option value="0278"  >血液内科</option>
+                    <option value="0196"  >血液内科病房</option>
+                    <option value="0261"  >血液内科二病区</option>
+                    <option value="0197"  >血液内科门诊</option>
+                    <option value="0198"  >血液学检验科</option>
+                    <option value="2000000"  >行政后勤</option>
+                    <option value="20a0000"  >行政后勤</option>
+                    <option value="0199"  >医疗保险处</option>
+                    <option value="0200"  >院长办公室</option>
+                    <option value="1040803"  >遗传咨询门诊</option>
+                    <option value="1051000"  >眼底病门诊</option>
+                    <option value="1022700"  >运动医学科</option>
+                    <option value="1022702"  >运动医学科门诊</option>
+                    <option value="0273"  >院方</option>
+                    <option value="0201"  >孕妇学校</option>
+                    <option value="1061200"  >咽喉疾病门诊</option>
+                    <option value="0202"  >药剂科</option>
+                    <option value="0203"  >药检室</option>
+                    <option value="10t0000"  >医技系统</option>
+                    <option value="0326"  >眼科</option>
+                    <option value="0204"  >眼科病房</option>
+                    <option value="1050700"  >眼眶病门诊</option>
+                    <option value="1050500"  >眼科激光门诊</option>
+                    <option value="0205"  >眼科门诊</option>
+                    <option value="1050600"  >眼科视光门诊</option>
+                    <option value="0206"  >眼科准分子治疗中心</option>
+                    <option value="1051500"  >眼科整形美容门诊</option>
+                    <option value="1000000"  >医疗科室</option>
+                    <option value="0365"  >医疗用品供应部</option>
+                    <option value="0207"  >院内感染科</option>
+                    <option value="0208"  >药品供应科</option>
+                    <option value="10v0000"  >药品系统</option>
+                    <option value="0386"  >烟台康泰置业有限公司</option>
+                    <option value="0209"  >医务处</option>
+                    <option value="0210"  >药物临床试验机构办公室</option>
+                    <option value="0346"  >院外门诊</option>
+                    <option value="1461000"  >药学部</option>
+                    <option value="1010806"  >银屑病门诊</option>
+                    <option value="0234"  >医学工程处</option>
+                    <option value="0238"  >影像设备科</option>
+                    <option value="2140200"  >影像设备科</option>
+                    <option value="0250"  >医学装备管理委员会</option>
+                    <option value="0211"  >医用材料供应科</option>
+                    <option value="2250300"  >营养减肥门诊</option>
+                    <option value="0212"  >营养科</option>
+                    <option value="1011900"  >营养门诊</option>
+                    <option value="0213"  >营养食堂</option>
+                    <option value="0264"  >招标采购管理办公室</option>
+                    <option value="0214"  >资产调配库</option>
+                    <option value="1040402"  >助产士门诊</option>
+                    <option value="0382"  >职工科</option>
+                    <option value="0236"  >综合科</option>
+                    <option value="0331"  >综合科</option>
+                    <option value="0332"  >综合科病房</option>
+                    <option value="0290"  >灾害事故医疗救护队</option>
+                    <option value="0215"  >综合运行班</option>
+                    <option value="0216"  >针灸门诊</option>
+                    <option value="0217"  >质控办</option>
+                    <option value="0218"  >总控室</option>
+                    <option value="0219"  >肿瘤放疗科门诊</option>
+                    <option value="0220"  >质量管理处</option>
+                    <option value="0221"  >肿瘤内二科病房</option>
+                    <option value="0284"  >肿瘤内一科</option>
+                    <option value="0222"  >肿瘤内一科病房</option>
+                    <option value="0223"  >肿瘤内科门诊</option>
+                    <option value="1012500"  >肿瘤内三科</option>
+                    <option value="0260"  >肿瘤内三科病区</option>
+                    <option value="0363"  >资料室</option>
+                    <option value="0302"  >肿瘤外科门诊</option>
+                    <option value="0224"  >中区病房手术室</option>
+                    <option value="0340"  >注射室</option>
+                    <option value="0225"  >总务处</option>
+                    <option value="1020604"  >周围神经门诊</option>
+                    <option value="0226"  >中心摆药室</option>
+                    <option value="0354"  >中心摆药室二</option>
+                    <option value="0353"  >中心摆药室一</option>
+                    <option value="0249"  >中心供氧</option>
+                    <option value="1020806"  >整形美容激光门诊</option>
+                    <option value="0227"  >中心实验室</option>
+                    <option value="1100500"  >中西医老年病门诊</option>
+                    <option value="0336"  >中西医门诊</option>
+                    <option value="1100300"  >中西医肾病门诊</option>
+                    <option value="0333"  >中医</option>
+                    <option value="0228"  >住院处</option>
+                    <option value="1461200"  >住院调剂科</option>
+                    <option value="0334"  >中医科病房</option>
+                    <option value="0229"  >中医门诊</option>
+                    <option value="1090500"  >中医乳腺病门诊</option>
+                    <option value="0351"  >住院药房</option>
+                    <option value="0230"  >住院药房二</option>
+                    <option value="0352"  >住院药房一</option>
+                    <option value="0356"  >中药制剂室</option>
+                    <option value="10c0000"  >中医、中西医</option>
+                    <option value="0335" >中医中西医结合科</option>
+                    <option value="0231" >中医中西医结合科病房</option>
+                    <option value="0348" >组织配型组</option>
+                    <option value="0285" >重症医学科</option>
+                    <option value="0232" >重症医学科病房东区</option>
+                    <option value="0233" >重症医学科病房中区</option>
+                </select>
+            </div>
+            <div class="layui-input-inline xs-100 mar10-0 pad0-10">
+                <input class="layui-input" name="" placeholder="设备名称拼音码" autocomplete="off">
+            </div>
+            <div class="layui-input-inline xs-100 mar10-0 pad0-10">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
+            </div>
+        </form>
+    </div>
+</script>
+<script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"radio"}
+                , {field: 'department', title: '部门', minWidth: 120}
+                , {field: 'equ_id', title: '设备编号', minWidth: 150}
+                , {field: 'hospital_id', title: '院内编号', minWidth: 120}
+                , {field: 'equ_name', title: '设备名称', minWidth: 120}
+                , {field: 'equ_brand', title: '品牌', minWidth: 120}
+                , {field: 'equ_model', title: '型号', minWidth: 100}
+                , {field: 'specifications', title: '规格', minWidth: 100}
+                , {field: 'start_date', title: '启用日期', minWidth: 120}
+            ]]
+            , "data": [
+                {
+                    "department": '病案室',          //部门
+                    "equ_id": "17090830149044",      //设备编号
+                    "hospital_id": "90007289",       //院内编号
+                    "equ_name": "计算机主机",        //设备名称
+                    "equ_brand": "5",                //品牌
+                    "equ_model": "启天M4600",        //型号
+                    "specifications": "启天M4600",   //规格
+                    "start_date": "2017-09-29"      //启用日期
+                }]
+            , done: function (obj) {
+                tableFunc({
+                    "obj":obj,
+                    "toolFunc":{
+                        tool:"toolbar",
+                        title:"数据查找",
+                        event:"dataSearch",
+                        content:$("#hideXs")
+                    }
+                })
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>原始记录</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="hidden-xs" id="moreBar">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="date" lay-verify="date" placeholder="开始时间" autocomplete="off" class="layui-input">
+            </div>
+            <span>-</span>
+            <div class="layui-input-inline">
+                <input type="text" name="date1" id="date1" lay-verify="date" placeholder="结束时间" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <input class="layui-input" name="search" placeholder="联网仪编号" autocomplete="off">
+            </div>
+            <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>
+</script>
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"checkbox"}
+                , {field: 'equip_room', title: '所在科室', minWidth: 150, sort: true}
+                , {field: 'equip_number', title: '设备编号', minWidth: 150,event:"openLink"}
+                , {field: 'equip_short', title: '资产编号', minWidth: 150}
+                , {field: 'equip_name', title: '设备名称',width:"30%", minWidth: 150}
+                , {field: 'netequip_number', title: '联网仪编号', minWidth: 150}
+                , {field: 'receive_time', title: '收包时间', minWidth: 200, sort: true}
+                , {field: 'data_bag', title: '数据包', minWidth: 150}
+            ]]
+            , "data": [
+                {
+                    "equip_room":"核磁共振室",
+                    "equip_number":"160232810001",
+                    "equip_short":"MRI",
+                    "equip_name":"设备1",
+                    "netequip_number":"88888888",
+                    "receive_time":"2018-12-1 00:00:00",
+                    "data_bag":"10",
+                    "link":"./welcome.html",
+                    "messages":[
+                        {
+                            name:"名称",
+                            value:"6666666"
+                        },
+                        {
+                            name:"时间",
+                            value:"666666668888"
+                        }
+                    ]
+                },{
+                    "equip_room":"CT室",
+                    "equip_number":"031233030001",
+                    "equip_short":"CT",
+                    "equip_name":"设备1",
+                    "netequip_number":"88888888",
+                    "receive_time":"2018-12-1 00:00:00",
+                    "data_bag":"10"
+                },{
+                    "equip_room":"心外ICU",
+                    "equip_number":"061222114004",
+                    "equip_short":"监护仪",
+                    "equip_name":"设备1",
+                    "netequip_number":"88888888",
+                    "receive_time":"2018-12-1 00:00:00",
+                    "data_bag":"10"
+                },{
+                    "equip_room":"CT室",
+                    "equip_number":"071033030001",
+                    "equip_short":"CT",
+                    "equip_name":"设备1",
+                    "netequip_number":"88888888",
+                    "receive_time":"2018-12-1 00:00:00",
+                    "data_bag":"10"
+                },{
+                    "equip_room":"摄片室",
+                    "equip_number":"091233015002",
+                    "equip_short":"DR",
+                    "equip_name":"设备1",
+                    "netequip_number":"88888888",
+                    "receive_time":"2018-12-1 00:00:00",
+                    "data_bag":"10"
+                },{
+                    "equip_room":"心内导管室",
+                    "equip_number":"121233015001",
+                    "equip_short":"DSA",
+                    "equip_name":"设备1",
+                    "netequip_number":"88888888",
+                    "receive_time":"2018-12-1 00:00:00",
+                    "data_bag":"10"
+                }]
+            , done: function (obj) {
+                tableFunc({
+                    "obj":obj,
+                    "addMsg":2,
+                    "addLink":"table1"
+                })
+            }
+        },
+        date :{
+            elem : "#date1",
+            type : "datetime"
+        }
+    }
+</script>
+</body>
+
+</html>

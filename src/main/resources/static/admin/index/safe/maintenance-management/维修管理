@@ -1,0 +1,74 @@
+一、设备维修
+
+二、维修合同
+
+三、维修配件
+
+四、维修发票
+    1、维修发票登记（invoice-registration.html）
+        child:
+            维修单号-选择（ maintenance-number.html）
+                "data": [
+                                {
+                                    "department": 'B超室',        //所在部门
+                                    "equ_id": "030515610730",     //维修单号
+                                    "equ_name": "诊断床",         //设备名称
+                                    "equ_model": "HB-150Y",       //型号
+                                    "specifications": "20",       //规格
+                                    "repair_price": "2000"        //维修费
+                                }
+                        ]
+            使用科室直接院外报修（exteralcourt-repair.html）
+                a、报修设备-选择(repair-equipment-select.html)
+                    "data": [
+                                    {
+                                        "department": '病案室',          //部门
+                                        "equ_id": "17090830149044",      //设备编号
+                                        "hospital_id": "90007289",       //院内编号
+                                        "equ_name": "计算机主机",        //设备名称
+                                        "equ_brand": "5",                //品牌
+                                        "equ_model": "启天M4600",        //型号
+                                        "specifications": "启天M4600",   //规格
+                                        "start_date": "2017-09-29"      //启用日期
+                                    }
+                             ]
+                b、开票单位-选择(issuing-office-select.html)
+                    "data": [
+                                    {
+                                        "maintainer": '安利（中国）日用品有限公司烟台分销中心',       //维修商
+                                        "contacts": "xxxxx",                                         //联系人
+                                        "phone": "18132565441",                                      //联系人电话
+                                        "email": "88888888888@sina.com",                            //Email地址
+                                        "Manufacturer_id": "4ac29222-3255-11e7-ac85-000c291e4751",  //厂商ID
+                                    }
+                             ]
+
+    2、维修发票单核(invoice-audit.html)
+        "data": [
+                        {
+                            "repair_num": "20181200003",       //维修单号
+                            "repair_equi": "TDP治疗机",         //维修设备
+                            "invoice_num": "1231231231231231",            //发票号
+                            "invoice_amount": "40.0",       //发票金额
+                            "register_person": "Admin",     //登记人
+                            "register_time": "2018-12-11 18:58:06", //登记时间
+                            "eqId": "10000"              //设备id，不显示，用于点击审核按钮传入到下个页面
+                        }
+                ]
+        child:
+            审核（examine.html）
+
+    3、维修发票查询(invoice-inquiry.html)
+         "data": [
+                        {
+                            "repair_num": "20181200003",       //维修单号
+                            "repair_equi": "TDP治疗机",         //维修设备
+                            "invoice_num": "1231231231231231",            //发票号
+                            "invoice_amount": "40.0",       //发票金额
+                            "register_person": "Admin",     //登记人
+                            "register_time": "2018-12-11 18:58:06", //登记时间
+                            "examine_person": "Admin",     //审核人
+                            "examine_time": "2018-12-11 18:58:06" //审核时间
+                        }
+                 ]
+    已完成;
