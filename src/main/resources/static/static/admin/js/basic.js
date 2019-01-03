@@ -445,8 +445,8 @@ function tableFunc() {
     <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 });*/
 
-    document.write("<script type='text/javascript' data-version='x2' src='"+window.location.origin+"/hospital/static/admin/layui/layui.js'></script>");
-    document.write("<script type='text/javascript' data-version='x2' src='"+window.location.origin+"/hospital/static/admin/js/renderMod.js'></script>");
+    document.write("<script type='text/javascript' data-version='x2' src='"+window.location.origin+"/static/admin/layui/layui.js'></script>");
+    document.write("<script type='text/javascript' data-version='x2' src='"+window.location.origin+"/static/admin/js/renderMod.js'></script>");
 
 
 /*
