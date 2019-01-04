@@ -37,4 +37,9 @@ public class EmpServiceImpl implements EmpService {
     public SBm getBmByEmpId(String empId) {
         return empDao.getBmByEmpId(empId);
     }
+
+    @Override
+    public SEmp getEmpsById(String id) {
+        return empDao.getEmpsById(id);
+    }
 }

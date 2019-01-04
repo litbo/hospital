@@ -10,6 +10,8 @@ public interface EmpService {
     List<SEmp> getWxEmps();
     //通过部门获取员工
     List<SEmp> getEmpsByBmId(String bmId);
+    //通过员工id获取员工信息
+    SEmp getEmpsById(String id);
     //保存员工
     void saveEmp(SEmp emp);
     //删除员工
