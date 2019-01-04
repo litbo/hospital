@@ -36,7 +36,7 @@ public class addPm {
     @RequestMapping("/add")
     public Result add() {
     /* public static void main (String args[]){*/
-        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\user.xlsx");
+        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\医疗器械分类编码68【20181210】.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
         try {
@@ -60,7 +60,7 @@ public class addPm {
             System.out.println(listToMap(lists, list));
             List<Map<String, Object>> mapList = listToMap(lists, list);
             for (Map<String, Object> map : mapList) {
-                /*User user = parseMap2Object(map, User.class);*/
+                /*SUser user = parseMap2Object(map, SUser.class);*/
                 EqPm eqPm = parseMap2Object(map,EqPm.class);
                 String pid = eqPm.getEqPmId().substring(0,eqPm.getEqPmId().length()-2);
                 eqPm.setPid(pid);

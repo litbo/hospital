@@ -4,6 +4,7 @@ package com.litbo.hospital.user.dao.provider;
 import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.vo.SelectEqVo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 import java.lang.reflect.Field;
@@ -79,7 +80,8 @@ public class EqProvider {
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
                 "\te.eq_qysj,\n" +
-                "\tb.bm_name \n" +
+                "\tb.bm_name  " +
+                "  e.eq_syzt " +
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
@@ -134,16 +136,17 @@ public class EqProvider {
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
                 "\te.eq_qysj,\n" +
+                "   e.eq_syzt" +
                 "\tb.bm_name \n" +
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
                 "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id\n" +
                 "WHERE 1=1" );
-        if(selectEqVo.getBmName()!=null)  sql.append(" and bm_name Like #{bmName}");
-        if(selectEqVo.getEqPym()!=null) sql.append(" and eq_pym Like #{eqPym}");
-        if(selectEqVo.getEqSbbh()!=null)  sql.append(" and eq_sbbh LIKE #{eqSbbh}" );
-        if(selectEqVo.getEqZcbh()!=null)  sql.append(" and eq_zcbh Like #{eqZcbh}");
+        if(StringUtils.isNotBlank(selectEqVo.getBmName()))sql.append(" and bm_name Like #{bmName}");
+        if(StringUtils.isNotBlank(selectEqVo.getEqPym())) sql.append(" and eq_pym Like #{eqPym}");
+        if(StringUtils.isNotBlank(selectEqVo.getEqSbbh()))sql.append(" and eq_sbbh LIKE #{eqSbbh}" );
+        if(StringUtils.isNotBlank(selectEqVo.getEqZcbh()))sql.append(" and eq_zcbh Like #{eqZcbh}");
         return sql.toString();
 
     }
@@ -352,7 +355,7 @@ public class EqProvider {
 
     public String listPmsByPym(String pym){
         StringBuffer sql = new StringBuffer("select * from eq_pm where 1=1");
-        if(pym!=null)  sql.append(" and pym Like #{pym}");
+        if(StringUtils.isNotBlank(pym))  sql.append(" and pym Like #{pym}");
         sql.append(" and len(eq_pm_id)=10");
         return sql.toString();
 

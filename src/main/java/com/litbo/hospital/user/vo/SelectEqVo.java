@@ -8,6 +8,7 @@ import lombok.Data;
  *  @version :
  * * @author : ljl
 **/
+@Data
 public class SelectEqVo {
 
     private String bmName;
@@ -17,37 +18,5 @@ public class SelectEqVo {
     private String eqZcbh;
 
 
-    public String getBmName() {
-        return bmName;
-    }
 
-    public void setBmName(String bmName) {
-        this.bmName = "%"+bmName+"%";
-    }
-
-    public String getEqPym() {
-        return eqPym;
-    }
-
-    public void setEqPym(String eqPym) {
-        this.eqPym ="%"+ eqPym + "%";
-    }
-
-
-
-    public String getEqSbbh() {
-        return eqSbbh;
-    }
-
-    public void setEqSbbh(String eqSbbh) {
-        this.eqSbbh = "%"+eqSbbh+"%";
-    }
-
-    public String getEqZcbh() {
-        return eqZcbh;
-    }
-
-    public void setEqZcbh(String eqZcbh) {
-        this.eqZcbh = "%"+eqZcbh+"%";
-    }
 }
