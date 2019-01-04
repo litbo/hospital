@@ -45,4 +45,6 @@ public interface EmpDao {
     @Select("select s_bm.obm_id,s_bm.bm_id,s_bm.bm_name " +
             "from s_emp INNER JOIN s_bm on(s_emp.bm_id=s_bm.bm_id) where s_emp.user_id = #{empId}")
     SBm getBmByEmpId(String empId);
+    @Select("select * from s_emp where user_id = #{id}")
+    SEmp getEmpsById(String id);
 }

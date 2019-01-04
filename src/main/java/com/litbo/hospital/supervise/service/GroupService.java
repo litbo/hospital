@@ -23,4 +23,6 @@ public interface GroupService {
     PageInfo getYTHGroupByCId(int pageNum, int pageSize, String createId);
     //获得所有管理部门的基本详情信息
     PageInfo getGroupsMSGDetail(int pageNum, int pageSize);
+    //获得未成立管理团队的部门
+    PageInfo listWclGroupBm(int pageNum, int pageSize);
 }
