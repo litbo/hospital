@@ -19,7 +19,7 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table" lay-filter="table1"></table>
+        <table id="table" lay-filter=""></table>
     </div>
 </div>
 
@@ -33,7 +33,7 @@
                     <option value="">全部</option>
                     <option value="">低风险</option>
                     <option value="">中风险</option>
-                    <option value="" selected="selected">高风险</option>
+                    <option value="" selected>高风险</option>
                 </select>
             </div>
         <div class="layui-inline">
@@ -46,87 +46,72 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">风险估计</a>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'equip_number', title: '设备编号',width:"15%", minWidth: 150}
-                , {field: 'equip_name', title: '设备名称', minWidth: 200}
-                , {field: 'standard', title: '规格', minWidth: 150, sort: true}
-                , {field: 'model-number', title: '型号', minWidth: 150, sort: true}
-                , {field: 'use-department', title: '使用科室', minWidth: 200, sort: true}
-                , {field: 'functional-analysis', title: '临床用途分析', minWidth: 150, sort: true}
-                , {field: 'feature-analysis', title: '管理特征分析', minWidth: 150, sort: true}
-                , {fixed:'right',width: 100,align:'center',toolbar: "#bar"}
-            ]]
-            , "data": [
-                {
-                    "equip_number":"15033685422001",
-                    "equip_name":"宝宝洗浴",
-                    "standard":"",
-                    "model-number":"KGW/BB",
-                    "use-department":"产科三病区",
-                    "functional-analysis":"",
-                    "feature-analysis":"",
-                    "link": "./show_messages.html"
-                },{
-                    "equip_number":"15033685422001",
-                    "equip_name":"宝宝洗浴",
-                    "standard":"",
-                    "model-number":"KGW/BB",
-                    "use-department":"产科三病区",
-                    "functional-analysis":"",
-                    "feature-analysis":"",
-                },{
-                    "equip_number":"17083682413001",
-                    "equip_name":"电脑中频药物导入治疗仪",
-                    "standard":"",
-                    "model-number":"",
-                    "use-department":"康复心理医学科病房",
-                    "functional-analysis":"",
-                    "feature-analysis":"",
-                },{
-                    "equip_number":"15033685422001",
-                    "equip_name":"电脑中频药物导入治疗仪",
-                    "standard":"",
-                    "model-number":"",
-                    "use-department":"康复心理医学科病房",
-                    "functional-analysis":"",
-                    "feature-analysis":"",
-                },{
-                    "equip_number":"15033685422001",
-                    "equip_name":"呼吸机",
-                    "standard":"",
-                    "model-number":"Transport",
-                    "use-department":"神经科ICU",
-                    "functional-analysis":"",
-                    "feature-analysis":"",
-                },{
-                    "equip_number":"15033685422001",
-                    "equip_name":"呼吸机",
-                    "standard":"",
-                    "model-number":"Transport",
-                    "use-department":"神经科ICU",
-                    "functional-analysis":"",
-                    "feature-analysis":"",
-                }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
-            }
-        });
-    });
+addTable ={
+    table:{
+        cols: [[ //表头
+            {type:"checkbox"}
+            , {field: 'equip_number', title: '设备编号',width:"15%", minWidth: 150}
+            , {field: 'equip_name', title: '设备名称', minWidth: 200}
+            , {field: 'standard', title: '规格', minWidth: 150, sort: true}
+            , {field: 'model-number', title: '型号', minWidth: 150, sort: true}
+            , {field: 'use-department', title: '使用科室', minWidth: 200, sort: true}
+            , {field: 'functional-analysis', title: '临床用途分析', minWidth: 150, sort: true}
+            , {field: 'feature-analysis', title: '管理特征分析', minWidth: 150, sort: true}
+            , {fixed:'right',width: 100,align:'center',toolbar: "#bar"}
+        ]]
+        , "data": [
+            {
+                "equip_number":"15033685422001",
+                "equip_name":"宝宝洗浴",
+                "standard":"",
+                "model-number":"KGW/BB",
+                "use-department":"产科三病区",
+                "functional-analysis":"",
+                "feature-analysis":""
+            },{
+                "equip_number":"15033685422001",
+                "equip_name":"宝宝洗浴",
+                "standard":"",
+                "model-number":"KGW/BB",
+                "use-department":"产科三病区",
+                "functional-analysis":"",
+                "feature-analysis":""
+            },{
+                "equip_number":"15033685422001",
+                "equip_name":"宝宝洗浴",
+                "standard":"",
+                "model-number":"KGW/BB",
+                "use-department":"产科三病区",
+                "functional-analysis":"",
+                "feature-analysis":""
+            },{
+                "equip_number":"15033685422001",
+                "equip_name":"宝宝洗浴",
+                "standard":"",
+                "model-number":"KGW/BB",
+                "use-department":"产科三病区",
+                "functional-analysis":"",
+                "feature-analysis":""
+            },{
+                "equip_number":"15033685422001",
+                "equip_name":"宝宝洗浴",
+                "standard":"",
+                "model-number":"KGW/BB",
+                "use-department":"产科三病区",
+                "functional-analysis":"",
+                "feature-analysis":""
+            }]
+        , done: function (obj) {
+            tableFunc({
+                "obj":obj,
+                "addMsg":2,
+                "addLink":"table1"
+            })
+        }
+    }
+}
 </script>
 </body>
 

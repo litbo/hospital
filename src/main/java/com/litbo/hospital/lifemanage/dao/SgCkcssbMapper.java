@@ -1,10 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgCkcssb;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ public interface SgCkcssbMapper {
     /**
      * 根据申购单ID查询所有厂商设备表信息
      *
+     * @param sgInfoId 申购单id
      * @return List<SgCkcssb> 查询的信息
      */
     @Select("SELECT\n" +
@@ -31,6 +29,17 @@ public interface SgCkcssbMapper {
             "FROM dbo.sg_ckcssb\n" +
             "WHERE dbo.sg_ckcssb.sg_id = #{sgInfoId,jdbcType=VARCHAR}")
     List<SgCkcssb> selectSgCkcssbBySgInfoId(String sgInfoId);
+
+    /**
+     * 根据申购单id查询参考厂商设备表id列表
+     *
+     * @param sgInfoId 申购单id
+     * @return 参考厂商设备表id列表
+     */
+    @Select("SELECT dbo.sg_ckcssb.ckcssb_id \n" +
+            "FROM dbo.sg_ckcssb \n" +
+            "WHERE dbo.sg_ckcssb.sg_id = #{sgInfoId,jdbcType=VARCHAR}")
+    List<String> selectSgCkcssbIdBySgInfoId(String sgInfoId);
 
     /**
      * 添加厂商设备表信息
@@ -51,9 +60,22 @@ public interface SgCkcssbMapper {
     /**
      * 根据主键删除参考厂商设备信息
      *
-     * @param sgCkcssbId 参考厂商设备id
+     * @param sgInfoId 参考厂商设备id
      * @return 删除信息的条数
      */
-    @Delete("DELETE FROM sg_ckcssb WHERE ckcssb_id = #{sgCkcssbId,jdbcType=VARCHAR}")
-    int deleteSgCkcssbById(String sgCkcssbId);
+    @Delete("DELETE FROM sg_ckcssb WHERE sg_id = #{sgInfoId,jdbcType=VARCHAR}")
+    int deleteSgCkcssbBySgInfoId(String sgInfoId);
+
+    /**
+     * 通过id获取品名名称
+     * @param pmId 品名id
+     * @return 品名名称
+     */
+    @Select("SELECT\n" +
+            "dbo.eq_pm.eq_pm_name\n" +
+            "FROM\n" +
+            "dbo.eq_pm\n" +
+            "WHERE\n" +
+            "dbo.eq_pm.eq_pm_id = #{pmId,jdbcType=VARCHAR}")
+    String getEqPmNameById(String pmId);
 }

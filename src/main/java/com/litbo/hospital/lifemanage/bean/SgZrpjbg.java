@@ -14,6 +14,10 @@ public class SgZrpjbg {
      */
     private String pjbgId;
     /**
+     * 申购单id
+     */
+    private String sgId;
+    /**
      * 准入评价报告单位
      */
     private String pjbgDw;

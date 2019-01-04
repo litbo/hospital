@@ -1,9 +1,20 @@
 package com.litbo.hospital.supervise.bean;
 
 public class SGcsBm {
+
+    private Integer gbId;
+
     private String userId;
 
     private String bmId;
+
+    public Integer getGbId() {
+        return gbId;
+    }
+
+    public void setGbId(Integer gbId) {
+        this.gbId = gbId;
+    }
 
     public String getUserId() {
         return userId;

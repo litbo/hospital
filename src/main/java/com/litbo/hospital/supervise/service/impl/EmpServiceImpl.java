@@ -20,7 +20,6 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public List<SEmp> getEmpsByBmId(String bmId) {
-
         return empDao.getEmpsByBmId(bmId);
     }
 

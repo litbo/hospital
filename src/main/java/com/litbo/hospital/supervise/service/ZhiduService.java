@@ -2,7 +2,7 @@ package com.litbo.hospital.supervise.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SZhidu;
-import com.litbo.hospital.supervise.vo.ShDetailMsg;
+import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ShMsgVO;
 import com.litbo.hospital.supervise.vo.ZhiduSubmitVO;
 
@@ -30,7 +30,7 @@ public interface ZhiduService {
     PageInfo listZdsByShr(int pageNum, int pageSize, String shr_id);
 
     //获取审核的详细信息
-    ShDetailMsg getShDetailMgsByZdId(Integer zdId, String shrId);
+    ZdShDetailMsg getShDetailMgsByZdId(Integer zdId, String shrId);
 
     //提交审核人的审核信息
     void submitShMsg(ShMsgVO shMsgVO);

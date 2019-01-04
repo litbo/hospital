@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>临时采购授权</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a href=""><button class=" layui-btn layui-btn-xs">新增授权</button></a>
+    </div>
+    <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
+        <div class="layui-input-inline">
+            <select name="modules" lay-verify="required">
+                <option value="yes">可申购</option>
+                <option value="no">申购过期</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="modules" lay-verify="required" lay-search="">
+                <option value="">输入搜索被授权人部门</option>
+                <option value="1">CT室</option>
+                <option value="2">核磁公正室</option>
+                <option value="3">摄片室</option>
+                <option value="4">内外导管室</option>
+                <option value="5">心外ICU</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="被授权人" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">查找</button>
+    </form>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">会议记录</a>
+</script>
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    addTable = {
+        table: {
+             cols: [[ //表头
+                {type: "checkbox"}
+                , {field: 'purchase-depart', title: '被授权人', width: "40%", minWidth: 150, sort: true}
+                , {field: 'device-num', title: '授权人部门', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '开始时间', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '结束时间', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '授权人', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '授权时间', minWidth: 150, sort: true}
+            ]]
+            , data: [
+                {
+                    "purchase-depart": 'CT室',
+                    "device-num": "62583289",
+                    "money": "CT"
+                }
+            ]
+            , done: function (obj) {
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

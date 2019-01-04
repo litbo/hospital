@@ -5,9 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
-import com.litbo.hospital.supervise.enums.ShProcessConstants;
+import com.litbo.hospital.supervise.enums.ZDShProcessConstants;
 import com.litbo.hospital.supervise.enums.ZdCzztEnumProcess;
-import com.litbo.hospital.supervise.enums.ZdShZtEnumProcess;
 import com.litbo.hospital.supervise.enums.ZdztEnumProcess;
 import com.litbo.hospital.supervise.service.ZhiduService;
 import com.litbo.hospital.supervise.vo.*;
@@ -62,10 +61,10 @@ public class ZhiduServiceImpl implements ZhiduService {
 
         //获得审核名字
         String dclCzztName = getDclCzztName(zdId);
-        String dqCzztName = ShProcessConstants.autoGetProcessName(dclCzztName,isTg);
+        String dqCzztName = ZDShProcessConstants.autoGetProcessName(dclCzztName,isTg);
 
         //设置审核状态名字
-        ztc.setZtCzname(ShProcessConstants.SH_PROCESS.get(ShProcessConstants.PROCESS_CODE));
+        ztc.setZtCzname(ZDShProcessConstants.SH_PROCESS.get(ZDShProcessConstants.PROCESS_CODE));
         //设置状态为待审核
         ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
         ztc.setZtShyj("");
@@ -95,7 +94,7 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     private String getDclCzztName(Integer zdId) {
         List<SZhiduzhizeZt> zdzts = zhiduDao.listZdztDescByDate(zdId);
-        if(zdzts==null) return ShProcessConstants.SH_PROCESS.get(ShProcessConstants.PROCESS_CODE);
+        if(zdzts==null) return ZDShProcessConstants.SH_PROCESS.get(ZDShProcessConstants.PROCESS_CODE);
         return zdzts.get(0).getZtCzname();
     }
 
@@ -116,7 +115,7 @@ public class ZhiduServiceImpl implements ZhiduService {
         ztc.setZdId(zd.getZdId());
         ztc.setUserId(zd.getUserId());
         ztc.setZtDate(zd.getCreateTime());
-        ztc.setZtCzname(ShProcessConstants.SH_PROCESS.get(ShProcessConstants.ZD_SHZT_KEMUBX));  //编写
+        ztc.setZtCzname(ZDShProcessConstants.SH_PROCESS.get(ZDShProcessConstants.ZD_SHZT_KEMUBX));  //编写
         ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_TG.getCode());    //操作状态 2 通过 1 不通过  0 待处理
         ztc.setZtShyj("");
         zhiduDao.saveZdZt(ztc);
@@ -161,18 +160,18 @@ public class ZhiduServiceImpl implements ZhiduService {
     @Override
     public PageInfo listZdsByShr(int pageNum, int pageSize, String shr_id) {
         PageHelper.startPage(pageNum,pageSize);
-        List<SelectAsBaseShMsg> date =  zhiduDao.listZdsByShr(shr_id);
+        List<ZDSelectAsBaseShMsg> date =  zhiduDao.listZdsByShr(shr_id);
         return new PageInfo(date);
     }
 
 
     @Override
-    public ShDetailMsg getShDetailMgsByZdId(Integer zdId, String shrId) {
+    public ZdShDetailMsg getShDetailMgsByZdId(Integer zdId, String shrId) {
         // 通过id 获取制度信息
         SZhiduSelect zd = zhiduDao.getZdSelectByZdId(zdId);
         // 通过id 获取审核信息
         List<SZhiduzhizeZtSelect> zts = zhiduDao.listZtsByZdId(zdId);
-        ShDetailMsg shDetailMsg = new ShDetailMsg();
+        ZdShDetailMsg shDetailMsg = new ZdShDetailMsg();
         //获取当前审核状态
         SZhiduzhizeZtSelect dqShMsg = zhiduDao.getDqShMsg(zdId,shrId);
         shDetailMsg.setsZhidu(zd);

@@ -15,35 +15,18 @@ public class SgKstlSqlProvider {
      * @param pmIds 品名ID
      * @return sql语句
      */
-    public String selectSgKstlVOByEqPmIds(List<Integer> pmIds) {
+    public String selectSgKstlVOByEqPmIds(List<String> pmIds) {
         return new SQL() {{
-            /*SELECT
-                eq_pm.eq_pm_id,
-                eq_pm.eq_pm_name,
-                eq_pm.eq_pm_jc,
-                eq_ylqxfl.eqfl_id,
-                eq_ylqxfl.eqfl_name,
-                sg_info.bh,
-                sg_tl_pm.kstl_sj
-            FROM eq_pm
-            INNER JOIN sg_info ON eq_pm.eq_pm_id = sg_info.eq_pm_id
-            INNER JOIN eq_ylqxfl ON eq_pm.eq_fl_id = eq_ylqxfl.eqfl_id
-            INNER JOIN sg_tl_pm ON eq_pm.eq_pm_id = sg_tl_pm.eq_pm_id
-            WHERE (sg_info.eq_pm_id IN (1,2))
-            */
             SELECT("eq_pm.eq_pm_id");
             SELECT("eq_pm.eq_pm_name");
             SELECT("eq_pm.eq_pm_jc");
-            SELECT("eq_ylqxfl.eqfl_id");
-            SELECT("eq_ylqxfl.eqfl_name");
             SELECT("sg_info.id as sgInfoId");
             SELECT("sg_info.bh");
             SELECT("sg_tl_pm.kstl_sj");
             FROM("eq_pm");
             INNER_JOIN("sg_info ON eq_pm.eq_pm_id = sg_info.eq_pm_id");
-            INNER_JOIN("eq_ylqxfl ON eq_pm.eq_fl_id = eq_ylqxfl.eqfl_id");
             INNER_JOIN("sg_tl_pm ON eq_pm.eq_pm_id = sg_tl_pm.eq_pm_id");
-            if (pmIds != null) {
+            if (pmIds != null && pmIds.size() > 0) {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < pmIds.size(); i++) {
                     sb.append(pmIds.get(i));
@@ -51,16 +34,17 @@ public class SgKstlSqlProvider {
                         sb.append(",");
                     }
                 }
-                WHERE("sg_info.eq_pm_id IN (" + sb.toString() + ")");
+                WHERE("eq_pm.eq_pm_id IN (" + sb.toString() + ")");
             }
+            WHERE("sg_info.iskssh <> 1 OR sg_info.iskssh IS NULL");
             ORDER_BY("kstl_sj desc");
         }}.toString();
     }
 
     public static void main(String[] args) {
-        List<Integer> emPmIds = new ArrayList<>();
-        emPmIds.add(1);
-        emPmIds.add(2);
+        List<String> emPmIds = new ArrayList<>();
+        emPmIds.add("6803010101");
+        emPmIds.add("6803010102");
         SgKstlSqlProvider s = new SgKstlSqlProvider();
         String s1 = s.selectSgKstlVOByEqPmIds(emPmIds);
         System.out.println(s1);

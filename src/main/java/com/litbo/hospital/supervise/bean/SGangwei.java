@@ -4,18 +4,19 @@ import java.util.Date;
 
 public class SGangwei {
     private Integer gwId;
-
     private String gwName;
-
-    private String userId;
-
-    private Date createTime;
-
-    private String docUrl;
-
     private String gwLevel;
 
+
     private String gwZz;
+    private String userId;
+    private Date createTime;
+    private String docUrl;
+    private Integer gwZzZt;
+    private Integer syTianshu;
+    private Integer sySyts;
+    private Integer zdXgcs;
+
 
     public Integer getGwId() {
         return gwId;
@@ -71,5 +72,37 @@ public class SGangwei {
 
     public void setGwZz(String gwZz) {
         this.gwZz = gwZz == null ? null : gwZz.trim();
+    }
+
+    public Integer getGwZzZt() {
+        return gwZzZt;
+    }
+
+    public void setGwZzZt(Integer gwZzZt) {
+        this.gwZzZt = gwZzZt;
+    }
+
+    public Integer getSyTianshu() {
+        return syTianshu;
+    }
+
+    public void setSyTianshu(Integer syTianshu) {
+        this.syTianshu = syTianshu;
+    }
+
+    public Integer getSySyts() {
+        return sySyts;
+    }
+
+    public void setSySyts(Integer sySyts) {
+        this.sySyts = sySyts;
+    }
+
+    public Integer getZdXgcs() {
+        return zdXgcs;
+    }
+
+    public void setZdXgcs(Integer zdXgcs) {
+        this.zdXgcs = zdXgcs;
     }
 }

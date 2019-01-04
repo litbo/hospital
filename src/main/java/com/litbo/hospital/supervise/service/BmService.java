@@ -22,8 +22,10 @@ public interface BmService {
     void saveBm(SBm bm);
     //根据父节点查部门
     PageInfo getBmListByPid(int pageNum, int pageSize, String pid);
-    //根据id查部门
+    //根据oid查部门
     SBm getBmByOid(String id);
+    //根据id查部门
+    SBm getBmByBmId(String bmid);
     //模糊查詢
     PageInfo getBmListByX(int pageNum, int pageSize, BmSelectVO selectVo);
     //通过部门id刪除
@@ -36,7 +38,7 @@ public interface BmService {
     void setBmsBeto(SetBmVO bmVO);
     void setBmBeto(String obm_id, String new_pbm_id );
     //设置为维修部门
-    void setWxbm(String obmid);
+    void setWxbm(List<String> obmid, int wxFlag);
     //获取所有维修部门
     List<SBm> getWxBms();
     //获取所有非维修部门

@@ -27,7 +27,7 @@
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
-    <div class="moreBtn hidden-xs">
+    <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
             <input class="layui-input" name="search" placeholder="设备编号" autocomplete="off">
         </div>
@@ -41,19 +41,12 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
-                  {type:"checkbox"}
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"checkbox"}
                 , {field: 'equip_number', title: '设备编号',width:"20%", minWidth: 150}
                 , {field: 'equip_short', title: '设备简称', minWidth: 150}
                 , {field: 'type_m', title: 'M值类型', minWidth: 150, sort: true}
@@ -107,14 +100,11 @@
                     "worktime_pm":"4",
                     "worktime_ni":"0"
                 }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
+            , done: function (obj) {
                 //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
             }
-        });
-    });
+        }
+    }
 </script>
 </body>
 

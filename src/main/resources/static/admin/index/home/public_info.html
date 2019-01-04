@@ -34,49 +34,56 @@
     <button class="layui-btn" data-type="reload">搜索</button>
 </script>
 <script src="../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , limit: 15
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
+    addTable ={
+        table:{
+            cols: [[ //表头
                 {type:"checkbox"}
-                , {field: 'wjmc', title: '文档名称',width:"50%", minWidth: 150}
-                , {field: 'scr', title: '上传人', minWidth: 150, sort: true}
-                , {field: 'scrq', title: '上传日期', minWidth: 150}
+                , {field: 'doc_name', title: '文档名称',width:"50%", minWidth: 150}
+                , {field: 'up_personal', title: '上传人', minWidth: 150, sort: true}
+                , {field: 'up_date', title: '上传日期', minWidth: 150}
             ]]
-            ,url:"http://localhost:8080/ggxz/listGgxzs"
-            ,request:{
-                pageName : 'pageNum',
-                limitName : 'pageSize'
+            , "data": [
+                {
+                    "doc_name": '文件1',
+                    "up_personal": "用户1",
+                    "up_date": "2018-12-01"
+                },{
+                    "doc_name": '文件1',
+                    "up_personal": "用户2",
+                    "up_date": "2018-12-01"
+                },{
+                    "doc_name": '文件1',
+                    "up_personal": "用户2",
+                    "up_date": "2018-12-01"
+                },{
+                    "doc_name": '文件1',
+                    "up_personal": "用户2",
+                    "up_date": "2018-12-01"
+                },{
+                    "doc_name": '文件1',
+                    "up_personal": "用户2",
+                    "up_date": "2018-12-01"
+                },{
+                    "doc_name": '文件1',
+                    "up_personal": "用户2",
+                    "up_date": "2018-12-01"
+                },{
+                    "doc_name": '文件1',
+                    "up_personal": "用户2",
+                    "up_date": "2018-12-01"
+                },{
+                    "doc_name": '文件1',
+                    "up_personal": "用户2",
+                    "up_date": "2018-12-01"
+                }]
+            , done: function (obj) {
+
             }
-            ,parseData: function(res) { //res 即为原始返回的数据
-            return {
-                "code": res.code, //解析接口状态
-                "msg": res.msg, //解析提示文本
-                "data": res.data.list //解析数据列表
-            }
-        },
-
-        text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-
-            }
-        });
-
-
-    });
+        }
+    }
 </script>
 </body>
-
-
 
 </html>

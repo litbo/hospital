@@ -11,6 +11,7 @@ import com.litbo.hospital.supervise.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -100,5 +101,65 @@ public class GroupServiceImpl implements GroupService {
         PageHelper.startPage(pageNum,pageSize);
         List<SGroup> groups = groupDao.getYTHGroup();
         return new PageInfo(groups);
+    }
+
+    @Override
+    public PageInfo getYTHGroupByCId(int pageNum, int pageSize, String createId) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SGroup> groups = groupDao.getYTHGroupByCId(createId);
+        return new PageInfo(groups);
+    }
+
+    @Override
+    public PageInfo getGroupsMSGDetail(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<GroupMSGDetailVO> msgDetails = new ArrayList<>();
+        List<SGroupSelectVO> selectGroups = groupDao.getSelectGroups();
+
+        for(SGroupSelectVO selectGroup:selectGroups){
+            Integer groupId = selectGroup.getGroupId();  //团队id
+            GroupMSGDetailVO msgDetailVO = new GroupMSGDetailVO();
+            msgDetailVO.setBmName(selectGroup.getBmName());   // 设置部门名
+
+//    使用部门医学装备管理小组组长             组长
+//    使用部门医学装备管理小组副组长          副组长
+//    使用部门质量安全管理人员	           质安管理人员
+//    使用部门资产管理员                   资产管理人员
+//    使用部门计量员                       计量管理人员
+//    使用部门监测联络员                    监测联络员
+//    使用部门质检员                       质控管理人员
+
+            //获得组长    根据id查人员和岗位       select emp.user_xm,gw.gw_name from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) WHERE gw.gw_name='使用部门质量安全管理人员'
+            String[] zzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门医学装备管理小组组长");
+            msgDetailVO.setZzs(zzs);
+            //获得副组长
+            String[] fzzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门医学装备管理小组副组长");
+            msgDetailVO.setFzzs(fzzs);
+
+            //获得质安管理人员
+            String[] zagls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质量安全管理人员");
+            msgDetailVO.setZagls(zagls);
+
+            //获得资产管理人员
+            String[] zcgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门资产管理员");
+            msgDetailVO.setZcgls(zcgls);
+
+            //获得计量管理人员
+            String[] jzgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门计量员");
+            msgDetailVO.setJlgls(jzgls);
+
+            //获得监测联络员
+            String[] jclls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门监测联络员");
+            msgDetailVO.setJclls(jclls);
+
+            //获得质控管理人员
+            String[] zkgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质检员");
+            msgDetailVO.setZkgls(zkgls);
+
+            msgDetails.add(msgDetailVO);
+        }
+
+
+        return new PageInfo(msgDetails);
     }
 }

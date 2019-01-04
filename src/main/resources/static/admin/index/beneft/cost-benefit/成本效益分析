@@ -1,0 +1,167 @@
+一、设备成本效益分析
+    1、医疗设备成本效益分析评价
+       a、直接成本统计   analyissis-evaluation.html
+              data": [
+                       {
+                           "bmName": "部门名称",
+                           "eqName": "设备名称",
+                           "eqNum": "院内编号",
+                           "eqXh": "设备型号",
+                           "ryjf": 人员经费,
+                           "wsclf": 卫生材料费,
+                           "ypf": 药品费,
+                           "gdzczjf": 固定资产折旧费,
+                           "wxzctxf": 无形资产摊销费,
+                           "ylfxf": 医疗风险提取费,
+                           "qt": 其他费用,
+                           "zj": 总计
+                       }
+               ]
+       已完成；
+
+       b、间接成本统计   indirect-cost.html
+
+            "data": [
+                            {
+                                "bmName": 部门名称,
+                                "eqName": 设备名称,
+                                "eqNum": 院内编号,
+                                "eqXh": 设备型号,
+                                "glfy": 管理费用,
+                                "fzksft": 辅助科室分摊,
+                                "qt": 其他费用,
+                                "zj": 总计
+                            }
+                     ]
+         已完成；
+
+       c、收入统计       cevenue-statistics.html
+                "data": [
+                                {
+                                    "bmName": "CT室",                 //部门名称
+                                    "eqName": "测试型号1",            //设备名称
+                                    "jcs": 0,                          //检查室
+                                    "eqNum": "181268031101310000",    //院内编号
+                                    "eqXh": "测试型号1",               //设备型号
+                                    "mzsr": 3000,                       //门诊收入
+                                    "kjxmsr": 100,                       //科教项目收入
+                                    "zysr": 3000,                       //住院收入
+                                    "qtsr": 200,                     //其他收入
+                                    "zj": 6800                        //总计
+                                }
+                         ]
+                 已完成；
+
+       d、效益分析表     benefit-analysis.html
+              "data": [
+                              {
+                                  "bmName": "CT室",                 //部门名称
+                                  "eqName": "测试型号1",            //设备名称
+                                  "eqNum": "181268031101310000",    //院内编号
+                                  "eqXh": "测试型号1",               //设备型号
+                                  "sr": 5000,                       //收入
+                                  "cb": 6800,                       //成本
+                                  "sy": -1800,                       //收益
+                                  "qjlc": 0,                         //期间例次
+                                  "zcsr": 5000,                      //诊次收入
+                                  "zccb": 6800,                     //诊次成本
+                                  "zcsy": -1800                     //诊次收益
+                              }
+                      ]
+              已完成；
+
+       e、效益评价表 benefit-statistics.html
+             "data": [
+                            {
+                                "bmName": "CT室",                 //部门名称
+                                "eqName": "测试型号1",            //设备名称
+                                "eqNum": "181268031101310000",    //院内编号
+                                "eqXh": "测试型号1",               //设备型号
+                                "eqPrice": 5623.25,                //原价
+                                "sy": -1800,                        //收益
+                                "syl": "-32%",                      //收益率
+                                "eqQysj": "2017-06-04T16:00:00.000+0000",  //启动时间
+                                "hbq": -6                              //回本期
+                            }
+                      ]
+              已完成；
+              日期部分不是太明白；
+
+     2、PACS明细查询（pacs-check.html）
+            "data": [
+                            {
+                                "patientID": "10001",                      //病人ID
+                                "patientName": "name",                    //病人姓名
+                                "patientSex": "男",                       //病人性别
+                                "patientType": "病人类型",               //病人类型
+                                "device-ident": "设备标识",              //设备标识
+                                "report-ftime": "报告完成时间",          //报告完成时间
+                                "check-oddnum": "检查单号",             //检查单号
+                                "check-project": "检查项目",            //检查项目
+                                "pro-price": 2000,                     //项目金额
+                            }
+                    ]
+             已完成；
+
+ 注：存在问题，搜索部分过长，自适应过程中会出现换行展示的情况
+
+二、成本效益设置
+    1、设备成本科目预设(set-equipmentcost-subject.html)
+         "data": [
+                        {
+                            "bmName": "CT室",           //部门名称
+                            "eqName": "cs设备编号4",     //设备名称
+                            "eqXh": "测试型号1",         //设备编号
+                            "eqId": "10000"              //设备id，不显示，用于点击编辑按钮传入到下个页面
+                        }
+                  ]
+        问题：是否需要添加删除按钮
+        未完成：添加页面，功能还不完善(set-equipmentcost-subject-add.html)
+       首页面已完成；
+           chile:
+                a、添加页面（equipmentcost-add.html）
+                    1)、科室选择（department-select.html）
+                    2）、设备选择（equipment-select.html）
+                    2)、成本明细项添加（detailed-add.html）
+                b、编辑页面（equipmentcost-edit.html）
+                    1)、编辑内编辑（equipent-edit-edit.html）
+                    此页面功能未完善：科室选择，设备选择，日期选择只读，只有金额可以修改。
+
+
+    2、设备收入科目预设（set-equipment-income.html）
+          1、设备成本科目预设(set-equipmentcost-subject.html)
+                 "data": [
+                                {
+                                    "bmName": "CT室",           //部门名称
+                                    "eqName": "cs设备编号4",     //设备名称
+                                    "eqXh": "测试型号1",         //设备编号
+                                    "eqId": "10000"              //设备id，不显示，用于点击编辑按钮传入到下个页面
+                                }
+                          ]
+            首页面已完成
+            a、添加页面(equipmentincome-add.html)
+                  同1设备成本科目预设
+                  1)、科室选择（department-select.html）
+                  2）、设备选择（equipment-select.html）
+                  2)、成本明细项添加（detailed-add.html）
+            b、编辑页面（equipmentcost-edit.html）
+                    同1设备成本科目预设
+                  1)、编辑内编辑（equipent-edit-edit.html）
+                      此页面功能未完善：科室选择，设备选择，日期选择只读，只有金额可以修改。
+    3、设备成本属性设置
+        暂无页面参考
+
+
+三、成本效益基础管理
+    1、内置科目(internal-subjects.html)
+        已完成；
+
+    2、会计结账日设置
+        暂无页面参考
+    3、医疗风险基金设置
+        暂无页面参考
+
+
+
+ 大体页面已完成，内部功能细节未做，参数传递未做（主要是成本效益设置内不页面跳转较多，功能细节比较复杂），成本效益设置中的
+ 设备成本科目预设 和 设备收入科目预设的移动端搜索显示有bug

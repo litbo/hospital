@@ -1,0 +1,38 @@
+计划制定          plan-formulation.html
+    已完成；
+
+计划查询           plan-query.html
+        "data": [
+                        {
+                            "plan_name": '计划名称',
+                            "document_place": "培训地点",
+                            "training_type": "培训类型",
+                            "training_nature": "培训性质",
+                            "organizer": "组织者",
+                            "start_date": "开始日期",
+                            "end_date":"结束时间"
+                        }
+                ]
+        已完成；
+
+人员录入           personnel-input.html
+     "data": [
+                    {
+                        "pxmc": "培训名称",
+                        "pxlx": "培训类型",
+                        "zjlx": "证件类型",
+                        "zjmc": "证件名称",
+                        "fzdw": "发证单位",
+                        "fzsj": "发证时间",
+                        "yxq":"有效期"
+                    }
+             ]
+    child:
+        a、员工                personnel-select.html
+        b、添加培训记录         record-add.html
+            1)、设备名称选择    device-name.html
+                "data": [
+                                    {
+                                        'device_name': '设备名称'
+                                    }
+                        ]

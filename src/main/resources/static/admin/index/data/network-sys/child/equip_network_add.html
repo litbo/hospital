@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>新增设备联网设置</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-item .layui-form-label{
+            width:150px;
+        }
+        .layui-form-item .layui-input-block{
+            margin-left:150px;
+        }
+        span{
+            color:#f10214;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <h1 style="margin:15px;">新增数据</h1>
+            <span>*同类设备项目标志一致</span>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备<span>*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联网仪编号<span>*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联网仪IP</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目标志<span>*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">安装Pacs/LIS</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="hasPaLi" value="有" title="有" checked="">
+                    <input type="radio" name="hasPaLi" value="无" title="无">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Pacs/LIS终端编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">记录工作量</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="recWork" value="有" title="有" checked="">
+                    <input type="radio" name="recWork" value="无" title="无">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工作量计算规则</label>
+                <div class="layui-input-block">
+                    <select name="interest">
+                        <option value="his_room" selected="">His执行科室为准</option>
+                        <option value="his_pro">His项目标志为准</option>
+                        <option value="no_flow">不计算流失工作量</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+<script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: addTable.elem
+            , page: addTable.page
+            , toolbar: addTable.toolbar
+            , height: addTable.height
+            , title: addTable.title
+            , limit:addTable.limit
+            , limits:addTable.limits
+            , minWidth: addTable.minWidth
+            , text: addTable.text
+            , cols: [[ //表头
+                  {type:"checkbox"}
+                , {field: 'equip_number', title: '设备编号', minWidth: 150, sort: true}
+                , {field: 'equip_name', title: '设备名称',width:"35%", minWidth: 150}
+                , {field: 'equip_specif', title: '规格', minWidth: 150}
+                , {field: 'equip_id', title: '型号', minWidth: 150, sort: true}
+                , {field: 'netequip_number', title: '联网仪编号', minWidth: 150, sort: true}
+                , {field: 'netequip_ip', title: '联网仪IP', minWidth: 150, sort: true}
+                , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar"}
+            ]]
+            , "data": [
+                {
+                    "equip_number": '100001000065456465',
+                    "equip_name": "测试设备",
+                    "equip_specif": "9999999999999999999",
+                    "equip_id": "X20",
+                    "netequip_number": "062562349278",
+                    "netequip_ip": "127.0.0.1"
+                },
+                {
+                    "equip_number": '100001000065456465',
+                    "equip_name": "测试设备",
+                    "equip_specif": "9999999999999999999",
+                    "equip_id": "X20",
+                    "netequip_number": "062562349278",
+                    "netequip_ip": "127.0.0.1/30"
+                }
+            ]
+            ,
+            text: {
+                none: "暂时还没有数据哦！"
+            }, done: function (obj) {
+                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

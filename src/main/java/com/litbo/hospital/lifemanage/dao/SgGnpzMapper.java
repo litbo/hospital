@@ -1,9 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgGnpz;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -46,4 +44,13 @@ public interface SgGnpzMapper {
             "WHERE\n" +
             "dbo.sg_gnpz.ckcssb_id = #{sgCkcssbId,jdbcType=VARCHAR}")
     List<SgGnpz> selectSgGnpzBySgCkcssbId(String sgCkcssbId);
+
+     /**
+     * 根据主键删除功能配置信息
+     *
+     * @param ckcssbId 功能配置id
+     * @return 删除的记录数
+     */
+    @Delete("DELETE FROM sg_gnpz WHERE ckcssb_id = #{ckcssbId,jdbcType=VARCHAR}")
+    int deleteSgGnpzByCkcssbId(String ckcssbId);
 }

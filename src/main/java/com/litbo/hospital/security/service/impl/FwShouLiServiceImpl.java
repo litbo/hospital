@@ -11,6 +11,7 @@ import com.litbo.hospital.security.service.FwShouLiService;
 import com.litbo.hospital.security.utils.WxGetNameUtils;
 import com.litbo.hospital.security.vo.FwVo;
 import com.litbo.hospital.security.vo.ShouliIndexVo;
+import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.user.dao.EqDao;
@@ -47,7 +48,7 @@ public class FwShouLiServiceImpl implements FwShouLiService {
     private BmDao bmDao;
 
     @Override
-    public ShouliIndexVo shouliIndex(String fwId,String userId,String slrUserName) {
+    public ShouliIndexVo shouliIndex(String fwId,String userId) {
         FwBaoxiu fwBaoxiu = fwBaoxiuDao.findFwBaoxiu(fwId);
         ShouliIndexVo shouliIndexVo = new ShouliIndexVo();
         shouliIndexVo.setFwBaoxiu(fwBaoxiu);
@@ -61,7 +62,8 @@ public class FwShouLiServiceImpl implements FwShouLiService {
         fwShouli.setGztjStatus(1);
         shouliIndexVo.setFwShouli(fwShouli);
 
-        shouliIndexVo.setSlrUserName(slrUserName);
+        SEmp empByUserId = empDao.getEmpByUserId(userId);
+        shouliIndexVo.setSlrUserName(empByUserId.getUserXm());
         return shouliIndexVo;
     }
 

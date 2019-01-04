@@ -2,8 +2,8 @@ package com.litbo.hospital.security.service;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
-import com.litbo.hospital.security.vo.FwInfoVo;
 import com.litbo.hospital.security.vo.WeixiuIndexVo;
+import com.litbo.hospital.security.vo.WxqrIndex;
 
 /**
  * @author zjc
@@ -16,7 +16,7 @@ public interface FwWeixiuService {
      * @param fwId
      * @return
      */
-    public FwInfoVo wxqsIndex(String fwId);
+    public WxqrIndex wxqsIndex(String fwId);
 
     /**
      * 维修主页面回显

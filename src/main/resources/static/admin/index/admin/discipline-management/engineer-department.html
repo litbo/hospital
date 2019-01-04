@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>工程师负责部门划分</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">确定划分</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="moreBtn hidden-xs" >
+        <div class="layui-inline">
+            <select>
+                <option>科室名称</option>
+                <option>aaa</option>
+                <option>bbb</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+</script>
+
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"checkbox"}
+                , {field: 'department-name', title: '科室名称',width:"100%", minWidth: 200}
+            ]]
+            , "data": [
+                {
+                    "department-name":'病案室'
+                },{
+                    "department-name":'病案质控室'
+                },{
+                    "department-name":'B超室'
+                },{
+                    "department-name":'病案室'
+                },{
+                    "department-name":'病案室'
+                }]
+            , done: function (obj) {
+                tableFunc({
+                    "obj":obj
+                })
+            }
+        }
+    }
+</script>
+</body>
+</html>

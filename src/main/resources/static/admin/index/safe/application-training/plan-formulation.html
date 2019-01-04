@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>计划制定</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 10px!important;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+        .sign{
+            color:red;
+        }
+        .layui-textarea{
+            min-height: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>医疗器械生产/经营许可证验证</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">计划名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" autocomplete="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">主办单位<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" autocomplete="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训类型</label>
+                <div class="layui-input-block">
+                    <select name="">
+                        <option value="" selected="selected">外出培训</option>
+                        <option value="">科室培训</option>
+                        <option value="">院内培训</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训性质</label>
+                <div class="layui-input-block">
+                    <select name="">
+                        <option value="" selected="selected">岗位再培训</option>
+                        <option value="">岗位培训</option>
+                        <option value="">应用培训</option>
+                        <option value="">行政部门组织培训</option>
+                        <option value="">进修培训</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训内容类别</label>
+                <div class="layui-input-block">
+                    <select name="">
+                        <option value="" selected="selected">操作规程</option>
+                        <option value="">保养规范</option>
+                        <option value="">用前检查</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备类型</label>
+                <div class="layui-input-block">
+                    <select name="">
+                        <option value="" selected="selected">大型设备</option>
+                        <option value="">特种设备</option>
+                        <option value="">急救设备</option>
+                        <option value="">生病支持设备</option>
+                        <option value="">辐射类设备</option>
+                        <option value="">其他设备</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-block">
+                    <input type="text" name="date" id="date" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="date" id="date1" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">组织者</label>
+                <div class="layui-input-block">
+                    <select id="" name="">
+                        <option value="" >于宗民</option>
+                        <option value="">于广建</option>
+                        <option value="">于洋深</option>
+                        <option value="">于洪江</option>
+                        <option value="">于笑霆</option>
+                        <option value="">刘丽</option>
+                        <option value="">刘军</option>
+                        <option value="">刘建琳</option>
+                        <option value="">刘志军</option>
+                        <option value="">刘红</option>
+                        <option value="">刘雨</option>
+                        <option value="">包德耿</option>
+                        <option value="">吕鹏</option>
+                        <option value="">吴跃杰</option>
+                        <option value="">姚慧超</option>
+                        <option value="">姜振德</option>
+                        <option value="">姜晓君</option>
+                        <option value="">姜淮翰</option>
+                        <option value="">孙伟</option>
+                        <option value="">孙学坤</option>
+                        <option value="">孙家峰</option>
+                        <option value="">孙寿堂</option>
+                        <option value="">孙尚武</option>
+                        <option value="">孙波</option>
+                        <option value="">张云龙</option>
+                        <option value="">张宁</option>
+                        <option value="">张建新</option>
+                        <option value="">张忠超</option>
+                        <option value="">张明远</option>
+                        <option value="">张真真</option>
+                        <option value="">张静</option>
+                        <option value="">戴喜娟</option>
+                        <option value="">曲超</option>
+                        <option value="">曹芸静</option>
+                        <option value="">朱洪涛</option>
+                        <option value="">李嘉豪</option>
+                        <option value="">李宗升</option>
+                        <option value="">李宗福</option>
+                        <option value="">李涛</option>
+                        <option value="">李贤民</option>
+                        <option value="">李进革</option>
+                        <option value="">杜心武</option>
+                        <option value="">杨凯</option>
+                        <option value="">杨利超</option>
+                        <option value="">林春旭</option>
+                        <option value="">林杰</option>
+                        <option value="">梁明琴</option>
+                        <option value="">牟坤</option>
+                        <option value="">王亚军</option>
+                        <option value="">王会考</option>
+                        <option value="">王威</option>
+                        <option value="">王栋</option>
+                        <option value="">王海</option>
+                        <option value="">王素云</option>
+                        <option value="">祝健</option>
+                        <option value="">秦宁</option>
+                        <option value="">管君</option>
+                        <option value="">米永宾</option>
+                        <option value="">罗英旗</option>
+                        <option value="">胡晓禹</option>
+                        <option value="">谢冰</option>
+                        <option value="">邹渤</option>
+                        <option value="">郑程</option>
+                        <option value="">郭鑫</option>
+                        <option value="">镡丰周</option>
+                        <option value="">陈峰</option>
+                        <option value="">鲁英慧</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">主讲人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" autocomplete="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训地点<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" autocomplete="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训内容<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <textarea placeholder="" class="layui-textarea" name=""></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn">保存</button>
+                <button class="layui-btn" oncancel="true">取消</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="tips">
+
+</div>
+
+
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    // 设置当前日期
+    var date = new Date();
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+
+    var setDate1 = document.getElementById('date');
+    var setDate2 = document.getElementById('date1');
+    setDate1.value = currentdate;
+    setDate2.value = currentdate;
+</script>
+<script>
+    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+    });
+</script>
+</body>
+
+</html>

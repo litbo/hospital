@@ -28,7 +28,7 @@
         <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="fas fa-plus"></i></a>
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
-    <div class="moreBtn hidden-xs">
+    <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
             <input class="layui-input" name="search" placeholder="设备拼音码" id="test-table-de" autocomplete="off">
         </div>
@@ -40,20 +40,12 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
-                  {type:"checkbox"}
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"checkbox"}
                 , {field: 'equip_number', title: '设备编号', minWidth: 150}
                 , {field: 'equip_short', title: '设备简称', minWidth: 150}
                 , {field: 'work_type', title: '值班类型', minWidth: 150, sort: true}
@@ -134,15 +126,11 @@
                     "week6": "值班",
                     "week7": "值班"
                 }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
-            }
-        });
+            , done: function (obj){
 
-    });
+            }
+        }
+    }
 </script>
 </body>
 

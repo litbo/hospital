@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>出库查询</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="">
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="" class="layui-input" placeholder="配件名称" autocomplete="off">
+                    </div>
+                    <span>入库时间：</span>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="date"  class="layui-input" placeholder="起" autocomplete="off" id="date">
+                    </div>
+                    <span>-</span>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="date"  class="layui-input" placeholder="止" autocomplete="off" id="date1">
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {checkbox:true}
+                , {field: 'use-depart', title: '出库单号', minWidth: 200}
+                , {field: 'authorized_person', title: '出库时间', minWidth: 150,sort:true}
+                , {field: 'authorized_depart', title: '配件名称', minWidth: 200}
+                , {field: 'model', title: '数量', minWidth: 100,sort:true}
+                , {field: 'model', title: '金额', minWidth: 150,sort:true}
+                , {field: 'model', title: '库位', minWidth: 150}
+            ]]
+            , height: "full-25"
+            , url:"eq/listShowEqs"
+            , request:{
+                pageName : 'pageNum',
+                limitName : 'pageSize'
+            }
+            ,where:{
+            }
+            ,parseData: function(res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "data": res.data.list //解析数据列表
+                }
+            }
+            , done: function (obj) {
+                tableFunc({
+                    "obj":obj,
+                    "toolFunc":{
+                        tool:"toolbar",
+                        title:"数据查找",
+                        event:"dataSearch",
+                        content:$("#hideXs")
+                    }
+                })
+            }
+        },
+        date:{
+            elem:'#date'
+        },
+        form:{
+
+        }
+    };
+    layui.use(['table','laydate'],function(){
+        var table = layui.table,
+            laydate = layui.laydate;
+        laydate.render({
+            elem: '#date1',
+            value: today,
+            format: "y-M-d"
+        });
+    })
+</script>
+</body>
+
+</html>

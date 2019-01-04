@@ -4,7 +4,7 @@ import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
 import com.litbo.hospital.supervise.vo.SZhiduSelect;
 import com.litbo.hospital.supervise.vo.SZhiduzhizeZtSelect;
-import com.litbo.hospital.supervise.vo.SelectAsBaseShMsg;
+import com.litbo.hospital.supervise.vo.ZDSelectAsBaseShMsg;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -58,7 +58,7 @@ public interface ZhiduDao {
     //通过审核人获取制度的基本信息   zdid zdname ztcaname
     @Select("select szd.zd_id,szd.zd_name,szt.zt_czname FROM s_zhidu szd LEFT JOIN s_zhiduzhize_zt szt\n" +
             "on (szd.zd_id = szt.zd_id) where szt.user_id=#{shr_id} and szt.zt_czzt=0 ")   // 状态为0（未处理）
-    List<SelectAsBaseShMsg> listZdsByShr(String shr_id);
+    List<ZDSelectAsBaseShMsg> listZdsByShr(String shr_id);
 
     //通过制度id获取该制度所有已通过的审核审核记录
     @Select("select szt.zt_id, szt.zd_id, emp.user_xm, szt.zt_date, szt.zt_czname, szt.zt_czzt,szt.zt_shyj \n" +

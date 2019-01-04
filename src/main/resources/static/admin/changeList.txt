@@ -1,0 +1,17 @@
+修改文件索引
+（ - ： 文件夹）
+
+-admin
+    changeList.txt     新增     修改文件索引目录     check
+    -index
+
+
+-static
+    -admin
+        -js
+            formNormal.js     新增     表单自动处理函数     check
+            basic.js     修改     项目基础函数集合     check
+                1：subUp函数     新增     数据提交函数
+                2：大部分函数     修改     函数位置修改
+                3：大部分函数     修改     函数注释完善
+            renderMod.js     新增     表格表单自动渲染函数     check

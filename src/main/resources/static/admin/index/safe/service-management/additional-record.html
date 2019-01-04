@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>补录维修报告</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 10px!important;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+        .sign{
+            color:red;
+        }
+        .layui-container{
+            margin-top:30px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-container">
+    <div class="layui-row">
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">报修</h2>
+                <div class="layui-colla-content">
+                    <form class="layui-form layui-form-pane" action="">
+                        <div class="layui-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">选择设备<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" lay-search>
+                                            <option></option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">故障现象<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option></option>
+                                            <option></option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">规格</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">保修到期日<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select name="" lay-verify="required" lay-search>
+                                            <option></option>
+                                            <option>11</option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修科室</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option></option>
+                                            <option></option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修人<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修方式</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option>网上报修</option>
+                                            <option>电话报修</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">发现时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" id="date" autocomplete="off" class="layui-input" >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">故障现象编码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off" placeholder="请输入故障现象编码">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">型号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">保修状态</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">紧急性</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option>低</option>
+                                            <option>中</option>
+                                            <option>高</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修科室电话</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修人电话</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">录入人</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off" placeholder="Admin">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off" id="date1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="layui-row">-->
+                            <!--<div class="layui-form-item">-->
+                                <!--<div class="layui-input-block">-->
+                                    <!--<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>-->
+                                    <!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </form>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">受理</h2>
+                <div class="layui-colla-content layui-show">
+                    <form class="layui-form layui-form-pane" action="">
+                        <div class="layui-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">因故障停机</label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" lay-search>
+                                            <option>未停机</option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">受理时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off" id="date2">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">约定维修时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off" id="date3">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">受理人</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">维修方式<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" lay-search>
+                                            <option>现场维修</option>
+                                            <option>电话指导</option>
+                                            <option>科室送修</option>
+                                            <option>远程维护</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">检修</h2>
+                <div class="layui-colla-content">
+                    内容3
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">科室</h2>
+                <div class="layui-colla-content">
+                    <div class="layui-card">
+                        <div class="layui-card-header">科室确认结果</div>
+                        <div class="layui-card-body">
+                            <form class="layui-form layui-form-pane" action="">
+                                <div class="layui-row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">确认时间</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="" autocomplete="off" class="layui-input" id="date4">
+
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">确认人</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="" class="layui-input" autocomplete="off" placeholder="Admin">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">确认结果</label>
+                                            <div class="layui-input-block">
+                                                <select>
+                                                    <option>合格</option>
+                                                    <option>不合格</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">满意度</label>
+                                            <div class="layui-input-block">
+                                                <select lay-verify="required" lay-search>
+                                                    <option>满意</option>
+                                                    <option>不满意</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['layer', 'form', 'layedit', 'laydate','element'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , element = layui.element;
+        var date = new Date()
+            , year = date.getFullYear()
+            , month = date.getMonth() + 1
+            , day = date.getDate()
+            , today = year+ "-" + month + "-" + day//获取年-月-日
+            , time = date.getTime();
+
+        //日期
+        laydate.render({
+            elem: '#date',
+            value: today,
+            format: "y-M-d"
+        });
+        laydate.render({
+            elem: '#date1',
+            value: today,
+            format: "y-M-d"
+        });
+        laydate.render({
+            elem: '#date2',
+            value: today,
+            format: "y-M-d"
+        });
+        laydate.render({
+            elem: '#date3',
+            value: today,
+            format: "y-M-d"
+        });
+        laydate.render({
+            elem: '#date4',
+            value: today,
+            format: "y-M-d"
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+
+        //弹出层设置
+//        $('#layerBtn').click(function(){
+//            layer.open({
+//                type:2
+//                ,title:'部门选择'
+//                ,content:'./child/draftAdd.html'
+//                ,area:['90%','90%']
+//                ,btn:['选择','取消']
+//            });
+//            return false;
+//        });
+    });
+</script>
+</body>
+
+</html>

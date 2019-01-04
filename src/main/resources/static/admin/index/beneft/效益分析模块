@@ -1,0 +1,69 @@
+一：效益管理(prior-argument)
+    1、经济效益论证
+        1）、项目方案录入:        ./beneft/prior-argument/scheme-input.html
+        2）、项目论证结果:        ./beneft/prior-argument/argument-result.html
+        3）、项目财务指标:        ./beneft/prior-argument/financial-index.html
+        4）、设备与方案关联：     ./beneft/prior-argument/scheme-association.html
+     2、效益评价结果
+        1）、设备评价等级列表：   ./beneft/prior-argument/evaluate-list.html
+
+
+二、使用情况分析（usage-situation）
+    1、效率PK
+        1）、开机率                ./beneft/usage-situation/boot-rate.html
+        2）、机时利用率            ./beneft/usage-situation/utilization-ratio.html
+        3）、空转率                ./beneft/usage-situation/idling-rate.html
+        4）、工作日平均闲置时间    ./beneft/usage-situation/average-time.html
+    2、效率等级
+        1）、效率等级             ./beneft/usage-situation/efficiency-level.html
+    3、效率等级设置
+        1）、效率等级设置         ./beneft/usage-situation/set-efficiency-level.html
+
+三、成本效益分析(const-benefit)
+    1、设备成本效益分析
+        1）、医疗设备成本效益分析评价    ./beneft/cost-benefit/analysis-evaluation.html
+           a、直接成本统计   analyissis-evaluation.html
+           b、间接成本统计   indirect-cost.html
+           c、收入统计       cevenue-statistics.html
+           d、效益分析表     benefit-analysis.html
+           e、效益分析统计表 benefit-statistics.html
+        2）PACS明细查询               ./beneft/cost-benefit/pacs-check.html
+
+    2、成本效益设置
+        1）、设备成本科目预设     ./beneft/cost-benefit/set-equipmentcost-subject.html
+        2）、设备收入科目预设     ./beneft/cost-benefit/set-equipment-incinternal-subjectsome.html
+        3）、设备成本属性设置
+
+    3、成本效益基础管理
+        1）、内置科目              ./beneft/cost-benefit/.html
+        2）、会计结账日设置
+        3）、医疗丰县基金设置
+
+四、工作量检测
+    1、跟踪监测
+        1）、流失情况监测              ./beneft/sz-supervise/wastage.html
+        2）、增减变动监测              ./beneft/sz-supervise/increase-decrease.html
+        3）、论证数据监测              ./beneft/sz-supervise/argument-data.html
+    2、管控结果
+        1）、经济指标动态分析报告      ./beneft/sz-supervise/economic-indicator.html
+    3、综合统计
+        1）、使用情况统计表           ./beneft/sz-supervise/service-condition.html
+        2）、经济效益分析和评价报告   ./beneft/sz-supervise/economic-benefit.html
+    4、工作量设置
+        1）、设备工作量设置           ./beneft/sz-supervise/device-work.html
+
+
+五、经济损失分析
+    1、收入流失
+        1）、收入流失分析             ./beneft/sz-supervise/income-lose.html
+    2、好用超支
+        1）、损耗超支分析             ./beneft/sz-supervise/overspending.html
+    3、损失指标分析
+        1）、经济损失指标分析          ./beneft/sz-supervise/economic-loss.html
+
+
+重合部分：
+    1、效率等级              ./beneft/sz-supervise/efficiency-level.html       ./beneft/usage-situation/efficiency-level.html
+    2、工作日平均闲置时间     ./beneft/sz-supervise/free-time.html              ./beneft/usage-situation/average-time.html
+    3、效率等级设置          ./beneft/sz-supervise/level-setup.html             ./beneft/usage-situation/set-efficiency-level.html
+    4、开机率                ./beneft/sz-supervise/starting-up.html             ./beneft/usage-situation/boot-rate.html

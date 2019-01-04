@@ -7,8 +7,13 @@ import lombok.Data;
  */
 @Data
 public class SgDxzbUser {
+    /**
+     * 大型医学装备考察报告表主键
+     */
     private String dxzbId;
-
+    /**
+     * 人员表主键
+     */
     private String userId;
 
 }

@@ -13,37 +13,14 @@
     <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
-    <style>
-        .layui-form-label{
-            padding: 8px 10px!important;
-        }
-        .title{
-            width:96.5%;
-            height:50px;
-            background-color:#eeeeee;
-            margin:0 auto;
-            border-radius:5px;
-            margin-top:20px;
-            margin-bottom:20px;
-            line-height:50px;
-            font-size:18px;
-            padding-left:15px;
-        }
-        .sign{
-            color:red;
-        }
-        .layui-form-item{
-            margin-bottom:25px
-        }
-    </style>
 </head>
 
 <body>
 <form class="layui-form layui-form-pane" action="">
     <div class="layui-row">
-        <div class="title">
-            医学装备申购科室讨论记录表
-        </div>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>医学装备申购科室讨论记录表</legend>
+        </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">时间<span class="sign">*</span></label>
@@ -66,13 +43,13 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">记录人<span class="sign">*</span></label>
                 <div class="layui-input-block">
 
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">参加人员<span class="sign">*</span></label>
                 <div class="layui-input-block">
 
@@ -83,19 +60,16 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">备注</label>
+                <label class="layui-form-label">会议内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
-
-        </div>
-        <div class="col-xs-12">
             <div class="layui-form-item" style="margin-left:35%;margin-top:25px">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -158,7 +132,6 @@
         });
 
 
-        frame_all("back");
     });
 </script>
 </body>

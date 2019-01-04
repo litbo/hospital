@@ -1,52 +1,319 @@
 package com.litbo.hospital.lifemanage.dao.provider;
 
 import com.litbo.hospital.lifemanage.bean.SgInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 申购单表Mapper接口的sql类
  */
 public class SgInfoSqlProvider {
-
-    public String updateSgInfoById(SgInfo record) {
+    /**
+     * 添加申购单信息
+     *
+     * @param sgInfo 申购信息
+     */
+    public String updateSgInfoById(SgInfo sgInfo) {
         return new SQL() {{
             UPDATE("sg_info");
-            SET("id = #{record.id,jdbcType=VARCHAR}");
-            SET("bm_id = #{record.bmId,jdbcType=CHAR}");
-            SET("bh = #{record.bh,jdbcType=VARCHAR}");
-            SET("eq_pm_id = #{record.eqPmId,jdbcType=INTEGER}");
-            SET("tg_bm_id = #{record.tgBmId,jdbcType=CHAR}");
-            SET("gzlb_id = #{record.gzlbId,jdbcType=INTEGER}");
-            SET("zjly_id = #{record.zjlyId,jdbcType=INTEGER}");
-            SET("syxz_id = #{record.syxzId,jdbcType=INTEGER}");
-            SET("num = #{record.num,jdbcType=INTEGER}");
-            SET("price_wd = #{record.priceWd,jdbcType=DECIMAL}");
-            SET("price_sn = #{record.priceSn,jdbcType=DECIMAL}");
-            SET("price_gj_y = #{record.priceGjY,jdbcType=DECIMAL}");
-            SET("price_gj_my = #{record.priceGjMy,jdbcType=DECIMAL}");
-            SET("syl = #{record.syl,jdbcType=VARCHAR}");
-            SET("pjbg_id = #{record.pjbgId,jdbcType=VARCHAR}");
-            SET("kxfx_id = #{record.kxfxId,jdbcType=VARCHAR}");
-            SET("dxzb_id = #{record.dxzbId,jdbcType=VARCHAR}");
-            SET("iskssh = #{record.iskssh,jdbcType=CHAR}");
-            SET("isyxgccsh = #{record.isyxgccsh,jdbcType=CHAR}");
-            SET("iszbwyhsh = #{record.iszbwyhsh,jdbcType=CHAR}");
-            SET("zbwyhyj = #{record.zbwyhyj,jdbcType=VARCHAR}");
-            SET("zbwyhhy_id = #{record.zbwyhhyId,jdbcType=VARCHAR}");
-            SET("isybghsh = #{record.isybghsh,jdbcType=CHAR}");
-            SET("ybghyj = #{record.ybghyj,jdbcType=VARCHAR}");
-            SET("ybghhy_id = #{record.ybghhyId,jdbcType=VARCHAR}");
-            SET("zt = #{record.zt,jdbcType=VARCHAR}");
-            SET("extend_one = #{record.extendOne,jdbcType=VARCHAR}");
-            SET("extend_two = #{record.extendTwo,jdbcType=VARCHAR}");
-            SET("yxgccyj = #{record.yxgccyj,jdbcType=VARCHAR}");
-            SET("gzll = #{record.gzll,jdbcType=LONGVARCHAR}");
-            SET("xxyt = #{record.xxyt,jdbcType=LONGVARCHAR}");
-            SET("mdyt = #{record.mdyt,jdbcType=LONGVARCHAR}");
-            SET("jxkylc_qk = #{record.jxkylcQk,jdbcType=LONGVARCHAR}");
-            SET("jbcsyq = #{record.jbcsyq,jdbcType=LONGVARCHAR}");
-            SET("pzxq = #{record.pzxq,jdbcType=LONGVARCHAR}");
-            WHERE("id = #{record.id,jdbcType=VARCHAR}");
+            SET("bh = #{sgInfo.bh,jdbcType=VARCHAR}");
+            //托管科室id
+            SET("tg_bm_id = #{sgInfo.tgBmId,jdbcType=CHAR}");
+            //购置类别id
+            SET("gzlb_id = #{sgInfo.gzlbId,jdbcType=INTEGER}");
+            //资金来源id
+            SET("zjly_id = #{sgInfo.zjlyId,jdbcType=INTEGER}");
+            //使用性质id
+            SET("syxz_id = #{sgInfo.syxzId,jdbcType=INTEGER}");
+            //数量
+            SET("num = #{sgInfo.num,jdbcType=INTEGER}");
+            //外地价格
+            SET("price_wd = #{sgInfo.priceWd,jdbcType=DECIMAL}");
+            //省内价格
+            SET("price_sn = #{sgInfo.priceSn,jdbcType=DECIMAL}");
+            //估价元
+            SET("price_gj_y = #{sgInfo.priceGjY,jdbcType=DECIMAL}");
+            //估价美元
+            SET("price_gj_my = #{sgInfo.priceGjMy,jdbcType=DECIMAL}");
+            //检测量/日
+            SET("jcl = #{sgInfo.jcl,jdbcType=VARCHAR}");
+            //设计使用率
+            SET("syl = #{sgInfo.syl,jdbcType=VARCHAR}");
+            //购置理由
+            SET("gzll = #{sgInfo.gzll,jdbcType=LONGVARCHAR}");
+            //详细用途
+            SET("xxyt = #{sgInfo.xxyt,jdbcType=LONGVARCHAR}");
+            //目的用途
+            SET("mdyt = #{sgInfo.mdyt,jdbcType=LONGVARCHAR}");
+            //目前教学科研临床应用情况
+            SET("jxkylcqk = #{sgInfo.jxkylcqk,jdbcType=LONGVARCHAR}");
+            //基本参数要求
+            SET("jbcsyq = #{sgInfo.jbcsyq,jdbcType=LONGVARCHAR}");
+            //配置详细需求
+            SET("pzxq = #{sgInfo.pzxq,jdbcType=LONGVARCHAR}");
+            WHERE("id = #{sgInfo.id,jdbcType=VARCHAR}");
+        }}.toString();
+    }
+
+    /**
+     * 显示科室汇总审核列表
+     *
+     * @param bmId     部门id
+     * @param sgInfoBh 申购单编号
+     * @param pmList   品名列表
+     */
+    public String selectSgInfoKsshList(String bmId, String sgInfoBh, List<String> pmList) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.id");
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("dbo.sg_info.bh");
+            SELECT("dbo.eq_pm.eq_pm_name");
+            SELECT("dbo.sg_info.num");
+            SELECT("dbo.sg_info.price_gj_y");
+            SELECT("dbo.sg_info.zt");
+            SELECT("dbo.sg_info.kstl_id");
+            SELECT("dbo.sg_info.pjbg_id");
+            SELECT("dbo.sg_info.kxfx_id");
+            SELECT("dbo.sg_info.dxzb_id");
+            SELECT("dbo.sg_info.lzfx_id");
+            FROM("dbo.sg_info");
+            INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
+            WHERE("dbo.sg_info.bh IS NOT NULL");
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
+            }
+            if (StringUtils.isNotBlank(sgInfoBh)) {
+                WHERE("dbo.sg_info.bh like #{sgInfoBh,jdbcType=VARCHAR}");
+            }
+            if (pmList != null && pmList.size() > 0) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < pmList.size(); i++) {
+                    sb.append(pmList.get(i));
+                    if (pmList.size() != (i + 1)) {
+                        sb.append(",");
+                    }
+                }
+                WHERE("dbo.sg_info.eq_pm_id IN (" + sb.toString() + ")");
+            }
+            WHERE("dbo.sg_info.iskssh IS NULL");
+        }}.toString();
+    }
+
+    /**
+     * 显示工程处审核列表
+     *
+     * @param bmId 查看具体部门id
+     */
+    public String selectSgInfoGccshList(String bmId) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.id");
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("dbo.sg_info.bh");
+            SELECT("dbo.eq_pm.eq_pm_name");
+            SELECT("dbo.sg_info.num");
+            SELECT("dbo.sg_info.price_gj_y");
+            SELECT("dbo.sg_info.zt");
+            SELECT("dbo.sg_info.kstl_id");
+            SELECT("dbo.sg_info.pjbg_id");
+            SELECT("dbo.sg_info.kxfx_id");
+            SELECT("dbo.sg_info.dxzb_id");
+            SELECT("dbo.sg_info.lzfx_id");
+            FROM("dbo.sg_info");
+            INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
+            WHERE("dbo.sg_info.bh IS NOT NULL");
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id like #{bmId,jdbcType=VARCHAR}");
+            }
+            WHERE("dbo.sg_info.isyxgccsh IS NULL AND dbo.sg_info.iskssh = 1");
+        }}.toString();
+    }
+
+    /**
+     * 显示申购单装备委员会审核列表
+     *
+     * @param bmId 部门id
+     * @param bh   申购单编号
+     */
+    public String selectSgInfoSgZbwyhhyList(String bmId, String bh) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.id");
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("dbo.sg_info.bh");
+            SELECT("dbo.eq_pm.eq_pm_name");
+            SELECT("dbo.sg_info.num");
+            SELECT("dbo.sg_info.price_gj_y");
+            SELECT("dbo.sg_info.zt");
+            SELECT("dbo.sg_info.kstl_id");
+            SELECT("dbo.sg_info.pjbg_id");
+            SELECT("dbo.sg_info.kxfx_id");
+            SELECT("dbo.sg_info.dxzb_id");
+            SELECT("dbo.sg_info.lzfx_id");
+            FROM("dbo.sg_info");
+            INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
+            WHERE("dbo.sg_info.bh IS NOT NULL");
+            if (StringUtils.isNotBlank(bh)) {
+                WHERE("dbo.sg_info.bh like #{sgInfoBh,jdbcType=VARCHAR}");
+            }
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
+            }
+            WHERE("dbo.sg_info.iszbwyhsh IS NULL AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1");
+        }}.toString();
+    }
+
+    /**
+     * 显示申购单院办公会审核列表
+     *
+     * @param bmId 部门id
+     * @param bh   申购单编号
+     */
+    public String selectSgInfoYbgsShList(String bmId, String bh) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.id");
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("dbo.sg_info.bh");
+            SELECT("dbo.eq_pm.eq_pm_name");
+            SELECT("dbo.sg_info.num");
+            SELECT("dbo.sg_info.price_gj_y");
+            SELECT("dbo.sg_info.zt");
+            SELECT("dbo.sg_info.kstl_id");
+            SELECT("dbo.sg_info.pjbg_id");
+            SELECT("dbo.sg_info.kxfx_id");
+            SELECT("dbo.sg_info.dxzb_id");
+            SELECT("dbo.sg_info.lzfx_id");
+            FROM("dbo.sg_info");
+            INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
+            WHERE("dbo.sg_info.bh IS NOT NULL");
+            if (StringUtils.isNotBlank(bh)) {
+                WHERE("dbo.sg_info.bh like #{sgInfoBh,jdbcType=VARCHAR}");
+            }
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
+            }
+            WHERE("dbo.sg_info.isybghsh IS NULL AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1");
+        }}.toString();
+    }
+
+    /**
+     * 装备委员会年度采购计划
+     *
+     * @param year 年份
+     * @param bmId 部门id
+     */
+    public String selectSgZbwyhYearPurchase(String year, String bmId) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.id");
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("dbo.sg_info.bh");
+            SELECT("dbo.eq_pm.eq_pm_name");
+            SELECT("dbo.sg_info.num");
+            SELECT("dbo.sg_info.price_gj_y");
+            SELECT("dbo.sg_info.zt");
+            SELECT("dbo.sg_info.kstl_id");
+            SELECT("dbo.sg_info.pjbg_id");
+            SELECT("dbo.sg_info.kxfx_id");
+            SELECT("dbo.sg_info.dxzb_id");
+            SELECT("dbo.sg_info.lzfx_id");
+            FROM("dbo.sg_info");
+            INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
+            WHERE("dbo.sg_info.bh IS NOT NULL");
+            if (StringUtils.isNotBlank(year)) {
+                WHERE("dbo.sg_info.id IN (SELECT dbo.sg_zbwyhhy.sg_id FROM dbo.sg_zbwyhhy WHERE dbo.sg_zbwyhhy.zbwyhhy_nd = #{year,jdbcType=VARCHAR})");
+            }
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
+            }
+            WHERE("dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1");
+        }}.toString();
+    }
+
+    /**
+     * 院办公会年度采购计划
+     *
+     * @param year 年份
+     * @param bmId 部门id
+     */
+    public String selectSgYbghhyYearPurchase(String year, String bmId) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.id");
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("dbo.sg_info.bh");
+            SELECT("dbo.eq_pm.eq_pm_name");
+            SELECT("dbo.sg_info.num");
+            SELECT("dbo.sg_info.price_gj_y");
+            SELECT("dbo.sg_info.zt");
+            SELECT("dbo.sg_info.kstl_id");
+            SELECT("dbo.sg_info.pjbg_id");
+            SELECT("dbo.sg_info.kxfx_id");
+            SELECT("dbo.sg_info.dxzb_id");
+            SELECT("dbo.sg_info.lzfx_id");
+            FROM("dbo.sg_info");
+            INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
+            WHERE("dbo.sg_info.bh IS NOT NULL");
+            if (StringUtils.isNotBlank(year)) {
+                WHERE("dbo.sg_info.id IN (SELECT dbo.sg_ybghhy.sg_id FROM dbo.sg_ybghhy WHERE YEAR(dbo.sg_ybghhy.ybghhy_sj) = #{year,jdbcType=VARCHAR})");
+            }
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
+            }
+            WHERE("dbo.sg_info.isybghsh = 1 AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1");
+        }}.toString();
+    }
+
+    /**
+     * 院办公会年度采购预算
+     *
+     * @param year 年份
+     * @param bmId 部门id
+     * @return sql
+     */
+    public String selectSgYbghhyYearBudget(String year, String bmId) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("Sum(dbo.sg_info.price_gj_y) AS ysy");
+            SELECT("Sum(dbo.sg_info.price_gj_my) AS ysmy");
+            FROM("dbo.sg_info");
+            WHERE("dbo.sg_info.isybghsh = '1'");
+            WHERE("dbo.sg_info.id IN ( " +
+                    "SELECT dbo.sg_ybghhy.sg_id " +
+                    "FROM dbo.sg_ybghhy " +
+                    "INNER JOIN dbo.sg_info ON dbo.sg_ybghhy.sg_id = dbo.sg_info.id " +
+                    "WHERE year(dbo.sg_ybghhy.ybghhy_sj) = #{year,jdbcType=VARCHAR}" +
+                    ")");
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
+            }
+            GROUP_BY("dbo.sg_info.bm_id");
+        }}.toString();
+    }
+
+    /**
+     * 装备委员会年度采购预算
+     *
+     * @param year 年份
+     * @param bmId 部门id
+     * @return sql
+     */
+    public String selectSgZbwyhYearBudget(String year, String bmId) {
+        return new SQL() {{
+            SELECT("dbo.sg_info.bm_id");
+            SELECT("Sum(dbo.sg_info.price_gj_y) AS ysy");
+            SELECT("Sum(dbo.sg_info.price_gj_my) AS ysmy");
+            FROM("dbo.sg_info");
+            WHERE("dbo.sg_info.iszbwyhsh = '1'");
+            WHERE("dbo.sg_info.id IN (" +
+                    "SELECT dbo.sg_zbwyhhy.sg_id " +
+                    "FROM dbo.sg_zbwyhhy " +
+                    "INNER JOIN dbo.sg_info ON dbo.sg_zbwyhhy.sg_id = dbo.sg_info.id " +
+                    "WHERE dbo.sg_zbwyhhy.zbwyhhy_nd = #{year,jdbcType=VARCHAR}" +
+                    ")");
+            if (StringUtils.isNotBlank(bmId)) {
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
+            }
+            GROUP_BY("dbo.sg_info.bm_id");
         }}.toString();
     }
 
@@ -55,7 +322,16 @@ public class SgInfoSqlProvider {
         SgInfo sgInfo = new SgInfo();
         sgInfo.setId("1");
         sgInfo.setBmId("1");
-        String s1 = s.updateSgInfoById(sgInfo);
+//        String s1 = s.updateSgInfoById(sgInfo);
+
+        String bmId = "1000011";
+        String sgInfoBh = "01";
+        List<String> pmList = new ArrayList<>();
+        pmList.add("6803010102");
+        pmList.add("6803010101");
+//        String s1 = s.selectKsShHz(bmId,sgInfoBh,pmList);
+//        System.out.println(s1);
+        String s1 = s.selectSgYbghhyYearBudget("2018", null);
         System.out.println(s1);
     }
 }
