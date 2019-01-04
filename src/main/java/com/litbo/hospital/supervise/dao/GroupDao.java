@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.dao;
 
+import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
 import com.litbo.hospital.supervise.bean.SGroupUser;
 import com.litbo.hospital.supervise.vo.GroupUserSelectVO;
@@ -14,9 +15,9 @@ public interface GroupDao {
     public List<SGroup> getGroups() ;
     @Select("select sp.group_id, sp.bm_id,bm.bm_name, sp.group_name, sp.user_id1,emp1.user_xm as userName1, \n" +
             "sp.create_time, sp.user_id2,emp2.user_xm as userName2, sp.sh_time, sp.sh_flag ,sp.sh_yj \n" +
-            "FROM s_group sp  INNER JOIN s_bm bm on (sp.bm_id=bm.bm_id) \n" +
-            "INNER JOIN s_emp emp1 ON (sp.user_id1 = emp1.user_id)\n" +
-            "INNER JOIN s_emp emp2 ON (sp.user_id2 = emp2.user_id) ")
+            "FROM s_group sp  LEFT JOIN s_bm bm on (sp.bm_id=bm.bm_id) \n" +
+            "LEFT JOIN s_emp emp1 ON (sp.user_id1 = emp1.user_id)\n" +
+            "LEFT JOIN s_emp emp2 ON (sp.user_id2 = emp2.user_id) ")
     List<SGroupSelectVO> getSelectGroups();
 
     @Select("select group_id, bm_id, group_name, user_id1, create_time, user_id2, sh_time, sh_flag ,sh_yj from s_group where group_id=#{group_id}")
@@ -71,7 +72,12 @@ public interface GroupDao {
             " from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) " +
             " INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) " +
             " WHERE gw.gw_name=#{gwName} and users.group_id=#{groupId}")
-    String[] getEmpXMByGIdAndGWXm(@Param("groupId") Integer groupId, @Param("gwName") String gwName);
+    List<String> getEmpXMByGIdAndGWXm(@Param("groupId") Integer groupId, @Param("gwName") String gwName);
+
+    @Select(" select bm.obm_id,bm.bm_id,bm.bm_name,bm.user_id,bm.bm_tel,bm.bm_addr,bm.wx_flag,bm.p_bm_id,bm.xbm_flag " +
+            " from s_bm bm LEFT JOIN s_group gp on (bm.bm_id=gp.bm_id) " +
+            " where gp.bm_id is null and bm.xbm_flag=0 ")
+    List<SBm> listWclGroupBm();
 
 //    SELECT * from s_group_users u INNER JOIN s_emp emp on (u.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (u.gw_id=gw.gw_id)gw_id
 }

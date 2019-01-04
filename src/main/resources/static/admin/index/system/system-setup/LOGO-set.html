@@ -69,13 +69,16 @@
                 acceptMime:"image/*",
                 auto:false,
                 bindAction:"#sub",
-                data:{},
+                field:"logoFile",
                 choose:function(obj){
                     obj.preview(function(index,file,result){
                         $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
                     })
                 },done:function(obj){
                     //layui.closeAll("loading");
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
                 }
             }
         }

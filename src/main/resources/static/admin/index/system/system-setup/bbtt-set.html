@@ -51,15 +51,13 @@
 
 
 <script>
-    $(function(){
-        $("button[lay-filter='submit']").on('click',function(){
-            JQajax({
-                url:"/logo/setLogo",
-                data:{"logoFile":$("input[name='logoFile']").val()},
-                method:"POST"
-            })
-        })
-    })
+    renderMod = {
+        form:{
+            switch:"html",
+            url:"/logo/setLogo",
+            method:"POST"
+        }
+    };
 </script>
 </body>
 </html>
