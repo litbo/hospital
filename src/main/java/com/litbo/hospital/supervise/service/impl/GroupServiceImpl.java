@@ -2,6 +2,7 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
 import com.litbo.hospital.supervise.bean.SGroupUser;
 import com.litbo.hospital.supervise.dao.GroupDao;
@@ -130,36 +131,48 @@ public class GroupServiceImpl implements GroupService {
 //    使用部门质检员                       质控管理人员
 
             //获得组长    根据id查人员和岗位       select emp.user_xm,gw.gw_name from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) WHERE gw.gw_name='使用部门质量安全管理人员'
-            String[] zzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门医学装备管理小组组长");
-            msgDetailVO.setZzs(zzs);
+            List<String> zzs = groupDao.getEmpXMByGIdAndGWXm(groupId, "使用部门医学装备管理小组组长");
+            msgDetailVO.setZzs(ListToArrStr(zzs));
             //获得副组长
-            String[] fzzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门医学装备管理小组副组长");
-            msgDetailVO.setFzzs(fzzs);
+            List<String> fzzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门医学装备管理小组副组长");
+            msgDetailVO.setFzzs(ListToArrStr(fzzs));
 
             //获得质安管理人员
-            String[] zagls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质量安全管理人员");
-            msgDetailVO.setZagls(zagls);
+            List<String> zagls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质量安全管理人员");
+            msgDetailVO.setZagls(ListToArrStr(zagls));
 
             //获得资产管理人员
-            String[] zcgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门资产管理员");
-            msgDetailVO.setZcgls(zcgls);
+            List<String> zcgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门资产管理员");
+            msgDetailVO.setZcgls(ListToArrStr(zcgls));
 
             //获得计量管理人员
-            String[] jzgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门计量员");
-            msgDetailVO.setJlgls(jzgls);
+            List<String> jzgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门计量员");
+            msgDetailVO.setJlgls(ListToArrStr(jzgls));
 
             //获得监测联络员
-            String[] jclls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门监测联络员");
-            msgDetailVO.setJclls(jclls);
+            List<String> jclls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门监测联络员");
+            msgDetailVO.setJclls(ListToArrStr(jclls));
 
             //获得质控管理人员
-            String[] zkgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质检员");
-            msgDetailVO.setZkgls(zkgls);
-
+            List<String> zkgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质检员");
+            msgDetailVO.setZkgls(ListToArrStr(zkgls));
             msgDetails.add(msgDetailVO);
         }
 
 
         return new PageInfo(msgDetails);
+    }
+
+    private String[] ListToArrStr(List<String> ll ){
+        String[] ss = new String[ll.size()];
+        String[] result = ll.toArray(ss);
+        return result;
+    }
+
+    @Override
+    public PageInfo listWclGroupBm(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> bms = groupDao.listWclGroupBm();
+        return new PageInfo(bms);
     }
 }

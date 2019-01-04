@@ -26,7 +26,6 @@ public interface ZhiduService {
     void reSubmit(ZhiduSubmitVO zhiduSubmitVO);
 
     //通过审核人查询待审核的制度
-
     PageInfo listZdsByShr(int pageNum, int pageSize, String shr_id);
 
     //获取审核的详细信息

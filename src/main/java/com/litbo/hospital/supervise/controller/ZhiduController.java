@@ -10,6 +10,7 @@ import com.litbo.hospital.supervise.vo.ZhiduSubmitVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/supervise/zdgl")
@@ -45,7 +46,7 @@ public class ZhiduController {
     }
 
     @PostMapping("/submit")
-    public Result submit(@RequestBody ZhiduSubmitVO zhiduSubmitVO){
+    public Result submit(@RequestBody ZhiduSubmitVO zhiduSubmitVO, @RequestParam(value = "file",required = false) MultipartFile file){
         //提交时 SZhidu对象包括信息 bmid  zdname  zdcontent  docurl  userid createTime
         zhiduService.submit(zhiduSubmitVO);
         return Result.success();
