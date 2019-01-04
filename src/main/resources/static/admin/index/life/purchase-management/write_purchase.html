@@ -22,35 +22,29 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
-
 <script type="text/html" id="toolBar">
-    <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="detail">填表说明</a>
-    <div class="layui-inline">
-        <input class="layui-input" name="search" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">填表说明</a>
     </div>
-    <div class="layui-inline">
-        <input class="layui-input" name="search" id="test" placeholder="设备简称" autocomplete="off">
+    <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="search" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="search" id="test" placeholder="设备简称" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">查找</button>
     </div>
-    <button class="layui-btn" data-type="reload">查找</button>
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase">申购单</a>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , limit:15
-            , limits:[15,25,35,45,55,65,75,85,95]
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
+    addTable ={
+        table:{
+            cols: [[ //表头
                 {field: 'eqPmName', title: '设备名称', width: '53%', minWidth: 400, event: 'openLink'}
                 , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
                 , {field: 'eqFlName', title: '卫标分类', minWidth: 150, sort: true}
@@ -65,15 +59,18 @@
             ,where:{
                 bmId : "01001"
             }
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-                frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+            ,parseData: function(res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "data": res.data.list //解析数据列表
+                }
             }
-        });
-
-    });
+            , done: function (obj) {
+                //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+            }
+        }
+    }
 </script>
 </body>
 

@@ -31,20 +31,11 @@
     <button class="layui-btn" data-type="reload">搜索</button>
 </script>
 <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , limit:15
-            , limits:[15,25,35,45,55,65,75,85,95]
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
+    addTable = {
+        table: {
+            cols: [[ //表头
                 {field: 'activity_name', title: '活动名', width: '53%', minWidth: 400, event: 'openLink'}
                 , {field: 'process_name', title: '流程名', minWidth: 150}
                 , {field: 'create_date', title: '创建日期', minWidth: 150, sort: true}
@@ -413,15 +404,11 @@
                     ]
                 }
             ]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-                frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+            , done: function (obj) {
+                // frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
             }
-        });
-
-    });
+        }
+    }
 </script>
 </body>
 

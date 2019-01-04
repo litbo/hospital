@@ -364,7 +364,7 @@
                     }
                 ]
             ]
-        }
+        };
         var h_name = [["need_do","personal_record"],["announce","public_info"]],id=0;
         getData(data);
         $(".h_more").click(function(){
@@ -383,8 +383,7 @@
                 window.parent.location.search = "?p=home";
             }
 
-        })
-
+        });
         //5：welcome数据添加
         function getData(data) {
             addData(h_name[0],data.task);
@@ -407,7 +406,14 @@
 
             }
         }
-    })
+    });
+    window.onload = function(){
+        //当页面canvas加载不正确时页面重载
+        var ww = $('canvas').width();
+        if(ww < 100){
+            $.cookie("ww",ww);
+        }
+    }
 
 </script>
 </body>

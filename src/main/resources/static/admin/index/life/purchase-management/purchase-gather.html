@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>申购单汇总</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <!--<table id="table" lay-filter="table1"></table>-->
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">按申购科室汇总</li>
+                <li>按申购设备汇总</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <table id="table" lay-filter="table"></table>
+                </div>
+                <div class="layui-tab-item">
+                    <table id="table1" lay-filter="table1"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a href=""><button class=" layui-btn layui-btn-xs">汇 总</button></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="全部科室" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
+</script>
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    addTable ={
+        table:[{
+            elem:"#table"
+            ,height:'full-75'
+            ,cols: [[ //表头
+                {type:"checkbox"}
+                , {field: 'purchase-depart', title: '申购科室',width:"40%", minWidth: 150}
+                , {field: 'device-num', title: '设备数量', minWidth: 400}
+                , {field: 'money', title: '金额', minWidth: 150, sort: true}
+            ]]
+            , done: function (obj) {
+            }
+        },{
+            elem:"#table1"
+            ,height:'full-75'
+            ,cols:[[
+                {type:'checkbox'}
+                ,{field:'device-name',title:'设备名称',width:'35%',minWidth:200}
+                ,{field:'model',title:'规格型号',minWidth:200}
+                ,{field:'device-num',title:'设备数量',minWidth:250}
+                ,{field:'money',title:'金额',minWidth:250,sort:true}
+            ]]
+        }]
+    }
+</script>
+</body>
+
+</html>

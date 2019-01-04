@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>设备信息查询</title>
     <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
     <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
@@ -17,7 +19,7 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table_basic" lay-filter="test"></table>
+        <table id="table" lay-filter="test"></table>
     </div>
 </div>
 <script type="text/html" id="bar">
@@ -25,109 +27,83 @@
     <a class="layui-btn layui-btn-xs" layui-event="detail">查看</a>
 </script>
 <script type="text/html" id="toolBar">
-    <form class="layui-form hidden-xs">
-        <div class="test-table-reload-btn  h_tool">
-            分类查询：
-            <div class="layui-input-inline">
-                <input class="layui-input" name="section-name" id="test-table-demoReload" autocomplete="off" placeholder="科室名称">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="hidden-xs" id="moreBar">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-inline">
+                <input class="layui-input" name="search" placeholder="科室名称" autocomplete="off">
+            </div>
+            <div class="layui-inline">
+                <input class="layui-input" name="search" placeholder="设备名称拼音码" autocomplete="off">
+            </div>
+            <div class="layui-inline">
+                <input class="layui-input" name="search" placeholder="设备编码" autocomplete="off">
+            </div>
+            <div class="layui-inline">
+                <input class="layui-input" name="search" placeholder="资产编码" autocomplete="off">
             </div>
             <div class="layui-input-inline">
-                <input class="layui-input" name="spell" placeholder="设备名称拼音码" autocomplete="off">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="serch">查找</button>
             </div>
-            <div class="layui-input-inline">
-                <input class="layui-input" name="section-number" autocomplete="off" placeholder="设备编码">
-            </div>
-            <div class="layui-input-inline">
-                <input class="layui-input" name="asset-number" autocomplete="off" placeholder="资产编码">
-            </div>
-            <button class="layui-btn" data-type="reload">搜索</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table',function(){
-        var table = layui.table;
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'bmName', title: '部门', minWidth: 100}
+                    , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
+                    , {field: 'eqZcbh', title: '资产编号', minWidth: 150}
+                    , {field: 'eqName', title: '设备名称', minWidth: 150}
+                    , {field: 'eqXh', title: '型号', minWidth: 80}
+                    , {field: 'eqGg', title: '规格', width: 150}
+                    , {field: 'eqQysj', title: '启用日期', width: 150}
+                    , {title: '操作', toolbar: '#bar', align: "center"}
+                ]]
+                , url: "http://localhost/eq/listShowEqs"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+             /*   , where: {
+                    bmId: ""
 
-        //方法级渲染
-        table.render({
-            elem:'#table_basic'
-            ,page:'true'
-            ,height:'full-25'
-            ,minWidth:1000
-            ,toolbar:'#toolBar'
-            ,cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'division', title: '部门', minWidth: 100}
-                , {field: 'device-number', title: '设备编号', minWidth: 150}
-                , {field:'asset-number',title:'资产编号',minWidth:150}
-                , {field:'device-name',title:'设备名称',minWidth:150}
-                , {field:'version',title:'型号',minWidth:80}
-                , {field:'standard',title:'规格',width:150}
-                , {field:'date',title:'启用日期',width:150}
-                , {title:'操作',toolbar:'#bar',align:"center"}
-            ]]
-            , "data": [
-                {
-                    "division": '病案室',
-                    "device-number": "17070002500073",
-                    "asset-number": "99001734",
-                    "device-name": "更衣柜（三门）",
-                    "version": "富莱特",
-                    "date":"2017-07-01"
-                },
-                {
-                    "division": '病案室',
-                    "device-number": "17070002500073",
-                    "asset-number": "99001734",
-                    "device-name": "更衣柜（三门）",
-                    "version": "富莱特",
-                    "date":"2017-07-01"
-                },
-                {
-                    "division": '病案室',
-                    "device-number": "17070002500073",
-                    "asset-number": "99001734",
-                    "device-name": "更衣柜（三门）",
-                    "version": "富莱特",
-                    "date":"2017-07-01"
-                },
-                {
-                    "division": '病案室',
-                    "device-number": "17070002500073",
-                    "asset-number": "99001734",
-                    "device-name": "更衣柜（三门）",
-                    "version": "富莱特",
-                    "date":"2017-07-01"
-                },
-                {
-                    "division": '病案室',
-                    "device-number": "17070002500073",
-                    "asset-number": "99001734",
-                    "device-name": "更衣柜（三门）",
-                    "version": "富莱特",
-                    "date":"2017-07-01"
-                },
-                {
-                    "division": '病案室',
-                    "device-number": "17070002500073",
-                    "asset-number": "99001734",
-                    "device-name": "更衣柜（三门）",
-                    "version": "富莱特",
-                    "date":"2017-07-01"
-                }]
-        });
+                }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
 
-    //监听行工具事件
-    table.on('tool(test)', function(obj){
-        var data = obj.data;//获得当前行数据
-        if(obj.event === 'edit'){//编辑
-            window.location.href="information-entry.html";
-        } else if(obj.event === 'detail'){//查看
-            //do something
+                }
+            },
+
+            reSet:{
+                url:"eq/listEqByX",
+                type:"serch",
+                where: {
+
+                }
+
+            }
+
         }
-    });
-    });
+
+
+
+    }
+
+
 </script>
 </body>
 </html>

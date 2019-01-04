@@ -23,7 +23,16 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <form class="layui-form layui-form-pane hidden-xs" action="">
+    <div class="mini_select">
+        <div class="layui-input-inline">
+            <select name="modules66" >
+                <option value="day">日</option>
+                <option value="month">月</option>
+                <option value="year">年</option>
+            </select>
+        </div>
+    </div>
+    <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
         <div class="layui-input-inline">
             <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
         </div>
@@ -42,29 +51,14 @@
             </div>
     </form>
 </script>
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">过程记录</a>
-</script>
+
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['table','form','laydate'], function () {
-        var table = layui.table
-            ,form = layui.form
-            ,laydate = layui.laydate;
-        laydate.render({
-            elem: '#date',
-            type:'date'
-        });
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
-                 {field: 'process_name', title: '科室', minWidth: 150, sort: true}
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {field: 'process_name', title: '科室', minWidth: 150, sort: true}
                 , {field: 'create_date', title: '台数', minWidth: 150, sort: true}
                 , {field: 'work_long', title: '工作时长', minWidth: 150, sort: true}
                 , {field: 'stand_long', title: '待机时长', minWidth: 150, sort: true}
@@ -86,14 +80,15 @@
                     "work_long": "10H",
                     "stand_long": "15H"
                 }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
+            , done: function (obj) {
                 //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
             }
-        });
-    });
+        },
+        date :{
+            elem : "#date"
+        }
+    }
+
 </script>
 </body>
 

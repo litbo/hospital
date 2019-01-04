@@ -1,21 +1,19 @@
 package com.litbo.hospital.supervise.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.dao.WxhfDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.supervise.service.WxhfService;
-import com.litbo.hospital.supervise.vo.WxhfReadyResouceVO;
-import java.util.List;
-
-import com.litbo.hospital.supervise.vo.WxrBmInsertVO;
-import com.litbo.hospital.user.bean.EqInfo;
+import com.litbo.hospital.supervise.vo.*;
 import com.litbo.hospital.user.dao.EqDao;
-import com.litbo.hospital.user.service.EqService;
-import com.litbo.hospital.user.vo.EqVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WxhfServiceImpl implements WxhfService {
@@ -54,9 +52,38 @@ public class WxhfServiceImpl implements WxhfService {
     }
 
     @Override
-    public void wxrBmXcHf(String[] bms) {
-        for (String bmId : bms){
-            wxhfDao.wxrBmXcHf(bmId);
+    public void wxrBmXcHf(String[] gbids) {
+        for (String gbid : gbids){
+            wxhfDao.wxrBmXcHf(gbid);
+        }
+    }
+
+    @Override
+    public PageInfo getWxbmGcsEqMSG() {
+
+        return new PageInfo(wxhfDao.getWxbmGcsEqMSG());
+    }
+
+    @Override
+    public PageInfo getGcsBmMSG(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(wxhfDao.getGcsBmMSG());
+    }
+
+    @Override
+    public void wxBmGcsEqHf(WxBmGcsEqInsertVO wxBmGcsEqInsertVO) {
+        String bmId = wxBmGcsEqInsertVO.getBmId();
+        String gcsId = wxBmGcsEqInsertVO.getUserId();
+        String[] eqIds = wxBmGcsEqInsertVO.getEqIds();
+        for (String eqId : eqIds){
+            wxhfDao.wxBmGcsEqHf(bmId,gcsId,eqId);
+        }
+    }
+
+    @Override
+    public void wxBmGcsEqXcHf(String[] bgids) {
+        for (String bgId : bgids){
+            wxhfDao.wxBmGcsEqXcHf(bgId);
         }
     }
 }

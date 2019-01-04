@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>新建改善提案</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        /*.layui-form-item .layui-form-label{*/
+        /*width:150px;*/
+        /*}*/
+        /*.layui-form-item .layui-input-block{*/
+        /*margin-left:150px;*/
+        /*}*/
+        .layui-form-item{
+            margin-top:35px
+        }
+        span{
+            color:#f10214;
+        }
+        .layui-form-label{
+            width:130px;
+            padding:8px 10px!important;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称<span>*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">提案人<span>*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" autocomplete="off"  class="layui-input" placeholder="Admin">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">提案日期<span>*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" id="date" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">问题<span>*</span></label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">提案类型</label>
+                <div class="layui-input-block">
+                    <select>
+                        <option>开源增收</option>
+                        <option>aaa</option>
+                        <option>bbb</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">适用范围</label>
+                <div class="layui-input-block">
+                    <select>
+                        <option>本科</option>
+                        <option>本科生</option>
+                        <option>博士生</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">科室</label>
+                <div class="layui-input-block">
+                    <select>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">主因</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">措施</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>-->
+<script>
+    layui.use(['layer','form','laydate',],function(){
+        var form = layui.form;
+        $   = layui.jquery;
+        laydate = layui.laydate;
+
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+    })
+</script>
+</body>
+
+</html>

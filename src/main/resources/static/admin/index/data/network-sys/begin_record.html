@@ -27,14 +27,10 @@
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
-    <div class="moreBtn hidden-xs">
+    <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-input-inline">
-                <input type="text" name="date" id="date" lay-verify="date" placeholder="开始时间" autocomplete="off" class="layui-input">
-            </div>
-            <span>-</span>
-            <div class="layui-input-inline">
-                <input type="text" name="date1" id="date1" lay-verify="date" placeholder="结束时间" autocomplete="off" class="layui-input">
+                <input type="text" name="date" id="date" lay-verify="date" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-inline">
                 <input class="layui-input" name="search" placeholder="联网仪编号" autocomplete="off">
@@ -49,32 +45,14 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['table','laydate'], function () {
-        var table = layui.table
-            ,laydate = layui.laydate;
-
-        laydate.render({
-            elem: '#date',
-            type:'datetime'
-        })
-
-        laydate.render({
-            elem: '#date1',
-            type:'datetime'
-        })
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
+    addTable ={
+        table:{
+            cols: [[ //表头
                 {type:"checkbox"}
                 , {field: 'equip_room', title: '所在科室', minWidth: 150, sort: true}
-                , {field: 'equip_number', title: '设备编号', minWidth: 150}
+                , {field: 'equip_number', title: '设备编号', minWidth: 150,event:"openLink"}
                 , {field: 'equip_short', title: '资产编号', minWidth: 150}
                 , {field: 'equip_name', title: '设备名称',width:"30%", minWidth: 150}
                 , {field: 'netequip_number', title: '联网仪编号', minWidth: 150}
@@ -89,7 +67,18 @@
                     "equip_name":"设备1",
                     "netequip_number":"88888888",
                     "receive_time":"2018-12-1 00:00:00",
-                    "data_bag":"10"
+                    "data_bag":"10",
+                    "link":"./welcome.html",
+                    "messages":[
+                        {
+                            name:"名称",
+                            value:"6666666"
+                        },
+                        {
+                            name:"时间",
+                            value:"666666668888"
+                        }
+                    ]
                 },{
                     "equip_room":"CT室",
                     "equip_number":"031233030001",
@@ -131,14 +120,19 @@
                     "receive_time":"2018-12-1 00:00:00",
                     "data_bag":"10"
                 }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
+            , done: function (obj) {
+                tableFunc({
+                    "obj":obj,
+                    "addMsg":2,
+                    "addLink":"table1"
+                })
             }
-        });
-    });
+        },
+        date:{
+            elem:"#date",
+            range:"-"
+        }
+    }
 </script>
 </body>
 

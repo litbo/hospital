@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/supervise/bmgl")
 @Api(tags = "部门管理")
@@ -89,12 +91,29 @@ public class BmController {
         return Result.success();
     }
 
-    @GetMapping("/setWxbm")
+    @GetMapping("/setBmBetoTest")
     @ResponseBody
-    public Result setWxbm(@RequestParam String obmid){
-        bmService.setWxbm(obmid);
+    public Result setBmBetoTest(@RequestParam String obm_id, @RequestParam String new_pbm_id  ){
+
+        bmService.setBmBeto(obm_id,new_pbm_id);
         return Result.success();
     }
+
+    @PostMapping("/hfWxbm")
+    @ResponseBody
+    public Result hfWxbm(@RequestBody List<String> obmids){
+        bmService.setWxbm(obmids,1);  // 1 为维修部门
+        return Result.success();
+    }
+
+    @PostMapping("/qchfWxbm")
+    @ResponseBody
+    public Result qchfWxbm(@RequestBody List<String> obmids){
+        bmService.setWxbm(obmids,0);  // 0 为非维修部门
+        return Result.success();
+    }
+
+
 
 
 }

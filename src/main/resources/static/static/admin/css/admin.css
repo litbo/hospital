@@ -1610,7 +1610,7 @@ html {
   top: 2px;
 }
 .main-layout-side .layui-nav-itemed > a {
-  background: #089ce2 !important;
+  background: #4E5465;
 }
 .main-layout-side .layui-nav-item a i {
   margin-right: 10px;
@@ -1641,8 +1641,7 @@ html {
   background-color: #089ce2;
 }
 .main-layout-side .layui-nav-tree .layui-nav-child .layui-this > a {
-  background-color: #56595a;
-  color: #00b5f9;
+  background-color: #4E5465;
 }
 .main-layout-side .layui-nav-tree .layui-this > a {
   background-color: rgba(0, 181, 249, 0.8);
@@ -1684,6 +1683,7 @@ html {
   width: 100%;
   height: 100%;
   display: block;
+  padding: 0!important;
 }
 .menu-btn1 span {
   font-size: 1.8rem !important;
@@ -1749,7 +1749,8 @@ html {
   color: #00b5f9;
 }
 .main-layout-header .layui-nav .layui-nav-bar {
-  display: none;
+  height: 2px;
+  background-color: #177fea;
 }
 .main-layout-header .layui-nav .layui-this:after {
   height: 0;
@@ -2033,6 +2034,67 @@ html {
 .tip_conts {
   width: auto;
 }
+.addBtn {
+  margin-bottom: 5px;
+}
+.sign {
+  color: red;
+  margin-left: 5px;
+}
+.layui-field-title {
+  margin-top: 20px;
+}
+.layui-tab-content {
+  padding: 0!important;
+}
+.subBtn {
+  width: 180px;
+  margin: 25px auto;
+}
+.subBtn > div {
+  margin: 0!important;
+}
+.input_area {
+  min-height: 38px;
+  max-height: 100px;
+}
+.layui-input-block button {
+  margin: 7px 10px;
+}
+.mini_select input {
+  width: 60px;
+  height: 30px;
+}
+.layui-colla-content {
+  overflow: hidden;
+}
+.layui-field-title {
+  margin-top: 20px;
+}
+.hidden {
+  display: none;
+}
+.showBlock {
+  display: block;
+}
+.showInline {
+  display: inline;
+}
+.padRight .layui-table-tool-temp {
+  padding-right: 0;
+}
+.layui-layer-shade {
+  z-index: 666!important;
+}
+.layui-layer-page .hidden-xs {
+  display: block!important;
+}
+a.layui-btn-fluid {
+  margin-top: 35px;
+}
+.layui-input-block img {
+  max-height: 200px;
+}
 @media (max-width: 768px) {
   .main-layout-side {
     position: fixed;
@@ -2093,6 +2155,20 @@ html {
     width: 100px;
     bottom: 5px;
     right: 5px;
+  }
+  .layui-table-page > div {
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 36px!important;
+  }
+  .xs-100 {
+    width: 100%!important;
+  }
+  .mar10-0 {
+    margin: 10px 0!important;
+  }
+  .pad0-10 {
+    padding: 0 10px!important;
   }
 }
 .email-wrap {

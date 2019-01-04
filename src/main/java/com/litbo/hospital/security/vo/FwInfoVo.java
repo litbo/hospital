@@ -1,35 +1,46 @@
 package com.litbo.hospital.security.vo;
 
-import com.litbo.hospital.security.bean.FwBaoxiu;
-import com.litbo.hospital.security.bean.FwShouli;
-import com.litbo.hospital.security.bean.FwWeixiu;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * @author zjc
  * @create 2018-12-10 11:22
  */
 @Data
-@ApiModel("维修确认审核页面响应数据")
 public class FwInfoVo {
 
-    @ApiModelProperty(value = "报修信息")
-    private FwBaoxiu fwBaoxiu;
-    @ApiModelProperty(value = "姓名响应显示")
-    private FwVo fwVo;
-    @ApiModelProperty(value = "受理信息")
-    private FwShouli fwShouli;
+    private String eqId;
 
-    private String slrUserName; //受理人姓名
+    private String eqName;
 
-    private FwWeixiu fwWeixiu;
+    private String bxrId;
 
-    private String gcsName; //工程师姓名
+    private String bxrName;
 
-    private String ywgcsName; //院外工程师姓名
+    private String slrId;
 
-    private String fzgcsName; //辅助工程师姓名
+    private String slrName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date ydwxTime;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date bxTime;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date slTime;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date fwksTime;
+
+    private String wxrName;
+
+    private String gzyy;
+
+    private String gzmx;
+
 
 }

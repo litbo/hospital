@@ -3,6 +3,7 @@ package com.litbo.hospital.supervise.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SGangwei;
 import com.litbo.hospital.supervise.vo.*;
+import java.util.List;
 
 public interface GangweiService {
 
@@ -14,6 +15,8 @@ public interface GangweiService {
     PageInfo getGws(int pageNum, int pageSize);
     //通过岗位id获取岗位信息
     SGangwei getGwsByGwId(int pageNum, int pageSize, String gw_id);
+    //通过岗位等级来获取岗位信息
+    List<SGangwei> getGwByGwLevel(String gw_level);
     //通过岗位职责状态查询岗位信息
     PageInfo getGwsByGwZzZt(int pageNum, int pageSize, Integer gwZzZt);
     //修改岗位信息
@@ -35,4 +38,6 @@ public interface GangweiService {
     GwZzReadyForXgVO readyForXgByGwId(Integer gwId);
     //修改后重新提交
     void reSubmit(GWSubmitVO gwSubmitVO);
+
+
 }

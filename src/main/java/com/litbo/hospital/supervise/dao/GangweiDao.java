@@ -27,6 +27,8 @@ public interface GangweiDao {
     void deleteGwByGwId(String gw_id);
     @Select("select * from s_gangwei where gw_id=#{gw_id}")
     SGangwei getGwsByGwId(String gw_id);
+    @Select("select * from s_gangwei where gw_level=#{gw_level}")
+    List<SGangwei> getGwByGwLevel(String gw_level);
     @Select("select * from s_gangwei where gw_zz_zt=#{gwZzZt}")
     List<SGangwei> getGwsByGwZzZt(Integer gwZzZt);
 
