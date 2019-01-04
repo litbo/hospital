@@ -62,6 +62,10 @@ public class SgLcclSqlProvider {
             sql.SET("report_person = #{reportPerson,jdbcType=VARCHAR}");
         }
 
+        if (record.getApprover() != null) {
+            sql.SET("approver = #{approver,jdbcType=VARCHAR}");
+        }
+
         if (record.getReportTime() != null) {
             sql.SET("report_time = #{reportTime,jdbcType=TIMESTAMP}");
             sql.SET("state = '申请已上报'");

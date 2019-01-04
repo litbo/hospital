@@ -201,8 +201,8 @@ public class SgInfoServiceImpl implements SgInfoService {
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoGccshList(bmId);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //TODO 根据部门id查询部门名称
-            selectKsShHz.setBmName(bmDao.getBmByOid(bmId).getBmName());
+            //根据部门id查询部门名称
+            selectKsShHz.setBmName(bmDao.getBmBybmid(bmId).getBmName());
         }
         return new PageInfo<>(selectKsShHzs);
     }
@@ -240,8 +240,8 @@ public class SgInfoServiceImpl implements SgInfoService {
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoSgZbwyhhyList(bmId, bh);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //TODO 根据部门id查询部门名称
-            selectKsShHz.setBmName(bmDao.getBmByOid(bmId).getBmName());
+            //根据部门id查询部门名称
+            selectKsShHz.setBmName(bmDao.getBmBybmid(bmId).getBmName());
         }
         return new PageInfo<>(selectKsShHzs);
     }
@@ -279,10 +279,10 @@ public class SgInfoServiceImpl implements SgInfoService {
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoYbgsShList(bmId, bh);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //TODO 根据部门id查询部门名称
-            SBm bmByOid = bmDao.getBmByOid(bmId);
-            if (bmByOid != null) {
-                selectKsShHz.setBmName(bmByOid.getBmName());
+            //根据部门id查询部门名称
+            SBm bId = bmDao.getBmBybmid(bmId);
+            if (bId != null) {
+                selectKsShHz.setBmName(bId.getBmName());
             } else {
                 selectKsShHz.setBmName(null);
             }
@@ -344,7 +344,7 @@ public class SgInfoServiceImpl implements SgInfoService {
         for (SgInfoListVO sgInfoListVO : sgInfoListVOS) {
             SgInfoReasonVO reason = sgInfoMapper.getReason(sgInfoListVO.getId());
             //科室审核未通过
-            if ("0".equals(reason.getIskssh())){
+            if (" 0".equals(reason.getIskssh())){
                 sgInfoListVO.setReason(reason.getKsshyj());
             }
             //医学工程处审核未通过

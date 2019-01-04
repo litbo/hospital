@@ -4,6 +4,7 @@ import com.litbo.hospital.lifemanage.bean.SgDjhw;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 登记货物表Mapper接口
@@ -43,7 +44,7 @@ public interface SgDjhwMapper {
     @Update("UPDATE sg_djhw SET \n" +
             " user_id = #{userId,jdbcType=VARCHAR},\n" +
             " djhw_jssj = #{date,jdbcType=TIMESTAMP}" +
-            "WHERE djhw_id = #{djhwId,jdbcType=VARCHAR} ")
+            " WHERE djhw_id = #{djhwId,jdbcType=VARCHAR} ")
     int updateSgDhdjKsjs(@Param("djhwId") String djhwId, @Param("userId") String userId, @Param("date") Date date);
 
     /**
@@ -72,5 +73,5 @@ public interface SgDjhwMapper {
             "dbo.sg_dhdj\n" +
             "INNER JOIN dbo.sg_djhw ON dbo.sg_dhdj.dhdj_id = dbo.sg_djhw.dhdj_id\n" +
             "WHERE dbo.sg_djhw.djhw_id = #{djhwId,jdbcType=VARCHAR}")
-    SgDjhw selectSgDhdjDetails(String djhwId);
+    List<SgDjhw> selectSgDhdjDetails(String djhwId);
 }

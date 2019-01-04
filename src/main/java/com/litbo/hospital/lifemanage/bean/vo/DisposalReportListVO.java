@@ -2,15 +2,16 @@ package com.litbo.hospital.lifemanage.bean.vo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 设备台账列表
+ * 处置上报VO
  *
- * @author Administrator on 2018-12-16
+ * @author Administrator on 2018-12-29
  */
 @Data
-public class MachineAccountVO {
+public class DisposalReportListVO {
     /**
      * 设备id
      */
@@ -20,13 +21,13 @@ public class MachineAccountVO {
      */
     private String eqSbbh;
     /**
-     * 设备名称
+     * 设备名字
      */
     private String eqName;
     /**
-     * 院内编号
+     * 部门名字
      */
-    private String eqYq;
+    private String bmName;
     /**
      * 设备规格
      */
@@ -36,27 +37,27 @@ public class MachineAccountVO {
      */
     private String eqXh;
     /**
-     * 部门id
+     * 采购日期
      */
-    private String eqBmid;
+    private Date eqCgrq;
     /**
-     * 所在科室
+     * 单价
      */
-    private String eqBmName;
+    private BigDecimal eqPrice;
     /**
-     * 台账类别
+     * 申报人
      */
-    private String eqTzlb;
+    private String userName;
     /**
-     * 设备启用时间
+     * 申报时间
      */
-    private Date eqQysj;
+    private Date declareTime;
     /**
-     * 设备使用年限
+     * 单位领导意见
      */
-    private Integer eqSynx;
+    private String opinion;
     /**
-     * 状态
+     * 处置方式
      */
-    private String state;
+    private String mode;
 }

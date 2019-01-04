@@ -9,6 +9,8 @@ import com.litbo.hospital.lifemanage.service.SgYsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 /**
  * 商务/临床/技术验收表Service实现类
  */
@@ -37,9 +39,22 @@ public class SgYsServiceImpl implements SgYsService {
      */
     @Override
     public void insertSgYs(SgYs sgYs) {
+        sgYs.setYsId(UUID.randomUUID().toString());
         //添加验收信息
         sgYsMapper.insertSgYs(sgYs);
         //把申购信息添加到设备表中
 
+    }
+
+    /**
+     * 添加信息到设备表
+     * @param sgInfo 申购单id
+     */
+    private void insertEqInfo(String sgInfo){
+        // 查出来需要的字段
+
+        //把字段添加进设备表中
+
+        // TODO
     }
 }

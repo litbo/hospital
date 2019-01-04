@@ -9,6 +9,7 @@ import com.litbo.hospital.lifemanage.bean.vo.YearBudgetVO;
 import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
 import com.litbo.hospital.lifemanage.dao.SgYbghhyMapper;
 import com.litbo.hospital.lifemanage.service.SgYbghhyService;
+import com.litbo.hospital.supervise.dao.BmDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class SgYbghhyServiceImpl implements SgYbghhyService {
     private SgYbghhyMapper sgYbghhyMapper;
     @Autowired
     private SgInfoMapper sgInfoMapper;
+    @Autowired
+    private BmDao bmDao;
 
     /**
      * 添加院办公会信息
@@ -60,9 +63,8 @@ public class SgYbghhyServiceImpl implements SgYbghhyService {
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgYbghhyYearPurchase(year, bmId);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //TODO 根据部门id查询部门名称
-            // selectKsShHz.getBmId();
-            selectKsShHz.setBmName("部门1");
+            //根据部门id查询部门名称
+            selectKsShHz.setBmName(bmDao.getBmBybmid(bmId).getBmName());
         }
         return new PageInfo<>(selectKsShHzs);
     }

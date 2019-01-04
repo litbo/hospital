@@ -2,10 +2,7 @@ package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgLccl;
-import com.litbo.hospital.lifemanage.bean.vo.DateLowerAndUpperVO;
-import com.litbo.hospital.lifemanage.bean.vo.DisposalQueryVO;
-import com.litbo.hospital.lifemanage.bean.vo.ScrappedListVO;
-import com.litbo.hospital.lifemanage.bean.vo.SgLcclVO;
+import com.litbo.hospital.lifemanage.bean.vo.*;
 
 /**
  * 处置管理Service
@@ -60,7 +57,18 @@ public interface SgLcclService {
 
     /**
      * 上报审核
+     *
      * @param sgLccl 上报审核信息
      */
     void updateSgLccLByEqId(SgLccl sgLccl);
+
+    /**
+     * 待上报列表
+     *
+     * @param pageNum  当前页数
+     * @param pageSize 每页显示记录数
+     * @param tab      标记 1待上报列表 2待批复列表 3待清理设备 4待备案处置设备
+     * @return PageInfo<DisposalReportListVO>
+     */
+    PageInfo<DisposalReportListVO> selectXList(Integer pageNum, Integer pageSize, String tab);
 }

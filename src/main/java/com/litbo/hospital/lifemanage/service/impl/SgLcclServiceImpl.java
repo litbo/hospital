@@ -5,12 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.lifemanage.bean.SgLccl;
 import com.litbo.hospital.lifemanage.bean.SgReason;
-import com.litbo.hospital.lifemanage.bean.vo.DateLowerAndUpperVO;
-import com.litbo.hospital.lifemanage.bean.vo.DisposalQueryVO;
-import com.litbo.hospital.lifemanage.bean.vo.ScrappedListVO;
-import com.litbo.hospital.lifemanage.bean.vo.SgLcclVO;
+import com.litbo.hospital.lifemanage.bean.vo.*;
 import com.litbo.hospital.lifemanage.dao.SgLcclMapper;
 import com.litbo.hospital.lifemanage.dao.SgReasonMapper;
+import com.litbo.hospital.lifemanage.enums.ModeEnum;
 import com.litbo.hospital.lifemanage.service.SgLcclService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,8 +120,33 @@ public class SgLcclServiceImpl implements SgLcclService {
         sgLcclMapper.insert(sgLccl);
     }
 
+    /**
+     * 上报审核
+     *
+     * @param sgLccl 上报审核信息
+     */
     @Override
     public void updateSgLccLByEqId(SgLccl sgLccl) {
         sgLcclMapper.updateByEqIdSelective(sgLccl);
+    }
+
+    /**
+     * 待上报列表
+     *
+     * @param pageNum  当前页数
+     * @param pageSize 每页显示记录数
+     * @param tab      标记 1待上报列表 2待批复列表 3待清理设备 4待备案处置设备
+     * @return PageInfo<DisposalReportListVO>
+     */
+    @Override
+    public PageInfo<DisposalReportListVO> selectXList(Integer pageNum, Integer pageSize, String tab) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<DisposalReportListVO> list = sgLcclMapper.selectXList(tab);
+        if (list != null) {
+            for (DisposalReportListVO aList : list) {
+                aList.setMode(ModeEnum.getMessageByCode(Integer.parseInt(aList.getMode())));
+            }
+        }
+        return new PageInfo<>(list);
     }
 }

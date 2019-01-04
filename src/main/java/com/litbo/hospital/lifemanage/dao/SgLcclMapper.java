@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.dao;
 import com.litbo.hospital.lifemanage.bean.SgLccl;
 import com.litbo.hospital.lifemanage.bean.vo.DateLowerAndUpperVO;
 import com.litbo.hospital.lifemanage.bean.vo.DisposalQueryVO;
+import com.litbo.hospital.lifemanage.bean.vo.DisposalReportListVO;
 import com.litbo.hospital.lifemanage.bean.vo.ScrappedListVO;
 import com.litbo.hospital.lifemanage.dao.provider.SgLcclSqlProvider;
 import org.apache.ibatis.annotations.*;
@@ -140,20 +141,56 @@ public interface SgLcclMapper {
             "dbo.eq_info\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
             "WHERE\n" +
-            "dbo.eq_info.eq_id IN (SELECT\n" +
+            "dbo.eq_info.eq_id NOT IN (SELECT\n" +
             "dbo.sg_lccl.eq_id\n" +
             "FROM\n" +
             "dbo.sg_lccl\n" +
             "WHERE\n" +
-            "dbo.sg_lccl.lccl_id IS NULL)" +
+            "dbo.sg_lccl.lccl_id IS NOT NULL)" +
             "<if test=\"bmId != null\"> AND dbo.eq_info.eq_bmid = #{bmId,jdbcType=VARCHAR} </if>" +
             "</script>")
     List<ScrappedListVO> selectApplyList(@Param("bmId") String bmId);
 
     /**
-     * 通过设备id查询
-     * @return
+     * 通过设备id查询处置id
+     *
+     * @param eqId 设备id
+     * @return 处置id
      */
     @Select("select id from sg_lccl where eq_id = #{eqId,jdbcType=VARCHAR}")
     String getIdByEqId(String eqId);
+
+    /**
+     * 待上报列表
+     *
+     * @param tab 标记 1待上报列表 2待批复列表 3待清理设备 4待备案处置设备
+     * @return List
+     */
+    @Select("<script>" +
+            "SELECT\n" +
+            "dbo.eq_info.eq_id,\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.s_bm.bm_name,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
+            "dbo.eq_info.eq_cgrq,\n" +
+            "dbo.eq_info.eq_price,\n" +
+            "dbo.s_user.user_name,\n" +
+            "dbo.sg_lccl.declare_time,\n" +
+            "dbo.sg_lccl.opinion,\n" +
+            "dbo.sg_lccl.mode\n" +
+            "FROM\n" +
+            "dbo.eq_info\n" +
+            "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
+            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "INNER JOIN dbo.s_user ON dbo.sg_lccl.user_id = dbo.s_user.user_id" +
+            "<where>" +
+            "<if test=\"tab == 1\"> dbo.sg_lccl.lccl_id IS NOT NULL AND dbo.sg_lccl.report_person IS NULL</if>" +
+            "<if test=\"tab == 2\"> AND dbo.sg_lccl.report_person IS NOT NULL AND dbo.sg_lccl.ratify IS NULL</if>" +
+            "<if test=\"tab == 3\"> AND dbo.sg_lccl.ratify IS NOT NULL AND dbo.sg_lccl.clear_person IS NULL</if>" +
+            "<if test=\"tab == 4\"> AND dbo.sg_lccl.clear_person IS NOT NULL AND dbo.sg_lccl.record IS NULL</if>" +
+            "</where>" +
+            "</script>")
+    List<DisposalReportListVO> selectXList(@Param("tab") String tab);
 }

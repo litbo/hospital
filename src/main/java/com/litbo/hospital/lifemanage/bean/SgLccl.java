@@ -48,7 +48,10 @@ public class SgLccl {
      * 上报时间
      */
     private Date reportTime;
-
+    /**
+     * 审批人
+     */
+    private String approver;
     /**
      * 批复人
      */

@@ -11,6 +11,7 @@ import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
 import com.litbo.hospital.lifemanage.dao.SgZbwyhRyMapper;
 import com.litbo.hospital.lifemanage.dao.SgZbwyhhyMapper;
 import com.litbo.hospital.lifemanage.service.SgZbwyhhyService;
+import com.litbo.hospital.supervise.dao.BmDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
     private SgZbwyhRyMapper sgZbwyhRyMapper;
     @Autowired
     private SgInfoMapper sgInfoMapper;
+    @Autowired
+    private BmDao bmDao;
 
     /**
      * 添加装备委员会信息
@@ -72,9 +75,8 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgZbwyhYearPurchase(year, bmId);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //TODO 根据部门id查询部门名称
-            // selectKsShHz.getBmId();
-            selectKsShHz.setBmName("部门1");
+            //根据部门id查询部门名称
+            selectKsShHz.setBmName(bmDao.getBmBybmid(bmId).getBmName());
         }
         return new PageInfo<>(selectKsShHzs);
     }
@@ -93,9 +95,8 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
         PageHelper.startPage(pageNum,pageSize);
         List<YearBudgetVO> yearBudgetVOS = sgInfoMapper.selectSgZbwyhYearBudget(year, bmId);
         for (YearBudgetVO yearBudgetVO : yearBudgetVOS) {
-            //TODO 根据部门id查询部门名称
-            // selectKsShHz.getBmId();
-            yearBudgetVO.setBmName("部门1");
+            //根据部门id查询部门名称
+            yearBudgetVO.setBmName(bmDao.getBmBybmid(bmId).getBmName());
         }
         return new PageInfo<>(yearBudgetVOS);
     }
