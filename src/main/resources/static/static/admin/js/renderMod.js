@@ -8,8 +8,8 @@
 * */
 
 $(function () {
-    layui.use(['table', 'form', 'laydate', 'element','upload'], function () {
-        var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate, upload = layui.upload,
+    layui.use(['table', 'form', 'laydate', 'element','upload',"jquery"], function () {
+        var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate, upload = layui.upload,$ = layui.jquery,
             formAction = renderMod['form'] || renderMod['formAction']//表单数据
             , addTable = renderMod['table'] || renderMod['addTable'];//表格数据
         //表单渲染
@@ -134,6 +134,11 @@ $(function () {
                     //console.log(options);
                     upload.render(options);
                     file.func && file.func();
+                    if(file.bindAction){
+                        $(file.bindAction).on('click',function(){
+                            return false;
+                        })
+                    }
                 }
 
             }
