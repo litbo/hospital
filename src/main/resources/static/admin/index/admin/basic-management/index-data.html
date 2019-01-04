@@ -23,89 +23,72 @@
     </div>
 </div>
 
-<!--<script type="text/html" id="toolBar">-->
-    <!--<div class="addBtn">-->
-        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
-    <!--</div>-->
-    <!--<div class="moreBtn hidden-xs">-->
-        <!--<div class="layui-inline">-->
-            <!--<input class="layui-input" name="search" placeholder="设备编号" autocomplete="off">-->
-        <!--</div>-->
-        <!--<div class="layui-inline">-->
-            <!--<input class="layui-input" name="search" placeholder="设备拼音码" autocomplete="off">-->
-        <!--</div>-->
-        <!--<button class="layui-btn" data-type="reload">搜索</button>-->
-    <!--</div>-->
-<!--</script>-->
-<!--<script type="text/html" id="bar">-->
-    <!--<a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>-->
-<!--</script>-->
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="moreBtn hidden-xs" >
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+</script>
+
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'guideposts', title: '控制指标',width:"25%", minWidth: 200}
-                , {field: 'check-index', title: '考核指标', width: 350}
-                , {field: 'auditing-standards', title: '审核标准', minWidth: 150, sort: true}
-                , {field: 'hospital-index', title: '院定标准', minWidth: 150, sort: true}
-                , {field: 'current-state', title: '当前状态', minWidth: 150, sort: true}
-            ]]
-            , "data": [
-                {
-                    "guideposts":"设备完好率",
-                    "check-index":"急救类/生命支持类设备完好率",
-                    "auditing-standards":"100%",
-                    "hospital-index":"99%",
-                    "current-state":"2%",
-                },{
-                    "guideposts":"设备完好率",
-                    "check-index":"五十万元以下设备完好率",
-                    "auditing-standards":"100%",
-                    "hospital-index":"98%",
-                    "current-state":"99%",
-                },{
-                    "guideposts":"质量管理措施覆盖率",
-                    "check-index":"急救/生命支持类设备应用质检率",
-                    "auditing-standards":"",
-                    "hospital-index":"99%",
-                    "current-state":"25%",
-                },{
-                    "guideposts":"质量管理措施覆盖率",
-                    "check-index":"强检计量器具合格证粘贴率",
-                    "auditing-standards":"100%",
-                    "hospital-index":"99%",
-                    "current-state":"2%",
-                },{
-                    "guideposts":"质量管理措施覆盖率",
-                    "check-index":"强检计量器具合格证有效率",
-                    "auditing-standards":"100%",
-                    "hospital-index":"99%",
-                    "current-state":"2%",
-                },{
-                    "guideposts":"设备完好率",
-                    "check-index":"用前规范性检查完成率",
-                    "auditing-standards":"",
-                    "hospital-index":"99%",
-                    "current-state":"2%",
-                }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
-                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
-            }
-        });
-    });
+addTable ={
+    table:{
+        cols: [[ //表头
+            {type:"checkbox"}
+            , {field: 'guideposts', title: '控制指标',width:"25%", minWidth: 200}
+            , {field: 'check-index', title: '考核指标', width: 350}
+            , {field: 'auditing-standards', title: '审核标准', minWidth: 150, sort: true}
+            , {field: 'hospital-index', title: '院定标准', minWidth: 150, sort: true}
+            , {field: 'current-state', title: '当前状态', minWidth: 150, sort: true}
+        ]]
+        , "data": [
+            {
+                "guideposts":"设备完好率",
+                "check-index":"急救类/生命支持类设备完好率",
+                "auditing-standards":"100%",
+                "hospital-index":"99%",
+                "current-state":"2%"
+            },{
+                "guideposts":"设备完好率",
+                "check-index":"急救类/生命支持类设备完好率",
+                "auditing-standards":"100%",
+                "hospital-index":"99%",
+                "current-state":"2%"
+            },{
+                "guideposts":"设备完好率",
+                "check-index":"急救类/生命支持类设备完好率",
+                "auditing-standards":"100%",
+                "hospital-index":"99%",
+                "current-state":"2%"
+            },{
+                "guideposts":"设备完好率",
+                "check-index":"急救类/生命支持类设备完好率",
+                "auditing-standards":"100%",
+                "hospital-index":"99%",
+                "current-state":"2%"
+            },{
+                "guideposts":"设备完好率",
+                "check-index":"急救类/生命支持类设备完好率",
+                "auditing-standards":"100%",
+                "hospital-index":"99%",
+                "current-state":"2%"
+            }]
+        , done: function (obj) {
+            tableFunc({
+                "obj":obj,
+                "addMsg":2,
+                "addLink":"table1"
+            })
+        }
+    }
+}
 </script>
 </body>
 

@@ -27,15 +27,21 @@
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
-    <div class="moreBtn hidden-xs">
+    <div class=" hidden-xs"  id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-input-inline">
-                <input type="text" name="date" id="date" lay-verify="date" placeholder="开始时间" autocomplete="off" class="layui-input">
+                <input type="text" name="date" id="date" lay-verify="date" autocomplete="off" class="layui-input">
             </div>
-            <span>-</span>
-            <div class="layui-input-inline">
-                <input type="text" name="date1" id="date1" lay-verify="date" placeholder="结束时间" autocomplete="off" class="layui-input">
-            </div>
+                <div class="layui-input-inline">
+                    <select name="modules" lay-search="">
+                        <option value="">输入状态标识</option>
+                        <option value="CT">CT室</option>
+                        <option value="HC">核磁公正室</option>
+                        <option value="SP">摄片室</option>
+                        <option value="DG">内外导管室</option>
+                        <option value="ICU">心外ICU</option>
+                    </select>
+                </div>
             <div class="layui-inline">
                 <input class="layui-input" name="search" placeholder="联网仪编号" autocomplete="off">
             </div>
@@ -49,20 +55,12 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table', function () {
-        var table = layui.table;
-
-        //第一个实例
-        table.render({
-            elem: '#table'
-            , page: true //开启分页
-            , toolbar: '#toolBar'
-            , height: 'full-25'
-            , title: '数据表'
-            , minWidth: 1200
-            , cols: [[ //表头
-                  {type:"checkbox"}
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"checkbox"}
                 , {field: 'equip_room', title: '所在科室', minWidth: 150, sort: true}
                 , {field: 'equip_number', title: '设备编号', minWidth: 150, sort: true}
                 , {field: 'assets_number', title: '资产编号', minWidth: 150}
@@ -109,14 +107,15 @@
                     "begin_time": "2018-12-01",
                     "end_time": "2019-01-01"
                 }]
-            ,
-            text: {
-                none: "暂时还没有数据哦！"
-            }, done: function (obj) {
+            , done: function (obj) {
                 //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
             }
-        });
-    });
+        },
+        date:{
+            elem:"#date",
+            range:"-"
+        }
+    }
 </script>
 </body>
 

@@ -1,0 +1,57 @@
+一、资质审核
+    1、使用说明                       instructions.html
+        已完成；
+
+    2、单证验证
+        a、经营/生产许可证           business-license.html
+        已完成；
+        b、产品注册证                registration-certificate.html
+        已完成；
+
+    3、单证验证查询
+        a、许可证列表                license-list.html
+            "data": [
+                            {
+                                "supplier": '供货商',
+                                "document_type": "证件类型",
+                                "document_num": "证件号码",
+                                "date_issue": "发证日期",
+                                "verif_results": "验证结果",
+                                "verif_date": "验证时间"
+                            }
+                    ]
+             已完成；
+
+        b、注册证列表                registration-list.html
+            "data": [
+                            {
+                                "supplier": '供货商',
+                                "document_type": "证件类型",
+                                "document_num": "证件号码",
+                                "date_issue": "产品名称",
+                                "verif_results": "验证结果",
+                                "verif_date": "验证时间"
+                            }
+                    ]
+             已完成；
+
+    4、综合验证                 comprehensive-verification.html
+            已完成；
+
+    5、综合验证查询
+            综合验证列表
+
+    6、无网录入
+
+
+二、厂商管理
+    1、厂商
+            a、厂商录入
+            b、厂商查询
+
+    2、证件
+            a、证件录入
+            b、证件查询
+
+    3、工程师
+            a、设置外院维修工程师理

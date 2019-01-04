@@ -1,0 +1,69 @@
+一：效率KPI
+   1、开机率（boot-rate.html）
+         "data": [
+                        {
+                            "equip_number": "设备编号",
+                            "equip_name": "设备名称",
+                            "starting-days": "开机天数",
+                            "turnon-time": "应开机时间",
+                            "boot-rate": "开机率",
+                            "ranking": "排名"
+                        }
+                  ]
+         已完成；
+
+   2、机时利用率(utilization-ratio.html)
+          "data": [
+                                {
+                                   "equip_number": "设备编号",
+                                    "equip_name": "设备简称",
+                                    "work-time": "工作时长",
+                                    "authorized-hour": "应开机时间",
+                                    "utilization-ratio": "机时利用率",
+                                    "ranking": "排名"
+                                }
+                          ]
+          已完成；
+
+   3、空转率(idling-rate.html)
+         "data": [
+                        {
+                            "equip_number": "设备编号",
+                            "equip_name": "设备简称",
+                            "turnon-time": "开机时长",
+                            "standby-time": "待机时长",
+                            "idling-rate": "空转率",
+                            "ranking": "排名"
+                        }
+                  ]
+          已完成；
+
+   4、工作日平均闲置时间(average-time.html)
+        "data": [
+                        {
+                            "equip_number": "设备编号",
+                            "equip_name": "设备简称",
+                            "watch-time": "值班时长",
+                            "unused-time": "闲置时长",
+                            "average-idletime": "平均闲置时长",
+                            "ranking": "排名"
+                        }
+                 ]
+         已完成
+
+二、效率等级（efficiency-level.html）
+          "data": [
+                         {
+                             "equip_number": "设备编号",
+                             "equip_name": "设备名称",
+                             "utilization-ratio": "机时利用率",
+                             "eff-level": "效率等级"
+                         }
+                   ]
+            已完成；
+
+
+三：效率等级设置
+       *  利用率       input
+       *  闲置率       input
+       注：无验证

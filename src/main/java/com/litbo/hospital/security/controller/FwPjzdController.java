@@ -6,8 +6,6 @@ import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.service.FwPjzdService;
-import com.sun.org.apache.regexp.internal.RE;
-import com.sun.tools.javac.jvm.Code;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

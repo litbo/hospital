@@ -1,0 +1,33 @@
+一、安全（不良）事件
+      1、不良事件报告
+        1）、可疑报告        suspicious-report.html
+            chlid
+                设备名称选择     susipcous-select.html
+                 "data": [
+                                {
+                                    "department": '部门',
+                                    "equ_id": "设备编号",
+                                    "equ_name": "设备名称",
+                                    "equ_model": "型号",
+                                    "specifications": "规格",
+                                    "start_date": "启用日期",
+                                    "assets_id": "资产编号"
+                                }
+                         ]
+            已完成；
+
+      2.统计查询
+        1）、报告查询        report-query
+            "data": [
+                            {
+                                "report_time": '报告时间',
+                                "report_person": "报告人",
+                                "equ_name": "设备名称",
+                                "specif_type": "规格型号",
+                                "manufactor": "厂家",
+                                "state": "状态"
+                            }
+                     ]
+             已完成；
+
+

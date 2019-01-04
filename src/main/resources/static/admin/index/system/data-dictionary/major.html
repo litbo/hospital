@@ -17,7 +17,7 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table_basic" lay-filter="basic"></table>
+        <table id="table" lay-filter="basic"></table>
     </div>
 </div>
 <script type="text/html" id="toolBar">
@@ -62,29 +62,46 @@
             </form>
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('table',function(){
-        var table = layui.table;
-        //方法级渲染
-        table.render({
-            elem:'#table_basic'
-            ,page:'true'
-            ,height:'full-25'
-            ,minWidth:1000
-            ,toolbar:'#toolBar'
-            ,cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'dictionary-name', title: '字典名称', width: '70%', minWidth: 400}
-                , {field: 'dictionary-type', title: '字典类型', minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "dictionary-name": '公告',
-                    "dictionary-type": "公告类型"
-                }
-            ]
-        })
-    })
+addTable ={
+    table:{
+        cols: [[ //表头
+            {checkbox:true,fixed:true}
+            , {field: 'dictionary-name', title: '字典名称', width: '45%', minWidth: 400}
+            , {field: 'dictionary-type', title: '字典类型', minWidth: 150}
+        ]]
+        , "data": [
+            {
+                "dictionary-name":"核磁共振室",
+                "dictionary-type":"160232810001",
+                "link":"./welcome.html",
+                "messages":[
+                    {
+                        name:"名称",
+                        value:"6666666"
+                    },
+                    {
+                        name:"时间",
+                        value:"666666668888"
+                    }
+                ]
+            },{
+                "dictionary-name":"核磁共振室",
+                "dictionary-type":"160232810001"
+            },{
+                "dictionary-name":"核磁共振室",
+                "dictionary-type":"160232810001"
+            }]
+        , done: function (obj) {
+            tableFunc({
+                "obj":obj,
+                "addMsg":2,
+                "addLink":"table1"
+            })
+        }
+    }
+}
 </script>
 </body>
 </html>

@@ -1,0 +1,76 @@
+一、风险管理（废弃）（risk-management）
+    1、风险分析
+        1）、风险等级                 ./safe/risk-management/risk-rating.html
+
+二、维修管理（maintenance-management）
+    1、设备维修
+        1）、报修
+        2）、维修任务
+        3）、维修费申请
+        4）、补录维修报告
+
+    2、维修合同
+        1）、合同录入
+        2）、合同支付
+        3）、合同查询
+
+    3、维修配件
+        1）、配件申购
+        2）、配件入库
+        3）、入库查询
+        4）、出库查询
+        5）、配件出库
+        6）、配件字典
+
+    4、维修发票
+        1）、维修发票登记              ./safe/manance-management/invoice-registration.html
+        2）、维修发票审核              ./safe/maintenance-management/invoice-audit.html
+        3）、维修发票查询              ./safe/maintenance-management/invoice-inquiry.html
+
+
+
+三、应用培训（application-training）
+    1、人员培训
+        1).计划制定                   ./safe/application-training/plan-formulation.html
+        2).计划查询                    ./safe/application-training/plan-query.html
+        3)、人员录入                   ./safe/application-training/personnel-input.html
+
+四、医疗事件（medical-incident）
+    1、安全（不良）事件
+        1）、可疑报告                  ./safe/medical-incident/suspicious-report.html
+    2、统计查询
+        1）、报告查询                  ./safe/medical-incident/report-query.html
+
+五、质量管理（废弃）
+
+六、厂商管理（废弃）（facturer-management）
+    1、资质审核
+        1）、使用说明                 ./safe/facturer-management/instructions.html
+
+        2）、单证验证
+            a、经营/生产许可证        ./safe/facturer-management/business-license.html
+            b、产品注册证             ./safe/facturer-management/registration-certificate.html
+
+        3）、单证验证查询
+            a、许可证列表             ./safe/facturer-management/license-list.html
+            b、注册证列表             ./safe/facturer-management/registration-list.html
+
+        4）、综合验证                 ./safe/facturer-management/comprehensive-verification.html
+
+        5）、综合验证查询
+            综合验证列表
+
+        6）、无网录入
+
+
+    2、厂商管理
+        1)、厂商
+            a、厂商录入
+            b、厂商查询
+
+        2）、证件
+            a、证件录入
+            b、证件查询
+
+        3）、工程师
+            a、设置外院维修工程师

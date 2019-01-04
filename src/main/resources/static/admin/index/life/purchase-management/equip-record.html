@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>装备委员会记录</title>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
+    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            width:130px!important;
+        }
+        .layui-input-block{
+            margin-left:130px!important;
+        }
+        .layui-form-text .layui-form-label{
+            width:100%!important;
+        }
+        .layui-form-text .layui-input-block{
+            margin-left:0!important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">装备委员会记录</li>
+                <li>会议信息</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <table id="table" lay-filter="table1"></table>
+                </div>
+                <div class="layui-tab-item">
+                    <form class="layui-form layui-form-pane" action="" style="padding-top:20px;">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">计划采购年度<span class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="date" id="datey" lay-verify="date" placeholder="yyyy-MM-dd h:m:s" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">会议时间</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="date" id="datet" lay-verify="date" placeholder="yyyy-MM-dd h:m:s" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">会议地点</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">主管部门签字</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">主管部门意见</label>
+                                <div class="layui-input-block">
+                                    <textarea name="" rows="1" class="layui-textarea input_area"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">参加人员</label>
+                                <div class="layui-input-block">
+                                    <select name="modules" lay-verify="required" lay-search="">
+                                        <option value="">输入搜索科室</option>
+                                        <option value="1">CT室</option>
+                                        <option value="2">核磁公正室</option>
+                                        <option value="3">摄片室</option>
+                                        <option value="4">内外导管室</option>
+                                        <option value="5">心外ICU</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">签名</label>
+                                <div class="layui-input-block">
+                                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-submit="" lay-filter="demo1">参会人员签字</button>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">分管领导签字</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">分管领导意见</label>
+                                <div class="layui-input-block">
+                                    <textarea name="" rows="1" class="layui-textarea input_area"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">会议内容</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form class="layui-form layui-form-pane" id="content" action="" style="display: none;padding-top:20px;">
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">终止误报</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="yn" value="通过" title="通过" checked="">
+                    <input type="radio" name="yn" value="不通过" title="不通过">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">数量修改</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" placeholder="默认原数量" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">院领导意见</label>
+                <div class="layui-input-block">
+                    <textarea name="" rows="1" class="layui-textarea input_area"></textarea>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="layui-form-item subBtn">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class=" layui-btn layui-btn-warm layui-btn-xs" lay-event="check">审 批</a>
+    </div>
+    <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="申购编号" autocomplete="off">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="设备拼音码" autocomplete="off">
+        </div>
+        <div class="layui-input-inline">
+            <select name="modules" lay-verify="required" lay-search="">
+                <option value="">输入搜索科室</option>
+                <option value="1">CT室</option>
+                <option value="2">核磁公正室</option>
+                <option value="3">摄片室</option>
+                <option value="4">内外导管室</option>
+                <option value="5">心外ICU</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="reload">查找</button>
+    </form>
+</script>
+<script type="text/html" id="toolBar1">
+    <form class="layui-form layui-form-pane hidden-xs">
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="date2" lay-verify="date" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-input-inline">
+            <select name="modules" lay-verify="required" lay-search="">
+                <option value="">输入搜索部门</option>
+                <option value="1">CT室</option>
+                <option value="2">核磁公正室</option>
+                <option value="3">摄片室</option>
+                <option value="4">内外导管室</option>
+                <option value="5">心外ICU</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="reload">查找</button>
+    </form>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">会议记录</a>
+</script>
+<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    addTable = {
+        table: {
+             height: 'full-75'
+            , cols: [[ //表头
+                {type: "checkbox"}
+                , {field: 'purchase-depart', title: '申购科室', width: "40%", minWidth: 150, sort: true}
+                , {field: 'device-num', title: '申购编号', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '设备名称', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '规格型号', minWidth: 150, sort: true}
+                , {field: 'money', title: '数量', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '估价(元)', minWidth: 150, sort: true}
+                , {field: 'device-num', title: '估价(美元)', minWidth: 150, sort: true}
+                , {field: 'money', title: '生产商', minWidth: 150, sort: true}
+                , {fixed:'right',width:150,align:'center',toolbar: "#bar"}
+            ]]
+            , data: [
+                {
+                    "purchase-depart": 'CT室',
+                    "device-num": "62583289",
+                    "money": "CT"
+                }
+            ]
+            , done: function (obj) {
+                tableFunc({
+                    toolFunc:{
+                        title:"审批",
+                        event:"check",
+                        tool:"toolbar",
+                        type:1,
+                        content:$("#content"),
+                        area:["50%","50%"]
+                    }
+                })
+            }
+        }
+        , date: [{
+                elem: "#datet"
+            },
+            {
+                elem: "#datey"
+                ,type: "year"
+                ,value: year
+                ,format:"y年"
+            }
+        ]
+    }
+</script>
+</body>
+
+</html>

@@ -3,6 +3,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'dialog'], function () {
         , $ = layui.jquery
         , hideBtn = $('#hideBtn')
         , mainLayout = $('#main-layout')
+        , menu = []
         , mainMask = $('.main-mask');
     //监听导航点击
     element.on('nav(leftNav)', function (elem) {
@@ -23,6 +24,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'dialog'], function () {
                 id: id
             });
             element.tabChange('tab', id);
+            setStorageMenu(text, url, id);
         }
         mainLayout.removeClass('hide-side');
     });
@@ -51,14 +53,23 @@ layui.use(['layer', 'form', 'element', 'jquery', 'dialog'], function () {
         mainLayout.removeClass('hide-side');
     });
 
-    element.on('tabDelete(tab)', function(data){
+    element.on('tabDelete', function(data){
         var id = $(this).parent().attr("lay-id")
             ,ground = data.elem[0].childNodes[1].childNodes
             ,num = ground.length;
-        if(num < 4 ){
-            document.getElementById('home').contentWindow.location.reload();//重新加载welcome页，避免统计图表错乱
+        //根据cookie值判断是否重载图表
+        if($(".navs li").length <= 1){
+            if($.cookie("ww") < 100){
+                $.cookie("ww",null);
+                document.getElementById('home').contentWindow.location.reload();
+            }
+
         }
+        //将当前删除的tab对应的列表选中取消
         $(".layui-nav-item a[data-id='"+id+"']").parent().removeClass("layui-this");
+        /*if($('.layui-nav-tree .layui-nav-child').length >0 && $('.layui-nav-tree .layui-nav-child').prev().children("span").length <= 0){
+            location.reload();
+        }*/
     });
     //菜单隐藏显示
     hideBtn.on('click', function () {
@@ -71,7 +82,7 @@ layui.use(['layer', 'form', 'element', 'jquery', 'dialog'], function () {
     //遮罩点击隐藏
     mainMask.on('click', function () {
         mainLayout.removeClass('hide-side');
-    })
+    });
 
     //示范一个公告层
 	/*layer.open({
@@ -94,4 +105,89 @@ layui.use(['layer', 'form', 'element', 'jquery', 'dialog'], function () {
 		    });
 		  }
 		});*/
+    /**
+     *@todo tab切换监听
+     * tab切换监听不能写字初始化加载$(function())方法内，否则不执行
+     */
+    element.on('tab(tab)', function(data) {
+        //console.log(this); //当前Tab标题所在的原始DOM元素
+        setStorageCurMenu();
+    });
+    /*
+     * @todo 监听layui Tab项的关闭按钮，改变本地存储
+     */
+    element.on('tabDelete(tab)', function(data) {
+        var layId = $(this).parent('li').attr('lay-id');
+        //console.log(layId);
+        removeStorageMenu(layId);
+    });
+
+    /*
+     * @todo 初始化加载完成执行方法
+     * 打开或刷新后执行
+     */
+
+    $(function() {
+        /*
+         * @todo 读取本地存储中记录的已打开的tab项
+         * 刷新后，读取记录，打开原来已打开的tab项
+         */
+
+        //延时加载
+        setTimeout(function() {
+            var se = $.getUrlParam('p');
+            if(sessionStorage.getItem("menu")) {
+                menu = JSON.parse(sessionStorage.getItem("menu"));
+                if(menu.length === 0){
+                    //$(".layui-nav-tree .layui-nav-item")[1].click();
+                    if(se !== "home"){
+                        if($('.layui-nav-tree .layui-nav-child').length >0){
+                            $(".layui-nav-tree .layui-nav-item").eq(1).addClass("layui-nav-itemed")
+                        }else{
+                            $(".layui-nav-tree .layui-nav-item").eq(1).addClass("layui-this")
+                        }
+                    }
+                    return false;
+                }
+                for(var i = 0; i < menu.length; i++) {
+                    if(se !== menu[i]["search"]){
+                        removeStorageMenu(menu[i].id);
+                        continue;
+                    }
+                    element.tabAdd('tab', {
+                        title: menu[i].title,
+                        content: '<iframe src="' + menu[i].url + '" name="iframe' +  menu[i].id + '" class="iframe" framborder="0" data-id="' +  menu[i].id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
+                        id:  menu[i].id
+                    });
+                }
+            } else if(sessionStorage.getItem("menu")){
+                $(".layui-nav-tree .layui-nav-item")[1].click();
+                return false;
+            }
+            var curMenu,id;
+            if (sessionStorage.getItem("curMenu")) {
+                $('.layui-tab-title').find('layui-this').removeClass('layui-class');
+                curMenu = JSON.parse(sessionStorage.getItem("curMenu"));
+                if(se !== curMenu["search"]){
+                    return;
+                }
+                id = curMenu.id;
+                    $('.layui-tab-title li[lay-id="' + id + '"]').addClass('layui-this');
+                    element.tabChange('tab', id);
+                    var $this_tag = $(".layui-nav-tree *[data-id="+id+"]");
+                    $this_tag[0].click();
+                    $this_tag.parent().addClass("layui-this");
+                    if($this_tag.parent()[0].tagName === "DD" || $this_tag.parent()[0].tagName === "dd"){
+                        $this_tag.parent().parent().parent().addClass("layui-nav-itemed");
+                    }
+            }
+
+        }, 100);
+        //点击tab标题时，触发reloadTab函数
+        // $('#tabName').on('click','li',function(){
+        //     reloadTab(this);
+        // });
+
+        //初始化加载结束
+    });
 });
