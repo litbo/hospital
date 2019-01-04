@@ -80,7 +80,7 @@ public class EqProvider {
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
                 "\te.eq_qysj,\n" +
-                "\tb.bm_name  " +
+                "\tb.bm_name,  " +
                 "  e.eq_syzt " +
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
