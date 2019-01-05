@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -97,12 +96,10 @@ public class SgDhdjServiceImpl implements SgDhdjService {
         //查询到货登记信息
         SgDhdj sgDhdj = sgDhdjMapper.selectSgDhdjDetails(djhwId);
         //查询申购货物信息
-        SgDjhw sgDjhw = sgDjhwMapper.selectSgDhdjDetails(djhwId);
+        List<SgDjhw> sgDjhw = sgDjhwMapper.selectSgDhdjDetails(djhwId);
         //封装成vo
         BeanUtils.copyProperties(sgDhdj,sgDhdjVO);
-        List<SgDjhw> sgDjhws =new ArrayList<>();
-        sgDjhws.add(sgDjhw);
-        sgDhdjVO.setSgDjhws(sgDjhws);
+        sgDhdjVO.setSgDjhws(sgDjhw);
         return sgDhdjVO;
     }
 

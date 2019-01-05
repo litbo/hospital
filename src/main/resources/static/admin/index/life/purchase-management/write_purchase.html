@@ -26,12 +26,15 @@
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">填表说明</a>
     </div>
-    <div class="hidden-xs" id="moreBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
         <div class="layui-inline">
-            <input class="layui-input" name="search" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
+            <input class="layui-input" name="eqPmName" placeholder="设备名称" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" id="test" placeholder="设备简称" autocomplete="off">
+            <input class="layui-input" name="eqPmJc" placeholder="设备简称" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
     </div>
@@ -39,35 +42,51 @@
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase">申购单</a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {field: 'eqPmName', title: '设备名称', width: '53%', minWidth: 400, event: 'openLink'}
-                , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
-                , {field: 'eqFlName', title: '卫标分类', minWidth: 150, sort: true}
-                , {field: 'bh', title: '申购单编号', minWidth: 150}
-                , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
-            ]]
-            ,url:"http://118.24.9.22/lifeManage/selectSgKstlSbs"
-            ,request:{
-                pageName : 'pageNum',
-                limitName : 'pageSize'
-            }
-            ,where:{
-                bmId : "01001"
-            }
-            ,parseData: function(res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "data": res.data.list //解析数据列表
+    renderMod = {
+        addTable: {
+            table:{
+                cols: [[ //表头
+                    {field: 'eqPmName', title: '设备名称', width: '53%', minWidth: 400, event: 'openLink'}
+                    , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
+                    , {field: 'eqPmId', title: '卫标分类', minWidth: 150, sort: true}
+                    , {field: 'bh', title: '申购单编号', minWidth: 150}
+                    , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
+                ]]
+                ,url:"http://localhost/lifeManage/selectSgKstlSbs"
+                ,method:"POST"
+                ,request:{
+                    pageName : 'pageNum',
+                    limitName : 'pageSize'
                 }
-            }
-            , done: function (obj) {
-                //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                ,where:{
+                    userId : "1"
+                }
+                ,parseData: function(res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.size,
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":{
+                            tool:"toolbar",
+                            title:"数据查找",
+                            event:"dataSearch",
+                            content:$("#hideXs")
+                        }
+                    })
+                }
+            },
+
+            reSet:{
+                url:"http://localhost/lifeManage/selectSgKstlSbs",
+                type:"reload",
+                data:["eqPmJc"]
             }
         }
     }

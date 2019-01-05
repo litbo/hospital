@@ -1,9 +1,10 @@
 package com.litbo.hospital.lifemanage.dao;
 
-import com.litbo.hospital.lifemanage.bean.vo.MachineAccountSearchCriteriaVO;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
+import com.litbo.hospital.lifemanage.dao.provider.EquipmentAccountProvider;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 
@@ -15,24 +16,16 @@ import java.util.List;
 @Mapper
 public interface EquipmentAccountMapper {
     /**
-     * 分页查询电子台账
+     * 查询电子台账
      *
-     * @param machineAccountSearchCriteriaVO 查询条件
+     * @param category            购置类别
+     * @param state               状态
+     * @param departmentId        部门id
+     * @param equipmentPinyinCode 设备拼音码
+     * @param departmentCoding    院内编码
+     * @param equipmentNumber     设备编码
      * @return List<MachineAccountVO>
      */
-    @Select("SELECT\n" +
-            "dbo.eq_info.eq_id,\n" +
-            "dbo.eq_info.eq_sbbh,\n" +
-            "dbo.eq_info.eq_yq,\n" +
-            "dbo.eq_info.eq_gg,\n" +
-            "dbo.eq_info.eq_xh,\n" +
-            "dbo.eq_info.eq_bmid,\n" +
-            "dbo.eq_info.eq_tzlb,\n" +
-            "dbo.eq_info.eq_qysj,\n" +
-            "dbo.eq_info.eq_synx\n" +
-            "FROM dbo.eq_info\n" +
-            "WHERE\n" +
-            "dbo.eq_info.eq_sbbh IS NOT NULL AND\n" +
-            "dbo.eq_info.eq_zcbh IS NOT NULL")
-    List<MachineAccountVO> selectEquipmentAccount(MachineAccountSearchCriteriaVO machineAccountSearchCriteriaVO);
+    @SelectProvider(type = EquipmentAccountProvider.class, method = "selectEquipmentAccount")
+    List<MachineAccountVO> selectEquipmentAccount(@Param("category") String category, @Param("state") String state, @Param("departmentId") String departmentId, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("equipmentNumber") String equipmentNumber);
 }

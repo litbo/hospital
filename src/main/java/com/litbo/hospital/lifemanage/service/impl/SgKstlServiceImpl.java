@@ -14,6 +14,7 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.EqDao;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -125,11 +126,14 @@ public class SgKstlServiceImpl implements SgKstlService {
         String bmId = bm.getBmId();
 
         List<String> pmList1 = selectSgTlPmPmIdsByBmId(bmId);
-        //调用品名的模糊查询 获得查询到的品名ID
-        List<EqPm> pmList = eqDao.listPmsByPym(eqPmName);
         List<String> pmList2 = new ArrayList<>();
-        for (EqPm eqPm : pmList) {
-            pmList2.add(eqPm.getEqPmId());
+
+        //调用品名的模糊查询 获得查询到的品名ID
+        if (StringUtils.isNotBlank(eqPmJc)){
+            List<EqPm> pmList = eqDao.listPmsByPym(eqPmJc);
+            for (EqPm eqPm : pmList) {
+                pmList2.add(eqPm.getEqPmId());
+            }
         }
 
         // 把通过部门查询的品名list和模糊查询到的品名list 合成一个list 使用set去重

@@ -94,10 +94,25 @@ public class SgLcclController {
     /**
      * 审核上报
      */
-    @PostMapping("updateSgLccLByEqId")
-    public Result updateSgLccLByEqId(@RequestBody SgLccl sgLccl){
+    @PostMapping("/updateSgLccLByEqId")
+    public Result updateSgLccLByEqId(SgLccl sgLccl) {
         sgLcclService.updateSgLccLByEqId(sgLccl);
         return Result.success();
+    }
+
+    /**
+     * 待X列表
+     *
+     * @param pageNum  当前页数
+     * @param pageSize 每页显示记录数
+     * @param tab      标记 1待上报列表 2待批复列表 3待清理设备 4待备案处置设备
+     * @return PageInfo<DisposalReportListVO>
+     */
+    @PostMapping("/selectXList")
+    public Result selectXList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                              @RequestParam(name = "tab") String tab) {
+        return Result.success(sgLcclService.selectXList(pageNum, pageSize, tab));
     }
 
 }

@@ -24,16 +24,6 @@ public class SgLcclVO {
     private String eqId;
 
     /**
-     * 申报人id
-     */
-    private String userId;
-
-    /**
-     * 申报时间
-     */
-    private Date declareTime;
-
-    /**
      * 处置方式
      */
     private String mode;
@@ -47,7 +37,10 @@ public class SgLcclVO {
      * 上报时间
      */
     private Date reportTime;
-
+    /**
+     * 审批人
+     */
+    private String approver;
     /**
      * 批复人
      */
