@@ -136,7 +136,7 @@ public class EqProvider {
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
                 "\te.eq_qysj,\n" +
-                "   e.eq_syzt" +
+                "   e.eq_syzt," +
                 "\tb.bm_name \n" +
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
