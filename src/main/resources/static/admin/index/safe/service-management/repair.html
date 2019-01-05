@@ -37,10 +37,10 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" class="layui-input" placeholder="部门拼音码" autocomplete="off">
+                        <input type="text" name="bmName" class="layui-input" placeholder="部门名称" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date"  class="layui-input" placeholder="输入关键字" autocomplete="off">
+                        <input type="text" name="date"  class="layui-input" placeholder="设备拼音" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="checkbox" name="" title="设备监管">
@@ -53,10 +53,9 @@
         </div>
     </div>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
-    addTable ={
+    /*addTable ={
         table:{
             cols: [[ //表头
                 {field: 'use-depart', title: '部门', minWidth: 200}
@@ -68,7 +67,7 @@
                 , {field: 'model', title: '启用日期', minWidth: 150,sort:true}
             ]]
             , height: "full-25"
-            , url:"eq/listShowEqs"
+            , url:"/baoxiu/baoxiuEq"
             , request:{
                 pageName : 'pageNum',
                 limitName : 'pageSize'
@@ -101,6 +100,55 @@
         form:{
 
         }
+    }*/
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'bmName', title: '部门', minWidth: 100}
+                    , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
+                    , {field: 'eqZcbh', title: '资产编号', minWidth: 150}
+                    , {field: 'eqName', title: '设备名称', minWidth: 150}
+                    , {field: 'eqXh', title: '型号', minWidth: 80}
+                    , {field: 'eqGg', title: '规格', width: 150}
+                    , {field: 'eqQysj', title: '启用日期', width: 150}
+                    , {title: '操作', toolbar: '#bar', align: "center"}
+                ]]
+                , url: "/baoxiu/baoxiuEq"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.size,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+/*
+            reSet:{
+                url:"/eq/listEqByX",
+                type:"search",
+                data:["bmName","eqPym","eqSbbh","eqZcbh"],    //搜索框的name
+                /!* where:{
+                    newValue:"thisIsNew"
+                },*!/
+                /!* tid:"#table"*!/          //对应table的id   可以不写
+            }*/
+
+        }
+
     }
 </script>
 </body>

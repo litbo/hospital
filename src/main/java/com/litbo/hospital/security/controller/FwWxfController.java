@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author zjc
  * @create 2018-12-09 9:47
@@ -31,6 +33,18 @@ public class FwWxfController {
         try {
             WxfIndexVo wxfIndexVo = fwWxfService.wxfShIndex(id);
             return Result.success(wxfIndexVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("读取信息失败");
+        }
+    }
+
+    @GetMapping("/wxfGetEq")
+    public Result wxfGetEq(){
+        try {
+            String userId = "1615925023";
+            List<String> list = fwWxfService.wxfGetEq(userId);
+            return Result.success(list);
         } catch (Exception e) {
             e.printStackTrace();
             return Result.error("读取信息失败");
