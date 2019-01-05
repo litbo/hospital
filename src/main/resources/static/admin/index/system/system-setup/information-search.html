@@ -33,25 +33,24 @@
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="科室名称" autocomplete="off">
+                <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">
             </div>
             <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="设备名称拼音码" autocomplete="off">
+                <input class="layui-input" name="eqPym" placeholder="设备名称拼音码" autocomplete="off">
             </div>
             <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="设备编码" autocomplete="off">
+                <input class="layui-input" name="eqSbbh" placeholder="设备编码" autocomplete="off">
             </div>
             <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="资产编码" autocomplete="off">
+                <input class="layui-input" name="eqZcbh" placeholder="资产编码" autocomplete="off">
             </div>
             <div class="layui-input-inline">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="serch">查找</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
             </div>
         </form>
     </div>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
     renderMod = {
         addTable: {
@@ -67,7 +66,7 @@
                     , {field: 'eqQysj', title: '启用日期', width: 150}
                     , {title: '操作', toolbar: '#bar', align: "center"}
                 ]]
-                , url: "http://localhost/eq/listShowEqs"
+                , url: "/eq/listShowEqs"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -89,12 +88,13 @@
             },
 
             reSet:{
-                url:"eq/listEqByX",
-                type:"serch",
-                where: {
-
-                }
-
+                url:"/eq/listEqByX",
+                type:"search",
+                data:["bmName","eqPym","eqSbbh","eqZcbh"],
+                /* where:{
+                    newValue:"thisIsNew"
+                },*/
+               /* tid:"#table"*/
             }
 
         }
