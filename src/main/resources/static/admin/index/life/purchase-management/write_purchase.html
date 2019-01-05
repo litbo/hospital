@@ -28,10 +28,10 @@
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="eqPmName" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
+            <input class="layui-input" name="eqPmName" id="eqPmName" placeholder="设备名称" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="eqPmJc" id="test" placeholder="设备简称" autocomplete="off">
+            <input class="layui-input" name="eqPmJc" id="eqPmJc" placeholder="设备简称" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
     </div>
@@ -63,7 +63,8 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "data": res.data.list //解析数据列表
+                        "data": res.data.list, //解析数据列表
+                        "count":res.data.size //总数据数
                     }
                 }
                 , done: function (obj) {
@@ -75,7 +76,7 @@
                 url:"http://localhost/lifeManage/selectSgKstlSbs",
                 type:"reload",
                 where: {
-                    eqPmJc:$("input[name='eqPmJc']").val()
+                    eqPmJc:$("input[name='eqPmJc']").valueOf()
                 }
             }
         }
