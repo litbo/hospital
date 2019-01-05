@@ -26,12 +26,15 @@
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">填表说明</a>
     </div>
-    <div class="hidden-xs" id="moreBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
         <div class="layui-inline">
-            <input class="layui-input" name="eqPmName" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
+            <input class="layui-input" name="eqPmName" placeholder="设备名称" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="eqPmJc" id="demoReload" placeholder="设备简称" autocomplete="off">
+            <input class="layui-input" name="eqPmJc" placeholder="设备简称" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
     </div>
@@ -63,11 +66,20 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
+                        "count":res.data.size,
                         "data": res.data.list //解析数据列表
                     }
                 }
                 , done: function (obj) {
-                    //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":{
+                            tool:"toolbar",
+                            title:"数据查找",
+                            event:"dataSearch",
+                            content:$("#hideXs")
+                        }
+                    })
                 }
             },
 
