@@ -34,6 +34,11 @@ public class SysController {
         }
         return Result.error();
     }
+    @RequestMapping("/getWjbb")
+    public Result getWjbb(){
+
+       return Result.success(sysDao.getWjbb());
+    }
 
     //短信猫设置
     @RequestMapping("/setDxm")
