@@ -22,6 +22,8 @@ public class SysController {
 
     @Autowired
     private SysService sysService;
+    @Autowired
+    private SysDao sysDao;
 
     //文件版本设置
     @RequestMapping("/setWjbb")
@@ -41,6 +43,11 @@ public class SysController {
         }else {
             return Result.error();
         }
+    }
+    @RequestMapping("/getDxm")
+    public Result getDxm(){
+        SysDxm sysDxm =  sysDao.getDxm();
+        return Result.success(sysDxm);
     }
     //作息时间设置
    /* public Result setZxsj(SysZxsj zxsj){
