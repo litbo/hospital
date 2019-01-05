@@ -14,17 +14,6 @@
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
     <style type="text/css">
-        .title{
-            height:50px;
-            background-color:#eeeeee;
-            border-radius:5px;
-            margin-top:20px;
-            line-height:50px;
-            font-size:18px;
-        }
-        .sign{
-            color:red;
-        }
         .layui-form-item{
             margin-top:30px;
         }
@@ -36,7 +25,9 @@
     <form class="layui-form layui-form-pane" >
         <div class="layui-row">
             <div class="col-xs-12">
-                <div class="title"><span style="margin-left:15px;">短信猫参数设置</span></div>
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>短信猫参数设置</legend>
+                </fieldset>
             </div>
             <div class="col-xs-12 col-sm-6">
                 <div class="layui-form-item">
@@ -83,17 +74,12 @@
                     data:["btl","ckh"]
                 },//表单提交函数
                 before:function(data){
-                    //console.log("1111");
-                    //console.log(data);
                     for(var name in data.field){
                         if(data.field.hasOwnProperty(name)){
                             if(data.field[name] === ""){
-                                //console.log(i);
-                                //console.log(data.field[i]);
                                 layer.alert("请确认您填写的信息！");
                                 return false;
                             }
-                            //console.log("is true");
                         }
                     }
                     return true;
