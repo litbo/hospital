@@ -35,6 +35,25 @@ public class GgProvider {
         return  sql;
     }
 
+    public String listWaits(){
+        String sql ="SELECT\n" +
+                "g.id,\n" +
+                "g.kssj,\n" +
+                "g.jssj,\n" +
+                "g.ggbt,\n" +
+                "g.ngr,\n" +
+                "g.ngsj,\n" +
+                "g.ggnr,\n" +
+                "g.status,\n" +
+                "x.gglx_name,\n" +
+                "b.bm_name\n" +
+                "FROM\n" +
+                "dbo.sys_gg AS g\n" +
+                "LEFT JOIN dbo.sys_gglx AS x ON g.gglx_id= x.gglx_id\n" +
+                "LEFT JOIN dbo.s_bm AS b ON g.bm_id= b.bm_id" +
+                " where status = 0";
+        return  sql;
+    }
     public String checkGg(Integer id){
         String sql = "update sys_gg set status = 1 where id = #{id}";
         return sql;

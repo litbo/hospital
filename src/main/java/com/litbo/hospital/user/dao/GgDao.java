@@ -3,10 +3,7 @@ package com.litbo.hospital.user.dao;
 import com.litbo.hospital.user.vo.SysGgVo;
 import com.litbo.hospital.user.bean.SysGg;
 import com.litbo.hospital.user.dao.provider.GgProvider;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,4 +18,7 @@ public interface GgDao {
 
     @SelectProvider(type = GgProvider.class , method = "getGgById")
     SysGgVo getGgById(Integer id);
+
+    @SelectProvider(type = GgProvider.class , method = "listWaits")
+    List<SysGgVo> listWaits();
 }
