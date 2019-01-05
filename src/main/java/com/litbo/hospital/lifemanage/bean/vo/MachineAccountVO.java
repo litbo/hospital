@@ -24,7 +24,7 @@ public class MachineAccountVO {
      */
     private String eqName;
     /**
-     * 院内编号
+     * 院内编号  资产编号
      */
     private String eqYq;
     /**

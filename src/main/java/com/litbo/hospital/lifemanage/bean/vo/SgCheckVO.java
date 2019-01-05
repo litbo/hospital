@@ -5,12 +5,12 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 核对对比列表VO
+ * 账实核对列表VO
  *
  * @author Administrator on 2019-01-04
  */
 @Data
-public class SgCheckListVO {
+public class SgCheckVO {
     /**
      * 审核id
      */
@@ -32,25 +32,13 @@ public class SgCheckListVO {
      */
     private String eqXh;
     /**
-     * 制定人
-     */
-    private String planUser;
-    /**
-     * 科室id
-     */
-    private String bmName;
-    /**
-     * 计划时间
-     */
-    private Date planDate;
-    /**
      * 审核日期
      */
     private Date date;
     /**
      * 审核人
      */
-    private String checkUser;
+    private String userId;
     /**
      * 是否存在
      */

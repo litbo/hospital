@@ -37,7 +37,6 @@ public class SgYsController {
     @PostMapping("/insertSgYs")
     public Result insertSgYs(@RequestBody SgYs sgYs,@RequestParam(name = "zjlyId") String zjlyId) {
         sgYsService.insertSgYs(sgYs);
-        System.out.println(zjlyId);
         return Result.success();
     }
 

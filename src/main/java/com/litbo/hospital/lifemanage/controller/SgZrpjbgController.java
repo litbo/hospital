@@ -21,22 +21,23 @@ public class SgZrpjbgController {
      * @param sgZrpjbg 准入评价报告
      */
     @PostMapping("/insertSgZrpjbg")
-    public Result insertSgZrpjbg(SgZrpjbg sgZrpjbg){
+    public Result insertSgZrpjbg(SgZrpjbg sgZrpjbg) {
         sgZrpjbgService.insertOrUpdateSgZrpjbg(sgZrpjbg);
         return Result.success();
     }
 
     /**
      * 根据申购单id查询准入评价报告信息
+     *
      * @param sgInfoId 申购单id
      * @return Result 评价报告信息
      */
     @PostMapping("/selectSgZrpjbgBySgInfoId")
-    public Result selectSgZrpjbgBySgInfoId(@RequestParam("sgInfoId")String sgInfoId){
+    public Result selectSgZrpjbgBySgInfoId(@RequestParam("sgInfoId") String sgInfoId) {
         SgZrpjbg sgZrpjbg = sgZrpjbgService.selectSgZrpjbgBySgInfoId(sgInfoId);
-        if(sgZrpjbg != null){
+        if (sgZrpjbg != null) {
             return Result.success(sgZrpjbg);
-        }else{
+        } else {
             return Result.success();
         }
     }
