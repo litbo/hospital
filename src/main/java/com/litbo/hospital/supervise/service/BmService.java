@@ -13,11 +13,14 @@ public interface BmService {
     PageInfo getXBmList(int pageNum, int pageSize);
     //返回所有叶子部门
     PageInfo getYZBmList(int pageNum, int pageSize);
+
+
     //返回所有虚部门
     List<SBm> getXBmList();
     //返回所有叶子部门
     List<SBm> getYZBmList();
-
+    //返回所有叶子部门
+    PageInfo getGLBmList(int pageNum, int pageSize);
     //保存部门
     void saveBm(SBm bm);
     //根据父节点查部门

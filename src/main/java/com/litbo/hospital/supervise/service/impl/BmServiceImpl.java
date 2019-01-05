@@ -8,6 +8,7 @@ import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
+import com.litbo.hospital.supervise.vo.WxbmSzSelectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,45 @@ public class BmServiceImpl implements BmService {
     public PageInfo getYZBmList(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<SBm> date = bmDao.getYZBmList();
+        return new PageInfo(date);
+    }
+
+    @Override
+    public PageInfo getGLBmList(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> bms = bmDao.getGLBmList();
+        List<WxbmSzSelectVO> date = new ArrayList<>();
+
+        for(SBm bm:bms){
+            WxbmSzSelectVO szSelectVO = new WxbmSzSelectVO();
+            szSelectVO.setBmId(bm.getBmId());
+            szSelectVO.setBmName(bm.getBmName());
+            if(bm.getBmId().startsWith("01")){
+                szSelectVO.setBmLb("机构领导");
+            }else if(bm.getBmId().startsWith("02")){
+                szSelectVO.setBmLb("管理部门");
+            }else{
+                szSelectVO.setBmLb("使用部门");
+            }
+
+            if(bm.getBmId().startsWith("0201")){
+                szSelectVO.setGlBmLb("医工");
+            }else if(bm.getBmId().startsWith("0202")){
+                szSelectVO.setGlBmLb("信息");
+            }else if(bm.getBmId().startsWith("0203")){
+                szSelectVO.setGlBmLb("后勤");
+            }else {
+                szSelectVO.setGlBmLb("0");
+            }
+
+            if ((bm.getWxFlag().equals("1"))) {
+                szSelectVO.setIsWxbm("是");
+            } else {
+                szSelectVO.setIsWxbm("否");
+            }
+            date.add(szSelectVO);
+        }
+
         return new PageInfo(date);
     }
 
