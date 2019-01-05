@@ -117,6 +117,8 @@ public class EqInfo {
     private Integer eqDcysl;
     //额定功率
     private Integer eqEdgl;
+    //使用状态
+    private String eqSyzt;
     //备注
     private String eqBz;
 

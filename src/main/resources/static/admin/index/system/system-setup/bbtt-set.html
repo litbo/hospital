@@ -30,17 +30,27 @@
                 </fieldset>
             </div>
             <div class="col-xs-12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">LOGO</label>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">选择</label>
                     <div class="layui-input-block">
-                        <input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
+                        <!--<input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">-->
+                    </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">预览</label>
+                    <div class="layui-input-block">
+                        <div class="img_show">
+
+                        </div>
+                        <!--<input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">-->
                     </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="submit" id="sub">提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -51,15 +61,36 @@
 
 
 <script>
-    $(function(){
-        $("button[lay-filter='submit']").on('click',function(){
-            JQajax({
+    renderMod = {
+        form:{
+            file:{
+                elem:"#selec1",
                 url:"/logo/setLogo",
-                data:{"logoFile":$("input[name='logoFile']").val()},
-                method:"POST"
-            })
-        })
-    })
+                accept:"images",
+                acceptMime:"image/*",
+                auto:false,
+                bindAction:"#sub",
+                field:"logoFile",
+                choose:function(obj){
+                    files = obj.pushFile();
+                    obj.preview(function(index,file,result){
+                        $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
+                    })
+                },done:function(res,index,upload){
+                    console.log(arguments);
+                    //layui.closeAll("loading");
+                    layer.msg('上传成功！', {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                    $(".img_show").html("");
+                    return delete files[index];
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
+                }
+            }
+        }
+    }
 </script>
 </body>
 </html>

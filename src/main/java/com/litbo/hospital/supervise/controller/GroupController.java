@@ -124,4 +124,13 @@ public class GroupController {
         return Result.success(date);
     }
 
+    //获得所有管理部门的基本详情信息
+    @GetMapping("/listWclGroupBm")
+    public Result listWclGroupBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                     @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+
+        PageInfo date =  groupService.listWclGroupBm(pageNum,pageSize);
+        return Result.success(date);
+    }
+
 }

@@ -14,6 +14,7 @@ import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
 import com.litbo.hospital.user.vo.SetPmVo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -55,10 +56,14 @@ public class EqServiceImpl implements EqService {
     public int addEq(EqInfo eqInfo, MultipartFile sbzp, MultipartFile mpzp) {
         //文件上传
         String path = "F:\\img";
-        String eqSbzp =  UploadFile.upload(path,sbzp);
-        String eqMpzp =  UploadFile.upload(path,mpzp);
-        eqInfo.setEqSbzp(eqSbzp);
-        eqInfo.setEqMpzp(eqMpzp);
+        if(sbzp!=null) {
+            String eqSbzp = UploadFile.upload(path, sbzp);
+            eqInfo.setEqSbzp(eqSbzp);
+        }
+        if(StringUtils.isNotBlank(mpzp.getOriginalFilename())) {
+            String eqMpzp = UploadFile.upload(path, mpzp);
+            eqInfo.setEqMpzp(eqMpzp);
+        }
         //设置设备拼音码
         String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
         eqInfo.setEqPym(pym);
@@ -81,6 +86,10 @@ public class EqServiceImpl implements EqService {
         EqPm pm = pmDao.getPmById(eqInfo.getEqPmId());
         String sbbh =time+pm.getPid()+pm.getGlh()+eqInfo.getEqId();
         eqInfo.setEqSbbh(sbbh);
+
+        //设置使用状态
+        String syzt = "在用";
+        eqInfo.setEqSyzt(syzt);
         //存
         return eqDao.addEq(eqInfo);
     }
@@ -89,6 +98,14 @@ public class EqServiceImpl implements EqService {
     @Override
     public PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo) {
         PageHelper.startPage(pageNum,pageSize);
+        if(StringUtils.isNotBlank(selectEqVo.getBmName()))
+            selectEqVo.setBmName("%"+selectEqVo.getBmName()+"%");
+        if(StringUtils.isNotBlank(selectEqVo.getEqPym()))
+            selectEqVo.setEqPym("%"+selectEqVo.getEqPym()+"%");
+        if(StringUtils.isNotBlank(selectEqVo.getEqSbbh()))
+            selectEqVo.setEqSbbh("%"+selectEqVo.getEqSbbh()+"%");
+        if(StringUtils.isNotBlank(selectEqVo.getEqZcbh()))
+            selectEqVo.setEqZcbh("%"+selectEqVo.getEqZcbh()+"%");
 
         return new PageInfo(eqDao.listEqByX(selectEqVo));
     }
@@ -150,9 +167,11 @@ public class EqServiceImpl implements EqService {
             String time = time1.substring(2,4)+time1.substring(5,time1.length());
             EqPm pm = pmDao.getPmById(setPmVo.getEqPmId());
             String sbbh =time+pm.getPid()+pm.getGlh()+eqId;
-            if(eqDao.setPm(setPmVo.getEqPmId(),eqId,sbbh)<0){
+            String syzt="在用";
+            if(eqDao.setPm(setPmVo.getEqPmId(),eqId,sbbh,syzt)<0){
                 return -1;
             }
+
         }
         return 1;
     }
@@ -199,7 +218,7 @@ public class EqServiceImpl implements EqService {
     @Override
     public PageInfo listPmsByPym(int pageNum, int pageSize, String pym) {
         PageHelper.startPage(pageNum,pageSize);
-        if(pym!=null){
+        if(StringUtils.isNotBlank(pym)){
             String newPym = "%"+pym+"%";
             return new PageInfo(eqDao.listPmsByPym(newPym));
         }

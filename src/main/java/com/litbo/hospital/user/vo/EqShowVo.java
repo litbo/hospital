@@ -29,4 +29,6 @@ public class EqShowVo {
     private String bmName;
 
     private Date eqQysj;
+
+    private String eqSyzt;
 }

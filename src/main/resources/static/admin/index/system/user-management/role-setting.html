@@ -49,7 +49,56 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-addTable ={
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox:true,fixed:true}
+                    , {field: 'userId', title: '工号', width: 150,sort:true}
+                    , {field:'name',title:'用户名',width:300}
+                    , {field:'roleName',title:'角色',minWidth:300}
+                    , {title:'操作',toolbar:'#barDemo',width:150,align:'center'}
+                ]]
+                , url: "http://localhost/role/listUsers"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"role/listUserByX",
+                type:"serch",
+                where: {
+
+                }
+
+            }
+
+        }
+
+
+
+    }
+
+
+
+  /*  addTable ={
     table:{
         cols: [[ //表头
             {checkbox:true,fixed:true}
@@ -96,7 +145,7 @@ addTable ={
             })
         }
     }
-}
+}*/
 </script>
 </body>
 </html>

@@ -22,7 +22,7 @@ public class TreeController {
     @Autowired
     private TreeDao treeDao;
 
-    @RequestMapping("/wbfl")
+/*   @RequestMapping("/wbfl")
     public Result listNoteByPid(String pid){
         List<TreeVo> T1 = treeDao.listNoteByPid("68");
 
@@ -39,6 +39,13 @@ public class TreeController {
             }
         }
         return Result.success(T1);
+    }*/
+    @RequestMapping("/wb")
+    public Result listNoteByPid(String pid){
+        List<TreeVo>  treeVos = treeDao.listNoteByPid(pid);
+        return Result.success(treeVos);
+
     }
+
 
 }
