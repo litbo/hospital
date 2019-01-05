@@ -84,15 +84,15 @@
                     }
                     return true;
                 }
+            },
+            val:{
+                filter:"form",
+                get:{
+                    url:"/sys/getDxm",
+                    type:"POST",
+                    add:{page:1,name:"默认表单"}
+                }//GET内参数需参考《内容传输与提交》文档
             }
-        },
-        val:{
-            filter:"form",
-            get:{
-                url:"/sys/getDxm",
-                type:"POST",
-                add:{page:1,name:"默认表单"}
-            }//GET内参数需参考《内容传输与提交》文档
         }
 
     }
