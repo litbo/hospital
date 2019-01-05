@@ -51,7 +51,9 @@ $(function () {
                     if(val.get){
                         val.get.success = function(data){
                             for(var name in data){
-                                form.val(val.filter, data[name]);
+                                if(data.hasOwnProperty(name)){
+                                    form.val(val.filter, data[name]);
+                                }
                             }
                         };
                         subUp(val.get)
@@ -151,7 +153,7 @@ $(function () {
                     sub.filter === true ? filter = '(' + normal.filter + ')' : filter = '(' + sub.filter + ')';
                 }
 
-                form.on('submit' + filter, function (data) {
+                form.on('submit' + filter, function (dataBase) {
                     //data：表单所有数据,包含内容如下
                     //-----elem:被执行事件的DOM对象（点击的按钮）
                     //-----form:表单dorm组建，没有form标签则不存在
@@ -159,11 +161,16 @@ $(function () {
 
                     //表单提交前处理事件
                     var bef =true;
-                    bef = (sub.before && sub.before(data));
+                    //console.log(sub.before);
+                    if(sub.before){
+                        bef = sub.before(dataBase)
+                    }
+                    //bef = Boolean(sub.before && sub.before(data));
+                    //console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
-                    sub.form && bef &&subUp(sub.form, data);
+                    sub.form && bef &&subUp(sub.form, dataBase);
                     //表单提交后处理事件(不推荐使用，推荐使用ajax success/error处理)
-                    sub.func && sub.func(data);
+                    sub.func && sub.func(dataBase);
                     //阻止按钮默认事件
                     return false;
                 })

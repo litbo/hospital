@@ -51,8 +51,8 @@
                     <label class="layui-form-label">波特率<span class="sign">*</span></label>
                     <div class="layui-input-block">
                         <select name="btl" lay-filter="">
-                            <option value="">119520</option>
-                            <option value="0">111</option>
+                            <option value="">请选择波特率</option>
+                            <option value="0" selected>111</option>
                             <option value="1">222</option>
                             <option value="2">333</option>
                         </select>
@@ -73,7 +73,6 @@
 
 
 <script>
-
     renderMod = {
         form:{
             submit:{
@@ -81,29 +80,27 @@
                 form:{
                     url:"http://localhost/sys/setDxm",
                     type:"POST",
-                    data:["btl","ckh"],
-                    success:function(){
-                        alert("xx");
-                    }
+                    data:["btl","ckh"]
                 },//表单提交函数
                 before:function(data){
-                    for(var i=0;i<data.field.length;i++){
-                        if(data.field[i] === ""){
-                            layer.alert("请确认您填写的信息！");
-                            return false;
+                    //console.log("1111");
+                    //console.log(data);
+                    for(var name in data.field){
+                        if(data.field.hasOwnProperty(name)){
+                            if(data.field[name] === ""){
+                                //console.log(i);
+                                //console.log(data.field[i]);
+                                layer.alert("请确认您填写的信息！");
+                                return false;
+                            }
+                            //console.log("is true");
                         }
                     }
-                },//表单提交前执行函数
-                func:function(data){
-                    n++;
-                    layer.alert("您已提交 " + n + " 次！");
-                }//表单提交后执行函数（不论成功与否）
+                    return true;
+                }
             }
         }
     }
-    //添加表单提交功能
-
-
 </script>
 </body>
 </html>
