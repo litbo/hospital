@@ -33,7 +33,7 @@
 <body>
 
 <div class="layui-row">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" >
         <div class="layui-row">
             <div class="col-xs-12">
                 <div class="title"><span style="margin-left:15px;">短信猫参数设置</span></div>
@@ -42,7 +42,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">串口号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" value="COM1" class="layui-input">
+                        <input type="text" name="ckh" autocomplete="off" value="COM1" class="layui-input">
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">波特率<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <select name="" lay-filter="">
+                        <select name="btl" lay-filter="">
                             <option value="">119520</option>
                             <option value="0">111</option>
                             <option value="1">222</option>
@@ -62,7 +62,7 @@
             <div class="col-xs-12">
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="">提交</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -72,9 +72,38 @@
 </div>
 
 
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
+
+    renderMod = {
+        form:{
+            submit:{
+                filter:"submit",//可以不写
+                form:{
+                    url:"http://localhost/sys/setDxm",
+                    type:"POST",
+                    data:["btl","ckh"],
+                    success:function(){
+                        alert("xx");
+                    }
+                },//表单提交函数
+                before:function(data){
+                    for(var i=0;i<data.field.length;i++){
+                        if(data.field[i] === ""){
+                            layer.alert("请确认您填写的信息！");
+                            return false;
+                        }
+                    }
+                },//表单提交前执行函数
+                func:function(data){
+                    n++;
+                    layer.alert("您已提交 " + n + " 次！");
+                }//表单提交后执行函数（不论成功与否）
+            }
+        }
+    }
+    //添加表单提交功能
+
+
 </script>
 </body>
 </html>
