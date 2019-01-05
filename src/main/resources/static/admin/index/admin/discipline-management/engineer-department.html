@@ -14,6 +14,11 @@
     <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,12 +29,16 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">确定划分</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
-    </div>
-    <div class="moreBtn hidden-xs" >
+    <div class="moreBtn hidden-xs">
         <div class="layui-inline">
+            <select>
+                <option>划分人</option>
+                <option>aaa</option>
+                <option>bbb</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="">确定划分</button>
+        <div class="layui-inline" style="margin-left:100px">
             <select>
                 <option>科室名称</option>
                 <option>aaa</option>
@@ -43,28 +52,40 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'department-name', title: '科室名称',width:"100%", minWidth: 200}
-            ]]
-            , "data": [
-                {
-                    "department-name":'病案室'
-                },{
-                    "department-name":'病案质控室'
-                },{
-                    "department-name":'B超室'
-                },{
-                    "department-name":'病案室'
-                },{
-                    "department-name":'病案室'
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'bmName', title: '科室名称', minWidth: 100}
+                ]]
+                , url: "http://localhost/kwgl/glbm/getGcsBmMSG"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"eq/listEqByX",
+                type:"serch",
+                where: {
+
+                }
             }
         }
     }

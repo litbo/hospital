@@ -99,17 +99,23 @@ function subUp(value,data) {
     }
     //判断是否需要自动获取表单数据(根据input的name属性自动获取所有的数据)
     if (Type(value.data) === "array") {
-        var dataP = {};
+        var dataP = {},valus = null;
         for (var i = 0; i < value.data.length; i++) {
+            valus = value.data[i];
             if(!data){
-                dataP.value.data[i] = $("input[name=" + value.data[i] + "]").val();
+                dataP[valus] = $("input[name=" + valus + "]").val();
             }else{
-                dataP.value.data[i] = data.field[value.data[i]];
+                dataP[valus] = data.field[valus];
             }
         }
-        for(var names in add){
-            dataP[names] = add[names];
+        if(value.add){
+            for(var names in value.add){
+                if(value.add.hasOwnProperty(name)){
+                    dataP[names] = add[names];
+                }
+            }
         }
+
     }
     //判断当前数据上传类型(默认以JQajax提交)
     if (value.switch === "xhr") {//以原生JS形式异步提交数据(基本代码)
@@ -150,7 +156,7 @@ function subUp(value,data) {
                 } else if (data.code === 1) {
                     alert("提交失败，请重试！");
                 }
-                value.done || value.done();
+                value.done && value.done();
             },
             error: function (er) {
                 alert("提交失败，请重试！");
