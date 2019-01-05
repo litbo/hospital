@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tree</title>
+<link rel="stylesheet" href="layui.css" media="all">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+</head>
+<body>
+
+
+<ul id="demo"></ul>
+    
+
+<script src="./layui.js"></script>
+<script>
+
+layui.use(['form',"tree","jquery"], function(){
+  var form = layui.form,$ = layui.jquery,
+  jsonP={elem:"#demo",click: function(node){
+      $.ajax({
+          url:"/tree/wb",
+          method:"GET",
+          data:{pid:node.id},
+          async:false,
+          success:function(data){
+             /* console.log(node);*/
+              node.children = data.data;
+             node.spread = true;
+              $("#demo").html("");
+              layui.tree(jsonP);
+          }
+      })
+  }  };
+  
+  $.ajax({
+            url:"/tree/wb",
+            method:"GET",
+            data:{pid:"68"},
+             async:false,
+            success:function(data){
+            /*    console.log(data);*/
+                jsonP.nodes = data.data;
+                layui.tree(jsonP);
+            }
+        });
+/*console.log(jsonP);
+  layui.tree(jsonP);*/
+
+  //各种基于事件的操作，下面会有进一步介绍
+});
+</script>
+<script>
+        
+    </script>
