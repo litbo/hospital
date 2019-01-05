@@ -230,4 +230,8 @@ public class SgYs {
      * 退换原因
      */
     private String ysThyy;
+    /**
+     * 资金来源表id
+     */
+    private Integer zjlyId;
 }

@@ -1,15 +1,15 @@
 package com.litbo.hospital.lifemanage.enums;
 
 /**
- * 状态枚举类
+ * 处置方式Enum
  *
- * @author Administrator on 2018-12-20
+ * @author Administrator on 2018-12-29
  */
-public enum StateEnum {
+public enum ModeEnum {
     /**
-     * 账实核对是否存在
+     * 处置方式 对应的标识码和对应的处置方式信息
      */
-    CHECK_Y(1,"是"),CHECK_N(0,"否");
+    ONE(1, "报废"), TWO(2, "捐赠"), THREE(3, "调拨");
 
     /**
      * 处置码
@@ -20,7 +20,7 @@ public enum StateEnum {
      */
     private String message;
 
-    StateEnum(Integer code, String message) {
+    ModeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -38,8 +38,8 @@ public enum StateEnum {
      * @param code code
      * @return 枚举实例
      */
-    public static StateEnum getEnumByCode(Integer code) {
-        for (StateEnum simpleEnum : StateEnum.values()) {
+    public static ModeEnum getEnumByCode(Integer code) {
+        for (ModeEnum simpleEnum : ModeEnum.values()) {
             if (code != null && code.equals(simpleEnum.code)) {
                 return simpleEnum;
             }

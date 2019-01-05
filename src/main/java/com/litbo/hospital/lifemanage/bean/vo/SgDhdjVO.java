@@ -13,10 +13,6 @@ import java.util.List;
 @Data
 public class SgDhdjVO {
     /**
-     * 到货登记表id
-     */
-    private String dhdjId;
-    /**
      * 收获单位
      */
     private String dhdjShdw;
@@ -113,14 +109,6 @@ public class SgDhdjVO {
      * 本合同是否全部到货
      */
     private String dhdjIsqbdh;
-    /**
-     * 扩展一
-     */
-    private String extendOne;
-    /**
-     * 扩展二
-     */
-    private String extendTwo;
     /**
      * 登记货物列表
      */

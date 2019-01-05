@@ -57,7 +57,7 @@ public interface SgYsMapper {
             "      ys_qysj, ys_istg, ys_thh, \n" +
             "      ys_thsj, ys_syqkyj, ys_ysjl, \n" +
             "      ys_czgc, ys_zysx, ys_byzd, \n" +
-            "      ys_cpjj, ys_zlkz, ys_thyy\n" +
+            "      ys_cpjj, ys_zlkz, ys_thyy, zjly_id\n" +
             "      )\n" +
             "    values (#{ysId,jdbcType=VARCHAR}, #{ysDabh,jdbcType=VARCHAR}, #{htId,jdbcType=VARCHAR},#{sgId,jdbcType=VARCHAR}, \n" +
             "      #{ysZzshjg,jdbcType=CHAR}, #{ysZzshr,jdbcType=VARCHAR}, #{ysZxd,jdbcType=VARCHAR}, \n" +
@@ -75,7 +75,7 @@ public interface SgYsMapper {
             "      #{ysQysj,jdbcType=TIMESTAMP}, #{ysIstg,jdbcType=CHAR}, #{ysThh,jdbcType=CHAR}, \n" +
             "      #{ysThsj,jdbcType=TIMESTAMP}, #{ysSyqkyj,jdbcType=LONGVARCHAR}, #{ysYsjl,jdbcType=LONGVARCHAR}, \n" +
             "      #{ysCzgc,jdbcType=LONGVARCHAR}, #{ysZysx,jdbcType=LONGVARCHAR}, #{ysByzd,jdbcType=LONGVARCHAR}, \n" +
-            "      #{ysCpjj,jdbcType=LONGVARCHAR}, #{ysZlkz,jdbcType=LONGVARCHAR}, #{ysThyy,jdbcType=LONGVARCHAR}\n" +
-            "      )")
+            "      #{ysCpjj,jdbcType=LONGVARCHAR}, #{ysZlkz,jdbcType=LONGVARCHAR}, #{ysThyy,jdbcType=LONGVARCHAR},\n" +
+            "      #{zjlyId,jdbcType=INTEGER})")
     int insertSgYs(SgYs sgYs);
 }

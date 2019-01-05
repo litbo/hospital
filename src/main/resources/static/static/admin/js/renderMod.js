@@ -8,8 +8,9 @@
 * */
 
 $(function () {
-    layui.use(['table', 'form', 'laydate', 'element','upload',"jquery","layer"], function () {
-        var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate, upload = layui.upload,$ = layui.jquery,layer = layui.layer,
+    layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer"], function () {
+        var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
+            upload = layui.upload, $ = layui.jquery, layer = layui.layer,
             formAction = renderMod['form'] || renderMod['formAction']//表单数据
             , addTable = renderMod['table'] || renderMod['addTable'];//表格数据
         //表单渲染
@@ -23,9 +24,9 @@ $(function () {
                     format: "y-M-d"
                 },//默认的日期选择器
                 nor_up = {
-                    elem:"#up",
-                    multiple:false,
-                    accept:"file"
+                    elem: "#up",
+                    multiple: false,
+                    accept: "file"
 
                 },
                 nor_ver = {},//默认添加的表单验证数据
@@ -42,26 +43,27 @@ $(function () {
                 //提交选择
                 eve = formAction.event,
                 //默认不添加选择器
-                filter = "",files=null;
+                filter = "", files = null;
 
             //表单默认值渲染
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
-                if (val.filter && val.options && Type(val.options) === "json") {
-                    if(val.get){
-                        val.get.success = function(data){
-                            for(var name in data){
-                                form.val(val.filter, data[name]);
+                if (val.filter && (val.get || (val.options && Type(val.options) === "json"))) {
+                    if (val.get) {
+                        val.get.success = function (data) {
+                            for (var name in data) {
+                                if (data.hasOwnProperty(name)) {
+                                    form.val(val.filter, data[name]);
+                                }
                             }
                         };
                         subUp(val.get)
-                    }else{
+                    } else {
                         form.val(val.filter, val.options);
                     }
-                    //form.val(val.filter, val.options);
                 } else {
-                    console.error("formNormal.js遇到一个无法处理的错误：");
-                    console.error("formAction.val参数传递错误,请参考相关文档！");
+                    console.error("renderMod.js遇到一个无法处理的错误：");
+                    console.error("formAction.val参数传递错误(LINE:50),请参考相关文档！");
                 }
             }
 
@@ -113,7 +115,7 @@ $(function () {
             }
 
             //文件上传
-            if(file && file !== false){
+            if (file && file !== false) {
                 if (file === true) {
                     //渲染默认上传域
                     //严重不推荐使用rue
@@ -130,12 +132,12 @@ $(function () {
                     }
                 }
 
-                function cUp(options){
+                function cUp(options) {
                     //console.log(options);
                     upload.render(options);
                     file.func && file.func();
-                    if(file.bindAction){
-                        $(file.bindAction).on('click',function(){
+                    if (file.bindAction) {
+                        $(file.bindAction).on('click', function () {
                             return false;
                         })
                     }
@@ -151,19 +153,24 @@ $(function () {
                     sub.filter === true ? filter = '(' + normal.filter + ')' : filter = '(' + sub.filter + ')';
                 }
 
-                form.on('submit' + filter, function (data) {
+                form.on('submit' + filter, function (dataBase) {
                     //data：表单所有数据,包含内容如下
                     //-----elem:被执行事件的DOM对象（点击的按钮）
                     //-----form:表单dorm组建，没有form标签则不存在
                     //-----field:容器内的所有表单字段 {name: value}
 
                     //表单提交前处理事件
-                    var bef =true;
-                    bef = (sub.before && sub.before(data));
+                    var bef = true;
+                    //console.log(sub.before);
+                    if (sub.before) {
+                        bef = sub.before(dataBase)
+                    }
+                    //bef = Boolean(sub.before && sub.before(data));
+                    //console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
-                    sub.form && bef &&subUp(sub.form, data);
+                    sub.form && bef && subUp(sub.form, dataBase);
                     //表单提交后处理事件(不推荐使用，推荐使用ajax success/error处理)
-                    sub.func && sub.func(data);
+                    sub.func && sub.func(dataBase);
                     //阻止按钮默认事件
                     return false;
                 })
@@ -235,10 +242,10 @@ $(function () {
                     compereData(tbs, args_table);
                     table.render(tbs);
                 } else if (Type(tbs) === "array") {
-                    for (var i = 0; i < tbs.length; i++) {
-                        if (Type(tbs[i]) === "json") {
-                            compereData(tbs[i], args_table);
-                            table.render(tbs[i]);
+                    for (var x = 0; x < tbs.length; x++) {
+                        if (Type(tbs[x]) === "json") {
+                            compereData(tbs[x], args_table);
+                            table.render(tbs[x]);
                         }
                     }
                 }
@@ -246,22 +253,45 @@ $(function () {
 
             //表格数据重载(查询数据)
             if (res && res !== false) {
-                var $ = layui.$, type = res.type || "search", active = {}, value = {};
+                var type = res.type || "search"//绑定data-type="search"的按钮
+                    , active = {}//绑定按钮事件
+                    , resValue = {};//
+                //绑定按钮事件
                 active[type] = function () {
-                    for (var name in res.where) {
-                        value[name] = $(res.where[name]).val();
+                    //动态获取表单数据
+                    if(Type(res.data) === "array"){
+                        for(var x=0;x<res.data.length;x++){
+                            //console.log("input="+res.data[x]);
+                            resValue[res.data[x]] = $("input[name='"+res.data[x]+"']").val();
+                            //console.log(resValue[res.data[x]]);
+                        }
+                        //console.log(resValue);
                     }
+
+                    //添加额外数据
+                    if(res.where){
+                        for (var name in res.where) {
+                            if (res.where.hasOwnProperty(name)) {
+                                resValue[name] = res.where[name];
+                            }
+                        }
+                        //console.log(resValue);
+                    }
+                    //console.log(resValue);
                     //执行重载
-                    table.reload(res.tid || args_table.id, {
-                        url: res.url
-                        , where: res.where || {}
-                    });
+                    table.reload(
+                        res.tid || args_table.id,
+                        {
+                            url: res.url
+                            , where: resValue
+                        });
                     //重新绑定事件
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
                         active[type] ? active[type].call(this) : '';
                     });
                 };
+
                 //首次页面渲染后按钮事件绑定
                 $(".layui-table-tool .layui-btn").on('click', function () {
                     var type = $(this).data('type');

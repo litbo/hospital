@@ -22,7 +22,7 @@ public class SgYsController {
      * @param pageSize 每页显示的记录数
      * @return Result
      */
-    @PostMapping("sgYsList")
+    @PostMapping("/sgYsList")
     public Result sgYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         return Result.success(sgYsService.sgYsList(pageNum, pageSize));
@@ -34,8 +34,8 @@ public class SgYsController {
      * @param sgYs 验收信息
      * @return Result
      */
-    @PostMapping("insertSgYs")
-    public Result insertSgYs(@RequestBody SgYs sgYs) {
+    @PostMapping("/insertSgYs")
+    public Result insertSgYs(@RequestBody SgYs sgYs,@RequestParam(name = "zjlyId") String zjlyId) {
         sgYsService.insertSgYs(sgYs);
         return Result.success();
     }
