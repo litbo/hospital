@@ -31,6 +31,12 @@ public class FwWxfServiceImpl implements FwWxfService {
     private FwPjqlDao fwPjqlDao;
 
     @Override
+    public List<String> wxfGetEq(String userId) {
+        List<String> list = fwWxfDao.wxfGetEq(userId);
+        return list;
+    }
+
+    @Override
     public WxfIndexVo wxfShIndex(Integer id) {
         WxfIndexVo wxfIndexVo = new WxfIndexVo();
         FwWxf wxf = fwWxfDao.findWxf(id);

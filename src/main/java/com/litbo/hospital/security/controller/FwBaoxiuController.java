@@ -1,14 +1,12 @@
 package com.litbo.hospital.security.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zjc
@@ -21,6 +19,19 @@ public class FwBaoxiuController {
 
     @Autowired
     private FwBaoxiuService fwBaoxiuService;
+
+    @GetMapping("/baoxiuEq")
+    public Result baoxiuEq(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                           @RequestParam(required = false,defaultValue = "10") Integer pageSize){
+        try {
+            String userId = "1615925023";
+            PageInfo pageInfo = fwBaoxiuService.getBaoxiuEq(userId, pageSize, pageNum);
+            return Result.success(pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("读取信息错误");
+        }
+    }
 
     /**
      * 报修页面

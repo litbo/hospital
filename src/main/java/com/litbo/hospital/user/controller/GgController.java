@@ -39,6 +39,15 @@ public class GgController {
         return Result.success(pageInfo);
     }
 
+    //查询待审核公告
+    @RequestMapping("listWaits")
+    public  Result listWaits(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo pageInfo =  ggService.listWaits(pageNum,pageSize);
+        return Result.success(pageInfo);
+
+    }
+
     //通过审核
     @RequestMapping("/checkGg")
     public Result checkGg(Integer id){

@@ -23,4 +23,8 @@ public interface SysDao {
     int updateZxsj(SysZxsj zxsj);
     @InsertProvider(type = SysProvider.class , method = "addZxsj")
     int addZxsj(SysZxsj zxsj);
+    @Select("select * from sys_dxm")
+    SysDxm getDxm();
+    @Select("select * from sys_wjbb")
+    SysWjbb getWjbb();
 }

@@ -113,7 +113,16 @@ public class BmController {
         return Result.success();
     }
 
+    //  获取叶子部门
 
+    @GetMapping("/listGLBm")
+    @ResponseBody
+    public Result listGLBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+
+        PageInfo yzBmList = bmService.getGLBmList(pageNum, pageSize);
+        return Result.success(yzBmList);
+    }
 
 
 }

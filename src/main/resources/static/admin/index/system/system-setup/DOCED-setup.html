@@ -30,7 +30,7 @@
 <body>
 
 <div class="layui-row">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" lay-filter="form" action="">
         <div class="layui-row">
             <div class="col-xs-12">
                 <div class="title"><span style="margin-left:15px;">文件版本设置</span></div>
@@ -91,6 +91,16 @@
                     }
                     return true;
                 }
+
+
+            },
+            val:{
+                filter:"form",
+                get:{
+                    url:"/sys/getWjbb",
+                    type:"POST",
+                    add:{page:1,name:"默认表单"}
+                }//GET内参数需参考《内容传输与提交》文档
             }
         }
     }

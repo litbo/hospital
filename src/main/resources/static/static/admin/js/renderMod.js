@@ -46,17 +46,20 @@ $(function () {
                 filter = "", files = null;
 
             //表单默认值渲染
+            //console.log(formAction);
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
                 if (val.filter && (val.get || (val.options && Type(val.options) === "json"))) {
                     if (val.get) {
                         val.get.success = function (data) {
+                            console.log(data);
                             for (var name in data) {
                                 if (data.hasOwnProperty(name)) {
                                     form.val(val.filter, data[name]);
                                 }
                             }
                         };
+                        console.log(val.get);
                         subUp(val.get)
                     } else {
                         form.val(val.filter, val.options);

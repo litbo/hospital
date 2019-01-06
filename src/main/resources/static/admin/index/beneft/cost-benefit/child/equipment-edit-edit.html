@@ -21,9 +21,6 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-        .sign{
-            color:red;
-        }
     </style>
 </head>
 
@@ -34,22 +31,28 @@
             <legend>成本科目预设编辑</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">科室选择<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: 0px" id="layerBtn1">选择</button>
-                </div>
-                <div class="layui-input-block">
-                    <input type="text" name="date" class="layui-input" readonly>
+                    <button class="layui-btn layui-btn-normal" id="layerBtn1">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">预览</label>
+                <div class="layui-input-block">
+                    <input type="text" name="view1" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备选择</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: 0px" id="layerBtn2">选择</button>
+                    <button class="layui-btn layui-btn-normal" id="layerBtn2">选择</button>
                 </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预览</label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" class="layui-input" readonly>
+                    <input type="text" name="view2" class="layui-input" readonly>
                 </div>
             </div>
         </div>
@@ -58,10 +61,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">日期选择<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" id="date" class="layui-btn layui-btn-normal" placeholder="选择日期" style="font-weight: bold;">
-                </div>
-                <div class="layui-input-block">
-                    <input type="text" name="date" class="layui-input" readonly>
+                    <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -69,9 +69,11 @@
 
     <div class="layui-row">
         <div class="col-xs-12 padRight">
-            <label class="layui-form-label col-xs-12">成本明细项</label>
-            <div class="layui-form-item">
-                <table id="table" lay-filter="table1"></table>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label col-xs-12">成本明细项</label>
+                <div class="layui-input-block">
+                    <table id="table" lay-filter="table1"></table>
+                </div>
             </div>
         </div>
     </div>
@@ -85,73 +87,36 @@
     </div>
 </form>
 
-
-<script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {field: 'kmName1', title: '科目',minWidth: 150}
-                ,{field: 'kmValue1', title: '金额', minWidth: 150}
-            ]]
-            , height: "270px"
-            , "data": [
-                {
-                    "kmName1":4200,
-                    "kmValue1":54656
-                },
-                {
-                    "kmName1":4200,
-                    "kmValue1":54656
-                }
-            ]
-            , done: function (obj) {
+    renderMod = {
+        form:{
+            date:{
+                elem:"#date"
             }
+        },
+        table:{
+            table:{
+                cols: [[ //表头
+                    {field: 'kmName1', title: '科目',minWidth: 150}
+                    ,{field: 'kmValue1', title: '金额', minWidth: 150}
+                ]]
+                , height: "270px"
+                , "data": [
+                    {
+                        "kmName1":4200,
+                        "kmValue1":54656
+                    },
+                    {
+                        "kmName1":4200,
+                        "kmValue1":54656
+                    }
+                ]
+                , done: function (obj) {
+                }
 
+            }
         }
     }
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-        //弹出框设置
-        $('#layerBtn1').on('click',function(){
-            layer.open({
-                type:2,
-                title:'科室选择',
-                content:'./department-select.html' ,
-                area:['96%','90%'],
-                btn:['选择','取消']
-            });
-            return false;
-        })
-        $('#layerBtn2').on('click',function(){
-            layer.open({
-                type:2,
-                title:'选择设备',
-                content:'./equipment-select.html' ,
-                area:['96%','90%'],
-                btn:['选择','取消']
-            });
-            return false;
-        })
-    });
 </script>
 </body>
 
