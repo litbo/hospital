@@ -41,6 +41,13 @@ public class BmController {
         return Result.success(date);
     }
 
+    @GetMapping("/listWXbms")
+    @ResponseBody
+    public Result listWXbms(){
+        List<SBm> date = bmService.getWxBmList();
+        return Result.success(date);
+    }
+
     @GetMapping("/listBmsByPid")
     @ResponseBody
     public Result getBmListByPid(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
