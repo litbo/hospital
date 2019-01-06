@@ -20,7 +20,7 @@ public class FwBaoxiuIndexVo {
 
     private String tel; //用户电话
 
-    private String obmId; //报修部门id
+    private String bmId; //报修部门id
 
     private String bmName; //报修部门名字
 

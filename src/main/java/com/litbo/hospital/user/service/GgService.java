@@ -12,4 +12,6 @@ public interface GgService {
     int checkGg(Integer id);
 
     SysGgVo getGgById(Integer id);
+
+    PageInfo listWaits(int pageNum, int pageSize);
 }

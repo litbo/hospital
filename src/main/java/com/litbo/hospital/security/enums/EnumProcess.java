@@ -2,7 +2,7 @@ package com.litbo.hospital.security.enums;
 
 import lombok.Getter;
 
-public enum EnumProcess {
+public enum EnumProcess implements CodeEnum{
     FW_GZ_BX(1,"故障报修"),
     FW_BX_SL(2,"报修受理"),
     FW_ZZ_WB(3,"终止误报"),

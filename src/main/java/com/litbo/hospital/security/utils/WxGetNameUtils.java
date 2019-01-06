@@ -47,7 +47,7 @@ public class WxGetNameUtils {
         FwVo fwVo = new FwVo();
         SEmp emp = empDaoImpl.getEmpByUserId(userId);
         fwVo.setUsername(emp.getUserXm());
-        SBm bm = bmDaoImpl.getBmByOid(emp.getBmId());
+        SBm bm = bmDaoImpl.getBmBybmid(emp.getBmId());
         fwVo.setBmName(bm.getBmName());
         fwVo.setBmId(emp.getBmId());
         if(eqId != null){

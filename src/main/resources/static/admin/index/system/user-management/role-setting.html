@@ -60,12 +60,12 @@
                     , {field:'roleName',title:'角色',minWidth:300}
                     , {title:'操作',toolbar:'#barDemo',width:150,align:'center'}
                 ]]
-                , url: "http://localhost/role/listUsers"
+                , url: "/role/listUsers"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
+                 /*   , where: {
                        bmId: ""
 
                    }*/
@@ -83,7 +83,8 @@
 
             reSet:{
                 url:"role/listUserByX",
-                type:"serch",
+                type:"reload",
+                data:[userId],
                 where: {
 
                 }

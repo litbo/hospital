@@ -1,5 +1,7 @@
 package com.litbo.hospital.security.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.bean.FwLcjl;
@@ -7,12 +9,15 @@ import com.litbo.hospital.security.dao.FwBaoxiuDao;
 import com.litbo.hospital.security.dao.FwLcjlDao;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwBaoxiuService;
+import com.litbo.hospital.security.vo.BaoXiuRw;
+import com.litbo.hospital.security.vo.BaoxiuEqVo;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zjc
@@ -27,6 +32,20 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     @Autowired
     private FwLcjlDao fwLcjlDao;
 
+
+    @Override
+    public PageInfo getBaoxiuEq(String userId,Integer pageSize,Integer pageNum) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<BaoxiuEqVo> pageInfo = new PageInfo<>(fwBaoxiuDao.findBaoxiuEq(userId));
+
+        return pageInfo;
+    }
+
+    @Override
+    public BaoXiuRw baoxiuRw(String userId) {
+        List<BaoXiuRw> baoxiuRw = fwBaoxiuDao.findBaoxiuRw(userId, EnumProcess.FW_BX_SL.getCode());
+        return null;
+    }
 
     @Override
     public FwBaoxiuIndexVo baoxiuIndex(String eqId, String empId) {

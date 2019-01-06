@@ -3380,16 +3380,22 @@ var main_list =
                                             "shiro":"a"
                                         },
                                         {
-                                            "title":"维修部门负责设备划分",
-                                            "url":"./admin/discipline-management/service-equipment.html",
+                                            "title":"工程师负责部门划分查询",
+                                            "url":"./admin/discipline-management/engineer-search.html",
                                             "id":"677",
                                             "shiro":"a"
                                         },
                                         {
-                                            "title":"工程师负责设备划分",
+                                            "title":"维修部门下的工程师负责设备划分",
                                             "url":"./admin/discipline-management/service-equipment.html",
                                             "id":"678",
                                             "shiro":"a"
+                                        },
+                                        {
+                                            "title":'维修部门下的工程师负责设备划分查询',
+                                            "url":'./admin/discipline-management/repair-search.html',
+                                            "id":'6781',
+                                            "shiro":'a'
                                         }
                                     ]
                                 },

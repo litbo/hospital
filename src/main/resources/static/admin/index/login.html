@@ -24,6 +24,7 @@
                 <div class="layui-form-item">
                     <input type="text" name="password" lay-verify="required|password" placeholder="密码"
                            autocomplete="off" class="layui-input">
+                    <input type="radio" value="n">
                 </div>
                 <div class="layui-form-item m-login-btn">
                     <div class="layui-inline subBut">
@@ -39,6 +40,7 @@
 </div>
 <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+/*
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer;
@@ -62,15 +64,48 @@
             ]
         });
 
-        //监听提交
+
         form.on('submit(login)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
+            $.ajax({
+                url: "/hospital/submit",
+                type: post,
+                data: $(data.form).serialize(),
+                success: function (info) {
+                    if (info.code === 1) {
+                        setTimeout(function () {
+                            location.href = info.url;
+                        }, 1000);
+                    }
+                    layer.msg(info.msg);
+                }
             });
             return false;
         });
-    });
+    })
 
+    //回车键触发提交
+    $("input").keydown(function(event){
+        if (event.keyCode == 13) {
+            document.getElementById("enterSubmit").click();
+        }
+    })
+*/
+
+
+
+    renderMod = {
+        form:{
+            submit:{
+                form:{
+                    url:"/hospital/submit",
+                    form:{
+
+                    }
+                }
+
+            }
+        }
+    }
 </script>
 </body>
 </html>

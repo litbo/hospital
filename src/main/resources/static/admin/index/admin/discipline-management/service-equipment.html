@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>维修部门负责设备划分</title>
+    <title>维修部门下的工程师负责设备划分</title>
     <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
     <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
@@ -14,6 +14,11 @@
     <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,52 +29,102 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">确定划分</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
-    </div>
-    <div class="moreBtn hidden-xs" >
+    <div class="moreBtn hidden-xs">
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" autocomplete="off" placeholder="设备名称">
+            <select lay-filter="select1">
+                <option>维修部门</option>
+                <option>111</option>
+                <option>222</option>
+            </select>
         </div>
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" autocomplete="off" placeholder="型号规格">
+            <select lay-filter="select2">
+                <option>划分人</option>
+                <option>111</option>
+                <option>222</option>
+            </select>
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="">确定划分</button>
     </div>
 </script>
 
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'equipment-name', title: '设备名称',width:"50%", minWidth: 200}
-                , {field: 'model' , title:'型号规格',minWidth:150}
-            ]]
-            , "data": [
-                {
-                    "equipment-name":'',
-                    "model":''
-                },{
-                    "equipment-name":'',
-                    "model":''
-                },{
-                    "equipment-name":'',
-                    "model":''
-                },{
-                    "equipment-name":'',
-                    "model":''
-                },{
-                    "equipment-name":'',
-                    "model":''
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'equipment-name', title: '设备名称',width:"50%", minWidth: 200}
+                    , {field: 'model' , title:'型号规格',minWidth:150}
+                ]]
+                , url: ""
+                , "data":[
+                    {}
+                ]
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        "obj":obj
+                    })
+                }
+            },
+            event:{
+                filter:'select1',
+                box:'select',
+                func:function(data){
+                    subUp({
+                        url:'',
+                        type:'post',
+                        data:{name:"ABC"},
+                        success:function(res){
+                            if(res.code ===0 ){
+                                var $d = "";
+                                for(var i=0;i<res.data.length;i++){
+                                    $d += $('<option>').append(res.data[i]);
+                                }
+                                $("select").append($d);
+                            }
+                        }
+                    },data)
+                },
+                break:false
+            },
+            event:{
+                filter:'select2',
+                box:'select',
+                func:function(data){
+                    subUp({
+                        url:'',
+                        type:'post',
+                        data:{name:"ABC"},
+                        success:function(res){
+                            if(res.code ===0 ){
+                                var $d = "";
+                                for(var i=0;i<res.data.length;i++){
+                                    $d += $('<option>').append(res.data[i]);
+                                }
+                                $("select").append($d);
+                            }
+                        }
+                    },data)
+                },
+                break:false
             }
         }
     }

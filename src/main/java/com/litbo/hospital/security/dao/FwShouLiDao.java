@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwShouli;
+import com.litbo.hospital.security.vo.BaoXiuRw;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -28,4 +29,7 @@ public interface FwShouLiDao {
 
     @Select("select id from fw_shouli where slr_id = #{userId}")
     public List<String> findFwId(String userId);
+
+    @Select("")
+    public List<BaoXiuRw> findBaoxiuRw(String userId);
 }

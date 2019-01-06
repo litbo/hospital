@@ -9,6 +9,7 @@ import com.litbo.hospital.security.service.FwFpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -18,9 +19,20 @@ import java.util.Date;
 public class FwFpController {
     @Autowired
     private FwFpService fpService;
-    @RequestMapping(value = "listFwFp",method = RequestMethod.GET)
-    public Result listFwFp(){
-        PageInfo pageInfo = fpService.listFwFpByWaitExamine();
+    @RequestMapping(value = "listFwFpByWaitExamine",method = RequestMethod.GET)
+    public Result listFwFpByWaitExamine(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                           @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
+                                        @RequestParam(required = false) String fpHm,
+                                        @RequestParam(required = false)String eqName,@RequestParam(required = false)String wxDh){
+        PageInfo pageInfo = fpService.listFwFpByWaitExamine(pageNum,pageSize, fpHm, eqName, wxDh);
+        return Result.success(pageInfo);
+    }
+    @RequestMapping(value = "listFwFpByApplyApproval",method = RequestMethod.GET)
+    public Result listFwFpByApplyApproval(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                        @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
+                                        @RequestParam(required = false) String fpHm,
+                                        @RequestParam(required = false)String eqName,@RequestParam(required = false)String wxDh){
+        PageInfo pageInfo = fpService.listFwFpByApplyApproval(pageNum,pageSize, fpHm, eqName, wxDh);
         return Result.success(pageInfo);
     }
     @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
@@ -28,7 +40,7 @@ public class FwFpController {
         //TODO 从session获取用户id
         String djrId = "2";
         fp.setFpShrId(djrId);
-        fp.setFpSdTime(new Date());
+//        fp.setFpSdTime(new Date());
         fp.setFpStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());
         Integer res = fpService.insertFwFp(fp);
         if(res==1){

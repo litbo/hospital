@@ -3,6 +3,8 @@ package com.litbo.hospital.security.dao;
 import com.litbo.hospital.security.bean.FwWxf;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * @author zjc
  * @create 2018-12-09 9:00
@@ -28,5 +30,16 @@ public interface FwWxfDao {
 
     @Select("select * from fw_wxf where id = #{id}")
     public FwWxf findWxf(int id);
+
+    @Select("SELECT\n" +
+            "shouli.id\n" +
+            "FROM\n" +
+            "dbo.fw_shouli AS shouli ,\n" +
+            "dbo.fw_baoxiu AS baoxiu\n" +
+            "WHERE\n" +
+            "shouli.slr_id = 1615925023 AND\n" +
+            "baoxiu.bx_status = #{userId} AND\n" +
+            "shouli.id = baoxiu.id")
+    public List<String> wxfGetEq(String userId);
 
 }

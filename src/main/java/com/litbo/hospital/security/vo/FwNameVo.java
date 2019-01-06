@@ -17,7 +17,7 @@ public class FwNameVo {
 
     private String userId;  //用户id
 
-    private String obmId; //报修部门id
+    private String bmId; //报修部门id
 
     private String bmName; //报修部门名字
 }

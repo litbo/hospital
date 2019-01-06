@@ -1,5 +1,6 @@
 package com.litbo.hospital.user.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,10 +13,9 @@ public class SysGgVo {
     private String gglxName;
 
     private String bmName;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date kssj;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date jssj;
 
     private String ggbt;
@@ -23,8 +23,8 @@ public class SysGgVo {
     private String status;
 
     private String ggnr;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+     private Date ngsj;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date ngsj;
 }
 
