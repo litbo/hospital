@@ -3613,7 +3613,7 @@ var main_list =
                     "shiro":"a",
                     "content":[
                         {
-                            "title":"系统信息",
+                            "title":"系统设置",
                             "url":"system&t=1&n=0",
                             "shiro":"a",
                             "id":"74",
@@ -3657,7 +3657,7 @@ var main_list =
                             ]
                         },
                         {
-                            "title":"设备设置",
+                            "title":"设备信息",
                             "url":"system&t=1&n=1",
                             "shiro":"a",
                             "id":"710",
