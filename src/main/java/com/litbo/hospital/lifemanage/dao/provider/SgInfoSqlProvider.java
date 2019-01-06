@@ -110,12 +110,11 @@ public class SgInfoSqlProvider {
     public String selectSgInfoGccshList(String bmId) {
         return new SQL() {{
             SELECT("dbo.sg_info.id");
-            SELECT("dbo.sg_info.bm_id");
+            SELECT("dbo.s_bm.bm_name");
             SELECT("dbo.sg_info.bh");
             SELECT("dbo.eq_pm.eq_pm_name");
             SELECT("dbo.sg_info.num");
             SELECT("dbo.sg_info.price_gj_y");
-            SELECT("dbo.sg_info.zt");
             SELECT("dbo.sg_info.kstl_id");
             SELECT("dbo.sg_info.pjbg_id");
             SELECT("dbo.sg_info.kxfx_id");
@@ -123,9 +122,10 @@ public class SgInfoSqlProvider {
             SELECT("dbo.sg_info.lzfx_id");
             FROM("dbo.sg_info");
             INNER_JOIN("dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id");
+            INNER_JOIN("dbo.s_bm ON dbo.sg_info.bm_id = dbo.s_bm.bm_id");
             WHERE("dbo.sg_info.bh IS NOT NULL");
             if (StringUtils.isNotBlank(bmId)) {
-                WHERE("dbo.sg_info.bm_id like #{bmId,jdbcType=VARCHAR}");
+                WHERE("dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}");
             }
             WHERE("dbo.sg_info.isyxgccsh IS NULL AND dbo.sg_info.iskssh = 1");
         }}.toString();

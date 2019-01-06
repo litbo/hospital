@@ -204,10 +204,6 @@ public class SgInfoServiceImpl implements SgInfoService {
     public PageInfo<SgInfoSumAuditListVO> selectSgInfoGccshList(String bmId, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoGccshList(bmId);
-        for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //根据部门id查询部门名称
-            selectKsShHz.setBmName(bmDao.getBmBybmid(bmId).getBmName());
-        }
         return new PageInfo<>(selectKsShHzs);
     }
 
