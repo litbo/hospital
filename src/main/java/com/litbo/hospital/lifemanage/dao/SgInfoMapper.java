@@ -349,11 +349,11 @@ public interface SgInfoMapper {
      * @param isSh   是否通过审核
      * @param bmId   部门id
      * @param bh     申购单编号
-     * @param sbName 设备拼音码
+     * @param sbPjm 设备拼音码
      * @return List<SgInfoListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class,method = "selectSgInfoList")
-    List<SgInfoListVO> selectSgInfoList(@Param("isSh") String isSh, @Param("bmId") String bmId, @Param("bh") String bh, @Param("sbName") String sbName);
+    List<SgInfoListVO> selectSgInfoList(@Param("isSh") String isSh, @Param("bmId") String bmId, @Param("bh") String bh, @Param("sbPjm") String sbPjm);
 
     /**
      * 查询未通过原因

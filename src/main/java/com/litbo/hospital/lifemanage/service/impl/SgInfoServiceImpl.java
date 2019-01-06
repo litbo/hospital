@@ -327,15 +327,15 @@ public class SgInfoServiceImpl implements SgInfoService {
      * @param isSh     是否通过审核
      * @param bmId     部门id
      * @param bh       申购单编号
-     * @param sbName   设备拼音码
+     * @param sbPjm   设备拼音码
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return PageInfo<SgInfoListVO>
      */
     @Override
-    public PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbName, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbPjm, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoListVO> sgInfoListVOS = sgInfoMapper.selectSgInfoList(isSh, bmId, bh, sbName);
+        List<SgInfoListVO> sgInfoListVOS = sgInfoMapper.selectSgInfoList(isSh, bmId, bh, sbPjm);
 
         List<SgInfoListVO> sgList = new ArrayList<>();
         for (SgInfoListVO sgInfoListVO : sgInfoListVOS) {

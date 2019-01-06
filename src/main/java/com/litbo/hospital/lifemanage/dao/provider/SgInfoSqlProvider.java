@@ -317,7 +317,7 @@ public class SgInfoSqlProvider {
         }}.toString();
     }
 
-    public String selectSgInfoList(String isSh, String bmId, String bh, String sbName) {
+    public String selectSgInfoList(String isSh, String bmId, String bh, String sbPym) {
         return new SQL() {{
             SELECT("dbo.sg_info.id,\n" +
                     "dbo.s_bm.bm_name,\n" +
@@ -336,22 +336,6 @@ public class SgInfoSqlProvider {
             FROM("dbo.sg_info\n" +
                     "INNER JOIN dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id\n" +
                     "INNER JOIN dbo.s_bm ON dbo.sg_info.bm_id = dbo.s_bm.bm_id");
-            //通过审核
-            if ("1".equals(isSh)) {
-                WHERE("dbo.sg_info.isybghsh = 1");
-            }
-            //未通过审核
-            else if ("0".equals(isSh)) {
-                WHERE("dbo.sg_info.iskssh = 0 OR dbo.sg_info.isyxgccsh = 0 OR " +
-                        "dbo.sg_info.iszbwyhsh = 0 OR dbo.sg_info.isybghsh = 0");
-            }
-            //待审核
-            else if ("2".equals(isSh)) {
-                WHERE("dbo.sg_info.iskssh is null " +
-                        "OR dbo.sg_info.isyxgccsh is null AND dbo.sg_info.iskssh = 1 " +
-                        "OR dbo.sg_info.iszbwyhsh is null AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 " +
-                        "OR dbo.sg_info.isybghsh is null AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1 ");
-            }
             //科室查找
             if (StringUtils.isNotBlank(bmId)) {
                 WHERE(" dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR} ");
@@ -361,8 +345,24 @@ public class SgInfoSqlProvider {
                 WHERE(" dbo.sg_info.bh = #{bh,jdbcType=VARCHAR} ");
             }
             //通过设备拼音码查找
-            if (StringUtils.isNotBlank(sbName)){
-                WHERE(" pym = #{sbName,jdbcType=VARCHAR} ");
+            if (StringUtils.isNotBlank(sbPym)){
+                WHERE(" pym like #{sbPym,jdbcType=VARCHAR} ");
+            }
+            //通过审核
+            if ("1".equals(isSh)) {
+                WHERE("dbo.sg_info.isybghsh = 1");
+            }
+            //未通过审核
+            else if ("0".equals(isSh)) {
+                WHERE("(dbo.sg_info.iskssh = 0 OR dbo.sg_info.isyxgccsh = 0 OR " +
+                        "dbo.sg_info.iszbwyhsh = 0 OR dbo.sg_info.isybghsh = 0)");
+            }
+            //待审核
+            else if ("2".equals(isSh)) {
+                WHERE("(dbo.sg_info.iskssh is null " +
+                        "OR dbo.sg_info.isyxgccsh is null AND dbo.sg_info.iskssh = 1 " +
+                        "OR dbo.sg_info.iszbwyhsh is null AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 " +
+                        "OR dbo.sg_info.isybghsh is null AND dbo.sg_info.iskssh = 1 AND dbo.sg_info.isyxgccsh = 1 AND dbo.sg_info.iszbwyhsh = 1 )");
             }
         }}.toString();
     }
