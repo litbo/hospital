@@ -37,57 +37,63 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">配件分类<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select required lay-verify="required">
+                    <select required lay-verify="required" name="pjfl">
+                        <option>分类</option>
                         <option>维材-医疗维修</option>
-                        <option>111</option>
-                        <option>222</option>
+                        <option>维材-办公维修</option>
+                        <option>维材-普通维修</option>
+                        <option>维材-家具维修</option>
+                        <option>维材-其他</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">设备名称</label>
+                <label class="layui-form-l abel">设备名称</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal">选择</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="sbId" id="layerBtn1" >选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">配件名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" placeholder="试剂取样器">
+                    <input type="text" name="pjName" class="layui-input" au tocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">配件编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" value="006889" disabled>
+                    <input type="text" name="pjbh" class="layui-input"  disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">规格型号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" >
+                    <input type="text" name="pjGgxh" class="layui-input" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">包装单位</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>个</option>
-                        <option>111</option>
-                        <option>222</option>
+                    <select name="pjBzdw">
+                        <option>分类</option>
+                        <option>维材-医疗维修</option>
+                        <option>维材-办公维修</option>
+                        <option>维材-普通维修</option>
+                        <option>维材-家具维修</option>
+                        <option>维材-其他</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">产品注册证号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input"  autocomplete="off" >
+                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">注册证到期日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input"  autocomplete="off" id="date">
+                    <input type="text" name="pjZczDqTime" class="layui-input"  autocomplete="off" id="date">
                 </div>
             </div>
         </div>
@@ -96,13 +102,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">生产企业</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="choose">选择</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">供货商</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="choose1">选择</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="pjGhsId" lay-event="choose1">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -114,15 +120,15 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">中标日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" id="date1">
+                    <input type="text" name="zbTime" class="layui-input" autocomplete="off" id="date1">
                 </div>
             </div>
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">备注</label>
-                <div class="layui-input-block">
-                    <textarea class="layui-textarea"></textarea>
-                </div>
-            </div>
+            <!--<div class="layui-form-item layui-form-text">-->
+                <!--<label class="layui-form-label">备注</label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<textarea class="layui-textarea" name=""></textarea>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
 
     </div>
@@ -141,6 +147,17 @@
 
 <script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    $('#layerBtn1').on('click',function(){
+        layer.open({
+            type:2,
+            title:'科室选择',
+            content:'equipment-select.html' ,
+            area:['96%','100%'],
+            btn:['选择','取消']
+        });
+        return false;
+    })
+
     layui.use(['layer', 'form', 'layedit', 'laydate','upload'], function () {
         var form = layui.form
             , layer = layui.layer

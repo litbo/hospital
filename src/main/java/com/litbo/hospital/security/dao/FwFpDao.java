@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwFp;
+import com.litbo.hospital.security.vo.ListFwFpByApplyApprovalVo;
 import com.litbo.hospital.security.vo.ListFwFpByWaitExamineVo;
 import org.apache.ibatis.annotations.*;
 
@@ -10,13 +11,15 @@ import java.util.List;
 public interface FwFpDao {
 
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwFpSqlProvider.class,method="listFwFpByWaitExamine")
-    List<ListFwFpByWaitExamineVo> listFwFpByWaitExamine();
+    List<ListFwFpByWaitExamineVo> listFwFpByWaitExamine(@Param("fpHm") String fpHm, @Param("eqName") String eqName, @Param("wxDh") String wxDh);
 
-    @Insert("    insert into fw_fp ( fp_dh, fp_price," +
-            "      fp_sdtime, fp_status, user_id" +
-            "      fp_cj_time,fp_hm)" +
+    @Insert("    insert into fw_fp ( fp_dh,fp_price," +
+            "      fp_sd_time,fp_status, user_id," +
+            "      fp_sh_time,fp_hm)" +
             "    values (#{fpDh,jdbcType=VARCHAR}, #{fpPrice,jdbcType=DECIMAL}, " +
-            "      #{fpSdtime,jdbcType=TIMESTAMP}, #{fpStatus,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, " +
-            "      #{fpCjTime,jdbcType=TIMESTAMP}, #{fpHm,jdbcType=VARCHAR})")
+            "      #{fpSdTime,jdbcType=TIMESTAMP}, #{fpStatus,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, " +
+            "      #{fpShTime,jdbcType=TIMESTAMP}, #{fpHm,jdbcType=VARCHAR})")
     Integer insertFwFp(FwFp fp);
+    @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwFpSqlProvider.class,method="listFwFpByApplyApproval")
+    List<ListFwFpByApplyApprovalVo> listFwFpByApplyApproval(@Param("fpHm") String fpHm, @Param("eqName") String eqName, @Param("wxDh") String wxDh);
 }

@@ -31,7 +31,7 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add"><i class="fas fa-plus"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-normal" href="child/accessories-dictionaryAdd.html" lay-event="add"><i class="fas fa-plus"></i></a>
     </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -43,8 +43,11 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select>
                             <option>分类</option>
-                            <option>111</option>
-                            <option>222</option>
+                            <option>维材-医疗维修</option>
+                            <option>维材-办公维修</option>
+                            <option>维材-普通维修</option>
+                            <option>维材-家具维修</option>
+                            <option>维材-其他</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -67,19 +70,17 @@
     addTable ={
         table:{
             cols: [[ //表头
-                {checkbox:true}
-                , {field: 'use-depart', title: '配件编号', minWidth: 200,sort:true}
-                , {field: 'authorized_person', title: '配件名称', minWidth: 150}
-                , {field: 'authorized_depart', title: '设备编号', minWidth: 100,sort:true}
-                , {field: 'model', title: '型号规格', minWidth: 100}
-                , {field: 'model', title: '注册证号', minWidth: 150}
-                , {field: 'model', title: '注册证到期日期', minWidth: 150,sort:true}
-                , {field: 'model', title: '生产厂家', minWidth: 150}
-                , {field: 'model', title: '供货商', minWidth: 150}
-                , {title:'',align:'center',minWidth:100,toolbar:'#bar'}
+                 {field: 'pjbh', title: '配件编号', minWidth: 100,sort:true}
+                , {field: 'pjName', title: '配件名称', minWidth: 150}
+                , {field: 'pjGgxh', title: '型号规格', minWidth: 100}
+                , {field: 'pjZczh', title: '注册证号', minWidth: 150}
+                , {field: 'pjZczDqTime', title: '注册证到期日期', minWidth: 150,sort:true}
+                , {field: 'scqyName', title: '生产厂家', minWidth: 150}
+                , {field: 'ghsName', title: '供货商', minWidth: 150}
+/*                , {title:'操作',align:'center',minWidth:100,toolbar:'#bar'}*/
             ]]
             , height: "full-25"
-//            , url:""
+            , url:"/security/pjzd/listFwPjzd"
             ,"data":[
                 {}
             ]
@@ -94,6 +95,7 @@
                 return {
                     "code": res.code, //解析接口状态
                     "msg": res.msg, //解析提示文本
+                    "count":res.data.size,//页面显示的数据条数
                     "data": res.data.list //解析数据列表
                 }
             }

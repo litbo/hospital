@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class ListFwFpByWaitExamineVo {
+public class ListFwFpByApplyApprovalVo {
 
     private Integer id;
 
@@ -22,6 +22,10 @@ public class ListFwFpByWaitExamineVo {
     private String eqName;
 
     private String fpHm;
+
+    private String shrName;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date fpShTime;
 
 
 }

@@ -51,43 +51,76 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'repair_num', title: '维修单号', minWidth: 120}
-                , {field: 'repair_equi', title: '维修设备', minWidth: 120}
-                , {field: 'invoice_num', title: '发票号',minWidth: 160}
-                , {field: 'invoice_amount', title: '发票金额', minWidth: 120}
-                , {field: 'register_person', title: '登记人', minWidth: 120}
-                , {field: 'register_time', title: '登记时间',minWidth: 180}
-                , {field: 'examine_person', title: '审核人', minWidth: 120}
-                , {field: 'examine_time', title: '审核时间',minWidth: 180}
-            ]]
-            , height: "full-25"
-            , "data": [
-                {
-                    "repair_num": "20181200003",       //维修单号
-                    "repair_equi": "TDP治疗机",         //维修设备
-                    "invoice_num": "1231231231231231",            //发票号
-                    "invoice_amount": "40.0",       //发票金额
-                    "register_person": "Admin",     //登记人
-                    "register_time": "2018-12-11 18:58:06", //登记时间
-                    "examine_person": "Admin",     //审核人
-                    "examine_time": "2018-12-11 18:58:06" //审核时间
+  //   addTable ={
+  //       table:{
+  //           cols: [[ //表头
+  //               {type:"checkbox"}
+  //               , {field: 'fpDh', title: '维修单号', minWidth: 120}
+  //               , {field: 'eqName', title: '维修设备', minWidth: 120}
+  //               , {field: 'fpDh', title: '发票号',minWidth: 160}
+  //               , {field: 'fpPrice', title: '发票金额', minWidth: 120}
+  //               , {field: 'userName', title: '登记人', minWidth: 120}
+  //               , {field: 'fpSdTime', title: '登记时间',minWidth: 180}
+  // /*              // , {field: 'examine_person', title: '审核人', minWidth: 120}*/
+  //               , {field: 'examine_time', title: '审核时间',minWidth: 180}
+  //           ]]
+  //           , height: "full-25"
+  //
+  //           , done: function (obj) {
+  //               tableFunc({
+  //                   "obj":obj,
+  //                   "toolFunc": {
+  //                       "tool":"toolbar",
+  //                       "title":"数据查找",
+  //                       "event":"dataSearch",
+  //                       "content":$("#hideXs")
+  //                   }
+  //
+  //               })
+  //           }
+  //
+  //       }
+  //   }
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'fpDh', title: '维修单号', minWidth: 160}
+                    , {field: 'eqName', title: '维修设备', minWidth: 120}
+                    , {field: 'fpDh', title: '发票号', minWidth: 160}
+                    , {field: 'fpPrice', title: '发票金额', minWidth: 120}
+                    , {field: 'userName', title: '登记人', minWidth: 120}
+                    , {field: 'fpSdTime', title: '登记时间', minWidth: 180}
+                    , {field: 'shrName', title: '审核人', minWidth: 120}
+                    , {field: 'fpShTime', title: '审核时间', minWidth: 120}
+                ]]
+                , url: "/security/fp/listFwFpByApplyApproval"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
-            ]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc": {
-                        "tool":"toolbar",
-                        "title":"数据查找",
-                        "event":"dataSearch",
-                        "content":$("#hideXs")
-                    }
+                /*   , where: {
+                       bmId: ""
 
-                })
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.size,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet: {
+                url: "/security/fp/listFwFpByApplyApproval",
+                type: "reload",
+                where: {}
+
             }
 
         }

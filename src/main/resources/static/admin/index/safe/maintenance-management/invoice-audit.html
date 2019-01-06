@@ -32,13 +32,13 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="search" placeholder="发票号">
+                        <input class="layui-input" name="fpHm" placeholder="发票号">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="search" placeholder="维修设备">
+                        <input class="layui-input" name="eqName" placeholder="维修设备">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="search" placeholder="维修单号">
+                        <input class="layui-input" name="wxDh" placeholder="维修单号">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10" align="center">
                         <button class="layui-btn" data-type="reload">搜索</button>
@@ -54,48 +54,45 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'repair_num', title: '维修单号', minWidth: 120}
-                , {field: 'repair_equi', title: '维修设备', minWidth: 120}
-                , {field: 'invoice_num', title: '发票号',minWidth: 180}
-                , {field: 'invoice_amount', title: '发票金额', minWidth: 120}
-                , {field: 'register_person', title: '登记人', minWidth: 120}
-                , {field: 'register_time', title: '登记时间',minWidth: 180}
-                , {fixed:'right',width:80,minWidth: 80,align:'center',toolbar: "#bar",name: "eqId"}
-            ]]
-            , height: "full-25"
-            , "data": [
-                {
-                    "repair_num": "20181200003",       //维修单号
-                    "repair_equi": "TDP治疗机",         //维修设备
-                    "invoice_num": "1231231231231231",            //发票号
-                    "invoice_amount": "40.0",       //发票金额
-                    "register_person": "Admin",     //登记人
-                    "register_time": "2018-12-11 18:58:06", //登记时间
-                    "eqId": "10000"              //设备id，不显示，用于点击审核按钮传入到下个页面
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                     {field: 'fpDh', title: '维修单号', minWidth: 160}
+                    , {field: 'eqName', title: '维修设备', minWidth: 120}
+                    , {field: 'fpHm', title: '发票号', minWidth: 160}
+                    , {field: 'fpPrice', title: '发票金额', minWidth: 120}
+                    , {field: 'userName', title: '登记人', minWidth: 120}
+                    , {field: 'fpSdTime', title: '登记时间', minWidth: 180}
+                    , {fixed:'right',width:150,align:'center',title:'操作',toolbar: "#bar"}
+                ]]
+                , url: "/security/fp/listFwFpByWaitExamine"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
-            ]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":[    {
-                        "tool":"toolbar",
-                        "title":"数据查找",
-                        "event":"dataSearch",
-                        "content":$("#hideXs")
-                    },
-                        {
-                            type:2,
-                            event: "edit",
-                            "title":"维修发票审核",
-                            content:"./child/examine.html"
+                /*   , where: {
+                       bmId: ""
 
-                        }
-                    ]
-                })
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.size,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet: {
+                url: "/security/fp/listFwFpByWaitExamine",
+                type: "reload",
+                where: {}
+
             }
 
         }
