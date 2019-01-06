@@ -155,7 +155,7 @@ public class SgInfoServiceImpl implements SgInfoService {
     /**
      * 显示申购单科室审核列表
      *
-     * @param eqPmName 设备名称
+     * @param eqPmPym  设备名称
      * @param bh       申购单编号
      * @param userId   登陆人id
      * @param pageNum  页数
@@ -163,7 +163,7 @@ public class SgInfoServiceImpl implements SgInfoService {
      * @return SgInfoSumAuditListVO
      */
     @Override
-    public PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(String eqPmName, String bh, String userId, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(String eqPmPym, String bh, String userId, Integer pageNum, Integer pageSize) {
 
         //调用用户表方法 通过人员表id获取所在部门id和名字
         SBm bm = empDao.getBmByEmpId(userId);
@@ -171,21 +171,25 @@ public class SgInfoServiceImpl implements SgInfoService {
         String bmId = bm.getBmId();
 
         //根据品名名称模糊查询 找到对应的id
-        List<EqPm> pmList = eqDao.listPmsByPym(eqPmName);
         List<String> pmIds = new ArrayList<>();
-        for (EqPm eqPm : pmList) {
-            pmIds.add(eqPm.getEqPmId());
+        if (StringUtils.isNotBlank(eqPmPym)) {
+            List<EqPm> pmList = eqDao.listPmsByPym(eqPmPym);
+            for (EqPm eqPm : pmList) {
+                pmIds.add(eqPm.getEqPmId());
+            }
         }
 
         if (StringUtils.isNotBlank(bh)) {
             bh = "%" + bh + "%";
         }
+
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoKsshList(bmId, bh, pmIds);
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
             selectKsShHz.setBmName(bmName);
         }
-        return new PageInfo<>(selectKsShHzs);
+        // 通过设备品名查找没有找到结果 返回null
+        return StringUtils.isNotBlank(eqPmPym) && pmIds.size() <= 0 ? new PageInfo<>() : new PageInfo<>(selectKsShHzs);
     }
 
     /**
@@ -334,34 +338,52 @@ public class SgInfoServiceImpl implements SgInfoService {
      */
     @Override
     public PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbName, Integer pageNum, Integer pageSize) {
-        if (StringUtils.isNotBlank(sbName)) {
-            sbName = "%" + sbName + "%";
-        }
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoListVO> sgInfoListVOS = sgInfoMapper.selectSgInfoList(isSh, bmId, bh, sbName);
 
         List<SgInfoListVO> sgList = new ArrayList<>();
         for (SgInfoListVO sgInfoListVO : sgInfoListVOS) {
             SgInfoReasonVO reason = sgInfoMapper.getReason(sgInfoListVO.getId());
-            //科室审核未通过
-            if (" 0".equals(reason.getIskssh())){
-                sgInfoListVO.setReason(reason.getKsshyj());
-            }
-            //医学工程处审核未通过
-            else if("0".equals(reason.getIsyxgccsh())){
-                sgInfoListVO.setReason(reason.getYxgccshyj());
-            }
-            //装备委员会审核未通过
-            else if("0".equals(reason.getIszbwyhsh())){
-                sgInfoListVO.setReason(reason.getZbwyhyj());
-            }
-            //院办公会审核未通过
-            else if("0".equals(reason.getIsybghsh())){
-                sgInfoListVO.setReason(reason.getYbghyj());
+            if (reason != null){
+                //科室审核未通过
+                if (" 0".equals(reason.getIskssh())) {
+                    sgInfoListVO.setReason(reason.getKsshyj());
+                }
+                //医学工程处审核未通过
+                else if ("0".equals(reason.getIsyxgccsh())) {
+                    sgInfoListVO.setReason(reason.getYxgccshyj());
+                }
+                //装备委员会审核未通过
+                else if ("0".equals(reason.getIszbwyhsh())) {
+                    sgInfoListVO.setReason(reason.getZbwyhyj());
+                }
+                //院办公会审核未通过
+                else if ("0".equals(reason.getIsybghsh())) {
+                    sgInfoListVO.setReason(reason.getYbghyj());
+                }
             }
             sgList.add(sgInfoListVO);
         }
 
         return new PageInfo<>(sgList);
+    }
+
+    /**
+     * 申购进度跟踪
+     *
+     * @param isSh     是否通过审核
+     * @param userId   用户id
+     * @param bh       申购单编号
+     * @param sbName   设备拼音码
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
+     * @return PageInfo<SgInfoListVO>
+     */
+    @Override
+    public PageInfo<SgInfoListVO> selectSgInfoBmList(String isSh, String userId, String bh, String sbName, Integer pageNum, Integer pageSize) {
+        //根据用户id 查询部门id
+        SBm bm = empDao.getBmByEmpId(userId);
+        String bmId = bm.getBmId();
+        return selectSgInfoList(isSh, bmId, bh, sbName, pageNum, pageSize);
     }
 }

@@ -261,11 +261,13 @@ $(function () {
                     //动态获取表单数据
                     if(Type(res.data) === "array"){
                         for(var x=0;x<res.data.length;x++){
-                            console.log("input="+res.data[x]);
-                            resValue[res.data[x]] = $("input[name='"+res.data[x]+"']").val();
-                            console.log(resValue[res.data[x]]);
+                            var inputValue = $("input[name='"+res.data[x]+"']").val();
+                            if(inputValue){
+                                resValue[res.data[x]] = inputValue;
+                            }else if($("select[name='"+res.data[x]+"']").val()){
+                                resValue[res.data[x]] = $("select[name='"+res.data[x]+"']").val();
+                            }
                         }
-                        console.log(resValue);
                     }
 
                     //添加额外数据
@@ -275,9 +277,7 @@ $(function () {
                                 resValue[name] = res.where[name];
                             }
                         }
-                        console.log(resValue);
                     }
-                    console.log(resValue);
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,

@@ -352,50 +352,7 @@ public interface SgInfoMapper {
      * @param sbName 设备拼音码
      * @return List<SgInfoListVO>
      */
-    @Select("<script>" +
-            "SELECT\n" +
-            "dbo.sg_info.id,\n" +
-            "dbo.s_bm.bm_name,\n" +
-            "dbo.sg_info.bh,\n" +
-            "dbo.eq_pm.eq_pm_name,\n" +
-            "dbo.sg_info.num,\n" +
-            "dbo.sg_info.price_gj_y,\n" +
-            "dbo.sg_info.zt,\n" +
-            "dbo.sg_info.kstl_id,\n" +
-            "dbo.sg_info.pjbg_id,\n" +
-            "dbo.sg_info.kxfx_id,\n" +
-            "dbo.sg_info.dxzb_id,\n" +
-            "dbo.sg_info.lzfx_id,\n" +
-            "dbo.sg_info.zbwyhhy_id,\n" +
-            "dbo.sg_info.ybghhy_id\n" +
-            "FROM\n" +
-            "dbo.sg_info\n" +
-            "INNER JOIN dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id\n" +
-            "INNER JOIN dbo.s_bm ON dbo.sg_info.bm_id = dbo.s_bm.bm_id" +
-            "<where>" +
-            //通过审核
-            "<if test=\"isSh == '1'\">" +
-            "dbo.sg_info.isybghsh = 1" +
-            "</if>" +
-            //未通过审核
-            "<if test=\"isSh == '0'\">" +
-            "AND dbo.sg_info.iskssh = 0 OR dbo.sg_info.isyxgccsh = 0 OR " +
-            "dbo.sg_info.iszbwyhsh = 0 OR dbo.sg_info.isybghsh = 0" +
-            "</if>" +
-            //通过科室查找
-            "<if test=\"bmId != null\">" +
-            "AND dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR}" +
-            "</if>" +
-            //通过申购单编号查找
-            "<if test=\"bh != null\">" +
-            "AND dbo.sg_info.bh = #{bh,jdbcType=VARCHAR}" +
-            "</if>" +
-            //通过设备拼音码查找
-            "<if test=\"sbName != null\">" +
-            "AND pym Like #{sbName,jdbcType=VARCHAR}" +
-            "</if>" +
-            "</where>" +
-            "</script>")
+    @SelectProvider(type = SgInfoSqlProvider.class,method = "selectSgInfoList")
     List<SgInfoListVO> selectSgInfoList(@Param("isSh") String isSh, @Param("bmId") String bmId, @Param("bh") String bh, @Param("sbName") String sbName);
 
     /**

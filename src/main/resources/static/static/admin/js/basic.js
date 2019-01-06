@@ -91,26 +91,31 @@ function Type(value) {
 /**
  * @return {boolean}
  */
-function subUp(value,data) {
+function subUp(value, data) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据)
     //判断必填项是否为空
-    if (!value.url && (value.switch !=="xhr" && value.switch !=="html" && value.data)) {
+    if (!value.url && (value.switch !== "xhr" && value.switch !== "html" && value.data)) {
         return false;
     }
     //判断是否需要自动获取表单数据(根据input的name属性自动获取所有的数据)
     if (Type(value.data) === "array") {
-        var dataP = {},valus = null;
+        var dataP = {}, valus = null;
         for (var i = 0; i < value.data.length; i++) {
             valus = value.data[i];
-            if(!data){
-                dataP[valus] = $("input[name=" + valus + "]").val();
-            }else{
+            if (!data) {
+                var inputValue = $("input[name=" + valus + "]").val();
+                if (inputValue) {
+                    dataP[valus] = inputValue;
+                } else if ($("select[name=" + valus + "]").val()) {
+                    dataP[valus] = $("select[name=" + valus + "]").val();
+                }
+            } else {
                 dataP[valus] = data.field[valus];
             }
         }
-        if(value.add){
-            for(var names in value.add){
-                if(value.add.hasOwnProperty(name)){
+        if (value.add) {
+            for (var names in value.add) {
+                if (value.add.hasOwnProperty(name)) {
                     dataP[names] = add[names];
                 }
             }
@@ -120,16 +125,16 @@ function subUp(value,data) {
     //判断当前数据上传类型(默认以JQajax提交)
     if (value.switch === "xhr") {//以原生JS形式异步提交数据(基本代码)
         //if (value.data.file) {//！！！！！代码未完善！！！！！
-            //var formData = new FormData();
-            //formData.append(value.data.name, $(value.data.file)[0].files[0]);
-            //console.log(formData);
-            // XMLHttpRequest 对象
-            var xhr = new XMLHttpRequest();
-            xhr.open(value.method || "GET", value.url, value.async || true);
-            xhr.onload = function () {
-                alert("上传完成!");
-            };
-            xhr.send(form);
+        //var formData = new FormData();
+        //formData.append(value.data.name, $(value.data.file)[0].files[0]);
+        //console.log(formData);
+        // XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+        xhr.open(value.method || "GET", value.url, value.async || true);
+        xhr.onload = function () {
+            alert("上传完成!");
+        };
+        xhr.send(form);
         //}
     } else if (value.switch === "html") {//以HTML默认的方式提交数据
         //使用HTML默认提交方式提交数据（使用新建内嵌框架实现不跳转新页面）
@@ -149,7 +154,7 @@ function subUp(value,data) {
     } else {//以ajax形式提交数据(默认)
         //以参数形式调用获取的数据解决异步数据不可外部调用与修改
         var ajaxOptions = {
-            success:function (data) {
+            success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
                     alert("提交成功！");
@@ -165,7 +170,7 @@ function subUp(value,data) {
             }
         };
         var backData = function (callback) {
-            compereData(value,ajaxOptions);
+            compereData(value, ajaxOptions);
             value.data = dataP || value.data;
             $.ajax(value);
         };
@@ -236,6 +241,7 @@ jQuery.cookie = function (name, value, options) {
         return cookieValue;
     }
 };
+
 //本地存储记录所有打开的窗口
 function setStorageMenu(title, url, id) {
     var menu = JSON.parse(sessionStorage.getItem('menu'));
@@ -268,6 +274,7 @@ function setStorageMenu(title, url, id) {
     }
     sessionStorage.setItem('menu', JSON.stringify(menu));
 }
+
 //本地存储记录当前打开窗口
 function setStorageCurMenu() {
     var curMenu = sessionStorage.getItem('curMenu');
@@ -286,6 +293,7 @@ function setStorageCurMenu() {
     };
     sessionStorage.setItem('curMenu', JSON.stringify(curMenu));
 }
+
 //本地存储中移除删除的元素
 function removeStorageMenu(id) {
     var menu = JSON.parse(sessionStorage.getItem('menu'));
@@ -427,6 +435,7 @@ var func = {//this = obj
         });
     }
 };
+
 //表格函数调用函数函数
 function tableFunc() {
     if (Type(arguments) === "json") {
@@ -443,7 +452,6 @@ function tableFunc() {
 }
 
 
-
 /*require.config({
     baseUrl: window.location.origin,
     paths: {
@@ -452,15 +460,14 @@ function tableFunc() {
     <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 });*/
 
-    document.write("<script type='text/javascript' data-version='x2' src='"+window.location.origin+"/static/admin/layui/layui.js'></script>");
-    document.write("<script type='text/javascript' data-version='x2' src='"+window.location.origin+"/static/admin/js/renderMod.js'></script>");
+document.write("<script type='text/javascript' data-version='x2' src='" + window.location.origin + "/static/admin/layui/layui.js'></script>");
+document.write("<script type='text/javascript' data-version='x2' src='" + window.location.origin + "/static/admin/js/renderMod.js'></script>");
 
 
 /*
 $(function(){
     beginRender();
 })*/
-
 
 
 /*

@@ -52,7 +52,7 @@ public class SgInfoController {
      * 显示申购单科室审核列表
      *
      * @param userId   登陆人id
-     * @param eqPmName 设备名称
+     * @param eqPmPym 设备名称
      * @param bh       申购单编号
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
@@ -61,11 +61,11 @@ public class SgInfoController {
     @PostMapping("/selectSgInfoKsshList")
     public Result selectSgInfoKsshList(
             @RequestParam(name = "userId") String userId,
-            @RequestParam(name = "eqPmName", required = false) String eqPmName,
+            @RequestParam(name = "eqPmPym", required = false) String eqPmPym,
             @RequestParam(name = "bh", required = false) String bh,
             @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
-        return Result.success(sgInfoService.selectSgInfoKsshList(eqPmName, bh, userId, pageNum, pageSize));
+        return Result.success(sgInfoService.selectSgInfoKsshList(eqPmPym, bh, userId, pageNum, pageSize));
     }
 
     /**
@@ -210,5 +210,28 @@ public class SgInfoController {
             @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
         return Result.success(sgInfoService.selectSgInfoList(isSh,bmId,bh,sbName,pageNum,pageSize));
+    }
+
+
+    /**
+     * 申购进度跟踪
+     *
+     * @param isSh     是否通过审核
+     * @param userId   用户id
+     * @param bh       申购单编号
+     * @param sbName   设备拼音码
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
+     * @return Result
+     */
+    @PostMapping("/selectSgInfoBmList")
+    public Result selectSgInfoBmList(
+            @RequestParam(required = false, name = "isSh") String isSh,
+            @RequestParam(name = "userId") String userId,
+            @RequestParam(required = false, name = "bh") String bh,
+            @RequestParam(required = false, name = "sbName") String sbName,
+            @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
+            @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
+        return Result.success(sgInfoService.selectSgInfoBmList(isSh,userId,bh,sbName,pageNum,pageSize));
     }
 }
