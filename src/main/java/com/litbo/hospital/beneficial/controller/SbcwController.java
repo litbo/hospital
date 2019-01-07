@@ -151,7 +151,7 @@ public class SbcwController {
         return Result.success(sbcwService.listXyPj(pageNum,pageSize));
     }
 
-    //查询设备直收入信息列表根据条件查询
+    //查询设备评价信息列表根据条件查询
     @RequestMapping(value = "/listXyPjByX")
     public Result listXyPjByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,

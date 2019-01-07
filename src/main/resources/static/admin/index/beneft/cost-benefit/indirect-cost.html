@@ -83,7 +83,56 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'bmName', title: '部门名称', minWidth: 120}
+                    , {field: 'eqName', title: '设备名称', minWidth: 120}
+                    , {field: 'eqNum', title: '院内编号', minWidth: 180}
+                    , {field: 'eqXh', title: '设备型号', minWidth: 130}
+                    , {field: 'fzksft', title: '辅助科室分摊', minWidth: 130,sort:true}
+                    , {field: 'glfy', title: '管理费用', minWidth: 100,sort:true}
+                    , {field: 'qt', title: '其他支出', minWidth: 120,sort:true}
+                    , {field: 'zj', title: '总计', minWidth: 120,sort:true}
+                ]]
+                , url: "/benefical/sbcw/listJjcb"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"/benefical/sbcw/listJjcbByX",
+                type:"serch",
+                data:["kssj","jssj","bmNameByx","eqNameByx"],    //搜索框的name
+                where: {
+
+                }
+
+            }
+
+        }
+
+
+
+    }
+    /*addTable ={
         table:{
             cols: [[ //表头
                 {field: 'bmName', title: '部门名称', minWidth: 120}
@@ -147,7 +196,7 @@
         form:{
 
         }
-    }
+    }*/
 </script>
 </body>
 

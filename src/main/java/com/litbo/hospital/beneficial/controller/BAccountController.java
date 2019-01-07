@@ -37,4 +37,11 @@ public class BAccountController {
         return Result.success(bAccountService.listSrAccount(pageNum,pageSize));
     }
 
+    /*
+    * 科目树形结构
+    * */
+    @RequestMapping(value = "/listAccountTree")
+    public Result listAccountTree(){
+        return Result.success();
+    }
 }

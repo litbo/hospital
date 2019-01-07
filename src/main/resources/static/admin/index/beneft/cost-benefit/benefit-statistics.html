@@ -80,7 +80,58 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'bmName', title: '部门名称', minWidth: 150}
+                    , {field: 'eqName', title: '设备名称', minWidth: 150}
+                    , {field: 'eqXh', title: '规格型号', minWidth: 150}
+                    , {field: 'eqNum', title: '院内编号', minWidth: 200}
+                    , {field: 'eqPrice', title: '原价', minWidth: 100,sort:true}
+                    , {field: 'sy', title: '收益', minWidth: 100,sort:true}
+                    , {field: 'syl', title: '收益率', minWidth: 100,sort:true}
+                    , {field: 'hbq', title: '回本期', minWidth: 100,sort:true}
+                    , {field: 'eqQysj', title: '启用时间', minWidth: 180}
+                ]]
+                , url: "/benefical/sbcw/listZjcb"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"/benefical/sbcw/listZjcbByX",
+                type:"serch",
+                data:["kssj","jssj","bmNameByx","eqNameByx"],    //搜索框的name
+                where: {
+
+                }
+
+            }
+
+        }
+
+
+
+    }
+
+    /*addTable ={
         table:{
             cols: [[ //表头
                 {field: 'bmName', title: '部门名称', minWidth: 150}
@@ -148,7 +199,7 @@
         form:{
 
         }
-    }
+    }*/
 </script>
 </body>
 

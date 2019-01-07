@@ -7,4 +7,6 @@ public interface BAccountService {
     PageInfo listCbAccount(int pageNum, int pageSize);
 
     PageInfo listSrAccount(int pageNum, int pageSize);
+
+
 }
