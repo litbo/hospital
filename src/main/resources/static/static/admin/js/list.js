@@ -3701,7 +3701,7 @@ var main_list =
                                         },
                                         {
                                             "title": "设备属性扩展",
-                                            "url": "./table.html",
+                                            "url": "./system/system-setup/device-property.html",
                                             "id": "717",
                                             "shiro": "a"
                                         },
@@ -3835,14 +3835,14 @@ var main_list =
                                 },
                                 {
                                     "title": "查询",
-                                    "url": "./table.html",
+                                    "url": "./system/portal-management/search.html",
                                     "icon":"search",
                                     "id": "734",
                                     "shiro": "a"
                                 },
                                 {
                                     "title": "公告类别管理",
-                                    "url": "./table.html",
+                                    "url": "./system/portal-management/announce-category.html",
                                     "icon":"sliders-h",
                                     "id": "735",
                                     "shiro": "a"
@@ -3857,7 +3857,7 @@ var main_list =
                             "items":[
                                 {
                                     "title": "拟稿",
-                                    "url": "./table.html",
+                                    "url": "./system/portal-management/download-draft.html",
                                     "icon":"pen",
                                     "id": "737",
                                     "shiro": "a"
