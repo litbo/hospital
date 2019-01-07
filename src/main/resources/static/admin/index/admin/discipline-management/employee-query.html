@@ -49,7 +49,7 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
+    /*addTable ={
         table:{
             cols: [[ //表头
                 {type:"checkbox"}
@@ -135,6 +135,54 @@
                     })
                 })
             }
+        }
+    }  */
+
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'bmName', title: '部门',width:"15%", minWidth: 200}
+                    , {field: 'userId' , title:'编号',minWidth:150,sort:true}
+                    , {field: 'userXm' , title:'姓名',minWidth:150}
+                    , {field: 'sex' , title:'性别',minWidth:150}
+                    , {field: 'xllb' , title:'学历',minWidth:150}
+                    , {field: 'zwlb' , title:'岗位',minWidth:150}
+                    , {field: 'byyx' , title:'毕业院校',minWidth:150}
+                    , {fixed: 'right' , title:'操作',align:'center',minWidth:80,toolbar:'#bar'}
+                ]]
+                , url: "/kwgl/empgl/listSelectEmps"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"eq/listEqByX",
+                type:"serch",
+                where: {
+
+                }
+
+            }
+
         }
     }
 </script>

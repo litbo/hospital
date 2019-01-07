@@ -29,45 +29,75 @@
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="申购单号" autocomplete="off">
+            <label>
+                <select class="layui-select" name="isSh">
+                    <option value="-1">是否通过审核</option>
+                    <option value="1">通过审核</option>
+                    <option value="0">未通过审核</option>
+                    <option value="2">待审核</option>
+                </select>
+            </label>
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="设备名称" autocomplete="off">
+            <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="sbPym" placeholder="设备拼音码" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
 </script>
 <script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价报告</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">装备委员会会议</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">院办公会会议</a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'equip_name', title: '设备名称',width:"20%", minWidth: 150}
-                , {field: 'purchase-num', title: '申购单号', minWidth: 150}
-                , {field: 'standard', title: '规格', minWidth: 100, sort: true}
-                , {field: 'model', title: '型号', minWidth: 100, sort: true}
-                , {field: 'yuan', title: '估价(元)', minWidth: 150}
-                , {field: 'm_yuan', title: '估价(美元)', minWidth: 150}
-                , {field: 'state', title: '状态', minWidth: 150}
-                , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar"}
-            ]]
-            , "data": [
-                {
-                    "equip_name":"",
-                    "purchase-num":"",
-                    "standard":"",
-                    "model":"",
-                    "yuan":"",
-                    "m_yuan":"",
-                    "state":""
-                }]
-            , done: function (obj) {
-                //frame_all({"check":obj},{"back":true},{"link":[obj,"table1"]},{"message":[2,obj]});//公共运行函数集合
+    renderMod = {
+        addTable: {
+            table:{
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'bmName', title: '部门名称', minWidth: 150}
+                    , {field: 'eqPmName', title: '设备名称',width:"20%", minWidth: 150}
+                    , {field: 'bh', title: '申购单号', minWidth: 150}
+                    , {field: 'num', title: '数量', minWidth: 100, sort: true}
+                    , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
+                    , {field: 'zt', title: '状态', minWidth: 150}
+                    , {field: 'reason', title: '未通过原因', minWidth: 150}
+                    , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar"}
+                ]]
+                ,url:"http://localhost/lifeManage/selectSgInfoBmList"
+                ,method:"POST"
+                ,request:{
+                    pageName : 'pageNum',
+                    limitName : 'pageSize'
+                }
+                ,where:{
+                    userId : "1"
+                }
+                ,parseData: function(res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.size //总数据数
+                    }
+                }
+                , done: function (obj) {
+                    //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                }
+            },
+
+            reSet:{
+                url:"http://localhost/lifeManage/selectSgInfoBmList",
+                type:"reload",
+                data:["isSh","bh","sbPym"]
             }
         }
     }

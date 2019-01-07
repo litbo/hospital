@@ -46,20 +46,17 @@ $(function () {
                 filter = "", files = null;
 
             //表单默认值渲染
-            //console.log(formAction);
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
                 if (val.filter && (val.get || (val.options && Type(val.options) === "json"))) {
                     if (val.get) {
                         val.get.success = function (data) {
-                            console.log(data);
                             for (var name in data) {
                                 if (data.hasOwnProperty(name)) {
                                     form.val(val.filter, data[name]);
                                 }
                             }
                         };
-                        console.log(val.get);
                         subUp(val.get)
                     } else {
                         form.val(val.filter, val.options);
@@ -264,11 +261,14 @@ $(function () {
                     //动态获取表单数据
                     if(Type(res.data) === "array"){
                         for(var x=0;x<res.data.length;x++){
-                            //console.log("input="+res.data[x]);
-                            resValue[res.data[x]] = $("input[name='"+res.data[x]+"']").val();
-                            //console.log(resValue[res.data[x]]);
+                            var inputValue = $("input[name='"+res.data[x]+"']").val();
+                            if(inputValue){
+                                resValue[res.data[x]] = inputValue;
+                            }else if($("select[name='"+res.data[x]+"']").val()){
+                                resValue[res.data[x]] = $("select[name='"+res.data[x]+"']").val();
+                            }
                         }
-                        //console.log(resValue);
+                        console.log(resValue);
                     }
 
                     //添加额外数据
@@ -278,9 +278,9 @@ $(function () {
                                 resValue[name] = res.where[name];
                             }
                         }
-                        //console.log(resValue);
+                        console.log(resValue);
                     }
-                    //console.log(resValue);
+                    console.log(resValue);
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,

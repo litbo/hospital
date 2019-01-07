@@ -105,6 +105,56 @@
             }
         }
     }
+
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'bmName', title: '科室',width:"20%", minWidth: 150}
+                    , {field: 'zzs', title: '组长', minWidth: 150}
+                    , {field: 'fzzs', title:'副组长' ,minWidth:100}
+                    , {field: 'zagls', title:'质安管理人员' ,minWidth:200}
+                    , {field: 'zcgls', title:'资产管理人员' ,minWidth:150}
+                    , {field: 'jlgls', title:'计量管理人员' ,width:150}
+                    , {field: 'jclls', title:'监测联络员' ,width:150}
+                    , {field: 'zkgls', title:'质控管理人员' ,width:150}
+                ]]
+                , url: "/sybm/ksgl/getGroupsMSGDetail"
+                , "data":[
+                    {}
+                ]
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"serch",
+                where: {
+
+                }
+            }
+        }
+    }
+
 </script>
 </body>
 </html>

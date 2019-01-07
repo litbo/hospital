@@ -32,14 +32,14 @@ public interface SgInfoService {
     /**
      * 显示申购单科室审核列表
      *
-     * @param eqPmName 设备名称
+     * @param eqPmPym  设备名称
      * @param bh       申购单编号
      * @param userId   登陆人id
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
      */
-    PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(String eqPmName, String bh, String userId, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(String eqPmPym, String bh, String userId, Integer pageNum, Integer pageSize);
 
     /**
      * 显示申购单工程处审核列表
@@ -115,4 +115,17 @@ public interface SgInfoService {
      * @return PageInfo<SgInfoListVO>
      */
     PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbName, Integer pageNum, Integer pageSize);
+
+    /**
+     * 申购进度跟踪
+     *
+     * @param isSh     是否通过审核
+     * @param userId   用户id
+     * @param bh       申购单编号
+     * @param sbName   设备拼音码
+     * @param pageNum  页数
+     * @param pageSize 每页显示记录数
+     * @return PageInfo<SgInfoListVO>
+     */
+    PageInfo<SgInfoListVO> selectSgInfoBmList(String isSh, String userId, String bh, String sbName, Integer pageNum, Integer pageSize);
 }

@@ -175,4 +175,11 @@ public class GroupServiceImpl implements GroupService {
         List<SBm> bms = groupDao.listWclGroupBm();
         return new PageInfo(bms);
     }
+
+    @Override
+    public PageInfo listPreEmps(int pageNum, int pageSize, String gwName) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<GroupPerCateGoryUserMSGDetailVO> details = groupDao.listPreEmps(gwName);
+        return new PageInfo(details);
+    }
 }

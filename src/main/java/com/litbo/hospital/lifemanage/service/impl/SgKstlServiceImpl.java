@@ -40,6 +40,7 @@ public class SgKstlServiceImpl implements SgKstlService {
     private EmpDao empDao;
     @Autowired
     private EqDao eqDao;
+
     /**
      * 添加科室讨论信息
      *
@@ -125,23 +126,19 @@ public class SgKstlServiceImpl implements SgKstlService {
         SBm bm = empDao.getBmByEmpId(userId);
         String bmId = bm.getBmId();
 
-        List<String> pmList1 = selectSgTlPmPmIdsByBmId(bmId);
-        List<String> pmList2 = new ArrayList<>();
+        List<String> pmList = selectSgTlPmPmIdsByBmId(bmId);
 
         //调用品名的模糊查询 获得查询到的品名ID
-        if (StringUtils.isNotBlank(eqPmJc)){
-            List<EqPm> pmList = eqDao.listPmsByPym(eqPmJc);
-            for (EqPm eqPm : pmList) {
-                pmList2.add(eqPm.getEqPmId());
+        if (StringUtils.isNotBlank(eqPmJc)) {
+            List<String> pms = new ArrayList<>();
+            for (EqPm eqPm : eqDao.listPmsByPym(eqPmJc)) {
+                pms.add(eqPm.getEqPmId());
             }
+//          把通过部门查询的品名list和模糊查询到的品名list 取交集
+            pmList.retainAll(pms);
         }
-
-        // 把通过部门查询的品名list和模糊查询到的品名list 合成一个list 使用set去重
-        Set<String> pmIds = new HashSet<>();
-        pmIds.addAll(pmList1);
-        pmIds.addAll(pmList2);
-
+        // 如果pmList为空 或者没有数据 就返回null的数据
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(selectSgKstlVOByPmIds(new ArrayList<>(pmIds)));
+        return pmList != null && pmList.size() > 0 ? new PageInfo<>(selectSgKstlVOByPmIds(pmList)) : new PageInfo<>();
     }
 }

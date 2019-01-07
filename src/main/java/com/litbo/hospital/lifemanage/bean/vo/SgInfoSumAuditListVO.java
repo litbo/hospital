@@ -33,4 +33,24 @@ public class SgInfoSumAuditListVO {
      * 估价(元)
      */
     private BigDecimal priceGjY;
+    /**
+     * 科室讨论表id
+     */
+    private String kstlId;
+    /**
+     * 准入评价报告表id
+     */
+    private String pjbgId;
+    /**
+     * 可行性分析表id
+     */
+    private String kxfxId;
+    /**
+     * 大型医学装备考察报告表id
+     */
+    private String dxzbId;
+    /**
+     * 论证分析表id
+     */
+    private String lzfxId;
 }

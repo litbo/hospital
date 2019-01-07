@@ -19,21 +19,21 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <!--<table id="table" lay-filter="table1"></table>-->
-        <div class="layui-tab">
-            <ul class="layui-tab-title">
-                <li class="layui-this">按申购科室汇总</li>
-                <li>按申购设备汇总</li>
-            </ul>
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    <table id="table" lay-filter="table"></table>
-                </div>
-                <div class="layui-tab-item">
-                    <table id="table1" lay-filter="table1"></table>
-                </div>
-            </div>
-        </div>
+        <table id="table" lay-filter="table1"></table>
+        <!--<div class="layui-tab">-->
+            <!--<ul class="layui-tab-title">-->
+                <!--<li class="layui-this">按申购科室汇总</li>-->
+                <!--<li>按申购设备汇总</li>-->
+            <!--</ul>-->
+            <!--<div class="layui-tab-content">-->
+                <!--<div class="layui-tab-item layui-show">-->
+                    <!--<table id="table" lay-filter="table"></table>-->
+                <!--</div>-->
+                <!--<div class="layui-tab-item">-->
+                    <!--<table id="table1" lay-filter="table1"></table>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
 
@@ -43,41 +43,68 @@
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs" id="moreBar">
-        <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="全部科室" autocomplete="off">
+        <div class="layui-input-inline">
+            <label>
+                <select class="layui-select" name="bmId">
+                    <option value="">全部科室</option>
+                    <option value="0302010000">CT室</option>
+                    <option value="0202010000">计算机维修</option>
+                    <option value="0302030000">儿童保健门诊</option>
+                    <option value="0200000000">管理部门</option>
+                </select>
+            </label>
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
 </script>
 <script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备考察报告表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析表</a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:[{
-            elem:"#table"
-            ,height:'full-75'
-            ,cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'purchase-depart', title: '申购科室',width:"40%", minWidth: 150}
-                , {field: 'device-num', title: '设备数量', minWidth: 400}
-                , {field: 'money', title: '金额', minWidth: 150, sort: true}
-            ]]
-            , done: function (obj) {
+    renderMod = {
+        addTable: {
+            table:{
+                cols: [[ //表头
+                    {field: 'bmName', title: '部门名称', minWidth: 150, event: 'openLink'}
+                    , {field: 'bh', title: '申购单编号', minWidth: 150}
+                    , {field: 'eqPmName', title: '设备名称', minWidth: 150}
+                    , {field: 'num', title: '数量', minWidth: 150}
+                    , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
+                    , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
+                ]]
+                ,url:"http://localhost/lifeManage/selectSgInfoGccshList"
+                ,method:"POST"
+                ,request:{
+                    pageName : 'pageNum',
+                    limitName : 'pageSize'
+                }
+                ,where:{
+
+                }
+                ,parseData: function(res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.size //总数据数
+                    }
+                }
+                , done: function (obj) {
+                    //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                }
+            },
+
+            reSet:{
+                url:"http://localhost/lifeManage/selectSgInfoGccshList",
+                type:"reload",
+                data:["bmId"]
             }
-        },{
-            elem:"#table1"
-            ,height:'full-75'
-            ,cols:[[
-                {type:'checkbox'}
-                ,{field:'device-name',title:'设备名称',width:'35%',minWidth:200}
-                ,{field:'model',title:'规格型号',minWidth:200}
-                ,{field:'device-num',title:'设备数量',minWidth:250}
-                ,{field:'money',title:'金额',minWidth:250,sort:true}
-            ]]
-        }]
+        }
     }
 </script>
 </body>
