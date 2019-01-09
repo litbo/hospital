@@ -26,7 +26,7 @@ public class JhController {
     private JhRyLrService jhRyLrService;
 
     @PostMapping("/jhAdd")
-    public Result addJhZd(@RequestBody JhZd jhZd){
+    public Result addJhZd(JhZd jhZd){
         Result result = jhZdService.addJhZd(jhZd);
         return result;
     }

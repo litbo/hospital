@@ -18,14 +18,36 @@ import org.springframework.web.bind.annotation.*;
 public class FwBaoxiuController {
 
     @Autowired
-    private FwBaoxiuService fwBaoxiuService;
+    private FwBaoxiuService
+            fwBaoxiuService;
 
+    @GetMapping("/baoxiuRw")
+    public Result baoxiuRw(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                           @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        try {
+            String userId = "1615925038";
+            PageInfo pageInfo = fwBaoxiuService.baoxiuRw(userId, pageNum, pageSize);
+            return Result.success(pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("读取信息失败");
+        }
+    }
+
+    /**
+     * 设备
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/baoxiuEq")
     public Result baoxiuEq(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
-                           @RequestParam(required = false,defaultValue = "10") Integer pageSize){
+                           @RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                           @RequestParam(required = false) String bmName, @RequestParam(required = false) String eqName){
         try {
             String userId = "1615925023";
-            PageInfo pageInfo = fwBaoxiuService.getBaoxiuEq(userId, pageSize, pageNum);
+            System.out.println(eqName);
+            PageInfo pageInfo = fwBaoxiuService.getBaoxiuEq(userId, pageSize, pageNum,bmName,eqName);
             return Result.success(pageInfo);
         } catch (Exception e) {
             e.printStackTrace();
