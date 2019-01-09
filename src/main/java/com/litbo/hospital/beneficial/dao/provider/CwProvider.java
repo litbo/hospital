@@ -60,7 +60,16 @@ public class CwProvider {
         if(StringUtils.isNotBlank(cbMhVo.getEqNameByx())){
             sql.append("and dbo.b_sbcw.eq_name Like '%'+ #{eqNameByx}+'%' " );
         }
-        if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
+        if ((cbMhVo.getKssj()!=null) && (cbMhVo.getJssj()==null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
+        }
+        if((cbMhVo.getKssj()==null)&&( cbMhVo.getJssj()!=null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN '1900-1-1' AND #{jssj}" );
+        }
+        if(( cbMhVo.getKssj()!=null)&&( cbMhVo.getJssj()!=null)) {
+            sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}");
+        }
+        /*if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
         }
         if((StringUtils.isBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
@@ -69,7 +78,7 @@ public class CwProvider {
         if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))) {
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}");
 
-        }
+        }*/
 
 
             sql.append("GROUP BY " +
@@ -122,7 +131,16 @@ public class CwProvider {
         if(StringUtils.isNotBlank(cbMhVo.getEqNameByx())){
             sql.append("and dbo.b_sbcw.eq_name Like '%'+ #{eqNameByx}+'%' " );
         }
-        if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
+        if ((cbMhVo.getKssj()!=null) && (cbMhVo.getJssj()==null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
+        }
+        if((cbMhVo.getKssj()==null)&&( cbMhVo.getJssj()!=null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN '1900-1-1' AND #{jssj}" );
+        }
+        if(( cbMhVo.getKssj()!=null)&&( cbMhVo.getJssj()!=null)) {
+            sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}");
+        }
+        /*if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
         }
         if((StringUtils.isBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
@@ -130,7 +148,7 @@ public class CwProvider {
         }
         if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
-        }
+        }*/
         sql.append("GROUP BY " +
                 "dbo.b_sbcw.eq_id ");
 
@@ -184,7 +202,16 @@ public class CwProvider {
         if(StringUtils.isNotBlank(cbMhVo.getEqNameByx())){
             sql.append("and dbo.b_sbcw.eq_name Like '%'+ #{eqNameByx}+'%' " );
         }
-        if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
+        if ((cbMhVo.getKssj()!=null) && (cbMhVo.getJssj()==null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
+        }
+        if((cbMhVo.getKssj()==null)&&( cbMhVo.getJssj()!=null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN '1900-1-1' AND #{jssj}" );
+        }
+        if(( cbMhVo.getKssj()!=null)&&( cbMhVo.getJssj()!=null)) {
+            sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}");
+        }
+        /*if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
         }
         if((StringUtils.isBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
@@ -192,7 +219,7 @@ public class CwProvider {
         }
         if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
-        }
+        }*/
         sql.append("GROUP BY " +
                 "dbo.b_sbcw.eq_id ");
 
@@ -244,7 +271,16 @@ public class CwProvider {
         if(StringUtils.isNotBlank(cbMhVo.getEqNameByx())){
             sql.append("and dbo.b_sbcw.eq_name Like '%'+ #{eqNameByx}+'%' " );
         }
-        if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
+        if ((cbMhVo.getKssj()!=null) && (cbMhVo.getJssj()==null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
+        }
+        if((cbMhVo.getKssj()==null)&&( cbMhVo.getJssj()!=null)){
+            sql.append("and dbo.b_sbcw.km_sj BETWEEN '1900-1-1' AND #{jssj}" );
+        }
+        if(( cbMhVo.getKssj()!=null)&&( cbMhVo.getJssj()!=null)) {
+            sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}");
+        }
+        /*if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
         }
         if((StringUtils.isBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
@@ -252,7 +288,7 @@ public class CwProvider {
         }
         if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
-        }
+        }*/
         sql.append("GROUP BY " +
                 "dbo.b_sbcw.eq_id ");
 
