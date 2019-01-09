@@ -21,21 +21,21 @@ import java.util.List;
  *  设备成本效益设置
  * */
 @RestController
-@RequestMapping(value = "/benefical/cbxySz")
+@RequestMapping("/benefical/cbxySz")
 public class CbxySzController {
 
     @Autowired
     private CbxySzService cbxySzService;
 
     //查询设备成本效益列表
-    @RequestMapping(value = "/listCbxySz")
+    @RequestMapping("/listCbxySz")
     public Result listCbxySz(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         return Result.success(cbxySzService.listCbxySz(pageNum,pageSize));
     }
 
     //查询设备成本效益列表根据条件查询
-    @RequestMapping(value = "/listCbxySzByX")
+    @RequestMapping("/listCbxySzByX")
     public Result listCbxySzByX(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                               CbMhVo cbMhVo) {
