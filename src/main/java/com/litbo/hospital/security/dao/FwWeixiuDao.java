@@ -2,11 +2,14 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
+import com.litbo.hospital.security.vo.BaoXiuRw;
 import com.litbo.hospital.security.vo.FwInfoVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 /**
  * @author zjc
@@ -53,5 +56,30 @@ public interface FwWeixiuDao {
             "\tbx.eq_id = eq.eq_id AND bx.bxr_id = emp.user_id AND sl.id = bx.id AND slEmp.user_id = sl.slr_id AND wx.fw_id = bx.id \n" +
             "\tAND wxEmp.user_id = wx.wxr_id AND wx.gzyy_id = wxgzyy.id AND wx.gzmx_id = wxgzmx.id AND bx.id = '201812000006'")
     public FwInfoVo findFwInfo(String fwId);
+
+    @Select("SELECT\n" +
+            "bm.bm_name,\n" +
+            "eq.eq_name,\n" +
+            "emp.user_xm,\n" +
+            "baoxiu.bx_time,\n" +
+            "baoxiu.jjx_status,\n" +
+            "eq.eq_id,\n" +
+            "baoxiu.bx_status,\n" +
+            "baoxiu.id AS fw_id\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.eq_info AS eq ,\n" +
+            "dbo.fw_baoxiu AS baoxiu ,\n" +
+            "dbo.fw_wxqs AS wxqs ,\n" +
+            "dbo.s_bm AS bm ,\n" +
+            "dbo.s_emp AS emp\n" +
+            "WHERE\n" +
+            "baoxiu.id = wxqs.fw_id AND\n" +
+            "eq.eq_id = baoxiu.eq_id AND\n" +
+            "baoxiu.bxks_id = bm.bm_id AND\n" +
+            "baoxiu.bxr_id = emp.user_id AND\n" +
+            "wxqs.qs_shr = #{userId} AND\n" +
+            "baoxiu.bx_status = 13")
+    public List<BaoXiuRw> getBaoXiuRw(String userId);
 
 }

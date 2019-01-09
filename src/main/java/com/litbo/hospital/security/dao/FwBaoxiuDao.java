@@ -77,7 +77,7 @@ public interface FwBaoxiuDao {
             "gcs.user_id = #{userId} and baoxiu.bx_status = #{status}\n")
     public List<BaoXiuRw> findBaoxiuRw(@Param("userId") String userId,@Param("status") Integer status);
 
-    @Select("SELECT\n" +
+    /*@Select("SELECT\n" +
             "bm.bm_name,eq.eq_id,\n" +
             "eq.eq_name,\n" +
             "eq.eq_sbbh,\n" +
@@ -93,7 +93,8 @@ public interface FwBaoxiuDao {
             "WHERE\n" +
             "eq.eq_bmid = bm.bm_id AND\n" +
             "bm.bm_id = emp.bm_id AND\n" +
-            "emp.user_id = #{userId}")
-    public List<BaoxiuEqVo> findBaoxiuEq(String userId);
+            "emp.user_id = #{userId}")*/
+    @SelectProvider(type = FwBaoxiuProvider.class,method = "findBaoxiuEq")
+    public List<BaoxiuEqVo> findBaoxiuEq(@Param("userId") String userId,@Param("bmName") String bmName,@Param("eqName") String eqName);
 
 }

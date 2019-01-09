@@ -7,6 +7,8 @@ import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.bean.FwLcjl;
 import com.litbo.hospital.security.dao.FwBaoxiuDao;
 import com.litbo.hospital.security.dao.FwLcjlDao;
+import com.litbo.hospital.security.dao.FwShouLiDao;
+import com.litbo.hospital.security.dao.FwWeixiuDao;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.BaoXiuRw;
@@ -32,19 +34,28 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     @Autowired
     private FwLcjlDao fwLcjlDao;
 
+    @Autowired
+    private FwShouLiDao fwShouLiDao;
+
+    @Autowired
+    private FwWeixiuDao fwWeixiuDao;
 
     @Override
-    public PageInfo getBaoxiuEq(String userId,Integer pageSize,Integer pageNum) {
+    public PageInfo getBaoxiuEq(String userId,Integer pageSize,Integer pageNum,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<BaoxiuEqVo> pageInfo = new PageInfo<>(fwBaoxiuDao.findBaoxiuEq(userId));
+        PageInfo<BaoxiuEqVo> pageInfo = new PageInfo<>(fwBaoxiuDao.findBaoxiuEq(userId,bmName,eqName));
 
         return pageInfo;
     }
 
     @Override
-    public BaoXiuRw baoxiuRw(String userId) {
+    public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize) {
         List<BaoXiuRw> baoxiuRw = fwBaoxiuDao.findBaoxiuRw(userId, EnumProcess.FW_BX_SL.getCode());
-        return null;
+        List<BaoXiuRw> baoxiuRw1 = fwShouLiDao.findBaoxiuRw(userId);
+        /*List<BaoXiuRw> baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(userId);*/
+        baoxiuRw.addAll(baoxiuRw1);
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo<BaoXiuRw>(baoxiuRw);
     }
 
     @Override
