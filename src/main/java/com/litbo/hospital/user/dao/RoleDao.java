@@ -43,4 +43,7 @@ public interface RoleDao {
     List<UserVo> listUserByX(SelectUserVo selectUserVo);
     @Select("select * from s_role")
     List<SRole> listRoles() ;
+    @Select("select top 1 role_id from s_role order by cast(role_id as int) DESC")
+    String getLastId();
+
 }
