@@ -81,14 +81,15 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">参加人员</label>
                                 <div class="layui-input-block">
-                                    <select name="modules" lay-verify="required" lay-search="">
-                                        <option value="">输入搜索科室</option>
-                                        <option value="1">CT室</option>
-                                        <option value="2">核磁公正室</option>
-                                        <option value="3">摄片室</option>
-                                        <option value="4">内外导管室</option>
-                                        <option value="5">心外ICU</option>
-                                    </select>
+                                    <label>
+                                        <select class="layui-select" name="bmId">
+                                            <option value="">全部科室</option>
+                                            <option value="0302010000">CT室</option>
+                                            <option value="0202010000">计算机维修</option>
+                                            <option value="0302030000">儿童保健门诊</option>
+                                            <option value="0200000000">管理部门</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </div>
                             <div class="layui-form-item" pane>
@@ -173,20 +174,21 @@
     </div>
     <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="申购编号" autocomplete="off">
+            <input class="layui-input" name="bh" placeholder="申购编号" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="设备拼音码" autocomplete="off">
+            <input class="layui-input" name="eqSbPym" placeholder="设备拼音码" autocomplete="off">
         </div>
         <div class="layui-input-inline">
-            <select name="modules" lay-verify="required" lay-search="">
-                <option value="">输入搜索科室</option>
-                <option value="1">CT室</option>
-                <option value="2">核磁公正室</option>
-                <option value="3">摄片室</option>
-                <option value="4">内外导管室</option>
-                <option value="5">心外ICU</option>
-            </select>
+            <label>
+                <select class="layui-select" name="bmId">
+                    <option value="">全部科室</option>
+                    <option value="0302010000">CT室</option>
+                    <option value="0202010000">计算机维修</option>
+                    <option value="0302030000">儿童保健门诊</option>
+                    <option value="0200000000">管理部门</option>
+                </select>
+            </label>
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
     </form>
@@ -197,14 +199,15 @@
             <input type="text" name="date" id="date2" lay-verify="date" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <select name="modules" lay-verify="required" lay-search="">
-                <option value="">输入搜索部门</option>
-                <option value="1">CT室</option>
-                <option value="2">核磁公正室</option>
-                <option value="3">摄片室</option>
-                <option value="4">内外导管室</option>
-                <option value="5">心外ICU</option>
-            </select>
+            <label>
+                <select class="layui-select" name="bmId">
+                    <option value="">全部科室</option>
+                    <option value="0302010000">CT室</option>
+                    <option value="0202010000">计算机维修</option>
+                    <option value="0302030000">儿童保健门诊</option>
+                    <option value="0200000000">管理部门</option>
+                </select>
+            </label>
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
     </form>
@@ -212,54 +215,65 @@
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">会议记录</a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable = {
-        table: {
-             height: 'full-75'
-            , cols: [[ //表头
-                {type: "checkbox"}
-                , {field: 'purchase-depart', title: '申购科室', width: "40%", minWidth: 150, sort: true}
-                , {field: 'device-num', title: '申购编号', minWidth: 150, sort: true}
-                , {field: 'device-num', title: '设备名称', minWidth: 150, sort: true}
-                , {field: 'device-num', title: '规格型号', minWidth: 150, sort: true}
-                , {field: 'money', title: '数量', minWidth: 150, sort: true}
-                , {field: 'device-num', title: '估价(元)', minWidth: 150, sort: true}
-                , {field: 'device-num', title: '估价(美元)', minWidth: 150, sort: true}
-                , {field: 'money', title: '生产商', minWidth: 150, sort: true}
-                , {fixed:'right',width:150,align:'center',toolbar: "#bar"}
-            ]]
-            , data: [
-                {
-                    "purchase-depart": 'CT室',
-                    "device-num": "62583289",
-                    "money": "CT"
+    renderMod = {
+        addTable: {
+            table: {
+                height: 'full-75'
+                , cols: [[ //表头
+                    {type: "checkbox"}
+                    , {field: 'bmName', title: '申购科室', minWidth: 150, sort: true}
+                    , {field: 'bh', title: '申购编号', minWidth: 150, sort: true}
+                    , {field: 'eqPmName', title: '设备名称', minWidth: 150}
+                    , {field: 'num', title: '数量', minWidth: 100, sort: true}
+                    , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
+                ]]
+                , url: "http://localhost/lifeManage/selectSgInfoSgZbwyhhyList"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
-            ]
-            , done: function (obj) {
-                tableFunc({
-                    toolFunc:{
-                        title:"审批",
-                        event:"check",
-                        tool:"toolbar",
-                        type:1,
-                        content:$("#content"),
-                        area:["50%","50%"]
+                , where: {
+
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.size //总数据数
                     }
-                })
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        toolFunc: {
+                            title: "审批",
+                            event: "check",
+                            tool: "toolbar",
+                            type: 1,
+                            content: $("#content"),
+                            area: ["50%", "50%"]
+                        }
+                    })
+                }
+            },
+            reSet: {
+                url: "http://localhost/lifeManage/selectSgInfoSgZbwyhhyList",
+                type: "reload",
+                data: ["bmId","bh","eqSbPym"]
             }
-        }
-        , date: [{
+            , date: [{
                 elem: "#datet"
             },
-            {
-                elem: "#datey"
-                ,type: "year"
-                ,value: year
-                ,format:"y年"
-            }
-        ]
+                {
+                    elem: "#datey"
+                    , type: "year"
+                    , value: year
+                    , format: "y年"
+                }
+            ]
+        }
     }
 </script>
 </body>

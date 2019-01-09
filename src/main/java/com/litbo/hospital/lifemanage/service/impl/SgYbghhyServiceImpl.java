@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -50,27 +49,23 @@ public class SgYbghhyServiceImpl implements SgYbghhyService {
     }
 
     /**
-     * 装备委员会年度采购计划
+     * 院办公会年度采购计划
      *
      * @param year     年份
      * @param bmId     部门id
+     * @param bh       申购单编号
      * @param pageNum  当前页数
      * @param pageSize 每页显示的记录数
      * @return PageInfo<SgInfoSumAuditListVO>
      */
     @Override
-    public PageInfo<SgInfoSumAuditListVO> selectSgYbghhyYearPurchase(String year, String bmId, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgInfoSumAuditListVO> selectSgYbghhyYearPurchase(String year, String bmId, String bh, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgYbghhyYearPurchase(year, bmId);
-        for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //根据部门id查询部门名称
-            selectKsShHz.setBmName(bmDao.getBmBybmid(bmId).getBmName());
-        }
-        return new PageInfo<>(selectKsShHzs);
+        return new PageInfo<>(sgInfoMapper.selectSgYbghhyYearPurchase(year, bmId, bh));
     }
 
     /**
-     * 装备委员会年度采购预算
+     * 院办公会年度采购预算
      *
      * @param year     年份
      * @param bmId     部门id
@@ -80,7 +75,7 @@ public class SgYbghhyServiceImpl implements SgYbghhyService {
      */
     @Override
     public PageInfo<YearBudgetVO> selectSgYbghhyYearBudget(String year, String bmId, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo<>(sgInfoMapper.selectSgYbghhyYearBudget(year,bmId));
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(sgInfoMapper.selectSgYbghhyYearBudget(year, bmId));
     }
 }

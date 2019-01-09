@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -35,6 +36,7 @@ public class DhdjksjsVO implements Serializable {
     /**
      * 到货时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dhsj;
     /**
      * 存放地点

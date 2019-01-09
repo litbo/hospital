@@ -293,7 +293,7 @@ var main_list =
                                     "list":[
                                         {
                                             "title":"申购设备公示查询",
-                                            "url":"./table.html",
+                                            "url":"./life/purchase-management/equipment-query.html",
                                             "id":"316",
                                             "shiro":"a"
                                         }

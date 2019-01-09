@@ -23,46 +23,55 @@
     </div>
 </div>
 
-<script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">新增</a>
-    </div>
-</script>
+<!--<script type="text/html" id="toolBar">-->
+    <!--<div class="addBtn">-->
+        <!--<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">新增</a>-->
+    <!--</div>-->
+<!--</script>-->
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase">查看明细</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase">科室接收</a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {field: 'eqPmPym', title: '合同编号', minWidth: 400, event: 'openLink'}
-                , {field: 'eqPmJc', title: '发货单位', width: '53%', minWidth: 150}
-                , {field: 'eqFlName', title: '运输单号', minWidth: 150, sort: true}
-                , {field: 'bh', title: '接收时间', minWidth: 150}
-                , {field: 'bh', title: '存放地点', minWidth: 150}
-                , {field: 'bh', title: '实到箱数', minWidth: 150}
-                , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
-            ]]
-            ,url:"http://118.24.9.22/lifeManage/selectSgKstlSbs"
-            ,request:{
-                pageName : 'pageNum',
-                limitName : 'pageSize'
-            }
-            ,where:{
-                bmId : "01001"
-            }
-            ,parseData: function(res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "data": res.data.list //解析数据列表
+    renderMod = {
+        addTable: {
+            table:{
+                cols: [[ //表头
+                    {field: 'htId', title: '合同编号', minWidth: 150, event: 'openLink'}
+                    , {field: 'bh', title: '申购单编号',  minWidth: 100}
+                    , {field: 'dhdjFhdw', title: '发货单位', minWidth: 150}
+                    , {field: 'dhdjYsdh', title: '运输单号', minWidth: 150}
+                    , {field: 'dhsj', title: '到货时间', minWidth: 150}
+                    , {field: 'dhdjCfdd', title: '存放地点', minWidth: 150}
+                    , {field: 'dhdjSdxs', title: '实到箱数', minWidth: 100}
+                    , {fixed:'right',minWidth: 200,align:'center',toolbar: "#bar"}
+                ]]
+                ,url:"http://localhost/lifeManage/selectDjhwKsjs"
+                ,method:"POST"
+                ,request:{
+                    pageName : 'pageNum',
+                    limitName : 'pageSize'
                 }
-            }
-            , done: function (obj) {
-                //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                ,where:{
+                    userId : "1"
+                }
+                ,parseData: function(res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.size //总数据数
+                    }
+                }
+                , done: function (obj) {
+                    //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                }
+            },
+
+            reSet:{
+                url:"http://localhost/lifeManage/selectDjhwKsjs",
+                type:"reload",
+                data:[""]
             }
         }
     }
