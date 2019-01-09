@@ -19,7 +19,7 @@
             width: 80px;
         }
         .scorll{
-            overflow-x: scroll;
+            overflow-x: auto;
             overflow-y: hidden;
         }
     </style>
@@ -33,9 +33,9 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
+    <!--<div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
+    </div>-->
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -52,37 +52,28 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10 setW">
-                        <select>
-                            <option disabled>日期类型</option>
-                            <option>日</option>
-                            <option selected>月</option>
-                            <option>年</option>
-                        </select>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="date" id="date" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date" id="date" lay-verify="date" autocomplete="off" class="layui-input">
+                        <input class="layui-input" name="bmNameByx" placeholder="部门名称">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="search" placeholder="部门名称">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                            <input class="layui-input" name="search" placeholder="设备名称">
+                            <input class="layui-input" name="eqNameByx" placeholder="设备名称">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="serch">查找</button>
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="search">查找</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
     renderMod = {
-        addTable: {
-            table: {
+        table :{
+            table:{
                 cols: [[ //表头
                     {field: 'bmName', title: '部门名称', minWidth: 100}
                     , {field: 'eqName', title: '设备名称', minWidth: 100}
@@ -97,123 +88,39 @@
                     , {field: 'qt', title: '其他费用', minWidth: 100,sort:true}
                     , {field: 'zj', title: '总计', minWidth: 120,sort:true}
                 ]]
-                , url: "/benefical/sbcw/listZjcb"
-                , request: {
-                    pageName: 'pageNum',
-                    limitName: 'pageSize'
+                , height: "full-25"
+                ,url:"/benefical/sbcw/listZjcb"
+                ,method:"POST"
+                ,request:{
+                    pageName : 'pageNum',
+                    limitName : 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
-                , parseData: function (res) { //res 即为原始返回的数据
+                ,parseData: function(res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
+                        "count":res.data.size,
                         "data": res.data.list //解析数据列表
                     }
                 }
-                , done: function (obj) {
+                ,done: function (obj) {
 
                 }
-            },
-
-            reSet:{
+            },reSet:{
                 url:"/benefical/sbcw/listZjcbByX",
-                type:"serch",
-                data:["kssj","jssj","bmNameByx","eqNameByx"],    //搜索框的name
-                where: {
-
-                }
-
+                type:"search",
+                data:["bmNameByx","eqNameByx"],
+                dat:["#date","kssj","jssj"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
             }
-
-        }
-
-
-
-    }
-
-    /*addTable ={
-        table:{
-            cols: [[ //表头
-                {field: 'bmName', title: '部门名称', minWidth: 100}
-                , {field: 'eqName', title: '设备名称', minWidth: 100}
-                , {field: 'eqNum', title: '院内编号', minWidth: 180}
-                , {field: 'eqXh', title: '设备型号', minWidth: 120}
-                , {field: 'ryjf', title: '人员经费', minWidth: 100,sort:true}
-                , {field: 'wsclf', title: '卫生材料费', minWidth: 120,sort:true}
-                , {field: 'ypf', title: '药品费', minWidth: 100,sort:true}
-                , {field: 'gdzczjf', title: '固定资产折旧费', minWidth: 150,sort:true}
-                , {field: 'wxzctxf', title: '无形资产摊销费', minWidth: 150,sort:true}
-                , {field: 'ylfxf', title: '医疗风险提取费', minWidth: 150,sort:true}
-                , {field: 'qt', title: '其他费用', minWidth: 100,sort:true}
-                , {field: 'zj', title: '总计', minWidth: 120,sort:true}
-            ]]
-            , height: "full-25"
-            , "data": [
-                {
-                    "bmName": "CT室",                 //部门名称
-                    "eqName": "测试型号1",            //设备名称
-                    "eqNum": "181268031101310000",    //院内编号
-                    "eqXh": "测试型号1",               //设备型号
-                    "ryjf": 3000,                       //人员经费
-                    "wsclf": 100,                       //卫生材料费
-                    "ypf": 3000,                       //药品费
-                    "gdzczjf": 200,                     //固定资产折旧费
-                    "wxzctxf": 0,                      //无形资产摊销费
-                    "ylfxf": 0,                        //医疗风险提取费
-                    "qt": 500,                        //其他费用
-                    "zj": 6800                        //总计
-                }
-                ,{
-                    "bmName": "CT室",
-                    "eqName": "测试型号1",
-                    "eqNum": "181268031101310000",
-                    "eqXh": "测试型号1",
-                    "ryjf": 3000,
-                    "wsclf": 100,
-                    "ypf": 3000,
-                    "gdzczjf": 200,
-                    "wxzctxf": 0,
-                    "ylfxf": 0,
-                    "qt": 500,
-                    "zj": 6800
-                }
-                ,{
-                    "bmName": "CT室",
-                    "eqName": "测试型号1",
-                    "eqNum": "181268031101310000",
-                    "eqXh": "测试型号1",
-                    "ryjf": 3000,
-                    "wsclf": 100,
-                    "ypf": 3000,
-                    "gdzczjf": 200,
-                    "wxzctxf": 0,
-                    "ylfxf": 0,
-                    "qt": 500,
-                    "zj": 6800
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":{
-                        tool:"toolbar",
-                        title:"数据查找",
-                        event:"dataSearch",
-                        content:$("#hideXs")
-                    }
-                })
-            }
-        },
-        date:{
-            elem:"#date",
-            range:"-"
         },
         form:{
-
+            date:{
+                elem:"#date",
+                range:"~",
+                format:'y-M-d'
+            }
         }
-    }*/
+    };
 </script>
 </body>
 

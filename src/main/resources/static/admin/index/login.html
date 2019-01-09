@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>登录</title>
     <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/admin/css/login.css"/>
@@ -18,21 +17,19 @@
             <h3 style="color:#000;">系统登录</h3>
             <form class="layui-form">
                 <div class="layui-form-item">
-                    <input id="user" type="text" name="username" lay-verify="required|username" placeholder="用户名"
-                           autocomplete="off" class="layui-input">
+                    <input id="user" type="text" name="username" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-item">
-                    <input type="text" name="password" lay-verify="required|password" placeholder="密码"
-                           autocomplete="off" class="layui-input">
-                    <input type="radio" value="n">
+                    <input type="password" name="password" lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-item m-login-btn">
                     <div class="layui-inline subBut">
-                        <button class="layui-btn layui-btn-normal btn" lay-submit lay-filter="login" id="check-btn">登录
-                        </button>
+                        <button class="layui-btn layui-btn-normal btn" lay-submit lay-filter="login" id="check-btn">登录</button>
                     </div>
                 </div>
-                <div class="div-logo"><img src="../../static/admin/images/footerlogo.png" class="logo-img"></div>
+                <div class="div-logo">
+                    <img src="../../static/admin/images/footerlogo.png" class="logo-img" alt="健龙世纪">
+                </div>
             </form>
         </div>
         <p class="copyright"><span class="sign">***</span> 初次登录，用户名和密码均使用员工号 <span class="sign">***</span></p>
@@ -40,12 +37,13 @@
 </div>
 <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-/*
-    layui.use(['form'], function () {
+
+    layui.use(['form','jquery'], function () {
         var form = layui.form,
+            $ = layui.jquery,
             layer = layui.layer;
 
-        //自定义验证规则
+       /* //自定义验证规则
         form.verify({
             username: function(value, item){ //value：表单的值、item：表单的DOM对象
                 if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
@@ -62,50 +60,50 @@
                 /(.+){6,12}$/
                 , '密码必须6到12位'
             ]
-        });
+        });*/
 
 
         form.on('submit(login)', function (data) {
+            //console.log(data);
+            var $ser = data.field;
+            //console.log($ser);
             $.ajax({
                 url: "/hospital/submit",
-                type: post,
-                data: $(data.form).serialize(),
+                type: "POST",
+                data: $ser,
                 success: function (info) {
-                    if (info.code === 1) {
+                    //登陆成功跳转页面
+                    if (info.code === 0) {
                         setTimeout(function () {
                             location.href = info.url;
+                            //location.href = "./index.html";
                         }, 1000);
+                        //显示登陆成功
+                        //layer.msg(info.msg);
+                        layer.msg("欢迎您（"+data.field.username+")");
+                    }else{
+                        layer.msg("登陆失败，请重试！");
+                        console.log(info);//打印错误信息，调试用，可注释
                     }
-                    layer.msg(info.msg);
+
+                },error:function(info){
+                    layer.msg("登陆失败，请重试！");
+                    console.log(info);//打印错误信息，调试用，可注释
                 }
             });
             return false;
         });
-    })
 
-    //回车键触发提交
-    $("input").keydown(function(event){
-        if (event.keyCode == 13) {
-            document.getElementById("enterSubmit").click();
-        }
-    })
-*/
-
-
-
-    renderMod = {
-        form:{
-            submit:{
-                form:{
-                    url:"/hospital/submit",
-                    form:{
-
-                    }
-                }
-
+        //回车键触发提交
+        $("input").keydown(function(event){
+            if (event.keyCode === 13) {
+                $("#check-btn")[0].click();
             }
-        }
-    }
+        })
+    });
+
+
+
 </script>
 </body>
 </html>

@@ -135,7 +135,8 @@ layui.use(['layer', 'form', 'element', 'jquery', 'dialog'], function () {
 
         //延时加载
         setTimeout(function() {
-            var se = $.getUrlParam('p');
+            //var se = $.getUrlParam('p');
+            var se = window.location.search;
             if(sessionStorage.getItem("menu")) {
                 menu = JSON.parse(sessionStorage.getItem("menu"));
                 if(menu.length === 0){
