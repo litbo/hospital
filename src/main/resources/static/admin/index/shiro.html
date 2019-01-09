@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>Shiro测试</title>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="../../static/admin/css/all.min.css"/>
+    <script src="../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="../../static/admin/js/basic.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <style>
+        .loading{
+            font-size:2.5rem;
+            color:#fff;
+            text-align: center;
+            vertical-align: middle;
+            margin:20% 0;
+            letter-spacing: 5px;
+        }
+        .loading i{
+            font-size:4rem;
+        }
+    </style>
+</head>
+<body>
+<script>markPage();</script>
+<div class="main-layout" id='main-layout'>
+    <!--侧边栏-->
+    <div class="main-layout-side">
+        <!--LOGO-->
+        <div class="m-logo">
+            <img src="../../static/admin/images/yhd.png" alt="LOGO">
+        </div>
+        <!--site Map-->
+        <div class="map_site">
+            位置：首页
+        </div>
+        <!--左侧主列表-->
+        <ul class="layui-nav layui-nav-tree" lay-shrink="all" lay-filter="leftNav" id="main_nav_list">
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页1</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页2</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页3</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页4</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页5</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页6</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页7</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页8</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页9</a>
+            </li>
+            <li class="layui-nav-item" shiro:haspermission="" name="a">
+                <a href="?p=home"><i class="fas fa-fas fa-home"></i>首页10</a>
+            </li>
+        </ul>
+    </div>
+    <!--右侧内容-->
+    <div class="main-layout-container">
+        <!--头部-->
+        <div class="main-layout-header">
+            <div class="menu-btn menu-btn1" id="hideBtn">
+                <a href="javascript:void(0);">
+                    <i class="fas fa-bars" id="sbars"></i>
+                </a>
+            </div>
+            <!--顶部导航-->
+            <div class="menus">
+                <div class="layui-nav">
+                    <div class="menus_con">
+
+                    </div>
+                </div>
+            </div>
+            <!--用户信息-->
+            <div class="info1">
+                <div class="visible-xs visible-sm info">
+                    <i class="fas fa-info"></i>
+                </div>
+                <ul class="layui-nav conts" lay-filter="rightNav" style="margin-right:20px;">
+                    <li class="layui-nav-item items1">
+                        <a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统">
+                            <i class="far fa-bell"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item items1">
+                        <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息" style="padding:0 10px;overflow:hidden;">
+                            <img src="../../static/admin/images/man.png" class="user_head" alt="用户头像">
+                            <p class="names">
+                                <span class="h_name">李医生</span>
+                                <span class="h_room">心血管科室</span>
+                            </p>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">修改信息</a></dd>
+                            <dd><a href="javascript:;">安全管理</a></dd>
+                            <dd><a href="javascript:;">退出</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--主体内容-->
+        <div class="main-layout-body">
+            <!--tab 切换-->
+            <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true" style="background:#fff;">
+                <ul class="layui-tab-title navs" style="margin-right:40px;">
+                    <li class="layui-this welcome" id="refresh_home">系统主页</li>
+                </ul>
+                <!--右侧折叠副列表-->
+                <div class="tools">
+                    <div class="tools_more">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                    <ul class="cts2">
+
+                    </ul>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
+                        <!--内容页-->
+                        <iframe src="welcome.html" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0" id="home"></iframe>
+                        <!--end-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="jlsj">
+            <img src="../../static/admin/images/footerlogo.png" alt="健龙世纪">
+            &lt;!&ndash;<p>医疗设备数字化管理产品和服务的</p>&ndash;&gt;
+            &lt;!&ndash;<p><b>开拓者 领航者</b></p>&ndash;&gt;
+        </div>-->
+    </div>
+    <!--遮罩-->
+    <div class="main-mask"></div>
+</div>
+
+</body>
+</html>
