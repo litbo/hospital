@@ -24,6 +24,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Integer addRole(SRole role) {
+        String roleId = String.valueOf(Integer.parseInt(roleDao.getLastId())+1);
+        role.setRoleId(roleId);
         return roleDao.addRole(role);
     }
 

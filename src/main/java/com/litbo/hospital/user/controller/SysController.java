@@ -55,13 +55,14 @@ public class SysController {
         return Result.success(sysDxm);
     }
     //作息时间设置
-   /* public Result setZxsj(SysZxsj zxsj){
+    @RequestMapping("/setZxsj")
+    public Result setZxsj(SysZxsj zxsj){
         if(sysService.setZxsj(zxsj)>0){
             return Result.success();
         }else {
             return Result.error();
         }
-    }*/
+    }
 
 /*    @RequestMapping("/test")
     public Result test(){

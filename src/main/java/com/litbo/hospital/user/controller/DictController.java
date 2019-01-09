@@ -1,11 +1,13 @@
 package com.litbo.hospital.user.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -65,6 +67,15 @@ public class DictController {
         return Result.success(eqGzlbs);
     }
 
+    @RequestMapping("/jczd")
+    public Result listJczd(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+
+        PageInfo pageInfo = ds.listJczd(pageNum,pageSize);
+        return  Result.success(pageInfo);
+
+
+    }
 
 
 }
