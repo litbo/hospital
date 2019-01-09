@@ -59,7 +59,7 @@ public class CbxySzController {
 
 
     //根据设备id查询成本科目
-    @RequestMapping(value = "/selectCbkmByEqId")
+    @RequestMapping("/selectCbkmByEqId")
     public Result selectCbkmByEqId(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                    @RequestParam("eqId")Integer eqId) {
