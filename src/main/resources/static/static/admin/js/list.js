@@ -128,7 +128,7 @@ var main_list =
                                             "url":"./data/network-sys/begin_record.html",
                                             "id":"30",
                                             "shiro": "a"
-                                        },
+                                        }
                                     ]
                                 }
                             ]
@@ -241,13 +241,13 @@ var main_list =
                                             "url":"./life/purchase-management/purchase-gather.html",
                                             "id":"38",
                                             "shiro":"a"
-                                        },
-                                        {
+                                        }
+                                        /*,{
                                             "title":"临时采购授权",
                                             "url":"./life/purchase-management/temp-buy.html",
                                             "id":"39",
                                             "shiro":"a"
-                                        }
+                                        }*/
 
                                     ]
                                 },
@@ -322,7 +322,7 @@ var main_list =
                                 }
                             ]
                         },
-                        {
+                        /*{
                             "title":"招标采购",
                             "url":"life&t=0&n=1",
                             "shiro":"a",
@@ -362,7 +362,7 @@ var main_list =
                                     ]
                                 }
                             ]
-                        },
+                        },*/
                         {
                             "title":"验收管理",
                             "url":"life&t=0&n=2",
@@ -612,24 +612,24 @@ var main_list =
                                         }
                                     ]
                                 },
-                                // {
-                                //     "title":"字典设置",
-                                //     "url":"./table.html",
-                                //     "icon":"stamp",
-                                //     "id":"368",
-                                //     "shiro":"a",
-                                //     "list":[
-                                //         {
-                                //             "title":"设备金额档设置",
-                                //             "url":"./table.html",
-                                //             "id":"369",
-                                //             "shiro":"a"
-                                //         }
-                                //     ]
-                                // },
+                                /*{
+                                    "title":"字典设置",
+                                    "url":"./table.html",
+                                    "icon":"stamp",
+                                    "id":"368",
+                                    "shiro":"a",
+                                    "list":[
+                                        {
+                                            "title":"设备金额档设置",
+                                            "url":"./table.html",
+                                            "id":"369",
+                                            "shiro":"a"
+                                        }
+                                    ]
+                                },*/
                                 {
                                     "title":"其他台账",
-                                    "url":"./electric-bill/bill-list.html",
+                                    "url":"./life/electric-bill/bill-list.html",
                                     "icon":"file-invoice-dollar",
                                     "id":"370",
                                     "shiro":"a"
@@ -1041,7 +1041,7 @@ var main_list =
                                             "url":"./table.html",
                                             "id":"39926",
                                             "shiro":"a"
-                                        },
+                                        }
                                     ]
                                 },
                                 {

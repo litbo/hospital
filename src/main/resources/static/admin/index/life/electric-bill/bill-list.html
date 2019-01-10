@@ -107,11 +107,6 @@
         </div>
     </div>
 </script>
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">详细</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">再评价</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">关联新设备</a>
-</script>
 <script>
     renderMod = {
         addTable: {
@@ -130,7 +125,6 @@
                         , {field: 'eqQysj', title: '设备启用时间', minWidth: 180}
                         , {field: 'eqSynx', title: '使用年限', minWidth: 60}
                         , {field: 'state', title: '是否在用状态', minWidth: 130}
-                        , {fixed:'right',minWidth: 200,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "http://localhost/lifeManage/selectEquipmentAccount"
                     , method: "POST"
