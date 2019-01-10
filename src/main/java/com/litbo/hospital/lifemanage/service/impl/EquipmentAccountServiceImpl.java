@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
 import com.litbo.hospital.lifemanage.dao.EquipmentAccountMapper;
 import com.litbo.hospital.lifemanage.service.EquipmentAccountService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,10 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
      */
     @Override
     public PageInfo<MachineAccountVO> selectEquipmentAccount(String category, String state, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo<>(equipmentAccountMapper.selectEquipmentAccount(category,state,departmentId,equipmentPinyinCode,departmentCoding,equipmentNumber));
+        if (StringUtils.isNotBlank(equipmentPinyinCode)) {
+            equipmentPinyinCode = "%"+equipmentPinyinCode+"%";
+        }
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(equipmentAccountMapper.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber));
     }
 }

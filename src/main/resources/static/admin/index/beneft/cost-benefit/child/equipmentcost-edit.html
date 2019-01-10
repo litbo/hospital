@@ -46,43 +46,42 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" id="delete">删除</a>
 </script>
-<script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
-    addTable ={
+    renderMod = {
         table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'eqName', title: '设备名称', minWidth: 150}
-                , {field: 'kmName', title: '科目名称', minWidth: 150}
-                , {field: 'kmValue', title: '科目数额',minWidth: 150}
-                , {field: 'kmSj', title: '预设时间',minWidth: 150}
-                , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar",width:160}
-            ]]
-            , height: "full-25"
-            , "data": [
-                {
-                    "eqName": "cs设备编号2",      //设备名称
-                    "kmName": "辅助科室分摊",      //科目名称
-                    "kmValue": 5000,                //科目数额
-                    "kmSj": "2018-11-02",      //预设时间
-                    "aid": 10                  //主键id，不显示，用于点击编辑传入下个页面
+            table:{
+                cols: [[
+                     {field: 'kmName', title: '科目名称', minWidth: 150}
+                    , {field: 'kmValue', title: '科目数额',minWidth: 150}
+                    , {field: 'kmSj', title: '预设时间',minWidth: 150}
+                    , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar",width:160}
+                ]]
+                , height: "full-25"
+                , "data": [
+                    {
+                        "eqName": "cs设备编号2",      //设备名称
+                        "kmName": "辅助科室分摊",      //科目名称
+                        "kmValue": 5000,                //科目数额
+                        "kmSj": "2018-11-02",      //预设时间
+                        "aid": 10                  //主键id，不显示，用于点击编辑传入下个页面
+                    }
+                ]
+                , done: function (obj) {
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":[
+                            {
+                                type:2,
+                                event: "edit",
+                                content:"./equipment-edit-edit.html"
+                            }
+                        ]
+                    })
                 }
-            ]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":[
-                        {
-                            type:2,
-                            event: "edit",
-                            content:"./equipment-edit-edit.html"
-                        }
-                    ]
-                })
             }
         }
-    }
+    };
 </script>
 <script>
 

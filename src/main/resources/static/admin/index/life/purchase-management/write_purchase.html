@@ -50,7 +50,7 @@
                     , {field: 'bh', title: '申购单编号', minWidth: 150}
                     , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
                 ]]
-                ,url:"http://localhost/lifeManage/selectSgKstlSbs"
+                ,url:"/lifeManage/selectSgKstlSbs"
                 ,method:"POST"
                 ,request:{
                     pageName : 'pageNum',
@@ -73,7 +73,7 @@
             },
 
             reSet:{
-                url:"http://localhost/lifeManage/selectSgKstlSbs",
+                url:"/lifeManage/selectSgKstlSbs",
                 type:"reload",
                 data:["eqPmJc"]
             }

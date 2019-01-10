@@ -24,15 +24,20 @@ public class EquipmentAccountProvider {
         SQL sql = new SQL();
         sql.SELECT("dbo.eq_info.eq_id,\n" +
                 "dbo.eq_info.eq_sbbh,\n" +
-                "dbo.eq_info.eq_yq,\n" +
+                "dbo.eq_info.eq_name,\n" +
+                "dbo.eq_info.eq_zcbh as eqYq,\n" +
                 "dbo.eq_info.eq_gg,\n" +
                 "dbo.eq_info.eq_xh,\n" +
-                "dbo.eq_info.eq_bmid,\n" +
+                "dbo.s_bm.bm_name as eqBmName,\n" +
                 "dbo.eq_info.eq_tzlb,\n" +
                 "dbo.eq_info.eq_qysj,\n" +
                 "dbo.eq_info.eq_synx,\n" +
                 "dbo.eq_info.eq_syzt as state");
         sql.FROM("dbo.eq_info");
+        sql.INNER_JOIN("dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id");
+        sql.WHERE("dbo.eq_info.eq_sbbh IS NOT NULL AND\n" +
+                "dbo.eq_info.eq_zcbh IS NOT NULL AND\n" +
+                "dbo.eq_info.eq_tzlb IS NOT NULL\n");
         if (StringUtils.isNotBlank(category)){
             //医学装备 68是 非68不是
             if (category.equals("68")){
@@ -48,10 +53,10 @@ public class EquipmentAccountProvider {
             sql.WHERE("dbo.eq_info.eq_bmid = #{departmentId,jdbcType=VARCHAR}");
         }
         if (StringUtils.isNotBlank(equipmentPinyinCode)){
-            sql.WHERE("dbo.eq_info.eq_pym = #{equipmentPinyinCode,jdbcType=VARCHAR}");
+            sql.WHERE("dbo.eq_info.eq_pym like #{equipmentPinyinCode,jdbcType=VARCHAR}");
         }
         if (StringUtils.isNotBlank(departmentCoding)){
-            sql.WHERE("1=1");
+            sql.WHERE("dbo.eq_info.eq_zcbh = #{departmentCoding,jdbcType=VARCHAR}");
         }
 
         if (StringUtils.isNotBlank(equipmentNumber)){

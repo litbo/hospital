@@ -53,8 +53,9 @@ public interface SgPlanMapper {
      * @return List<SgPlan>
      */
     @Select("<script>" +
-            "select id, user_id, bm_id, plan_name,plan_date \n" +
+            "select sg_plan.id, sg_plan.user_id, s_bm.bm_name as bmId, sg_plan.plan_name,sg_plan.plan_date \n" +
             "from sg_plan\n" +
+            "INNER JOIN s_bm ON sg_plan.bm_id = s_bm.bm_id \n" +
             "<where>" +
             "<if test=\"planName != null\"> dbo.sg_plan.plan_name = #{planName,jdbcType=VARCHAR} </if>" +
             "<if test=\"planDate != null\"> AND YEAR(dbo.sg_plan.plan_date) = YEAR(#{planDate,jdbcType=TIMESTAMP}) AND MONTH(dbo.sg_plan.plan_date) = MONTH(#{planDate,jdbcType=TIMESTAMP}) AND DAY(dbo.sg_plan.plan_date) = DAY(#{planDate,jdbcType=TIMESTAMP}) </if>" +

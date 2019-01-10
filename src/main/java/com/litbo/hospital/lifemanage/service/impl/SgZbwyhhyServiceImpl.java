@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -65,20 +64,16 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
      *
      * @param year     年份
      * @param bmId     部门id
+     * @param bh       申购单编号
      * @param pageNum  当前页数
      * @param pageSize 每页显示的记录数
      * @return PageInfo<SgInfoSumAuditListVO>
      */
     @Override
-    public PageInfo<SgInfoSumAuditListVO> selectSgZbwyhYearPurchase(String year, String bmId, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgInfoSumAuditListVO> selectSgZbwyhYearPurchase(String year, String bmId, String bh, Integer pageNum, Integer pageSize) {
 
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgZbwyhYearPurchase(year, bmId);
-        for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
-            //根据部门id查询部门名称
-            selectKsShHz.setBmName(bmDao.getBmBybmid(bmId).getBmName());
-        }
-        return new PageInfo<>(selectKsShHzs);
+        return new PageInfo<>(sgInfoMapper.selectSgZbwyhYearPurchase(year, bmId, bh));
     }
 
     /**
@@ -92,12 +87,7 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
      */
     @Override
     public PageInfo<YearBudgetVO> selectSgZbwyhYearBudget(String year, String bmId, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<YearBudgetVO> yearBudgetVOS = sgInfoMapper.selectSgZbwyhYearBudget(year, bmId);
-        for (YearBudgetVO yearBudgetVO : yearBudgetVOS) {
-            //根据部门id查询部门名称
-            yearBudgetVO.setBmName(bmDao.getBmBybmid(bmId).getBmName());
-        }
-        return new PageInfo<>(yearBudgetVOS);
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(sgInfoMapper.selectSgZbwyhYearBudget(year, bmId));
     }
 }

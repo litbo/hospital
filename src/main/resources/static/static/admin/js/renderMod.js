@@ -12,7 +12,8 @@ $(function () {
         var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
             upload = layui.upload, $ = layui.jquery, layer = layui.layer,
             formAction = renderMod['form'] || renderMod['formAction']//表单数据
-            , addTable = renderMod['table'] || renderMod['addTable'];//表格数据
+            ,addTable = renderMod['table'] || renderMod['addTable']//表格数据
+        ;
         //表单渲染
         if (formAction && Type(formAction) === "json") {
             var normal = {
