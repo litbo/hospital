@@ -257,4 +257,17 @@ public class BmServiceImpl implements BmService {
 
         return bmDao.getFwxBms();
     }
+
+    @Override
+    public PageInfo getFwxBms(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(bmDao.getFwxBms());
+    }
+
+
+    @Override
+    public PageInfo listFWXBmByBmName(int pageNum, int pageSize, String bmName) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(bmDao.listFWXBmByBmName(bmName));
+    }
 }

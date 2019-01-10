@@ -14,8 +14,8 @@ public class GcsBmProvider {
                 " from s_gcs_bm sgb " +
                 " INNER JOIN s_emp emp ON (sgb.user_id=emp.user_id)" +
                 " INNER JOIN s_bm bm on (sgb.bm_id=bm.bm_id) where 1=1" );
-        if(userXm!="")  sql.append(" and user_xm Like '%'+ #{userXm} +'%' ");
-        if(bmName!="") sql.append(" and bm_name Like  '%'+  #{bmName} +'%' ");
+        if(userXm!=null)  sql.append(" and user_xm like  '%'+#{userXm}+'%' ");
+        if(bmName!=null) sql.append(" and bm_name like  '%'+#{bmName}+'%' ");
 
         return sql.toString();
     }

@@ -39,9 +39,9 @@
         </div>
         <button class="layui-btn" data-type="">确定划分</button>
         <div class="layui-inline" style="margin-left:100px">
-            <input type="text" name="" class="layui-input" autocomplete="off" placeholder="科室名称">
+            <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -55,7 +55,7 @@
                     {checkbox: true, fixed: true}
                     , {field: 'bmName', title: '科室名称', minWidth: 100}
                 ]]
-                , url: "/kwgl/glbm/getGcsBmMSG"
+                , url: "/supervise/bmgl/listFWXBm"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -75,20 +75,21 @@
 
                 }
             },
-
             reSet:{
-                url:"eq/listEqByX",
-                type:"serch",
+                url:"/supervise/bmgl/listFWXBmByBmName",
+                type:"search",
+                data:["bmName"],    //搜索框的name
                 where: {
+
                 }
             },
             event:{
                 filter:'select1',
-                box:'select',
+                box:'onChange',
                 func:function(data){
                     subUp({
-                        url:'',
-                        type:'POST',
+                        url:'/kwgl/empgl/listGcsEmp',
+                        type:'GET',
                         data:{name:"ABC"},
                         success:function(res){
                             if(res.code ===0 ){

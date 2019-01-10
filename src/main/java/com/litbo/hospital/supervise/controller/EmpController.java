@@ -26,6 +26,14 @@ public class EmpController {
         return Result.success(info);
     }
 
+    @GetMapping("/listSelectEmpBybmIdAndUserId")
+    public Result listSelectEmps(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 String bmId,String userId){
+        PageInfo info  =  empService.listSelectEmpBybmIdAndUserId(pageNum,pageSize,bmId,userId);
+        return Result.success(info);
+    }
+
 
     @GetMapping("listEmpsByBmId")
     public Result getEmpsByBmId(@RequestParam String bmId){
@@ -49,6 +57,11 @@ public class EmpController {
         return Result.success(emps);
     }
 
+    @GetMapping("/listGcsEmp")
+    public Result listGcsEmp(){
+        List<SEmp> emps = empService.getWxEmps();
+        return Result.success(emps);
+    }
 
 
 }

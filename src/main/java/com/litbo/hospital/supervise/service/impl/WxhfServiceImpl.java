@@ -93,4 +93,10 @@ public class WxhfServiceImpl implements WxhfService {
         }
     }
 
+    @Override
+    public PageInfo getBmGcsEqByX(int pageNum, int pageSize, BmGcsEqSelectXVO xvo) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SWxbmGcsEqSelect> data = wxhfDao.getBmGcsEqByX(xvo);
+        return new PageInfo(data);
+    }
 }

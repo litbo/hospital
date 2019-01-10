@@ -45,6 +45,14 @@
             </select>
         </div>
         <button class="layui-btn" data-type="">确定划分</button>
+
+        <div class="layui-inline">
+            <input type="text" name="eqPym" class="layui-input" autocomplete="off" placeholder="设备拼音码">
+        </div>
+        <!--<div class="layui-inline">-->
+            <!--<input type="text" name="" class="layui-input" autocomplete="off" placeholder="型号规格">-->
+        <!--</div>-->
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -82,6 +90,14 @@
                     tableFunc({
                         "obj":obj
                     })
+                }
+            },
+            reSet:{
+                url:"/eq/listEqByX",
+                type:"search",
+                data:["eqPym"],
+                where: {
+
                 }
             },
             event:{
