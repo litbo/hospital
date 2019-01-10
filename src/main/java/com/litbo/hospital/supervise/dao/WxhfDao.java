@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.dao;
 
+import com.litbo.hospital.supervise.dao.provider.GcsBmProvider;
 import com.litbo.hospital.supervise.vo.SGcsBmSelect;
 import com.litbo.hospital.supervise.vo.SWxbmGcsEqSelect;
 import org.apache.ibatis.annotations.*;
@@ -25,8 +26,18 @@ public interface WxhfDao {
             " from s_gcs_bm sgb INNER JOIN s_emp emp ON (sgb.user_id=emp.user_id) " +
             " INNER JOIN s_bm bm on (sgb.bm_id=bm.bm_id) ")
     List<SGcsBmSelect> getGcsBmMSG();
+
+//    @Select(" select sgb.gb_id,sgb.user_id,emp.user_xm,sgb.bm_id,bm.bm_name \n" +
+//            " from s_gcs_bm sgb INNER JOIN s_emp emp ON (sgb.user_id=emp.user_id)\n" +
+//            " INNER JOIN s_bm bm on (sgb.bm_id=bm.bm_id)\n" +
+//            " where emp.user_xm LIKE '%'+#{userXm}+'%' and bm.bm_name like '%'+#{bmName}+'%'")
+    @SelectProvider(type = GcsBmProvider.class ,method = "selectGcsBmByX")
+    List<SGcsBmSelect> getGcsBmMSGByGcsNameAndBmName(@Param("userXm") String userXm, @Param("bmName") String bmName);
     @Insert("insert into s_wxbm_gcs_eq (bm_id,user_id,eq_id) values(#{bmId},#{gcsId},#{eqId})")
     void wxBmGcsEqHf(@Param("bmId") String bmId, @Param("gcsId") String gcsId, @Param("eqId") String eqId);
     @Delete("delete from s_wxbm_gcs_eq where bg_id=#{bgId}")
     void wxBmGcsEqXcHf(String bgId);
+
+
+
 }

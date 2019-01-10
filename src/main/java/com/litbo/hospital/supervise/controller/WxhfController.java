@@ -42,6 +42,13 @@ public class WxhfController {
         return Result.success(pageInfo);
     }
 
+    @GetMapping("/getGcsBmMSGByGcsNameAndBmName")
+    public Result getGcsBmMSGByGcsNameAndBmName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String userXm,String bmName){    //s_gcs_bm
+        PageInfo pageInfo = wxhfService.getGcsBmMSGByGcsNameAndBmName(pageNum,pageSize,userXm,bmName);
+        return Result.success(pageInfo);
+    }
+
 
 
 
