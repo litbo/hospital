@@ -473,6 +473,147 @@ function removeStorageMenu(id) {
     sessionStorage.setItem('menu', JSON.stringify(menu));
 }
 
+//函数集合
+var func = {//this = obj
+    "addMsg": function () {
+        var num = Number(arguments[0]) || Number(arguments[0][0]) || 1//添加messages的表格列数
+            , timeIn = Number(arguments[0][1]) || 500//动画渐入时间
+            , timeOut = Number(arguments[0][2]) || 100//动画渐出时间
+            , oData = this.data;
+        if (typeof oData !== "object") {
+            console.error("页面无法正常加载（参数传入错误-缺少必填项）！");
+            return;
+        }
+        $("td:nth-child(" + Number(num) + ")").mouseover(function (e) {
+            var $h_tip = $("#h_tips");
+            if ($h_tip.length <= 0) {
+                $("body").append($("<div>").attr("id", "h_tips"))
+            }
+            for (var i = 0; i < oData.length; i++) {
+                for (var titles in oData[i]) {
+                    if(oData[i].hasOwnProperty(titles)){
+                        if (oData[i][titles] === $(this).text()) {//确保当前的单元值与捕获的数据中的值对应，避免对应错误
+                            $h_tip.html("");
+                            try {
+                                for (var j = 0; j < oData[i].messages.length; j++) {
+                                    $h_tip.append("<p>\n" +
+                                        "        <span class=\"tip_title\">" + oData[i].messages[j].name + "</span>：<span class=\"tip_conts\">" + oData[i].messages[j].value + "</span>\n" +
+                                        "    </p>")
+                                }
+                            } catch (e) {
+                                continue;
+                            }
+                            e = e || window.event;
+                            _x = e.pageX || e.clientX + document.body.scroolLeft;
+                            _y = e.pageY || e.clientY + document.body.scrollTop;
+                            //$("#tips").fadeOut(50);
+                            $h_tip.css("left", _x + 'px').css("top", _y + 'px').fadeIn(timeIn);
+                            $(this).mouseleave(function () {
+                                $h_tip.fadeOut(timeOut).remove();
+                            });
+                            break;
+                        }
+                    }
+                }
+            }
+        })
+    },
+    "addLink": function (value) {
+        layui.use('table', function () {
+            var table = layui.table
+                , filter = Type(value) !== "string" ? value[0] : value
+                , yes = Type(value) !== "string" ? value[1] : "确定要跳转链接吗？"
+                , no = Type(value) !== "string" ? value[2] : "没有可以跳转的链接。";
+            table.on('tool(' + filter + ')', function (obj) {
+                var data = obj.data;
+                if (obj.event === "openLink") {
+                    if (data.link) {
+                        layer.confirm(yes, function () {
+                            location.href = data.link + "?link=" + encodeURIComponent(window.location.href);
+                        });
+                    } else {
+                        layer.alert(no)
+                    }
+                }
+            });
+        })
+    },
+    "toolFunc": function (value) {
+        if (Type(value) === "json") {
+            cc(value);
+        } else if (Type(value) === "array") {
+            for (var i = 0; i < value.length; i++) {
+                (function (i) {
+                    cc(value[i]);
+                })(i)
+            }
+        } else {
+            console.error("toolFunc函数参数填写错误！");
+            return false;
+        }
+
+        function cc(vas) {
+            layui.use('table', function () {
+                var table = layui.table, layer = layui.layer, filt = vas.filter || "table1", tool = vas.tool || "tool";
+                table.on('' + tool + '(' + filt + ')', function (obj) {
+                    //console.log(22);
+                    var w = document.body.clientWidth - 20
+                        , h = document.body.clientHeight - 20;
+                    //var data = obj.data;//获得当前行数据
+                    if (obj.event === vas.event) {//弹出窗口
+                        layer.open({
+                            type: vas.type || 1,
+                            title: vas.title || "详情",
+                            content: vas.content || "无内容",
+                            area: vas.area || [w + "px", h + "px"],
+                            resize: vas.resize || false,
+                            move: vas.move || false
+                        });
+                    }
+                });
+            });
+        }
+    },
+    "tableBtn": function (vas) {
+        layui.use('table', function () {
+            var table = layui.table, layer = layui.layer, filt = vas.filter || "table1",
+                event = vas.event || "dataSearch", id = vas.tool || "hideXs";
+            table.on('toolbar(' + filt + ')', function (obj) {
+                var w = document.body.clientWidth - 20
+                    , h = document.body.clientHeight - 20;
+                //var data = obj.data;//获得当前行数据
+                if (obj.event === vas.event) {//弹出窗口
+                    layer.open({
+                        type: vas.type || 1,
+                        title: vas.title || "详细查找",
+                        content: vas.content || $('#' + id),
+                        area: vas.area || [w + "px", h + "px"],
+                        resize: vas.resize || false,
+                        move: vas.move || false
+                    });
+                }
+            });
+        });
+    }
+};
+//表格函数调用函数函数
+function tableFunc() {
+    if (Type(arguments) === "json") {
+        var obj = arguments[0].obj;
+        for (var name in arguments[0]) {
+            if(arguments[0].hasOwnProperty(name)){
+                if (func[name]) {
+                    func[name].call(obj, arguments[0][name]);
+                    console.log(name + " 已加载！");
+                }
+            }
+        }
+    } else {
+        layer.msg("系统错误！");
+        console.error("tableFunc参数填写错误");
+    }
+}
+
 
 /**
  * @todo 本地存储-session
