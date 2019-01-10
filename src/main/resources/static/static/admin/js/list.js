@@ -612,24 +612,24 @@ var main_list =
                                         }
                                     ]
                                 },
-                                {
-                                    "title":"字典设置",
-                                    "url":"./table.html",
-                                    "icon":"stamp",
-                                    "id":"368",
-                                    "shiro":"a",
-                                    "list":[
-                                        {
-                                            "title":"设备金额档设置",
-                                            "url":"./table.html",
-                                            "id":"369",
-                                            "shiro":"a"
-                                        }
-                                    ]
-                                },
+                                // {
+                                //     "title":"字典设置",
+                                //     "url":"./table.html",
+                                //     "icon":"stamp",
+                                //     "id":"368",
+                                //     "shiro":"a",
+                                //     "list":[
+                                //         {
+                                //             "title":"设备金额档设置",
+                                //             "url":"./table.html",
+                                //             "id":"369",
+                                //             "shiro":"a"
+                                //         }
+                                //     ]
+                                // },
                                 {
                                     "title":"其他台账",
-                                    "url":"./table.html",
+                                    "url":"./electric-bill/bill-list.html",
                                     "icon":"file-invoice-dollar",
                                     "id":"370",
                                     "shiro":"a"
