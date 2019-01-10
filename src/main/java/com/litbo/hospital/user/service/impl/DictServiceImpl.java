@@ -2,7 +2,7 @@ package com.litbo.hospital.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.common.vo.DictVo;
+import com.litbo.hospital.user.vo.DictVo;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
