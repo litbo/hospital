@@ -43,11 +43,22 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">模板</label>
-                <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" style="margin-left:35px" id="layerBtn" type="button">选择</button>
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" style="margin-left:10px" id="" type="button">导入模板信息</button>
-                    <!--<input type="text" class="layui-input" autocomplete="off" name=""><button class="layui-btn"></button>-->
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">制度内容</li>
+                        <li>文档上传</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <textarea class="layui-textarea"></textarea>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="layui-upload" style="margin-top:40px;">
+                                <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
+                                <!--<button type="button" class="layui-btn" id="startUploadFile">提交文件</button>-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,6 +87,16 @@
                     <input type="text" name="" class="layui-input" autocomplete="off" value="Admin">
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人</label>
+                <div class="layui-input-block">
+                    <select>
+                        <option>Admin</option>
+                        <option>aaa</option>
+                        <option>bbb</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
@@ -90,7 +111,7 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="startUploadFile">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -103,12 +124,13 @@
 
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
+    layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
+            , element = layui.element
+            , upload = layui.upload
             , laydate = layui.laydate;
-
         //日期
         laydate.render({
             elem: '#date'
@@ -116,7 +138,6 @@
 
         //创建一个编辑器
         var editIndex = layedit.build('LAY_demo_editor');
-
         //自定义验证规则
         form.verify({
             title: function (value) {
@@ -157,6 +178,18 @@
             });
             return false;
         });
+
+        //文件下载
+        upload.render({
+            elem:'#selectFile',
+            url:'/upload/',
+            auto:false,
+            bindAction:'#startUploadFile',
+            size:1024*40,//限制文件大小，单位kb
+            done:function(res){
+                console.log(res);
+            }
+        })
     });
 </script>
 </body>

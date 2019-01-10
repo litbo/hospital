@@ -2,7 +2,6 @@ package com.litbo.hospital.security.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwBaoxiu;
-import com.litbo.hospital.security.vo.BaoXiuRw;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 
 /**
@@ -18,7 +17,7 @@ public interface FwBaoxiuService {
      * @param userId
      * @return
      */
-    public PageInfo getBaoxiuEq(String userId, Integer pageSize, Integer pageNum);
+    public PageInfo getBaoxiuEq(String userId, Integer pageSize, Integer pageNum,String bmName,String eqName);
 
 
     /**
@@ -26,7 +25,7 @@ public interface FwBaoxiuService {
      * @param userId
      * @return
      */
-    public BaoXiuRw baoxiuRw(String userId);
+    public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize);
 
     public FwBaoxiuIndexVo baoxiuIndex(String eqId, String empId);
 

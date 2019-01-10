@@ -289,7 +289,7 @@ function setStorageCurMenu() {
         title: text,
         url: url,
         id: id,
-        search: $.getUrlParam('p')
+        search: location.search
     };
     sessionStorage.setItem('curMenu', JSON.stringify(curMenu));
 }

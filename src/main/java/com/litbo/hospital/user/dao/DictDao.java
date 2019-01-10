@@ -1,5 +1,6 @@
 package com.litbo.hospital.user.dao;
 
+import com.litbo.hospital.user.vo.DictVo;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.DictProvider;
 
@@ -24,4 +25,9 @@ public interface DictDao {
     @Insert(" insert into eq_zjly (zjly_id, zjly_name)\n" +
             "    values (#{zjlyId,jdbcType=INTEGER}, #{zjlyName,jdbcType=VARCHAR})")
     Integer addEqZjly(EqZjly eqZjly);
+    @Select("select eq_jldw_name as dictName,type as dictType FROM eq_jldw")
+    List<DictVo> listJldw1();
+    @Select("select")
+    List<DictVo> listGgs();
+
 }

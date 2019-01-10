@@ -108,6 +108,12 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
+    public List<SBm> getWxBmList() {
+        List<SBm> date = bmDao.getWxBmList();
+        return date;
+    }
+
+    @Override
     public void saveBm(SBm bm) {
         bmDao.saveBm(bm);
     }

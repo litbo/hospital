@@ -68,10 +68,9 @@
 <script type="text/html" id="bar">
 <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event=""></a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
-    addTable = {
+    /*addTable = {
         table: {
             cols: [[ //表头
                 {field: 'use-depart', title: '报修科室', minWidth: 200}
@@ -150,7 +149,63 @@
                 }
             }
         })
-    })
+    })*/
+    renderMod = {
+        addTable: {
+            table: {
+                /*cols: [[ //表头
+                    {field: 'use-depart', title: '报修科室', minWidth: 200}
+                    , {field: 'authorized_person', title: '报修设备', minWidth: 200, sort: true}
+                    , {field: 'authorized_depart', title: '报修人', minWidth: 200}
+                    , {field: 'model', title: '报修时间', minWidth: 200, sort: true}
+                    , {field: 'model', title: '紧急性', minWidth: 80}
+                    , {toolbar: '#bar', align: 'center', width: 200}
+                ]]*/
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'bmName', title: '报修科室', minWidth: 200}
+                    , {field: 'eqName', title: '报修设备', minWidth: 200}
+                    , {field: 'userXm', title: '报修人', minWidth: 200}
+                    , {field: 'bxTime', title: '报修时间', minWidth: 80}
+                    , {field: 'jjxStatusString', title: '紧急性', width: 200}
+                    , {field: 'baoxiuRw', title: '    ', width: 250}
+                    , {title: '操作', toolbar: '#bar', align: "center"}
+                ]]
+                , url: "/baoxiu/baoxiuRw"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.size,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+            /*
+                        reSet:{
+                            url:"/eq/listEqByX",
+                            type:"search",
+                            data:["bmName","eqPym","eqSbbh","eqZcbh"],    //搜索框的name
+                            /!* where:{
+                                newValue:"thisIsNew"
+                            },*!/
+                            /!* tid:"#table"*!/          //对应table的id   可以不写
+                        }*/
+
+        }
+
+    }
 </script>
 </body>
 

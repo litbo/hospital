@@ -51,10 +51,11 @@
             table: {
                 cols: [[ //表头
                     {type:"checkbox"}
-                    , {field: 'equipment-name', title: '设备名称',width:"50%", minWidth: 200}
-                    , {field: 'model' , title:'型号规格',minWidth:150}
+                    , {field: 'bmName', title: '维修部门',width:"50%", minWidth: 200}
+                    , {field: 'userXm' , title:'工程师',minWidth:150}
+                    , {field: 'eqName' , title:'型号规格',minWidth:150}
                 ]]
-                , url: ""
+                , url: "/kwgl/glbm/getWxbmGcsEqMSG"
                 , "data":[
                     {}
                 ]

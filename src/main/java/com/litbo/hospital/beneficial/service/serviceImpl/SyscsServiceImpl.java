@@ -12,22 +12,18 @@ public class SyscsServiceImpl implements SyscsService {
     private SyscsDao syscsDao;
 
     @Override
-    public Integer InsertKjjzr(Integer kjjzr) {
-        return syscsDao.insertKjjzr(kjjzr);
-    }
-
-    @Override
     public Integer UpdateKjjzr(Integer kjjzr) {
-        return 0;
-    }
-
-    @Override
-    public Integer InsertYlfx(float ylfx) {
-        return syscsDao.insertYlfx(ylfx);
+        if((kjjzr<1)||(kjjzr>30)){
+            return 0;
+        }
+        return syscsDao.updateKjjzr(kjjzr);
     }
 
     @Override
     public Integer UpdateYlfx(float ylfx) {
-        return null;
+        if((ylfx<0.01)||(ylfx>0.03)){
+            return 0;
+        }
+        return syscsDao.insertYlfx(ylfx);
     }
 }

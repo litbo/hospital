@@ -3,6 +3,7 @@ package com.litbo.hospital.supervise.dao;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
 import com.litbo.hospital.supervise.bean.SGroupUser;
+import com.litbo.hospital.supervise.vo.GroupPerCateGoryUserMSGDetailVO;
 import com.litbo.hospital.supervise.vo.GroupUserSelectVO;
 import com.litbo.hospital.supervise.vo.SGroupSelectVO;
 import org.apache.ibatis.annotations.*;
@@ -78,6 +79,24 @@ public interface GroupDao {
             " from s_bm bm LEFT JOIN s_group gp on (bm.bm_id=gp.bm_id) " +
             " where gp.bm_id is null and bm.xbm_flag=0 ")
     List<SBm> listWclGroupBm();
+
+  /**  SELECT bm.bm_name, gw.gw_name,sex.sex,emp.tel
+    from s_group gp
+    INNER JOIN s_group_users gpu on (gp.group_id=gpu.group_id)
+    INNER JOIN s_gangwei gw ON (gpu.gw_id=gw.gw_id)
+    INNER JOIN s_emp emp ON (emp.user_id=gpu.user_id)
+    INNER JOIN s_bm bm ON (bm.bm_id=gp.bm_id)
+    INNER JOIN s_sex sex ON (sex.sex_id=emp.sex_id)
+    where gw.gw_name='使用部门质检员'*/
+    @Select("    SELECT bm.bm_name,  emp.user_xm,sex.sex,emp.tel\n" +
+            "    from s_group gp\n" +
+            "    INNER JOIN s_group_users gpu on (gp.group_id=gpu.group_id)\n" +
+            "    INNER JOIN s_gangwei gw ON (gpu.gw_id=gw.gw_id)\n" +
+            "    INNER JOIN s_emp emp ON (emp.user_id=gpu.user_id)\n" +
+            "    INNER JOIN s_bm bm ON (bm.bm_id=gp.bm_id)\n" +
+            "    INNER JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
+            "    where gw.gw_name=#{gwName}")
+    List<GroupPerCateGoryUserMSGDetailVO> listPreEmps(String gwName);
 
 //    SELECT * from s_group_users u INNER JOIN s_emp emp on (u.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (u.gw_id=gw.gw_id)gw_id
 }

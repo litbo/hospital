@@ -1,5 +1,6 @@
 package com.litbo.hospital.security.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.litbo.hospital.common.utils.EnumUtils;
 import com.litbo.hospital.security.enums.EnumProcess;
 import lombok.Getter;
@@ -28,6 +29,8 @@ public class BaoXiuRw {
     private String eqName;
 
     private String userXm;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date bxTime;
 

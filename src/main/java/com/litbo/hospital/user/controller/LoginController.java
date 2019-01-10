@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.controller;
 
 import com.litbo.hospital.common.vo.LoginVo;
+import com.litbo.hospital.result.Result;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
@@ -24,11 +25,10 @@ public class LoginController {
     }
     @RequestMapping("/tomain")
     public String tomain(){
-        return "main";
+        return "index";
     }
-    @RequestMapping("/submit")
-    @ResponseBody
-    public Map<String,Object> submit(@Valid LoginVo loginVo, BindingResult bindingResult){
+
+   /* public Map<String,Object> submit(@Valid LoginVo loginVo, BindingResult bindingResult){
         Map<String,Object> map = new HashMap<String, Object>();
         if(bindingResult.hasErrors()){
             map.put("success",false);
@@ -53,5 +53,32 @@ public class LoginController {
             map.put("msg","用户名密码错误");
             return map;
         }
+    }*/
+
+    @RequestMapping("/submit")
+    @ResponseBody
+    public Result submit(@Valid LoginVo loginVo, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return Result.error(bindingResult.getFieldErrorCount());
+        }
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(loginVo.getUserName(),loginVo.getUserPwd());
+
+
+        try {
+            subject.login(token);
+            //把用户名存入session
+            Session session =  subject.getSession();
+            session.setAttribute("username",loginVo.getUserName());
+
+            return Result.success("登录验证通过");
+
+        }catch (Exception e){
+            return Result.error("用户名密码错误");
+        }
+
+
     }
 }
+
+

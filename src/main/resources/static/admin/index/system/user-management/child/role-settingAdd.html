@@ -35,17 +35,15 @@
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">员工<span>*</span></label>
+                <label class="layui-form-label">角色ID<span>*</span></label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-normal" id="addBtn" style="margin-left:35px;">选择</button>
+                    <input type="text" name="" class="layui-input" autocomplete="off" required lay-verify="required">
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">临床工程师</label>
+                <label class="layui-form-label">角色姓名<span>*</span></label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-normal" id="addBtn1" style="margin-left:35px">选择</button>
+                    <input type="text" name="" class="layui-input" autocomplete="off" required lay-verify="required">
                 </div>
             </div>
         </div>
@@ -65,32 +63,6 @@
 <script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    $('#addBtn').on('click',function(){
-        layui.use('layer',function(){
-            var layer = layui.layer;
-            //弹出层
-            layer.open({
-                type:2,
-                title:'',
-                content:'role-settingAddtable.html',
-                btn:['选择','取消'],
-                area:['95%','95%']
-            })
-        })
-    });
-    $('#addBtn1').on('click',function(){
-        layui.use('layer',function(){
-            var layer = layui.layer;
-            //弹出层
-            layer.open({
-                type:2,
-                title:'',
-                content:'role-settingAddtable1.html',
-                btn:['选择','取消'],
-                area:['95%','95%']
-            })
-        })
-    });
 </script>
 </body>
 

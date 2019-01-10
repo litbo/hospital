@@ -36,9 +36,9 @@ public class GroupController {
         return Result.success(pageInfo);
     }
 
-    //获得所有科室管理团队
+    //获得科室管理团队
     @GetMapping("/listSelectGroups")
-    public Result getSelectGroups(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+    public Result getSelectGrouplistWclGroupBms(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         PageInfo pageInfo = groupService.getSelectGroups(pageNum,pageSize);
         return Result.success(pageInfo);
@@ -124,12 +124,21 @@ public class GroupController {
         return Result.success(date);
     }
 
-    //获得所有管理部门的基本详情信息
+    //获得未成立部门
     @GetMapping("/listWclGroupBm")
     public Result listWclGroupBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
 
         PageInfo date =  groupService.listWclGroupBm(pageNum,pageSize);
+        return Result.success(date);
+    }
+
+    @GetMapping("/listPreEmps")
+    public Result listPreEmps(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                              String bmName){
+
+        PageInfo date =  groupService.listPreEmps(pageNum,pageSize,bmName);
         return Result.success(date);
     }
 

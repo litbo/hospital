@@ -40,13 +40,13 @@
                         <input type="text" name="bmName" class="layui-input" placeholder="部门名称" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date"  class="layui-input" placeholder="设备拼音" autocomplete="off">
+                        <input type="text" name="eqName"  class="layui-input" placeholder="设备名称" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="checkbox" name="" title="设备监管">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
                     </div>
                 </form>
             </div>
@@ -136,16 +136,15 @@
 
                 }
             },
-/*
             reSet:{
-                url:"/eq/listEqByX",
+                url:"/baoxiu/baoxiuEq",
                 type:"search",
-                data:["bmName","eqPym","eqSbbh","eqZcbh"],    //搜索框的name
-                /!* where:{
+                data:["bmName","eqName"],    //搜索框的name
+                /* where:{
                     newValue:"thisIsNew"
-                },*!/
-                /!* tid:"#table"*!/          //对应table的id   可以不写
-            }*/
+                },*/
+                /* tid:"#table"*/          //对应table的id   可以不写
+            }
 
         }
 

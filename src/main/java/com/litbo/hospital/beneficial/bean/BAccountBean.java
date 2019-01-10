@@ -1,5 +1,8 @@
 package com.litbo.hospital.beneficial.bean;
 
+/*
+* 会计科目
+* */
 public class BAccountBean {
     private Integer aId;
 
