@@ -1,10 +1,155 @@
 /*
 * basic.js 页面的基本函数集合,放置于页面顶部，且必须位于JQuery.js之后
 * */
+
 /**
- *@todo 获取URL中的参数的值
+ * @todo 全局通用变量的定义
+ * @arguments
+ * @return 当前时间计算 date year month day today time
+ *         表格表单定义数据 renderMod
  **/
-//获取当前页面的URL属性值，接收参数name：属性名，如果有对应属性值则返回属性值否则返回 null
+//计算当前时间
+var date = new Date()
+    , year = date.getFullYear()
+    , month = date.getMonth() + 1
+    , day = date.getDate()
+    , today = year + "-" + month + "-" + day//获取年-月-日
+    , time = date.getTime(),
+    //初始化页面渲染数据
+    renderMod = {};
+/**
+ * @todo 表格多函数调用
+ * @tips 表格函数集合
+ **/
+/*var func = {//this = obj
+    "addMsg": function () {
+        var num = Number(arguments[0]) || Number(arguments[0][0]) || 1//添加messages的表格列数
+            , timeIn = Number(arguments[0][1]) || 500//动画渐入时间
+            , timeOut = Number(arguments[0][2]) || 100//动画渐出时间
+            , oData = this.data;
+        if (typeof oData !== "object") {
+            console.error("页面无法正常加载（参数传入错误-缺少必填项）！");
+            return;
+        }
+        $("td:nth-child(" + Number(num) + ")").mouseover(function (e) {
+            var $h_tip = $("#h_tips");
+            if ($h_tip.length <= 0) {
+                $("body").append($("<div>").attr("id", "h_tips"))
+            }
+            for (var i = 0; i < oData.length; i++) {
+                for (var titles in oData[i]) {
+                    if(oData[i].hasOwnProperty(titles)){
+                        if (oData[i][titles] === $(this).text()) {//确保当前的单元值与捕获的数据中的值对应，避免对应错误
+                            $h_tip.html("");
+                            try {
+                                for (var j = 0; j < oData[i].messages.length; j++) {
+                                    $h_tip.append("<p>\n" +
+                                        "        <span class=\"tip_title\">" + oData[i].messages[j].name + "</span>：<span class=\"tip_conts\">" + oData[i].messages[j].value + "</span>\n" +
+                                        "    </p>")
+                                }
+                            } catch (e) {
+                                continue;
+                            }
+                            e = e || window.event;
+                            _x = e.pageX || e.clientX + document.body.scroolLeft;
+                            _y = e.pageY || e.clientY + document.body.scrollTop;
+                            //$("#tips").fadeOut(50);
+                            $h_tip.css("left", _x + 'px').css("top", _y + 'px').fadeIn(timeIn);
+                            $(this).mouseleave(function () {
+                                $h_tip.fadeOut(timeOut).remove();
+                            });
+                            break;
+                        }
+                    }
+                }
+            }
+        })
+    },
+    "addLink": function (value) {
+        layui.use('table', function () {
+            var table = layui.table
+                , filter = Type(value) !== "string" ? value[0] : value
+                , yes = Type(value) !== "string" ? value[1] : "确定要跳转链接吗？"
+                , no = Type(value) !== "string" ? value[2] : "没有可以跳转的链接。";
+            table.on('tool(' + filter + ')', function (obj) {
+                var data = obj.data;
+                if (obj.event === "openLink") {
+                    if (data.link) {
+                        layer.confirm(yes, function () {
+                            location.href = data.link + "?link=" + encodeURIComponent(window.location.href);
+                        });
+                    } else {
+                        layer.alert(no)
+                    }
+                }
+            });
+        })
+    },
+    "toolFunc": function (value) {
+        if (Type(value) === "json") {
+            cc(value);
+        } else if (Type(value) === "array") {
+            for (var i = 0; i < value.length; i++) {
+                (function (i) {
+                    cc(value[i]);
+                })(i)
+            }
+        } else {
+            console.error("toolFunc函数参数填写错误！");
+            return false;
+        }
+
+        function cc(vas) {
+            layui.use('table', function () {
+                var table = layui.table, layer = layui.layer, filt = vas.filter || "table1", tool = vas.tool || "tool";
+                table.on('' + tool + '(' + filt + ')', function (obj) {
+                    //console.log(22);
+                    var w = document.body.clientWidth - 20
+                        , h = document.body.clientHeight - 20;
+                    //var data = obj.data;//获得当前行数据
+                    if (obj.event === vas.event) {//弹出窗口
+                        layer.open({
+                            type: vas.type || 1,
+                            title: vas.title || "详情",
+                            content: vas.content || "无内容",
+                            area: vas.area || [w + "px", h + "px"],
+                            resize: vas.resize || false,
+                            move: vas.move || false
+                        });
+                    }
+                });
+            });
+        }
+    },
+    "tableBtn": function (vas) {
+        layui.use('table', function () {
+            var table = layui.table, layer = layui.layer, filt = vas.filter || "table1",
+                event = vas.event || "dataSearch", id = vas.tool || "hideXs";
+            table.on('toolbar(' + filt + ')', function (obj) {
+                var w = document.body.clientWidth - 20
+                    , h = document.body.clientHeight - 20;
+                //var data = obj.data;//获得当前行数据
+                if (obj.event === vas.event) {//弹出窗口
+                    layer.open({
+                        type: vas.type || 1,
+                        title: vas.title || "详细查找",
+                        content: vas.content || $('#' + id),
+                        area: vas.area || [w + "px", h + "px"],
+                        resize: vas.resize || false,
+                        move: vas.move || false
+                    });
+                }
+            });
+        });
+    }
+};*/
+
+/**
+ * @todo 获取URL中的参数的值
+ * @arguments name -> 需要获取的URL参数
+ * @return true -> 对应参数的值 {string}
+ *         false -> null {null}
+ **/
 (function ($) {
     $.getUrlParam = function (name, site) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"), r;
@@ -22,20 +167,24 @@
     };
 })(jQuery);
 
+
 /**
- *@todo 页面加载遮罩
+ * @todo 页面加载效果遮罩
+ * @arguments text -> 提示文字
+ *            time -> 遮罩自动结束时间
+ * @return
  **/
-//页面加载遮罩
 function markPage(text, time) {
     //如果页面中不存在定位元素则创建定位元素
-    if (!($(".begin").length > 0)) {
+    var $beg = $(".begin");
+    if ($beg.length <= 0) {
         $("body").prepend($("<div>").attr("class", "begin"))
     }
     var timer = null;
     text = text || "页面急速加载中!";//遮罩提示文本
     time = Number(time) || 3000;//遮罩显示时间
     //渲染页面遮罩样式
-    $(".begin").append($("<div>").attr("class", "main-mask").css({"display": "block", "background": "rgba(0,0,0,0.6)"})
+    $beg.append($("<div>").attr("class", "main-mask").css({"display": "block", "background": "rgba(0,0,0,0.6)"})
         .append($("<p>").attr("class", "loading").html("<br />" + text)
             .prepend($("<i>").attr("class", "layui-icon layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"))
         ));
@@ -52,11 +201,12 @@ function markPage(text, time) {
     });
 }
 
-//4：判断对象数据类型
+
 /**
- *@todo 数据类型判断
- * 以小写字符串形式返回
- * @return {string}
+ * @todo 数据类型判断
+ * @tips 类型中返回的Json对应格式为{...},其他格式Json返回相应格式
+ * @arguments value -> 需要判断的数据
+ * @return {string} -> 类型对应的小写名
  **/
 function Type(value) {
     if (value === undefined) {
@@ -87,9 +237,13 @@ function Type(value) {
     }
 }
 
-//数据提交函数，包含3种提交形式（原生HTML提交 JS-AJAX XHR提交 JQ-AJAX提交）
+
 /**
- * @return {boolean}
+ * @todo 数据提交
+ * @tips 包含3种提交形式（原生HTML提交 JS-AJAX XHR提交 JQ-AJAX提交）
+ * @arguments value -> 需要提交的必要参数
+ *            data -> layui返回的函数参数
+ * @return value参数不正确 -> false{boolean}
  */
 function subUp(value, data) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据)
@@ -115,7 +269,7 @@ function subUp(value, data) {
         }
         if (value.add) {
             for (var names in value.add) {
-                if (value.add.hasOwnProperty(name)) {
+                if (value.add.hasOwnProperty(names)) {
                     dataP[names] = add[names];
                 }
             }
@@ -166,7 +320,7 @@ function subUp(value, data) {
             error: function (er) {
                 alert("提交失败，请重试！");
                 console.log(er);
-                value.fine || value.fine(er);
+                value.fine && value.fine(er);
             }
         };
         var backData = function (callback) {
@@ -178,32 +332,31 @@ function subUp(value, data) {
     }
 }
 
-//合并两个数据不一样之处，将y中x没有的项添加进x中（X为主）
+
+/**
+ * @todo 数据合并（JSON）
+ * @tips 合并两个数据不一样之处，将y中x没有的项添加进x中（X为主）
+ * @arguments x -> 主数据
+ *            y -> 基础数据(用于比较的数据)
+ * @return {Object} -> x*
+ */
 function compereData(x, y) {
     for (var name in y) {
-        if (!x[name]) {
-            x[name] = y[name];
+        if(y.hasOwnProperty(name)){
+            if (!x[name]) {
+                x[name] = y[name];
+            }
         }
     }
 }
 
 /**
- *@todo 当前时间计算
- **/
-//计算当前时间
-var date = new Date()
-    , year = date.getFullYear()
-    , month = date.getMonth() + 1
-    , day = date.getDate()
-    , today = year + "-" + month + "-" + day//获取年-月-日
-    , time = date.getTime();
-
-//初始化页面渲染数据
-var renderMod = {};
-/**
- *@todo 本地存储 sessionStorage cookie 操作
- **/
-//cookies操作函数
+ * @todo 本地存储-cookie
+ * @arguments name -> 操作的cookie名
+ *            value -> 操作的cookie值
+ *            options -> 操作的cookie的其他参数
+ * @return {string} -> 读取的cookie
+ */
 jQuery.cookie = function (name, value, options) {
     if (typeof value !== 'undefined') {
         options = options || {};
@@ -242,6 +395,14 @@ jQuery.cookie = function (name, value, options) {
     }
 };
 
+
+/**
+ * @todo 本地存储-session
+ * @arguments title -> 操作的session名
+ *            url -> 操作的session所在的链接search信息
+ *            id -> 操作的session对应的导航ID
+ * @return {string} -> 读取的session
+ */
 //本地存储记录所有打开的窗口
 function setStorageMenu(title, url, id) {
     var menu = JSON.parse(sessionStorage.getItem('menu'));
@@ -277,14 +438,14 @@ function setStorageMenu(title, url, id) {
 
 //本地存储记录当前打开窗口
 function setStorageCurMenu() {
-    var curMenu = sessionStorage.getItem('curMenu');
-    var text = $('.layui-tab-title').find('.layui-this').text();
+    var curMenu = sessionStorage.getItem('curMenu'),$layTabTit = $('.layui-tab-title'),
+    text = $layTabTit.find('.layui-this').text();
     text = text.split('ဆ')[0];
     if (text === "系统主页") {
         return;
     }
     var url = $('.layui-tab-content').find('.layui-show').find('.weIframe').attr('src');
-    var id = $('.layui-tab-title').find('.layui-this').attr('lay-id');
+    var id = $layTabTit.find('.layui-this').attr('lay-id');
     curMenu = {
         title: text,
         url: url,
@@ -312,174 +473,15 @@ function removeStorageMenu(id) {
     sessionStorage.setItem('menu', JSON.stringify(menu));
 }
 
+
 /**
- *@todo 表格多函数调用
- **/
-//表格调用函数集合
-var func = {//this = obj
-    "addMsg": function () {
-        var num = Number(arguments[0]) || Number(arguments[0][0]) || 1//添加messages的表格列数
-            , timeIn = Number(arguments[0][1]) || 500//动画渐入时间
-            , timeOut = Number(arguments[0][2]) || 100//动画渐出时间
-            , oData = this.data;
-        if (typeof oData !== "object") {
-            console.error("页面无法正常加载（参数传入错误-缺少必填项）！");
-            return;
-        }
-        $("td:nth-child(" + Number(num) + ")").mouseover(function (e) {
-            if ($("#h_tips").length <= 0) {
-                $("body").append($("<div>").attr("id", "h_tips"))
-            }
-            for (var i = 0; i < oData.length; i++) {
-                for (var titles in oData[i]) {
-                    if (oData[i][titles] === $(this).text()) {//确保当前的单元值与捕获的数据中的值对应，避免对应错误
-                        $("#h_tips").html("");
-                        try {
-                            for (var j = 0; j < oData[i].messages.length; j++) {
-                                $("#h_tips").append("<p>\n" +
-                                    "        <span class=\"tip_title\">" + oData[i].messages[j].name + "</span>：<span class=\"tip_conts\">" + oData[i].messages[j].value + "</span>\n" +
-                                    "    </p>")
-                            }
-                        } catch (e) {
-                            continue;
-                        }
-                        e = e || window.event;
-                        _x = e.pageX || e.clientX + document.body.scroolLeft;
-                        _y = e.pageY || e.clientY + document.body.scrollTop;
-                        //$("#tips").fadeOut(50);
-                        $("#h_tips").css("left", _x + 'px').css("top", _y + 'px').fadeIn(timeIn);
-                        $(this).mouseleave(function () {
-                            $("#h_tips").fadeOut(timeOut).remove();
-                        });
-                        break;
-                    }
-                }
-            }
-        })
-    },
-    "addLink": function (value) {
-        layui.use('table', function () {
-            var table = layui.table
-                , filter = Type(value) !== "string" ? value[0] : value
-                , yes = Type(value) !== "string" ? value[1] : "确定要跳转链接吗？"
-                , no = Type(value) !== "string" ? value[2] : "没有可以跳转的链接。";
-            table.on('tool(' + filter + ')', function (obj) {
-                var data = obj.data;
-                if (obj.event === "openLink") {
-                    if (data.link) {
-                        layer.confirm(yes, function () {
-                            location.href = data.link + "?link=" + encodeURIComponent(window.location.href);
-                        });
-                    } else {
-                        layer.alert(no)
-                    }
-                }
-            });
-        })
-    },
-    "toolFunc": function (value) {
-        if (Type(value) === "json") {
-            cc(value);
-        } else if (Type(value) === "array") {
-            for (var i = 0; i < value.length; i++) {
-                (function (i) {
-                    cc(value[i]);
-                })(i)
-            }
-        } else {
-            console.error("toolFunc函数参数填写错误！");
-            return false;
-        }
-
-        function cc(vas) {
-            layui.use('table', function () {
-                var table = layui.table, layer = layui.layer, filt = vas.filter || "table1", tool = vas.tool || "tool";
-                table.on('' + tool + '(' + filt + ')', function (obj) {
-                    //console.log(22);
-                    var w = document.body.clientWidth - 20
-                        , h = document.body.clientHeight - 20;
-                    var data = obj.data;//获得当前行数据
-                    if (obj.event === vas.event) {//弹出窗口
-                        layer.open({
-                            type: vas.type || 1,
-                            title: vas.title || "详情",
-                            content: vas.content || "无内容",
-                            area: vas.area || [w + "px", h + "px"],
-                            resize: vas.resize || false,
-                            move: vas.move || false
-                        });
-                    }
-                });
-            });
-        }
-    },
-    "tableBtn": function (vas) {
-        layui.use('table', function () {
-            var table = layui.table, layer = layui.layer, filt = vas.filter || "table1",
-                event = vas.event || "dataSearch", id = vas.tool || "hideXs";
-            table.on('toolbar(' + filt + ')', function (obj) {
-                var w = document.body.clientWidth - 20
-                    , h = document.body.clientHeight - 20;
-                var data = obj.data;//获得当前行数据
-                if (obj.event === vas.event) {//弹出窗口
-                    layer.open({
-                        type: vas.type || 1,
-                        title: vas.title || "详细查找",
-                        content: vas.content || $('#' + id),
-                        area: vas.area || [w + "px", h + "px"],
-                        resize: vas.resize || false,
-                        move: vas.move || false
-                    });
-                }
-            });
-        });
-    }
-};
-
-//表格函数调用函数函数
-function tableFunc() {
-    if (Type(arguments) === "json") {
-        var obj = arguments[0].obj;
-        for (var name in arguments[0]) {
-            if (func[name]) {
-                func[name].call(obj, arguments[0][name]);
-                console.log(name + " 已加载！");
-            }
-        }
-    } else {
-        console.error("tableFunc参数填写错误")
-    }
-}
-
-
-/*require.config({
-    baseUrl: window.location.origin,
-    paths: {
-        "render": "/hospital/static/admin/js/renderMod.js"
-    }
-    <script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-});*/
-
+ * @todo 本地存储-session
+ * @tips 动态添加页面渲染所必须的基础函数<顺序不能更改>
+ * @arguments title -> 操作的session名
+ *            url -> 操作的session所在的链接search信息
+ *            id -> 操作的session对应的导航ID
+ * @return {string} -> 读取的session
+ */
+//
 document.write("<script type='text/javascript' data-version='x2' src='" + window.location.origin + "/static/admin/layui/layui.js'></script>");
 document.write("<script type='text/javascript' data-version='x2' src='" + window.location.origin + "/static/admin/js/renderMod.js'></script>");
-
-
-/*
-$(function(){
-    beginRender();
-})*/
-
-
-/*
-function loadJs(file){
-    var scriptTag = document.getElementById('loadScript');
-    var head = document.getElementsByTagName('head').item(0);
-    if(scriptTag) head.removeChild(scriptTag);
-    script = document.createElement('script');
-    script.src = window.location.origin+file+".js";
-    script.type = 'text/javascript';
-    script.id = 'loadScript';
-    head.appendChild(script);
-}
-
-loadJs("/hospital/static/admin/js/renderMod");*/
