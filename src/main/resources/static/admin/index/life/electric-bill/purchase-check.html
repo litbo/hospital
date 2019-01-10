@@ -47,7 +47,7 @@
                         , {field: 'userId', title: '审核人', minWidth: 150}
                         , {field: 'checks', title: '是否存在', minWidth: 150}
                     ]]
-                    , url: "http://localhost/lifeManage/selectSgCheck"
+                    , url: "/lifeManage/selectSgCheck"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -69,7 +69,7 @@
                 }
             ]
             , reSet: {
-                url: "http://localhost/lifeManage/selectSgCheck",
+                url: "/lifeManage/selectSgCheck",
                 type: "reload",
                 data: ["planName", "planDate", "userId"]
             }

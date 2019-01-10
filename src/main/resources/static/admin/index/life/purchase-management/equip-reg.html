@@ -45,7 +45,7 @@
                     , {field: 'dhsj', title: '采购日期', minWidth: 200}
                     , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
                 ]]
-                ,url:"http://localhost/lifeManage/sgYsList"
+                ,url:"/lifeManage/sgYsList"
                 ,method:"POST"
                 ,request:{
                     pageName : 'pageNum',
@@ -67,7 +67,7 @@
             },
 
             reSet:{
-                url:"http://localhost/lifeManage/sgYsList",
+                url:"/lifeManage/sgYsList",
                 type:"reload",
                 data:[""]
             }

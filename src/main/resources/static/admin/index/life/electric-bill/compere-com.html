@@ -71,7 +71,7 @@
                         , {field: 'date', title: '审核日期', minWidth: 160, sort: true}
                         , {field: 'checks', title: '是否存在', minWidth: 80}
                     ]]
-                    , url: "http://localhost/lifeManage/selectSgCheckList"
+                    , url: "/lifeManage/selectSgCheckList"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -91,7 +91,7 @@
                 }
             ]
             , reSet: {
-                url: "http://localhost/lifeManage/selectSgCheckList",
+                url: "/lifeManage/selectSgCheckList",
                 type: "reload",
                 data: ["check", "checkDate", "checkUser", "planDate", "planUser"]
             }

@@ -56,7 +56,7 @@
                         , {field: 'planDate', title: '制定日期', minWidth: 150}
                         , {fixed:'right',minWidth: 200,align:'center',toolbar: "#bar"}
                     ]]
-                    , url: "http://localhost/lifeManage/selectPlan"
+                    , url: "/lifeManage/selectPlan"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -76,7 +76,7 @@
                 }
             ]
             , reSet: {
-                url: "http://localhost/lifeManage/selectPlan",
+                url: "/lifeManage/selectPlan",
                 type: "reload",
                 data: ["planName","planDate","userId"]
             }

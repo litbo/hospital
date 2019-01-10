@@ -1,7 +1,13 @@
 package com.litbo.hospital;
 
+import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
@@ -17,7 +23,7 @@ public class HospitalApplication {
      * http重定向到https
      * @return -
      */
-    /*@Bean
+    @Bean
     public TomcatServletWebServerFactory servletContainer() {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
             @Override
@@ -44,5 +50,5 @@ public class HospitalApplication {
         //监听到http的端口号后转向到的https的端口号
         connector.setRedirectPort(443);
         return connector;
-    }*/
+    }
 }

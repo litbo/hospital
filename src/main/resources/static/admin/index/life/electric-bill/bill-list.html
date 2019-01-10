@@ -126,7 +126,7 @@
                         , {field: 'eqSynx', title: '使用年限', minWidth: 60}
                         , {field: 'state', title: '是否在用状态', minWidth: 130}
                     ]]
-                    , url: "http://localhost/lifeManage/selectEquipmentAccount"
+                    , url: "/lifeManage/selectEquipmentAccount"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -146,7 +146,7 @@
                 }
             ]
             , reSet: {
-                url: "http://localhost/lifeManage/selectEquipmentAccount",
+                url: "/lifeManage/selectEquipmentAccount",
                 type: "reload",
                 data: ["category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
             }

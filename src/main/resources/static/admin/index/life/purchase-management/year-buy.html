@@ -92,7 +92,7 @@
                         , {field: 'num', title: '数量', minWidth: 100, sort: true}
                         , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
                     ]]
-                    , url: "http://localhost/lifeManage/selectSgZbwyhYearPurchase"
+                    , url: "/lifeManage/selectSgZbwyhYearPurchase"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -120,7 +120,7 @@
                         , {field: 'ysy', title: '预算(元)', minWidth: 200, sort: true}
                         , {field: 'ysmy', title: '预算(美元)', minWidth: 200, sort: true}
                     ]]
-                    , url: "http://localhost/lifeManage/selectSgZbwyhYearBudget"
+                    , url: "/lifeManage/selectSgZbwyhYearBudget"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -140,7 +140,7 @@
 
             ]
             , reSet: {
-                url: "http://localhost/lifeManage/selectSgZbwyhYearPurchase",
+                url: "/lifeManage/selectSgZbwyhYearPurchase",
                 type: "reload",
                 data: ["bmId","bh", "year"]
             }
