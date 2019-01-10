@@ -1,6 +1,6 @@
 package com.litbo.hospital.user.dao;
 
-import com.litbo.hospital.common.vo.DictVo;
+import com.litbo.hospital.user.vo.DictVo;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.DictProvider;
 
