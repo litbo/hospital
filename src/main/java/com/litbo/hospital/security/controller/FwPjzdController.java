@@ -31,7 +31,7 @@ public class FwPjzdController {
     @ApiOperation(value = "插入配件字典")
     @ApiResponses(value = {@ApiResponse(code = 500,message = "服务器端异常",response = Result.class)})
     @RequestMapping(value = "/insertFwPjzd",method = RequestMethod.POST)
-    public Result insertFwPjzd(@RequestParam(required = true) FwPjzd pjzd){
+    public Result insertFwPjzd(FwPjzd pjzd){
         try {
             if(pjzdService.insertFwPjzd(pjzd)>0){
                 return Result.success();
@@ -39,6 +39,7 @@ public class FwPjzdController {
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
         }catch (Exception e){
+            e.printStackTrace();
             return Result.error(CodeMsg.PARAM_ERROR);
         }
 

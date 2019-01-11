@@ -10,11 +10,11 @@ public class FwPjzdSqlProvider {
                 FROM("fw_pjzd");
                 LEFT_OUTER_JOIN("eq_cs AS ghs ON fw_pjzd.pj_ghs_id = ghs.sbcs_id");
                 LEFT_OUTER_JOIN("eq_cs AS scqy on fw_pjzd.pj_scqy_id = scqy.sbcs_id");
-                if (pjSzm!=null) {
+                if (pjSzm!=null&&!"".equals(pjSzm)) {
                     WHERE("pj_szm like '%'+#{pjSzm}+'%'");
                 }
-                if (pjfl!=null){
-                    WHERE("pjfl like '%'+#{pjfl}+'%'");
+                if (pjfl!=null&&!"".equals(pjfl)){
+                    WHERE("pjfl = #{pjfl}");
                 }
             }
         }.toString();

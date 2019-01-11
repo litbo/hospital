@@ -42,7 +42,6 @@ public class FwBlsjServiceImpl implements FwBlsjService {
             baoxiuDao.updateBaoxiuStatus(blsj.getBxdh(),EnumProcess.FW_BLSJ.getCode());//报修单状态更改
         }
         return blsjDao.insertFwBlsj(blsj);
-
     }
 
     @Override

@@ -42,7 +42,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发现者</label>
                 <div class="layui-input-block">
-                    <select id="discoverer" name="">
+                    <select id="discoverer" name="userId">
                         <option value="">盖玉斋</option>
                         <option value="">刘松峰</option>
                         <option value="">杨凯</option>
@@ -86,7 +86,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: 0px" id="layerBtn">选择</button>
+                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: 0px" id="layerBtn" name="sbId">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -98,17 +98,17 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报告人岗位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="work" value="" title="医师" checked>
-                    <input type="radio" name="work" value="" title="技师">
-                    <input type="radio" name="work" value="" title="护士">
-                    <input type="radio" name="work" value="" title="工程师">
-                    <input type="radio" name="work" value="" title="其他">
+                    <input type="radio" name="bgrgw" value="" title="医师" checked>
+                    <input type="radio" name="bgrgw" value="" title="技师">
+                    <input type="radio" name="bgrgw" value="" title="护士">
+                    <input type="radio" name="bgrgw" value="" title="工程师">
+                    <input type="radio" name="bgrgw" value="" title="其他">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">报告人签字<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input" value="刘松峰" readonly>
+                    <input type="text" name="bgrqz" autocomplete="" class="layui-input" value="刘松峰" readonly>
                 </div>
             </div>
         </div>
@@ -119,20 +119,20 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">患者姓名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input">
+                    <input type="text" name="hzxm" autocomplete="" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">年龄</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input">
+                    <input type="text" name="hz_age" autocomplete="" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">性别</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="sex" value="" title="男" checked>
-                    <input type="radio" name="sex" value="" title="女">
+                    <input type="radio" name="hz_sex" value="男" title="男" checked>
+                    <input type="radio" name="hz_sex" value="女" title="女">
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 160px;">预期治疗疾病或作用<span class="sign">*</span></label>
                 <div class="layui-input-block" style="margin-left: 160px;">
-                    <textarea placeholder="" class="layui-textarea" name=""></textarea>
+                    <textarea placeholder="" class="layui-textarea" name="yqzlxg"></textarea>
                 </div>
             </div>
         </div>
@@ -153,13 +153,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 170px;">事件发生日期<span class="sign">*</span></label>
                 <div class="layui-input-block" style="margin-left: 170px">
-                    <input type="text" name="date" id="sdate" class="layui-input">
+                    <input type="text" name="sjfs_time" id="sdate" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 170px;">发现或者知悉日期<span class="sign">*</span></label>
                 <div class="layui-input-block"style="margin-left: 170px">
-                    <input type="text" name="date" id="fdate" class="layui-input">
+                    <input type="text" name="fxzx_time" id="fdate" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -184,18 +184,18 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">事件后果<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="Consequence" value="" title="死亡" checked>
-                    <input type="radio" name="Consequence" value="" title="危及生命">
-                    <input type="radio" name="Consequence" value="" title="  机体功能结构永久性损伤">
-                    <input type="radio" name="Consequence" value="" title="可能导致机体功能结构永久性损伤">
-                    <input type="radio" name="Consequence" value="" title="需要内、外科治疗避免上述永久损伤">
-                    <input type="radio" name="Consequence" value="" title="其他（在事件陈述中说明）">
+                    <input type="radio" name="sjhg" value="死亡" title="死亡" checked>
+                    <input type="radio" name="sjhg" value="危及生命" title="危及生命">
+                    <input type="radio" name="sjhg" value="机体功能结构永久性损伤" title="机体功能结构永久性损伤">
+                    <input type="radio" name="sjhg" value="可能导致机体功能结构永久性损伤" title="可能导致机体功能结构永久性损伤">
+                    <input type="radio" name="sjhg" value="需要内、外科治疗避免上述永久损伤" title="需要内、外科治疗避免上述永久损伤">
+                    <input type="radio" name="sjhg" value="其他（在事件陈述中说明）" title="其他（在事件陈述中说明）">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 160px;">植入日期（若植入）</label>
                 <div class="layui-input-block" style="margin-left: 160px;">
-                    <input type="text" name="date" id="zdate" class="layui-input">
+                    <input type="text" name="zr_time" id="zdate" class="layui-input">
                 </div>
             </div>
         </div>

@@ -3,20 +3,20 @@ package com.litbo.hospital.security.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwPjk;
-import com.litbo.hospital.security.bean.FwPjqlZjb;
 import com.litbo.hospital.security.bean.FwPjsg;
 import com.litbo.hospital.security.bean.FwPjsgZjb;
 import com.litbo.hospital.security.dao.FwPjkDao;
 import com.litbo.hospital.security.dao.FwPjsgDao;
 import com.litbo.hospital.security.dao.FwPjsgZjbDao;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
-import com.litbo.hospital.security.service.FwPjkService;
 import com.litbo.hospital.security.service.FwPjsgService;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
+import com.sun.tools.javadoc.Start;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -69,5 +69,23 @@ public class FwPjsgServiceImpl implements FwPjsgService {
             }
         }
         return pjsgDao.updateFwPjsgStatus(sgStatus,currentUserId,id);
+    }
+
+    @Override
+    public PageInfo listFwPjsgZjb(int pageNum, int pageSize, String pjRkTimeStart, String pjRkTimeEnd, String pjName) {
+        PageHelper.startPage(pageNum,pageSize);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = null;
+        Date end = null;
+
+        try {
+            if(pjRkTimeStart!=null)
+             start = formatter.parse(pjRkTimeStart);
+            if(pjRkTimeEnd!=null)
+             end = formatter.parse(pjRkTimeEnd);
+        }catch (Exception e){
+            return null;
+        }
+        return new PageInfo(pjsgZjbDao.listFwPjsgZjb(start,end,pjName));
     }
 }
