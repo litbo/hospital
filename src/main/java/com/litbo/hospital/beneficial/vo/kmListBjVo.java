@@ -12,7 +12,6 @@ import java.util.Date;
 * */
 @Data
 public class kmListBjVo {
-    private Integer aId;
 
     private String eqName;
 
@@ -21,4 +20,6 @@ public class kmListBjVo {
     private BigDecimal kmValue;
 
     private Date kmSj;
+
+    private Integer id;
 }

@@ -67,7 +67,7 @@ public class CbxySzProvider {
     public String selectCbkmByEqId(Integer eqId){
 
         String sql = "SELECT "+
-                "Max(dbo.b_sbcw.a_id) AS aId, "+
+                "Max(dbo.b_sbcw.a_id) AS id, "+
                 "Max(dbo.b_sbcw.eq_name) AS eqName, "+
                 "Max(dbo.b_sbcw.km_name) AS kmName, "+
                 "Max(dbo.b_sbcw.km_value) AS kmValue, "+
@@ -146,7 +146,7 @@ public class CbxySzProvider {
     public String selectSrkmByEqId(Integer eqId){
 
         String sql = "SELECT "+
-                "Max(dbo.b_sbcw.a_id) AS aId, "+
+                "Max(dbo.b_sbcw.a_id) AS id, "+
                 "Max(dbo.b_sbcw.eq_name) AS eqName, "+
                 "Max(dbo.b_sbcw.km_name) AS kmName, "+
                 "Max(dbo.b_sbcw.km_value) AS kmValue, "+

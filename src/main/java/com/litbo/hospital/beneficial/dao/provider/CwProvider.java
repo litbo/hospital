@@ -133,6 +133,7 @@ public class CwProvider {
         }
         if ((cbMhVo.getKssj()!=null) && (cbMhVo.getJssj()==null)){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
+
         }
         if((cbMhVo.getKssj()==null)&&( cbMhVo.getJssj()!=null)){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN '1900-1-1' AND #{jssj}" );
