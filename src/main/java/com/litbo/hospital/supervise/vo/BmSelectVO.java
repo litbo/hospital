@@ -11,7 +11,7 @@ public class BmSelectVO {
     }
 
     public void setBmName(String bmName) {
-        this.bmName = "%"+bmName+"%";
+        this.bmName = bmName;
     }
 
     public String getBmlb() {
@@ -19,7 +19,7 @@ public class BmSelectVO {
     }
 
     public void setBmlb(String bmlb) {
-        this.bmlb = bmlb+"%";
+        this.bmlb = bmlb;
     }
 
     public String getGklb() {
@@ -27,7 +27,7 @@ public class BmSelectVO {
     }
 
     public void setGklb(String gklb) {
-        this.gklb = gklb+"%";
+        this.gklb = gklb;
     }
 
     public String getIsWx() {

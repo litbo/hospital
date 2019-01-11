@@ -46,6 +46,10 @@ public interface BmService {
     List<SBm> getWxBms();
     //获取所有非维修部门
     List<SBm> getFwxBms();
+    //获取所有非维修部门
+    PageInfo getFwxBms(int pageNum, int pageSize);
+    //获取所有非维修部门通过部门名
+    PageInfo listFWXBmByBmName(int pageNum, int pageSize, String bmName);
 
     //通过父布门递归删除
 //    void removeBmByPid(String pid);

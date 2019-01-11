@@ -53,13 +53,12 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
     function addPage(a) {//a:main_list[0] 或 main_list[x].items[i] (x>1)
         var small_list = "";
         if (a.list) {
-            var $dl = $("<dl>").attr("class", "layui-nav-child").append(small_list)
+            var $dl = $("<dl>").attr("class", "layui-nav-child").append(small_list);
             for (var j = 0; j < a.list.length; j++) {
                 var aList_j = a.list[j];
                 $dl.append($("<dd>").attr(
                     {
-                        "shiro:hasPermission": false,
-                        "name": aList_j.shiro,
+                        "shiro:hasPermission": aList_j.shiro
                     }).append($("<a>").attr(
                     {
                         "href": "javascript:void(0);",
@@ -73,8 +72,7 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
             list.append($("<li>").attr(
                 {
                     "class": "layui-nav-item",
-                    "shiro:hasPermission": true,
-                    "name": a.shiro,
+                    "shiro:hasPermission": a.shiro
                 }).append($("<a>").attr(
                 {"href": "javascript:void(0);"}).html(a.title)
                 .prepend($("<i>").attr("class", "fas fa-" + a.icon))).append($dl)
@@ -83,8 +81,7 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
             list.append($("<li>").attr(
                 {
                     "class": "layui-nav-item",
-                    "shiro:hasPermission": true,
-                    "name": a.shiro,
+                    "shiro:hasPermission": a.shiro
                 }).append($("<a>").attr(
                 {
                     "href": "javascript:void(0);",
@@ -115,8 +112,7 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
 
                     $ul.append($("<li>").attr(
                         {
-                            "shiro:hasPermission": true,
-                            "name": xT_iC_j.shiro,
+                            "shiro:hasPermission": xT_iC_j.shiro
                         }).append($("<a>").attr(
                         {
                             "href": sUrl,
@@ -131,8 +127,7 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
                 a.append($("<li>").attr(
                     {
                         "class": "layui-nav-item",
-                        "shiro:hasPermission": true,
-                        "name": xt_i.shiro,
+                        "shiro:hasPermission": xt_i.shiro
                     }).append($("<a>").attr({"href": "javascript:void(0);"}).html(a.title)
                         .prepend($("<i>").attr("class", "fas fa-" + xt_i.icon))
                         .append($("<p>").attr("class", "tools_title").html(xt_i.title))
@@ -174,7 +169,7 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
                 var onThis;//判断所有数据中是否有一个值与表示当前页面名称的属性值（p）对应
                 for (var j = 1; j < main_list.length; j++) {
                     //当有对应时则返回true并且结束循环，否则返回false并继续循环直至循环结束
-                    onThis = p === main_list[j].page ? true : false;
+                    onThis = ( p === main_list[j].page );
                     if (onThis) break;
                 }
                 //表示当前页面名称的属性值（p）与所有的数据中对应的名称均不匹配时页面将直接跳转至首页

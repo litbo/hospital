@@ -9,7 +9,7 @@ public enum StateEnum {
     /**
      * 账实核对是否存在
      */
-    CHECK_Y(1,"是"),CHECK_N(0,"否");
+    CHECK_Y_OR_N(-1,"未核对"),CHECK_Y(1,"是"),CHECK_N(0,"否");
 
     /**
      * 处置码

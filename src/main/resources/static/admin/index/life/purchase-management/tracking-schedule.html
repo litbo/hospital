@@ -72,7 +72,7 @@
                     , {field: 'reason', title: '未通过原因', minWidth: 150}
                     , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar"}
                 ]]
-                ,url:"http://localhost/lifeManage/selectSgInfoBmList"
+                ,url:"/lifeManage/selectSgInfoBmList"
                 ,method:"POST"
                 ,request:{
                     pageName : 'pageNum',
@@ -95,7 +95,7 @@
             },
 
             reSet:{
-                url:"http://localhost/lifeManage/selectSgInfoBmList",
+                url:"/lifeManage/selectSgInfoBmList",
                 type:"reload",
                 data:["isSh","bh","sbPym"]
             }

@@ -16,6 +16,8 @@ public class LogoServiceImpl implements LogoService {
     private LogoDao logoDao;
     @Autowired
     private SysDao sysDao;
+
+
 /*
     @Override
     public int setLogo(SysLogo logo) {
@@ -38,7 +40,8 @@ public class LogoServiceImpl implements LogoService {
 
     @Override
     public int setLogo(SysLogo logo, MultipartFile multipartFile) {
-        String filePath = "F:\\Logo\\";
+        String path = System.getProperty("user.dir");
+        String filePath =path+"\\logo\\";
         String url = UploadFile.upload(filePath,multipartFile);
         logo.setLogo(url);
         if(sysDao.count("sys_logo")>0){
@@ -49,7 +52,8 @@ public class LogoServiceImpl implements LogoService {
 
     @Override
     public int setBbtt(SysLogo logo, MultipartFile multipartFile) {
-        String filePath = "F:\\Logo\\";
+        String path = System.getProperty("user.dir");
+        String filePath =path+"\\logo\\";
         String url = UploadFile.upload(filePath,multipartFile);
         logo.setBbtt(url);
         if(sysDao.count("sys_logo")>0){
@@ -60,7 +64,8 @@ public class LogoServiceImpl implements LogoService {
 
     @Override
     public int setSbbqtt(SysLogo logo, MultipartFile multipartFile) {
-        String filePath = "F:\\Logo\\";
+        String path = System.getProperty("user.dir");
+        String filePath =path+"\\logo\\";
         String url = UploadFile.upload(filePath,multipartFile);
         logo.setSbbqtt(url);
         if(sysDao.count("sys_logo")>0){

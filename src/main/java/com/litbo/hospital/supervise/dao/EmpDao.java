@@ -2,11 +2,9 @@ package com.litbo.hospital.supervise.dao;
 
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.supervise.dao.provider.EmpProvider;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -57,4 +55,7 @@ public interface EmpDao {
             " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
             " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id)")
     List<EmpSelectVO> listSelectEmps();
+
+    @SelectProvider(type = EmpProvider.class,method = "selectEmpsByX")
+    List<EmpSelectVO> listSelectEmpBybmIdAndUserId(@Param("bmId") String bmId, @Param("userId") String userId);
 }
