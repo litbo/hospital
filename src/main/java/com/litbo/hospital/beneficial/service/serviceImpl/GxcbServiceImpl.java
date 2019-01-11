@@ -78,8 +78,8 @@ public class GxcbServiceImpl implements GxcbService {
     }
 
     @Override
-    public ShowSbcwVo showSbCb(Integer aId) {
-        return gxcbDao.showSbCb(aId);
+    public Result showSbCb(Integer aId) {
+        return Result.success(gxcbDao.showSbCb(aId));
     }
 
     @Override

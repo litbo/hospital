@@ -6,6 +6,7 @@ import com.litbo.hospital.beneficial.vo.ShowSbcwVo;
 import org.apache.ibatis.annotations.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Mapper
 public interface GxcbDao {
@@ -14,7 +15,7 @@ public interface GxcbDao {
     int insertCb(BSbcwBean bSbcwBean);
 
     @SelectProvider(type = GxsrProvider.class , method = "showSbSr")
-    ShowSbcwVo showSbCb(Integer aId);
+    List<ShowSbcwVo> showSbCb(Integer aId);
 
     @Update("update b_sbcw set km_value=#{kmValue,jdbcType=DECIMAL} where a_id=#{aId}")
     Integer updateSbCb(@Param("aId") Integer aId, @Param("kmValue") BigDecimal kmValue);
