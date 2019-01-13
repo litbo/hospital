@@ -42,7 +42,7 @@
             <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="sbName" placeholder="设备拼音码" autocomplete="off">
+            <input class="layui-input" name="sbPym" placeholder="设备拼音码" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
@@ -63,16 +63,16 @@
             table:{
                 cols: [[ //表头
                     {type:"checkbox"}
-                    , {field: 'bmName', title: '部门名称',width:"20%", minWidth: 150}
+                    , {field: 'bmName', title: '部门名称', minWidth: 150}
                     , {field: 'eqPmName', title: '设备名称',width:"20%", minWidth: 150}
                     , {field: 'bh', title: '申购单号', minWidth: 150}
                     , {field: 'num', title: '数量', minWidth: 100, sort: true}
-                    , {field: 'priceGjY', title: '估价(元)', minWidth: 150}
+                    , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
                     , {field: 'zt', title: '状态', minWidth: 150}
                     , {field: 'reason', title: '未通过原因', minWidth: 150}
                     , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar"}
                 ]]
-                ,url:"http://localhost/lifeManage/selectSgInfoBmList"
+                ,url:"/lifeManage/selectSgInfoBmList"
                 ,method:"POST"
                 ,request:{
                     pageName : 'pageNum',
@@ -95,9 +95,9 @@
             },
 
             reSet:{
-                url:"http://localhost/lifeManage/selectSgInfoBmList",
+                url:"/lifeManage/selectSgInfoBmList",
                 type:"reload",
-                data:["isSh","bh","sbName"]
+                data:["isSh","bh","sbPym"]
             }
         }
     }

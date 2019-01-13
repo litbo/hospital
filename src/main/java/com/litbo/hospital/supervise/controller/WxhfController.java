@@ -3,6 +3,7 @@ package com.litbo.hospital.supervise.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.service.WxhfService;
+import com.litbo.hospital.supervise.vo.BmGcsEqSelectXVO;
 import com.litbo.hospital.supervise.vo.WxBmGcsEqInsertVO;
 import com.litbo.hospital.supervise.vo.WxhfReadyResouceVO;
 import com.litbo.hospital.supervise.vo.WxrBmInsertVO;
@@ -42,7 +43,22 @@ public class WxhfController {
         return Result.success(pageInfo);
     }
 
+    @GetMapping("/getGcsBmMSGByGcsNameAndBmName")
+    public Result getGcsBmMSGByGcsNameAndBmName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String userXm,String bmName){    //s_gcs_bm
+        PageInfo pageInfo = wxhfService.getGcsBmMSGByGcsNameAndBmName(pageNum,pageSize,userXm,bmName);
+        return Result.success(pageInfo);
+    }
 
+
+
+    @GetMapping("/getBmGcsEqByX")
+    public Result getBmGcsEqByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                BmGcsEqSelectXVO xvo){    //s_gcs_bm
+        PageInfo pageInfo = wxhfService.getBmGcsEqByX(pageNum,pageSize,xvo);
+        return Result.success(pageInfo);
+    }
 
 
 

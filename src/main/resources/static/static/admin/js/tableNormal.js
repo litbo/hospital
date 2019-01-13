@@ -83,7 +83,7 @@ $(function () {
                         var type = $(this).data('type');
                         active[type] ? active[type].call(this) : '';
                     });
-                }
+                };
                 //首次页面渲染后按钮事件绑定
                 $(".layui-table-tool .layui-btn").on('click',function(){
                     var type = $(this).data('type');

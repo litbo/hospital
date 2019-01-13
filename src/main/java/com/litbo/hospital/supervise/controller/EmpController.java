@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.service.EmpService;
@@ -15,6 +16,24 @@ import java.util.List;
 public class EmpController {
     @Autowired
     private EmpService empService;
+
+
+    //获取Emp基本信息
+    @GetMapping("/listSelectEmps")
+    public Result listSelectEmps(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo info  =  empService.listSelectEmps(pageNum,pageSize);
+        return Result.success(info);
+    }
+
+    @GetMapping("/listSelectEmpBybmIdAndUserId")
+    public Result listSelectEmps(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 String bmId,String userId){
+        PageInfo info  =  empService.listSelectEmpBybmIdAndUserId(pageNum,pageSize,bmId,userId);
+        return Result.success(info);
+    }
+
 
     @GetMapping("listEmpsByBmId")
     public Result getEmpsByBmId(@RequestParam String bmId){
@@ -32,6 +51,17 @@ public class EmpController {
         return Result.success();
     }
 
+    @GetMapping("/listEmpByBmId")
+    public Result listEmpByBmId(@RequestParam String bmId){
+        List<SEmp> emps = empService.listEmpByBmId(bmId);
+        return Result.success(emps);
+    }
+
+    @GetMapping("/listGcsEmp")
+    public Result listGcsEmp(){
+        List<SEmp> emps = empService.getWxEmps();
+        return Result.success(emps);
+    }
 
 
 }

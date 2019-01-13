@@ -60,7 +60,7 @@
                     , {field: 'priceGjY', title: '估价(元)', minWidth: 150, sort: true}
                     , {fixed: 'right', minWidth: 80, align: 'center', toolbar: "#bar"}
                 ]]
-                , url: "http://localhost/lifeManage/selectSgInfoKsshList"
+                , url: "/lifeManage/selectSgInfoKsshList"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
@@ -83,7 +83,7 @@
             },
 
             reSet: {
-                url: "http://localhost/lifeManage/selectSgInfoKsshList",
+                url: "/lifeManage/selectSgInfoKsshList",
                 type: "reload",
                 data: ["eqPmPym", "bh"]
             }

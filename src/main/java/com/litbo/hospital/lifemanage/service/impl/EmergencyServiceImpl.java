@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * EmergencyServiceImpl
+ * 紧急调拨ServiceImpl
  *
  * @author Administrator on 2018-12-17
  */

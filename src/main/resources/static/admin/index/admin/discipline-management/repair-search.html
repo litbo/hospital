@@ -34,12 +34,24 @@
             <button class="layui-btn" date-type="">清除划分</button>
         </div>
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" autocomplete="off" placeholder="设备名称">
+            <select lay-filter="select1" name="bmId">
+                <option>维修部门</option>
+                <option value="0202010000">计算机维修</option>
+                <option value="0201000000">医工</option>
+            </select>
         </div>
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" autocomplete="off" placeholder="型号规格">
+            <select lay-filter="select2" name="userId">
+                <option>划分人</option>
+                <option value="1615925008">李佳龙</option>
+                <option value="1615925037">高贺稳</option>
+            </select>
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <div class="layui-inline">
+            <input type="text" name="eqPym" class="layui-input" autocomplete="off" placeholder="设备拼音码">
+        </div>
+
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -51,10 +63,11 @@
             table: {
                 cols: [[ //表头
                     {type:"checkbox"}
-                    , {field: 'equipment-name', title: '设备名称',width:"50%", minWidth: 200}
-                    , {field: 'model' , title:'型号规格',minWidth:150}
+                    , {field: 'bmName', title: '维修部门',width:"50%", minWidth: 200}
+                    , {field: 'userXm' , title:'工程师',minWidth:150}
+                    , {field: 'eqName' , title:'设备名称',minWidth:150}
                 ]]
-                , url: ""
+                , url: "/kwgl/glbm/getWxbmGcsEqMSG"
                 , "data":[
                     {}
                 ]
@@ -79,8 +92,9 @@
             },
 
             reSet:{
-                url:"",
-                type:"serch",
+                url:"/kwgl/glbm/getBmGcsEqByX",
+                type:"search",
+                data:["bmId","userId","eqPym"],
                 where: {
 
                 }

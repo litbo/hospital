@@ -2,10 +2,9 @@ package com.litbo.hospital.supervise.dao;
 
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.litbo.hospital.supervise.dao.provider.EmpProvider;
+import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -47,4 +46,16 @@ public interface EmpDao {
     SBm getBmByEmpId(String empId);
     @Select("select * from s_emp where user_id = #{id}")
     SEmp getEmpsById(String id);
+    @Select("select * from s_emp where bm_id = #{bmId}")
+    List<SEmp> listEmpByBmId(String bmId);
+    @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id, sex.sex,xllb.xllb,zwlb.zwlb,emp.byyx\n" +
+            " from s_emp emp\n" +
+            " LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
+            " LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
+            " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
+            " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id)")
+    List<EmpSelectVO> listSelectEmps();
+
+    @SelectProvider(type = EmpProvider.class,method = "selectEmpsByX")
+    List<EmpSelectVO> listSelectEmpBybmIdAndUserId(@Param("bmId") String bmId, @Param("userId") String userId);
 }

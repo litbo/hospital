@@ -41,7 +41,7 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
+  /* addTable ={
         table:{
             cols: [[ //表头
                 {type:"checkbox"}
@@ -89,7 +89,52 @@
                 })
             }
         }
-    }
+    }*/
+
+
+  renderMod = {
+      addTable: {
+          table: {
+              cols: [[ //表头
+                  {checkbox: true, fixed: true}
+                  , {field: 'bmName', title: '科室',width:"30%", minWidth: 200}
+                  , {field: 'userXm', title: '质控管理员', minWidth: 150}
+                  , {field: 'sex', title: '性别', minWidth: 150}
+                  // , {field: 'work-name', title: '职称', minWidth: 150}
+                  , {field: 'tel', title: '联系电话', minWidth: 150}
+              ]]
+              , url: "/sybm/ksgl/listPreEmps?bmName=使用部门计量员"
+              , request: {
+                  pageName: 'pageNum',
+                  limitName: 'pageSize'
+              }
+              /*   , where: {
+                     bmId: ""
+
+                 }*/
+              , parseData: function (res) { //res 即为原始返回的数据
+                  return {
+                      "code": res.code, //解析接口状态
+                      "msg": res.msg, //解析提示文本
+                      "data": res.data.list //解析数据列表
+                  }
+              }
+              , done: function (obj) {
+
+              }
+          },
+
+          reSet:{
+              url:"eq/listEqByX",
+              type:"serch",
+              where: {
+
+              }
+
+          }
+
+      }
+  }
 </script>
 </body>
 </html>

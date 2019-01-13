@@ -1,3 +1,4 @@
+/*
 package com.litbo.hospital;
 
 import org.springframework.context.annotation.Bean;
@@ -21,9 +22,11 @@ import java.util.List;
 @EnableSwagger2
 public class Swagger2 {
 
-	/**
+	*/
+/**
 	 * @Description:swagger2的配置文件，这里可以配置swagger2的一些基本的内容，比如扫描的包等等
-	 */
+	 *//*
+
 	@Bean
 	public Docket createRestApi() {
 		
@@ -48,9 +51,11 @@ public class Swagger2 {
 				.globalOperationParameters(pars);
 	}
 
-	/**
+	*/
+/**
 	 * @Description: 构建 api文档的信息
-	 */
+	 *//*
+
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				// 设置页面标题
@@ -64,3 +69,4 @@ public class Swagger2 {
 	}
 
 }
+*/

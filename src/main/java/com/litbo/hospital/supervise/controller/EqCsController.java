@@ -43,5 +43,4 @@ public class EqCsController {
         return Result.success(date);
     }
 
-
 }

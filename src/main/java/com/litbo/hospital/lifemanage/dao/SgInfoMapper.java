@@ -222,7 +222,7 @@ public interface SgInfoMapper {
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoSgZbwyhhyList")
-    List<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(@Param("bmId") String bmId, @Param("bh") String bh);
+    List<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(@Param("eqPmPym") String eqPmPym, @Param("bmId") String bmId, @Param("bh") String bh);
 
     /**
      * 装备委员会审核
@@ -258,7 +258,7 @@ public interface SgInfoMapper {
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoYbgsShList")
-    List<SgInfoSumAuditListVO> selectSgInfoYbgsShList(@Param("bmId") String bmId, @Param("bh") String bh);
+    List<SgInfoSumAuditListVO> selectSgInfoYbgsShList(@Param("bmId") String bmId, @Param("bh") String bh, @Param("eqSbPym") String eqSbPym);
 
     /**
      * 院办公会会审核
@@ -291,20 +291,22 @@ public interface SgInfoMapper {
      *
      * @param year 年份
      * @param bmId 部门id
+     * @param bh   申购单编号
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgZbwyhYearPurchase")
-    List<SgInfoSumAuditListVO> selectSgZbwyhYearPurchase(@Param("year") String year, @Param("bmId") String bmId);
+    List<SgInfoSumAuditListVO> selectSgZbwyhYearPurchase(@Param("year") String year, @Param("bmId") String bmId, @Param("bh") String bh);
 
     /**
      * 院办公会年度采购计划
      *
      * @param year 年份
      * @param bmId 部门id
+     * @param bh   申购单编号
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgYbghhyYearPurchase")
-    List<SgInfoSumAuditListVO> selectSgYbghhyYearPurchase(@Param("year") String year, @Param("bmId") String bmId);
+    List<SgInfoSumAuditListVO> selectSgYbghhyYearPurchase(@Param("year") String year, @Param("bmId") String bmId, @Param("bh") String bh);
 
     /**
      * 院办公会年度采购预算
@@ -346,17 +348,18 @@ public interface SgInfoMapper {
     /**
      * 申购设备公示查询列表
      *
-     * @param isSh   是否通过审核
-     * @param bmId   部门id
-     * @param bh     申购单编号
-     * @param sbName 设备拼音码
+     * @param isSh  是否通过审核
+     * @param bmId  部门id
+     * @param bh    申购单编号
+     * @param sbPym 设备拼音码
      * @return List<SgInfoListVO>
      */
-    @SelectProvider(type = SgInfoSqlProvider.class,method = "selectSgInfoList")
-    List<SgInfoListVO> selectSgInfoList(@Param("isSh") String isSh, @Param("bmId") String bmId, @Param("bh") String bh, @Param("sbName") String sbName);
+    @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoList")
+    List<SgInfoListVO> selectSgInfoList(@Param("isSh") String isSh, @Param("bmId") String bmId, @Param("bh") String bh, @Param("sbPym") String sbPym);
 
     /**
      * 查询未通过原因
+     *
      * @param id 申购单id
      * @return 未通过原因
      */

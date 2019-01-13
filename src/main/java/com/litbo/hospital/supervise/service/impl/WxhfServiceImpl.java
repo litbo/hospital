@@ -71,6 +71,12 @@ public class WxhfServiceImpl implements WxhfService {
     }
 
     @Override
+    public PageInfo getGcsBmMSGByGcsNameAndBmName(int pageNum, int pageSize, String userXm, String bmName) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(wxhfDao.getGcsBmMSGByGcsNameAndBmName(userXm,bmName));
+    }
+
+    @Override
     public void wxBmGcsEqHf(WxBmGcsEqInsertVO wxBmGcsEqInsertVO) {
         String bmId = wxBmGcsEqInsertVO.getBmId();
         String gcsId = wxBmGcsEqInsertVO.getUserId();
@@ -85,5 +91,12 @@ public class WxhfServiceImpl implements WxhfService {
         for (String bgId : bgids){
             wxhfDao.wxBmGcsEqXcHf(bgId);
         }
+    }
+
+    @Override
+    public PageInfo getBmGcsEqByX(int pageNum, int pageSize, BmGcsEqSelectXVO xvo) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SWxbmGcsEqSelect> data = wxhfDao.getBmGcsEqByX(xvo);
+        return new PageInfo(data);
     }
 }

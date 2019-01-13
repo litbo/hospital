@@ -1,7 +1,9 @@
 package com.litbo.hospital.beneficial.bean;
 
 import java.math.BigDecimal;
-
+/*
+* 附属设备
+* */
 public class BSbfsgxBean {
     private Integer aId;
 

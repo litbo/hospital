@@ -34,9 +34,12 @@
             <button class="layui-btn">清除划分</button>
         </div>
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" autocomplete="off" placeholder="科室名称">
+            <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <div class="layui-inline">
+            <input type="text" name="userXm" class="layui-input" autocomplete="off" placeholder="工程师">
+        </div>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -49,8 +52,9 @@
                 cols: [[ //表头
                     {checkbox: true, fixed: true}
                     , {field: 'bmName', title: '科室名称', minWidth: 100}
+                    , {field: 'userXm', title: '负责人', minWidth: 100}
                 ]]
-                , url: "http://localhost/kwgl/glbm/getGcsBmMSG"
+                , url: "/kwgl/glbm/getGcsBmMSG"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -71,8 +75,9 @@
                 }
             },
             reSet:{
-                url:"",
-                type:"serch",
+                url:"/kwgl/glbm/getGcsBmMSGByGcsNameAndBmName",
+                type:"search",
+                data:["bmName","userXm"],    //搜索框的name
                 where: {
 
                 }

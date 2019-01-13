@@ -61,13 +61,14 @@ public interface SgInfoService {
     /**
      * 显示申购单装备委员会审核列表
      *
+     * @param eqPmPym  设备拼音码
      * @param bmId     部门id
      * @param bh       申购单编号
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
      */
-    PageInfo<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(String bmId, String bh, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(String eqPmPym, String bmId, String bh, Integer pageNum, Integer pageSize);
 
     /**
      * 装备委员会审核
@@ -81,11 +82,12 @@ public interface SgInfoService {
      *
      * @param bmId     部门id
      * @param bh       申购单编号
+     * @param eqSbPym  设备拼音码
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return PageInfo<SgInfoSumAuditListVO>
      */
-    PageInfo<SgInfoSumAuditListVO> selectSgInfoYbgsShList(String bmId, String bh, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoSumAuditListVO> selectSgInfoYbgsShList(String bmId, String bh, String eqSbPym, Integer pageNum, Integer pageSize);
 
     /**
      * 院办公会审核
@@ -109,12 +111,12 @@ public interface SgInfoService {
      * @param isSh     是否通过审核
      * @param bmId     部门id
      * @param bh       申购单编号
-     * @param sbName   设备拼音码
+     * @param sbPjm   设备拼音码
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return PageInfo<SgInfoListVO>
      */
-    PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbName, Integer pageNum, Integer pageSize);
+    PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbPjm, Integer pageNum, Integer pageSize);
 
     /**
      * 申购进度跟踪

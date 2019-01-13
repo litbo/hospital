@@ -12,7 +12,8 @@ $(function () {
         var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
             upload = layui.upload, $ = layui.jquery, layer = layui.layer,
             formAction = renderMod['form'] || renderMod['formAction']//表单数据
-            , addTable = renderMod['table'] || renderMod['addTable'];//表格数据
+            ,addTable = renderMod['table'] || renderMod['addTable']//表格数据
+        ;
         //表单渲染
         if (formAction && Type(formAction) === "json") {
             var normal = {
@@ -20,8 +21,7 @@ $(function () {
                 },//通用默认操作集合
                 nor_date = {
                     elem: "#date",
-                    value: today,
-                    format: "y-M-d"
+                    value: today
                 },//默认的日期选择器
                 nor_up = {
                     elem: "#up",
@@ -83,24 +83,6 @@ $(function () {
                             a(date[j]);
                         }
                     }
-                }
-
-                //日期选择器的渲染函数
-                function a(date) {
-                    //匹配默认数据，未填写的参数将使用已有的参数填充
-                    compereData(date, nor_date);
-                    //判断日期选择器是否为范围选择器
-                    if (date.range) {
-                        //默认连接符
-                        var bars = date.bar || "-";
-                        if (Type(date.range) === "array") {
-                            bars = date.range
-                        }
-                        //默认日期渲染
-                        date.value = today + " " + bars + " " + today
-                    }
-                    //日期选择器渲染
-                    laydate.render(date);
                 }
             }
 
@@ -255,7 +237,7 @@ $(function () {
             if (res && res !== false) {
                 var type = res.type || "search"//绑定data-type="search"的按钮
                     , active = {}//绑定按钮事件
-                    , resValue = {};//
+                    , resValue = {};//重载值
                 //绑定按钮事件
                 active[type] = function () {
                     //动态获取表单数据
@@ -268,7 +250,7 @@ $(function () {
                                 resValue[res.data[x]] = $("select[name='"+res.data[x]+"']").val();
                             }
                         }
-                        console.log(resValue);
+                        //console.log(resValue);
                     }
 
                     //添加额外数据
@@ -278,7 +260,25 @@ $(function () {
                                 resValue[name] = res.where[name];
                             }
                         }
-                        console.log(resValue);
+                        //console.log(resValue);
+                    }
+                    if(res.dat){
+                        var dat = "",datArray="",bar = "~";
+                        if(Type(res.dat) === "array"){
+                            console.log(this);
+                            dat = $(res.dat[0]).val();
+                            if(res.dat[3]){
+                                bar = dat[3]
+                            }
+                            datArray = dat.split(bar);
+                            resValue[res.dat[1]] = datArray[0].trim();
+                            resValue[res.dat[2]] = datArray[1].trim();
+                        }else if(Type(res.dat) === "json"){
+                            dat = $(res.dat.elem).val();
+                            datArray = dat.split(res.dat.bar || "~");
+                            resValue[res.dat.bTime] = datArray[0].trim();
+                            resValue[res.dat.eTime] = datArray[1].trim();
+                        }
                     }
                     console.log(resValue);
                     //执行重载
@@ -288,6 +288,10 @@ $(function () {
                             url: res.url
                             , where: resValue
                         });
+                    //重新渲染日期选择器
+                    if($.cookie("dddd")){
+                        laydate.render(JSON.parse($.cookie("dddd")));
+                    }
                     //重新绑定事件
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
@@ -299,8 +303,50 @@ $(function () {
                 $(".layui-table-tool .layui-btn").on('click', function () {
                     var type = $(this).data('type');
                     active[type] ? active[type].call(this) : '';
+                    return false;
                 });
             }
+
+            //日期选择器渲染
+            //支持 默认渲染 单选择器渲染 多选择器渲染
+            if (date && date !== false) {
+                //当 data = true 时使用默认的参数渲染数据
+                if (date === true) {
+                    a(nor_date);
+                    //当 data 数据类型为 JSON 时则渲染一个日期选择器(优先自定义属性)
+                } else if (Type(date) === "json") {
+                    a(date);
+                    //当 data 数据类型为 ARRAY 时则渲染多个日期选择器(优先自定义属性)
+                } else if (Type(date) === "array") {
+                    for (var v = 0; v < date.length; v++) {
+                        if (Type(date[v]) === "json") {
+                            a(date[j]);
+                        }
+                    }
+                }
+            }
+        }
+
+        //日期选择器的渲染函数
+        function a(date) {
+            //匹配默认数据，未填写的参数将使用已有的参数填充
+            compereData(date, nor_date);
+            //判断日期选择器是否为范围选择器
+            if (date.range) {
+                //默认连接符
+                var bars = "~";
+                if (Type(date.range) === "string") {
+                    bars = date.range
+                }
+                if(date.range === true){
+                    date.range = bars;
+                }
+                //默认日期渲染
+                date.value = today + " " + bars + " " + today;
+            }
+            //日期选择器渲染
+            laydate.render(date);
+            $.cookie("dddd",JSON.stringify(date));
         }
     });
 });

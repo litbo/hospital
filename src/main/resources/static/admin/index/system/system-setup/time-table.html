@@ -45,7 +45,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">上午上班时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" value="4" class="layui-input">
+                        <input type="text" name="" autocomplete="off" class="layui-input" id="time" value="14:00:00">
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">上午下班时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="" value="14:00:00" class="layui-input">
+                        <input type="text" name="" autocomplete="" class="layui-input" id="time1" value="14:00:00">
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">下午上班时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" value="14:00:00" class="layui-input">
+                        <input type="text" name="" autocomplete="off" class="layui-input" id="time2" value="14:00:00">
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">下午下班时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="" value="18:00:00" class="layui-input">
+                        <input type="text" name="" autocomplete="" class="layui-input" id="time3" value="14:00:00">
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
             submit:{
                 filter:"submit",//可以不写
                 form:{
-                    url:"http://localhost/sys/setDxm",
+                    url:"/sys/setDxm",
                     type:"POST",
                     data:["btl","ckh"]
                 },//表单提交函数
@@ -117,7 +117,28 @@
                 }
             }
         }
-    }
+    };
+    layui.use('laydate',function(){
+        laydate = layui.laydate;
+        laydate.render({
+            elem:'#time',
+            type:'time'
+            // value:now,
+            // format:"h-m-s"
+        });
+        laydate.render({
+            elem:'#time1',
+            type:'time'
+        });
+        laydate.render({
+            elem:'#time2',
+            type:'time'
+        });
+        laydate.render({
+            elem:'#time3',
+            type:'time'
+        });
+    })
 </script>
 </body>
 </html>

@@ -26,6 +26,8 @@ public class BmController {
         return "ztreeBmDemo";
     }
 
+
+    //列出所有部门信息
     @GetMapping("/listBms")
     @ResponseBody
     public Result getBmList(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -33,14 +35,21 @@ public class BmController {
         PageInfo date = bmService.getBmList(pageNum,pageSize);
         return Result.success(date);
     }
-
+    //查询部门信息通过老id
     @GetMapping("/getBmByOid")
     @ResponseBody
     public Result getBmByOid(@RequestParam String oid){
         SBm date = bmService.getBmByOid(oid);
         return Result.success(date);
     }
-
+    //列出所有维修部门信息
+    @GetMapping("/listWXbms")
+    @ResponseBody
+    public Result listWXbms(){
+        List<SBm> date = bmService.getWxBmList();
+        return Result.success(date);
+    }
+    //列出所有部门信息通过父id
     @GetMapping("/listBmsByPid")
     @ResponseBody
     public Result getBmListByPid(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -49,7 +58,7 @@ public class BmController {
         PageInfo date = bmService.getBmListByPid(pageNum,pageSize,pid);
         return Result.success(date);
     }
-
+    //级联查询
     @GetMapping("/listBmsByX")
     @ResponseBody
     public Result getBmListByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -60,14 +69,14 @@ public class BmController {
     }
 
 
-
+    //保存部门信息
     @PostMapping("/saveBm")
     @ResponseBody
     public Result saveBm(@RequestBody SBm bm){
         bmService.saveBm(bm);
         return Result.success();
     }
-
+    //删除部门通过老id
     @GetMapping("/removeBmByOid")
     @ResponseBody
     public Result removeBmByOid(@RequestParam String oid){
@@ -78,7 +87,7 @@ public class BmController {
         return Result.success();
     }
 
-
+    //设置部门归属 调整部门
     @PostMapping("/setBmBeto")
     @ResponseBody
     public Result setBmBeto(@RequestBody SetBmVO bmVO){
@@ -99,13 +108,14 @@ public class BmController {
         return Result.success();
     }
 
+    //设置维修部门
     @PostMapping("/hfWxbm")
     @ResponseBody
     public Result hfWxbm(@RequestBody List<String> obmids){
         bmService.setWxbm(obmids,1);  // 1 为维修部门
         return Result.success();
     }
-
+    //去除维修部门
     @PostMapping("/qchfWxbm")
     @ResponseBody
     public Result qchfWxbm(@RequestBody List<String> obmids){
@@ -114,7 +124,6 @@ public class BmController {
     }
 
     //  获取叶子部门
-
     @GetMapping("/listGLBm")
     @ResponseBody
     public Result listGLBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -124,5 +133,21 @@ public class BmController {
         return Result.success(yzBmList);
     }
 
+    @GetMapping("/listFWXBm")
+    @ResponseBody
+    public Result listFWXBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
 
+        PageInfo fwxBms = bmService.getFwxBms(pageNum, pageSize);
+        return Result.success(fwxBms);
+    }
+
+    @GetMapping("/listFWXBmByBmName")
+    @ResponseBody
+    public Result listFWXBmByBmName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,@RequestParam String bmName){
+
+        PageInfo fwxBms = bmService.listFWXBmByBmName(pageNum, pageSize,bmName);
+        return Result.success(fwxBms);
+    }
 }

@@ -30,16 +30,16 @@
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <select>
-                <option>所有部门</option>
-                <option>aaa</option>
-                <option>bbb</option>
+            <select name="bmId">
+                <option >所有部门</option>
+                <option value="0200000000">管理部门</option>
+                <option value="0202010000">计算机维修</option>
             </select>
         </div>
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" autocomplete="off" placeholder="员工编号">
+            <input type="text" name="userId" class="layui-input" autocomplete="off" placeholder="员工编号">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 <script type="text/html" id="bar">
@@ -49,92 +49,52 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'department', title: '部门',width:"15%", minWidth: 200}
-                , {field: 'number' , title:'编号',minWidth:150,sort:true}
-                , {field: 'name' , title:'姓名',minWidth:150}
-                , {field: 'sex' , title:'性别',minWidth:150}
-                , {field: 'xueLi' , title:'学历',minWidth:150}
-                , {field: 'post' , title:'岗位',minWidth:150}
-                , {field: 'job' , title:'职称',minWidth:150}
-                , {field: 'begin-time' , title:'参与工作时间',minWidth:150,sort:true}
-                , {field: 'promotion-time' , title:'晋升时间',minWidth:150,sort:true}
-                , {field: 'graduate' , title:'毕业院校',minWidth:150}
-                , {fixed: 'right' , title:'操作',align:'center',minWidth:80,toolbar:'#bar'}
 
-            ]]
-            , "data": [
-                {
-                    "department":'',
-                    "number":'',
-                    "name":'',
-                    "sex":'',
-                    "xueLi":'',
-                    "post":'',
-                    "job":'',
-                    "begin-tie":'',
-                    "promotion-time":'',
-                    "graduate":''
-                },{
-                    "department":'',
-                    "number":'',
-                    "name":'',
-                    "sex":'',
-                    "xueLi":'',
-                    "post":'',
-                    "job":'',
-                    "begin-tie":'',
-                    "promotion-time":'',
-                    "graduate":''
-                },{
-                    "department":'',
-                    "number":'',
-                    "name":'',
-                    "sex":'',
-                    "xueLi":'',
-                    "post":'',
-                    "job":'',
-                    "begin-tie":'',
-                    "promotion-time":'',
-                    "graduate":''
-                },{
-                    "department":'',
-                    "number":'',
-                    "name":'',
-                    "sex":'',
-                    "xueLi":'',
-                    "post":'',
-                    "job":'',
-                    "begin-tie":'',
-                    "promotion-time":'',
-                    "graduate":''
-                },{
-                    "department":'',
-                    "number":'',
-                    "name":'',
-                    "sex":'',
-                    "xueLi":'',
-                    "post":'',
-                    "job":'',
-                    "begin-tie":'',
-                    "promotion-time":'',
-                    "graduate":''
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":({
-                        "tool":'toolbar',
-                        "event":'add',
-                        "title":'员工信息添加',
-                        "type":2,
-                        "content":'./child/employee-queryAdd.html'
-                    })
-                })
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'bmName', title: '部门',width:"15%", minWidth: 200}
+                    , {field: 'userId' , title:'编号',minWidth:150,sort:true}
+                    , {field: 'userXm' , title:'姓名',minWidth:150}
+                    , {field: 'sex' , title:'性别',minWidth:150}
+                    , {field: 'xllb' , title:'学历',minWidth:150}
+                    , {field: 'zwlb' , title:'岗位',minWidth:150}
+                    , {field: 'byyx' , title:'毕业院校',minWidth:150}
+                    , {fixed: 'right' , title:'操作',align:'center',minWidth:80,toolbar:'#bar'}
+                ]]
+                , url: "/kwgl/empgl/listSelectEmps"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"/kwgl/empgl/listSelectEmpBybmIdAndUserId",
+                type:"search",
+                data:["bmId","userId"],
+                where: {
+
+                }
+
             }
+
         }
     }
 </script>

@@ -108,6 +108,12 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
+    public List<SBm> getWxBmList() {
+        List<SBm> date = bmDao.getWxBmList();
+        return date;
+    }
+
+    @Override
     public void saveBm(SBm bm) {
         bmDao.saveBm(bm);
     }
@@ -250,5 +256,18 @@ public class BmServiceImpl implements BmService {
     public List<SBm> getFwxBms() {
 
         return bmDao.getFwxBms();
+    }
+
+    @Override
+    public PageInfo getFwxBms(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(bmDao.getFwxBms());
+    }
+
+
+    @Override
+    public PageInfo listFWXBmByBmName(int pageNum, int pageSize, String bmName) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(bmDao.listFWXBmByBmName(bmName));
     }
 }

@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -35,10 +36,7 @@ public class MachineAccountVO {
      * 设备型号
      */
     private String eqXh;
-    /**
-     * 部门id
-     */
-    private String eqBmid;
+
     /**
      * 所在科室
      */
@@ -50,6 +48,7 @@ public class MachineAccountVO {
     /**
      * 设备启用时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date eqQysj;
     /**
      * 设备使用年限

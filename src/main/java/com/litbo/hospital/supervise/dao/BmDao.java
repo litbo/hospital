@@ -23,13 +23,18 @@ public interface BmDao {
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
             " where wx_flag=0 and xbm_flag=0 ")
     List<SBm> getFwxBms();
-
+    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
+            " where wx_flag=0 and xbm_flag=0 and bm_name like '%'+#{bmName}+'%' ")
+    List<SBm> listFWXBmByBmName(String bmName);
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
             " where xbm_flag=0")
     List<SBm> getYZBmList();
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
             " where xbm_flag=0 and bm_id like '02%' ")
     List<SBm> getGLBmList();
+    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
+            " where xbm_flag=0 and wx_flag=1")
+    List<SBm> getWxBmList();
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where p_bm_id=#{pid}")
     List<SBm> getBmListByPid(String pid);
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where obm_id=#{id}")
