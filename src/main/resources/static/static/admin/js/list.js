@@ -1451,7 +1451,7 @@ var main_list =
                                         },
                                         {
                                             "title": "申购入库",
-                                            "url": "./table.html",
+                                            "url": "./safe/service-management/purchase-input.html",
                                             "id": "43912",
                                             "shiro": "a"
                                         }
@@ -1492,7 +1492,7 @@ var main_list =
                                         },
                                         {
                                             "title": "库存查询",
-                                            "url": "./table.html",
+                                            "url": "./safe/service-management/stock-check.html",
                                             "id": "43918",
                                             "shiro": "a"
                                         },
@@ -3707,7 +3707,7 @@ var main_list =
                                         },
                                         {
                                             "title": "设备卫标分类设置",
-                                            "url": "./table.html",
+                                            "url": "./system/system-setup/repair-classify.html",
                                             "id": "718",
                                             "shiro": "a"
                                         },
