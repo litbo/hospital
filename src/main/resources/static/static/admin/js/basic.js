@@ -567,7 +567,9 @@ func = {
                 //console.log(tableOn);
                 table.on(tableOn, function (obj) {
                     //console.log(vas);
-                    var checkStatus = table.checkStatus(obj.config.id);//获取选中数据
+                    if(tool === "toolbar"){
+                        var checkStatus = table.checkStatus(obj.config.id);//获取选中数据
+                    }
                     var data = obj.data;//获得当前行数据
                     //console.log("===tool/toolbar===");
                     //console.log(obj);
@@ -603,14 +605,6 @@ func = {
 
                     layer.close(index);
                 })
-                /*for(var i=0;i<allData.length;i++){
-                    if(data[value.match] === allData[i][value.match]){
-                        allData[i][field] = val;
-                    }
-                }
-                console.log(allData);
-                upData[value.match] = val;
-                obj.update(upData)*/
             });
         })
     },

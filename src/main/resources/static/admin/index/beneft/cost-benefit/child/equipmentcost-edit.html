@@ -68,6 +68,7 @@
                     , {field: 'kmSj', title: '预设时间',minWidth: 150,templet: '#timeFormat'}
                     , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar",width:200}
                 ]]
+                , defaultToolbar:[]
                 , height: "full-25"
                 ,url:"/benefical/cbxySz/selectCbkmByEqId"
                 ,method:"POST"
@@ -82,7 +83,7 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count":res.count,//页数据数
+                        "count":res.data.total,//页数据数
                         "data": res.data.list //解析数据列表
                     }
                 }
