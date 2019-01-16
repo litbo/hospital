@@ -63,7 +63,6 @@
                     , {field: 'eqXh', title: '设备型号', width: "25%", minWidth: 150}
                     , {fixed: 'right', minWidth: 80, align: 'center', toolbar: "#bar"}
                 ]]
-                , height: "full-25"
                 , url: "/benefical/cbxySz/listCbxySz"
                 , method: "POST"
                 , request: {
@@ -79,14 +78,13 @@
                     }
                 }
                 , done: function (obj) {
-                    //console.log(obj);
                     tableFunc(
                         {
                             "obj": obj,
                             "toolFunc": [
                                 {
                                     type: 2,
-                                    title: "编辑",
+                                    title: "数据选择",
                                     event: "edit",
                                     content: "./child/equipmentcost-edit.html",
                                     dataUrl: ["eqId"]

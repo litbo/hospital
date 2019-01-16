@@ -47,13 +47,11 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="kmSj" id="date" lay-verify="date" disabled autocomplete="off"
-                           class="layui-input">
+                    <input type="text" name="kmSj" id="date" lay-verify="date" disabled autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
     </div>
-
     <div class="layui-row">
         <div class="col-xs-12 padRight">
             <div class="layui-form-item layui-form-text">
@@ -64,12 +62,9 @@
             </div>
         </div>
     </div>
-    </div>
     <div class="layui-row">
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-filter="save">保存</button>
-            </div>
+        <div class="col-xs-12">
+            <button class="layui-btn layui-btn-fluid layui-btn-warm" id="closeThis">关闭</button>
         </div>
     </div>
 </form>
@@ -84,22 +79,6 @@
                     url: "/benefical/gxcb/showSbCb",
                     type: "POST",
                     data: {aId: $.getUrlParam("id")}
-                }
-            },
-            submit: {
-                filter: "save",
-                form: {
-                    url: "/benefical/gxcb/showSbCb",
-                    type: "post",
-                    data: window.varGlobal3e,
-                    success: function (res) {
-                        if (res.code === 0) {
-                            layer.msg("保存成功了！");
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                            window.varGlobal3e = undefined;//销毁全局变量释放内存
-                        }
-                    }
                 }
             }
         },
@@ -122,29 +101,48 @@
                     aId: $.getUrlParam("id")
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
-                    allData = res.data.data;
-                    console.log(allData);
-                    //window.varGlobal3e = res.data.data;//创建全局变量，便于存取值
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count": res.count,//页数据数
+                        "count": res.data.total,//页数据数
                         "data": res.data.data//解析数据列表
                     }
                 }
                 , done: function (obj) {
-                    console.log(obj.data);
                     tableFunc({
                         "obj": obj,
                         "tableEdit": {
                             filter: "table1",
-                            date:obj.data
+                            tip: "金额",
+                            func: function (val) {
+                                subUp({
+                                    url: "/benefical/gxcb/updateSbCb",
+                                    data: {aId: $.getUrlParam("id"), kmValue: val},
+                                    method: "POST",
+                                    success: function (res) {
+                                        if (res.code === 0) {
+                                            layer.msg("保存成功！")
+                                        } else {
+                                            layer.msg("保存失败！")
+                                        }
+                                    }
+                                })
+                            }
                         }
                     })
                 }
 
             }
-        }
+        },
+        btn:[
+            {
+                elem:"#closeThis",
+                func:function(){
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                }
+            }
+        ]
     }
 </script>
 </body>

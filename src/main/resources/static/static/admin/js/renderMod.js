@@ -313,11 +313,11 @@ $(function () {
 
                 //首次页面渲染后按钮事件绑定
                 $(".layui-table-tool .layui-btn").on('click', function () {
-                    console.log("===TOOLBAR===");
+                    //console.log("===TOOLBAR===");
                     var type = $(this).data('type');
-                    console.log(type);
+                    //console.log(type);
                     active[type] ? active[type].call(this) : '';
-                    console.log(active[type] ? false:"");
+                    //console.log(active[type] ? false:"");
                     return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
                 });
             }
@@ -376,8 +376,8 @@ $(function () {
             }
 
             function btn(dat){
-                console.log("===BTN===");
-                console.log(dat);
+                //console.log("===BTN===");
+                //console.log(dat);
                 var datType = dat.type || "click"
                     ,datBan = Boolean(dat.ban)
                     ,datFunc = dat.func || function(){

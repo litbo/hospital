@@ -360,7 +360,8 @@ function layOpen(data,def_data){
             area:[w + "px", h + "px"],
             resize:false,
             maxmin:true,
-            move:false
+            move:false,
+            scrollbar:false
         }
     ;
     compereData(data,def_data || def_open);
@@ -568,6 +569,7 @@ func = {
                 table.on(tableOn, function (obj) {
                     //console.log(vas);
                     if(tool === "toolbar"){
+                        console.log(obj);
                         var checkStatus = table.checkStatus(obj.config.id);//获取选中数据
                     }
                     var data = obj.data;//获得当前行数据
@@ -596,13 +598,9 @@ func = {
                 var val = obj.value //得到修改后的值
                     ,data = obj.data //得到所在行所有数据
                     ,field = obj.field //得到字段对应的name
-                    ,upData = {};//更新值存储
-                layer.confirm("确定将"+field+"的值修改为："+val+"吗？",function(index){
-                    if(value.sub){
-                        //subUp()//提交数
-                        // 据
-                    }
-
+                    ,tips = value.tip || field;
+                layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
+                    value.func && value.func(val,obj);
                     layer.close(index);
                 })
             });
@@ -613,9 +611,41 @@ func = {
             data[inName[i]] = $("input[name='"+inName[i]+"']").val();
         }
         console.log(data);
-        console.log(arguments);
         layer.close(index);
         //return false;
+    },
+    //向表格中添加数据
+    "reTable":function(name,res){
+        layui.use('table',function(){
+            var table = layui.table;
+            var oData =  table.cache[name];//获取表格所有数据
+            oData.push(res);
+            //重新渲染表格
+            table.reload(name,{
+                data : oData
+            });
+        });
+    },
+    //表格外获取选中数据并删除选中数据
+    "checkTable":function(name){
+        layui.use('table', function() {
+            var table = layui.table;
+
+            var oData =  table.cache[name];//获取表格所有数据
+            layui.each(oData,function(index,data){
+                //index -> 数据序号 data -> 遍历的所有数据
+                //当钱数据被选中时则删除当前数据，否则清除LAYUI痕迹，重新渲染
+                if(data.LAY_CHECKED === true){
+                    oData.splice(index, 1);
+                }else{
+                    delete data["LAY_CHECKED"];
+                    delete data["LAY_TABLE_INDEX"];
+                }
+            });
+            table.reload(name,{
+                data : oData
+            });
+        });
     }
 };
 //表格函数调用函数函数
