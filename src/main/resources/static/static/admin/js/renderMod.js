@@ -8,11 +8,12 @@
 * */
 
 $(function () {
-    layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer"], function () {
+    layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer","util"], function () {
         var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
-            upload = layui.upload, $ = layui.jquery, layer = layui.layer,
+            upload = layui.upload, $ = layui.jquery, layer = layui.layer,util = layui.util,
             formAction = renderMod['form'] || renderMod['formAction']//表单数据
             ,addTable = renderMod['table'] || renderMod['addTable']//表格数据
+            ,bindButton = renderMod['btn'] || renderMod['bindButton']//按钮数据
         ;
         //表单渲染
         if (formAction && Type(formAction) === "json") {
@@ -50,12 +51,22 @@ $(function () {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
                 if (val.filter && (val.get || (val.options && Type(val.options) === "json"))) {
                     if (val.get) {
-                        val.get.success = function (data) {
-                            for (var name in data) {
-                                if (data.hasOwnProperty(name)) {
-                                    form.val(val.filter, data[name]);
+                        val.get.success = function (res) {
+                            var dat = res.data.data,value = {};
+                            if(res.data){
+                                for (var name in dat[0]) {
+                                    if (dat[0].hasOwnProperty(name)) {
+                                        if(val.dateName && name === val.dateName){
+                                            //格式化日期时间
+                                            value[name] = layui.util.toDateString(new Date(dat[0][name]).getTime(),"yyyy年MM月dd日");
+                                        }else{
+                                            value[name] = dat[0][name];
+                                        }
+                                    }
                                 }
+                                form.val(val.filter, value);
                             }
+
                         };
                         subUp(val.get)
                     } else {
@@ -227,7 +238,7 @@ $(function () {
                     for (var x = 0; x < tbs.length; x++) {
                         if (Type(tbs[x]) === "json") {
                             compereData(tbs[x], args_table);
-                            table.render(tbs[x]);
+                            allData = table.render(tbs[x]);
                         }
                     }
                 }
@@ -280,7 +291,7 @@ $(function () {
                             resValue[res.dat.eTime] = datArray[1].trim();
                         }
                     }
-                    console.log(resValue);
+                    //console.log(resValue);
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,
@@ -296,14 +307,18 @@ $(function () {
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
                         active[type] ? active[type].call(this) : '';
+                        return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
                     });
                 };
 
                 //首次页面渲染后按钮事件绑定
                 $(".layui-table-tool .layui-btn").on('click', function () {
+                    console.log("===TOOLBAR===");
                     var type = $(this).data('type');
+                    console.log(type);
                     active[type] ? active[type].call(this) : '';
-                    return false;
+                    console.log(active[type] ? false:"");
+                    return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
                 });
             }
 
@@ -325,6 +340,7 @@ $(function () {
                     }
                 }
             }
+
         }
 
         //日期选择器的渲染函数
@@ -347,6 +363,29 @@ $(function () {
             //日期选择器渲染
             laydate.render(date);
             $.cookie("dddd",JSON.stringify(date));
+        }
+
+        //按钮绑定
+        if(bindButton){
+            if(Type(bindButton)==="json"){
+                btn(bindButton);
+            }else if(Type(bindButton)==="array"){
+                for(var b=0;b<bindButton.length;b++){
+                    btn(bindButton[b]);
+                }
+            }
+
+            function btn(dat){
+                console.log("===BTN===");
+                console.log(dat);
+                var datType = dat.type || "click"
+                    ,datBan = Boolean(dat.ban)
+                    ,datFunc = dat.func || function(){
+                    layer.alert("点击事件触发成功！！！");
+                };
+                $(dat.elem).on(datType,datFunc);//绑定函数
+            }
+
         }
     });
 });

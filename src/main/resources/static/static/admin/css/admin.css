@@ -2089,11 +2089,16 @@ html {
 .layui-layer-page .hidden-xs {
   display: block!important;
 }
-a.layui-btn-fluid {
-  margin-top: 35px;
+/*a.layui-btn-fluid{
+  margin-top:35px;
 }
+手机版查找数据按钮样式定位
+*/
 .layui-input-block img {
   max-height: 200px;
+}
+.layui-form-pane .layui-form-item[pane] .layui-form-label {
+  line-height: 2.3;
 }
 @media (max-width: 768px) {
   .main-layout-side {
@@ -2173,9 +2178,9 @@ a.layui-btn-fluid {
   .layui-table-tool-temp {
     padding-right: 0!important;
   }
-  .addBtn {
-    margin-bottom: -25px;
-  }
+  /*.addBtn{
+    margin-bottom:-25px;
+  }*/
   #hideXs .layui-inline,
   #hideXs button {
     width: 95%;
