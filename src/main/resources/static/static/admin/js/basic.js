@@ -379,8 +379,8 @@ function layOpen(data,def_data){
 /**
  * @todo 数据提交
  * @tips 包含3种提交形式（原生HTML提交 JS-AJAX XHR提交 JQ-AJAX提交）
- * @arguments value -> 需要提交的必要参数
- *            data -> layui返回的函数参数
+ * @param value -> 需要提交的必要参数
+ * @param data -> layui返回的函数参数
  * @return value参数不正确 -> false{boolean}
  */
 function subUp(value, data) {
@@ -569,8 +569,7 @@ func = {
                 table.on(tableOn, function (obj) {
                     //console.log(vas);
                     if(tool === "toolbar"){
-                        console.log(obj);
-                        var checkStatus = table.checkStatus(obj.config.id);//获取选中数据
+                        var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
                     }
                     var data = obj.data;//获得当前行数据
                     //console.log("===tool/toolbar===");
@@ -582,8 +581,10 @@ func = {
                             vas.content += vas.dataUrl[i] + "=" + data[vas.dataUrl[i]] + "&";
                         }
                     }
+                    //判断是否自定义layer是否弹出
                     if(vas.layOpen !== undefined) openT = Boolean(vas.layOpen);
                     openT && layOpen(vas);
+                    //有函数则执行函数
                     vas.func && vas.func(obj,checkStatus);
                 });
             });

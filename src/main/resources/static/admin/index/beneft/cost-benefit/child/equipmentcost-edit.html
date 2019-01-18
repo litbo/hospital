@@ -44,7 +44,7 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" id="delete">删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="delete">删除</a>
 </script>
 <script id="timeFormat" type="text/html">
     //日期转换
@@ -97,6 +97,27 @@
                                 event: "edit",
                                 content:"./equipment-edit-edit.html",
                                 dataUrl:["id"]
+                            },
+                            {
+                                event: "delete",
+                                layOpen:false,
+                                func:function(obj){
+                                    layer.confirm('确定删除这一行吗？', function(index){
+                                        subUp({
+                                            url:"/benefical/gxcb/deleteSbCb",
+                                            data:{"aId":obj.data.aid},
+                                            success:function(res){
+                                                if(res.code === 0){
+                                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                                    putMsg({
+                                                        msg:"您已成功删除一条数据！"
+                                                    });
+                                                    layer.close(index);
+                                                }
+                                            }
+                                        })
+                                    });
+                                }
                             }
                         ]
                     })

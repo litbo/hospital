@@ -50,31 +50,38 @@
 </script>
 
 <script>
+    var $url_cols= "/benefical/select/listSelectCols",
+        $url_data="/benefical/select/listSelect",
+        $key = $.getUrlParam("key");
     subUp({
-        url: "/benefical/select/listSelectCols",
+        url: $url_cols,
         type: "POST",
-        data: {key: "bm"},
+        data: {key: $key},
         success: function (res) {
-            console.log("===SUBUP===");
-            console.log(res);
+            if(res.code !== 0){
+                putMsg({
+                        alert:"数据获取失败，请重试！"
+                    });
+                return false;
+            }
+            //console.log("===SUBUP===");
+            //console.log(res);
             var colsData = [];
             colsData.push(res.data.list);
+            console.log(colsData);
             renderMod = {
                 table: {
                     table: {
-                        cols: [[
-                            {type: "radio"}
-                            , {field: 'bmName', title: '科室名称'}
-                        ]]
+                        cols: colsData
                         , defaultToolbar: []
-                        , url: "/benefical/select/listSelect"
+                        , url: $url_data
                         , method: "POST"
                         , request: {
                             pageName: 'pageNum',
                             limitName: 'pageSize'
                         }
                         , where: {
-                            key: "bm"
+                            key: $key
                         }
                         , parseData: function (res) { //res 即为原始返回的数据
                             return {
@@ -93,8 +100,9 @@
                                         event: "setThisData",
                                         layOpen: false,
                                         func: function (obj, cs) {
-                                            layui.sessionData('dtdt', {
-                                                key: "tempData",
+                                            var name = $.getUrlParam("vg") || "dtdt",key = $.getUrlParam("v") || $.getUrlParam("key") || "tempData";
+                                            layui.sessionData(name, {
+                                                key: key,
                                                 value: cs.data
                                             });
                                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

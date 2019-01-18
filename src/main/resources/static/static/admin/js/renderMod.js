@@ -379,11 +379,16 @@ $(function () {
                 //console.log("===BTN===");
                 //console.log(dat);
                 var datType = dat.type || "click"
-                    ,datBan = Boolean(dat.ban)
+                    ,datBan = Boolean(dat.ban) || false
                     ,datFunc = dat.func || function(){
                     layer.alert("点击事件触发成功！！！");
                 };
-                $(dat.elem).on(datType,datFunc);//绑定函数
+                $(dat.elem).on(datType,function(){
+                        datFunc();
+                        if(datBan === false){
+                            return false;
+                        }
+                });//绑定函数
             }
 
         }
