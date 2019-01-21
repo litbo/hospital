@@ -101,54 +101,50 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">再评价</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">关联新设备</a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
-<script>
-addTable ={
-    table:{
-        cols: [[ //表头
-             {field: 'authorized_person', title: '分类代码', minWidth: 200, sort: true}
-            , {field: 'authorized_depart', title: '分类名称', minWidth: 200}
-            , {field: 'authorized_depart', title: '设备编号', minWidth: 200}
-            , {field: 'authorized_depart', title: '设备名称', minWidth: 200}
-            , {field: 'authorized_depart', title: '型号规格',width:"20%", minWidth: 200}
-            , {field: 'authorized_depart', title: '启用日期', minWidth: 200}
-            , {field: 'authorized_depart', title: '状态', minWidth: 80}
-            , {field: 'authorized_depart', title: '质检状态', minWidth: 100}
-        ]]
-        , height: "full-70"
-        , "data": [
-            {
-                "authorized_person":"核磁共振室",
-                "authorized_depart":"160232810001",
-                "open_time":"MRI",
-                "close_time":"设备1",
-                "authorizer":"88888888",
-                "time":"2018-12-1 00:00:00"
-            },{
-                "authorized_person":"核磁共振室",
-                "authorized_depart":"160232810001",
-                "open_time":"MRI",
-                "close_time":"设备1",
-                "authorizer":"88888888",
-                "time":"2018-12-1 00:00:00"
-            }]
-        , done: function (obj) {
-            tableFunc({
-                "obj":obj,
-                "toolFunc":{
-                    tool:"toolbar",
-                    title:"数据查找",
-                    event:"dataSearch",
-                    content:$("#hideXs")
-                }
-            })
-        }
-    },
-    form:{
 
+<script>
+    renderMod = {
+        addTable :{
+            table:{
+                cols: [[ //表头
+                    {field: 'authorized_person', title: '分类代码', minWidth: 200, sort: true}
+                    , {field: 'authorized_depart', title: '分类名称', minWidth: 200}
+                    , {field: 'authorized_depart', title: '设备编号', minWidth: 200}
+                    , {field: 'authorized_depart', title: '设备名称', minWidth: 200}
+                    , {field: 'authorized_depart', title: '型号规格',width:"20%", minWidth: 200}
+                    , {field: 'authorized_depart', title: '启用日期', minWidth: 200}
+                    , {field: 'authorized_depart', title: '状态', minWidth: 80}
+                    , {field: 'authorized_depart', title: '质检状态', minWidth: 100}
+                ]]
+                , height: "full-70"
+                , "data": [
+                    {
+                        "authorized_person":"核磁共振室",
+                        "authorized_depart":"160232810001",
+                        "open_time":"MRI",
+                        "close_time":"设备1",
+                        "authorizer":"88888888",
+                        "time":"2018-12-1 00:00:00"
+                    },{
+                        "authorized_person":"核磁共振室",
+                        "authorized_depart":"160232810001",
+                        "open_time":"MRI",
+                        "close_time":"设备1",
+                        "authorizer":"88888888",
+                        "time":"2018-12-1 00:00:00"
+                    }]
+                , done: function (obj) {
+                    tableFunc({
+                        "obj":obj,
+                        "tableBtn":{
+                            title:"数据查找",
+                            content:$("#hideXs")
+                        }
+                    })
+                }
+            }
+        }
     }
-}
 </script>
 </body>
 

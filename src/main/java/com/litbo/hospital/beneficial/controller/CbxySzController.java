@@ -81,14 +81,14 @@ public class CbxySzController {
         }
     }
     //查询设备收入列表
-    @RequestMapping(value = "/listSrSz")
+    @RequestMapping(value = "/listSrxySz")
     public Result listSrSz(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         return Result.success(cbxySzService.listSrSz(pageNum,pageSize));
     }
 
     //查询设备收入列表根据条件查询
-    @RequestMapping(value = "/listSrSzByX")
+    @RequestMapping(value = "/listSrxySzByX")
     public Result listSrSzByX(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                 CbMhVo cbMhVo) {
@@ -97,7 +97,7 @@ public class CbxySzController {
     }
 
     //导出 excell查询设备收入效益列表
-    @RequestMapping(value = "/listSrSzByXExport", method = RequestMethod.GET)
+    @RequestMapping(value = "/listSrxySzByXExport", method = RequestMethod.GET)
     public void listSrSzByXExport(CbMhVo cbMhVo, HttpServletResponse response,
                                     @RequestParam(value = "fileName", required = true) String fileName) {
 

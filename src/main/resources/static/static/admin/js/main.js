@@ -1,4 +1,4 @@
-layui.use(['layer', 'form', 'element', 'jquery', 'dialog'], function () {
+layui.use(['layer', 'form', 'element', 'jquery'], function () {
     var element = layui.element
         , $ = layui.jquery
         , hideBtn = $('#hideBtn')

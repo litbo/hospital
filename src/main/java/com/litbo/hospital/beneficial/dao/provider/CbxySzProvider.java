@@ -35,7 +35,7 @@ public class CbxySzProvider {
                 "Max(dbo.eq_info.eq_id) AS eqId "+
 
                 "FROM "+
-                "dbo.b_sbcw , "+
+                "dbo.b_sbcw, "+
                 "dbo.eq_info "+
                 "WHERE "+
                 "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id and "+
@@ -110,11 +110,11 @@ public class CbxySzProvider {
         StringBuffer sql = new StringBuffer("SELECT "+
                 "Max(dbo.b_sbcw.bm_name) AS bmName, "+
                 "Max(dbo.b_sbcw.eq_name) AS eqName, "+
-                "Max(dbo.eq_info.eq_xh) AS eqXh， "+
+                "Max(dbo.eq_info.eq_xh) AS eqXh, "+
                 "Max(dbo.eq_info.eq_id) AS eqId "+
 
                 "FROM "+
-                "dbo.b_sbcw , "+
+                "dbo.b_sbcw, "+
                 "dbo.eq_info "+
                 "WHERE "+
                 "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id and "+
