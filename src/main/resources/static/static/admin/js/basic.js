@@ -271,7 +271,7 @@ function Type(value) {
 }
 
 /**
- * @todo 错误提示与输出
+ * @todo 信息提示与输出
  * @tips
  * @arguments errMsg -> 提示与输出信息
  * @return
@@ -287,7 +287,9 @@ function putMsg(errMsg){
         errMsg.log && console.log(errMsg.log);
         errMsg.error && console.error(errMsg.error);
         //Window方法
-        errMsg.wAlert && layer.wAlert(errMsg.wAlert);
+        errMsg.wAlert && alert(errMsg.wAlert);
+        //自定义扩展函数
+        errMsg.func && errMsg.func(layer);
     })
 }
 
@@ -298,7 +300,7 @@ function putMsg(errMsg){
  *            y -> 基础数据(用于比较的数据)
  * @return {Object} -> x*
  */
-function compereData(x, y) {
+function compareData(x, y) {
     for (var name in y) {
         if(y.hasOwnProperty(name)){
             if (x[name] === undefined) {
@@ -364,10 +366,7 @@ function layOpen(data,def_data){
             scrollbar:false
         }
     ;
-    compereData(data,def_data || def_open);
-    if(data.site === "top"){
-
-    }
+    compareData(data,def_data || def_open);
     switch(data.site){
         case "top":return top.layer.open(data);
         case "parent":return parent.layer.open(data);
@@ -463,7 +462,7 @@ function subUp(value, data) {
             }
         };
         var backData = function (callback) {
-            compereData(value, ajaxOptions);
+            compareData(value, ajaxOptions);
             value.data = dataP || value.data;
             $.ajax(value);
         };

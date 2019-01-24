@@ -50,8 +50,8 @@
 </script>
 
 <script>
-    var $url_cols= "/benefical/select/listSelectCols",
-        $url_data="/benefical/select/listSelect",
+    var $url_cols= $.getUrlParam("cb") || "/benefical/select/listSelectCols",
+        $url_data= $.getUrlParam("db") || "/benefical/select/listSelect",
         $key = $.getUrlParam("key");
     subUp({
         url: $url_cols,
