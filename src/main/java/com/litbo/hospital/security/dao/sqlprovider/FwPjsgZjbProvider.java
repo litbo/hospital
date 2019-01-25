@@ -14,7 +14,7 @@ public class FwPjsgZjbProvider {
                 SELECT("\tb.id,\n" +
                         "\tg.id as pjsg_id,\n" +
                         "\td.pj_name,\n" +
-                        "\tg.pj_rk_time,\n" +
+                        "\tg.sg_sh_time as pj_rk_time,\n" +
                         "\tb.pjsg_count,\n" +
                         "\tb.pjsg_price,\n" +
                         "\ts1.user_xm as sgr_name,\n" +
@@ -29,10 +29,10 @@ public class FwPjsgZjbProvider {
                     WHERE("d.pj_name like '%'+#{pjName}+'%'");
                 }
                 if(start!=null&&end!=null&&start.before(end)){
-                    WHERE("g.pj_rk_time >= #{start}");
+                    WHERE("g.sg_sh_time >= #{start}");
                 }
                 if(end!=null&&start!=null&&end.after(start)){
-                    WHERE("g.pj_rk_time <= #{end}");
+                    WHERE("g.sg_sh_time <= #{end}");
                 }
 
             }

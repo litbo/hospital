@@ -45,7 +45,7 @@
                     </div>
                     <span>-</span>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjRkTimeEnd"  class="layui-input" placeholder="截止日期" autocomplete="off" id="date1">
+                        <input type="text" name="pjRkTimeEnd"  class="layui-input" placeholder="止" autocomplete="off" id="date1">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="reload" lay-filter="demo1">查找</button>
@@ -58,63 +58,13 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    // addTable ={
-    //     table:{
-    //         cols: [[ //表头
-    //              {field: 'id', title: '入库编号', minWidth: 200}
-    //             , {field: 'pjRkTime  ', title: '入库时间', minWidth: 150,sort:true}
-    //             , {field: 'pjName', title: '配件名称', minWidth: 200}
-    //             , {field: 'pjsgCount', title: '数量', minWidth: 100,sort:true}
-    //             , {field: 'pjsgPrice', title: '金额', minWidth: 150,sort:true}
-    //             , {field: 'sgrName', title: '申购人', minWidth: 150}
-    //             , {field: 'shrName', title: '审核人', minWidth: 150}
-    //         ]]
-    //         , height: "full-25"
-    //         , url:"/security/pjsg/listFwPjsgZjb"
-    //         , request:{
-    //             pageName : 'pageNum',
-    //             limitName : 'pageSize'
-    //         }
-    //         // ,where:{
-    //         // }
-    //         ,parseData: function(res) { //res 即为原始返回的数据
-    //             return {
-    //                 "code": res.code, //解析接口状态
-    //                 "msg": res.msg, //解析提示文本
-    //                 "count":res.data.size,//页面显示的数据条数
-    //                 "data": res.data.list //解析数据列表
-    //             }
-    //         }
-    //         , done: function (obj) {
-    //             // tableFunc({
-    //             //     "obj":obj,
-    //             //     "toolFunc":{
-    //             //         tool:"toolbar",
-    //             //         title:"数据查找",
-    //             //         event:"dataSearch",
-    //             //         content:$("#hideXs")
-    //             //     }
-    //             // })
-    //         }
-    //     },
-    //     date:{
-    //         elem:'#date'
-    //     },
-    //     reSet: {
-    //      url:"/security/pjsg/listFwPjsgZjb",
-    //         type: "reload",
-    //         data:["pjName","pjRkTimeStart","pjRkTimeEnd"],     //搜索框的name
-    //         where: {}
-    //
-    //     }
-    // };
 
     renderMod = {
         addTable: {
             table: {
                 cols: [[ //表头
                     {field: 'id', title: '入库编号', minWidth: 200}
-                    , {field: 'pjRkTime  ', title: '入库时间', minWidth: 150,sort:true}
+                    , {field: 'pjRkTime', title: '入库时间', minWidth: 150,sort:true}
                     , {field: 'pjName', title: '配件名称', minWidth: 200}
                     , {field: 'pjsgCount', title: '数量', minWidth: 100,sort:true}
                     , {field: 'pjsgPrice', title: '金额', minWidth: 150,sort:true}
@@ -145,7 +95,6 @@
                 type: "reload",
                 data:["pjName","pjRkTimeStart","pjRkTimeEnd"],     //搜索框的name
                 where: {}
-
             }
         }
     }

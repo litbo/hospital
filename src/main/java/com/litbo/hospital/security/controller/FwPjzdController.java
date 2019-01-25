@@ -1,4 +1,3 @@
-/*
 package com.litbo.hospital.security.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.poi.ExcelData;
@@ -11,10 +10,8 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-//import com.litbo.hospital.security.enums.EnumStatus;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,14 +21,11 @@ import java.util.List;
 public class FwPjzdController {
     @Autowired
     private FwPjzdService pjzdService;
-
-
-    */
 /**
      * 插入一个新的配件字典
      * @param pjzd
      * @return
-     *//*
+     */
 
     @ApiOperation(value = "插入配件字典")
     @ApiResponses(value = {@ApiResponse(code = 500,message = "服务器端异常",response = Result.class)})
@@ -50,7 +44,7 @@ public class FwPjzdController {
 
     }
 
-    */
+
 /**
      *
      * @param pjSzm 配件首字母
@@ -58,7 +52,7 @@ public class FwPjzdController {
      * @param pageSize
      * @param pjfl  配件分类
      * @return
-     *//*
+     */
 
     @ApiOperation(value = "查询所有配件字典")
     @RequestMapping(value = "/listFwPjzd",method = RequestMethod.GET)
@@ -75,13 +69,13 @@ public class FwPjzdController {
 
     }
 
-    */
+
 /**
      * 导出配件字典到excel
      * @param pjSzm
      * @param pjfl
      * @param response
-     *//*
+     */
 
     @ApiOperation(value = "导出配件字典到excel")
     @RequestMapping(value = "/listFwPjzdExport",method = RequestMethod.GET)
@@ -104,4 +98,4 @@ public class FwPjzdController {
 
 
 }
-*/
+

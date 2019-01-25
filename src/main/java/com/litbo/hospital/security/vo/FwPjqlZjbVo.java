@@ -4,23 +4,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
-public class FwPjsgZjbVo {
+public class FwPjqlZjbVo {
     private Integer id;
-
-    private Integer pjsgId;
-
+    private Integer pjqlId;
     private String pjName;
-
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date pjRkTime;
-
-    private String sgrName;
-
-    private String shrName;
-
-    private Integer pjsgCount;
-
-    private Double pjsgPrice;
+    private Date qrTime;
+    private String qrrName;
+    private String qlrName;
+    private Integer pjCount;
 
 }

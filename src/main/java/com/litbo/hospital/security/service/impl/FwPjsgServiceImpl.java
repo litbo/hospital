@@ -77,7 +77,6 @@ public class FwPjsgServiceImpl implements FwPjsgService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date start = null;
         Date end = null;
-
         try {
             if(pjRkTimeStart!=null)
              start = formatter.parse(pjRkTimeStart);
