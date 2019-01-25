@@ -61,7 +61,7 @@ $(function(){
                 //日期选择器的渲染函数
                 function a(date){
                     //匹配默认数据，未填写的参数将使用已有的参数填充
-                    compereData(date, nor_date);
+                    compareData(date, nor_date);
                     //判断日期选择器是否为范围选择器
                     if(date.range){
                         //默认连接符
@@ -82,7 +82,7 @@ $(function(){
             // 自定义值
             if(ver && ver !== false){
                 if(Type(ver) === "json"){
-                    compereData(ver, nor_ver);
+                    compareData(ver, nor_ver);
                     form.verify(ver);
                 }
             }

@@ -29,12 +29,12 @@ $(function () {
 
             //表格渲染
             if (Type(tbs) === "json") {
-                compereData(tbs, args_table);
+                compareData(tbs, args_table);
                 table.render(tbs);
             }else if(Type(tbs) === "array"){
                 for(var i=0;i<tbs.length;i++){
                     if(Type(tbs[i]) === "json"){
-                        compereData(tbs[i], args_table);
+                        compareData(tbs[i], args_table);
                         table.render(tbs[i]);
                     }
                 }
@@ -54,7 +54,7 @@ $(function () {
                     }
                 }
                 function a(das){
-                    compereData(das, args_date);
+                    compareData(das, args_date);
                     if(das.range){
                         var bars = "-";
                         if(Type(das.range) === "array"){

@@ -8,11 +8,12 @@
 * */
 
 $(function () {
-    layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer"], function () {
+    layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer","util"], function () {
         var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
-            upload = layui.upload, $ = layui.jquery, layer = layui.layer,
+            upload = layui.upload, $ = layui.jquery, layer = layui.layer,util = layui.util,
             formAction = renderMod['form'] || renderMod['formAction']//表单数据
             ,addTable = renderMod['table'] || renderMod['addTable']//表格数据
+            ,bindButton = renderMod['btn'] || renderMod['bindButton']//按钮数据
         ;
         //表单渲染
         if (formAction && Type(formAction) === "json") {
@@ -21,6 +22,7 @@ $(function () {
                 },//通用默认操作集合
                 nor_date = {
                     elem: "#date",
+                    format:"y-M-d",
                     value: today
                 },//默认的日期选择器
                 nor_up = {
@@ -50,20 +52,32 @@ $(function () {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
                 if (val.filter && (val.get || (val.options && Type(val.options) === "json"))) {
                     if (val.get) {
-                        val.get.success = function (data) {
-                            for (var name in data) {
-                                if (data.hasOwnProperty(name)) {
-                                    form.val(val.filter, data[name]);
+                        val.get.success = function (res) {
+                            var dat = res.data.data,value = {};
+                            if(res.code ===0 && res.data){
+                                for (var name in dat[0]) {
+                                    if (dat[0].hasOwnProperty(name)) {
+                                        if(val.dateName && name === val.dateName){
+                                            //格式化日期时间
+                                            value[name] = layui.util.toDateString(new Date(dat[0][name]).getTime(),"yyyy年MM月dd日");
+                                        }else{
+                                            value[name] = dat[0][name];
+                                        }
+                                    }
                                 }
+                                form.val(val.filter, value);
                             }
+
                         };
                         subUp(val.get)
                     } else {
                         form.val(val.filter, val.options);
                     }
                 } else {
-                    console.error("renderMod.js遇到一个无法处理的错误：");
-                    console.error("formAction.val参数传递错误(LINE:50),请参考相关文档！");
+                    putMsg({
+                        error:"renderMod.js遇到一个无法处理的错误：",
+                        log:"formAction.val参数传递错误(LINE:51),请参考表单渲染文档！"
+                    });
                 }
             }
 
@@ -91,7 +105,7 @@ $(function () {
             // 自定义值
             if (ver && ver !== false) {
                 if (Type(ver) === "json") {
-                    compereData(ver, nor_ver);
+                    compareData(ver, nor_ver);
                     form.verify(ver);
                 }
             }
@@ -100,7 +114,7 @@ $(function () {
             if (file && file !== false) {
                 if (file === true) {
                     //渲染默认上传域
-                    //严重不推荐使用rue
+                    //严重不推荐使用
                     cUp(nor_up);
                     //渲染单个上传域
                 } else if (Type(file) === "json") {
@@ -186,16 +200,17 @@ $(function () {
                             eve.func || eve.func(data);
 
                             //自定义是否需要阻止默认事件
-                            if ((eve.break || false) === true) {
+                            var eBreak = true;//true -> 阻止 false -> 不阻止
+                            if(eve.break === false){
+                                eBreak = false;
+                            }
+                            if (eBreak === true) {
                                 //阻止按钮默认事件
                                 return false;
                             }
                         })
                     }
                 }
-
-                //设定固定的提交按钮事件还是所有的提交按钮的事件
-
             }
         }
         //表格渲染
@@ -221,13 +236,13 @@ $(function () {
             //TABLE表格创建
             if (tbs && tbs !== false) {
                 if (Type(tbs) === "json") {
-                    compereData(tbs, args_table);
+                    compareData(tbs, args_table);
                     table.render(tbs);
                 } else if (Type(tbs) === "array") {
                     for (var x = 0; x < tbs.length; x++) {
                         if (Type(tbs[x]) === "json") {
-                            compereData(tbs[x], args_table);
-                            table.render(tbs[x]);
+                            compareData(tbs[x], args_table);
+                            allData = table.render(tbs[x]);
                         }
                     }
                 }
@@ -280,7 +295,7 @@ $(function () {
                             resValue[res.dat.eTime] = datArray[1].trim();
                         }
                     }
-                    console.log(resValue);
+                    //console.log(resValue);
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,
@@ -296,14 +311,18 @@ $(function () {
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
                         active[type] ? active[type].call(this) : '';
+                        return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
                     });
                 };
 
                 //首次页面渲染后按钮事件绑定
                 $(".layui-table-tool .layui-btn").on('click', function () {
+                    //console.log("===TOOLBAR===");
                     var type = $(this).data('type');
+                    //console.log(type);
                     active[type] ? active[type].call(this) : '';
-                    return false;
+                    //console.log(active[type] ? false:"");
+                    return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
                 });
             }
 
@@ -325,12 +344,13 @@ $(function () {
                     }
                 }
             }
+
         }
 
         //日期选择器的渲染函数
         function a(date) {
             //匹配默认数据，未填写的参数将使用已有的参数填充
-            compereData(date, nor_date);
+            compareData(date, nor_date);
             //判断日期选择器是否为范围选择器
             if (date.range) {
                 //默认连接符
@@ -347,6 +367,34 @@ $(function () {
             //日期选择器渲染
             laydate.render(date);
             $.cookie("dddd",JSON.stringify(date));
+        }
+
+        //按钮绑定
+        if(bindButton){
+            if(Type(bindButton)==="json"){
+                btn(bindButton);
+            }else if(Type(bindButton)==="array"){
+                for(var b=0;b<bindButton.length;b++){
+                    btn(bindButton[b]);
+                }
+            }
+
+            function btn(dat){
+                //console.log("===BTN===");
+                //console.log(dat);
+                var datType = dat.type || "click"
+                    ,datBan = Boolean(dat.ban) || false
+                    ,datFunc = dat.func || function(){
+                    layer.alert("事件触发成功！！！");
+                };
+                $(dat.elem).on(datType,function(){
+                        datFunc();
+                        if(datBan === false){
+                            return false;
+                        }
+                });//绑定函数
+            }
+
         }
     });
 });

@@ -26,8 +26,7 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs" lay-event="addData"><i class="fas fa-plus"></i></a>
     </div>
     <div class="visible-xs" id="check">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -59,13 +58,11 @@
         table: {
             table: {
                 cols: [[ //表头
-                    {type: "checkbox"}
-                    , {field: 'bmName', title: '部门名称', width: "30%", minWidth: 150}
+                     {field: 'bmName', title: '部门名称', width: "30%", minWidth: 150}
                     , {field: 'eqName', title: '设备名称', width: "30%", minWidth: 150}
                     , {field: 'eqXh', title: '设备型号', width: "25%", minWidth: 150}
                     , {fixed: 'right', minWidth: 80, align: 'center', toolbar: "#bar"}
                 ]]
-                , height: "full-25"
                 , url: "/benefical/cbxySz/listCbxySz"
                 , method: "POST"
                 , request: {
@@ -76,7 +73,7 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count": res.count,//页数据数
+                        "count": res.data.total,//页数据数
                         "data": res.data.list //解析数据列表
                     }
                 }
@@ -84,23 +81,25 @@
                     tableFunc(
                         {
                             "obj": obj,
-                            "toolFunc": [{
-                                tool: "toolbar",
-                                title: "添加",
-                                type: 2,
-                                event: "add",
-                                content: "./child/equipmentcost-add.html"
-                            },
+                            "toolFunc": [
                                 {
                                     type: 2,
-                                    title: "编辑",
+                                    title: "数据选择",
                                     event: "edit",
                                     content: "./child/equipmentcost-edit.html",
-                                    dataUrl: ["eqid"]
+                                    dataUrl: ["eqId"]
+                                },{
+                                    tool:"toolbar",
+                                    type: 2,
+                                    title: "添加",
+                                    event: "addData",
+                                    content: "./child/equipmentcost-add.html"
                                 }
                             ]
+
                         })
                 }
+
             },
             reSet: {
                 url: "/benefical/cbxySz/listCbxySzByX",
@@ -110,10 +109,9 @@
             }
         }
     };
-</script>
-<script>
 
 </script>
+
 </body>
 
 </html>

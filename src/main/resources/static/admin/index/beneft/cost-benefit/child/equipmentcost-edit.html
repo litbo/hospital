@@ -44,7 +44,18 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" id="delete">删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="delete">删除</a>
+</script>
+<script id="timeFormat" type="text/html">
+    //日期转换
+    {{#
+    var time ="";
+    layui.use('util',function(){
+        var util = layui.util;
+        time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
+    });
+    return time;
+    }}
 </script>
 
 <script>
@@ -54,27 +65,59 @@
                 cols: [[
                      {field: 'kmName', title: '科目名称', minWidth: 150}
                     , {field: 'kmValue', title: '科目数额',minWidth: 150}
-                    , {field: 'kmSj', title: '预设时间',minWidth: 150}
-                    , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar",width:160}
+                    , {field: 'kmSj', title: '预设时间',minWidth: 150,templet: '#timeFormat'}
+                    , {fixed:'right',minWidth: 80,align:'center',toolbar: "#bar",width:200}
                 ]]
+                , defaultToolbar:[]
+                , toolbar:false
                 , height: "full-25"
-                , "data": [
-                    {
-                        "eqName": "cs设备编号2",      //设备名称
-                        "kmName": "辅助科室分摊",      //科目名称
-                        "kmValue": 5000,                //科目数额
-                        "kmSj": "2018-11-02",      //预设时间
-                        "aid": 10                  //主键id，不显示，用于点击编辑传入下个页面
+                ,url:"/benefical/cbxySz/selectCbkmByEqId"
+                ,method:"POST"
+                ,request:{
+                    pageName : 'pageNum',
+                    limitName : 'pageSize'
+                }
+                ,where:{
+                    eqId : $.getUrlParam("eqId")
+                }
+                ,parseData: function(res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.total,//页数据数
+                        "data": res.data.list //解析数据列表
                     }
-                ]
+                }
                 , done: function (obj) {
                     tableFunc({
                         "obj":obj,
-                        "toolFunc":[
+                        "tools":[
                             {
                                 type:2,
                                 event: "edit",
-                                content:"./equipment-edit-edit.html"
+                                content:"./equipment-edit-edit.html",
+                                dataUrl:["id"]
+                            },
+                            {
+                                event: "delete",
+                                layOpen:false,
+                                func:function(obj){
+                                    layer.confirm('确定删除这一行吗？', function(index){
+                                        subUp({
+                                            url:"/benefical/gxcb/deleteSbCb",
+                                            data:{"aId":obj.data.aid},
+                                            success:function(res){
+                                                if(res.code === 0){
+                                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                                    putMsg({
+                                                        msg:"您已成功删除一条数据！"
+                                                    });
+                                                    layer.close(index);
+                                                }
+                                            }
+                                        })
+                                    });
+                                }
                             }
                         ]
                     })
