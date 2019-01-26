@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="form">
     <div class="layui-row">
         <div class="col-xs-12">
             <h1 style="margin:15px;">维修流程 - 胃肠外一科病区;TDP治疗机;17072682610001;报修受理</h1>
@@ -181,12 +181,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">受理人</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
-                        <option value="0">写作</option>
-                        <option value="1" selected="">阅读</option>
-                        <option value="2">游戏</option>
-                        <option value="3">音乐</option>
-                        <option value="4">旅行</option>
+                    <select name="interest" lay-filter="aihao6">
                     </select>
                 </div>
             </div>
@@ -202,13 +197,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修方式</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
+                    <select name="interest" lay-filter="re">
                         <option value=""></option>
-                        <option value="0">写作</option>
-                        <option value="1" selected="">阅读</option>
-                        <option value="2">游戏</option>
-                        <option value="3">音乐</option>
-                        <option value="4">旅行</option>
                     </select>
                 </div>
             </div>
@@ -242,63 +232,30 @@
 
 </div>
 
-
-<script src="../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-
-        //日期
-        laydate.render({
-            elem: '#date2',
-            type: 'datetime'
-        });
-        laydate.render({
-            elem: "#date",
-            format: "yyyy-MM-dd",
-            range: false,
-            type: "date",
-            value: "2018-12-9"
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
+    renderMod = {
+        form: {
+            val:{
+                filter:"form",
+                select:[
+                    {
+                        filter:"re",
+                        ids:"eqCxflId",
+                        text:"eqCxflName",
+                        url:"/eqdict/cxfl"
+                    },
+                    {
+                        filter:"aihao6",
+                        ids:"eqCxflId",
+                        text:"eqCxflName",
+                        url:"/eqdict/cxfl"
+                    }
+                ]
             }
-            , pass: [/(.+){6,12}$/, '密码必须6到12位']
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-
-    });
+        }
+    }
 </script>
+
 </body>
 
 </html>

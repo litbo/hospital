@@ -50,7 +50,7 @@ $(function () {
             //表单默认值渲染
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
-                if (val.filter && (val.get || (val.options && Type(val.options) === "json"))) {
+                if (val.filter && (val.select || val.get || (val.options && Type(val.options) === "json"))) {
                     if (val.get) {
                         val.get.success = function (res) {
                             var dat = res.data.data,value = {};
@@ -70,15 +70,46 @@ $(function () {
 
                         };
                         subUp(val.get)
-                    } else {
+                    }
+
+                    if(val.select){
+                        if(Type(val.select) === "json"){
+                            getSelect(val.select);
+                        }else if(Type(val.select) === "array"){
+                            for(var s=0;s<val.select.length;s++){
+                                getSelect(val.select[s]);
+                            }
+                        }
+
+                        function getSelect(re){
+                            var id = re.ids || "id",text = re.text || "text",filter = re.filter || "select";
+                            re.success = function(res){
+                                if (res.code === 0) {
+                                    var $d = $("select[lay-filter='"+filter+"']");
+                                    for (var i = 0; i < res.data.length; i++) {
+                                        $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
+                                    }
+                                    form.render("select");
+                                }
+                            };
+                            //删除不必要参数，避免污染参数
+                            delete re.ids;
+                            delete re.text;
+                            delete re.filter;
+                            subUp(re)
+                        }
+                    }
+                    if(!val.get && !val.select) {
                         form.val(val.filter, val.options);
                     }
-                } else {
+                    form.render();
+                } else{
                     putMsg({
                         error:"renderMod.js遇到一个无法处理的错误：",
                         log:"formAction.val参数传递错误(LINE:51),请参考表单渲染文档！"
                     });
                 }
+
             }
 
             //日期选择器渲染
@@ -172,7 +203,7 @@ $(function () {
                 })
             }
 
-            //表单组建监听事件
+            //表单组件监听事件
             //可以监听的组建 select checkbox switch radio
             if (eve && eve !== false) {
                 if (Type(eve) === "json") {
@@ -185,19 +216,19 @@ $(function () {
 
                 function setE(eve) {
                     if (eve.box) {
-                        if (eve.filter) {
-                            //当eve.filter = true时则使用默认的过滤字符，否则使用自定义的字符
-                            eve.filter === true ? filter = '(' + normal.filter + ')' : filter = '(' + eve.filter + ')';
-                        }
+                        //当eve.filter = true时则使用默认的过滤字符，否则使用自定义的字符
+                        var filter = eve.filter === true ? '(' + normal.filter + ')' :  '(' + eve.filter + ')';
+                        console.log(eve);
+                        console.log(eve.box + filter);
                         form.on(eve.box + filter, function (data) {
                             //data：所有数据,包含内容如下
                             //-----elem:原始DOM对象(select(下拉) checkbox(复选) switch(开关) radio(单选))
                             //-----value:被选中的值(select(下拉) checkbox(复选) switch(开关) radio(单选))
                             //-----othis:美化后的DOM对象(select(下拉) checkbox(复选) switch(开关))
                             //-----elem.checked(checkbox(复选) switch(开关))
-
+                            console.log("=IN=");
                             //如果存在函数则执行函数
-                            eve.func || eve.func(data);
+                            eve.func && eve.func(data);
 
                             //自定义是否需要阻止默认事件
                             var eBreak = true;//true -> 阻止 false -> 不阻止
@@ -208,6 +239,11 @@ $(function () {
                                 //阻止按钮默认事件
                                 return false;
                             }
+                        })
+                    }else{
+                        putMsg({
+                            log:"要使用event功能，box参数必须存在",
+                            error:"参数填写错误！"
                         })
                     }
                 }

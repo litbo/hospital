@@ -29,7 +29,7 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item" style="margin:20px 0;">
-                <button class="layui-btn layui-btn-warm col-xs-12 col-sm-2" id="upData">保存</button>
+                <button class="layui-btn layui-btn-warm col-xs-12 col-sm-2" lay-submit="" id="upData">保存</button>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">日期选择<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" id="date" class="layui-input">
+                    <input type="text" name="kmSj" id="date" class="layui-input">
                 </div>
             </div>
         </div>
@@ -94,6 +94,18 @@
         form:{
             date:{
                 elem:"#date"
+            },
+            submit:{
+                form:{
+                    url:"/benefical/gxcb/insertCb",
+                    type:"POST",
+                    data:["bmName","eqName","kmSj","qjlc"],
+                    add:{
+                        bmId:JSON.parse(tempValue("dtdt","bm",null)).bmId,
+                        eqId:JSON.parse(tempValue("dtdt","eq",null)).eqId,
+                        kmNameAndValue:tempValue("sdsd","j",null)
+                    }
+                }
             }
         },
         addTable :{
@@ -123,7 +135,7 @@
                         area:["300px","400px"],
                         maxmin:false,
                         end:function(){
-                            var res = tempValue("sdsd","j",null);
+                            var res = tempValue("sdsd","j",false);
                             func.reTable("table",res);
                         }
                     });
