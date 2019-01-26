@@ -39,24 +39,22 @@
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select>
+                        <select class="layui-select" name="pjfl">
                             <option>分类</option>
-                            <option>维材-医疗维修</option>
-                            <option>维材-办公维修</option>
-                            <option>维材-普通维修</option>
-                            <option>维材-家具维修</option>
-                            <option>维材-其他</option>
+                            <option value="维材-医疗维修">维材-医疗维修</option>
+                            <option value="维材-办公维修">维材-办公维修</option>
+                            <option value="维材-普通维修">维材-普通维修</option>
+                            <option value="维材-家具维修">维材-家具维修</option>
+                            <option value="维材-其他">维材-其他</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date"  class="layui-input" placeholder="配件拼音码" autocomplete="off">
+                        <input type="text" name="pjSzm"  class="layui-input" placeholder="配件拼音码" autocomplete="off">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">查找</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -64,12 +62,73 @@
 <script type="text/html" id="bar">
 <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
 </script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
+//     addTable ={
+//         table:{
+//             cols: [[ //表头
+//                  {field: 'pjbh', title: '配件编号', minWidth: 100,sort:true}
+//                 , {field: 'pjName', title: '配件名称', minWidth: 150}
+//                 , {field: 'pjGgxh', title: '型号规格', minWidth: 100}
+//                 , {field: 'pjZczh', title: '注册证号', minWidth: 150}
+//                 , {field: 'pjZczDqTime', title: '注册证到期日期', minWidth: 150,sort:true}
+//                 , {field: 'scqyName', title: '生产厂家', minWidth: 150}
+//                 , {field: 'ghsName', title: '供货商', minWidth: 150}
+// /*                , {title:'操作',align:'center',minWidth:100,toolbar:'#bar'}*/
+//             ]]
+//             , height: "full-25"
+//             , url:"/security/pjzd/listFwPjzd"
+//             ,"data":[
+//                 {}
+//             ]
+//             , request:{
+//                 pageName : 'pageNum',
+//                 limitName : 'pageSize'
+//             }
+//             ,where:{
+//
+//             }
+//             ,parseData: function(res) { //res 即为原始返回的数据
+//                 return {
+//                     "code": res.code, //解析接口状态
+//                     "msg": res.msg, //解析提示文本
+//                     "count":res.data.size,//页面显示的数据条数
+//                     "data": res.data.list //解析数据列表
+//                 }
+//             }
+//             , done: function (obj) {
+//                 tableFunc({
+//                     "obj":obj,
+//                     "toolFunc":[
+//                         {
+//                             tool:"toolbar",
+//                             title:"数据查找",
+//                             event:"dataSearch",
+//                             content:$("#hideXs")
+//                         },
+//                         {
+// //                            tool:"toolbar",
+//                             title:'配件字典编辑',
+//                             event:'edit',
+//                             type:2,
+//                             area:['95%','95%'],
+//                             content:'./child/accessories-dictionaryAdd.html'
+//                         }
+//                     ]
+//                 })
+//             }
+//         },
+//         reSet: {
+//             url: "/security/pjzd/listFwPjzd",
+//             type: "reload",
+//             data:["pjSzm","pjfl"],    //搜索框的name
+//             where: {}
+//         }
+//
+//     }
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
                  {field: 'pjbh', title: '配件编号', minWidth: 100,sort:true}
                 , {field: 'pjName', title: '配件名称', minWidth: 150}
                 , {field: 'pjGgxh', title: '型号规格', minWidth: 100}
@@ -77,55 +136,33 @@
                 , {field: 'pjZczDqTime', title: '注册证到期日期', minWidth: 150,sort:true}
                 , {field: 'scqyName', title: '生产厂家', minWidth: 150}
                 , {field: 'ghsName', title: '供货商', minWidth: 150}
-/*                , {title:'操作',align:'center',minWidth:100,toolbar:'#bar'}*/
-            ]]
-            , height: "full-25"
-            , url:"/security/pjzd/listFwPjzd"
-            ,"data":[
-                {}
-            ]
-            , request:{
-                pageName : 'pageNum',
-                limitName : 'pageSize'
-            }
-            ,where:{
-
-            }
-            ,parseData: function(res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "count":res.data.size,//页面显示的数据条数
-                    "data": res.data.list //解析数据列表
+                ]]
+                , url: "/security/pjzd/listFwPjzd"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
-            }
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":[
-                        {
-                            tool:"toolbar",
-                            title:"数据查找",
-                            event:"dataSearch",
-                            content:$("#hideXs")
-                        },
-                        {
-//                            tool:"toolbar",
-                            title:'配件字典编辑',
-                            event:'edit',
-                            type:2,
-                            area:['95%','95%'],
-                            content:'./child/accessories-dictionaryAdd.html'
-                        }
-                    ]
-                })
-            }
-        },
-        date:{
-            elem:'#date'
-        },
-        form:{
+                /*   , where: {
+                       bmId: ""
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.size,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                }
+            },
+            reSet: {
+                url: "/security/pjzd/listFwPjzd",
+                type: "reload",
+                data:["pjfl","pjSzm"],     //搜索框的name
+                where: {}
 
+            }
         }
     }
 </script>

@@ -1,5 +1,7 @@
 package com.litbo.hospital.security.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.*;
 import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -90,4 +93,23 @@ public class FwPjqlServiceImpl implements FwPjqlService {
 
         return pjqlDao.updateFwPjqlSqStatus(status,id,qrrId,new Date());
     }
+    @Override
+    public PageInfo listFwPjqlZjb(int pageNum, int pageSize, String pjRkTimeStart, String pjRkTimeEnd, String pjName) {
+        PageHelper.startPage(pageNum,pageSize);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = null;
+        Date end = null;
+        try {
+            if(pjRkTimeStart!=null){
+                start = formatter.parse(pjRkTimeStart);
+            }
+            if(pjRkTimeEnd!=null){
+                end = formatter.parse(pjRkTimeEnd);
+            }
+        }catch(Exception e){
+            return null;
+        }
+        return new PageInfo(pjqlZjbDao.listFwPjqlZjb(start,end,pjName));
+    }
+
 }

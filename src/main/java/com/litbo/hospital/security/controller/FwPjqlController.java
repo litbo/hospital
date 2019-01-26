@@ -1,5 +1,6 @@
 package com.litbo.hospital.security.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjck;
@@ -57,5 +58,15 @@ public class FwPjqlController {
         }else {
             return Result.error(CodeMsg.PARAM_ERROR);
         }
+    }
+    @ApiOperation("出库查询")
+    @RequestMapping(value = "listFwPjqlZjb",method = RequestMethod.GET)
+    public Result listFwPjsgZjb(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
+                                @RequestParam(required = false,defaultValue = "1990-01-01") String pjRkTimeStart,
+                                @RequestParam(required = false,defaultValue = "2999-12-31") String pjRkTimeEnd,
+                                @RequestParam(required = false) String pjName){
+        PageInfo pageInfo = pjqlService.listFwPjqlZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
+        return Result.success(pageInfo);
     }
 }

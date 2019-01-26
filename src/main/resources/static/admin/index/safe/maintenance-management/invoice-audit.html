@@ -73,7 +73,6 @@
                 }
                 /*   , where: {
                        bmId: ""
-
                    }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
@@ -84,17 +83,15 @@
                     }
                 }
                 , done: function (obj) {
-
                 }
             },
-
             reSet: {
                 url: "/security/fp/listFwFpByWaitExamine",
                 type: "reload",
+                data:["fpHm","eqName","wxDh"],    //搜索框的name
                 where: {}
 
             }
-
         }
     }
 </script>
