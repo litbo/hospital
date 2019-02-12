@@ -29,21 +29,19 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
             callback ? callback() : null;
         })//layui element规定用法，当主列表项无子列表时选中第一个列表项
     }//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）
-    function addSample(a) {//a:main_list[x] （x>=0） 或 main_list[x].tools[y].children[z]
-        console.log(a);
-        if (a.children) {//判断是否为 返回首页 列表项（x=0？）
-            console.log(a);
-            for (var i = 0; i < a.children.length; i++) {
-                addPage(a.children[i]);
+    function addSample(a) {//a:main_list[x] （x>=0） 或 main_list[x].tools[y].content[z]
+        if (a.items) {//判断是否为 返回首页 列表项（x=0？）
+            for (var i = 0; i < a.items.length; i++) {
+                addPage(a.items[i]);
             }
             if (p !== "home") {//首页不打开新TAB
-                var d = a.children[0];
-                if (!d.children) {
+                var d = a.items[0];
+                if (!d.list) {
                     changeTab(d, function () {
                         $('.layui-nav-item').eq(1).addClass('layui-this');
                     })
                 } else {
-                    changeTab(d.children[0], function () {
+                    changeTab(d.list[0], function () {
                         $('.layui-nav-child').children(':first').addClass('layui-this');
                     })
                 }
@@ -54,12 +52,10 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
     }//判断当前页面，新建并切换TAB标签页
     function addPage(a) {//a:main_list[0] 或 main_list[x].items[i] (x>1)
         var small_list = "";
-        //console.log(a);
-        if (a.children) {
+        if (a.list) {
             var $dl = $("<dl>").attr("class", "layui-nav-child").append(small_list);
-            for (var j = 0; j < a.children.length; j++) {
-                //console.log(a.children.length);
-                var aList_j = a.children[j];
+            for (var j = 0; j < a.list.length; j++) {
+                var aList_j = a.list[j];
                 $dl.append($("<dd>").attr(
                     {
                         "shiro:hasPermission": aList_j.shiro
@@ -98,13 +94,13 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
     }//在list中动态添加主列表项
     function addTools(a, x) {//a：包含副列表的容器 $(“#body”) x:当前列表项 main_list[x]
         for (var i = 0; i < x.tools.length; i++) {
-            if (x.tools[i].children) {//当副列表的列表项存在时才会将列表项添加进a中，否则无意义
+            if (x.tools[i].content) {//当副列表的列表项存在时才会将列表项添加进a中，否则无意义
                 var sUrl = ""//设置URL地址
                     , sTarget = ""//设置链接打开方式
                     , xt_i = x.tools[i];
                 $ul = $("<ul>").attr("class", "min_tools");
-                for (var j = 0; j < x.tools[i].children.length; j++) {
-                    var xT_iC_j = x.tools[i].children[j];
+                for (var j = 0; j < x.tools[i].content.length; j++) {
+                    var xT_iC_j = x.tools[i].content[j];
                     //判断URL值是否为URL地址或者IP地址
                     if (/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(xT_iC_j.url) || /((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)/.test(xT_iC_j.url)) {
                         sUrl = xT_iC_j.url;
@@ -150,8 +146,7 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
                     if (mXit.length === 0 && mXto.length !== 0) {
                         //无默认主列表但有副列表，则使用副列表第一个列表项对应的主列表项为默认导航列表
                         addTools(list1, mX);
-                        addSample(mXto[0].children[0]);
-                        console.log(mXto[0]);
+                        addSample(mXto[0].content[0]);
                     } else if (mXit.length !== 0 && mXto.length === 0) {
                         //有默认主列表并且无副列表，则不渲染副列表
                         addSample(mX);
@@ -163,9 +158,9 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
                     addMaps($mapSite, x);
                 } else if (n === null || t === null) {// 当URL中只有 t 与 n 属性中的一个时删除URL中的 t 与 n
                     location.search = "?p=" + p;
-                } else if (nN < mXto[tN].children.length && tN < mXto.length) {//当URL中同时有 t 与 n 时则动态加载相应的数据
+                } else if (nN < mXto[tN].content.length && tN < mXto.length) {//当URL中同时有 t 与 n 时则动态加载相应的数据
                     addTools(list1, mX);
-                    addSample(mXto[tN].children[nN]);
+                    addSample(mXto[tN].content[nN]);
                     addMaps($mapSite, x);
                 } else {//当出现未知可能性时则直接跳转默认页面，例如：当 n 与 t 与数据实际情况不符合时，删除 t 与 n
                     location.search = "?p=" + p;
@@ -191,7 +186,7 @@ function addMaps(con, x) {//con:包含位置地图的容器名 x:当前页面的
     for (var i = 0; i < nav_list.length; i++) {
         if (p === nav_list[i].page) {
             if (n !== null && t !== null) {
-                addSite(p, nav_list[i].title, main_list[x].tools[tN].children[nN]);
+                addSite(p, nav_list[i].title, main_list[x].tools[tN].content[nN]);
             } else {
                 addSite("home", "首页", nav_list[i]);
             }

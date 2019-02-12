@@ -34,7 +34,7 @@ var main_list =
                     "id": "13",
                     "icon": "star",
                     "shiro": "a",
-                    "children": [
+                    "list": [
                         {
                             "title": "通知公告",
                             "url": "./home/announcement.html",
@@ -58,20 +58,20 @@ var main_list =
                     "title": "联网设备",
                     "icon": "globe-asia",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "运行记录",
                             "url": "data&t=0&n=0",
                             "shiro": "a",
                             "id": "2",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "运行记录",
                                     "url": "javascript:void;",
                                     "icon": "book-open",
                                     "id": "21",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "单机运行设备",
                                             "url": "./data/network-sys/equip_record.html",
@@ -92,7 +92,7 @@ var main_list =
                                     "icon": "network-wired",
                                     "id": "24",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备联网设置",
                                             "url": "./data/network-sys/equip_network.html",
@@ -138,14 +138,14 @@ var main_list =
                             "url": "data&t=0&n=1",
                             "shiro": "a",
                             "id": "25",
-                            'children': [
+                            'items': [
                                 {
                                     "title": "设备工作量记录",
                                     "url": "javascript:void;",
                                     "id": "26",
                                     "icon": "industry",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "单机工作量",
                                             "url": "./data/network-sys/equip_worktime.html",
@@ -183,20 +183,20 @@ var main_list =
                     "title": "采购管理",
                     "icon": "shopping-cart",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "申购管理",
                             "url": "life&t=0&n=0",
                             "shiro": "a",
                             "id": "3",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "科室申购",
                                     "url": "./table.html",
                                     "icon": "credit-card",
                                     "id": "31",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "科室讨论",
                                             "url": "./life/purchase-management/department-discuss.html",
@@ -226,10 +226,10 @@ var main_list =
                                 {
                                     "title": "申购汇总",
                                     "url": "javascript:void(0);",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "36",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "申购单论证分析",
                                             "url": "./life/purchase-management/purchase-discuss.html",
@@ -257,7 +257,7 @@ var main_list =
                                     "icon": "comments",
                                     "id": "310",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "装备委员会记录",
                                             "url": "./life/purchase-management/equip-record.html",
@@ -290,7 +290,7 @@ var main_list =
                                     "icon": "comments",
                                     "id": "315",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "申购设备公示查询",
                                             "url": "./life/purchase-management/equipment-query.html",
@@ -305,7 +305,7 @@ var main_list =
                                     "icon": "comments",
                                     "id": "317",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "申购讨论条件",
                                             "url": "./table.html",
@@ -327,14 +327,14 @@ var main_list =
                             "url": "life&t=0&n=1",
                             "shiro": "a",
                             "id": "320",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "招标采购",
                                     "url": "./table.html",
                                     "icon": "shopping-cart",
                                     "id": "321",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "计划打包",
                                             "url": "./table.html",
@@ -368,7 +368,7 @@ var main_list =
                             "url": "life&t=0&n=2",
                             "id": "333",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "到货登记",
                                     "url": "./life/purchase-management/goods-reg.html",
@@ -405,20 +405,20 @@ var main_list =
                     "title": "使用管理",
                     "icon": "mouse-pointer",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "操作规程",
                             "url": "life&t=1&n=0",
                             "id": "338",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "操作规程查询",
                                     "url": "./table.html",
                                     "icon": "search",
                                     "id": "339",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "已备案操作规程",
                                             "url": "./life/use-management/record-rule.html",
@@ -445,7 +445,7 @@ var main_list =
                                     "icon": "pencil-alt",
                                     "shiro": "a",
                                     "id": "343",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "编写",
                                             "url": "./life/use-management/edit-rule.html",
@@ -466,7 +466,7 @@ var main_list =
                                     "icon": "comment-alt",
                                     "id": "346",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "操作规程再评价流程",
                                             "url": "./life/use-management/again-rule.html",
@@ -481,7 +481,7 @@ var main_list =
                                     "icon": "spinner",
                                     "id": "348",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "制定进度",
                                             "url": "./life/use-management/process-edit.html",
@@ -502,10 +502,10 @@ var main_list =
                                     "id": "351",
                                     "icon": "paperclip",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "模板列表",
-                                            "url": "./life/use-management/modern-children.html",
+                                            "url": "./life/use-management/modern-list.html",
                                             "id": "352",
                                             "shiro": "a"
                                         },
@@ -524,17 +524,17 @@ var main_list =
                             "url": "life&t=1&n=1",
                             "id": "354",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "设备台账",
                                     "url": "./table.html",
                                     "id": "355",
                                     "icon": "file-invoice-dollar",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "总账",
-                                            "url": "./life/electric-bill/bill-children.html",
+                                            "url": "./life/electric-bill/bill-list.html",
                                             "id": "356",
                                             "shiro": "a"
                                         },
@@ -558,7 +558,7 @@ var main_list =
                                     "icon": "clipboard-check",
                                     "id": "359",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "计划制定",
                                             "url": "./life/electric-bill/plan-write.html",
@@ -591,7 +591,7 @@ var main_list =
                                     "icon": "chart-pie",
                                     "id": "364",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "科室设备综合查询",
                                             "url": "./table.html",
@@ -618,7 +618,7 @@ var main_list =
                                     "icon": "stamp",
                                     "id": "368",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备金额档设置",
                                             "url": "./table.html",
@@ -629,7 +629,7 @@ var main_list =
                                 },
                                 {
                                     "title": "其他台账",
-                                    "url": "./life/electric-bill/bill-children.html",
+                                    "url": "./life/electric-bill/bill-list.html",
                                     "icon": "file-invoice-dollar",
                                     "id": "370",
                                     "shiro": "a"
@@ -643,20 +643,20 @@ var main_list =
                     "title": "应急管理",
                     "icon": "exclamation-triangle",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "应急预案",
                             "url": "life&t=2&n=0",
                             "id": "371",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "应急预案查询",
                                     "url": "./table.html",
                                     "icon": "search",
                                     "id": "372",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "已备案",
                                             "url": "./table.html",
@@ -683,7 +683,7 @@ var main_list =
                                     "icon": "pencil-alt",
                                     "id": "376",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "开始指定",
                                             "url": "./table.html",
@@ -704,7 +704,7 @@ var main_list =
                                     "icon": "comment-alt",
                                     "id": "379",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "再评价收件箱",
                                             "url": "./table.html",
@@ -719,7 +719,7 @@ var main_list =
                                     "icon": "search",
                                     "id": "381",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "制订进度",
                                             "url": "./table.html",
@@ -740,7 +740,7 @@ var main_list =
                                     "icon": "paperclip",
                                     "id": "384",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "模板录入",
                                             "url": "./table.html",
@@ -762,14 +762,14 @@ var main_list =
                             "url": "life&t=2&n=1",
                             "id": "387",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "紧急报停",
                                     "url": "./table.html",
                                     "icon": "minus-circle",
                                     "id": "388",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "紧急报停搜查",
                                             "url": "./table.html",
@@ -784,7 +784,7 @@ var main_list =
                                     "icon": "screwdriver",
                                     "id": "390",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "搜查设备",
                                             "url": "./table.html",
@@ -799,7 +799,7 @@ var main_list =
                                     "icon": "check",
                                     "id": "392",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "等待替换",
                                             "url": "./table.html",
@@ -817,7 +817,7 @@ var main_list =
                                 {
                                     "title": "病人安置记录",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "395",
                                     "shiro": "a"
                                 },
@@ -827,7 +827,7 @@ var main_list =
                                     "icon": "flag",
                                     "id": "396",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "总结评价",
                                             "url": "./table.html",
@@ -848,7 +848,7 @@ var main_list =
                                     "icon": "chart-pie",
                                     "id": "399",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "搜查结果查询",
                                             "url": "./table.html",
@@ -864,14 +864,14 @@ var main_list =
                             "url": "life&t=2&n=2",
                             "id": "3992",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "设备调配",
                                     "url": "./table.html",
                                     "icon": "puzzle-piece",
                                     "id": "3993",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "查询调用",
                                             "url": "./table.html",
@@ -886,7 +886,7 @@ var main_list =
                                     "icon": "check-circle",
                                     "id": "3995",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "未送达调配单",
                                             "url": "./table.html",
@@ -907,7 +907,7 @@ var main_list =
                                     "icon": "undo-alt",
                                     "id": "3998",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "收条",
                                             "url": "./table.html",
@@ -922,7 +922,7 @@ var main_list =
                                     "icon": "umbrella-beach",
                                     "id": "39910",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "调配跟踪",
                                             "url": "./table.html",
@@ -950,7 +950,7 @@ var main_list =
                                     "icon": "chart-pie",
                                     "id": "39914",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "事件查询",
                                             "url": "./table.html",
@@ -974,20 +974,20 @@ var main_list =
                     "title": "处置管理",
                     "icon": "compact-disc",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "处置管理",
                             "url": "life&t=3&n=0",
                             "id": "39917",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "处置查询",
                                     "url": "./table.html",
                                     "icon": "search",
                                     "id": "39918",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "处置查询",
                                             "url": "./table.html",
@@ -1014,7 +1014,7 @@ var main_list =
                                     "icon": "rocket",
                                     "id": "39922",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "处置申请",
                                             "url": "./table.html",
@@ -1035,7 +1035,7 @@ var main_list =
                                     "icon": "arrow-up",
                                     "id": "39925",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "待上报列表",
                                             "url": "./table.html",
@@ -1050,7 +1050,7 @@ var main_list =
                                     "icon": "calendar-check",
                                     "id": "39927",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "待批复列表",
                                             "url": "./table.html",
@@ -1065,7 +1065,7 @@ var main_list =
                                     "icon": "broom",
                                     "id": "39929",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "待清理设备",
                                             "url": "./table.html",
@@ -1077,10 +1077,10 @@ var main_list =
                                 {
                                     "title": "处置备案",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "39931",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "待备案处置设备",
                                             "url": "./table.html",
@@ -1103,20 +1103,20 @@ var main_list =
                     "title": "风险管理",
                     "icon": "exclamation-triangle",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "风险管理",
                             "url": "safe&t=0&n=0",
                             "shiro": "a",
                             "id": "4",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "风险分析",
                                     "url": "./table.html",
                                     "icon": "poll",
                                     "id": "41",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "风险分值定义",
                                             "url": "./table.html",
@@ -1137,7 +1137,7 @@ var main_list =
                                     "icon": "user-edit",
                                     "id": "44",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "风险监测",
                                             "url": "./table.html",
@@ -1164,7 +1164,7 @@ var main_list =
                                     "icon": "sliders-h",
                                     "id": "48",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "风险控制实施",
                                             "url": "./table.html",
@@ -1199,20 +1199,20 @@ var main_list =
                     "title": "维修管理",
                     "icon": "wrench",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "设备维修",
                             "url": "safe&t=1&n=0",
                             "id": "413",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "维修任务",
                                     "url": "./table.html",
                                     "icon": "wrench",
                                     "id": "414",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "报修",
                                             "url": "./safe/service-management/repair.html",
@@ -1251,7 +1251,7 @@ var main_list =
                                     "icon": "chart-pie",
                                     "id": "420",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "工程师工作情况",
                                             "url": "./table.html",
@@ -1290,7 +1290,7 @@ var main_list =
                                     "icon": "book",
                                     "id": "426",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "配件字典",
                                             "url": "./table.html",
@@ -1317,7 +1317,7 @@ var main_list =
                                     "icon": "sliders-h",
                                     "id": "430",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "反馈信息设置",
                                             "url": "./table.html",
@@ -1394,13 +1394,13 @@ var main_list =
                             "url": "safe&t=1&n=1",
                             "id": "4393",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "报修合同",
                                     "url": "./table.html",
                                     "icon": "scroll",
                                     "id": "4394",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "合同录入",
                                             "url": "./safe/service-management/contract-input.html",
@@ -1428,7 +1428,7 @@ var main_list =
                             "url": "safe&t=1&n=2",
                             "id": "4398",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "配件申购",
                                     "url": "./safe/service-management/accessories-purchase.html",
@@ -1442,7 +1442,7 @@ var main_list =
                                     "icon": "university",
                                     "id": "43910",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "配件入库",
                                             "url": "./safe/service-management/accessories-in.html",
@@ -1477,7 +1477,7 @@ var main_list =
                                     "icon": "search",
                                     "id": "43915",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "入库查询",
                                             "url": "./safe/service-management/ruku-search.html",
@@ -1524,14 +1524,14 @@ var main_list =
                             "url": "safe&t=1&n=3",
                             "id": "43922",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "维修发票管理",
                                     "url": "./table.html",
                                     "id": "43923",
                                     "icon": "receipt",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "维修发票登记",
                                             "url": "./safe/maintenance-management/invoice-registration.html",
@@ -1560,20 +1560,20 @@ var main_list =
                     "title": "应用培训",
                     "icon": "graduation-cap",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "人员培训",
                             "url": "safe&t=2&n=0",
                             "id": "43927",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "培训计划",
                                     "url": "./table.html",
                                     "id": "43928",
                                     "icon": "scroll",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "计划制定",
                                             "url": "./safe/application-training/plan-formulation.html",
@@ -1588,7 +1588,7 @@ var main_list =
                                     "icon": "user-tag",
                                     "id": "43930",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "人员名单",
                                             "url": "./table.html",
@@ -1615,7 +1615,7 @@ var main_list =
                                     "icon": "user-clock",
                                     "id": "43934",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "签到",
                                             "url": "./table.html",
@@ -1642,7 +1642,7 @@ var main_list =
                                     "icon": "user-friends",
                                     "id": "43938",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "计划查询",
                                             "url": "./safe/application-training/plan-query.html",
@@ -1671,20 +1671,20 @@ var main_list =
                     "title": "医疗事件",
                     "icon": "briefcase-medical",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "安全(不良)事件",
                             "url": "safe&t=3&n=0",
                             "id": "43942",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "不良事件报告",
                                     "url": "./table.html",
                                     "icon": "file-powerpoint",
                                     "id": "43943",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "可疑报告",
                                             "url": "./safe/medical-incident/suspicious-report.html",
@@ -1717,7 +1717,7 @@ var main_list =
                                     "icon": "chart-pie",
                                     "id": "43948",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "报告查询",
                                             "url": "./safe/medical-incident/report-query.html",
@@ -1746,20 +1746,20 @@ var main_list =
                     "title": "质量管理",
                     "icon": "feather",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "维护保养",
                             "url": "safe&t=4&n=0",
                             "id": "43952",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "维护保养规范",
                                     "url": "./table.html",
                                     "id": "43953",
                                     "icon": "newspaper",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "保养规范",
                                             "url": "./table.html",
@@ -1786,7 +1786,7 @@ var main_list =
                                     "icon": "scroll",
                                     "id": "43957",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "常规保养计划",
                                             "url": "./table.html",
@@ -1807,7 +1807,7 @@ var main_list =
                                     "icon": "map",
                                     "id": "43960",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "预防性维护待执行任务",
                                             "url": "./table.html",
@@ -1834,7 +1834,7 @@ var main_list =
                                     "icon": "chart-pie",
                                     "id": "43964",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "综合查询",
                                             "url": "./table.html",
@@ -1863,14 +1863,14 @@ var main_list =
                             "url": "safe&t=4&n=1",
                             "id": "43968",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "检测计划",
                                     "url": "./table.html",
                                     "id": "43969",
                                     "icon": "scroll",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "计划制定",
                                             "url": "./table.html",
@@ -1919,14 +1919,14 @@ var main_list =
                             "url": "safe&t=4&n=2",
                             "id": "43976",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "巡检计划",
                                     "url": "./table.html",
                                     "icon": "scroll",
                                     "id": "43977",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "计划制定",
                                             "url": "./table.html",
@@ -1953,7 +1953,7 @@ var main_list =
                                     "icon": "newspaper",
                                     "id": "43981",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备巡检",
                                             "url": "./table.html",
@@ -1976,14 +1976,14 @@ var main_list =
                             "url": "safe&t=4&n=4398",
                             "id": "43984",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "查询统计",
                                     "url": "./table.html",
                                     "icon": "chart-pie",
                                     "id": "43985",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "综合查询",
                                             "url": "./table.html",
@@ -2004,7 +2004,7 @@ var main_list =
                                     "icon": "info",
                                     "id": "43988",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "总账",
                                             "url": "./table.html",
@@ -2037,7 +2037,7 @@ var main_list =
                                     "icon": "newspaper",
                                     "id": "43993",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "检定提醒",
                                             "url": "./table.html",
@@ -2076,7 +2076,7 @@ var main_list =
                                     "icon": "search",
                                     "id": "43999",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "已送检计量器具清单",
                                             "url": "./table.html",
@@ -2098,14 +2098,14 @@ var main_list =
                             "url": "safe&t=4&n=4",
                             "id": "439912",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "特种设备台账",
                                     "url": "./table.html",
                                     "icon": "file-invoice-dollar",
                                     "id": "439913",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "特种设备",
                                             "url": "./table.html",
@@ -2132,7 +2132,7 @@ var main_list =
                                     "icon": "check-square",
                                     "id": "439917",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "检测计划",
                                             "url": "./table.html",
@@ -2177,7 +2177,7 @@ var main_list =
                                     "id": "439924",
                                     "icon": "user",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "从业人员",
                                             "url": "./table.html",
@@ -2206,13 +2206,13 @@ var main_list =
                     "title": "厂商管理",
                     "icon": "building",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "资质审核",
                             "url": "safe&t=5&n=0",
                             "id": "439928",
                             "shiro": "a",
-                            'children': [
+                            'items': [
                                 {
                                     "title": "使用说明",
                                     "url": "./safe/facturer-management/instructions.html\n",
@@ -2226,7 +2226,7 @@ var main_list =
                                     "icon": "user-check",
                                     "id": "439930",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "经营/生产许可证",
                                             "url": "./safe/facturer-management/business-license.html",
@@ -2247,16 +2247,16 @@ var main_list =
                                     "icon": "search",
                                     "id": "439933",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "许可证列表",
-                                            "url": "./safe/facturer-management/license-children.html",
+                                            "url": "./safe/facturer-management/license-list.html",
                                             "id": "439934",
                                             "shiro": "a"
                                         },
                                         {
                                             "title": "注册证列表",
-                                            "url": "./safe/facturer-management/registration-children.html",
+                                            "url": "./safe/facturer-management/registration-list.html",
                                             "id": "439935",
                                             "shiro": "a"
                                         }
@@ -2275,7 +2275,7 @@ var main_list =
                                     "icon": "search",
                                     "id": "439937",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "综合验证列表",
                                             "url": "./table.html",
@@ -2298,14 +2298,14 @@ var main_list =
                             "url": "safe&t=5&n=1",
                             "id": "439940",
                             "shiro": "a",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "厂商",
                                     "url": "./table.html",
                                     "icon": "building",
                                     "id": "439941",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "厂商录入",
                                             "url": "./table.html",
@@ -2326,7 +2326,7 @@ var main_list =
                                     "icon": "id-card-alt",
                                     "id": "439944",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "证件录入",
                                             "url": "./table.html",
@@ -2347,7 +2347,7 @@ var main_list =
                                     "icon": "users-cog",
                                     "id": "439947",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设置外院维修工程师",
                                             "url": "./table.html",
@@ -2370,20 +2370,20 @@ var main_list =
                     "title": "事前论证",
                     "icon": "thumbtack",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "可行性论证",
                             "url": "beneft&t=0&n=0",
                             "shiro": "a",
                             "id": "5",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "经济效益论证",
                                     "url": "./table.html",
                                     "icon": "credit-card",
                                     "id": "51",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "项目方案录入",
                                             "url": "./beneft/prior-argument/scheme-input.html",
@@ -2413,13 +2413,13 @@ var main_list =
                                 {
                                     "title": "效益评价结果",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "56",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备评价等级列表",
-                                            "url": "./beneft/prior-argument/evaluate-children.html",
+                                            "url": "./beneft/prior-argument/evaluate-list.html",
                                             "id": "57",
                                             "shiro": "a"
                                         }
@@ -2433,20 +2433,20 @@ var main_list =
                     "title": "事中监管",
                     "icon": "landmark",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "使用情况分析",
                             "url": "beneft&t=1&n=0",
                             "shiro": "a",
                             "id": "58",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "效率KPI",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "59",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "开机率",
                                             "url": "./beneft/usage-situation/boot-rate.html",
@@ -2476,14 +2476,14 @@ var main_list =
                                 {
                                     "title": "效率等级",
                                     "url": "./beneft/usage-situation/efficiency-level.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "514",
                                     "shiro": "a"
                                 },
                                 {
                                     "title": "效率等级设置",
                                     "url": "./beneft/usage-situation/set-efficiency-level.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "515",
                                     "shiro": "a"
                                 }
@@ -2494,14 +2494,14 @@ var main_list =
                             "url": "beneft&t=1&n=1",
                             "shiro": "a",
                             "id": "516",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "设备成本效益分析",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "517",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "医疗设备成本效益分析评价",
                                             "url": "./beneft/cost-benefit/analysis-evaluation.html",
@@ -2519,10 +2519,10 @@ var main_list =
                                 {
                                     "title": "成本效益设置",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "520",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备成本科目预设",
                                             "url": "./beneft/cost-benefit/set-equipmentcost-subject.html",
@@ -2546,10 +2546,10 @@ var main_list =
                                 {
                                     "title": "成本效益基础管理",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "524",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "内置科目",
                                             "url": "./beneft/cost-benefit/internal-subjects.html",
@@ -2577,14 +2577,14 @@ var main_list =
                             "url": "beneft&t=1&n=2",
                             "shiro": "a",
                             "id": "528",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "跟踪监测",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "529",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "流失情况监测",
                                             "url": "./beneft/sz-supervise/wastage.html",
@@ -2608,10 +2608,10 @@ var main_list =
                                 {
                                     "title": "管控结果",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "533",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "经济指标动态分析报告",
                                             "url": "./beneft/sz-supervise/economic-indicator.html",
@@ -2623,10 +2623,10 @@ var main_list =
                                 {
                                     "title": "综合统计",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "535",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "使用情况统计表",
                                             "url": "./beneft/sz-supervise/service-condition.html",
@@ -2644,10 +2644,10 @@ var main_list =
                                 {
                                     "title": "工作量设置",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "538",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备工作量设置",
                                             "url": "./beneft/sz-supervise/device-work.html",
@@ -2663,14 +2663,14 @@ var main_list =
                             "url": "beneft&t=1&n=3",
                             "shiro": "a",
                             "id": "540",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "收入流失",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "541",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "收入流失分析",
                                             "url": "./beneft/sz-supervise/income-lose.html",
@@ -2682,10 +2682,10 @@ var main_list =
                                 {
                                     "title": "耗用超支",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "543",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "损耗超支分析",
                                             "url": "./beneft/sz-supervise/overspending.html",
@@ -2697,10 +2697,10 @@ var main_list =
                                 {
                                     "title": "损失指标分析",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "545",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "经济损失指标分析",
                                             "url": "./beneft/sz-supervise/economic-loss.html",
@@ -2717,20 +2717,20 @@ var main_list =
                     "title": "定期评价",
                     "icon": "user-edit",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "使用评价",
                             "url": "beneft&t=2&n=0",
                             "shiro": "a",
                             "id": "547",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "工作效率",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "548",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "机时利用率",
                                             "url": "./table.html",
@@ -2748,10 +2748,10 @@ var main_list =
                                 {
                                     "title": "配置效率",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "551",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "预测工作量符合率",
                                             "url": "./table.html",
@@ -2769,10 +2769,10 @@ var main_list =
                                 {
                                     "title": "运营效率",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "554",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "投资收益率",
                                             "url": "./table.html",
@@ -2784,10 +2784,10 @@ var main_list =
                                 {
                                     "title": "综合评价",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "556",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "综合评价",
                                             "url": "./table.html",
@@ -2799,10 +2799,10 @@ var main_list =
                                 {
                                     "title": "评价标准设置",
                                     "url": "./table.html",
-                                    "icon": "clipboard-children",
+                                    "icon": "clipboard-list",
                                     "id": "558",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "使用效率等级设置",
                                             "url": "./table.html",
@@ -2849,13 +2849,13 @@ var main_list =
                     "title": "基础管理",
                     "icon": "building",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "安全指标体系",
                             "url": "admin&t=0&n=0",
                             "shiro": "a",
                             "id": "6",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "指标数据",
                                     "icon": "chart-line",
@@ -2884,14 +2884,14 @@ var main_list =
                             "url": "admin&t=0&n=1",
                             "shiro": "a",
                             "id": "64",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "机构与岗位",
                                     "url": "./table.html",
                                     "icon": "chess-rook",
                                     "id": "65",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "机构管理",
                                             "url": "./table.html",
@@ -2918,7 +2918,7 @@ var main_list =
                                     "icon": "sliders-h",
                                     "id": "69",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "部门类别设置",
                                             "url": "./admin/basic-management/department-category.html",
@@ -2952,14 +2952,14 @@ var main_list =
                             "url": "admin&t=0&n=2",
                             "shiro": "a",
                             "id": "614",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "规章制度查询",
                                     "url": "./table.html",
                                     "icon": "search",
                                     "id": "615",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "已备案的规章制度",
                                             "url": "./admin/basic-management/beian-rules.html",
@@ -2986,7 +2986,7 @@ var main_list =
                                     "icon": "pencil-alt",
                                     "id": "619",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "编写",
                                             "url": "./admin/basic-management/write.html",
@@ -3019,7 +3019,7 @@ var main_list =
                                     "icon": "comment-alt",
                                     "id": "624",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "待评价",
                                             "url": "./admin/basic-management/evaluate.html",
@@ -3052,7 +3052,7 @@ var main_list =
                                     "icon": "search",
                                     "id": "629",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "制定进度",
                                             "url": "./admin/basic-management/schedule-development.html",
@@ -3073,10 +3073,10 @@ var main_list =
                                     "icon": "paperclip",
                                     "id": "632",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "模板列表",
-                                            "url": "./admin/basic-management/template-children.html",
+                                            "url": "./admin/basic-management/template-list.html",
                                             "id": "633",
                                             "shiro": "a"
                                         },
@@ -3095,14 +3095,14 @@ var main_list =
                             "url": "admin&t=0&n=3",
                             "shiro": "a",
                             "id": "635",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "岗位职责查询",
                                     "url": "./table.html",
                                     "icon": "search",
                                     "id": "636",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "已备案的岗位职责",
                                             "url": "./admin/basic-management/post-beian.html",
@@ -3129,7 +3129,7 @@ var main_list =
                                     "icon": "pencil-alt",
                                     "id": "640",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "编写",
                                             "url": "./admin/basic-management/begin-write.html",
@@ -3162,7 +3162,7 @@ var main_list =
                                     "icon": "comment-alt",
                                     "id": "645",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "待评价",
                                             "url": "./admin/basic-management/post-checkPending.html",
@@ -3195,7 +3195,7 @@ var main_list =
                                     "icon": "spinner",
                                     "id": "650",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "制定进度",
                                             "url": "./admin/basic-management/post-schedule.html",
@@ -3216,7 +3216,7 @@ var main_list =
                                     "icon": "paperclip",
                                     "id": "653",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "模板列表",
                                             "url": "./admin/basic-management/post-templateList.html",
@@ -3239,20 +3239,20 @@ var main_list =
                     "title": "科务管理",
                     "icon": "cogs",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "使用部门",
                             "url": "admin&t=1&n=0",
                             "shiro": "a",
                             "id": "656",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "科室团队分工",
                                     "url": "./table.html",
                                     "icon": "chalkboard-teacher",
                                     "id": "657",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "科室管理团队",
                                             "url": "./admin/discipline-management/department-management.html",
@@ -3286,7 +3286,7 @@ var main_list =
                                     "icon": "asterisk",
                                     "id": "662",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "科室质安管理团队汇总",
                                             "url": "./admin/discipline-management/qualitySafe-management.html",
@@ -3331,7 +3331,7 @@ var main_list =
                                     "icon": "wrench",
                                     "id": "669",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备使用管理人授权",
                                             "url": "./admin/discipline-management/department-use.html",
@@ -3365,14 +3365,14 @@ var main_list =
                             "url": "admin&t=1&n=1",
                             "shiro": "a",
                             "id": "674",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "维修分管设备划分",
                                     "url": "./table.html",
                                     "icon": "chalkboard-teacher",
                                     "id": "675",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "工程师负责部门划分",
                                             "url": "./admin/discipline-management/engineer-department.html",
@@ -3413,7 +3413,7 @@ var main_list =
                             "url": "admin&t=1&n=2",
                             "shiro": "a",
                             "id": "680",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "员工信息查询",
                                     "url": "./admin/discipline-management/employee-query.html",
@@ -3436,13 +3436,13 @@ var main_list =
                     "title": "落实监督",
                     "icon": "eye",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "合规性检查",
                             "url": "admin&t=2&n=0",
                             "shiro": "a",
                             "id": "683",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "设备证照检查",
                                     "url": "./admin/supervision/certificate-inspection.html",
@@ -3500,20 +3500,20 @@ var main_list =
                     "title": "改善提高",
                     "icon": "arrow-up",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "改善提案",
                             "url": "admin&t=3&n=0",
                             "shiro": "a",
                             "id": "691",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "改善提案制订",
                                     "url": "./table.html",
                                     "icon": "pencil-alt",
                                     "id": "692",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "新建改善提案",
                                             "url": "./admin/improvement/new-improvement.html",
@@ -3546,7 +3546,7 @@ var main_list =
                                     "icon": "search",
                                     "id": "697",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "提案制订进度",
                                             "url": "./admin/improvement/proposal-progress.html",
@@ -3575,13 +3575,13 @@ var main_list =
                     "title": "数据字典",
                     "icon": "database",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "数据字典",
                             "url": "system&t=0&n=0",
                             "shiro": "a",
                             "id": "7",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "基础字典",
                                     "url": "./system/data-dictionary/basic.html",
@@ -3611,13 +3611,13 @@ var main_list =
                     "title": "系统设置",
                     "icon": "hourglass-start",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "系统设置",
                             "url": "system&t=1&n=0",
                             "shiro": "a",
                             "id": "74",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "LOGO设置",
                                     "url": "./system/system-setup/LOGO-set.html",
@@ -3661,14 +3661,14 @@ var main_list =
                             "url": "system&t=1&n=1",
                             "shiro": "a",
                             "id": "710",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "设备信息",
                                     "url": "./table.html",
                                     "icon": "info-circle",
                                     "id": "711",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "设备信息查询",
                                             "url": "./system/system-setup/information-search.html",
@@ -3733,14 +3733,14 @@ var main_list =
                             "url": "system&t=1&n=2",
                             "shiro": "a",
                             "id": "721",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "提醒设置",
                                     "url": "./table.html",
                                     "icon": "sliders-h",
                                     "id": "722",
                                     "shiro": "a",
-                                    "children": [
+                                    "list": [
                                         {
                                             "title": "提醒类别",
                                             "url": "./system/system-setup/reminder-classify.html",
@@ -3776,13 +3776,13 @@ var main_list =
                     "title": "用户管理",
                     "icon": "users-cog",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "用户管理",
                             "url": "system&t=2&n=0",
                             "shiro": "a",
                             "id": "727",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "用户设置",
                                     "url": "./system/user-management/user-setting.html",
@@ -3812,13 +3812,13 @@ var main_list =
                     "title": "门户管理",
                     "icon": "desktop",
                     "shiro": "a",
-                    "children": [
+                    "content": [
                         {
                             "title": "公告",
                             "url": "system&t=3&n=0",
                             "shiro": "a",
                             "id": "731",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "拟稿",
                                     "url": "./system/portal-management/draft.html",
@@ -3854,7 +3854,7 @@ var main_list =
                             "url": "system&t=3&n=1",
                             "shiro": "a",
                             "id": "736",
-                            "children": [
+                            "items": [
                                 {
                                     "title": "拟稿",
                                     "url": "./system/portal-management/download-draft.html",
