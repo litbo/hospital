@@ -129,7 +129,6 @@
     <div class="main-mask"></div>
 </div>
 <script src="../../static/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../static/admin/js/list.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../static/admin/js/nav.js" type="text/javascript" charset="utf-8"></script>
 <script>
     layui.use('element',function(){
@@ -139,10 +138,10 @@
     window.onload = function(){
             var homes = document.getElementById('home');
         //判断当前页面渲染是否正确，不正确的话将刷新页面重新渲染
-        if($('.layui-nav-tree .layui-nav-child').length >0 && $('.layui-nav-tree .layui-nav-child').prev().children("span").length <= 0){
+        /*if($('.layui-nav-tree .layui-nav-child').length >0 && $('.layui-nav-tree .layui-nav-child').prev().children("span").length <= 0){
             $.cookie("reload",$.cookie("reload")+"-66-");//判断刷新几次
             location.reload();
-        }
+        }*/
         //判断主页点击时渲染是否正确，不正确重载主页
         $("#refresh_home").click(function(){
             if($(this).hasClass("layui-this") || $.cookie("ww") > 100 ){

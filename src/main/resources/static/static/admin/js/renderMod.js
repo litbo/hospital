@@ -67,7 +67,6 @@ $(function () {
                                 }
                                 form.val(val.filter, value);
                             }
-
                         };
                         subUp(val.get)
                     }

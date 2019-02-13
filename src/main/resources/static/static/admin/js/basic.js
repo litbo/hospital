@@ -685,6 +685,8 @@ document.write("<script type='text/javascript' data-version='x2' src='" + window
 document.write("<script type='text/javascript' data-version='x2' src='" + window.location.origin + "/static/admin/js/renderMod.js'></script>");
 
 window.onload = function(){
+    //填充页面URL，便于调试页面
+    $("body").prepend($("<p>").css({"position":"absolute","right":"0","color":"#f10214","border":"1px solid","padding":"5px","z-index": "99999"}).html("当前页面地址："+window.location.href));
     //手机版显示 数据查找 按钮
    var $dataSearch = $("a[lay-event='dataSearch']");
    if($dataSearch.length>0){

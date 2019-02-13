@@ -5,18 +5,38 @@ var $mainList = $("#main_nav_list")
     , $viceList = $(".cts2")
     , $mapSite = $('.map_site')
     , $navList = $(".menus_con")
-    , n = $.getUrlParam('n')//获取URL地址中的 n 属性值，表示副列表的列表项 t 下的第 n 个子列表
-    , t = $.getUrlParam('t')//获取URL地址中的 t 属性值，表示副列表的列表项t下
+    , n = $.getUrlParam('n')//获取URL地址中的 n 属性值，表示右侧副列表的列表项 t 下的第 n 个子列表
+    , t = $.getUrlParam('t')//获取URL地址中的 t 属性值，表示右侧主列表的列表项t下
     , p = $.getUrlParam('p')//获取URL地址中的 p 属性值，表示当前页面的名称
-    , nN = Number(n)
-    , tN = Number(t);
+    , nN = Number(n)//Number化n值
+    , tN = Number(t)
+    , mList = {} //具体页面导航数据
+    , nList = {};//大页面导航数据
 
 $(function () {
-    addList($mainList, $viceList);
-    addNav($navList);
+    $.ajax({
+        url:"/static/admin/js/json/nav.json",
+        async:false,
+        success:function(res){
+            nList = res;
+            addNav($navList);
+            console.log("nav already!");
+            $.ajax({
+                url:"/static/admin/js/json/list.json",
+                async:false,
+                success:function(res){
+                    mList = res;
+                    addList($mainList, $viceList,mList);
+                    console.log("list already!");
+                }
+            })
+        }
+    })
+    //addList($mainList, $viceList,mList);
+    //addNav($navList);
 });
 
-function addList(list, list1) {//list:包含主列表的容器 list1:包含副列表的容器
+function addList(list, list1,main_list) {//list:包含主列表的容器 list1:包含副列表的容器
     function changeTab(ele, callback) {
         layui.use(['element'], function () {
             var element = layui.element;
@@ -30,11 +50,10 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
         })//layui element规定用法，当主列表项无子列表时选中第一个列表项
     }//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）
     function addSample(a) {//a:main_list[x] （x>=0） 或 main_list[x].tools[y].children[z]
-        console.log(a);
-        if (a.children) {//判断是否为 返回首页 列表项（x=0？）
-            console.log(a);
-            for (var i = 0; i < a.children.length; i++) {
-                addPage(a.children[i]);
+        var thisA = a.children || a.items;
+        if (thisA) {//判断是否为 返回首页 列表项（x=0？）
+            for (var i = 0; i < thisA.length; i++) {
+                addPage(thisA[i]);
             }
             if (p !== "home") {//首页不打开新TAB
                 var d = a.children[0];
@@ -54,7 +73,6 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
     }//判断当前页面，新建并切换TAB标签页
     function addPage(a) {//a:main_list[0] 或 main_list[x].items[i] (x>1)
         var small_list = "";
-        //console.log(a);
         if (a.children) {
             var $dl = $("<dl>").attr("class", "layui-nav-child").append(small_list);
             for (var j = 0; j < a.children.length; j++) {
@@ -140,6 +158,7 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
             }
         }
     }//动态添加副列表
+    //页面导航判断与渲染
     for (var x = 1; x < main_list.length; x++) {
         var mX = main_list[x]
             , mXit = mX.items
@@ -151,7 +170,6 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
                         //无默认主列表但有副列表，则使用副列表第一个列表项对应的主列表项为默认导航列表
                         addTools(list1, mX);
                         addSample(mXto[0].children[0]);
-                        console.log(mXto[0]);
                     } else if (mXit.length !== 0 && mXto.length === 0) {
                         //有默认主列表并且无副列表，则不渲染副列表
                         addSample(mX);
@@ -188,12 +206,12 @@ function addList(list, list1) {//list:包含主列表的容器 list1:包含副�
 
 function addMaps(con, x) {//con:包含位置地图的容器名 x:当前页面的序号
     var location = window.location.origin + window.location.pathname;//获取当前页面不包含任何属性值的根地址（例：http://www.XXX.com/index.html）
-    for (var i = 0; i < nav_list.length; i++) {
-        if (p === nav_list[i].page) {
+    for (var i = 0; i < nList.length; i++) {
+        if (p === nList[i].page) {
             if (n !== null && t !== null) {
-                addSite(p, nav_list[i].title, main_list[x].tools[tN].children[nN]);
+                addSite(p, nList[i].title, mList[x].tools[tN].children[nN]);
             } else {
-                addSite("home", "首页", nav_list[i]);
+                addSite("home", "首页", nList[i]);
             }
         }
     }
@@ -207,11 +225,11 @@ function addMaps(con, x) {//con:包含位置地图的容器名 x:当前页面的
 }//通过nav_list匹配页面的名称
 
 function addNav(con) {//con包含导航菜单的容器名
-    for (var i = 0; i < nav_list.length; i++) {
+    for (var i = 0; i < nList.length; i++) {
         con.append($("<li>").attr("class", "layui-nav-item menu-btn")
-            .append($("<a>").attr("href", "?p=" + nav_list[i].page)
-                .append($("<i>").attr("class", nav_list[i].icon))
-                .append($("<p>").attr("class", "menu-tit").html(nav_list[i].title))
+            .append($("<a>").attr("href", "?p=" + nList[i].page)
+                .append($("<i>").attr("class", nList[i].icon))
+                .append($("<p>").attr("class", "menu-tit").html(nList[i].title))
             )
         );
     }

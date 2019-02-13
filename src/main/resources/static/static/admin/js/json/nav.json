@@ -1,0 +1,32 @@
+[
+  {
+    "page": "data",
+    "title": "数据收集",
+    "icon": "fas fa-chart-bar"
+  },
+  {
+    "page": "life",
+    "title": "全寿命管理",
+    "icon": "far fa-heart"
+  },
+  {
+    "page": "safe",
+    "title": "安全管理",
+    "icon": "far fa-smile"
+  },
+  {
+    "page": "beneft",
+    "title": "效益管理",
+    "icon": "far fa-gem"
+  },
+  {
+    "page": "admin",
+    "title": "行政管理",
+    "icon": "fas fa-sitemap"
+  },
+  {
+    "page": "system",
+    "title": "系统管理",
+    "icon": "fas fa-cogs"
+  }
+]
