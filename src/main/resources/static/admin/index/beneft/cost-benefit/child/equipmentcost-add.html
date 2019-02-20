@@ -90,62 +90,6 @@
     </div>
 
 </form>
-<script type="text/html">
-    <!--btn: [
-        {
-            elem: "#selectRoom",
-            func: function () {
-                layOpen({
-                    type: 2,
-                    title: "选择数据",
-                    content: "../../../global/data.html?cb=/benefical/select/listSelectCols&db=/benefical/select/listSelect&key=bm&vg=dtdt",
-                    area: ["90%", "90%"],
-                    end: function () {
-                        //获取数据并且不删除数据
-                        var res = tempValue("dtdt", "bm");
-                        formData["bm"] = res;
-                        //向页面中填充值
-                        if (res !== undefined) {
-                            for (var i = 0; i < res.length; i++) {
-                                for (var name in res[i]) {
-                                    if (res[i].hasOwnProperty(name)) {
-                                        $("*[name=" + name + "]").val(res[i][name])
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        },
-        {
-            elem: "#selectEquip",
-            func: function () {
-                layOpen({
-                    type: 2,
-                    title: "选择数据",
-                    content: "../../../global/data.html?cb=/benefical/select/listSelectCols&db=/benefical/select/listSelect&key=eq&vg=dtdt",
-                    area: ["90%", "90%"],
-                    end: function () {
-                        //获取数据并且不删除数据
-                        var res = tempValue("dtdt", "eq");
-                        formData["eq"] = res;
-                        //向页面中填充值
-                        if (res !== undefined) {
-                            for (var i = 0; i < res.length; i++) {
-                                for (var name in res[i]) {
-                                    if (res[i].hasOwnProperty(name)) {
-                                        $("*[name=" + name + "]").val(res[i][name])
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-    ],-->
-</script>
 
 <script>
     var formData = {};
@@ -160,7 +104,7 @@
             submit: {
                 before: function () {
                     var tv = getTableValue("table");
-                    if (!doJudg({
+                    if (doJudg({
                         "undefined": [formData.bm, formData.eq],
                         0: [tv]
                     })){
@@ -207,13 +151,13 @@
         bind: {
             addItem: {
                 elem: "#addNew",
-                url: "./equipmentcost-add-add.html?vg=sdsd&v=j"
+                url: "./equipmentcost-add-add.html?vg=sdsd&v=j",
+                area:"min"
             },
             delItem: " #delNew",
             selectItem: [
                 {
                     elem: "#selectEquip",
-                    url: "../../../global/data.html",
                     cb: "/benefical/select/listSelectCols",
                     db: "/benefical/select/listSelect",
                     name: "dtdt",
@@ -222,7 +166,6 @@
                 },
                 {
                     elem: "#selectRoom",
-                    url: "../../../global/data.html",
                     cb: "/benefical/select/listSelectCols",
                     db: "/benefical/select/listSelect",
                     name: "dtdt",

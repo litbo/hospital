@@ -492,7 +492,7 @@ function getTableValue(name,inClear){
     layui.use("table",function(){
         var table = layui.table;
         oData =  table.cache[name];
-        if(inClear === false){
+        if(inClear === false || inClear === undefined){
             clear = [];
         }else if(Type(inClear) === "array"){
             if(inClear[0] === true){
@@ -519,31 +519,48 @@ function getTableValue(name,inClear){
 }
 
 //抽象出的简化判断，成立返回false 不成立则返回true
-function judg(data,end,mod){
+function judg(data,end,mod,con){
+    var da = null;
     for(var x=0;x<data.length;x++){
+        da= data[x];
+        if(con === "l"){
+            da = da.length;
+        }else if(Type(con) === "string" && da[con] !== undefined){
+            da = da[con];
+        }
         switch(mod){
             case "=":
-                if(data[x] === end){
+                if(da === end){
                     return false;
                 }
                 break;
             case "<":
-                if(data[x] < end){
+                if(da < end){
                     return false;
                 }
                 break;
             case ">":
-                if(data[x] > end){
+                if(da > end){
                     return false;
                 }
                 break;
             case "<=":
-                if(data[x] <= end){
+                if(da <= end){
                     return false;
                 }
                 break;
             case ">=":
-                if(data[x] >= end){
+                if(da >= end){
+                    return false;
+                }
+                break;
+            case "!=":
+                if(da !== end){
+                    return false;
+                }
+                break;
+            case "!":
+                if(da === !end){
                     return false;
                 }
                 break;
@@ -563,27 +580,27 @@ function doJudg(value){
                     ju = judg(value[name],undefined,"=");
                     break;
                 case 0:
-                    ju = judg(value[name],0,"=");
+                    ju = judg(value[name],0,"=","l");
                     break;
-                case "0":
+                case "00":
                     ju = judg(value[name],"","=");
                     break;
             }
-            //如果有一个匹配成功则会直接返回false，表示有不符合要求的
+            //如果有一个匹配成功则会直接返回true，表示有不符合要求的
             if(!ju){
-                return false;
+                return true;
             }
         }
     }
-    //若全都未匹配则返回true，表示全都符合要求
-    return true;
+    //若全都未匹配则返回false，表示全都符合要求
+    return false;
 }
 
 /**
  * @todo 多函数调用
  * @tips 函数集合
  **/
-func = {
+action = func = {
     //this = obj
     //添加提示信息
     "addMsg": function () {
@@ -656,9 +673,7 @@ func = {
             cc(value);
         } else if (Type(value) === "array") {
             for (var i = 0; i < value.length; i++) {
-                (function (i) {
-                    cc(value[i]);
-                })(i)
+                cc(value[i]);
             }
         } else {
             putMsg({
@@ -672,16 +687,20 @@ func = {
         function cc(vas) {
             layui.use('table', function () {
                 var table = layui.table, layer = layui.layer, filt = vas.filter || "table1",tool = vas.tool || "tool",tableOn = tool+'(' + filt + ')',openT = true;
-                //console.log(tableOn);
                 table.on(tableOn, function (obj) {
-                    //console.log(vas);
+                    //排除多个数据源干扰，如toolbar有数据干扰问题，可移除外层限制if
+                    var event = obj.event;
+                    if(tool === "tool"){
+                        for(var x=0;x<value.length;x++){
+                            if(event === value[x].event){
+                                vas = value[x];
+                            }
+                        }
+                    }
                     if(tool === "toolbar"){
                         var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
                     }
                     var data = obj.data;//获得当前行数据
-                    //console.log("===tool/toolbar===");
-                    //console.log(obj);
-                    //console.log(checkStatus);
                     if(vas.dataUrl && vas.dataUrl !== false){
                         vas.content += "?";
                         for(var i=0;i<vas.dataUrl.length;i++){
@@ -699,35 +718,42 @@ func = {
     },
     //添加表格编辑事件
     "tableEdit":function(value){
-        allData = this.data;
         layui.use('table',function(){
             var table = layui.table;
             table.on('edit('+value.filter+')', function(obj){
                 var val = obj.value //得到修改后的值
                     ,data = obj.data //得到所在行所有数据
                     ,field = obj.field //得到字段对应的name
+                    ,uValue = obj.uValue//字段修改前的值（自定义JS，table.js重置后将失效）
                     ,tips = value.tip || field;
                 layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
                     value.func && value.func(val,obj);
                     layer.close(index);
+                },function(index){
+                    //取消操作将重置已编辑的数据
+                    data[field] = uValue;
+                    obj.update(data);
                 })
             });
         })
     },
-    "layDataAdd":function(index,data,inName){
-        for(var i=0;i<inName.length;i++){
-            data[inName[i]] = $("input[name='"+inName[i]+"']").val();
-        }
-        console.log(data);
-        layer.close(index);
-        //return false;
-    },
     //向表格中添加数据
-    "reTable":function(name,res){
+    "reTable":function(value){
+        var name = value.name || "table",res = value.data;
         layui.use('table',function(){
             var table = layui.table;
             var oData =  table.cache[name];//获取表格所有数据
-            oData.push(res);
+            if(value.cover === true){
+                oData = res;
+            }else{
+                if(Type(res) === "array"){
+                    for(var i=0;i<res.length;i++){
+                        oData.push(res[i]);
+                    }
+                }else if(Type(res) === "json"){
+                    oData.push(res);
+                }
+            }
             //重新渲染表格
             table.reload(name,{
                 data : oData
@@ -737,21 +763,25 @@ func = {
     //表格外获取选中数据并删除选中数据
     "checkTable":function(name){
         layui.use('table', function() {
-            var table = layui.table;
-
-            var oData =  table.cache[name];//获取表格所有数据
+            var table = layui.table
+                ,noCk = false
+                ,oData =  table.cache[name];//获取表格所有数据
             layui.each(oData,function(index,data){
-                //index -> 数据序号 data -> 遍历的所有数据
+                //index -> 数据序号 data -> 遍历的当前数据
                 //当前数据被选中时则删除当前数据，否则清除LAYUI痕迹，最后重新渲染
                 if(data.LAY_CHECKED === true){
                     oData.splice(index, 1);
+                    noCk = true;
                 }else{
+                    //这个可以不要，因为就算删除了，重新渲染表格后依然会自动添加
                     delete data["LAY_CHECKED"];
                     delete data["LAY_TABLE_INDEX"];
                 }
             });
-            if(oData.length<=0){
-                alert("当前为选中任何数据！");
+            if(!noCk){
+                putMsg({
+                    alert:"当前未选中任何数据！"
+                });
                 return false;
             }
             table.reload(name,{
@@ -761,10 +791,9 @@ func = {
     }
 };
 //表格函数调用函数函数
-//@tips 在未来更新中将逐渐弱化此引用函数方式，将采用直接函数书写方式
 function tableFunc(fn){
     if (Type(fn) === "json") {
-        var obj = fn.obj;
+        var obj = fn.obj || this;
         for (var name in fn) {
             if(fn.hasOwnProperty(name)){
                 if (func[name]) {

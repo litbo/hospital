@@ -118,11 +118,10 @@
                 form:{
                     before:function(){
                         var tv = getTableValue("table"),tv1 = getTableValue("table1",[true,"",""]);
-                        var truth = doJudg({
+                        if(doJudg({
                             "undefined":[formData.person,formData.user],
                             0:[tv,tv1]
-                        });
-                        if(!truth){
+                        })){
                             putMsg({
                                 alert:"无法提交空数据！"
                             });
@@ -184,39 +183,30 @@
                }
            ]
        },
-       btn:[
-           {
-               elem:".addNew",
-               func:function(){
-                   var tableId = $(this).data("id") || "table";
-                   layOpen({
-                       type:2,
-                       title:"添加数据",
-                       content:"./equipmentcost-add-add.html?vg=sdsd&v=j",
-                       area:["300px","400px"],
-                       maxmin:false,
-                       end:function(){
-                           var res = tempValue("sdsd","j");
-                           func.reTable(tableId,res);
-                       }
-                   });
-               }
+       bind: {
+           addItem: {
+               elem: ".addNew",
+               url: "./equipmentcost-add-add.html?vg=sdsd&v=j"
            },
-           {
-               elem:".delNew",
-               func:function(){
-                   var tableId = $(this).data("id") || "table";
-                   //basic.js中定义的函数
-                   func.checkTable(tableId);
+           delItem: " .delNew",
+           selectItem: [
+               {
+                   elem: "#selectEquip",
+                   cb: "/benefical/select/listSelectCols",
+                   db: "/benefical/select/listSelect",
+                   name: "dtdt",
+                   key: "eq",
+                   data:formData
+               },
+               {
+                   elem: "#selectRoom",
+                   cb: "/benefical/select/listSelectCols",
+                   db: "/benefical/select/listSelect",
+                   name: "dtdt",
+                   key: "bm",
+                   data:formData
                }
-           }
-       ],
-       bind:{
-           delItem:".delNew",
-           addItem:{
-               elem:".addNew",
-               url:"./equipmentcost-add-add.html?vg=sdsd&v=j"
-           }
+           ]
        }
    }
 </script>

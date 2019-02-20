@@ -439,7 +439,7 @@ $(function () {
                     $(el).on("click",function(){
                         var tableId = $(this).data("id") || "table";
                         //basic.js中定义的函数
-                        func.checkTable(tableId);
+                        action.checkTable(tableId);
                     })
                 },
                 addItem:function(item){
@@ -466,7 +466,10 @@ $(function () {
                             maxmin:false,
                             end:function(){
                                 var res = tempValue(name,value);
-                                func.reTable(tableId,res);
+                                action.reTable({
+                                    name:tableId,
+                                    data:res
+                                });
                             }
                         });
                     })
@@ -483,7 +486,7 @@ $(function () {
                     function forSelect(item){
                         $(item.elem).on("click",function(){
                             if(!doJudg({
-                                "undefined":[item.cb,item.db,item.url,item.name,item.key,item.data]
+                                "undefined":[item.cb,item.db,item.name,item.key,item.data]
                             })){
                                 putMsg({
                                     alert:"页面调用错误，操作无法进行！",
@@ -492,11 +495,11 @@ $(function () {
                                 });
                                 return false;
                             }
-                            var name = item.name,value = item.value || item.key;
+                            var name = item.name,value = item.value || item.key,url = item.url || "/admin/index/global/data.html";
                             layOpen({
                                 type:2,
                                 title:"选择数据",
-                                content:item.url+"?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value,
+                                content:url+"?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value,
                                 area:["90%","90%"],
                                 end:function(){
                                     //获取数据并且删除数据
@@ -551,7 +554,7 @@ $(function () {
             }
             //日期选择器渲染
             laydate.render(date);
-            $.cookie("dddd",JSON.stringify(date));
+            $.cookie("RenderDate-a-Func",JSON.stringify(date));
         }
     });
 });
