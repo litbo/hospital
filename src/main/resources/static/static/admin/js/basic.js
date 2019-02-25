@@ -828,8 +828,9 @@ function tableFunc(fn){
  * @arguments
  * @return
  */
-document.write("<script type='text/javascript' data-version='x2' src='" + window.location.origin + "/static/admin/layui/layui.js'></script>");
-document.write("<script type='text/javascript' data-version='x2' src='" + window.location.origin + "/static/admin/js/renderMod.js'></script>");
+document.write("<script type='text/javascript' data-version='x2' src='/static/admin/layui/layui.js'></script>");
+document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/renderMod.js'></script>");
+document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/>");
 
 window.onload = function(){
     //填充页面URL，便于调试页面

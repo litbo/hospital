@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>申购单论证分析</title>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
-    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label{
             width:145px!important;
@@ -72,6 +72,14 @@
     </div>
     <div class="layui-row">
         <div class="col-xs-12">
+            <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">参考型号及报价</label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                </div>
+            </div>
+            <table id="table" lay-filter="table1"></table>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">选型理由</label>
                 <div class="layui-input-block">
@@ -123,57 +131,26 @@
 </div>
 
 
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-
-        //日期
-        laydate.render({
-            elem: '#date',
-            type: 'datetime'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
+    renderMod = {
+        addTable :{
+            table:{
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    ,{field: 'kmName', title: '生产厂商',minWidth: 150}
+                    ,{field: 'kmValue', title: '型号', minWidth: 150}
+                    ,{field: 'kmValue', title: '报价', minWidth: 150}
+                ]]
+                , toolbar:false
+                , page:false
+                , height: "200"
+                , data: []
+                , text:{
+                    none:"请点击上方按钮添加数据！"
                 }
             }
-            , pass: [/(.+){6,12}$/, '密码必须6到12位']
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-
-    });
+        }
+    }
 </script>
 </body>
 
