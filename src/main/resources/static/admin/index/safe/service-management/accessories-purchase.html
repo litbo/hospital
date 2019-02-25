@@ -37,16 +37,13 @@
             <legend>申购单</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">申购部门</label>
-                <div class="layui-input-block">
-                    <select >
-                        <option>鼻病门诊</option>
-                        <option>111</option>
-                        <option>222</option>
-                    </select>
-                </div>
-            </div>
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">申购部门</label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<select name="bm">-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">申购人<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -62,10 +59,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option></option>
-                        <option>111</option>
-                        <option>222</option>
+                    <select lay-filter="shr">
                     </select>
                 </div>
             </div>
@@ -108,8 +102,7 @@
 
 
 
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
     layui.use(['layer', 'form', 'layedit', 'laydate','upload','table'], function () {
         var form = layui.form
@@ -171,6 +164,23 @@
             ]
         })
     });
+    renderMod={
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"shr",
+                        ids:"obmId",
+                        text:"bmName",
+                        url:"/supervise/bmgl/listWXbms"
+                    }
+                ]
+            }
+        }
+
+    }
+
 </script>
 </body>
 

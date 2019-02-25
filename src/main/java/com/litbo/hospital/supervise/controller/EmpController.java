@@ -35,17 +35,17 @@ public class EmpController {
     }
 
 
-    @GetMapping("listEmpsByBmId")
+    @GetMapping("/listEmpsByBmId")
     public Result getEmpsByBmId(@RequestParam String bmId){
         List<SEmp> emps =  empService.getEmpsByBmId(bmId);
         return Result.success(emps);
     }
-    @PostMapping("saveEmp")
+    @PostMapping("/saveEmp")
     public Result saveEmp(@RequestBody SEmp emp){
         empService.saveEmp(emp);
         return Result.success();
     }
-    @GetMapping("deleteEmpByUserId")
+    @GetMapping("/deleteEmpByUserId")
     public Result deleteEmpByUserId(@RequestParam String empId){
         empService.deleteEmpByUserId(empId);
         return Result.success();

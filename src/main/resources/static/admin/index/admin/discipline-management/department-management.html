@@ -30,9 +30,12 @@
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="" autocomplete="off">
+            <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <div class="layui-inline">
+            <input class="layui-input" name="groupName" placeholder="团队名称" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 <script type="text/html" id="bar">
@@ -97,7 +100,7 @@
                     , {field: 'groupName', title: '团队名称', minWidth: 150}
                     , {fixed: 'right', title:'操作' ,align:'center', toolbar:'#bar',minWidth:80}
                 ]]
-                , url: "/sybm/ksgl/listSelectGroups"
+                , url: "/sybm/ksgl/listSelectGroupsByShCode?shCode=2"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -119,8 +122,9 @@
             },
 
             reSet:{
-                url:"eq/listEqByX",
-                type:"serch",
+                url:"/sybm/ksgl/listSelectGroupsByBmNameAndGNameAndShCode?shCode=2",
+                type:"search",
+                data:["bmName","groupName"],
                 where: {
 
                 }

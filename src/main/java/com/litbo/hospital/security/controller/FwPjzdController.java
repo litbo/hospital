@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -92,8 +93,11 @@ public class FwPjzdController {
         }catch (Exception e){
             return Result.error(CodeMsg.SERVER_ERROR);
         }
-
-
+    }
+    @RequestMapping(value = "fwPjzdTitle",method = RequestMethod.GET)
+    public Result fwPjzdTitle(){
+        String[] titles = {"1","2"};
+        return Result.success(titles);
     }
 
 
