@@ -54,13 +54,37 @@
 </script>
 
 <script>
-    var $url_cols= $.getUrlParam("cb") || "/benefical/select/listSelectCols",//表头链接
-        $url_data= $.getUrlParam("db") || "/benefical/select/listSelect",//表格数据获取链接
+    var $url_cols= $.getUrlParam("cb") || "",//表头链接
+        $url_data= $.getUrlParam("db") || "",//表格数据获取链接
         $url_search= $.getUrlParam("se") || "",//表格搜索相关数据获取链接
-        $key = $.getUrlParam("key"),//页面判断参数
+        $key = $.getUrlParam("key") || "",//页面判断参数
+        $name = $.getUrlParam("vg") || "",
+        $value = $.getUrlParam("v") || $key,
         colsData = [],//表头判断
         searchDom=$("#diyDOM"),//搜索数据DOM
         searchParam=false;//搜索参数,false不使用
+    if($url_search === "undefined"){
+        $url_search = ""
+    }
+    if($value === "undefined"){
+        $value = $key
+    }
+    if(doJudg({
+        "00":[$url_cols,$url_data,$key,$name]
+    })){
+        putMsg({
+            alert:"页面调用错误，操作无法进行！",
+            error:"URL参数传递错误！",
+            log:{
+                cb:$url_cols,
+                db:$url_data,
+                key:$key,
+                name:$name
+            }
+        });
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index); //再执行关闭
+    }
     subUp({
         url: $url_cols,
         type: "POST",
@@ -80,7 +104,8 @@
             }else{
                 colsData.push(res.data.list);
             }
-            console.log(colsData);
+            //console.log($url_cols);
+            //console.log(JSON.stringify(colsData));
             //未填写se参数则代表使用默认条件
             if($url_search !== ""){
                 subUp({
@@ -118,6 +143,9 @@
                             }
                         }
                         , done: function (obj) {
+                            //console.log(obj);
+                            console.log("===obj");
+                            console.log($value);
                             tableFunc({
                                 "obj": obj,
                                 "toolFunc": [
@@ -126,11 +154,16 @@
                                         event: "setThisData",
                                         layOpen: false,
                                         func: function (obj, cs) {
-                                            var name = $.getUrlParam("vg") || "dtdt",key = $.getUrlParam("v") || $.getUrlParam("key") || "tempData";
-                                            layui.sessionData(name, {
-                                                key: key,
+                                            console.log("ccc====");
+                                            console.log($value);
+                                            layui.sessionData($name, {
+                                                key: $value,
                                                 value: cs.data
                                             });
+                                            /*layui.sessionData("c1", {
+                                                key: $value,
+                                                value: cs.data
+                                            });*/
                                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                             parent.layer.close(index); //再执行关闭
                                         }

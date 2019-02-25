@@ -48,7 +48,7 @@
                     , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
                     , {field: 'eqPmId', title: '卫标分类', minWidth: 150, sort: true}
                     , {field: 'bh', title: '申购单编号', minWidth: 150}
-                    , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
+                    , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
                 ]]
                 ,url:"/lifeManage/selectSgKstlSbs"
                 ,method:"POST"
@@ -64,18 +64,20 @@
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
                         "data": res.data.list, //解析数据列表
-                        "count": res.data.size //总数据数
+                        "count": res.data.total //总数据数
                     }
                 }
                 , done: function (obj) {
-                    //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                    action.toolFunc({
+
+                    })
                 }
             },
 
             reSet:{
                 url:"/lifeManage/selectSgKstlSbs",
                 type:"reload",
-                data:["eqPmJc"]
+                data:["eqPmName","eqPmJc"]
             }
         }
     }

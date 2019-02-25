@@ -7,7 +7,12 @@ import com.litbo.hospital.supervise.vo.GroupSelectDetailVO;
 
 public interface GroupService {
     PageInfo getGroups(int pageNum, int pageSize);
+    //获取部门详细信息
     PageInfo getSelectGroups(int pageNum, int pageSize);
+    //获取部门详细信息通过审核标识
+    public PageInfo getSelectGroupsByShCode(int pageNum, int pageSize,String shCode);
+    //获取部门详细信息通过部门名称和团队名称
+    public PageInfo getSelectGroupsByBmNameAndGNameAndShCode(int pageNum, int pageSize,String bmName,String groupName,String shCode);
     SGroup getGroupById(int pageNum, int pageSize, String group_id);
     // 提交科室管理团队信息
     void submitGroups(GroupInsertDetailVO groupInsertDetailVO);

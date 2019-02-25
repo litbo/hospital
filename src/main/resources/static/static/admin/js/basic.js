@@ -14,9 +14,9 @@ var date = new Date()
     , month = date.getMonth() + 1
     , day = date.getDate()
     , today = year + "-" + month + "-" + day//获取年-月-日
-    , time = date.getTime(),
+    , time = date.getTime()
     //初始化页面渲染数据
-    renderMod = {}
+    ,renderMod = {}
     ,allData = null;
 
 /**
@@ -77,6 +77,42 @@ Date.prototype.Format = function(fmt) {
     };
 })(jQuery);
 
+
+/**
+ * @todo 数据类型判断
+ * @tips 类型中返回的Json对应格式为{...},其他格式Json返回相应格式
+ * @arguments value -> 需要判断的数据
+ * @return {string} -> 类型对应的小写名
+ **/
+function Type(value) {
+    if (value === undefined) {
+        return "undefined";
+    } else if (value === null) {
+        return "null";
+    } else if (typeof value === "object") {
+        if (value instanceof Array) {
+            return "array";
+        } else if (value instanceof Function) {
+            return "function";
+        } else {
+            try {
+                var tt = typeof JSON.parse(JSON.stringify(value))
+            } catch (e) {
+                return value.constructor;
+            }
+            if (tt === "object") {
+                return "json"
+                //"json"表示格式为{}的数据，非严格意义的json
+            }
+        }
+    } else if (typeof value === "function") {
+        return "function";
+    } else {
+        var type = typeof (value);
+        return type.toLowerCase();
+    }
+}
+
 /**
  * @todo 本地存储-cookie
  * @tips 以下存储方式将在未来被删除，推荐使用layui-data等框架支持方式本地存储，详见文档
@@ -126,6 +162,7 @@ jQuery.cookie = function (name, value, options) {
 /**
  * @todo 本地存储-session
  * @tips 专对于导航（其他可用，需要适当调整输入）
+ * @warm 除非必要，请不要修改下方三个函数代码，如使用本地存储功能请参照文档
  * @arguments title -> 操作的session名
  *            url -> 操作的session所在的链接search信息
  *            id -> 操作的session对应的导航ID
@@ -203,29 +240,36 @@ function removeStorageMenu(id) {
 
 /**
  * @todo 临时数据传递
- * @tips
+ * @tips 用于获取本地存储中的值，获取后可选择是否删除数据（默认删除本条）
  * @arguments name -> 获取的表名
  *            value -> 获取的键值,当value不存在时则默认会清空表内所有数据
  *            clear -> 获取后是否清空原数据（可空，默认清空查询的数据，可赋值null清空表内所有数据）
  *            type -> 数据存储方式（可空，默认sessionData）
- * @return {string} -> 获取的值，如无value则
+ * @return {Boolean} -> 无name时将返回 false
+ * @return {String} -> 获取的值，如无value则
  **/
 function tempValue(name,value,clear,type){
+    if(!name) return false;//name不存在将返回false
     var temp = null;
     //获取存储的值
     switch(type){
         case"data":temp = layui.data(name);break;
         default:temp = layui.sessionData(name);break;
     }
+    //console.log(temp);
     //清除存储的值
     if(value === undefined || clear === null || clear === "null"){
         layui.sessionData(name,null);
-    }else if(clear !== false){
-            layui.sessionData(name,{
-                remove:true,
-                key:value
-            });
-
+    }else if(clear === undefined || clear === true || clear === "true"){
+        layui.sessionData(name,{
+            remove:true,
+            key:value
+        });
+    }else if(Type(clear) === "string" && clear !== "false"){
+        layui.sessionData(name,{
+            remove:true,
+            key:clear
+        });
     }
     //返回值
     if(value){
@@ -235,40 +279,6 @@ function tempValue(name,value,clear,type){
     }
 }
 
-/**
- * @todo 数据类型判断
- * @tips 类型中返回的Json对应格式为{...},其他格式Json返回相应格式
- * @arguments value -> 需要判断的数据
- * @return {string} -> 类型对应的小写名
- **/
-function Type(value) {
-    if (value === undefined) {
-        return "undefined";
-    } else if (value === null) {
-        return "null";
-    } else if (typeof value === "object") {
-        if (value instanceof Array) {
-            return "array";
-        } else if (value instanceof Function) {
-            return "function";
-        } else {
-            try {
-                var tt = typeof JSON.parse(JSON.stringify(value))
-            } catch (e) {
-                return value.constructor;
-            }
-            if (tt === "object") {
-                return "json"
-                //"json"表示格式为{}的数据，非严格意义的json
-            }
-        }
-    } else if (typeof value === "function") {
-        return "function";
-    } else {
-        var type = typeof (value);
-        return type.toLowerCase();
-    }
-}
 
 /**
  * @todo 信息提示与输出
@@ -292,7 +302,6 @@ function putMsg(errMsg){
         errMsg.func && errMsg.func(layer);
     })
 }
-
 /**
  * @todo 数据合并（JSON）
  * @tips 合并两个数据不一样之处，将y中x没有的项添加进x中（X为主）
@@ -319,10 +328,7 @@ function compareData(x, y) {
  **/
 function markPage(text, time){
     //如果页面中不存在定位元素则创建定位元素
-    var $beg = $(".begin");
-    if ($beg.length <= 0) {
-        $("body").prepend($("<div>").attr("class", "begin"))
-    }
+    var $beg = $("#begin");
     var timer = null;
     text = text || "页面急速加载中!";//遮罩提示文本
     time = Number(time) || 3000;//遮罩显示时间
@@ -334,12 +340,12 @@ function markPage(text, time){
     //一定时间后自动移除遮罩
     clearTimeout(timer);
     timer = setTimeout(function () {
-        $(".begin").remove();
+        $beg.remove();
     }, time);
     //监听页面加载完毕后移除遮罩元素
     document.addEventListener('readystatechange', function () {
         if (document.readyState === "complete") {
-            $(".begin").remove();
+            $beg.remove();
         }
     });
 }
@@ -380,12 +386,15 @@ function layOpen(data,def_data){
  * @tips 包含3种提交形式（原生HTML提交 JS-AJAX XHR提交 JQ-AJAX提交）
  * @param value -> 需要提交的必要参数
  * @param data -> layui返回的函数参数
+ * @param param -> 传递参数
  * @return value参数不正确 -> false{boolean}
  */
-function subUp(value, data) {
-    //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据)
+function subUp(value, data, param) {
+    //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
     //判断必填项是否为空
-    if (!value.url && (value.switch !== "xhr" && value.switch !== "html" && value.data)) {
+    //console.log("SUB-PARAM");
+    //console.log(param);
+    if (!value.url  && value.data) {
         return false;
     }
     //判断是否需要自动获取表单数据(根据input的name属性自动获取所有的数据)
@@ -408,6 +417,13 @@ function subUp(value, data) {
             for (var names in value.add) {
                 if (value.add.hasOwnProperty(names)) {
                     dataP[names] = add[names];
+                }
+            }
+        }
+        if (value.param) {
+            for (var na in value.param) {
+                if (value.param.hasOwnProperty(na)) {
+                    dataP[add[na]] = param[na];
                 }
             }
         }
@@ -470,12 +486,127 @@ function subUp(value, data) {
     }
 }
 
+//获取表格数据并且清空LAYUI自动添加的数据
+function getTableValue(name,inClear){
+    var oData = [],clear=["LAY_CHECKED","LAY_TABLE_INDEX"];
+    layui.use("table",function(){
+        var table = layui.table;
+        oData =  table.cache[name];
+        if(inClear === false || inClear === undefined){
+            clear = [];
+        }else if(Type(inClear) === "array"){
+            if(inClear[0] === true){
+                inClear.splice(0,1);//删除标识符 true
+                clear = clear.concat(inClear);
+            }else{
+                clear = inClear;
+            }
+
+        }else if(Type(inClear === "string")){
+            clear =[inClear];
+        }
+        if(clear.length !== 0){
+            for(var j=0;j<oData.length;j++){
+                for(var x=0;x<clear.length;x++){
+                    if(oData[clear[x]] !== undefined){
+                        delete oData[i][[clear[x]]]
+                    }
+                }
+            }
+        }
+    });
+    return oData;
+}
+
+//抽象出的简化判断，成立返回false 不成立则返回true
+function judg(data,end,mod,con){
+    var da = null;
+    for(var x=0;x<data.length;x++){
+        da= data[x];
+        if(con === "l"){
+            da = da.length;
+        }else if(Type(con) === "string" && da[con] !== undefined){
+            da = da[con];
+        }
+        switch(mod){
+            case "=":
+                if(da === end){
+                    return false;
+                }
+                break;
+            case "<":
+                if(da < end){
+                    return false;
+                }
+                break;
+            case ">":
+                if(da > end){
+                    return false;
+                }
+                break;
+            case "<=":
+                if(da <= end){
+                    return false;
+                }
+                break;
+            case ">=":
+                if(da >= end){
+                    return false;
+                }
+                break;
+            case "!=":
+                if(da !== end){
+                    return false;
+                }
+                break;
+            case "!":
+                if(da === !end){
+                    return false;
+                }
+                break;
+        }
+    }
+    //无成功匹配
+    return true;
+}
+
+//判断数据是否符合要求合法（用于无法使用layui自带判断情况）
+function doJudg(value){
+    var ju = true;
+    for(var name in value){
+        if(value.hasOwnProperty(name)){
+            switch(name){
+                case "undefined":
+                    ju = judg(value[name],undefined,"=");
+                    break;
+                case 0:
+                    ju = judg(value[name],0,"=","l");
+                    break;
+                case "00":
+                    ju = judg(value[name],"","=");
+                    break;
+            }
+            //如果有一个匹配成功则会直接返回true，表示有不符合要求的
+            if(!ju){
+                value.true && value.true === true ? putMsg({
+                    alert:"数据不合法！",
+                    error:"参数不合法，未通过效验！",
+                    log:value
+                }) : value.true();
+                return true;
+            }
+        }
+    }
+    //若全都未匹配则返回false，表示全都符合要求
+    value.false && value.false();
+    return false;
+}
 
 /**
  * @todo 多函数调用
  * @tips 函数集合
  **/
-func = {
+action = func = {
     //this = obj
     //添加提示信息
     "addMsg": function () {
@@ -548,9 +679,7 @@ func = {
             cc(value);
         } else if (Type(value) === "array") {
             for (var i = 0; i < value.length; i++) {
-                (function (i) {
-                    cc(value[i]);
-                })(i)
+                cc(value[i]);
             }
         } else {
             putMsg({
@@ -564,16 +693,20 @@ func = {
         function cc(vas) {
             layui.use('table', function () {
                 var table = layui.table, layer = layui.layer, filt = vas.filter || "table1",tool = vas.tool || "tool",tableOn = tool+'(' + filt + ')',openT = true;
-                //console.log(tableOn);
                 table.on(tableOn, function (obj) {
-                    //console.log(vas);
+                    //排除多个数据源干扰，如toolbar有数据干扰问题，可移除外层限制if
+                    var event = obj.event;
+                    if(tool === "tool"){
+                        for(var x=0;x<value.length;x++){
+                            if(event === value[x].event){
+                                vas = value[x];
+                            }
+                        }
+                    }
                     if(tool === "toolbar"){
                         var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
                     }
                     var data = obj.data;//获得当前行数据
-                    //console.log("===tool/toolbar===");
-                    //console.log(obj);
-                    //console.log(checkStatus);
                     if(vas.dataUrl && vas.dataUrl !== false){
                         vas.content += "?";
                         for(var i=0;i<vas.dataUrl.length;i++){
@@ -591,35 +724,42 @@ func = {
     },
     //添加表格编辑事件
     "tableEdit":function(value){
-        allData = this.data;
         layui.use('table',function(){
             var table = layui.table;
             table.on('edit('+value.filter+')', function(obj){
                 var val = obj.value //得到修改后的值
                     ,data = obj.data //得到所在行所有数据
                     ,field = obj.field //得到字段对应的name
+                    ,uValue = obj.uValue//字段修改前的值（自定义JS，table.js重置后将失效）
                     ,tips = value.tip || field;
                 layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
                     value.func && value.func(val,obj);
                     layer.close(index);
+                },function(index){
+                    //取消操作将重置已编辑的数据
+                    data[field] = uValue;
+                    obj.update(data);
                 })
             });
         })
     },
-    "layDataAdd":function(index,data,inName){
-        for(var i=0;i<inName.length;i++){
-            data[inName[i]] = $("input[name='"+inName[i]+"']").val();
-        }
-        console.log(data);
-        layer.close(index);
-        //return false;
-    },
     //向表格中添加数据
-    "reTable":function(name,res){
+    "reTable":function(value){
+        var name = value.name || "table",res = value.data;
         layui.use('table',function(){
             var table = layui.table;
             var oData =  table.cache[name];//获取表格所有数据
-            oData.push(res);
+            if(value.cover === true){
+                oData = res;
+            }else{
+                if(Type(res) === "array"){
+                    for(var i=0;i<res.length;i++){
+                        oData.push(res[i]);
+                    }
+                }else if(Type(res) === "json"){
+                    oData.push(res);
+                }
+            }
             //重新渲染表格
             table.reload(name,{
                 data : oData
@@ -629,19 +769,27 @@ func = {
     //表格外获取选中数据并删除选中数据
     "checkTable":function(name){
         layui.use('table', function() {
-            var table = layui.table;
-
-            var oData =  table.cache[name];//获取表格所有数据
+            var table = layui.table
+                ,noCk = false
+                ,oData =  table.cache[name];//获取表格所有数据
             layui.each(oData,function(index,data){
-                //index -> 数据序号 data -> 遍历的所有数据
-                //当钱数据被选中时则删除当前数据，否则清除LAYUI痕迹，重新渲染
+                //index -> 数据序号 data -> 遍历的当前数据
+                //当前数据被选中时则删除当前数据，否则清除LAYUI痕迹，最后重新渲染
                 if(data.LAY_CHECKED === true){
                     oData.splice(index, 1);
+                    noCk = true;
                 }else{
+                    //这个可以不要，因为就算删除了，重新渲染表格后依然会自动添加
                     delete data["LAY_CHECKED"];
                     delete data["LAY_TABLE_INDEX"];
                 }
             });
+            if(!noCk){
+                putMsg({
+                    alert:"当前未选中任何数据！"
+                });
+                return false;
+            }
             table.reload(name,{
                 data : oData
             });
@@ -649,10 +797,9 @@ func = {
     }
 };
 //表格函数调用函数函数
-//@tips 在未来更新中将逐渐弱化此引用函数方式，将采用直接函数书写方式
 function tableFunc(fn){
     if (Type(fn) === "json") {
-        var obj = fn.obj;
+        var obj = fn.obj || this;
         for (var name in fn) {
             if(fn.hasOwnProperty(name)){
                 if (func[name]) {
@@ -663,7 +810,7 @@ function tableFunc(fn){
                         case "tools":func["toolFunc"].call(obj, fn["tools"]);break;
                     }
                 }
-                console.log(name + " 已加载！");
+                //console.log(name + " 已加载！");
             }
         }
     } else {
@@ -686,7 +833,7 @@ document.write("<script type='text/javascript' data-version='x2' src='" + window
 
 window.onload = function(){
     //填充页面URL，便于调试页面
-    $("body").prepend($("<p>").css({"position":"absolute","right":"0","color":"#f10214","border":"1px solid","padding":"5px","z-index": "99999"}).html("当前页面地址："+window.location.href));
+    $("body").prepend($("<p>").css({"position":"absolute","right":"0","color":"#f10214","border":"1px solid","padding":"5px","z-index": "99999"}).html("当前页面地址："+window.location.href).on("click",function(){if(confirm("删除此内容？")){$(this).remove()}}));
     //手机版显示 数据查找 按钮
    var $dataSearch = $("a[lay-event='dataSearch']");
    if($dataSearch.length>0){

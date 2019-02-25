@@ -10,11 +10,19 @@
 $(function () {
     layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer","util"], function () {
         var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
-            upload = layui.upload, $ = layui.jquery, layer = layui.layer,util = layui.util,
+            upload = layui.upload, $ = layui.jquery, layer = layui.layer,util = layui.util,param = {},
             formAction = renderMod['form'] || renderMod['formAction']//表单数据
             ,addTable = renderMod['table'] || renderMod['addTable']//表格数据
             ,bindButton = renderMod['btn'] || renderMod['bindButton']//按钮数据
+            ,ahead = renderMod['first'] || renderMod['firstExecute']//最先加载内容
+            ,bindEvent = renderMod['bind'] || renderMod['bindEvent']//常用事件绑定
         ;
+        //最先加载事件
+        if(ahead && ahead !== false){
+            if(Type(ahead)==="function"){
+                ahead();
+            }
+        }
         //表单渲染
         if (formAction && Type(formAction) === "json") {
             var normal = {
@@ -180,23 +188,29 @@ $(function () {
                 }
 
                 form.on('submit' + filter, function (dataBase) {
-                    //data：表单所有数据,包含内容如下
+                    //dataBase：表单所有数据,包含内容如下
                     //-----elem:被执行事件的DOM对象（点击的按钮）
                     //-----form:表单dorm组建，没有form标签则不存在
                     //-----field:容器内的所有表单字段 {name: value}
+
+                    //避免其他按钮被处理
+                    if($(this).attr("lay-submit") === undefined){
+                        return false;
+                    }
 
                     //表单提交前处理事件
                     var bef = true;
                     //console.log(sub.before);
                     if (sub.before) {
-                        bef = sub.before(dataBase)
+                        console.log("before");
+                        bef = sub.before(dataBase);
                     }
                     //bef = Boolean(sub.before && sub.before(data));
                     //console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
-                    sub.form && bef && subUp(sub.form, dataBase);
+                    sub.form && bef && subUp(sub.form, dataBase,param);
                     //表单提交后处理事件(不推荐使用，推荐使用ajax success/error处理)
-                    sub.func && sub.func(dataBase);
+                    sub.func && bef && sub.func(dataBase);
                     //阻止按钮默认事件
                     return false;
                 })
@@ -381,31 +395,8 @@ $(function () {
             }
 
         }
-
-        //日期选择器的渲染函数
-        function a(date) {
-            //匹配默认数据，未填写的参数将使用已有的参数填充
-            compareData(date, nor_date);
-            //判断日期选择器是否为范围选择器
-            if (date.range) {
-                //默认连接符
-                var bars = "~";
-                if (Type(date.range) === "string") {
-                    bars = date.range
-                }
-                if(date.range === true){
-                    date.range = bars;
-                }
-                //默认日期渲染
-                date.value = today + " " + bars + " " + today;
-            }
-            //日期选择器渲染
-            laydate.render(date);
-            $.cookie("dddd",JSON.stringify(date));
-        }
-
-        //按钮绑定
-        if(bindButton){
+        //按钮绑定渲染
+        if(bindButton && bindButton !== false){
             if(Type(bindButton)==="json"){
                 btn(bindButton);
             }else if(Type(bindButton)==="array"){
@@ -430,6 +421,140 @@ $(function () {
                 });//绑定函数
             }
 
+        }
+        //常用事件绑定
+        if(bindEvent && Type(bindEvent) === "json"){
+            var bindFunc = {
+                delItem:function(el){
+                    if(!doJudg({
+                        0:[el]
+                    })){
+                        putMsg({
+                            alert:"页面调用错误，操作无法进行！",
+                            error:"DOM元素填写无效！"
+                        });
+                        return false;
+                    }
+                    //delItem用于删除表格中的选中数据，表格ID获取button标签的data-id，默认ID为"table"
+                    $(el).on("click",function(){
+                        var tableId = $(this).data("id") || "table";
+                        //basic.js中定义的函数
+                        action.checkTable(tableId);
+                    })
+                },
+                addItem:function(item){
+                    if(!doJudg({
+                        "undefined":[item.elem,item.url]
+                    })){
+                        putMsg({
+                            alert:"页面调用错误，操作无法进行！",
+                            error:"必填参数不能为空，请参照文档检查代码(addItem)！"
+                        });
+                        return false;
+                    }
+                    //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
+                    $(item.elem).on("click",function(){
+                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || "j",tableId = $(this).data("id") || "table";
+                        if(item.area === "min"){
+                            areas = ["300px","400px"]
+                        }
+                        layOpen({
+                            type:2,
+                            title:"添加数据",
+                            content:item.url,
+                            area:areas,
+                            maxmin:false,
+                            end:function(){
+                                var res = tempValue(name,value);
+                                action.reTable({
+                                    name:tableId,
+                                    data:res
+                                });
+                            }
+                        });
+                    })
+                },
+                selectItem:function(cl){
+                    if(Type(cl) === "array"){
+                        for(var i=0;i<cl.length;i++){
+                            forSelect(cl[i]);
+                        }
+                    }else if(Type(cl) === "json"){
+                        forSelect(cl);
+                    }
+
+                    function forSelect(item){
+                        $(item.elem).on("click",function(){
+                            if(!doJudg({
+                                "undefined":[item.cb,item.db,item.name,item.key,item.data]
+                            })){
+                                putMsg({
+                                    alert:"页面调用错误，操作无法进行！",
+                                    error:"必填参数不能为空，请参照文档检查代码(selectItem)！",
+                                    log:item
+                                });
+                                return false;
+                            }
+                            var name = item.name,value = item.value || item.key,url = item.url || "/admin/index/global/data.html";
+                            layOpen({
+                                type:2,
+                                title:"选择数据",
+                                content:url+"?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value,
+                                area:["90%","90%"],
+                                end:function(){
+                                    //获取数据并且删除数据
+                                    var res = tempValue(name,value);
+                                    if(res === undefined){
+                                        //不提示信息，避免用户取消
+                                        return false;
+                                    }else{
+                                        //item.data[item.key] = {};
+                                        item.data[item.key] = res;
+                                        //console.log(res);
+                                        for(var i=0;i<res.length;i++){
+                                            for(var key in res[i]){
+                                                if(res[i].hasOwnProperty(key)){
+                                                    $("*[name="+key+"]").val(res[i][key])
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        })
+                    }
+                }
+            };
+            //匹配并运行函数，将参数传递进函数
+            for(var name in bindEvent){
+                if(bindEvent.hasOwnProperty(name)){
+                    if(bindFunc[name] !== undefined){
+                        bindFunc[name](bindEvent[name]);
+                    }
+                }
+            }
+        }
+
+        //日期选择器的渲染函数
+        function a(date) {
+            //匹配默认数据，未填写的参数将使用已有的参数填充
+            compareData(date, nor_date);
+            //判断日期选择器是否为范围选择器
+            if (date.range) {
+                //默认连接符
+                var bars = "~";
+                if (Type(date.range) === "string") {
+                    bars = date.range
+                }
+                if(date.range === true){
+                    date.range = bars;
+                }
+                //默认日期渲染
+                date.value = today + " " + bars + " " + today;
+            }
+            //日期选择器渲染
+            laydate.render(date);
+            $.cookie("RenderDate-a-Func",JSON.stringify(date));
         }
     });
 });

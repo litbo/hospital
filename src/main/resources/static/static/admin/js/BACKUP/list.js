@@ -3267,7 +3267,7 @@ var main_list =
                                         },
                                         {
                                             "title": "已退回管理团队",
-                                            "url": "./table.html",
+                                            "url": "./admin/discipline-management/notpass-team.html",
                                             "id": "660",
                                             "shiro": "a"
                                         }

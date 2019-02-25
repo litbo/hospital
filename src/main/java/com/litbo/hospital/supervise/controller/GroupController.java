@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
+import com.litbo.hospital.supervise.enums.GroupSHEnumProcess;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.service.GroupService;
 import com.litbo.hospital.supervise.vo.GroupInsertDetailVO;
@@ -41,6 +42,48 @@ public class GroupController {
     public Result getSelectGrouplistWclGroupBms(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         PageInfo pageInfo = groupService.getSelectGroups(pageNum,pageSize);
+        return Result.success(pageInfo);
+    }
+
+    //获得科室管理团队通过审核code
+    @GetMapping("/listSelectGroupsByShCode")
+    public Result listSelectGroupsByShCode(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String shCode){
+        PageInfo pageInfo = groupService.getSelectGroupsByShCode(pageNum,pageSize,shCode);
+        return Result.success(pageInfo);
+    }
+
+
+    //获得科室管理团队通过审核code部门名称和团队名称的组联模糊查询
+    @GetMapping("/listSelectGroupsByBmNameAndGNameAndShCode")
+    public Result listSelectGroupsByBmNameAndGNameAndShCode(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName,String shCode){
+        PageInfo pageInfo = groupService.getSelectGroupsByBmNameAndGNameAndShCode(pageNum,pageSize,bmName,groupName,shCode);
+        return Result.success(pageInfo);
+    }
+
+    //获得已通过科室管理团队通过部门名称和团队名称的组联模糊查询
+    @GetMapping("/listSelectYTGGroupsByBmNameAndGName")
+    public Result listSelectYTGGroupsByBmNameAndGName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName){
+        PageInfo pageInfo = groupService.getSelectGroupsByBmNameAndGNameAndShCode(pageNum,pageSize,bmName,groupName,GroupSHEnumProcess.Grouop__ZT_YTG.getCode());
+        return Result.success(pageInfo);
+    }
+
+    //获得待审核科室管理团队通过部门名称和团队名称的组联模糊查询
+    @GetMapping("/listSelectDSHGroupsByBmNameAndGName")
+    public Result listSelectDSHGroupsByBmNameAndGName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName){
+        PageInfo pageInfo = groupService.getSelectGroupsByBmNameAndGNameAndShCode(pageNum,pageSize,bmName,groupName,GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
+        return Result.success(pageInfo);
+    }
+
+
+    //获得已退回科室管理团队通过部门名称和团队名称的组联模糊查询
+    @GetMapping("/listSelectYTHGroupsByBmNameAndGName")
+    public Result listSelectYTHGroupsByBmNameAndGName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName){
+        PageInfo pageInfo = groupService.getSelectGroupsByBmNameAndGNameAndShCode(pageNum,pageSize,bmName,groupName,GroupSHEnumProcess.Grouop_ZT_YTH.getCode());
         return Result.success(pageInfo);
     }
 
@@ -141,5 +184,7 @@ public class GroupController {
         PageInfo date =  groupService.listPreEmps(pageNum,pageSize,bmName);
         return Result.success(date);
     }
+
+
 
 }
