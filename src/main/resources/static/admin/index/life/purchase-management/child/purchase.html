@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>申购单</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>设备购置申请单</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" action="">
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">购置类别</label>
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao">
+                        <option value="0">更新</option>
+                        <option value="1" selected="">新技术新项目</option>
+                        <option value="2">教学/科研</option>
+                        <option value="3">增购</option>
+                        <option value="4">科研合作</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">使用性质</label>
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao">
+                        <option value="0">教学/科研引用</option>
+                        <option value="1" selected="">临床应用</option>
+                        <option value="2">教学/科研/临床兼用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">外地收费价格</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">省内收费价格</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">资金来源</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">资金来源</label>
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao">
+                        <option value="0">教学/科研引用</option>
+                        <option value="1" >临床应用</option>
+                        <option value="2">教学/科研/临床兼用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">数量 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">估价(元)<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="number" autocomplete="off" placeholder="请输入"
+                           class="layui-input" id="gjpd">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">估价(美元)</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="number" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">检测量/日</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">添加生产商</label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                </div>
+            </div>
+            <table id="table" lay-filter="table1"></table>
+
+            <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">功能配置列表</label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew1"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew1"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                </div>
+            </div>
+            <table id="table1" lay-filter="table1"></table>
+        </div>
+        <!--9000-->
+        <div class="col-xs-12" id="showMin">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">购置理由</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="增加购置医学装备的目的、用途、目前教学/科研/临床应用情况，医学装备基本配置及技术参数要求，医学装备功能项目及拟开展或需要增加的功能项目，设计使用率（小时、人次、样本数/月），资金来源为科研经费的详细说明科研项目（课题名称、科研课题申报人、科研课题经费来源及金额）。" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">详细用途</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <!--900000000-->
+        <div class="col-xs-12" id="showMax">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">目的、用途</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">目前教学/科研/临床应用情况</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="资金来源为科研经费的请说明科研项目（课题名称）、科研课题申报人、科研课题经费来源及金额" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">基本参数要求</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">配置详细需求</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">设计使用率</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="小时、人次、样本数/月" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="tips">
+
+</div>
+</body>
+<script>
+    renderMod = {
+        table:{
+            table:[
+                {
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        ,{field: 'kmName', title: '参考生产厂商',minWidth: 150}
+                        ,{field: 'kmValue', title: '规格型号', minWidth: 150}
+                        ,{field: 'kmValue', title: '估价', minWidth: 150}
+                    ]]
+                    , toolbar:false
+                    , page:false
+                    , height: "200"
+                    , data: []
+                    , text:{
+                        none:"请点击上方按钮添加数据！"
+                    }
+                },
+                {
+                    elem:"#table1",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        ,{field: 'kmName', title: '功能名称',minWidth: 150}
+                        ,{field: 'kmValue', title: '功能描述', minWidth: 150}
+                        ,{field: 'kmValue', title: '使用', minWidth: 150}
+                    ]]
+                    , toolbar:false
+                    , page:false
+                    , height: "200"
+                    , data: []
+                    , text:{
+                        none:"请点击上方按钮添加数据！"
+                    }
+                }
+            ]
+        },
+        bind:{
+
+        }
+    };
+
+    $(function(){
+        var ss = null;
+        pd(true);
+        $("#gjpd").on("change",pd).keydown(function(event){
+            if(event.keyCode === 13){
+                pd();
+                return false;
+            }
+        });
+        function pd(f){
+            var mm = Number($("#gjpd").val());
+            if(mm > 5000){
+                !f && putMsg({
+                    msg:"数据已修改！"
+                });
+                $("#showMin").addClass("hidden");
+                $("#showMax").removeClass("hidden");
+            }else{
+                !f && putMsg({
+                    msg:"数据已修改！"
+                });
+                $("#showMin").removeClass("hidden");
+                $("#showMax").addClass("hidden");
+            }
+        }
+
+    })
+</script>
+</html>

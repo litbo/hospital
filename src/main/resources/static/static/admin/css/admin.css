@@ -2100,6 +2100,11 @@ html {
 .layui-form-pane .layui-form-item[pane] .layui-form-label {
   line-height: 2.3;
 }
+.PoAb0xx0 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 @media (max-width: 768px) {
   .main-layout-side {
     position: fixed;

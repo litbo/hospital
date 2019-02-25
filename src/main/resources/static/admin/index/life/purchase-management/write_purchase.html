@@ -14,6 +14,25 @@
     <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        #desInfo h1{
+            padding:15px 0;
+            text-align: center;
+        }
+        ol{
+            padding:15px;
+        }
+        ol li{
+            list-style: unset;
+            margin-left: 40px;
+            font-size: 1.4em;
+            padding: 5px 0;
+        }
+        .bold{
+            font-weight:600;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,9 +41,24 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+    <div class="hidden" id="desInfo">
+        <h1>医学装备购置申请填表说明</h1>
+        <ol>
+            <li>为落实医疗器械监督管理条例、医疗器械临床使用安全管理规范、医疗卫生机构医学装备管理办法、《三级综合医院评审标准》等的要求，规范医学装备购置流程，满足医院医、教、研的需要，凡涉及医学装备增加、购置等的相关科室，均需填写相关表格并上报医学工程处。</li>
+            <li>办公家具、病床车辆只需填写<span class="bold">《办公及医用家具、病床车辆增加购置申请表》</span>。</li>
+            <li>万元以下设备、器械只需填写<span class="bold">《万元以下医学装备增加购置申请表》</span>，价值万元以上、10万元以下的设备只需填写<span class="bold">《万元以下医学装备增加购置申请表》《万元以上10万元以下医学装备增加购置申请表》</span>。</li>
+            <li>价值在10万至100万之间的设备，需填写<span class="bold">《医学装备购置申请及临床准入评价报告》封面</span>、<span class="bold">《医学装备增加购置申请表》</span>、<span class="bold">《医学装备可行性分析表》</span>。</li>
+            <li>价值在100万以上的设备，需填写<span class="bold">《医学装备购置申请及临床准入评价报告》封面</span>、<span class="bold">《医学装备增加购置申请表》</span>、<span class="bold">《医学装备可行性分析表》</span>、<span class="bold">《大型医学装备考察报告表》</span>（若进行过考察）。</li>
+            <li>凡涉及增加、购置的医学装备，需由医学工程处档案管理人员审核相关资质，审核通过后填写<span class="bold">《厂商资质审核表》</span>。相关洽谈、论证、决议过程及结果由参加会议的记录人员记录填写<span class="bold">《医学装备管理会议记录》</span>并归档。</li>
+            <li>50万以上的需进行可行性论证，<span class="bold">《医学装备论证表》</span>由医疗设备管理委员会待医学装备临床准入评价及集体论证后由医学工程处相关人员填写，得出论证结论，参与论证的相关人员签字确认。</li>
+            <li>进入采购程序，签订合同。</li>
+            <li>以上各项合并成<span class="bold">《医学装备购置申请及临床准入评价报告》</span>，形成增加购置管理档案，提交给档案管理程序，分别编号归档。</li>
+            <li>表格内容请按要求逐项填写清楚、完整。若表格容量不够，请另附纸写明。其它不明事宜，请致电医学工程处咨询。</li>
+        </ol>
+    </div>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">填表说明</a>
+        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="describe">填表说明</a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
@@ -68,8 +102,20 @@
                     }
                 }
                 , done: function (obj) {
-                    action.toolFunc({
-
+                    tableFunc({
+                        tools:[
+                            {
+                                tool:"toolbar",
+                                event:"describe",
+                                content:$("#desInfo")
+                            },
+                            {
+                                event:"purchase",
+                                type:2,
+                                content:"./child/purchase.html",
+                                dataUrl:["id"]
+                            }
+                        ]
                     })
                 }
             },

@@ -426,12 +426,13 @@ $(function () {
         if(bindEvent && Type(bindEvent) === "json"){
             var bindFunc = {
                 delItem:function(el){
-                    if(!doJudg({
+                    if(doJudg({
                         0:[el]
                     })){
                         putMsg({
                             alert:"页面调用错误，操作无法进行！",
-                            error:"DOM元素填写无效！"
+                            error:"DOM元素填写无效！(delItem)",
+                            log:el
                         });
                         return false;
                     }
@@ -443,12 +444,13 @@ $(function () {
                     })
                 },
                 addItem:function(item){
-                    if(!doJudg({
+                    if(doJudg({
                         "undefined":[item.elem,item.url]
                     })){
                         putMsg({
                             alert:"页面调用错误，操作无法进行！",
-                            error:"必填参数不能为空，请参照文档检查代码(addItem)！"
+                            error:"必填参数不能为空，请参照文档检查代码(addItem)！",
+                            log:item
                         });
                         return false;
                     }
@@ -485,7 +487,7 @@ $(function () {
 
                     function forSelect(item){
                         $(item.elem).on("click",function(){
-                            if(!doJudg({
+                            if(doJudg({
                                 "undefined":[item.cb,item.db,item.name,item.key,item.data]
                             })){
                                 putMsg({
