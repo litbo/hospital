@@ -34,6 +34,19 @@ public class GroupServiceImpl implements GroupService {
         List<SGroupSelectVO> date = groupDao.getSelectGroups();
         return new PageInfo(date);
     }
+    @Override
+    public PageInfo getSelectGroupsByShCode(int pageNum, int pageSize,String shCode) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SGroupSelectVO> date = groupDao.getSelectGroupsByShCode(shCode);
+        return new PageInfo(date);
+    }
+
+    @Override
+    public PageInfo getSelectGroupsByBmNameAndGNameAndShCode(int pageNum, int pageSize,String bmName,String groupName,String shCode) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SGroupSelectVO> date = groupDao.getSelectGroupsByBmNameAndGNameAndShCode(bmName,groupName,shCode);
+        return new PageInfo(date);
+    }
 
     @Override
     public SGroup getGroupById(int pageNum, int pageSize, String group_id) {

@@ -18,8 +18,8 @@ public class BmGcsEqProvider {
                 "   LEFT JOIN s_bm bm ON(swge.bm_id=bm.bm_id) " +
                 "   LEFT JOIN s_emp emp on (swge.user_id=emp.user_id)" +
                 "   LEFT JOIN eq_info eq ON (swge.eq_id=eq.eq_id) where 1=1" );
-        if(xvo.getBmId()!=null)  sql.append(" and bm.bm_id=#{bmId} ");
-        if(xvo.getUserId()!=null) sql.append(" and emp.user_id=#{userId} ");
+        if(!"0000000000".equals(xvo.getBmId()))  sql.append(" and bm.bm_id=#{bmId} ");
+        if(!"0000000000".equals(xvo.getUserId())) sql.append(" and emp.user_id=#{userId} ");
         if(xvo.getEqPym()!=null) sql.append(" and eq.eq_pym like '%'+#{eqPym}+'%' ");
         return sql.toString();
     }
