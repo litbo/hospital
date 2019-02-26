@@ -43,13 +43,35 @@ public class SelectController {
     public Result listSelectCols(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                 String key) {
-        if(key.equals("eq")) {
-            PageInfo date = es.listShowEqs(pageNum, pageSize);
+        if(key.equals("bm")) {
+            String jsonMessage = "[{'type': 'radio'}, "+"{field: 'bmName', title: '科室名称'}]";
+            JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);
+            PageInfo date = new PageInfo(myJsonArray);
             return Result.success(date);
         }
-        if(key.equals("bm")) {
+        if(key.equals("eq")) {
 
-            String jsonMessage = "[{'type': 'radio'}, "+"{field: 'bmName', title: '科室名称'}]";
+            /*
+            * "eqId": 10000,
+                "eqSbbh": "181268031101310000",
+                "eqName": "设备名称",
+                "eqZcbh": "11111",
+                "eqPmName": null,
+                "eqGg": "测试规格1",
+                "eqXh": "测试型号1",
+                "bmName": "管理部门",
+                "eqQysj": "2017-06-04T16:00:00.000+0000",
+                "eqSyzt": "在用"
+            * */
+            String jsonMessage = "[{'type': 'radio'}, "+
+                    "{field: 'eqSbbh', title: '设备编号'},"+
+                    "{field: 'eqName', title: '设备名称'},"+
+                    "{field: 'eqXh', title: '型号'},"+
+                    "{field: 'eqGg', title: '规格'},"+
+                    "{field: 'bmName', title: '所属科室'},"+
+                    "{field: 'bmSyzt', title: '使用状态'},"+
+                    "]";
+
             JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);
             PageInfo date = new PageInfo(myJsonArray);
             return Result.success(date);
