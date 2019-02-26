@@ -74,13 +74,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">包装单位</label>
                 <div class="layui-input-block">
-                    <select name="pjBzdw">
-                        <option>分类</option>
-                        <option>维材-医疗维修</option>
-                        <option>维材-办公维修</option>
-                        <option>维材-普通维修</option>
-                        <option>维材-家具维修</option>
-                        <option>维材-其他</option>
+                    <select name="pjBzdw" lay-filter="pjBzdw">
                     </select>
                 </div>
             </div>
@@ -203,6 +197,22 @@
         //     return false;
         // });
     });
+    renderMod={
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"pjBzdw",
+                        ids:"eqJldwName",
+                        text:"eqJldwName",
+                        url:"/eqdict/jldw"
+                    }
+                ]
+            }
+        }
+
+    }
 </script>
 </body>
 
