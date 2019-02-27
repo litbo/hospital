@@ -392,38 +392,44 @@ function layOpen(data,def_data){
 function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
     //判断必填项是否为空
-    //console.log("SUB-PARAM");
+    console.log("SUB-PARAM");
     //console.log(param);
     if (!value.url  && value.data) {
         return false;
     }
     //判断是否需要自动获取表单数据(根据input的name属性自动获取所有的数据)
     if (Type(value.data) === "array") {
+        //dataP 提交的数据
         var dataP = {}, valus = null;
         for (var i = 0; i < value.data.length; i++) {
             valus = value.data[i];
+            //当data不存在时获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
             if (!data) {
                 var inputValue = $("input[name=" + valus + "]").val();
                 if (inputValue) {
                     dataP[valus] = inputValue;
                 } else if ($("select[name=" + valus + "]").val()) {
                     dataP[valus] = $("select[name=" + valus + "]").val();
+                } else if($("textarea[name=" + valus + "]").val()){
+                    dataP[valus] = $("textarea[name=" + valus + "]").val();
                 }
             } else {
                 dataP[valus] = data.field[valus];
             }
         }
+        //添加附加数据
         if (value.add) {
             for (var names in value.add) {
                 if (value.add.hasOwnProperty(names)) {
-                    dataP[names] = add[names];
+                    dataP[names] = value.add[names];
                 }
             }
         }
         if (value.param) {
+            console.log(param);
             for (var na in value.param) {
                 if (value.param.hasOwnProperty(na)) {
-                    dataP[add[na]] = param[na];
+                    dataP[value.param[na]] = param[na];
                 }
             }
         }
@@ -479,6 +485,7 @@ function subUp(value, data, param) {
         };
         var backData = function (callback) {
             compareData(value, ajaxOptions);
+            console.log(dataP);
             value.data = dataP || value.data;
             $.ajax(value);
         };
@@ -492,7 +499,7 @@ function getTableValue(name,inClear){
     layui.use("table",function(){
         var table = layui.table;
         oData =  table.cache[name];
-        if(inClear === false || inClear === undefined){
+        if(inClear === false){
             clear = [];
         }else if(Type(inClear) === "array"){
             if(inClear[0] === true){
@@ -502,7 +509,7 @@ function getTableValue(name,inClear){
                 clear = inClear;
             }
 
-        }else if(Type(inClear === "string")){
+        }else if(Type(inClear) === "string"){
             clear =[inClear];
         }
         if(clear.length !== 0){
