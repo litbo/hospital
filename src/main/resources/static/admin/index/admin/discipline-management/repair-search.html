@@ -34,10 +34,9 @@
             <button class="layui-btn" date-type="">清除划分</button>
         </div>
         <div class="layui-inline">
-            <select lay-filter="select1" name="bmId">
+            <select lay-filter="wxbm" name="bmId">
                 <option value="0000000000">维修部门</option>
-                <option value="0202010000">计算机维修</option>
-                <option value="0201000000">医工</option>
+
             </select>
         </div>
         <div class="layui-inline">
@@ -59,6 +58,19 @@
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
     renderMod = {
+            form:{
+                val:{
+                    filter:"forms",
+                    select:[
+                        {
+                            filter:"wxbm",
+                            ids:"bmId",
+                            text:"bmName",
+                            url:"/supervise/bmgl/listWXbms"
+                        }
+                    ]
+                }
+            },
         addTable: {
             table: {
                 cols: [[ //表头

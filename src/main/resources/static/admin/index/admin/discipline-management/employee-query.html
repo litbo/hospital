@@ -30,10 +30,8 @@
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <select name="bmId">
+            <select lay-filter="bm" name="bmId">
                 <option value="0000000000">所有部门</option>
-                <option value="0200000000">管理部门</option>
-                <option value="0202010000">计算机维修</option>
             </select>
         </div>
         <div class="layui-inline">
@@ -51,6 +49,19 @@
 <script>
 
     renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"bm",
+                        ids:"bmId",
+                        text:"bmName",
+                        url:"/supervise/bmgl/listBms2"
+                    }
+                ]
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
