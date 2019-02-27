@@ -25,6 +25,10 @@ public class BmServiceImpl implements BmService {
         List<SBm> date = bmDao.getBmList();
         return new PageInfo(date);
     }
+    @Override
+    public List<SBm> getBmList() {
+        return bmDao.getBmList();
+    }
 
     @Override
     public PageInfo getXBmList(int pageNum, int pageSize) {

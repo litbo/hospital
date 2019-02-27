@@ -28,8 +28,12 @@ public interface GroupService {
     PageInfo getYTHGroupByCId(int pageNum, int pageSize, String createId);
     //获得所有管理部门的基本详情信息
     PageInfo getGroupsMSGDetail(int pageNum, int pageSize);
+    //获得管理部门的基本详情信息通过科室名称
+    PageInfo getGroupsMSGDetailByBmName(int pageNum, int pageSize, String bmName);
     //获得未成立管理团队的部门
     PageInfo listWclGroupBm(int pageNum, int pageSize);
     //通过岗位名称获取每个队伍相对应的人员信息
     PageInfo listPreEmps(int pageNum, int pageSize, String gwName);
+    //通过岗位名称人员姓名部门名称联合模糊获取每个队伍相对应的人员信息
+    PageInfo listPreEmpsByBmNameAndGwName(int pageNum, int pageSize, String gwName, String userXm, String bmName);
 }

@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -63,5 +64,13 @@ public class EmpController {
         return Result.success(emps);
     }
 
+    //获取登陆人的同部门伙伴信息  只包括userId和userXm
+    @GetMapping("/listPartnerByUserId")
+    public Result listPartnerByUserId(HttpServletRequest request){
+        String userId="1";
+//        userId=(String) request.getSession().getAttribute("username");
+        List<SEmp> emps = empService.listPartnerByUserId(userId);
+        return Result.success(emps);
+    }
 
 }

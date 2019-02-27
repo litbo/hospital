@@ -9,6 +9,8 @@ import java.util.List;
 public interface BmService {
     //返回所有部门
     PageInfo getBmList(int pageNum, int pageSize);
+    //返回所有部门不分頁
+    List<SBm> getBmList();
     //返回所有虚部门
     PageInfo getXBmList(int pageNum, int pageSize);
     //返回所有叶子部门

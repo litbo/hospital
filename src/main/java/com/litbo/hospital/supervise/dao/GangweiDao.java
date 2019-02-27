@@ -14,6 +14,8 @@ import java.util.List;
 public interface GangweiDao {
     @Select("select * from s_gangwei")
     List<SGangwei> getGws();
+    @SelectProvider(type = GwProvider.class ,method = "getGwsByGwLevelAndGwName")
+    List<SGangwei> getGwsByGwLevelAndGwName(@Param("gwLevel") String gwLevel, @Param("gwName") String gwName);
 
     @Insert("insert into s_gangwei (gw_id, gw_name, user_id, \n" +
             "      create_time, doc_url, gw_level, \n" +
