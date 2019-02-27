@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
-import com.litbo.hospital.supervise.enums.GroupSHEnumProcess;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.service.GroupService;
 import com.litbo.hospital.supervise.vo.GroupInsertDetailVO;
@@ -62,30 +61,7 @@ public class GroupController {
         return Result.success(pageInfo);
     }
 
-    //获得已通过科室管理团队通过部门名称和团队名称的组联模糊查询
-    @GetMapping("/listSelectYTGGroupsByBmNameAndGName")
-    public Result listSelectYTGGroupsByBmNameAndGName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName){
-        PageInfo pageInfo = groupService.getSelectGroupsByBmNameAndGNameAndShCode(pageNum,pageSize,bmName,groupName,GroupSHEnumProcess.Grouop__ZT_YTG.getCode());
-        return Result.success(pageInfo);
-    }
 
-    //获得待审核科室管理团队通过部门名称和团队名称的组联模糊查询
-    @GetMapping("/listSelectDSHGroupsByBmNameAndGName")
-    public Result listSelectDSHGroupsByBmNameAndGName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName){
-        PageInfo pageInfo = groupService.getSelectGroupsByBmNameAndGNameAndShCode(pageNum,pageSize,bmName,groupName,GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
-        return Result.success(pageInfo);
-    }
-
-
-    //获得已退回科室管理团队通过部门名称和团队名称的组联模糊查询
-    @GetMapping("/listSelectYTHGroupsByBmNameAndGName")
-    public Result listSelectYTHGroupsByBmNameAndGName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName){
-        PageInfo pageInfo = groupService.getSelectGroupsByBmNameAndGNameAndShCode(pageNum,pageSize,bmName,groupName,GroupSHEnumProcess.Grouop_ZT_YTH.getCode());
-        return Result.success(pageInfo);
-    }
 
     //通过id获得科室管理团队
     @GetMapping("/getGroupById")
@@ -167,6 +143,15 @@ public class GroupController {
         return Result.success(date);
     }
 
+    //获得管理部门的基本详情信息通过科室名称
+    @GetMapping("/getGroupsMSGDetailByBmName")
+    public Result getGroupsMSGDetailByBmName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                     @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName){
+
+        PageInfo date =  groupService.getGroupsMSGDetailByBmName(pageNum,pageSize,bmName);
+        return Result.success(date);
+    }
+
     //获得未成立部门
     @GetMapping("/listWclGroupBm")
     public Result listWclGroupBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -179,9 +164,18 @@ public class GroupController {
     @GetMapping("/listPreEmps")
     public Result listPreEmps(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                  @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                              String bmName){
+                              String gwName){
 
-        PageInfo date =  groupService.listPreEmps(pageNum,pageSize,bmName);
+        PageInfo date =  groupService.listPreEmps(pageNum,pageSize,gwName);
+        return Result.success(date);
+    }
+
+    @GetMapping("/listPreEmpsByBmNameAndUserXm")
+    public Result listPreEmpsByBmNameAndGwName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                              String gwName,String userXm,String bmName){
+
+        PageInfo date =  groupService.listPreEmpsByBmNameAndGwName(pageNum,pageSize,gwName,userXm,bmName);
         return Result.success(date);
     }
 

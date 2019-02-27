@@ -25,4 +25,6 @@ public interface EmpService {
     PageInfo listSelectEmps(int pageNum, int pageSize);
     //获取Emp基本信息通过部门id和userId
     PageInfo listSelectEmpBybmIdAndUserId(int pageNum, int pageSize, String bmId, String userId);
+    //获取登陆人的同部门伙伴信息
+    List<SEmp> listPartnerByUserId(String userId);
 }

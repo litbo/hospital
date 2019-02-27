@@ -13,6 +13,8 @@ public interface GangweiService {
     void deleteGwByGwId(String gw_id);
     //获取所有岗位
     PageInfo getGws(int pageNum, int pageSize);
+    //获取岗位列表通过级别和名称迷糊查询
+    PageInfo getGwsByGwLevelAndGwName(int pageNum, int pageSize, String gwLevel, String gwName);
     //通过岗位id获取岗位信息
     SGangwei getGwsByGwId(int pageNum, int pageSize, String gw_id);
     //通过岗位等级来获取岗位信息

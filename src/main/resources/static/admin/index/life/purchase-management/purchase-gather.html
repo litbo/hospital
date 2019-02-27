@@ -54,12 +54,18 @@
     </div>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价表</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析表</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备考察报告表</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析表</a>
+    {{#  if(d.dxzbId !== null){ }}
+        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备考察报告表</a>
+    {{#  } else if(d.kstlId !== null) { }}
+        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
+    {{#  } else if(d.kxfxId !== null) { }}
+        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析表</a>
+    {{#  } else if(d.lzfxId !== null) { }}
+        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析表</a>
+    {{#  } else if(d.pjbgId !== null) { }}
+        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价表</a>
+    {{#  } }}
 </script>
 <script>
     renderMod = {
@@ -90,6 +96,7 @@
                     }
                 }
                 , done: function (obj) {
+                    console.log(obj);
                     //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
                 }
             },

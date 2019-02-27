@@ -4,6 +4,7 @@ package com.litbo.hospital.beneficial.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.beneficial.service.BAccountService;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.user.service.EqService;
@@ -22,6 +23,9 @@ public class SelectController {
     @Autowired
     private BmService bmService;
 
+    @Autowired
+    private BAccountService bAccountService;
+
 
     @RequestMapping(value = "/listSelect")
     public Result listSelect(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
@@ -33,6 +37,14 @@ public class SelectController {
         }
         if(key.equals("bm")) {
             PageInfo date = bmService.getBmList(pageNum,pageSize);
+            return Result.success(date);
+        }
+        if(key.equals("cbkm")) {
+            PageInfo date = bAccountService.listCbAccount(pageNum,pageSize);
+            return Result.success(date);
+        }
+        if(key.equals("srkm")) {
+            PageInfo date = bAccountService.listSrAccount(pageNum,pageSize);
             return Result.success(date);
         }
         else
@@ -72,6 +84,20 @@ public class SelectController {
                     "{field: 'bmSyzt', title: '使用状态'},"+
                     "]";
 
+            JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);
+            PageInfo date = new PageInfo(myJsonArray);
+            return Result.success(date);
+        }
+
+        if(key.equals("cbkm")) {
+            String jsonMessage = "[{'type': 'radio'}, " + "{field: 'kmName', title: '科目名称'}"+"{field: 'kmNum', title: '科目编号'}]";
+            JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);
+            PageInfo date = new PageInfo(myJsonArray);
+            return Result.success(date);
+        }
+
+        if(key.equals("srkm")) {
+            String jsonMessage = "[{'type': 'radio'}, " + "{field: 'kmName', title: '科目名称'}"+"{field: 'kmNum', title: '科目编号'}]";
             JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);
             PageInfo date = new PageInfo(myJsonArray);
             return Result.success(date);

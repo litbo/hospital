@@ -18,4 +18,20 @@ public class GroupProvider {
         if(groupName!=null) sql.append(" and sp.group_name Like '%'+#{groupName}+'%'");
         return sql.toString();
     }
+
+    public String listPreEmpsByBmNameAndGwName(String gwName, String userXm,String bmName){
+
+        StringBuffer sql = new StringBuffer("" +
+                "   SELECT bm.bm_name,  emp.user_xm,sex.sex,emp.tel " +
+                "   from s_group gp " +
+                "   INNER JOIN s_group_users gpu on (gp.group_id=gpu.group_id) " +
+                "   INNER JOIN s_gangwei gw ON (gpu.gw_id=gw.gw_id) " +
+                "   INNER JOIN s_emp emp ON (emp.user_id=gpu.user_id) " +
+                "   INNER JOIN s_bm bm ON (bm.bm_id=gp.bm_id) " +
+                "   INNER JOIN s_sex sex ON (sex.sex_id=emp.sex_id) " +
+                "   where  gw.gw_name=#{gwName}" );
+        if(userXm!=null)  sql.append(" and emp.user_xm Like '%'+#{userXm}+'%'");
+        if(bmName!=null) sql.append(" and bm.bm_name Like '%'+#{bmName}+'%'");
+        return sql.toString();
+    }
 }
