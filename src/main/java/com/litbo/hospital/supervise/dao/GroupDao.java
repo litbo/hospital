@@ -101,7 +101,8 @@ public interface GroupDao {
             "    where gw.gw_name=#{gwName}")
     List<GroupPerCateGoryUserMSGDetailVO> listPreEmps(String gwName);
 
-
+    @SelectProvider(type = GroupProvider.class,method = "listPreEmpsByBmNameAndGwName")
+    List<GroupPerCateGoryUserMSGDetailVO> listPreEmpsByBmNameAndGwName(@Param("gwName") String gwName, @Param("userXm")String userXm, @Param("bmName")String bmName);
 
 //    SELECT * from s_group_users u INNER JOIN s_emp emp on (u.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (u.gw_id=gw.gw_id)gw_id
 }

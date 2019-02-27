@@ -44,13 +44,10 @@
     <div class="hidden-xs" id="moreBar">
         <div class="layui-input-inline">
             <label>
-                <select class="layui-select" name="bmId">
-                    <option value="">全部科室</option>
-                    <option value="0302010000">CT室</option>
-                    <option value="0202010000">计算机维修</option>
-                    <option value="0302030000">儿童保健门诊</option>
-                    <option value="0200000000">管理部门</option>
-                </select>
+                <div class="layui-input-block">
+                    <select name="bmId" lay-filter="bmId">
+                    </select>
+                </div>
             </label>
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
@@ -73,26 +70,24 @@
 <script>
     renderMod = {
         addTable: {
-            table:{
+            table: {
                 cols: [[ //表头
-                    {type:"checkbox"}
+                    {type: "checkbox"}
                     , {field: 'bmName', title: '部门名称', minWidth: 150, event: 'openLink'}
                     , {field: 'bh', title: '申购单编号', minWidth: 150}
                     , {field: 'eqPmName', title: '设备名称', minWidth: 150}
                     , {field: 'num', title: '数量', minWidth: 150}
                     , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
-                    , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
+                    , {fixed: 'right', minWidth: 100, align: 'center', toolbar: "#bar"}
                 ]]
-                ,url:"/lifeManage/selectSgInfoGccshList"
-                ,method:"POST"
-                ,request:{
-                    pageName : 'pageNum',
-                    limitName : 'pageSize'
+                , url: "/lifeManage/selectSgInfoGccshList"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
-                ,where:{
-
-                }
-                ,parseData: function(res) { //res 即为原始返回的数据
+                , where: {}
+                , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
@@ -105,10 +100,23 @@
                 }
             },
 
-            reSet:{
-                url:"/lifeManage/selectSgInfoGccshList",
-                type:"reload",
-                data:["bmId"]
+            reSet: {
+                url: "/lifeManage/selectSgInfoGccshList",
+                type: "reload",
+                data: ["bmId"]
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
             }
         }
     }

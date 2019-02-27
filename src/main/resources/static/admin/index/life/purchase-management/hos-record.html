@@ -73,11 +73,7 @@
                             <div class="layui-input-block">
                                 <label>
                                     <select class="layui-select" name="bmId">
-                                        <option value="">全部科室</option>
-                                        <option value="0302010000">CT室</option>
-                                        <option value="0202010000">计算机维修</option>
-                                        <option value="0302030000">儿童保健门诊</option>
-                                        <option value="0200000000">管理部门</option>
+                                        <option value="">这里是弹窗式的多选</option>
                                     </select>
                                 </label>
                             </div>
@@ -153,32 +149,9 @@
         </div>
         <div class="layui-input-inline">
             <label>
-                <select class="layui-select" name="bmId">
-                    <option value="">全部科室</option>
-                    <option value="0302010000">CT室</option>
-                    <option value="0202010000">计算机维修</option>
-                    <option value="0302030000">儿童保健门诊</option>
-                    <option value="0200000000">管理部门</option>
-                </select>
-            </label>
-        </div>
-        <button class="layui-btn" data-type="reload">查找</button>
-    </form>
-</script>
-<script type="text/html" id="toolBar1">
-    <form class="layui-form layui-form-pane hidden-xs">
-        <div class="layui-input-inline">
-            <input type="text" name="date" id="date2" lay-verify="date" autocomplete="off" class="layui-input">
-        </div>
-        <div class="layui-input-inline">
-            <label>
-                <select class="layui-select" name="bmId">
-                    <option value="">全部科室</option>
-                    <option value="0302010000">CT室</option>
-                    <option value="0202010000">计算机维修</option>
-                    <option value="0302030000">儿童保健门诊</option>
-                    <option value="0200000000">管理部门</option>
-                </select>
+                <div class="layui-input-block">
+                    <select name="bmId" lay-filter="bmId"></select>
+                </div>
             </label>
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
@@ -242,6 +215,19 @@
                     , format: "y年"
                 }
             ]
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
+            }
         }
     }
 </script>

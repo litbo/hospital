@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>年度采购计划</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -45,16 +46,12 @@
         </div>
         <div class="layui-input-inline">
             <label>
-                <select class="layui-select" name="bmId">
-                    <option value="">全部科室</option>
-                    <option value="0302010000">CT室</option>
-                    <option value="0202010000">计算机维修</option>
-                    <option value="0302030000">儿童保健门诊</option>
-                    <option value="0200000000">管理部门</option>
-                </select>
+                <div class="layui-input-block">
+                    <select name="bmId" lay-filter="bmId"></select>
+                </div>
             </label>
         </div>
-        <button class="layui-btn" data-type="reload">查找</button>
+        <button class="layui-btn" data-type="reload1">查找</button>
     </form>
 </script>
 <script type="text/html" id="toolBar1">
@@ -64,16 +61,12 @@
         </div>
         <div class="layui-input-inline">
             <label>
-                <select class="layui-select" name="bmId">
-                    <option value="">全部科室</option>
-                    <option value="0302010000">CT室</option>
-                    <option value="0202010000">计算机维修</option>
-                    <option value="0302030000">儿童保健门诊</option>
-                    <option value="0200000000">管理部门</option>
-                </select>
+                <div class="layui-input-block">
+                    <select name="bmId" lay-filter="bmId"></select>
+                </div>
             </label>
         </div>
-        <button class="layui-btn" data-type="reload">查找</button>
+        <button class="layui-btn" data-type="reload2">查找</button>
     </form>
 </script>
 <script>
@@ -138,11 +131,17 @@
                 }
 
             ]
-            , reSet: {
-                url: "/lifeManage/selectSgZbwyhYearPurchase",
-                type: "reload",
-                data: ["bmId","bh", "year"]
-            }
+            , reSet: [
+                {
+                    url: "/lifeManage/selectSgZbwyhYearPurchase",
+                    type: "reload1",
+                    data: ["bmId", "bh", "year"]
+                },
+                {
+                    url: "/lifeManage/selectSgZbwyhYearBudget",
+                    type: "reload2",
+                    data: ["bmId", "year"]
+                }]
             , date: [
                 {
                     elem: "#date1"
@@ -156,6 +155,19 @@
                     , value: year
                     , format: "y"
                 }]
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
+            }
         }
     }
 </script>

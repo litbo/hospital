@@ -80,13 +80,9 @@
                     </div>
                     <div class="layui-input-inline">
                         <label>
-                            <select class="layui-select" name="departmentId">
-                                <option value="">全部科室</option>
-                                <option value="0302010000">CT室</option>
-                                <option value="0202010000">计算机维修</option>
-                                <option value="0302030000">儿童保健门诊</option>
-                                <option value="0200000000">管理部门</option>
-                            </select>
+                            <div class="layui-input-block">
+                                <select name="departmentId" lay-filter="departmentId"></select>
+                            </div>
                         </label>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -148,6 +144,19 @@
                 url: "/lifeManage/selectEquipmentAccount",
                 type: "reload",
                 data: ["category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "departmentId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
             }
         }
     }

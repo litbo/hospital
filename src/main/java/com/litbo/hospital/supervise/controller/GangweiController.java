@@ -35,6 +35,13 @@ public class GangweiController {
         PageInfo date = gangweiService.getGws(pageNum,pageSize);
         return Result.success(date);
     }
+    //获取岗位列表通过级别和名称迷糊查询
+    @GetMapping("/listGwsByGwLevelAndGwName")
+    public Result listGwsByGwLevelAndGwName(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
+                         @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwLevel,String gwName){
+        PageInfo date = gangweiService.getGwsByGwLevelAndGwName(pageNum,pageSize,gwLevel,gwName);
+        return Result.success(date);
+    }
     @GetMapping("/getGwByGwId")
     public Result getGwsByGwId(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,

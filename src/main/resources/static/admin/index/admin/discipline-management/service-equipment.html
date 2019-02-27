@@ -31,10 +31,8 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs">
         <div class="layui-inline">
-            <select lay-filter="select1">
+            <select lay-filter="wxbm">
                 <option>维修部门</option>
-                <option>111</option>
-                <option>222</option>
             </select>
         </div>
         <div class="layui-inline">
@@ -60,6 +58,19 @@
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
     renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"wxbm",
+                        ids:"bmId",
+                        text:"bmName",
+                        url:"/supervise/bmgl/listWXbms"
+                    }
+                ]
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
