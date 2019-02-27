@@ -462,14 +462,15 @@ $(function () {
                     }
                     //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
                     $(item.elem).on("click",function(){
-                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || "j",tableId = $(this).data("id") || "table";
+                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || "j",tableId = $(this).data("id") || "table"
+                            ,setUrl = item.base;
                         if(item.area === "min"){
                             areas = ["300px","400px"]
                         }
                         layOpen({
                             type:2,
                             title:"添加数据",
-                            content:item.url,
+                            content:setUrl || item.url,
                             area:areas,
                             maxmin:false,
                             end:function(){
