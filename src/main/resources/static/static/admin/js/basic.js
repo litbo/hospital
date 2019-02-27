@@ -588,11 +588,12 @@ function doJudg(value){
             }
             //如果有一个匹配成功则会直接返回true，表示有不符合要求的
             if(!ju){
-                value.true && value.true === true ? putMsg({
+                //是否显示报错信息 === true则显示，否则不显示
+                value.truth && value.truth === true ? putMsg({
                     alert:"数据不合法！",
                     error:"参数不合法，未通过效验！",
                     log:value
-                }) : value.true();
+                }) : "";
                 return true;
             }
         }
