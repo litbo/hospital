@@ -87,24 +87,6 @@ $(function () {
                                 getSelect(val.select[s]);
                             }
                         }
-
-                        function getSelect(re){
-                            var id = re.ids || "id",text = re.text || "text",filter = re.filter || "select";
-                            re.success = function(res){
-                                if (res.code === 0) {
-                                    var $d = $("select[lay-filter='"+filter+"']");
-                                    for (var i = 0; i < res.data.length; i++) {
-                                        $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
-                                    }
-                                    form.render("select");
-                                }
-                            };
-                            //删除不必要参数，避免污染参数
-                            delete re.ids;
-                            delete re.text;
-                            delete re.filter;
-                            subUp(re)
-                        }
                     }
                     if(!val.get && !val.select) {
                         form.val(val.filter, val.options);
@@ -113,7 +95,7 @@ $(function () {
                 } else{
                     putMsg({
                         error:"renderMod.js遇到一个无法处理的错误：",
-                        log:"formAction.val参数传递错误(LINE:51),请参考表单渲染文档！"
+                        log:"renderMod.formAction.val参数传递错误(LINE:116),请参考表单渲染文档！"
                     });
                 }
 
@@ -362,6 +344,23 @@ $(function () {
                     if($.cookie("RenderDate-a-Func")){
                         laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
                     }
+                    //重新绑定select事件
+                    if($("#moreBar select").length > 0){
+                        var val = formAction.val;
+                        if(val.select){
+                            console.log("666");
+                            if(Type(val.select) === "json"){
+                                getSelect(val.select);
+                            }else if(Type(val.select) === "array"){
+                                for(var s=0;s<val.select.length;s++){
+                                    getSelect(val.select[s]);
+                                }
+                            }
+
+                            form.render();
+                        }
+                    }
+
                     //重新绑定事件
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
@@ -459,7 +458,7 @@ $(function () {
                     }
                     function forAdd(item){
                         if(doJudg({
-                            "undefined":[item.elem,item.cb,item.db,item.key,item.name]
+                            "undefined":[item.elem]
                         })){
                             putMsg({
                                 alert:"页面调用错误，操作无法进行！",
@@ -593,6 +592,33 @@ $(function () {
             //日期选择器渲染
             laydate.render(date);
             $.cookie("RenderDate-a-Func",JSON.stringify(date));
+        }
+
+        function getSelect(re,del){
+            console.log("ssss");
+            console.log(re);
+            var id = re.ids || "id",text = re.text || "text",filter = re.filter || "select";
+            re.success = function(res){
+                console.log(res);
+                if (res.code === 0) {
+                    var $d = $("select[lay-filter='"+filter+"']");
+                    //console.log(JSON.stringify($d));
+                    for (var i = 0; i < res.data.length; i++) {
+                        $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
+                    }
+                    console.log($d);
+                    form.render("select");
+                }
+            };
+            //删除不必要参数，避免污染参数
+            //删除参数将导致无法重载，不建议删除
+            /*if(!del){
+                delete re.ids;
+                delete re.text;
+                delete re.filter;
+            }*/
+            //获取数据并渲染页面
+            subUp(re)
         }
     });
 });

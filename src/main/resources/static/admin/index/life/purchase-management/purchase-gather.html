@@ -53,6 +53,7 @@
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
 </script>
+
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
     {{#  if(d.dxzbId !== null){ }}
@@ -96,7 +97,7 @@
                     }
                 }
                 , done: function (obj) {
-                    console.log(obj);
+                    //console.log(obj);
                 }
             },
 
