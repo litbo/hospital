@@ -202,12 +202,18 @@ $(function () {
                     var bef = true;
                     //console.log(sub.before);
                     if (sub.before) {
-                        console.log("before");
-                        bef = sub.before(dataBase);
+                        var backBefore = sub.before(param,dataBase);
+                        if(!backBefore){
+                            bef = false;
+                        }else{
+                            console.log(backBefore);
+                            param = backBefore;
+                        }
                     }
                     //bef = Boolean(sub.before && sub.before(data));
                     //console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
+                    console.log(param);
                     sub.form && bef && subUp(sub.form, dataBase,param);
                     //表单提交后处理事件(不推荐使用，推荐使用ajax success/error处理)
                     sub.func && bef && sub.func(dataBase);
@@ -456,18 +462,29 @@ $(function () {
                     }
                     //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
                     $(item.elem).on("click",function(){
-                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || "j",tableId = $(this).data("id") || "table";
+                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || item.key || "j",tableId = item.table || $(this).data("id") || "table"
+                            ,setUrl = "";
                         if(item.area === "min"){
                             areas = ["300px","400px"]
                         }
+                        //获取URL地址
+                        if(item.url){
+                            setUrl = item.url
+                        }else{
+                            setUrl = item.base || "/admin/index/global/data.html";
+                            //设置参数
+                            setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;
+                        }
+
                         layOpen({
                             type:2,
                             title:"添加数据",
-                            content:item.url,
+                            content:setUrl,
                             area:areas,
                             maxmin:false,
                             end:function(){
                                 var res = tempValue(name,value);
+                                console.log(res);
                                 action.reTable({
                                     name:tableId,
                                     data:res
@@ -506,17 +523,25 @@ $(function () {
                                 end:function(){
                                     //获取数据并且删除数据
                                     var res = tempValue(name,value);
+                                    //console.log(JSON.stringify(res));
                                     if(res === undefined){
                                         //不提示信息，避免用户取消
                                         return false;
                                     }else{
                                         //item.data[item.key] = {};
                                         item.data[item.key] = res;
-                                        //console.log(res);
+                                        //console.log(item.data);
+                                        //寻找匹配的元素并且赋值能匹配上的name值
                                         for(var i=0;i<res.length;i++){
                                             for(var key in res[i]){
                                                 if(res[i].hasOwnProperty(key)){
-                                                    $("*[name="+key+"]").val(res[i][key])
+                                                    //console.log(key);
+                                                    var $dom = $("*[name="+key+"]");
+                                                    //console.log($dom);
+                                                    if($dom.length > 0){
+                                                        $dom.val(res[i][key]);
+                                                        return true;
+                                                    }
                                                 }
                                             }
                                         }

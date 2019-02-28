@@ -31,10 +31,11 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs">
         <div class="layui-inline">
-            <select lay-submit="select1">
+            <!--<select lay-submit="select1">-->
+                <!--<option>划分人</option>-->
+            <!--</select>-->
+            <select lay-filter="hfr">
                 <option>划分人</option>
-                <option>aaa</option>
-                <option>bbb</option>
             </select>
         </div>
         <button class="layui-btn" data-type="">确定划分</button>
@@ -49,6 +50,19 @@
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
     renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"hfr",
+                        ids:"userId",
+                        text:"userXm",
+                        url:"/kwgl/empgl/listGcsEmp"
+                    }
+                ]
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头

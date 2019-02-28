@@ -6,6 +6,8 @@ import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ShMsgVO;
 import com.litbo.hospital.supervise.vo.ZhiduSubmitVO;
 
+import java.util.Date;
+
 public interface ZhiduService {
     //获取所有制度
     PageInfo getZds(int pageNum, int pageSize);
@@ -33,5 +35,8 @@ public interface ZhiduService {
 
     //提交审核人的审核信息
     void submitShMsg(ShMsgVO shMsgVO);
-
+    //获取制度信息通过制度状态
+    PageInfo listZdsByZdZt(int pageNum, int pageSize, String zdZt);
+    //获取制度信息通过时间段制度名称和状态级联查询
+    PageInfo listZdsByTimeAndZdNameAndZt(int pageNum, int pageSize, Date startTime, Date endTime, String zdName, String zdZt);
 }

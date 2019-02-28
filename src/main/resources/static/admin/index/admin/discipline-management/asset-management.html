@@ -29,64 +29,18 @@
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="科室" autocomplete="off">
+            <input class="layui-input" name="userXm" placeholder="科室财产管理员" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <div class="layui-inline">
+            <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    /* addTable ={
-         table:{
-             cols: [[ //表头
-                 {type:"checkbox"}
-                 , {field: 'department', title: '科室',width:"30%", minWidth: 200}
-                 , {field: 'quality-control', title: '资产管理人员', minWidth: 150}
-                 , {field: 'sex', title: '性别', minWidth: 150}
-                 , {field: 'work-name', title: '职称', minWidth: 150}
-                 , {field: 'telephone', title: '联系电话', minWidth: 150}
-             ]]
-             , "data": [
-                 {
-                     "department":"心外科病房",
-                     "quality-control":"王茜茜",
-                     "sex":'女',
-                     "work-name":'',
-                     "telephone":'19999999999'
-                 },{
-                     "department":"心外科病房",
-                     "quality-control":"王茜茜",
-                     "sex":'女',
-                     "work-name":'',
-                     "telephone":'19999999999'
-                 },{
-                     "department":"心外科病房",
-                     "quality-control":"王茜茜",
-                     "sex":'女',
-                     "work-name":'',
-                     "telephone":'19999999999'
-                 },{
-                     "department":"心外科病房",
-                     "quality-control":"王茜茜",
-                     "sex":'女',
-                     "work-name":'',
-                     "telephone":'19999999999'
-                 },{
-                     "department":"心外科病房",
-                     "quality-control":"王茜茜",
-                     "sex":'女',
-                     "work-name":'',
-                     "telephone":'19999999999'
-                 }]
-             , done: function (obj) {
-                 tableFunc({
-                     "obj":obj
-                 })
-             }
-         }
-     }*/
 
 
     renderMod = {
@@ -100,7 +54,7 @@
                     // , {field: 'work-name', title: '职称', minWidth: 150}
                     , {field: 'tel', title: '联系电话', minWidth: 150}
                 ]]
-                , url: "/sybm/ksgl/listPreEmps?bmName=使用部门资产管理员"
+                , url: "/sybm/ksgl/listPreEmps?gwName=使用部门资产管理员"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -122,8 +76,9 @@
             },
 
             reSet:{
-                url:"eq/listEqByX",
-                type:"serch",
+                url:"/sybm/ksgl/listPreEmpsByBmNameAndUserXm?gwName=使用部门资产管理员",
+                type:"search",
+                data:["userXm","bmName"],
                 where: {
 
                 }

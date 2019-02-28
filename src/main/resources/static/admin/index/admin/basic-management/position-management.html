@@ -31,17 +31,17 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
-            <select name="modules" lay-verify="required" lay-search="">
-                <option value="">岗位级别</option>
+            <select name="gwLevel" lay-verify="required" lay-search="">
+                <option value="0000000000">岗位级别</option>
                 <option value="1">一级</option>
                 <option value="2">二级</option>
                 <option value="3">三级</option>
             </select>
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="岗位名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="gwName" placeholder="岗位名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -49,54 +49,7 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-/*   addTable ={
-        table:{
-            cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'station-name', title: '岗位名称',width:'40%', minWidth: 200}
-                , {field: 'station-level', title: '岗位级别', minWidth: 150}
-                , {title:'操作',toolbar:'#barDemo',width:150,align:"center"}
-            ]]
-            , "data": [
-                {
-                    "station-name":"院长",
-                    "station-level":"1"
-                },{
-                    "station-name":"主管院长",
-                    "station-level":"1"
-                },{
-                    "station-name":"医学装备管理委员会主任",
-                    "station-level":"1"
-                },{
-                    "station-name":"医学装备管理委员会成员",
-                    "station-level":"1"
-                },{
-                    "station-name":"医院计量管理委员会主任",
-                    "station-level":"1"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":[{
-                        "event":'edit',
-                        "title":'修改岗位',
-                        "type":2,
-                        "area":['50%','80%'],
-                        "content":'./child/position-managementAdd.html'
-                    },{
-                        "tool":'toolbar',
-                        "filter":"table1",
-                        "event":"add",
-                        "title":"岗位信息",
-                        "type":2,
-                        "area":['50%','80%'],
-                        "content":"./child/position-managementAdd.html"
-                    }]
-                })
-            }
-        }
-    }
-*/
+
 renderMod = {
         addTable: {
             table: {
@@ -128,8 +81,9 @@ renderMod = {
             },
 
             reSet:{
-                url:"eq/listEqByX",
-                type:"serch",
+                url:"/supervise/gwgl/listGwsByGwLevelAndGwName",
+                type:"search",
+                data:["gwLevel","gwName"],
                 where: {
 
                 }

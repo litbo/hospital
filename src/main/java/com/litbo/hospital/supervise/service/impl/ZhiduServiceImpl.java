@@ -30,6 +30,20 @@ public class ZhiduServiceImpl implements ZhiduService {
     }
 
     @Override
+    public PageInfo listZdsByZdZt(int pageNum, int pageSize, String zdZt) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SZhidu> date =  zhiduDao.listZdsByZdZt(zdZt);
+        return new PageInfo(date);
+    }
+
+    @Override
+    public PageInfo listZdsByTimeAndZdNameAndZt(int pageNum, int pageSize, Date startTime, Date endTime, String zdName, String zdZt) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SZhidu> date =  zhiduDao.listZdsByTimeAndZdNameAndZt(startTime,endTime,zdName,zdZt);
+        return new PageInfo(date);
+    }
+
+    @Override
     public void saveZd(SZhidu zd) {
         zhiduDao.saveZd(zd);
     }

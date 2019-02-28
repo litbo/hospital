@@ -29,9 +29,9 @@
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="科室" autocomplete="off">
+            <input class="layui-input" name="bmName" placeholder="科室" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -146,8 +146,9 @@
             },
 
             reSet:{
-                url:"",
-                type:"serch",
+                url:"/sybm/ksgl/getGroupsMSGDetailByBmName",
+                type:"search",
+                data:["bmName"],
                 where: {
 
                 }

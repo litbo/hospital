@@ -67,10 +67,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属制度</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option></option>
-                        <option>aaa</option>
-                        <option>bbb</option>
+                    <select lay-filter="sszd">
+
                     </select>
                 </div>
             </div>
@@ -191,6 +189,22 @@
             }
         })
     });
+
+    renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"sszd",
+                        ids:"bmId",
+                        text:"bmName",
+                        url:"/supervise/bmgl/listBms2"
+                    }
+                ]
+            }
+        }
+    }
 </script>
 </body>
 

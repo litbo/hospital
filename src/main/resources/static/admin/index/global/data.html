@@ -99,10 +99,19 @@
             //console.log("===SUBUP===");
             //console.log(res);
             //判断是否为二重数组，是则直接使用，否则嵌套一层数据
-            if(Type(res.data.list[0]) === "array"){
-                colsData =res.data.list;
+            var datt = [];
+            if(res.data.list){
+                datt = res.data.list;
+            }else if(res.data.data){
+                datt = res.data.data;
             }else{
-                colsData.push(res.data.list);
+                datt = res.data;
+            }
+
+            if(Type(datt[0]) === "array"){
+                colsData = datt;
+            }else{
+                colsData.push(datt);
             }
             //console.log($url_cols);
             //console.log(JSON.stringify(colsData));
@@ -144,8 +153,8 @@
                         }
                         , done: function (obj) {
                             //console.log(obj);
-                            console.log("===obj");
-                            console.log($value);
+                            /*console.log("===obj");
+                            console.log($value);*/
                             tableFunc({
                                 "obj": obj,
                                 "toolFunc": [
@@ -154,8 +163,8 @@
                                         event: "setThisData",
                                         layOpen: false,
                                         func: function (obj, cs) {
-                                            console.log("ccc====");
-                                            console.log($value);
+                                            /*console.log("ccc====");
+                                            console.log($value);*/
                                             layui.sessionData($name, {
                                                 key: $value,
                                                 value: cs.data
