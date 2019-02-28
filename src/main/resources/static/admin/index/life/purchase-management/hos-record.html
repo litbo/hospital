@@ -148,11 +148,7 @@
             <input class="layui-input" name="eqSbPym" placeholder="设备拼音码" autocomplete="off">
         </div>
         <div class="layui-input-inline">
-            <label>
-                <div class="layui-input-block">
-                    <select name="bmId" lay-filter="bmId"></select>
-                </div>
-            </label>
+            <select name="bmId" lay-filter="bmId"></select>
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
     </form>
@@ -176,9 +172,7 @@
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                , where: {
-
-                }
+                , where: {}
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -203,7 +197,7 @@
             reSet: {
                 url: "/lifeManage/selectSgInfoYbgShList",
                 type: "reload",
-                data: ["bmId","bh","eqSbPym"]
+                data: ["bmId", "bh", "eqSbPym"]
             }
             , date: [{
                 elem: "#datet"
