@@ -462,19 +462,29 @@ $(function () {
                     }
                     //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
                     $(item.elem).on("click",function(){
-                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || "j",tableId = $(this).data("id") || "table"
-                            ,setUrl = item.base;
+                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || item.key || "j",tableId = item.table || $(this).data("id") || "table"
+                            ,setUrl = "";
                         if(item.area === "min"){
                             areas = ["300px","400px"]
                         }
+                        //获取URL地址
+                        if(item.url){
+                            setUrl = item.url
+                        }else{
+                            setUrl = item.base || "/admin/index/global/data.html";
+                            //设置参数
+                            setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;
+                        }
+
                         layOpen({
                             type:2,
                             title:"添加数据",
-                            content:setUrl || item.url,
+                            content:setUrl,
                             area:areas,
                             maxmin:false,
                             end:function(){
                                 var res = tempValue(name,value);
+                                console.log(res);
                                 action.reTable({
                                     name:tableId,
                                     data:res
@@ -520,11 +530,18 @@ $(function () {
                                     }else{
                                         //item.data[item.key] = {};
                                         item.data[item.key] = res;
-                                        //console.log(res);
+                                        //console.log(item.data);
+                                        //寻找匹配的元素并且赋值能匹配上的name值
                                         for(var i=0;i<res.length;i++){
                                             for(var key in res[i]){
                                                 if(res[i].hasOwnProperty(key)){
-                                                    $("*[name="+key+"]").val(res[i][key])
+                                                    //console.log(key);
+                                                    var $dom = $("*[name="+key+"]");
+                                                    //console.log($dom);
+                                                    if($dom.length > 0){
+                                                        $dom.val(res[i][key]);
+                                                        return true;
+                                                    }
                                                 }
                                             }
                                         }
