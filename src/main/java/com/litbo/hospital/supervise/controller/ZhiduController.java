@@ -3,6 +3,7 @@ package com.litbo.hospital.supervise.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SZhidu;
+import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.service.ZhiduService;
 import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ShMsgVO;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
+import java.util.List;
+
 @RestController
 @RequestMapping("/supervise/zdgl")
 @Api(tags = "制度审核管理")
@@ -19,13 +23,36 @@ public class ZhiduController {
 
     @Autowired
     private ZhiduService zhiduService;
-
+    @Autowired
+    private ZhiduDao zhiduDao;
 
 
     @GetMapping("/listZds")
     public Result getZds(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                          @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         PageInfo date = zhiduService.getZds(pageNum,pageSize);
+        return Result.success(date);
+    }
+
+    @GetMapping("/listZds2")
+    public Result listZds2(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                         @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        List<SZhidu> zds = zhiduDao.getZds();
+        return Result.success(zds);
+    }
+
+    @GetMapping("/listZdsByTimeAndZdNameAndZt")
+    public Result listZdsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                              Date startTime, Date endTime, String zdName, String zdZt){
+        PageInfo date = zhiduService.listZdsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,zdName,zdZt);
+        return Result.success(date);
+    }
+
+    @GetMapping("/listZdsByZdZt")
+    public Result listZdsByZdZt(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                         @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String zdZt){
+        PageInfo date = zhiduService.listZdsByZdZt(pageNum,pageSize,zdZt);
         return Result.success(date);
     }
 

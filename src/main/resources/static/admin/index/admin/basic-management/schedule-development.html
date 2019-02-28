@@ -88,6 +88,48 @@
             type : "datetime"
         }
     }
+
+    // renderMod = {
+    //
+    //     addTable: {
+    //         table: {
+    //             cols: [[ //表头
+    //                 {checkbox:true,fixed:true}
+    //                 , {field: 'zdId', title: '制度编号', width:'35%',minWidth: 200,sort:true}
+    //                 , {field: 'zdName', title: '制度名称', minWidth: 150}
+    //                 , {field: 'current-activity', 'title':'当前活动',minWidth:150}
+    //                 , {fixed: 'right', align:'center', minWidth:100,title:'操作',toolbar:'#bar'}
+    //             ]]
+    //             , url: "/supervise/zdgl/listZds2"
+    //             , request: {
+    //                 pageName: 'pageNum',
+    //                 limitName: 'pageSize'
+    //             }
+    //             /*   , where: {
+    //                    bmId: ""
+    //
+    //                }*/
+    //             , parseData: function (res) { //res 即为原始返回的数据
+    //                 return {
+    //                     "code": res.code, //解析接口状态
+    //                     "msg": res.msg, //解析提示文本
+    //                     "data": res.data.list //解析数据列表
+    //                 }
+    //             }
+    //             , done: function (obj) {
+    //
+    //             }
+    //         },
+    //         reSet:{
+    //             url:"/supervise/bmgl/listFWXBmByBmName",
+    //             type:"search",
+    //             data:["bmName"],    //搜索框的name
+    //             where: {
+    //
+    //             }
+    //         }
+    //     }
+    // }
 </script>
 </body>
 </html>

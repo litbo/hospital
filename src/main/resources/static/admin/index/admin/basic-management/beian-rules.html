@@ -31,16 +31,22 @@
     <div class="hidden-xs"  id="moreBar">
         <span>备案日期：</span>
         <div class="layui-input-inline">
-            <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
+            <input type="text"  id="date" name="beginTime" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
         </div>
         <span>-</span>
         <div class="layui-input-inline">
-            <input type="text"  id="date1" name="date1" lay-verify="date" autocomplete="off" class="layui-input">
+            <!--<div class="layui-form-item">-->
+                <!--<div class="layui-input-block">-->
+                    <!--<input type="text" name="endTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">-->
+                <!--</div>-->
+            <!--</div>-->
+            <input type="text"  id="date1" name="endTime" lay-verify="date" autocomplete="off" class="layui-input">
+
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -48,45 +54,45 @@
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'system-number', title: '制度编号', width:'30%',minWidth: 200,sort:true}
-                , {field: 'system-name', title: '制度名称', minWidth: 150}
-                , {field: 'beiandate', title: '备案日期', minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "system-number":"",
-                    "system-name":"",
-                    "beiandate":""
-                },{
-                    "system-number":"",
-                    "system-name":"",
-                    "beiandate":""
-                },{
-                    "system-number":"",
-                    "system-name":"",
-                    "beiandate":""
-                },{
-                    "system-number":"",
-                    "system-name":"",
-                    "beiandate":""
-                },{
-                    "system-number":"",
-                    "system-name":"",
-                    "beiandate":""
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
+
+    renderMod = {
+
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox:true,fixed:true}
+                    , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
+                    , {field: 'zdName', title: '制度名称', minWidth: 150}
+                    , {field: 'createTime', title: '备案日期', minWidth: 150}
+                ]]
+                , url: "/supervise/zdgl/listZdsByZdZt?zdZt=3"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+            reSet:{
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=3",
+                type:"search",
+                data:["beginTime","endTime","zdName"],    //搜索框的name
+                where: {
+
+                }
             }
-        },
-        date :{
-            elem : "#date1",
-            type : "datetime"
         }
     }
 </script>
