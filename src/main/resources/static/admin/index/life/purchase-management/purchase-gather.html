@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>申购单汇总</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -20,34 +21,33 @@
     <div class="col-xs-12">
         <table id="table" lay-filter="table1"></table>
         <!--<div class="layui-tab">-->
-            <!--<ul class="layui-tab-title">-->
-                <!--<li class="layui-this">按申购科室汇总</li>-->
-                <!--<li>按申购设备汇总</li>-->
-            <!--</ul>-->
-            <!--<div class="layui-tab-content">-->
-                <!--<div class="layui-tab-item layui-show">-->
-                    <!--<table id="table" lay-filter="table"></table>-->
-                <!--</div>-->
-                <!--<div class="layui-tab-item">-->
-                    <!--<table id="table1" lay-filter="table1"></table>-->
-                <!--</div>-->
-            <!--</div>-->
+        <!--<ul class="layui-tab-title">-->
+        <!--<li class="layui-this">按申购科室汇总</li>-->
+        <!--<li>按申购设备汇总</li>-->
+        <!--</ul>-->
+        <!--<div class="layui-tab-content">-->
+        <!--<div class="layui-tab-item layui-show">-->
+        <!--<table id="table" lay-filter="table"></table>-->
+        <!--</div>-->
+        <!--<div class="layui-tab-item">-->
+        <!--<table id="table1" lay-filter="table1"></table>-->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
     </div>
 </div>
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a href=""><button class=" layui-btn layui-btn-xs">汇 总</button></a>
+        <a href="">
+            <button class=" layui-btn layui-btn-xs">汇 总</button>
+        </a>
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-input-inline">
             <label>
-                <div class="layui-input-block">
-                    <select name="bmId" lay-filter="bmId">
-                    </select>
-                </div>
+                <select name="bmId" lay-filter="bmId"></select>
             </label>
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
@@ -56,15 +56,15 @@
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
     {{#  if(d.dxzbId !== null){ }}
-        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备考察报告表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备考察报告表</a>
     {{#  } else if(d.kstlId !== null) { }}
-        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
     {{#  } else if(d.kxfxId !== null) { }}
-        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析表</a>
     {{#  } else if(d.lzfxId !== null) { }}
-        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析表</a>
     {{#  } else if(d.pjbgId !== null) { }}
-        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价表</a>
     {{#  } }}
 </script>
 <script>
