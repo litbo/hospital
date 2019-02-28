@@ -485,7 +485,11 @@ function subUp(value, data, param) {
         };
         var backData = function (callback) {
             compareData(value, ajaxOptions);
+            if(value.contentType === "application/json;charset=UTF-8"){
+                dataP = JSON.stringify(dataP);
+            }
             console.log(dataP);
+            console.log(Type(dataP));
             value.data = dataP || value.data;
             $.ajax(value);
         };
