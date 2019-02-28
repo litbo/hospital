@@ -120,9 +120,6 @@
 <script>
     var formData = {};
     renderMod = {
-        first: function () {
-
-        },
         form: {
             date: {
                 elem: "#date"
@@ -130,7 +127,7 @@
             submit: {
                 form: {
                     before: function () {
-                        var tv = getTableValue("table"), tv1 = getTableValue("table1", [true, "", ""]);
+                        var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
                         if (doJudg({
                             "undefined": [formData.person, formData.user],
                             0: [tv, tv1]
@@ -140,7 +137,7 @@
                             });
                             return false;
                         }
-                        param = {
+                        return param = {
                             1: formData.person.userIdJl,
                             2: tv1,
                             3: tv
@@ -198,20 +195,21 @@
         bind: {
             addItem: [
                 {
-                elem: "#dataTable1",
-                url:"",
-                cb: "/kwgl/empgl/listSelectEmpsCols",
-                db: "/kwgl/empgl/listPartnerByUserId",
-                name:"dtdt",
-                key: "checkbox"
-            },
-                {elem: "#dataTable1",
-                    url:"",
+                    elem: "#dataTable1",
                     cb: "/kwgl/empgl/listSelectEmpsCols",
                     db: "/kwgl/empgl/listPartnerByUserId",
-                    name:"dtdt",
-                    key: "checkbox"},
-            delItem: " .delNew",
+                    name: "dtdt",
+                    key: "checkbox"
+                },
+                {
+                    elem: "#dataTable1",
+                    cb: "/kwgl/empgl/listSelectEmpsCols",
+                    db: "/kwgl/empgl/listPartnerByUserId",
+                    name: "dtdt",
+                    key: "checkbox"
+                }
+                ],
+            delItem: ".delNew",
             selectItem: [
                 {
                     elem: "#selectEmp",

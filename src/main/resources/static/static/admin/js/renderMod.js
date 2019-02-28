@@ -449,49 +449,60 @@ $(function () {
                         action.checkTable(tableId);
                     })
                 },
-                addItem:function(item){
-                    if(doJudg({
-                        "undefined":[item.elem,item.url]
-                    })){
-                        putMsg({
-                            alert:"页面调用错误，操作无法进行！",
-                            error:"必填参数不能为空，请参照文档检查代码(addItem)！",
-                            log:item
-                        });
-                        return false;
+                addItem:function(cl){
+                    if(Type(cl) === "array"){
+                        for(var i=0;i<cl.length;i++){
+                            forAdd(cl[i]);
+                        }
+                    }else if(Type(cl) === "json"){
+                        forAdd(cl);
                     }
-                    //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
-                    $(item.elem).on("click",function(){
-                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || item.key || "j",tableId = item.table || $(this).data("id") || "table"
-                            ,setUrl = "";
-                        if(item.area === "min"){
-                            areas = ["300px","400px"]
+                    function forAdd(item){
+                        if(doJudg({
+                            "undefined":[item.elem,item.cb,item.db,item.key,item.name]
+                        })){
+                            putMsg({
+                                alert:"页面调用错误，操作无法进行！",
+                                error:"必填参数不能为空，请参照文档检查代码(addItem)！",
+                                log:item
+                            });
+                            return false;
                         }
-                        //获取URL地址
-                        if(item.url){
-                            setUrl = item.url
-                        }else{
-                            setUrl = item.base || "/admin/index/global/data.html";
-                            //设置参数
-                            setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;
-                        }
-
-                        layOpen({
-                            type:2,
-                            title:"添加数据",
-                            content:setUrl,
-                            area:areas,
-                            maxmin:false,
-                            end:function(){
-                                var res = tempValue(name,value);
-                                console.log(res);
-                                action.reTable({
-                                    name:tableId,
-                                    data:res
-                                });
+                        //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
+                        $(item.elem).on("click",function(){
+                            console.log("666");
+                            var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || item.key || "j",tableId = item.table || $(this).data("id") || "table"
+                                ,setUrl = "";
+                            if(item.area === "min"){
+                                areas = ["300px","400px"]
                             }
-                        });
-                    })
+                            //获取URL地址
+                            if(item.url){
+                                setUrl = item.url
+                            }else{
+                                setUrl = item.base || "/admin/index/global/data.html";
+                                //设置参数
+                                setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;
+                            }
+
+                            layOpen({
+                                type:2,
+                                title:"添加数据",
+                                content:setUrl,
+                                area:areas,
+                                maxmin:false,
+                                end:function(){
+                                    var res = tempValue(name,value);
+                                    console.log(res);
+                                    console.log(tableId);
+                                    action.reTable({
+                                        name:tableId,
+                                        data:res
+                                    });
+                                }
+                            });
+                        })
+                    }
                 },
                 selectItem:function(cl){
                     if(Type(cl) === "array"){

@@ -761,6 +761,10 @@ action = func = {
         layui.use('table',function(){
             var table = layui.table;
             var oData =  table.cache[name];//获取表格所有数据
+            console.log("=====reTable=====");
+            console.log(name);
+            console.log(res);
+            console.log(oData);
             if(value.cover === true){
                 oData = res;
             }else{
