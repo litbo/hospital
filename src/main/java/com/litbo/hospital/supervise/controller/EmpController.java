@@ -23,10 +23,18 @@ public class EmpController {
 
     @RequestMapping("/listSelectEmpsCols")
     public Result listSelectEmpsCols(@RequestParam(required = false) String key) {
-        String jsonMessage = "[{'type': 'radio'}, " +
-                "{field: 'userId', title: '人员ID'}, " +
-                "{field: 'userXm', title: '人员姓名'}]";
-        JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);
+        JSONArray myJsonArray = null;
+        if ("checkbox".equals(key)){
+            String jsonMessage = "[{'type': 'checkbox'}, " +
+                    "{field: 'userId', title: '人员ID'}, " +
+                    "{field: 'userXm', title: '人员姓名'}]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }else if ("radio".equals(key)){
+            String jsonMessage = "[{'type': 'radio'}, " +
+                    "{field: 'userId', title: '人员ID'}, " +
+                    "{field: 'userXm', title: '人员姓名'}]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }
         PageInfo date = new PageInfo(myJsonArray);
         return Result.success(date);
     }
