@@ -359,8 +359,8 @@ $(function () {
                             , where: resValue
                         });
                     //重新渲染日期选择器
-                    if($.cookie("dddd")){
-                        laydate.render(JSON.parse($.cookie("dddd")));
+                    if($.cookie("RenderDate-a-Func")){
+                        laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
                     }
                     //重新绑定事件
                     $(".layui-table-tool .layui-btn").on('click', function () {
