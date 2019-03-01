@@ -49,7 +49,6 @@
 
 
 <script>
-    //../../../global/addData.html?dt=1666
     renderMod = {
         btn:[
             {
@@ -59,10 +58,10 @@
                         site:"parent",
                         type:2,
                         title:"选择数据",
-                        content:"/admin/index/global/data.html?cb=/benefical/select/listSelectCols&db=/benefical/select/listSelect&vg=dtdt&key=sbcb",
+                        content:"/admin/index/global/data.html?cb=/benefical/select/listSelectCols&db=/benefical/select/listSelect&vg=dtdt&key=cbkm",
                         area:["90%","90%"],
                         end:function(){
-                            var res = tempValue("dtdt","sbcb",true);
+                            var res = tempValue("dtdt","cbkm",true);
                             for(var i=0;i<res.length;i++){
                                 for(var name in res[i]){
                                     if(res[i].hasOwnProperty(name)){

@@ -392,7 +392,7 @@ function layOpen(data,def_data){
 function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
     //判断必填项是否为空
-    console.log("SUB-PARAM");
+    //console.log("SUB-PARAM");
     //console.log(param);
     if (!value.url  && value.data) {
         return false;
@@ -425,8 +425,9 @@ function subUp(value, data, param) {
                 }
             }
         }
+        //获取自定义参数并合并到dataP中
         if (value.param) {
-            console.log(param);
+            //console.log(param);
             for (var na in value.param) {
                 if (value.param.hasOwnProperty(na)) {
                     dataP[value.param[na]] = param[na];
@@ -488,8 +489,8 @@ function subUp(value, data, param) {
             if(value.contentType === "application/json;charset=UTF-8"){
                 dataP = JSON.stringify(dataP);
             }
-            console.log(dataP);
-            console.log(Type(dataP));
+            //console.log(dataP);
+            //console.log(Type(dataP));
             value.data = dataP || value.data;
             $.ajax(value);
         };
@@ -761,10 +762,10 @@ action = func = {
         layui.use('table',function(){
             var table = layui.table;
             var oData =  table.cache[name];//获取表格所有数据
-            console.log("=====reTable=====");
+            /*console.log("=====reTable=====");
             console.log(name);
             console.log(res);
-            console.log(oData);
+            console.log(oData);*/
             if(value.cover === true){
                 oData = res;
             }else{

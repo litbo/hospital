@@ -62,9 +62,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">记录人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
-                    </div>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
                 </div>
             </div>
         </div>
@@ -177,10 +175,11 @@
                     }
                 },
                 {
-                    elem: "#table1",
+                    elem:"#table1",
+                    id:"table1",
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'kmName', title: '姓名', minWidth: 150}
+                        , {field: 'userXm', title: '姓名', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -202,7 +201,7 @@
                     key: "checkbox"
                 },
                 {
-                    elem: "#dataTable1",
+                    elem: "#dataTable2",
                     cb: "/kwgl/empgl/listSelectEmpsCols",
                     db: "/kwgl/empgl/listPartnerByUserId",
                     name: "dtdt",
