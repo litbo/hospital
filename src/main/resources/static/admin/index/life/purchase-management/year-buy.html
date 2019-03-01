@@ -45,11 +45,7 @@
             <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
         </div>
         <div class="layui-input-inline">
-            <label>
-                <div class="layui-input-block">
-                    <select name="bmId" lay-filter="bmId"></select>
-                </div>
-            </label>
+            <select name="bmId" lay-filter="bmId"></select>
         </div>
         <button class="layui-btn" data-type="reload1">查找</button>
     </form>
@@ -60,11 +56,7 @@
             <input type="text" name="year" id="date2" placeholder="yyyy" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <label>
-                <div class="layui-input-block">
-                    <select name="bmId" lay-filter="bmId"></select>
-                </div>
-            </label>
+            <select name="bmId" lay-filter="bmId"></select>
         </div>
         <button class="layui-btn" data-type="reload2">查找</button>
     </form>
@@ -136,12 +128,13 @@
                     url: "/lifeManage/selectSgZbwyhYearPurchase",
                     type: "reload1",
                     data: ["bmId", "bh", "year"]
-                },
-                {
-                    url: "/lifeManage/selectSgZbwyhYearBudget",
-                    type: "reload2",
-                    data: ["bmId", "year"]
-                }]
+                }
+                /*                {
+                                    url: "/lifeManage/selectSgZbwyhYearBudget",
+                                    type: "reload2",
+                                    data: ["bmId", "year"]
+                                }*/
+            ]
             , date: [
                 {
                     elem: "#date1"

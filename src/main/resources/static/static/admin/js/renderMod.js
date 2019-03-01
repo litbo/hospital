@@ -87,24 +87,6 @@ $(function () {
                                 getSelect(val.select[s]);
                             }
                         }
-
-                        function getSelect(re){
-                            var id = re.ids || "id",text = re.text || "text",filter = re.filter || "select";
-                            re.success = function(res){
-                                if (res.code === 0) {
-                                    var $d = $("select[lay-filter='"+filter+"']");
-                                    for (var i = 0; i < res.data.length; i++) {
-                                        $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
-                                    }
-                                    form.render("select");
-                                }
-                            };
-                            //删除不必要参数，避免污染参数
-                            delete re.ids;
-                            delete re.text;
-                            delete re.filter;
-                            subUp(re)
-                        }
                     }
                     if(!val.get && !val.select) {
                         form.val(val.filter, val.options);
@@ -113,7 +95,7 @@ $(function () {
                 } else{
                     putMsg({
                         error:"renderMod.js遇到一个无法处理的错误：",
-                        log:"formAction.val参数传递错误(LINE:51),请参考表单渲染文档！"
+                        log:"renderMod.formAction.val参数传递错误(LINE:116),请参考表单渲染文档！"
                     });
                 }
 
@@ -202,12 +184,18 @@ $(function () {
                     var bef = true;
                     //console.log(sub.before);
                     if (sub.before) {
-                        console.log("before");
-                        bef = sub.before(dataBase);
+                        var backBefore = sub.before(param,dataBase);
+                        if(!backBefore){
+                            bef = false;
+                        }else{
+                            console.log(backBefore);
+                            param = backBefore;
+                        }
                     }
                     //bef = Boolean(sub.before && sub.before(data));
                     //console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
+                    console.log(param);
                     sub.form && bef && subUp(sub.form, dataBase,param);
                     //表单提交后处理事件(不推荐使用，推荐使用ajax success/error处理)
                     sub.func && bef && sub.func(dataBase);
@@ -353,9 +341,26 @@ $(function () {
                             , where: resValue
                         });
                     //重新渲染日期选择器
-                    if($.cookie("dddd")){
-                        laydate.render(JSON.parse($.cookie("dddd")));
+                    if($.cookie("RenderDate-a-Func")){
+                        laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
                     }
+                    //重新绑定select事件
+                    if($("#moreBar select").length > 0){
+                        var val = formAction.val;
+                        if(val.select){
+                            console.log("666");
+                            if(Type(val.select) === "json"){
+                                getSelect(val.select);
+                            }else if(Type(val.select) === "array"){
+                                for(var s=0;s<val.select.length;s++){
+                                    getSelect(val.select[s]);
+                                }
+                            }
+
+                            form.render();
+                        }
+                    }
+
                     //重新绑定事件
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
@@ -443,38 +448,60 @@ $(function () {
                         action.checkTable(tableId);
                     })
                 },
-                addItem:function(item){
-                    if(doJudg({
-                        "undefined":[item.elem,item.url]
-                    })){
-                        putMsg({
-                            alert:"页面调用错误，操作无法进行！",
-                            error:"必填参数不能为空，请参照文档检查代码(addItem)！",
-                            log:item
-                        });
-                        return false;
-                    }
-                    //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
-                    $(item.elem).on("click",function(){
-                        var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || "j",tableId = $(this).data("id") || "table";
-                        if(item.area === "min"){
-                            areas = ["300px","400px"]
+                addItem:function(cl){
+                    if(Type(cl) === "array"){
+                        for(var i=0;i<cl.length;i++){
+                            forAdd(cl[i]);
                         }
-                        layOpen({
-                            type:2,
-                            title:"添加数据",
-                            content:item.url,
-                            area:areas,
-                            maxmin:false,
-                            end:function(){
-                                var res = tempValue(name,value);
-                                action.reTable({
-                                    name:tableId,
-                                    data:res
-                                });
+                    }else if(Type(cl) === "json"){
+                        forAdd(cl);
+                    }
+                    function forAdd(item){
+                        if(doJudg({
+                            "undefined":[item.elem]
+                        })){
+                            putMsg({
+                                alert:"页面调用错误，操作无法进行！",
+                                error:"必填参数不能为空，请参照文档检查代码(addItem)！",
+                                log:item
+                            });
+                            return false;
+                        }
+                        //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
+                        $(item.elem).on("click",function(){
+                            console.log("666");
+                            var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || item.key || "j",tableId = item.table || $(this).data("id") || "table"
+                                ,setUrl = "";
+                            if(item.area === "min"){
+                                areas = ["300px","400px"]
                             }
-                        });
-                    })
+                            //获取URL地址
+                            if(item.url){
+                                setUrl = item.url
+                            }else{
+                                setUrl = item.base || "/admin/index/global/data.html";
+                                //设置参数
+                                setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;
+                            }
+
+                            layOpen({
+                                type:2,
+                                title:"添加数据",
+                                content:setUrl,
+                                area:areas,
+                                maxmin:false,
+                                end:function(){
+                                    var res = tempValue(name,value);
+                                    console.log(res);
+                                    console.log(tableId);
+                                    action.reTable({
+                                        name:tableId,
+                                        data:res
+                                    });
+                                }
+                            });
+                        })
+                    }
                 },
                 selectItem:function(cl){
                     if(Type(cl) === "array"){
@@ -506,17 +533,25 @@ $(function () {
                                 end:function(){
                                     //获取数据并且删除数据
                                     var res = tempValue(name,value);
+                                    //console.log(JSON.stringify(res));
                                     if(res === undefined){
                                         //不提示信息，避免用户取消
                                         return false;
                                     }else{
                                         //item.data[item.key] = {};
                                         item.data[item.key] = res;
-                                        //console.log(res);
+                                        //console.log(item.data);
+                                        //寻找匹配的元素并且赋值能匹配上的name值
                                         for(var i=0;i<res.length;i++){
                                             for(var key in res[i]){
                                                 if(res[i].hasOwnProperty(key)){
-                                                    $("*[name="+key+"]").val(res[i][key])
+                                                    //console.log(key);
+                                                    var $dom = $("*[name="+key+"]");
+                                                    //console.log($dom);
+                                                    if($dom.length > 0){
+                                                        $dom.val(res[i][key]);
+                                                        return true;
+                                                    }
                                                 }
                                             }
                                         }
@@ -557,6 +592,33 @@ $(function () {
             //日期选择器渲染
             laydate.render(date);
             $.cookie("RenderDate-a-Func",JSON.stringify(date));
+        }
+
+        function getSelect(re,del){
+            console.log("ssss");
+            console.log(re);
+            var id = re.ids || "id",text = re.text || "text",filter = re.filter || "select";
+            re.success = function(res){
+                console.log(res);
+                if (res.code === 0) {
+                    var $d = $("select[lay-filter='"+filter+"']");
+                    //console.log(JSON.stringify($d));
+                    for (var i = 0; i < res.data.length; i++) {
+                        $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
+                    }
+                    console.log($d);
+                    form.render("select");
+                }
+            };
+            //删除不必要参数，避免污染参数
+            //删除参数将导致无法重载，不建议删除
+            /*if(!del){
+                delete re.ids;
+                delete re.text;
+                delete re.filter;
+            }*/
+            //获取数据并渲染页面
+            subUp(re)
         }
     });
 });

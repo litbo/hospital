@@ -399,31 +399,38 @@ function subUp(value, data, param) {
     }
     //判断是否需要自动获取表单数据(根据input的name属性自动获取所有的数据)
     if (Type(value.data) === "array") {
+        //dataP 提交的数据
         var dataP = {}, valus = null;
         for (var i = 0; i < value.data.length; i++) {
             valus = value.data[i];
+            //当data不存在时获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
             if (!data) {
                 var inputValue = $("input[name=" + valus + "]").val();
                 if (inputValue) {
                     dataP[valus] = inputValue;
                 } else if ($("select[name=" + valus + "]").val()) {
                     dataP[valus] = $("select[name=" + valus + "]").val();
+                } else if($("textarea[name=" + valus + "]").val()){
+                    dataP[valus] = $("textarea[name=" + valus + "]").val();
                 }
             } else {
                 dataP[valus] = data.field[valus];
             }
         }
+        //添加附加数据
         if (value.add) {
             for (var names in value.add) {
                 if (value.add.hasOwnProperty(names)) {
-                    dataP[names] = add[names];
+                    dataP[names] = value.add[names];
                 }
             }
         }
+        //获取自定义参数并合并到dataP中
         if (value.param) {
+            //console.log(param);
             for (var na in value.param) {
                 if (value.param.hasOwnProperty(na)) {
-                    dataP[add[na]] = param[na];
+                    dataP[value.param[na]] = param[na];
                 }
             }
         }
@@ -479,6 +486,11 @@ function subUp(value, data, param) {
         };
         var backData = function (callback) {
             compareData(value, ajaxOptions);
+            if(value.contentType === "application/json;charset=UTF-8"){
+                dataP = JSON.stringify(dataP);
+            }
+            //console.log(dataP);
+            //console.log(Type(dataP));
             value.data = dataP || value.data;
             $.ajax(value);
         };
@@ -492,7 +504,7 @@ function getTableValue(name,inClear){
     layui.use("table",function(){
         var table = layui.table;
         oData =  table.cache[name];
-        if(inClear === false || inClear === undefined){
+        if(inClear === false){
             clear = [];
         }else if(Type(inClear) === "array"){
             if(inClear[0] === true){
@@ -502,7 +514,7 @@ function getTableValue(name,inClear){
                 clear = inClear;
             }
 
-        }else if(Type(inClear === "string")){
+        }else if(Type(inClear) === "string"){
             clear =[inClear];
         }
         if(clear.length !== 0){
@@ -750,6 +762,10 @@ action = func = {
         layui.use('table',function(){
             var table = layui.table;
             var oData =  table.cache[name];//获取表格所有数据
+            /*console.log("=====reTable=====");
+            console.log(name);
+            console.log(res);
+            console.log(oData);*/
             if(value.cover === true){
                 oData = res;
             }else{

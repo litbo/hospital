@@ -10,7 +10,6 @@ import com.litbo.hospital.supervise.vo.EmpSelectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -68,10 +67,9 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public List<SEmp> listPartnerByUserId(String userId) {
+    public PageInfo<SEmp> listPartnerByUserId(String userId,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         List<SEmp> partners = empDao.listPartnerByUserId(userId);
-        Iterator<SEmp> iterator = partners.iterator();
-
-        return partners;
+        return new PageInfo<>(partners);
     }
 }

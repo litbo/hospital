@@ -94,15 +94,12 @@
 <script>
     var formData = {};
     renderMod = {
-        first: function () {
-            //console.log(1);
-        },
         form: {
             date: {
                 elem: "#date"
             },
             submit: {
-                before: function () {
+                before: function (param) {
                     var tv = getTableValue("table");
                     if (doJudg({
                         "undefined": [formData.bm, formData.eq],
@@ -113,17 +110,18 @@
                         });
                         return false;
                     }
-                    param = {
-                        1: formData.bm.bmId,
-                        2: formData.eq.eqId,
+                    //console.log(formData);
+                    return param = {
+                        1: formData.bm[0].bmId,
+                        2: formData.eq[0].eqId,
                         3: tv
                     };
-                    console.log(formData);
                 },
                 form: {
                     url: "/benefical/gxcb/insertCb",
                     type: "POST",
-                    data: ["bmName", "eqName", "kmSj", "qjlc"],
+                    contentType:"application/json;charset=UTF-8",
+                    data: ["bmName", "eqName", "kmSj"],
                     param: {
                         1: "bmId",
                         2: "eqId",
@@ -138,6 +136,8 @@
                     {type: "checkbox"}
                     , {field: 'kmName', title: '科目', minWidth: 150}
                     , {field: 'kmValue', title: '金额', minWidth: 150}
+                    , {field: 'kmNum', title: '编号', minWidth: 150,hide:true}
+
                 ]]
                 , toolbar: false
                 , page: false

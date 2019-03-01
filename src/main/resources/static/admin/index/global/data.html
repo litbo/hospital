@@ -54,32 +54,32 @@
 </script>
 
 <script>
-    var $url_cols= $.getUrlParam("cb") || "",//表头链接
-        $url_data= $.getUrlParam("db") || "",//表格数据获取链接
-        $url_search= $.getUrlParam("se") || "",//表格搜索相关数据获取链接
+    var $url_cols = $.getUrlParam("cb") || "",//表头链接
+        $url_data = $.getUrlParam("db") || "",//表格数据获取链接
+        $url_search = $.getUrlParam("se") || "",//表格搜索相关数据获取链接
         $key = $.getUrlParam("key") || "",//页面判断参数
         $name = $.getUrlParam("vg") || "",
         $value = $.getUrlParam("v") || $key,
         colsData = [],//表头判断
-        searchDom=$("#diyDOM"),//搜索数据DOM
-        searchParam=false;//搜索参数,false不使用
-    if($url_search === "undefined"){
+        searchDom = $("#diyDOM"),//搜索数据DOM
+        searchParam = false;//搜索参数,false不使用
+    if ($url_search === "undefined") {
         $url_search = ""
     }
-    if($value === "undefined"){
+    if ($value === "undefined") {
         $value = $key
     }
-    if(doJudg({
-        "00":[$url_cols,$url_data,$key,$name]
-    })){
+    if (doJudg({
+        "00": [$url_cols, $url_data, $key, $name]
+    })) {
         putMsg({
-            alert:"页面调用错误，操作无法进行！",
-            error:"URL参数传递错误！",
-            log:{
-                cb:$url_cols,
-                db:$url_data,
-                key:$key,
-                name:$name
+            alert: "页面调用错误，操作无法进行！",
+            error: "URL参数传递错误！",
+            log: {
+                cb: $url_cols,
+                db: $url_data,
+                key: $key,
+                name: $name
             }
         });
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
@@ -90,30 +90,42 @@
         type: "POST",
         data: {key: $key},
         success: function (res) {
-            if(res.code !== 0){
+            console.log(res);
+            if (res.code !== 0) {
                 putMsg({
-                        alert:"数据获取失败，请重试！"
-                    });
+                    alert: "数据获取失败，请重试！",
+                    error: "数据返回异常！",
+                    log: res
+                });
                 return false;
             }
             //console.log("===SUBUP===");
             //console.log(res);
             //判断是否为二重数组，是则直接使用，否则嵌套一层数据
-            if(Type(res.data.list[0]) === "array"){
-                colsData =res.data.list;
-            }else{
-                colsData.push(res.data.list);
+            var datt = [];
+            if (res.data.list) {
+                datt = res.data.list;
+            } else if (res.data.data) {
+                datt = res.data.data;
+            } else {
+                datt = res.data;
+            }
+
+            if (Type(datt[0]) === "array") {
+                colsData = datt;
+            } else {
+                colsData.push(datt);
             }
             //console.log($url_cols);
             //console.log(JSON.stringify(colsData));
             //未填写se参数则代表使用默认条件
-            if($url_search !== ""){
+            if ($url_search !== "") {
                 subUp({
-                    url:$url_search,
-                    type:"POST",
-                    data:{key:$key},
-                    async:false,//同步
-                    success:function(res){
+                    url: $url_search,
+                    type: "POST",
+                    data: {key: $key},
+                    async: false,//同步
+                    success: function (res) {
                         searchDom.html(res.data.list.dom);
                         searchParam = res.data.list.data;
                     }
@@ -144,8 +156,8 @@
                         }
                         , done: function (obj) {
                             //console.log(obj);
-                            console.log("===obj");
-                            console.log($value);
+                            /*console.log("===obj");
+                            console.log($value);*/
                             tableFunc({
                                 "obj": obj,
                                 "toolFunc": [
@@ -154,8 +166,8 @@
                                         event: "setThisData",
                                         layOpen: false,
                                         func: function (obj, cs) {
-                                            console.log("ccc====");
-                                            console.log($value);
+                                            /*console.log("ccc====");
+                                            console.log($value);*/
                                             layui.sessionData($name, {
                                                 key: $value,
                                                 value: cs.data
@@ -172,7 +184,7 @@
                             })
                         }
                     },
-                    reSet:searchParam
+                    reSet: searchParam
                 }
             };
         }
