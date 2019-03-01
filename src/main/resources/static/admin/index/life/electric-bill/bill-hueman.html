@@ -76,12 +76,7 @@
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="interest" lay-filter="aihao">
-                            <option value=""selected="">全部科室</option>
-                            <option value="0" >在用</option>
-                            <option value="1">待报废</option>
-                            <option value="2">报废</option>
-                        </select>
+                        <select name="bmName" lay-filter="departmentId"></select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input class="layui-input" name="search" placeholder="简称拼音码" autocomplete="off">
@@ -153,8 +148,18 @@ addTable ={
             })
         }
     },
-    form:{
-
+    form: {
+        val: {
+            filter: "forms",
+            select: [
+                {
+                    filter: "departmentId",
+                    ids: "bmId",
+                    text: "bmName",
+                    url: "/supervise/bmgl/listBm"
+                }
+            ]
+        }
     }
 }
 </script>

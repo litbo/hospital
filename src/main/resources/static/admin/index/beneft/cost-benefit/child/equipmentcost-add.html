@@ -110,7 +110,6 @@
                         });
                         return false;
                     }
-                    console.log(formData);
                     return param = {
                         1: formData.bm[0].bmId,
                         2: formData.eq[0].eqId,
@@ -120,6 +119,7 @@
                 form: {
                     url: "/benefical/gxcb/insertCb",
                     type: "POST",
+                    contentType:"application/json;charset=UTF-8",
                     data: ["bmName", "eqName", "kmSj"],
                     param: {
                         1: "bmId",
@@ -135,6 +135,7 @@
                     {type: "checkbox"}
                     , {field: 'kmName', title: '科目', minWidth: 150}
                     , {field: 'kmValue', title: '金额', minWidth: 150}
+                    , {field: 'kmNum', title: '编号', minWidth: 150,hide:true}
                 ]]
                 , toolbar: false
                 , page: false

@@ -5,6 +5,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
+import com.litbo.hospital.user.vo.DictVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,6 +77,16 @@ public class DictController {
 
 
     }
+
+    @RequestMapping("/gglx")
+    public Result listGglx(){
+
+        List<SysGglx> gglxes = dictDao.listGglx();
+        return Result.success(gglxes);
+    }
+
+
+
 
 
 }

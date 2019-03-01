@@ -29,5 +29,6 @@ public interface DictDao {
     List<DictVo> listJldw1();
     @Select("select")
     List<DictVo> listGgs();
-
+    @Select("select * from sys_gglx")
+    List<SysGglx> listGglx();
 }

@@ -1,5 +1,8 @@
 package com.litbo.hospital.lifemanage.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.vo.SgInfoVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgYbghhyVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgZbwyhhyVO;
@@ -183,13 +186,34 @@ public class SgInfoController {
     }
 
     /**
+     * 申购单页面表头
+     * @param pageNum 当前页数
+     * @param pageSize 每页显示记录数
+     * @param key 前端传的区分关键字
+     * @return
+     */
+    @GetMapping("/selectSgInfoLzfxCols")
+    public Result selectSgInfoLzfxCols(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                       @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                       @RequestParam(required = false) String key) {
+
+        String jsonMessage = "[{'type': 'radio'}, " +
+                "{field: 'id', title: '申购单ID'}, " +
+                "{field: 'bh', title: '申购单编号'}," +
+                "{field: 'pmName', title: '申购设备'}]";
+        JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);
+        PageInfo date = new PageInfo(myJsonArray);
+        return Result.success(date);
+    }
+
+    /**
      * 查询满足论证分析的申购单
      *
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return Result
      */
-    @PostMapping("/selectSgInfoLzfx")
+    @GetMapping("/selectSgInfoLzfx")
     public Result selectSgInfoLzfx(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                    @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         return Result.success(sgInfoService.selectSgInfoLzfx(pageNum, pageSize));
@@ -201,7 +225,7 @@ public class SgInfoController {
      * @param isSh     是否通过审核
      * @param bmId     部门id
      * @param bh       申购单编号
-     * @param sbPym   设备拼音码
+     * @param sbPym    设备拼音码
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return Result
