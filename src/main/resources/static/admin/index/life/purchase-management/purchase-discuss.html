@@ -139,6 +139,7 @@
 
 
 <script>
+    var formData = {};
     renderMod = {
         addTable: {
             table: {
@@ -156,6 +157,26 @@
                     none: "请点击上方按钮添加数据！"
                 }
             }
+        },
+        bind: {
+            addItem: {
+                elem: ".addNew",
+                cb: "/kwgl/empgl/listSelectEmpsCols",
+                db: "/kwgl/empgl/listPartnerByUserId",
+                name: "dtdt",
+                key: "checkbox"
+            },
+            delItem: ".delNew",
+            selectItem: [
+                {
+                    elem: "#selectEmp",
+                    cb: "/lifeManage/selectSgInfoLzfxCols",
+                    db: "/lifeManage/selectSgInfoLzfx",
+                    name: "dtdt",
+                    key: "radio",
+                    data: formData
+                }
+            ]
         }
     }
 </script>
