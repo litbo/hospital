@@ -1,5 +1,6 @@
 package com.litbo.hospital.security.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
@@ -7,10 +8,7 @@ import com.litbo.hospital.security.service.FwWeixiuService;
 import com.litbo.hospital.security.vo.WeixiuIndexVo;
 import com.litbo.hospital.security.vo.WxqrIndex;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zjc
@@ -91,5 +89,6 @@ public class FwWeixiuController {
             return Result.error("审核失败");
         }
     }
+
 
 }

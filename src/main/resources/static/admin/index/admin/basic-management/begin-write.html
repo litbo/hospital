@@ -41,13 +41,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>院长</option>
-                        <option>主管院长</option>
-                        <option>医院装备管理委员会主任</option>
-                        <option>医院装备管理委员会成员</option>
-                        <option>医院计量管理委员会主任</option>
-                        <option>...</option>
+                    <select lay-filter="gwname">
+
                     </select>
                 </div>
             </div>
@@ -186,6 +181,22 @@
             }
         })
     });
+
+    renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"gwname",
+                        ids:"gwId",
+                        text:"gwName",
+                        url:"/supervise/gwgl/listGws2"
+                    }
+                ]
+            }
+        }
+    }
 </script>
 </body>
 

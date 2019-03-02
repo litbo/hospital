@@ -119,7 +119,7 @@
                 form:{
                     url: "/benefical/gxcb/insertCb",
                     type: "POST",
-                    contentType:"application/json;charset=UTF-8",
+                    contentType:"application/json",
                     data: ["bmName", "eqName", "kmSj","qjlc"],
                     param: {
                         1: "bmId",
@@ -133,8 +133,9 @@
             table:{
                 cols: [[ //表头
                     {type: "checkbox"}
-                    , {field: 'kmName', title: '科目',minWidth: 150}
-                    ,{field: 'kmValue', title: '金额', minWidth: 150}
+                    , {field: 'kmName1', title: '科目',minWidth: 150}
+                    ,{field: 'kmValue1', title: '金额', minWidth: 150}
+                    ,{field: 'kmNum1', title: '金额', minWidth: 150}
                 ]]
                 ,toolbar:false
                 , page:false

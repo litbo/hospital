@@ -45,6 +45,14 @@ public class GangweiServiceImpl implements GangweiService {
     }
 
     @Override
+    public PageInfo listGwsByGwZt(int pageNum, int pageSize, String gwZt) {
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<SGangwei> list =  gangweiDao.listGwsByGwZt(gwZt);
+        return new PageInfo(list);
+    }
+
+    @Override
     public PageInfo getGwsByGwLevelAndGwName(int pageNum, int pageSize, String gwLevel, String gwName) {
         PageHelper.startPage(pageNum,pageSize);
         List<SGangwei> list =  gangweiDao.getGwsByGwLevelAndGwName(gwLevel,gwName);

@@ -14,6 +14,8 @@ import java.util.List;
 public interface GangweiDao {
     @Select("select * from s_gangwei")
     List<SGangwei> getGws();
+    @Select("select * from s_gangwei where gw_zz_zt =#{gwZt}")
+    List<SGangwei> listGwsByGwZt(String gwZt);
     @SelectProvider(type = GwProvider.class ,method = "getGwsByGwLevelAndGwName")
     List<SGangwei> getGwsByGwLevelAndGwName(@Param("gwLevel") String gwLevel, @Param("gwName") String gwName);
 

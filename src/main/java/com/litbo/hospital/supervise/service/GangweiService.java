@@ -9,10 +9,14 @@ public interface GangweiService {
 
     //添加岗位
     void saveGw(SGangwei gw);
+
+
     //通过岗位id删除岗位
     void deleteGwByGwId(String gw_id);
     //获取所有岗位
     PageInfo getGws(int pageNum, int pageSize);
+    //获取所有岗位通过岗位状态
+    PageInfo listGwsByGwZt(int pageNum, int pageSize, String gwZt);
     //获取岗位列表通过级别和名称迷糊查询
     PageInfo getGwsByGwLevelAndGwName(int pageNum, int pageSize, String gwLevel, String gwName);
     //通过岗位id获取岗位信息

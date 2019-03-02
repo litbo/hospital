@@ -1,9 +1,7 @@
 package com.litbo.hospital.supervise.dao.provider;
 
-import java.util.Date;
-
 public class ZhiDuProvider {
-    public String listZdsByTimeAndZdNameAndZt(Date startTime, Date endTime, String zdName, String zdZt){
+    public String listZdsByTimeAndZdNameAndZt(String startTime, String endTime, String zdName, String zdZt){
         StringBuffer sql = new StringBuffer("" +
                 "  SELECT * from s_zhidu where 1=1");
         if(startTime!=null) sql.append(" and create_time>#{startTime} ");

@@ -58,10 +58,10 @@
                         site:"parent",
                         type:2,
                         title:"选择数据",
-                        content:"/admin/index/global/data.html?cb=/benefical/select/listSelectCols&db=/benefical/select/listSelect&vg=dtdt&key=cbkm",
+                        content:"/admin/index/global/data.html?cb=/benefical/select/listSelectCols&db=/benefical/select/listSelect&vg=dtdt&key=srkm",
                         area:["90%","90%"],
                         end:function(){
-                            var res = tempValue("dtdt","cbkm",true);
+                            var res = tempValue("dtdt","srkm",true);
                             if(res !== undefined){
                                 for(var i=0;i<res.length;i++){
                                     for(var name in res[i]){
@@ -79,14 +79,15 @@
             {
                 elem:"#saveData",
                 func:function(){
-                    var $k1 = Number($("input[name='kmNum']").val());
+                    var $k1 = $("input[name='kmValue']").val();
                     var $k2 = $("input[name='kmName']").val();
+                    var $k3 = $("input[name='kmNum']").val();
                     if($k1 && $k2 && $k2 !== "" ){
                         //两个文本框必填，
                         var vg = $.getUrlParam("vg") || "temp",v=$.getUrlParam("v") || "temp";
                         layui.sessionData(vg,{
                             key:v,
-                            value:{"kmValue":$k1,"kmName":$k2}
+                            value:{"kmValue1":$k1,"kmName1":$k2,"kmNum1":$k3}
                         });
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index); //再执行关闭

@@ -46,6 +46,7 @@
                     , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
                     , {field: 'createTime', title: '备案日期', minWidth: 150}
+                    , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
                 , url: "/supervise/zdgl/listZdsByZdZt?zdZt=1"
                 , request: {
@@ -64,7 +65,20 @@
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":{
+                            "event":'edit',
+                            "title":'科长审核',
+                            "type":2,
+                            "content":'section-audit.html ',
+                            "area":['95%','95%']
+                        }
+                    })
 
+                },date :{
+                    elem : "#date1",
+                    type : "datetime"
                 }
             },
             reSet:{

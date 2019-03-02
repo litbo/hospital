@@ -90,7 +90,7 @@ div.ruler div.cursor {height:20px; width:30px; background-color:#3C6E31; color:w
 	padding: 0 10px;
 	font-weight:600;
 }
-.showMe input{
+.showMe input,.tmore{
 	width: 63.5%;
     display: block;
     float: left;

@@ -34,10 +34,11 @@
             <legend>院外报修发票登记</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">报修设备<span class="sign">*</span></label>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">报修单号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: 0px;" id="layerBtn1">选择</button>
+                    <input type="text" name="id" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="add">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -49,7 +50,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发票号码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input">
+                    <input type="text" name="fpHm" autocomplete="" class="layui-input">
                 </div>
             </div>
         </div>
@@ -57,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发票金额<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input">
+                    <input type="text" name="fpPrice" autocomplete="" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -71,73 +72,48 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn">提交</button>
+                <button class="layui-btn" lay-submit lay-filter="submit">提交</button>
             </div>
         </div>
     </div>
 </form>
 
 
-<script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    var date = new Date();
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-    var setDate = document.getElementById('date');
-    setDate.value = currentdate;
-</script>
+
 <script>
-    addTable ={
+    formData = {};
+    renderMod = {
+        form: {
+            date:true,
+            submit: {
+                filter: "submit",//可以不写
+                form: {
+                    url: "/security/fp/insertFwFp",
+                    type: "POST",
+                    data:['fpHm','fpPrice','fpSdTime','fpDh'],
+                    success:function(res){
+                        if(res.code === 0){
+                            layer.alert("信息提交成功！",function(){
+                                window.location.reload();
+                            });
+                        }
+                    }
+                }//表单提交函数
+            }
+
+        },
+        bind: {
+            selectItem: [{
+                elem: "#add",
+                data:formData,
+                cb:"/baoxiu/listWxTitles",
+                db:"/baoxiu/listWx",
+                key:"dtdt",
+                name:"dtdt"
+            }],
+            delItem: "#delNew"
+        }
     }
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-        //弹出框设置
-        $('#layerBtn1').on('click',function(){
-            layer.open({
-                type:2,
-                title:'报修设备-选择',
-                content:'./repair-equipment-select.html',
-                area:['98%','92%'],
-                btn:['选择','取消']
-            });
-            return false;
-        })
-        $('#layerBtn2').on('click',function(){
-            layer.open({
-                type:2,
-                title:'开票单位-选择',
-                content:'./issuing-office-select.html',
-                area:['98%','92%'],
-                btn:['选择','取消']
-            });
-            return false;
-        })
-    });
 </script>
 </body>
 

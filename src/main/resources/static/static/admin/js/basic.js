@@ -372,13 +372,14 @@ function layOpen(data,def_data){
             scrollbar:false
         }
     ;
+    //合并数据
     compareData(data,def_data || def_open);
+    //判断窗口新建位置，并弹出新窗口
     switch(data.site){
         case "top":return top.layer.open(data);
         case "parent":return parent.layer.open(data);
         default :return layer.open(data);
     }
-
 }
 
 /**
@@ -391,17 +392,23 @@ function layOpen(data,def_data){
  */
 function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
-    //判断必填项是否为空
-    //console.log("SUB-PARAM");
-    //console.log(param);
-    if (!value.url  && value.data) {
+    //判断数据有效性
+    if(doJudg({
+        "undefined":[value.url]
+    })){
+        putMsg({
+            alert:"数据上传操作已被强制终止！",
+            error:"参数填写不正确，程序无法继续进行！",
+            log:arguments
+        });
         return false;
     }
-    //判断是否需要自动获取表单数据(根据input的name属性自动获取所有的数据)
+    //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
     if (Type(value.data) === "array") {
-        //dataP 提交的数据
+        //dataP 提交的数据 valus 填写的表单name值
         var dataP = {}, valus = null;
         for (var i = 0; i < value.data.length; i++) {
+            //获取一个name值
             valus = value.data[i];
             //当data不存在时获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
             if (!data) {
@@ -417,7 +424,7 @@ function subUp(value, data, param) {
                 dataP[valus] = data.field[valus];
             }
         }
-        //添加附加数据
+        //向data中直接添加附加数据
         if (value.add) {
             for (var names in value.add) {
                 if (value.add.hasOwnProperty(names)) {
@@ -425,13 +432,12 @@ function subUp(value, data, param) {
                 }
             }
         }
-        //获取自定义参数并合并到dataP中
-        if (value.param) {
-            //console.log(param);
-            for (var na in value.param) {
-                if (value.param.hasOwnProperty(na)) {
-                    dataP[value.param[na]] = param[na];
-                }
+    }
+    //获取自定义的参数并合并到 dataP 中
+    if (value.param) {
+        for (var na in value.param) {
+            if (value.param.hasOwnProperty(na)) {
+                dataP[value.param[na]] = param[na];
             }
         }
     }
@@ -464,33 +470,45 @@ function subUp(value, data, param) {
         $form[0].submit();
         alert("提交成功！");
         window.location.reload();
-    } else {//以ajax形式提交数据(默认)
+    } else {
+        //以$ajax形式提交数据(默认)
         //以参数形式调用获取的数据解决异步数据不可外部调用与修改
         var ajaxOptions = {
             success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
-                    alert("提交成功！");
-                } else if (data.code === 1) {
-                    alert("提交失败，请重试！");
+                    putMsg({
+                        alert:"数据提交成功！"
+                    });
+                } else{
+                    putMsg({
+                        alert:"提交失败，请重试！",
+                        error:"数据返回异常",
+                        log:data
+                    });
                 }
-                value.done && value.done();
+                //提交成功后执行（不论返回数据是否正确）
+                value.done && value.done(data);
             },
             error: function (er) {
                 putMsg({
                     alert:"提交失败，请重试！",
+                    error:"数据提交异常",
                     log:er
                 });
+                //提交失败后执行函数
                 value.fine && value.fine(er);
             }
         };
+        //将AJAX数据同步化
         var backData = function (callback) {
+            //合并数据
             compareData(value, ajaxOptions);
-            if(value.contentType === "application/json;charset=UTF-8"){
+            //判断若以JSON形式发送则格式化数据
+            if(value.contentType === "application/json"){
                 dataP = JSON.stringify(dataP);
             }
-            console.log(dataP);
-            console.log(Type(dataP));
+            //数据回填
             value.data = dataP || value.data;
             $.ajax(value);
         };
@@ -500,10 +518,13 @@ function subUp(value, data, param) {
 
 //获取表格数据并且清空LAYUI自动添加的数据
 function getTableValue(name,inClear){
+    //oData 初始表格数据 clear 初始清除参数集合
     var oData = [],clear=["LAY_CHECKED","LAY_TABLE_INDEX"];
     layui.use("table",function(){
         var table = layui.table;
+        //获取表格缓存中的数据
         oData =  table.cache[name];
+        //判断是否需要清除不需要的参数
         if(inClear === false){
             clear = [];
         }else if(Type(inClear) === "array"){
@@ -513,10 +534,10 @@ function getTableValue(name,inClear){
             }else{
                 clear = inClear;
             }
-
         }else if(Type(inClear) === "string"){
             clear =[inClear];
         }
+        //当clear长度不为0时则执行清除参数操作
         if(clear.length !== 0){
             for(var j=0;j<oData.length;j++){
                 for(var x=0;x<clear.length;x++){
@@ -527,6 +548,7 @@ function getTableValue(name,inClear){
             }
         }
     });
+    //返回表格数据
     return oData;
 }
 
@@ -534,12 +556,15 @@ function getTableValue(name,inClear){
 function judg(data,end,mod,con){
     var da = null;
     for(var x=0;x<data.length;x++){
+        //获取单个具体数据
         da= data[x];
+        //判断需要判断数据的类型与格式
         if(con === "l"){
             da = da.length;
         }else if(Type(con) === "string" && da[con] !== undefined){
             da = da[con];
         }
+        //匹配运算符号
         switch(mod){
             case "=":
                 if(da === end){
@@ -584,9 +609,11 @@ function judg(data,end,mod,con){
 
 //判断数据是否符合要求合法（用于无法使用layui自带判断情况）
 function doJudg(value){
+    //数据是否有效标志
     var ju = true;
     for(var name in value){
         if(value.hasOwnProperty(name)){
+            //获取数据匹配参数
             switch(name){
                 case "undefined":
                     ju = judg(value[name],undefined,"=");
@@ -606,6 +633,7 @@ function doJudg(value){
                     error:"参数不合法，未通过效验！",
                     log:value
                 }) : "";
+                //数据不合法
                 return true;
             }
         }
@@ -688,6 +716,7 @@ action = func = {
     },
     //添加表格内功能按钮
     "toolFunc": function (value) {
+        //数据类型判断
         if (Type(value) === "json") {
             cc(value);
         } else if (Type(value) === "array") {
@@ -696,40 +725,53 @@ action = func = {
             }
         } else {
             putMsg({
-                msg:"系统错误！",
+                msg:"操作执行失败！",
                 log:value,
                 error:"tableFunc参数填写错误"
             });
             return false;
         }
-
+        //事件绑定函数
         function cc(vas) {
             layui.use('table', function () {
-                var table = layui.table, layer = layui.layer, filt = vas.filter || "table1",tool = vas.tool || "tool",tableOn = tool+'(' + filt + ')',openT = true;
+                var table = layui.table,
+                    layer = layui.layer,
+                    filt = vas.filter || "table1",
+                    tool = vas.tool || "tool",
+                    tableOn = tool+'(' + filt + ')',
+                    openT = true;
+                //绑定表格事件
                 table.on(tableOn, function (obj) {
                     //排除多个数据源干扰，如toolbar有数据干扰问题，可移除外层限制if
-                    var event = obj.event;
+                    //只有在点击表格内按钮时才执行事件
                     if(tool === "tool"){
+                        //获取当前点击按钮event
+                        var event = obj.event;
                         for(var x=0;x<value.length;x++){
                             if(event === value[x].event){
                                 vas = value[x];
                             }
                         }
                     }
+                    //只有在点击表格标题行按钮才执行事件
                     if(tool === "toolbar"){
+                        //获取选中行数据
                         var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
                     }
-                    var data = obj.data;//获得当前行数据
+                    //获得当前行数据
+                    var data = obj.data;
+                    //当存在dataUrl时则填充进URL参数中
                     if(vas.dataUrl && vas.dataUrl !== false){
                         vas.content += "?";
                         for(var i=0;i<vas.dataUrl.length;i++){
                             vas.content += vas.dataUrl[i] + "=" + data[vas.dataUrl[i]] + "&";
                         }
                     }
-                    //判断是否自定义layer是否弹出
+                    //判断是否允许自定义layer窗口弹出
                     if(vas.layOpen !== undefined) openT = Boolean(vas.layOpen);
+                    //若允许弹出则弹出
                     openT && layOpen(vas);
-                    //有函数则执行函数
+                    //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
                     vas.func && vas.func(obj,checkStatus);
                 });
             });
@@ -746,11 +788,15 @@ action = func = {
                     ,uValue = obj.uValue//字段修改前的值（自定义JS，table.js重置后将失效）
                     ,tips = value.tip || field;
                 layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
+                    //执行自定义函数
                     value.func && value.func(val,obj);
+                    //关闭弹出的确认信息
                     layer.close(index);
                 },function(index){
                     //取消操作将重置已编辑的数据
+                    //获取改变前的数据
                     data[field] = uValue;
+                    //更新数据
                     obj.update(data);
                 })
             });
@@ -760,12 +806,9 @@ action = func = {
     "reTable":function(value){
         var name = value.name || "table",res = value.data;
         layui.use('table',function(){
-            var table = layui.table;
-            var oData =  table.cache[name];//获取表格所有数据
-            /*console.log("=====reTable=====");
-            console.log(name);
-            console.log(res);
-            console.log(oData);*/
+            var table = layui.table
+                ,oData =  table.cache[name];//获取表格所有数据
+            //若需覆盖原数据则不保留原数据，否则向后逐条追加数据
             if(value.cover === true){
                 oData = res;
             }else{
@@ -789,6 +832,7 @@ action = func = {
             var table = layui.table
                 ,noCk = false
                 ,oData =  table.cache[name];//获取表格所有数据
+            //var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
             layui.each(oData,function(index,data){
                 //index -> 数据序号 data -> 遍历的当前数据
                 //当前数据被选中时则删除当前数据，否则清除LAYUI痕迹，最后重新渲染
@@ -807,6 +851,7 @@ action = func = {
                 });
                 return false;
             }
+            //重新渲染表格
             table.reload(name,{
                 data : oData
             });

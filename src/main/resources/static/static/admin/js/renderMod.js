@@ -61,15 +61,22 @@ $(function () {
                 if (val.filter && (val.select || val.get || (val.options && Type(val.options) === "json"))) {
                     if (val.get) {
                         val.get.success = function (res) {
-                            var dat = res.data.data,value = {};
-                            if(res.code ===0 && res.data){
-                                for (var name in dat[0]) {
-                                    if (dat[0].hasOwnProperty(name)) {
+                            var dat = null,value = {};
+                            if(res.data.data !== undefined){
+                                dat = res.data.data;
+                            }else if(res.data.list !== undefined){
+                                dat = res.data.list[0];
+                            }else{
+                                dat = res.data;
+                            }
+                            if(res.code === 0 && res.data){
+                                for (var name in dat) {
+                                    if (dat.hasOwnProperty(name)) {
                                         if(val.dateName && name === val.dateName){
                                             //格式化日期时间
-                                            value[name] = layui.util.toDateString(new Date(dat[0][name]).getTime(),"yyyy年MM月dd日");
+                                            value[name] = layui.util.toDateString(new Date(dat[name]).getTime(),"yyyy年MM月dd日");
                                         }else{
-                                            value[name] = dat[0][name];
+                                            value[name] = dat[name];
                                         }
                                     }
                                 }
@@ -192,8 +199,7 @@ $(function () {
                             param = backBefore;
                         }
                     }
-                    //bef = Boolean(sub.before && sub.before(data));
-                    //console.log(bef);
+                    console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
                     console.log(param);
                     sub.form && bef && subUp(sub.form, dataBase,param);
@@ -302,9 +308,7 @@ $(function () {
                                 resValue[res.data[x]] = $("select[name='"+res.data[x]+"']").val();
                             }
                         }
-                        //console.log(resValue);
                     }
-
                     //添加额外数据
                     if(res.where){
                         for (var name in res.where) {
@@ -314,25 +318,26 @@ $(function () {
                         }
                         //console.log(resValue);
                     }
+                    //时间选择器数据拆分
                     if(res.dat){
                         var dat = "",datArray="",bar = "~";
                         if(Type(res.dat) === "array"){
-                            console.log(this);
                             dat = $(res.dat[0]).val();
                             if(res.dat[3]){
-                                bar = dat[3]
+                                bar = res.dat[3]
                             }
                             datArray = dat.split(bar);
                             resValue[res.dat[1]] = datArray[0].trim();
                             resValue[res.dat[2]] = datArray[1].trim();
                         }else if(Type(res.dat) === "json"){
                             dat = $(res.dat.elem).val();
-                            datArray = dat.split(res.dat.bar || "~");
+                            datArray = dat.split(res.dat.bar || bar);
                             resValue[res.dat.bTime] = datArray[0].trim();
                             resValue[res.dat.eTime] = datArray[1].trim();
                         }
+                        console.log(resValue);
+                        console.log(bar);
                     }
-                    //console.log(resValue);
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,
@@ -348,7 +353,6 @@ $(function () {
                     if($("#moreBar select").length > 0){
                         var val = formAction.val;
                         if(val.select){
-                            console.log("666");
                             if(Type(val.select) === "json"){
                                 getSelect(val.select);
                             }else if(Type(val.select) === "array"){
@@ -356,8 +360,8 @@ $(function () {
                                     getSelect(val.select[s]);
                                 }
                             }
-
-                            form.render();
+                            //重新渲染下拉
+                            form.render("select");
                         }
                     }
 
@@ -371,12 +375,9 @@ $(function () {
 
                 //首次页面渲染后按钮事件绑定
                 $(".layui-table-tool .layui-btn").on('click', function () {
-                    //console.log("===TOOLBAR===");
                     var type = $(this).data('type');
-                    //console.log(type);
                     active[type] ? active[type].call(this) : '';
-                    //console.log(active[type] ? false:"");
-                    return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
+                    return active[type] ? false:"";//存在type则阻止其他事件，否则不阻止
                 });
             }
 
@@ -402,6 +403,7 @@ $(function () {
         }
         //按钮绑定渲染
         if(bindButton && bindButton !== false){
+            //数据类型判断
             if(Type(bindButton)==="json"){
                 btn(bindButton);
             }else if(Type(bindButton)==="array"){
@@ -409,10 +411,8 @@ $(function () {
                     btn(bindButton[b]);
                 }
             }
-
+            //数据事件绑定函数
             function btn(dat){
-                //console.log("===BTN===");
-                //console.log(dat);
                 var datType = dat.type || "click"
                     ,datBan = Boolean(dat.ban) || false
                     ,datFunc = dat.func || function(){
@@ -425,14 +425,14 @@ $(function () {
                         }
                 });//绑定函数
             }
-
         }
         //常用事件绑定
         if(bindEvent && Type(bindEvent) === "json"){
             var bindFunc = {
                 delItem:function(el){
+                    //数据类型判断
                     if(doJudg({
-                        0:[el]
+                        0:[$(el)]
                     })){
                         putMsg({
                             alert:"页面调用错误，操作无法进行！",
@@ -449,6 +449,7 @@ $(function () {
                     })
                 },
                 addItem:function(cl){
+                    //数据类型判断
                     if(Type(cl) === "array"){
                         for(var i=0;i<cl.length;i++){
                             forAdd(cl[i]);
@@ -456,7 +457,9 @@ $(function () {
                     }else if(Type(cl) === "json"){
                         forAdd(cl);
                     }
+                    //添加表格数据事件函数
                     function forAdd(item){
+                        //数据有效性判断
                         if(doJudg({
                             "undefined":[item.elem]
                         })){
@@ -469,21 +472,25 @@ $(function () {
                         }
                         //addItem用于添加表格数据，匹配data-id对应的表格，默认表格ID为"table"
                         $(item.elem).on("click",function(){
-                            console.log("666");
-                            var areas = ["90%","90%"],name = item.name || "sdsd",value = item.value || item.key || "j",tableId = item.table || $(this).data("id") || "table"
+                            var areas = ["90%","90%"],
+                                name = item.name || "sdsd",
+                                value = item.value || item.key || "j",
+                                tableId = item.table || $(this).data("id") || "table"
                                 ,setUrl = "";
+                            //判断是否使用固定小尺寸窗口
                             if(item.area === "min"){
                                 areas = ["300px","400px"]
                             }
-                            //获取URL地址
+                            //获取数据页URL地址
                             if(item.url){
                                 setUrl = item.url
                             }else{
+                                //设置URL
                                 setUrl = item.base || "/admin/index/global/data.html";
                                 //设置参数
                                 setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;
                             }
-
+                            //弹出自定义窗口
                             layOpen({
                                 type:2,
                                 title:"添加数据",
@@ -491,19 +498,24 @@ $(function () {
                                 area:areas,
                                 maxmin:false,
                                 end:function(){
+                                    //获取本地存储中的数据
                                     var res = tempValue(name,value);
-                                    console.log(res);
-                                    console.log(tableId);
-                                    action.reTable({
-                                        name:tableId,
-                                        data:res
-                                    });
+                                    //数据有效则添加
+                                    if(res !== undefined){
+                                        //向表格中添加数据
+                                        action.reTable({
+                                            name:tableId,
+                                            data:res
+                                        });
+                                    }
                                 }
                             });
+                            return false;
                         })
                     }
                 },
                 selectItem:function(cl){
+                    //数据类型判断
                     if(Type(cl) === "array"){
                         for(var i=0;i<cl.length;i++){
                             forSelect(cl[i]);
@@ -511,11 +523,12 @@ $(function () {
                     }else if(Type(cl) === "json"){
                         forSelect(cl);
                     }
-
+                    //数据选择事件处理
                     function forSelect(item){
                         $(item.elem).on("click",function(){
+                            //判断数据有效性
                             if(doJudg({
-                                "undefined":[item.cb,item.db,item.name,item.key,item.data]
+                                "undefined":[item.cb,item.db,item.name,item.data]
                             })){
                                 putMsg({
                                     alert:"页面调用错误，操作无法进行！",
@@ -524,30 +537,28 @@ $(function () {
                                 });
                                 return false;
                             }
-                            var name = item.name,value = item.value || item.key,url = item.url || "/admin/index/global/data.html";
+                            //调用值
+                            var name = item.name,
+                                value = item.value || item.key,
+                                url = item.url || "/admin/index/global/data.html";
                             layOpen({
                                 type:2,
                                 title:"选择数据",
-                                content:url+"?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value,
+                                content:url+"?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+name+"&v="+item.value,
                                 area:["90%","90%"],
                                 end:function(){
                                     //获取数据并且删除数据
                                     var res = tempValue(name,value);
-                                    //console.log(JSON.stringify(res));
-                                    if(res === undefined){
-                                        //不提示信息，避免用户取消
-                                        return false;
-                                    }else{
-                                        //item.data[item.key] = {};
+                                    //判断是否选择了数据
+                                    if(res !== undefined){
+                                        //将获取到的值写到指定变量的指定参数内
                                         item.data[item.key] = res;
-                                        //console.log(item.data);
-                                        //寻找匹配的元素并且赋值能匹配上的name值
+                                        //寻找匹配的元素并且将匹配上name值的DOM赋值
                                         for(var i=0;i<res.length;i++){
                                             for(var key in res[i]){
                                                 if(res[i].hasOwnProperty(key)){
-                                                    //console.log(key);
-                                                    var $dom = $("*[name="+key+"]");
-                                                    //console.log($dom);
+                                                    var $dom = $("input[name="+key+"]");
+                                                    //判断DOM是否存在
                                                     if($dom.length > 0){
                                                         $dom.val(res[i][key]);
                                                         return true;
@@ -562,7 +573,7 @@ $(function () {
                     }
                 }
             };
-            //匹配并运行函数，将参数传递进函数
+            //匹配并运行函数，并将参数传递进函数
             for(var name in bindEvent){
                 if(bindEvent.hasOwnProperty(name)){
                     if(bindFunc[name] !== undefined){
@@ -593,22 +604,36 @@ $(function () {
             laydate.render(date);
             $.cookie("RenderDate-a-Func",JSON.stringify(date));
         }
-
-        function getSelect(re,del){
-            console.log("ssss");
-            console.log(re);
-            var id = re.ids || "id",text = re.text || "text",filter = re.filter || "select";
+        //下拉列表动态加载
+        function getSelect(re){
+            //re 提交的数据
+            var id = re.ids || "id",
+                text = re.text || "text",
+                filter = re.filter || "select";
             re.success = function(res){
-                console.log(res);
                 if (res.code === 0) {
+                    //获取指定select标签
                     var $d = $("select[lay-filter='"+filter+"']");
-                    //console.log(JSON.stringify($d));
                     for (var i = 0; i < res.data.length; i++) {
+                        //动态渲染option标签并且渲染进页面
                         $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
                     }
-                    console.log($d);
+                    //表单下拉单独重新渲染
                     form.render("select");
+                }else{
+                    putMsg({
+                        alert:"数据加载失败！",
+                        error:"返回数据异常！",
+                        log:res
+                    });
                 }
+            };
+            re.error = function(res){
+                putMsg({
+                    alert:"数据加载失败！",
+                    error:"数据提交异常！",
+                    log:res
+                });
             };
             //删除不必要参数，避免污染参数
             //删除参数将导致无法重载，不建议删除

@@ -117,7 +117,21 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":({
+                            "tool":'toolbar',
+                            "event":'add',
+                            "type":2,
+                            "title":'科室管理团队分工',
+                            "content":'.html',
+                            "area":['95%','95%']
+                        },{
+                            "event":'edit',
+                            'type':2,
+                            "content":'.html'
+                        })
+                    })
                 }
             },
 

@@ -54,4 +54,16 @@ public class FwBaoxiuProvider {
         }
         return sql;
     }
+    public String listFwBaoxiuVo(Integer status){
+        return new SQL(){
+            {
+                SELECT("fw_baoxiu.id as fpDh,eq_name,eq_gg,eq_xh,wxf_cjrgf,bm_name");
+                FROM("fw_baoxiu");
+                INNER_JOIN("eq_info on eq_info.eq_id=fw_baoxiu.eq_id");
+                INNER_JOIN("fw_wxf ON fw_wxf.fw_id = fw_baoxiu.id");
+                INNER_JOIN("s_bm on eq_info.eq_bmid =  s_bm.bm_id");
+                WHERE("bx_status=#{status}");
+            }
+        }.toString();
+    }
 }
