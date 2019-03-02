@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>维修发票审核</title>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label{
             padding: 8px 10px!important;
@@ -21,14 +20,11 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-        .sign{
-            color:red;
-        }
     </style>
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="" >
+<form class="layui-form layui-form-pane" action="" lay-filter="forms" >
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>维修发票审核</legend>
@@ -47,11 +43,17 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">登记时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fpSdTime" id="shsj" autocomplete="" class="layui-input" readonly>
+                </div>
+            </div>
+           <!-- <div class="layui-form-item">
                 <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="fpShrId" id="shr" autocomplete="" class="layui-input" readonly>
                 </div>
-            </div>
+            </div>-->
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -67,12 +69,6 @@
                     <input type="text" name="fpPrice" id="fpje" autocomplete="" class="layui-input" readonly>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">登记时间</label>
-                <div class="layui-input-block">
-                    <input type="text" name="fpSdTime" id="shsj" autocomplete="" class="layui-input" readonly>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -81,15 +77,14 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">审核意见</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="" name="shyj" class="layui-textarea"></textarea>
+                    <textarea placeholder="请输入审核意见" id="textArea" name="shyj" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn">保存</button>
-                <button class="layui-btn">返回</button>
+                <button class="layui-btn" lay-submit >保存</button>
             </div>
         </div>
     </div>
@@ -102,14 +97,43 @@
 <script>
     renderMod = {
         form:{
-            //动态获取val示例
             val:{
                 filter:"forms",
                 get:{
                     url:"/security/fp/selectFwFpById",
                     type:"GET",
                     data:{id:$.getUrlParam('id')}
-                }//get内参数需参考《内容传输与提交》文档
+                }
+            },
+            submit:{
+                before:function(){
+                  var $text = $("#textArea").val();
+                  if(doJudg({
+                      "00":[$text]
+                  })){
+                        putMsg({
+                            alert:"请输入审核意见！",
+                            log:$text
+                        });
+                        return false;
+                  }
+                  return true;
+                },
+                form:{
+                    url:"/security/fp/updateFwFpStatus",
+                    type:"POST",
+                    data:["shyj"],
+                    add:{
+                        id:$.getUrlParam("id")
+                    },
+                    done:function(res){
+                        if(res.code === 0){
+                            //提交完成后关闭页面
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                        }
+                    }
+                }
             }
         }
 

@@ -488,7 +488,7 @@ function subUp(value, data, param) {
                     });
                 }
                 //提交成功后执行（不论返回数据是否正确）
-                value.done && value.done();
+                value.done && value.done(data);
             },
             error: function (er) {
                 putMsg({

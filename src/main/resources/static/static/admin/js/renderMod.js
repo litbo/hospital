@@ -61,15 +61,22 @@ $(function () {
                 if (val.filter && (val.select || val.get || (val.options && Type(val.options) === "json"))) {
                     if (val.get) {
                         val.get.success = function (res) {
-                            var dat = res.data.data,value = {};
-                            if(res.code ===0 && res.data){
-                                for (var name in dat[0]) {
-                                    if (dat[0].hasOwnProperty(name)) {
+                            var dat = null,value = {};
+                            if(res.data.data !== undefined){
+                                dat = res.data.data;
+                            }else if(res.data.list !== undefined){
+                                dat = res.data.list[0];
+                            }else{
+                                dat = res.data;
+                            }
+                            if(res.code === 0 && res.data){
+                                for (var name in dat) {
+                                    if (dat.hasOwnProperty(name)) {
                                         if(val.dateName && name === val.dateName){
                                             //格式化日期时间
-                                            value[name] = layui.util.toDateString(new Date(dat[0][name]).getTime(),"yyyy年MM月dd日");
+                                            value[name] = layui.util.toDateString(new Date(dat[name]).getTime(),"yyyy年MM月dd日");
                                         }else{
-                                            value[name] = dat[0][name];
+                                            value[name] = dat[name];
                                         }
                                     }
                                 }
@@ -193,7 +200,7 @@ $(function () {
                         }
                     }
                     //bef = Boolean(sub.before && sub.before(data));
-                    //console.log(bef);
+                    console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
                     console.log(param);
                     sub.form && bef && subUp(sub.form, dataBase,param);
@@ -302,9 +309,7 @@ $(function () {
                                 resValue[res.data[x]] = $("select[name='"+res.data[x]+"']").val();
                             }
                         }
-                        //console.log(resValue);
                     }
-
                     //添加额外数据
                     if(res.where){
                         for (var name in res.where) {
@@ -314,10 +319,10 @@ $(function () {
                         }
                         //console.log(resValue);
                     }
+                    //时间选择器数据拆分
                     if(res.dat){
                         var dat = "",datArray="",bar = "~";
                         if(Type(res.dat) === "array"){
-                            console.log(this);
                             dat = $(res.dat[0]).val();
                             if(res.dat[3]){
                                 bar = dat[3]
@@ -332,7 +337,6 @@ $(function () {
                             resValue[res.dat.eTime] = datArray[1].trim();
                         }
                     }
-                    //console.log(resValue);
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,
@@ -348,7 +352,6 @@ $(function () {
                     if($("#moreBar select").length > 0){
                         var val = formAction.val;
                         if(val.select){
-                            console.log("666");
                             if(Type(val.select) === "json"){
                                 getSelect(val.select);
                             }else if(Type(val.select) === "array"){
@@ -356,8 +359,8 @@ $(function () {
                                     getSelect(val.select[s]);
                                 }
                             }
-
-                            form.render();
+                            //重新渲染下拉
+                            form.render("select");
                         }
                     }
 
@@ -371,12 +374,9 @@ $(function () {
 
                 //首次页面渲染后按钮事件绑定
                 $(".layui-table-tool .layui-btn").on('click', function () {
-                    //console.log("===TOOLBAR===");
                     var type = $(this).data('type');
-                    //console.log(type);
                     active[type] ? active[type].call(this) : '';
-                    //console.log(active[type] ? false:"");
-                    return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
+                    return active[type] ? false:"";//存在type则阻止其他事件，否则不阻止
                 });
             }
 
