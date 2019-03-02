@@ -34,11 +34,11 @@
             <!--<select lay-submit="select1">-->
                 <!--<option>划分人</option>-->
             <!--</select>-->
-            <select lay-filter="hfr">
+            <select lay-filter="hfr" name="userId">
                 <option>划分人</option>
             </select>
         </div>
-        <button class="layui-btn" data-type="">确定划分</button>
+        <button class="layui-btn" data-type="hf">确定划分</button>
         <div class="layui-inline" style="margin-left:100px">
             <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
         </div>
@@ -96,7 +96,7 @@
                 where: {
 
                 }
-            },
+            }
             event:{
                 filter:'select1',
                 box:'onChange',

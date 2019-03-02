@@ -8,7 +8,6 @@ import com.litbo.hospital.supervise.vo.SZhiduzhizeZtSelect;
 import com.litbo.hospital.supervise.vo.ZDSelectAsBaseShMsg;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -89,5 +88,5 @@ public interface ZhiduDao {
     @Select("select * from s_zhiduzhize_zt  where zd_id=#{zdId} order by zt_id desc")
     List<SZhiduzhizeZt> listZdztDescByZtid(Integer zdId);
     @SelectProvider(type = ZhiDuProvider.class,method = "listZdsByTimeAndZdNameAndZt")
-    List<SZhidu> listZdsByTimeAndZdNameAndZt(@Param("startTime") Date startTime, @Param("endTime")Date endTime, @Param("zdName") String zdName, @Param("zdZt")String zdZt);
+    List<SZhidu> listZdsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("zdName") String zdName, @Param("zdZt")String zdZt);
 }

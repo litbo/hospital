@@ -30,18 +30,8 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <span>备案日期：</span>
-        <div class="layui-input-inline">
-            <input type="text"  id="date" name="beginTime" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
-        </div>
-        <span>-</span>
-        <div class="layui-input-inline">
-            <!--<div class="layui-form-item">-->
-                <!--<div class="layui-input-block">-->
-                    <!--<input type="text" name="endTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">-->
-                <!--</div>-->
-            <!--</div>-->
-            <input type="text"  id="date1" name="endTime" lay-verify="date" autocomplete="off" class="layui-input">
-
+        <div class="layui-inline">
+            <input type="text"  id="date" name="startTime" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
@@ -50,13 +40,16 @@
     </div>
 </script>
 
-
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
 
     renderMod = {
-
+        form:{
+            date :{
+                elem : "#date",
+                type : "datetime",
+                range:"~"
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
@@ -88,13 +81,13 @@
             reSet:{
                 url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=3",
                 type:"search",
-                data:["beginTime","endTime","zdName"],    //搜索框的name
-                where: {
-
-                }
+                data:["zdName"],    //搜索框的name
+                dat:["#date","startTime","endTime","~"]
             }
         }
     }
+
+
 </script>
 </body>
 </html>

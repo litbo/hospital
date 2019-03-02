@@ -77,6 +77,25 @@ renderMod = {
                 }
                 , done: function (obj) {
 
+                    tableFunc(
+                        {
+                            "obj": obj,
+                            "toolFunc": [
+                                {
+                                    type: 2,
+                                    title: "员工信息查询新增",
+                                    event: "add",
+                                    content: "./child/position-managementAdd.html",
+                                },{
+                                    tool:"toolbar",
+                                    type: 2,
+                                    title: "员工信息修改",
+                                    event: "edit",
+                                    content: "./child/position-managementAdd.html"
+                                }
+                            ]
+
+                        })
                 }
             },
 

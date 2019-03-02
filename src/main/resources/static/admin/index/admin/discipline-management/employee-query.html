@@ -92,6 +92,49 @@
                     }
                 }
                 , done: function (obj) {
+                    // tableFunc({
+                    //     "obj":obj,
+                    //     "toolFunc":[{
+                    //         "type":2,
+                    //         "title":'员工信息查询新增',
+                    //         "tool":'toolbar',
+                    //         "event":'add',
+                    //         "filter":'table1',
+                    //         "content":'./child/employee-queryAdd.html'
+                    //     },{
+                    //         "type":2,
+                    //         "title":'员工信息修改',
+                    //         "tool":'toolbar',
+                    //         "event":'edit',
+                    //         "filter":'table1',
+                    //         "content":'./child/employee-queryAdd.html'
+                    //     }]
+                    // })
+
+
+                    tableFunc(
+                        {
+                            "obj": obj,
+                            "toolFunc": [
+                                {
+                                    type: 2,
+                                    title: "dddddd",
+                                    event: "add",
+                                    content: "./child/employee-queryAdd.html",
+                                },{
+                                    tool:"toolbar",
+                                    type: 2,
+                                    title: "aaaaaaa",
+                                    event: "edit",
+                                    content: "./child/employee-queryAdd.html"
+                                }
+                            ]
+
+                        })
+
+
+
+
 
                 }
             },
