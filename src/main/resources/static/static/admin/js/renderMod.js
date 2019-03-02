@@ -508,6 +508,7 @@ $(function () {
                                     }
                                 }
                             });
+                            return false;
                         })
                     }
                 },
