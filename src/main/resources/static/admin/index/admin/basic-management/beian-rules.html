@@ -39,7 +39,17 @@
         <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
-
+<script id="timeFormat" type="text/html">
+    //日期转换
+    {{#
+    var time ="";
+    layui.use('util',function(){
+    var util = layui.util;
+    time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
+    });
+    return time;
+    }}
+</script>
 <script>
 
     renderMod = {
@@ -56,7 +66,7 @@
                     {checkbox:true,fixed:true}
                     , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
-                    , {field: 'createTime', title: '备案日期', minWidth: 150}
+                    , {field: 'createTime', title: '备案日期', minWidth: 150,templet:'#timeFormat'}
                 ]]
                 , url: "/supervise/zdgl/listZdsByZdZt?zdZt=3"
                 , request: {
