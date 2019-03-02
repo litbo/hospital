@@ -394,7 +394,7 @@ function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
     //判断数据有效性
     if(doJudg({
-        "undefined":[value.data,value.url]
+        "undefined":[value.url]
     })){
         putMsg({
             alert:"数据上传操作已被强制终止！",
