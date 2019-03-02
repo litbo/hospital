@@ -53,7 +53,7 @@ public class GxsrServiceImpl implements GxsrService {
             //获取科目编号
             String kmNum1 = jsonArray.getJSONObject(i)+"";
             JSONObject kmNum2 = JSON.parseObject(kmNum1);
-            Integer kmNum3 = (Integer) kmValue2.get("kmNum1");
+            String kmNum3 = (String) kmValue2.get("kmNum1");
             bSbcwBean.setKmNum(kmNum3);
 
             bSbcwBean.setEqId(insertSbcwVo.getEqId());
