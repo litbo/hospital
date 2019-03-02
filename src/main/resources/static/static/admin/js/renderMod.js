@@ -199,7 +199,6 @@ $(function () {
                             param = backBefore;
                         }
                     }
-                    //bef = Boolean(sub.before && sub.before(data));
                     console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
                     console.log(param);

@@ -119,9 +119,6 @@
                         ids:"userId",
                         text:"userXm",
                         url:"/kwgl/empgl/listPartnerByUserId"
-                    },
-                    {
-
                     }
                 ]
             }
@@ -129,7 +126,10 @@
         bind:{
             addItem: {
                 elem: "#addNew",
-                url: "/admin/index/global/data.html?cb=/security/pjzd/fwPjzdTitle&db=/security/pjzd/listFwPjzd&vg=dtdt&key=pj"
+                cb:"/security/pjzd/fwPjzdTitle",
+                db:"/security/pjzd/listFwPjzd",
+                name:"dtdt",
+                key:"pj"
             },
             delItem: " #delNew"
         },
@@ -143,7 +143,7 @@
                     {field: 'pjZczh', title: '注册证号'},
                     {field: 'pjZczDqTime', title: '注册证到期日期'},
                     {field: 'scqyName', title: '生产厂家'},
-                    {field: 'ghsName', title: '供货商'},
+                    {field: 'ghsName', title: '供货商'}
                 ]]
                 , toolbar:false
                 , page:false
