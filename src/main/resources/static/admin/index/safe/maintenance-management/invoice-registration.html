@@ -21,9 +21,6 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-        .sign{
-            color:red;
-        }
         #btn{
             color: #00b5f9;
             display: block;
@@ -34,22 +31,23 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" method="post" action="/security/fp/insertFwFp">
+<form class="layui-form layui-form-pane">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>发票信息登记</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">维修单号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: -3px" id="layerBtn">选择</button>
+                    <input type="text" name="wxDh" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">发票号码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="fpHm" autocomplete="" class="layui-input">
+                    <input type="text" name="fpHm" autocomplete="" class="layui-input" lay-verify="required|number" required>
                 </div>
             </div>
         </div>
@@ -58,13 +56,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发票金额<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="fpPrice" autocomplete="" class="layui-input">
+                    <input type="text" name="fpPrice" autocomplete="" class="layui-input" lay-verify="required|number" required>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">送达时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="fpSdTime" id="date" class="layui-input">
+                    <input type="text" name="fpSdTime" id="date" class="layui-input" lay-verify="required|date" required>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -80,7 +78,7 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn">提交</button>
+                <button class="layui-btn" lay-submit lay-filter="submit">提交</button>
             </div>
         </div>
     </div>
@@ -89,56 +87,30 @@
 
 </div>
 
-
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    // 设置当前日期
-    var date = new Date();
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-
-    var setDate = document.getElementById('date');
-    setDate.value = currentdate;
-</script>
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-        //弹出框设置
-        $('#layerBtn').on('click',function(){
-            layer.open({
-                type:2,
-                title:'维修单号',
-                content:'./child/maintenance-number.html' ,
-                area:['95%','95%'],
-                btn:['选择','取消']
-            });
-            return false;
-        })
-    });
+    formData = {};
+    renderMod = {
+        form: {
+            date:true,
+            submit: {
+                filter: "submit",//可以不写
+                form: {
+                    url: "/security/fp/insertFwFp",
+                    type: "POST"
+                }//表单提交函数
+            },
+            bind: {
+                selectItem: {
+                    elem: "#selectData",
+                    data:formData,
+                    cb:"/security/pjzd/fwPjzdTitle",
+                    db:"/security/pjzd/listFwPjzd",
+                    key:"wxfpdj",
+                    name:"dtdt"
+                }
+            }
+        }
+    }
 </script>
 </body>
 

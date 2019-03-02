@@ -55,7 +55,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">台账类别</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="">
+                                        <select name="" lay-filter="tzlb">
                                             <option value="">低值耐用品类</option>
                                             <option value="0">111</option>
                                             <option value="1">222</option>
@@ -86,13 +86,9 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">经费来源</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="">
-                                            <option value="">其他</option>
-                                            <option value="0">111</option>
-                                            <option value="1">222</option>
-                                            <option value="2">333</option>
-                                            <option value="3">aa</option>
-                                            <option value="4">vvv</option>
+                                        <select name="" lay-filter="zjly">
+                                            <option> 其他</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -373,7 +369,7 @@
 
 <script src="/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['layer','form','laydate','element'],function(){
+ /*   layui.use(['layer','form','laydate','element'],function(){
         var form = layui.form;
              $   = layui.jquery;
          laydate = layui.laydate;
@@ -390,7 +386,28 @@
         laydate.render({
             elem: '#date2'
         });
-    })
+    })*/
+     renderMod.form = {
+         val:{
+             filter:"form",
+             select:[
+                 {
+                     filter:"zjly",
+                     ids:"zjlyId",
+                     text:"zjlyName",
+                     url:"/eqdict/zjly"
+                 }/*,
+                 {
+                     filter:"aihao6",
+                     ids:"eqCxflId",
+                     text:"eqCxflName",
+                     url:"/eqdict/cxfl"
+                 }*/
+             ]
+         }
+     }
+
+
 </script>
 </body>
 </html>

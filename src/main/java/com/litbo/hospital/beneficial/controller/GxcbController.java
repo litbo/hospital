@@ -23,6 +23,7 @@ public class GxcbController {
     @RequestMapping(value = "/insertCb",method = RequestMethod.POST)
     public Result insertCb(@RequestBody InsertSbcwVo insertSbcwVo){
 
+        System.out.println(insertSbcwVo);
         return gxcbService.insertCb(insertSbcwVo);
     }
 
