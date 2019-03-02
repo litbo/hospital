@@ -100,7 +100,6 @@
 
 
 <script>
-    formData = {};
     renderMod = {
         form:{
             //动态获取val示例
@@ -109,7 +108,7 @@
                 get:{
                     url:"/security/fp/selectFwFpById",
                     type:"GET",
-                    data:{id:getUrlParam('id')}
+                    data:{id:$.getUrlParam('id')}
                 }//get内参数需参考《内容传输与提交》文档
             }
         }
