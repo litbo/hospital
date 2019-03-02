@@ -83,6 +83,14 @@
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "edit",
+                            content:"./child/examine.html",
+                            dataUrl:["id"]
+                        }
+                    })
                 }
             },
             reSet: {

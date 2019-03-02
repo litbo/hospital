@@ -88,8 +88,8 @@
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">成本明细项</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加</button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew" data-id="table"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
                 </div>
             </div>
             <table id="table" lay-filter="table1"></table>
@@ -116,19 +116,34 @@
                 select:[
                     {
                         filter:"shr",
-                        ids:"obmId",
-                        text:"bmName",
-                        url:"/supervise/bmgl/listWXbms"
+                        ids:"userId",
+                        text:"userXm",
+                        url:"/kwgl/empgl/listPartnerByUserId"
+                    },
+                    {
+
                     }
                 ]
             }
         },
+        bind:{
+            addItem: {
+                elem: "#addNew",
+                url: "/admin/index/global/data.html?cb=/security/pjzd/fwPjzdTitle&db=/security/pjzd/listFwPjzd&vg=dtdt&key=pj"
+            },
+            delItem: " #delNew"
+        },
         addTable :{
             table:{
                 cols: [[ //表头
-                    {type: "checkbox"}
-                    ,{field: 'kmName', title: '科目',minWidth: 150}
-                    ,{field: 'kmValue', title: '金额', minWidth: 150}
+                    {type: "checkbox"},
+                    {field: 'pjbh', title: '配件编号'},
+                    {field: 'pjName', title: '配件名称'},
+                    {field: 'pjGgxh', title: '规格型号'},
+                    {field: 'pjZczh', title: '注册证号'},
+                    {field: 'pjZczDqTime', title: '注册证到期日期'},
+                    {field: 'scqyName', title: '生产厂家'},
+                    {field: 'ghsName', title: '供货商'},
                 ]]
                 , toolbar:false
                 , page:false

@@ -83,10 +83,10 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: 0px" id="layerBtn" name="sbId">选择</button>
+                    <button class="layui-btn layui-btn-normal"  style="margin-left:35px;margin-top: 0px" id="selectEquip" name="sbId">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -95,7 +95,7 @@
                     <input type="text" name="" autocomplete="" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">报告人岗位<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="radio" name="bgrgw" value="" title="医师" checked>
@@ -247,72 +247,22 @@
     </div>
 </form>
 
-
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    // 设置当前日期
-    var date = new Date();
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-
-    var setDate1 = document.getElementById('bdate');
-    var setDate2 = document.getElementById('sdate');
-    var setDate3 = document.getElementById('fdate');
-    setDate1.value = currentdate;
-    setDate2.value = currentdate;
-    setDate3.value = currentdate;
-</script>
 <script>
-    addTable ={
+    formData={};
+    renderMod={
+        bind: {
+            selectItem: [
+                {
+                    elem: "#selectEquip",
+                    cb: "/benefical/select/listSelectCols",
+                    db: "/benefical/select/listSelect",
+                    name: "dtdt",
+                    key: "eq",
+                    data:formData
+                }
+            ]
+        }
     }
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#bdate'
-        });
-        laydate.render({
-            elem: '#sdate'
-        });
-        laydate.render({
-            elem: '#fdate'
-        });
-        laydate.render({
-            elem: '#zdate'
-        });
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-        //弹出框设置
-        $('#layerBtn').on('click',function(){
-            layer.open({
-                type:2,
-                title:'员工选择',
-                content:'./child/suspicious-select.html' ,
-                area:['96%','90%'],
-                btn:['选择','取消']
-            });
-            return false;
-        })
-    });
 </script>
 </body>
 

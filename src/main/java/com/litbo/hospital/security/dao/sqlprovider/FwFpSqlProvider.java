@@ -49,4 +49,14 @@ public class FwFpSqlProvider {
             }
         }.toString();
     }
+    public String selectFwFpById(Integer id){
+        return new SQL(){
+            {
+                SELECT("id,fp_dh,fp_price,s.user_xm djrName,fp_hm,fp_sd_time");
+                FROM("fw_fp");
+                LEFT_OUTER_JOIN("s_emp AS s ON s.user_id = fw_fp.fp_shr_id");
+                WHERE("id = #{id}");
+            }
+        }.toString();
+    }
 }

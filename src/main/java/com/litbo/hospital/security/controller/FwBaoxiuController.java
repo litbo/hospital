@@ -1,5 +1,6 @@
 package com.litbo.hospital.security.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwBaoxiu;
@@ -7,6 +8,9 @@ import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author zjc
@@ -104,5 +108,25 @@ public class FwBaoxiuController {
             e.printStackTrace();
             return Result.error();
         }
+    }
+
+    @RequestMapping(value = "listWx",method = RequestMethod.POST)
+    public Result listWx(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                         @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
+        PageInfo pageInfo = fwBaoxiuService.listWx(pageNum,pageSize);
+        return Result.success(pageInfo);
+    }
+
+    @RequestMapping(value = "listWxTitles",method = RequestMethod.POST)
+    public Result listWxTitles(){
+        String title ="[{'type': 'radio'}, "+
+                "{field: 'fpDh', title: '维修单号'},"+
+                "{field: 'eqName', title: '配件名称'},"+
+                "{field: 'eqGg', title: '规格'},"+
+                "{field: 'eqXh', title: '型号'},"+
+                "{field: 'wxfCjrgf', title: '费用'},"+
+                "{field: 'bmName', title: '部门'}"+
+                "]";
+        return Result.success(JSON.parseArray(title));
     }
 }

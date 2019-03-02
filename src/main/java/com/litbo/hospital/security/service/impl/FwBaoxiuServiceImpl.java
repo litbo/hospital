@@ -91,5 +91,10 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
         fwBaoxiuDao.updateBaoxiuStatus(id,baoxiuStatus);
     }
 
+    @Override
+    public PageInfo listWx(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
 
+        return new PageInfo(fwBaoxiuDao.listFwBaoxiuVo(EnumProcess.FW_WX_OVER.getCode()));
+    }
 }
