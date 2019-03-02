@@ -79,16 +79,7 @@
                     <span>链接(url)：</span> <input type="text" name="url" disabled>
                 </label>
 
-                <div class="tmore">
-                    <label>
-                        <span>页面名：</span> <input type="text" name="tname" disabled>
-                    </label>
-                    <label>
-                        <span>T：</span> <input type="text" name="trow" disabled>
-                    </label>
-                    <label>
-                        <span>N：</span> <input type="text" name="tcol" disabled>
-                    </label>
+                <div id="tn" style="display: none;">
                     <label>
                         <button id="reTN" class="btn" style="width: 100%;background: #08eebb;">T/N重排</button>
                     </label>
@@ -121,7 +112,7 @@
 
             <div class="file">
                 <label>
-                    <span>文件位置：</span> <input type="text" name="fileUrl" value="./list.json" >
+                    <span>文件位置：</span> <input type="text" name="fileUrl" value="/static/admin/js/json/list.json" >
                 </label>
                 <label>
                     <input type="file" id="files" accept="application/json" style="display:none;" />
@@ -317,6 +308,11 @@
                             $elem.attr("disabled",true);
                         }
                     }
+                    if(data["level"] === 1){
+                        $("#tn").css("display","block");
+                    }else{
+                        $("#tn").css("display","none");
+                    }
                     //如果存在ICON则预览此ICON，否则清除上次遗留数据
                     if($("input[name='icon']").val().length>0){
                         $("#showIcon").attr("class","fas fa-"+$("input[name='icon']").val())
@@ -452,31 +448,28 @@
         //T/N重排
         function reTN(){
             //遍历首层
+            var urls = "";
             for(var i=0;i<thisData.data.length;i++){
                 //e.g. 10 11 12 {string}
                 thisData.data[i].id = String(thisData.index) + String(i);
                 if(thisData.data[i].children !== undefined){
                     //将父级数据中的子集数据及父级ID传入循环
-                    reTNNext(thisData.data[i].children,thisData.data[i].id);
+                    for(var x=0;x<thisData.data[i].children.length;x++){
+                        urls = thisData.data[i].children[x].url.split("&");
+                        if(urls.length <= 1){
+                            alert("当前链接无法重排！");
+                            return false;
+                        }
+                        thisData.data[i].children[x].url = urls[0] + "&t=" + i +"&n=" + x;
+                        console.log(thisData.data[i].children[x]);
+                    }
                 }
             }
             setObj(thisData.index,thisData.other);
-            alert("ID重排已完成，请重新选择节点！");
+            alert("T/N重排已完成，请重新选择节点！");
             $(".shade").css("display","block");
         }
 
-        //TN重排内部调用函数
-        function reTNNext(data,index){
-            //内部递归引用
-            for(var i=0;i<data.length;i++){
-                if(data[i].level === 1){
-                    console.log(data[i]);
-                }
-                if(data[i].children !== undefined){
-                    reTNNext(data[i].children,data[i].id);
-                }
-            }
-        }
 
         //文件选择（只支持部分浏览器）
         function selectF(){
@@ -530,13 +523,13 @@
                             },
                             error:function(res){
                                 alert("数据加载失败！");
-                                $("input[name='fileUrl']").val("./list.json");
+                                $("input[name='fileUrl']").val("/static/admin/js/json/list.json");
                                 console.log(res);
                             }
                         });
                         setObj(1,"items");
                     }else{
-                        $("input[name='fileUrl']").val("./list.json");
+                        $("input[name='fileUrl']").val("/static/admin/js/json/list.json");
                     }
                 }else{
                     alert("无法加载文件！");
