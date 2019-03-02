@@ -23,9 +23,6 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-        .sign{
-            color:red;
-        }
     </style>
 </head>
 
@@ -43,16 +40,16 @@
                     <!--</select>-->
                 <!--</div>-->
             <!--</div>-->
-            <div class="layui-form-item">
+            <!--<div class="layui-form-item">
                 <label class="layui-form-label">申购人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" required lay-verify="required" placeholder="Admin">
+                    <input type="text" name="" class="layui-input" autocomplete="off"  placeholder="Admin">
                 </div>
-            </div>
+            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">申购时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" id="date" required lay-verify="required">
+                    <input type="text" name="" class="layui-input" autocomplete="off" id="date" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -82,7 +79,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">申请事项<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea" required lay-verify="required"></textarea>
+                    <textarea placeholder="请输入" class="layui-textarea" lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
@@ -98,8 +95,7 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">提交数据</button>
             </div>
         </div>
     </div>
@@ -111,6 +107,7 @@
 <script>
     renderMod={
         form:{
+            date:true,
             val:{
                 filter:"forms",
                 select:[

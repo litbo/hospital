@@ -77,7 +77,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">审核意见</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入审核意见" id="textArea" name="shyj" class="layui-textarea"></textarea>
+                    <textarea placeholder="请输入审核意见" id="textArea" name="shyj" class="layui-textarea" lay-verify="required"></textarea>
                 </div>
             </div>
         </div>
@@ -106,19 +106,6 @@
                 }
             },
             submit:{
-                before:function(){
-                  var $text = $("#textArea").val();
-                  if(doJudg({
-                      "00":[$text]
-                  })){
-                        putMsg({
-                            alert:"请输入审核意见！",
-                            log:$text
-                        });
-                        return false;
-                  }
-                  return true;
-                },
                 form:{
                     url:"/security/fp/updateFwFpStatus",
                     type:"POST",
