@@ -804,26 +804,78 @@ action = func = {
     },
     //向表格中添加数据
     "reTable":function(value){
-        var name = value.name || "table",res = value.data;
+        var name = value.name || "table",res = value.data,rep = 0,total = 0,num = 0,sec = 0,add = [],xs=0;
         layui.use('table',function(){
             var table = layui.table
                 ,oData =  table.cache[name];//获取表格所有数据
+            //未选择数据则不执行操作
+            if(res.length === 0){
+                return false;
+            }
+            //数据对比函数
+            function compRes(val){
+                if(oData.length === 0){
+                    sec++;//判断是否有
+                    oData.push(val);
+                }else{
+                    for(x = xs;x<oData.length;x++){
+                        //删除标志参数
+                        delete oData[x]["LAY_TABLE_INDEX"];
+                        delete oData[x]["LAY_CHECKED"];
+                        //判断是否需要删除某个判断的元素（删除自定义参数）
+                        if(value.del !== undefined && Type(value.del) === "array"){
+                            for(var cc=0;cc < value.del.length;cc++){
+                                delete oData[x][cc];
+                            }
+                        }
+                        //匹配参数个数并计算相同参数个数
+                        for(var name in oData[x]){
+                            if(oData[x].hasOwnProperty(name)){
+                                total++;//计算参数的总数
+                                if(oData[x][name] === val[name]){
+                                    num++;//计算匹配成功参数的个数
+                                }
+                            }
+                        }
+                        //若相等则表示当前数据在原数据中已存在，不相等则表示需要添加进数据中
+                        if(total !== num){
+                            sec++;
+                            add.push(val);
+                            //使用完毕，复位变量
+                            total = num = 0;
+                        }else{
+                            xs = x+1;
+                            return false;
+                        }
+                    }
+                    for(var j =0;j < add.length;j++){
+                        oData.push(add[j]);
+                    }
+                }
+            }
             //若需覆盖原数据则不保留原数据，否则向后逐条追加数据
             if(value.cover === true){
                 oData = res;
             }else{
+                //判断数据类型并执行函数
                 if(Type(res) === "array"){
                     for(var i=0;i<res.length;i++){
-                        oData.push(res[i]);
+                        compRes(res[i]);
                     }
                 }else if(Type(res) === "json"){
-                    oData.push(res);
+                    compRes(res)
                 }
             }
             //重新渲染表格
             table.reload(name,{
                 data : oData
             });
+            //信息提示
+            if(sec === 0){
+                layer.msg("重复数据无法添加！");
+            }else{
+                layer.msg("已成功添加" + sec + "条新数据！");
+            }
         });
     },
     //表格外获取选中数据并删除选中数据
@@ -832,29 +884,34 @@ action = func = {
             var table = layui.table
                 ,noCk = false
                 ,oData =  table.cache[name];//获取表格所有数据
-            //var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
-            layui.each(oData,function(index,data){
-                //index -> 数据序号 data -> 遍历的当前数据
-                //当前数据被选中时则删除当前数据，否则清除LAYUI痕迹，最后重新渲染
-                if(data.LAY_CHECKED === true){
-                    oData.splice(index, 1);
-                    noCk = true;
-                }else{
-                    //这个可以不要，因为就算删除了，重新渲染表格后依然会自动添加
-                    delete data["LAY_CHECKED"];
-                    delete data["LAY_TABLE_INDEX"];
-                }
-            });
-            if(!noCk){
+            var ck = table.checkStatus(name);//获取选中数据
+            if(ck.data.length === 0){
                 putMsg({
                     alert:"当前未选中任何数据！"
                 });
                 return false;
             }
-            //重新渲染表格
-            table.reload(name,{
-                data : oData
+            layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
+                if(ck.isAll === true){
+                    oData = [];
+                }else {
+                    for (var j = 0; j < oData.length; j++) {
+                        //找出所有数据中的已选中数据并删除
+                        if (oData[j].LAY_CHECKED === true) {
+                            oData.splice(j, 1);
+                        } else {
+                            delete oData[j]["LAY_CHECKED"];
+                            delete oData[j]["LAY_TABLE_INDEX"];
+                        }
+                    }
+                }
+                //重新渲染表格
+                table.reload(name,{
+                    data : oData
+                });
+                layer.close(index);
             });
+
         });
     }
 };
@@ -896,7 +953,7 @@ document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/
 
 window.onload = function(){
     //填充页面URL，便于调试页面
-    $("body").prepend($("<p>").css({"position":"absolute","right":"0","color":"#f10214","border":"1px solid","padding":"5px","z-index": "99999"}).html("当前页面地址："+window.location.href).on("click",function(){if(confirm("删除此内容？")){$(this).remove()}}));
+    $("body").prepend($("<p>").css({"position":"absolute","right":"0","color":"#f10214","border":"1px solid","padding":"5px","z-index": "99999"}).html("当前页面地址："+window.location.href).on("click",function(){$(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/}));
     //手机版显示 数据查找 按钮
    var $dataSearch = $("a[lay-event='dataSearch']");
    if($dataSearch.length>0){

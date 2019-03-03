@@ -324,6 +324,7 @@ $(function () {
                         if(Type(res.dat) === "array"){
                             dat = $(res.dat[0]).val();
                             if(res.dat[3]){
+                                //获取自定义的连接符
                                 bar = res.dat[3]
                             }
                             datArray = dat.split(bar);
@@ -335,8 +336,6 @@ $(function () {
                             resValue[res.dat.bTime] = datArray[0].trim();
                             resValue[res.dat.eTime] = datArray[1].trim();
                         }
-                        console.log(resValue);
-                        console.log(bar);
                     }
                     //执行重载
                     table.reload(
