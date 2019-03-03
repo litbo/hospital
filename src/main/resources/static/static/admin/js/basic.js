@@ -419,6 +419,10 @@ function subUp(value, data, param) {
                     dataP[valus] = $("select[name=" + valus + "]").val();
                 } else if($("textarea[name=" + valus + "]").val()){
                     dataP[valus] = $("textarea[name=" + valus + "]").val();
+                } else if($("input[type=radio][name=" + valus + "]").val()){
+                    dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
+                } else if($("input[type=checkbox][name=" + valus + "]").val()){
+                    dataP[valus] = $("input[type=checkbox][name=" + valus + "]").val();
                 }
             } else {
                 dataP[valus] = data.field[valus];

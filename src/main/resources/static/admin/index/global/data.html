@@ -9,7 +9,7 @@
     <title>数据</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="/static/admin/css/all.min.css"/>
+
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
@@ -44,12 +44,12 @@
 <script id="timeFormat" type="text/html">
     //日期转换
     {{#
-    var time ="";
-    layui.use('util',function(){
-    var util = layui.util;
-    time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
-    });
-    return time;
+        var time ="";
+        layui.use('util',function(){
+        var util = layui.util;
+        time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
+        });
+        return time;
     }}
 </script>
 
@@ -96,7 +96,6 @@
         type: "POST",
         data: {key: $key},
         success: function (res) {
-            //console.log(res);
             if (res.code !== 0) {
                 putMsg({
                     alert: "数据获取失败，请重试！",
@@ -152,7 +151,6 @@
                         }
                         , parseData: function (res) { //res 即为原始返回的数据
                             var dataS = res.data.list || res.data.data || res.data;
-                            console.log(dataS);
                             return {
                                 "code": res.code, //解析接口状态
                                 "msg": res.msg, //解析提示文本
@@ -175,7 +173,6 @@
                                                 key: $value,
                                                 value: cs.data
                                             });
-                                            console.log("8989");
                                             //关闭页面
                                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                             parent.layer.close(index); //再执行关闭

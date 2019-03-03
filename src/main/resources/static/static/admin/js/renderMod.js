@@ -195,14 +195,14 @@ $(function () {
                         if(!backBefore){
                             bef = false;
                         }else{
-                            console.log(backBefore);
                             param = backBefore;
                         }
                     }
-                    console.log(bef);
+                    //console.log(bef);
                     //表单提交事件（处理在subUp函数内部处理）
-                    console.log(param);
-                    sub.form && bef && subUp(sub.form, dataBase,param);
+                    //console.log(param);
+                    var subForm = sub.up || sub.form;
+                    subForm && bef && subUp(subForm, dataBase,param);
                     //表单提交后处理事件(不推荐使用，推荐使用ajax success/error处理)
                     sub.func && bef && sub.func(dataBase);
                     //阻止按钮默认事件
