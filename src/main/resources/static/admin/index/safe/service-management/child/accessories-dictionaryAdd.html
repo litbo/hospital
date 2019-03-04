@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="layui-form-item" pane>
-                <label class="layui-form-l abel" >设备名称</label>
+                <label class="layui-form-label" >设备名称</label>
                 <div class="layui-input-block">
                     <input type="text" name="eqId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
@@ -95,13 +95,17 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">生产企业</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>
+                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectScqy">选择</button>
+                    <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">供货商</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="pjGhsId" lay-event="choose1">选择</button>
+                    <input type="text" name="sbcsId1" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectGhs">选择</button>
+                    <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjGhsId" lay-event="choose1">选择</button>-->
                 </div>
             </div>
             <div class="layui-form-item">
@@ -140,6 +144,7 @@
 
 
 <script>
+    var formData = {};
     renderMod={
         form:{
             val:{
@@ -160,6 +165,20 @@
                 elem: "#selectData",
                 cb: "/benefical/select/listSelectCols",
                 db: "/benefical/select/listSelect",
+                name: "dtdt",
+                key: "eq",
+                data:formData
+            },{
+                elem: "#selectScqy",
+                cb: "/supervise/csgl/eqcsTitles",
+                db: "/supervise/csgl/listEqCs",
+                name: "dtdt",
+                key: "bm",
+                data:formData
+            },{
+                elem: "#selectGhs",
+                cb: "/supervise/csgl/eqcsTitles",
+                db: "/supervise/csgl/listEqCs1",
                 name: "dtdt",
                 key: "bm",
                 data:formData
