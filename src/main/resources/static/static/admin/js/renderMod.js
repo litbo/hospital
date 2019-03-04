@@ -568,6 +568,7 @@ $(function () {
                                     }
                                 }
                             });
+                            return false;
                         })
                     }
                 }
