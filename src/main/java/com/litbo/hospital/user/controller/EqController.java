@@ -1,5 +1,7 @@
 package com.litbo.hospital.user.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqInfo;
@@ -150,7 +152,31 @@ public class EqController {
     public Result listPmsByPym(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String pym){
 
-       PageInfo pageInfo = es.listPmsByPym(pageNum,pageSize,pym);
+    PageInfo pageInfo = es.listPmsByPym(pageNum,pageSize,pym);
        return Result.success(pageInfo);
+}
+    //返回表头
+    @RequestMapping("/listEqbt")
+    public Result listSelectEmpsCols(@RequestParam(required = false) String key) {
+        JSONArray myJsonArray = null;
+        if ("checkbox".equals(key)){
+            String jsonMessage = "[{'type': 'checkbox'}, " +
+                    "{field: 'eqSbbh', title: '设备编号''}, " +
+                    "{field: 'eqSbmc', title: '设备名称'}" +
+                    "{field: 'eqGg', title: '规格'}" +
+                    "{field: 'eqXh', title: '型号'}]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }else if ("radio".equals(key)){
+            String jsonMessage = "[{'type': 'radio'}, " +
+                    "{field: 'eqSbbh', title: '设备编号'}, " +
+                    "{field: 'eqSbmc', title: '设备名称'}" +
+                    "{field: 'eqGg', title: '规格'}" +
+                    "{field: 'eqXh', title: '型号'}]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }
+        PageInfo date = new PageInfo(myJsonArray);
+        return Result.success(date);
     }
+
+
 }
