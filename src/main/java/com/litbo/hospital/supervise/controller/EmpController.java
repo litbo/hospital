@@ -47,11 +47,11 @@ public class EmpController {
         return Result.success(info);
     }
 
-    @GetMapping("/listSelectEmpBybmIdAndUserId")
+    @GetMapping("/listSelectEmpBybmIdAndUserIdAndStatus")
     public Result listSelectEmps(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                 String bmId, String userId) {
-        PageInfo info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId);
+                                 String bmId, String userId,String status) {
+        PageInfo info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId,status);
         return Result.success(info);
     }
 

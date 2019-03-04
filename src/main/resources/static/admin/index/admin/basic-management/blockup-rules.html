@@ -33,14 +33,11 @@
         <div class="layui-input-inline">
             <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
         </div>
-        <span>-</span>
-        <div class="layui-input-inline">
-            <input type="text"  id="date1" name="date1" lay-verify="date" autocomplete="off" class="layui-input">
-        </div>
+
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -49,7 +46,13 @@
 
 <script>
     renderMod = {
-
+        form:{
+            date :{
+                elem : "#date",
+                type : "datetime",
+                range:"~"
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
@@ -79,12 +82,10 @@
                 }
             },
             reSet:{
-                url:"/supervise/bmgl/listFWXBmByBmName",
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=0",
                 type:"search",
                 data:["bmName"],    //搜索框的name
-                where: {
-
-                }
+                dat:["#date","startTime","endTime","~"]
             }
         }
     }
