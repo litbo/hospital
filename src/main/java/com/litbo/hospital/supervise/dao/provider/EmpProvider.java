@@ -16,9 +16,9 @@ public class EmpProvider {
                 "  LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id) " +
                 "  LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)" +
                 "  LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id) where 1=1" );
-        if(!"0000000000".equals(bmId))  sql.append(" and bm.bm_id=#{bmId} ");
-        if(userId!=null) sql.append(" and emp.user_id=#{userId} ");
-        if(userId!=null) sql.append(" and emp.status=#{status} ");
+        if(!"0000000000".equals(bmId))  sql.append(" and bm.bm_id Like '%'+#{bmId}+'%'");
+        if(userId!=null) sql.append(" and emp.user_id like '%'+#{userId}+'%' ");
+        if(status!=null) sql.append(" and emp.status like '%'+#{status}+'%' ");
         return sql.toString();
     }
 }
