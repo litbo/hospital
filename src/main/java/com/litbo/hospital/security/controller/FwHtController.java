@@ -36,6 +36,7 @@ public class FwHtController {
 
     @GetMapping("/list")
     public Result getAllFwHt(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                             
                              @RequestParam(required = false,defaultValue = "10") Integer pageSize){
         Result result = fwHtService.getAllFwHt(pageNum, pageSize);
         return result;

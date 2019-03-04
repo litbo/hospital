@@ -3,6 +3,7 @@ package com.litbo.hospital.security.controller;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwWxf;
 import com.litbo.hospital.security.service.FwWxfService;
+import com.litbo.hospital.security.vo.FwIdSelectVo;
 import com.litbo.hospital.security.vo.WxfIndexVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +43,8 @@ public class FwWxfController {
     @GetMapping("/wxfGetEq")
     public Result wxfGetEq(){
         try {
-            String userId = "1615925023";
-            List<String> list = fwWxfService.wxfGetEq(userId);
+            String userId = "1615925038";
+            List<FwIdSelectVo> list = fwWxfService.wxfGetEq(userId);
             return Result.success(list);
         } catch (Exception e) {
             e.printStackTrace();

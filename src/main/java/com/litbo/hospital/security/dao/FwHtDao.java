@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwHt;
+import com.litbo.hospital.security.vo.HtVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -30,7 +31,19 @@ public interface FwHtDao {
             "      #{htMs,jdbcType=LONGVARCHAR})")
     public int addFwHt(FwHt fwHt);
 
-    @Select("select * from fw_ht")
-    public List<FwHt> getAllFwHt();
+    //合同查询
+    @Select("SELECT\n" +
+            "ht.id,\n" +
+            "ht.ht_name,\n" +
+            "ht.ht_price,\n" +
+            "ht.ht_time,\n" +
+            "cs.sbcs_name\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.fw_ht AS ht ,\n" +
+            "dbo.eq_cs AS cs\n" +
+            "WHERE\n" +
+            "ht.wxs_id = cs.sbcs_id")
+    public List<HtVo> getAllFwHt();
 
 }

@@ -7,6 +7,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwHt;
 import com.litbo.hospital.security.dao.FwHtDao;
 import com.litbo.hospital.security.service.FwHtService;
+import com.litbo.hospital.security.vo.HtVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class FwHtServiceImpl implements FwHtService {
     @Override
     public Result getAllFwHt(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<FwHt> pageInfo = new PageInfo<>(fwHtDao.getAllFwHt());
+        PageInfo<HtVo> pageInfo = new PageInfo<>(fwHtDao.getAllFwHt());
         return Result.success(pageInfo);
     }
 }
