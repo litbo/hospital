@@ -18,7 +18,7 @@ public class EmpProvider {
                 "  LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id) where 1=1" );
         if(!"0000000000".equals(bmId))  sql.append(" and bm.bm_id Like '%'+#{bmId}+'%'");
         if(userId!=null) sql.append(" and emp.user_id like '%'+#{userId}+'%' ");
-        if(status!=null) sql.append(" and emp.status like '%'+#{status}+'%' ");
+        if(status!=null) sql.append(" and emp.status like  '%'+#{status}+'%' ");
         return sql.toString();
     }
 }
