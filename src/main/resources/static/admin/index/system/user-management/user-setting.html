@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>用户设置</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -14,8 +15,8 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-inline{
-            width:140px;
+        .layui-inline {
+            width: 140px;
         }
     </style>
 </head>
@@ -26,16 +27,16 @@
     </div>
 </div>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">设为系统用户</a>
+    <a class="layui-btn layui-btn-sm" lay-event="edit">设为系统用户</a>
 </script>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" >批量设置为用户</a>
+        <a class="layui-btn layui-btn-xs layui-btn-normal">批量设置为用户</a>
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
-    <div class="hidden-xs"  id="moreBar">
+    <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <select  lay-filter="bm"  lay-verify="required">
+            <select lay-filter="bm" lay-verify="required">
                 <option>部门</option>
                 <option value="0">123</option>
                 <option value="1"></option>
@@ -60,95 +61,42 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {checkbox:true,fixed:true}
+                    {checkbox: true, fixed: true}
                     , {field: 'bmName', title: '部门', minWidth: 200}
                     , {field: 'userId', title: '工号', minWidth: 150}
-                    , {field:'userXm',title:'姓名',minWidth:150}
-                    , {field:'sex',title:'性别',minWidth:150}
-                    , {field:'zwlb',title:'职务类别'}
-                    , {title:'操作',toolbar:'#barDemo',width:200,align:"center"}
+                    , {field: 'userXm', title: '姓名', minWidth: 150}
+                    , {field: 'sex', title: '性别', minWidth: 150}
+                    , {field: 'zwlb', title: '职务类别'}
+                    , {title: '操作', toolbar: '#barDemo', width: 200, align: "center"}
                 ]]
                 , url: "/kwgl/empgl/listSelectEmps"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                      bmId: ""
-
-                  }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
                         "data": res.data.list //解析数据列表
                     }
-                }},
-
-
-            reSet:{
-                url:"/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
-                type:"reload",
-                data:["userId","status"]
-             /*   where: {
-
-                }*/
-
+                }
             },
-                val:{
-                select:[
+            reSet: {
+                url: "/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
+                type: "reload",
+                data: ["userId", "status"]
+            },
+            val: {
+                select: [
                     {
-                        filter:"bm",
-                        ids:"bmId",
-                        text:"bmName",
-                        url:"/supervise/bmgl/bmlist"
+                        filter: "bm",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/bmlist"
                     }
-
                 ]
             }
-
-
-
-
-
-    }}
-      /*  addTable ={
-        table:{
-            cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'division', title: '部门', minWidth: 200}
-                , {field: 'job-number', title: '工号', minWidth: 150}
-                , {field:'name',title:'姓名',minWidth:150}
-                , {field:'tel-number',title:'手机号码',minWidth:150}
-                , {field:'email',title:'电子邮箱'}
-                , {title:'操作',toolbar:'#barDemo',width:200,align:"center"}
-            ]]
-            , "data": [
-                {
-                    "division":"心血管内科",
-                    "job-number":"00000",
-                    "name":"全院",
-                    "tel-number":"",
-                    "email":""
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":[{
-                        "event":'edit'
-                    }]
-                })
-            }
-        },val:{
-            select:[
-                {
-                    filter:"bm",
-                    ids:"bmId",
-                    text:"bmName",
-                    url:"/supervise/bmgl/bmlist"
-                }
-
-            ]
         }
     };
 </script>

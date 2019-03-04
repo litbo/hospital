@@ -77,7 +77,7 @@
         <div class="layui-row">
             <div class="col-xs-12">
                 <div class="layui-form-item" pane   style="margin-bottom:-10px;">
-                    <label class="layui-form-label col-xs-12">成本明细项</label>
+                    <label class="layui-form-label col-xs-12">申请配件信息</label>
                     <div class="layui-input-block">
                         <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加</button>
                         <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
@@ -128,25 +128,14 @@
     renderMod={
         form:{
             date:true,
-            val:{
-                filter:"forms",
-                get:{
-                    url:"#",
-                    type:"POST",
-                    add:{page:1,name:"默认表单"}
-                }
-            },
             submit:{
-                filter:"",//可以不写
                 form:{
                     url:"#",
                     type:"POST",
-                    data:{name:"abc"},
-                    success:function(){
-                        alert("xx");
-                    }
-                },//表单提交函数
+                    data:{name:"abc"}
+                },
                 before:function(data){
+                    console.log(data);
                     for(var i=0;i<data.field.length;i++){
                         if(data.field[i] === ""){
                             layer.alert("请确认您填写的信息！");
