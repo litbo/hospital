@@ -21,4 +21,6 @@ public class ListFwPjzdVo {
     private String ghsName;
 
     private String scqyName;
+
+    private Integer pjsgCount;
 }

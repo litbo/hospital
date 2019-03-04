@@ -23,7 +23,7 @@ public interface FwFpDao {
     Integer insertFwFp(FwFp fp);
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwFpSqlProvider.class,method="listFwFpByApplyApproval")
     List<ListFwFpByApplyApprovalVo> listFwFpByApplyApproval(@Param("fpHm") String fpHm, @Param("eqName") String eqName, @Param("wxDh") String wxDh);
-    @Update("update fw_fp set user_id=#{userId},fp_sh_time =#{fpShTime},fp_shr_id=#{fpShrId},shyj=#{shyj} where id=#{id}")
+    @Update("update fw_fp set fp_status=#{fpStatus},fp_sh_time =#{fpShTime},fp_shr_id=#{fpShrId},shyj=#{shyj} where id=#{id}")
     int updateFwFp(FwFp fp);
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwFpSqlProvider.class,method="selectFwFpById")
     SelectFwFpByIdVo selectFwFpById(Integer id);

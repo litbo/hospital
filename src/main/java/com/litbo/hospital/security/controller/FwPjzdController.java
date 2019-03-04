@@ -95,7 +95,7 @@ public class FwPjzdController {
     }
     @RequestMapping(value = "fwPjzdTitle",method = RequestMethod.POST)
     public Result fwPjzdTitle(){
-        String title ="[{'type': 'radio'}, "+
+        String title ="[{'type': 'checkbox'}, "+
                 "{field: 'pjbh', title: '配件编号'},"+
                 "{field: 'pjName', title: '配件名称'},"+
                 "{field: 'pjGgxh', title: '规格型号'},"+

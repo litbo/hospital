@@ -52,6 +52,7 @@ public class FwFpController {
         }
 
     }
+    //审核发票
     @RequestMapping(value = "updateFwFpStatus",method = RequestMethod.POST)
     public Result updateFwFpStatus(FwFp fp){
 
@@ -61,11 +62,18 @@ public class FwFpController {
         String userId = "123";
         fp.setFpShrId(userId);
         int res  = fpService.updateFwFp(fp);
-        return Result.success();
+        if(res==1){
+            return Result.success();
+        }else{
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
     }
     @RequestMapping(value = "selectFwFpById",method = RequestMethod.GET)
     public Result selectFwFpById(Integer id){
         SelectFwFpByIdVo fp = fpService.selectFwFpById(id);
-        return Result.success(fp);
+        if(fp!=null)
+            return Result.success(fp);
+        else
+            return Result.error("查询不到数据");
     }
 }
