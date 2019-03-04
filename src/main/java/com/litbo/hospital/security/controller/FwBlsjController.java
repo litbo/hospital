@@ -31,11 +31,9 @@ public class FwBlsjController {
     }
 
 
-
     @RequestMapping(value = "listFwBlsj",method = RequestMethod.GET)
     public Result listFwBlsj(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
         return  Result.success(blsjService.listFwBlsj(pageNum,pageSize));
     }
-
 }

@@ -15,6 +15,7 @@ public class ListFwPjzdVo {
     private String pjGgxh;
 
     private String pjZczh;
+
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date pjZczDqTime;
 
