@@ -14,7 +14,7 @@ public class BSbcwBean {
 
     private Date kmSj;
 
-    private Integer kmNum;
+    private String kmNum;
 
     private String kmName;
 
@@ -60,11 +60,11 @@ public class BSbcwBean {
         this.kmSj = kmSj;
     }
 
-    public Integer getKmNum() {
+    public String getKmNum() {
         return kmNum;
     }
 
-    public void setKmNum(Integer kmNum) {
+    public void setKmNum(String kmNum) {
         this.kmNum = kmNum;
     }
 

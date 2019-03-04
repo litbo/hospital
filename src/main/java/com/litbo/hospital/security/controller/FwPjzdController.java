@@ -1,4 +1,5 @@
 package com.litbo.hospital.security.controller;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.poi.ExcelData;
 import com.litbo.hospital.common.utils.poi.ExportExcelUtil;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("security/pjzd")
@@ -56,7 +55,7 @@ public class FwPjzdController {
      */
 
     @ApiOperation(value = "查询所有配件字典")
-    @RequestMapping(value = "/listFwPjzd",method = RequestMethod.GET)
+    @RequestMapping(value = "/listFwPjzd",method = RequestMethod.POST)
     public Result listFwPjzd(@RequestParam(value = "pjSzm",required = false) String pjSzm,
                               @RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                               @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
@@ -94,10 +93,19 @@ public class FwPjzdController {
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
-    @RequestMapping(value = "fwPjzdTitle",method = RequestMethod.GET)
+    @RequestMapping(value = "fwPjzdTitle",method = RequestMethod.POST)
     public Result fwPjzdTitle(){
-        String[] titles = {"1","2"};
-        return Result.success(titles);
+        String title ="[{'type': 'checkbox'}, "+
+                "{field: 'pjbh', title: '配件编号'},"+
+                "{field: 'pjName', title: '配件名称'},"+
+                "{field: 'pjGgxh', title: '规格型号'},"+
+                "{field: 'pjZczh', title: '注册证号'},"+
+                "{field: 'pjZczDqTime', title: '注册证到期日期'},"+
+                "{field: 'scqyName', title: '生产厂家'},"+
+                "{field: 'ghsName', title: '供货商'},"+
+                "]";
+        return Result.success(JSON.parseArray(title));
+
     }
 
 

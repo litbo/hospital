@@ -2,10 +2,7 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.dao.sqlprovider.FwBaoxiuProvider;
-import com.litbo.hospital.security.vo.BaoXiuRw;
-import com.litbo.hospital.security.vo.BaoxiuEqVo;
-import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
-import com.litbo.hospital.security.vo.FwNameVo;
+import com.litbo.hospital.security.vo.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -96,5 +93,6 @@ public interface FwBaoxiuDao {
             "emp.user_id = #{userId}")*/
     @SelectProvider(type = FwBaoxiuProvider.class,method = "findBaoxiuEq")
     public List<BaoxiuEqVo> findBaoxiuEq(@Param("userId") String userId,@Param("bmName") String bmName,@Param("eqName") String eqName);
-
+    @SelectProvider(type = FwBaoxiuProvider.class,method = "listFwBaoxiuVo")
+    List<ListFwBaoxiuVo> listFwBaoxiuVo(Integer status);
 }

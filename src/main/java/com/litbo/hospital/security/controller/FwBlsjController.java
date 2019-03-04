@@ -18,7 +18,16 @@ public class FwBlsjController {
     private FwBlsjService blsjService;
     @RequestMapping(value = "insertFwBlsj",method = RequestMethod.POST)
     public Result insertFwBlsj(FwBlsj blsj){
-            return Result.success(blsjService.insertFwBlsj(blsj));
+        try {
+            if(blsjService.insertFwBlsj(blsj)>0)
+                return Result.success();
+            else
+                return Result.error();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+
     }
 
 

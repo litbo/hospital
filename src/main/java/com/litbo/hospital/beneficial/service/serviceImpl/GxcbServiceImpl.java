@@ -39,18 +39,18 @@ public class GxcbServiceImpl implements GxcbService {
             String kmName1 = jsonArray.getJSONObject(i)+"";
             JSONObject kmName2 = JSON.parseObject(kmName1);
             String kmName3 = (String) kmName2.get("kmName1");
-            bSbcwBean.setKmName( kmName3);
+            bSbcwBean.setKmName(kmName3);
 
             //获取科目金额
             String kmValue1 = jsonArray.getJSONObject(i)+"";
             JSONObject kmValue2 = JSON.parseObject(kmValue1);
-            Integer kmValue3 = (Integer) kmValue2.get("kmValue1");
-            bSbcwBean.setKmValue(BigDecimal.valueOf(kmValue3));
+            BigDecimal kmValue3 = (BigDecimal) kmValue2.get("kmValue1");
+            bSbcwBean.setKmValue(kmValue3);
 
             //获取科目编号
             String kmNum1 = jsonArray.getJSONObject(i)+"";
             JSONObject kmNum2 = JSON.parseObject(kmNum1);
-            Integer kmNum3 = (Integer) kmValue2.get("kmNum1");
+            String kmNum3 = (String) kmValue2.get("kmNum1");
             bSbcwBean.setKmNum(kmNum3);
 
             bSbcwBean.setEqId(insertSbcwVo.getEqId());
@@ -63,7 +63,8 @@ public class GxcbServiceImpl implements GxcbService {
                 bSbcwBean.setKmCjdm(2);
             }
             bSbcwBean.setKmCjdm(1);
-            //bSbcwBean.setaId(i+30);
+            bSbcwBean.setaId(i+77);
+
 
             if( gxcbDao.insertCb(bSbcwBean)>0){
                 if(i == insertSbcwVo.getKmNameAndValue().size()) {

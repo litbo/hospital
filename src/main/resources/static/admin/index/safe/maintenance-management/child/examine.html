@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>维修发票审核</title>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label{
             padding: 8px 10px!important;
@@ -21,14 +20,11 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-        .sign{
-            color:red;
-        }
     </style>
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms" >
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>维修发票审核</legend>
@@ -37,40 +33,40 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修单号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" id="wxdh" autocomplete="" class="layui-input" readonly>
+                    <input type="text" name="fpDh" id="wxdh" autocomplete="" class="layui-input" readonly>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">发票号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" id="fph" autocomplete="" class="layui-input" readonly>
+                    <input type="text" name="fpHm" id="fph" autocomplete="" class="layui-input" readonly>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">审核人<span class="sign">*</span></label>
+                <label class="layui-form-label">登记时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" id="shr" autocomplete="" class="layui-input" readonly>
+                    <input type="text" name="fpSdTime" id="shsj" autocomplete="" class="layui-input" readonly>
                 </div>
             </div>
+           <!-- <div class="layui-form-item">
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="fpShrId" id="shr" autocomplete="" class="layui-input" readonly>
+                </div>
+            </div>-->
         </div>
 
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">登记人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" id="register" autocomplete="" class="layui-input" readonly>
+                    <input type="text" name="djrName" id="register" autocomplete="" class="layui-input" readonly>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">发票金额</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" id="fpje" autocomplete="" class="layui-input" readonly>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">审核时间</label>
-                <div class="layui-input-block">
-                    <input type="text" name="" id="shsj" autocomplete="" class="layui-input" readonly>
+                    <input type="text" name="fpPrice" id="fpje" autocomplete="" class="layui-input" readonly>
                 </div>
             </div>
         </div>
@@ -81,15 +77,14 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">审核意见</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="" class="layui-textarea"></textarea>
+                    <textarea placeholder="请输入审核意见" id="textArea" name="shyj" class="layui-textarea" lay-verify="required"></textarea>
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn">保存</button>
-                <button class="layui-btn">返回</button>
+                <button class="layui-btn" lay-submit >保存</button>
             </div>
         </div>
     </div>
@@ -99,43 +94,38 @@
 </div>
 
 
-<script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-    });
-    //填充表格数据
-    function  fill() {
-        var datas = {
-            "wxdh": "20181200003",      //维修单号
-            "fph": "1231231231231231",  //发票号
-            "shr": "刘松峰",            //审核人
-            "register": "Admin",        //登记人
-            "fpje": "4.0",              //发票金额
-            "shsj": "2018-01-02 22:02:03"      //审核时间
+    renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/security/fp/selectFwFpById",
+                    type:"GET",
+                    data:{id:$.getUrlParam('id')}
+                }
+            },
+            submit:{
+                form:{
+                    url:"/security/fp/updateFwFpStatus",
+                    type:"POST",
+                    data:["shyj"],
+                    add:{
+                        id:$.getUrlParam("id")
+                    },
+                    done:function(res){
+                        if(res.code === 0){
+                            //提交完成后关闭页面
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.location.reload();
+                        }
+                    }
+                }
+            }
         }
-        wxdh = document.getElementById('wxdh');
-        fph = document.getElementById('fph');
-        shr = document.getElementById('shr');
-        register = document.getElementById('register');
-        fpje = document.getElementById('fpje');
-        shsj = document.getElementById('shsj');
-        wxdh.value = datas.wxdh;
-        fph.value = datas.fph;
-        shr.value = datas.shr;
-        register.value = datas.register;
-        fpje.value = datas.fpje;
-        shsj.value = datas.shsj;
+
     }
-    fill();
 </script>
 </body>
 

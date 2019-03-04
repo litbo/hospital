@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>设备收入科目预设录入-添加</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 10px!important;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form class="layui-form layui-form-pane" action="" style="padding:10px;">
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">科目选择<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectData">选择</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择预览</label>
+            <div class="layui-input-block">
+                <input type="text" name="kmName" class="layui-input" lay-verify="required" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">金额设置</label>
+            <div class="layui-input-block">
+                <input type="text" name="kmNum" placeholder="请输入" lay-verify="required" class="layui-input">
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" id="saveData">确认添加</button>
+    </form>
+
+
+<script>
+    renderMod = {
+        btn:[
+            {
+                elem:"#selectData",
+                func:function(){
+                    layOpen({
+                        site:"parent",
+                        type:2,
+                        title:"选择数据",
+                        content:"/admin/index/global/data.html?cb=/benefical/select/listSelectCols&db=/benefical/select/listSelect&vg=dtdt&key=srkm",
+                        area:["90%","90%"],
+                        end:function(){
+                            var res = tempValue("dtdt","srkm",true);
+                            if(res !== undefined){
+                                for(var i=0;i<res.length;i++){
+                                    for(var name in res[i]){
+                                        if(res[i].hasOwnProperty(name)){
+                                            $("*[name="+name+"]").val(res[i][name])
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    return false;
+                }
+            },
+            {
+                elem:"#saveData",
+                func:function(){
+                    var $k1 = $("input[name='kmValue']").val();
+                    var $k2 = $("input[name='kmName']").val();
+                    var $k3 = $("input[name='kmNum']").val();
+                    if($k1 && $k2 && $k2 !== "" ){
+                        //两个文本框必填，
+                        var vg = $.getUrlParam("vg") || "temp",v=$.getUrlParam("v") || "temp";
+                        layui.sessionData(vg,{
+                            key:v,
+                            value:{"kmValue1":$k1,"kmName1":$k2,"kmNum1":$k3}
+                        });
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    }else{
+                        putMsg({
+                            alert:"信息不完整，请完整填写信息！"
+                        })
+                    }
+                    return false;
+                }
+            }
+        ]
+    };
+
+</script>
+</body>
+
+</html>

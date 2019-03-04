@@ -9,7 +9,7 @@
     <title>数据</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="/static/admin/css/all.min.css"/>
+
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
@@ -44,12 +44,12 @@
 <script id="timeFormat" type="text/html">
     //日期转换
     {{#
-    var time ="";
-    layui.use('util',function(){
-    var util = layui.util;
-    time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
-    });
-    return time;
+        var time ="";
+        layui.use('util',function(){
+        var util = layui.util;
+        time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
+        });
+        return time;
     }}
 </script>
 
@@ -62,13 +62,16 @@
         $value = $.getUrlParam("v") || $key,
         colsData = [],//表头判断
         searchDom = $("#diyDOM"),//搜索数据DOM
-        searchParam = false;//搜索参数,false不使用
+        searchParam = false//搜索参数,false不使用
+    ;
+    //判断非必填参数是否有效
     if ($url_search === "undefined") {
         $url_search = ""
     }
     if ($value === "undefined") {
         $value = $key
     }
+    //数据有效性判断
     if (doJudg({
         "00": [$url_cols, $url_data, $key, $name]
     })) {
@@ -78,10 +81,13 @@
             log: {
                 cb: $url_cols,
                 db: $url_data,
+                se: $url_search,
                 key: $key,
-                name: $name
+                name: $name,
+                value:$value
             }
         });
+        //关闭页面
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index); //再执行关闭
     }
@@ -90,7 +96,6 @@
         type: "POST",
         data: {key: $key},
         success: function (res) {
-            console.log(res);
             if (res.code !== 0) {
                 putMsg({
                     alert: "数据获取失败，请重试！",
@@ -99,9 +104,7 @@
                 });
                 return false;
             }
-            //console.log("===SUBUP===");
-            //console.log(res);
-            //判断是否为二重数组，是则直接使用，否则嵌套一层数据
+            //判断返回数据所在位置
             var datt = [];
             if (res.data.list) {
                 datt = res.data.list;
@@ -110,15 +113,13 @@
             } else {
                 datt = res.data;
             }
-
+            //判断是否为二重数组，是则直接使用，否则嵌套一层数据
             if (Type(datt[0]) === "array") {
                 colsData = datt;
             } else {
                 colsData.push(datt);
             }
-            //console.log($url_cols);
-            //console.log(JSON.stringify(colsData));
-            //未填写se参数则代表使用默认条件
+            //判断是否有se参数（是否加载搜索数据）
             if ($url_search !== "") {
                 subUp({
                     url: $url_search,
@@ -126,12 +127,14 @@
                     data: {key: $key},
                     async: false,//同步
                     success: function (res) {
-                        searchDom.html(res.data.list.dom);
-                        searchParam = res.data.list.data;
+                        //渲染搜索DOM
+                        res.data.list.dom && searchDom.html(res.data.list.dom);
+                        //渲染检索JS
+                        res.data.list.data && (searchParam = res.data.list.data);
                     }
                 })
             }
-
+            //页面渲染
             renderMod = {
                 table: {
                     table: {
@@ -147,17 +150,16 @@
                             key: $key
                         }
                         , parseData: function (res) { //res 即为原始返回的数据
+                            var dataS = res.data.list || res.data.data || res.data;
                             return {
                                 "code": res.code, //解析接口状态
                                 "msg": res.msg, //解析提示文本
                                 "count": res.data.total,//页数据数
-                                "data": res.data.list //解析数据列表
+                                "data": dataS //解析数据列表
                             }
                         }
                         , done: function (obj) {
-                            //console.log(obj);
-                            /*console.log("===obj");
-                            console.log($value);*/
+                            //obj.data为所有data数据
                             tableFunc({
                                 "obj": obj,
                                 "toolFunc": [
@@ -166,16 +168,12 @@
                                         event: "setThisData",
                                         layOpen: false,
                                         func: function (obj, cs) {
-                                            /*console.log("ccc====");
-                                            console.log($value);*/
+                                            //将选定的页面存在session中(数组形式数据)
                                             layui.sessionData($name, {
                                                 key: $value,
                                                 value: cs.data
                                             });
-                                            /*layui.sessionData("c1", {
-                                                key: $value,
-                                                value: cs.data
-                                            });*/
+                                            //关闭页面
                                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                             parent.layer.close(index); //再执行关闭
                                         }

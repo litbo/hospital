@@ -7,14 +7,13 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>设备成本科目预设录入-添加</title>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label {
             padding: 8px 10px !important;
@@ -110,7 +109,6 @@
                         });
                         return false;
                     }
-                    //console.log(formData);
                     return param = {
                         1: formData.bm[0].bmId,
                         2: formData.eq[0].eqId,
@@ -134,10 +132,9 @@
             table: {
                 cols: [[ //表头
                     {type: "checkbox"}
-                    , {field: 'kmName', title: '科目', minWidth: 150}
-                    , {field: 'kmValue', title: '金额', minWidth: 150}
-                    , {field: 'kmNum', title: '编号', minWidth: 150,hide:true}
-
+                    , {field: 'kmName1', title: '科目', minWidth: 150}
+                    , {field: 'kmValue1', title: '金额', minWidth: 150}
+                    , {field: 'kmNum1', title: '编号', minWidth: 150,hide:true}
                 ]]
                 , toolbar: false
                 , page: false

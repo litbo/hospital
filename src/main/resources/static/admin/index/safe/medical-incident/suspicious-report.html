@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>可疑报告</title>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label{
             padding: 8px 10px!important;
@@ -21,9 +21,7 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-        .sign{
-            color:red;
-        }
+
         .layui-textarea{
             min-height: 120px;
             height: 120px;
@@ -42,51 +40,44 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发现者</label>
                 <div class="layui-input-block">
-                    <select id="discoverer" name="userId">
-                        <option value="">盖玉斋</option>
-                        <option value="">刘松峰</option>
-                        <option value="">杨凯</option>
-                        <option value="">杨永鹏</option>
-                        <option value="">姚美丽</option>
-                        <option value="">于金科</option>
-                        <option value="">胡威</option>
+                    <select id="discoverer" name="userId" lay-filter="fxz">
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">报告编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input" value="自动">
+                    <input type="text" name="bgbh" autocomplete="" class="layui-input" value="自动">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">报告名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input">
+                    <input type="text" name="bgmc" autocomplete="" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">报告日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" id="bdate" class="layui-input">
+                    <input type="text" name="bgTime" id="bdate" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">事件性质<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select id="nature" name="">
-                        <option value="" selected>个案</option>
-                        <option value="">群发事件</option>
+                    <select id="nature" name="sjxz">
+                        <option value="个案" selected>个案</option>
+                        <option value="群发事件">群发事件</option>
                     </select>
                 </div>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal" style="margin-left:35px;margin-top: 0px" id="layerBtn" name="sbId">选择</button>
+                    <button class="layui-btn layui-btn-normal"  style="margin-left:35px;margin-top: 0px" id="selectEquip" name="sbId">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -95,14 +86,14 @@
                     <input type="text" name="" autocomplete="" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">报告人岗位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="bgrgw" value="" title="医师" checked>
-                    <input type="radio" name="bgrgw" value="" title="技师">
-                    <input type="radio" name="bgrgw" value="" title="护士">
-                    <input type="radio" name="bgrgw" value="" title="工程师">
-                    <input type="radio" name="bgrgw" value="" title="其他">
+                    <input type="radio" name="bgrgw" value="医师" title="医师" checked>
+                    <input type="radio" name="bgrgw" value="技师" title="技师">
+                    <input type="radio" name="bgrgw" value="护士" title="护士">
+                    <input type="radio" name="bgrgw" value="工程师" title="工程师">
+                    <input type="radio" name="bgrgw" value="其他" title="其他">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -125,14 +116,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">年龄</label>
                 <div class="layui-input-block">
-                    <input type="text" name="hz_age" autocomplete="" class="layui-input">
+                    <input type="text" name="hzAge" autocomplete="" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">性别</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="hz_sex" value="男" title="男" checked>
-                    <input type="radio" name="hz_sex" value="女" title="女">
+                    <input type="radio" name="hzSex" value="男" title="男" checked>
+                    <input type="radio" name="hzSex" value="女" title="女">
                 </div>
             </div>
         </div>
@@ -153,30 +144,30 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 170px;">事件发生日期<span class="sign">*</span></label>
                 <div class="layui-input-block" style="margin-left: 170px">
-                    <input type="text" name="sjfs_time" id="sdate" class="layui-input">
+                    <input type="text" name="sjfsTime" id="sdate" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 170px;">发现或者知悉日期<span class="sign">*</span></label>
                 <div class="layui-input-block"style="margin-left: 170px">
-                    <input type="text" name="fxzx_time" id="fdate" class="layui-input">
+                    <input type="text" name="fxzxTime" id="fdate" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 170px;font-size: 12px;">医疗器械实际使用场所<span class="sign">*</span></label>
                 <div class="layui-input-block" style="margin-left: 170px;">
-                    <input type="radio" name="place" value="" title="医疗机构" checked>
-                    <input type="radio" name="place" value="" title="家庭">
-                    <input type="radio" name="place" value="" title="其他">
+                    <input type="radio" name="ylqxsxcs" value="医疗机构" title="医疗机构" checked>
+                    <input type="radio" name="ylqxsxcs" value="家庭" title="家庭">
+                    <input type="radio" name="ylqxsxcs" value="其他" title="其他">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 170px;">操作人员<span class="sign">*</span></label>
                 <div class="layui-input-block" style="margin-left:170px;">
-                    <input type="radio" name="operator" value="" title="专业人员" checked>
-                    <input type="radio" name="operator" value="" title="非专业人员">
-                    <input type="radio" name="operator" value="" title="患者">
-                    <input type="radio" name="operator" value="" title="其他">
+                    <input type="radio" name="czry" value="专业人员" title="专业人员" checked>
+                    <input type="radio" name="czry" value="非专业人员" title="非专业人员">
+                    <input type="radio" name="czry" value="患者" title="患者">
+                    <input type="radio" name="czry" value="其他" title="其他">
                 </div>
             </div>
         </div>
@@ -195,7 +186,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 160px;">植入日期（若植入）</label>
                 <div class="layui-input-block" style="margin-left: 160px;">
-                    <input type="text" name="zr_time" id="zdate" class="layui-input">
+                    <input type="text" name="zrTime" id="zdate" class="layui-input">
                 </div>
             </div>
         </div>
@@ -206,7 +197,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">器械故障<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <textarea placeholder="" class="layui-textarea" name=""></textarea>
+                        <textarea placeholder="" class="layui-textarea" name="qxgz"></textarea>
                     </div>
                 </div>
             </div>
@@ -214,7 +205,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">主要伤害</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="" class="layui-textarea" name=""></textarea>
+                        <textarea placeholder="" class="layui-textarea" name="zysh"></textarea>
                     </div>
                 </div>
             </div>
@@ -222,7 +213,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">事件陈述</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="" class="layui-textarea" name=""></textarea>
+                        <textarea placeholder="" class="layui-textarea" name="sjcs"></textarea>
                     </div>
                 </div>
             </div>
@@ -232,7 +223,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 120px;">事件相关资料</label>
                 <div class="layui-input-block" style="margin-left: 120px;">
-                    <input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">
+                    <input type="file" accept="image/*" name="file" autocomplete="off" class="layui-input" style="padding:5px;">
                 </div>
             </div>
         </div>
@@ -240,79 +231,52 @@
         <div class="layui-row">
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn">提交</button>
+                    <button class="layui-btn" lay-submit>提交</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
 
-
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    // 设置当前日期
-    var date = new Date();
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-
-    var setDate1 = document.getElementById('bdate');
-    var setDate2 = document.getElementById('sdate');
-    var setDate3 = document.getElementById('fdate');
-    setDate1.value = currentdate;
-    setDate2.value = currentdate;
-    setDate3.value = currentdate;
-</script>
 <script>
-    addTable ={
+    formData={};
+    renderMod={
+        form:{
+            date:[{elem:'#zdate'},{elem:'#bdate'},{elem:'#sdate'},{elem:'#fdate'}],
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"fxz",
+                        ids:"userId",
+                        text:"userXm",
+                        url:"/kwgl/empgl/listPartnerByUserId"
+                    }
+                ]
+            },
+            submit:{
+                form:{
+                    url:"/security/blsj/insertFwBlsj",
+                    type:"POST",
+                    data:["userId","bgmc","bgTime","sjxz","bgrqz","hzxm","hzAge","yqzlxg","sjfsTime","fxzxTime","zrTime",
+                        "qxgz","zysh","sjcs"]
+                }
+            }
+
+        },
+        bind: {
+            selectItem: [
+                {
+                    elem: "#selectEquip",
+                    cb: "/benefical/select/listSelectCols",
+                    db: "/benefical/select/listSelect",
+                    name: "dtdt",
+                    key: "eq",
+                    data:formData
+                }
+            ]
+        }
     }
-    layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#bdate'
-        });
-        laydate.render({
-            elem: '#sdate'
-        });
-        laydate.render({
-            elem: '#fdate'
-        });
-        laydate.render({
-            elem: '#zdate'
-        });
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-        //弹出框设置
-        $('#layerBtn').on('click',function(){
-            layer.open({
-                type:2,
-                title:'员工选择',
-                content:'./child/suspicious-select.html' ,
-                area:['96%','90%'],
-                btn:['选择','取消']
-            });
-            return false;
-        })
-    });
 </script>
 </body>
 

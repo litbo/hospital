@@ -1,9 +1,9 @@
 package com.litbo.hospital.beneficial.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class InsertSbcwVo {
     private Integer eqId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date kmSj;
 
     private List<UpdateKmVo> kmNameAndValue;
@@ -30,5 +31,5 @@ public class InsertSbcwVo {
 
     private Integer qjlc;
 
-    private BigDecimal kmValue;
+    private String kmValue;
 }

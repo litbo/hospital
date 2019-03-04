@@ -1,5 +1,6 @@
 package com.litbo.hospital.security.service;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
 import com.litbo.hospital.security.vo.WeixiuIndexVo;
