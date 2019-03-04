@@ -35,31 +35,85 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <select name="modules" lay-verify="required">
+            <select  lay-filter="bm"  lay-verify="required">
                 <option>部门</option>
-                <option value="0"></option>
+                <option value="0">123</option>
                 <option value="1"></option>
             </select>
         </div>
         <div class="layui-inline">
-            <select>
+            <select name="status">
                 <option></option>
                 <option value="0">非系统用户</option>
                 <option value="1">系统用户</option>
             </select>
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="工号" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="userId" placeholder="工号" id="test-table-demoReload" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
 </script>
 
 
-<script src="/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="/static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    addTable ={
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox:true,fixed:true}
+                    , {field: 'bmName', title: '部门', minWidth: 200}
+                    , {field: 'userId', title: '工号', minWidth: 150}
+                    , {field:'userXm',title:'姓名',minWidth:150}
+                    , {field:'sex',title:'性别',minWidth:150}
+                    , {field:'zwlb',title:'职务类别'}
+                    , {title:'操作',toolbar:'#barDemo',width:200,align:"center"}
+                ]]
+                , url: "/kwgl/empgl/listSelectEmps"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                      bmId: ""
+
+                  }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }},
+
+
+            reSet:{
+                url:"/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
+                type:"reload",
+                data:["userId","status"]
+             /*   where: {
+
+                }*/
+
+            },
+                val:{
+                select:[
+                    {
+                        filter:"bm",
+                        ids:"bmId",
+                        text:"bmName",
+                        url:"/supervise/bmgl/bmlist"
+                    }
+
+                ]
+            }
+
+
+
+
+
+    }}
+      /*  addTable ={
         table:{
             cols: [[ //表头
                 {checkbox:true,fixed:true}
@@ -86,8 +140,18 @@
                     }]
                 })
             }
+        },val:{
+            select:[
+                {
+                    filter:"bm",
+                    ids:"bmId",
+                    text:"bmName",
+                    url:"/supervise/bmgl/bmlist"
+                }
+
+            ]
         }
-    };
+    }*/
 </script>
 </body>
 </html>

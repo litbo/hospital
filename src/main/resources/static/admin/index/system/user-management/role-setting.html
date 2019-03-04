@@ -15,7 +15,7 @@
     <!--<![endif]&ndash;&gt;-->
     <!--<script src="../../../../static/admin/js/basic.js"></script>-->
 <!--</head>-->
-<!--<body>-->
+<!--<body>--下·>
 <!--<div class="layui-row">-->
     <!--<div class="col-xs-12">-->
         <!--<table id="table" lay-filter="table1"></table>-->
@@ -74,7 +74,7 @@
                         <!--"code": res.code, //解析接口状态-->
                         <!--"msg": res.msg, //解析提示文本-->
                         <!--"data": res.data.list //解析数据列表-->
-                    <!--}-->
+                    <!--}-->sa
                 <!--}-->
                 <!--, done: function (obj) {-->
 
@@ -202,14 +202,14 @@
             </select>
         </div>
         <div class="layui-inline">
-            <select>
+            <select name="status">
                 <option></option>
                 <option value="0">未设置角色</option>
                 <option value="1">已设置角色</option>
             </select>
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="工号" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="userId" placeholder="工号" id="test-table-demoReload" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
@@ -302,12 +302,12 @@
             },
 
             reSet:{
-                url:"role/listUserByX",
+                url:"/role/listUserByX",
                 type:"reload",
-                data:[userId],
-                where: {
+                data:["userId","status"]
+          /*      where: {
 
-                }
+                }*/
 
             }
 
