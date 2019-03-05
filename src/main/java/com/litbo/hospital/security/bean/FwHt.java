@@ -1,6 +1,8 @@
 package com.litbo.hospital.security.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,7 +11,8 @@ public class FwHt {
     private String id;
 
     private String htName;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date htTime;
 
     private String htLx;
@@ -26,11 +29,14 @@ public class FwHt {
 
     private String htJfly;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date htBxksTime;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date htBxjsTime;
 
-    private Date htXyTime;
+    private Integer htXyTime;
 
     private String htBxfw;
 
@@ -38,7 +44,7 @@ public class FwHt {
 
     private String htFjurl;
 
-    private Integer sbId;
+    private Integer eqId;
 
     private Integer htStatus;
 

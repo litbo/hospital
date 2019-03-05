@@ -29,6 +29,7 @@ public class FwHtController {
                 return Result.error("添加shibai");
             }
         }catch (Exception ex){
+            ex.printStackTrace();
             return Result.error("添加shibai");
         }
 
