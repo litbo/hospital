@@ -45,6 +45,7 @@ public class GxcbController {
     @RequestMapping(value = "/deleteSbCb",method = RequestMethod.POST)
     public Result deleteSbCb(@RequestParam(value = "aId" ,required = false)Integer aId){
 
+        System.out.println(aId);
         if(gxcbService.deleteSbCb(aId)>0){
             return Result.success();
         }
