@@ -392,7 +392,6 @@ function layOpen(data,def_data){
  */
 function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
-    console.log("param = ",param);
     //判断数据有效性
     if(doJudg({
         "undefined":[value.url]
@@ -404,6 +403,7 @@ function subUp(value, data, param) {
         });
         return false;
     }
+
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
     var dataP = {}, valus = null;
     if (Type(value.data) === "array") {
@@ -437,6 +437,8 @@ function subUp(value, data, param) {
                 }
             }
         }
+    }else if(Type(value.data) === "json"){
+        dataP = value.data;
     }
     //获取自定义的参数并合并到 dataP 中
     if (value.param) {
