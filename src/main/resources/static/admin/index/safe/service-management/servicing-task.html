@@ -74,8 +74,9 @@
                         , {field: 'userXm', title: '报修人', minWidth: 200}
                         , {field: 'bxTime', title: '报修时间', minWidth: 200}
                         , {field: 'jjxStatusString', title: '紧急性', minwidth: 100}
-                        , {field: 'baoxiuRw', title: '链接', minwidth: 250}
+                        , {field: 'baoxiuRw', title: '链接(点击可查看详情)', minwidth: 350,event:"openLink"}
                     ]]
+                    , height:"full-75"
                     , toolbar: false
                     , url: "/baoxiu/baoxiuRw"
                     , request: {
@@ -86,12 +87,14 @@
                         return {
                             "code": res.code, //解析接口状态
                             "msg": res.msg, //解析提示文本
-                            "count": res.data.size,//页面显示的数据条数
+                            "count": res.data.total,//页面显示的数据条数
                             "data": res.data.list //解析数据列表
                         }
                     }
                     , done: function (obj) {
-
+                        tableFunc({
+                            addLink:"table"
+                        })
                     }
                 },
                 {
@@ -103,6 +106,7 @@
                         , {field: 'bxTime', title: '服务水平监控', minWidth: 200}
                         , {field: 'jjxStatusString', title: '截止日期', minwidth: 200}
                     ]]
+                    ,height:"full-75"
                     , toolbar: false
                     , url: "/baoxiu/baoxiuRw"
                     , request: {
@@ -113,7 +117,7 @@
                         return {
                             "code": res.code, //解析接口状态
                             "msg": res.msg, //解析提示文本
-                            "count": res.data.size,//页面显示的数据条数
+                            "count": res.data.total,//页面显示的数据条数
                             "data": res.data.list //解析数据列表
                         }
                     }

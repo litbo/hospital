@@ -33,23 +33,10 @@
             <legend>申购单</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
-            <!--<div class="layui-form-item">-->
-                <!--<label class="layui-form-label">申购部门</label>-->
-                <!--<div class="layui-input-block">-->
-                    <!--<select name="bm">-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="layui-form-item">
-                <label class="layui-form-label">申购人<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off"  placeholder="Admin">
-                </div>
-            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">申购时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" id="date" lay-verify="required">
+                    <input type="text" name="pjRkTime" class="layui-input" autocomplete="off" id="date" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -65,11 +52,11 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">原因<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="dqby" title="定期保养">
-                    <input type="checkbox" name="zrms" title="自然磨损">
-                    <input type="checkbox" name="czbd" title="操作不当">
-                    <input type="checkbox" name="rjgx" title="软件更新">
-                    <input type="checkbox" name="wjys" title="外界因素">
+                    <input type="checkbox" name="sgYy" title="定期保养">
+                    <input type="checkbox" name="sgYy" title="自然磨损">
+                    <input type="checkbox" name="sgYy" title="操作不当">
+                    <input type="checkbox" name="sgYy" title="软件更新">
+                    <input type="checkbox" name="sgYy" title="外界因素">
                 </div>
             </div>
         </div>
@@ -118,6 +105,27 @@
                         url:"/kwgl/empgl/listPartnerByUserId"
                     }
                 ]
+            },
+            submit:{
+                before:function(param){
+                    var ts = getTableValue("table");
+                    return param = {
+                        1: {
+                            "pjRkTime":$("input[name='pjRkTime']").val(),
+                            "sgSqsx":$("input[name='sgSqsx']").val(),
+                            "sgYy":$("input[name='sgYy']").val()
+                        },
+                        2:ts
+                    }
+                },
+                form:{
+                    url:"securitypjsg/insertFwPjsg",
+                    type:"POST",
+                    param:{
+                        1:"fwPjsg",
+                        2:"fwPjsgZjbs"
+                    }
+                }
             }
         },
         bind:{
@@ -140,7 +148,9 @@
                     {field: 'pjZczh', title: '注册证号'},
                     {field: 'pjZczDqTime', title: '注册证到期日期'},
                     {field: 'scqyName', title: '生产厂家'},
-                    {field: 'ghsName', title: '供货商'}
+                    {field: 'ghsName', title: '供货商'},
+                    {field: 'pisgPrice', title: '单价（可编辑）',edit:true},
+                    {field: 'pjsgCount', title: '数量（可编辑）',edit:true}
                 ]]
                 , toolbar:false
                 , page:false

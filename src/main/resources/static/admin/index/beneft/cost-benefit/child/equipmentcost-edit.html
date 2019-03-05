@@ -102,20 +102,27 @@
                                 event: "delete",
                                 layOpen:false,
                                 func:function(obj){
+                                    console.log("IN-DEL");
                                     layer.confirm('确定删除这一行吗？', function(index){
+                                        console.log(obj);
                                         subUp({
                                             url:"/benefical/gxcb/deleteSbCb",
-                                            data:{"aId":obj.data.aid},
+                                            type:"POST",
+                                            data:{"aId":obj.data.id},
                                             success:function(res){
                                                 if(res.code === 0){
                                                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                                                     putMsg({
                                                         msg:"您已成功删除一条数据！"
                                                     });
-                                                    layer.close(index);
+                                                }else{
+                                                    putMsg({
+                                                        msg:"删除失败，请重试！"
+                                                    });
                                                 }
+                                                layer.close(index);
                                             }
-                                        })
+                                        });
                                     });
                                 }
                             }

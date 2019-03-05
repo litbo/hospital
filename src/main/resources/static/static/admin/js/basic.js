@@ -743,6 +743,7 @@ action = func = {
                     filt = vas.filter || "table1",
                     tool = vas.tool || "tool",
                     tableOn = tool+'(' + filt + ')',
+                    baseUrl = vas.content,
                     openT = true;
                 //绑定表格事件
                 table.on(tableOn, function (obj) {
@@ -762,6 +763,10 @@ action = func = {
                         //获取选中行数据
                         var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
                     }
+                    //当无法正常获取URL的时候
+                    if(baseUrl === undefined && vas.content !== undefined){
+                        baseUrl = vas.content;
+                    }
                     //获得当前行数据
                     var data = obj.data;
                     //当存在dataUrl时则填充进URL参数中
@@ -777,6 +782,8 @@ action = func = {
                     openT && layOpen(vas);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
                     vas.func && vas.func(obj,checkStatus);
+                    //还原url
+                    vas.content = baseUrl;
                 });
             });
         }
