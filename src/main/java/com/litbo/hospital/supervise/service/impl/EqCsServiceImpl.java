@@ -6,6 +6,7 @@ import com.litbo.hospital.supervise.dao.EqCsDao;
 import com.litbo.hospital.supervise.service.EqCsService;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
+import com.litbo.hospital.supervise.vo.EqCsVO;
 import com.litbo.hospital.user.bean.EqCs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,12 @@ public class EqCsServiceImpl implements EqCsService {
         PageHelper.startPage(pageNum,pageSize);
         List<EqCs> date = eqCsDao.listEqcsByX(selectVo);
         return new PageInfo(date);
+    }
+
+    @Override
+    public PageInfo listEqCs1(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqCsVO> eqcss = eqCsDao.listEqCs1(pageNum,pageSize);
+        return new PageInfo(eqcss);
     }
 }

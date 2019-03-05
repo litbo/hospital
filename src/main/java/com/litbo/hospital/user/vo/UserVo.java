@@ -10,4 +10,8 @@ public class UserVo {
     private String name;
 
     private String roleName;
+
+    private String bmId;
+
+    private String bmName;
 }

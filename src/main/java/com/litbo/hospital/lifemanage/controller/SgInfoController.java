@@ -192,7 +192,7 @@ public class SgInfoController {
      * @param key 前端传的区分关键字
      * @return
      */
-    @GetMapping("/selectSgInfoLzfxCols")
+    @PostMapping("/selectSgInfoLzfxCols")
     public Result selectSgInfoLzfxCols(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                        @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
                                        @RequestParam(required = false) String key) {
@@ -213,7 +213,7 @@ public class SgInfoController {
      * @param pageSize 每页显示记录数
      * @return Result
      */
-    @GetMapping("/selectSgInfoLzfx")
+    @PostMapping("/selectSgInfoLzfx")
     public Result selectSgInfoLzfx(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                    @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         return Result.success(sgInfoService.selectSgInfoLzfx(pageNum, pageSize));

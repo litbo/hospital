@@ -39,7 +39,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">维修单号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="wxDh" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="fpDh" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
                 </div>
             </div>
@@ -93,20 +93,20 @@
             date:true,
             submit: {
                 filter: "submit",//可以不写
-                before:function(){
-
-                    return param = {
-                        1:formData.wxfpdj[0].wxDh
-                    }
-                },
+                // before:function(){
+                //
+                //     return param = {
+                //         1:formData.wxfpdj.fpDh
+                //     }
+                // },
                 form: {
                     url: "/security/fp/insertFwFp",
                     type: "POST",
-                    contentType:"application/json",
-                    data:["fpHm","fpPrice","fpSdTime"],
-                    param:{
-                        1:"fpDh"
-                    }
+                    // contentType:"application/json",
+                    data:["fpHm","fpPrice","fpSdTime","fpDh"],
+                    // param:{
+                    //     1:"fpDh"
+                    // }
                 }//表单提交函数
             }
         },
@@ -114,8 +114,8 @@
             selectItem: {
                 elem: "#selectData",
                 data:formData,
-                cb:"/security/pjzd/fwPjzdTitle",
-                db:"/security/pjzd/listFwPjzd",
+                cb:"/baoxiu/listWxTitles",
+                db:"/baoxiu/listWx",
                 key:"wxfpdj",
                 name:"dtdt"
             }

@@ -15,4 +15,6 @@ public interface EqCsService {
     void insertEqCs(EqCs eqCs);
     // 模糊级联查询
     PageInfo listEqcsByX(int pageNum, int pageSize, EqCsSelectVO selectVo);
+
+    PageInfo listEqCs1(int pageNum, int pageSize);
 }

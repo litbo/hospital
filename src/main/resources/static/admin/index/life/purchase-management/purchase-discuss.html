@@ -43,7 +43,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">申购单<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectSg">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -79,13 +79,15 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">参考型号及报价</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table2" id="dataTable2"><i
+                            class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table2"><i
+                            class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
-            <table id="table" lay-filter="table1"></table>
+            <table id="table2" lay-filter="table2"></table>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">选型理由</label>
                 <div class="layui-input-block">
@@ -141,35 +143,78 @@
 <script>
     var formData = {};
     renderMod = {
-        addTable: {
-            table: {
-                cols: [[ //表头
-                    {type: "checkbox"}
-                    , {field: 'kmName', title: '生产厂商', minWidth: 150}
-                    , {field: 'kmValue', title: '型号', minWidth: 150}
-                    , {field: 'kmValue', title: '报价', minWidth: 150}
-                ]]
-                , toolbar: false
-                , page: false
-                , height: "200"
-                , data: []
-                , text: {
-                    none: "请点击上方按钮添加数据！"
+        form: {
+            date: {
+                elem: "#date"
+            },
+            submit: {
+                form: {
+                    before: function () {
+                        var tv = getTableValue("table"), tv1 = getTableValue("table2", [true]);
+                        if (doJudg({
+                            "undefined": [formData.person, formData.user],
+                            0: [tv, tv1]
+                        })) {
+                            putMsg({
+                                alert: "无法提交空数据！"
+                            });
+                            return false;
+                        }
+                        return param = {
+                            1: formData.person.userIdJl,
+                            2: tv1,
+                            3: tv
+                        };
+                    },
+                    form: {
+                        url: "/lifeManage/insertSgKstl",
+                        type: "POST",
+                        data: ["kstlAddr", "kstlYj", "kstlTime", "kstlContent"],
+                        param: {
+                            1: "userIdJl",
+                            2: "usersId",
+                            3: "pmsId"
+                        },
+                        add: {
+                            bmId: 1
+                        }
+                    }
                 }
             }
         },
+        addTable: {
+            table: [
+                {
+                    elem:"#table2",
+                    id:"table2",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'userXm', title: '姓名', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
+                    }
+                }
+            ]
+        },
         bind: {
-            addItem: {
-                elem: ".addNew",
-                cb: "/kwgl/empgl/listSelectEmpsCols",
-                db: "/kwgl/empgl/listPartnerByUserId",
-                name: "dtdt",
-                key: "checkbox"
-            },
+            addItem: [
+                {
+                    elem: "#dataTable2",
+                    cb: "/kwgl/empgl/listSelectEmpsCols",
+                    db: "/kwgl/empgl/listPartnerByUserId",
+                    name: "dtdt",
+                    key: "checkbox"
+                }
+            ],
             delItem: ".delNew",
             selectItem: [
                 {
-                    elem: "#selectEmp",
+                    elem: "#selectSg",
                     cb: "/lifeManage/selectSgInfoLzfxCols",
                     db: "/lifeManage/selectSgInfoLzfx",
                     name: "dtdt",

@@ -2,6 +2,7 @@ package com.litbo.hospital.supervise.dao;
 
 import com.litbo.hospital.supervise.dao.provider.EqCsProvider;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
+import com.litbo.hospital.supervise.vo.EqCsVO;
 import com.litbo.hospital.user.bean.EqCs;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,4 +30,6 @@ public interface EqCsDao {
 
     @SelectProvider(type = EqCsProvider.class ,method = "selectEqCsByX")
     List<EqCs> listEqcsByX(EqCsSelectVO selectVo);
+    @Select("select sbcs_id as sbcs_id1,sbcs_name,sbcs_lxr1,sbcs_lxdh1,email from eq_cs")
+    List<EqCsVO> listEqCs1(int pageNum, int pageSize);
 }
