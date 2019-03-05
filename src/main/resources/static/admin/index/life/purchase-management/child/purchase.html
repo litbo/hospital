@@ -40,7 +40,7 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend>设备购置申请单</legend>
     </fieldset>
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称</label>
@@ -260,7 +260,14 @@
                         text: "zjlyName",
                         url: "/eqdict/zjly"
                     }
-                ]
+                ],
+                get: {
+                    url: "/lifeManage/selectSgInfoById",
+                    type: "POST",
+                    data: {}
+                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
+                    //有add时必需时data为表单name数组，否则请直接使用data赋值
+                }//get内参数需参考《内容传输与提交》文档
             }
         }
     };

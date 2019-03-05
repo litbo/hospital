@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgKstl;
+import com.litbo.hospital.lifemanage.bean.SgKstlUser;
 import com.litbo.hospital.lifemanage.bean.vo.SgKstlAddSgInfoVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgKstlVO;
 import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
@@ -51,8 +52,8 @@ public class SgKstlServiceImpl implements SgKstlService {
     @Override
     public boolean insertSgKstl(SgKstlVO sgKstlVO) {
         SgKstl sgKstl = new SgKstl();
-        List<String> usersId = sgKstlVO.getUsersId();
-        List<String> pmsId = sgKstlVO.getPmsId();
+        List<SgKstlUser> usersId = sgKstlVO.getUsersId();
+        List<EqPm> pmsId = sgKstlVO.getPmsId();
         BeanUtils.copyProperties(sgKstlVO, sgKstl);
 
         //添加讨论表id
@@ -60,14 +61,14 @@ public class SgKstlServiceImpl implements SgKstlService {
         Integer integer = sgKstlMapper.insertSgKstl(sgKstl);
 
         int sgKstlUserNum = 0;
-        for (String userId : usersId) {
-            sgKstlUserNum += sgKstlUserMapper.insertSgKstlUser(sgKstl.getKstlId(), userId);
+        for (SgKstlUser u : usersId) {
+            sgKstlUserNum += sgKstlUserMapper.insertSgKstlUser(sgKstl.getKstlId(), u.getUserId());
         }
         int sgTlPmNum = 0, sgInfoNum = 0;
-        for (String pmId : pmsId) {
-            sgTlPmNum += sgTlPmMapper.insertSgTlPm(sgKstl.getKstlId(), pmId, sgKstl.getKstlTime());
+        for (EqPm p : pmsId) {
+            sgTlPmNum += sgTlPmMapper.insertSgTlPm(sgKstl.getKstlId(), p.getEqPmId(), sgKstl.getKstlTime());
             // 使讨论的品名Id添加到申购表中
-            sgInfoNum += sgInfoMapper.insertSgInfo(UUID.randomUUID().toString(), pmId, sgKstl.getBmId(), sgKstl.getKstlId());
+            sgInfoNum += sgInfoMapper.insertSgInfo(UUID.randomUUID().toString(), p.getEqPmId(), sgKstl.getBmId(), sgKstl.getKstlId());
         }
         return integer > 0 && usersId.size() == sgKstlUserNum && pmsId.size() == sgTlPmNum && pmsId.size() == sgInfoNum;
     }

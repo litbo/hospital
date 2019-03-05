@@ -1,8 +1,12 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.litbo.hospital.lifemanage.bean.SgKstlUser;
+import com.litbo.hospital.user.bean.EqPm;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +14,8 @@ import java.util.List;
  * 科室讨论表实体类
  */
 @Data
-public class SgKstlVO {
+
+public class SgKstlVO implements Serializable {
     /**
      * 科室讨论主键id
      */
@@ -26,7 +31,8 @@ public class SgKstlVO {
     /**
      * 科室讨论时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-M-d",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-M-d")
     private Date kstlTime;
     /**
      * 地点
@@ -51,9 +57,9 @@ public class SgKstlVO {
     /**
      * 科室讨论参与人员
      */
-    List<String> usersId;
+    List<SgKstlUser> usersId;
     /**
      * 讨论的品名列表
      */
-    List<String> pmsId;
+    List<EqPm> pmsId;
 }

@@ -403,10 +403,11 @@ function subUp(value, data, param) {
         });
         return false;
     }
+
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
+    var dataP = {}, valus = null;
     if (Type(value.data) === "array") {
         //dataP 提交的数据 valus 填写的表单name值
-        var dataP = {}, valus = null;
         for (var i = 0; i < value.data.length; i++) {
             //获取一个name值
             valus = value.data[i];
@@ -436,11 +437,16 @@ function subUp(value, data, param) {
                 }
             }
         }
+    }else if(Type(value.data) === "json"){
+        dataP = value.data;
     }
     //获取自定义的参数并合并到 dataP 中
     if (value.param) {
         for (var na in value.param) {
             if (value.param.hasOwnProperty(na)) {
+                /*console.log("na = ",na);
+                console.log("value.param = ",value.param[na]);
+                console.log("param = ",param[na]);*/
                 dataP[value.param[na]] = param[na];
             }
         }

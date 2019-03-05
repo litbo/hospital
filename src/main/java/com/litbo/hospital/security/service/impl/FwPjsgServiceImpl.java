@@ -34,7 +34,6 @@ public class FwPjsgServiceImpl implements FwPjsgService {
     public int insertFwPjsg(InsertFwPjsgVo insertFwPjsgVo) {
         int res = 0;
         FwPjsg pjsg = new FwPjsg();
-        pjsg.setPjRkTime(new Date());
         pjsg.setSgStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());
         res = pjsgDao.insertFwPjsg(pjsg);
         List<FwPjsgZjb> fwPjsgZjbs = insertFwPjsgVo.getFwPjsgZjbs();

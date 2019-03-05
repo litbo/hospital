@@ -9,6 +9,7 @@ import com.litbo.hospital.security.dao.FwBlsjDao;
 import com.litbo.hospital.security.dao.FwLcjlDao;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwBlsjService;
+import com.litbo.hospital.security.vo.SelectFwBlsjById;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,10 @@ public class FwBlsjServiceImpl implements FwBlsjService {
     public PageInfo listFwBlsj(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(blsjDao.listFwBlsj());
+    }
+
+    @Override
+    public SelectFwBlsjById selectFwBlsjById(Integer id) {
+        return blsjDao.selectFwBlsjById(id);
     }
 }
