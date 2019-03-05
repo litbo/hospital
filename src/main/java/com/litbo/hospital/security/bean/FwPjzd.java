@@ -3,6 +3,7 @@ package com.litbo.hospital.security.bean;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 @Data
 public class FwPjzd {
@@ -37,5 +38,7 @@ public class FwPjzd {
     private String pjSzm;
 
     private String pjbh;
+
+    private BigDecimal zbPrice;
 
 }

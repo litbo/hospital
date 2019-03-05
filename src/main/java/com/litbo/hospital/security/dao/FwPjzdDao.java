@@ -10,9 +10,9 @@ import java.util.List;
 @Mapper
 public interface FwPjzdDao {
 
-    @Insert("INSERT INTO fw_pjzd(pjfl, pj_kw,  pj_scqy_id, pj_ghs_id, sb_id, pj_name, zb_time,"+
+    @Insert("INSERT INTO fw_pjzd(zb_price,pjfl, pj_kw,  pj_scqy_id, pj_ghs_id, sb_id, pj_name, zb_time,"+
             " pj_ggxh,pj_bzdw, pj_zczh, pj_zcz_dq_time, pj_xg_time, pj_cj_time, pj_szm,pjbh) "+
-            "VALUES (  #{pjfl,jdbcType=VARCHAR}, #{pjKw,jdbcType=INTEGER}, " +
+            "VALUES ( #{zbPrice}, #{pjfl,jdbcType=VARCHAR}, #{pjKw,jdbcType=INTEGER}, " +
             "      #{pjScqyId,jdbcType=INTEGER}, #{pjGhsId,jdbcType=INTEGER}, #{sbId,jdbcType=INTEGER}, " +
             "      #{pjName,jdbcType=VARCHAR}, #{zbTime,jdbcType=TIMESTAMP}, #{pjGgxh,jdbcType=VARCHAR}," +
             "      #{pjBzdw,jdbcType=VARCHAR}, #{pjZczh,jdbcType=VARCHAR}, #{pjZczDqTime,jdbcType=TIMESTAMP}," +
