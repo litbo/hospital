@@ -35,7 +35,8 @@ public class IDFormat {
     public static String getIdByIDAndTime(String dbName,String userId){
         String endId = dbIdDao.getEndId(dbName,userId);
         int id = 0;
-        if(endId != null){
+        System.out.println(endId);
+        if(endId != null&&endId.length()>=6){
             String ids = endId.substring(6, endId.length());
             id = Integer.parseInt(ids);
         }
