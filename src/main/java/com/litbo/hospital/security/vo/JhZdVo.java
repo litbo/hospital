@@ -30,7 +30,7 @@ public class JhZdVo {
 
     private String jhPxxz;
 
-    private String userId;
+    private String ZZZName;
 
     private String userXm;
 }
