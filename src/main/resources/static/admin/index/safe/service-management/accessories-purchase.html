@@ -52,11 +52,11 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">原因<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="sgYy" title="定期保养">
-                    <input type="checkbox" name="sgYy" title="自然磨损">
-                    <input type="checkbox" name="sgYy" title="操作不当">
-                    <input type="checkbox" name="sgYy" title="软件更新">
-                    <input type="checkbox" name="sgYy" title="外界因素">
+                    <input type="checkbox" name="sgYy" value="定期保养" title="定期保养">
+                    <input type="checkbox" name="sgYy" value="自然磨损" title="自然磨损">
+                    <input type="checkbox" name="sgYy" value="操作不当" title="操作不当">
+                    <input type="checkbox" name="sgYy" value="软件更新" title="软件更新">
+                    <input type="checkbox" name="sgYy" value="外界因素" title="外界因素">
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">申请事项<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入" class="layui-textarea" lay-verify="required"></textarea>
+                    <textarea placeholder="请输入" name="sgSqsx" class="layui-textarea" lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
@@ -112,15 +112,16 @@
                     return param = {
                         1: {
                             "pjRkTime":$("input[name='pjRkTime']").val(),
-                            "sgSqsx":$("input[name='sgSqsx']").val(),
+                            "sgSqsx":$("textarea[name='sgSqsx']").val(),
                             "sgYy":$("input[name='sgYy']").val()
                         },
                         2:ts
                     }
                 },
                 form:{
-                    url:"securitypjsg/insertFwPjsg",
+                    url:"/security/pjsg/insertFwPjsg",
                     type:"POST",
+                    contentType:"application/json",
                     param:{
                         1:"fwPjsg",
                         2:"fwPjsgZjbs"

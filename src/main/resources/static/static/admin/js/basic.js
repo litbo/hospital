@@ -392,6 +392,7 @@ function layOpen(data,def_data){
  */
 function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
+    console.log("param = ",param);
     //判断数据有效性
     if(doJudg({
         "undefined":[value.url]
@@ -404,9 +405,9 @@ function subUp(value, data, param) {
         return false;
     }
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
+    var dataP = {}, valus = null;
     if (Type(value.data) === "array") {
         //dataP 提交的数据 valus 填写的表单name值
-        var dataP = {}, valus = null;
         for (var i = 0; i < value.data.length; i++) {
             //获取一个name值
             valus = value.data[i];
@@ -441,6 +442,9 @@ function subUp(value, data, param) {
     if (value.param) {
         for (var na in value.param) {
             if (value.param.hasOwnProperty(na)) {
+                /*console.log("na = ",na);
+                console.log("value.param = ",value.param[na]);
+                console.log("param = ",param[na]);*/
                 dataP[value.param[na]] = param[na];
             }
         }
