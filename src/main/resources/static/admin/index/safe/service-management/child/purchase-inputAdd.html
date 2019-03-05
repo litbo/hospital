@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>申购入库新增</title>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-form-label{
-            padding: 8px 6px!important;
+        .layui-form-label {
+            width: 130px !important;
+            padding: 8px 6px !important;
         }
-        .layui-form-label{
-            width:120px;
+
+        .layui-input-block {
+            margin-left: 130px !important;
         }
-        .layui-form-item{
-            margin-bottom:30px;
-        }
-        .sign{
-            color:red;
+
+        .layui-form-item {
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -37,7 +37,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">入库时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" id="date" required lay-verify="required">
+                    <input type="text" name="" class="layui-input" autocomplete="off" id="date" required
+                           lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -51,9 +52,16 @@
 
     <div class="layui-row">
         <div class="col-xs-12">
-            <span>待入库配件信息<span class="sign">*</span></span>
+            <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">待入库配件信息<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加
+                    </button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    </button>
+                </div>
+            </div>
             <table id="table" lay-filter="table1"></table>
-            <button class="layui-btn"><i class="layui-icon">&#xe608;</i></button>
         </div>
     </div>
 
@@ -61,81 +69,39 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </div>
 </form>
 
 
-
-<script src="../../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate','upload','table'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , upload = layui.upload
-            , table = layui.table
-            , laydate = layui.laydate;
-        var date = new Date()
-            , year = date.getFullYear()
-            , month = date.getMonth() + 1
-            , day = date.getDate()
-            , today = year+ "-" + month + "-" + day//获取年-月-日
-            , time = date.getTime();
-
-        //日期
-        laydate.render({
-            elem: '#date',
-            value: today,
-            format: "y-M-d"
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-        //表格
-        table.render({
-            elem:'#table'
-            ,cols: [[ //表头
-                {field:'id',title:'',minWidth:50}
-                , {field: 'name', title: '名称', minWidth: 150}
-                , {field: 'guige', title: '规格', minWidth: 150}
-                , {field: 'model', title: '型号', minWidth: 100}
-                , {field: 'number', title: '数量', minWidth: 150}
-                , {field: 'price', title: '单价', minWidth: 150}
-                , {field: 'money', title: '金额', minWidth: 150}
-            ]]
-            ,"data":[
-                {
-                    "id":'1',
-                    "name":'主板',
-                    "number":'1',
-                    "price":'200',
-                    "money":'200.00'
+    renderMod = {
+        form: {
+            date: true
+        },
+        table: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'id', title: '', minWidth: 50}
+                    , {field: 'name', title: '名称', minWidth: 150}
+                    , {field: 'guige', title: '规格', minWidth: 150}
+                    , {field: 'model', title: '型号', minWidth: 100}
+                    , {field: 'number', title: '数量', minWidth: 150}
+                    , {field: 'price', title: '单价', minWidth: 150}
+                    , {field: 'money', title: '金额', minWidth: 150}
+                ]]
+                , toolbar: false
+                , page: false
+                , height: "200"
+                , data: []
+                , text: {
+                    none: "请点击上方按钮添加数据！"
                 }
-            ]
-        })
-    });
+            }
+        }
+    }
 </script>
 </body>
 

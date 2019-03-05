@@ -5,7 +5,9 @@ import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwFp;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
+import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwFpService;
+import com.litbo.hospital.security.vo.SelectFwFpByIdVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,5 +51,29 @@ public class FwFpController {
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 
+    }
+    //审核发票
+    @RequestMapping(value = "updateFwFpStatus",method = RequestMethod.POST)
+    public Result updateFwFpStatus(FwFp fp){
+
+        fp.setFpShTime(new Date());
+        fp.setFpStatus(EnumApplyStatus.APPLY_APPROVAL.getCode());
+        //TODO 此处配件请领人从session中获取，并存入fp表中
+        String userId = "123";
+        fp.setFpShrId(userId);
+        int res  = fpService.updateFwFp(fp);
+        if(res==1){
+            return Result.success();
+        }else{
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+    }
+    @RequestMapping(value = "selectFwFpById",method = RequestMethod.GET)
+    public Result selectFwFpById(Integer id){
+        SelectFwFpByIdVo fp = fpService.selectFwFpById(id);
+        if(fp!=null)
+            return Result.success(fp);
+        else
+            return Result.error("查询不到数据");
     }
 }

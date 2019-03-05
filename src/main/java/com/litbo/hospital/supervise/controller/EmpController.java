@@ -47,11 +47,11 @@ public class EmpController {
         return Result.success(info);
     }
 
-    @GetMapping("/listSelectEmpBybmIdAndUserId")
+    @GetMapping("/listSelectEmpBybmIdAndUserIdAndStatus")
     public Result listSelectEmps(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                 String bmId, String userId) {
-        PageInfo info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId);
+                                 String bmId, String userId,String status) {
+        PageInfo info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId,status);
         return Result.success(info);
     }
 
@@ -94,8 +94,7 @@ public class EmpController {
             @RequestParam(required = false) String key, HttpServletRequest request) {
         String userId = "1";
 //        userId=(String) request.getSession().getAttribute("username");
-        PageInfo<SEmp> emps = empService.listPartnerByUserId(userId,pageNum,pageSize);
-        return Result.success(emps);
+        return Result.success( empService.listPartnerByUserId(userId,pageNum,pageSize));
     }
 
 }

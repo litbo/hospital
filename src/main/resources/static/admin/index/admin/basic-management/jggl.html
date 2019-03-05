@@ -108,8 +108,8 @@
         </form>
     </div>
 </div>
-<script src="/static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="/static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
+
+
 <script>
     //树形结构菜单
     layui.use(['form',"tree","jquery"], function() {
@@ -117,7 +117,8 @@
             jsonP = {
                 elem: "#demo", click: function (node) {
                     $.ajax({
-                        url: "http://localhost:80/tree/wb",
+                        // url: "http://localhost:80/tree/wb/",
+                        url: "/supervise/bmgl/listBms2",
                         method: "GET",
                         data: {pid: node.id},
                         async: false,
@@ -133,9 +134,9 @@
             };
 
         $.ajax({
-            url: "http://localhost:80/tree/wb",
+            url: "/supervise/bmgl/listBms2",
             method: "GET",
-            data: {pid: "68"},
+            // data: {pid: "68"},
             async: false,
             success: function (data) {
                 // console.log(data);

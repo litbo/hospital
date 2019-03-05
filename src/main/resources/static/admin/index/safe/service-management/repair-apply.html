@@ -6,23 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>维修费用申请</title>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label{
             padding: 8px 10px!important;
         }
         .layui-form-item{
             margin-bottom:30px;
-        }
-        .sign{
-            color:red;
         }
     </style>
 </head>
@@ -37,15 +34,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">申请人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" placeholder="Admin" autocomplete="off" required lay-verify="required">
+                    <input type="text" name="" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">报修设备</label>
                 <div class="layui-input-block">
                     <select>
-                        <option></option>
-                        <option></option>
                         <option></option>
                     </select>
                 </div>
@@ -74,8 +69,6 @@
                 <div class="layui-input-block">
                     <select>
                         <option></option>
-                        <option></option>
-                        <option></option>
                     </select>
                 </div>
             </div>
@@ -83,14 +76,14 @@
 
         <div class="layui-row">
             <div class="col-xs-12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">申请配件信息</label>
+                <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+                    <label class="layui-form-label col-xs-12">申请配件信息</label>
                     <div class="layui-input-block">
-                        <div class="layui-row">
-                            <table class="table"></table>
-                        </div>
+                        <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                        <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
                     </div>
                 </div>
+                <table id="table" lay-filter="table1"></table>
             </div>
         </div>
 
@@ -98,7 +91,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">人工费报价</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off">
+                    <input type="text" name="" class="layui-input" placeholder="请输入" autocomplete="off" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -106,8 +99,6 @@
                 <div class="layui-input-block">
                     <select>
                         <option>Admin</option>
-                        <option></option>
-                        <option></option>
                     </select>
                 </div>
             </div>
@@ -115,7 +106,7 @@
         <div class="col-xs-12 col-sm-6">
             <label class="layui-form-label">人工费成交价</label>
             <div class="layui-input-block">
-                <input type="text" name="" autocomplete="off" class="layui-input">
+                <input type="text" name="" autocomplete="off" placeholder="请输入" class="layui-input" lay-verify="required">
             </div>
         </div>
     </div>
@@ -124,7 +115,6 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </div>
@@ -134,114 +124,41 @@
 </div>
 
 
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    /*layui.use(['layer', 'form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-        var date = new Date()
-            , year = date.getFullYear()
-            , month = date.getMonth() + 1
-            , day = date.getDate()
-            , today = year+ "-" + month + "-" + day//获取年-月-日
-            , time = date.getTime();
-
-        //日期
-        laydate.render({
-            elem: '#date',
-            value: today,
-            format: "y-M-d"
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-        //弹出层设置
-        $('#layerBtn').click(function(){
-            layer.open({
-                type:2
-                ,title:'部门选择'
-                ,content:'./child/draftAdd.html'
-                ,area:['90%','90%']
-                ,btn:['选择','取消']
-            });
-            return false;
-        });
-    });*/
     renderMod={
         form:{
             date:true,
-            val:{
-                filter:"forms",
-                get:{
-                    url:"#",
-                    type:"POST",
-                    add:{page:1,name:"默认表单"}
-                }//GET内参数需参考《内容传输与提交》文档
-            },
-
             submit:{
-                filter:"",//可以不写
                 form:{
                     url:"#",
                     type:"POST",
-                    data:{name:"abc"},
-                    success:function(){
-                        alert("xx");
-                    }
-                },//表单提交函数
+                    data:{name:"abc"}
+                },
                 before:function(data){
+                    console.log(data);
                     for(var i=0;i<data.field.length;i++){
                         if(data.field[i] === ""){
                             layer.alert("请确认您填写的信息！");
                 	return false;
                         }
                     }
-                },//表单提交前执行函数
-                func:function(data){
-                    n++;
-                    layer.alert("您已提交 " + n + " 次！");
-                }//表单提交后执行函数（不论成功与否）
-            },
-            event:{
-                filter:"",//可以不写
-                box:"select",
-                func:function(data){
-                    subUp({
-                        url:"/wxf/wxfGetEq",
-                        type:"GET",
-                        data:{},
-                        success:function(res){
-                            if(res.code === 0){
-                                var $d = "";
-                                for(var i=0;i<res.data.length;i++){
-                                    $d += $("<option>").append(res.data[i]);
-                                }
-                                $('select[name="fwId"]').append($d);
-                            }
-                        }
-                    },data)
-                },
-                break:false//break=false可不写
+                }
+            }
+        },
+        addTable :{
+            table:{
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    ,{field: 'kmName', title: '科目',minWidth: 150}
+                    ,{field: 'kmValue', title: '金额', minWidth: 150}
+                ]]
+                , toolbar:false
+                , page:false
+                , height: "200"
+                , data: []
+                , text:{
+                    none:"请点击上方按钮添加数据！"
+                }
             }
         }
     }

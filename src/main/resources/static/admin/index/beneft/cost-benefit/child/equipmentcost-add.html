@@ -109,9 +109,6 @@
                         });
                         return false;
                     }
-                    /*for(var i=0;i<tv.length;i++){
-                        tv[i] = JSON.stringify(tv[i]);
-                    }*/
                     return param = {
                         1: formData.bm[0].bmId,
                         2: formData.eq[0].eqId,
@@ -121,7 +118,7 @@
                 form: {
                     url: "/benefical/gxcb/insertCb",
                     type: "POST",
-                    contentType:"application/json;charset=UTF-8",
+                    contentType:"application/json",
                     data: ["bmName", "eqName", "kmSj"],
                     param: {
                         1: "bmId",

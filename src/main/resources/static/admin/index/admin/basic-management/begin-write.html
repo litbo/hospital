@@ -7,14 +7,14 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>开始编写</title>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label{
             padding: 8px 6px!important;
@@ -25,9 +25,7 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-        .sign{
-            color:red;
-        }
+
     </style>
 </head>
 
@@ -41,13 +39,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>院长</option>
-                        <option>主管院长</option>
-                        <option>医院装备管理委员会主任</option>
-                        <option>医院装备管理委员会成员</option>
-                        <option>医院计量管理委员会主任</option>
-                        <option>...</option>
+                    <select lay-filter="gwname">
+
                     </select>
                 </div>
             </div>
@@ -128,7 +121,7 @@
 </div>
 
 
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
 <script>
     layui.use(['layer', 'form', 'layedit', 'laydate','upload'], function () {
         var form = layui.form
@@ -186,6 +179,22 @@
             }
         })
     });
+
+    renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"gwname",
+                        ids:"gwId",
+                        text:"gwName",
+                        url:"/supervise/gwgl/listGws2"
+                    }
+                ]
+            }
+        }
+    }
 </script>
 </body>
 

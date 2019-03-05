@@ -15,12 +15,6 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .PoAb0xx0 {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
         .warm_btn {
             height: 45px;
             font-size: 1.3em;
@@ -40,20 +34,20 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlTime" id="date" placeholder="请输入..." autocomplete="off"
+                    <input type="text" name="kstlTime" id="date" placeholder="请输入" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">地点<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlAddr" placeholder="请输入..." autocomplete="off" class="layui-input">
+                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">意见<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlYj" placeholder="请输入..." autocomplete="off" class="layui-input">
+                    <input type="text" name="kstlYj" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
         </div>
@@ -63,6 +57,12 @@
                 <label class="layui-form-label">记录人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择预览</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userXm" disabled autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -85,17 +85,15 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">会议内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" name="kstlContent"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="kstlContent" lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12" style="width: 115px;">申购设备列表</label>
                 <div class="layui-input-block" style="margin-left:115px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable2"><i
-                            class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable2"><i class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
-                            class="fas fa-trash-alt"></i>&nbsp;删除
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
@@ -123,36 +121,37 @@
                 elem: "#date"
             },
             submit: {
+                before: function () {
+                    var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
+                    console.log(formData);
+                    if (doJudg({
+                        "undefined": [formData.radio],
+                        0: [tv, tv1]
+                    })) {
+                        putMsg({
+                            alert: "请选择数据后提交！",
+                            log:[formData,tv,tv1]
+                        });
+                        return false;
+                    }
+                    return param = {
+                        1: formData.radio[0].userIdJl,
+                        2: tv1,
+                        3: tv
+                    };
+                },
                 form: {
-                    before: function () {
-                        var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
-                        if (doJudg({
-                            "undefined": [formData.person, formData.user],
-                            0: [tv, tv1]
-                        })) {
-                            putMsg({
-                                alert: "无法提交空数据！"
-                            });
-                            return false;
-                        }
-                        return param = {
-                            1: formData.person.userIdJl,
-                            2: tv1,
-                            3: tv
-                        };
+                    url: "/lifeManage/insertSgKstl",
+                    type: "POST",
+                    data: ["kstlAddr", "kstlYj", "kstlTime", "kstlContent"],
+                    contentType:"application/json",
+                    param: {
+                        1: "userIdJl",
+                        2: "usersId",
+                        3: "pmsId"
                     },
-                    form: {
-                        url: "/lifeManage/insertSgKstl",
-                        type: "POST",
-                        data: ["kstlAddr", "kstlYj", "kstlTime", "kstlContent"],
-                        param: {
-                            1: "userIdJl",
-                            2: "usersId",
-                            3: "pmsId"
-                        },
-                        add: {
-                            bmId: 1
-                        }
+                    add: {
+                        bmId: 1
                     }
                 }
             }

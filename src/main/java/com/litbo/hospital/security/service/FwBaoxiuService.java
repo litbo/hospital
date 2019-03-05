@@ -42,4 +42,5 @@ public interface FwBaoxiuService {
      */
     public void updateBaoxiuStatusById(String id,Integer baoxiuStatus);
 
+    PageInfo listWx(int pageNum, int pageSize);
 }

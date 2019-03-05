@@ -3,10 +3,12 @@ package com.litbo.hospital.supervise.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SGangwei;
+import com.litbo.hospital.supervise.dao.GangweiDao;
 import com.litbo.hospital.supervise.service.GangweiService;
 import com.litbo.hospital.supervise.vo.*;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,8 @@ public class GangweiController {
     @Autowired
     private GangweiService gangweiService;
 
+    @Autowired
+    private GangweiDao gangweiDao;
 
     @PostMapping("/saveGw")
     public Result saveGw(@RequestBody  SGangwei gw){
@@ -33,6 +37,18 @@ public class GangweiController {
     public Result getGws(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize){
         PageInfo date = gangweiService.getGws(pageNum,pageSize);
+        return Result.success(date);
+    }
+
+    @GetMapping("/listGws2")
+    public Result getGws2(){
+        List<SGangwei> gws = gangweiDao.getGws();
+        return Result.success(gws);
+    }
+    @GetMapping("/listGwsByGwZt")
+    public Result listGwsByGwZt(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
+                         @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwZt){
+        PageInfo date = gangweiService.listGwsByGwZt(pageNum,pageSize,gwZt);
         return Result.success(date);
     }
     //获取岗位列表通过级别和名称迷糊查询

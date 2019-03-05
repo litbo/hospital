@@ -44,7 +44,7 @@ public class ZhiduController {
     @GetMapping("/listZdsByTimeAndZdNameAndZt")
     public Result listZdsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                                              Date startTime, Date endTime, String zdName, String zdZt){
+                                              String startTime, String endTime, String zdName, String zdZt){
         PageInfo date = zhiduService.listZdsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,zdName,zdZt);
         return Result.success(date);
     }
