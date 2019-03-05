@@ -105,6 +105,8 @@
                                     layer.confirm('确定删除这一行吗？', function(index){
                                         subUp({
                                             url:"/benefical/gxcb/deleteSbCb",
+                                            type:"POST",
+                                            contentType:"application/json",
                                             data:{"aId":obj.data.aid},
                                             success:function(res){
                                                 if(res.code === 0){

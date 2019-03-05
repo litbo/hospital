@@ -3,14 +3,11 @@ package com.litbo.hospital.beneficial.service.serviceImpl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.beneficial.MathUtils;
 import com.litbo.hospital.beneficial.bean.BSbcwBean;
 import com.litbo.hospital.beneficial.dao.GxsrDao;
 import com.litbo.hospital.beneficial.service.GxsrService;
 import com.litbo.hospital.beneficial.vo.InsertSbcwVo;
-import com.litbo.hospital.beneficial.vo.ShowSbcwVo;
 import com.litbo.hospital.beneficial.vo.UpdateKmVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +44,11 @@ public class GxsrServiceImpl implements GxsrService {
             //获取科目金额
             String kmValue1 = jsonArray.getJSONObject(i)+"";
             JSONObject kmValue2 = JSON.parseObject(kmValue1);
-            Integer kmValue3 = (Integer) kmValue2.get("kmValue1");
-            bSbcwBean.setKmValue(BigDecimal.valueOf(kmValue3));
+            Object kmValue3 = kmValue2.get("kmValue1");
+            /*BigDecimal kmValue3 = (BigDecimal) kmValue2.get("kmValue1");*/
+            bSbcwBean.setKmValue(MathUtils.getBigDecimal(kmValue3));
+            /*Integer kmValue3 = (Integer) kmValue2.get("kmValue1");
+            bSbcwBean.setKmValue(BigDecimal.valueOf(kmValue3));*/
 
             //获取科目编号
             String kmNum1 = jsonArray.getJSONObject(i)+"";

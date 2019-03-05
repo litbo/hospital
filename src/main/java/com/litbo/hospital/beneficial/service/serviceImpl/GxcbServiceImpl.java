@@ -3,6 +3,7 @@ package com.litbo.hospital.beneficial.service.serviceImpl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.litbo.hospital.beneficial.MathUtils;
 import com.litbo.hospital.beneficial.bean.BSbcwBean;
 import com.litbo.hospital.beneficial.dao.GxcbDao;
 import com.litbo.hospital.beneficial.service.GxcbService;
@@ -44,8 +45,9 @@ public class GxcbServiceImpl implements GxcbService {
             //获取科目金额
             String kmValue1 = jsonArray.getJSONObject(i)+"";
             JSONObject kmValue2 = JSON.parseObject(kmValue1);
-            BigDecimal kmValue3 = (BigDecimal) kmValue2.get("kmValue1");
-            bSbcwBean.setKmValue(kmValue3);
+            Object kmValue3 = kmValue2.get("kmValue1");
+            /*BigDecimal kmValue3 = (BigDecimal) kmValue2.get("kmValue1");*/
+            bSbcwBean.setKmValue(MathUtils.getBigDecimal(kmValue3));
 
             //获取科目编号
             String kmNum1 = jsonArray.getJSONObject(i)+"";
@@ -63,7 +65,7 @@ public class GxcbServiceImpl implements GxcbService {
                 bSbcwBean.setKmCjdm(2);
             }
             bSbcwBean.setKmCjdm(1);
-            bSbcwBean.setaId(i+77);
+            bSbcwBean.setaId(i+40);
 
 
             if( gxcbDao.insertCb(bSbcwBean)>0){
