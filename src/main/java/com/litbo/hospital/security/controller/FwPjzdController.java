@@ -56,7 +56,7 @@ public class FwPjzdController {
 
     @ApiOperation(value = "查询所有配件字典")
     @RequestMapping(value = "/listFwPjzd",method = RequestMethod.POST)
-    public Result listFwPjzd(@RequestParam(value = "pjSzm",required = false) String pjSzm,
+    public Result listFwPjzd(@RequestParam(value = "pjSzm",required = false,defaultValue = "") String pjSzm,
                               @RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                               @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
                               @RequestParam(value = "pjfl" ,required = false) String pjfl){
@@ -64,6 +64,7 @@ public class FwPjzdController {
             PageInfo pageInfo = pjzdService.listFwPjzd( pjSzm, pageNum, pageSize, pjfl);
             return Result.success(pageInfo);
         }catch (Exception e){
+            e.printStackTrace();
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 

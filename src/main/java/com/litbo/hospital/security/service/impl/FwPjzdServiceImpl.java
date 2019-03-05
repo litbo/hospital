@@ -28,23 +28,12 @@ public class FwPjzdServiceImpl implements FwPjzdService {
     @Override
     public PageInfo listFwPjzd(String pjSzm,int pageNum,int pageSize,String pjfl) {
         PageHelper.startPage(pageNum,pageSize);
-        if(pjSzm!=null){
-            List<ListFwPjzdVo> res = pjzdDao.listFwPjzd(pjSzm.toUpperCase(),pjfl);
-            for (ListFwPjzdVo vo:
-                 res) {
-                vo.setPjsgCount(1);
-            }
-            return new PageInfo(res);
+        List<ListFwPjzdVo> res = pjzdDao.listFwPjzd(pjSzm.toUpperCase(),pjfl);
+        for (ListFwPjzdVo v:res) {
+            v.setPjsgCount(1);
         }
+        return new PageInfo(res);
 
-        else{
-            List<ListFwPjzdVo> res = pjzdDao.listFwPjzd(pjSzm.toUpperCase(),pjfl);
-            for (ListFwPjzdVo vo:
-                    res) {
-                vo.setPjsgCount(1);
-            }
-            return new PageInfo(res);
-        }
 
     }
 

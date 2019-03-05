@@ -35,26 +35,27 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">配件分类<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select required lay-verify="required" name="pjfl">
-                        <option>分类</option>
-                        <option>维材-医疗维修</option>
-                        <option>维材-办公维修</option>
-                        <option>维材-普通维修</option>
-                        <option>维材-家具维修</option>
-                        <option>维材-其他</option>
+                    <select lay-verify="required" name="pjfl">
+                        <option value="分类">分类</option>
+                        <option value="维材-医疗维修">维材-医疗维修</option>
+                        <option value="维材-办公维修">维材-办公维修</option>
+                        <option value="维材-普通维修">维材-普通维修</option>
+                        <option value="维材-家具维修">维材-家具维修</option>
+                        <option value="维材-其他">维材-其他</option>
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-l abel">设备名称</label>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label" >设备名称</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="sbId" id="layerBtn1" >选择</button>
+                    <input type="text" name="eqId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">配件名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjName" class="layui-input" autocomplete="off" required lay-verify="required">
+                    <input type="text" name="pjName" class="layui-input" autocomplete="off"  lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -94,13 +95,17 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">生产企业</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>
+                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectScqy">选择</button>
+                    <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">供货商</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" name="pjGhsId" lay-event="choose1">选择</button>
+                    <input type="text" name="sbcsId1" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectGhs">选择</button>
+                    <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjGhsId" lay-event="choose1">选择</button>-->
                 </div>
             </div>
             <div class="layui-form-item">
@@ -128,7 +133,7 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button class="layui-btn" lay-submit  lay-filter="submit">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -139,62 +144,7 @@
 
 
 <script>
-    $('#layerBtn1').on('click',function(){
-        layer.open({
-            type:2,
-            title:'科室选择',
-            content:'equipment-select.html' ,
-            area:['96%','100%'],
-            btn:['选择','取消']
-        });
-        return false;
-    })
-
-    layui.use(['layer', 'form', 'layedit', 'laydate','upload'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , upload = layui.upload
-            , laydate = layui.laydate;
-        var date = new Date()
-            , year = date.getFullYear()
-            , month = date.getMonth() + 1
-            , day = date.getDate()
-            , today = year+ "-" + month + "-" + day//获取年-月-日
-            , time = date.getTime();
-
-        //日期
-        laydate.render({
-            elem: '#date',
-            value: today,
-            format: "y-M-d"
-        });
-        laydate.render({
-            elem: '#date1',
-            value: today,
-            format: "y-M-d"
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-
-        // //监听指定开关
-        // form.on('switch(switchTest)', function (data) {
-        //     layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-        //         offset: '6px'
-        //     });
-        //     layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        // });
-
-        // //监听提交
-        // form.on('submit(demo1)', function (data) {
-        //     layer.alert(JSON.stringify(data.field), {
-        //         title: '最终的提交信息'
-        //     });
-        //     return false;
-        // });
-    });
+    var formData = {};
     renderMod={
         form:{
             val:{
@@ -208,6 +158,31 @@
                     }
                 ]
             }
+
+        },
+        bind: {
+            selectItem: [{
+                elem: "#selectData",
+                cb: "/benefical/select/listSelectCols",
+                db: "/benefical/select/listSelect",
+                name: "dtdt",
+                key: "eq",
+                data:formData
+            },{
+                elem: "#selectScqy",
+                cb: "/supervise/csgl/eqcsTitles",
+                db: "/supervise/csgl/listEqCs",
+                name: "dtdt",
+                key: "bm",
+                data:formData
+            },{
+                elem: "#selectGhs",
+                cb: "/supervise/csgl/eqcsTitles",
+                db: "/supervise/csgl/listEqCs1",
+                name: "dtdt",
+                key: "bm",
+                data:formData
+            }]
         }
 
     }
