@@ -40,8 +40,8 @@
                 <div class="layui-input-block">
                     <select id="s1" name="s1">
                         <option>请选择</option>
-                        <option value="1">于金科</option>
-                        <option value="2">刘松峰</option>
+                        <option value="于金科">于金科</option>
+                        <option value="刘松峰">刘松峰</option>
                         <option value="3">姚美丽</option>
                         <option value="4">杨凯</option>
                         <option value="5">杨永鹏</option>
@@ -54,8 +54,8 @@
                 <div class="layui-input-block">
                     <select id="s2" name="s2">
                         <option>请选择</option>
-                        <option value="1">主管院长</option>
-                        <option value="2">设备处长</option>
+                        <option value="主管院长">主管院长</option>
+                        <option value="设备处长">设备处长</option>
                         <option value="3">院长</option>
                         <option value="4">医院设备报废技术鉴定小组组长</option>
                         <option value="5">采购供应科科长</option>
@@ -187,31 +187,27 @@
         },
         btn:[
             {
-                id:'addNew',
+                elem:'#addNew',
                 func:function(){
                     var new1 = {};
                     new1.s1 = $('#s1').val();
                     new1.s2 = $('#s2').val();
                     var bg = getTableValue('table');
-                    bg.push(new1)
+                    bg.push(new1);
+                    console.log(bg);
                     layui.use('table',function(){
                         var table = layui.table;
-                        table.reload('s1',{
-                            data:bg
+                        table.reload('table',{
+                            data:bg,
+                            done:function(data){
+                                console.log(data);
+                            }
                         })
                     })
                 }
             }
         ]
-
     };
-    // var select = document.getElementById('s1');
-    // var options = select.options;
-    // var text1 = options[2].text;
-    // alert(text1);
-    // form.on('select(test)',function(data){
-    //     console.log(data);
-    // })
 </script>
 </body>
 
