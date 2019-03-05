@@ -36,8 +36,8 @@
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <select lay-filter="bm" lay-verify="required">
-                <option>部门</option>
+            <select lay-filter="bmList" name="bmId" lay-verify="required">
+                <option value="0000000000">部门</option>
                 <option value="0">123</option>
                 <option value="1"></option>
             </select>
@@ -58,6 +58,7 @@
 
 <script>
     renderMod = {
+
         addTable: {
             table: {
                 cols: [[ //表头
@@ -85,19 +86,22 @@
             reSet: {
                 url: "/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
                 type: "reload",
-                data: ["userId", "status"]
-            },
+                data: ["userId","bmId", "status"]
+            }
+        },
+        form:{
             val: {
+                filter:"bmList",
                 select: [
                     {
-                        filter: "bm",
+                        filter:"bmList",
                         ids: "bmId",
                         text: "bmName",
-                        url: "/supervise/bmgl/bmlist"
+                        url: "/supervise/bmgl/listBm"
                     }
                 ]
             }
-        }
+        },
     };
 </script>
 </body>

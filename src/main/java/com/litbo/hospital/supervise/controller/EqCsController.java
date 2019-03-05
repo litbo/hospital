@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.service.EqCsService;
@@ -17,10 +18,16 @@ public class EqCsController {
     @Autowired
     private EqCsService eqCsService;
 
-    @GetMapping("/listEqCs")
+    @PostMapping("/listEqCs")
     public Result listEqCs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         PageInfo pageInfo = eqCsService.listEqCs(pageNum,pageSize);
+        return Result.success(pageInfo);
+    }
+    @PostMapping("/listEqCs1")
+    public Result listEqCs1(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo pageInfo = eqCsService.listEqCs1(pageNum,pageSize);
         return Result.success(pageInfo);
     }
     @GetMapping("/readyResource")
@@ -42,5 +49,14 @@ public class EqCsController {
         PageInfo date = eqCsService.listEqcsByX(pageNum,pageSize,selectVo);
         return Result.success(date);
     }
-
+    @PostMapping("eqcsTitles")
+    public Result eqcsTitles() {
+        String title ="[{'type': 'radio'}, "+
+                "{field: 'sbcsName', title: '供货商'},"+
+                "{field: 'sbcsLxr1', title: '联系人'},"+
+                "{field: 'sbcsLxdh1', title: '联系电话'},"+
+                "{field: 'email', title: 'Email地址'}"+
+                "]";
+        return Result.success(JSON.parseArray(title));
+    }
 }

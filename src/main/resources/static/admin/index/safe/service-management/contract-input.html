@@ -38,13 +38,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">合同编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" placeholder="20190101-？" autocomplete="off" >
+                    <input type="text" name="" class="layui-input" placeholder="20190101-？" lay-verify="required" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">合同名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" required lay-verify="required">
+                    <input type="text" name="" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -66,7 +66,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">合同金额<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" placeholder="0" required lay-verify="required">
+                    <input type="text" name="" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -82,19 +82,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修商代表</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input"  autocomplete="off" >
+                    <input type="text" name="" class="layui-input"  autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">院方代表</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input"  autocomplete="off" placeholder="Admin">
-                </div>
-            </div>
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">合同描述</label>
-                <div class="layui-input-block">
-                    <textarea class="layui-textarea"></textarea>
+                    <input type="text" name="" class="layui-input"  autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
         </div>
@@ -155,7 +149,7 @@
                     <input type="radio" name="or" value="否" title="否" checked>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">合同附件</label>
                 <div class="layui-input-block">
                     <div class="layui-upload">
@@ -164,21 +158,29 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" id="choose">选择</button>
+                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
                 </div>
             </div>
         </div>
 
+        <div class="col-xs-12">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">合同描述</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" placeholder="请输入" lay-verify="required"></textarea>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </div>
@@ -188,7 +190,7 @@
 
 
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate','upload'], function () {
+/*    layui.use(['layer', 'form', 'layedit', 'laydate','upload'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
@@ -261,7 +263,22 @@
                 console.log(res);
             }
         })
-    });
+    });*/
+renderMod = {
+    form:{
+        date:[
+            {
+                elem:"#date"
+            },
+            {
+                elem:"#date1"
+            },
+            {
+                elem:"#date2"
+            }
+        ]
+    }
+}
 </script>
 </body>
 

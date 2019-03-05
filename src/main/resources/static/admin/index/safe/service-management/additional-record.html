@@ -103,7 +103,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">发现时间</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="" id="date" autocomplete="off" class="layui-input" >
+                                            <input type="text" name="" id="findDate" autocomplete="off" class="layui-input" >
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">报修时间</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="" class="layui-input" autocomplete="off" id="date1">
+                                            <input type="text" name="" class="layui-input" autocomplete="off" id="repairDate">
                                         </div>
                                     </div>
                                 </div>
@@ -185,13 +185,13 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">受理时间</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="" class="layui-input" autocomplete="off" id="date2">
+                                            <input type="text" name="" class="layui-input" autocomplete="off" id="inDate">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">约定维修时间</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="" class="layui-input" autocomplete="off" id="date3">
+                                            <input type="text" name="" class="layui-input" autocomplete="off" id="yreDate">
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">故障排查</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" name="" autocomplete="off" class="layui-input" id="date4">
+                                                    <input type="text" name="" autocomplete="off" class="layui-input" id="breakBackDate">
                                                 </div>
                                             </div>
                                             <div class="layui-form-item">
@@ -355,7 +355,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">确认时间</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" name="" autocomplete="off" class="layui-input" id="date4">
+                                                    <input type="text" name="" autocomplete="off" class="layui-input">
                                                 </div>
                                             </div>
                                             <div class="layui-form-item">
@@ -409,7 +409,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">确认时间</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" name="" autocomplete="off" class="layui-input" id="date4">
+                                                    <input type="text" name="" autocomplete="off" class="layui-input" id="confirmDate">
                                                 </div>
                                             </div>
                                             <div class="layui-form-item">
@@ -465,7 +465,31 @@
 
 
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate','element'], function () {
+    renderMod = {
+        form:{
+            date:[
+                {
+                    elem:"#confirmDate"
+                },
+                {
+                    elem:"#findDate"
+                },
+                {
+                    elem:"#repairDate"
+                },
+                {
+                    elem:"#inDate"
+                },
+                {
+                    elem:"#yreDate"
+                },
+                {
+                    elem:"#breakBackDate"
+                }
+            ]
+        }
+    }
+/*    layui.use(['layer', 'form', 'layedit', 'laydate','element'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
@@ -524,19 +548,7 @@
             });
             return false;
         });
-
-        //弹出层设置
-//        $('#layerBtn').click(function(){
-//            layer.open({
-//                type:2
-//                ,title:'部门选择'
-//                ,content:'./child/draftAdd.html'
-//                ,area:['90%','90%']
-//                ,btn:['选择','取消']
-//            });
-//            return false;
-//        });
-    });
+    });*/
 </script>
 </body>
 
