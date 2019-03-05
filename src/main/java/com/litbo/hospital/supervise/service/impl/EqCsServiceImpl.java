@@ -46,9 +46,17 @@ public class EqCsServiceImpl implements EqCsService {
     }
 
     @Override
-    public PageInfo listEqCs1(int pageNum, int pageSize) {
+    public PageInfo listEqcsByX1(int pageNum, int pageSize, EqCsSelectVO selectVo) {
         PageHelper.startPage(pageNum,pageSize);
-        List<EqCsVO> eqcss = eqCsDao.listEqCs1(pageNum,pageSize);
-        return new PageInfo(eqcss);
+        selectVo.setEqCslb("3");
+        List<EqCsVO> date = eqCsDao.listEqcsByX1(selectVo);
+        return new PageInfo(date);
+    }
+    @Override
+    public PageInfo listEqcsByX2(int pageNum, int pageSize, EqCsSelectVO selectVo) {
+        PageHelper.startPage(pageNum,pageSize);
+        selectVo.setEqCslb("1");
+        List<EqCs> date = eqCsDao.listEqcsByX(selectVo);
+        return new PageInfo(date);
     }
 }

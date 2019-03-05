@@ -94,7 +94,8 @@ public class EmpController {
             @RequestParam(required = false) String key, HttpServletRequest request) {
         String userId = "1";
 //        userId=(String) request.getSession().getAttribute("username");
-        return Result.success( empService.listPartnerByUserId(userId,pageNum,pageSize));
+        List<SEmp> sEmps = empService.listPartnerByUserId(userId, pageNum, pageSize);
+        return Result.success(new PageInfo<>(sEmps));
     }
 
 }

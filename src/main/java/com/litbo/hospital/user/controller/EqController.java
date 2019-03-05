@@ -28,53 +28,55 @@ public class EqController {
 
     //查询所有设备信息
     @RequestMapping("/listEqs")
-    public Result listEq(Model model){
+    public Result listEq(Model model) {
 
-        List<EqVo>  eqInfos = es.getAllEq();
+        List<EqVo> eqInfos = es.getAllEq();
 
         return Result.success(eqInfos);
     }
+
     //查询设备展示信息
     @RequestMapping("/listShowEqs")
-    public Result listShowEqs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+    public Result listShowEqs(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 
-        return Result.success(es.listShowEqs(pageNum,pageSize));
+        return Result.success(es.listShowEqs(pageNum, pageSize));
     }
 
     //模糊查询
     @RequestMapping("/listEqByX")
-    public Result listEqByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                            SelectEqVo selectEqVo){
-        PageInfo pageInfo =  es.listEqByX(pageNum ,pageSize, selectEqVo);
+    public Result listEqByX(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                            SelectEqVo selectEqVo) {
+        PageInfo pageInfo = es.listEqByX(pageNum, pageSize, selectEqVo);
         return Result.success(pageInfo);
     }
 
     //通过设备id 查询设备信息
     @RequestMapping("/getEqById")
-    public Result getEqById(String eqId){
+    public Result getEqById(String eqId) {
 
         return Result.success(es.getEqById(eqId));
     }
 
     /**
-    *
-    *   添加设备
-    *   @return
-    **/
+     * 添加设备
+     *
+     * @return
+     **/
     @RequestMapping(value = "/addEq")
-    public Result addEq(EqInfo eqInfo, @RequestParam(value = "sbzp",required = false) MultipartFile sbzp,@RequestParam(value = "mpzp",required = false) MultipartFile mpzp){
+    public Result addEq(EqInfo eqInfo, @RequestParam(value = "sbzp", required = false) MultipartFile sbzp, @RequestParam(value = "mpzp", required = false) MultipartFile mpzp) {
 
-        if(es.addEq(eqInfo,sbzp,mpzp)>0){
+        if (es.addEq(eqInfo, sbzp, mpzp) > 0) {
             return Result.success();
         }
         return Result.error();
     }
-    @RequestMapping("/setPm")
-    public Result setPm(@RequestBody SetPmVo setPmVo){
 
-        if(es.setPm(setPmVo)<0){
+    @RequestMapping("/setPm")
+    public Result setPm(@RequestBody SetPmVo setPmVo) {
+
+        if (es.setPm(setPmVo) < 0) {
             return Result.error();
         }
         return Result.success();
@@ -82,23 +84,23 @@ public class EqController {
 
     //Excel导入设备信息
     @RequestMapping("/importEq")
-    public Result importEq(MultipartFile file){
-       if(es.importEq(file)<0){
-           return Result.error();
-       }
-       return Result.success();
+    public Result importEq(MultipartFile file) {
+        if (es.importEq(file) < 0) {
+            return Result.error();
+        }
+        return Result.success();
     }
 
 
     /**
-    *
-    *   修改
-    *   @return
-    **/
+     * 修改
+     *
+     * @return
+     **/
     @RequestMapping("/updateEq")
-    public Result updateEq(EqInfo eqInfo){
+    public Result updateEq(EqInfo eqInfo) {
 
-        if(es.updateEq(eqInfo)>0){
+        if (es.updateEq(eqInfo) > 0) {
             return Result.success();
         }
         return Result.error();
@@ -107,29 +109,29 @@ public class EqController {
 
     //查询已经关联设备
     @RequestMapping("/listFlEq")
-    public Result listFlEq(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+    public Result listFlEq(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                           @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 
-        PageInfo pageInfo = es.listFlEq(pageNum,pageSize);
+        PageInfo pageInfo = es.listFlEq(pageNum, pageSize);
         return Result.success(pageInfo);
     }
 
     //查询未关联设备
     @RequestMapping("/listWFlEq")
-    public Result listWFlEq(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+    public Result listWFlEq(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 
-        PageInfo pageInfo = es.listWFlEq(pageNum,pageSize);
+        PageInfo pageInfo = es.listWFlEq(pageNum, pageSize);
         return Result.success(pageInfo);
     }
 
 
     //解除卫标分类
     @RequestMapping("/cancelFl")
-    public Result cancelFl(@RequestBody List<String> eqIds){
+    public Result cancelFl(@RequestBody List<String> eqIds) {
 
         for (String eqId : eqIds) {
-            if(es.cancelFl(eqId)<0){
+            if (es.cancelFl(eqId) < 0) {
                 return Result.error(eqId);
             }
         }
@@ -137,36 +139,53 @@ public class EqController {
 
     }
 
+    // 设备品名表头
+    @RequestMapping("/listPmsCols")
+    public Result listPmsCols(@RequestParam(required = false) String key,
+                              @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+        JSONArray myJsonArray = null;
+        if ("checkbox".equals(key)) {
+            String jsonMessage = "[{'type': 'checkbox'}, " +
+                    "{field: 'eqPmName', title: '设备名称'}, " +
+                    "{field: 'eqPmJc', title: '设备简称'}, " +
+                    "{field: 'eqFlId', title: '卫标分类'}]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }
+        PageInfo date = new PageInfo(myJsonArray);
+        return Result.success(date);
+    }
 
     //查询品名
     @RequestMapping("/listPms")
-    public Result listPms(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                          @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
-        PageInfo pageInfo = es.listPms(pageNum,pageSize);
+    public Result listPms(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                          @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+        PageInfo pageInfo = es.listPms(pageNum, pageSize);
 
         return Result.success(pageInfo);
     }
 
     //通过品名 拼音码pym 查询品名
     @RequestMapping("/listPmsByPym")
-    public Result listPmsByPym(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String pym){
+    public Result listPmsByPym(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize, String pym) {
 
-    PageInfo pageInfo = es.listPmsByPym(pageNum,pageSize,pym);
-       return Result.success(pageInfo);
-}
+        PageInfo pageInfo = es.listPmsByPym(pageNum, pageSize, pym);
+        return Result.success(pageInfo);
+    }
+
     //返回表头
     @RequestMapping("/listEqbt")
     public Result listSelectEmpsCols(@RequestParam(required = false) String key) {
         JSONArray myJsonArray = null;
-        if ("checkbox".equals(key)){
+        if ("checkbox".equals(key)) {
             String jsonMessage = "[{'type': 'checkbox'}, " +
                     "{field: 'eqSbbh', title: '设备编号''}, " +
                     "{field: 'eqSbmc', title: '设备名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
-        }else if ("radio".equals(key)){
+        } else if ("radio".equals(key)) {
             String jsonMessage = "[{'type': 'radio'}, " +
                     "{field: 'eqSbbh', title: '设备编号'}, " +
                     "{field: 'eqSbmc', title: '设备名称'}" +

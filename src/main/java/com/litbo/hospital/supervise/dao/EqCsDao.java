@@ -32,4 +32,6 @@ public interface EqCsDao {
     List<EqCs> listEqcsByX(EqCsSelectVO selectVo);
     @Select("select sbcs_id as sbcs_id1,sbcs_name,sbcs_lxr1,sbcs_lxdh1,email from eq_cs")
     List<EqCsVO> listEqCs1(int pageNum, int pageSize);
+    @SelectProvider(type = EqCsProvider.class ,method = "selectEqCsByX1")
+    List<EqCsVO> listEqcsByX1(EqCsSelectVO selectVo);
 }

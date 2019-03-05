@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,7 @@ public class SgKstlVO {
     /**
      * 科室讨论时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date kstlTime;
     /**
      * 地点
