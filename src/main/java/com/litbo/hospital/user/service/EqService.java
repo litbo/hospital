@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
@@ -38,4 +39,6 @@ public interface EqService {
     Integer cancelFl(String eqId);
 
     PageInfo listPmsByPym(int pageNum, int pageSize, String pym);
+
+    Integer saveFj(EqFj eqFj);
 }
