@@ -52,23 +52,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">购置类别</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
-                        <option value="0">更新</option>
-                        <option value="1" selected="">新技术新项目</option>
-                        <option value="2">教学/科研</option>
-                        <option value="3">增购</option>
-                        <option value="4">科研合作</option>
-                    </select>
+                    <select name="Gzlb" lay-filter="Gzlb"></select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">使用性质</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
-                        <option value="0">教学/科研引用</option>
-                        <option value="1" selected="">临床应用</option>
-                        <option value="2">教学/科研/临床兼用</option>
-                    </select>
+                    <select name="Zjly" lay-filter="Zjly"></select>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -90,18 +80,15 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">资金来源</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                           style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">资金来源</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
-                        <option value="0">教学/科研引用</option>
-                        <option value="1" >临床应用</option>
-                        <option value="2">教学/科研/临床兼用</option>
-                    </select>
+                    <select name="Zjly" lay-filter="Zjly"></select>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -134,20 +121,25 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+            <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">添加生产商</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加</button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加
+                    </button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    </button>
                 </div>
             </div>
             <table id="table" lay-filter="table1"></table>
 
-            <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+            <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">功能配置列表</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew1"><i class="fas fa-plus"></i>&nbsp;添加</button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew1"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew1"><i class="fas fa-plus"></i>&nbsp;添加
+                    </button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew1"><i
+                            class="fas fa-trash-alt"></i>&nbsp;删除
+                    </button>
                 </div>
             </div>
             <table id="table1" lay-filter="table1"></table>
@@ -157,7 +149,9 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">购置理由</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="增加购置医学装备的目的、用途、目前教学/科研/临床应用情况，医学装备基本配置及技术参数要求，医学装备功能项目及拟开展或需要增加的功能项目，设计使用率（小时、人次、样本数/月），资金来源为科研经费的详细说明科研项目（课题名称、科研课题申报人、科研课题经费来源及金额）。" class="layui-textarea"></textarea>
+                    <textarea
+                            placeholder="增加购置医学装备的目的、用途、目前教学/科研/临床应用情况，医学装备基本配置及技术参数要求，医学装备功能项目及拟开展或需要增加的功能项目，设计使用率（小时、人次、样本数/月），资金来源为科研经费的详细说明科研项目（课题名称、科研课题申报人、科研课题经费来源及金额）。"
+                            class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
@@ -178,7 +172,8 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">目前教学/科研/临床应用情况</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="资金来源为科研经费的请说明科研项目（课题名称）、科研课题申报人、科研课题经费来源及金额" class="layui-textarea"></textarea>
+                    <textarea placeholder="资金来源为科研经费的请说明科研项目（课题名称）、科研课题申报人、科研课题经费来源及金额"
+                              class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
@@ -213,66 +208,84 @@
 </body>
 <script>
     renderMod = {
-        table:{
-            table:[
+        table: {
+            table: [
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        ,{field: 'kmName', title: '参考生产厂商',minWidth: 150}
-                        ,{field: 'kmValue', title: '规格型号', minWidth: 150}
-                        ,{field: 'kmValue', title: '估价', minWidth: 150}
+                        , {field: 'kmName', title: '参考生产厂商', minWidth: 150}
+                        , {field: 'kmValue', title: '规格型号', minWidth: 150}
+                        , {field: 'kmValue', title: '估价', minWidth: 150}
                     ]]
-                    , toolbar:false
-                    , page:false
+                    , toolbar: false
+                    , page: false
                     , height: "200"
                     , data: []
-                    , text:{
-                        none:"请点击上方按钮添加数据！"
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
                     }
                 },
                 {
-                    elem:"#table1",
+                    elem: "#table1",
                     cols: [[ //表头
                         {type: "checkbox"}
-                        ,{field: 'kmName', title: '功能名称',minWidth: 150}
-                        ,{field: 'kmValue', title: '功能描述', minWidth: 150}
-                        ,{field: 'kmValue', title: '使用', minWidth: 150}
+                        , {field: 'kmName', title: '功能名称', minWidth: 150}
+                        , {field: 'kmValue', title: '功能描述', minWidth: 150}
+                        , {field: 'kmValue', title: '使用', minWidth: 150}
                     ]]
-                    , toolbar:false
-                    , page:false
+                    , toolbar: false
+                    , page: false
                     , height: "200"
                     , data: []
-                    , text:{
-                        none:"请点击上方按钮添加数据！"
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
                     }
                 }
             ]
         },
-        bind:{
-
+        bind: {},
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "Gzlb",
+                        ids: "gzlbId",
+                        text: "gzlbName",
+                        url: "/eqdict/gzlb"
+                    },
+                    {
+                        filter: "Zjly",
+                        ids: "zjlyId",
+                        text: "zjlyName",
+                        url: "/eqdict/zjly"
+                    }
+                ]
+            }
         }
     };
 
-    $(function(){
+    $(function () {
         var ss = null;
         pd(true);
-        $("#gjpd").on("change",pd).keydown(function(event){
-            if(event.keyCode === 13){
+        $("#gjpd").on("change", pd).keydown(function (event) {
+            if (event.keyCode === 13) {
                 pd();
                 return false;
             }
         });
-        function pd(f){
+
+        function pd(f) {
             var mm = Number($("#gjpd").val());
-            if(mm > 5000){
+            if (mm > 5000) {
                 !f && putMsg({
-                    msg:"数据已修改！"
+                    msg: "数据已修改！"
                 });
                 $("#showMin").addClass("hidden");
                 $("#showMax").removeClass("hidden");
-            }else{
+            } else {
                 !f && putMsg({
-                    msg:"数据已修改！"
+                    msg: "数据已修改！"
                 });
                 $("#showMin").removeClass("hidden");
                 $("#showMax").addClass("hidden");

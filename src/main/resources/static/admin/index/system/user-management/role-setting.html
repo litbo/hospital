@@ -38,10 +38,8 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <select name="modules" lay-verify="required" lay-search="">
-                <option>部门</option>
-                <option value="0"></option>
-                <option value="1"></option>
+            <select name="bmId" lay-filter="bmList" lay-verify="required" lay-search="">
+                <option value="0000000000">部门</option>
             </select>
         </div>
         <div class="layui-inline">
@@ -68,6 +66,7 @@
                     , {field: 'userId', title: '工号', width: 150,sort:true}
                     , {field:'name',title:'用户名',width:300}
                     , {field:'roleName',title:'角色',minWidth:300}
+                    , {field:'bmName',title:'部门',minWidth:300}
                     , {title:'操作',toolbar:'#barDemo',width:200,align:'center'}
                 ]]
                 , url: "/role/listUsers"
@@ -105,7 +104,20 @@
             reSet:{
                 url:"/role/listUserByX",
                 type:"reload",
-                data:["userId","status"]
+                data:["userId","bmId","status"]
+            }
+        },
+        form:{
+            val: {
+                filter:"bmList",
+                select: [
+                    {
+                        filter:"bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
             }
         }
     }
