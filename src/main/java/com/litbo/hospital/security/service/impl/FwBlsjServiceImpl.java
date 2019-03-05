@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.security.bean.FwBlsj;
 import com.litbo.hospital.security.bean.FwLcjl;
 import com.litbo.hospital.security.dao.FwBaoxiuDao;
@@ -27,6 +28,7 @@ public class FwBlsjServiceImpl implements FwBlsjService {
     @Transactional
     public int insertFwBlsj(FwBlsj blsj) {
         blsj.setBgTime(new Date());
+        blsj.setBgbh(IDFormat.getIdByIDAndTime("fw_blsj","bgbh"));
         if(StringUtils.isNotBlank(blsj.getBxdh())){//如果保修单号不为空，存入流程
             FwLcjl lcjl = new FwLcjl();
             lcjl.setCreatTime(new Date());

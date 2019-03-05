@@ -8,7 +8,7 @@ import java.util.Date;
 public class FwBlsj {
     private Integer id;
 
-    private Integer sbId;
+    private Integer eqId;
 
     private String userId;
 
