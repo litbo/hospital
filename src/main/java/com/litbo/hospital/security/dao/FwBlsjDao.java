@@ -1,9 +1,7 @@
 package com.litbo.hospital.security.dao;
 import com.litbo.hospital.security.bean.FwBlsj;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import com.litbo.hospital.security.vo.SelectFwBlsjById;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -29,5 +27,8 @@ public interface FwBlsjDao {
     int insertFwBlsj(FwBlsj blsj);
     @Select("select * from fw_blsj")
     List<FwBlsj> listFwBlsj();
+    @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwBlsjSqlProvider.class,method="selectFwBlsjById")
+    SelectFwBlsjById selectFwBlsjById(Integer id);
+
 
 }
