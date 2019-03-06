@@ -21,7 +21,7 @@ public class EmpController {
     private EmpService empService;
 
 
-    @RequestMapping("/listSelectEmpsCols")
+    @PostMapping("/listSelectEmpsCols")
     public Result listSelectEmpsCols(@RequestParam(required = false) String key) {
         JSONArray myJsonArray = null;
         if ("checkbox".equals(key)){
@@ -62,9 +62,20 @@ public class EmpController {
         return Result.success(emps);
     }
 
+    @GetMapping("/getEmpsByUserId")
+    public Result getEmpsByUserId(@RequestParam String userId) {
+        SEmp emps = empService.getEmpsByUserId(userId);
+        return Result.success(emps);
+    }
     @PostMapping("/saveEmp")
     public Result saveEmp(@RequestBody SEmp emp) {
-        empService.saveEmp(emp);
+
+        if(empService.getEmpsByUserId(emp.getUserId())!=null){
+            empService.updateEmp(emp);
+        }else {
+            empService.saveEmp(emp);
+        }
+
         return Result.success();
     }
 

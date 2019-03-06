@@ -1,24 +1,37 @@
 package com.litbo.hospital.supervise.vo;
 
-import com.litbo.hospital.supervise.bean.SZhidu;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
+import java.util.Date;
+
+@Data
 public class ZhiduSubmitVO {
-    private SZhidu sZhidu;   //制度信息对象
+    private Integer zdId;
+
+    private String bmId;
+
+    private String zdName;
+
+    private String userId;
+
+    private String docUrl;
+
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date createTime;
+
+    private String zdContent;
+
+    private Integer zdZt;
+
+    private Integer syTianshu;
+
+    private Integer sySyts;
+
+    private Integer zdXgcs;
+
     private String shrId;   //审核人id
 
-    public SZhidu getsZhidu() {
-        return sZhidu;
-    }
 
-    public void setsZhidu(SZhidu sZhidu) {
-        this.sZhidu = sZhidu;
-    }
 
-    public String getShrId() {
-        return shrId;
-    }
-
-    public void setShrId(String shrId) {
-        this.shrId = shrId;
-    }
 }

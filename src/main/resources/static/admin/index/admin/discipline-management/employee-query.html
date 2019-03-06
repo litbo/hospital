@@ -41,7 +41,7 @@
     </div>
 </script>
 <script type="text/html" id="bar">
-<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
 </script>
 
 
@@ -92,44 +92,23 @@
                     }
                 }
                 , done: function (obj) {
-                    // tableFunc({
-                    //     "obj":obj,
-                    //     "toolFunc":[{
-                    //         "type":2,
-                    //         "title":'员工信息查询新增',
-                    //         "tool":'toolbar',
-                    //         "event":'add',
-                    //         "filter":'table1',
-                    //         "content":'./child/employee-queryAdd.html'
-                    //     },{
-                    //         "type":2,
-                    //         "title":'员工信息修改',
-                    //         "tool":'toolbar',
-                    //         "event":'edit',
-                    //         "filter":'table1',
-                    //         "content":'./child/employee-queryAdd.html'
-                    //     }]
-                    // })
 
-
-                    tableFunc(
-                        {
+                    tableFunc({
                             "obj": obj,
-                            "toolFunc": [
-                                {
+                            "toolFunc": [{
+                                    tool:"tool",
                                     type: 2,
-                                    title: "dddddd",
+                                    title: "添加",
                                     event: "add",
                                     content: "./child/employee-queryAdd.html",
-                                },{
+                                } , {
                                     tool:"toolbar",
                                     type: 2,
-                                    title: "aaaaaaa",
+                                    title: "修改",
                                     event: "edit",
-                                    content: "./child/employee-queryAdd.html"
-                                }
-                            ]
-
+                                    content: "./child/employee-queryAdd.html",
+                                    dataUrl:["userId"]
+                                }]
                         })
 
 

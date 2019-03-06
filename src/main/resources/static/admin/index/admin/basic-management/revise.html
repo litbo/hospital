@@ -27,13 +27,15 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">修改</a>
+</script>
 
 
 <script>
@@ -46,6 +48,7 @@
                     , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
                     , {field: 'createTime', title: '备案日期', minWidth: 150}
+                    , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
                 , url: "/supervise/zdgl/listZdsByZdZt?zdZt=0"
                 , request: {
@@ -64,13 +67,22 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":{
+                            "event":'edit',
+                            "title":'修改',
+                            "type":2,
+                            "content":'section-audit.html ',
+                            "area":['95%','95%']
+                        }
+                    })
                 }
             },
             reSet:{
-                url:"/supervise/bmgl/listFWXBmByBmName",
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=0",
                 type:"search",
-                data:["bmName"],    //搜索框的name
+                data:["zdName"],    //搜索框的name
                 where: {
 
                 }

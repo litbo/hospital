@@ -29,4 +29,9 @@ public interface EmpService {
 
     //获取登陆人的同部门伙伴信息
     List<SEmp> listPartnerByUserId(String userId,int pageNum,int pageSize);
+
+    SEmp getEmpsByUserId(String userId);
+
+    void updateEmp(SEmp emp);
+
 }

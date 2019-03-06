@@ -74,4 +74,15 @@ public class EmpServiceImpl implements EmpService {
         List<SEmp> partners = empDao.listPartnerByUserId(userId);
         return partners;
     }
+
+    @Override
+    public SEmp getEmpsByUserId(String userId) {
+
+        return empDao.getEmpsByUserId(userId);
+    }
+
+    @Override
+    public void updateEmp(SEmp emp) {
+        empDao.updateEmp(emp);
+    }
 }

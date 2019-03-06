@@ -36,7 +36,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">制度名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off">
+                    <input type="text" name="zdName" class="layui-input" autocomplete="off">
 
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            <textarea class="layui-textarea"></textarea>
+                            <textarea class="layui-textarea" name="zdContent"></textarea>
                         </div>
                         <div class="layui-tab-item">
                             <div class="layui-upload" style="margin-top:40px;">
@@ -65,7 +65,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属制度</label>
                 <div class="layui-input-block">
-                    <select lay-filter="sszd">
+                    <select lay-filter="sszd" name="bmId">
 
                     </select>
                 </div>
@@ -80,14 +80,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" value="Admin">
+                    <input type="text" name="userId" class="layui-input" autocomplete="off" value="Admin">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>Admin</option>
+                    <select name="shrId">
+                        <option value="1615925037">Gowen</option>
                         <option>aaa</option>
                         <option>bbb</option>
                     </select>
@@ -98,7 +98,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="createTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="startUploadFile">立即提交</button>
+                <button class="layui-btn" lay-submit=""  lay-filter="submit" id="startUploadFile">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -190,7 +190,17 @@
 
     renderMod = {
         form:{
+            submit:{
+                filter:"submit",//可以不写
+                form:{
+                    url:"/supervise/zdgl/submit",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["zdName","bmId","userId","zdContent","createTime","shrId"]
+                }//表单提交函数
+            },
             val:{
+
                 filter:"forms",
                 select:[
                     {
@@ -203,6 +213,7 @@
             }
         }
     }
+
 </script>
 </body>
 

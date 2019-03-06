@@ -105,4 +105,6 @@ public class SGangwei {
     public void setZdXgcs(Integer zdXgcs) {
         this.zdXgcs = zdXgcs;
     }
+
+
 }
