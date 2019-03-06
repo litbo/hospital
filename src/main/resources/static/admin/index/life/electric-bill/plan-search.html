@@ -41,6 +41,7 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">账实核对</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="downloadPlan">计划下载</a>
 </script>
 <script>
     renderMod = {
@@ -72,6 +73,16 @@
                         }
                     }
                     , done: function (obj) {
+                        tableFunc({
+                            tools:[
+                                {
+                                    event:"detail",
+                                    type:2,
+                                    content:"/purchase-check.html",
+                                    dataUrl:["id"]
+                                }
+                            ]
+                        })
                     }
                 }
             ]
