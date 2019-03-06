@@ -58,7 +58,8 @@ $(function () {
             //表单默认值渲染
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
-                if (val.filter && (val.select || val.get || (val.options && Type(val.options) === "json"))) {
+                if (val.filter && (val.list || val.select || val.get || (val.options && Type(val.options) === "json"))) {
+                    //表单渲染
                     if (val.get) {
                         val.get.success = function (res) {
                             var dat = null,value = {};
@@ -69,7 +70,7 @@ $(function () {
                             }else{
                                 dat = res.data;
                             }
-                            if(res.code === 0 && res.data){
+                            if(res.code === 0 && dat !== undefined){
                                 for (var name in dat) {
                                     if (dat.hasOwnProperty(name)) {
                                         if(val.dateName && name === val.dateName){
@@ -78,6 +79,12 @@ $(function () {
                                         }else{
                                             value[name] = dat[name];
                                         }
+                                        //表格渲染
+                                        if(val.get.parse !== undefined){
+                                            table.reload(val.get.tableId,{
+                                                data:val.get.parse
+                                            })
+                                        }
                                     }
                                 }
                                 form.val(val.filter, value);
@@ -85,7 +92,7 @@ $(function () {
                         };
                         subUp(val.get)
                     }
-
+                    //下拉渲染
                     if(val.select){
                         if(Type(val.select) === "json"){
                             getSelect(val.select);
@@ -95,9 +102,21 @@ $(function () {
                             }
                         }
                     }
-                    if(!val.get && !val.select) {
+                    //多数据表格渲染
+                    if(val.list){
+                        if(Type(val.list) === "json"){
+                            getSelect(val.list);
+                        }else if(Type(val.list) === "array"){
+                            for(var f=0;f<val.list.length;f++){
+                                getSelect(val.list[f]);
+                            }
+                        }
+                    }
+                    //当不需要获取数据的时候就直接渲染页面
+                    if(!val.get && !val.select && !val.list) {
                         form.val(val.filter, val.options);
                     }
+                    //页面表单渲染
                     form.render();
                 } else{
                     putMsg({
@@ -605,29 +624,46 @@ $(function () {
             $.cookie("RenderDate-a-Func",JSON.stringify(date));
         }
         //下拉列表动态加载
-        function getSelect(re){
+        function getSelect(re,tab){
             //re 提交的数据
             var id = re.ids || "id",
                 text = re.text || "text",
                 filter = re.filter || "select";
-            re.success = function(res){
-                if (res.code === 0) {
-                    //获取指定select标签
-                    var $d = $("select[lay-filter='"+filter+"']");
-                    for (var i = 0; i < res.data.length; i++) {
-                        //动态渲染option标签并且渲染进页面
-                        $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
+            if(tab === undefined){
+                re.success = function(res){
+                    if (res.code === 0) {
+                        //获取指定select标签
+                        var $d = $("select[lay-filter='"+filter+"']");
+                        for (var i = 0; i < res.data.length; i++) {
+                            //动态渲染option标签并且渲染进页面
+                            $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
+                        }
+                        //表单下拉单独重新渲染
+                        form.render("select");
+                    }else{
+                        putMsg({
+                            alert:"数据加载失败！",
+                            error:"返回数据异常！",
+                            log:res
+                        });
                     }
-                    //表单下拉单独重新渲染
-                    form.render("select");
-                }else{
-                    putMsg({
-                        alert:"数据加载失败！",
-                        error:"返回数据异常！",
-                        log:res
-                    });
-                }
-            };
+                };
+            }else{
+                re.success = function(res){
+                    if (res.code === 0) {
+                        table.reload(tab,{
+                            data:res.data
+                        });
+                    }else{
+                        putMsg({
+                            alert:"数据加载失败！",
+                            error:"返回数据异常！",
+                            log:res
+                        });
+                    }
+                };
+            }
+
             re.error = function(res){
                 putMsg({
                     alert:"数据加载失败！",
