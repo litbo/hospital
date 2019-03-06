@@ -34,6 +34,12 @@ public class ZhiduController {
         return Result.success(date);
     }
 
+    @GetMapping("/getZdById")
+    public Result getZdById(String id){
+        SZhidu sZhidu = zhiduService.getZdById(id);
+        return Result.success(sZhidu);
+    }
+
     @GetMapping("/listZds2")
     public Result listZds2(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                          @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
@@ -45,7 +51,12 @@ public class ZhiduController {
     public Result listZdsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                                               String startTime, String endTime, String zdName, String zdZt){
-        PageInfo date = zhiduService.listZdsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,zdName,zdZt);
+        PageInfo date = null;
+        try {
+            date = zhiduService.listZdsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,zdName,zdZt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Result.success(date);
     }
 
@@ -71,9 +82,8 @@ public class ZhiduController {
         zhiduService.updateZd(zd);
         return Result.success();
     }
-
     @PostMapping("/submit")
-    public Result submit(@RequestBody ZhiduSubmitVO zhiduSubmitVO, @RequestParam(value = "file",required = false) MultipartFile file){
+    public Result submit(@RequestBody ZhiduSubmitVO zhiduSubmitVO){
         //提交时 SZhidu对象包括信息 bmid  zdname  zdcontent  docurl  userid createTime
         zhiduService.submit(zhiduSubmitVO);
         return Result.success();

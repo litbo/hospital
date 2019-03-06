@@ -38,7 +38,7 @@ public interface GangweiDao {
 
     @Update("update s_gangwei\n" +
             "    set gw_name = #{gwName,jdbcType=VARCHAR},\n" +
-            "      gw_level = #{gwLevel,jdbcType=CHAR},\n" +
+            "      gw_level = #{gwLevel,jdbcType=CHAR} \n" +
             "    where gw_id = #{gwId,jdbcType=INTEGER}")
     void updateGw(SGangwei gw);
 
@@ -107,5 +107,6 @@ public interface GangweiDao {
     @SelectProvider(type = GwProvider.class ,method = "selectGwByX")
     List<ZZSelectAsBaseShMsg> listGwsByShrAndZzZt(@Param("shr_id") String shr_id, @Param("gwZzZt")Integer gwZzZt);
 
-
+    @Select("select MAX(gw_id) from s_gangwei")
+    Integer getMaxId();
 }

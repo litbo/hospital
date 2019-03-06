@@ -1,5 +1,7 @@
 package com.litbo.hospital.supervise.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class SZhidu {
@@ -13,6 +15,7 @@ public class SZhidu {
 
     private String docUrl;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date createTime;
 
     private String zdContent;
@@ -24,6 +27,8 @@ public class SZhidu {
     private Integer sySyts;
 
     private Integer zdXgcs;
+
+
     public Integer getZdId() {
         return zdId;
     }

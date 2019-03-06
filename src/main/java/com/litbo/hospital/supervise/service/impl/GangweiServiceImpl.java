@@ -29,6 +29,8 @@ public class GangweiServiceImpl implements GangweiService {
 
     @Override
     public void saveGw(SGangwei gw) {
+        Integer maxId = gangweiDao.getMaxId();
+        gw.setGwId(maxId+1);
         gangweiDao.saveGw(gw);
     }
 

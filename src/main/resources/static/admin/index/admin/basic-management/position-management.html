@@ -77,25 +77,22 @@ renderMod = {
                 }
                 , done: function (obj) {
 
-                    tableFunc(
-                        {
-                            "obj": obj,
-                            "toolFunc": [
-                                {
-                                    type: 2,
-                                    title: "员工信息查询新增",
-                                    event: "add",
-                                    content: "./child/position-managementAdd.html",
-                                },{
-                                    tool:"toolbar",
-                                    type: 2,
-                                    title: "员工信息修改",
-                                    event: "edit",
-                                    content: "./child/position-managementAdd.html"
-                                }
-                            ]
-
-                        })
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [{
+                            tool:"toolbar",
+                            type: 2,
+                            title: "添加岗位",
+                            event: "add",
+                            content: "./child/position-managementAdd.html",
+                        } , {
+                            type: 2,
+                            title: "修改岗位",
+                            event: "edit",
+                            content: "./child/position-managementAdd.html",
+                            dataUrl:["gwId"]
+                        }]
+                    })
                 }
             },
 
@@ -108,24 +105,10 @@ renderMod = {
                 }
 
             }, done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":[{
-                        "event":'edit',
-                        "title":'修改岗位',
-                        "type":2,
-                        "area":['50%','80%'],
-                        "content":'./child/position-managementAdd.html'
-                    },{
-                        "tool":'toolbar',
-                        "filter":"table1",
-                        "event":"add",
-                        "title":"岗位信息",
-                        "type":2,
-                        "area":['50%','80%'],
-                        "content":"./child/position-managementAdd.html"
-                    }]
-                })
+
+
+
+
             }
 
         }

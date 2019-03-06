@@ -31,29 +31,22 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称<span>*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" >
-                </div>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">岗位管理</label>
-                <div class="layui-input-block">
-                    <input type="radio" name="hasPaLi" value="是" title="是" checked="">
-                    <input type="radio" name="hasPaLi" value="否" title="否">
+                    <input type="text" name="gwName" class="layui-input" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">级别</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>一级</option>
-                        <option>二级</option>
-                        <option>三级</option>
+                    <select name="gwLevel">
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                        <option value="3">三级</option>
                     </select>
                 </div>
             </div>
@@ -61,7 +54,7 @@
         <div class="col-xs-12">
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -74,6 +67,34 @@
 
 
 <script>
+    renderMod = {
+
+        form:{
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/supervise/gwgl/getGwByGwId",
+                    type:"GET",
+                    data:{gwId:$.getUrlParam('gwId')}
+                }
+            },
+
+            submit:{
+                form:{
+                    url:"/supervise/gwgl/saveGw",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["gwLevel","gwName"],
+                    add:{
+                        gwId:$.getUrlParam('gwId')
+                    }
+
+                }
+            }
+        }
+
+    }
+
 </script>
 </body>
 
