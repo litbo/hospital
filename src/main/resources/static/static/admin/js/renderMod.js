@@ -367,8 +367,9 @@ $(function () {
                     if($.cookie("RenderDate-a-Func")){
                         laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
                     }
+
                     //重新绑定select事件
-                    if($("#moreBar select").length > 0){
+                    if($(".layui-table-tool select").length > 0){
                         var val = formAction.val;
                         if(val.select){
                             if(Type(val.select) === "json"){
@@ -604,6 +605,9 @@ $(function () {
 
         //日期选择器的渲染函数
         function a(date) {
+            if(date === undefined){
+                return false;
+            }
             //匹配默认数据，未填写的参数将使用已有的参数填充
             compareData(date, nor_date);
             //判断日期选择器是否为范围选择器
@@ -634,9 +638,10 @@ $(function () {
                     if (res.code === 0) {
                         //获取指定select标签
                         var $d = $("select[lay-filter='"+filter+"']");
-                        for (var i = 0; i < res.data.length; i++) {
+                        var datt = res.data.list || res.data;
+                        for (var i = 0; i < datt.length; i++) {
                             //动态渲染option标签并且渲染进页面
-                            $d .append($("<option>").attr({"value":res.data[i][id]}).append(res.data[i][text]));
+                            $d .append($("<option>").attr({"value":datt[i][id]}).append(datt[i][text]));
                         }
                         //表单下拉单独重新渲染
                         form.render("select");
