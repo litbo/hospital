@@ -17,6 +17,10 @@ public class SgCkcssbVO implements Serializable {
      */
     private Integer sbcsId;
     /**
+     * 设备厂商名称
+     */
+    private String sbcsName;
+    /**
      * 型号
      */
     private String ckcssbXh;

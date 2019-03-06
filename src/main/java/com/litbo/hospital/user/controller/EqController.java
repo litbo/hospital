@@ -140,6 +140,14 @@ public class EqController {
 
     }
 
+    //使用性质接口
+    @RequestMapping("/listSyxz")
+    public Result listSyxz(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                           @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+
+        return Result.success(es.listSyxz());
+    }
+
     // 设备品名表头
     @RequestMapping("/listPmsCols")
     public Result listPmsCols(@RequestParam(required = false) String key,
