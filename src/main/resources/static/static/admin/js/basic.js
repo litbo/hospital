@@ -838,19 +838,26 @@ action = func = {
                     ,data = obj.data //得到所在行所有数据
                     ,field = obj.field //得到字段对应的name
                     ,uValue = obj.uValue//字段修改前的值（自定义JS，table.js重置后将失效）
-                    ,tips = value.tip || field;
-                layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
-                    //执行自定义函数
-                    value.func && value.func(val,uValue,obj);
-                    //关闭弹出的确认信息
-                    layer.close(index);
-                },function(index){
-                    //取消操作将重置已编辑的数据
-                    //获取改变前的数据
-                    data[field] = uValue;
-                    //更新数据
-                    obj.update(data);
-                })
+                    ,tips = value.tip || uValue;
+                //是否提示信息
+                if(value.confirm === false){
+                    value.func && value.func.call(this,val,uValue,obj);
+                }else{
+                    layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
+                        //执行自定义函数
+                        value.func && value.func(val,uValue,obj);
+                        //关闭弹出的确认信息
+                        layer.close(index);
+                    },function(index){
+                        //取消操作将重置已编辑的数据
+                        //获取改变前的数据
+                        data[field] = uValue;
+                        //更新数据
+                        obj.update(data);
+                        //table.reload();
+                    })
+                }
+
             });
         })
     },

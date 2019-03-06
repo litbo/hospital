@@ -52,11 +52,11 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">原因<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="sgYy" value="定期保养" title="定期保养">
-                    <input type="checkbox" name="sgYy" value="自然磨损" title="自然磨损">
-                    <input type="checkbox" name="sgYy" value="操作不当" title="操作不当">
-                    <input type="checkbox" name="sgYy" value="软件更新" title="软件更新">
-                    <input type="checkbox" name="sgYy" value="外界因素" title="外界因素">
+                    <input type="checkbox" class="cks" name="s1" value="定期保养" title="定期保养">
+                    <input type="checkbox" class="cks" name="s2" value="自然磨损" title="自然磨损">
+                    <input type="checkbox" class="cks" name="s3" value="操作不当" title="操作不当">
+                    <input type="checkbox" class="cks" name="s4" value="软件更新" title="软件更新">
+                    <input type="checkbox" class="cks" name="s5" value="外界因素" title="外界因素">
                 </div>
             </div>
         </div>
@@ -95,6 +95,8 @@
     }else{
         if(isNaN(Number(d.pisgPrice) !== false)){
             return "0.00"
+        }else{
+            return d.pisgPrice
         }
     }
     }}
@@ -104,6 +106,8 @@
     {{#
     if(isNaN(Number(d.pjsgCoun) !== false)){
         return "1"
+    }else{
+        return d.pjsgCoun
     }
     }}
 </script>
@@ -125,12 +129,18 @@
             },
             submit:{
                 before:function(param){
-                    var ts = getTableValue("table");
+                    var ts = getTableValue("table"),ss= "",$cks = $(".cks");
+                    //获取选中的值
+                    for(var i=0;i<$cks.length;i++){
+                        if($cks[i].checked === true){
+                            ss += $("input[name='s"+(i+1)+"']").val() + "|"
+                        }
+                    }
                     return param = {
                         1: {
                             "pjRkTime":$("input[name='pjRkTime']").val(),
                             "sgSqsx":$("textarea[name='sgSqsx']").val(),
-                            "sgYy":$("input[name='sgYy']").val()
+                            "sgYy":ss
                         },
                         2:ts
                     }
@@ -180,10 +190,15 @@
                 done:function(obj){
                     tableFunc({
                         tableEdit:{
-                            tip:"数量",
+                            filter:"table1",
+                            confirm:false,
                             func:function(val,back,obj){
+                                //数据不符合要求时还原本次修改
                                 if(isNaN(val) !== false){
+                                    //改变数据
                                     obj.data[obj.field] = back;
+                                    //改变界面
+                                    $(this).val(back);
                                     //更新数据
                                     obj.update(obj.data);
                                 }
