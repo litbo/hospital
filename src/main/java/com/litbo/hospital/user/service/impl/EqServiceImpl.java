@@ -9,6 +9,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
+import com.litbo.hospital.user.bean.EqSyxz;
 import com.litbo.hospital.user.dao.EqDao;
 import com.litbo.hospital.user.dao.PmDao;
 import com.litbo.hospital.user.service.EqService;
@@ -20,13 +21,12 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -224,6 +224,15 @@ public class EqServiceImpl implements EqService {
             return new PageInfo(eqDao.listPmsByPym(newPym));
         }
        return new PageInfo(eqDao.listPmsByPym(pym));
+    }
+
+    /**
+     * 使用性质接口
+     * @return
+     */
+    @Override
+    public List<EqSyxz> listSyxz() {
+        return eqDao.listSyxz();
     }
 
     @Override
