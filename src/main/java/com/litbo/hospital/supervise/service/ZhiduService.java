@@ -36,5 +36,7 @@ public interface ZhiduService {
     //获取制度信息通过制度状态
     PageInfo listZdsByZdZt(int pageNum, int pageSize, String zdZt);
     //获取制度信息通过时间段制度名称和状态级联查询
-    PageInfo listZdsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String zdName, String zdZt);
+    PageInfo listZdsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String zdName, String zdZt) throws  Exception;
+
+    SZhidu getZdById(String id);
 }

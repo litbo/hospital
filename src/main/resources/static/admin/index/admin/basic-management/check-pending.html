@@ -27,13 +27,15 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">科长审核</a>
+</script>
 
 
 <script>
@@ -65,14 +67,13 @@
                     }
                 }
                 , done: function (obj) {
+
                     tableFunc({
-                        "obj":obj,
-                        "toolFunc":{
-                            "event":'edit',
-                            "title":'科长审核',
-                            "type":2,
-                            "content":'section-audit.html ',
-                            "area":['95%','95%']
+                        tools:{
+                            type:2,
+                            event: "edit",
+                            content:"regulatory-information.html",
+                            dataUrl:["zdId"]
                         }
                     })
 
@@ -82,9 +83,9 @@
                 }
             },
             reSet:{
-                url:"/supervise/bmgl/listFWXBmByBmName",
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=1",
                 type:"search",
-                data:["bmName"],    //搜索框的name
+                data:["zdName"],    //搜索框的name
                 where: {
 
                 }

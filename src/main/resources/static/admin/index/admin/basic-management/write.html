@@ -36,7 +36,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">制度名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off">
+                    <input type="text" name="zdName" class="layui-input" autocomplete="off" lay-verify="required">
 
                 </div>
             </div>
@@ -48,12 +48,11 @@
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            <textarea class="layui-textarea"></textarea>
+                            <textarea class="layui-textarea" name="zdContent"></textarea>
                         </div>
                         <div class="layui-tab-item">
                             <div class="layui-upload" style="margin-top:40px;">
                                 <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
-                                <!--<button type="button" class="layui-btn" id="startUploadFile">提交文件</button>-->
                             </div>
                         </div>
                     </div>
@@ -65,7 +64,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属制度</label>
                 <div class="layui-input-block">
-                    <select lay-filter="sszd">
+                    <select lay-filter="sszd" name="bmId">
 
                     </select>
                 </div>
@@ -80,14 +79,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" value="Admin">
+                    <input type="text" name="userId" class="layui-input" autocomplete="off" value="Admin" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>Admin</option>
+                    <select name="shrId">
+                        <option value="1615925037">Gowen</option>
                         <option>aaa</option>
                         <option>bbb</option>
                     </select>
@@ -98,17 +97,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="createTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">
                 </div>
             </div>
         </div>
     </div>
 
     <div class="layui-row">
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="startUploadFile">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <div class="col-xs-12">
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
             </div>
         </div>
     </div>
@@ -117,80 +115,25 @@
 
 </div>
 
-
-
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , element = layui.element
-            , upload = layui.upload
-            , laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
-            , pass: [/(.+){6,12}$/, '密码必须6到12位']
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-        //弹出层设置
-        $('#layerBtn').click(function(){
-            layer.open({
-                type:2
-                ,title:'模板选择'
-                ,content:'./child/writeAdd.html'
-                ,area:['90%','90%']
-                ,btn:['选择','取消']
-            });
-            return false;
-        });
-
-        //文件下载
-        upload.render({
-            elem:'#selectFile',
-            url:'/upload/',
-            auto:false,
-            bindAction:'#startUploadFile',
-            size:1024*40,//限制文件大小，单位kb
-            done:function(res){
-                console.log(res);
-            }
-        })
-    });
 
     renderMod = {
         form:{
+            date:{
+                elem:'#date',
+                value:today
+            },
+            submit:{
+                filter:"submit",//可以不写
+                form:{
+                    url:"/supervise/zdgl/submit",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["zdName","bmId","userId","zdContent","createTime","shrId"]
+                }//表单提交函数
+            },
             val:{
+
                 filter:"forms",
                 select:[
                     {
@@ -203,6 +146,7 @@
             }
         }
     }
+
 </script>
 </body>
 
