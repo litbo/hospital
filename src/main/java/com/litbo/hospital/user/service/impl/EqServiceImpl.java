@@ -6,6 +6,7 @@ import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.EqDao;
@@ -223,6 +224,12 @@ public class EqServiceImpl implements EqService {
             return new PageInfo(eqDao.listPmsByPym(newPym));
         }
        return new PageInfo(eqDao.listPmsByPym(pym));
+    }
+
+    @Override
+    public Integer saveFj(EqFj eqFj) {
+        return eqDao.saveFj(eqFj);
+
     }
 
 

@@ -2,6 +2,7 @@ package com.litbo.hospital.user.dao.provider;
 
 
 import com.litbo.hospital.common.utils.WordToPinYin;
+import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.vo.SelectEqVo;
 import org.apache.commons.lang3.StringUtils;
@@ -359,5 +360,12 @@ public class EqProvider {
         sql.append(" and len(eq_pm_id)=10");
         return sql.toString();
 
+    }
+
+
+    public String saveFj(EqFj eqFj){
+        String sql="Insert into eq_fujian (eq_id,fj_gg,fj_xh,fj_name,fj_scbh)" +
+                "values(#{eqId},#{fjGg},#{fjXh},#{fjName},#{fjScbh})";
+        return sql;
     }
 }

@@ -45,8 +45,8 @@
 
 
 <script>
-    addTable ={
-        table:{
+    // addTable ={
+    //     table:{
             // cols: [[ //表头
             //     {type:"checkbox"}
             //     , {field: 'department', title: '科室',width:"50%", minWidth: 200}
@@ -71,25 +71,25 @@
             //         "team-name":"中区病房手术室"
             //     }]
             // ,
-                done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":({
-                        "tool":'toolbar',
-                        "event":'add',
-                        "type":2,
-                        "title":'科室管理团队分工',
-                        "content":'.html',
-                        "area":['95%','95%']
-                    },{
-                        "event":'edit',
-                        'type':2,
-                        "content":'.html'
-                    })
-                })
-            }
-        }
-    }
+    //             done: function (obj) {
+    //             tableFunc({
+    //                 "obj":obj,
+    //                 "toolFunc":({
+    //                     "tool":'toolbar',
+    //                     "event":'add',
+    //                     "type":2,
+    //                     "title":'科室管理团队分工',
+    //                     "content":'.html',
+    //                     "area":['95%','95%']
+    //                 },{
+    //                     "event":'edit',
+    //                     'type':2,
+    //                     "content":'.html'
+    //                 })
+    //             })
+    //         }
+    //     }
+    // }
 
     renderMod = {
         addTable: {
@@ -124,12 +124,8 @@
                             "event":'add',
                             "type":2,
                             "title":'科室管理团队分工',
-                            "content":'.html',
+                            "content":'./child/management.html',
                             "area":['95%','95%']
-                        },{
-                            "event":'edit',
-                            'type':2,
-                            "content":'.html'
                         })
                     })
                 }

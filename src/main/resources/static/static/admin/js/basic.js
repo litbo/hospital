@@ -487,9 +487,16 @@ function subUp(value, data, param) {
             success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
-                    putMsg({
-                        alert:"数据提交成功！"
-                    });
+                    if(value.reload !== undefined){
+                        layer.alert("数据提交成功",function(){
+                            //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
+                            value.reload === "parent" ? parent.location.reload() : window.location.reload();
+                        })
+                    }else{
+                        putMsg({
+                            alert:"数据提交成功！"
+                        });
+                    }
                 } else{
                     putMsg({
                         alert:"提交失败，请重试！",
@@ -887,6 +894,10 @@ action = func = {
             table.reload(name,{
                 data : oData
             });
+            //大于15条数据不显示数量（数据太大会导致内存占用过高，页面崩溃。限制最多只能选中15条一次）
+            if(sec >= 15){
+                sec = "多";
+            }
             //信息提示
             if(sec === 0){
                 layer.msg("重复数据无法添加！");
@@ -895,13 +906,49 @@ action = func = {
             }
         });
     },
-    //表格外获取选中数据并删除选中数据
+    //表格外获取选中数据并删除选中数据(只修改本地数据)
     "checkTable":function(name){
         layui.use('table', function() {
             var table = layui.table
                 ,noCk = false
                 ,oData =  table.cache[name];//获取表格所有数据
             var ck = table.checkStatus(name);//获取选中数据
+            if(ck.data.length === 0){
+                putMsg({
+                    alert:"当前未选中任何数据！"
+                });
+                return false;
+            }
+            layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
+                if(ck.isAll === true){
+                    oData = [];
+                }else {
+                    for (var j = 0; j < oData.length; j++) {
+                        //找出所有数据中的已选中数据并删除
+                        if (oData[j].LAY_CHECKED === true) {
+                            oData.splice(j, 1);
+                        } else {
+                            delete oData[j]["LAY_CHECKED"];
+                            delete oData[j]["LAY_TABLE_INDEX"];
+                        }
+                    }
+                }
+                //重新渲染表格
+                table.reload(name,{
+                    data : oData
+                });
+                layer.close(index);
+            });
+
+        });
+    },
+    //表格外获取选中数据并删除选中数据（可提交数据）
+    "delTable":function(value){
+        layui.use('table', function() {
+            var table = layui.table
+                ,noCk = false
+                ,oData =  table.cache[value.name];//获取表格所有数据
+            var ck = table.checkStatus(value.name);//获取选中数据
             if(ck.data.length === 0){
                 putMsg({
                     alert:"当前未选中任何数据！"

@@ -1,5 +1,6 @@
 package com.litbo.hospital.user.dao;
 
+import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.provider.EqProvider;
@@ -49,4 +50,6 @@ public interface EqDao {
 
     @SelectProvider(type = EqProvider.class  , method = "listPmsByPym")
     List<EqPm> listPmsByPym(@Param("pym") String pym);
+    @InsertProvider(type = EqProvider.class , method = "saveFj")
+    Integer saveFj(EqFj eqFj);
 }

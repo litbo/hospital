@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.EqVo;
@@ -174,6 +175,18 @@ public class EqController {
         return Result.success(pageInfo);
     }
 
+    //添加附件
+    @RequestMapping("/saveFj")
+    public Result saveFj(EqFj eqFj){
+        if(es.saveFj(eqFj)>0){
+            return Result.success();
+        }else {
+            return Result.error();
+        }
+
+    }
+
+
     //返回表头
     @RequestMapping("/listEqbt")
     public Result listSelectEmpsCols(@RequestParam(required = false) String key) {
@@ -181,14 +194,14 @@ public class EqController {
         if ("checkbox".equals(key)) {
             String jsonMessage = "[{'type': 'checkbox'}, " +
                     "{field: 'eqSbbh', title: '设备编号''}, " +
-                    "{field: 'eqSbmc', title: '设备名称'}" +
+                    "{field: 'eqName', title: '设备名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
         } else if ("radio".equals(key)) {
             String jsonMessage = "[{'type': 'radio'}, " +
                     "{field: 'eqSbbh', title: '设备编号'}, " +
-                    "{field: 'eqSbmc', title: '设备名称'}" +
+                    "{field: 'eqName', title: '设备名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
