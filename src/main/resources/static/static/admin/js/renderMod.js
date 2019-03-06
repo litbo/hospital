@@ -370,7 +370,10 @@ $(function () {
 
                     //重新绑定select事件
                     if($(".layui-table-tool select").length > 0){
-                        var val = formAction.val;
+                        var val = {};
+                        if(formAction !== undefined){
+                            val = formAction.val ;
+                        }
                         if(val.select){
                             if(Type(val.select) === "json"){
                                 getSelect(val.select);
