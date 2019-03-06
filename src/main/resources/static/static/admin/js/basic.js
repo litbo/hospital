@@ -945,7 +945,6 @@ action = func = {
     "checkTable":function(name){
         layui.use('table', function() {
             var table = layui.table
-                ,noCk = false
                 ,oData =  table.cache[name];//获取表格所有数据
             var ck = table.checkStatus(name);//获取选中数据
             if(ck.data.length === 0){
@@ -981,9 +980,9 @@ action = func = {
     "delTable":function(value){
         layui.use('table', function() {
             var table = layui.table
-                ,noCk = false
-                ,oData =  table.cache[value.name];//获取表格所有数据
-            var ck = table.checkStatus(value.name);//获取选中数据
+                ,nCk = []
+                ,oData =  table.cache[value.id];//获取表格所有数据
+            var ck = table.checkStatus(value.id);//获取选中数据
             if(ck.data.length === 0){
                 putMsg({
                     alert:"当前未选中任何数据！"
@@ -993,22 +992,38 @@ action = func = {
             layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
                 if(ck.isAll === true){
                     oData = [];
+                    nCk = "all";//全部被选中
                 }else {
                     for (var j = 0; j < oData.length; j++) {
                         //找出所有数据中的已选中数据并删除
                         if (oData[j].LAY_CHECKED === true) {
                             oData.splice(j, 1);
+                            //添加
+                            nCk.push(oData[j][value.name]);
                         } else {
                             delete oData[j]["LAY_CHECKED"];
                             delete oData[j]["LAY_TABLE_INDEX"];
                         }
                     }
+                    //上传已删除文件
+                    value.data = {};
+                    value.data[value.param] = nCk;
+                    value.success = function (res){
+                      if(res.code === 0){
+                          layer.msg("数据删除成功！");
+                          //重新渲染表格
+                          table.reload(name,{
+                              data : oData
+                          });
+                      } else{
+                          layer.msg("数据删除失败！")
+                      }
+                        layer.close(index);
+                    };
+                    subUp(value)
                 }
-                //重新渲染表格
-                table.reload(name,{
-                    data : oData
-                });
-                layer.close(index);
+
+
             });
 
         });
