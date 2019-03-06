@@ -20,6 +20,7 @@ public class SgKstlSqlProvider {
             SELECT("eq_pm.eq_pm_id");
             SELECT("eq_pm.eq_pm_name");
             SELECT("eq_pm.eq_pm_jc");
+            SELECT("eq_pm.eq_fl_id");
             SELECT("sg_info.id as sgInfoId");
             SELECT("sg_info.bh");
             SELECT("sg_tl_pm.kstl_sj");
