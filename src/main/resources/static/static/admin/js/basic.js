@@ -13,12 +13,40 @@ var date = new Date()
     , year = date.getFullYear()
     , month = date.getMonth() + 1
     , day = date.getDate()
+    , hour = date.getHours()
+    , minutes = date.getMinutes()
+    , seconds = date.getSeconds()
     , today = year + "-" + month + "-" + day//获取年-月-日
-    , time = date.getTime()
+    , today0 = ""
+    , time0 = ""
+    , time = hour + ":" + minutes + ":" + seconds
     //初始化页面渲染数据
     ,renderMod = {}
     ,allData = null;
-
+//日期补零
+if(month < 10){
+    if(day < 10){
+        today0 = year + "-0" + month + "-0" + day
+    }else{
+        today0 = year + "-0" + month + "-" + day
+    }
+}else{
+    today0 = today;
+}
+//时间补零
+if(hour < 10){
+    if(minutes <10){
+        if(seconds < 10){
+            time0 = "0" + hour + ":0" + minutes + ":0" + seconds
+        }else{
+            time0 = "0" + hour + ":0" + minutes + ":" + seconds
+        }
+    }else{
+        time0 = "0" + hour + ":" + minutes + ":" + seconds
+    }
+}else{
+    time0 = time
+}
 /**
  * @todo 日期格式化
  * @tips 以下日期转换方式将在未来被删除，推荐使用layui日期转换格式，详见文档
@@ -813,7 +841,7 @@ action = func = {
                     ,tips = value.tip || field;
                 layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
                     //执行自定义函数
-                    value.func && value.func(val,obj);
+                    value.func && value.func(val,uValue,obj);
                     //关闭弹出的确认信息
                     layer.close(index);
                 },function(index){

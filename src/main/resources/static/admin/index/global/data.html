@@ -97,6 +97,7 @@
         type: "POST",
         data: dataD,
         success: function (res) {
+            console.log(res);
             if (res.code !== 0) {
                 putMsg({
                     alert: "数据获取失败，请重试！",

@@ -88,6 +88,25 @@
     </div>
 </form>
 
+<script type="text/html" id="price">
+    {{#
+    if(!d.pisgPrice){
+        return "0.00"
+    }else{
+        if(isNaN(Number(d.pisgPrice) !== false)){
+            return "0.00"
+        }
+    }
+    }}
+</script>
+
+<script type="text/html" id="number">
+    {{#
+    if(isNaN(Number(d.pjsgCoun) !== false)){
+        return "1"
+    }
+    }}
+</script>
 
 
 
@@ -148,7 +167,7 @@
                     {field: 'pjZczDqTime', title: '注册证到期日期'},
                     {field: 'scqyName', title: '生产厂家'},
                     {field: 'ghsName', title: '供货商'},
-                    {field: 'pisgPrice', title: '单价（可编辑）',edit:true},
+                    {field: 'pisgPrice', title: '单价（可编辑）',edit:true,templet:"#price"},
                     {field: 'pjsgCount', title: '数量（可编辑）',edit:true}
                 ]]
                 , toolbar:false
@@ -157,6 +176,20 @@
                 , data: []
                 , text:{
                     none:"请点击上方按钮添加数据！"
+                },
+                done:function(obj){
+                    tableFunc({
+                        tableEdit:{
+                            tip:"数量",
+                            func:function(val,back,obj){
+                                if(isNaN(val) !== false){
+                                    obj.data[obj.field] = back;
+                                    //更新数据
+                                    obj.update(obj.data);
+                                }
+                            }
+                        }
+                    })
                 }
             }
         }
