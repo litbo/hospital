@@ -24,9 +24,6 @@
         .layui-form-item{
             margin-top:35px
         }
-        span{
-            color:#f10214;
-        }
         .layui-form-label{
             width:120px;
             padding:8px 10px!important;
@@ -39,17 +36,17 @@
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">制度名称<span>*</span></label>
+                <label class="layui-form-label">制度名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" >
+                    <input type="text" name="" class="layui-input" autocomplete="off" lay-verify="required">
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">制度内容<span>*</span></label>
+                <label class="layui-form-label">制度内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea name="" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea name="" placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
                 </div>
             </div>
         </div>
@@ -57,18 +54,15 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备使用范围</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="" title="低风险" >
+                    <input type="checkbox" name="" title="低风险" checked>
                     <input type="checkbox" name="" title="中风险" >
                     <input type="checkbox" name="" title="高风险" >
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
             </div>
         </div>
 

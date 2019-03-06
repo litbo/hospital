@@ -35,9 +35,9 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <label class="layui-form-label">岗位名称<span>*</span></label>
+                <label class="layui-form-label">岗位名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="gwName" class="layui-input" autocomplete="off" >
+                    <input type="text" name="gwName" class="layui-input" autocomplete="off" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -52,11 +52,8 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
             </div>
         </div>
 
