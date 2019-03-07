@@ -33,19 +33,21 @@
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label">所属设备<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-normal layui-btn-xs" style="margin-left:35px" id="layerBtn">选择</button>
+                        <input type="text" name="eqName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectEq">选择</button>
+
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">附件名称<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" class="layui-input">
+                        <input type="text" name="fjName" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">序列号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off"  class="layui-input">
+                        <input type="text" name="fjScbh" autocomplete="off"  class="layui-input">
                     </div>
                 </div>
             </div>
@@ -53,20 +55,20 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">型号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="" class="layui-input">
+                        <input type="text" name="fjXh" autocomplete="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">规格</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="" class="layui-input">
+                        <input type="text" name="fjGg" autocomplete="" class="layui-input">
                     </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="">提交</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -79,21 +81,43 @@
 
 
 <script>
-layui.use('layer',function(){
-    var layer = layui.layer;
 
-    //弹出框设置
-    $('#layerBtn').on('click',function(){
-        layer.open({
-            type:2,
-            title:'设备选择',
-            content:'./child/fjEntry-add.html' ,
-            area:['90%','90%'],
-            btn:['选择','取消']
-        });
-        return false;
-    })
-})
+formData = {};
+renderMod = {
+    form: {
+        date:true,
+        submit: {
+            filter: "submit",//可以不写
+             before:function(){
+
+                 return param = {
+                     1:formData.radio[0].eqId
+                 }
+             },
+            form: {
+                url: "/eq/saveFj",
+                type: "POST",
+                // contentType:"application/json",
+                data:["fjXh","fjGg","fjName"],
+                 param:{
+                     1:"eqId"
+                 }
+            }//表单提交函数
+        }
+    },
+    bind: {
+        selectItem: {
+            elem: "#selectEq",
+            data:formData,
+            cb:"/eq/listEqbt",
+            db:"/eq/listShowEqs",
+            key:"radio",
+            name:"dtdt"
+        }
+    }
+}
+
+
 </script>
 </body>
 </html>
