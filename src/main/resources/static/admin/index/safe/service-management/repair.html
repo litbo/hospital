@@ -52,7 +52,7 @@
 </script>
 
 <script type="text/html" id="bar">
-    <button class="layui-btn">一个标准的按钮</button>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="baoxiu">报修</a>
 </script>
 
 <script>
@@ -67,6 +67,7 @@
                     , {field: 'eqXh', title: '型号', minWidth: 80}
                     , {field: 'eqGg', title: '规格', width: 150}
                     , {field: 'eqQysj', title: '启用日期', width: 200}
+                    , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
                 ]]
                 , url: "/baoxiu/baoxiuEq"
                 , request: {
@@ -82,7 +83,17 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        tools:[
+                            {
+                                event:"baoxiu",
+                                title:"报修",
+                                type:2,
+                                content:"./child/repair-repairs.html",
+                                dataUrl:["eqId"]
+                            }
+                        ]
+                    })
                 }
             },
             reSet:{

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>补录维修报告</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            padding: 8px 10px !important;
+        }
+
+        .layui-form-item {
+            margin-bottom: 30px;
+        }
+
+        .layui-container {
+            margin-top: 30px;
+        }
+        .layui-colla-content{
+            overflow: initial;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-container">
+    <form class="layui-form layui-form-pane">
+        <div class="layui-row">
+            <div class="layui-collapse" lay-accordion>
+                <!--模块1-->
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">报修</h2>
+                    <div class="layui-colla-content layui-show">
+                        <div class="layui-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">保修设备<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修人<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修人电话</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                               class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修科室</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" disabled class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修科室电话</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                               class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修方式</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option>网上报修</option>
+                                            <option>电话报修</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">故障现象</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                               class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">报修时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" class="layui-input" autocomplete="off"
+                                               id="repairDate">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">发现时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="" id="findDate" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    renderMod = {
+        form: {
+            date: [
+                {
+                    elem: "#findDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#repairDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                }
+            ]
+        },
+        table:{
+            table:{
+                cols:[[
+                    {type:"checkbox"}
+                    , {field:"xx",title:"配件编号", minWidth: 150}
+                    ,{field: 'kmValue', title: '配件名称', minWidth: 150}
+                    ,{field: 'kmValue', title: '型号规格', minWidth: 150}
+                    ,{field: 'kmValue', title: '报价(可编辑)',edit:true, minWidth: 150}
+                    ,{field: 'kmValue', title: '成交价(可编辑)',edit:true, minWidth: 150}
+                    ,{field: 'kmValue', title: '单位', minWidth: 150}
+                    ,{field: 'kmValue', title: '数量(可编辑)',edit:true, minWidth: 150}
+                ]]
+                , toolbar:false
+                , page:false
+                , height: "200"
+                , data: []
+                , text:{
+                    none:"请点击上方按钮添加数据！"
+                }
+            }
+        }
+    }
+</script>
+</body>
+
+</html>
