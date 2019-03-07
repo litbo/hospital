@@ -82,7 +82,7 @@ $(function () {
                                         //表格渲染
                                         if(val.get.parse !== undefined){
                                             table.reload(val.get.tableId,{
-                                                data:val.get.parse
+                                                data:dat[val.get.parse]
                                             })
                                         }
                                     }
@@ -313,6 +313,8 @@ $(function () {
             //表格数据重载(查询数据)
             if (res && res !== false) {
                 var type = res.type || "search"//绑定data-type="search"的按钮
+                    , nData = []
+                    , cData = []
                     , active = {}//绑定按钮事件
                     , resValue = {};//重载值
                 //绑定按钮事件
@@ -356,6 +358,10 @@ $(function () {
                             resValue[res.dat.eTime] = datArray[1].trim();
                         }
                     }
+                    //获取重载前表格数据
+                    if(res.add === true && res.add.tableId !== undefined){
+                        nData = table.cache(res.add.tableId);
+                    }
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,
@@ -363,6 +369,16 @@ $(function () {
                             url: res.url
                             , where: resValue
                         });
+                    //还原重载前的数据
+                    if(res.add === true && res.add.tableId !== undefined){
+                        cData = table.cache(res.add.tableId);
+                        for(var b=0;b<cData.length;b++){
+                            nData.push(cData[b]);
+                        }
+                        table.reload(res.add.tableId,{
+                            data:nData
+                        });
+                    }
                     //重新渲染日期选择器
                     if($.cookie("RenderDate-a-Func")){
                         laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
@@ -370,7 +386,10 @@ $(function () {
 
                     //重新绑定select事件
                     if($(".layui-table-tool select").length > 0){
-                        var val = formAction.val;
+                        var val = {};
+                        if(formAction !== undefined){
+                            val = formAction.val ;
+                        }
                         if(val.select){
                             if(Type(val.select) === "json"){
                                 getSelect(val.select);

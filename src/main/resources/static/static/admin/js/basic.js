@@ -515,7 +515,7 @@ function subUp(value, data, param) {
             success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
-                    if(value.reload !== undefined){
+                    if(value.reload){
                         layer.alert("数据提交成功",function(){
                             //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                             value.reload === "parent" ? parent.location.reload() : window.location.reload();
@@ -838,19 +838,26 @@ action = func = {
                     ,data = obj.data //得到所在行所有数据
                     ,field = obj.field //得到字段对应的name
                     ,uValue = obj.uValue//字段修改前的值（自定义JS，table.js重置后将失效）
-                    ,tips = value.tip || field;
-                layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
-                    //执行自定义函数
-                    value.func && value.func(val,uValue,obj);
-                    //关闭弹出的确认信息
-                    layer.close(index);
-                },function(index){
-                    //取消操作将重置已编辑的数据
-                    //获取改变前的数据
-                    data[field] = uValue;
-                    //更新数据
-                    obj.update(data);
-                })
+                    ,tips = value.tip || uValue;
+                //是否提示信息
+                if(value.confirm === false){
+                    value.func && value.func.call(this,val,uValue,obj);
+                }else{
+                    layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
+                        //执行自定义函数
+                        value.func && value.func(val,uValue,obj);
+                        //关闭弹出的确认信息
+                        layer.close(index);
+                    },function(index){
+                        //取消操作将重置已编辑的数据
+                        //获取改变前的数据
+                        data[field] = uValue;
+                        //更新数据
+                        obj.update(data);
+                        //table.reload();
+                    })
+                }
+
             });
         })
     },
@@ -938,7 +945,6 @@ action = func = {
     "checkTable":function(name){
         layui.use('table', function() {
             var table = layui.table
-                ,noCk = false
                 ,oData =  table.cache[name];//获取表格所有数据
             var ck = table.checkStatus(name);//获取选中数据
             if(ck.data.length === 0){
@@ -974,9 +980,9 @@ action = func = {
     "delTable":function(value){
         layui.use('table', function() {
             var table = layui.table
-                ,noCk = false
-                ,oData =  table.cache[value.name];//获取表格所有数据
-            var ck = table.checkStatus(value.name);//获取选中数据
+                ,nCk = []
+                ,oData =  table.cache[value.id];//获取表格所有数据
+            var ck = table.checkStatus(value.id);//获取选中数据
             if(ck.data.length === 0){
                 putMsg({
                     alert:"当前未选中任何数据！"
@@ -986,22 +992,38 @@ action = func = {
             layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
                 if(ck.isAll === true){
                     oData = [];
+                    nCk = "all";//全部被选中
                 }else {
                     for (var j = 0; j < oData.length; j++) {
                         //找出所有数据中的已选中数据并删除
                         if (oData[j].LAY_CHECKED === true) {
                             oData.splice(j, 1);
+                            //添加
+                            nCk.push(oData[j][value.name]);
                         } else {
                             delete oData[j]["LAY_CHECKED"];
                             delete oData[j]["LAY_TABLE_INDEX"];
                         }
                     }
+                    //上传已删除文件
+                    value.data = {};
+                    value.data[value.param] = nCk;
+                    value.success = function (res){
+                      if(res.code === 0){
+                          layer.msg("数据删除成功！");
+                          //重新渲染表格
+                          table.reload(name,{
+                              data : oData
+                          });
+                      } else{
+                          layer.msg("数据删除失败！")
+                      }
+                        layer.close(index);
+                    };
+                    subUp(value)
                 }
-                //重新渲染表格
-                table.reload(name,{
-                    data : oData
-                });
-                layer.close(index);
+
+
             });
 
         });
