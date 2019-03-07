@@ -8,7 +8,6 @@ import com.litbo.hospital.supervise.service.GangweiService;
 import com.litbo.hospital.supervise.vo.*;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +24,11 @@ public class GangweiController {
 
     @PostMapping("/saveGw")
     public Result saveGw(@RequestBody  SGangwei gw){
-        gangweiService.saveGw(gw);
+        if(gw.getGwId()!=null){
+            gangweiService.updateGw(gw);
+        }else {
+            gangweiService.saveGw(gw);
+        }
         return Result.success();
     }
     @GetMapping("/deleteGwByGwId")
@@ -61,8 +64,8 @@ public class GangweiController {
     @GetMapping("/getGwByGwId")
     public Result getGwsByGwId(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,
-                               @RequestParam String gw_id){
-        SGangwei date = gangweiService.getGwsByGwId(pageNum,pageSize,gw_id);
+                               @RequestParam String gwId){
+        SGangwei date = gangweiService.getGwsByGwId(pageNum,pageSize,gwId);
         return Result.success(date);
     }
 

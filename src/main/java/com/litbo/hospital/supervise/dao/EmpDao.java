@@ -61,4 +61,30 @@ public interface EmpDao {
     @Select("SELECT emp2.user_id,emp2.user_xm from s_emp as emp1 INNER JOIN s_emp emp2 ON (emp1.bm_id=emp2.bm_id) " +
             "where emp1.user_id=#{userId} and emp2.user_id!=#{userId} ")
     List<SEmp> listPartnerByUserId(String userId);
+
+    @Select("select * from s_emp where user_id=#{userId}")
+    SEmp getEmpsByUserId(String userId);
+    @Update("update s_emp\n" +
+        "    set user_xm = #{userXm,jdbcType=VARCHAR},\n" +
+        "      sex_id = #{sexId,jdbcType=CHAR},\n" +
+        "      mz_id = #{mzId,jdbcType=CHAR},\n" +
+        "      zzmm_id = #{zzmmId,jdbcType=CHAR},\n" +
+        "      sfzh = #{sfzh,jdbcType=CHAR},\n" +
+        "      gb_id = #{gbId,jdbcType=CHAR},\n" +
+        "      jg_id = #{jgId,jdbcType=CHAR},\n" +
+        "      jtzz = #{jtzz,jdbcType=VARCHAR},\n" +
+        "      bm_id = #{bmId,jdbcType=CHAR},\n" +
+        "      zggwlb_id = #{zggwlbId,jdbcType=CHAR},\n" +
+        "      zgbzlb_id = #{zgbzlbId,jdbcType=CHAR},\n" +
+        "      zgzt_id = #{zgztId,jdbcType=CHAR},\n" +
+        "      xllb_id = #{xllbId,jdbcType=CHAR},\n" +
+        "      xlzy_id = #{xlzyId,jdbcType=CHAR},\n" +
+        "      zwlb_id = #{zwlbId,jdbcType=CHAR},\n" +
+        "      tel = #{tel,jdbcType=VARCHAR},\n" +
+        "      email = #{email,jdbcType=VARCHAR},\n" +
+        "      byyx = #{byyx,jdbcType=VARCHAR},\n" +
+        "      qzzp = #{qzzp,jdbcType=VARCHAR},\n" +
+        "      zp = #{zp,jdbcType=VARCHAR}\n" +
+        "    where user_id = #{userId,jdbcType=VARCHAR}")
+    void updateEmp(SEmp emp);
 }

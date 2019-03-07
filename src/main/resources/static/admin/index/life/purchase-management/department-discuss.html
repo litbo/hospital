@@ -135,7 +135,7 @@
                         return false;
                     }
                     return param = {
-                        1: formData.radio[0].userIdJl,
+                        1: formData.radio[0]["userIdJl"],
                         2: tv1,
                         3: tv
                     };
@@ -161,9 +161,9 @@
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'kmName', title: '设备名称', minWidth: 150}
-                        , {field: 'kmValue', title: '设备简称', minWidth: 150}
-                        , {field: 'kmValue', title: '卫标分类', minWidth: 150}
+                        , {field: 'eqPmName', title: '设备名称', minWidth: 150}
+                        , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
+                        , {field: 'eqFlId', title: '卫标分类', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -201,8 +201,8 @@
                 },
                 {
                     elem: "#dataTable2",
-                    cb: "/kwgl/empgl/listSelectEmpsCols",
-                    db: "/kwgl/empgl/listPartnerByUserId",
+                    cb: "/eq/listPmsCols",
+                    db: "/eq/listPms",
                     name: "dtdt",
                     key: "checkbox"
                 }

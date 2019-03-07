@@ -26,6 +26,9 @@
         .layui-container {
             margin-top: 30px;
         }
+        .layui-colla-content{
+            overflow: initial;
+        }
     </style>
 </head>
 
@@ -37,24 +40,21 @@
                 <!--模块1-->
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">报修</h2>
-                    <div class="layui-colla-content layui-show1">
+                    <div class="layui-colla-content layui-show">
                         <div class="layui-row">
                             <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
+                                <div class="layui-form-item" pane>
                                     <label class="layui-form-label">选择设备<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <select lay-verify="required" lay-search>
-                                            <option></option>
-                                            <option></option>
-                                        </select>
+                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">故障现象<span class="sign">*</span></label>
                                     <div class="layui-input-block">
+                                        <!--<input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">-->
                                         <select>
-                                            <option></option>
-                                            <option></option>
                                             <option></option>
                                         </select>
                                     </div>
@@ -62,36 +62,25 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">规格</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
-                                               class="layui-input" autocomplete="off">
+                                        <input type="text" name="" disabled class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修到期日<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-verify="required" lay-search>
-                                            <option></option>
-                                            <option>11</option>
-                                            <option></option>
-                                        </select>
+                                        <input type="text" name="" disabled class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修科室</label>
                                     <div class="layui-input-block">
-                                        <select>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
-                                        </select>
+                                        <input type="text" name="" disabled class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修人<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <select>
-                                            <option></option>
-                                        </select>
+                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -112,11 +101,11 @@
                             </div>
 
                             <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
+                                <div class="layui-form-item" pane>
                                     <label class="layui-form-label">故障现象编码</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" class="layui-input" autocomplete="off"
-                                               placeholder="请输入" lay-verify="required">
+                                        <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">查找</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -162,7 +151,7 @@
                                     <label class="layui-form-label">录入人</label>
                                     <div class="layui-input-block">
                                         <input type="text" name="" class="layui-input" autocomplete="off"
-                                               placeholder="请输入" lay-verify="required">
+                                               disabled>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -185,22 +174,22 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">因故障停机</label>
                                     <div class="layui-input-block">
-                                        <select lay-verify="required" lay-search>
+                                        <select>
+                                            <option>停机</option>
                                             <option>未停机</option>
-                                            <option></option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">受理时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" class="layui-input" autocomplete="off" id="inDate">
+                                        <input type="text" name="" class="layui-input" autocomplete="off" id="acceptDate">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">约定维修时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" class="layui-input" autocomplete="off" id="yreDate">
+                                        <input type="text" name="" class="layui-input" autocomplete="off" id="appointRepairDate">
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +221,7 @@
                 <!--模块3-->
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">检修</h2>
-                    <div class="layui-colla-content layui-show">
+                    <div class="layui-colla-content">
                         <button class="warm_btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" id="">生成不良事件可疑报告</button>
                         <div class="layui-tab layui-tab-card">
 
@@ -324,7 +313,7 @@
                                                 <label class="layui-form-label">服务开始时间</label>
                                                 <div class="layui-input-block">
                                                     <input type="text" name="" class="layui-input" autocomplete="off"
-                                                           id="seriveBeginTime">
+                                                           id="serviceBeginTime">
                                                 </div>
                                             </div>
                                         </div>
@@ -353,10 +342,12 @@
                                                 <label class="layui-form-label">故障部位<span
                                                         class="sign">*</span></label>
                                                 <div class="layui-input-block">
-                                                    <select lay-verify="required" lay-search>
+                                                    <input type="text" name="" class="layui-input" autocomplete="off"
+                                                           placeholder="请输入">
+                                                    <!--<select lay-verify="required" lay-search>
                                                         <option>满意</option>
                                                         <option>不满意</option>
-                                                    </select>
+                                                    </select>-->
                                                 </div>
                                             </div>
                                             <div class="layui-form-item">
@@ -508,7 +499,7 @@
                                                 <label class="layui-form-label">确认人</label>
                                                 <div class="layui-input-block">
                                                     <input type="text" name="" class="layui-input" autocomplete="off"
-                                                           placeholder="请输入" lay-verify="required">
+                                                           disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -560,22 +551,52 @@
         form: {
             date: [
                 {
-                    elem: "#confirmDate"
+                    elem: "#findDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
-                    elem: "#findDate"
+                    elem: "#repairDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
-                    elem: "#repairDate"
+                    elem: "#acceptDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
-                    elem: "#inDate"
+                    elem: "#appointRepairDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
-                    elem: "#yreDate"
+                    elem: "#serviceBeginTime",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
-                    elem: "#breakBackDate"
+                    elem: "#serviceEndTime",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#checkFinTime",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#confirmDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 }
             ]
         },
@@ -601,66 +622,6 @@
             }
         }
     }
-    /*    layui.use(['layer', 'form', 'layedit', 'laydate','element'], function () {
-            var form = layui.form
-                , layer = layui.layer
-                , layedit = layui.layedit
-                , laydate = layui.laydate
-                , element = layui.element;
-            var date = new Date()
-                , year = date.getFullYear()
-                , month = date.getMonth() + 1
-                , day = date.getDate()
-                , today = year+ "-" + month + "-" + day//获取年-月-日
-                , time = date.getTime();
-
-            //日期
-            laydate.render({
-                elem: '#date',
-                value: today,
-                format: "y-M-d"
-            });
-            laydate.render({
-                elem: '#date1',
-                value: today,
-                format: "y-M-d"
-            });
-            laydate.render({
-                elem: '#date2',
-                value: today,
-                format: "y-M-d"
-            });
-            laydate.render({
-                elem: '#date3',
-                value: today,
-                format: "y-M-d"
-            });
-            laydate.render({
-                elem: '#date4',
-                value: today,
-                format: "y-M-d"
-            });
-
-            //创建一个编辑器
-            var editIndex = layedit.build('LAY_demo_editor');
-
-
-            //监听指定开关
-            form.on('switch(switchTest)', function (data) {
-                layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                    offset: '6px'
-                });
-                layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-            });
-
-            //监听提交
-            form.on('submit(demo1)', function (data) {
-                layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                });
-                return false;
-            });
-        });*/
 </script>
 </body>
 

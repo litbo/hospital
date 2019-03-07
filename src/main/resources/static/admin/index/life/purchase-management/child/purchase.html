@@ -40,47 +40,47 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend>设备购置申请单</legend>
     </fieldset>
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="eqPmName" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">购置类别</label>
                 <div class="layui-input-block">
-                    <select name="Gzlb" lay-filter="Gzlb"></select>
+                    <select name="gzlbId" lay-filter="gzlbId"></select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">使用性质</label>
                 <div class="layui-input-block">
-                    <select name="Zjly" lay-filter="Zjly"></select>
+                    <select name="syxzId" lay-filter="syxzId"></select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">外地收费价格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceWd" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">省内收费价格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceSn" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
         </div>
         <div class="col-xs-6">
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">资金来源</label>
+                <label class="layui-form-label">托管科室</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                    <input type="text" name="tgBmId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
                            style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
                 </div>
@@ -88,34 +88,34 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">资金来源</label>
                 <div class="layui-input-block">
-                    <select name="Zjly" lay-filter="Zjly"></select>
+                    <select name="zjlyId" lay-filter="Zjly"></select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">数量 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="num" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(元)<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="number" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceGjY" lay-verify="number" autocomplete="off" placeholder="请输入"
                            class="layui-input" id="gjpd">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(美元)</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="number" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceGjMy" lay-verify="number" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">检测量/日</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="jcl" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -151,13 +151,13 @@
                 <div class="layui-input-block">
                     <textarea
                             placeholder="增加购置医学装备的目的、用途、目前教学/科研/临床应用情况，医学装备基本配置及技术参数要求，医学装备功能项目及拟开展或需要增加的功能项目，设计使用率（小时、人次、样本数/月），资金来源为科研经费的详细说明科研项目（课题名称、科研课题申报人、科研课题经费来源及金额）。"
-                            class="layui-textarea"></textarea>
+                            class="layui-textarea" name="gzll"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">详细用途</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea name="xxyt" placeholder="请输入内容" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
@@ -166,32 +166,32 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">目的、用途</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea name="mdyt" placeholder="请输入内容" class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">目前教学/科研/临床应用情况</label>
                 <div class="layui-input-block">
                     <textarea placeholder="资金来源为科研经费的请说明科研项目（课题名称）、科研课题申报人、科研课题经费来源及金额"
-                              class="layui-textarea"></textarea>
+                              class="layui-textarea" name="jxkylcqk"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">基本参数要求</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="jbcsyq"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">配置详细需求</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="pzxq"></textarea>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">设计使用率</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="小时、人次、样本数/月" class="layui-textarea"></textarea>
+                    <textarea placeholder="小时、人次、样本数/月" class="layui-textarea" name="syl"></textarea>
                 </div>
             </div>
         </div>
@@ -213,9 +213,10 @@
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'kmName', title: '参考生产厂商', minWidth: 150}
-                        , {field: 'kmValue', title: '规格型号', minWidth: 150}
-                        , {field: 'kmValue', title: '估价', minWidth: 150}
+                        , {field: 'sbcsName', title: '参考生产厂商', minWidth: 150}
+                        , {field: 'ckcssbXh', title: '型号', minWidth: 150}
+                        , {field: 'ckcssbGg', title: '规格', minWidth: 150}
+                        , {field: 'ckcssbGj', title: '估价', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -229,14 +230,30 @@
                     elem: "#table1",
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'kmName', title: '功能名称', minWidth: 150}
-                        , {field: 'kmValue', title: '功能描述', minWidth: 150}
-                        , {field: 'kmValue', title: '使用', minWidth: 150}
+                        , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
+                        , {field: 'gnpzMs', title: '功能描述', minWidth: 150}
+                        , {field: 'gnpzIssy', title: '使用', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
                     , height: "200"
-                    , data: []
+                    , url:"/lifeManage/selectSgInfoById"
+                    , method: "POST"
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                    , where: {
+                        sgInfoId: $.getUrlParam("sgInfoId")
+                    }
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "data": res.data.sgCkcssbVOs, //解析数据列表
+                            "count": res.data.total //总数据数
+                        }
+                    }
                     , text: {
                         none: "请点击上方按钮添加数据！"
                     }
@@ -249,7 +266,7 @@
                 filter: "forms",
                 select: [
                     {
-                        filter: "Gzlb",
+                        filter: "gzlbId",
                         ids: "gzlbId",
                         text: "gzlbName",
                         url: "/eqdict/gzlb"
@@ -259,8 +276,21 @@
                         ids: "zjlyId",
                         text: "zjlyName",
                         url: "/eqdict/zjly"
+                    },
+                    {
+                        filter: "syxzId",
+                        ids: "syxzId",
+                        text: "syxzName",
+                        url: "/eq/listSyxz"
                     }
-                ]
+                ],
+                get: {
+                    url: "/lifeManage/selectSgInfoById",
+                    type: "POST",
+                    data: {sgInfoId: $.getUrlParam("sgInfoId")}
+                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
+                    //有add时必需时data为表单name数组，否则请直接使用data赋值
+                }//get内参数需参考《内容传输与提交》文档
             }
         }
     };

@@ -8,6 +8,8 @@ import java.util.Date;
 @Data
 public class ListFwPjzdVo {
 
+    private Integer pjzdId;
+
     private String pjbh;
 
     private String pjName;

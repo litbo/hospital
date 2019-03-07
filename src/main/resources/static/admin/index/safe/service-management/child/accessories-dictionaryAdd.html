@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="/security/pjzd/insertFwPjzd" method="post">
+<form class="layui-form layui-form-pane" action="" >
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6" style="margin-top: 20px;">
             <div class="layui-form-item">
@@ -55,19 +55,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">配件名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjName" class="layui-input" autocomplete="off"  lay-verify="required">
+                    <input type="text" name="pjName" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">配件编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjbh" class="layui-input" autocomplete="off" lay-verify="required|number">
+                    <input type="text" name="pjbh" class="layui-input" autocomplete="off" lay-verify="required|number" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">规格型号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjGgxh" class="layui-input" autocomplete="off" >
+                    <input type="text" name="pjGgxh" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -80,52 +80,44 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">产品注册证号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off" >
+                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off"  ay-verify="required|number" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">注册证到期日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjZczDqTime" class="layui-input"  autocomplete="off" id="date">
+                    <input type="text"  name="pjZczDqTime" class="layui-input"  autocomplete="off" id="date">
                 </div>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-6" style="margin-top: 20px;">
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">生产企业</label>
                 <div class="layui-input-block">
                     <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectScqy">选择</button>
-                    <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">供货商</label>
                 <div class="layui-input-block">
                     <input type="text" name="sbcsId1" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectGhs">选择</button>
-                    <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjGhsId" lay-event="choose1">选择</button>-->
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">中标价</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" >
+                    <input type="text" name="zbPrice" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">中标日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbTime" class="layui-input" autocomplete="off" id="date1">
+                    <input type="text" name="zbTime" class="layui-input" autocomplete="off" id="zdate">
                 </div>
             </div>
-            <!--<div class="layui-form-item layui-form-text">-->
-                <!--<label class="layui-form-label">备注</label>-->
-                <!--<div class="layui-input-block">-->
-                    <!--<textarea class="layui-textarea" name=""></textarea>-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
 
     </div>
@@ -134,7 +126,6 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit  lay-filter="submit">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </div>
@@ -147,6 +138,29 @@
     var formData = {};
     renderMod={
         form:{
+            date:[{elem:'#zdate'},{elem:'#date'}],
+            submit: {
+                filter: "submit",//可以不写
+                before:function(param){
+                    console.log("formD = ",formData);
+                    return param = {
+                        1:formData.eq[0].eqId,
+                        2:formData.scqy[0].sbcsId,
+                        3:formData.ghs[0].sbcsId1
+                    }
+                },
+                form: {
+                    url: "/security/pjzd/insertFwPjzd",
+                    type: "POST",
+                    contentType:"application/json",
+                    data:["pjfl","pjName","pjbh","pjGgxh","pjBzdw","pjZczh","zbPrice","zbTime"],
+                    param:{
+                        1:"sbId",
+                        2:"pjScqyId",
+                        3:"pjGhsId"
+                    }
+                }//表单提交函数
+            },
             val:{
                 filter:"forms",
                 select:[
@@ -171,16 +185,16 @@
             },{
                 elem: "#selectScqy",
                 cb: "/supervise/csgl/eqcsTitles",
-                db: "/supervise/csgl/listEqCs",
+                db: "/supervise/csgl/listEqcsByX2",
                 name: "dtdt",
-                key: "bm",
+                key: "scqy",
                 data:formData
             },{
                 elem: "#selectGhs",
                 cb: "/supervise/csgl/eqcsTitles",
-                db: "/supervise/csgl/listEqCs1",
+                db: "/supervise/csgl/listEqcsByX1",
                 name: "dtdt",
-                key: "bm",
+                key: "ghs",
                 data:formData
             }]
         }

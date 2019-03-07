@@ -1,13 +1,14 @@
 package com.litbo.hospital.user.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
+import com.litbo.hospital.user.bean.EqSyxz;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
 import com.litbo.hospital.user.vo.SetPmVo;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface EqService {
@@ -38,4 +39,8 @@ public interface EqService {
     Integer cancelFl(String eqId);
 
     PageInfo listPmsByPym(int pageNum, int pageSize, String pym);
+
+    List<EqSyxz> listSyxz();
+
+    Integer saveFj(EqFj eqFj);
 }

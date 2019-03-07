@@ -25,7 +25,7 @@ public class SgPlanController {
      * @return Result
      */
     @PostMapping("/insertPlan")
-    public Result insertPlan(@RequestBody SgPlan sgPlan) {
+    public Result insertPlan(SgPlan sgPlan) {
         sgPlanService.insertPlan(sgPlan);
         return Result.success();
     }

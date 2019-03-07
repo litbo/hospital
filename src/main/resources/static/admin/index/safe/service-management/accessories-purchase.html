@@ -27,29 +27,16 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="form">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>申购单</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
-            <!--<div class="layui-form-item">-->
-                <!--<label class="layui-form-label">申购部门</label>-->
-                <!--<div class="layui-input-block">-->
-                    <!--<select name="bm">-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="layui-form-item">
-                <label class="layui-form-label">申购人<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off"  placeholder="Admin">
-                </div>
-            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">申购时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" id="date" lay-verify="required">
+                    <input type="text" name="pjRkTime" class="layui-input" autocomplete="off" id="date" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -65,11 +52,11 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">原因<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="dqby" title="定期保养">
-                    <input type="checkbox" name="zrms" title="自然磨损">
-                    <input type="checkbox" name="czbd" title="操作不当">
-                    <input type="checkbox" name="rjgx" title="软件更新">
-                    <input type="checkbox" name="wjys" title="外界因素">
+                    <input type="checkbox" class="cks" name="s1" value="定期保养" title="定期保养">
+                    <input type="checkbox" class="cks" name="s2" value="自然磨损" title="自然磨损">
+                    <input type="checkbox" class="cks" name="s3" value="操作不当" title="操作不当">
+                    <input type="checkbox" class="cks" name="s4" value="软件更新" title="软件更新">
+                    <input type="checkbox" class="cks" name="s5" value="外界因素" title="外界因素">
                 </div>
             </div>
         </div>
@@ -79,7 +66,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">申请事项<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入" class="layui-textarea" lay-verify="required"></textarea>
+                    <textarea placeholder="请输入" name="sgSqsx" class="layui-textarea" lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
@@ -101,6 +88,29 @@
     </div>
 </form>
 
+<script type="text/html" id="price">
+    {{#
+    if(!d.pisgPrice){
+        return "0.00"
+    }else{
+        if(isNaN(Number(d.pisgPrice) !== false)){
+            return "0.00"
+        }else{
+            return d.pisgPrice
+        }
+    }
+    }}
+</script>
+
+<script type="text/html" id="number">
+    {{#
+    if(isNaN(Number(d.pjsgCoun) !== false)){
+        return "1"
+    }else{
+        return d.pjsgCoun
+    }
+    }}
+</script>
 
 
 
@@ -109,15 +119,42 @@
         form:{
             date:true,
             val:{
-                filter:"forms",
-                select:[
-                    {
+                filter:"form",
+                select:{
                         filter:"shr",
                         ids:"userId",
                         text:"userXm",
                         url:"/kwgl/empgl/listPartnerByUserId"
                     }
-                ]
+            },
+            submit:{
+                before:function(param){
+                    var ts = getTableValue("table"),ss= "",$cks = $(".cks");
+                    //获取选中的值
+                    for(var i=0;i<$cks.length;i++){
+                        if($cks[i].checked === true){
+                            ss += $("input[name='s"+(i+1)+"']").val() + "|"
+                        }
+                    }
+                    return param = {
+                        1: {
+                            "pjRkTime":$("input[name='pjRkTime']").val(),
+                            "sgSqsx":$("textarea[name='sgSqsx']").val(),
+                            "sgYy":ss
+                        },
+                        2:ts
+                    }
+                },
+                form:{
+                    url:"/security/pjsg/insertFwPjsg",
+                    type:"POST",
+                    contentType:"application/json",
+                    reload:true,
+                    param:{
+                        1:"fwPjsg",
+                        2:"fwPjsgZjbs"
+                    }
+                }
             }
         },
         bind:{
@@ -140,7 +177,9 @@
                     {field: 'pjZczh', title: '注册证号'},
                     {field: 'pjZczDqTime', title: '注册证到期日期'},
                     {field: 'scqyName', title: '生产厂家'},
-                    {field: 'ghsName', title: '供货商'}
+                    {field: 'ghsName', title: '供货商'},
+                    {field: 'pisgPrice', title: '单价（可编辑）',edit:true,templet:"#price"},
+                    {field: 'pjsgCount', title: '数量（可编辑）',edit:true}
                 ]]
                 , toolbar:false
                 , page:false
@@ -148,6 +187,25 @@
                 , data: []
                 , text:{
                     none:"请点击上方按钮添加数据！"
+                },
+                done:function(obj){
+                    tableFunc({
+                        tableEdit:{
+                            filter:"table1",
+                            confirm:false,
+                            func:function(val,back,obj){
+                                //数据不符合要求时还原本次修改
+                                if(isNaN(val) !== false){
+                                    //改变数据
+                                    obj.data[obj.field] = back;
+                                    //改变界面
+                                    $(this).val(back);
+                                    //更新数据
+                                    obj.update(obj.data);
+                                }
+                            }
+                        }
+                    })
                 }
             }
         }

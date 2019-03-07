@@ -24,12 +24,6 @@ public class EqCsController {
         PageInfo pageInfo = eqCsService.listEqCs(pageNum,pageSize);
         return Result.success(pageInfo);
     }
-    @PostMapping("/listEqCs1")
-    public Result listEqCs1(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
-        PageInfo pageInfo = eqCsService.listEqCs1(pageNum,pageSize);
-        return Result.success(pageInfo);
-    }
     @GetMapping("/readyResource")
     public Result readyResource(){
         EqCsInsertReadyVO readyVO = eqCsService.readyResource();
@@ -47,6 +41,20 @@ public class EqCsController {
                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                               EqCsSelectVO selectVo){
         PageInfo date = eqCsService.listEqcsByX(pageNum,pageSize,selectVo);
+        return Result.success(date);
+    }
+    @PostMapping("/listEqcsByX1")
+    public Result listEqcsByX1(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                              EqCsSelectVO selectVo){
+        PageInfo date = eqCsService.listEqcsByX1(pageNum,pageSize,selectVo);
+        return Result.success(date);
+    }
+    @PostMapping("/listEqcsByX2")
+    public Result listEqcsByX2(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                              EqCsSelectVO selectVo){
+        PageInfo date = eqCsService.listEqcsByX2(pageNum,pageSize,selectVo);
         return Result.success(date);
     }
     @PostMapping("eqcsTitles")

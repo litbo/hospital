@@ -41,45 +41,6 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'department', title: '科室',width:"30%", minWidth: 200}
-                , {field: 'team-name', title: '团队名称', minWidth: 150}
-                , {field: 'state', title:'状态' ,minWidth:80}
-            ]]
-            , "data": [
-                {
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
-            }
-        }
-    }
-
-
     renderMod = {
         addTable: {
             table: {
@@ -94,19 +55,20 @@
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
+                        "count":res.data.total,
                         "data": res.data.list //解析数据列表
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        delTable:{
 
+                        }
+                    })
                 }
             },
 

@@ -1,13 +1,14 @@
 package com.litbo.hospital.user.dao;
 
+import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
+import com.litbo.hospital.user.bean.EqSyxz;
 import com.litbo.hospital.user.dao.provider.EqProvider;
 import com.litbo.hospital.user.vo.EqShowVo;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
 import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 @Mapper
@@ -49,4 +50,18 @@ public interface EqDao {
 
     @SelectProvider(type = EqProvider.class  , method = "listPmsByPym")
     List<EqPm> listPmsByPym(@Param("pym") String pym);
+
+    /**
+     * 使用性质
+     * @return
+     */
+    @Select("SELECT\n" +
+            "dbo.eq_syxz.syxz_id,\n" +
+            "dbo.eq_syxz.syxz_name\n" +
+            "FROM\n" +
+            "dbo.eq_syxz")
+    List<EqSyxz> listSyxz();
+
+    @InsertProvider(type = EqProvider.class , method = "saveFj")
+    Integer saveFj(EqFj eqFj);
 }

@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.security.bean.FwBlsj;
 import com.litbo.hospital.security.bean.FwLcjl;
 import com.litbo.hospital.security.dao.FwBaoxiuDao;
@@ -8,6 +9,7 @@ import com.litbo.hospital.security.dao.FwBlsjDao;
 import com.litbo.hospital.security.dao.FwLcjlDao;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwBlsjService;
+import com.litbo.hospital.security.vo.SelectFwBlsjById;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class FwBlsjServiceImpl implements FwBlsjService {
     @Transactional
     public int insertFwBlsj(FwBlsj blsj) {
         blsj.setBgTime(new Date());
+        blsj.setBgbh(IDFormat.getIdByIDAndTime("fw_blsj","bgbh"));
         if(StringUtils.isNotBlank(blsj.getBxdh())){//如果保修单号不为空，存入流程
             FwLcjl lcjl = new FwLcjl();
             lcjl.setCreatTime(new Date());
@@ -43,5 +46,10 @@ public class FwBlsjServiceImpl implements FwBlsjService {
     public PageInfo listFwBlsj(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(blsjDao.listFwBlsj());
+    }
+
+    @Override
+    public SelectFwBlsjById selectFwBlsjById(Integer id) {
+        return blsjDao.selectFwBlsjById(id);
     }
 }

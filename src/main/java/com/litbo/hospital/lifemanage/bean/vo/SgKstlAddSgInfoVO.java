@@ -20,6 +20,10 @@ public class SgKstlAddSgInfoVO {
      */
     private String eqPmJc;
     /**
+     * 卫标分类
+     */
+    private String eqFlId;
+    /**
      * 设备品名ID
      */
     private String eqPmId;

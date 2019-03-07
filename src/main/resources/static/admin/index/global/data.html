@@ -91,11 +91,13 @@
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index); //再执行关闭
     }
+    var dataD  = JSON.parse(JSON.stringify({ "key" : $key}));
     subUp({
         url: $url_cols,
         type: "POST",
-        data: {key: $key},
+        data: dataD,
         success: function (res) {
+            console.log(res);
             if (res.code !== 0) {
                 putMsg({
                     alert: "数据获取失败，请重试！",
@@ -146,9 +148,8 @@
                             pageName: 'pageNum',
                             limitName: 'pageSize'
                         }
-                        , where: {
-                            key: $key
-                        }
+                        , where: dataD
+                        , limits : [15]
                         , parseData: function (res) { //res 即为原始返回的数据
                             //var dataS = res.data.list || res.data.data || res.data;
                             return {

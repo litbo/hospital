@@ -89,4 +89,8 @@ public interface ZhiduDao {
     List<SZhiduzhizeZt> listZdztDescByZtid(Integer zdId);
     @SelectProvider(type = ZhiDuProvider.class,method = "listZdsByTimeAndZdNameAndZt")
     List<SZhidu> listZdsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("zdName") String zdName, @Param("zdZt")String zdZt);
+    @Select("select * from s_zhidu where zd_id=#{id}")
+    SZhidu getZdById(String id);
+
+    void updateZhiduZdzt(Integer zdId, int i);
 }

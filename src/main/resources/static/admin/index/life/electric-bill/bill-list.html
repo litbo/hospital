@@ -56,11 +56,13 @@
                     <!--</select>-->
                     <!--</div>-->
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="category" lay-filter="aihao">
-                            <option value="" selected>全部分类</option>
-                            <option value="68">医学类装备</option>
-                            <option value="-68">非医学类装备</option>
-                        </select>
+                        <label>
+                            <select name="category" lay-filter="aihao">
+                                <option value="" selected>全部分类</option>
+                                <option value="68">医学类装备</option>
+                                <option value="-68">非医学类装备</option>
+                            </select>
+                        </label>
                     </div>
                     <!--<div class="layui-inline xs-100 mar10-0 pad0-10">-->
                     <!--<select name="interest" lay-filter="aihao">-->
@@ -116,9 +118,9 @@
                         , {field: 'eqGg', title: '规格', minWidth: 100}
                         , {field: 'eqXh', title: '型号', minWidth: 100}
                         , {field: 'eqBmName', title: '所在科室', minWidth: 200}
-                        , {field: 'eqTzlb', title: '台账类别', minWidth: 200}
+                        , {field: 'eqTzlb', title: '台账类别', minWidth: 180}
                         , {field: 'eqQysj', title: '设备启用时间', minWidth: 180}
-                        , {field: 'eqSynx', title: '使用年限', minWidth: 60}
+                        , {field: 'eqSynx', title: '使用年限', minWidth: 200}
                         , {field: 'state', title: '是否在用状态', minWidth: 130}
                     ]]
                     , url: "/lifeManage/selectEquipmentAccount"

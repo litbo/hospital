@@ -13,6 +13,8 @@ import com.litbo.hospital.supervise.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +32,12 @@ public class ZhiduServiceImpl implements ZhiduService {
     }
 
     @Override
+    public SZhidu getZdById(String id) {
+
+        return zhiduDao.getZdById(id);
+    }
+
+    @Override
     public PageInfo listZdsByZdZt(int pageNum, int pageSize, String zdZt) {
         PageHelper.startPage(pageNum,pageSize);
         List<SZhidu> date =  zhiduDao.listZdsByZdZt(zdZt);
@@ -37,8 +45,17 @@ public class ZhiduServiceImpl implements ZhiduService {
     }
 
     @Override
-    public PageInfo listZdsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String zdName, String zdZt) {
+    public PageInfo listZdsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String zdName, String zdZt)throws  Exception {
         PageHelper.startPage(pageNum,pageSize);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(endTime!=null && !endTime.equals("")){
+            Date date = sdf.parse(endTime);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, 1);
+            endTime=sdf.format(cal.getTime()).toString();
+        }
+
         List<SZhidu> date =  zhiduDao.listZdsByTimeAndZdNameAndZt(startTime,endTime,zdName,zdZt);
         return new PageInfo(date);
     }
@@ -115,7 +132,14 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     @Override
     public void submit(ZhiduSubmitVO zhiduSubmitVO) {
-        SZhidu  zd = zhiduSubmitVO.getsZhidu();
+
+        SZhidu zd = new SZhidu();
+        zd.setZdName(zhiduSubmitVO.getZdName());
+        zd.setCreateTime(zhiduSubmitVO.getCreateTime());
+        zd.setZdContent(zhiduSubmitVO.getZdContent());
+        zd.setUserId(zhiduSubmitVO.getUserId());
+        zd.setBmId(zhiduSubmitVO.getBmId());
+
         //填充信息
         zd.setZdZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         zd.setSyTianshu(0);  //试用时间
@@ -151,13 +175,19 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     @Override
     public void reSubmit(ZhiduSubmitVO zhiduSubmitVO) {
+        SZhidu zd = new SZhidu();
+        zd.setZdName(zhiduSubmitVO.getZdName());
+        zd.setCreateTime(zhiduSubmitVO.getCreateTime());
+        zd.setZdContent(zhiduSubmitVO.getZdContent());
+        zd.setUserId(zhiduSubmitVO.getUserId());
+        zd.setBmId(zhiduSubmitVO.getBmId());
         //判断是否是在使用期修改
 //        SZhidu gzd = zhiduDao.getZdByZdId(zhiduSubmitVO.getsZhidu().getZdId());
 //        if(gzd.getZdZt()==ZdztEnumProcess.ZD__ZT_SY.getCode()){//试用期修改
 //
 //        }
         //更新制度信息
-        SZhidu  zd = zhiduSubmitVO.getsZhidu();
+
         //填充信息
         zd.setZdZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         zd.setSyTianshu(0);  //试用时间
@@ -197,15 +227,6 @@ public class ZhiduServiceImpl implements ZhiduService {
     @Override
     public void submitShMsg(ShMsgVO shMsgVO) {     // 审核提交  先更新  然后根据审核状态添加的状态
 
-//        SZhiduzhizeZt sZhiduzhizeZt = new SZhiduzhizeZt();
-//        //组装状态
-//        sZhiduzhizeZt.setZtId(shMsgVO.getZtId());
-//        sZhiduzhizeZt.setZtCzzt(shMsgVO.getZtCzzt());
-//        sZhiduzhizeZt.setZtDate(shMsgVO.getZtDate());
-//        sZhiduzhizeZt.setZtShyj(shMsgVO.getZtShyj());
-//        //更新状态
-//        zhiduDao.updateZdzt(sZhiduzhizeZt);
-        //更新状态
         updateZdZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),shMsgVO.getZtDate(),shMsgVO.getZtShyj());
 
         if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT_TG.getCode() && shMsgVO.getNextShrId()!=null){   //审核通过且继续审核
@@ -232,6 +253,7 @@ public class ZhiduServiceImpl implements ZhiduService {
 //            zhiduDao.setZhiDuZt(shMsgVO.getZdId(),"0",0);
             //更新制度状态 为0未通过
             insertZdZt(shMsgVO.getZdId(),null,false);
+            zhiduDao.setZhiDuZt(shMsgVO.getZdId(),ZdztEnumProcess.ZD__ZT_SHSB.getCode(),0);
         }
 
     }

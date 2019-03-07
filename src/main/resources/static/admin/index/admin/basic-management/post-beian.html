@@ -31,13 +31,10 @@
     <div class="hidden-xs"  id="moreBar">
         <span>备案日期：</span>
         <div class="layui-input-inline">
-            <input type="text"  id="date1" name="date1" lay-verify="date" autocomplete="off" class="layui-input">
+            <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="编号"  autocomplete="off">
-        </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="名称"  autocomplete="off">
+            <input class="layui-input" name="search" placeholder="岗位职责名称"  autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
@@ -47,50 +44,15 @@
 
 
 <script>
-    // addTable ={
-    //     table:{
-    //         cols: [[ //表头
-    //             {checkbox:true,fixed:true}
-    //             , {field: 'post-number', title: '岗位职责编号', width:'30%',minWidth: 200,sort:true}
-    //             , {field: 'post-name', title: '岗位职责名称', minWidth: 150}
-    //             , {field: 'beiandate', title: '备案日期', minWidth: 150,sort:true}
-    //         ]]
-    //         , "data": [
-    //             {
-    //                 "post-number":"",
-    //                 "post-name":"",
-    //                 "beiandate":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":"",
-    //                 "beiandate":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":"",
-    //                 "beiandate":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":"",
-    //                 "beiandate":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":"",
-    //                 "beiandate":""
-    //             }]
-    //         , done: function (obj) {
-    //             tableFunc({
-    //                 "obj":obj
-    //             })
-    //         }
-    //     },
-    //     date :{
-    //         elem : "#date1",
-    //         type : "datetime"
-    //     }
-    // }
 
     renderMod = {
-
+        form:{
+            date :{
+                elem : "#date",
+                type : "datetime",
+                range:"~"
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
@@ -118,7 +80,7 @@
                 , done: function (obj) {
 
                 },date :{
-                    elem : "#date1",
+                    elem : "#date",
                     type : "datetime"
                 }
             },

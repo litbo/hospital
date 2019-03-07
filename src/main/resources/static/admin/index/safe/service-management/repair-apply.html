@@ -142,13 +142,7 @@
                     data:{name:"abc"}
                 },
                 before:function(data){
-                    console.log(data);
-                    for(var i=0;i<data.field.length;i++){
-                        if(data.field[i] === ""){
-                            layer.alert("请确认您填写的信息！");
-                	return false;
-                        }
-                    }
+
                 }
             }
         },
