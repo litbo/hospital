@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,13 +79,14 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
             sqcVO.setRepairCosts(sgQueryCountVO.getRepairCosts());
 
             try {
-                sqcVO.setUseYears(TimeAgoUtils.format(new SimpleDateFormat("yyyy-MM-dd").parse(sqcVO.getUseYears())));
+                //使用年数
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sqcVO.getUseYears());
+                sqcVO.setUseYears(TimeAgoUtils.compareTime(date));
+                //保修状态
             } catch (ParseException | NullPointerException e) {
                 System.out.println("没有查询到时间");
-//                e.printStackTrace();
             }
-            //折旧年限固定值为5
-            sqcVO.setDepreciationYears("5");
+            sqcVO.setDepreciationYears("5"); //折旧年限固定值
 
         }
         return new PageInfo<>(sgQueryCountVOS);

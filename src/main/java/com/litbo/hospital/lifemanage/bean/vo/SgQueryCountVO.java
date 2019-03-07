@@ -64,12 +64,11 @@ public class SgQueryCountVO {
     /**
      * 资产状态
      */
-    private String eqBxqx;
+    private String eqSyzt;
     /**
      * 保修状态
      */
-    private String eqSyzt;
-
+    private String eqBxqx;
     /**
      * 所在科室
      */

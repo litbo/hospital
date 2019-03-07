@@ -105,6 +105,7 @@ public class SgCheckSqlProvider {
             if (StringUtils.isNotBlank(planUser)){
                 WHERE(" dbo.sg_plan.user_id = #{planUser,jdbcType=VARCHAR}");
             }
+            WHERE("dbo.sg_check.user_id IS NOT NULL");
 
         }}.toString();
     }
