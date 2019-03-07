@@ -72,11 +72,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修商</label>
                 <div class="layui-input-block">
-                    <select name="wxsId">
-                        <option>bbb</option>
-                        <option>111</option>
-                        <option>222</option>
-                    </select>
+                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectWxs">选择</button>
+                    <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
                 </div>
             </div>
             <div class="layui-form-item">
@@ -273,7 +271,7 @@
                 form:{
                     url:"/fwht/add",
                     type:"POST",
-                    data:["id","htName","htTime","htLx","htPrice","wxsId","heWxsdb","htYfdb","htZffs",
+                    data:["id","htName","htTime","htLx","htPrice","sbcsId","heWxsdb","htYfdb","htZffs",
                         "htJfly","htBxksTime","htBxjsTime","htXyTime","htBxfw","htHpjf","htFjurl","eqId","htMs",],
                     success:function(res){
 
@@ -285,14 +283,22 @@
             }
         },
         bind: {
-            selectItem: {
+            selectItem: [{
                 elem: "#selectData",
                 cb: "/benefical/select/listSelectCols",
                 db: "/benefical/select/listSelect",
                 name: "dtdt",
                 key: "eq",
                 data: formData
-            }
+            },
+            {
+                elem: "#selectWxs",
+                cb: "/supervise/csgl/eqcsTitles",
+                db: "/supervise/csgl/listEqCs",
+                name: "dtdt",
+                key: "bm",
+                data:formData
+            }]
         }
     }
 </script>

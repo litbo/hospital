@@ -16,14 +16,14 @@ import java.util.List;
 public interface FwHtDao {
 
     @Insert("insert into fw_ht (id, ht_name, ht_time, \n" +
-            "      ht_lx, ht_price, wxs_id, \n" +
+            "      ht_lx, ht_price, sbcs_id, \n" +
             "      he_wxsdb, ht_yfdb, ht_zffs, \n" +
             "      ht_jfly, ht_bxks_time, ht_bxjs_time, \n" +
             "      ht_xy_time, ht_bxfw, ht_hpjf, \n" +
             "      ht_fjURL, eq_id, ht_status, \n" +
             "      ht_ms)\n" +
             "    values (#{id,jdbcType=VARCHAR}, #{htName,jdbcType=VARCHAR}, #{htTime,jdbcType=TIMESTAMP}, \n" +
-            "      #{htLx,jdbcType=VARCHAR}, #{htPrice,jdbcType=DECIMAL}, #{wxsId,jdbcType=INTEGER}, \n" +
+            "      #{htLx,jdbcType=VARCHAR}, #{htPrice,jdbcType=DECIMAL}, #{sbcsId,jdbcType=INTEGER}, \n" +
             "      #{heWxsdb,jdbcType=VARCHAR}, #{htYfdb,jdbcType=VARCHAR}, #{htZffs,jdbcType=VARCHAR}, \n" +
             "      #{htJfly,jdbcType=VARCHAR}, #{htBxksTime,jdbcType=TIMESTAMP}, #{htBxjsTime,jdbcType=TIMESTAMP}, \n" +
             "      #{htXyTime,jdbcType=INTEGER}, #{htBxfw,jdbcType=VARCHAR}, #{htHpjf,jdbcType=INTEGER}, \n" +
@@ -43,7 +43,9 @@ public interface FwHtDao {
             "dbo.fw_ht AS ht ,\n" +
             "dbo.eq_cs AS cs\n" +
             "WHERE\n" +
-            "ht.wxs_id = cs.sbcs_id")
+            "ht.sbcs_id = cs.sbcs_id")
     public List<HtVo> getAllFwHt();
+
+
 
 }
