@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>综合统计</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline {
+            width: 150px;
+        }
+
+        .layui-field-title {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="" lay-filter="form">
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <label>
+                            <select name="" lay-filter="">
+                                <option value="">医疗设备分户统计报表</option>
+                                <option value="">呵呵呵</option>
+                                <option value="">哈哈哈</option>
+                                <option value="">嘿嘿嘿</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10" pane>
+                        <label>
+                            <select name="" lay-filter="">
+                                <option value="">年报</option>
+                                <option value="">季报</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <label>
+                            <select name="" lay-filter="">
+                                <option value="">2019</option>
+                                <option value="">2018</option>
+                                <option value="">2017</option>
+                                <option value="">2016</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">
+                            查找
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script>
+    renderMod = {
+        form:{
+            date:{
+                elem:'#date',
+                type:'datetime',
+                range:'~'
+            }
+        },
+        addTable:{
+            table: {
+                elem: "#table"
+                , height: 'full-75'
+                , cols: [[ //表头
+                    {field: 'eqBmName', title: '分户', minWidth: 200}
+                    , {field: 'eqSbbh', title: '期初数量', minWidth: 200,sort: true}
+                    , {field: 'eqName', title: '新增数量', minWidth: 200, sort: true}
+                    , {field: 'eqYq', title: '减少数量', minWidth: 200, sort: true}
+                    , {field: 'eqGg', title: '期末数量', minWidth: 200, sort: true}
+
+                ]]
+                , url: "/lifeManage/selectEquipmentAccount"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , where: {}
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.size //总数据数
+                    }
+                }
+
+            }
+            , reSet: {
+                url: "",
+                type: "reload",
+                data: ["",""]
+            }
+            ,form: {
+                val: {
+                    filter: "form",
+                    select: [
+                        {
+                            filter: "bmId",
+                            ids: "bmId",
+                            text: "bmName",
+                            url: ""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+</script>
+</body>
+
+</html>
