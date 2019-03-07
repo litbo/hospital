@@ -67,7 +67,7 @@
                 , {field: 'model', title: '余额', minWidth: 150,sort:true}
                 , {title:'',align:'center',minWidth:100,toolbar:'#bar'}
             ]]
-           , url:"eq/listShowEqs"
+           , url:""
            , request:{
                pageName : 'pageNum',
                limitName : 'pageSize'
@@ -81,15 +81,7 @@
                }
            }
             , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":{
-                        tool:"toolbar",
-                        title:"数据查找",
-                        event:"dataSearch",
-                        content:$("#hideXs")
-                    }
-                })
+
             }
         }
     }

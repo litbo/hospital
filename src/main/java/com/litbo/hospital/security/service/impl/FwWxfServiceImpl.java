@@ -6,6 +6,7 @@ import com.litbo.hospital.security.dao.FwPjqlDao;
 import com.litbo.hospital.security.dao.FwWxfDao;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwWxfService;
+import com.litbo.hospital.security.vo.FwIdSelectVo;
 import com.litbo.hospital.security.vo.FwNameVo;
 import com.litbo.hospital.security.vo.PjVo;
 import com.litbo.hospital.security.vo.WxfIndexVo;
@@ -31,8 +32,8 @@ public class FwWxfServiceImpl implements FwWxfService {
     private FwPjqlDao fwPjqlDao;
 
     @Override
-    public List<String> wxfGetEq(String userId) {
-        List<String> list = fwWxfDao.wxfGetEq(userId);
+    public List<FwIdSelectVo> wxfGetEq(String userId) {
+        List<FwIdSelectVo> list = fwWxfDao.wxfGetEq(userId);
         return list;
     }
 

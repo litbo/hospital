@@ -57,9 +57,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报修单<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="fwId" lay-verify="required" lay-search>
-                        <option></option>
-                        <option>11</option>
+                    <select name="fwId" lay-filter="fwId" lay-verify="required" lay-search>
                         <option></option>
                     </select>
                 </div>
@@ -128,6 +126,15 @@
     renderMod={
         form:{
             date:true,
+            val:{
+                filter:"form",
+                select:{
+                    filter:"fwId",
+                    ids:"fwId",
+                    text:"fwIdValue",
+                    url:"/wxf/wxfGetEq"
+                }
+            },
             submit:{
                 form:{
                     url:"#",

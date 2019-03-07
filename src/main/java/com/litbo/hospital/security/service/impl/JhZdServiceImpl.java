@@ -7,6 +7,7 @@ import com.litbo.hospital.security.bean.JhZd;
 import com.litbo.hospital.security.dao.JhRyLrDao;
 import com.litbo.hospital.security.dao.JhZdDao;
 import com.litbo.hospital.security.service.JhZdService;
+import com.litbo.hospital.security.vo.JhZdVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,7 @@ public class JhZdServiceImpl implements JhZdService {
      */
     public Result listJhZd(int pageNum, int pageSize, String createdate,String jhName){
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<JhZd> pageInfo = new PageInfo<>(jhZdDao.jhzdList(createdate,jhName));
+        PageInfo<JhZdVo> pageInfo = new PageInfo<>(jhZdDao.jhzdList(createdate,jhName));
         return Result.success(pageInfo);
     }
 
