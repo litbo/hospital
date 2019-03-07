@@ -2,12 +2,19 @@ package com.litbo.hospital.lifemanage.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.TimeAgoUtils;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
+import com.litbo.hospital.lifemanage.bean.vo.SgQueryCountVO;
 import com.litbo.hospital.lifemanage.dao.EquipmentAccountMapper;
 import com.litbo.hospital.lifemanage.service.EquipmentAccountService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * EquipmentAccountServiceImpl
@@ -38,7 +45,50 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
         if (StringUtils.isNotBlank(equipmentPinyinCode)) {
             equipmentPinyinCode = "%"+equipmentPinyinCode+"%";
         }
+        if (StringUtils.isNotBlank(departmentCoding)) {
+            departmentCoding = "%"+departmentCoding+"%";
+        }
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(equipmentAccountMapper.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber));
+    }
+
+    /**
+     * 科室设备综合查询
+     *
+     * @param state 状态
+     * @param equipmentPinyinCode 设备拼音码
+     * @param departmentCoding 院内编码
+     * @param pageNum 当前页数
+     * @param pageSize 每页显示的条数
+     * @return PageInfo
+     */
+    @Override
+    public PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding, Integer pageNum, Integer pageSize) {
+        if (StringUtils.isNotBlank(equipmentPinyinCode)) {
+            equipmentPinyinCode = "%"+equipmentPinyinCode+"%";
+        }
+        if (StringUtils.isNotBlank(departmentCoding)) {
+            departmentCoding = "%"+departmentCoding+"%";
+        }
+        PageHelper.startPage(pageNum, pageSize);
+        List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(state, equipmentPinyinCode, departmentCoding);
+
+        for (SgQueryCountVO sqcVO :sgQueryCountVOS){
+            SgQueryCountVO sgQueryCountVO = equipmentAccountMapper.selectKsEqTwo(sqcVO.getEqId());
+            sqcVO.setRepairTimes(sgQueryCountVO.getRepairTimes());
+            sqcVO.setRepairCosts(sgQueryCountVO.getRepairCosts());
+
+            try {
+                //使用年数
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sqcVO.getUseYears());
+                sqcVO.setUseYears(TimeAgoUtils.compareTime(date));
+                //保修状态
+            } catch (ParseException | NullPointerException e) {
+                System.out.println("没有查询到时间");
+            }
+            sqcVO.setDepreciationYears("5"); //折旧年限固定值
+
+        }
+        return new PageInfo<>(sgQueryCountVOS);
     }
 }

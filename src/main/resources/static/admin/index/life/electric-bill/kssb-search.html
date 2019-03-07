@@ -46,11 +46,11 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="" lay-filter="form">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="" placeholder="设备名称拼音码" autocomplete="off">
+                        <input class="layui-input" name="equipmentPinyinCode" placeholder="设备名称拼音码" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
-                            <select name="" lay-filter="">
+                            <select name="state" lay-filter="">
                                 <option value="">全部</option>
                                 <option value="" selected>在用</option>
                                 <option value="">待报废</option>
@@ -67,7 +67,7 @@
                         </label>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" class="layui-input" placeholder="院内编码" autocomplete="off">
+                        <input type="text" name="departmentCoding" class="layui-input" placeholder="院内编码" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
@@ -127,21 +127,21 @@
             elem: "#table"
             , height: 'full-75'
             , cols: [[ //表头
-                {field: 'eqBmName', title: '院内编码', minWidth: 100, sort: true}
-                , {field: 'eqSbbh', title: '设备名称', minWidth: 100}
-                , {field: 'eqName', title: '型号规格', minWidth: 100}
-                , {field: 'eqYq', title: '启用日期', minWidth: 100}
-                , {field: 'eqGg', title: '设备类别', minWidth: 100}
-                , {field: 'eqXh', title: '维修次数', minWidth: 200, sort: true}
-                , {field: 'eqQysj', title: '累计维修费', minWidth: 100, sort: true}
-                , {field: 'state', title: '使用年数', minWidth: 100}
-                , {field: 'state', title: '折旧年限', minWidth: 100}
-                , {field: 'state', title: '累计折旧额', minWidth: 150, sort: true}
-                , {field: 'state', title: '资产状态', minWidth: 100}
-                , {field: 'state', title: '保修状态', minWidth: 100}
-
+                {field: 'eqZcbh', title: '院内编码', minWidth: 100, sort: true}
+                , {field: 'eqName', title: '设备名称', minWidth: 100}
+                , {field: 'eqGg', title: '型号', minWidth: 100}
+                , {field: 'eqXh', title: '规格', minWidth: 100}
+                , {field: 'eqQysj', title: '启用日期', minWidth: 100}
+                , {field: 'eqCxflName', title: '设备类别', minWidth: 100}
+                , {field: 'repairTimes', title: '维修次数', minWidth: 200, sort: true}
+                , {field: 'repairCosts', title: '累计维修费', minWidth: 100, sort: true}
+                , {field: 'useYears', title: '使用年数', minWidth: 100}
+                , {field: 'depreciationYears', title: '折旧年限', minWidth: 100}
+                , {field: 'accumulatedDepreciation', title: '累计折旧额', minWidth: 150, sort: true}
+                , {field: 'eqSyzt', title: '资产状态', minWidth: 100}
+                , {field: 'eqBxqx', title: '保修状态', minWidth: 100}
             ]]
-            , url: "/lifeManage/selectEquipmentAccount"
+            , url: "/lifeManage/selectKsEq"
             , method: "POST"
             , request: {
                 pageName: 'pageNum',
@@ -159,7 +159,7 @@
 
         }
         , reSet: {
-            url: "",
+            url: "/lifeManage/selectKsEq",
             type: "reload",
             data: ["",""]
         }

@@ -38,30 +38,76 @@ public class EquipmentAccountProvider {
         sql.WHERE("dbo.eq_info.eq_sbbh IS NOT NULL AND\n" +
                 "dbo.eq_info.eq_zcbh IS NOT NULL AND\n" +
                 "dbo.eq_info.eq_tzlb IS NOT NULL\n");
-        if (StringUtils.isNotBlank(category)){
+        if (StringUtils.isNotBlank(category)) {
             //医学装备 68是 非68不是
-            if (category.equals("68")){
+            if (category.equals("68")) {
                 sql.WHERE("LEFT(dbo.eq_info.eq_pm_id,2) = 68");
-            }else{
+            } else {
                 sql.WHERE("LEFT(dbo.eq_info.eq_pm_id,2) <> 68");
             }
         }
-        if (StringUtils.isNotBlank(state)){
+        if (StringUtils.isNotBlank(state)) {
             sql.WHERE("dbo.eq_info.eq_syzt = #{state,jdbcType=VARCHAR}");
         }
-        if (StringUtils.isNotBlank(departmentId)){
+        if (StringUtils.isNotBlank(departmentId)) {
             sql.WHERE("dbo.eq_info.eq_bmid = #{departmentId,jdbcType=VARCHAR}");
         }
-        if (StringUtils.isNotBlank(equipmentPinyinCode)){
+        if (StringUtils.isNotBlank(equipmentPinyinCode)) {
             sql.WHERE("dbo.eq_info.eq_pym like #{equipmentPinyinCode,jdbcType=VARCHAR}");
         }
-        if (StringUtils.isNotBlank(departmentCoding)){
-            sql.WHERE("dbo.eq_info.eq_zcbh = #{departmentCoding,jdbcType=VARCHAR}");
+        if (StringUtils.isNotBlank(departmentCoding)) {
+            sql.WHERE("dbo.eq_info.eq_zcbh like #{departmentCoding,jdbcType=VARCHAR}");
         }
 
-        if (StringUtils.isNotBlank(equipmentNumber)){
+        if (StringUtils.isNotBlank(equipmentNumber)) {
             sql.WHERE("dbo.eq_info.eq_sbbh = #{equipmentNumber,jdbcType=VARCHAR}");
         }
         return sql.toString();
+    }
+
+    /**
+     * 科室设备综合查询
+     *
+     * @param state               状态
+     * @param equipmentPinyinCode 设备拼音码
+     * @param departmentCoding    院内编码
+     * @return sql
+     */
+    public String selectKsEq(String state, String equipmentPinyinCode, String departmentCoding) {
+        SQL sql = new SQL();
+        sql.SELECT("dbo.eq_info.eq_id,\n" +
+                "dbo.eq_info.eq_zcbh,\n" +
+                "dbo.eq_info.eq_sbbh,\n" +
+                "dbo.eq_info.eq_name,\n" +
+                "dbo.eq_info.eq_gg,\n" +
+                "dbo.eq_info.eq_xh,\n" +
+                "dbo.eq_info.eq_qysj AS useYears,\n" +
+                "dbo.eq_cxfl.eq_cxfl_name,\n" +
+                "dbo.eq_info.eq_bxqx,\n" +
+                "dbo.eq_info.eq_syzt,\n" +
+                "dbo.s_bm.bm_name,\n" +
+                "dbo.eq_cs.sbcs_name");
+        sql.FROM("dbo.eq_info");
+        sql.INNER_JOIN("dbo.eq_cxfl ON dbo.eq_info.eq_cxfl_id = dbo.eq_cxfl.eq_cxfl_id\n" +
+                "LEFT JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+                "LEFT JOIN dbo.eq_cs ON dbo.eq_info.sbcs_id_scs = dbo.eq_cs.sbcs_id");
+        if (StringUtils.isNotBlank(state)) {
+            sql.WHERE("dbo.eq_info.eq_syzt = #{state,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(equipmentPinyinCode)) {
+            sql.WHERE("dbo.eq_info.eq_pym like #{equipmentPinyinCode,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(departmentCoding)) {
+            sql.WHERE("dbo.eq_info.eq_zcbh like #{departmentCoding,jdbcType=VARCHAR}");
+        }
+
+        return sql.toString();
+    }
+
+    public static void main(String[] args) {
+        EquipmentAccountProvider s = new EquipmentAccountProvider();
+        String s1 = s.selectKsEq(null, null, null);
+        System.out.println(s1);
+
     }
 }
