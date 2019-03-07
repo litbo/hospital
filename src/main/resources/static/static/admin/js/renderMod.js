@@ -319,6 +319,7 @@ $(function () {
                     , resValue = {};//重载值
                 //绑定按钮事件
                 active[type] = function () {
+                    resValue = {};
                     //动态获取表单数据
                     if(Type(res.data) === "array"){
                         for(var x=0;x<res.data.length;x++){
@@ -337,7 +338,6 @@ $(function () {
                                 resValue[name] = res.where[name];
                             }
                         }
-                        //console.log(resValue);
                     }
                     //时间选择器数据拆分
                     if(res.dat){
@@ -362,13 +362,47 @@ $(function () {
                     if(res.add === true && res.add.tableId !== undefined){
                         nData = table.cache(res.add.tableId);
                     }
-                    //执行重载
+                    var toEnd = false;
+                    subUp({
+                        url:res.url,
+                        type:res.method || "POST",
+                        async:false,
+                        data:resValue,
+                        success:function(res){
+                            if(res.code === 0){
+                                if(res.data.list.length === 0){
+                                    layer.msg("查无数据！");
+                                    table.reload(res.tid || args_table.id,
+                                        {
+                                            data:[],
+                                            url:false
+                                        })
+                                }else{
+                                    layer.msg("查找成功！");
+                                    table.reload(res.tid || args_table.id,
+                                        {
+                                            data:res.data.list,
+                                            url:false
+                                        })
+                                }
+
+                            }else{
+                                layer.msg("查找失败，请重试！");
+                                toEnd = true;
+                            }
+                        }
+                    });
+                    if(toEnd){
+                        return false;
+                    }
+                    /*//执行重载
                     table.reload(
                         res.tid || args_table.id,
                         {
                             url: res.url
                             , where: resValue
-                        });
+                        });*/
+                    form.render();
                     //还原重载前的数据
                     if(res.add === true && res.add.tableId !== undefined){
                         cData = table.cache(res.add.tableId);

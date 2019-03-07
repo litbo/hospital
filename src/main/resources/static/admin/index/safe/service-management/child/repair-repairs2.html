@@ -36,6 +36,7 @@
 <div class="layui-container">
     <form class="layui-form layui-form-pane">
         <div class="layui-row">
+
             <div class="layui-collapse" lay-accordion>
                 <!--模块1-->
                 <div class="layui-colla-item">
@@ -132,7 +133,6 @@
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6">
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">紧急性</label>
                                         <div class="layui-input-block">
@@ -143,7 +143,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -208,6 +207,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-xs-12">
+                <div class="layui-form-item" style="margin:20px 0;">
+                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+                </div>
+            </div>
         </div>
     </form>
 </div>
@@ -230,27 +235,6 @@
                     format:'yyyy-MM-dd HH:mm:ss'
                 }
             ]
-        },
-        table:{
-            table:{
-                cols:[[
-                    {type:"checkbox"}
-                    , {field:"xx",title:"配件编号", minWidth: 150}
-                    ,{field: 'kmValue', title: '配件名称', minWidth: 150}
-                    ,{field: 'kmValue', title: '型号规格', minWidth: 150}
-                    ,{field: 'kmValue', title: '报价(可编辑)',edit:true, minWidth: 150}
-                    ,{field: 'kmValue', title: '成交价(可编辑)',edit:true, minWidth: 150}
-                    ,{field: 'kmValue', title: '单位', minWidth: 150}
-                    ,{field: 'kmValue', title: '数量(可编辑)',edit:true, minWidth: 150}
-                ]]
-                , toolbar:false
-                , page:false
-                , height: "200"
-                , data: []
-                , text:{
-                    none:"请点击上方按钮添加数据！"
-                }
-            }
         }
     }
 </script>
