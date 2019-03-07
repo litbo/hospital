@@ -79,10 +79,9 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
 
             try {
                 sqcVO.setUseYears(TimeAgoUtils.format(new SimpleDateFormat("yyyy-MM-dd").parse(sqcVO.getUseYears())));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }catch (NullPointerException ignored){
-
+            } catch (ParseException | NullPointerException e) {
+                System.out.println("没有查询到时间");
+//                e.printStackTrace();
             }
             //折旧年限固定值为5
             sqcVO.setDepreciationYears("5");

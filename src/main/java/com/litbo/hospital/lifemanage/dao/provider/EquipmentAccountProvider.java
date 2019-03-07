@@ -77,15 +77,20 @@ public class EquipmentAccountProvider {
         SQL sql = new SQL();
         sql.SELECT("dbo.eq_info.eq_id,\n" +
                 "dbo.eq_info.eq_zcbh,\n" +
+                "dbo.eq_info.eq_sbbh,\n" +
                 "dbo.eq_info.eq_name,\n" +
                 "dbo.eq_info.eq_gg,\n" +
                 "dbo.eq_info.eq_xh,\n" +
                 "dbo.eq_info.eq_qysj AS useYears,\n" +
                 "dbo.eq_cxfl.eq_cxfl_name,\n" +
                 "dbo.eq_info.eq_bxqx,\n" +
-                "dbo.eq_info.eq_syzt");
+                "dbo.eq_info.eq_syzt,\n" +
+                "dbo.s_bm.bm_name,\n" +
+                "dbo.eq_cs.sbcs_name");
         sql.FROM("dbo.eq_info");
-        sql.INNER_JOIN("dbo.eq_cxfl ON dbo.eq_info.eq_cxfl_id = dbo.eq_cxfl.eq_cxfl_id");
+        sql.INNER_JOIN("dbo.eq_cxfl ON dbo.eq_info.eq_cxfl_id = dbo.eq_cxfl.eq_cxfl_id\n" +
+                "LEFT JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+                "LEFT JOIN dbo.eq_cs ON dbo.eq_info.sbcs_id_scs = dbo.eq_cs.sbcs_id");
         if (StringUtils.isNotBlank(state)) {
             sql.WHERE("dbo.eq_info.eq_syzt = #{state,jdbcType=VARCHAR}");
         }
@@ -97,5 +102,12 @@ public class EquipmentAccountProvider {
         }
 
         return sql.toString();
+    }
+
+    public static void main(String[] args) {
+        EquipmentAccountProvider s = new EquipmentAccountProvider();
+        String s1 = s.selectKsEq(null, null, null);
+        System.out.println(s1);
+
     }
 }

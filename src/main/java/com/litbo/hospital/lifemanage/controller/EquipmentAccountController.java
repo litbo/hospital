@@ -62,7 +62,6 @@ public class EquipmentAccountController {
             @RequestParam(name = "departmentCoding", required = false) String departmentCoding,
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-
         return Result.success(equipmentAccountService.selectKsEq(state,equipmentPinyinCode,departmentCoding,pageNum,pageSize));
     }
 }

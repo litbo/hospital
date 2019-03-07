@@ -14,6 +14,10 @@ public class SgQueryCountVO {
      */
     private String eqId;
     /**
+     * 设备编号
+     */
+    private String eqSbbh;
+    /**
      * 院内编号  资产编号
      */
     private String eqZcbh;
@@ -66,4 +70,12 @@ public class SgQueryCountVO {
      */
     private String eqSyzt;
 
+    /**
+     * 所在科室
+     */
+    private String bmName;
+    /**
+     * 生产商
+     */
+    private String sbcsName;
 }
