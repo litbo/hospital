@@ -1,8 +1,7 @@
 package com.litbo.hospital;
 
 import com.litbo.hospital.security.dao.FwBaoxiuDao;
-import com.litbo.hospital.security.dao.FwWxfDao;
-import com.litbo.hospital.security.vo.FwNameVo;
+import com.litbo.hospital.security.dao.JhZdDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +13,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class HospitalApplicationTests {
 
     @Autowired
-    private FwWxfDao fwWxfDao;
-
-    @Autowired
     private FwBaoxiuDao fwBaoxiuDao;
 
-    @Test
-    public void test(){
-        FwNameVo fwNameVO = fwBaoxiuDao.findFwNameVO("201812000001", "1615925008");
-        System.out.println(fwNameVO);
-    }
+    @Autowired
+    private JhZdDao jhZdDao;
 
+    @Test
+    public void contextLoads() {
+        jhZdDao.jhzdList(null, null);
+    }
 }

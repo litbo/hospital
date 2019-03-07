@@ -11,8 +11,17 @@ public class JhZdProvider {
     public String findList(String createdate,String jhName){
         return new SQL(){
             {
-                SELECT("*");
-                FROM("jh_zd");
+                SELECT("jh.jh_name,\n" +
+                        "jh.px_addr,\n" +
+                        "jh.jh_pxlx,\n" +
+                        "jh.jh_pxxz,\n" +
+                        "jh.jh_kstime,\n" +
+                        "jh.jh_jstime,\n" +
+                        "emp.user_xm,\n" +
+                        "jh.id,\n" +
+                        "jh.user_id");
+                FROM("jh_zd as jh,s_emp as emp");
+                WHERE("jh.user_id = emp.user_id");
                 if(createdate != null){
                     WHERE("jh_kstime>#{createdate}");
                 }

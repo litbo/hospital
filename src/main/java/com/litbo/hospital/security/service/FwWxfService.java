@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.service;
 
 import com.litbo.hospital.security.bean.FwWxf;
+import com.litbo.hospital.security.vo.FwIdSelectVo;
 import com.litbo.hospital.security.vo.WxfIndexVo;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface FwWxfService {
 
-    public List<String> wxfGetEq(String userId);
+    public List<FwIdSelectVo> wxfGetEq(String userId);
 
     /**
      * 审核
