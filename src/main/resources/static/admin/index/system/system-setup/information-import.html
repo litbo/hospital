@@ -59,21 +59,21 @@ renderMod = {
             accept:"file",
             acceptMime:"file/*",
             auto:false,
-            bindAction:"#sub",
-            field:"model",
-            choose:function(obj){
+            bindAction:"#startUploadFile",
+            field:"file",
+            /*choose:function(obj){
                 files = obj.pushFile();
                 obj.preview(function(index,file,result){
                     $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
                 })
-            },done:function(res,index,upload){
+            },*/done:function(res,index,upload){
                 console.log(arguments);
                 //layui.closeAll("loading");
-                layer.msg('上传成功！', {
+                layer.msg('导入成功！', {
                     time: 2000 //2秒关闭（如果不配置，默认是3秒）
                 });
-                $(".img_show").html("");
-                return delete files[index];
+                /*$(".img_show").html("");
+                return delete files[index];*/
             },error:function(index,upload){
                 console.log("index:"+index);
                 console.log("upload"+upload);

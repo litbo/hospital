@@ -35,21 +35,36 @@
 
 
 <script>
-    layui.use('upload',function(){
-        var upload = layui.upload;
-
-        //上传文件
-        upload.render({
-            elem:'#selectFile',
-            url:'/upload/',
-            auto:false,
-            bindAction:'#startUploadFile',
-            size:1024*40,//限制文件大小，单位kb
-            done:function(res){
-                console.log(res);
+    renderMod = {
+        form:{
+            file:{
+                elem:"#selectFile",
+                url:"/eq/importFj",
+                accept:"file",
+                acceptMime:"file/*",
+                auto:false,
+                bindAction:"#startUploadFile",
+                field:"file",
+                /*choose:function(obj){
+                    files = obj.pushFile();
+                    obj.preview(function(index,file,result){
+                        $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
+                    })
+                },*/done:function(res,index,upload){
+                    console.log(arguments);
+                    //layui.closeAll("loading");
+                    layer.msg('导入成功！', {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                    /*$(".img_show").html("");
+                    return delete files[index];*/
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
+                }
             }
-        })
-    })
+        }
+    }
 </script>
 </body>
 </html>

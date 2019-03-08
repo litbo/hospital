@@ -117,6 +117,14 @@
 <script>
     renderMod = {
         form: {
+            val:{
+              get:{
+                  url:"",
+                  data:{
+                      eqSbbh:$.getUrlParam("eqSbbh")
+                  }
+              }
+            },
             date: [
                 {
                     elem: "#findDate",
