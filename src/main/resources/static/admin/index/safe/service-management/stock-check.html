@@ -50,49 +50,38 @@
 
 
 <script>
-    addTable ={
+    renderMod ={
         table:{
-            cols: [[ //表头
-                {checkbox:true}
-                , {field: 'pjName', title: '配件名称', minWidth: 200}
-                , {field: 'pjGgxh', title: '配件类别', minWidth: 200}
-                , {field: 'pjkSl', title: '库存', minWidth: 200,sort:true}
-                , {field: 'pjbh', title: '配件编号', minWidth: 80,sort:true}
-                , {field: 'model', title: '库位', minWidth: 80}
-            ]]
-            , height: "full-25"
-            , url:"/security/pjk/listFwPjk"
-            , request:{
-                pageName : 'pageNum',
-                limitName : 'pageSize'
-            }
-            ,where:{
-            }
-            ,parseData: function(res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "data": res.data.list,//解析数据列表
-                    "count":res.data.size//页面显示的数据条数
+            table:{
+                cols: [[ //表头
+                      {field: 'pjName', title: '配件名称', minWidth: 200}
+                    , {field: 'pjGgxh', title: '配件类别', minWidth: 200}
+                    , {field: 'pjkSl', title: '库存', minWidth: 200,sort:true}
+                    , {field: 'pjbh', title: '配件编号', minWidth: 80,sort:true}
+                    , {field: 'model', title: '库位', minWidth: 80}
+                ]]
+                , url:"/security/pjk/listFwPjk"
+                , request:{
+                    pageName : 'pageNum',
+                    limitName : 'pageSize'
+                }
+                ,where:{
+                }
+                ,parseData: function(res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list,//解析数据列表
+                        "count":res.data.total//页面显示的数据条数
+                    }
+
                 }
             }
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":{
-                        tool:"toolbar",
-                        title:"数据查找",
-                        event:"dataSearch",
-                        content:$("#hideXs")
-                    }
-                })
-            }
-        },
-        date:{
-            elem:'#date'
         },
         form:{
-
+            date:{
+                elem:'#date'
+            }
         }
     };
 </script>
