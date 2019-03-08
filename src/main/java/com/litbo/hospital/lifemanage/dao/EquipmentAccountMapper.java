@@ -34,13 +34,14 @@ public interface EquipmentAccountMapper {
     /**
      * 科室设备综合查询
      *
-     * @param state 状态
+     * @param state               状态
      * @param equipmentPinyinCode 设备拼音码
-     * @param departmentCoding 院内编码
+     * @param departmentCoding    院内编码
+     * @param eqCxflId            设备分类Id
      * @return List
      */
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectKsEq")
-    List<SgQueryCountVO> selectKsEqOne(@Param("state")String state,@Param("equipmentPinyinCode") String equipmentPinyinCode,@Param("departmentCoding") String departmentCoding);
+    List<SgQueryCountVO> selectKsEqOne(@Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId);
 
     /**
      * 查询设备维修的次数和维修总金额

@@ -58,12 +58,13 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
      * @param state 状态
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding 院内编码
+     * @param eqCxflId 设备分类Id
      * @param pageNum 当前页数
      * @param pageSize 每页显示的条数
      * @return PageInfo
      */
     @Override
-    public PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding,String eqCxflId, Integer pageNum, Integer pageSize) {
         if (StringUtils.isNotBlank(equipmentPinyinCode)) {
             equipmentPinyinCode = "%"+equipmentPinyinCode+"%";
         }
@@ -71,7 +72,7 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
             departmentCoding = "%"+departmentCoding+"%";
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(state, equipmentPinyinCode, departmentCoding);
+        List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(state, equipmentPinyinCode, departmentCoding,eqCxflId);
 
         for (SgQueryCountVO sqcVO :sgQueryCountVOS){
             SgQueryCountVO sgQueryCountVO = equipmentAccountMapper.selectKsEqTwo(sqcVO.getEqId());
@@ -80,9 +81,10 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
 
             try {
                 //使用年数
-                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sqcVO.getUseYears());
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sqcVO.getEqQysj());
                 sqcVO.setUseYears(TimeAgoUtils.compareTime(date));
                 //保修状态
+
             } catch (ParseException | NullPointerException e) {
                 System.out.println("没有查询到时间");
             }
