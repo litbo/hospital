@@ -51,6 +51,7 @@ public class EquipmentAccountController {
      * @param state 状态
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding 院内编码
+     * @param eqCxflId 设备分类Id
      * @param pageNum 当前页数
      * @param pageSize 每页显示的条数
      * @return PageInfo
@@ -60,8 +61,9 @@ public class EquipmentAccountController {
             @RequestParam(name = "state", required = false) String state,
             @RequestParam(name = "equipmentPinyinCode", required = false) String equipmentPinyinCode,
             @RequestParam(name = "departmentCoding", required = false) String departmentCoding,
+            @RequestParam(name = "eqCxflId",required = false)String eqCxflId,
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        return Result.success(equipmentAccountService.selectKsEq(state,equipmentPinyinCode,departmentCoding,pageNum,pageSize));
+        return Result.success(equipmentAccountService.selectKsEq(state,equipmentPinyinCode,departmentCoding,eqCxflId,pageNum,pageSize));
     }
 }
