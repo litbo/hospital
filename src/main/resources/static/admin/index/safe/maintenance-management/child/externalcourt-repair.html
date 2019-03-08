@@ -37,23 +37,23 @@
         </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">报修单号<span class="sign">*</span></label>
+                <label class="layui-form-label">维修单号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="id" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="add">选择</button>
+                    <input type="text" name="eqId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">开票单位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="id" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="addBuild">选择</button>
+                    <input type="text" name="sbcsId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectScqy">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">发票号码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="fpHm" autocomplete="" class="layui-input" placeholder="请输入" lay-verify="required">
+                    <input type="text" name="ywfpHm" autocomplete="" lay-verify="required|number" class="layui-input" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
         </div>
@@ -61,13 +61,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">发票金额<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="fpPrice" autocomplete="" class="layui-input" placeholder="请输入" lay-verify="required">
+                    <input type="text" name="ywfpPrice" autocomplete="" lay-verify="required|number" class="layui-input" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">送达时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" id="date" class="layui-input">
+                    <input type="text" name="ywfpSdTime" id="date" lay-verify="required" class="layui-input">
                 </div>
             </div>
         </div>
@@ -92,9 +92,9 @@
             submit: {
                 filter: "submit",//可以不写
                 form: {
-                    url: "/security/fp/insertFwFp",
-                    type: "POST",
-                    data:['fpHm','fpPrice','fpSdTime','fpDh'],
+                    url: "/security/ywFp/insertFwYwFp",
+                    method: "POST",
+                    data:['eqId','sbcsId','ywfpHm','ywfpPrice','ywfpSdTime'],
                     success:function(res){
                         if(res.code === 0){
                             layer.alert("信息提交成功！",function(){
@@ -108,14 +108,20 @@
         },
         bind: {
             selectItem: [{
-                elem: "#add",
-                data:formData,
-                cb:"/baoxiu/listWxTitles",
-                db:"/baoxiu/listWx",
-                key:"dtdt",
-                name:"dtdt"
-            }],
-            delItem: "#delNew"
+                elem: "#selectData",
+                cb: "/benefical/select/listSelectCols",
+                db: "/benefical/select/listSelect",
+                name: "dtdt",
+                key: "eq",
+                data:formData
+            },{
+                elem: "#selectScqy",
+                cb: "/supervise/csgl/eqcsTitles",
+                db: "/supervise/csgl/listEqcsByX2",
+                name: "dtdt",
+                key: "scqy",
+                data:formData
+            }]
         }
     }
 </script>
