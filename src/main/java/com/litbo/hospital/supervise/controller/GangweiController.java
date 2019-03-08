@@ -36,6 +36,14 @@ public class GangweiController {
         gangweiService.deleteGwByGwId(gw_id);
         return Result.success();
     }
+
+
+    @PostMapping("/deleteGwByGwIds")
+    public Result deleteGwByGwIds(@RequestParam String[] gwIds){
+        for(String gwid:gwIds)
+            gangweiService.deleteGwByGwId(gwid);
+        return Result.success();
+    }
     @GetMapping("/listGws")
     public Result getGws(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize){

@@ -31,13 +31,13 @@ public class BmController {
     }
 
 
-    @RequestMapping("/listSelectBmsCols")
+    @PostMapping("/listSelectBmsCols")
     public Result listSelectBmsCols(@RequestParam(required = false) String key) {
         JSONArray myJsonArray = null;
         if ("checkbox".equals(key)){
             String jsonMessage = "[{'type': 'checkbox'}, " +
-                    "{field: 'bmId', title: '部门ID'}, " +
-                    "{field: 'bmName', title: '部门名称'}]";
+                    "{field: 'bmId', title: '人员ID'}, " +
+                    "{field: 'bmName', title: '人员姓名'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
         }else if ("radio".equals(key)){
             String jsonMessage = "[{'type': 'radio'}, " +
@@ -48,6 +48,9 @@ public class BmController {
         PageInfo date = new PageInfo(myJsonArray);
         return Result.success(date);
     }
+
+
+
 
     //列出所有部门信息
     @GetMapping("/listBms")
