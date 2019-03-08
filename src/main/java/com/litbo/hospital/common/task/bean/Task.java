@@ -6,7 +6,7 @@ import java.util.Date;
 @Data
 public class Task {
     private Integer id;
-    private String fbrName;
+    private String actionName;
     private String workName;
     private Date creatTime;
     private String status;

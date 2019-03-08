@@ -32,6 +32,7 @@ public class FwPjsgController {
             else
                 return Result.error(CodeMsg.PARAM_ERROR);
         }catch (Exception e){
+            e.printStackTrace();
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }

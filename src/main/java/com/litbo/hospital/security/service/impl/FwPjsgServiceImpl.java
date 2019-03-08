@@ -2,6 +2,8 @@ package com.litbo.hospital.security.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.task.bean.Task;
+import com.litbo.hospital.common.task.dao.TaskDao;
 import com.litbo.hospital.security.bean.FwPjk;
 import com.litbo.hospital.security.bean.FwPjsg;
 import com.litbo.hospital.security.bean.FwPjsgZjb;
@@ -9,6 +11,7 @@ import com.litbo.hospital.security.dao.FwPjkDao;
 import com.litbo.hospital.security.dao.FwPjsgDao;
 import com.litbo.hospital.security.dao.FwPjsgZjbDao;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
+import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwPjsgService;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
 import com.sun.tools.javadoc.Start;
@@ -29,11 +32,13 @@ public class FwPjsgServiceImpl implements FwPjsgService {
     private FwPjsgZjbDao pjsgZjbDao;
     @Autowired
     private FwPjkDao pjkDao;
+    @Autowired
+    private TaskDao taskDao;
     @Override
     @Transactional
     public int insertFwPjsg(InsertFwPjsgVo insertFwPjsgVo) {
         int res = 0;
-        FwPjsg pjsg = new FwPjsg();
+        FwPjsg pjsg = insertFwPjsgVo.getFwPjsg();
         pjsg.setSgStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());
         res = pjsgDao.insertFwPjsg(pjsg);
         List<FwPjsgZjb> fwPjsgZjbs = insertFwPjsgVo.getFwPjsgZjbs();
@@ -41,6 +46,13 @@ public class FwPjsgServiceImpl implements FwPjsgService {
             p.setPjsgId(pjsg.getId());
         }
         res = pjsgZjbDao.insertFwPjsgZjbList(fwPjsgZjbs);
+        Task task = new Task();
+        task.setCreatTime(new Date());
+        task.setWorkName("配件申购审核");
+        task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
+        task.setUrl("");
+        task.setActionName("配件申购");
+        taskDao.insertTask(task);
         return res;
     }
 
