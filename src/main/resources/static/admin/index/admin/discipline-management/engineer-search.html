@@ -71,7 +71,15 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        delTable:{
+                            id:"table",
+                            name:"gbId",
+                            param:"gbIds",
+                            url:"/kwgl/glbm/getGcsBmMSG/deleteGwByGwIds",
+                            type:"POST"
+                        }
+                    })
                 }
             },
             reSet:{

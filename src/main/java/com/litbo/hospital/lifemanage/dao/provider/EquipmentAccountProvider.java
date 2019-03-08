@@ -71,9 +71,10 @@ public class EquipmentAccountProvider {
      * @param state               状态
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding    院内编码
+     * @param eqCxflId            设备分类Id
      * @return sql
      */
-    public String selectKsEq(String state, String equipmentPinyinCode, String departmentCoding) {
+    public String selectKsEq(String state, String equipmentPinyinCode, String departmentCoding, String eqCxflId) {
         SQL sql = new SQL();
         sql.SELECT("dbo.eq_info.eq_id,\n" +
                 "dbo.eq_info.eq_zcbh,\n" +
@@ -81,11 +82,14 @@ public class EquipmentAccountProvider {
                 "dbo.eq_info.eq_name,\n" +
                 "dbo.eq_info.eq_gg,\n" +
                 "dbo.eq_info.eq_xh,\n" +
-                "dbo.eq_info.eq_qysj AS useYears,\n" +
+                "dbo.eq_info.eq_qysj,\n" +
                 "dbo.eq_cxfl.eq_cxfl_name,\n" +
                 "dbo.eq_info.eq_bxqx,\n" +
+                "dbo.eq_info.eq_cgrq,\n" +
                 "dbo.eq_info.eq_syzt,\n" +
                 "dbo.s_bm.bm_name,\n" +
+                "dbo.eq_info.eq_price,\n" +
+                "dbo.eq_info.eq_tgks,\n" +
                 "dbo.eq_cs.sbcs_name");
         sql.FROM("dbo.eq_info");
         sql.INNER_JOIN("dbo.eq_cxfl ON dbo.eq_info.eq_cxfl_id = dbo.eq_cxfl.eq_cxfl_id\n" +
@@ -100,13 +104,16 @@ public class EquipmentAccountProvider {
         if (StringUtils.isNotBlank(departmentCoding)) {
             sql.WHERE("dbo.eq_info.eq_zcbh like #{departmentCoding,jdbcType=VARCHAR}");
         }
-
+        if (StringUtils.isNotBlank(eqCxflId)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        sql.WHERE("dbo.eq_info.eq_sbbh IS NOT NULL AND dbo.eq_info.eq_zcbh IS NOT NULL");
         return sql.toString();
     }
 
     public static void main(String[] args) {
         EquipmentAccountProvider s = new EquipmentAccountProvider();
-        String s1 = s.selectKsEq(null, null, null);
+        String s1 = s.selectKsEq(null, null, null, null);
         System.out.println(s1);
 
     }

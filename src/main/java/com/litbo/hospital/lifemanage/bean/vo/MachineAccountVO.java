@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.bean.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -49,6 +50,7 @@ public class MachineAccountVO {
      * 设备启用时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date eqQysj;
     /**
      * 设备使用年限
