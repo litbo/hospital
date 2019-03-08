@@ -49,7 +49,22 @@
                         <span>启用日期：</span>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text"  id="date" name="startTime" lay-verify="date" autocomplete="off" class="layui-input">
+                        <input type="text" id="eqQysj" name="eqQysj" lay-verify="date" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
+                        <span>采购日期：</span>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" id="eqCgrq" name="eqCgrq" lay-verify="date" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
+                        <span>金额区间：</span>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" id="price" name="eqPrice" lay-verify="date" autocomplete="off"
+                               class="layui-input">
                     </div>
                     <!--<div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
@@ -63,8 +78,8 @@
                     </div>-->
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
-                            <select name="" lay-filter="">
-                                <option value="">全部</option>
+                            <select name="eqSyzt" lay-filter="">
+                                <option value="">完好状态</option>
                                 <option value="">在用</option>
                                 <option value="">待报废</option>
                                 <option value="">已报废</option>
@@ -72,7 +87,31 @@
                         </label>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" class="layui-input" placeholder="设备拼音码" autocomplete="off">
+                        <label>
+                            <select name="eqBxqx" lay-filter="">
+                                <option value="">保修状态</option>
+                                <option value="">在保</option>
+                                <option value="">过保</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="equipmentPinyinCode" class="layui-input" placeholder="设备拼音码"
+                               autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <label>
+                            <select name="bmId" lay-filter="eqTgks">
+                                <option value="">托管科室</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <label>
+                            <select name="eqCxflId" lay-filter="eqCxflId">
+                                <option value="">设备类别</option>
+                            </select>
+                        </label>
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">
@@ -87,30 +126,47 @@
 
 <script>
     renderMod = {
-        form:{
-            date:{
-                elem:'#date',
-                type:'datetime',
-                range:'~'
+        form: {
+            val: {
+                filter: "form",
+                select: [
+                    {
+                        filter: "eqTgks",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    },
+                    {
+                        filter: "eqCxflId",
+                        ids: "eqCxflId",
+                        text: "eqCxflName",
+                        url: "/eqdict/cxfl"
+                    }
+                ]
+            },
+            date: {
+                elem: '#eqQysj',
+                type: 'datetime',
+                range: '~'
             }
         },
-        addTable:{
+        addTable: {
             table: {
                 elem: "#table"
                 , height: 'full-75'
                 , cols: [[ //表头
                     {field: 'eqSbbh', title: '设备编号', minWidth: 190, sort: true}
-                    , {field: 'eqZcbh', title: '资产编号', minWidth: 190,sort: true}
+                    , {field: 'eqZcbh', title: '资产编号', minWidth: 190, sort: true}
                     , {field: 'eqName', title: '设备名称', minWidth: 200}
                     , {field: 'eqCxflName', title: '设备类别', minWidth: 100}
                     , {field: 'eqXh', title: '型号', minWidth: 100}
                     , {field: 'eqGg', title: '规格', minWidth: 100}
                     , {field: 'bmName', title: '所在科室', minWidth: 100}
-                    , {field: 'eqPrice', title: '单价', minWidth: 90,sort: true}
-                    , {field: 'eqQysj', title: '启用日期', minWidth: 130,sort: true}
-                    , {field: 'eqCgrq', title: '采购日期', minWidth: 130,sort: true}
-                    , {field: 'eqXh', title: '资产状态', minWidth: 100}
-                    , {field: 'eqGg', title: '保修状态', minWidth: 100}
+                    , {field: 'eqPrice', title: '单价', minWidth: 90, sort: true}
+                    , {field: 'eqQysj', title: '启用日期', minWidth: 130, sort: true}
+                    , {field: 'eqCgrq', title: '采购日期', minWidth: 130, sort: true}
+                    , {field: 'eqSyzt', title: '资产状态', minWidth: 100}
+                    , {field: 'eqBxqx', title: '保修状态', minWidth: 100}
                     , {field: 'sbcsName', title: '生产商', minWidth: 100}
                     , {field: 'eqTgks', title: '托管科室', minWidth: 100}
 
@@ -132,25 +188,12 @@
                     }
                 }
 
-            }
-            , reSet: {
+            },
+            reSet: {
                 url: "/lifeManage/selectKsEq",
                 type: "reload",
-                data: ["",""]
+                data: ["", ""]
             }
-          /*  ,form: {
-                val: {
-                    filter: "form",
-                    select: [
-                        {
-                            filter: "bmId",
-                            ids: "bmId",
-                            text: "bmName",
-                            url: ""
-                        }
-                    ]
-                }
-            }*/
         }
     }
 </script>

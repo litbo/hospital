@@ -99,7 +99,7 @@
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">确定添加
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save" id="sureAdd">确定添加
                 </button>
             </div>
         </div>
@@ -179,13 +179,13 @@
                     new1.s1 = $('#s1').val();
                     new1.s2 = $('#s2').val();
                     var bg = getTableValue('table');
-                    bg.push(new1);
                     if(new1.s1==="" || new1.s2===""){
                         putMsg({
                             alert:'当前未选中数据'
                         });
                         return false;
                     }
+                    bg.push(new1);
                     layui.use('table',function(){
                         var table = layui.table;
                         table.reload('table',{
@@ -199,6 +199,13 @@
                 func:function(){
                     var tableId = $(this).data('id') || 'table';
                     action.checkTable(tableId);
+                }
+            },
+            {
+                elem:'#sureAdd',
+                func:function(){
+                    var new2 = {};
+
                 }
             }
         ]
