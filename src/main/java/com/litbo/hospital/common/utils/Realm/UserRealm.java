@@ -24,14 +24,12 @@ import java.util.Set;
 
 public class UserRealm extends AuthorizingRealm
 {
-
     @Autowired
     private UserService userService;
     @Autowired
     private RoleService roleService;
     @Autowired
     private RightService rightService;
-
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) SecurityUtils.getSubject().getPrincipal();
@@ -45,23 +43,17 @@ public class UserRealm extends AuthorizingRealm
                 info.addStringPermission(right.getRightName());
             }
         }
-
-
         info.setRoles(roles);
         return info;
     }
-
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
         String username = token.getPrincipal().toString();
         SUser user = userService.getUserByUsername(username);
-
         if(user!=null){
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getUserPwd(),getName());
             return authcInfo;
         }
         return  null;
-
     }
 }
