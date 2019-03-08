@@ -34,39 +34,41 @@
 
 <body>
 <div class="layui-container">
-    <form class="layui-form layui-form-pane">
+    <form class="layui-form layui-form-pane" lay-filter="baoxiuForms">
         <div class="layui-row">
-
+            <input type="hidden" name="eqId" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+            <input type="hidden" name="bxrId" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+            <input type="hidden" name="bxksId" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
             <div class="col-xs-12 col-sm-6">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修设备<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                        <input type="text" name="eqName" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修人<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                        <input type="text" name="userXm" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修人电话</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="bxrdh" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修科室</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" disabled class="layui-input" autocomplete="off">
+                                        <input type="text" name="bmName" disabled class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修科室电话</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="bxksdh" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
@@ -76,7 +78,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修方式</label>
                                     <div class="layui-input-block">
-                                        <select>
+                                        <select name="bxfs">
                                             <option>网上报修</option>
                                             <option>电话报修</option>
                                         </select>
@@ -85,21 +87,21 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">故障现象</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="gzxx" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" class="layui-input" autocomplete="off"
+                                        <input type="text" name="bxTime" class="layui-input" autocomplete="off"
                                                id="repairDate">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">发现时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" id="findDate" autocomplete="off" class="layui-input">
+                                        <input type="text" name="fxTime" id="findDate" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                             </div>
@@ -118,12 +120,28 @@
     renderMod = {
         form: {
             val:{
+                filter:"baoxiuForms",
               get:{
-                  url:"",
+                  url:"/baoxiu/baoxiuIndex",
                   data:{
-                      eqSbbh:$.getUrlParam("eqSbbh")
+                      eqId:$.getUrlParam("eqId")
                   }
               }
+            },
+            submit:{
+                form:{
+                    url:"/baoxiu/addBaoxiu",
+                    type:"POST",
+                    data:["eqId","bxrId","bxrdh","bxksId","bxksdh","bxfs","gzxx","bxTime","fxTime"],
+                    done:function(res){
+                        if(res.code === 0){
+                            //提交完成后关闭页面
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.location.reload();
+                        }
+                    }
+                }
             },
             date: [
                 {

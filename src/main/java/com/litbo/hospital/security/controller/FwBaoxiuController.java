@@ -9,9 +9,6 @@ import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author zjc
  * @create 2018-12-03 11:29
@@ -60,7 +57,7 @@ public class FwBaoxiuController {
     }
 
     /**
-     * 报修页面
+     * 报修页面 初始化
      * @param eqId
      * @return
      */
