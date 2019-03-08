@@ -92,6 +92,16 @@ public class EqController {
         return Result.success();
     }
 
+    //Execl 导入设备附件信息
+    @RequestMapping("/importFj")
+    public Result importFj(MultipartFile file){
+        if(es.importFj(file)<0){
+            return Result.error();
+        }
+         return Result.success();
+
+    }
+
 
     /**
      * 修改

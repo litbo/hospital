@@ -31,6 +31,9 @@ public interface EqDao {
     @Select("SELECT COUNT(*) FROM eq_info")
     Integer countEq();
 
+    @Select("SELECT COUNT(*) FROM eq_fujian")
+    Integer countFj();
+
     @Select("SELECT * FROM eq_info where eq_id =#{id}")
     EqInfo getEqById(String id);
 

@@ -43,4 +43,6 @@ public interface EqService {
     List<EqSyxz> listSyxz();
 
     Integer saveFj(EqFj eqFj);
+
+    Integer importFj(MultipartFile file);
 }

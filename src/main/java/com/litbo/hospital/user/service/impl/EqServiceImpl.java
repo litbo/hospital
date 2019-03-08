@@ -160,6 +160,43 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
+    public Integer importFj(MultipartFile file) {
+        Workbook workbook = null;
+        InputStream inputStream = null;
+
+        try {
+            inputStream = new ByteArrayInputStream(file.getBytes());
+            workbook = WorkbookFactory.create(inputStream);
+            inputStream.close();
+            //工作表对象
+            Sheet sheetAt = workbook.getSheetAt(0);
+            Row row = sheetAt.getRow(0);
+            int rowNum = sheetAt.getLastRowNum() + 1;
+            short cellNum = row.getLastCellNum();
+            /*int rowIsNull = getRowIsNull(row, rowNum);
+            System.out.println(rowIsNull);*/
+            List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+
+            List<Map<String, Object>> mapList = listToMap(lists, list);
+            for (Map<String, Object> map : mapList) {
+                /*SUser user = parseMap2Object(map, SUser.class);*/
+                EqFj eqFj = parseMap2Object(map,EqFj.class);
+
+                if(eqDao.saveFj(eqFj)<0){
+                    return -1;
+                }
+            }
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
+
+    @Override
     public Integer setPm(SetPmVo setPmVo) {
         List<String> eqIds = setPmVo.getEqIds();
         for (String eqId : eqIds) {
@@ -240,6 +277,7 @@ public class EqServiceImpl implements EqService {
         return eqDao.saveFj(eqFj);
 
     }
+
 
 
 }
