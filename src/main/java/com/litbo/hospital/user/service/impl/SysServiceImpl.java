@@ -8,6 +8,8 @@ import com.litbo.hospital.user.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+
 @Service
 public class SysServiceImpl implements SysService {
     @Autowired
@@ -34,9 +36,13 @@ public class SysServiceImpl implements SysService {
     @Override
     public int setZxsj(SysZxsj zxsj) {
         String bname = "sys_zxsj";
+        Time amSbsj= new java.sql.Time(zxsj.getAmSbsj().getTime());
+        Time amXbsj= new java.sql.Time(zxsj.getAmXbsj().getTime());
+        Time pmSbsj= new java.sql.Time(zxsj.getPmSbsj().getTime());
+        Time pmXbsj= new java.sql.Time(zxsj.getPmXbsj().getTime());
         if(sysDao.count(bname)>0){
-            return sysDao.updateZxsj(zxsj);
+            return sysDao.updateZxsj(amSbsj,amXbsj,pmSbsj,pmXbsj);
         }
-        return sysDao.addZxsj(zxsj);
+        return sysDao.addZxsj(amSbsj,amXbsj,pmSbsj,pmXbsj);
     }
 }

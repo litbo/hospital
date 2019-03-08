@@ -6,6 +6,8 @@ import com.litbo.hospital.user.bean.SysZxsj;
 import com.litbo.hospital.user.dao.provider.SysProvider;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Time;
+
 @Mapper
 public interface SysDao {
 
@@ -20,9 +22,9 @@ public interface SysDao {
     @InsertProvider(type = SysProvider.class , method = "addDxm")
     int addDxm(SysDxm dxm);
     @UpdateProvider(type = SysProvider.class , method = "updateZxsj")
-    int updateZxsj(SysZxsj zxsj);
+    int updateZxsj(@Param("amSbsj") Time amSbsj,@Param("amXbsj")  Time amXbsj,@Param("pmSbsj")  Time pmSbsj, @Param("pmXbsj") Time pmXbsj);
     @InsertProvider(type = SysProvider.class , method = "addZxsj")
-    int addZxsj(SysZxsj zxsj);
+    int addZxsj(@Param("amSbsj") Time amSbsj,@Param("amXbsj")  Time amXbsj,@Param("pmSbsj")  Time pmSbsj, @Param("pmXbsj") Time pmXbsj);
     @Select("select * from sys_dxm")
     SysDxm getDxm();
     @Select("select * from sys_wjbb")
