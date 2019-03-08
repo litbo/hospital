@@ -3,7 +3,10 @@ package com.litbo.hospital.user.dao.provider;
 import com.litbo.hospital.user.bean.SysDxm;
 import com.litbo.hospital.user.bean.SysWjbb;
 import com.litbo.hospital.user.bean.SysZxsj;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
+
+import java.sql.Time;
 
 public class SysProvider {
 
@@ -35,22 +38,20 @@ public class SysProvider {
                     " set ckh = #{ckh} , btl = #{btl}";
         return sql;
     }
-    public String addZxsj(SysZxsj zxsj){
+    public String addZxsj(@Param("amSbsj") Time amSbsj,@Param("amXbsj")  Time amXbsj,@Param("pmSbsj")  Time pmSbsj, @Param("pmXbsj") Time pmXbsj){
         String sql = " insert into sys_zxsj ( am_sbsj, am_xbsj,  " +
-                "      pm_sbsj, pm_xbsj,yb_sbsj,yb_sbsj,yb_xbsj) " +
-                "    values (#{amSbsj,jdbcType=DATE}, #{amXbsj,jdbcType=DATE},  " +
-                "      #{pmSbsj,jdbcType=DATE}, #{pmXbsj,jdbcType=DATE})" +
-                "   #{ybSbsj},#{ybXbsj}";
+                "      pm_sbsj, pm_xbsj ) " +
+                "    values (#{amSbsj }, #{amXbsj },  " +
+                "      #{pmSbsj }, #{pmXbsj } )" ;
         return sql;
     }
-    public String updateZxsj(SysZxsj zxsj){
+    public String updateZxsj(@Param("amSbsj") Time amSbsj,@Param("amXbsj")  Time amXbsj,@Param("pmSbsj")  Time pmSbsj, @Param("pmXbsj") Time pmXbsj){
         String sql =" update sys_zxsj " +
-                "    set am_sbsj = #{amSbsj,jdbcType=DATE}, " +
-                "      am_xbsj = #{amXbsj,jdbcType=DATE}, " +
-                "      pm_sbsj = #{pmSbsj,jdbcType=DATE}, " +
-                "      pm_xbsj = #{pmXbsj,jdbcType=DATE}" +
-                "      yb_sbsj = #{ybSbsj}" +
-                "      yb_xbsj = #{ybXbsj}" ;
+                "    set am_sbsj = #{amSbsj }, " +
+                "      am_xbsj = #{amXbsj }, " +
+                "      pm_sbsj = #{pmSbsj }, " +
+                "      pm_xbsj = #{pmXbsj }"
+                ;
         return  sql;
     }
 }
