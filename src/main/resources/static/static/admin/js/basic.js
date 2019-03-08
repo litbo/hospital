@@ -742,15 +742,27 @@ action = func = {
     "addLink": function (value) {
         layui.use('table', function () {
             var table = layui.table
-                , filter = Type(value) !== "string" ? value[0] : value
-                , yes = Type(value) !== "string" ? value[1] : "确定要跳转链接吗？"
-                , no = Type(value) !== "string" ? value[2] : "没有可以跳转的链接。";
+                , filter = Type(value) !== "string" ? value.filter : value
+                , yes = Type(value) !== "string" ? value.yes : "确定要跳转链接吗？"
+                , no = Type(value) !== "string" ? value.no : "没有可以跳转的链接。";
             table.on('tool(' + filter + ')', function (obj) {
-                var data = obj.data;
+                var data = obj.data,con = "";
                 if (obj.event === "openLink") {
                     if (data.link) {
                         layer.confirm(yes, function () {
-                            location.href = data.link + "?link=" + encodeURIComponent(window.location.href);
+                            con = data.link + "?";
+                            if(Type(value.param) === "array"){
+                                for(var g=0;g<value.param.length;g++){
+                                    con +=  value.param[g] + "&" ;
+                                }
+                            }else{
+                                con = data.link + "?" + value.param + "=" + data[value.param];
+                            }
+                            layOpen({
+                                type:2,
+                                title:"详细",
+                                content:con
+                            })
                         });
                     } else {
                         layer.alert(no)
@@ -982,49 +994,114 @@ action = func = {
             var table = layui.table
                 ,nCk = []
                 ,oData =  table.cache[value.id];//获取表格所有数据
-            var ck = table.checkStatus(value.id);//获取选中数据
-            if(ck.data.length === 0){
-                putMsg({
-                    alert:"当前未选中任何数据！"
-                });
-                return false;
-            }
-            layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
-                if(ck.isAll === true){
-                    oData = [];
-                    nCk = "all";//全部被选中
-                }else {
-                    for (var j = 0; j < oData.length; j++) {
-                        //找出所有数据中的已选中数据并删除
-                        if (oData[j].LAY_CHECKED === true) {
-                            oData.splice(j, 1);
-                            //添加
-                            nCk.push(oData[j][value.name]);
-                        } else {
-                            delete oData[j]["LAY_CHECKED"];
-                            delete oData[j]["LAY_TABLE_INDEX"];
-                        }
+            table.on("toolbar("+value.filter+")",function () {
+
+                if(obj.event === value.event){
+                    var ck = table.checkStatus(value.id);//获取选中数据
+                    if(ck.data.length === 0){
+                        putMsg({
+                            alert:"当前未选中任何数据！"
+                        });
+                        return false;
                     }
-                    //上传已删除文件
-                    value.data = {};
-                    value.data[value.param] = nCk;
-                    value.success = function (res){
-                      if(res.code === 0){
-                          layer.msg("数据删除成功！");
-                          //重新渲染表格
-                          table.reload(name,{
-                              data : oData
-                          });
-                      } else{
-                          layer.msg("数据删除失败！")
-                      }
-                        layer.close(index);
-                    };
-                    subUp(value)
+                    layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
+                        if(ck.isAll === true){
+                            oData = [];
+                            nCk = "all";//全部被选中
+                        }else {
+                            for (var j = 0; j < oData.length; j++) {
+                                //找出所有数据中的已选中数据并删除
+                                if (oData[j].LAY_CHECKED === true) {
+                                    oData.splice(j, 1);
+                                    //添加
+                                    nCk.push(oData[j][value.name]);
+                                } else {
+                                    delete oData[j]["LAY_CHECKED"];
+                                    delete oData[j]["LAY_TABLE_INDEX"];
+                                }
+                            }
+                            //上传已删除文件
+                            value.data = {};
+                            value.data[value.param] = nCk;
+                            value.success = function (res){
+                                if(res.code === 0){
+                                    layer.msg("数据删除成功！");
+                                    //重新渲染表格
+                                    table.reload(name,{
+                                        data : oData
+                                    });
+                                } else{
+                                    layer.msg("数据删除失败！")
+                                }
+                                layer.close(index);
+                            };
+                            subUp(value)
+                        }
+
+
+                    });
                 }
-
-
             });
+        });
+    },
+    //数据划分按钮
+    "divTable":function(value){
+        layui.use('table', function() {
+            var table = layui.table
+                ,nCk = []
+                ,oData =  table.cache[value.id];//获取表格所有数据
+            table.on("toolbar("+value.filter+")",function () {
+
+                if(obj.event === value.event){
+                    var ck = table.checkStatus(value.id);//获取选中数据
+                    if(ck.data.length === 0){
+                        putMsg({
+                            alert:"当前未选中任何数据！"
+                        });
+                        return false;
+                    }
+
+
+
+                    layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
+                        if(ck.isAll === true){
+                            oData = [];
+                            nCk = "all";//全部被选中
+                        }else {
+                            for (var j = 0; j < oData.length; j++) {
+                                //找出所有数据中的已选中数据并删除
+                                if (oData[j].LAY_CHECKED === true) {
+                                    oData.splice(j, 1);
+                                    //添加
+                                    nCk.push(oData[j][value.name]);
+                                } else {
+                                    delete oData[j]["LAY_CHECKED"];
+                                    delete oData[j]["LAY_TABLE_INDEX"];
+                                }
+                            }
+                            //上传已删除文件
+                            value.data = {};
+                            value.data[value.param] = nCk;
+                            value.success = function (res){
+                                if(res.code === 0){
+                                    layer.msg("数据删除成功！");
+                                    //重新渲染表格
+                                    table.reload(name,{
+                                        data : oData
+                                    });
+                                } else{
+                                    layer.msg("数据删除失败！")
+                                }
+                                layer.close(index);
+                            };
+                            subUp(value)
+                        }
+
+
+                    });
+                }
+            });
+
 
         });
     }
@@ -1043,7 +1120,6 @@ function tableFunc(fn){
                         case "tools":func["toolFunc"].call(obj, fn["tools"]);break;
                     }
                 }
-                //console.log(name + " 已加载！");
             }
         }
     } else {
