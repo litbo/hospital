@@ -11,10 +11,10 @@ import com.litbo.hospital.security.dao.FwPjkDao;
 import com.litbo.hospital.security.dao.FwPjsgDao;
 import com.litbo.hospital.security.dao.FwPjsgZjbDao;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
-import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwPjsgService;
+import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
-import com.sun.tools.javadoc.Start;
+import com.litbo.hospital.security.vo.PjsgZjbExamineVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,7 +79,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
                 }
             }
         }
-        return pjsgDao.updateFwPjsgStatus(sgStatus,currentUserId,id);
+        return pjsgDao.updateFwPjsgStatus(sgStatus,currentUserId,id,0);
     }
 
     @Override
@@ -97,5 +97,13 @@ public class FwPjsgServiceImpl implements FwPjsgService {
             return null;
         }
         return new PageInfo(pjsgZjbDao.listFwPjsgZjb(start,end,pjName));
+    }
+
+    @Override
+    public ExaminePjsgVO selectFwPjsgById(Integer id, Integer taskId) {
+        ExaminePjsgVO vo = pjsgDao.selectFwPjsgById(id);
+        List<PjsgZjbExamineVO> pjsgZjbExamineVOS =  pjsgZjbDao.listFwPjsgZjbExamine(id);
+        vo.setPjsgZjbs(pjsgZjbExamineVOS);
+        return vo;
     }
 }

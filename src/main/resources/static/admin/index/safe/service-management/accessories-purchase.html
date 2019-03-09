@@ -42,7 +42,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <select lay-filter="shr">
+                    <select lay-filter="shr" name="userId2">
                     </select>
                 </div>
             </div>
@@ -140,7 +140,8 @@
                         1: {
                             "pjRkTime":$("input[name='pjRkTime']").val(),
                             "sgSqsx":$("textarea[name='sgSqsx']").val(),
-                            "sgYy":ss
+                            "sgYy":ss,
+                            "userId2":$("select[name='userId2']").val()
                         },
                         2:ts
                     }

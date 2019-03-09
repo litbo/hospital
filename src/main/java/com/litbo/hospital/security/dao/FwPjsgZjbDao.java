@@ -2,8 +2,10 @@ package com.litbo.hospital.security.dao;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwPjsgZjb;
+import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import com.litbo.hospital.security.vo.FwPjqlZjbVo;
 import com.litbo.hospital.security.vo.FwPjsgZjbVo;
+import com.litbo.hospital.security.vo.PjsgZjbExamineVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
@@ -23,7 +25,10 @@ public interface FwPjsgZjbDao {
 
     @Select("select * from fw_pjsg_zjb where pjsg_id = #{id}")
     List<FwPjsgZjb> listFwPjsgZjbByPjsgId(int id);
+
     //查询所有的入库记录
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjsgZjbProvider.class,method="listFwPjsgZjb")
     List<FwPjsgZjbVo> listFwPjsgZjb(@Param("start") Date start, @Param("end") Date end, @Param("pjName") String pjName);
+    @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjsgZjbProvider.class,method="listFwPjsgZjbExamine")
+    List<PjsgZjbExamineVO> listFwPjsgZjbExamine(Integer id);
 }
