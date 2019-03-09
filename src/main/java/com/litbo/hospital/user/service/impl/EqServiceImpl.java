@@ -15,6 +15,7 @@ import com.litbo.hospital.user.dao.PmDao;
 import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SelectFlEqVo;
 import com.litbo.hospital.user.vo.SetPmVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Row;
@@ -193,6 +194,12 @@ public class EqServiceImpl implements EqService {
             e.printStackTrace();
         }
         return 1;
+    }
+
+    @Override
+    public PageInfo listFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listFlEqByX(selectFlEqVo));
     }
 
 

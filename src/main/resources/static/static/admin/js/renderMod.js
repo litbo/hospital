@@ -600,7 +600,7 @@ $(function () {
                         $(item.elem).on("click",function(){
                             //判断数据有效性
                             if(doJudg({
-                                "undefined":[item.cb,item.db,item.name,item.data]
+                                "undefined":[item.key,item.name,item.data]
                             })){
                                 putMsg({
                                     alert:"页面调用错误，操作无法进行！",
@@ -613,6 +613,7 @@ $(function () {
                             var name = item.name,
                                 value = item.value || item.key,
                                 url = item.url || "/admin/index/global/data.html";
+                            console.log("inThis",item);
                             layOpen({
                                 type:2,
                                 title:"选择数据",
@@ -638,6 +639,7 @@ $(function () {
                                                 }
                                             }
                                         }
+                                        item.func && item.func(res);
                                     }
                                 }
                             });
