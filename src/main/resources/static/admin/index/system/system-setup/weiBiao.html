@@ -34,13 +34,18 @@
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="全部科室" autocomplete="off">
+                <select name="bmId" lay-filter="bmList" lay-verify="required" lay-search="">
+                    <option value="0000000000">部门</option>
+                </select>
             </div>
             <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="设备名称" autocomplete="off">
+                <input class="layui-input" name="eqName" placeholder="设备名称" autocomplete="off">
+            </div>
+            <div class="layui-inline">
+                <input class="layui-input" name="status" type="hidden" value="1" placeholder="设备名称" autocomplete="off">
             </div>
             <div class="layui-input-inline">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="reload">查找</button>
             </div>
         </form>
     </div>
@@ -48,27 +53,56 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'section', title: '所在科室',  minWidth: 150, sort: true}
-                , {field: 'deviceName', title: '设备品名', width:'20%', minWidth: 150}
-                , {field: 'classify_wb', title: '卫标分类', minWidth: 150}
-                , {field: 'brand', title: '品牌', minWidth: 150}
-                , {field: 'standard', title: '规格', minWidth: 150}
-                , {field: 'model', title: '型号', minWidth: 200}
-                , {field: 'price', title: '单价', minWidth: 200,sort:true}
-            ]],
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "addMsg":2,
-                    "addLink":"table1"
-                })
+    renderMod={
+        addTable : {
+            table: {
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    , {field: 'bmName', title: '所在科室', minWidth: 150, sort: true}
+                    , {field: 'eqName', title: '设备名称', width: '20%', minWidth: 150}
+                    , {field: 'eqPmName', title: '设备品名', width: '20%', minWidth: 150}
+                    , {field: 'eqPp', title: '品牌', minWidth: 150}
+                    , {field: 'eqGg', title: '规格', minWidth: 150}
+                    , {field: 'eqXh', title: '型号', minWidth: 200}
+                    , {field: 'eqPrice', title: '单价', minWidth: 200, sort: true}
+                ]]
+                , url: "/eq/listFlEq"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+            },
+            reSet: {
+                url: "/eq/listFlEqByX",
+                type: "reload",
+                data: ["bmId","eqName"]
             }
-        }
+
+        },
+        form:{
+            val: {
+                filter:"bmList",
+                select: [
+                    {
+                        filter:"bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
+            }
+        },
+
     }
+
+
 </script>
 </body>
 

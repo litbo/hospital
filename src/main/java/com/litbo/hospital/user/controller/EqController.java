@@ -9,6 +9,7 @@ import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SelectFlEqVo;
 import com.litbo.hospital.user.vo.SetPmVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -124,6 +125,15 @@ public class EqController {
                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 
         PageInfo pageInfo = es.listFlEq(pageNum, pageSize);
+        return Result.success(pageInfo);
+    }
+
+    //模糊查询已经关联设备
+    @RequestMapping("/listFlEqByX")
+    public Result listFlEqByX(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                              SelectFlEqVo selectFlEqVo) {
+        PageInfo pageInfo = es.listFlEqByX(pageNum,pageSize,selectFlEqVo);
         return Result.success(pageInfo);
     }
 

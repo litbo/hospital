@@ -5,6 +5,7 @@ import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SelectFlEqVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
@@ -137,7 +138,7 @@ public class EqProvider {
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
                 "\te.eq_qysj,\n" +
-                "   e.eq_syzt," +
+                "   e.eq_syzt,e.eq_price,e.eq_pp," +
                 "\tb.bm_name \n" +
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
@@ -324,7 +325,7 @@ public class EqProvider {
                 "\tp.eq_pm_name,\n" +
                 "\te.eq_gg,\n" +
                 "\te.eq_xh,\n" +
-                "\te.eq_qysj,\n" +
+                "\te.eq_qysj,e.eq_price,e.eq_pp,\n" +
                 "\tb.bm_name \n" +
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
@@ -333,6 +334,27 @@ public class EqProvider {
                 " where e.eq_pm_id is not NULL";
 
         return SQL;
+    }
+    public String listFlEqByX(SelectFlEqVo selectFlEqVo){
+        StringBuffer SQL =new StringBuffer( "SELECT\n" +
+                "\te.eq_id,\n" +
+                "\te.eq_sbbh,\n" +
+                "\te.eq_zcbh,\n" +
+                "  e.eq_name, " +
+                "\tp.eq_pm_name,\n" +
+                "\te.eq_gg,\n" +
+                "\te.eq_xh,\n" +
+                "\te.eq_qysj,e.eq_price,e.eq_pp,\n" +
+                "\tb.bm_name \n" +
+                "FROM\n" +
+                "\tdbo.eq_info AS e\n" +
+                "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
+                " where e.eq_pm_id is not NULL");
+                 if(StringUtils.isNotBlank(selectFlEqVo.getBmId()))SQL.append(" and eq_bmid Like '%'+ #{bmId}+'%'");
+                 if(StringUtils.isNotBlank(selectFlEqVo.getEqName()))SQL.append(" and eq_name Like '%'+ #{eqName}+'%'");
+
+        return SQL.toString();
     }
     public String listWFlEq(){
         String SQL = "SELECT\n" +
