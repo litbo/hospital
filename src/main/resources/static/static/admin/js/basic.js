@@ -1005,6 +1005,7 @@ action = func = {
             table.on("toolbar("+value.filter+")",function () {
 
                 if(obj.event === value.event){
+                    console.log("666");
                     var ck = table.checkStatus(value.id);//获取选中数据
                     if(ck.data.length === 0){
                         putMsg({
@@ -1029,6 +1030,7 @@ action = func = {
                         layer.close(index);
                     };
                     if(value.confirm === false){
+                        console.log("con");
                         subUp(value)
                     }else{
                         layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
