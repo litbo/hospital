@@ -1012,42 +1012,47 @@ action = func = {
                         });
                         return false;
                     }
-                    layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
-                        if(ck.isAll === true){
-                            oData = [];
-                            nCk = "all";//全部被选中
-                        }else {
-                            for (var j = 0; j < oData.length; j++) {
-                                //找出所有数据中的已选中数据并删除
-                                if (oData[j].LAY_CHECKED === true) {
-                                    oData.splice(j, 1);
-                                    //添加
-                                    nCk.push(oData[j][value.name]);
-                                } else {
-                                    delete oData[j]["LAY_CHECKED"];
-                                    delete oData[j]["LAY_TABLE_INDEX"];
-                                }
-                            }
-                            //上传已删除文件
-                            value.data = {};
-                            value.data[value.param] = nCk;
-                            value.success = function (res){
-                                if(res.code === 0){
-                                    layer.msg("数据删除成功！");
-                                    //重新渲染表格
-                                    table.reload(name,{
-                                        data : oData
-                                    });
-                                } else{
-                                    layer.msg("数据删除失败！")
-                                }
-                                layer.close(index);
-                            };
-                            subUp(value)
+                    //上传数据定义
+                    value.data = {};
+                    value.data[value.param] = nCk;
+                    value.success = function (res){
+                        if(res.code === 0){
+                            layer.msg("数据删除成功！");
+                            //重新渲染表格
+                            table.reload(name,{
+                                data : oData
+                            });
+                            value.reload && window.location.reload();
+                        } else{
+                            layer.msg("数据删除失败！")
                         }
+                        layer.close(index);
+                    };
+                    if(value.confirm === false){
+                        subUp(value)
+                    }else{
+                        layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
+                            if(ck.isAll === true){
+                                oData = [];
+                                nCk = "all";//全部被选中
+                            }else {
+                                for (var j = 0; j < oData.length; j++) {
+                                    //找出所有数据中的已选中数据并删除
+                                    if (oData[j].LAY_CHECKED === true) {
+                                        oData.splice(j, 1);
+                                        //添加
+                                        nCk.push(oData[j][value.name]);
+                                    } else {
+                                        delete oData[j]["LAY_CHECKED"];
+                                        delete oData[j]["LAY_TABLE_INDEX"];
+                                    }
+                                }
+                                //上传已删除文件
 
-
-                    });
+                                subUp(value)
+                            }
+                        });
+                    }
                 }
             });
         });
