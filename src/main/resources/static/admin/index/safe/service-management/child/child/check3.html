@@ -61,7 +61,7 @@
                 <label class="layui-form-label">辅助维修人员</label>
                 <div class="layui-input-block">
                     <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="fzwx">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -258,7 +258,12 @@
         bind:{
             selectItem:[
                 {
-                    elem:""
+                    elem:"#fzwx",
+                    cb:"#",
+                    db:"#",
+                    key:"fzwxry",
+                    name:"dtdt",
+                    data:formData
                 }
             ]
         }
