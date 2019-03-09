@@ -16,8 +16,9 @@
     <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-inline{
-            width:140px;
+            width:180px;
         }
+
     </style>
 </head>
 
@@ -41,11 +42,7 @@
                     </div>
                     <span>入库时间：</span>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjRkTimeStart"  class="layui-input" placeholder="起" autocomplete="off" id="date">
-                    </div>
-                    <span>-</span>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjRkTimeEnd"  class="layui-input" placeholder="止" autocomplete="off" id="date1">
+                        <input type="text" name="pjRkTimeStart"  class="layui-input"  autocomplete="off" id="date">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="reload" lay-filter="demo1">查找</button>
@@ -60,6 +57,9 @@
 <script>
 
     renderMod = {
+        form:{
+            date:{elem:'#date',range:"~"}
+        },
         addTable: {
             table: {
                 cols: [[ //表头
@@ -76,14 +76,11 @@
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count":res.data.size,//页面显示的数据条数
+                        "count":res.data.total,//页面显示的数据条数
                         "data": res.data.list //解析数据列表
                     }
                 }
@@ -93,6 +90,7 @@
             reSet: {
                 url:"/security/pjsg/listFwPjsgZjb",
                 type: "reload",
+                method:"GET",
                 data:["pjName","pjRkTimeStart","pjRkTimeEnd"],     //搜索框的name
                 where: {}
             }
@@ -100,16 +98,6 @@
     }
 
 
-
-    layui.use(['table','laydate'],function(){
-        var table = layui.table,
-            laydate = layui.laydate;
-        laydate.render({
-            elem: '#date1',
-            value: today,
-            format: "y-M-d"
-        });
-    })
 </script>
 </body>
 

@@ -74,7 +74,19 @@ public class SgQueryCountVO {
      */
     private String bmName;
     /**
+     * 托管科室
+     */
+    private String eqTgks;
+    /**
+     * 单价
+     */
+    private String eqPrice;
+    /**
      * 生产商
      */
     private String sbcsName;
+    /**
+     * 采购日期
+     */
+    private String eqCgrq;
 }

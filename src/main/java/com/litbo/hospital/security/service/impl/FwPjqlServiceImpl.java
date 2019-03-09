@@ -68,7 +68,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
             //检查配件库库存是否足够
             List<FwPjqlZjb> pjqlZjbs = pjqlZjbDao.listFwPjqlByBjqlId(id);
             for(FwPjqlZjb pjqlZjb:pjqlZjbs){
-                if(pjkDao.reduceFwPjkSl(pjqlZjb.getPjId(),pjqlZjb.getPjCount())==0){//如果数量不足，则回滚事务，并返回 审核失败
+                if(pjkDao.reduceFwPjkSl(pjqlZjb.getPjzdId(),pjqlZjb.getPjsgCount())==0){//如果数量不足，则回滚事务，并返回 审核失败
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     return -1;
                 }

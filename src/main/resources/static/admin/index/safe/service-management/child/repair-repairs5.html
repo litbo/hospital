@@ -36,23 +36,23 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">请领时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjRkTime" class="layui-input" autocomplete="off" id="getTime">
+                    <input type="text" name="qlTime" class="layui-input" autocomplete="off" id="getTime">
                 </div>
             </div>
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">请领人<span class="sign">*</span></label>
+                <label class="layui-form-label">请领人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
+                    <input type="text" name="qlrId"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <!--<button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>-->
                 </div>
             </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">签字</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">签字</button>
-                </div>
-            </div>
+            <!--<div class="layui-form-item" pane>-->
+                <!--<label class="layui-form-label">签字</label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">-->
+                    <!--<button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">签字</button>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
     <div class="layui-row">
@@ -60,14 +60,15 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">请领原因<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入" name="sgSqsx" class="layui-textarea" lay-verify="required"></textarea>
+                    <textarea placeholder="请输入" name="qlyy" class="layui-textarea" lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">确认人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
+                    <select lay-filter="shr" name="qrrId">
+
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
@@ -84,32 +85,18 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">提交数据</button>
-                <button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="demo1">维修费用申请</button>
             </div>
         </div>
     </div>
 </form>
 
-<script type="text/html" id="price">
-    {{#
-    if(!d.pisgPrice){
-        return "0.00"
-    }else{
-        if(isNaN(Number(d.pisgPrice) !== false)){
-            return "0.00"
-        }else{
-            return d.pisgPrice
-        }
-    }
-    }}
-</script>
 
 <script type="text/html" id="number">
     {{#
-    if(isNaN(Number(d.pjsgCoun) !== false)){
+    if(isNaN(Number(d.pjsgCount) !== false)){
         return "1"
     }else{
-        return d.pjsgCoun
+        return d.pjsgCount
     }
     }}
 </script>
@@ -145,20 +132,19 @@
                     }
                     return param = {
                         1: {
-                            "pjRkTime":$("input[name='pjRkTime']").val(),
-                            "sgSqsx":$("textarea[name='sgSqsx']").val(),
-                            "sgYy":ss
+                            "qlTime":$("input[name='qlTime']").val(),
+                            "qlyy":$("textarea[name='qlyy']").val()
                         },
                         2:ts
                     }
                 },
                 form:{
-                    url:"/security/pjsg/insertFwPjsg",
+                    url:"/security/pjql/insertFwPjql",
                     type:"POST",
                     contentType:"application/json",
                     param:{
-                        1:"fwPjsg",
-                        2:"fwPjsgZjbs"
+                        1:"fwPjql",
+                        2:"fwPjqlZjbs"
                     }
                 }
             }
@@ -181,8 +167,7 @@
                     {field: 'pjName', title: '配件名称'},
                     {field: 'pjGgxh', title: '规格型号'},
                     {field: 'pjZczh', title: '品牌'},
-                    {field: 'pisgPrice', title: '单价（可编辑）',edit:true,templet:"#price"},
-                    {field: 'pjsgCount', title: '数量（可编辑）',edit:true},
+                    {field: 'pjsgCount', title: '数量（可编辑）',edit:true,templet:"#number"},
                     {field: 'ghsName', title: '生产商'}
                 ]]
                 , toolbar:false

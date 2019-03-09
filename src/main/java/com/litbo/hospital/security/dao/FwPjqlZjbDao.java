@@ -10,9 +10,9 @@ import java.util.List;
 @Mapper
 public interface FwPjqlZjbDao {
     @Insert( {"<script>",
-            "insert into fw_pjql_zjb(pjql_id, pj_id, pj_count) values ",
+            "insert into fw_pjql_zjb(pjql_id, pjzd_id, pjsg_count) values ",
             "<foreach collection='fwPjqlZjbs' item='item' index='index' separator=','>",
-            "(#{item.pjqlId}, #{item.pjId}, #{item.pjCount})", "</foreach>",
+            "(#{item.pjqlId}, #{item.pjzdId}, #{item.pjsgCount})", "</foreach>",
             "</script>"
     })
     int insertFwPjqlZjbList(@Param("fwPjqlZjbs") List<FwPjqlZjb> fwPjqlZjbs);

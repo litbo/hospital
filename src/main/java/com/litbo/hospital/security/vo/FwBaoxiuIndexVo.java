@@ -16,14 +16,14 @@ public class FwBaoxiuIndexVo {
 
     private String userXm; //报修人姓名
 
-    private String userId;  //用户id
+    private String bxrId;  //用户id
 
-    private String tel; //用户电话
+    private String bxrdh; //用户电话
 
-    private String bmId; //报修部门id
+    private String bxksId; //报修部门id
 
     private String bmName; //报修部门名字
 
-    private String bmTel; //报修科室电话
+    private String bxksdh; //报修科室电话
 
 }

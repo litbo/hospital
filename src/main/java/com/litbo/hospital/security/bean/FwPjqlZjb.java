@@ -12,8 +12,8 @@ public class FwPjqlZjb {
     @ApiModelProperty(hidden = true)
     private Integer pjqlId;
     @ApiModelProperty(value = "配件字典id", required = true)
-    private Integer pjId;
+    private Integer pjzdId;
     @ApiModelProperty(value = "配件数量", required = true)
-    private Integer pjCount;
+    private Integer pjsgCount;
 
 }
