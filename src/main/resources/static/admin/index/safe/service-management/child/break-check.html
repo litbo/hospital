@@ -124,14 +124,23 @@
                 <div class="layui-input-block">
                     <select name="">
                         <option value="1">已查清</option>
+                        <option value="1">已查清待确认</option>
+                        <option value="1">未查明</option>
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">信息填写</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal">配件请领</button>
-                    <button class="layui-btn layui-btn-normal">院外维修申请</button>
-                    <button class="layui-btn layui-btn-normal">直接维修</button>
+                    <button class="layui-btn layui-btn-normal" id="check1">配件请领</button>
+                    <button class="layui-btn layui-btn-normal" id="check2">院外维修申请</button>
+                    <button class="layui-btn layui-btn-normal" id="check3">直接维修</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">已填写</label>
+                <div class="layui-input-block">
+                    <input type="text" id="allDone" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
         </div>
@@ -141,47 +150,16 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">提交数据</button>
-                <button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="demo1">维修费用申请</button>
+                <!--<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="demo1">维修费用申请</button>-->
             </div>
         </div>
     </div>
 </form>
 
-<script type="text/html" id="price">
-    {{#
-    if(!d.pisgPrice){
-        return "0.00"
-    }else{
-        if(isNaN(Number(d.pisgPrice) !== false)){
-            return "0.00"
-        }else{
-            return d.pisgPrice
-        }
-    }
-    }}
-</script>
-
-<script type="text/html" id="number">
-    {{#
-    if(isNaN(Number(d.pjsgCoun) !== false)){
-        return "1"
-    }else{
-        return d.pjsgCoun
-    }
-    }}
-</script>
-
-
-
 <script>
+    formData = {};
     renderMod={
         form:{
-            date:{
-                elem:"#getTime",
-                value:today0+" "+time0,
-                type:"datetime",
-                format:'yyyy-MM-dd HH:mm:ss'
-            },
             val:{
                 filter:"form",
                 select:{
@@ -221,54 +199,38 @@
             }
         },
         bind:{
-            addItem: {
-                elem: "#addNew",
-                cb:"/security/pjzd/fwPjzdTitle",
-                db:"/security/pjzd/listFwPjzd",
-                name:"dtdt",
-                key:"pj"
-            },
-            delItem: "#delNew"
-        },
-        addTable :{
-            table:{
-                cols: [[ //表头
-                    {type: "checkbox"},
-                    {field: 'pjbh', title: '配件编号'},
-                    {field: 'pjName', title: '配件名称'},
-                    {field: 'pjGgxh', title: '规格型号'},
-                    {field: 'pjZczh', title: '品牌'},
-                    {field: 'pisgPrice', title: '单价（可编辑）',edit:true,templet:"#price"},
-                    {field: 'pjsgCount', title: '数量（可编辑）',edit:true},
-                    {field: 'ghsName', title: '生产商'}
-                ]]
-                , toolbar:false
-                , page:false
-                , height: "200"
-                , data: []
-                , text:{
-                    none:"请点击上方按钮添加数据！"
+            selectItem:[
+                {
+                    elem:"#check1",
+                    url:"./child/check1.html",
+                    name:"dtdt",
+                    key:"check1",
+                    data:formData,
+                    func:function(res){
+                        $("#allDone").val("配件请领")
+                    }
                 },
-                done:function(obj){
-                    tableFunc({
-                        tableEdit:{
-                            filter:"table1",
-                            confirm:false,
-                            func:function(val,back,obj){
-                                //数据不符合要求时还原本次修改
-                                if(isNaN(val) !== false){
-                                    //改变数据
-                                    obj.data[obj.field] = back;
-                                    //改变界面
-                                    $(this).val(back);
-                                    //更新数据
-                                    obj.update(obj.data);
-                                }
-                            }
-                        }
-                    })
+                {
+                    elem:"#check2",
+                    url:"./child/check2.html",
+                    name:"dtdt",
+                    key:"check2",
+                    data:formData,
+                    func:function(res){
+                        $("#allDone").val("院外维修申请")
+                    }
+                },
+                {
+                    elem:"#check3",
+                    url:"./child/check3.html",
+                    name:"dtdt",
+                    key:"check3",
+                    data:formData,
+                    func:function(res){
+                        $("#allDone").val("直接维修")
+                    }
                 }
-            }
+            ]
         }
     }
 </script>
