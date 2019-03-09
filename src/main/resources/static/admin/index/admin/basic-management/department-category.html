@@ -36,17 +36,17 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
-            <select name="modules" lay-verify="required" lay-search="">
-                <option value="">部门类别</option>
-                <option value="1">机构领导</option>
-                <option value="2">使用部门</option>
-                <option value="3">管理部门</option>
+            <select name="bmlb" lay-verify="required" lay-search="" >
+                <option value="0000000000">部门类别</option>
+                <option value="01">机构领导</option>
+                <option value="02">管理部门</option>
+                <option value="03">使用部门</option>
             </select>
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="部门名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="bmName" placeholder="部门名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -60,17 +60,17 @@
                     , height: 'full-75'
                     ,cols: [[ //表头
                         {checkbox:true,fixed:true}
-                        , {field: 'division-name', title: '部门名称', width:'30%',minWidth: 200}
-                        , {field: 'division-number', title: '部门编号', minWidth: 150}
-                        , {field: 'pinyin-code', title: '拼音码', minWidth: 150}
-                        , {field: 'division-classify', title: '部门类别', minWidth: 150}
+                        , {field: 'bmName', title: '部门名称', width:'30%',minWidth: 200}
+                        , {field: 'bmId', title: '部门编号', minWidth: 150}
+                        , {field: 'bmLb', title: '部门类别', minWidth: 150}
                     ]]
-                    , url: "/lifeManage/selectEquipmentAccount"
-                    , method: "POST"
+                    , url: "/supervise/bmgl/listBmsAsLbBms?flag=1"
+                    , method: "GET"
                     , request: {
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
+                    ,page:true
                     , where: {}
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
@@ -85,9 +85,9 @@
                 }
             ]
             , reSet: {
-                url: "",
-                type: "reload",
-                data: ["",""]
+                url: "/supervise/bmgl/listBmsAsLbBmsBySelectVO?flag=1",
+                type: "search",
+                data: ["bmlb","bmName"]
             }
         }
     }

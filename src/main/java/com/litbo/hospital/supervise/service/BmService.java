@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface BmService {
@@ -55,8 +57,9 @@ public interface BmService {
 
     PageInfo listBmsAsLbBms(int pageNum, int pageSize,int flag);
 
+    PageInfo listBmsAsLbBmsBySelectVO(int pageNum, int pageSize, BmSelectVO selectVO);
 
-
+    Integer batchImportBms(String fileName, MultipartFile file)throws  Exception;
 
     //通过父布门递归删除
 //    void removeBmByPid(String pid);

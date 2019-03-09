@@ -7,6 +7,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjsg;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwPjsgService;
+import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +26,8 @@ public class FwPjsgController {
     @ApiOperation(value = "插入配件申购")
     @RequestMapping(value = "insertFwPjsg",method = RequestMethod.POST)
     public Result insertFwPjsg(@RequestBody InsertFwPjsgVo fwPjsgVo){
-        try {
+        try {//TODO
+            fwPjsgVo.getFwPjsg().setUserId1("1615925039");
             int res = pjsgService.insertFwPjsg(fwPjsgVo);
             if(res>0)
                 return Result.success();
@@ -80,7 +82,7 @@ public class FwPjsgController {
             if(id!=null&&sgStatus!=null&&(sgStatus == EnumApplyStatus.APPLY_APPROVAL.getCode()||sgStatus == EnumApplyStatus.APPLY_REJECT.getCode())){
                 //Todo 修改session的name
                 //      String currentUserId = (String) SecurityUtils.getSubject().getSession().getAttribute("currentUserId");
-                String currentUserId = "2";
+                String currentUserId = "1615925023";
                 int res = pjsgService.updateFwPjsgStatus(sgStatus,currentUserId,id);
                 if(res == 1){
                     return Result.success(res);
@@ -95,5 +97,10 @@ public class FwPjsgController {
             return Result.error(CodeMsg.PARAM_ERROR);
         }
 
+    }
+    @RequestMapping(value = "selectFwPjsgById",method = RequestMethod.GET)
+    public Result selectFwPjsgById(@RequestParam(defaultValue = "26") Integer id,@RequestParam(value = "taskId",required = false) Integer taskId){
+        ExaminePjsgVO vo = pjsgService.selectFwPjsgById(id,taskId);
+        return Result.success(vo);
     }
 }

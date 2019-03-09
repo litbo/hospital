@@ -11,12 +11,12 @@ import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/supervise/bmgl")
 @Api(tags = "部门管理")
 public class BmController {
@@ -32,7 +32,6 @@ public class BmController {
 
 
     @RequestMapping("/listSelectBmsCols")
-    @ResponseBody
     public Result listSelectBmsCols(@RequestParam(required = false) String key) {
         JSONArray myJsonArray = null;
         if ("checkbox".equals(key)){
@@ -52,7 +51,6 @@ public class BmController {
 
     //列出所有部门信息
     @RequestMapping("/listBms")
-    @ResponseBody
     public Result getBmList(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         PageInfo date = bmService.getBmList(pageNum,pageSize);
@@ -79,11 +77,18 @@ public class BmController {
         List<SBm> bmList = bmDao.getBmList();
         return Result.success(bmList);
     }
-    @GetMapping("/listBmsAsLbBms")
+    @RequestMapping("/listBmsAsLbBms")
     @ResponseBody
     public Result listBmsAsLbBms(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,int flag){
         PageInfo date = bmService.listBmsAsLbBms(pageNum,pageSize,flag);
+        return Result.success(date);
+    }
+    @RequestMapping("/listBmsAsLbBmsBySelectVO")
+    @ResponseBody
+    public Result listBmsAsLbBmsBySelectVO(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,BmSelectVO selectVO){
+        PageInfo date = bmService.listBmsAsLbBmsBySelectVO(pageNum,pageSize,selectVO);
         return Result.success(date);
     }
     //查询部门信息通过老id
@@ -200,5 +205,15 @@ public class BmController {
 
         PageInfo fwxBms = bmService.listFWXBmByBmName(pageNum, pageSize,bmName);
         return Result.success(fwxBms);
+    }
+
+    @PostMapping( "/batchImportBms")
+    @ResponseBody
+    public Result batchImportBms(@RequestParam("file") MultipartFile file) throws Exception{
+        String fileName = file.getOriginalFilename();
+        if(bmService.batchImportBms(fileName,file) == 0){
+            return Result.error();
+        }
+        return Result.success();
     }
 }
