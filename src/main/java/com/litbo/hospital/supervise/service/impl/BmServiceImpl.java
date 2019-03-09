@@ -6,6 +6,7 @@ import com.litbo.hospital.common.utils.StringCutUtils;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
+import com.litbo.hospital.supervise.vo.BmSelectLbVO;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
 import com.litbo.hospital.supervise.vo.WxbmSzSelectVO;
@@ -273,5 +274,72 @@ public class BmServiceImpl implements BmService {
     public PageInfo listFWXBmByBmName(int pageNum, int pageSize, String bmName) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(bmDao.listFWXBmByBmName(bmName));
+    }
+
+    @Override
+    public PageInfo listBmsAsLbBms(int pageNum, int pageSize,int flag) {
+        PageHelper.startPage(pageNum,pageSize);
+
+        List<SBm> bms = bmDao.getBmList();
+
+
+        List<BmSelectLbVO> lbbms = new ArrayList<>();
+        if(flag==1){
+            for (SBm bm:bms){
+                BmSelectLbVO lbbm = new BmSelectLbVO();
+                lbbm.setBmId(bm.getBmId());
+                lbbm.setBmName(bm.getBmName());
+                if(bm.getBmId().startsWith("02"))
+                    lbbm.setBmLb("管理部门");
+                else if (bm.getBmId().startsWith("01")){
+                    lbbm.setBmLb("机构领导");
+                }else {
+                    lbbm.setBmLb("使用部门");
+                }
+                lbbms.add(lbbm);
+            }
+        }else if(flag==2){
+            for (SBm bm:bms){
+                BmSelectLbVO lbbm = new BmSelectLbVO();
+                if(bm.getBmId().startsWith("02")){
+                    lbbm.setBmId(bm.getBmId());
+                    lbbm.setBmName(bm.getBmName());
+                    if(bm.getBmId().startsWith("0201")){
+                        lbbm.setBmgk("医工");
+                    }else if(bm.getBmId().startsWith("0202")) {
+                        lbbm.setBmgk("信息");
+                    }else if(bm.getBmId().startsWith("0203")) {
+                        lbbm.setBmgk("后勤");
+                    }
+                }
+                lbbms.add(lbbm);
+            }
+        }else if(flag==3){
+            for (SBm bm:bms){
+                BmSelectLbVO lbbm = new BmSelectLbVO();
+                if(bm.getBmId().startsWith("02")){
+                    lbbm.setBmId(bm.getBmId());
+                    lbbm.setBmName(bm.getBmName());
+                    if(bm.getBmId().startsWith("0201")){
+                        lbbm.setBmgk("医工");
+                    }else if(bm.getBmId().startsWith("0202")) {
+                        lbbm.setBmgk("信息");
+                    }else if(bm.getBmId().startsWith("0203")) {
+                        lbbm.setBmgk("后勤");
+                    }
+
+                    if(bm.getWxFlag().equals("1")){
+                        lbbm.setIsGlbm("是");
+                    }else {
+                        lbbm.setIsGlbm("否");
+                    }
+                }
+                lbbms.add(lbbm);
+            }
+        }
+
+
+        return new PageInfo(lbbms);
+
     }
 }
