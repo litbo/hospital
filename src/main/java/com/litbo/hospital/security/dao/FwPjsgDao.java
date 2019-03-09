@@ -6,6 +6,7 @@ import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -24,7 +25,7 @@ public interface FwPjsgDao {
 
     @Update("update fw_pjsg set sg_sh_time =#{sgShTime}, sg_status = #{sgStatus,jdbcType=INTEGER} " +
             "where user_id2 = #{currentUserId,jdbcType=VARCHAR} and  id = #{id,jdbcType=INTEGER} and sg_status = #{wait}")
-    int updateFwPjsgStatus(@Param("sgStatus") int sgStatus, @Param("currentUserId")String currentUserId,@Param("id") int id,@Param("wait")int wait);
+    int updateFwPjsgStatus(@Param("sgShTime")Date sgShTime ,@Param("sgStatus") int sgStatus, @Param("currentUserId")String currentUserId, @Param("id") int id, @Param("wait")int wait);
 
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjsgSqlProvider.class,method="selectFwPjsgById")
     ExaminePjsgVO selectFwPjsgById(Integer id);

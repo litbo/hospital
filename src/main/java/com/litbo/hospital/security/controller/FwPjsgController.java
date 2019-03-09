@@ -70,8 +70,15 @@ public class FwPjsgController {
                                 @RequestParam(required = false,defaultValue = "1990-01-01") String pjRkTimeStart,
                                 @RequestParam(required = false,defaultValue = "2999-12-31") String pjRkTimeEnd,
                                 @RequestParam(required = false) String pjName){
-        PageInfo pageInfo = pjsgService.listFwPjsgZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
-        return Result.success(pageInfo);
+        try{
+            PageInfo pageInfo = pjsgService.listFwPjsgZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
+            return Result.success(pageInfo);
+        }catch (Exception e){
+            return Result.error(CodeMsg.SERVER_ERROR);
+
+        }
+
+
     }
 
 

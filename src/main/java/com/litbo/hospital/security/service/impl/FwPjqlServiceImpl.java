@@ -7,6 +7,7 @@ import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwPjqlService;
+import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.InsertFwPjqlVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,4 +113,10 @@ public class FwPjqlServiceImpl implements FwPjqlService {
         return new PageInfo(pjqlZjbDao.listFwPjqlZjb(start,end,pjName));
     }
 
+    @Override
+    public ExaminePjqlVO selectFwPjqlById(Integer id, Integer taskId) {
+        ExaminePjqlVO vo = pjqlDao.selectFwPjqlById(id);
+        vo.setPjqlZjbs(pjqlZjbDao.listFwPjqlZjbExamine(id));
+        return vo;
+    }
 }
