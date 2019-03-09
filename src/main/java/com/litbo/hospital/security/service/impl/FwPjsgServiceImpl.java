@@ -79,7 +79,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
                 }
             }
         }
-        return pjsgDao.updateFwPjsgStatus(sgStatus,currentUserId,id,0);
+        return pjsgDao.updateFwPjsgStatus(new Date(),sgStatus,currentUserId,id,0);
     }
 
     @Override

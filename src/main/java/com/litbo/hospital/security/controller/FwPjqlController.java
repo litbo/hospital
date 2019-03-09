@@ -6,6 +6,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjck;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwPjqlService;
+import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.InsertFwPjqlVo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,10 @@ public class FwPjqlController {
                                 @RequestParam(required = false) String pjName){
         PageInfo pageInfo = pjqlService.listFwPjqlZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
         return Result.success(pageInfo);
+    }
+    @RequestMapping(value = "selectFwPjqlById",method = RequestMethod.GET)
+    public Result selectFwPjqlById(Integer id,Integer taskId){
+        ExaminePjqlVO vo = pjqlService.selectFwPjqlById(id,taskId);
+        return Result.success(vo);
     }
 }
