@@ -62,14 +62,22 @@ $(function () {
                     //表单渲染
                     if (val.get) {
                         val.get.success = function (res) {
-                            var dat = null,value = {};
-                            if(res.data.data !== undefined){
-                                dat = res.data.data;
-                            }else if(res.data.list !== undefined){
-                                dat = res.data.list[0];
-                            }else{
-                                dat = res.data;
+                            if(res.code !== 0 && res.data !== undefined){
+                                layer.alert("数据渲染失败！");
+                                console.log(res);
+                                return false;
                             }
+                            var dat = null,value = {};
+                            if(res.data){
+                                if(res.data.data !== undefined){
+                                    dat = res.data.data;
+                                }else if(res.data.list !== undefined){
+                                    dat = res.data.list[0];
+                                }else{
+                                    dat = res.data;
+                                }
+                            }
+
                             if(res.code === 0 && dat !== undefined){
                                 for (var name in dat) {
                                     if (dat.hasOwnProperty(name)) {
@@ -87,7 +95,11 @@ $(function () {
                                         }
                                     }
                                 }
+                                //表单默认值填充
                                 form.val(val.filter, value);
+                                if(val.datas !== undefined){
+                                    val.datas[res] = res.data;
+                                }
                             }
                         };
                         subUp(val.get)
@@ -254,7 +266,7 @@ $(function () {
                             //-----elem.checked(checkbox(复选) switch(开关))
                             console.log("=IN=");
                             //如果存在函数则执行函数
-                            eve.func && eve.func(data);
+                            eve.func && eve.func(data,eve);
 
                             //自定义是否需要阻止默认事件
                             var eBreak = true;//true -> 阻止 false -> 不阻止
@@ -613,7 +625,6 @@ $(function () {
                             var name = item.name,
                                 value = item.value || item.key,
                                 url = item.url || "/admin/index/global/data.html";
-                            console.log("inThis",item);
                             layOpen({
                                 type:2,
                                 title:"选择数据",

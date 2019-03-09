@@ -121,7 +121,7 @@
                 elem: "#date"
             },
             submit: {
-                before: function () {
+                before: function (param) {
                     var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
                     console.log(formData);
                     if (doJudg({

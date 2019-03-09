@@ -32,7 +32,7 @@
 
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>配件请领</legend>
+            <legend>院外维修申请</legend>
         </fieldset>
         <div class="col-xs-12">
 
@@ -80,6 +80,14 @@
             elem:"#save",
             func:function(){
                 var sel = $("#selectOne").val(),int = $("#inputOne").val(),$name = $.getUrlParam("vg"),$key = $.getUrlParam("key");
+                if(doJudg({
+                    "00":[int]
+                })){
+                    putMsg({
+                        alert:"请检查您的输入！"
+                    });
+                    return false;
+                }
                 layui.sessionData($name,{
                     key:$key,
                     value:{"eng":sel,"int":int}

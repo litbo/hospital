@@ -451,7 +451,10 @@ function subUp(value, data, param) {
                 } else if($("input[type=radio][name=" + valus + "]").val()){
                     dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
                 } else if($("input[type=checkbox][name=" + valus + "]").val()){
-                    dataP[valus] = $("input[type=checkbox][name=" + valus + "]").val();
+                    var $cks = $("input[type=checkbox][name=" + valus + "]");
+                    if($cks[0].checked === true){
+                        dataP[valus] = $cks.val();
+                    }
                 }
             } else {
                 dataP[valus] = data.field[valus];
@@ -743,13 +746,15 @@ action = func = {
         layui.use('table', function () {
             var table = layui.table
                 , filter = Type(value) !== "string" ? value.filter : value
-                , yes = Type(value) !== "string" ? value.yes : "确定要跳转链接吗？"
-                , no = Type(value) !== "string" ? value.no : "没有可以跳转的链接。";
+                , yes = Type(value) !== "json" ? value.yes : "确定要跳转链接吗？"
+                , no = Type(value) !== "json" ? value.no : "没有可以跳转的链接。";
             table.on('tool(' + filter + ')', function (obj) {
-                var data = obj.data,con = "";
+                var data = obj.data,
+                    con = "";
                 if (obj.event === "openLink") {
                     if (data.link) {
-                        layer.confirm(yes, function () {
+                        layer.confirm(yes, function (index) {
+                            //链接拼接
                             con = data.link + "?";
                             if(Type(value.param) === "array"){
                                 for(var g=0;g<value.param.length;g++){
@@ -758,11 +763,14 @@ action = func = {
                             }else{
                                 con = data.link + "?" + value.param + "=" + data[value.param];
                             }
+                            //弹出窗口
                             layOpen({
                                 type:2,
                                 title:"详细",
-                                content:con
-                            })
+                                content:con,
+                                area:["90%","90%"]
+                            });
+                            layer.close(index);
                         });
                     } else {
                         layer.alert(no)
@@ -1004,42 +1012,47 @@ action = func = {
                         });
                         return false;
                     }
-                    layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
-                        if(ck.isAll === true){
-                            oData = [];
-                            nCk = "all";//全部被选中
-                        }else {
-                            for (var j = 0; j < oData.length; j++) {
-                                //找出所有数据中的已选中数据并删除
-                                if (oData[j].LAY_CHECKED === true) {
-                                    oData.splice(j, 1);
-                                    //添加
-                                    nCk.push(oData[j][value.name]);
-                                } else {
-                                    delete oData[j]["LAY_CHECKED"];
-                                    delete oData[j]["LAY_TABLE_INDEX"];
-                                }
-                            }
-                            //上传已删除文件
-                            value.data = {};
-                            value.data[value.param] = nCk;
-                            value.success = function (res){
-                                if(res.code === 0){
-                                    layer.msg("数据删除成功！");
-                                    //重新渲染表格
-                                    table.reload(name,{
-                                        data : oData
-                                    });
-                                } else{
-                                    layer.msg("数据删除失败！")
-                                }
-                                layer.close(index);
-                            };
-                            subUp(value)
+                    //上传数据定义
+                    value.data = {};
+                    value.data[value.param] = nCk;
+                    value.success = function (res){
+                        if(res.code === 0){
+                            layer.msg("数据删除成功！");
+                            //重新渲染表格
+                            table.reload(name,{
+                                data : oData
+                            });
+                            value.reload && window.location.reload();
+                        } else{
+                            layer.msg("数据删除失败！")
                         }
+                        layer.close(index);
+                    };
+                    if(value.confirm === false){
+                        subUp(value)
+                    }else{
+                        layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
+                            if(ck.isAll === true){
+                                oData = [];
+                                nCk = "all";//全部被选中
+                            }else {
+                                for (var j = 0; j < oData.length; j++) {
+                                    //找出所有数据中的已选中数据并删除
+                                    if (oData[j].LAY_CHECKED === true) {
+                                        oData.splice(j, 1);
+                                        //添加
+                                        nCk.push(oData[j][value.name]);
+                                    } else {
+                                        delete oData[j]["LAY_CHECKED"];
+                                        delete oData[j]["LAY_TABLE_INDEX"];
+                                    }
+                                }
+                                //上传已删除文件
 
-
-                    });
+                                subUp(value)
+                            }
+                        });
+                    }
                 }
             });
         });

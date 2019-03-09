@@ -44,8 +44,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">选择预览</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" readonly>
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                 </div>
+
             </div>
             <div class="layui-form-item">
 
@@ -185,7 +186,7 @@
                 {
                     elem: "#selectRoom",
                     cb: "/supervise/bmgl/listSelectBmsCols",
-                    db: "/supervise/bmgl/listBms3",
+                    db: "/supervise/bmgl/listBms",
                     name: "dtdt",
                     key: "radio",
                     data: formData

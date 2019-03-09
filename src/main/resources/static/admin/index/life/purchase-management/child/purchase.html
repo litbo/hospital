@@ -82,7 +82,7 @@
                 <div class="layui-input-block">
                     <input type="text" name="tgBmId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
                            style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectRoom">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -207,6 +207,7 @@
 </div>
 </body>
 <script>
+    var formData = {};
     renderMod = {
         table: {
             table: [
@@ -237,7 +238,7 @@
                     , toolbar: false
                     , page: false
                     , height: "200"
-                    , url:"/lifeManage/selectSgInfoById"
+                    , url: "/lifeManage/selectSgInfoById"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -260,7 +261,18 @@
                 }
             ]
         },
-        bind: {},
+        bind: {
+            selectItem: [
+                {
+                    elem: "#selectRoom",
+                    cb: "/supervise/bmgl/listSelectBmsCols",
+                    db: "/supervise/bmgl/listBms",
+                    name: "dtdt",
+                    key: "radio",
+                    data: formData
+                }
+            ]
+        },
         form: {
             val: {
                 filter: "forms",
@@ -291,6 +303,9 @@
                     // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
                     //有add时必需时data为表单name数组，否则请直接使用data赋值
                 }//get内参数需参考《内容传输与提交》文档
+            },
+            before:function () {
+                
             }
         }
     };

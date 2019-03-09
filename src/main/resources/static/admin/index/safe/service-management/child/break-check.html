@@ -108,7 +108,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label" style="width:150px;">转到信息设置维修</label>
                 <div class="layui-input-block" style="margin-left:150px;">
-                    <input type="checkbox" name="a" class="layui-input" value="ON" title="ON" autocomplete="off">
+                    <input type="checkbox" name="a" id="turn" class="layui-input" value="ON" title="ON" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">故障排查</label>
                 <div class="layui-input-block">
-                    <select name="">
+                    <select name="gzpc" id="checks">
                         <option value="1">已查清</option>
                         <option value="1">已查清待确认</option>
                         <option value="1">未查明</option>
@@ -171,20 +171,16 @@
             },
             submit:{
                 before:function(param){
-                    var ts = getTableValue("table"),ss= "",$cks = $(".cks");
-                    //获取选中的值
-                    for(var i=0;i<$cks.length;i++){
-                        if($cks[i].checked === true){
-                            ss += $("input[name='s"+(i+1)+"']").val() + "|"
-                        }
+                    var ss= "",$cks = $(".cks"),one = {};
+                    switch($("allDone").val()){
+                        case "配件申领":one = formData.check1;break;
+                        case "院外维修申请":one = formData.check2;break;
+                        case "直接维修":one = formData.check3;break;
                     }
                     return param = {
-                        1: {
-                            "pjRkTime":$("input[name='pjRkTime']").val(),
-                            "sgSqsx":$("textarea[name='sgSqsx']").val(),
-                            "sgYy":ss
-                        },
-                        2:ts
+                        1: $("#turn").val(),
+                        2: $("#checks").val(),
+                        3: one
                     }
                 },
                 form:{
@@ -192,8 +188,9 @@
                     type:"POST",
                     contentType:"application/json",
                     param:{
-                        1:"fwPjsg",
-                        2:"fwPjsgZjbs"
+                        1:"name1",
+                        2:"name2",
+                        3:"name3"
                     }
                 }
             }
@@ -207,7 +204,8 @@
                     key:"check1",
                     data:formData,
                     func:function(res){
-                        $("#allDone").val("配件请领")
+                        $("#allDone").val("配件请领");
+                        console.log("1= ",formData);
                     }
                 },
                 {
@@ -217,7 +215,8 @@
                     key:"check2",
                     data:formData,
                     func:function(res){
-                        $("#allDone").val("院外维修申请")
+                        $("#allDone").val("院外维修申请");
+                        console.log("2= ",formData);
                     }
                 },
                 {
@@ -227,7 +226,8 @@
                     key:"check3",
                     data:formData,
                     func:function(res){
-                        $("#allDone").val("直接维修")
+                        $("#allDone").val("直接维修");
+                        console.log("3= ",formData);
                     }
                 }
             ]

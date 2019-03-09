@@ -10,9 +10,17 @@ import com.litbo.hospital.supervise.vo.BmSelectLbVO;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
 import com.litbo.hospital.supervise.vo.WxbmSzSelectVO;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -279,11 +287,9 @@ public class BmServiceImpl implements BmService {
     @Override
     public PageInfo listBmsAsLbBms(int pageNum, int pageSize,int flag) {
         PageHelper.startPage(pageNum,pageSize);
-
         List<SBm> bms = bmDao.getBmList();
-
-
         List<BmSelectLbVO> lbbms = new ArrayList<>();
+
         if(flag==1){
             for (SBm bm:bms){
                 BmSelectLbVO lbbm = new BmSelectLbVO();
@@ -300,32 +306,33 @@ public class BmServiceImpl implements BmService {
             }
         }else if(flag==2){
             for (SBm bm:bms){
-                BmSelectLbVO lbbm = new BmSelectLbVO();
+
                 if(bm.getBmId().startsWith("02")){
+                    BmSelectLbVO lbbm = new BmSelectLbVO();
                     lbbm.setBmId(bm.getBmId());
                     lbbm.setBmName(bm.getBmName());
                     if(bm.getBmId().startsWith("0201")){
-                        lbbm.setBmgk("医工");
+                        lbbm.setBmGk("医工");
                     }else if(bm.getBmId().startsWith("0202")) {
-                        lbbm.setBmgk("信息");
+                        lbbm.setBmGk("信息");
                     }else if(bm.getBmId().startsWith("0203")) {
-                        lbbm.setBmgk("后勤");
+                        lbbm.setBmGk("后勤");
                     }
+                    lbbms.add(lbbm);
                 }
-                lbbms.add(lbbm);
             }
         }else if(flag==3){
             for (SBm bm:bms){
-                BmSelectLbVO lbbm = new BmSelectLbVO();
                 if(bm.getBmId().startsWith("02")){
+                    BmSelectLbVO lbbm = new BmSelectLbVO();
                     lbbm.setBmId(bm.getBmId());
                     lbbm.setBmName(bm.getBmName());
                     if(bm.getBmId().startsWith("0201")){
-                        lbbm.setBmgk("医工");
+                        lbbm.setBmGk("医工");
                     }else if(bm.getBmId().startsWith("0202")) {
-                        lbbm.setBmgk("信息");
+                        lbbm.setBmGk("信息");
                     }else if(bm.getBmId().startsWith("0203")) {
-                        lbbm.setBmgk("后勤");
+                        lbbm.setBmGk("后勤");
                     }
 
                     if(bm.getWxFlag().equals("1")){
@@ -333,13 +340,152 @@ public class BmServiceImpl implements BmService {
                     }else {
                         lbbm.setIsGlbm("否");
                     }
+                    lbbms.add(lbbm);
                 }
-                lbbms.add(lbbm);
+
             }
         }
 
 
         return new PageInfo(lbbms);
 
+    }
+
+    @Override
+    public PageInfo listBmsAsLbBmsBySelectVO(int pageNum, int pageSize,  BmSelectVO selectVO) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> bms = bmDao.listBmsAsLbBmsBySelectVO(selectVO);
+        List<BmSelectLbVO> lbbms = new ArrayList<>();
+
+        if(selectVO.getFlag()==1){
+            for (SBm bm:bms){
+                BmSelectLbVO lbbm = new BmSelectLbVO();
+                lbbm.setBmId(bm.getBmId());
+                lbbm.setBmName(bm.getBmName());
+                if(bm.getBmId().startsWith("02"))
+                    lbbm.setBmLb("管理部门");
+                else if (bm.getBmId().startsWith("01")){
+                    lbbm.setBmLb("机构领导");
+                }else {
+                    lbbm.setBmLb("使用部门");
+                }
+                lbbms.add(lbbm);
+            }
+        }else if(selectVO.getFlag()==2){
+            for (SBm bm:bms){
+
+                if(bm.getBmId().startsWith("02")){
+                    BmSelectLbVO lbbm = new BmSelectLbVO();
+                    lbbm.setBmId(bm.getBmId());
+                    lbbm.setBmName(bm.getBmName());
+                    if(bm.getBmId().startsWith("0201")){
+                        lbbm.setBmGk("医工");
+                    }else if(bm.getBmId().startsWith("0202")) {
+                        lbbm.setBmGk("信息");
+                    }else if(bm.getBmId().startsWith("0203")) {
+                        lbbm.setBmGk("后勤");
+                    }
+                    lbbms.add(lbbm);
+                }
+            }
+        }else if(selectVO.getFlag()==3){
+            for (SBm bm:bms){
+                if(bm.getBmId().startsWith("02")){
+                    BmSelectLbVO lbbm = new BmSelectLbVO();
+                    lbbm.setBmId(bm.getBmId());
+                    lbbm.setBmName(bm.getBmName());
+                    if(bm.getBmId().startsWith("0201")){
+                        lbbm.setBmGk("医工");
+                    }else if(bm.getBmId().startsWith("0202")) {
+                        lbbm.setBmGk("信息");
+                    }else if(bm.getBmId().startsWith("0203")) {
+                        lbbm.setBmGk("后勤");
+                    }
+
+                    if(bm.getWxFlag().equals("1")){
+                        lbbm.setIsGlbm("是");
+                    }else {
+                        lbbm.setIsGlbm("否");
+                    }
+                    lbbms.add(lbbm);
+                }
+
+            }
+        }
+
+
+        return new PageInfo(lbbms);
+    }
+
+    @Override
+    public Integer batchImportBms(String fileName, MultipartFile file) throws  Exception {
+
+        boolean notNull = false;
+        Integer status = 1;
+        if (!fileName.matches("^.+\\.(?i)(xls)$") && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
+            String error = "上传文件格式不正确";
+            status = 0;
+            return status;
+        }
+        boolean isExcel2003 = true;
+        if (fileName.matches("^.+\\.(?i)(xlsx)$")) {
+            isExcel2003 = false;
+        }
+        InputStream is = file.getInputStream();
+        Workbook wb = null;
+        if (isExcel2003) {
+            wb = new HSSFWorkbook(is);
+        } else {
+            wb = new XSSFWorkbook(is);
+        }
+        Sheet sheet = wb.getSheetAt(0);
+        if(sheet!=null){
+            notNull = true;
+        }
+        System.out.println(sheet.getLastRowNum());
+        for (int r = 1; r < sheet.getLastRowNum()-1; r++) {
+            Row row = sheet.getRow(r);
+            if (row == null){
+                continue;
+            }
+            SBm bm = new SBm();
+
+
+            row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
+            row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
+            row.getCell(8).setCellType(Cell.CELL_TYPE_STRING);
+
+
+
+            String obmId = row.getCell(0).getStringCellValue();
+            String bmId = row.getCell(1).getStringCellValue();
+            String bmName = row.getCell(2).getStringCellValue();
+            String userId = row.getCell(3).getStringCellValue();
+            String bmTel = row.getCell(4).getStringCellValue();
+            String bmAddr = row.getCell(5).getStringCellValue();
+            String wxFlag = row.getCell(6).getStringCellValue();
+            String pBmId = row.getCell(7).getStringCellValue();
+            String xbmFlag = row.getCell(8).getStringCellValue();
+
+            bm.setObmId(obmId);
+            bm.setBmId(bmId);
+            bm.setBmName(bmName);
+            bm.setUserId(userId);
+            bm.setBmTel(bmTel);
+            bm.setBmAddr(bmAddr);
+            bm.setWxFlag(wxFlag);
+            bm.setpBmId(pBmId);
+            bm.setXbmFlag(xbmFlag);
+
+            bmDao.saveBm(bm);
+
+        }
+
+        return status;
     }
 }
