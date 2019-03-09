@@ -32,6 +32,7 @@ public class BmController {
 
 
     @RequestMapping("/listSelectBmsCols")
+    @ResponseBody
     public Result listSelectBmsCols(@RequestParam(required = false) String key) {
         JSONArray myJsonArray = null;
         if ("checkbox".equals(key)){
@@ -41,8 +42,8 @@ public class BmController {
             myJsonArray = JSONObject.parseArray(jsonMessage);
         }else if ("radio".equals(key)){
             String jsonMessage = "[{'type': 'radio'}, " +
-                    "{field: 'bmId', title: '人员ID'}, " +
-                    "{field: 'bmName', title: '人员姓名'}]";
+                    "{field: 'bmId', title: '部门ID'}, " +
+                    "{field: 'bmName', title: '部门名称'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
         }
         PageInfo date = new PageInfo(myJsonArray);
@@ -50,7 +51,7 @@ public class BmController {
     }
 
     //列出所有部门信息
-    @GetMapping("/listBms")
+    @RequestMapping("/listBms")
     @ResponseBody
     public Result getBmList(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
