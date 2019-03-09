@@ -22,6 +22,14 @@ public interface EmpDao {
             " from s_emp emp  INNER JOIN s_bm bm ON (emp.bm_id=bm.bm_id) WHERE bm.wx_flag=1")
     List<SEmp> getWxEmps();
 
+    @Select("SELECT\n" +
+            "emp.user_xm\n" +
+            "FROM\n" +
+            "dbo.s_emp AS emp\n" +
+            "WHERE\n" +
+            "emp.user_id = #{userId}")
+    String getUserXmById(String userId);
+
     @Select("select * from s_emp where bm_id = #{bmId}")
     List<SEmp> getEmpsByBmId(String bmId);
     @Insert("insert into s_emp (user_id, user_xm, sex_id, \n" +

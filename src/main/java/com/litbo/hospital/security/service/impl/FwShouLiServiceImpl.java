@@ -9,6 +9,7 @@ import com.litbo.hospital.security.dao.FwShouLiDao;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwShouLiService;
 import com.litbo.hospital.security.utils.WxGetNameUtils;
+import com.litbo.hospital.security.vo.FwShouLiIndexVo;
 import com.litbo.hospital.security.vo.FwVo;
 import com.litbo.hospital.security.vo.ShouliIndexVo;
 import com.litbo.hospital.supervise.bean.SEmp;
@@ -46,6 +47,14 @@ public class FwShouLiServiceImpl implements FwShouLiService {
 
     @Autowired
     private BmDao bmDao;
+
+    @Override
+    public FwShouLiIndexVo shouLiIndexVo(String fwId, String userId) {
+        FwShouLiIndexVo shouLiIndexVo = fwShouLiDao.shouLiIndexVo(fwId);
+        shouLiIndexVo.setSlrId(userId);
+        shouLiIndexVo.setSlrName(empDao.getUserXmById(userId));
+        return shouLiIndexVo;
+    }
 
     @Override
     public ShouliIndexVo shouliIndex(String fwId,String userId) {
