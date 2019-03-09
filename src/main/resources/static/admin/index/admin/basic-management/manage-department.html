@@ -37,18 +37,18 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
-            <select name="modules" lay-verify="required" lay-search="">
-                <option value="">全部</option>
-                <option value="1">清除设定</option>
-                <option value="2">划分到后勤口</option>
-                <option value="3">划分到信息口</option>
-                <option value="3">划分到医工口</option>
+            <select name="gklb" lay-verify="required" lay-search="">
+                <option value="0000000000">全部</option>
+                <option value="0200">未划分</option>
+                <option value="0201">医工</option>
+                <option value="0202">信息</option>
+                <option value="0203">后勤</option>
             </select>
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="拼音码" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="bmName" placeholder="部门名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -63,7 +63,7 @@
                     ,cols: [[ //表头
                         {checkbox:true,fixed:true}
                         , {field: 'bmName', title: '部门名称', width:'50%',minWidth: 200}
-                        , {field: 'bmgk', title: '归口', minWidth: 150}
+                        , {field: 'bmGk', title: '归口', minWidth: 150}
                     ]]
                     , url: "/supervise/bmgl/listBmsAsLbBms?flag=2"
                     , method: "GET"
@@ -85,9 +85,9 @@
                 }
             ]
             , reSet: {
-                url: "",
-                type: "reload",
-                data: ["",""]
+                url: "/supervise/bmgl/listBmsAsLbBmsBySelectVO?flag=2",
+                type: "search",
+                data: ["gklb","bmName"]
             }
         }
     }

@@ -31,7 +31,7 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs">
         <div class="layui-inline">
-            <button class="layui-btn">清除划分</button>
+            <button class="layui-btn" lay-event="qchf">清除划分</button>
         </div>
         <div class="layui-inline">
             <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
@@ -74,6 +74,7 @@
                     tableFunc({
                         delTable:{
                             id:"table",
+                            event:"qchf",
                             name:"gbId",
                             param:"gbIds",
                             url:"/kwgl/glbm/getGcsBmMSG/deleteGwByGwIds",
