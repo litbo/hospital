@@ -31,7 +31,7 @@
 </script>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal">批量设置为用户</a>
+        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sz">批量设置为用户</a>
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs" id="moreBar">
@@ -81,7 +81,22 @@
                         "msg": res.msg, //解析提示文本
                         "data": res.data.list //解析数据列表
                     }
-                }
+                },
+                done:function (obj) {
+                    tableFunc({
+                        delTable:{
+                            event:"#sz", //lay-event
+                            id:"table",
+                            name:"userId", //需要向后台发送的数据
+                            param:"userId",  //后台接收的名称
+                            url:"/user/setUsers",
+                            type:"post",
+                            confirm:false,  //false为不删除    删除就不要
+                            reload:true
+                        }
+                    })
+
+                },
             },
             reSet: {
                 url: "/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",

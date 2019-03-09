@@ -97,7 +97,17 @@
                             "type":2,
                             "area":['50%',"70%"],
                             "content":"./child/role-settingAdd.html"
-                        }]
+                        }],
+                        delTable:{
+                            event:"#sz", //lay-event
+                            id:"table",
+                            name:"userId", //需要向后台发送的数据
+                            param:"userId",  //后台接收的名称
+                            url:"/user/setUsers",
+                            type:"post",
+                            confirm:false,  //false为不删除    删除就不要
+                            reload:true
+                        }
                     })
                 }
             },
