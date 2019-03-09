@@ -53,6 +53,11 @@ public interface BmService {
     //获取所有非维修部门通过部门名
     PageInfo listFWXBmByBmName(int pageNum, int pageSize, String bmName);
 
+    PageInfo listBmsAsLbBms(int pageNum, int pageSize,int flag);
+
+
+
+
     //通过父布门递归删除
 //    void removeBmByPid(String pid);
 }

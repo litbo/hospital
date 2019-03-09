@@ -81,6 +81,13 @@ public class BmController {
         List<SBm> bmList = bmDao.getBmList();
         return Result.success(bmList);
     }
+    @GetMapping("/listBmsAsLbBms")
+    @ResponseBody
+    public Result listBmsAsLbBms(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,int flag){
+        PageInfo date = bmService.listBmsAsLbBms(pageNum,pageSize,flag);
+        return Result.success(date);
+    }
     //查询部门信息通过老id
     @GetMapping("/getBmByOid")
     @ResponseBody

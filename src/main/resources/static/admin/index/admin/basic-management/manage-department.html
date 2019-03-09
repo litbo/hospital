@@ -62,11 +62,11 @@
                     , height: 'full-75'
                     ,cols: [[ //表头
                         {checkbox:true,fixed:true}
-                        , {field: 'division-name', title: '部门名称', width:'50%',minWidth: 200}
-                        , {field: 'guikou', title: '归口', minWidth: 150}
+                        , {field: 'bmName', title: '部门名称', width:'50%',minWidth: 200}
+                        , {field: 'bmgk', title: '归口', minWidth: 150}
                     ]]
-                    , url: "/lifeManage/selectEquipmentAccount"
-                    , method: "POST"
+                    , url: "/supervise/bmgl/listBmsAsLbBms?flag=2"
+                    , method: "GET"
                     , request: {
                         pageName: 'pageNum',
                         limitName: 'pageSize'
