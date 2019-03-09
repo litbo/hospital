@@ -33,7 +33,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">公告类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select  lay-filter="gglx">
+                    <select name="gglxId"  lay-filter="gglx">
                         <option>请选择</option>
                     </select>
                 </div>
@@ -41,19 +41,20 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">发布部门<span class="sign">*</span></label>
                 <div class="layui-input-block">
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-xs layui-btn-normal" style="margin-left:35px" id="layerBtn" type="button">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">起始日期</label>
                 <div class="layui-input-block">
-                    <input type="text" id="date" name="kssj" autocomplete="off" class="layui-input">
+                    <input type="text" id="date1" name="kssj" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">截止日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jssj" id="date1" autocomplete="off" class="layui-input">
+                    <input type="text" name="jssj" id="date2" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -68,7 +69,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">拟稿时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ngsj" disabled autocomplete="off" class="layui-input" value="2018-12-09">
+                    <input type="text" name="ngsj" disabled autocomplete="off" class="layui-input"id="date3" value="2018-12-09">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -83,7 +84,7 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">公共内容</label>
+                <label class="layui-form-label">公告内容</label>
                 <div class="layui-input-block">
                     <textarea placeholder="请输入内容" name="ggnr" class="layui-textarea"></textarea>
                 </div>
@@ -92,7 +93,7 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -105,17 +106,71 @@
 
 
 <script>
-    renderMod.form = {
-        val:{
-            filter:"form",
-            select:[
+    formData = {};
+    renderMod= {
+        form:{
+            val:{
+                filter:"form",
+                select:[
+                    {
+                        filter:"gglx",
+                        ids:"gglxId",
+                        text:"gglxName",
+                        url:"/eqdict/gglx"
+                    }]
+            },
+            date:[
                 {
-                    filter:"gglx",
-                    ids:"gglxId",
-                    text:"gglxName",
-                    url:"/eqdict/gglx"
-                }]
+                    elem:"#date1",
+                    value:today,
+                    type:"date",
+                    format:'yyyy-MM-dd'
+                },
+                {
+                    elem:"#date2",
+                    value:today,
+                    type:"date",
+                    format:'yyyy-MM-dd'
+                },
+                {
+                    elem:"#date3",
+                    value:today,
+                    type:"date",
+                    format:'yyyy-MM-dd'
+                }
+            ],
+            submit:{
+                filter:"submit",//可以不写
+                before:function(){
+
+                    return param = {
+                        1:formData.radio[0].bmId
+                    }
+                },
+                form:{//或者写作up
+                    url:"/gg/addGg",
+                    type:"POST",
+                    data:["kssj","jssj","ngr","ggbt","ngsj","ggnr","gglxId"],
+                    param:{
+                        1:"bmId"
+                    },
+                    success:function(){
+                        alert("发布成功");
+                    }
+                }
         }
+        },
+        bind:{
+            selectItem: {
+                elem: "#layerBtn",
+                data:formData,
+                cb:"/supervise/bmgl/listSelectBmsCols",
+                db:"/supervise/bmgl/listBms",
+                key:"radio",
+                name:"dtdt"
+            }
+        }
+
     }
 </script>
 </body>

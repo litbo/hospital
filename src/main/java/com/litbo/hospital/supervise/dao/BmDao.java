@@ -41,12 +41,12 @@ public interface BmDao {
     SBm getBmByOid(String id);
     @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where bm_id=#{bmid}")
     SBm getBmBybmid(String bmid);
-    @Insert("insert into s_bm (bm_id, bm_name, user_id, \n" +
+    @Insert("insert into s_bm (obm_id,bm_id, bm_name, user_id, \n" +
             "      bm_tel, bm_addr, wx_flag, \n" +
-            "      p_bm_id)\n" +
-            "    values (#{bmId,jdbcType=CHAR}, #{bmName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
+            "      p_bm_id,xbm_flag)\n" +
+            "    values (#{obmId},#{bmId,jdbcType=CHAR}, #{bmName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
             "      #{bmTel,jdbcType=VARCHAR}, #{bmAddr,jdbcType=VARCHAR}, #{wxFlag,jdbcType=CHAR}, \n" +
-            "      #{pBmId,jdbcType=CHAR})")
+            "      #{pBmId,jdbcType=CHAR},#{xbmFlag})")
     void saveBm(SBm bm);
 
     @SelectProvider(type = BmProvider.class ,method = "selectBmByX")
@@ -65,6 +65,6 @@ public interface BmDao {
     void setBmIdByOid(@Param("obmId") String obmId,@Param("bmId") String bmId);
     @Update("update s_bm set wx_flag=#{fwFlag} where obm_id=#{obmId}")
     void setWxbm(@Param("obmId")String obmId, @Param("fwFlag")int fwFlag);
-
-
+    @SelectProvider(type = BmProvider.class ,method = "listBmsAsLbBmsBySelectVO")
+    List<SBm> listBmsAsLbBmsBySelectVO(BmSelectVO selectVO);
 }

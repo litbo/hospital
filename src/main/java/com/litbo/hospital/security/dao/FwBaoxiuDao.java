@@ -46,7 +46,7 @@ public interface FwBaoxiuDao {
             "WHERE baoxiu.id = #{fwId}")
     public FwNameVo findFwNameVO(@Param("fwId") String fwId, @Param("userId") String userId);
 
-    @Select("SELECT eq.eq_id,eq.eq_name,bm.bm_id,bm.bm_name,emp.user_id,emp.user_xm,bm.bm_tel,emp.tel \n" +
+    @Select("SELECT eq.eq_id,eq.eq_name,bm.bm_id as bxksId,bm.bm_name,emp.user_id as bxrId,emp.user_xm,bm.bm_tel as bxksdh,emp.tel as bxrdh \n" +
             "FROM dbo.eq_info AS eq, dbo.s_bm AS bm,dbo.s_emp AS emp \n" +
             "WHERE eq.eq_bmid = bm.bm_id AND eq.eq_id = #{eqId} AND emp.user_id = #{userId}")
     public FwBaoxiuIndexVo findBaoxiuIndexVo(@Param("eqId") String eqId,@Param("userId") String userId);

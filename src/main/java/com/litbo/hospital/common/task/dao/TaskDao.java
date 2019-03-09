@@ -12,6 +12,6 @@ public interface TaskDao {
     int insertTask(Task task);
     @Select("select * from task where jsr_id = #{userId} and status = 0 ORDER BY creat_time DESC")
     List<Task> listTaskByUserId(@Param("userId") String userId);
-    @Update("update task set status = 1 where id = #{id}")
-    int updateTaskById(Integer id);
+    @Update("update task set status = 1 where task_id = #{taskId}")
+    int updateTaskById(@Param("taskId") Integer taskId);
 }

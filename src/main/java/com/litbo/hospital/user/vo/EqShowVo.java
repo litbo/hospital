@@ -16,6 +16,8 @@ public class EqShowVo {
 
     private String eqSbbh;
 
+    private String eqPym;
+
     private String eqName;
 
     private String eqZcbh;
@@ -27,6 +29,10 @@ public class EqShowVo {
     private String eqXh;
 
     private String bmName;
+
+    private String eqPp;
+
+    private String eqPrice;
 
     private Date eqQysj;
 

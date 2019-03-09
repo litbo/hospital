@@ -42,6 +42,8 @@ public class BaoXiuRw {
 
     private String baoxiuRw;
 
+    private String link;
+
 
     public BaoXiuRw(String bmName, String eqName, String userXm, Timestamp bxTime, Integer jjxStatus, String eqId, Integer bxStatus, String fwId) {
         this.eqId = eqId;
@@ -65,6 +67,7 @@ public class BaoXiuRw {
             this.jjxStatusString =  "未知";
         }
         this.baoxiuRw = bmName+";"+eqName+";"+eqId+";"+ EnumUtils.getByCode(EnumProcess.class,bxStatus).getMessage();
+        this.link = "/admin/index/safe/service-management/child/repair-repairs"+this.bxStatus+".html";
     }
 
 }

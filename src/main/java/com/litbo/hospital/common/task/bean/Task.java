@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class Task {
-    private Integer id;
+    private Integer taskId;
     private String actionName;
     private String workName;
     private Date creatTime;

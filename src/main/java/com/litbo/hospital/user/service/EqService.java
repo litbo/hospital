@@ -6,6 +6,7 @@ import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqSyxz;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SelectFlEqVo;
 import com.litbo.hospital.user.vo.SetPmVo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,4 +46,6 @@ public interface EqService {
     Integer saveFj(EqFj eqFj);
 
     Integer importFj(MultipartFile file);
+
+    PageInfo listFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
 }

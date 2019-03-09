@@ -8,6 +8,7 @@ import com.litbo.hospital.user.dao.provider.EqProvider;
 import com.litbo.hospital.user.vo.EqShowVo;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
+import com.litbo.hospital.user.vo.SelectFlEqVo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -67,4 +68,6 @@ public interface EqDao {
 
     @InsertProvider(type = EqProvider.class , method = "saveFj")
     Integer saveFj(EqFj eqFj);
+    @SelectProvider(type = EqProvider.class , method = "listFlEqByX")
+    List<EqShowVo> listFlEqByX(SelectFlEqVo selectFlEqVo);
 }
