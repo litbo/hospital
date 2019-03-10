@@ -19,4 +19,6 @@ public interface EqCsService {
     PageInfo listEqcsByX1(int pageNum, int pageSize, EqCsSelectVO selectVo);
 
     PageInfo listEqcsByX2(int pageNum, int pageSize, EqCsSelectVO selectVo);
+
+    PageInfo listEqcsByX3(int pageNum, int pageSize, EqCsSelectVO selectVo);
 }
