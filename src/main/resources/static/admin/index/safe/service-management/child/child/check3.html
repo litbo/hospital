@@ -94,11 +94,12 @@
                 <label class="layui-form-label">故障原因类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select name="ss" lay-filter="break_type">
-                        <option value="人为原因">人为原因</option>
-                        <option value="设备本身原因">设备本身原因</option>
-                        <option value="外界环境原因">外界环境原因</option>
-                        <option value="正常损耗原因">正常损耗原因</option>
-                        <option value="其他不明原因">其他不明原因</option>
+                        <option value=""></option>
+                        <option value="1">人为原因</option>
+                        <option value="2">设备本身原因</option>
+                        <option value="3">外界环境原因</option>
+                        <option value="4">正常损耗原因</option>
+                        <option value="5">其他不明原因</option>
                     </select>
                 </div>
             </div>
@@ -106,16 +107,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">故障原因明细<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="ss" lay-filter="break_reason">
-
+                    <select name="ss" id="gzmx" lay-filter="break_reason">
+                        <option value=""></option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">故障部位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="ss" lay-filter="break_part">
-
+                    <select  name="ss" lay-filter="break_part">
+                        <option value=""></option>
                     </select>
                 </div>
             </div>
@@ -189,7 +190,7 @@
                     format:'yyyy-MM-dd HH:mm:ss'
                 }
             ],
-            val:{
+            /*val:{
                 filter:"form",
                 select:{
                         filter:"repair_eng",
@@ -197,7 +198,7 @@
                         text:"userXm",
                         url:"/kwgl/empgl/listPartnerByUserId"
                     }
-            },
+            },*/
             event:{
                 filter:"break_type",
                 box:"select",
@@ -206,7 +207,9 @@
                     subUp({
                         url:"/security/wxnr/wxnrZdIndex",
                         type:"GET",
-                        data:{key:data.value},
+                        data:{gzyyId:data.value,
+                            gzmxId:$("#gzmx").val()
+                        },
                         success:function(res){
                             if(res.code === 0){
                                 var datt = res.data.list || res.data;
@@ -217,11 +220,16 @@
                                     var $d = $("select[lay-filter='"+f+"']");
                                     $d.html("");
                                     for (var i = 0; i < d.length; i++) {
+                                        //console.log(d[i]);
                                         //动态渲染option标签并且渲染进页面
-                                        $d .append($("<option>").attr({"value":d[i][id]}).append(d[i][text]));
+                                        $d .append($("<option>").attr({"value":d[i]['id']}).append(d[i]['wxnrzdText']));
                                     }
-                                    //表单下拉单独重新渲染
-                                    form.render("select");
+                                    layui.use("form",function(){
+                                        var form = layui.form;
+                                        //表单下拉单独重新渲染
+                                        form.render("select");
+                                    })
+
                                 }
                             }
                         }

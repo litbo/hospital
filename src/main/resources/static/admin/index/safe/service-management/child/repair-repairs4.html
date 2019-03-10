@@ -158,7 +158,10 @@
 </form>
 
 <script>
-    formData = {};
+    var formData = {},$cbs = "";
+    $(function () {
+        $cbs = $("#wxrId").val()
+    });
     renderMod= {
         form: {
             /*val:{
@@ -219,6 +222,7 @@
                         elem: "#check1",
                         url: "./child/check1.html",
                         name: "dtdt",
+                        cb:$cbs,
                         key: "check1",
                         data: formData,
                         func: function (res) {

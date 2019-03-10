@@ -32,6 +32,7 @@ public class FwWxnrzdServiceImpl implements FwWxnrzdService {
         wxnrzdIndexVo.setGzyymx(gzyymx);
         List<FwWxnrzd> gzbm = wxnrzdDao.selectFwWxnrzd(gzmxId);
         wxnrzdIndexVo.setGzbw(gzbm);
+        System.out.println();
         return wxnrzdIndexVo;
     }
 }
