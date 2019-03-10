@@ -57,19 +57,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">团队名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="groupName" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">创建人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" value="刘松峰" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="userId1" value="刘松峰" autocomplete="off" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="" id="" lay-verify="required">
+                    <select name="userId2" id="" lay-verify="required">
                         <option></option>
                         <option>盖玉斋</option>
                         <option>刘松峰</option>
@@ -122,10 +122,10 @@
             submit: {
                 form: {
                     before: function () {
-                        var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
+                        var ug = getTableValue("table");
                         if (doJudg({
                             "undefined": [formData.person, formData.user],
-                            0: [tv, tv1]
+                            0: [ug]
                         })) {
                             putMsg({
                                 alert: "无法提交空数据！"
@@ -134,18 +134,16 @@
                         }
                         return param = {
                             1: formData.person.userIdJl,
-                            2: tv1,
-                            3: tv
+                            2: ug
                         };
                     },
                     form: {
-                        url: "/lifeManage/insertSgKstl",
+                        url: "/sybm/ksgl/submitGroups",
                         type: "POST",
-                        data: ["kstlAddr", "kstlYj", "kstlTime", "kstlContent"],
+                        data: ["groupName", "userId1", "userId2"],
                         param: {
                             1: "userIdJl",
-                            2: "usersId",
-                            3: "pmsId"
+                            2: "ug"
                         },
                         add: {
                             bmId: 1
