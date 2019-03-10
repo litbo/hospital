@@ -95,11 +95,11 @@
                     </button>
                 </div>
             </div>
-            <table id="table" lay-filter="table1"></table>
+            <table id="table" lay-filter="table"></table>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save" id="sureAdd">确定添加
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""  id="add" >确定添加
                 </button>
             </div>
         </div>
@@ -202,10 +202,20 @@
                 }
             },
             {
-                elem:'#sureAdd',
+                elem:'#add',
                 func:function(){
-                    var new2 = {};
-
+                    layui.use('table',function(){
+                        var table = layui.table;
+                        var aa = table.cache['table'];
+                        var key = $.getUrlParam('key');
+                        console.log(key);
+                        layui.sessionData($.getUrlParam('vg'),{
+                            key:key,
+                            value:aa
+                        });
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index);
+                    })
                 }
             }
         ]
