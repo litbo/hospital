@@ -1,8 +1,8 @@
 package com.litbo.hospital.security.service;
 
-import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
+import com.litbo.hospital.security.vo.FwWeiXiuIndexVo;
 import com.litbo.hospital.security.vo.WeixiuIndexVo;
 import com.litbo.hospital.security.vo.WxqrIndex;
 
@@ -20,11 +20,13 @@ public interface FwWeixiuService {
     public WxqrIndex wxqsIndex(String fwId);
 
     /**
-     * 维修主页面回显
+     * 维修主页面回显（过时）
      * @param fwId
      * @return
      */
     public WeixiuIndexVo weixiuIndex(String fwId);
+
+    public FwWeiXiuIndexVo weixiuIndexVo(String fwId,String userId);
 
     /**
      * 添加维修

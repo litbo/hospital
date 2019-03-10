@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>合同支付</title>
+    <title>合同查询</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -41,6 +41,9 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="" autocomplete="off" class="layui-input" placeholder="合同名称">
                     </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="维修商">
+                    </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
                     </div>
@@ -50,39 +53,56 @@
     </div>
 </script>
 <script type="text/html" id="bar">
-<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">支付</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="zhifu">支付</a>
 </script>
-
-
 <script>
-    renderMod.addTable ={
+    renderMod.table={
         table:{
             cols: [[ //表头
-                {field: 'use-depart', title: '合同编号', minWidth: 200}
-                , {field: 'authorized_person', title: '合同名称', minWidth: 150}
-                , {field: 'authorized_depart', title: '合同金额', minWidth: 200,sort:true}
-                , {field: 'model', title: '首次支付', minWidth: 100}
-                , {field: 'model', title: '二次支付', minWidth: 150}
-                , {field: 'model', title: '末次金额', minWidth: 150,sort:true}
-                , {field: 'model', title: '余额', minWidth: 150,sort:true}
-                , {title:'',align:'center',minWidth:100,toolbar:'#bar'}
+                {field: 'id', title: '合同编号', minWidth: 200}
+                , {field: 'htName', title: '合同名称', minWidth: 150}
+                , {field: 'htPrice', title: '合同金额', minWidth: 200,sort:true}
+                , {field: 'htTime', title: '合同日期', minWidth: 100}
+                , {field: 'sbcsName', title: '维修商', minWidth: 150}
+                , {title:'',align:'center',minWidth:200,toolbar:'#bar'}
             ]]
-           , url:""
-           , request:{
-               pageName : 'pageNum',
-               limitName : 'pageSize'
-           }
-           ,parseData: function(res) { //res 即为原始返回的数据
-               return {
-                   "code": res.code, //解析接口状态
-                   "msg": res.msg, //解析提示文本
-                   "count":res.data.total,
-                   "data": res.data.list //解析数据列表
-               }
-           }
-            , done: function (obj) {
-
+            ,url:"/fwht/htZfList"
+            ,request:{
+                pageName : 'pageNum',
+                limitName : 'pageSize'
             }
+            /*,where:{
+                a : 1
+            }*/
+            ,parseData: function(res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count":res.data.total,//页面的所有数据数
+                    "data": res.data.list //解析数据列表
+                }
+            }
+            , done: function (obj) {
+                tableFunc({
+                    tools:[
+                        {
+                            event:"zhifu",
+                            title:"支付",
+                            type:2,
+                            content:"./child/contract-pay.html",
+                            dataUrl:["id"]
+                        }
+                    ]
+                })
+            }
+        },
+        reSet:{
+            url:"/fwht/list",
+            type:"search",
+            where:{
+                newValue:"thisIsNew"
+            },
+            tid:"#table"
         }
     }
 </script>

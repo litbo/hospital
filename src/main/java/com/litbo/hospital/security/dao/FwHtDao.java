@@ -1,10 +1,9 @@
 package com.litbo.hospital.security.dao;
 
+import com.litbo.hospital.security.bean.FwFk;
 import com.litbo.hospital.security.bean.FwHt;
 import com.litbo.hospital.security.vo.HtVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -14,6 +13,9 @@ import java.util.List;
  */
 @Mapper
 public interface FwHtDao {
+
+    @Update("update fw_ht set ht_status = #{status} where id = #{id}")
+    public int updateHtStatus(@Param("id") String id, @Param("status") Integer status);
 
     @Insert("insert into fw_ht (id, ht_name, ht_time, \n" +
             "      ht_lx, ht_price, sbcs_id, \n" +
@@ -31,13 +33,20 @@ public interface FwHtDao {
             "      #{htMs,jdbcType=LONGVARCHAR})")
     public int addFwHt(FwHt fwHt);
 
-    //合同查询
+    @Insert("INSERT INTO fw_fk (fk_fs,fk_time,fk_fphm,fkrXm,fk_price,fk_htbh) " +
+            "values (#{fkFs},#{fkTime},#{fkFphm},#{fkrXm},#{fkPrice},#{fkHtbh})")
+    public int addFwFk(FwFk fwFk);
+
+    /**
+     *   合同查询
+     */
     @Select("SELECT\n" +
             "ht.id,\n" +
             "ht.ht_name,\n" +
             "ht.ht_price,\n" +
             "ht.ht_time,\n" +
-            "cs.sbcs_name\n" +
+            "cs.sbcs_name,\n" +
+            "ht.ht_status\n" +
             "\n" +
             "FROM\n" +
             "dbo.fw_ht AS ht ,\n" +
@@ -46,6 +55,32 @@ public interface FwHtDao {
             "ht.sbcs_id = cs.sbcs_id")
     public List<HtVo> getAllFwHt();
 
+    @Select("SELECT\n" +
+            "ht.id,\n" +
+            "ht.ht_name,\n" +
+            "ht.ht_price,\n" +
+            "ht.ht_time,\n" +
+            "cs.sbcs_name,\n" +
+            "ht.ht_status\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.fw_ht AS ht ,\n" +
+            "dbo.eq_cs AS cs\n" +
+            "WHERE\n" +
+            "ht.sbcs_id = cs.sbcs_id AND\n" +
+            "ht.ht_status = #{htStatus}")
+    public List<HtVo> getFwHtByStatus(Integer htStatus);
 
+    @Select("SELECT\n" +
+            "dbo.fw_ht.id as fkHtbh,\n" +
+            "dbo.fw_ht.ht_name,\n" +
+            "dbo.fw_ht.ht_time,\n" +
+            "dbo.fw_ht.ht_price\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.fw_ht\n" +
+            "WHERE\n" +
+            "dbo.fw_ht.id = #{id}")
+    public HtVo getFwHt(String id);
 
 }

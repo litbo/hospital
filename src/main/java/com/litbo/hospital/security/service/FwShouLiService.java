@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.service;
 
 import com.litbo.hospital.security.bean.FwShouli;
+import com.litbo.hospital.security.vo.FwShouLiIndexVo;
 import com.litbo.hospital.security.vo.ShouliIndexVo;
 
 import java.util.List;
@@ -13,7 +14,15 @@ import java.util.List;
 public interface FwShouLiService {
 
     /**
-     * 页面会先数据封装
+     * 初始化受理页面
+     * @param fwId
+     * @param userId
+     * @return
+     */
+    public FwShouLiIndexVo shouLiIndexVo(String fwId, String userId);
+
+    /**
+     * 初始化受理页面 (过时)
      * @param fwId
      * @param userId
      * @return

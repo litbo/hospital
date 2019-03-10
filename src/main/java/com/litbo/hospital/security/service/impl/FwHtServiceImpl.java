@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.security.bean.FwFk;
 import com.litbo.hospital.security.bean.FwHt;
 import com.litbo.hospital.security.dao.FwHtDao;
 import com.litbo.hospital.security.service.FwHtService;
@@ -25,7 +26,17 @@ public class FwHtServiceImpl implements FwHtService {
     public int addFwHt(FwHt fwHt) {
         String id = IDFormat.getIdByIDAndTime("fw_ht", "id");
         fwHt.setId(id);
+        fwHt.setHtStatus(0);
         int i = fwHtDao.addFwHt(fwHt);
+        return i;
+    }
+
+    @Override
+    public int addFwFk(FwFk fwFk) {
+        int i = fwHtDao.addFwFk(fwFk);
+        if(i>0){
+            fwHtDao.updateHtStatus(fwFk.getFkHtbh(),1);
+        }
         return i;
     }
 
@@ -34,5 +45,17 @@ public class FwHtServiceImpl implements FwHtService {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<HtVo> pageInfo = new PageInfo<>(fwHtDao.getAllFwHt());
         return Result.success(pageInfo);
+    }
+
+    @Override
+    public PageInfo getHtZfList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<HtVo> htVoPageInfo = new PageInfo<>(fwHtDao.getFwHtByStatus(0));
+        return htVoPageInfo;
+    }
+
+    @Override
+    public HtVo getHtVoById(String id) {
+        return fwHtDao.getFwHt(id);
     }
 }

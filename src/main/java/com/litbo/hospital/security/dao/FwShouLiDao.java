@@ -2,6 +2,7 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwShouli;
 import com.litbo.hospital.security.vo.BaoXiuRw;
+import com.litbo.hospital.security.vo.FwShouLiIndexVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -54,4 +55,31 @@ public interface FwShouLiDao {
             "shouli.slr_id = #{userId} AND\n" +
             "baoxiu.bx_status in (4,5,10,12,44)")
     public List<BaoXiuRw> findBaoxiuRw(String userId);
+
+    //受理页面初始化
+    @Select("SELECT\n" +
+            "bx.id,\n" +
+            "eq.eq_name,\n" +
+            "eq.eq_gg,\n" +
+            "eq.eq_xh,\n" +
+            "eq.eq_bxjssj,\n" +
+            "bm.bm_name,\n" +
+            "bx.bxksdh,\n" +
+            "bx.bx_time,\n" +
+            "emp.user_xm,\n" +
+            "bx.bxrdh,\n" +
+            "bx.bxfs,\n" +
+            "bx.jjx_status\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.fw_baoxiu AS bx ,\n" +
+            "dbo.eq_info AS eq ,\n" +
+            "dbo.s_bm AS bm ,\n" +
+            "dbo.s_emp AS emp\n" +
+            "WHERE\n" +
+            "bx.eq_id = eq.eq_id AND\n" +
+            "bx.bxks_id = bm.bm_id AND\n" +
+            "bx.bxr_id = emp.user_id AND\n" +
+            "bx.id = #{fwId}")
+    public FwShouLiIndexVo shouLiIndexVo(String fwId);
 }

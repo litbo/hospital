@@ -36,7 +36,7 @@
 <div class="layui-container">
     <form class="layui-form layui-form-pane" lay-filter="shouliForms">
         <div class="layui-row">
-
+            <input type="hidden" name="slrId" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
             <div class="layui-collapse" lay-accordion>
                 <!--模块1-->
                 <div class="layui-colla-item">
@@ -47,64 +47,64 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">维修单号<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                        <input type="text" name="id" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修设备<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                        <input type="text" name="eqName" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">型号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="eqXh" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">规格</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" disabled class="layui-input" autocomplete="off">
+                                        <input type="text" name="eqGg" disabled class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修状态</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="eqBxStatus" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修到期日<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                        <input type="text" name="eqBxjssj" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修部门<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                        <input type="text" name="bmName" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修科室电话</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="bxksdh" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" disabled class="layui-input" autocomplete="off">
+                                        <input type="text" name="bxTime" disabled class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修类型</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="bxLx" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
@@ -114,14 +114,14 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="userXm" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修人电话</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="bxrdh" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
@@ -129,17 +129,17 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">报修方式</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="bxfs" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">紧急性</label>
                                         <div class="layui-input-block">
-                                            <select>
-                                                <option>低</option>
-                                                <option>中</option>
-                                                <option>高</option>
+                                            <select name="jjxStatus">
+                                                <option value="0">低</option>
+                                                <option value="0">中</option>
+                                                <option value="0">高</option>
                                             </select>
                                         </div>
                                     </div>
@@ -156,20 +156,20 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">受理人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="slrName" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">受理时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" class="layui-input" autocomplete="off" id="acceptDate">
+                                        <input type="text" name="slTime" class="layui-input" autocomplete="off" id="acceptDate">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">备注</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" placeholder="请输入" lay-verify="required"
+                                        <input type="text" name="slBz" placeholder="请输入" lay-verify="required"
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
@@ -179,27 +179,27 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">因故障停机</label>
                                     <div class="layui-input-block">
-                                        <select>
-                                            <option>停机</option>
-                                            <option>未停机</option>
+                                        <select name="gztjStatus">
+                                            <option value="0">停机</option>
+                                            <option value="1">未停机</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">维修方式<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <select lay-verify="required" lay-search>
-                                            <option>现场维修</option>
-                                            <option>电话指导</option>
-                                            <option>科室送修</option>
-                                            <option>远程维护</option>
+                                        <select name="wxfs" lay-verify="required" lay-search>
+                                            <option value="现场维修">现场维修</option>
+                                            <option value="电话指导">电话指导</option>
+                                            <option value="科室送修">科室送修</option>
+                                            <option value="远程维护">远程维护</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">约定维修时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" class="layui-input" autocomplete="off" id="appointRepairDate">
+                                        <input type="text" name="ydwxTime" class="layui-input" autocomplete="off" id="appointRepairDate">
                                     </div>
                                 </div>
                             </div>
@@ -222,19 +222,19 @@
     renderMod = {
         form: {
             val:{
-                filter:"shouliForms",
-                get:{
-                    url:"/baoxiu/baoxiuIndex",
-                    data:{
-                        eqId:$.getUrlParam("eqId")
+                    filter:"shouliForms",
+                    get:{
+                        url:"/shouli/shouLiIndex",
+                        data:{
+                            fwId:$.getUrlParam("fwId")
+                        }
                     }
-                }
             },
             submit:{
                 form:{
-                    url:"/baoxiu/addBaoxiu",
+                    url:"/shouli/addShouli",
                     type:"POST",
-                    data:["eqId","bxrId","bxrdh","bxksId","bxksdh","bxfs","gzxx","bxTime","fxTime"],
+                    data:["id","gztjStatus","slTime","wxfs","bxfs","slrId","ydwxTime","slBz"],
                     done:function(res){
                         if(res.code === 0){
                             //提交完成后关闭页面
