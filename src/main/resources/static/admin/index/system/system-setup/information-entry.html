@@ -52,8 +52,8 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">品名<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
+                                        <input type="text" name="eqPmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="pm" id="pm">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -437,34 +437,7 @@
 <script>
 </script>
 <script>
-    $('#next').click(function(){
-        $('#tab1').attr('class','layui-tab-item');
-        $('#tab2').attr('class','layui-tab-item layui-show');
-        $('#tit1').attr('class','');
-        $('#tit2').attr('class','layui-this');
-    });
-    layui.use('element', function(){
-        var element = layui.element;
-    });
-     // renderMod.form = {
-     //     val:{
-     //         filter:"form",
-     //         select:[
-     //             {
-     //                 filter:"zjly",
-     //                 ids:"zjlyId",
-     //                 text:"zjlyName",
-     //                 url:"/eqdict/zjly"
-     //             }/*,
-     //             {
-     //                 filter:"aihao6",
-     //                 ids:"eqCxflId",
-     //                 text:"eqCxflName",
-     //                 url:"/eqdict/cxfl"
-     //             }*/
-     //         ]
-     //     }
-     // }
+    formData={};
     renderMod={
         form:{
             date:[
@@ -497,12 +470,12 @@
                     value:today
                 }
             ],
-            file:[
+          /*  file:[
                 {
                     elem:"#selec",
                     url:"/logo/setLogo",
                     accept:"images",
-                    acceptMime:"image/*",
+                    acceptMime:"image/!*",
                     auto:false,
                     bindAction:"#sub",
                     field:"logoFile",
@@ -528,7 +501,7 @@
                     elem:"#selec1",
                     url:"/logo/setLogo",
                     accept:"images",
-                    acceptMime:"image/*",
+                    acceptMime:"image/!*",
                     auto:false,
                     bindAction:"#sub",
                     field:"logoFile",
@@ -550,30 +523,32 @@
                         console.log("upload"+upload);
                     }
                 }
-            ]
-        },
-
-        addTable:{
-            table: [
-                {
-                    cols: [[ //表头
-                        {type: "checkbox"}
-                        , {field: 's1', title: '名称', minWidth: 300}
-                        , {field: 's2', title: '型号', minWidth: 300}
-                        , {field: 's2', title: '生产日期', minWidth: 220}
-                        , {field: 's2', title: '生产编号', minWidth: 200}
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "请先选择数据！"
+            ],*/
+          /*  val: {
+                filter:"bmList",
+                select: [
+                    {
+                        filter:"bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
                     }
-                    ,id:'table'
-                }
-            ]
+                ]
+            }*/
+        },
+        bind:{
+            selectItem: {
+                elem: "#pm",
+                data:formData,
+                cb:"/eq/listPmsCols",
+                db:"/eq/listPms",
+                key:"radio",
+                name:"dtdt"
+            }
         }
+
+
+
     }
 </script>
 </body>
