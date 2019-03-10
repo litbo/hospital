@@ -50,8 +50,9 @@ public class FwPjsgServiceImpl implements FwPjsgService {
         task.setCreatTime(new Date());
         task.setWorkName("配件申购审核");
         task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
-        task.setUrl("");
+        task.setUrl("/admin/index/examine/examine-apply.html");
         task.setActionName("配件申购");
+        task.setOther(pjsg.getId().toString());
         taskDao.insertTask(task);
         return res;
     }

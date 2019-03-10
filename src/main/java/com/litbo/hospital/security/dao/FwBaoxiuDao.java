@@ -28,7 +28,7 @@ public interface FwBaoxiuDao {
 
     @Update("update fw_baoxiu set bx_status = #{baoxiuStatus} where id = #{fwId}")
     //@UpdateProvider(type = FwBaoxiuProvider.class)
-    public void updateBaoxiuStatus(@Param("fwId") String fwId, @Param("baoxiuStatus") int baoxiuStatus);
+    public int updateBaoxiuStatus(@Param("fwId") String fwId, @Param("baoxiuStatus") int baoxiuStatus);
 
     @SelectProvider(type = FwBaoxiuProvider.class,method = "listFwBaoxiu")
     public List<FwBaoxiu> findFwBaoxiuList();
