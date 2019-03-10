@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwPjqlZjb;
+import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.FwPjqlZjbVo;
 import com.litbo.hospital.security.vo.PjqlZjbExamineVO;
 import org.apache.ibatis.annotations.*;
@@ -20,8 +21,13 @@ public interface FwPjqlZjbDao {
 
     @Select("select * from fw_pjql_zjb where pjql_id=#{id}")
     List<FwPjqlZjb> listFwPjqlByBjqlId(Integer id);
+
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjqlZjbProvider.class,method="listFwPjqlZjb")
     List<FwPjqlZjbVo> listFwPjqlZjb(@Param("start") Date start, @Param("end") Date end, @Param("pjName") String pjName);
+
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjqlZjbProvider.class,method="listFwPjqlZjbExamine")
     List<PjqlZjbExamineVO> listFwPjqlZjbExamine(Integer id);
+
+    @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjqlZjbProvider.class,method="selectFwPjqlByFwId")
+    List<PjqlZjbExamineVO> selectFwPjqlByFwId(String fwId);
 }

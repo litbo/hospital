@@ -2,6 +2,8 @@ package com.litbo.hospital.security.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.task.bean.Task;
+import com.litbo.hospital.common.task.service.TaskService;
 import com.litbo.hospital.security.bean.*;
 import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
@@ -32,6 +34,8 @@ public class FwPjqlServiceImpl implements FwPjqlService {
     private FwPjkDao pjkDao;
     @Autowired
     private FwPjckDao pjckDao;
+    @Autowired
+    private TaskService taskService;
     /***
      *插入配件请领信息
      * @param insertFwPjqlVo
@@ -54,15 +58,26 @@ public class FwPjqlServiceImpl implements FwPjqlService {
             }
             res = pjqlZjbDao.insertFwPjqlZjbList(fwPjqlZjbs);
         }
+
         //修改报修表状态
-//      baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL.getCode());
+        baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL.getCode());
         //流程表记录
-//      res = lcjlDao.insertFwLcjl(new FwLcjl(pjql.getQlrId(),new Date(), pjql.getFwId(),EnumProcess.FW_PJ_QL.getMessage()));
+        res = lcjlDao.insertFwLcjl(new FwLcjl(pjql.getQlrId(),new Date(), pjql.getFwId(),EnumProcess.FW_PJ_QL.getMessage()));
+
+        Task task = new Task();
+        task.setActionName("配件请领");
+        task.setCreatTime(new Date());
+        task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
+        task.setUrl("/admin/index/examine/examine-apply.html");
+        task.setJsrId(pjql.getQlrId());
+        task.setOther(pjql.getId().toString());
+        task.setWorkName("配件请领审核");
+        taskService.insertTask(task);
         return res;
     }
     @Transactional
     @Override
-    public int updateFwPjqlSqStatus(Integer status, Integer id, String qrrId, String shyy) {
+    public int updateFwPjqlSqStatus(Integer status, Integer id, String qrrId, String shyy, Integer taskId) {
         //根据主键查询报修单id
         String fwId = pjqlDao.selectFwIdById(id);
         if(status == EnumApplyStatus.APPLY_APPROVAL.getCode()){
@@ -80,11 +95,20 @@ public class FwPjqlServiceImpl implements FwPjqlService {
             pjck.setPjCkTime(new Date());
             pjck.setUserId(qrrId);
             pjck.setQlId(id);
-            pjckDao.insertFwPjck(pjck);
+
+            if(pjckDao.insertFwPjck(pjck)==0){
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            }
             //流程表记录
             lcjlDao.insertFwLcjl(new FwLcjl(qrrId,new Date(),fwId,EnumProcess.FW_PJ_QL_SH_TG.getMessage()));
             //修改报修表状态
-            baoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_GZ_JX.getCode());
+            if(baoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_GZ_JX.getCode())==0){
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            }
+            //任务列表进行完成
+            if(taskService.updateTaskById(taskId)==0){
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            }
         }else {
             //流程表记录
             lcjlDao.insertFwLcjl(new FwLcjl(qrrId,new Date(),fwId,EnumProcess.FW_PJ_QL_SH_WTG.getMessage()));
@@ -114,7 +138,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
     }
 
     @Override
-    public ExaminePjqlVO selectFwPjqlById(Integer id, Integer taskId) {
+    public ExaminePjqlVO selectFwPjqlById(Integer id) {
         ExaminePjqlVO vo = pjqlDao.selectFwPjqlById(id);
         vo.setPjqlZjbs(pjqlZjbDao.listFwPjqlZjbExamine(id));
         return vo;

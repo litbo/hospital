@@ -14,6 +14,6 @@ public class FwPjqlZjbVo {
     private Date qrTime;
     private String qrrName;
     private String qlrName;
-    private Integer pjCount;
+    private Integer pjsgCount;
 
 }

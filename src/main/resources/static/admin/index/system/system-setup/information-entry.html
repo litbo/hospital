@@ -55,20 +55,19 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">品名<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
+                                        <input type="text" name="eqPmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="pm" id="pm">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">台账类别</label>
                                     <div class="layui-input-block">
                                         <select name="" lay-filter="tzlb">
-                                            <option value="">低值耐用品类</option>
-                                            <option value="0">111</option>
-                                            <option value="1">222</option>
-                                            <option value="2">333</option>
-                                            <option value="3">aa</option>
-                                            <option value="4">vvv</option>
+                                            <option value="低值耐用品类">低值耐用品类</option>
+                                            <option value="固定资产类">固定资产类</option>
+                                            <option value="基建类">基建类</option>
+                                            <option value="第三方类">第三方类</option>
+                                            <option value="试用类">试用类</option>
                                         </select>
                                     </div>
                                 </div>
@@ -93,18 +92,14 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">经费来源</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="zjly">
-                                            <option>其他</option>
+                                        <select name="zjlyId" lay-filter="zjly">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">单位</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="">
-                                            <option value="">Kg</option>
-                                            <option value="0">t</option>
-                                            <option value="1">g</option>
+                                        <select name="eqJldwId" lay-filter="dwList">
                                         </select>
                                     </div>
                                 </div>
@@ -120,33 +115,24 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用部门</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="">
-                                            <option value="">病案室</option>
-                                            <option value="0">核磁共振室</option>
-                                            <option value="1">内科室</option>
-                                            <option value="2">外科室</option>
+                                        <select name="bmName" lay-filter="bmList">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">管理归口<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="">
-                                            <option value="">信息</option>
-                                            <option value="0">111</option>
-                                            <option value="1">222</option>
-                                            <option value="2">333</option>
+                                        <select name="eqGlgk" lay-filter="">
+                                            <option value="信息">信息</option>
+                                            <option value="医工">医工</option>
+                                            <option value="后勤">后勤</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">设备分类</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="">
-                                            <option value="">一般设备</option>
-                                            <option value="0">111</option>
-                                            <option value="1">222</option>
-                                            <option value="2">333</option>
+                                        <select name="eqCxflId" lay-filter="cxfl">
                                         </select>
                                     </div>
                                 </div>
@@ -165,8 +151,8 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">维修商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" >选择</button>
+                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="wxs">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -205,8 +191,8 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">生产商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0">选择</button>
+                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="scs" id="scs">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -245,8 +231,8 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">供应商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0">选择</button>
+                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="gys" id="gys">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -347,7 +333,7 @@
                                     <div class="layui-form-item" pane>
                                         <label class="layui-form-label">设备照片</label>
                                         <div class="layui-input-block">
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec">选择文件</button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp">选择文件</button>
                                         </div>
                                     </div>
                                     <div class="layui-form-item" pane>
@@ -362,7 +348,7 @@
                                     <div class="layui-form-item" pane>
                                         <label class="layui-form-label">铭牌照片</label>
                                         <div class="layui-input-block">
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="mpzp">选择文件</button>
                                         </div>
                                     </div>
                                     <div class="layui-form-item" pane>
@@ -428,9 +414,9 @@
 
 
 <script>
-    layui.use('element', function(){
-        var element = layui.element;
-    });
+</script>
+<script>
+    formData={};
     renderMod={
         form:{
             date:[
@@ -463,12 +449,12 @@
                     value:today
                 }
             ],
-            file:[
+          /*  file:[
                 {
                     elem:"#selec",
                     url:"/logo/setLogo",
                     accept:"images",
-                    acceptMime:"image/*",
+                    acceptMime:"image/!*",
                     auto:false,
                     bindAction:"#sub",
                     field:"logoFile",
@@ -494,7 +480,7 @@
                     elem:"#selec1",
                     url:"/logo/setLogo",
                     accept:"images",
-                    acceptMime:"image/*",
+                    acceptMime:"image/!*",
                     auto:false,
                     bindAction:"#sub",
                     field:"logoFile",
@@ -516,30 +502,78 @@
                         console.log("upload"+upload);
                     }
                 }
-            ]
-        },
-
-        addTable:{
-            table: [
-                {
-                    cols: [[ //表头
-                        {type: "checkbox"}
-                        , {field: 's1', title: '名称', minWidth: 300}
-                        , {field: 's2', title: '型号', minWidth: 300}
-                        , {field: 's2', title: '生产日期', minWidth: 220}
-                        , {field: 's2', title: '生产编号', minWidth: 200}
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "请先选择数据！"
+            ],*/
+            val: {
+                filter:"bmList",
+                select: [
+                    {
+                        filter:"dwList",
+                        ids: "eqJldwId",
+                        text: "eqJldwName",
+                        url: "/eqdict/jldw"
+                    },
+                    {
+                        filter:"zjly",
+                        ids: "zjlyId",
+                        text: "zjlyName",
+                        url: "/eqdict/zjly"
+                    },
+                    {
+                        filter:"cxfl",
+                        ids: "eqCxflId",
+                        text: "eqCxflName",
+                        url: "/eqdict/cxfl"
+                    },
+                    {
+                        filter:"bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBms2"
                     }
-                    ,id:'table'
+                ]
+            }
+        },
+        bind:{
+            selectItem: [
+                {
+                    elem: "#pm",
+                    data:formData,
+                    cb:"/eq/listPmsCols",
+                    db:"/eq/listPms",
+                    key:"radio",
+                    name:"dtdt"
+                },
+                {
+                    elem: "#scs",
+                    data:formData,
+                    cb:"/supervise/csgl/eqcsTitles",
+                    db:"/supervise/csgl/listEqcsByX2",
+                    key:"radio",
+                    name:"dtdt"
+                },
+                {
+                    elem: "#gys",
+                    data:formData,
+                    cb:"/supervise/csgl/eqcsTitles",
+                    db:"/supervise/csgl/listEqcsByX1",
+                    key:"radio",
+                    name:"dtdt"
+                },
+                {
+                    elem: "#wxs",
+                    data:formData,
+                    cb:"/supervise/csgl/eqcsTitles",
+                    db:"/supervise/csgl/listEqcsByX3",
+                    key:"radio",
+                    name:"dtdt"
                 }
+
+
             ]
         }
+
+
+
     }
 </script>
 </body>
