@@ -172,6 +172,7 @@
 </form>
 
 <script>
+    formData = {};
     renderMod={
         form:{
             date:[
@@ -203,14 +204,14 @@
                 func:function(data,val){
                     console.log(data);
                     subUp({
-                        url:"",
-                        type:"POST",
+                        url:"/security/wxnr/wxnrZdIndex",
+                        type:"GET",
                         data:{key:data.value},
                         success:function(res){
                             if(res.code === 0){
                                 var datt = res.data.list || res.data;
-                                renderS(datt.reason,"break_reason");
-                                renderS(datt.part,"break_part");
+                                renderS(datt.gzyymx,"break_reason");
+                                renderS(datt.gzbw,"break_part");
                                 function renderS(d,f){
                                     //f => 需要渲染的select的lay-filter值
                                     var $d = $("select[lay-filter='"+f+"']");

@@ -42,6 +42,11 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Autowired
     private FwPjqlDao fwPjqlDao;
 
+    /**
+     * 过时
+     * @param fwId
+     * @return
+     */
     @Override
     public WxqrIndex wxqsIndex(String fwId){
         WxqrIndex wxqrIndex = new WxqrIndex();
@@ -52,6 +57,11 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
         return wxqrIndex;
     }
 
+    /**
+     * 过时
+     * @param fwId
+     * @return
+     */
     @Override
     public WeixiuIndexVo weixiuIndex(String fwId) {
         WeixiuIndexVo weixiuIndexVo = new WeixiuIndexVo();
@@ -78,6 +88,13 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
         weixiuIndexVo.setWxnrList3(fwWxnrzds3);
 
         return weixiuIndexVo;
+    }
+
+    @Override
+    public FwWeiXiuIndexVo weixiuIndexVo(String fwId,String userId) {
+        FwWeiXiuIndexVo fwWeiXiuIndexVo = fwWeixiuDao.weixiuIndexVo(fwId);
+        fwWeiXiuIndexVo.setWxrId(userId);
+        return fwWeiXiuIndexVo;
     }
 
     @Override

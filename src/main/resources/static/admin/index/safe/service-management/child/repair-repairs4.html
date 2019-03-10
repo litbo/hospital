@@ -27,8 +27,9 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="" lay-filter="form">
+<form class="layui-form layui-form-pane" action="" lay-filter="weiXiuForms">
 
+    <input type="hidden" id="wxrId" name="wxrId">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>报修单</legend>
@@ -37,25 +38,25 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报修单编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="fwId" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">报修设备</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="eqName" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">报修人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="bxrName" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">报修人电话</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="bxrdh" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
         </div>
@@ -64,37 +65,37 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报修时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="bxTime" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">保修到期日</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="eqBxjssj" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">服务类型</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="bxLx" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">报修科室电话</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="bxksdh" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">紧急性</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="jjxStatusString" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item" >
                 <label class="layui-form-label">故障现象</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="gzxx" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
         </div>
@@ -158,9 +159,9 @@
 
 <script>
     formData = {};
-    renderMod={
-        form:{
-            val:{
+    renderMod= {
+        form: {
+            /*val:{
                 filter:"form",
                 select:{
                         filter:"shr",
@@ -168,70 +169,89 @@
                         text:"userXm",
                         url:"/kwgl/empgl/listPartnerByUserId"
                     }
+            },*/
+
+            val:{
+                filter:"weiXiuForms",
+                get:{
+                    url:"/fwWeixiu/weixiuIndex",
+                    data:{
+                        fwId:$.getUrlParam("fwId")
+                    }
+                }
             },
-            submit:{
-                before:function(param){
-                    var ss= "",$cks = $(".cks"),one = {};
-                    switch($("allDone").val()){
-                        case "配件申领":one = formData.check1;break;
-                        case "院外维修申请":one = formData.check2;break;
-                        case "直接维修":one = formData.check3;break;
-                    }
-                    return param = {
-                        1: $("#turn").val(),
-                        2: $("#checks").val(),
-                        3: one
-                    }
-                },
-                form:{
-                    url:"/security/pjsg/insertFwPjsg",
-                    type:"POST",
-                    contentType:"application/json",
-                    param:{
-                        1:"name1",
-                        2:"name2",
-                        3:"name3"
+
+                submit: {
+                    before: function (param) {
+                        var ss = "", $cks = $(".cks"), one = {};
+                        switch ($("allDone").val()) {
+                            case "配件申领":
+                                one = formData.check1;
+                                break;
+                            case "院外维修申请":
+                                one = formData.check2;
+                                break;
+                            case "直接维修":
+                                one = formData.check3;
+                                break;
+                        }
+                        return param = {
+                            1: $("#turn").val(),
+                            2: $("#checks").val(),
+                            3: one
+                        }
+                    },
+                    form: {
+                        url: "/security/pjsg/insertFwPjsg",
+                        type: "POST",
+                        contentType: "application/json",
+                        param: {
+                            1: "name1",
+                            2: "name2",
+                            3: "name3"
+                        }
                     }
                 }
+            },
+            bind: {
+                selectItem: [
+                    {
+                        elem: "#check1",
+                        url: "./child/check1.html",
+                        name: "dtdt",
+                        key: "check1",
+                        data: formData,
+                        func: function (res) {
+                            $("#allDone").val("配件请领");
+                            console.log("1= ", formData);
+                        }
+                    },
+                    {
+                        elem: "#check2",
+                        url: "./child/check2.html",
+                        name: "dtdt",
+                        key: "check2",
+                        data: formData,
+                        func: function (res) {
+                            $("#allDone").val("院外维修申请");
+                            console.log("2= ", formData);
+                        }
+                    },
+                    {
+                        elem: "#check3",
+                        url: "./child/check3.html",
+                        name: "dtdt",
+                        cb:$("#wxrId").val(),
+                        key: "check3",
+                        data: formData,
+                        func: function (res) {
+                            $("#allDone").val("直接维修");
+                            console.log("3= ", formData);
+                        }
+                    }
+                ]
             }
-        },
-        bind:{
-            selectItem:[
-                {
-                    elem:"#check1",
-                    url:"./child/check1.html",
-                    name:"dtdt",
-                    key:"check1",
-                    data:formData,
-                    func:function(res){
-                        $("#allDone").val("配件请领");
-                        console.log("1= ",formData);
-                    }
-                },
-                {
-                    elem:"#check2",
-                    url:"./child/check2.html",
-                    name:"dtdt",
-                    key:"check2",
-                    data:formData,
-                    func:function(res){
-                        $("#allDone").val("院外维修申请");
-                        console.log("2= ",formData);
-                    }
-                },
-                {
-                    elem:"#check3",
-                    url:"./child/check3.html",
-                    name:"dtdt",
-                    key:"check3",
-                    data:formData,
-                    func:function(res){
-                        $("#allDone").val("直接维修");
-                        console.log("3= ",formData);
-                    }
-                }
-            ]
-        }
+
     }
 </script>
 </body>
