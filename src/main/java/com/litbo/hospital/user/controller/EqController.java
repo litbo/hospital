@@ -176,9 +176,13 @@ public class EqController {
         JSONArray myJsonArray = null;
         if ("checkbox".equals(key)) {
             String jsonMessage = "[{'type': 'checkbox'}, " +
-                    "{field: 'eqPmName', title: '设备名称'}, " +
-                    "{field: 'eqPmJc', title: '设备简称'}, " +
-                    "{field: 'eqFlId', title: '卫标分类'}]";
+                    "{field: 'eqPmId', title: '品名编号'}, " +
+                    "{field: 'eqPmName', title: '品名'}]" ;
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }else  if ("radio".equals(key)){
+            String jsonMessage = "[{'type': 'radio'}, " +
+                    "{field: 'eqPmId', title: '品名编号'}, " +
+                    "{field: 'eqPmName', title: '品名'}]" ;
             myJsonArray = JSONObject.parseArray(jsonMessage);
         }
         PageInfo date = new PageInfo(myJsonArray);

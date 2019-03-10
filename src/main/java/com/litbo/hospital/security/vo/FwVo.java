@@ -1,8 +1,10 @@
 package com.litbo.hospital.security.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -28,6 +30,8 @@ public class FwVo {
     @ApiModelProperty(value = "报修设备型号")
     private String eqXh; //报修设备型号
     @ApiModelProperty(value = "保修结束时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date eqBxjssj; //保修结束时间
 
 }

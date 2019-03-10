@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">选择预览</label>
+                <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
                 <div class="layui-input-block">
                     <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                 </div>
@@ -88,10 +88,10 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12" style="padding:8px 10px!important">团队人员列表</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="addNew"><i
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="addNew"><i
                             class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1"><i
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
                             class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
@@ -159,8 +159,8 @@
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'employee', title: '员工', minWidth: 150}
-                        , {field: 'post', title: '岗位', minWidth: 150}
+                        , {field: 's1', title: '员工', minWidth: 150}
+                        , {field: 's2', title: '岗位', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -169,6 +169,7 @@
                     , text: {
                         none: "请点击上方按钮 添加数据！"
                     }
+                    ,id:'table'
                 }
             ]
         },
@@ -176,9 +177,9 @@
             addItem: [
                 {
                     elem:'#addNew',
-                    url:'./management-add.html',
-                    area:['90%','90%'],
-                    title:'添加记录'
+                    base:'./management-add.html',
+                    key:'abc',
+                    name:'bbb'
                 }
             ],
             delItem: ".delNew",
@@ -198,6 +199,3 @@
 </body>
 
 </html>
-
-<!--/kwgl/empgl/listSelectEmpsCols-->
-<!--/kwgl/empgl/listPartnerByUserId-->

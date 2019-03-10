@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwPjql;
+import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.PjVo;
 import org.apache.ibatis.annotations.*;
 
@@ -29,7 +30,17 @@ public interface FwPjqlDao {
     @Select("SELECT pjzd.pj_name,pjzd.pjbh,pjzd.pj_ggxh,cs.sbcs_name,pjql_zjb.pj_count from fw_pjql pjql \n" +
             "INNER JOIN fw_pjql_zjb pjql_zjb ON pjql.id=pjql_zjb.pjql_id\n" +
             "INNER JOIN fw_pjzd pjzd ON pjzd.id = pjql_zjb.pj_id \n" +
-            "INNER JOIN eq_cs cs ON cs.sbcs_id = pjzd.pj_ghs_id\n" +
+            "INNER JOIN eq_cs cs ON cs.sbcs_id = pjzd.pj_ghs_id" +
             "WHERE pjql.fw_id = #{fwId}")
     List<PjVo> selectPjVo(String fwId);
+    @Select("SELECT\n" +
+            "\tql_time,\n" +
+            "\tqlyy,\n" +
+            "\ts.user_xm\n" +
+            "FROM\n" +
+            "\tfw_pjql as f\n" +
+            "LEFT JOIN s_emp as s ON s.user_id = f.qlr_id\n" +
+            "WHERE\n" +
+            "\tid = #{id}")
+    ExaminePjqlVO selectFwPjqlById(Integer id);
 }
