@@ -33,7 +33,9 @@
     </div>
 </script>
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">试用期</a>
+</script>
 
 
 <script>
@@ -46,6 +48,7 @@
                     , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
                     , {field: 'createTime', title: '备案日期', minWidth: 150}
+                    , {fixed:'right',Width: 300,align:'center',toolbar: "#bar",template:""}
                 ]]
                 , url: "/supervise/zdgl/listZdsByZdZt?zdZt=2"
                 , request: {
