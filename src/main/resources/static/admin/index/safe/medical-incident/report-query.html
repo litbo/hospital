@@ -32,7 +32,7 @@
     </div>
     <div class=" hidden-xs"  id="hideXs">
         <form class="layui-form layui-form-pane" action="">
-            <label class="layui-text xs-100 mar10-0 pad0-10">时间范围</label>
+            <label class="layui-text xs-100 mar10-0 pad0-10">时间范围 </label>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
                 <input type="text" name="date" id="date" lay-verify="date" autocomplete="off" class="layui-input">
             </div>
@@ -45,42 +45,44 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'report_time', title: '报告时间', minWidth: 120}
-                , {field: 'report_person', title: '报告人', minWidth: 120}
-                , {field: 'equ_name', title: '设备名称', minWidth: 120}
-                , {field: 'specif_type', title: '规格型号', minWidth: 120, sort: true}
-                , {field: 'manufactor', title: '厂家', minWidth: 120}
-                , {field: 'state', title: '状态', minWidth: 120}
-            ]]
-            , "data": [
-                {
-                    "report_time": '1',
-                    "report_person": "2",
-                    "equ_name": "3",
-                    "specif_type": "4",
-                    "manufactor": "5",
-                    "state": "6"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":{
-                        tool:"toolbar",
-                        title:"数据查找",
-                        event:"dataSearch",
-                        content:$("#hideXs")
-                    }
-                })
+    renderMod = {
+        addTable :{
+            table:{
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'report_time', title: '报告时间', minWidth: 120}
+                    , {field: 'report_person', title: '报告人', minWidth: 120}
+                    , {field: 'equ_name', title: '设备名称', minWidth: 120}
+                    , {field: 'specif_type', title: '规格型号', minWidth: 120, sort: true}
+                    , {field: 'manufactor', title: '厂家', minWidth: 120}
+                    , {field: 'state', title: '状态', minWidth: 120}
+                ]]
+                , "data": [
+                    {
+                        "report_time": '1',
+                        "report_person": "2",
+                        "equ_name": "3",
+                        "specif_type": "4",
+                        "manufactor": "5",
+                        "state": "6"
+                    }]
+                , done: function (obj) {
+                    tableFunc({
+                        "tools":{
+                            tool:"toolbar",
+                            title:"666",
+                            event:"edit",
+                            content:"66666"
+                        }
+                    })
+                }
             }
         },
-
-        date:{
-            elem:"#date",
-            range:"-"
+        form:{
+            date:{
+                elem:"#date",
+                range:"-"
+            }
         }
     }
 </script>
