@@ -48,4 +48,6 @@ public interface EqService {
     Integer importFj(MultipartFile file);
 
     PageInfo listFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
+
+    String uploadFile(MultipartFile multipartFile);
 }

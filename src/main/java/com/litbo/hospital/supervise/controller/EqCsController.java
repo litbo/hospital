@@ -43,6 +43,7 @@ public class EqCsController {
         PageInfo date = eqCsService.listEqcsByX(pageNum,pageSize,selectVo);
         return Result.success(date);
     }
+    //供应商
     @PostMapping("/listEqcsByX1")
     public Result listEqcsByX1(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
@@ -50,11 +51,20 @@ public class EqCsController {
         PageInfo date = eqCsService.listEqcsByX1(pageNum,pageSize,selectVo);
         return Result.success(date);
     }
+    //生产商
     @PostMapping("/listEqcsByX2")
     public Result listEqcsByX2(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                               EqCsSelectVO selectVo){
         PageInfo date = eqCsService.listEqcsByX2(pageNum,pageSize,selectVo);
+        return Result.success(date);
+    }
+    //维修商
+    @PostMapping("/listEqcsByX3")
+    public Result listEqcsByX3(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                               EqCsSelectVO selectVo){
+        PageInfo date = eqCsService.listEqcsByX3(pageNum,pageSize,selectVo);
         return Result.success(date);
     }
     @PostMapping("eqcsTitles")
