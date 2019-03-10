@@ -169,10 +169,21 @@
                                         event: "setThisData",
                                         layOpen: false,
                                         func: function (obj, cs) {
+                                            var valueD = getTableValue("table"),values = [];
+                                            console.log(valueD);
+                                            for(var i=0;i<valueD.length;i++){
+                                                if(valueD[i]["LAY_CHECKED"] === true){
+                                                    values.push(valueD[i]);
+                                                }
+                                            }
                                             //将选定的页面存在session中(数组形式数据)
+                                            if($.getUrlParam("cache") === "false"){
+                                                values = cs.data;
+                                            }
+                                            console.log(values);
                                             layui.sessionData($name, {
                                                 key: $value,
-                                                value: cs.data
+                                                value: values
                                             });
                                             //关闭页面
                                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
