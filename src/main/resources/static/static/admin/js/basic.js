@@ -105,6 +105,23 @@ Date.prototype.Format = function(fmt) {
     };
 })(jQuery);
 
+(function ($) {
+    $.getUrlHash = function (name, site) {
+        var reg = new RegExp("(^|#)" + name + "=([^#]*)(#|$)", "i"), r;
+        if (site === 1) {
+            r = window.parent.location.hash.substr(1).match(reg)
+        } else {
+            try {
+                r = site.location.hash.substr(1).match(reg);
+            } catch (e) {
+                r = window.location.hash.substr(1).match(reg)
+            }
+        }
+        if (r != null) return decodeURI(r[2]);
+        return null;
+    };
+})(jQuery);
+
 
 /**
  * @todo 数据类型判断
