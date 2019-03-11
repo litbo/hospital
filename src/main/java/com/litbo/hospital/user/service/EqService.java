@@ -19,7 +19,7 @@ public interface EqService {
 
     PageInfo listShowEqs(int pageNum, int pageSize);
 
-    int addEq(EqInfo eqInfo, MultipartFile sbzp, MultipartFile mpzp);
+    int addEq(EqInfo eqInfo);
 
     PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo);
 

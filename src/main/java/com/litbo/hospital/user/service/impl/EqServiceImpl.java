@@ -55,20 +55,14 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
-    public int addEq(EqInfo eqInfo, MultipartFile sbzp, MultipartFile mpzp) {
-        //文件上传
-        String path = "F:\\img";
-        if(sbzp!=null) {
-            String eqSbzp = UploadFile.upload(path, sbzp);
-            eqInfo.setEqSbzp(eqSbzp);
-        }
-        if(StringUtils.isNotBlank(mpzp.getOriginalFilename())) {
-            String eqMpzp = UploadFile.upload(path, mpzp);
-            eqInfo.setEqMpzp(eqMpzp);
-        }
+    public int addEq(EqInfo eqInfo) {
+
         //设置设备拼音码
         String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
-        eqInfo.setEqPym(pym);
+        if(pym!=""){
+            eqInfo.setEqPym(pym);
+        }
+
         //初始化设备流水号
         if(eqDao.countEq()==0){
            String eqId ="10000";
