@@ -76,14 +76,14 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectEquip">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">联系电话</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" autocomplete="" class="layui-input" placeholder="请填写" lay-verify="required">
+                    <input type="text" name="" autocomplete="" lay-verify="required|phone" class="layui-input" placeholder="请填写" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item" pane>
@@ -99,7 +99,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报告人签字<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="bgrqz" autocomplete="" class="layui-input" value="刘松峰" readonly>
+                    <input type="text" name="bgrqz" autocomplete="" class="layui-input"  readonly>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">患者姓名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="hzxm" autocomplete="" class="layui-input" placeholder="请填写" lay-verify="required">
+                    <input type="text" name="hzxm" autocomplete=""  class="layui-input" placeholder="请填写" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -205,7 +205,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">主要伤害</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" name="zysh" placeholder="请填写" lay-verify="required"></textarea>
+                        <textarea class="layui-textarea" name="zysh" lay-filter placeholder="请填写" lay-verify="required"></textarea>
                     </div>
                 </div>
             </div>
@@ -219,14 +219,14 @@
             </div>
         </div>
 
-        <div class="layui-row">
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 120px;">事件相关资料</label>
-                <div class="layui-input-block" style="margin-left: 120px;">
-                    <input type="file" accept="image/*" name="file" autocomplete="off" class="layui-input" style="padding:5px;">
-                </div>
-            </div>
-        </div>
+        <!--<div class="layui-row">-->
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label" style="width: 120px;">事件相关资料</label>-->
+                <!--<div class="layui-input-block" style="margin-left: 120px;">-->
+                    <!--<input type="file" accept="image/*" name="file" autocomplete="off" class="layui-input" style="padding:5px;">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="layui-row">
             <div class="layui-form-item">

@@ -6,11 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface FwPjckDao {
-    @Insert("    insert into fw_pjck ( user_id, bx_id, \n" +
-            "      pj_id, pj_ck_time, pj_ck_xsl, \n" +
-            "      pj_ck_lsl)\n" +
-            "    values (#{userId,jdbcType=VARCHAR}, #{bxId,jdbcType=VARCHAR}, \n" +
-            "      #{pjId,jdbcType=INTEGER}, #{pjCkTime,jdbcType=TIMESTAMP}, #{pjCkXsl,jdbcType=INTEGER}, \n" +
-            "      #{pjCkLsl,jdbcType=INTEGER})")
+    @Insert("    insert into fw_pjck ( user_id, " +
+            "      ql_id, pj_ck_time, shyy)" +
+            "    values (#{userId,jdbcType=VARCHAR},"+
+            "      #{qlId,jdbcType=INTEGER}, #{pjCkTime,jdbcType=TIMESTAMP}," +
+            "      #{shyy,jdbcType=VARCHAR})")
     int insertFwPjck(FwPjck pjck);
 }

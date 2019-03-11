@@ -34,7 +34,7 @@
         </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">请领时间<span class="sign">*</span></label>
+                <label class="layui-form-label">请领时间</label>
                 <div class="layui-input-block">
                     <input type="text" name="qlTime" class="layui-input" autocomplete="off" id="date" disabled>
                 </div>
@@ -50,9 +50,15 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">请领原因<span class="sign">*</span></label>
+                <label class="layui-form-label">请领原因</label>
                 <div class="layui-input-block">
                     <textarea  name="qlyy" class="layui-textarea" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">审核原因<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <textarea  name="shyy" class="layui-textarea"  lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
@@ -113,7 +119,8 @@
                     type:"POST",
                     data:{
                         id:$.getUrlParam("id"),
-                        sgStatus:"1"
+                        status:"1",
+                        shyy:$("textarea[name='shyy']").val()
                     }
                 })
             }
@@ -125,7 +132,7 @@
                     type:"POST",
                     data:{
                         id:$.getUrlParam("id"),
-                        sgStatus:"2"
+                        status:"2"
                     }
                 })
             }

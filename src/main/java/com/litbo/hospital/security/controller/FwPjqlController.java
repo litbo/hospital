@@ -18,12 +18,16 @@ import org.springframework.web.bind.annotation.*;
 public class FwPjqlController {
     @Autowired
     private FwPjqlService pjqlService;
-    @ApiOperation(value = "请领后存入数据库")
+
+
+
+    @ApiOperation(value = "配件请领")
     @RequestMapping(value = "insertFwPjql",method = RequestMethod.POST)
     public Result insertFwPjql(@RequestBody InsertFwPjqlVo fwPjqlVo){
         try {
             //TODO 此处配件请领人从session中获取，并存入Pjql表中
-            String qrrId = "2";
+            String qlrId = "2";
+            fwPjqlVo.getFwPjql().setQlrId(qlrId);
             int res = pjqlService.insertFwPjql(fwPjqlVo);
             if(res>0){
                 return Result.success();
@@ -31,20 +35,20 @@ public class FwPjqlController {
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
         }catch (Exception e){
+            e.printStackTrace();
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
+
+
     @ApiOperation(value = "确认人对请领进行审核")
-    @RequestMapping(value = "updateSqStatus",method = RequestMethod.POST)
-    @ApiImplicitParams({ @ApiImplicitParam(name = "status" ,value = "是否同意（1 同意）  （2 拒绝）",required = true),
-            @ApiImplicitParam(name = "id" ,value = "请领表id",required = true),
-            @ApiImplicitParam(name = "shyy" ,value = "审核原因",required = true)})
-    public Result updateSqStatus(Integer status,  Integer id,  String shyy){
+    @RequestMapping(value = "updateFwPjqlStatus",method = RequestMethod.POST)
+    public Result updateFwPjqlStatus(Integer status,  Integer id,  String shyy,Integer taskId){
         if(status != null && (status==EnumApplyStatus.APPLY_APPROVAL.getCode() || status==EnumApplyStatus.APPLY_REJECT.getCode())){
             try {
                 //TODO 此处确认人从session中获取，并存入Pjql表中
-                String qrrId = "2";
-                int res = pjqlService.updateFwPjqlSqStatus(status,id,qrrId,shyy);
+                String qrrId = "1615925023";
+                int res = pjqlService.updateFwPjqlSqStatus(status,id,qrrId,shyy,taskId);
                 if(res >0){
                     return Result.success();
                 }else if(res == -1){
@@ -53,6 +57,7 @@ public class FwPjqlController {
                     return Result.error(CodeMsg.PARAM_ERROR);
                 }
             }catch (Exception e){
+                e.printStackTrace();
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
 
@@ -72,7 +77,7 @@ public class FwPjqlController {
     }
     @RequestMapping(value = "selectFwPjqlById",method = RequestMethod.GET)
     public Result selectFwPjqlById(Integer id,Integer taskId){
-        ExaminePjqlVO vo = pjqlService.selectFwPjqlById(id,taskId);
+        ExaminePjqlVO vo = pjqlService.selectFwPjqlById(id);
         return Result.success(vo);
     }
 }
