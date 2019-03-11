@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwPjql;
+import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.PjVo;
 import org.apache.ibatis.annotations.*;
@@ -21,7 +22,7 @@ public interface FwPjqlDao {
     @Options(useGeneratedKeys = true, keyColumn = "id")
     Integer insertFwPjql(FwPjql pjql);
 
-    @Update("update fw_pjql set sq_status = #{status}, qr_time = #{date} where qrr_id = #{qrrId} and id = #{id} and sq_status == 0")
+    @Update("update fw_pjql set sq_status = #{status}, qr_time = #{date} where qrr_id = #{qrrId} and id = #{id} and sq_status = 0")
     int updateFwPjqlSqStatus(@Param("status") Integer status, @Param("id") Integer id, @Param("qrrId") String qrrId, @Param("date") Date date);
 
     @Select("select fw_id from fw_pjql where id = #{id}")

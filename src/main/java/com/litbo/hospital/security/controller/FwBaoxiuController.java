@@ -26,7 +26,7 @@ public class FwBaoxiuController {
     public Result baoxiuRw(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                            @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         try {
-            String userId = "1615925038";
+            String userId = "1615925023";
             PageInfo pageInfo = fwBaoxiuService.baoxiuRw(userId, pageNum, pageSize);
             return Result.success(pageInfo);
         } catch (Exception e) {

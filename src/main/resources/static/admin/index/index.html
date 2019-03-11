@@ -142,6 +142,9 @@
         var element = layui.element;
 
         $(function(){
+            //http://localhost/admin/index/index.html?p=home#url=./repair.html#title=百度首页#id=666666
+            //重点#url=./repair.html#title=百度首页#id=666666
+
             var uu = $.getUrlHash("url")
                 ,tt = $.getUrlHash("title") || "新窗口"
                 ,ii = $.getUrlHash("id") || 999999999;

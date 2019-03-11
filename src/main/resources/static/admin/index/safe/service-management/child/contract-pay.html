@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>支付</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            padding: 8px 10px !important;
+        }
+
+        .layui-form-item {
+            margin-bottom: 30px;
+        }
+
+        .layui-container {
+            margin-top: 30px;
+        }
+        .layui-colla-content{
+            overflow: initial;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-container">
+    <form class="layui-form layui-form-pane" lay-filter="htzfForms">
+        <div class="layui-row">
+            <div class="layui-collapse" lay-accordion>
+                <!--模块1-->
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">合同详情</h2>
+                    <div class="layui-colla-content layui-show">
+                        <div class="layui-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">合同编号<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="fkHtbh" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">合同名称<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="htName" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">合同金额<span class="sign">*</span></label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="htPrice" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">合同时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="htTime" class="layui-input" autocomplete="off" id="acceptDate">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 模块二 -->
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">付款</h2>
+                    <div class="layui-colla-content">
+                        <div class="layui-row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">付款方式</label>
+                                    <div class="layui-input-block">
+                                        <select name="fkFs">
+                                            <option value="汇总">汇总</option>
+                                            <option value="汇票">汇票</option>
+                                            <option value="银行转账">银行转账</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">发票号码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="fkFphm" placeholder="请输入" lay-verify="required"
+                                               class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">发票金额</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="fkPice" placeholder="请输入" lay-verify="required"
+                                               class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">付款时间</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="fkTime" class="layui-input" autocomplete="off" id="appointRepairDate">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">付款人</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="fkrXm" placeholder="请输入" lay-verify="required"
+                                               class="layui-input" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="layui-form-item" style="margin:20px 0;">
+                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    renderMod = {
+        form: {
+            val:{
+                    filter:"htzfForms",
+                    get:{
+                        url:"/fwht/htzfIndex",
+                        data:{
+                            id:$.getUrlParam("id")
+                        }
+                    }
+            },
+            submit:{
+                form:{
+                    url:"/fwht/addFwFk",
+                    type:"POST",
+                    data:["fkHtbh","fkTime","fkFphm","fkPrice","fkrXm","fkFs",],
+                    done:function(res){
+                        if(res.code === 0){
+                            //提交完成后关闭页面
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.location.reload();
+                        }
+                    }
+                }
+            },
+            date: [
+                {
+                    elem: "#acceptDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#appointRepairDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                }
+            ]
+        }
+    }
+</script>
+</body>
+
+</html>

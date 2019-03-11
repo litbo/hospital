@@ -80,7 +80,7 @@
             </div>
 
 
-            <div class="layui-form-item">
+            <div class="layui-form-item" id="nextShr">
                 <label class="layui-form-label">下一个审核人</label>
                 <div class="layui-input-block">
                     <select name="nextShrId">
@@ -88,6 +88,12 @@
                         <option>aaa</option>
                         <option>bbb</option>
                     </select>
+                </div>
+            </div>
+            <div class="layui-form-item" id="syDays">
+                <label class="layui-form-label">试用天数<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="syDays" class="layui-input" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
@@ -217,6 +223,18 @@
         }
 
     }
+
+    $(function () {
+
+        var xx = $.getUrlParam('zdId');
+        if (xx == 45) {
+            $("#nextShr").addClass("hidden");
+            $("#syDays").removeClass("hidden");
+        } else {
+            $("#nextShr").removeClass("hidden");
+            $("#syDays").addClass("hidden");
+        }
+    })
 </script>
 </body>
 

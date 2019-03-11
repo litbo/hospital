@@ -74,6 +74,13 @@ public class EqController {
         }
         return Result.error();
     }
+    //上传文件
+    @RequestMapping("/uploadFile")
+    public Result uploadFile(@RequestParam("file") MultipartFile multipartFile){
+       String url = es.uploadFile(multipartFile);
+       return Result.success(url);
+    }
+
 
     @RequestMapping("/setPm")
     public Result setPm(@RequestBody SetPmVo setPmVo) {
