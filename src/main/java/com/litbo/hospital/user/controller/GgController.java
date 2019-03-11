@@ -65,5 +65,13 @@ public class GgController {
         return Result.success(ggService.getGgById(id));
     }
 
+    //添加公告类别
+    @RequestMapping("/addGglb")
+    public Result addGglb(String gglxName){
+        if(ggService.addGglb(gglxName)>0){
+            return Result.success();
+        }
+        return Result.error();
+    }
 
 }
