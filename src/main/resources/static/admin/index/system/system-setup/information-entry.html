@@ -419,6 +419,34 @@
     formData={};
     renderMod={
         form:{
+            submit:{
+                filter:"",//可以不写
+                form:{
+                    url:"/eq/addEq",
+                    type:"POST",
+                    data:["eqName","eqSbbh","eqZcbh","eqPmId","eqGg","eqXh","eqZjlyId",
+                            "eqJldwId","eqPrice","eqTzlb","eqBxkssj","eqBxjssj","eqBxxysj",
+                            "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczbh","eqPp","eqScbh",
+                            "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
+                            "eqZblx","eqZjl","userId","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
+                            "eqMpzp","eqAzhjyq"],
+                    success:function(){
+                        alert("xx");
+                    }
+                },//表单提交函数
+                before:function(data){
+                    for(var i=0;i<data.field.length;i++){
+                        if(data.field[i] === ""){
+                            layer.alert("请确认您填写的信息！");
+                	return false;
+                        }
+                    }
+                },//表单提交前执行函数
+                func:function(data){
+                    n++;
+                    layer.alert("您已提交 " + n + " 次！");
+                }//表单提交后执行函数（不论成功与否）
+            },
             date:[
                 {
                     elem:'#date',
