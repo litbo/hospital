@@ -945,6 +945,7 @@ action = func = {
         layui.use('table', function () {
             var table = layui.table
                 , oData = table.cache[name];//获取表格所有数据
+
             //未选择数据则不执行操作
             if (res.length === 0) {
                 return false;
@@ -956,19 +957,17 @@ action = func = {
             } else {
                 if (oData.length === 0) {
                     for (var v = 0; v < res.length; v++) {
-                        delete res[v]["LAY_CHECKED"];
+                        delParam(res[v]);
                         oData.push(res[v]);
                     }
-                } else {
+                }else {
                     for (var i = 0; i < oData.length; i++) {
-                        delete oData[i]["LAY_CHECKED"];
-                        delete oData[i]["LAY_TABLE_INDEX"];
+                        delParam(oData[i]);
                         compRes(oData[i], res);
                     }
 
                     for (var j = 0; j < res.length; j++) {
-                            res[j]["LAY_CHECKED"] && delete res[j]["LAY_CHECKED"];
-                            res[j]["LAY_TABLE_INDEX"] && delete res[j]["LAY_TABLE_INDEX"];
+                        delParam(res[j]);
                         oData.push(res[j]);
                     }
                 }
@@ -976,45 +975,47 @@ action = func = {
 
             //数据对比函数
             function compRes(data, val) {
-
                 //循环需要添加的数据
                 for (var x = 0; x < val.length; x++) {
-
-                    //删除不必要参数
-                    delete val[x]["LAY_CHECKED"];
-                    delete val[x]["LAY_TABLE_INDEX"];
-                    //判断是否需要删除某个判断的元素（删除自定义参数）
-                    if(value.del !== undefined && Type(value.del) === "array"){
-                        for(var cc=0;cc < value.del.length;cc++){
-                            delete oData[x][cc];
-                        }
-                    }
-
+                    //删除不需要进行判断的参数
+                    delParam(val[x]);
                     //获取数据字符串
                     var dd = JSON.stringify(data)
                         , vv = JSON.stringify(val[x]);
-
                     //当数据一样时，删除当前数据并且结束循环
                     if (dd === vv){
                         val.splice(x, 1);
                         return true;
                     }
-
                 }
             }
 
-            //console.log("即将渲染的数据", oData);
-            //数据大于15条时显示分页按钮
+            //删除不需要进行判断的参数
+            function delParam(data) {
+                //默认将删除 LAY_CHECKED LAY_TABLE_INDEX
+                !value.delVal && data["LAY_CHECKED"] && delete data["LAY_CHECKED"];
+                !value.delVal && data["LAY_TABLE_INDEX"] && delete data["LAY_TABLE_INDEX"];
+                //判断是否需要删除某个判断的元素（删除自定义参数）
+                if(value.del !== undefined && Type(value.del) === "array"){
+                    for(var cc=0;cc < value.del.length;cc++){
+                        data[cc] && delete data[cc];
+                    }
+                }
+            }
+
+            //数据大于15条时显示分页按钮并拉高表格高度
             if(oData.length > 15){
                 pp = true;
                 hh = "250"
             }
+
             //重新渲染表格
             table.reload(name, {
                 data: oData,
                 page:pp,
                 height:hh
             });
+
             //信息提示
             /*if (res.length === 0) {
                 layer.msg("重复数据无法添加！");
