@@ -1016,11 +1016,11 @@ action = func = {
                 height:hh
             });
             //信息提示
-            if (res.length === 0) {
+            /*if (res.length === 0) {
                 layer.msg("重复数据无法添加！");
-            } else {
-                layer.msg("已成功添加" + res.length + "条新数据！");
-            }
+            }*/
+
+            layer.msg("已成功添加" + res.length + "条新数据！");
         });
     },
     //表格外获取选中数据并删除选中数据(只修改本地数据)
