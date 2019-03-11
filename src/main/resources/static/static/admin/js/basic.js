@@ -941,7 +941,7 @@ action = func = {
     },
     //向表格中添加数据
     "reTable": function (value) {
-        var name = value.name || "table", res = value.data, rep = 0, total = 0, num = 0, sec = 0, add = [], xs = 0;
+        var name = value.name || "table", res = value.data,pp = false,hh="200";
         layui.use('table', function () {
             var table = layui.table
                 , oData = table.cache[name];//获取表格所有数据
@@ -949,113 +949,77 @@ action = func = {
             if (res.length === 0) {
                 return false;
             }
-            console.log("==========");
-            console.log("==========");
-            console.log("==========");
+
             //若需覆盖原数据则不保留原数据，否则向后逐条追加数据
             if (value.cover === true) {
                 oData = res;
             } else {
-                console.log("需要添加的RES = ", res);
                 if (oData.length === 0) {
-                    sec++;
                     for (var v = 0; v < res.length; v++) {
                         delete res[v]["LAY_CHECKED"];
                         oData.push(res[v]);
                     }
                 } else {
                     for (var i = 0; i < oData.length; i++) {
+                        delete oData[i]["LAY_CHECKED"];
+                        delete oData[i]["LAY_TABLE_INDEX"];
                         compRes(oData[i], res);
                     }
-                    //console.log(JSON.stringify(add));
-                    for (var j = 0; j < add.length; j++) {
-                        oData.push(add[j]);
+
+                    for (var j = 0; j < res.length; j++) {
+                            res[j]["LAY_CHECKED"] && delete res[j]["LAY_CHECKED"];
+                            res[j]["LAY_TABLE_INDEX"] && delete res[j]["LAY_TABLE_INDEX"];
+                        oData.push(res[j]);
                     }
                 }
             }
 
             //数据对比函数
-            function compRes(data, val, show) {
-                rep++;
-                !show && console.log("+++vvvv--==--REP--==--", rep);
-                !show && console.log("+++vvvv--==--REP--==--", rep);
-                show && console.log("==--RRR--==");
-                show && console.log("==--RRR--==");
-                show && console.log("==--RRR--==");
-                delete data["LAY_CHECKED"];
-                delete data["LAY_TABLE_INDEX"];
+            function compRes(data, val) {
 
                 //循环需要添加的数据
                 for (var x = 0; x < val.length; x++) {
+
                     //删除不必要参数
                     delete val[x]["LAY_CHECKED"];
                     delete val[x]["LAY_TABLE_INDEX"];
+                    //判断是否需要删除某个判断的元素（删除自定义参数）
+                    if(value.del !== undefined && Type(value.del) === "array"){
+                        for(var cc=0;cc < value.del.length;cc++){
+                            delete oData[x][cc];
+                        }
+                    }
 
                     //获取数据字符串
                     var dd = JSON.stringify(data)
                         , vv = JSON.stringify(val[x]);
 
-                    console.log("这条需要判断******：", JSON.parse(JSON.stringify(val[x])));
-                    console.log("这条是原数据%%%%%%：", JSON.parse(JSON.stringify(data)));
-                    //当数据一样时，删除当前数据。数据不一样时匹配add数组，只有当和数组中的数据不匹配时才会加进add数组
-                    if (dd !== vv) {
-                        sec++;
-                        console.log("xx=========================================================================================xx");
-                        console.log("这条数据将添加+++++++：" + x, JSON.parse(JSON.stringify(val[x])));
-                        console.log("添加之=+前+=的add：" + x, JSON.parse(JSON.stringify(add)));
-                        console.log("cc=========================================================================================cc");
-                        //add.push(val[x]);
-                        console.log("添加之=+后+=的add：" + x, JSON.parse(JSON.stringify(add)));
-                        console.log("tt=========================================================================================tt");
-
-                        if(add.length === 0){
-                            add.push(val[x]);
-                        }else{
-                            for (var v = 0; v < add.length; v++) {
-                                var aa = JSON.stringify(add[v]);
-                                if (dd === aa) {
-                                    console.log("dddddddd = ", JSON.parse(dd));
-                                    console.log("aaaaaaaa = ", JSON.parse(aa));
-                                    add.splice(v, 1);
-                                    v = 0;
-                                }
-                                //console.log("Tadd = "+x,JSON.stringify(add));
-                            }
-                        }
-
-                        add.push(val[x]);
-                    } else {
-                        console.log("((((((((((((((((((((((((((((((((((((((((((((((((");
+                    //当数据一样时，删除当前数据并且结束循环
+                    if (dd === vv){
                         val.splice(x, 1);
-                        x = 0;
-                        //compRes(data,val,true);
+                        return true;
                     }
-                    //判断是否需要删除某个判断的元素（删除自定义参数）
-                    /*if(value.del !== undefined && Type(value.del) === "array"){
-                        for(var cc=0;cc < value.del.length;cc++){
-                            delete oData[x][cc];
-                        }
-                    }*/
 
                 }
-                //!show && console.log("isAdd",JSON.stringify(add));
-
             }
 
-            console.log("即将渲染的数据", oData);
+            //console.log("即将渲染的数据", oData);
+            //数据大于15条时显示分页按钮
+            if(oData.length > 15){
+                pp = true;
+                hh = "250"
+            }
             //重新渲染表格
             table.reload(name, {
-                data: oData
+                data: oData,
+                page:pp,
+                height:hh
             });
-            //大于15条数据不显示数量（数据太大会导致内存占用过高，页面崩溃。限制最多只能选中15条一次）
-            /*if(sec >= 15){
-                sec = "多";
-            }*/
             //信息提示
-            if (sec === 0) {
+            if (res.length === 0) {
                 layer.msg("重复数据无法添加！");
             } else {
-                layer.msg("已成功添加" + sec + "条新数据！");
+                layer.msg("已成功添加" + res.length + "条新数据！");
             }
         });
     },
