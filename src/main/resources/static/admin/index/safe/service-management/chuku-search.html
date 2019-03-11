@@ -41,11 +41,7 @@
                     </div>
                     <span>入库时间：</span>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjRkTimeStart"  class="layui-input" placeholder="起" autocomplete="off" id="date">
-                    </div>
-                    <span>-</span>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjRkTimeEnd"  class="layui-input" placeholder="止" autocomplete="off" id="date1">
+                        <input type="text" name="date" id="date" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">查找</button>
@@ -65,7 +61,7 @@
                     {field: 'id', title: '入库编号', minWidth: 200}
                     , {field: 'qrTime', title: '出库时间', minWidth: 150,sort:true}
                     , {field: 'pjName', title: '配件名称', minWidth: 200}
-                    , {field: 'pjCount', title: '数量', minWidth: 100,sort:true}
+                    , {field: 'pjsgCount', title: '数量', minWidth: 100,sort:true}
                     , {field: 'qlrName', title: '请领人', minWidth: 150}
                     , {field: 'qrrName', title: '确认人', minWidth: 150}
                 ]]
@@ -91,21 +87,28 @@
             reSet: {
                 url:"/security/pjql/listFwPjqlZjb",
                 type: "reload",
-                data:["pjName","pjRkTimeStart","pjRkTimeEnd"],     //搜索框的name
-                where: {}
+                data:["pjName"],     //搜索框的name
+                dat:["#date","pjRkTimeStart","pjRkTimeEnd"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
+            }
+        },
+        form:{
+            date:{
+                elem:"#date",
+                range:"~",
+                format:'y-M-d'
             }
         }
     }
 
-    layui.use(['table','laydate'],function(){
-        var table = layui.table,
-            laydate = layui.laydate;
-        laydate.render({
-            elem: '#date1',
-            value: today,
-            format: "y-M-d"
-        });
-    })
+    // layui.use(['table','laydate'],function(){
+    //     var table = layui.table,
+    //         laydate = layui.laydate;
+    //     laydate.render({
+    //         elem: '#date',
+    //         value: today,
+    //         format: "y-M-d"
+    //     });
+    // })
 </script>
 </body>
 

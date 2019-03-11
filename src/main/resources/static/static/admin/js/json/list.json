@@ -1039,7 +1039,7 @@
                 "children": [
                   {
                     "title": "待上报列表",
-                    "url": "./table.html",
+                    "url": "./life/czgl/dispose_report.html",
                     "id": "33020",
                     "shiro": "a"
                   }
@@ -1054,7 +1054,7 @@
                 "children": [
                   {
                     "title": "待批复列表",
-                    "url": "./table.html",
+                    "url": "./life/czgl/disposal_reply.html",
                     "id": "33030",
                     "shiro": "a"
                   }
@@ -1069,7 +1069,7 @@
                 "children": [
                   {
                     "title": "待清理设备",
-                    "url": "./table.html",
+                    "url": "./life/czgl/disposal_clear.html",
                     "id": "33040",
                     "shiro": "a"
                   }
@@ -1084,7 +1084,7 @@
                 "children": [
                   {
                     "title": "待备案处置设备",
-                    "url": "./table.html",
+                    "url": "./life/czgl/disposal_record.html",
                     "id": "33050",
                     "shiro": "a"
                   }

@@ -106,7 +106,7 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item" style="margin:20px 0;">
-                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="submit" id="upData">保存</button>
             </div>
         </div>
     </div>
@@ -121,7 +121,8 @@
         form:{
             date:{
                 elem:'#date',
-                value:today
+                value:today,
+                type:"datetime"
             },
             submit:{
                 filter:"submit",//可以不写
@@ -146,6 +147,7 @@
             }
         }
     }
+
 
 </script>
 </body>

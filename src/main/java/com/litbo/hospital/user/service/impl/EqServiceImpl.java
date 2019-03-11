@@ -202,6 +202,14 @@ public class EqServiceImpl implements EqService {
         return new PageInfo(eqDao.listFlEqByX(selectFlEqVo));
     }
 
+    @Override
+    public String uploadFile(MultipartFile multipartFile) {
+        String path = System.getProperty("user.dir");
+        String filePath =path+"/eq/";
+        String url = UploadFile.upload(filePath,multipartFile);
+        return url;
+    }
+
 
     @Override
     public Integer setPm(SetPmVo setPmVo) {

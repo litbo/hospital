@@ -4,6 +4,7 @@ import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
 import com.litbo.hospital.security.vo.BaoXiuRw;
 import com.litbo.hospital.security.vo.FwInfoVo;
+import com.litbo.hospital.security.vo.FwWeiXiuIndexVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -81,5 +82,25 @@ public interface FwWeixiuDao {
             "wxqs.qs_shr = #{userId} AND\n" +
             "baoxiu.bx_status = 13")
     public List<BaoXiuRw> getBaoXiuRw(String userId);
+
+    @Select("SELECT\n" +
+            "bx.id AS fwId,\n" +
+            "eq.eq_name,\n" +
+            "dbo.s_emp.user_xm AS bxrName,\n" +
+            "bx.bxrdh,\n" +
+            "bx.bx_time,\n" +
+            "eq.eq_bxjssj,\n" +
+            "bx.bxksdh,\n" +
+            "bx.jjx_status,\n" +
+            "bx.gzxx\n" +
+            "FROM\n" +
+            "dbo.eq_info AS eq ,\n" +
+            "dbo.fw_baoxiu AS bx ,\n" +
+            "dbo.s_emp\n" +
+            "WHERE\n" +
+            "eq.eq_id = bx.eq_id AND\n" +
+            "bx.bxr_id = dbo.s_emp.user_id AND\n" +
+            "bx.id = #{fwId}")
+    public FwWeiXiuIndexVo weixiuIndexVo(String fwId);
 
 }

@@ -38,46 +38,11 @@
     </div>
 </script>
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase">审核</a>
+</script>
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'department', title: '科室',width:"30%", minWidth: 200}
-                , {field: 'team-name', title: '团队名称', minWidth: 150}
-                , {field: 'state', title:'状态' ,minWidth:80}
-            ]]
-            , "data": [
-                {
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                },{
-                    "department":"",
-                    "team-name":"",
-                    "state":''
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
-            }
-        }
-    }
 
 
     renderMod = {
