@@ -172,7 +172,6 @@ $(function () {
             if (file && file !== false) {
                 if (file === true) {
                     //渲染默认上传域
-                    //严重不推荐使用
                     cUp(nor_up);
                     //渲染单个上传域
                 } else if (Type(file) === "json") {
@@ -185,8 +184,43 @@ $(function () {
                         }
                     }
                 }
-
+                //文件上传事件
                 function cUp(options) {
+                    var dataP = {}, valus = "";
+                    if (Type(options.data) === "array") {
+                        //dataP 提交的数据 valus 填写的表单name值
+                        for (var i = 0; i < options.data.length; i++) {
+                            //获取一个name值
+                            valus = options.data[i];
+                            //获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
+                                var inputValue = $("input[name=" + valus + "]").val();
+                                if (inputValue) {
+                                    dataP[valus] = inputValue;
+                                } else if ($("select[name=" + valus + "]").val()) {
+                                    dataP[valus] = $("select[name=" + valus + "]").val();
+                                } else if($("textarea[name=" + valus + "]").val()){
+                                    dataP[valus] = $("textarea[name=" + valus + "]").val();
+                                } else if($("input[type=radio][name=" + valus + "]").val()){
+                                    dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
+                                } else if($("input[type=checkbox][name=" + valus + "]").val()){
+                                    var $cks = $("input[type=checkbox][name=" + valus + "]");
+                                    if($cks[0].checked === true){
+                                        dataP[valus] = $cks.val();
+                                    }
+                                }
+                        }
+                        //向data中直接添加附加数据
+                        if (options.add) {
+                            for (var names in options.add) {
+                                if (options.add.hasOwnProperty(names)) {
+                                    dataP[names] = options.add[names];
+                                }
+                            }
+                        }
+                    }else if(Type(options.data) === "json"){
+                        dataP = options.data;
+                    }
+                    options.data = dataP;
                     //console.log(options);
                     upload.render(options);
                     file.func && file.func();

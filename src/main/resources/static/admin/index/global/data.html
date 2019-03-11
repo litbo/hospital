@@ -97,7 +97,7 @@
         type: "POST",
         data: dataD,
         success: function (res) {
-            console.log(res);
+            //console.log(res);
             if (res.code !== 0) {
                 putMsg({
                     alert: "数据获取失败，请重试！",
@@ -170,7 +170,6 @@
                                         layOpen: false,
                                         func: function (obj, cs) {
                                             var valueD = getTableValue("table"),values = [];
-                                            console.log(valueD);
                                             for(var i=0;i<valueD.length;i++){
                                                 if(valueD[i]["LAY_CHECKED"] === true){
                                                     values.push(valueD[i]);
@@ -180,7 +179,6 @@
                                             if($.getUrlParam("cache") === "false"){
                                                 values = cs.data;
                                             }
-                                            console.log(values);
                                             layui.sessionData($name, {
                                                 key: $value,
                                                 value: values
