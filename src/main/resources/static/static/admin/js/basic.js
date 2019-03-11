@@ -1063,21 +1063,21 @@ action = func = {
     "delTable": function (value) {
         layui.use('table', function () {
             var table = layui.table
-                , nCk = []
+                ,loc = true
+                ,ck = table.checkStatus(value.id)//获取已选中数据
                 , oData = table.cache[value.id];//获取表格所有数据
-            table.on("toolbar(" + value.filter + ")", function () {
-
+            table.on("toolbar(" + value.filter + ")", function (obj) {
+                //按钮匹配
                 if (obj.event === value.event) {
-                    var ck = table.checkStatus(value.id);//获取选中数据
                     if (ck.data.length === 0) {
                         putMsg({
-                            alert: "当前未选中任何数据！"
+                            alert: "请选择至少一条数据！"
                         });
                         return false;
                     }
                     //上传数据定义
                     value.data = {};
-                    value.data[value.param] = nCk;
+                    value.data[value.name] = ck;
                     if (value.add !== undefined) {
                         for (var name in value.add) {
                             if (value.add.hasOwnProperty(name)) {
@@ -1087,14 +1087,17 @@ action = func = {
                     }
                     value.success = function (res) {
                         if (res.code === 0) {
-                            layer.msg("数据删除成功！");
+                            layer.msg("操作成功！");
                             //重新渲染表格
-                            table.reload(name, {
+                            value.reTable && table.reload(name, {
+                                data: res.data
+                            });
+                            !loc && table.reload(name, {
                                 data: oData
                             });
                             value.reload && window.location.reload();
                         } else {
-                            layer.msg("数据删除失败！")
+                            layer.msg("操作失败！")
                         }
                         layer.close(index);
                     };
@@ -1105,21 +1108,18 @@ action = func = {
                         layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
                             if (ck.isAll === true) {
                                 oData = [];
-                                nCk = "all";//全部被选中
                             } else {
                                 for (var j = 0; j < oData.length; j++) {
                                     //找出所有数据中的已选中数据并删除
                                     if (oData[j].LAY_CHECKED === true) {
                                         oData.splice(j, 1);
-                                        //添加
-                                        nCk.push(oData[j][value.name]);
                                     } else {
                                         delete oData[j]["LAY_CHECKED"];
                                         delete oData[j]["LAY_TABLE_INDEX"];
                                     }
                                 }
+                                loc = false;
                                 //上传已删除文件
-
                                 subUp(value)
                             }
                         });
