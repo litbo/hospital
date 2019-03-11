@@ -67,9 +67,9 @@ public class EqController {
      * @return
      **/
     @RequestMapping(value = "/addEq")
-    public Result addEq(EqInfo eqInfo, @RequestParam(value = "sbzp", required = false) MultipartFile sbzp, @RequestParam(value = "mpzp", required = false) MultipartFile mpzp) {
+    public Result addEq(EqInfo eqInfo) {
 
-        if (es.addEq(eqInfo, sbzp, mpzp) > 0) {
+        if (es.addEq(eqInfo) > 0) {
             return Result.success();
         }
         return Result.error();
