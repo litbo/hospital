@@ -198,7 +198,6 @@ public class SgInfoController {
                                        @RequestParam(required = false) String key) {
 
         String jsonMessage = "[{'type': 'radio'}, " +
-                "{field: 'id', title: '申购单ID'}, " +
                 "{field: 'bh', title: '申购单编号'}," +
                 "{field: 'pmName', title: '申购设备'}]";
         JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);

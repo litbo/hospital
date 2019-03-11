@@ -342,7 +342,7 @@ public interface SgInfoMapper {
             "dbo.sg_info\n" +
             "INNER JOIN dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id\n" +
             "WHERE\n" +
-            "dbo.sg_info.price_gj_y >= #{lzfxPrice,jdbcType=DECIMAL}")
+            "dbo.sg_info.price_gj_y >= #{lzfxPrice,jdbcType=DECIMAL} AND dbo.sg_info.bh IS NOT NULL")
     List<SgInfoLzfxVO> selectSgInfoLzfx(String lzfxPrice);
 
     /**
