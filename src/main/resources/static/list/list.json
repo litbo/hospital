@@ -996,9 +996,15 @@
                     "shiro": "a"
                   },
                   {
-                    "title": "待/已报废清单",
-                    "url": "./life/disposal_management/scrapped_list.html",
+                    "title": "待报废清单",
+                    "url": "./life/disposal_management/no_scrapped_list.html",
                     "id": "33001",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "已报废清单",
+                    "url": "./life/disposal_management/scrapped_list.html",
+                    "id": "33002",
                     "shiro": "a"
                   }
                 ]
@@ -1014,12 +1020,6 @@
                     "title": "处置申请",
                     "url": "./life/disposal_management/disposal_application.html",
                     "id": "33010",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "处置任务",
-                    "url": "./table.html",
-                    "id": "33011",
                     "shiro": "a"
                   }
                 ]

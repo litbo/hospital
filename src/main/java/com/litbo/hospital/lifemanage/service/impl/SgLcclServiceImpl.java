@@ -149,4 +149,14 @@ public class SgLcclServiceImpl implements SgLcclService {
         }
         return new PageInfo<>(list);
     }
+
+    /**
+     * 处置流程信息查询
+     * @param eqId 设备id
+     * @return DisposalProcessListVO
+     */
+    @Override
+    public DisposalProcessListVO selectDisposalProcess(String eqId) {
+        return sgLcclMapper.selectDisposalProcess(eqId);
+    }
 }

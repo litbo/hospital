@@ -21,40 +21,40 @@
         <legend>处置流程</legend>
     </fieldset>
 </div>
-    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <form class="layui-form layui-form-pane" action="" lay-filter="form">
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">单据号</label>
+                <label class="layui-form-label">设备编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="自动"
-                           class="layui-input">
+                    <input type="text" name="eqSbbh" lay-verify="title" autocomplete="off" placeholder=""
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称</label>
                 <div class="layui-input-block">
                     <input type="text" name="eqName" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">型号</label>
                 <div class="layui-input-block">
                     <input type="text" name="eqXh" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">采购日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="syxzId" lay-verify="title" autocomplete="off" class="layui-input" id="time">
+                    <input type="text" name="eqCgrq" lay-verify="title" autocomplete="off" class="layui-input" id="time" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">设备价格</label>
                 <div class="layui-input-block">
                     <input type="text" name="eqPrice" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -72,43 +72,36 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">院内编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqYq" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                    <input type="text" name="eqZcbh" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">启用日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ysQysj" autocomplete="off"  class="layui-input" lay-verify="number"
-                           id="time1">
+                    <input type="text" name="eqQysj" autocomplete="off"  class="layui-input" lay-verify="number"
+                           id="time1" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">规格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="egEg" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                    <input type="text" name="eqGg" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">申报人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="reportPerson" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                    <input type="text" name="userId" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">申报日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="ysQysj" autocomplete="off"  class="layui-input" lay-verify="number"
-                           id="time2">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">审批人<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="approver" lay-verify="number" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                    <input type="text" name="declareTime" autocomplete="off"  class="layui-input" lay-verify="number"
+                           id="time2" disabled>
                 </div>
             </div>
         </div>
@@ -135,20 +128,27 @@
 <body>
 <script>
     renderMod = {
-        form:{
-            date: [
-                {
-                    elem: "#time"
-                },
-                {
-                    elem:"#time1"
-                },
-                {
-                    elem: "#time2"
-                }]
+        form: {
+            val: {
+                filter: "form",//与form标签lay-filter相同
+                get: {
+                    url: "/lifeManage/selectDisposalProcess",
+                    type: "POST",
+                    data: {eqId:$.getUrlParam("eqId")}
+                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
+                    //有add时必需时data为表单name数组，否则请直接使用data赋值
+                }//get内参数需参考《内容传输与提交》文档
+            },
+            submit:{
+                filter:"",//可以不写
+                form:{//或者写作up
+                    url:"/lifeManage/updateSgDict",
+                    type:"POST",
+                    data:["sgDictId","lzfxPrice","sgKstlRySl"]
+                }
+            }
         }
-    }
-
+    };
 </script>
 </body>
 </html>

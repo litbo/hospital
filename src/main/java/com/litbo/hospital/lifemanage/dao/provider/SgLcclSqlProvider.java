@@ -19,7 +19,7 @@ public class SgLcclSqlProvider {
         sql.SELECT("dbo.eq_info.eq_xh");
         sql.SELECT("dbo.eq_info.eq_cgrq");
         sql.SELECT("dbo.eq_info.eq_price");
-        sql.SELECT("dbo.s_user.user_name");
+        sql.SELECT("dbo.s_emp.user_xm AS userName");
         sql.SELECT("dbo.sg_lccl.declare_time");
         sql.SELECT("dbo.sg_lccl.report_time");
         sql.SELECT("dbo.sg_lccl.ratify_time");
@@ -27,7 +27,7 @@ public class SgLcclSqlProvider {
         sql.FROM("dbo.eq_info");
         sql.INNER_JOIN("dbo.sg_lccl ON dbo.sg_lccl.eq_id = dbo.eq_info.eq_id");
         sql.INNER_JOIN("dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id");
-        sql.INNER_JOIN("dbo.s_user ON dbo.sg_lccl.user_id = dbo.s_user.user_id");
+        sql.INNER_JOIN("dbo.s_emp ON dbo.sg_lccl.user_id = dbo.s_emp.user_id");
         if (dateLowerAndUpperVO != null) {
             if (dateLowerAndUpperVO.getLower()!=null){
                 sql.WHERE("dbo.sg_lccl.declare_time >= #{lower,jdbcType=VARCHAR}");

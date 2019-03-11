@@ -71,4 +71,11 @@ public interface SgLcclService {
      * @return PageInfo<DisposalReportListVO>
      */
     PageInfo<DisposalReportListVO> selectXList(Integer pageNum, Integer pageSize, String tab);
+
+    /**
+     * 处置流程信息查询
+     * @param eqId 设备id
+     * @return DisposalProcessListVO
+     */
+    DisposalProcessListVO selectDisposalProcess(String eqId);
 }

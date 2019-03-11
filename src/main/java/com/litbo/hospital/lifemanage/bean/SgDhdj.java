@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -57,6 +58,7 @@ public class SgDhdj {
     /**
      * 到货时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date dhsj;
     /**
      * 物流公司

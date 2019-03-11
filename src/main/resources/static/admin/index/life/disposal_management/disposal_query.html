@@ -35,29 +35,24 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "checkbox"}
-                    , {field: 'eqId', title: '申购单id', minWidth: 90}
-                    , {field: 'eqSbbh', title: '设备编号', minWidth: 90}
-                    , {field: 'eqName', title: '设备名称', minWidth: 90}
-                    , {field: 'bmName', title: '部门名称', minWidth: 90}
-                    , {field: 'eqGg', title: '规格', minWidth: 60}
-                    , {field: 'eqXh', title: '型号', minWidth: 60}
-                    , {field: 'eqCgrq', title: '采购日期', minWidth: 90}
-                    , {field: 'eqPrice', title: '单价', minWidth: 60}
-                    , {field: 'userName', title: '申报人', minWidth: 85}
-                    , {field: 'declareTime', title: '申报日期', minWidth: 90}
-                    , {field: 'reportTime', title: '上报时间', minWidth: 90}
-                    , {field: 'ratifyTime', title: '批复时间', minWidth: 90}
-                    , {field: 'state', title: '状态', minWidth: 60}
+                     {field: 'eqSbbh', title: '设备编号', minWidth: 175}
+                    , {field: 'eqName', title: '设备名称', minWidth: 150}
+                    , {field: 'bmName', title: '使用部门', minWidth: 100}
+                    , {field: 'eqGg', title: '规格', minWidth: 100}
+                    , {field: 'eqXh', title: '型号', minWidth: 100}
+                    , {field: 'eqCgrq', title: '购置日期', minWidth: 170}
+                    , {field: 'eqPrice', title: '单价', minWidth: 80}
+                    , {field: 'userName', title: '申报人', minWidth: 20}
+                    , {field: 'declareTime', title: '申报日期', minWidth: 170}
+                    , {field: 'reportTime', title: '院内审批时间', minWidth: 170}
+                    , {field: 'ratifyTime', title: '财政审批时间', minWidth: 170}
+                    , {field: 'state', title: '处置状态', minWidth: 100}
                 ]]
-                , url: "/lifeManage/selectSgInfoKsshList"
+                , url: "/lifeManage/selectSgLccLList"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
-                }
-                , where: {
-                    userId: "1"
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
@@ -67,13 +62,11 @@
                         "count": res.data.total //总数据数
                     }
                 }
-                , done: function (obj) {
-                }
             }
             , reSet: {
-                url: "/lifeManage/selectSgInfoKsshList",
+                url: "/lifeManage/selectSgLccLList",
                 type: "reload",
-                data: ["eqPmPym", "bh"]
+                data: ["lower", "upper"]
             }
         }
         , form: {

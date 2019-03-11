@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -52,14 +53,17 @@ public class DisposalQueryVO {
     /**
      * 申报时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date declareTime;
     /**
      * 上报时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date reportTime;
     /**
      * 批复时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date ratifyTime;
     /**
      * 状态

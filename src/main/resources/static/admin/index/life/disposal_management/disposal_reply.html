@@ -47,7 +47,7 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="describe">上报审核</a>
+        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="describe">审核批复</a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <!--        <div class="layui-inline">
@@ -62,16 +62,16 @@
             table: {
                 cols: [[ //表头
                     {type: "checkbox"}
-                    , {field: 'eqSbbh', title: '设备编号', minWidth: 150, sort: true, event: 'openLink'}
+                    , {field: 'eqSbbh', title: '设备编号', minWidth: 180, sort: true, event: 'openLink'}
                     , {field: 'eqName', title: '设备名称', minWidth: 150}
                     , {field: 'bmName', title: '使用部门', minWidth: 150}
-                    , {field: 'eqXh', title: '型号', minWidth: 150}
-                    , {field: 'eqGg', title: '规格', minWidth: 150}
-                    , {field: 'eqCgrq', title: '购置日期', minWidth: 150, sort: true}
-                    , {field: 'eqPrice', title: '单价', minWidth: 100, sort: true}
-                    , {field: 'userName', title: '申报人', minWidth: 100}
-                    , {field: 'declareTime', title: '申报日期', minWidth: 150, sort: true}
-                    , {field: 'mode', title: '处置方式', minWidth: 100}
+                    , {field: 'eqXh', title: '型号', minWidth: 100}
+                    , {field: 'eqGg', title: '规格', minWidth: 100}
+                    , {field: 'eqCgrq', title: '购置日期', minWidth: 180, sort: true}
+                    , {field: 'eqPrice', title: '单价', minWidth: 50, sort: true}
+                    , {field: 'userName', title: '申报人', minWidth: 50}
+                    , {field: 'declareTime', title: '申报日期', minWidth: 180, sort: true}
+                    , {field: 'mode', title: '处置方式', minWidth: 80}
                 ]]
                 , url: "/lifeManage/selectXList"
                 , method: "POST"
