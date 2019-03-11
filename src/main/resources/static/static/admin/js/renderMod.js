@@ -408,7 +408,7 @@ $(function () {
                     if(res.add === true && res.add.tableId !== undefined){
                         nData = table.cache(res.add.tableId);
                     }
-                    var toEnd = false;
+                   /* var toEnd = false;
                     subUp({
                         url:res.url,
                         type:res.method || "POST",
@@ -440,14 +440,25 @@ $(function () {
                     });
                     if(toEnd){
                         return false;
-                    }
-                    /*//执行重载
+                    }*/
+                    //执行重载
                     table.reload(
                         res.tid || args_table.id,
                         {
                             url: res.url
                             , where: resValue
-                        });*/
+                            , parseData:function(res){
+                                for(var x=0;x<nData.length;x++){
+                                    res.data.list.push(nData[x]);
+                                }
+                                return {
+                                    "code": res.code, //解析接口状态
+                                    "msg": res.msg, //解析提示文本
+                                    "count":res.data.total,//页面的所有数据数
+                                    "data": res.data.list //解析数据列表
+                                }
+                            }
+                        });
                     form.render();
                     //还原重载前的数据
                     if(res.add === true && res.add.tableId !== undefined){
