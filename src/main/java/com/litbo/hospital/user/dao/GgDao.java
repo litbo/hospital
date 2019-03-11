@@ -21,4 +21,8 @@ public interface GgDao {
 
     @SelectProvider(type = GgProvider.class , method = "listWaits")
     List<SysGgVo> listWaits();
+    @Insert("insert into sys_gglx(gglx_id,gglx_name) values(#{gglxId},#{gglxName})")
+    Integer addGglb(@Param("gglxName") String gglxName, @Param("gglxId") Integer gglxId);
+    @Select("select top 1 gglx_id from sys_gglx order by gglx_id desc" )
+    Integer getLastId();
 }

@@ -34,23 +34,23 @@
 <form class="layui-form layui-form-pane" action="">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
+            <!--<div class="layui-form-item">
                 <label class="layui-form-label">角色ID<span>*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="" class="layui-input" autocomplete="off" required lay-verify="required">
                 </div>
-            </div>
+            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">角色姓名<span>*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" required lay-verify="required">
+                    <input type="text" name="roleName" class="layui-input" autocomplete="off" required lay-verify="required">
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -61,8 +61,37 @@
 
 
 
-
 <script>
+    renderMod = {
+        form:{
+            submit:{
+                filter:"submit",//可以不写
+                form:{
+                    url:"/role/addRole",
+                    type:"POST",
+                    data:["roleName"],
+                    reload:"true"
+                },//表单提交函数
+                before:function(data){
+                    //console.log("1111");
+                    //console.log(data);
+                    for(var name in data.field){
+                        if(data.field.hasOwnProperty(name)){
+                            if(data.field[name] === ""){
+                                //console.log(i);
+                                //console.log(data.field[i]);
+                                layer.alert("请确认您填写的信息！");
+                                return false;
+                            }
+                            //console.log("is true");
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+    }
+
 </script>
 </body>
 

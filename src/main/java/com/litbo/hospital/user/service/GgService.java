@@ -14,4 +14,6 @@ public interface GgService {
     SysGgVo getGgById(Integer id);
 
     PageInfo listWaits(int pageNum, int pageSize);
+
+    Integer addGglb(String gglxName);
 }
