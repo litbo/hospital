@@ -30,7 +30,7 @@ public class SgLcclController {
     @PostMapping("/selectSgLccLList")
     public Result selectSgLccLList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                    @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                                   @RequestBody DateLowerAndUpperVO dateLowerAndUpperVO) {
+                                   DateLowerAndUpperVO dateLowerAndUpperVO) {
         return Result.success(sgLcclService.selectSgLccLList(pageNum, pageSize, dateLowerAndUpperVO));
     }
 
@@ -115,4 +115,14 @@ public class SgLcclController {
         return Result.success(sgLcclService.selectXList(pageNum, pageSize, tab));
     }
 
+    /**
+     * 处置流程信息查询
+     *
+     * @param eqId   设备id
+     * @return Result
+     */
+    @PostMapping("/selectDisposalProcess")
+    public Result selectDisposalProcess(@RequestParam(name = "eqId") String eqId) {
+        return Result.success(sgLcclService.selectDisposalProcess(eqId));
+    }
 }

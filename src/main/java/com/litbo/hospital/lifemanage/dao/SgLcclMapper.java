@@ -1,10 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgLccl;
-import com.litbo.hospital.lifemanage.bean.vo.DateLowerAndUpperVO;
-import com.litbo.hospital.lifemanage.bean.vo.DisposalQueryVO;
-import com.litbo.hospital.lifemanage.bean.vo.DisposalReportListVO;
-import com.litbo.hospital.lifemanage.bean.vo.ScrappedListVO;
+import com.litbo.hospital.lifemanage.bean.vo.*;
 import com.litbo.hospital.lifemanage.dao.provider.SgLcclSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -104,7 +101,8 @@ public interface SgLcclMapper {
             "dbo.eq_info\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
             "<where>" +
-            " <if test=\"isScrapped == null || isScrapped == 0\"> dbo.eq_info.eq_id NOT IN ((SELECT\n" +
+            "dbo.eq_info.eq_sbbh IS NOT NULL \n" +
+            " <if test=\"isScrapped == null || isScrapped == 0\"> AND dbo.eq_info.eq_id NOT IN ((SELECT\n" +
             "dbo.sg_lccl.eq_id\n" +
             "FROM\n" +
             "dbo.sg_lccl\n" +
@@ -141,7 +139,7 @@ public interface SgLcclMapper {
             "dbo.eq_info\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
             "WHERE\n" +
-            "dbo.eq_info.eq_id NOT IN (SELECT\n" +
+            "dbo.eq_info.eq_sbbh IS NOT NULL AND dbo.eq_info.eq_id IN (SELECT\n" +
             "dbo.sg_lccl.eq_id\n" +
             "FROM\n" +
             "dbo.sg_lccl\n" +
@@ -176,7 +174,7 @@ public interface SgLcclMapper {
             "dbo.eq_info.eq_xh,\n" +
             "dbo.eq_info.eq_cgrq,\n" +
             "dbo.eq_info.eq_price,\n" +
-            "dbo.s_user.user_name,\n" +
+            "dbo.s_emp.user_xm as userName,\n" +
             "dbo.sg_lccl.declare_time,\n" +
             "dbo.sg_lccl.opinion,\n" +
             "dbo.sg_lccl.mode\n" +
@@ -184,7 +182,7 @@ public interface SgLcclMapper {
             "dbo.eq_info\n" +
             "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
-            "INNER JOIN dbo.s_user ON dbo.sg_lccl.user_id = dbo.s_user.user_id" +
+            "INNER JOIN dbo.s_emp ON dbo.sg_lccl.user_id = dbo.s_emp.user_id" +
             "<where>" +
             "<if test=\"tab == 1\"> dbo.sg_lccl.lccl_id IS NOT NULL AND dbo.sg_lccl.report_person IS NULL</if>" +
             "<if test=\"tab == 2\"> AND dbo.sg_lccl.report_person IS NOT NULL AND dbo.sg_lccl.ratify IS NULL</if>" +
@@ -193,4 +191,29 @@ public interface SgLcclMapper {
             "</where>" +
             "</script>")
     List<DisposalReportListVO> selectXList(@Param("tab") String tab);
+
+    /**
+     * 处置流程信息查询
+     * @param eqId 设备id
+     * @return DisposalProcessListVO
+     */
+    @Select("SELECT\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.eq_info.eq_zcbh,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
+            "dbo.eq_info.eq_qysj,\n" +
+            "dbo.eq_info.eq_cgrq,\n" +
+            "dbo.eq_info.eq_price,\n" +
+            "dbo.s_emp.user_xm AS userId,\n" +
+            "dbo.sg_lccl.declare_time\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.sg_lccl\n" +
+            "INNER JOIN dbo.eq_info ON dbo.sg_lccl.eq_id = dbo.eq_info.eq_id\n" +
+            "INNER JOIN dbo.s_emp ON dbo.sg_lccl.user_id = dbo.s_emp.user_id\n" +
+            "WHERE\n" +
+            "dbo.sg_lccl.eq_id = #{eqId,jdbcType=VARCHAR}")
+    DisposalProcessListVO selectDisposalProcess(String eqId);
 }

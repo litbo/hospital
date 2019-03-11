@@ -23,12 +23,10 @@ public class ZDShProcessConstants {
         public static final int ZD_SHZT_KESH = 3;
         /** 处长审核 */
         public static final int ZD_SHZT_CZSH = 4;
-        /** 院长审核 */
-        public static final int ZD_SHZT_YZSH = 5;
         /** 试用 */
-        public static final int ZD_SHZT_SY = 6;
+        public static final int ZD_SHZT_SY = 5;
         /** 备案*/
-        public static final int ZD_SHZT_BA = 7;
+        public static final int ZD_SHZT_BA = 6;
 
 
         public static final Map<Integer, String> SH_PROCESS = new HashMap<Integer, String>();
@@ -41,7 +39,6 @@ public class ZDShProcessConstants {
 
             SH_PROCESS.put(ZD_SHZT_KESH, "科长审核");
             SH_PROCESS.put(ZD_SHZT_CZSH, "处长审核");
-            SH_PROCESS.put(ZD_SHZT_YZSH, "院长审核");
             SH_PROCESS.put(ZD_SHZT_SY, "试用");
             SH_PROCESS.put(ZD_SHZT_BA, "备案");
 

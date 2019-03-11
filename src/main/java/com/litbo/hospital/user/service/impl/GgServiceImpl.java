@@ -43,4 +43,10 @@ public class GgServiceImpl implements GgService {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo(ggDao.listWaits());
     }
+
+    @Override
+    public Integer addGglb(String gglxName) {
+        Integer gglxId = ggDao.getLastId()+1;
+        return ggDao.addGglb(gglxName,gglxId);
+    }
 }

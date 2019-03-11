@@ -110,15 +110,6 @@ public class ZhiduServiceImpl implements ZhiduService {
         dqZt.setZtCzzt(ztCzzt);
         dqZt.setZtDate(ztDate);
         dqZt.setZtShyj(ZtShyj);
-        //更新状态
-//        SZhiduzhizeZt sZhiduzhizeZt = new SZhiduzhizeZt();
-//        //组装状态
-//        sZhiduzhizeZt.setZtId(shMsgVO.getZtId());
-//        sZhiduzhizeZt.setZtCzzt(shMsgVO.getZtCzzt());
-//        sZhiduzhizeZt.setZtDate(shMsgVO.getZtDate());
-//        sZhiduzhizeZt.setZtShyj(shMsgVO.getZtShyj());
-//        //更新状态
-//        zhiduDao.updateZdzt(sZhiduzhizeZt);
         zhiduDao.updateZdzt(dqZt);
 
     }
@@ -135,7 +126,9 @@ public class ZhiduServiceImpl implements ZhiduService {
 
         SZhidu zd = new SZhidu();
         zd.setZdName(zhiduSubmitVO.getZdName());
-        zd.setCreateTime(zhiduSubmitVO.getCreateTime());
+//        zd.setCreateTime(zhiduSubmitVO.getCreateTime());
+        Date date = new Date();
+        zd.setCreateTime(date);
         zd.setZdContent(zhiduSubmitVO.getZdContent());
         zd.setUserId(zhiduSubmitVO.getUserId());
         zd.setBmId(zhiduSubmitVO.getBmId());
@@ -152,12 +145,12 @@ public class ZhiduServiceImpl implements ZhiduService {
         SZhiduzhizeZt ztc = new SZhiduzhizeZt();
         ztc.setZdId(zd.getZdId());
         ztc.setUserId(zd.getUserId());
-        ztc.setZtDate(zd.getCreateTime());
+        ztc.setZtDate(date);
+//        ztc.setZtDate(zd.getCreateTime());
         ztc.setZtCzname(ZDShProcessConstants.SH_PROCESS.get(ZDShProcessConstants.ZD_SHZT_KEMUBX));  //编写
         ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_TG.getCode());    //操作状态 2 通过 1 不通过  0 待处理
         ztc.setZtShyj("");
         zhiduDao.saveZdZt(ztc);
-
 
         //封装状态审核信息  待审核状态
 //        SZhiduzhizeZt zt = new SZhiduzhizeZt();
@@ -177,7 +170,7 @@ public class ZhiduServiceImpl implements ZhiduService {
     public void reSubmit(ZhiduSubmitVO zhiduSubmitVO) {
         SZhidu zd = new SZhidu();
         zd.setZdName(zhiduSubmitVO.getZdName());
-        zd.setCreateTime(zhiduSubmitVO.getCreateTime());
+        zd.setCreateTime(new Date());
         zd.setZdContent(zhiduSubmitVO.getZdContent());
         zd.setUserId(zhiduSubmitVO.getUserId());
         zd.setBmId(zhiduSubmitVO.getBmId());
@@ -227,17 +220,9 @@ public class ZhiduServiceImpl implements ZhiduService {
     @Override
     public void submitShMsg(ShMsgVO shMsgVO) {     // 审核提交  先更新  然后根据审核状态添加的状态
 
-        updateZdZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),shMsgVO.getZtDate(),shMsgVO.getZtShyj());
+        updateZdZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),new Date(),shMsgVO.getZtShyj());
 
         if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT_TG.getCode() && shMsgVO.getNextShrId()!=null){   //审核通过且继续审核
-            //插入新的审核状态
-//            SZhiduzhizeZt new_sZhiduzhizeZt = new SZhiduzhizeZt();
-//            new_sZhiduzhizeZt.setZdId(shMsgVO.getZdId());
-//            new_sZhiduzhizeZt.setUserId(shMsgVO.getNextShrId());
-//            new_sZhiduzhizeZt.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode()); // 待审核状态
-//            new_sZhiduzhizeZt.setZtShyj("默认");
-//            new_sZhiduzhizeZt.setZtCzname("处长审核");
-//            zhiduDao.saveZdZt(new_sZhiduzhizeZt);
 
             insertZdZt(shMsgVO.getZdId(),shMsgVO.getNextShrId(),true);
 
@@ -247,7 +232,6 @@ public class ZhiduServiceImpl implements ZhiduService {
             zhiduDao.setZhiDuZt(shMsgVO.getZdId(),ZdztEnumProcess.ZD__ZT_SY.getCode(),shMsgVO.getSyDays());  //插入试用状态
             //当试用时间通过 修改时间  修改状态0-》2
             insertZdZt(shMsgVO.getZdId(),null,true); //更新制度表的审核状态和试用时间
-
 
         } else if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT__BTG.getCode()){//审核不通过
 //            zhiduDao.setZhiDuZt(shMsgVO.getZdId(),"0",0);
