@@ -79,6 +79,10 @@ $(function () {
                             }
 
                             if(res.code === 0 && dat !== undefined){
+                                if(val.get.save){
+                                    val.get.save["val"] = dat;
+                                    console.log(val.get.save);
+                                }
                                 for (var name in dat) {
                                     if (dat.hasOwnProperty(name)) {
                                         if(val.dateName && name === val.dateName){
@@ -408,46 +412,13 @@ $(function () {
                     if(res.add === true && res.add.tableId !== undefined){
                         nData = table.cache(res.add.tableId);
                     }
-                   /* var toEnd = false;
-                    subUp({
-                        url:res.url,
-                        type:res.method || "POST",
-                        async:false,
-                        data:resValue,
-                        success:function(res){
-                            if(res.code === 0){
-                                if(res.data.list.length === 0){
-                                    layer.msg("查无数据！");
-                                    table.reload(res.tid || args_table.id,
-                                        {
-                                            data:[],
-                                            url:false
-                                        })
-                                }else{
-                                    layer.msg("查找成功！");
-                                    table.reload(res.tid || args_table.id,
-                                        {
-                                            data:res.data.list,
-                                            url:false
-                                        })
-                                }
-
-                            }else{
-                                layer.msg("查找失败，请重试！");
-                                toEnd = true;
-                            }
-                        }
-                    });
-                    if(toEnd){
-                        return false;
-                    }*/
                     //执行重载
                     table.reload(
                         res.tid || args_table.id,
                         {
                             url: res.url
                             , where: resValue
-                            , parseData:function(res){
+                            , parseData:res.parseData || function(res){
                                 for(var x=0;x<nData.length;x++){
                                     res.data.list.push(nData[x]);
                                 }
@@ -668,12 +639,41 @@ $(function () {
                             }
                             //调用值
                             var name = item.name,
+                                param = {},
                                 value = item.value || item.key,
-                                url = item.url || "/admin/index/global/data.html";
+                                url = item.url || "/admin/index/global/data.html"
+                                ,content = url + "?key=" + item.key + "&vg=" + name;
+                            if(item.cb){
+                                content += "?cb=" + item.cb
+                            }
+                            if(item.db){
+                                content += "&db="+item.db
+                            }
+                            if(item.se){
+                                content += "&se="+item.se
+                            }
+                            if(item.value){
+                                content += "&v="+item.value
+                            }
+
+                            //提交之前运行一个函数
+                            var ss = item.before && item.before();
+                            //如果有返回值并且需要添加数据则循环添加
+                            if(ss && item.param && Type(item.param) === "array" && Type(ss) === "json"){
+                                for(var p=0;p<item.param.length;p++){
+                                    for(var nas in ss){
+                                        if(ss.hasOwnProperty(nas)){
+                                            if(nas === item.param[p]){
+                                                content += "&" + nas + "=" + ss[nas];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             layOpen({
                                 type:2,
                                 title:"选择数据",
-                                content:url+"?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+name+"&v="+item.value,
+                                content:content,
                                 area:["90%","90%"],
                                 end:function(){
                                     //获取数据并且删除数据
