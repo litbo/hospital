@@ -56,24 +56,37 @@ public class GangweiController {
         List<SGangwei> gws = gangweiDao.getGws();
         return Result.success(gws);
     }
-    @GetMapping("/listGwsByGwZt")
+    @RequestMapping("/listGwsByGwZt")
     public Result listGwsByGwZt(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwZt){
         PageInfo date = gangweiService.listGwsByGwZt(pageNum,pageSize,gwZt);
         return Result.success(date);
     }
+
+    @RequestMapping("/listGwsByTimeAndZdNameAndZt")
+    public Result listGwsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
+                                @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwZt,
+                                String startTime, String endTime, String gwName){
+        PageInfo date = null;
+        try {
+            date = gangweiService.listGwsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,gwName,gwZt);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.success(date);
+    }
+
     //获取岗位列表通过级别和名称迷糊查询
-    @GetMapping("/listGwsByGwLevelAndGwName")
+    @RequestMapping("/listGwsByGwLevelAndGwName")
     public Result listGwsByGwLevelAndGwName(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwLevel,String gwName){
         PageInfo date = gangweiService.getGwsByGwLevelAndGwName(pageNum,pageSize,gwLevel,gwName);
         return Result.success(date);
     }
     @GetMapping("/getGwByGwId")
-    public Result getGwsByGwId(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
-                         @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,
-                               @RequestParam String gwId){
-        SGangwei date = gangweiService.getGwsByGwId(pageNum,pageSize,gwId);
+    public Result getGwsByGwId(@RequestParam String gwId){
+        SGangwei date = gangweiService.getGwsByGwId(gwId);
         return Result.success(date);
     }
 
@@ -106,6 +119,7 @@ public class GangweiController {
     @PostMapping("/gwzzSubmit")
     public Result gwzzSubmit(@RequestBody GWSubmitVO gwSubmitVO){
         //提交时 SZhidu对象包括信息 bmid  zdname  zdcontent  docurl  userid createTime
+
         gangweiService.gwzzSubmit(gwSubmitVO);
         return Result.success();
     }
@@ -127,7 +141,9 @@ public class GangweiController {
 
     @PostMapping("/submitShMsg")
     public Result submitShMsg(@RequestBody ShMsgVO shMsgVO){
-
+        if(shMsgVO.getNextShrId().equals("请选择")){
+            shMsgVO.setNextShrId(null);
+        }
         gangweiService.submitShMsg(shMsgVO);
         return Result.success();
     }

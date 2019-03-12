@@ -23,67 +23,22 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="hidden-xs"  id="moreBar">
+
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="编号" autocomplete="off">
+            <input class="layui-input" name="gwName" placeholder="岗位职责名称" autocomplete="off">
         </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="名称" autocomplete="off">
-        </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">科长审核</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">审核</a>
 </script>
 
 
 
 
 <script>
-    // addTable ={
-    //     table:{
-    //         cols: [[ //表头
-    //             {checkbox:true,fixed:true}
-    //             , {field: 'post-number', title: '岗位职责编号', width:'50%',minWidth: 200,sort:true}
-    //             , {field: 'post-name', title: '岗位职责名称', minWidth: 150}
-    //             , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
-    //         ]]
-    //         , "data": [
-    //             {
-    //                 "post-number":"",
-    //                 "post-name":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":""
-    //             },{
-    //                 "post-number":"",
-    //                 "post-name":""
-    //             }]
-    //         , done: function (obj) {
-    //             tableFunc({
-    //                 "obj":obj,
-    //                 "toolFunc":{
-    //                     "event":'edit',
-    //                     "title":'科长审核',
-    //                     "type":2,
-    //                     "content":'section-audit.html',
-    //                     "area":['95%','95%']
-    //                 }
-    //             })
-    //         }
-    //     },
-    //     date :{
-    //         elem : "#date1",
-    //         type : "datetime"
-    //     }
-    // }
 
 
     renderMod = {
@@ -92,11 +47,13 @@
             table: {
                 cols: [[ //表头
                     {checkbox:true,fixed:true}
-                    , {field: 'gwId', title: '岗位职责编号', width:'50%',minWidth: 200,sort:true}
+                    , {field: 'gwId', title: '岗位职责编号',minWidth: 150,sort:true}
                     , {field: 'gwName', title: '岗位职责名称', minWidth: 150}
+                    , {field: 'createTime', title: '创建时间', minWidth: 150}
+                    , {field: 'ztCzname', title: '审核类型', minWidth: 150}
                     , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
-                , url: "/supervise/gwgl/listGwsByGwZt?gwZt=3"
+                , url: "/supervise/gwgl/listGwsByGwZt?gwZt=1"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -113,14 +70,13 @@
                     }
                 }
                 , done: function (obj) {
+
                     tableFunc({
-                        "obj":obj,
-                        "toolFunc":{
-                            "event":'edit',
-                            "title":'科长审核',
-                            "type":2,
-                            "content":'section-audit.html',
-                            "area":['95%','95%']
+                        tools:{
+                            type:2,
+                            event: "edit",
+                            content:"section-audit.html",
+                            dataUrl:["gwId","ztCzname"]
                         }
                     })
                 },
@@ -130,12 +86,9 @@
                 }
             },
             reSet:{
-                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=1",
+                url:"/supervise/gwgl/listGwsByTimeAndZdNameAndZt?gwZt=1",
                 type:"search",
-                data:["startTime","endTime","zdName"],    //搜索框的name
-                where: {
-
-                }
+                data:["gwName"],    //搜索框的name
             }
         }
     }

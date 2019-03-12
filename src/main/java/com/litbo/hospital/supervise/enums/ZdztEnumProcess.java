@@ -4,6 +4,7 @@ import lombok.Getter;
 
 public enum  ZdztEnumProcess {
 //    3 备案 2 试用 1 审核中 0 审核失败
+    ZD__ZT_WBX(-1,"制度未编写"),
     ZD__ZT_SHSB(0,"审核失败"),
     ZD__ZT_SHZ(1,"审核中"),
     ZD__ZT_SY(2,"试用"),
