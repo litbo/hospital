@@ -70,4 +70,6 @@ public interface EqDao {
     Integer saveFj(EqFj eqFj);
     @SelectProvider(type = EqProvider.class , method = "listFlEqByX")
     List<EqShowVo> listFlEqByX(SelectFlEqVo selectFlEqVo);
+    @Delete("delete from eq_info where eq_id =#{eqId}")
+    Integer delEq(String eqId);
 }

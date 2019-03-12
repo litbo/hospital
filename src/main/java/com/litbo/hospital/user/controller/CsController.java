@@ -25,7 +25,7 @@ public class CsController {
         PageInfo date = csService.listScs(pageNum,pageSize);
         return Result.success(date);
     }
-    @RequestMapping("/listWxs")
+        @RequestMapping("/listWxs")
     public Result listWxs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         PageInfo date = csService.listWxs(pageNum,pageSize);

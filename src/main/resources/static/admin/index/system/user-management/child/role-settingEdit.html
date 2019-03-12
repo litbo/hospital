@@ -63,6 +63,34 @@
 
 
 <script>
+    renderMod = {
+        form: {
+            val:{
+                filter:"baoxiuForms",
+                get:{
+                    url:"/eq/getEqById",
+                    data:{
+                        eqId:$.getUrlParam("eqId")
+                    }
+                }
+            },
+            submit:{
+                form:{
+                    url:"/baoxiu/addBaoxiu",
+                    type:"POST",
+                    data:["eqId","bxrId","bxrdh","bxksId","bxksdh","bxfs","gzxx","bxTime","fxTime"],
+                    done:function(res){
+                        if(res.code === 0){
+                            //提交完成后关闭页面
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.location.reload();
+                        }
+                    }
+                }
+            }
+        }
+    }
 </script>
 </body>
 

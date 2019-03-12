@@ -50,4 +50,6 @@ public interface EqService {
     PageInfo listFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
 
     String uploadFile(MultipartFile multipartFile);
+
+    Integer delEq(String eqId);
 }
