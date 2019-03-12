@@ -1,15 +1,15 @@
 package com.litbo.hospital.security.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwWxf;
 import com.litbo.hospital.security.service.FwWxfService;
 import com.litbo.hospital.security.vo.FwIdSelectVo;
+import com.litbo.hospital.security.vo.FwWxfIndexVo;
 import com.litbo.hospital.security.vo.WxfIndexVo;
+import com.litbo.hospital.security.vo.WxfListVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +23,19 @@ public class FwWxfController {
 
     @Autowired
     private FwWxfService fwWxfService;
+
+    @GetMapping("/wxfList")
+    public Result wxfList(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                          @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        try {
+            String userId = "1615925023";
+            PageInfo<WxfListVo> pageInfo = fwWxfService.WxfList(userId, pageNum, pageSize);
+            return Result.success(pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("读取数据失败");
+        }
+    }
 
     /**
      * 维修费审核主页面
@@ -64,7 +77,7 @@ public class FwWxfController {
          * SecurityUtils.getSubject().getSession().getAttribute();
          */
         try {
-            WxfIndexVo wxfIndexVo = fwWxfService.wxfIndex(fwId, userId);
+            FwWxfIndexVo wxfIndexVo = fwWxfService.fwWxfIndex(fwId, userId);
             return Result.success(wxfIndexVo);
         } catch (Exception e) {
             e.printStackTrace();

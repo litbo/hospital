@@ -2,6 +2,7 @@ package com.litbo.hospital.security.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.litbo.hospital.common.utils.EnumUtils;
+import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.enums.EnumProcess;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +39,8 @@ public class BaoXiuRw {
 
     private Integer bxStatus;
 
+    private Integer wxfStatus;
+
     private String jjxStatusString;
 
     private String baoxiuRw;
@@ -70,4 +73,28 @@ public class BaoXiuRw {
         this.link = "/admin/index/safe/service-management/child/repair-repairs"+this.bxStatus+".html";
     }
 
+    public BaoXiuRw(String bmName, String eqName, String userXm, Timestamp bxTime, Integer jjxStatus, String eqId,  String fwId,Integer wxfStatus) {
+        this.eqId = eqId;
+        this.fwId = fwId;
+        this.bmName = bmName;
+        this.eqName = eqName;
+        this.userXm = userXm;
+        this.bxTime = bxTime;
+        this.jjxStatus = jjxStatus;
+        this.wxfStatus = wxfStatus;
+        if(jjxStatus == 1){
+            this.jjxStatusString =  "低";
+        }
+        else if(jjxStatus == 2){
+            this.jjxStatusString =  "中";
+        }
+        else if(jjxStatus == 3){
+            this.jjxStatusString =  "高";
+        }
+        else{
+            this.jjxStatusString =  "未知";
+        }
+        this.baoxiuRw = bmName+";"+eqName+";"+eqId+";维修费申请"+ EnumUtils.getByCode(EnumApplyStatus.class,wxfStatus).getMessage();
+        this.link = "/admin/index/safe/service-management/child/repair-apply.html";
+    }
 }

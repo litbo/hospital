@@ -1,7 +1,12 @@
 package com.litbo.hospital.security.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
+@Data
 public class FwWxf {
     private Integer id;
 
@@ -9,6 +14,8 @@ public class FwWxf {
 
     private String fwId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:ss:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:ss:mm")
     private Date wxfSqtime;
 
     private Double wxfRgf;
@@ -19,87 +26,10 @@ public class FwWxf {
 
     private Integer wxfStatus;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:ss:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:ss:mm")
     private Date wxfSptime;
 
     private String wxfSpyj;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUser1Id() {
-        return user1Id;
-    }
-
-    public void setUser1Id(String user1Id) {
-        this.user1Id = user1Id == null ? null : user1Id.trim();
-    }
-
-    public String getFwId() {
-        return fwId;
-    }
-
-    public void setFwId(String fwId) {
-        this.fwId = fwId == null ? null : fwId.trim();
-    }
-
-    public Date getWxfSqtime() {
-        return wxfSqtime;
-    }
-
-    public void setWxfSqtime(Date wxfSqtime) {
-        this.wxfSqtime = wxfSqtime;
-    }
-
-    public Double getWxfRgf() {
-        return wxfRgf;
-    }
-
-    public void setWxfRgf(Double wxfRgf) {
-        this.wxfRgf = wxfRgf;
-    }
-
-    public Double getWxfCjrgf() {
-        return wxfCjrgf;
-    }
-
-    public void setWxfCjrgf(Double wxfCjrgf) {
-        this.wxfCjrgf = wxfCjrgf;
-    }
-
-    public String getUser2Id() {
-        return user2Id;
-    }
-
-    public void setUser2Id(String user2Id) {
-        this.user2Id = user2Id == null ? null : user2Id.trim();
-    }
-
-    public Integer getWxfStatus() {
-        return wxfStatus;
-    }
-
-    public void setWxfStatus(Integer wxfStatus) {
-        this.wxfStatus = wxfStatus;
-    }
-
-    public Date getWxfSptime() {
-        return wxfSptime;
-    }
-
-    public void setWxfSptime(Date wxfSptime) {
-        this.wxfSptime = wxfSptime;
-    }
-
-    public String getWxfSpyj() {
-        return wxfSpyj;
-    }
-
-    public void setWxfSpyj(String wxfSpyj) {
-        this.wxfSpyj = wxfSpyj == null ? null : wxfSpyj.trim();
-    }
 }

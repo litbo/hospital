@@ -5,10 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.bean.FwLcjl;
-import com.litbo.hospital.security.dao.FwBaoxiuDao;
-import com.litbo.hospital.security.dao.FwLcjlDao;
-import com.litbo.hospital.security.dao.FwShouLiDao;
-import com.litbo.hospital.security.dao.FwWeixiuDao;
+import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.BaoXiuRw;
@@ -40,6 +37,9 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     @Autowired
     private FwWeixiuDao fwWeixiuDao;
 
+    @Autowired
+    private FwWxfDao fwWxfDao;
+
     @Override
     public PageInfo getBaoxiuEq(String userId,Integer pageSize,Integer pageNum,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
@@ -52,8 +52,11 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize) {
         List<BaoXiuRw> baoxiuRw = fwBaoxiuDao.findBaoxiuRw(userId, EnumProcess.FW_BX_SL.getCode());
         List<BaoXiuRw> baoxiuRw1 = fwShouLiDao.findBaoxiuRw(userId);
-        /*List<BaoXiuRw> baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(userId);*/
+        List<BaoXiuRw> baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(userId);
+        List<BaoXiuRw> baoxiuRw3 = fwWxfDao.getWxfRw(userId);
         baoxiuRw.addAll(baoxiuRw1);
+        baoxiuRw.addAll(baoxiuRw1);
+        baoxiuRw.addAll(baoxiuRw3);
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<BaoXiuRw>(baoxiuRw);
     }
