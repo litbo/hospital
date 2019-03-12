@@ -35,8 +35,8 @@ public class ZhiduController {
     }
 
     @GetMapping("/getZdById")
-    public Result getZdById(String id){
-        SZhidu sZhidu = zhiduService.getZdById(id);
+    public Result getZdById(String zdId){
+        SZhidu sZhidu = zhiduService.getZdById(zdId);
         return Result.success(sZhidu);
     }
 
@@ -47,7 +47,7 @@ public class ZhiduController {
         return Result.success(zds);
     }
 
-    @GetMapping("/listZdsByTimeAndZdNameAndZt")
+    @RequestMapping("/listZdsByTimeAndZdNameAndZt")
     public Result listZdsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                                               String startTime, String endTime, String zdName, String zdZt){
@@ -112,9 +112,13 @@ public class ZhiduController {
     @PostMapping("/submitShMsg")
     public Result submitShMsg(@RequestBody ShMsgVO shMsgVO){
 
+        if(shMsgVO.getNextShrId().equals("请选择")){
+            shMsgVO.setNextShrId(null);
+        }
         zhiduService.submitShMsg(shMsgVO);
         return Result.success();
     }
+
 
 
 }

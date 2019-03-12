@@ -14,311 +14,71 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-form-label{
-            padding: 8px 10px!important;
-        }
-        .layui-form-item{
-            margin-bottom:30px;
-        }
-
-        .layui-container{
+        button{
             margin-top:30px;
         }
     </style>
 </head>
 
 <body>
-<div class="layui-container">
-    <div class="layui-row">
-        <div class="layui-collapse">
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">取得方式</h2>
-                <div class="layui-colla-content layui-show" style="height:230px;" >
-                    <form class="layui-form layui-form-pane" action="">
-                        <div class="layui-row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">取得方式<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <select requied lay-verify="required">
-                                            <option>上级调拨</option>
-                                            <option>外购</option>
-                                            <option>接受捐赠</option>
-                                            <option>融资租入</option>
-                                            <option>试用</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item" pane>
-                                    <label class="layui-form-label">设备<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="eqName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-xs layui-btn-normal" id="selectEq1">选择</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-row">
-                            <div class="layui-form-item">
-                                <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">添置类型</h2>
-                <div class="layui-colla-content">
-                    <form class="layui-form layui-form-pane" action="">
-                        <div class="layui-row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">添置类型<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <select requied lay-verify="required">
-                                            <option>更新</option>
-                                            <option>新增</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item" pane>
-                                    <label class="layui-form-label">设备<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <button class="layui-btn layui-btn-xs layui-btn-normal" id="selectEq2">选择</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-row">
-                            <div class="layui-form-item">
-                                <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">适用范围</h2>
-                <div class="layui-colla-content">
-                    <form class="layui-form layui-form-pane" action="">
-                        <div class="layui-row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">适用范围<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <select requied lay-verify="required">
-                                            <option>全院使用</option>
-                                            <option>多科使用</option>
-                                            <option>单科使用</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item" pane>
-                                    <label class="layui-form-label">设备<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <button class="layui-btn layui-btn-xs layui-btn-normal"  id="selectEq3">选择</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-row">
-                            <div class="layui-form-item">
-                                <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">使用分类</h2>
-                <div class="layui-colla-content">
-                    <form class="layui-form layui-form-pane" action="">
-                        <div class="layui-row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">适用范围<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <select requied lay-verify="required">
-                                            <option>医疗器械</option>
-                                            <option>手术器械和注册穿射器械</option>
-                                            <option>手术器械</option>
-                                            <option>...</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item" pane>
-                                    <label class="layui-form-label">设备<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <button class="layui-btn layui-btn-xs layui-btn-normal"  id="selectEq4">选择</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-row">
-                            <div class="layui-form-item">
-                                <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <button class="layui-btn layui-btn-normal " id="qdfs">取得方式</button>
+        <button class="layui-btn layui-btn-normal " id="tzlx">添置类型</button>
+        <button class="layui-btn layui-btn-normal " id="syfw">使用范围</button>
+        <button class="layui-btn layui-btn-normal " id="syfl">使用分类</button>
     </div>
 </div>
-
-
-
-
-
 <script>
     formData = {};
     renderMod = {
-        form: {
-            date:true,
-            submit: {
-                filter: "submit",//可以不写
-                before:function(){
-
-                    return param = {
-                        1:formData.radio[0].eqId
-                    }
-                },
-                form: {
-                    url: "/eq/saveFj",
-                    type: "POST",
-                    // contentType:"application/json",
-                    data:["fjXh","fjGg","fjName"],
-                    param:{
-                        1:"eqId"
-                    }
-                }//表单提交函数
-            }
-        },
-        bind: {
-            selectItem: [
-                {
-                    elem: "#selectEq1",
-                    data: formData,
-                    cb: "/eq/listEqbt",
-                    db: "/eq/listShowEqs",
-                    key: "radio",
-                    name: "dtdt"
-                },
-                {
-                    elem: "#selectEq2",
-                    data: formData,
-                    cb: "/eq/listEqbt",
-                    db: "/eq/listShowEqs",
-                    key: "radio",
-                    name: "dtdt"
-                },
-
-                {
-                    elem: "#selectEq3",
-                    data: formData,
-                    cb: "/eq/listEqbt",
-                    db: "/eq/listShowEqs",
-                    key: "radio",
-                    name: "dtdt"
-                },
-                {
-                    elem: "#selectEq4",
-                    data: formData,
-                    cb: "/eq/listEqbt",
-                    db: "/eq/listShowEqs",
-                    key: "radio",
-                    name: "dtdt"
+        btn:[
+            {
+                elem:'#qdfs',
+                func:function(){
+                    layui.use('layer',function(){
+                        var layer = layui.layer;
+                        layer.open({
+                            type:2,
+                            content:'./child/qdfsAdd.html',
+                            area:['80%','90%']
+                        })
+                    })
                 }
-            ]
-
-        }
+            },
+            {
+                elem:'#tzlx',
+                func:function(){
+                    layOpen({
+                        event:'tzlx',
+                        type:2,
+                        content:'./child/tzlxAdd.html',
+                        area:['80%','90%']
+                    })
+                }
+            },
+            {
+                elem:'#syfw',
+                func:function(){
+                    layer.open({
+                        type:2,
+                        content:'./child/syfwAdd.html',
+                        area:['80%','90%']
+                    })
+                }
+            },
+            {
+                elem:'#syfl',
+                func:function(){
+                    layer.open({
+                        type:2,
+                        content:'./child/syflAdd.html',
+                        area:['80%','90%']
+                    })
+                }
+            }
+        ]
     }
-
-
-   /* layui.use(['layer', 'form', 'layedit', 'laydate','element'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate
-            , element = layui.element;
-        var date = new Date()
-            , year = date.getFullYear()
-            , month = date.getMonth() + 1
-            , day = date.getDate()
-            , today = year+ "-" + month + "-" + day//获取年-月-日
-            , time = date.getTime();
-
-        //日期
-        laydate.render({
-            elem: '#date',
-            value: today,
-            format: "y-M-d"
-        });
-        laydate.render({
-            elem: '#date1',
-            value: today,
-            format: "y-M-d"
-        });
-        laydate.render({
-            elem: '#date2',
-            value: today,
-            format: "y-M-d"
-        });
-        laydate.render({
-            elem: '#date3',
-            value: today,
-            format: "y-M-d"
-        });
-        laydate.render({
-            elem: '#date4',
-            value: today,
-            format: "y-M-d"
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-        //弹出层设置
-//        $('#layerBtn').click(function(){
-//            layer.open({
-//                type:2
-//                ,title:'部门选择'
-//                ,content:'./child/draftAdd.html'
-//                ,area:['90%','90%']
-//                ,btn:['选择','取消']
-//            });
-//            return false;
-//        });
-    });*/
 </script>
 </body>
 

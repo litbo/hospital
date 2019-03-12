@@ -41,15 +41,15 @@
                         <div class="layui-row">
                             <div class="col-xs-12 col-sm-6">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">设备编号</label>
+                                    <label class="layui-form-label">设备名称</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqName" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">产品编号<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input"  placeholder="请输入...">
+                                        <input type="text" name="eqZcbh" autocomplete="off" class="layui-input"  placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -62,7 +62,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">台账类别</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="tzlb">
+                                        <select name="eqTzlb" lay-filter="tzlb">
                                             <option value="低值耐用品类">低值耐用品类</option>
                                             <option value="固定资产类">固定资产类</option>
                                             <option value="基建类">基建类</option>
@@ -74,19 +74,19 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修期开始时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="date" id="date"  placeholder="2018-12-04" autocomplete="off" class="layui-input">
+                                        <input type="text" name="eqBxkssj" id="date"  placeholder="2018-12-04" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">设备型号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqXh" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">设备规格</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqGg" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -106,7 +106,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">单价<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="3000">
+                                        <input type="text" name="eqPrice" autocomplete="off" class="layui-input" placeholder="3000">
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用部门</label>
                                     <div class="layui-input-block">
-                                        <select name="bmName" lay-filter="bmList">
+                                        <select name="eqBmid" lay-filter="bmList">
                                         </select>
                                     </div>
                                 </div>
@@ -139,19 +139,19 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">启用日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="date" id="date1"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
+                                        <input type="text" name="eqQysj" id="date1"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修期结束时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="date" id="date2"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
+                                        <input type="text" name="eqBxjssj" id="date2"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">维修商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="wxsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="wxs">选择</button>
                                     </div>
                                 </div>
@@ -165,13 +165,13 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">注册证名称</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqZczmc" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">注册证编码</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqZczbh" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                             </div>
@@ -191,14 +191,14 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">生产商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="scsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="scs" id="scs">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">品牌</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqPp" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -210,47 +210,47 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">生产编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text" name="eqScbh" class="layui-input" autocomplete="off" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">配置</label>
                                     <div class="layui-input-block">
-                                        <select name="">
-                                            <option>标配</option>
-                                            <option>选配</option>
+                                        <select name="eqPz">
+                                            <option value="标配">标配</option>
+                                            <option value="选配">选配</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用年限(月)</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="60">
+                                        <input type="text" name="eqSynx" autocomplete="off" class="layui-input" placeholder="60">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">供应商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="gysName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="gys" id="gys">选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">合同编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text"  name="eqHtbh" class="layui-input" autocomplete="off" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">采购日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" id="date4">
+                                        <input type="text" name="eqCgrq"  class="layui-input" autocomplete="off" id="date4">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用部门负责人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" disabled autocomplete="off" class="layui-input" placeholder="请输入">
+                                        <input type="text" name="eqSybmfzr" disabled autocomplete="off" class="layui-input" placeholder="请输入">
                                     </div>
                                 </div>
                             </div>
@@ -259,65 +259,65 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">安装日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" id="date5">
+                                        <input type="text" name="eqAzrq" class="layui-input" autocomplete="off" id="date5">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">安装位置</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text" name="eqAzwz" class="layui-input" autocomplete="off" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">值班类型</label>
                                     <div class="layui-input-block">
-                                        <select name="" lay-filter="">
-                                            <option value="">白班</option>
-                                            <option value="0">夜班</option>
-                                            <option value="1">全天</option>
+                                        <select name="eqZblx" lay-filter="">
+                                            <option value="白班">白班</option>
+                                            <option value="夜班">夜班</option>
+                                            <option value="全天">全天</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">折旧率</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" placeholder="0">
+                                        <input type="text" class="layui-input" name="eqZjl" autocomplete="off" placeholder="0">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">建档人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" placeholder="刘松峰">
+                                        <input type="text" name="userId" class="layui-input" autocomplete="off" placeholder="刘松峰">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">建档日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" id="date6">
+                                        <input type="text" name="eqJdrq" class="layui-input" autocomplete="off" id="date6">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">卷宗编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text" name="eqJzbh" class="layui-input" autocomplete="off" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">档案编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqDabh" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">院区</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqYq" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">备注</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqBz" autocomplete="off" class="layui-input" placeholder="请输入...">
                                     </div>
                                 </div>
                             </div>
@@ -393,7 +393,7 @@
                                     <div class="layui-form-item" pane>
                                         <label class="layui-form-label">安装环境及要求</label>
                                         <div class="layui-input-block">
-                                            <textarea class="layui-textarea" placeholder="请输入..."></textarea>
+                                            <textarea class="layui-textarea" name="eqAzhjyq" placeholder="请输入..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -401,7 +401,7 @@
                         </div>
                         <div class="layui-row">
                             <div class="col-xs-12">
-                                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid">提 交</button>
+                                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="submit">提 交</button>
                             </div>
                         </div>
                     </div>
@@ -420,32 +420,79 @@
     renderMod={
         form:{
             submit:{
-                filter:"",//可以不写
+                filter:"submit",//可以不写
+                before:function(){
+                    var ad={};
+                    if(formData.eqSbzp!==undefined){
+                        ad.eqSbzp=formData.eqSbzp;
+                    }
+                    if(formData.eqMpzp!==undefined){
+                        ad.eqMpzp=formData.eqMpzp;
+
+                    }
+                    if(formData.radio!==undefined){
+                            ad.eqPmId=formData.radio[0].eqPmId
+                    }
+                    if(formData.wxs!==undefined){
+                        ad.sbcsIdWxs=formData.wxs[0].sbcsIdWxs
+                    }
+                    if(formData.scs!==undefined){
+                        ad.sbcsIdScs=formData.scs[0].sbcsIdScs
+                    }
+                    if(formData.gys!==undefined){
+                        ad.sbcsIdGys=formData.gys[0].sbcsIdGys
+                    }
+              /*      if(doJudg({
+                            "undefined":[formData.radio,formData.eqMpzp,formData.eqSbzp]
+                        })){
+                        putMsg({
+                            alert:"参数不完整"
+                        })
+                    }*/
+                    return param = {
+                        /*1:formData.radio[0].bmId,*/
+                        1:ad.eqSbzp,
+                        2:ad.eqMpzp,
+                        3:ad.eqPmId,
+                        4:ad.sbcsIdWxs,
+                        5:ad.sbcsIdScs,
+                        6:ad.sbcsIdGys
+                    }
+                },
                 form:{
                     url:"/eq/addEq",
                     type:"POST",
-                    data:["eqName","eqSbbh","eqZcbh","eqPmId","eqGg","eqXh","eqZjlyId",
+                    data:["eqName","eqZcbh","eqPmId","eqGg","eqXh","zjlyId",
                             "eqJldwId","eqPrice","eqTzlb","eqBxkssj","eqBxjssj","eqBxxysj",
-                            "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczbh","eqPp","eqScbh",
+                            "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",
                             "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
                             "eqZblx","eqZjl","userId","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
                             "eqMpzp","eqAzhjyq"],
-                    success:function(){
+                    param:{
+                        1:"eqSbzp",
+                        2:"eqMpzp",
+                        3:"eqPmId",
+                        4:"sbcsIdWxs",
+                        5:"sbcsIdScs",
+                        6:"sbcsIdGys"
+                    },
+                    reload:false
+              /*      success:function(){
                         alert("xx");
-                    }
-                },//表单提交函数
-                before:function(data){
+                    }*/
+                }//表单提交函数
+     /*           before:function(data){
                     for(var i=0;i<data.field.length;i++){
                         if(data.field[i] === ""){
                             layer.alert("请确认您填写的信息！");
                 	return false;
                         }
                     }
-                },//表单提交前执行函数
-                func:function(data){
+                },*///表单提交前执行函数
+            /*    func:function(data){
                     n++;
                     layer.alert("您已提交 " + n + " 次！");
-                }//表单提交后执行函数（不论成功与否）
+                }*///表单提交后执行函数（不论成功与否）
             },
             date:[
                 {
@@ -477,27 +524,28 @@
                     value:today
                 }
             ],
-          /*  file:[
+            file:[
                 {
-                    elem:"#selec",
-                    url:"/logo/setLogo",
+                    elem:"#sbzp",
+                    url:"/eq/uploadFile",
                     accept:"images",
-                    acceptMime:"image/!*",
-                    auto:false,
-                    bindAction:"#sub",
-                    field:"logoFile",
+                    acceptMime:"image/*",
+                    auto:true,
+                    bindAction:"#file",
+                    field:"file",
                     choose:function(obj){
                         files = obj.pushFile();
                         obj.preview(function(index,file,result){
                             $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
                         })
                     },done:function(res,index,upload){
+                        if(res.code===0){
+                            formData.eqSbzp=res.data
+                            layer.msg('选择成功！', {
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
                         console.log(arguments);
-                        //layui.closeAll("loading");
-                        layer.msg('上传成功！', {
-                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
-                        });
-                        $(".img_show").html("");
                         return delete files[index];
                     },error:function(index,upload){
                         console.log("index:"+index);
@@ -505,32 +553,33 @@
                     }
                 },
                 {
-                    elem:"#selec1",
-                    url:"/logo/setLogo",
+                    elem:"#mpzp",
+                    url:"/eq/uploadFile",
                     accept:"images",
                     acceptMime:"image/!*",
-                    auto:false,
+                    auto:true,
                     bindAction:"#sub",
-                    field:"logoFile",
+                    field:"file",
                     choose:function(obj){
                         files = obj.pushFile();
                         obj.preview(function(index,file,result){
                             $(".img_show1").html($("<img>").attr({"src":result,"id":"show_img"}));
                         })
                     },done:function(res,index,upload){
+                        if(res.code===0){
+                            formData.eqMpzp=res.data
+                            layer.msg('选择成功！', {
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
                         console.log(arguments);
-                        //layui.closeAll("loading");
-                        layer.msg('上传成功！', {
-                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
-                        });
-                        $(".img_show1").html("");
                         return delete files[index];
                     },error:function(index,upload){
                         console.log("index:"+index);
                         console.log("upload"+upload);
                     }
                 }
-            ],*/
+            ],
             val: {
                 filter:"bmList",
                 select: [
@@ -574,25 +623,25 @@
                 {
                     elem: "#scs",
                     data:formData,
-                    cb:"/supervise/csgl/eqcsTitles",
-                    db:"/supervise/csgl/listEqcsByX2",
-                    key:"radio",
+                    cb:"/cs/scsTitle",
+                    db:"/cs/listScs",
+                    key:"scs",
                     name:"dtdt"
                 },
                 {
                     elem: "#gys",
                     data:formData,
-                    cb:"/supervise/csgl/eqcsTitles",
-                    db:"/supervise/csgl/listEqcsByX1",
-                    key:"radio",
+                    cb:"/cs/gysTitle",
+                    db:"/cs/listGys",
+                    key:"gys",
                     name:"dtdt"
                 },
                 {
                     elem: "#wxs",
                     data:formData,
-                    cb:"/supervise/csgl/eqcsTitles",
-                    db:"/supervise/csgl/listEqcsByX3",
-                    key:"radio",
+                    cb:"/cs/wxsTitle",
+                    db:"/cs/listWxs",
+                    key:"wxs",
                     name:"dtdt"
                 }
 

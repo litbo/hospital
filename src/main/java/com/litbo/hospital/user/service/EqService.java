@@ -19,7 +19,7 @@ public interface EqService {
 
     PageInfo listShowEqs(int pageNum, int pageSize);
 
-    int addEq(EqInfo eqInfo, MultipartFile sbzp, MultipartFile mpzp);
+    int addEq(EqInfo eqInfo);
 
     PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo);
 
@@ -50,4 +50,6 @@ public interface EqService {
     PageInfo listFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
 
     String uploadFile(MultipartFile multipartFile);
+
+    Integer delEq(String eqId);
 }

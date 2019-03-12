@@ -941,122 +941,87 @@ action = func = {
     },
     //向表格中添加数据
     "reTable": function (value) {
-        var name = value.name || "table", res = value.data, rep = 0, total = 0, num = 0, sec = 0, add = [], xs = 0;
+        var name = value.name || "table", res = value.data,pp = false,hh="200";
         layui.use('table', function () {
             var table = layui.table
                 , oData = table.cache[name];//获取表格所有数据
+
             //未选择数据则不执行操作
             if (res.length === 0) {
                 return false;
             }
-            console.log("==========");
-            console.log("==========");
-            console.log("==========");
+
             //若需覆盖原数据则不保留原数据，否则向后逐条追加数据
             if (value.cover === true) {
                 oData = res;
             } else {
-                console.log("需要添加的RES = ", res);
                 if (oData.length === 0) {
-                    sec++;
                     for (var v = 0; v < res.length; v++) {
-                        delete res[v]["LAY_CHECKED"];
+                        delParam(res[v]);
                         oData.push(res[v]);
                     }
-                } else {
+                }else {
                     for (var i = 0; i < oData.length; i++) {
+                        delParam(oData[i]);
                         compRes(oData[i], res);
                     }
-                    //console.log(JSON.stringify(add));
-                    for (var j = 0; j < add.length; j++) {
-                        oData.push(add[j]);
+
+                    for (var j = 0; j < res.length; j++) {
+                        delParam(res[j]);
+                        oData.push(res[j]);
                     }
                 }
             }
 
             //数据对比函数
-            function compRes(data, val, show) {
-                rep++;
-                !show && console.log("+++vvvv--==--REP--==--", rep);
-                !show && console.log("+++vvvv--==--REP--==--", rep);
-                show && console.log("==--RRR--==");
-                show && console.log("==--RRR--==");
-                show && console.log("==--RRR--==");
-                delete data["LAY_CHECKED"];
-                delete data["LAY_TABLE_INDEX"];
-
+            function compRes(data, val) {
                 //循环需要添加的数据
                 for (var x = 0; x < val.length; x++) {
-                    //删除不必要参数
-                    delete val[x]["LAY_CHECKED"];
-                    delete val[x]["LAY_TABLE_INDEX"];
-
+                    //删除不需要进行判断的参数
+                    delParam(val[x]);
                     //获取数据字符串
                     var dd = JSON.stringify(data)
                         , vv = JSON.stringify(val[x]);
-
-                    console.log("这条需要判断******：", JSON.parse(JSON.stringify(val[x])));
-                    console.log("这条是原数据%%%%%%：", JSON.parse(JSON.stringify(data)));
-                    //当数据一样时，删除当前数据。数据不一样时匹配add数组，只有当和数组中的数据不匹配时才会加进add数组
-                    if (dd !== vv) {
-                        sec++;
-                        console.log("xx=========================================================================================xx");
-                        console.log("这条数据将添加+++++++：" + x, JSON.parse(JSON.stringify(val[x])));
-                        console.log("添加之=+前+=的add：" + x, JSON.parse(JSON.stringify(add)));
-                        console.log("cc=========================================================================================cc");
-                        //add.push(val[x]);
-                        console.log("添加之=+后+=的add：" + x, JSON.parse(JSON.stringify(add)));
-                        console.log("tt=========================================================================================tt");
-
-                        if(add.length === 0){
-                            add.push(val[x]);
-                        }else{
-                            for (var v = 0; v < add.length; v++) {
-                                var aa = JSON.stringify(add[v]);
-                                if (dd === aa) {
-                                    console.log("dddddddd = ", JSON.parse(dd));
-                                    console.log("aaaaaaaa = ", JSON.parse(aa));
-                                    add.splice(v, 1);
-                                    v = 0;
-                                }
-                                //console.log("Tadd = "+x,JSON.stringify(add));
-                            }
-                        }
-
-                        add.push(val[x]);
-                    } else {
-                        console.log("((((((((((((((((((((((((((((((((((((((((((((((((");
+                    //当数据一样时，删除当前数据并且结束循环
+                    if (dd === vv){
                         val.splice(x, 1);
-                        x = 0;
-                        //compRes(data,val,true);
+                        return true;
                     }
-                    //判断是否需要删除某个判断的元素（删除自定义参数）
-                    /*if(value.del !== undefined && Type(value.del) === "array"){
-                        for(var cc=0;cc < value.del.length;cc++){
-                            delete oData[x][cc];
-                        }
-                    }*/
-
                 }
-                //!show && console.log("isAdd",JSON.stringify(add));
-
             }
 
-            console.log("即将渲染的数据", oData);
+            //删除不需要进行判断的参数
+            function delParam(data) {
+                //默认将删除 LAY_CHECKED LAY_TABLE_INDEX
+                !value.delVal && data["LAY_CHECKED"] && delete data["LAY_CHECKED"];
+                !value.delVal && data["LAY_TABLE_INDEX"] && delete data["LAY_TABLE_INDEX"];
+                //判断是否需要删除某个判断的元素（删除自定义参数）
+                if(value.del !== undefined && Type(value.del) === "array"){
+                    for(var cc=0;cc < value.del.length;cc++){
+                        data[cc] && delete data[cc];
+                    }
+                }
+            }
+
+            //数据大于15条时显示分页按钮并拉高表格高度
+            if(oData.length > 15){
+                pp = true;
+                hh = "250"
+            }
+
             //重新渲染表格
             table.reload(name, {
-                data: oData
+                data: oData,
+                page:pp,
+                height:hh
             });
-            //大于15条数据不显示数量（数据太大会导致内存占用过高，页面崩溃。限制最多只能选中15条一次）
-            /*if(sec >= 15){
-                sec = "多";
-            }*/
+
             //信息提示
-            if (sec === 0) {
+            /*if (res.length === 0) {
                 layer.msg("重复数据无法添加！");
-            } else {
-                layer.msg("已成功添加" + sec + "条新数据！");
-            }
+            }*/
+
+            layer.msg("已成功添加" + res.length + "条新数据！");
         });
     },
     //表格外获取选中数据并删除选中数据(只修改本地数据)
@@ -1098,21 +1063,21 @@ action = func = {
     "delTable": function (value) {
         layui.use('table', function () {
             var table = layui.table
-                , nCk = []
+                ,loc = true
+                ,ck = table.checkStatus(value.id)//获取已选中数据
                 , oData = table.cache[value.id];//获取表格所有数据
-            table.on("toolbar(" + value.filter + ")", function () {
-
+            table.on("toolbar(" + value.filter + ")", function (obj) {
+                //按钮匹配
                 if (obj.event === value.event) {
-                    var ck = table.checkStatus(value.id);//获取选中数据
                     if (ck.data.length === 0) {
                         putMsg({
-                            alert: "当前未选中任何数据！"
+                            alert: "请选择至少一条数据！"
                         });
                         return false;
                     }
                     //上传数据定义
                     value.data = {};
-                    value.data[value.param] = nCk;
+                    value.data[value.name] = ck;
                     if (value.add !== undefined) {
                         for (var name in value.add) {
                             if (value.add.hasOwnProperty(name)) {
@@ -1120,16 +1085,20 @@ action = func = {
                             }
                         }
                     }
+                    value.contentType = "application/json";
                     value.success = function (res) {
                         if (res.code === 0) {
-                            layer.msg("数据删除成功！");
+                            layer.msg("操作成功！");
                             //重新渲染表格
-                            table.reload(name, {
+                            value.reTable && table.reload(name, {
+                                data: res.data
+                            });
+                            !loc && table.reload(name, {
                                 data: oData
                             });
                             value.reload && window.location.reload();
                         } else {
-                            layer.msg("数据删除失败！")
+                            layer.msg("操作失败！")
                         }
                         layer.close(index);
                     };
@@ -1140,21 +1109,18 @@ action = func = {
                         layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
                             if (ck.isAll === true) {
                                 oData = [];
-                                nCk = "all";//全部被选中
                             } else {
                                 for (var j = 0; j < oData.length; j++) {
                                     //找出所有数据中的已选中数据并删除
                                     if (oData[j].LAY_CHECKED === true) {
                                         oData.splice(j, 1);
-                                        //添加
-                                        nCk.push(oData[j][value.name]);
                                     } else {
                                         delete oData[j]["LAY_CHECKED"];
                                         delete oData[j]["LAY_TABLE_INDEX"];
                                     }
                                 }
+                                loc = false;
                                 //上传已删除文件
-
                                 subUp(value)
                             }
                         });

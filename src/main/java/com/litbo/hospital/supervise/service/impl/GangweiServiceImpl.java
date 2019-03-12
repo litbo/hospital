@@ -15,6 +15,8 @@ import com.litbo.hospital.supervise.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,8 +31,7 @@ public class GangweiServiceImpl implements GangweiService {
 
     @Override
     public void saveGw(SGangwei gw) {
-        Integer maxId = gangweiDao.getMaxId();
-        gw.setGwId(maxId+1);
+        gw.setGwZzZt(ZdztEnumProcess.ZD__ZT_WBX.getCode());
         gangweiDao.saveGw(gw);
     }
 
@@ -50,9 +51,39 @@ public class GangweiServiceImpl implements GangweiService {
     public PageInfo listGwsByGwZt(int pageNum, int pageSize, String gwZt) {
 
         PageHelper.startPage(pageNum,pageSize);
-        List<SGangwei> list =  gangweiDao.listGwsByGwZt(gwZt);
-        return new PageInfo(list);
+        List<GangWeiAndZtVO> vos =  gangweiDao.listGwsByGwZt(gwZt);
+        for (GangWeiAndZtVO vo:vos){
+            setGangWeiAndZtVO(vo);
+        }
+        return new PageInfo(vos);
     }
+    private void setGangWeiAndZtVO(GangWeiAndZtVO vo){
+        List<SZhiduzhizeZt> zts = gangweiDao.listZdztDescByZzId(vo.getGwId());
+        if(zts.size()<=0) return;
+        vo.setZtCzname(zts.get(0).getZtCzname());
+        if(zts.get(0).getZtDate()!=null)
+            vo.setZtDate(zts.get(0).getZtDate());
+    }
+
+    @Override
+    public PageInfo listGwsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String gwName, String gwZt) throws  Exception{
+        PageHelper.startPage(pageNum,pageSize);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(endTime!=null && !endTime.equals("")){
+            Date date = sdf.parse(endTime);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, 1);
+            endTime=sdf.format(cal.getTime()).toString();
+        }
+
+        List<GangWeiAndZtVO> vos =  gangweiDao.listGwsByTimeAndZdNameAndZt(startTime,endTime,gwName,gwZt);
+        for (GangWeiAndZtVO vo:vos){
+            setGangWeiAndZtVO(vo);
+        }
+        return new PageInfo(vos);
+    }
+
 
     @Override
     public PageInfo getGwsByGwLevelAndGwName(int pageNum, int pageSize, String gwLevel, String gwName) {
@@ -62,8 +93,7 @@ public class GangweiServiceImpl implements GangweiService {
     }
 
     @Override
-    public SGangwei getGwsByGwId(int pageNum, int pageSize, String gw_id) {
-        PageHelper.startPage(pageNum,pageSize);
+    public SGangwei getGwsByGwId(String gw_id) {
         SGangwei gw =  gangweiDao.getGwsByGwId(gw_id);
         return gw;
     }
@@ -80,6 +110,7 @@ public class GangweiServiceImpl implements GangweiService {
         List<SGangwei> gws =  gangweiDao.getGwsByGwZzZt(gwZzZt);
         return new PageInfo(gws);
     }
+
 
     @Override
     public void updateGw(SGangwei gw) {
@@ -98,7 +129,17 @@ public class GangweiServiceImpl implements GangweiService {
 
     @Override
     public void gwzzSubmit(GWSubmitVO gwSubmitVO) {
-        SGangwei gw = gwSubmitVO.getsGangwei();
+        if(gangweiDao.getGwsByGwId(gwSubmitVO.getGwId().toString()).getGwZzZt()!=null){
+            reSubmit(gwSubmitVO);
+            return;
+        }
+//        SGangwei gw = gwSubmitVO.getsGangwei();
+        SGangwei gw = new SGangwei();
+        gw.setGwId(gwSubmitVO.getGwId());
+        gw.setGwName(gwSubmitVO.getGwName());
+        gw.setGwZz(gwSubmitVO.getGwZz());
+        gw.setUserId(gwSubmitVO.getUserId());
+        gw.setCreateTime(new Date());
         //填充信息
         gw.setGwZzZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         gw.setSyTianshu(0);  //试用时间
@@ -127,11 +168,19 @@ public class GangweiServiceImpl implements GangweiService {
         if(shrId!=null) ztc.setUserId(shrId);
         //获得审核名字
         String dclCzztName = getDclCzztName(gwId);
+        if (dclCzztName.equals("试用")) isTg = false;
         String dqCzztName = GwZzShProcessConstants.autoGetProcessName(dclCzztName,isTg);
         //设置审核状态名字
+        if(dqCzztName.equals("试用")||dqCzztName.equals("科室秘书编写")||dqCzztName.equals("试用期修改")){
+            ztc.setZtDate(new Date());
+        }
         ztc.setZtCzname(GwZzShProcessConstants.SH_PROCESS.get(GwZzShProcessConstants.PROCESS_CODE));
         //设置状态为待审核
-        ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
+        if(dqCzztName.equals("试用期修改")){
+            ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_TG.getCode());
+        }else{
+            ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
+        }
         ztc.setZtShyj("");
         gangweiDao.saveZzZt(ztc);
     }
@@ -182,18 +231,9 @@ public class GangweiServiceImpl implements GangweiService {
     @Override
     public void submitShMsg(ShMsgVO shMsgVO) {
 
-        updateZzZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),shMsgVO.getZtDate(),shMsgVO.getZtShyj());
+        updateZzZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),new Date(),shMsgVO.getZtShyj());
 
         if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT_TG.getCode() && shMsgVO.getNextShrId()!=null){   //审核通过且继续审核
-            //插入新的审核状态
-//            SZhiduzhizeZt new_sZhiduzhizeZt = new SZhiduzhizeZt();
-//            new_sZhiduzhizeZt.setZdId(shMsgVO.getZdId());
-//            new_sZhiduzhizeZt.setUserId(shMsgVO.getNextShrId());
-//            new_sZhiduzhizeZt.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode()); // 待审核状态
-//            new_sZhiduzhizeZt.setZtShyj("默认");
-//            new_sZhiduzhizeZt.setZtCzname("处长审核");
-//            zhiduDao.saveZdZt(new_sZhiduzhizeZt);
-
             insertZdZt(shMsgVO.getZdId(),shMsgVO.getNextShrId(),true);
 
 
@@ -205,7 +245,7 @@ public class GangweiServiceImpl implements GangweiService {
 
 
         } else if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT__BTG.getCode()){//审核不通过
-//            zhiduDao.setZhiDuZt(shMsgVO.getZdId(),"0",0);
+            gangweiDao.updateGwZt(shMsgVO.getZdId(),ZdztEnumProcess.ZD__ZT_SHSB.getCode(),shMsgVO.getSyDays());
             //更新制度状态 为0未通过
             insertZdZt(shMsgVO.getZdId(),null,false);
         }
@@ -233,7 +273,12 @@ public class GangweiServiceImpl implements GangweiService {
     public void reSubmit(GWSubmitVO gwSubmitVO) {
 
         //更新制度信息
-        SGangwei gw = gwSubmitVO.getsGangwei();
+        SGangwei gw = new SGangwei();
+        gw.setGwId(gwSubmitVO.getGwId());
+        gw.setGwName(gwSubmitVO.getGwName());
+        gw.setGwZz(gwSubmitVO.getGwZz());
+        gw.setUserId(gwSubmitVO.getUserId());
+        gw.setCreateTime(new Date());
         //填充信息
         gw.setGwZzZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         gw.setSyTianshu(0);  //试用时间
@@ -245,5 +290,9 @@ public class GangweiServiceImpl implements GangweiService {
         updateZzZt(gw.getGwId(),ZdCzztEnumProcess.ZD__CZZT_TG.getCode(),new Date(),"");
         //插入新状态
         insertZdZt(gw.getGwId(),gwSubmitVO.getShrId(),true);
+        //判断是否是在试用期修改
+        if(getDclCzztName(gw.getGwId()).equals("试用期修改")){
+            insertZdZt(gw.getGwId(),gwSubmitVO.getShrId(),true);
+        }
     }
 }

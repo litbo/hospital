@@ -34,13 +34,16 @@
             <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="岗位职责名称"  autocomplete="off">
+            <input class="layui-input" name="gwName" placeholder="岗位职责名称"  autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">再评价</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">详细</a>
+</script>
 
 
 <script>
@@ -59,7 +62,8 @@
                     {checkbox:true,fixed:true}
                     , {field: 'gwId', title: '岗位职责编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'gwName', title: '岗位职责名称', minWidth: 150}
-                    , {field: 'createTime', title: '备案日期', minWidth: 150,sort:true}
+                    , {field: 'ztDate', title: '备案日期', minWidth: 150,sort:true}
+                    , {fixed:'right',Width: 300,align:'center',toolbar: "#bar",template:""}
                 ]]
                 , url: "/supervise/gwgl/listGwsByGwZt?gwZt=3"
                 , request: {
@@ -85,12 +89,10 @@
                 }
             },
             reSet:{
-                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=3",
+                url:"/supervise/gwgl/listGwsByTimeAndZdNameAndZt?gwZt=3",
                 type:"search",
-                data:["startTime","endTime","zdName"],    //搜索框的name
-                where: {
-
-                }
+                data:["gwName"],    //搜索框的name
+                dat:["#date","startTime","endTime","~"]
             }
         }
     }
