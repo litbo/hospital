@@ -151,7 +151,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">维修商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="wxsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="wxs">选择</button>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">生产商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="scsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="scs" id="scs">选择</button>
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">供应商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="sbcsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="gysName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="gys" id="gys">选择</button>
                                     </div>
                                 </div>
@@ -281,7 +281,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">折旧率</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" name="BigDecimal" autocomplete="off" placeholder="0">
+                                        <input type="text" class="layui-input" name="eqZjl" autocomplete="off" placeholder="0">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -431,10 +431,16 @@
 
                     }
                     if(formData.radio!==undefined){
-                            ad.eqPmId=formData.radio[0].eqPmId,
-                            ad.sbcsIdWxs=formData.radio[0].sbcsIdWxs,
-                            ad.sbcsIdScs=formData.radio[0].sbcsIdScs,
-                            ad.sbcsIdGys=formData.radio[0].sbcsIdGys
+                            ad.eqPmId=formData.radio[0].eqPmId
+                    }
+                    if(formData.wxs!==undefined){
+                        ad.sbcsIdWxs=formData.wxs[0].sbcsIdWxs
+                    }
+                    if(formData.scs!==undefined){
+                        ad.sbcsIdScs=formData.scs[0].sbcsIdScs
+                    }
+                    if(formData.gys!==undefined){
+                        ad.sbcsIdGys=formData.gys[0].sbcsIdGys
                     }
               /*      if(doJudg({
                             "undefined":[formData.radio,formData.eqMpzp,formData.eqSbzp]
@@ -450,9 +456,7 @@
                         3:ad.eqPmId,
                         4:ad.sbcsIdWxs,
                         5:ad.sbcsIdScs,
-                        6:ad.sbcsIdGys,
-
-
+                        6:ad.sbcsIdGys
                     }
                 },
                 form:{
@@ -460,7 +464,7 @@
                     type:"POST",
                     data:["eqName","eqZcbh","eqPmId","eqGg","eqXh","zjlyId",
                             "eqJldwId","eqPrice","eqTzlb","eqBxkssj","eqBxjssj","eqBxxysj",
-                            "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczbh","eqPp","eqScbh",
+                            "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",
                             "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
                             "eqZblx","eqZjl","userId","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
                             "eqMpzp","eqAzhjyq"],
@@ -619,25 +623,25 @@
                 {
                     elem: "#scs",
                     data:formData,
-                    cb:"/supervise/csgl/eqcsTitles",
-                    db:"/supervise/csgl/listEqcsByX2",
-                    key:"radio",
+                    cb:"/cs/scsTitle",
+                    db:"/cs/listScs",
+                    key:"scs",
                     name:"dtdt"
                 },
                 {
                     elem: "#gys",
                     data:formData,
-                    cb:"/supervise/csgl/eqcsTitles",
-                    db:"/supervise/csgl/listEqcsByX1",
-                    key:"radio",
+                    cb:"/cs/gysTitle",
+                    db:"/cs/listGys",
+                    key:"gys",
                     name:"dtdt"
                 },
                 {
                     elem: "#wxs",
                     data:formData,
-                    cb:"/supervise/csgl/eqcsTitles",
-                    db:"/supervise/csgl/listEqcsByX3",
-                    key:"radio",
+                    cb:"/cs/wxsTitle",
+                    db:"/cs/listWxs",
+                    key:"wxs",
                     name:"dtdt"
                 }
 
