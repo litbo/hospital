@@ -13,10 +13,7 @@ import com.litbo.hospital.user.vo.SelectFlEqVo;
 import com.litbo.hospital.user.vo.SetPmVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -164,6 +161,18 @@ public class EqController {
             }
         }
         return Result.success();
+
+    }
+    //批量删除设备
+    @RequestMapping("/delEq")
+    @ResponseBody
+    public Result delEq(@RequestBody List<EqInfo>  eqInfos){
+
+        for (EqInfo eq : eqInfos) {
+           es.delEq(eq.getEqId());
+        }
+        return Result.success();
+
 
     }
 

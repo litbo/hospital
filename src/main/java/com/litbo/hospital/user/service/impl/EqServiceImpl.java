@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.common.utils.WordToPinYin;
+import com.litbo.hospital.common.utils.poi.ChangeFile;
 import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
@@ -27,11 +28,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
 import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
@@ -86,6 +90,26 @@ public class EqServiceImpl implements EqService {
         //设置使用状态
         String syzt = "在用";
         eqInfo.setEqSyzt(syzt);
+
+        //将临时保存在tmp的图片文件保存到eq文件夹下  并将tmp文件夹清空
+        String path = System.getProperty("user.dir");
+        String filePath = path+"/eq/";
+        java.io.File file = new java.io.File(filePath);
+        String mpzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
+        String sbzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
+        try {
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzp);
+            ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzp);
+            ChangeFile.deleteDir(path+"/tmp/");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        eqInfo.setEqMpzp(mpzp);
+        eqInfo.setEqSbzp(sbzp);
+
         //存
         return eqDao.addEq(eqInfo);
     }
@@ -199,9 +223,14 @@ public class EqServiceImpl implements EqService {
     @Override
     public String uploadFile(MultipartFile multipartFile) {
         String path = System.getProperty("user.dir");
-        String filePath =path+"/eq/";
+        String filePath =path+"/tmp/";
         String url = UploadFile.upload(filePath,multipartFile);
         return url;
+    }
+
+    @Override
+    public Integer delEq(String eqId) {
+        return eqDao.delEq(eqId);
     }
 
 

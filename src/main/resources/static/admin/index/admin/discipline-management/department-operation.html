@@ -53,67 +53,59 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'department-number', title: '设备编号',width:"30%", minWidth: 200}
-                , {field: 'department-name', title: '设备名称', minWidth: 150}
-                , {field: 'production', title: '生产商', minWidth: 150}
-                , {field: 'model', title: '规格型号', minWidth: 150}
-                , {field: 'section', title: '科室', minWidth: 150}
-                , {field: 'operation', title:'授权操作人员', minWidth:150}
-                , {fixed: 'right',align:'center',toolbar:'#bar',title:'操作'}
-            ]]
-            , "data": [
-                {
-                    "department-number":"13100611037",
-                    "department-name":"彩电",
-                    "production":'烟台金源家电有限公司',
-                    "model":'H42E12',
-                    "section":'心外科病房',
-                    "operation":'张伟秋'
-                },{
-                    "department-number":"13100611037",
-                    "department-name":"彩电",
-                    "production":'烟台金源家电有限公司',
-                    "model":'H42E12',
-                    "section":'心外科病房',
-                    "operation":'张伟秋'
-                },{
-                    "department-number":"13100611037",
-                    "department-name":"彩电",
-                    "production":'烟台金源家电有限公司',
-                    "model":'H42E12',
-                    "section":'心外科病房',
-                    "operation":'张伟秋'
-                },{
-                    "department-number":"13100611037",
-                    "department-name":"彩电",
-                    "production":'烟台金源家电有限公司',
-                    "model":'H42E12',
-                    "section":'心外科病房',
-                    "operation":'张伟秋'
-                },{
-                    "department-number":"13100611037",
-                    "department-name":"彩电",
-                    "production":'烟台金源家电有限公司',
-                    "model":'H42E12',
-                    "section":'心外科病房',
-                    "operation":'张伟秋'
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":({
-                        "type":2,
-                        "title":'设备保管人设置',
-                        "tool":'toolbar',
-                        "event":'add',
-                        "filter":'table1',
-                        "content":'./child/department-operationAdd.html'
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    ,{field:'department-number',title:'设备编号',minWidth:100}
+                    ,{field:'department-name',title:'设备名称',minWidth:150}
+                    ,{field:'production',title:'生产商',minWidth:150}
+                    ,{field:'model',title:'规格型号',minWidth:150}
+                    ,{field:'section',title:'科室',minWidth:'150'}
+                    ,{field:'operation',title:'授权操作人员',minWidth:150}
+                    ,{field:'right',title:'操作',align:'center',toolbar:'#bar'}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [{
+                            tool:"toolbar",
+                            type: 2,
+                            title: "设备保管人设置",
+                            event: "add",
+                            filter:'table1',
+                            content: "./child/department-operationAdd.html",
+                        }]
                     })
-                })
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
             }
         }
     }
