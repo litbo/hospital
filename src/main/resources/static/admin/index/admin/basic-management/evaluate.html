@@ -37,39 +37,43 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'system-number', title: '制度编号', width:'50%',minWidth: 200,sort:true}
-                , {field: 'system-name', title: '制度名称', minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "system-number":"",
-                    "system-name":""
-                },{
-                    "system-number":"",
-                    "system-name":""
-                },{
-                    "system-number":"",
-                    "system-name":""
-                },{
-                    "system-number":"",
-                    "system-name":""
-                },{
-                    "system-number":"",
-                    "system-name":""
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    ,{field:'system-number',title:'制度编号',width:'50%',minWidth:200,sort:true}
+                    ,{filed:'system-name',title:'制度名称',minWidth:150}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
+
             }
-        },
-        date :{
-            elem : "#date1",
-            type : "datetime"
+
         }
     }
 </script>
