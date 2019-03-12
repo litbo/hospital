@@ -6,6 +6,7 @@ import com.litbo.hospital.supervise.dao.provider.ZhiDuProvider;
 import com.litbo.hospital.supervise.vo.SZhiduSelect;
 import com.litbo.hospital.supervise.vo.SZhiduzhizeZtSelect;
 import com.litbo.hospital.supervise.vo.ZDSelectAsBaseShMsg;
+import com.litbo.hospital.supervise.vo.ZhuduAndZdZzVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface ZhiduDao {
     @Select("select zd_id, bm_id, zd_name,zd_content, user_id, doc_url, create_time,zd_zt,sy_tianshu,sy_syts ,zd_xgcs from s_zhidu")
     public List<SZhidu> getZds() ;
     @Select("select * from s_zhidu where zd_zt=#{zdZt}")
-    List<SZhidu> listZdsByZdZt(String zdZt);
+    List<ZhuduAndZdZzVO> listZdsByZdZt(String zdZt);
 
     //通过制度id查询SZhidu
     @Select("select zd_id, bm_id, zd_name,zd_content, user_id, doc_url, create_time,zd_zt,sy_tianshu,sy_syts ,zd_xgcs  " +
@@ -86,9 +87,11 @@ public interface ZhiduDao {
     @Select("select * from s_zhiduzhize_zt  where zd_id=#{zdId} order by zt_date desc")
     List<SZhiduzhizeZt> listZdztDescByDate(Integer zdId);
     @Select("select * from s_zhiduzhize_zt  where zd_id=#{zdId} order by zt_id desc")
+    List<SZhiduzhizeZt> listZdztDescByZtId(Integer zdId);
+    @Select("select * from s_zhiduzhize_zt  where zd_id=#{zdId} order by zt_id desc")
     List<SZhiduzhizeZt> listZdztDescByZtid(Integer zdId);
     @SelectProvider(type = ZhiDuProvider.class,method = "listZdsByTimeAndZdNameAndZt")
-    List<SZhidu> listZdsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("zdName") String zdName, @Param("zdZt")String zdZt);
+    List<ZhuduAndZdZzVO> listZdsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("zdName") String zdName, @Param("zdZt")String zdZt);
     @Select("select * from s_zhidu where zd_id=#{id}")
     SZhidu getZdById(String id);
 

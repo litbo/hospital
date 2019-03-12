@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>取得方式-新增</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .warm_btn {
+            height: 45px;
+            font-size: 1.3em;
+            letter-spacing: 3px;
+            margin: 10px 0 30px;
+        }
+        .layui-form-item{
+            margin-top:30px;
+            margin-bottom:30px;
+            height:46px;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">取得方式<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <select name="" lay-verify="required">
+                        <option value="">上级调拨</option>
+                        <option value="">外购</option>
+                        <option value="">接受捐赠</option>
+                        <option value="">融资租入</option>
+                        <option value="">试用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">设备<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-sm" id="selectEq1">选择</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
+                <div class="layui-input-block">
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid">保存</button>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    var formData = {};
+    renderMod = {
+        form: {
+            date: {
+                elem: "#date"
+            },
+            submit: {
+                form: {
+                    before: function () {
+                        var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
+                        if (doJudg({
+                            "undefined": [formData.person, formData.user],
+                            0: [tv, tv1]
+                        })) {
+                            putMsg({
+                                alert: "无法提交空数据！"
+                            });
+                            return false;
+                        }
+                        return param = {
+                            1: formData.person.userIdJl,
+                            2: tv1,
+                            3: tv
+                        };
+                    },
+                    form: {
+                        url: "",
+                        type: "POST",
+                        data: [""],
+                        param: {
+                            1: "",
+                            2: "",
+                            3: ""
+                        }
+                    }
+                }
+            }
+        },
+        bind:{
+            selectItem:{
+                elem: "#selectEq1",
+                data: formData,
+                cb: "/eq/listEqbt",
+                db: "/eq/listShowEqs",
+                key: "radio",
+                name: "dtdt"
+            }
+        }
+    };
+</script>
+</body>
+
+</html>

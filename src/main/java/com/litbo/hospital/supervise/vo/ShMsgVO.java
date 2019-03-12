@@ -1,11 +1,16 @@
 package com.litbo.hospital.supervise.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ShMsgVO {
     private Integer ztId;
     private Integer ztCzzt;   // 0待审核 1 不通过 2 通过
     private Integer syDays; // 试用天数
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ztDate;
     private String ztShyj;
 

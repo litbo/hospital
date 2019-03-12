@@ -16,4 +16,15 @@ public class GwProvider {
         if(gwName!=null)  sql.append(" and gw_name Like '%'+#{gwName}+'%'");
         return sql.toString();
     }
+
+    public String listGwsByTimeAndZdNameAndZt(String startTime, String endTime, String gwName, String gwZt){
+
+        StringBuffer sql = new StringBuffer("" +
+                "  SELECT * from s_gangwei where 1=1");
+        if(startTime!=null) sql.append(" and create_time>#{startTime} ");
+        if(endTime!=null) sql.append(" and create_time<#{endTime} ");
+        if(gwName!=null) sql.append(" and gw_name like '%'+#{gwName}+'%' ");
+        if(gwZt!=null) sql.append(" and gw_zz_zt= #{gwZt} ");
+        return sql.toString();
+    }
 }

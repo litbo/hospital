@@ -10,7 +10,6 @@ public interface GangweiService {
     //添加岗位
     void saveGw(SGangwei gw);
 
-
     //通过岗位id删除岗位
     void deleteGwByGwId(String gw_id);
     //获取所有岗位
@@ -20,7 +19,7 @@ public interface GangweiService {
     //获取岗位列表通过级别和名称迷糊查询
     PageInfo getGwsByGwLevelAndGwName(int pageNum, int pageSize, String gwLevel, String gwName);
     //通过岗位id获取岗位信息
-    SGangwei getGwsByGwId(int pageNum, int pageSize, String gw_id);
+    SGangwei getGwsByGwId( String gw_id);
     //通过岗位等级来获取岗位信息
     List<SGangwei> getGwByGwLevel(String gw_level);
     //通过岗位职责状态查询岗位信息
@@ -45,5 +44,5 @@ public interface GangweiService {
     //修改后重新提交
     void reSubmit(GWSubmitVO gwSubmitVO);
 
-
+    PageInfo listGwsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String gwName, String gwZt) throws  Exception;
 }

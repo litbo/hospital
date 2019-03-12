@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>制度制定</legend>
@@ -130,7 +130,11 @@
                     url:"/supervise/zdgl/submit",
                     type:"POST",
                     contentType:"application/json",
-                    data:["zdName","bmId","userId","zdContent","createTime","shrId"]
+                    data:["zdName","bmId","userId","zdContent","createTime","shrId"],
+                    add:{
+                        zdId:$.getUrlParam("zdId")
+                    }
+
                 }//表单提交函数
             },
             val:{
@@ -143,7 +147,12 @@
                         text:"bmName",
                         url:"/supervise/bmgl/listBms2"
                     }
-                ]
+                ],
+                get:{
+                    url:"/supervise/zdgl/getZdById",
+                    type:"GET",
+                    data:{zdId:$.getUrlParam('zdId')}
+                }
             }
         }
     }

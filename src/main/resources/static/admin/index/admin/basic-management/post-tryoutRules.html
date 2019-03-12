@@ -29,17 +29,16 @@
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs"  id="moreBar">
-        <span>试用期：</span>
+        <span>试用期开始日期：</span>
         <div class="layui-input-inline">
-            <input type="text"  id="date1" name="date1" lay-verify="date" autocomplete="off" class="layui-input">
+            <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
         </div>
+        <span>-</span>
+
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="编号"  autocomplete="off">
+            <input class="layui-input" name="gwName" placeholder="岗位职责名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="名称"  autocomplete="off">
-        </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
@@ -48,14 +47,20 @@
 
 <script>
     renderMod = {
-
+        form:{
+            date :{
+                elem : "#date",
+                type : "datetime",
+                range:"~"
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
                     {checkbox:true,fixed:true}
                     , {field: 'gwId', title: '岗位职责编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'gwName', title: '岗位职责名称', minWidth: 150}
-                    , {field: 'createTime', title: '备案日期', minWidth: 150,sort:true}
+                    , {field: 'ztDate', title: '试用期开始日期', minWidth: 150,sort:true}
                 ]]
                 , url: "/supervise/gwgl/listGwsByGwZt?gwZt=2"
                 , request: {
@@ -78,12 +83,10 @@
                 }
             },
             reSet:{
-                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=3",
+                url:"/supervise/gwgl/listGwsByTimeAndZdNameAndZt?gwZt=2",
                 type:"search",
-                data:["startTime","endTime","zdName"],    //搜索框的name
-                where: {
-
-                }
+                data:["gwName"],    //搜索框的name
+                dat:["#date","startTime","endTime","~"]
             }
         }
     }

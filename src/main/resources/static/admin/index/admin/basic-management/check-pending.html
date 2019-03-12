@@ -34,7 +34,7 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">科长审核</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">审核</a>
 </script>
 
 
@@ -47,7 +47,8 @@
                     {checkbox:true,fixed:true}
                     , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
-                    , {field: 'createTime', title: '备案日期', minWidth: 150}
+                    , {field: 'createTime', title: '创建时间', minWidth: 150}
+                    , {field: 'ztCzname', title: '审核类型', minWidth: 150}
                     , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
                 , url: "/supervise/zdgl/listZdsByZdZt?zdZt=1"
@@ -73,7 +74,7 @@
                             type:2,
                             event: "edit",
                             content:"regulatory-information.html",
-                            dataUrl:["zdId"]
+                            dataUrl:["zdId","ztCzname"]
                         }
                     })
 
