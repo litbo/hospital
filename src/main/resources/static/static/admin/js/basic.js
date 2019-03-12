@@ -1085,6 +1085,7 @@ action = func = {
                             }
                         }
                     }
+                    value.contentType = "application/json";
                     value.success = function (res) {
                         if (res.code === 0) {
                             layer.msg("操作成功！");
