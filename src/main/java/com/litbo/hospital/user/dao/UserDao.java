@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.dao;
 
 import com.litbo.hospital.user.bean.SUser;
+import com.litbo.hospital.user.vo.UserVo;
 import org.apache.ibatis.annotations.*;
 
 
@@ -18,4 +19,10 @@ public interface UserDao {
             " where user_id = #{userId}")
     Integer updatePwd(@Param("userId") String userId,@Param("userPwd") String userPwd);
 
+    @Select("SELECT u.user_id , e.user_xm as name, e.bm_id ,r.role_name,r.role_id FROM s_user u\n" +
+            "Left JOIN s_emp e on u.user_id = e.user_id\n" +
+            "Left JOIN s_user_role ur on u.user_id = ur.user_id\n" +
+            "Left JOIN s_role  r on ur.role_id = r.role_id\n" +
+            "WHERE u.user_id = #{userId}")
+    UserVo getUserByUserId(String userId);
 }

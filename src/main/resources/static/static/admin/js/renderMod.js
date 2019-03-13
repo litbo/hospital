@@ -644,7 +644,7 @@ $(function () {
                                 url = item.url || "/admin/index/global/data.html"
                                 ,content = url + "?key=" + item.key + "&vg=" + name;
                             if(item.cb){
-                                content += "?cb=" + item.cb
+                                content += "&cb=" + item.cb
                             }
                             if(item.db){
                                 content += "&db="+item.db
@@ -653,7 +653,7 @@ $(function () {
                                 content += "&se="+item.se
                             }
                             if(item.value){
-                                content += "&v="+item.value
+                                content += "&v="+value
                             }
 
                             //提交之前运行一个函数

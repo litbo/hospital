@@ -31,13 +31,16 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" lay-filter="userForm">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">用户<span>*</span></label>
-                <div class="layui-input-block">
+               <!-- <div class="layui-input-block">
                     <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="">选择</button>
+                </div>-->
+                <div class="layui-input-block">
+                    <input type="text" name="name" disabled class="layui-input" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item" pane>
@@ -66,11 +69,11 @@
     renderMod = {
         form: {
             val:{
-                filter:"baoxiuForms",
+                filter:"userForm",
                 get:{
-                    url:"/eq/getEqById",
+                    url:"/user/getUserById",
                     data:{
-                        eqId:$.getUrlParam("eqId")
+                        userId:$.getUrlParam("userId")
                     }
                 }
             },

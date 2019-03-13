@@ -32,9 +32,9 @@
 </script>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs" lay-event="add">添加角色</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+    <div class="addBtn" lay-event="add">
+        <a class="layui-btn layui-btn-xs" lay-event="">添加角色</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event=""><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
@@ -82,6 +82,9 @@
                     }
                 }
                 ,  done: function (obj) {
+/*                    tableFunc({
+
+                    })*/
                     tableFunc({
                         tools:[
                             {
@@ -90,11 +93,15 @@
                                 type:2,
                                 content:"./child/role-settingEdit.html",
                                 dataUrl:["userId"]
+                            },
+                            {
+                                event:"add",
+                                title:"添加角色",
+                                type:2,
+                                content:"./child/role-settingAdd.html"
                             }
-                        ]
-                    })
-        /*            tableFunc({
-                        "obj":obj,
+                        ],
+/*                        "obj":obj,
                         "toolFunc":[{
                             "event":'edit',
                             "type":2,
@@ -110,7 +117,7 @@
                             "content":"./child/role-settingAdd.html",
 
 
-                        }],
+                        }],*/
                         delTable:{
                             event:"#sz", //lay-event
                             id:"table",
@@ -121,7 +128,7 @@
                             confirm:false,  //false为不删除    删除就不要
                             reload:true
                         }
-                    })*/
+                    })
                 }
             },
             reSet:{
