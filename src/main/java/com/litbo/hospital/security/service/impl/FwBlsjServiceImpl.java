@@ -43,9 +43,9 @@ public class FwBlsjServiceImpl implements FwBlsjService {
     }
 
     @Override
-    public PageInfo listFwBlsj(int pageNum, int pageSize) {
+    public PageInfo listFwBlsj(int pageNum, int pageSize,String sjxz,String bmName,String sbcsName,String bgmc) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(blsjDao.listFwBlsj());
+        return new PageInfo(blsjDao.listFwBlsj( sjxz, bmName, sbcsName, bgmc));
     }
 
     @Override

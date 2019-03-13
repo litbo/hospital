@@ -1,5 +1,6 @@
 package com.litbo.hospital.security.dao;
 import com.litbo.hospital.security.bean.FwBlsj;
+import com.litbo.hospital.security.vo.FwBlsjVO;
 import com.litbo.hospital.security.vo.SelectFwBlsjById;
 import org.apache.ibatis.annotations.*;
 
@@ -25,8 +26,11 @@ public interface FwBlsjDao {
             "      #{bxdh,jdbcType=VARCHAR}, #{yqzlxg,jdbcType=LONGVARCHAR}, #{qxgz,jdbcType=LONGVARCHAR}, " +
             "      #{zysh,jdbcType=LONGVARCHAR}, #{sjcs,jdbcType=LONGVARCHAR})")
     int insertFwBlsj(FwBlsj blsj);
-    @Select("select * from fw_blsj")
-    List<FwBlsj> listFwBlsj();
+
+    @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwBlsjSqlProvider.class,method="listFwBlsj")
+    List<FwBlsjVO> listFwBlsj(@Param("sjxz") String sjxz,@Param("bgName") String bmName,
+                              @Param("sbcsName") String sbcsName,@Param("bgmc") String bgmc);
+
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwBlsjSqlProvider.class,method="selectFwBlsjById")
     SelectFwBlsjById selectFwBlsjById(Integer id);
 

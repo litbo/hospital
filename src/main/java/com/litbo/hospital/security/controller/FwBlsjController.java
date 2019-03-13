@@ -33,8 +33,10 @@ public class FwBlsjController {
 
     @RequestMapping(value = "listFwBlsj",method = RequestMethod.GET)
     public Result listFwBlsj(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                   @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
-        return  Result.success(blsjService.listFwBlsj(pageNum,pageSize));
+                                   @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
+                             @RequestParam(required = false) String sjxz, @RequestParam(required = false)String bmName,
+                             @RequestParam(required = false)String sbcsName, @RequestParam(required = false)String bgmc){
+        return  Result.success(blsjService.listFwBlsj(pageNum,pageSize, sjxz, bmName, sbcsName, bgmc));
     }
 
     @RequestMapping(value = "selectFwBlsjById",method = RequestMethod.GET)
