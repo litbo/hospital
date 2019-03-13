@@ -37,16 +37,16 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="" lay-filter="form1">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="pjName" >
+                        <select name="sjxz" >
                             <option value="个案">个案</option>
                             <option value="群发事件">群发事件</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjName" class="layui-input" placeholder="报告名称" autocomplete="off">
+                        <input type="text" name="bgmc" class="layui-input" placeholder="报告名称" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjName" class="layui-input" placeholder="生产商" autocomplete="off">
+                        <input type="text" name="sbcsName" class="layui-input" placeholder="生产商" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="bmName" lay-filter="bmName">
@@ -62,7 +62,9 @@
     </div>
 </script>
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit" name="modify">查看</a>
+</script>
 <script>
     renderMod = {
         addTable: {
@@ -75,7 +77,7 @@
                     , {field: 'eqGg', title: '设备规格', minWidth: 150}
                     , {field: 'sbcsName', title: '生产商', minWidth: 150}
                     , {field: 'eqAzrq', title: '设备安装时间', minWidth: 150,sort:true}
-                    , {fixed:'right',width:150,align:'center',title:'操作',toolbar: "#bar"}
+                    , {fixed:'right',width:150,align:'center',title:'查看',toolbar: "#bar"}
                 ]]
                 , url:"/security/blsj/listFwBlsj"
                 , request: {
@@ -98,7 +100,7 @@
                         tools:{
                             type:2,
                             event: "edit",
-                            content:"./child/examine.html",
+                            content:"./suspicious-show.html",
                             dataUrl:["id"]
                         }
                     })

@@ -54,5 +54,7 @@ public class SelectFwBlsjById {
 
     private String sjcs;
 
+    private String lxdh;
+
 
 }

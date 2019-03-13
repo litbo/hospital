@@ -16,7 +16,7 @@ public interface FwBlsjDao {
             "      sjfs_time, sjhg, fxzx_time, " +
             "      ylqxsxcs, czry, zr_time, " +
             "      bxdh, yqzlxg, qxgz, " +
-            "      zysh, sjcs)" +
+            "      zysh, sjcs,lxdh)" +
             "    values (#{eqId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, " +
             "      #{bgbh,jdbcType=VARCHAR}, #{bgmc,jdbcType=VARCHAR}, #{bgrgw,jdbcType=VARCHAR}, " +
             "      #{bgTime,jdbcType=TIMESTAMP}, #{sjxz,jdbcType=VARCHAR}, #{bgrqz,jdbcType=VARCHAR}, " +
@@ -24,11 +24,11 @@ public interface FwBlsjDao {
             "      #{sjfsTime,jdbcType=TIMESTAMP}, #{sjhg,jdbcType=VARCHAR}, #{fxzxTime,jdbcType=TIMESTAMP}, " +
             "      #{ylqxsxcs,jdbcType=VARCHAR}, #{czry,jdbcType=VARCHAR}, #{zrTime,jdbcType=TIMESTAMP}, " +
             "      #{bxdh,jdbcType=VARCHAR}, #{yqzlxg,jdbcType=LONGVARCHAR}, #{qxgz,jdbcType=LONGVARCHAR}, " +
-            "      #{zysh,jdbcType=LONGVARCHAR}, #{sjcs,jdbcType=LONGVARCHAR})")
+            "      #{zysh,jdbcType=LONGVARCHAR}, #{sjcs,jdbcType=LONGVARCHAR},#{lxdh,jdbcType=VARCHAR})")
     int insertFwBlsj(FwBlsj blsj);
 
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwBlsjSqlProvider.class,method="listFwBlsj")
-    List<FwBlsjVO> listFwBlsj(@Param("sjxz") String sjxz,@Param("bgName") String bmName,
+    List<FwBlsjVO> listFwBlsj(@Param("sjxz") String sjxz,@Param("bmName") String bmName,
                               @Param("sbcsName") String sbcsName,@Param("bgmc") String bgmc);
 
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwBlsjSqlProvider.class,method="selectFwBlsjById")

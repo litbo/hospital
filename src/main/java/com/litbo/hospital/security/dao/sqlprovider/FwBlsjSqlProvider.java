@@ -8,7 +8,7 @@ public class FwBlsjSqlProvider {
             {
                 SELECT("eq_info.eq_name,user_xm,f.user_id,f.bgbh,f.bgmc,f.bgrgw," +
                         "f.bg_time,f.sjxz,f.bgrqz,f.hzxm,f.hz_age,f.hz_sex,sjfs_time,sjhg," +
-                        "fxzx_time,ylqxsxcs,czry,zr_time,bxdh,yqzlxg,qxgz,zysh,sjcs");
+                        "fxzx_time,ylqxsxcs,czry,zr_time,bxdh,yqzlxg,qxgz,zysh,sjcs,lxdh");
                 FROM("fw_blsj as f");
                 LEFT_OUTER_JOIN("eq_info ON eq_info.eq_id = f.eq_id");
                 LEFT_OUTER_JOIN("s_emp ON s_emp.user_id = f.user_id");
