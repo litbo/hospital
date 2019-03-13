@@ -41,43 +41,56 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'inspection-number', title: '证照检查数目',width:"40%", minWidth: 200,sort:true}
-                , {field: 'record-number' , title:'记录数',minWidth:150,sort:true}
-                , {fixed: 'right', title:'操作',align:'center',minWidth:80,toolbar:'#bar'}
-            ]]
-            , "data": [
-                {
-                    "inspection-number":'无茶品注册证的设备',
-                    "record-number":'4661'
-                },{
-                    "inspection-number":'无出厂检验合格证的设备',
-                    "record-number":'53364'
-                },{
-                    "inspection-number":'无计量器鉴定合格证的设备',
-                    "record-number":'2422'
-                },{
-                    "inspection-number":'无特种设备监测合格证的设备',
-                    "record-number":'1258'
-                },{
-                    "inspection-number":'无大型设备配置许可证的设备',
-                    "record-number":'43'
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":({
-                        "event":'edit',
-                        "type":2,
-                        "content":'./child/certificate-inputAdd.html',
-                        "title":'设备证件导入',
-                        "area":['60%','70%']
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    ,{field:'a',title:'证照检查数目',minWidth:200,sort:true}
+                    ,{field:'b',title:'记录数',minWidth:150,sort:true}
+                    ,{field:'right',title:'操作',align:'center',minWidth:80,toolbar:'#bar'}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":({
+                            "event":'edit',
+                            "type":2,
+                            "content":'./child/certificate-inputAdd.html',
+                            "title":'设备证件导入',
+                            "area":['60%','70%']
+                        })
                     })
-                })
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
+
             }
+
         }
     }
 </script>
