@@ -4,13 +4,11 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwWxf;
 import com.litbo.hospital.security.service.FwWxfService;
-import com.litbo.hospital.security.vo.FwIdSelectVo;
-import com.litbo.hospital.security.vo.FwWxfIndexVo;
-import com.litbo.hospital.security.vo.WxfIndexVo;
-import com.litbo.hospital.security.vo.WxfListVo;
+import com.litbo.hospital.security.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +21,40 @@ public class FwWxfController {
 
     @Autowired
     private FwWxfService fwWxfService;
+
+    @GetMapping("/wxfSh")
+    public Result wxfSh(Integer id , String wxfSpyj, Date wxfSptime){
+
+        try {
+            int i = fwWxfService.updateWxf(id, wxfSpyj, wxfSptime);
+            if(i>0){
+                return Result.success(i);
+            }else {
+                return Result.error("修改失败1");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("修改失败2");
+        }
+
+    }
+
+    /**
+     * 维修费审核主页面
+     * @param id
+     * @return
+     */
+    @GetMapping("/wxfShIndex")
+    public Result wxfShIndex(Integer id){
+        try {
+            String userId = "1615925023";
+            FwWxfShIndexVo wxfShIndexVo = fwWxfService.wxfShIndex(id, userId);
+            return Result.success(wxfShIndexVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("查询数据失败");
+        }
+    }
 
     @GetMapping("/wxfList")
     public Result wxfList(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
@@ -38,11 +70,11 @@ public class FwWxfController {
     }
 
     /**
-     * 维修费审核主页面
-     * @param id
+     * 维修费审核主页面{过时}
+     * @param
      * @return
      */
-    @GetMapping("/wxfShIndex")
+    /*@GetMapping("/wxfShIndex")
     public Result wxfShIndex(Integer id){
         try {
             WxfIndexVo wxfIndexVo = fwWxfService.wxfShIndex(id);
@@ -51,7 +83,7 @@ public class FwWxfController {
             e.printStackTrace();
             return Result.error("读取信息失败");
         }
-    }
+    }*/
 
     @GetMapping("/wxfGetEq")
     public Result wxfGetEq(){

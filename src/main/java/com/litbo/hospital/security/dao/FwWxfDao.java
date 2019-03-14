@@ -1,12 +1,11 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwWxf;
-import com.litbo.hospital.security.vo.BaoXiuRw;
-import com.litbo.hospital.security.vo.FwIdSelectVo;
-import com.litbo.hospital.security.vo.FwWxfIndexVo;
-import com.litbo.hospital.security.vo.WxfListVo;
+import com.litbo.hospital.security.dao.sqlprovider.WxfProvider;
+import com.litbo.hospital.security.vo.*;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -92,7 +91,7 @@ public interface FwWxfDao {
             "baoxiu.bx_time,\n" +
             "baoxiu.jjx_status,\n" +
             "eq.eq_id,\n" +
-            "baoxiu.id AS fw_id,\n" +
+            "wxf.id,\n" +
             "wxf.wxf_status\n" +
             "\n" +
             "FROM\n" +
@@ -109,5 +108,31 @@ public interface FwWxfDao {
             "wxf.user2_id = #{userId} AND\n" +
             "wxf.wxf_status = 0")
     public List<BaoXiuRw> getWxfRw(String userId);
+
+    @Select("SELECT\n" +
+            "wxf.id,\n" +
+            "wxf.fw_id,\n" +
+            "eq.eq_name,\n" +
+            "emp.user_xm,\n" +
+            "bm.bm_name,\n" +
+            "wxf.wxf_sqtime,\n" +
+            "wxf.wxf_rgf,\n" +
+            "wxf.wxf_cjrgf\n" +
+            "FROM\n" +
+            "dbo.eq_info AS eq ,\n" +
+            "dbo.fw_wxf AS wxf ,\n" +
+            "dbo.s_bm AS bm ,\n" +
+            "dbo.fw_baoxiu AS bx ,\n" +
+            "dbo.s_emp AS emp\n" +
+            "WHERE\n" +
+            "wxf.fw_id = bx.id AND\n" +
+            "eq.eq_id = bx.eq_id AND\n" +
+            "bm.bm_id = bx.bxks_id AND\n" +
+            "wxf.user1_id = emp.user_id AND\n" +
+            "wxf.id = #{id}")
+    public FwWxfShIndexVo getWxfShById(Integer id);
+
+    @UpdateProvider(type = WxfProvider.class,method = "updateWxf")
+    public int updateWxfById(@Param("id") Integer id, @Param("wxfSpyj") String wxfSpyj, @Param("wxfSptime") Date wxfSptime);
 
 }
