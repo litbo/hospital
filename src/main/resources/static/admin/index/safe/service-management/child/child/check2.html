@@ -39,16 +39,18 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修工程师</label>
                 <div class="layui-input-block">
-                    <select name="ss" id="selectOne" lay-filter="repair_eng">
-                    </select>
+                    <input type="text" name="wxrName" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">院外维修工程师</label>
+                <label class="layui-form-label" style="height:46px;line-height:30px;">维修商</label>
                 <div class="layui-input-block">
-                    <input type="text" id="inputOne" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
+                    <input type="text" name="wxsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="wxs">选择</button>
                 </div>
             </div>
+
+            <input type="hidden" name="gzwxFs" value="2">
 
         </div>
 
@@ -68,12 +70,12 @@
         form:{
             val:{
                 filter:"form",
-                select:{
-                        filter:"repair_eng",
-                        ids:"userId",
-                        text:"userXm",
-                        url:"/kwgl/empgl/listPartnerByUserId"
+                get:{
+                    url:"/fwWeixiu/pjqlWxIndex",
+                    data:{
+                        wxrId:$.getUrlParam("wxrId")
                     }
+                }
             }
         },
         btn:{
@@ -96,7 +98,19 @@
                 parent.layer.close(index);
                 return false;
             }
-        }
+        }/*,
+        bind:{
+            selectItem: [
+                {
+                    elem: "#wxs",
+                    data:formData,
+                    cb:"/cs/wxsTitle",
+                    db:"/cs/listWxs",
+                    key:"wxs",
+                    name:"dtdt"
+                }
+            ]
+        }*/
     }
 </script>
 </body>

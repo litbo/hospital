@@ -38,10 +38,11 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修工程师</label>
                 <div class="layui-input-block">
-                    <select name="ss" id="selectOne" lay-filter="repair_eng">
-                    </select>
+                    <input type="text" name="wxrName" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
+
+            <input type="hidden" name="gzwxFs" value="1">
 
         </div>
 
@@ -61,12 +62,12 @@
         form:{
             val:{
                 filter:"form",
-                select:{
-                        filter:"repair_eng",
-                        ids:"userId",
-                        text:"userXm",
-                        url:"/kwgl/empgl/listPartnerByUserId"
+                get:{
+                    url:"/fwWeixiu/pjqlWxIndex",
+                    data:{
+                        wxrId:$.getUrlParam("wxrId")
                     }
+                }
             }
         },
         btn:{
