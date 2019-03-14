@@ -12,6 +12,14 @@ import com.litbo.hospital.security.vo.WxqrIndex;
  */
 public interface FwWeixiuService {
 
+
+    /**
+     * 配件请领页面显示
+     * @param userId
+     * @return
+     */
+    public String pjqlWxIndex(String userId);
+
     /**
      * 维修确认页面回显
      * @param fwId
