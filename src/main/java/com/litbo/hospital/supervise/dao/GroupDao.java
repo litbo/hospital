@@ -43,8 +43,9 @@ public interface GroupDao {
             "from s_group where sh_flag=0 and user_id1=#{createId}")
     List<SGroup> getYTHGroupByCId(String createId);
 
-    @Insert("insert into s_group (group_id, bm_id, group_name, user_id1, create_time, user_id2, sh_time, sh_flag,sh_yj) " +
-            " values(#{groupId},#{bmId},#{groupName},#{userId1},#{createTime},#{userId2},#{shTime},#{shFlag},#{shYj}) ")
+    @Insert("insert into s_group (bm_id, group_name, user_id1, create_time, user_id2, sh_time, sh_flag,sh_yj) " +
+            " values(#{bmId},#{groupName},#{userId1},#{createTime},#{userId2},#{shTime},#{shFlag},#{shYj}) ")
+    @Options(useGeneratedKeys=true, keyProperty="groupId", keyColumn="group_id")
     void saveGroup(SGroup group);
 
     @Insert("insert into s_group_users (group_id, user_id, gw_id) " +

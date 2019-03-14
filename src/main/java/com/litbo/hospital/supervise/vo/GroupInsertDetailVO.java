@@ -1,27 +1,23 @@
 package com.litbo.hospital.supervise.vo;
 
-import com.litbo.hospital.supervise.bean.SGroup;
 import com.litbo.hospital.supervise.bean.SGroupUser;
+import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
+@Data
 public class GroupInsertDetailVO {
-    private SGroup group;   // 科室管理
+    private Integer groupId;
+    private String bmId;
+    private String groupName;
+    private String userId1;
+    private Date createTime;
+    private String userId2;
+    private Date shTime;
+    private String shFlag;
+    private String shYj;
     private List<SGroupUser> users;  // 科室成员
 
-    public SGroup getGroup() {
-        return group;
-    }
 
-    public void setGroup(SGroup group) {
-        this.group = group;
-    }
-
-    public List<SGroupUser> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<SGroupUser> users) {
-        this.users = users;
-    }
 }
