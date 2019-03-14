@@ -3,6 +3,7 @@ package com.litbo.hospital.supervise.dao;
 import com.litbo.hospital.supervise.bean.SGangwei;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
 import com.litbo.hospital.supervise.dao.provider.GwProvider;
+import com.litbo.hospital.supervise.vo.GangWeiAndZtVO;
 import com.litbo.hospital.supervise.vo.SGangweiSelect;
 import com.litbo.hospital.supervise.vo.SZhiduzhizeZtSelect;
 import com.litbo.hospital.supervise.vo.ZZSelectAsBaseShMsg;
@@ -15,14 +16,14 @@ public interface GangweiDao {
     @Select("select * from s_gangwei")
     List<SGangwei> getGws();
     @Select("select * from s_gangwei where gw_zz_zt =#{gwZt}")
-    List<SGangwei> listGwsByGwZt(String gwZt);
+    List<GangWeiAndZtVO> listGwsByGwZt(String gwZt);
     @SelectProvider(type = GwProvider.class ,method = "getGwsByGwLevelAndGwName")
     List<SGangwei> getGwsByGwLevelAndGwName(@Param("gwLevel") String gwLevel, @Param("gwName") String gwName);
 
-    @Insert("insert into s_gangwei (gw_id, gw_name, user_id, \n" +
+    @Insert("insert into s_gangwei (gw_name, user_id, \n" +
             "      create_time, doc_url, gw_level, \n" +
             "      gw_zz)\n" +
-            "    values (#{gwId,jdbcType=INTEGER}, #{gwName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
+            "    values (#{gwName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
             "      #{createTime,jdbcType=TIMESTAMP}, #{docUrl,jdbcType=VARCHAR}, #{gwLevel,jdbcType=CHAR}, \n" +
             "      #{gwZz,jdbcType=LONGVARCHAR})")
     void saveGw(SGangwei gw);
@@ -109,4 +110,6 @@ public interface GangweiDao {
 
     @Select("select MAX(gw_id) from s_gangwei")
     Integer getMaxId();
+    @SelectProvider(type = GwProvider.class,method = "listGwsByTimeAndZdNameAndZt")
+    List<GangWeiAndZtVO> listGwsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("gwName") String gwName, @Param("gwZt")String gwZt);
 }

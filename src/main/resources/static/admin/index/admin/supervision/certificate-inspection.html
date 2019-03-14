@@ -41,36 +41,45 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'inspection-number', title: '证照检查数目',width:"30%", minWidth: 200,sort:true}
-                , {field: 'record-number' , title:'记录数',minWidth:150,sort:true}
-                , {fixed: 'right', title:'操作',align:'center',minWidth:80,toolbar:'#bar'}
-            ]]
-            , "data": [
-                {
-                    "inspection-number":'供货商无经营/生产许可证的设备',
-                    "record-number":'123'
-                },{
-                    "inspection-number":'',
-                    "record-number":''
-                },{
-                    "inspection-number":'',
-                    "record-number":''
-                },{
-                    "inspection-number":'',
-                    "record-number":''
-                },{
-                    "inspection-number":'',
-                    "record-number":''
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'inspection-number', title: '证照检查数目', minWidth: 200,sort:true}
+                    , {field: 'record-number' , title:'记录数',minWidth:150,sort:true}
+                    , {fixed: 'right', title:'操作',align:'center',minWidth:80,toolbar:'#bar'}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
+
             }
+
         }
     }
 </script>

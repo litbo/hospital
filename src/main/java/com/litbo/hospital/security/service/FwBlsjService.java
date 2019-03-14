@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface FwBlsjService {
     int insertFwBlsj(FwBlsj blsj);
-    PageInfo listFwBlsj(int pageNum, int pageSize);
+    PageInfo listFwBlsj(int pageNum, int pageSize,String sjxz,String bmName,String sbcsName,String bgmc);
 
     SelectFwBlsjById selectFwBlsjById(Integer id);
 }

@@ -24,9 +24,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
-    </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
             <input type="text" name="" autocomplete="off" placeholder="检查项目" class="layui-input">
@@ -41,43 +38,57 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'device-item', title: '设备转台检查项目',width:"40%", minWidth: 200}
-                , {field: 'device-number' , title:'设备台数',minWidth:150,sort:true}
-                , {fixed: 'right',title:'操作',align:'center',toolbar:'#bar',minWidth:80}
-            ]]
-            , "data": [
-                {
-                    "device-item":'急救生命支持类使用状态未知设备',
-                    "device-number":'222'
-                },{
-                    "device-item":'急救生命支持类不完好设备',
-                    "device-number":'123'
-                },{
-                    "device-item":'质检不合格设备',
-                    "device-number":'5'
-                },{
-                    "device-item":'没有粘贴计量器具鉴定合格证涉笔',
-                    "device-number":'36'
-                },{
-                    "device-item":'预警设备',
-                    "device-number":'7'
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":({
-                        "event":'edit',
-                        "type":2,
-                        "title":'使用状态未知设备列表',
-                        "content":'./child/device-statusAdd.html',
-                        "area":['95%','95%']
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'device-item', title: '设备转台检查项目', minWidth: 200}
+                    , {field: 'device-number' , title:'设备台数',minWidth:150,sort:true}
+                    , {fixed: 'right',title:'操作',align:'center',toolbar:'#bar',minWidth:80}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":({
+                            "event":'edit',
+                            "type":2,
+                            "title":'使用状态未知设备列表',
+                            "content":'./child/device-statusAdd.html',
+                            "area":['90%','90%']
+                        })
                     })
-                })
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
+
             }
+
         }
     }
 </script>

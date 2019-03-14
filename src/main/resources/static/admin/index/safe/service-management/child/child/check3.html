@@ -39,9 +39,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修工程师</label>
                 <div class="layui-input-block">
-                    <select name="ss" lay-filter="repair_eng">
-
-                    </select>
+                    <input type="text" name="wxrName" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
 
@@ -54,7 +52,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修费</label>
                 <div class="layui-input-block">
-                    <input type="text" id="" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
+                    <input type="text" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item" pane>
@@ -124,7 +122,7 @@
                 <label class="layui-form-label">维修工作内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select name="ss" lay-filter="repair_eng">
-
+                        <option value="1">123</option>
                     </select>
                 </div>
             </div>
@@ -190,15 +188,15 @@
                     format:'yyyy-MM-dd HH:mm:ss'
                 }
             ],
-            /*val:{
+            val:{
                 filter:"form",
-                select:{
-                        filter:"repair_eng",
-                        ids:"userId",
-                        text:"userXm",
-                        url:"/kwgl/empgl/listPartnerByUserId"
+                get:{
+                    url:"/fwWeixiu/pjqlWxIndex",
+                    data:{
+                        wxrId:$.getUrlParam("wxrId")
                     }
-            },*/
+                }
+            },
             event:{
                 filter:"break_type",
                 box:"select",

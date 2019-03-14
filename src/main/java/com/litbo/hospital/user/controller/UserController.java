@@ -42,4 +42,11 @@ public class UserController {
         return Result.success();
     }
 
+    //通过用户名查询用户信息
+    @RequestMapping("getUserById")
+    public Result getUserById(String userId){
+
+       return Result.success(userService.getUserById(userId)) ;
+    }
+
 }

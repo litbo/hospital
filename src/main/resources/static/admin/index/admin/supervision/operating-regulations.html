@@ -24,9 +24,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
-    </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
             <input type="text" name="" autocomplete="off" placeholder="检查项目" class="layui-input">
@@ -38,35 +35,44 @@
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'operating-item', title: '操作规程与应急预案检查项目',width:"70%", minWidth: 200}
-                , {field: 'record-number' , title:'记录数',minWidth:150,sort:true}
-            ]]
-            , "data": [
-                {
-                    "operating-item":'未张贴上墙操作规程',
-                    "record-number":'0'
-                },{
-                    "operating-item":'未张贴上墙操作规程',
-                    "record-number":'0'
-                },{
-                    "operating-item":'应急替代演练次数',
-                    "record-number":'0'
-                },{
-                    "operating-item":'应急替代演练次数',
-                    "record-number":'0'
-                },{
-                    "operating-item":'应急调配演练次数',
-                    "record-number":'0'
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'operating-item', title: '操作规程与应急预案检查项目',width:"70%", minWidth: 200}
+                    , {field: 'record-number' , title:'记录数',minWidth:150,sort:true}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
+
             }
+
         }
     }
 </script>

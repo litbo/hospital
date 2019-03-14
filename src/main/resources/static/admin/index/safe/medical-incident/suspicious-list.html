@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>综合查询</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="" lay-filter="form1">
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="sjxz" >
+                            <option value="个案">个案</option>
+                            <option value="群发事件">群发事件</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="bgmc" class="layui-input" placeholder="报告名称" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="sbcsName" class="layui-input" placeholder="生产商" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="bmName" lay-filter="bmName">
+
+                        </select>
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">查找</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit" name="modify">查看</a>
+</script>
+<script>
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                     {field: 'bgTime', title: '报告时间', minWidth: 150,sort:true}
+                    , {field: 'bmName', title: '报告科室', minWidth: 200}
+                    , {field: 'sjxz', title: '报告性质', minWidth: 100}
+                    , {field: 'eqName', title: '设备名称', minWidth: 150}
+                    , {field: 'eqGg', title: '设备规格', minWidth: 150}
+                    , {field: 'sbcsName', title: '生产商', minWidth: 150}
+                    , {field: 'eqAzrq', title: '设备安装时间', minWidth: 150,sort:true}
+                    , {fixed:'right',width:150,align:'center',title:'查看',toolbar: "#bar"}
+                ]]
+                , url:"/security/blsj/listFwBlsj"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "edit",
+                            content:"./suspicious-show.html",
+                            dataUrl:["id"]
+                        }
+                    })
+                }
+            },
+            reSet: {
+                url:"/security/blsj/listFwBlsj",
+                type: "reload",
+                method:"GET",
+                data:["sjxz","bmName","sbcsName","bgmc"]    //搜索框的name
+            }
+        },
+        form:{
+            val:{
+                filter:"form1",
+                select:[
+                    {
+                        filter:"bmName",
+                        ids:"bmName",
+                        text:"bmName",
+                        url:"/supervise/bmgl/listBms"
+                    }
+                ]
+            },
+            date:{
+                elem:"#date",
+                range:"~",
+                format:'y-M-d'
+            }
+        }
+    }
+
+    // layui.use(['table','laydate'],function(){
+    //     var table = layui.table,
+    //         laydate = layui.laydate;
+    //     laydate.render({
+    //         elem: '#date',
+    //         value: today,
+    //         format: "y-M-d"
+    //     });
+    // })
+</script>
+</body>
+
+</html>

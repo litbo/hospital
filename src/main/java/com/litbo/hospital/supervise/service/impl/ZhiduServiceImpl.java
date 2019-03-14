@@ -2,18 +2,22 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
+import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.enums.ZDShProcessConstants;
 import com.litbo.hospital.supervise.enums.ZdCzztEnumProcess;
 import com.litbo.hospital.supervise.enums.ZdztEnumProcess;
 import com.litbo.hospital.supervise.service.ZhiduService;
 import com.litbo.hospital.supervise.vo.*;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +28,8 @@ import java.util.List;
 public class ZhiduServiceImpl implements ZhiduService {
     @Autowired
     private ZhiduDao zhiduDao;
+    @Autowired
+    private EmpDao empDao;
     @Override
     public PageInfo getZds(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -40,8 +46,11 @@ public class ZhiduServiceImpl implements ZhiduService {
     @Override
     public PageInfo listZdsByZdZt(int pageNum, int pageSize, String zdZt) {
         PageHelper.startPage(pageNum,pageSize);
-        List<SZhidu> date =  zhiduDao.listZdsByZdZt(zdZt);
-        return new PageInfo(date);
+        List<ZhuduAndZdZzVO> vos =  zhiduDao.listZdsByZdZt(zdZt);
+        for (ZhuduAndZdZzVO vo:vos){
+            setZhuduAndZdZzVO(vo);
+        }
+        return new PageInfo(vos);
     }
 
     @Override
@@ -56,9 +65,21 @@ public class ZhiduServiceImpl implements ZhiduService {
             endTime=sdf.format(cal.getTime()).toString();
         }
 
-        List<SZhidu> date =  zhiduDao.listZdsByTimeAndZdNameAndZt(startTime,endTime,zdName,zdZt);
-        return new PageInfo(date);
+        List<ZhuduAndZdZzVO> vos =  zhiduDao.listZdsByTimeAndZdNameAndZt(startTime,endTime,zdName,zdZt);
+        for (ZhuduAndZdZzVO vo:vos){
+            setZhuduAndZdZzVO(vo);
+        }
+
+        return new PageInfo(vos);
     }
+
+    private void setZhuduAndZdZzVO(ZhuduAndZdZzVO vo){
+        List<SZhiduzhizeZt> zts = zhiduDao.listZdztDescByZtId(vo.getZdId());
+        vo.setZtCzname(zts.get(0).getZtCzname());
+        if(zts.get(0).getZtDate()!=null)
+            vo.setZtDate(zts.get(0).getZtDate());
+    }
+
 
     @Override
     public void saveZd(SZhidu zd) {
@@ -92,12 +113,20 @@ public class ZhiduServiceImpl implements ZhiduService {
 
         //获得审核名字
         String dclCzztName = getDclCzztName(zdId);
+        if (dclCzztName.equals("试用")) isTg = false;
         String dqCzztName = ZDShProcessConstants.autoGetProcessName(dclCzztName,isTg);
 
+        if(dqCzztName.equals("试用")||dqCzztName.equals("科室秘书编写")||dqCzztName.equals("试用期修改")){
+            ztc.setZtDate(new Date());
+        }
         //设置审核状态名字
         ztc.setZtCzname(ZDShProcessConstants.SH_PROCESS.get(ZDShProcessConstants.PROCESS_CODE));
-        //设置状态为待审核
-        ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
+        if(dqCzztName.equals("试用期修改")){
+            ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_TG.getCode());
+        }else{
+            //设置状态为待审核
+            ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
+        }
         ztc.setZtShyj("");
         zhiduDao.saveZdZt(ztc);
     }
@@ -123,6 +152,11 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     @Override
     public void submit(ZhiduSubmitVO zhiduSubmitVO) {
+
+        if(zhiduSubmitVO.getZdId()!=null){
+            reSubmit(zhiduSubmitVO);
+            return;
+        }
 
         SZhidu zd = new SZhidu();
         zd.setZdName(zhiduSubmitVO.getZdName());
@@ -152,34 +186,19 @@ public class ZhiduServiceImpl implements ZhiduService {
         ztc.setZtShyj("");
         zhiduDao.saveZdZt(ztc);
 
-        //封装状态审核信息  待审核状态
-//        SZhiduzhizeZt zt = new SZhiduzhizeZt();
-//        zt.setZdId(zd.getZdId());
-//
-//        zt.setUserId(zhiduSubmitVO.getShrId());   //设置状态审核人
-//        zt.setZtDate(zd.getCreateTime());
-//        zt.setZtCzname("科长审核");
-//        zt.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());  //操作状态 1 通过 0 不通过  2 待处理
-//        zt.setZtShyj("默认");
-//        zhiduDao.saveZdZt(zt);
-          insertZdZt(zd.getZdId(),zhiduSubmitVO.getShrId(),true);
+        insertZdZt(zd.getZdId(),zhiduSubmitVO.getShrId(),true);
 
     }
 
     @Override
     public void reSubmit(ZhiduSubmitVO zhiduSubmitVO) {
         SZhidu zd = new SZhidu();
+        zd.setZdId(zhiduSubmitVO.getZdId());
         zd.setZdName(zhiduSubmitVO.getZdName());
         zd.setCreateTime(new Date());
         zd.setZdContent(zhiduSubmitVO.getZdContent());
         zd.setUserId(zhiduSubmitVO.getUserId());
         zd.setBmId(zhiduSubmitVO.getBmId());
-        //判断是否是在使用期修改
-//        SZhidu gzd = zhiduDao.getZdByZdId(zhiduSubmitVO.getsZhidu().getZdId());
-//        if(gzd.getZdZt()==ZdztEnumProcess.ZD__ZT_SY.getCode()){//试用期修改
-//
-//        }
-        //更新制度信息
 
         //填充信息
         zd.setZdZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
@@ -192,6 +211,11 @@ public class ZhiduServiceImpl implements ZhiduService {
         updateZdZt(zd.getZdId(),ZdCzztEnumProcess.ZD__CZZT_TG.getCode(),new Date(),"");
         //插入新状态
         insertZdZt(zd.getZdId(),zhiduSubmitVO.getShrId(),true);
+        //判断是否是在试用期修改
+        if(getDclCzztName(zd.getZdId()).equals("试用期修改")){
+            insertZdZt(zd.getZdId(),zhiduSubmitVO.getShrId(),true);
+        }
+        //更新制度信息
     }
 
     @Override
@@ -242,4 +266,33 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     }
 
+    @Override
+    public PageInfo getShProcesses(int pageNum, int pageSize, Integer zdId) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SZhiduzhizeZt> zts= zhiduDao.getShProcesses(zdId);
+        SZhidu zd = zhiduDao.getZdById(zdId.toString());
+        List<ZhiduShProcessDetailVO> processes = new ArrayList<>();
+        int i=1;
+        for(SZhiduzhizeZt zt:zts){
+            ZhiduShProcessDetailVO vo = new ZhiduShProcessDetailVO();
+            vo.setId(i);
+            vo.setZdName(zd.getZdName());
+            vo.setZtCzname(zt.getZtCzname());
+            SEmp shr = empDao.getEmpsById(zt.getUserId());
+            if(shr!=null)
+                vo.setShr(shr.getUserXm());
+            vo.setZtDate(zt.getZtDate());
+            if(zt.getZtCzzt()==2){
+                vo.setIsTg("通过");
+            }else if(zt.getZtCzzt()==1){
+                vo.setIsTg("不通过");
+            }else{
+                vo.setIsTg("待审核");
+            }
+            vo.setYj(zt.getZtShyj());
+            processes.add(vo);
+            i++;
+        }
+        return new PageInfo(processes);
+    }
 }

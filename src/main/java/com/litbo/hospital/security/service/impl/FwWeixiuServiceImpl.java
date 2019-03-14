@@ -42,6 +42,11 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Autowired
     private FwPjqlDao fwPjqlDao;
 
+    @Override
+    public String pjqlWxIndex(String userId) {
+        return empDao.getUserXmById(userId);
+    }
+
     /**
      * 过时
      * @param fwId

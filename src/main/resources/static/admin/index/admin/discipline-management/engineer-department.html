@@ -38,7 +38,7 @@
                 <option>划分人</option>
             </select>
         </div>
-        <button class="layui-btn" data-type="hf">确定划分</button>
+        <button class="layui-btn" data-type="hf" lay-event="hf">确定划分</button>
         <div class="layui-inline" style="margin-left:100px">
             <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
         </div>
@@ -86,7 +86,18 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        delTable:{
+                            id:"table",
+                            fitler:"table1",
+                            name:"bmId",
+                            param:"bmId",
+                            url:"/kwgl/glbm/gcsBmHf",
+                            type:"POST",
+                            event:"hf",
+                            add:["userId"]
+                        }
+                    })
                 }
             },
             reSet:{
@@ -96,27 +107,6 @@
                 where: {
 
                 }
-            },
-            event:{
-                filter:'select1',
-                box:'onChange',
-                func:function(data){
-                    subUp({
-                        url:'/kwgl/empgl/listGcsEmp',
-                        type:'GET',
-                        data:{name:"ABC"},
-                        success:function(res){
-                            if(res.code ===0 ){
-                                var $d = "";
-                                for(var i=0;i<res.data.length;i++){
-                                    $d += $('<option>').append(res.data[i]);
-                                }
-                                $("select").append($d);
-                            }
-                        }
-                    },data)
-                },
-                break:false
             }
         }
     }

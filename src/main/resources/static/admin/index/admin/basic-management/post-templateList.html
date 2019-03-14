@@ -22,9 +22,6 @@
     </div>
 </div>
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
             <input class="layui-input" name="search" placeholder="岗位职责名称" id="test-table-demoReload" autocomplete="off">
@@ -34,36 +31,43 @@
 </script>
 
 
-
-
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'post-name', title: '岗位职责名称', width:'100%',minWidth: 200,sort:true}
-            ]]
-            , "data": [
-                {
-                    "post-name":"fdf"
-                },{
-                    "post-name":"fdf"
-                },{
-                    "post-name":"fdf"
-                },{
-                    "post-name":"fdf"
-                },{
-                    "post-name":"fdf"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    ,{field:'post-name',title:'岗位职责名称',width:'100%',minWidth:200,sort:true}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
+
             }
-        },
-        date :{
-            elem : "#date1",
-            type : "datetime"
+
         }
     }
 </script>

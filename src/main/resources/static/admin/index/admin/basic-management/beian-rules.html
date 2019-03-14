@@ -52,7 +52,7 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">再评价</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="revalue">再评价</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">详细</a>
 </script>
 <script>
@@ -71,7 +71,7 @@
                     {checkbox:true,fixed:true}
                     , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
-                    , {field: 'createTime', title: '备案日期', minWidth: 150,templet:'#timeFormat'}
+                    , {field: 'ztDate', title: '备案日期', minWidth: 150,templet:'#timeFormat'}
                     , {fixed:'right',Width: 300,align:'center',toolbar: "#bar",template:""}
                 ]]
                 , url: "/supervise/zdgl/listZdsByZdZt?zdZt=3"
@@ -91,7 +91,14 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "revalue",
+                            content:"check-revalue.html",
+                            dataUrl:["zdId"]
+                        }
+                    })
                 }
             },
             reSet:{

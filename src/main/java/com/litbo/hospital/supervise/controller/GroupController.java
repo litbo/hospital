@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
+import com.litbo.hospital.supervise.dao.BmDao;
+import com.litbo.hospital.supervise.dao.GroupDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.service.GroupService;
 import com.litbo.hospital.supervise.vo.GroupInsertDetailVO;
@@ -26,6 +28,8 @@ public class GroupController {
     @Autowired
     private BmService bmService;
 
+    @Autowired
+    private GroupDao groupDao;
 
 
     //获得所有科室管理团队
@@ -34,6 +38,12 @@ public class GroupController {
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         PageInfo pageInfo = groupService.getGroups(pageNum,pageSize);
         return Result.success(pageInfo);
+    }
+
+    @GetMapping("/listGroups2")
+    public Result listGroups2(){
+        List<SGroup> groups = groupDao.getGroups();
+        return Result.success(groups);
     }
 
     //获得科室管理团队

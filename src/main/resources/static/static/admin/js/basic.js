@@ -21,30 +21,30 @@ var date = new Date()
     , time0 = ""
     , time = hour + ":" + minutes + ":" + seconds
     //初始化页面渲染数据
-    ,renderMod = {}
-    ,allData = null;
+    , renderMod = {}
+    , allData = null;
 //日期补零
-if(month < 10){
-    if(day < 10){
+if (month < 10) {
+    if (day < 10) {
         today0 = year + "-0" + month + "-0" + day
-    }else{
+    } else {
         today0 = year + "-0" + month + "-" + day
     }
-}else{
+} else {
     today0 = today;
 }
 //时间补零
-if(hour < 10){
-    if(minutes <10){
-        if(seconds < 10){
+if (hour < 10) {
+    if (minutes < 10) {
+        if (seconds < 10) {
             time0 = "0" + hour + ":0" + minutes + ":0" + seconds
-        }else{
+        } else {
             time0 = "0" + hour + ":0" + minutes + ":" + seconds
         }
-    }else{
+    } else {
         time0 = "0" + hour + ":" + minutes + ":" + seconds
     }
-}else{
+} else {
     time0 = time
 }
 /**
@@ -59,23 +59,23 @@ if(hour < 10){
 //例子：
 //(new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
 //(new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
-Date.prototype.Format = function(fmt) {
+Date.prototype.Format = function (fmt) {
     var o = {
-        "M+" : this.getMonth()+1,                 //月份
-        "d+" : this.getDate(),                    //日
-        "h+" : this.getHours(),                   //小时
-        "m+" : this.getMinutes(),                 //分
-        "s+" : this.getSeconds(),                 //秒
-        "q+" : Math.floor((this.getMonth()+3)/3), //季度
-        "S"  : this.getMilliseconds()             //毫秒
+        "M+": this.getMonth() + 1,                 //月份
+        "d+": this.getDate(),                    //日
+        "h+": this.getHours(),                   //小时
+        "m+": this.getMinutes(),                 //分
+        "s+": this.getSeconds(),                 //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds()             //毫秒
     };
     console.log(this);
-    if(/(y+)/.test(fmt)){
-        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     }
-    for(var k in o){
-        if(new RegExp("("+ k +")").test(fmt)){
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+    for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         }
     }
     //console.log(fmt);
@@ -105,6 +105,12 @@ Date.prototype.Format = function(fmt) {
     };
 })(jQuery);
 
+/**
+ * @todo 获取URL中的HASH的值
+ * @arguments name -> 需要获取的HASH参数
+ * @return true -> 对应参数的值 {string}
+ *         false -> null {null}
+ **/
 (function ($) {
     $.getUrlHash = function (name, site) {
         var reg = new RegExp("(^|#)" + name + "=([^#]*)(#|$)", "i"), r;
@@ -248,8 +254,8 @@ function setStorageMenu(title, url, id) {
 
 //本地存储记录当前打开窗口
 function setStorageCurMenu() {
-    var curMenu = sessionStorage.getItem('curMenu'),$layTabTit = $('.layui-tab-title'),
-    text = $layTabTit.find('.layui-this').text();
+    var curMenu = sessionStorage.getItem('curMenu'), $layTabTit = $('.layui-tab-title'),
+        text = $layTabTit.find('.layui-this').text();
     text = text.split('ဆ')[0];
     if (text === "系统主页") {
         return;
@@ -293,33 +299,37 @@ function removeStorageMenu(id) {
  * @return {Boolean} -> 无name时将返回 false
  * @return {String} -> 获取的值，如无value则
  **/
-function tempValue(name,value,clear,type){
-    if(!name) return false;//name不存在将返回false
+function tempValue(name, value, clear, type) {
+    if (!name) return false;//name不存在将返回false
     var temp = null;
     //获取存储的值
-    switch(type){
-        case"data":temp = layui.data(name);break;
-        default:temp = layui.sessionData(name);break;
+    switch (type) {
+        case"data":
+            temp = layui.data(name);
+            break;
+        default:
+            temp = layui.sessionData(name);
+            break;
     }
     //console.log(temp);
     //清除存储的值
-    if(value === undefined || clear === null || clear === "null"){
-        layui.sessionData(name,null);
-    }else if(clear === undefined || clear === true || clear === "true"){
-        layui.sessionData(name,{
-            remove:true,
-            key:value
+    if (value === undefined || clear === null || clear === "null") {
+        layui.sessionData(name, null);
+    } else if (clear === undefined || clear === true || clear === "true") {
+        layui.sessionData(name, {
+            remove: true,
+            key: value
         });
-    }else if(Type(clear) === "string" && clear !== "false"){
-        layui.sessionData(name,{
-            remove:true,
-            key:clear
+    } else if (Type(clear) === "string" && clear !== "false") {
+        layui.sessionData(name, {
+            remove: true,
+            key: clear
         });
     }
     //返回值
-    if(value){
+    if (value) {
         return temp[value];
-    }else{
+    } else {
         return temp;
     }
 }
@@ -331,8 +341,8 @@ function tempValue(name,value,clear,type){
  * @arguments errMsg -> 提示与输出信息
  * @return
  **/
-function putMsg(errMsg){
-    layui.use('layer',function(){
+function putMsg(errMsg) {
+    layui.use('layer', function () {
         var layer = layui.layer;
         //console.log(errMsg);
         //LAYUI方法
@@ -347,6 +357,7 @@ function putMsg(errMsg){
         errMsg.func && errMsg.func(layer);
     })
 }
+
 /**
  * @todo 数据合并（JSON）
  * @tips 合并两个数据不一样之处，将y中x没有的项添加进x中（X为主）
@@ -356,7 +367,7 @@ function putMsg(errMsg){
  */
 function compareData(x, y) {
     for (var name in y) {
-        if(y.hasOwnProperty(name)){
+        if (y.hasOwnProperty(name)) {
             if (x[name] === undefined) {
                 x[name] = y[name];
             }
@@ -371,7 +382,7 @@ function compareData(x, y) {
  *            time -> 遮罩自动结束时间
  * @return
  **/
-function markPage(text, time){
+function markPage(text, time) {
     //如果页面中不存在定位元素则创建定位元素
     var $beg = $("#begin");
     var timer = null;
@@ -402,29 +413,58 @@ function markPage(text, time){
  *            def_data -> 默认弹出参数（可不填）
  * @return
  */
-function layOpen(data,def_data){
+function layOpen(data, def_data) {
     var w = document.body.clientWidth - 20
         , h = document.body.clientHeight - 20
-        ,def_open=
+        , def_open =
         {
-            type:1,
-            title:"详情",
-            content:"无内容哦~",
-            area:[w + "px", h + "px"],
-            resize:false,
-            maxmin:true,
-            move:false,
-            scrollbar:false
+            type: 1,
+            title: "详情",
+            content: "无内容哦~",
+            area: [w + "px", h + "px"],
+            resize: false,
+            maxmin: true,
+            move: false,
+            scrollbar: false
         }
     ;
     //合并数据
-    compareData(data,def_data || def_open);
+    compareData(data, def_data || def_open);
     //判断窗口新建位置，并弹出新窗口
-    switch(data.site){
-        case "top":return top.layer.open(data);
-        case "parent":return parent.layer.open(data);
-        default :return layer.open(data);
+    switch (data.site) {
+        case "top":
+            return top.layer.open(data);
+        case "parent":
+            return parent.layer.open(data);
+        default :
+            return layer.open(data);
     }
+}
+
+
+//获取数据hash值
+function getHash(input) {
+    var hash = 5381999;
+    var I64BIT_TABLE =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'.split('');
+    var i = input.length - 1;
+
+    if (typeof input == 'string') {
+        for (; i > -1; i--)
+            hash += (hash << 5) + input.charCodeAt(i);
+    } else {
+        for (; i > -1; i--)
+            hash += (hash << 5999) + input[i];
+    }
+    var value = hash & 0x7FFFFFFF;
+
+    var retValue = '';
+    do {
+        retValue += I64BIT_TABLE[value & 0x3F];
+    }
+    while (value >>= 6);
+
+    return retValue;
 }
 
 /**
@@ -438,19 +478,19 @@ function layOpen(data,def_data){
 function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
     //判断数据有效性
-    if(doJudg({
-        "undefined":[value.url]
-    })){
+    if (doJudg({
+        "undefined": [value.url]
+    })) {
         putMsg({
-            alert:"数据上传操作已被强制终止！",
-            error:"参数填写不正确，程序无法继续进行！",
-            log:arguments
+            alert: "数据上传操作已被强制终止！",
+            error: "参数填写不正确，程序无法继续进行！",
+            log: arguments
         });
         return false;
     }
 
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
-    var dataP = {}, valus = null;
+    var dataP = {}, valus = "";
     if (Type(value.data) === "array") {
         //dataP 提交的数据 valus 填写的表单name值
         for (var i = 0; i < value.data.length; i++) {
@@ -463,13 +503,13 @@ function subUp(value, data, param) {
                     dataP[valus] = inputValue;
                 } else if ($("select[name=" + valus + "]").val()) {
                     dataP[valus] = $("select[name=" + valus + "]").val();
-                } else if($("textarea[name=" + valus + "]").val()){
+                } else if ($("textarea[name=" + valus + "]").val()) {
                     dataP[valus] = $("textarea[name=" + valus + "]").val();
-                } else if($("input[type=radio][name=" + valus + "]").val()){
+                } else if ($("input[type=radio][name=" + valus + "]").val()) {
                     dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
-                } else if($("input[type=checkbox][name=" + valus + "]").val()){
+                } else if ($("input[type=checkbox][name=" + valus + "]").val()) {
                     var $cks = $("input[type=checkbox][name=" + valus + "]");
-                    if($cks[0].checked === true){
+                    if ($cks[0].checked === true) {
                         dataP[valus] = $cks.val();
                     }
                 }
@@ -485,7 +525,7 @@ function subUp(value, data, param) {
                 }
             }
         }
-    }else if(Type(value.data) === "json"){
+    } else if (Type(value.data) === "json") {
         dataP = value.data;
     }
     //获取自定义的参数并合并到 dataP 中
@@ -535,21 +575,21 @@ function subUp(value, data, param) {
             success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
-                    if(value.reload){
-                        layer.alert("数据提交成功",function(){
+                    if (value.reload) {
+                        layer.alert("数据提交成功", function () {
                             //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                             value.reload === "parent" ? parent.location.reload() : window.location.reload();
                         })
-                    }else{
+                    } else {
                         putMsg({
-                            alert:"数据提交成功！"
+                            alert: "数据提交成功！"
                         });
                     }
-                } else{
+                } else {
                     putMsg({
-                        alert:"提交失败，请重试！",
-                        error:"数据返回异常",
-                        log:data
+                        alert: "提交失败，请重试！",
+                        error: "数据返回异常",
+                        log: data
                     });
                 }
                 //提交成功后执行（不论返回数据是否正确）
@@ -557,9 +597,9 @@ function subUp(value, data, param) {
             },
             error: function (er) {
                 putMsg({
-                    alert:"提交失败，请重试！",
-                    error:"数据提交异常",
-                    log:er
+                    alert: "提交失败，请重试！",
+                    error: "数据提交异常",
+                    log: er
                 });
                 //提交失败后执行函数
                 value.fine && value.fine(er);
@@ -570,7 +610,7 @@ function subUp(value, data, param) {
             //合并数据
             compareData(value, ajaxOptions);
             //判断若以JSON形式发送则格式化数据
-            if(value.contentType === "application/json"){
+            if (value.contentType === "application/json") {
                 dataP = JSON.stringify(dataP);
             }
             //数据回填
@@ -582,31 +622,31 @@ function subUp(value, data, param) {
 }
 
 //获取表格数据并且清空LAYUI自动添加的数据
-function getTableValue(name,inClear){
+function getTableValue(name, inClear) {
     //oData 初始表格数据 clear 初始清除参数集合
-    var oData = [],clear=["LAY_CHECKED","LAY_TABLE_INDEX"];
-    layui.use("table",function(){
+    var oData = [], clear = ["LAY_CHECKED", "LAY_TABLE_INDEX"];
+    layui.use("table", function () {
         var table = layui.table;
         //获取表格缓存中的数据
-        oData =  table.cache[name];
+        oData = table.cache[name];
         //判断是否需要清除不需要的参数
-        if(inClear === false){
+        if (inClear === false) {
             clear = [];
-        }else if(Type(inClear) === "array"){
-            if(inClear[0] === true){
-                inClear.splice(0,1);//删除标识符 true
+        } else if (Type(inClear) === "array") {
+            if (inClear[0] === true) {
+                inClear.splice(0, 1);//删除标识符 true
                 clear = clear.concat(inClear);
-            }else{
+            } else {
                 clear = inClear;
             }
-        }else if(Type(inClear) === "string"){
-            clear =[inClear];
+        } else if (Type(inClear) === "string") {
+            clear = [inClear];
         }
         //当clear长度不为0时则执行清除参数操作
-        if(clear.length !== 0){
-            for(var j=0;j<oData.length;j++){
-                for(var x=0;x<clear.length;x++){
-                    if(oData[clear[x]] !== undefined){
+        if (clear.length !== 0) {
+            for (var j = 0; j < oData.length; j++) {
+                for (var x = 0; x < clear.length; x++) {
+                    if (oData[clear[x]] !== undefined) {
                         delete oData[i][[clear[x]]]
                     }
                 }
@@ -618,51 +658,51 @@ function getTableValue(name,inClear){
 }
 
 //抽象出的简化判断，成立返回false 不成立则返回true
-function judg(data,end,mod,con){
+function judg(data, end, mod, con) {
     var da = null;
-    for(var x=0;x<data.length;x++){
+    for (var x = 0; x < data.length; x++) {
         //获取单个具体数据
-        da= data[x];
+        da = data[x];
         //判断需要判断数据的类型与格式
-        if(con === "l"){
+        if (con === "l") {
             da = da.length;
-        }else if(Type(con) === "string" && da[con] !== undefined){
+        } else if (Type(con) === "string" && da[con] !== undefined) {
             da = da[con];
         }
         //匹配运算符号
-        switch(mod){
+        switch (mod) {
             case "=":
-                if(da === end){
+                if (da === end) {
                     return false;
                 }
                 break;
             case "<":
-                if(da < end){
+                if (da < end) {
                     return false;
                 }
                 break;
             case ">":
-                if(da > end){
+                if (da > end) {
                     return false;
                 }
                 break;
             case "<=":
-                if(da <= end){
+                if (da <= end) {
                     return false;
                 }
                 break;
             case ">=":
-                if(da >= end){
+                if (da >= end) {
                     return false;
                 }
                 break;
             case "!=":
-                if(da !== end){
+                if (da !== end) {
                     return false;
                 }
                 break;
             case "!":
-                if(da === !end){
+                if (da === !end) {
                     return false;
                 }
                 break;
@@ -673,30 +713,30 @@ function judg(data,end,mod,con){
 }
 
 //判断数据是否符合要求合法（用于无法使用layui自带判断情况）
-function doJudg(value){
+function doJudg(value) {
     //数据是否有效标志
     var ju = true;
-    for(var name in value){
-        if(value.hasOwnProperty(name)){
+    for (var name in value) {
+        if (value.hasOwnProperty(name)) {
             //获取数据匹配参数
-            switch(name){
+            switch (name) {
                 case "undefined":
-                    ju = judg(value[name],undefined,"=");
+                    ju = judg(value[name], undefined, "=");
                     break;
                 case 0:
-                    ju = judg(value[name],0,"=","l");
+                    ju = judg(value[name], 0, "=", "l");
                     break;
                 case "00":
-                    ju = judg(value[name],"","=");
+                    ju = judg(value[name], "", "=");
                     break;
             }
             //如果有一个匹配成功则会直接返回true，表示有不符合要求的
-            if(!ju){
+            if (!ju) {
                 //是否显示报错信息 === true则显示，否则不显示
                 value.truth && value.truth === true ? putMsg({
-                    alert:"数据不合法！",
-                    error:"参数不合法，未通过效验！",
-                    log:value
+                    alert: "数据不合法！",
+                    error: "参数不合法，未通过效验！",
+                    log: value
                 }) : "";
                 //数据不合法
                 return true;
@@ -731,7 +771,7 @@ action = func = {
             }
             for (var i = 0; i < oData.length; i++) {
                 for (var titles in oData[i]) {
-                    if(oData[i].hasOwnProperty(titles)){
+                    if (oData[i].hasOwnProperty(titles)) {
                         if (oData[i][titles] === $(this).text()) {//确保当前的单元值与捕获的数据中的值对应，避免对应错误
                             $h_tip.html("");
                             try {
@@ -773,19 +813,19 @@ action = func = {
                         layer.confirm(yes, function (index) {
                             //链接拼接
                             con = data.link + "?";
-                            if(Type(value.param) === "array"){
-                                for(var g=0;g<value.param.length;g++){
-                                    con +=  value.param[g] + "&" ;
+                            if (Type(value.param) === "array") {
+                                for (var g = 0; g < value.param.length; g++) {
+                                    con += value.param[g] + "&";
                                 }
-                            }else{
+                            } else {
                                 con = data.link + "?" + value.param + "=" + data[value.param];
                             }
                             //弹出窗口
                             layOpen({
-                                type:2,
-                                title:"详细",
-                                content:con,
-                                area:["90%","90%"]
+                                type: 2,
+                                title: "详细",
+                                content: con,
+                                area: ["90%", "90%"]
                             });
                             layer.close(index);
                         });
@@ -807,12 +847,13 @@ action = func = {
             }
         } else {
             putMsg({
-                msg:"操作执行失败！",
-                log:value,
-                error:"tableFunc参数填写错误"
+                msg: "操作执行失败！",
+                log: value,
+                error: "tableFunc参数填写错误"
             });
             return false;
         }
+
         //事件绑定函数
         function cc(vas) {
             layui.use('table', function () {
@@ -820,46 +861,46 @@ action = func = {
                     layer = layui.layer,
                     filt = vas.filter || "table1",
                     tool = vas.tool || "tool",
-                    tableOn = tool+'(' + filt + ')',
+                    tableOn = tool + '(' + filt + ')',
                     baseUrl = vas.content,
                     openT = true;
                 //绑定表格事件
                 table.on(tableOn, function (obj) {
                     //排除多个数据源干扰，如toolbar有数据干扰问题，可移除外层限制if
                     //只有在点击表格内按钮时才执行事件
-                    if(tool === "tool"){
+                    if (tool === "tool") {
                         //获取当前点击按钮event
                         var event = obj.event;
-                        for(var x=0;x<value.length;x++){
-                            if(event === value[x].event){
+                        for (var x = 0; x < value.length; x++) {
+                            if (event === value[x].event) {
                                 vas = value[x];
                             }
                         }
                     }
                     //只有在点击表格标题行按钮才执行事件
-                    if(tool === "toolbar"){
+                    if (tool === "toolbar") {
                         //获取选中行数据
                         var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
                     }
                     //当无法正常获取URL的时候
-                    if(baseUrl === undefined && vas.content !== undefined){
+                    if (baseUrl === undefined && vas.content !== undefined) {
                         baseUrl = vas.content;
                     }
                     //获得当前行数据
                     var data = obj.data;
                     //当存在dataUrl时则填充进URL参数中
-                    if(vas.dataUrl && vas.dataUrl !== false){
+                    if (vas.dataUrl && vas.dataUrl !== false) {
                         vas.content += "?";
-                        for(var i=0;i<vas.dataUrl.length;i++){
+                        for (var i = 0; i < vas.dataUrl.length; i++) {
                             vas.content += vas.dataUrl[i] + "=" + data[vas.dataUrl[i]] + "&";
                         }
                     }
                     //判断是否允许自定义layer窗口弹出
-                    if(vas.layOpen !== undefined) openT = Boolean(vas.layOpen);
+                    if (vas.layOpen !== undefined) openT = Boolean(vas.layOpen);
                     //若允许弹出则弹出
                     openT && layOpen(vas);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
-                    vas.func && vas.func(obj,checkStatus);
+                    vas.func && vas.func(obj, checkStatus);
                     //还原url
                     vas.content = baseUrl;
                 });
@@ -867,25 +908,25 @@ action = func = {
         }
     },
     //添加表格编辑事件
-    "tableEdit":function(value){
-        layui.use('table',function(){
+    "tableEdit": function (value) {
+        layui.use('table', function () {
             var table = layui.table;
-            table.on('edit('+value.filter+')', function(obj){
+            table.on('edit(' + value.filter + ')', function (obj) {
                 var val = obj.value //得到修改后的值
-                    ,data = obj.data //得到所在行所有数据
-                    ,field = obj.field //得到字段对应的name
-                    ,uValue = obj.uValue//字段修改前的值（自定义JS，table.js重置后将失效）
-                    ,tips = value.tip || uValue;
+                    , data = obj.data //得到所在行所有数据
+                    , field = obj.field //得到字段对应的name
+                    , uValue = obj.uValue//字段修改前的值（自定义JS，table.js重置后将失效）
+                    , tips = value.tip || uValue;
                 //是否提示信息
-                if(value.confirm === false){
-                    value.func && value.func.call(this,val,uValue,obj);
-                }else{
-                    layer.confirm("确定将 "+tips+" 修改为："+val+"吗？",function(index){
+                if (value.confirm === false) {
+                    value.func && value.func.call(this, val, uValue, obj);
+                } else {
+                    layer.confirm("确定将 " + tips + " 修改为：" + val + "吗？", function (index) {
                         //执行自定义函数
-                        value.func && value.func(val,uValue,obj);
+                        value.func && value.func(val, uValue, obj);
                         //关闭弹出的确认信息
                         layer.close(index);
-                    },function(index){
+                    }, function (index) {
                         //取消操作将重置已编辑的数据
                         //获取改变前的数据
                         data[field] = uValue;
@@ -899,101 +940,106 @@ action = func = {
         })
     },
     //向表格中添加数据
-    "reTable":function(value){
-        var name = value.name || "table",res = value.data,rep = 0,total = 0,num = 0,sec = 0,add = [],xs=0;
-        layui.use('table',function(){
+    "reTable": function (value) {
+        var name = value.name || "table", res = value.data,pp = false,hh="200";
+        layui.use('table', function () {
             var table = layui.table
-                ,oData =  table.cache[name];//获取表格所有数据
+                , oData = table.cache[name];//获取表格所有数据
+
             //未选择数据则不执行操作
-            if(res.length === 0){
+            if (res.length === 0) {
                 return false;
             }
-            //数据对比函数
-            function compRes(val){
-                if(oData.length === 0){
-                    sec++;//判断是否有
-                    oData.push(val);
-                }else{
-                    for(x = xs;x<oData.length;x++){
-                        //删除标志参数
-                        delete oData[x]["LAY_TABLE_INDEX"];
-                        delete oData[x]["LAY_CHECKED"];
-                        //判断是否需要删除某个判断的元素（删除自定义参数）
-                        if(value.del !== undefined && Type(value.del) === "array"){
-                            for(var cc=0;cc < value.del.length;cc++){
-                                delete oData[x][cc];
-                            }
-                        }
-                        //匹配参数个数并计算相同参数个数
-                        for(var name in oData[x]){
-                            if(oData[x].hasOwnProperty(name)){
-                                total++;//计算参数的总数
-                                if(oData[x][name] === val[name]){
-                                    num++;//计算匹配成功参数的个数
-                                }
-                            }
-                        }
-                        //若相等则表示当前数据在原数据中已存在，不相等则表示需要添加进数据中
-                        if(total !== num){
-                            sec++;
-                            add.push(val);
-                            //使用完毕，复位变量
-                            total = num = 0;
-                        }else{
-                            xs = x+1;
-                            return false;
-                        }
-                    }
-                    for(var j =0;j < add.length;j++){
-                        oData.push(add[j]);
-                    }
-                }
-            }
+
             //若需覆盖原数据则不保留原数据，否则向后逐条追加数据
-            if(value.cover === true){
+            if (value.cover === true) {
                 oData = res;
-            }else{
-                //判断数据类型并执行函数
-                if(Type(res) === "array"){
-                    for(var i=0;i<res.length;i++){
-                        compRes(res[i]);
+            } else {
+                if (oData.length === 0) {
+                    for (var v = 0; v < res.length; v++) {
+                        delParam(res[v]);
+                        oData.push(res[v]);
                     }
-                }else if(Type(res) === "json"){
-                    compRes(res)
+                }else {
+                    for (var i = 0; i < oData.length; i++) {
+                        delParam(oData[i]);
+                        compRes(oData[i], res);
+                    }
+
+                    for (var j = 0; j < res.length; j++) {
+                        delParam(res[j]);
+                        oData.push(res[j]);
+                    }
                 }
             }
+
+            //数据对比函数
+            function compRes(data, val) {
+                //循环需要添加的数据
+                for (var x = 0; x < val.length; x++) {
+                    //删除不需要进行判断的参数
+                    delParam(val[x]);
+                    //获取数据字符串
+                    var dd = JSON.stringify(data)
+                        , vv = JSON.stringify(val[x]);
+                    //当数据一样时，删除当前数据并且结束循环
+                    if (dd === vv){
+                        val.splice(x, 1);
+                        return true;
+                    }
+                }
+            }
+
+            //删除不需要进行判断的参数
+            function delParam(data) {
+                //默认将删除 LAY_CHECKED LAY_TABLE_INDEX
+                !value.delVal && data["LAY_CHECKED"] && delete data["LAY_CHECKED"];
+                !value.delVal && data["LAY_TABLE_INDEX"] && delete data["LAY_TABLE_INDEX"];
+                //判断是否需要删除某个判断的元素（删除自定义参数）
+                if(value.del !== undefined && Type(value.del) === "array"){
+                    for(var cc=0;cc < value.del.length;cc++){
+                        data[cc] && delete data[cc];
+                    }
+                }
+            }
+
+            //数据大于15条时显示分页按钮并拉高表格高度
+            if(oData.length > 15){
+                pp = true;
+                hh = "250"
+            }
+
             //重新渲染表格
-            table.reload(name,{
-                data : oData
+            table.reload(name, {
+                data: oData,
+                page:pp,
+                height:hh
             });
-            //大于15条数据不显示数量（数据太大会导致内存占用过高，页面崩溃。限制最多只能选中15条一次）
-            if(sec >= 15){
-                sec = "多";
-            }
+
             //信息提示
-            if(sec === 0){
+            /*if (res.length === 0) {
                 layer.msg("重复数据无法添加！");
-            }else{
-                layer.msg("已成功添加" + sec + "条新数据！");
-            }
+            }*/
+
+            layer.msg("已成功添加" + res.length + "条新数据！");
         });
     },
     //表格外获取选中数据并删除选中数据(只修改本地数据)
-    "checkTable":function(name){
-        layui.use('table', function() {
+    "checkTable": function (name) {
+        layui.use('table', function () {
             var table = layui.table
-                ,oData =  table.cache[name];//获取表格所有数据
+                , oData = table.cache[name];//获取表格所有数据
             var ck = table.checkStatus(name);//获取选中数据
-            if(ck.data.length === 0){
+            if (ck.data.length === 0) {
                 putMsg({
-                    alert:"当前未选中任何数据！"
+                    alert: "当前未选中任何数据！"
                 });
                 return false;
             }
-            layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
-                if(ck.isAll === true){
+            layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
+                if (ck.isAll === true) {
                     oData = [];
-                }else {
+                } else {
                     for (var j = 0; j < oData.length; j++) {
                         //找出所有数据中的已选中数据并删除
                         if (oData[j].LAY_CHECKED === true) {
@@ -1005,8 +1051,8 @@ action = func = {
                     }
                 }
                 //重新渲染表格
-                table.reload(name,{
-                    data : oData
+                table.reload(name, {
+                    data: oData
                 });
                 layer.close(index);
             });
@@ -1014,60 +1060,67 @@ action = func = {
         });
     },
     //表格外获取选中数据并删除选中数据（可提交数据）
-    "delTable":function(value){
-        layui.use('table', function() {
+    "delTable": function (value) {
+        layui.use('table', function () {
             var table = layui.table
-                ,nCk = []
-                ,oData =  table.cache[value.id];//获取表格所有数据
-            table.on("toolbar("+value.filter+")",function () {
-
-                if(obj.event === value.event){
-                    console.log("666");
-                    var ck = table.checkStatus(value.id);//获取选中数据
-                    if(ck.data.length === 0){
+                ,loc = true
+                ,ck = table.checkStatus(value.id)//获取已选中数据
+                , oData = table.cache[value.id];//获取表格所有数据
+            table.on("toolbar(" + value.filter + ")", function (obj) {
+                //按钮匹配
+                if (obj.event === value.event) {
+                    if (ck.data.length === 0) {
                         putMsg({
-                            alert:"当前未选中任何数据！"
+                            alert: "请选择至少一条数据！"
                         });
                         return false;
                     }
                     //上传数据定义
                     value.data = {};
-                    value.data[value.param] = nCk;
-                    value.success = function (res){
-                        if(res.code === 0){
-                            layer.msg("数据删除成功！");
+                    value.data[value.name] = ck;
+                    if (value.add !== undefined) {
+                        for (var name in value.add) {
+                            if (value.add.hasOwnProperty(name)) {
+                                value.data[name] = value.add[name]
+                            }
+                        }
+                    }
+                    value.contentType = "application/json";
+                    value.success = function (res) {
+                        if (res.code === 0) {
+                            layer.msg("操作成功！");
                             //重新渲染表格
-                            table.reload(name,{
-                                data : oData
+                            value.reTable && table.reload(name, {
+                                data: res.data
+                            });
+                            !loc && table.reload(name, {
+                                data: oData
                             });
                             value.reload && window.location.reload();
-                        } else{
-                            layer.msg("数据删除失败！")
+                        } else {
+                            layer.msg("操作失败！")
                         }
                         layer.close(index);
                     };
-                    if(value.confirm === false){
+                    if (value.confirm === false) {
                         console.log("con");
                         subUp(value)
-                    }else{
-                        layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
-                            if(ck.isAll === true){
+                    } else {
+                        layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
+                            if (ck.isAll === true) {
                                 oData = [];
-                                nCk = "all";//全部被选中
-                            }else {
+                            } else {
                                 for (var j = 0; j < oData.length; j++) {
                                     //找出所有数据中的已选中数据并删除
                                     if (oData[j].LAY_CHECKED === true) {
                                         oData.splice(j, 1);
-                                        //添加
-                                        nCk.push(oData[j][value.name]);
                                     } else {
                                         delete oData[j]["LAY_CHECKED"];
                                         delete oData[j]["LAY_TABLE_INDEX"];
                                     }
                                 }
+                                loc = false;
                                 //上传已删除文件
-
                                 subUp(value)
                             }
                         });
@@ -1075,90 +1128,36 @@ action = func = {
                 }
             });
         });
-    },
-    //数据划分按钮
-    "divTable":function(value){
-        layui.use('table', function() {
-            var table = layui.table
-                ,nCk = []
-                ,oData =  table.cache[value.id];//获取表格所有数据
-            table.on("toolbar("+value.filter+")",function () {
-
-                if(obj.event === value.event){
-                    var ck = table.checkStatus(value.id);//获取选中数据
-                    if(ck.data.length === 0){
-                        putMsg({
-                            alert:"当前未选中任何数据！"
-                        });
-                        return false;
-                    }
-
-
-
-                    layer.confirm("确定要删除这"+ck.data.length+"条数据吗？",function(index){
-                        if(ck.isAll === true){
-                            oData = [];
-                            nCk = "all";//全部被选中
-                        }else {
-                            for (var j = 0; j < oData.length; j++) {
-                                //找出所有数据中的已选中数据并删除
-                                if (oData[j].LAY_CHECKED === true) {
-                                    oData.splice(j, 1);
-                                    //添加
-                                    nCk.push(oData[j][value.name]);
-                                } else {
-                                    delete oData[j]["LAY_CHECKED"];
-                                    delete oData[j]["LAY_TABLE_INDEX"];
-                                }
-                            }
-                            //上传已删除文件
-                            value.data = {};
-                            value.data[value.param] = nCk;
-                            value.success = function (res){
-                                if(res.code === 0){
-                                    layer.msg("数据删除成功！");
-                                    //重新渲染表格
-                                    table.reload(name,{
-                                        data : oData
-                                    });
-                                } else{
-                                    layer.msg("数据删除失败！")
-                                }
-                                layer.close(index);
-                            };
-                            subUp(value)
-                        }
-
-
-                    });
-                }
-            });
-
-
-        });
     }
 };
+
 //表格函数调用函数函数
-function tableFunc(fn){
+function tableFunc(fn) {
     if (Type(fn) === "json") {
         var obj = fn.obj || this;
         for (var name in fn) {
-            if(fn.hasOwnProperty(name)){
+            if (fn.hasOwnProperty(name)) {
                 if (func[name]) {
                     func[name].call(obj, fn[name]);
-                }else{
-                    switch(name){
+                } else {
+                    switch (name) {
                         case "btn":
-                        case "tools":func["toolFunc"].call(obj, fn["tools"]);break;
+                        case "tools":
+                            func["toolFunc"].call(obj, fn["tools"]);
+                            break;
+                        case "subTable":
+                        case "subs":
+                            func["delTable"].call(obj, fn["subs"]);
+                            break;
                     }
                 }
             }
         }
     } else {
         putMsg({
-            msg:"系统错误！",
-            error:"tableFunc参数填写错误",
-            log:arguments
+            msg: "系统错误！",
+            error: "tableFunc参数填写错误",
+            log: arguments
         });
     }
 }
@@ -1173,17 +1172,27 @@ document.write("<script type='text/javascript' data-version='x2' src='/static/ad
 document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/renderMod.js'></script>");
 document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/>");
 
-window.onload = function(){
+window.onload = function () {
     //填充页面URL，便于调试页面
-    $("body").prepend($("<p>").css({"position":"absolute","right":"0","color":"#f10214","border":"1px solid","padding":"5px","z-index": "99999"}).html("当前页面地址："+window.location.href).on("click",function(){$(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/}));
+    $("body").prepend($("<p>").css({
+        "position": "absolute",
+        "right": "0",
+        "color": "#f10214",
+        "border": "1px solid",
+        "padding": "5px",
+        "z-index": "99999"
+    }).html("当前页面地址：" + window.location.href).on("click", function () {
+        $(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/
+    }));
     //手机版显示 数据查找 按钮
-   var $dataSearch = $("a[lay-event='dataSearch']");
-   if($dataSearch.length>0){
-       $dataSearch.on('click',function(){
-           layOpen({
-               title:"数据查找",
-               content:$("#hideXs")
-           });
-       })
-   }
+    var $dataSearch = $("a[lay-event='dataSearch']");
+    if ($dataSearch.length > 0) {
+        $dataSearch.on('click', function () {
+            layOpen({
+                title: "数据查找",
+                content: $("#hideXs")
+            });
+            return false;
+        })
+    }
 };

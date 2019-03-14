@@ -1,7 +1,6 @@
 package com.litbo.hospital.security.dao.sqlprovider;
 
 import com.litbo.hospital.security.enums.EnumApplyStatus;
-import com.litbo.hospital.security.enums.EnumProcess;
 import org.apache.ibatis.jdbc.SQL;
 
 import java.util.Date;
@@ -57,7 +56,7 @@ public class FwPjqlZjbProvider {
                 LEFT_OUTER_JOIN("fw_pjzd as d on d.id = z.pjzd_id");
                 LEFT_OUTER_JOIN("eq_cs as c on c.sbcs_id = d.pj_scqy_id");
                 LEFT_OUTER_JOIN("eq_cs as s on s.sbcs_id = d.pj_ghs_id");
-                WHERE("f.fwId = #{fwId} and sq_status = " +EnumApplyStatus.APPLY_APPROVAL.getCode());
+                WHERE("f.fw_id = #{fwId} and sq_status = " +EnumApplyStatus.APPLY_APPROVAL.getCode());
             }
         }.toString();
     }

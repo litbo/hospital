@@ -5,15 +5,13 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.service.ZhiduService;
-import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ShMsgVO;
+import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ZhiduSubmitVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,8 +33,8 @@ public class ZhiduController {
     }
 
     @GetMapping("/getZdById")
-    public Result getZdById(String id){
-        SZhidu sZhidu = zhiduService.getZdById(id);
+    public Result getZdById(String zdId){
+        SZhidu sZhidu = zhiduService.getZdById(zdId);
         return Result.success(sZhidu);
     }
 
@@ -47,7 +45,7 @@ public class ZhiduController {
         return Result.success(zds);
     }
 
-    @GetMapping("/listZdsByTimeAndZdNameAndZt")
+    @RequestMapping("/listZdsByTimeAndZdNameAndZt")
     public Result listZdsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                                               String startTime, String endTime, String zdName, String zdZt){
@@ -109,12 +107,24 @@ public class ZhiduController {
         return Result.success(date);
     }
 
+    @GetMapping("/getShProcesses")
+    public Result getShProcesses(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 @RequestParam Integer zdId){
+        PageInfo date = zhiduService.getShProcesses(pageNum,pageSize,zdId);
+        return Result.success(date);
+    }
+
     @PostMapping("/submitShMsg")
     public Result submitShMsg(@RequestBody ShMsgVO shMsgVO){
 
+        if(shMsgVO.getNextShrId().equals("请选择")){
+            shMsgVO.setNextShrId(null);
+        }
         zhiduService.submitShMsg(shMsgVO);
         return Result.success();
     }
+
 
 
 }

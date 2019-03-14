@@ -1713,7 +1713,7 @@
                   },
                   {
                     "title": "综合查询",
-                    "url": "./table.html",
+                    "url": "./safe/medical-incident/suspicious-list.html",
                     "id": "43011",
                     "shiro": "a"
                   },

@@ -22,9 +22,6 @@
     </div>
 </div>
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
             <input class="layui-input" name="search" placeholder="编号" autocomplete="off">
@@ -35,50 +32,63 @@
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
 </script>
-
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">流程记录</a>
+</script>
 
 
 <script>
-    addTable ={
-        table:{
-            cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'post-number', title: '岗位职责编号', width:'30%',minWidth: 200,sort:true}
-                , {field: 'post-name', title: '岗位职责名称', minWidth: 150}
-                , {field: 'current-activity', title: '当前活动', minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "post-number":"",
-                    "post-name":"",
-                    "current-activity":''
-                },{
-                    "post-number":"",
-                    "post-name":"",
-                    "current-activity":''
-                },{
-                    "post-number":"",
-                    "post-name":"",
-                    "current-activity":''
-                },{
-                    "post-number":"",
-                    "post-name":"",
-                    "current-activity":''
-                },{
-                    "post-number":"",
-                    "post-name":"",
-                    "current-activity":''
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    ,{field:'post-number',title:'岗位职责编号',width:'30%',minWidth:200,sort:true}
+                    ,{field:'post-name',title:'岗位职责名称',minWidth:150}
+                    ,{field:'current-activity',title:'当前活动',minWidth:150}
+                    ,{field:'right',title:'操作',minWidth:200,toolbar:'#bar',align:'center'}
+                ]]
+                , url: "/supervise/gwgl/listGws"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": {
+                            tool:"toolbar",
+                            type: 2,
+                            title: "流程记录",
+                            event: "edit",
+                            content: ""
+                    }
                 })
             }
-        },
-        date :{
-            elem : "#date1",
-            type : "datetime"
+            },
+
+            reSet:{
+                url:"",
+                type:"search",
+                data:[""],
+                where: {
+
+                }
+
+            }
+
         }
     }
 </script>

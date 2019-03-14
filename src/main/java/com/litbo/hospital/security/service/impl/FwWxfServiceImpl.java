@@ -1,18 +1,20 @@
 package com.litbo.hospital.security.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwWxf;
 import com.litbo.hospital.security.dao.FwBaoxiuDao;
 import com.litbo.hospital.security.dao.FwPjqlDao;
+import com.litbo.hospital.security.dao.FwPjqlZjbDao;
 import com.litbo.hospital.security.dao.FwWxfDao;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwWxfService;
-import com.litbo.hospital.security.vo.FwIdSelectVo;
-import com.litbo.hospital.security.vo.FwNameVo;
-import com.litbo.hospital.security.vo.PjVo;
-import com.litbo.hospital.security.vo.WxfIndexVo;
+import com.litbo.hospital.security.vo.*;
+import com.litbo.hospital.supervise.dao.EmpDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +33,35 @@ public class FwWxfServiceImpl implements FwWxfService {
     @Autowired
     private FwPjqlDao fwPjqlDao;
 
+    @Autowired
+    private FwPjqlZjbDao fwPjqlZjbDao;
+
+    @Autowired
+    private EmpDao empDao;
+
+    @Override
+    public int updateWxf(Integer id, String wxfSpyj, Date wxfSptime) {
+        int i = fwWxfDao.updateWxfById(id, wxfSpyj, wxfSptime);
+        return i;
+    }
+
+    @Override
+    public FwWxfShIndexVo wxfShIndex(Integer id, String userId) {
+        FwWxfShIndexVo wxfSh = fwWxfDao.getWxfShById(id);
+        String username = empDao.getUserXmById(userId);
+        wxfSh.setShrName(username);
+        List<PjqlZjbExamineVO> pjList = fwPjqlZjbDao.selectFwPjqlByFwId(wxfSh.getFwId());
+        wxfSh.setPjList(pjList);
+        return wxfSh;
+    }
+
+    @Override
+    public PageInfo<WxfListVo> WxfList(String userId,Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<WxfListVo> pageInfo = new PageInfo<>(fwWxfDao.WxfList(userId));
+        return pageInfo;
+    }
+
     @Override
     public List<FwIdSelectVo> wxfGetEq(String userId) {
         List<FwIdSelectVo> list = fwWxfDao.wxfGetEq(userId);
@@ -47,6 +78,14 @@ public class FwWxfServiceImpl implements FwWxfService {
         List<PjVo> pjVos = fwPjqlDao.selectPjVo(wxf.getFwId());
         wxfIndexVo.setPjList(pjVos);
         return wxfIndexVo;
+    }
+
+    @Override
+    public FwWxfIndexVo fwWxfIndex(String fwId, String userId) {
+        FwWxfIndexVo fwWxfIndexVo = fwWxfDao.fwWxfIndex(fwId, userId);
+        List<PjqlZjbExamineVO> pjList = fwPjqlZjbDao.selectFwPjqlByFwId(fwId);
+        fwWxfIndexVo.setPjList(pjList);
+        return fwWxfIndexVo;
     }
 
     @Override

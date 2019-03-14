@@ -79,6 +79,10 @@ $(function () {
                             }
 
                             if(res.code === 0 && dat !== undefined){
+                                if(val.get.save){
+                                    val.get.save["val"] = dat;
+                                    console.log(val.get.save);
+                                }
                                 for (var name in dat) {
                                     if (dat.hasOwnProperty(name)) {
                                         if(val.dateName && name === val.dateName){
@@ -172,7 +176,6 @@ $(function () {
             if (file && file !== false) {
                 if (file === true) {
                     //渲染默认上传域
-                    //严重不推荐使用
                     cUp(nor_up);
                     //渲染单个上传域
                 } else if (Type(file) === "json") {
@@ -185,8 +188,43 @@ $(function () {
                         }
                     }
                 }
-
+                //文件上传事件
                 function cUp(options) {
+                    var dataP = {}, valus = "";
+                    if (Type(options.data) === "array") {
+                        //dataP 提交的数据 valus 填写的表单name值
+                        for (var i = 0; i < options.data.length; i++) {
+                            //获取一个name值
+                            valus = options.data[i];
+                            //获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
+                                var inputValue = $("input[name=" + valus + "]").val();
+                                if (inputValue) {
+                                    dataP[valus] = inputValue;
+                                } else if ($("select[name=" + valus + "]").val()) {
+                                    dataP[valus] = $("select[name=" + valus + "]").val();
+                                } else if($("textarea[name=" + valus + "]").val()){
+                                    dataP[valus] = $("textarea[name=" + valus + "]").val();
+                                } else if($("input[type=radio][name=" + valus + "]").val()){
+                                    dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
+                                } else if($("input[type=checkbox][name=" + valus + "]").val()){
+                                    var $cks = $("input[type=checkbox][name=" + valus + "]");
+                                    if($cks[0].checked === true){
+                                        dataP[valus] = $cks.val();
+                                    }
+                                }
+                        }
+                        //向data中直接添加附加数据
+                        if (options.add) {
+                            for (var names in options.add) {
+                                if (options.add.hasOwnProperty(names)) {
+                                    dataP[names] = options.add[names];
+                                }
+                            }
+                        }
+                    }else if(Type(options.data) === "json"){
+                        dataP = options.data;
+                    }
+                    options.data = dataP;
                     //console.log(options);
                     upload.render(options);
                     file.func && file.func();
@@ -374,46 +412,24 @@ $(function () {
                     if(res.add === true && res.add.tableId !== undefined){
                         nData = table.cache(res.add.tableId);
                     }
-                    var toEnd = false;
-                    subUp({
-                        url:res.url,
-                        type:res.method || "POST",
-                        async:false,
-                        data:resValue,
-                        success:function(res){
-                            if(res.code === 0){
-                                if(res.data.list.length === 0){
-                                    layer.msg("查无数据！");
-                                    table.reload(res.tid || args_table.id,
-                                        {
-                                            data:[],
-                                            url:false
-                                        })
-                                }else{
-                                    layer.msg("查找成功！");
-                                    table.reload(res.tid || args_table.id,
-                                        {
-                                            data:res.data.list,
-                                            url:false
-                                        })
-                                }
-
-                            }else{
-                                layer.msg("查找失败，请重试！");
-                                toEnd = true;
-                            }
-                        }
-                    });
-                    if(toEnd){
-                        return false;
-                    }
-                    /*//执行重载
+                    //执行重载
                     table.reload(
                         res.tid || args_table.id,
                         {
                             url: res.url
                             , where: resValue
-                        });*/
+                            , parseData:res.parseData || function(res){
+                                for(var x=0;x<nData.length;x++){
+                                    res.data.list.push(nData[x]);
+                                }
+                                return {
+                                    "code": res.code, //解析接口状态
+                                    "msg": res.msg, //解析提示文本
+                                    "count":res.data.total,//页面的所有数据数
+                                    "data": res.data.list //解析数据列表
+                                }
+                            }
+                        });
                     form.render();
                     //还原重载前的数据
                     if(res.add === true && res.add.tableId !== undefined){
@@ -623,12 +639,41 @@ $(function () {
                             }
                             //调用值
                             var name = item.name,
+                                param = {},
                                 value = item.value || item.key,
-                                url = item.url || "/admin/index/global/data.html";
+                                url = item.url || "/admin/index/global/data.html"
+                                ,content = url + "?key=" + item.key + "&vg=" + name;
+                            if(item.cb){
+                                content += "&cb=" + item.cb
+                            }
+                            if(item.db){
+                                content += "&db="+item.db
+                            }
+                            if(item.se){
+                                content += "&se="+item.se
+                            }
+                            if(item.value){
+                                content += "&v="+value
+                            }
+
+                            //提交之前运行一个函数
+                            var ss = item.before && item.before();
+                            //如果有返回值并且需要添加数据则循环添加
+                            if(ss && item.param && Type(item.param) === "array" && Type(ss) === "json"){
+                                for(var p=0;p<item.param.length;p++){
+                                    for(var nas in ss){
+                                        if(ss.hasOwnProperty(nas)){
+                                            if(nas === item.param[p]){
+                                                content += "&" + nas + "=" + ss[nas];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             layOpen({
                                 type:2,
                                 title:"选择数据",
-                                content:url+"?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+name+"&v="+item.value,
+                                content:content,
                                 area:["90%","90%"],
                                 end:function(){
                                     //获取数据并且删除数据

@@ -39,4 +39,6 @@ public interface ZhiduService {
     PageInfo listZdsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String zdName, String zdZt) throws  Exception;
 
     SZhidu getZdById(String id);
+
+    PageInfo getShProcesses(int pageNum,int pageSize,Integer zdId);
 }

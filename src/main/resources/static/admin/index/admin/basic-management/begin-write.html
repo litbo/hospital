@@ -30,7 +30,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>岗位职责信息</legend>
@@ -39,7 +39,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称</label>
                 <div class="layui-input-block">
-                    <select lay-filter="gwname">
+                    <select lay-filter="gw" name="gwId">
 
                     </select>
                 </div>
@@ -49,7 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位职责名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off">
+                    <input type="text" name="gwName" class="layui-input" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 </ul>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                        <textarea class="layui-textarea"></textarea>
+                        <textarea class="layui-textarea" name="gwZz"></textarea>
                     </div>
                     <div class="layui-tab-item">
                         <div class="layui-upload" style="margin-top:40px;">
@@ -83,16 +83,15 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" value="Admin">
+                    <input type="text" name="userId" class="layui-input" autocomplete="off" value="Admin">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>Admin</option>
-                        <option>aaa</option>
-                        <option>bbb</option>
+                    <select name="shrId">
+                        <option value="1615925037">Gowen</option>
+                        <option value="1615925008">李佳龙</option>
                     </select>
                 </div>
             </div>
@@ -101,7 +100,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="createTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">
                 </div>
             </div>
         </div>
@@ -110,7 +109,7 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary" id="startUploadFile">重置</button>
             </div>
         </div>
@@ -182,11 +181,25 @@
 
     renderMod = {
         form:{
+            submit:{
+                filter:"submit",//可以不写
+                form:{
+                    url:"/supervise/gwgl/gwzzSubmit",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["gwId","gwName","gwZz","userId","shrId","createTime"]
+                }//表单提交函数
+            },
             val:{
                 filter:"forms",
+                get:{
+                    url:"/supervise/gwgl/getGwByGwId",
+                    type:"GET",
+                    data:{gwId:$.getUrlParam('gwId')}
+                },
                 select:[
                     {
-                        filter:"gwname",
+                        filter:"gw",
                         ids:"gwId",
                         text:"gwName",
                         url:"/supervise/gwgl/listGws2"

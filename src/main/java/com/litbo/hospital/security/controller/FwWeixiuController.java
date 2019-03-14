@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 /**
  * @author zjc
  * @create 2018-12-06 13:08
@@ -22,6 +24,20 @@ public class FwWeixiuController {
 
     @Autowired
     private FwWeixiuService fwWeixiuService;
+
+    @GetMapping("/pjqlWxIndex")
+    public Result pjqlWxIndex(String wxrId){
+        try {
+            String wxrName = fwWeixiuService.pjqlWxIndex(wxrId);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("wxrName",wxrName);
+            System.out.println(map);
+            return Result.success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("数据返回异常");
+        }
+    }
 
     @GetMapping("/wxqsIndex")
     public Result wxqsIndex(String fwId){

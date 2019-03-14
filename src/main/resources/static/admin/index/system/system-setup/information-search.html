@@ -18,7 +18,7 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table" lay-filter="test"></table>
+        <table id="table" lay-filter="eqTable"></table>
     </div>
 </div>
 <script type="text/html" id="bar">
@@ -27,7 +27,7 @@
 </script>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
@@ -78,11 +78,21 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count":res.data.size,//页面显示的数据条数
+                        "count":res.data.total,//页面显示的数据条数
                         "data": res.data.list //解析数据列表
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        delTable:{
+                            id:"table",
+                            filter:"eqTable",
+                            name:"eqId",
+                            event:"del",
+                            url:"/eq/delEq",
+                            type:"POST"
+                        }
+                    })
 
                 }
             },

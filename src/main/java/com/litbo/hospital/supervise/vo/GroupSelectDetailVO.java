@@ -1,24 +1,20 @@
 package com.litbo.hospital.supervise.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
+import java.util.Date;
 import java.util.List;
 
+@Data
 public class GroupSelectDetailVO {
-    SGroupSelectVO groupSelectVO;
+    private Integer groupId;
+    private String bmName;
+    private String groupName;
+    private String userName1;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date createTime;
+    private String userName2;
     List<GroupUserSelectVO> userSelectVOS;
 
-    public SGroupSelectVO getGroupSelectVO() {
-        return groupSelectVO;
-    }
-
-    public void setGroupSelectVO(SGroupSelectVO groupSelectVO) {
-        this.groupSelectVO = groupSelectVO;
-    }
-
-    public List<GroupUserSelectVO> getUserSelectVOS() {
-        return userSelectVOS;
-    }
-
-    public void setUserSelectVOS(List<GroupUserSelectVO> userSelectVOS) {
-        this.userSelectVOS = userSelectVOS;
-    }
 }

@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>岗位职责信息</legend>
@@ -36,7 +36,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位职责名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="zdName" class="layui-input" autocomplete="off">
+                    <input type="text" name="gwName" class="layui-input" autocomplete="off">
 
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            <textarea class="layui-textarea"></textarea>
+                            <textarea class="layui-textarea" name="gwZz"></textarea>
                         </div>
                         <div class="layui-tab-item">
                             <div class="layui-upload" style="margin-top:40px;">
@@ -68,26 +68,36 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">审核结果<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="jieguo" value="通过" title="通过" checked>
-                    <input type="radio" name="jieguo" value="不通过" title="不通过">
+                    <input type="radio" name="ztCzzt" value="2" title="通过" checked>
+                    <input type="radio" name="ztCzzt" value="1" title="不通过">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" lay-verify="required">
+                    <input type="text" name="userId" class="layui-input" autocomplete="off" lay-verify="required">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">下一个审核人<span class="sign">*</span></label>
+            <div class="layui-form-item" id="nextShr">
+                <label class="layui-form-label">下一个审核人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" lay-verify="required">
+                    <select name="nextShrId">
+                        <option>请选择</option>
+                        <option value="1615925037">Gowen</option>
+                        <option value="1615925008">李佳龙</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" id="syDays">
+                <label class="layui-form-label">试用天数<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="syDays" class="layui-input" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="date" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="ztDate" class="layui-input" autocomplete="off" id="date" lay-verify="date">
                 </div>
             </div>
         </div>
@@ -95,7 +105,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">审核意见</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea"></textarea>
+                    <textarea class="layui-textarea" name="ztShyj"></textarea>
                 </div>
             </div>
         </div>
@@ -104,7 +114,7 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item" style="margin:20px 0;">
-                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="bb" id="upData">保存</button>
             </div>
         </div>
     </div>
@@ -116,73 +126,7 @@
 
 
 <script>
-    // layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
-    //     var form = layui.form
-    //         , layer = layui.layer
-    //         , layedit = layui.layedit
-    //         , element = layui.element
-    //         , upload = layui.upload
-    //         , laydate = layui.laydate;
-    //     //日期
-    //     laydate.render({
-    //         elem: '#date'
-    //     });
-    //
-    //     //创建一个编辑器
-    //     var editIndex = layedit.build('LAY_demo_editor');
-    //     //自定义验证规则
-    //     form.verify({
-    //         title: function (value) {
-    //             if (value.length < 5) {
-    //                 return '标题至少得5个字符啊';
-    //             }
-    //         }
-    //         , pass: [/(.+){6,12}$/, '密码必须6到12位']
-    //         , content: function (value) {
-    //             layedit.sync(editIndex);
-    //         }
-    //     });
-    //
-    //     //监听指定开关
-    //     form.on('switch(switchTest)', function (data) {
-    //         layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-    //             offset: '6px'
-    //         });
-    //         layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-    //     });
-    //
-    //     //监听提交
-    //     form.on('submit(demo1)', function (data) {
-    //         layer.alert(JSON.stringify(data.field), {
-    //             title: '最终的提交信息'
-    //         });
-    //         return false;
-    //     });
-    //
-    //     //弹出层设置
-    //     $('#layerBtn').click(function(){
-    //         layer.open({
-    //             type:2
-    //             ,title:'模板选择'
-    //             ,content:'./child/writeAdd.html'
-    //             ,area:['90%','90%']
-    //             ,btn:['选择','取消']
-    //         });
-    //         return false;
-    //     });
-    //
-    //     //文件下载
-    //     upload.render({
-    //         elem:'#selectFile',
-    //         url:'/upload/',
-    //         auto:false,
-    //         bindAction:'#startUploadFile',
-    //         size:1024*40,//限制文件大小，单位kb
-    //         done:function(res){
-    //             console.log(res);
-    //         }
-    //     })
-    // });
+
 
     renderMod = {
         form:{
@@ -193,18 +137,19 @@
             val:{
                 filter:"forms",
                 get:{
-                    url:"/supervise/zdgl/getZdById",
+                    url:"/supervise/gwgl/getGwByGwId",
                     type:"GET",
-                    data:{id:$.getUrlParam('id')}
+                    data:{gwId:$.getUrlParam('gwId')}
                 }
             },
             submit:{
                 form:{
-                    url:"/security/fp/updateFwFpStatus",
+                    url:"/supervise/gwgl/submitShMsg",
                     type:"POST",
-                    data:["shyj"],
+                    contentType:"application/json",
+                    data:["ztCzzt","nextShrId","ztDate","ztShyj","syDays"],
                     add:{
-                        id:$.getUrlParam("id")
+                        zdId:$.getUrlParam("gwId")
                     },
                     done:function(res){
                         if(res.code === 0){
@@ -219,6 +164,18 @@
         }
 
     }
+
+    $(function () {
+
+        var xx = $.getUrlParam('ztCzname');
+        if (xx == "处长审核") {
+            $("#nextShr").addClass("hidden");
+            $("#syDays").removeClass("hidden");
+        } else if(xx == "科长审核"){
+            $("#nextShr").removeClass("hidden");
+            $("#syDays").addClass("hidden");
+        }
+    })
 </script>
 </body>
 

@@ -473,7 +473,10 @@ public class BmServiceImpl implements BmService {
             String xbmFlag = row.getCell(8).getStringCellValue();
 
             bm.setObmId(obmId);
-            bm.setBmId(bmId);
+//            bm.setBmId(bmId);
+
+
+            bm.setBmId("0000000000");
             bm.setBmName(bmName);
             bm.setUserId(userId);
             bm.setBmTel(bmTel);
