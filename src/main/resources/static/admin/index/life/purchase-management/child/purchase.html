@@ -124,9 +124,9 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">添加生产商</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dateTable1"><i class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1" id="delTable1"><i class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
@@ -135,9 +135,9 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">功能配置列表</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew1"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-smaddNew" data-id="table1" id="dateTable2"><i class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew1"><i
+                    <button class="layui-btn layui-btn-danger layui-btn-smdelNew" data-id="table1" id="delTable2"><i
                             class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
@@ -264,12 +264,18 @@
         bind: {
             selectItem: [
                 {
-                    elem: "#selectRoom",
-                    cb: "/supervise/bmgl/listSelectBmsCols",
-                    db: "/supervise/bmgl/listBms",
-                    name: "dtdt",
-                    key: "radio",
-                    data: formData
+                    elem: "#dateTable1",
+                    url:"reference_firm.html",
+                    data:formData,
+                    key:"",
+                    name: "dtdt"
+                },
+                {
+                    elem: "#dateTable2",
+                    url:"function_configuration.html",
+                    data:formData,
+                    key:"",
+                    name: "dtd"
                 }
             ]
         },

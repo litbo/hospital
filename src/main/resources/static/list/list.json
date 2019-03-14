@@ -242,12 +242,6 @@
                     "url": "./life/purchase-management/purchase-gather.html",
                     "id": "30011",
                     "shiro": "a"
-                  },
-                  {
-                    "title": "临时采购授权",
-                    "url": "./life/purchase-management/temp-buy.html",
-                    "id": "30012",
-                    "shiro": "a"
                   }
                 ]
               },
@@ -570,12 +564,6 @@
                     "title": "计划查询",
                     "url": "./life/electric-bill/plan-search.html",
                     "id": "31111",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "账实核对",
-                    "url": "./life/electric-bill/purchase-check.html",
-                    "id": "31112",
                     "shiro": "a"
                   },
                   {
