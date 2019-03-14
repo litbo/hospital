@@ -78,6 +78,14 @@
                     key:$key,
                     value:sel
                 });
+                subUp({
+                    url:"###",
+                    type:"POST",
+                    async:false,
+                    data:{
+                        sel:sel
+                    }
+                });
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
                 return false;

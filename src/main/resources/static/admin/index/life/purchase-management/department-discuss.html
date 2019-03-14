@@ -116,21 +116,39 @@
 <script>
     var formData = {};
     renderMod = {
+        first:function(){
+          subUp({
+              url:"/lifeManage/selectSgDict",
+              type:"POST",
+              success:function(res){
+                  if(res.code === 0){
+                      formData["maxNum"] = Number(res.data["sgKstlRySl"]);
+                      console.log(formData);
+                  }
+              }
+          });
+
+        },
         form: {
             date: {
                 elem: "#date"
             },
             submit: {
                 before: function (param) {
-                    var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
+                    var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]),maxNum = 15;
                     console.log(formData);
                     if (doJudg({
                         "undefined": [formData.radio],
                         0: [tv, tv1]
-                    })) {
+                    })){
                         putMsg({
                             alert: "请选择数据后提交！",
                             log:[formData,tv,tv1]
+                        });
+                        return false;
+                    }else if(tv.length < formData.maxNum){
+                        putMsg({
+                            alert:"参加人数必须多于"+formData.maxNum+"人！"
                         });
                         return false;
                     }

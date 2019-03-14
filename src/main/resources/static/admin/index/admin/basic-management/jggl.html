@@ -13,6 +13,10 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <!--ZTREE-->
+    <link rel="stylesheet" href="/static/admin/css/tree/demo.css" type="text/css">
+    <link rel="stylesheet" href="/static/admin/css/tree/zTreeStyle.css" type="text/css">
+    <script src="/static/admin/js/jquery.ztree.all.js"></script>
     <style>
         .layui-inline{
             width:140px;
@@ -111,19 +115,27 @@
 
 
 <script>
-    //树形结构菜单
+    var setting = {
+        data:{
+            key:{
+                title:"bmName"
+            }
+        }
+    }
+    /*//树形结构菜单
     layui.use(['form',"tree","jquery"], function() {
         var form = layui.form, $ = layui.jquery,
             jsonP = {
-                elem: "#demo", click: function (node) {
+                elem: "#demo",
+                click: function (node) {
                     $.ajax({
-                        // url: "http://localhost:80/tree/wb/",
                         url: "/supervise/bmgl/listBms2",
                         method: "GET",
                         data: {pid: node.id},
                         async: false,
                         success: function (data) {
-                             // console.log(node.id);
+                             console.log(node);
+                             console.log(data);
                             node.children = data.data;
                             node.spread = true;
                             $("#demo").html("");
@@ -144,7 +156,7 @@
                 layui.tree(jsonP);
             }
         });
-    });
+    });*/
 </script>
 </body>
 </html>
