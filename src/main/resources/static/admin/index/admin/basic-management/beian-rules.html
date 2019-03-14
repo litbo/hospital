@@ -52,7 +52,7 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">再评价</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="revalue">再评价</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">详细</a>
 </script>
 <script>
@@ -91,7 +91,14 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "revalue",
+                            content:"check-revalue.html",
+                            dataUrl:["zdId"]
+                        }
+                    })
                 }
             },
             reSet:{

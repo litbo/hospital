@@ -2,18 +2,22 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
+import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.enums.ZDShProcessConstants;
 import com.litbo.hospital.supervise.enums.ZdCzztEnumProcess;
 import com.litbo.hospital.supervise.enums.ZdztEnumProcess;
 import com.litbo.hospital.supervise.service.ZhiduService;
 import com.litbo.hospital.supervise.vo.*;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +28,8 @@ import java.util.List;
 public class ZhiduServiceImpl implements ZhiduService {
     @Autowired
     private ZhiduDao zhiduDao;
+    @Autowired
+    private EmpDao empDao;
     @Override
     public PageInfo getZds(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -260,5 +266,33 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     }
 
-
+    @Override
+    public PageInfo getShProcesses(int pageNum, int pageSize, Integer zdId) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SZhiduzhizeZt> zts= zhiduDao.getShProcesses(zdId);
+        SZhidu zd = zhiduDao.getZdById(zdId.toString());
+        List<ZhiduShProcessDetailVO> processes = new ArrayList<>();
+        int i=1;
+        for(SZhiduzhizeZt zt:zts){
+            ZhiduShProcessDetailVO vo = new ZhiduShProcessDetailVO();
+            vo.setId(i);
+            vo.setZdName(zd.getZdName());
+            vo.setZtCzname(zt.getZtCzname());
+            SEmp shr = empDao.getEmpsById(zt.getUserId());
+            if(shr!=null)
+                vo.setShr(shr.getUserXm());
+            vo.setZtDate(zt.getZtDate());
+            if(zt.getZtCzzt()==2){
+                vo.setIsTg("通过");
+            }else if(zt.getZtCzzt()==1){
+                vo.setIsTg("不通过");
+            }else{
+                vo.setIsTg("待审核");
+            }
+            vo.setYj(zt.getZtShyj());
+            processes.add(vo);
+            i++;
+        }
+        return new PageInfo(processes);
+    }
 }

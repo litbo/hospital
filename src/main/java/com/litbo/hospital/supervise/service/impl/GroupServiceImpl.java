@@ -58,14 +58,24 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public void submitGroups(GroupInsertDetailVO groupInsertDetailVO) {
         // 设置审核状态
-        groupInsertDetailVO.getGroup().setShFlag(GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
-        groupDao.saveGroup(groupInsertDetailVO.getGroup());
+        SGroup group = new SGroup();
+        group.setGroupId(groupInsertDetailVO.getGroupId());
+        group.setBmId(groupInsertDetailVO.getBmId());
+        group.setGroupName(groupInsertDetailVO.getGroupName());
+        group.setCreateTime(new Date());
+        group.setUserId1(groupInsertDetailVO.getUserId1());
+        group.setUserId2(groupInsertDetailVO.getUserId2());
+        group.setShFlag(GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
+        group.setShTime(groupInsertDetailVO.getShTime());
+        group.setShYj(groupInsertDetailVO.getShYj());
+        groupDao.saveGroup(group);
 
         List<SGroupUser> users = groupInsertDetailVO.getUsers();
 //        for(SGroupUser user:users){
 //            groupDao.saveGroupUser(user);
 //        }
         for (SGroupUser user:users){
+            user.setGroupId(group.getGroupId());
             if(groupDao.getGroupUserByGuId(user.getGuId())!=null){   //能获取到  更新
                 groupDao.updateGroupUser(user);
             }else{
@@ -88,14 +98,28 @@ public class GroupServiceImpl implements GroupService {
         SGroupSelectVO  group = groupDao.getGroupSelectByGId(gid);
         //科室成员
         List<GroupUserSelectVO> users = groupDao.getGroupUserSelectByGId(gid);
-        vo.setGroupSelectVO(group);
+        vo.setGroupId(group.getGroupId());
+        vo.setBmName(group.getBmName());
+        vo.setGroupName(group.getGroupName());
+        vo.setUserName1(group.getUserName1());
+        vo.setCreateTime(group.getCreateTime());
+        vo.setUserName2(group.getUserName2());
         vo.setUserSelectVOS(users);
         return vo;
     }
 
     @Override
     public void shrShGroup(GroupInsertDetailVO groupInsertDetailVO) {
-        SGroup group = groupInsertDetailVO.getGroup();
+        SGroup group = new SGroup();
+        group.setGroupId(groupInsertDetailVO.getGroupId());
+        group.setBmId(groupInsertDetailVO.getBmId());
+        group.setGroupName(groupInsertDetailVO.getGroupName());
+        group.setCreateTime(new Date());
+        group.setUserId1(groupInsertDetailVO.getUserId1());
+        group.setUserId2(groupInsertDetailVO.getUserId2());
+        group.setShFlag(GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
+        group.setShTime(groupInsertDetailVO.getShTime());
+        group.setShYj(groupInsertDetailVO.getShYj());
         //设置审核时间
         group.setShTime(new Date());
         groupDao.updateShGroup(group);
@@ -107,7 +131,6 @@ public class GroupServiceImpl implements GroupService {
                 groupDao.saveGroupUser(user);
             }
         }
-
     }
 
     @Override

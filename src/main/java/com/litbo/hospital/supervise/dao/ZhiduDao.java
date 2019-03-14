@@ -15,7 +15,7 @@ import java.util.List;
 public interface ZhiduDao {
     @Select("select zd_id, bm_id, zd_name,zd_content, user_id, doc_url, create_time,zd_zt,sy_tianshu,sy_syts ,zd_xgcs from s_zhidu")
     public List<SZhidu> getZds() ;
-    @Select("select * from s_zhidu where zd_zt=#{zdZt}")
+    @SelectProvider(type = ZhiDuProvider.class,method = "listZdsByZdZt")
     List<ZhuduAndZdZzVO> listZdsByZdZt(String zdZt);
 
     //通过制度id查询SZhidu
@@ -95,5 +95,6 @@ public interface ZhiduDao {
     @Select("select * from s_zhidu where zd_id=#{id}")
     SZhidu getZdById(String id);
 
-    void updateZhiduZdzt(Integer zdId, int i);
+    @Select("select * from s_zhiduzhize_zt where zd_id=#{zdId}")
+    List<SZhiduzhizeZt> getShProcesses(Integer zdId);
 }
