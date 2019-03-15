@@ -8,7 +8,9 @@ import com.litbo.hospital.user.bean.SysZxsj;
 import com.litbo.hospital.user.dao.SysDao;
 import com.litbo.hospital.user.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -56,7 +58,7 @@ public class SysController {
     }
     //作息时间设置
     @RequestMapping("/setZxsj")
-    public Result setZxsj(SysZxsj zxsj){
+    public Result setZxsj(@RequestBody SysZxsj zxsj){
         if(sysService.setZxsj(zxsj)>0){
             return Result.success();
         }else {
