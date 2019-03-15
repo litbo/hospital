@@ -4,6 +4,7 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.dao.provider.EmpProvider;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import com.litbo.hospital.supervise.vo.JhEmpVo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -95,4 +96,16 @@ public interface EmpDao {
         "      zp = #{zp,jdbcType=VARCHAR}\n" +
         "    where user_id = #{userId,jdbcType=VARCHAR}")
     void updateEmp(SEmp emp);
+
+    @Select("SELECT\n" +
+            "emp.user_id AS empId,\n" +
+            "emp.user_xm,\n" +
+            "bm.bm_name\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.s_emp AS emp ,\n" +
+            "dbo.s_bm AS bm\n" +
+            "WHERE\n" +
+            "emp.bm_id = bm.bm_id")
+    public List<JhEmpVo> getJhEmpVo();
 }

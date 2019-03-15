@@ -1,7 +1,12 @@
 package com.litbo.hospital.security.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
+@Data
 public class JhRylr {
     private Integer id;
 
@@ -19,97 +24,14 @@ public class JhRylr {
 
     private String jhlrFzdw;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date jhlrFzTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date jhlrYxq;
 
     private String empId;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getJhlrPxgw() {
-        return jhlrPxgw;
-    }
-
-    public void setJhlrPxgw(String jhlrPxgw) {
-        this.jhlrPxgw = jhlrPxgw == null ? null : jhlrPxgw.trim();
-    }
-
-    public Integer getJhId() {
-        return jhId;
-    }
-
-    public void setJhId(Integer jhId) {
-        this.jhId = jhId;
-    }
-
-    public Double getJhlrCj() {
-        return jhlrCj;
-    }
-
-    public void setJhlrCj(Double jhlrCj) {
-        this.jhlrCj = jhlrCj;
-    }
-
-    public String getJhlrSgzmc() {
-        return jhlrSgzmc;
-    }
-
-    public void setJhlrSgzmc(String jhlrSgzmc) {
-        this.jhlrSgzmc = jhlrSgzmc == null ? null : jhlrSgzmc.trim();
-    }
-
-    public String getJhlrZjurl() {
-        return jhlrZjurl;
-    }
-
-    public void setJhlrZjurl(String jhlrZjurl) {
-        this.jhlrZjurl = jhlrZjurl == null ? null : jhlrZjurl.trim();
-    }
-
-    public Integer getSbId() {
-        return sbId;
-    }
-
-    public void setSbId(Integer sbId) {
-        this.sbId = sbId;
-    }
-
-    public String getJhlrFzdw() {
-        return jhlrFzdw;
-    }
-
-    public void setJhlrFzdw(String jhlrFzdw) {
-        this.jhlrFzdw = jhlrFzdw == null ? null : jhlrFzdw.trim();
-    }
-
-    public Date getJhlrFzTime() {
-        return jhlrFzTime;
-    }
-
-    public void setJhlrFzTime(Date jhlrFzTime) {
-        this.jhlrFzTime = jhlrFzTime;
-    }
-
-    public Date getJhlrYxq() {
-        return jhlrYxq;
-    }
-
-    public void setJhlrYxq(Date jhlrYxq) {
-        this.jhlrYxq = jhlrYxq;
-    }
-
-    public String getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
-    }
 }

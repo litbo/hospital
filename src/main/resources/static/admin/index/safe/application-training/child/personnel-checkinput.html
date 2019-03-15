@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>配件申购</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 6px!important;
+        }
+        .layui-form-label{
+            width:120px;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="" lay-filter="jhrylrForm">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>计划信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhName" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训类型<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhPxlx" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">主办单位<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="zbdw" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhKstime" class="layui-input" autocomplete="off"
+                           id="repairDate">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhJstime" class="layui-input" autocomplete="off"
+                           id="findDate">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>证件信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">证件名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhlrSgzmc" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">培训岗位<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhlrPxgw" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">发证单位<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhlrFzdw" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发证时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhlrFzTime" class="layui-input" autocomplete="off"
+                           id="appointRepairDate">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">有效期</label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhlrFzTime" class="layui-input" autocomplete="off"
+                           id="yxqRepairDate">
+                </div>
+            </div>
+
+            <input type="hidden" name="id">
+
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">人员信息</label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew" data-id="table"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                </div>
+            </div>
+            <table id="table" lay-filter="table1"></table>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">提交数据</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--<script type="text/html" id="price">
+    {{#
+    if(!d.pisgPrice){
+    return "0.00"
+    }else{
+    if(isNaN(Number(d.pisgPrice) !== false)){
+    return "0.00"
+    }else{
+    return d.pisgPrice
+    }
+    }
+    }}
+</script>
+
+<script type="text/html" id="number">
+    {{#
+    if(isNaN(Number(d.pjsgCount) !== false)){
+    return "1"
+    }else{
+    return d.pjsgCount
+    }
+    }}
+</script>-->
+
+
+
+<script>
+    formData={};
+    renderMod={
+        form:{
+            date: [
+                {
+                    elem: "#findDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#repairDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#appointRepairDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#yxqRepairDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                }
+            ],
+            val:{
+                filter:"jhrylrForm",
+                get:{
+                    url:"/Jh/jhrylrIndex",
+                    data:{
+                        id:$.getUrlParam("id")
+                    }
+                }
+            },
+            submit:{
+                before:function(param){
+                    var ts = getTableValue("table");
+                    return param = {
+                        1: {
+                            "jhlrSgzmc":$("input[name='jhlrSgzmc']").val(),
+                            "jhlrPxgw":$("input[name='jhlrPxgw']").val(),
+                            "jhlrFzdw":$("input[name='jhlrFzdw']").val(),
+                            "jhlrFzTime":$("input[name='jhlrFzTime']").val(),
+                            "jhlrYxq":$("input[name='jhlrYxq']").val(),
+                            "jhId":$("input[name='id']").val()
+                        },
+                        2:ts
+                    }
+                },
+                form:{
+                    url:"/Jh/addJhRy",
+                    type:"POST",
+                    contentType:"application/json",
+                    reload:true,
+                    param:{
+                        1:"jhRylr",
+                        2:"emps"
+                    }
+                }
+            }
+        },
+        bind:{
+            addItem: {
+                elem: "#addNew",
+                cb:"/Jh/jhryTitle",
+                db:"/Jh/jhryList",
+                name:"dtdt",
+                key:"jH"
+            },
+            delItem: "#delNew"
+        },
+        addTable :{
+            table:{
+                cols: [[ //表头
+                    {type: "checkbox"},
+                    {field: 'empId', title: 'Id'},
+                    {field: 'userXm', title: '人员姓名'},
+                    {field: 'bmName', title: '部门'}
+                ]]
+                , toolbar:false
+                , page:false
+                , height: "200"
+                , data: []
+                , text:{
+                    none:"请点击上方按钮添加数据！"
+                },
+                done:function(obj){
+                    tableFunc({
+                        tableEdit:{
+                            filter:"table1",
+                            confirm:false,
+                            func:function(val,back,obj){
+                                //数据不符合要求时还原本次修改
+                                if(isNaN(val) !== false){
+                                    //改变数据
+                                    obj.data[obj.field] = back;
+                                    //改变界面
+                                    $(this).val(back);
+                                    //更新数据
+                                    obj.update(obj.data);
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

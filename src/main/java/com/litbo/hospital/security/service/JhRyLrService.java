@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.service;
 
 import com.litbo.hospital.security.bean.JhRylr;
+import com.litbo.hospital.security.vo.JhryVo;
 
 import java.util.List;
 
@@ -10,6 +11,13 @@ import java.util.List;
  * 计划人员录入
  */
 public interface JhRyLrService {
+
+    /**
+     * 添加计划人员
+     * @param jhryVo
+     * @return
+     */
+    public int addJhry(JhryVo jhryVo);
 
     /**
      * 计划人员批量录入
