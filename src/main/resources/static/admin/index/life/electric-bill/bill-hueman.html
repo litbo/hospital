@@ -83,24 +83,14 @@
                             </select>
                         </label>
                     </div>
-                    <!--<div class="layui-inline xs-100 mar10-0 pad0-10">-->
                     <div class="layui-input-inline">
-                        <label>
-                            <select name="bmId" lay-filter="bmId"></select>
-                        </label>
+                        <select name="departmentId" lay-filter="departmentId">
+                            <option value="">全部部门</option>
+                        </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input class="layui-input" name="equipmentPinyinCode" placeholder="简称拼音码" autocomplete="off">
                     </div>
-                    <!--<div class="layui-inline xs-100 mar10-0 pad0-10">-->
-                        <!--<input class="layui-input" name="search" placeholder="设备品牌" autocomplete="off">-->
-                    <!--</div>-->
-                    <!--<div class="layui-inline xs-100 mar10-0 pad0-10">-->
-                        <!--<input class="layui-input" name="search" placeholder="设备型号" autocomplete="off">-->
-                    <!--</div>-->
-                    <!--<div class="layui-inline xs-100 mar10-0 pad0-10">-->
-                        <!--<input class="layui-input" name="search" placeholder="设备规格" autocomplete="off">-->
-                    <!--</div>-->
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">
                             查找
@@ -156,13 +146,13 @@
             url: "/lifeManage/selectEquipmentAccount",
             type: "reload",
             data: ["category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
-        }
-        ,form: {
+        },
+        form: {
             val: {
-                filter: "form",
+                filter: "forms",
                 select: [
                     {
-                        filter: "bmId",
+                        filter: "departmentId",
                         ids: "bmId",
                         text: "bmName",
                         url: "/supervise/bmgl/listBm"
