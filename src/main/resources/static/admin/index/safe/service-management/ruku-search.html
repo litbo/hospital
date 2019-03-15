@@ -58,7 +58,11 @@
 
     renderMod = {
         form:{
-            date:{elem:'#date',range:"~"}
+            date:{
+                elem:'#date',
+                range:"~",
+                value:today0
+            }
         },
         addTable: {
             table: {
@@ -92,7 +96,7 @@
                 type: "reload",
                 method:"GET",
                 data:["pjName"],     //搜索框的name
-                dat:["#date","pjRkTimeStart","pjRkTimeEnd"],
+                dat:["#date","pjRkTimeStart","pjRkTimeEnd","~"],
                 where: {}
             }
         }

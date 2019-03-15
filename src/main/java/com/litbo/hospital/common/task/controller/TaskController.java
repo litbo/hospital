@@ -23,7 +23,7 @@ public class TaskController {
     @RequestMapping(value = "listTaskByUserId",method = RequestMethod.GET)
     public Result listTaskByUserId(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
-        String userId = "1615925039";
+        String userId = "1615925023";
         //TODO
         PageInfo pageInfo = taskService.listTaskByUserId(userId,pageNum,pageSize);
         return Result.success(pageInfo);

@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 public class FwPjkServiceImpl implements FwPjkService {
     @Autowired
     private FwPjkDao fwPjkDao;
-    public PageInfo listFwPjk(int pageNum,int pageSize){
+    public PageInfo listFwPjk(int pageNum, int pageSize, String pjSzm){
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(fwPjkDao.listFwPjk());
+        return new PageInfo(fwPjkDao.listFwPjk(pjSzm));
 
     }
 

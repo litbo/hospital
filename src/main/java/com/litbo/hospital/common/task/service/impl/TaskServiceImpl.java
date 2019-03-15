@@ -8,6 +8,8 @@ import com.litbo.hospital.common.task.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaskServiceImpl implements TaskService {
     @Autowired
@@ -20,7 +22,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public PageInfo listTaskByUserId(String userId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(taskDao.listTaskByUserId(userId));
+        List<Task> res = taskDao.listTaskByUserId(userId);
+        for (Task task:res) {
+            task.setUrl(task.getUrl()+"?id="+task.getOther()+"&taskId="+task.getTaskId());
+        }
+        return new PageInfo(res);
     }
 
     @Override
