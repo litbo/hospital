@@ -26,6 +26,8 @@ public class FwPjsgController {
     @ApiOperation(value = "插入配件申购")
     @RequestMapping(value = "insertFwPjsg",method = RequestMethod.POST)
     public Result insertFwPjsg(@RequestBody InsertFwPjsgVo fwPjsgVo){
+        if(fwPjsgVo.getFwPjsgZjbs().size()<=0)
+            return Result.error(CodeMsg.PARAM_ERROR);
         try {//TODO
             fwPjsgVo.getFwPjsg().setUserId1("1615925039");
             int res = pjsgService.insertFwPjsg(fwPjsgVo);

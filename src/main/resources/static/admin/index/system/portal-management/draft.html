@@ -122,21 +122,15 @@
             date:[
                 {
                     elem:"#date1",
-                    value:today,
-                    type:"date",
-                    format:'yyyy-MM-dd'
+                    value:today0
                 },
                 {
                     elem:"#date2",
-                    value:today,
-                    type:"date",
-                    format:'yyyy-MM-dd'
+                    value:today0
                 },
                 {
                     elem:"#date3",
-                    value:today,
-                    type:"date",
-                    format:'yyyy-MM-dd'
+                    value:today0
                 }
             ],
             submit:{
@@ -150,6 +144,7 @@
                 form:{//或者写作up
                     url:"/gg/addGg",
                     type:"POST",
+                    contentType:"application/json",
                     data:["kssj","jssj","ngr","ggbt","ngsj","ggnr","gglxId"],
                     param:{
                         1:"bmId"

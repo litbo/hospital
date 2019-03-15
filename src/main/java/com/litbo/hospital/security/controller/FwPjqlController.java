@@ -24,9 +24,11 @@ public class FwPjqlController {
     @ApiOperation(value = "配件请领")
     @RequestMapping(value = "insertFwPjql",method = RequestMethod.POST)
     public Result insertFwPjql(@RequestBody InsertFwPjqlVo fwPjqlVo){
+        if(fwPjqlVo.getFwPjqlZjbs().size()<=0)
+            return Result.error(CodeMsg.PARAM_ERROR);
         try {
             //TODO 此处配件请领人从session中获取，并存入Pjql表中
-            String qlrId = "2";
+            String qlrId = "1615925039";
             fwPjqlVo.getFwPjql().setQlrId(qlrId);
             int res = pjqlService.insertFwPjql(fwPjqlVo);
             if(res>0){

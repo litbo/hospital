@@ -138,7 +138,16 @@
     var formData = {};
     renderMod={
         form:{
-            date:[{elem:'#zdate'},{elem:'#date'}],
+            date:[
+                {
+                    elem:'#zdate'
+                    ,value:today0
+                },
+                {
+                    elem: '#date'
+                    , value: today0
+                }
+            ],
             submit: {
                 filter: "submit",//可以不写
                 before:function(param){

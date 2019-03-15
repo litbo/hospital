@@ -8,6 +8,7 @@ import com.litbo.hospital.security.bean.*;
 import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.enums.EnumProcess;
+import com.litbo.hospital.security.enums.EnumURL;
 import com.litbo.hospital.security.service.FwPjqlService;
 import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.InsertFwPjqlVo;
@@ -68,7 +69,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
         task.setActionName("配件请领");
         task.setCreatTime(new Date());
         task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
-        task.setUrl("/admin/index/examine/examine-apply.html");
+        task.setUrl(EnumURL.EXAMINE_APPLY.getMessage());
         task.setJsrId(pjql.getQlrId());
         task.setOther(pjql.getId().toString());
         task.setWorkName("配件请领审核");

@@ -52,5 +52,7 @@ public class FwBlsj {
 
     private String sjcs;
 
+    private String lxdh;
+
 
 }
