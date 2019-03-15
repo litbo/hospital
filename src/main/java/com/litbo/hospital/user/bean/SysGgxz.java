@@ -1,5 +1,6 @@
 package com.litbo.hospital.user.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,6 +12,7 @@ public class SysGgxz {
     private Integer id;
 
     private String wjmc;
+    @JsonFormat(pattern ="yyyy-MM-dd" )
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date scrq;
 

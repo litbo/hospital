@@ -30,13 +30,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">文档名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" required lay-verify="required">
+                    <input type="text" name="wjmc" class="layui-input" autocomplete="off" required lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">上传日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" id="date" autocomplete="">
+                    <input type="text" name="scrq" class="layui-input" id="date" autocomplete="">
                 </div>
             </div>
         </div>
@@ -45,13 +45,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">上传人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ngr" autocomplete="off" class="layui-input" value="刘松峰">
+                    <input type="text" name="scr" autocomplete="off" class="layui-input" value="刘松峰">
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">文档</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" id="select">选择文件</button>
+                    <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-verify="require" id="select">选择文件</button>
                 </div>
             </div>
         </div>
@@ -60,16 +60,16 @@
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">文档内容</label>
+                <label class="layui-form-label" >文档内容</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" name="ggnr" class="layui-textarea"></textarea>
+                    <textarea placeholder="请输入内容" name="wjsm" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="sub">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="submit" id="sub">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -82,18 +82,22 @@
 
 
 <script>
+    formData={};
     renderMod = {
         form:{
             submit:{
                 filter:"submit",//可以不写
                 form:{
-                    url:"/sys/setDxm",
+                    url:"/ggxz/addGgxz",
                     type:"POST",
-                    data:["btl","ckh"]
+                    contentType:"application/json",
+                    data:["wjmc","scrq","scr","wjsm"],
+                    param:{
+                        1:"url"
+                    },
+                    reload:true
                 },//表单提交函数
                 before:function(data){
-                    //console.log("1111");
-                    //console.log(data);
                     for(var name in data.field){
                         if(data.field.hasOwnProperty(name)){
                             if(data.field[name] === ""){
@@ -105,21 +109,32 @@
                             //console.log("is true");
                         }
                     }
-                    return true;
+
+                    return param = {
+                        1:formData.url
+                    }
                 }
+
             },
             date:{
                 elem:'#date',
-                value: today,
-                format: "y-M-d"
+                value: today0,
+                format:'yyyy-MM-dd'
             },
             file:{
                 elem:'#select',
-                url:'',
-                auto:false,
-                bindAction:'#sub',
+                url:'/eq/uploadFile',
+                accept:"file",
+
+                auto:true,
                 done:function(res){
-                    console.log(res);
+                    if(res.code ===0){
+                        formData.url=res.data;
+                        layer.msg('选择成功！', {
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                    }
+
                 }
             }
         }

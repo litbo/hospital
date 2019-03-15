@@ -64,9 +64,9 @@ public class EqController {
      * @return
      **/
     @RequestMapping(value = "/addEq")
-    public Result addEq(EqInfo eqInfo) {
+    public Result addEq(@RequestBody EqInfo eqInfo) {
 
-        if (es.addEq(eqInfo) > 0) {
+            if (es.addEq(eqInfo) > 0) {
             return Result.success();
         }
         return Result.error();
