@@ -118,10 +118,14 @@
     var setting = {
         data:{
             key:{
-                title:"bmName"
+                title:"bmName",
+                name:"bmName",
+                url:"url"
             }
         }
-    }
+    };
+
+    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
     /*//树形结构菜单
     layui.use(['form',"tree","jquery"], function() {
         var form = layui.form, $ = layui.jquery,
