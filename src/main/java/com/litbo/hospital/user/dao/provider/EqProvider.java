@@ -107,7 +107,7 @@ public class EqProvider {
                 "      eq_dabh, eq_yq, eq_sbzp, \n" +
                 "      eq_mpzp, qdfs_id, gzlb_id, \n" +
                 "      eq_usewater, eq_dcysl, eq_edgl, \n" +
-                "      eq_bz, eq_azhjyq,eq_name,eq_pym)\n" +
+                "      eq_bz, eq_azhjyq,eq_name,eq_syzt,eq_pym)\n" +
                 "    values (#{eqId,jdbcType=INTEGER}, #{eqSbbh,jdbcType=VARCHAR}, #{eqZcbh,jdbcType=VARCHAR}, \n" +
                 "      #{eqPmId,jdbcType=INTEGER}, #{eqGg,jdbcType=VARCHAR}, #{eqXh,jdbcType=VARCHAR}, \n" +
                 "      #{zjlyId,jdbcType=CHAR}, #{eqJldwId,jdbcType=CHAR}, #{eqPrice,jdbcType=DECIMAL}, \n" +
@@ -123,7 +123,7 @@ public class EqProvider {
                 "      #{eqDabh,jdbcType=VARCHAR}, #{eqYq,jdbcType=VARCHAR}, #{eqSbzp,jdbcType=VARCHAR}, \n" +
                 "      #{eqMpzp,jdbcType=VARCHAR}, #{qdfsId,jdbcType=INTEGER}, #{gzlbId,jdbcType=INTEGER}, \n" +
                 "      #{eqUsewater,jdbcType=CHAR}, #{eqDcysl,jdbcType=INTEGER}, #{eqEdgl,jdbcType=INTEGER}, \n" +
-                "      #{eqBz,jdbcType=LONGVARCHAR}, #{eqAzhjyq,jdbcType=LONGVARCHAR} ,#{eqName},#{eqPym})";
+                "      #{eqBz,jdbcType=LONGVARCHAR}, #{eqAzhjyq,jdbcType=LONGVARCHAR} ,#{eqName},#{eqSyzt},#{eqPym})";
         return SQL;
 
     }

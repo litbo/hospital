@@ -25,7 +25,10 @@ public class UserServiceImpl implements UserService {
         u.setUserName(userId);
         u.setUserPwd(userId);
         //修改emp表中标记值   未写
-        return userDao.addUser(u);
+        if(userDao.addUser(u)>0){
+           return userDao.changeStatus(userId);
+        }
+        return -1;
     }
 
     @Override
