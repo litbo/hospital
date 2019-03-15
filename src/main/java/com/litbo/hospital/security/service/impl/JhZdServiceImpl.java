@@ -8,6 +8,8 @@ import com.litbo.hospital.security.dao.JhRyLrDao;
 import com.litbo.hospital.security.dao.JhZdDao;
 import com.litbo.hospital.security.service.JhZdService;
 import com.litbo.hospital.security.vo.JhZdVo;
+import com.litbo.hospital.supervise.dao.EmpDao;
+import com.litbo.hospital.supervise.vo.JhEmpVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,16 @@ public class JhZdServiceImpl implements JhZdService {
 
     @Autowired
     private JhRyLrDao jhRyLrDao;
+
+    @Autowired
+    private EmpDao empDao;
+
+    @Override
+    public PageInfo<JhEmpVo> jhryList(Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<JhEmpVo> pageInfo = new PageInfo<>(empDao.getJhEmpVo());
+        return pageInfo;
+    }
 
     /**
      * 计划添加
@@ -49,6 +61,18 @@ public class JhZdServiceImpl implements JhZdService {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<JhZdVo> pageInfo = new PageInfo<>(jhZdDao.jhzdList(createdate,jhName));
         return Result.success(pageInfo);
+    }
+
+    @Override
+    public Result jhrylrListIndex(int pageNum, int pageSize, String createdate, String jhName) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<JhZdVo> pageInfo = new PageInfo<>(jhZdDao.jhrylrListIndex(createdate,jhName));
+        return Result.success(pageInfo);
+    }
+
+    @Override
+    public JhZd jhrylrIndex(Integer id) {
+        return jhZdDao.getJhzdById(id);
     }
 
 }

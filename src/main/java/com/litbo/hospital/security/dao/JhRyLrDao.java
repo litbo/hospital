@@ -1,10 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.JhRylr;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -33,5 +30,8 @@ public interface JhRyLrDao {
 
     @Select("select * from jh_rylr where emp_id=#{empId}")
     public List<JhRylr> getJhRyLrByEmpId(String empId);
+
+    @Select("select * from jh_rylr where emp_id=#{empId} and jh_id = #{jhId}")
+    public List<JhRylr> getJhRyLrByEmpIdAndJhId(@Param("empId") String empId ,@Param("jhId") Integer jhId);
 
 }

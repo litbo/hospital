@@ -25,6 +25,33 @@ public class FwWeixiuController {
     @Autowired
     private FwWeixiuService fwWeixiuService;
 
+    @GetMapping("/jumpPj")
+    public Result addPj(String wxrId,String gzwxFs){
+
+        try {
+            System.out.println(gzwxFs);
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("数据异常");
+        }
+
+    }
+
+    @PostMapping("/jumpWxwc")
+    public Result addWx(FwWeixiu fwWeixiu){
+
+        try {
+            System.out.println(fwWeixiu);
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("数据异常");
+        }
+
+    }
+
+
     @GetMapping("/pjqlWxIndex")
     public Result pjqlWxIndex(String wxrId){
         try {

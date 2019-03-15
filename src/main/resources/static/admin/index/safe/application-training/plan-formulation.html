@@ -99,15 +99,18 @@
 
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">开始日期</label>
+                <label class="layui-form-label">开始时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhKstime" id="date" class="layui-input">
+                    <input type="text" name="jhKstime" class="layui-input" autocomplete="off"
+                           id="repairDate">
                 </div>
             </div>
+
             <div class="layui-form-item">
-                <label class="layui-form-label">结束日期<span class="sign">*</span></label>
+                <label class="layui-form-label">结束时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhJstime" id="date1" class="layui-input">
+                    <input type="text" name="jhJstime" class="layui-input" autocomplete="off"
+                           id="findDate">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -247,6 +250,26 @@
 
 <script>
     renderMod.form={
+        date: [
+            {
+                elem: "#findDate",
+                value:today0+" "+time0,
+                type:"datetime",
+                format:'yyyy-MM-dd HH:mm:ss'
+            },
+            {
+                elem: "#repairDate",
+                value:today0+" "+time0,
+                type:"datetime",
+                format:'yyyy-MM-dd HH:mm:ss'
+            },
+            {
+                elem: "#appointRepairDate",
+                value:today0+" "+time0,
+                type:"datetime",
+                format:'yyyy-MM-dd HH:mm:ss'
+            }
+        ],
         submit:{
             filter:true,
             form:{
