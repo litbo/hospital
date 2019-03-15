@@ -258,6 +258,11 @@
                     key:$key,
                     value:pData
                 });
+                subUp({
+                    url:"###",
+                    type:"POST",
+                    data:pData
+                });
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
             }

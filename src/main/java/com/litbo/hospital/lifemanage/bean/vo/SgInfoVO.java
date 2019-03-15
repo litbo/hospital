@@ -1,5 +1,7 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.litbo.hospital.lifemanage.bean.SgCkcssb;
+import com.litbo.hospital.lifemanage.bean.SgGnpz;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -89,5 +91,9 @@ public class SgInfoVO {
     /**
      * 申购单对应的参考设备商列表
      */
-    private List<SgCkcssbVO> sgCkcssbVOs;
+    private List<SgCkcssb> sgCkcssbs;
+    /**
+     * 参考厂商对应的功能配置
+     */
+    private List<SgGnpz> sgGnpzs;
 }

@@ -3,8 +3,8 @@ package com.litbo.hospital.supervise.vo;
 import java.util.Date;
 
 public class SGroupSelectVO {
-    private Integer groupId;
 
+    private Integer groupId;
     private String bmId;
     private String bmName;
 

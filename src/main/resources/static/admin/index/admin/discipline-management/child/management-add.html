@@ -38,45 +38,34 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">员工<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select id="s1" name="s1" lay-verify="required">
+                    <select id="userId" name="z" lay-verify="required">
                         <option></option>
-                        <option value="于金科">于金科</option>
-                        <option value="刘松峰">刘松峰</option>
-                        <option value="姚美丽">姚美丽</option>
-                        <option value="杨凯">杨凯</option>
-                        <option value="杨永鹏">杨永鹏</option>
+                        <option value="1615925037">于金科</option>
+                        <option value="1615925038">刘松峰</option>
+                        <option value="1615925039">姚美丽</option>
+                        <option value="1615925030">杨凯</option>
+                        <option value="1615925030">杨永鹏</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select id="s2" name="s2" lay-verify="required">
+                    <select id="gwId" name="gwId" lay-filter="gw">
                         <option></option>
-                        <option value="主管院长">主管院长</option>
-                        <option value="设备处长">设备处长</option>
-                        <option value="院长">院长</option>
-                        <option value="医院设备报废技术鉴定小组组长">医院设备报废技术鉴定小组组长</option>
-                        <option value="采购供应科科长">采购供应科科长</option>
-                        <option value="医学装备管理委员会主任">医学装备管理委员会主任</option>
-                        <option value="医学计量管理委员会会长">医学计量管理委员会会长</option>
-                        <option value="设备副处长">设备副处长</option>
-                        <option value="质量管理科科长">质量管理科科长</option>
-                        <option value="信息处处长">信息处处长</option>
-                        <option value="信息处副处长">信息处副处长</option>
-                        <option value="计量室主任">计量室主任</option>
-                        <option value="质检室主任">质检室主任</option>
-                        <option value="主管会计">主管会计</option>
-                        <option value="档案室主任">档案室主任</option>
-                        <option value="库房主管">库房主管</option>
-                        <option value="检测室主任">检测室主任</option>
-                        <option value="普通设备科科长">普通设备科科长</option>
-                        <option value="电子设备科科长">电子设备科科长</option>
-                        <option value="影像设备科科长">影像设备科科长</option>
-                        <option value="综合管理科科长">综合管理科科长</option>
-                        <option value="成本核算室主任">成本核算室主任</option>
-                        <option value="监测员(物资)">监测员(物资)</option>
-                        <option value="监测员(医务)">监测员(医务)</option>
+                        <option value="1">主管院长</option>
+                        <option value="2">设备处长</option>
+                        <option value="3">院长</option>
+                        <option value="4">医院设备报废技术鉴定小组组长</option>
+                        <option value="5">采购供应科科长</option>
+                        <option value="6">医学装备管理委员会主任</option>
+                        <option value="7">医学计量管理委员会会长</option>
+                        <option value="8">设备副处长</option>
+                        <option value="9">质量管理科科长</option>
+                        <option value="10">信息处处长</option>
+                        <option value="11">信息处副处长</option>
+                        <option value="12">计量室主任</option>
+                        <option value="13">质检室主任</option>
                     </select>
                 </div>
             </div>
@@ -116,6 +105,17 @@
         form: {
             date: {
                 elem: "#date"
+            },
+            val:{
+                filter:"forms",
+                select:[
+                    {
+                        filter:"gw",
+                        ids:"gwId",
+                        text:"gwName",
+                        url:"/sybm/ksgl/listGroups2"
+                    }
+                ]
             },
             submit: {
                 form: {
@@ -157,8 +157,8 @@
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 's1', title: '员工', minWidth: 150}
-                        , {field: 's2', title: '岗位', minWidth: 150}
+                        , {field: 'userName', title: '员工', minWidth: 150}
+                        , {field: 'gwName', title: '岗位', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -176,10 +176,20 @@
                 elem:'#addNew',
                 func:function(){
                     var new1 = {};
-                    new1.s1 = $('#s1').val();
-                    new1.s2 = $('#s2').val();
+                    new1.userId = $('#userId').val();
+                    for(var i=0;i<$("#userId option").length;i++){
+                        if($("#userId option")[i].value===new1.userId){
+                            new1.userName=$("#userId option")[i].innerHTML
+                        }
+                    }
+                    new1.gwId = $('#gwId').val();
+                    for(var j=0;j<$("#gwId option").length;j++){
+                        if($("#gwId option")[j].value===new1.gwId){
+                            new1.gwName=$("#gwId option")[j].innerHTML
+                        }
+                    }
                     var bg = getTableValue('table');
-                    if(new1.s1==="" || new1.s2===""){
+                    if(new1.userId==="" || new1.gwId===""){
                         putMsg({
                             alert:'当前未选中数据'
                         });

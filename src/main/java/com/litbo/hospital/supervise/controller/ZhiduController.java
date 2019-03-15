@@ -5,15 +5,13 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.service.ZhiduService;
-import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ShMsgVO;
+import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
 import com.litbo.hospital.supervise.vo.ZhiduSubmitVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -106,6 +104,14 @@ public class ZhiduController {
     @GetMapping("/getShDetailMgs")
     public Result getShDetailMgsByZdId(@RequestParam Integer zdId,@RequestParam String shrId){
         ZdShDetailMsg date = zhiduService.getShDetailMgsByZdId(zdId,shrId);
+        return Result.success(date);
+    }
+
+    @GetMapping("/getShProcesses")
+    public Result getShProcesses(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 @RequestParam Integer zdId){
+        PageInfo date = zhiduService.getShProcesses(pageNum,pageSize,zdId);
         return Result.success(date);
     }
 

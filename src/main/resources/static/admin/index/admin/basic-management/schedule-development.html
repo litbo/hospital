@@ -27,9 +27,9 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 <script type="text/html" id="bar">
@@ -49,10 +49,10 @@
                     {checkbox:true,fixed:true}
                     , {field: 'zdId', title: '制度编号', width:'35%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
-                    , {field: 'current-activity', 'title':'当前活动',minWidth:150}
+                    , {field: 'ztCzname', 'title':'当前活动',minWidth:150}
                     , {fixed: 'right', align:'center', minWidth:100,title:'操作',toolbar:'#bar'}
                 ]]
-                , url: "/supervise/zdgl/listZds2"
+                , url: "/supervise/zdgl/listZdsByZdZt"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -69,25 +69,21 @@
                     }
                 }
                 , done: function (obj) {
+                    
                     tableFunc({
-                        "obj":obj,
-                        "toolFunc":{
-                            "event":'edit',
-                            "title":'流程记录',
-                            "type":2,
-                            "content":'./child/schedule-developmentAdd.html'
+                        tools:{
+                            type:2,
+                            event: "edit",
+                            content:"./child/schedule-developmentDetail.html",
+                            dataUrl:["zdId"]
                         }
                     })
-
                 }
             },
             reSet:{
-                url:"/supervise/bmgl/listFWXBmByBmName",
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt",
                 type:"search",
-                data:["bmName"],    //搜索框的name
-                where: {
-
-                }
+                data:["zdName"],    //搜索框的name
             }
         }
     }

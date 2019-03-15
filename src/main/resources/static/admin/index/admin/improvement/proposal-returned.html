@@ -44,47 +44,59 @@
 
 
 <script>
-    renderMod = {
-        addTable: {
-            table: {
-                cols: [[ //表头
-                    {type:"checkbox"}
-                    , {field: 'proposal-name', title: '提案名称', minWidth: 200}
-                    , {field: 'proposal-type' , title:'提案类型',minWidth:150}
-                    , {field: 'proposal-person', title:'提案人',minWidth:150}
-                    , {field: 'proposal-date', title:'提案日期',minWidth:150,sort:true}
-                    , {field: 'range', title:'使用范围',minWidth:150}
-                    , {field: 'section', title:'科室',minWidth:150}
-                ]]
-                , url: "/supervise/gwgl/listGws"
-                , request: {
-                    pageName: 'pageNum',
-                    limitName: 'pageSize'
-                }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
-                , parseData: function (res) { //res 即为原始返回的数据
-                    return {
-                        "code": res.code, //解析接口状态
-                        "msg": res.msg, //解析提示文本
-                        "data": res.data.list ,//解析数据列表
-                        "count":res.data.total
-                    }
-                }
-            },
-
-            reSet:{
-                url:"",
-                type:"search",
-                data:[""],
-                where: {
-
-                }
-
+    addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"checkbox"}
+                , {field: 'proposal-name', title: '提案名称',width:"30%", minWidth: 200}
+                , {field: 'proposal-type' , title:'提案类型',minWidth:150}
+                , {field: 'proposal-person', title:'提案人',minWidth:150}
+                , {field: 'proposal-date', title:'提案日期',minWidth:150,sort:true}
+                , {field: 'range', title:'使用范围',minWidth:150}
+                , {field: 'section', title:'科室',minWidth:150}
+            ]]
+            , "data": [
+                {
+                    "proposal-name":'',
+                    "proposal-type":'',
+                    "proposal-person":'',
+                    "proposal-date":'',
+                    "range":'',
+                    "section":''
+                },{
+                    "proposal-name":'',
+                    "proposal-type":'',
+                    "proposal-person":'',
+                    "proposal-date":'',
+                    "range":'',
+                    "section":''
+                },{
+                    "proposal-name":'',
+                    "proposal-type":'',
+                    "proposal-person":'',
+                    "proposal-date":'',
+                    "range":'',
+                    "section":''
+                },{
+                    "proposal-name":'',
+                    "proposal-type":'',
+                    "proposal-person":'',
+                    "proposal-date":'',
+                    "range":'',
+                    "section":''
+                },{
+                    "proposal-name":'',
+                    "proposal-type":'',
+                    "proposal-person":'',
+                    "proposal-date":'',
+                    "range":'',
+                    "section":''
+                }]
+            , done: function (obj) {
+                tableFunc({
+                    "obj":obj
+                })
             }
-
         }
     }
 </script>

@@ -40,4 +40,5 @@ public interface ZhiduService {
 
     SZhidu getZdById(String id);
 
+    PageInfo getShProcesses(int pageNum,int pageSize,Integer zdId);
 }

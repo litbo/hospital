@@ -17,10 +17,10 @@ public interface SgGnpzMapper {
      * @param sgGnpz 功能配置信息
      * @return 添加的记录数
      */
-    @Insert("insert into sg_gnpz (gnpz_id, ckcssb_id, gnpz_mc, \n" +
+    @Insert("insert into sg_gnpz (gnpz_id, sg_id, gnpz_mc, \n" +
             "   gnpz_ms, gnpz_issy, extend_one, \n" +
             "   extend_two)\n" +
-            "values (#{gnpzId,jdbcType=VARCHAR}, #{ckcssbId,jdbcType=VARCHAR}, #{gnpzMc,jdbcType=VARCHAR}, \n" +
+            "values (#{gnpzId,jdbcType=VARCHAR}, #{sgId,jdbcType=VARCHAR}, #{gnpzMc,jdbcType=VARCHAR}, \n" +
             "   #{gnpzMs,jdbcType=VARCHAR}, #{gnpzIssy,jdbcType=CHAR}, #{extendOne,jdbcType=VARCHAR}, \n" +
             "   #{extendTwo,jdbcType=VARCHAR})")
     int insertSgGnpz(SgGnpz sgGnpz);
@@ -28,12 +28,12 @@ public interface SgGnpzMapper {
     /**
      * 通过参考厂商设备id查询对应的功能配置
      *
-     * @param sgCkcssbId 参考厂商设备id
+     * @param sgInfoId 申购单id
      * @return List<SgGnpz>
      */
     @Select("SELECT\n" +
             "dbo.sg_gnpz.gnpz_id,\n" +
-            "dbo.sg_gnpz.ckcssb_id,\n" +
+            "dbo.sg_gnpz.sg_id,\n" +
             "dbo.sg_gnpz.gnpz_mc,\n" +
             "dbo.sg_gnpz.gnpz_ms,\n" +
             "dbo.sg_gnpz.gnpz_issy,\n" +
@@ -42,15 +42,15 @@ public interface SgGnpzMapper {
             "FROM\n" +
             "dbo.sg_gnpz\n" +
             "WHERE\n" +
-            "dbo.sg_gnpz.ckcssb_id = #{sgCkcssbId,jdbcType=VARCHAR}")
-    List<SgGnpz> selectSgGnpzBySgCkcssbId(String sgCkcssbId);
+            "dbo.sg_gnpz.sg_id = #{sgInfoId,jdbcType=VARCHAR}")
+    List<SgGnpz> selectSgGnpzBySgInfoId(String sgInfoId);
 
      /**
      * 根据主键删除功能配置信息
      *
-     * @param ckcssbId 功能配置id
+     * @param sgInfoId 申购单id
      * @return 删除的记录数
      */
-    @Delete("DELETE FROM sg_gnpz WHERE ckcssb_id = #{ckcssbId,jdbcType=VARCHAR}")
-    int deleteSgGnpzByCkcssbId(String ckcssbId);
+    @Delete("DELETE FROM sg_gnpz WHERE sg_id = #{sgInfoId,jdbcType=VARCHAR}")
+    int deleteSgGnpzBySgInfoId(String sgInfoId);
 }

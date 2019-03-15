@@ -39,7 +39,7 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase">审核</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchase" lay-filter="purchase">审核</a>
 </script>
 
 <script>
@@ -71,7 +71,14 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "purchase",
+                            content:"./child/management-sh.html",
+                            dataUrl:["groupId"]
+                        }
+                    })
                 }
             },
 

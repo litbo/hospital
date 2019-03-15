@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title">
             <legend>科室管理团队分工</legend>
@@ -119,37 +119,25 @@
             date: {
                 elem: "#date"
             },
+
             submit: {
-                form: {
                     before: function () {
-                        var ug = getTableValue("table");
-                        if (doJudg({
-                            "undefined": [formData.person, formData.user],
-                            0: [ug]
-                        })) {
-                            putMsg({
-                                alert: "无法提交空数据！"
-                            });
-                            return false;
-                        }
+                        var users = getTableValue("table");
                         return param = {
-                            1: formData.person.userIdJl,
-                            2: ug
+                            1: formData.radio[0]["bmId"],
+                            2: users
                         };
                     },
                     form: {
                         url: "/sybm/ksgl/submitGroups",
                         type: "POST",
+                        contentType:"application/json",
                         data: ["groupName", "userId1", "userId2"],
                         param: {
-                            1: "userIdJl",
-                            2: "ug"
-                        },
-                        add: {
-                            bmId: 1
+                            1: "bmId",
+                            2: "users"
                         }
                     }
-                }
             }
         },
         addTable: {
@@ -157,8 +145,8 @@
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 's1', title: '员工', minWidth: 150}
-                        , {field: 's2', title: '岗位', minWidth: 150}
+                        , {field: 'userName', title: '员工', minWidth: 150}
+                        , {field: 'gwName', title: '岗位', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
