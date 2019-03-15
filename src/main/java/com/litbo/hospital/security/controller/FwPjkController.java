@@ -16,9 +16,10 @@ public class FwPjkController {
     private FwPjkService pjkService;
     @RequestMapping(value = "listFwPjk",method = RequestMethod.GET)
     public Result listFwPjk(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                            @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
+                            @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
+                            @RequestParam(value = "pjSzm",required = false)String pjSzm){
         try {
-            return Result.success(pjkService.listFwPjk(pageNum,pageSize));
+            return Result.success(pjkService.listFwPjk(pageNum,pageSize,pjSzm));
         }catch (Exception e){
             e.printStackTrace();
             return Result.error(CodeMsg.SERVER_ERROR);

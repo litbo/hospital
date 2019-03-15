@@ -9,10 +9,7 @@ import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwFpService;
 import com.litbo.hospital.security.vo.SelectFwFpByIdVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -38,9 +35,9 @@ public class FwFpController {
         return Result.success(pageInfo);
     }
     @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
-    public Result insertFwFp(FwFp fp){
+    public Result insertFwFp( FwFp fp){
         //TODO 从session获取用户id
-        String djrId = "2";
+        String djrId = "1615925023";
         fp.setFpShrId(djrId);
 //        fp.setFpSdTime(new Date());
         fp.setFpStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());

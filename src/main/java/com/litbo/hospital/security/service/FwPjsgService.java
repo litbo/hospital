@@ -10,7 +10,7 @@ public interface FwPjsgService {
 
     PageInfo listFwPjsg(FwPjsg pjsg,int pageNum,int pageSize);
 
-    int updateFwPjsgStatus(int sgStatus, String currentUserId,int id);
+    int updateFwPjsgStatus(Integer sgStatus, String currentUserId,Integer id,Integer taskId);
 
     PageInfo listFwPjsgZjb(int pageNum, int pageSize, String pjRkTimeStart, String pjRkTimeEnd, String pjName);
 

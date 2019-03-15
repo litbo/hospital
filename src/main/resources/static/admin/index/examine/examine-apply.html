@@ -120,6 +120,7 @@
                     data:{
                         id:$.getUrlParam("id"),
                         status:"1",
+                        taskId:$.getUrlParam("taskId"),
                         shyy:$("textarea[name='shyy']").val()
                     }
                 })
@@ -132,7 +133,9 @@
                     type:"POST",
                     data:{
                         id:$.getUrlParam("id"),
-                        status:"2"
+                        taskId:$.getUrlParam("taskId"),
+                        status:"2",
+                        shyy:$("textarea[name='shyy']").val()
                     }
                 })
             }

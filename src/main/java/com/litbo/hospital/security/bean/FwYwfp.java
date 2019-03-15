@@ -17,10 +17,10 @@ public class FwYwfp {
     private String ywfpHm;
 
     private BigDecimal ywfpPrice;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date ywfpSdTime;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date ywfpCjTime;
 
 }

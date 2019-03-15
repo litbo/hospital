@@ -22,5 +22,5 @@ public interface FwPjkDao {
     @Update("UPDATE fw_pjk SET pjk_sl=pjk_sl-#{pjCount} WHERE pjk_sl>=#{pjCount} and id = #{pjId}")
     int reduceFwPjkSl(@Param("pjId") Integer pjId, @Param("pjCount") Integer pjCount);
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjkSqlProvider.class,method="listFwPjk")
-    List<ListFwPjkVo> listFwPjk();
+    List<ListFwPjkVo> listFwPjk(String pjSzm);
 }

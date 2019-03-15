@@ -54,6 +54,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
         task.setUrl(EnumURL.EXAMINE_PURCHASE.getMessage());
         task.setActionName("配件申购");
         task.setOther(pjsg.getId().toString());
+        task.setJsrId(pjsg.getUserId2());
         taskDao.insertTask(task);
         return res;
     }
@@ -66,7 +67,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
 
     @Override
     @Transactional
-    public int updateFwPjsgStatus(int sgStatus, String currentUserId,int id) {
+    public int updateFwPjsgStatus(Integer sgStatus, String currentUserId,Integer id,Integer taskId) {
         if(sgStatus == EnumApplyStatus.APPLY_APPROVAL.getCode()){//申购审核同意，就吧配件入库
             List<FwPjsgZjb> pjsgZjbs = pjsgZjbDao.listFwPjsgZjbByPjsgId(id);
             for (FwPjsgZjb pjsgZjb:pjsgZjbs){
@@ -81,6 +82,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
                 }
             }
         }
+        taskDao.updateTaskById(taskId);
         return pjsgDao.updateFwPjsgStatus(new Date(),sgStatus,currentUserId,id,0);
     }
 
