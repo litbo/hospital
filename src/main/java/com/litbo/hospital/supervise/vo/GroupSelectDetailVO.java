@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class GroupSelectDetailVO {
     private Integer groupId;
+    private String bmId;
     private String bmName;
     private String groupName;
     private String userName1;
