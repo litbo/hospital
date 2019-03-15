@@ -25,6 +25,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
@@ -59,6 +60,7 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
+    @Transactional
     public int addEq(EqInfo eqInfo) {
 
         //设置设备拼音码
@@ -131,6 +133,7 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
+    @Transactional
     public Integer importEq(MultipartFile file)  {
 
         Workbook workbook = null;
@@ -179,6 +182,7 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
+    @Transactional
     public Integer importFj(MultipartFile file) {
         Workbook workbook = null;
         InputStream inputStream = null;

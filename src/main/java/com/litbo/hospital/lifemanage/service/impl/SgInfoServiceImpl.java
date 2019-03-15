@@ -62,19 +62,14 @@ public class SgInfoServiceImpl implements SgInfoService {
         SgInfo sgInfo = sgInfoMapper.selectSgInfoById(sgInfoId);
         BeanUtils.copyProperties(sgInfo, sgInfoVO);
 
-        //添加申购单对应的参考厂商设备信息
+        //查询 申购单对应的参考厂商设备信息
         List<SgCkcssb> sgCkcssbs = sgCkcssbMapper.selectSgCkcssbBySgInfoId(sgInfoId);
+        //查询功能配置
+        List<SgGnpz> sgGnpzs = sgGnpzMapper.selectSgGnpzBySgInfoId(sgInfoId);
 
-        List<SgCkcssbVO> sgCkcssbVOS = new ArrayList<>();
-        SgCkcssbVO sgCkcssbVO = new SgCkcssbVO();
-        for (SgCkcssb sgCkcssb : sgCkcssbs) {
-            BeanUtils.copyProperties(sgCkcssb, sgCkcssbVO);
-            //参考厂商设备信息对应的功能配置
-            sgCkcssbVO.setSgGnpzs(sgGnpzMapper.selectSgGnpzBySgCkcssbId(sgCkcssb.getCkcssbId()));
-            sgCkcssbVOS.add(sgCkcssbVO);
-        }
-
-        sgInfoVO.setSgCkcssbVOs(sgCkcssbVOS);
+        sgInfoVO.setSgCkcssbs(sgCkcssbs);
+        sgInfoVO.setSgGnpzs(sgGnpzs);
+        //通过品名id获取品名名称
         sgInfoVO.setEqPmName(sgCkcssbMapper.getEqPmNameById(sgInfo.getEqPmId()));
         return sgInfoVO;
     }
@@ -103,37 +98,32 @@ public class SgInfoServiceImpl implements SgInfoService {
         sgInfo.setBh(sgInfoBh);
         sgInfoMapper.updateSgInfoById(sgInfo);
 
-        // 根据申购单id查询参考厂商id
-        List<String> sgCkcssbIds = sgCkcssbMapper.selectSgCkcssbIdBySgInfoId(sgInfoVO.getId());
-        //根据参考厂商设备id删除对应的功能配置
-        for (String id : sgCkcssbIds) {
-            sgGnpzMapper.deleteSgGnpzByCkcssbId(id);
-        }
+        //根据申购单id删除对应的功能配置
+        sgGnpzMapper.deleteSgGnpzBySgInfoId(sgInfoVO.getId());
 
         //根据申购单id删除对应的参考厂商信息
         sgCkcssbMapper.deleteSgCkcssbBySgInfoId(sgInfoVO.getId());
 
         //添加参考厂商设备
-        List<SgCkcssbVO> sgCkcssbVOS = sgInfoVO.getSgCkcssbVOs();
-        //获取页面的功能配置列表
-        List<SgGnpz> sgGnpzs = new ArrayList<>();
+        List<SgCkcssb> sgCkcssbs = sgInfoVO.getSgCkcssbs();
 
-        SgCkcssb sgCkcssb = new SgCkcssb();
-        for (SgCkcssbVO sgCkcssbVO : sgCkcssbVOS) {
-            sgGnpzs.addAll(sgCkcssbVO.getSgGnpzs());
-            BeanUtils.copyProperties(sgCkcssbVO, sgCkcssb);
-            //添加参考厂商设备信息到数据库
+        //获取页面的功能配置列表
+        List<SgGnpz> sgGnpzs = sgInfoVO.getSgGnpzs();
+
+        //添加参考厂商设备信息到数据库
+        for (SgCkcssb sgCkcssb : sgCkcssbs) {
             sgCkcssb.setCkcssbId(UUID.randomUUID().toString());
             sgCkcssb.setSgId(sgInfo.getId());
             sgCkcssbMapper.insertSgCkcssb(sgCkcssb);
-
-            //添加功能配置
-            for (SgGnpz sgGnpz : sgGnpzs) {
-                sgGnpz.setGnpzId(UUID.randomUUID().toString());
-                sgGnpz.setCkcssbId(sgCkcssb.getCkcssbId());
-                sgGnpzMapper.insertSgGnpz(sgGnpz);
-            }
         }
+
+        //添加功能配置
+        for (SgGnpz sgGnpz : sgGnpzs) {
+            sgGnpz.setGnpzId(UUID.randomUUID().toString());
+            sgGnpz.setSgId(sgInfo.getId());
+            sgGnpzMapper.insertSgGnpz(sgGnpz);
+        }
+
     }
 
     /**
@@ -235,11 +225,11 @@ public class SgInfoServiceImpl implements SgInfoService {
      */
     @Override
     public PageInfo<SgInfoSumAuditListVO> selectSgInfoSgZbwyhhyList(String eqPmPym, String bmId, String bh, Integer pageNum, Integer pageSize) {
-        if (StringUtils.isNotBlank(eqPmPym)){
-            eqPmPym = "%"+eqPmPym+"%";
+        if (StringUtils.isNotBlank(eqPmPym)) {
+            eqPmPym = "%" + eqPmPym + "%";
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoSgZbwyhhyList(eqPmPym,bmId, bh);
+        List<SgInfoSumAuditListVO> selectKsShHzs = sgInfoMapper.selectSgInfoSgZbwyhhyList(eqPmPym, bmId, bh);
         return new PageInfo<>(selectKsShHzs);
     }
 
@@ -322,8 +312,8 @@ public class SgInfoServiceImpl implements SgInfoService {
      */
     @Override
     public PageInfo<SgInfoListVO> selectSgInfoList(String isSh, String bmId, String bh, String sbPym, Integer pageNum, Integer pageSize) {
-        if (StringUtils.isNotBlank(sbPym)){
-            sbPym = "%"+sbPym+"%";
+        if (StringUtils.isNotBlank(sbPym)) {
+            sbPym = "%" + sbPym + "%";
         }
 
         PageHelper.startPage(pageNum, pageSize);

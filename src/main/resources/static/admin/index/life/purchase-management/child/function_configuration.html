@@ -38,59 +38,32 @@
 
 <div class="layui-row">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>参考生产厂商</legend>
+        <legend>功能配置录入</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">参考生产厂商</label>
-                <div class="layui-input-block">
-                    <input type="text" name="" placeholder="请选择" autocomplete="off" disabled class="layui-input"
-                           style="height:38px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectRoom">选择</button>
-                </div>
-            </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">型号</label>
+                <label class="layui-form-label">名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="gnpzMc" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">规格</label>
+                <label class="layui-form-label">功能是否使用</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">估价</label>
-                <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
+                    <select name="gnpzIssy" >
+                        <option value="1">使用</option>
+                        <option value="0">不使用</option>
+                    </select>
                 </div>
             </div>
         </div>
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">国别</label>
+                <label class="layui-form-label">描述</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">产地</label>
-                <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">数量</label>
-                <div class="layui-input-block">
-                    <input type="text" name="num" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="gnpzMs" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>

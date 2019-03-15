@@ -25,4 +25,8 @@ public interface UserDao {
             "Left JOIN s_role  r on ur.role_id = r.role_id\n" +
             "WHERE u.user_id = #{userId}")
     UserVo getUserByUserId(String userId);
+
+    @Update("update s_emp set status='1' where user_id=#{userId}")
+    Integer changeStatus(String userId);
+
 }

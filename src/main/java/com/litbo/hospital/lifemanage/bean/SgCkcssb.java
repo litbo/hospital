@@ -34,6 +34,12 @@ public class SgCkcssb {
     @ApiModelProperty(value = "估价",name = "sbcsId", dataType = "BigDecimal", required = true)
     private BigDecimal ckcssbGj;
 
+    @ApiModelProperty(value = "国别",name = "gb", dataType = "String")
+    private String gb;
+
+    @ApiModelProperty(value = "产地",name = "cd", dataType = "String")
+    private String cd;
+
     @ApiModelProperty(value = "扩展列1",name = "extendOne", dataType = "String")
     private String extendOne;
 

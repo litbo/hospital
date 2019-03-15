@@ -6,6 +6,11 @@ public class SBm {
 
     private String bmId;
 
+    /**
+     * 托管部门id 和bmId相同
+     */
+    private String tgBmId;
+
     private String bmName;
 
     private String userId;
@@ -19,6 +24,14 @@ public class SBm {
     private String pBmId;
 
     private String xbmFlag;
+
+    public String getTgBmId() {
+        return tgBmId;
+    }
+
+    public void setTgBmId(String tgBmId) {
+        this.tgBmId = tgBmId;
+    }
 
     public String getBmId() {
         return bmId;
