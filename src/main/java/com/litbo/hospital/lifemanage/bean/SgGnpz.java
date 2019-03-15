@@ -12,9 +12,9 @@ public class SgGnpz {
      */
     private String gnpzId;
     /**
-     * 参考厂商设备id
+     * 申购单id
      */
-    private String ckcssbId;
+    private String sgId;
     /**
      * 功能配置名称
      */
