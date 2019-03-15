@@ -93,7 +93,16 @@
                             type:"post",
                             confirm:false,  //false为不删除    删除就不要
                             reload:true
-                        }
+                        },
+                        tools:[
+                            {
+                                event:"edit",
+                                title:"设为系统用户",
+                                type:2,
+                                content:"./child/setUser.html",
+                                dataUrl:["userId"]
+                            }
+                        ],
                     })
 
                 },
