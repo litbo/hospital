@@ -2,6 +2,7 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
+import com.litbo.hospital.security.bean.FwYwwx;
 import com.litbo.hospital.security.vo.*;
 import org.apache.ibatis.annotations.*;
 
@@ -26,7 +27,7 @@ public interface FwWeixiuDao {
             "      #{gzwxFs,jdbcType=INTEGER}, #{wxgznr,jdbcType=INTEGER}, #{wxrId,jdbcType=VARCHAR}, \n" +
             "      #{wxsyTime,jdbcType=DOUBLE}, #{wxPrice,jdbcType=DECIMAL}, #{fzwxId,jdbcType=VARCHAR}, \n" +
             "      #{wxjg,jdbcType=VARCHAR}, #{gcsjy,jdbcType=VARCHAR}, #{zjStatus,jdbcType=INTEGER}, \n" +
-            "      #{gztjTime,jdbcType=TIMESTAMP}, #{fwksTime,jdbcType=TIMESTAMP}, #{pcwcTime,jdbcType=TIMESTAMP}\n" +
+            "      #{gztjTime}, #{fwksTime,jdbcType=TIMESTAMP}, #{pcwcTime,jdbcType=TIMESTAMP}\n" +
             "      )")
     public void addFwWeiXiu(FwWeixiu fwWeixiu);
 
@@ -154,5 +155,8 @@ public interface FwWeixiuDao {
             "LEFT JOIN s_emp AS wxqsEmp ON wxqsEmp.user_id = wxqs.qs_user\n" +
             "WHERE bx.id = #{fwId}\n")
     public FwWxqsShIndexVo wxqsShIndexVo(String fwId);
+
+    @Insert("insert into fw_ywwx (fw_id , wxr_id , sbcs_id_wxs) values (#{fwId},#{wxrId},#{sbcsIdWxs})")
+    public int addFwYwwx(FwYwwx fwYwwx);
 
 }

@@ -82,9 +82,11 @@
         btn:{
             elem:"#save",
             func:function(){
-                //var sel = $("#selectOne").val(),int = $("#inputOne").val(),$name = $.getUrlParam("vg"),$key = $.getUrlParam("key");
+                var sel = $("#selectOne").val(),int = $("#inputOne").val(),$name = $.getUrlParam("vg"),$key = $.getUrlParam("key");
+                var wxrId = $.getUrlParam("wxrId");
                 var fwId = $.getUrlParam("fwId");
-                var wxs = $("#wxs").val()
+                var sbcsIdWxs = formData.wxs[0].sbcsIdWxs;
+                alert(sbcsIdWxs);
                 if(doJudg({
                     "00":[int]
                 })){
@@ -98,11 +100,12 @@
                     value:{"eng":sel,"int":int}
                 });
                 subUp({
-                    url:"/fwWeixiu/addFwWeixiu",
-                    type:"POST",
+                    url:"/fwWeixiu/jumpYwwx",
+                    type:"GET",
                     data:{
                         fwId:fwId,
-                        wxs:wxs
+                        sbcsIdWxs:sbcsIdWxs,
+                        wxrId:wxrId
                     }
                 });
                 var index = parent.layer.getFrameIndex(window.name);

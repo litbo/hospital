@@ -11,4 +11,5 @@ public interface FwLcjlDao {
             "    values ( #{userId,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, " +
             "      #{bxId,jdbcType=VARCHAR}, #{lc,jdbcType=VARCHAR})")
     int insertFwLcjl(FwLcjl lcjl);
+
 }

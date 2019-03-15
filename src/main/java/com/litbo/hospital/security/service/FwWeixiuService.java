@@ -2,6 +2,7 @@ package com.litbo.hospital.security.service;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
+import com.litbo.hospital.security.bean.FwYwwx;
 import com.litbo.hospital.security.vo.*;
 
 /**
@@ -11,11 +12,18 @@ import com.litbo.hospital.security.vo.*;
 public interface FwWeixiuService {
 
     /**
+     * 院外维修
+     * @param fwYwwx
+     * @return
+     */
+    public int jumpYwwx(FwYwwx fwYwwx);
+
+    /**
      * 配件请领
      * @param fwId
      * @return
      */
-    public int jumpPj(String fwId);
+    public int jumpPj(String userId,String fwId);
 
     /**
      * 维修审核页面初始化

@@ -37,8 +37,7 @@ public class FwWeixiu {
 
     private Integer zjStatus;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date gztjTime;
+    private String gztjTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fwksTime;

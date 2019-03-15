@@ -53,7 +53,7 @@ public interface FwShouLiDao {
             "baoxiu.bxks_id = bm.bm_id AND\n" +
             "baoxiu.bxr_id = emp.user_id AND\n" +
             "shouli.slr_id = #{userId} AND\n" +
-            "baoxiu.bx_status in (4,5,10,12,44,14)")
+            "baoxiu.bx_status in (4,5,10,12,44)")
     public List<BaoXiuRw> findBaoxiuRw(String userId);
 
     //受理页面初始化

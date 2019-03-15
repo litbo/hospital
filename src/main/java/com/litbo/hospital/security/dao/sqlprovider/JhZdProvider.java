@@ -73,7 +73,7 @@ public class JhZdProvider {
                         "jh.user_id");
                 FROM("jh_zd as jh,s_emp as emp");
                 WHERE("jh.user_id = emp.user_id");
-                WHERE("jh.jh_jstime < (select GETDATE())");
+                WHERE("jh.jh_kstime < (select GETDATE())");
                 if(createdate != null){
                     WHERE("jh_kstime>#{createdate}");
                 }
