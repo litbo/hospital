@@ -60,8 +60,8 @@
                 <div class="layui-input-block">
                     <select name="userId2" id="" lay-verify="required">
                         <option></option>
-                        <option>盖玉斋</option>
-                        <option>刘松峰</option>
+                        <option value="1615925037">高贺稳</option>
+                        <option value="1615925008">李佳龙</option>
                         <option>杨凯</option>
                         <option>杨永鹏</option>
                         <option>姚美丽</option>
@@ -87,9 +87,42 @@
             </div>
             <table id="table" lay-filter="table1"></table>
         </div>
+
+
+    </div>
+
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>审核信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">审核结果<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="radio" name="shFlag" value="2" title="通过" checked>
+                    <input type="radio" name="shFlag" value="0" title="不通过">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="shTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">审核意见</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="shYj"></textarea>
+                </div>
+            </div>
+        </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">保存
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">审核提交
                 </button>
             </div>
         </div>
@@ -113,6 +146,8 @@
                 get:{
                     url:"/sybm/ksgl/getGroupDetailByGId",
                     type:"GET",
+                    parse:"userSelectVOS",
+                    tableId:"table",
                     data:{gid:$.getUrlParam('groupId')}
                 }
             },
@@ -120,19 +155,20 @@
                     before: function () {
                         var users = getTableValue("table");
                         return param = {
-                            1: formData.radio[0]["bmId"],
-                            2: users
+                            1: users,
+                            2:$.getUrlParam('groupId')
                         };
                     },
                     form: {
-                        url: "/sybm/ksgl/submitGroups",
+                        url: "/sybm/ksgl/shrShGroup",
                         type: "POST",
                         contentType:"application/json",
-                        data: ["groupName", "userId1", "userId2"],
+                        data: ["shFlag", "shYj"],
                         param: {
-                            1: "bmId",
-                            2: "users"
+                            1: "users",
+                            2:"groupId"
                         }
+
                     }
             }
         },

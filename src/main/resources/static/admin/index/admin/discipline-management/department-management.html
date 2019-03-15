@@ -71,17 +71,45 @@
                     }
                 }
                 , done: function (obj) {
+                    // tableFunc({
+                    //     "obj":obj,
+                    //     "toolFunc":({
+                    //         "tool":'toolbar',
+                    //         "event":'add',
+                    //         "type":2,
+                    //         "title":'科室管理团队分工',
+                    //         "content":'./child/management.html',
+                    //         "area":['95%','95%']
+                    //     })
+                    // })
+
+                    // tableFunc({
+                    //     tools:{
+                    //         type:2,
+                    //         event: "edit",
+                    //         content:"./child/management.html",
+                    //         dataUrl:["groupId"]
+                    //     }
+                    // })
+
+
                     tableFunc({
-                        "obj":obj,
-                        "toolFunc":({
-                            "tool":'toolbar',
-                            "event":'add',
-                            "type":2,
-                            "title":'科室管理团队分工',
-                            "content":'./child/management.html',
-                            "area":['95%','95%']
-                        })
+                        "obj": obj,
+                        "toolFunc": [{
+                            tool:"toolbar",
+                            type: 2,
+                            title: "科室管理团队分工",
+                            event: "add",
+                            content: "./child/management1.html",
+                        } , {
+                            type: 2,
+                            title: "科室管理团队分工调整",
+                            event: "edit",
+                            content: "./child/management.html",
+                            dataUrl:["groupId"]
+                        }]
                     })
+
                 }
             },
 
