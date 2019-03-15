@@ -5,6 +5,8 @@ import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
 import com.litbo.hospital.security.service.FwWeixiuService;
 import com.litbo.hospital.security.vo.FwWeiXiuIndexVo;
+import com.litbo.hospital.security.vo.FwWxqrIndexVo;
+import com.litbo.hospital.security.vo.FwWxqsShIndexVo;
 import com.litbo.hospital.security.vo.WxqrIndex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +27,40 @@ public class FwWeixiuController {
     @Autowired
     private FwWeixiuService fwWeixiuService;
 
-    @GetMapping("/jumpPj")
-    public Result addPj(String wxrId,String gzwxFs){
-
+    @GetMapping("/wxqsShIndexVo")
+    public Result wxqsShIndexVo(String fwId){
         try {
-            System.out.println(gzwxFs);
+            String userId = "1615925023";
+            FwWxqsShIndexVo fwWxqsShIndexVo = fwWeixiuService.wxqsShIndexVo(userId, fwId);
+            return Result.success(fwWxqsShIndexVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("数据异常");
+        }
+    }
+
+
+    /**
+     * 维修确认页面
+     * @param fwId
+     * @return
+     */
+    @GetMapping("/wxqsIndexVo")
+    public Result wxqsIndexVo(String fwId){
+        try {
+            String userId = "1615925023";
+            FwWxqrIndexVo fwWxqrIndexVo = fwWeixiuService.wxqrIndexVo(userId, fwId);
+            return Result.success(fwWxqrIndexVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("数据异常");
+        }
+    }
+
+    @GetMapping("/jumpPj")
+    public Result jumpPj(String fwId){
+        try {
+            fwWeixiuService.jumpPj(fwId);
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,7 +148,7 @@ public class FwWeixiuController {
             @PostMapping("/addFwWxqs")
     public Result addFwWxqs(FwWxqs fwWxqs){
         try {
-            String userId = "1";
+            String userId = "1615925023";
             fwWeixiuService.addFwWxqs(fwWxqs,userId);
             return  Result.success();
         } catch (Exception e) {
@@ -126,10 +157,10 @@ public class FwWeixiuController {
         }
     }
 
-    @GetMapping("/updateWxsh")
+    @PostMapping("/updateWxsh")
     public Result updateWxsh(String fwId){
         try {
-            String userId = "1";
+            String userId = "1615925023";
             fwWeixiuService.updateFwWxqs(userId,fwId);
             return Result.success();
         } catch (Exception e) {

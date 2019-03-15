@@ -55,7 +55,7 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
         List<BaoXiuRw> baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(userId);
         List<BaoXiuRw> baoxiuRw3 = fwWxfDao.getWxfRw(userId);
         baoxiuRw.addAll(baoxiuRw1);
-        baoxiuRw.addAll(baoxiuRw1);
+        baoxiuRw.addAll(baoxiuRw2);
         baoxiuRw.addAll(baoxiuRw3);
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<BaoXiuRw>(baoxiuRw);

@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <input type="hidden" name="gzwxFs" value="1">
+            <input type="hidden" name="gzwxFs" value="1" id="gzwxFs">
 
         </div>
 
@@ -74,6 +74,8 @@
             elem:"#save",
             func:function(){
                 var sel = $("#selectOne").val(),$name = $.getUrlParam("vg"),$key = $.getUrlParam("key");
+                var gzwxFs = $("#gzwxFs").val();
+                var fwId = $.getUrlParam("fwId");
                 layui.sessionData($name,{
                     key:$key,
                     value:sel
@@ -86,7 +88,8 @@
                     type:"GET",
                     async:false,
                     data:{
-                        sel:sel
+                        wxrName:sel,
+                        fwId:fwId
                     }
                 });
                 var index = parent.layer.getFrameIndex(window.name);

@@ -24,6 +24,9 @@ public interface JhZdService {
     //计划人员列表录入初始化
     public Result jhrylrListIndex(int pageNum, int pageSize, String createdate, String jhName);
 
+    //计划人员列表考核初始化
+    public Result jhryKhListIndex(int pageNum, int pageSize, String createdate, String jhName);
+
     /**
      * 计划录入初始化
      * @param id
