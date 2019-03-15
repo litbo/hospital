@@ -10,6 +10,7 @@ import com.litbo.hospital.security.vo.ListFwPjzdVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +21,7 @@ public class FwPjzdServiceImpl implements FwPjzdService {
     private FwPjzdDao pjzdDao;
     @Override
     public int insertFwPjzd(FwPjzd pjzd) {
+        pjzd.setPjCjTime(new Date());
         pjzd.setPjSzm(WordToPinYin.toPinYin(pjzd.getPjName()));
         return pjzdDao.insertPjzd(pjzd);
 

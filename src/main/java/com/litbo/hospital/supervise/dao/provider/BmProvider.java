@@ -18,13 +18,13 @@ public class BmProvider {
 
         if(selectVo.getBmName()!=null)  sql.append(" and bm_name Like '%'+#{bmName}+'%'");
         if(selectVo.getFlag()==1){
-            if(!selectVo.getBmlb().equals("0000000000")) sql.append(" and bm_id Like #{bmlb}+'%'");
+            if(selectVo.getBmlb()!=null) sql.append(" and bm_id Like #{bmlb}+'%'");
         }else if(selectVo.getFlag()==2){
             sql.append(" and bm_id LIKE '02'+'%'" );
-            if(!selectVo.getGklb().equals("0000000000"))  sql.append(" and bm_id LIKE #{gklb}+'%'" );
+            if(selectVo.getGklb()!=null)  sql.append(" and bm_id LIKE #{gklb}+'%'" );
         }else if(selectVo.getFlag()==3){
             sql.append(" and bm_id LIKE '02'+'%'" );
-            if(!selectVo.getIsWx().equals("0000000000"))  sql.append(" and wx_flag = #{isWx}");
+            if(selectVo.getIsWx()!=null)  sql.append(" and wx_flag = #{isWx}");
         }
 
 

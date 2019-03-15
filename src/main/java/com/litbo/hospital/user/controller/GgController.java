@@ -5,6 +5,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SysGg;
 import com.litbo.hospital.user.service.GgService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class GgController {
 
     //增加公告
     @RequestMapping("/addGg")
-    public Result addGg(SysGg gg){
+    public Result addGg(@RequestBody SysGg gg){
         gg.setStatus(0);
         if(ggService.addGg(gg)>0){
             return Result.success();

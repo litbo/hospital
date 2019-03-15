@@ -21,7 +21,7 @@ public class FwBlsj {
     private String sjxz;
 
     private String bgrqz;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date bgTime;
 
     private String hzxm;
@@ -29,17 +29,17 @@ public class FwBlsj {
     private Integer hzAge;
 
     private String hzSex;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date sjfsTime;
 
     private String sjhg;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fxzxTime;
 
     private String ylqxsxcs;
 
     private String czry;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date zrTime;
 
     private String bxdh;
@@ -51,6 +51,8 @@ public class FwBlsj {
     private String zysh;
 
     private String sjcs;
+
+    private String lxdh;
 
 
 }

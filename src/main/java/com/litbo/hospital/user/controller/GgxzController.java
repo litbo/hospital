@@ -7,10 +7,7 @@ import com.litbo.hospital.user.bean.SysGgxz;
 import com.litbo.hospital.user.service.GgxzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +31,8 @@ public class GgxzController {
 
     //添加公共下载
     @RequestMapping("/addGgxz")
-    public Result addGgxz(@RequestParam("file") MultipartFile multipartFile , SysGgxz ggxz){
-       if(ggxzService.addGgxz(multipartFile,ggxz)>0){
+    public Result addGgxz(@RequestBody SysGgxz ggxz){
+       if(ggxzService.addGgxz(ggxz)>0){
            return Result.success();
        }
 

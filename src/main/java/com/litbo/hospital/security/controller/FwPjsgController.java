@@ -26,7 +26,10 @@ public class FwPjsgController {
     @ApiOperation(value = "插入配件申购")
     @RequestMapping(value = "insertFwPjsg",method = RequestMethod.POST)
     public Result insertFwPjsg(@RequestBody InsertFwPjsgVo fwPjsgVo){
-        try {//TODO
+        if(fwPjsgVo.getFwPjsgZjbs().size()<=0)
+            return Result.error(CodeMsg.PARAM_ERROR);
+        try {
+            //TODO
             fwPjsgVo.getFwPjsg().setUserId1("1615925039");
             int res = pjsgService.insertFwPjsg(fwPjsgVo);
             if(res>0)
@@ -84,13 +87,13 @@ public class FwPjsgController {
 
     @ApiOperation("同意或者拒绝申购")
     @RequestMapping(value = "updateFwPjsgStatus",method = RequestMethod.POST)
-    public Result updateFwPjsgStatus(Integer sgStatus,Integer id){
+    public Result updateFwPjsgStatus(Integer sgStatus,Integer id,Integer taskId){
         try {
             if(id!=null&&sgStatus!=null&&(sgStatus == EnumApplyStatus.APPLY_APPROVAL.getCode()||sgStatus == EnumApplyStatus.APPLY_REJECT.getCode())){
                 //Todo 修改session的name
                 //      String currentUserId = (String) SecurityUtils.getSubject().getSession().getAttribute("currentUserId");
                 String currentUserId = "1615925023";
-                int res = pjsgService.updateFwPjsgStatus(sgStatus,currentUserId,id);
+                int res = pjsgService.updateFwPjsgStatus(sgStatus,currentUserId,id,taskId);
                 if(res == 1){
                     return Result.success(res);
                 }else {

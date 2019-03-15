@@ -16,7 +16,7 @@
     <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-inline{
-            width:140px;
+            width:180px;
         }
     </style>
 </head>
@@ -88,14 +88,14 @@
                 url:"/security/pjql/listFwPjqlZjb",
                 type: "reload",
                 data:["pjName"],     //搜索框的name
-                dat:["#date","pjRkTimeStart","pjRkTimeEnd"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
+                dat:["#date","pjRkTimeStart","pjRkTimeEnd","~"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
             }
         },
         form:{
             date:{
-                elem:"#date",
+                elem:'#date',
                 range:"~",
-                format:'y-M-d'
+                value:today0
             }
         }
     }

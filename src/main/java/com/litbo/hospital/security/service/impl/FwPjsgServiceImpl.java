@@ -11,6 +11,7 @@ import com.litbo.hospital.security.dao.FwPjkDao;
 import com.litbo.hospital.security.dao.FwPjsgDao;
 import com.litbo.hospital.security.dao.FwPjsgZjbDao;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
+import com.litbo.hospital.security.enums.EnumURL;
 import com.litbo.hospital.security.service.FwPjsgService;
 import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
@@ -50,9 +51,10 @@ public class FwPjsgServiceImpl implements FwPjsgService {
         task.setCreatTime(new Date());
         task.setWorkName("配件申购审核");
         task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
-        task.setUrl("/admin/index/examine/examine-apply.html");
+        task.setUrl(EnumURL.EXAMINE_PURCHASE.getMessage());
         task.setActionName("配件申购");
         task.setOther(pjsg.getId().toString());
+        task.setJsrId(pjsg.getUserId2());
         taskDao.insertTask(task);
         return res;
     }
@@ -65,7 +67,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
 
     @Override
     @Transactional
-    public int updateFwPjsgStatus(int sgStatus, String currentUserId,int id) {
+    public int updateFwPjsgStatus(Integer sgStatus, String currentUserId,Integer id,Integer taskId) {
         if(sgStatus == EnumApplyStatus.APPLY_APPROVAL.getCode()){//申购审核同意，就吧配件入库
             List<FwPjsgZjb> pjsgZjbs = pjsgZjbDao.listFwPjsgZjbByPjsgId(id);
             for (FwPjsgZjb pjsgZjb:pjsgZjbs){
@@ -80,6 +82,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
                 }
             }
         }
+        taskDao.updateTaskById(taskId);
         return pjsgDao.updateFwPjsgStatus(new Date(),sgStatus,currentUserId,id,0);
     }
 

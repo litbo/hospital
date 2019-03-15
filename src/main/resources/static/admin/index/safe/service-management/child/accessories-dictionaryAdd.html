@@ -138,7 +138,16 @@
     var formData = {};
     renderMod={
         form:{
-            date:[{elem:'#zdate'},{elem:'#date'}],
+            date:[
+                {
+                    elem:'#zdate'
+                    ,value:today0
+                },
+                {
+                    elem: '#date'
+                    , value: today0
+                }
+            ],
             submit: {
                 filter: "submit",//可以不写
                 before:function(param){
@@ -153,13 +162,17 @@
                     url: "/security/pjzd/insertFwPjzd",
                     type: "POST",
                     contentType:"application/json",
-                    data:["pjfl","pjName","pjbh","pjGgxh","pjBzdw","pjZczh","zbPrice","zbTime"],
+                    data:["pjfl","pjName","pjbh","pjGgxh","pjBzdw","pjZczh","zbPrice","zbTime","pjZczDqTime"],
                     param:{
                         1:"sbId",
                         2:"pjScqyId",
                         3:"pjGhsId"
                     }
-                }//表单提交函数
+                },//表单提交函数
+                func:function(data){
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
             },
             val:{
                 filter:"forms",

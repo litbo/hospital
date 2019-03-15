@@ -46,7 +46,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报告编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bgbh" autocomplete="" class="layui-input" placeholder="请填写" lay-verify="required">
+                    <input type="text" name="bgbh" autocomplete="" class="layui-input" placeholder="自动生成" disabled >
                 </div>
             </div>
             <div class="layui-form-item">
@@ -242,7 +242,32 @@
     formData={};
     renderMod={
         form:{
-            date:[{elem:'#zdate'},{elem:'#bdate'},{elem:'#sdate'},{elem:'#fdate'}],
+            date:[
+                {
+                    elem:'#zdate',
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: '#bdate',
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: '#sdate',
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: '#fdate',
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                }
+            ],
             val:{
                 filter:"forms",
                 select:[
@@ -259,7 +284,8 @@
                     url:"/security/blsj/insertFwBlsj",
                     type:"POST",
                     data:["userId","bgmc","bgTime","sjxz","bgrqz","hzxm","hzAge","yqzlxg","sjfsTime","fxzxTime","zrTime",
-                        "qxgz","zysh","sjcs","hzSex","ylqxsxcs","czry","sjhg","bgrgw","eqId","lxdh"]
+                        "qxgz","zysh","sjcs","hzSex","ylqxsxcs","czry","sjhg","bgrgw","eqId","lxdh"],
+                    reload:true
                 }
             }
 

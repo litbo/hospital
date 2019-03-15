@@ -8,6 +8,7 @@ public enum EnumProcess implements CodeEnum{
     FW_ZZ_WB(3,"终止误报"),
     FW_GZ_JX(4,"故障检修"),
     FW_PJ_QL(5,"配件请领"),
+    FW_PJ_QL_SH(14,"配件请领审核"),
     FW_PJ_QL_SH_TG(6,"配件请领审核通过"),
     FW_PJ_QL_SH_WTG(7,"配件请领审核未通过"),
     FW_YW_WX_SQ(8,"院外维修申请"),

@@ -67,7 +67,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">送达时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="ywfpSdTime" id="date" lay-verify="required" class="layui-input">
+                    <input type="text" name="ywfpSdTime" id="date" lay-verify="required|datetime" class="layui-input">
                 </div>
             </div>
         </div>
@@ -88,7 +88,12 @@
     formData = {};
     renderMod = {
         form: {
-            date:true,
+            date:{
+                elem: "#date",
+                value:today0+" "+time0,
+                type:"datetime",
+                format:'yyyy-MM-dd HH:mm:ss'
+            },
             submit: {
                 filter: "submit",//可以不写
                 form: {

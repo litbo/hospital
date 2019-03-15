@@ -14,13 +14,13 @@ public class FwFp {
 
     private BigDecimal fpPrice;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fpSdTime;
 
     private Integer fpStatus;
 
     private String userId;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fpShTime;
 
     private String shyj;

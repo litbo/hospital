@@ -8,6 +8,7 @@ import com.litbo.hospital.security.bean.*;
 import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.enums.EnumProcess;
+import com.litbo.hospital.security.enums.EnumURL;
 import com.litbo.hospital.security.service.FwPjqlService;
 import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.InsertFwPjqlVo;
@@ -60,7 +61,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
         }
 
         //修改报修表状态
-        baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL.getCode());
+        baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL_SH.getCode());
         //流程表记录
         res = lcjlDao.insertFwLcjl(new FwLcjl(pjql.getQlrId(),new Date(), pjql.getFwId(),EnumProcess.FW_PJ_QL.getMessage()));
 
@@ -68,7 +69,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
         task.setActionName("配件请领");
         task.setCreatTime(new Date());
         task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
-        task.setUrl("/admin/index/examine/examine-apply.html");
+        task.setUrl(EnumURL.EXAMINE_APPLY.getMessage());
         task.setJsrId(pjql.getQlrId());
         task.setOther(pjql.getId().toString());
         task.setWorkName("配件请领审核");
@@ -80,7 +81,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
     public int updateFwPjqlSqStatus(Integer status, Integer id, String qrrId, String shyy, Integer taskId) {
         //根据主键查询报修单id
         String fwId = pjqlDao.selectFwIdById(id);
-        if(status == EnumApplyStatus.APPLY_APPROVAL.getCode()){
+        if(status == EnumApplyStatus.APPLY_APPROVAL.getCode()){//同意
             //检查配件库库存是否足够
             List<FwPjqlZjb> pjqlZjbs = pjqlZjbDao.listFwPjqlByBjqlId(id);
             for(FwPjqlZjb pjqlZjb:pjqlZjbs){

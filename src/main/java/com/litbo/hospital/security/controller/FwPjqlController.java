@@ -24,9 +24,11 @@ public class FwPjqlController {
     @ApiOperation(value = "配件请领")
     @RequestMapping(value = "insertFwPjql",method = RequestMethod.POST)
     public Result insertFwPjql(@RequestBody InsertFwPjqlVo fwPjqlVo){
+        if(fwPjqlVo.getFwPjqlZjbs().size()<=0)
+            return Result.error(CodeMsg.PARAM_ERROR);
         try {
             //TODO 此处配件请领人从session中获取，并存入Pjql表中
-            String qlrId = "2";
+            String qlrId = "1615925039";
             fwPjqlVo.getFwPjql().setQlrId(qlrId);
             int res = pjqlService.insertFwPjql(fwPjqlVo);
             if(res>0){
@@ -72,8 +74,14 @@ public class FwPjqlController {
                                 @RequestParam(required = false,defaultValue = "1990-01-01") String pjRkTimeStart,
                                 @RequestParam(required = false,defaultValue = "2999-12-31") String pjRkTimeEnd,
                                 @RequestParam(required = false) String pjName){
-        PageInfo pageInfo = pjqlService.listFwPjqlZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
-        return Result.success(pageInfo);
+        try {
+            PageInfo pageInfo = pjqlService.listFwPjqlZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
+            return Result.success(pageInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+
     }
     @RequestMapping(value = "selectFwPjqlById",method = RequestMethod.GET)
     public Result selectFwPjqlById(Integer id,Integer taskId){
