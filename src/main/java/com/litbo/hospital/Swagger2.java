@@ -46,7 +46,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
 
                 // 添加自己的包路径
-                .apis(RequestHandlerSelectors.basePackage("com.litbo.hospital.security"))
+                .apis(RequestHandlerSelectors.basePackage("com.litbo.hospital.lifemanage"))
                 .paths(PathSelectors.any()).build()
                 .globalOperationParameters(pars);
     }
