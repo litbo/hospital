@@ -94,6 +94,11 @@
                     key:$key,
                     value:{"eng":sel,"int":int}
                 });
+                subUp({
+                    url:"###",
+                    type:"POST",
+                    data:{"eng":sel,"int":int}
+                });
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
                 return false;

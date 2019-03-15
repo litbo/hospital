@@ -363,7 +363,7 @@
                 ]
             ]
         };
-        var h_name = [["need_do","personal_record"],["announce","public_info"]],id=0;
+        var h_name = [["need_do"],["personal_record","announce","public_info"]],id=0;
         getData(data);
         $(".h_more").click(function(){
             var page = $.getUrlParam("p",1);
@@ -384,19 +384,38 @@
         });
         //5：welcome数据添加
         function getData(data) {
-            addData(h_name[0],data.task);
-            addData(h_name[1],data.public);
-            function addData(name,d){
+            $.ajax({
+                url:"/listTaskByUserId",
+                success:function(res){
+                    if(res.code === 0){
+                        addData(h_name[0],res.data.list,"workName","url","creatTime");
+                    }
+                }
+            });
+            $.ajax({
+                url:"/listTaskByUserId",
+                success:function(res){
+                    if(res.code === 0){
+                        var list = ["list","list","list"];
+                        for(var c=0;c<list.length;c++){
+                            addData(h_name[1],res.data[list[c]],"workName","url","creatTime");
+                        }
+                    }
+                }
+            });
+
+            //addData(h_name[1],data.public);
+            function addData(name,d,item,src,time){
                 for(var j=0;j<name.length;j++){
                     var containers = $("div[h_name='"+name[j]+"'] ul"),n=0;
                     containers.html("");//清空已有内容，避免数据污染
-                    for(var i=0;i<d[j].length;i++){
+                    for(var i=0;i<d.length;i++){
                         if(n <= 7){//只渲染7条数据（一个数据框内最多只能容纳7条数据）
                             n++;
                             containers.append($("<li>")
-                                .append($("<a>").attr("href",d[j][i].src)
-                                    .append($("<span>").attr("class","h_ovf col-xs-9").html(d[j][i].item))
-                                    .append($("<span>").attr("class","h_right col-xs-3").html(d[j][i].time))
+                                .append($("<a>").attr("href",d[i][src] || "#")
+                                    .append($("<span>").attr("class","h_ovf col-xs-9").html(d[i][item]))
+                                    .append($("<span>").attr("class","h_right col-xs-3").html(d[i][time]))
                                 ))
                         }
                     }
