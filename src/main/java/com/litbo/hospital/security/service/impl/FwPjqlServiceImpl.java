@@ -61,7 +61,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
         }
 
         //修改报修表状态
-        baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL.getCode());
+        baoxiuDao.updateBaoxiuStatus(pjql.getFwId(),EnumProcess.FW_PJ_QL_SH.getCode());
         //流程表记录
         res = lcjlDao.insertFwLcjl(new FwLcjl(pjql.getQlrId(),new Date(), pjql.getFwId(),EnumProcess.FW_PJ_QL.getMessage()));
 
@@ -81,7 +81,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
     public int updateFwPjqlSqStatus(Integer status, Integer id, String qrrId, String shyy, Integer taskId) {
         //根据主键查询报修单id
         String fwId = pjqlDao.selectFwIdById(id);
-        if(status == EnumApplyStatus.APPLY_APPROVAL.getCode()){
+        if(status == EnumApplyStatus.APPLY_APPROVAL.getCode()){//同意
             //检查配件库库存是否足够
             List<FwPjqlZjb> pjqlZjbs = pjqlZjbDao.listFwPjqlByBjqlId(id);
             for(FwPjqlZjb pjqlZjb:pjqlZjbs){
