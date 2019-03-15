@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>参考型号及报价</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>参考型号及报价</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="col-xs-12">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">参考生产厂商</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                           style="height:38px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" data-id="table1" id="selectRoom">选择</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">型号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ckcssbXh" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">报价</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">技术参数性能指标</label>
+                <div class="layui-input-block">
+                    <textarea name="" placeholder="请输入" class="layui-textarea">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="reload">确定</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    renderMod = {
+        bind: {
+            addItem: [
+                {
+                    elem: "#selectRoom",
+                    cb: "/cs/scsTitle",
+                    db: "/cs/listScs",
+                    name: "dtdt",
+                    key: "radio"
+                }
+            ],
+            delItem: ".delNew",
+        }
+    };
+</script>
+</html>
