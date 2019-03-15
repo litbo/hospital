@@ -96,19 +96,34 @@ public class EqServiceImpl implements EqService {
         //将临时保存在tmp的图片文件保存到eq文件夹下  并将tmp文件夹清空
         String path = System.getProperty("user.dir");
         String filePath = path+"/eq/";
+        String mpzp =null;
+        String sbzp = null;
         java.io.File file = new java.io.File(filePath);
-        String mpzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
-        String sbzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
-        try {
+        if(eqInfo.getEqMpzp()!=null){
+            mpzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
             if(!file.exists()){
                 file.mkdirs();
             }
-            ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzp);
-            ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzp);
-            ChangeFile.deleteDir(path+"/tmp/");
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        if(eqInfo.getEqSbzp()!=null){
+            sbzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            try {
+                ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ChangeFile.deleteDir(path+"/tmp/");
+
         eqInfo.setEqMpzp(mpzp);
         eqInfo.setEqSbzp(sbzp);
 

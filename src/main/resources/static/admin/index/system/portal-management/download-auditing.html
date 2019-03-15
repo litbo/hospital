@@ -41,28 +41,24 @@
         table:{
             cols: [[ //表头
                 {type:"checkbox"}
-                , {field: 'activity-name', title: '活动名', width:"30%",minWidth: 150}
-                , {field: 'process-name', title: '流程名', minWidth: 150}
-                , {field: 'create-date', title: '创建日期', minWidth: 150, sort: true}
-                , {field: 'service', title: '服务水平监控', minWidth: 150}
-                , {field: 'cutoff-time', title: '截止日期', minWidth: 150, sort: true}
-            ]]
-            , "data": [
-                {
-                    "activity-name": '',
-                    "process-name": "",
-                    "create-date": "",
-                    "service":'',
-                    "cutoff-time":''
-                },
-                {
-                    "activity-name": '',
-                    "process-name": "",
-                    "create-date": "",
-                    "service":'',
-                    "cutoff-time":''
+                , {field: 'wjmc', title: '文件名称', width:"35%",minWidth: 150}
+                , {field: 'scrq', title: '上传时间', minWidth: 150, sort: true}
+                , {field: 'scr', title: '上传人', minWidth: 150}
+            ]],
+            url:"/ggxz/listWaits",
+            request: {
+                pageName: 'pageNum',
+                limitName: 'pageSize'
+            },
+            parseData: function (res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count":res.data.total,//页面显示的数据条数
+                    "data": res.data.list //解析数据列表
                 }
-            ]
+            }
+
             , done: function (obj) {
                 tableFunc({
                     "obj":obj,

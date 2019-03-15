@@ -41,22 +41,24 @@
         table:{
             cols: [[ //表头
                 {type:"checkbox"}
-                , {field: 'fileName', title: '文件名称', width:"35%",minWidth: 150}
-                , {field: 'time', title: '上传时间', minWidth: 150, sort: true}
-                , {field: 'person', title: '上传人', minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "fileName": '谷歌浏览器',
-                    "time": "2017-05-09",
-                    "person": "刘松峰"
-                },
-                {
-                    "fileName": '谷歌浏览器',
-                    "time": "2017-05-09",
-                    "person": "刘松峰"
+                , {field: 'wjmc', title: '文件名称', width:"35%",minWidth: 150}
+                , {field: 'scrq', title: '上传时间', minWidth: 150, sort: true}
+                , {field: 'scr', title: '上传人', minWidth: 150}
+            ]],
+            url:"/ggxz/listGgxzs",
+            request: {
+                pageName: 'pageNum',
+                limitName: 'pageSize'
+            },
+            parseData: function (res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count":res.data.total,//页面显示的数据条数
+                    "data": res.data.list //解析数据列表
                 }
-            ]
+            }
+
             , done: function (obj) {
                 tableFunc({
                     "obj":obj,
