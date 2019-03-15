@@ -42,6 +42,37 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Autowired
     private FwPjqlDao fwPjqlDao;
 
+    @Autowired
+    private FwPjqlZjbDao fwPjqlZjbDao;
+
+    @Override
+    public int jumpPj(String fwId) {
+        int i = fwBaoxiuDao.updateBaoxiuStatus(fwId, 5);
+        return i;
+    }
+
+    @Override
+    public FwWxqsShIndexVo wxqsShIndexVo(String userId, String fwId) {
+        FwWxqsShIndexVo wxqsShIndexVo = fwWeixiuDao.wxqsShIndexVo("201812000006");
+        String userXm = empDao.getUserXmById(userId);
+        wxqsShIndexVo.setShName(userXm);
+        wxqsShIndexVo.setQsShr(userId);
+        List<PjqlZjbExamineVO> pjqlZjbExamineVOS = fwPjqlZjbDao.selectFwPjqlByFwId("201812000006");
+        wxqsShIndexVo.setPjList(pjqlZjbExamineVOS);
+        return wxqsShIndexVo;
+    }
+
+    @Override
+    public FwWxqrIndexVo wxqrIndexVo(String userId, String fwId) {
+        FwWxqrIndexVo wxqrIndexVo = fwWeixiuDao.wxqrIndexVo("201812000006");
+        String userXm = empDao.getUserXmById(userId);
+        wxqrIndexVo.setQrName(userXm);
+        wxqrIndexVo.setQsUser(userId);
+        List<PjqlZjbExamineVO> pjqlZjbExamineVOS = fwPjqlZjbDao.selectFwPjqlByFwId("201812000006");
+        wxqrIndexVo.setPjList(pjqlZjbExamineVOS);
+        return wxqrIndexVo;
+    }
+
     @Override
     public String pjqlWxIndex(String userId) {
         return empDao.getUserXmById(userId);

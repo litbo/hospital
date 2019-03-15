@@ -2,15 +2,36 @@ package com.litbo.hospital.security.service;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
-import com.litbo.hospital.security.vo.FwWeiXiuIndexVo;
-import com.litbo.hospital.security.vo.WeixiuIndexVo;
-import com.litbo.hospital.security.vo.WxqrIndex;
+import com.litbo.hospital.security.vo.*;
 
 /**
  * @author zjc
  * @create 2018-12-06 13:03
  */
 public interface FwWeixiuService {
+
+    /**
+     * 配件请领
+     * @param fwId
+     * @return
+     */
+    public int jumpPj(String fwId);
+
+    /**
+     * 维修审核页面初始化
+     * @param userId
+     * @param fwId
+     * @return
+     */
+    public FwWxqsShIndexVo wxqsShIndexVo(String userId,String fwId);
+
+    /**
+     * 科室确认页面初始化
+     * @param userId
+     * @param fwId
+     * @return
+     */
+    public FwWxqrIndexVo wxqrIndexVo(String userId,String fwId);
 
 
     /**

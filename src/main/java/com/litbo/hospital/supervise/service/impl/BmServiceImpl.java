@@ -299,8 +299,10 @@ public class BmServiceImpl implements BmService {
                     lbbm.setBmLb("管理部门");
                 else if (bm.getBmId().startsWith("01")){
                     lbbm.setBmLb("机构领导");
-                }else {
+                }else if(bm.getBmId().startsWith("03")){
                     lbbm.setBmLb("使用部门");
+                }else{
+                    lbbm.setBmLb("未设置");
                 }
                 lbbms.add(lbbm);
             }
@@ -366,8 +368,10 @@ public class BmServiceImpl implements BmService {
                     lbbm.setBmLb("管理部门");
                 else if (bm.getBmId().startsWith("01")){
                     lbbm.setBmLb("机构领导");
-                }else {
+                }else if(bm.getBmId().startsWith("03")){
                     lbbm.setBmLb("使用部门");
+                }else{
+                    lbbm.setBmLb("未设置");
                 }
                 lbbms.add(lbbm);
             }

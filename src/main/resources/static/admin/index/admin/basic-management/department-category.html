@@ -37,7 +37,7 @@
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
             <select name="bmlb" lay-verify="required" lay-search="" >
-                <option value="0000000000">部门类别</option>
+                <option></option>
                 <option value="01">机构领导</option>
                 <option value="02">管理部门</option>
                 <option value="03">使用部门</option>
@@ -64,7 +64,7 @@
                         , {field: 'bmId', title: '部门编号', minWidth: 150}
                         , {field: 'bmLb', title: '部门类别', minWidth: 150}
                     ]]
-                    , url: "/supervise/bmgl/listBmsAsLbBms?flag=1"
+                    , url: "/supervise/bmgl/listBmsAsLbBmsBySelectVO?flag=1"
                     , method: "GET"
                     , request: {
                         pageName: 'pageNum',

@@ -2,13 +2,8 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
 import com.litbo.hospital.security.bean.FwWxqs;
-import com.litbo.hospital.security.vo.BaoXiuRw;
-import com.litbo.hospital.security.vo.FwInfoVo;
-import com.litbo.hospital.security.vo.FwWeiXiuIndexVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.litbo.hospital.security.vo.*;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -43,8 +38,8 @@ public interface FwWeixiuDao {
             "      #{qsQzurl,jdbcType=VARCHAR}, #{qsMs,jdbcType=LONGVARCHAR})")
     public void addFwWxqr(FwWxqs fwWxqs);
 
-    @Update("update fw_wxqs set qsShr = #{userId} and qs_shtime = (select GETDATE()) where fw_id = #{fwId}")
-    public void updateFwWxsh(String userId,String fwId);
+    @Update("update fw_wxqs set qs_shr = #{userId} , qs_shtime = (select GETDATE()) where fw_id = #{fwId}")
+    public void updateFwWxsh(@Param("userId") String userId,@Param("fwId") String fwId);
 
     @Select("select * from fw_weixiu where fw_id = #{fwId}")
     public FwWeixiu findWeixiuOne(String fwId);
@@ -79,7 +74,6 @@ public interface FwWeixiuDao {
             "eq.eq_id = baoxiu.eq_id AND\n" +
             "baoxiu.bxks_id = bm.bm_id AND\n" +
             "baoxiu.bxr_id = emp.user_id AND\n" +
-            "wxqs.qs_shr = #{userId} AND\n" +
             "baoxiu.bx_status = 13")
     public List<BaoXiuRw> getBaoXiuRw(String userId);
 
@@ -102,5 +96,63 @@ public interface FwWeixiuDao {
             "bx.bxr_id = dbo.s_emp.user_id AND\n" +
             "bx.id = #{fwId}")
     public FwWeiXiuIndexVo weixiuIndexVo(String fwId);
+
+    @Select("SELECT\n" +
+            "bx.id AS fwId,\n" +
+            "eq.eq_name,\n" +
+            "bxEmp.user_xm AS bxrName,\n" +
+            "slEmp.user_xm AS slrName,\n" +
+            "sl.ydwx_time,\n" +
+            "wxEmp.user_xm AS wxrName,\n" +
+            "bx.gzxx,\n" +
+            "wxnr1.wxnrzd_text,\n" +
+            "wxnr2.wxnrzd_text,\n" +
+            "bx.bx_time,\n" +
+            "sl.sl_time,\n" +
+            "wx.fwks_time AS wx_time\n" +
+            "FROM\n" +
+            "dbo.fw_baoxiu AS bx \n" +
+            "LEFT JOIN dbo.fw_shouli AS sl ON bx.id = sl.id\n" +
+            "LEFT JOIN dbo.fw_weixiu AS wx ON bx.id = wx.fw_id\n" +
+            "LEFT JOIN dbo.eq_info AS eq ON bx.eq_id = eq.eq_id\n" +
+            "LEFT JOIN dbo.s_emp AS bxEmp ON bx.bxr_id = bxEmp.user_id\n" +
+            "LEFT JOIN dbo.s_emp AS slEmp ON sl.slr_id = slEmp.user_id\n" +
+            "LEFT JOIN dbo.s_emp AS wxEmp ON wx.wxr_id = wxEmp.user_id\n" +
+            "LEFT JOIN fw_wxnrzd AS wxnr1 ON wxnr1.id = wx.gzyy_id\n" +
+            "LEFT JOIN fw_wxnrzd AS wxnr2 ON wxnr2.id = gzmx_id\n" +
+            "WHERE bx.id = #{fwId}")
+    public FwWxqrIndexVo wxqrIndexVo(String fwId);
+
+    @Select("SELECT\n" +
+            "bx.id AS fwId,\n" +
+            "eq.eq_name,\n" +
+            "bxEmp.user_xm AS bxrName,\n" +
+            "slEmp.user_xm AS slrName,\n" +
+            "sl.ydwx_time,\n" +
+            "wxEmp.user_xm AS wxrName,\n" +
+            "bx.gzxx,\n" +
+            "wxnr1.wxnrzd_text,\n" +
+            "wxnr2.wxnrzd_text,\n" +
+            "bx.bx_time,\n" +
+            "sl.sl_time,\n" +
+            "wx.fwks_time AS wx_time,\n" +
+            "wxqsEmp.user_xm AS qrName,\n" +
+            "wxqs.qs_myd,\n" +
+            "wxqs.qs_jg,\n" +
+            "wxqs.qs_ms\n" +
+            "FROM\n" +
+            "dbo.fw_baoxiu AS bx \n" +
+            "LEFT JOIN dbo.fw_shouli AS sl ON bx.id = sl.id\n" +
+            "LEFT JOIN dbo.fw_weixiu AS wx ON bx.id = wx.fw_id\n" +
+            "LEFT JOIN dbo.eq_info AS eq ON bx.eq_id = eq.eq_id\n" +
+            "LEFT JOIN dbo.s_emp AS bxEmp ON bx.bxr_id = bxEmp.user_id\n" +
+            "LEFT JOIN dbo.s_emp AS slEmp ON sl.slr_id = slEmp.user_id\n" +
+            "LEFT JOIN dbo.s_emp AS wxEmp ON wx.wxr_id = wxEmp.user_id\n" +
+            "LEFT JOIN fw_wxnrzd AS wxnr1 ON wxnr1.id = wx.gzyy_id\n" +
+            "LEFT JOIN fw_wxnrzd AS wxnr2 ON wxnr2.id = gzmx_id\n" +
+            "LEFT JOIN fw_wxqs AS wxqs ON wxqs.fw_id = bx.id\n" +
+            "LEFT JOIN s_emp AS wxqsEmp ON wxqsEmp.user_id = wxqs.qs_user\n" +
+            "WHERE bx.id = #{fwId}\n")
+    public FwWxqsShIndexVo wxqsShIndexVo(String fwId);
 
 }

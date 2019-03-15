@@ -66,23 +66,42 @@ public class GroupServiceImpl implements GroupService {
         group.setUserId1(groupInsertDetailVO.getUserId1());
         group.setUserId2(groupInsertDetailVO.getUserId2());
         group.setShFlag(GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
-        group.setShTime(groupInsertDetailVO.getShTime());
-        group.setShYj(groupInsertDetailVO.getShYj());
+        if(groupInsertDetailVO.getGroupId()!=null){
+            groupDao.updateGroup(group);
+        }else{
+            groupDao.saveGroup(group);
+        }
+
+        List<SGroupUser> users = groupInsertDetailVO.getUsers();
+
+        groupDao.deleteUsersByGid(group.getGroupId());
+        for (SGroupUser user:users){
+            user.setGroupId(group.getGroupId());
+            groupDao.saveGroupUser(user);
+        }
+
+    }
+
+    @Override
+    public void reSubmitGroups(GroupInsertDetailVO groupInsertDetailVO) {
+        // 设置审核状态
+        SGroup group = new SGroup();
+        group.setGroupId(groupInsertDetailVO.getGroupId());
+        group.setBmId(groupInsertDetailVO.getBmId());
+        group.setGroupName(groupInsertDetailVO.getGroupName());
+        group.setCreateTime(new Date());
+        group.setUserId1(groupInsertDetailVO.getUserId1());
+        group.setUserId2(groupInsertDetailVO.getUserId2());
+        group.setShFlag(GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
         groupDao.saveGroup(group);
 
         List<SGroupUser> users = groupInsertDetailVO.getUsers();
-//        for(SGroupUser user:users){
-//            groupDao.saveGroupUser(user);
-//        }
+
+        groupDao.deleteUsersByGid(group.getGroupId());
         for (SGroupUser user:users){
             user.setGroupId(group.getGroupId());
-            if(groupDao.getGroupUserByGuId(user.getGuId())!=null){   //能获取到  更新
-                groupDao.updateGroupUser(user);
-            }else{
-                groupDao.saveGroupUser(user);
-            }
+            groupDao.saveGroupUser(user);
         }
-
     }
 
     @Override
@@ -100,6 +119,7 @@ public class GroupServiceImpl implements GroupService {
         List<GroupUserSelectVO> users = groupDao.getGroupUserSelectByGId(gid);
         vo.setGroupId(group.getGroupId());
         vo.setBmName(group.getBmName());
+        vo.setBmId(group.getBmId());
         vo.setGroupName(group.getGroupName());
         vo.setUserName1(group.getUserName1());
         vo.setCreateTime(group.getCreateTime());
@@ -114,22 +134,20 @@ public class GroupServiceImpl implements GroupService {
         group.setGroupId(groupInsertDetailVO.getGroupId());
         group.setBmId(groupInsertDetailVO.getBmId());
         group.setGroupName(groupInsertDetailVO.getGroupName());
-        group.setCreateTime(new Date());
         group.setUserId1(groupInsertDetailVO.getUserId1());
         group.setUserId2(groupInsertDetailVO.getUserId2());
-        group.setShFlag(GroupSHEnumProcess.Grouop__ZT_DSH.getCode());
+        group.setShFlag(groupInsertDetailVO.getShFlag());
         group.setShTime(groupInsertDetailVO.getShTime());
         group.setShYj(groupInsertDetailVO.getShYj());
         //设置审核时间
         group.setShTime(new Date());
         groupDao.updateShGroup(group);
         List<SGroupUser> users = groupInsertDetailVO.getUsers();
+
+        groupDao.deleteUsersByGid(group.getGroupId());
         for (SGroupUser user:users){
-            if(groupDao.getGroupUserByGuId(user.getGuId())!=null){   //能获取到  更新
-                groupDao.updateGroupUser(user);
-            }else{
-                groupDao.saveGroupUser(user);
-            }
+            user.setGroupId(group.getGroupId());
+            groupDao.saveGroupUser(user);
         }
     }
 
@@ -279,5 +297,23 @@ public class GroupServiceImpl implements GroupService {
         PageHelper.startPage(pageNum,pageSize);
         List<GroupPerCateGoryUserMSGDetailVO> details = groupDao.listPreEmpsByBmNameAndGwName(gwName,userXm,bmName);
         return new PageInfo(details);
+    }
+
+    @Override
+    public PageInfo getEstablishJd(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<GroupKSJDVO> groupKSJDVOS = groupDao.getEstablishJd();
+        for(GroupKSJDVO groupKSJDVO:groupKSJDVOS){
+            String status = groupKSJDVO.getStatus();
+
+            if(status.equals("1")){
+                groupKSJDVO.setStatus("成立");
+            }else if (status.equals("2")){
+                groupKSJDVO.setStatus("审核通过");
+            }else{
+                groupKSJDVO.setStatus("已退回");
+            }
+        }
+        return new PageInfo(groupKSJDVOS);
     }
 }

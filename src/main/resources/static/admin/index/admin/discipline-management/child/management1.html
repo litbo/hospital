@@ -119,30 +119,13 @@
             date: {
                 elem: "#date"
             },
-            val:{
-                filter:"forms",
-                get:{
-                    url:"/sybm/ksgl/getGroupDetailByGId",
-                    type:"GET",
-                    parse:"userSelectVOS",
-                    tableId:"table",
-                    save:formData,
-                    data:{gid:$.getUrlParam('groupId')}
-                }
-            },
             submit: {
                     before: function () {
-                        var users = getTableValue("table"),daa={};
-                        if(formData.radio){
-                            daa=formData.radio[0]["bmId"];
-                        }else if(formData.val){
-                            console.log(formData)
-                            daa=formData.val.bmId;
-                        }
+                        var users = getTableValue("table");
+                        console.log(formData);
                         return param = {
-                            1: daa,
-                            2: users,
-                            3:$.getUrlParam('groupId')
+                            1: formData.radio[0]["bmId"],
+                            2: users
                         };
                     },
 
@@ -153,12 +136,8 @@
                         data: ["groupName", "userId1", "userId2"],
                         param: {
                             1: "bmId",
-                            2: "users",
-                            3: "groupId"
-                        },
-                        where:{
+                            2: "users"
                         }
-
                     }
             }
         },

@@ -31,6 +31,9 @@ public interface JhZdDao {
     @SelectProvider(type = JhZdProvider.class,method = "findListByKsTime")
     public List<JhZdVo> jhrylrListIndex(@Param("createdate") String createdate, @Param("jhName") String jhName);
 
+    @SelectProvider(type = JhZdProvider.class,method = "findListByKsTime")
+    public List<JhZdVo> jhryKhListIndex(@Param("createdate") String createdate, @Param("jhName") String jhName);
+
     @Select("select * from jh_zd where id = #{id}")
     public JhZd getJhzdById(Integer id);
 }

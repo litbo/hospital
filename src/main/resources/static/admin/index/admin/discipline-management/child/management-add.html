@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title">
             <legend>团队人员分工</legend>
@@ -53,19 +53,6 @@
                 <div class="layui-input-block">
                     <select id="gwId" name="gwId" lay-filter="gw">
                         <option></option>
-                        <option value="1">主管院长</option>
-                        <option value="2">设备处长</option>
-                        <option value="3">院长</option>
-                        <option value="4">医院设备报废技术鉴定小组组长</option>
-                        <option value="5">采购供应科科长</option>
-                        <option value="6">医学装备管理委员会主任</option>
-                        <option value="7">医学计量管理委员会会长</option>
-                        <option value="8">设备副处长</option>
-                        <option value="9">质量管理科科长</option>
-                        <option value="10">信息处处长</option>
-                        <option value="11">信息处副处长</option>
-                        <option value="12">计量室主任</option>
-                        <option value="13">质检室主任</option>
                     </select>
                 </div>
             </div>
@@ -113,45 +100,12 @@
                         filter:"gw",
                         ids:"gwId",
                         text:"gwName",
-                        url:"/sybm/ksgl/listGroups2"
+                        url:"/supervise/gwgl/listGws2"
                     }
                 ]
-            },
-            submit: {
-                form: {
-                    before: function () {
-                        var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]);
-                        if (doJudg({
-                            "undefined": [formData.person, formData.user],
-                            0: [tv, tv1]
-                        })) {
-                            putMsg({
-                                alert: "无法提交空数据！"
-                            });
-                            return false;
-                        }
-                        return param = {
-                            1: formData.person.userIdJl,
-                            2: tv1,
-                            3: tv
-                        };
-                    },
-                    form: {
-                        url: "/lifeManage/insertSgKstl",
-                        type: "POST",
-                        data: ["kstlAddr", "kstlYj", "kstlTime", "kstlContent"],
-                        param: {
-                            1: "userIdJl",
-                            2: "usersId",
-                            3: "pmsId"
-                        },
-                        add: {
-                            bmId: 1
-                        }
-                    }
-                }
             }
-        },
+        }
+        ,
         addTable: {
             table: [
                 {

@@ -71,6 +71,13 @@ public class JhZdServiceImpl implements JhZdService {
     }
 
     @Override
+    public Result jhryKhListIndex(int pageNum, int pageSize, String createdate, String jhName) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<JhZdVo> pageInfo = new PageInfo<>(jhZdDao.jhryKhListIndex(createdate,jhName));
+        return Result.success(pageInfo);
+    }
+
+    @Override
     public JhZd jhrylrIndex(Integer id) {
         return jhZdDao.getJhzdById(id);
     }

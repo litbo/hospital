@@ -66,6 +66,7 @@
 </form>
 
 <script>
+    var formData = {};
     renderMod={
         form:{
             val:{
@@ -81,7 +82,9 @@
         btn:{
             elem:"#save",
             func:function(){
-                var sel = $("#selectOne").val(),int = $("#inputOne").val(),$name = $.getUrlParam("vg"),$key = $.getUrlParam("key");
+                //var sel = $("#selectOne").val(),int = $("#inputOne").val(),$name = $.getUrlParam("vg"),$key = $.getUrlParam("key");
+                var fwId = $.getUrlParam("fwId");
+                var wxs = $("#wxs").val()
                 if(doJudg({
                     "00":[int]
                 })){
@@ -95,15 +98,18 @@
                     value:{"eng":sel,"int":int}
                 });
                 subUp({
-                    url:"###",
+                    url:"/fwWeixiu/addFwWeixiu",
                     type:"POST",
-                    data:{"eng":sel,"int":int}
+                    data:{
+                        fwId:fwId,
+                        wxs:wxs
+                    }
                 });
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
                 return false;
             }
-        }/*,
+        },
         bind:{
             selectItem: [
                 {
@@ -115,7 +121,7 @@
                     name:"dtdt"
                 }
             ]
-        }*/
+        }
     }
 </script>
 </body>
