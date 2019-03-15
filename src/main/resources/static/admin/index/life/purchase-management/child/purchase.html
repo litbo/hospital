@@ -80,9 +80,9 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">托管科室</label>
                 <div class="layui-input-block">
-                    <input type="text" name="tgBmId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input"
                            style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectRoom">选择</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectBm">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -238,23 +238,7 @@
                     , toolbar: false
                     , page: false
                     , height: "200"
-                    , url: "/lifeManage/selectSgInfoById"
-                    , method: "POST"
-                    , request: {
-                        pageName: 'pageNum',
-                        limitName: 'pageSize'
-                    }
-                    , where: {
-                        sgInfoId: $.getUrlParam("sgInfoId")
-                    }
-                    , parseData: function (res) { //res 即为原始返回的数据
-                        return {
-                            "code": res.code, //解析接口状态
-                            "msg": res.msg, //解析提示文本
-                            "data": res.data.sgCkcssbVOs, //解析数据列表
-                            "count": res.data.total //总数据数
-                        }
-                    }
+                    , data: []
                     , text: {
                         none: "请点击上方按钮添加数据！"
                     }
@@ -262,20 +246,29 @@
             ]
         },
         bind: {
-            selectItem: [
+            addItem: [
                 {
                     elem: "#dateTable1",
                     url:"reference_firm.html",
-                    data:formData,
-                    key:"",
-                    name: "dtdt"
+                    name: "dtdt",
+                    key: "radio"
                 },
                 {
                     elem: "#dateTable2",
                     url:"function_configuration.html",
-                    data:formData,
                     key:"",
                     name: "dtd"
+                }
+            ],
+            delItem: ".delNew",
+            selectItem: [
+                {
+                    elem: "#selectBm",
+                    cb:"/supervise/bmgl/listSelectBmsCols",
+                    db:"/supervise/bmgl/listBms",
+                    key:"radio",
+                    name: "dtdt",
+                    data:formData
                 }
             ]
         },

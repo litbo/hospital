@@ -45,29 +45,29 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">参考生产厂商</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
                            style="height:38px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectRoom">选择</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" data-id="table1" id="selectRoom">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">型号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbXh" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">规格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbGg" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">估价</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbGj" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">数量</label>
                 <div class="layui-input-block">
-                    <input type="text" name="num" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbSl" lay-verify="title" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -104,95 +104,19 @@
 </div>
 </body>
 <script>
-    var formData = {};
     renderMod = {
-        table: {
-            table: [
-                {
-                    elem: "#table1",
-                    cols: [[ //表头
-                        {type: "checkbox"}
-                        , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
-                        , {field: 'gnpzMs', title: '功能描述', minWidth: 150}
-                        , {field: 'gnpzIssy', title: '使用', minWidth: 150}
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , url: "/lifeManage/selectSgInfoById"
-                    , method: "POST"
-                    , request: {
-                        pageName: 'pageNum',
-                        limitName: 'pageSize'
-                    }
-                    , parseData: function (res) { //res 即为原始返回的数据
-                        return {
-                            "code": res.code, //解析接口状态
-                            "msg": res.msg, //解析提示文本
-                            "data": res.data.sgCkcssbVOs, //解析数据列表
-                            "count": res.data.total //总数据数
-                        }
-                    }
-                }
-            ]
-        },
         bind: {
-            selectItem: [
+            addItem: [
                 {
-                    elem: "#dateTable1",
-                    url:"reference_firm.html",
-                    data:formData,
-                    name: "dtdt"
-                },
-                {
-                    elem: "#dateTable2",
-                    url:"function_configuration.html",
-                    data:formData,
-                    name: "dtdt"
+                    elem: "#selectRoom",
+                    cb: "/cs/scsTitle",
+                    db: "/cs/listScs",
+                    name: "dtdt",
+                    key: "radio"
                 }
-            ]
-        },
-        form: {
-            val: {
-                filter: "forms",
-                get: {
-                    url: "/lifeManage/selectSgInfoById",
-                    type: "POST",
-                    data: {sgInfoId: $.getUrlParam("sgInfoId")}
-                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
-                    //有add时必需时data为表单name数组，否则请直接使用data赋值
-                }//get内参数需参考《内容传输与提交》文档
-            }
+            ],
+            delItem: ".delNew",
         }
     };
-
-    $(function () {
-        var ss = null;
-        pd(true);
-        $("#gjpd").on("change", pd).keydown(function (event) {
-            if (event.keyCode === 13) {
-                pd();
-                return false;
-            }
-        });
-
-        function pd(f) {
-            var mm = Number($("#gjpd").val());
-            if (mm > 5000) {
-                !f && putMsg({
-                    msg: "数据已修改！"
-                });
-                $("#showMin").addClass("hidden");
-                $("#showMax").removeClass("hidden");
-            } else {
-                !f && putMsg({
-                    msg: "数据已修改！"
-                });
-                $("#showMin").removeClass("hidden");
-                $("#showMax").addClass("hidden");
-            }
-        }
-
-    })
 </script>
 </html>

@@ -24,6 +24,8 @@ public interface SgCkcssbMapper {
             "dbo.sg_ckcssb.ckcssb_gg,\n" +
             "dbo.sg_ckcssb.ckcssb_sl,\n" +
             "dbo.sg_ckcssb.ckcssb_gj,\n" +
+            "dbo.sg_ckcssb.gb,\n" +
+            "dbo.sg_ckcssb.cd,\n" +
             "dbo.sg_ckcssb.extend_one,\n" +
             "dbo.sg_ckcssb.extend_two\n" +
             "FROM dbo.sg_ckcssb\n" +
@@ -49,11 +51,11 @@ public interface SgCkcssbMapper {
      */
     @Insert("INSERT INTO sg_ckcssb (ckcssb_id, sg_id, sbcs_id, \n" +
             "   ckcssb_xh, ckcssb_gg, ckcssb_sl, \n" +
-            "   ckcssb_gj, extend_one, extend_two\n" +
+            "   ckcssb_gj, gb, cd, extend_one, extend_two\n" +
             ")\n" +
             "VALUES (#{ckcssbId,jdbcType=VARCHAR}, #{sgId,jdbcType=VARCHAR}, #{sbcsId,jdbcType=INTEGER}, \n" +
             "   #{ckcssbXh,jdbcType=VARCHAR}, #{ckcssbGg,jdbcType=VARCHAR}, #{ckcssbSl,jdbcType=INTEGER}, \n" +
-            "   #{ckcssbGj,jdbcType=DECIMAL}, #{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}\n" +
+            "   #{ckcssbGj,jdbcType=DECIMAL}, #{gb,jdbcType=VARCHAR},#{cd,jdbcType=VARCHAR},#{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}\n" +
             ")")
     int insertSgCkcssb(SgCkcssb sgCkcssb);
 
