@@ -36,71 +36,57 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <div class="layui-tab">
-            <ul class="layui-tab-title">
-                <li class="layui-this">院办公会记录</li>
-            </ul>
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    <table id="table" lay-filter="table1"></table>
+        <form class="layui-form layui-form-pane" action="" style="padding-top:20px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">会议时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="date" id="datet" lay-verify="date"
+                           placeholder="yyyy-MM-dd h:m:s" autocomplete="off" class="layui-input">
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<form class="layui-form layui-form-pane" id="content" action="" style="display: none;padding-top:20px;">
-    <div class="layui-row">
-        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">会议地点</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" autocomplete="off" class="layui-input">
+                </div>
+            </div>
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">终止误报</label>
+                <label class="layui-form-label">书记员<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="yn" value="通过" title="通过" checked="">
-                    <input type="radio" name="yn" value="不通过" title="不通过">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-submit=""
+                            lay-filter="demo1">选择
+                    </button>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">数量修改</label>
+                <label class="layui-form-label">参加人员</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="默认原数量" autocomplete="off" class="layui-input">
+                    <label>
+                        <select class="layui-select" name="bmId">
+                            <option value="">这里是弹窗式的多选</option>
+                        </select>
+                    </label>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">院领导意见</label>
-                <div class="layui-input-block">
-                    <textarea name="" rows="1" class="layui-textarea input_area"></textarea>
-                </div>
-            </div>
+
             <div class="col-xs-12">
-                <div class="layui-form-item subBtn">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">会议内容</label>
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
-<script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class=" layui-btn layui-btn-warm layui-btn-xs" lay-event="check">审 批</a>
-    </div>
-    <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
-        <div class="layui-inline">
-            <input class="layui-input" name="bh" placeholder="申购编号" autocomplete="off">
-        </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="eqSbPym" placeholder="设备拼音码" autocomplete="off">
-        </div>
-        <div class="layui-input-inline">
-            <select name="bmId" lay-filter="bmId">
-                <option value="">全部部门</option>
-            </select>
-        </div>
-        <button class="layui-btn" data-type="reload">查找</button>
-    </form>
-</script>
+</div>
 <script>
     renderMod = {
         addTable: {
@@ -130,16 +116,7 @@
                     }
                 }
                 , done: function (obj) {
-                    tableFunc({
-                        toolFunc: {
-                            title: "会议记录",
-                            event: "describe",
-                            tool: "toolbar",
-                            type: 2,
-                            content: "./meet-record-hos.html",
-                            area: ["90%", "90%"]
-                        }
-                    })
+
                 }
             },
             reSet: {
@@ -147,16 +124,6 @@
                 type: "reload",
                 data: ["bmId", "bh", "eqSbPym"]
             }
-            , date: [{
-                elem: "#datet"
-            },
-                {
-                    elem: "#datey"
-                    , type: "year"
-                    , value: year
-                    , format: "y年"
-                }
-            ]
         },
         form: {
             val: {
@@ -170,9 +137,15 @@
                     }
                 ]
             }
+            , date: {
+                elem: "#datet"
+                ,type:"datetime"
+                ,value: today + " "+time
+                ,format:'yyyy-MM-dd HH:mm:ss'
+            }
+
         }
     }
 </script>
 </body>
-
 </html>
