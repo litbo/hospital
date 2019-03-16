@@ -116,16 +116,42 @@
 
 <script>
     var setting = {
-        data:{
+
+        view: {
+            showLine: false,           //不显示连接线
+            showIcon: showIconForTree  //不显示文件夹图标（调用showIconForTree()）
+        },
+
+        data: {
             key:{
-                title:"bmName",
-                name:"bmName",
-                url:"url"
+                name:"bmName"
+            },
+            simpleData: {
+                enable: true,
+                idKey: "bmId",
+                pIdKey: "pBmId"
             }
         }
     };
 
-    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+
+    function showIconForTree(treeId, treeNode) {
+        return !treeNode.isParent;
+    };
+
+
+    $(document).ready(function(){
+        $.ajax({
+            url : "/supervise/bmgl/listBm",
+            dataType:"JSON",
+            success(date){
+                var nodes = date;
+                $.fn.zTree.init($("#demo"), setting, nodes);
+            }
+        })
+
+    });
     /*//树形结构菜单
     layui.use(['form',"tree","jquery"], function() {
         var form = layui.form, $ = layui.jquery,
