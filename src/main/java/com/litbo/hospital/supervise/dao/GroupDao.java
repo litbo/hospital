@@ -4,6 +4,7 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
 import com.litbo.hospital.supervise.bean.SGroupUser;
 import com.litbo.hospital.supervise.dao.provider.GroupProvider;
+import com.litbo.hospital.supervise.vo.GroupKSJDVO;
 import com.litbo.hospital.supervise.vo.GroupPerCateGoryUserMSGDetailVO;
 import com.litbo.hospital.supervise.vo.GroupUserSelectVO;
 import com.litbo.hospital.supervise.vo.SGroupSelectVO;
@@ -52,9 +53,9 @@ public interface GroupDao {
             " values(#{groupId},#{userId},#{gwId}) ")
     void saveGroupUser(SGroupUser user);
 
-    @Select("SELECT u.gu_id,u.group_id, u.gw_id,u.user_id ,emp.user_xm ,gw.gw_name " +
-            " from s_group_users u INNER JOIN s_emp emp on (u.user_id=emp.user_id)" +
-            " INNER JOIN s_gangwei gw ON (u.gw_id=gw.gw_id)" +
+    @Select("SELECT u.gu_id,u.group_id, u.gw_id,u.user_id ,emp.user_xm as userName ,gw.gw_name " +
+            " from s_group_users u LEFT JOIN s_emp emp on (u.user_id=emp.user_id)" +
+            " LEFT JOIN s_gangwei gw ON (u.gw_id=gw.gw_id)" +
             " WHERE u.group_id = #{gid}")
     List<GroupUserSelectVO> getGroupUserSelectByGId(String gid);
 
@@ -63,22 +64,34 @@ public interface GroupDao {
 //            " WHERE sp.group_id = #{gid}")
     @Select("select sp.group_id,sp.bm_id, bm.bm_name, sp.group_name, sp.user_id1,emp1.user_xm as userName1, \n" +
             "sp.create_time, sp.user_id2,emp2.user_xm as userName2, sp.sh_time, sp.sh_flag ,sp.sh_yj \n" +
-            "FROM s_group sp  INNER JOIN s_bm bm on (sp.bm_id=bm.bm_id) \n" +
-            "INNER JOIN s_emp emp1 ON (sp.user_id1 = emp1.user_id)\n" +
-            "INNER JOIN s_emp emp2 ON (sp.user_id2 = emp2.user_id)\n" +
+            "FROM s_group sp  LEFT JOIN s_bm bm on (sp.bm_id=bm.bm_id) \n" +
+            "LEFT JOIN s_emp emp1 ON (sp.user_id1 = emp1.user_id)\n" +
+            "LEFT JOIN s_emp emp2 ON (sp.user_id2 = emp2.user_id)\n" +
             "WHERE sp.group_id = #{gid}")
     SGroupSelectVO getGroupSelectByGId(String gid);
 
     @Update("update s_group set sh_time = #{shTime},sh_flag = #{shFlag},sh_yj=#{shYj} " +
             " where group_id = #{groupId}")
     void updateShGroup(SGroup group);
-
+    @Update("update s_group\n" +
+            "    set bm_id = #{bmId,jdbcType=VARCHAR},\n" +
+            "      group_name = #{groupName,jdbcType=VARCHAR},\n" +
+            "      user_id1 = #{userId1,jdbcType=VARCHAR},\n" +
+            "      create_time = #{createTime,jdbcType=TIMESTAMP},\n" +
+            "      user_id2 = #{userId2,jdbcType=VARCHAR},\n" +
+            "      sh_time = #{shTime,jdbcType=TIMESTAMP},\n" +
+            "      sh_yj = #{shYj,jdbcType=TIMESTAMP},\n" +
+            "      sh_flag = #{shFlag,jdbcType=CHAR}\n" +
+            "    where group_id = #{groupId,jdbcType=INTEGER}")
+    void updateGroup(SGroup group);
 
     @Select("select gu_id, group_id, user_id, gw_id from s_group_users where gu_id = #{guId}")
     SGroupUser getGroupUserByGuId(Integer guId);
     @Update("update s_group_users set group_id = #{groupId},user_id = #{userId},gw_id=#{gwId} " +
             " where gu_id = #{guId}")
     void updateGroupUser(SGroupUser user);
+
+
 
     @Select("select emp.user_xm " +
             " from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) " +
@@ -104,6 +117,13 @@ public interface GroupDao {
 
     @SelectProvider(type = GroupProvider.class,method = "listPreEmpsByBmNameAndGwName")
     List<GroupPerCateGoryUserMSGDetailVO> listPreEmpsByBmNameAndGwName(@Param("gwName") String gwName, @Param("userXm")String userXm, @Param("bmName")String bmName);
+
+    @Delete("delete from s_group_users where group_id=#{groupId}")
+    void deleteUsersByGid(Integer groupId);
+    @Select("select bm.bm_name, gp.group_name,gp.sh_flag as status from s_group gp left join s_bm bm on(gp.bm_id=bm.bm_id)")
+    List<GroupKSJDVO> getEstablishJd();
+
+
 
 //    SELECT * from s_group_users u INNER JOIN s_emp emp on (u.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (u.gw_id=gw.gw_id)gw_id
 }

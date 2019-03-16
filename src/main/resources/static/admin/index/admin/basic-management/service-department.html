@@ -33,7 +33,7 @@
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
             <select name="isWx" lay-verify="required" lay-search="">
-                <option value="0000000000">全部</option>
+                <option></option>
                 <option value="1">维修部门</option>
                 <option value="0">不是维修部门</option>
             </select>
@@ -117,7 +117,7 @@
                     , {field: 'bmGk', title: '管理部门类别', minWidth: 150}
                     , {field: 'isGlbm', title: '是否维修部门', minWidth: 150}
                 ]]
-                , url: "/supervise/bmgl/listBmsAsLbBms?flag=3"
+                , url: "/supervise/bmgl/listBmsAsLbBmsBySelectVO?flag=3"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'

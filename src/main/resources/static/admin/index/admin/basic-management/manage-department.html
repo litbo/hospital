@@ -38,7 +38,7 @@
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
             <select name="gklb" lay-verify="required" lay-search="">
-                <option value="0000000000">全部</option>
+                <option></option>
                 <option value="0200">未划分</option>
                 <option value="0201">医工</option>
                 <option value="0202">信息</option>
@@ -65,7 +65,7 @@
                         , {field: 'bmName', title: '部门名称', width:'50%',minWidth: 200}
                         , {field: 'bmGk', title: '归口', minWidth: 150}
                     ]]
-                    , url: "/supervise/bmgl/listBmsAsLbBms?flag=2"
+                    , url: "/supervise/bmgl/listBmsAsLbBmsBySelectVO?flag=2"
                     , method: "GET"
                     , request: {
                         pageName: 'pageNum',

@@ -63,7 +63,6 @@
             <div class="menus">
                 <div class="layui-nav">
                     <div class="menus_con">
-
                     </div>
                 </div>
             </div>
@@ -163,11 +162,25 @@
     });
 
     window.onload = function(){
-            var homes = document.getElementById('home');
+            var homes = document.getElementById('home'),$treeList = $('.layui-nav-tree .layui-nav-child');
+            var count = layui.sessionData("rel").count;
+
         //判断当前页面渲染是否正确，不正确的话将刷新页面重新渲染
-        if($('.layui-nav-tree .layui-nav-child').length >0 && $('.layui-nav-tree .layui-nav-child').prev().children("span").length <= 0){
-            $.cookie("reload",$.cookie("reload")+"-66-");//判断刷新几次
-            location.reload();
+        if($treeList.length >0 && $treeList.prev().children("span").length <= 0){
+            //$.cookie("reload",$.cookie("reload")+"-66-");//判断刷新几次
+            if(count<2){
+                location.reload();
+                count ++;
+                layui.sessionData("rel",{
+                    key:"count",
+                    value:count
+                });
+            }
+        }else{
+            layui.sessionData("rel",{
+                key:"count",
+                value:0
+            });
         }
         //判断主页点击时渲染是否正确，不正确重载主页
         $("#refresh_home").click(function(){

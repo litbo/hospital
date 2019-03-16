@@ -42,6 +42,57 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Autowired
     private FwPjqlDao fwPjqlDao;
 
+    @Autowired
+    private FwPjqlZjbDao fwPjqlZjbDao;
+
+    @Override
+    public int jumpYwwx(FwYwwx fwYwwx) {
+        int i = fwWeixiuDao.addFwYwwx(fwYwwx);
+        fwBaoxiuDao.updateBaoxiuStatus(fwYwwx.getFwId(),100);
+        FwLcjl fwLcjl = new FwLcjl();
+        fwLcjl.setUserId(fwYwwx.getWxrId());
+        fwLcjl.setCreatTime(new Date());
+        fwLcjl.setBxId(fwYwwx.getFwId());
+        fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
+        fwLcjlDao.insertFwLcjl(fwLcjl);
+        return i;
+    }
+
+    @Override
+    public int jumpPj(String userId,String fwId) {
+        int i = fwBaoxiuDao.updateBaoxiuStatus(fwId, 5);
+        FwLcjl fwLcjl = new FwLcjl();
+        fwLcjl.setUserId(userId);
+        fwLcjl.setCreatTime(new Date());
+        fwLcjl.setBxId(fwId);
+        fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
+        fwLcjlDao.insertFwLcjl(fwLcjl);
+        return i;
+    }
+
+    @Override
+    public FwWxqsShIndexVo wxqsShIndexVo(String userId, String fwId) {
+        FwWxqsShIndexVo wxqsShIndexVo = fwWeixiuDao.wxqsShIndexVo(fwId);
+        String userXm = empDao.getUserXmById(userId);
+        wxqsShIndexVo.setShName(userXm);
+        wxqsShIndexVo.setQsShr(userId);
+        List<PjqlZjbExamineVO> pjqlZjbExamineVOS = fwPjqlZjbDao.selectFwPjqlByFwId(fwId);
+        wxqsShIndexVo.setPjList(pjqlZjbExamineVOS);
+        return wxqsShIndexVo;
+    }
+
+    @Override
+    public FwWxqrIndexVo wxqrIndexVo(String userId, String fwId) {
+        FwWxqrIndexVo wxqrIndexVo = fwWeixiuDao.wxqrIndexVo(fwId);
+        String userXm = empDao.getUserXmById(userId);
+        System.out.println(userXm);
+        wxqrIndexVo.setQrName(userXm);
+        wxqrIndexVo.setQsUser(userId);
+        List<PjqlZjbExamineVO> pjqlZjbExamineVOS = fwPjqlZjbDao.selectFwPjqlByFwId(fwId);
+        wxqrIndexVo.setPjList(pjqlZjbExamineVOS);
+        return wxqrIndexVo;
+    }
+
     @Override
     public String pjqlWxIndex(String userId) {
         return empDao.getUserXmById(userId);
@@ -106,10 +157,7 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Transactional
     public void addFwWeixiu(FwWeixiu fwWeixiu,String userId) {
         fwWeixiuDao.addFwWeiXiu(fwWeixiu);
-        if(fwWeixiu.getGzwxFs()==EnumProcess.FW_ZJWX.getCode()){
-            fwBaoxiuDao.updateBaoxiuStatus(fwWeixiu.getFwId(),EnumProcess.FW_WX_QR.getCode());
-        }
-        fwBaoxiuDao.updateBaoxiuStatus(fwWeixiu.getFwId(),fwWeixiu.getGzwxFs());
+        fwBaoxiuDao.updateBaoxiuStatus(fwWeixiu.getFwId(),EnumProcess.FW_WX_QR.getCode());
         FwLcjl fwLcjl = new FwLcjl();
         fwLcjl.setUserId(userId);
         fwLcjl.setCreatTime(new Date());

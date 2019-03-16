@@ -39,9 +39,7 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a href="">
-            <button class=" layui-btn layui-btn-xs">汇 总</button>
-        </a>
+            <a class=" layui-btn layui-btn-xs" lay-event="describe">汇 总</a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-input-inline">
@@ -73,7 +71,7 @@
     renderMod = {
         addTable: {
             table: {
-                cols: [[ //表头
+                cols: [[
                     {type: "checkbox"}
                     , {field: 'bmName', title: '部门名称', minWidth: 150, event: 'openLink'}
                     , {field: 'bh', title: '申购单编号', minWidth: 150}
@@ -98,10 +96,18 @@
                     }
                 }
                 , done: function (obj) {
-                    //console.log(obj);
+                    tableFunc({
+                        toolFunc: {
+                            title: "汇总",
+                            event: "describe",
+                            tool: "toolbar",
+                            type: 2,
+                            content: "./huizong.html",
+                            area: ["90%", "90%"]
+                        }
+                    })
                 }
             },
-
             reSet: {
                 url: "/lifeManage/selectSgInfoGccshList",
                 type: "reload",
@@ -124,5 +130,4 @@
     }
 </script>
 </body>
-
 </html>

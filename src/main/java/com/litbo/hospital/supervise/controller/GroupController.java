@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGroup;
-import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.dao.GroupDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.service.GroupService;
@@ -100,8 +99,13 @@ public class GroupController {
     //提交
     @PostMapping("/submitGroups")
     public Result submitGroups(@RequestBody GroupInsertDetailVO groupInsertDetailVO){
-
         groupService.submitGroups(groupInsertDetailVO);
+        return Result.success();
+    }
+    @PostMapping("/reSubmitGroups")
+    public Result reSubmitGroups(@RequestBody GroupInsertDetailVO groupInsertDetailVO){
+        groupService.reSubmitGroups(groupInsertDetailVO);
+
         return Result.success();
     }
     //通过审核人id 获取待审核的团队
@@ -190,5 +194,13 @@ public class GroupController {
     }
 
 
+    @GetMapping("/getEstablishJd")
+    public Result getEstablishJd(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+
+        PageInfo info = groupService.getEstablishJd(pageNum,pageSize);
+
+        return Result.success(info);
+    }
 
 }

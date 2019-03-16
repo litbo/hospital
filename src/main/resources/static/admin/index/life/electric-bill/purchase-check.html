@@ -25,10 +25,13 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detailYes">核对存在</a>
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detailNo">核对不存在</a>
-    </div>
+    <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
+        <div class="addBtn">
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-submit=""  lay-event="detailYes">核对存在</a>
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-submit="" lay-event="detailNo">核对不存在</a>
+        </div>
+    </form>
+
 </script>
 <script>
     renderMod = {
@@ -65,6 +68,36 @@
                         }
                     }
                     , done: function (obj) {
+                        tableFunc({
+                            toolFunc: {
+                                // title: "核对存在",
+                                event: "check",
+                                tool: "toolbar",
+                                type: 1,
+                                content:"核对完成",
+                                area: ["30%", "30%"],
+                                func:function(a,b){
+                                    if(b.length===0)
+                                    {
+                                        alert('未选中数据');
+                                        return false;
+                                    }
+                                    subUp({
+                                        url:"",
+                                        type:"",
+                                        data:{
+                                            cc:b
+                                        },
+                                        success:function(res){
+
+                                            if(res.code === 0){
+                                                layer.alert("核对完成");
+                                            }
+                                        }
+                                    })
+                                }
+                            }
+                        })
                     }
                 }
             ],
@@ -83,11 +116,20 @@
                         // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
                         //有add时必需时data为表单name数组，否则请直接使用data赋值
                     }//get内参数需参考《内容传输与提交》文档
+                },submit:{
+                    form:{
+                        url:"/lifeManage/updateSgCheckByIds",
+                        type:"POST",
+                        data: [],
+                        success:function(){
+                            alert("审核成功");
+                        }
+                    }
                 }
+
             }
         }
     }
 </script>
 </body>
-
 </html>

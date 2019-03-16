@@ -105,7 +105,7 @@ public class SgInfoController {
      * @return Result
      */
     @PostMapping("updateSgInfoYxgccsh")
-    public Result updateSgInfoYxgccsh(@RequestBody ShVO shVO) {
+    public Result updateSgInfoYxgccsh( ShVO shVO) {
         sgInfoService.updateSgInfoYxgccsh(shVO);
         return Result.success();
     }

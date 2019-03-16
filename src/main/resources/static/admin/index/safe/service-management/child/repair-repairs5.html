@@ -134,7 +134,8 @@
                         1: {
                             "qlTime":$("input[name='qlTime']").val(),
                             "qlyy":$("textarea[name='qlyy']").val(),
-                            "qrrId":$("select[name='qrrId']").val()
+                            "qrrId":$("select[name='qrrId']").val(),
+                            "fwId":$.getUrlParam("fwId")
 
                         },
                         2:ts
@@ -147,7 +148,11 @@
                     param:{
                         1:"fwPjql",
                         2:"fwPjqlZjbs"
-                    }
+                    },
+                },
+                func:function(data){
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
                 }
             }
         },

@@ -863,25 +863,52 @@ action = func = {
                     tool = vas.tool || "tool",
                     tableOn = tool + '(' + filt + ')',
                     baseUrl = vas.content,
+                    num =0,
                     openT = true;
                 //绑定表格事件
                 table.on(tableOn, function (obj) {
                     //排除多个数据源干扰，如toolbar有数据干扰问题，可移除外层限制if
                     //只有在点击表格内按钮时才执行事件
-                    if (tool === "tool") {
-                        //获取当前点击按钮event
-                        var event = obj.event;
-                        for (var x = 0; x < value.length; x++) {
-                            if (event === value[x].event) {
-                                vas = value[x];
-                            }
-                        }
-                    }
+                    //console.log(vas);
+                    //if (tool === "tool") {
+                    //获取当前点击按钮event
                     //只有在点击表格标题行按钮才执行事件
                     if (tool === "toolbar") {
                         //获取选中行数据
                         var checkStatus = table.checkStatus(obj.config.id || vas.tableId);//获取选中数据
                     }
+                    var event = obj.event;
+                    if (Type(value) === "json") {
+                        if (event === value.event) {
+                            vas = value;
+                        }else{
+                            console.log("ISBACK");
+                            return false;
+                        }
+                    } else if (Type(value) === "array") {
+                        for (var x = 0; x < value.length; x++) {
+                            console.log("IS", event, value[x].event);
+                            if (event === value[x].event) {
+                                console.log("IN-IN-IN", event, value[x].event);
+                                vas = value[x];
+                            }else{
+                                num++;
+                            }
+                        }
+                        console.log(num,value.length);
+                        if(num === value.length){
+                            num = 0;
+                            return false;
+                        }
+                    }
+
+                    //}
+                    //
+                    if(vas.send){
+                        checkStatus && action.sendTo(vas.send,checkStatus,table);
+                        return true;
+                    }
+
                     //当无法正常获取URL的时候
                     if (baseUrl === undefined && vas.content !== undefined) {
                         baseUrl = vas.content;
@@ -941,7 +968,7 @@ action = func = {
     },
     //向表格中添加数据
     "reTable": function (value) {
-        var name = value.name || "table", res = value.data,pp = false,hh="200";
+        var name = value.name || "table", res = value.data, pp = false, hh = "200";
         layui.use('table', function () {
             var table = layui.table
                 , oData = table.cache[name];//获取表格所有数据
@@ -960,7 +987,7 @@ action = func = {
                         delParam(res[v]);
                         oData.push(res[v]);
                     }
-                }else {
+                } else {
                     for (var i = 0; i < oData.length; i++) {
                         delParam(oData[i]);
                         compRes(oData[i], res);
@@ -983,7 +1010,7 @@ action = func = {
                     var dd = JSON.stringify(data)
                         , vv = JSON.stringify(val[x]);
                     //当数据一样时，删除当前数据并且结束循环
-                    if (dd === vv){
+                    if (dd === vv) {
                         val.splice(x, 1);
                         return true;
                     }
@@ -996,15 +1023,15 @@ action = func = {
                 !value.delVal && data["LAY_CHECKED"] && delete data["LAY_CHECKED"];
                 !value.delVal && data["LAY_TABLE_INDEX"] && delete data["LAY_TABLE_INDEX"];
                 //判断是否需要删除某个判断的元素（删除自定义参数）
-                if(value.del !== undefined && Type(value.del) === "array"){
-                    for(var cc=0;cc < value.del.length;cc++){
+                if (value.del !== undefined && Type(value.del) === "array") {
+                    for (var cc = 0; cc < value.del.length; cc++) {
                         data[cc] && delete data[cc];
                     }
                 }
             }
 
             //数据大于15条时显示分页按钮并拉高表格高度
-            if(oData.length > 15){
+            if (oData.length > 15) {
                 pp = true;
                 hh = "250"
             }
@@ -1012,8 +1039,8 @@ action = func = {
             //重新渲染表格
             table.reload(name, {
                 data: oData,
-                page:pp,
-                height:hh
+                page: pp,
+                height: hh
             });
 
             //信息提示
@@ -1062,72 +1089,94 @@ action = func = {
     //表格外获取选中数据并删除选中数据（可提交数据）
     "delTable": function (value) {
         layui.use('table', function () {
-            var table = layui.table
-                ,loc = true
-                ,ck = table.checkStatus(value.id)//获取已选中数据
-                , oData = table.cache[value.id];//获取表格所有数据
+            var table = layui.table;
             table.on("toolbar(" + value.filter + ")", function (obj) {
+                var ck = table.checkStatus(value.id || obj.config.id );//获取已选中数据
+                console.log("======normalBegin=====",value);
                 //按钮匹配
                 if (obj.event === value.event) {
-                    if (ck.data.length === 0) {
-                        putMsg({
-                            alert: "请选择至少一条数据！"
-                        });
-                        return false;
-                    }
-                    //上传数据定义
-                    value.data = {};
-                    value.data[value.name] = ck;
-                    if (value.add !== undefined) {
-                        for (var name in value.add) {
-                            if (value.add.hasOwnProperty(name)) {
-                                value.data[name] = value.add[name]
-                            }
-                        }
-                    }
-                    value.contentType = "application/json";
-                    value.success = function (res) {
-                        if (res.code === 0) {
-                            layer.msg("操作成功！");
-                            //重新渲染表格
-                            value.reTable && table.reload(name, {
-                                data: res.data
-                            });
-                            !loc && table.reload(name, {
-                                data: oData
-                            });
-                            value.reload && window.location.reload();
-                        } else {
-                            layer.msg("操作失败！")
-                        }
-                        layer.close(index);
-                    };
-                    if (value.confirm === false) {
-                        console.log("con");
-                        subUp(value)
-                    } else {
-                        layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
-                            if (ck.isAll === true) {
-                                oData = [];
-                            } else {
-                                for (var j = 0; j < oData.length; j++) {
-                                    //找出所有数据中的已选中数据并删除
-                                    if (oData[j].LAY_CHECKED === true) {
-                                        oData.splice(j, 1);
-                                    } else {
-                                        delete oData[j]["LAY_CHECKED"];
-                                        delete oData[j]["LAY_TABLE_INDEX"];
-                                    }
-                                }
-                                loc = false;
-                                //上传已删除文件
-                                subUp(value)
-                            }
-                        });
-                    }
+                    action.sendTo(value,ck,table);
                 }
             });
         });
+    },
+    "sendTo":function (value,ck,table) {
+        var tempData =[],loc = true,oData = table.cache[value.id];
+            if (ck.data.length === 0) {
+                putMsg({
+                    alert: "请选择至少一条数据！"
+                });
+                return false;
+            }
+            //上传数据定义
+            value.data = {};
+            //获取表格中的某一个值组成一个数组
+            if(value.par){
+                for(var t=0;t<ck.data.length;t++){
+                    tempData.push(String(ck.data[t][value.par]));
+                }
+                value.data[value.name] = tempData;
+            }else{
+                value.data[value.name] = ck.data;
+            }
+            //其他需要扩充的数据
+            if (value.adds !== undefined) {
+                for (var name in value.adds) {
+                    if (value.adds.hasOwnProperty(name)) {
+                        value.data[name] = value.adds[name]
+                    }
+                }
+            }
+            //强制以JSON格式发送数据
+            value.contentType = "application/json";
+            //提交成功回调函数
+            value.success = function (res) {
+                if (res.code === 0) {
+
+                    //判断是否重新渲染表格
+                    value.reTable && table.reload(name, {
+                        data: res.data
+                    });
+                    //判断是否需要重新渲染表格数据
+                    !loc && table.reload(name, {
+                        data: oData
+                    });
+
+                    layer.msg("操作成功！",function (index) {
+                        //判断是否刷新页面
+                        value.reload && window.location.reload();
+                    });
+                } else {
+                    layer.msg("操作失败！")
+                }
+                //不论成功关闭layer
+                layer.close(index);
+            };
+            //判断是否为删除数据
+            if (value.confirm === false) {
+                //不删除数据则直接发送数据
+                subUp(value)
+            } else {
+                layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
+                    //获取除去要删除的数据后的数据
+                    if (ck.isAll === true) {
+                        oData = [];
+                    } else {
+                        for (var j = 0; j < oData.length; j++) {
+                            //找出所有数据中的已选中数据并删除
+                            if (oData[j].LAY_CHECKED === true) {
+                                oData.splice(j, 1);
+                            } else {
+                                delete oData[j]["LAY_CHECKED"];
+                                delete oData[j]["LAY_TABLE_INDEX"];
+                            }
+                        }
+                    }
+                    loc=false;
+                    //上传已删除文件
+                    subUp(value)
+                });
+            }
     }
 };
 

@@ -47,7 +47,7 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="describe">上报审核</a>
+        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-submit="" lay-event="describe">上报审核</a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <!--        <div class="layui-inline">
@@ -90,15 +90,23 @@
                         "count": res.data.total //总数据数
                     }
                 }
+                , done: function (obj) {
+                    tableFunc({
+                        toolFunc: {
+                            // title: "核对存在",
+                            event: "check",
+                            tool: "toolbar",
+                            type: 1,
+                            content:"上报完成",
+                            area: ["30%", "30%"]
+                        }
+                    })
+                }
             }
         }
     }
 
 </script>
 </body>
-
 </html>
-
-
-
 

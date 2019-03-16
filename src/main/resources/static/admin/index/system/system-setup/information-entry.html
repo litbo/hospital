@@ -55,7 +55,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">品名<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqPmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="eqPmName" placeholder="请选择"  lay-verify="require" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="pm" id="pm">选择</button>
                                     </div>
                                 </div>
@@ -462,6 +462,7 @@
                 form:{
                     url:"/eq/addEq",
                     type:"POST",
+                    contentType:"application/json",
                     data:["eqName","eqZcbh","eqPmId","eqGg","eqXh","zjlyId",
                             "eqJldwId","eqPrice","eqTzlb","eqBxkssj","eqBxjssj","eqBxxysj",
                             "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",

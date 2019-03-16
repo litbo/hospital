@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.FileUtil;
 import com.litbo.hospital.common.utils.UploadFile;
+import com.litbo.hospital.common.utils.poi.ChangeFile;
 import com.litbo.hospital.user.bean.SysGgxz;
 import com.litbo.hospital.user.dao.GgxzDao;
 import com.litbo.hospital.user.service.GgxzService;
@@ -11,29 +12,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.UUID;
+
 
 @Service
 public class GgxzServiceImpl implements GgxzService {
     @Autowired
     private GgxzDao ggxzDao;
     @Override
-    public int addGgxz(MultipartFile multipartFile, SysGgxz ggxz) {
-        String filePath ="F:\\file\\";
-       /* String fileName = multipartFile.getOriginalFilename();
-        String newFileName = UUID.randomUUID().toString()+fileName.substring(fileName.lastIndexOf("."));
-        UploadFile file = new UploadFile(filePath);
-        if(!file.exists()){
-            file.mkdirs();
-        }
-        try {
+    public int addGgxz(SysGgxz ggxz) {
 
-            multipartFile.transferTo(new UploadFile(filePath+newFileName));
+        String path = System.getProperty("user.dir");
+        String filePath = path+"/wjxz/";
+        java.io.File file = new java.io.File(filePath);
+        String url = filePath+ UUID.randomUUID().toString()+ggxz.getUrl().substring(ggxz.getUrl().lastIndexOf("."));
+        try {
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            ChangeFile.changeFile(ggxz.getUrl(),url);
+            ChangeFile.deleteDir(path+"/tmp/");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String url = filePath+newFileName;*/
-        String url = UploadFile.upload(filePath,multipartFile);
         ggxz.setUrl(url);
         ggxz.setStatus(0);
 

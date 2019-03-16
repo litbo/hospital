@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,14 +35,14 @@
             </select>
         </div>
         <div class="layui-inline">
-            <input type="text" name="checkDate" id="date1" lay-verify="date" placeholder="审核日期(yyyy-MM-dd)"
+            <input type="text" name="checkDate" id="date1" placeholder="审核日期"
                    autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="checkUser" id="test-table-demoReload" placeholder="审核人" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <input type="text" name="planDate" id="datet" lay-verify="date" placeholder="制定日期(yyyy-MM-dd)"
+            <input type="text" name="planDate" id="datet" placeholder="制定日期"
                    autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
@@ -94,9 +95,21 @@
                 type: "reload",
                 data: ["check", "checkDate", "checkUser", "planDate", "planUser"]
             }
+        },
+        form : {
+            date:[
+                {
+                    elem:"#datet",
+                    value: "",
+                    format: 'yyyy-MM-dd'
+                },
+                {
+                    elem: "#date1",
+                    value: "",
+                    format: 'yyyy-MM-dd'
+                }]
         }
     }
 </script>
 </body>
-
 </html>

@@ -94,6 +94,15 @@ public class JhController {
         return result;
     }
 
+    @GetMapping("/jhryKhListIndex")
+    public Result jhryKhListIndex(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                                  @RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                                  @RequestParam(required = false) String createdate, @RequestParam(value = "jhName",required = false) String jhName){
+
+        Result result = jhZdService.jhryKhListIndex(pageNum, pageSize,createdate,jhName);
+        return result;
+    }
+
     /**
      * 计划人员录入初始化
      * @param id

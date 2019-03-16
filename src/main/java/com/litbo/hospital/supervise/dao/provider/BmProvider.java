@@ -5,7 +5,7 @@ import com.litbo.hospital.supervise.vo.BmSelectVO;
 public class BmProvider {
 
     public String selectBmByX(BmSelectVO selectVo){
-        StringBuffer sql = new StringBuffer("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where 1=1" );
+        StringBuffer sql = new StringBuffer("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where 1=1 and bm_id!='0000000000'" );
         if(selectVo.getBmName()!=null)  sql.append(" and bm_name Like '%'+#{bmName}+'%'");
         if(selectVo.getBmlb()!=null) sql.append(" and bm_id Like #{bmlb}+'%'");
         if(selectVo.getGklb()!=null)  sql.append(" and eq_sbbh LIKE #{gklb}+'%'" );
@@ -14,17 +14,17 @@ public class BmProvider {
     }
 
     public String listBmsAsLbBmsBySelectVO(BmSelectVO selectVo){
-        StringBuffer sql = new StringBuffer("select * from s_bm where 1=1" );
+        StringBuffer sql = new StringBuffer("select * from s_bm where 1=1 " );
 
         if(selectVo.getBmName()!=null)  sql.append(" and bm_name Like '%'+#{bmName}+'%'");
         if(selectVo.getFlag()==1){
-            if(!selectVo.getBmlb().equals("0000000000")) sql.append(" and bm_id Like #{bmlb}+'%'");
+            if(selectVo.getBmlb()!=null) sql.append(" and bm_id Like #{bmlb}+'%'");
         }else if(selectVo.getFlag()==2){
             sql.append(" and bm_id LIKE '02'+'%'" );
-            if(!selectVo.getGklb().equals("0000000000"))  sql.append(" and bm_id LIKE #{gklb}+'%'" );
+            if(selectVo.getGklb()!=null)  sql.append(" and bm_id LIKE #{gklb}+'%'" );
         }else if(selectVo.getFlag()==3){
             sql.append(" and bm_id LIKE '02'+'%'" );
-            if(!selectVo.getIsWx().equals("0000000000"))  sql.append(" and wx_flag = #{isWx}");
+            if(selectVo.getIsWx()!=null)  sql.append(" and wx_flag = #{isWx}");
         }
 
 

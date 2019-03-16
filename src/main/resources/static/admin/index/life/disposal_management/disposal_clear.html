@@ -47,7 +47,7 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="describe">清理设备</a>
+        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="describe" >清理设备</a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <!--        <div class="layui-inline">
@@ -90,15 +90,42 @@
                         "count": res.data.total //总数据数
                     }
                 }
+                , done: function (obj) {
+                    tableFunc({
+                        toolFunc: {
+                            title: "处置方式",
+                            event: "describe",
+                            tool: "toolbar",
+                            type: 2,
+                            content:"./child/clear_style.html",
+                            area: ["70%", "50%"],
+                            // func:function(a,b){
+                            //     if(b.length===0)
+                            //     {
+                            //         alert('未选中数据');
+                            //         return false;
+                            //     }
+                            //
+                            //     subUp({
+                            //         url:"",
+                            //         type:"",
+                            //         data:{
+                            //             cc:b
+                            //         },
+                            //         success:function(res){
+                            //
+                            //             if(res.code === 0){
+                            //                 layer.alert("清理完成");
+                            //             }
+                            //         }
+                            //     })
+                            // }
+                        }
+                    })
+                }
             }
         }
     }
-
 </script>
 </body>
-
 </html>
-
-
-
-

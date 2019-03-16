@@ -57,12 +57,18 @@
                            class="layui-input" disabled>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label" style="width:130px;">申请处理方式<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input name="mode" type="radio" checked="checked">报废
-                    <input type="radio" name="mode">捐赠
-                    <input type="radio" name="mode">调拨
+                <div class="layui-input-block" style="margin-left:130px;">
+                    <label class="radio">
+                        <input name="mode" type="radio" value='1'>报废
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="mode" value='2'>捐赠
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="mode" value='3'>调拨
+                    </label>
                     <!--<input type="text" name="mode" lay-verify="title" autocomplete="off" placeholder="请输入"-->
                            <!--class="layui-input">-->
                 </div>
@@ -105,28 +111,33 @@
                 </div>
             </div>
         </div>
-    </form>
-<div class="layui-row">
+
+<div class="layui-row" id="bfyy1" style="display: none;">
     <fieldset class="layui-elem-field layui-field-title">
         <legend>设备报废原因</legend>
     </fieldset>
 </div>
-<form class="layui-form layui-form-pane" action="" lay-filter="forms">
-    <div class="layui-form-item">
+
+    <div class="layui-form-item" id="bfyy" style="display:none;" pane>
         <label class="layui-form-label">报废原因</label>
         <div class="layui-input-block">
-            <input type="checkbox" name="reasonIds">严重损坏无法修复或维修费用过高
-            <input type="checkbox" name="reasonIds">国家有明确要求
-            <input type="checkbox" name="reasonIds">失效或功能低下、技术落后，不能满足使用需求
+            <input type="checkbox" name="reasonIds" title="严重损坏无法修复或维修费用过高">
+            <input type="checkbox" name="reasonIds" title="国家有明确要求">
+            <input type="checkbox" name="reasonIds" title="失效或功能低下、技术落后，不能满足使用需求">
         </div>
         <div class="layui-input-block">
-            <input type="checkbox" name="reasonIds">严重污染环境，危害人身安全与健康
-            <input type="checkbox" name="reasonIds">国家规定淘汰
+            <input type="checkbox" name="reasonIds" title="严重污染环境，危害人身安全与健康">
+            <input type="checkbox" name="reasonIds" title="国家规定淘汰">
         </div>
     </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+            </div>
+        </div>
 </form>
 <body>
-<script>
+<script type="text/javascript">
     renderMod = {
         form: {
             val: {
@@ -148,7 +159,22 @@
                 }
             }
         }
-    };
+
+    }
+
+
+        $('.radio').on("click" ,function(){
+            var value=$("input[name=mode]:checked").val();
+            if(value!='1'){
+                $("#bfyy").hide();
+                $("#bfyy1").hide();
+            }else{
+                $("#bfyy").show();
+                $("#bfyy1").show();
+
+            }
+        });
+
 </script>
 </body>
 </html>

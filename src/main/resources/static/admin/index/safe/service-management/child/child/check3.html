@@ -46,40 +46,39 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维修工时<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" id="inputOne" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required|number">
+                    <input type="text" name="wxsyTime" id="inputOne" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required|number">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">维修费</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
+                    <input type="text" name="wxPrice" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item">
                 <label class="layui-form-label">辅助维修人员</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="fzwx">选择</button>
+                    <input type="text" name="fzwxId" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">维修结果</label>
                 <div class="layui-input-block">
-                    <select name="">
-                        <option value="">已修复工作正常</option>
-                        <option value="">部分修复尚需进一步维修</option>
-                        <option value="">需外送维修</option>
-                        <option value="">无法维修</option>
+                    <select name="wxjg">
+                        <option value="已修复工作正常">已修复工作正常</option>
+                        <option value="部分修复尚需进一步维修">部分修复尚需进一步维修</option>
+                        <option value="需外送维修">需外送维修</option>
+                        <option value="无法维修">无法维修</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">工程师建议</label>
                 <div class="layui-input-block">
-                    <select name="">
-                        <option value="">临床使用</option>
-                        <option value="">停用</option>
-                        <option value="">报废</option>
+                    <select name="gcsjy">
+                        <option value="临床使用">临床使用</option>
+                        <option value="停用">停用</option>
+                        <option value="报废">报废</option>
                     </select>
                 </div>
             </div>
@@ -91,7 +90,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">故障原因类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="ss" lay-filter="break_type">
+                    <select name="gzyyId" lay-filter="break_type">
                         <option value=""></option>
                         <option value="1">人为原因</option>
                         <option value="2">设备本身原因</option>
@@ -105,7 +104,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">故障原因明细<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="ss" id="gzmx" lay-filter="break_reason">
+                    <select name="gzmxId" id="gzmx" lay-filter="break_reason">
                         <option value=""></option>
                     </select>
                 </div>
@@ -113,7 +112,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">故障部位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select  name="ss" lay-filter="break_part">
+                    <select  name="gzbwId" lay-filter="break_part">
                         <option value=""></option>
                     </select>
                 </div>
@@ -121,7 +120,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">维修工作内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="ss" lay-filter="repair_eng">
+                    <select name="wxgznr" lay-filter="repair_eng">
                         <option value="1">123</option>
                     </select>
                 </div>
@@ -129,32 +128,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width:120px">故障停机时长</label>
                 <div class="layui-input-block" style="margin-left:120px;">
-                    <input type="text" name="pjRkTime" class="layui-input" autocomplete="off" lay-verify="required|number" placeholder="请输入（单位：小时）">
-                </div>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">维修指导</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">指导咨询次数</label>
-                <div class="layui-input-block">
-                    <input type="text" name="pjRkTime" class="layui-input" autocomplete="off" lay-verify="required|number" placeholder="请输入">
+                    <input type="text" name="gztjTime" class="layui-input" autocomplete="off" lay-verify="required|number" placeholder="请输入（单位：小时）">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">服务开始时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjRkTime" class="layui-input" autocomplete="off" id="date" lay-verify="required">
+                    <input type="text" name="fwksTime" class="layui-input" autocomplete="off" id="date" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">排查完成时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjRkTime" class="layui-input" autocomplete="off" id="date1" lay-verify="required">
+                    <input type="text" name="pcwcTime" class="layui-input" autocomplete="off" id="date1" lay-verify="required">
                 </div>
             </div>
 
@@ -245,21 +231,23 @@
                     ,$select = $("select");
                 //获取input标签的name与value，存入json
                 for(var i=0;i<$input.length;i++){
-                    pData[$input.get(i).attr("name")] = $input.get(i).val();
+                    pData[$input.eq(i).attr("name")] = $input.eq(i).val();
                 }
                 //获取select标签的name与value，存入json
                 for(var j=0;j<$select.length;j++){
-                    pData[$select.get(j).attr("name")] = $select.get(j).val();
+                    pData[$select.eq(j).attr("name")] = $select.eq(j).val();
                 }
                 //拼接数据
                 pData["fzwxry"] = formData["fzwxry"];
                 pData["wxzd"] = formData["wxzd"];
+                pData["wxrId"] = $.getUrlParam("wxrId");
+                pData["fwId"] = $.getUrlParam("fwId");
                 layui.sessionData($name,{
                     key:$key,
                     value:pData
                 });
                 subUp({
-                    url:"/fwWeixiu/jumpWxwc",
+                    url:"/fwWeixiu/jumpWx",
                     type:"POST",
                     data:pData
                 });
