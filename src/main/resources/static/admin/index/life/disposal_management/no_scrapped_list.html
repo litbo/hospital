@@ -16,10 +16,21 @@
 </head>
 
 <body>
-<script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="applyScrap">申请报废</a>
+
+
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
     </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <form class="layui-form layui-form-pane hidden-xs">
+        <div class="addBtn">
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-submit="" lay-event="check">申请报废</a>
+        </div>
+    </form>
+
     <div class="hidden-xs" id="moreBar">
         <div class="layui-input-inline">
             <label>
@@ -31,19 +42,13 @@
         <button class="layui-btn" data-type="reload">查找</button>
     </div>
 </script>
-
-<div class="layui-row">
-    <div class="col-xs-12">
-        <table id="table" lay-filter="table1"></table>
-    </div>
-</div>
-
 <script>
     renderMod = {
         addTable: {
-            table: {
+            table:[ {
                 cols: [[ //表头
-                    {field: 'eqSbbh', title: '设备编号', minWidth: 150}
+                      {type:"checkbox"}
+                    , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
                     , {field: 'eqName', title: '设备名称', minWidth: 150}
                     , {field: 'bmName', title: '部门名称', minWidth: 100}
                     , {field: 'eqGg', title: '规格', minWidth: 100}
@@ -63,9 +68,36 @@
                         "data": res.data.list, //解析数据列表
                         "count": res.data.total //总数据数
                     }
+                },
+                done: function (obj) {
+                    tableFunc({
+                        tools: {
+                            title: "申请报废",
+                            event: "check",
+                            tool: "toolbar",
+                            type: 1,
+                            content: "1456151",
+                            area: ["50%", "50%"],
+                            func:function(a,b){
+                                subUp({
+                                    url:"",
+                                    type:"",
+                                    data:{
+                                        cc:b
+                                    },
+                                    success:function(res){
+                                        if(res.code===0){
+                                            layer.alert("申请成功");
+                                        }else{
+                                            layer.alter("失败");
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    })
                 }
-            },
-
+            }],
             reSet: {
                 url: "/lifeManage/selectScrappedList",
                 type: "reload",
@@ -85,7 +117,6 @@
                 ]
             }
         }
-
     }
 </script>
 
