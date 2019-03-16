@@ -20,11 +20,9 @@
             padding: 15px 0;
             text-align: center;
         }
-
         ol {
             padding: 15px;
         }
-
         ol li {
             list-style: unset;
             margin-left: 40px;
@@ -90,15 +88,43 @@
                         "count": res.data.total //总数据数
                     }
                 }
+                , done: function (obj) {
+                    tableFunc({
+                        toolFunc: {
+                            title: "存放位置",
+                            event: "describe",
+                            tool: "toolbar",
+                            type: 2,
+                            content:"./child/clear_style.html",
+                            area: ["70%", "50%"],
+                            // func:function(a,b){
+                            //     if(b.length===0)
+                            //     {
+                            //         alert('未选中数据');
+                            //         return false;
+                            //     }
+                            //
+                            //     subUp({
+                            //         url:"",
+                            //         type:"",
+                            //         data:{
+                            //             cc:b
+                            //         },
+                            //         success:function(res){
+                            //
+                            //             if(res.code === 0){
+                            //                 layer.alert("备案完成");
+                            //             }
+                            //         }
+                            //     })
+                            // }
+                        }
+                    })
+                }
+
             }
         }
     }
-
 </script>
 </body>
-
 </html>
-
-
-
-

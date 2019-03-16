@@ -60,7 +60,7 @@
     renderMod = {
         addTable: {
             table: {
-                cols: [[ //表头
+                cols: [[
                     {type: "checkbox"}
                     , {field: 'eqSbbh', title: '设备编号', minWidth: 180, sort: true, event: 'openLink'}
                     , {field: 'eqName', title: '设备名称', minWidth: 150}
@@ -90,15 +90,48 @@
                         "count": res.data.total //总数据数
                     }
                 }
+                , done: function (obj) {
+
+                    tableFunc({
+                        toolFunc: {
+                            // title: "核对存在",
+                            event: "describe",
+                            tool: "toolbar",
+                            type: 1,
+                            content:"完成",
+                            area: ["30%", "30%"],
+                            // func:function(a,b){
+                            //     if(b.length===0)
+                            //     {
+                            //         alert('未选中数据');
+                            //         return false;
+                            //     }
+                            //
+                            //     subUp({
+                            //         url:"",
+                            //         type:"",
+                            //         data:{
+                            //             cc:b
+                            //         },
+                            //         success:function(res){
+                            //
+                            //             if(res.code === 0){
+                            //                 layer.alert("已批复");
+                            //             }
+                            //         }
+                            //     })
+                            // }
+                        }
+                    })
+                }
+
             }
         }
     }
 
 </script>
 </body>
-
 </html>
-
 
 
 
