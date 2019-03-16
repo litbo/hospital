@@ -482,8 +482,8 @@ function subUp(value, data, param) {
         "undefined": [value.url]
     })) {
         putMsg({
-            alert: "数据上传操作已被强制终止！",
-            error: "参数填写不正确，程序无法继续进行！",
+            alert: "数据传输URL未填写！",
+            error: "参数填写不正确，程序无法继续进行！请检查（487行）传递的参数中的第一项（0）中是否含有URL",
             log: arguments
         });
         return false;
@@ -598,8 +598,12 @@ function subUp(value, data, param) {
             error: function (er) {
                 putMsg({
                     alert: "提交失败，请重试！",
-                    error: "数据提交异常,错误信息为:",
+                    error: "数据提交异常,错误信息为（602行）",
                     log: er.responseJSON
+                });
+                putMsg({
+                    error: "错误的提交数据为（606行）:",
+                    log: dataP || value.data
                 });
                 //提交失败后执行函数
                 value.fine && value.fine(er);
@@ -657,7 +661,7 @@ function getTableValue(name, inClear) {
     return oData;
 }
 
-function getFormValue(data){
+function getFormValue(data,vaus,dataP){
     var inputValue = $("input[name=" + valus + "]").val();
     if (inputValue) {
         dataP[valus] = inputValue;
