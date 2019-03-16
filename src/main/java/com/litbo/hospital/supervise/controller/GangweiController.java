@@ -39,7 +39,7 @@ public class GangweiController {
 
 
     @PostMapping("/deleteGwByGwIds")
-    public Result deleteGwByGwIds(@RequestParam String[] gwIds){
+    public Result deleteGwByGwIds(@RequestBody String[] gwIds){
         for(String gwid:gwIds)
             gangweiService.deleteGwByGwId(gwid);
         return Result.success();
