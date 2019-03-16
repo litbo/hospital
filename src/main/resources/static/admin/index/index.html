@@ -197,15 +197,13 @@
             },10)
         });
         //展开第一项列表
-        try{
-            var f = $.cookie("f");
-            $.cookie("f", null);
-            if(f !== null && typeof Number(f) === "number"){
+
+            var f = tempValue("index","f");
+            console.log(f);
+            if(f && typeof Number(f) === "number"){
                 $("a[data-id='"+Number(f)+"']")[0].click();
             }//读取cookies跳转页面
-        }catch(er){
-            console.log("no COOKIES");
-        }
+
     }
 </script>
 </body>
