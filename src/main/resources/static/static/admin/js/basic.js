@@ -868,15 +868,26 @@ action = func = {
                 table.on(tableOn, function (obj) {
                     //排除多个数据源干扰，如toolbar有数据干扰问题，可移除外层限制if
                     //只有在点击表格内按钮时才执行事件
-                    if (tool === "tool") {
-                        //获取当前点击按钮event
-                        var event = obj.event;
+                    //if (tool === "tool") {
+                    //获取当前点击按钮event
+                    var event = obj.event;
+                    if (Type(value) === "json") {
+                        if (event === value.event) {
+                            vas = value;
+                        } else {
+                            return false;
+                        }
+                    } else if (Type(value) === "array") {
                         for (var x = 0; x < value.length; x++) {
                             if (event === value[x].event) {
                                 vas = value[x];
+                            } else {
+                                return false;
                             }
                         }
                     }
+
+                    //}
                     //只有在点击表格标题行按钮才执行事件
                     if (tool === "toolbar") {
                         //获取选中行数据
@@ -941,7 +952,7 @@ action = func = {
     },
     //向表格中添加数据
     "reTable": function (value) {
-        var name = value.name || "table", res = value.data,pp = false,hh="200";
+        var name = value.name || "table", res = value.data, pp = false, hh = "200";
         layui.use('table', function () {
             var table = layui.table
                 , oData = table.cache[name];//获取表格所有数据
@@ -960,7 +971,7 @@ action = func = {
                         delParam(res[v]);
                         oData.push(res[v]);
                     }
-                }else {
+                } else {
                     for (var i = 0; i < oData.length; i++) {
                         delParam(oData[i]);
                         compRes(oData[i], res);
@@ -983,7 +994,7 @@ action = func = {
                     var dd = JSON.stringify(data)
                         , vv = JSON.stringify(val[x]);
                     //当数据一样时，删除当前数据并且结束循环
-                    if (dd === vv){
+                    if (dd === vv) {
                         val.splice(x, 1);
                         return true;
                     }
@@ -996,15 +1007,15 @@ action = func = {
                 !value.delVal && data["LAY_CHECKED"] && delete data["LAY_CHECKED"];
                 !value.delVal && data["LAY_TABLE_INDEX"] && delete data["LAY_TABLE_INDEX"];
                 //判断是否需要删除某个判断的元素（删除自定义参数）
-                if(value.del !== undefined && Type(value.del) === "array"){
-                    for(var cc=0;cc < value.del.length;cc++){
+                if (value.del !== undefined && Type(value.del) === "array") {
+                    for (var cc = 0; cc < value.del.length; cc++) {
                         data[cc] && delete data[cc];
                     }
                 }
             }
 
             //数据大于15条时显示分页按钮并拉高表格高度
-            if(oData.length > 15){
+            if (oData.length > 15) {
                 pp = true;
                 hh = "250"
             }
@@ -1012,8 +1023,8 @@ action = func = {
             //重新渲染表格
             table.reload(name, {
                 data: oData,
-                page:pp,
-                height:hh
+                page: pp,
+                height: hh
             });
 
             //信息提示
@@ -1063,12 +1074,16 @@ action = func = {
     "delTable": function (value) {
         layui.use('table', function () {
             var table = layui.table
-                ,loc = true
-                ,ck = table.checkStatus(value.id)//获取已选中数据
+                , loc = true
+
                 , oData = table.cache[value.id];//获取表格所有数据
             table.on("toolbar(" + value.filter + ")", function (obj) {
+                var ck = table.checkStatus(value.id || obj.config.id ),tempData =[];//获取已选中数据
+                console.log("======normalBegin=====",value);
                 //按钮匹配
                 if (obj.event === value.event) {
+                    //console.log("table",table.checkStatus);
+                    console.log("ck",ck);
                     if (ck.data.length === 0) {
                         putMsg({
                             alert: "请选择至少一条数据！"
@@ -1077,7 +1092,15 @@ action = func = {
                     }
                     //上传数据定义
                     value.data = {};
-                    value.data[value.name] = ck;
+                    if(value.par){
+                        for(var t=0;t<ck.data.length;t++){
+                            tempData.push(String(ck.data[t][value.par]));
+
+                        }
+                        value.data[value.name] = tempData;
+                    }else{
+                        value.data[value.name] = ck.data;
+                    }
                     if (value.add !== undefined) {
                         for (var name in value.add) {
                             if (value.add.hasOwnProperty(name)) {
@@ -1085,6 +1108,7 @@ action = func = {
                             }
                         }
                     }
+                    console.log("vd",value.data);
                     value.contentType = "application/json";
                     value.success = function (res) {
                         if (res.code === 0) {
