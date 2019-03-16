@@ -62,8 +62,12 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
                         <span>金额区间：</span>
                     </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" id="price" name="eqPrice" lay-verify="date" autocomplete="off"
+                    <div class="layui-inline col-6 mar10-0 pad0-10">
+                        <input type="text" id="price1" name="eqPrice" lay-verify="date" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <div class="layui-inline col-6 mar10-0 pad0-10">
+                        <input type="text" id="price2" name="eqPrice" lay-verify="date" autocomplete="off"
                                class="layui-input">
                     </div>
                     <!--<div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -144,11 +148,16 @@
                     }
                 ]
             },
-            date: {
-                elem: '#eqQysj',
-                type: 'datetime',
-                range: '~'
+
+            date: [{
+                elem: "#eqQysj",
+                value:today0
+            },
+            {
+                elem: "#eqCgrq",
+                value:today0
             }
+            ]
         },
         addTable: {
             table: {

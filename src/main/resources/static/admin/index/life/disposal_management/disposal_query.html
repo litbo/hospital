@@ -24,6 +24,7 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">申报日期：</div>
         <div class="layui-inline">
             <input class="layui-input" name="bh" id="date1" autocomplete="off">
         </div>
@@ -70,13 +71,11 @@
             }
         }
         , form: {
-            date: {
-                elem: "#date1",
-                value: today0,
-                type: "date",
-                range: "~",
-                format: 'yyyy-MM-dd'
-            }
+            date:
+                {
+                    elem: "#date1",
+                    value:today0
+                }
         }
     }
 </script>
