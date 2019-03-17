@@ -55,8 +55,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<SRole> listRoles() {
-        return roleDao.listRoles();
+    public PageInfo listRoles(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+
+        return new PageInfo(roleDao.listRoles());
+
     }
+
+
 
 }

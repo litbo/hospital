@@ -26,5 +26,5 @@ public interface RoleService {
 
     PageInfo listUserByX(SelectUserVo selectUserVo, int pageNum, int pageSize);
 
-    List<SRole> listRoles();
+    PageInfo listRoles( int pageNum, int pageSize);
 }

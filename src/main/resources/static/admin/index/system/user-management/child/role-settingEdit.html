@@ -41,19 +41,20 @@
                 </div>-->
                 <div class="layui-input-block">
                     <input type="text" name="name" disabled class="layui-input" autocomplete="off">
+                    <input type="hidden" name="userId" disabled class="layui-input" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">角色<span>*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="">选择</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="" id="roleList" name="roleId" lay-filter="roleList">选择</button>
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -66,22 +67,33 @@
 
 
 <script>
+    formData={};
     renderMod = {
         form: {
+
             val:{
                 filter:"userForm",
                 get:{
                     url:"/user/getUserById",
                     data:{
-                        userId:$.getUrlParam("userId")
+                            userId:$.getUrlParam("userId")
                     }
                 }
             },
             submit:{
+                before :function(){
+                    return param = {
+                        1: formData.radio[0].roleId
+                    }
+                },
                 form:{
-                    url:"/baoxiu/addBaoxiu",
+                    filter:"submit",
+                    url:"/role/setRole",
                     type:"POST",
-                    data:["eqId","bxrId","bxrdh","bxksId","bxksdh","bxfs","gzxx","bxTime","fxTime"],
+                    data:["userId"],
+                    param:{
+                        1:"roleId"
+                    },
                     done:function(res){
                         if(res.code === 0){
                             //提交完成后关闭页面
@@ -92,6 +104,18 @@
                     }
                 }
             }
+        },
+        bind:{
+            selectItem: [
+                {
+                    elem: "#roleList",
+                    data:formData,
+                    cb:"/role/listRolesTitle",
+                    db:"/role/listRoles",
+                    key:"radio",
+                    name:"dtdt"
+                }
+            ]
         }
     }
 </script>

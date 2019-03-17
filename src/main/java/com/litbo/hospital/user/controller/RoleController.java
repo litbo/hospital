@@ -1,5 +1,8 @@
 package com.litbo.hospital.user.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SRole;
 import com.litbo.hospital.user.service.RoleService;
@@ -68,8 +71,23 @@ public class RoleController {
 
     //查询所有角色数据
     @RequestMapping("/listRoles")
-    public Result listRoles(){
-        return Result.success(roleService.listRoles());
+    public Result listRoles(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize){
+        PageInfo pageInfo = roleService.listRoles(pageNum,pageSize);
+        return Result.success(pageInfo);
+    }
+
+    @RequestMapping("listRolesTitle")
+    public Result listPmsCols(@RequestParam(required = false) String key,
+                              @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+        JSONArray myJsonArray = null;
+            String jsonMessage = "[{'type': 'radio'}, " +
+                    "{field: 'roleId', title: '角色编号'}, " +
+                    "{field: 'roleName', title: '角色名称'}]" ;
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        PageInfo date = new PageInfo(myJsonArray);
+        return Result.success(date);
     }
 
 }
