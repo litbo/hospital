@@ -73,13 +73,20 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        delTable:{
-                            id:"table",
+                        toolFunc: {
+                            send: {
+                                id: "table",
+                                fitler: "table1",
+                                name: "gbIds",
+                                url: "/kwgl/glbm/gcsBmXcHf",
+                                type: "POST",
+                                event: "qchf",
+                                confirm:false,
+                                par:"gbId"
+                                // adds:["userId"]
+                            },
                             event:"qchf",
-                            name:"gbId",
-                            param:"gbIds",
-                            url:"/kwgl/glbm/getGcsBmMSG/deleteGwByGwIds",
-                            type:"POST"
+                            tool:"toolbar"
                         }
                     })
                 }

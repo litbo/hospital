@@ -3,10 +3,7 @@ package com.litbo.hospital.supervise.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.service.WxhfService;
-import com.litbo.hospital.supervise.vo.BmGcsEqSelectXVO;
-import com.litbo.hospital.supervise.vo.WxBmGcsEqInsertVO;
-import com.litbo.hospital.supervise.vo.WxhfReadyResouceVO;
-import com.litbo.hospital.supervise.vo.WxrBmInsertVO;
+import com.litbo.hospital.supervise.vo.*;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +28,8 @@ public class WxhfController {
     }
 
     @PostMapping("/gcsBmXcHf")
-    public Result wxrBmXcHf(@RequestBody String[] gbids){
-        wxhfService.wxrBmXcHf(gbids);
+    public Result wxrBmXcHf(@RequestBody WxhfDeteleVO wxhfDeteleVO){
+        wxhfService.wxrBmXcHf(wxhfDeteleVO.getGbIds());
         return Result.success();
     }
 
@@ -76,8 +73,8 @@ public class WxhfController {
     }
 
     @PostMapping("/wxBmGcsEqXcHf")
-    public Result wxBmGcsEqXcHf(@RequestBody String[] bgids){
-        wxhfService.wxBmGcsEqXcHf(bgids);
+    public Result wxBmGcsEqXcHf(@RequestBody WxhfDeteleVO wxhfDeteleVO){
+        wxhfService.wxBmGcsEqXcHf(wxhfDeteleVO.getBgIds());
         return Result.success();
     }
 
