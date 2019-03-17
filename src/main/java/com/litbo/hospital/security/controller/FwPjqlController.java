@@ -28,7 +28,7 @@ public class FwPjqlController {
             return Result.error(CodeMsg.PARAM_ERROR);
         try {
             //TODO 此处配件请领人从session中获取，并存入Pjql表中
-            String qlrId = "1615925039";
+            String qlrId = "1615925023";
             fwPjqlVo.getFwPjql().setQlrId(qlrId);
             int res = pjqlService.insertFwPjql(fwPjqlVo);
             if(res>0){
