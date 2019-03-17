@@ -51,29 +51,16 @@
     renderMod = {
         addTable: {
             table: {
-                cols: [[ //表头
-                    {checkbox: true, fixed: true}
-                    , {field: 'bmName', title: 'xxx', minWidth: 100}
-                    , {field: 'eqSbbh', title: 'xxx', minWidth: 150}
-                    , {field: 'eqZcbh', title: 'xxx', minWidth: 150}
-                    , {field: 'eqName', title: 'xxx', minWidth: 150}
-                    , {field: 'eqXh', title: 'xxx', minWidth: 80}
-                    , {field: 'eqGg', title: 'xxx', width: 150}
-                    , {field: 'eqQysj', title: 'xxx', width: 150}
+                elem: "#table"
+                , height: 'full-75'
+                ,cols: [[ //表头
+                    {checkbox:true,fixed:true}
+                    , {field: 'bmName', title: '部门名称', width:'30%',minWidth: 200}
+                    , {field: 'bmId', title: '部门编号', minWidth: 150}
+                    , {field: 'bmLb', title: '部门类别', minWidth: 150}
                 ]]
-                , url: ""
-                ,data:[
-                    {
-                        'bmName':'你好',
-                        'eqSbbh':'你好',
-                        'eqZcbh':'你好',
-                        'eqName':'你好',
-                        'eqXh':'你好',
-                        'eqGg':'你好',
-                        'eqQysj':'你好'
-                    }
-                ]
-                , method: "POST"
+                , url: "/supervise/bmgl/listBmsAsLbBmsBySelectVO?flag=1"
+                , method: "GET"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'

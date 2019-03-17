@@ -8,7 +8,6 @@
     <title>岗位管理</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
@@ -21,13 +20,15 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
 </script>
+
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
@@ -64,17 +65,15 @@ renderMod = {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
+                        "count":res.data.total,
                         "data": res.data.list //解析数据列表
                     }
                 }
+                ,id:"table"
                 , done: function (obj) {
 
                     tableFunc({
@@ -85,13 +84,30 @@ renderMod = {
                             title: "添加岗位",
                             event: "add",
                             content: "./child/position-managementAdd.html",
-                        } , {
+                            func:function(){
+                                console.log(arguments);
+                            }
+                        },{
                             type: 2,
                             title: "修改岗位",
                             event: "edit",
                             content: "./child/position-managementAdd.html",
                             dataUrl:["gwId"]
-                        }]
+                        },{
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"gwIds",
+                                event:"del",
+                                url:"/supervise/gwgl/deleteGwByGwIds",
+                                type:"POST",
+                                par:"gwId"
+                            },
+                            tool:"toolbar",
+                            event:"del"
+
+                        }
+                        ]
                     })
                 }
             },

@@ -88,28 +88,46 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
+                        "count":res.data.total,
                         "data": res.data.list //解析数据列表
                     }
                 }
                 , done: function (obj) {
 
+                    // tableFunc({
+                    //         "obj": obj,
+                    //         "toolFunc": [{
+                    //                 tool:"tool",
+                    //                 type: 2,
+                    //                 title: "添加",
+                    //                 event: "add",
+                    //                 content: "./child/employee-queryAdd.html",
+                    //             } , {
+                    //                 tool:"toolbar",
+                    //                 type: 2,
+                    //                 title: "修改",
+                    //                 event: "edit",
+                    //                 content: "./child/employee-queryAdd.html",
+                    //                 dataUrl:["userId"]
+                    //             }]
+                    //     })
+
                     tableFunc({
-                            "obj": obj,
-                            "toolFunc": [{
-                                    tool:"tool",
-                                    type: 2,
-                                    title: "添加",
-                                    event: "add",
-                                    content: "./child/employee-queryAdd.html",
-                                } , {
-                                    tool:"toolbar",
-                                    type: 2,
-                                    title: "修改",
-                                    event: "edit",
-                                    content: "./child/employee-queryAdd.html",
-                                    dataUrl:["userId"]
-                                }]
-                        })
+                        "obj": obj,
+                        "toolFunc": [{
+                            tool:"toolbar",
+                            type: 2,
+                            title: "添加员工",
+                            event: "add",
+                            content: "./child/employee-queryAdd.html",
+                        } , {
+                            type: 2,
+                            title: "修改员工",
+                            event: "edit",
+                            content: "./child/employee-queryAdd.html",
+                            dataUrl:["userId"]
+                        }]
+                    })
 
 
 
