@@ -32,7 +32,7 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sz">批量设置为用户</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除用户信息<i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
@@ -83,7 +83,7 @@
                     }
                 },
                 done:function (obj) {
-                    tableFunc({
+                   /* tableFunc({
                         delTable:{
                             event:"#sz", //lay-event
                             id:"table",
@@ -103,8 +103,45 @@
                                 dataUrl:["userId"]
                             }
                         ],
-                    })
+                    })*/
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [{
+                            event: "edit",
+                            title: "设为系统用户",
+                            type: 2,
+                            content: "./child/setUser.html",
+                            dataUrl: ["userId"]
+                        }, {
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"userIds",
+                                event:"del",
+                                url:"/user/setUsers",
+                                type:"POST",
+                                par:"userId"
+                            },
+                            tool:"toolbar",
+                            event:"del"
 
+                        },{
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"userIds",
+                                event:"sz",
+                                url:"/user/setUsers",
+                                type:"POST",
+                                par:"userId"
+                            },
+                            tool:"toolbar",
+                            event:"sz"
+
+                        }
+
+                        ]
+                    })
                 },
             },
             reSet: {

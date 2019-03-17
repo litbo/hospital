@@ -27,14 +27,13 @@
 </div>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="szjs">设置角色</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">设置角色</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改角色</a>
 </script>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn" lay-event="add">
-        <a class="layui-btn layui-btn-xs" lay-event="">添加角色</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event=""><i class="fas fa-trash-alt"></i></a>
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs" lay-event="add">添加角色</a>
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
@@ -85,7 +84,7 @@
 /*                    tableFunc({
 
                     })*/
-                    tableFunc({
+                  /*  tableFunc({
                         tools:[
                             {
                                 event:"szjs",
@@ -101,7 +100,7 @@
                                 content:"./child/role-settingAdd.html"
                             }
                         ],
-/*                        "obj":obj,
+/!*                        "obj":obj,
                         "toolFunc":[{
                             "event":'edit',
                             "type":2,
@@ -117,17 +116,24 @@
                             "content":"./child/role-settingAdd.html",
 
 
-                        }],*/
-                        delTable:{
-                            event:"#sz", //lay-event
-                            id:"table",
-                            name:"userId", //需要向后台发送的数据
-                            param:"userId",  //后台接收的名称
-                            url:"/user/setUsers",
-                            type:"post",
-                            confirm:false,  //false为不删除    删除就不要
-                            reload:true
-                        }
+                        }],*!/
+                    })*/
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [{
+                            event: "edit",
+                            title: "设置角色",
+                            type: 2,
+                            content: "./child/setUser.html",
+                            dataUrl: ["userId"]
+                        },
+                            {
+                                event: "add",
+                                title: "添加角色",
+                                type: 2,
+                                content: "./child/role-settingAdd.html",
+                            },
+                        ]
                     })
                 }
             },
