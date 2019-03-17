@@ -7,10 +7,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
-import com.litbo.hospital.user.vo.EqVo;
-import com.litbo.hospital.user.vo.SelectEqVo;
-import com.litbo.hospital.user.vo.SelectFlEqVo;
-import com.litbo.hospital.user.vo.SetPmVo;
+import com.litbo.hospital.user.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -153,9 +150,9 @@ public class EqController {
 
     //解除卫标分类
     @RequestMapping("/cancelFl")
-    public Result cancelFl(@RequestBody List<String> eqIds) {
+    public Result cancelFl(@RequestBody ListVo listVo) {
 
-        for (String eqId : eqIds) {
+        for (String eqId : listVo.getEqIds()) {
             if (es.cancelFl(eqId) < 0) {
                 return Result.error(eqId);
             }
@@ -166,10 +163,10 @@ public class EqController {
     //批量删除设备
     @RequestMapping("/delEq")
     @ResponseBody
-    public Result delEq(@RequestBody List<EqInfo>  eqInfos){
+    public Result delEq(@RequestBody ListVo listVo){
 
-        for (EqInfo eq : eqInfos) {
-           es.delEq(eq.getEqId());
+        for (String id : listVo.getEqIds()) {
+           es.delEq(id);
         }
         return Result.success();
 

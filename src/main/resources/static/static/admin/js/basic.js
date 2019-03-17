@@ -482,8 +482,8 @@ function subUp(value, data, param) {
         "undefined": [value.url]
     })) {
         putMsg({
-            alert: "数据上传操作已被强制终止！",
-            error: "参数填写不正确，程序无法继续进行！",
+            alert: "数据传输URL未填写！",
+            error: "参数填写不正确，程序无法继续进行！请检查（487行）传递的参数中的第一项（0）中是否含有URL",
             log: arguments
         });
         return false;
@@ -598,8 +598,12 @@ function subUp(value, data, param) {
             error: function (er) {
                 putMsg({
                     alert: "提交失败，请重试！",
-                    error: "数据提交异常",
-                    log: er
+                    error: "数据提交异常,错误信息为（602行）",
+                    log: er.responseJSON
+                });
+                putMsg({
+                    error: "错误的提交数据为（606行）:",
+                    log: dataP || value.data
                 });
                 //提交失败后执行函数
                 value.fine && value.fine(er);
@@ -655,6 +659,24 @@ function getTableValue(name, inClear) {
     });
     //返回表格数据
     return oData;
+}
+
+function getFormValue(data,vaus,dataP){
+    var inputValue = $("input[name=" + valus + "]").val();
+    if (inputValue) {
+        dataP[valus] = inputValue;
+    } else if ($("select[name=" + valus + "]").val()) {
+        dataP[valus] = $("select[name=" + valus + "]").val();
+    } else if ($("textarea[name=" + valus + "]").val()) {
+        dataP[valus] = $("textarea[name=" + valus + "]").val();
+    } else if ($("input[type=radio][name=" + valus + "]").val()) {
+        dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
+    } else if ($("input[type=checkbox][name=" + valus + "]").val()) {
+        var $cks = $("input[type=checkbox][name=" + valus + "]");
+        if ($cks[0].checked === true) {
+            dataP[valus] = $cks.val();
+        }
+    }
 }
 
 //抽象出的简化判断，成立返回false 不成立则返回true
@@ -905,7 +927,7 @@ action = func = {
                     //}
                     //
                     if(vas.send){
-                        checkStatus && action.sendTo(vas.send,checkStatus,table);
+                        checkStatus && func.sendTo(vas.send,checkStatus,table);
                         return true;
                     }
 
@@ -1095,7 +1117,7 @@ action = func = {
                 console.log("======normalBegin=====",value);
                 //按钮匹配
                 if (obj.event === value.event) {
-                    action.sendTo(value,ck,table);
+                    func.sendTo(value,ck,table);
                 }
             });
         });
@@ -1121,12 +1143,24 @@ action = func = {
             }
             //其他需要扩充的数据
             if (value.adds !== undefined) {
-                for (var name in value.adds) {
-                    if (value.adds.hasOwnProperty(name)) {
-                        value.data[name] = value.adds[name]
+                console.log("adds = ",value.add);
+                if(Type(value.adds) === "json"){
+                    for (var name in value.adds) {
+                        if (value.adds.hasOwnProperty(name)) {
+                            value.data[name] = value.adds[name]
+                        }
+                    }
+                }else if(Type(value.adds) === "array"){
+                    for(var g=0;g<value.adds.length;g++){
+                        var $selVal = $("select[name=" + value.adds[g] + "]").val();
+                        if($selVal){
+                            value.data[value.adds[g]] = $selVal;
+                        }
                     }
                 }
+
             }
+            //console.log("拼接完成：",value.data);
             //强制以JSON格式发送数据
             value.contentType = "application/json";
             //提交成功回调函数
@@ -1142,15 +1176,15 @@ action = func = {
                         data: oData
                     });
 
-                    layer.msg("操作成功！",function (index) {
+                    layer.alert("操作成功！",function (index) {
                         //判断是否刷新页面
                         value.reload && window.location.reload();
+                        layer.close(index);
                     });
                 } else {
-                    layer.msg("操作失败！")
+                    layer.alert("操作失败！")
                 }
-                //不论成功关闭layer
-                layer.close(index);
+
             };
             //判断是否为删除数据
             if (value.confirm === false) {

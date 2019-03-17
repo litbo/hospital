@@ -32,9 +32,8 @@
 </script>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn" lay-event="add">
-        <a class="layui-btn layui-btn-xs" lay-event="">添加角色</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event=""><i class="fas fa-trash-alt"></i></a>
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs" lay-event="add">添加角色</a>
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
@@ -78,13 +77,11 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
+                        "count":res.data.total,
                         "data": res.data.list //解析数据列表
                     }
                 }
                 ,  done: function (obj) {
-/*                    tableFunc({
-
-                    })*/
                     tableFunc({
                         tools:[
                             {
@@ -95,29 +92,13 @@
                                 dataUrl:["userId"]
                             },
                             {
+                                tool:'toolbar',
                                 event:"add",
                                 title:"添加角色",
                                 type:2,
                                 content:"./child/role-settingAdd.html"
                             }
                         ],
-/*                        "obj":obj,
-                        "toolFunc":[{
-                            "event":'edit',
-                            "type":2,
-                            "area":['50%','70%'],
-                            "content":'./child/role-settingEdit.html'
-                        },{
-                            "tool":'toolbar',
-                            "filter":"table1",
-                            "event":"add",
-                            "title":"角色设置",
-                            "type":2,
-                            "area":['50%',"70%"],
-                            "content":"./child/role-settingAdd.html",
-
-
-                        }],*/
                         delTable:{
                             event:"#sz", //lay-event
                             id:"table",
