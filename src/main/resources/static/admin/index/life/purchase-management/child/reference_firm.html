@@ -45,29 +45,31 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">参考生产厂商</label>
                 <div class="layui-input-block">
-                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                    <input type="text" name="scsName" placeholder="请选择" autocomplete="off" disabled class="layui-input"
                            style="height:38px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" data-id="table1" id="selectRoom">选择</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" data-id="table1" id="selectRoom">
+                        选择
+                    </button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">型号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ckcssbXh" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbXh" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">规格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ckcssbGg" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbGg" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">估价</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ckcssbGj" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbGj" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -76,21 +78,21 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">国别</label>
                 <div class="layui-input-block">
-                    <input type="text" name="gb" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="gb" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">产地</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cd" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="cd" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">数量</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ckcssbSl" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="ckcssbSl" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -104,19 +106,42 @@
 </div>
 </body>
 <script>
+    var formData = {};
     renderMod = {
         bind: {
-            addItem: [
+            selectItem: [
                 {
                     elem: "#selectRoom",
                     cb: "/cs/scsTitle",
                     db: "/cs/listScs",
                     name: "dtdt",
-                    key: "radio"
+                    key: "radio",
+                    data: formData
                 }
-            ],
-            delItem: ".delNew",
-        }
+            ]
+        },
+        btn: [
+            {
+                elem: '#reload',
+                func: function () {
+                    var new1 = {}, da = [];
+                    var $input = $("input");
+                    for (var i = 0; i < $input.length; i++) {
+                        new1[$input.eq(i).attr("name")] = $input[i].value;
+                    }
+                    new1.sbcsId = formData.radio[0].sbcsIdScs;
+                    new1.sbcsName = formData.radio[0].scsName;
+                    var key = $.getUrlParam('key');
+                    da.push(new1);
+                    layui.sessionData($.getUrlParam('vg'), {
+                        key: key,
+                        value: da
+                    });
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ]
     };
 </script>
 </html>

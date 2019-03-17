@@ -72,15 +72,15 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">参加人员<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dataTable1"><i
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable1"><i
                             class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1"><i
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
                             class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
-            <table id="table1" lay-filter="table1"></table>
+            <table id="table" lay-filter="table"></table>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">会议内容<span class="sign">*</span></label>
@@ -91,13 +91,13 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12" style="width: 115px;">申购设备列表</label>
                 <div class="layui-input-block" style="margin-left:115px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable2"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dataTable2"><i class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1"><i class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
-            <table id="table" lay-filter="table1"></table>
+            <table id="table1" lay-filter="table1"></table>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
@@ -127,7 +127,6 @@
                   }
               }
           });
-
         },
         form: {
             date: {
@@ -136,7 +135,6 @@
             submit: {
                 before: function (param) {
                     var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]),maxNum = 15;
-                    console.log(formData);
                     if (doJudg({
                         "undefined": [formData.radio],
                         0: [tv, tv1]
@@ -147,6 +145,7 @@
                         });
                         return false;
                     }else if(tv.length < formData.maxNum){
+
                         putMsg({
                             alert:"参加人数必须多于"+formData.maxNum+"人！"
                         });
@@ -154,8 +153,8 @@
                     }
                     return param = {
                         1: formData.radio[0]["userIdJl"],
-                        2: tv1,
-                        3: tv
+                        2: tv,
+                        3: tv1
                     };
                 },
                 form: {
@@ -177,11 +176,10 @@
         addTable: {
             table: [
                 {
+                    elem:"#table",
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'eqPmName', title: '设备名称', minWidth: 150}
-                        , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
-                        , {field: 'eqFlId', title: '卫标分类', minWidth: 150}
+                        , {field: 'userXm', title: '姓名', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -196,7 +194,9 @@
                     id:"table1",
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'userXm', title: '姓名', minWidth: 150}
+                        , {field: 'eqPmName', title: '设备名称', minWidth: 150}
+                        , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
+                        , {field: 'eqFlId', title: '卫标分类', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -206,6 +206,7 @@
                         none: "请点击上方按钮添加数据！"
                     }
                 }
+
             ]
         },
         bind: {

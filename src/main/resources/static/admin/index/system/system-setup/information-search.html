@@ -18,12 +18,12 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table" lay-filter="eqTable"></table>
+        <table id="table" lay-filter="table1"></table>
     </div>
 </div>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs" layui-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
 </script>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
@@ -84,14 +84,23 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        delTable:{
-                            id:"table",
-                            filter:"eqTable",
-                            name:"eqId",
-                            event:"del",
-                            url:"/eq/delEq",
-                            type:"POST"
+                        "obj": obj,
+                        "toolFunc": {
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"eqIds",
+                                event:"del",
+                                url:"/eq/delEq",
+                                type:"POST",
+                                par:"eqId",
+                                reload:true,
+                                reTable:true
+                            },
+                            tool:"toolbar",
+                            event:"del"
                         }
+
                     })
 
                 }

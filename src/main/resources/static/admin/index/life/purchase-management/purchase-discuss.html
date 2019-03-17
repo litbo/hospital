@@ -43,7 +43,9 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">申购单<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectSg">选择</button>
+                    <input type="text" name="pmName" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                           style="height:46px;padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectSg">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -143,48 +145,14 @@
 <script>
     var formData = {};
     renderMod = {
-        form: {
-            date: {
-                elem: "#date"
-            },
-            submit: {
-                form: {
-                    before: function (param) {
-                        var xh = getTableValue("table");
-                        if (doJudg({
-                            "undefined": [formData.person, formData.user],
-                            0: [xh]
-                        })) {
-                            putMsg({
-                                alert: "无法提交空数据！"
-                            });
-                            return false;
-                        }
-                        return param = {
-                            1: formData.radio[0]["id"],
-                            2: xh,
-                        };
-                    },
-                    form: {
-                        url: "/lifeManage/insertSgLzfx",
-                        type: "POST",
-                        data: ["lzfxJscs", "lzfxJspg", "lzfxLcyqpj", "lzfxShfk", "lzfxXxly", "lzfxYldqz", "lzfxYldyj", "lzfxZjqz", "lzfxZjzyj"],
-                        param: {
-                            1: "sgId",
-                            2: ""
-                        }
-                    }
-                }
-            }
-        },
-        addTable: {
+        table: {
             table: [
                 {
                     elem: "#table",
                     id: "table",
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'userXm', title: '生产厂商', minWidth: 150}
+                        , {field: 'scsName', title: '生产厂商', minWidth: 150}
                         , {field: 'xhbjXh', title: '型号', minWidth: 150}
                         , {field: 'xhbjBj', title: '报价', minWidth: 150}
                     ]]
@@ -202,9 +170,9 @@
             addItem: [
                 {
                     elem: "#dataTable",
-                    url: "child/reference_quotation.html",
+                    base: "child/reference_quotation.html",
                     name: "dtdt",
-                    key: ""
+                    key: "date"
                 }
             ],
             delItem: ".delNew",
@@ -218,6 +186,39 @@
                     data: formData
                 }
             ]
+        },
+        form: {
+            date: {
+                elem: "#date"
+            },
+            submit: {
+                before: function (param) {
+                    var xh = getTableValue("table");
+                    if (doJudg({
+                        "undefined": [formData.radio],
+                        0: [xh]
+                    })) {
+                        putMsg({
+                            alert: "无法提交空数据！"
+                        });
+                        return false;
+                    }
+                    return param = {
+                        1: formData.radio[0]["id"],
+                        2: xh,
+                    };
+                },
+                form: {
+                    url: "/lifeManage/insertSgLzfx",
+                    type: "POST",
+                    data: ["lzfxJscs", "lzfxJspg", "lzfxLcyqpj", "lzfxShfk", "lzfxXxly", "lzfxYldqz", "lzfxYldyj", "lzfxZjqz", "lzfxZjzyj"],
+                    contentType:"application/json",
+                    param: {
+                        1: "sgId",
+                        2: "xhbjs"
+                    }
+                }
+            }
         }
     }
 </script>

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.service.EmpService;
+import com.litbo.hospital.supervise.vo.EmpDeleteVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -85,8 +86,16 @@ public class EmpController {
         return Result.success();
     }
 
+    @PostMapping("/deleteEmpsByUserIds")
+    public Result deleteEmpsByUserIds(@RequestBody EmpDeleteVO deleteVO) {
+        for(String userId:deleteVO.getUserIds()){
+            empService.deleteEmpByUserId(userId);
+        }
+        return Result.success();
+    }
+
     @GetMapping("/listEmpByBmId")
-    public Result listEmpByBmId(@RequestParam String bmId) {
+    public Result listEmpByBmId(@RequestBody String bmId) {
         List<SEmp> emps = empService.listEmpByBmId(bmId);
         return Result.success(emps);
     }

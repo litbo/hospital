@@ -124,9 +124,9 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">添加生产商</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dateTable1"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dateTable1"><i class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1" id="delTable1"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table" id="delTable1"><i class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
@@ -214,7 +214,7 @@
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'sbcsName', title: '参考生产厂商', minWidth: 150}
+                        , {field: 'scsName', title: '参考生产厂商', minWidth: 150}
                         , {field: 'ckcssbXh', title: '型号', minWidth: 150}
                         , {field: 'ckcssbGg', title: '规格', minWidth: 150}
                         , {field: 'ckcssbGj', title: '估价', minWidth: 150}
@@ -229,11 +229,12 @@
                 },
                 {
                     elem: "#table1",
+                    id:"table1",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
                         , {field: 'gnpzMs', title: '功能描述', minWidth: 150}
-                        , {field: 'gnpzIssy', title: '使用', minWidth: 150}
+                        , {field: 'gnpzIssyName', title: '使用', minWidth: 150}
                     ]]
                     , toolbar: false
                     , page: false
@@ -249,15 +250,15 @@
             addItem: [
                 {
                     elem: "#dateTable1",
-                    url:"reference_firm.html",
+                    base:"reference_firm.html",
                     name: "dtdt",
-                    key: ""
+                    key: "dateTable1"
                 },
                 {
                     elem: "#dateTable2",
-                    url:"function_configuration.html",
-                    key:"",
-                    name: "dtd"
+                    base:"function_configuration.html",
+                    key:"dateTable2",
+                    name: "dtdt"
                 }
             ],
             delItem: ".delNew",
@@ -308,7 +309,6 @@
                     var cs = getTableValue("table"), gn = getTableValue("table1", [true]);
                     console.log(formData);
                     if (doJudg({
-                        "undefined": [formData.radio],
                         0: [cs, gn]
                     })) {
                         putMsg({
@@ -317,8 +317,12 @@
                         });
                         return false;
                     }
+                    var bm = "";
+                    if (formData.radio){
+                        bm = formData.radio[0]["tgBmId"]
+                    }
                     return param = {
-                        1: formData.radio[0]["tgBmId"],
+                        1: bm,
                         2: cs,
                         3: gn
                     };
@@ -333,8 +337,8 @@
                     contentType: "application/json",
                     param: {
                         1: "tgBmId",
-                        2: "ckcssb_id",
-                        3: "gnpz_id"
+                        2: "sgCkcssbs",
+                        3: "sgGnpzs"
                     }
                 }
             }

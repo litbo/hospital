@@ -31,18 +31,18 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs">
         <div class="layui-inline">
-            <select lay-filter="wxbm">
+            <select lay-filter="wxbm" name="bmId">
                 <option>维修部门</option>
             </select>
         </div>
         <div class="layui-inline">
-            <select lay-filter="select2">
+            <select lay-filter="select2" name="userId">
                 <option>划分人</option>
-                <option>111</option>
-                <option>222</option>
+                <option value="1615925039">博</option>
+                <option value="1615925008">李佳龙</option>
             </select>
         </div>
-        <button class="layui-btn" data-type="">确定划分</button>
+        <button class="layui-btn" data-type="" lay-event="hf">确定划分</button>
 
         <div class="layui-inline">
             <input type="text" name="eqPym" class="layui-input" autocomplete="off" placeholder="设备拼音码">
@@ -101,7 +101,21 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        "obj":obj
+                        toolFunc: {
+                            send: {
+                                id: "table",
+                                fitler: "table1",
+                                name: "eqIds",
+                                url: "/kwgl/glbm/wxBmGcsEqHf",
+                                type: "POST",
+                                event: "hf",
+                                confirm:false,
+                                par:"eqId",
+                                adds:["bmId","userId"]
+                            },
+                            event:"hf",
+                            tool:"toolbar"
+                        }
                     })
                 }
             },
