@@ -26,13 +26,13 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
-<script type="text/html" id="plet">
+<!--<script type="text/html" id="plet">
 {{#
 if(d.system == 1){
 <a class="layui-btn layui-btn-sm" lay-event="edit" class="">设为系统用户</a>
 }
 }}
-</script>
+</script>-->
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-sm" lay-event="edit" class="">设为系统用户</a>
 </script>
@@ -45,8 +45,6 @@ if(d.system == 1){
         <div class="layui-inline">
             <select lay-filter="bmList" name="bmId" lay-verify="required">
                 <option value="0000000000">部门</option>
-                <option value="0">123</option>
-                <option value="1"></option>
             </select>
         </div>
         <div class="layui-inline">
@@ -90,27 +88,6 @@ if(d.system == 1){
                     }
                 },
                 done:function (obj) {
-                   /* tableFunc({
-                        delTable:{
-                            event:"#sz", //lay-event
-                            id:"table",
-                            name:"userId", //需要向后台发送的数据
-                            param:"userId",  //后台接收的名称
-                            url:"/user/setUsers",
-                            type:"post",
-                            confirm:false,  //false为不删除    删除就不要
-                            reload:true
-                        },
-                        tools:[
-                            {
-                                event:"edit",
-                                title:"设为系统用户",
-                                type:2,
-                                content:"./child/setUser.html",
-                                dataUrl:["userId"]
-                            }
-                        ],
-                    })*/
                     tableFunc({
                         "obj": obj,
                         "toolFunc": [{
@@ -125,7 +102,7 @@ if(d.system == 1){
                                 filter:"table1",
                                 name:"userIds",
                                 event:"del",
-                                url:"/user/setUsers",
+                                url:"/user/delUsers",
                                 type:"POST",
                                 par:"userId"
                             },
@@ -158,18 +135,17 @@ if(d.system == 1){
             }
         },
         form:{
-            val:
-                {
-                    filter:"bmList",
-                    select: [
-                        {
-                            filter:"bmList",
-                            ids: "bmId",
-                            text: "bmName",
-                            url: "/supervise/bmgl/listBm"
-                        }
-                    ]
-                }
+            val: {
+                filter:"bmList",
+                select: [
+                    {
+                        filter:"bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBms"
+                    }
+                ]
+            }
         }
     };
 </script>

@@ -50,4 +50,14 @@ public class UserController {
        return Result.success(userService.getUserById(userId)) ;
     }
 
+    @RequestMapping("delUsers")
+    public  Result delUsers(@RequestBody ListVo listVo){
+        for (String id : listVo.getUserIds()) {
+            if(userService.delUser(id)<0){
+                return Result.error(id);
+            }
+        }
+        return Result.success();
+    }
+
 }

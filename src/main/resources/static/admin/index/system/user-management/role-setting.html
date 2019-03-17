@@ -83,8 +83,10 @@
                 }
                 ,  done: function (obj) {
                     tableFunc({
+                        "obj": obj,
                         tools:[
                             {
+                                tool:'toolbar',
                                 event:"szjs",
                                 title:"设置角色",
                                 type:2,
@@ -98,17 +100,7 @@
                                 type:2,
                                 content:"./child/role-settingAdd.html"
                             }
-                        ],
-                        delTable:{
-                            event:"#sz", //lay-event
-                            id:"table",
-                            name:"userId", //需要向后台发送的数据
-                            param:"userId",  //后台接收的名称
-                            url:"/user/setUsers",
-                            type:"post",
-                            confirm:false,  //false为不删除    删除就不要
-                            reload:true
-                        }
+                        ]
                     })
                 }
             },
@@ -126,12 +118,13 @@
                         filter:"bmList",
                         ids: "bmId",
                         text: "bmName",
-                        url: "/supervise/bmgl/listBm"
+                        url: "/supervise/bmgl/listBms"
                     }
                 ]
             }
         }
     }
+
 
 </script>
 </body>
