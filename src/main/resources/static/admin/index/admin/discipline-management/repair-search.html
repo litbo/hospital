@@ -31,7 +31,7 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs">
         <div class="layui-inline">
-            <button class="layui-btn" date-type="">清除划分</button>
+            <button class="layui-btn" date-type="" lay-event="qchf">清除划分</button>
         </div>
         <div class="layui-inline">
             <select lay-filter="wxbm" name="bmId">
@@ -100,7 +100,23 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        toolFunc: {
+                            send: {
+                                id: "table",
+                                fitler: "table1",
+                                name: "bgIds",
+                                url: "/kwgl/glbm/wxBmGcsEqXcHf",
+                                type: "POST",
+                                event: "qchf",
+                                confirm:false,
+                                par:"bgId"
+                                // adds:["userId"]
+                            },
+                            event:"qchf",
+                            tool:"toolbar"
+                        }
+                    })
                 }
             },
 

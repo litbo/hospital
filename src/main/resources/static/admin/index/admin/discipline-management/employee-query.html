@@ -26,7 +26,7 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add"><i class="fas fa-plus"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
@@ -94,24 +94,6 @@
                 }
                 , done: function (obj) {
 
-                    // tableFunc({
-                    //         "obj": obj,
-                    //         "toolFunc": [{
-                    //                 tool:"tool",
-                    //                 type: 2,
-                    //                 title: "添加",
-                    //                 event: "add",
-                    //                 content: "./child/employee-queryAdd.html",
-                    //             } , {
-                    //                 tool:"toolbar",
-                    //                 type: 2,
-                    //                 title: "修改",
-                    //                 event: "edit",
-                    //                 content: "./child/employee-queryAdd.html",
-                    //                 dataUrl:["userId"]
-                    //             }]
-                    //     })
-
                     tableFunc({
                         "obj": obj,
                         "toolFunc": [{
@@ -126,6 +108,19 @@
                             event: "edit",
                             content: "./child/employee-queryAdd.html",
                             dataUrl:["userId"]
+                        },{
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"userIds",
+                                event:"del",
+                                url:"/kwgl/empgl/deleteEmpsByUserIds",
+                                type:"POST",
+                                par:"userId"
+                            },
+                            tool:"toolbar",
+                            event:"del"
+
                         }]
                     })
 
