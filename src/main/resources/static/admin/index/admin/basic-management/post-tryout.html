@@ -53,7 +53,7 @@
                     , {field: 'gwName', title: '岗位职责名称  ', minWidth: 150}
                     , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
-                , url: "/supervise/gwgl/listGwsByGwZt?gwZt=2"
+                , url: "/supervise/gwgl/listGwsByTimeAndZdNameAndZt?gwZt=2&reFlag=0"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -86,7 +86,7 @@
                 }
             },
             reSet:{
-                url:"/supervise/gwgl/listGwsByTimeAndZdNameAndZt?gwZt=2",
+                url:"/supervise/gwgl/listGwsByTimeAndZdNameAndZt?gwZt=2&reFlag=0",
                 type:"search",
                 data:["gwName"]    //搜索框的name
             }

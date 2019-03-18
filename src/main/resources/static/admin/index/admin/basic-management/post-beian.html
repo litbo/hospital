@@ -41,7 +41,7 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">再评价</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="revalue">再评价</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">详细</a>
 </script>
 
@@ -83,6 +83,14 @@
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "revalue",
+                            content:"post-check-revalue.html",
+                            dataUrl:["gwId"]
+                        }
+                    })
 
                 },date :{
                     elem : "#date",

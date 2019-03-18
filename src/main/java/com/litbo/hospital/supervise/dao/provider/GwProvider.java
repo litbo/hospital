@@ -17,7 +17,7 @@ public class GwProvider {
         return sql.toString();
     }
 
-    public String listGwsByTimeAndZdNameAndZt(String startTime, String endTime, String gwName, String gwZt){
+    public String listGwsByTimeAndZdNameAndZt(String startTime, String endTime, String gwName, String gwZt,String reFlag){
 
         StringBuffer sql = new StringBuffer("" +
                 "  SELECT * from s_gangwei where 1=1");
@@ -25,6 +25,7 @@ public class GwProvider {
         if(endTime!=null) sql.append(" and create_time<#{endTime} ");
         if(gwName!=null) sql.append(" and gw_name like '%'+#{gwName}+'%' ");
         if(gwZt!=null) sql.append(" and gw_zz_zt= #{gwZt} ");
+        if(reFlag!=null) sql.append(" and zd_xgcs= #{reFlag} ");
         return sql.toString();
     }
 }
