@@ -104,7 +104,9 @@ if(d.system == 1){
                                 event:"del",
                                 url:"/user/delUsers",
                                 type:"POST",
-                                par:"userId"
+                                par:"userId",
+                                reload:true,
+                                reTable:true
                             },
                             tool:"toolbar",
                             event:"del"
@@ -117,7 +119,9 @@ if(d.system == 1){
                                 event:"sz",
                                 url:"/user/setUsers",
                                 type:"POST",
-                                par:"userId"
+                                par:"userId",
+                                reload:true,
+                                reTable:true
                             },
                             tool:"toolbar",
                             event:"sz"

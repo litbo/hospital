@@ -5,6 +5,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.service.UserService;
 import com.litbo.hospital.user.vo.ListVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,9 +52,10 @@ public class UserController {
     }
 
     @RequestMapping("delUsers")
+    @Transactional
     public  Result delUsers(@RequestBody ListVo listVo){
         for (String id : listVo.getUserIds()) {
-            if(userService.delUser(id)<0){
+            if(userService.delUser(id)<=0){
                 return Result.error(id);
             }
         }
