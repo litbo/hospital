@@ -15,6 +15,8 @@ import java.util.List;
 public interface GangweiDao {
     @Select("select * from s_gangwei")
     List<SGangwei> getGws();
+    @Select("select * from s_gangwei where gw_zz_zt is null ")
+    List<SGangwei> listMZZGws();
     @Select("select * from s_gangwei where gw_zz_zt =#{gwZt}")
     List<GangWeiAndZtVO> listGwsByGwZt(String gwZt);
     @SelectProvider(type = GwProvider.class ,method = "getGwsByGwLevelAndGwName")
@@ -22,10 +24,10 @@ public interface GangweiDao {
 
     @Insert("insert into s_gangwei (gw_name, user_id, \n" +
             "      create_time, doc_url, gw_level, \n" +
-            "      gw_zz)\n" +
+            "      gw_zz,gw_zz_zt,zd_xgcs)\n" +
             "    values (#{gwName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
             "      #{createTime,jdbcType=TIMESTAMP}, #{docUrl,jdbcType=VARCHAR}, #{gwLevel,jdbcType=CHAR}, \n" +
-            "      #{gwZz,jdbcType=LONGVARCHAR})")
+            "      #{gwZz,jdbcType=LONGVARCHAR},#{gwZzZt},#{zdXgcs})")
     void saveGw(SGangwei gw);
 
     @Delete("delete from s_gangwei where gw_id = #{gw_id}")
@@ -114,5 +116,6 @@ public interface GangweiDao {
     @SelectProvider(type = GwProvider.class,method = "listGwsByTimeAndZdNameAndZt")
     List<GangWeiAndZtVO> listGwsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("gwName") String gwName, @Param("gwZt")String gwZt,@Param("reFlag")String reFlag);
 
-
+    @Select("select * from s_zhize_zt where zz_id=#{gwId}")
+    List<SZhiduzhizeZt> getShProcesses(Integer gwId);
 }

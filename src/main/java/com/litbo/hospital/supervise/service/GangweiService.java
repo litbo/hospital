@@ -51,4 +51,6 @@ public interface GangweiService {
     GwZpjMsgVO getZpjMsgByGwId(String gwId);
 
     void dpjSubmitShMsg(GwZpjSubmitVO gwZpjSubmitVO);
+
+    PageInfo getShProcesses(int pageNum, int pageSize, Integer gwId);
 }
