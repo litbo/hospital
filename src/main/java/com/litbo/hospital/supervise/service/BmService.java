@@ -45,7 +45,7 @@ public interface BmService {
     void setBmsBeto(SetBmVO bmVO);
     void setBmBeto(String obm_id, String new_pbm_id );
     //设置为维修部门
-    void setWxbm(List<String> obmid, int wxFlag);
+    void setWxbm(String[] obmid, int wxFlag);
     //获取所有维修部门
     List<SBm> getWxBms();
     //获取所有非维修部门

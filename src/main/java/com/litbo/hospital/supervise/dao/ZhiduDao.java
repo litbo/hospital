@@ -47,7 +47,7 @@ public interface ZhiduDao {
             "      doc_url = #{docUrl,jdbcType=VARCHAR},\n" +
             "      create_time = #{createTime,jdbcType=TIMESTAMP},\n" +
             "      zd_content = #{zdContent,jdbcType=LONGVARCHAR}," +
-            "zd_zt = #{zdZt},sy_tianshu = #{syTianshu},sy_syts = #{sySyts},zd_xgcs=#{zdXgcs}" +
+            "zd_zt = #{zdZt},sy_tianshu = #{syTianshu},sy_syts = #{sySyts}" +
             "  where zd_id=#{zdId}")
     void updateZd(SZhidu zd);
     // 保存制度审核状态
@@ -83,6 +83,11 @@ public interface ZhiduDao {
             "  where zd_id=#{zdId}")
     void setZhiDuZt(@Param("zdId")Integer zdId,@Param("zdZt")Integer zdZt ,@Param("syDays")Integer syDays);
 
+    @Update("update s_zhidu  set   zd_zt = #{zdZt},zd_xgcs=#{reFlag}" +
+            "  where zd_id=#{zdId}")
+    void setZhiDuZtIncludeReflag(@Param("zdId")int zdId, @Param("zdZt")Integer zdZt, @Param("reFlag")int reFlag);
+
+
 
     @Select("select * from s_zhiduzhize_zt  where zd_id=#{zdId} order by zt_date desc")
     List<SZhiduzhizeZt> listZdztDescByDate(Integer zdId);
@@ -91,10 +96,12 @@ public interface ZhiduDao {
     @Select("select * from s_zhiduzhize_zt  where zd_id=#{zdId} order by zt_id desc")
     List<SZhiduzhizeZt> listZdztDescByZtid(Integer zdId);
     @SelectProvider(type = ZhiDuProvider.class,method = "listZdsByTimeAndZdNameAndZt")
-    List<ZhuduAndZdZzVO> listZdsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("zdName") String zdName, @Param("zdZt")String zdZt);
+    List<ZhuduAndZdZzVO> listZdsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("zdName") String zdName, @Param("zdZt")String zdZt,@Param("reFlag")String reFlag);
     @Select("select * from s_zhidu where zd_id=#{id}")
     SZhidu getZdById(String id);
 
     @Select("select * from s_zhiduzhize_zt where zd_id=#{zdId}")
     List<SZhiduzhizeZt> getShProcesses(Integer zdId);
+
+
 }

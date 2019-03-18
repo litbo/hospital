@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>审核</title>
+    <title>再评价审核</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -60,9 +60,41 @@
             </div>
         </div>
     </div>
+
+
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>科长审核信息</legend>
+            <legend>再评价申请信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价原因</label>
+                <div class="layui-input-block">
+                    <input type="text" name="zpjReason" class="layui-input" autocomplete="off">
+
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">申请人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sqUserId" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">申请日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="sqDate" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>再评价审核信息</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item" pane>
@@ -79,24 +111,6 @@
                 </div>
             </div>
 
-
-            <div class="layui-form-item" id="nextShr">
-                <label class="layui-form-label">下一个审核人</label>
-                <div class="layui-input-block">
-                    <select name="nextShrId">
-                        <option>请选择</option>
-                        <option value="1615925037">Gowen</option>
-                        <option>aaa</option>
-                        <option>bbb</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item" id="syDays">
-                <label class="layui-form-label">试用天数<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="syDays" class="layui-input" autocomplete="off" >
-                </div>
-            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -203,7 +217,7 @@
             val:{
                 filter:"forms",
                 get:{
-                    url:"/supervise/zdgl/getZdById",
+                    url:"/supervise/zdgl/getZpjMsgByZdId",
                     type:"GET",
                     data:{zdId:$.getUrlParam('zdId')}
                 }
@@ -211,10 +225,10 @@
             ,
             submit:{
                 form:{
-                    url:"/supervise/zdgl/submitShMsg",
+                    url:"/supervise/zdgl/dpjSubmitShMsg",
                     type:"POST",
                     contentType:"application/json",
-                    data:["ztCzzt","ztShyj","ztDate","nextShrId","syDays"],
+                    data:["ztCzzt","ztShyj","ztDate"],
                     add:{
                         zdId:$.getUrlParam("zdId")
                     }
@@ -235,13 +249,7 @@
             $("#nextShr").removeClass("hidden");
             $("#syDays").addClass("hidden");
         }
-
     })
-    $('input[type=radio][name=ztCzzt]').change(function() {
-        alert("cc");
-        alert(this.val);
-    });
-
 </script>
 </body>
 

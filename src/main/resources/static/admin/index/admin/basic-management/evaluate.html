@@ -34,18 +34,23 @@
 </script>
 
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">再评价审核</a>
+</script>
 
 <script>
     renderMod = {
+
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type:"checkbox"}
-                    ,{field:'system-number',title:'制度编号',width:'50%',minWidth:200,sort:true}
-                    ,{filed:'system-name',title:'制度名称',minWidth:150}
+                    {checkbox:true,fixed:true}
+                    , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
+                    , {field: 'zdName', title: '制度名称', minWidth: 150}
+                    , {field: 'ztCzname', title: '审核类型', minWidth: 150}
+                    , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
-                , url: "/supervise/gwgl/listGws"
+                , url: "/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=5"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -58,22 +63,34 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "data": res.data.list ,//解析数据列表
-                        "count":res.data.total
+                        "count":res.data.total,
+                        "data": res.data.list //解析数据列表
                     }
                 }
-            },
+                , done: function (obj) {
 
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "edit",
+                            content:"./child/zpjRegulatory-information.html",
+                            dataUrl:["zdId","ztCzname"]
+                        }
+                    })
+
+                },date :{
+                    elem : "#date1",
+                    type : "datetime"
+                }
+            },
             reSet:{
-                url:"",
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=5",
                 type:"search",
-                data:[""],
+                data:["zdName"],    //搜索框的name
                 where: {
 
                 }
-
             }
-
         }
     }
 </script>

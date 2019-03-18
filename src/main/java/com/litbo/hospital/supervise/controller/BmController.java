@@ -9,6 +9,7 @@ import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
+import com.litbo.hospital.supervise.vo.WxBmHfVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -168,15 +169,15 @@ public class BmController {
     //设置维修部门
     @PostMapping("/hfWxbm")
     @ResponseBody
-    public Result hfWxbm(@RequestBody List<String> obmids){
-        bmService.setWxbm(obmids,1);  // 1 为维修部门
+    public Result hfWxbm(@RequestBody WxBmHfVO wxBmHfVO){
+        bmService.setWxbm(wxBmHfVO.getObmIds(),1);  // 1 为维修部门
         return Result.success();
     }
     //去除维修部门
     @PostMapping("/qchfWxbm")
     @ResponseBody
-    public Result qchfWxbm(@RequestBody List<String> obmids){
-        bmService.setWxbm(obmids,0);  // 0 为非维修部门
+    public Result qchfWxbm(@RequestBody WxBmHfVO wxBmHfVO){
+        bmService.setWxbm(wxBmHfVO.getObmIds(),0);  // 0 为非维修部门
         return Result.success();
     }
 

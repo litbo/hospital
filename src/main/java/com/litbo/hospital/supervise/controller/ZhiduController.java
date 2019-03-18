@@ -5,9 +5,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.service.ZhiduService;
-import com.litbo.hospital.supervise.vo.ShMsgVO;
-import com.litbo.hospital.supervise.vo.ZdShDetailMsg;
-import com.litbo.hospital.supervise.vo.ZhiduSubmitVO;
+import com.litbo.hospital.supervise.vo.*;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,10 +46,10 @@ public class ZhiduController {
     @RequestMapping("/listZdsByTimeAndZdNameAndZt")
     public Result listZdsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                                              String startTime, String endTime, String zdName, String zdZt){
+                                              String startTime, String endTime, String zdName, String zdZt,String reFlag){
         PageInfo date = null;
         try {
-            date = zhiduService.listZdsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,zdName,zdZt);
+            date = zhiduService.listZdsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,zdName,zdZt,reFlag);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,6 +123,26 @@ public class ZhiduController {
         return Result.success();
     }
 
+    @PostMapping("/dpjSubmitMsg")
+    public Result dpjSubmitMsg(@RequestBody ZpjSumbitVO zpjSumbitVO){
+        zhiduService.dpjSubmitMsg(zpjSumbitVO);
+        return Result.success();
+    }
+
+
+    @GetMapping("/getZpjMsgByZdId")
+    public Result getZpjMsgByZdId(@RequestParam String zdId){
+        ZpjMsgVO zpjMsgVO = zhiduService.getZpjMsgByZdId(zdId);
+
+
+        return Result.success(zpjMsgVO);
+    }
+    @PostMapping("/dpjSubmitShMsg")
+    public Result dpjSubmitShMsg(@RequestBody ShMsgVO shMsgVO){
+
+        zhiduService.dpjSubmitShMsg(shMsgVO);
+        return Result.success();
+    }
 
 
 }

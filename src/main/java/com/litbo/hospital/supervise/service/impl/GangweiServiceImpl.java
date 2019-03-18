@@ -66,7 +66,7 @@ public class GangweiServiceImpl implements GangweiService {
     }
 
     @Override
-    public PageInfo listGwsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String gwName, String gwZt) throws  Exception{
+    public PageInfo listGwsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String gwName, String gwZt,String reFlag) throws  Exception{
         PageHelper.startPage(pageNum,pageSize);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if(endTime!=null && !endTime.equals("")){
@@ -77,7 +77,7 @@ public class GangweiServiceImpl implements GangweiService {
             endTime=sdf.format(cal.getTime()).toString();
         }
 
-        List<GangWeiAndZtVO> vos =  gangweiDao.listGwsByTimeAndZdNameAndZt(startTime,endTime,gwName,gwZt);
+        List<GangWeiAndZtVO> vos =  gangweiDao.listGwsByTimeAndZdNameAndZt(startTime,endTime,gwName,gwZt,reFlag);
         for (GangWeiAndZtVO vo:vos){
             setGangWeiAndZtVO(vo);
         }
@@ -283,7 +283,6 @@ public class GangweiServiceImpl implements GangweiService {
         gw.setGwZzZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         gw.setSyTianshu(0);  //试用时间
         gw.setSySyts(0);    //试用剩余时间
-        gw.setZdXgcs(0);   //修改次数为0
         //先保存制度信息
         gangweiDao.insertGwZz(gw);
         //更新老状态
@@ -293,6 +292,61 @@ public class GangweiServiceImpl implements GangweiService {
         //判断是否是在试用期修改
         if(getDclCzztName(gw.getGwId()).equals("试用期修改")){
             insertZdZt(gw.getGwId(),gwSubmitVO.getShrId(),true);
+        }
+    }
+
+    @Override
+    public void dpjSubmitMsg(ZpjSumbitVO zpjSumbitVO) {
+        //修改制度状态为待评价
+        gangweiDao.updateGwZtIncludeReFlag(Integer.parseInt(zpjSumbitVO.getGwId()),ZdztEnumProcess.ZD__ZT_DPJ.getCode(),1);
+
+        //插入审核状态
+        SZhiduzhizeZt ztc = new SZhiduzhizeZt();
+        //设置制度ID
+        ztc.setZdId(Integer.parseInt(zpjSumbitVO.getGwId()));
+        //设置审核状态名字
+        ztc.setZtCzname("待评价");
+        ztc.setZtDate(new Date());
+        ztc.setUserId(zpjSumbitVO.getUserId());
+        ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
+        ztc.setZtShyj(zpjSumbitVO.getZpjReason());
+        gangweiDao.saveZzZt(ztc);
+    }
+
+    @Override
+    public GwZpjMsgVO getZpjMsgByGwId(String gwId) {
+        GwZpjMsgVO gwZpjMsgVO = new GwZpjMsgVO();
+        SGangwei gw = gangweiDao.getGwsByGwId(gwId);
+        gwZpjMsgVO.setGwId(gwId);
+        gwZpjMsgVO.setGwName(gw.getGwName());
+        gwZpjMsgVO.setGwZz(gw.getGwZz());
+        gwZpjMsgVO.setDocUrl(gw.getDocUrl());
+        List<SZhiduzhizeZt> zts = gangweiDao.listZdztDescByZzId(Integer.parseInt(gwId));
+        SZhiduzhizeZt zt = zts.get(0);
+        gwZpjMsgVO.setSqDate(zt.getZtDate());
+        gwZpjMsgVO.setSqUserId(zt.getUserId());
+        gwZpjMsgVO.setZpjReason(zt.getZtShyj());
+        return gwZpjMsgVO;
+    }
+
+    @Override
+    public void dpjSubmitShMsg(GwZpjSubmitVO gwZpjSubmitVO) {
+        if(gwZpjSubmitVO.getZtCzzt()==1){
+            gangweiDao.updateGwZt(Integer.parseInt(gwZpjSubmitVO.getGwId()),ZdztEnumProcess.ZD__ZT_BA.getCode(),0);
+            updateZzZt(Integer.parseInt(gwZpjSubmitVO.getGwId()),gwZpjSubmitVO.getZtCzzt(),new Date(),gwZpjSubmitVO.getZtShyj());
+        }else if(gwZpjSubmitVO.getZtCzzt()==2){
+            gangweiDao.updateGwZt(Integer.parseInt(gwZpjSubmitVO.getGwId()),ZdztEnumProcess.ZD__ZT_SHSB.getCode(),0);
+            updateZzZt(Integer.parseInt(gwZpjSubmitVO.getGwId()),gwZpjSubmitVO.getZtCzzt(),new Date(),gwZpjSubmitVO.getZtShyj());
+
+            //插入审核状态
+            SZhiduzhizeZt ztc = new SZhiduzhizeZt();
+            //设置制度ID
+            ztc.setZdId(Integer.parseInt(gwZpjSubmitVO.getGwId()));
+            //设置审核状态名字
+            ztc.setZtCzname("科室秘书编写");
+            ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
+            ztc.setZtShyj("");
+            gangweiDao.saveZzZt(ztc);
         }
     }
 }

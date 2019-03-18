@@ -44,5 +44,11 @@ public interface GangweiService {
     //修改后重新提交
     void reSubmit(GWSubmitVO gwSubmitVO);
 
-    PageInfo listGwsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String gwName, String gwZt) throws  Exception;
+    PageInfo listGwsByTimeAndZdNameAndZt(int pageNum, int pageSize, String startTime, String endTime, String gwName, String gwZt,String reFlag) throws  Exception;
+
+    void dpjSubmitMsg(ZpjSumbitVO zpjSumbitVO);
+
+    GwZpjMsgVO getZpjMsgByGwId(String gwId);
+
+    void dpjSubmitShMsg(GwZpjSubmitVO gwZpjSubmitVO);
 }
