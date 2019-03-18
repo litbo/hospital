@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="col-xs-12">
-                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="">保存</button>
+                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="" id="upData">保存</button>
             </div>
         </div>
     </form>
@@ -107,6 +107,20 @@
                         1:"eqId"
                     }
                 }//表单提交函数
+            }
+        },
+        btn:{
+            elem:'#upData',
+            func:function(){
+                console.log('123');
+                layui.use('layer',function(){
+                    var layer = layui.layer;
+                    layer.open({
+                        type:2,
+                        content:'kxxfx.html',
+                        area:['100%','100%']
+                    })
+                })
             }
         }
     }

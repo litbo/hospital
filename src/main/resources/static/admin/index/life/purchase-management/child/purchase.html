@@ -101,14 +101,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(元)<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceGjY" lay-verify="number" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceGjY" autocomplete="off" placeholder="请输入"
                            class="layui-input" id="gjpd">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(美元)</label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceGjMy" lay-verify="number" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceGjMy"  autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -343,20 +343,20 @@
                 }
             }
         },
-        // btn:{
-        //     elem:'#upData',
-        //     func:function(){
-        //         console.log('123');
-        //         layui.use('layer',function(){
-        //             var layer = layui.layer;
-        //             layer.open({
-        //                 type:2,
-        //                 content:'zr-evaluation.html',
-        //                 area:['100%','100%']
-        //             })
-        //         })
-        //     }
-        // }
+        btn:{
+            elem:'#upData',
+            func:function(){
+                console.log('123');
+                layui.use('layer',function(){
+                    var layer = layui.layer;
+                    layer.open({
+                        type:2,
+                        content:'zr-evaluation.html',
+                        area:['100%','100%']
+                    })
+                })
+            }
+        }
     };
 
     $(function () {
