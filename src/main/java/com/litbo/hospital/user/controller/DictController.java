@@ -85,6 +85,15 @@ public class DictController {
         return Result.success(gglxes);
     }
 
+    @RequestMapping("/listDictByTName")
+    public Result listDictByTName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                  @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String tName){
+
+        PageInfo pageInfo =ds.listDictByTName(pageNum,pageSize,tName);
+        return Result.success(pageInfo);
+    }
+
+
 
 
 

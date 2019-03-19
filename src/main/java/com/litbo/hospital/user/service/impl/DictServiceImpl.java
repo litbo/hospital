@@ -45,12 +45,15 @@ public class DictServiceImpl implements DictService{
     }
 
     @Override
-    public PageInfo<DictVo> listJczd(int pageNum, int pageSize) {
+    public PageInfo listJczd(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<DictVo> eqJldws =  dictDao.listJldw1();
-        List<DictVo> Ggs = dictDao.listGgs();
-        List<DictVo> dictVos = new ArrayList<DictVo>();
-        dictVos.addAll(eqJldws);
-        return new PageInfo<>(dictVos);
+
+        return  new PageInfo(dictDao.listJczd());
+    }
+
+    @Override
+    public PageInfo listDictByTName(int pageNum, int pageSize, String tName) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(dictDao.listDictByTName(tName));
     }
 }
