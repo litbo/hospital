@@ -56,6 +56,12 @@ public class GangweiController {
         List<SGangwei> gws = gangweiDao.getGws();
         return Result.success(gws);
     }
+
+    @GetMapping("/listMZZGws")
+    public Result listMZZGws(){
+        List<SGangwei> gws = gangweiDao.listMZZGws();
+        return Result.success(gws);
+    }
     @RequestMapping("/listGwsByGwZt")
     public Result listGwsByGwZt(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwZt){
@@ -66,10 +72,10 @@ public class GangweiController {
     @RequestMapping("/listGwsByTimeAndZdNameAndZt")
     public Result listGwsByTimeAndZdNameAndZt(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                                 @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwZt,
-                                String startTime, String endTime, String gwName){
+                                String startTime, String endTime, String gwName,String reFlag){
         PageInfo date = null;
         try {
-            date = gangweiService.listGwsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,gwName,gwZt);
+            date = gangweiService.listGwsByTimeAndZdNameAndZt(pageNum,pageSize,startTime,endTime,gwName,gwZt,reFlag);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -159,5 +165,32 @@ public class GangweiController {
     public Result reSubmit(@RequestBody GWSubmitVO gwSubmitVO){
         gangweiService.reSubmit(gwSubmitVO);
         return Result.success();
+    }
+
+    @PostMapping("/dpjSubmitMsg")
+    public Result dpjSubmitMsg(@RequestBody ZpjSumbitVO zpjSumbitVO){
+        gangweiService.dpjSubmitMsg(zpjSumbitVO);
+        return Result.success();
+    }
+
+    @GetMapping("/getZpjMsgByGwId")
+    public Result getZpjMsgByGwId(@RequestParam String gwId){
+        GwZpjMsgVO gwZpjMsgVO = gangweiService.getZpjMsgByGwId(gwId);
+
+        return Result.success(gwZpjMsgVO);
+    }
+
+    @PostMapping("/dpjSubmitShMsg")
+    public Result dpjSubmitShMsg(@RequestBody GwZpjSubmitVO gwZpjSubmitVO){
+        gangweiService.dpjSubmitShMsg(gwZpjSubmitVO);
+        return Result.success();
+    }
+
+    @GetMapping("/getShProcesses")
+    public Result getShProcesses(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 @RequestParam Integer gwId){
+        PageInfo date = gangweiService.getShProcesses(pageNum,pageSize,gwId);
+        return Result.success(date);
     }
 }

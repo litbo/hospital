@@ -69,14 +69,14 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">再评价原因</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" name="ztShyj"></textarea>
+                        <textarea class="layui-textarea" name="zpjReason"></textarea>
                     </div>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">申请人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" >
+                    <input type="text" name="userId" class="layui-input" autocomplete="off" >
                 </div>
             </div>
 
@@ -187,10 +187,10 @@
             ,
             submit:{
                 form:{
-                    url:"/supervise/zdgl/submitShMsg",
+                    url:"/supervise/zdgl/dpjSubmitMsg",
                     type:"POST",
                     contentType:"application/json",
-                    data:["ztCzzt","ztShyj","ztDate","nextShrId","syDays"],
+                    data:["zpjReason","userId","ztDate"],
                     add:{
                         zdId:$.getUrlParam("zdId")
                     }

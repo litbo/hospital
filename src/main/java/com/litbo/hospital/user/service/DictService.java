@@ -18,5 +18,9 @@ public interface DictService {
 
     List<EqGzlb> listGzlb();
 
-    PageInfo<DictVo> listJczd(int pageNum, int pageSize);
+    PageInfo listJczd(int pageNum, int pageSize);
+
+    PageInfo listDictByTName(int pageNum, int pageSize, String tName);
+
+    PageInfo listZyzd(int pageNum, int pageSize);
 }

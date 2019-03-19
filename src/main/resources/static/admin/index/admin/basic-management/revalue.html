@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>再评价进度</title>
+    <title>进度制定</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -27,26 +27,32 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">流程记录</a>
 </script>
 
 
 
 
 <script>
+
     renderMod = {
+
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type:"checkbox"}
-                    ,{field:'system-number',title:'制度编号',width:'30%',minWidth:200,sort:true}
-                    ,{field:'system-name',title:'制度名称',minWidth:150}
-                    ,{field:'current-activity',title:'当前活动',minWidth:150}
+                    {checkbox:true,fixed:true}
+                    , {field: 'zdId', title: '制度编号', width:'35%',minWidth: 200,sort:true}
+                    , {field: 'zdName', title: '制度名称', minWidth: 150}
+                    , {field: 'ztCzname', 'title':'当前活动',minWidth:150}
+                    , {fixed: 'right', align:'center', minWidth:100,title:'操作',toolbar:'#bar'}
                 ]]
-                , url: "/supervise/gwgl/listGws"
+                , url: "/supervise/zdgl/listZdsByTimeAndZdNameAndZt?reFlag=1"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -59,22 +65,27 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "data": res.data.list ,//解析数据列表
-                        "count":res.data.total
+                        "count":res.data.total,
+                        "data": res.data.list //解析数据列表
                     }
                 }
-            },
+                , done: function (obj) {
 
-            reSet:{
-                url:"",
-                type:"search",
-                data:[""],
-                where: {
-
+                    tableFunc({
+                        tools:{
+                            type:2,
+                            event: "edit",
+                            content:"./child/schedule-developmentDetail.html",
+                            dataUrl:["zdId"]
+                        }
+                    })
                 }
-
+            },
+            reSet:{
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?reFlag=1",
+                type:"search",
+                data:["zdName"],    //搜索框的name
             }
-
         }
     }
 </script>

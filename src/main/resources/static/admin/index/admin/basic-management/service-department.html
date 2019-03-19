@@ -26,9 +26,8 @@
 </script>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-        <a class=" layui-btn layui-btn-warm layui-btn-xs" id="">去除设定</a>
-        <a class=" layui-btn layui-btn-warm layui-btn-xs">设为维修部门</a>
+        <a class=" layui-btn layui-btn-warm layui-btn-xs" id="" lay-event="qcsd">去除设定</a>
+        <a class=" layui-btn layui-btn-warm layui-btn-xs" lay-event="swwxbm">设为维修部门</a>
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
@@ -49,62 +48,7 @@
 
 
 <script>
- /*   renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {checkbox:true,fixed:true}
-                , {field: 'division-name', title: '部门名称', width:'20%',minWidth: 200}
-                , {field: 'division-number', title: '部门编号', minWidth: 150,sort:true}
-                , {field: 'pinyin-code', title: '拼音码', minWidth: 150}
-                , {field: 'division-classify', title: '部门类别', minWidth: 150}
-                , {field: 'manage', title: '管理部门类别', minWidth: 150}
-                , {field: 'service', title: '是否维修部门', minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "division-name":"病房消化内镜室",
-                    "division-number":"10329885",
-                    "pinyin-code":"bfdkxk",
-                    "division-classify":"管理部门",
-                    "manage":"0",
-                    "service":"否"
-                },{
-                    "division-name":"病房消化内镜室",
-                    "division-number":"10329885",
-                    "pinyin-code":"bfdkxk",
-                    "division-classify":"管理部门",
-                    "manage":"0",
-                    "service":"否"
-                },{
-                    "division-name":"病房消化内镜室",
-                    "division-number":"10329885",
-                    "pinyin-code":"bfdkxk",
-                    "division-classify":"管理部门",
-                    "manage":"0",
-                    "service":"否"
-                },{
-                    "division-name":"病房消化内镜室",
-                    "division-number":"10329885",
-                    "pinyin-code":"bfdkxk",
-                    "division-classify":"管理部门",
-                    "manage":"0",
-                    "service":"否"
-                },{
-                    "division-name":"病房消化内镜室",
-                    "division-number":"10329885",
-                    "pinyin-code":"bfdkxk",
-                    "division-classify":"管理部门",
-                    "manage":"0",
-                    "service":"否"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj
-                })
-            }
-        }
-    }
-*/
+
     renderMod = {
         addTable: {
             table: {
@@ -135,7 +79,37 @@
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [{
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"obmIds",
+                                event:"qcsd",
+                                url:"/supervise/bmgl/qchfWxbm",
+                                type:"POST",
+                                par:"obmId"
+                            },
+                            tool:"toolbar",
+                            event:"qcsd"
 
+                        },{
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"obmIds",
+                                event:"swwxbm",
+                                url:"/supervise/bmgl/hfWxbm",
+                                type:"POST",
+                                par:"obmId"
+                            },
+                            tool:"toolbar",
+                            event:"swwxbm"
+
+                        }
+                        ]
+                    })
                 }
             },
 

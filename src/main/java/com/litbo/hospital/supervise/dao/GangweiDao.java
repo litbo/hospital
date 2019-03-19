@@ -15,6 +15,8 @@ import java.util.List;
 public interface GangweiDao {
     @Select("select * from s_gangwei")
     List<SGangwei> getGws();
+    @Select("select * from s_gangwei where gw_zz_zt is null ")
+    List<SGangwei> listMZZGws();
     @Select("select * from s_gangwei where gw_zz_zt =#{gwZt}")
     List<GangWeiAndZtVO> listGwsByGwZt(String gwZt);
     @SelectProvider(type = GwProvider.class ,method = "getGwsByGwLevelAndGwName")
@@ -22,10 +24,10 @@ public interface GangweiDao {
 
     @Insert("insert into s_gangwei (gw_name, user_id, \n" +
             "      create_time, doc_url, gw_level, \n" +
-            "      gw_zz)\n" +
+            "      gw_zz,gw_zz_zt,zd_xgcs)\n" +
             "    values (#{gwName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
             "      #{createTime,jdbcType=TIMESTAMP}, #{docUrl,jdbcType=VARCHAR}, #{gwLevel,jdbcType=CHAR}, \n" +
-            "      #{gwZz,jdbcType=LONGVARCHAR})")
+            "      #{gwZz,jdbcType=LONGVARCHAR},#{gwZzZt},#{zdXgcs})")
     void saveGw(SGangwei gw);
 
     @Delete("delete from s_gangwei where gw_id = #{gw_id}")
@@ -50,8 +52,7 @@ public interface GangweiDao {
             "      doc_url = #{docUrl,jdbcType=VARCHAR},\n" +
             "      gw_zz_zt = #{gwZzZt,jdbcType=CHAR},\n" +
             "      sy_tianshu = #{syTianshu,jdbcType=LONGVARCHAR},\n" +
-            "      sy_syts = #{sySyts,jdbcType=LONGVARCHAR},\n" +
-            "      zd_xgcs = #{zdXgcs,jdbcType=LONGVARCHAR}\n" +
+            "      sy_syts = #{sySyts,jdbcType=LONGVARCHAR}\n" +
             "    where gw_id = #{gwId,jdbcType=INTEGER}")
     void insertGwZz(SGangwei gw);
 
@@ -104,12 +105,17 @@ public interface GangweiDao {
     @Update("update s_gangwei  set   gw_zz_zt = #{gwZzZt},  sy_tianshu = #{syDays},  sy_syts = #{syDays}" +
             "  where gw_id=#{zzId}")
     void updateGwZt(@Param("zzId") Integer zzId, @Param("gwZzZt")Integer gwZzZt,@Param("syDays") Integer syDays);
-
+    @Update("update s_gangwei  set   gw_zz_zt = #{gwZzZt}, zd_xgcs=#{reFlag}" +
+            "  where gw_id=#{zzId}")
+    void updateGwZtIncludeReFlag(@Param("zzId") Integer zzId, @Param("gwZzZt")Integer gwZzZt,@Param("reFlag") Integer reFlag);
     @SelectProvider(type = GwProvider.class ,method = "selectGwByX")
     List<ZZSelectAsBaseShMsg> listGwsByShrAndZzZt(@Param("shr_id") String shr_id, @Param("gwZzZt")Integer gwZzZt);
 
     @Select("select MAX(gw_id) from s_gangwei")
     Integer getMaxId();
     @SelectProvider(type = GwProvider.class,method = "listGwsByTimeAndZdNameAndZt")
-    List<GangWeiAndZtVO> listGwsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("gwName") String gwName, @Param("gwZt")String gwZt);
+    List<GangWeiAndZtVO> listGwsByTimeAndZdNameAndZt(@Param("startTime") String startTime, @Param("endTime")String endTime, @Param("gwName") String gwName, @Param("gwZt")String gwZt,@Param("reFlag")String reFlag);
+
+    @Select("select * from s_zhize_zt where zz_id=#{gwId}")
+    List<SZhiduzhizeZt> getShProcesses(Integer gwId);
 }

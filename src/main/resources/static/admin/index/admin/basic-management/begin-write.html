@@ -39,8 +39,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位名称</label>
                 <div class="layui-input-block">
-                    <select lay-filter="gw" name="gwId">
-
+                     <!--lay-filter="gw"-->
+                    <select name="gwId" lay-filter="gw" >
                     </select>
                 </div>
             </div>
@@ -181,15 +181,6 @@
 
     renderMod = {
         form:{
-            submit:{
-                filter:"submit",//可以不写
-                form:{
-                    url:"/supervise/gwgl/gwzzSubmit",
-                    type:"POST",
-                    contentType:"application/json",
-                    data:["gwId","gwName","gwZz","userId","shrId","createTime"]
-                }//表单提交函数
-            },
             val:{
                 filter:"forms",
                 get:{
@@ -202,10 +193,20 @@
                         filter:"gw",
                         ids:"gwId",
                         text:"gwName",
-                        url:"/supervise/gwgl/listGws2"
+                        url:"/supervise/gwgl/listMZZGws"
                     }
                 ]
+            },
+            submit:{
+                filter:"submit",//可以不写
+                form:{
+                    url:"/supervise/gwgl/gwzzSubmit",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["gwId","gwName","gwZz","userId","shrId","createTime"]
+                }//表单提交函数
             }
+
         }
     }
 </script>

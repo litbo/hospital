@@ -253,7 +253,7 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
-    public void setWxbm(List<String> obmids, int fwFlag) {
+    public void setWxbm(String[] obmids, int fwFlag) {
         for(String obmid:obmids){
             bmDao.setWxbm(obmid,fwFlag);
         }
@@ -362,6 +362,7 @@ public class BmServiceImpl implements BmService {
         if(selectVO.getFlag()==1){
             for (SBm bm:bms){
                 BmSelectLbVO lbbm = new BmSelectLbVO();
+                lbbm.setObmId(bm.getObmId());
                 lbbm.setBmId(bm.getBmId());
                 lbbm.setBmName(bm.getBmName());
                 if(bm.getBmId().startsWith("02"))
@@ -380,6 +381,7 @@ public class BmServiceImpl implements BmService {
 
                 if(bm.getBmId().startsWith("02")){
                     BmSelectLbVO lbbm = new BmSelectLbVO();
+                    lbbm.setObmId(bm.getObmId());
                     lbbm.setBmId(bm.getBmId());
                     lbbm.setBmName(bm.getBmName());
                     if(bm.getBmId().startsWith("0201")){
@@ -396,6 +398,7 @@ public class BmServiceImpl implements BmService {
             for (SBm bm:bms){
                 if(bm.getBmId().startsWith("02")){
                     BmSelectLbVO lbbm = new BmSelectLbVO();
+                    lbbm.setObmId(bm.getObmId());
                     lbbm.setBmId(bm.getBmId());
                     lbbm.setBmName(bm.getBmName());
                     if(bm.getBmId().startsWith("0201")){

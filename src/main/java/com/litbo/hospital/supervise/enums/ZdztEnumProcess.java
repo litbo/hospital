@@ -9,7 +9,8 @@ public enum  ZdztEnumProcess {
     ZD__ZT_SHZ(1,"审核中"),
     ZD__ZT_SY(2,"试用"),
     ZD__ZT_BA(3,"备案"),
-    ZD__ZT_YTY(4,"已停用");
+    ZD__ZT_YTY(4,"已停用"),
+    ZD__ZT_DPJ(5,"待评价");
 
     @Getter
     private Integer code;

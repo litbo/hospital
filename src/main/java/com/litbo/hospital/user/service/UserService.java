@@ -13,4 +13,6 @@ public interface UserService {
     Integer updatePwd(String userId, String userPwd);
 
     UserVo getUserById(String userId);
+
+    Integer delUser(String id);
 }

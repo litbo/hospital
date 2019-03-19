@@ -68,6 +68,14 @@ public class DictController {
         return Result.success(eqGzlbs);
     }
 
+
+
+    @RequestMapping("/gglx")
+    public Result listGglx(){
+
+        List<SysGglx> gglxes = dictDao.listGglx();
+        return Result.success(gglxes);
+    }
     @RequestMapping("/jczd")
     public Result listJczd(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
@@ -77,13 +85,25 @@ public class DictController {
 
 
     }
+    @RequestMapping("/zyzd")
+    public Result listZyzd(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
 
-    @RequestMapping("/gglx")
-    public Result listGglx(){
+        PageInfo pageInfo = ds.listZyzd(pageNum,pageSize);
+        return  Result.success(pageInfo);
 
-        List<SysGglx> gglxes = dictDao.listGglx();
-        return Result.success(gglxes);
+
     }
+
+    @RequestMapping("/listDictByTName")
+    public Result listDictByTName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                  @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String tName){
+
+        PageInfo pageInfo =ds.listDictByTName(pageNum,pageSize,tName);
+        return Result.success(pageInfo);
+    }
+
+
 
 
 

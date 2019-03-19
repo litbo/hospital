@@ -76,4 +76,35 @@
     </form>
 </div>
 </body>
+<script>
+    renderMod = {
+        btn: [
+            {
+                elem: '#upData',
+                func: function () {
+                    var new1 = {}, da = [];
+                    var $input = $("input");
+                    for (var i = 0; i < $input.length; i++) {
+                        new1[$input.eq(i).attr("name")] = $input[i].value;
+                    }
+                    var na = $("select[name = 'gnpzIssy']");
+                    new1.gnpzIssy = na.val();
+                    if (na.val() === '1'){
+                        new1.gnpzIssyName = "使用";
+                    }else if (na.val() === '0'){
+                        new1.gnpzIssyName = "不使用";
+                    }
+                    var key = $.getUrlParam('key');
+                    da.push(new1);
+                    layui.sessionData($.getUrlParam('vg'), {
+                        key: key,
+                        value: da
+                    });
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ]
+    };
+</script>
 </html>

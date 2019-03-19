@@ -4,11 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.user.bean.SRole;
 import com.litbo.hospital.user.dao.RoleDao;
+import com.litbo.hospital.user.dao.UserDao;
 import com.litbo.hospital.user.service.RoleService;
 import com.litbo.hospital.user.vo.SelectUserVo;
 import com.litbo.hospital.user.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private UserDao userDao;
     @Override
     public List<SRole> getRoleByUsername(String username) {
         return roleDao.getRoleByUsername(username);
@@ -30,7 +34,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public Integer setRole(String userId, String roleId) {
+        userDao.delRole(userId);
         if(roleDao.setRole(userId,roleId)>0 && roleDao.setStatus(userId)>0){
             return 1;
         }
@@ -55,8 +61,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<SRole> listRoles() {
-        return roleDao.listRoles();
+    public PageInfo listRoles(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+
+        return new PageInfo(roleDao.listRoles());
+
     }
+
+
 
 }

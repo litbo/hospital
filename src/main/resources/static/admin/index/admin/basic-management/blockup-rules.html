@@ -62,7 +62,7 @@
                     , {field: 'createTime', title: '启用日期', minWidth: 150}
                     , {field: 'ztDate', title: '停用日期', minWidth: 150}
                 ]]
-                , url: "/supervise/zdgl/listZdsByZdZt?zdZt=0"
+                , url: "/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=4"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -84,7 +84,7 @@
                 }
             },
             reSet:{
-                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=0",
+                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=4",
                 type:"search",
                 data:["bmName"],    //搜索框的name
                 dat:["#date","startTime","endTime","~"]

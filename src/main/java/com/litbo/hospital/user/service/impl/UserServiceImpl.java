@@ -6,6 +6,7 @@ import com.litbo.hospital.user.service.UserService;
 import com.litbo.hospital.user.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -41,5 +42,15 @@ public class UserServiceImpl implements UserService {
     public UserVo getUserById(String userId) {
 
        return userDao.getUserByUserId(userId);
+    }
+
+    @Override
+    public Integer delUser(String id) {
+        if(userDao.delUser(id)>0){
+            userDao.changeStatus0(id);
+            userDao.delRole(id);
+            return 1;
+        }
+       return 1/0;
     }
 }

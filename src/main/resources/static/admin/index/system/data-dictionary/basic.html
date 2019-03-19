@@ -24,8 +24,14 @@
     <form class="layui-form">
         字典分类：
         <div class="layui-inline">
-            <select name="classify" lay-verify="">
-                <option>111</option>
+            <select name="tName" lay-verify="">
+                <option value="s_mz">民族字典</option>
+                <option value="s_sex">性别字典</option>
+                <option value="s_jg">籍贯字典</option>
+                <option value="s_xllb">学历字典</option>
+                <option value="s_gb">国别字典</option>
+                <option value="s_zwlb">职务类别</option>
+                <option value="s_zzmm">政治面貌</option>
             </select>
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
@@ -38,42 +44,29 @@
             table:{
                 cols: [[ //表头
                     {checkbox:true,fixed:true}
-                    , {field: 'dictionary-name', title: '字典名称', width: '45%', minWidth: 400}
-                    , {field: 'dictionary-type', title: '字典类型', minWidth: 150,event:"openLink"}
+                    , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
+                    , {field: 'dictId', title: '字典编号', minWidth: 150,event:"openLink"}
                 ]]
-                , "data": [
-                    {
-                        "dictionary-name":"核磁共振室",
-                        "dictionary-type":"160232810001",
-                        "link":"./welcome.html",
-                        "messages":[
-                            {
-                                name:"名称",
-                                value:"6666666"
-                            },
-                            {
-                                name:"时间",
-                                value:"666666668888"
-                            }
-                        ]
-                    },{
-                        "dictionary-name":"核磁共振室",
-                        "dictionary-type":"160232810001"
-                    },{
-                        "dictionary-name":"核磁共振室",
-                        "dictionary-type":"160232810001"
-                    }]
+                ,url:"/eqdict/jczd"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
                 , done: function (obj) {
-                    tableFunc({
-                        "obj":obj,
-                        "addMsg":2,
-                        "addLink":"table1"
-                    })
                 }
             },
-            date :{
-                elem : "#date1",
-                type : "datetime"
+            reSet:{
+                url:"/eqdict/listDictByTName",
+                type:"reload",
+                data:["tName"]
             }
         }
     </script>

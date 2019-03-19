@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>再评价审核</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 6px!important;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>规章制度信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">规章制度名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="zdName" class="layui-input" autocomplete="off">
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">制度信息</li>
+                        <li>文档上传</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <textarea class="layui-textarea" name="zdContent"></textarea>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="layui-upload" style="margin-top:40px;">
+                                <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>再评价申请信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价原因</label>
+                <div class="layui-input-block">
+                    <input type="text" name="zpjReason" class="layui-input" autocomplete="off">
+
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">申请人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sqUserId" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">申请日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="sqDate" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>再评价审核信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">审核结果<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ztCzzt" value="2" title="通过" checked>
+                    <input type="radio" name="ztCzzt" value="1" title="不通过">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="" class="layui-input" autocomplete="off" >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="ztDate" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">审核意见</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="ztShyj"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="submit" id="startUploadFile">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="tips">
+
+</div>
+
+
+
+<script>
+    layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , element = layui.element
+            , upload = layui.upload
+            , laydate = layui.laydate;
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+
+        //弹出层设置
+        $('#layerBtn').click(function(){
+            layer.open({
+                type:2
+                ,title:'模板选择'
+                ,content:'./child/writeAdd.html'
+                ,area:['90%','90%']
+                ,btn:['选择','取消']
+            });
+            return false;
+        });
+
+        //文件下载
+        upload.render({
+            elem:'#selectFile',
+            url:'/upload/',
+            auto:false,
+            bindAction:'#startUploadFile',
+            size:1024*40,//限制文件大小，单位kb
+            done:function(res){
+                console.log(res);
+            }
+        })
+    });
+
+    renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/supervise/zdgl/getZpjMsgByZdId",
+                    type:"GET",
+                    data:{zdId:$.getUrlParam('zdId')}
+                }
+            }
+            ,
+            submit:{
+                form:{
+                    url:"/supervise/zdgl/dpjSubmitShMsg",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["ztCzzt","ztShyj","ztDate"],
+                    add:{
+                        zdId:$.getUrlParam("zdId")
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    $(function () {
+
+        var xx = $.getUrlParam('ztCzname');
+        if (xx == "处长审核") {
+            $("#nextShr").addClass("hidden");
+            $("#syDays").removeClass("hidden");
+        } else if(xx == "科长审核"){
+            $("#nextShr").removeClass("hidden");
+            $("#syDays").addClass("hidden");
+        }
+    })
+</script>
+</body>
+
+</html>

@@ -28,5 +28,12 @@ public interface UserDao {
 
     @Update("update s_emp set status='1' where user_id=#{userId}")
     Integer changeStatus(String userId);
-
+    @Update("update s_emp set status='0' where user_id=#{userId}")
+    Integer changeStatus0(String userId);
+    @Delete("delete from s_user where user_id =#{id}")
+    Integer delUser(String id);
+    @Delete("delete from s_emp where user_id =#{id}")
+    Integer delEmp(String id);
+    @Delete("delete from s_user_role where user_id =#{id}")
+    Integer delRole(String id);
 }

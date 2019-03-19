@@ -3,7 +3,9 @@ package com.litbo.hospital.user.controller;
 
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.service.UserService;
+import com.litbo.hospital.user.vo.ListVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +34,8 @@ public class UserController {
 
     //批量设置为用户
     @PostMapping("/setUsers")
-    public Result setUsers(@RequestBody List<String> ids){
-        for (String id : ids) {
+    public Result setUsers(@RequestBody ListVo listVo){
+        for (String id : listVo.getUserIds()) {
             if(userService.setUser(id)<0){
                 return Result.error(id);
             }
@@ -47,6 +49,17 @@ public class UserController {
     public Result getUserById(String userId){
 
        return Result.success(userService.getUserById(userId)) ;
+    }
+
+    @RequestMapping("delUsers")
+    @Transactional
+    public  Result delUsers(@RequestBody ListVo listVo){
+        for (String id : listVo.getUserIds()) {
+            if(userService.delUser(id)<=0){
+                return Result.error(id);
+            }
+        }
+        return Result.success();
     }
 
 }
