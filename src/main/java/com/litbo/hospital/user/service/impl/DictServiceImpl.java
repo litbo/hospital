@@ -56,4 +56,11 @@ public class DictServiceImpl implements DictService{
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(dictDao.listDictByTName(tName));
     }
+
+    @Override
+    public PageInfo listZyzd(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+
+        return  new PageInfo(dictDao.listZyzd());
+    }
 }

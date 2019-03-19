@@ -48,4 +48,19 @@ public interface DictDao {
     List<DictVo> listJczd();
     @SelectProvider(type = DictProvider.class ,method = "listDictByTName")
     List<DictVo> listDictByTName(String tName);
+
+    @Select("SELECT eq_cslb_id as dictId ,eq_cslb_name as dictName FROM eq_cslb\n" +
+            "union all\n" +
+            "SELECT eq_cxfl_id as dictId ,eq_cxfl_name as dictName FROM eq_cxfl\n" +
+            "union all\n" +
+            "SELECT gzlb_id as dictId ,gzlb_name as dictName FROM eq_gzlb\n" +
+            "union all\n" +
+            "SELECT eq_jldw_id as dictId ,eq_jldw_name as dictName FROM eq_jldw\n" +
+            "union all\n" +
+            "SELECT qdfs_id as dictId ,qdfs_name as dictName FROM eq_qdfs\n" +
+            "union all\n" +
+            "SELECT zjly_id as dictId ,zjly_name as dictName FROM eq_zjly\n" +
+            "union all\n" +
+            "SELECT syxz_id as dictId ,syxz_name as dictName FROM eq_syxz")
+    List<DictVo> listZyzd();
 }
