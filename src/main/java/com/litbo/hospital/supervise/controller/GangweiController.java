@@ -56,6 +56,12 @@ public class GangweiController {
         List<SGangwei> gws = gangweiDao.getGws();
         return Result.success(gws);
     }
+
+    @GetMapping("/listMZZGws")
+    public Result listMZZGws(){
+        List<SGangwei> gws = gangweiDao.listMZZGws();
+        return Result.success(gws);
+    }
     @RequestMapping("/listGwsByGwZt")
     public Result listGwsByGwZt(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
                          @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,String gwZt){
@@ -178,5 +184,13 @@ public class GangweiController {
     public Result dpjSubmitShMsg(@RequestBody GwZpjSubmitVO gwZpjSubmitVO){
         gangweiService.dpjSubmitShMsg(gwZpjSubmitVO);
         return Result.success();
+    }
+
+    @GetMapping("/getShProcesses")
+    public Result getShProcesses(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 @RequestParam Integer gwId){
+        PageInfo date = gangweiService.getShProcesses(pageNum,pageSize,gwId);
+        return Result.success(date);
     }
 }

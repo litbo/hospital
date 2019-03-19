@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>岗位职责再评价进度</title>
+    <title>岗位职责制定进度</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -22,19 +22,22 @@
     </div>
 </div>
 <script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+    </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="编号" autocomplete="off">
+            <input class="layui-input" name="gwName" placeholder="岗位职责名称" autocomplete="off">
         </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="名称" autocomplete="off">
-        </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
+
+        <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">流程记录</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">流程记录</a>
 </script>
+
+
 
 
 <script>
@@ -42,13 +45,13 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type:"checkbox"}
-                    ,{field:'post-number',title:'岗位职责编号',width:'30%',minWidth:200,sort:true}
-                    ,{field:'post-name',title:'岗位职责名称',minWidth:150}
-                    ,{field:'current-activity',title:'当前活动',minWidth:150}
-                    ,{field:'right',title:'操作',minWidth:200,toolbar:'#bar',align:'center'}
+                    {checkbox:true,fixed:true}
+                    , {field: 'gwId', title: '岗位职责编号',minWidth: 150,sort:true}
+                    , {field: 'gwName', title: '岗位职责名称', minWidth: 150}
+                    , {field: 'ztCzname', 'title':'当前活动',minWidth:150}
+                    , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
-                , url: "/supervise/gwgl/listGws"
+                , url: "/supervise/gwgl/listGwsByTimeAndZdNameAndZt?reFlag=1"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -61,34 +64,31 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "data": res.data.list ,//解析数据列表
-                        "count":res.data.total
+                        "count":res.data.total,
+                        "data": res.data.list //解析数据列表
                     }
                 }
                 , done: function (obj) {
+
                     tableFunc({
-                        "obj": obj,
-                        "toolFunc": {
-                            tool:"toolbar",
-                            type: 2,
-                            title: "流程记录",
+                        tools:{
+                            type:2,
                             event: "edit",
-                            content: ""
-                    }
-                })
-            }
+                            content:"./child/postSchedule-developmentDetail.html",
+                            dataUrl:["gwId"]
+                        }
+                    })
+                }
             },
 
             reSet:{
-                url:"",
+                url:"/supervise/gwgl/listGwsByTimeAndZdNameAndZt?reFlag=1",
                 type:"search",
-                data:[""],
+                data:["gwName"],
                 where: {
 
                 }
-
             }
-
         }
     }
 </script>
