@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>机构管理</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -14,26 +15,28 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <!--ZTREE-->
-    <link rel="stylesheet" href="/static/admin/css/tree/demo.css" type="text/css">
-    <link rel="stylesheet" href="/static/admin/css/tree/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="/static/admin/css/tree/ztree-liulinwj.css" type="text/css">
     <script src="/static/admin/js/jquery.ztree.all.js"></script>
+    <script src="/static/admin/js/ztree-liulinwj_5.js"></script>
     <style>
-        .layui-inline{
-            width:140px;
+        .layui-inline {
+            width: 140px;
         }
-        .layui-form-item{
-            margin-top:20px;
-            height:45px;
+
+        .layui-form-item {
+            margin-top: 20px;
+            height: 45px;
         }
-        .tree-container{
-            height:620px;
-            margin-left:20px;
-            margin-top:10px;
-            display:inline-block;
-            padding:10px;
-            border:1px solid #ddd;
-            overflow:auto;
-            float:left;
+
+        .tree-container {
+            height: 620px;
+            margin-left: 20px;
+            margin-top: 10px;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow: auto;
+            float: left;
         }
     </style>
 </head>
@@ -41,71 +44,74 @@
 <body>
 
 <div class="tree-container col-xs-12 col-md-5">
-    <ul id="demo"></ul>
+    <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
+        <ul id="demo"></ul>
+    </div>
 </div>
 <div class="layui-row col-xs-12 col-md-6">
     <div class="col-xs-12">
-        <form class="layui-form layui-form-pane" action="">
+        <form class="layui-form layui-form-pane" lay-filter="shows" action="">
             <div class="row">
-                    <div class="layui-col-xs-12">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">科室名称</label>
-                            <div class="layui-input-block">
-                                <input type="text" class="layui-input" name="" autocomplete="off" >
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item" pane>
-                        <label class="layui-form-label">管理部门</label>
-                        <div class="layui-input-block" style="line-height:40px">
-                            <input type="radio" name="bm" value="是" title="是" checked >
-                            <input type="radio" name="bm" value="否" title="否" >
-                        </div>
-                    </div>
-                    <div class="layui-form-item" pane>
-                        <label class="layui-form-label">归口</label>
-                        <div class="layui-input-block" style="line-height:40px">
-                            <input type="radio" name="gk" value="医工" title="医工" checked>
-                            <input type="radio" name="gk" value="信息" title="信息">
-                            <input type="radio" name="gk" value="后勤" title="后勤">
-                        </div>
-                    </div>
-                    <div class="layui-form-item" pane>
-                        <label class="layui-form-label">维修科室</label>
-                        <div class="layui-input-block" style="line-height:40px">
-                            <input type="radio" name="wxks" value="是" title="是" checked>
-                            <input type="radio" name="wxks" value="否" title="否">
-                        </div>
-                    </div>
+                <div class="layui-col-xs-12">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">负责人</label>
+                        <label class="layui-form-label">科室名称</label>
                         <div class="layui-input-block">
-                            <input type="text" class="layui-input" autocomplete="off" >
+                            <input type="text" name="bmName" class="layui-input" name="" autocomplete="off">
                         </div>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">负责人电话</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" autocomplete="off" >
-                        </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">管理部门</label>
+                    <div class="layui-input-block" style="line-height:40px">
+                        <input type="radio" name="xbmFlag" value="1" title="是" checked>
+                        <input type="radio" name="xbmFlag" value="0" title="否">
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">科室电话</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" autocomplete="off" >
-                        </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">归口</label>
+                    <div class="layui-input-block" style="line-height:40px">
+                        <input type="radio" name="bmAddr" value="0" title="医工" checked>
+                        <input type="radio" name="bmAddr" value="1" title="信息">
+                        <input type="radio" name="bmAddr" value="2" title="后勤">
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">地址</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input" autocomplete="off" >
-                        </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">维修科室</label>
+                    <div class="layui-input-block" style="line-height:40px">
+                        <input type="radio" name="wxFlag" value="1" title="是" checked>
+                        <input type="radio" name="wxFlag" value="0" title="否">
                     </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">负责人</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">负责人电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="tgBmId" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">科室电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bmTel" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
             </div>
             <div class="layui-row">
                 <div class="layui-col-xs12">
                     <div class="layui-form-item" style="margin:20px 0;">
-                        <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="">保存</button>
+                        <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="">保存
+                        </button>
                     </div>
                 </div>
             </div>
@@ -116,77 +122,43 @@
 
 <script>
     var setting = {
-
-        view: {
-            showLine: false,           //不显示连接线
-            showIcon: showIconForTree  //不显示文件夹图标（调用showIconForTree()）
-        },
-
-        data: {
-            key:{
-                name:"bmName"
+            view: {
+                showLine: false,
+                showIcon: false
             },
-            simpleData: {
-                enable: true,
-                idKey: "bmId",
-                pIdKey: "pBmId"
-            }
-        }
-    };
-
-
-
-    function showIconForTree(treeId, treeNode) {
-        return !treeNode.isParent;
-    };
-
-
-    $(document).ready(function(){
-        $.ajax({
-            url : "/supervise/bmgl/listBm",
-            dataType:"JSON",
-            success(date){
-                var nodes = date;
-                $.fn.zTree.init($("#demo"), setting, nodes);
-            }
-        })
-
-    });
-    /*//树形结构菜单
-    layui.use(['form',"tree","jquery"], function() {
-        var form = layui.form, $ = layui.jquery,
-            jsonP = {
-                elem: "#demo",
-                click: function (node) {
-                    $.ajax({
-                        url: "/supervise/bmgl/listBms2",
-                        method: "GET",
-                        data: {pid: node.id},
-                        async: false,
-                        success: function (data) {
-                             console.log(node);
-                             console.log(data);
-                            node.children = data.data;
-                            node.spread = true;
-                            $("#demo").html("");
-                            layui.tree(jsonP);
-                        }
-                    })
+            data: {
+                key: {
+                    name: "bmName"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "bmId",
+                    pIdKey: "pBmId"
                 }
-            };
-
-        $.ajax({
-            url: "/supervise/bmgl/listBms2",
-            method: "GET",
-            // data: {pid: "68"},
-            async: false,
-            success: function (data) {
-                // console.log(data);
-                jsonP.nodes = data.data;
-                layui.tree(jsonP);
+            },
+            callback: {
+                "onClick":clickShow
             }
-        });
-    });*/
+        },
+        nodes = {};
+
+    function clickShow(event,treeId,treeNode){
+        console.log(arguments);
+        layui.use("form",function(){
+            var form = layui.form;
+            form.val("shows", treeNode);
+        })
+    }
+
+    $.ajax({
+        url: "/supervise/bmgl/listBm",
+        dataType: "JSON",
+        success: function (data) {
+            //console.log(data);
+            nodes = data;
+            $.fn.zTree.beautify().init($("#demo"), setting, nodes);
+        }
+    })
 </script>
 </body>
 </html>

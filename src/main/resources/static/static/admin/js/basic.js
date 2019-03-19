@@ -493,7 +493,7 @@ function subUp(value, data, param) {
     var dataP = {}, valus = "";
     if (Type(value.data) === "array") {
         //dataP 提交的数据 valus 填写的表单name值
-        for (var i = 0; i < value.data.length; i++) {
+        /*for (var i = 0; i < value.data.length; i++) {
             //获取一个name值
             valus = value.data[i];
             //当data不存在时获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
@@ -516,7 +516,8 @@ function subUp(value, data, param) {
             } else {
                 dataP[valus] = data.field[valus];
             }
-        }
+        }*/
+        dataP = getFormValue(value.data);
         //向data中直接添加附加数据
         if (value.add) {
             for (var names in value.add) {
@@ -661,22 +662,37 @@ function getTableValue(name, inClear) {
     return oData;
 }
 
-function getFormValue(data,vaus,dataP){
-    var inputValue = $("input[name=" + valus + "]").val();
-    if (inputValue) {
-        dataP[valus] = inputValue;
-    } else if ($("select[name=" + valus + "]").val()) {
-        dataP[valus] = $("select[name=" + valus + "]").val();
-    } else if ($("textarea[name=" + valus + "]").val()) {
-        dataP[valus] = $("textarea[name=" + valus + "]").val();
-    } else if ($("input[type=radio][name=" + valus + "]").val()) {
-        dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
-    } else if ($("input[type=checkbox][name=" + valus + "]").val()) {
-        var $cks = $("input[type=checkbox][name=" + valus + "]");
-        if ($cks[0].checked === true) {
-            dataP[valus] = $cks.val();
+//获取给定name的表单数据
+//返回JSON
+function getFormValue(name,res,force){
+    var data = res || {};
+    //遍历所有的name
+    for(var c=0;c<name.length;c++){
+        var inputValue = $("input[name=" + name[c] + "]").val()
+            ,selectValue = $("select[name=" + name[c] + "]").val()
+            ,textareaValue = $("textarea[name=" + name[c] + "]").val()
+            ,radioValue = $("input[type=radio][name=" + name[c] + "]").val()
+            ,checkBoxValue = $("input[type=checkbox][name=" + name[c] + "]").val();
+
+        //只匹配首先获取到的name抛弃后匹配成功的，
+        //如强制匹配（第二参数为true）则未匹配成功则会使用其他匹配上的DOM的值
+        if (inputValue) {
+            data[name[c]] = inputValue;
+        } else if (selectValue) {
+            data[name[c]] = selectValue;
+        } else if (textareaValue) {
+            data[name[c]] = textareaValue;
+        } else if (radioValue) {
+            data[name[c]] = radioValue;
+        } else if (checkBoxValue) {
+            if (checkBoxValue[0].checked === true) {
+                data[name[c]] = checkBoxValue.val();
+            }
+        }else{
+            force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
         }
     }
+    return data;
 }
 
 //抽象出的简化判断，成立返回false 不成立则返回true
@@ -1151,12 +1167,13 @@ action = func = {
                         }
                     }
                 }else if(Type(value.adds) === "array"){
-                    for(var g=0;g<value.adds.length;g++){
+                    value.data = getFormValue(value.adds,value.data);
+                    /*for(var g=0;g<value.adds.length;g++){
                         var $selVal = $("select[name=" + value.adds[g] + "]").val();
                         if($selVal){
                             value.data[value.adds[g]] = $selVal;
                         }
-                    }
+                    }*/
                 }
 
             }
