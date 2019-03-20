@@ -60,8 +60,8 @@ public class BmController {
     //列出所有部门信息不分頁
     @GetMapping("/listBm")
     @ResponseBody
-    public List<SBm> getBmList(){
-        return bmService.getBmList();
+    public Result getBmList(){
+        return Result.success(bmService.getBmList());
 
     }
     //列出所有部门信息
