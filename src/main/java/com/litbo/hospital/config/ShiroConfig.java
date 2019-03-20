@@ -9,12 +9,13 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//@Configuration
+@Configuration
 public class  ShiroConfig {
 
     /**
@@ -37,7 +38,7 @@ public class  ShiroConfig {
 
         //设置默认访问路径
 
-        shiroFilterFactoryBean.setLoginUrl("/login.html");
+        shiroFilterFactoryBean.setLoginUrl("/admin/index/login.html");
         shiroFilterFactoryBean.setSuccessUrl("/success.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("unauthorized.html");
 

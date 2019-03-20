@@ -6,8 +6,10 @@ import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.user.bean.SRight;
 import com.litbo.hospital.user.bean.SRole;
+import com.litbo.hospital.user.dao.RoleDao;
 import com.litbo.hospital.user.service.RightService;
 import com.litbo.hospital.user.service.RoleService;
+import com.litbo.hospital.user.vo.RoleRightVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -31,6 +33,8 @@ public class LoginController {
     private RightService rightService;
     @Autowired
     private EmpService empService;
+    @Autowired
+    private RoleDao roleDao;
     @RequestMapping("/")
     public String tologin(){
         return "login";
@@ -84,18 +88,16 @@ public class LoginController {
             session.setAttribute("username",loginVo.getUserName());
             SEmp emp =  empService.getEmpsByUserId(loginVo.getUserName());
             session.setAttribute("emp",emp);
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            Set<String> roles = new HashSet<>();
-            List<SRole> rolesByUsername = roleService.getRoleByUsername(loginVo.getUserName());
-            for (SRole role : rolesByUsername) {
-                roles.add(role.getRoleName());
-                List<SRight> rightsByUsername = rightService.getRightsByRolename(role.getRoleName());
-                for (SRight right : rightsByUsername) {
-                    info.addStringPermission(right.getRightName());
-                }
-            }
-            info.setRoles(roles);
-            return Result.success(info);
+
+
+
+            SRole role =  roleDao.getRole(loginVo.getUserName());
+            List<SRight> rightsByUsername = rightService.getRightsByRolename(role.getRoleName());
+            RoleRightVo auth = new RoleRightVo();
+            auth.setRole(role.getRoleName());
+            auth.setRightList(rightsByUsername);
+
+            return Result.success(auth);
 
         }catch (Exception e){
             return Result.error("用户名密码错误");
