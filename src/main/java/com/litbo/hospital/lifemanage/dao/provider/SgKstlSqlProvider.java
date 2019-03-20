@@ -37,7 +37,7 @@ public class SgKstlSqlProvider {
                 }
                 WHERE("eq_pm.eq_pm_id IN (" + sb.toString() + ")");
             }
-            WHERE("sg_info.iskssh <> 1 OR sg_info.iskssh IS NULL");
+            WHERE("(sg_info.iskssh <> 1 OR sg_info.iskssh IS NULL)");
             ORDER_BY("kstl_sj desc");
         }}.toString();
     }

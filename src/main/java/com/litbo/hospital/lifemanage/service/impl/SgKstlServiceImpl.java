@@ -135,6 +135,7 @@ public class SgKstlServiceImpl implements SgKstlService {
 
         //调用品名的模糊查询 获得查询到的品名ID
         if (StringUtils.isNotBlank(eqPmJc)) {
+            eqPmJc = "%"+eqPmJc+"%";
             List<String> pms = new ArrayList<>();
             for (EqPm eqPm : eqDao.listPmsByPym(eqPmJc)) {
                 pms.add(eqPm.getEqPmId());

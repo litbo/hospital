@@ -602,21 +602,6 @@
                 ]
               },
               {
-                "title": "字典设置",
-                "url": "./table.html",
-                "icon": "stamp",
-                "id": "3113",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "设备金额档设置",
-                    "url": "./table.html",
-                    "id": "31130",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
                 "title": "其他台账",
                 "url": "./life/electric-bill/bill-list.html",
                 "icon": "file-invoice-dollar",

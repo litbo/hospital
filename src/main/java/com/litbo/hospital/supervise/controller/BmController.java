@@ -61,8 +61,8 @@ public class BmController {
     //列出所有部门信息不分頁
     @GetMapping("/listBm")
     @ResponseBody
-    public List<SBm> getBmList(){
-        return bmService.getBmList();
+    public Result getBmList(){
+        return Result.success(bmService.getBmList());
 
     }
     //列出所有部门信息
@@ -83,9 +83,9 @@ public class BmController {
 
     @GetMapping ("/listTreeBms")
     @ResponseBody
-    public Result listTreeBms(){
+    public List<BmsTreeVO> listTreeBms(){
         List<BmsTreeVO> bmList = bmService.listTreeBms();
-        return Result.success(bmList);
+        return bmList;
     }
     @RequestMapping("/listBmsAsLbBms")
     @ResponseBody
