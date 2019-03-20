@@ -8,6 +8,7 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
+import com.litbo.hospital.supervise.vo.BmsTreeVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
 import com.litbo.hospital.supervise.vo.WxBmHfVO;
 import io.swagger.annotations.Api;
@@ -77,6 +78,13 @@ public class BmController {
     public Result listBms3(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         List<SBm> bmList = bmDao.getBmList();
+        return Result.success(bmList);
+    }
+
+    @GetMapping ("/listTreeBms")
+    @ResponseBody
+    public Result listTreeBms(){
+        List<BmsTreeVO> bmList = bmService.listTreeBms();
         return Result.success(bmList);
     }
     @RequestMapping("/listBmsAsLbBms")
@@ -218,4 +226,6 @@ public class BmController {
         }
         return Result.success();
     }
+
+
 }
