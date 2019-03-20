@@ -11,6 +11,7 @@ var $mainList = $("#main_nav_list")
     , nN = Number(n)//Number化n值
     , tN = Number(t)
     , shiro = ""
+    ,shir = layui.sessionData("rl").sr
     , mList = {} //具体页面导航数据
     , nList = {};//大页面导航数据
 
@@ -83,10 +84,21 @@ function addList(list, list1,main_list) {//list:包含主列表的容器 list1:�
         }
     }//判断当前页面，新建并切换TAB标签页
     function addPage(a) {//a:main_list[0] 或 main_list[x].items[i] (x>1)
-        var small_list = "";
+        var small_list = "",bre = true;
         //权限不匹配不渲染列表
-        if(a.shiro !== undefined && a.shiro !== shiro){
-            return false;
+        if(shir !== undefined){
+            for(var k=0;k<shir.length;k++){
+                if(a.shiro === shir[k].rightName){
+                    bre = true;
+                    break;
+                }else{
+                    bre = false;
+                }
+            }
+            //若一个匹配都不成功则不渲染
+            if(!bre){
+                return false;
+            }
         }
         if (a.children) {
             var $dl = $("<dl>").attr("class", "layui-nav-child").append(small_list);
@@ -134,10 +146,22 @@ function addList(list, list1,main_list) {//list:包含主列表的容器 list1:�
             if (x.tools[i].children) {//当副列表的列表项存在时才会将列表项添加进a中，否则无意义
                 var sUrl = ""//设置URL地址
                     , sTarget = ""//设置链接打开方式
+                    , bres = true
                     , xt_i = x.tools[i];
                 //匹配权限
-                if(xt_i.shiro !== undefined && xt_i.shiro !== shiro){
-                    return false;
+                if(shir !== undefined){
+                    for(var k=0;k<shir.length;k++){
+                        if(xt_i.shiro === shir[k].rightName){
+                            bres = true;
+                            break;
+                        }else{
+                            bres = false;
+                        }
+                    }
+                    //若一个匹配都不成功则不渲染
+                    if(!bres){
+                        return false;
+                    }
                 }
                 $ul = $("<ul>").attr("class", "min_tools");
                 for (var j = 0; j < x.tools[i].children.length; j++) {
