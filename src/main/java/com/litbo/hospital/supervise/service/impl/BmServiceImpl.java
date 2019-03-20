@@ -509,17 +509,19 @@ public class BmServiceImpl implements BmService {
         List<BmsTreeVO> vos  =  bmDao.listTreeBms();
         for (BmsTreeVO treeVO :vos){
             if(treeVO.getBmId().startsWith("02")){
-                treeVO.setIsGlbm(1);
+                treeVO.setIsGlbm("1");
             }else{
-                treeVO.setIsGlbm(0);
+                treeVO.setIsGlbm("0");
             }
 
             if(treeVO.getBmId().startsWith("0201")){
-                treeVO.setGkCode(0);
+                treeVO.setGkCode("0");
             }else  if(treeVO.getBmId().startsWith("0202")){
-                treeVO.setGkCode(1);
+                treeVO.setGkCode("1");
             }else  if(treeVO.getBmId().startsWith("0203")){
-                treeVO.setGkCode(2);
+                treeVO.setGkCode("2");
+            }else {
+                treeVO.setGkCode("3");
             }
         }
         return vos;

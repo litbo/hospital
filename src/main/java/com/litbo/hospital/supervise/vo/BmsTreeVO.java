@@ -13,8 +13,7 @@ public class BmsTreeVO {
     private String wxFlag;
     private String pBmId;
     private String xbmFlag;
-
-    private Integer isGlbm;
-    private Integer gkCode;
+    private String isGlbm;
+    private String gkCode;
     private String fzrName;
 }

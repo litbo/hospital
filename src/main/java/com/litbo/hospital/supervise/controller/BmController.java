@@ -83,9 +83,9 @@ public class BmController {
 
     @GetMapping ("/listTreeBms")
     @ResponseBody
-    public Result listTreeBms(){
+    public List<BmsTreeVO> listTreeBms(){
         List<BmsTreeVO> bmList = bmService.listTreeBms();
-        return Result.success(bmList);
+        return bmList;
     }
     @RequestMapping("/listBmsAsLbBms")
     @ResponseBody
