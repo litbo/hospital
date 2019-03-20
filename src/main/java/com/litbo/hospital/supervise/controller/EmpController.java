@@ -112,7 +112,7 @@ public class EmpController {
             @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             @RequestParam(required = false) String key, HttpServletRequest request) {
-        String userId = "1";
+        String userId = "1615925037";
 //        userId=(String) request.getSession().getAttribute("username");
         List<SEmp> sEmps = empService.listPartnerByUserId(userId, pageNum, pageSize);
         return Result.success(new PageInfo<>(sEmps));
