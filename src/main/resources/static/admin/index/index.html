@@ -139,7 +139,7 @@
 <script>
     layui.use('element',function(){
         var element = layui.element;
-
+        element.render();
         $(function(){
             //http://localhost/admin/index/index.html?p=home#url=./repair.html#title=百度首页#id=666666
             //重点#url=./repair.html#title=百度首页#id=666666
@@ -166,7 +166,7 @@
             var count = layui.sessionData("rel").count;
 
         //判断当前页面渲染是否正确，不正确的话将刷新页面重新渲染
-        if($treeList.length >0 && $treeList.prev().children("span").length <= 0){
+        /*if($treeList.length >0 && $treeList.prev().children("span").length <= 0){
             //$.cookie("reload",$.cookie("reload")+"-66-");//判断刷新几次
             if(count<2){
                 location.reload();
@@ -181,7 +181,7 @@
                 key:"count",
                 value:0
             });
-        }
+        }*/
         //判断主页点击时渲染是否正确，不正确重载主页
         $("#refresh_home").click(function(){
             if($(this).hasClass("layui-this") || $.cookie("ww") > 100 ){

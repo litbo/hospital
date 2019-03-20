@@ -17,6 +17,10 @@ import java.util.List;
 
 public class SgKstlVO implements Serializable {
     /**
+     * 登陆人id
+     */
+    private String userId;
+    /**
      * 科室讨论主键id
      */
     private String kstlId;

@@ -51,6 +51,10 @@ public class SgKstlServiceImpl implements SgKstlService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public boolean insertSgKstl(SgKstlVO sgKstlVO) {
+        //通过人员id 查询部门id
+        SBm bmByEmpId = empDao.getBmByEmpId(sgKstlVO.getUserId());
+        sgKstlVO.setBmId(bmByEmpId.getBmId());
+
         SgKstl sgKstl = new SgKstl();
         List<SgKstlUser> usersId = sgKstlVO.getUsersId();
         List<EqPm> pmsId = sgKstlVO.getPmsId();
