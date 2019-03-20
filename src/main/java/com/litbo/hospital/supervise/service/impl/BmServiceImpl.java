@@ -6,10 +6,7 @@ import com.litbo.hospital.common.utils.StringCutUtils;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
-import com.litbo.hospital.supervise.vo.BmSelectLbVO;
-import com.litbo.hospital.supervise.vo.BmSelectVO;
-import com.litbo.hospital.supervise.vo.SetBmVO;
-import com.litbo.hospital.supervise.vo.WxbmSzSelectVO;
+import com.litbo.hospital.supervise.vo.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 @Service
 public class BmServiceImpl implements BmService {
 
@@ -173,10 +172,10 @@ public class BmServiceImpl implements BmService {
         List<SBm> old_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的部门信息
         List<SBm> new_bmListByPid = bmDao.getBmListByPid(new_pbm_id); //获取平级下的部门信息
 
-        SBm old_idmax_mb = getMaxBm(old_bmListByPid);    //
-        SBm new_idmax_mb = getMaxBm(new_bmListByPid);    //
+        SBm old_idmax_mb = getMaxBm(old_bmListByPid,bm.getpBmId());    //
+        SBm new_idmax_mb = getMaxBm(new_bmListByPid,new_pbm_id);    //
 
-        String new_bm_id = createNewBmId(new_idmax_mb);
+        String new_bm_id = createNewBmId(new_idmax_mb,bmDao.getBmListByPid(new_idmax_mb.getBmId()).size());
         bmDao.setBmBeto(obm_id,new_bm_id,new_pbm_id);
 
         if(!old_idmax_mb.getBmId().equals(bm.getBmId())) {   //如果原来平级部门id的最大值不为当前修改的部门的id，酒吧这个部门的id赋给他
@@ -186,29 +185,7 @@ public class BmServiceImpl implements BmService {
 
     }
 
-    private String createNewBmId(SBm idmax_mb) {
-        /**  List<String> bmid_cuted = StringCutUtils.stringToList(idmax_mb.getBmId());
-        System.out.println(bmid_cuted);
-        int l=0;
-        for(String s:bmid_cuted){
-            if(!s.equals("00")) l++;
-        }
-        System.out.println(l);
-
-        int mb = Integer.parseInt(bmid_cuted.get(l - 1))+1;
-        if(mb+1<10)
-            bmid_cuted.add(l-1,"0"+Integer.toString(mb));
-        else
-            bmid_cuted.add(l-1,Integer.toString(mb));
-        bmid_cuted.remove(l);
-//        System.out.println(bmid_cuted);
-
-        StringBuffer new_bmid = new StringBuffer();
-        for(String s:bmid_cuted){
-            new_bmid.append(s);
-        }
-        return new_bmid.toString();  */
-
+    private String createNewBmId(SBm idmax_mb,int xj) {
         List<Integer> bmid_cuted = StringCutUtils.stringToIntList(idmax_mb.getBmId());
         System.out.println(bmid_cuted);
         int l=0;
@@ -216,6 +193,8 @@ public class BmServiceImpl implements BmService {
             if(s!=0) l++;
         }
         System.out.println(l);
+
+        if(xj==0) l++;
 //        18 10 6 0 0 0
 
         List<String> bmidc = new ArrayList<>();
@@ -237,14 +216,12 @@ public class BmServiceImpl implements BmService {
         return new_bmid.toString();
     }
 
-    private SBm getMaxBm(List<SBm> bms) {
+    private SBm getMaxBm(List<SBm> bms,String id) {
 
+        if(bms.size()==0) return bmDao.getBmBybmid(id);
         SBm idmaxbm = bms.get(0);
         for (SBm bm:bms){
             System.out.println(Long.parseLong(bm.getBmId(),16));
-//            if(Integer.parseInt(bm.getBmId())>Integer.parseInt(idmaxbm.getBmId())){
-//                idmaxbm = bm;
-//            }
             if(Long.parseLong(bm.getBmId(),16)>Long.parseLong(idmaxbm.getBmId(),16)){
                 idmaxbm = bm;
             }
@@ -424,6 +401,31 @@ public class BmServiceImpl implements BmService {
         return new PageInfo(lbbms);
     }
 
+    private void setBmIdAndPId(SBm bm){
+        Random random = new Random(System.currentTimeMillis());
+        List<SBm> bmList = bmDao.getBmList();
+        SBm bm1 = null;
+
+        while(true){
+            bm1=bmList.get(random.nextInt(bmList.size()));
+            List<Integer> bmid_cuted = StringCutUtils.stringToIntList(bm1.getBmId());
+            int l=0;
+            for(Integer s:bmid_cuted){
+                if(s!=0) l++;
+            }
+
+            if(!bm1.getBmId().equals("0100000000")&&!bm1.getBmId().equals("0200000000")&&!bm1.getBmId().equals("0300000000")&&l<4) break;
+
+        }
+
+        String bmId = bm1.getBmId();
+        bm.setpBmId(bmId);
+        List<SBm> new_bmListByPid = bmDao.getBmListByPid(bmId); //获取平级下的部门信息
+        SBm new_idmax_mb = getMaxBm(new_bmListByPid,bmId);
+        String new_bm_id = createNewBmId(new_idmax_mb,bmDao.getBmListByPid(bmId).size());
+        bm.setBmId(new_bm_id);
+    }
+
     @Override
     public Integer batchImportBms(String fileName, MultipartFile file) throws  Exception {
 
@@ -449,7 +451,7 @@ public class BmServiceImpl implements BmService {
         if(sheet!=null){
             notNull = true;
         }
-        System.out.println(sheet.getLastRowNum());
+
         for (int r = 1; r < sheet.getLastRowNum()-1; r++) {
             Row row = sheet.getRow(r);
             if (row == null){
@@ -466,6 +468,8 @@ public class BmServiceImpl implements BmService {
             row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
             row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
             row.getCell(8).setCellType(Cell.CELL_TYPE_STRING);
+
+
 
 
 
@@ -492,10 +496,34 @@ public class BmServiceImpl implements BmService {
             bm.setpBmId(pBmId);
             bm.setXbmFlag(xbmFlag);
 
+            setBmIdAndPId(bm);
             bmDao.saveBm(bm);
 
         }
 
         return status;
+    }
+
+    @Override
+    public List<BmsTreeVO> listTreeBms() {
+        List<BmsTreeVO> vos  =  bmDao.listTreeBms();
+        for (BmsTreeVO treeVO :vos){
+            if(treeVO.getBmId().startsWith("02")){
+                treeVO.setIsGlbm("1");
+            }else{
+                treeVO.setIsGlbm("0");
+            }
+
+            if(treeVO.getBmId().startsWith("0201")){
+                treeVO.setGkCode("0");
+            }else  if(treeVO.getBmId().startsWith("0202")){
+                treeVO.setGkCode("1");
+            }else  if(treeVO.getBmId().startsWith("0203")){
+                treeVO.setGkCode("2");
+            }else {
+                treeVO.setGkCode("3");
+            }
+        }
+        return vos;
     }
 }
