@@ -27,8 +27,12 @@
 </div>
 
 <script type="text/html" id="barDemo">
+
+    {{#  if(d.status=== 0){ }}
     <a class="layui-btn layui-btn-xs" lay-event="szjs">设置角色</a>
+    {{#  } else if(d.status === 1) { }}
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改角色</a>
+    {{#  } }}
 </script>
 
 <script type="text/html" id="toolBar">
