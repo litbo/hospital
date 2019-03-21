@@ -21,7 +21,7 @@ public class RoleProvider {
         String sql = "SELECT e.user_id AS userId,\n" +
                 "\t e.user_xm AS name,\n" +
                 "\t r.role_name AS roleName,\n" +
-                "\t e.bm_id AS bmId,\n" +
+                "\t e.bm_id AS bmId,u.status,\n" +
                 "\t b.bm_name AS bmName\n" +
                 "FROM s_user u\n" +
                 "LEFT JOIN s_user_role AS ur ON u.user_id =ur.user_id\n" +

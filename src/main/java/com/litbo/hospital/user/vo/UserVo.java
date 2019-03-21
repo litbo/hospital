@@ -14,4 +14,6 @@ public class UserVo {
     private String bmId;
 
     private String bmName;
+
+    private Integer status;
 }
