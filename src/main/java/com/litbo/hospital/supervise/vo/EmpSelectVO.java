@@ -10,6 +10,7 @@ public class EmpSelectVO {
     private String xllb;
     private String zwlb;
     private String byyx;
+    private Integer status;
 
     public String getBmName() {
         return bmName;
@@ -65,5 +66,12 @@ public class EmpSelectVO {
 
     public void setByyx(String byyx) {
         this.byyx = byyx;
+    }
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
