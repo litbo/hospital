@@ -5,6 +5,8 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwWxf;
 import com.litbo.hospital.security.service.FwWxfService;
 import com.litbo.hospital.security.vo.*;
+import com.litbo.hospital.supervise.bean.SEmp;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +49,8 @@ public class FwWxfController {
     @GetMapping("/wxfShIndex")
     public Result wxfShIndex(Integer id){
         try {
-            String userId = "1615925023";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             FwWxfShIndexVo wxfShIndexVo = fwWxfService.wxfShIndex(id, userId);
             return Result.success(wxfShIndexVo);
         } catch (Exception e) {
@@ -60,7 +63,8 @@ public class FwWxfController {
     public Result wxfList(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                           @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         try {
-            String userId = "1615925023";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             PageInfo<WxfListVo> pageInfo = fwWxfService.WxfList(userId, pageNum, pageSize);
             return Result.success(pageInfo);
         } catch (Exception e) {
@@ -88,7 +92,8 @@ public class FwWxfController {
     @GetMapping("/wxfGetEq")
     public Result wxfGetEq(){
         try {
-            String userId = "1615925038";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             List<FwIdSelectVo> list = fwWxfService.wxfGetEq(userId);
             return Result.success(list);
         } catch (Exception e) {
@@ -104,7 +109,8 @@ public class FwWxfController {
      */
     @GetMapping("/wxfIndex")
     public Result wxfIndex(String fwId){
-        String userId = "1615925008";
+        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String userId = sEmp.getUserId();
         /**
          * SecurityUtils.getSubject().getSession().getAttribute();
          */
@@ -137,7 +143,8 @@ public class FwWxfController {
     public Result updateWxf(int status,String spyj,String fwId){
         try {
             //session获取
-            String userId = "5";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             fwWxfService.updateFwWxf(userId,status,spyj,fwId);
             return Result.success();
         } catch (Exception e) {

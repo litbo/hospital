@@ -6,6 +6,8 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
+import com.litbo.hospital.supervise.bean.SEmp;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +28,8 @@ public class FwBaoxiuController {
     public Result baoxiuRw(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                            @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         try {
-            String userId = "1615925023";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             PageInfo pageInfo = fwBaoxiuService.baoxiuRw(userId, pageNum, pageSize);
             return Result.success(pageInfo);
         } catch (Exception e) {
@@ -46,7 +49,8 @@ public class FwBaoxiuController {
                            @RequestParam(required = false,defaultValue = "10") Integer pageSize,
                            @RequestParam(required = false) String bmName, @RequestParam(required = false) String eqName){
         try {
-            String userId = "1615925023";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             System.out.println(eqName);
             PageInfo pageInfo = fwBaoxiuService.getBaoxiuEq(userId, pageSize, pageNum,bmName,eqName);
             return Result.success(pageInfo);
@@ -65,7 +69,8 @@ public class FwBaoxiuController {
     public Result baoxiuIndex(String eqId){
 //        SecurityUtils.getSubject().getSession().getAttribute("");
         try {
-            String userId = "1615925008";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             FwBaoxiuIndexVo baoxiuIndexVo = fwBaoxiuService.baoxiuIndex(eqId, userId);
             return Result.success(baoxiuIndexVo);
         } catch (Exception e) {
