@@ -57,7 +57,7 @@ public interface EmpDao {
     SEmp getEmpsById(String id);
     @Select("select * from s_emp where bm_id = #{bmId}")
     List<SEmp> listEmpByBmId(String bmId);
-    @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id, sex.sex,xllb.xllb,zwlb.zwlb,emp.byyx\n" +
+    @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id,emp.status, sex.sex,xllb.xllb,zwlb.zwlb,emp.byyx\n" +
             " from s_emp emp\n" +
             " LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
             " LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +

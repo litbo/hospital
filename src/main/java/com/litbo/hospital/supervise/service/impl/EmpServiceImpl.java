@@ -8,6 +8,7 @@ import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
 import com.litbo.hospital.user.dao.UserDao;
+import com.litbo.hospital.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class EmpServiceImpl implements EmpService {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    UserService userService;
     @Override
     public List<SEmp> getWxEmps() {
         return empDao.getWxEmps();
@@ -39,7 +42,7 @@ public class EmpServiceImpl implements EmpService {
     public void deleteEmpByUserId(String empId) {
 
         empDao.deleteEmpByUserId(empId);
-        userDao.delUser(empId);
+        userService.delUser(empId);
     }
 
     @Override

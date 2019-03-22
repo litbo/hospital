@@ -73,12 +73,17 @@
                 </div>
                 <ul class="layui-nav conts" lay-filter="rightNav" style="margin-right:20px;">
                     <li class="layui-nav-item items1">
-                        <a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统">
+                        <a href="javascript:;" id="lockSys" data-text="系统锁定">
+                            <i class="fas fa-lock"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item items1">
+                        <a href="javascript:;" data-url="email.html" data-id='004' data-text="邮件系统">
                             <i class="far fa-bell"></i>
                         </a>
                     </li>
                     <li class="layui-nav-item items1">
-                        <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息" style="padding:0 10px;overflow:hidden;">
+                        <a href="javascript:;" data-url="admin-info.html" data-id='005' data-text="个人信息" style="padding:0 10px;overflow:hidden;">
                             <img src="/static/admin/images/man.png" class="user_head" alt="用户头像">
                             <p class="names">
                                 <span class="h_name">李医生</span>
@@ -88,7 +93,7 @@
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;">修改信息</a></dd>
                             <dd><a href="javascript:;">安全管理</a></dd>
-                            <dd><a href="javascript:;">退出</a></dd>
+                            <dd><a href="/logout;">退出</a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -133,6 +138,12 @@
     </div>
     <!--遮罩-->
     <div class="main-mask"></div>
+    <div class="hide" id="lock">
+        <form class="layui-form" action="">
+            <input type="text" name="userName" lay-verify="required" placeholder="账户密码" autocomplete="off" class="layui-input">
+            <button class="layui-btn layui-btn-normal btn" lay-filter="login" id="check-btn">解锁</button>
+        </form>
+    </div>
 </div>
 <script src="/static/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/admin/js/nav_shiro.js" type="text/javascript" charset="utf-8"></script>
@@ -182,6 +193,18 @@
                 value:0
             });
         }*/
+        $("#lockSys").on("click",function(){
+           layOpen({
+               type:1,
+               content:$("#lock"),
+               closeBtn: 0,
+               maxmin:false,
+               fixed:true,
+               resize:false,
+               title:false,
+               area:["100%","100%"]
+           })
+        });
         //判断主页点击时渲染是否正确，不正确重载主页
         $("#refresh_home").click(function(){
             if($(this).hasClass("layui-this") || $.cookie("ww") > 100 ){
@@ -199,7 +222,7 @@
         //展开第一项列表
 
             var f = tempValue("index","f");
-            console.log(f);
+            //console.log(f);
             if(f && typeof Number(f) === "number"){
                 $("a[data-id='"+Number(f)+"']")[0].click();
             }//读取cookies跳转页面

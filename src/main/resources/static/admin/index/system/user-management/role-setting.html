@@ -26,9 +26,14 @@
     </div>
 </div>
 
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="szjs">设置角色</a>
+<script type="text/html" id="bar">
+
+
+    {{# if (d.status=== 1) { }}  
     <a class="layui-btn layui-btn-xs" lay-event="edit">修改角色</a>
+    {{# } else { }}  
+    <a class="layui-btn layui-btn-xs" lay-event="szjs">设置角色</a>
+    {{# } }}  
 </script>
 
 <script type="text/html" id="toolBar">
@@ -66,7 +71,7 @@
                     , {field:'name',title:'用户名',width:300}
                     , {field:'roleName',title:'角色',minWidth:300}
                     , {field:'bmName',title:'部门',minWidth:300}
-                    , {title:'操作',toolbar:'#barDemo',width:200,align:'center'}
+                    , {field:"status",title:'操作',toolbar:'#bar',width:200,align:'center'}
                 ]]
                 , url: "/role/listUsers"
                 , request: {
@@ -89,6 +94,14 @@
 
                                 event:"szjs",
                                 title:"设置角色",
+                                type:2,
+                                content:"./child/role-settingEdit.html",
+                                dataUrl:["userId"]
+                            },
+                            {
+
+                                event:"edit",
+                                title:"修改角色",
                                 type:2,
                                 content:"./child/role-settingEdit.html",
                                 dataUrl:["userId"]

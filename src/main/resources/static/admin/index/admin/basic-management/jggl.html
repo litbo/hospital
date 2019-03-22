@@ -86,19 +86,19 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">负责人</label>
                     <div class="layui-input-block">
-                        <input type="text" name="fzrName" class="layui-input" autocomplete="off">
+                        <input type="text" name="fzrName" placeholder="请输入" class="layui-input" autocomplete="off">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">科室电话</label>
                     <div class="layui-input-block">
-                        <input type="text" name="bmTel" class="layui-input" autocomplete="off">
+                        <input type="text" name="bmTel" placeholder="请输入" class="layui-input" autocomplete="off">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">地址</label>
                     <div class="layui-input-block">
-                        <input type="text" class="layui-input" name="bmAddr" autocomplete="off">
+                        <input type="text" class="layui-input" placeholder="请输入" name="bmAddr" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
             <div class="layui-row">
                 <div class="layui-col-xs12">
                     <div class="layui-form-item" style="margin:20px 0;">
-                        <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="">保存
+                        <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="saveD">保存信息
                         </button>
                     </div>
                 </div>
@@ -120,7 +120,10 @@
     var setting = {
             view: {
                 showLine: false,
-                showIcon: false
+                showIcon: false,
+                addHoverDom:addHoverDom,
+                removeHoverDom:removeHoverDom,
+                fontCss: setFontCss
             },
             data: {
                 key: {
@@ -135,16 +138,22 @@
             callback: {
                 "onClick":clickShow
             }
-        },
-        nodes = {};
-
-    function clickShow(event,treeId,treeNode){
-        console.log(arguments);
-        layui.use("form",function(){
-            var form = layui.form;
-            form.val("shows", treeNode);
-        })
-    }
+        }
+        ,newJson = {
+            new:true,
+            bmAddr: "",
+            bmId: "0302050000",
+            bmName: "待编辑子节点",
+            bmTel: "",
+            fzrName: "",
+            gkCode: "3",
+            isGlbm: "0",
+            obmId: "0001",
+            pbmId: "0302000000",
+            wxFlag: "0",
+            xbmFlag: "0"}
+        ,readyData = {}
+        ,nodes = {};
 
     $.ajax({
         url: "/supervise/bmgl/listTreeBms",
@@ -154,7 +163,74 @@
             nodes = data;
             $.fn.zTree.beautify().init($("#demo"), setting, nodes);
         }
+    });
+
+    //列表项点击事件
+    function clickShow(event,treeId,treeNode){
+        console.log(arguments);
+        layui.use("form",function(){
+            var form = layui.form;
+            readyData = treeNode;
+            form.val("shows", treeNode);
+        })
+    }
+
+    function setFontCss(treeId, treeNode) {
+        return treeNode.new === true ? {color:"red"} : {color:"#1b82f1"};
+    }
+
+    //添加子节点按钮（新增按钮）
+    function addHoverDom(treeId, treeNode) {
+        //最后一级菜单不能增加子节点
+        //if( treeNode.level !== 1){
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='添加子节点' onfocus='this.blur();' style='margin-left:10px;background:transparent;color: #c50909;'><i class='fas fa-plus'></i></span>";
+            sObj.after(addStr);
+            var btn = $("#addBtn_"+treeNode.tId);
+            if (btn) btn.on("click", function(){
+                var zTree = $.fn.zTree.getZTreeObj(treeId);
+                console.log("zTreeNodes",zTree.getNodes());
+                zTree.addNodes(treeNode, newJson);
+                //readyData = newJson;
+                return false;
+            });
+        //}
+    }
+
+    //隐藏按钮
+    function removeHoverDom(treeId, treeNode) {
+        $("#addBtn_"+treeNode.tId).unbind().remove();
+    }
+
+    $("#saveD").on("click",function(){
+        //readyData
+        for(var name in readyData){
+            if(readyData.hasOwnProperty(name)){
+                var $for = $("*[name='"+readyData[name]+"']").val();
+                if($for !== undefined){
+                    readyData[name] = $for;
+                }
+            }
+        }
+
+        console.log("save",readyData);
+
+        $.ajax({
+            url:"###",
+            type:"POST",
+            data:readyData,
+            success:function(res){
+                if(res.code === 0){
+                    layer.msg("保存成功！");
+                }else{
+                    layer.msg("保存失败！")
+                }
+            }
+        });
+        return false;
     })
+
 </script>
 </body>
 </html>

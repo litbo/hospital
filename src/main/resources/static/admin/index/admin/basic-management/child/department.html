@@ -8,54 +8,88 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <!--ZTREE-->
+    <link rel="stylesheet" href="/static/admin/css/tree/ztree-liulinwj.css" type="text/css">
+    <script src="/static/admin/js/jquery.ztree.all.js"></script>
+    <script src="/static/admin/js/ztree-liulinwj_5.js"></script>
+    <style>
+        .layui-inline {
+            width: 140px;
+        }
 
+        .layui-form-item {
+            margin-top: 20px;
+            height: 45px;
+        }
+
+        .tree-container {
+            height: 620px;
+            margin-left: 20px;
+            margin-top: 10px;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow: auto;
+            float: left;
+        }
+    </style>
 </head>
 <body>
-<div class="row">
-    <div class="col-xs-12">
-        <ul id="tree"></ul>
+<div class="tree-container col-xs-12 col-md-5">
+    <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
+        <ul id="demo"></ul>
     </div>
 </div>
 
 
 
 <script>
-    //树形结构菜单
-    layui.use(['form',"tree","jquery"], function() {
-        var form = layui.form, $ = layui.jquery,
-            jsonP = {
-                elem: "#tree", click: function (node) {
-                    $.ajax({
-                        url: "http://localhost:80/tree/wb",
-                        method: "GET",
-                        data: {pid: node.id},
-                        async: false,
-                        success: function (data) {
-                            /* console.log(node);*/
-                            node.children = data.data;
-                            node.spread = true;
-                            $("#demo").html("");
-                            layui.tree(jsonP);
-                        }
-                    })
+    var setting = {
+            view: {
+                showLine: false,
+                showIcon: false
+            },
+            data: {
+                key: {
+                    name: "bmName"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "bmId",
+                    pIdKey: "pBmId"
                 }
-            };
-
-        $.ajax({
-            url: "http://localhost:80/tree/wb",
-            method: "GET",
-            data: {pid: "68"},
-            async: false,
-            success: function (data) {
-                /*    console.log(data);*/
-                jsonP.nodes = data.data;
-                layui.tree(jsonP);
+            },
+            callback: {
+                "onClick":clickShow
             }
-        });
-    });
+        },
+        nodes = {};
+
+    function clickShow(event,treeId,treeNode){
+        console.log(arguments);
+        layui.use("form",function(){
+            var form = layui.form;
+            form.val("shows", treeNode);
+        })
+    }
+
+    $.ajax({
+        url: "/supervise/bmgl/listBm",
+        dataType: "JSON",
+        success: function (data) {
+            //console.log(data);
+            nodes = data;
+            $.fn.zTree.beautify().init($("#demo"), setting, nodes);
+        }
+    })
 </script>
+
+</body>
+</html>

@@ -45,5 +45,13 @@ public interface RoleDao {
     List<SRole> listRoles() ;
     @Select("select top 1 role_id from s_role order by cast(role_id as int) DESC")
     String getLastId();
-
+    @Select("SELECT\n" +
+            "r.role_name\n" +
+            "FROM\n" +
+            "dbo.s_user AS u\n" +
+            "INNER JOIN dbo.s_user_role AS ur ON u.user_id= ur.user_id\n" +
+            "INNER JOIN dbo.s_role AS r ON r.role_id= ur.role_id\n" +
+            "WHERE\n" +
+            "u.user_name = #{userName}")
+    SRole getRole(String userName);
 }
