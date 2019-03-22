@@ -38,13 +38,13 @@ public interface EmpDao {
             "      jg_id, jtzz, bm_id, zggwlb_id, \n" +
             "      zgbzlb_id, zgzt_id, xllb_id, xlzy_id, \n" +
             "      zwlb_id, tel, email, byyx, \n" +
-            "      qzzp, zp)\n" +
+            "      qzzp, zp,status)\n" +
             "    values (#{userId,jdbcType=VARCHAR}, #{userXm,jdbcType=VARCHAR}, #{sexId,jdbcType=CHAR}, \n" +
             "      #{mzId,jdbcType=CHAR}, #{zzmmId,jdbcType=CHAR}, #{sfzh,jdbcType=CHAR}, #{gbId,jdbcType=CHAR}, \n" +
             "      #{jgId,jdbcType=CHAR}, #{jtzz,jdbcType=VARCHAR}, #{bmId,jdbcType=CHAR}, #{zggwlbId,jdbcType=CHAR}, \n" +
             "      #{zgbzlbId,jdbcType=CHAR}, #{zgztId,jdbcType=CHAR}, #{xllbId,jdbcType=CHAR}, #{xlzyId,jdbcType=CHAR}, \n" +
             "      #{zwlbId,jdbcType=CHAR}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{byyx,jdbcType=VARCHAR}, \n" +
-            "      #{qzzp,jdbcType=VARCHAR}, #{zp,jdbcType=VARCHAR})")
+            "      #{qzzp,jdbcType=VARCHAR}, #{zp,jdbcType=VARCHAR},#{status})")
     void saveEmp(SEmp emp);
 
     @Delete("delete from s_emp where user_id=#{epmId}")
@@ -64,7 +64,13 @@ public interface EmpDao {
             " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
             " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id)")
     List<EmpSelectVO> listSelectEmps();
-
+    @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id,emp.status, sex.sex,xllb.xllb,zwlb.zwlb,emp.byyx\n" +
+            " from s_emp emp\n" +
+            " LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
+            " LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
+            " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
+            " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id) where emp.user_id=#{userId}")
+    EmpSelectVO listSelectEmpsByUserId(String userId);
     @SelectProvider(type = EmpProvider.class,method = "selectEmpsByX")
     List<EmpSelectVO> listSelectEmpBybmIdAndUserId(@Param("bmId") String bmId, @Param("userId") String userId,@Param("status") String status);
     @Select("SELECT emp2.user_id,emp2.user_xm from s_emp as emp1 INNER JOIN s_emp emp2 ON (emp1.bm_id=emp2.bm_id) " +
@@ -108,4 +114,6 @@ public interface EmpDao {
             "WHERE\n" +
             "emp.bm_id = bm.bm_id")
     public List<JhEmpVo> getJhEmpVo();
+
+
 }

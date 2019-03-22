@@ -7,9 +7,11 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.supervise.vo.EmpDeleteVO;
+import com.litbo.hospital.supervise.vo.EmpSelectVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -46,6 +48,12 @@ public class EmpController {
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         PageInfo info = empService.listSelectEmps(pageNum, pageSize);
         return Result.success(info);
+    }
+
+    @GetMapping("/listSelectEmpsByUserId")
+    public Result listSelectEmpsByUserId(@RequestParam String userId) {
+        EmpSelectVO selectVO = empService.listSelectEmpsByUserId(userId);
+        return Result.success(selectVO);
     }
 
     @GetMapping("/listSelectEmpBybmIdAndUserIdAndStatus")
@@ -116,6 +124,17 @@ public class EmpController {
 //        userId=(String) request.getSession().getAttribute("username");
         List<SEmp> sEmps = empService.listPartnerByUserId(userId, pageNum, pageSize);
         return Result.success(new PageInfo<>(sEmps));
+    }
+
+
+    @PostMapping( "/batchImportEmps")
+    @ResponseBody
+    public Result batchImportEmps(@RequestParam("file") MultipartFile file) throws Exception{
+        String fileName = file.getOriginalFilename();
+        if(empService.batchImportBms(fileName,file) == 0){
+            return Result.error();
+        }
+        return Result.success();
     }
 
 }

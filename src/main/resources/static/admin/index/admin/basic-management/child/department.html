@@ -81,10 +81,10 @@
     }
 
     $.ajax({
-        url: "/supervise/bmgl/listBm",
+        url: "/supervise/bmgl/listBmForTree",
         dataType: "JSON",
         success: function (data) {
-            //console.log(data);
+            console.log(data);
             nodes = data;
             $.fn.zTree.beautify().init($("#demo"), setting, nodes);
         }

@@ -68,8 +68,7 @@ public class BmController {
     //列出所有部门信息
     @GetMapping("/listBms2")
     @ResponseBody
-    public Result getBmLsist2(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+    public Result getBmLsist2(){
         List<SBm> bmList = bmDao.getBmList();
         return Result.success(bmList);
     }
@@ -79,6 +78,12 @@ public class BmController {
                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         List<SBm> bmList = bmDao.getBmList();
         return Result.success(bmList);
+    }
+    @GetMapping("/listBmForTree")
+    @ResponseBody
+    public List<SBm> listBmForTree(){
+        return bmService.getBmList();
+
     }
 
     @GetMapping ("/listTreeBms")
