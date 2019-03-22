@@ -40,8 +40,7 @@ public interface SgKxxfxMapper {
      */
     @Update("update sg_kxxfx\n" +
             "   set " +
-//            "       kxfx_id = #{sgKxxfx.kxfxId,jdbcType=VARCHAR},\n" +
-//            "      sg_id = #{sgKxxfx.sgId,jdbcType=VARCHAR},\n" +
+            "       kxfx_hcgy = #{kxfxHcgy,jdbcType=VARCHAR},\n" +
             "       kxfx_syrq = #{kxfxSyrq,jdbcType=TIMESTAMP},\n" +
             "       kxfx_syqx = #{kxfxSyqx,jdbcType=INTEGER},\n" +
             "       kxfx_hbqx = #{kxfxHbqx,jdbcType=INTEGER},\n" +
@@ -80,7 +79,7 @@ public interface SgKxxfxMapper {
      * @param sgInfoId 申购单主键
      * @return List<SgKxxfx>
      */
-    @Select("select kxfx_id, sg_id, kxfx_syrq, kxfx_syqx, kxfx_hbqx, kxfx_sfxm, kxfx_pjsf, kxfx_yjyrc, \n" +
+    @Select("select kxfx_hcgy, kxfx_id, sg_id, kxfx_syrq, kxfx_syqx, kxfx_hbqx, kxfx_sfxm, kxfx_pjsf, kxfx_yjyrc, \n" +
             "    kxfx_yjyze, kxfx_yjwcysr, kxfx_zxsbtz, kxfx_ptss, kxfx_yjcwxfy, kxfx_yclf, kxfx_sbzjf, \n" +
             "    kxfx_qtzjf, kxfx_ryglf, kxfx_hbqsq, kxfx_hbzys, kxfx_myhb, kxfx_xhbze, kxfx_ksfzr, \n" +
             "    extend_one, extend_two, kxfx_mqqk, kxfx_yqqk, kxfx_azcd, kxfx_pzss, kxfx_jsqk, kxfx_xhxy, kxfx_kxxjl,sg_id \n" +
