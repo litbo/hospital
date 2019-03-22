@@ -49,15 +49,13 @@
     </div>
 </div>
 <div class="layui-row col-xs-12 col-md-6">
-    <div class="col-xs-12">
-        <form class="layui-form layui-form-pane" lay-filter="shows" action="">
-            <div class="row">
-                <div class="layui-col-xs-12">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">科室名称</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="bmName" class="layui-input" name="" autocomplete="off">
-                        </div>
+    <form class="layui-form layui-form-pane" lay-filter="shows" action="">
+        <div class="layui-row">
+            <div class="layui-col-xs-12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">科室名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bmName" class="layui-input" autocomplete="off">
                     </div>
                 </div>
                 <div class="layui-form-item" pane>
@@ -102,58 +100,105 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="layui-row">
-                <div class="layui-col-xs12">
-                    <div class="layui-form-item" style="margin:20px 0;">
-                        <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="saveD">保存信息
-                        </button>
+        <div class="layui-row">
+            <div class="layui-col-xs12">
+                <div class="layui-form-item" style="margin:20px 0;">
+                    <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="saveD">保存信息
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="hidden" id="openView">
+    <form class="layui-form layui-form-pane" lay-filter="showIn" action="">
+        <div class="layui-row">
+            <div class="col-xs-12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">科室名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bmName1" placeholder="请输入" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">维修科室</label>
+                    <div class="layui-input-block" style="line-height:40px">
+                        <input type="radio" name="wxFlag1" value="1" title="是" checked>
+                        <input type="radio" name="wxFlag1" value="0" title="否">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">负责人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="fzrName1" placeholder="请输入" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">科室电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bmTel1" placeholder="请输入" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" placeholder="请输入" name="bmAddr1" autocomplete="off">
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
+        <div class="layui-row">
+            <div class="col-xs-12">
+                <div class="layui-form-item" style="margin:10px 0;">
+                    <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" id="addIn">确认添加</button>
+                </div>
+                <div class="layui-form-item" style="margin:10px 0;">
+                    <button class="warm-btn layui-btn layui-btn-normal layui-btn-fluid" id="canal">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 <script>
     var setting = {
-            view: {
-                showLine: false,
-                showIcon: false,
-                addHoverDom:addHoverDom,
-                removeHoverDom:removeHoverDom,
-                fontCss: setFontCss
+        view: {
+            showLine: false,
+            showIcon: false,
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            fontCss: setFontCss
+        },
+        data: {
+            key: {
+                name: "bmName"
             },
-            data: {
-                key: {
-                    name: "bmName"
-                },
-                simpleData: {
-                    enable: true,
-                    idKey: "bmId",
-                    pIdKey: "pbmId"
-                }
-            },
-            callback: {
-                "onClick":clickShow
+            simpleData: {
+                enable: true,
+                idKey: "bmId",
+                pIdKey: "pbmId"
             }
+        },
+        callback: {
+            "onClick": clickShow
         }
-        ,newJson = {
-            new:true,
-            bmAddr: "",
-            bmId: "0302050000",
-            bmName: "待编辑子节点",
-            bmTel: "",
-            fzrName: "",
-            gkCode: "3",
-            isGlbm: "0",
-            obmId: "0001",
-            pbmId: "0302000000",
-            wxFlag: "0",
-            xbmFlag: "0"}
-        ,readyData = {}
-        ,nodes = {};
+    }
+        , newJson = {
+        new: true,
+        bmAddr: "",
+        bmName: "待编辑子节点",
+        bmTel: "",
+        pbmId: "0302000000",
+        wxFlag: "0",
+        fzrName: ""
+    }
+        , readyData = {}
+        , paseData = {}
+        , nodes = {};
 
     $.ajax({
         url: "/supervise/bmgl/listTreeBms",
@@ -166,9 +211,9 @@
     });
 
     //列表项点击事件
-    function clickShow(event,treeId,treeNode){
+    function clickShow(event, treeId, treeNode) {
         console.log(arguments);
-        layui.use("form",function(){
+        layui.use("form", function () {
             var form = layui.form;
             readyData = treeNode;
             form.val("shows", treeNode);
@@ -176,54 +221,113 @@
     }
 
     function setFontCss(treeId, treeNode) {
-        return treeNode.new === true ? {color:"red"} : {color:"#1b82f1"};
+        return treeNode.new === true ? {color: "red"} : {color: "#1b82f1"};
     }
 
     //添加子节点按钮（新增按钮）
     function addHoverDom(treeId, treeNode) {
         //最后一级菜单不能增加子节点
-        //if( treeNode.level !== 1){
+        if (treeNode.level !== 5) {
             var sObj = $("#" + treeNode.tId + "_span");
-            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+            if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
             var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='添加子节点' onfocus='this.blur();' style='margin-left:10px;background:transparent;color: #c50909;'><i class='fas fa-plus'></i></span>";
             sObj.after(addStr);
-            var btn = $("#addBtn_"+treeNode.tId);
-            if (btn) btn.on("click", function(){
-                var zTree = $.fn.zTree.getZTreeObj(treeId);
-                console.log("zTreeNodes",zTree.getNodes());
-                zTree.addNodes(treeNode, newJson);
+            var btn = $("#addBtn_" + treeNode.tId);
+            if (btn) btn.on("click", function () {
+                console.log(treeNode);
+                paseData["pId"] = treeNode;
+                paseData["tId"] = treeId;
+                layOpen({
+                    type: 1,
+                    content: $("#openView"),
+                    area: ["90%", "90%"],
+                    title: "添加",
+                    maxmin: false,
+                    fixed: true,
+                    resize: false
+                });
+
+                /*var zTree = $.fn.zTree.getZTreeObj(treeId);
+                console.log("zTreeNodes", zTree.getNodes());
+                zTree.addNodes(treeNode, newJson);*/
                 //readyData = newJson;
                 return false;
             });
-        //}
+        }
     }
 
     //隐藏按钮
     function removeHoverDom(treeId, treeNode) {
-        $("#addBtn_"+treeNode.tId).unbind().remove();
+        $("#addBtn_" + treeNode.tId).unbind().remove();
     }
 
-    $("#saveD").on("click",function(){
+    //关闭页面
+    $("#canal").on("click", function () {
+        console.log("ccl");
+
+        layui.use("layer",function(){
+            var layer = layui.layer;
+            console.log(window.name);
+            console.log(JSON.stringify(parent.layer.getFrameIndex));
+            /*var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            layer.close(index); //再执行关闭*/
+            layer.close(layer.index);
+            return false;
+        });
+
+        //return false;
+    });
+
+    $("#addIn").on("click", function () {
+        console.log(paseData);
+        layer.confirm("确认添加这条信息吗？", function () {
+            var nData = {
+                bmAddr: $("*[name='bmAddr1']").val(),
+                bmName: $("*[name='bmName1']").val(),
+                bmTel: $("*[name='bmTel1']").val(),
+                wxFlag: $("*[name='wxFlag1']").val(),
+                fzrName: $("*[name='fzrName1']").val(),
+                pbmId:paseData["pId"]["pbmId"]
+            };
+            $.ajax({
+                url: "/supervise/bmgl/saveBm",
+                method: "POST",
+                data: nData,
+                success:function(res){
+                    console.log(res);
+                    if(res.code === 0){
+                        layer.msg("添加成功！");
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                        location.reload();
+                    }
+                }
+            })
+        });
+        return false;
+    });
+
+    $("#saveD").on("click", function () {
         //readyData
-        for(var name in readyData){
-            if(readyData.hasOwnProperty(name)){
-                var $for = $("*[name='"+readyData[name]+"']").val();
-                if($for !== undefined){
+        for (var name in readyData) {
+            if (readyData.hasOwnProperty(name)) {
+                var $for = $("*[name='" + readyData[name] + "']").val();
+                if ($for !== undefined) {
                     readyData[name] = $for;
                 }
             }
         }
 
-        console.log("save",readyData);
+        console.log("save", readyData);
 
         $.ajax({
-            url:"###",
-            type:"POST",
-            data:readyData,
-            success:function(res){
-                if(res.code === 0){
+            url: "###",
+            type: "POST",
+            data: readyData,
+            success: function (res) {
+                if (res.code === 0) {
                     layer.msg("保存成功！");
-                }else{
+                } else {
                     layer.msg("保存失败！")
                 }
             }
