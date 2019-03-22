@@ -9,6 +9,8 @@ import com.litbo.hospital.user.bean.SRole;
 import com.litbo.hospital.user.dao.RoleDao;
 import com.litbo.hospital.user.service.RightService;
 import com.litbo.hospital.user.service.RoleService;
+import com.litbo.hospital.user.service.UserService;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import com.litbo.hospital.user.vo.RoleRightVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -32,7 +34,7 @@ public class LoginController {
     @Autowired
     private RightService rightService;
     @Autowired
-    private EmpService empService;
+    private UserService userService;
     @Autowired
     private RoleDao roleDao;
     @RequestMapping("/")
@@ -86,7 +88,7 @@ public class LoginController {
             //把用户名存入session
             Session session =  subject.getSession();
             session.setAttribute("username",loginVo.getUserName());
-            SEmp emp =  empService.getEmpsByUserId(loginVo.getUserName());
+            LiveEmpVo emp =  userService.getLiveUserById(loginVo.getUserName());
             session.setAttribute("emp",emp);
 
 
@@ -96,6 +98,7 @@ public class LoginController {
             RoleRightVo auth = new RoleRightVo();
             auth.setRole(role.getRoleName());
             auth.setRightList(rightsByUsername);
+            auth.setEmp(emp);
 
             return Result.success(auth);
 

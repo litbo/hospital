@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.dao;
 
 import com.litbo.hospital.user.bean.SUser;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import com.litbo.hospital.user.vo.UserVo;
 import org.apache.ibatis.annotations.*;
 
@@ -36,4 +37,10 @@ public interface UserDao {
     Integer delEmp(String id);
     @Delete("delete from s_user_role where user_id =#{id}")
     Integer delRole(String id);
+    @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id,emp.status, sex.sex\n" +
+            " from s_emp emp\n" +
+            " LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
+            " LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
+            "where emp.user_id=#{userId}")
+    LiveEmpVo getLiveUserById(String userId);
 }
