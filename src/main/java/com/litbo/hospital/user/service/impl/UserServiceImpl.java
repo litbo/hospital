@@ -3,6 +3,7 @@ package com.litbo.hospital.user.service.impl;
 import com.litbo.hospital.user.bean.SUser;
 import com.litbo.hospital.user.dao.UserDao;
 import com.litbo.hospital.user.service.UserService;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import com.litbo.hospital.user.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,12 @@ public class UserServiceImpl implements UserService {
             return 1;
         }
        return 1/0;
+    }
+
+    @Override
+    public LiveEmpVo getLiveUserById(String userId) {
+
+        return  userDao.getLiveUserById(userId);
+
     }
 }
