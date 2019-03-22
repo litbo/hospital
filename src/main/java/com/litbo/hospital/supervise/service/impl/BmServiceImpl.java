@@ -127,6 +127,8 @@ public class BmServiceImpl implements BmService {
 
     @Override
     public void saveBm(SBm bm) {
+
+
         bmDao.saveBm(bm);
     }
 

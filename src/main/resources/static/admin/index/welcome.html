@@ -352,7 +352,10 @@
                     type: 2,
                     title: $(this).find(".h_ovf").html(),
                     content: $(this).attr("href"),
-                    area: [w + "px", h + "px"]
+                    area: [w + "px", h + "px"],
+                    end:function(){
+                        window.location.reload();
+                    }
                 });
                 return false;
             });

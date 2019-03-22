@@ -9,6 +9,7 @@ import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.supervise.vo.EmpDeleteVO;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
 import io.swagger.annotations.Api;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -120,9 +121,24 @@ public class EmpController {
             @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             @RequestParam(required = false) String key, HttpServletRequest request) {
-        String userId = "1615925037";
+
+        SEmp emp = (SEmp) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String userId = emp.getUserId();
 //        userId=(String) request.getSession().getAttribute("username");
         List<SEmp> sEmps = empService.listPartnerByUserId(userId, pageNum, pageSize);
+        return Result.success(new PageInfo<>(sEmps));
+    }
+
+    @RequestMapping("/listBmPartnerByUserId")
+    public Result listBmPartnerByUserId(
+            @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+            @RequestParam(required = false) String key, HttpServletRequest request) {
+
+        SEmp emp = (SEmp) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String userId = emp.getUserId();
+//        userId=(String) request.getSession().getAttribute("username");
+        List<SEmp> sEmps = empService.listBmPartnerByUserId(userId, pageNum, pageSize);
         return Result.success(new PageInfo<>(sEmps));
     }
 

@@ -125,6 +125,15 @@
                         id:$.getUrlParam("id"),
                         taskId:$.getUrlParam("taskId"),
                         sgStatus:"1"
+                    },
+                    success:function (data) {
+                        if(data.code == 0){
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                        }else {
+                            alert(data.msg);
+                        }
+
                     }
                 })
             }
@@ -138,6 +147,15 @@
                         id:$.getUrlParam("id"),
                         taskId:$.getUrlParam("taskId"),
                         sgStatus:"2"
+                    },
+                    success:function (data) {
+                        if(data.code == 0){
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                        }else {
+                            alert(data.msg);
+                        }
+
                     }
                 })
             }

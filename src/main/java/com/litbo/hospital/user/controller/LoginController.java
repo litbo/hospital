@@ -94,9 +94,13 @@ public class LoginController {
 
 
             SRole role =  roleDao.getRole(loginVo.getUserName());
-            List<SRight> rightsByUsername = rightService.getRightsByRolename(role.getRoleName());
+            List<SRight> rightsByUsername=null;
+            if(role!=null)
+            rightsByUsername = rightService.getRightsByRolename(role.getRoleName());
             RoleRightVo auth = new RoleRightVo();
+            if(role!=null)
             auth.setRole(role.getRoleName());
+            if(rightsByUsername!=null)
             auth.setRightList(rightsByUsername);
             auth.setEmp(emp);
 

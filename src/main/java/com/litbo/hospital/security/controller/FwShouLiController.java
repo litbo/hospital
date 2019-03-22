@@ -4,6 +4,8 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwShouli;
 import com.litbo.hospital.security.service.FwShouLiService;
 import com.litbo.hospital.security.vo.FwShouLiIndexVo;
+import com.litbo.hospital.supervise.bean.SEmp;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +28,9 @@ public class FwShouLiController {
     @GetMapping("/shouLiIndex")
     public Result shouliIndex(String fwId){
         try {
-            /*Session session = SecurityUtils.getSubject().getSession();
-            session.getAttribute("");
-            session.getAttribute("");*/
-            String userId = "1615925023";
+
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             //String slrName = "";
             /*过时代码
             ShouliIndexVo shouliIndexVo = fwShouLiService.shouliIndex(fwId,userId);*/
@@ -58,7 +59,8 @@ public class FwShouLiController {
          *SecurityUtils.getSubject().getSession().getAttribute("userId");
          */
         try {
-            String userId = "1";
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
             List<String> fwIdList = fwShouLiService.getFWIdBySlrId(userId);
             return Result.success(fwIdList);
         } catch (Exception e) {

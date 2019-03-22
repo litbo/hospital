@@ -74,9 +74,11 @@ public interface EmpDao {
     @SelectProvider(type = EmpProvider.class,method = "selectEmpsByX")
     List<EmpSelectVO> listSelectEmpBybmIdAndUserId(@Param("bmId") String bmId, @Param("userId") String userId,@Param("status") String status);
     @Select("SELECT emp2.user_id,emp2.user_xm from s_emp as emp1 INNER JOIN s_emp emp2 ON (emp1.bm_id=emp2.bm_id) " +
-            "where emp1.user_id=#{userId} and emp2.user_id!=#{userId} ")
+            "where emp1.user_id=#{userId} ")
     List<SEmp> listPartnerByUserId(String userId);
-
+    @Select("SELECT emp2.user_id,emp2.user_xm from s_user as emp1 INNER JOIN s_user emp2 ON (emp1.bm_id=emp2.bm_id) " +
+            "where emp1.user_id=#{userId} ")
+    List<SEmp> listBmPartnerByUserId(String userId);
     @Select("select * from s_emp where user_id=#{userId}")
     SEmp getEmpsByUserId(String userId);
     @Update("update s_emp\n" +
