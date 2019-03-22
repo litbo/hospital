@@ -129,6 +129,19 @@ public class EmpController {
         return Result.success(new PageInfo<>(sEmps));
     }
 
+    @RequestMapping("/listBmPartnerByUserId")
+    public Result listBmPartnerByUserId(
+            @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+            @RequestParam(required = false) String key, HttpServletRequest request) {
+
+        SEmp emp = (SEmp) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String userId = emp.getUserId();
+//        userId=(String) request.getSession().getAttribute("username");
+        List<SEmp> sEmps = empService.listBmPartnerByUserId(userId, pageNum, pageSize);
+        return Result.success(new PageInfo<>(sEmps));
+    }
+
 
     @PostMapping( "/batchImportEmps")
     @ResponseBody

@@ -39,4 +39,6 @@ public interface EmpService {
     Integer batchImportBms(String fileName, MultipartFile file) throws Exception;
 
     EmpSelectVO listSelectEmpsByUserId(String userId);
+
+    List<SEmp> listBmPartnerByUserId(String userId, int pageNum, int pageSize);
 }

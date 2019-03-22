@@ -100,6 +100,13 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
+    public List<SEmp> listBmPartnerByUserId(String userId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SEmp> partners = empDao.listBmPartnerByUserId(userId);
+        return partners;
+    }
+
+    @Override
     public SEmp getEmpsByUserId(String userId) {
 
         return empDao.getEmpsByUserId(userId);
