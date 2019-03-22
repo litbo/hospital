@@ -346,12 +346,11 @@
         btn:{
             elem:'#upData',
             func:function(){
-                console.log('123');
                 layui.use('layer',function(){
                     var layer = layui.layer;
                     layer.open({
                         type:2,
-                        content:'zr-evaluation.html',
+                        content:'zr-evaluation.html?sgId='+$.getUrlParam("sgInfoId"),
                         area:['100%','100%']
                     })
                 })

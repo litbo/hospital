@@ -27,7 +27,7 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <button class="layui-btn layui-btn-xs">审 核</button>
+        <button class="layui-btn layui-btn-xs" lay-event="audit">审 核</button>
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
@@ -73,7 +73,18 @@
                     }
                 }
                 , done: function (obj) {
-                    //frame_all(obj,{"link":"table1"},{"message":[1]});//公共运行函数集合
+                    tableFunc({
+                        "obj":obj,
+                        "toolFunc":[
+                            {
+                                tool:'toolbar',
+                                event:'audit',
+                                type:2,
+                                title:'汇总审核',
+                                content:'./child/gather-auditAdd.html'
+                            }
+                        ]
+                    })
                 }
             },
 

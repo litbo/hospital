@@ -1,6 +1,5 @@
 package com.litbo.hospital;
 
-import com.litbo.hospital.common.utils.GetProjectAddressUtil;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,7 +19,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/eq/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/tmp/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/downloadFile/");
-        System.out.println(GetProjectAddressUtil.getAddress());
-
-}
+    }
 }

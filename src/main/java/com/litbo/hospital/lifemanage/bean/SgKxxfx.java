@@ -135,4 +135,8 @@ public class SgKxxfx {
      * 可行性分析结论
      */
     private String kxfxKxxjl;
+    /**
+     * 耗材供应情况
+     */
+    private String kxfxHcgy;
 }

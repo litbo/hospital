@@ -43,19 +43,19 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">申请单位</label>
                     <div class="layui-input-block">
-                        <input type="text" class="layui-input" autocomplete="off">
+                        <input type="text" name="pjbgDw" class="layui-input" autocomplete="off">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">申请装备项目</label>
                     <div class="layui-input-block">
-                        <input type="text" name="fjName" autocomplete="off" class="layui-input">
+                        <input type="text" name="pjbgZbxm" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">申请部门负责人</label>
                     <div class="layui-input-block">
-                        <input type="text" name="fjScbh" autocomplete="off"  class="layui-input">
+                        <input type="text" name="pjbgBmfzr" autocomplete="off"  class="layui-input">
                     </div>
                 </div>
             </div>
@@ -63,13 +63,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">制表单位</label>
                     <div class="layui-input-block">
-                        <input type="text" name="fjXh" autocomplete="" class="layui-input">
+                        <input type="text" name="pjbgZbdw" autocomplete="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">填表日期</label>
                     <div class="layui-input-block">
-                        <input type="text" class="layui-input" id="date" autocomplete="off">
+                        <input type="text" name="pjbgRq" class="layui-input" id="date" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -82,29 +82,35 @@
 
 
 <script>
-
     formData = {};
     renderMod = {
         form: {
+            val: {
+                get: {
+                    url: "/lifeManage/selectSgZrpjbgBySgInfoId",
+                    type: "POST",
+                    data: {sgInfoId: $.getUrlParam("sgId")}
+                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
+                    //有add时必需时data为表单name数组，否则请直接使用data赋值
+                }//get内参数需参考《内容传输与提交》文档
+            },
             date:{
                 elem:'#date',
                 value:today
             },
             submit: {
-                filter: "submit",//可以不写
                 before:function(){
-
                     return param = {
-                        1:formData.radio[0].eqId
+                        1:$.getUrlParam("sgId")
                     }
                 },
                 form: {
-                    url: "/eq/saveFj",
+                    url: "/lifeManage/insertSgZrpjbg",
                     type: "POST",
-                    // contentType:"application/json",
-                    data:["fjXh","fjGg","fjName"],
+                    contentType:"application/json",
+                    data:["pjbgDw","pjbgZbxm","pjbgBmfzr","pjbgZbdw","pjbgRq"],
                     param:{
-                        1:"eqId"
+                        1:"sgId"
                     }
                 }//表单提交函数
             }
@@ -112,20 +118,17 @@
         btn:{
             elem:'#upData',
             func:function(){
-                console.log('123');
                 layui.use('layer',function(){
                     var layer = layui.layer;
                     layer.open({
                         type:2,
-                        content:'kxxfx.html',
+                        content:'kxxfx.html?sgId='+$.getUrlParam("sgId"),
                         area:['100%','100%']
                     })
                 })
             }
         }
     }
-
-
 </script>
 </body>
 </html>
