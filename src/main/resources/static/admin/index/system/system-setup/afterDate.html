@@ -43,7 +43,83 @@
 
 
 <script>
-    renderMod.addTable ={
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'txlb', title: '提醒类别', width:'30%', minWidth: 150}
+                    , {field: 'txcs', title: '提醒次数', minWidth: 150, sort:true}
+                    , {field: 'jgts', title: '间隔天数', minWidth: 150, sort:true}
+                ]]
+                , url:"/xttx/listTxlb"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [
+                            {
+                                send:{
+                                    id:"table",
+                                    filter:"table1",
+                                    name:"eqIds",
+                                    event:"del",
+                                    url:"/eq/delEq",
+                                    type:"POST",
+                                    par:"eqId",
+                                    reload:true,
+                                    reTable:true
+                                }
+                            },
+                            {
+                                "event":'edit',
+                                'title':'设备信息编辑',
+                                'type':2,
+                                "content":'./child/information-edit.html'
+                            },
+                            {
+                                'event':'check',
+                                'title':'设备信息查看',
+                                'type':2,
+                                'content':'./child/information-check.html'
+                            }
+                        ]
+                    })
+
+                }
+            },
+
+            reSet:{
+                url:"/eq/listEqByX",
+                type:"search",
+                data:["bmName","eqPym","eqSbbh","eqZcbh"],
+                /* where:{
+                    newValue:"thisIsNew"
+                },*/
+                /* tid:"#table"*/
+            }
+
+        }
+
+
+
+    }
+   /* renderMod.addTable ={
         table:{
             cols: [[ //表头
                 {type:"checkbox"}
@@ -78,7 +154,7 @@
                 })
             }
         }
-    };
+    };*/
 </script>
 </body>
 </html>
