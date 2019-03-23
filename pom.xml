@@ -70,10 +70,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!--对json处理-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.8</version>
+            <version>1.2.47</version>
         </dependency>
         <!--密码进行MD5加密-->
         <dependency>

@@ -48,96 +48,48 @@
     <button class="layui-btn" data-type="reload">搜索</button>
 </script>
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit" name="modify">查看</a>
+</script>
 <script>
-    renderMod.addTable = {
-        table: [{
-            elem: "#table"
-            , height: 'full-75'
-            , cols: [[ //表头
-                {type: "checkbox"}
-                , {field: 'remind_type', title: '提醒类别', minWidth: 150}
-                , {field: 'remind_msg', title: '提醒信息', width: "50%", minWidth: 150, sort: true}
-                , {field: 'cut_date', title: '截止日期', minWidth: 150}
-                , {field: 'remind_times', title: '累计提醒(次)', minWidth: 150}
-                , {field: 'remind_end', title: '末次提醒', minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "remind_type": '普通提醒',
-                    "remind_msg": "新的提醒信息，请查收！",
-                    "cut_date": "2019-01-01",
-                    "remind_times": "7",
-                    "remind_end": "2018-11-25"
-                },
-                {
-                    "remind_type": '普通提醒',
-                    "remind_msg": "新的提醒信息，请查收！",
-                    "cut_date": "2019-01-01",
-                    "remind_times": "7",
-                    "remind_end": "2018-11-25"
-                }
-                ,
-                {
-                    "remind_type": '普通提醒',
-                    "remind_msg": "新的提醒信息，请查收！",
-                    "cut_date": "2019-01-01",
-                    "remind_times": "7",
-                    "remind_end": "2018-11-25"
-                }
-            ]
-        },
-            {
-                elem: "#table1"
-                , height: 'full-75'
-                , cols: [[ //表头
-                    {type: "checkbox"}
-                    , {field: 'process_name', title: '文档名称', width: "50%", minWidth: 150}
-                    , {field: 'create_date', title: '上传人', minWidth: 150, sort: true}
-                    , {field: 'Service_monitoring', title: '上传日期', minWidth: 150}
+    renderMod={
+        addTable : {
+            table: {
+                cols: [[ //表头
+                    {field: 'creatTime', title: '报告时间', minWidth: 150, sort: true}
+                    , {field: 'actionName', title: '事物分类', minWidth: 200}
+                    , {field: 'workName', title: '事物名称', minWidth: 200}
+                    , {fixed: 'right', width: 150, align: 'center', title: '查看', toolbar: "#bar"}
                 ]]
-                , "data": [
-                    {
-                        "activity_name": '100001000010000100001000010001001000010000100001000065456465',
-                        "link": "https://www.baidu.com",
-                        "process_name": "user-0",
-                        "create_date": "user-0",
-                        "Service_monitoring": "2018-12-01",
-                        "cut_date": "城市-0",
-                        "messages": [
-                            {
-                                name: "流程名称",
-                                value: "某一个活动"
-                            },
-                            {
-                                name: "创建日期",
-                                value: "2018-11-23 21：34:00"
-                            }
-                        ]
-                    }, {
-                        "activity_name": 10000,
-                        "process_name": "user-0",
-                        "link": "./show_messages.html",
-                        "Service_monitoring": "2018-12-01",
-                        "create_date": "城市-0",
-                        "cut_date": "城市-0"
-                    },
-                    {
-                        "activity_name": 10000,
-                        "process_name": "user-0",
-                        "Service_monitoring": "2018-12-01",
-                        "create_date": "城市-0",
-                        "cut_date": "城市-0"
-                    },
-                    {
-                        "activity_name": 10000,
-                        "process_name": "user-0",
-                        "Service_monitoring": "2018-12-01",
-                        "create_date": "城市-0",
-                        "cut_date": "城市-0"
-                    }]
-            }
-        ]
+                , url: "/listTaskByUserId"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                   bmId: ""
+               }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        tools: {
+                            type: 2,
+                            event: "edit",
+                            content: "$(url)",
+                            dataUrl: ["id"]
+                        }
+                    })
+                }
+            },
+
+        }
     };
 </script>
 </body>
