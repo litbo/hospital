@@ -92,7 +92,15 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        "obj": obj,
+                        toolFunc: {
+                            title: "单位领导处理意见",
+                            event: "describe",
+                            tool: "toolbar",
+                            type: 2,
+                            content: "./child/reply_style.html",
+                            area: ["50%", "35%"]
+                        }
+                        /*"obj": obj,
                         "toolFunc": [{
                             send: {
                                 id: "table",
@@ -107,7 +115,7 @@
                             },
                             tool: "toolbar",
                             event: "describe"
-                        }]
+                        }]*/
                     })
                 }
             }

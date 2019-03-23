@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>清理设备去处</title>
+    <title>批复领导意见</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -23,7 +23,7 @@
 <body>
 <div class="col-xs-12">
     <div class="layui-form-item">
-        <textarea name="sbqc" clos="500" rows="4" warp="virtual" placeholder="设备清理去处"></textarea>
+        <textarea name="opinion" clos="500" rows="4" warp="virtual" placeholder="单位领导处理意见"></textarea>
     </div>
 </div>
 <div class="col-xs-12">
@@ -42,10 +42,10 @@
                     }
                 },
                 form: {//或者写作up
-                    url: "/lifeManage/updateSgLccLByEqId3",
+                    url: "/lifeManage/updateSgLccLByEqId2",
                     contentType:"application/json",
                     type: "POST",
-                    data: ["sbqc"],
+                    data: ["opinion"],
                     param: {
                         1: "ids",
                     },
