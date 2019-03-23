@@ -8,6 +8,8 @@ import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwFpService;
 import com.litbo.hospital.security.vo.SelectFwFpByIdVo;
+import com.litbo.hospital.supervise.bean.SEmp;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +38,9 @@ public class FwFpController {
     }
     @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
     public Result insertFwFp( FwFp fp){
-        //TODO 从session获取用户id
-        String djrId = "1615925023";
+        //TODO 已修改
+        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String djrId = sEmp.getUserId();
         fp.setFpShrId(djrId);
 //        fp.setFpSdTime(new Date());
         fp.setFpStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());
@@ -55,8 +58,9 @@ public class FwFpController {
 
         fp.setFpShTime(new Date());
         fp.setFpStatus(EnumApplyStatus.APPLY_APPROVAL.getCode());
-        //TODO 此处配件请领人从session中获取，并存入fp表中
-        String userId = "123";
+        //TODO 已修改 此处配件请领人从session中获取，并存入fp表中
+        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String userId = sEmp.getUserId();
         fp.setFpShrId(userId);
         int res  = fpService.updateFwFp(fp);
         if(res==1){

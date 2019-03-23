@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.service;
 
 import com.litbo.hospital.user.bean.SUser;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import com.litbo.hospital.user.vo.UserVo;
 
 
@@ -15,4 +16,6 @@ public interface UserService {
     UserVo getUserById(String userId);
 
     Integer delUser(String id);
+
+    LiveEmpVo getLiveUserById(String userId);
 }

@@ -31,7 +31,6 @@ public class FwWxnrzdController {
     public Result wxnrZdIndex(@RequestParam(required = false,defaultValue = "1") Integer gzyyId ,
                               @RequestParam(required = false,defaultValue = "6") Integer gzmxId){
         try {
-            System.out.println(gzmxId);
             WxnrzdIndexVo wxnrzdIndexVo = wxnrzdService.wxnrZdIndex(gzyyId, gzmxId);
             return Result.success(wxnrzdIndexVo);
         }catch (Exception e){

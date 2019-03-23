@@ -9,8 +9,10 @@ import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwPjsgService;
 import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
+import com.litbo.hospital.supervise.bean.SEmp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +31,10 @@ public class FwPjsgController {
         if(fwPjsgVo.getFwPjsgZjbs().size()<=0)
             return Result.error(CodeMsg.PARAM_ERROR);
         try {
-            //TODO
-            fwPjsgVo.getFwPjsg().setUserId1("1615925039");
+            //TODO 已修改
+            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
+            fwPjsgVo.getFwPjsg().setUserId1(userId);
             int res = pjsgService.insertFwPjsg(fwPjsgVo);
             if(res>0)
                 return Result.success();
@@ -45,9 +49,10 @@ public class FwPjsgController {
     @RequestMapping(value = "listFwPjsgByUserWaitExamine",method = RequestMethod.GET)
     public Result listFwPjsgByUserWaitExamine(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
-        //Todo 修改session的name
+        //Todo 已修改 修改session的name
 //        String currentUserId = (String) SecurityUtils.getSubject().getSession().getAttribute("currentUserId");
-        String currentUserId = "2";
+        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String currentUserId = sEmp.getUserId();
         FwPjsg pjsg = new FwPjsg();
         pjsg.setUserId2(currentUserId);
         pjsg.setSgStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());//查询待审核的配件请领
@@ -59,9 +64,12 @@ public class FwPjsgController {
     @RequestMapping(value = "listFwPjsgByUserApplyApproval",method = RequestMethod.GET)
     public Result listFwPjsgByUserApplyApproval(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
-        //Todo 修改session的name
-//      String currentUserId = (String) SecurityUtils.getSubject().getSession().getAttribute("currentUserId");
+        //Todo 已修改（等待测试）修改session的name
+        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String qrrId = sEmp.getUserId();
+
         FwPjsg pjsg = new FwPjsg();
+        pjsg.setUserId2(qrrId);
         pjsg.setSgStatus(EnumApplyStatus.APPLY_APPROVAL.getCode());//查询审核通过的配件请领
         PageInfo pageInfo = pjsgService.listFwPjsg(pjsg,pageNum,pageSize);
         return Result.success(pageInfo);
@@ -90,9 +98,9 @@ public class FwPjsgController {
     public Result updateFwPjsgStatus(Integer sgStatus,Integer id,Integer taskId){
         try {
             if(id!=null&&sgStatus!=null&&(sgStatus == EnumApplyStatus.APPLY_APPROVAL.getCode()||sgStatus == EnumApplyStatus.APPLY_REJECT.getCode())){
-                //Todo 修改session的name
-                //      String currentUserId = (String) SecurityUtils.getSubject().getSession().getAttribute("currentUserId");
-                String currentUserId = "1615925023";
+                //Todo 已修改 修改session的name
+                SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+                String currentUserId = sEmp.getUserId();
                 int res = pjsgService.updateFwPjsgStatus(sgStatus,currentUserId,id,taskId);
                 if(res == 1){
                     return Result.success(res);

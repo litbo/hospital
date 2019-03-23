@@ -3,6 +3,8 @@ package com.litbo.hospital.supervise.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,4 +36,9 @@ public interface EmpService {
 
     void updateEmp(SEmp emp);
 
+    Integer batchImportBms(String fileName, MultipartFile file) throws Exception;
+
+    EmpSelectVO listSelectEmpsByUserId(String userId);
+
+    List<SEmp> listBmPartnerByUserId(String userId, int pageNum, int pageSize);
 }

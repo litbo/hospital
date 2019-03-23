@@ -71,18 +71,22 @@
                 type: "POST",
                 data: $ser,
                 success: function (info) {
-                    console.log(info);
+                    //console.log("LOGIN",info);
                     //登陆成功跳转页面
                     if (info.code === 0) {
                         layui.sessionData("rl",{
                             key:"sr",
                             value:info.data.rightList
                         });
+                        layui.sessionData("rl",{
+                            key:"emp",
+                            value:info.data.emp
+                        });
                         setTimeout(function () {
                             location.href = "./index.html";
                         }, 1000);
                         //显示登陆成功
-                        layer.msg("欢迎您（"+info.data.role+")");
+                        layer.msg("欢迎您  " +info.data.role);
                     }else{
                         layer.msg("登陆失败，请重试！");
                         console.log(info);//打印错误信息，调试用，可注释
