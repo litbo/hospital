@@ -31,7 +31,7 @@ public class FwPjzdServiceImpl implements FwPjzdService {
     public PageInfo listFwPjzd(String pjSzm,int pageNum,int pageSize,String pjfl) {
         PageHelper.startPage(pageNum,pageSize);
         List<ListFwPjzdVo> res = pjzdDao.listFwPjzd(pjSzm.toUpperCase(),pjfl);
-        for (ListFwPjzdVo v:res) {
+        for (ListFwPjzdVo v:res) {//把配件数量设置为默认为1
             v.setPjsgCount(1);
         }
         return new PageInfo(res);
