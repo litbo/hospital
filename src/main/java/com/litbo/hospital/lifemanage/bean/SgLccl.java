@@ -73,6 +73,11 @@ public class SgLccl {
     private Date clearTime;
 
     /**
+     * 设备去处
+     */
+    private String sbqc;
+
+    /**
      * 单位领导意见
      */
     private String opinion;

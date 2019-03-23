@@ -93,6 +93,10 @@ public class SgLcclSqlProvider {
             sql.SET("state = '设备已清理'");
         }
 
+        if (record.getSbqc() != null){
+            sql.SET("sbqc = #{sbqc,jdbcType=VARCHAR}");
+        }
+
         if (record.getRecord() != null) {
             sql.SET("record = #{record,jdbcType=VARCHAR}");
         }

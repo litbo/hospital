@@ -83,6 +83,9 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public void updateApply(SgLcclVO sgLcclVO) {
         SgLccl sgLccl = new SgLccl();
+        //TODO 获取登陆人 设置审批人
+        sgLccl.setApprover("1615925039");
+
         BeanUtils.copyProperties(sgLcclVO, sgLccl);
         //设置流程单号
         String idByIDAndTime = IDFormat.getIdByIDAndTime("sg_lccl", "lccl_id");
@@ -106,28 +109,39 @@ public class SgLcclServiceImpl implements SgLcclService {
     /**
      * 申请报废
      *
-     * @param userId 用户id
-     * @param eqId   设备id
+     * @param sgLc 设备id
      */
     @Override
-    public void insertApplyScrap(String userId, String eqId) {
+    public void insertApplyScrap(ListIdsVO sgLc) {
         SgLccl sgLccl = new SgLccl();
-        sgLccl.setId(UUID.randomUUID().toString());
-        sgLccl.setEqId(eqId);
-        sgLccl.setUserId(userId);
+        BeanUtils.copyProperties(sgLc,sgLccl);
+        // TODO 获取用户id
+        sgLccl.setUserId("666666");
         sgLccl.setDeclareTime(new Date());
         sgLccl.setState("科室申请报废");
-        sgLcclMapper.insert(sgLccl);
+        if (sgLc.getIds().size() > 0) {
+            for (String eqId : sgLc.getIds()) {
+                sgLccl.setId(UUID.randomUUID().toString());
+                sgLccl.setEqId(eqId);
+                sgLcclMapper.insert(sgLccl);
+            }
+        }
     }
 
     /**
-     * 上报审核
+     * 处置任务
      *
-     * @param sgLccl 上报审核信息
+     * @param sgLc 上报审核信息
      */
     @Override
-    public void updateSgLccLByEqId(SgLccl sgLccl) {
-        sgLcclMapper.updateByEqIdSelective(sgLccl);
+    public void updateSgLccLByEqId(SgLcclVO sgLc) {
+        SgLccl sgLccl = new SgLccl();
+        BeanUtils.copyProperties(sgLc,sgLccl);
+        List<String> eqIds = sgLc.getIds();
+        for (String eqId : eqIds) {
+            sgLccl.setEqId(eqId);
+            sgLcclMapper.updateByEqIdSelective(sgLccl);
+        }
     }
 
     /**
@@ -152,6 +166,7 @@ public class SgLcclServiceImpl implements SgLcclService {
 
     /**
      * 处置流程信息查询
+     *
      * @param eqId 设备id
      * @return DisposalProcessListVO
      */

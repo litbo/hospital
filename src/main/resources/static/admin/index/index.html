@@ -93,7 +93,7 @@
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;">修改信息</a></dd>
                             <dd><a href="javascript:;">安全管理</a></dd>
-                            <dd><a href="/logout;">退出</a></dd>
+                            <dd><a href="javascript:" id="quit">退出</a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -140,8 +140,17 @@
     <div class="main-mask"></div>
     <div class="hide" id="lock">
         <form class="layui-form" action="">
-            <input type="text" name="userName" lay-verify="required" placeholder="账户密码" autocomplete="off" class="layui-input">
-            <button class="layui-btn layui-btn-normal btn" lay-filter="login" id="check-btn">解锁</button>
+            <div class="container" style="margin-top:20%">
+                <div class="row">
+                    <div class="layui-col-lg-offset4" style="width:300px">
+                        <h1 style="text-align: center;margin-bottom: 20px;">系统已锁定</h1>
+                        <input type="text" name="userName" lay-verify="required" placeholder="账户密码" autocomplete="off" class="layui-input">
+                        <button class="layui-btn layui-btn-normal btn layui-btn-fluid" lay-filter="login" id="check-btn" style="margin-top: 20px;">解锁</button>
+                    </div>
+
+                </div>
+            </div>
+
         </form>
     </div>
 </div>
@@ -169,6 +178,44 @@
                 window.location.hash = "";
             }
 
+            var emm = layui.sessionData("rl").emp;
+            if(emm !== undefined){
+                //console.log(emm);
+                $(".h_name").html(emm.userXm);
+                $(".h_room").html(emm.bmName);
+                if(emm.sex === "女"){
+                    $(".user_head").attr("src","/static/admin/images/woman.png")
+                }
+            }
+
+            $("#quit").on("click",function(){
+                layer.confirm("确定要退出吗？",function(){
+                    location.href = "/logout"
+                })
+            });
+
+            /*$(".tools_more").on("click",function(){
+                $(".cts2").toggleClass("hidden");
+            });
+            $(".info1").on("click",function(){
+                $(".conts").toggleClass("hidden");
+            })*/
+
+            $("#lockSys").on("click",function(){
+                layOpen({
+                    type:1,
+                    content:$("#lock"),
+                    closeBtn: 0,
+                    maxmin:false,
+                    fixed:true,
+                    resize:false,
+                    title:false,
+                    area:["100%","100%"]
+                });
+                $("#check-btn").on("click",function(){
+
+                })
+            });
         })
     });
 
@@ -193,19 +240,8 @@
                 value:0
             });
         }*/
-        $("#lockSys").on("click",function(){
-           layOpen({
-               type:1,
-               content:$("#lock"),
-               closeBtn: 0,
-               maxmin:false,
-               fixed:true,
-               resize:false,
-               title:false,
-               area:["100%","100%"]
-           })
-        });
-        //判断主页点击时渲染是否正确，不正确重载主页
+
+        //判断主页(welcome.html)点击时渲染是否正确，不正确重载主页
         $("#refresh_home").click(function(){
             if($(this).hasClass("layui-this") || $.cookie("ww") > 100 ){
                 return false;
