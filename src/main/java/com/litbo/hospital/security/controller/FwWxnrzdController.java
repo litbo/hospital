@@ -17,8 +17,7 @@ public class FwWxnrzdController {
     private FwWxnrzdService wxnrzdService;
     @ApiOperation(value = "级联查询维修内容")
     @RequestMapping(value = "selectFwWxnrzd",method = RequestMethod.GET)
-    public Result selectFwWxnrzd(@RequestParam(value = "parentId",defaultValue = "0") int parentId
-                                 ){
+    public Result selectFwWxnrzd(@RequestParam(value = "parentId",defaultValue = "0") int parentId){
         try {
             return Result.success(wxnrzdService.selectFwWxnrzd(parentId));
         }catch (Exception e){
@@ -28,8 +27,7 @@ public class FwWxnrzdController {
     }
 
     @GetMapping("/wxnrZdIndex")
-    public Result wxnrZdIndex(@RequestParam(required = false,defaultValue = "1") Integer gzyyId ,
-                              @RequestParam(required = false,defaultValue = "6") Integer gzmxId){
+    public Result wxnrZdIndex(@RequestParam(required = false,defaultValue = "1") Integer gzyyId , @RequestParam(required = false,defaultValue = "6") Integer gzmxId){
         try {
             WxnrzdIndexVo wxnrzdIndexVo = wxnrzdService.wxnrZdIndex(gzyyId, gzmxId);
             return Result.success(wxnrzdIndexVo);
