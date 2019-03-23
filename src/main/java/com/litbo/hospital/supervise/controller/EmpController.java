@@ -8,6 +8,7 @@ import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.supervise.vo.EmpDeleteVO;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,7 +123,7 @@ public class EmpController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             @RequestParam(required = false) String key, HttpServletRequest request) {
 
-        SEmp emp = (SEmp) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         String userId = emp.getUserId();
 //        userId=(String) request.getSession().getAttribute("username");
         List<SEmp> sEmps = empService.listPartnerByUserId(userId, pageNum, pageSize);

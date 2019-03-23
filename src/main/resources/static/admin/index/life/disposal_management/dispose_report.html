@@ -62,16 +62,17 @@
             table: {
                 cols: [[ //表头
                     {type: "checkbox"}
+                    , {field: 'eqId', title: '设备Id', minWidth: 180, sort: true, event: 'openLink'}
                     , {field: 'eqSbbh', title: '设备编号', minWidth: 180, sort: true, event: 'openLink'}
                     , {field: 'eqName', title: '设备名称', minWidth: 150}
                     , {field: 'bmName', title: '使用部门', minWidth: 150}
                     , {field: 'eqXh', title: '型号', minWidth: 100}
                     , {field: 'eqGg', title: '规格', minWidth: 100}
                     , {field: 'eqCgrq', title: '购置日期', minWidth: 180, sort: true}
-                    , {field: 'eqPrice', title: '单价', minWidth: 50, sort: true}
-                    , {field: 'userName', title: '申报人', minWidth: 50}
+                    , {field: 'eqPrice', title: '单价', minWidth: 80, sort: true}
+                    , {field: 'userName', title: '申报人', minWidth: 100}
                     , {field: 'declareTime', title: '申报日期', minWidth: 180, sort: true}
-                    , {field: 'mode', title: '处置方式', minWidth: 80}
+                    , {field: 'mode', title: '处置方式', minWidth: 120}
                 ]]
                 , url: "/lifeManage/selectXList"
                 , method: "POST"
@@ -92,16 +93,25 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        toolFunc: {
-                            // title: "核对存在",
-                            event: "check",
+                        "obj": obj,
+                        "toolFunc": [{
+                            send: {
+                                id: "table",
+                                filter: "table1",
+                                name: "ids",
+                                event: "describe",
+                                url: "/lifeManage/updateSgLccLByEqId1",
+                                type: "POST",
+                                par: "eqId",
+                                reload: true,
+                                reTable: true
+                            },
                             tool: "toolbar",
-                            type: 1,
-                            content:"上报完成",
-                            area: ["30%", "30%"]
-                        }
+                            event: "describe"
+                        }]
                     })
                 }
+
             }
         }
     }

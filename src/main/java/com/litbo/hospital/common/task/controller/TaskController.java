@@ -6,6 +6,7 @@ import com.litbo.hospital.common.task.service.TaskService;
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class TaskController {
     public Result listTaskByUserId(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
         //TODO  已修改
-        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
         String userId = sEmp.getUserId();
         System.out.println(userId);
         PageInfo pageInfo = taskService.listTaskByUserId(userId,pageNum,pageSize);

@@ -10,6 +10,7 @@ import com.litbo.hospital.security.service.FwPjsgService;
 import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
@@ -32,7 +33,7 @@ public class FwPjsgController {
             return Result.error(CodeMsg.PARAM_ERROR);
         try {
             //TODO 已修改
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             fwPjsgVo.getFwPjsg().setUserId1(userId);
             int res = pjsgService.insertFwPjsg(fwPjsgVo);
@@ -51,7 +52,7 @@ public class FwPjsgController {
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
         //Todo 已修改 修改session的name
 //        String currentUserId = (String) SecurityUtils.getSubject().getSession().getAttribute("currentUserId");
-        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
         String currentUserId = sEmp.getUserId();
         FwPjsg pjsg = new FwPjsg();
         pjsg.setUserId2(currentUserId);
@@ -65,7 +66,7 @@ public class FwPjsgController {
     public Result listFwPjsgByUserApplyApproval(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
         //Todo 已修改（等待测试）修改session的name
-        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
         String qrrId = sEmp.getUserId();
 
         FwPjsg pjsg = new FwPjsg();
@@ -99,7 +100,7 @@ public class FwPjsgController {
         try {
             if(id!=null&&sgStatus!=null&&(sgStatus == EnumApplyStatus.APPLY_APPROVAL.getCode()||sgStatus == EnumApplyStatus.APPLY_REJECT.getCode())){
                 //Todo 已修改 修改session的name
-                SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+                LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
                 String currentUserId = sEmp.getUserId();
                 int res = pjsgService.updateFwPjsgStatus(sgStatus,currentUserId,id,taskId);
                 if(res == 1){
