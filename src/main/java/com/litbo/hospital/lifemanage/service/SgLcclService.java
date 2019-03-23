@@ -1,7 +1,6 @@
 package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.lifemanage.bean.SgLccl;
 import com.litbo.hospital.lifemanage.bean.vo.*;
 
 /**
@@ -50,17 +49,16 @@ public interface SgLcclService {
     /**
      * 申请报废
      *
-     * @param userId 用户id
      * @param eqId   设备id
      */
-    void insertApplyScrap(String userId, String eqId);
+    void insertApplyScrap(ListIdsVO eqId);
 
     /**
-     * 上报审核
+     * 处置任务
      *
      * @param sgLccl 上报审核信息
      */
-    void updateSgLccLByEqId(SgLccl sgLccl);
+    void updateSgLccLByEqId(SgLcclVO sgLccl);
 
     /**
      * 待上报列表

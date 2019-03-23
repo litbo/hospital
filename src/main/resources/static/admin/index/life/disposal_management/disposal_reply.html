@@ -91,40 +91,25 @@
                     }
                 }
                 , done: function (obj) {
-
                     tableFunc({
-                        toolFunc: {
-                            // title: "核对存在",
-                            event: "describe",
+                        "obj": obj,
+                        "toolFunc": [{
+                            send: {
+                                id: "table",
+                                filter: "table1",
+                                name: "ids",
+                                event: "describe",
+                                url: "/lifeManage/updateSgLccLByEqId2",
+                                type: "POST",
+                                par: "eqId",
+                                reload: true,
+                                reTable: true
+                            },
                             tool: "toolbar",
-                            type: 1,
-                            content:"完成",
-                            area: ["30%", "30%"],
-                            // func:function(a,b){
-                            //     if(b.length===0)
-                            //     {
-                            //         alert('未选中数据');
-                            //         return false;
-                            //     }
-                            //
-                            //     subUp({
-                            //         url:"",
-                            //         type:"",
-                            //         data:{
-                            //             cc:b
-                            //         },
-                            //         success:function(res){
-                            //
-                            //             if(res.code === 0){
-                            //                 layer.alert("已批复");
-                            //             }
-                            //         }
-                            //     })
-                            // }
-                        }
+                            event: "describe"
+                        }]
                     })
                 }
-
             }
         }
     }

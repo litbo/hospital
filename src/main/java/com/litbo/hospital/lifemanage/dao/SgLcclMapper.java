@@ -144,7 +144,7 @@ public interface SgLcclMapper {
             "FROM\n" +
             "dbo.sg_lccl\n" +
             "WHERE\n" +
-            "dbo.sg_lccl.lccl_id IS NOT NULL)" +
+            "dbo.sg_lccl.lccl_id IS NULL)" +
             "<if test=\"bmId != null\"> AND dbo.eq_info.eq_bmid = #{bmId,jdbcType=VARCHAR} </if>" +
             "</script>")
     List<ScrappedListVO> selectApplyList(@Param("bmId") String bmId);

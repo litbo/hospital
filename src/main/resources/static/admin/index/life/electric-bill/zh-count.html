@@ -80,29 +80,42 @@
         </div>
     </div>
 </script>
-
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table1" lay-filter="table1"></table>
+    </div>
+</div>
 
 <script>
     renderMod = {
-        form:{
-            date:{
-                elem:'#date',
-                type:'datetime',
-                range:'~'
+        form: {
+            date: {
+                elem: '#date',
+                type: 'datetime',
+                range: '~'
             }
         },
-        addTable:{
+        addTable: {
             table: {
-                elem: "#table"
+                elem: "#table1"
                 , height: 'full-75'
                 , cols: [[ //表头
                     {field: 'eqBmName', title: '分户', minWidth: 200}
-                    , {field: 'eqSbbh', title: '期初数量', minWidth: 200,sort: true}
+                    , {field: 'eqSbbh', title: '期初数量', minWidth: 200, sort: true}
                     , {field: 'eqName', title: '新增数量', minWidth: 200, sort: true}
                     , {field: 'eqYq', title: '减少数量', minWidth: 200, sort: true}
                     , {field: 'eqGg', title: '期末数量', minWidth: 200, sort: true}
 
                 ]]
+                , "data": [
+                    {
+                        "eqBmName": '部门名称',
+                        "eqSbbh": "初期",
+                        "eqName": "新增",
+                        "eqYq": "减少",
+                        "eqGg": "期末"
+                    }
+                ]
                 /*, url: ""
                 , method: "POST"
                 , request: {
@@ -123,20 +136,7 @@
             , reSet: {
                 url: "",
                 type: "reload",
-                data: ["",""]
-            }
-            ,form: {
-                val: {
-                    filter: "form",
-                    select: [
-                        {
-                            filter: "bmId",
-                            ids: "bmId",
-                            text: "bmName",
-                            url: ""
-                        }
-                    ]
-                }
+                data: ["", ""]
             }
         }
     }

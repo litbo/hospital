@@ -1,12 +1,14 @@
 package com.litbo.hospital.lifemanage.controller;
 
-import com.litbo.hospital.lifemanage.bean.SgLccl;
 import com.litbo.hospital.lifemanage.bean.vo.DateLowerAndUpperVO;
+import com.litbo.hospital.lifemanage.bean.vo.ListIdsVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgLcclVO;
 import com.litbo.hospital.lifemanage.service.SgLcclService;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 /**
  * 处置管理Controller
@@ -69,13 +71,12 @@ public class SgLcclController {
     /**
      * 申请报废
      *
-     * @param userId 用户id
-     * @param eqId   设备id
+     * @param eqId 设备id
      * @return Result
      */
     @PostMapping("/insertApplyScrap")
-    public Result insertApplyScrap(@RequestParam(name = "userId") String userId, @RequestParam(name = "eqId") String eqId) {
-        sgLcclService.insertApplyScrap(userId, eqId);
+    public Result insertApplyScrap(@RequestBody ListIdsVO eqId) {
+        sgLcclService.insertApplyScrap(eqId);
         return Result.success();
     }
 
@@ -92,10 +93,49 @@ public class SgLcclController {
     }
 
     /**
-     * 审核上报
+     * 处置上报
      */
-    @PostMapping("/updateSgLccLByEqId")
-    public Result updateSgLccLByEqId(SgLccl sgLccl) {
+    @PostMapping("/updateSgLccLByEqId1")
+    public Result updateSgLccLByEqId1(@RequestBody SgLcclVO sgLccl) {
+        //TODO 获取登陆人
+        sgLccl.setReportPerson("1615925037");
+        sgLccl.setReportTime(new Date());
+        sgLcclService.updateSgLccLByEqId(sgLccl);
+        return Result.success();
+    }
+
+    /**
+     * 处置批复
+     */
+    @PostMapping("/updateSgLccLByEqId2")
+    public Result updateSgLccLByEqId2(@RequestBody SgLcclVO sgLccl) {
+        //TODO 获取登陆人
+        sgLccl.setRatify("1615925037");
+        sgLccl.setRatifyTime(new Date());
+        sgLcclService.updateSgLccLByEqId(sgLccl);
+        return Result.success();
+    }
+
+    /**
+     * 处置清理
+     */
+    @PostMapping("/updateSgLccLByEqId3")
+    public Result updateSgLccLByEqId3(@RequestBody SgLcclVO sgLccl) {
+        //TODO 获取登陆人
+        sgLccl.setClearPerson("1615925037");
+        sgLccl.setClearTime(new Date());
+        sgLcclService.updateSgLccLByEqId(sgLccl);
+        return Result.success();
+    }
+
+    /**
+     * 处置备案
+     */
+    @PostMapping("/updateSgLccLByEqId4")
+    public Result updateSgLccLByEqId4(@RequestBody SgLcclVO sgLccl) {
+        //TODO 获取登陆人
+        sgLccl.setRecord("1615925037");
+        sgLccl.setRecordTime(new Date());
         sgLcclService.updateSgLccLByEqId(sgLccl);
         return Result.success();
     }
@@ -118,7 +158,7 @@ public class SgLcclController {
     /**
      * 处置流程信息查询
      *
-     * @param eqId   设备id
+     * @param eqId 设备id
      * @return Result
      */
     @PostMapping("/selectDisposalProcess")
