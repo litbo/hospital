@@ -308,6 +308,9 @@ public class EqProvider {
                 if(eqInfo.getEqEdgl()!=null) {
                     SET("eq_edgl=#{eqEdgl}");
                 }
+                if(eqInfo.getEqSyfw()!=null) {
+                    SET("eq_syfw=#{eqSyfw}");
+                }
                 if(eqInfo.getEqBz()!=null) {
                     SET("eq_bz=#{eqBz}");
                 }
