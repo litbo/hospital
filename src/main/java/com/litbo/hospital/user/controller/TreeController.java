@@ -47,5 +47,37 @@ public class TreeController {
 
     }
 
+    @RequestMapping("/right")
+    public  Result listRightByPid(String pid){
+
+        List<TreeVo> T1 = treeDao.listRightByPid("");
+
+        for (TreeVo t1 : T1) {
+            List<TreeVo> T2 = treeDao.listRightByPid(t1.getId());
+            t1.setChildren(T2);
+            for (TreeVo t2 : T2) {
+                List<TreeVo> T3 = treeDao.listRightByPid(t2.getId());
+                t2.setChildren(T3);
+                for (TreeVo t3 : T3) {
+                    List<TreeVo> T4 = treeDao.listRightByPid(t3.getId());
+                    t3.setChildren(T4);
+                    for (TreeVo t4 : T4) {
+                        List<TreeVo> T5 = treeDao.listRightByPid(t4.getId());
+                        t4.setChildren(T5);
+                    }
+                }
+            }
+        }
+       return Result.success(T1);
+    }
+
+
+    @RequestMapping("/right1")
+    public Result listNoteByPid1(String pid){
+        List<TreeVo>  treeVos = treeDao.listRightByPid(pid);
+        return Result.success(treeVos);
+
+    }
+
 
 }
