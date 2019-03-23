@@ -90,7 +90,15 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        "obj": obj,
+                        toolFunc: {
+                            title: "备案文件存放位置",
+                            event: "describe",
+                            tool: "toolbar",
+                            type: 2,
+                            content: "./child/record_style.html",
+                            area: ["50%", "35%"]
+                        }
+                        /*"obj": obj,
                         "toolFunc": [{
                             send: {
                                 id: "table",
@@ -105,7 +113,7 @@
                             },
                             tool: "toolbar",
                             event: "describe"
-                        }]
+                        }]*/
                     })
                 }
 

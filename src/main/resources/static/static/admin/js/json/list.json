@@ -3479,7 +3479,7 @@
               },
               {
                 "title": "用户权限分配",
-                "url": "./table.html",
+                "url": "./system/user-management/right-setting.html",
                 "icon": "user-lock",
                 "id": "7202",
                 "shiro": "a"

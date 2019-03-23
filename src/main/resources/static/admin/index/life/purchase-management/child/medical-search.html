@@ -57,7 +57,7 @@
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label">考察人员<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-xs layui-btn-normal">选择</button>
+                        <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
@@ -73,10 +73,7 @@
         </div>
     </form>
 </div>
-
-
 <script>
-
     formData = {};
     renderMod = {
         form: {
@@ -115,17 +112,15 @@
         },
         bind: {
             selectItem: {
-              /*elem: "",
-                data:formData,
-                cb:"",
-                db:"",
-                key:"checkbox",
-                name:"dtdt"*/
+                elem: "#selectEmp",
+                cb: "/kwgl/empgl/listSelectEmpsCols",
+                db: "/kwgl/empgl/listPartnerByUserId",
+                name: "dtdt",
+                key: "checkbox",
+                data: formData
             }
         }
     }
-
-
 </script>
 </body>
 </html>

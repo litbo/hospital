@@ -5,6 +5,8 @@ import com.litbo.hospital.lifemanage.bean.vo.ListIdsVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgLcclVO;
 import com.litbo.hospital.lifemanage.service.SgLcclService;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -88,6 +90,9 @@ public class SgLcclController {
      */
     @PostMapping("/updateApply")
     public Result updateApply(@RequestBody SgLcclVO sgLcclVO) {
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgLcclVO.setApprover(emp.getUserId());
         sgLcclService.updateApply(sgLcclVO);
         return Result.success();
     }
@@ -97,8 +102,9 @@ public class SgLcclController {
      */
     @PostMapping("/updateSgLccLByEqId1")
     public Result updateSgLccLByEqId1(@RequestBody SgLcclVO sgLccl) {
-        //TODO 获取登陆人
-        sgLccl.setReportPerson("1615925037");
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgLccl.setReportPerson(emp.getUserId());
         sgLccl.setReportTime(new Date());
         sgLcclService.updateSgLccLByEqId(sgLccl);
         return Result.success();
@@ -109,8 +115,9 @@ public class SgLcclController {
      */
     @PostMapping("/updateSgLccLByEqId2")
     public Result updateSgLccLByEqId2(@RequestBody SgLcclVO sgLccl) {
-        //TODO 获取登陆人
-        sgLccl.setRatify("1615925037");
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgLccl.setRatify(emp.getUserId());
         sgLccl.setRatifyTime(new Date());
         sgLcclService.updateSgLccLByEqId(sgLccl);
         return Result.success();
@@ -121,8 +128,9 @@ public class SgLcclController {
      */
     @PostMapping("/updateSgLccLByEqId3")
     public Result updateSgLccLByEqId3(@RequestBody SgLcclVO sgLccl) {
-        //TODO 获取登陆人
-        sgLccl.setClearPerson("1615925037");
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgLccl.setClearPerson(emp.getUserId());
         sgLccl.setClearTime(new Date());
         sgLcclService.updateSgLccLByEqId(sgLccl);
         return Result.success();
@@ -133,8 +141,9 @@ public class SgLcclController {
      */
     @PostMapping("/updateSgLccLByEqId4")
     public Result updateSgLccLByEqId4(@RequestBody SgLcclVO sgLccl) {
-        //TODO 获取登陆人
-        sgLccl.setRecord("1615925037");
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgLccl.setRecord(emp.getUserId());
         sgLccl.setRecordTime(new Date());
         sgLcclService.updateSgLccLByEqId(sgLccl);
         return Result.success();

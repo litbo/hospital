@@ -10,6 +10,8 @@ import com.litbo.hospital.lifemanage.dao.SgLcclMapper;
 import com.litbo.hospital.lifemanage.dao.SgReasonMapper;
 import com.litbo.hospital.lifemanage.enums.ModeEnum;
 import com.litbo.hospital.lifemanage.service.SgLcclService;
+import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,8 +85,6 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public void updateApply(SgLcclVO sgLcclVO) {
         SgLccl sgLccl = new SgLccl();
-        //TODO 获取登陆人 设置审批人
-        sgLccl.setApprover("1615925039");
 
         BeanUtils.copyProperties(sgLcclVO, sgLccl);
         //设置流程单号
@@ -115,8 +115,9 @@ public class SgLcclServiceImpl implements SgLcclService {
     public void insertApplyScrap(ListIdsVO sgLc) {
         SgLccl sgLccl = new SgLccl();
         BeanUtils.copyProperties(sgLc,sgLccl);
-        // TODO 获取用户id
-        sgLccl.setUserId("666666");
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgLccl.setUserId(emp.getUserId());
         sgLccl.setDeclareTime(new Date());
         sgLccl.setState("科室申请报废");
         if (sgLc.getIds().size() > 0) {
