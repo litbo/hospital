@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>大型医学装备考察报告页面</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -14,13 +15,15 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style type="text/css">
-        .layui-form-item{
-            margin-top:30px;
+        .layui-form-item {
+            margin-top: 30px;
         }
-        .layui-form-label{
-            width:140px;
-            padding:8px 8px !important;
+
+        .layui-form-label {
+            width: 140px;
+            padding: 8px 8px !important;
         }
+
         .warm_btn {
             height: 45px;
             font-size: 1.3em;
@@ -40,12 +43,6 @@
                 </fieldset>
             </div>
             <div class="col-xs-12 col-sm-6">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">时间</label>
-                    <div class="layui-input-block">
-                        <input name="dxzbSj" type="text" class="layui-input" autocomplete="off" id="date">
-                    </div>
-                </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">考察地点内容</label>
                     <div class="layui-input-block">
@@ -54,12 +51,6 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6">
-                <div class="layui-form-item" pane>
-                    <label class="layui-form-label">考察人员<span class="sign">*</span></label>
-                    <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
-                    </div>
-                </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">结论意见</label>
                     <div class="layui-input-block">
@@ -68,57 +59,104 @@
                 </div>
             </div>
             <div class="col-xs-12">
-                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="upData" lay-filter="upData">保存</button>
+                <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                    <label class="layui-form-label col-xs-12">考察人员<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable1">
+                            <i class="fas fa-plus"></i>&nbsp;添加
+                        </button>
+                        <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
+                                class="fas fa-trash-alt"></i>&nbsp;删除
+                        </button>
+                    </div>
+                </div>
+                <table id="table" lay-filter="table"></table>
+            </div>
+            <div class="col-xs-12">
+                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="upData"
+                        lay-filter="upData">保存
+                </button>
             </div>
         </div>
     </form>
 </div>
 <script>
     formData = {};
+    var sgId = $.getUrlParam("sgId");
+    console.log(sgId);
     renderMod = {
         form: {
             val: {
                 get: {
                     url: "/lifeManage/selectSgDxyxzbkc",
                     type: "POST",
-                    data: {sgInfoId: $.getUrlParam("sgId")}
+                    data: {"sgInfoId": sgId}
                     // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
                     //有add时必需时data为表单name数组，否则请直接使用data赋值
                 }//get内参数需参考《内容传输与提交》文档
             },
-            date:{
-                elem:'#date',
-                value:today
+            date: {
+                elem: '#date',
+                value: today
             },
             submit: {
                 filter: "upData",//可以不写
-                before:function(){
-                    return param = {
-                        1:$.getUrlParam("sgId"),
-                        //TODO select查询部门领导
-                        2:$.getUrlParam("sgId")
+                before: function (param) {
+                    var tv = getTableValue("table");
+                    if (doJudg({
+                        0: [tv]
+                    })) {
+                        putMsg({
+                            alert: "请选择数据后提交！",
+                            log: [tv]
+                        });
+                        return false;
                     }
+                    return param = {
+                        1: sgId,
+                        2: tv
+                    };
                 },
                 form: {
                     url: "/lifeManage/insertSgDxyxzbkc",
                     type: "POST",
-                    data:["dxzbDdnr","dxzbSj","dxzbYj"],
-                    param:{
-                        1:"sgId",
-                        2:"userIds"
+                    data: ["dxzbDdnr", "dxzbYj"],
+                    param: {
+                        1: "sgId",
+                        2: "userIds"
                     }
                 }//表单提交函数
             }
         },
+        addTable: {
+            table: [
+                {
+                    elem: "#table",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'userXm', title: '姓名', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
+                    }
+                }
+            ]
+        },
         bind: {
-            selectItem: {
-                elem: "#selectEmp",
-                cb: "/kwgl/empgl/listSelectEmpsCols",
-                db: "/kwgl/empgl/listPartnerByUserId",
-                name: "dtdt",
-                key: "checkbox",
-                data: formData
-            }
+            addItem: [
+                {
+                    elem: "#dataTable1",
+                    cb: "/kwgl/empgl/listSelectEmpsCols",
+                    db: "/kwgl/empgl/listPartnerByUserId",
+                    name: "dtdt",
+                    key: "checkbox"
+                }
+            ],
+            delItem: ".delNew"
         }
     }
 </script>

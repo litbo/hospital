@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>处置详情页面</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+
+<div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>处置流程</legend>
+    </fieldset>
+</div>
+<form class="layui-form layui-form-pane" action="" lay-filter="form">
+    <div class="col-xs-6">
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqSbbh" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqName" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">型号</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqXh" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">采购日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqCgrq" lay-verify="title" autocomplete="off" class="layui-input" id="time"
+                       disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备价格</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqPrice" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label" style="width:130px;">申请处理方式<span class="sign">*</span></label>
+            <div class="layui-input-block" style="margin-left:130px;">
+                <label class="radio">
+                    <input name="mode" type="radio" value='1'>报废
+                </label>
+                <label class="radio">
+                    <input type="radio" name="mode" value='2'>捐赠
+                </label>
+                <label class="radio">
+                    <input type="radio" name="mode" value='3'>调拨
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="layui-form-item">
+            <label class="layui-form-label">院内编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqZcbh" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">启用日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqQysj" autocomplete="off" class="layui-input"
+                       id="time1" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">规格</label>
+            <div class="layui-input-block">
+                <input type="text" name="eqGg" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申报人<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="userId" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申报日期<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="declareTime" autocomplete="off" class="layui-input"
+                       id="time2" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row" id="bfyy1" style="display: none;">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>设备报废原因</legend>
+        </fieldset>
+    </div>
+
+    <div class="layui-form-item" id="bfyy" style="display:none;" pane>
+        <label class="layui-form-label">报废原因</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="reasonIds" value="1" title="严重损坏无法修复或维修费用过高">
+            <input type="checkbox" name="reasonIds" value="2" title="国家有明确要求">
+            <input type="checkbox" name="reasonIds" value="3" title="失效或功能低下、技术落后，不能满足使用需求">
+        </div>
+        <div class="layui-input-block">
+            <input type="checkbox" name="reasonIds" value="4" title="严重污染环境，危害人身安全与健康">
+            <input type="checkbox" name="reasonIds" value="5" title="国家规定淘汰">
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="layui-form-item" style="margin:20px 0;">
+            <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+        </div>
+    </div>
+</form>
+<body>
+<script type="text/javascript">
+    renderMod = {
+        form: {
+            val: {
+                filter: "form",//与form标签lay-filter相同
+                get: {
+                    url: "/lifeManage/selectDisposalProcess",
+                    type: "POST",
+                    data: {eqId: $.getUrlParam("eqId")},
+                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
+                    //有add时必需时data为表单name数组，否则请直接使用data赋值
+                }//get内参数需参考《内容传输与提交》文档
+            },
+            submit: {
+                before:function(){
+                    return param = {
+                        1:$.getUrlParam("eqId")
+                    }
+                },
+                form: {//或者写作up
+                    url: "/lifeManage/updateApply",
+                    contentType:"application/json",
+                    type: "POST",
+                    data: ["mode"],
+                    param: {
+                        1: "eqId",
+                    },
+                    success:function (data) {
+                        if(data.code == 0){
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                        }else {
+                            alert(data.msg)
+                        }
+                    }
+                }
+            }
+        }
+    };
+    $('.radio').on("click", function () {
+        var value = $("input[name=mode]:checked").val();
+        if (value != '1') {
+            $("#bfyy").hide();
+            $("#bfyy1").hide();
+        } else {
+            $("#bfyy").show();
+            $("#bfyy1").show();
+        }
+    });
+</script>
+</body>
+</html>

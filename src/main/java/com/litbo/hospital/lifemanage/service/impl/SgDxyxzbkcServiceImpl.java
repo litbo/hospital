@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,6 +37,7 @@ public class SgDxyxzbkcServiceImpl implements SgDxyxzbkcService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public void insertOrUpdateSgDxyxzbkc(SgDxyxzbkcVO sgDxyxzbkcVO) {
+        sgDxyxzbkcVO.setDxzbSj(new Date());
         SgDxyxzbkc sgDxyxzbkc = new SgDxyxzbkc();
         BeanUtils.copyProperties(sgDxyxzbkcVO, sgDxyxzbkc);
         // 获取参会人员列表

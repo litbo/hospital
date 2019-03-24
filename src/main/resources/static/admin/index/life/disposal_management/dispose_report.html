@@ -56,13 +56,15 @@
                 <button class="layui-btn" data-type="reload">查找</button>-->
     </div>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="application">详情</a>
+</script>
 <script>
     renderMod = {
         addTable: {
             table: {
                 cols: [[ //表头
                     {type: "checkbox"}
-                    , {field: 'eqId', title: '设备Id', minWidth: 180, sort: true, event: 'openLink'}
                     , {field: 'eqSbbh', title: '设备编号', minWidth: 180, sort: true, event: 'openLink'}
                     , {field: 'eqName', title: '设备名称', minWidth: 150}
                     , {field: 'bmName', title: '使用部门', minWidth: 150}
@@ -73,6 +75,7 @@
                     , {field: 'userName', title: '申报人', minWidth: 100}
                     , {field: 'declareTime', title: '申报日期', minWidth: 180, sort: true}
                     , {field: 'mode', title: '处置方式', minWidth: 120}
+                    , {fixed: 'right', minWidth: 100, align: 'center', toolbar: "#bar"}
                 ]]
                 , url: "/lifeManage/selectXList"
                 , method: "POST"
@@ -93,8 +96,7 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        "obj": obj,
-                        "toolFunc": [{
+                        toolFunc: [{
                             send: {
                                 id: "table",
                                 filter: "table1",
@@ -108,7 +110,15 @@
                             },
                             tool: "toolbar",
                             event: "describe"
-                        }]
+                        }],
+                        tools:[
+                            {
+                                event:"application",
+                                type:2,
+                                content:"./child/details_page.html",
+                                dataUrl:["eqId"]
+                            }
+                        ]
                     })
                 }
 

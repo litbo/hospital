@@ -40,82 +40,100 @@
         <form class="layui-form layui-form-pane" action="" style="padding-top:20px;">
             <div class="col-xs-12 col-sm-6">
                 <div class="layui-form-item">
+                    <label class="layui-form-label">是否通过审核</label>
+                    <div class="layui-input-block">
+                        <select name="issh" autocomplete="off" class="layui-select">
+                            <option value="0">通过审核</option>
+                            <option value="1">未通过审核</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-form-label">计划采购年度<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="date" id="datey" lay-verify="date"
-                               placeholder="yyyy-MM-dd h:m:s" autocomplete="off" class="layui-input">
+                        <input type="text" name="zbwyhhyNd" id="year" lay-verify="year"
+                               placeholder="yyyy" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">会议时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="date" id="datet" lay-verify="datetime"
-                               placeholder="yyyy-MM-dd h:m:s" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">会议地点</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="title" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">主管部门签字</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="title" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">主管部门意见</label>
-                    <div class="layui-input-block">
-                        <textarea name="" rows="1" class="layui-textarea input_area"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-6">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">参加人员</label>
-                    <div class="layui-input-block">
-                        <label>
-                            <select name="bmId" lay-filter="bmId"></select>
-                        </label>
-                    </div>
-                </div>
-                <div class="layui-form-item" pane>
-                    <label class="layui-form-label">签名</label>
-                    <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-xs layui-btn-normal" lay-submit=""
-                                lay-filter="demo1">参会人员签字
-                        </button>
+                        <input type="text" name="zbwyhhySj" id="date" lay-verify="date"
+                               placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">分管领导签字</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title" autocomplete="off" class="layui-input">
+                        <input type="text" name="zbwyhhyFgld" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主管部门签字</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="zbwyhhyZgbm" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">审核意见</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="shyj" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">签名</label>
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-xs layui-btn-normal" id="chryqz" lay-filter="demo1">参会人员签字
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">会议地点</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="zbwyhhyDd" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">分管领导意见</label>
                     <div class="layui-input-block">
-                        <textarea name="" rows="1" class="layui-textarea input_area"></textarea>
+                        <textarea name="zbwyhhyFgldyj" rows="1" class="layui-textarea input_area"></textarea>
                     </div>
                 </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主管部门意见</label>
+                    <div class="layui-input-block">
+                        <textarea name="zbwyhhyZgbmyj" rows="1" class="layui-textarea input_area"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                    <label class="layui-form-label col-xs-12">参加人员</label>
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable1">
+                            <i class="fas fa-plus"></i>&nbsp;添加
+                        </button>
+                        <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
+                                class="fas fa-trash-alt"></i>&nbsp;删除
+                        </button>
+                    </div>
+                </div>
+                <table id="table" lay-filter="table"></table>
             </div>
             <div class="col-xs-12">
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">会议内容</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea name="zbwyhhyNr" placeholder="请输入内容" class="layui-textarea"></textarea>
                     </div>
                 </div>
             </div>
-
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <div class="col-xs-12">
+                <div class="layui-form-item">
+                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">审批
+                    </button>
                 </div>
             </div>
         </form>
@@ -124,91 +142,77 @@
 <script>
     renderMod = {
         addTable: {
-            table: {
-                height: 'full-75'
-                , cols: [[ //表头
-                    {type: "checkbox"}
-                    , {field: 'bmName', title: '申购科室', minWidth: 150, sort: true}
-                    , {field: 'bh', title: '申购编号', minWidth: 150, sort: true}
-                    , {field: 'eqPmName', title: '设备名称', minWidth: 150}
-                    , {field: 'num', title: '数量', minWidth: 100, sort: true}
-                    , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
-                ]]
-                , url: "/lifeManage/selectSgInfoSgZbwyhhyList"
-                , method: "POST"
-                , request: {
-                    pageName: 'pageNum',
-                    limitName: 'pageSize'
-                }
-                , where: {}
-                , parseData: function (res) { //res 即为原始返回的数据
-                    return {
-                        "code": res.code, //解析接口状态
-                        "msg": res.msg, //解析提示文本
-                        "data": res.data.list, //解析数据列表
-                        "count": res.data.total //总数据数
-                    }
-                }
-                , done: function (obj) {
-                    tableFunc({
-                        toolFunc: {
-                            title: "审批",
-                            event: "check",
-                            tool: "toolbar",
-                            type: 1,
-                            content: $("#content"),
-                            area: ["50%", "50%"]
-                        }
-                    })
-                }
-            },
-            reSet: {
-                url: "/lifeManage/selectSgInfoSgZbwyhhyList",
-                type: "reload",
-                data: ["bmId", "bh", "eqSbPym"]
-            }
-            , date: [{
-                elem: "#datet"
-            },
+            table: [
                 {
-                    elem: "#datey"
-                    , type: "year"
-                    , value: year
-                    , format: "y年"
+                    elem: "#table",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'userXm', title: '姓名', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
+                    }
                 }
             ]
         },
+        bind: {
+            addItem: [
+                {
+                    elem: "#dataTable1",
+                    cb: "/kwgl/empgl/listSelectEmpsCols",
+                    db: "/kwgl/empgl/listPartnerByUserId",
+                    name: "dtdt",
+                    key: "checkbox"
+                }
+            ],
+            delItem: ".delNew"
+        },
         form: {
-            val: {
-                filter: "forms",
-                select: [
-                    {
-                        filter: "bmId",
-                        ids: "bmId",
-                        text: "bmName",
-                        url: "/supervise/bmgl/listBm"
-                    }
-                ]
-            },
             date: [
                 {
-                    elem: "#datet"
-                    ,type:"datetime"
-                    ,value: today + " "+time
-                    ,format:'yyyy-MM-dd HH:mm:ss'
+                    elem: "#year"
+                    , type: "date"
+                    , format: 'yyyy'
                 },
                 {//选择 “时间” 日期选择器
-                    elem: "#datey"
-                    ,type:"datetime"
-                    ,value: today + " "+time
-                    ,format:'yyyy-MM-dd HH:mm:ss'
+                    elem: "#date"
+                    , type: "date"
+                    , value: today
+                    , format: 'yyyy-MM-dd'
                 }],
-            submit:{
-                form:{
-                    url:"/lifeManage/updateSgInfoZbwyhhy",
-                    type:"POST",
-                    data: [],
-                    success:function(){
+            submit: {
+                before: function (param) {
+                    var tv = getTableValue("table");
+                    if (doJudg({
+                        0: [tv]
+                    })) {
+                        putMsg({
+                            alert: "请选择数据后提交！",
+                            log: [tv]
+                        });
+                        return false;
+                    }
+                    return param = {
+                        1: tv,
+                    };
+                },
+                form: {
+                    url: "/lifeManage/updateSgInfoZbwyhhy",
+                    type: "POST",
+                    data: ["zbwyhhyNd", "zbwyhhySj", "zbwyhhyFgld", "zbwyhhyZgbm",
+                        "zbwyhhyDd", "zbwyhhyFgldyj", "zbwyhhyZgbmyj", "zbwyhhyNr"],
+                    contentType: "application/json",
+                    param: {
+                        1: "sgZbwyhRys"
+                    },
+                    add: {
+                        ids: []
+                    },
+                    success: function () {
                         alert("审批已成功");
                     }
                 }

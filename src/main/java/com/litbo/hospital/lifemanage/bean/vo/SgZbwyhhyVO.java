@@ -55,7 +55,27 @@ public class SgZbwyhhyVO {
      */
     private List<String> sgZbwyhRys;
     /**
-     * 审核信息
+     * 审核人
      */
-    private ShVO shVO;
+    private String shr;
+    /**
+     * 是否通过审核
+     */
+    private String issh;
+    /**
+     * 审核时间
+     */
+    private Date shsj;
+    /**
+     * 审核意见
+     */
+    private String shyj;
+    /**
+     * 审核状态
+     */
+    private String zt;
+    /**
+     * 审核申购单列表
+     */
+    private List<String> ids;
 }

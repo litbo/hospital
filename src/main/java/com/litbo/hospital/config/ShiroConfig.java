@@ -3,7 +3,6 @@ package com.litbo.hospital.config;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.litbo.hospital.common.utils.Realm.UserRealm;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -15,8 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -47,7 +44,6 @@ public class  ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         //设置默认访问路径
-
         shiroFilterFactoryBean.setLoginUrl("/admin/index/login.html");
         shiroFilterFactoryBean.setSuccessUrl("/success.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("unauthorized.html");
