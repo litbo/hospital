@@ -52,7 +52,6 @@
         addTable: {
             table: {
                 elem: "#table"
-                , height: 'full-75'
                 ,cols: [[ //表头
                     {checkbox:true,fixed:true}
                     , {field: 'bmName', title: '部门名称', width:'30%',minWidth: 200}
@@ -85,7 +84,17 @@
                                     event: "add",
                                     content: './child/department.html',
                                     area:['50%','90%'],
-                                    btn:['确定','取消']
+                                    btn:['确定','取消'],
+                                    func:function(obj,cs){
+                                        var data = [];
+                                        for(var i=0;i<cs.data.length;i++){
+                                            data.push(cs.data[i]["obmId"]);
+                                        }
+                                        layui.sessionData("dtdd",{
+                                            key:"eqq",
+                                            value:data
+                                        })
+                                    }
                                 }
                             ]
                         }
