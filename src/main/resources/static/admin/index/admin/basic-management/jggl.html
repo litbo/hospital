@@ -238,12 +238,13 @@
 
 
     function beforeRemove(e,treeId,treeNode){
+        var bool = true;
         return confirm("你确定要删除吗？");
     }
 
     function onRemove(e,treeId,treeNode){
         bmId ="bmId="+ treeNode["bmId"];
-        console.log("bmId",bmId)
+        console.log("bmId",bmId);
         $.ajax({
             url: "/supervise/bmgl/removeBmByBmId",
             type: "GET",

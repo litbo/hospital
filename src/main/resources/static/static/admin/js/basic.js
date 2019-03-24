@@ -669,11 +669,11 @@ function getFormValue(name,res,force){
     var data = res || {};
     //遍历所有的name
     for(var c=0;c<name.length;c++){
-        var inputValue = $("input[name=" + name[c] + "]").val()
+        var inputValue = $("input[type=text][name=" + name[c] + "]").val()
             ,selectValue = $("select[name=" + name[c] + "]").val()
             ,textareaValue = $("textarea[name=" + name[c] + "]").val()
-            ,radioValue = $("input[type=radio][name=" + name[c] + "]").val()
-            ,checkBoxValue = $("input[type=checkbox][name=" + name[c] + "]").val();
+            ,radioValue = $("input[type=radio][name=" + name[c] + "]:checked").val()
+            ,checkBoxValue = $("input[type=checkbox][name=" + name[c] + "]:checked").val();
 
         //只匹配首先获取到的name抛弃后匹配成功的，
         //如强制匹配（第二参数为true）则未匹配成功则会使用其他匹配上的DOM的值
@@ -686,9 +686,9 @@ function getFormValue(name,res,force){
         } else if (radioValue) {
             data[name[c]] = radioValue;
         } else if (checkBoxValue) {
-            if (checkBoxValue[0].checked === true) {
+            //if (checkBoxValue[0].checked === true) {
                 data[name[c]] = checkBoxValue.val();
-            }
+            //}
         }else{
             force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
         }
