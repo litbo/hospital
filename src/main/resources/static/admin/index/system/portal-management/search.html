@@ -19,8 +19,7 @@
         }
     </style>
 </head>
-
-<body>
+<!--<body>
 <div class="layui-row">
     <div class="col-xs-12">
         <table id="table" lay-filter="table1"></table>
@@ -28,6 +27,93 @@
 </div>
 
 <script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="hidden-xs"  id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+
+</script>
+
+
+<script>
+    renderMod.addTable ={
+        table:{
+            cols: [[ //表头
+                {type:"checkbox"},
+                {field: 'ggbt', title: '公告类型', minWidth: 120, sort: true}
+                , {field: 'bmName', title: '公告名称', minWidth: 250,width:"30%",}
+                , {field: 'ngsj', title: '发布部门', minWidth: 160}
+                , {field: 'ggnr', title: '发布时间', minWidth: 150,sort:true}
+                , {field: 'ggnr', title: '有效期',minWidth: 150}
+                , {title:'操作',align:'center',minWidth:200,toolbar:'#bar'}
+            ]],
+            url:"/ggxz/listGgxzs",
+            request: {
+                pageName: 'pageNum',
+                limitName: 'pageSize'
+            },
+            parseData: function (res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count":res.data.total,//页面显示的数据条数
+                    "data": res.data.list //解析数据列表
+                }
+            }
+
+            , done: function (obj) {
+                tableFunc({
+                    "obj": obj,
+                    "toolFunc": [  {
+                        send:{
+                            id:"table",
+                            filter:"table1",
+                            name:"ggxzIds",
+                            event:"del",
+                            url:"/ggxz/delGgxz",
+                            type:"POST",
+                            par:"id",
+                            reload:true,
+                            reTable:true
+                        },
+                        tool:"toolbar",
+                        event:"del"
+
+                    }
+
+                    ]
+                })
+            }
+
+        }
+    }
+</script>
+
+</body>-->
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
+    </div>
+    <div class="hidden-xs"  id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+
+</script>
+<!--<script type="text/html" id="toolBar">
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
@@ -38,7 +124,7 @@
             </div>
         </form>
     </div>
-</script>
+</script>-->
 <script type="text/html" id="bar">
 <a class="layui-btn layui-btn-xs layui-btn-normal">查看明细</a>
 </script>
@@ -50,12 +136,12 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {field: 'ggbt', title: '公告类型', minWidth: 120, sort: true}
-                    , {field: 'bmName', title: '公告名称', minWidth: 250,width:"30%",}
-                    , {field: 'ngsj', title: '发布部门', minWidth: 160}
-                    , {field: 'ggnr', title: '发布时间', minWidth: 150,sort:true}
-                    , {field: 'ggnr', title: '有效期',minWidth: 150}
-                    , {title:'操作',align:'center',minWidth:200,toolbar:'#bar'}
+                    {type:"checkbox"},
+                    {field: 'ggbt', title: '公告标题', minWidth: 120, sort: true}
+                    , {field: 'bmName', title: '发布部门', minWidth: 250,width:"30%",}
+                    , {field: 'ngsj', title: '拟稿时间', minWidth: 160}
+                    , {field: 'ggnr', title: '公告内容', minWidth: 150,sort:true}
+                 /*   , {title:'操作',align:'center',minWidth:200,toolbar:'#bar'}*/
                 ]]
                  , url: "/gg/listShowGg"
                 , request: {
@@ -78,7 +164,27 @@
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [  {
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                name:"ggIds",
+                                event:"del",
+                                url:"/gg/delGg",
+                                type:"POST",
+                                par:"id",
+                                reload:true,
+                                reTable:true
+                            },
+                            tool:"toolbar",
+                            event:"del"
 
+                        }
+
+                        ]
+                    })
                 }
             },
 
@@ -97,57 +203,6 @@
 
     }
 
-
-    /*renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'publish-name', title: '公告名称', minWidth: 150, sort: true}
-                , {field: 'publish-depart', title: '发布部门', minWidth: 150}
-                , {field: 'publish-time', title: '发布时间', minWidth: 150}
-                , {field: 'announce-content', title: '公告内容',width:"30%", minWidth: 150}
-            ]]
-            , "data": [
-                {
-                    "publish-name":"核磁共振室",
-                    "publish-depart":"160232810001",
-                    "publish-time":"MRI",
-                    "announce-content":"设备1"
-                },{
-                    "publish-name":"核磁共振室",
-                    "publish-depart":"160232810001",
-                    "publish-time":"MRI",
-                    "announce-content":"设备1"
-                },{
-                    "publish-name":"核磁共振室",
-                    "publish-depart":"160232810001",
-                    "publish-time":"MRI",
-                    "announce-content":"设备1"
-                },{
-                    "publish-name":"核磁共振室",
-                    "publish-depart":"160232810001",
-                    "publish-time":"MRI",
-                    "announce-content":"设备1"
-                },{
-                    "publish-name":"核磁共振室",
-                    "publish-depart":"160232810001",
-                    "publish-time":"MRI",
-                    "announce-content":"设备1"
-                },{
-                    "publish-name":"核磁共振室",
-                    "publish-depart":"160232810001",
-                    "publish-time":"MRI",
-                    "announce-content":"设备1"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "addMsg":2,
-                    "addLink":"table1"
-                })
-            }
-        }
-    }*/
 </script>
 </body>
 

@@ -16,4 +16,6 @@ public interface GgxzService {
     PageInfo listWaits(int pageNum, int pageSize);
 
     SysGgxz getGgxzById(Integer id);
+
+    Integer delGgxz(int id);
 }

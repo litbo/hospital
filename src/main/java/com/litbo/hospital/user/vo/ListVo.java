@@ -9,4 +9,7 @@ public class ListVo {
 
     List<String> userIds;
     List<String> eqIds;
+
+    List<String> ggxzIds;
+    List<String> ggIds;
 }
