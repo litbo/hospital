@@ -5,8 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SysGgxz;
 import com.litbo.hospital.user.service.GgxzService;
+import com.litbo.hospital.user.vo.ListVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -80,6 +82,19 @@ public class GgxzController {
     public Result getGgxzById(Integer id){
 
         return Result.success(ggxzService.getGgxzById(id));
+    }
+
+    @RequestMapping("delGgxz")
+    @Transactional
+    public Result delGgxz( @RequestBody ListVo listVo){
+
+        for (String id : listVo.getGgxzIds()) {
+            if(ggxzService.delGgxz(Integer.parseInt(id))<=0){
+                return Result.error();
+            }
+         }
+        return Result.success();
+
     }
 
 }

@@ -22,6 +22,8 @@ public class FwShouLiIndexVo {
 
     private String eqName; //报修设备名称
 
+    private String eqId;
+
     private String eqGg; //报修设备规格
 
     private String eqXh; //报修设备型号
@@ -56,9 +58,10 @@ public class FwShouLiIndexVo {
 
     private String slrName;
 
-    public FwShouLiIndexVo(String id, String eqName, String eqGg, String eqXh, java.sql.Date eqBxjssj, String bmName, String bxksdh, Timestamp bxTime, String userXm, String bxrdh, String bxfs, Integer jjxStatus) {
+    public FwShouLiIndexVo(String id, String eqName,String eqId, String eqGg, String eqXh, java.sql.Date eqBxjssj, String bmName, String bxksdh, Timestamp bxTime, String userXm, String bxrdh, String bxfs, Integer jjxStatus) {
         this.id = id;
         this.eqName = eqName;
+        this.eqId = eqId;
         this.eqGg = eqGg;
         this.eqXh = eqXh;
         this.eqBxjssj = eqBxjssj;
@@ -70,11 +73,13 @@ public class FwShouLiIndexVo {
         this.bxfs = bxfs;
         this.jjxStatus = jjxStatus;
         this.bxLx = "科室故障维修";
-        /*if(eqBxjssj.before(new Date())){
-            this.eqBxStatus = "在保";
-        }else{
-            this.eqBxStatus = "过保";
-        }*/
+        if(eqBxjssj != null){
+            if(new Date(eqBxjssj.getTime()).before(new Date())){
+                this.eqBxStatus = "在保";
+            }else{
+                this.eqBxStatus = "过保";
+            }
+        }
         if(jjxStatus == 1){
             this.jjxStatusString =  "低";
         }

@@ -102,16 +102,18 @@
                             tool: "toolbar",
                             type: 2,
                             content: "./child/reply_style.html",
-                            area: ["50%", "35%"]
-                        },
-                        tools:[
-                            {
-                                event:"application",
-                                type:2,
-                                content:"./child/details_page.html",
-                                dataUrl:["eqId"]
+                            area: ["50%", "35%"],
+                            func:function(obj,cs){
+                                var data = [];
+                                for(var i=0;i<cs.data.length;i++){
+                                    data.push(cs.data[i]["eqId"]);
+                                }
+                                layui.sessionData("dtds",{
+                                    key:"tCs",
+                                    value:data
+                                })
                             }
-                        ]
+                        }
                         /*"obj": obj,
                         "toolFunc": [{
                             send: {

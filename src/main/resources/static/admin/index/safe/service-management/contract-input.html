@@ -50,7 +50,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">合同日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="htTime" class="layui-input" autocomplete="off" id="date">
+                    <input type="text" name="htTime" class="layui-input" autocomplete="off" id="htDate">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -121,13 +121,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">保修开始日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="htBxksTime" class="layui-input" autocomplete="off" id="date1">
+                    <input type="text" name="htBxksTime" class="layui-input" autocomplete="off" id="htKsDate">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">保修结束日期</label>
                 <div class="layui-input-block">
-                    <input type="text" name="htBxjsTime" class="layui-input" autocomplete="off" id="date2">
+                    <input type="text" name="htBxjsTime" class="layui-input" autocomplete="off" id="htJsDate">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -153,13 +153,10 @@
                     <input type="radio" name="htHpjf" value="2" title="否" checked>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">合同附件</label>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">设备照片</label>
                 <div class="layui-input-block">
-                    <div class="layui-upload">
-                        <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" id="selectFile">选择文件</button>
-                        <button type="button" class="layui-btn layui-btn-xs" id="startUploadFile">提交文件</button>
-                    </div>
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp">选择文件</button>
                 </div>
             </div>
             <div class="layui-form-item" pane>
@@ -186,7 +183,7 @@
 
 
 
-<script>
+<!--<script>
     layui.use(['layer', 'form', 'layedit', 'laydate','upload'], function () {
         var form = layui.form
             , layer = layui.layer
@@ -261,18 +258,33 @@
             }
         })
     });
-</script>
+</script>-->
 <script>
     var formData = {};
     renderMod={
         form:{
             submit:{
                 filter:true,
+                before:function(){
+                    var ad={};
+                    if(formData.htFjurl!==undefined){
+                        ad.htFjurl=formData.htFjurl;
+                    }
+
+                    return param = {
+                        /*1:formData.radio[0].bmId,*/
+                        1:ad.htFjurl
+                    }
+                },
                 form:{
                     url:"/fwht/add",
                     type:"POST",
+                    contentType:"application/json",
                     data:["id","htName","htTime","htLx","htPrice","sbcsId","heWxsdb","htYfdb","htZffs",
-                        "htJfly","htBxksTime","htBxjsTime","htXyTime","htBxfw","htHpjf","htFjurl","eqId","htMs",],
+                        "htJfly","htBxksTime","htBxjsTime","htXyTime","htBxfw","htHpjf","htFjurl","eqId","htMs"],
+                    param: {
+                        1: "htFjurl"
+                    },
                     success:function(res){
 
                     },
@@ -280,7 +292,55 @@
                         xonsole.log(r);
                     }
                 }
-            }
+            },
+            date: [
+                {
+                    elem: "#htDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#htKsDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    elem: "#htJsDate",
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
+                }
+            ],
+            file:[
+                {
+                    elem:"#sbzp",
+                    url:"/eq/uploadFile",
+                    accept:"file",
+                    acceptMime:"file/*",
+                    auto:true,
+                    bindAction:"#file",
+                    field:"file",
+                    choose:function(obj){
+                        files = obj.pushFile();
+                        obj.preview(function(index,file,result){
+                            $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
+                        })
+                    },done:function(res,index,upload){
+                        if(res.code===0){
+                            formData.htFjurl=res.data
+                            layer.msg('选择成功！', {
+                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                        console.log(arguments);
+                        return delete files[index];
+                    },error:function(index,upload){
+                        console.log("index:"+index);
+                        console.log("upload"+upload);
+                    }
+                },]
         },
         bind: {
             selectItem: [{

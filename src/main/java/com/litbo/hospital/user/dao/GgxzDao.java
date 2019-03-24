@@ -23,4 +23,6 @@ public interface GgxzDao {
 
     @SelectProvider(type = GgxzProvider.class , method = "getGgxzById")
     SysGgxz getGgxzById(Integer id);
+    @Delete("delete from sys_ggxz where id =#{id}")
+    Integer delGgxz(int id);
 }

@@ -43,52 +43,6 @@
 
 
 <script>
-  /*  renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'eqTxlb', title: '提醒类别', width:'30%', minWidth: 150}
-                , {field: 'eqTxts', title: '提前提醒天数', minWidth: 200, sort:true}
-                , {field: 'eqTxcs', title: '提醒次数', minWidth: 150, sort:true}
-                , {field: 'eqJgsj', title: '两次提醒间隔天数', minWidth: 150, sort:true}
-                , {fixed: 'right', minWidth:80, align:'center', toolbar:'#bar'}
-            ]],url:"/xttx/listTxcl"
-            , "data": [
-                {
-                    "reminder-type":"计量提醒",
-                    "pre-days":"7",
-                    "reminder-times":'42',
-                    "interval-days":"4"
-                },{
-                    "reminder-type":"计量提醒",
-                    "pre-days":"13",
-                    "reminder-times":'6',
-                    "interval-days":"24"
-                },{
-                    "reminder-type":"保修期到期",
-                    "pre-days":"1",
-                    "reminder-times":'1',
-                    "interval-days":"1"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":[{
-                        "event":'edit'
-                    },{
-                        "tool":'toolbar',
-                        "filter":'table1',
-                        "event":'add',
-                        "title":'提醒策略设置',
-                        "type":2,
-                        "area":['75%','80%'],
-                        "content":'./child/preDateAdd.html'
-                    }]
-                })
-            }
-        }
-    };*/
-
     renderMod = {
         addTable: {
             table: {
@@ -135,16 +89,11 @@
                                 }
                             },
                             {
-                                "event":'edit',
-                                'title':'设备信息编辑',
-                                'type':2,
-                                "content":'./child/information-edit.html'
-                            },
-                            {
-                                'event':'check',
-                                'title':'设备信息查看',
-                                'type':2,
-                                'content':'./child/information-check.html'
+                                tool:'toolbar',
+                                event:'add',
+                                title:'提醒策略设置',
+                                type:2,
+                                content:'./child/preDateAdd.html'
                             }
                         ]
                     })

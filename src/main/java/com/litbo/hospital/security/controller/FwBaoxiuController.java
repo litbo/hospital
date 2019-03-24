@@ -7,6 +7,7 @@ import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class FwBaoxiuController {
     public Result baoxiuRw(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                            @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             PageInfo pageInfo = fwBaoxiuService.baoxiuRw(userId, pageNum, pageSize);
             return Result.success(pageInfo);
@@ -49,7 +50,7 @@ public class FwBaoxiuController {
                            @RequestParam(required = false,defaultValue = "10") Integer pageSize,
                            @RequestParam(required = false) String bmName, @RequestParam(required = false) String eqName){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             System.out.println(eqName);
             PageInfo pageInfo = fwBaoxiuService.getBaoxiuEq(userId, pageSize, pageNum,bmName,eqName);
@@ -69,7 +70,7 @@ public class FwBaoxiuController {
     public Result baoxiuIndex(String eqId){
 //        SecurityUtils.getSubject().getSession().getAttribute("");
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             FwBaoxiuIndexVo baoxiuIndexVo = fwBaoxiuService.baoxiuIndex(eqId, userId);
             return Result.success(baoxiuIndexVo);

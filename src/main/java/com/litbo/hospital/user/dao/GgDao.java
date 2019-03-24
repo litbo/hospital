@@ -25,4 +25,6 @@ public interface GgDao {
     Integer addGglb(@Param("gglxName") String gglxName, @Param("gglxId") Integer gglxId);
     @Select("select top 1 gglx_id from sys_gglx order by gglx_id desc" )
     Integer getLastId();
+    @Delete("delete from sys_gg where id =#{id}")
+    Integer delGg(int parseInt);
 }

@@ -1,8 +1,8 @@
 package com.litbo.hospital.security.controller;
+
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwBlsj;
-import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.service.FwBlsjService;
 import com.litbo.hospital.security.vo.SelectFwBlsjById;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +40,17 @@ public class FwBlsjController {
     }
 
     @RequestMapping(value = "selectFwBlsjById",method = RequestMethod.GET)
-    public Result selectFwBlsjById(Integer id){
+    public Result selectFwBlsjById(Integer id) {
         try {
             SelectFwBlsjById fwBlsjById = blsjService.selectFwBlsjById(id);
-            if(fwBlsjById!=null)
+            if (fwBlsjById != null)
                 return Result.success(fwBlsjById);
             else
                 return Result.error(CodeMsg.PARAM_ERROR);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
+
 }

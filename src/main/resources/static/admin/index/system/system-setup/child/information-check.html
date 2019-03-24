@@ -34,7 +34,7 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <div class="layui-collapse" style="margin-top:20px;">
-            <form class="layui-form layui-form-pane" action="">
+            <form class="layui-form layui-form-pane" action="" lay-filter="eqForm">
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">基本信息</h2>
                     <div class="layui-colla-content layui-show">
@@ -409,6 +409,7 @@
     formData={};
     renderMod={
         form:{
+
             submit:{
                 filter:"submit",//可以不写
                 before:function(){
@@ -572,7 +573,14 @@
                 }
             ],
             val: {
-                filter:"bmList",
+
+                get:{
+                    url:"/eq/getEqById",
+                    data:{
+                        eqId:$.getUrlParam("eqId")
+                    }
+                },
+                filter:"eqForm",
                 select: [
                     {
                         filter:"dwList",

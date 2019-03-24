@@ -28,6 +28,8 @@ public interface BmService {
     List<SBm> getWxBmList();
     //保存部门
     void saveBm(SBm bm);
+
+    void updateBm(SBm bm);
     //根据父节点查部门
     PageInfo getBmListByPid(int pageNum, int pageSize, String pid);
     //根据oid查部门
@@ -63,6 +65,8 @@ public interface BmService {
     Integer batchImportBms(String fileName, MultipartFile file)throws  Exception;
 
     List<BmsTreeVO> listTreeBms();
+
+
 
     //通过父布门递归删除
 //    void removeBmByPid(String pid);

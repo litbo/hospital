@@ -36,23 +36,23 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">使用范围<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="" lay-verify="required">
-                        <option value="">全员使用</option>
-                        <option value="">多科使用</option>
-                        <option value="">单科使用</option>
+                    <select name="eqSyfw" lay-verify="required">
+                        <option value="全员使用">全员使用</option>
+                        <option value="多科使用">多科使用</option>
+                        <option value="单科使用">单科使用</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-sm" id="selectEq3">选择</button>
+                    <button class="layui-btn layui-btn-sm" id="selectEq1">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="eqName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                 </div>
 
             </div>
@@ -60,14 +60,51 @@
     </div>
     <div class="layui-row">
         <div class="col-xs-12">
-            <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid">保存</button>
+            <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="" lay-filter="submit">保存</button>
         </div>
     </div>
 </form>
 
 
 <script>
+
     var formData = {};
+    renderMod = {
+        form: {
+            date: {
+                elem: "#date"
+            },
+            submit: {
+                filter:"submit",
+                before:function(){
+                    return param = {
+                        1:formData.radio[0].eqId,
+                    }
+                },
+                form:{
+                    url:"/eq/updateEq",
+                    type:"POST",
+                    data:["eqSyfw"],
+                    param:{
+                        1:"eqId",
+                    },
+                    reload:true
+                }//表单提交函数
+
+            }
+        },
+        bind:{
+            selectItem:{
+                elem: "#selectEq1",
+                data: formData,
+                cb: "/eq/listEqbt",
+                db: "/eq/listShowEqs",
+                key: "radio",
+                name: "dtdt"
+            }
+        }
+    };
+  /*  var formData = {};
     renderMod = {
         form: {
             date: {
@@ -115,7 +152,8 @@
                 name: "dtdt"
             }
         }
-    };
+    };*/
+
 </script>
 </body>
 

@@ -47,6 +47,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
             p.setPjsgId(pjsg.getId());
         }
         res = pjsgZjbDao.insertFwPjsgZjbList(fwPjsgZjbs);
+        //添加审核数据到task表
         Task task = new Task();
         task.setCreatTime(new Date());
         task.setWorkName("配件申购审核");
@@ -72,6 +73,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
             List<FwPjsgZjb> pjsgZjbs = pjsgZjbDao.listFwPjsgZjbByPjsgId(id);
             for (FwPjsgZjb pjsgZjb:pjsgZjbs){
                 if(pjkDao.selectFwPjkIsHaveById(pjsgZjb.getPjzdId())!=null){
+                    //判断配件库是否有该配件
                     pjkDao.addFwPjkSl(pjsgZjb.getPjzdId(),pjsgZjb.getPjsgCount());
                 }else {
                     FwPjk pjk = new FwPjk();

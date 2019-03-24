@@ -7,5 +7,6 @@ public class SRight {
 
     private String rightId;
     private String rightName;
+    private String pid;
     private String bz;
 }

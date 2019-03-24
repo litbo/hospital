@@ -129,10 +129,11 @@
                     data: {key: $key},
                     async: false,//同步
                     success: function (res) {
+                        console.log(res);
                         //渲染搜索DOM
-                        res.data.list.dom && searchDom.html(res.data.list.dom);
+                        res.data['dom'] && searchDom.html(res.data['dom']);
                         //渲染检索JS
-                        res.data.list.data && (searchParam = res.data.list.data);
+                        res.data['data'] && (searchParam = res.data['data']);
                     }
                 })
             }

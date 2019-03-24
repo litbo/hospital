@@ -21,6 +21,16 @@ import java.util.Date;
 public class FwFpController {
     @Autowired
     private FwFpService fpService;
+
+    /**
+     * 等待审核
+     * @param pageNum
+     * @param pageSize
+     * @param fpHm 发票号码
+     * @param eqName 设备名称
+     * @param wxDh 维修单号
+     * @return
+     */
     @RequestMapping(value = "listFwFpByWaitExamine",method = RequestMethod.GET)
     public Result listFwFpByWaitExamine(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
@@ -29,6 +39,16 @@ public class FwFpController {
         PageInfo pageInfo = fpService.listFwFpByWaitExamine(pageNum,pageSize, fpHm, eqName, wxDh);
         return Result.success(pageInfo);
     }
+
+    /**
+     * 已审核
+     * @param pageNum
+     * @param pageSize
+     * @param fpHm
+     * @param eqName
+     * @param wxDh
+     * @return
+     */
     @RequestMapping(value = "listFwFpByApplyApproval",method = RequestMethod.GET)
     public Result listFwFpByApplyApproval(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                         @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
@@ -37,6 +57,12 @@ public class FwFpController {
         PageInfo pageInfo = fpService.listFwFpByApplyApproval(pageNum,pageSize, fpHm, eqName, wxDh);
         return Result.success(pageInfo);
     }
+
+    /**
+     * 插入发票
+     * @param fp
+     * @return
+     */
     @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
     public Result insertFwFp( FwFp fp){
         //TODO 已修改
@@ -53,7 +79,13 @@ public class FwFpController {
         }
 
     }
-    //审核发票
+
+
+    /**
+     * 审核发票
+     * @param fp
+     * @return
+     */
     @RequestMapping(value = "updateFwFpStatus",method = RequestMethod.POST)
     public Result updateFwFpStatus(FwFp fp){
 
@@ -70,6 +102,12 @@ public class FwFpController {
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
+
+    /**
+     * 通过id查询发票
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "selectFwFpById",method = RequestMethod.GET)
     public Result selectFwFpById(Integer id){
         SelectFwFpByIdVo fp = fpService.selectFwFpById(id);

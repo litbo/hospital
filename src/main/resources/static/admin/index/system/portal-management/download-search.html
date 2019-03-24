@@ -24,7 +24,7 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
@@ -61,9 +61,25 @@
 
             , done: function (obj) {
                 tableFunc({
-                    "obj":obj,
-                    "addMsg":2,
-                    "addLink":"table1"
+                    "obj": obj,
+                    "toolFunc": [  {
+                        send:{
+                            id:"table",
+                            filter:"table1",
+                            name:"ggxzIds",
+                            event:"del",
+                            url:"/ggxz/delGgxz",
+                            type:"POST",
+                            par:"id",
+                            reload:true,
+                            reTable:true
+                        },
+                        tool:"toolbar",
+                        event:"del"
+
+                    }
+
+                    ]
                 })
             }
 
