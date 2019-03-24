@@ -60,6 +60,7 @@ public interface FwShouLiDao {
     @Select("SELECT\n" +
             "bx.id,\n" +
             "eq.eq_name,\n" +
+            "eq.eq_id,\n" +
             "eq.eq_gg,\n" +
             "eq.eq_xh,\n" +
             "eq.eq_bxjssj,\n" +
