@@ -38,7 +38,7 @@ public class FwHtController {
 
     //维修合同添加
     @PostMapping("/add")
-    public Result addFwHt(FwHt fwHt){
+    public Result addFwHt(@RequestBody FwHt fwHt){
         try {
             int i = fwHtService.addFwHt(fwHt);
             if(i>0){

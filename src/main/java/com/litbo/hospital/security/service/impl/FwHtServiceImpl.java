@@ -3,6 +3,7 @@ package com.litbo.hospital.security.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
+import com.litbo.hospital.common.utils.poi.ChangeFile;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwFk;
 import com.litbo.hospital.security.bean.FwHt;
@@ -11,6 +12,9 @@ import com.litbo.hospital.security.service.FwHtService;
 import com.litbo.hospital.security.vo.HtVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * @author zjc
@@ -24,6 +28,22 @@ public class FwHtServiceImpl implements FwHtService {
 
     @Override
     public int addFwHt(FwHt fwHt) {
+        String path = System.getProperty("user.dir");
+        String filePath = path+"/eq/";
+        String pjUrl =null;
+        java.io.File file = new java.io.File(filePath);
+        if(fwHt.getHtFjurl()!=null){
+            pjUrl = filePath+ UUID.randomUUID().toString()+fwHt.getHtFjurl().substring(fwHt.getHtFjurl().lastIndexOf("."));
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            try {
+                ChangeFile.changeFile(fwHt.getHtFjurl(),pjUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ChangeFile.deleteDir(path+"/tmp/");
         String id = IDFormat.getIdByIDAndTime("fw_ht", "id");
         fwHt.setId(id);
         fwHt.setHtStatus(0);

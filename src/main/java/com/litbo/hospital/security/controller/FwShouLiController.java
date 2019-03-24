@@ -5,6 +5,7 @@ import com.litbo.hospital.security.bean.FwShouli;
 import com.litbo.hospital.security.service.FwShouLiService;
 import com.litbo.hospital.security.vo.FwShouLiIndexVo;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class FwShouLiController {
     public Result shouliIndex(String fwId){
         try {
 
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             //String slrName = "";
             /*过时代码
@@ -59,7 +60,7 @@ public class FwShouLiController {
          *SecurityUtils.getSubject().getSession().getAttribute("userId");
          */
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             List<String> fwIdList = fwShouLiService.getFWIdBySlrId(userId);
             return Result.success(fwIdList);
