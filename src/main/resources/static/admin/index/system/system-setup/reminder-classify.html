@@ -24,7 +24,7 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-
+        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
@@ -87,16 +87,11 @@
                                 }
                             },
                             {
-                                "event":'edit',
-                                'title':'设备信息编辑',
-                                'type':2,
-                                "content":'./child/information-edit.html'
-                            },
-                            {
-                                'event':'check',
-                                'title':'设备信息查看',
-                                'type':2,
-                                'content':'./child/information-check.html'
+                                tool:'toolbar',
+                                event:'add',
+                                title:'分区',
+                                type:2,
+                                content:'./child/reminderAdd.html'
                             }
                         ]
                     })

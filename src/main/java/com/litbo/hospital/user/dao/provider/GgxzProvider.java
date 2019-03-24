@@ -24,8 +24,8 @@ public class GgxzProvider {
                 "\n" +
                 "FROM\n" +
                 "sys_ggxz\n" +
-                "\n" +
-                "WHERE status =1";
+                "\n" ;
+                /*"WHERE status =1"*/
         return sql;
     }
 
