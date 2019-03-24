@@ -33,10 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
 import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
@@ -153,7 +150,7 @@ public class EqServiceImpl implements EqService {
 
         Workbook workbook = null;
         InputStream inputStream = null;
-
+        List<Integer> ids = new ArrayList<>();
         try {
             inputStream = new ByteArrayInputStream(file.getBytes());
             workbook = WorkbookFactory.create(inputStream);
@@ -166,7 +163,7 @@ public class EqServiceImpl implements EqService {
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
 
             List<Map<String, Object>> mapList = listToMap(lists, list);
 
@@ -201,6 +198,7 @@ public class EqServiceImpl implements EqService {
     public Integer importFj(MultipartFile file) {
         Workbook workbook = null;
         InputStream inputStream = null;
+        List<Integer> ids = new ArrayList<>();
 
         try {
             inputStream = new ByteArrayInputStream(file.getBytes());
@@ -214,7 +212,7 @@ public class EqServiceImpl implements EqService {
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
 
             List<Map<String, Object>> mapList = listToMap(lists, list);
             for (Map<String, Object> map : mapList) {

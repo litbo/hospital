@@ -33,58 +33,52 @@
         }
     </style>
 </head>
-
-<body>
-<div class="layui-row">
-    <div class="col-xs-12">
-        <form class="layui-form layui-form-pane">
-            <div class="layui-form-item" style="margin-top:10px;">
-                <button class="layui-btn warm_btn layui-btn-warm layui-btn-fluid">提交</button>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">名称</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" >
-                </div>
-            </div>
-
-            <div class="layui-row">
-                <div class="col-xs-12" >
-                    <div class="tree-container col-xs-12 col-md-3">
-                        <ul id="tree"></ul>
-                    </div>
-                    <div class="col-xs-12 col-md-8 padRight">
-                        <div class="col-xs-12">
-                            <table id="table" lay-filter="table1"></table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+<div class="tree-container col-xs-12 col-md-5">
+    <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
+        <ul id="demo"></ul>
     </div>
 </div>
+<body>
 
-<script type="text/html" id="toolBar">
-    <div class="visible-xs">
-        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
-    </div>
-    <div class="hidden-xs" id="hideXs">
-        <div class="layui-row">
-            <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane maxCont" action="">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="所在科室">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="设备品名">
-                    </div>
-                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<script>
+    var setting = {
+            view: {
+                showLine: false,
+                showIcon: false
+            },
+            data: {
+                key: {
+                    name: "bmName"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "bmId",
+                    pIdKey: "pBmId"
+                }
+            },
+            callback: {
+                "onClick":clickShow
+            }
+        },
+        nodes = {};
+
+    function clickShow(event,treeId,treeNode){
+        console.log(arguments);
+        layui.use("form",function(){
+            var form = layui.form;
+            form.val("shows", treeNode);
+        })
+    }
+
+    $.ajax({
+        url: "/supervise/bmgl/listBmForTree",
+        dataType: "JSON",
+        success: function (data) {
+            console.log(data);
+            nodes = data;
+            $.fn.zTree.beautify().init($("#demo"), setting, nodes);
+        }
+    })
 </script>
 <script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>

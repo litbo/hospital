@@ -1,6 +1,11 @@
 package com.litbo.hospital.common.utils.poi;
 
+import com.alibaba.fastjson.JSONObject;
+import com.litbo.hospital.user.bean.EqInfo;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -8,9 +13,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
 import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
@@ -24,7 +29,7 @@ public class ImportExcelUtil {
     /**
      * 读取Xlsx
      */
-    public static ExcelData readXlsx(File file){
+  /*  public static ExcelData readXlsx(File file){
         ExcelData excelData = new ExcelData();
         Workbook workbook = null;
         InputStream inputStream = null;
@@ -59,7 +64,7 @@ public class ImportExcelUtil {
             return excelData;
         }
 
-    }
+    }*/
 
     /**
      * 判断是否是空行
@@ -111,7 +116,7 @@ public class ImportExcelUtil {
      * @param rowNum
      * @return
      */
-    public static List<List<Object>> readRowsToExcel(Workbook wb, Sheet sheetAt,Row row,int rowNum){
+    public static List<List<Object>> readRowsToExcel(Workbook wb, Sheet sheetAt,Row row,int rowNum , List<Integer> ids){
         short cellNum = row.getLastCellNum();
         Cell cell = null;
         List list = new ArrayList<>();
@@ -122,15 +127,33 @@ public class ImportExcelUtil {
                 continue;
             }
             for( int j = 0 ;j<cellNum;j++){
+                //System.out.println(cellNum);
+                for (Integer id : ids) {
+                    if(j == id) {
+                    String stringCellValue = cell.getStringCellValue();
+                    Calendar calendar = new GregorianCalendar(1900,0,-1);
+                    Date d = calendar.getTime();
+                    Date dd = DateUtils.addDays(d,Integer.parseInt(stringCellValue));
+                    String ddd =  (new SimpleDateFormat("yyyy-MM-dd")).format(dd);
+                    rowList.add(ddd);
+                        continue;
+                    }
+                }
+
                 cell = row.getCell(j);
+
                 if(cell == null||cell.getCellType()==HSSFCell.CELL_TYPE_BLANK){
                     rowList.add("");
                     continue;
                 }
                 cell.setCellType(1);
                 String cellValue = cell.getStringCellValue();
+
+                //System.out.println(cellValue);
                 rowList.add(cellValue);
+
             }
+
             list.add(rowList);
            // System.out.println();
         }
@@ -141,9 +164,16 @@ public class ImportExcelUtil {
     测试
      */
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\");
+        File file = new File("C:\\Users\\Administrator\\Desktop\\设备导入测试数据11.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
+        List<Integer> ids = new ArrayList<>();
+        ids.add(8);
+        ids.add(9);
+        ids.add(12);
+        ids.add(19);
+        ids.add(20);
+
         try {
             inputStream = new FileInputStream(file);
             workbook = WorkbookFactory.create(inputStream);
@@ -156,16 +186,16 @@ public class ImportExcelUtil {
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = readTitlesToExcel(workbook, sheetAt,row,cellNum);
-            List<List<Object>> lists = readRowsToExcel(workbook, sheetAt, row, rowNum);
-            //System.out.println(list);
+            List<List<Object>> lists = readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
+            System.out.println(list);
             for (List<Object> objectList : lists) {
-                //System.out.println(objectList);
-               // System.out.println(JSONObject.toJSON(objectList));
+                System.out.println(objectList);
+               System.out.println(JSONObject.toJSON(objectList));
             }
             System.out.println(listToMap(lists, list));
             List<Map<String, Object>> mapList = listToMap(lists, list);
             for (Map<String, Object> map : mapList) {
-                User user = parseMap2Object(map, User.class);
+                EqInfo user = parseMap2Object(map, EqInfo.class);
 
                 System.out.println(user);
             }
