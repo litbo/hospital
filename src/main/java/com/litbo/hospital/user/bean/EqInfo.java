@@ -128,6 +128,8 @@ public class EqInfo {
     private String eqSyzt;
     //备注
     private String eqBz;
+    //使用范围
+    private String eqSyfw;
 
 
 

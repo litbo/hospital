@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>备案文件存放地点</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        textarea {
+            width: 100%;
+            height:100%;
+            font-size: 20px;
+            border:0;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div class="col-xs-12">
+    <div class="layui-form-item">
+        <textarea name="storageLocation" clos="500" rows="4" warp="virtual" placeholder="备案文件存放地点"></textarea>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="layui-form-item">
+        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">确定
+        </button>
+    </div>
+</div>
+<script type="text/javascript">
+    renderMod = {
+        form: {
+            submit: {
+                before:function(){
+                    return param = {
+                        1:$.getUrlParam("eqId")
+                    }
+                },
+                form: {//或者写作up
+                    url: "/lifeManage/updateSgLccLByEqId4",
+                    contentType:"application/json",
+                    type: "POST",
+                    data: ["storageLocation"],
+                    param: {
+                        1: "ids",
+                    },
+                    success:function (data) {
+                        if(data.code == 0){
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                        }else {
+                            alert(data.msg)
+                        }
+                    }
+                }
+            }
+        }
+    };
+    $('.radio').on("click", function () {
+        var value = $("input[name=mode]:checked").val();
+        if (value != '1') {
+            $("#bfyy").hide();
+            $("#bfyy1").hide();
+        } else {
+            $("#bfyy").show();
+            $("#bfyy1").show();
+        }
+    });
+</script>
+</body>
+</html>

@@ -26,4 +26,7 @@ public interface RightDao {
     Integer addRights(@Param("rightId") String rightId,@Param("roleId") String roleId);
     @Delete("DELETE FROM s_role_right WHERE role_id = #{roleId}")
     void deletaByRoleId(String roleId);
+
+    @Insert("INSERT INTO a_right(right_id,right_name,bz,pid) VALUES(#{rightId},#{rightName},#{bz},#{pid})")
+    Integer addRight(SRight sRight);
 }

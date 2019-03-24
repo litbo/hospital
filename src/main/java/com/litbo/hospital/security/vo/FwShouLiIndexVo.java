@@ -70,11 +70,13 @@ public class FwShouLiIndexVo {
         this.bxfs = bxfs;
         this.jjxStatus = jjxStatus;
         this.bxLx = "科室故障维修";
-        /*if(eqBxjssj.before(new Date())){
-            this.eqBxStatus = "在保";
-        }else{
-            this.eqBxStatus = "过保";
-        }*/
+        if(eqBxjssj != null){
+            if(new Date(eqBxjssj.getTime()).before(new Date())){
+                this.eqBxStatus = "在保";
+            }else{
+                this.eqBxStatus = "过保";
+            }
+        }
         if(jjxStatus == 1){
             this.jjxStatusString =  "低";
         }

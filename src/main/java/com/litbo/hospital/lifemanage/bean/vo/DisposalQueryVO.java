@@ -40,6 +40,7 @@ public class DisposalQueryVO {
     /**
      * 采购日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date eqCgrq;
     /**
      * 单价

@@ -9,6 +9,7 @@ import com.litbo.hospital.security.service.FwPjqlService;
 import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.InsertFwPjqlVo;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.*;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class FwPjqlController {
             return Result.error(CodeMsg.PARAM_ERROR);
         try {
             //TODO 已修改 此处配件请领人从session中获取，并存入Pjql表中
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String qlrId = sEmp.getUserId();
             fwPjqlVo.getFwPjql().setQlrId(qlrId);
             int res = pjqlService.insertFwPjql(fwPjqlVo);
@@ -52,7 +53,7 @@ public class FwPjqlController {
         if(status != null && (status==EnumApplyStatus.APPLY_APPROVAL.getCode() || status==EnumApplyStatus.APPLY_REJECT.getCode())){
             try {
                 //TODO 已修改 此处确认人从session中获取，并存入Pjql表中
-                SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+                LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
                 String qrrId = sEmp.getUserId();
                 int res = pjqlService.updateFwPjqlSqStatus(status,id,qrrId,shyy,taskId);
                 if(res >0){

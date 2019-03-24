@@ -9,6 +9,7 @@ import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwFpService;
 import com.litbo.hospital.security.vo.SelectFwFpByIdVo;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,16 @@ import java.util.Date;
 public class FwFpController {
     @Autowired
     private FwFpService fpService;
+
+    /**
+     * 等待审核
+     * @param pageNum
+     * @param pageSize
+     * @param fpHm 发票号码
+     * @param eqName 设备名称
+     * @param wxDh 维修单号
+     * @return
+     */
     @RequestMapping(value = "listFwFpByWaitExamine",method = RequestMethod.GET)
     public Result listFwFpByWaitExamine(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
@@ -28,6 +39,16 @@ public class FwFpController {
         PageInfo pageInfo = fpService.listFwFpByWaitExamine(pageNum,pageSize, fpHm, eqName, wxDh);
         return Result.success(pageInfo);
     }
+
+    /**
+     * 已审核
+     * @param pageNum
+     * @param pageSize
+     * @param fpHm
+     * @param eqName
+     * @param wxDh
+     * @return
+     */
     @RequestMapping(value = "listFwFpByApplyApproval",method = RequestMethod.GET)
     public Result listFwFpByApplyApproval(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                         @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
@@ -36,10 +57,16 @@ public class FwFpController {
         PageInfo pageInfo = fpService.listFwFpByApplyApproval(pageNum,pageSize, fpHm, eqName, wxDh);
         return Result.success(pageInfo);
     }
+
+    /**
+     * 插入发票
+     * @param fp
+     * @return
+     */
     @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
     public Result insertFwFp( FwFp fp){
         //TODO 已修改
-        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
         String djrId = sEmp.getUserId();
         fp.setFpShrId(djrId);
 //        fp.setFpSdTime(new Date());
@@ -52,14 +79,20 @@ public class FwFpController {
         }
 
     }
-    //审核发票
+
+
+    /**
+     * 审核发票
+     * @param fp
+     * @return
+     */
     @RequestMapping(value = "updateFwFpStatus",method = RequestMethod.POST)
     public Result updateFwFpStatus(FwFp fp){
 
         fp.setFpShTime(new Date());
         fp.setFpStatus(EnumApplyStatus.APPLY_APPROVAL.getCode());
         //TODO 已修改 此处配件请领人从session中获取，并存入fp表中
-        SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+        LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
         String userId = sEmp.getUserId();
         fp.setFpShrId(userId);
         int res  = fpService.updateFwFp(fp);
@@ -69,6 +102,12 @@ public class FwFpController {
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
+
+    /**
+     * 通过id查询发票
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "selectFwFpById",method = RequestMethod.GET)
     public Result selectFwFpById(Integer id){
         SelectFwFpByIdVo fp = fpService.selectFwFpById(id);

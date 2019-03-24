@@ -52,6 +52,11 @@ public class SgLcclVO {
     private Date ratifyTime;
 
     /**
+     * 单位领导意见
+     */
+    private String opinion;
+
+    /**
      * 清理人
      */
     private String clearPerson;
@@ -62,9 +67,9 @@ public class SgLcclVO {
     private Date clearTime;
 
     /**
-     * 单位领导意见
+     * 设备去处
      */
-    private String opinion;
+    private String sbqc;
 
     /**
      * 备案人
@@ -89,4 +94,8 @@ public class SgLcclVO {
      * 报废原因id列表
      */
     private List<String> reasonIds;
+    /**
+     * 审核设备ids
+     */
+    private List<String> ids;
 }

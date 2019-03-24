@@ -147,6 +147,13 @@ public class BmController {
         bmService.saveBm(bm);
         return Result.success();
     }
+
+    @PostMapping("/updateBm")
+    @ResponseBody
+    public Result updateBm(@RequestBody SBm bm){
+        bmService.updateBm(bm);
+        return Result.success();
+    }
     //删除部门通过老id
     @GetMapping("/removeBmByOid")
     @ResponseBody

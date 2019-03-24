@@ -73,4 +73,7 @@ public interface BmDao {
             "   bm.obm_id,bm.p_bm_id,bm.wx_flag,bm.xbm_flag ,bm.user_id,ep.user_xm as fzrName " +
             "   from s_bm bm LEFT JOIN s_emp ep ON (bm.user_id=ep.user_id)")
     List<BmsTreeVO> listTreeBms();
+
+    @Update("update s_bm set bm_name=#{bmName},wx_flag=#{wxFlag},user_id=#{userId}, bm_tel=#{bmTel},bm_addr=#{bmAddr}  where bm_id=#{bmId}")
+    void updateBm(SBm bm);
 }

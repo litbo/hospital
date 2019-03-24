@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class BmServiceImpl implements BmService {
@@ -127,9 +128,18 @@ public class BmServiceImpl implements BmService {
 
     @Override
     public void saveBm(SBm bm) {
-
-
+        bm.setObmId(UUID.randomUUID().toString());
+        List<SBm> new_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的部门信息
+        SBm new_idmax_mb = getMaxBm(new_bmListByPid,bm.getpBmId());
+        String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(bm.getpBmId()));
+        bm.setBmId(new_bm_id);
+        bm.setXbmFlag("0");
         bmDao.saveBm(bm);
+    }
+
+    @Override
+    public void updateBm(SBm bm) {
+        bmDao.updateBm(bm);
     }
 
     @Override
@@ -177,7 +187,7 @@ public class BmServiceImpl implements BmService {
         SBm old_idmax_mb = getMaxBm(old_bmListByPid,bm.getpBmId());    //
         SBm new_idmax_mb = getMaxBm(new_bmListByPid,new_pbm_id);    //
 
-        String new_bm_id = createNewBmId(new_idmax_mb,bmDao.getBmListByPid(new_idmax_mb.getBmId()).size());
+        String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(new_pbm_id));
         bmDao.setBmBeto(obm_id,new_bm_id,new_pbm_id);
 
         if(!old_idmax_mb.getBmId().equals(bm.getBmId())) {   //如果原来平级部门id的最大值不为当前修改的部门的id，酒吧这个部门的id赋给他
@@ -187,7 +197,7 @@ public class BmServiceImpl implements BmService {
 
     }
 
-    private String createNewBmId(SBm idmax_mb,int xj) {
+    private String createNewBmId(SBm idmax_mb,Boolean xj) {
         List<Integer> bmid_cuted = StringCutUtils.stringToIntList(idmax_mb.getBmId());
         System.out.println(bmid_cuted);
         int l=0;
@@ -196,7 +206,7 @@ public class BmServiceImpl implements BmService {
         }
         System.out.println(l);
 
-        if(xj==0) l++;
+        if(xj==true) l++;
 //        18 10 6 0 0 0
 
         List<String> bmidc = new ArrayList<>();
@@ -424,7 +434,7 @@ public class BmServiceImpl implements BmService {
         bm.setpBmId(bmId);
         List<SBm> new_bmListByPid = bmDao.getBmListByPid(bmId); //获取平级下的部门信息
         SBm new_idmax_mb = getMaxBm(new_bmListByPid,bmId);
-        String new_bm_id = createNewBmId(new_idmax_mb,bmDao.getBmListByPid(bmId).size());
+        String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(bmId));
         bm.setBmId(new_bm_id);
     }
 

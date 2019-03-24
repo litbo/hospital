@@ -70,4 +70,12 @@ public class GgxzServiceImpl implements GgxzService {
 
         return ggxzDao.getGgxzById(id);
     }
+
+    @Override
+    public Integer delGgxz(int id) {
+        if( ggxzDao.delGgxz(id)<=0){
+            return 1/0;
+        }
+        return 1;
+    }
 }
