@@ -126,21 +126,27 @@ public class ImportExcelUtil {
             if(row==null){
                 continue;
             }
-            for( int j = 0 ;j<cellNum;j++){
-                //System.out.println(cellNum);
-                for (Integer id : ids) {
-                    if(j == id) {
-                    String stringCellValue = cell.getStringCellValue();
-                    Calendar calendar = new GregorianCalendar(1900,0,-1);
-                    Date d = calendar.getTime();
-                    Date dd = DateUtils.addDays(d,Integer.parseInt(stringCellValue));
-                    String ddd =  (new SimpleDateFormat("yyyy-MM-dd")).format(dd);
-                    rowList.add(ddd);
-                        continue;
-                    }
-                }
+            label1: for( int j = 0 ;j<cellNum;j++){
 
-                cell = row.getCell(j);
+                       cell = row.getCell(j);
+                    for (Integer id : ids) {
+                        if (j == id) {
+                            if (cell != null) {
+                                cell.setCellType(1);
+                                String stringCellValue = cell.getStringCellValue();
+                                Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                Date d = calendar.getTime();
+                                Date dd = DateUtils.addDays(d, Integer.parseInt(stringCellValue));
+                                String ddd = (new SimpleDateFormat("yyyy-MM-dd")).format(dd);
+                                rowList.add(ddd);
+                                continue label1;
+                            }
+                        }
+                    }
+
+
+
+
 
                 if(cell == null||cell.getCellType()==HSSFCell.CELL_TYPE_BLANK){
                     rowList.add("");
@@ -155,7 +161,6 @@ public class ImportExcelUtil {
             }
 
             list.add(rowList);
-           // System.out.println();
         }
         return list;
     }
@@ -164,15 +169,15 @@ public class ImportExcelUtil {
     测试
      */
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\Administrator\\Desktop\\设备导入测试数据11.xlsx");
+        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\设备导入\\设备导入测试数据11.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
         List<Integer> ids = new ArrayList<>();
-        ids.add(8);
-        ids.add(9);
-        ids.add(12);
-        ids.add(19);
-        ids.add(20);
+        ids.add(6);
+        ids.add(7);
+        ids.add(10);
+        ids.add(17);
+        ids.add(18);
 
         try {
             inputStream = new FileInputStream(file);
