@@ -3265,21 +3265,21 @@
                 "url": "./system/data-dictionary/basic.html",
                 "icon": "book",
                 "id": "7000",
-                "shiro": "sggl"
+                "shiro": "a"
               },
               {
                 "title": "专业字典",
                 "url": "./system/data-dictionary/major.html",
                 "icon": "torah",
                 "id": "7001",
-                "shiro": "sggl666"
+                "shiro": "a"
               },
               {
                 "title": "状态字典",
                 "url": "./system/data-dictionary/state.html",
                 "icon": "torah",
                 "id": "7002",
-                "shiro": "zeng"
+                "shiro": "a"
               }
             ]
           }
