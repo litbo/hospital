@@ -17,11 +17,10 @@ public class JhZdProvider {
                         "jh.jh_pxxz,\n" +
                         "jh.jh_kstime,\n" +
                         "jh.jh_jstime,\n" +
-                        "emp.user_xm,\n" +
+                        "jh.user_id as userXm,\n" +
                         "jh.id,\n" +
                         "jh.user_id");
-                FROM("jh_zd as jh,s_emp as emp");
-                WHERE("jh.user_id = emp.user_id");
+                FROM("jh_zd as jh");
                 if(createdate != null){
                     WHERE("jh_kstime>#{createdate}");
                 }
@@ -42,11 +41,10 @@ public class JhZdProvider {
                         "jh.jh_pxxz,\n" +
                         "jh.jh_kstime,\n" +
                         "jh.jh_jstime,\n" +
-                        "emp.user_xm,\n" +
+                        "jh.user_id as userXm,\n" +
                         "jh.id,\n" +
                         "jh.user_id");
-                FROM("jh_zd as jh,s_emp as emp");
-                WHERE("jh.user_id = emp.user_id");
+                FROM("jh_zd as jh");
                 WHERE("jh.jh_kstime > (select GETDATE())");
                 if(createdate != null){
                     WHERE("jh_kstime>#{createdate}");
@@ -68,11 +66,10 @@ public class JhZdProvider {
                         "jh.jh_pxxz,\n" +
                         "jh.jh_kstime,\n" +
                         "jh.jh_jstime,\n" +
-                        "emp.user_xm,\n" +
+                        "jh.user_id as userXm,\n" +
                         "jh.id,\n" +
                         "jh.user_id");
-                FROM("jh_zd as jh,s_emp as emp");
-                WHERE("jh.user_id = emp.user_id");
+                FROM("jh_zd as jh");
                 WHERE("jh.jh_kstime < (select GETDATE())");
                 if(createdate != null){
                     WHERE("jh_kstime>#{createdate}");

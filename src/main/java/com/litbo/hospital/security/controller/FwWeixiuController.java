@@ -10,6 +10,7 @@ import com.litbo.hospital.security.vo.FwWxqrIndexVo;
 import com.litbo.hospital.security.vo.FwWxqsShIndexVo;
 import com.litbo.hospital.security.vo.WxqrIndex;
 import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class FwWeixiuController {
     @GetMapping("/wxqsShIndexVo")
     public Result wxqsShIndexVo(String id){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             System.out.println(id);
             FwWxqsShIndexVo fwWxqsShIndexVo = fwWeixiuService.wxqsShIndexVo(userId, id);
@@ -53,7 +54,7 @@ public class FwWeixiuController {
     @GetMapping("/wxqsIndexVo")
     public Result wxqsIndexVo(String id){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             System.out.println(id);
             FwWxqrIndexVo fwWxqrIndexVo = fwWeixiuService.wxqrIndexVo(userId, id);
@@ -67,7 +68,7 @@ public class FwWeixiuController {
     @GetMapping("/jumpPj")
     public Result jumpPj(String fwId){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             fwWeixiuService.jumpPj(userId,fwId);
             return Result.success();
@@ -81,7 +82,7 @@ public class FwWeixiuController {
     @GetMapping("/jumpYwwx")
     public Result jumpYwwx(FwYwwx fwYwwx){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             int i = fwWeixiuService.jumpYwwx(fwYwwx);
             if(i>0){
@@ -99,7 +100,7 @@ public class FwWeixiuController {
     @PostMapping("/jumpWx")
     public Result jumpWx(FwWeixiu fwWeixiu){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             fwWeixiuService.addFwWeixiu(fwWeixiu,userId);
             return Result.success();
@@ -139,7 +140,7 @@ public class FwWeixiuController {
     @GetMapping("/weixiuIndex")
     public Result weixiuIndex(String fwId){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             /*过时
             WeixiuIndexVo weixiuIndexVo = fwWeixiuService.weixiuIndex(fwId);*/
@@ -159,7 +160,7 @@ public class FwWeixiuController {
     @PostMapping("/addFwWeixiu")
     public Result addFwWeixiu(FwWeixiu fwWeixiu){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             fwWeixiuService.addFwWeixiu(fwWeixiu,userId);
             return  Result.success();
@@ -178,7 +179,7 @@ public class FwWeixiuController {
             @PostMapping("/addFwWxqs")
     public Result addFwWxqs(FwWxqs fwWxqs){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             fwWeixiuService.addFwWxqs(fwWxqs,userId);
             return  Result.success();
@@ -191,7 +192,7 @@ public class FwWeixiuController {
     @PostMapping("/updateWxsh")
     public Result updateWxsh(String fwId){
         try {
-            SEmp sEmp = (SEmp)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             fwWeixiuService.updateFwWxqs(userId,fwId);
             return Result.success();
