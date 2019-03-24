@@ -136,7 +136,7 @@ public class GangweiServiceImpl implements GangweiService {
 
     @Override
     public void gwzzSubmit(GWSubmitVO gwSubmitVO) {
-        if(gangweiDao.getGwsByGwId(gwSubmitVO.getGwId().toString()).getGwZzZt()!=null){
+        if(gangweiDao.getGwsByGwId(gwSubmitVO.getGwId().toString()).getGwZzZt()!=-1){
             reSubmit(gwSubmitVO);
             return;
         }

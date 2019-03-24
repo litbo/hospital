@@ -147,9 +147,6 @@ public class GangweiController {
 
     @PostMapping("/submitShMsg")
     public Result submitShMsg(@RequestBody ShMsgVO shMsgVO){
-        if(shMsgVO.getNextShrId().equals("请选择")){
-            shMsgVO.setNextShrId(null);
-        }
         gangweiService.submitShMsg(shMsgVO);
         return Result.success();
     }

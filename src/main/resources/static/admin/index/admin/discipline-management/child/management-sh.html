@@ -55,21 +55,21 @@
                     <input type="text" name="userId1" value="刘松峰" autocomplete="off" class="layui-input" lay-verify="required">
                 </div>
             </div>
+
             <div class="layui-form-item">
-                <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="userId2" id="" lay-verify="required">
-                        <option></option>
-                        <option value="1615925037">高贺稳</option>
-                        <option value="1615925008">李佳龙</option>
-                        <option>杨凯</option>
-                        <option>杨永鹏</option>
-                        <option>姚美丽</option>
-                        <option>于金科</option>
-                        <option>胡威</option>
-                    </select>
+                    <input type="text" name="userName2"  autocomplete="off" class="layui-input" lay-verify="required">
                 </div>
             </div>
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<select name="userId2" id="" lay-verify="required" lay-filter="shr">-->
+                        <!--<option></option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
     <div class="layui-row">
@@ -149,7 +149,14 @@
                     parse:"userSelectVOS",
                     tableId:"table",
                     data:{gid:$.getUrlParam('groupId')}
-                }
+                },select: [
+                    {
+                        filter: "shr",
+                        ids: "userId",
+                        text: "userXm",
+                        url: "/kwgl/empgl/listBmPartnerByUserId"
+                    }
+                ]
             },
             submit: {
                     before: function () {
