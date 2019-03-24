@@ -47,6 +47,7 @@ if (hour < 10) {
 } else {
     time0 = time
 }
+window.reNum = 0;
 /**
  * @todo 日期格式化
  * @tips 以下日期转换方式将在未来被删除，推荐使用layui日期转换格式，详见文档
