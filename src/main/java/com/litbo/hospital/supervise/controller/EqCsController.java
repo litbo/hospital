@@ -1,6 +1,7 @@
 package com.litbo.hospital.supervise.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.service.EqCsService;
@@ -10,6 +11,9 @@ import com.litbo.hospital.user.bean.EqCs;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/supervise/csgl")
@@ -35,13 +39,29 @@ public class EqCsController {
         return Result.success();
     }
 
-    @GetMapping("/listEqcsByX")
+    @RequestMapping("/listEqcsByX")
     @ResponseBody
     public Result listEqcsByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                               EqCsSelectVO selectVo){
         PageInfo date = eqCsService.listEqcsByX(pageNum,pageSize,selectVo);
         return Result.success(date);
+    }
+    @RequestMapping(value = "listEqcsByXSe",method = RequestMethod.POST)
+    public Result listEqcsByXSe(){
+        Map map =new HashMap();
+        map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+        Map m = new HashMap();
+        m.put("url","/supervise/csgl/listEqcsByX");
+        m.put("type","reload");
+        String[] data = {"sbcsName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
     }
     //供应商
     @PostMapping("/listEqcsByX1")
@@ -51,6 +71,22 @@ public class EqCsController {
         PageInfo date = eqCsService.listEqcsByX1(pageNum,pageSize,selectVo);
         return Result.success(date);
     }
+    @RequestMapping(value = "listEqcsByX1Se",method = RequestMethod.POST)
+    public Result listEqcsByX1Se(){
+        Map map =new HashMap();
+        map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+        Map m = new HashMap();
+        m.put("url","/supervise/csgl/listEqcsByX1");
+        m.put("type","reload");
+        String[] data = {"sbcsName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+    }
+
     //生产商
     @PostMapping("/listEqcsByX2")
     public Result listEqcsByX2(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -58,6 +94,21 @@ public class EqCsController {
                               EqCsSelectVO selectVo){
         PageInfo date = eqCsService.listEqcsByX2(pageNum,pageSize,selectVo);
         return Result.success(date);
+    }
+    @RequestMapping(value = "listEqcsByX2Se",method = RequestMethod.POST)
+    public Result listEqcsByX2Se(){
+        Map map =new HashMap();
+        map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+        Map m = new HashMap();
+        m.put("url","/supervise/csgl/listEqcsByX2");
+        m.put("type","reload");
+        String[] data = {"sbcsName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
     }
     //维修商
     @PostMapping("/listEqcsByX3")
