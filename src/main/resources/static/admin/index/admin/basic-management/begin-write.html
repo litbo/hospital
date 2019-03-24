@@ -89,9 +89,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <select name="shrId">
-                        <option value="1615925037">Gowen</option>
-                        <option value="1615925008">李佳龙</option>
+                    <select name="shrId" lay-filter="shr">
+                        <option></option>
+
                     </select>
                 </div>
             </div>
@@ -194,6 +194,11 @@
                         ids:"gwId",
                         text:"gwName",
                         url:"/supervise/gwgl/listMZZGws"
+                    },{
+                        filter: "shr",
+                        ids: "userId",
+                        text: "userXm",
+                        url: "/kwgl/empgl/listBmPartnerByUserId"
                     }
                 ]
             },
@@ -203,7 +208,16 @@
                     url:"/supervise/gwgl/gwzzSubmit",
                     type:"POST",
                     contentType:"application/json",
-                    data:["gwId","gwName","gwZz","userId","shrId","createTime"]
+                    data:["gwId","gwName","gwZz","userId","shrId","createTime"],
+                    done:function(res){
+                        if(res.code === 0){
+                            layer.alert("提交成功",function () {
+                                location.reload();
+                            })
+                        }else{
+                            layer.alert("提交失败")
+                        }
+                    }
                 }//表单提交函数
                 ,
                 done:function(res){

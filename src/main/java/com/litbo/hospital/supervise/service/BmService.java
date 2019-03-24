@@ -39,7 +39,7 @@ public interface BmService {
     //模糊查詢
     PageInfo getBmListByX(int pageNum, int pageSize, BmSelectVO selectVo);
     //通过部门id刪除
-    void removeBmByOid(String oid);
+    void removeBmByBmId(String oid);
     //判断部门是否为子节点
     boolean isZJD(String oid);
     //判断部门们是否为子节点
