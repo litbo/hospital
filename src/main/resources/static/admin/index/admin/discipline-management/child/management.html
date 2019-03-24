@@ -69,15 +69,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="userId2" id="" lay-verify="required">
+                    <select name="userId2" id="" lay-verify="required" lay-filter="shr">
                         <option></option>
-                        <option>盖玉斋</option>
-                        <option>刘松峰</option>
-                        <option>杨凯</option>
-                        <option>杨永鹏</option>
-                        <option>姚美丽</option>
-                        <option>于金科</option>
-                        <option>胡威</option>
                     </select>
                 </div>
             </div>
@@ -128,7 +121,15 @@
                     tableId:"table",
                     save:formData,
                     data:{gid:$.getUrlParam('groupId')}
-                }
+                },
+                select: [
+                    {
+                        filter: "shr",
+                        ids: "userId",
+                        text: "userXm",
+                        url: "/kwgl/empgl/listBmPartnerByUserId"
+                    }
+                ]
             },
             submit: {
                     before: function () {

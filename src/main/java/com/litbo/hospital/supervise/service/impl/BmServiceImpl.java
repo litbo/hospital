@@ -150,8 +150,8 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
-    public void removeBmByOid(String oid) {
-        bmDao.removeBmByOid(oid);
+    public void removeBmByBmId(String oid) {
+        bmDao.removeBmByBmId(oid);
     }
 
     @Override

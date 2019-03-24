@@ -30,15 +30,8 @@
             <a class="layui-btn layui-btn-warm" lay-event="setThisData">选定数据</a>
         </div>
         <div class="DiyDom" id="diyDOM">
-            <!--<div class="layui-inline mar10-0">
-                <input class="layui-input" name="search" placeholder="搜索....">
-            </div>
-            <div class="layui-input-inline mar10-0" align="center">
-                <button class="layui-btn" data-type="reload">搜索</button>
-            </div>-->
+
         </div>
-
-
     </form>
 </script>
 <script id="timeFormat" type="text/html">
@@ -61,8 +54,9 @@
         $name = $.getUrlParam("vg") || "",
         $value = $.getUrlParam("v") || $key,
         colsData = [],//表头判断
-        searchDom = $("#diyDOM"),//搜索数据DOM
-        searchParam = false//搜索参数,false不使用
+        searchDom = $("#toolBar"),//搜索数据DOM
+        searchParam = false,//搜索参数,false不使用
+        isTruth = false
     ;
     //判断非必填参数是否有效
     if ($url_search === "undefined") {
@@ -121,6 +115,7 @@
             } else {
                 colsData.push(datt);
             }
+            isTruth = true;
             //判断是否有se参数（是否加载搜索数据）
             if ($url_search !== "") {
                 subUp({
@@ -130,9 +125,18 @@
                     async: false,//同步
                     success: function (res) {
                         //渲染搜索DOM
-                        res.data.list.dom && searchDom.html(res.data.list.dom);
+                        res.data['dom'] && searchDom.html("<form class=\"layui-form layui-form-pane maxCont\" id=\"search\" action=\"\">\n" +
+                            "        <div class=\"layui-inline xs-100 mar10-0 pad0-10\" style=\"margin-right:10px;\">\n" +
+                            "            <a class=\"layui-btn layui-btn-warm\" lay-event=\"setThisData\">选定数据</a>\n" +
+                            "        </div>\n" +
+                            "        <div class=\"DiyDom\" id=\"diyDOM\">\n" +
+                            res.data['dom']+
+                            "\n" +
+                            "        </div>\n" +
+                            "    </form>");
                         //渲染检索JS
-                        res.data.list.data && (searchParam = res.data.list.data);
+                        res.data['data'] && (searchParam = res.data['data']);
+                        //console.log(searchParam);
                     }
                 })
             }
@@ -194,6 +198,13 @@
                     reSet: searchParam
                 }
             };
+        }
+    });
+
+    $(function(){
+        if(!isTruth && window.reNum < 2){
+            location.reload();
+            window.reNum ++;
         }
     })
 

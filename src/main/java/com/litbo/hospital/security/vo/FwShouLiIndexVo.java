@@ -22,6 +22,8 @@ public class FwShouLiIndexVo {
 
     private String eqName; //报修设备名称
 
+    private String eqId;
+
     private String eqGg; //报修设备规格
 
     private String eqXh; //报修设备型号
@@ -56,9 +58,10 @@ public class FwShouLiIndexVo {
 
     private String slrName;
 
-    public FwShouLiIndexVo(String id, String eqName, String eqGg, String eqXh, java.sql.Date eqBxjssj, String bmName, String bxksdh, Timestamp bxTime, String userXm, String bxrdh, String bxfs, Integer jjxStatus) {
+    public FwShouLiIndexVo(String id, String eqName,String eqId, String eqGg, String eqXh, java.sql.Date eqBxjssj, String bmName, String bxksdh, Timestamp bxTime, String userXm, String bxrdh, String bxfs, Integer jjxStatus) {
         this.id = id;
         this.eqName = eqName;
+        this.eqId = eqId;
         this.eqGg = eqGg;
         this.eqXh = eqXh;
         this.eqBxjssj = eqBxjssj;

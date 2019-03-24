@@ -168,6 +168,17 @@
 
 <script>
     var setting = {
+        edit:{
+            enable: true,
+            drag:{
+                isMove:true,
+                prev:true,
+                autoOpenTime: 0
+            },
+            editNameSelectAll: true,
+            showRemoveBtn: true,
+            removeTitle: "删除节点",
+        },
         view: {
             showLine: false,
             showIcon: false,
@@ -227,17 +238,17 @@
 
 
     function beforeRemove(e,treeId,treeNode){
+        var bool = true;
         return confirm("你确定要删除吗？");
     }
 
     function onRemove(e,treeId,treeNode){
-        bmId = treeNode["bmId"];
-        console.log("bmId",bmId)
+        bmId ="bmId="+ treeNode["bmId"];
+        console.log("bmId",bmId);
         $.ajax({
-            url: "/supervise/bmgl/updateBm",
+            url: "/supervise/bmgl/removeBmByBmId",
             type: "GET",
             data: bmId,
-            contentType: "application/json",
             success: function (res) {
                 if (res.code === 0) {
                     layer.msg("保存成功！");

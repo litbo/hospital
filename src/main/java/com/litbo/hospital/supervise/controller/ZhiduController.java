@@ -116,9 +116,6 @@ public class ZhiduController {
     @PostMapping("/submitShMsg")
     public Result submitShMsg(@RequestBody ShMsgVO shMsgVO){
 
-        if(shMsgVO.getNextShrId().equals("请选择")){
-            shMsgVO.setNextShrId(null);
-        }
         zhiduService.submitShMsg(shMsgVO);
         return Result.success();
     }

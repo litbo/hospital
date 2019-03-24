@@ -136,11 +136,12 @@ public class EmpController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             @RequestParam(required = false) String key, HttpServletRequest request) {
 
-        SEmp emp = (SEmp) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         String userId = emp.getUserId();
 //        userId=(String) request.getSession().getAttribute("username");
         List<SEmp> sEmps = empService.listBmPartnerByUserId(userId, pageNum, pageSize);
-        return Result.success(new PageInfo<>(sEmps));
+//        return Result.success(new PageInfo<>(sEmps));
+        return Result.success(sEmps);
     }
 
 
