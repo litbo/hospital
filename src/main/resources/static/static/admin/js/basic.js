@@ -671,6 +671,7 @@ function getFormValue(name,res,force){
     for(var c=0;c<name.length;c++){
         var inputValue = $("input[type=text][name=" + name[c] + "]").val()
             ,selectValue = $("select[name=" + name[c] + "]").val()
+            ,hideValue = $("input[type=hidden][name=" + name[c] + "]").val()
             ,textareaValue = $("textarea[name=" + name[c] + "]").val()
             ,radioValue = $("input[type=radio][name=" + name[c] + "]:checked").val()
             ,checkBoxValue = $("input[type=checkbox][name=" + name[c] + "]:checked").val();
@@ -681,6 +682,8 @@ function getFormValue(name,res,force){
             data[name[c]] = inputValue;
         } else if (selectValue) {
             data[name[c]] = selectValue;
+        } else if (hideValue) {
+            data[name[c]] = hideValue;
         } else if (textareaValue) {
             data[name[c]] = textareaValue;
         } else if (radioValue) {
@@ -692,6 +695,7 @@ function getFormValue(name,res,force){
         }else{
             force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
         }
+        //console.log(data);
     }
     return data;
 }

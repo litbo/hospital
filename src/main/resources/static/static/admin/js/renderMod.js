@@ -137,7 +137,7 @@ $(function () {
                 } else{
                     putMsg({
                         error:"renderMod.js遇到一个无法处理的错误：",
-                        log:"renderMod.formAction.val参数传递错误(LINE:116),请参考表单渲染文档！"
+                        log:"renderMod.formAction.val参数传递错误(LINE:61),请参考表单渲染文档！"
                     });
                 }
 

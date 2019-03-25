@@ -24,9 +24,7 @@
         }
 
         .tree-container {
-            height: 610px;
-            margin-left: 20px;
-            margin-top: 10px;
+            height: 400px;
             display: inline-block;
             padding: 10px;
             border: 1px solid #ddd;
@@ -41,23 +39,35 @@
 
     </style>
 </head>
-<div class="tree-container col-xs-12 col-md-5">
-    <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
-        <ul id="demo"></ul>
-    </div>
-</div>
-<div class="tree-container col-xs-12 col-md-5">
+<div class="col-xs-12" style="margin-top:20px">
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="layui-form-item">
             <label class="layui-form-label">用户组</label>
             <div class="layui-input-block">
-                <select name="nextShrId" lay-filter="shr">
+                <select name="roleId" lay-filter="yhz">
 
                 </select>
             </div>
         </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">菜单分配</label>
+            <div class="layui-input-block">
+                <div class="tree-container col-xs-12">
+                    <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
+                        <ul id="demo"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-warm layui-btn-fluid" style="margin-top:20px;" lay-filter="submit" id="saveRole">保存</button>
+        </div>
     </form>
 </div>
+
+
 <body>
 
 <script>
@@ -106,10 +116,10 @@
                             var treeObj = $.fn.zTree.getZTreeObj("demo");
                             //treeNode.halfCheck = false;
                             var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null);//获取指定父节点
-                            console.log(parentZNode);
+                            //console.log(parentZNode);
                             treeObj.removeChildNodes(parentZNode);
                             newNode = treeObj.addNodes(parentZNode, res.data, false);
-                            console.log(newNode);
+                            //console.log(newNode);
                         }
                     }
                 }
@@ -130,11 +140,33 @@
 
         }
     });
+    $("#saveRole").on("click",function(){
+        var treeObj = $.fn.zTree.getZTreeObj("demo");
+        var nodes = treeObj.getCheckedNodes(true).data =[];
+        console.log(nodes);
+        for(var i=0;i<nodes.length;i++){
+            data.push(nodes[i]["id"]);
+        }
+        subUp({
+            url:"/right/setRights",
+            data:["roleId"],
+            add:{
+                rightIds:data
+            }
+        });
+       return false;
+    });
 
     renderMod = {
         form:{
             val:{
-
+                filter:"forms",
+                select:{
+                    filter:"yhz",
+                    url:"/role/listRoleNoLimit",
+                    ids:"roleId",
+                    text:"roleName"
+                }
             }
         }
     }
