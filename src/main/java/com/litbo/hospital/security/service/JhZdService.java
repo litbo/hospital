@@ -3,6 +3,8 @@ package com.litbo.hospital.security.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.JhZd;
+import com.litbo.hospital.security.vo.JhKhVo;
+import com.litbo.hospital.security.vo.JhRyCjLr;
 import com.litbo.hospital.supervise.vo.JhEmpVo;
 
 /**
@@ -11,6 +13,12 @@ import com.litbo.hospital.supervise.vo.JhEmpVo;
  * 计划制定service
  */
 public interface JhZdService {
+
+    //成绩录入
+    public void updateJhCj(JhRyCjLr jhRyCjLr);
+
+    //计划考核
+    public JhKhVo jhkhIndex(Integer jhId);
 
     //人员列表
     public PageInfo<JhEmpVo> jhryList(Integer pageNum, Integer pageSize, String userId, String userXm);
