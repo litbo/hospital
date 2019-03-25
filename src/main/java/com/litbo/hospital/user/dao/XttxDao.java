@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface XttxDao {
 
-    @Insert("insert into eq_txlb(lbmc,txjs,txxx) values(lbmc,txjs,txxx)")
+    @Insert("insert into eq_txlb(lbmc,roleId,txxx) values(#{lbmc},#{roleId},#{txxx})")
     Integer addTxlb(SysTxlb sysTxlb);
 
     @Insert("insert into eq_txcl(eq_txlb,eq_txts,eq_txcs,eq_jgsj) values(eqTxlb,eqTxts,eqTxcs,eqJgsj)")

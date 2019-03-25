@@ -7,7 +7,8 @@ public class SysTxlb {
 
     private Integer id;
     private String  lbmc;
-    private String  txjs;
+    private String  roleId;
+    private String  roleName;
     private String  txxx;
 
  }
