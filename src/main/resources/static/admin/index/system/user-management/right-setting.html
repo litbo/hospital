@@ -142,16 +142,19 @@
     });
     $("#saveRole").on("click",function(){
         var treeObj = $.fn.zTree.getZTreeObj("demo");
-        var nodes = treeObj.getCheckedNodes(true).data =[];
-        console.log(nodes);
+        var nodes = treeObj.getCheckedNodes(true),datas =[];
+        //console.log(nodes);
         for(var i=0;i<nodes.length;i++){
-            data.push(nodes[i]["id"]);
+            datas.push(nodes[i]["id"]);
         }
+        //console.log(datas);
         subUp({
             url:"/right/setRights",
             data:["roleId"],
+            type:"POST",
+            contentType:"application/json",
             add:{
-                rightIds:data
+                "rightIds":datas
             }
         });
        return false;
