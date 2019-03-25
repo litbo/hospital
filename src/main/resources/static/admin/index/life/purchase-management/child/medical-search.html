@@ -49,7 +49,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">考察地点内容</label>
                     <div class="layui-input-block">
-                        <textarea name="dxzbDdnr" class="layui-textarea"></textarea>
+                        <textarea name="dxzbDdnr" class="layui-textarea" placeholder="请输入内容"></textarea>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">结论意见</label>
                     <div class="layui-input-block">
-                        <textarea name="dxzbYj" class="layui-textarea"></textarea>
+                        <textarea name="dxzbYj" class="layui-textarea" placeholder="请输入内容"></textarea>
                     </div>
                 </div>
             </div>
@@ -82,9 +82,7 @@
                     url: "/lifeManage/selectSgDxyxzbkc",
                     type: "POST",
                     data: {sgInfoId: $.getUrlParam("sgId")}
-                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
-                    //有add时必需时data为表单name数组，否则请直接使用data赋值
-                }//get内参数需参考《内容传输与提交》文档
+                }
             },
             date:{
                 elem:'#date',

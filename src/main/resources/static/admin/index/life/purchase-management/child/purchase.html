@@ -339,21 +339,18 @@
                         1: "tgBmId",
                         2: "sgCkcssbs",
                         3: "sgGnpzs"
+                    },
+                    success:function(res){
+                        console.log("提交成功！",res);
                     }
-                }
-            }
-        },
-        btn:{
-            elem:'#upData',
-            func:function(){
-                layui.use('layer',function(){
-                    var layer = layui.layer;
-                    layer.open({
+                },
+                func:function(){
+                    layOpen({
                         type:2,
-                        content:'zr-evaluation.html?sgId='+$.getUrlParam("sgInfoId"),
+                        content:'./zr-evaluation.html?sgId='+$.getUrlParam("sgInfoId"),
                         area:['100%','100%']
                     })
-                })
+                }
             }
         }
     };
