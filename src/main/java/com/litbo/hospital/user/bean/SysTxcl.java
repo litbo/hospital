@@ -7,7 +7,7 @@ import lombok.Data;
 public class SysTxcl {
 
     private Integer id;
-    private Integer eqTxlb;
+    private Integer lbmc;
     private Integer eqTxts;
     private Integer eqTxcs;
     private Integer eqJgsj;
