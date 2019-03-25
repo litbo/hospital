@@ -102,9 +102,9 @@
                 <label class="layui-form-label">支付方式</label>
                 <div class="layui-input-block">
                     <select name="htZffs">
-                        <option>一次</option>
-                        <option>111</option>
-                        <option>222</option>
+                        <option value="1">一次</option>
+                        <option value="2">二次</option>
+                        <option value="3">三次</option>
                     </select>
                 </div>
             </div>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">设备照片</label>
+                <label class="layui-form-label">合同附件</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp">选择文件</button>
                 </div>
@@ -285,6 +285,7 @@
                     param: {
                         1: "htFjurl"
                     },
+                    reload:"parent",
                     success:function(res){
 
                     },

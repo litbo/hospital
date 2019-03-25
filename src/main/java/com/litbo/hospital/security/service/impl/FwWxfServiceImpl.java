@@ -56,9 +56,9 @@ public class FwWxfServiceImpl implements FwWxfService {
     }
 
     @Override
-    public PageInfo<WxfListVo> WxfList(String userId,Integer pageNum,Integer pageSize) {
+    public PageInfo<WxfListVo> WxfList(String userId,Integer pageNum,Integer pageSize, String fwId, String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<WxfListVo> pageInfo = new PageInfo<>(fwWxfDao.WxfList(userId));
+        PageInfo<WxfListVo> pageInfo = new PageInfo<>(fwWxfDao.WxfList(userId,fwId,eqName));
         return pageInfo;
     }
 
