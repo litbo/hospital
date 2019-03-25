@@ -1,7 +1,9 @@
 package com.litbo.hospital.user.dao;
 
 
+import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqPm;
+import com.litbo.hospital.user.vo.RightTreeVo;
 import com.litbo.hospital.user.vo.TreeVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -16,4 +18,7 @@ public interface TreeDao {
 
     @Select("select right_id as id , bz as name from a_right where pid=#{pid}")
     List<TreeVo> listRightByPid(String pid);
+
+    @Select("select right_id ,bz as rightName ,pid from a_right")
+    List<RightTreeVo> listRight();
 }

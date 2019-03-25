@@ -39,5 +39,11 @@ public class RightController {
         return Result.success();
     }
 
-    //根据角色Id查权限
+    //显示角色已有id
+    @RequestMapping("listRightByRId")
+    public Result listRightByRId(String roleId){
+
+       return Result.success(rightService.listRightByRId(roleId));
+
+    }
 }

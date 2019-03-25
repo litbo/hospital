@@ -40,34 +40,32 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">提醒类别<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <select lay-verify="required">
-                            <option>计量提醒</option>
-                            <option>aaa</option>
-                            <option>bbb</option>
+                        <select lay-verify="required" lay-filter="txlbList" name="lbmc">
+
                         </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">提前提醒天数<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" class="layui-input" lay-verify="required">
+                        <input type="text" name="eqTxts" autocomplete="off" class="layui-input" lay-verify="required">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">提醒次数<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" class="layui-input" lay-verify="required">
+                        <input type="text" name="eqTxcs" autocomplete="off" class="layui-input" lay-verify="required">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">间隔时间(时)<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" class="layui-input" lay-verify="required">
+                        <input type="text" name="eqJgsj" autocomplete="off" class="layui-input" lay-verify="required">
                     </div>
                 </div>
             </div>
             <div class="col-xs-12">
-                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="">保存</button>
+                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-filter="submit" lay-submit="">保存</button>
             </div>
         </div>
     </form>
@@ -77,43 +75,52 @@
 
 
 <script>
-    renderMod = {
+    formData={};
+    renderMod={
         form:{
             submit:{
-                before: function (param) {
-                    var cs = getTableValue("table"), gn = getTableValue("table1", [true]);
-                    console.log(formData);
-                    if (doJudg({
-                        0: [cs, gn]
-                    })) {
-                        putMsg({
-                            alert: "请选择数据后提交！",
-                            log: [formData, cs, gn]
-                        });
-                        return false;
-                    }
-                    var bm = "";
-                    if (formData.radio){
-                        bm = formData.radio[0]["tgBmId"]
-                    }
-                    return param = {
-                        1: bm,
-                        2: cs,
-                        3: gn
-                    };
-                },
-                form: {
-                    url: "",
-                    type: "POST",
-                    data: [],
-                    contentType: "application/json",
-                    param: {
+                filter:"submit",//可以不写
+                form:{
+                    url:"/xttx/addTxcl",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["lbmc","eqTxts","eqTxcs","eqJgsj"],
+                    reload:true
+                    /*      success:function(){
+                              alert("xx");
+                          }*/
+                }//表单提交函数
+                /*           before:function(data){
+                               for(var i=0;i<data.field.length;i++){
+                                   if(data.field[i] === ""){
+                                       layer.alert("请确认您填写的信息！");
+                               return false;
+                                   }
+                               }
+                           },*///表单提交前执行函数
+                /*    func:function(data){
+                        n++;
+                        layer.alert("您已提交 " + n + " 次！");
+                    }*///表单提交后执行函数（不论成功与否）
+            },
 
+            val: {
+                filter:"111",
+                select: [
+                    {
+                        filter:"txlbList",
+                        ids: "id",
+                        text: "lbmc",
+                        url: "/xttx/listTxlbNoLimit"
                     }
-                }
+                ]
             }
         }
+
+
+
     }
+
 </script>
 </body>
 </html>

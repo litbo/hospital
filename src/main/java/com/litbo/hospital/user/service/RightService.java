@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.service;
 
 import com.litbo.hospital.user.bean.SRight;
+import com.litbo.hospital.user.vo.RightTreeVo;
 import com.litbo.hospital.user.vo.SetRightVo;
 import io.swagger.models.auth.In;
 
@@ -18,4 +19,6 @@ public interface RightService {
     Integer countByRoleId(String roleId);
 
     void deletaByRoleId(String roleId);
+
+    List<RightTreeVo> listRightByRId(String roleId);
 }

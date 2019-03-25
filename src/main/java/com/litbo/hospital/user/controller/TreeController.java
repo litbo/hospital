@@ -86,5 +86,13 @@ public class TreeController {
 
     }
 
+    @RequestMapping("right3")
+    public Result listRight(){
+        return  Result.success(treeDao.listRight()) ;
+    }
+
+
+
+
 
 }
