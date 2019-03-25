@@ -24,10 +24,10 @@ public interface CsDao {
     @Select("select sbcs_id as sbcs_id_scs,sbcs_name as scsName,sbcs_lxr1,sbcs_lxdh1,email from eq_cs WHERE sb_cslb_id = 1 " +
             "AND  sbcs_name like '%'+#{sbcsName}+'%'")
     List<ScsVo> listScsByX(@Param("sbcsName") String sbcsName);
-    @Select("select sbcs_id as sbcs_id_scs,sbcs_name as scsName,sbcs_lxr1,sbcs_lxdh1,email from eq_cs WHERE sb_cslb_id = 2 " +
+    @Select("select sbcs_id as sbcs_id_wxs,sbcs_name as wxsName,sbcs_lxr1,sbcs_lxdh1,email from eq_cs WHERE sb_cslb_id = 2 " +
             "AND  sbcs_name like '%'+#{sbcsName}+'%'")
     List<WxsVo> listWxsByX(@Param("sbcsName") String sbcsName);
-    @Select("select sbcs_id as sbcs_id_scs,sbcs_name as scsName,sbcs_lxr1,sbcs_lxdh1,email from eq_cs WHERE sb_cslb_id = 3 " +
+    @Select("select sbcs_id as sbcs_id_gys,sbcs_name as gysName,sbcs_lxr1,sbcs_lxdh1,email from eq_cs WHERE sb_cslb_id = 3 " +
             "AND  sbcs_name like '%'+#{sbcsName}+'%'")
     List<GysVo> listGysByX(@Param("sbcsName") String sbcsName);
     @Select("select sbcs_id as sbcs_id_scs,sbcs_name as scsName,sbcs_lxr1,sbcs_lxdh1,email from eq_cs WHERE sb_cslb_id = 4 " +
