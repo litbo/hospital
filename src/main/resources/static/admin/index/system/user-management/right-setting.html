@@ -77,8 +77,14 @@
             },
             data: {
                 key: {
-                    name: "name"
+                    name: "rightName"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "rightId",
+                    pIdKey: "pid"
                 }
+
             },
             callback: {
                 "onClick": ckLine
@@ -104,7 +110,7 @@
         //if (true) {
             //alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);
             $.ajax({
-                url: "/tree/right1",//请求的action路径
+                url: "/tree/right3",//请求的action路径
                 data: {"pid": treeNode.id},
                 error: function () {//请求失败处理函数
                     layer.alert('请求失败');
@@ -126,8 +132,9 @@
         //}
     }
 
+
     $.ajax({
-        url: "/tree/right1",
+        url: "/tree/right3",
         type: "GET",
         data: {pid: ""},
         success: function (res) {
