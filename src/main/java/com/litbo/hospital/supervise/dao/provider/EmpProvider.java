@@ -1,5 +1,8 @@
 package com.litbo.hospital.supervise.dao.provider;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.jdbc.SQL;
+
 public class EmpProvider {
     public String selectEmpsByX(String bmId,String userId,String status){
 /**
@@ -20,5 +23,21 @@ public class EmpProvider {
         if(userId!=null) sql.append(" and emp.user_id like '%'+#{userId}+'%' ");
         if(status!=null) sql.append(" and emp.status like  '%'+#{status}+'%' ");
         return sql.toString();
+    }
+
+    public String selectEmpByIdOrName(String userId,String userXm){
+        return new SQL(){
+            {
+                SELECT("emp.user_id AS empId,emp.user_xm,bm.bm_name");
+                FROM("s_emp AS emp , s_bm AS bm");
+                WHERE("emp.bm_id = bm.bm_id");
+                if(StringUtils.isNotBlank(userId)){
+                    WHERE("emp.user_id = #{userId}");
+                }
+                if(StringUtils.isNotBlank(userXm)){
+                    WHERE("emp.user_xm like '%'+#{userXm}+'%'");
+                }
+            }
+        }.toString();
     }
 }

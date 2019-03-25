@@ -13,7 +13,7 @@ import com.litbo.hospital.supervise.vo.JhEmpVo;
 public interface JhZdService {
 
     //人员列表
-    public PageInfo<JhEmpVo> jhryList(Integer pageNum, Integer pageSize);
+    public PageInfo<JhEmpVo> jhryList(Integer pageNum, Integer pageSize, String userId, String userXm);
 
     //添加计划制定
     public Result addJhZd(JhZd jhZd);

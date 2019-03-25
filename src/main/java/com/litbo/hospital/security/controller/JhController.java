@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.JhRylr;
@@ -12,7 +13,9 @@ import com.litbo.hospital.supervise.vo.JhEmpVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zjc
@@ -56,11 +59,30 @@ public class JhController {
         return Result.success(JSON.parseArray(title));
     }
 
+    @PostMapping("/jhrySe")
+    public Result jhrySe(){
+        Map map =new HashMap();
+        map.put("dom", "<div class='layui-inline'><input type=\"text\"name=\"userId\" class=\"layui-input\" placeholder=\"用户ID\" autocomplete=\"off\"></div>" +
+                "<div class='layui-inline'><input type=\"text\" name=\"userXm\" class=\"layui-input\" placeholder=\"用户姓名\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/Jh/jhryList");
+        m.put("type","reload");
+        String[] data = {"userId","userXm"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+    }
+
     @PostMapping("/jhryList")
     public Result jhryList(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") Integer pageNum,
-                           @RequestParam(value = "pageSize" ,required = false,defaultValue="10")Integer pageSize){
+                           @RequestParam(value = "pageSize" ,required = false,defaultValue="10")Integer pageSize,
+                           @RequestParam(required = false) String userId,@RequestParam(required = false) String userXm){
         try {
-            PageInfo<JhEmpVo> pageInfo = jhZdService.jhryList(pageNum, pageSize);
+            PageInfo<JhEmpVo> pageInfo = jhZdService.jhryList(pageNum, pageSize,userId,userXm);
             return Result.success(pageInfo);
         } catch (Exception e) {
             e.printStackTrace();

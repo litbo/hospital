@@ -32,9 +32,9 @@ public class JhZdServiceImpl implements JhZdService {
     private EmpDao empDao;
 
     @Override
-    public PageInfo<JhEmpVo> jhryList(Integer pageNum,Integer pageSize) {
+    public PageInfo<JhEmpVo> jhryList(Integer pageNum,Integer pageSize, String userId, String userXm) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<JhEmpVo> pageInfo = new PageInfo<>(empDao.getJhEmpVo());
+        PageInfo<JhEmpVo> pageInfo = new PageInfo<>(empDao.getJhEmpVo(userId,userXm));
         return pageInfo;
     }
 

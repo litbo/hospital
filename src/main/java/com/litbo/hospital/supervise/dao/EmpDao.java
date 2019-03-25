@@ -105,17 +105,8 @@ public interface EmpDao {
         "    where user_id = #{userId,jdbcType=VARCHAR}")
     void updateEmp(SEmp emp);
 
-    @Select("SELECT\n" +
-            "emp.user_id AS empId,\n" +
-            "emp.user_xm,\n" +
-            "bm.bm_name\n" +
-            "\n" +
-            "FROM\n" +
-            "dbo.s_emp AS emp ,\n" +
-            "dbo.s_bm AS bm\n" +
-            "WHERE\n" +
-            "emp.bm_id = bm.bm_id")
-    public List<JhEmpVo> getJhEmpVo();
+    @SelectProvider(type = EmpProvider.class,method = "selectEmpByIdOrName")
+    public List<JhEmpVo> getJhEmpVo(@Param("userId") String userId , @Param("userXm") String userXm);
 
 
 }
