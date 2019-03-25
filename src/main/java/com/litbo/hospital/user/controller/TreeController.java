@@ -78,7 +78,6 @@ public class TreeController {
         for (TreeVo treeVo : treeVos) {
             if(treeVo.getChildren()==null){
                 List<TreeVo> t = new  ArrayList<>();
-                t.add(null);
                 treeVo.setChildren(t);
             }
 
