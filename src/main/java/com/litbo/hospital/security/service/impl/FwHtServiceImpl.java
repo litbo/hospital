@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -54,8 +55,12 @@ public class FwHtServiceImpl implements FwHtService {
     @Override
     public int addFwFk(FwFk fwFk) {
         int i = fwHtDao.addFwFk(fwFk);
+        int fkCs = fwHtDao.findFkCs(fwFk.getFkHtbh());
+        int count = fwHtDao.findFkCountByHtId(fwFk.getFkHtbh());
         if(i>0){
-            fwHtDao.updateHtStatus(fwFk.getFkHtbh(),1);
+            if(fkCs == count) {
+                fwHtDao.updateHtStatus(fwFk.getFkHtbh(), 1);
+            }
         }
         return i;
     }
@@ -70,7 +75,12 @@ public class FwHtServiceImpl implements FwHtService {
     @Override
     public PageInfo getHtZfList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<HtVo> htVoPageInfo = new PageInfo<>(fwHtDao.getFwHtByStatus(0));
+        List<HtVo> fwHtByStatus = fwHtDao.getFwHtByStatus(0);
+        for (HtVo ht : fwHtByStatus) {
+            Integer count = fwHtDao.findFkCountByHtId(ht.getId());
+            ht.setFkcs(count.toString());
+        }
+        PageInfo<HtVo> htVoPageInfo = new PageInfo<>(fwHtByStatus);
         return htVoPageInfo;
     }
 

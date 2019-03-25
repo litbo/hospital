@@ -4,8 +4,10 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwWxf;
 import com.litbo.hospital.security.service.FwWxfService;
-import com.litbo.hospital.security.vo.*;
-import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.security.vo.FwIdSelectVo;
+import com.litbo.hospital.security.vo.FwWxfIndexVo;
+import com.litbo.hospital.security.vo.FwWxfShIndexVo;
+import com.litbo.hospital.security.vo.WxfListVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +64,12 @@ public class FwWxfController {
 
     @GetMapping("/wxfList")
     public Result wxfList(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
-                          @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+                          @RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                          @RequestParam(required = false) String fwId,@RequestParam(required = false) String eqName){
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-            PageInfo<WxfListVo> pageInfo = fwWxfService.WxfList(userId, pageNum, pageSize);
+            PageInfo<WxfListVo> pageInfo = fwWxfService.WxfList(userId, pageNum, pageSize,fwId,eqName);
             return Result.success(pageInfo);
         } catch (Exception e) {
             e.printStackTrace();

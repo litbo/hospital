@@ -26,7 +26,7 @@ public interface FwHtDao {
             "      ht_ms)\n" +
             "    values (#{id,jdbcType=VARCHAR}, #{htName,jdbcType=VARCHAR}, #{htTime,jdbcType=TIMESTAMP}, \n" +
             "      #{htLx,jdbcType=VARCHAR}, #{htPrice,jdbcType=DECIMAL}, #{sbcsId,jdbcType=INTEGER}, \n" +
-            "      #{heWxsdb,jdbcType=VARCHAR}, #{htYfdb,jdbcType=VARCHAR}, #{htZffs,jdbcType=VARCHAR}, \n" +
+            "      #{heWxsdb,jdbcType=VARCHAR}, #{htYfdb,jdbcType=VARCHAR}, #{htZffs}, \n" +
             "      #{htJfly,jdbcType=VARCHAR}, #{htBxksTime,jdbcType=TIMESTAMP}, #{htBxjsTime,jdbcType=TIMESTAMP}, \n" +
             "      #{htXyTime,jdbcType=INTEGER}, #{htBxfw,jdbcType=VARCHAR}, #{htHpjf,jdbcType=INTEGER}, \n" +
             "      #{htFjurl,jdbcType=VARCHAR}, #{eqId,jdbcType=INTEGER}, #{htStatus,jdbcType=INTEGER}, \n" +
@@ -60,15 +60,14 @@ public interface FwHtDao {
             "ht.ht_name,\n" +
             "ht.ht_price,\n" +
             "ht.ht_time,\n" +
-            "cs.sbcs_name,\n" +
-            "ht.ht_status\n" +
-            "\n" +
+            "ht.ht_zffs,\n" +
+            "cs.sbcs_name\n" +
             "FROM\n" +
             "dbo.fw_ht AS ht ,\n" +
             "dbo.eq_cs AS cs\n" +
             "WHERE\n" +
             "ht.sbcs_id = cs.sbcs_id AND\n" +
-            "ht.ht_status = #{htStatus}")
+            "ht.ht_status = 0")
     public List<HtVo> getFwHtByStatus(Integer htStatus);
 
     @Select("SELECT\n" +
@@ -82,5 +81,11 @@ public interface FwHtDao {
             "WHERE\n" +
             "dbo.fw_ht.id = #{id}")
     public HtVo getFwHt(String id);
+
+    @Select("select count(*) FROM fw_fk fk where fk_htbh = #{htId}")
+    public int findFkCountByHtId(String htId);
+
+    @Select("select ht_zffs FROM fw_ht where id = #{htId}")
+    public int findFkCs(String htId);
 
 }

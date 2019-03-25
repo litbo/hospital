@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwWxf;
+import com.litbo.hospital.security.dao.sqlprovider.FwWxfProvider;
 import com.litbo.hospital.security.dao.sqlprovider.WxfProvider;
 import com.litbo.hospital.security.vo.*;
 import org.apache.ibatis.annotations.*;
@@ -46,23 +47,8 @@ public interface FwWxfDao {
             "shouli.id = baoxiu.id")
     public List<FwIdSelectVo> wxfGetEq(String userId);
 
-    @Select("SELECT\n" +
-            "shouli.id AS fwId,\n" +
-            "eq.eq_name,\n" +
-            "bm.bm_name,\n" +
-            "baoxiu.bx_time,\n" +
-            "wxf.wxf_status\n" +
-            "FROM\n" +
-            "dbo.fw_shouli AS shouli \n" +
-            "LEFT JOIN dbo.fw_baoxiu AS baoxiu ON shouli.id = baoxiu.id\n" +
-            "LEFT JOIN dbo.eq_info AS eq ON baoxiu.eq_id = eq.eq_id\n" +
-            "LEFT JOIN dbo.s_bm AS bm ON baoxiu.bxks_id = bm.bm_id\n" +
-            "LEFT JOIN fw_wxf AS wxf ON baoxiu.id = wxf.fw_id\n" +
-            "WHERE\n" +
-            "shouli.slr_id = #{userId} AND\n" +
-            "baoxiu.bx_status = 100 AND\n" +
-            "wxf.wxf_status IS NULL")
-    public List<WxfListVo> WxfList(String userId);
+    @SelectProvider(type = FwWxfProvider.class,method = "WxfList")
+    public List<WxfListVo> WxfList(@Param("userId") String userId,@Param("fwId") String fwId,@Param("eqName") String eqName);
 
     @Select("SELECT\n" +
             "emp.user_xm,\n" +

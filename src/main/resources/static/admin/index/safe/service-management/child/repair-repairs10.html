@@ -164,7 +164,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">确认描述<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="qsMs" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
+                <input type="text" name="qsMs" class="layui-input" autocomplete="off" lay-verify="required">
             </div>
         </div>
     </div>
@@ -172,13 +172,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">确认结果<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="qsJg" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
+                <input type="text" name="qsJg" class="layui-input" autocomplete="off" lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">满意度<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="qsMyd" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
+                <input type="text" name="qsMyd" class="layui-input" placeholder="优秀" autocomplete="off" lay-verify="required">
             </div>
         </div>
         <input type="hidden" name="id">
@@ -217,14 +217,7 @@
                     url:"/fwWeixiu/addFwWxqs",
                     type:"POST",
                     data:["qsUser","qsMs","qsJg","qsMyd","fwId"],
-                    done:function(res){
-                        if(res.code === 0){
-                            //提交完成后关闭页面
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                            parent.location.reload();
-                        }
-                    }
+                    reload:"parent"
                 }
             },
             date: [
