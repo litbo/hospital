@@ -14,6 +14,11 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style type="text/css">
+        .col-xs-100{
+            margin-left: 80%;
+            margin-top: -5%;
+        }
+
     </style>
 </head>
 <body>
@@ -26,14 +31,25 @@
     </div>
     <div class="col-xs-12">
         <div class="layui-upload" style="margin-top:60px;">
+            <div class="col-xs-100">
+                <button type="button" class="layui-btn" id="11">
+                    <i class="layui-icon">&#xe67c;</i>下载模板
+                </button>
+                <button type="button" class="layui-btn" id="12">
+                    <i class="layui-icon">&#xe67c;</i>下载须知
+                </button>
+            </div>
             <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
             <button type="button" class="layui-btn" id="startUploadFile">提交</button>
+
+
         </div>
     </div>
+
 </div>
+<div class="">
 
-
-
+</div>
 <script>
     renderMod = {
         form:{

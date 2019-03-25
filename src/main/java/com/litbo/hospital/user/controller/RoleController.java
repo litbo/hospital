@@ -87,6 +87,7 @@ public class RoleController {
                     "{field: 'roleName', title: '角色名称'}]" ;
             myJsonArray = JSONObject.parseArray(jsonMessage);
         PageInfo date = new PageInfo(myJsonArray);
+
         return Result.success(date);
     }
 

@@ -1,15 +1,16 @@
 package com.litbo.hospital.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.dao.CsDao;
 import com.litbo.hospital.user.service.CsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cs")
@@ -68,4 +69,76 @@ public class CsController {
                 "]";
         return Result.success(JSON.parseArray(title));
     }
+
+    @RequestMapping("listScsByX")
+    public Result listScsByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize, String sbcsName){
+        PageInfo date = csService.listScsByX(pageNum,pageSize,sbcsName);
+        return Result.success(date);
+
+
+    }
+    @RequestMapping("listWxsByX")
+    public Result listWxsByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize, String sbcsName){
+        PageInfo date = csService.listWxsByX(pageNum,pageSize,sbcsName);
+        return Result.success(date);
+
+
+    }
+    @RequestMapping("listGysByX")
+    public Result listGysByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize, String sbcsName){
+        PageInfo date = csService.listGysByX(pageNum,pageSize,sbcsName);
+        return Result.success(date);
+
+    }
+
+    @RequestMapping(value = "listScsSe",method = RequestMethod.POST)
+    public Result listScsSe(){
+        Map map =new HashMap();
+        map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+        Map m = new HashMap();
+        m.put("url","/cs/listScsByX");
+        m.put("type","reload");
+        String[] data = {"sbcsName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+    }
+    @RequestMapping(value = "listWxsSe",method = RequestMethod.POST)
+    public Result listWxsSe(){
+        Map map =new HashMap();
+        map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+        Map m = new HashMap();
+        m.put("url","/cs/listWxsByX");
+        m.put("type","reload");
+        String[] data = {"sbcsName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+    }
+
+    @RequestMapping(value = "listGysSe",method = RequestMethod.POST)
+    public Result listGysSe(){
+        Map map =new HashMap();
+        map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+        Map m = new HashMap();
+        m.put("url","/cs/listGysByX");
+        m.put("type","reload");
+        String[] data = {"sbcsName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+    }
+
 }

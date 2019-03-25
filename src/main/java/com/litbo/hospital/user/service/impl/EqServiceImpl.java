@@ -184,6 +184,11 @@ public class EqServiceImpl implements EqService {
 
                 //初始化设备流水号
                 eqInfo.setEqId(setLsh());
+                //设置拼音码
+                String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
+                if(pym!=""){
+                    eqInfo.setEqPym(pym);
+                }
 
                if(eqDao.addEq(eqInfo)<=0){
                     return 1/0;
