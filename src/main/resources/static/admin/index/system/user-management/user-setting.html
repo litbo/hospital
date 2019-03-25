@@ -37,7 +37,7 @@
     {{# if (d.status=== 1) { }}  
     <a class="layui-btn layui-btn-xs" lay-event="edit">系统用户</a>
     {{# } else { }}  
-    <a class="layui-btn layui-btn-sm" lay-event="edit" class="">设为系统用户</a>
+    <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit" class="">设为系统用户</a>
     {{# } }}  
 
 </script>
@@ -130,12 +130,11 @@
                             },
                             tool:"toolbar",
                             event:"sz"
-
                         }
 
                         ]
                     })
-                },
+                }
             },
             reSet: {
                 url: "/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
