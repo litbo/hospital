@@ -38,35 +38,25 @@
             height: 46px;
         }
 
-        .chk{
-            width: 16px;
-            display: block;
-            height: 16px;
-            float: left;
-            border:1px solid #ddd;
-            margin-right: -10px;
-        }
-        .switch{
-            margin-left: 10px;
-        }
-        .checkbox_false_full_focus{
-            background:#00b7ee;
-        }
-        .checkbox_true_part{
-            background:rgba(0,0,0,0.5);
-        }
-        .checkbox_true_full{
-            background:#f10214;
-        }
-        .checkbox_true_full_focus{
-            background:rgba(100,100,100,0.6);
-        }
+
     </style>
 </head>
 <div class="tree-container col-xs-12 col-md-5">
     <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
         <ul id="demo"></ul>
     </div>
+</div>
+<div class="tree-container col-xs-12 col-md-5">
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户组</label>
+            <div class="layui-input-block">
+                <select name="nextShrId" lay-filter="shr">
+
+                </select>
+            </div>
+        </div>
+    </form>
 </div>
 <body>
 
@@ -89,6 +79,7 @@
                 chkStyle: "checkbox"
             }
         },
+        newNode = {},
         nodes = {};
 
     function clickShow(event, treeId, treeNode) {
@@ -100,8 +91,8 @@
     }
 
     function ckLine(event, treeId, treeNode, clickFlag) {
-        // 判断是否父节点
-        if (!treeNode.isParent) {
+        // 判断是否父节点 !treeNode.isParent
+        //if (true) {
             //alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);
             $.ajax({
                 url: "/tree/right1",//请求的action路径
@@ -115,22 +106,15 @@
                             var treeObj = $.fn.zTree.getZTreeObj("demo");
                             //treeNode.halfCheck = false;
                             var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null);//获取指定父节点
+                            console.log(parentZNode);
+                            treeObj.removeChildNodes(parentZNode);
                             newNode = treeObj.addNodes(parentZNode, res.data, false);
+                            console.log(newNode);
                         }
                     }
-                    //var jsondata= eval(data);
-                    /*if (jsondata == null || jsondata === "") {
-                        //末节点的数据为空   所以不再添加节点  这里可以根据业务需求自己写
-                        //$("#treeFrame").attr("src",treeNode.url);
-                    } else {
-                        var treeObj = $.fn.zTree.getZTreeObj("demotree");
-                        //treeNode.halfCheck = false;
-                        var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null);//获取指定父节点
-                        newNode = treeObj.addNodes(parentZNode, jsondata, false);
-                    }*/
                 }
             });
-        }
+        //}
     }
 
     $.ajax({
@@ -145,45 +129,15 @@
             }
 
         }
-    })
-</script>
+    });
 
-<script>
+    renderMod = {
+        form:{
+            val:{
 
-    /*
-        //树形结构菜单
-        layui.use(['form',"tree","jquery"], function() {
-            var form = layui.form, $ = layui.jquery,
-                jsonP = {
-                    elem: "#tree", click: function (node) {
-                        $.ajax({
-                            url: "/tree/right1",
-                            method: "GET",
-                            data: {pid: node.id},
-                            async: false,
-                            success: function (data) {
-                                /!* console.log(node);*!/
-                                node.children = data.data;
-                                node.spread = true;
-                                $("#tree").html("");
-                                layui.tree(jsonP);
-                            }
-                        })
-                    }
-                };
-
-            $.ajax({
-                url: "/tree/right1",
-                method: "GET",
-                data: {pid: ""},
-                async: false,
-                success: function (data) {
-                    /!*    console.log(data);*!/
-                    jsonP.nodes = data.data;
-                    layui.tree(jsonP);
-                }
-            });
-        })*/
+            }
+        }
+    }
 </script>
 </body>
 </html>
