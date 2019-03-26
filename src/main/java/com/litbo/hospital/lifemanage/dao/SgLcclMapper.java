@@ -82,6 +82,14 @@ public interface SgLcclMapper {
     int updateByEqIdSelective(SgLccl record);
 
     /**
+     * 通过处置管理id查询对应设备id
+     * @param id 处置管理id
+     * @return 设备id
+     */
+    @Select("SELECT eq_id FROM sg_lccl WHERE id = #{id,jdbcType=VARCHAR}")
+    String selectEqIdById(@Param("id") String id);
+
+    /**
      * 待报废清单
      *
      * @param bmId 部门id
@@ -101,13 +109,11 @@ public interface SgLcclMapper {
             "dbo.eq_info\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
             "<where>" +
-            "dbo.eq_info.eq_sbbh IS NOT NULL \n" +
+            "dbo.eq_info.eq_sbbh IS NOT NULL\n" +
             " <if test=\"isScrapped == null || isScrapped == 0\"> AND dbo.eq_info.eq_id NOT IN ((SELECT\n" +
             "dbo.sg_lccl.eq_id\n" +
             "FROM\n" +
-            "dbo.sg_lccl\n" +
-            "WHERE\n" +
-            "dbo.sg_lccl.clear_time IS NULL)) </if> " +
+            "dbo.sg_lccl WHERE dbo.sg_lccl.issh = 1 OR dbo.sg_lccl.issh IS NULL  )) </if> " +
             " <if test=\"isScrapped != null\"> AND dbo.eq_info.eq_id IN ((SELECT\n" +
             "dbo.sg_lccl.eq_id\n" +
             "FROM\n" +
@@ -144,19 +150,10 @@ public interface SgLcclMapper {
             "FROM\n" +
             "dbo.sg_lccl\n" +
             "WHERE\n" +
-            "dbo.sg_lccl.lccl_id IS NULL)" +
+            "dbo.sg_lccl.lccl_id IS NULL AND issh IS NULL)" +
             "<if test=\"bmId != null\"> AND dbo.eq_info.eq_bmid = #{bmId,jdbcType=VARCHAR} </if>" +
             "</script>")
     List<ScrappedListVO> selectApplyList(@Param("bmId") String bmId);
-
-    /**
-     * 通过设备id查询处置id
-     *
-     * @param eqId 设备id
-     * @return 处置id
-     */
-    @Select("select id from sg_lccl where eq_id = #{eqId,jdbcType=VARCHAR}")
-    String getIdByEqId(String eqId);
 
     /**
      * 待上报列表
@@ -177,7 +174,8 @@ public interface SgLcclMapper {
             "dbo.s_emp.user_xm as userName,\n" +
             "dbo.sg_lccl.declare_time,\n" +
             "dbo.sg_lccl.opinion,\n" +
-            "dbo.sg_lccl.mode\n" +
+            "dbo.sg_lccl.mode,\n" +
+            "dbo.sg_lccl.id\n" +
             "FROM\n" +
             "dbo.eq_info\n" +
             "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
@@ -185,8 +183,8 @@ public interface SgLcclMapper {
             "INNER JOIN dbo.s_emp ON dbo.sg_lccl.user_id = dbo.s_emp.user_id" +
             "<where>" +
             "<if test=\"tab == 1\"> dbo.sg_lccl.lccl_id IS NOT NULL AND dbo.sg_lccl.report_person IS NULL</if>" +
-            "<if test=\"tab == 2\"> AND dbo.sg_lccl.report_person IS NOT NULL AND dbo.sg_lccl.ratify IS NULL</if>" +
-            "<if test=\"tab == 3\"> AND dbo.sg_lccl.ratify IS NOT NULL AND dbo.sg_lccl.clear_person IS NULL</if>" +
+            "<if test=\"tab == 2\"> AND dbo.sg_lccl.report_person IS NOT NULL AND dbo.sg_lccl.ratify IS NULL AND dbo.sg_lccl.issh = 1</if>" +
+            "<if test=\"tab == 3\"> AND dbo.sg_lccl.ratify IS NOT NULL AND dbo.sg_lccl.clear_person IS NULL AND dbo.sg_lccl.issh = 1</if>" +
             "<if test=\"tab == 4\"> AND dbo.sg_lccl.clear_person IS NOT NULL AND dbo.sg_lccl.record IS NULL</if>" +
             "</where>" +
             "</script>")
@@ -207,13 +205,14 @@ public interface SgLcclMapper {
             "dbo.eq_info.eq_cgrq,\n" +
             "dbo.eq_info.eq_price,\n" +
             "dbo.s_emp.user_xm AS userId,\n" +
-            "dbo.sg_lccl.declare_time\n" +
+            "dbo.sg_lccl.declare_time,\n" +
+            "dbo.sg_lccl.id\n" +
             "\n" +
             "FROM\n" +
             "dbo.sg_lccl\n" +
             "INNER JOIN dbo.eq_info ON dbo.sg_lccl.eq_id = dbo.eq_info.eq_id\n" +
             "INNER JOIN dbo.s_emp ON dbo.sg_lccl.user_id = dbo.s_emp.user_id\n" +
             "WHERE\n" +
-            "dbo.sg_lccl.eq_id = #{eqId,jdbcType=VARCHAR}")
+            "dbo.sg_lccl.eq_id = #{eqId,jdbcType=VARCHAR} AND dbo.sg_lccl.issh IS NULL")
     DisposalProcessListVO selectDisposalProcess(String eqId);
 }

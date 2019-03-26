@@ -12,7 +12,10 @@ import java.util.List;
  */
 @Data
 public class SgLcclVO {
-
+    /**
+     * 表id
+     */
+    private String id;
     /**
      * 单据号
      */
@@ -90,12 +93,19 @@ public class SgLcclVO {
      * 状态
      */
     private String state;
+
+    /**
+     * 是否通过审核
+     */
+    private String issh;
+
     /**
      * 报废原因id列表
      */
     private List<String> reasonIds;
+
     /**
-     * 审核设备ids
+     * 流程处理ids
      */
     private List<String> ids;
 }

@@ -68,7 +68,13 @@ public class SgLcclSqlProvider {
 
         if (record.getReportTime() != null) {
             sql.SET("report_time = #{reportTime,jdbcType=TIMESTAMP}");
-            sql.SET("state = '申请已上报'");
+            if ("1".equals(record.getIssh())) {
+                sql.SET("issh = '1'");
+                sql.SET("state = '申请已上报'");
+            }else{
+                sql.SET("issh = '0'");
+                sql.SET("state = '处置上报未通过'");
+            }
         }
 
         if (record.getRatify() != null) {
@@ -77,7 +83,13 @@ public class SgLcclSqlProvider {
 
         if (record.getRatifyTime() != null) {
             sql.SET("ratify_time = #{ratifyTime,jdbcType=TIMESTAMP}");
-            sql.SET("state = '申请已批复'");
+            if ("1".equals(record.getIssh())) {
+                sql.SET("issh = '1'");
+                sql.SET("state = '申请已批复'");
+            }else{
+                sql.SET("issh = '0'");
+                sql.SET("state = '处置批复未通过未通过'");
+            }
         }
 
         if (record.getOpinion() != null) {
@@ -109,8 +121,7 @@ public class SgLcclSqlProvider {
         if (record.getStorageLocation() != null) {
             sql.SET("storage_location = #{storageLocation,jdbcType=VARCHAR}");
         }
-
-        sql.WHERE("eq_id = #{eqId,jdbcType=VARCHAR}");
+        sql.WHERE("id = #{id,jdbcType=VARCHAR}");
 
         return sql.toString();
     }

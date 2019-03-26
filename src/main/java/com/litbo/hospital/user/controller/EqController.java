@@ -214,7 +214,8 @@ public class EqController {
     //通过品名 拼音码pym 查询品名
     @RequestMapping("/listPmsByPym")
     public Result listPmsByPym(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
-                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize, String pym) {
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                               @RequestParam(value = "pym",required = false) String pym) {
 
         PageInfo pageInfo = es.listPmsByPym(pageNum, pageSize, pym);
         return Result.success(pageInfo);

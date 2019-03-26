@@ -96,28 +96,30 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        toolFunc: [{
-                            send: {
-                                id: "table",
-                                filter: "table1",
-                                name: "ids",
-                                event: "describe",
-                                url: "/lifeManage/updateSgLccLByEqId1",
-                                type: "POST",
-                                par: "eqId",
-                                confirm:false,
-                                reload: true,
-                                reTable: true
-                            },
+                        toolFunc: {
+                            title: "单位领导处理意见",
+                            event: "describe",
                             tool: "toolbar",
-                            event: "describe"
-                        }],
+                            type: 2,
+                            content: "./child/report_style.html",
+                            area: ["58%", "52%"],
+                            func:function(obj,cs){
+                                var data = [];
+                                for(var i=0;i<cs.data.length;i++){
+                                    data.push(cs.data[i]["id"]);
+                                }
+                                layui.sessionData("dtds",{
+                                    key:"report",
+                                    value:data
+                                })
+                            }
+                        },
                         tools:[
                             {
                                 event:"application",
                                 type:2,
                                 content:"./child/details_page.html",
-                                dataUrl:["eqId"]
+                                dataUrl:["id"]
                             }
                         ]
                     })

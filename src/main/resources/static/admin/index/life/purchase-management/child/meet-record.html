@@ -43,8 +43,8 @@
                     <label class="layui-form-label">是否通过审核</label>
                     <div class="layui-input-block">
                         <select name="issh" autocomplete="off" class="layui-select">
-                            <option value="0">通过审核</option>
-                            <option value="1">未通过审核</option>
+                            <option value="1">通过审核</option>
+                            <option value="0">未通过审核</option>
                         </select>
                     </div>
                 </div>
@@ -183,10 +183,28 @@
                     , type: "date"
                     , value: today
                     , format: 'yyyy-MM-dd'
-                }],
+                }
+            ],
             submit: {
                 before: function (param) {
+                    //获取上页面传的值
+                    var dat = tempValue("dtds","sgIdss",false);
+                    console.log(dat);
+                    if(dat && (dat.length === 0 || $("#opp").val() === "")){
+                        putMsg({
+                            alert:"未选中数据或未填写意见！",
+                            log:dat
+                        });
+                        return false;
+                    }
+                    // tempValue("dtds","sgIds");
+
+                    // 获取table数据
                     var tv = getTableValue("table");
+                    var data = [];
+                    for(var i=0;i<tv.length;i++){
+                        data.push(tv[i]["userId"]);
+                    }
                     if (doJudg({
                         0: [tv]
                     })) {
@@ -197,24 +215,21 @@
                         return false;
                     }
                     return param = {
-                        1: tv,
+                        1: data,
+                        2: dat
                     };
                 },
                 form: {
                     url: "/lifeManage/updateSgInfoZbwyhhy",
                     type: "POST",
-                    data: ["zbwyhhyNd", "zbwyhhySj", "zbwyhhyFgld", "zbwyhhyZgbm",
+                    data: ["issh","shyj","zbwyhhyNd", "zbwyhhySj", "zbwyhhyFgld", "zbwyhhyZgbm",
                         "zbwyhhyDd", "zbwyhhyFgldyj", "zbwyhhyZgbmyj", "zbwyhhyNr"],
                     contentType: "application/json",
                     param: {
-                        1: "sgZbwyhRys"
+                        1: "sgZbwyhRys",
+                        2: "ids"
                     },
-                    add: {
-                        ids: []
-                    },
-                    success: function () {
-                        alert("审批已成功");
-                    }
+                    reload: "parent"
                 }
             }
         }

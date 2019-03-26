@@ -23,6 +23,7 @@
 </div>
 <form class="layui-form layui-form-pane" action="" lay-filter="form">
     <div class="col-xs-6">
+        <input type="hidden" name="id" />
         <div class="layui-form-item">
             <label class="layui-form-label">设备编号</label>
             <div class="layui-input-block">
@@ -144,15 +145,16 @@
                 get: {
                     url: "/lifeManage/selectDisposalProcess",
                     type: "POST",
-                    data: {eqId: $.getUrlParam("eqId")},
+                    data: {eqId: $.getUrlParam("eqId")}
                     // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
                     //有add时必需时data为表单name数组，否则请直接使用data赋值
                 }//get内参数需参考《内容传输与提交》文档
             },
             submit: {
                 before:function(){
+                    var value = $("input[name='id']").val();
                     return param = {
-                        1:$.getUrlParam("eqId")
+                        1: value,
                     }
                 },
                 form: {//或者写作up
@@ -161,16 +163,9 @@
                     type: "POST",
                     data: ["mode"],
                     param: {
-                        1: "eqId",
+                        1: "id",
                     },
-                    success:function (data) {
-                        if(data.code == 0){
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index);
-                        }else {
-                            alert(data.msg)
-                        }
-                    }
+                    reload:"parent"
                 }
             }
         }

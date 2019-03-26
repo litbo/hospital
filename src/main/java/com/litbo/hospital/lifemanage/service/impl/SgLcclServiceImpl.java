@@ -10,6 +10,8 @@ import com.litbo.hospital.lifemanage.dao.SgLcclMapper;
 import com.litbo.hospital.lifemanage.dao.SgReasonMapper;
 import com.litbo.hospital.lifemanage.enums.ModeEnum;
 import com.litbo.hospital.lifemanage.service.SgLcclService;
+import com.litbo.hospital.user.bean.EqInfo;
+import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
@@ -33,6 +35,8 @@ public class SgLcclServiceImpl implements SgLcclService {
     private SgLcclMapper sgLcclMapper;
     @Autowired
     private SgReasonMapper sgReasonMapper;
+    @Autowired
+    private EqService eqService;
 
     /**
      * 处置查询列表
@@ -92,12 +96,10 @@ public class SgLcclServiceImpl implements SgLcclService {
         sgLccl.setLcclId(idByIDAndTime);
         //添加处置信息
         sgLcclMapper.updateByEqIdSelective(sgLccl);
-        //获取处置表id
-        String idByEqId = sgLcclMapper.getIdByEqId(sgLccl.getEqId());
         List<String> reasonIds = sgLcclVO.getReasonIds();
         if (reasonIds != null) {
             SgReason sgReason = new SgReason();
-            sgReason.setLcclId(idByEqId);
+            sgReason.setLcclId(sgLccl.getId());
             for (String reasonId : reasonIds) {
                 sgReason.setReasonId(reasonId);
                 //添加报废原因
@@ -138,9 +140,31 @@ public class SgLcclServiceImpl implements SgLcclService {
     public void updateSgLccLByEqId(SgLcclVO sgLc) {
         SgLccl sgLccl = new SgLccl();
         BeanUtils.copyProperties(sgLc,sgLccl);
-        List<String> eqIds = sgLc.getIds();
-        for (String eqId : eqIds) {
-            sgLccl.setEqId(eqId);
+        List<String> ids = sgLc.getIds();
+        for (String id : ids) {
+            sgLccl.setId(id);
+            sgLcclMapper.updateByEqIdSelective(sgLccl);
+        }
+    }
+
+    /**
+     * 处置备案
+     *
+     * @param sgLc 上报审核信息
+     */
+    @Transactional(propagation = Propagation.REQUIRED ,rollbackFor = RuntimeException.class)
+    @Override
+    public void updateSgLccLByEqId4(SgLcclVO sgLc) {
+        SgLccl sgLccl = new SgLccl();
+        EqInfo eqInfo = new EqInfo();
+        eqInfo.setEqSyzt("报废");
+        BeanUtils.copyProperties(sgLc,sgLccl);
+
+        List<String> ids = sgLc.getIds();
+        for (String id : ids) {
+            sgLccl.setId(id);
+            eqInfo.setEqId(sgLcclMapper.selectEqIdById(id));
+            eqService.updateEq(eqInfo);
             sgLcclMapper.updateByEqIdSelective(sgLccl);
         }
     }

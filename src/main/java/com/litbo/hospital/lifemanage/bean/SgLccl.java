@@ -101,4 +101,9 @@ public class SgLccl {
      * 状态
      */
     private String state;
+
+    /**
+     * 是否通过审核
+     */
+    private String issh;
 }

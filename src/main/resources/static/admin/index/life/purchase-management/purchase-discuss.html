@@ -127,11 +127,8 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="layui-form-item subBtn">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
+            <div class="layui-form-item">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="demo1">保存</button>
             </div>
         </div>
     </div>
@@ -170,7 +167,7 @@
             addItem: [
                 {
                     elem: "#dataTable",
-                    base: "child/reference_quotation.html",
+                    base: "./child/reference_quotation.html",
                     name: "dtdt",
                     key: "date"
                 }
@@ -212,7 +209,7 @@
                     url: "/lifeManage/insertSgLzfx",
                     type: "POST",
                     data: ["lzfxJscs", "lzfxJspg", "lzfxLcyqpj", "lzfxShfk", "lzfxXxly", "lzfxYldqz", "lzfxYldyj", "lzfxZjqz", "lzfxZjzyj"],
-                    contentType:"application/json",
+                    contentType: "application/json",
                     param: {
                         1: "sgId",
                         2: "xhbjs"

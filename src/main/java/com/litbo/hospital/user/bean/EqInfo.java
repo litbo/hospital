@@ -132,6 +132,4 @@ public class EqInfo {
     private String eqSyfw;
 
 
-
-
     }

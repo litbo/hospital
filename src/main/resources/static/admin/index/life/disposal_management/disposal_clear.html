@@ -102,27 +102,17 @@
                             tool: "toolbar",
                             type: 2,
                             content:"./child/clear_style.html",
-                            area: ["50%", "35%"]
-                            // func:function(a,b){
-                            //     if(b.length===0)
-                            //     {
-                            //         alert('未选中数据');
-                            //         return false;
-                            //     }
-                            //     subUp({
-                            //         url:"/lifeManage/updateSgLccLByEqId3",
-                            //         type:"POST",
-                            //         data:{
-                            //             cc:b
-                            //         },
-                            //         success:function(res){
-                            //
-                            //             if(res.code === 0){
-                            //                 layer.alert("清理完成");
-                            //             }
-                            //         }
-                            //     })
-                            // }
+                            area: ["58%", "42%"],
+                            func:function(obj,cs){
+                                var data = [];
+                                for(var i=0;i<cs.data.length;i++){
+                                    data.push(cs.data[i]["id"]);
+                                }
+                                layui.sessionData("dtds",{
+                                    key:"ids",
+                                    value:data
+                                })
+                            }
                         },
                         tools:[
                             {

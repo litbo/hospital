@@ -100,7 +100,17 @@
                             tool: "toolbar",
                             type: 2,
                             content: "./child/record_style.html",
-                            area: ["50%", "35%"]
+                            area: ["58%", "42%"],
+                            func:function(obj,cs){
+                                var data = [];
+                                for(var i=0;i<cs.data.length;i++){
+                                    data.push(cs.data[i]["id"]);
+                                }
+                                layui.sessionData("dtds",{
+                                    key:"idss",
+                                    value:data
+                                })
+                            }
                         },
                         tools:[
                             {
@@ -110,22 +120,6 @@
                                 dataUrl:["eqId"]
                             }
                         ]
-                        /*"obj": obj,
-                        "toolFunc": [{
-                            send: {
-                                id: "table",
-                                filter: "table1",
-                                name: "ids",
-                                event: "describe",
-                                url: "/lifeManage/updateSgLccLByEqId4",
-                                type: "POST",
-                                par: "eqId",
-                                reload: true,
-                                reTable: true
-                            },
-                            tool: "toolbar",
-                            event: "describe"
-                        }]*/
                     })
                 }
 

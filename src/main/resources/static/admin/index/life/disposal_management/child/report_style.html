@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>批复领导意见</title>
+    <title>处置上报审核</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -59,7 +59,7 @@
         form: {
             submit: {
                 before: function () {
-                    var dat = tempValue("dtds", "tCs", false);
+                    var dat = tempValue("dtds", "report", false);
                     console.log(dat);
                     if (dat && (dat.length === 0 || $("#opp").val() === "")) {
                         putMsg({
@@ -68,16 +68,16 @@
                         });
                         return false;
                     }
-                    tempValue("dtds", "tCs");
+                    tempValue("dtds", "report");
                     return param = {
                         1: dat
                     }
                 },
                 form: {//或者写作up
-                    url: "/lifeManage/updateSgLccLByEqId2",
+                    url: "/lifeManage/updateSgLccLByEqId1",
                     contentType: "application/json",
                     type: "POST",
-                    data: ["issh","opinion"],
+                    data: ["issh", "opinion"],
                     param: {
                         1: "ids"
                     },

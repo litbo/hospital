@@ -102,11 +102,11 @@
                             tool: "toolbar",
                             type: 2,
                             content: "./child/reply_style.html",
-                            area: ["50%", "35%"],
+                            area: ["58%", "52%"],
                             func:function(obj,cs){
                                 var data = [];
                                 for(var i=0;i<cs.data.length;i++){
-                                    data.push(cs.data[i]["eqId"]);
+                                    data.push(cs.data[i]["id"]);
                                 }
                                 layui.sessionData("dtds",{
                                     key:"tCs",
@@ -114,28 +114,11 @@
                                 })
                             }
                         }
-                        /*"obj": obj,
-                        "toolFunc": [{
-                            send: {
-                                id: "table",
-                                filter: "table1",
-                                name: "ids",
-                                event: "describe",
-                                url: "/lifeManage/updateSgLccLByEqId2",
-                                type: "POST",
-                                par: "eqId",
-                                reload: true,
-                                reTable: true
-                            },
-                            tool: "toolbar",
-                            event: "describe"
-                        }]*/
                     })
                 }
             }
         }
     }
-
 </script>
 </body>
 </html>

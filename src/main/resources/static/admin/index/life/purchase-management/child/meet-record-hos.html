@@ -42,8 +42,8 @@
                     <label class="layui-form-label">是否通过审核</label>
                     <div class="layui-input-block">
                         <select name="issh" autocomplete="off" class="layui-select">
-                            <option value="0">通过审核</option>
-                            <option value="1">未通过审核</option>
+                            <option value="1">通过审核</option>
+                            <option value="0">未通过审核</option>
                         </select>
                     </div>
                 </div>
@@ -59,13 +59,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">书记员<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="ybghhySjy" placeholder="请选择" autocomplete="off" class="layui-input">
+                        <input type="text" name="ybghhySjy" placeholder="请输入内容" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">会议地点</label>
                     <div class="layui-input-block">
-                        <input type="text" name="ybghhyDd" autocomplete="off" class="layui-input">
+                        <input type="text" name="ybghhyDd" placeholder="请输入内容" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </div>
@@ -110,15 +110,30 @@
                 , format: 'yyyy-MM-dd'
             },
             submit: {
+                before: function () {
+                    var dat = tempValue("dtds", "aa", false);
+                    if (dat && (dat.length === 0 || $("#opp").val() === "")) {
+                        putMsg({
+                            alert: "未选中数据或未填写意见！",
+                            log: dat
+                        });
+                        return false;
+                    }
+                    tempValue("dtds", "aa");
+                    return param = {
+                        1: dat
+                    }
+                },
                 form: {
                     url: "/lifeManage/updateSgInfoYbghhy",
                     type: "POST",
                     data: ["issh", "ybghhySj", "ybghhySjy",
                         "ybghhyDd", "ybghhyChry", "ybghhyNr","shyj"],
                     contentType: "application/json",
-                    add:{
-                        ids: []
-                    }
+                    param: {
+                        1: "ids"
+                    },
+                    reload: "parent"
                 }
             }
         }

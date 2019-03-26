@@ -1,14 +1,12 @@
 package com.litbo.hospital.lifemanage.controller;
 
+import com.litbo.hospital.lifemanage.bean.vo.ListIdsVO;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 账实核对Controller
@@ -21,6 +19,13 @@ public class SgCheckController {
     @Autowired
     private SgCheckService sgCheckService;
 
+    /**
+     * 计划查询账实核对信息
+     * @param planId 计划id
+     * @param pageNum 当前页数
+     * @param pageSize 每页显示记录数
+     * @return Result
+     */
     @PostMapping("/selectSgCheck")
     public Result selectSgCheck(@RequestParam(name = "planId") String planId,
                                 @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
@@ -29,18 +34,30 @@ public class SgCheckController {
     }
 
     /**
-     * 添加账实核对信息
+     * 添加账实核对信息  审核存在
      *
      * @param ids    核对表id
-     * @param userId 核对人id
-     * @param check  核对是否存在 0不存在 1存在
      * @return Result
      */
-    @PostMapping("/updateSgCheckByIds")
-    public Result updateSgCheckByIds(@RequestParam(name = "ids") List<String> ids,
-                                     @RequestParam(name = "userId") String userId,
-                                     @RequestParam(name = "check") String check) {
-        sgCheckService.updateSgCheckByIds(ids, userId, check);
+    @PostMapping("/updateSgCheckYByIds")
+    public Result updateSgCheckYByIds(@RequestBody ListIdsVO ids) {
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgCheckService.updateSgCheckByIds(ids.getIds(), emp.getUserId(), "1");
+        return Result.success();
+    }
+
+    /**
+     * 添加账实核对信息 审核不存在
+     *
+     * @param id    核对表id
+     * @return Result
+     */
+    @PostMapping("/updateSgCheckNByIds")
+    public Result updateSgCheckNByIds(@RequestBody ListIdsVO id) {
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgCheckService.updateSgCheckByIds(id.getIds(), emp.getUserId(), "0");
         return Result.success();
     }
 
