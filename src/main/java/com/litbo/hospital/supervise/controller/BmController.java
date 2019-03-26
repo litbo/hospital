@@ -170,7 +170,7 @@ public class BmController {
     @ResponseBody
     public Result setBmBeto(@RequestBody SetBmVO bmVO){
         boolean flag = true;
-        flag = bmService.isAllZJD(bmVO.getObm_ids());
+        flag = bmService.isAllZJD(bmVO.getObmIds());
         //判断部门是否为叶子部门
         if(!flag) return Result.error("部门必须为叶子部门！！");
         //调整部门

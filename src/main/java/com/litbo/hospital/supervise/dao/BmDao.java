@@ -2,6 +2,7 @@ package com.litbo.hospital.supervise.dao;
 
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.provider.BmProvider;
+import com.litbo.hospital.supervise.vo.BmSelectLbVO;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.BmsTreeVO;
 import org.apache.ibatis.annotations.*;
@@ -67,7 +68,7 @@ public interface BmDao {
     @Update("update s_bm set wx_flag=#{fwFlag} where obm_id=#{obmId}")
     void setWxbm(@Param("obmId")String obmId, @Param("fwFlag")int fwFlag);
     @SelectProvider(type = BmProvider.class ,method = "listBmsAsLbBmsBySelectVO")
-    List<SBm> listBmsAsLbBmsBySelectVO(BmSelectVO selectVO);
+    List<BmSelectLbVO> listBmsAsLbBmsBySelectVO(BmSelectVO selectVO);
 
     @Select("   SELECT bm.bm_id,bm.bm_name,bm.bm_tel,bm.bm_addr," +
             "   bm.obm_id,bm.p_bm_id,bm.wx_flag,bm.xbm_flag ,bm.user_id,ep.user_xm as fzrName " +

@@ -61,8 +61,8 @@ public class EmpController {
     @GetMapping("/listSelectEmpBybmIdAndUserIdAndStatus")
     public Result listSelectEmps(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                 String bmId, String userId,String status) {
-        PageInfo info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId,status);
+                                 String bmId, String userId,String status,String bmName) {
+        PageInfo info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId,status,bmName);
         return Result.success(info);
     }
 

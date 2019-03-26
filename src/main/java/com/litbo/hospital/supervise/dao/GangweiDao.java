@@ -15,8 +15,8 @@ import java.util.List;
 public interface GangweiDao {
     @Select("select * from s_gangwei")
     List<SGangwei> getGws();
-//    @Select("select * from s_gangwei where gw_zz_zt=-1 ")
-    @Select("select * from s_gangwei ")
+    @Select("select * from s_gangwei where gw_zz_zt=-1 ")
+//    @Select("select * from s_gangwei ")
     List<SGangwei> listMZZGws();
     @Select("select * from s_gangwei where gw_zz_zt =#{gwZt}")
     List<GangWeiAndZtVO> listGwsByGwZt(String gwZt);
