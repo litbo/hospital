@@ -10,45 +10,32 @@ var $mainList = $("#main_nav_list")
     , p = $.getUrlParam('p')//获取URL地址中的 p 属性值，表示当前页面的名称
     , nN = Number(n)//Number化n值
     , tN = Number(t)
-    , shiro = ""
-    ,shir = layui.sessionData("rl").sr
+    , shiro = layui.sessionData("rl").sr
     , mList = {} //具体页面导航数据
     , nList = {};//大页面导航数据
 
 $(function () {
     $.ajax({
-        url:"/static/admin/js/json/shiro.json",
-        async:false,
-        success:function(res){
-            if(res.code === 0){
-                //获取当前用户的权限
-                shiro = res.data;
-                $.ajax({
-                    url:"/static/admin/js/json/nav.json",
-                    async:false,
-                    success:function(res){
-                        nList = res;
-                        addNav($navList);
-                        console.log("nav already!");
-                        $.ajax({
-                            url:"/static/admin/js/json/list.json",
-                            async:false,
-                            success:function(res){
-                                mList = res;
-                                addList($mainList, $viceList,mList);
-                                console.log("list already!");
-                            }
-                        })
-                    }
-                })
-            }
+        url: "/static/admin/js/json/nav.json",
+        async: false,
+        success: function (res) {
+            nList = res;
+            addNav($navList);
+            console.log("nav already!");
+            $.ajax({
+                url: "/static/admin/js/json/list.json",
+                async: false,
+                success: function (res) {
+                    mList = res;
+                    addList($mainList, $viceList, mList);
+                    console.log("list already!");
+                }
+            })
         }
     })
-    //addList($mainList, $viceList,mList);
-    //addNav($navList);
 });
 
-function addList(list, list1,main_list) {//list:包含主列表的容器 list1:包含副列表的容器
+function addList(list, list1, main_list) {//list:包含主列表的容器 list1:包含副列表的容器
     function changeTab(ele, callback) {
         layui.use(['element'], function () {
             var element = layui.element;
@@ -84,27 +71,38 @@ function addList(list, list1,main_list) {//list:包含主列表的容器 list1:�
         }
     }//判断当前页面，新建并切换TAB标签页
     function addPage(a) {//a:main_list[0] 或 main_list[x].items[i] (x>1)
-        var small_list = "",bre = true;
+        var small_list = "", bre = true;
         //权限不匹配不渲染列表
-        if(shir !== undefined){
-            for(var k=0;k<shir.length;k++){
-                if(a.shiro === shir[k].rightName){
+        if (shiro !== undefined) {
+            for (var k = 0; k < shiro.length; k++) {
+                if (a.shiro === shiro[k].rightName) {
                     bre = true;
                     break;
-                }else{
+                } else {
                     bre = false;
                 }
             }
             //若一个匹配都不成功则不渲染
-            if(!bre){
+            if (!bre) {
                 return false;
             }
         }
         if (a.children) {
             var $dl = $("<dl>").attr("class", "layui-nav-child").append(small_list);
             for (var j = 0; j < a.children.length; j++) {
-                //console.log(a.children.length);
                 var aList_j = a.children[j];
+                for (var u = 0; u < shiro.length; u++) {
+                    if (aList_j.shiro === shiro[u].rightName) {
+                        bre = true;
+                        break;
+                    } else {
+                        bre = false;
+                    }
+                }
+                //若一个匹配都不成功则不渲染
+                if (!bre) {
+                    continue;
+                }
                 $dl.append($("<dd>").attr(
                     {
                         "shiro:hasPermission": aList_j.shiro
@@ -149,35 +147,35 @@ function addList(list, list1,main_list) {//list:包含主列表的容器 list1:�
                     , bres = true
                     , xt_i = x.tools[i];
                 //匹配权限
-                if(shir !== undefined){
-                    for(var k=0;k<shir.length;k++){
-                        if(xt_i.shiro === shir[k].rightName){
+                if (shiro !== undefined) {
+                    for (var k = 0; k < shiro.length; k++) {
+                        if (xt_i.shiro === shiro[k].rightName) {
                             bres = true;
                             break;
-                        }else{
+                        } else {
                             bres = false;
                         }
                     }
                     //若一个匹配都不成功则不渲染
-                    if(!bres){
-                        return false;
+                    if (!bres) {
+                        continue;
                     }
                 }
                 $ul = $("<ul>").attr("class", "min_tools");
                 for (var j = 0; j < x.tools[i].children.length; j++) {
-                    var xT_iC_j = x.tools[i].children[j],bres1 = true;
-                    if(shir !== undefined){
-                        for(var t=0;t<shir.length;t++){
-                            if(xT_iC_j.shiro === shir[t].rightName){
+                    var xT_iC_j = x.tools[i].children[j], bres1 = true;
+                    if (shiro !== undefined) {
+                        for (var t = 0; t < shiro.length; t++) {
+                            if (xT_iC_j.shiro === shiro[t].rightName) {
                                 bres1 = true;
                                 break;
-                            }else{
+                            } else {
                                 bres1 = false;
                             }
                         }
                         //若一个匹配都不成功则不渲染
-                        if(!bres1){
-                            return false;
+                        if (!bres1) {
+                            continue;
                         }
                     }
                     //判断URL值是否为URL地址或者IP地址
@@ -249,14 +247,14 @@ function addList(list, list1,main_list) {//list:包含主列表的容器 list1:�
                 var onThis;//判断所有数据中是否有一个值与表示当前页面名称的属性值（p）对应
                 for (var j = 1; j < main_list.length; j++) {
                     //当有对应时则返回true并且结束循环，否则返回false并继续循环直至循环结束
-                    onThis = ( p === main_list[j].page );
+                    onThis = (p === main_list[j].page);
                     if (onThis) break;
                 }
                 //表示当前页面名称的属性值（p）与所有的数据中对应的名称均不匹配时页面将直接跳转至首页
-                if (!onThis) location.search =  "?p=home";
+                if (!onThis) location.search = "?p=home";
             }
         } else {//URL中无p属性时默认直接载入首页
-            location.search =  "?p=home";
+            location.search = "?p=home";
         }
     }
 }//动态的向页面中添加列表
