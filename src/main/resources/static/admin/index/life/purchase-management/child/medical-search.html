@@ -102,7 +102,12 @@
             submit: {
                 filter: "upData",//可以不写
                 before: function (param) {
+                    // 获取table数据
                     var tv = getTableValue("table");
+                    var data = [];
+                    for(var i=0;i<tv.length;i++){
+                        data.push(tv[i]["userId"]);
+                    }
                     if (doJudg({
                         0: [tv]
                     })) {
@@ -114,12 +119,13 @@
                     }
                     return param = {
                         1: sgId,
-                        2: tv
+                        2: data
                     };
                 },
                 form: {
                     url: "/lifeManage/insertSgDxyxzbkc",
                     type: "POST",
+                    contentType:"application/json",
                     data: ["dxzbDdnr", "dxzbYj"],
                     param: {
                         1: "sgId",
