@@ -8,6 +8,8 @@ import com.litbo.hospital.security.bean.JhRylr;
 import com.litbo.hospital.security.bean.JhZd;
 import com.litbo.hospital.security.service.JhRyLrService;
 import com.litbo.hospital.security.service.JhZdService;
+import com.litbo.hospital.security.vo.JhKhVo;
+import com.litbo.hospital.security.vo.JhRyCjLr;
 import com.litbo.hospital.security.vo.JhryVo;
 import com.litbo.hospital.supervise.vo.JhEmpVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,17 @@ public class JhController {
 
     @Autowired
     private JhRyLrService jhRyLrService;
+
+    @PostMapping("/jhcjLr")
+    public Result jhcjLr(@RequestBody JhRyCjLr jhRyCjLr){
+        try {
+            jhZdService.updateJhCj(jhRyCjLr);
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error();
+        }
+    }
 
     @PostMapping("/addJhRy")
     public Result addJhRy(@RequestBody JhryVo jhryVo){
@@ -199,6 +212,17 @@ public class JhController {
         } catch (Exception e) {
             e.printStackTrace();
             return Result.error("查询失败");
+        }
+    }
+
+    @GetMapping("/jhkhIndex")
+    public Result jhkhIndex(Integer jhId){
+        try {
+            JhKhVo jhKhVo = jhZdService.jhkhIndex(jhId);
+            return Result.success(jhKhVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("读取信息失败");
         }
     }
 

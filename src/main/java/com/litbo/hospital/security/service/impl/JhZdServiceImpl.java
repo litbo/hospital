@@ -7,12 +7,17 @@ import com.litbo.hospital.security.bean.JhZd;
 import com.litbo.hospital.security.dao.JhRyLrDao;
 import com.litbo.hospital.security.dao.JhZdDao;
 import com.litbo.hospital.security.service.JhZdService;
+import com.litbo.hospital.security.vo.JhEmp;
+import com.litbo.hospital.security.vo.JhKhVo;
+import com.litbo.hospital.security.vo.JhRyCjLr;
 import com.litbo.hospital.security.vo.JhZdVo;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.supervise.vo.JhEmpVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author zjc
@@ -30,6 +35,22 @@ public class JhZdServiceImpl implements JhZdService {
 
     @Autowired
     private EmpDao empDao;
+
+    @Override
+    public void updateJhCj(JhRyCjLr jhRyCjLr) {
+        for (JhEmp emp : jhRyCjLr.getJhEmp()) {
+            jhRyLrDao.updateCj(emp.getUserId(), emp.getJhlrCj(), jhRyCjLr.getJh().getJhId());
+        }
+    }
+
+    @Override
+    public JhKhVo jhkhIndex(Integer jhId) {
+        JhKhVo jhKh = jhZdDao.findJhKh(jhId);
+        List<JhEmp> empList = jhRyLrDao.findEmpByJhId(jhId);
+        if(empList!=null && empList.size()>0)
+        jhKh.setEmpList(empList);
+        return jhKh;
+    }
 
     @Override
     public PageInfo<JhEmpVo> jhryList(Integer pageNum,Integer pageSize, String userId, String userXm) {
