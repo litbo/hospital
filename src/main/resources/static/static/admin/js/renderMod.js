@@ -81,7 +81,7 @@ $(function () {
                             if(res.code === 0 && dat !== undefined){
                                 if(val.get.save){
                                     val.get.save["val"] = dat;
-                                    console.log(val.get.save);
+                                    //console.log(val.get.save);
                                 }
                                 for (var name in dat) {
                                     if (dat.hasOwnProperty(name)) {

@@ -32,7 +32,7 @@
 <body>
 
 <div class="layui-row">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="" lay-filter="form">
         <div class="layui-row">
             <div class="col-xs-12">
                 <fieldset class="layui-elem-field layui-field-title">
@@ -78,6 +78,7 @@
     renderMod = {
         form: {
             val: {
+                filter:"form",
                 get: {
                     url: "/lifeManage/selectSgDxyxzbkc",
                     type: "POST",
@@ -101,6 +102,7 @@
                     url: "/lifeManage/insertSgDxyxzbkc",
                     type: "POST",
                     data:["dxzbDdnr","dxzbSj","dxzbYj"],
+                    contentType:"application/json",
                     param:{
                         1:"sgId",
                         2:"userIds"
