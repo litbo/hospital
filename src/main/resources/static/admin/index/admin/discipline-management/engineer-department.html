@@ -18,6 +18,7 @@
         .layui-inline,
         .mini_select input {
             width: 140px;
+            height: 38px;
         }
 
         .mini_select {
@@ -36,6 +37,9 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
+
+    </div>
+    <div class="moreBtn hidden-xs">
         <div class="mini_select">
             <div class="layui-inline">
                 <select lay-filter="hfr" id="usId" name="userId">
@@ -44,9 +48,7 @@
             </div>
         </div>
 
-        <button class="layui-btn layui-btn-sm layui-btn-normal" data-type="hf" lay-event="hf">确定划分</button>
-    </div>
-    <div class="moreBtn hidden-xs">
+        <button class="layui-btn layui-btn-md layui-btn-normal" data-type="hf" lay-event="hf">确定划分</button>
         <div class="layui-inline">
             <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
         </div>
