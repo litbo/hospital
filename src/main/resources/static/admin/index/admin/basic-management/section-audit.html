@@ -170,7 +170,24 @@
                         }
                     }
                 }
-            }
+            },
+            event:[
+                {
+                    box:"radio",
+                    func:function(){
+                        var $val = $("input[name='ztCzzt']:checked").val();
+                        console.log($val);
+                        if($val === "1"){
+                            $("#nextShr").addClass("hidden");
+                            $("#syDays").addClass("hidden");
+                        }else if(xx=="科长审核"){
+                            $("#nextShr").removeClass("hidden");
+                        }else if(xx=="处长审核"){
+                            $("#syDays").removeClass("hidden");
+                        }
+                    }
+                }
+            ]
         }
 
     }

@@ -58,6 +58,10 @@
                     </div>
                 </div>
             </div>
+
+            <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" lay-event="shlc" id="addNew"><i
+                    class="fas fa-plus"></i>&nbsp;审核流程
+            </button>
         </div>
     </div>
     <div class="layui-row">
@@ -72,7 +76,7 @@
                     <input type="radio" name="ztCzzt" class="radis" value="1" title="不通过">
                 </div>
             </div>
-            <div class="layui-form-item" id="shrs">
+            <div class="layui-form-item" >
                 <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="" class="layui-input" autocomplete="off" >
@@ -244,12 +248,13 @@
                     box:"radio",
                     func:function(){
                         var $val = $("input[name='ztCzzt']:checked").val();
-                        console.log($val);
+                        var xx = $.getUrlParam('ztCzname');
                         if($val === "1"){
-                            $("#shrs").addClass("hidden");
+                            $("#nextShr").addClass("hidden");
                             $("#syDays").addClass("hidden");
-                        }else{
-                            $("#shrs").removeClass("hidden");
+                        }else if(xx=="科长审核"){
+                            $("#nextShr").removeClass("hidden");
+                        }else if(xx=="处长审核"){
                             $("#syDays").removeClass("hidden");
                         }
                     }

@@ -524,4 +524,10 @@ public class BmServiceImpl implements BmService {
         }
         return vos;
     }
+
+    @Override
+    public List<SBm> listBmsByBmName(int pageNum, int pageSize,String bmName) {
+        PageHelper.startPage(pageNum,pageSize);
+        return bmDao.listBmsByBmName(bmName);
+    }
 }

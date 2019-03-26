@@ -77,4 +77,7 @@ public interface BmDao {
 
     @Update("update s_bm set bm_name=#{bmName},wx_flag=#{wxFlag},user_id=#{userId}, bm_tel=#{bmTel},bm_addr=#{bmAddr}  where bm_id=#{bmId}")
     void updateBm(SBm bm);
+
+    @Select("select * from s_bm where bm_name like  '%'+#{bmName}+'%'")
+    List<SBm> listBmsByBmName(String bmName);
 }

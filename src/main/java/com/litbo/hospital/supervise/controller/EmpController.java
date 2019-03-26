@@ -45,7 +45,7 @@ public class EmpController {
     }
 
     //获取Emp基本信息
-    @GetMapping("/listSelectEmps")
+    @RequestMapping("/listSelectEmps")
     public Result listSelectEmps(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         PageInfo info = empService.listSelectEmps(pageNum, pageSize);
