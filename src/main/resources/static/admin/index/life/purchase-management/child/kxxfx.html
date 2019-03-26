@@ -46,7 +46,7 @@
     </div>
     <div class="col-xs-12">
         <div class="layui-collapse" style="margin-top:20px;">
-            <form class="layui-form layui-form-pane" action="">
+            <form class="layui-form layui-form-pane" action="" lay-filter="form">
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">使用情况和条件分析</h2>
                     <div class="layui-colla-content layui-show">
@@ -286,6 +286,7 @@
     renderMod={
         form:{
             val: {
+                filter:"form",
                 get: {
                     url: "/lifeManage/selectSgKxxfxBySgInfoId",
                     type: "POST",

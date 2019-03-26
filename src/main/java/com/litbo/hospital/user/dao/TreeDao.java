@@ -16,9 +16,9 @@ public interface TreeDao {
     @Select("select eq_pm_id as id , eq_pm_name as name from eq_pm where pid=#{pid}")
    List<TreeVo> listNoteByPid(String pid);
 
-    @Select("select right_id as id , bz as name from a_right where pid=#{pid}")
+    @Select("select right_id as id , bz as name from s_right where pid=#{pid}")
     List<TreeVo> listRightByPid(String pid);
 
-    @Select("select right_id ,bz as rightName ,pid from a_right")
+    @Select("select right_id ,bz as rightName ,pid from s_right")
     List<RightTreeVo> listRight();
 }

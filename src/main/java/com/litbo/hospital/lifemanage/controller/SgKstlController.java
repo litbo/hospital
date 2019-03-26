@@ -3,6 +3,8 @@ package com.litbo.hospital.lifemanage.controller;
 import com.litbo.hospital.lifemanage.bean.vo.SgKstlVO;
 import com.litbo.hospital.lifemanage.service.SgKstlService;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +36,6 @@ public class SgKstlController {
     /**
      * 显示部门下的所有讨论的设备
      *
-     * @param userId    登陆人id
      * @param eqPmName 设备名称
      * @param eqPmJc   设备简称
      * @param pageNum  页数
@@ -42,12 +43,13 @@ public class SgKstlController {
      * @return SgKstlAddSgInfoVO
      */
     @PostMapping("/selectSgKstlSbs")
-    public Result selectSgKstlSbs(@RequestParam(name = "userId") String userId,
-                                  @RequestParam(required = false, name = "eqPmName") String eqPmName,
+    public Result selectSgKstlSbs(@RequestParam(required = false, name = "eqPmName") String eqPmName,
                                   @RequestParam(required = false, name = "eqPmJc") String eqPmJc,
                                   @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
                                   @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
-        return Result.success(sgKstlService.selectSgKstlSbs(userId, eqPmName, eqPmJc, pageNum, pageSize));
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        return Result.success(sgKstlService.selectSgKstlSbs(emp.getUserId(), eqPmName, eqPmJc, pageNum, pageSize));
     }
 
 }

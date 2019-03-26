@@ -78,7 +78,7 @@
         addTable: {
             table:{
                 cols: [[ //表头
-                    {field: 'eqPmName', title: '设备名称', width: '53%', minWidth: 400, event: 'openLink'}
+                    {field: 'eqPmName', title: '设备名称', width: '53%', minWidth: 150, event: 'openLink'}
                     , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
                     , {field: 'eqFlId', title: '卫标分类', minWidth: 150, sort: true}
                     , {field: 'bh', title: '申购单编号', minWidth: 150}
@@ -89,9 +89,6 @@
                 ,request:{
                     pageName : 'pageNum',
                     limitName : 'pageSize'
-                }
-                ,where:{
-                    userId : "1615925037"
                 }
                 ,parseData: function(res) { //res 即为原始返回的数据
                     return {

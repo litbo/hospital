@@ -66,7 +66,7 @@ public interface BmService {
 
     List<BmsTreeVO> listTreeBms();
 
-
+    List<SBm> listBmsByBmName(int pageNum, int pageSize,String bmName);
 
     //通过父布门递归删除
 //    void removeBmByPid(String pid);

@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/supervise/bmgl")
@@ -49,6 +51,25 @@ public class BmController {
         }
         PageInfo date = new PageInfo(myJsonArray);
         return Result.success(date);
+    }
+
+    @RequestMapping("/bmSe")
+    public Result bmSe(){
+        Map map =new HashMap();
+        map.put("dom",
+                "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"部门名称\" autocomplete=\"off\"></div>" +
+                        "    <div class='layui-input-inline mar10-0' align='center'>" +
+                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/supervise/bmgl/listBmsByBmName");
+        m.put("type","reload");
+        String[] data = {"bmName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
     }
 
     //列出所有部门信息
@@ -87,10 +108,19 @@ public class BmController {
     }
 
     @GetMapping ("/listTreeBms")
+
     @ResponseBody
     public List<BmsTreeVO> listTreeBms(){
         List<BmsTreeVO> bmList = bmService.listTreeBms();
         return bmList;
+    }
+
+    @RequestMapping("/listBmsByBmName")
+    @ResponseBody
+    public Result listBmsByBmName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName){
+        List<SBm> bms = bmService.listBmsByBmName(pageNum,pageSize,bmName);
+        return Result.success(new PageInfo<>(bms));
     }
     @RequestMapping("/listBmsAsLbBms")
     @ResponseBody
@@ -106,6 +136,7 @@ public class BmController {
         PageInfo date = bmService.listBmsAsLbBmsBySelectVO(pageNum,pageSize,selectVO);
         return Result.success(date);
     }
+
     //查询部门信息通过老id
     @GetMapping("/getBmByOid")
     @ResponseBody
@@ -170,7 +201,7 @@ public class BmController {
     @ResponseBody
     public Result setBmBeto(@RequestBody SetBmVO bmVO){
         boolean flag = true;
-        flag = bmService.isAllZJD(bmVO.getObm_ids());
+        flag = bmService.isAllZJD(bmVO.getObmIds());
         //判断部门是否为叶子部门
         if(!flag) return Result.error("部门必须为叶子部门！！");
         //调整部门

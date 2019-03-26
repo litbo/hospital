@@ -14,6 +14,10 @@ import java.util.Date;
 @Data
 public class DisposalReportListVO {
     /**
+     * 处置管理id
+     */
+    private String id;
+    /**
      * 设备id
      */
     private String eqId;

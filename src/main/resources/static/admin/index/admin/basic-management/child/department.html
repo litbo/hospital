@@ -86,10 +86,11 @@
     $("#Save").on("click",function(){
         var daa = tempValue("dtdd","eqq");
         subUp({
-            url:"",
+            url:"/supervise/bmgl/setBmBeto",
             method:"POST",
+            contentType:"application/json",
             data:{
-                pbmId:newData,
+                pbmId:newData["bmId"],
                 obmIds:daa
             },
             reload:"parent"

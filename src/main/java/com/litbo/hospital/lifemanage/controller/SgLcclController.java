@@ -145,7 +145,7 @@ public class SgLcclController {
         LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         sgLccl.setRecord(emp.getUserId());
         sgLccl.setRecordTime(new Date());
-        sgLcclService.updateSgLccLByEqId(sgLccl);
+        sgLcclService.updateSgLccLByEqId4(sgLccl);
         return Result.success();
     }
 

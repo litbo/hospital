@@ -102,8 +102,18 @@
                             event: "describe",
                             tool: "toolbar",
                             type: 2,
-                            content: "./huizong.html",
-                            area: ["90%", "90%"]
+                            content: "./child/huizong.html",
+                            area: ["90%", "60%"],
+                            func:function(obj,cs){
+                                var data = [];
+                                for(var i=0;i<cs.data.length;i++){
+                                    data.push(cs.data[i]["id"]);
+                                }
+                                layui.sessionData("dtds",{
+                                    key:"sg",
+                                    value:data
+                                })
+                            }
                         }
                     })
                 }

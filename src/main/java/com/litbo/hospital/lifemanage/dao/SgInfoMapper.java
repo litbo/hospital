@@ -211,14 +211,15 @@ public interface SgInfoMapper {
      */
     @Update(" UPDATE sg_info " +
             " SET lzfx_id = #{sgLzfxId,jdbcType=VARCHAR}" +
-            " WHERE id = #{sgId,jdbcType=VARCHAR}")
+            " WHERE id = #{sgId}")
     int updateSgInfoSgLzfxIdById(@Param("sgId") String sgId, @Param("sgLzfxId") String sgLzfxId);
 
     /**
      * 显示申购单装备委员会审核列表
      *
-     * @param bh   申购单编号
-     * @param bmId 部门id
+     * @param eqPmPym 设备拼音码
+     * @param bh      申购单编号
+     * @param bmId    部门id
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoSgZbwyhhyList")

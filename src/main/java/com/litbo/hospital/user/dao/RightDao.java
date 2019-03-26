@@ -29,17 +29,17 @@ public interface RightDao {
     @Delete("DELETE FROM s_role_right WHERE role_id = #{roleId}")
     void deletaByRoleId(String roleId);
 
-    @Insert("INSERT INTO a_right(right_id,right_name,bz,pid) VALUES(#{rightId},#{rightName},#{bz},#{pid})")
+    @Insert("INSERT INTO s_right(right_id,right_name,bz,pid) VALUES(#{rightId},#{rightName},#{bz},#{pid})")
     Integer addRight(SRight sRight);
-    @Select("select right_id ,bz as rightName ,pid from a_right")
+    @Select("select right_id ,bz as rightName ,pid from s_right")
     List<RightTreeVo> listRightTree();
     @Select("SELECT r.bz as rightName ,r.right_id,r.pid FROM s_role_right rr \n" +
-            "LEFT JOIN a_right r on r.right_id=rr.right_id\n" +
+            "LEFT JOIN s_right r on r.right_id=rr.right_id\n" +
             "WHERE rr.role_id=#{roleId}")
     List<RightTreeVo> listRightTreeVoByRId(String roleId);
 
     @Select("SELECT r.bz as rightName,r.right_id,r.pid,r.right_name as checked FROM s_role_right rr \n" +
-            "LEFT JOIN a_right r on r.right_id=rr.right_id\n" +
+            "LEFT JOIN s_right r on r.right_id=rr.right_id\n" +
             "WHERE rr.role_id=#{roleId}")
     List<RightTreeSetValueVo> listRightTreeVoByRId1(String roleId);
 

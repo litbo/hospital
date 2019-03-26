@@ -21,7 +21,7 @@ public class SgZrpjbgController {
      * @param sgZrpjbg 准入评价报告
      */
     @PostMapping("/insertSgZrpjbg")
-    public Result insertSgZrpjbg(SgZrpjbg sgZrpjbg) {
+    public Result insertSgZrpjbg(@RequestBody SgZrpjbg sgZrpjbg) {
         sgZrpjbgService.insertOrUpdateSgZrpjbg(sgZrpjbg);
         return Result.success();
     }

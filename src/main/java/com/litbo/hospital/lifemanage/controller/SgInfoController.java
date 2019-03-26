@@ -11,6 +11,9 @@ import com.litbo.hospital.lifemanage.service.SgInfoService;
 import com.litbo.hospital.lifemanage.service.SgYbghhyService;
 import com.litbo.hospital.lifemanage.service.SgZbwyhhyService;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,6 +82,9 @@ public class SgInfoController {
      */
     @PostMapping("/updateSgInfoKssh")
     public Result updateSgInfoKssh(@RequestBody ShVO shVO) {
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        shVO.setShr(emp.getUserId());
         sgInfoService.updateSgInfoKssh(shVO);
         return Result.success();
     }
@@ -105,7 +111,10 @@ public class SgInfoController {
      * @return Result
      */
     @PostMapping("updateSgInfoYxgccsh")
-    public Result updateSgInfoYxgccsh( ShVO shVO) {
+    public Result updateSgInfoYxgccsh(@RequestBody ShVO shVO) {
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        shVO.setShr(emp.getUserId());
         sgInfoService.updateSgInfoYxgccsh(shVO);
         return Result.success();
     }
@@ -138,7 +147,12 @@ public class SgInfoController {
      */
     @PostMapping("/updateSgInfoZbwyhhy")
     public Result updateSgInfoZbwyhhy(@RequestBody SgZbwyhhyVO sgZbwyhhyVO) {
-        ShVO shVO = sgZbwyhhyVO.getShVO();
+        ShVO shVO = new ShVO();
+        BeanUtils.copyProperties(sgZbwyhhyVO,shVO);
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        shVO.setShr(emp.getUserId());
+        //更改申购单表中的状态
         sgInfoService.updateSgInfoZbwyhhy(shVO);
         //添加装备委员会审核信息
         for (String sgId : shVO.getIds()) {
@@ -175,7 +189,11 @@ public class SgInfoController {
      */
     @PostMapping("/updateSgInfoYbghhy")
     public Result updateSgInfoYbghhy(@RequestBody SgYbghhyVO sgYbghhyVO) {
-        ShVO shVO = sgYbghhyVO.getShVO();
+        ShVO shVO = new ShVO();
+        BeanUtils.copyProperties(sgYbghhyVO,shVO);
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        shVO.setShr(emp.getUserId());
         sgInfoService.updateSgInfoYbghhy(shVO);
         //添加院办公会审核信息
         for (String sgId : shVO.getIds()) {
@@ -196,7 +214,6 @@ public class SgInfoController {
     public Result selectSgInfoLzfxCols(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                        @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
                                        @RequestParam(required = false) String key) {
-
         String jsonMessage = "[{'type': 'radio'}, " +
                 "{field: 'bh', title: '申购单编号'}," +
                 "{field: 'pmName', title: '申购设备'}]";

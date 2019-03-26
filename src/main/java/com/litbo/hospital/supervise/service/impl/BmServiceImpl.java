@@ -171,8 +171,8 @@ public class BmServiceImpl implements BmService {
 
     @Override
     public void setBmsBeto(SetBmVO bmVO) {
-        String new_pbm_id = bmVO.getPbm_id();   //获取父部门
-        String[] obm_ids = bmVO.getObm_ids();   //获取子部门
+        String new_pbm_id = bmVO.getPbmId();   //获取父部门
+        String[] obm_ids = bmVO.getObmIds();   //获取子部门
         for(String obm_id:obm_ids){
             setBmBeto(obm_id,new_pbm_id);       //设置归属
         }
@@ -345,65 +345,51 @@ public class BmServiceImpl implements BmService {
     @Override
     public PageInfo listBmsAsLbBmsBySelectVO(int pageNum, int pageSize,  BmSelectVO selectVO) {
         PageHelper.startPage(pageNum,pageSize);
-        List<SBm> bms = bmDao.listBmsAsLbBmsBySelectVO(selectVO);
-        List<BmSelectLbVO> lbbms = new ArrayList<>();
+        List<BmSelectLbVO> lbbms = bmDao.listBmsAsLbBmsBySelectVO(selectVO);
 
         if(selectVO.getFlag()==1){
-            for (SBm bm:bms){
-                BmSelectLbVO lbbm = new BmSelectLbVO();
-                lbbm.setObmId(bm.getObmId());
-                lbbm.setBmId(bm.getBmId());
-                lbbm.setBmName(bm.getBmName());
-                if(bm.getBmId().startsWith("02"))
+            for (BmSelectLbVO lbbm:lbbms){
+                if(lbbm.getBmId().startsWith("02"))
                     lbbm.setBmLb("管理部门");
-                else if (bm.getBmId().startsWith("01")){
+                else if (lbbm.getBmId().startsWith("01")){
                     lbbm.setBmLb("机构领导");
-                }else if(bm.getBmId().startsWith("03")){
+                }else if(lbbm.getBmId().startsWith("03")){
                     lbbm.setBmLb("使用部门");
                 }else{
                     lbbm.setBmLb("未设置");
                 }
-                lbbms.add(lbbm);
             }
         }else if(selectVO.getFlag()==2){
-            for (SBm bm:bms){
+            for (BmSelectLbVO lbbm:lbbms){
 
-                if(bm.getBmId().startsWith("02")){
-                    BmSelectLbVO lbbm = new BmSelectLbVO();
-                    lbbm.setObmId(bm.getObmId());
-                    lbbm.setBmId(bm.getBmId());
-                    lbbm.setBmName(bm.getBmName());
-                    if(bm.getBmId().startsWith("0201")){
+                if(lbbm.getBmId().startsWith("02")){
+
+                    if(lbbm.getBmId().startsWith("0201")){
                         lbbm.setBmGk("医工");
-                    }else if(bm.getBmId().startsWith("0202")) {
+                    }else if(lbbm.getBmId().startsWith("0202")) {
                         lbbm.setBmGk("信息");
-                    }else if(bm.getBmId().startsWith("0203")) {
+                    }else if(lbbm.getBmId().startsWith("0203")) {
                         lbbm.setBmGk("后勤");
                     }
-                    lbbms.add(lbbm);
+
                 }
             }
         }else if(selectVO.getFlag()==3){
-            for (SBm bm:bms){
-                if(bm.getBmId().startsWith("02")){
-                    BmSelectLbVO lbbm = new BmSelectLbVO();
-                    lbbm.setObmId(bm.getObmId());
-                    lbbm.setBmId(bm.getBmId());
-                    lbbm.setBmName(bm.getBmName());
-                    if(bm.getBmId().startsWith("0201")){
+            for (BmSelectLbVO lbbm:lbbms){
+                if(lbbm.getBmId().startsWith("02")){
+                    if(lbbm.getBmId().startsWith("0201")){
                         lbbm.setBmGk("医工");
-                    }else if(bm.getBmId().startsWith("0202")) {
+                    }else if(lbbm.getBmId().startsWith("0202")) {
                         lbbm.setBmGk("信息");
-                    }else if(bm.getBmId().startsWith("0203")) {
+                    }else if(lbbm.getBmId().startsWith("0203")) {
                         lbbm.setBmGk("后勤");
                     }
 
-                    if(bm.getWxFlag().equals("1")){
+                    if(lbbm.getWxFlag().equals("1")){
                         lbbm.setIsGlbm("是");
                     }else {
                         lbbm.setIsGlbm("否");
                     }
-                    lbbms.add(lbbm);
                 }
 
             }
@@ -537,5 +523,11 @@ public class BmServiceImpl implements BmService {
             }
         }
         return vos;
+    }
+
+    @Override
+    public List<SBm> listBmsByBmName(int pageNum, int pageSize,String bmName) {
+        PageHelper.startPage(pageNum,pageSize);
+        return bmDao.listBmsByBmName(bmName);
     }
 }
