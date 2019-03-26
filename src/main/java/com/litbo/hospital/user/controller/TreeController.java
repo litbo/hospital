@@ -75,9 +75,24 @@ public class TreeController {
     @RequestMapping("/right1")
     public Result listNoteByPid1(String pid){
         List<TreeVo>  treeVos = treeDao.listRightByPid(pid);
+        for (TreeVo treeVo : treeVos) {
+            if(treeVo.getChildren()==null){
+                List<TreeVo> t = new  ArrayList<>();
+                treeVo.setChildren(t);
+            }
+
+        }
         return Result.success(treeVos);
 
     }
+
+    @RequestMapping("right3")
+    public Result listRight(){
+        return  Result.success(treeDao.listRight()) ;
+    }
+
+
+
 
 
 }

@@ -2,6 +2,7 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.JhZd;
 import com.litbo.hospital.security.dao.sqlprovider.JhZdProvider;
+import com.litbo.hospital.security.vo.JhKhVo;
 import com.litbo.hospital.security.vo.JhZdVo;
 import org.apache.ibatis.annotations.*;
 
@@ -36,4 +37,15 @@ public interface JhZdDao {
 
     @Select("select * from jh_zd where id = #{id}")
     public JhZd getJhzdById(Integer id);
+
+    @Select("SELECT\n" +
+            "dbo.jh_zd.id AS jhId,\n" +
+            "dbo.jh_zd.jh_name,\n" +
+            "dbo.jh_zd.jh_kstime,\n" +
+            "dbo.jh_zd.jh_jstime\n" +
+            "FROM\n" +
+            "dbo.jh_zd\n" +
+            "WHERE\n" +
+            "id = #{jhId}")
+    public JhKhVo findJhKh(Integer jhId);
 }

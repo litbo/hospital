@@ -123,7 +123,7 @@
               success:function(res){
                   if(res.code === 0){
                       formData["maxNum"] = Number(res.data["sgKstlRySl"]);
-                      console.log(formData);
+                      //console.log(formData);
                   }
               }
           });
@@ -169,7 +169,8 @@
                     },
                     add: {
                         userId: 1615925037
-                    }
+                    },
+                    reload:true
                 }
             }
         },

@@ -53,8 +53,8 @@ public interface BmDao {
     @SelectProvider(type = BmProvider.class ,method = "selectBmByX")
     List<SBm> getBmListByX(BmSelectVO selectVo);
 
-    @Delete("delete from s_bm where obm_id = #{oid}")
-    void removeBmByOid(String oid);
+    @Delete("delete from s_bm where bm_id = #{bmId}")
+    void removeBmByBmId(String bmId);
 
     @Select("select count(*) from s_bm where p_bm_id=#{obm_id}")
     Integer getAmountByPid(String obm_id);

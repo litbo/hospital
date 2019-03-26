@@ -85,10 +85,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <select name="shrId">
-                        <option value="1615925037">Gowen</option>
-                        <option>aaa</option>
-                        <option>bbb</option>
+                    <select name="shrId" lay-filter="shr">
+                        <option></option>
                     </select>
                 </div>
             </div>
@@ -133,6 +131,14 @@
                     data:["zdName","bmId","userId","zdContent","createTime","shrId"],
                     add:{
                         zdId:$.getUrlParam("zdId")
+                    },done:function(res){
+                        if(res.code === 0){
+                            layer.alert("提交成功",function () {
+                                location.reload();
+                            })
+                        }else{
+                            layer.alert("提交失败")
+                        }
                     }
 
                 }//表单提交函数
@@ -146,6 +152,11 @@
                         ids:"bmId",
                         text:"bmName",
                         url:"/supervise/bmgl/listBms2"
+                    },{
+                        filter: "shr",
+                        ids: "userId",
+                        text: "userXm",
+                        url: "/kwgl/empgl/listBmPartnerByUserId"
                     }
                 ],
                 get:{

@@ -36,7 +36,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">规章制度名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="zdName" class="layui-input" autocomplete="off">
+                    <input type="text" name="zdName" class="layui-input" autocomplete="off" disabled>
 
                 </div>
             </div>
@@ -68,11 +68,11 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">审核结果<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="radio" name="ztCzzt" value="2" title="通过" checked>
-                    <input type="radio" name="ztCzzt" value="1" title="不通过">
+                    <input type="radio" name="ztCzzt" class="radis" value="2" title="通 过" checked>
+                    <input type="radio" name="ztCzzt" class="radis" value="1" title="不通过">
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" id="shrs">
                 <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="" class="layui-input" autocomplete="off" >
@@ -83,14 +83,12 @@
             <div class="layui-form-item" id="nextShr">
                 <label class="layui-form-label">下一个审核人</label>
                 <div class="layui-input-block">
-                    <select name="nextShrId">
-                        <option>请选择</option>
-                        <option value="1615925037">Gowen</option>
-                        <option>aaa</option>
-                        <option>bbb</option>
+                    <select name="nextShrId" lay-filter="shr">
+                        <option></option>
                     </select>
                 </div>
             </div>
+
             <div class="layui-form-item" id="syDays">
                 <label class="layui-form-label">试用天数<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -118,7 +116,6 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="submit" id="startUploadFile">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </div>
@@ -130,7 +127,7 @@
 
 
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
+/*    layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
@@ -196,9 +193,10 @@
                 console.log(res);
             }
         })
-    });
+    });*/
 
     renderMod = {
+
         form:{
             val:{
                 filter:"forms",
@@ -206,9 +204,19 @@
                     url:"/supervise/zdgl/getZdById",
                     type:"GET",
                     data:{zdId:$.getUrlParam('zdId')}
-                }
-            }
-            ,
+                },
+                select: [
+                    {
+                        filter: "shr",
+                        ids: "userId",
+                        text: "userXm",
+                        url: "/kwgl/empgl/listBmPartnerByUserId"
+                    }
+                ]
+            },
+            date:{
+                elem: '#date'
+            },
             submit:{
                 form:{
                     url:"/supervise/zdgl/submitShMsg",
@@ -217,30 +225,50 @@
                     data:["ztCzzt","ztShyj","ztDate","nextShrId","syDays"],
                     add:{
                         zdId:$.getUrlParam("zdId")
+                    },done:function(res){
+                        if(res.code === 0){
+                            layer.alert("提交成功",function () {
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index); //再执行关闭
+                                parent.location.reload();
+                            })
+                        }else {
+                            layer.alert("提交失败")
+                        }
                     }
 
                 }
-            }
+            },
+            event:[
+                {
+                    box:"radio",
+                    func:function(){
+                        var $val = $("input[name='ztCzzt']:checked").val();
+                        console.log($val);
+                        if($val === "1"){
+                            $("#shrs").addClass("hidden");
+                            $("#syDays").addClass("hidden");
+                        }else{
+                            $("#shrs").removeClass("hidden");
+                            $("#syDays").removeClass("hidden");
+                        }
+                    }
+                }
+            ]
         }
-
-    }
+    };
 
     $(function () {
-
         var xx = $.getUrlParam('ztCzname');
-        if (xx == "处长审核") {
+        if (xx === "处长审核") {
             $("#nextShr").addClass("hidden");
             $("#syDays").removeClass("hidden");
-        } else if(xx == "科长审核"){
+        } else if(xx === "科长审核"){
             $("#nextShr").removeClass("hidden");
             $("#syDays").addClass("hidden");
         }
-
     })
-    // $('input[type=radio][name=ztCzzt]').on("change":function() {
-    //     alert("cc");
-    //     alert(this.val);
-    // });
+
 
 </script>
 </body>

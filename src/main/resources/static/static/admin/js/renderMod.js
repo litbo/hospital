@@ -137,7 +137,7 @@ $(function () {
                 } else{
                     putMsg({
                         error:"renderMod.js遇到一个无法处理的错误：",
-                        log:"renderMod.formAction.val参数传递错误(LINE:116),请参考表单渲染文档！"
+                        log:"renderMod.formAction.val参数传递错误(LINE:61),请参考表单渲染文档！"
                     });
                 }
 
@@ -293,7 +293,7 @@ $(function () {
                 function setE(eve) {
                     if (eve.box) {
                         //当eve.filter = true时则使用默认的过滤字符，否则使用自定义的字符
-                        var filter = eve.filter === true ? '(' + normal.filter + ')' :  '(' + eve.filter + ')';
+                        var filter = eve.filter === true ? '(' + normal.filter + ')' :  '(' + eve.filter + ')' || "";
                         console.log(eve);
                         console.log(eve.box + filter);
                         form.on(eve.box + filter, function (data) {
@@ -302,7 +302,7 @@ $(function () {
                             //-----value:被选中的值(select(下拉) checkbox(复选) switch(开关) radio(单选))
                             //-----othis:美化后的DOM对象(select(下拉) checkbox(复选) switch(开关))
                             //-----elem.checked(checkbox(复选) switch(开关))
-                            console.log("=IN=");
+                            //console.log("=IN=");
                             //如果存在函数则执行函数
                             eve.func && eve.func(data,eve);
 
@@ -494,7 +494,7 @@ $(function () {
                 } else if (Type(date) === "array") {
                     for (var v = 0; v < date.length; v++) {
                         if (Type(date[v]) === "json") {
-                            a(date[j]);
+                            a(date[v]);
                         }
                     }
                 }

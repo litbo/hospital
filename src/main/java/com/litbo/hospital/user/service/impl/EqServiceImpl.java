@@ -33,10 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
 import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
@@ -48,6 +45,18 @@ public class EqServiceImpl implements EqService {
     EqDao eqDao;
     @Autowired
     PmDao pmDao;
+
+    //初始化设备流水号（设备Id）
+    public  String  setLsh(){
+        if(eqDao.countEq()==0){
+            String eqId ="10000";
+            return eqId;
+        }else{
+            Integer eqId1 = Integer.parseInt(eqDao.getLastId())+1;
+            String  eqId = eqId1.toString();
+            return eqId;
+        }
+    }
     @Override
     public List<EqVo> getAllEq() {
         return eqDao.getAllEq();
@@ -70,14 +79,8 @@ public class EqServiceImpl implements EqService {
         }
 
         //初始化设备流水号
-        if(eqDao.countEq()==0){
-           String eqId ="10000";
-           eqInfo.setEqId(eqId);
-        }else{
-            Integer eqId1 = Integer.parseInt(eqDao.getLastId())+1;
-            String  eqId = eqId1.toString();
-            eqInfo.setEqId(eqId);
-        }
+        eqInfo.setEqId(setLsh());
+
 
         //初始化设备编号
         //年月1812 + pm编号68031409 + 级别 1 + 流水号eqId
@@ -153,7 +156,12 @@ public class EqServiceImpl implements EqService {
 
         Workbook workbook = null;
         InputStream inputStream = null;
-
+        List<Integer> ids = new ArrayList<>();
+        ids.add(6);
+        ids.add(7);
+        ids.add(10);
+        ids.add(17);
+        ids.add(18);
         try {
             inputStream = new ByteArrayInputStream(file.getBytes());
             workbook = WorkbookFactory.create(inputStream);
@@ -166,7 +174,7 @@ public class EqServiceImpl implements EqService {
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
 
             List<Map<String, Object>> mapList = listToMap(lists, list);
 
@@ -175,17 +183,15 @@ public class EqServiceImpl implements EqService {
                 EqInfo eqInfo = parseMap2Object(map,EqInfo.class);
 
                 //初始化设备流水号
-                if(eqDao.countEq()==0){
-                    String eqId ="10000";
-                    eqInfo.setEqId(eqId);
-                }else{
-                    Integer eqId1 = Integer.parseInt(eqDao.getLastId())+1;
-                    String  eqId = eqId1.toString();
-                    eqInfo.setEqId(eqId);
+                eqInfo.setEqId(setLsh());
+                //设置拼音码
+                String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
+                if(pym!=""){
+                    eqInfo.setEqPym(pym);
                 }
 
-               if(eqDao.addEq(eqInfo)<0){
-                    return -1;
+               if(eqDao.addEq(eqInfo)<=0){
+                    return 1/0;
                }
             }
 
@@ -201,6 +207,7 @@ public class EqServiceImpl implements EqService {
     public Integer importFj(MultipartFile file) {
         Workbook workbook = null;
         InputStream inputStream = null;
+        List<Integer> ids = new ArrayList<>();
 
         try {
             inputStream = new ByteArrayInputStream(file.getBytes());
@@ -214,7 +221,7 @@ public class EqServiceImpl implements EqService {
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
 
             List<Map<String, Object>> mapList = listToMap(lists, list);
             for (Map<String, Object> map : mapList) {

@@ -1,8 +1,6 @@
 package com.litbo.hospital.security.dao.sqlprovider;
 
 import com.litbo.hospital.security.enums.EnumApplyStatus;
-import com.litbo.hospital.security.vo.ListFwFpByWaitExamineVo;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 public class FwFpSqlProvider {
@@ -54,7 +52,7 @@ public class FwFpSqlProvider {
             {
                 SELECT("id,fp_dh,fp_price,s.user_xm djrName,fp_hm,fp_sd_time");
                 FROM("fw_fp");
-                LEFT_OUTER_JOIN("s_emp AS s ON s.user_id = fw_fp.fp_shr_id");
+                LEFT_OUTER_JOIN("s_emp AS s ON s.user_id = fw_fp.user_id");
                 WHERE("id = #{id}");
             }
         }.toString();

@@ -5,14 +5,15 @@ import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwFp;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
-import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwFpService;
 import com.litbo.hospital.security.vo.SelectFwFpByIdVo;
-import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
@@ -68,7 +69,7 @@ public class FwFpController {
         //TODO 已修改
         LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
         String djrId = sEmp.getUserId();
-        fp.setFpShrId(djrId);
+        fp.setUserId(djrId);
 //        fp.setFpSdTime(new Date());
         fp.setFpStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());
         Integer res = fpService.insertFwFp(fp);

@@ -76,8 +76,8 @@ public interface EmpDao {
     @Select("SELECT emp2.user_id,emp2.user_xm from s_emp as emp1 INNER JOIN s_emp emp2 ON (emp1.bm_id=emp2.bm_id) " +
             "where emp1.user_id=#{userId} ")
     List<SEmp> listPartnerByUserId(String userId);
-    @Select("SELECT emp2.user_id,emp2.user_xm from s_user as emp1 INNER JOIN s_user emp2 ON (emp1.bm_id=emp2.bm_id) " +
-            "where emp1.user_id=#{userId} ")
+    @Select("select ur.user_id ,ep.user_xm from s_user ur LEFT JOIN s_emp ep ON(ur.user_id=ep.user_id) where \n" +
+            "ur.user_id in (SELECT emp2.user_id from s_emp as emp1 INNER JOIN s_emp emp2 ON (emp1.bm_id=emp2.bm_id) where emp1.user_id=#{userId}) ")
     List<SEmp> listBmPartnerByUserId(String userId);
     @Select("select * from s_emp where user_id=#{userId}")
     SEmp getEmpsByUserId(String userId);
@@ -105,17 +105,8 @@ public interface EmpDao {
         "    where user_id = #{userId,jdbcType=VARCHAR}")
     void updateEmp(SEmp emp);
 
-    @Select("SELECT\n" +
-            "emp.user_id AS empId,\n" +
-            "emp.user_xm,\n" +
-            "bm.bm_name\n" +
-            "\n" +
-            "FROM\n" +
-            "dbo.s_emp AS emp ,\n" +
-            "dbo.s_bm AS bm\n" +
-            "WHERE\n" +
-            "emp.bm_id = bm.bm_id")
-    public List<JhEmpVo> getJhEmpVo();
+    @SelectProvider(type = EmpProvider.class,method = "selectEmpByIdOrName")
+    public List<JhEmpVo> getJhEmpVo(@Param("userId") String userId , @Param("userXm") String userXm);
 
 
 }

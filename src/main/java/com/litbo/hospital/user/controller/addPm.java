@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,7 @@ public class addPm {
         File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\医疗器械分类编码68【20181210】.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
+        List<Integer> ids = new ArrayList<>();
         try {
             inputStream = new FileInputStream(file);
             workbook = WorkbookFactory.create(inputStream);
@@ -55,7 +57,7 @@ public class addPm {
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
             //System.out.println(list);
             for (List<Object> objectList : lists) {
                 //System.out.println(objectList);
@@ -92,6 +94,7 @@ public class addPm {
         File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\权限\\新建文件夹\\导入数据.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
+        List<Integer> ids = new ArrayList<>();
         try {
             inputStream = new FileInputStream(file);
             workbook = WorkbookFactory.create(inputStream);
@@ -104,7 +107,7 @@ public class addPm {
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
             //System.out.println(list);
             for (List<Object> objectList : lists) {
                 //System.out.println(objectList);

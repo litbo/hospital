@@ -18,10 +18,10 @@ import java.io.IOException;
 @RequestMapping("/download")
 public class DownController {
 
-    @RequestMapping("/eqExcel")
-    public ResponseEntity<InputStreamResource> eqExcel() throws IOException {
+    @RequestMapping("/file")
+    public ResponseEntity<InputStreamResource> eqExcel(String url) throws IOException {
         String path = System.getProperty("user.dir");
-        String filePath =path+"/downloadFile/eqModel.xlsx";
+        String filePath =path+url;
         FileSystemResource file = new FileSystemResource(filePath);
         HttpHeaders headers = DownloadFile.downloadFile(file);
         return ResponseEntity

@@ -12,9 +12,11 @@ public class GroupSelectDetailVO {
     private String bmId;
     private String bmName;
     private String groupName;
+    private String userId1;
     private String userName1;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date createTime;
+    private String userId2;
     private String userName2;
     List<GroupUserSelectVO> userSelectVOS;
 

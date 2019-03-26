@@ -35,7 +35,7 @@ public interface FwWxfService {
      * @param userId
      * @return
      */
-    public PageInfo<WxfListVo> WxfList(String userId, Integer pageNum, Integer pageSize);
+    public PageInfo<WxfListVo> WxfList(String userId, Integer pageNum, Integer pageSize, String fwId, String eqName);
 
 
     public List<FwIdSelectVo> wxfGetEq(String userId);

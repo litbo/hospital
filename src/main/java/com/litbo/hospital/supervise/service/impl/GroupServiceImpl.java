@@ -121,8 +121,10 @@ public class GroupServiceImpl implements GroupService {
         vo.setBmName(group.getBmName());
         vo.setBmId(group.getBmId());
         vo.setGroupName(group.getGroupName());
+        vo.setUserId1(group.getUserId1());
         vo.setUserName1(group.getUserName1());
         vo.setCreateTime(group.getCreateTime());
+        vo.setUserId2(group.getUserId2());
         vo.setUserName2(group.getUserName2());
         vo.setUserSelectVOS(users);
         return vo;

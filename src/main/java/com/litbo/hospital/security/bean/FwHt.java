@@ -25,7 +25,7 @@ public class FwHt {
 
     private String htYfdb;
 
-    private String htZffs;
+    private Integer htZffs;
 
     private String htJfly;
 
