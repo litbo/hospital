@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -139,6 +140,7 @@ public class SgInfoServiceImpl implements SgInfoService {
         } else {
             shVO.setZt("科室审核未通过");
         }
+        shVO.setShsj(new Date());
         sgInfoMapper.updateSgInfoKssh(shVO);
     }
 

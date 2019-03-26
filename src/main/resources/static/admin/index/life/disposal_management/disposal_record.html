@@ -54,6 +54,9 @@
                 <button class="layui-btn" data-type="reload">查找</button>-->
     </div>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="application">详情</a>
+</script>
 <script>
     renderMod = {
         addTable: {
@@ -66,10 +69,11 @@
                     , {field: 'eqXh', title: '型号', minWidth: 100}
                     , {field: 'eqGg', title: '规格', minWidth: 100}
                     , {field: 'eqCgrq', title: '购置日期', minWidth: 180, sort: true}
-                    , {field: 'eqPrice', title: '单价', minWidth: 50, sort: true}
-                    , {field: 'userName', title: '申报人', minWidth: 50}
+                    , {field: 'eqPrice', title: '单价', minWidth: 80, sort: true}
+                    , {field: 'userName', title: '申报人', minWidth: 100}
                     , {field: 'declareTime', title: '申报日期', minWidth: 180, sort: true}
-                    , {field: 'mode', title: '处置方式', minWidth: 80}
+                    , {field: 'mode', title: '处置方式', minWidth: 120}
+                    , {fixed: 'right', minWidth: 100, align: 'center', toolbar: "#bar"}
                 ]]
                 , url: "/lifeManage/selectXList"
                 , method: "POST"
@@ -96,24 +100,26 @@
                             tool: "toolbar",
                             type: 2,
                             content: "./child/record_style.html",
-                            area: ["50%", "35%"]
-                        }
-                        /*"obj": obj,
-                        "toolFunc": [{
-                            send: {
-                                id: "table",
-                                filter: "table1",
-                                name: "ids",
-                                event: "describe",
-                                url: "/lifeManage/updateSgLccLByEqId4",
-                                type: "POST",
-                                par: "eqId",
-                                reload: true,
-                                reTable: true
-                            },
-                            tool: "toolbar",
-                            event: "describe"
-                        }]*/
+                            area: ["58%", "42%"],
+                            func:function(obj,cs){
+                                var data = [];
+                                for(var i=0;i<cs.data.length;i++){
+                                    data.push(cs.data[i]["id"]);
+                                }
+                                layui.sessionData("dtds",{
+                                    key:"idss",
+                                    value:data
+                                })
+                            }
+                        },
+                        tools:[
+                            {
+                                event:"application",
+                                type:2,
+                                content:"./child/details_page.html",
+                                dataUrl:["eqId"]
+                            }
+                        ]
                     })
                 }
 

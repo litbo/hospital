@@ -1,8 +1,10 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 院办公会会议信息表实体类
@@ -33,8 +35,30 @@ public class SgYbghhyVO {
      * 内容
      */
     private String ybghhyNr;
+
     /**
-     * 审核信息
+     * 审核人
      */
-    private ShVO shVO;
+    private String shr;
+    /**
+     * 是否通过审核
+     */
+    private String issh;
+    /**
+     * 审核时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date shsj;
+    /**
+     * 审核意见
+     */
+    private String shyj;
+    /**
+     * 审核状态
+     */
+    private String zt;
+    /**
+     * 审核申购单列表
+     */
+    private List<String> ids;
 }

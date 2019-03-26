@@ -33,6 +33,9 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="application">详情</a>
+</script>
 <script>
     renderMod = {
         addTable: {
@@ -44,6 +47,7 @@
                     , {field: 'eqGg', title: '规格', minWidth: 100}
                     , {field: 'eqXh', title: '型号', minWidth: 200}
                     , {field: 'eqPrice', title: '价格', minWidth: 100}
+                    , {fixed: 'right', minWidth: 100, align: 'center', toolbar: "#bar"}
                 ]]
                 , url: "/lifeManage/selectScrappedList"
                 , method: "POST"

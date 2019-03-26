@@ -61,6 +61,13 @@ public interface SgLcclService {
     void updateSgLccLByEqId(SgLcclVO sgLccl);
 
     /**
+     * 处置备案
+     *
+     * @param sgLccl 上报审核信息
+     */
+    void updateSgLccLByEqId4(SgLcclVO sgLccl);
+
+    /**
      * 待上报列表
      *
      * @param pageNum  当前页数
