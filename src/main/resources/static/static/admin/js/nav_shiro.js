@@ -165,17 +165,21 @@ function addList(list, list1,main_list) {//list:包含主列表的容器 list1:�
                 }
                 $ul = $("<ul>").attr("class", "min_tools");
                 for (var j = 0; j < x.tools[i].children.length; j++) {
-                    var xT_iC_j = x.tools[i].children[j];
-                    //匹配权限
+                    var xT_iC_j = x.tools[i].children[j],bres1 = true;
                     if(shir !== undefined){
-                        for(var k=0;k<shir.length;k++){
-                            if(xT_iC_j.shiro === shir[k].rightName){
-                                bres = true;
+                        for(var t=0;t<shir.length;t++){
+                            if(xT_iC_j.shiro === shir[t].rightName){
+                                bres1 = true;
                                 break;
                             }else{
-                                bres = false;
+                                bres1 = false;
                             }
-                        }}
+                        }
+                        //若一个匹配都不成功则不渲染
+                        if(!bres1){
+                            return false;
+                        }
+                    }
                     //判断URL值是否为URL地址或者IP地址
                     if (/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(xT_iC_j.url) || /((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)/.test(xT_iC_j.url)) {
                         sUrl = xT_iC_j.url;

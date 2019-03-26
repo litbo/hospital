@@ -44,7 +44,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;">
                 </div>
 
             </div>
@@ -171,7 +171,13 @@
                     base:'./management-add.html',
                     key:'abc',
                     name:'bbb',
-                    bmId:formData.radio[0].bmId
+                    before:function(){
+                        var ids = formData.radio[0].bmId;
+                      return {
+                          bmId:ids
+                      }
+                    },
+                    param:["bmId"]
                 }
             ],
             delItem: ".delNew",
