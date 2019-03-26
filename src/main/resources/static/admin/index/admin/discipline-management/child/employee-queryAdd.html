@@ -53,6 +53,15 @@
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">民族</label>
+                <div class="layui-input-block">
+                    <select name="mzId" lay-filter="mz">
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">部门</label>
                 <div class="layui-input-block">
                     <select name="bmId" lay-filter="bm">
@@ -89,9 +98,14 @@
                 <label class="layui-form-label">学历</label>
                 <div class="layui-input-block">
                     <select name="xllbId">
+                        <option value="0">博士生</option>
                         <option value="1">研究生</option>
-                        <option value="2">本科生</option>
-                        <option value="3">博士生</option>
+                        <option value="2">大学本科</option>
+                        <option value="3">大学专科及专科学校</option>
+                        <option value="4">中专及中技</option>
+                        <option value="5">技工学校</option>
+                        <option value="6">高中</option>
+                        <option value="7">初中及以下</option>
                     </select>
                 </div>
             </div>
@@ -116,9 +130,7 @@
                 <label class="layui-form-label">岗位</label>
                 <div class="layui-input-block">
                     <select name="zggwlbId">
-                        <option value="1">医生</option>
-                        <option value="2">护士</option>
-                        <option value="3">院长</option>
+
                     </select>
                 </div>
             </div>

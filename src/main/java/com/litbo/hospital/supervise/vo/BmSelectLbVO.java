@@ -10,4 +10,5 @@ public class BmSelectLbVO {
     private String bmLb;
     private String bmGk;
     private String isGlbm;
+    private String wxFlag;
 }
