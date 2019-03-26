@@ -38,7 +38,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">员工<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select id="userId" name="z" lay-verify="required">
+                    <select id="userId" name="z" lay-verify="required" lay-filter="emp">
                         <option></option>
                         <option value="1615925037">于金科</option>
                         <option value="1615925038">刘松峰</option>
@@ -101,6 +101,12 @@
                         ids:"gwId",
                         text:"gwName",
                         url:"/supervise/gwgl/listGws2"
+                    },{
+                        filter:"emp",
+                        ids:"userId",
+                        text:"userXm",
+                        url:"/kwgl/empgl/listEmpByBmId",
+                        data:{"bmId":$.getUrlParam("bmId")}
                     }
                 ]
             }

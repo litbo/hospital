@@ -925,20 +925,20 @@ action = func = {
                         if (event === value.event) {
                             vas = value;
                         }else{
-                            console.log("ISBACK");
+                            //console.log("ISBACK");
                             return false;
                         }
                     } else if (Type(value) === "array") {
                         for (var x = 0; x < value.length; x++) {
-                            console.log("IS", event, value[x].event);
+                            //console.log("IS", event, value[x].event);
                             if (event === value[x].event) {
-                                console.log("IN-IN-IN", event, value[x].event);
+                                //console.log("IN-IN-IN", event, value[x].event);
                                 vas = value[x];
                             }else{
                                 num++;
                             }
                         }
-                        console.log(num,value.length);
+                        //console.log(num,value.length);
                         if(num === value.length){
                             num = 0;
                             return false;
