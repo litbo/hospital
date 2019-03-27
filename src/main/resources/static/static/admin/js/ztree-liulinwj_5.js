@@ -4,7 +4,7 @@
  * @author Liulinwj
  * @licence MIT
  */
-;(function ($, ztree) {
+(function ($, ztree) {
 
   if (!ztree) {
     return;

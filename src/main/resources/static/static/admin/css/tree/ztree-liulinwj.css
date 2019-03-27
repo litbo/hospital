@@ -174,3 +174,35 @@
 .ztree ul ul{
   padding-left:25px;
 }
+
+.chk{
+  width: 16px;
+  display: block;
+  height: 16px;
+  float: left;
+  margin-right: -10px;
+  background-image:url("/static/admin/css/tree/img/square.png")!important;
+  background-size:100% 100%;
+}
+.switch{
+  margin-left: 10px;
+}
+.checkbox_false_full_focus{
+  background-image:url("/static/admin/css/tree/img/check.png")!important;
+  background-color:#00b7ee;
+}
+.checkbox_true_part{
+  background-image:url("/static/admin/css/tree/img/check.png")!important;
+  background-color:rgba(0,0,0,0.5);
+}
+.checkbox_true_full{
+  background-image:url("/static/admin/css/tree/img/done.png")!important;
+  background-color:#f10214;
+}
+.checkbox_true_full_focus{
+  background-image:url("/static/admin/css/tree/img/check.png")!important;
+  background-color:rgba(100,100,100,0.6);
+}
+.checkbox_true_disable{
+  background-image:url("/static/admin/css/tree/img/ban.png")!important;
+}

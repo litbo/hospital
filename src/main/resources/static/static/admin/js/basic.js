@@ -671,6 +671,7 @@ function getFormValue(name,res,force){
     for(var c=0;c<name.length;c++){
         var inputValue = $("input[type=text][name=" + name[c] + "]").val()
             ,selectValue = $("select[name=" + name[c] + "]").val()
+            ,hideValue = $("input[type=hidden][name=" + name[c] + "]").val()
             ,textareaValue = $("textarea[name=" + name[c] + "]").val()
             ,radioValue = $("input[type=radio][name=" + name[c] + "]:checked").val()
             ,checkBoxValue = $("input[type=checkbox][name=" + name[c] + "]:checked").val();
@@ -681,6 +682,8 @@ function getFormValue(name,res,force){
             data[name[c]] = inputValue;
         } else if (selectValue) {
             data[name[c]] = selectValue;
+        } else if (hideValue) {
+            data[name[c]] = hideValue;
         } else if (textareaValue) {
             data[name[c]] = textareaValue;
         } else if (radioValue) {
@@ -692,6 +695,7 @@ function getFormValue(name,res,force){
         }else{
             force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
         }
+        //console.log(data);
     }
     return data;
 }
@@ -921,20 +925,20 @@ action = func = {
                         if (event === value.event) {
                             vas = value;
                         }else{
-                            console.log("ISBACK");
+                            //console.log("ISBACK");
                             return false;
                         }
                     } else if (Type(value) === "array") {
                         for (var x = 0; x < value.length; x++) {
-                            console.log("IS", event, value[x].event);
+                            //console.log("IS", event, value[x].event);
                             if (event === value[x].event) {
-                                console.log("IN-IN-IN", event, value[x].event);
+                                //console.log("IN-IN-IN", event, value[x].event);
                                 vas = value[x];
                             }else{
                                 num++;
                             }
                         }
-                        console.log(num,value.length);
+                        //console.log(num,value.length);
                         if(num === value.length){
                             num = 0;
                             return false;

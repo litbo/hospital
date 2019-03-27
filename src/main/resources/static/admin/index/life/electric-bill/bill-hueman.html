@@ -114,7 +114,8 @@
             elem: "#table"
             , height: 'full-75'
             , cols: [[ //表头
-                {field: 'eqBmName', title: '户名', minWidth: 200, sort: true}
+                {type: "checkbox"}
+                , {field: 'eqBmName', title: '户名', minWidth: 200, sort: true}
                 , {field: 'eqSbbh', title: '设备编号', minWidth: 200}
                 , {field: 'eqName', title: '设备名称', minWidth: 200}
                 , {field: 'eqYq', title: '院内编码', minWidth: 200}
@@ -137,7 +138,7 @@
                     "code": res.code, //解析接口状态
                     "msg": res.msg, //解析提示文本
                     "data": res.data.list, //解析数据列表
-                    "count":res.data.total
+                    "count": res.data.total
                 }
             }
 

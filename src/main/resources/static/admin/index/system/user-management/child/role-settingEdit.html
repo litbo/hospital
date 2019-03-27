@@ -56,7 +56,6 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </div>
@@ -95,14 +94,7 @@
                     param:{
                         1:"roleId"
                     },
-                    done:function(res){
-                        if(res.code === 0){
-                            //提交完成后关闭页面
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                            parent.location.reload();
-                        }
-                    }
+                    reload:"parent"
                 }
             }
         },

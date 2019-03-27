@@ -32,7 +32,7 @@
 <body>
 
 <div class="layui-row">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="" lay-filter="form">
         <div class="layui-row">
             <div class="col-xs-12">
                 <fieldset class="layui-elem-field layui-field-title">
@@ -43,19 +43,19 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">申请单位</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pjbgDw" class="layui-input" autocomplete="off">
+                        <input type="text" name="pjbgDw" placeholder="请输入内容" class="layui-input" autocomplete="off">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">申请装备项目</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pjbgZbxm" autocomplete="off" class="layui-input">
+                        <input type="text" name="pjbgZbxm" placeholder="请输入内容" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">部门负责人</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pjbgBmfzr" autocomplete="off"  class="layui-input">
+                        <input type="text" name="pjbgBmfzr" placeholder="请输入内容" autocomplete="off"  class="layui-input">
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">制表单位</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pjbgZbdw" autocomplete="" class="layui-input">
+                        <input type="text" name="pjbgZbdw" placeholder="请输入内容" autocomplete="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -86,6 +86,7 @@
     renderMod = {
         form: {
             val: {
+                filter:"form",
                 get: {
                     url: "/lifeManage/selectSgZrpjbgBySgInfoId",
                     type: "POST",
@@ -96,7 +97,8 @@
             },
             date:{
                 elem:'#date',
-                value:today
+                format:"yyyy-MM-dd",
+                value:today0
             },
             submit: {
                 before:function(){
@@ -107,25 +109,22 @@
                 form: {
                     url: "/lifeManage/insertSgZrpjbg",
                     type: "POST",
-                    contentType:"application/json",
                     data:["pjbgDw","pjbgZbxm","pjbgBmfzr","pjbgZbdw","pjbgRq"],
+                    contentType:"application/json",
                     param:{
                         1:"sgId"
+                    },
+                    success:function(res){
+                        console.log("提交成功！",res);
                     }
-                }//表单提交函数
-            }
-        },
-        btn:{
-            elem:'#upData',
-            func:function(){
-                layui.use('layer',function(){
-                    var layer = layui.layer;
-                    layer.open({
+                },
+                func:function(){
+                    layOpen({
                         type:2,
-                        content:'kxxfx.html?sgId='+$.getUrlParam("sgId"),
+                        content:'./kxxfx.html?sgId='+$.getUrlParam("sgId"),
                         area:['100%','100%']
                     })
-                })
+                }
             }
         }
     }

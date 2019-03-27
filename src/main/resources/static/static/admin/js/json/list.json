@@ -183,12 +183,12 @@
       {
         "title": "采购管理",
         "icon": "shopping-cart",
-        "shiro": "a",
+        "shiro": "CGGL",
         "children": [
           {
             "title": "申购管理",
             "url": "life&t=0&n=0",
-            "shiro": "a",
+            "shiro": "SGGL",
             "id": "300",
             "children": [
               {
@@ -196,31 +196,31 @@
                 "url": "./table.html",
                 "icon": "credit-card",
                 "id": "3000",
-                "shiro": "a",
+                "shiro": "KSSG",
                 "children": [
                   {
                     "title": "科室讨论",
                     "url": "./life/purchase-management/department-discuss.html",
                     "id": "30000",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "填写申购单",
                     "url": "./life/purchase-management/write_purchase.html",
                     "id": "30001",
-                    "shiro": "a"
+                    "shiro": "TXSGD"
                   },
                   {
                     "title": "科室汇总审核",
                     "url": "./life/purchase-management/gather-audit.html",
                     "id": "30002",
-                    "shiro": "a"
+                    "shiro": "KSHZSH"
                   },
                   {
                     "title": "申购进度跟踪",
                     "url": "./life/purchase-management/tracking-schedule.html",
                     "id": "30003",
-                    "shiro": "a"
+                    "shiro": "SGJDGZ"
                   }
                 ]
               },
@@ -229,19 +229,19 @@
                 "url": "javascript:void(0);",
                 "icon": "clipboard-list",
                 "id": "3001",
-                "shiro": "a",
+                "shiro": "SGHZ",
                 "children": [
                   {
                     "title": "申购单论证分析",
                     "url": "./life/purchase-management/purchase-discuss.html",
                     "id": "30010",
-                    "shiro": "a"
+                    "shiro": "SGDLZFX"
                   },
                   {
                     "title": "申购单汇总",
                     "url": "./life/purchase-management/purchase-gather.html",
                     "id": "30011",
-                    "shiro": "a"
+                    "shiro": "SGDHZ"
                   }
                 ]
               },
@@ -250,31 +250,31 @@
                 "url": "javascript:void(0);",
                 "icon": "comments",
                 "id": "3002",
-                "shiro": "a",
+                "shiro": "JTTL",
                 "children": [
                   {
                     "title": "装备委员会记录",
                     "url": "./life/purchase-management/equip-record.html",
                     "id": "30020",
-                    "shiro": "a"
+                    "shiro": "ZBWYHJL"
                   },
                   {
                     "title": "年度采购计划",
                     "url": "./life/purchase-management/year-buy.html",
                     "id": "30021",
-                    "shiro": "a"
+                    "shiro": "NDCGJH"
                   },
                   {
                     "title": "院办公会记录",
                     "url": "./life/purchase-management/hos-record.html",
                     "id": "30022",
-                    "shiro": "a"
+                    "shiro": "YBGHJL"
                   },
                   {
                     "title": "采购实施计划",
                     "url": "./life/purchase-management/buy-plan.html",
                     "id": "30023",
-                    "shiro": "a"
+                    "shiro": "CGSSJH"
                   }
                 ]
               },
@@ -283,13 +283,13 @@
                 "url": "javascript:void(0);",
                 "icon": "comments",
                 "id": "3003",
-                "shiro": "a",
+                "shiro": "TJCXY",
                 "children": [
                   {
                     "title": "申购设备公示查询",
                     "url": "./life/purchase-management/equipment-query.html",
                     "id": "30030",
-                    "shiro": "a"
+                    "shiro": "SGSBGSCX"
                   }
                 ]
               },
@@ -298,19 +298,19 @@
                 "url": "javascript:void(0);",
                 "icon": "comments",
                 "id": "3004",
-                "shiro": "a",
+                "shiro": "ZDSZ",
                 "children": [
                   {
                     "title": "申购讨论条件",
                     "url": "./life/purchase-management/sgtltj.html",
                     "id": "30040",
-                    "shiro": "a"
+                    "shiro": "SGTLTJ"
                   },
                   {
                     "title": "论证分析金额设置",
                     "url": "./life/purchase-management/tlfxjesz.html",
                     "id": "30041",
-                    "shiro": "a"
+                    "shiro": "LZFXJESZ"
                   }
                 ]
               }
@@ -399,7 +399,7 @@
       {
         "title": "使用管理",
         "icon": "mouse-pointer",
-        "shiro": "a",
+        "shiro": "SYGL",
         "children": [
           {
             "title": "操作规程",
@@ -518,32 +518,32 @@
             "title": "电子台账",
             "url": "life&t=1&n=1",
             "id": "311",
-            "shiro": "a",
+            "shiro": "DZTZ",
             "children": [
               {
                 "title": "设备台账",
                 "url": "./table.html",
                 "id": "3110",
                 "icon": "file-invoice-dollar",
-                "shiro": "a",
+                "shiro": "SBTZ",
                 "children": [
                   {
                     "title": "总账",
                     "url": "./life/electric-bill/bill-list.html",
                     "id": "31100",
-                    "shiro": "a"
+                    "shiro": "ZZ"
                   },
                   {
                     "title": "分户账",
                     "url": "./life/electric-bill/bill-hueman.html",
                     "id": "31101",
-                    "shiro": "a"
+                    "shiro": "FHZ"
                   },
                   {
                     "title": "分类账",
                     "url": "./life/electric-bill/bill-type.html",
                     "id": "31102",
-                    "shiro": "a"
+                    "shiro": "FLZ"
                   }
                 ]
               },
@@ -552,25 +552,25 @@
                 "url": "./table.html",
                 "icon": "clipboard-check",
                 "id": "3111",
-                "shiro": "a",
+                "shiro": "ZSHD",
                 "children": [
                   {
                     "title": "计划制定",
                     "url": "./life/electric-bill/plan-write.html",
                     "id": "31110",
-                    "shiro": "a"
+                    "shiro": "ZSHDJHZD"
                   },
                   {
                     "title": "计划查询",
                     "url": "./life/electric-bill/plan-search.html",
                     "id": "31111",
-                    "shiro": "a"
+                    "shiro": "ZSHDJHCX"
                   },
                   {
                     "title": "核实对比",
                     "url": "./life/electric-bill/compere-com.html",
                     "id": "31113",
-                    "shiro": "a"
+                    "shiro": "HSDB"
                   }
                 ]
               },
@@ -579,19 +579,19 @@
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "3112",
-                "shiro": "a",
+                "shiro": "CXTJE",
                 "children": [
                   {
                     "title": "科室设备综合查询",
                     "url": "./life/electric-bill/kssb-search.html",
                     "id": "31120",
-                    "shiro": "a"
+                    "shiro": "KSSBZHCX"
                   },
                   {
                     "title": "综合查询",
                     "url": "./life/electric-bill/zh-search.html",
                     "id": "31121",
-                    "shiro": "a"
+                    "shiro": "ZHCX"
                   },
                   {
                     "title": "综合统计",
@@ -606,7 +606,7 @@
                 "url": "./life/electric-bill/bill-list.html",
                 "icon": "file-invoice-dollar",
                 "id": "3114",
-                "shiro": "a"
+                "shiro": "QTTZ"
               }
             ]
           }
@@ -947,38 +947,38 @@
       {
         "title": "处置管理",
         "icon": "compact-disc",
-        "shiro": "a",
+        "shiro": "CZGLZ",
         "children": [
           {
             "title": "处置管理",
             "url": "life&t=3&n=0",
             "id": "330",
-            "shiro": "a",
+            "shiro": "CZGL",
             "children": [
               {
                 "title": "处置查询",
                 "url": "./table.html",
                 "icon": "search",
                 "id": "3300",
-                "shiro": "a",
+                "shiro": "CZCXY",
                 "children": [
                   {
                     "title": "处置查询",
                     "url": "./life/disposal_management/disposal_query.html",
                     "id": "33000",
-                    "shiro": "a"
+                    "shiro": "CZCXE"
                   },
                   {
                     "title": "待报废清单",
                     "url": "./life/disposal_management/no_scrapped_list.html",
                     "id": "33001",
-                    "shiro": "a"
+                    "shiro": "DBFQD"
                   },
                   {
                     "title": "已报废清单",
                     "url": "./life/disposal_management/scrapped_list.html",
                     "id": "33002",
-                    "shiro": "a"
+                    "shiro": "YBFQD"
                   }
                 ]
               },
@@ -987,13 +987,13 @@
                 "url": "./table.html",
                 "icon": "rocket",
                 "id": "3301",
-                "shiro": "a",
+                "shiro": "CZSQY",
                 "children": [
                   {
                     "title": "处置申请",
                     "url": "./life/disposal_management/disposal_application.html",
                     "id": "33010",
-                    "shiro": "a"
+                    "shiro": "CZSQE"
                   }
                 ]
               },
@@ -1002,13 +1002,13 @@
                 "url": "./table.html",
                 "icon": "arrow-up",
                 "id": "3302",
-                "shiro": "a",
+                "shiro": "CZSB",
                 "children": [
                   {
                     "title": "待上报列表",
                     "url": "./life/disposal_management/dispose_report.html",
                     "id": "33020",
-                    "shiro": "a"
+                    "shiro": "DSBLB"
                   }
                 ]
               },
@@ -1017,13 +1017,13 @@
                 "url": "./table.html",
                 "icon": "calendar-check",
                 "id": "3303",
-                "shiro": "a",
+                "shiro": "CZPF",
                 "children": [
                   {
                     "title": "待批复列表",
                     "url": "./life/disposal_management/disposal_reply.html",
                     "id": "33030",
-                    "shiro": "a"
+                    "shiro": "DPFLB"
                   }
                 ]
               },
@@ -1032,13 +1032,13 @@
                 "url": "./table.html",
                 "icon": "broom",
                 "id": "3304",
-                "shiro": "a",
+                "shiro": "CZQL",
                 "children": [
                   {
                     "title": "待清理设备",
                     "url": "./life/disposal_management/disposal_clear.html",
                     "id": "33040",
-                    "shiro": "a"
+                    "shiro": "DQLSB"
                   }
                 ]
               },
@@ -1047,13 +1047,13 @@
                 "url": "./table.html",
                 "icon": "clipboard",
                 "id": "3305",
-                "shiro": "a",
+                "shiro": "CZBA",
                 "children": [
                   {
                     "title": "待备案处置设备",
                     "url": "./life/disposal_management/disposal_record.html",
                     "id": "33050",
-                    "shiro": "a"
+                    "shiro": "DBACZSB"
                   }
                 ]
               }
@@ -1168,38 +1168,38 @@
       {
         "title": "维修管理",
         "icon": "wrench",
-        "shiro": "a",
+        "shiro": "WXGL",
         "children": [
           {
             "title": "设备维修",
             "url": "safe&t=1&n=0",
             "id": "410",
-            "shiro": "a",
+            "shiro": "SBWX",
             "children": [
               {
                 "title": "维修任务",
                 "url": "./table.html",
                 "icon": "wrench",
                 "id": "4100",
-                "shiro": "a",
+                "shiro": "WXRWZ",
                 "children": [
                   {
                     "title": "报修",
                     "url": "./safe/service-management/repair.html",
                     "id": "41000",
-                    "shiro": "a"
+                    "shiro": "BXIU"
                   },
                   {
                     "title": "维修任务",
                     "url": "./safe/service-management/servicing-task.html",
                     "id": "41001",
-                    "shiro": "a"
+                    "shiro": "WXRW"
                   },
                   {
                     "title": "维修费申请",
                     "url": "./safe/service-management/repair-apply.html",
                     "id": "41002",
-                    "shiro": "a"
+                    "shiro": "WXFSQ"
                   },
                   {
                     "title": "满意度再评价",
@@ -1211,7 +1211,7 @@
                     "title": "补录维修报告",
                     "url": "./safe/service-management/additional-record.html",
                     "id": "41004",
-                    "shiro": "a"
+                    "shiro": "BLWXBG"
                   }
                 ]
               },
@@ -1259,34 +1259,15 @@
                 "url": "./table.html",
                 "icon": "book",
                 "id": "4102",
-                "shiro": "a",
+                "shiro": "ZDGL",
                 "children": [
                   {
                     "title": "配件字典",
                     "url": "./safe/service-management/accessories-dictionary.html",
                     "id": "41020",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "维修字典",
-                    "url": "./table.html",
-                    "id": "41021",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "简称配置故障现象",
-                    "url": "./table.html",
-                    "id": "41022",
-                    "shiro": "a"
+                    "shiro": "PJZDZ"
                   }
                 ]
-              },
-              {
-                "title": "维修实时监控",
-                "url": "./table.html",
-                "icon": "eye",
-                "id": "4104",
-                "shiro": "a"
               }
             ]
           },
@@ -1294,32 +1275,32 @@
             "title": "维修合同",
             "url": "safe&t=1&n=1",
             "id": "411",
-            "shiro": "a",
+            "shiro": "WXHT",
             "children": [
               {
                 "title": "报修合同",
                 "url": "./table.html",
                 "icon": "scroll",
                 "id": "4110",
-                "shiro": "a",
+                "shiro": "BXHT",
                 "children": [
                   {
                     "title": "合同录入",
                     "url": "./safe/service-management/contract-input.html",
                     "id": "41100",
-                    "shiro": "a"
+                    "shiro": "HTLR"
                   },
                   {
                     "title": "合同支付",
                     "url": "./safe/service-management/contract-payment.html",
                     "id": "41101",
-                    "shiro": "a"
+                    "shiro": "HTZF"
                   },
                   {
                     "title": "合同查询",
                     "url": "./safe/service-management/contract-search.html",
                     "id": "41102",
-                    "shiro": "a"
+                    "shiro": "HTCX"
                   }
                 ]
               }
@@ -1329,42 +1310,42 @@
             "title": "维修配件",
             "url": "safe&t=1&n=2",
             "id": "412",
-            "shiro": "a",
+            "shiro": "WXPJ",
             "children": [
               {
                 "title": "配件申购",
                 "url": "./safe/service-management/accessories-purchase.html",
                 "icon": "shopping-cart",
                 "id": "4120",
-                "shiro": "a"
+                "shiro": "PJSG"
               },
               {
                 "title": "入库查询",
                 "url": "./safe/service-management/ruku-search.html",
                 "id": "4121",
                 "icon": "sign-out-alt",
-                "shiro": "a"
+                "shiro": "RKCX"
               },
               {
                 "icon": "gavel",
                 "title": "出库查询",
                 "url": "./safe/service-management/chuku-search.html",
                 "id": "4122",
-                "shiro": "a"
+                "shiro": "CKCX"
               },
               {
                 "title": "库存查询",
                 "url": "./safe/service-management/stock-check.html",
                 "icon": "search",
                 "id": "4124",
-                "shiro": "a"
+                "shiro": "KCCX"
               },
               {
                 "title": "配件字典",
                 "url": "./safe/service-management/accessories-dictionary.html",
                 "icon": "torah",
                 "id": "4125",
-                "shiro": "a"
+                "shiro": "PJZD"
               }
             ]
           },
@@ -1372,32 +1353,32 @@
             "title": "维修发票",
             "url": "safe&t=1&n=3",
             "id": "413",
-            "shiro": "a",
+            "shiro": "WXFP",
             "children": [
               {
                 "title": "维修发票管理",
                 "url": "./table.html",
                 "id": "4130",
                 "icon": "receipt",
-                "shiro": "a",
+                "shiro": "WXFPGL",
                 "children": [
                   {
                     "title": "维修发票登记",
                     "url": "./safe/maintenance-management/invoice-registration.html",
                     "id": "41300",
-                    "shiro": "a"
+                    "shiro": "WXFPDJ"
                   },
                   {
                     "title": "维修发票审核",
                     "url": "./safe/maintenance-management/invoice-audit.html",
                     "id": "41301",
-                    "shiro": "a"
+                    "shiro": "WXFPSH"
                   },
                   {
                     "title": "维修发票查询",
                     "url": "./safe/maintenance-management/invoice-inquiry.html",
                     "id": "41302",
-                    "shiro": "a"
+                    "shiro": "WXFPCX"
                   }
                 ]
               }
@@ -1409,26 +1390,26 @@
       {
         "title": "应用培训",
         "icon": "graduation-cap",
-        "shiro": "a",
+        "shiro": "YYPX",
         "children": [
           {
             "title": "人员培训",
             "url": "safe&t=2&n=0",
             "id": "420",
-            "shiro": "a",
+            "shiro": "RYPX",
             "children": [
               {
                 "title": "培训计划",
                 "url": "./table.html",
                 "id": "4200",
                 "icon": "scroll",
-                "shiro": "a",
+                "shiro": "PXJH",
                 "children": [
                   {
                     "title": "计划制定",
                     "url": "./safe/application-training/plan-formulation.html",
                     "id": "42000",
-                    "shiro": "a"
+                    "shiro": "JHZD"
                   }
                 ]
               },
@@ -1437,7 +1418,7 @@
                 "url": "./table.html",
                 "icon": "user-tag",
                 "id": "4201",
-                "shiro": "a",
+                "shiro": "RYDA",
                 "children": [
                   {
                     "title": "人员名单",
@@ -1455,7 +1436,13 @@
                     "title": "人员录入",
                     "url": "./safe/application-training/personnel-input.html",
                     "id": "42012",
-                    "shiro": "a"
+                    "shiro": "RYLR"
+                  },
+                  {
+                    "title": "考核",
+                    "url": "./safe/application-training/personnel-check.html",
+                    "id": "42013",
+                    "shiro": "KH"
                   }
                 ]
               },
@@ -1473,12 +1460,6 @@
                     "shiro": "a"
                   },
                   {
-                    "title": "考核",
-                    "url": "./safe/application-training/personnel-check.html",
-                    "id": "42021",
-                    "shiro": "a"
-                  },
-                  {
                     "title": "颁证",
                     "url": "./table.html",
                     "id": "42022",
@@ -1491,13 +1472,13 @@
                 "url": "./table.html",
                 "icon": "user-friends",
                 "id": "4203",
-                "shiro": "a",
+                "shiro": "PXCX",
                 "children": [
                   {
                     "title": "计划查询",
                     "url": "./safe/application-training/plan-query.html",
                     "id": "42030",
-                    "shiro": "a"
+                    "shiro": "JHCX"
                   },
                   {
                     "title": "人员上岗资质",
@@ -1521,26 +1502,26 @@
       {
         "title": "医疗事件",
         "icon": "briefcase-medical",
-        "shiro": "a",
+        "shiro": "YLSJ",
         "children": [
           {
             "title": "安全(不良)事件",
             "url": "safe&t=3&n=0",
             "id": "430",
-            "shiro": "a",
+            "shiro": "AQ(BL)SJ",
             "children": [
               {
                 "title": "不良事件报告",
                 "url": "./table.html",
                 "icon": "file-powerpoint",
                 "id": "4300",
-                "shiro": "a",
+                "shiro": "BLSJBG",
                 "children": [
                   {
                     "title": "可疑报告",
                     "url": "./safe/medical-incident/suspicious-report.html",
                     "id": "43000",
-                    "shiro": "a"
+                    "shiro": "KYBG"
                   }
                 ]
               },
@@ -1549,7 +1530,7 @@
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "4301",
-                "shiro": "a",
+                "shiro": "TJCX",
                 "children": [
                   {
                     "title": "综合查询",
@@ -2098,12 +2079,12 @@
       {
         "title": "事中监管",
         "icon": "landmark",
-        "shiro": "a",
+        "shiro": "SZJG",
         "children": [
           {
             "title": "使用情况分析",
             "url": "beneft&t=1&n=0",
-            "shiro": "a",
+            "shiro": "SYQKFX",
             "id": "510",
             "children": [
               {
@@ -2111,31 +2092,31 @@
                 "url": "./table.html",
                 "icon": "clipboard",
                 "id": "5100",
-                "shiro": "a",
+                "shiro": "XLKPI",
                 "children": [
                   {
                     "title": "开机率",
                     "url": "./beneft/usage-situation/boot-rate.html",
                     "id": "51000",
-                    "shiro": "a"
+                    "shiro": "KJL"
                   },
                   {
                     "title": "机时利用率",
                     "url": "./beneft/usage-situation/utilization-ratio.html",
                     "id": "51001",
-                    "shiro": "a"
+                    "shiro": "JSLYL"
                   },
                   {
                     "title": "空转率",
                     "url": "./beneft/usage-situation/idling-rate.html",
                     "id": "51002",
-                    "shiro": "a"
+                    "shiro": "KZL"
                   },
                   {
                     "title": "工作日平均闲置时间",
                     "url": "./beneft/usage-situation/average-time.html",
                     "id": "51003",
-                    "shiro": "a"
+                    "shiro": "GZRPJXZSJ"
                   }
                 ]
               },
@@ -2144,21 +2125,21 @@
                 "url": "./beneft/usage-situation/efficiency-level.html",
                 "icon": "clipboard-list",
                 "id": "5101",
-                "shiro": "a"
+                "shiro": "XLDJ"
               },
               {
                 "title": "效率等级设置",
                 "url": "./beneft/usage-situation/set-efficiency-level.html",
                 "icon": "clipboard-list",
                 "id": "5102",
-                "shiro": "a"
+                "shiro": "XLDJSZ"
               }
             ]
           },
           {
             "title": "成本效益分析",
             "url": "beneft&t=1&n=1",
-            "shiro": "a",
+            "shiro": "CBXYFX",
             "id": "511",
             "children": [
               {
@@ -2166,19 +2147,19 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5110",
-                "shiro": "a",
+                "shiro": "SBCBXYFX",
                 "children": [
                   {
                     "title": "医疗设备成本效益分析评价",
                     "url": "./beneft/cost-benefit/analysis-evaluation.html",
                     "id": "51100",
-                    "shiro": "a"
+                    "shiro": "YLSBCBXYFXPJ"
                   },
                   {
                     "title": "PACS明细查询",
                     "url": "./beneft/cost-benefit/pacs-check.html",
                     "id": "51101",
-                    "shiro": "a"
+                    "shiro": "PACSMXCX"
                   }
                 ]
               },
@@ -2187,25 +2168,25 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5111",
-                "shiro": "a",
+                "shiro": "CBXYSZ",
                 "children": [
                   {
                     "title": "设备成本科目预设",
                     "url": "./beneft/cost-benefit/set-equipmentcost-subject.html",
                     "id": "51110",
-                    "shiro": "a"
+                    "shiro": "SBCBKMYS"
                   },
                   {
                     "title": "设备收入科目预设",
                     "url": "./beneft/cost-benefit/set-equipment-income.html",
                     "id": "51111",
-                    "shiro": "a"
+                    "shiro": "SBSRKMYS"
                   },
                   {
                     "title": "设备成本属性设置",
                     "url": "./table.html",
                     "id": "51112",
-                    "shiro": "a"
+                    "shiro": "SBCBSXSZ"
                   }
                 ]
               },
@@ -2214,25 +2195,25 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5112",
-                "shiro": "a",
+                "shiro": "CBXYJCGL",
                 "children": [
                   {
                     "title": "内置科目",
                     "url": "./beneft/cost-benefit/internal-subjects.html",
                     "id": "51120",
-                    "shiro": "a"
+                    "shiro": "NZKM"
                   },
                   {
                     "title": "会计结账日设置",
                     "url": "./table.html",
                     "id": "51121",
-                    "shiro": "a"
+                    "shiro": "HJJZRSZ"
                   },
                   {
                     "title": "医疗风险基金设置",
                     "url": "./table.html",
                     "id": "51122",
-                    "shiro": "a"
+                    "shiro": "YLFXJJSZ"
                   }
                 ]
               }
@@ -2241,7 +2222,7 @@
           {
             "title": "工作量监测",
             "url": "beneft&t=1&n=2",
-            "shiro": "a",
+            "shiro": "GZLJC",
             "id": "512",
             "children": [
               {
@@ -2249,25 +2230,25 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5120",
-                "shiro": "a",
+                "shiro": "GZJC",
                 "children": [
                   {
                     "title": "流失情况监测",
                     "url": "./beneft/sz-supervise/wastage.html",
                     "id": "51200",
-                    "shiro": "a"
+                    "shiro": "LSQKJC"
                   },
                   {
                     "title": "增减变动监测",
                     "url": "./beneft/sz-supervise/increase-decrease.html",
                     "id": "51201",
-                    "shiro": "a"
+                    "shiro": "ZJBDJC"
                   },
                   {
                     "title": "论证数据监测",
                     "url": "./beneft/sz-supervise/argument-data.html",
                     "id": "51202",
-                    "shiro": "a"
+                    "shiro": "LZSJJC"
                   }
                 ]
               },
@@ -2516,7 +2497,7 @@
       {
         "title": "基础管理",
         "icon": "building",
-        "shiro": "a",
+        "shiro": "JCGL",
         "children": [
           {
             "title": "安全指标体系",
@@ -2550,7 +2531,7 @@
           {
             "title": "组织机构管理",
             "url": "admin&t=0&n=1",
-            "shiro": "a",
+            "shiro": "ZZJGGL",
             "id": "601",
             "children": [
               {
@@ -2558,25 +2539,25 @@
                 "url": "./table.html",
                 "icon": "chess-rook",
                 "id": "6010",
-                "shiro": "a",
+                "shiro": "JGYGW",
                 "children": [
                   {
                     "title": "机构管理",
                     "url": "./admin/basic-management/jggl.html",
                     "id": "60100",
-                    "shiro": "a"
+                    "shiro": "JGGL"
                   },
                   {
                     "title": "科室导入",
                     "url": "./table.html",
                     "id": "60101",
-                    "shiro": "a"
+                    "shiro": "KSDR"
                   },
                   {
                     "title": "岗位管理",
                     "url": "./admin/basic-management/position-management.html",
                     "id": "60102",
-                    "shiro": "a"
+                    "shiro": "GWGL"
                   }
                 ]
               },
@@ -2585,7 +2566,7 @@
                 "url": "./table.html",
                 "icon": "sliders-h",
                 "id": "6011",
-                "shiro": "a",
+                "shiro": "JGSXSZ",
                 "children": [
                   {
                     "title": "部门类别设置",
@@ -2603,7 +2584,7 @@
                     "title": "维修部门设置",
                     "url": "./admin/basic-management/service-department.html",
                     "id": "60112",
-                    "shiro": "a"
+                    "shiro": "WXBMSZ"
                   },
                   {
                     "title": "科室系统字典",
@@ -2615,7 +2596,7 @@
                     "title": "部门归属",
                     "url": "./admin/basic-management/bmgs.html",
                     "id": "601130",
-                    "shiro": "a"
+                    "shiro": "BMGS"
                   }
                 ]
               }
@@ -2624,7 +2605,7 @@
           {
             "title": "规章制度管理",
             "url": "admin&t=0&n=2",
-            "shiro": "a",
+            "shiro": "GZZDGL",
             "id": "602",
             "children": [
               {
@@ -2632,25 +2613,25 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "6020",
-                "shiro": "a",
+                "shiro": "GZZDCX",
                 "children": [
                   {
                     "title": "已备案的规章制度",
                     "url": "./admin/basic-management/beian-rules.html",
                     "id": "60200",
-                    "shiro": "a"
+                    "shiro": "YBADGZZD"
                   },
                   {
                     "title": "试用中的规章制度",
                     "url": "./admin/basic-management/tryout-rules.html",
                     "id": "60201",
-                    "shiro": "a"
+                    "shiro": "SYZDGZZD"
                   },
                   {
                     "title": "已停用的规章制度",
                     "url": "./admin/basic-management/blockup-rules.html",
                     "id": "60202",
-                    "shiro": "a"
+                    "shiro": "YTYDGZZD"
                   }
                 ]
               },
@@ -2659,31 +2640,31 @@
                 "url": "./table.html",
                 "icon": "pencil-alt",
                 "id": "6021",
-                "shiro": "a",
+                "shiro": "GZZDZD",
                 "children": [
                   {
                     "title": "编写",
                     "url": "./admin/basic-management/write.html",
                     "id": "60210",
-                    "shiro": "a"
+                    "shiro": "GZZDBX"
                   },
                   {
                     "title": "待审核",
                     "url": "./admin/basic-management/check-pending.html",
                     "id": "60211",
-                    "shiro": "a"
+                    "shiro": "GZZDDSH"
                   },
                   {
                     "title": "待修改",
                     "url": "./admin/basic-management/revise.html",
                     "id": "60212",
-                    "shiro": "a"
+                    "shiro": "GZZDDXG"
                   },
                   {
                     "title": "试用中",
                     "url": "./admin/basic-management/tryout.html",
                     "id": "60213",
-                    "shiro": "a"
+                    "shiro": "GZZDSYZ"
                   }
                 ]
               },
@@ -2692,31 +2673,31 @@
                 "url": "./table.html",
                 "icon": "comment-alt",
                 "id": "6022",
-                "shiro": "a",
+                "shiro": "GZZDZPJ",
                 "children": [
                   {
                     "title": "待评价",
                     "url": "./admin/basic-management/evaluate.html",
                     "id": "60220",
-                    "shiro": "a"
+                    "shiro": "GZZDDPJ"
                   },
                   {
                     "title": "待修改",
                     "url": "./admin/basic-management/revise.html",
                     "id": "60221",
-                    "shiro": "a"
+                    "shiro": "GZZDZPJDXG"
                   },
                   {
                     "title": "待审核",
                     "url": "./admin/basic-management/check-pending.html",
                     "id": "60222",
-                    "shiro": "a"
+                    "shiro": "GZZDZPJDSH"
                   },
                   {
                     "title": "试用中",
                     "url": "./admin/basic-management/tryout.html",
                     "id": "60223",
-                    "shiro": "a"
+                    "shiro": "GZZDZPJSYZ"
                   }
                 ]
               },
@@ -2725,19 +2706,19 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "6023",
-                "shiro": "a",
+                "shiro": "GZZDJDCX",
                 "children": [
                   {
                     "title": "制定进度",
                     "url": "./admin/basic-management/schedule-development.html",
                     "id": "60230",
-                    "shiro": "a"
+                    "shiro": "GZZDZDJD"
                   },
                   {
                     "title": "再评价进度",
                     "url": "./admin/basic-management/revalue.html",
                     "id": "60231",
-                    "shiro": "a"
+                    "shiro": "GZZDZPJJD"
                   }
                 ]
               },
@@ -2767,7 +2748,7 @@
           {
             "title": "岗位职责管理",
             "url": "admin&t=0&n=3",
-            "shiro": "a",
+            "shiro": "GWZZGL",
             "id": "603",
             "children": [
               {
@@ -2775,25 +2756,25 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "6030",
-                "shiro": "a",
+                "shiro": "GWZZCX",
                 "children": [
                   {
                     "title": "已备案的岗位职责",
                     "url": "./admin/basic-management/post-beian.html",
                     "id": "60300",
-                    "shiro": "a"
+                    "shiro": "YBADGWZZ"
                   },
                   {
                     "title": "试用中的岗位职责",
                     "url": "./admin/basic-management/post-tryoutRules.html",
                     "id": "60301",
-                    "shiro": "a"
+                    "shiro": "SYZDGWZZ"
                   },
                   {
                     "title": "已停用的岗位职责",
                     "url": "./admin/basic-management/post-blockup.html",
                     "id": "60302",
-                    "shiro": "a"
+                    "shiro": "YTYDGWZZ"
                   }
                 ]
               },
@@ -2802,31 +2783,31 @@
                 "url": "./table.html",
                 "icon": "pencil-alt",
                 "id": "6031",
-                "shiro": "a",
+                "shiro": "GWZZZD",
                 "children": [
                   {
                     "title": "编写",
                     "url": "./admin/basic-management/begin-write.html",
                     "id": "60310",
-                    "shiro": "a"
+                    "shiro": "GWZZBX"
                   },
                   {
                     "title": "待审核",
                     "url": "./admin/basic-management/post-checkPending.html",
                     "id": "60311",
-                    "shiro": "a"
+                    "shiro": "GWZZDSH"
                   },
                   {
                     "title": "待修改",
                     "url": "./admin/basic-management/post-revise.html",
                     "id": "60312",
-                    "shiro": "a"
+                    "shiro": "GWZZDXG"
                   },
                   {
                     "title": "试用中",
                     "url": "./admin/basic-management/post-tryout.html",
                     "id": "60313",
-                    "shiro": "a"
+                    "shiro": "GWZZSYZ"
                   }
                 ]
               },
@@ -2835,31 +2816,31 @@
                 "url": "./table.html",
                 "icon": "comment-alt",
                 "id": "6032",
-                "shiro": "a",
+                "shiro": "GWZZZPJ",
                 "children": [
                   {
                     "title": "待评价",
                     "url": "./admin/basic-management/post-checkPending.html",
                     "id": "60320",
-                    "shiro": "a"
+                    "shiro": "GWZZZPJDPJ"
                   },
                   {
                     "title": "待修改",
                     "url": "./admin/basic-management/post-checkPending.html",
                     "id": "60321",
-                    "shiro": "a"
+                    "shiro": "GWZZZPJDXG"
                   },
                   {
                     "title": "待审核",
                     "url": "./admin/basic-management/post-checkPending.html",
                     "id": "60322",
-                    "shiro": "a"
+                    "shiro": "GWZZZPJDSH"
                   },
                   {
                     "title": "试用中",
                     "url": "./admin/basic-management/post-checkPending.html",
                     "id": "60323",
-                    "shiro": "a"
+                    "shiro": "GWZZZPJSYZ"
                   }
                 ]
               },
@@ -2868,19 +2849,19 @@
                 "url": "./table.html",
                 "icon": "spinner",
                 "id": "6033",
-                "shiro": "a",
+                "shiro": "GWZZJDCX",
                 "children": [
                   {
                     "title": "制定进度",
                     "url": "./admin/basic-management/post-schedule.html",
                     "id": "60330",
-                    "shiro": "a"
+                    "shiro": "GWZZZDJD"
                   },
                   {
                     "title": "再评价进度",
                     "url": "./admin/basic-management/post-revalue.html",
                     "id": "60331",
-                    "shiro": "a"
+                    "shiro": "GWZZZPJJD"
                   }
                 ]
               },
@@ -2913,12 +2894,12 @@
       {
         "title": "科务管理",
         "icon": "cogs",
-        "shiro": "a",
+        "shiro": "KWGL",
         "children": [
           {
             "title": "使用部门",
             "url": "admin&t=1&n=0",
-            "shiro": "a",
+            "shiro": "SYBM",
             "id": "610",
             "children": [
               {
@@ -2926,25 +2907,25 @@
                 "url": "./table.html",
                 "icon": "chalkboard-teacher",
                 "id": "6100",
-                "shiro": "a",
+                "shiro": "KSTDFG",
                 "children": [
                   {
                     "title": "科室管理团队",
                     "url": "./admin/discipline-management/department-management.html",
                     "id": "61000",
-                    "shiro": "a"
+                    "shiro": "KSGLTD"
                   },
                   {
                     "title": "待审核管理团队",
                     "url": "./admin/discipline-management/checkPending-team.html",
                     "id": "61001",
-                    "shiro": "a"
+                    "shiro": "DSHGLTD"
                   },
                   {
                     "title": "已退回管理团队",
                     "url": "./admin/discipline-management/notpass-team.html",
                     "id": "61002",
-                    "shiro": "a"
+                    "shiro": "YTHGLTD"
                   }
                 ]
               },
@@ -2953,50 +2934,50 @@
                 "url": "./admin/discipline-management/ksjd.html",
                 "icon": "spinner",
                 "id": "6101",
-                "shiro": "a"
+                "shiro": "KSTDCLJD"
               },
               {
                 "title": "科室团队汇总",
                 "url": "./table.html",
                 "icon": "asterisk",
                 "id": "6102",
-                "shiro": "a",
+                "shiro": "KSTDHZ",
                 "children": [
                   {
                     "title": "科室质安管理团队汇总",
                     "url": "./admin/discipline-management/qualitySafe-management.html",
                     "id": "61020",
-                    "shiro": "a"
+                    "shiro": "KSZAGLTDHZ"
                   },
                   {
                     "title": "质控管理员名单",
                     "url": "./admin/discipline-management/qualityControl-management.html",
                     "id": "61021",
-                    "shiro": "a"
+                    "shiro": "ZKGLYMD"
                   },
                   {
                     "title": "监测联络员名单",
                     "url": "./admin/discipline-management/monitoring-liaison.html",
                     "id": "61022",
-                    "shiro": "a"
+                    "shiro": "JCLLYMD"
                   },
                   {
                     "title": "科室资产管理人员名单",
                     "url": "./admin/discipline-management/asset-management.html",
                     "id": "61023",
-                    "shiro": "a"
+                    "shiro": "KSZCGLRYMD"
                   },
                   {
                     "title": "计量管理员名单",
                     "url": "./admin/discipline-management/metering-management.html",
                     "id": "61024",
-                    "shiro": "a"
+                    "shiro": "JLGLYMD"
                   },
                   {
                     "title": "未成立管理团队科室",
                     "url": "./admin/discipline-management/not-established.html",
                     "id": "61025",
-                    "shiro": "a"
+                    "shiro": "WCLGLTDKS"
                   }
                 ]
               },
@@ -3038,7 +3019,7 @@
           {
             "title": "管理部门",
             "url": "admin&t=1&n=1",
-            "shiro": "a",
+            "shiro": "GLBM",
             "id": "611",
             "children": [
               {
@@ -3046,31 +3027,31 @@
                 "url": "./table.html",
                 "icon": "chalkboard-teacher",
                 "id": "6110",
-                "shiro": "a",
+                "shiro": "WXFGSBHF",
                 "children": [
                   {
                     "title": "工程师负责部门划分",
                     "url": "./admin/discipline-management/engineer-department.html",
                     "id": "61100",
-                    "shiro": "a"
+                    "shiro": "GCSFZBMHF"
                   },
                   {
                     "title": "工程师负责部门划分查询",
                     "url": "./admin/discipline-management/engineer-search.html",
                     "id": "61101",
-                    "shiro": "a"
+                    "shiro": "GCSFZBMHFCX"
                   },
                   {
                     "title": "维修部门下的工程师负责设备划分",
                     "url": "./admin/discipline-management/service-equipment.html",
                     "id": "61102",
-                    "shiro": "a"
+                    "shiro": "WXBMXDGCSFZSBHF"
                   },
                   {
                     "title": "维修部门下的工程师负责设备划分查询",
                     "url": "./admin/discipline-management/repair-search.html",
                     "id": "61103",
-                    "shiro": "a"
+                    "shiro": "WXBMXDGCSFZSBHFCX"
                   }
                 ]
               },
@@ -3086,7 +3067,7 @@
           {
             "title": "员工管理",
             "url": "admin&t=1&n=2",
-            "shiro": "a",
+            "shiro": "YGGL",
             "id": "612",
             "children": [
               {
@@ -3094,14 +3075,14 @@
                 "url": "./admin/discipline-management/employee-query.html",
                 "icon": "search",
                 "id": "6120",
-                "shiro": "a"
+                "shiro": "YGXXCX"
               },
               {
                 "title": "员工信息导入",
                 "url": "./admin/discipline-management/employee-input.html",
                 "icon": "file-import",
                 "id": "6121",
-                "shiro": "a"
+                "shiro": "YGXXDR"
               }
             ]
           }
@@ -3252,12 +3233,12 @@
       {
         "title": "数据字典",
         "icon": "database",
-        "shiro": "a",
+        "shiro": "SJZDZ",
         "children": [
           {
             "title": "数据字典",
             "url": "system&t=0&n=0",
-            "shiro": "a",
+            "shiro": "SJZD",
             "id": "700",
             "children": [
               {
@@ -3265,14 +3246,14 @@
                 "url": "./system/data-dictionary/basic.html",
                 "icon": "book",
                 "id": "7000",
-                "shiro": "a"
+                "shiro": "JCZD"
               },
               {
                 "title": "专业字典",
                 "url": "./system/data-dictionary/major.html",
                 "icon": "torah",
                 "id": "7001",
-                "shiro": "a"
+                "shiro": "ZYZD"
               },
               {
                 "title": "状态字典",
@@ -3289,56 +3270,56 @@
       {
         "title": "系统设置",
         "icon": "hourglass-start",
-        "shiro": "a",
+        "shiro": "XTSZZ",
         "children": [
           {
             "title": "系统设置",
             "url": "system&t=1&n=0",
-            "shiro": "a",
+            "shiro": "XTSZ",
             "id": "710",
             "children": [
               {
                 "title": "LOGO设置",
                 "url": "./system/system-setup/LOGO-set.html",
                 "id": "7100",
-                "shiro": "a"
+                "shiro": "LOGOSZ"
               },
               {
                 "title": "报表抬头设置",
                 "url": "./system/system-setup/bbtt-set.html",
                 "id": "7101",
-                "shiro": "a"
+                "shiro": "BBTTSZ"
               },
               {
                 "title": "设备标签抬头设置",
                 "url": "./system/system-setup/equip-head-set.html",
                 "id": "7102",
-                "shiro": "a"
+                "shiro": "SBBQTTSZ"
               },
               {
                 "title": "文件版本设置",
                 "url": "./system/system-setup/DOCED-setup.html",
                 "id": "7103",
-                "shiro": "a"
+                "shiro": "WJBBSZ"
               },
               {
                 "title": "短信猫设置",
                 "url": "./system/system-setup/modem-gsm.html",
                 "id": "7104",
-                "shiro": "a"
+                "shiro": "DXMSZ"
               },
               {
                 "title": "作息时间",
                 "url": "./system/system-setup/time-table.html",
                 "id": "7105",
-                "shiro": "a"
+                "shiro": "ZXSJ"
               }
             ]
           },
           {
             "title": "设备信息",
             "url": "system&t=1&n=1",
-            "shiro": "a",
+            "shiro": "SBXXZ",
             "id": "711",
             "children": [
               {
@@ -3346,55 +3327,55 @@
                 "url": "./table.html",
                 "icon": "info-circle",
                 "id": "7110",
-                "shiro": "a",
+                "shiro": "SBXX",
                 "children": [
                   {
                     "title": "设备信息查询",
                     "url": "./system/system-setup/information-search.html",
                     "id": "71100",
-                    "shiro": "a"
+                    "shiro": "SBXXCX"
                   },
                   {
                     "title": "设备信息导入",
                     "url": "./system/system-setup/information-import.html",
                     "id": "71101",
-                    "shiro": "a"
+                    "shiro": "SBXXDR"
                   },
                   {
                     "title": "设备信息录入",
                     "url": "./system/system-setup/information-entry.html",
                     "id": "71102",
-                    "shiro": "a"
+                    "shiro": "SBXXLR"
                   },
                   {
                     "title": "设备附件信息导入",
                     "url": "./system/system-setup/fjImport.html",
                     "id": "71103",
-                    "shiro": "a"
+                    "shiro": "SBFJXXDR"
                   },
                   {
                     "title": "设备附件信息录入",
                     "url": "./system/system-setup/fjEntry.html",
                     "id": "71104",
-                    "shiro": "a"
+                    "shiro": "SBFJXXLR"
                   },
                   {
                     "title": "设备属性扩展",
                     "url": "./system/system-setup/device-property.html",
                     "id": "71105",
-                    "shiro": "a"
+                    "shiro": "SBSXKZ"
                   },
                   {
                     "title": "设备卫标分类设置",
                     "url": "./system/system-setup/repair-classify.html",
                     "id": "71106",
-                    "shiro": "a"
+                    "shiro": "SBWBFLSZ"
                   },
                   {
                     "title": "卫标已关联设备",
                     "url": "./system/system-setup/weiBiao.html",
                     "id": "71107",
-                    "shiro": "a"
+                    "shiro": "WBYGLSB"
                   }
                 ]
               },
@@ -3410,7 +3391,7 @@
           {
             "title": "系统提醒",
             "url": "system&t=1&n=2",
-            "shiro": "a",
+            "shiro": "XTTX",
             "id": "712",
             "children": [
               {
@@ -3418,19 +3399,19 @@
                 "url": "./table.html",
                 "icon": "sliders-h",
                 "id": "7120",
-                "shiro": "a",
+                "shiro": "TXSZ",
                 "children": [
                   {
                     "title": "提醒类别",
                     "url": "./system/system-setup/reminder-classify.html",
                     "id": "71200",
-                    "shiro": "a"
+                    "shiro": "TXLB"
                   },
                   {
                     "title": "日期前提醒设置",
                     "url": "./system/system-setup/preDate.html",
                     "id": "71201",
-                    "shiro": "a"
+                    "shiro": "RQQTXSZ"
                   },
                   {
                     "title": "日期后提醒设置",
@@ -3455,12 +3436,12 @@
       {
         "title": "用户管理",
         "icon": "users-cog",
-        "shiro": "a",
+        "shiro": "YHGLZ",
         "children": [
           {
             "title": "用户管理",
             "url": "system&t=2&n=0",
-            "shiro": "a",
+            "shiro": "YHGL",
             "id": "720",
             "children": [
               {
@@ -3468,21 +3449,21 @@
                 "url": "./system/user-management/user-setting.html",
                 "icon": "sliders-h",
                 "id": "7200",
-                "shiro": "a"
+                "shiro": "YHSZ"
               },
               {
                 "title": "角色设置",
                 "url": "./system/user-management/role-setting.html",
                 "icon": "users-cog",
                 "id": "7201",
-                "shiro": "a"
+                "shiro": "JSSZ"
               },
               {
                 "title": "用户权限分配",
                 "url": "./system/user-management/right-setting.html",
                 "icon": "user-lock",
                 "id": "7202",
-                "shiro": "a"
+                "shiro": "YHQXFP"
               }
             ]
           }
@@ -3492,12 +3473,12 @@
       {
         "title": "门户管理",
         "icon": "desktop",
-        "shiro": "a",
+        "shiro": "MHGL",
         "children": [
           {
             "title": "公告",
             "url": "system&t=3&n=0",
-            "shiro": "a",
+            "shiro": "GG",
             "id": "730",
             "children": [
               {
@@ -3505,35 +3486,35 @@
                 "url": "./system/portal-management/draft.html",
                 "icon": "pen",
                 "id": "7300",
-                "shiro": "a"
+                "shiro": "GGNG"
               },
               {
                 "title": "审核",
                 "url": "./system/portal-management/auditing.html",
                 "icon": "clipboard-check",
                 "id": "7301",
-                "shiro": "a"
+                "shiro": "GGSH"
               },
               {
                 "title": "查询",
                 "url": "./system/portal-management/search.html",
                 "icon": "search",
                 "id": "7302",
-                "shiro": "a"
+                "shiro": "GGCX"
               },
               {
                 "title": "公告类别管理",
                 "url": "./system/portal-management/announce-category.html",
                 "icon": "sliders-h",
                 "id": "7303",
-                "shiro": "a"
+                "shiro": "GGLBGL"
               }
             ]
           },
           {
             "title": "公共下载",
             "url": "system&t=3&n=1",
-            "shiro": "a",
+            "shiro": "GGXZ",
             "id": "731",
             "children": [
               {
@@ -3541,21 +3522,21 @@
                 "url": "./system/portal-management/download-draft.html",
                 "icon": "pen",
                 "id": "7310",
-                "shiro": "a"
+                "shiro": "NG"
               },
               {
                 "title": "审核",
                 "url": "./system/portal-management/download-auditing.html",
                 "icon": "clipboard-check",
                 "id": "7311",
-                "shiro": "a"
+                "shiro": "SH"
               },
               {
                 "title": "查询",
                 "url": "./system/portal-management/download-search.html",
                 "icon": "search",
                 "id": "7312",
-                "shiro": "a"
+                "shiro": "CX"
               }
             ]
           }

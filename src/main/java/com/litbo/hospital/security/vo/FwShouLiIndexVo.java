@@ -75,9 +75,10 @@ public class FwShouLiIndexVo {
         this.bxLx = "科室故障维修";
         if(eqBxjssj != null){
             if(new Date(eqBxjssj.getTime()).before(new Date())){
-                this.eqBxStatus = "在保";
-            }else{
                 this.eqBxStatus = "过保";
+            }else{
+
+                this.eqBxStatus = "在保";
             }
         }
         if(jjxStatus == 1){

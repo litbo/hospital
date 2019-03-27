@@ -89,8 +89,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审批人</label>
                 <div class="layui-input-block">
-                    <select name="user2Id">
-                        <option value="1615925023">Admin</option>
+                    <select name="user2Id" lay-filter="spUser">
+                        <option value="00612">超级管理员</option>
                     </select>
                 </div>
             </div>
@@ -130,6 +130,15 @@
                     }
                 }
             },
+            /*val:{
+                filter:"wxfForms",
+                select:{
+                    filter:"spUser",
+                    ids: "userId",
+                    text: "userXm",
+                    url: "/wxf/spUserList"
+                }
+            },*/
             submit:{
                 form:{
                     url:"/wxf/addWxf",

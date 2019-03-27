@@ -1,15 +1,12 @@
 package com.litbo.hospital.user.dao.provider;
 
 
-import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.vo.SelectEqVo;
 import com.litbo.hospital.user.vo.SelectFlEqVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
-
-import java.lang.reflect.Field;
 
 public class EqProvider {
 
@@ -313,6 +310,9 @@ public class EqProvider {
                 }
                 if(eqInfo.getEqBz()!=null) {
                     SET("eq_bz=#{eqBz}");
+                }
+                if (eqInfo.getEqSyzt()!=null){
+                    SET("eq_syzt=#{eqSyzt}");
                 }
                 WHERE("eq_id=#{eqId}");
             }

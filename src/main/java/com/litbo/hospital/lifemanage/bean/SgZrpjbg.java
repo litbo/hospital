@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -36,6 +37,7 @@ public class SgZrpjbg {
     /**
      * 准入评价报告日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date pjbgRq;
     /**
      * 准入评价报告扩展名1

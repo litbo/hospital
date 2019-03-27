@@ -10,6 +10,7 @@ import com.litbo.hospital.security.dao.FwWxfDao;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwWxfService;
 import com.litbo.hospital.security.vo.*;
+import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,11 @@ public class FwWxfServiceImpl implements FwWxfService {
     private EmpDao empDao;
 
     @Override
+    public List<SEmp> spUserList(String userId) {
+        return empDao.getEmpsByBmId(empDao.getBmIdByUserId(userId));
+    }
+
+    @Override
     public int updateWxf(Integer id, String wxfSpyj, Date wxfSptime) {
         int i = fwWxfDao.updateWxfById(id, wxfSpyj, wxfSptime);
         return i;
@@ -56,9 +62,9 @@ public class FwWxfServiceImpl implements FwWxfService {
     }
 
     @Override
-    public PageInfo<WxfListVo> WxfList(String userId,Integer pageNum,Integer pageSize) {
+    public PageInfo<WxfListVo> WxfList(String userId,Integer pageNum,Integer pageSize, String fwId, String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<WxfListVo> pageInfo = new PageInfo<>(fwWxfDao.WxfList(userId));
+        PageInfo<WxfListVo> pageInfo = new PageInfo<>(fwWxfDao.WxfList(userId,fwId,eqName));
         return pageInfo;
     }
 

@@ -32,9 +32,6 @@
     </div>
     <div class=" hidden-xs"  id="hideXs">
         <form class="layui-form layui-form-pane" action="">
-            <div class="layui-inline xs-100 mar10-0 pad0-10">
-                <input type="text" name="date" id="createdate" class="layui-input" placeholder="日期">
-            </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
                 <input class="layui-input" name="jhName" placeholder="计划名称" autocomplete="off">
             </div>
@@ -83,7 +80,7 @@
                             event:"luru",
                             title:"录入",
                             type:2,
-                            content:"./child/personnel-childinput.html",
+                            content:"./child/personnel-khinput.html",
                             dataUrl:["id"]
                         }
                     ]
@@ -93,7 +90,7 @@
         reSet:{
             url:"/Jh/jhrylrIndex",
             type:"search",
-            data:["createdate","jhName"]    //搜索框的name
+            data:["jhName"]    //搜索框的name
         }
 
     }

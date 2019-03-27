@@ -34,33 +34,31 @@
 <body>
 
 <div class="layui-row">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" >
         <div class="layui-row">
             <div class="col-xs-12">
                 <div class="layui-form-item">
                     <label class="layui-form-label">类别名称<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" class="layui-input" aotocomplete="off" placeholder="计量提醒">
+                        <input type="text" name="lbmc" class="layui-input" aotocomplete="off" placeholder="计量提醒">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">提醒角色<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <select name="">
-                            <option value="">信息处处长</option>
-                            <option value=""></option>
+                        <select name="roleId" lay-filter ="roleList">
                         </select>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">提醒信息<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" placeholder="设备计量计划到期"></textarea>
+                        <textarea class="layui-textarea" name="txxx" placeholder="设备计量计划到期"></textarea>
                     </div>
                 </div>
             </div>
             <div class="col-xs-12">
-                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="">保存</button>
+                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-filter="submit" lay-submit="">保存</button>
             </div>
         </div>
     </form>
@@ -70,7 +68,53 @@
 
 
 <script>
-    renderMod = {
+
+    formData={};
+    renderMod={
+        form:{
+            submit:{
+                filter:"submit",//可以不写
+                form:{
+                    url:"/xttx/addTxlb",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["roleId","txxx","lbmc"],
+                    reload:true
+                    /*      success:function(){
+                              alert("xx");
+                          }*/
+                }//表单提交函数
+                /*           before:function(data){
+                               for(var i=0;i<data.field.length;i++){
+                                   if(data.field[i] === ""){
+                                       layer.alert("请确认您填写的信息！");
+                               return false;
+                                   }
+                               }
+                           },*///表单提交前执行函数
+                /*    func:function(data){
+                        n++;
+                        layer.alert("您已提交 " + n + " 次！");
+                    }*///表单提交后执行函数（不论成功与否）
+            },
+
+            val: {
+                filter:"111",
+                select: [
+                    {
+                        filter:"roleList",
+                        ids: "roleId",
+                        text: "roleName",
+                        url: "/role/listRoleNoLimit"
+                    }
+                ]
+            }
+        }
+
+
+
+    }
+   /* renderMod = {
         form:{
             submit:{
                 before: function (param) {
@@ -106,7 +150,7 @@
                 }
             }
         }
-    }
+    }*/
 </script>
 </body>
 </html>

@@ -44,7 +44,6 @@ public class  ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         //设置默认访问路径
-
         shiroFilterFactoryBean.setLoginUrl("/admin/index/login.html");
         shiroFilterFactoryBean.setSuccessUrl("/success.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("unauthorized.html");

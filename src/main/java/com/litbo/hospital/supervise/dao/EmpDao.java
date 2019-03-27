@@ -72,7 +72,7 @@ public interface EmpDao {
             " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id) where emp.user_id=#{userId}")
     EmpSelectVO listSelectEmpsByUserId(String userId);
     @SelectProvider(type = EmpProvider.class,method = "selectEmpsByX")
-    List<EmpSelectVO> listSelectEmpBybmIdAndUserId(@Param("bmId") String bmId, @Param("userId") String userId,@Param("status") String status);
+    List<EmpSelectVO> listSelectEmpBybmIdAndUserId(@Param("bmId") String bmId, @Param("userId") String userId,@Param("status") String status,@Param("bmName") String bmName);
     @Select("SELECT emp2.user_id,emp2.user_xm from s_emp as emp1 INNER JOIN s_emp emp2 ON (emp1.bm_id=emp2.bm_id) " +
             "where emp1.user_id=#{userId} ")
     List<SEmp> listPartnerByUserId(String userId);
@@ -105,17 +105,11 @@ public interface EmpDao {
         "    where user_id = #{userId,jdbcType=VARCHAR}")
     void updateEmp(SEmp emp);
 
-    @Select("SELECT\n" +
-            "emp.user_id AS empId,\n" +
-            "emp.user_xm,\n" +
-            "bm.bm_name\n" +
-            "\n" +
-            "FROM\n" +
-            "dbo.s_emp AS emp ,\n" +
-            "dbo.s_bm AS bm\n" +
-            "WHERE\n" +
-            "emp.bm_id = bm.bm_id")
-    public List<JhEmpVo> getJhEmpVo();
+    @SelectProvider(type = EmpProvider.class,method = "selectEmpByIdOrName")
+    public List<JhEmpVo> getJhEmpVo(@Param("userId") String userId , @Param("userXm") String userXm);
+
+    @Select("select bm_id from s_emp where user_id = #{userId}")
+    public String getBmIdByUserId(String userId);
 
 
 }

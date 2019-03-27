@@ -32,14 +32,11 @@
     </div>
     <div class=" hidden-xs"  id="hideXs">
         <form class="layui-form layui-form-pane" action="">
-            <div class="layui-inline xs-100 mar10-0 pad0-10">
-                <input type="text" name="date" id="createdate" class="layui-input" placeholder="日期">
-            </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
                 <input class="layui-input" name="jhName" placeholder="计划名称" autocomplete="off">
             </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
             </div>
         </form>
     </div>
@@ -75,14 +72,11 @@
                     "data": res.data.list //解析数据列表
                 }
             }
-            , done: function (obj) {
-
-            }
         },
         reSet:{
             url:"/Jh/jhList",
             type:"search",
-            data:["createdate","jhName"]    //搜索框的name
+            data:["jhName"]    //搜索框的name
         }
 
         }

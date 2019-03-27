@@ -1,6 +1,7 @@
 package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.JhRylr;
+import com.litbo.hospital.security.vo.JhEmp;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -33,5 +34,20 @@ public interface JhRyLrDao {
 
     @Select("select * from jh_rylr where emp_id=#{empId} and jh_id = #{jhId}")
     public List<JhRylr> getJhRyLrByEmpIdAndJhId(@Param("empId") String empId ,@Param("jhId") Integer jhId);
+
+    @Select("SELECT\n" +
+            "emp.user_id,\n" +
+            "emp.user_xm,\n" +
+            "ry.jhlr_cj\n" +
+            "FROM\n" +
+            "dbo.jh_rylr AS ry ,\n" +
+            "dbo.s_emp AS emp\n" +
+            "WHERE\n" +
+            "ry.emp_id = emp.user_id AND\n" +
+            "ry.jh_id = #{jhId}")
+    public List<JhEmp> findEmpByJhId(Integer jhId);
+
+    @Update("update jh_rylr set jhlr_cj = #{cj} where emp_id = #{userId} and jh_id = #{jhId}")
+    public int updateCj(@Param("userId") String userId,@Param("cj")Float cj,@Param("jhId")Integer jhId);
 
 }

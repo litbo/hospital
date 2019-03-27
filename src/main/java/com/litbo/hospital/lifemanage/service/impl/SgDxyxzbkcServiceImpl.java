@@ -6,6 +6,8 @@ import com.litbo.hospital.lifemanage.dao.SgDxyxzbkcMapper;
 import com.litbo.hospital.lifemanage.dao.SgDxzbUserMapper;
 import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
 import com.litbo.hospital.lifemanage.service.SgDxyxzbkcService;
+import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.supervise.service.EmpService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +31,8 @@ public class SgDxyxzbkcServiceImpl implements SgDxyxzbkcService {
     private SgDxzbUserMapper sgDxzbUserMapper;
     @Autowired
     private SgInfoMapper sgInfoMapper;
+    @Autowired
+    private EmpService empService;
 
     /**
      * 添加或更新大型医学装备考察报告信息
@@ -36,6 +42,7 @@ public class SgDxyxzbkcServiceImpl implements SgDxyxzbkcService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public void insertOrUpdateSgDxyxzbkc(SgDxyxzbkcVO sgDxyxzbkcVO) {
+        sgDxyxzbkcVO.setDxzbSj(new Date());
         SgDxyxzbkc sgDxyxzbkc = new SgDxyxzbkc();
         BeanUtils.copyProperties(sgDxyxzbkcVO, sgDxyxzbkc);
         // 获取参会人员列表
@@ -83,6 +90,11 @@ public class SgDxyxzbkcServiceImpl implements SgDxyxzbkcService {
             //查询大型医学装备考察报告信息人员信息
             List<String> userIds = sgDxzbUserMapper.selectSgDxzbUserBySgDxyxzbkcId(sgDxyxzbkc.getDxzbId());
             sgDxyxzbkcVO.setUserIds(userIds);
+            List<SEmp> list = new LinkedList<>();
+            for (String id :userIds){
+                list.add(empService.getEmpsById(id));
+            }
+            sgDxyxzbkcVO.setUsers(list);
             return sgDxyxzbkcVO;
         }
         return null;

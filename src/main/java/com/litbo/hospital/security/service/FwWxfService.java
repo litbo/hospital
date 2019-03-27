@@ -3,6 +3,7 @@ package com.litbo.hospital.security.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwWxf;
 import com.litbo.hospital.security.vo.*;
+import com.litbo.hospital.supervise.bean.SEmp;
 
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,13 @@ import java.util.List;
  * @create 2018-12-09 9:44
  */
 public interface FwWxfService {
+
+    /**
+     * 获取审批人   暂定为本部门的所有人
+     * @param userId
+     * @return
+     */
+    public List<SEmp> spUserList(String userId);
 
     /**
      * 维修费审核
@@ -35,7 +43,7 @@ public interface FwWxfService {
      * @param userId
      * @return
      */
-    public PageInfo<WxfListVo> WxfList(String userId, Integer pageNum, Integer pageSize);
+    public PageInfo<WxfListVo> WxfList(String userId, Integer pageNum, Integer pageSize, String fwId, String eqName);
 
 
     public List<FwIdSelectVo> wxfGetEq(String userId);

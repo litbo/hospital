@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -21,6 +22,7 @@ public class ShVO {
     /**
      * 审核时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date shsj;
     /**
      * 审核意见

@@ -4,40 +4,69 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>设备卫标分类设置</title>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
-    <link rel="stylesheet" href="../../../../static/admin/css/all.min.css"/>
-    <script src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="../../../../static/admin/js/basic.js"></script>
+    <script src="/static/admin/js/basic.js"></script>
+    <!--ZTREE-->
+    <link rel="stylesheet" href="/static/admin/css/tree/ztree-liulinwj.css" type="text/css">
+    <script src="/static/admin/js/jquery.ztree.all.js"></script>
+    <script src="/static/admin/js/ztree-liulinwj_5.js"></script>
     <style>
-        .layui-inline{
-            width:140px;
+        .layui-inline {
+            width: 140px;
         }
-        .tree-container{
-            height:610px;
-            margin-left:20px;
-            margin-top:10px;
-            display:inline-block;
-            padding:10px;
-            border:1px solid #ddd;
-            overflow:auto;
-            float:left;
+
+        .tree-container {
+            height: 400px;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow: auto;
+            float: left;
         }
-        .layui-form-item{
-            height:46px;
+
+        .layui-form-item {
+            height: 46px;
         }
+
     </style>
 </head>
-<div class="tree-container col-xs-12 col-md-5">
-    <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
-        <ul id="demo"></ul>
-    </div>
+<div class="col-xs-12" style="margin-top:20px">
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户组</label>
+            <div class="layui-input-block">
+                <select name="roleId" lay-filter="yhz">
+
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">菜单分配</label>
+            <div class="layui-input-block">
+                <div class="tree-container col-xs-12">
+                    <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
+                        <ul id="demo"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-warm layui-btn-fluid" style="margin-top:20px;" lay-filter="submit" id="saveRole">保存</button>
+        </div>
+    </form>
 </div>
+
+
 <body>
 
 <script>
@@ -48,76 +77,125 @@
             },
             data: {
                 key: {
-                    name: "bmName"
+                    name: "rightName"
                 },
                 simpleData: {
                     enable: true,
-                    idKey: "bmId",
-                    pIdKey: "pBmId"
+                    idKey: "rightId",
+                    pIdKey: "pid"
                 }
+
             },
-            callback: {
-                "onClick":clickShow
+            check: {
+                enable: true,
+                chkStyle: "checkbox"
             }
         },
+        newNode = {},
         nodes = {};
 
-    function clickShow(event,treeId,treeNode){
+    function clickShow(event, treeId, treeNode) {
         console.log(arguments);
-        layui.use("form",function(){
+        layui.use("form", function () {
             var form = layui.form;
             form.val("shows", treeNode);
         })
     }
 
-    $.ajax({
-        url: "/supervise/bmgl/listBmForTree",
-        dataType: "JSON",
-        success: function (data) {
-            console.log(data);
-            nodes = data;
-            $.fn.zTree.beautify().init($("#demo"), setting, nodes);
-        }
-    })
-</script>
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../../static/admin/js/tableNormal.js" type="text/javascript" charset="utf-8"></script>
-<script>
-
-
-    //树形结构菜单
-    layui.use(['form',"tree","jquery"], function() {
-        var form = layui.form, $ = layui.jquery,
-            jsonP = {
-                elem: "#tree", click: function (node) {
-                    $.ajax({
-                        url: "/tree/right1",
-                        method: "GET",
-                        data: {pid: node.id},
-                        async: false,
-                        success: function (data) {
-                            /* console.log(node);*/
-                            node.children = data.data;
-                            node.spread = true;
-                            $("#tree").html("");
-                            layui.tree(jsonP);
+    function ckLine(event, treeId, treeNode, clickFlag) {
+        // 判断是否父节点 !treeNode.isParent
+        //if (true) {
+            //alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);
+            $.ajax({
+                url: "/tree/right3",//请求的action路径
+                data: {"pid": treeNode.id},
+                error: function () {//请求失败处理函数
+                    layer.alert('请求失败');
+                },
+                success: function (res) { //添加子节点到指定的父节点
+                    if (res.code === 0) {
+                        if (res.data && res.data.length > 0) {
+                            var treeObj = $.fn.zTree.getZTreeObj("demo");
+                            //treeNode.halfCheck = false;
+                            var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null);//获取指定父节点
+                            //console.log(parentZNode);
+                            treeObj.removeChildNodes(parentZNode);
+                            newNode = treeObj.addNodes(parentZNode, res.data, false);
+                            //console.log(newNode);
                         }
-                    })
+                    }
                 }
-            };
+            });
+        //}
+    }
 
-        $.ajax({
-            url: "/tree/right1",
-            method: "GET",
-            data: {pid: ""},
-            async: false,
-            success: function (data) {
-                /*    console.log(data);*/
-                jsonP.nodes = data.data;
-                layui.tree(jsonP);
+
+    $.ajax({
+        url: "/tree/right3",
+        type: "GET",
+        data: {pid: ""},
+        success: function (res) {
+            if (res.code === 0) {
+                //console.log(data);
+                nodes = res.data;
+                $.fn.zTree.beautify().init($("#demo"), setting, nodes);
+            }
+
+        }
+    });
+    $("#saveRole").on("click",function(){
+        var treeObj = $.fn.zTree.getZTreeObj("demo");
+        var nodes = treeObj.getCheckedNodes(true),datas =[];
+        //console.log(nodes);
+        for(var i=0;i<nodes.length;i++){
+            datas.push(nodes[i]["rightId"]);
+        }
+        //console.log(datas);
+        subUp({
+            url:"/right/setRights",
+            data:["roleId"],
+            type:"POST",
+            contentType:"application/json",
+            add:{
+                "rightIds":datas
             }
         });
-    })
+       return false;
+    });
+
+    renderMod = {
+        form:{
+            val:{
+                filter:"forms",
+                select:{
+                    filter:"yhz",
+                    url:"/role/listRoleNoLimit",
+                    ids:"roleId",
+                    text:"roleName"
+                }
+            },
+            event:{
+                box:"select",
+                filter:"",
+                func:function(elem,value,othis){
+                    var val = elem.value;
+                    $.ajax({
+                        url: "/right/listRightByRId",
+                        type: "GET",
+                        data: {roleId: val},
+                        success: function (res) {
+                            if (res.code === 0) {
+                                console.log(res);
+                                /*nodes = res.data;*/
+                                $.fn.zTree.beautify().init($("#demo"), setting, res.data);
+                            }
+
+                        }
+                    });
+                }
+            }
+        }
+    }
 </script>
 </body>
 </html>

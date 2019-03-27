@@ -25,7 +25,7 @@ public class JhZdProvider {
                     WHERE("jh_kstime>#{createdate}");
                 }
                 if(jhName != null){
-                    WHERE("jh_name like %+#{jhName}+%");
+                    WHERE("jh_name like '%'+#{jhName}+'%'");
                 }
             }
 
@@ -70,7 +70,7 @@ public class JhZdProvider {
                         "jh.id,\n" +
                         "jh.user_id");
                 FROM("jh_zd as jh");
-                WHERE("jh.jh_kstime < (select GETDATE())");
+                WHERE("jh.jh_jstime < (select GETDATE())");
                 if(createdate != null){
                     WHERE("jh_kstime>#{createdate}");
                 }

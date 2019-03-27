@@ -108,7 +108,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(美元)</label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceGjMy"  autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceGjMy" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -124,9 +124,11 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">添加生产商</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dateTable1"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dateTable1"><i
+                            class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table" id="delTable1"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table" id="delTable1"><i
+                            class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
@@ -135,7 +137,8 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">功能配置列表</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dateTable2"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dateTable2"><i
+                            class="fas fa-plus"></i>&nbsp;添加
                     </button>
                     <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1" id="delTable2"><i
                             class="fas fa-trash-alt"></i>&nbsp;删除
@@ -229,7 +232,7 @@
                 },
                 {
                     elem: "#table1",
-                    id:"table1",
+                    id: "table1",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
@@ -250,14 +253,14 @@
             addItem: [
                 {
                     elem: "#dateTable1",
-                    base:"reference_firm.html",
+                    base: "reference_firm.html",
                     name: "dtdt",
                     key: "dateTable1"
                 },
                 {
                     elem: "#dateTable2",
-                    base:"function_configuration.html",
-                    key:"dateTable2",
+                    base: "function_configuration.html",
+                    key: "dateTable2",
                     name: "dtdt"
                 }
             ],
@@ -265,11 +268,12 @@
             selectItem: [
                 {
                     elem: "#selectBm",
-                    cb:"/supervise/bmgl/listSelectBmsCols",
-                    db:"/supervise/bmgl/listBms",
-                    key:"radio",
+                    cb: "/supervise/bmgl/listSelectBmsCols",
+                    db: "/supervise/bmgl/listBms",
+                    se: "/supervise/bmgl/bmSe",
+                    key: "radio",
                     name: "dtdt",
-                    data:formData
+                    data: formData
                 }
             ]
         },
@@ -299,7 +303,9 @@
                 get: {
                     url: "/lifeManage/selectSgInfoById",
                     type: "POST",
-                    data: {sgInfoId: $.getUrlParam("sgInfoId")}
+                    data: {sgInfoId: $.getUrlParam("sgInfoId")},
+                    parse: "sgCkcssbs",
+                    tableId: "table"
                     // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
                     //有add时必需时data为表单name数组，否则请直接使用data赋值
                 }//get内参数需参考《内容传输与提交》文档
@@ -318,13 +324,14 @@
                         return false;
                     }
                     var bm = "";
-                    if (formData.radio){
+                    if (formData.radio) {
                         bm = formData.radio[0]["tgBmId"]
                     }
                     return param = {
                         1: bm,
                         2: cs,
-                        3: gn
+                        3: gn,
+                        4: $.getUrlParam("sgInfoId")
                     };
                 },
                 form: {
@@ -338,22 +345,20 @@
                     param: {
                         1: "tgBmId",
                         2: "sgCkcssbs",
-                        3: "sgGnpzs"
+                        3: "sgGnpzs",
+                        4: "id"
+                    },
+                    success: function (res) {
+                        console.log("提交成功！", res);
                     }
-                }
-            }
-        },
-        btn:{
-            elem:'#upData',
-            func:function(){
-                layui.use('layer',function(){
-                    var layer = layui.layer;
-                    layer.open({
-                        type:2,
-                        content:'zr-evaluation.html?sgId='+$.getUrlParam("sgInfoId"),
-                        area:['100%','100%']
+                },
+                func: function () {
+                    layOpen({
+                        type: 2,
+                        content: './zr-evaluation.html?sgId=' + $.getUrlParam("sgInfoId"),
+                        area: ['100%', '100%']
                     })
-                })
+                }
             }
         }
     };

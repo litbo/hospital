@@ -36,9 +36,9 @@
 <div class="layui-container">
     <form class="layui-form layui-form-pane" lay-filter="baoxiuForms">
         <div class="layui-row">
-            <input type="hidden" name="eqId" class="layui-input" autocomplete="off">
-            <input type="hidden" name="bxrId" class="layui-input" autocomplete="off">
-            <input type="hidden" name="bxksId" class="layui-input" autocomplete="off">
+            <input type="hidden" name="eqId">
+            <input type="hidden" name="bxrId">
+            <input type="hidden" name="bxksId">
             <div class="col-xs-12 col-sm-6">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修设备<span class="sign">*</span></label>
@@ -133,14 +133,7 @@
                     url:"/baoxiu/addBaoxiu",
                     type:"POST",
                     data:["eqId","bxrId","bxrdh","bxksId","bxksdh","bxfs","gzxx","bxTime","fxTime"],
-                    done:function(res){
-                        if(res.code === 0){
-                            //提交完成后关闭页面
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                            parent.location.reload();
-                        }
-                    }
+                    reload:"parent"
                 }
             },
             date: [

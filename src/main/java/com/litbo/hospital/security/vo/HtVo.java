@@ -35,6 +35,13 @@ public class HtVo {
 
     private String htStatusString;
 
+    private Integer htZffs;
+
+    private String fkzs; //总付款数
+
+    private String fkcs; //付款数
+
+
     public HtVo(String id, String htName, BigDecimal htPrice, Timestamp htTime, String sbcsName, Integer htStatus) {
         this.id = id;
         this.htName = htName;
@@ -51,10 +58,32 @@ public class HtVo {
         }
     }
 
-    public HtVo(String fkHtbh, String htName, Timestamp htTime , BigDecimal htPrice ) {
+    public HtVo(String id, String htName, BigDecimal htPrice, Timestamp htTime, Integer htZffs ,String sbcsName) {
+        this.id = id;
+        this.htName = htName;
+        this.htPrice = htPrice;
+        this.htTime = htTime;
+        this.htZffs = htZffs;
+        this.sbcsName = sbcsName;
+        if(htZffs == 1){
+            this.fkzs = "一次";
+        }else if (htZffs == 2){
+            this.fkzs = "两次";
+        }else if (htZffs == 3){
+            this.fkzs = "三次";
+        }else{
+            this.fkzs = "支付错误";
+        }
+    }
+
+    public HtVo(String fkHtbh, String htName, Timestamp htTime , BigDecimal htPrice) {
         this.id = fkHtbh;
         this.htName = htName;
         this.htPrice = htPrice;
         this.htTime = htTime;
     }
+
+
+
+
 }

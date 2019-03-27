@@ -86,9 +86,9 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public PageInfo listSelectEmpBybmIdAndUserId(int pageNum, int pageSize, String bmId, String userId,String status) {
+    public PageInfo listSelectEmpBybmIdAndUserId(int pageNum, int pageSize, String bmId, String userId,String status,String bmName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<EmpSelectVO> emps = empDao.listSelectEmpBybmIdAndUserId(bmId,userId,status);
+        List<EmpSelectVO> emps = empDao.listSelectEmpBybmIdAndUserId(bmId,userId,status,bmName);
         return new PageInfo(emps);
     }
 

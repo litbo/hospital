@@ -4,9 +4,11 @@ package com.litbo.hospital.user.controller;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SysTxcl;
 import com.litbo.hospital.user.bean.SysTxlb;
+import com.litbo.hospital.user.dao.XttxDao;
 import com.litbo.hospital.user.service.XttxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class XttxController {
     @Autowired
     private XttxService xttxService;
+    @Autowired
+    private XttxDao xttxDao;
     @RequestMapping("addTxlb")
-    public Result addTxlb(SysTxlb sysTxlb){
+    public Result addTxlb(@RequestBody SysTxlb sysTxlb){
         if(xttxService.addTxlb(sysTxlb)>0){
             return Result.success();
         }
@@ -26,7 +30,7 @@ public class XttxController {
     }
 
     @RequestMapping("addTxcl")
-    public Result addTxcl(SysTxcl sysTxcl){
+    public Result addTxcl(@RequestBody SysTxcl sysTxcl){
         if(xttxService.addTxcl(sysTxcl)>0){
             return Result.success();
         }
@@ -38,6 +42,11 @@ public class XttxController {
                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
 
         return Result.success(xttxService.listTxlb(pageNum,pageSize));
+    }
+
+    @RequestMapping("/listTxlbNoLimit")
+    public Result listTxlbNoLimit() {
+        return Result.success(xttxDao.listTxlb());
     }
 
     @RequestMapping("/listTxcl")

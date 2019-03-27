@@ -9,4 +9,10 @@ public interface CsService {
     PageInfo listWxs(int pageNum, int pageSize);
 
     PageInfo listGys(int pageNum, int pageSize);
+
+    PageInfo listScsByX(int pageNum, int pageSize, String sbcsName);
+
+    PageInfo listWxsByX(int pageNum, int pageSize, String sbcsName);
+
+    PageInfo listGysByX(int pageNum, int pageSize, String sbcsName);
 }

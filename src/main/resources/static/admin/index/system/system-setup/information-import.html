@@ -14,6 +14,10 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style type="text/css">
+        .col-xs-100{
+            margin-left: 80%;
+            margin-top: -5%;
+        }
     </style>
 </head>
 <body>
@@ -25,9 +29,19 @@
         </fieldset>
     </div>
     <div class="col-xs-12">
-        <div class="layui-upload" style="margin-top:60px;">
-            <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
-            <button type="button" class="layui-btn" id="startUploadFile">提交文件</button>
+        <div class="layui-upload" style="margin-top:50px;">
+            <div class="col-xs-12">
+                <button type="button" class="layui-btn layui-btn-normal" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
+                <button type="button" class="layui-btn layui-btn-normal" id="startUploadFile"><i class="layui-icon" >&#xe621;</i>提交文件</button>
+            </div>
+            <div class="col-xs-12" style="margin-top:60px;">
+                <button type="button" class="layui-btn" id="11">
+                    <a href="/download/file?url=/Download/设备导入模板.xlsx"  class="layui-icon">&#xe67c;</a>下载模板
+                </button>
+                <button type="button" class="layui-btn" id="12">
+                    <i class="layui-icon">&#xe67c;</i>下载须知
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -35,21 +49,6 @@
 
 
 <script>
-/*layui.use('upload',function(){
-   var upload = layui.upload;
-
-    //上传文件
-    upload.render({
-        elem:'#selectFile',
-        url:'/upload/',
-        auto:false,
-        bindAction:'#startUploadFile',
-        size:1024*40,//限制文件大小，单位kb
-        done:function(res){
-            console.log(res);
-        }
-    })
-})*/
 
 renderMod = {
     form:{

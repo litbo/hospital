@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SRole;
+import com.litbo.hospital.user.dao.RoleDao;
 import com.litbo.hospital.user.service.RoleService;
 import com.litbo.hospital.user.vo.SelectUserVo;
 import com.litbo.hospital.user.vo.SetRolesVo;
@@ -22,6 +23,8 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private RoleDao roleDao;
 
     //添加角色
     @RequestMapping("/addRole")
@@ -77,6 +80,12 @@ public class RoleController {
         return Result.success(pageInfo);
     }
 
+    //查询所有角色数据
+    @RequestMapping("/listRoleNoLimit")
+    public Result listRoleNoLimit(){
+        return Result.success(roleDao.listRoles());
+    }
+
     @RequestMapping("listRolesTitle")
     public Result listPmsCols(@RequestParam(required = false) String key,
                               @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
@@ -87,6 +96,7 @@ public class RoleController {
                     "{field: 'roleName', title: '角色名称'}]" ;
             myJsonArray = JSONObject.parseArray(jsonMessage);
         PageInfo date = new PageInfo(myJsonArray);
+
         return Result.success(date);
     }
 

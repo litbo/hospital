@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/eq")
@@ -214,7 +216,8 @@ public class EqController {
     //通过品名 拼音码pym 查询品名
     @RequestMapping("/listPmsByPym")
     public Result listPmsByPym(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
-                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize, String pym) {
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                               @RequestParam(value = "pym",required = false) String pym) {
 
         PageInfo pageInfo = es.listPmsByPym(pageNum, pageSize, pym);
         return Result.success(pageInfo);
@@ -255,5 +258,45 @@ public class EqController {
         return Result.success(date);
     }
 
+
+    @RequestMapping(value = "/pmSe")
+    public Result pmSe(){
+        Map map =new HashMap();
+        map.put("dom",
+                "<div class='layui-inline'><input type=\"text\" name=\"pym\" class=\"layui-input\" placeholder=\"品名拼音码\" autocomplete=\"off\"></div>" +
+                        "    <div class='layui-input-inline mar10-0' align='center'>" +
+                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/eq/listPmsByPym");
+        m.put("type","reload");
+        String[] data = {"pym"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
+    }
+    @RequestMapping(value = "/eqSe")
+    public Result eqSe(){
+        Map map =new HashMap();
+        map.put("dom",
+                "<div class='layui-inline'><input type=\"text\" name=\"eqPym\" class=\"layui-input\" placeholder=\"设备拼音码\" autocomplete=\"off\"></div>" +
+                        "<div class='layui-inline'><input type=\"text\" name=\"eqSbbh\" class=\"layui-input\" placeholder=\"设备编码\" autocomplete=\"off\"></div>" +
+                        "<div class='layui-inline'><input type=\"text\" name=\"eqZcbh\" class=\"layui-input\" placeholder=\"资产编码\" autocomplete=\"off\"></div>" +
+                        "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"部门名称\" autocomplete=\"off\"></div>" +
+                        "    <div class='layui-input-inline mar10-0' align='center'>" +
+                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/eq/listEqByX");
+        m.put("type","reload");
+        String[] data = {"eqPym","eqSbbh","eqZcbh","bmName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
+    }
 
 }

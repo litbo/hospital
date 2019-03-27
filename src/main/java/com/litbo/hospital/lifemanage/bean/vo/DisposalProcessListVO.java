@@ -13,6 +13,10 @@ import java.util.Date;
 @Data
 public class DisposalProcessListVO {
     /**
+     * 处置申请id
+     */
+    private String id;
+    /**
      * 设备编号
      */
     private String eqSbbh;

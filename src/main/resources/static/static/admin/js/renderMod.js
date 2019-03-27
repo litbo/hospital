@@ -81,7 +81,7 @@ $(function () {
                             if(res.code === 0 && dat !== undefined){
                                 if(val.get.save){
                                     val.get.save["val"] = dat;
-                                    console.log(val.get.save);
+                                    //console.log(val.get.save);
                                 }
                                 for (var name in dat) {
                                     if (dat.hasOwnProperty(name)) {
@@ -137,7 +137,7 @@ $(function () {
                 } else{
                     putMsg({
                         error:"renderMod.js遇到一个无法处理的错误：",
-                        log:"renderMod.formAction.val参数传递错误(LINE:116),请参考表单渲染文档！"
+                        log:"renderMod.formAction.val参数传递错误(LINE:61),请参考表单渲染文档！"
                     });
                 }
 
@@ -576,7 +576,9 @@ $(function () {
                                 name = item.name || "sdsd",
                                 value = item.value || item.key || "j",
                                 tableId = item.table || $(this).data("id") || "table"
-                                ,setUrl = "";
+                                ,setUrl = ""
+                                , url = item.base || "/admin/index/global/data.html"
+                            ;
                             //判断是否使用固定小尺寸窗口
                             if(item.area === "min"){
                                 areas = ["300px","400px"]
@@ -585,10 +587,39 @@ $(function () {
                             if(item.url){
                                 setUrl = item.url
                             }else{
-                                //设置URL
+                                /*//设置URL
                                 setUrl = item.base || "/admin/index/global/data.html";
                                 //设置参数
-                                setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;
+                                setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;*/
+                                //调用值
+                                //setUrl = item.base || "/admin/index/global/data.html";
+                                setUrl = url + "?key=" + item.key + "&vg=" + name;
+                                if(item.cb){
+                                    setUrl += "&cb=" + item.cb
+                                }
+                                if(item.db){
+                                    setUrl += "&db="+item.db
+                                }
+                                if(item.se){
+                                    setUrl += "&se="+item.se
+                                }
+                                if(item.value){
+                                    setUrl += "&v="+value
+                                }
+                            }
+                            //提交之前运行一个函数
+                            var ss = item.before && item.before();
+                            //如果有返回值并且需要添加数据则循环添加
+                            if(ss && item.param && Type(item.param) === "array" && Type(ss) === "json"){
+                                for(var p=0;p<item.param.length;p++){
+                                    for(var nas in ss){
+                                        if(ss.hasOwnProperty(nas)){
+                                            if(nas === item.param[p]){
+                                                setUrl += "&" + nas + "=" + ss[nas];
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             //弹出自定义窗口
                             layOpen({
@@ -639,7 +670,6 @@ $(function () {
                             }
                             //调用值
                             var name = item.name,
-                                param = {},
                                 value = item.value || item.key,
                                 url = item.url || "/admin/index/global/data.html"
                                 ,content = url + "?key=" + item.key + "&vg=" + name;
