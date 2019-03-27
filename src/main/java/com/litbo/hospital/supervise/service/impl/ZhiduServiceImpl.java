@@ -218,9 +218,9 @@ public class ZhiduServiceImpl implements ZhiduService {
     }
 
     @Override
-    public PageInfo listZdsByShr(int pageNum, int pageSize, String shr_id) {
+    public PageInfo listZdsByShr(int pageNum, int pageSize, String shr_id,String zdZt,String reFlag,String zdName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<ZDSelectAsBaseShMsg> date =  zhiduDao.listZdsByShr(shr_id);
+        List<ZDSelectAsBaseShMsg> date =  zhiduDao.listZdsByShr(shr_id,zdZt,reFlag,zdName);
         return new PageInfo(date);
     }
 
@@ -254,12 +254,12 @@ public class ZhiduServiceImpl implements ZhiduService {
 
             zhiduDao.setZhiDuZt(shMsgVO.getZdId(),ZdztEnumProcess.ZD__ZT_SY.getCode(),shMsgVO.getSyDays());  //插入试用状态
             //当试用时间通过 修改时间  修改状态0-》2
-            insertZdZt(shMsgVO.getZdId(),null,true); //更新制度表的审核状态和试用时间
+            insertZdZt(shMsgVO.getZdId(),zhiduDao.getZdById(shMsgVO.getZdId().toString()).getUserId(),true); //更新制度表的审核状态和试用时间
 
         } else if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT__BTG.getCode()){//审核不通过
 //            zhiduDao.setZhiDuZt(shMsgVO.getZdId(),"0",0);
             //更新制度状态 为0未通过
-            insertZdZt(shMsgVO.getZdId(),null,false);
+            insertZdZt(shMsgVO.getZdId(),zhiduDao.getZdById(shMsgVO.getZdId().toString()).getUserId(),false);
             zhiduDao.setZhiDuZt(shMsgVO.getZdId(),ZdztEnumProcess.ZD__ZT_SHSB.getCode(),0);
         }
 

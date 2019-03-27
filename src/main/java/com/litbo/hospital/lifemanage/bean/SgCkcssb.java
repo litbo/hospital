@@ -22,6 +22,9 @@ public class SgCkcssb {
     @ApiModelProperty(value = "设备厂商id",name = "sbcsId", dataType = "Integer", required = true)
     private Integer sbcsId;
 
+    @ApiModelProperty(value = "设备厂商名字",name = "sbcsName", dataType = "String", required = true)
+    private String scsName;
+
     @ApiModelProperty(value = "型号",name = "ckcssbXh", dataType = "String", required = true)
     private String ckcssbXh;
 

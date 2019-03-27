@@ -102,7 +102,10 @@ public class LoginController {
             auth.setRole(role.getRoleName());
             if(rightsByUsername!=null)
             auth.setRightList(rightsByUsername);
+            rightsByUsername.add(new SRight());
+            auth.setRightList(rightsByUsername);
             auth.setEmp(emp);
+
 
             return Result.success(auth);
 

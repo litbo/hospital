@@ -81,10 +81,11 @@ public interface GangweiDao {
     @Select("select * from s_zhize_zt  where zz_id=#{gwId} order by zt_date desc")
     List<SZhiduzhizeZt> listZzZtDescByDate(Integer gwId);
 
-    @Select("select gw.gw_id,gw.gw_name,szt.zt_czname " +
-            " FROM s_gangwei gw LEFT JOIN s_zhize_zt szt on (gw.gw_id = szt.zz_id) " +
-            "where  szt.zt_czzt=0 and szt.user_id=#{shr_id} ")   // 状态为0（未处理）
-    List<ZZSelectAsBaseShMsg> listZdsByShr(String shr_id);
+//    @Select("select gw.gw_id,gw.gw_name,szt.zt_czname " +
+//            " FROM s_gangwei gw LEFT JOIN s_zhize_zt szt on (gw.gw_id = szt.zz_id) " +
+//            "where  szt.zt_czzt=0 and szt.user_id=#{shr_id} ")   // 状态为0（未处理）
+    @SelectProvider(type = GwProvider.class ,method = "listZdsByShr")
+    List<ZZSelectAsBaseShMsg> listZdsByShr(@Param("shr_id") String shr_id, @Param("gwZt")String gwZt, @Param("reFlag")String reFlag, @Param("gwName")String gwName);
 
     @Select("select * from s_gangwei where gw_id=#{gw_id}")
     SGangweiSelect getGwSelectByGwId(Integer gwId);

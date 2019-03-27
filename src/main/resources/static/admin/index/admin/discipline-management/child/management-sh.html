@@ -34,15 +34,16 @@
         <fieldset class="layui-elem-field layui-field-title">
             <legend>科室管理团队分工</legend>
         </fieldset>
-        <div class="layui-form-item">
-            <label class="layui-form-label">部门名称<span class="sign">*</span></label>
-            <div class="layui-input-block">
-                <input type="text" name="bmName" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required">
-            </div>
-        </div>
+
     </div>
 
         <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="bmName" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">团队名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -52,24 +53,11 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">创建人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="userId1" value="刘松峰" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="userName1" value="" autocomplete="off" class="layui-input" lay-verify="required" disabled>
                 </div>
             </div>
 
-            <div class="layui-form-item">
-                <label class="layui-form-label">审核人<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="userName2"  autocomplete="off" class="layui-input" lay-verify="required">
-                </div>
-            </div>
-            <!--<div class="layui-form-item">-->
-                <!--<label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>-->
-                <!--<div class="layui-input-block">-->
-                    <!--<select name="userId2" id="" lay-verify="required" lay-filter="shr">-->
-                        <!--<option></option>-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
+
         </div>
     </div>
     <div class="layui-row">
@@ -96,6 +84,16 @@
             <legend>审核信息</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <!--<input type="text" name="userName2"  autocomplete="off" class="layui-input" lay-verify="required">-->
+                    <input type="text" name="userXmaa" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXmaa" disabled>
+                    <input type="text" name="userIdaa" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userIdaa" style="display:none;">
+
+                </div>
+            </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">审核结果<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -220,6 +218,12 @@
             ]
         }
     }
+
+    $(function() {
+        var emp =  tempValue("rl","emp",false);
+        $("#userIdaa").val(emp.userId);
+        $("#userXmaa").val(emp.userXm);
+    })
 </script>
 </body>
 

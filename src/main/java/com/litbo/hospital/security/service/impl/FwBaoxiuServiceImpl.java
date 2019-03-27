@@ -11,6 +11,7 @@ import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.BaoXiuRw;
 import com.litbo.hospital.security.vo.BaoxiuEqVo;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
+import com.litbo.hospital.supervise.dao.EmpDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,9 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     @Autowired
     private FwWxfDao fwWxfDao;
 
+    @Autowired
+    private EmpDao empDao;
+
     @Override
     public PageInfo getBaoxiuEq(String userId,Integer pageSize,Integer pageNum,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
@@ -52,7 +56,8 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize) {
         List<BaoXiuRw> baoxiuRw = fwBaoxiuDao.findBaoxiuRw(userId, EnumProcess.FW_BX_SL.getCode());
         List<BaoXiuRw> baoxiuRw1 = fwShouLiDao.findBaoxiuRw(userId);
-        List<BaoXiuRw> baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(userId);
+        String bmId = empDao.getBmIdByUserId(userId);
+        List<BaoXiuRw> baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(bmId);
         List<BaoXiuRw> baoxiuRw3 = fwWxfDao.getWxfRw(userId);
         baoxiuRw.addAll(baoxiuRw1);
         baoxiuRw.addAll(baoxiuRw2);

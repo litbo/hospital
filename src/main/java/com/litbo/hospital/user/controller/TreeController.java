@@ -46,6 +46,13 @@ public class TreeController {
         return Result.success(treeVos);
 
     }
+    @RequestMapping("wb1")
+    public Result listWbTree(){
+
+        return  Result.success(treeDao.listWbTree()) ;
+
+    }
+
 
     @RequestMapping("/right")
     public  Result listRightByPid(String pid){

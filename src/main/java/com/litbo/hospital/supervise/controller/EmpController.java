@@ -105,7 +105,7 @@ public class EmpController {
     }
 
     @GetMapping("/listEmpByBmId")
-    public Result listEmpByBmId(@RequestBody String bmId) {
+    public Result listEmpByBmId(@RequestParam String bmId) {
         List<SEmp> emps = empService.listEmpByBmId(bmId);
         return Result.success(emps);
     }

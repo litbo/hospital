@@ -597,7 +597,7 @@
                     "title": "综合统计",
                     "url": "./life/electric-bill/zh-count.html",
                     "id": "31122",
-                    "shiro": "ZHTJ"
+                    "shiro": "a"
                   }
                 ]
               },
@@ -1437,6 +1437,12 @@
                     "url": "./safe/application-training/personnel-input.html",
                     "id": "42012",
                     "shiro": "RYLR"
+                  },
+                  {
+                    "title": "考核",
+                    "url": "./safe/application-training/personnel-check.html",
+                    "id": "42013",
+                    "shiro": "KH"
                   }
                 ]
               },
@@ -1451,12 +1457,6 @@
                     "title": "签到",
                     "url": "./table.html",
                     "id": "42020",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "考核",
-                    "url": "./safe/application-training/personnel-check.html",
-                    "id": "42021",
                     "shiro": "a"
                   },
                   {
@@ -1536,7 +1536,7 @@
                     "title": "综合查询",
                     "url": "./safe/medical-incident/suspicious-list.html",
                     "id": "43010",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               }
@@ -3260,7 +3260,7 @@
                 "url": "./system/data-dictionary/state.html",
                 "icon": "torah",
                 "id": "7002",
-                "shiro": "ZTZD"
+                "shiro": "a"
               }
             ]
           }
@@ -3493,7 +3493,7 @@
                 "url": "./system/portal-management/auditing.html",
                 "icon": "clipboard-check",
                 "id": "7301",
-                "shiro": "GGSH"
+                "shiro": "a"
               },
               {
                 "title": "查询",
@@ -3529,7 +3529,7 @@
                 "url": "./system/portal-management/download-auditing.html",
                 "icon": "clipboard-check",
                 "id": "7311",
-                "shiro": "SH"
+                "shiro": "a"
               },
               {
                 "title": "查询",

@@ -17,6 +17,19 @@ public class GwProvider {
         return sql.toString();
     }
 
+    public String listZdsByShr( String shr_id, String gwZt,String reFlag,String gwName){
+
+        StringBuffer sql = new StringBuffer("" +
+
+                " select gw.gw_id,gw.gw_name,gw.create_time,szt.zt_czname \n" +
+                "FROM s_gangwei gw LEFT JOIN s_zhize_zt szt on (gw.gw_id = szt.zz_id)\n" +
+                "where  szt.zt_czzt=0 and szt.user_id=#{shr_id} ");
+        if(gwName!=null) sql.append(" and gw.gw_name like '%'+#{gwName}+'%' ");
+        if(gwZt!=null) sql.append(" and gw.gw_zz_zt= #{gwZt} ");
+        if(reFlag!=null) sql.append(" and gw.zd_xgcs= #{reFlag} ");
+        return sql.toString();
+    }
+
     public String listGwsByTimeAndZdNameAndZt(String startTime, String endTime, String gwName, String gwZt,String reFlag){
 
         StringBuffer sql = new StringBuffer("" +

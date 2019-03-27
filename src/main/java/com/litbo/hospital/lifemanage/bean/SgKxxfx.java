@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -22,6 +23,7 @@ public class SgKxxfx {
     /**
      * 使用日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date kxfxSyrq;
     /**
      * 使用期限 月
@@ -82,6 +84,7 @@ public class SgKxxfx {
     /**
      * 还本起始期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date kxfxHbqsq;
     /**
      * 还本总月数

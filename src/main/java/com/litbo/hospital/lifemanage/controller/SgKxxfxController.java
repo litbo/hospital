@@ -22,7 +22,7 @@ public class SgKxxfxController {
      * @return Result
      */
     @PostMapping("/insertSgKxxfx")
-    public Result insertSgKxxfx(SgKxxfx sgKxxfx) {
+    public Result insertSgKxxfx(@RequestBody SgKxxfx sgKxxfx) {
         sgKxxfxService.insertOrUpdateSgKxxfx(sgKxxfx);
         return Result.success();
     }

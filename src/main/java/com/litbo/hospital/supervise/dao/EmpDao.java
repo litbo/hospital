@@ -108,5 +108,8 @@ public interface EmpDao {
     @SelectProvider(type = EmpProvider.class,method = "selectEmpByIdOrName")
     public List<JhEmpVo> getJhEmpVo(@Param("userId") String userId , @Param("userXm") String userXm);
 
+    @Select("select bm_id from s_emp where user_id = #{userId}")
+    public String getBmIdByUserId(String userId);
+
 
 }

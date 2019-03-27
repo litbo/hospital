@@ -63,7 +63,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">创建人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="userId1" value="刘松峰" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="userXm" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
+                    <input type="text" name="userId1" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId1" style="display:none;">
+
                 </div>
             </div>
             <div class="layui-form-item">
@@ -138,6 +140,15 @@
                         type: "POST",
                         contentType:"application/json",
                         data: ["groupName", "userId1", "userId2"],
+                        done:function(res){
+                            if(res.code === 0){
+                                layer.alert("提交成功",function () {
+                                    location.reload();
+                                })
+                            }else{
+                                layer.alert("提交失败")
+                            }
+                        },
                         param: {
                             1: "bmId",
                             2: "users"
@@ -194,6 +205,11 @@
             ]
         }
     }
+    $(function() {
+        var emp =  tempValue("rl","emp",false);
+        $("#userId1").val(emp.userId);
+        $("#userXm").val(emp.userXm);
+    })
 </script>
 </body>
 

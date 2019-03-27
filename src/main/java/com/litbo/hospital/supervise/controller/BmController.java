@@ -16,6 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -270,5 +275,42 @@ public class BmController {
         return Result.success();
     }
 
+    /**
+     * 描述：下载外部案件导入模板
+     * @throws Exception
+     */
+    @RequestMapping(value = "/downloadExcel")
+    @ResponseBody
+    public void downloadExcel(HttpServletResponse res, HttpServletRequest req, String name) throws Exception {
+        String fileName = name+".xls";
+        ServletOutputStream out;
+        res.setContentType("multipart/form-data");
+        res.setCharacterEncoding("UTF-8");
+        res.setContentType("text/html");
+        String filePath = getClass().getResource("/templates/" + fileName).getPath();
+        String userAgent = req.getHeader("User-Agent");
+        if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
+            fileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+        } else {
+            // 非IE浏览器的处理：
+            fileName = new String((fileName).getBytes("UTF-8"), "ISO-8859-1");
+        }
+        filePath = URLDecoder.decode(filePath, "UTF-8");
+        res.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+        FileInputStream inputStream = new FileInputStream(filePath);
+        out = res.getOutputStream();
+        int b = 0;
+        byte[] buffer = new byte[1024];
+        while ((b = inputStream.read(buffer)) != -1) {
+        // 4.写到输出流(out)中
+         out.write(buffer, 0, b);
+        }
+        inputStream.close();
 
+        if (out != null) {
+        out.flush();
+        out.close();
+        }
+
+    }
 }

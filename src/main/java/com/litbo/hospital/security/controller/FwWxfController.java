@@ -8,8 +8,10 @@ import com.litbo.hospital.security.vo.FwIdSelectVo;
 import com.litbo.hospital.security.vo.FwWxfIndexVo;
 import com.litbo.hospital.security.vo.FwWxfShIndexVo;
 import com.litbo.hospital.security.vo.WxfListVo;
+import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.InvalidSessionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,26 @@ public class FwWxfController {
     @Autowired
     private FwWxfService fwWxfService;
 
+    @GetMapping("/spUserList")
+    public Result spUserList(){
+        try {
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
+            List<SEmp> sEmps = fwWxfService.spUserList(userId);
+            return Result.success(sEmps);
+        } catch (InvalidSessionException e) {
+            e.printStackTrace();
+            return Result.error("失败");
+        }
+    }
+
+    /**
+     * 维修费审核
+     * @param id
+     * @param wxfSpyj
+     * @param wxfSptime
+     * @return
+     */
     @GetMapping("/wxfSh")
     public Result wxfSh(Integer id , String wxfSpyj, Date wxfSptime){
 
