@@ -9,7 +9,6 @@ import com.litbo.hospital.security.vo.FwWeiXiuIndexVo;
 import com.litbo.hospital.security.vo.FwWxqrIndexVo;
 import com.litbo.hospital.security.vo.FwWxqsShIndexVo;
 import com.litbo.hospital.security.vo.WxqrIndex;
-import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,7 @@ public class FwWeixiuController {
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-            System.out.println(id);
+            //System.out.println(id);
             FwWxqrIndexVo fwWxqrIndexVo = fwWeixiuService.wxqrIndexVo(userId, id);
             return Result.success(fwWxqrIndexVo);
         } catch (Exception e) {

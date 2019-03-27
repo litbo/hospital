@@ -54,8 +54,7 @@ public interface FwWeixiuDao {
             "\tAND wxEmp.user_id = wx.wxr_id AND wx.gzyy_id = wxgzyy.id AND wx.gzmx_id = wxgzmx.id AND bx.id = '201812000006'")
     public FwInfoVo findFwInfo(String fwId);
 
-    @Select("SELECT\n" +
-            "bm.bm_name,\n" +
+    @Select("bm.bm_name,\n" +
             "eq.eq_name,\n" +
             "emp.user_xm,\n" +
             "baoxiu.bx_time,\n" +
@@ -63,7 +62,6 @@ public interface FwWeixiuDao {
             "eq.eq_id,\n" +
             "baoxiu.bx_status,\n" +
             "baoxiu.id AS fw_id\n" +
-            "\n" +
             "FROM\n" +
             "dbo.eq_info AS eq ,\n" +
             "dbo.fw_baoxiu AS baoxiu ,\n" +
@@ -75,8 +73,9 @@ public interface FwWeixiuDao {
             "eq.eq_id = baoxiu.eq_id AND\n" +
             "baoxiu.bxks_id = bm.bm_id AND\n" +
             "baoxiu.bxr_id = emp.user_id AND\n" +
+            "emp.bm_id = #{bmId} AND\n" +
             "baoxiu.bx_status = 13")
-    public List<BaoXiuRw> getBaoXiuRw(String userId);
+    public List<BaoXiuRw> getBaoXiuRw(String bmId);
 
     @Select("SELECT\n" +
             "bx.id AS fwId,\n" +

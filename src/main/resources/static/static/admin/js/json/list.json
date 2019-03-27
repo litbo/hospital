@@ -1437,6 +1437,12 @@
                     "url": "./safe/application-training/personnel-input.html",
                     "id": "42012",
                     "shiro": "RYLR"
+                  },
+                  {
+                    "title": "考核",
+                    "url": "./safe/application-training/personnel-check.html",
+                    "id": "42013",
+                    "shiro": "KH"
                   }
                 ]
               },
@@ -1451,12 +1457,6 @@
                     "title": "签到",
                     "url": "./table.html",
                     "id": "42020",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "考核",
-                    "url": "./safe/application-training/personnel-check.html",
-                    "id": "42021",
                     "shiro": "a"
                   },
                   {
