@@ -15,6 +15,16 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        #search {
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+
+        #search > div {
+            float: left;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,12 +47,12 @@
 <script id="timeFormat" type="text/html">
     //日期转换
     {{#
-        var time ="";
-        layui.use('util',function(){
-        var util = layui.util;
-        time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
-        });
-        return time;
+    var time ="";
+    layui.use('util',function(){
+    var util = layui.util;
+    time = layui.util.toDateString(new Date(d.kmSj).getTime(),"yyyy-MM-dd");
+    });
+    return time;
     }}
 </script>
 
@@ -78,14 +88,14 @@
                 se: $url_search,
                 key: $key,
                 name: $name,
-                value:$value
+                value: $value
             }
         });
         //关闭页面
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index); //再执行关闭
     }
-    var dataD  = JSON.parse(JSON.stringify({ "key" : $key}));
+    var dataD = JSON.parse(JSON.stringify({"key": $key}));
     subUp({
         url: $url_cols,
         type: "POST",
@@ -130,7 +140,7 @@
                             "            <a class=\"layui-btn layui-btn-warm\" lay-event=\"setThisData\">选定数据</a>\n" +
                             "        </div>\n" +
                             "        <div class=\"DiyDom\" id=\"diyDOM\">\n" +
-                            res.data['dom']+
+                            res.data['dom'] +
                             "\n" +
                             "        </div>\n" +
                             "    </form>");
@@ -172,14 +182,14 @@
                                         event: "setThisData",
                                         layOpen: false,
                                         func: function (obj, cs) {
-                                            var valueD = getTableValue("table"),values = [];
-                                            for(var i=0;i<valueD.length;i++){
-                                                if(valueD[i]["LAY_CHECKED"] === true){
+                                            var valueD = getTableValue("table"), values = [];
+                                            for (var i = 0; i < valueD.length; i++) {
+                                                if (valueD[i]["LAY_CHECKED"] === true) {
                                                     values.push(valueD[i]);
                                                 }
                                             }
                                             //将选定的页面存在session中(数组形式数据)
-                                            if($.getUrlParam("cache") === "false"){
+                                            if ($.getUrlParam("cache") === "false") {
                                                 values = cs.data;
                                             }
                                             layui.sessionData($name, {
@@ -198,14 +208,36 @@
                     reSet: searchParam
                 }
             };
+
+        },
+        error: function (re) {
+            console.log(re);
+            layui.use("layer", function () {
+                var layer = layui.layer;
+                layer.alert("页面加载错误，请重试！", function () {
+                    location.reload();
+                    window.reNum++;
+                }, function () {
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭s
+                });
+            })
         }
     });
 
-    $(function(){
-        if(!isTruth && window.reNum < 2){
-            location.reload();
-            window.reNum ++;
-        }
+    $(function () {
+        layui.use("layer", function () {
+            var layer = layui.layer;
+            if (!isTruth && window.reNum < 2) {
+                layer.alert("页面加载异常，请重试！", function () {
+                    location.reload();
+                    window.reNum++;
+                }, function () {
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭s
+                });
+            }
+        })
     })
 
 </script>
