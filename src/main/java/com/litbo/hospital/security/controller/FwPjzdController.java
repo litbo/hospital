@@ -120,11 +120,11 @@ public class FwPjzdController {
                 "                        <option value=\"维材-家具维修\">维材-家具维修</option>" +
                 "                        <option value=\"维材-其他\">维材-其他</option>" +
                 "                    </select> </div> " +
-                "<div class='layui-inline'><input type=\"text\" name=\"pjSzm\" class=\"layui-input\" placeholder=\"配件拼音码\" autocomplete=\"off\"></div>" +
+                "<div class='layui-inline'><input type=\"text\" name=\"pjSzm\" class=\"layui-input\" " +
+                "placeholder=\"配件拼音码\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +
                 "<button class='layui-btn' data-type='reload'>搜索</button>" +
                 "</div>");
-
         Map m = new HashMap();
         m.put("url","/security/pjzd/listFwPjzd");
         m.put("type","reload");
