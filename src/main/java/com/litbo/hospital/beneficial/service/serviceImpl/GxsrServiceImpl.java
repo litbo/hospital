@@ -66,7 +66,7 @@ public class GxsrServiceImpl implements GxsrService {
                 bSbcwBean.setKmCjdm(2);
             }*/
             bSbcwBean.setKmCjdm(3);
-            bSbcwBean.setaId(i+100);
+            //bSbcwBean.setaId(i+101);
 
             if( gxsrDao.insertSr(bSbcwBean)>0){
                 if(i == insertSbcwVo.getKmNameAndValue().size()) {

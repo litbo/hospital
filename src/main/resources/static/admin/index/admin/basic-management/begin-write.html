@@ -208,7 +208,8 @@
                     url:"/supervise/gwgl/gwzzSubmit",
                     type:"POST",
                     contentType:"application/json",
-                    data:["gwId","gwName","gwZz","userId","shrId","createTime"],
+                    data:["gwId","gwName","gwZz","userId","shrId","createTime"]
+                    ,
                     done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {

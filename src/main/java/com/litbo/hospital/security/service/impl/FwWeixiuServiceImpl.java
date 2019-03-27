@@ -85,7 +85,7 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     public FwWxqrIndexVo wxqrIndexVo(String userId, String fwId) {
         FwWxqrIndexVo wxqrIndexVo = fwWeixiuDao.wxqrIndexVo(fwId);
         String userXm = empDao.getUserXmById(userId);
-        System.out.println(userXm);
+        //System.out.println(userXm);
         wxqrIndexVo.setQrName(userXm);
         wxqrIndexVo.setQsUser(userId);
         List<PjqlZjbExamineVO> pjqlZjbExamineVOS = fwPjqlZjbDao.selectFwPjqlByFwId(fwId);

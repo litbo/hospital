@@ -27,8 +27,10 @@ public interface SgCkcssbMapper {
             "dbo.sg_ckcssb.gb,\n" +
             "dbo.sg_ckcssb.cd,\n" +
             "dbo.sg_ckcssb.extend_one,\n" +
-            "dbo.sg_ckcssb.extend_two\n" +
+            "dbo.sg_ckcssb.extend_two,\n" +
+            "dbo.eq_cs.sbcs_name AS scsName\n" +
             "FROM dbo.sg_ckcssb\n" +
+            "LEFT JOIN dbo.eq_cs ON dbo.sg_ckcssb.sbcs_id = dbo.eq_cs.sbcs_id\n" +
             "WHERE dbo.sg_ckcssb.sg_id = #{sgInfoId,jdbcType=VARCHAR}")
     List<SgCkcssb> selectSgCkcssbBySgInfoId(String sgInfoId);
 

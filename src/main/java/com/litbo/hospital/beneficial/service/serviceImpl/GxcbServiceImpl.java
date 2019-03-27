@@ -65,7 +65,7 @@ public class GxcbServiceImpl implements GxcbService {
                 bSbcwBean.setKmCjdm(2);
             }
             bSbcwBean.setKmCjdm(1);
-            bSbcwBean.setaId(i+40);
+            //bSbcwBean.setaId(i+40);
 
 
             if( gxcbDao.insertCb(bSbcwBean)>0){
