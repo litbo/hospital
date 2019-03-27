@@ -21,4 +21,6 @@ public interface TreeDao {
 
     @Select("select right_id ,bz as rightName ,pid from s_right")
     List<RightTreeVo> listRight();
+    @Select("select * from eq_pm")
+    List<EqPm> listWbTree();
 }
