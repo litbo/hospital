@@ -106,6 +106,7 @@ public class LoginController {
             auth.setRightList(rightsByUsername);
             auth.setEmp(emp);
 
+
             return Result.success(auth);
 
         }catch (Exception e){
