@@ -54,7 +54,8 @@ public interface FwWeixiuDao {
             "\tAND wxEmp.user_id = wx.wxr_id AND wx.gzyy_id = wxgzyy.id AND wx.gzmx_id = wxgzmx.id AND bx.id = '201812000006'")
     public FwInfoVo findFwInfo(String fwId);
 
-    @Select("bm.bm_name,\n" +
+    @Select("SELECT\n" +
+            "bm.bm_name,\n" +
             "eq.eq_name,\n" +
             "emp.user_xm,\n" +
             "baoxiu.bx_time,\n" +
