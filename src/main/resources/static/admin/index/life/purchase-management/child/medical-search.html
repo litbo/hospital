@@ -88,7 +88,9 @@
                 get: {
                     url: "/lifeManage/selectSgDxyxzbkc",
                     type: "POST",
-                    data: {"sgInfoId": sgId}
+                    data: {"sgInfoId": sgId},
+                    parse: "users",
+                    tableId: "table"
                     // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
                     //有add时必需时data为表单name数组，否则请直接使用data赋值
                 }//get内参数需参考《内容传输与提交》文档
@@ -125,7 +127,6 @@
                     type: "POST",
                     contentType:"application/json",
                     data: ["dxzbDdnr", "dxzbYj"],
-                    contentType:"application/json",
                     param: {
                         1: "sgId",
                         2: "userIds"

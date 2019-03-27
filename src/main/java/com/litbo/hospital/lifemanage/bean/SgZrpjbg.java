@@ -37,7 +37,7 @@ public class SgZrpjbg {
     /**
      * 准入评价报告日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date pjbgRq;
     /**
      * 准入评价报告扩展名1

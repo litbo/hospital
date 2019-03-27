@@ -597,7 +597,7 @@
                     "title": "综合统计",
                     "url": "./life/electric-bill/zh-count.html",
                     "id": "31122",
-                    "shiro": "ZHTJ"
+                    "shiro": "a"
                   }
                 ]
               },
@@ -3260,7 +3260,7 @@
                 "url": "./system/data-dictionary/state.html",
                 "icon": "torah",
                 "id": "7002",
-                "shiro": "ZTZD"
+                "shiro": "a"
               }
             ]
           }
