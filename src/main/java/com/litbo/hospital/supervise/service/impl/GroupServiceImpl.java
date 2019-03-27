@@ -116,6 +116,7 @@ public class GroupServiceImpl implements GroupService {
         //科室团队
         SGroupSelectVO  group = groupDao.getGroupSelectByGId(gid);
         //科室成员
+
         List<GroupUserSelectVO> users = groupDao.getGroupUserSelectByGId(gid);
         vo.setGroupId(group.getGroupId());
         vo.setBmName(group.getBmName());

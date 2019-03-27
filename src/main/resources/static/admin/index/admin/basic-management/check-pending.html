@@ -51,7 +51,7 @@
                     , {field: 'ztCzname', title: '审核类型', minWidth: 150}
                     , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
-                , url: "/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=1&reFlag=0"
+                , url: "/supervise/zdgl/listZdsByShr?zdZt=1&reFlag=0"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -85,7 +85,7 @@
                 }
             },
             reSet:{
-                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=1&reFlag=0",
+                url:"/supervise/zdgl/listZdsByShr?zdZt=1&reFlag=0",
                 type:"search",
                 data:["zdName"],    //搜索框的name
                 where: {

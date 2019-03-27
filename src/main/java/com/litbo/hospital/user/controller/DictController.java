@@ -70,6 +70,26 @@ public class DictController {
 
 
 
+    @RequestMapping("/zggwlb")
+    public Result listZggwlb(){
+
+        List<Zggwlb> zggwlb = dictDao.listZggwlb();
+        return Result.success(zggwlb);
+    }
+
+    @RequestMapping("/listMz")
+    public Result listMz(){
+        List<Mz> mz = dictDao.listMz();
+        return Result.success(mz);
+    }
+    @RequestMapping("/listZc")
+    public Result listZc(){
+        List<Zc> zc = dictDao.listZc();
+
+        return Result.success(zc);
+    }
+
+
     @RequestMapping("/gglx")
     public Result listGglx(){
 
@@ -94,6 +114,7 @@ public class DictController {
 
 
     }
+
 
     @RequestMapping("/listDictByTName")
     public Result listDictByTName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,

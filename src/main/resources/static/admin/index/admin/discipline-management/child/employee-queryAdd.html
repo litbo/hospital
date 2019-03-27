@@ -56,7 +56,7 @@
                 <label class="layui-form-label">民族</label>
                 <div class="layui-input-block">
                     <select name="mzId" lay-filter="mz">
-
+                        <option></option>
                     </select>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 <label class="layui-form-label">部门</label>
                 <div class="layui-input-block">
                     <select name="bmId" lay-filter="bm">
-
+                        <option></option>
                     </select>
                 </div>
             </div>
@@ -98,6 +98,7 @@
                 <label class="layui-form-label">学历</label>
                 <div class="layui-input-block">
                     <select name="xllbId">
+                        <option></option>
                         <option value="0">博士生</option>
                         <option value="1">研究生</option>
                         <option value="2">大学本科</option>
@@ -109,16 +110,16 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">专业分类</label>
-                <div class="layui-input-block">
-                    <select name="xlzyId">
-                        <option value="1">农学</option>
-                        <option value="2">计算机</option>
-                        <option value="3">医学院</option>
-                    </select>
-                </div>
-            </div>
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">专业分类</label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<select name="xlzyId">-->
+                        <!--<option value="1">农学</option>-->
+                        <!--<option value="2">计算机</option>-->
+                        <!--<option value="3">医学院</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <div class="layui-form-item">
                 <label class="layui-form-label">毕业院校</label>
@@ -129,18 +130,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位</label>
                 <div class="layui-input-block">
-                    <select name="zggwlbId">
-
+                    <select name="zggwlbId" lay-filter="zggwlb">
+                        <option></option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">职称</label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>医士</option>
-                        <option>本科生</option>
-                        <option>博士生</option>
+                    <select name="zc" lay-filter="zc">
+                        <option></option>
                     </select>
                 </div>
             </div>
@@ -198,6 +197,21 @@
                         ids:"bmId",
                         text:"bmName",
                         url:"/supervise/bmgl/listBms2"
+                    },{
+                        filter:"zggwlb",
+                        ids:"zggwlbId",
+                        text:"zggwlb",
+                        url:"/eqdict/zggwlb"
+                    },{
+                        filter:"mz",
+                        ids:"mzId",
+                        text:"mz",
+                        url:"/eqdict/listMz"
+                    },{
+                        filter:"zc",
+                        ids:"zcId",
+                        text:"zc",
+                        url:"/eqdict/listZc"
                     }
                 ]
             },
@@ -207,7 +221,7 @@
                     url:"/kwgl/empgl/saveEmp",
                     type:"POST",
                     contentType:"application/json",
-                    data:["bmId","userId","userXm","sexId","sfzh","tel","xllbId","byyx","zggwlbId"],
+                    data:["bmId","userId","userXm","sexId","sfzh","tel","xllbId","byyx","zggwlbId","zcId"],
                     add:{
 
                     }

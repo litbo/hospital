@@ -83,7 +83,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="userId" class="layui-input" autocomplete="off" value="Admin">
+
+                    <input type="text" name="userXm" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
+                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId" style="display:none;">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -233,6 +235,12 @@
 
         }
     }
+
+    $(function() {
+        var emp =  tempValue("rl","emp",false);
+        $("#userId").val(emp.userId);
+        $("#userXm").val(emp.userXm);
+    })
 </script>
 </body>
 

@@ -156,7 +156,8 @@ public class BmServiceImpl implements BmService {
 
     @Override
     public boolean isZJD(String oid) {
-        Integer num = bmDao.getAmountByPid(oid);  //获取子节点
+        SBm bmByOid = bmDao.getBmByOid(oid);
+        Integer num = bmDao.getAmountByPid(bmByOid.getBmId());  //获取子节点
         if(num>0) return false;
         return true;
     }

@@ -1,11 +1,12 @@
 package com.litbo.hospital.user.dao;
 
-import com.litbo.hospital.user.vo.DictVo;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.DictProvider;
-
-import org.apache.ibatis.annotations.*;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.litbo.hospital.user.vo.DictVo;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 
@@ -63,4 +64,10 @@ public interface DictDao {
             "union all\n" +
             "SELECT syxz_id as dictId ,syxz_name as dictName FROM eq_syxz")
     List<DictVo> listZyzd();
+    @Select("select zggwlb_id  ,zggwlb  from s_zggwlb")
+    List<Zggwlb> listZggwlb();
+    @Select("select *  from s_mz")
+    List<Mz> listMz();
+    @Select("select *  from s_zc")
+    List<Zc> listZc();
 }

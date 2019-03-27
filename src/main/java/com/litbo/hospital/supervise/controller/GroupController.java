@@ -72,6 +72,8 @@ public class GroupController {
 
 
 
+
+
     //通过id获得科室管理团队
     @GetMapping("/getGroupById")
     public Result getGroupById(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
