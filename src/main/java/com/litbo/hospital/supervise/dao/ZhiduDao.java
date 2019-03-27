@@ -60,9 +60,10 @@ public interface ZhiduDao {
     void saveZdZt(SZhiduzhizeZt ztc);
 
     //通过审核人获取制度的基本信息   zdid zdname ztcaname
-    @Select("select szd.zd_id,szd.zd_name,szt.zt_czname FROM s_zhidu szd LEFT JOIN s_zhiduzhize_zt szt\n" +
-            "on (szd.zd_id = szt.zd_id) where szt.user_id=#{shr_id} and szt.zt_czzt=0 ")   // 状态为0（未处理）
-    List<ZDSelectAsBaseShMsg> listZdsByShr(String shr_id);
+//    @Select("select szd.zd_id,szd.zd_name,szt.zt_czname FROM s_zhidu szd LEFT JOIN s_zhiduzhize_zt szt\n" +
+//            "on (szd.zd_id = szt.zd_id) where szt.user_id=#{shr_id} and szt.zt_czzt=0 ")   // 状态为0（未处理）
+    @SelectProvider(type = ZhiDuProvider.class,method = "listZdsByShr")
+    List<ZDSelectAsBaseShMsg> listZdsByShr(@Param("shr_id")String shr_id , @Param("zdZt")String zdZt,@Param("reFlag")String reFlag,@Param("zdName") String zdName);
 
     //通过制度id获取该制度所有已通过的审核审核记录
     @Select("select szt.zt_id, szt.zd_id, emp.user_xm, szt.zt_date, szt.zt_czname, szt.zt_czzt,szt.zt_shyj \n" +

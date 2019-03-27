@@ -79,7 +79,8 @@
             <div class="layui-form-item" >
                 <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input" autocomplete="off" >
+                    <input type="text" name="userXm" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
+                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId" style="display:none;">
                 </div>
             </div>
 
@@ -264,6 +265,11 @@
     };
 
     $(function () {
+
+        var emp =  tempValue("rl","emp",false);
+        $("#userId").val(emp.userId);
+        $("#userXm").val(emp.userXm);
+
         var xx = $.getUrlParam('ztCzname');
         if (xx === "处长审核") {
             $("#nextShr").addClass("hidden");

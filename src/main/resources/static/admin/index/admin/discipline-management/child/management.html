@@ -189,7 +189,21 @@
                     elem:'#addNew',
                     base:'./management-add.html',
                     key:'abc',
-                    name:'bbb'
+                    name:'bbb',
+                    before:function(){
+                        var users = getTableValue("table"),daa={};
+                        if(formData.radio){
+                            daa=formData.radio[0]["bmId"];
+                        }else if(formData.val){
+                            console.log(formData)
+                            daa=formData.val.bmId;
+                        }
+
+                        return {
+                            bmId:daa
+                        }
+                    },
+                    param:["bmId"]
                 }
             ],
             delItem: ".delNew",

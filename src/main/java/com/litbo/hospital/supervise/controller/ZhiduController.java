@@ -6,7 +6,9 @@ import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.service.ZhiduService;
 import com.litbo.hospital.supervise.vo.*;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.Api;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -93,9 +95,10 @@ public class ZhiduController {
 
     @GetMapping("/listZdsByShr")
     public Result listZdsByShr(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                         @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                               String shr_id){
-        PageInfo date = zhiduService.listZdsByShr(pageNum,pageSize,shr_id);
+                         @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String zdZt,String reFlag,String zdName){
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String shrId = emp.getUserId();
+        PageInfo date = zhiduService.listZdsByShr(pageNum,pageSize,shrId,zdZt,reFlag,zdName);
         return Result.success(date);
     }
     //通过审核人id获取待审核的制度的信息

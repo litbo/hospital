@@ -6,7 +6,9 @@ import com.litbo.hospital.supervise.bean.SGangwei;
 import com.litbo.hospital.supervise.dao.GangweiDao;
 import com.litbo.hospital.supervise.service.GangweiService;
 import com.litbo.hospital.supervise.vo.*;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.Api;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -133,8 +135,10 @@ public class GangweiController {
     @GetMapping("/listGwsByShr")
     public Result listZdsByShr(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                               String shr_id,Integer gwZzZt){
-        PageInfo date = gangweiService.listZdsByShr(pageNum,pageSize,shr_id);
+                               String gwZt, String reFlag,String gwName){
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        String shr_id = emp.getUserId();
+        PageInfo date = gangweiService.listZdsByShr(pageNum,pageSize,shr_id,gwZt,reFlag,gwName);
         return Result.success(date);
     }
 

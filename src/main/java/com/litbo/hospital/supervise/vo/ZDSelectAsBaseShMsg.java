@@ -1,9 +1,15 @@
 package com.litbo.hospital.supervise.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class ZDSelectAsBaseShMsg {
     private Integer zdId;    //制度编号
     private String zdName;  // 制度名称
     private String ztCzname;    //制度状态操作名称
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date  createTime;
 
     public Integer getZdId() {
         return zdId;

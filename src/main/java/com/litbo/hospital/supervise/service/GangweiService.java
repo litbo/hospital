@@ -31,7 +31,7 @@ public interface GangweiService {
     //岗位职责提交
     void gwzzSubmit(GWSubmitVO gwSubmitVO);
     //通过审核人查询待审核岗位职责
-    PageInfo listZdsByShr(int pageNum, int pageSize, String shr_id);
+    PageInfo listZdsByShr(int pageNum, int pageSize, String shr_id, String gwZt, String reFlag,String gwName);
     //通过岗位id查询 岗位的审核信息  ， 通过岗位和审核人获取当前未审核信息
     GwShDetailMsg getShDetailMgsByZdId(Integer gwId, String shrId);
     //提交审核信息

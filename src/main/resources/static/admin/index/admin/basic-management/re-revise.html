@@ -49,7 +49,7 @@
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
                     , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
                 ]]
-                , url: "/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=0&reFlag=1"
+                , url: "/supervise/zdgl/listZdsByShr?zdZt=0&reFlag=1"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -78,7 +78,7 @@
                 }
             },
             reSet:{
-                url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=0&reFlag=1",
+                url:"/supervise/zdgl/listZdsByShr?zdZt=0&reFlag=1",
                 type:"search",
                 data:["zdName"],    //搜索框的name
                 where: {
