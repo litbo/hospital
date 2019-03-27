@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.litbo.hospital.supervise.bean.SEmp;
 import lombok.Data;
 
 import java.util.Date;
@@ -30,4 +31,8 @@ public class SgDxyxzbkcVO {
      * 考察人员列表
      */
     private List<String> userIds;
+    /**
+     * 人员信息
+     */
+    private List<SEmp> users;
 }
