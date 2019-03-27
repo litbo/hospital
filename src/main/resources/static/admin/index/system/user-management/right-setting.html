@@ -86,9 +86,6 @@
                 }
 
             },
-            callback: {
-                "onClick": ckLine
-            },
             check: {
                 enable: true,
                 chkStyle: "checkbox"
@@ -175,6 +172,26 @@
                     url:"/role/listRoleNoLimit",
                     ids:"roleId",
                     text:"roleName"
+                }
+            },
+            event:{
+                box:"select",
+                filter:"",
+                func:function(elem,value,othis){
+                    var val = elem.value;
+                    $.ajax({
+                        url: "/right/listRightByRId",
+                        type: "GET",
+                        data: {roleId: val},
+                        success: function (res) {
+                            if (res.code === 0) {
+                                console.log(res);
+                                /*nodes = res.data;*/
+                                $.fn.zTree.beautify().init($("#demo"), setting, res.data);
+                            }
+
+                        }
+                    });
                 }
             }
         }
