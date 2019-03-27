@@ -3493,7 +3493,7 @@
                 "url": "./system/portal-management/auditing.html",
                 "icon": "clipboard-check",
                 "id": "7301",
-                "shiro": "GGSH"
+                "shiro": "a"
               },
               {
                 "title": "查询",
@@ -3529,7 +3529,7 @@
                 "url": "./system/portal-management/download-auditing.html",
                 "icon": "clipboard-check",
                 "id": "7311",
-                "shiro": "SH"
+                "shiro": "a"
               },
               {
                 "title": "查询",
