@@ -1536,7 +1536,7 @@
                     "title": "综合查询",
                     "url": "./safe/medical-incident/suspicious-list.html",
                     "id": "43010",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               }
