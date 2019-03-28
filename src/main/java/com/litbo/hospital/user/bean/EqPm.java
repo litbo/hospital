@@ -19,6 +19,8 @@ public class EqPm {
 
     private String pid;
 
+    private Boolean nocheck;
+
 
 
 }

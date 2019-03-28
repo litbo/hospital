@@ -259,6 +259,18 @@ public class EqServiceImpl implements EqService {
         return eqDao.delEq(eqId);
     }
 
+    @Override
+    public List<EqPm> listPmTree() {
+
+        List<EqPm> pms =  eqDao.listPmTree();
+        for (EqPm pm : pms) {
+            if(pm.getPid().length()<8){
+                pm.setNocheck(true);
+            }
+        }
+        return pms;
+    }
+
 
     @Override
     public Integer setPm(SetPmVo setPmVo) {
