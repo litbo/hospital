@@ -213,6 +213,13 @@ public class EqController {
         return Result.success(pageInfo);
     }
 
+    //品名树返回数据
+    @RequestMapping("/listPmTree")
+    public Result listPmTree(){
+
+        return Result.success(es.listPmTree());
+    }
+
     //通过品名 拼音码pym 查询品名
     @RequestMapping("/listPmsByPym")
     public Result listPmsByPym(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
