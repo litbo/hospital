@@ -72,4 +72,6 @@ public interface EqDao {
     List<EqShowVo> listFlEqByX(SelectFlEqVo selectFlEqVo);
     @Delete("delete from eq_info where eq_id =#{eqId}")
     Integer delEq(String eqId);
+    @Select("select * from eq_pm")
+    List<EqPm> listPmTree();
 }
