@@ -317,15 +317,24 @@
                         1:"sgId"
                     },
                     success:function(res){
-                        console.log("提交成功！",res);
+                        if(res.code === 0){
+                            parent.layer.msg("提交成功！");
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        }
+                        //console.log("提交成功！",res);
                     }
                 },
                 func:function(){
-                    layOpen({
-                        type:2,
-                        content:'./medical-search.html?sgId='+$.getUrlParam("sgId"),
-                        area:['100%','100%']
-                    })
+                    //价格大于100W才弹出页面
+                    if(top.tempData.mm >= 1000000){
+                        layOpen({
+                            type:2,
+                            site:"parent",
+                            content:'./child/medical-search.html?sgId='+$.getUrlParam("sgId"),
+                            area:['100%','100%']
+                        })
+                    }
                 }
             },
             date:[

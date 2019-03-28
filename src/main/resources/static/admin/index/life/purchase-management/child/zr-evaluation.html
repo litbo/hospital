@@ -91,9 +91,7 @@
                     url: "/lifeManage/selectSgZrpjbgBySgInfoId",
                     type: "POST",
                     data: {sgInfoId: $.getUrlParam("sgId")}
-                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
-                    //有add时必需时data为表单name数组，否则请直接使用data赋值
-                }//get内参数需参考《内容传输与提交》文档
+                }
             },
             date:{
                 elem:'#date',
@@ -115,15 +113,24 @@
                         1:"sgId"
                     },
                     success:function(res){
-                        console.log("提交成功！",res);
+                        if(res.code === 0){
+                            parent.layer.msg("提交成功！");
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        }
+                        //console.log("提交成功！",res);
                     }
                 },
                 func:function(){
-                    layOpen({
-                        type:2,
-                        content:'./kxxfx.html?sgId='+$.getUrlParam("sgId"),
-                        area:['100%','100%']
-                    })
+                    //价格大于10W弹出新页面
+                    if(top.tempData.mm >= 100000){
+                        layOpen({
+                            type:2,
+                            site:"parent",
+                            content:'./child/kxxfx.html?sgId='+$.getUrlParam("sgId"),
+                            area:['100%','100%']
+                        })
+                    }
                 }
             }
         }
