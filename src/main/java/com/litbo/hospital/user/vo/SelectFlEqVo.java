@@ -8,4 +8,6 @@ public class SelectFlEqVo {
     private String bmId;
 
     private String eqName;
+
+    private String bmName;
 }

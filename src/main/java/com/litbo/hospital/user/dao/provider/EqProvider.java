@@ -356,7 +356,30 @@ public class EqProvider {
                 " where e.eq_pm_id is not NULL");
                  if(StringUtils.isNotBlank(selectFlEqVo.getBmId()))SQL.append(" and eq_bmid Like '%'+ #{bmId}+'%'");
                  if(StringUtils.isNotBlank(selectFlEqVo.getEqName()))SQL.append(" and eq_name Like '%'+ #{eqName}+'%'");
+                 if(StringUtils.isNotBlank(selectFlEqVo.getBmName()))SQL.append(" and bm_name Like '%'+ #{bmName}+'%'");
 
+        return SQL.toString();
+    }
+
+    public String listWFlEqByX(SelectFlEqVo selectFlEqVo){
+        StringBuffer SQL =new StringBuffer( "SELECT\n" +
+                "\te.eq_id,\n" +
+                "\te.eq_sbbh,\n" +
+                "\te.eq_zcbh,\n" +
+                "  e.eq_name, " +
+                "\tp.eq_pm_name,\n" +
+                "\te.eq_gg,\n" +
+                "\te.eq_xh,\n" +
+                "\te.eq_qysj,e.eq_price,e.eq_pp,\n" +
+                "\tb.bm_name \n" +
+                "FROM\n" +
+                "\tdbo.eq_info AS e\n" +
+                "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
+                " where e.eq_pm_id is NULL");
+        if(StringUtils.isNotBlank(selectFlEqVo.getBmId()))SQL.append(" and eq_bmid Like '%'+ #{bmId}+'%'");
+        if(StringUtils.isNotBlank(selectFlEqVo.getEqName()))SQL.append(" and eq_name Like '%'+ #{eqName}+'%'");
+        if(StringUtils.isNotBlank(selectFlEqVo.getBmName()))SQL.append(" and bm_name Like '%'+ #{bmName}+'%'");
         return SQL.toString();
     }
     public String listWFlEq(){
