@@ -42,6 +42,21 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
+    {{#  if(d.kstlId !== null){ }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
+    {{#  } if(d.pjbgId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价报告</a>
+    {{#  } if(d.kxfxId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析</a>
+    {{#  } if(d.dxzbId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备</a>
+    {{#  } if(d.lzfxId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析</a>
+    {{#  } if(d.zbwyhhyId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">装备委员会会议</a>
+    {{#  } else if(d.ybghhyId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">院办公会会议</a>
+    {{#  } }}
 </script>
 <script>
     renderMod = {
