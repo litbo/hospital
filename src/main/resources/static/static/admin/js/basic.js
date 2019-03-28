@@ -22,6 +22,10 @@ var date = new Date()
     , time = hour + ":" + minutes + ":" + seconds
     //初始化页面渲染数据
     , renderMod = {}
+    ,tempData = {
+        mm:0,
+        lay:""
+    }
     , allData = null;
 //日期补零
 if (month < 10) {
@@ -441,7 +445,6 @@ function layOpen(data, def_data) {
             return layer.open(data);
     }
 }
-
 
 //获取数据hash值
 function getHash(input) {

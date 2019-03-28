@@ -44,12 +44,12 @@
     <div class="col-xs-12">
         <form class="layui-form layui-form-pane">
             <div class="layui-form-item" style="margin-top:10px;">
-                <button class="layui-btn warm_btn layui-btn-warm layui-btn-fluid">提交</button>
+                <button class="layui-btn warm_btn layui-btn-warm layui-btn-fluid" lay-submit="" id="saveType">提交</button>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">名称</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" placeholder="请输入">
+                    <input type="text" name="name" id="name" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-row">
@@ -81,7 +81,7 @@
                         <input type="text" name="" autocomplete="off" class="layui-input" placeholder="设备品名">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                        <button class="layui-btn layui-btn-fluid" lay-filter="demo1">查找</button>
                     </div>
                 </form>
             </div>
@@ -98,53 +98,25 @@
             data: {
                 key: {
                     name: "eqPmName"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "eqPmId",
+                    pIdKey: "pid"
                 }
-            },
-            callback: {
-                onClick: ckLine
             },
             check: {
                 enable: true,
-                chkStyle: "checkbox"
+                chkStyle: "radio",
+                radioType: "all"
             }
         },
         newNode = {},
         nodes = {};
 
-
-    function ckLine(event, treeId, treeNode, clickFlag) {
-        // 判断是否父节点 !treeNode.isParent
-        //if (true) {
-        //alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);
-        console.log(treeNode);
-        $.ajax({
-            url: "/tree/wb",//请求的action路径
-            data: {"pid": treeNode.pid},
-            error: function () {//请求失败处理函数
-                layer.alert('请求失败');
-            },
-            success: function (res) { //添加子节点到指定的父节点
-                if (res.code === 0) {
-                    if (res.data && res.data.length > 0) {
-                        var treeObj = $.fn.zTree.getZTreeObj("tree");
-                        //treeNode.halfCheck = false;
-                        var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null);//获取指定父节点
-                        //console.log(parentZNode);
-                        treeObj.removeChildNodes(parentZNode);
-                        newNode = treeObj.addNodes(parentZNode, res.data, false);
-                        //console.log(newNode);
-                    }
-                }
-            }
-        });
-        //}
-    }
-
-
     $.ajax({
-        url: "/tree/wb1",
+        url: "/eq/listPmTree",
         type: "GET",
-        data: {pid: "68"},
         success: function (res) {
             if (res.code === 0) {
                 console.log(res);
@@ -154,22 +126,43 @@
 
         }
     });
-    $("#saveRole").on("click", function () {
-        var treeObj = $.fn.zTree.getZTreeObj("demo");
-        var nodes = treeObj.getCheckedNodes(true), datas = [];
-        //console.log(nodes);
+    $("#saveType").on("click", function () {
+        var treeObj = $.fn.zTree.getZTreeObj("tree");
+        var nodes = treeObj.getCheckedNodes(true), datas = "",tableD = [],tableData=[];
+        console.log("node",nodes);
+        //获取树ID
         for (var i = 0; i < nodes.length; i++) {
-            datas.push(nodes[i]["rightId"]);
+            datas = nodes[i]["eqPmId"];
         }
         //console.log(datas);
+        layui.use("table",function(){
+            var table = layui.table;
+            tableD = table.checkStatus("table").data;
+            console.log("table",JSON.stringify(tableD));
+            for (var j = 0; j < tableD.length; j++) {
+                tableData.push(tableD[j]["eqId"]);
+            }
+
+        });
+        if(doJudg({
+            "0":[tableData],
+            "00":[datas]
+        })){
+            putMsg({
+                alert:"至少需要选择一项内容哦！"
+            });
+            return false;
+        }
         subUp({
-            url: "/right/setRights",
-            data: ["roleId"],
+            url: "/eq/setPm",
+            data: ["name"],
             type: "POST",
             contentType: "application/json",
             add: {
-                "rightIds": datas
-            }
+                "eqPmId": datas,
+                "eqIds":tableData
+            },
+            reload:true
         });
         return false;
     });
@@ -192,12 +185,12 @@
                     elem: "#table"
                     , cols: [[ //表头
                         {checkbox: true}
-                        , {field: 'use-depart', title: '所在科室', minWidth: 150}
-                        , {field: 'authorized_person', title: '设备品名', minWidth: 150, sort: true}
-                        , {field: 'model', title: '型号', minWidth: 100}
-                        , {field: 'model', title: '金额', minWidth: 100, sort: true}
-                        , {field: 'model', title: '生产商', minWidth: 100}
-                        , {field: 'model', title: '品牌', minWidth: 80}
+                        , {field: 'eqName', title: '生产商', minWidth: 100}
+                        , {field: 'bmName', title: '所在科室', minWidth: 150}
+                        , {field: 'eqPmName', title: '设备品名', minWidth: 150, sort: true}
+                        , {field: 'eqXh', title: '型号', minWidth: 100}
+                        , {field: 'eqPrice', title: '金额', minWidth: 100, sort: true}
+                        , {field: 'eqPp', title: '品牌', minWidth: 80}
                     ]]
                     , url: "/eq/listWFlEq"
                     , method: "POST"

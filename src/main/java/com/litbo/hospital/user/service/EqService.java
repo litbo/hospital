@@ -1,8 +1,10 @@
 package com.litbo.hospital.user.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
+import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.bean.EqSyxz;
 import com.litbo.hospital.user.vo.EqVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
@@ -52,4 +54,8 @@ public interface EqService {
     String uploadFile(MultipartFile multipartFile);
 
     Integer delEq(String eqId);
+
+    List<EqPm> listPmTree();
+
+    PageInfo listWFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
 }

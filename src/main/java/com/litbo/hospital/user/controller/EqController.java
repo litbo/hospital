@@ -149,6 +149,14 @@ public class EqController {
         return Result.success(pageInfo);
     }
 
+    //模糊查询已经关联设备
+    @RequestMapping("/listWFlEqByX")
+    public Result listWFlEqByX(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                              SelectFlEqVo selectFlEqVo) {
+        PageInfo pageInfo = es.listWFlEqByX(pageNum,pageSize,selectFlEqVo);
+        return Result.success(pageInfo);
+    }
 
     //解除卫标分类
     @RequestMapping("/cancelFl")
@@ -211,6 +219,13 @@ public class EqController {
         PageInfo pageInfo = es.listPms(pageNum, pageSize);
 
         return Result.success(pageInfo);
+    }
+
+    //品名树返回数据
+    @RequestMapping("/listPmTree")
+    public Result listPmTree(){
+
+        return Result.success(es.listPmTree());
     }
 
     //通过品名 拼音码pym 查询品名

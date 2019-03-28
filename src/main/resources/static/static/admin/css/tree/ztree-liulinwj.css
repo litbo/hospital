@@ -174,35 +174,69 @@
 .ztree ul ul{
   padding-left:25px;
 }
-
+/*选择渲染*/
 .chk{
   width: 16px;
   display: block;
   height: 16px;
   float: left;
   margin-right: -10px;
-  background-image:url("/static/admin/css/tree/img/square.png")!important;
   background-size:100% 100%;
 }
 .switch{
   margin-left: 10px;
 }
+/*CHECKBOX 样式*/
+.checkbox_false_full{
+  background-image:url("/static/admin/css/tree/img/c-square.png")!important;
+  background-color:#f10214;
+}
 .checkbox_false_full_focus{
-  background-image:url("/static/admin/css/tree/img/check.png")!important;
+  background-image:url("/static/admin/css/tree/img/c-check.png")!important;
   background-color:#00b7ee;
 }
+.checkbox_false_disable{
+  background-image:url("/static/admin/css/tree/img/c-baned.png")!important;
+}
 .checkbox_true_part{
-  background-image:url("/static/admin/css/tree/img/check.png")!important;
+  background-image:url("/static/admin/css/tree/img/c-check.png")!important;
   background-color:rgba(0,0,0,0.5);
 }
 .checkbox_true_full{
-  background-image:url("/static/admin/css/tree/img/done.png")!important;
+  background-image:url("/static/admin/css/tree/img/c-done.png")!important;
   background-color:#f10214;
 }
 .checkbox_true_full_focus{
-  background-image:url("/static/admin/css/tree/img/check.png")!important;
+  background-image:url("/static/admin/css/tree/img/c-check.png")!important;
   background-color:rgba(100,100,100,0.6);
 }
 .checkbox_true_disable{
-  background-image:url("/static/admin/css/tree/img/ban.png")!important;
+  background-image:url("/static/admin/css/tree/img/c-ban.png")!important;
+}
+/*RADIO 样式*/
+.radio_false_full{
+  background-image:url("/static/admin/css/tree/img/r-square.png")!important;
+  background-color:#f10214;
+}
+.radio_false_full_focus{
+  background-image:url("/static/admin/css/tree/img/r-check.png")!important;
+  background-color:#00b7ee;
+}
+.radio_false_disable{
+  background-image:url("/static/admin/css/tree/img/r-baned.png")!important;
+}
+.radio_true_part{
+  background-image:url("/static/admin/css/tree/img/r-check.png")!important;
+  background-color:rgba(0,0,0,0.5);
+}
+.radio_true_full{
+  background-image:url("/static/admin/css/tree/img/r-done.png")!important;
+  background-color:#f10214;
+}
+.radio_true_full_focus{
+  background-image:url("/static/admin/css/tree/img/r-check.png")!important;
+  background-color:rgba(100,100,100,0.6);
+}
+.radio_true_disable{
+  background-image:url("/static/admin/css/tree/img/r-ban.png")!important;
 }
