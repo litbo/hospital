@@ -86,6 +86,8 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
             if (!bre) {
                 return false;
             }
+        }else{
+            return false;
         }
         if (a.children) {
             var $dl = $("<dl>").attr("class", "layui-nav-child").append(small_list);
@@ -160,6 +162,8 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                     if (!bres) {
                         continue;
                     }
+                }else{
+                    return false;
                 }
                 $ul = $("<ul>").attr("class", "min_tools");
                 for (var j = 0; j < x.tools[i].children.length; j++) {
@@ -177,6 +181,8 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                         if (!bres1) {
                             continue;
                         }
+                    }else{
+                        return false;
                     }
                     //判断URL值是否为URL地址或者IP地址
                     if (/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(xT_iC_j.url) || /((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)/.test(xT_iC_j.url)) {

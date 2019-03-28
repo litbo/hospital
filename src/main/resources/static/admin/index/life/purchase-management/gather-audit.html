@@ -75,24 +75,33 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        toolFunc: {
-                            tool: 'toolbar',
-                            event: 'audit',
-                            type: 2,
-                            title: '汇总审核',
-                            content: './child/gather-auditAdd.html',
-                            area: ["58%", "50%"],
-                            func: function (obj, cs) {
-                                var data = [];
-                                for (var i = 0; i < cs.data.length; i++) {
-                                    data.push(cs.data[i]["id"]);
+                        toolFunc: [
+                            {
+                                tool: 'toolbar',
+                                event: 'audit',
+                                type: 2,
+                                title: '汇总审核',
+                                content: './child/gather-auditAdd.html',
+                                area: ["58%", "50%"],
+                                func: function (obj, cs) {
+                                    var data = [];
+                                    for (var i = 0; i < cs.data.length; i++) {
+                                        data.push(cs.data[i]["id"]);
+                                    }
+                                    layui.sessionData("dtds", {
+                                        key: "sa",
+                                        value: data
+                                    })
                                 }
-                                layui.sessionData("dtds", {
-                                    key: "sa",
-                                    value: data
-                                })
+                            },
+                            {
+                                event:'detail',
+                                type:2,
+                                title:'申购单查看',
+                                content:'./child/gather-auditAdd1.html',
+                                area:['58%','80%']
                             }
-                        }
+                        ]
 
                     })
                 }
