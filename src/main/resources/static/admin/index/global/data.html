@@ -214,7 +214,7 @@
             console.log(re);
             layui.use("layer", function () {
                 var layer = layui.layer;
-                layer.alert("页面加载错误，请重试！", function () {
+                layer.confirm("页面加载错误，请重试！", function () {
                     location.reload();
                     window.reNum++;
                 }, function () {
