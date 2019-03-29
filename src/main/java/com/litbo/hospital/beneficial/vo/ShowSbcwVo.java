@@ -1,5 +1,6 @@
 package com.litbo.hospital.beneficial.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +15,7 @@ public class ShowSbcwVo {
     private String eqName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date kmSj;
 
     private String kmName;
