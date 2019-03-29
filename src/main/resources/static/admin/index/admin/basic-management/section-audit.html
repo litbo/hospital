@@ -36,7 +36,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位职责名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="gwName" class="layui-input" autocomplete="off">
+                    <input type="text" name="gwName" class="layui-input" autocomplete="off" disabled>
 
                 </div>
             </div>
@@ -58,8 +58,12 @@
                     </div>
                 </div>
             </div>
+            <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" lay-event="shlc" id="addNew"><i
+                    class="fas"></i>&nbsp;审核流程详情
+            </button>
         </div>
     </div>
+
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>审核信息</legend>
@@ -106,7 +110,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">审核意见</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea" name="ztShyj"></textarea>
+                    <textarea class="layui-textarea" name="ztShyj" lay-verify="required"></textarea>
                 </div>
             </div>
         </div>
@@ -189,6 +193,30 @@
                             $("#syDays").removeClass("hidden");
                         }
                     }
+                }
+            ]
+        },
+        bind: {
+            addItem: [
+                {
+                    elem:'#addNew',
+                    base:'./child/postSchedule-developmentDetail.html',
+                    key:'abc',
+                    name:'bbb',
+                    before:function(){
+                        // var users = getTableValue("table"),daa={};
+                        // if(formData.radio){
+                        //     daa=formData.radio[0]["bmId"];
+                        // }else if(formData.val){
+                        //     console.log(formData)
+                        //     daa=formData.val.bmId;
+                        // }
+                        var gwId=$.getUrlParam('gwId')
+                        return {
+                            gwId:gwId
+                        }
+                    },
+                    param:["gwId"]
                 }
             ]
         }

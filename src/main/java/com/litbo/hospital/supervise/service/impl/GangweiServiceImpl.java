@@ -237,7 +237,7 @@ public class GangweiServiceImpl implements GangweiService {
 
     @Override
     public void submitShMsg(ShMsgVO shMsgVO) {
-
+        if(shMsgVO.getZtShyj()==null) shMsgVO.setZtShyj("");
         updateZzZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),new Date(),shMsgVO.getZtShyj());
 
         if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT_TG.getCode() && shMsgVO.getNextShrId()!=null){   //审核通过且继续审核
@@ -304,6 +304,7 @@ public class GangweiServiceImpl implements GangweiService {
 
     @Override
     public void dpjSubmitMsg(ZpjSumbitVO zpjSumbitVO) {
+        if(zpjSumbitVO.getZpjReason()==null)zpjSumbitVO.setZpjReason("");
         //修改制度状态为待评价
         gangweiDao.updateGwZtIncludeReFlag(Integer.parseInt(zpjSumbitVO.getGwId()),ZdztEnumProcess.ZD__ZT_DPJ.getCode(),1);
 
@@ -314,7 +315,7 @@ public class GangweiServiceImpl implements GangweiService {
         //设置审核状态名字
         ztc.setZtCzname("待评价");
         ztc.setZtDate(new Date());
-        ztc.setUserId(zpjSumbitVO.getUserId());
+        ztc.setUserId(zpjSumbitVO.getUserId1());
         ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
         ztc.setZtShyj(zpjSumbitVO.getZpjReason());
         gangweiDao.saveZzZt(ztc);
@@ -332,12 +333,14 @@ public class GangweiServiceImpl implements GangweiService {
         SZhiduzhizeZt zt = zts.get(0);
         gwZpjMsgVO.setSqDate(zt.getZtDate());
         gwZpjMsgVO.setSqUserId(zt.getUserId());
+        gwZpjMsgVO.setSqUserName(empDao.getEmpByUserId(zt.getUserId()).getUserXm());
         gwZpjMsgVO.setZpjReason(zt.getZtShyj());
         return gwZpjMsgVO;
     }
 
     @Override
     public void dpjSubmitShMsg(GwZpjSubmitVO gwZpjSubmitVO) {
+        if(gwZpjSubmitVO.getZtShyj()==null) gwZpjSubmitVO.setZtShyj("");
         if(gwZpjSubmitVO.getZtCzzt()==1){
             gangweiDao.updateGwZt(Integer.parseInt(gwZpjSubmitVO.getGwId()),ZdztEnumProcess.ZD__ZT_BA.getCode(),0);
             updateZzZt(Integer.parseInt(gwZpjSubmitVO.getGwId()),gwZpjSubmitVO.getZtCzzt(),new Date(),gwZpjSubmitVO.getZtShyj());

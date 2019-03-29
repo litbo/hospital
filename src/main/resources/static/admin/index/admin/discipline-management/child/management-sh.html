@@ -41,19 +41,20 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">部门名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="bmName" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" disabled>
+                    <input type="text" id="bmId" name="bmId" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" style="display: none">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">团队名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="groupName" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="groupName" placeholder="请输入..." autocomplete="off" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">创建人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="userName1" value="" autocomplete="off" class="layui-input" lay-verify="required" disabled>
+                    <input type="text" name="userName1" value="" autocomplete="off" class="layui-input"  disabled>
                 </div>
             </div>
 
@@ -114,7 +115,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">审核意见</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea" name="shYj"></textarea>
+                    <textarea class="layui-textarea" name="shYj" lay-verify="required"></textarea>
                 </div>
             </div>
         </div>
@@ -172,6 +173,16 @@
                         param: {
                             1: "users",
                             2:"groupId"
+                        },done:function(res){
+                            if(res.code === 0){
+                                layer.alert("提交成功",function () {
+                                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                    parent.layer.close(index); //再执行关闭
+                                    parent.location.reload();
+                                })
+                            }else {
+                                layer.alert("提交失败")
+                            }
                         }
 
                     }
@@ -202,7 +213,14 @@
                     elem:'#addNew',
                     base:'./management-add.html',
                     key:'abc',
-                    name:'bbb'
+                    name:'bbb',
+                    before:function(){
+                        var ids =$("#bmId").val();
+                        return {
+                            bmId:ids
+                        }
+                    },
+                    param:["bmId"]
                 }
             ],
             delItem: ".delNew",
