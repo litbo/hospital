@@ -9,17 +9,25 @@ public class EqVo {
 
     private String eqId;
 
+    private String eqName;
+
     private String eqSbbh;
 
     private String eqZcbh;
 
     private String eqPmId;
 
+    private String eqPmName;
+
     private String eqGg;
 
     private String eqXh;
 
+    private String zjlyId;
+
     private String zjlyName;
+
+    private String eqJldwId;
 
     private String eqJldwName;
 
@@ -35,7 +43,19 @@ public class EqVo {
 
     private Integer sbcsIdWxs;
 
+    private String wxsName;
+
+    private Integer sbcsIdScs;
+
+    private String  scsName;
+
+    private Integer sbcsIdGys;
+
+    private String gysName;
+
     private String eqBmid;
+
+    private String bmName;
 
     private String eqGlgk;
 
@@ -47,8 +67,6 @@ public class EqVo {
 
     private String eqZczmc;
 
-    private Integer sbcsIdScs;
-
     private String eqPp;
 
     private String eqScbh;
@@ -56,8 +74,6 @@ public class EqVo {
     private String eqPz;
 
     private Integer eqSynx;
-
-    private Integer sbcsIdGys;
 
     private String eqHtbh;
 

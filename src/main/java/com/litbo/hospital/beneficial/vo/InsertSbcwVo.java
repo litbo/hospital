@@ -22,7 +22,7 @@ public class InsertSbcwVo {
     private Integer eqId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date kmSj;
 
     private List<UpdateKmVo> kmNameAndValue;
