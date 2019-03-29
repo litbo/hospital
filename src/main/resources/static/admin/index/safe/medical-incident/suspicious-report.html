@@ -99,7 +99,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报告人签字<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="bgrqz" autocomplete="" class="layui-input"  readonly>
+                    <input type="text" name="bgrqz" id="bgrqz" autocomplete="" class="layui-input"  readonly>
                 </div>
             </div>
         </div>
@@ -239,6 +239,7 @@
 </form>
 
 <script>
+
     formData={};
     renderMod={
         form:{
@@ -296,6 +297,7 @@
                     elem: "#selectEquip",
                     cb: "/benefical/select/listSelectCols",
                     db: "/benefical/select/listSelect",
+                    se:"/eq/eqSe",
                     name: "dtdt",
                     key: "eq",
                     data:formData
@@ -303,6 +305,8 @@
             ]
         }
     }
+    var people=tempValue("rl","emp",false);
+    $("#bgrqz").val(people.userXm)
 </script>
 </body>
 

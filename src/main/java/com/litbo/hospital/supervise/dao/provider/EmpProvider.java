@@ -13,16 +13,16 @@ public class EmpProvider {
                 " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
                 " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id)")*/
         StringBuffer sql = new StringBuffer("" +
-                "  SELECT bm.bm_name, emp.user_xm, emp.user_id, sex.sex, xllb.xllb, zwlb.zwlb, emp.byyx" +
+                "  SELECT bm.bm_name, emp.user_xm, emp.user_id, sex.sex, xllb.xllb, zwlb.zwlb, emp.byyx,emp.status" +
                 "  from s_emp emp " +
                 "  LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)" +
                 "  LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id) " +
                 "  LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)" +
                 "  LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id) where 1=1" );
-        if(!"0000000000".equals(bmId))  sql.append(" and bm.bm_id Like '%'+#{bmId}+'%'");
+        if(bmId!=null&& !"0000000000".equals(bmId))  sql.append(" and bm.bm_id Like '%'+#{bmId}+'%'");
         if(userId!=null) sql.append(" and emp.user_id like '%'+#{userId}+'%' ");
         if(status!=null) sql.append(" and emp.status like  '%'+#{status}+'%' ");
-        if(bmName!=null) sql.append(" and emp.bm_name like  '%'+#{bmName}+'%' ");
+        if(bmName!=null) sql.append(" and bm.bm_name like  '%'+#{bmName}+'%' ");
         return sql.toString();
     }
 

@@ -40,11 +40,11 @@ public class EqInfo {
     private String eqTzlb;
     //保修开始时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqBxkssj;
     //保修结束时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqBxjssj;
     //保修响应时间
     private Integer eqBxxysj;
@@ -58,7 +58,7 @@ public class EqInfo {
     private String eqCxflId;
     //启用时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqQysj;
     //注册证编号
     private String eqZczbh;
@@ -80,13 +80,13 @@ public class EqInfo {
     private String eqHtbh;
     //采购日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqCgrq;
     //使用部门负责人
     private String eqSybmfzr;
     //安装日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqAzrq;
     //安装位置
     private String eqAzwz;
@@ -98,7 +98,7 @@ public class EqInfo {
     private String userId;
     //建档日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqJdrq;
     //卷宗编号
     private String eqJzbh;

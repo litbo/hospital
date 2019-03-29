@@ -90,7 +90,7 @@
                 , {field: 'zj', title: '总计', minWidth: 120,sort:true}
             ]]
             , height: "full-25"
-            ,url:"/benefical/sbcw/listZjcb"
+            ,url:"/benefical/sbcw/listSr"
             ,method:"POST"
             ,request:{
                 pageName : 'pageNum',
@@ -116,7 +116,7 @@
                 })
             }
         },reSet:{
-            url:"/benefical/sbcw/listZjcbByX",
+            url:"/benefical/sbcw/listSrByX",
             type:"search",
             data:["bmNameByx","eqNameByx"],
             dat:["#date","kssj","jssj"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）

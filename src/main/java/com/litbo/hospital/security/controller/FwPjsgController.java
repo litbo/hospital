@@ -1,6 +1,5 @@
 package com.litbo.hospital.security.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
@@ -9,19 +8,17 @@ import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwPjsgService;
 import com.litbo.hospital.security.vo.ExaminePjsgVO;
 import com.litbo.hospital.security.vo.InsertFwPjsgVo;
-import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 @RestController
 @RequestMapping("security/pjsg")
+@Slf4j
 @Api(value = "security/pjsg" ,description = "配件申购操作")
 public class FwPjsgController {
     @Autowired
@@ -42,7 +39,7 @@ public class FwPjsgController {
             else
                 return Result.error(CodeMsg.PARAM_ERROR);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage());
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
@@ -86,6 +83,7 @@ public class FwPjsgController {
             PageInfo pageInfo = pjsgService.listFwPjsgZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
             return Result.success(pageInfo);
         }catch (Exception e){
+            log.error("异常信息",e.getMessage());
             return Result.error(CodeMsg.SERVER_ERROR);
 
         }
@@ -110,9 +108,11 @@ public class FwPjsgController {
                 }
 
             }else {
+                log.error("异常信息",id,sgStatus,id,taskId);
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
         }catch (Exception e){
+            log.error("异常信息",e.getMessage(),sgStatus,id,taskId);
             return Result.error(CodeMsg.PARAM_ERROR);
         }
 

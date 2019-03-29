@@ -416,4 +416,67 @@ public class EqProvider {
                 "values(#{eqId},#{fjGg},#{fjXh},#{fjName},#{fjScbh})";
         return sql;
     }
+
+    public String getEqById(String id){
+
+        String SQL = "SELECT\n" +
+                "e.eq_id,e.eq_name,\n" +
+                "e.eq_sbbh,\n" +
+                "e.eq_zcbh,\n" +
+                "e.eq_pm_id, p.eq_pm_name,\n" +
+                "e.eq_gg,\n" +
+                "e.eq_xh,\n" +
+                "z.zjly_name,e.zjly_id,\n" +
+                "e.eq_price,\n" +
+                "e.eq_tzlb,\n" +
+                "e.eq_bxkssj,\n" +
+                "e.eq_bxjssj,\n" +
+                "e.eq_bxxysj,\n" +
+                "e.eq_bmid,b.bm_name,\n" +
+                "e.eq_glgk,\n" +
+                "e.eq_qysj,\n" +
+                "e.eq_zczbh,\n" +
+                "e.eq_zczmc,\n" +
+                "e.eq_pp,\n" +
+                "e.eq_scbh,\n" +
+                "e.eq_pz,\n" +
+                "e.eq_synx,\n" +
+                "e.eq_htbh,\n" +
+                "e.eq_cgrq,\n" +
+                "e.eq_sybmfzr,\n" +
+                "e.eq_azrq,\n" +
+                "e.eq_azwz,\n" +
+                "e.eq_zblx,\n" +
+                "e.eq_zjl,\n" +
+                "e.eq_jdrq,\n" +
+                "e.eq_jzbh,\n" +
+                "e.eq_dabh,\n" +
+                "e.eq_yq,\n" +
+                "e.eq_bz,\n" +
+                "e.eq_sbzp,\n" +
+                "e.eq_mpzp,\n" +
+                "e.eq_azhjyq,\n" +
+                "e.eq_dcysl,\n" +
+                "e.eq_edgl,\n" +
+                "j.eq_jldw_name,e.eq_jldw_id,\n" +
+                "c.eq_cxfl_name,\n" +
+                "u.user_name,\n" +
+                "g.gzlb_name,\n" +
+                "e.eq_usewater,\n" +
+                "q.qdfs_name\n" +
+                "\n" +
+                "FROM\n" +
+                "dbo.eq_info AS e\n" +
+                "LEFT JOIN dbo.eq_jldw AS j ON e.eq_jldw_id = j.eq_jldw_id\n" +
+                "LEFT JOIN dbo.eq_cxfl AS c ON e.eq_cxfl_id = c.eq_cxfl_id\n" +
+                "LEFT JOIN dbo.s_user AS u ON e.user_id = u.user_id\n" +
+                "LEFT JOIN dbo.eq_gzlb AS g ON e.gzlb_id = g.gzlb_id\n" +
+                "LEFT JOIN dbo.eq_qdfs AS q ON e.qdfs_id = q.qdfs_id\n" +
+                "LEFT JOIN dbo.eq_zjly AS z ON e.zjly_id = z.zjly_id " +
+                "LEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id " +
+                "LEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id " +
+                "where eq_id = #{id}";
+        return SQL;
+    }
+
 }

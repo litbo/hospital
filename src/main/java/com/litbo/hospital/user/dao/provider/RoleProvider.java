@@ -36,7 +36,7 @@ public class RoleProvider {
                 "\te.user_xm AS name,\n" +
                 "\tr.role_name AS roleName, \n" +
                 "\t e.bm_id AS bmId,\n" +
-                "\t b.bm_name AS bmName\n" +
+                "\t b.bm_name AS bmName,u.status\n" +
                 "FROM\n" +
                 "\tdbo.s_user as u\n" +
                 "\tLEFT JOIN dbo.s_emp AS e ON u.user_id = e.user_id\n" +
@@ -44,10 +44,11 @@ public class RoleProvider {
                 "\tLEFT JOIN dbo.s_role AS r ON r.role_id= ur.role_id\n" +
                 "LEFT JOIN s_bm   AS b on e.bm_id = b.bm_id\n"+
                 "  WHERE 1 = 1 ");
-        if(selectUserVo.getRoleId()!=null) sql.append("and r.role_id Like '%'+#{roleId}+'%'");
-        if(!"0000000000".equals(selectUserVo.getBmId())) sql.append("and e.bm_id Like '%'+#{bmId}+'%'");
-        if(selectUserVo.getUserId()!=null) sql.append("and u.user_id Like'%'+#{userId}+'%'");
-        if(selectUserVo.getStatus()!=null) sql.append("and u.status Like '%'+#{status}+'%'");
+        if(selectUserVo.getRoleId()!=null) sql.append(" and r.role_id Like '%'+#{roleId}+'%'");
+        if(selectUserVo.getBmId()!=null&&!"0000000000".equals(selectUserVo.getBmId())) sql.append(" and e.bm_id Like '%'+#{bmId}+'%'");
+        if(selectUserVo.getUserId()!=null) sql.append(" and u.user_id Like'%'+#{userId}+'%'");
+        if(selectUserVo.getStatus()!=null) sql.append(" and u.status Like '%'+#{status}+'%'");
+        if(selectUserVo.getBmName()!=null) sql.append(" and b.bm_name Like '%'+#{bmName}+'%'");
         return sql.toString();
     }
 }

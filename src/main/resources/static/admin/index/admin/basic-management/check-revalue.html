@@ -69,7 +69,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">再评价原因</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" name="zpjReason"></textarea>
+                        <textarea class="layui-textarea" name="zpjReason" lay-verify="required"></textarea>
                     </div>
                 </div>
             </div>
@@ -77,14 +77,14 @@
                 <label class="layui-form-label">申请人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="userXm" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
-                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId" style="">
+                    <input type="text" name="userId1" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId1" style="display: none">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">申请日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="ztDate" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="ztDate" class="layui-input date" autocomplete="off" id="date" lay-verify="date">
                 </div>
             </div>
         </div>
@@ -107,75 +107,80 @@
 
 
 <script>
-    // layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
-    //     var form = layui.form
-    //         , layer = layui.layer
-    //         , layedit = layui.layedit
-    //         , element = layui.element
-    //         , upload = layui.upload
-    //         , laydate = layui.laydate;
-    //     //日期
-    //     laydate.render({
-    //         elem: '#date'
-    //     });
-    //
-    //     //创建一个编辑器
-    //     var editIndex = layedit.build('LAY_demo_editor');
-    //     //自定义验证规则
-    //     form.verify({
-    //         title: function (value) {
-    //             if (value.length < 5) {
-    //                 return '标题至少得5个字符啊';
-    //             }
-    //         }
-    //         , pass: [/(.+){6,12}$/, '密码必须6到12位']
-    //         , content: function (value) {
-    //             layedit.sync(editIndex);
-    //         }
-    //     });
-    //
-    //     //监听指定开关
-    //     form.on('switch(switchTest)', function (data) {
-    //         layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-    //             offset: '6px'
-    //         });
-    //         layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-    //     });
-    //
-    //     //监听提交
-    //     form.on('submit(demo1)', function (data) {
-    //         layer.alert(JSON.stringify(data.field), {
-    //             title: '最终的提交信息'
-    //         });
-    //         return false;
-    //     });
-    //
-    //     //弹出层设置
-    //     $('#layerBtn').click(function(){
-    //         layer.open({
-    //             type:2
-    //             ,title:'模板选择'
-    //             ,content:'./child/writeAdd.html'
-    //             ,area:['90%','90%']
-    //             ,btn:['选择','取消']
-    //         });
-    //         return false;
-    //     });
-    //
-    //     //文件下载
-    //     upload.render({
-    //         elem:'#selectFile',
-    //         url:'/upload/',
-    //         auto:false,
-    //         bindAction:'#startUploadFile',
-    //         size:1024*40,//限制文件大小，单位kb
-    //         done:function(res){
-    //             console.log(res);
-    //         }
-    //     })
-    // });
+    layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , element = layui.element
+            , upload = layui.upload
+            , laydate = layui.laydate;
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+
+        //弹出层设置
+        $('#layerBtn').click(function(){
+            layer.open({
+                type:2
+                ,title:'模板选择'
+                ,content:'./child/writeAdd.html'
+                ,area:['90%','90%']
+                ,btn:['选择','取消']
+            });
+            return false;
+        });
+
+        //文件下载
+        upload.render({
+            elem:'#selectFile',
+            url:'/upload/',
+            auto:false,
+            bindAction:'#startUploadFile',
+            size:1024*40,//限制文件大小，单位kb
+            done:function(res){
+                console.log(res);
+            }
+        })
+    });
 
     renderMod = {
+        date:{
+            elem:'#date',
+            value:today,
+            type:"datetime"
+        },
         form:{
             val:{
                 filter:"forms",
@@ -187,18 +192,25 @@
             }
             ,
             submit:{
-                before:{
-
-
-                },
                 form:{
                     url:"/supervise/zdgl/dpjSubmitMsg",
                     type:"POST",
                     contentType:"application/json",
-                    data:["zpjReason","userId","ztDate"],
+                    data:["zpjReason","userId1","ztDate"],
                     add:{
-                        zdId:$.getUrlParam("zdId")
+                        zdId:$.getUrlParam("zdId"),
+
+                    },done:function(res){
+                    if(res.code === 0){
+                        layer.alert("提交成功",function () {
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.location.reload();
+                        })
+                    }else {
+                        layer.alert("提交失败")
                     }
+                }
 
                 }
             }
@@ -210,7 +222,7 @@
 
     $(function() {
         var emp =  tempValue("rl","emp",false);
-        $("#userId").val(emp.userId);
+        $("#userId1").val(emp.userId);
         $("#userXm").val(emp.userXm);
     })
 </script>

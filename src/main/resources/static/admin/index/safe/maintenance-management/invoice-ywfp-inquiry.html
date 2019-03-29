@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>院外发票查询</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="visible-xs" id="check" >
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch" id="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs"  lay-filter="table2">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="">
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input class="layui-input" type="text" name="fpHm" placeholder="发票号">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input class="layui-input"  type="text" name="eqName" placeholder="维修设备">
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10" align="center">
+                        <button class="layui-btn" data-type="reload">搜索</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script>
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'ywfpHm', title: '发票号码', minWidth: 160}
+                    , {field: 'eqName', title: '维修设备', minWidth: 120}
+                    , {field: 'ywfpPrice', title: '发票金额', minWidth: 120}
+                    , {field: 'userName', title: '登记人', minWidth: 120}
+                    , {field: 'ywfpSdTime', title: '登记时间', minWidth: 180}
+                    , {field: 'sbcsName', title: '维修厂商', minWidth: 120}
+                ]]
+                , url: "/security/ywFp/listFwYwFp"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*   , where: {
+                       bmId: ""
+
+                   }*/
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.total,
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet: {
+                url: "/security/ywFp/listFwYwFp",
+                type: "reload",
+                method:"GET",
+                data:["fpHm","eqName"],    //搜索框的name
+                where: {}
+
+            }
+
+        }
+    }
+</script>
+</body>
+
+</html>

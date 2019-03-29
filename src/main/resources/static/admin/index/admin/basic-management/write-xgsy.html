@@ -72,24 +72,30 @@
                 <!--</div>-->
 
                 <div class="col-xs-12 col-sm-6">
-                    <div class="layui-form-item" pane>
-                        <label class="layui-form-label" style="line-height:30px">所属制度<span class="sign">*</span></label>
-                        <div class="layui-input-block">
-                            <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>
-                        </div>
-                    </div>
+                    <!--<div class="layui-form-item" pane>-->
+                        <!--<label class="layui-form-label" style="line-height:30px">所属制度<span class="sign">*</span></label>-->
+                        <!--<div class="layui-input-block">-->
+                            <!--<button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
+                        <label class="layui-form-label" style="height:46px;line-height:30px;">所属部门</label>
                         <div class="layui-input-block">
-                            <input type="text" name="bmName" lay-verify="required" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;">
+                            <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;">
                         </div>
-
+                        <div class="layui-input-block">
+                            <input type="text" name="bmId" id="bmId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="display:none;">
+                        </div>
                     </div>
                     <div class="layui-form-item">
 
                     </div>
                 </div>
+
             </div>
+            <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" lay-event="shlc" id="addNew"><i
+                    class="fas "></i>&nbsp;审核流程详情
+            </button>
         </div>
     </div>
     <div class="layui-row">
@@ -148,7 +154,7 @@
                 filter:"submit",//可以不写
                 before: function () {
                     return param = {
-                        1: formData.radio[0]["bmId"],
+                        1: $("#bmId").val()
                     };
                 },
                 form:{
@@ -158,14 +164,19 @@
                     data:["zdName","userId","zdContent","createTime","shrId"],
                     add:{
                         zdId:$.getUrlParam("zdId")
-                    },param: {
-                        1: "bmId",
-                    },done:function(res){
+                    }
+                    ,
+                    param: {
+                        1: "bmId"
+                    }
+                    ,done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {
-                                location.reload();
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index); //再执行关闭
+                                parent.location.reload();
                             })
-                        }else{
+                        }else {
                             layer.alert("提交失败")
                         }
                     }
@@ -195,6 +206,21 @@
                 }
             }
         },bind: {
+            addItem: [
+                {
+                    elem:'#addNew',
+                    base:'./child/schedule-developmentDetail.html',
+                    key:'abc',
+                    name:'bbb',
+                    before:function(){
+                        var zdId=$.getUrlParam('zdId')
+                        return {
+                            zdId:zdId
+                        }
+                    },
+                    param:["zdId"]
+                }
+            ],
             selectItem: [
                 {
                     elem: "#selectRoom",
@@ -207,6 +233,7 @@
                 }
             ]
         }
+
     }
 
     $(function() {

@@ -3,20 +3,21 @@ package com.litbo.hospital.security.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
-import com.litbo.hospital.security.bean.FwPjck;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwPjqlService;
 import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.InsertFwPjqlVo;
-import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.user.vo.LiveEmpVo;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("security/pjql")
+@Slf4j
 @Api(value = "security/pjql" ,description = "配件请领操作")
 public class FwPjqlController {
     @Autowired
@@ -41,7 +42,7 @@ public class FwPjqlController {
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("insertFwPjql参数错误 fwPjqlVo={}",fwPjqlVo);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
@@ -64,7 +65,7 @@ public class FwPjqlController {
                     return Result.error(CodeMsg.PARAM_ERROR);
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                log.error("异常信息",e.getMessage());
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
 
@@ -83,14 +84,21 @@ public class FwPjqlController {
             PageInfo pageInfo = pjqlService.listFwPjqlZjb(pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
             return Result.success(pageInfo);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage(),pageNum,pageSize,pjRkTimeStart,pjRkTimeEnd,pjName);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 
     }
     @RequestMapping(value = "selectFwPjqlById",method = RequestMethod.GET)
     public Result selectFwPjqlById(Integer id,Integer taskId){
-        ExaminePjqlVO vo = pjqlService.selectFwPjqlById(id);
-        return Result.success(vo);
+        try {
+            ExaminePjqlVO vo = pjqlService.selectFwPjqlById(id);
+            return Result.success(vo);
+        }catch (Exception e){
+            log.error("异常信息",e.getMessage(),id);
+            return Result.error(CodeMsg.PARAM_ERROR);
+        }
+
+
     }
 }

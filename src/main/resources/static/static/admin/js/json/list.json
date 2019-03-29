@@ -1068,6 +1068,7 @@
   {
     "page": "safe",
     "tools": [
+
       {
         "title": "风险管理",
         "icon": "exclamation-triangle",
@@ -1379,6 +1380,12 @@
                     "url": "./safe/maintenance-management/invoice-inquiry.html",
                     "id": "41302",
                     "shiro": "WXFPCX"
+                  },
+                  {
+                    "title": "院外发票查询",
+                    "url": "./safe/maintenance-management/invoice-ywfp-inquiry.html",
+                    "id": "41303",
+                    "shiro": "YWFPCX"
                   }
                 ]
               }

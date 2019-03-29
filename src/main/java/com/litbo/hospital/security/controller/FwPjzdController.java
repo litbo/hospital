@@ -9,6 +9,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.service.FwPjzdService;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.*;
 @RestController
 @RequestMapping("security/pjzd")
 @Api(value = "security/pjzd" ,description = "配件字典操作")
+@Slf4j
 public class FwPjzdController {
     @Autowired
     private FwPjzdService pjzdService;
@@ -36,10 +38,11 @@ public class FwPjzdController {
             if(pjzdService.insertFwPjzd(pjzd)>0){
                 return Result.success();
             }else {
+                log.error("异常信息",pjzd);
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage());
             return Result.error(CodeMsg.PARAM_ERROR);
         }
 
@@ -65,7 +68,7 @@ public class FwPjzdController {
             PageInfo pageInfo = pjzdService.listFwPjzd( pjSzm, pageNum, pageSize, pjfl);
             return Result.success(pageInfo);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage());
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 
@@ -92,6 +95,7 @@ public class FwPjzdController {
             ExportExcelUtil.exportExcel(response,fileName,data);
             return Result.success();
         }catch (Exception e){
+            log.error("异常信息",e.getMessage(),pjSzm , pjfl);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
@@ -112,14 +116,14 @@ public class FwPjzdController {
     @RequestMapping(value = "fwPjzdSe")
     public Result fwPjzdSe(){
         Map map =new HashMap();
-        map.put("dom","<div class='layui-inline'><select class=\"layui-select\" name=\"pjfl\">" +
-                "                        <option>分类</option>" +
-                "                        <option value=\"维材-医疗维修\">维材-医疗维修</option>" +
-                "                        <option value=\"维材-办公维修\">维材-办公维修</option>" +
-                "                        <option value=\"维材-普通维修\">维材-普通维修</option>" +
-                "                        <option value=\"维材-家具维修\">维材-家具维修</option>" +
-                "                        <option value=\"维材-其他\">维材-其他</option>" +
-                "                    </select> </div> " +
+        map.put("dom","<div class='layui-inline'><select class='layui-select' name='pjfl'>" +
+                "<option>分类</option>" +
+                "<option value='维材-医疗维修'>维材-医疗维修</option>" +
+                "<option value='维材-办公维修'>维材-办公维修</option>" +
+                "<option value='维材-普通维修'>维材-普通维修</option>" +
+                "<option value='维材-家具维修'>维材-家具维修</option>" +
+                "<option value='维材-其他'>维材-其他</option>" +
+                "</select> </div> " +
                 "<div class='layui-inline'><input type=\"text\" name=\"pjSzm\" class=\"layui-input\" " +
                 "placeholder=\"配件拼音码\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +

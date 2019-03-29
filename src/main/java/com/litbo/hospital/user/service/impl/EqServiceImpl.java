@@ -85,12 +85,15 @@ public class EqServiceImpl implements EqService {
         //初始化设备编号
         //年月1812 + pm编号68031409 + 级别 1 + 流水号eqId
         //获取当前时间
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
-        String time1 = sf.format(new Date());
-        String time = time1.substring(2,4)+time1.substring(5,time1.length());
-        EqPm pm = pmDao.getPmById(eqInfo.getEqPmId());
-        String sbbh =time+pm.getPid()+pm.getGlh()+eqInfo.getEqId();
-        eqInfo.setEqSbbh(sbbh);
+        if(eqInfo.getEqPmId()!=null){
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
+            String time1 = sf.format(new Date());
+            String time = time1.substring(2,4)+time1.substring(5,time1.length());
+            EqPm pm = pmDao.getPmById(eqInfo.getEqPmId());
+            String sbbh =time+pm.getPid()+pm.getGlh()+eqInfo.getEqId();
+            eqInfo.setEqSbbh(sbbh);
+        }
+
 
         //设置使用状态
         String syzt = "在用";
@@ -307,9 +310,9 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
-    public EqInfo getEqById(String eqId) {
+    public EqVo getEqById(String eqId) {
 
-        return eqDao.getEqById(eqId);
+        return eqDao.getEqWithNameById(eqId);
     }
 
     @Override

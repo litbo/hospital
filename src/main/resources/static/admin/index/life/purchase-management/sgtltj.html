@@ -33,18 +33,15 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <form class="layui-form layui-form-pane" action="" method="POST" lay-filter="form">
+            <input type="hidden" name="sgDictId" autocomplete="off" class="layui-input">
+            <input type="hidden" name="lzfxPrice" autocomplete="off" class="layui-input">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>科室讨论最低参加人数</legend>
+                </fieldset>
             <div class="layui-form-item">
-                <input type="hidden" name="sgDictId" autocomplete="off" class="layui-input">
-                <label class="layui-form-label">论证分析金额设置</label>
+                <label class="layui-form-label">申购讨论条件<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="lzfxPrice" placeholder="申购单论证分析最低金额" autocomplete="off" class="layui-input" lay-verify="required">
-                </div>
-
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">申购讨论条件</label>
-                <div class="layui-input-block">
-                    <input type="text" name="sgKstlRySl" placeholder="科室讨论最低参加人数" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="sgKstlRySl" placeholder="请输入人数" autocomplete="off" class="layui-input" lay-verify="number">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -65,16 +62,14 @@
                     url: "/lifeManage/selectSgDict",
                     type: "POST",
                     data: {}
-                    // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
-                    //有add时必需时data为表单name数组，否则请直接使用data赋值
-                }//get内参数需参考《内容传输与提交》文档
+                }
             },
             submit:{
                 filter:"",//可以不写
                 form:{//或者写作up
                     url:"/lifeManage/updateSgDict",
                     type:"POST",
-                    data:["sgDictId","lzfxPrice","sgKstlRySl"]
+                    data:["sgDictId","sgKstlRySl","lzfxPrice"]
                 }
             }
         }
