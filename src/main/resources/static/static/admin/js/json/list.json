@@ -1069,103 +1069,6 @@
     "page": "safe",
     "tools": [
       {
-        "title": "风险管理",
-        "icon": "exclamation-triangle",
-        "shiro": "a",
-        "children": [
-          {
-            "title": "风险管理",
-            "url": "safe&t=0&n=0",
-            "shiro": "a",
-            "id": "400",
-            "children": [
-              {
-                "title": "风险分析",
-                "url": "./table.html",
-                "icon": "poll",
-                "id": "4000",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "风险分值定义",
-                    "url": "./table.html",
-                    "id": "40000",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "风险等级",
-                    "url": "./safe/risk-management/risk-rating.html",
-                    "id": "40001",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "风险评价",
-                "url": "./table.html",
-                "icon": "user-edit",
-                "id": "4001",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "风险监测",
-                    "url": "./table.html",
-                    "id": "40010",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "风险预警",
-                    "url": "./table.html",
-                    "id": "40011",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "实时监视",
-                    "url": "./table.html",
-                    "id": "40012",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "风险控制",
-                "url": "./table.html",
-                "icon": "sliders-h",
-                "id": "4002",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "风险控制实施",
-                    "url": "./table.html",
-                    "id": "40020",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "质控等级目录",
-                    "url": "./table.html",
-                    "id": "40021",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "分级风控方案",
-                    "url": "./table.html",
-                    "id": "40022",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "设备风控单",
-                    "url": "./table.html",
-                    "id": "40023",
-                    "shiro": "a"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "id": "40"
-      },
-      {
         "title": "维修管理",
         "icon": "wrench",
         "shiro": "WXGL",
@@ -1387,6 +1290,104 @@
         ],
         "id": "41"
       },
+      {
+        "title": "风险管理",
+        "icon": "exclamation-triangle",
+        "shiro": "a",
+        "children": [
+          {
+            "title": "风险管理",
+            "url": "safe&t=0&n=0",
+            "shiro": "a",
+            "id": "400",
+            "children": [
+              {
+                "title": "风险分析",
+                "url": "./table.html",
+                "icon": "poll",
+                "id": "4000",
+                "shiro": "a",
+                "children": [
+                  {
+                    "title": "风险分值定义",
+                    "url": "./table.html",
+                    "id": "40000",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "风险等级",
+                    "url": "./safe/risk-management/risk-rating.html",
+                    "id": "40001",
+                    "shiro": "a"
+                  }
+                ]
+              },
+              {
+                "title": "风险评价",
+                "url": "./table.html",
+                "icon": "user-edit",
+                "id": "4001",
+                "shiro": "a",
+                "children": [
+                  {
+                    "title": "风险监测",
+                    "url": "./table.html",
+                    "id": "40010",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "风险预警",
+                    "url": "./table.html",
+                    "id": "40011",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "实时监视",
+                    "url": "./table.html",
+                    "id": "40012",
+                    "shiro": "a"
+                  }
+                ]
+              },
+              {
+                "title": "风险控制",
+                "url": "./table.html",
+                "icon": "sliders-h",
+                "id": "4002",
+                "shiro": "a",
+                "children": [
+                  {
+                    "title": "风险控制实施",
+                    "url": "./table.html",
+                    "id": "40020",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "质控等级目录",
+                    "url": "./table.html",
+                    "id": "40021",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "分级风控方案",
+                    "url": "./table.html",
+                    "id": "40022",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "设备风控单",
+                    "url": "./table.html",
+                    "id": "40023",
+                    "shiro": "a"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "id": "40"
+      },
+
       {
         "title": "应用培训",
         "icon": "graduation-cap",

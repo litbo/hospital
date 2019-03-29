@@ -8,6 +8,7 @@ import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwFpService;
 import com.litbo.hospital.security.vo.SelectFwFpByIdVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-
+@Slf4j
 @RestController
 @RequestMapping("security/fp")
 public class FwFpController {
@@ -38,6 +39,7 @@ public class FwFpController {
                                         @RequestParam(required = false) String fpHm,
                                         @RequestParam(required = false)String eqName,@RequestParam(required = false)String wxDh){
         PageInfo pageInfo = fpService.listFwFpByWaitExamine(pageNum,pageSize, fpHm, eqName, wxDh);
+
         return Result.success(pageInfo);
     }
 
@@ -76,6 +78,7 @@ public class FwFpController {
         if(res==1){
             return Result.success();
         }else{
+            log.error("insertFwFp参数错误 FwFp={}",fp);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 
@@ -100,6 +103,7 @@ public class FwFpController {
         if(res==1){
             return Result.success();
         }else{
+            log.error("updateFwFpStatus参数错误 FwFp={}",fp);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
@@ -114,7 +118,10 @@ public class FwFpController {
         SelectFwFpByIdVo fp = fpService.selectFwFpById(id);
         if(fp!=null)
             return Result.success(fp);
-        else
+        else{
+            log.error("selectFwFpById参数错误 id={}",id);
             return Result.error("查询不到数据");
+        }
+
     }
 }

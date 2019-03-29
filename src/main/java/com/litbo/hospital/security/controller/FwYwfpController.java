@@ -4,7 +4,7 @@ import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwYwfp;
 import com.litbo.hospital.security.service.FwYwfpService;
-import com.sun.tools.javac.jvm.Code;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("security/ywFp")
+@Slf4j
 public class FwYwfpController {
     @Autowired
     private FwYwfpService fwYwfpService;
@@ -25,7 +26,7 @@ public class FwYwfpController {
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage());
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }

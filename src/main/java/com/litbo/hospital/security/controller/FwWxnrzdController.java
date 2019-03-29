@@ -6,11 +6,13 @@ import com.litbo.hospital.security.service.FwWxnrzdService;
 import com.litbo.hospital.security.vo.WxnrzdIndexVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("security/wxnr")
+@Slf4j
 @Api(value = "security/wxnr" ,description = "维修内容字典")
 public class FwWxnrzdController {
     @Autowired
@@ -21,6 +23,7 @@ public class FwWxnrzdController {
         try {
             return Result.success(wxnrzdService.selectFwWxnrzd(parentId));
         }catch (Exception e){
+            log.error("异常信息",e.getMessage(),parentId);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 
@@ -32,7 +35,7 @@ public class FwWxnrzdController {
             WxnrzdIndexVo wxnrzdIndexVo = wxnrzdService.wxnrZdIndex(gzyyId, gzmxId);
             return Result.success(wxnrzdIndexVo);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage(),gzyyId, gzmxId);
             return Result.error("加载数据异常");
         }
 
