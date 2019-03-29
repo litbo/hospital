@@ -42,7 +42,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">请领人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="qlrId"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="qlrId" id="qlrId"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <!--<button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="">选择</button>-->
                 </div>
             </div>
@@ -206,6 +206,10 @@
             }
         }
     }
+    $(function() {
+        var emp =  tempValue("rl","emp",false);
+        $("#qlrId").val(emp.userXm);
+    })
 </script>
 </body>
 
