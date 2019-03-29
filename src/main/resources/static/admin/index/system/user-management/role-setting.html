@@ -42,9 +42,7 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <select name="bmId" lay-filter="bmList" lay-verify="required" lay-search="">
-                <option value="0000000000">部门</option>
-            </select>
+            <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">
         </div>
         <div class="layui-inline">
             <select name="status">
@@ -120,7 +118,7 @@
             reSet:{
                 url:"/role/listUserByX",
                 type:"reload",
-                data:["userId","bmId","status"]
+                data:["userId","bmName","status"]
             }
         },
         form:{
