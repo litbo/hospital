@@ -74,4 +74,6 @@ public interface EqDao {
     Integer delEq(String eqId);
     @Select("select * from eq_pm")
     List<EqPm> listPmTree();
+    @SelectProvider(type = EqProvider.class , method = "listWFlEqByX")
+    List<EqShowVo> listWFlEqByX(SelectFlEqVo selectFlEqVo);
 }

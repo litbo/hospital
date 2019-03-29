@@ -271,8 +271,15 @@ public class EqServiceImpl implements EqService {
         return pms;
     }
 
+    @Override
+    public PageInfo listWFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listWFlEqByX(selectFlEqVo));
+    }
+
 
     @Override
+    @Transactional
     public Integer setPm(SetPmVo setPmVo) {
         List<String> eqIds = setPmVo.getEqIds();
         for (String eqId : eqIds) {
@@ -283,7 +290,7 @@ public class EqServiceImpl implements EqService {
             String sbbh =time+pm.getPid()+pm.getGlh()+eqId;
             String syzt="在用";
             if(eqDao.setPm(setPmVo.getEqPmId(),eqId,sbbh,syzt)<0){
-                return -1;
+                return 1/0;
             }
 
         }

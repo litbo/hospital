@@ -93,7 +93,7 @@
                         var vg = $.getUrlParam("vg") || "temp",v=$.getUrlParam("v") || "temp";
                         layui.sessionData(vg,{
                             key:v,
-                            value:{"kmValue1":$k1,"kmName1":$k2,"kmNum1":$k3}
+                            value:[{"kmValue1":$k1,"kmName1":$k2,"kmNum1":$k3}]
                         });
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index); //再执行关闭

@@ -56,4 +56,6 @@ public interface EqService {
     Integer delEq(String eqId);
 
     List<EqPm> listPmTree();
+
+    PageInfo listWFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
 }
