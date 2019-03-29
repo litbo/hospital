@@ -69,7 +69,7 @@
                     , {field: 'eqPmName', title: '设备名称', minWidth: 150, sort: true}
                     , {field: 'num', title: '数量', minWidth: 100, sort: true}
                     , {field: 'priceGjY', title: '估价(元)', minWidth: 150, sort: true}
-                    , {fixed: 'right', minWidth: 80, align: 'center', toolbar: "#bar"}
+                    , {fixed: 'right', width: 300, align: 'center', toolbar: "#bar"}
                 ]]
                 , url: "/lifeManage/selectSgInfoKsshList"
                 , method: "POST"
@@ -98,6 +98,15 @@
                                 title: '汇总审核',
                                 content: './child/gather-auditAdd.html',
                                 area: ["58%", "50%"],
+                                before:function(obj,cs){
+                                    console.log("cs",cs);
+                                    if(cs.data.length === 0){
+                                        putMsg({
+                                            alert:"请至少选择一条数据！"
+                                        });
+                                        return false
+                                    }
+                                },
                                 func: function (obj, cs) {
                                     var data = [];
                                     for (var i = 0; i < cs.data.length; i++) {
