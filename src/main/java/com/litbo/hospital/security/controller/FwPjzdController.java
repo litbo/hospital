@@ -9,6 +9,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.service.FwPjzdService;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.*;
 @RestController
 @RequestMapping("security/pjzd")
 @Api(value = "security/pjzd" ,description = "配件字典操作")
+@Slf4j
 public class FwPjzdController {
     @Autowired
     private FwPjzdService pjzdService;
@@ -36,10 +38,11 @@ public class FwPjzdController {
             if(pjzdService.insertFwPjzd(pjzd)>0){
                 return Result.success();
             }else {
+                log.error("异常信息",pjzd);
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage());
             return Result.error(CodeMsg.PARAM_ERROR);
         }
 
@@ -65,7 +68,7 @@ public class FwPjzdController {
             PageInfo pageInfo = pjzdService.listFwPjzd( pjSzm, pageNum, pageSize, pjfl);
             return Result.success(pageInfo);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("异常信息",e.getMessage());
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 
@@ -92,6 +95,7 @@ public class FwPjzdController {
             ExportExcelUtil.exportExcel(response,fileName,data);
             return Result.success();
         }catch (Exception e){
+            log.error("异常信息",e.getMessage(),pjSzm , pjfl);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }

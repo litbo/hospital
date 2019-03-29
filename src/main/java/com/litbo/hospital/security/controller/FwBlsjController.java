@@ -5,16 +5,17 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwBlsj;
 import com.litbo.hospital.security.service.FwBlsjService;
 import com.litbo.hospital.security.vo.SelectFwBlsjById;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-
+@Slf4j
 @RestController
 @RequestMapping("security/blsj")
 public class FwBlsjController {
+//    Logger logger = LoggerFactory.getLogger(FwBlsjController.class);
     @Autowired
     private FwBlsjService blsjService;
     @RequestMapping(value = "insertFwBlsj",method = RequestMethod.POST)
@@ -25,7 +26,7 @@ public class FwBlsjController {
             else
                 return Result.error();
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("insertFwBlsj参数错误 FwBlsj={}",blsj);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
 
@@ -48,7 +49,7 @@ public class FwBlsjController {
             else
                 return Result.error(CodeMsg.PARAM_ERROR);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("selectFwBlsjById参数错误 id={}",id);
             return Result.error(CodeMsg.SERVER_ERROR);
         }
     }
