@@ -36,7 +36,7 @@ public class RoleProvider {
                 "\te.user_xm AS name,\n" +
                 "\tr.role_name AS roleName, \n" +
                 "\t e.bm_id AS bmId,\n" +
-                "\t b.bm_name AS bmName\n" +
+                "\t b.bm_name AS bmName,u.status\n" +
                 "FROM\n" +
                 "\tdbo.s_user as u\n" +
                 "\tLEFT JOIN dbo.s_emp AS e ON u.user_id = e.user_id\n" +
