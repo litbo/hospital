@@ -48,9 +48,10 @@
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <select lay-filter="bmList" name="bmId" lay-verify="required">
+            <input class="layui-input" name="bmName" placeholder="部门" id="bmName" autocomplete="off">
+          <!--  <select lay-filter="bmList" name="bmId" lay-verify="required">
                 <option value="0000000000">部门</option>
-            </select>
+            </select>-->
         </div>
         <div class="layui-inline">
             <select name="status" id="status" lay-filter="xtUser">
@@ -139,10 +140,10 @@
             reSet: {
                 url: "/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
                 type: "reload",
-                data: ["userId","bmId", "status"]
+                data: ["userId","bmName", "status"]
             }
-        },
-        form:{
+        }
+      /*  form:{
             val: {
                 filter:"bmList",
                 select: [
@@ -154,7 +155,7 @@
                     }
                 ]
             }
-        }
+        }*/
     };
 </script>
 </body>

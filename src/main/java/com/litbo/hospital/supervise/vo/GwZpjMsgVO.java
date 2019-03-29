@@ -13,6 +13,7 @@ public class GwZpjMsgVO {
 
 
     private String sqUserId;
+    private String sqUserName;
     private String zpjReason;
     private Date sqDate;
 }

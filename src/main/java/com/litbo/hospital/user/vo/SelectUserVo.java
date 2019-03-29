@@ -13,5 +13,7 @@ public class SelectUserVo {
 
     private String status;
 
+    private String bmName;
+
 
 }

@@ -71,7 +71,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">再评价原因</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" name="zpjReason"></textarea>
+                        <textarea class="layui-textarea" name="zpjReason" lay-verify="required"></textarea>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="layui-input-block">
                     <!--<input type="text" name="userId" class="layui-input" autocomplete="off" >-->
                     <input type="text" name="userXm" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
-                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId" style="display:none;">
+                    <input type="text" name="userId1" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId" style="display:none;">
                 </div>
             </div>
 
@@ -194,10 +194,20 @@
                     url:"/supervise/gwgl/dpjSubmitMsg",
                     type:"POST",
                     contentType:"application/json",
-                    data:["zpjReason","userId","ztDate"],
+                    data:["zpjReason","userId1","ztDate"],
                     add:{
                         gwId:$.getUrlParam("gwId")
+                    },done:function(res){
+                    if(res.code === 0){
+                        layer.alert("提交成功",function () {
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.location.reload();
+                        })
+                    }else {
+                        layer.alert("提交失败")
                     }
+                }
 
                 }
             }

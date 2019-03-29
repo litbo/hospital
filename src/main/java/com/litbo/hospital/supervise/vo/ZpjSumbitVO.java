@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class ZpjSumbitVO {
     private String gwId;
     private String zdId;
-    private String userId;
+    private String userId1;
     private String zpjReason;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")

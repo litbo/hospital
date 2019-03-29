@@ -34,6 +34,7 @@ public class ZhiduController {
 
     @GetMapping("/getZdById")
     public Result getZdById(String zdId){
+        if(zdId.equals("")) return Result.success();
         SZhidu sZhidu = zhiduService.getZdById(zdId);
         return Result.success(sZhidu);
     }

@@ -12,6 +12,7 @@ public class ZpjMsgVO {
     private String docUrl;
     private String zdContent;
     private String sqUserId;
+    private String sqUserName;
     private String zpjReason;
     private Date sqDate;
 }

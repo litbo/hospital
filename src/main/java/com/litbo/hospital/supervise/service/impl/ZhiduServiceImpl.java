@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
+import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.enums.ZDShProcessConstants;
@@ -30,6 +31,8 @@ public class ZhiduServiceImpl implements ZhiduService {
     private ZhiduDao zhiduDao;
     @Autowired
     private EmpDao empDao;
+    @Autowired
+    private BmDao bmDao;
     @Override
     public PageInfo getZds(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -39,8 +42,9 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     @Override
     public SZhidu getZdById(String id) {
-
-        return zhiduDao.getZdById(id);
+        SZhidu zhidu=zhiduDao.getZdById(id);
+        zhidu.setBmName(bmDao.getBmBybmid(zhidu.getBmId()).getBmName());
+        return zhidu;
     }
 
     @Override
@@ -243,6 +247,7 @@ public class ZhiduServiceImpl implements ZhiduService {
     @Override
     public void submitShMsg(ShMsgVO shMsgVO) {     // 审核提交  先更新  然后根据审核状态添加的状态
 
+        if(shMsgVO.getZtShyj()==null)shMsgVO.setZtShyj("");
         updateZdZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),new Date(),shMsgVO.getZtShyj());
 
         if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT_TG.getCode() && shMsgVO.getNextShrId()!=null){   //审核通过且继续审核
@@ -297,6 +302,7 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     @Override
     public void dpjSubmitMsg(ZpjSumbitVO zpjSumbitVO) {
+        if(zpjSumbitVO.getZpjReason()==null) zpjSumbitVO.setZpjReason("");
         //修改制度状态为待修改
         zhiduDao.setZhiDuZtIncludeReflag(Integer.parseInt(zpjSumbitVO.getZdId()),ZdztEnumProcess.ZD__ZT_DPJ.getCode(),1);
 
@@ -307,7 +313,8 @@ public class ZhiduServiceImpl implements ZhiduService {
         //设置审核状态名字
         ztc.setZtCzname("待评价");
         ztc.setZtDate(new Date());
-        ztc.setUserId(zpjSumbitVO.getUserId());
+
+        ztc.setUserId(zpjSumbitVO.getUserId1());
         ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
         ztc.setZtShyj(zpjSumbitVO.getZpjReason());
         zhiduDao.saveZdZt(ztc);
@@ -327,6 +334,7 @@ public class ZhiduServiceImpl implements ZhiduService {
         SZhiduzhizeZt sZhiduzhizeZt = zts.get(0);
         zpjMsgVO.setZpjReason(sZhiduzhizeZt.getZtShyj());
         zpjMsgVO.setSqUserId(sZhiduzhizeZt.getUserId());
+        zpjMsgVO.setSqUserName(empDao.getEmpByUserId(sZhiduzhizeZt.getUserId()).getUserXm());
         zpjMsgVO.setSqDate(sZhiduzhizeZt.getZtDate());
 
         return zpjMsgVO;
@@ -335,6 +343,7 @@ public class ZhiduServiceImpl implements ZhiduService {
     @Override
     public void dpjSubmitShMsg(ShMsgVO shMsgVO) {
 
+        if(shMsgVO.getZtShyj()==null) shMsgVO.setZtShyj("");
         if(shMsgVO.getZtCzzt()==1){
             zhiduDao.setZhiDuZt(shMsgVO.getZdId(),ZdztEnumProcess.ZD__ZT_BA.getCode(),0);
             updateZdZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),new Date(),shMsgVO.getZtShyj());
@@ -349,6 +358,7 @@ public class ZhiduServiceImpl implements ZhiduService {
             //设置审核状态名字
             ztc.setZtCzname("科室秘书编写");
             ztc.setZtCzzt(ZdCzztEnumProcess.ZD__CZZT_DSH.getCode());
+            ztc.setUserId(zhiduDao.getZdById(shMsgVO.getZdId().toString()).getUserId());
             ztc.setZtShyj("");
             zhiduDao.saveZdZt(ztc);
         }
