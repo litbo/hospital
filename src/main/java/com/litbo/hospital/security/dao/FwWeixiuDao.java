@@ -106,8 +106,8 @@ public interface FwWeixiuDao {
             "sl.ydwx_time,\n" +
             "wxEmp.user_xm AS wxrName,\n" +
             "bx.gzxx,\n" +
-            "wxnr1.wxnrzd_text,\n" +
-            "wxnr2.wxnrzd_text,\n" +
+            "wxnr1.wxnrzd_text AS gzyyString,\n" +
+            "wxnr2.wxnrzd_text AS gzmxString,\n" +
             "bx.bx_time,\n" +
             "sl.sl_time,\n" +
             "wx.fwks_time AS wx_time\n" +
@@ -132,8 +132,8 @@ public interface FwWeixiuDao {
             "sl.ydwx_time,\n" +
             "wxEmp.user_xm AS wxrName,\n" +
             "bx.gzxx,\n" +
-            "wxnr1.wxnrzd_text,\n" +
-            "wxnr2.wxnrzd_text,\n" +
+            "wxnr1.wxnrzd_text AS gzyyString,\n" +
+            "wxnr2.wxnrzd_text AS gzmxString,\n" +
             "bx.bx_time,\n" +
             "sl.sl_time,\n" +
             "wx.fwks_time AS wx_time,\n" +
