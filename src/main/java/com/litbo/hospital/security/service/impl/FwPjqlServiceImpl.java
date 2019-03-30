@@ -115,6 +115,10 @@ public class FwPjqlServiceImpl implements FwPjqlService {
             lcjlDao.insertFwLcjl(new FwLcjl(qrrId,new Date(),fwId,EnumProcess.FW_PJ_QL_SH_WTG.getMessage()));
             //修改报修表状态
             baoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_GZ_JX.getCode());
+            //任务列表进行完成
+            if(taskService.updateTaskById(taskId)==0){
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            }
         }
 
         return pjqlDao.updateFwPjqlSqStatus(status,id,qrrId,new Date());
