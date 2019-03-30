@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import com.litbo.hospital.supervise.vo.EmpVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface EmpService {
     //获取登陆人的同部门伙伴信息
     List<SEmp> listPartnerByUserId(String userId,int pageNum,int pageSize);
 
-    SEmp getEmpsByUserId(String userId);
+    EmpVO getEmpsByUserId(String userId);
 
     void updateEmp(SEmp emp);
 

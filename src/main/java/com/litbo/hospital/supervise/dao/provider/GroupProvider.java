@@ -22,7 +22,10 @@ public class GroupProvider {
                 "   where 1=1 and sp.sh_flag=#{shCode}" );
         if(bmName!=null)  sql.append(" and bm.bm_name Like '%'+#{bmName}+'%'");
         if(groupName!=null) sql.append(" and sp.group_name Like '%'+#{groupName}+'%'");
-        if(userId!=null) sql.append(" and sp.user_id2 ="+"'"+userId+"'");
+        if(shCode.equals("2")||shCode.equals("0"))
+            sql.append(" and sp.user_id1 ="+"'"+userId+"'");
+        else
+            sql.append(" and sp.user_id2 ="+"'"+userId+"'");
         return sql.toString();
     }
 

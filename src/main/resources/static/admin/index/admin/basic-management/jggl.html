@@ -147,12 +147,12 @@
                         <input type="radio" name="wxFlag1" value="0" title="否">
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">负责人</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="fzrName1" placeholder="请输入" class="layui-input" autocomplete="off">
-                    </div>
-                </div>
+                <!--<div class="layui-form-item">-->
+                    <!--<label class="layui-form-label">负责人</label>-->
+                    <!--<div class="layui-input-block">-->
+                        <!--<input type="text" name="fzrName1" placeholder="请输入" class="layui-input" autocomplete="off">-->
+                    <!--</div>-->
+                <!--</div>-->
                     <!--<div class="layui-form-item" pane>-->
                         <!--<label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>-->
                         <!--<div class="layui-input-block">-->
@@ -167,7 +167,6 @@
 
                     <!--</div>-->
 
-                <div class="col-xs-12 col-sm-6">
                     <div class="layui-form-item" pane>
                         <label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>
                         <div class="layui-input-block">
@@ -181,12 +180,6 @@
                         </div>
 
                     </div>
-                    <div class="layui-form-item">
-
-                    </div>
-                </div>
-
-
 
 
                 <div class="layui-form-item">
@@ -294,12 +287,12 @@
     }
 
     function onRemove(e,treeId,treeNode){
-        bmId ="bmId="+ treeNode["bmId"];
-        console.log("bmId",bmId);
+        obmId ="obmId="+ treeNode["obmId"];
+
         $.ajax({
-            url: "/supervise/bmgl/removeBmByBmId",
+            url: "/supervise/bmgl/removeBmByOBmId",
             type: "GET",
-            data: bmId,
+            data: obmId,
             success: function (res) {
                 if (res.code === 0) {
                     layer.msg("保存成功！");

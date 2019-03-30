@@ -172,7 +172,7 @@ public class GroupServiceImpl implements GroupService {
     public PageInfo getGroupsMSGDetail(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<GroupMSGDetailVO> msgDetails = new ArrayList<>();
-        List<SGroupSelectVO> selectGroups = groupDao.getSelectGroups();
+        List<SGroupSelectVO> selectGroups = groupDao.getSelectGroupsCL();
 
         for(SGroupSelectVO selectGroup:selectGroups){
             Integer groupId = selectGroup.getGroupId();  //团队id
@@ -215,16 +215,18 @@ public class GroupServiceImpl implements GroupService {
             msgDetailVO.setZkgls(ListToArrStr(zkgls));
             msgDetails.add(msgDetailVO);
         }
+        PageInfo selectGroupsinfo = new PageInfo<>(selectGroups);
+        PageInfo msgDetailsinfo = new PageInfo(msgDetails);
+        setInfoTo(selectGroupsinfo,msgDetailsinfo);
 
-
-        return new PageInfo(msgDetails);
+        return msgDetailsinfo;
     }
 
     @Override
     public PageInfo getGroupsMSGDetailByBmName(int pageNum, int pageSize, String bmName) {
         PageHelper.startPage(pageNum,pageSize);
         List<GroupMSGDetailVO> msgDetails = new ArrayList<>();
-        List<SGroupSelectVO> selectGroups = groupDao.getSelectGroups();
+        List<SGroupSelectVO> selectGroups = groupDao.getSelectGroupsCL();
 
         for(SGroupSelectVO selectGroup:selectGroups){
             Integer groupId = selectGroup.getGroupId();  //团队id
@@ -270,9 +272,26 @@ public class GroupServiceImpl implements GroupService {
             msgDetailVO.setZkgls(ListToArrStr(zkgls));
             msgDetails.add(msgDetailVO);
         }
+        PageInfo selectGroupsinfo = new PageInfo<>(selectGroups);
+        PageInfo msgDetailsinfo = new PageInfo(msgDetails);
+        setInfoTo(selectGroupsinfo,msgDetailsinfo);
+        return msgDetailsinfo;
+    }
 
-
-        return new PageInfo(msgDetails);
+    private void setInfoTo(PageInfo selectGroupsinfo,PageInfo msgDetailsinfo){
+        msgDetailsinfo.setPageSize(selectGroupsinfo.getPageSize());
+        msgDetailsinfo.setEndRow(selectGroupsinfo.getEndRow());
+        msgDetailsinfo.setSize(selectGroupsinfo.getSize());
+        msgDetailsinfo.setStartRow(selectGroupsinfo.getStartRow());
+        msgDetailsinfo.setTotal(selectGroupsinfo.getTotal());
+        msgDetailsinfo.setHasNextPage(selectGroupsinfo.isHasNextPage());
+        msgDetailsinfo.setHasPreviousPage(selectGroupsinfo.isHasPreviousPage());
+        msgDetailsinfo.setIsFirstPage(selectGroupsinfo.isIsFirstPage());
+        msgDetailsinfo.setIsLastPage(selectGroupsinfo.isIsLastPage());
+        msgDetailsinfo.setPageNum(selectGroupsinfo.getPageNum());
+        msgDetailsinfo.setNavigateFirstPage(selectGroupsinfo.getNavigateFirstPage());
+        msgDetailsinfo.setNavigateLastPage(selectGroupsinfo.getNavigateLastPage());
+        msgDetailsinfo.setNavigatepageNums(selectGroupsinfo.getNavigatepageNums());
     }
 
     private String[] ListToArrStr(List<String> ll ){
