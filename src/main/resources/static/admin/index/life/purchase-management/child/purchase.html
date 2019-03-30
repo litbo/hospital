@@ -45,7 +45,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqPmName" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="eqPmName" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -64,14 +64,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">外地收费价格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceWd" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceWd" lay-verify="Decimal" autocomplete="off"
+                           placeholder="0.00"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">省内收费价格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceSn" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceSn" lay-verify="Decimal" autocomplete="off"
+                           placeholder="0.00"
                            class="layui-input">
                 </div>
             </div>
@@ -94,28 +96,29 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">数量 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="num" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="num" lay-verify="number" autocomplete="off" placeholder="请输入数量"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(元)<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceGjY" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceGjY" lay-verify="Decimal" autocomplete="off" placeholder="请输入金额"
                            class="layui-input" id="gjpd">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(美元)</label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceGjMy" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="priceGjMy" lay-verify="Decimal" value="0.00" autocomplete="off"
+                           placeholder="请输入金额"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">检测量/日</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jcl" lay-verify="title" autocomplete="off" placeholder="请输入"
+                    <input type="text" name="jcl" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -278,6 +281,13 @@
             ]
         },
         form: {
+            ver: {
+                Decimal: function (value, item) {
+                    if (!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(value))) {
+                        return '请填写金额';
+                    }
+                }
+            },
             val: {
                 filter: "forms",
                 select: [
@@ -347,7 +357,7 @@
                         4: "id"
                     },
                     success: function (res) {
-                        if(res.code === 0){
+                        if (res.code === 0) {
                             parent.layer.msg("提交成功！");
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
@@ -359,10 +369,10 @@
                     var mm = Number($("#gjpd").val());
                     top.tempData.mm = mm;
                     //价格大于1W弹出新页面
-                    if(mm >= 10000){
+                    if (mm >= 10000) {
                         layOpen({
                             type: 2,
-                            site:"parent",
+                            site: "parent",
                             content: './child/zr-evaluation.html?sgId=' + $.getUrlParam("sgInfoId"),
                             area: ['100%', '100%']
                         });
@@ -384,13 +394,13 @@
 
         function pd(f) {
             var mm = Number($("#gjpd").val());
-            if(mm !== 0){
+            if (mm !== 0) {
                 putMsg({
-                    msg:"已输入金额："+ mm/10000 +" 万"
+                    msg: "已输入金额：" + mm / 10000 + " 万"
                 });
             }
-            //在1W-10W时显示一个内容，其他情况使用一个内容
-            if (mm >= 10000 && mm <= 100000) {
+            //在超过1W时显示一个内容，其他情况使用一个内容
+            if (mm >= 10000) {
                 !f && putMsg({
                     msg: "数据已修改！"
                 });

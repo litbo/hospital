@@ -36,7 +36,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位职责名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="gwName" class="layui-input" autocomplete="off">
+                    <input type="text" name="gwName" class="layui-input" autocomplete="off" disabled>
 
                 </div>
             </div>
@@ -69,7 +69,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">再评价原因</label>
                 <div class="layui-input-block">
-                    <input type="text" name="zpjReason" class="layui-input" autocomplete="off">
+                    <input type="text" name="zpjReason" class="layui-input" autocomplete="off" disabled>
 
                 </div>
             </div>
@@ -77,13 +77,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">申请人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="sqUserId" class="layui-input" autocomplete="off">
+                    <!--<input type="text" name="sqUserId" class="layui-input" autocomplete="off">-->
+                    <input type="text" name="sqUserName" class="layui-input" autocomplete="off" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">申请日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="sqDate" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="sqDate" class="layui-input" autocomplete="off" id="date"  disabled>
                 </div>
             </div>
 
@@ -171,10 +172,11 @@
                     },
                     done:function(res){
                         if(res.code === 0){
-                            //提交完成后关闭页面
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                            parent.location.reload();
+                            layer.alert("提交成功",function () {
+                                location.reload();
+                            })
+                        }else{
+                            layer.alert("提交失败")
                         }
                     }
                 }

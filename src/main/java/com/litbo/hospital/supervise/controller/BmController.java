@@ -191,13 +191,13 @@ public class BmController {
         return Result.success();
     }
     //删除部门通过老id
-    @GetMapping("/removeBmByBmId")
+    @GetMapping("/removeBmByOBmId")
     @ResponseBody
-    public Result removeBmByBmId(@RequestParam String bmId){
+    public Result removeBmByOBmId(@RequestParam String obmId){
         boolean flag = true;
-        flag = bmService.isZJD(bmId);
+        flag = bmService.isZJD(obmId);
         if(!flag) return Result.error("删除部门必须为叶子部门！！");
-        bmService.removeBmByBmId(bmId);
+        bmService.removeBmByOBmId(obmId);
         return Result.success();
     }
 

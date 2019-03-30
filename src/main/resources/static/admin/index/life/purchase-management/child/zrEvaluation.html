@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>准入评价报告查看</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style type="text/css">
+        .layui-form-item{
+            margin-top:30px;
+        }
+        .layui-form-label{
+            width:140px;
+            padding:8px 8px !important;
+        }
+        .warm_btn {
+            height: 45px;
+            font-size: 1.3em;
+            letter-spacing: 3px;
+            margin: 10px 0 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layui-row">
+    <form class="layui-form layui-form-pane" action="" lay-filter="form">
+        <div class="layui-row">
+            <div class="col-xs-12">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>准入评价报告</legend>
+                </fieldset>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">申请单位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="pjbgDw"  class="layui-input" autocomplete="off" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">申请装备项目</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="pjbgZbxm"  autocomplete="off" class="layui-input" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门负责人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="pjbgBmfzr"  autocomplete="off"  class="layui-input" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">制表单位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="pjbgZbdw"  autocomplete="" class="layui-input" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">填表日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="pjbgRq" class="layui-input" id="date" autocomplete="off" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="" id="upData">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    formData = {};
+    renderMod = {
+        form: {
+            val: {
+                filter:"form",
+                get: {
+                    url: "/lifeManage/selectSgZrpjbgBySgInfoId",
+                    type: "POST",
+                    data: {sgInfoId: $.getUrlParam("sgId")}
+                }
+            },
+            date:{
+                elem:'#date',
+                format:"yyyy-MM-dd",
+                value:today0
+            },
+            submit: {
+                before:function(){
+                    return param = {
+                        1:$.getUrlParam("sgId")
+                    }
+                },
+                form: {
+                    url: "/lifeManage/insertSgZrpjbg",
+                    type: "POST",
+                    data:["pjbgDw","pjbgZbxm","pjbgBmfzr","pjbgZbdw","pjbgRq"],
+                    contentType:"application/json",
+                    param:{
+                        1:"sgId"
+                    },
+                    success:function(res){
+                        if(res.code === 0){
+                            parent.layer.msg("提交成功！");
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        }
+                        //console.log("提交成功！",res);
+                    }
+                },
+                func:function(){
+                    //价格大于10W弹出新页面
+                    if(top.tempData.mm >= 100000){
+                        layOpen({
+                            type:2,
+                            site:"parent",
+                            content:'./child/kxxfx.html?sgId='+$.getUrlParam("sgId"),
+                            area:['100%','100%']
+                        })
+                    }
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

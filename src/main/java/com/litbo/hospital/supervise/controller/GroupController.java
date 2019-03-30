@@ -129,6 +129,7 @@ public class GroupController {
     //审核人提交审核结果
     @PostMapping("/shrShGroup")
     public Result shrShGroup(@RequestBody GroupInsertDetailVO groupInsertDetailVO){
+        if(groupInsertDetailVO.getShYj()==null)groupInsertDetailVO.setShYj("");
         groupService.shrShGroup(groupInsertDetailVO);
         return Result.success();
     }

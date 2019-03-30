@@ -44,17 +44,17 @@
     </div>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">申购单</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchaseDan">申购单</a>
     {{#  if(d.kstlId !== null){ }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">科室讨论表</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="discussBiao">科室讨论表</a>
     {{#  } if(d.pjbgId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">准入评价报告</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="zrEvaluation">准入评价报告</a>
     {{#  } if(d.kxfxId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">可行性分析</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="kxxFenxi">可行性分析</a>
     {{#  } if(d.dxzbId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">大型医学装备</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="bigDevice">大型医学装备</a>
     {{#  } if(d.lzfxId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">论证分析</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="lzFenxi">论证分析</a>
     {{#  } if(d.zbwyhhyId !== null) { }}
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">装备委员会会议</a>
     {{#  } else if(d.ybghhyId !== null) { }}
@@ -70,11 +70,11 @@
                     , {field: 'bmName', title: '部门名称', minWidth: 150}
                     , {field: 'eqPmName', title: '设备名称',width:"20%", minWidth: 150}
                     , {field: 'bh', title: '申购单号', minWidth: 150}
-                    , {field: 'num', title: '数量', minWidth: 100, sort: true}
+                    , {field: 'num', title: '数量', minWidth: 80, sort: true}
                     , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
                     , {field: 'zt', title: '状态', minWidth: 150}
                     , {field: 'reason', title: '未通过原因', minWidth: 200}
-                    , {fixed:'right',Width: 300,align:'center',toolbar: "#bar",template:""}
+                    , {minWidth: 400,align:'center',toolbar: "#bar",template:""}
                 ]]
                 ,url:"/lifeManage/selectSgInfoBmList"
                 ,method:"POST"
@@ -94,6 +94,34 @@
                     }
                 }
                 , done: function (obj) {
+                    tableFunc({
+                        toolFunc:[
+                            {
+                                event:'purchaseDan',
+                                type:2,
+                                content:'./child/purchaseDan.html',
+                                area:['58%','90%']
+                            },
+                            {
+                                event:'discussBiao',
+                                type:2,
+                                content:'./child/departmentDiscuss.html',
+                                area:['58%','90%']
+                            },
+                            {
+                                event:'zrEvaluation',
+                                type:2,
+                                content:'./child/zrEvaluation.html',
+                                area:['58%','90%']
+                            },
+                            {
+                                event:'kxxFenxi',
+                                type:2,
+                                content:'./child/kxxFenxi.html',
+                                area:['58%','90%']
+                            }
+                        ]
+                    })
 
                 }
             },

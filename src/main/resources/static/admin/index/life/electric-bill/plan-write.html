@@ -24,10 +24,11 @@
         </fieldset>
         <div class="col-xs-12">
             <div class="layui-form-item">
+                <input id="userId" name="userId" type="hidden">
                 <label class="layui-form-label">制定人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <label>
-                        <input type="text" name="userId" value="读取登陆人信息显示不能修改" disabled autocomplete="off"
+                        <input id="userXm" type="text" disabled autocomplete="off"
                                class="layui-input">
                     </label>
                 </div>
@@ -164,7 +165,13 @@
                 }
             }
         }
-    }
+    };
+    $(function() {
+        var emp =  tempValue("rl","emp",false);
+        $("#userId").val(emp.userId);
+        $("#userXm").val(emp.userXm);
+    })
+
 </script>
 </body>
 

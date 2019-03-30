@@ -44,7 +44,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;">
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" lay-verify="required" disabled class="layui-input" style="height:46px;">
                 </div>
 
             </div>
@@ -71,7 +71,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="userId2" id="" lay-verify="required" lay-filter="shr">
+                    <select name="userId2" id="" lay-verify="required" lay-filter="shr" lay-verify="required">
                         <option></option>
                     </select>
                 </div>

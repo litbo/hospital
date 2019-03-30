@@ -33,17 +33,15 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <form class="layui-form layui-form-pane" action="" method="POST" lay-filter="form">
-            <div class="layui-form-item">
-                <input type="hidden" name="sgDictId" autocomplete="off" class="layui-input">
-                <label class="layui-form-label">论证分析金额设置</label>
-                <div class="layui-input-block">
-                    <input type="text" name="lzfxPrice" placeholder="请输入论证分析最低金额" autocomplete="off" class="layui-input" lay-verify="required">
-                </div>
+            <input type="hidden" name="sgDictId" autocomplete="off" class="layui-input">
+            <input type="hidden" name="sgKstlRySl" autocomplete="off" class="layui-input">
+            <div class="col-xs-12 col-xs-6">
+                <label>请输入论证分析最低金额</label>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">申购讨论条件</label>
+                <label class="layui-form-label">论证分析金额<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="sgKstlRySl" placeholder="请输入申购讨论最少限制人数" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="lzfxPrice" placeholder="0.00" autocomplete="off" class="layui-input" lay-verify="Decimal">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -58,6 +56,13 @@
 <script>
     renderMod = {
         form: {
+            ver:{
+                Decimal:function(value,item){
+                    if(!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(value))){
+                        return '请填写金额';
+                    }
+                }
+            },
             val: {
                 filter: "form",//与form标签lay-filter相同
                 get: {

@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -32,6 +33,7 @@ public class SgLccl {
     /**
      * 申报时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date declareTime;
 
     /**
@@ -47,6 +49,7 @@ public class SgLccl {
     /**
      * 上报时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date reportTime;
     /**
      * 审批人
@@ -60,6 +63,7 @@ public class SgLccl {
     /**
      * 批复时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date ratifyTime;
 
     /**
@@ -70,6 +74,7 @@ public class SgLccl {
     /**
      * 清理时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date clearTime;
 
     /**
@@ -90,6 +95,7 @@ public class SgLccl {
     /**
      * 备案时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date recordTime;
 
     /**

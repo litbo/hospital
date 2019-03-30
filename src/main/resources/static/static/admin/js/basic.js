@@ -915,8 +915,6 @@ action = func = {
                 table.on(tableOn, function (obj) {
                     //排除多个数据源干扰，如toolbar有数据干扰问题，可移除外层限制if
                     //只有在点击表格内按钮时才执行事件
-                    //console.log(vas);
-                    //if (tool === "tool") {
                     //获取当前点击按钮event
                     //只有在点击表格标题行按钮才执行事件
                     if (tool === "toolbar") {
@@ -928,28 +926,21 @@ action = func = {
                         if (event === value.event) {
                             vas = value;
                         }else{
-                            //console.log("ISBACK");
                             return false;
                         }
                     } else if (Type(value) === "array") {
                         for (var x = 0; x < value.length; x++) {
-                            //console.log("IS", event, value[x].event);
                             if (event === value[x].event) {
-                                //console.log("IN-IN-IN", event, value[x].event);
                                 vas = value[x];
                             }else{
                                 num++;
                             }
                         }
-                        //console.log(num,value.length);
                         if(num === value.length){
                             num = 0;
                             return false;
                         }
                     }
-
-                    //}
-                    //
                     if(vas.send){
                         checkStatus && func.sendTo(vas.send,checkStatus,table);
                         return true;
@@ -970,6 +961,11 @@ action = func = {
                     }
                     //判断是否允许自定义layer窗口弹出
                     if (vas.layOpen !== undefined) openT = Boolean(vas.layOpen);
+                    //弹出前执行函数
+                    if(vas.before){
+                        var nnf = vas.before(obj,checkStatus);
+                        openT = (nnf !== false);
+                    }
                     //若允许弹出则弹出
                     openT && layOpen(vas);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
@@ -1167,7 +1163,7 @@ action = func = {
             }
             //其他需要扩充的数据
             if (value.adds !== undefined) {
-                console.log("adds = ",value.add);
+                //console.log("adds = ",value.add);
                 if(Type(value.adds) === "json"){
                     for (var name in value.adds) {
                         if (value.adds.hasOwnProperty(name)) {
@@ -1176,14 +1172,7 @@ action = func = {
                     }
                 }else if(Type(value.adds) === "array"){
                     value.data = getFormValue(value.adds,value.data);
-                    /*for(var g=0;g<value.adds.length;g++){
-                        var $selVal = $("select[name=" + value.adds[g] + "]").val();
-                        if($selVal){
-                            value.data[value.adds[g]] = $selVal;
-                        }
-                    }*/
                 }
-
             }
             //console.log("拼接完成：",value.data);
             //强制以JSON格式发送数据
@@ -1216,21 +1205,25 @@ action = func = {
                 //不删除数据则直接发送数据
                 subUp(value)
             } else {
-                layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
+                var showMsg = value.show|| "确定要删除这" + ck.data.length + "条数据吗？";
+                layer.confirm(showMsg, function (index) {
                     //获取除去要删除的数据后的数据
-                    if (ck.isAll === true) {
-                        oData = [];
-                    } else {
-                        for (var j = 0; j < oData.length; j++) {
-                            //找出所有数据中的已选中数据并删除
-                            if (oData[j].LAY_CHECKED === true) {
-                                oData.splice(j, 1);
-                            } else {
-                                delete oData[j]["LAY_CHECKED"];
-                                delete oData[j]["LAY_TABLE_INDEX"];
+                    if(!value.del || value.del === true ){
+                        if (ck.isAll === true) {
+                            oData = [];
+                        } else {
+                            for (var j = 0; j < oData.length; j++) {
+                                //找出所有数据中的已选中数据并删除
+                                if (oData[j].LAY_CHECKED === true) {
+                                    oData.splice(j, 1);
+                                } else {
+                                    delete oData[j]["LAY_CHECKED"];
+                                    delete oData[j]["LAY_TABLE_INDEX"];
+                                }
                             }
                         }
                     }
+
                     loc=false;
                     //上传已删除文件
                     subUp(value)
