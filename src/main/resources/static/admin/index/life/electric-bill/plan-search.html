@@ -30,7 +30,7 @@
             <input class="layui-input" name="planName" id="test-table-demoReload" placeholder="计划名称" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <input type="text" name="planDate" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off"
+            <input type="text" name="planDate" id="date" placeholder="计划时间" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-inline">
@@ -92,6 +92,13 @@
                 type: "reload",
                 data: ["planName","planDate","userId"]
             }
+        },
+        form: {
+            date: [{
+                    elem: "#date"
+                    , value: ""
+                    , format: "yyyy-MM-dd"
+                }]
         }
     }
 </script>

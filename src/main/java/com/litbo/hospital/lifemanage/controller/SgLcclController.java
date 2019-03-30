@@ -26,16 +26,12 @@ public class SgLcclController {
     /**
      * 处置查询列表
      *
-     * @param pageNum             当前页数
-     * @param pageSize            每页显示记录数
-     * @param dateLowerAndUpperVO 时间下限 时间上限
+     * @param dateLowerAndUpperVO 时间下限 时间上限 当前页数 每页显示记录数
      * @return PageInfo<DisposalQueryVO>
      */
     @PostMapping("/selectSgLccLList")
-    public Result selectSgLccLList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                                   @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                                   DateLowerAndUpperVO dateLowerAndUpperVO) {
-        return Result.success(sgLcclService.selectSgLccLList(pageNum, pageSize, dateLowerAndUpperVO));
+    public Result selectSgLccLList(@RequestBody DateLowerAndUpperVO dateLowerAndUpperVO) {
+        return Result.success(sgLcclService.selectSgLccLList(dateLowerAndUpperVO.getPageNum(), dateLowerAndUpperVO.getPageSize(), dateLowerAndUpperVO));
     }
 
     /**

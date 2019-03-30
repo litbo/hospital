@@ -103,6 +103,15 @@
                             type: 2,
                             content: "./child/reply_style.html",
                             area: ["58%", "52%"],
+                            before:function(obj,cs){
+                                console.log("cs",cs);
+                                if(cs.data.length === 0){
+                                    putMsg({
+                                        alert:"请至少选择一条数据！"
+                                    });
+                                    return false
+                                }
+                            },
                             func:function(obj,cs){
                                 var data = [];
                                 for(var i=0;i<cs.data.length;i++){

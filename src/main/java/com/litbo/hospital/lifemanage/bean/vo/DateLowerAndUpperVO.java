@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,11 +16,23 @@ public class DateLowerAndUpperVO {
     /**
      * 时间上限
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date lower;
     /**
      * 时间下限
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date upper;
+
+    /**
+     * pageNum
+     */
+    private Integer pageNum = 1;
+
+    /**
+     * pageSize
+     */
+    private Integer pageSize = 10;
 }

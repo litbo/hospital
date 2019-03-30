@@ -317,7 +317,6 @@ public class SgInfoServiceImpl implements SgInfoService {
         if (StringUtils.isNotBlank(sbPym)) {
             sbPym = "%" + sbPym + "%";
         }
-
         PageHelper.startPage(pageNum, pageSize);
         List<SgInfoListVO> sgInfoListVOS = sgInfoMapper.selectSgInfoList(isSh, bmId, bh, sbPym);
 

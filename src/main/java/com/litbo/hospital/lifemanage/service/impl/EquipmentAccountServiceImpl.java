@@ -88,6 +88,9 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
             } catch (ParseException | NullPointerException e) {
                 System.out.println("没有查询到时间");
             }
+
+            //TODO 计算累计折旧额
+
             sqcVO.setDepreciationYears("5"); //折旧年限固定值
 
         }

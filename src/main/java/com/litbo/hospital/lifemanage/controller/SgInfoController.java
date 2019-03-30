@@ -57,7 +57,6 @@ public class SgInfoController {
     /**
      * 显示申购单科室审核列表
      *
-     * @param userId   登陆人id
      * @param eqPmPym  设备名称
      * @param bh       申购单编号
      * @param pageNum  页数
@@ -66,12 +65,13 @@ public class SgInfoController {
      */
     @PostMapping("/selectSgInfoKsshList")
     public Result selectSgInfoKsshList(
-            @RequestParam(name = "userId") String userId,
             @RequestParam(name = "eqPmPym", required = false) String eqPmPym,
             @RequestParam(name = "bh", required = false) String bh,
             @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
-        return Result.success(sgInfoService.selectSgInfoKsshList(eqPmPym, bh, userId, pageNum, pageSize));
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        return Result.success(sgInfoService.selectSgInfoKsshList(eqPmPym, bh, emp.getUserId(), pageNum, pageSize));
     }
 
     /**
@@ -262,7 +262,6 @@ public class SgInfoController {
      * 申购进度跟踪
      *
      * @param isSh     是否通过审核
-     * @param userId   用户id
      * @param bh       申购单编号
      * @param sbPjy    设备拼音码
      * @param pageNum  页数
@@ -272,11 +271,12 @@ public class SgInfoController {
     @PostMapping("/selectSgInfoBmList")
     public Result selectSgInfoBmList(
             @RequestParam(required = false, name = "isSh") String isSh,
-            @RequestParam(name = "userId") String userId,
             @RequestParam(required = false, name = "bh") String bh,
             @RequestParam(required = false, name = "sbPjy") String sbPjy,
             @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize) {
-        return Result.success(sgInfoService.selectSgInfoBmList(isSh, userId, bh, sbPjy, pageNum, pageSize));
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        return Result.success(sgInfoService.selectSgInfoBmList(isSh, emp.getUserId(), bh, sbPjy, pageNum, pageSize));
     }
 }

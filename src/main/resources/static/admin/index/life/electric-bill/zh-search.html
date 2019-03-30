@@ -63,11 +63,11 @@
                         <span>金额区间：</span>
                     </div>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="price1" name="eqPrice" lay-verify="date" autocomplete="off"
+                        <input type="text" id="price1" name="eqPriceLower" lay-verify="date" autocomplete="off"
                                class="layui-input">
                     </div>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="price2" name="eqPrice" lay-verify="date" autocomplete="off"
+                        <input type="text" id="price2" name="eqPriceUpper" lay-verify="date" autocomplete="off"
                                class="layui-input">
                     </div>
                     <!--<div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -82,11 +82,10 @@
                     </div>-->
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
-                            <select name="eqSyzt" lay-filter="">
+                            <select name="state" lay-filter="">
                                 <option value="">完好状态</option>
-                                <option value="">在用</option>
-                                <option value="">待报废</option>
-                                <option value="">已报废</option>
+                                <option value="在用">在用</option>
+                                <option value="报废">报废</option>
                             </select>
                         </label>
                     </div>
@@ -94,14 +93,21 @@
                         <label>
                             <select name="eqBxqx" lay-filter="">
                                 <option value="">保修状态</option>
-                                <option value="">在保</option>
-                                <option value="">过保</option>
+                                <option value="在保">在保</option>
+                                <option value="过保">过保</option>
                             </select>
                         </label>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="equipmentPinyinCode" class="layui-input" placeholder="设备拼音码"
                                autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <label>
+                            <select name="bmId" lay-filter="eqTgks">
+                                <option value="">所在科室</option>
+                            </select>
+                        </label>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
@@ -201,7 +207,7 @@
             reSet: {
                 url: "/lifeManage/selectKsEq",
                 type: "reload",
-                data: ["", ""]
+                data: ["state", "equipmentPinyinCode", "departmentCoding", "eqCxflId"]
             }
         }
     }

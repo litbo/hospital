@@ -4,8 +4,10 @@ import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 审核计划Controller
@@ -43,7 +45,6 @@ public class SgPlanController {
     @PostMapping("/selectPlan")
     public Result selectPlan(
             @RequestParam(name = "planName",required = false) String planName,
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
             @RequestParam(name = "planDate",required = false) String planDate,
             @RequestParam(name = "userId",required = false) String userId,
             @RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageNum,

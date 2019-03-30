@@ -27,7 +27,7 @@ public class SgZbwyhhyController {
     @PostMapping("/selectSgZbwyhYearPurchase")
     public Result selectSgZbwyhYearPurchase(@RequestParam(name = "year", required = false) String year,
                                             @RequestParam(name = "bmId", required = false) String bmId,
-                                            @RequestParam(required = false, name = "bh") String bh,
+                                            @RequestParam(name = "bh",required = false) String bh,
                                             @RequestParam(name = "pageNum", defaultValue = "1", required = false) Integer pageNum,
                                             @RequestParam(name = "pageSize", defaultValue = "1", required = false) Integer pageSize) {
         return Result.success(sgZbwyhhyService.selectSgZbwyhYearPurchase(year, bmId, bh, pageNum, pageSize));
