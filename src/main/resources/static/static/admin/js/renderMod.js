@@ -428,6 +428,8 @@ $(function () {
                                     "count":res.data.total,//页面的所有数据数
                                     "data": res.data.list //解析数据列表
                                 }
+                            },done: function(res, curr, count){
+                                this.where={};
                             }
                         });
                     form.render();
