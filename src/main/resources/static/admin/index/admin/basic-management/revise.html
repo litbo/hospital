@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>待修改</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -23,9 +24,9 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
     </div>
-    <div class="hidden-xs"  id="moreBar">
+    <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
             <input class="layui-input" name="zdName" placeholder="制度名称" id="test-table-demoReload" autocomplete="off">
         </div>
@@ -40,50 +41,43 @@
 
 <script>
     renderMod = {
-
         addTable: {
             table: {
                 cols: [[ //表头
-                    {checkbox:true,fixed:true}
-                    , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
+                    {checkbox: true, fixed: true}
+                    , {field: 'zdId', title: '制度编号', width: '30%', minWidth: 200, sort: true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
-                    , {align:'center',title:'操作',toolbar:'#bar',minWidth:100}
+                    , {align: 'center', title: '操作', toolbar: '#bar', minWidth: 50}
                 ]]
                 , url: "/supervise/zdgl/listZdsByShr?zdZt=0&reFlag=0"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count":res.data.total,
+                        "count": res.data.total,
                         "data": res.data.list //解析数据列表
                     }
                 }
                 , done: function (obj) {
                     tableFunc({
-                        tools:{
-                            type:2,
+                        tools: {
+                            type: 2,
                             event: "edit",
-                            content:"write-xgsy.html",
-                            dataUrl:["zdId"]
+                            content: "write-xgsy.html",
+                            dataUrl: ["zdId"]
                         }
                     })
                 }
             },
-            reSet:{
-                url:"/supervise/zdgl/listZdsByShr?zdZt=0&reFlag=0",
-                type:"search",
-                data:["zdName"],    //搜索框的name
-                where: {
-
-                }
+            reSet: {
+                url: "/supervise/zdgl/listZdsByShr?zdZt=0&reFlag=0",
+                type: "search",
+                data: ["zdName"],    //搜索框的name
+                where: {}
             }
         }
     }

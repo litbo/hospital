@@ -8,6 +8,7 @@ import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.supervise.vo.EmpDeleteVO;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import com.litbo.hospital.supervise.vo.EmpVO;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
@@ -75,7 +76,8 @@ public class EmpController {
 
     @GetMapping("/getEmpsByUserId")
     public Result getEmpsByUserId(@RequestParam String userId) {
-        SEmp emps = empService.getEmpsByUserId(userId);
+        if(userId.equals("")) return  Result.success();
+        EmpVO emps = empService.getEmpsByUserId(userId);
         return Result.success(emps);
     }
     @PostMapping("/saveEmp")

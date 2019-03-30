@@ -8,6 +8,7 @@ import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import com.litbo.hospital.supervise.vo.EmpVO;
 import com.litbo.hospital.user.dao.UserDao;
 import com.litbo.hospital.user.service.UserService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -47,6 +48,7 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public void saveEmp(SEmp emp) {
+        emp.setStatus("0");
         empDao.saveEmp(emp);
     }
 
@@ -107,9 +109,10 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public SEmp getEmpsByUserId(String userId) {
-
-        return empDao.getEmpsByUserId(userId);
+    public EmpVO getEmpsByUserId(String userId) {
+        EmpVO emp = empDao.getEmpsByUserId(userId);
+        emp.setBmName(bmDao.getBmBybmid(emp.getBmId()).getBmName());
+        return emp;
     }
 
     @Override

@@ -1,15 +1,12 @@
-package com.litbo.hospital.supervise.bean;
+package com.litbo.hospital.supervise.vo;
 
 import lombok.Data;
 
 @Data
-public class SEmp {
+public class EmpVO {
     private String userId;
-
     private String userXm;
-
     private String sexId;
-
     private String mzId;
 
     private String zzmmId;
@@ -23,6 +20,7 @@ public class SEmp {
     private String jtzz;
 
     private String bmId;
+    private String bmName;
 
     private String zggwlbId;
 
@@ -47,6 +45,5 @@ public class SEmp {
     private String zp;
     private String zcId;
     private String status;
-
 
 }
