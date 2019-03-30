@@ -964,9 +964,7 @@ action = func = {
                     //弹出前执行函数
                     if(vas.before){
                         var nnf = vas.before(obj,checkStatus);
-                        if(nnf === false){
-                            openT = false
-                        }
+                        openT = (nnf !== false);
                     }
                     //若允许弹出则弹出
                     openT && layOpen(vas);
