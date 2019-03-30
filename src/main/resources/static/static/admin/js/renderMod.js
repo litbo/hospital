@@ -59,6 +59,27 @@ $(function () {
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
                 if (val.filter && (val.list || val.select || val.get || (val.options && Type(val.options) === "json"))) {
+
+                    //下拉渲染
+                    if(val.select){
+                        if(Type(val.select) === "json"){
+                            getSelect(val.select);
+                        }else if(Type(val.select) === "array"){
+                            for(var s=0;s<val.select.length;s++){
+                                getSelect(val.select[s]);
+                            }
+                        }
+                    }
+                    //多数据表格渲染
+                    if(val.list){
+                        if(Type(val.list) === "json"){
+                            getSelect(val.list);
+                        }else if(Type(val.list) === "array"){
+                            for(var f=0;f<val.list.length;f++){
+                                getSelect(val.list[f]);
+                            }
+                        }
+                    }
                     //表单渲染
                     if (val.get) {
                         val.get.success = function (res) {
@@ -101,33 +122,16 @@ $(function () {
                                 }
                                 //表单默认值填充
                                 form.val(val.filter, value);
-                                if(val.datas !== undefined){
+
+                                val.func && val.func(dat,form);
+                                /*if(val.datas !== undefined){
                                     val.datas[res] = res.data;
-                                }
+                                }*/
                             }
                         };
                         subUp(val.get)
                     }
-                    //下拉渲染
-                    if(val.select){
-                        if(Type(val.select) === "json"){
-                            getSelect(val.select);
-                        }else if(Type(val.select) === "array"){
-                            for(var s=0;s<val.select.length;s++){
-                                getSelect(val.select[s]);
-                            }
-                        }
-                    }
-                    //多数据表格渲染
-                    if(val.list){
-                        if(Type(val.list) === "json"){
-                            getSelect(val.list);
-                        }else if(Type(val.list) === "array"){
-                            for(var f=0;f<val.list.length;f++){
-                                getSelect(val.list[f]);
-                            }
-                        }
-                    }
+
                     //当不需要获取数据的时候就直接渲染页面
                     if(!val.get && !val.select && !val.list) {
                         form.val(val.filter, val.options);

@@ -15,12 +15,6 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        /*.layui-form-item .layui-form-label{*/
-        /*width:150px;*/
-        /*}*/
-        /*.layui-form-item .layui-input-block{*/
-        /*margin-left:150px;*/
-        /*}*/
         .layui-form-item{
             margin-top:35px
         }
@@ -61,25 +55,16 @@
                 </div>
             </div>
 
-            <div class="layui-form-item">
-                <!--<label class="layui-form-label">部门</label>-->
-                <!--<div class="layui-input-block">-->
-                    <!--<select name="bmId" lay-filter="bm">-->
-                        <!--<option></option>-->
-                    <!--</select>-->
-                <!--</div>-->
-                <div class="layui-form-item" pane>
-                    <label class="layui-form-label" style="line-height:30px">科室<span class="sign">*</span></label>
-                    <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>
-                    </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label" style="line-height:30px">科室<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label" style="height:46px;line-height:30px;">科室选择预览</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="bmName" placeholder="请选择" autocomplete="off" lay-verify="required" disabled class="layui-input" style="height:46px;">
-                    </div>
-
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="height:46px;line-height:30px;">科室选择预览</label>
+                <div class="layui-input-block">
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" lay-verify="required" disabled class="layui-input" style="height:46px;">
                 </div>
 
             </div>
@@ -124,16 +109,6 @@
                     </select>
                 </div>
             </div>
-            <!--<div class="layui-form-item">-->
-                <!--<label class="layui-form-label">专业分类</label>-->
-                <!--<div class="layui-input-block">-->
-                    <!--<select name="xlzyId">-->
-                        <!--<option value="1">农学</option>-->
-                        <!--<option value="2">计算机</option>-->
-                        <!--<option value="3">医学院</option>-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
 
             <div class="layui-form-item">
                 <label class="layui-form-label">毕业院校</label>
@@ -164,7 +139,6 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </div>
@@ -172,32 +146,22 @@
     </div>
 </form>
 
-
-
-<!---->
 <script>
-    layui.use(['layer','form','laydate',],function(){
-        var form = layui.form;
-        $   = layui.jquery;
-        laydate = layui.laydate;
-
-
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-        laydate.render({
-            elem: '#date2'
-        });
-    })
-
     var formData = {};
     renderMod = {
 
         form:{
+            date:[
+                {
+                    elem: '#date'
+                },
+                {
+                    elem: '#date1'
+                },
+                {
+                    elem: '#date2'
+                }
+            ],
             val:{
                 filter:"forms",
                 get:{
@@ -227,7 +191,15 @@
                         text:"zc",
                         url:"/eqdict/listZc"
                     }
-                ]
+                ],
+                func:function(data,form){
+                    //console.log(data);
+                    $("select[name='mzId']").val(String(data["xllbId"]).trim());
+                    $("select[name='xllbId']").val(String(data["xllbId"]).trim());
+                    $("select[name='zwlbId']").val(String(data["zwlbId"]).trim());
+                    $("select[name='zcId']").val(String(data["zcId"]).trim());
+                    form.render("select");
+                }
             },
 
             submit:{
@@ -236,7 +208,7 @@
                     if(formData.radio){
                         daa=formData.radio[0]["bmId"];
                     }else if(formData.val){
-                        console.log(formData)
+                        console.log(formData);
                         daa=formData.val.bmId;
                     }
                     return param = {
@@ -249,7 +221,7 @@
                     contentType:"application/json",
                     data:["userId","userXm","mzId","sexId","sfzh","tel","xllbId","byyx","zwlbId","zcId"],
                     param: {
-                        1: "bmId",
+                        1: "bmId"
                     },done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {
@@ -261,7 +233,6 @@
                             layer.alert("提交失败")
                         }
                     }
-
                 }
             }
         },bind: {
