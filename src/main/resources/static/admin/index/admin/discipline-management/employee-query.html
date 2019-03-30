@@ -30,9 +30,7 @@
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <select lay-filter="bm" name="bmId">
-                <option value="0000000000">所有部门</option>
-            </select>
+            <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="部门名称">
         </div>
         <div class="layui-inline">
             <input type="text" name="userId" class="layui-input" autocomplete="off" placeholder="员工编号">
@@ -106,7 +104,7 @@
                             type: 2,
                             title: "修改员工",
                             event: "edit",
-                            content: "./child/employee-queryAdd.html",
+                            content: "./child/employee-queryAdd1.html",
                             dataUrl:["userId"]
                         },{
                             send:{
@@ -132,9 +130,9 @@
             },
 
             reSet:{
-                url:"/kwgl/empgl/listSelectEmpBybmIdAndUserId",
+                url:"/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
                 type:"search",
-                data:["bmId","userId"],
+                data:["bmName","userId"],
                 where: {
 
                 }

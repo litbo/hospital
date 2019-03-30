@@ -4,6 +4,7 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.dao.provider.EmpProvider;
 import com.litbo.hospital.supervise.vo.EmpSelectVO;
+import com.litbo.hospital.supervise.vo.EmpVO;
 import com.litbo.hospital.supervise.vo.JhEmpVo;
 import org.apache.ibatis.annotations.*;
 
@@ -38,13 +39,13 @@ public interface EmpDao {
             "      jg_id, jtzz, bm_id, zggwlb_id, \n" +
             "      zgbzlb_id, zgzt_id, xllb_id, xlzy_id, \n" +
             "      zwlb_id, tel, email, byyx, \n" +
-            "      qzzp, zp,status)\n" +
+            "      qzzp, zp,status,zc_id)\n" +
             "    values (#{userId,jdbcType=VARCHAR}, #{userXm,jdbcType=VARCHAR}, #{sexId,jdbcType=CHAR}, \n" +
             "      #{mzId,jdbcType=CHAR}, #{zzmmId,jdbcType=CHAR}, #{sfzh,jdbcType=CHAR}, #{gbId,jdbcType=CHAR}, \n" +
             "      #{jgId,jdbcType=CHAR}, #{jtzz,jdbcType=VARCHAR}, #{bmId,jdbcType=CHAR}, #{zggwlbId,jdbcType=CHAR}, \n" +
             "      #{zgbzlbId,jdbcType=CHAR}, #{zgztId,jdbcType=CHAR}, #{xllbId,jdbcType=CHAR}, #{xlzyId,jdbcType=CHAR}, \n" +
             "      #{zwlbId,jdbcType=CHAR}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{byyx,jdbcType=VARCHAR}, \n" +
-            "      #{qzzp,jdbcType=VARCHAR}, #{zp,jdbcType=VARCHAR},#{status})")
+            "      #{qzzp,jdbcType=VARCHAR}, #{zp,jdbcType=VARCHAR},#{status},#{zcId})")
     void saveEmp(SEmp emp);
 
     @Delete("delete from s_emp where user_id=#{epmId}")
@@ -80,7 +81,7 @@ public interface EmpDao {
             "ur.user_id in (SELECT emp2.user_id from s_emp as emp1 INNER JOIN s_emp emp2 ON (emp1.bm_id=emp2.bm_id) where emp1.user_id=#{userId}) ")
     List<SEmp> listBmPartnerByUserId(String userId);
     @Select("select * from s_emp where user_id=#{userId}")
-    SEmp getEmpsByUserId(String userId);
+    EmpVO getEmpsByUserId(String userId);
     @Update("update s_emp\n" +
         "    set user_xm = #{userXm,jdbcType=VARCHAR},\n" +
         "      sex_id = #{sexId,jdbcType=CHAR},\n" +
