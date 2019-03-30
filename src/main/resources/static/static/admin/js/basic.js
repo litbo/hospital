@@ -1163,7 +1163,7 @@ action = func = {
             }
             //其他需要扩充的数据
             if (value.adds !== undefined) {
-                console.log("adds = ",value.add);
+                //console.log("adds = ",value.add);
                 if(Type(value.adds) === "json"){
                     for (var name in value.adds) {
                         if (value.adds.hasOwnProperty(name)) {
@@ -1172,14 +1172,7 @@ action = func = {
                     }
                 }else if(Type(value.adds) === "array"){
                     value.data = getFormValue(value.adds,value.data);
-                    /*for(var g=0;g<value.adds.length;g++){
-                        var $selVal = $("select[name=" + value.adds[g] + "]").val();
-                        if($selVal){
-                            value.data[value.adds[g]] = $selVal;
-                        }
-                    }*/
                 }
-
             }
             //console.log("拼接完成：",value.data);
             //强制以JSON格式发送数据

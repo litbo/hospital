@@ -8,7 +8,6 @@
     <title>维修部门下的工程师负责设备划分查询</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
@@ -35,15 +34,13 @@
         </div>
         <div class="layui-inline">
             <select lay-filter="wxbm" name="bmId">
-                <option value="0000000000">维修部门</option>
+                <option >维修部门</option>
 
             </select>
         </div>
         <div class="layui-inline">
-            <select lay-filter="select2" name="userId">
-                <option value="0000000000">划分人</option>
-                <option value="1615925008">李佳龙</option>
-                <option value="1615925037">高贺稳</option>
+            <select lay-filter="hfr" name="userId">
+                <option >划分人</option>
             </select>
         </div>
         <div class="layui-inline">
@@ -69,6 +66,31 @@
                             url:"/supervise/bmgl/listWXbms"
                         }
                     ]
+                },
+                event: {
+                    filter: 'wxbm',
+                    box: 'select',
+                    func: function (data) {
+                        subUp({
+                            url: '/kwgl/empgl/listEmpsByBmId',
+                            type: 'GET',
+                            data: {bmId: data.value},
+                            success: function (res) {
+                                if (res.code === 0) {
+                                    var $sel = $("select[lay-filter='hfr']");
+                                    $sel.html("");
+                                    for (var i = 0; i < res.data.length; i++) {
+                                        $sel.append($('<option>').attr("value",res.data[i]["userId"]).append(res.data[i]["userXm"]));
+                                    }
+                                    layui.use("form",function(){
+                                        var form = layui.form;
+                                        form.render("select");
+                                    })
+
+                                }
+                            }
+                        })
+                    }
                 }
             },
         addTable: {
@@ -80,17 +102,10 @@
                     , {field: 'eqName' , title:'设备名称',minWidth:150}
                 ]]
                 , url: "/kwgl/glbm/getWxbmGcsEqMSG"
-                , "data":[
-                    {}
-                ]
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -109,9 +124,10 @@
                                 url: "/kwgl/glbm/wxBmGcsEqXcHf",
                                 type: "POST",
                                 event: "qchf",
-                                confirm:false,
-                                par:"bgId"
-                                // adds:["userId"]
+                                show:"是否清除划分？",
+                                del:false,
+                                par:"bgId",
+                                reload:true
                             },
                             event:"qchf",
                             tool:"toolbar"

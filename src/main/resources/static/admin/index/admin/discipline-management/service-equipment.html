@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>维修部门下的工程师负责设备划分</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -15,8 +16,8 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-inline{
-            width:140px;
+        .layui-inline {
+            width: 140px;
         }
     </style>
 </head>
@@ -36,10 +37,8 @@
             </select>
         </div>
         <div class="layui-inline">
-            <select lay-filter="select2" name="userId">
+            <select lay-filter="hfr" name="userId">
                 <option>划分人</option>
-                <option value="1615925039">博</option>
-                <option value="1615925008">李佳龙</option>
             </select>
         </div>
         <button class="layui-btn" data-type="" lay-event="hf">确定划分</button>
@@ -48,55 +47,71 @@
             <input type="text" name="eqPym" class="layui-input" autocomplete="off" placeholder="设备拼音码">
         </div>
         <!--<div class="layui-inline">-->
-            <!--<input type="text" name="" class="layui-input" autocomplete="off" placeholder="型号规格">-->
+        <!--<input type="text" name="" class="layui-input" autocomplete="off" placeholder="型号规格">-->
         <!--</div>-->
         <button class="layui-btn" data-type="search">搜索</button>
     </div>
 </script>
 
 
-
 <script>
     renderMod = {
-        form:{
-            val:{
-                filter:"forms",
-                select:[
+        form: {
+            val: {
+                filter: "forms",
+                select: [
                     {
-                        filter:"wxbm",
-                        ids:"bmId",
-                        text:"bmName",
-                        url:"/supervise/bmgl/listWXbms"
+                        filter: "wxbm",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listWXbms"
                     }
                 ]
+            },
+            event: {
+                filter: 'wxbm',
+                box: 'select',
+                func: function (data) {
+                    subUp({
+                        url: '/kwgl/empgl/listEmpsByBmId',
+                        type: 'GET',
+                        data: {bmId: data.value},
+                        success: function (res) {
+                            if (res.code === 0) {
+                                var $sel = $("select[lay-filter='hfr']");
+                                $sel.html("");
+                                for (var i = 0; i < res.data.length; i++) {
+                                    $sel.append($('<option>').attr("value",res.data[i]["userId"]).append(res.data[i]["userXm"]));
+                                }
+                                layui.use("form",function(){
+                                    var form = layui.form;
+                                    form.render("select");
+                                })
+
+                            }
+                        }
+                    })
+                }
             }
         },
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type:"checkbox"}
-                    , {field: 'eqName', title: '设备名称',width:"50%", minWidth: 200}
-                    , {field: 'eqGg' , title:'型号规格',minWidth:150}
+                    {type: "checkbox"}
+                    , {field: 'eqName', title: '设备名称', width: "50%", minWidth: 200}
+                    , {field: 'eqGg', title: '型号规格', minWidth: 150}
                 ]]
                 , url: "/eq/listShowEqs"
-                , "data":[
-                    {}
-                ]
-                ,even:true
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
                         "data": res.data.list, //解析数据列表
-                        "count":res.data.total
+                        "count": res.data.total
                     }
                 }
                 , done: function (obj) {
@@ -109,65 +124,23 @@
                                 url: "/kwgl/glbm/wxBmGcsEqHf",
                                 type: "POST",
                                 event: "hf",
-                                confirm:false,
-                                par:"eqId",
-                                adds:["bmId","userId"]
+                                show:"是否要划分此数据",
+                                del:false,
+                                par: "eqId",
+                                adds: ["bmId", "userId"],
+                                reload:true
                             },
-                            event:"hf",
-                            tool:"toolbar"
+                            event: "hf",
+                            tool: "toolbar"
                         }
                     })
                 }
             },
-            reSet:{
-                url:"/eq/listEqByX",
-                type:"search",
-                data:["eqPym"],
-                where: {
-
-                }
-            },
-            event:{
-                filter:'select1',
-                box:'select',
-                func:function(data){
-                    subUp({
-                        url:'',
-                        type:'post',
-                        data:{name:"ABC"},
-                        success:function(res){
-                            if(res.code ===0 ){
-                                var $d = "";
-                                for(var i=0;i<res.data.length;i++){
-                                    $d += $('<option>').append(res.data[i]);
-                                }
-                                $("select").append($d);
-                            }
-                        }
-                    },data)
-                },
-                break:false
-            },
-            event:{
-                filter:'select2',
-                box:'select',
-                func:function(data){
-                    subUp({
-                        url:'',
-                        type:'post',
-                        data:{name:"ABC"},
-                        success:function(res){
-                            if(res.code ===0 ){
-                                var $d = "";
-                                for(var i=0;i<res.data.length;i++){
-                                    $d += $('<option>').append(res.data[i]);
-                                }
-                                $("select").append($d);
-                            }
-                        }
-                    },data)
-                },
-                break:false
+            reSet: {
+                url: "/eq/listEqByX",
+                type: "search",
+                data: ["eqPym"],
+                where: {}
             }
         }
     }
