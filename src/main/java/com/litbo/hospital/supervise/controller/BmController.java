@@ -282,7 +282,7 @@ public class BmController {
     @RequestMapping(value = "/downloadExcel")
     @ResponseBody
     public void downloadExcel(HttpServletResponse res, HttpServletRequest req, String name) throws Exception {
-        String fileName = name+".xls";
+        String fileName = name+".xlsx";
         ServletOutputStream out;
         res.setContentType("multipart/form-data");
         res.setCharacterEncoding("UTF-8");

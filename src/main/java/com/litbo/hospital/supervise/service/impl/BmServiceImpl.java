@@ -451,51 +451,46 @@ public class BmServiceImpl implements BmService {
             notNull = true;
         }
 
-        for (int r = 1; r < sheet.getLastRowNum()-1; r++) {
+        for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
             Row row = sheet.getRow(r);
             if (row == null){
                 continue;
             }
+
+            for (Cell c : row) {
+                if(c==null) c.setCellValue("");
+            }
+
             SBm bm = new SBm();
+
 
 
             row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
             row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
+            row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
             row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
             row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(8).setCellType(Cell.CELL_TYPE_STRING);
 
 
 
 
 
             String obmId = row.getCell(0).getStringCellValue();
-            String bmId = row.getCell(1).getStringCellValue();
-            String bmName = row.getCell(2).getStringCellValue();
-            String userId = row.getCell(3).getStringCellValue();
-            String bmTel = row.getCell(4).getStringCellValue();
-            String bmAddr = row.getCell(5).getStringCellValue();
-            String wxFlag = row.getCell(6).getStringCellValue();
-            String pBmId = row.getCell(7).getStringCellValue();
-            String xbmFlag = row.getCell(8).getStringCellValue();
+            String bmName = row.getCell(1).getStringCellValue();
+            String userId = row.getCell(2).getStringCellValue();
+            String bmTel = row.getCell(3).getStringCellValue();
+            String bmAddr = row.getCell(4).getStringCellValue();
 
             bm.setObmId(obmId);
 //            bm.setBmId(bmId);
-
-
             bm.setBmId("0000000000");
             bm.setBmName(bmName);
             bm.setUserId(userId);
             bm.setBmTel(bmTel);
             bm.setBmAddr(bmAddr);
-            bm.setWxFlag(wxFlag);
-            bm.setpBmId(pBmId);
-            bm.setXbmFlag(xbmFlag);
+            bm.setWxFlag("0");
+            bm.setpBmId("1000000000");
 
-            setBmIdAndPId(bm);
             bmDao.saveBm(bm);
 
         }
