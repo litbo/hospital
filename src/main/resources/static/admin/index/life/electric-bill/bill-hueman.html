@@ -48,7 +48,7 @@
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane maxCont" action="">
+                <form class="layui-form layui-form-pane maxCont" action="" lay-filter="forms">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="interest" lay-filter="aihao">
                             <option value="" selected>卫标分类</option>
@@ -84,10 +84,10 @@
                         </label>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="equipmentPinyinCode" placeholder="简称拼音码" autocomplete="off">
+                        <input type="text" class="layui-input" name="equipmentPinyinCode" placeholder="简称拼音码" autocomplete="off">
                     </div>
                     <div class="layui-input-inline">
-                        <select name="departmentId" lay-filter="departmentId" id="departmentId">
+                        <select name="departmentId" lay-filter="part">
                             <option value="">全部部门</option>
                         </select>
                     </div>
@@ -109,51 +109,51 @@
 
 
 <script>
-    renderMod.addTable = {
-        table: {
-            elem: "#table"
-            , height: 'full-75'
-            , cols: [[ //表头
-                {type: "checkbox"}
-                , {field: 'eqBmName', title: '户名', minWidth: 200, sort: true}
-                , {field: 'eqSbbh', title: '设备编号', minWidth: 200}
-                , {field: 'eqName', title: '设备名称', minWidth: 200}
-                , {field: 'eqYq', title: '院内编码', minWidth: 200}
-                , {field: 'eqGg', title: '型号', minWidth: 200}
-                , {field: 'eqXh', title: '规格', minWidth: 200}
-                , {field: 'eqQysj', title: '启用日期', minWidth: 200}
-                // , {field: 'authorized_depart', title: '分类名称', minWidth: 200}
-                , {field: 'state', title: '状态', minWidth: 80}
-                // , {field: 'authorized_depart', title: '质检状态', minWidth: 100}
-            ]]
-            , url: "/lifeManage/selectEquipmentAccount"
-            , method: "POST"
-            , request: {
-                pageName: 'pageNum',
-                limitName: 'pageSize'
-            }
-            , where: {}
-            , parseData: function (res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "data": res.data.list, //解析数据列表
-                    "count": res.data.total
+    renderMod = {
+        addTable : {
+            table: {
+                elem: "#table"
+                , height: 'full-75'
+                , cols: [[ //表头
+                    {type: "checkbox"}
+                    , {field: 'eqBmName', title: '户名', minWidth: 200, sort: true}
+                    , {field: 'eqSbbh', title: '设备编号', minWidth: 200}
+                    , {field: 'eqName', title: '设备名称', minWidth: 200}
+                    , {field: 'eqYq', title: '院内编码', minWidth: 200}
+                    , {field: 'eqGg', title: '型号', minWidth: 200}
+                    , {field: 'eqXh', title: '规格', minWidth: 200}
+                    , {field: 'eqQysj', title: '启用日期', minWidth: 200}
+                    // , {field: 'authorized_depart', title: '分类名称', minWidth: 200}
+                    , {field: 'state', title: '状态', minWidth: 80}
+                    // , {field: 'authorized_depart', title: '质检状态', minWidth: 100}
+                ]]
+                , url: "/lifeManage/selectEquipmentAccount"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.total
+                    }
+                }
+            },
+            reSet: {
+                url: "/lifeManage/selectEquipmentAccount",
+                type: "reload",
+                data: ["interest","category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
             }
-
-        },
-        reSet: {
-            url: "/lifeManage/selectEquipmentAccount",
-            type: "reload",
-            data: ["category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
         },
         form: {
             val: {
                 filter: "forms",
                 select: [
                     {
-                        filter: "departmentId",
+                        filter: "part",
                         ids: "bmId",
                         text: "bmName",
                         url: "/supervise/bmgl/listBm"
@@ -162,6 +162,7 @@
             }
         }
     }
+
 </script>
 </body>
 

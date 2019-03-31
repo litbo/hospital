@@ -39,8 +39,7 @@
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs">
         <div class="layui-input-inline">
-            <input type="text" name="year" id="date1" lay-verify="year"
-                   placeholder="yyyy" autocomplete="off" class="layui-input">
+            <input type="text" name="year" id="date1" lay-verify="year" placeholder="yyyy" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
@@ -87,7 +86,6 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , where: {}
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -133,14 +131,16 @@
                     url: "/lifeManage/selectSgZbwyhYearPurchase",
                     type: "reload1",
                     data: ["bmId", "bh", "year"]
+                },
+                {
+                    url: "/lifeManage/selectSgZbwyhYearPurchase",
+                    type: "reload2",
+                    data: ["bmId", "bh", "year"]
                 }
-                /*{
-                     url: "/lifeManage/selectSgZbwyhYearBudget",
-                     type: "reload2",
-                     data: ["bmId", "year"]
-                   }*/
             ]
-            , date: [
+        },
+        form: {
+            date: [
                 {
                     elem: "#date1"
                     , type: "year"
@@ -152,15 +152,6 @@
                     , type: "year"
                     , value: year
                     , format: "yyyy"
-                }]
-        },
-        form: {
-            date:[
-                {
-                    elem:"#date1"
-                },
-                {
-                    elem:"#date2"
                 }
             ],
             val: {

@@ -366,125 +366,152 @@ $(function () {
 
             //表格数据重载(查询数据)
             if (res && res !== false) {
-                var type = res.type || "search"//绑定data-type="search"的按钮
-                    , nData = []
-                    , cData = []
-                    , active = {}//绑定按钮事件
-                    , resValue = {};//重载值
-                //绑定按钮事件
-                active[type] = function () {
-                    resValue = {};
-                    //动态获取表单数据
-                    if(Type(res.data) === "array"){
-                        for(var x=0;x<res.data.length;x++){
-                            var inputValue = $("input[name='"+res.data[x]+"']").val();
-                            if(inputValue){
-                                resValue[res.data[x]] = inputValue;
-                            }else if($("select[name='"+res.data[x]+"']").val()){
-                                resValue[res.data[x]] = $("select[name='"+res.data[x]+"']").val();
-                            }
-                        }
+                if(Type(res) === "json"){
+                    resSet(res);
+                }else if(Type(res) === "array"){
+                    for(var h=0;h<res.length;h++){
+                        resSet(res[h]);
                     }
-                    //添加额外数据
-                    if(res.where){
-                        for (var name in res.where) {
-                            if (res.where.hasOwnProperty(name)) {
-                                resValue[name] = res.where[name];
-                            }
-                        }
-                    }
-                    //时间选择器数据拆分
-                    if(res.dat){
-                        var dat = "",datArray="",bar = "~";
-                        if(Type(res.dat) === "array"){
-                            dat = $(res.dat[0]).val();
-                            if(res.dat[3]){
-                                //获取自定义的连接符
-                                bar = res.dat[3]
-                            }
-                            datArray = dat.split(bar);
-                            resValue[res.dat[1]] = datArray[0].trim();
-                            resValue[res.dat[2]] = datArray[1].trim();
-                        }else if(Type(res.dat) === "json"){
-                            dat = $(res.dat.elem).val();
-                            datArray = dat.split(res.dat.bar || bar);
-                            resValue[res.dat.bTime] = datArray[0].trim();
-                            resValue[res.dat.eTime] = datArray[1].trim();
-                        }
-                    }
-                    //获取重载前表格数据
-                    if(res.add === true && res.add.tableId !== undefined){
-                        nData = table.cache(res.add.tableId);
-                    }
-                    //执行重载
-                    table.reload(
-                        res.tid || args_table.id,
-                        {
-                            url: res.url
-                            , where: resValue
-                            , parseData:res.parseData || function(res){
-                                for(var x=0;x<nData.length;x++){
-                                    res.data.list.push(nData[x]);
+                }
+                function resSet(res){
+                    var type = res.type || "search"//绑定data-type="search"的按钮
+                        , nData = []
+                        , cData = []
+                        , active = {}//绑定按钮事件
+                        , resValue = {};//重载值
+                    //绑定按钮事件
+                    active[type] = function () {
+                        resValue = {};
+                        //动态获取表单数据
+                        if(Type(res.data) === "array"){
+                            for(var x=0;x<res.data.length;x++){
+                                var inputValue = $("input[name='"+res.data[x]+"']").val();
+                                if(inputValue){
+                                    resValue[res.data[x]] = inputValue;
+                                }else if($("select[name='"+res.data[x]+"']").val()){
+                                    resValue[res.data[x]] = $("select[name='"+res.data[x]+"']").val();
                                 }
-                                return {
-                                    "code": res.code, //解析接口状态
-                                    "msg": res.msg, //解析提示文本
-                                    "count":res.data.total,//页面的所有数据数
-                                    "data": res.data.list //解析数据列表
-                                }
-                            },done: function(res, curr, count){
-                                this.where={};
                             }
-                        });
-                    form.render();
-                    //还原重载前的数据
-                    if(res.add === true && res.add.tableId !== undefined){
-                        cData = table.cache(res.add.tableId);
-                        for(var b=0;b<cData.length;b++){
-                            nData.push(cData[b]);
                         }
-                        table.reload(res.add.tableId,{
-                            data:nData
-                        });
-                    }
-                    //重新渲染日期选择器
-                    if($.cookie("RenderDate-a-Func")){
-                        laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
-                    }
+                        //添加额外数据
+                        if(res.where){
+                            for (var name in res.where) {
+                                if (res.where.hasOwnProperty(name)) {
+                                    resValue[name] = res.where[name];
+                                }
+                            }
+                        }
+                        //时间选择器数据拆分
+                        if(res.dat){
+                            var dat = "",datArray="",bar = "~";
+                            if(Type(res.dat) === "array"){
+                                dat = $(res.dat[0]).val();
+                                if(res.dat[3]){
+                                    //获取自定义的连接符
+                                    bar = res.dat[3]
+                                }
+                                datArray = dat.split(bar);
+                                resValue[res.dat[1]] = datArray[0].trim();
+                                resValue[res.dat[2]] = datArray[1].trim();
+                            }else if(Type(res.dat) === "json"){
+                                dat = $(res.dat.elem).val();
+                                datArray = dat.split(res.dat.bar || bar);
+                                resValue[res.dat.bTime] = datArray[0].trim();
+                                resValue[res.dat.eTime] = datArray[1].trim();
+                            }
+                        }
+                        //获取重载前表格数据
+                        if(res.add === true && res.add.tableId !== undefined){
+                            nData = table.cache(res.add.tableId);
+                        }
+                        //执行重载
+                        table.reload(
+                            res.tid || args_table.id,
+                            {
+                                url: res.url
+                                , where: resValue
+                                , parseData:res.parseData || function(res){
+                                    for(var x=0;x<nData.length;x++){
+                                        res.data.list.push(nData[x]);
+                                    }
+                                    return {
+                                        "code": res.code, //解析接口状态
+                                        "msg": res.msg, //解析提示文本
+                                        "count":res.data.total,//页面的所有数据数
+                                        "data": res.data.list //解析数据列表
+                                    }
+                                },done: function(res, curr, count){
+                                    this.where={};
+                                }
+                            });
+                        form.render();
+                        //还原重载前的数据
+                        if(res.add === true && res.add.tableId !== undefined){
+                            cData = table.cache(res.add.tableId);
+                            for(var b=0;b<cData.length;b++){
+                                nData.push(cData[b]);
+                            }
+                            table.reload(res.add.tableId,{
+                                data:nData
+                            });
+                        }
+                        /*//重新渲染日期选择器
+                        if($.cookie("RenderDate-a-Func")){
+                            laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
+                        }*/
 
-                    //重新绑定select事件
-                    if($(".layui-table-tool select").length > 0){
-                        var val = {};
-                        if(formAction !== undefined){
-                            val = formAction.val ;
-                        }
-                        if(val.select){
-                            if(Type(val.select) === "json"){
-                                getSelect(val.select);
-                            }else if(Type(val.select) === "array"){
-                                for(var s=0;s<val.select.length;s++){
-                                    getSelect(val.select[s]);
+                        //重新绑定select事件
+                        if($(".layui-table-tool select").length > 0){
+                            var val = {};
+                            if(formAction !== undefined){
+                                val = formAction.val;
+                                if(val && val.select){
+                                    if(Type(val.select) === "json"){
+                                        getSelect(val.select);
+                                    }else if(Type(val.select) === "array"){
+                                        for(var s=0;s<val.select.length;s++){
+                                            getSelect(val.select[s]);
+                                        }
+                                    }
+                                    //重新渲染下拉
+                                    form.render("select");
                                 }
                             }
-                            //重新渲染下拉
-                            form.render("select");
                         }
-                    }
+                        //日期选择器渲染
+                        if (date && date !== false) {
+                            //当 data = true 时使用默认的参数渲染数据
+                            if (date === true) {
+                                a(nor_date);
+                                //当 data 数据类型为 JSON 时则渲染一个日期选择器(优先自定义属性)
+                            } else if (Type(date) === "json") {
+                                a(date);
+                                //当 data 数据类型为 ARRAY 时则渲染多个日期选择器(优先自定义属性)
+                            } else if (Type(date) === "array") {
+                                for (var v = 0; v < date.length; v++) {
+                                    if (Type(date[v]) === "json") {
+                                        a(date[v]);
+                                    }
+                                }
+                            }
+                        }
 
-                    //重新绑定事件
+                        //重新绑定事件
+                        $(".layui-table-tool .layui-btn").on('click', function () {
+                            var type = $(this).data('type');
+                            active[type] ? active[type].call(this) : '';
+                            return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
+                        });
+                    };
+
+                    //首次页面渲染后按钮事件绑定
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
+                        console.log(type);
                         active[type] ? active[type].call(this) : '';
-                        return active[type] ? false:"";//存在type则阻止其他事件，否则继续执行
+                        return active[type] ? false:"";//存在type则阻止其他事件，否则不阻止
                     });
-                };
-
-                //首次页面渲染后按钮事件绑定
-                $(".layui-table-tool .layui-btn").on('click', function () {
-                    var type = $(this).data('type');
-                    active[type] ? active[type].call(this) : '';
-                    return active[type] ? false:"";//存在type则阻止其他事件，否则不阻止
-                });
+                }
             }
 
             //日期选择器渲染
@@ -789,6 +816,9 @@ $(function () {
                         for (var i = 0; i < datt.length; i++) {
                             //动态渲染option标签并且渲染进页面
                             $d .append($("<option>").attr({"value":datt[i][id]}).append(datt[i][text]));
+                        }
+                        if(datt.length > 10){
+                            $d.attr("lay-search","");
                         }
                         //表单下拉单独重新渲染
                         form.render("select");

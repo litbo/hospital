@@ -39,8 +39,7 @@
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs">
         <div class="layui-input-inline">
-            <input type="text" name="year" id="date1" placeholder="yyyy" autocomplete="off"
-                   class="layui-input">
+            <input type="text" name="year" id="date1" placeholder="yyyy" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
@@ -56,11 +55,10 @@
 <script type="text/html" id="toolBar1">
     <form class="layui-form layui-form-pane hidden-xs">
         <div class="layui-input-inline">
-            <input type="text" name="year" id="date2" placeholder="yyyy" autocomplete="off"
-                   class="layui-input">
+            <input type="text" name="year" id="date2" placeholder="yyyy" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <select name="bmId" lay-filter="bmId">
+            <select name="bmId1" lay-filter="bmId1">
                 <option value="">全部部门</option>
             </select>
         </div>
@@ -88,7 +86,6 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , where: {}
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -99,8 +96,8 @@
                     }
                     , done: function (obj) {
                     }
-                }
-                , {
+                },
+                {
                     elem: "#table1"
                     , height: 'full-75'
                     , toolbar: "#toolBar1"
@@ -116,7 +113,6 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , where: {}
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -136,7 +132,7 @@
                 {
                     url: "/lifeManage/selectSgYbghhyYearBudget",
                     type: "reload2",
-                    data: ["bmId", "year"]
+                    data: ["bmId1", "year"]
                 }
             ]
         },
@@ -153,10 +149,17 @@
                     , type: "year"
                     , value: year
                     , format: "yyyy"
-                }],
+                }
+            ],
             val: {
                 filter: "forms",
                 select: [
+                    {
+                        filter: "bmId1",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    },
                     {
                         filter: "bmId",
                         ids: "bmId",
