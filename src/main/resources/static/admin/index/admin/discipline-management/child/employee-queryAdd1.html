@@ -167,7 +167,8 @@
                 get:{
                     url:"/kwgl/empgl/getEmpsByUserId",
                     type:"GET",
-                    data:{userId:$.getUrlParam('userId')}
+                    data:{userId:$.getUrlParam('userId')},
+                    save:formData
                 },
                 select:[
                     {
@@ -205,6 +206,7 @@
             submit:{
                 before: function () {
                     var daa={};
+                    console.log(formData);
                     if(formData.radio){
                         daa=formData.radio[0]["bmId"];
                     }else if(formData.val){

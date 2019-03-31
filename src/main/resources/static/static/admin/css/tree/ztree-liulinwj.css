@@ -240,3 +240,7 @@
 .radio_true_disable{
   background-image:url("/static/admin/css/tree/img/r-ban.png")!important;
 }
+
+.edit{
+  margin-right:5px;
+}
