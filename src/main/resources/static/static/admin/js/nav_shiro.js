@@ -54,7 +54,7 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
             for (var i = 0; i < thisA.length; i++) {
                 addPage(thisA[i]);
             }
-            if (p !== "home") {//首页不打开新TAB
+            /*if (p !== "home") {//首页不打开新TAB
                 var d = a.children[0];
                 if (!d.children) {
                     changeTab(d, function () {
@@ -65,7 +65,7 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                         $('.layui-nav-child').children(':first').addClass('layui-this');
                     })
                 }
-            }
+            }*/
         } else {
             addPage(a);
         }

@@ -13,45 +13,28 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
-    <style type="text/css">
-        .title{
-            height:50px;
-            background-color:#eeeeee;
-            margin:0 auto;
-            border-radius:5px;
-            margin-top:20px;
-            line-height:50px;
-            font-size:18px;
-            padding-left:15px;
-        }
-    </style>
 </head>
 <body>
 
 <div class="layui-row">
     <div class="col-xs-12">
-        <div class="title">部门信息导入</div>
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>部门信息导入</legend>
+        </fieldset>
     </div>
     <div class="col-xs-12">
-        <!--<div class="layui-upload" style="margin-top:60px;">-->
-            <!--<button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>-->
-            <!--<button type="button" class="layui-btn" id="startUploadFile">提交文件</button>-->
-        <!--</div>-->
-        <div class="col-xs-12 layui-upload" style="margin-top:60px;">
+        <div class="col-xs-12 layui-upload" style="margin-top:15px;">
             <button type="button" class="layui-btn layui-btn-normal" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
-            <button type="button" class="layui-btn layui-btn-normal" id="startUploadFile"><i class="layui-icon">&#xe621;</i>提交文件</button>
+            <button type="button" class="layui-btn layui-btn-normal" style="margin-left: 10px" id="startUploadFile"><i class="layui-icon">&#xe621;</i>提交文件</button>
         </div>
         <div class="col-xs-12" style="margin-top:60px">
             <button type="button" class="layui-btn" id="xzmb">
-                <i class="layui-icon">&#xe67c;</i>下载模板
+                <i class="layui-icon">&#xe601;</i>下载模板
             </button>
-            <button type="button" class="layui-btn" id="xzxz">
+            <button type="button" class="layui-btn layui-btn-warm" id="xzxz">
                 <i class="layui-icon">&#xe67c;</i>下载须知
             </button>
         </div>
-        <form style="display: none" id="queryCourseForm">
-            <input type="text" name="name" value="部门模板"  style="display: none" >
-        </form>
     </div>
 </div>
 
@@ -68,13 +51,8 @@
                 auto:false,
                 bindAction:"#startUploadFile",
                 field:"file",
-                /*choose:function(obj){
-                    files = obj.pushFile();
-                    obj.preview(function(index,file,result){
-                        $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
-                    })
-                },*/done:function(res,index,upload){
-                    console.log(arguments);
+                done:function(res,index,upload){
+                    //console.log(arguments);
                     layer.msg('导入成功！', {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
                     });
@@ -83,20 +61,43 @@
                     console.log("upload"+upload);
                 }
             }
-        }
-    }
+        },
+        btn:[
+            {
+                elem:"#xzxz",
+                func:function(){
+                    putMsg({
+                        alert:"表格标红列为必填项"
+                    })
+                }
+            },
+            {
+                elem:"#xzmb",
+                func:function(){
+                    var url = '/supervise/bmgl/downloadExcel';
+                    //创建一个form用于提交数据
+                    var form=$("<form>");
+                    form.attr({
+                        "style":"display:none",
+                        "target":"",
+                        "method":"post",
+                        "action":url
+                    });
+                    $("body").append(form);//将表单放置在web中
+                    //插入表单内容（用于发送给后台）
+                    var input1=$("<input>");
+                    input1.attr({
+                        "type":"hidden",
+                        "name":"name",
+                        "value":"部门模板"
+                    });
+                    form.append(input1);
 
-    $(document).ready(function(){
-        $("#xzmb").click(function(){
-
-            var queryForm = $("#queryCourseForm");
-            var exportForm = $("<form action='/supervise/bmgl/downloadExcel' method='post'></form>")
-            exportForm.html(queryForm.html());
-            $(document.body).append(exportForm);
-            exportForm.submit();
-        });
-
-    });
+                    form.submit();//表单提交
+                }
+            }
+        ]
+    };
 </script>
 </body>
 </html>
