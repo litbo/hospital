@@ -79,4 +79,12 @@ public interface EqDao {
     List<EqPm> listPmTree();
     @SelectProvider(type = EqProvider.class , method = "listWFlEqByX")
     List<EqShowVo> listWFlEqByX(SelectFlEqVo selectFlEqVo);
+    @Select("SELECT bm_id FROM s_bm WHERE bm_name =#{bmName}")
+    String getBmIdByName(String bmName);
+    @Select("SELECT eq_jldw_id FROM eq_jldw WHERE eq_jldw_name =#{eqJldwName}")
+    String getJldwId(String eqJldwName);
+    @Select("SELECT eq_cxfl_id FROM eq_cxfl WHERE eq_cxfl_name =#{eqCxflName}")
+    String getCxflId(String eqCxflName);
+    @Select("SELECT zjly_id FROM eq_zjly WHERE zjly_name =#{eqZjlyName}")
+    String getZjlyId(String eqZjlyName);
 }

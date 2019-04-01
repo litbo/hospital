@@ -116,11 +116,11 @@ public class ImportExcelUtil {
      * @param rowNum
      * @return
      */
-    public static List<List<Object>> readRowsToExcel(Workbook wb, Sheet sheetAt,Row row,int rowNum , List<Integer> ids){
+    public static List<List<Object>> readRowsToExcel(Workbook wb, Sheet sheetAt,Row row,int rowNum , List<Integer> ids,int startRow){
         short cellNum = row.getLastCellNum();
         Cell cell = null;
         List list = new ArrayList<>();
-        for (int i = 1;i<rowNum;i++){
+        for (int i = startRow;i<rowNum;i++){
             ArrayList<String> rowList = new ArrayList<>();
             row = sheetAt.getRow(i);
             if(row==null){
@@ -169,29 +169,35 @@ public class ImportExcelUtil {
     测试
      */
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\设备导入\\设备导入测试数据11.xlsx");
+        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\设备导入\\设备导入模板.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
         List<Integer> ids = new ArrayList<>();
         ids.add(6);
         ids.add(7);
         ids.add(10);
-        ids.add(17);
         ids.add(18);
+        ids.add(19);
+        ids.add(23);
 
         try {
             inputStream = new FileInputStream(file);
             workbook = WorkbookFactory.create(inputStream);
             inputStream.close();
             //工作表对象
+            //获取第几个工作表
             Sheet sheetAt = workbook.getSheetAt(0);
-            Row row = sheetAt.getRow(0);
+            //获取表头
+            Row row = sheetAt.getRow(2);
+            //设置从第几行开始读取数据(表头所在行数)
+            int startRow=3;
+            //设置总行数
             int rowNum = sheetAt.getLastRowNum()+1;
             short cellNum = row.getLastCellNum();
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = readTitlesToExcel(workbook, sheetAt,row,cellNum);
-            List<List<Object>> lists = readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
+            List<List<Object>> lists = readRowsToExcel(workbook, sheetAt, row, rowNum,ids,startRow);
             System.out.println(list);
             for (List<Object> objectList : lists) {
                 System.out.println(objectList);

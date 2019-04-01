@@ -49,6 +49,9 @@
                 <i class="layui-icon">&#xe67c;</i>下载须知
             </button>
         </div>
+        <form style="display: none" id="queryCourseForm">
+            <input type="text" name="name" value="部门模板"  style="display: none" >
+        </form>
     </div>
 </div>
 
@@ -88,10 +91,16 @@
 
     $(document).ready(function(){
         $("#xzmb").click(function(){
-            $.ajax({
-                type: "GET",
-                url: "/supervise/bmgl/downloadExcel?name=bm"
-            });
+            // $.ajax({
+            //     type: "GET",
+            //     url: "?name=bm"
+            // });
+
+            var queryForm = $("#queryCourseForm");
+            var exportForm = $("<form action='/supervise/bmgl/downloadExcel' method='post'></form>")
+            exportForm.html(queryForm.html());
+            $(document.body).append(exportForm);
+            exportForm.submit();
         });
 
     });

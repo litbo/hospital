@@ -164,27 +164,40 @@ public class EqServiceImpl implements EqService {
         ids.add(7);
         ids.add(10);
         ids.add(17);
-        ids.add(18);
+        ids.add(19);
+        ids.add(23);
         try {
             inputStream = new ByteArrayInputStream(file.getBytes());
             workbook = WorkbookFactory.create(inputStream);
             inputStream.close();
             //工作表对象
             Sheet sheetAt = workbook.getSheetAt(0);
-            Row row = sheetAt.getRow(0);
+            Row row = sheetAt.getRow(2);
+            int startRow=3;
             int rowNum = sheetAt.getLastRowNum() + 1;
             short cellNum = row.getLastCellNum();
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids,startRow);
 
             List<Map<String, Object>> mapList = listToMap(lists, list);
 
             for (Map<String, Object> map : mapList) {
                 /*SUser user = parseMap2Object(map, SUser.class);*/
                 EqInfo eqInfo = parseMap2Object(map,EqInfo.class);
-
+                if(eqInfo.getEqBmName()!=null){
+                    eqInfo.setEqBmid(eqDao.getBmIdByName(eqInfo.getEqBmName()));
+                }
+                if(eqInfo.getEqJldwName()!=null){
+                    eqInfo.setEqJldwId(eqDao.getJldwId(eqInfo.getEqJldwName()));
+                }
+                if(eqInfo.getEqCxflName()!=null) {
+                    eqInfo.setEqCxflId(eqDao.getCxflId(eqInfo.getEqCxflName()));
+                }
+                if(eqInfo.getEqZjlyName()!=null){
+                    eqInfo.setZjlyId(eqDao.getZjlyId(eqInfo.getEqZjlyName()));
+                }
                 //初始化设备流水号
                 eqInfo.setEqId(setLsh());
                 //设置拼音码
@@ -219,12 +232,13 @@ public class EqServiceImpl implements EqService {
             //工作表对象
             Sheet sheetAt = workbook.getSheetAt(0);
             Row row = sheetAt.getRow(0);
+            int startRow=1;
             int rowNum = sheetAt.getLastRowNum() + 1;
             short cellNum = row.getLastCellNum();
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids,startRow);
 
             List<Map<String, Object>> mapList = listToMap(lists, list);
             for (Map<String, Object> map : mapList) {
@@ -232,7 +246,7 @@ public class EqServiceImpl implements EqService {
                 EqFj eqFj = parseMap2Object(map,EqFj.class);
 
                 if(eqDao.saveFj(eqFj)<0){
-                    return -1;
+                    return 1/0;
                 }
             }
 
