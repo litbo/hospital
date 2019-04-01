@@ -967,6 +967,7 @@ action = func = {
                         openT = (nnf !== false);
                     }
                     //若允许弹出则弹出
+                    //console.log(vas);
                     openT && layOpen(vas);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
                     vas.func && vas.func(obj, checkStatus);

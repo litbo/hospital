@@ -55,21 +55,21 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">科室名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="bmName" class="layui-input" autocomplete="off">
-                        <input style="display:none" type="text" name="bmId" placeholder="请输入" class="layui-input" autocomplete="off">
+                        <input type="text" name="bmName" placeholder="请输入" class="layui-input" autocomplete="off">
+                        <input type="text" name="bmId" placeholder="请输入" class="layui-input hidden" autocomplete="off">
                     </div>
                 </div>
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label">管理部门</label>
                     <div class="layui-input-block" style="line-height:40px">
-                        <input type="radio" name="isGlbm" value="1" title="是" checked  >
+                        <input type="radio" name="isGlbm" value="1" title="是" checked>
                         <input type="radio" name="isGlbm" value="0" title="否">
                     </div>
                 </div>
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label">归口</label>
                     <div class="layui-input-block" style="line-height:40px">
-                        <input type="radio" name="gkCode" value="0" title="医工" checked  >
+                        <input type="radio" name="gkCode" value="0" title="医工" checked>
                         <input type="radio" name="gkCode" value="1" title="信息">
                         <input type="radio" name="gkCode" value="2" title="后勤">
                         <input type="radio" name="gkCode" value="3" title="其他">
@@ -82,27 +82,43 @@
                         <input type="radio" name="wxFlag" value="0" title="否">
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <!--<div class="layui-form-item">
                     <label class="layui-form-label">负责人</label>
                     <div class="layui-input-block">
                         <input type="text" name="fzrName" placeholder="请输入" class="layui-input" autocomplete="off">
-                        <input style="display:none" type="text" name="userId" placeholder="请输入" class="layui-input" autocomplete="off">
+                        <input style="display:none" type="text" name="userId" placeholder="请输入" class="layui-input"
+                               autocomplete="off">
                     </div>
 
-                    <!--<div class="layui-form-item" pane>-->
-                        <!--<label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>-->
-                        <!--<div class="layui-input-block">-->
-                            <!--<button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="layui-form-item">-->
-                        <!--<label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>-->
-                        <!--<div class="layui-input-block">-->
-                            <!--<input type="text" name="userXm" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">-->
-                        <!--</div>-->
+                    &lt;!&ndash;<div class="layui-form-item" pane>&ndash;&gt;
+                    &lt;!&ndash;<label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>&ndash;&gt;
+                    &lt;!&ndash;<div class="layui-input-block">&ndash;&gt;
+                    &lt;!&ndash;<button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>&ndash;&gt;
+                    &lt;!&ndash;</div>&ndash;&gt;
+                    &lt;!&ndash;</div>&ndash;&gt;
+                    &lt;!&ndash;<div class="layui-form-item">&ndash;&gt;
+                    &lt;!&ndash;<label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>&ndash;&gt;
+                    &lt;!&ndash;<div class="layui-input-block">&ndash;&gt;
+                    &lt;!&ndash;<input type="text" name="userXm66" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">&ndash;&gt;
+                    &lt;!&ndash;</div>&ndash;&gt;
 
-                    <!--</div>-->
+                    &lt;!&ndash;</div>&ndash;&gt;
 
+                </div>-->
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;"
+                                id="selectRoom1">选择
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userXm" placeholder="请选择" autocomplete="off" lay-verify="required"
+                               disabled class="layui-input" style="height:46px;">
+                    </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">科室电话</label>
@@ -122,8 +138,7 @@
         <div class="layui-row">
             <div class="layui-col-xs12">
                 <div class="layui-form-item" style="margin:20px 0;">
-                    <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="saveD">保存信息
-                    </button>
+                    <button class="warm-btn layui-btn layui-btn-warm layui-btn-fluid" layui-submit="" id="saveD">保存信息</button>
                 </div>
             </div>
         </div>
@@ -143,44 +158,26 @@
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label">维修科室</label>
                     <div class="layui-input-block" style="line-height:40px">
-                        <input type="radio" name="wxFlag1" value="1" title="是" checked >
+                        <input type="radio" name="wxFlag1" value="1" title="是" checked>
                         <input type="radio" name="wxFlag1" value="0" title="否">
                     </div>
                 </div>
-                <!--<div class="layui-form-item">-->
-                    <!--<label class="layui-form-label">负责人</label>-->
-                    <!--<div class="layui-input-block">-->
-                        <!--<input type="text" name="fzrName1" placeholder="请输入" class="layui-input" autocomplete="off">-->
-                    <!--</div>-->
-                <!--</div>-->
-                    <!--<div class="layui-form-item" pane>-->
-                        <!--<label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>-->
-                        <!--<div class="layui-input-block">-->
-                            <!--<button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="layui-form-item">-->
-                        <!--<label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>-->
-                        <!--<div class="layui-input-block">-->
-                            <!--<input type="text" name="userXm" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">-->
-                        <!--</div>-->
 
-                    <!--</div>-->
-
-                    <div class="layui-form-item" pane>
-                        <label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>
-                        <div class="layui-input-block">
-                            <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>
-                        </div>
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;"
+                                id="selectRoom">选择
+                        </button>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="userXm" placeholder="请选择" autocomplete="off" lay-verify="required" disabled class="layui-input" style="height:46px;">
-                        </div>
-
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userXm" placeholder="请选择" autocomplete="off" lay-verify="required"
+                               disabled class="layui-input" style="height:46px;">
                     </div>
-
+                </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">科室电话</label>
@@ -212,24 +209,22 @@
 
 <script>
     var setting = {
-        edit:{
+        edit: {
             enable: true,
-            drag:{
-                isMove:true,
-                prev:true,
+            drag: {
+                isMove: true,
+                prev: true,
                 autoOpenTime: 0
             },
             editNameSelectAll: true,
             showRemoveBtn: true,
-            removeTitle: "删除节点",
+            removeTitle: "删除节点"
         },
         view: {
             showLine: false,
             showIcon: false,
-            // fontCss: setFontCss,
             addHoverDom: addHoverDom,
             removeHoverDom: removeHoverDom
-
         },
         data: {
             key: {
@@ -243,8 +238,8 @@
         },
         callback: {
             "onClick": clickShow,
-            beforeRemove:beforeRemove,
-            onRemove:onRemove
+            beforeRemove: beforeRemove,
+            onRemove: onRemove
         }
     }
         , newJson = {
@@ -258,6 +253,7 @@
     }
         , readyData = {}
         , paseData = {}
+        , ind = 0
         , nodes = {};
 
     $.ajax({
@@ -281,14 +277,13 @@
     }
 
 
-    function beforeRemove(e,treeId,treeNode){
+    function beforeRemove(e, treeId, treeNode) {
         var bool = true;
         return confirm("你确定要删除吗？");
     }
 
-    function onRemove(e,treeId,treeNode){
-        obmId ="obmId="+ treeNode["obmId"];
-
+    function onRemove(e, treeId, treeNode) {
+        var obmId = "obmId=" + treeNode["obmId"];
         $.ajax({
             url: "/supervise/bmgl/removeBmByOBmId",
             type: "GET",
@@ -301,7 +296,6 @@
                 }
             }
         });
-
     }
 
     //添加子节点按钮（新增按钮）
@@ -315,11 +309,9 @@
 
             var btn = $("#addBtn_" + treeNode.tId);
             if (btn) btn.on("click", function () {
-
-                console.log(treeNode);
                 paseData["pId"] = treeNode;
                 paseData["tId"] = treeId;
-                layOpen({
+                ind = layOpen({
                     type: 1,
                     content: $("#openView"),
                     area: ["50%", "90%"],
@@ -328,11 +320,6 @@
                     fixed: true,
                     resize: false
                 });
-
-                /*var zTree = $.fn.zTree.getZTreeObj(treeId);
-                console.log("zTreeNodes", zTree.getNodes());
-                zTree.addNodes(treeNode, newJson);*/
-                //readyData = newJson;
                 return false;
             });
         }
@@ -346,41 +333,39 @@
 
     //关闭页面
     $("#canal").on("click", function () {
-        console.log("ccl");
-
-        layui.use("layer",function(){
-            var layer = layui.layer;
-            console.log(window.name);
-            console.log(JSON.stringify(parent.layer.getFrameIndex));
-            /*var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-            layer.close(index); //再执行关闭*/
-            layer.close(layer.index);
-            return false;
-        });
-
-        //return false;
+        var index = layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        console.log(ind);
+        layer.close(ind); //再执行关闭
+        return false;
     });
 
     $("#addIn").on("click", function () {
         console.log(paseData);
+        var nData = {
+            bmAddr: $("*[name='bmAddr1']").val(),
+            bmName: $("*[name='bmName1']").val(),
+            bmTel: $("*[name='bmTel1']").val(),
+            wxFlag: $("*[name='wxFlag1']").val(),
+            userId: $("*[name='fzrName1']").val(),
+            pBmId: paseData["pId"]["bmId"]
+        };
+        for(var name in nData){
+            if(nData.hasOwnProperty(name)){
+                if(nData[name] === "" || nData[name] === undefined){
+                    layer.alert("请完整填写信息后再保存！");
+                    return false;
+                }
+            }
+        }
         layer.confirm("确认添加这条信息吗？", function () {
-            var nData = {
-                bmAddr: $("*[name='bmAddr1']").val(),
-                bmName: $("*[name='bmName1']").val(),
-                bmTel: $("*[name='bmTel1']").val(),
-                wxFlag: $("*[name='wxFlag1']").val(),
-                userId: $("*[name='fzrName1']").val(),
-                pBmId:paseData["pId"]["bmId"]
-            };
-            console.log(nData);
             $.ajax({
                 url: "/supervise/bmgl/saveBm",
                 method: "POST",
                 data: JSON.stringify(nData),
                 contentType: "application/json",
-                success:function(res){
+                success: function (res) {
                     console.log(res);
-                    if(res.code === 0){
+                    if (res.code === 0) {
                         layer.msg("添加成功！");
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index); //再执行关闭
@@ -393,16 +378,6 @@
     });
 
     $("#saveD").on("click", function () {
-        //readyData
-        // for (var name in readyData) {
-        //     if (readyData.hasOwnProperty(name)) {
-        //         var $for = $("*[name='" + readyData[name] + "']").val();
-        //         if ($for !== undefined) {
-        //             readyData[name] = $for;
-        //         }
-        //     }
-        // }
-
         var nData = {
             bmId: $("*[name='bmId']").val(),
             bmAddr: $("*[name='bmAddr']").val(),
@@ -410,7 +385,7 @@
             bmTel: $("*[name='bmTel']").val(),
             wxFlag: $("*[name='wxFlag']").val(),
             fzrName: $("*[name='fzrName']").val(),
-            userId:$("*[name='userId']").val(),
+            userId: $("*[name='userId']").val()
         };
 
         console.log("save", nData);
@@ -421,18 +396,18 @@
             contentType: "application/json",
             success: function (res) {
                 if (res.code === 0) {
-                    layer.msg("保存成功！");
+                    parent.layer.msg("保存成功！");
+                    location.reload();
                 } else {
                     layer.msg("保存失败！")
                 }
             }
         });
         return false;
-    })
+    });
 
     var formData = {};
     renderMod = {
-
         bind: {
             selectItem: [
                 {
@@ -440,6 +415,16 @@
                     cb: "/kwgl/empgl/listSelectEmpsCols",
                     db: "/kwgl/empgl/listSelectEmps",
                     name: "dtdt",
+                    na:"userXm",
+                    key: "radio",
+                    data: formData
+                },
+                {
+                    elem: "#selectRoom1",
+                    cb: "/kwgl/empgl/listSelectEmpsCols",
+                    db: "/kwgl/empgl/listSelectEmps",
+                    name: "dtdt",
+                    na:"userXm",
                     key: "radio",
                     data: formData
                 }
