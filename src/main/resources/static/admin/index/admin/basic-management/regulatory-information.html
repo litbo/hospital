@@ -44,7 +44,7 @@
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
                         <li class="layui-this">制度信息</li>
-                        <li>文档上传</li>
+                        <li id="wdsc">文档上传</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
@@ -52,13 +52,13 @@
                         </div>
                         <div class="layui-tab-item">
                             <div class="layui-upload" style="margin-top:40px;">
-                                <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
+                                <button type="button" class="layui-btn " id="viewFile" >查看文件</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <input type="text" name="docUrl" class="layui-input" autocomplete="off" id="docUrl"   >
             <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" lay-event="shlc" id="addNew"><i
                     class="fas"></i>&nbsp;审核流程详情
             </button>
@@ -209,6 +209,7 @@
                     url:"/supervise/zdgl/getZdById",
                     type:"GET",
                     data:{zdId:$.getUrlParam('zdId')}
+
                 },
                 select: [
                     {
@@ -270,13 +271,6 @@
                     key:'abc',
                     name:'bbb',
                     before:function(){
-                        // var users = getTableValue("table"),daa={};
-                        // if(formData.radio){
-                        //     daa=formData.radio[0]["bmId"];
-                        // }else if(formData.val){
-                        //     console.log(formData)
-                        //     daa=formData.val.bmId;
-                        // }
                         var zdId=$.getUrlParam('zdId')
                         return {
                             zdId:zdId
@@ -288,7 +282,34 @@
         }
     };
 
+    $(document).ready(function(){
+
+
+        $("#wdsc").click(function(){
+            var url = $("#docUrl").val()
+            if(url==null||url==""){
+                $("#viewFile").addClass("layui-btn-disabled");
+            }
+        });
+
+        $("#viewFile").click(function(){
+            var url=$('#docUrl').val();
+            $.ajax({
+                url:'/supervise/zdgl/getDocByUrl?url='+url,
+                type:'GET',
+                success:function(str){
+                    alert(str);
+                },
+                error:function (err){
+                    alert(err);
+                }
+            });
+        });
+
+    });
+
     $(function () {
+
 
         var emp =  tempValue("rl","emp",false);
         $("#userId").val(emp.userId);

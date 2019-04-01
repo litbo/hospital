@@ -75,12 +75,9 @@
                     })
                 },*/done:function(res,index,upload){
                     console.log(arguments);
-                    //layui.closeAll("loading");
                     layer.msg('导入成功！', {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
                     });
-                    /*$(".img_show").html("");
-                    return delete files[index];*/
                 },error:function(index,upload){
                     console.log("index:"+index);
                     console.log("upload"+upload);
@@ -91,10 +88,6 @@
 
     $(document).ready(function(){
         $("#xzmb").click(function(){
-            // $.ajax({
-            //     type: "GET",
-            //     url: "?name=bm"
-            // });
 
             var queryForm = $("#queryCourseForm");
             var exportForm = $("<form action='/supervise/bmgl/downloadExcel' method='post'></form>")

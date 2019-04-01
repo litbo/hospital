@@ -2,6 +2,7 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
@@ -13,9 +14,9 @@ import com.litbo.hospital.supervise.enums.ZdCzztEnumProcess;
 import com.litbo.hospital.supervise.enums.ZdztEnumProcess;
 import com.litbo.hospital.supervise.service.ZhiduService;
 import com.litbo.hospital.supervise.vo.*;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class ZhiduServiceImpl implements ZhiduService {
     @Override
     public SZhidu getZdById(String id) {
         SZhidu zhidu=zhiduDao.getZdById(id);
+        String path = System.getProperty("user.dir");
+        zhidu.setDocUrl(zhidu.getDocUrl().replace(path,""));
         zhidu.setBmName(bmDao.getBmBybmid(zhidu.getBmId()).getBmName());
         return zhidu;
     }
@@ -164,13 +167,12 @@ public class ZhiduServiceImpl implements ZhiduService {
 
         SZhidu zd = new SZhidu();
         zd.setZdName(zhiduSubmitVO.getZdName());
-//        zd.setCreateTime(zhiduSubmitVO.getCreateTime());
         Date date = new Date();
         zd.setCreateTime(date);
         zd.setZdContent(zhiduSubmitVO.getZdContent());
         zd.setUserId(zhiduSubmitVO.getUserId());
         zd.setBmId(zhiduSubmitVO.getBmId());
-
+        zd.setDocUrl(zhiduSubmitVO.getDocUrl());
         //填充信息
         zd.setZdZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         zd.setSyTianshu(0);  //试用时间
@@ -203,6 +205,7 @@ public class ZhiduServiceImpl implements ZhiduService {
         zd.setZdContent(zhiduSubmitVO.getZdContent());
         zd.setUserId(zhiduSubmitVO.getUserId());
         zd.setBmId(zhiduSubmitVO.getBmId());
+        zd.setDocUrl(zhiduSubmitVO.getDocUrl());
 
         //填充信息
         zd.setZdZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
@@ -363,5 +366,13 @@ public class ZhiduServiceImpl implements ZhiduService {
             zhiduDao.saveZdZt(ztc);
         }
 
+    }
+
+    @Override
+    public String importZdDoc(MultipartFile file) {
+        String path = System.getProperty("user.dir");
+        String filePath =path+"/zd/";
+        String url = UploadFile.upload(filePath,file);
+        return url;
     }
 }

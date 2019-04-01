@@ -11,7 +11,13 @@ import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.net.URLDecoder;
 import java.util.List;
 
 @RestController
@@ -145,5 +151,46 @@ public class ZhiduController {
         return Result.success();
     }
 
+    @PostMapping( "/importZdDoc")
+    @ResponseBody
+    public Result importZdDoc(@RequestParam("file") MultipartFile file) throws Exception{
+        String fileName = file.getOriginalFilename();
+        String docUrl = zhiduService.importZdDoc(file);
+        return Result.success(docUrl);
+    }
+    @GetMapping( "/getDocByUrl")
+    @ResponseBody
+    public void getDocByUrl(HttpServletResponse res, HttpServletRequest req, String url) throws Exception{
+        String filePath = System.getProperty("user.dir")+url;
+        ServletOutputStream out;
+        res.setContentType("text/html");
+        res.setCharacterEncoding("UTF-8");
+        res.setContentType("text/html");
+//        String filePath = getClass().getResource(fileName).getPath();
+//        String userAgent = req.getHeader("User-Agent");
+//        if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
+//            fileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+//        } else {
+//            // 非IE浏览器的处理：
+//            fileName = new String((fileName).getBytes("UTF-8"), "ISO-8859-1");
+//        }
+//        filePath = URLDecoder.decode(filePath, "UTF-8");
+//        res.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+        FileInputStream inputStream = new FileInputStream(filePath);
+        out = res.getOutputStream();
+        int b = 0;
+        byte[] buffer = new byte[1024];
+        while ((b = inputStream.read(buffer)) != -1) {
+            // 4.写到输出流(out)中
+            out.write(buffer, 0, b);
+        }
+        inputStream.close();
+
+        if (out != null) {
+            out.flush();
+            out.close();
+        }
+
+    }
 
 }
