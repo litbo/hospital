@@ -39,7 +39,7 @@
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs">
         <div class="layui-input-inline">
-            <input type="text" name="year" id="date1" placeholder="yyyy" autocomplete="off" class="layui-input">
+            <input type="text" name="year" id="date1" placeholder="点击选择年度" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
@@ -55,7 +55,7 @@
 <script type="text/html" id="toolBar1">
     <form class="layui-form layui-form-pane hidden-xs">
         <div class="layui-input-inline">
-            <input type="text" name="yearBudget" id="date2" placeholder="yyyy" autocomplete="off" class="layui-input">
+            <input type="text" name="yearBudget" id="date2" placeholder="点击选择年度" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <select name="bmIdBudget" lay-filter="bmId1">
@@ -145,13 +145,13 @@
                 {
                     elem: "#date1"
                     , type: "year"
-                    , value: year
+                    , value: ""
                     , format: "yyyy"
                 },
                 {
                     elem: "#date2"
                     , type: "year"
-                    , value: year
+                    , value: ""
                     , format: "yyyy"
                 }
             ],
