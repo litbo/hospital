@@ -16,12 +16,12 @@ public interface SgZbwyhhyMapper {
      * @param sgZbwyhhy 装备委员会信息
      * @return 更新记录数
      */
-    @Insert("insert into sg_zbwyhhy (zbwyhhy_id, zbwyhhy_nd, zbwyhhy_chry, \n" +
+    @Insert("insert into sg_zbwyhhy (zbwyhhy_id,sg_id, zbwyhhy_nd, zbwyhhy_chry, \n" +
             "   zbwyhhy_fgld, zbwyhhy_fgldyj, zbwyhhy_sj, \n" +
             "   zbwyhhy_dd, zbwyhhy_zgbm, zbwyhhy_zgbmyj, \n" +
             "   extend_one, extend_two, zbwyhhy_nr\n" +
             "   )\n" +
-            " values (#{zbwyhhyId,jdbcType=VARCHAR}, #{zbwyhhyNd,jdbcType=VARCHAR}, #{zbwyhhyChry,jdbcType=VARCHAR}, \n" +
+            " values (#{zbwyhhyId,jdbcType=VARCHAR}, #{sgId,jdbcType=VARCHAR}, #{zbwyhhyNd,jdbcType=VARCHAR}, #{zbwyhhyChry,jdbcType=VARCHAR}, \n" +
             "   #{zbwyhhyFgld,jdbcType=VARCHAR}, #{zbwyhhyFgldyj,jdbcType=VARCHAR}, #{zbwyhhySj,jdbcType=TIMESTAMP}, \n" +
             "   #{zbwyhhyDd,jdbcType=VARCHAR}, #{zbwyhhyZgbm,jdbcType=VARCHAR}, #{zbwyhhyZgbmyj,jdbcType=VARCHAR}, \n" +
             "   #{extendOne,jdbcType=VARCHAR}, #{extendTwo,jdbcType=VARCHAR}, #{zbwyhhyNr,jdbcType=LONGVARCHAR}\n" +

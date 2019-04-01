@@ -6,10 +6,12 @@ import com.litbo.hospital.lifemanage.bean.SgZbwyhRy;
 import com.litbo.hospital.lifemanage.bean.SgZbwyhhy;
 import com.litbo.hospital.lifemanage.bean.vo.SgInfoSumAuditListVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgZbwyhhyVO;
+import com.litbo.hospital.lifemanage.bean.vo.ShVO;
 import com.litbo.hospital.lifemanage.bean.vo.YearBudgetVO;
 import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
 import com.litbo.hospital.lifemanage.dao.SgZbwyhRyMapper;
 import com.litbo.hospital.lifemanage.dao.SgZbwyhhyMapper;
+import com.litbo.hospital.lifemanage.service.SgInfoService;
 import com.litbo.hospital.lifemanage.service.SgZbwyhhyService;
 import com.litbo.hospital.supervise.dao.BmDao;
 import org.springframework.beans.BeanUtils;
@@ -33,6 +35,8 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
     private SgInfoMapper sgInfoMapper;
     @Autowired
     private BmDao bmDao;
+    @Autowired
+    SgInfoService sgInfoService;
 
     /**
      * 添加装备委员会信息
@@ -42,20 +46,27 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public void insertSgInfoZbwyhhy(SgZbwyhhyVO sgZbwyhhyVO) {
-        SgZbwyhhy sgZbwyhhy = new SgZbwyhhy();
-        BeanUtils.copyProperties(sgZbwyhhyVO, sgZbwyhhy);
-        String zbwyhId = UUID.randomUUID().toString();
-        sgZbwyhhy.setZbwyhhyId(zbwyhId);
-
-        sgZbwyhhyMapper.insertSgInfoZbwyhhy(sgZbwyhhy);
-        //在申购单中添加装备委员会会议id
-        sgInfoMapper.updateSgInfoZbwyhhyIdById(sgZbwyhhy.getSgId(), zbwyhId);
-        //添加会议人员信息
-        SgZbwyhRy sgZbwyhRy = new SgZbwyhRy();
-        sgZbwyhRy.setZbwyhhyId(zbwyhId);
-        for (String ryId : sgZbwyhhyVO.getSgZbwyhRys()) {
-            sgZbwyhRy.setUserId(ryId);
-            sgZbwyhRyMapper.insertZbwyhhyRy(sgZbwyhRy);
+        ShVO shVO = new ShVO();
+        BeanUtils.copyProperties(sgZbwyhhyVO,shVO);
+        //更改申购单表中的状态
+        sgInfoService.updateSgInfoZbwyhhy(shVO);
+        //添加装备委员会审核信息
+        for (String sgId : shVO.getIds()) {
+            sgZbwyhhyVO.setSgId(sgId);
+            SgZbwyhhy sgZbwyhhy = new SgZbwyhhy();
+            BeanUtils.copyProperties(sgZbwyhhyVO, sgZbwyhhy);
+            String zbwyhId = UUID.randomUUID().toString();
+            sgZbwyhhy.setZbwyhhyId(zbwyhId);
+            sgZbwyhhyMapper.insertSgInfoZbwyhhy(sgZbwyhhy);
+            //在申购单中添加装备委员会会议id
+            sgInfoMapper.updateSgInfoZbwyhhyIdById(sgZbwyhhy.getSgId(), zbwyhId);
+            //添加会议人员信息
+            SgZbwyhRy sgZbwyhRy = new SgZbwyhRy();
+            sgZbwyhRy.setZbwyhhyId(zbwyhId);
+            for (String ryId : sgZbwyhhyVO.getSgZbwyhRys()) {
+                sgZbwyhRy.setUserId(ryId);
+                sgZbwyhRyMapper.insertZbwyhhyRy(sgZbwyhRy);
+            }
         }
     }
 

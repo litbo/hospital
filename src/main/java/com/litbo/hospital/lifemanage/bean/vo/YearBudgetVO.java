@@ -12,17 +12,17 @@ public class YearBudgetVO {
     /**
      * 部门id
      */
-    private String bmId;
+    private String bmIdBudget;
     /**
      * 部门名字
      */
-    private String bmName;
+    private String bmNameBudget;
     /**
      * 预算总额(元)
      */
-    private String ysy;
+    private String ysyBudget;
     /**
      * 预算总额（美元）
      */
-    private String ysmy;
+    private String ysmyBudget;
 }
