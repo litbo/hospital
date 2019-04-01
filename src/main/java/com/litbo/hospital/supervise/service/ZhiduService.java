@@ -3,6 +3,7 @@ package com.litbo.hospital.supervise.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.vo.*;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ZhiduService {
     //获取所有制度
@@ -45,4 +46,6 @@ public interface ZhiduService {
     ZpjMsgVO getZpjMsgByZdId(String zdId);
 
     void dpjSubmitShMsg(ShMsgVO shMsgVO);
+
+    String importZdDoc(MultipartFile file);
 }
