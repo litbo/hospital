@@ -34,9 +34,10 @@
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
-                <select name="bmId" lay-filter="bmList" lay-verify="required" lay-search="">
+              <!--  <select name="bmId" lay-filter="bmList" lay-verify="required" lay-search="">
                     <option value="0000000000">部门</option>
-                </select>
+                </select>-->
+                <input class="layui-input" name="bmName" placeholder="部门名称" autocomplete="off">
             </div>
             <div class="layui-inline">
                 <input class="layui-input" name="eqName" placeholder="设备名称" autocomplete="off">
@@ -108,7 +109,7 @@
             reSet: {
                 url: "/eq/listFlEqByX",
                 type: "reload",
-                data: ["bmId","eqName"]
+                data: ["bmName","eqName"]
             }
 
         },

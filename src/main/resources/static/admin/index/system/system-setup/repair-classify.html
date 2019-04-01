@@ -75,13 +75,13 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="所在科室">
+                        <input type="text" name="bmName" autocomplete="off" class="layui-input" placeholder="所在科室">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="设备品名">
+                        <input type="text" name="eqName" autocomplete="off" class="layui-input" placeholder="设备名称">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-filter="demo1">查找</button>
+                        <button class="layui-btn layui-btn-fluid" lay-filter="demo1" data-type="reload">查找</button>
                     </div>
                 </form>
             </div>
@@ -212,9 +212,9 @@
                 }
             ]
             , reSet: {
-                url: "",
+                url: "/eq/listWFlEqByX",
                 type: "reload",
-                data: [""]
+                data: ["bmName","eqName"]
             }
         }
     }

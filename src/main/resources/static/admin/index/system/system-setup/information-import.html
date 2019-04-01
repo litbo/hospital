@@ -35,14 +35,21 @@
                 <button type="button" class="layui-btn layui-btn-normal" id="startUploadFile"><i class="layui-icon" >&#xe621;</i>提交文件</button>
             </div>
             <div class="col-xs-12" style="margin-top:60px;">
-                <button type="button" class="layui-btn" id="11">
-                    <a href="/download/file?url=/Download/设备导入模板.xlsx"  class="layui-icon">&#xe67c;</a>下载模板
+                <!--<button type="button" class="layui-btn" id="11">-->
+                    <!--<a href="/supervise/bmgl/downloadExcel?name=设备导入模板"  class="layui-icon">&#xe67c;</a>下载模板-->
+                <!--</button>-->
+                <button type="button" class="layui-btn" id="xzmb">
+                    <i class="layui-icon">&#xe67c;</i>下载模板
                 </button>
                 <button type="button" class="layui-btn" id="12">
                     <i class="layui-icon">&#xe67c;</i>下载须知
                 </button>
             </div>
         </div>
+
+        <form style="display: none" id="queryCourseForm">
+            <input type="text" name="name" value="设备导入模板"  style="display: none" >
+        </form>
     </div>
 </div>
 
@@ -80,6 +87,22 @@ renderMod = {
         }
     }
 }
+
+$(document).ready(function(){
+    $("#xzmb").click(function(){
+        // $.ajax({
+        //     type: "GET",
+        //     url: "?name=bm"
+        // });
+
+        var queryForm = $("#queryCourseForm");
+        var exportForm = $("<form action='/supervise/bmgl/downloadExcel' method='post'></form>")
+        exportForm.html(queryForm.html());
+        $(document.body).append(exportForm);
+        exportForm.submit();
+    });
+
+});
 </script>
 </body>
 </html>

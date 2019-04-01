@@ -47,6 +47,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer delUser(String id) {
+        if(userDao.getUserByUserId(id)==null){
+            return 1;
+        }
         if(userDao.delUser(id)>0){
             userDao.changeStatus0(id);
             userDao.delRole(id);
