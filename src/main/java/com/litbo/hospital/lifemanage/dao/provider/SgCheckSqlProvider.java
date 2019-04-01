@@ -94,13 +94,13 @@ public class SgCheckSqlProvider {
                 }
             }
             if (StringUtils.isNotBlank(checkDate)){
-                WHERE(" YEAR(dbo.sg_check.[date]) = YEAR(#{checkDate,jdbcType=TIMESTAMP}) AND MONTH(dbo.sg_check.[date]) = MONTH(#{checkDate,jdbcType=TIMESTAMP}) AND DAY(dbo.sg_check.[date]) = DAY(#{checkDate,jdbcType=TIMESTAMP})");
+                WHERE(" YEAR(dbo.sg_check.[date]) = YEAR(#{checkDate,jdbcType=VARCHAR}) AND MONTH(dbo.sg_check.[date]) = MONTH(#{checkDate,jdbcType=VARCHAR}) AND DAY(dbo.sg_check.[date]) = DAY(#{checkDate,jdbcType=VARCHAR})");
             }
             if (StringUtils.isNotBlank(checkUser)){
                 WHERE(" dbo.sg_check.user_id = #{checkUser,jdbcType=VARCHAR}");
             }
             if (StringUtils.isNotBlank(planDate)){
-                WHERE(" YEAR(dbo.sg_plan.plan_date) = YEAR(#{planDate,jdbcType=TIMESTAMP}) AND MONTH(dbo.sg_plan.plan_date) = MONTH(#{planDate,jdbcType=TIMESTAMP}) AND DAY(dbo.sg_plan.plan_date) = DAY(#{planDate,jdbcType=TIMESTAMP})");
+                WHERE(" YEAR(dbo.sg_plan.plan_date) = YEAR(#{planDate,jdbcType=VARCHAR}) AND MONTH(dbo.sg_plan.plan_date) = MONTH(#{planDate,jdbcType=VARCHAR}) AND DAY(dbo.sg_plan.plan_date) = DAY(#{planDate,jdbcType=VARCHAR})");
             }
             if (StringUtils.isNotBlank(planUser)){
                 WHERE(" dbo.sg_plan.user_id = #{planUser,jdbcType=VARCHAR}");

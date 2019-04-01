@@ -292,9 +292,9 @@ public class SgInfoSqlProvider {
      */
     public String selectSgYbghhyYearBudget(String year, String bmId) {
         return new SQL() {{
-            SELECT("dbo.s_bm.bm_name");
-            SELECT("Sum(dbo.sg_info.price_gj_y) AS ysy");
-            SELECT("Sum(dbo.sg_info.price_gj_my) AS ysmy");
+            SELECT("dbo.s_bm.bm_name as bmNameBudget");
+            SELECT("Sum(dbo.sg_info.price_gj_y) AS ysyBudget");
+            SELECT("Sum(dbo.sg_info.price_gj_my) AS ysmyBudget");
             FROM("dbo.sg_info");
             INNER_JOIN("dbo.s_bm ON dbo.sg_info.bm_id = dbo.s_bm.bm_id");
             WHERE("dbo.sg_info.isybghsh = '1'");
@@ -322,9 +322,9 @@ public class SgInfoSqlProvider {
      */
     public String selectSgZbwyhYearBudget(String year, String bmId) {
         return new SQL() {{
-            SELECT("dbo.s_bm.bm_name");
-            SELECT("Sum(dbo.sg_info.price_gj_y) AS ysy");
-            SELECT("Sum(dbo.sg_info.price_gj_my) AS ysmy");
+            SELECT("dbo.s_bm.bm_name as bmNameBudget");
+            SELECT("Sum(dbo.sg_info.price_gj_y) AS ysyBudget");
+            SELECT("Sum(dbo.sg_info.price_gj_my) AS ysmyBudget");
             FROM("dbo.sg_info");
             INNER_JOIN("dbo.s_bm ON dbo.sg_info.bm_id = dbo.s_bm.bm_id");
             WHERE("dbo.sg_info.iszbwyhsh = '1'");

@@ -147,18 +147,10 @@ public class SgInfoController {
      */
     @PostMapping("/updateSgInfoZbwyhhy")
     public Result updateSgInfoZbwyhhy(@RequestBody SgZbwyhhyVO sgZbwyhhyVO) {
-        ShVO shVO = new ShVO();
-        BeanUtils.copyProperties(sgZbwyhhyVO,shVO);
         //获取登陆人id
         LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
-        shVO.setShr(emp.getUserId());
-        //更改申购单表中的状态
-        sgInfoService.updateSgInfoZbwyhhy(shVO);
-        //添加装备委员会审核信息
-        for (String sgId : shVO.getIds()) {
-            sgZbwyhhyVO.setSgId(sgId);
-            sgZbwyhhyService.insertSgInfoZbwyhhy(sgZbwyhhyVO);
-        }
+        sgZbwyhhyVO.setShr(emp.getUserId());
+        sgZbwyhhyService.insertSgInfoZbwyhhy(sgZbwyhhyVO);
         return Result.success();
     }
 
@@ -190,7 +182,7 @@ public class SgInfoController {
     @PostMapping("/updateSgInfoYbghhy")
     public Result updateSgInfoYbghhy(@RequestBody SgYbghhyVO sgYbghhyVO) {
         ShVO shVO = new ShVO();
-        BeanUtils.copyProperties(sgYbghhyVO,shVO);
+        BeanUtils.copyProperties(sgYbghhyVO, shVO);
         //获取登陆人id
         LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         shVO.setShr(emp.getUserId());
@@ -205,9 +197,10 @@ public class SgInfoController {
 
     /**
      * 申购单页面表头
-     * @param pageNum 当前页数
+     *
+     * @param pageNum  当前页数
      * @param pageSize 每页显示记录数
-     * @param key 前端传的区分关键字
+     * @param key      前端传的区分关键字
      * @return
      */
     @PostMapping("/selectSgInfoLzfxCols")

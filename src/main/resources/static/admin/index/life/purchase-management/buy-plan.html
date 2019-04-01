@@ -39,8 +39,7 @@
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs">
         <div class="layui-input-inline">
-            <input type="text" name="year" id="date1" placeholder="yyyy" autocomplete="off"
-                   class="layui-input">
+            <input type="text" name="year" id="date1" placeholder="yyyy" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
@@ -56,11 +55,10 @@
 <script type="text/html" id="toolBar1">
     <form class="layui-form layui-form-pane hidden-xs">
         <div class="layui-input-inline">
-            <input type="text" name="year" id="date2" placeholder="yyyy" autocomplete="off"
-                   class="layui-input">
+            <input type="text" name="yearBudget" id="date2" placeholder="yyyy" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <select name="bmId" lay-filter="bmId">
+            <select name="bmIdBudget" lay-filter="bmId1">
                 <option value="">全部部门</option>
             </select>
         </div>
@@ -74,6 +72,7 @@
                 {
                     elem: "#table"
                     , height: 'full-75'
+                    , toolbar: "#toolBar"
                     , cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'bmName', title: '申购科室', minWidth: 150}
@@ -88,7 +87,6 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , where: {}
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -99,16 +97,16 @@
                     }
                     , done: function (obj) {
                     }
-                }
-                , {
+                },
+                {
                     elem: "#table1"
                     , height: 'full-75'
                     , toolbar: "#toolBar1"
                     , cols: [[
                         {type: 'checkbox'}
-                        , {field: 'bmName', title: '申购科室', width: '35%', minWidth: 200}
-                        , {field: 'ysy', title: '预算(元)', minWidth: 200}
-                        , {field: 'ysmy', title: '预算(美元)', minWidth: 250}
+                        , {field: 'bmNameBudget', title: '申购科室', width: '35%', minWidth: 200}
+                        , {field: 'ysyBudget', title: '预算(元)', minWidth: 200}
+                        , {field: 'ysmyBudget', title: '预算(美元)', minWidth: 250}
                     ]]
                     , url: "/lifeManage/selectSgYbghhyYearBudget"
                     , method: "POST"
@@ -116,7 +114,6 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , where: {}
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -136,7 +133,7 @@
                 {
                     url: "/lifeManage/selectSgYbghhyYearBudget",
                     type: "reload2",
-                    data: ["bmId", "year"]
+                    data: ["bmIdBudget", "yearBudget"]
                 }
             ]
         },
@@ -153,10 +150,17 @@
                     , type: "year"
                     , value: year
                     , format: "yyyy"
-                }],
+                }
+            ],
             val: {
                 filter: "forms",
                 select: [
+                    {
+                        filter: "bmId1",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    },
                     {
                         filter: "bmId",
                         ids: "bmId",

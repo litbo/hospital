@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -86,23 +84,7 @@ public class SgCheckServiceImpl implements SgCheckService {
         if (StringUtils.isNotBlank(check)){
             check = StateEnum.getMessageByCode(Integer.parseInt(check));
         }
-        Date cDate = null,pDate = null;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        if (StringUtils.isNotBlank(planDate)){
-            try {
-                pDate = simpleDateFormat.parse(planDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        if (StringUtils.isNotBlank(checkDate)){
-            try {
-                cDate = simpleDateFormat.parse(checkDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo<>(sgCheckMapper.getListByX(check,cDate,checkUser,pDate,planUser));
+        return new PageInfo<>(sgCheckMapper.getListByX(check,checkDate,checkUser,planDate,planUser));
     }
 }
