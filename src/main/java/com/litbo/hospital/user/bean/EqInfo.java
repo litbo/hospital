@@ -52,6 +52,8 @@ public class EqInfo {
     private Integer sbcsIdWxs;
     //部门id
     private String eqBmid;
+    //部门名称
+    private String eqBmName;
     //管理归口
     private String eqGlgk;
     //查询分类id  (设备分类)

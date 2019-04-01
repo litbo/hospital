@@ -79,4 +79,6 @@ public interface EqDao {
     List<EqPm> listPmTree();
     @SelectProvider(type = EqProvider.class , method = "listWFlEqByX")
     List<EqShowVo> listWFlEqByX(SelectFlEqVo selectFlEqVo);
+    @Select("SELECT bm_id FROM s_bm WHERE bm_name =#{bmName}")
+    String getBmIdByName(String bmName);
 }

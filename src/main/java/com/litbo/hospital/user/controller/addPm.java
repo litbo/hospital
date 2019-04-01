@@ -52,12 +52,13 @@ public class addPm {
             //工作表对象
             Sheet sheetAt = workbook.getSheetAt(0);
             Row row = sheetAt.getRow(0);
+            int startRow=1;
             int rowNum = sheetAt.getLastRowNum() + 1;
             short cellNum = row.getLastCellNum();
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids,startRow);
             //System.out.println(list);
             for (List<Object> objectList : lists) {
                 //System.out.println(objectList);
@@ -102,12 +103,13 @@ public class addPm {
             //工作表对象
             Sheet sheetAt = workbook.getSheetAt(0);
             Row row = sheetAt.getRow(0);
+            int startRow=1;
             int rowNum = sheetAt.getLastRowNum() + 1;
             short cellNum = row.getLastCellNum();
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
             List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
-            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum,ids,startRow);
             //System.out.println(list);
             for (List<Object> objectList : lists) {
                 //System.out.println(objectList);
