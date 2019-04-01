@@ -216,6 +216,17 @@
 
                 })
             });
+            //判断当前页面，标示当前页面并禁止点击
+            (function(){
+                var page = $.getUrlParam("p");
+                var $a = $(".menu-btn").find("a[href='?p="+page+"']");
+                if($a.length>0){
+                    $a.css("background","#089ce20f");
+                    $a.on("click",function(){
+                        return false;
+                    });
+                }
+            })();
         })
     });
 
@@ -240,6 +251,7 @@
                 value:0
             });
         }*/
+
 
         //判断主页(welcome.html)点击时渲染是否正确，不正确重载主页
         $("#refresh_home").click(function(){
