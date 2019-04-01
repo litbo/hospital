@@ -32,8 +32,12 @@ public class EqInfo {
     private String eqXh;
     //资金来源id
     private String zjlyId;
+    //资金来源name
+    private String eqZjlyName;
     //计量单位id
     private String eqJldwId;
+    //计量单位name
+    private String eqJldwName;
     //单价
     private BigDecimal eqPrice;
     //台账类别
@@ -58,6 +62,8 @@ public class EqInfo {
     private String eqGlgk;
     //查询分类id  (设备分类)
     private String eqCxflId;
+    //查询分类name
+    private String eqCxflName;
     //启用时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")

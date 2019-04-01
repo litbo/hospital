@@ -176,9 +176,9 @@ public class ImportExcelUtil {
         ids.add(6);
         ids.add(7);
         ids.add(10);
-        ids.add(17);
         ids.add(18);
-        ids.add(22);
+        ids.add(19);
+        ids.add(23);
 
         try {
             inputStream = new FileInputStream(file);

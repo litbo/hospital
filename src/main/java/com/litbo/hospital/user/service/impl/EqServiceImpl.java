@@ -164,8 +164,8 @@ public class EqServiceImpl implements EqService {
         ids.add(7);
         ids.add(10);
         ids.add(17);
-        ids.add(18);
-        ids.add(22);
+        ids.add(19);
+        ids.add(23);
         try {
             inputStream = new ByteArrayInputStream(file.getBytes());
             workbook = WorkbookFactory.create(inputStream);
@@ -188,6 +188,15 @@ public class EqServiceImpl implements EqService {
                 EqInfo eqInfo = parseMap2Object(map,EqInfo.class);
                 if(eqInfo.getEqBmName()!=null){
                     eqInfo.setEqBmid(eqDao.getBmIdByName(eqInfo.getEqBmName()));
+                }
+                if(eqInfo.getEqJldwName()!=null){
+                    eqInfo.setEqJldwId(eqDao.getJldwId(eqInfo.getEqJldwName()));
+                }
+                if(eqInfo.getEqCxflName()!=null) {
+                    eqInfo.setEqCxflId(eqDao.getCxflId(eqInfo.getEqCxflName()));
+                }
+                if(eqInfo.getEqZjlyName()!=null){
+                    eqInfo.setZjlyId(eqDao.getZjlyId(eqInfo.getEqZjlyName()));
                 }
                 //初始化设备流水号
                 eqInfo.setEqId(setLsh());
