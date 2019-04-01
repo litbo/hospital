@@ -1135,7 +1135,7 @@ action = func = {
             var table = layui.table;
             table.on("toolbar(" + value.filter + ")", function (obj) {
                 var ck = table.checkStatus(value.id || obj.config.id );//获取已选中数据
-                console.log("======normalBegin=====",value);
+                //console.log("======normalBegin=====",value);
                 //按钮匹配
                 if (obj.event === value.event) {
                     func.sendTo(value,ck,table);
@@ -1206,7 +1206,12 @@ action = func = {
                 //不删除数据则直接发送数据
                 subUp(value)
             } else {
-                var showMsg = value.show|| "确定要删除这" + ck.data.length + "条数据吗？";
+                var showMsg = "确定要删除这" + ck.data.length + "条数据吗？";
+                if(value.show && Type(value.show) === "string"){
+                    showMsg = value.show;
+                } else if(Type(value.show) === "array"){
+                    showMsg = value.show[0]+ ck.data.length + value.show[1];
+                }
                 layer.confirm(showMsg, function (index) {
                     //获取除去要删除的数据后的数据
                     if(!value.del || value.del === true ){

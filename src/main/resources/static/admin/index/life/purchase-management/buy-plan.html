@@ -100,6 +100,7 @@
                 },
                 {
                     elem: "#table1"
+                    ,id:"table1"
                     , height: 'full-75'
                     , toolbar: "#toolBar1"
                     , cols: [[
@@ -128,11 +129,13 @@
                 {
                     url: "/lifeManage/selectSgYbghhyYearPurchase",
                     type: "reload1",
+                    tid:"table",
                     data: ["bmId", "bh", "year"]
                 },
                 {
                     url: "/lifeManage/selectSgYbghhyYearBudget",
                     type: "reload2",
+                    tid:"table1",
                     data: ["bmIdBudget", "yearBudget"]
                 }
             ]
