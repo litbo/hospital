@@ -27,6 +27,7 @@
 </head>
 
 <body>
+
 <fieldset class="layui-elem-field layui-field-title">
     <legend>分类标准 WS/T118-1999</legend>
 </fieldset>
@@ -38,8 +39,8 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">二维码</a>
-        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">设备卡</a>
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="qrcode">二维码</a>
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="eqCard">设备卡</a>
     </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -140,6 +141,28 @@
                         }
                     }
                     , done: function (obj) {
+                        tableFunc({
+                            tools:[
+                                {
+                                    event:"qrcode",
+                                    tool:"toolbar",
+                                    type:2,
+                                    content:"./child/QRshow.html",
+                                    before:function(obj,cs){
+                                        if(cs.data.length === 0){
+                                            putMsg({
+                                                alert:"请至少选择一条数据！"
+                                            });
+                                            return false;
+                                        }
+                                        layui.sessionData("qr",{
+                                            key:"d",
+                                            value:cs
+                                        })
+                                    }
+                                }
+                            ]
+                        })
                     }
                 }
             ]

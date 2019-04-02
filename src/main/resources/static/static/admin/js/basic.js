@@ -969,7 +969,9 @@ action = func = {
                     }
                     //创建一个新的副本（强制切断联系，避免修改原数据）
                     var newJ = JSON.parse(JSON.stringify(vas));
-                    newJ.content = showContent;
+                    if(showContent){
+                        newJ.content = showContent;
+                    }
                     //若允许弹出则弹出
                     openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
