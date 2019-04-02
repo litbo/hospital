@@ -315,17 +315,17 @@
                     }
                 }
             });
-       /*     $.ajax({
-            /!*    url: "/ggxz/listShowGg",*!/
+            $.ajax({
+                url: "/ggxz/listGgxzs",
                 success: function (res) {
                     if (res.code === 0) {
                         //var list = ["list", "list", "list"];
                         //for (var c = 0; c < list.length; c++) {
-                        addData(h_name[2], res.data[list], "ggbt", "url", "ggnr");
+                        addData(h_name[2], res.data.list, "wjmc", "url", "scrq");
                         //}
                     }
                 }
-            });*/
+            });
 
             //addData(h_name[1],data.public);
             function addData(name, d, item, src, time) {
