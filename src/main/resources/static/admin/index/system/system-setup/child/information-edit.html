@@ -157,13 +157,6 @@
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label" style="height:46px;line-height:30px;">第三方维修商</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" >选择</button>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
                                     <label class="layui-form-label">注册证名称</label>
                                     <div class="layui-input-block">
                                         <input type="text" name="eqZczmc" autocomplete="off" class="layui-input">
@@ -360,28 +353,6 @@
                             <div class="layui-row">
                                 <div class="col-xs-12">
                                     <fieldset class="layui-elem-field layui-field-title">
-                                        <legend>设备配置信息</legend>
-                                    </fieldset>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="layui-form-item" pane style="margin-bottom:-10px;">
-                                        <label class="layui-form-label col-xs-12" style="padding:8px 10px!important">设备配置信息</label>
-                                        <div class="layui-input-block">
-                                            <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="addNew"><i
-                                                    class="fas fa-plus"></i>&nbsp;添加
-                                            </button>
-                                            <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table" id="delNew" ><i
-                                                    class="fas fa-trash-alt"></i>&nbsp;删除
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <table id="table" lay-filter="table1"></table>
-                                </div>
-                            </div>
-
-                            <div class="layui-row">
-                                <div class="col-xs-12">
-                                    <fieldset class="layui-elem-field layui-field-title">
                                         <legend>安装环境及要求</legend>
                                     </fieldset>
                                 </div>
@@ -456,7 +427,7 @@
                     }
                 },
                 form:{
-                    url:"/eq/addEq",
+                    url:"/eq/updateEq",
                     type:"POST",
                     contentType:"application/json",
                     data:["eqName","eqZcbh","eqPmId","eqGg","eqXh","zjlyId",
@@ -619,10 +590,6 @@
                     $("select[name='eqCxflId']").val(String(data["eqCxflId"]).trim());
                     $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
                     $("select[name='eqPmId']").val(String(data["eqPmId"]).trim());
-                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
-                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
-                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
-                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
 
                     form.render("select");
                 }

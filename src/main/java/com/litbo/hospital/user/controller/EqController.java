@@ -113,7 +113,7 @@ public class EqController {
      * @return
      **/
     @RequestMapping("/updateEq")
-    public Result updateEq(EqInfo eqInfo) {
+    public Result updateEq(@RequestBody EqInfo eqInfo) {
 
         if (es.updateEq(eqInfo) > 0) {
             return Result.success();
