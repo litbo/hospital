@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.user.bean.SysGg;
 import com.litbo.hospital.user.vo.SysGgVo;
 
+import java.util.List;
+
 public interface GgService {
     int addGg(SysGg gg);
 
@@ -16,4 +18,7 @@ public interface GgService {
     PageInfo listWaits(int pageNum, int pageSize);
 
     Integer addGglb(String gglxName);
+
+    PageInfo listGgDesc(int pageNum, int pageSize);
+
 }

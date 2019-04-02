@@ -9,6 +9,8 @@ import com.litbo.hospital.user.vo.SysGgVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GgServiceImpl implements GgService {
 
@@ -48,5 +50,15 @@ public class GgServiceImpl implements GgService {
     public Integer addGglb(String gglxName) {
         Integer gglxId = ggDao.getLastId()+1;
         return ggDao.addGglb(gglxName,gglxId);
+    }
+
+    @Override
+    public PageInfo listGgDesc(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<SysGgVo> sysGgs= ggDao.listGgDesc();
+        for (SysGgVo sysGg : sysGgs) {
+            sysGg.setUrl("/gg/getEqById?id="+sysGg.getId());
+        }
+        return new PageInfo(sysGgs);
     }
 }

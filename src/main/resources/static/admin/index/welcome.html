@@ -277,7 +277,7 @@
             });
     });
     $(function () {
-        var h_name = [["need_do"], ["personal_record", "announce", "public_info"]], id = 0;
+        var h_name = [["need_do"], ["personal_record"],[ "announce"], ["public_info"]], id = 0;
         getData();
         $(".h_more").click(function () {
             var page = $.getUrlParam("p", 1);
@@ -305,16 +305,27 @@
                 }
             });
             $.ajax({
-                url: "/listTaskByUserId",
+                url: "/gg/listGgDesc",
                 success: function (res) {
                     if (res.code === 0) {
-                        var list = ["list", "list", "list"];
-                        for (var c = 0; c < list.length; c++) {
-                            addData(h_name[1], res.data[list[c]], "workName", "url", "creatTime");
-                        }
+                        //var list = ["list", "list", "list"];
+                        //for (var c = 0; c < list.length; c++) {
+                            addData(h_name[2], res.data.list, "ggbt", "url", "ggnr");
+                        //}
                     }
                 }
             });
+       /*     $.ajax({
+            /!*    url: "/ggxz/listShowGg",*!/
+                success: function (res) {
+                    if (res.code === 0) {
+                        //var list = ["list", "list", "list"];
+                        //for (var c = 0; c < list.length; c++) {
+                        addData(h_name[2], res.data[list], "ggbt", "url", "ggnr");
+                        //}
+                    }
+                }
+            });*/
 
             //addData(h_name[1],data.public);
             function addData(name, d, item, src, time) {

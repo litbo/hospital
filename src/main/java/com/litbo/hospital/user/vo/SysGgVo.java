@@ -12,6 +12,8 @@ public class SysGgVo {
 
     private String gglxName;
 
+    private String url;
+
     private String bmName;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date kssj;
