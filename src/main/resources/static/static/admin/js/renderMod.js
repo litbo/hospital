@@ -124,9 +124,6 @@ $(function () {
                                 form.val(val.filter, value);
 
                                 val.func && val.func(dat, form);
-                                /*if(val.datas !== undefined){
-                                    val.datas[res] = res.data;
-                                }*/
                             }
                         };
                         subUp(val.get)

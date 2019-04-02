@@ -38,6 +38,13 @@
             overflow: auto;
             float: left;
         }
+        .full{
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+        }
     </style>
 </head>
 
@@ -59,14 +66,14 @@
                         <input type="text" name="bmId" placeholder="请输入" class="layui-input hidden" autocomplete="off">
                     </div>
                 </div>
-                <div class="layui-form-item" pane>
+                <div class="layui-form-item glBan" pane>
                     <label class="layui-form-label">管理部门</label>
                     <div class="layui-input-block" style="line-height:40px">
                         <input type="radio" name="isGlbm" value="1" title="是" checked>
                         <input type="radio" name="isGlbm" value="0" title="否">
                     </div>
                 </div>
-                <div class="layui-form-item" pane>
+                <div class="layui-form-item glBan" pane>
                     <label class="layui-form-label">归口</label>
                     <div class="layui-input-block" style="line-height:40px">
                         <input type="radio" name="gkCode" value="0" title="医工" checked>
@@ -241,7 +248,7 @@
         , paseData = {}
         , ind = 0
         , nodes = {};
-
+    var formData = {};
     $.ajax({
         url: "/supervise/bmgl/listTreeBms",
         dataType: "JSON",
@@ -254,10 +261,10 @@
 
     //列表项点击事件
     function clickShow(event, treeId, treeNode) {
-        $("input[name='gkCode']").attr("disabled","disabled");
+        /*$("input[name='gkCode']").attr("disabled","disabled");
         $("input[name='isGlbm']").attr("disabled","disabled");
         $("input[name='gkCode']:checked").attr("disabled",false);
-        $("input[name='isGlbm']:checked").attr("disabled",false);
+        $("input[name='isGlbm']:checked").attr("disabled",false);*/
         layui.use("form", function () {
             var form = layui.form;
             readyData = treeNode;
@@ -323,23 +330,20 @@
     //关闭页面
     $("#canal").on("click", function () {
         var index = layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        console.log(ind);
+        //console.log(ind);
         layer.close(ind); //再执行关闭
         return false;
     });
 
     $("#addIn").on("click", function () {
-
         var nData = {
             bmAddr: $("*[name='bmAddr1']").val(),
             bmName: $("*[name='bmName1']").val(),
             bmTel: $("*[name='bmTel1']").val(),
             wxFlag: $("*[name='wxFlag1']").val(),
-            // userId: $("*[name='fzrName1']").val(),
-            userId:formData.radio[0]["userId"],
+            userId:paseData["pId"]["userId"],
             pBmId: paseData["pId"]["bmId"]
         };
-
         for(var name in nData){
             if(nData.hasOwnProperty(name)){
                 if(nData[name] === "" || nData[name] === undefined){
@@ -371,23 +375,30 @@
     $("#saveD").on("click", function () {
         var daa={};
         if(formData.radio){
-            daa=formData.radio[0]["bmId"];
+            daa=formData.radio[0]["userId"];
         }else if(formData.val){
-            console.log(formData)
-            daa=formData.val.bmId;
+            daa=formData.val.userId;
+        }else if(paseData && paseData.pid){
+            daa=paseData["pId"]["userId"];
+        }else if(readyData){
+            daa = readyData.userId;
         }
-
         var nData = {
             bmId: $("*[name='bmId']").val(),
             bmAddr: $("*[name='bmAddr']").val(),
             bmName: $("*[name='bmName']").val(),
             bmTel: $("*[name='bmTel']").val(),
             wxFlag: $("*[name='wxFlag']").val(),
-            // fzrName: $("*[name='fzrName']").val(),
             userId: daa
         };
-
-        console.log("save", nData);
+        for(var name in nData){
+            if(nData.hasOwnProperty(name)){
+                if(nData[name] === "" || !nData[name]|| JSON.stringify(nData[name]) === "{}"){
+                    layer.alert("请完整填写信息后再保存！");
+                    return false;
+                }
+            }
+        }
         $.ajax({
             url: "/supervise/bmgl/updateBm",
             type: "POST",
@@ -405,7 +416,6 @@
         return false;
     });
 
-    var formData = {};
     renderMod = {
         bind: {
             selectItem: [
@@ -429,7 +439,12 @@
                 }
             ]
         }
-    }
+    };
+
+    $(function(){
+        //遮罩DOM，禁止点击
+      $(".glBan").append($("<div>").attr("class","full"))
+    })
 
 </script>
 </body>
