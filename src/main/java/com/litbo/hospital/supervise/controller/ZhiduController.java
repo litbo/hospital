@@ -181,7 +181,7 @@ public class ZhiduController {
         FileInputStream inputStream = new FileInputStream(filePath);
         out = res.getOutputStream();
         int b = 0;
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[1024];k
         while ((b = inputStream.read(buffer)) != -1) {
             // 4.写到输出流(out)中
             out.write(buffer, 0, b);
@@ -195,12 +195,12 @@ public class ZhiduController {
 
     }
 
-    @RequestMapping( "/readDocOnline")
-    @ResponseBody
-    public Result readDocOnline(String url) throws Exception{
-        PoiWordToHtml.PoiWord07ToHtml(url);
-        return Result.success();
-    }
+//    @RequestMapping( "/readDocOnline")
+//    @ResponseBody
+//    public Result readDocOnline(String url) throws Exception{
+//        PoiWordToHtml.PoiWord07ToHtml(url);
+//        return Result.success();
+//    }
 
 }
 */
