@@ -409,13 +409,6 @@
                     if(formData.gys!==undefined){
                         ad.sbcsIdGys=formData.gys[0].sbcsIdGys
                     }
-                    /*      if(doJudg({
-                                  "undefined":[formData.radio,formData.eqMpzp,formData.eqSbzp]
-                              })){
-                              putMsg({
-                                  alert:"参数不完整"
-                              })
-                          }*/
                     return param = {
                         /*1:formData.radio[0].bmId,*/
                         1:ad.eqSbzp,
@@ -423,7 +416,8 @@
                         3:ad.eqPmId,
                         4:ad.sbcsIdWxs,
                         5:ad.sbcsIdScs,
-                        6:ad.sbcsIdGys
+                        6:ad.sbcsIdGys,
+                        7:$.getUrlParam("eqId")
                     }
                 },
                 form:{
@@ -442,7 +436,8 @@
                         3:"eqPmId",
                         4:"sbcsIdWxs",
                         5:"sbcsIdScs",
-                        6:"sbcsIdGys"
+                        6:"sbcsIdGys",
+                        7:"eqId"
                     },
                     reload:true
                     /*      success:function(){
@@ -583,7 +578,7 @@
                     }
                 ],
                 func:function(data,form){
-                    //console.log(data);
+                    console.log($.getUrlParam("eqId"));
                     $("select[name='zjlyId']").val(String(data["zjlyId"]).trim());
                     $("select[name='eqBmid']").val(String(data["eqBmid"]).trim());
                     $("select[name='eqJldwId']").val(String(data["eqJldwId"]).trim());
@@ -637,9 +632,6 @@
 
             ]
         }
-
-
-
     }
 </script>
 </body>

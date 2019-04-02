@@ -55,7 +55,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">品名<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqPmName" placeholder="请选择"  lay-verify="require" autocomplete="off" disabled class="layui-input" style="height:46px;">
+                                        <input type="text" name="eqPmName" autocomplete="off" disabled class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -67,7 +67,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修期开始时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqBxkssj" id="date"  placeholder="2018-12-04" autocomplete="off" class="layui-input">
+                                        <input type="text" name="eqBxkssj" id="date" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -97,7 +97,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">单价<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqPrice" autocomplete="off" class="layui-input" placeholder="3000" disabled>
+                                        <input type="text" name="eqPrice" autocomplete="off" class="layui-input" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -124,27 +124,27 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">启用日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqQysj" id="date1"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
+                                        <input type="text" name="eqQysj" id="date1" autocomplete="off"  class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修期结束时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqBxjssj" id="date2"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
+                                        <input type="text" name="eqBxjssj" id="date2" autocomplete="off"  class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label" style="height:46px;line-height:30px;">维修商</label>
+                                    <label class="layui-form-label">维修商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="wxsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="wxsName" autocomplete="off" disabled class="layui-input" >
                                     </div>
                                 </div>
-                                <div class="layui-form-item">
+                                <!--<div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">第三方维修商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="title" autocomplete="off" disabled class="layui-input">
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">注册证名称</label>
                                     <div class="layui-input-block">
@@ -169,7 +169,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">生产商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="scsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="scsName" autocomplete="off" disabled class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -193,22 +193,19 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">配置</label>
                                     <div class="layui-input-block">
-                                        <select name="eqPz">
-                                            <option value="标配">标配</option>
-                                            <option value="选配">选配</option>
-                                        </select>
+                                        <input type="text" name="eqPz" autocomplete="off" class="layui-input" disabled>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用年限(月)</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqSynx" autocomplete="off" class="layui-input" placeholder="60" disabled>
+                                        <input type="text" name="eqSynx" autocomplete="off" class="layui-input" disabled>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">供应商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="gysName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="gysName" autocomplete="off" disabled class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -226,7 +223,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用部门负责人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqSybmfzr" disabled autocomplete="off" class="layui-input" disabled>
+                                        <input type="text" name="eqSybmfzr" disabled autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                             </div>
@@ -247,11 +244,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">值班类型</label>
                                     <div class="layui-input-block">
-                                        <select name="eqZblx" lay-filter="">
-                                            <option value="白班">白班</option>
-                                            <option value="夜班">夜班</option>
-                                            <option value="全天">全天</option>
-                                        </select>
+                                        <input type="text" class="layui-input" name="eqZblx" autocomplete="off" placeholder="0" disabled>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -309,14 +302,7 @@
                                     <div class="layui-form-item" pane>
                                         <label class="layui-form-label">设备照片</label>
                                         <div class="layui-input-block">
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp">选择文件</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item" pane>
-                                        <label class="layui-form-label">预览</label>
-                                        <div class="layui-input-block">
-                                            <div class="img_show">
-                                            </div>
+                                            <img src="#" id="eqImg" />
                                         </div>
                                     </div>
                                 </div>
@@ -324,20 +310,13 @@
                                     <div class="layui-form-item" pane>
                                         <label class="layui-form-label">铭牌照片</label>
                                         <div class="layui-input-block">
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="mpzp">选择文件</button>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item" pane>
-                                        <label class="layui-form-label">预览</label>
-                                        <div class="layui-input-block">
-                                            <div class="img_show1">
-                                            </div>
+                                            <img src="#" id="paImg" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="layui-row">
+                            <!--<div class="layui-row">
                                 <div class="col-xs-12">
                                     <fieldset class="layui-elem-field layui-field-title">
                                         <legend>设备配置信息</legend>
@@ -357,7 +336,7 @@
                                     </div>
                                     <table id="table" lay-filter="table1"></table>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="layui-row">
                                 <div class="col-xs-12">
@@ -366,18 +345,13 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="layui-form-item" pane>
+                                    <div class="layui-form-item layui-textarea" pane>
                                         <label class="layui-form-label">安装环境及要求</label>
                                         <div class="layui-input-block">
                                             <textarea class="layui-textarea" name="eqAzhjyq" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="layui-row">
-                            <div class="col-xs-12">
-                                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="submit">提 交</button>
                             </div>
                         </div>
                     </div>
@@ -395,7 +369,6 @@
     formData={};
     renderMod={
         form:{
-
             submit:{
                 filter:"submit",//可以不写
                 before:function(){
@@ -529,7 +502,6 @@
                 }
             ],
             val: {
-
                 get:{
                     url:"/eq/getEqById",
                     data:{
@@ -562,7 +534,15 @@
                         text: "bmName",
                         url: "/supervise/bmgl/listBms2"
                     }
-                ]
+                ],
+                func:function(data,form){
+                    console.log(data);
+                    console.log($.getUrlParam("eqId"));
+                    $("#eqImg").attr("src",data.eqSbzp);
+                    $("#paImg").attr("src",data.eqSbzp);
+                    //$("select[name='eqBmid']").val(String(data["eqBmid"]).trim());
+                    //form.render("select");
+                }
             }
         },
         bind:{

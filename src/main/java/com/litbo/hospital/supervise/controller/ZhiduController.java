@@ -1,3 +1,4 @@
+/*
 package com.litbo.hospital.supervise.controller;
 
 import com.github.pagehelper.PageInfo;
@@ -202,3 +203,4 @@ public class ZhiduController {
     }
 
 }
+*/
