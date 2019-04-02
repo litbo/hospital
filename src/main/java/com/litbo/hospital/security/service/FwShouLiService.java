@@ -19,7 +19,7 @@ public interface FwShouLiService {
      * @param userId
      * @return
      */
-    public FwShouLiIndexVo shouLiIndexVo(String fwId, String userId);
+    public FwShouLiIndexVo shouLiIndexVo(String fwId, String userId) throws Exception;
 
     /**
      * 初始化受理页面 (过时)

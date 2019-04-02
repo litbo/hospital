@@ -95,4 +95,10 @@ public interface FwBaoxiuDao {
     public List<BaoxiuEqVo> findBaoxiuEq(@Param("userId") String userId,@Param("bmName") String bmName,@Param("eqName") String eqName);
     @SelectProvider(type = FwBaoxiuProvider.class,method = "listFwBaoxiuVo")
     List<ListFwBaoxiuVo> listFwBaoxiuVo(Integer status);
+
+    @Update("update eq_info set eq_syzt = '维修' where eq_id = #{eqId}")
+    public void updateEqStatus(String eqId);
+
+    @Update("update eq_info set eq_syzt = '在用' where eq_id = #{eqId}")
+    public void updateEqStatussy(String eqId);
 }
