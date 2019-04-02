@@ -375,4 +375,5 @@ public class ZhiduServiceImpl implements ZhiduService {
         String url = UploadFile.upload(filePath,file);
         return url;
     }
+
 }

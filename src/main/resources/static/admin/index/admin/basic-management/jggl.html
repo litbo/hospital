@@ -90,20 +90,6 @@
                                autocomplete="off">
                     </div>
 
-                    &lt;!&ndash;<div class="layui-form-item" pane>&ndash;&gt;
-                    &lt;!&ndash;<label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>&ndash;&gt;
-                    &lt;!&ndash;<div class="layui-input-block">&ndash;&gt;
-                    &lt;!&ndash;<button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>&ndash;&gt;
-                    &lt;!&ndash;</div>&ndash;&gt;
-                    &lt;!&ndash;</div>&ndash;&gt;
-                    &lt;!&ndash;<div class="layui-form-item">&ndash;&gt;
-                    &lt;!&ndash;<label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>&ndash;&gt;
-                    &lt;!&ndash;<div class="layui-input-block">&ndash;&gt;
-                    &lt;!&ndash;<input type="text" name="userXm66" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">&ndash;&gt;
-                    &lt;!&ndash;</div>&ndash;&gt;
-
-                    &lt;!&ndash;</div>&ndash;&gt;
-
                 </div>-->
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>
@@ -268,7 +254,10 @@
 
     //列表项点击事件
     function clickShow(event, treeId, treeNode) {
-        // console.log(arguments);
+        $("input[name='gkCode']").attr("disabled","disabled");
+        $("input[name='isGlbm']").attr("disabled","disabled");
+        $("input[name='gkCode']:checked").attr("disabled",false);
+        $("input[name='isGlbm']:checked").attr("disabled",false);
         layui.use("form", function () {
             var form = layui.form;
             readyData = treeNode;
@@ -340,15 +329,17 @@
     });
 
     $("#addIn").on("click", function () {
-        console.log(paseData);
+
         var nData = {
             bmAddr: $("*[name='bmAddr1']").val(),
             bmName: $("*[name='bmName1']").val(),
             bmTel: $("*[name='bmTel1']").val(),
             wxFlag: $("*[name='wxFlag1']").val(),
-            userId: $("*[name='fzrName1']").val(),
+            // userId: $("*[name='fzrName1']").val(),
+            userId:formData.radio[0]["userId"],
             pBmId: paseData["pId"]["bmId"]
         };
+
         for(var name in nData){
             if(nData.hasOwnProperty(name)){
                 if(nData[name] === "" || nData[name] === undefined){
@@ -378,14 +369,22 @@
     });
 
     $("#saveD").on("click", function () {
+        var daa={};
+        if(formData.radio){
+            daa=formData.radio[0]["bmId"];
+        }else if(formData.val){
+            console.log(formData)
+            daa=formData.val.bmId;
+        }
+
         var nData = {
             bmId: $("*[name='bmId']").val(),
             bmAddr: $("*[name='bmAddr']").val(),
             bmName: $("*[name='bmName']").val(),
             bmTel: $("*[name='bmTel']").val(),
             wxFlag: $("*[name='wxFlag']").val(),
-            fzrName: $("*[name='fzrName']").val(),
-            userId: $("*[name='userId']").val()
+            // fzrName: $("*[name='fzrName']").val(),
+            userId: daa
         };
 
         console.log("save", nData);
@@ -431,6 +430,7 @@
             ]
         }
     }
+
 </script>
 </body>
 </html>
