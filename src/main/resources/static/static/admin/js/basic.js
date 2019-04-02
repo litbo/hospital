@@ -909,6 +909,7 @@ action = func = {
                     tool = vas.tool || "tool",
                     tableOn = tool + '(' + filt + ')',
                     baseUrl = vas.content,
+                    showContent = "",
                     num =0,
                     openT = true;
                 //绑定表格事件
@@ -954,9 +955,9 @@ action = func = {
                     var data = obj.data;
                     //当存在dataUrl时则填充进URL参数中
                     if (vas.dataUrl && vas.dataUrl !== false) {
-                        vas.content += "?";
+                        showContent = baseUrl + "?";
                         for (var i = 0; i < vas.dataUrl.length; i++) {
-                            vas.content += vas.dataUrl[i] + "=" + data[vas.dataUrl[i]] + "&";
+                            showContent += vas.dataUrl[i] + "=" + data[vas.dataUrl[i]] + "&";
                         }
                     }
                     //判断是否允许自定义layer窗口弹出
@@ -966,13 +967,15 @@ action = func = {
                         var nnf = vas.before(obj,checkStatus);
                         openT = (nnf !== false);
                     }
+                    //创建一个新的副本（强制切断联系，避免修改原数据）
+                    var newJ = JSON.parse(JSON.stringify(vas));
+                    newJ.content = showContent;
                     //若允许弹出则弹出
-                    //console.log("showing",vas);
-                    openT && layOpen(vas);
+                    openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
                     vas.func && vas.func(obj, checkStatus);
                     //还原url
-                    //vas.content = baseUrl;
+                    //vas.content = "";
                 });
             });
         }
