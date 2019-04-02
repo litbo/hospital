@@ -27,4 +27,6 @@ public interface GgDao {
     Integer getLastId();
     @Delete("delete from sys_gg where id =#{id}")
     Integer delGg(int parseInt);
+    @SelectProvider(type = GgProvider.class , method = "listGgDesc")
+    List<SysGgVo> listGgDesc();
 }
