@@ -180,9 +180,11 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Override
     public void updateFwWxqs(String userId,String fwId) {
         fwWeixiuDao.updateFwWxsh(userId,fwId);
+        FwBaoxiu fwBaoxiu = fwBaoxiuDao.findFwBaoxiu(fwId);
         fwBaoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_WX_OVER.getCode());
         FwLcjl fwLcjl = new FwLcjl(userId,new Date(),fwId,EnumProcess.FW_WX_QR.getMessage());
         fwLcjlDao.insertFwLcjl(fwLcjl);
+        fwBaoxiuDao.updateEqStatussy(fwBaoxiu.getEqId());
     }
 
 
