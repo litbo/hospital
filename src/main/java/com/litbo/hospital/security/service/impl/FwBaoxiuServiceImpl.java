@@ -91,6 +91,8 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
         fwLcjl.setCreatTime(new Date());
         fwLcjl.setLc(EnumProcess.FW_GZ_BX.getMessage());
         fwLcjlDao.insertFwLcjl(fwLcjl);
+        //设置报修状态
+        fwBaoxiuDao.updateEqStatus(fwBaoxiu.getEqId());
     }
 
     @Override

@@ -49,7 +49,11 @@ public class FwShouLiServiceImpl implements FwShouLiService {
     private BmDao bmDao;
 
     @Override
-    public FwShouLiIndexVo shouLiIndexVo(String fwId, String userId) {
+    public FwShouLiIndexVo shouLiIndexVo(String fwId, String userId) throws Exception{
+        int size = fwShouLiDao.getShouliByFwId(fwId);
+        if(size > 0){
+            throw new RuntimeException("该设备已被维修人员处理");
+        }
         FwShouLiIndexVo shouLiIndexVo = fwShouLiDao.shouLiIndexVo(fwId);
         shouLiIndexVo.setSlrId(userId);
         shouLiIndexVo.setSlrName(empDao.getUserXmById(userId));

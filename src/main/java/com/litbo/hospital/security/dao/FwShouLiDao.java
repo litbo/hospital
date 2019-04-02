@@ -16,6 +16,9 @@ import java.util.List;
 @Mapper
 public interface FwShouLiDao {
 
+    @Select("SELECT COUNT(*) FROM fw_shouli where id = #{fwId}")
+    public int getShouliByFwId(String fwId);
+
 
     @Insert("insert into fw_shouli (id, xy_status, gztj_status, \n" +
             "      sl_time, wxfs, slr_id, \n" +
