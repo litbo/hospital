@@ -16,4 +16,5 @@ public class BmsTreeVO {
     private String isGlbm;
     private String gkCode;
     private String fzrName;
+    private String userXm;
 }

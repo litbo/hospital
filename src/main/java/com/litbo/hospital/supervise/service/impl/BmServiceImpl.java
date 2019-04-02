@@ -502,6 +502,7 @@ public class BmServiceImpl implements BmService {
     public List<BmsTreeVO> listTreeBms() {
         List<BmsTreeVO> vos  =  bmDao.listTreeBms();
         for (BmsTreeVO treeVO :vos){
+            treeVO.setUserXm(treeVO.getFzrName());
             if(treeVO.getBmId().startsWith("02")){
                 treeVO.setIsGlbm("1");
             }else{

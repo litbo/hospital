@@ -1,6 +1,7 @@
 package com.litbo.hospital.supervise.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.poi.PoiWordToHtml;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
@@ -191,6 +192,13 @@ public class ZhiduController {
             out.close();
         }
 
+    }
+
+    @RequestMapping( "/readDocOnline")
+    @ResponseBody
+    public Result readDocOnline(String url) throws Exception{
+        PoiWordToHtml.PoiWord07ToHtml(url);
+        return Result.success();
     }
 
 }

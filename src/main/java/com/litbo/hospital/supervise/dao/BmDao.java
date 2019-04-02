@@ -72,7 +72,7 @@ public interface BmDao {
 
     @Select("   SELECT bm.bm_id,bm.bm_name,bm.bm_tel,bm.bm_addr," +
             "   bm.obm_id,bm.p_bm_id,bm.wx_flag,bm.xbm_flag ,bm.user_id,ep.user_xm as fzrName " +
-            "   from s_bm bm LEFT JOIN s_emp ep ON (bm.user_id=ep.user_id)")
+            "   from s_bm bm LEFT JOIN s_emp ep ON (bm.user_id=ep.user_id) where bm.bm_id!='0000000000'")
     List<BmsTreeVO> listTreeBms();
 
     @Update("update s_bm set bm_name=#{bmName},wx_flag=#{wxFlag},user_id=#{userId}, bm_tel=#{bmTel},bm_addr=#{bmAddr}  where bm_id=#{bmId}")
