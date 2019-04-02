@@ -26,6 +26,8 @@ public class EqInfo {
     private String eqZcbh;
     //品名id
     private String eqPmId;
+    //品名name
+    private String eqPmName;
     //设备规格
     private String eqGg;
     //设备型号
@@ -104,6 +106,8 @@ public class EqInfo {
     private BigDecimal eqZjl;
     //建档人
     private String userId;
+    //建档人
+    private String userName;
     //建档日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")

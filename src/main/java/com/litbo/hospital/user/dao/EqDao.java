@@ -39,7 +39,7 @@ public interface EqDao {
     EqInfo getEqById(String id);
 
     @SelectProvider(type = EqProvider.class,method = "getEqById")
-    EqVo getEqWithNameById(String id);
+    EqInfo getEqWithNameById(String id);
 
     @Update("UPDATE eq_info SET eq_pm_id =#{eqPmId},eq_sbbh =#{sbbh},eq_syzt=#{eqSyzt} WHERE eq_id =#{eqId}")
     Integer setPm(@Param("eqPmId") String eqPmId,@Param("eqId") String eqId,@Param("sbbh") String sbbh,@Param("eqSyzt")String syzt);

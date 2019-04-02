@@ -116,7 +116,7 @@ public class EqProvider {
                 "      #{eqSynx,jdbcType=INTEGER}, #{sbcsIdGys,jdbcType=INTEGER}, #{eqHtbh,jdbcType=VARCHAR}, \n" +
                 "      #{eqCgrq,jdbcType=DATE}, #{eqSybmfzr,jdbcType=VARCHAR}, #{eqAzrq,jdbcType=DATE}, \n" +
                 "      #{eqAzwz,jdbcType=VARCHAR}, #{eqZblx,jdbcType=CHAR}, #{eqZjl,jdbcType=DECIMAL}, \n" +
-                "      #{userId,jdbcType=VARCHAR}, #{eqJdrq,jdbcType=DATE}, #{eqJzbh,jdbcType=VARCHAR}, \n" +
+                "      #{userName,jdbcType=VARCHAR}, #{eqJdrq,jdbcType=DATE}, #{eqJzbh,jdbcType=VARCHAR}, \n" +
                 "      #{eqDabh,jdbcType=VARCHAR}, #{eqYq,jdbcType=VARCHAR}, #{eqSbzp,jdbcType=VARCHAR}, \n" +
                 "      #{eqMpzp,jdbcType=VARCHAR}, #{qdfsId,jdbcType=INTEGER}, #{gzlbId,jdbcType=INTEGER}, \n" +
                 "      #{eqUsewater,jdbcType=CHAR}, #{eqDcysl,jdbcType=INTEGER}, #{eqEdgl,jdbcType=INTEGER}, \n" +
@@ -265,6 +265,9 @@ public class EqProvider {
                 }
                 if(eqInfo.getUserId()!=null) {
                     SET("user_id=#{userId}");
+                }
+                if(eqInfo.getUserName()!=null) {
+                    SET("user_id=#{userName}");
                 }
 
                 if(eqInfo.getEqJdrq()!=null) {
@@ -453,14 +456,17 @@ public class EqProvider {
                 "e.eq_dabh,\n" +
                 "e.eq_yq,\n" +
                 "e.eq_bz,\n" +
+                "e.sbcs_id_scs," +
+                "e.sbcs_id_wxs," +
+                "e.sbcs_id_gys," +
                 "e.eq_sbzp,\n" +
                 "e.eq_mpzp,\n" +
                 "e.eq_azhjyq,\n" +
                 "e.eq_dcysl,\n" +
                 "e.eq_edgl,\n" +
                 "j.eq_jldw_name,e.eq_jldw_id,\n" +
-                "c.eq_cxfl_name,\n" +
-                "u.user_name,\n" +
+                "e.eq_cxfl_id,c.eq_cxfl_name,\n" +
+                "e.user_id as userName,\n" +
                 "g.gzlb_name,\n" +
                 "e.eq_usewater,\n" +
                 "q.qdfs_name\n" +

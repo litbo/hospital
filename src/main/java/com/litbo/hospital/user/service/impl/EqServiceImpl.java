@@ -324,7 +324,7 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
-    public EqVo getEqById(String eqId) {
+        public EqInfo getEqById(String eqId) {
 
         return eqDao.getEqWithNameById(eqId);
     }

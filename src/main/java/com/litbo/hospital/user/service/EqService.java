@@ -31,7 +31,7 @@ public interface EqService {
 
     Integer updateEq(EqInfo eqInfo);
 
-    EqVo getEqById(String eqId);
+    EqInfo getEqById(String eqId);
 
     PageInfo listPms(int pageNum, int pageSize);
 

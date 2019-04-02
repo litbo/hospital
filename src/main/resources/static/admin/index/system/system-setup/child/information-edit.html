@@ -34,7 +34,7 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <div class="layui-collapse" style="margin-top:20px;">
-            <form class="layui-form layui-form-pane" action="">
+            <form class="layui-form layui-form-pane" action="" lay-filter="eqForm">
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">基本信息</h2>
                     <div class="layui-colla-content layui-show">
@@ -93,6 +93,7 @@
                                     <label class="layui-form-label">经费来源</label>
                                     <div class="layui-input-block">
                                         <select name="zjlyId" lay-filter="zjly">
+                                            <option></option>
                                         </select>
                                     </div>
                                 </div>
@@ -282,7 +283,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">建档人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="userId" class="layui-input" autocomplete="off" >
+                                        <input type="text" name="userName" class="layui-input" autocomplete="off" >
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -462,7 +463,7 @@
                         "eqJldwId","eqPrice","eqTzlb","eqBxkssj","eqBxjssj","eqBxxysj",
                         "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",
                         "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
-                        "eqZblx","eqZjl","userId","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
+                        "eqZblx","eqZjl","userName","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
                         "eqMpzp","eqAzhjyq"],
                     param:{
                         1:"eqSbzp",
@@ -493,31 +494,31 @@
             date:[
                 {
                     elem:'#date',
-                    value:today
+                    value:today0
                 },
                 {
                     elem:'#date1',
-                    value:today
+                    value:today0
                 },
                 {
                     elem:'#date2',
-                    value:today
+                    value:today0
                 },
                 {
                     elem:'#date3',
-                    value:today
+                    value:today0
                 },
                 {
                     elem:'#date4',
-                    value:today
+                    value:today0
                 },
                 {
                     elem:'#date5',
-                    value:today
+                    value:today0
                 },
                 {
                     elem:'#date6',
-                    value:today
+                    value:today0
                 }
             ],
             file:[
@@ -535,18 +536,18 @@
                             $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
                         })
                     },done:function(res,index,upload){
-                        if(res.code===0){
-                            formData.eqSbzp=res.data
-                            layer.msg('选择成功！', {
-                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
-                            });
-                        }
-                        console.log(arguments);
-                        return delete files[index];
-                    },error:function(index,upload){
-                        console.log("index:"+index);
-                        console.log("upload"+upload);
+                    if(res.code===0){
+                        formData.eqSbzp=res.data
+                        layer.msg('选择成功！', {
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        });
                     }
+                    console.log(arguments);
+                    return delete files[index];
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
+                }
                 },
                 {
                     elem:"#mpzp",
@@ -562,22 +563,28 @@
                             $(".img_show1").html($("<img>").attr({"src":result,"id":"show_img"}));
                         })
                     },done:function(res,index,upload){
-                        if(res.code===0){
-                            formData.eqMpzp=res.data
-                            layer.msg('选择成功！', {
-                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
-                            });
-                        }
-                        console.log(arguments);
-                        return delete files[index];
-                    },error:function(index,upload){
-                        console.log("index:"+index);
-                        console.log("upload"+upload);
+                    if(res.code===0){
+                        formData.eqMpzp=res.data
+                        layer.msg('选择成功！', {
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                        });
                     }
+                    console.log(arguments);
+                    return delete files[index];
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
+                }
                 }
             ],
             val: {
-                filter:"bmList",
+                get:{
+                    url:"/eq/getEqById",
+                    data:{
+                        eqId:$.getUrlParam("eqId")
+                    }
+                },
+                filter:"eqForm",
                 select: [
                     {
                         filter:"dwList",
@@ -603,7 +610,22 @@
                         text: "bmName",
                         url: "/supervise/bmgl/listBms2"
                     }
-                ]
+                ],
+                func:function(data,form){
+                    //console.log(data);
+                    $("select[name='zjlyId']").val(String(data["zjlyId"]).trim());
+                    $("select[name='eqBmid']").val(String(data["eqBmid"]).trim());
+                    $("select[name='eqJldwId']").val(String(data["eqJldwId"]).trim());
+                    $("select[name='eqCxflId']").val(String(data["eqCxflId"]).trim());
+                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
+                    $("select[name='eqPmId']").val(String(data["eqPmId"]).trim());
+                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
+                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
+                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
+                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
+
+                    form.render("select");
+                }
             }
         },
         bind:{
@@ -613,6 +635,7 @@
                     data:formData,
                     cb:"/eq/listPmsCols",
                     db:"/eq/listPms",
+                    se:"/eq/pmSe",
                     key:"radio",
                     name:"dtdt"
                 },
@@ -621,6 +644,7 @@
                     data:formData,
                     cb:"/cs/scsTitle",
                     db:"/cs/listScs",
+                    se:"/cs/listScsSe",
                     key:"scs",
                     name:"dtdt"
                 },
@@ -629,6 +653,7 @@
                     data:formData,
                     cb:"/cs/gysTitle",
                     db:"/cs/listGys",
+                    se:"/cs/listGysSe",
                     key:"gys",
                     name:"dtdt"
                 },
@@ -637,6 +662,7 @@
                     data:formData,
                     cb:"/cs/wxsTitle",
                     db:"/cs/listWxs",
+                    se:"/cs/listWxsSe",
                     key:"wxs",
                     name:"dtdt"
                 }
