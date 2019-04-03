@@ -506,7 +506,7 @@ $(function () {
                     //首次页面渲染后按钮事件绑定
                     $(".layui-table-tool .layui-btn").on('click', function () {
                         var type = $(this).data('type');
-                        console.log(type);
+                        //console.log(type);
                         active[type] ? active[type].call(this) : '';
                         return active[type] ? false : "";//存在type则阻止其他事件，否则不阻止
                     });

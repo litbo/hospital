@@ -947,11 +947,19 @@ action = func = {
                         openT = (nnf !== false);
                     }
                     //创建一个新的副本（强制切断联系，避免修改原数据）
-                    var newJ = JSON.parse(JSON.stringify(vas));
+                    var newJ = "";
+                    if(vas.type === 1){
+                        newJ = vas
+                    }else{
+                        newJ = JSON.parse(JSON.stringify(vas))
+                    }
+
 
                     if(showContent){
+                        console.log(1);
                         newJ.content = showContent;
                     }
+                    console.log("即将弹出",newJ);
                     //若允许弹出则弹出
                     openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
@@ -1263,7 +1271,9 @@ function tableFunc(fn) {
  */
 document.write("<script type='text/javascript' data-version='x2' src='/static/admin/layui/layui.js'></script>");
 document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/renderMod.js'></script>");
+document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/selectivizr-min.js'></script>");
 document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/>");
+
 
 window.onload = function () {
     //填充页面URL，便于调试页面
