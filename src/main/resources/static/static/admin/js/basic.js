@@ -948,9 +948,10 @@ action = func = {
                     }
 
                     //当无法正常获取URL的时候
-                    if (baseUrl === undefined && vas.content !== undefined) {
+                    //if (baseUrl === undefined && vas.content !== undefined) {
                         baseUrl = vas.content;
-                    }
+                    //}
+
                     //获得当前行数据
                     var data = obj.data;
                     //当存在dataUrl时则填充进URL参数中
@@ -969,6 +970,7 @@ action = func = {
                     }
                     //创建一个新的副本（强制切断联系，避免修改原数据）
                     var newJ = JSON.parse(JSON.stringify(vas));
+
                     if(showContent){
                         newJ.content = showContent;
                     }
@@ -976,6 +978,7 @@ action = func = {
                     openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
                     vas.func && vas.func(obj, checkStatus);
+
                     //还原url
                     //vas.content = "";
                 });
