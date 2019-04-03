@@ -49,7 +49,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">资产编号<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqZcbh" autocomplete="off" class="layui-input" lay-verify="required" placeholder="请输入...">
+                                        <input type="text" name="eqZcbh" autocomplete="off" class="layui-input" lay-verify="number" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -81,7 +81,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修响应时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqBxxysj" autocomplete="off" class="layui-input" placeholder="请输入..."  lay-verify="number">
+                                        <input type="number" name="eqBxxysj" autocomplete="off" class="layui-input" placeholder="请输入..." >
                                     </div>
                                 </div>
 
@@ -113,9 +113,9 @@
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">单价<span class="sign">*</span></label>
+                                    <label class="layui-form-label">单价<span class="sign"></span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqPrice" autocomplete="off" class="layui-input" placeholder="3000" lay-verify="number">
+                                        <input type="number" name="eqPrice" autocomplete="off" class="layui-input" placeholder="3000">
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">管理归口<span class="sign">*</span></label>
+                                    <label class="layui-form-label">管理归口<span class="sign"></span></label>
                                     <div class="layui-input-block">
                                         <select name="eqGlgk" lay-filter="">
                                             <option value="">请选择...</option>
@@ -238,7 +238,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用年限(月)</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqSynx" autocomplete="off" class="layui-input" placeholder="60">
+                                        <input type="number" name="eqSynx" autocomplete="off" class="layui-input" placeholder="60">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -295,7 +295,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">折旧率</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" name="eqZjl" autocomplete="off" placeholder="0" lay-verify="number">
+                                        <input type="number" class="layui-input" name="eqZjl" autocomplete="off" placeholder="0" >
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -488,7 +488,7 @@
                             "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",
                             "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
                             "eqZblx","eqZjl","userId","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
-                            "eqMpzp","eqAzhjyq"],
+                            "eqMpzp","eqAzhjyq","eqBz"],
                     param:{
                         1:"eqSbzp",
                         2:"eqMpzp",
@@ -518,27 +518,27 @@
             date:[
                 {
                     elem:'#date',
-                    value:today0
+                    value:false
                 },
                 {
                     elem:'#date1',
-                    value:today0
+                    value:false
                 },
                 {
                     elem:'#date2',
-                    value:today0
+                    value:false
                 },
                 {
                     elem:'#date3',
-                    value:today0
+                    value:false
                 },
                 {
                     elem:'#date4',
-                    value:today0
+                    value:false
                 },
                 {
                     elem:'#date5',
-                    value:today0
+                    value:false
                 },
                 {
                     elem:'#date6',
