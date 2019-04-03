@@ -310,7 +310,7 @@ $(function () {
 
                             //自定义是否需要阻止默认事件
                             var eBreak = true;//true -> 阻止 false -> 不阻止
-                            if (eve.break === false) {
+                            if (eve['break'] === false) {
                                 eBreak = false;
                             }
                             if (eBreak === true) {

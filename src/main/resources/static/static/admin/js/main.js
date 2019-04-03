@@ -5,6 +5,7 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         , mainLayout = $('#main-layout')
         , menu = []
         , mainMask = $('.main-mask');
+    element.render();
     //监听导航点击
     element.on('nav(leftNav)', function (elem) {
         var id = elem.attr('data-id')

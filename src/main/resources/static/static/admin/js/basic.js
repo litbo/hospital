@@ -388,6 +388,8 @@ function compareData(x, y) {
  * @return
  **/
 function markPage(text, time) {
+    //判断只在非IE时加载遮罩功能
+    if("\v"!=="v"){
     //如果页面中不存在定位元素则创建定位元素
     var $beg = $("#begin");
     var timer = null;
@@ -409,6 +411,8 @@ function markPage(text, time) {
             $beg.remove();
         }
     });
+    }
+
 }
 
 /**
@@ -497,30 +501,6 @@ function subUp(value, data, param) {
     var dataP = {}, valus = "";
     if (Type(value.data) === "array") {
         //dataP 提交的数据 valus 填写的表单name值
-        /*for (var i = 0; i < value.data.length; i++) {
-            //获取一个name值
-            valus = value.data[i];
-            //当data不存在时获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
-            if (!data) {
-                var inputValue = $("input[name=" + valus + "]").val();
-                if (inputValue) {
-                    dataP[valus] = inputValue;
-                } else if ($("select[name=" + valus + "]").val()) {
-                    dataP[valus] = $("select[name=" + valus + "]").val();
-                } else if ($("textarea[name=" + valus + "]").val()) {
-                    dataP[valus] = $("textarea[name=" + valus + "]").val();
-                } else if ($("input[type=radio][name=" + valus + "]").val()) {
-                    dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
-                } else if ($("input[type=checkbox][name=" + valus + "]").val()) {
-                    var $cks = $("input[type=checkbox][name=" + valus + "]");
-                    if ($cks[0].checked === true) {
-                        dataP[valus] = $cks.val();
-                    }
-                }
-            } else {
-                dataP[valus] = data.field[valus];
-            }
-        }*/
         dataP = getFormValue(value.data);
         //向data中直接添加附加数据
         if (value.add) {
@@ -545,11 +525,10 @@ function subUp(value, data, param) {
         }
     }
     //判断当前数据上传类型(默认以JQajax提交)
-    if (value.switch === "xhr") {//以原生JS形式异步提交数据(基本代码)
-        //if (value.data.file) {//！！！！！代码未完善！！！！！
-        //var formData = new FormData();
-        //formData.append(value.data.name, $(value.data.file)[0].files[0]);
-        //console.log(formData);
+    var switchs = value['switch'];
+    if (switchs === "xhr") {
+        //未进行完整测试，不建议使用
+        //以原生JS形式异步提交数据(基本代码)
         // XMLHttpRequest 对象
         var xhr = new XMLHttpRequest();
         xhr.open(value.method || "GET", value.url, value.async || true);
@@ -557,8 +536,7 @@ function subUp(value, data, param) {
             alert("上传完成!");
         };
         xhr.send(form);
-        //}
-    } else if (value.switch === "html") {//以HTML默认的方式提交数据
+    } else if (switchs === "html") {//以HTML默认的方式提交数据
         //使用HTML默认提交方式提交数据（使用新建内嵌框架实现不跳转新页面）
         //使用不可见iframe获取返回数据，但由于未知原因(暂未知)无法获取iframe内返回的数据，故目前只能提交则成功
         //form标签无需添加method和url，只需在数据中填写则可以自动渲染
@@ -790,7 +768,7 @@ function doJudg(value) {
         }
     }
     //若全都未匹配则返回false，表示全都符合要求
-    value.false && value.false();
+    value['false'] && value['false']();
     return false;
 }
 
