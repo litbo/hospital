@@ -5,8 +5,9 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         , mainLayout = $('#main-layout')
         , menu = []
         , mainMask = $('.main-mask');
-    element.render();
-    //监听导航点击
+    //导航重渲染
+    element.render("nav");
+    //监听左侧主导航点击
     element.on('nav(leftNav)', function (elem) {
         var id = elem.attr('data-id')
             ,url = elem.attr('data-url')
@@ -18,6 +19,8 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         if (isActive.length > 0) {
             //切换到选项卡
             element.tabChange('tab', id);
+            var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
+            $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
         } else {
             element.tabAdd('tab', {
                 title: text,
@@ -29,7 +32,7 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         }
         mainLayout.removeClass('hide-side');
     });
-    //监听导航点击
+    //监听右上角用户按钮导航点击
     element.on('nav(rightNav)', function (elem) {
         var navA = $(elem).find('a')
             ,id = navA.attr('data-id')
@@ -42,6 +45,8 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         if (isActive.length > 0) {
             //切换到选项卡
             element.tabChange('tab', id);
+            var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
+            $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
         } else {
             element.tabAdd('tab', {
                 title: text,
