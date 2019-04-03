@@ -44,7 +44,7 @@
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
                         <li class="layui-this">制度信息</li>
-                        <li id="wdsc">文档上传</li>
+                        <li id="wdsc">文档预览</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <input type="text" name="docUrl" class="layui-input" autocomplete="off" id="docUrl"   >
+            <input type="text" name="docUrl" class="layui-input" autocomplete="off" id="docUrl"   style="display: none">
             <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" lay-event="shlc" id="addNew"><i
                     class="fas"></i>&nbsp;审核流程详情
             </button>
@@ -294,16 +294,12 @@
 
         $("#viewFile").click(function(){
             var url=$('#docUrl').val();
-            $.ajax({
-                url:'/supervise/zdgl/getDocByUrl?url='+url,
-                type:'GET',
-                success:function(str){
-                    alert(str);
-                },
-                error:function (err){
-                    alert(err);
-                }
-            });
+            layOpen({
+                type:2,
+                content:'/supervise/zdgl/readDocOnline?url='+url,
+                area:["80%","80%"]
+            })
+
         });
 
     });
@@ -316,6 +312,8 @@
         $("#userXm").val(emp.userXm);
 
         var xx = $.getUrlParam('ztCzname');
+
+
         if (xx === "处长审核") {
             $("#nextShr").addClass("hidden");
             $("#syDays").removeClass("hidden");

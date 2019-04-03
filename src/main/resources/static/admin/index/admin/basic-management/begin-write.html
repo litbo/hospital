@@ -67,8 +67,8 @@
                     </div>
                     <div class="layui-tab-item">
                         <div class="layui-upload" style="margin-top:40px;">
-                            <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
-                            <!--<button type="button" class="layui-btn" id="startUploadFile">提交文件</button>-->
+                            <button type="button" class="layui-btn layui-btn-normal" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
+                            <button type="button" class="layui-btn layui-btn-normal" id="startUploadFile"><i class="layui-icon">&#xe621;</i>提交文件</button>
                         </div>
                     </div>
                 </div>
@@ -107,12 +107,12 @@
             </div>
         </div>
     </div>
-
+    <input type="text" name="docUrl" class="layui-input" autocomplete="off" id="docUrl"  style="display: none" >
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary" id="startUploadFile">重置</button>
+                <button type="reset" class="layui-btn layui-btn-primary" id="">重置</button>
             </div>
         </div>
     </div>
@@ -183,6 +183,31 @@
 
     renderMod = {
         form:{
+            file:{
+                elem:"#selectFile",
+                url:"/supervise/zdgl/importZdDoc",
+                accept:"file",
+                acceptMime:"file/*",
+                auto:false,
+                bindAction:"#startUploadFile",
+                field:"file",
+                /*choose:function(obj){
+                    files = obj.pushFile();
+                    obj.preview(function(index,file,result){
+                        $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
+                    })
+                },*/done:function(res,index,upload){
+                    $("#docUrl").val(res.data);
+
+                    layer.msg('导入成功！', {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
+                }
+            },
+
             val:{
                 filter:"forms",
                 get:{
@@ -211,19 +236,22 @@
                     url:"/supervise/gwgl/gwzzSubmit",
                     type:"POST",
                     contentType:"application/json",
-                    data:["gwName","gwZz","userId","shrId","createTime"]
+                    data:["gwName","gwZz","userId","shrId","createTime","docUrl"]
                     ,
                     add:{
                         gwId:$.getUrlParam("gwId")
-                    },
-                    done:function(res){
-                        if(res.code === 0){
-                            //提交完成后关闭页面
+                    }
+                , done: function (res) {
+                    if (res.code === 0) {
+                        layer.alert("提交成功", function () {
                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                             parent.layer.close(index); //再执行关闭
                             parent.location.reload();
-                        }
+                        })
+                    } else {
+                        layer.alert("提交失败")
                     }
+                }
                 }//表单提交函数
                 ,
                 done:function(res){

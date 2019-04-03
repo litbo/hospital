@@ -44,7 +44,7 @@
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
                         <li class="layui-this">制度信息</li>
-                        <li>文档上传</li>
+                        <li id="wdsc">文档预览</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="layui-tab-item">
                             <div class="layui-upload" style="margin-top:40px;">
-                                <button type="button" class="layui-btn layui-btn-normal" id="selectFile">选择文件</button>
+                                <button type="button" class="layui-btn " id="viewFile" >查看文件</button>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-
+    <input type="text" name="docUrl" class="layui-input" autocomplete="off" id="docUrl"   style="display: none">
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -250,6 +250,28 @@
         }
 
     }
+    $(document).ready(function(){
+
+
+        $("#wdsc").click(function(){
+            var url = $("#docUrl").val()
+            if(url==null||url==""){
+                $("#viewFile").addClass("layui-btn-disabled");
+            }
+        });
+
+        $("#viewFile").click(function(){
+            var url=$('#docUrl').val();
+            layOpen({
+                type:2,
+                content:'/supervise/zdgl/readDocOnline?url='+url,
+                area:["80%","80%"]
+            })
+
+        });
+
+    });
+
     $(function () {
 
         var emp =  tempValue("rl","emp",false);

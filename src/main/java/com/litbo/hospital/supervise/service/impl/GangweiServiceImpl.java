@@ -101,7 +101,11 @@ public class GangweiServiceImpl implements GangweiService {
 
     @Override
     public SGangwei getGwsByGwId(String gw_id) {
+
         SGangwei gw =  gangweiDao.getGwsByGwId(gw_id);
+        String path = System.getProperty("user.dir");
+        if (gw.getDocUrl()!=null&&!gw.getDocUrl().equals(""))
+            gw.setDocUrl(gw.getDocUrl().replace(path+"\\","").replaceAll("\\\\","/"));
         return gw;
     }
 
@@ -147,6 +151,7 @@ public class GangweiServiceImpl implements GangweiService {
         gw.setGwZz(gwSubmitVO.getGwZz());
         gw.setUserId(gwSubmitVO.getUserId());
         gw.setCreateTime(new Date());
+        gw.setDocUrl(gwSubmitVO.getDocUrl());
         //填充信息
         gw.setGwZzZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         gw.setSyTianshu(0);  //试用时间
@@ -286,6 +291,7 @@ public class GangweiServiceImpl implements GangweiService {
         gw.setGwZz(gwSubmitVO.getGwZz());
         gw.setUserId(gwSubmitVO.getUserId());
         gw.setCreateTime(new Date());
+        gw.setDocUrl(gwSubmitVO.getDocUrl());
         //填充信息
         gw.setGwZzZt(ZdztEnumProcess.ZD__ZT_SHZ.getCode());  //审核中  3 备案 2 试用 1 审核中 0 审核失败
         gw.setSyTianshu(0);  //试用时间

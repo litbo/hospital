@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +46,8 @@ public class ZhiduServiceImpl implements ZhiduService {
     public SZhidu getZdById(String id) {
         SZhidu zhidu=zhiduDao.getZdById(id);
         String path = System.getProperty("user.dir");
-        zhidu.setDocUrl(zhidu.getDocUrl().replace(path,""));
+        if (zhidu.getDocUrl()!=null&&!zhidu.getDocUrl().equals(""))
+            zhidu.setDocUrl(zhidu.getDocUrl().replace(path+"\\","").replaceAll("\\\\","/"));
         zhidu.setBmName(bmDao.getBmBybmid(zhidu.getBmId()).getBmName());
         return zhidu;
     }
@@ -198,6 +200,16 @@ public class ZhiduServiceImpl implements ZhiduService {
 
     @Override
     public void reSubmit(ZhiduSubmitVO zhiduSubmitVO) {
+
+        SZhidu zdd = zhiduDao.getZdByZdId(zhiduSubmitVO.getZdId());
+        String docUrl = zdd.getDocUrl();
+        if(docUrl!=null&&!docUrl.equals(zhiduSubmitVO.getDocUrl())){   //文件重新提交
+            File file = new File(docUrl);
+            if(file.exists()){
+                file.delete();
+            }
+        }
+
         SZhidu zd = new SZhidu();
         zd.setZdId(zhiduSubmitVO.getZdId());
         zd.setZdName(zhiduSubmitVO.getZdName());
@@ -330,6 +342,10 @@ public class ZhiduServiceImpl implements ZhiduService {
         zpjMsgVO.setZdId(zdId);
         zpjMsgVO.setZdName(zd.getZdName());
         zpjMsgVO.setBmId(zd.getBmId());
+        String path = System.getProperty("user.dir");
+        if (zd.getDocUrl()!=null&&!zd.getDocUrl().equals(""))
+            zd.setDocUrl(zd.getDocUrl().replace(path+"\\","").replaceAll("\\\\","/"));
+
         zpjMsgVO.setDocUrl(zd.getDocUrl());
         zpjMsgVO.setZdContent(zd.getZdContent());
 
@@ -373,6 +389,7 @@ public class ZhiduServiceImpl implements ZhiduService {
         String path = System.getProperty("user.dir");
         String filePath =path+"/zd/";
         String url = UploadFile.upload(filePath,file);
+        url = url.replaceAll("/","\\\\");
         return url;
     }
 

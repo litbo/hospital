@@ -1,4 +1,3 @@
-/*
 package com.litbo.hospital.supervise.controller;
 
 import com.github.pagehelper.PageInfo;
@@ -18,8 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
-import java.net.URLDecoder;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -181,7 +181,7 @@ public class ZhiduController {
         FileInputStream inputStream = new FileInputStream(filePath);
         out = res.getOutputStream();
         int b = 0;
-        byte[] buffer = new byte[1024];k
+        byte[] buffer = new byte[1024];
         while ((b = inputStream.read(buffer)) != -1) {
             // 4.写到输出流(out)中
             out.write(buffer, 0, b);
@@ -195,12 +195,44 @@ public class ZhiduController {
 
     }
 
-//    @RequestMapping( "/readDocOnline")
-//    @ResponseBody
-//    public Result readDocOnline(String url) throws Exception{
-//        PoiWordToHtml.PoiWord07ToHtml(url);
-//        return Result.success();
-//    }
+    @RequestMapping( "/readDocOnline")
+    @ResponseBody
+    public void readDocOnline(HttpServletResponse res, HttpServletRequest req,String url) throws Exception{
+
+        url= url.replaceAll("/","\\\\") ;
+        String pjpath = System.getProperty("user.dir");
+        String hname = url.split("\\.")[0].split("\\\\")[1];
+        String realUrl =pjpath+"\\zdhtml\\"+hname+".html";
+
+
+        File file = new File(realUrl);
+        if (!file.exists()) {
+            if(url.endsWith("docx"))
+                realUrl = PoiWordToHtml.PoiWord07ToHtml(url);
+//            else
+//                realUrl=PoiWordToHtml.Word2003ToHtml(url);
+        }
+
+//        String urlht = PoiWordToHtml.PoiWord07ToHtml(url);
+        ServletOutputStream out;
+        res.setContentType("text/html");
+        res.setCharacterEncoding("UTF-8");
+        res.setContentType("text/html");
+        FileInputStream inputStream = new FileInputStream(realUrl);
+        out = res.getOutputStream();
+        int b = 0;
+        byte[] buffer = new byte[1024];
+        while ((b = inputStream.read(buffer)) != -1) {
+            // 4.写到输出流(out)中
+            out.write(buffer, 0, b);
+        }
+        inputStream.close();
+
+        if (out != null) {
+            out.flush();
+            out.close();
+        }
+    }
 
 }
-*/
+
