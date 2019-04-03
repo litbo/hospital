@@ -1271,7 +1271,7 @@ function tableFunc(fn) {
  */
 document.write("<script type='text/javascript' data-version='x2' src='/static/admin/layui/layui.js'></script>");
 document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/renderMod.js'></script>");
-document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/selectivizr-min.js'></script>");
+/*document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/selectivizr-min.js'></script>");*/
 document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/>");
 
 

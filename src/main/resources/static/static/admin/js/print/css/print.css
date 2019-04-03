@@ -1,0 +1,13 @@
+.showQ ul li{
+    width: 100%!important;
+    margin: 10px;
+    border: 1px solid #ddd;
+    overflow-x: hidden;
+    padding: 5px;
+    box-shadow: 0 0 4px 1px #ddd;
+    border-radius: 5px;
+    float:left;
+}
+#shows{
+    display: none;
+}

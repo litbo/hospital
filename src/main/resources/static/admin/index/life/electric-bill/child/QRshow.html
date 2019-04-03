@@ -14,6 +14,10 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <script src="/static/admin/js/jquery.qrcode.min.js"></script>
+    <script src="/static/admin/js/JsBarcode.all.min.js"></script>
+    <script src="/static/admin/js/jquery.jqprint-0.3.js"></script>
+    <!--<link rel="stylesheet" href="/static/admin/js/print/css/print-preview.css">-->
+    <link href="/static/admin/js/print/css/print.css" rel="stylesheet"type="text/css" media="print">
     <style>
         .layui-inline {
             width: 140px;
@@ -24,42 +28,54 @@
             margin-bottom: 5px;
         }
         .showQ ul li{
-            width: 25%;
-            min-width: 300px;
-            height: 155px;
+            width: 40%;
+            max-width:500px;
+            min-width: 350px;
             margin: 10px;
             border: 1px solid #ddd;
             overflow-x: hidden;
             padding: 5px;
-            box-shadow: 0px 0px 4px 1px #ddd;
+            box-shadow: 0 0 4px 1px #ddd;
             border-radius: 5px;
             float:left;
         }
         .qrImg{
-            background: #000;
-            width: 40%;
-            min-width: 120px;
-            height: 150px;
-            float: left;
+            padding: 5px;
+            float: right;
         }
         .qrImg canvas{
-            width: 100%;
-            height: 100%;
+            width: 150px;
+            height: 150px;
         }
         .QRmsg{
             float: left;
-            width: 58%;
+            width: 65%;
             min-width: 170px;
             margin-left: 5px;
+        }
+        .QRmsg>p{
+            margin-bottom: 5px;
+            font-size: 17px;
+        }
+        .tit{
+            text-align: center;
+            height: 100px;
+        }
+        .code{
+            float: left;
+            width: 100%;
+            height: 80px;
         }
     </style>
 </head>
 
 <body>
+<div class="layui-row" id="shows" style="margin: 15px 0;">
+    <div class="col-xs-12">
+        <button class="layui-btn layui-btn-fluid" id="print">打印</button>
+    </div>
+</div>
 
-<fieldset class="layui-elem-field layui-field-title">
-    <legend>已选定数据二维码</legend>
-</fieldset>
 <div class="showQ">
     <ul>
 
@@ -69,11 +85,14 @@
 <script>
     var data = tempValue("qr","d",false)
         ,showData = ""
-        ,idShow = ["设备编号","设备名称","规格","型号"]
-        ,idName = ["eqId","eqName","eqGg","eqXh"]
+        ,idShow = ["资产编号","品牌型号","使用部门","序列号SN","分类编码","启用日期","院内编码"]
+        ,idName = ["eqId","eqName","eqGg","eqXh","eqId","eqName","eqGg"]
     ;
     for(var i=0;i<data.data.length;i++){
-        var $qr = $("<div>").attr("class","qrImg"),$qrM =  $("<div>").attr("class","QRmsg");
+        var $qr = $("<div>").attr("class","qrImg"),
+            $qrM =  $("<div>").attr("class","QRmsg"),
+            $cod = $("<canvas>")
+        ;
         showData = "eqId:" + data.data[i].eqId + ";sbbh:" + data.data[i].eqSbbh;
         try
         {
@@ -86,16 +105,39 @@
         for(var j=0;j<idName.length;j++){
             $qrM .append(
                 $("<p>").append(
-                    $("<b>").append(idShow[j])
+                    $("<b>").append(idShow[j]+"：")
                 ).append(
-                    $("<p>").css("margin-bottom","2px").append(data.data[i][idName[j]])
+                    $("<span>").css("margin-bottom","2px").append(data.data[i][idName[j]])
                 )
-            )
+            );
+            if(idName[j] === "eqId"){
+                var cc = data.data[i][idName[j]];
+                //console.log(cc);
+                $cod.JsBarcode(cc,{
+                    format: "CODE39",//选择要使用的条形码类型
+                        width:3,//设置条之间的宽度
+                        height:60,//高度
+                        displayValue:false//是否在条形码下方显示文字
+                });
+            }
         }
-        var $li = $("<li>").append($qr).append($qrM);
-        $(".showQ ul").append($li);
+        var $li = $("<li>").append($qrM).append($qr),
+            $code = $("<div>").attr("class","code").append($cod),
+            $top = $("<div>").attr("class","tit").append($("<h1>").text("XXXX医院")).append($("<h2>").text("固定资产卡"));
+        $(".showQ ul").append($li.prepend($top).append($code));
     }
+    //$('#print').prepend('<a class="print-preview">Print this page</a>');
+    //$('a.print-preview').printPreview();
+    $("#print").on("click",function(){
 
+        window.print();
+        /*$("#showQ").jqprint({
+            debug: true,
+            importCSS: true,
+            printContainer: true,
+            operaSupport: false
+        });*/
+    })
 </script>
 </body>
 

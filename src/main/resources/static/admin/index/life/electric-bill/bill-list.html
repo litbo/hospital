@@ -146,8 +146,7 @@
                                 {
                                     event:"qrcode",
                                     tool:"toolbar",
-                                    type:2,
-                                    content:"./child/QRshow.html",
+                                    layOpen:false,
                                     before:function(obj,cs){
                                         if(cs.data.length === 0){
                                             putMsg({
@@ -158,7 +157,11 @@
                                         layui.sessionData("qr",{
                                             key:"d",
                                             value:cs
-                                        })
+                                        });
+                                        var $a = $("<a>").attr({"href":"./child/QRshow.html","target":"_blank"});
+                                        $a[0].click();
+                                        location.reload();
+                                        return false;
                                     }
                                 }
                             ]
