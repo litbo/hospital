@@ -9,6 +9,7 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
     element.render("nav");
     //监听左侧主导航点击
     element.on('nav(leftNav)', function (elem) {
+        //console.log(elem);
         var id = elem.attr('data-id')
             ,url = elem.attr('data-url')
             ,text = elem.attr('data-text');

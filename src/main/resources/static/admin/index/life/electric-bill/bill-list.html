@@ -163,6 +163,27 @@
                                         location.reload();
                                         return false;
                                     }
+                                },
+                                {
+                                    event:"eqCard",
+                                    tool:"toolbar",
+                                    layOpen:false,
+                                    before:function(obj,cs){
+                                        if(cs.data.length !== 1){
+                                            putMsg({
+                                                alert:"一次只能选中一个设备！！"
+                                            });
+                                            return false;
+                                        }
+                                        layui.sessionData("eqc",{
+                                            key:"c",
+                                            value:cs
+                                        });
+                                        var $a = $("<a>").attr({"href":"./child/eqCardShow.html","target":"_blank"});
+                                        $a[0].click();
+                                        location.reload();
+                                        return false;
+                                    }
                                 }
                             ]
                         })

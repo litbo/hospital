@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>总账目录</title>
+    <title>二维码查看</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -13,10 +13,13 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <!--二维码插件-->
     <script src="/static/admin/js/jquery.qrcode.min.js"></script>
+    <!--条形码插件-->
     <script src="/static/admin/js/JsBarcode.all.min.js"></script>
-    <script src="/static/admin/js/jquery.jqprint-0.3.js"></script>
+    <!--<script src="/static/admin/js/jquery.jqprint-0.3.js"></script>-->
     <!--<link rel="stylesheet" href="/static/admin/js/print/css/print-preview.css">-->
+    <!--打印样式插件-->
     <link href="/static/admin/js/print/css/print.css" rel="stylesheet"type="text/css" media="print">
     <style>
         .layui-inline {
@@ -28,8 +31,7 @@
             margin-bottom: 5px;
         }
         .showQ ul li{
-            width: 40%;
-            max-width:500px;
+            width: 31%;
             min-width: 350px;
             margin: 10px;
             border: 1px solid #ddd;
@@ -49,7 +51,7 @@
         }
         .QRmsg{
             float: left;
-            width: 65%;
+            width: 64%;
             min-width: 170px;
             margin-left: 5px;
         }
@@ -76,68 +78,77 @@
     </div>
 </div>
 
-<div class="showQ">
-    <ul>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <div class="showQ">
+            <ul>
 
-    </ul>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <script>
-    var data = tempValue("qr","d",false)
+    var data = tempValue("qr","d",null)
         ,showData = ""
-        ,idShow = ["资产编号","品牌型号","使用部门","序列号SN","分类编码","启用日期","院内编码"]
-        ,idName = ["eqId","eqName","eqGg","eqXh","eqId","eqName","eqGg"]
+        ,idShow = ["资产名称","品牌型号","使用部门","序列号SN","分类编码","启用日期","院内编码"]
+        ,idName = ["eqName","eqXh","eqBmName","xlSN","flBh","eqQysj","eqYq"]
     ;
-    for(var i=0;i<data.data.length;i++){
-        var $qr = $("<div>").attr("class","qrImg"),
-            $qrM =  $("<div>").attr("class","QRmsg"),
-            $cod = $("<canvas>")
-        ;
-        showData = "eqId:" + data.data[i].eqId + ";sbbh:" + data.data[i].eqSbbh;
-        try
-        {
-            document.createElement('canvas').getContext('2d');
-            $qr.qrcode({render:"canvas",correctLevel:0,text:showData});
-        } catch (e)
-        {
-            $qr.qrcode({render:"table",correctLevel:0,text:showData});
-        }
-        for(var j=0;j<idName.length;j++){
-            $qrM .append(
-                $("<p>").append(
-                    $("<b>").append(idShow[j]+"：")
-                ).append(
-                    $("<span>").css("margin-bottom","2px").append(data.data[i][idName[j]])
-                )
-            );
-            if(idName[j] === "eqId"){
-                var cc = data.data[i][idName[j]];
-                //console.log(cc);
-                $cod.JsBarcode(cc,{
-                    format: "CODE39",//选择要使用的条形码类型
-                        width:3,//设置条之间的宽度
+    if(!data){
+        layui.use("layer",function(){
+            var layer = layui.layer;
+            layer.alert("暂无可用数据",function(){
+                window.close();
+            })
+        });
+    }else{
+        for(var i=0;i<data.data.length;i++){
+            var $qr = $("<div>").attr("class","qrImg"),
+                $qrM =  $("<div>").attr("class","QRmsg"),
+                $cod = $("<canvas>").css({"width":"20px","height":"20px"})
+            ;
+            //格式：eqId:XXXXX;eqSbbh:XXXXXXX;flBh:XXXXX;
+            showData = "eqId:" + data.data[i].eqId + ";eqSbbh:" + data.data[i].eqSbbh+ ";flBh:" + data.data[i].flBh + ";";
+            //判断是否可以创建canvas，不能创建则创建表格图形
+            try
+            {
+                document.createElement('canvas').getContext('2d');
+                $qr.qrcode({render:"canvas",correctLevel:0,text:showData});
+            } catch (e)
+            {
+                $qr.qrcode({render:"table",correctLevel:0,text:showData});
+            }
+            for(var j=0;j<idName.length;j++){
+                $qrM .append(
+                    $("<p>").append(
+                        $("<b>").append(idShow[j]+"：")
+                    ).append(
+                        $("<span>").css("margin-bottom","2px").append(data.data[i][idName[j]])
+                    )
+                );
+                if(idName[j] === "eqYq"){
+                    var cc = data.data[i][idName[j]];
+                    $cod.JsBarcode(cc,{
+                        format: "CODE39",//选择要使用的条形码类型
                         height:60,//高度
                         displayValue:false//是否在条形码下方显示文字
-                });
+                    });
+                    $cod.css({"width":"auto","height":"auto"});
+                }
             }
+            var $li = $("<li>").append($qrM).append($qr),
+                $code = $("<div>").attr("class","code").append($cod),
+                $top = $("<div>").attr("class","tit").append($("<h1>").text("XXXX医院")).append($("<h2>").text("固定资产卡"));
+            $(".showQ ul").append($li.prepend($top).append($code));
         }
-        var $li = $("<li>").append($qrM).append($qr),
-            $code = $("<div>").attr("class","code").append($cod),
-            $top = $("<div>").attr("class","tit").append($("<h1>").text("XXXX医院")).append($("<h2>").text("固定资产卡"));
-        $(".showQ ul").append($li.prepend($top).append($code));
-    }
-    //$('#print').prepend('<a class="print-preview">Print this page</a>');
-    //$('a.print-preview').printPreview();
-    $("#print").on("click",function(){
 
-        window.print();
-        /*$("#showQ").jqprint({
-            debug: true,
-            importCSS: true,
-            printContainer: true,
-            operaSupport: false
-        });*/
-    })
+        $("#print").on("click",function(){
+
+            window.print();
+
+        })
+    }
+
 </script>
 </body>
 

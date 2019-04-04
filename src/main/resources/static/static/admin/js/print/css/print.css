@@ -1,13 +1,24 @@
 .showQ ul li{
-    width: 100%!important;
-    margin: 10px;
+    width: 90%!important;
+    margin:0 0 5px 0 !important;
     border: 1px solid #ddd;
-    overflow-x: hidden;
-    padding: 5px;
-    box-shadow: 0 0 4px 1px #ddd;
-    border-radius: 5px;
+    padding: 0 10px!important;
+    border-radius: 1px;
+    box-shadow: none!important;
     float:left;
 }
 #shows{
     display: none;
+}
+#print{
+    display: none;
+}
+.tit{
+    height: auto!important;
+}
+.td{
+    max-height:20px!important;
+}
+.min_msg{
+    width:100%!important;
 }
