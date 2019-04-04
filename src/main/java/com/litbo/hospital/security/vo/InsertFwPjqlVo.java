@@ -2,6 +2,7 @@ package com.litbo.hospital.security.vo;
 
 import com.litbo.hospital.security.bean.FwPjql;
 import com.litbo.hospital.security.bean.FwPjqlZjb;
+import com.litbo.hospital.user.vo.LiveEmpVo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,4 +12,5 @@ public class InsertFwPjqlVo implements Serializable {
     private static final long serialVersionUID = 8607859409880232081L;
     private FwPjql fwPjql;
     private List<FwPjqlZjb> fwPjqlZjbs;
+    private LiveEmpVo sEmp;
 }

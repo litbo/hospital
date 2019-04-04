@@ -1,6 +1,5 @@
 package com.litbo.hospital.security.dao;
 
-import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.vo.ListFwPjzdVo;
 import org.apache.ibatis.annotations.*;
@@ -22,4 +21,8 @@ public interface FwPjzdDao {
 
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjzdSqlProvider.class,method="listFwPjzd")
     List<ListFwPjzdVo> listFwPjzd(@Param("pjSzm") String pjSzm, @Param("pjfl") String pjfl);
+    @Select("select pj_name from fw_pjzd where id = #{pjzdId}")
+    String selectFwPjzdName(Integer pjzdId);
+    @Select("select pjk_sl from fw_pjk where id = #{pjzdId}")
+    Integer selectFwPjkCountById(Integer pjzdId);
 }

@@ -1,12 +1,12 @@
 package com.litbo.hospital.user.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.common.utils.poi.ChangeFile;
 import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
-import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
@@ -29,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -37,6 +36,7 @@ import java.util.*;
 
 import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
 import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
+
 
 @Service
 public class EqServiceImpl implements EqService {

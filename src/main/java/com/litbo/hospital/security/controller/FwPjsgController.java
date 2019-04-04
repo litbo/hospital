@@ -33,6 +33,7 @@ public class FwPjsgController {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             fwPjsgVo.getFwPjsg().setUserId1(userId);
+            fwPjsgVo.setSEmp(sEmp);
             int res = pjsgService.insertFwPjsg(fwPjsgVo);
             if(res>0)
                 return Result.success();

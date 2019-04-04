@@ -10,7 +10,7 @@ public class ExaminePjsgVO {
     private Integer id;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date pjRkTime;
-
+  //  申购人姓名
     private String userXm;
     private String sgYy;
     private  String sgSqsx;

@@ -42,6 +42,7 @@ public class FwPjsgServiceImpl implements FwPjsgService {
         FwPjsg pjsg = insertFwPjsgVo.getFwPjsg();
         pjsg.setSgStatus(EnumApplyStatus.WAIT_EXAMINE.getCode());
         res = pjsgDao.insertFwPjsg(pjsg);
+
         List<FwPjsgZjb> fwPjsgZjbs = insertFwPjsgVo.getFwPjsgZjbs();
         for (FwPjsgZjb p:fwPjsgZjbs) {
             p.setPjsgId(pjsg.getId());
@@ -50,7 +51,8 @@ public class FwPjsgServiceImpl implements FwPjsgService {
         //添加审核数据到task表
         Task task = new Task();
         task.setCreatTime(new Date());
-        task.setWorkName("配件申购审核");
+
+        task.setWorkName(insertFwPjsgVo.getSEmp().getBmName()+" "+insertFwPjsgVo.getSEmp().getUserXm()+" "+"配件申购审核");
         task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
         task.setUrl(EnumURL.EXAMINE_PURCHASE.getMessage());
         task.setActionName("配件申购");
