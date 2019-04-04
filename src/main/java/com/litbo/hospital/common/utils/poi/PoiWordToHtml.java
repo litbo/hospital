@@ -1,5 +1,6 @@
 package com.litbo.hospital.common.utils.poi;
 
+
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
@@ -41,9 +42,13 @@ public class PoiWordToHtml {
                 //读取文档内容
                 InputStream in = new FileInputStream(f);
                 XWPFDocument document = new XWPFDocument(in);
+
                 File imageFolderFile = new File(path);
+                if(!imageFolderFile.exists()){
+                    imageFolderFile.mkdir();
+                }
                 //加载html页面时图片路径
-                XHTMLOptions options = XHTMLOptions.create().URIResolver( new BasicURIResolver("./"));
+                XHTMLOptions options = XHTMLOptions.create().URIResolver( new BasicURIResolver("/"));
                 //图片保存文件夹路径
                 options.setExtractor(new FileImageExtractor(imageFolderFile));
                 OutputStream out = new FileOutputStream(new File(file2));

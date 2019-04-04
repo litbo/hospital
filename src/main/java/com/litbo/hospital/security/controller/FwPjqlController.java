@@ -15,6 +15,8 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("security/pjql")
 @Slf4j
@@ -34,6 +36,7 @@ public class FwPjqlController {
             //TODO 已修改 此处配件请领人从session中获取，并存入Pjql表中
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String qlrId = sEmp.getUserId();
+            fwPjqlVo.setSEmp(sEmp);
             fwPjqlVo.getFwPjql().setQlrId(qlrId);
             int res = pjqlService.insertFwPjql(fwPjqlVo);
             if(res>0){
@@ -56,13 +59,11 @@ public class FwPjqlController {
                 //TODO 已修改 此处确认人从session中获取，并存入Pjql表中
                 LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
                 String qrrId = sEmp.getUserId();
-                int res = pjqlService.updateFwPjqlSqStatus(status,id,qrrId,shyy,taskId);
-                if(res >0){
+                Map map = pjqlService.updateFwPjqlSqStatus(status,id,qrrId,shyy,taskId);
+                if(map ==null){
                     return Result.success();
-                }else if(res == -1){
-                    return Result.error("配件库存不足，请检查配件库存");
-                }else {
-                    return Result.error(CodeMsg.PARAM_ERROR);
+                }else{
+                    return Result.error("配件库存不足："+map.toString());
                 }
             }catch (Exception e){
                 log.error("异常信息",e.getMessage());
