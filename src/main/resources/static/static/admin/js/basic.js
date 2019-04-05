@@ -52,6 +52,30 @@ if (hour < 10) {
     time0 = time
 }
 window.reNum = 0;
+
+//除法运算修正
+function division(arg1, arg2) {
+    var t1 = 0, t2 = 0, r1, r2;
+    try {
+        t1 = arg1.toString().split(".")[1].length;
+    }
+    catch (e) {
+    }
+
+    try {
+        t2 = arg2.toString().split(".")[1].length;
+    }
+    catch (e) {
+    }
+
+    with (Math) {
+        r1 = Number(arg1.toString().replace(".", ""));
+        r2 = Number(arg2.toString().replace(".", ""));
+        return (r1 / r2) * pow(10, t2 - t1);
+    }
+}
+
+
 /**
  * @todo 日期格式化
  * @tips 以下日期转换方式将在未来被删除，推荐使用layui日期转换格式，详见文档
@@ -74,7 +98,7 @@ Date.prototype.Format = function (fmt) {
         "q+": Math.floor((this.getMonth() + 3) / 3), //季度
         "S": this.getMilliseconds()             //毫秒
     };
-    console.log(this);
+    //console.log(this);
     if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     }

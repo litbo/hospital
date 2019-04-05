@@ -5,14 +5,15 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         , mainLayout = $('#main-layout')
         , menu = []
         , mainMask = $('.main-mask');
-    //导航重渲染
-    element.render("nav");
+    //element.init();
+    //element.render("nav");
     //监听左侧主导航点击
     element.on('nav(leftNav)', function (elem) {
         //console.log(elem);
         var id = elem.attr('data-id')
             ,url = elem.attr('data-url')
             ,text = elem.attr('data-text');
+        //console.log(url);
         if (!url) {
             return;
         }
@@ -20,8 +21,10 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         if (isActive.length > 0) {
             //切换到选项卡
             element.tabChange('tab', id);
-            var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
-            $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
+            layer.confirm("是否刷新当前页面？",function(){
+                var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
+                $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
+            })
         } else {
             element.tabAdd('tab', {
                 title: text,
@@ -46,8 +49,10 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         if (isActive.length > 0) {
             //切换到选项卡
             element.tabChange('tab', id);
-            var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
-            $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
+            layer.confirm("是否刷新当前页面？",function(){
+                var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
+                $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
+            })
         } else {
             element.tabAdd('tab', {
                 title: text,
@@ -90,7 +95,6 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
     mainMask.on('click', function () {
         mainLayout.removeClass('hide-side');
     });
-
     //示范一个公告层
 	/*layer.open({
 		  type: 1
@@ -198,4 +202,6 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
 
         //初始化加载结束
     });
+    //导航重渲染
+    //element.render();
 });

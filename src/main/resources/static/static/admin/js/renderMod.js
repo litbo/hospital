@@ -58,7 +58,8 @@ $(function () {
             //表单默认值渲染
             if (val && val !== false) {
                 //自动匹配lay-filter相同的元素，val.value：{name(input表单name):value(name对应默认数据)}
-                if (val.filter && (val.list || val.select || val.get || (val.options && Type(val.options) === "json"))) {
+                //filter不必填 val.filter &&
+                if ((val.list || val.select || val.get || (val.options && Type(val.options) === "json"))) {
 
                     //下拉渲染
                     if (val.select) {
@@ -114,14 +115,25 @@ $(function () {
                                         }
                                         //表格渲染
                                         if (val.get.parse !== undefined) {
-                                            table.reload(val.get.tableId, {
-                                                data: dat[val.get.parse]
-                                            })
+                                            //当为字符串时渲染一个表格
+                                            if(Type(val.get.parse) === "string"){
+                                                table.reload(val.get.tableId, {
+                                                    data: dat[val.get.parse]
+                                                })
+                                                //当为数组时渲染多个表格
+                                            }else if(Type(val.get.parse) === "array"){
+                                                for(var o=0;o<val.get.parse;o++){
+                                                    table.reload(val.get.tableId[o] || "table", {
+                                                        data: dat[val.get.parse[o]]
+                                                    })
+                                                }
+                                            }
+
                                         }
                                     }
                                 }
                                 //表单默认值填充
-                                form.val(val.filter, value);
+                                form.val(val.filter || "forms", value);
 
                                 val.func && val.func(dat, form);
                             }
@@ -131,7 +143,7 @@ $(function () {
 
                     //当不需要获取数据的时候就直接渲染页面
                     if (!val.get && !val.select && !val.list) {
-                        form.val(val.filter, val.options);
+                        form.val(val.filter || "forms", val.options);
                     }
                     //页面表单渲染
                     form.render();
@@ -876,6 +888,30 @@ $(function () {
             //获取数据并渲染页面
             subUp(re)
         }
+
+
+        // 缓存当前操作的是哪个表格的哪个tr的哪个td
+        $(document).off('mousedown', '.layui-table-grid-down')
+            .on('mousedown', '.layui-table-grid-down', function (event) {
+                // 记录操作的td的jquery对象
+                table._tableTdCurr = $(this).closest('td');
+            });
+
+        // 给弹出的详情里面的按钮添加监听级联的触发原始table的按钮的点击事件
+        $(document).off('click', '.layui-table-tips-main [lay-event]')
+            .on('click', '.layui-table-tips-main [lay-event]', function (event) {
+                var elem = $(this);
+                var tableTrCurr = table._tableTdCurr;
+                if (!tableTrCurr) {
+                    return;
+                }
+                var layerIndex = elem.closest('.layui-table-tips').attr('times');
+                // 关闭当前的这个显示更多的tip
+                layer.close(layerIndex);
+                // 找到记录的当前操作的那个按钮
+                table._tableTdCurr.find('[lay-event="' + elem.attr('lay-event') + '"]').first().click();
+            });
+
     });
 });
 

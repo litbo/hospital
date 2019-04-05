@@ -15,23 +15,27 @@ var $mainList = $("#main_nav_list")
     , nList = {};//大页面导航数据
 
 $(function () {
-    $.ajax({
-        url: "/static/admin/js/json/nav.json",
-        async: false,
-        success: function (res) {
-            nList = res;
-            addNav($navList);
-            console.log("nav already!");
-            $.ajax({
-                url: "/static/admin/js/json/list.json",
-                async: false,
-                success: function (res) {
-                    mList = res;
-                    addList($mainList, $viceList, mList);
-                    console.log("list already!");
-                }
-            })
-        }
+    layui.use("element",function(){
+        var element = layui.element;
+        $.ajax({
+            url: "/static/admin/js/json/nav.json",
+            async: false,
+            success: function (res) {
+                nList = res;
+                addNav($navList);
+                //console.log("nav already!");
+                $.ajax({
+                    url: "/static/admin/js/json/list.json",
+                    async: false,
+                    success: function (res) {
+                        mList = res;
+                        addList($mainList, $viceList, mList);
+                        element.render();
+                        console.log("导航渲染完毕!");
+                    }
+                })
+            }
+        })
     })
 });
 
