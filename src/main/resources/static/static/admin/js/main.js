@@ -4,7 +4,8 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         , hideBtn = $('#hideBtn')
         , mainLayout = $('#main-layout')
         , menu = []
-        , mainMask = $('.main-mask');
+        , mainMask = $('.main-mask')
+        ,showMsg = "当前页面已打开，是否刷新此页面？";
     //element.init();
     //element.render("nav");
     //监听左侧主导航点击
@@ -21,9 +22,10 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         if (isActive.length > 0) {
             //切换到选项卡
             element.tabChange('tab', id);
-            layer.confirm("是否刷新当前页面？",function(){
+            layer.confirm(showMsg,function(index){
                 var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
                 $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
+                layer.close(index);
             })
         } else {
             element.tabAdd('tab', {
@@ -49,9 +51,10 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         if (isActive.length > 0) {
             //切换到选项卡
             element.tabChange('tab', id);
-            layer.confirm("是否刷新当前页面？",function(){
+            layer.confirm(showMsg,function(index){
                 var src=$(".layui-tab-item.layui-show").find("iframe").attr("src");
                 $(".layui-tab-item.layui-show").find("iframe").attr("src",src);
+                layer.close(index);
             })
         } else {
             element.tabAdd('tab', {
@@ -202,6 +205,4 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
 
         //初始化加载结束
     });
-    //导航重渲染
-    //element.render();
 });

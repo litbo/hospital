@@ -633,12 +633,7 @@ $(function () {
                             if (item.url) {
                                 setUrl = item.url
                             } else {
-                                /*//设置URL
-                                setUrl = item.base || "/admin/index/global/data.html";
-                                //设置参数
-                                setUrl += "?cb="+item.cb+"&db="+item.db+"&se="+item.se+"&key="+item.key+"&vg="+item.name+"&v="+item.value;*/
                                 //调用值
-                                //setUrl = item.base || "/admin/index/global/data.html";
                                 setUrl = url + "?key=" + item.key + "&vg=" + name;
                                 if (item.cb) {
                                     setUrl += "&cb=" + item.cb
@@ -691,6 +686,7 @@ $(function () {
                         })
                     }
                 },
+                //数据选择按钮功能
                 selectItem: function (cl) {
                     //数据类型判断
                     if (Type(cl) === "array") {
@@ -780,7 +776,6 @@ $(function () {
                                                     }
                                                 }
                                             }
-
                                         }
                                         item.func && item.func(res);
                                     }
@@ -878,18 +873,12 @@ $(function () {
                     log: res
                 });
             };
-            //删除不必要参数，避免污染参数
-            //删除参数将导致无法重载，不建议删除
-            /*if(!del){
-                delete re.ids;
-                delete re.text;
-                delete re.filter;
-            }*/
             //获取数据并渲染页面
             subUp(re)
         }
 
 
+        //表格 《更多》 按钮，打开按钮事件处理
         // 缓存当前操作的是哪个表格的哪个tr的哪个td
         $(document).off('mousedown', '.layui-table-grid-down')
             .on('mousedown', '.layui-table-grid-down', function (event) {

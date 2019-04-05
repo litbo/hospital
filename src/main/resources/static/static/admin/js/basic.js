@@ -404,7 +404,6 @@ function compareData(x, y) {
     }
 }
 
-
 /**
  * @todo 页面加载效果遮罩
  * @arguments text -> 提示文字
@@ -505,7 +504,7 @@ function getHash(input) {
  * @param value -> 需要提交的必要参数
  * @param data -> layui返回的函数参数
  * @param param -> 传递参数
- * @return value参数不正确 -> false{boolean}
+ * @return boolean value参数不正确 -> false{}
  */
 function subUp(value, data, param) {
     //value：提交参数 data：submit函数中默认的参数(可选，当data不存在时将自动获取表单数据) param:可用参数
@@ -549,8 +548,7 @@ function subUp(value, data, param) {
         }
     }
     //判断当前数据上传类型(默认以JQajax提交)
-    var switchs = value['switch'];
-    if (switchs === "xhr") {
+    if (value['switch'] === "xhr") {
         //未进行完整测试，不建议使用
         //以原生JS形式异步提交数据(基本代码)
         // XMLHttpRequest 对象
@@ -560,7 +558,7 @@ function subUp(value, data, param) {
             alert("上传完成!");
         };
         xhr.send(form);
-    } else if (switchs === "html") {//以HTML默认的方式提交数据
+    } else if (value['switch'] === "html") {//以HTML默认的方式提交数据
         //使用HTML默认提交方式提交数据（使用新建内嵌框架实现不跳转新页面）
         //使用不可见iframe获取返回数据，但由于未知原因(暂未知)无法获取iframe内返回的数据，故目前只能提交则成功
         //form标签无需添加method和url，只需在数据中填写则可以自动渲染
