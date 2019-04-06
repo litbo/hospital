@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>医疗设备智能管理系统</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -15,16 +16,17 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .loading{
-            font-size:2.5rem;
-            color:#fff;
+        .loading {
+            font-size: 2.5rem;
+            color: #fff;
             text-align: center;
             vertical-align: middle;
-            margin:20% 0;
+            margin: 20% 0;
             letter-spacing: 5px;
         }
-        .loading i{
-            font-size:4rem;
+
+        .loading i {
+            font-size: 4rem;
         }
     </style>
 
@@ -77,13 +79,13 @@
                             <i class="fas fa-lock"></i>
                         </a>
                     </li>
-                    <li class="layui-nav-item items1">
-                        <a href="javascript:;" data-url="email.html" data-id='004' data-text="邮件系统">
+                    <!--<li class="layui-nav-item items1">
+                        <a href="javascript:;" data-url="./wait.html" data-id='x111' data-text="消息提醒">
                             <i class="far fa-bell"></i>
                         </a>
-                    </li>
+                    </li>-->
                     <li class="layui-nav-item items1">
-                        <a href="javascript:;" data-url="admin-info.html" data-id='005' data-text="个人信息" style="padding:0 10px;overflow:hidden;">
+                        <a href="javascript:" style="padding:0 10px;overflow:hidden;">
                             <img src="/static/admin/images/man.png" class="user_head" alt="用户头像">
                             <p class="names">
                                 <span class="h_name">李医生</span>
@@ -91,24 +93,26 @@
                             </p>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;">修改信息</a></dd>
-                            <dd><a href="javascript:;">安全管理</a></dd>
+                            <dd><a href="javascript:;" data-url="./global/info.html" data-id='x222' data-text="信息管理">信息管理</a>
+                            </dd>
+                            <!--<dd><a href="javascript:;" data-url="./global/admin-info.html" data-id='x333' data-text="个人信息">安全管理</a></dd>-->
                             <dd><a href="javascript:" id="quit">退出</a></dd>
                         </dl>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="nav_list">
+        <!--<div class="nav_list">
             <ul>
                 <li>6666</li>
                 <li>1111</li>
             </ul>
-        </div>
+        </div>-->
         <!--主体内容-->
         <div class="main-layout-body">
             <!--tab 切换-->
-            <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true" style="background:#fff;">
+            <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true"
+                 style="background:#fff;">
                 <ul class="layui-tab-title navs" style="margin-right:40px;">
                     <li class="layui-this welcome" id="refresh_home">系统主页</li>
                 </ul>
@@ -124,7 +128,8 @@
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
                         <!--内容页-->
-                        <iframe src="welcome.html" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0" id="home"></iframe>
+                        <iframe src="welcome.html" width="100%" height="100%" name="iframe" scrolling="auto"
+                                class="iframe" framborder="0" id="home"></iframe>
                         <!--end-->
                     </div>
                 </div>
@@ -144,8 +149,11 @@
                 <div class="row">
                     <div class="layui-col-lg-offset4" style="width:300px">
                         <h1 style="text-align: center;margin-bottom: 20px;">系统已锁定</h1>
-                        <input type="text" name="userName" lay-verify="required" placeholder="账户密码" autocomplete="off" class="layui-input">
-                        <button class="layui-btn layui-btn-normal btn layui-btn-fluid" lay-filter="login" id="check-btn" style="margin-top: 20px;">解锁</button>
+                        <input type="text" name="userName" lay-verify="required" placeholder="账户密码" autocomplete="off"
+                               class="layui-input">
+                        <button class="layui-btn layui-btn-normal btn layui-btn-fluid" lay-filter="login" id="check-btn"
+                                style="margin-top: 20px;">解锁
+                        </button>
                     </div>
 
                 </div>
@@ -157,18 +165,18 @@
 <script src="/static/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/admin/js/nav_shiro.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    layui.use('element',function(){
+    layui.use('element', function () {
         var element = layui.element;
-        //element.render();
-        $(function(){
+        $(function () {
+            var emp = tempValue("rl","emp",false)
+                ,f = tempValue("index", "f",null)
+                ,uu = $.getUrlHash("url")
+                , tt = $.getUrlHash("title") || "新窗口"
+                , ii = $.getUrlHash("id") || "n9999";
             //http://localhost/admin/index/index.html?p=home#url=./repair.html#title=百度首页#id=666666
-            //重点#url=./repair.html#title=百度首页#id=666666
-
-            var uu = $.getUrlHash("url")
-                ,tt = $.getUrlHash("title") || "新窗口"
-                ,ii = $.getUrlHash("id") || 999999999;
-
-            if(uu !== null){
+            //判断点 #url=./repair.html #title=百度首页 #id=666666
+            //获取URL HASH值打开新页面
+            if (uu !== null) {
                 element.tabAdd('tab', {
                     title: tt,
                     content: '<iframe src="' + uu + '" name="iframe"' + ii + '"" class="iframe" framborder="0" data-id="' + ii + '" scrolling="auto" width="100%"  height="100%"></iframe>',
@@ -178,104 +186,76 @@
                 window.location.hash = "";
             }
 
-            var emm = layui.sessionData("rl").emp;
-            if(emm !== undefined){
-                //console.log(emm);
-                $(".h_name").html(emm.userXm);
-                $(".h_room").html(emm.bmName);
-                if(emm.sex === "女"){
-                    $(".user_head").attr("src","/static/admin/images/woman.png")
+            //获取用户信息
+            if (emp) {
+                $(".h_name").text(emp.userXm);
+                $(".h_room").text(emp.bmName);
+                if (emp.sex === "女") {
+                    $(".user_head").attr("src", "/static/admin/images/woman.png")
                 }
+            }else{
+                layer.alert("无法获取用户信息，请重新登录！",function (index) {
+                    layer.close(index);
+                    location.href = "/logout"
+                })
             }
 
-            $("#quit").on("click",function(){
-                layer.confirm("确定要退出吗？",function(){
+            //页面登出事件
+            $("#quit").on("click", function () {
+                layer.confirm("确定要退出吗？", function () {
                     location.href = "/logout"
                 })
             });
 
-            /*$(".tools_more").on("click",function(){
-                $(".cts2").toggleClass("hidden");
-            });
-            $(".info1").on("click",function(){
-                $(".conts").toggleClass("hidden");
-            })*/
-
-            $("#lockSys").on("click",function(){
+            //页面锁定事件
+            $("#lockSys").on("click", function () {
                 layOpen({
-                    type:1,
-                    content:$("#lock"),
+                    type: 1,
+                    content: $("#lock"),
                     closeBtn: 0,
-                    maxmin:false,
-                    fixed:true,
-                    resize:false,
-                    title:false,
-                    area:["100%","100%"]
+                    maxmin: false,
+                    fixed: true,
+                    resize: false,
+                    title: false,
+                    area: ["100%", "100%"]
                 });
-                $("#check-btn").on("click",function(){
+                $("#check-btn").on("click", function () {
 
                 })
             });
-            //判断当前页面，标示当前页面并禁止点击
-            (function(){
+
+            //判断当前页面，标示出当前页面的导航栏（改变导航栏底色）并禁止点击
+            (function () {
                 var page = $.getUrlParam("p");
-                var $a = $(".menu-btn").find("a[href='?p="+page+"']");
-                if($a.length>0){
-                    $a.css("background","#089ce20f");
-                    $a.on("click",function(){
+                var $a = $(".menu-btn").find("a[href='?p=" + page + "']");
+                if ($a.length > 0) {
+                    $a.css("background", "#089ce20f");
+                    $a.on("click", function () {
                         return false;
                     });
                 }
             })();
+
+            //判断主页(welcome.html)点击时渲染是否正确，不正确重载主页
+            $("#refresh_home").click(function () {
+                if ($(this).hasClass("layui-this")) {
+                    return false;
+                }
+                setTimeout(function () {
+                    document.getElementById('home').contentWindow.location.reload();
+                }, 10)
+            });
+            //展开第一项列表
+
+            //读取本地存储中的页面ID并打开页面（仅限当前页面存在的页面）
+            if (f && typeof Number(f) === "number") {
+                var ne =$("a[data-id='" + Number(f) + "']");
+                if(ne.length>0){
+                    ne[0].click();
+                }
+            }
         })
     });
-
-    window.onload = function(){
-            var homes = document.getElementById('home'),$treeList = $('.layui-nav-tree .layui-nav-child');
-            var count = layui.sessionData("rel").count;
-
-        //判断当前页面渲染是否正确，不正确的话将刷新页面重新渲染
-        /*if($treeList.length >0 && $treeList.prev().children("span").length <= 0){
-            //$.cookie("reload",$.cookie("reload")+"-66-");//判断刷新几次
-            if(count<2){
-                location.reload();
-                count ++;
-                layui.sessionData("rel",{
-                    key:"count",
-                    value:count
-                });
-            }
-        }else{
-            layui.sessionData("rel",{
-                key:"count",
-                value:0
-            });
-        }*/
-
-
-        //判断主页(welcome.html)点击时渲染是否正确，不正确重载主页
-        $("#refresh_home").click(function(){
-            if($(this).hasClass("layui-this") || $.cookie("ww") > 100 ){
-                return false;
-            }
-            setTimeout(function(){
-                try{
-                    homes.contentWindow.location.reload();
-                }catch (er){
-                    alert("当前页面显示不正确，可能会出现显示错乱，请使用服务器访问当前页面！");
-                    console.error("此功能无法正常在本地使用，请使用服务器访问！");
-                }
-            },10)
-        });
-        //展开第一项列表
-
-            var f = tempValue("index","f");
-            //console.log(f);
-            if(f && typeof Number(f) === "number"){
-                $("a[data-id='"+Number(f)+"']")[0].click();
-            }//读取cookies跳转页面
-
-    }
 </script>
 </body>
 </html>

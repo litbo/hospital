@@ -61,8 +61,8 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
             }
             //打开左侧主列表第一个
             /*if (p !== "home") {//首页不打开新TAB*/
-                var d = a.children[0];
-                if (!d.children) {
+                var d = a.children;
+                if (d && !d[0].children) {
                     //changeTab(d, function () {
                         $('.layui-nav-item').eq(1).addClass('layui-this');
                     //})

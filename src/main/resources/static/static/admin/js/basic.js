@@ -27,6 +27,7 @@ var date = new Date()
         lay:""
     }
     , allData = null;
+
 //日期补零
 if (month < 10) {
     if (day < 10) {
@@ -37,6 +38,7 @@ if (month < 10) {
 } else {
     today0 = today;
 }
+
 //时间补零
 if (hour < 10) {
     if (minutes < 10) {
@@ -51,6 +53,7 @@ if (hour < 10) {
 } else {
     time0 = time
 }
+//全局变量（不推荐使用）
 window.reNum = 0;
 
 //除法运算修正
@@ -74,42 +77,6 @@ function division(arg1, arg2) {
         return (r1 / r2) * pow(10, t2 - t1);
     }
 }
-
-
-/**
- * @todo 日期格式化
- * @tips 以下日期转换方式将在未来被删除，推荐使用layui日期转换格式，详见文档
- * @arguments time -> 需要转换的日期
- * @return {string} -> 转换后的时间
- **/
-//对Date的扩展，将 Date 转化为指定格式的String
-//月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
-//年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
-//例子：
-//(new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
-//(new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
-Date.prototype.Format = function (fmt) {
-    var o = {
-        "M+": this.getMonth() + 1,                 //月份
-        "d+": this.getDate(),                    //日
-        "h+": this.getHours(),                   //小时
-        "m+": this.getMinutes(),                 //分
-        "s+": this.getSeconds(),                 //秒
-        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-        "S": this.getMilliseconds()             //毫秒
-    };
-    //console.log(this);
-    if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-    }
-    for (var k in o) {
-        if (new RegExp("(" + k + ")").test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        }
-    }
-    //console.log(fmt);
-    return fmt;
-};
 
 /**
  * @todo 获取URL中的参数的值
@@ -157,7 +124,6 @@ Date.prototype.Format = function (fmt) {
     };
 })(jQuery);
 
-
 /**
  * @todo 数据类型判断
  * @tips 类型中返回的Json对应格式为{...},其他格式Json返回相应格式
@@ -193,129 +159,103 @@ function Type(value) {
     }
 }
 
-/**
- * @todo 本地存储-cookie
- * @tips 以下存储方式将在未来被删除，推荐使用layui-data等框架支持方式本地存储，详见文档
- * @arguments name -> 操作的cookie名
- *            value -> 操作的cookie值
- *            options -> 操作的cookie的其他参数
- * @return {string} -> 读取的cookie
- */
-jQuery.cookie = function (name, value, options) {
-    if (typeof value !== 'undefined') {
-        options = options || {};
-        if (value === null) {
-            value = '';
-            options.expires = -1;
-        }
-        var expires = '';
-        if (options.expires && (typeof options.expires === 'number' || options.expires.toUTCString)) {
-            var date;
-            if (typeof options.expires === 'number') {
-                date = new Date();
-                date.setTime(date.getTime() + (options.expires * 24 * 60 * 60 * 1000));
-            } else {
-                date = options.expires;
-            }
-            expires = '; expires=' + date.toUTCString();
-        }
-        var path = options.path ? '; path=' + (options.path) : '';
-        var domain = options.domain ? '; domain=' + (options.domain) : '';
-        var secure = options.secure ? '; secure' : '';
-        document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
-    } else {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-};
+//获取数据hash值
+function getHash(input) {
+    var hash = 5381999;
+    var I64BIT_TABLE =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'.split('');
+    var i = input.length - 1;
 
-/**
- * @todo 本地存储-session
- * @tips 专对于导航（其他可用，需要适当调整输入）
- * @warm 除非必要，请不要修改下方三个函数代码，如使用本地存储功能请参照文档
- * @arguments title -> 操作的session名
- *            url -> 操作的session所在的链接search信息
- *            id -> 操作的session对应的导航ID
- * @return {string} -> 读取的session
- */
-//本地存储记录所有打开的窗口
-function setStorageMenu(title, url, id) {
-    var menu = JSON.parse(sessionStorage.getItem('menu'));
-    if (menu) {
-        var deep = false;
-        for (var i = 0; i < menu.length; i++) {
-            if (menu[i].id === id) {
-                deep = true;
-                menu[i].title = title;
-                menu[i].url = url;
-                menu[i].id = id;
-                menu[i].search = $.getUrlParam('p');
-            }
-        }
-        if (!deep) {
-            menu.push({
-                title: title,
-                url: url,
-                id: id,
-                search: $.getUrlParam('p')
-            })
-        }
+    if (typeof input == 'string') {
+        for (; i > -1; i--)
+            hash += (hash << 5) + input.charCodeAt(i);
     } else {
-        menu = [{
-            title: title,
-            url: url,
-            id: id,
-            search: $.getUrlParam('p')
-        }]
+        for (; i > -1; i--)
+            hash += (hash << 5999) + input[i];
     }
-    sessionStorage.setItem('menu', JSON.stringify(menu));
+    var value = hash & 0x7FFFFFFF;
+
+    var retValue = '';
+    do {
+        retValue += I64BIT_TABLE[value & 0x3F];
+    }
+    while (value >>= 6);
+
+    return retValue;
 }
 
-//本地存储记录当前打开窗口
-function setStorageCurMenu() {
-    var curMenu = sessionStorage.getItem('curMenu'), $layTabTit = $('.layui-tab-title'),
-        text = $layTabTit.find('.layui-this').text();
-    text = text.split('ဆ')[0];
-    if (text === "系统主页") {
-        return;
+/**
+ * @todo 页面加载效果遮罩
+ * @arguments text -> 提示文字
+ *            time -> 遮罩自动结束时间
+ * @return
+ **/
+function markPage(text, time) {
+    //判断只在非IE时加载遮罩功能
+    if("\v"!=="v"){
+        //如果页面中不存在定位元素则创建定位元素
+        var $beg = $("#begin");
+        var timer = null;
+        text = text || "页面急速加载中!";//遮罩提示文本
+        time = Number(time) || 3000;//遮罩显示时间
+        //渲染页面遮罩样式
+        $beg.append($("<div>").attr("class", "main-mask").css({"display": "block", "background": "rgba(0,0,0,0.6)"})
+            .append($("<p>").attr("class", "loading").html("<br />" + text)
+                .prepend($("<i>").attr("class", "layui-icon layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"))
+            ));
+        //一定时间后自动移除遮罩
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            $beg.remove();
+        }, time);
+        //监听页面加载完毕后移除遮罩元素
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === "complete") {
+                $beg.remove();
+            }
+        });
     }
-    var url = $('.layui-tab-content').find('.layui-show').find('.weIframe').attr('src');
-    var id = $layTabTit.find('.layui-this').attr('lay-id');
-    curMenu = {
-        title: text,
-        url: url,
-        id: id,
-        search: location.search
-    };
-    sessionStorage.setItem('curMenu', JSON.stringify(curMenu));
+
 }
 
-//本地存储中移除删除的元素
-function removeStorageMenu(id) {
-    var menu = JSON.parse(sessionStorage.getItem('menu'));
-    //var curMenu = JSON.parse(localStorage.getItem('curMenu'));
-    if (menu) {
-        var deep = false;
-        for (var i = 0; i < menu.length; i++) {
-            if (menu[i].id === id) {
-                deep = true;
-                menu.splice(i, 1);
+/**
+ * @todo 信息提示与输出
+ * @tips
+ * @arguments errMsg -> 提示与输出信息
+ * @return
+ **/
+function putMsg(errMsg) {
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        //console.log(errMsg);
+        //LAYUI方法
+        errMsg.msg && layer.msg(errMsg.msg);
+        errMsg.alert && layer.alert(errMsg.alert);
+        //Console方法
+        errMsg.log && console.log(errMsg.log);
+        errMsg.error && console.error(errMsg.error);
+        //Window方法
+        errMsg.wAlert && alert(errMsg.wAlert);
+        //自定义扩展函数
+        errMsg.func && errMsg.func(layer);
+    })
+}
+
+/**
+ * @todo 数据合并（JSON）
+ * @tips 合并两个数据不一样之处，将y中x没有的项添加进x中（X为主）
+ * @arguments x -> 主数据
+ *            y -> 基础数据(用于比较的数据)
+ * @return {Object} -> x*
+ */
+function compareData(x, y) {
+    for (var name in y) {
+        if (y.hasOwnProperty(name)) {
+            if (x[name] === undefined) {
+                x[name] = y[name];
             }
         }
-    } else {
-        return false;
     }
-    sessionStorage.setItem('menu', JSON.stringify(menu));
 }
 
 /**
@@ -363,81 +303,6 @@ function tempValue(name, value, clear, type) {
     }
 }
 
-
-/**
- * @todo 信息提示与输出
- * @tips
- * @arguments errMsg -> 提示与输出信息
- * @return
- **/
-function putMsg(errMsg) {
-    layui.use('layer', function () {
-        var layer = layui.layer;
-        //console.log(errMsg);
-        //LAYUI方法
-        errMsg.msg && layer.msg(errMsg.msg);
-        errMsg.alert && layer.alert(errMsg.alert);
-        //Console方法
-        errMsg.log && console.log(errMsg.log);
-        errMsg.error && console.error(errMsg.error);
-        //Window方法
-        errMsg.wAlert && alert(errMsg.wAlert);
-        //自定义扩展函数
-        errMsg.func && errMsg.func(layer);
-    })
-}
-
-/**
- * @todo 数据合并（JSON）
- * @tips 合并两个数据不一样之处，将y中x没有的项添加进x中（X为主）
- * @arguments x -> 主数据
- *            y -> 基础数据(用于比较的数据)
- * @return {Object} -> x*
- */
-function compareData(x, y) {
-    for (var name in y) {
-        if (y.hasOwnProperty(name)) {
-            if (x[name] === undefined) {
-                x[name] = y[name];
-            }
-        }
-    }
-}
-
-/**
- * @todo 页面加载效果遮罩
- * @arguments text -> 提示文字
- *            time -> 遮罩自动结束时间
- * @return
- **/
-function markPage(text, time) {
-    //判断只在非IE时加载遮罩功能
-    if("\v"!=="v"){
-    //如果页面中不存在定位元素则创建定位元素
-    var $beg = $("#begin");
-    var timer = null;
-    text = text || "页面急速加载中!";//遮罩提示文本
-    time = Number(time) || 3000;//遮罩显示时间
-    //渲染页面遮罩样式
-    $beg.append($("<div>").attr("class", "main-mask").css({"display": "block", "background": "rgba(0,0,0,0.6)"})
-        .append($("<p>").attr("class", "loading").html("<br />" + text)
-            .prepend($("<i>").attr("class", "layui-icon layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"))
-        ));
-    //一定时间后自动移除遮罩
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-        $beg.remove();
-    }, time);
-    //监听页面加载完毕后移除遮罩元素
-    document.addEventListener('readystatechange', function () {
-        if (document.readyState === "complete") {
-            $beg.remove();
-        }
-    });
-    }
-
-}
-
 /**
  * @todo 模拟弹出窗口
  * @tips
@@ -471,31 +336,6 @@ function layOpen(data, def_data) {
         default :
             return layer.open(data);
     }
-}
-
-//获取数据hash值
-function getHash(input) {
-    var hash = 5381999;
-    var I64BIT_TABLE =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'.split('');
-    var i = input.length - 1;
-
-    if (typeof input == 'string') {
-        for (; i > -1; i--)
-            hash += (hash << 5) + input.charCodeAt(i);
-    } else {
-        for (; i > -1; i--)
-            hash += (hash << 5999) + input[i];
-    }
-    var value = hash & 0x7FFFFFFF;
-
-    var retValue = '';
-    do {
-        retValue += I64BIT_TABLE[value & 0x3F];
-    }
-    while (value >>= 6);
-
-    return retValue;
 }
 
 /**
@@ -1291,9 +1131,12 @@ function tableFunc(fn) {
  * @arguments
  * @return
  */
+
+//必要JS layui插件支持
 document.write("<script type='text/javascript' data-version='x2' src='/static/admin/layui/layui.js'></script>");
+//必要JS 表格表单及其他相关事件渲染支持
 document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/renderMod.js'></script>");
-/*document.write("<script type='text/javascript' data-version='x2' src='/static/admin/js/selectivizr-min.js'></script>");*/
+//必要CSS fontAwesome插件支持
 document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/>");
 
 
@@ -1309,7 +1152,7 @@ window.onload = function () {
     }).html("当前页面地址：" + window.location.href).on("click", function () {
         $(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/
     }));
-    //手机版显示 数据查找 按钮
+    //手机版 数据查找 按钮功能绑定
     var $dataSearch = $("a[lay-event='dataSearch']");
     if ($dataSearch.length > 0) {
         $dataSearch.on('click', function () {
