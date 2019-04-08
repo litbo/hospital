@@ -44,8 +44,6 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
             , id = navA.attr('data-id')
             , url = navA.attr('data-url')
             , text = navA.attr('data-text');
-        console.log(elem);
-        console.log(url);
         if (!url) {
             return;
         }
@@ -270,10 +268,12 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
                 $('.layui-tab-title li[lay-id="' + id + '"]').addClass('layui-this');
                 element.tabChange('tab', id);
                 var $this_tag = $(".layui-nav-tree *[data-id=" + id + "]");
-                $this_tag[0].click();
-                $this_tag.parent().addClass("layui-this");
-                if ($this_tag.parent()[0].tagName === "DD" || $this_tag.parent()[0].tagName === "dd") {
-                    $this_tag.parent().parent().parent().addClass("layui-nav-itemed");
+                if($this_tag.length>0){
+                    $this_tag[0].click();
+                    $this_tag.parent().addClass("layui-this");
+                    if ($this_tag.parent()[0].tagName === "DD" || $this_tag.parent()[0].tagName === "dd") {
+                        $this_tag.parent().parent().parent().addClass("layui-nav-itemed");
+                    }
                 }
             }
 
