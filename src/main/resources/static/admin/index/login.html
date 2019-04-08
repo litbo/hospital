@@ -71,7 +71,7 @@
                 type: "POST",
                 data: $ser,
                 success: function (info) {
-                    //console.log("LOGIN",info);
+                    console.log("LOGIN",info);
                     //登陆成功跳转页面
                     if (info.code === 0) {
                         layui.sessionData("rl",{
@@ -81,6 +81,10 @@
                         layui.sessionData("rl",{
                             key:"emp",
                             value:info.data.emp
+                        });
+                        layui.sessionData("rl",{
+                            key:"glo",
+                            value:info.data.logos
                         });
                         setTimeout(function () {
                             location.href = "./index.html";

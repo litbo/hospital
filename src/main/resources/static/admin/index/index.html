@@ -169,6 +169,7 @@
         var element = layui.element;
         $(function () {
             var emp = tempValue("rl","emp",false)
+                ,glo = tempValue("rl","glo",false)
                 ,f = tempValue("index", "f",null)
                 ,uu = $.getUrlHash("url")
                 , tt = $.getUrlHash("title") || "新窗口"
@@ -198,6 +199,10 @@
                     layer.close(index);
                     location.href = "/logout"
                 })
+            }
+
+            if(glo){
+                $(".m-logo img").attr("src",glo.logo)
             }
 
             //页面登出事件
