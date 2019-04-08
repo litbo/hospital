@@ -43,7 +43,9 @@ public class LogoServiceImpl implements LogoService {
         String path = System.getProperty("user.dir");
         String filePath =path+"/logo/";
         String url = UploadFile.upload(filePath,multipartFile);
-        logo.setLogo(url);
+        int begin = url.indexOf("logo")+4;
+
+        logo.setLogo(url.substring(begin,url.length()));
         if(sysDao.count("sys_logo")>0){
             return logoDao.updateLogo(logo);
         }
@@ -55,7 +57,8 @@ public class LogoServiceImpl implements LogoService {
         String path = System.getProperty("user.dir");
         String filePath =path+"/logo/";
         String url = UploadFile.upload(filePath,multipartFile);
-        logo.setBbtt(url);
+        int begin = url.indexOf("logo")+4;
+        logo.setBbtt(url.substring(begin,url.length()));
         if(sysDao.count("sys_logo")>0){
             return logoDao.updateLogo(logo);
         }
@@ -67,11 +70,21 @@ public class LogoServiceImpl implements LogoService {
         String path = System.getProperty("user.dir");
         String filePath =path+"/logo/";
         String url = UploadFile.upload(filePath,multipartFile);
-        logo.setSbbqtt(url);
+        int begin = url.indexOf("logo")+4;
+        logo.setSbbqtt(url.substring(begin,url.length()));
         if(sysDao.count("sys_logo")>0){
             return logoDao.updateLogo(logo);
         }
         return logoDao.setLogo(logo);
+    }
+
+
+    public  static  void  main (String args[]){
+
+        String a ="C:\\hospital\\major/logo/fa0ceffb-a521-4577-aaa1-b081ff0ae01d.jpg";
+        int begin = a.indexOf("logo")+4;
+        System.out.println(begin);
+        System.out.println( a.substring(begin,a.length()));
     }
 
 }

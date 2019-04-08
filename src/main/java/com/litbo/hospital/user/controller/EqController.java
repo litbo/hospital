@@ -258,6 +258,7 @@ public class EqController {
             String jsonMessage = "[{'type': 'checkbox'}, " +
                     "{field: 'eqSbbh', title: '设备编号''}, " +
                     "{field: 'eqName', title: '设备名称'}" +
+                    "{field: 'bmName', title: '部门名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
@@ -265,6 +266,7 @@ public class EqController {
             String jsonMessage = "[{'type': 'radio'}, " +
                     "{field: 'eqSbbh', title: '设备编号'}, " +
                     "{field: 'eqName', title: '设备名称'}" +
+                    "{field: 'bmName', title: '部门名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);

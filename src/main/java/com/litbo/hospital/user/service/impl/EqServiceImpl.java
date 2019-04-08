@@ -104,25 +104,29 @@ public class EqServiceImpl implements EqService {
         String filePath = path+"/eq/";
         String mpzp =null;
         String sbzp = null;
+        String mpzpUrl =null;
+        String sbzpUrl =null;
         java.io.File file = new java.io.File(filePath);
         if(eqInfo.getEqMpzp()!=null){
-            mpzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
+            mpzp = UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
+            mpzpUrl = filePath+mpzp;
             if(!file.exists()){
                 file.mkdirs();
             }
             try {
-                ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzp);
+                ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzpUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         if(eqInfo.getEqSbzp()!=null){
-            sbzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
+            sbzp =  UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
+            sbzpUrl = filePath+ sbzp;
             if(!file.exists()){
                 file.mkdirs();
             }
             try {
-                ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzp);
+                ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzpUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,8 +134,8 @@ public class EqServiceImpl implements EqService {
 
         ChangeFile.deleteDir(path+"/tmp/");
 
-        eqInfo.setEqMpzp(mpzp);
-        eqInfo.setEqSbzp(sbzp);
+        eqInfo.setEqMpzp("/"+mpzp);
+        eqInfo.setEqSbzp("/"+sbzp);
 
         //存
         return eqDao.addEq(eqInfo);
