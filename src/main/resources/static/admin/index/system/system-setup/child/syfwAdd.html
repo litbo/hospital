@@ -84,6 +84,7 @@
                 form:{
                     url:"/eq/updateEq",
                     type:"POST",
+                    contentType:"application/json",
                     data:["eqSyfw"],
                     param:{
                         1:"eqId",
@@ -99,6 +100,7 @@
                 data: formData,
                 cb: "/eq/listEqbt",
                 db: "/eq/listShowEqs",
+                se:"/eq/eqSe",
                 key: "radio",
                 name: "dtdt"
             }
