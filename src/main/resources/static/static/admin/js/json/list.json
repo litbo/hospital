@@ -3358,7 +3358,7 @@
                     "title": "设备附件信息导入",
                     "url": "./system/system-setup/fjImport.html",
                     "id": "71103",
-                    "shiro": "SBFJXXDR"
+                    "shiro": "a"
                   },
                   {
                     "title": "设备附件信息录入",
