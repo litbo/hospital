@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwFk;
 import com.litbo.hospital.security.bean.FwHt;
+import com.litbo.hospital.security.vo.FwHtXqVo;
 import com.litbo.hospital.security.vo.HtVo;
 
 /**
@@ -11,6 +12,13 @@ import com.litbo.hospital.security.vo.HtVo;
  * @create 2018-11-29 19:35
  */
 public interface FwHtService {
+
+    /**
+     * 合同详情
+     * @param id
+     * @return
+     */
+    public FwHtXqVo findHtxq(String id);
 
     public int addFwHt(FwHt fwHt);
 

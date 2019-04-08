@@ -52,6 +52,9 @@
         </div>
     </div>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="xq">详情</a>
+</script>
 <script>
     renderMod.table={
         table:{
@@ -62,6 +65,7 @@
                 , {field: 'htTime', title: '合同日期', minWidth: 100}
                 , {field: 'sbcsName', title: '维修商', minWidth: 150}
                 , {field: 'htStatusString', title: '状态', minWidth: 150}
+                , {title:'',align:'center',minWidth:200,toolbar:'#bar'}
             ]]
             ,url:"/fwht/list"
             ,request:{
@@ -78,6 +82,19 @@
                     "count":res.data.total,//页面的所有数据数
                     "data": res.data.list //解析数据列表
                 }
+            }
+            , done: function (obj) {
+                tableFunc({
+                    tools:[
+                        {
+                            event:"xq",
+                            title:"合同详情",
+                            type:2,
+                            content:"./child/contract-xq.html",
+                            dataUrl:["id"]
+                        }
+                    ]
+                })
             }
         },
         reSet:{

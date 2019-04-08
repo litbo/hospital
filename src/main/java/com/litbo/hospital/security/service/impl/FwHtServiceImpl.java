@@ -9,6 +9,7 @@ import com.litbo.hospital.security.bean.FwFk;
 import com.litbo.hospital.security.bean.FwHt;
 import com.litbo.hospital.security.dao.FwHtDao;
 import com.litbo.hospital.security.service.FwHtService;
+import com.litbo.hospital.security.vo.FwHtXqVo;
 import com.litbo.hospital.security.vo.HtVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,13 @@ public class FwHtServiceImpl implements FwHtService {
 
     @Autowired
     private FwHtDao fwHtDao;
+
+    @Override
+    public FwHtXqVo findHtxq(String id) {
+        FwHtXqVo fwHtxq = fwHtDao.getFwHtxq(id);
+        fwHtxq.setFwFkVo(fwHtDao.findFkList(id));
+        return fwHtxq;
+    }
 
     @Override
     public int addFwHt(FwHt fwHt) {

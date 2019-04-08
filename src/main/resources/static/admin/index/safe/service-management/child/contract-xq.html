@@ -77,59 +77,19 @@
                 </div>
                 <!-- 模块二 -->
                 <div class="layui-colla-item">
-                    <h2 class="layui-colla-title">付款</h2>
+                    <h2 class="layui-colla-title">付款信息</h2>
                     <div class="layui-colla-content">
                         <div class="layui-row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">付款方式</label>
+                            <div class="col-xs-12">
+                                <div class="layui-form-item" pane   style="margin-bottom:-10px;">
+                                    <label class="layui-form-label col-xs-12">付款信息      </label>
                                     <div class="layui-input-block">
-                                        <select name="fkFs">
-                                            <option value="汇总">汇总</option>
-                                            <option value="汇票">汇票</option>
-                                            <option value="银行转账">银行转账</option>
-                                        </select>
                                     </div>
                                 </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">发票号码</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="fkFphm" placeholder="请输入" lay-verify="required"
-                                               class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">发票金额</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="fkPrice" placeholder="请输入" lay-verify="required"
-                                               class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">付款时间</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="fkTime" class="layui-input" autocomplete="off" id="appointRepairDate">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">付款人</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="fkrXm" placeholder="请输入" lay-verify="required"
-                                               class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
+                                <table id="table" lay-filter="table1"></table>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12">
-                <div class="layui-form-item" style="margin:20px 0;">
-                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
                 </div>
             </div>
         </div>
@@ -141,26 +101,13 @@
     renderMod = {
         form: {
             val:{
-                    filter:"htzfForms",
-                    get:{
-                        url:"/fwht/htzfIndex",
-                        data:{
-                            id:$.getUrlParam("id")
-                        }
-                    }
-            },
-            submit:{
-                form:{
-                    url:"/fwht/addFwFk",
-                    type:"POST",
-                    data:["fkHtbh","fkTime","fkFphm","fkPrice","fkrXm","fkFs",],
-                    done:function(res){
-                        if(res.code === 0){
-                            //提交完成后关闭页面
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                            parent.location.reload();
-                        }
+                filter:"htzfForms",
+                get:{
+                    url:"/fwht/htxqIndex",
+                    parse:"fwFkVo",
+                    tableId:"table",
+                    data:{
+                        id:$.getUrlParam("id")
                     }
                 }
             },
@@ -178,6 +125,23 @@
                     format:'yyyy-MM-dd HH:mm:ss'
                 }
             ]
+        }
+        ,
+        addTable :{
+            table:{
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    ,{field: 'fkrXm', title: '付款人姓名',minWidth: 150}
+                    ,{field: 'fkFs', title: '付款方式', minWidth: 150}
+                    ,{field: 'fkFphm', title: '发票编号', minWidth: 150}
+                    ,{field: 'fkTime', title: '付款时间', minWidth: 150}
+                    ,{field: 'fkPrice', title: '付款金额', minWidth: 150}
+                ]]
+                , toolbar:false
+                , page:false
+                , height: "200"
+                , data: []
+            }
         }
     }
 </script>
