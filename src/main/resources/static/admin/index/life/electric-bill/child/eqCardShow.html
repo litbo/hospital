@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>设备卡查看</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <!--打印样式插件-->
+    <link href="/static/admin/js/print/css/print.css" rel="stylesheet" type="text/css" media="print">
+    <style>
+        .bodys{
+            margin: 0 auto;
+            width: 1500px;
+        }
+        .layui-table, .layui-table-view{
+            margin:0!important;
+        }
+        td{
+            text-align: center;
+            min-height:40px!important;
+        }
+        .t_title {
+            width: 10%;
+        }
+        .t_val{
+            width:23.3%;
+        }
+        .t_max{
+            width:25%;
+        }
+        .eqCB{
+            border:3px solid #ddd;
+            clear:both;
+        }
+        .layui-table tbody tr:hover{
+            background-color: transparent!important;
+        }
+        .eqFo{
+            overflow: hidden;
+            margin:5px 0 20px;
+        }
+        .min_msg{
+            width: 20%;
+            float: right;
+            margin-bottom: 5px;
+        }
+        .min_msg td{
+            width:50%;
+        }
+        .fl{
+            float:left;
+        }
+        .fr{
+            float:right;
+        }
+        .tal{
+            text-align: left;
+        }
+        .min_fo{
+            width:300px;
+        }
+        h1{
+            text-align: center;
+            margin-top:10px;
+            font-size: 2.5em;
+        }
+        .logo{
+            width: 260px;
+            height: 70px;
+            float: left;
+        }
+        #print{
+            width: 150px;
+            position: absolute;
+            top: 120px;
+            left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row bodys">
+    <div class="col-xs-12">
+        <img src="/static/admin/images/yhd.png" alt="LOGO" class="logo" />
+        <h1>设备台账信息卡</h1>
+        <div id="show">
+            <button class="layui-btn layui-btn-normal" id="print">打印页面</button>
+        </div>
+        <div class="min_msg">
+            <table class="layui-table">
+                <tr>
+                    <td>设备编号</td>
+                    <td class="sbbh"></td>
+                </tr>
+                <tr>
+                    <td>技术状态</td>
+                    <td class="jszt"></td>
+                </tr>
+                <tr>
+                    <td>报修状态</td>
+                    <td class="bxzt"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="eqCB">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th colspan="6"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="t_title">设备品名</td>
+                    <td class="t_val sbpm"></td>
+                    <td class="t_title">设备简称</td>
+                    <td class="t_val sbjc"></td>
+                    <td class="t_title">型号</td>
+                    <td class="t_val xh"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">规格</td>
+                    <td class="t_val gg"></td>
+                    <td class="t_title">使用范围</td>
+                    <td class="t_val syfw"></td>
+                    <td class="t_title">启用日期</td>
+                    <td class="t_val qyrq"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">分类代码</td>
+                    <td class="t_val fldm"></td>
+                    <td class="t_title">分类名称</td>
+                    <td class="t_val flmc"></td>
+                    <td class="t_title">分类标准</td>
+                    <td class="t_val flbz"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">使用科室</td>
+                    <td class="t_val syks"></td>
+                    <td class="t_title">保管人</td>
+                    <td class="t_val bgr"></td>
+                    <td class="t_title">安装位置</td>
+                    <td class="t_val azwz"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">风险等级</td>
+                    <td class="t_val fxdj"></td>
+                    <td class="t_title">管理品目</td>
+                    <td class="t_val glpm"></td>
+                    <td class="t_title">案卷编号</td>
+                    <td class="t_val ajbh"></td>
+                </tr>
+                </tbody>
+                <thead>
+                <tr>
+                    <th colspan="6"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="t_title">供应商</td>
+                    <td class="t_val gys"></td>
+                    <td class="t_title">采购日期</td>
+                    <td class="t_val cgrq"></td>
+                    <td class="t_title">配置</td>
+                    <td class="t_val pz"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">附件</td>
+                    <td class="t_val fj"></td>
+                    <td class="t_title">合同编号</td>
+                    <td class="t_val htbh"></td>
+                    <td class="t_title">免税批号</td>
+                    <td class="t_val msph"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">注册证号</td>
+                    <td class="t_val zczh"></td>
+                    <td class="t_title">经费来源</td>
+                    <td class="t_val jfly"></td>
+                    <td class="t_title">取得方式</td>
+                    <td class="t_val qdfs"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">安装日期</td>
+                    <td class="t_val azrq"></td>
+                    <td class="t_title">转入日期</td>
+                    <td class="t_val zrrq"></td>
+                    <td class="t_title">使用年限</td>
+                    <td class="t_val synx"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">生产商</td>
+                    <td class="t_val scs"></td>
+                    <td class="t_title">生产日期</td>
+                    <td class="t_val scrq"></td>
+                    <td class="t_title">设备序列号</td>
+                    <td class="t_val sbxlh"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">国别</td>
+                    <td class="t_val gb"></td>
+                    <td class="t_title">维修商</td>
+                    <td class="t_val wxs"></td>
+                    <td class="t_title">第三方维修商</td>
+                    <td class="t_val dsfwxs"></td>
+                </tr>
+                <tr>
+                    <td class="t_title">产地</td>
+                    <td class="t_val cd"></td>
+                    <td class="t_title">进口产品</td>
+                    <td class="t_val jkcp"></td>
+                    <td colspan="2"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="layui-table">
+                <tbody id="list">
+                    <tr>
+                        <td class="t_max">变更事项</td>
+                        <td class="t_max">变更前</td>
+                        <td class="t_max">变更后</td>
+                        <td class="t_max">变更时间</td>
+                    </tr>
+                    <tr class="blk">
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                    <tr class="blk">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="blk">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="blk">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>注销日期</td>
+                        <td colspan="3" class="zxrq tal"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="eqFo">
+            <div class="min_fo fl">
+                <span>建卡人：</span>
+                <span class="jkr"></span>
+            </div>
+            <div class="min_fo fr">
+                <span>建卡时间：</span>
+                <span class="jksj"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    //表格数据填充
+    function pintValue(res){
+        for(var name in res){
+            if(res.hasOwnProperty(name)){
+                $on = $("." + name);
+                if($on.length > 0){
+                    $on.text(res[name]);
+                }
+            }
+        }
+    }
+    //表格列表数据填充
+    function printList(res){
+        if(res.length > 0){
+            $(".blk").remove();
+            for(var j=0;j<res.length;j++){
+                $("#list").append(
+                    $("<tr>").append(
+                        $("<td>").text(res[j][0])
+                    ).append(
+                        $("<td>").text(res[j][1])
+                    ).append(
+                        $("<td>").text(res[j][2])
+                    ).append(
+                        $("<td>").text(res[j][3])
+                    )
+                )
+            }
+        }
+    }
+
+    pintValue({
+        "gys":"华康",
+        "gb":"中国",
+        "zxrq":"2019-01-01",
+        "jkr":"pppppppppppppppppppppp",
+        "jksj":"2019-01-01d",
+        sbbh:"6666666666666"
+    });
+    printList(
+        [
+            [0,1,2,3],
+            [10,11,12,13],
+            ["a","b","c","d"],
+            []
+        ]
+    );
+    $("#print").on("click",function () {
+        window.print();
+    })
+</script>
+</html>

@@ -15,57 +15,63 @@ var $mainList = $("#main_nav_list")
     , nList = {};//大页面导航数据
 
 $(function () {
-    $.ajax({
-        url: "/static/admin/js/json/nav.json",
-        async: false,
-        success: function (res) {
-            nList = res;
-            addNav($navList);
-            console.log("nav already!");
-            $.ajax({
-                url: "/static/admin/js/json/list.json",
-                async: false,
-                success: function (res) {
-                    mList = res;
-                    addList($mainList, $viceList, mList);
-                    console.log("list already!");
-                }
-            })
-        }
+    layui.use("element",function(){
+        var element = layui.element;
+        $.ajax({
+            url: "/static/admin/js/json/nav.json",
+            async: false,
+            success: function (res) {
+                nList = res;
+                addNav($navList);
+                //console.log("nav already!");
+                $.ajax({
+                    url: "/static/admin/js/json/list.json",
+                    async: false,
+                    success: function (res) {
+                        mList = res;
+                        addList($mainList, $viceList, mList);
+                        element.render();
+                        console.log("导航渲染完毕!");
+                    }
+                })
+            }
+        })
     })
 });
 
+function changeTab(ele, callback) {
+    layui.use(['element'], function () {
+        var element = layui.element;
+        element.tabAdd('tab', {
+            title: ele.title,
+            content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
+            id: ele.id
+        });
+        element.tabChange('tab', ele.id);
+        //callback ? callback() : null;
+    })//layui element规定用法，当主列表项无子列表时选中第一个列表项
+}//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）
+
 function addList(list, list1, main_list) {//list:包含主列表的容器 list1:包含副列表的容器
-    function changeTab(ele, callback) {
-        layui.use(['element'], function () {
-            var element = layui.element;
-            element.tabAdd('tab', {
-                title: ele.title,
-                content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
-                id: ele.id
-            });
-            element.tabChange('tab', ele.id);
-            callback ? callback() : null;
-        })//layui element规定用法，当主列表项无子列表时选中第一个列表项
-    }//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）
     function addSample(a) {//a:main_list[x] （x>=0） 或 main_list[x].tools[y].children[z]
         var thisA = a.children || a.items;
         if (thisA) {//判断是否为 返回首页 列表项（x=0？）
             for (var i = 0; i < thisA.length; i++) {
                 addPage(thisA[i]);
             }
-            /*if (p !== "home") {//首页不打开新TAB
-                var d = a.children[0];
-                if (!d.children) {
-                    changeTab(d, function () {
+            //打开左侧主列表第一个
+            /*if (p !== "home") {//首页不打开新TAB*/
+                var d = a.children;
+                if (d && !d[0].children) {
+                    //changeTab(d, function () {
                         $('.layui-nav-item').eq(1).addClass('layui-this');
-                    })
+                    //})
                 } else {
-                    changeTab(d.children[0], function () {
+                    //changeTab(d.children[0], function () {
                         $('.layui-nav-child').children(':first').addClass('layui-this');
-                    })
+                    //})
                 }
-            }*/
+            //}
         } else {
             addPage(a);
         }
@@ -293,5 +299,14 @@ function addNav(con) {//con包含导航菜单的容器名
                 .append($("<p>").attr("class", "menu-tit").html(nList[i].title))
             )
         );
+        if(p !== "home"){
+            if(p === nList[i].page){
+                changeTab({
+                    title:nList[i].title,
+                    url:"./global/page.html?p="+p+"&s="+i,
+                    id:"pageFix"
+                })
+            }
+        }
     }
 }//通过nav_list向页面中添加顶部导航列表

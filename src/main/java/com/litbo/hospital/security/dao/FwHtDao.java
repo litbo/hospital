@@ -2,6 +2,8 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwFk;
 import com.litbo.hospital.security.bean.FwHt;
+import com.litbo.hospital.security.vo.FwFkVo;
+import com.litbo.hospital.security.vo.FwHtXqVo;
 import com.litbo.hospital.security.vo.HtVo;
 import org.apache.ibatis.annotations.*;
 
@@ -82,10 +84,35 @@ public interface FwHtDao {
             "dbo.fw_ht.id = #{id}")
     public HtVo getFwHt(String id);
 
+    @Select("SELECT\n" +
+            "dbo.fw_ht.id as fkHtbh,\n" +
+            "dbo.fw_ht.ht_name,\n" +
+            "dbo.fw_ht.ht_time,\n" +
+            "dbo.fw_ht.ht_price\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.fw_ht\n" +
+            "WHERE\n" +
+            "dbo.fw_ht.id = #{id}")
+    public FwHtXqVo getFwHtxq(String id);
+
     @Select("select count(*) FROM fw_fk fk where fk_htbh = #{htId}")
     public int findFkCountByHtId(String htId);
 
     @Select("select ht_zffs FROM fw_ht where id = #{htId}")
     public int findFkCs(String htId);
+
+    @Select("SELECT\n" +
+            "dbo.fw_fk.fkrXm,\n" +
+            "dbo.fw_fk.fk_time,\n" +
+            "dbo.fw_fk.fk_price,\n" +
+            "dbo.fw_fk.fk_fs,\n" +
+            "dbo.fw_fk.fk_fphm\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.fw_fk\n" +
+            "WHERE\n" +
+            "dbo.fw_fk.fk_htbh = #{fpId}")
+    public List<FwFkVo> findFkList(String fpId);
 
 }

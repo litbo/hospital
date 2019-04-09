@@ -227,7 +227,12 @@ public class EqController {
 
         return Result.success(es.listPmTree());
     }
+    //查询品名信息
+    @RequestMapping("/getPmById")
+    public Result getPmById(String eqPmId){
 
+        return Result.success(es.getPmById(eqPmId));
+    }
     //通过品名 拼音码pym 查询品名
     @RequestMapping("/listPmsByPym")
     public Result listPmsByPym(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
@@ -258,6 +263,7 @@ public class EqController {
             String jsonMessage = "[{'type': 'checkbox'}, " +
                     "{field: 'eqSbbh', title: '设备编号''}, " +
                     "{field: 'eqName', title: '设备名称'}" +
+                    "{field: 'bmName', title: '部门名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
@@ -265,6 +271,7 @@ public class EqController {
             String jsonMessage = "[{'type': 'radio'}, " +
                     "{field: 'eqSbbh', title: '设备编号'}, " +
                     "{field: 'eqName', title: '设备名称'}" +
+                    "{field: 'bmName', title: '部门名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);

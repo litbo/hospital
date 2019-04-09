@@ -41,6 +41,7 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+
     <div class="hidden" id="desInfo">
         <h1>医学装备购置申请填表说明</h1>
         <ol>
@@ -56,6 +57,7 @@
             <li>表格内容请按要求逐项填写清楚、完整。若表格容量不够，请另附纸写明。其它不明事宜，请致电医学工程处咨询。</li>
         </ol>
     </div>
+
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="describe">填表说明</a>
@@ -103,6 +105,7 @@
                         tools:[
                             {
                                 tool:"toolbar",
+                                type:1,
                                 event:"describe",
                                 content:$("#desInfo")
                             },

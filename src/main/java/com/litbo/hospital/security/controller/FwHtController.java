@@ -85,4 +85,15 @@ public class FwHtController {
 
     }
 
+    @GetMapping("/htxqIndex")
+    public Result htxqIndex(String id){
+        try {
+            return Result.success(fwHtService.findHtxq(id));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("加载信息失败");
+        }
+
+    }
+
 }

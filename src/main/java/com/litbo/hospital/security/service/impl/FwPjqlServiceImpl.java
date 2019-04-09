@@ -3,6 +3,7 @@ package com.litbo.hospital.security.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.task.bean.Task;
+import com.litbo.hospital.common.task.dao.TaskDao;
 import com.litbo.hospital.common.task.service.TaskService;
 import com.litbo.hospital.security.bean.*;
 import com.litbo.hospital.security.dao.*;
@@ -19,7 +20,9 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FwPjqlServiceImpl implements FwPjqlService {
@@ -36,7 +39,10 @@ public class FwPjqlServiceImpl implements FwPjqlService {
     @Autowired
     private FwPjckDao pjckDao;
     @Autowired
-    private TaskService taskService;
+    private TaskDao taskDao;
+    @Autowired
+    private FwPjzdDao pjzdDao;
+
     /***
      *插入配件请领信息
      * @param insertFwPjqlVo
@@ -72,23 +78,32 @@ public class FwPjqlServiceImpl implements FwPjqlService {
         task.setUrl(EnumURL.EXAMINE_APPLY.getMessage());
         task.setJsrId(pjql.getQlrId());
         task.setOther(pjql.getId().toString());
-        task.setWorkName("配件请领审核");
-        taskService.insertTask(task);
+        task.setWorkName(insertFwPjqlVo.getSEmp().getBmName()+" "+insertFwPjqlVo.getSEmp().getUserXm()+" "+"配件请领审核");
+        taskDao.insertTask(task);
         return res;
     }
     @Transactional
     @Override
-    public int updateFwPjqlSqStatus(Integer status, Integer id, String qrrId, String shyy, Integer taskId) {
+    public Map<String, Integer> updateFwPjqlSqStatus(Integer status, Integer id, String qrrId, String shyy, Integer taskId) {
         //根据主键查询报修单id
         String fwId = pjqlDao.selectFwIdById(id);
         if(status == EnumApplyStatus.APPLY_APPROVAL.getCode()){//同意
             //检查配件库库存是否足够
+            Map<String,Integer> map = new HashMap();
             List<FwPjqlZjb> pjqlZjbs = pjqlZjbDao.listFwPjqlByBjqlId(id);
+            Boolean flag = false;
+
             for(FwPjqlZjb pjqlZjb:pjqlZjbs){
                 if(pjkDao.reduceFwPjkSl(pjqlZjb.getPjzdId(),pjqlZjb.getPjsgCount())==0){//如果数量不足，则回滚事务，并返回 审核失败
-                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                    return -1;
+                    String pjName = pjzdDao.selectFwPjzdName(pjqlZjb.getPjzdId());
+                    Integer num = pjzdDao.selectFwPjkCountById(pjqlZjb.getPjzdId());
+                    map.put(pjName,pjqlZjb.getPjsgCount()-num);
+                    flag = true;
                 }
+            }
+            if(flag){
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return map;
             }
             //库存如果足够，完成出库，并存入出库信息
             FwPjck pjck = new FwPjck();
@@ -107,7 +122,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
             //任务列表进行完成
-            if(taskService.updateTaskById(taskId)==0){
+            if(taskDao.updateTaskById(taskId)==0){
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         }else {
@@ -116,12 +131,12 @@ public class FwPjqlServiceImpl implements FwPjqlService {
             //修改报修表状态
             baoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_GZ_JX.getCode());
             //任务列表进行完成
-            if(taskService.updateTaskById(taskId)==0){
+            if(taskDao.updateTaskById(taskId)==0){
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
         }
-
-        return pjqlDao.updateFwPjqlSqStatus(status,id,qrrId,new Date());
+        pjqlDao.updateFwPjqlSqStatus(status,id,qrrId,new Date());
+        return null;
     }
     @Override
     public PageInfo listFwPjqlZjb(int pageNum, int pageSize, String pjRkTimeStart, String pjRkTimeEnd, String pjName) {

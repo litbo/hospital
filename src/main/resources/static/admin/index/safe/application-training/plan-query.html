@@ -42,7 +42,7 @@
     </div>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">编辑</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情</a>
 </script>
 
 
@@ -58,6 +58,7 @@
                 , {field: 'ZZZName', title: '组织者', minWidth: 150}
                 , {field: 'jhKstime', title: '开始日期', minWidth: 150}
                 , {field: 'jhJstime', title: '结束日期', minWidth: 150}
+                , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
             ]],
             url: "/Jh/jhList"
             , request: {
@@ -71,6 +72,19 @@
                     "count":res.data.total,//页面显示的数据条数
                     "data": res.data.list //解析数据列表
                 }
+            }
+            , done: function (obj) {
+                tableFunc({
+                    tools:[
+                        {
+                            event:"jhxq",
+                            title:"计划详情",
+                            type:2,
+                            content:"./child/personnel-xqinput.html",
+                            dataUrl:["id"]
+                        }
+                    ]
+                })
             }
         },
         reSet:{

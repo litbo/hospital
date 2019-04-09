@@ -1,12 +1,12 @@
 package com.litbo.hospital.user.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.common.utils.poi.ChangeFile;
 import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
-import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
@@ -29,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -37,6 +36,7 @@ import java.util.*;
 
 import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
 import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
+
 
 @Service
 public class EqServiceImpl implements EqService {
@@ -104,25 +104,29 @@ public class EqServiceImpl implements EqService {
         String filePath = path+"/eq/";
         String mpzp =null;
         String sbzp = null;
+        String mpzpUrl =null;
+        String sbzpUrl =null;
         java.io.File file = new java.io.File(filePath);
         if(eqInfo.getEqMpzp()!=null){
-            mpzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
+            mpzp = UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
+            mpzpUrl = filePath+mpzp;
             if(!file.exists()){
                 file.mkdirs();
             }
             try {
-                ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzp);
+                ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzpUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         if(eqInfo.getEqSbzp()!=null){
-            sbzp = filePath+ UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
+            sbzp =  UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
+            sbzpUrl = filePath+ sbzp;
             if(!file.exists()){
                 file.mkdirs();
             }
             try {
-                ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzp);
+                ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzpUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,8 +134,8 @@ public class EqServiceImpl implements EqService {
 
         ChangeFile.deleteDir(path+"/tmp/");
 
-        eqInfo.setEqMpzp(mpzp);
-        eqInfo.setEqSbzp(sbzp);
+        eqInfo.setEqMpzp("/"+mpzp);
+        eqInfo.setEqSbzp("/"+sbzp);
 
         //存
         return eqDao.addEq(eqInfo);
@@ -292,6 +296,11 @@ public class EqServiceImpl implements EqService {
     public PageInfo listWFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(eqDao.listWFlEqByX(selectFlEqVo));
+    }
+
+    @Override
+    public EqPm getPmById(String eqPmId) {
+        return eqDao.getPmById(eqPmId);
     }
 
 

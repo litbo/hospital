@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.StringCutUtils;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
+
 
 @Service
 public class BmServiceImpl implements BmService {

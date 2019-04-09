@@ -117,7 +117,6 @@ public class FwPjzdController {
     public Result fwPjzdSe(){
         Map map =new HashMap();
         map.put("dom","<div class='layui-inline'><select class='layui-select' name='pjfl'>" +
-                "<option>分类</option>" +
                 "<option value='维材-医疗维修'>维材-医疗维修</option>" +
                 "<option value='维材-办公维修'>维材-办公维修</option>" +
                 "<option value='维材-普通维修'>维材-普通维修</option>" +

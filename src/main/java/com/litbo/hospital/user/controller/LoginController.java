@@ -6,6 +6,8 @@ import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.user.bean.SRight;
 import com.litbo.hospital.user.bean.SRole;
+import com.litbo.hospital.user.bean.SysLogo;
+import com.litbo.hospital.user.dao.LogoDao;
 import com.litbo.hospital.user.dao.RoleDao;
 import com.litbo.hospital.user.service.RightService;
 import com.litbo.hospital.user.service.RoleService;
@@ -37,6 +39,8 @@ public class LoginController {
     private UserService userService;
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private LogoDao logoDao;
     @RequestMapping("/")
     public String tologin(){
         return "login";
@@ -90,7 +94,8 @@ public class LoginController {
             session.setAttribute("username",loginVo.getUserName());
             LiveEmpVo emp =  userService.getLiveUserById(loginVo.getUserName());
             session.setAttribute("emp",emp);
-
+            SysLogo logos =logoDao.selectLogo();
+            session.setAttribute("logos",logos);
 
 
             SRole role =  roleDao.getRole(loginVo.getUserName());
@@ -105,6 +110,7 @@ public class LoginController {
             rightsByUsername.add(new SRight());
             auth.setRightList(rightsByUsername);
             auth.setEmp(emp);
+            auth.setLogos(logos);
 
 
             return Result.success(auth);
