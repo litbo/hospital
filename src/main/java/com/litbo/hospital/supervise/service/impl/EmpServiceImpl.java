@@ -83,6 +83,14 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
+    public List<EmpSelectVO> listSelectEmpsByUserName(int pageNum, int pageSize, String userName) {
+        PageHelper.startPage(pageNum,pageSize);
+        if(userName==null||userName.equals("")) return null;
+        List<EmpSelectVO> emps = empDao.listSelectEmpsByUserName(userName);
+        return emps;
+    }
+
+    @Override
     public EmpSelectVO listSelectEmpsByUserId(String userId) {
         return empDao.listSelectEmpsByUserId(userId);
     }

@@ -108,73 +108,6 @@
 
 
 <script>
-    layui.use(['layer', 'form', 'layedit', 'laydate','element','upload'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , element = layui.element
-            , upload = layui.upload
-            , laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
-            , pass: [/(.+){6,12}$/, '密码必须6到12位']
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-        //弹出层设置
-        $('#layerBtn').click(function(){
-            layer.open({
-                type:2
-                ,title:'模板选择'
-                ,content:'./child/writeAdd.html'
-                ,area:['90%','90%']
-                ,btn:['选择','取消']
-            });
-            return false;
-        });
-
-        //文件下载
-        upload.render({
-            elem:'#selectFile',
-            url:'/upload/',
-            auto:false,
-            bindAction:'#startUploadFile',
-            size:1024*40,//限制文件大小，单位kb
-            done:function(res){
-                console.log(res);
-            }
-        })
-    });
 
     renderMod = {
         date:{
@@ -219,15 +152,29 @@
 
     }
 
-    $("#viewFile").click(function(){
-        var url=$('#docUrl').val();
-        layOpen({
-            type:2,
-            content:'/supervise/zdgl/readDocOnline?url='+url,
-            area:["80%","80%"]
-        })
+    $(document).ready(function(){
+
+
+        $("#wdsc").click(function(){
+            var url = $("#docUrl").val()
+            if(url==null||url==""){
+                $("#viewFile").addClass("layui-btn-disabled");
+            }
+        });
+
+        $("#viewFile").click(function(){
+            if($("#viewFile").hasClass("layui-btn-disabled")) return;
+            var url=$('#docUrl').val();
+            layOpen({
+                type:2,
+                content:'/supervise/zdgl/readDocOnline?url='+url,
+                area:["80%","80%"]
+            })
+
+        });
 
     });
+
 
 
 

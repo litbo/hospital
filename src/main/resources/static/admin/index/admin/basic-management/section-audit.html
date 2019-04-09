@@ -62,6 +62,7 @@
                     class="fas"></i>&nbsp;审核流程详情
             </button>
         </div>
+
     </div>
 
     <div class="layui-row">
@@ -204,13 +205,6 @@
                     key:'abc',
                     name:'bbb',
                     before:function(){
-                        // var users = getTableValue("table"),daa={};
-                        // if(formData.radio){
-                        //     daa=formData.radio[0]["bmId"];
-                        // }else if(formData.val){
-                        //     console.log(formData)
-                        //     daa=formData.val.bmId;
-                        // }
                         var gwId=$.getUrlParam('gwId')
                         return {
                             gwId:gwId
@@ -234,6 +228,7 @@
         });
 
         $("#viewFile").click(function(){
+            if($("#viewFile").hasClass("layui-btn-disabled")) return;
             var url=$('#docUrl').val();
             layOpen({
                 type:2,

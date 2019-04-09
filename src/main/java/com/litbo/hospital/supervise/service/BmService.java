@@ -2,6 +2,7 @@ package com.litbo.hospital.supervise.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.SBm;
+import com.litbo.hospital.supervise.vo.BmSelectLbVO;
 import com.litbo.hospital.supervise.vo.BmSelectVO;
 import com.litbo.hospital.supervise.vo.BmsTreeVO;
 import com.litbo.hospital.supervise.vo.SetBmVO;
@@ -67,6 +68,8 @@ public interface BmService {
     List<BmsTreeVO> listTreeBms();
 
     List<SBm> listBmsByBmName(int pageNum, int pageSize,String bmName);
+
+    List<BmSelectLbVO> listKgsBm(int pageNum, int pageSize, String bmName);
 
     //通过父布门递归删除
 //    void removeBmByPid(String pid);

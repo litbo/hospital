@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/kwgl/empgl")
@@ -45,12 +47,42 @@ public class EmpController {
         return Result.success(date);
     }
 
+    @RequestMapping("/empSe")
+    public Result empSe(){
+        Map map =new HashMap();
+        map.put("dom",
+                "<div class='layui-inline'><input type=\"text\" name=\"userName\" class=\"layui-input\" placeholder=\"员工姓名\" autocomplete=\"off\"></div>" +
+                        "    <div class='layui-input-inline mar10-0' align='center'>" +
+                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/kwgl/empgl/listSelectEmpsByUserName");
+        m.put("type","reload");
+        String[] data = {"userName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
+    }
+
+
+
     //获取Emp基本信息
     @RequestMapping("/listSelectEmps")
     public Result listSelectEmps(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         PageInfo info = empService.listSelectEmps(pageNum, pageSize);
         return Result.success(info);
+    }
+
+    //获取Emp基本信息
+    @RequestMapping("/listSelectEmpsByUserName")
+    public Result listSelectEmpsByUserName(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                                 String userName) {
+        List<EmpSelectVO> emps=empService.listSelectEmpsByUserName(pageNum, pageSize,userName);
+        return Result.success(new PageInfo<>(emps));
     }
 
     @GetMapping("/listSelectEmpsByUserId")

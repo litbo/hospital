@@ -261,6 +261,7 @@
         });
 
         $("#viewFile").click(function(){
+            if($("#viewFile").hasClass("layui-btn-disabled")) return;
             var url=$('#docUrl').val();
             layOpen({
                 type:2,

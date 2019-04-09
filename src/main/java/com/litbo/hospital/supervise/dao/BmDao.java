@@ -60,7 +60,7 @@ public interface BmDao {
     @Select("select count(*) from s_bm where p_bm_id=#{obm_id}")
     Integer getAmountByPid(String obm_id);
 
-    @Update("update s_bm set bm_id=#{bm_id},p_bm_id=#{pbm_id} where obm_id=#{obmid}")
+    @Update("update s_bm set bm_id=#{bm_id},p_bm_id=#{pbm_id},xbm_flag=0 where obm_id=#{obmid}")
     void setBmBeto(@Param("obmid") String obmid,@Param("bm_id") String bm_id, @Param("pbm_id") String pbm_id);
 
     @Update("update s_bm set bm_id=#{bmId} where obm_id=#{obmId}")
@@ -80,4 +80,8 @@ public interface BmDao {
 
     @Select("select * from s_bm where bm_name like  '%'+#{bmName}+'%'")
     List<SBm> listBmsByBmName(String bmName);
+    @Update("update s_bm set xbm_flag=#{xbmFlag}  where bm_id=#{new_pbm_id}")
+    void setxbm(@Param("new_pbm_id") String new_pbm_id, @Param("xbmFlag")String xbmFlag);
+    @SelectProvider(type = BmProvider.class ,method = "listKgsBm")
+    List<BmSelectLbVO>  listKgsBm(String bmName);
 }

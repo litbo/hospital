@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
+                    <label class="layui-form-label" style="height:46px;line-height:30px;">负责人预览</label>
                     <div class="layui-input-block">
                         <input type="text" name="userXm" placeholder="请选择" autocomplete="off" lay-verify="required"
                                disabled class="layui-input" style="height:46px;">
@@ -165,7 +165,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
+                    <label class="layui-form-label" style="height:46px;line-height:30px;">负责人预览</label>
                     <div class="layui-input-block">
                         <input type="text" name="userXm" placeholder="请选择" autocomplete="off" lay-verify="required"
                                disabled class="layui-input" style="height:46px;">
@@ -344,6 +344,7 @@
             userId:paseData["pId"]["userId"],
             pBmId: paseData["pId"]["bmId"]
         };
+        console.log(nData);
         for(var name in nData){
             if(nData.hasOwnProperty(name)){
                 if(nData[name] === "" || nData[name] === undefined){
@@ -426,7 +427,8 @@
                     name: "dtdt",
                     na:"userXm",
                     key: "radio",
-                    data: formData
+                    data: formData,
+                    se:"/kwgl/empgl/empSe"
                 },
                 {
                     elem: "#selectRoom1",
@@ -435,7 +437,8 @@
                     name: "dtdt",
                     na:"userXm",
                     key: "radio",
-                    data: formData
+                    data: formData,
+                    se:"/kwgl/empgl/empSe"
                 }
             ]
         }

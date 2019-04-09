@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ public class GWSubmitVO {
     private String gwLevel;
     private String gwZz;
     private String userId;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date createTime;
     private String docUrl;
     private Integer gwZzZt;

@@ -186,7 +186,7 @@ public class BmServiceImpl implements BmService {
     public void setBmBeto(String obm_id, String new_pbm_id) {
         SBm bm = bmDao.getBmByOid(obm_id); // 获得需要修改bm的信息
         List<SBm> old_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的部门信息
-        List<SBm> new_bmListByPid = bmDao.getBmListByPid(new_pbm_id); //获取平级下的部门信息
+        List<SBm> new_bmListByPid = bmDao.getBmListByPid(new_pbm_id); //获取新平级下的部门信息
 
         SBm old_idmax_mb = getMaxBm(old_bmListByPid,bm.getpBmId());    //
         SBm new_idmax_mb = getMaxBm(new_bmListByPid,new_pbm_id);    //
@@ -196,9 +196,13 @@ public class BmServiceImpl implements BmService {
 
         if(!old_idmax_mb.getBmId().equals(bm.getBmId())) {   //如果原来平级部门id的最大值不为当前修改的部门的id，酒吧这个部门的id赋给他
             bmDao.setBmIdByOid(old_idmax_mb.getObmId(),bm.getBmId());
-
         }
-
+        //设置父节点为虚部门
+        bmDao.setxbm(new_pbm_id,"1");
+        //判断原父节点是否还存在子节点 如果不存在则修改虚部门标识
+        if(bmDao.getAmountByPid(bm.getpBmId())==0){
+            bmDao.setxbm(bm.getpBmId(),"0");
+        }
     }
 
     private String createNewBmId(SBm idmax_mb,Boolean xj) {
@@ -398,9 +402,25 @@ public class BmServiceImpl implements BmService {
 
             }
         }
-
-
         return new PageInfo(lbbms);
+    }
+
+    @Override
+    public List<BmSelectLbVO> listKgsBm(int pageNum, int pageSize, String bmName) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<BmSelectLbVO> bms =  bmDao.listKgsBm(bmName);
+        for(BmSelectLbVO bm:bms){
+            if(bm.getBmId().startsWith("02"))
+                bm.setBmLb("管理部门");
+            else if (bm.getBmId().startsWith("01")){
+                bm.setBmLb("机构领导");
+            }else if(bm.getBmId().startsWith("03")){
+                bm.setBmLb("使用部门");
+            }else{
+                bm.setBmLb("未设置");
+            }
+        }
+        return bms;
     }
 
     private void setBmIdAndPId(SBm bm){
@@ -528,6 +548,7 @@ public class BmServiceImpl implements BmService {
     @Override
     public List<SBm> listBmsByBmName(int pageNum, int pageSize,String bmName) {
         PageHelper.startPage(pageNum,pageSize);
+        if(bmName==null||bmName.equals("")) return null;
         return bmDao.listBmsByBmName(bmName);
     }
 }

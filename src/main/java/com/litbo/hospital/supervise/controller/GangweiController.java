@@ -94,7 +94,7 @@ public class GangweiController {
     }
     @GetMapping("/getGwByGwId")
     public Result getGwsByGwId(@RequestParam String gwId){
-        if(gwId==null||gwId.equals("")) return Result.error();
+        if(gwId==null||gwId.equals("")) return Result.success();
         SGangwei date = gangweiService.getGwsByGwId(gwId);
         return Result.success(date);
     }
