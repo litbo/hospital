@@ -103,7 +103,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(元)<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceGjY" lay-verify="Decimal" autocomplete="off" placeholder="请输入金额"
+                    <input type="text" name="priceGjY" lay-verify="required|Decimal" autocomplete="off" placeholder="请输入金额"
                            class="layui-input" id="gjpd">
                 </div>
             </div>
@@ -283,8 +283,10 @@
         form: {
             ver: {
                 Decimal: function (value, item) {
-                    if (!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(value))) {
-                        return '请填写金额';
+                    if (value !== ''){
+                        if (!(/^([1-9][\d]{0,10}|0)(\.[\d]{1,2})?$/.test(value))) {
+                            return '请填写金额';
+                        }
                     }
                 }
             },

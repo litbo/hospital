@@ -26,6 +26,7 @@ public class EquipmentAccountProvider {
                 "dbo.eq_info.eq_sbbh,\n" +
                 "dbo.eq_info.eq_name,\n" +
                 "dbo.eq_info.eq_zcbh as eqYq,\n" +
+                "dbo.eq_info.eq_pm_id AS flBh,\n" +
                 "dbo.eq_info.eq_gg,\n" +
                 "dbo.eq_info.eq_xh,\n" +
                 "dbo.s_bm.bm_name as eqBmName,\n" +

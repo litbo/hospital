@@ -74,7 +74,7 @@
                     , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
                     , {field: 'zt', title: '状态', minWidth: 150}
                     , {field: 'reason', title: '未通过原因', minWidth: 200}
-                    , {minWidth: 400,align:'center',toolbar: "#bar",template:""}
+                    , {align:'center',toolbar: "#bar",template:"",minWidth: 200}
                 ]]
                 ,url:"/lifeManage/selectSgInfoBmList"
                 ,method:"POST"
@@ -97,25 +97,29 @@
                                 event:'purchaseDan',
                                 type:2,
                                 content:'./child/purchaseDan.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["id"]
                             },
                             {
                                 event:'discussBiao',
                                 type:2,
                                 content:'./child/departmentDiscuss.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["kstlId"]
                             },
                             {
                                 event:'zrEvaluation',
                                 type:2,
                                 content:'./child/zrEvaluation.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["pjbgId"]
                             },
                             {
                                 event:'kxxFenxi',
                                 type:2,
                                 content:'./child/kxxFenxi.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["kxfxId"]
                             }
                         ]
                     })

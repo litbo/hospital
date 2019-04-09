@@ -60,12 +60,9 @@ public class PoiWordToHtml {
     /**
      * 将word2003转换为html文件 2018-4-9
      * 
-     * @param wordPath
-     *            word文件路径
-     * @param wordName
-     *            word文件名称无后缀
-     * @param suffix
-     *            word文件后缀
+     * @param wordPath word文件路径
+     * @param wordName word文件名称无后缀
+     * @param suffix word文件后缀
      * @throws IOException
      * @throws TransformerException
      * @throws ParserConfigurationException

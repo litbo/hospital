@@ -23,10 +23,10 @@ public class SgKstlSqlProvider {
             SELECT("eq_pm.eq_fl_id");
             SELECT("sg_info.id as sgInfoId");
             SELECT("sg_info.bh");
-            SELECT("sg_tl_pm.kstl_sj");
-            FROM("eq_pm");
-            INNER_JOIN("sg_info ON eq_pm.eq_pm_id = sg_info.eq_pm_id");
-            INNER_JOIN("sg_tl_pm ON eq_pm.eq_pm_id = sg_tl_pm.eq_pm_id");
+            SELECT("sg_kstl.kstl_time");
+            FROM("sg_info");
+            LEFT_OUTER_JOIN("eq_pm ON sg_info.eq_pm_id = eq_pm.eq_pm_id");
+            LEFT_OUTER_JOIN("sg_kstl ON sg_info.kstl_id = sg_kstl.kstl_id");
             if (pmIds != null && pmIds.size() > 0) {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < pmIds.size(); i++) {
@@ -38,7 +38,7 @@ public class SgKstlSqlProvider {
                 WHERE("eq_pm.eq_pm_id IN (" + sb.toString() + ")");
             }
             WHERE("(sg_info.iskssh <> 1 OR sg_info.iskssh IS NULL)");
-            ORDER_BY("kstl_sj desc");
+            ORDER_BY("kstl_time desc");
         }}.toString();
     }
 

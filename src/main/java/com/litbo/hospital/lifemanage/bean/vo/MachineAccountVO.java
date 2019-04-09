@@ -60,4 +60,14 @@ public class MachineAccountVO {
      * 状态
      */
     private String state;
+
+    /**
+     * 分类编码
+     */
+    private String flBh;
+
+    /**
+     * 序列号SN
+     */
+    private String xlSN;
 }

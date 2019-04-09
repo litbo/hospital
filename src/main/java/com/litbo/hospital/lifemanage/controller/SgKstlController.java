@@ -20,17 +20,31 @@ public class SgKstlController {
     /**
      * 添加科室讨论信息
      *
-     * @param sgKstlVO  科室讨论信息
+     * @param sgKstlVO 科室讨论信息
      * @return 添加科室讨论信息成功/添加科室讨论信息失败
      */
     @PostMapping("/insertSgKstl")
     public Result insertSgKstl(@RequestBody SgKstlVO sgKstlVO) {
+        //获取登陆人id
+        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        sgKstlVO.setUserId(emp.getUserId());
         boolean result = sgKstlService.insertSgKstl(sgKstlVO);
         if (result) {
             return Result.success();
         } else {
             return Result.error("添加信息错误");
         }
+    }
+
+    /**
+     * 查询科室讨论信息
+     *
+     * @param kstlId 科室讨论id
+     * @return 添加科室讨论信息成功/添加科室讨论信息失败
+     */
+    @PostMapping("/selectSgKstl")
+    public Result selectSgKstl(String kstlId) {
+        return Result.success(sgKstlService.selectSgKstl(kstlId));
     }
 
     /**
