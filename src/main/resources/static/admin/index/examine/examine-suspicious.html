@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>可疑报告查看</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 10px!important;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+
+        .layui-textarea{
+            min-height: 120px;
+            height: 120px;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>安全（不良）事件流程</legend>
+        </fieldset>
+        <blockquote class="layui-elem-quote layui-text">基本信息</blockquote>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">发现者</label>
+                <div class="layui-input-block">
+                    <input name="userXm" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">报告编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="bgbh" autocomplete="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">报告名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="bgmc" autocomplete="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">报告日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="bgTime" id="bdate" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">事件性质<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input name="sjxz" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">设备名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="eqName"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="lxdh" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">报告人岗位<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="bgrgw" class="layui-input" disabled>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">报告人签字<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="bgrqz" autocomplete="" class="layui-input"  readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <blockquote class="layui-elem-quote layui-text">患者情况</blockquote>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">患者姓名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="hzxm"   class="layui-input"  disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年龄</label>
+                <div class="layui-input-block">
+                    <input type="text" name="hzAge" autocomplete="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" name="hzSex" disabled>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">预期治疗疾病或作用<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="yqzlxg" disabled></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <blockquote class="layui-elem-quote layui-text">事件情况</blockquote>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 170px;">事件发生日期<span class="sign">*</span></label>
+                <div class="layui-input-block" style="margin-left: 170px">
+                    <input type="text" name="sjfsTime" id="sdate" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 170px;">发现或者知悉日期<span class="sign">*</span></label>
+                <div class="layui-input-block"style="margin-left: 170px">
+                    <input type="text" name="fxzxTime" id="fdate" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 170px;font-size: 12px;">医疗器械实际使用场所<span class="sign">*</span></label>
+                <div class="layui-input-block" style="margin-left: 170px;">
+                    <input type="text" class="layui-input" name="ylqxsxcs"  disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 170px;">操作人员<span class="sign">*</span></label>
+                <div class="layui-input-block" style="margin-left:170px;">
+                    <input type="text" class="layui-input" name="czry" disabled>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">事件后果<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" name="sjhg" disabled>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 160px;">植入日期（若植入）</label>
+                <div class="layui-input-block" style="margin-left: 160px;">
+                    <input type="text"  name="zrTime" id="zdate" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-row">
+            <blockquote class="layui-elem-quote layui-text">事件主要表现</blockquote>
+            <div class="col-xs-12 col-sm-4">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">器械故障<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="qxgz"  disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">主要伤害</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="zysh" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">事件陈述</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="sjcs" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" id="agree"  lay-filter="demo1">同意</button>
+                    <button class="layui-btn layui-btn-danger" id="disagree"  lay-filter="demo1">拒绝</button>
+                </div>
+            </div>
+        </div>
+        <!--<div class="layui-row">-->
+        <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label" style="width: 120px;">事件相关资料</label>-->
+        <!--<div class="layui-input-block" style="margin-left: 120px;">-->
+        <!--<input type="file" accept="image/*" name="file" autocomplete="off" class="layui-input" style="padding:5px;">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</form>
+
+<script>
+    formData={};
+    renderMod={
+        form:{
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/security/blsj/selectFwBlsjById",
+                    type:"GET",
+                    data:{id:$.getUrlParam('id')}
+                }
+            }
+        },
+        btn:[{
+            elem:"#agree",
+            func:function () {
+                subUp({
+                    url:"/security/blsj/updateFwBlsjStatus",
+                    type:"POST",
+                    data:{
+                        id:$.getUrlParam("id"),
+                        taskId:$.getUrlParam("taskId"),
+                        status:"1"
+                    },
+                    success:function (data) {
+                        if(data.code == 0){
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                        }else {
+                            alert(data.msg);
+                        }
+
+                    }
+                })
+            }
+        },{
+            elem:"#disagree",
+            func:function () {
+                subUp({
+                    url:"/security/blsj/updateFwBlsjStatus",
+                    type:"POST",
+                    data:{
+                        id:$.getUrlParam("id"),
+                        taskId:$.getUrlParam("taskId"),
+                        status:"2"
+                    },
+                    success:function (data) {
+                        if(data.code == 0){
+
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                        }else {
+                            alert(data.msg);
+                        }
+
+                    }
+                })
+            }
+        }]
+    }
+</script>
+</body>
+
+</html>
