@@ -206,27 +206,8 @@ $(function () {
                 function cUp(options) {
                     var dataP = {}, valus = "";
                     if (Type(options.data) === "array") {
-                        //dataP 提交的数据 valus 填写的表单name值
-                        for (var i = 0; i < options.data.length; i++) {
-                            //获取一个name值
-                            valus = options.data[i];
-                            //获取表单中的数据，支持 input select textarea ,存在时就将data.field中的数据添加到dataP
-                            var inputValue = $("input[name=" + valus + "]").val();
-                            if (inputValue) {
-                                dataP[valus] = inputValue;
-                            } else if ($("select[name=" + valus + "]").val()) {
-                                dataP[valus] = $("select[name=" + valus + "]").val();
-                            } else if ($("textarea[name=" + valus + "]").val()) {
-                                dataP[valus] = $("textarea[name=" + valus + "]").val();
-                            } else if ($("input[type=radio][name=" + valus + "]").val()) {
-                                dataP[valus] = $("input[type=radio][name=" + valus + "]").val();
-                            } else if ($("input[type=checkbox][name=" + valus + "]").val()) {
-                                var $cks = $("input[type=checkbox][name=" + valus + "]");
-                                if ($cks[0].checked === true) {
-                                    dataP[valus] = $cks.val();
-                                }
-                            }
-                        }
+                        //dataP 提交的数据 填写的表单name值
+                        dataP = getFormValue(options.data);
                         //向data中直接添加附加数据
                         if (options.add) {
                             for (var names in options.add) {
@@ -389,20 +370,18 @@ $(function () {
                         , nData = []
                         , cData = []
                         , active = {}//绑定按钮事件
+                        , mu = "null"//无数据默认填充数据
                         , resValue = {};//重载值
                     //绑定按钮事件
                     active[type] = function () {
                         resValue = {};
+                        //默认填充值
+                        if(res.mu){
+                            mu = res.mu;
+                        }
                         //动态获取表单数据
                         if (Type(res.data) === "array") {
-                            for (var x = 0; x < res.data.length; x++) {
-                                var inputValue = $("input[name='" + res.data[x] + "']").val();
-                                if (inputValue) {
-                                    resValue[res.data[x]] = inputValue;
-                                } else if ($("select[name='" + res.data[x] + "']").val()) {
-                                    resValue[res.data[x]] = $("select[name='" + res.data[x] + "']").val();
-                                }
-                            }
+                            resValue = getFormValue(res.data,false,false,mu);
                         }
                         //添加额外数据
                         if (res.where) {
@@ -433,14 +412,18 @@ $(function () {
                         }
                         //获取重载前表格数据
                         if (res.add === true && res.add.tableId !== undefined) {
-                            nData = table.cache(res.add.tableId);
+                            nData = table.cache[res.add.tableId];
                         }
+
                         //执行重载
                         table.reload(
                             res.tid || args_table.id,
                             {
                                 url: res.url
                                 , where: resValue
+                                , page:{
+                                    curr: 1//返回第一页
+                                }
                                 , parseData: res.parseData || function (res) {
                                     for (var x = 0; x < nData.length; x++) {
                                         res.data.list.push(nData[x]);
@@ -452,9 +435,17 @@ $(function () {
                                         "data": res.data.list //解析数据列表
                                     }
                                 }, done: function (res, curr, count) {
-                                    this.where = {};
+                                    //this.where = {};
                                 }
                             });
+                        //还原表单选项
+                        for(var naa in resValue){
+                            if(resValue.hasOwnProperty(naa)){
+                                if(resValue[naa] !== mu){
+                                    $("*[name='"+naa+"']").val(resValue[naa])
+                                }
+                            }
+                        }
                         form.render();
                         //还原重载前的数据
                         if (res.add === true && res.add.tableId !== undefined) {
@@ -466,10 +457,6 @@ $(function () {
                                 data: nData
                             });
                         }
-                        /*//重新渲染日期选择器
-                        if($.cookie("RenderDate-a-Func")){
-                            laydate.render(JSON.parse($.cookie("RenderDate-a-Func")));
-                        }*/
 
                         //重新绑定select事件
                         if ($(".layui-table-tool select").length > 0) {

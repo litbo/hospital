@@ -508,7 +508,7 @@ function getTableValue(name, inClear) {
 
 //获取给定name的表单数据
 //返回JSON
-function getFormValue(name,res,force){
+function getFormValue(name,res,force,must){
     var data = res || {};
     //遍历所有的name
     for(var c=0;c<name.length;c++){
@@ -537,6 +537,7 @@ function getFormValue(name,res,force){
             //}
         }else{
             force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
+            must && (data[name[c]] = must || "null")
         }
         //console.log(data);
     }
