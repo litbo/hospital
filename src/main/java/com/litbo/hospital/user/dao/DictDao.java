@@ -3,10 +3,9 @@ package com.litbo.hospital.user.dao;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.DictProvider;
 import com.litbo.hospital.user.vo.DictVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import com.litbo.hospital.user.vo.SIntVo;
+import lombok.Data;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -47,8 +46,7 @@ public interface DictDao {
             "union all\n" +
             "SELECT zzmm_id as dictId , zzmm as dictName FROM s_zzmm")
     List<DictVo> listJczd();
-    @SelectProvider(type = DictProvider.class ,method = "listDictByTName")
-    List<DictVo> listDictByTName(String tName);
+
 
     @Select("SELECT eq_cslb_id as dictId ,eq_cslb_name as dictName FROM eq_cslb\n" +
             "union all\n" +
@@ -70,4 +68,10 @@ public interface DictDao {
     List<Mz> listMz();
     @Select("select *  from s_zc")
     List<Zc> listZc();
+    @SelectProvider(type = DictProvider.class ,method = "listDictByTName")
+    List<DictVo> listDictByTName(String tName);
+    @SelectProvider(type = DictProvider.class ,method = "addDictByTName")
+    Integer addDictByTName(@Param("tName") String tName, @Param("dictName") String dictName, @Param("sdictId") String sdictId,@Param("dictId") Integer dictId);
+    @SelectProvider(type = DictProvider.class ,method = "getLastIdByTName")
+    SIntVo getLastIdByTName(String tName);
 }
