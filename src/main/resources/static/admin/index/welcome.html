@@ -32,7 +32,7 @@
                 <div class="h_pad0 col-xs-12">
                     <div class="panel_title li_first_l1">
                         <span class="li_first_left col-lg-11">我的任务</span>
-                        <a href="javascrip:void(0);" class="h_more li_first_right col-lg-1" data-id="11">更多 &gt;&gt;</a>
+                        <a href="javascrip:void(0);" class="h_more li_first_right col-lg-1" data-url="#" data-title="我的任务" data-id="m1">更多 &gt;&gt;</a>
                     </div>
                     <div class="panel_con" h_name="need_do">
                         <ul>
@@ -49,7 +49,7 @@
                     <div class="clearfix">
                         <div class="panel_title li_first_l3">
                             <span class="li_first_left col-lg-9">提醒事项</span>
-                            <a href="javascrip:void(0);" class="h_more li_first_right col-lg-3" data-id="12">更多
+                            <a href="javascrip:void(0);" class="h_more li_first_right col-lg-3" data-url="#" data-title="提醒事项" data-id="m2">更多
                                 &gt;&gt;</a>
                         </div>
                         <div class="panel_con" h_name="personal_record">
@@ -63,7 +63,7 @@
                     <div class="clearfix">
                         <div class="panel_title li_first">
                             <span class="col-lg-9 li_first_left">通知公告</span>
-                            <a href="javascrip:void(0);" class="h_more col-lg-3 li_first_right" data-id="14">更多
+                            <a href="javascrip:void(0);" class="h_more col-lg-3 li_first_right" data-url="#" data-title="通知公告" data-id="m3">更多
                                 &gt;&gt;</a>
                         </div>
                         <div class="panel_con" h_name="announce">
@@ -77,7 +77,7 @@
                     <div class="clearfix">
                         <div class="panel_title li_first">
                             <span class="col-lg-9 li_first_left">公共信息</span>
-                            <a href="javascript:void(0);" class="h_more col-lg-3 li_first_right" data-id="15">更多 &gt;&gt;</a>
+                            <a href="javascript:void(0);" class="h_more col-lg-3 li_first_right" data-url="#" data-title="公共信息" data-id="m4">更多 &gt;&gt;</a>
                         </div>
                         <div class="panel_con" h_name="public_info">
                             <ul>
@@ -280,8 +280,15 @@
         var h_name = [["need_do"], ["personal_record"],[ "announce"], ["public_info"]], id = 0;
         getData();
         $(".h_more").click(function () {
-            var page = $.getUrlParam("p", 1);
-            id = $(this).attr("data-id");
+            var page = $.getUrlParam("p", 1)
+                ,title = $(this).attr("data-title")
+                ,url = $(this).attr("data-url")
+                ,id = $(this).attr("data-id");
+            changeTab({
+                url:url,
+                id:id,
+                title:title
+            });
             if (page === "home") {
                 $(".layui-nav-item a[data-id='" + id + "']", window.parent.document)[0].click();
             } else {

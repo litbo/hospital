@@ -1171,6 +1171,20 @@ jQuery.cookie = function (name, value, options) {
     }
 };
 
+function changeTab(ele, callback) {
+    //ele:{title:"",id:"",url:""}
+    layui.use(['element'], function () {
+        var element = layui.element;
+        element.tabAdd('tab', {
+            title: ele.title,
+            content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
+            id: ele.id
+        });
+        element.tabChange('tab', ele.id);
+        callback ? callback() : null;
+    })//layui element规定用法，当主列表项无子列表时选中第一个列表项
+}//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）
+
 /**
  * @todo 动态添加JS
  * @tips 动态添加页面渲染所必须的基础函数<顺序不能更改>

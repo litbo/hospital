@@ -252,7 +252,7 @@
             });
             //展开第一项列表
 
-            //读取本地存储中的页面ID并打开页面（仅限当前页面存在的页面）
+            //读取本地存储中的页面ID并打开页面（仅限当前页面存在的页面，主要用于welcome页跳转）
             if (f && typeof Number(f) === "number") {
                 var ne =$("a[data-id='" + Number(f) + "']");
                 if(ne.length>0){

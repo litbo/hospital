@@ -39,19 +39,6 @@ $(function () {
     })
 });
 
-function changeTab(ele, callback) {
-    layui.use(['element'], function () {
-        var element = layui.element;
-        element.tabAdd('tab', {
-            title: ele.title,
-            content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
-            id: ele.id
-        });
-        element.tabChange('tab', ele.id);
-        //callback ? callback() : null;
-    })//layui element规定用法，当主列表项无子列表时选中第一个列表项
-}//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）
-
 function addList(list, list1, main_list) {//list:包含主列表的容器 list1:包含副列表的容器
     function addSample(a) {//a:main_list[x] （x>=0） 或 main_list[x].tools[y].children[z]
         var thisA = a.children || a.items;
