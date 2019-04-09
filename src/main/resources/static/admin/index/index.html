@@ -96,7 +96,7 @@
                             <dd><a href="javascript:;" data-url="./global/info.html" data-id='x222' data-text="信息管理">信息管理</a>
                             </dd>
                             <!--<dd><a href="javascript:;" data-url="./global/admin-info.html" data-id='x333' data-text="个人信息">安全管理</a></dd>-->
-                            <dd><a href="javascript:" id="quit">退出</a></dd>
+                            <dd><a href="javascript:" class="quit">退出</a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -149,11 +149,10 @@
                 <div class="row">
                     <div class="layui-col-lg-offset4" style="width:300px">
                         <h1 style="text-align: center;margin-bottom: 20px;">系统已锁定</h1>
-                        <input type="text" name="userName" lay-verify="required" placeholder="账户密码" autocomplete="off"
-                               class="layui-input">
-                        <button class="layui-btn layui-btn-normal btn layui-btn-fluid" lay-filter="login" id="check-btn"
-                                style="margin-top: 20px;">解锁
-                        </button>
+                        <input type="text" id="uKey" lay-verify="required" placeholder="账户密码" autocomplete="off" class="layui-input">
+                        <button class="layui-btn layui-btn-normal btn layui-btn-fluid" lay-filter="login" id="check-btn" style="margin-top: 20px;">解锁</button>
+                        <span> </span>
+                        <button class="layui-btn layui-btn-warm btn layui-btn-fluid quit" style="margin-top: 20px;">登出</button>
                     </div>
 
                 </div>
@@ -170,6 +169,7 @@
         $(function () {
             var emp = tempValue("rl","emp",false)
                 ,glo = tempValue("rl","glo",false)
+                ,loc = tempValue("pageLock","lock",false)
                 ,f = tempValue("index", "f",null)
                 ,uu = $.getUrlHash("url")
                 , tt = $.getUrlHash("title") || "新窗口"
@@ -201,33 +201,79 @@
                 })
             }
 
+            //LOGO设置
             if(glo){
                 $(".m-logo img").attr("src",glo.logo)
             }
 
+            //锁定判断
+            //console.log(loc);
+            //console.log(window.locked);
+            if(loc || window.locked){
+                goLock(true);
+            }
+
             //页面登出事件
-            $("#quit").on("click", function () {
+            $(".quit").on("click", function () {
                 layer.confirm("确定要退出吗？", function () {
-                    location.href = "/logout"
-                })
+                    location.href = "/logout";
+                    tempValue("pageLock","lock",null);
+                    window.locked = false;
+                });
+                return false;
             });
 
             //页面锁定事件
-            $("#lockSys").on("click", function () {
-                layOpen({
-                    type: 1,
-                    content: $("#lock"),
-                    closeBtn: 0,
-                    maxmin: false,
-                    fixed: true,
-                    resize: false,
-                    title: false,
-                    area: ["100%", "100%"]
-                });
-                $("#check-btn").on("click", function () {
+            $("#lockSys").on("click",goLock);
 
-                })
-            });
+            function goLock(cc){
+                console.log(cc);
+                if(cc !== true){
+                    layer.confirm("确认锁定系统吗？",goo);
+                }else{
+                    goo();
+                }
+                function goo(){
+                    layui.sessionData("pageLock",{
+                        key:"lock",
+                        value:"true"
+                    });
+                    window.locked = true;
+                    var inn = layOpen({
+                        type: 1,
+                        content: $("#lock"),
+                        closeBtn: 0,
+                        maxmin: false,
+                        fixed: true,
+                        resize: false,
+                        title: false,
+                        area: ["100%", "100%"]
+                    });
+                    $("#check-btn").on("click", function () {
+                        /// hospital / lock
+                        var k = $("#uKey").val();
+                        $.ajax({
+                            url:"/hospital/lock",
+                            type:"POST",
+                            data:{
+                                userId:emp.userId,
+                                userPwd:k
+                            },
+                            success:function(res){
+                                if(res.code === 0){
+                                    tempValue("pageLock","lock",null);
+                                    window.locked = false;
+                                    layer.close(inn);
+                                }else{
+                                    layer.alert("解锁失败！");
+                                    $("#uKey").val("");
+                                }
+                            }
+                        });
+                        return false;
+                    })
+                }
+            }
 
             //判断当前页面，标示出当前页面的导航栏（改变导航栏底色）并禁止点击
             (function () {
