@@ -58,4 +58,6 @@ public interface EqService {
     List<EqPm> listPmTree();
 
     PageInfo listWFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
+
+    EqPm getPmById(String eqPmId);
 }

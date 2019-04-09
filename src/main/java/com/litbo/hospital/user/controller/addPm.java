@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,9 +40,10 @@ public class addPm {
     private RightDao rightDao;
 
     @RequestMapping("/add")
+    @Transactional
     public Result add() {
     /* public static void main (String args[]){*/
-        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\医疗器械分类编码68【20181210】.xlsx");
+        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\设备导入\\品名导入数据.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
         List<Integer> ids = new ArrayList<>();

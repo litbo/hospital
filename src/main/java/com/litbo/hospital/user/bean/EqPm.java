@@ -9,9 +9,9 @@ public class EqPm {
 
     private String eqPmName;
 
-    private String eqPmJc;
+    private String cpms;
 
-    private String eqFlId;
+    private String yqyt;
 
     private String pym;
 

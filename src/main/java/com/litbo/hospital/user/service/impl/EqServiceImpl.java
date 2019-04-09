@@ -298,6 +298,11 @@ public class EqServiceImpl implements EqService {
         return new PageInfo(eqDao.listWFlEqByX(selectFlEqVo));
     }
 
+    @Override
+    public EqPm getPmById(String eqPmId) {
+        return eqDao.getPmById(eqPmId);
+    }
+
 
     @Override
     @Transactional

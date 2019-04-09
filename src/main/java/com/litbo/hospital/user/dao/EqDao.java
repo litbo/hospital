@@ -87,4 +87,6 @@ public interface EqDao {
     String getCxflId(String eqCxflName);
     @Select("SELECT zjly_id FROM eq_zjly WHERE zjly_name =#{eqZjlyName}")
     String getZjlyId(String eqZjlyName);
+    @Select("select * from eq_pm where eq_pm_id = #{eqPmId}")
+    EqPm getPmById(String eqPmId);
 }

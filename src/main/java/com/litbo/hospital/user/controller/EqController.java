@@ -227,7 +227,12 @@ public class EqController {
 
         return Result.success(es.listPmTree());
     }
+    //查询品名信息
+    @RequestMapping("/getPmById")
+    public Result getPmById(String eqPmId){
 
+        return Result.success(es.getPmById(eqPmId));
+    }
     //通过品名 拼音码pym 查询品名
     @RequestMapping("/listPmsByPym")
     public Result listPmsByPym(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
