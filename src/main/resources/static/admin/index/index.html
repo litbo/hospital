@@ -252,6 +252,10 @@
                     $("#check-btn").on("click", function () {
                         /// hospital / lock
                         var k = $("#uKey").val();
+                        if(!k){
+                            layer.alert("请输入密码！");
+                            return false;
+                        }
                         $.ajax({
                             url:"/hospital/lock",
                             type:"POST",
