@@ -218,6 +218,7 @@
         table: {
             table: [
                 {
+                    id:"ta1",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'scsName', title: '参考生产厂商', minWidth: 150}
@@ -235,7 +236,7 @@
                 },
                 {
                     elem: "#table1",
-                    id: "table1",
+                    id: "ta2",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
@@ -316,8 +317,8 @@
                     url: "/lifeManage/selectSgInfoById",
                     type: "POST",
                     data: {sgInfoId: $.getUrlParam("sgInfoId")},
-                    parse: "sgCkcssbs",
-                    tableId: "table"
+                    parse: ["sgCkcssbs","sgGnpzs"],
+                    tableId: ["ta1","ta2"]
                 }
             },
             submit: {
