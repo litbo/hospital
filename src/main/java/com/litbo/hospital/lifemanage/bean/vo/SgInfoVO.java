@@ -25,6 +25,10 @@ public class SgInfoVO {
      */
     private String tgBmId;
     /**
+     * 托管科室名字
+     */
+    private String bmName;
+    /**
      * 购置类别表id
      */
     private Integer gzlbId;

@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.vo.SgKstlAddSgInfoVO;
+import com.litbo.hospital.lifemanage.bean.vo.SgKstlToVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgKstlVO;
 
 import java.util.List;
@@ -53,4 +54,11 @@ public interface SgKstlService {
      * @return SgKstlAddSgInfoVO
      */
     PageInfo<SgKstlAddSgInfoVO> selectSgKstlSbs(String userId, String eqPmName, String eqPmJc, Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询科室讨论表信息
+     * @param kstlId 科室讨论表id
+     * @return SgKstlToVO
+     */
+    SgKstlToVO selectSgKstl(String kstlId);
 }

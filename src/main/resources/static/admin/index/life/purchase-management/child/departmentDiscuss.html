@@ -25,47 +25,45 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title">
             <legend>医学装备申购科室讨论记录表</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">时间<span class="sign">*</span></label>
+                <label class="layui-form-label">申请部门</label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlTime" id="date" placeholder="请输入" autocomplete="off"
-                           class="layui-input" disabled>
+                    <input type="text" name="bmName" disabled autocomplete="off" placeholder="未选择" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">记录人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userNameJl" disabled autocomplete="off" placeholder="未选择" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">时间<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="kstlTime" id="date" placeholder="无数据信息" autocomplete="off"
+                           class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
                 <label class="layui-form-label">地点<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input" disabled>
+                    <input type="text" name="kstlAddr" placeholder="未填写信息" autocomplete="off" lay-verify="required"
+                           class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">意见<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlYj" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input" disabled>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">记录人<span class="sign">*</span></label>
-
-                <!-- TODO   添加搜索人员导航 -->
-
-                <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">选择预览</label>
-                <div class="layui-input-block">
-                    <input type="text" name="userXm" disabled autocomplete="off" class="layui-input">
+                    <input type="text" name="kstlYj" placeholder="未填写信息" autocomplete="off" lay-verify="required"
+                           class="layui-input" disabled>
                 </div>
             </div>
         </div>
@@ -74,171 +72,53 @@
         <div class="col-xs-12">
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">参加人员<span class="sign">*</span></label>
-
-                <!-- TODO   添加搜索人员导航 -->
-
-                <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable1"><i
-                            class="fas fa-plus"></i>&nbsp;添加
-                    </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
-                            class="fas fa-trash-alt"></i>&nbsp;删除
-                    </button>
-                </div>
+                <div class="layui-input-block"></div>
             </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12">
             <table id="table" lay-filter="table"></table>
-
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">会议内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" name="kstlContent" lay-verify="required"></textarea>
+                <textarea placeholder="未填写信息" class="layui-textarea" name="kstlContent"
+                          lay-verify="required" disabled></textarea>
                 </div>
-            </div>
-            <div class="layui-form-item" pane style="margin-bottom:-10px;">
-                <label class="layui-form-label col-xs-12" style="width: 115px;">申购设备列表</label>
-                <div class="layui-input-block" style="margin-left:115px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dataTable2"><i class="fas fa-plus"></i>&nbsp;添加
-                    </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1"><i class="fas fa-trash-alt"></i>&nbsp;删除
-                    </button>
-                </div>
-            </div>
-            <table id="table1" lay-filter="table1"></table>
-        </div>
-        <div class="col-xs-12">
-            <div class="layui-form-item">
-                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">保存
-                </button>
             </div>
         </div>
     </div>
 </form>
 <script>
-    var formData = {};
     renderMod = {
-        first:function(){
-            subUp({
-                url:"/lifeManage/selectSgDict",
-                type:"POST",
-                success:function(res){
-                    if(res.code === 0){
-                        formData["maxNum"] = Number(res.data["sgKstlRySl"]);
-                        //console.log(formData);
+        addTable: {
+            table: [{
+                    elem: "#table",
+                    cols: [[{field: 'userXm', title: '姓名', minWidth: 150}]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "无数据信息！"
                     }
-                }
-            });
+                }]
         },
         form: {
-            date: {
-                elem: "#date"
-            },
-            submit: {
-                before: function (param) {
-                    var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]),maxNum = 15;
-                    if (doJudg({
-                        "undefined": [formData.radio],
-                        0: [tv, tv1]
-                    })){
-                        putMsg({
-                            alert: "请选择数据后提交！",
-                            log:[formData,tv,tv1]
-                        });
-                        return false;
-                    }else if(tv.length < formData.maxNum){
-
-                        putMsg({
-                            alert:"参加人数必须多于"+formData.maxNum+"人！"
-                        });
-                        return false;
-                    }
-                    return param = {
-                        1: formData.radio[0]["userIdJl"],
-                        2: tv,
-                        3: tv1
-                    };
-                },
-                form: {
-                    url: "/lifeManage/insertSgKstl",
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/lifeManage/selectSgKstl",
                     type: "POST",
-                    data: ["kstlAddr", "kstlYj", "kstlTime", "kstlContent"],
-                    contentType:"application/json",
-                    param: {
-                        1: "userIdJl",
-                        2: "usersId",
-                        3: "pmsId"
-                    },
-                    add: {
-                        userId: 1615925037
-                    },
-                    reload:true
+                    data: {kstlId: $.getUrlParam("kstlId")},
+                    parse: "usersName",
+                    tableId: "table"
                 }
             }
-        },
-        addTable: {
-            table: [
-                {
-                    elem:"#table",
-                    cols: [[ //表头
-                        {type: "checkbox"}
-                        , {field: 'userXm', title: '姓名', minWidth: 150}
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "请点击上方按钮添加数据！"
-                    }
-                },
-                {
-                    elem:"#table1",
-                    id:"table1",
-                    cols: [[ //表头
-                        {type: "checkbox"}
-                        , {field: 'eqPmName', title: '设备名称', minWidth: 150}
-                        , {field: 'eqPmJc', title: '设备简称', minWidth: 150}
-                        , {field: 'eqFlId', title: '卫标分类', minWidth: 150}
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "请点击上方按钮添加数据！"
-                    }
-                }
-
-            ]
-        },
-        bind: {
-            addItem: [
-                {
-                    elem: "#dataTable1",
-                    cb: "/kwgl/empgl/listSelectEmpsCols",
-                    db: "/kwgl/empgl/listPartnerByUserId",
-                    name: "dtdt",
-                    key: "checkbox"
-                },
-                {
-                    elem: "#dataTable2",
-                    cb: "/eq/listPmsCols",
-                    db: "/eq/listPmsByPym",
-                    se:"/eq//pmSe",
-                    name: "dtdt",
-                    key: "checkbox"
-                }
-            ],
-            delItem: ".delNew",
-            selectItem: [
-                {
-                    elem: "#selectEmp",
-                    cb: "/kwgl/empgl/listSelectEmpsCols",
-                    db: "/kwgl/empgl/listPartnerByUserId",
-                    name: "dtdt",
-                    key: "radio",
-                    data: formData
-                }
-            ]
         }
     }
 </script>

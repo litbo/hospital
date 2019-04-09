@@ -93,10 +93,6 @@
                     tableId: "table"
                 }
             },
-            date: {
-                elem: '#date',
-                value: today
-            },
             submit: {
                 filter: "upData",//可以不写
                 before: function (param) {
@@ -156,7 +152,7 @@
                 {
                     elem: "#dataTable1",
                     cb: "/kwgl/empgl/listSelectEmpsCols",
-                    db: "/kwgl/empgl/listPartnerByUserId",
+                    db: "/kwgl/empgl/listSelectEmps",
                     name: "dtdt",
                     key: "checkbox"
                 }

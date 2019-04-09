@@ -54,6 +54,9 @@ public class SgInfoSqlProvider {
             SET("jbcsyq = #{sgInfo.jbcsyq,jdbcType=LONGVARCHAR}");
             //配置详细需求
             SET("pzxq = #{sgInfo.pzxq,jdbcType=LONGVARCHAR}");
+            //设置状态
+            SET("zt = '填写申购单'");
+            SET("iskssh = '2'"); //2代表待审核
             WHERE("id = #{sgInfo.id,jdbcType=VARCHAR}");
         }}.toString();
     }
@@ -98,7 +101,7 @@ public class SgInfoSqlProvider {
                 }
                 WHERE("dbo.sg_info.eq_pm_id IN (" + sb.toString() + ")");
             }
-            WHERE("dbo.sg_info.iskssh IS NULL");
+            WHERE("dbo.sg_info.iskssh IS NULL OR dbo.sg_info.iskssh = 2");
         }}.toString();
     }
 

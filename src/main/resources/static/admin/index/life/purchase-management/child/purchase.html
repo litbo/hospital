@@ -103,7 +103,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">估价(元)<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="priceGjY" lay-verify="Decimal" autocomplete="off" placeholder="请输入金额"
+                    <input type="text" name="priceGjY" lay-verify="required|Decimal" autocomplete="off" placeholder="请输入金额"
                            class="layui-input" id="gjpd">
                 </div>
             </div>
@@ -218,6 +218,7 @@
         table: {
             table: [
                 {
+                    id:"ta1",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'scsName', title: '参考生产厂商', minWidth: 150}
@@ -235,7 +236,7 @@
                 },
                 {
                     elem: "#table1",
-                    id: "table1",
+                    id: "ta2",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
@@ -283,8 +284,10 @@
         form: {
             ver: {
                 Decimal: function (value, item) {
-                    if (!(/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(value))) {
-                        return '请填写金额';
+                    if (value !== ''){
+                        if (!(/^([1-9][\d]{0,10}|0)(\.[\d]{1,2})?$/.test(value))) {
+                            return '请填写金额';
+                        }
                     }
                 }
             },
@@ -314,8 +317,8 @@
                     url: "/lifeManage/selectSgInfoById",
                     type: "POST",
                     data: {sgInfoId: $.getUrlParam("sgInfoId")},
-                    parse: "sgCkcssbs",
-                    tableId: "table"
+                    parse: ["sgCkcssbs","sgGnpzs"],
+                    tableId: ["ta1","ta2"]
                 }
             },
             submit: {
