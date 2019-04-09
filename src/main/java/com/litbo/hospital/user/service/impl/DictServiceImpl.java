@@ -6,6 +6,7 @@ import com.litbo.hospital.user.vo.DictVo;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
+import com.litbo.hospital.user.vo.SIntVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +63,26 @@ public class DictServiceImpl implements DictService{
         PageHelper.startPage(pageNum,pageSize);
 
         return  new PageInfo(dictDao.listZyzd());
+    }
+
+    @Override
+    public Integer addDictByTName(String tName, String dictName) {
+        SIntVo sIntVo = dictDao.getLastIdByTName(tName);
+        String sdictId=null;
+        Integer dictId=null;
+        if(sIntVo.getId()!=null){
+          dictId = sIntVo.getId()+1;
+        }
+        if(sIntVo.getSId()!=null){
+            sdictId = String.valueOf(Integer.parseInt(sIntVo.getSId())+1);
+        }
+        try{
+            dictDao.addDictByTName(tName,dictName,sdictId,dictId);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+
+
     }
 }
