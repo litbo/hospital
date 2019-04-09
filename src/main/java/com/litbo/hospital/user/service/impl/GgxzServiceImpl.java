@@ -26,7 +26,8 @@ public class GgxzServiceImpl implements GgxzService {
         String path = System.getProperty("user.dir");
         String filePath = path+"/wjxz/";
         java.io.File file = new java.io.File(filePath);
-        String url = filePath+ UUID.randomUUID().toString()+ggxz.getUrl().substring(ggxz.getUrl().lastIndexOf("."));
+        String name =  UUID.randomUUID().toString()+ggxz.getUrl().substring(ggxz.getUrl().lastIndexOf("."));
+        String url = filePath+ name;
         try {
             if(!file.exists()){
                 file.mkdirs();
@@ -36,7 +37,7 @@ public class GgxzServiceImpl implements GgxzService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ggxz.setUrl(url);
+        ggxz.setUrl("/"+name);
         ggxz.setStatus(0);
 
         return ggxzDao.addGgxz(ggxz);
