@@ -74,7 +74,7 @@ public class DictServiceImpl implements DictService{
           dictId = sIntVo.getId()+1;
         }
         if(sIntVo.getSId()!=null){
-            sdictId = String.valueOf(Integer.parseInt(sIntVo.getSId())+1);
+            sdictId = String.valueOf(Integer.parseInt(sIntVo.getSId().trim())+1);
         }
         try{
             dictDao.addDictByTName(tName,dictName,sdictId,dictId);
