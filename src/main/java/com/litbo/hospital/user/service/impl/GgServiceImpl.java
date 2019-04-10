@@ -9,6 +9,8 @@ import com.litbo.hospital.user.vo.SysGgVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -16,7 +18,8 @@ public class GgServiceImpl implements GgService {
 
     @Autowired
     private GgDao ggDao;
-
+    @Autowired
+    HttpServletRequest request;
     @Override
     public int addGg(SysGg gg) {
         return ggDao.addGg(gg);
@@ -54,10 +57,12 @@ public class GgServiceImpl implements GgService {
 
     @Override
     public PageInfo listGgDesc(int pageNum, int pageSize) {
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+
+                request.getServerPort()+"/";
         PageHelper.startPage(pageNum, pageSize);
         List<SysGgVo> sysGgs= ggDao.listGgDesc();
         for (SysGgVo sysGg : sysGgs) {
-            sysGg.setUrl("/gg/getEqById?id="+sysGg.getId());
+            sysGg.setUrl(basePath + "admin/index/system/portal-management/child/ggShow.html?ggId="+sysGg.getId());
         }
         return new PageInfo(sysGgs);
     }

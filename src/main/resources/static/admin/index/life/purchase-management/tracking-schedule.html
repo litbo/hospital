@@ -56,9 +56,9 @@
     {{#  } if(d.lzfxId !== null) { }}
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="lzFenxi">论证分析</a>
     {{#  } if(d.zbwyhhyId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">装备委员会会议</a>
-    {{#  } else if(d.ybghhyId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">院办公会会议</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="zbwyhhyId">装备委员会会议</a>
+    {{#  } if(d.ybghhyId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="ybghhyId">院办公会会议</a>
     {{#  } }}
 </script>
 <script>
@@ -74,7 +74,7 @@
                     , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
                     , {field: 'zt', title: '状态', minWidth: 150}
                     , {field: 'reason', title: '未通过原因', minWidth: 200}
-                    , {minWidth: 400,align:'center',toolbar: "#bar",template:""}
+                    , {align:'center',toolbar: "#bar",template:"",minWidth: 200}
                 ]]
                 ,url:"/lifeManage/selectSgInfoBmList"
                 ,method:"POST"
@@ -97,25 +97,57 @@
                                 event:'purchaseDan',
                                 type:2,
                                 content:'./child/purchaseDan.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["id"]
                             },
                             {
                                 event:'discussBiao',
                                 type:2,
                                 content:'./child/departmentDiscuss.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["kstlId"]
                             },
                             {
                                 event:'zrEvaluation',
                                 type:2,
                                 content:'./child/zrEvaluation.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["id"]
                             },
                             {
                                 event:'kxxFenxi',
                                 type:2,
                                 content:'./child/kxxFenxi.html',
-                                area:['58%','90%']
+                                area:['90%','90%'],
+                                dataUrl:["id"]
+                            },
+                            {
+                                event:'bigDevice',
+                                type:2,
+                                content:'./child/bigDevice.html',
+                                area:['90%','90%'],
+                                dataUrl:["id"]
+                            },
+                            {
+                                event:'lzFenxi',
+                                type:2,
+                                content:'./child/lzFenxi.html',
+                                area:['90%','90%'],
+                                dataUrl:["id"]
+                            },
+                            {
+                                event:'zbwyhhyId',
+                                type:2,
+                                content:'./child/zbwyhhyId.html',
+                                area:['90%','90%'],
+                                dataUrl:["zbwyhhyId"]
+                            },
+                            {
+                                event:'ybghhyId',
+                                type:2,
+                                content:'./child/ybghhyId.html',
+                                area:['90%','90%'],
+                                dataUrl:["ybghhyId"]
                             }
                         ]
                     })

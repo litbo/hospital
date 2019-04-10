@@ -1,8 +1,6 @@
 package com.litbo.hospital.security.dao.sqlprovider;
 
-import com.litbo.hospital.security.bean.FwPjsg;
 import com.litbo.hospital.security.enums.EnumApplyStatus;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
 import java.util.Date;
@@ -34,6 +32,7 @@ public class FwPjsgZjbProvider {
                 if(end!=null&&start!=null&&end.after(start)){
                     WHERE("g.sg_sh_time <= #{end}");
                 }
+                ORDER_BY("sg_sh_time Desc");
 
             }
         }.toString();

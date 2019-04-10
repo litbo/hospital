@@ -13,7 +13,6 @@ import com.litbo.hospital.lifemanage.dao.SgZbwyhRyMapper;
 import com.litbo.hospital.lifemanage.dao.SgZbwyhhyMapper;
 import com.litbo.hospital.lifemanage.service.SgInfoService;
 import com.litbo.hospital.lifemanage.service.SgZbwyhhyService;
-import com.litbo.hospital.supervise.dao.BmDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +32,6 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
     private SgZbwyhRyMapper sgZbwyhRyMapper;
     @Autowired
     private SgInfoMapper sgInfoMapper;
-    @Autowired
-    private BmDao bmDao;
     @Autowired
     SgInfoService sgInfoService;
 
@@ -100,5 +97,15 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
     public PageInfo<YearBudgetVO> selectSgZbwyhYearBudget(String year, String bmId, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(sgInfoMapper.selectSgZbwyhYearBudget(year, bmId));
+    }
+
+    /**
+     * 装备委员会详情信息
+     * @param zbwyhhyId 装备会员会id
+     * @return SgZbwyhhyVO
+     */
+    @Override
+    public SgZbwyhhyVO selectSgZbwyhById(String zbwyhhyId) {
+        return sgZbwyhhyMapper.selectSgZbwyhById(zbwyhhyId);
     }
 }

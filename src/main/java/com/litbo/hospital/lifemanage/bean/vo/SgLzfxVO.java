@@ -11,9 +11,17 @@ import java.util.List;
 @Data
 public class SgLzfxVO {
     /**
+     * 论证分析id
+     */
+    private String lzfxId;
+    /**
      * 申购单id
      */
     private String sgId;
+    /**
+     * 申购设备名称
+     */
+    private String bh;
     /**
      * 临床要求及评价
      */

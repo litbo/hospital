@@ -4,124 +4,279 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>申购单查看</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>申购单详情</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-form-item .layui-form-label{
-            width:150px;
+        .layui-form-label {
+            width: 145px !important;
         }
-        .layui-form-item .layui-input-block{
-            margin-left:150px;
+
+        .layui-input-block {
+            margin-left: 145px !important;
         }
-        .layui-form-item{
-            margin-top:35px
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
         }
-        .warm_btn {
-            height: 45px;
-            font-size: 1.3em;
-            letter-spacing: 3px;
-            margin: 10px 0 30px;
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
         }
     </style>
 </head>
-
 <body>
-<form class="layui-form layui-form-pane" action="">
-    <div class="layui-row">
-        <div class="col-xs-12">
-            <div class="layui-form-item">
-                <label class="layui-form-label">部门名称</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input" id="date" autocomplete="off" disabled>
-                </div>
-            </div>
+<div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>设备购置申请单</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="col-xs-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="eqPmName" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">申购单号</label>
+                <label class="layui-form-label">购置类别</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" disabled>
+                    <select name="gzlbId" lay-filter="gzlbId" disabled></select>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">数量</label>
+                <label class="layui-form-label">使用性质</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" disabled>
+                    <select name="syxzId" lay-filter="syxzId" disabled></select>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">估价(元)</label>
+                <label class="layui-form-label">外地收费价格</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="priceWd" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">状态</label>
+                <label class="layui-form-label">省内收费价格</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" disabled>
+                    <input type="text" name="priceSn" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">托管科室</label>
+                <div class="layui-input-block">
+                    <input type="text" name="bmName" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">未通过原因</label>
+                <label class="layui-form-label">资金来源</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" autocomplete="off" disabled>
+                    <select name="zjlyId" lay-filter="Zjly" disabled></select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">数量 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="num" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">估价(元)<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="priceGjY" class="layui-input" id="gjpd" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">估价(美元)</label>
+                <div class="layui-input-block">
+                    <input type="text" name="priceGjMy" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">检测量/日</label>
+                <div class="layui-input-block">
+                    <input type="text" name="jcl" class="layui-input" disabled>
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
-            <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid">保存</button>
+            <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">添加生产商</label>
+                <div class="layui-input-block">
+                </div>
+            </div>
+            <table id="table" lay-filter="table1"></table>
+
+            <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">功能配置列表</label>
+                <div class="layui-input-block">
+                </div>
+            </div>
+            <table id="table1" lay-filter="table1"></table>
         </div>
-    </div>
-</form>
+        <!--9000-->
+        <div class="col-xs-12" id="showMin">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">购置理由</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="gzll" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">详细用途</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="xxyt" disabled></textarea>
+                </div>
+            </div>
+        </div>
+        <!--900000000-->
+        <div class="col-xs-12" id="showMax">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">目的、用途</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="mdyt" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">目前教学/科研/临床应用情况</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="jxkylcqk" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">基本参数要求</label>
+                <div class="layui-input-block">
+                    <textarea  class="layui-textarea" name="jbcsyq" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">配置详细需求</label>
+                <div class="layui-input-block">
+                    <textarea  class="layui-textarea" name="pzxq" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">设计使用率</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="syl" disabled></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="tips">
 
-
-
+</div>
+</body>
 <script>
     renderMod = {
-        form:{
-            submit:{
-                filter:"submit",//可以不写
-                form:{
-                    url:"",
-                    type:"POST",
-                    data:[""],
-                    reload:"true"
-                },//表单提交函数
-                before:function(data){
-                    for(var name in data.field){
-                        if(data.field.hasOwnProperty(name)){
-                            if(data.field[name] === ""){
-                                layer.alert("请确认您填写的信息！");
-                                return false;
-                            }
-                        }
+        table: {
+            table: [
+                {
+                    id:"table",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'scsName', title: '参考生产厂商', minWidth: 150}
+                        , {field: 'ckcssbXh', title: '型号', minWidth: 150}
+                        , {field: 'ckcssbGg', title: '规格', minWidth: 150}
+                        , {field: 'ckcssbGj', title: '估价', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "无数据信息！"
                     }
-                    return true;
+                },
+                {
+                    elem: "#table1",
+                    id: "table1",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
+                        , {field: 'gnpzMs', title: '功能描述', minWidth: 150}
+                        , {field: 'gnpzIssyName', title: '使用', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "无数据信息！"
+                    }
                 }
-            },
-            val:{
-                get:{
-                    url:'',
-                    type:'',
-                    data:{}
+            ]
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "gzlbId",
+                        ids: "gzlbId",
+                        text: "gzlbName",
+                        url: "/eqdict/gzlb"
+                    },
+                    {
+                        filter: "Zjly",
+                        ids: "zjlyId",
+                        text: "zjlyName",
+                        url: "/eqdict/zjly"
+                    },
+                    {
+                        filter: "syxzId",
+                        ids: "syxzId",
+                        text: "syxzName",
+                        url: "/eq/listSyxz"
+                    }
+                ],
+                get: {
+                    url: "/lifeManage/selectSgInfoById",
+                    type: "POST",
+                    data: {sgInfoId: $.getUrlParam("id")},
+                    parse: ["sgCkcssbs","sgGnpzs"],
+                    tableId: ["table","table1"]
+                },
+                func:function(){
+                    //执行判断函数
+                    pd();
                 }
             }
         }
+    };
+
+    function pd(f) {
+        //f:是否允许弹出提示信息，false 默认允许
+        var mm = Number($("#gjpd").val());
+        //在超过1W时显示一个内容，其他情况使用一个内容
+        if (mm >= 10000) {
+            $("#showMin").addClass("hidden");
+            $("#showMax").removeClass("hidden");
+        } else {
+            $("#showMin").removeClass("hidden");
+            $("#showMax").addClass("hidden");
+        }
     }
 
+    $(function () {
+        var ss = null;
+        pd(true);
+        $("#gjpd").on("change", pd).keydown(function (event) {
+            if (event.keyCode === 13) {
+                pd();
+                return false;
+            }
+        });
+    })
 </script>
-</body>
-
 </html>

@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.litbo.hospital.supervise.bean.SEmp;
 import lombok.Data;
 
 import java.util.Date;
@@ -53,9 +54,13 @@ public class SgZbwyhhyVO {
      */
     private String zbwyhhyNr;
     /**
-     * 装备委员会参加人员
+     * 装备委员会参加人员姓名
      */
     private List<String> sgZbwyhRys;
+    /**
+     * 人员信息
+     */
+    private List<SEmp> users;
     /**
      * 审核人
      */

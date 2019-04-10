@@ -32,10 +32,6 @@
             float: left;
             margin: 10px 0;
         }
-
-        .layui-form-item {
-            height: 46px;
-        }
     </style>
 </head>
 
@@ -47,9 +43,15 @@
                 <button class="layui-btn warm_btn layui-btn-warm layui-btn-fluid" lay-submit="" id="saveType">提交</button>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">名称</label>
+                <label class="layui-form-label">预期用途</label>
                 <div class="layui-input-block">
-                    <input type="text" name="name" id="name" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
+                    <input type="text" name="name" id="use" class="layui-input" autocomplete="off" placeholder="请选择" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">产品描述</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" id="des" autocomplete="off" placeholder="请选择" disabled></textarea>
                 </div>
             </div>
             <div class="layui-row">
@@ -109,6 +111,9 @@
                 enable: true,
                 chkStyle: "radio",
                 radioType: "all"
+            },
+            callback: {
+                "onClick": clickShow
             }
         },
         newNode = {},
@@ -119,17 +124,26 @@
         type: "GET",
         success: function (res) {
             if (res.code === 0) {
-                console.log(res);
+                //console.log(res);
                 nodes = res.data;
                 $.fn.zTree.beautify().init($("#tree"), setting, res.data);
             }
 
         }
     });
+
+    //列表项点击事件
+    function clickShow(event, treeId, treeNode) {
+        if(!treeNode.nocheck){
+            $("#des").val(treeNode["cpms"]);
+            $("#use").val(treeNode["yqyt"]);
+        }
+    }
+
     $("#saveType").on("click", function () {
         var treeObj = $.fn.zTree.getZTreeObj("tree");
         var nodes = treeObj.getCheckedNodes(true), datas = "",tableD = [],tableData=[];
-        console.log("node",nodes);
+        //console.log("node",nodes);
         //获取树ID
         for (var i = 0; i < nodes.length; i++) {
             datas = nodes[i]["eqPmId"];

@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgLzfx;
 import com.litbo.hospital.lifemanage.bean.SgLzfxxhbj;
 import com.litbo.hospital.lifemanage.bean.vo.SgLzfxVO;
@@ -50,5 +51,15 @@ public class SgLzfxServiceImpl implements SgLzfxService {
             sgLzfxxhbj.setXhbjId(UUID.randomUUID().toString());
             sgLzfxxhbjMapper.insertSgLzfxxhbj(sgLzfxxhbj);
         }
+    }
+
+    /**
+     * 查看论证分析详情
+     * @param sgInfoId 申购单id
+     * @return SgLzfxVO
+     */
+    @Override
+    public SgLzfxVO selectSgLzfx(String sgInfoId) {
+        return sgLzfxMapper.selectSgLzfx(sgInfoId);
     }
 }

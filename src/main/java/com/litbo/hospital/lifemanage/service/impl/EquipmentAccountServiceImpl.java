@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.TimeAgoUtils;
+import com.litbo.hospital.lifemanage.bean.vo.EqCardToVO;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgQueryCountVO;
 import com.litbo.hospital.lifemanage.dao.EquipmentAccountMapper;
@@ -95,5 +96,16 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
 
         }
         return new PageInfo<>(sgQueryCountVOS);
+    }
+
+    /**
+     * 设备卡详情
+     *
+     * @param eqSbbh 设备编号
+     * @return Result
+     */
+    @Override
+    public EqCardToVO selectEqCardShow(String eqSbbh) {
+        return equipmentAccountMapper.selectEqCardShow(eqSbbh);
     }
 }

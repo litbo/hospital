@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgKstl;
 import com.litbo.hospital.lifemanage.bean.SgKstlUser;
 import com.litbo.hospital.lifemanage.bean.vo.SgKstlAddSgInfoVO;
+import com.litbo.hospital.lifemanage.bean.vo.SgKstlToVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgKstlVO;
 import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
 import com.litbo.hospital.lifemanage.dao.SgKstlMapper;
@@ -146,5 +147,17 @@ public class SgKstlServiceImpl implements SgKstlService {
         // 如果pmList为空 或者没有数据 就返回null的数据
         PageHelper.startPage(pageNum, pageSize);
         return pmList != null && pmList.size() > 0 ? new PageInfo<>(selectSgKstlVOByPmIds(pmList)) : new PageInfo<>();
+    }
+
+    /**
+     * 查询科室讨论表信息
+     * @param kstlId 科室讨论表id
+     * @return SgKstlToVO
+     */
+    @Override
+    public SgKstlToVO selectSgKstl(String kstlId) {
+        SgKstlToVO sgKstlToVO = sgKstlMapper.selectSgKstl(kstlId);
+        sgKstlToVO.setUsersName(sgKstlMapper.selectSgKstlRy(kstlId));
+        return sgKstlToVO;
     }
 }

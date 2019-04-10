@@ -73,9 +73,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12">
-                <button class="layui-btn layui-btn-warm warm_btn layui-btn-fluid" lay-submit="" id="upData">保存</button>
-            </div>
         </div>
     </form>
 </div>
@@ -90,48 +87,13 @@
                 get: {
                     url: "/lifeManage/selectSgZrpjbgBySgInfoId",
                     type: "POST",
-                    data: {sgInfoId: $.getUrlParam("sgId")}
+                    data: {sgInfoId: $.getUrlParam("id")}
                 }
             },
             date:{
                 elem:'#date',
                 format:"yyyy-MM-dd",
                 value:today0
-            },
-            submit: {
-                before:function(){
-                    return param = {
-                        1:$.getUrlParam("sgId")
-                    }
-                },
-                form: {
-                    url: "/lifeManage/insertSgZrpjbg",
-                    type: "POST",
-                    data:["pjbgDw","pjbgZbxm","pjbgBmfzr","pjbgZbdw","pjbgRq"],
-                    contentType:"application/json",
-                    param:{
-                        1:"sgId"
-                    },
-                    success:function(res){
-                        if(res.code === 0){
-                            parent.layer.msg("提交成功！");
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
-                        }
-                        //console.log("提交成功！",res);
-                    }
-                },
-                func:function(){
-                    //价格大于10W弹出新页面
-                    if(top.tempData.mm >= 100000){
-                        layOpen({
-                            type:2,
-                            site:"parent",
-                            content:'./child/kxxfx.html?sgId='+$.getUrlParam("sgId"),
-                            area:['100%','100%']
-                        })
-                    }
-                }
             }
         }
     }

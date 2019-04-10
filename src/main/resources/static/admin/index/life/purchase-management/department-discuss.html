@@ -115,6 +115,7 @@
 </form>
 <script>
     var formData = {};
+    var formData2 = {};
     renderMod = {
         first:function(){
           subUp({
@@ -136,12 +137,12 @@
                 before: function (param) {
                     var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]),maxNum = 15;
                     if (doJudg({
-                        "undefined": [formData.radio],
+                        "undefined": [formData2.radio],
                         0: [tv, tv1]
                     })){
                         putMsg({
                             alert: "请选择数据后提交！",
-                            log:[formData,tv,tv1]
+                            log:[formData2,tv,tv1]
                         });
                         return false;
                     }else if(tv.length < formData.maxNum){
@@ -152,7 +153,7 @@
                         return false;
                     }
                     return param = {
-                        1: formData.radio[0]["userIdJl"],
+                        1: formData2.radio[0]["userId"],
                         2: tv,
                         3: tv1
                     };
@@ -166,9 +167,6 @@
                         1: "userIdJl",
                         2: "usersId",
                         3: "pmsId"
-                    },
-                    add: {
-                        userId: 1615925037
                     },
                     reload:true
                 }
@@ -236,7 +234,7 @@
                     db: "/kwgl/empgl/listPartnerByUserId",
                     name: "dtdt",
                     key: "radio",
-                    data: formData
+                    data: formData2
                 }
             ]
         }

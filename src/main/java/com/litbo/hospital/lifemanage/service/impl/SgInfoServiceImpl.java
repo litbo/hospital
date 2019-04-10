@@ -18,6 +18,7 @@ import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.EqDao;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,13 @@ public class SgInfoServiceImpl implements SgInfoService {
         //添加申购单基本信息
         SgInfo sgInfo = sgInfoMapper.selectSgInfoById(sgInfoId);
         BeanUtils.copyProperties(sgInfo, sgInfoVO);
-
+        //查询托管部门名称
+        if (StringUtils.isNotBlank(sgInfo.getTgBmId())){
+            SBm sBm = bmDao.getBmBybmid(sgInfo.getTgBmId());
+            if (ObjectUtils.allNotNull(sBm)){
+                sgInfoVO.setBmName(sBm.getBmName());
+            }
+        }
         //查询 申购单对应的参考厂商设备信息
         List<SgCkcssb> sgCkcssbs = sgCkcssbMapper.selectSgCkcssbBySgInfoId(sgInfoId);
         //查询功能配置
@@ -91,7 +98,7 @@ public class SgInfoServiceImpl implements SgInfoService {
 
         //查询申购单的id是否存在
         String sgInfoBh = sgInfoMapper.selectSgInfoBhById(sgInfo.getId());
-        // 如何申购单编号不存在生成一个编号
+        // 如果申购单编号不存在生成一个编号
         if (StringUtils.isBlank(sgInfoBh)) {
             //按照格式生成申购单编号 日期+流水号
             sgInfoBh = IDFormat.getIdByIDAndTime("sg_info", "bh");
@@ -325,7 +332,7 @@ public class SgInfoServiceImpl implements SgInfoService {
             SgInfoReasonVO reason = sgInfoMapper.getReason(sgInfoListVO.getId());
             if (reason != null) {
                 //科室审核未通过
-                if (" 0".equals(reason.getIskssh())) {
+                if ("0".equals(reason.getIskssh())) {
                     sgInfoListVO.setReason(reason.getKsshyj());
                 }
                 //医学工程处审核未通过

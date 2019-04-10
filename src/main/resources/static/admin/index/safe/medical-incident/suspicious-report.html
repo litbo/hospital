@@ -70,6 +70,14 @@
                     </select>
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人</label>
+                <div class="layui-input-block">
+                    <select lay-filter="shr" name="shr">
+                    </select>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -277,6 +285,11 @@
                         ids:"userId",
                         text:"userXm",
                         url:"/kwgl/empgl/listPartnerByUserId"
+                    }, {
+                        filter:"shr",
+                        ids:"userId",
+                        text:"userXm",
+                        url:"/kwgl/empgl/listBmPartnerByUserId"
                     }
                 ]
             },
@@ -285,7 +298,7 @@
                     url:"/security/blsj/insertFwBlsj",
                     type:"POST",
                     data:["userId","bgmc","bgTime","sjxz","bgrqz","hzxm","hzAge","yqzlxg","sjfsTime","fxzxTime","zrTime",
-                        "qxgz","zysh","sjcs","hzSex","ylqxsxcs","czry","sjhg","bgrgw","eqId","lxdh"],
+                        "qxgz","zysh","sjcs","hzSex","ylqxsxcs","czry","sjhg","bgrgw","eqId","lxdh","shr"],
                     reload:true
                 }
             }
@@ -295,11 +308,11 @@
             selectItem: [
                 {
                     elem: "#selectEquip",
-                    cb: "/benefical/select/listSelectCols",
-                    db: "/benefical/select/listSelect",
+                    cb: "/eq/listEqbt",
+                    db: "/eq/listShowEqs",
                     se:"/eq/eqSe",
                     name: "dtdt",
-                    key: "eq",
+                    key: "radio",
                     data:formData
                 }
             ]

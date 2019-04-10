@@ -30,4 +30,13 @@ public class SgLzfxController {
         return Result.success();
     }
 
+    /**
+     * 查看论证分析信息
+     * @param sgInfoId 申购单id
+     * @return Result
+     */
+    @PostMapping("/selectSgLzfx")
+    public Result selectSgLzfx(String sgInfoId) {
+        return Result.success(sgLzfxService.selectSgLzfx(sgInfoId));
+    }
 }

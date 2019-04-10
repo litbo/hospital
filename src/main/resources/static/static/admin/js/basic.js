@@ -508,7 +508,7 @@ function getTableValue(name, inClear) {
 
 //获取给定name的表单数据
 //返回JSON
-function getFormValue(name,res,force){
+function getFormValue(name,res,force,must){
     var data = res || {};
     //遍历所有的name
     for(var c=0;c<name.length;c++){
@@ -537,6 +537,7 @@ function getFormValue(name,res,force){
             //}
         }else{
             force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
+            must && (data[name[c]] = must || "null")
         }
         //console.log(data);
     }
@@ -1170,6 +1171,20 @@ jQuery.cookie = function (name, value, options) {
         return cookieValue;
     }
 };
+
+function changeTab(ele, callback) {
+    //ele:{title:"",id:"",url:""}
+    layui.use(['element'], function () {
+        var element = layui.element;
+        element.tabAdd('tab', {
+            title: ele.title,
+            content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
+            id: ele.id
+        });
+        element.tabChange('tab', ele.id);
+        callback ? callback() : null;
+    })//layui element规定用法，当主列表项无子列表时选中第一个列表项
+}//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）
 
 /**
  * @todo 动态添加JS

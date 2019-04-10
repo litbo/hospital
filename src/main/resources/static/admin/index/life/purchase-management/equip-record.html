@@ -86,6 +86,20 @@
         <button class="layui-btn" data-type="reload">查找</button>
     </form>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="purchaseDan">申购单</a>
+    {{#  if(d.kstlId !== null){ }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="discussBiao">科室讨论表</a>
+    {{#  } if(d.pjbgId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="zrEvaluation">准入评价报告</a>
+    {{#  } if(d.kxfxId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="kxxFenxi">可行性分析</a>
+    {{#  } if(d.dxzbId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="bigDevice">大型医学装备</a>
+    {{#  } if(d.lzfxId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="lzFenxi">论证分析</a>
+    {{#  } }}
+</script>
 <script>
     renderMod = {
         addTable: {
@@ -98,6 +112,7 @@
                     , {field: 'eqPmName', title: '设备名称', minWidth: 150}
                     , {field: 'num', title: '数量', minWidth: 100, sort: true}
                     , {field: 'priceGjY', title: '估价(元)', minWidth: 100, sort: true}
+                    , {minWidth: 300, align: 'left', toolbar: "#bar"}
                 ]]
                 , url: "/lifeManage/selectSgInfoSgZbwyhhyList"
                 , method: "POST"
@@ -111,38 +126,82 @@
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
                         "data": res.data.list, //解析数据列表
-                        "count":res.data.total
+                        "count": res.data.total
                     }
                 }
                 , done: function (obj) {
                     tableFunc({
-                        toolFunc: {
-                            title: "审批",
-                            event: "describe",
-                            tool: "toolbar",
-                            type: 2,
-                            content: "./child/meet-record.html",
-                            area: ["90%", "90%"],
-                            before:function(obj,cs){
-                                console.log("cs",cs);
-                                if(cs.data.length === 0){
-                                    putMsg({
-                                        alert:"请至少选择一条数据！"
-                                    });
-                                    return false
+                        toolFunc: [
+                            {
+                                title: "审批",
+                                event: "describe",
+                                tool: "toolbar",
+                                type: 2,
+                                content: "./child/meet-record.html",
+                                area: ["90%", "90%"],
+                                before: function (obj, cs) {
+                                    console.log("cs", cs);
+                                    if (cs.data.length === 0) {
+                                        putMsg({
+                                            alert: "请至少选择一条数据！"
+                                        });
+                                        return false
+                                    }
+                                },
+                                func: function (obj, cs) {
+                                    var data = [];
+                                    for (var i = 0; i < cs.data.length; i++) {
+                                        data.push(cs.data[i]["id"]);
+                                    }
+                                    layui.sessionData("dtds", {
+                                        key: "sgIdss",
+                                        value: data
+                                    })
                                 }
                             },
-                            func:function(obj,cs){
-                                var data = [];
-                                for(var i=0;i<cs.data.length;i++){
-                                    data.push(cs.data[i]["id"]);
-                                }
-                                layui.sessionData("dtds",{
-                                    key:"sgIdss",
-                                    value:data
-                                })
+                            {
+                                event: 'purchaseDan',
+                                type: 2,
+                                content: './child/purchaseDan.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["id"]
+                            },
+                            {
+                                event: 'discussBiao',
+                                type: 2,
+                                content: './child/departmentDiscuss.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["kstlId"]
+                            },
+                            {
+                                event: 'zrEvaluation',
+                                type: 2,
+                                content: './child/zrEvaluation.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["id"]
+                            },
+                            {
+                                event: 'kxxFenxi',
+                                type: 2,
+                                content: './child/kxxFenxi.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["id"]
+                            },
+                            {
+                                event: 'bigDevice',
+                                type: 2,
+                                content: './child/bigDevice.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["id"]
+                            },
+                            {
+                                event: 'lzFenxi',
+                                type: 2,
+                                content: './child/lzFenxi.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["id"]
                             }
-                        }
+                        ]
                     })
                 }
             },
@@ -177,15 +236,15 @@
             date: [
                 {
                     elem: "#datet"
-                    ,type:"datetime"
-                    ,value: today + " "+time
-                    ,format:'yyyy-MM-dd HH:mm:ss'
+                    , type: "datetime"
+                    , value: today + " " + time
+                    , format: 'yyyy-MM-dd HH:mm:ss'
                 },
                 {//选择 “时间” 日期选择器
                     elem: "#datey"
-                    ,type:"datetime"
-                    ,value: today + " "+time
-                    ,format:'yyyy-MM-dd HH:mm:ss'
+                    , type: "datetime"
+                    , value: today + " " + time
+                    , format: 'yyyy-MM-dd HH:mm:ss'
                 }]
         }
     }

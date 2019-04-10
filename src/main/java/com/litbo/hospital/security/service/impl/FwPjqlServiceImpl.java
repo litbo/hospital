@@ -102,7 +102,6 @@ public class FwPjqlServiceImpl implements FwPjqlService {
                 }
             }
             if(flag){
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return map;
             }
             //库存如果足够，完成出库，并存入出库信息

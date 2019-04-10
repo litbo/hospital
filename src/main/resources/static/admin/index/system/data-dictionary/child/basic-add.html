@@ -51,7 +51,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">字典名称<span>*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="roleName" class="layui-input" autocomplete="off" required lay-verify="required">
+                    <input type="text" name="dictName" class="layui-input" autocomplete="off" required lay-verify="required">
                 </div>
             </div>
         </div>
@@ -75,9 +75,9 @@
             submit:{
                 filter:"submit",//可以不写
                 form:{
-                    url:"/role/addRole",
+                    url:"/eqdict/addDictByTName",
                     type:"POST",
-                    data:["roleName"],
+                    data:["tName","dictName"],
                     reload:"true"
                 },//表单提交函数
                 before:function(data){

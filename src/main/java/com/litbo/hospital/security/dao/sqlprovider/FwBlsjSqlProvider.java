@@ -16,7 +16,7 @@ public class FwBlsjSqlProvider {
             }
         }.toString();
     }
-    public String listFwBlsj(String sjxz,String bmName,String sbcsName,String bgmc){
+    public String listFwBlsj(String sjxz,String bmName,String sbcsName,String bgmc,Integer status){
         return new SQL(){
             {
                 SELECT("b.id,f.eq_name,m.bm_name,b.bgmc,b.bg_time,b.sjxz,f.eq_gg,e.sbcs_name,f.eq_azrq");
@@ -36,6 +36,7 @@ public class FwBlsjSqlProvider {
                 if(sbcsName!=null&&!"".equals(sbcsName)){
                     WHERE("sbcs_name like '%'+#{sbcsName}+'%'");
                 }
+                WHERE("status=#{status}");
             }
         }.toString();
     }

@@ -78,4 +78,15 @@ public class SgYbghhyServiceImpl implements SgYbghhyService {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(sgInfoMapper.selectSgYbghhyYearBudget(year, bmId));
     }
+
+    /**
+     * 院办公会会议详情
+     *
+     * @param ybghhyId 院办公会会议id
+     * @return SgYbghhyVO
+     */
+    @Override
+    public SgYbghhyVO selectSgYbghhyById(String ybghhyId) {
+        return sgYbghhyMapper.selectSgYbghhyById(ybghhyId);
+    }
 }

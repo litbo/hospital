@@ -19,6 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/logo/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/eq/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/tmp/")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/wjxz/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/downloadFile/");
     }
 }
