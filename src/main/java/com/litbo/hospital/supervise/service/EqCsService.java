@@ -3,12 +3,14 @@ package com.litbo.hospital.supervise.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
+import com.litbo.hospital.supervise.vo.EqCsVO;
 import com.litbo.hospital.user.bean.EqCs;
+import java.util.List;
 
 public interface EqCsService {
     //获得所有厂商
-    PageInfo listEqCs(int pageNum, int pageSize);
-
+    List<EqCs> listEqCs(int pageNum, int pageSize);
+    List<EqCsVO> listEqCsVO(EqCsSelectVO selectVo,int pageNum, int pageSize);
     //添加数据前准备数据
     EqCsInsertReadyVO readyResource();
     //添加厂商

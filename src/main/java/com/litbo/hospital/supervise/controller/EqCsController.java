@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,8 +26,8 @@ public class EqCsController {
     @PostMapping("/listEqCs")
     public Result listEqCs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
-        PageInfo pageInfo = eqCsService.listEqCs(pageNum,pageSize);
-        return Result.success(pageInfo);
+        List<EqCs> eqCs = eqCsService.listEqCs(pageNum, pageSize);
+        return Result.success(new PageInfo<>(eqCs));
     }
     @GetMapping("/readyResource")
     public Result readyResource(){

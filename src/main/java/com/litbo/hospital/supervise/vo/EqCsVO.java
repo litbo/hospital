@@ -7,10 +7,13 @@ public class EqCsVO {
     private Integer sbcsId1;
 
     private String sbCslbId;
+    private String sbCslbName;
 
     private String gbId;
+    private String gbName;
 
     private String jgId;
+    private String jdName;
 
     private String sbcsName;
 
@@ -31,4 +34,6 @@ public class EqCsVO {
     private String sbcsLxdh3;
 
     private String sbcsFax;
+
+    private String sbcsCsdm;
 }

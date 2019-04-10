@@ -46,6 +46,20 @@
                 </div>
             </div>
 
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sexId" value="1" title="男" checked="">
+                    <input type="radio" name="sexId" value="2" title="女">
+                    <input type="radio" name="sexId" value="0" title="未知的性别">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">身份证号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sfzh" autocomplete="off" class="layui-input" lay-verify="required|sfzid">
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">民族</label>
                 <div class="layui-input-block">
@@ -54,6 +68,34 @@
                     </select>
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="tel" autocomplete="off" class="layui-input" lay-verify="required|phone">
+                </div>
+            </div>
+
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">签名照片</label>
+                <input type="text" name="qzzp" id="qzzp" autocomplete="off" class="layui-input" lay-verify=""  >
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" lay-submit="" lay-filter="submit" id="sub">上传照片</button>
+                    <button type="button" id="ckzp" class="layui-btn layui-btn-sm layui-btn-normal"   ><a id="ackzp">查看照片</a></button>
+                </div>
+            </div>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">预览</label>
+                <div class="layui-input-block">
+                    <div class="img_show">
+
+                    </div>
+                    <!--<input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">-->
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-6">
 
             <div class="layui-form-item" pane>
                 <label class="layui-form-label" style="line-height:30px">科室<span class="sign">*</span></label>
@@ -69,43 +111,11 @@
 
             </div>
 
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">性别</label>
-                <div class="layui-input-block">
-                    <input type="radio" name="sexId" value="0" title="未知的性别">
-                    <input type="radio" name="sexId" value="1" title="男" checked="">
-                    <input type="radio" name="sexId" value="2" title="女">
-                </div>
-            </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">身份证号</label>
-                <div class="layui-input-block">
-                    <input type="text" name="sfzh" autocomplete="off" class="layui-input" lay-verify="required">
-                </div>
-            </div>
-
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">电话</label>
-                <div class="layui-input-block">
-                    <input type="text" name="tel" autocomplete="off" class="layui-input">
-                </div>
-            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">学历</label>
                 <div class="layui-input-block">
-                    <select name="xllbId">
+                    <select name="xllbId" lay-filter="xllb" lay-verify="required">
                         <option></option>
-                        <option value="0">博士生</option>
-                        <option value="1">研究生</option>
-                        <option value="2">大学本科</option>
-                        <option value="3">大学专科及专科学校</option>
-                        <option value="4">中专及中技</option>
-                        <option value="5">技工学校</option>
-                        <option value="6">高中</option>
-                        <option value="7">初中及以下</option>
                     </select>
                 </div>
             </div>
@@ -119,15 +129,15 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位</label>
                 <div class="layui-input-block">
-                    <select name="zwlbId" lay-filter="zwlb">
+                    <select name="zwlbId" lay-filter="zwlb" lay-verify="required">
                         <option></option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">职称</label>
+                <label class="layui-form-label" >职称</label>
                 <div class="layui-input-block">
-                    <select name="zcId" lay-filter="zc">
+                    <select name="zcId" lay-filter="zc" lay-verify="required">
                         <option></option>
                     </select>
                 </div>
@@ -151,6 +161,40 @@
     renderMod = {
 
         form:{
+            ver:{
+                sfzid: [
+                    /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+                    ,'请输入正确的身份证号'
+                ]
+            },
+            file:{
+                elem:"#selec1",
+                url:"/kwgl/empgl/setQzzp",
+                accept:"images",
+                acceptMime:"image/*",
+                auto:false,
+                bindAction:"#sub",
+                field:"img",
+                choose:function(obj){
+                    files = obj.pushFile();
+                    obj.preview(function(index,file,result){
+                        $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
+                    })
+                },done:function(res,index,upload){
+                    $("#qzzp").val(res.data);
+                    $("#selec1").text("重新选择");
+                    $("#ckzp").removeClass("layui-btn-disabled");
+                    //layui.closeAll("loading");
+                    layer.msg('上传成功！', {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                    // $(".img_show").html("");
+                    return delete files[index];
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
+                }
+            },
             date:[
                 {
                     elem: '#date'
@@ -176,6 +220,11 @@
                         ids:"bmId",
                         text:"bmName",
                         url:"/supervise/bmgl/listBms2"
+                    }, {
+                        filter:"xllb",
+                        ids:"xllbId",
+                        text:"xllb",
+                        url:"/eqdict/listXllb"
                     },{
                         filter:"zwlb",
                         ids:"zggwlbId",
@@ -195,7 +244,7 @@
                 ],
                 func:function(data,form){
                     //console.log(data);
-                    $("select[name='mzId']").val(String(data["xllbId"]).trim());
+                    $("select[name='mzId']").val(String(data["mzId"]).trim());
                     $("select[name='xllbId']").val(String(data["xllbId"]).trim());
                     $("select[name='zwlbId']").val(String(data["zwlbId"]).trim());
                     $("select[name='zcId']").val(String(data["zcId"]).trim());
@@ -221,7 +270,7 @@
                     url:"/kwgl/empgl/saveEmp",
                     type:"POST",
                     contentType:"application/json",
-                    data:["userId","userXm","mzId","sexId","sfzh","tel","xllbId","byyx","zwlbId","zcId"],
+                    data:["userId","userXm","mzId","sexId","sfzh","tel","xllbId","byyx","zwlbId","zcId","qzzp"],
                     param: {
                         1: "bmId"
                     },done:function(res){
@@ -252,6 +301,26 @@
         }
 
     }
+
+    $(document).ready(function(){
+
+
+        var url = $("#qzzp").val()
+        if(url==null||url==""){
+            $("#ckzp").addClass("layui-btn-disabled");
+        }
+
+        $("#ckzp").click(function(){
+            if($("#ckzp").hasClass("layui-btn-disabled")) return;
+            var url=$('#qzzp').val();
+            console.log(url);
+            layOpen({
+                type:2,
+                content:url,
+                area:["50%","50%"]
+            })
+        });
+    });
 </script>
 
 

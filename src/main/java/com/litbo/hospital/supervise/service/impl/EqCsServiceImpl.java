@@ -19,10 +19,17 @@ public class EqCsServiceImpl implements EqCsService {
     private EqCsDao eqCsDao;
 
     @Override
-    public PageInfo listEqCs(int pageNum, int pageSize) {
+    public List<EqCs> listEqCs(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<EqCs> eqcss = eqCsDao.listEqCs(pageNum,pageSize);
-        return new PageInfo(eqcss);
+        List<EqCs> eqcss = eqCsDao.listEqCs();
+        return eqcss;
+    }
+
+    @Override
+    public List<EqCsVO> listEqCsVO(EqCsSelectVO selectVo, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqCsVO> eqCsVOS = eqCsDao.listEqCsVO(selectVo);
+        return eqCsVOS;
     }
 
     @Override

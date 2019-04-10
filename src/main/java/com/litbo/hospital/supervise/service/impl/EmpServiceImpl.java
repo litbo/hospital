@@ -2,6 +2,7 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.dao.BmDao;
@@ -23,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -119,10 +119,16 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public EmpVO getEmpsByUserId(String userId) {
         EmpVO emp = empDao.getEmpsByUserId(userId);
-        emp.setZwlbId(emp.getZwlbId().trim());
-        emp.setXllbId(emp.getXllbId().trim());
-        emp.setMzId(emp.getMzId().trim());
-        emp.setBmName(bmDao.getBmBybmid(emp.getBmId()).getBmName());
+        if(emp==null) return null;
+        emp.setZwlbId(emp.getZwlbId()!=null?emp.getZwlbId().trim():null);
+        emp.setXllbId(emp.getXllbId()!=null?emp.getXllbId().trim():null);
+        emp.setMzId(emp.getMzId()!=null?emp.getMzId().trim():null);
+        emp.setBmName(emp.getBmId()!=null?bmDao.getBmBybmid(emp.getBmId()).getBmName():null);
+
+//        String path = System.getProperty("user.dir");
+//        if (emp.getQzzp()!=null&&!emp.getQzzp().equals(""))
+//            emp.setQzzp(emp.getQzzp().replace(path+"\\","").replaceAll("\\\\","/"));
+
         return emp;
     }
 
@@ -192,5 +198,14 @@ public class EmpServiceImpl implements EmpService {
         }
 
         return status;
+    }
+
+    @Override
+    public String setQzzp(MultipartFile img) {
+        String path = System.getProperty("user.dir");
+        String filePath =path+"/emp/qzzp/";
+        String url = UploadFile.upload(filePath,img);
+        url = url.replaceAll("/","\\\\");
+        return url;
     }
 }

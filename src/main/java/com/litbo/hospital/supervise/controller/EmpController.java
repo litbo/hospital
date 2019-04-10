@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -187,6 +193,40 @@ public class EmpController {
             return Result.error();
         }
         return Result.success();
+    }
+
+    @RequestMapping("/setQzzp")
+    public Result setQzzp(@RequestParam("img")MultipartFile img){
+        String docUrl = empService.setQzzp(img);
+        return Result.success(docUrl);
+    }
+
+
+
+    @RequestMapping(value="getImg" )
+    @ResponseBody
+    public void getImg(String imgPathEncode,HttpServletResponse response) throws IOException {
+
+        response.setContentType("text/html");
+        String imgPath = URLDecoder.decode(imgPathEncode, "utf-8");
+        imgPath= imgPathEncode.replaceAll("/","\\\\") ;
+
+        String pjpath = System.getProperty("user.dir");
+
+        String realUrl =pjpath+"\\"+imgPath;
+
+        File file = new File(realUrl);
+        if(file.exists()) {
+            FileInputStream in = new FileInputStream(file);
+            OutputStream os = response.getOutputStream();
+            byte[] b = new byte[1024];
+            while(in.read(b)!= -1) {
+                os.write(b);
+            }
+            in.close();
+            os.flush();
+            os.close();
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.litbo.hospital.user.dao;
 
+import com.litbo.hospital.security.bean.Xllb;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.DictProvider;
 import com.litbo.hospital.user.vo.DictVo;
@@ -68,6 +69,8 @@ public interface DictDao {
     List<Mz> listMz();
     @Select("select *  from s_zc")
     List<Zc> listZc();
+    @Select("select *  from s_xllb")
+    List<Xllb> listXllb();
     @SelectProvider(type = DictProvider.class ,method = "listDictByTName")
     List<DictVo> listDictByTName(String tName);
     @SelectProvider(type = DictProvider.class ,method = "addDictByTName")
