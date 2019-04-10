@@ -77,23 +77,13 @@
 
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">签名照片</label>
-                <input type="text" name="qzzp" id="qzzp" autocomplete="off" class="layui-input" lay-verify=""  >
+                <input type="text" name="qzzp" id="qzzp" autocomplete="off" class="layui-input hidden" >
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
                     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" lay-submit="" lay-filter="submit" id="sub">上传照片</button>
-                    <button type="button" id="ckzp" class="layui-btn layui-btn-sm layui-btn-normal"   ><a id="ackzp">查看照片</a></button>
+                    <button type="button" id="ckzp" class="layui-btn layui-btn-sm layui-btn-normal">查看照片</button>
                 </div>
             </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">预览</label>
-                <div class="layui-input-block">
-                    <div class="img_show">
-
-                    </div>
-                    <!--<input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">-->
-                </div>
-            </div>
-
         </div>
         <div class="col-xs-12 col-sm-6">
 
@@ -142,8 +132,6 @@
                     </select>
                 </div>
             </div>
-
-
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
@@ -159,7 +147,6 @@
 <script>
     var formData = {};
     renderMod = {
-
         form:{
             ver:{
                 sfzid: [
@@ -176,19 +163,14 @@
                 bindAction:"#sub",
                 field:"img",
                 choose:function(obj){
-                    files = obj.pushFile();
-                    obj.preview(function(index,file,result){
-                        $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
-                    })
+                    layer.msg("选择成功！");
                 },done:function(res,index,upload){
                     $("#qzzp").val(res.data);
                     $("#selec1").text("重新选择");
                     $("#ckzp").removeClass("layui-btn-disabled");
-                    //layui.closeAll("loading");
                     layer.msg('上传成功！', {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
                     });
-                    // $(".img_show").html("");
                     return delete files[index];
                 },error:function(index,upload){
                     console.log("index:"+index);
@@ -249,6 +231,10 @@
                     $("select[name='zwlbId']").val(String(data["zwlbId"]).trim());
                     $("select[name='zcId']").val(String(data["zcId"]).trim());
                     form.render("select");
+
+                    if(!data["qzzp"]){
+                        $("#ckzp").addClass("layui-btn-disabled");
+                    }
                 }
             },
 
@@ -286,7 +272,8 @@
                     }
                 }
             }
-        },bind: {
+        },
+        bind: {
             selectItem: [
                 {
                     elem: "#selectRoom",
@@ -298,29 +285,24 @@
                     se:"/supervise/bmgl/bmSe"
                 }
             ]
+        },
+        btn:{
+            elem:"#ckzp",
+            func:function(){
+                var url = $("#qzzp").val();
+                if(url){
+                    var nUrl = url.split("\\emp\\");
+                    layOpen({
+                        type:2,
+                        content:"/emp/"+nUrl[1],
+                        title:"图片详情",
+                        area:["80%","80%"]
+                    })
+                }
+            }
         }
+    };
 
-    }
-
-    $(document).ready(function(){
-
-
-        var url = $("#qzzp").val()
-        if(url==null||url==""){
-            $("#ckzp").addClass("layui-btn-disabled");
-        }
-
-        $("#ckzp").click(function(){
-            if($("#ckzp").hasClass("layui-btn-disabled")) return;
-            var url=$('#qzzp').val();
-            console.log(url);
-            layOpen({
-                type:2,
-                content:url,
-                area:["50%","50%"]
-            })
-        });
-    });
 </script>
 
 
