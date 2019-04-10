@@ -7,15 +7,16 @@
 *            2：renderMod.js大部分组建使用方法与其他两个文件中定义的相同使用上略有偏差，详细请看相关说明文档，推荐使用renderMod渲染页面
 * */
 
-$(function () {
+function render(renderParam){
     layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer", "util"], function () {
         var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
             upload = layui.upload, $ = layui.jquery, layer = layui.layer, util = layui.util, param = {},
-            formAction = renderMod['form'] || renderMod['formAction']//表单数据
-            , addTable = renderMod['table'] || renderMod['addTable']//表格数据
-            , bindButton = renderMod['btn'] || renderMod['bindButton']//按钮数据
-            , ahead = renderMod['first'] || renderMod['firstExecute']//最先加载内容
-            , bindEvent = renderMod['bind'] || renderMod['bindEvent']//常用事件绑定
+            renderMain = renderParam || renderMod,
+            formAction = renderMain['form'] || renderMain['formAction']//表单数据
+            , addTable = renderMain['table'] || renderMain['addTable']//表格数据
+            , bindButton = renderMain['btn'] || renderMain['bindButton']//按钮数据
+            , ahead = renderMain['first'] || renderMain['firstExecute']//最先加载内容
+            , bindEvent = renderMain['bind'] || renderMain['bindEvent']//常用事件绑定
         ;
         //最先加载事件
         if (ahead && ahead !== false) {
@@ -888,6 +889,10 @@ $(function () {
             });
 
     });
+}
+
+$(function () {
+    render();
 });
 
 
