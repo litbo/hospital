@@ -113,22 +113,21 @@ $(function () {
                                         } else {
                                             value[name] = dat[name];
                                         }
-                                        //表格渲染
-                                        if (val.get.parse !== undefined) {
-                                            //当为字符串时渲染一个表格
-                                            if(Type(val.get.parse) === "string"){
-                                                table.reload(val.get.tableId, {
-                                                    data: dat[val.get.parse]
-                                                })
-                                                //当为数组时渲染多个表格
-                                            }else if(Type(val.get.parse) === "array"){
-                                                for(var o=0;o<val.get.parse;o++){
-                                                    table.reload(val.get.tableId[o] || "table", {
-                                                        data: dat[val.get.parse[o]]
-                                                    })
-                                                }
-                                            }
-
+                                    }
+                                }
+                                //表格渲染
+                                if (val.get.parse !== undefined) {
+                                    //当为字符串时渲染一个表格
+                                    if(Type(val.get.parse) === "string"){
+                                        table.reload(val.get.tableId, {
+                                            data: dat[val.get.parse]
+                                        })
+                                        //当为数组时渲染多个表格
+                                    }else if(Type(val.get.parse) === "array"){
+                                        for(var o=0;o<val.get.parse.length;o++){
+                                            table.reload(val.get.tableId[o] || "table", {
+                                                data: dat[val.get.parse[o]]
+                                            })
                                         }
                                     }
                                 }
@@ -370,18 +369,18 @@ $(function () {
                         , nData = []
                         , cData = []
                         , active = {}//绑定按钮事件
-                        , mu = "null"//无数据默认填充数据
+                        , mu = {show:null}//无数据默认填充数据
                         , resValue = {};//重载值
                     //绑定按钮事件
                     active[type] = function () {
                         resValue = {};
                         //默认填充值
                         if(res.mu){
-                            mu = res.mu;
+                            mu["show"] = res.mu;
                         }
                         //动态获取表单数据
                         if (Type(res.data) === "array") {
-                            resValue = getFormValue(res.data,false,false,mu);
+                            resValue = getFormValue(res.data,false,true,mu);
                         }
                         //添加额外数据
                         if (res.where) {
@@ -441,7 +440,7 @@ $(function () {
                         //还原表单选项
                         for(var naa in resValue){
                             if(resValue.hasOwnProperty(naa)){
-                                if(resValue[naa] !== mu){
+                                if(resValue[naa] !== mu["show"]){
                                     $("*[name='"+naa+"']").val(resValue[naa])
                                 }
                             }

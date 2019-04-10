@@ -207,8 +207,6 @@
             }
 
             //锁定判断
-            //console.log(loc);
-            //console.log(window.locked);
             if(loc || window.locked){
                 goLock(true);
             }
@@ -271,6 +269,7 @@
                                 }else{
                                     layer.alert("解锁失败！");
                                     $("#uKey").val("");
+                                    console.log(res);
                                 }
                             }
                         });

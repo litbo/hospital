@@ -536,8 +536,12 @@ function getFormValue(name,res,force,must){
                 data[name[c]] = checkBoxValue.val();
             //}
         }else{
-            force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
-            must && (data[name[c]] = must || "null")
+            if(force){
+                data[name[c]] = $("*[name='"+name[c]+"']").val();
+            }
+            if(must){
+                must["show"] && (data[name[c]] = must.show || null)
+            }
         }
         //console.log(data);
     }
@@ -816,13 +820,12 @@ action = func = {
                     }else{
                         newJ = JSON.parse(JSON.stringify(vas))
                     }
-
-
+                    //修改弹窗链接
                     if(showContent){
-                        console.log(1);
+                        //console.log(1);
                         newJ.content = showContent;
                     }
-                    console.log("即将弹出",newJ);
+                    //console.log("即将弹出",newJ);
                     //若允许弹出则弹出
                     openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
