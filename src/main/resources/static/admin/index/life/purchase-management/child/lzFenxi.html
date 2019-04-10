@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>申购单论证分析查询</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>医学装备论证</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">申购单<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="bh" autocomplete="off" disabled class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">技术参数</label>
+                <div class="layui-input-block">
+                    <textarea name="lzfxJscs" rows="1" class="layui-textarea input_area" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">技术评估</label>
+                <div class="layui-input-block">
+                    <textarea name="lzfxJspg" rows="1" class="layui-textarea input_area" disabled></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">临床要求及评价</label>
+                <div class="layui-input-block">
+                    <textarea name="lzfxLcyqpj" rows="1" class="layui-textarea input_area" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">售后反馈</label>
+                <div class="layui-input-block">
+                    <textarea name="lzfxShfk" rows="1" class="layui-textarea input_area" disabled></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">参考型号及报价</label>
+                <div class="layui-input-block">
+                </div>
+            </div>
+            <table id="table" lay-filter="table"></table>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">选型理由</label>
+                <div class="layui-input-block">
+                    <textarea name="lzfxXxly" class="layui-textarea"  disabled></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">专家论证组意见</label>
+                <div class="layui-input-block">
+                    <textarea name="lzfxZjzyj" rows="1" class="layui-textarea input_area" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">专家签字</label>
+                <div class="layui-input-block">
+                    <input type="text" name="lzfxZjqz" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">院领导意见</label>
+                <div class="layui-input-block">
+                    <textarea name="lzfxYldyj" rows="1" class="layui-textarea input_area" disabled></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">院领导签字</label>
+                <div class="layui-input-block">
+                    <input type="text" name="lzfxYldqz" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>
+    renderMod = {
+        table: {
+            table: [
+                {
+                    elem: "#table",
+                    id: "table",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'sbcsName', title: '生产厂商', minWidth: 150}
+                        , {field: 'xhbjXh', title: '型号', minWidth: 150}
+                        , {field: 'xhbjBj', title: '报价', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "无数据信息！"
+                    }
+                }
+            ]
+        },
+        form: {
+            val: {
+                filter:"form",
+                get: {
+                    url: "/lifeManage/selectSgLzfx",
+                    type: "POST",
+                    data: {"sgInfoId": $.getUrlParam("id")},
+                    parse: "xhbjs",
+                    tableId: "table"
+                }
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

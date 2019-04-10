@@ -57,6 +57,7 @@ public class EqServiceImpl implements EqService {
             return eqId;
         }
     }
+
     @Override
     public List<EqVo> getAllEq() {
         return eqDao.getAllEq();
@@ -328,6 +329,44 @@ public class EqServiceImpl implements EqService {
         if(eqInfo.getEqName()!=null){
             String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
             eqInfo.setEqPym(pym);
+        }
+        if(eqInfo.getEqMpzp()!=null||eqInfo.getEqSbzp()!=null){
+            String path = System.getProperty("user.dir");
+            String filePath = path+"/eq/";
+            String mpzp =null;
+            String sbzp = null;
+            String mpzpUrl =null;
+            String sbzpUrl =null;
+            java.io.File file = new java.io.File(filePath);
+            if(eqInfo.getEqMpzp()!=null){
+                mpzp = UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
+                mpzpUrl = filePath+mpzp;
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+                try {
+                    ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzpUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(eqInfo.getEqSbzp()!=null){
+                sbzp =  UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
+                sbzpUrl = filePath+ sbzp;
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+                try {
+                    ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzpUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            ChangeFile.deleteDir(path+"/tmp/");
+
+            eqInfo.setEqMpzp("/"+mpzp);
+            eqInfo.setEqSbzp("/"+sbzp);
         }
         return eqDao.updateEq(eqInfo);
     }

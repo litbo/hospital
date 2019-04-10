@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.dao;
 
+import com.litbo.hospital.lifemanage.bean.vo.EqCardToVO;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgQueryCountVO;
 import com.litbo.hospital.lifemanage.dao.provider.EquipmentAccountProvider;
@@ -58,4 +59,14 @@ public interface EquipmentAccountMapper {
             "WHERE\n" +
             "dbo.fw_baoxiu.eq_id = #{eqId,jdbcType=VARCHAR}")
     SgQueryCountVO selectKsEqTwo(String eqId);
+
+    //TODO 设备卡sql
+    /**
+     * 设备卡详情
+     *
+     * @param eqSbbh 设备编号
+     * @return Result
+     */
+    @Select("")
+    EqCardToVO selectEqCardShow(String eqSbbh);
 }

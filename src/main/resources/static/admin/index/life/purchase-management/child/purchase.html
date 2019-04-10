@@ -218,7 +218,7 @@
         table: {
             table: [
                 {
-                    id:"ta1",
+                    id:"table",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'scsName', title: '参考生产厂商', minWidth: 150}
@@ -236,7 +236,7 @@
                 },
                 {
                     elem: "#table1",
-                    id: "ta2",
+                    id: "table1",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
@@ -318,7 +318,7 @@
                     type: "POST",
                     data: {sgInfoId: $.getUrlParam("sgInfoId")},
                     parse: ["sgCkcssbs","sgGnpzs"],
-                    tableId: ["ta1","ta2"]
+                    tableId: ["table","table1"]
                 },
                 func:function(){
                     //执行判断函数
@@ -327,7 +327,7 @@
             },
             submit: {
                 before: function (param) {
-                    var cs = getTableValue("ta1"), gn = getTableValue("ta2", [true]);
+                    var cs = getTableValue("table"), gn = getTableValue("table1", [true]);
                     //console.log(formData);
                     if (doJudg({
                         0: [cs, gn]

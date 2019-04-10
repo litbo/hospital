@@ -58,20 +58,20 @@ public class DictProvider {
 
     public String getLastIdByTName(String tName) {
         StringBuffer sql =new StringBuffer();
-        if("s_jg".equals(tName))sql.append("select top 1 jg_id  as sId FROM s_jg  ORDER BY jg_id desc");
-        if("s_mz".equals(tName))sql.append("select top 1 mz_id as id FROM s_mz  ORDER BY mz_id desc");
-        if("s_xllb".equals(tName))sql.append("select top 1 xllb_id as sId FROM s_xllb  ORDER BY xllb_id desc");
-        if("s_sex".equals(tName))sql.append("select top 1 sex_id as sId FROM s_sex  ORDER BY sex_id desc");
-        if("s_gb".equals(tName))sql.append("select top 1 gb_id  as sId FROM s_gb  ORDER BY gb_id desc");
-        if("s_zwlb".equals(tName))sql.append("select top 1 zwlb_id as sId FROM s_zwlb  ORDER BY zwlb_id desc");
-        if("s_zzmm".equals(tName))sql.append("select top 1 zzmm_id as sId FROM s_zwlb  ORDER BY zzmm_id desc");
-        if("eq_cslb".equals(tName))sql.append("select top 1 eq_cslb_id as sId FROM eq_cslb  ORDER BY eq_cslb_id desc");
-        if("eq_cxfl".equals(tName))sql.append("select top 1 eq_cxfl_id as sId FROM eq_cxfl  ORDER BY eq_cxfl_id desc");
-        if("eq_gzlb".equals(tName))sql.append("select top 1 gzlb_id  as id FROM eq_gzlb  ORDER BY gzlb_id desc");
-        if("eq_jldw".equals(tName))sql.append("select top 1 eq_jldw_id as sId FROM eq_jldw  ORDER BY eq_jldw_id desc");
-        if("eq_qdfs".equals(tName))sql.append("select top 1 qdfs_id  as id FROM eq_qdfs  ORDER BY qdfs_id desc");
-        if("eq_zjly".equals(tName))sql.append("select top 1 zjly_id as id FROM eq_zjly  ORDER BY zjly_id desc");
-        if("eq_syxz".equals(tName))sql.append("select top 1 syxz_id as id  FROM eq_syxz  ORDER BY syxz_id desc");
+        if("s_jg".equals(tName))sql.append("select top 1 jg_id  as sId FROM s_jg  ORDER BY abs( jg_id ) desc");
+        if("s_mz".equals(tName))sql.append("select top 1 mz_id as id FROM s_mz  ORDER BY abs( mz_id ) desc");
+        if("s_xllb".equals(tName))sql.append("select top 1 xllb_id as sId FROM s_xllb  ORDER BY abs( xllb_id ) desc");
+        if("s_sex".equals(tName))sql.append("select top 1 sex_id as sId FROM s_sex  ORDER BY abs( sex_id ) desc");
+        if("s_gb".equals(tName))sql.append("select top 1 gb_id  as sId FROM s_gb  ORDER BY abs( gb_id ) desc");
+        if("s_zwlb".equals(tName))sql.append("select top 1 zwlb_id as sId FROM s_zwlb  ORDER BY abs( zwlb_id ) desc");
+        if("s_zzmm".equals(tName))sql.append("select top 1 zzmm_id as sId FROM s_zzmm  ORDER BY abs( zzmm_id ) desc");
+        if("eq_cslb".equals(tName))sql.append("select top 1 eq_cslb_id as sId FROM eq_cslb  ORDER BY abs( eq_cslb_id ) desc");
+        if("eq_cxfl".equals(tName))sql.append("select top 1 eq_cxfl_id as sId FROM eq_cxfl  ORDER BY abs( eq_cxfl_id ) desc");
+        if("eq_gzlb".equals(tName))sql.append("select top 1 gzlb_id  as id FROM eq_gzlb  ORDER BY abs( gzlb_id ) desc");
+        if("eq_jldw".equals(tName))sql.append("select top 1 eq_jldw_id as sId FROM eq_jldw  ORDER BY abs( eq_jldw_id ) desc");
+        if("eq_qdfs".equals(tName))sql.append("select top 1 qdfs_id  as id FROM eq_qdfs  ORDER BY abs( qdfs_id ) desc");
+        if("eq_zjly".equals(tName))sql.append("select top 1 zjly_id as id FROM eq_zjly  ORDER BY abs( zjly_id ) desc");
+        if("eq_syxz".equals(tName))sql.append("select top 1 syxz_id as id  FROM eq_syxz  ORDER BY abs( syxz_id ) desc");
 
         return sql.toString();
     }

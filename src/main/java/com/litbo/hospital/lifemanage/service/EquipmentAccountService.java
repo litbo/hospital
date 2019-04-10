@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.vo.EqCardToVO;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgQueryCountVO;
 
@@ -37,4 +38,12 @@ public interface EquipmentAccountService {
      * @return PageInfo
      */
     PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding,String eqCxflId, Integer pageNum, Integer pageSize);
+
+    /**
+     * 设备卡详情
+     *
+     * @param eqSbbh 设备编号
+     * @return Result
+     */
+    EqCardToVO selectEqCardShow(String eqSbbh);
 }

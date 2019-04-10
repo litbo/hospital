@@ -21,6 +21,9 @@
     </div>
 </div>
 <script type="text/html" id="toolBar">
+            <div class="addBtn">
+                  <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
+            </div>
             <form class="layui-form">
                     字典分类：
                     <div class="layui-inline">
@@ -33,8 +36,6 @@
                             <option value="eq_qdfs">取得方式</option>
                             <option value="eq_zjly">资金来源</option>
                             <option value="eq_syxz">使用性质</option>
-
-
                         </select>
                     </div>
                     <button class="layui-btn" data-type="reload">搜索</button>
@@ -64,6 +65,19 @@
                 }
             }
             , done: function (obj) {
+                tableFunc({
+                    "obj": obj,
+                    "tools": [
+                        {
+                            filter:"basic",
+                            tool:'toolbar',
+                            event:'add',
+                            title:'字典设置',
+                            type:2,
+                            content:'./child/major-add.html'
+                        }
+                    ]
+                })
             }
         },
         reSet:{

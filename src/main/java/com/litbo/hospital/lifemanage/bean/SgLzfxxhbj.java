@@ -22,6 +22,10 @@ public class SgLzfxxhbj {
      */
     private Integer sbcsId;
     /**
+     * 设备厂商名称
+     */
+    private String sbcsName;
+    /**
      * 型号
      */
     private String xhbjXh;
