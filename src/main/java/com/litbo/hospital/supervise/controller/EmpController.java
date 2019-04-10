@@ -198,6 +198,8 @@ public class EmpController {
     @RequestMapping("/setQzzp")
     public Result setQzzp(@RequestParam("img")MultipartFile img){
         String docUrl = empService.setQzzp(img);
+        String pjpath = System.getProperty("user.dir");
+        docUrl=docUrl.replace(pjpath,"");
         return Result.success(docUrl);
     }
 

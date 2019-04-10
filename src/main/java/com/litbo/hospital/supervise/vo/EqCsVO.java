@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class EqCsVO {
-    private Integer sbcsId1;
+    private Integer sbcsId;
 
     private String sbCslbId;
     private String sbCslbName;

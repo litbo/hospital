@@ -4,10 +4,7 @@ import com.litbo.hospital.supervise.dao.provider.EqCsProvider;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
 import com.litbo.hospital.supervise.vo.EqCsVO;
 import com.litbo.hospital.user.bean.EqCs;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -36,5 +33,8 @@ public interface EqCsDao {
     @SelectProvider(type = EqCsProvider.class ,method = "selectEqCsByX1")
     List<EqCsVO> listEqcsByX1(EqCsSelectVO selectVo);
 
-
+    @Delete("delete from eq_cs where sbcs_id=#{sbcsId} ")
+    void deleteEqCs(String sbcsId);
+    @Select("select * from eq_cs where sbcs_id=#{sbcsId}")
+    EqCs getEqCsById(String sbcsId);
 }
