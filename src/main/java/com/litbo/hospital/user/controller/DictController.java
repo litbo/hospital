@@ -124,6 +124,15 @@ public class DictController {
         return Result.success(pageInfo);
     }
 
+    @RequestMapping("addDictByTName")
+    public Result addDictByTName(String tName,String dictName){
+
+       if(ds.addDictByTName(tName,dictName)>0){
+           return Result.success();
+       }
+
+       return Result.error();
+    }
 
 
 

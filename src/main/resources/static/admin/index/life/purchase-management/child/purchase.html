@@ -319,6 +319,10 @@
                     data: {sgInfoId: $.getUrlParam("sgInfoId")},
                     parse: ["sgCkcssbs","sgGnpzs"],
                     tableId: ["table","table1"]
+                },
+                func:function(){
+                    //执行判断函数
+                    pd();
                 }
             },
             submit: {
@@ -385,6 +389,30 @@
         }
     };
 
+    function pd(f) {
+        //f:是否允许弹出提示信息，false 默认允许
+        var mm = Number($("#gjpd").val());
+        if (mm !== 0) {
+            putMsg({
+                msg: "已输入金额：" + division(mm,10000) + " 万"
+            });
+        }
+        //在超过1W时显示一个内容，其他情况使用一个内容
+        if (mm >= 10000) {
+            !f && putMsg({
+                msg: "数据已修改！"
+            });
+            $("#showMin").addClass("hidden");
+            $("#showMax").removeClass("hidden");
+        } else {
+            !f && putMsg({
+                msg: "数据已修改！"
+            });
+            $("#showMin").removeClass("hidden");
+            $("#showMax").addClass("hidden");
+        }
+    }
+
     $(function () {
         var ss = null;
         pd(true);
@@ -394,30 +422,6 @@
                 return false;
             }
         });
-
-        function pd(f) {
-            var mm = Number($("#gjpd").val());
-            if (mm !== 0) {
-                putMsg({
-                    msg: "已输入金额：" + division(mm,10000) + " 万"
-                });
-            }
-            //在超过1W时显示一个内容，其他情况使用一个内容
-            if (mm >= 10000) {
-                !f && putMsg({
-                    msg: "数据已修改！"
-                });
-                $("#showMin").addClass("hidden");
-                $("#showMax").removeClass("hidden");
-            } else {
-                !f && putMsg({
-                    msg: "数据已修改！"
-                });
-                $("#showMin").removeClass("hidden");
-                $("#showMax").addClass("hidden");
-            }
-        }
-
     })
 </script>
 </html>

@@ -59,11 +59,15 @@ public class FwPjqlController {
                 //TODO 已修改 此处确认人从session中获取，并存入Pjql表中
                 LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
                 String qrrId = sEmp.getUserId();
-                Map map = pjqlService.updateFwPjqlSqStatus(status,id,qrrId,shyy,taskId);
+                Map<String,Integer> map = pjqlService.updateFwPjqlSqStatus(status,id,qrrId,shyy,taskId);
                 if(map ==null){
                     return Result.success();
                 }else{
-                    return Result.error("配件库存不足："+map.toString());
+                    StringBuffer buffer = new StringBuffer();
+                    for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                        buffer.append(entry.getKey()+"缺少"+entry.getValue()+"个 ");
+                    }
+                    return Result.error("配件库存不足："+buffer.toString());
                 }
             }catch (Exception e){
                 log.error("异常信息",e.getMessage());

@@ -26,6 +26,7 @@ public class FwPjqlZjbProvider {
                 if(end!=null&&start!=null&&end.after(start)){
                     WHERE("l.qr_time <= #{end}");
                 }
+                ORDER_BY("qr_time Desc");
             }
         }.toString();
     }

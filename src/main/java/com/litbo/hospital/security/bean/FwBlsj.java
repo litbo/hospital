@@ -54,5 +54,9 @@ public class FwBlsj {
 
     private String lxdh;
 
+    private Integer status;
+
+    private String shr;
+
 
 }
