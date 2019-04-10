@@ -66,4 +66,16 @@ public class EquipmentAccountController {
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         return Result.success(equipmentAccountService.selectKsEq(state,equipmentPinyinCode,departmentCoding,eqCxflId,pageNum,pageSize));
     }
+
+    /**
+     * 设备卡详情
+     *
+     * @param eqSbbh 设备编号
+     * @return Result
+     */
+    @PostMapping("/selectEqCardShow")
+    public Result selectEqCardShow(@RequestParam(name = "eqSbbh") String eqSbbh) {
+        return Result.success(equipmentAccountService.selectEqCardShow(eqSbbh));
+    }
+
 }

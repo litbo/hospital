@@ -182,7 +182,7 @@
         table: {
             table: [
                 {
-                    id:"ta1",
+                    id:"table",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'scsName', title: '参考生产厂商', minWidth: 150}
@@ -200,7 +200,7 @@
                 },
                 {
                     elem: "#table1",
-                    id: "ta2",
+                    id: "table1",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'gnpzMc', title: '功能名称', minWidth: 150}
@@ -245,11 +245,28 @@
                     type: "POST",
                     data: {sgInfoId: $.getUrlParam("id")},
                     parse: ["sgCkcssbs","sgGnpzs"],
-                    tableId: ["ta1","ta2"]
+                    tableId: ["table","table1"]
+                },
+                func:function(){
+                    //执行判断函数
+                    pd();
                 }
             }
         }
     };
+
+    function pd(f) {
+        //f:是否允许弹出提示信息，false 默认允许
+        var mm = Number($("#gjpd").val());
+        //在超过1W时显示一个内容，其他情况使用一个内容
+        if (mm >= 10000) {
+            $("#showMin").addClass("hidden");
+            $("#showMax").removeClass("hidden");
+        } else {
+            $("#showMin").removeClass("hidden");
+            $("#showMax").addClass("hidden");
+        }
+    }
 
     $(function () {
         var ss = null;
@@ -260,25 +277,6 @@
                 return false;
             }
         });
-
-        function pd(f) {
-            var mm = Number($("#gjpd").val());
-            //在超过1W时显示一个内容，其他情况使用一个内容
-            if (mm >= 10000) {
-                !f && putMsg({
-                    msg: "数据已修改！"
-                });
-                $("#showMin").addClass("hidden");
-                $("#showMax").removeClass("hidden");
-            } else {
-                !f && putMsg({
-                    msg: "数据已修改！"
-                });
-                $("#showMin").removeClass("hidden");
-                $("#showMax").addClass("hidden");
-            }
-        }
-
     })
 </script>
 </html>
