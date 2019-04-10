@@ -5,8 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.service.EqCsService;
-import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
-import com.litbo.hospital.supervise.vo.EqCsSelectVO;
+import com.litbo.hospital.supervise.vo.*;
 import com.litbo.hospital.user.bean.EqCs;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,17 @@ public class EqCsController {
         return Result.success();
     }
 
+    @RequestMapping("/deleteEqCs")
+    public Result deleteEqCs(@RequestBody CsDeleteVO deleteVO){
+        eqCsService.deleteEqCs(deleteVO);
+        return Result.success();
+    }
+    @RequestMapping("/getEqCsById")
+    public Result getEqCsById(String sbcsId){
+         EqCs eqCs =  eqCsService.getEqCsById(sbcsId);
+        return Result.success(eqCs);
+    }
+
     @RequestMapping("/listEqcsByX")
     @ResponseBody
     public Result listEqcsByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -63,6 +73,14 @@ public class EqCsController {
         map.put("data",m);
         return Result.success(new JSONObject(map));
 
+    }
+
+    @RequestMapping("/listEqcsVOByX")
+    public Result listEqcsVOByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                               EqCsSelectVO selectVo){
+        List<EqCsVO> eqCsVOS = eqCsService.listEqCsVO(selectVo, pageNum, pageSize);
+        return Result.success(new PageInfo<>(eqCsVOS));
     }
     //供应商
     @PostMapping("/listEqcsByX1")

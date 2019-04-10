@@ -1,6 +1,7 @@
 package com.litbo.hospital.supervise.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.supervise.vo.CsDeleteVO;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
 import com.litbo.hospital.supervise.vo.EqCsVO;
@@ -23,4 +24,8 @@ public interface EqCsService {
     PageInfo listEqcsByX2(int pageNum, int pageSize, EqCsSelectVO selectVo);
 
     PageInfo listEqcsByX3(int pageNum, int pageSize, EqCsSelectVO selectVo);
+
+    void deleteEqCs(CsDeleteVO deleteVO);
+
+    EqCs getEqCsById(String sbcsId);
 }
