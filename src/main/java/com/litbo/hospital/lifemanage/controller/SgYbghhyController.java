@@ -36,10 +36,10 @@ public class SgYbghhyController {
     /**
      * 院办公会年度采购预算
      *
-     * @param yearBudget     年份
-     * @param bmIdBudget     部门id
-     * @param pageNum  当前页数
-     * @param pageSize 每页显示的记录数
+     * @param yearBudget 年份
+     * @param bmIdBudget 部门id
+     * @param pageNum    当前页数
+     * @param pageSize   每页显示的记录数
      * @return Result
      */
     @PostMapping("/selectSgYbghhyYearBudget")
@@ -48,5 +48,16 @@ public class SgYbghhyController {
                                            @RequestParam(name = "pageNum", defaultValue = "1", required = false) Integer pageNum,
                                            @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize) {
         return Result.success(sgYbghhyService.selectSgYbghhyYearBudget(yearBudget, bmIdBudget, pageNum, pageSize));
+    }
+
+    /**
+     * 院办公会会议详情
+     *
+     * @param ybghhyId 院办公会会议id
+     * @return Result
+     */
+    @PostMapping("/selectSgYbghhyById")
+    public Result selectSgYbghhyById(@RequestParam(name = "ybghhyId") String ybghhyId) {
+        return Result.success(sgYbghhyService.selectSgYbghhyById(ybghhyId));
     }
 }

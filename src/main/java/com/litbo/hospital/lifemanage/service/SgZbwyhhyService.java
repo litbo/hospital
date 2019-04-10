@@ -38,4 +38,11 @@ public interface SgZbwyhhyService {
      * @return PageInfo<YearBudgetVO>
      */
     PageInfo<YearBudgetVO> selectSgZbwyhYearBudget(String year, String bmId, Integer pageNum, Integer pageSize);
+
+    /**
+     * 装备委员会详情信息
+     * @param zbwyhhyId 装备会员会id
+     * @return SgZbwyhhyVO
+     */
+    SgZbwyhhyVO selectSgZbwyhById(String zbwyhhyId);
 }

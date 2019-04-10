@@ -38,4 +38,12 @@ public interface SgYbghhyService {
      * @return PageInfo<YearBudgetVO>
      */
     PageInfo<YearBudgetVO> selectSgYbghhyYearBudget(String year, String bmId, Integer pageNum, Integer pageSize);
+
+    /**
+     * 院办公会会议详情
+     *
+     * @param ybghhyId 院办公会会议id
+     * @return SgYbghhyVO
+     */
+    SgYbghhyVO selectSgYbghhyById(String ybghhyId);
 }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>大型医学装备考察报告详情页面</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+<script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+<!--[if IE 8]>
+<script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script src="/static/admin/js/basic.js"></script>
+<style type="text/css">
+    .layui-form-item{
+        margin-top:30px;
+    }
+    .layui-form-label{
+        width:140px;
+        padding:8px 8px !important;
+    }
+    .warm_btn {
+        height: 45px;
+        font-size: 1.3em;
+        letter-spacing: 3px;
+        margin: 10px 0 30px;
+    }
+</style>
+</head>
+<body>
+
+<div class="layui-row">
+    <form class="layui-form layui-form-pane" action="" lay-filter="form">
+        <div class="layui-row">
+            <div class="col-xs-12">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>大型医学装备考察报告</legend>
+                </fieldset>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">考察地点内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="dxzbDdnr" class="layui-textarea" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">结论意见</label>
+                    <div class="layui-input-block">
+                        <textarea name="dxzbYj" class="layui-textarea" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                    <label class="layui-form-label col-xs-12">考察人员<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                    </div>
+                </div>
+                <table id="table" lay-filter="table"></table>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    renderMod = {
+        form: {
+            val: {
+                filter:"form",
+                get: {
+                    url: "/lifeManage/selectSgDxyxzbkc",
+                    type: "POST",
+                    data: {"sgInfoId": $.getUrlParam("id")},
+                    parse: "users",
+                    tableId: "table"
+                }
+            }
+        },
+        addTable: {
+            table: [
+                {
+                    elem: "#table",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'userXm', title: '姓名', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "无数据信息！"
+                    }
+                }
+            ]
+        }
+    }
+</script>
+</body>
+</html>

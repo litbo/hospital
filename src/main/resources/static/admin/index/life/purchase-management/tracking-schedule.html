@@ -56,9 +56,9 @@
     {{#  } if(d.lzfxId !== null) { }}
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="lzFenxi">论证分析</a>
     {{#  } if(d.zbwyhhyId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">装备委员会会议</a>
-    {{#  } else if(d.ybghhyId !== null) { }}
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">院办公会会议</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="zbwyhhyId">装备委员会会议</a>
+    {{#  } if(d.ybghhyId !== null) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="ybghhyId">院办公会会议</a>
     {{#  } }}
 </script>
 <script>
@@ -112,14 +112,42 @@
                                 type:2,
                                 content:'./child/zrEvaluation.html',
                                 area:['90%','90%'],
-                                dataUrl:["pjbgId"]
+                                dataUrl:["id"]
                             },
                             {
                                 event:'kxxFenxi',
                                 type:2,
                                 content:'./child/kxxFenxi.html',
                                 area:['90%','90%'],
-                                dataUrl:["kxfxId"]
+                                dataUrl:["id"]
+                            },
+                            {
+                                event:'bigDevice',
+                                type:2,
+                                content:'./child/bigDevice.html',
+                                area:['90%','90%'],
+                                dataUrl:["id"]
+                            },
+                            {
+                                event:'lzFenxi',
+                                type:2,
+                                content:'./child/lzFenxi.html',
+                                area:['90%','90%'],
+                                dataUrl:["id"]
+                            },
+                            {
+                                event:'zbwyhhyId',
+                                type:2,
+                                content:'./child/zbwyhhyId.html',
+                                area:['90%','90%'],
+                                dataUrl:["zbwyhhyId"]
+                            },
+                            {
+                                event:'ybghhyId',
+                                type:2,
+                                content:'./child/ybghhyId.html',
+                                area:['90%','90%'],
+                                dataUrl:["ybghhyId"]
                             }
                         ]
                     })
