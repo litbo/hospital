@@ -141,7 +141,7 @@ function render(renderParam){
                                     }
                                 }
                                 //表单默认值填充
-                                console.log(value);
+                                //console.log(value);
                                 form.val(val.filter || "forms", value);
 
                                 val.func && val.func(dat, form);
