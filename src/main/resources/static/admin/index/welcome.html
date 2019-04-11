@@ -32,7 +32,7 @@
                 <div class="h_pad0 col-xs-12">
                     <div class="panel_title li_first_l1">
                         <span class="li_first_left col-lg-11">我的任务</span>
-                        <a href="javascrip:void(0);" class="h_more li_first_right col-lg-1" data-url="./home/my_task.html" data-title="我的任务" data-id="m1">更多 &gt;&gt;</a>
+                        <a href="javascrip:void(0);" class="h_more li_first_right col-lg-1" data-url="./home/my_task.html" data-title="我的任务" data-id="myTask">更多 &gt;&gt;</a>
                     </div>
                     <div class="panel_con" h_name="need_do">
                         <ul>
@@ -284,10 +284,12 @@
                 ,title = $(this).attr("data-title")
                 ,url = $(this).attr("data-url")
                 ,id = $(this).attr("data-id");
+            console.log(url);
             changeTab({
                 url:url,
                 id:id,
-                title:title
+                title:title,
+                top:true
             });
             /*if (page === "home") {
                 $(".layui-nav-item a[data-id='" + id + "']", window.parent.document)[0].click();
