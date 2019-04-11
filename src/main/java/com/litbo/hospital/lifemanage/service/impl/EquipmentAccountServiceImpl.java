@@ -109,8 +109,9 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
     @Override
     public EqCardToVO selectEqCardShow(String eqSbbh) {
         EqCardToVO eqCardToVO = equipmentAccountMapper.selectEqCardShow(eqSbbh);
-        // TODO 
-        eqCardToVO.setAzrq(new Date())
+        // TODO
+        EqCardToVO eqCardToVO1 = new EqCardToVO();
+        eqCardToVO1.setAzrq(new Date())
                 .setAzwz("AZWZ")
                 .setBgr("BGR")
                 .setBxzt("BXZT")
@@ -122,6 +123,6 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
                 .setFldm("FLDM")
                 .setGb("GB")
                 .setGlpm("GLPM");
-        return eqCardToVO;
+        return eqCardToVO1;
     }
 }
