@@ -301,7 +301,7 @@
     function pintValue(res){
         for(var name in res){
             if(res.hasOwnProperty(name)){
-                $on = $("." + name);
+                var $on = $("." + name);
                 if($on.length > 0){
                     $on.text(res[name]);
                 }
@@ -328,22 +328,41 @@
         }
     }
 
-    $.ajax({
-        url:"/lifeManage/selectEqCardShow",
-        type:"POST",
-        data:{eqSbbh:""},
-        success:function(res){
-            if(res.code === 0){
-                pintValue(res.data.value);
-                printList(res.data.list);
+    var dat = tempValue("eqc","c",null)
+        ,logs = tempValue("rl","glo",false)
+        ,emp = tempValue("rl","emp",false)
+        ,data= "";
+    if(!dat){
+        layui.use("layer",function(){
+            var layer = layui.layer;
+            layer.alert("暂无可用数据",function(){
+                //window.close();
+            })
+        });
+    }else{
+        data = dat.data;
+        $.ajax({
+            url:"/lifeManage/selectEqCardShow",
+            type:"POST",
+            data:{eqSbbh:data[0]["eqSbbh"]},
+            success:function(res){
+                if(res.code === 0){
+                    pintValue(res.data.value);
+                    printList(res.data.list);
+                    $(".jkr").text(emp.userXm);
+                    $(".jksj").text(today0+" "+time0)
+                }
+            },
+            error:function(res){
+                console.log(res);
             }
-        }
-    });
+        });
+    }
+
 
     $("#print").on("click",function () {
         window.print();
     });
-    var logs = tempValue("rl","glo",false);
     $(".logo").attr("src",logs.logo);
 </script>
 </html>
