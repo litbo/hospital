@@ -51,15 +51,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">计划采购年度<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="zbwyhhyNd" id="year" lay-verify="year"
-                               placeholder="yyyy" autocomplete="off" class="layui-input" disabled>
+                        <input type="text" name="zbwyhhyNd" id="year" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">会议时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="zbwyhhySj" id="date" lay-verify="date"
-                               placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" disabled>
+                        <input type="text" name="zbwyhhySj" id="date" autocomplete="off" class="layui-input" disabled>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -140,20 +138,6 @@
             ]
         },
         form: {
-            date: [
-                {
-                    elem: "#year"
-                    , type: "year"
-                    , value: year
-                    , format: 'yyyy'
-                },
-                {//选择 “时间” 日期选择器
-                    elem: "#date"
-                    , type: "date"
-                    , value: today
-                    , format: 'yyyy-MM-dd'
-                }
-            ],
             val: {
                 filter:"form",
                 get: {

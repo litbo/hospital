@@ -96,6 +96,10 @@ public class SgLcclSqlProvider {
             sql.SET("opinion = #{opinion,jdbcType=VARCHAR}");
         }
 
+        if (record.getOpinion2() != null) {
+            sql.SET("opinion2 = #{opinion2,jdbcType=VARCHAR}");
+        }
+
         if (record.getClearPerson() != null) {
             sql.SET("clear_person = #{clearPerson,jdbcType=VARCHAR}");
         }

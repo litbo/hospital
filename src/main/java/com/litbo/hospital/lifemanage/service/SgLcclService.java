@@ -49,7 +49,7 @@ public interface SgLcclService {
     /**
      * 申请报废
      *
-     * @param eqId   设备id
+     * @param eqId 设备id
      */
     void insertApplyScrap(ListIdsVO eqId);
 
@@ -79,8 +79,17 @@ public interface SgLcclService {
 
     /**
      * 处置流程信息查询
+     *
      * @param eqId 设备id
      * @return DisposalProcessListVO
      */
     DisposalProcessListVO selectDisposalProcess(String eqId);
+
+    /**
+     * 流程处理详情
+     *
+     * @param id 流程处理主键id
+     * @return LcclToVO
+     */
+    LcclToVO selectLcclById(String id);
 }
