@@ -517,7 +517,8 @@ function getFormValue(name,res,force,must){
             ,hideValue = $("input[type=hidden][name=" + name[c] + "]").val()
             ,textareaValue = $("textarea[name=" + name[c] + "]").val()
             ,radioValue = $("input[type=radio][name=" + name[c] + "]:checked").val()
-            ,checkBoxValue = $("input[type=checkbox][name=" + name[c] + "]:checked").val();
+            ,checkBox = $("input[type=checkbox][name=" + name[c] + "]:checked")
+            ,checkBoxValue = checkBox.val();
 
         //只匹配首先获取到的name抛弃后匹配成功的，
         //如强制匹配（第二参数为true）则未匹配成功则会使用其他匹配上的DOM的值
@@ -532,9 +533,16 @@ function getFormValue(name,res,force,must){
         } else if (radioValue) {
             data[name[c]] = radioValue;
         } else if (checkBoxValue) {
-            //if (checkBoxValue[0].checked === true) {
-                data[name[c]] = checkBoxValue.val();
-            //}
+            if(checkBox.length>1){
+                var str = [];
+                checkBox.each(function(){
+                    str.push($(this).val())
+                });
+                data[name[c]] = str;
+            }else{
+                data[name[c]] = checkBoxValue;
+            }
+
         }else{
             if(force){
                 data[name[c]] = $("*[name='"+name[c]+"']").val();

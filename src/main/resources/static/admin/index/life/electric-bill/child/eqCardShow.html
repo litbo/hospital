@@ -84,18 +84,33 @@
             top: 120px;
             left: 15px;
         }
+        #shows2{
+            display:none;
+        }
     </style>
 </head>
 
 <body>
 <div class="layui-row bodys">
     <div class="col-xs-12">
-        <img src="/static/admin/images/yhd.png" alt="LOGO" class="logo" />
+        <img src="" alt="LOGO" class="logo" />
         <h1>设备台账信息卡</h1>
         <div id="show">
             <button class="layui-btn layui-btn-normal" id="print">打印页面</button>
         </div>
-        <div class="min_msg">
+        <div class="min_msg" id="shows2">
+            <table class="layui-table">
+                <tr>
+                    <td>设备编号</td>
+                    <td class="sbbh"></td>
+                    <td>技术状态</td>
+                    <td class="jszt"></td>
+                    <td>报修状态</td>
+                    <td class="bxzt"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="min_msg" id="shows1">
             <table class="layui-table">
                 <tr>
                     <td>设备编号</td>
@@ -313,23 +328,22 @@
         }
     }
 
-    pintValue({
-        "gys":"华康",
-        "gb":"中国",
-        "zxrq":"2019-01-01",
-        "jkr":"pppppppppppppppppppppp",
-        "jksj":"2019-01-01d",
-        sbbh:"6666666666666"
+    $.ajax({
+        url:"#",
+        type:"POST",
+        data:{},
+        success:function(res){
+            if(res.code === 0){
+                pintValue(res.data.value);
+                printList(res.data.list);
+            }
+        }
     });
-    printList(
-        [
-            ["","","",""],
-            ["","","",""],
-            ["","","",""]
-        ]
-    );
+
     $("#print").on("click",function () {
         window.print();
-    })
+    });
+    var logs = tempValue("rl","glo",false);
+    $(".logo").attr("src",logs.logo);
 </script>
 </html>
