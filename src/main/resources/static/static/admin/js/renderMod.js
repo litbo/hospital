@@ -112,7 +112,15 @@ function render(renderParam){
                                             //格式化日期时间
                                             value[name] = layui.util.toDateString(new Date(dat[name]).getTime(), "yyyy年MM月dd日");
                                         } else {
-                                            value[name] = dat[name];
+                                            //是数组时则直接渲染选中（针对多选），否则赋值等待后期渲染
+                                            if(Type(dat[name]) === "array"){
+                                                for(var p=0;p<dat[name].length;p++){
+                                                    $("*[name='"+name+"'][value='"+dat[name][p]+"']").prop("checked",true);
+                                                }
+                                                form.render();
+                                            }else{
+                                                value[name] = dat[name];
+                                            }
                                         }
                                     }
                                 }
@@ -133,6 +141,7 @@ function render(renderParam){
                                     }
                                 }
                                 //表单默认值填充
+                                console.log(value);
                                 form.val(val.filter || "forms", value);
 
                                 val.func && val.func(dat, form);
