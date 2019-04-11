@@ -347,8 +347,9 @@
             data:{eqSbbh:data[0]["eqSbbh"]},
             success:function(res){
                 if(res.code === 0){
-                    pintValue(res.data.value);
-                    printList(res.data.list);
+                    //console.log(res);
+                    pintValue(res.data);
+                    //printList(res.data.list);
                     $(".jkr").text(emp.userXm);
                     $(".jksj").text(today0+" "+time0)
                 }
