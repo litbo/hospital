@@ -119,5 +119,6 @@ public interface EmpDao {
     @Select("select bm_id from s_emp where user_id = #{userId}")
     public String getBmIdByUserId(String userId);
 
-
+    @Select("select userId from s_emp where user_xm = #{xm}")
+    String getIdByXm(String xm);
 }

@@ -37,7 +37,7 @@ public class SgPlanController {
      *
      * @param planName 计划名称
      * @param planDate 制定时间
-     * @param userId   制定人
+     * @param userName   制定人
      * @param pageNum  当前页数
      * @param pageSize 每页记录数
      * @return Result
@@ -46,9 +46,9 @@ public class SgPlanController {
     public Result selectPlan(
             @RequestParam(name = "planName",required = false) String planName,
             @RequestParam(name = "planDate",required = false) String planDate,
-            @RequestParam(name = "userId",required = false) String userId,
+            @RequestParam(name = "userName",required = false) String userName,
             @RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pageSize) {
-        return Result.success(sgPlanService.selectPlan(planName, planDate, userId, pageNum, pageSize));
+        return Result.success(sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize));
     }
 }

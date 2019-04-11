@@ -7,6 +7,7 @@ import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
+import com.litbo.hospital.supervise.service.EmpService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ public class SgPlanServiceImpl implements SgPlanService {
     private SgPlanMapper sgPlanMapper;
     @Autowired
     private SgCheckMapper sgCheckMapper;
+    @Autowired
+    private EmpService empService;
 
     /**
      * 计划制定
@@ -60,13 +63,26 @@ public class SgPlanServiceImpl implements SgPlanService {
      *
      * @param planName 计划名称
      * @param planDate 制定时间
-     * @param userId   制定人
+     * @param userName   制定人
      * @param pageNum  当前页数
      * @param pageSize 每页记录数
      * @return PageInfo<SgPlan>
      */
     @Override
-    public PageInfo<SgPlan> selectPlan(String planName, String planDate, String userId,Integer pageNum,Integer pageSize){
+    public PageInfo<SgPlan> selectPlan(String planName, String planDate, String userName,Integer pageNum,Integer pageSize){
+        if (StringUtils.isBlank(planName)){
+            planName = null;
+        }
+        if (StringUtils.isBlank(planDate)){
+            planDate = null;
+        }
+        if (StringUtils.isBlank(userName)){
+            userName = null;
+        }
+        String userId = null;
+        if (StringUtils.isNotBlank(userName)){
+            userId = empService.getIdByXm(userName);
+        }
         Date date = null;
         if (StringUtils.isNotBlank(planDate)){
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

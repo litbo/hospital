@@ -109,6 +109,7 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
     @Override
     public EqCardToVO selectEqCardShow(String eqSbbh) {
         EqCardToVO eqCardToVO = equipmentAccountMapper.selectEqCardShow(eqSbbh);
+        // TODO 
         eqCardToVO.setAzrq(new Date())
                 .setAzwz("AZWZ")
                 .setBgr("BGR")

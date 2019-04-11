@@ -70,6 +70,11 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
+    public String getIdByXm(String xm) {
+        return empDao.getIdByXm(xm);
+    }
+
+    @Override
     public List<SEmp> listEmpByBmId(String bmId) {
 
         return empDao.listEmpByBmId(bmId);
