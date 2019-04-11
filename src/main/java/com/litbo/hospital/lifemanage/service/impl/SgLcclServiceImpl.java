@@ -96,12 +96,12 @@ public class SgLcclServiceImpl implements SgLcclService {
         sgLccl.setLcclId(idByIDAndTime);
         //添加处置信息
         sgLcclMapper.updateByEqIdSelective(sgLccl);
-        List<SgReason> reasonIds = sgLcclVO.getReasonIds();
+        List<String> reasonIds = sgLcclVO.getReasonIds();
         if (reasonIds != null && reasonIds.size()>0) {
             SgReason sgReason = new SgReason();
             sgReason.setLcclId(sgLccl.getId());
-            for (SgReason reasonId : reasonIds) {
-                sgReason.setReasonId(reasonId.getReasonId());
+            for (String reasonId : reasonIds) {
+                sgReason.setReasonId(reasonId);
                 //添加报废原因
                 sgReasonMapper.insert(sgReason);
             }
@@ -208,6 +208,11 @@ public class SgLcclServiceImpl implements SgLcclService {
      */
     @Override
     public LcclToVO selectLcclById(String id) {
-        return sgLcclMapper.selectLcclById(id);
+        LcclToVO lcclToVO = sgLcclMapper.selectLcclById(id);
+        String mode = "1"; //处置申请为报废的设备添加报废原因
+        if (lcclToVO !=null && mode.equals(lcclToVO.getMode())){
+            lcclToVO.setReasonIds(sgLcclMapper.selectReasonIdsByLcclId(id));
+        }
+        return lcclToVO;
     }
 }

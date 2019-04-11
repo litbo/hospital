@@ -11,6 +11,7 @@ public class SgLcclSqlProvider {
      */
     public String selectSgLccLList( DateLowerAndUpperVO dateLowerAndUpperVO) {
         SQL sql = new SQL();
+        sql.SELECT("dbo.sg_lccl.id");
         sql.SELECT("dbo.eq_info.eq_id");
         sql.SELECT("dbo.eq_info.eq_sbbh");
         sql.SELECT("dbo.eq_info.eq_name");

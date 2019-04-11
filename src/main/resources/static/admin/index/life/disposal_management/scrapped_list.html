@@ -66,6 +66,18 @@
                         "count": res.data.total //总数据数
                     }
                 }
+                , done: function (obj) {
+                    tableFunc({
+                        tools:[
+                            {
+                                event:"application",
+                                type:2,
+                                content:"./child/details_page4.html",
+                                dataUrl:["id"]
+                            }
+                        ]
+                    })
+                }
             },
 
             reSet: {

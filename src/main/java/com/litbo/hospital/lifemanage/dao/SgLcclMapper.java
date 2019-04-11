@@ -104,10 +104,12 @@ public interface SgLcclMapper {
             "dbo.eq_info.eq_pp,\n" +
             "dbo.eq_info.eq_gg,\n" +
             "dbo.eq_info.eq_xh,\n" +
-            "dbo.eq_info.eq_price\n" +
+            "dbo.eq_info.eq_price,\n" +
+            "dbo.sg_lccl.id\n" +
             "FROM\n" +
             "dbo.eq_info\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
             "<where>" +
             "dbo.eq_info.eq_sbbh IS NOT NULL\n" +
             " <if test=\"isScrapped == null || isScrapped == 0\"> AND dbo.eq_info.eq_id NOT IN ((SELECT\n" +
@@ -257,4 +259,17 @@ public interface SgLcclMapper {
             "WHERE\n" +
             "dbo.sg_lccl.id = #{id,jdbcType=VARCHAR}")
     LcclToVO selectLcclById(String id);
+
+    /**
+     * 查询处置原因
+     * @param id 流程处理id
+     * @return 处置原因
+     */
+    @Select("SELECT\n" +
+            "dbo.sg_reason.reason_id\n" +
+            "FROM\n" +
+            "dbo.sg_reason\n" +
+            "WHERE\n" +
+            "dbo.sg_reason.lccl_id = #{id,jdbcType=VARCHAR}")
+    List<String> selectReasonIdsByLcclId(String id);
 }

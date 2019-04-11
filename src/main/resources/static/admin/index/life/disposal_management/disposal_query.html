@@ -32,6 +32,9 @@
         <button class="layui-btn" data-type="reload">查找</button>
     </div>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="application">详情</a>
+</script>
 <script>
     renderMod = {
         addTable: {
@@ -49,6 +52,7 @@
                     , {field: 'reportTime', title: '院内审批时间', minWidth: 170}
                     , {field: 'ratifyTime', title: '财政审批时间', minWidth: 170}
                     , {field: 'state', title: '处置状态', minWidth: 180}
+                    , {fixed: 'right', minWidth: 100, align: 'center', toolbar: "#bar"}
                 ]]
                 , url: "/lifeManage/selectSgLccLList"
                 , contentType:"application/json"
@@ -64,6 +68,18 @@
                         "data": res.data.list, //解析数据列表
                         "count": res.data.total //总数据数
                     }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        tools:[
+                            {
+                                event:"application",
+                                type:2,
+                                content:"./child/details_page5.html",
+                                dataUrl:["id"]
+                            }
+                        ]
+                    })
                 }
             }
             , reSet: {

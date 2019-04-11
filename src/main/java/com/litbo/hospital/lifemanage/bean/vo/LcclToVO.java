@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * LcclToVO
@@ -139,4 +140,9 @@ public class LcclToVO {
      * 是否通过审核
      */
     private String issh;
+
+    /**
+     * 报废原因id列表
+     */
+    private List<String> reasonIds;
 }

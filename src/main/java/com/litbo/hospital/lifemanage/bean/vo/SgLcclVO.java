@@ -1,6 +1,5 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
-import com.litbo.hospital.lifemanage.bean.SgReason;
 import lombok.Data;
 
 import java.util.Date;
@@ -107,7 +106,7 @@ public class SgLcclVO {
     /**
      * 报废原因id列表
      */
-    private List<SgReason> reasonIds;
+    private List<String> reasonIds;
 
     /**
      * 流程处理ids
