@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.bean.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Administrator on 2019-04-10
  */
 @Data
+@Accessors(chain = true)
 public class LcclToVO {
     /**
      * 处置申请id
@@ -73,7 +75,7 @@ public class LcclToVO {
     /**
      * 上报时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date reportTime;
     /**
      * 审批人
@@ -87,7 +89,7 @@ public class LcclToVO {
     /**
      * 批复时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date ratifyTime;
 
     /**
@@ -98,7 +100,7 @@ public class LcclToVO {
     /**
      * 清理时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date clearTime;
 
     /**
@@ -123,7 +125,7 @@ public class LcclToVO {
     /**
      * 备案时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date recordTime;
 
     /**

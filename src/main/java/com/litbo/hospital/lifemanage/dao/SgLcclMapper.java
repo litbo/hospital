@@ -104,29 +104,45 @@ public interface SgLcclMapper {
             "dbo.eq_info.eq_pp,\n" +
             "dbo.eq_info.eq_gg,\n" +
             "dbo.eq_info.eq_xh,\n" +
+            "dbo.eq_info.eq_price\n" +
+            "FROM\n" +
+            "dbo.eq_info\n" +
+            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "<where>" +
+            "dbo.eq_info.eq_sbbh IS NOT NULL AND dbo.eq_info.eq_id NOT IN ((SELECT\n" +
+            "dbo.sg_lccl.eq_id\n" +
+            "FROM\n" +
+            "dbo.sg_lccl WHERE dbo.sg_lccl.issh = 1 OR dbo.sg_lccl.issh IS NULL  ))" +
+            " <if test=\"bmId != null\"> AND dbo.eq_info.eq_bmid = #{bmId}</if> " +
+            "</where>" +
+            "</script>")
+    List<ScrappedListVO> selectNoScrappedList(@Param("bmId") String bmId);
+
+    /**
+     * 已报废清单
+     * @param bmId 部门id
+     * @return List<ScrappedListVO>
+     */
+    @Select("<script>" +
+            "SELECT\n" +
+            "dbo.eq_info.eq_id,\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.eq_info.eq_pp,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
             "dbo.eq_info.eq_price,\n" +
+            "dbo.s_bm.bm_name,\n" +
             "dbo.sg_lccl.id\n" +
             "FROM\n" +
             "dbo.eq_info\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
             "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
-            "<where>" +
-            "dbo.eq_info.eq_sbbh IS NOT NULL\n" +
-            " <if test=\"isScrapped == null || isScrapped == 0\"> AND dbo.eq_info.eq_id NOT IN ((SELECT\n" +
-            "dbo.sg_lccl.eq_id\n" +
-            "FROM\n" +
-            "dbo.sg_lccl WHERE dbo.sg_lccl.issh = 1 OR dbo.sg_lccl.issh IS NULL  )) </if> " +
-            " <if test=\"isScrapped != null\"> AND dbo.eq_info.eq_id IN ((SELECT\n" +
-            "dbo.sg_lccl.eq_id\n" +
-            "FROM\n" +
-            "dbo.sg_lccl\n" +
             "WHERE\n" +
-            "dbo.sg_lccl.clear_time IS NOT NULL)) </if> " +
+            "dbo.sg_lccl.clear_time IS NOT NULL" +
             " <if test=\"bmId != null\"> AND dbo.eq_info.eq_bmid = #{bmId}</if> " +
-            "</where>" +
             "</script>")
-    List<ScrappedListVO> selectScrappedList(@Param("bmId") String bmId, @Param("isScrapped") String isScrapped);
-
+    List<ScrappedListVO> selectYesScrappedList(@Param("bmId") String bmId);
     /**
      * 处置申请
      *

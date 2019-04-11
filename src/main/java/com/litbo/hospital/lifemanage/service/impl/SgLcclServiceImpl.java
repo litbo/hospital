@@ -10,9 +10,11 @@ import com.litbo.hospital.lifemanage.dao.SgLcclMapper;
 import com.litbo.hospital.lifemanage.dao.SgReasonMapper;
 import com.litbo.hospital.lifemanage.enums.ModeEnum;
 import com.litbo.hospital.lifemanage.service.SgLcclService;
+import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ public class SgLcclServiceImpl implements SgLcclService {
     private SgReasonMapper sgReasonMapper;
     @Autowired
     private EqService eqService;
+    @Autowired
+    private EmpService empService;
 
     /**
      * 处置查询列表
@@ -63,7 +67,10 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public PageInfo<ScrappedListVO> selectScrappedList(Integer pageNum, Integer pageSize, String bmId, String isScrapped) {
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(sgLcclMapper.selectScrappedList(bmId, isScrapped));
+        return new PageInfo<>(
+                StringUtils.isNotBlank(isScrapped) ?
+                        sgLcclMapper.selectYesScrappedList(bmId) : sgLcclMapper.selectNoScrappedList(bmId)
+        );
     }
 
     /**
@@ -97,7 +104,7 @@ public class SgLcclServiceImpl implements SgLcclService {
         //添加处置信息
         sgLcclMapper.updateByEqIdSelective(sgLccl);
         List<String> reasonIds = sgLcclVO.getReasonIds();
-        if (reasonIds != null && reasonIds.size()>0) {
+        if (reasonIds != null && reasonIds.size() > 0) {
             SgReason sgReason = new SgReason();
             sgReason.setLcclId(sgLccl.getId());
             for (String reasonId : reasonIds) {
@@ -209,9 +216,17 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public LcclToVO selectLcclById(String id) {
         LcclToVO lcclToVO = sgLcclMapper.selectLcclById(id);
-        String mode = "1"; //处置申请为报废的设备添加报废原因
-        if (lcclToVO !=null && mode.equals(lcclToVO.getMode())){
-            lcclToVO.setReasonIds(sgLcclMapper.selectReasonIdsByLcclId(id));
+        if (lcclToVO != null) {
+            //通过人员id查找人员name
+            lcclToVO.setUserId(lcclToVO.getUserId() != null ? empService.getEmpsById(lcclToVO.getUserId()).getUserXm() : null)
+                    .setReportPerson(lcclToVO.getReportPerson() != null ? empService.getEmpsById(lcclToVO.getReportPerson()).getUserXm() : null)
+                    .setRatify(lcclToVO.getRatify() != null ? empService.getEmpsById(lcclToVO.getRatify()).getUserXm() : null)
+                    .setClearPerson(lcclToVO.getClearPerson() != null ? empService.getEmpsById(lcclToVO.getClearPerson()).getUserXm() : null)
+                    .setRecord(lcclToVO.getRecord() != null ? empService.getEmpsById(lcclToVO.getRecord()).getUserXm() : null);
+            String mode = "1"; //处置申请为报废的设备添加报废原因
+            if (mode.equals(lcclToVO.getMode())) {
+                lcclToVO.setReasonIds(sgLcclMapper.selectReasonIdsByLcclId(id));
+            }
         }
         return lcclToVO;
     }

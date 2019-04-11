@@ -151,33 +151,33 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend>处置上报详情</legend>
     </fieldset>
-    <div class="col-xs-12">
-        <div class="col-xs-12 col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">上报人</label>
-                <div class="layui-input-block">
-                    <input type="text" name="jcl" class="layui-input" disabled>
+        <div class="col-xs-12">
+            <div class="col-xs-12 col-xs-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上报人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="reportPerson" class="layui-input" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-xs-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上报时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="reportTime" class="layui-input" disabled>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">上报时间</label>
+        <div class="col-xs-12">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">处置上报领导意见</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jcl" class="layui-input" disabled>
+                    <textarea class="layui-textarea" name="opinion" disabled></textarea>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-12">
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">处置上报领导意见</label>
-            <div class="layui-input-block">
-                <textarea class="layui-textarea" name="opinion" disabled></textarea>
-            </div>
-        </div>
-    </div>
-</div>
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title">
             <legend>处置批复详情</legend>
@@ -187,7 +187,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">批复人</label>
                     <div class="layui-input-block">
-                        <input type="text" name="jcl" class="layui-input" disabled>
+                        <input type="text" name="ratify" class="layui-input" disabled>
                     </div>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">批复时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="jcl" class="layui-input" disabled>
+                        <input type="text" name="ratifyTime" class="layui-input" disabled>
                     </div>
                 </div>
             </div>
@@ -218,7 +218,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">清理人</label>
                     <div class="layui-input-block">
-                        <input type="text" name="jcl" class="layui-input" disabled>
+                        <input type="text" name="clearPerson" class="layui-input" disabled>
                     </div>
                 </div>
             </div>
@@ -226,14 +226,14 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">清理时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="jcl" class="layui-input" disabled>
+                        <input type="text" name="clearTime" class="layui-input" disabled>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">设备处理去向</label>
+                <label class="layui-form-label">清理方式去处</label>
                 <div class="layui-input-block">
                     <textarea class="layui-textarea" name="sbqc" disabled></textarea>
                 </div>
