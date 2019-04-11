@@ -2,6 +2,7 @@ package com.litbo.hospital.user.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.security.bean.Xllb;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
@@ -81,6 +82,11 @@ public class DictController {
     public Result listMz(){
         List<Mz> mz = dictDao.listMz();
         return Result.success(mz);
+    }
+    @RequestMapping("/listXllb")
+    public Result listXllb(){
+        List<Xllb> xllb = dictDao.listXllb();
+        return Result.success(xllb);
     }
     @RequestMapping("/listZc")
     public Result listZc(){

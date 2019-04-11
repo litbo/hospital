@@ -7,8 +7,14 @@
     box-shadow: none!important;
     float:left;
 }
-#shows{
+#shows,#shows1{
     display: none;
+}
+#shows2{
+    display:block!important;
+}
+#shows2 td{
+    width:16.6%;
 }
 #print{
     display: none;
@@ -20,5 +26,8 @@
     max-height:20px!important;
 }
 .min_msg{
+    width:100%!important;
+}
+.bodys{
     width:100%!important;
 }

@@ -14,6 +14,10 @@ import java.util.Date;
 @Data
 public class DisposalQueryVO {
     /**
+     * 论证分析id
+     */
+    private String id;
+    /**
      * 设备id
      */
     private String eqId;

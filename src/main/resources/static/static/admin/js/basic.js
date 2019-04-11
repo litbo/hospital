@@ -517,7 +517,8 @@ function getFormValue(name,res,force,must){
             ,hideValue = $("input[type=hidden][name=" + name[c] + "]").val()
             ,textareaValue = $("textarea[name=" + name[c] + "]").val()
             ,radioValue = $("input[type=radio][name=" + name[c] + "]:checked").val()
-            ,checkBoxValue = $("input[type=checkbox][name=" + name[c] + "]:checked").val();
+            ,checkBox = $("input[type=checkbox][name=" + name[c] + "]:checked")
+            ,checkBoxValue = checkBox.val();
 
         //只匹配首先获取到的name抛弃后匹配成功的，
         //如强制匹配（第二参数为true）则未匹配成功则会使用其他匹配上的DOM的值
@@ -532,12 +533,23 @@ function getFormValue(name,res,force,must){
         } else if (radioValue) {
             data[name[c]] = radioValue;
         } else if (checkBoxValue) {
-            //if (checkBoxValue[0].checked === true) {
-                data[name[c]] = checkBoxValue.val();
-            //}
+            if(checkBox.length>1){
+                var str = [];
+                checkBox.each(function(){
+                    str.push($(this).val())
+                });
+                data[name[c]] = str;
+            }else{
+                data[name[c]] = checkBoxValue;
+            }
+
         }else{
-            force && (data[name[c]] = $("*[name='"+name[c]+"']").val());
-            must && (data[name[c]] = must || "null")
+            if(force){
+                data[name[c]] = $("*[name='"+name[c]+"']").val();
+            }
+            if(must){
+                must["show"] && (data[name[c]] = must.show || null)
+            }
         }
         //console.log(data);
     }
@@ -816,13 +828,12 @@ action = func = {
                     }else{
                         newJ = JSON.parse(JSON.stringify(vas))
                     }
-
-
+                    //修改弹窗链接
                     if(showContent){
-                        console.log(1);
+                        //console.log(1);
                         newJ.content = showContent;
                     }
-                    console.log("即将弹出",newJ);
+                    //console.log("即将弹出",newJ);
                     //若允许弹出则弹出
                     openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
@@ -1176,12 +1187,22 @@ function changeTab(ele, callback) {
     //ele:{title:"",id:"",url:""}
     layui.use(['element'], function () {
         var element = layui.element;
-        element.tabAdd('tab', {
-            title: ele.title,
-            content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
-            id: ele.id
-        });
-        element.tabChange('tab', ele.id);
+        if(ele.top){
+            parent.layui.element.tabAdd('tab', {
+                title: ele.title,
+                content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
+                id: ele.id
+            });
+            parent.layui.element.tabChange('tab', ele.id);
+        }else{
+            element.tabAdd('tab', {
+                title: ele.title,
+                content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
+                id: ele.id
+            });
+            console.log(ele);
+            element.tabChange('tab', ele.id);
+        }
         callback ? callback() : null;
     })//layui element规定用法，当主列表项无子列表时选中第一个列表项
 }//打开一个新的TAB标签页，并切换至此标签页、选中相应列表项（回调函数实现）

@@ -70,6 +70,13 @@ public interface EmpDao {
             " LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
             " LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
             " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
+            " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id) where emp.user_xm like '%'+#{userName}+'%'")
+    List<EmpSelectVO> listSelectEmpsByUserName(String userName);
+    @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id,emp.status, sex.sex,xllb.xllb,zwlb.zwlb,emp.byyx\n" +
+            " from s_emp emp\n" +
+            " LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
+            " LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
+            " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
             " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id) where emp.user_id=#{userId}")
     EmpSelectVO listSelectEmpsByUserId(String userId);
     @SelectProvider(type = EmpProvider.class,method = "selectEmpsByX")

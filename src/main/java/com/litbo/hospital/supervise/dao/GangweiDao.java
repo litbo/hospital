@@ -120,4 +120,20 @@ public interface GangweiDao {
 
     @Select("select * from s_zhize_zt where zz_id=#{gwId}")
     List<SZhiduzhizeZt> getShProcesses(Integer gwId);
+
+
+    /**
+     * 每日任务
+     * 试用期天数减一
+     * 修改试用期天数为0且制度标识为试用期修改标识为备案
+     * 修改审核表试用的审核状态
+     */
+    @Update("update s_gangwei set sy_tianshu=sy_tianshu-1 WHERE gw_zz_zt=2 and sy_tianshu>0 ")
+    void scheUpdateSyTs();
+    @Select("select * from s_gangwei where gw_zz_zt=2 and sy_tianshu=0")
+    List<SGangwei> scheSelectZtDxgZd();
+    @Update("update s_gangwei set gw_zz_zt=3 where gw_zz_zt=2 and sy_tianshu=0")
+    void scheUpdateZt();
+    @Update("update s_zhize_zt set zt_czzt=2 WHERE zt_czname='试用' and zz_id=#{gwId}")
+    void scheUpdateZtsh(Integer gwId);
 }

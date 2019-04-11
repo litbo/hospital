@@ -104,7 +104,6 @@
                             content:"./child/clear_style.html",
                             area: ["58%", "42%"],
                             before:function(obj,cs){
-                                console.log("cs",cs);
                                 if(cs.data.length === 0){
                                     putMsg({
                                         alert:"请至少选择一条数据！"
@@ -127,8 +126,8 @@
                             {
                                 event:"application",
                                 type:2,
-                                content:"./child/details_page.html",
-                                dataUrl:["eqId"]
+                                content:"./child/details_page2.html",
+                                dataUrl:["id"]
                             }
                         ]
                     })

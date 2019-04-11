@@ -104,10 +104,12 @@ public interface SgLcclMapper {
             "dbo.eq_info.eq_pp,\n" +
             "dbo.eq_info.eq_gg,\n" +
             "dbo.eq_info.eq_xh,\n" +
-            "dbo.eq_info.eq_price\n" +
+            "dbo.eq_info.eq_price,\n" +
+            "dbo.sg_lccl.id\n" +
             "FROM\n" +
             "dbo.eq_info\n" +
             "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
             "<where>" +
             "dbo.eq_info.eq_sbbh IS NOT NULL\n" +
             " <if test=\"isScrapped == null || isScrapped == 0\"> AND dbo.eq_info.eq_id NOT IN ((SELECT\n" +
@@ -174,6 +176,7 @@ public interface SgLcclMapper {
             "dbo.s_emp.user_xm as userName,\n" +
             "dbo.sg_lccl.declare_time,\n" +
             "dbo.sg_lccl.opinion,\n" +
+            "dbo.sg_lccl.opinion2,\n" +
             "dbo.sg_lccl.mode,\n" +
             "dbo.sg_lccl.id\n" +
             "FROM\n" +
@@ -215,4 +218,58 @@ public interface SgLcclMapper {
             "WHERE\n" +
             "dbo.sg_lccl.eq_id = #{eqId,jdbcType=VARCHAR} AND dbo.sg_lccl.issh IS NULL")
     DisposalProcessListVO selectDisposalProcess(String eqId);
+
+    /**
+     * 流程处理详情
+     *
+     * @param id 流程处理主键id
+     * @return LcclToVO
+     */
+    @Select("SELECT\n" +
+            "dbo.sg_lccl.id,\n" +
+            "dbo.sg_lccl.user_id,\n" +
+            "dbo.sg_lccl.declare_time,\n" +
+            "dbo.sg_lccl.mode,\n" +
+            "dbo.sg_lccl.report_person,\n" +
+            "dbo.sg_lccl.report_time,\n" +
+            "dbo.sg_lccl.ratify,\n" +
+            "dbo.sg_lccl.ratify_time,\n" +
+            "dbo.sg_lccl.opinion,\n" +
+            "dbo.sg_lccl.opinion2,\n" +
+            "dbo.sg_lccl.clear_person,\n" +
+            "dbo.sg_lccl.clear_time,\n" +
+            "dbo.sg_lccl.record,\n" +
+            "dbo.sg_lccl.record_time,\n" +
+            "dbo.sg_lccl.storage_location,\n" +
+            "dbo.sg_lccl.state,\n" +
+            "dbo.sg_lccl.approver,\n" +
+            "dbo.sg_lccl.sbqc,\n" +
+            "dbo.sg_lccl.issh,\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
+            "dbo.eq_info.eq_zcbh,\n" +
+            "dbo.eq_info.eq_price,\n" +
+            "dbo.eq_info.eq_qysj,\n" +
+            "dbo.eq_info.eq_cgrq\n" +
+            "FROM\n" +
+            "dbo.sg_lccl\n" +
+            "INNER JOIN dbo.eq_info ON dbo.sg_lccl.eq_id = dbo.eq_info.eq_id\n" +
+            "WHERE\n" +
+            "dbo.sg_lccl.id = #{id,jdbcType=VARCHAR}")
+    LcclToVO selectLcclById(String id);
+
+    /**
+     * 查询处置原因
+     * @param id 流程处理id
+     * @return 处置原因
+     */
+    @Select("SELECT\n" +
+            "dbo.sg_reason.reason_id\n" +
+            "FROM\n" +
+            "dbo.sg_reason\n" +
+            "WHERE\n" +
+            "dbo.sg_reason.lccl_id = #{id,jdbcType=VARCHAR}")
+    List<String> selectReasonIdsByLcclId(String id);
 }

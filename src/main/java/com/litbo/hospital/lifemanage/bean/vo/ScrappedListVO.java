@@ -12,6 +12,10 @@ import java.math.BigDecimal;
 @Data
 public class ScrappedListVO {
     /**
+     * 论证分析id
+     */
+    private String id;
+    /**
      * 设备id
      */
     private String eqId;

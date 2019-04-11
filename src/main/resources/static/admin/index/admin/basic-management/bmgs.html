@@ -26,7 +26,6 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add" >归属为</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
     </div>
     <div class="visible-xs" id="check">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch" id="dataSearch">数据检索</a>
@@ -36,10 +35,10 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="eqNameByx" placeholder="">
+                        <input class="layui-input" name="bmName" placeholder="部门名称">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10" align="center">
-                        <button class="layui-btn" data-type="reload">查找</button>
+                        <button class="layui-btn" data-type="reload">查询</button>
                     </div>
                 </form>
             </div>
@@ -58,7 +57,7 @@
                     , {field: 'bmId', title: '部门编号', minWidth: 150}
                     , {field: 'bmLb', title: '部门类别', minWidth: 150}
                 ]]
-                , url: "/supervise/bmgl/listBmsAsLbBmsBySelectVO?flag=1"
+                , url: "/supervise/bmgl/listKgsBm"
                 , method: "GET"
                 , request: {
                     pageName: 'pageNum',
@@ -103,10 +102,10 @@
 
             },
             reSet: {
-                url: "",
+                url: "/supervise/bmgl/listKgsBm",
                 type: "reload",
-                method: "POST",
-                data: ["", ""]
+                method: "GET",
+                data: ["bmName"]
             }
         }
     }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.dao.EqCsDao;
 import com.litbo.hospital.supervise.service.EqCsService;
+import com.litbo.hospital.supervise.vo.CsDeleteVO;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
 import com.litbo.hospital.supervise.vo.EqCsVO;
@@ -19,10 +20,17 @@ public class EqCsServiceImpl implements EqCsService {
     private EqCsDao eqCsDao;
 
     @Override
-    public PageInfo listEqCs(int pageNum, int pageSize) {
+    public List<EqCs> listEqCs(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<EqCs> eqcss = eqCsDao.listEqCs(pageNum,pageSize);
-        return new PageInfo(eqcss);
+        List<EqCs> eqcss = eqCsDao.listEqCs();
+        return eqcss;
+    }
+
+    @Override
+    public List<EqCsVO> listEqCsVO(EqCsSelectVO selectVo, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqCsVO> eqCsVOS = eqCsDao.listEqCsVO(selectVo);
+        return eqCsVOS;
     }
 
     @Override
@@ -66,5 +74,20 @@ public class EqCsServiceImpl implements EqCsService {
         selectVo.setEqCslb("2");
         List<EqCs> date = eqCsDao.listEqcsByX(selectVo);
         return new PageInfo(date);
+    }
+
+    @Override
+    public void deleteEqCs(CsDeleteVO deleteVO) {
+        String[] sbcsIds = deleteVO.getSbcsIds();
+        for(String sbcsId:sbcsIds){
+            eqCsDao.deleteEqCs(sbcsId);
+        }
+
+    }
+
+    @Override
+    public EqCs getEqCsById(String sbcsId) {
+        if (sbcsId==null||sbcsId.equals("")) return null;
+        return eqCsDao.getEqCsById(sbcsId);
     }
 }

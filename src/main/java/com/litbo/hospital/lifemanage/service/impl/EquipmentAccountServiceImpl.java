@@ -85,7 +85,6 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sqcVO.getEqQysj());
                 sqcVO.setUseYears(TimeAgoUtils.compareTime(date));
                 //保修状态
-
             } catch (ParseException | NullPointerException e) {
                 System.out.println("没有查询到时间");
             }

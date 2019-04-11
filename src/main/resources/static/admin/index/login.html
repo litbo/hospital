@@ -13,7 +13,6 @@
 <body>
 <div class="m-login-bg">
     <div class="m-login">
-
         <div class="m-login-warp">
             <h3 style="color:#000;">系统登录</h3>
             <form class="layui-form">
@@ -50,12 +49,6 @@
                 if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
                     return '用户名不能有特殊字符';
                 }
-                if(/(^\_)|(\_\_)|(\_+$)/.test(value)){
-                    return '用户名首尾不能出现下划线\'_\'';
-                }
-                if(/^\d+\d+\d$/.test(value)){
-                    return '用户名不能全为数字';
-                }
             }
             , password: [
                 /(.+){6,12}$/
@@ -86,6 +79,8 @@
                             key:"glo",
                             value:info.data.logos
                         });
+                        layui.sessionData("pageLock",null);
+                        window.locked = false;
                         setTimeout(function () {
                             location.href = "./index.html";
                         }, 1000);
@@ -111,8 +106,6 @@
             }
         })
     });
-
-
 
 </script>
 </body>

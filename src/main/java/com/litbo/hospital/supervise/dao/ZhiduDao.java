@@ -105,4 +105,19 @@ public interface ZhiduDao {
     List<SZhiduzhizeZt> getShProcesses(Integer zdId);
 
 
+
+    /**
+     * 每日任务
+     * 试用期天数减一
+     * 修改试用期天数为0且制度标识为试用期修改标识为备案
+     * 修改审核表试用的审核状态
+     */
+    @Update("update s_zhidu set sy_tianshu=sy_tianshu-1 WHERE zd_zt=2 and sy_tianshu>0 ")
+    void scheUpdateSyTs();
+    @Select("select * from s_zhidu where zd_zt=2 and sy_tianshu=0")
+    List<SZhidu> scheSelectZtDxgZd();
+    @Update("update s_zhidu set zd_zt=3 where zd_zt=2 and sy_tianshu=0")
+    void scheUpdateZt();
+    @Update("update s_zhiduzhize_zt set zt_czzt=2 WHERE zt_czname='试用' and zd_id=#{id}")
+    void scheUpdateZtsh(String id);
 }

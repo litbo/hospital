@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Date;
  */
 @SpringBootApplication
 @EnableSwagger2
+@EnableScheduling
 public class HospitalApplication {
 
     public static void main(String[] args) {

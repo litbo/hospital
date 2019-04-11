@@ -7,15 +7,16 @@
 *            2：renderMod.js大部分组建使用方法与其他两个文件中定义的相同使用上略有偏差，详细请看相关说明文档，推荐使用renderMod渲染页面
 * */
 
-$(function () {
+function render(renderParam){
     layui.use(['table', 'form', 'laydate', 'element', 'upload', "jquery", "layer", "util"], function () {
         var table = layui.table, form = layui.form, element = layui.element, laydate = layui.laydate,
             upload = layui.upload, $ = layui.jquery, layer = layui.layer, util = layui.util, param = {},
-            formAction = renderMod['form'] || renderMod['formAction']//表单数据
-            , addTable = renderMod['table'] || renderMod['addTable']//表格数据
-            , bindButton = renderMod['btn'] || renderMod['bindButton']//按钮数据
-            , ahead = renderMod['first'] || renderMod['firstExecute']//最先加载内容
-            , bindEvent = renderMod['bind'] || renderMod['bindEvent']//常用事件绑定
+            renderMain = renderParam || renderMod,
+            formAction = renderMain['form'] || renderMain['formAction']//表单数据
+            , addTable = renderMain['table'] || renderMain['addTable']//表格数据
+            , bindButton = renderMain['btn'] || renderMain['bindButton']//按钮数据
+            , ahead = renderMain['first'] || renderMain['firstExecute']//最先加载内容
+            , bindEvent = renderMain['bind'] || renderMain['bindEvent']//常用事件绑定
         ;
         //最先加载事件
         if (ahead && ahead !== false) {
@@ -113,22 +114,21 @@ $(function () {
                                         } else {
                                             value[name] = dat[name];
                                         }
-                                        //表格渲染
-                                        if (val.get.parse !== undefined) {
-                                            //当为字符串时渲染一个表格
-                                            if(Type(val.get.parse) === "string"){
-                                                table.reload(val.get.tableId, {
-                                                    data: dat[val.get.parse]
-                                                })
-                                                //当为数组时渲染多个表格
-                                            }else if(Type(val.get.parse) === "array"){
-                                                for(var o=0;o<val.get.parse;o++){
-                                                    table.reload(val.get.tableId[o] || "table", {
-                                                        data: dat[val.get.parse[o]]
-                                                    })
-                                                }
-                                            }
-
+                                    }
+                                }
+                                //表格渲染
+                                if (val.get.parse !== undefined) {
+                                    //当为字符串时渲染一个表格
+                                    if(Type(val.get.parse) === "string"){
+                                        table.reload(val.get.tableId, {
+                                            data: dat[val.get.parse]
+                                        })
+                                        //当为数组时渲染多个表格
+                                    }else if(Type(val.get.parse) === "array"){
+                                        for(var o=0;o<val.get.parse.length;o++){
+                                            table.reload(val.get.tableId[o] || "table", {
+                                                data: dat[val.get.parse[o]]
+                                            })
                                         }
                                     }
                                 }
@@ -370,18 +370,18 @@ $(function () {
                         , nData = []
                         , cData = []
                         , active = {}//绑定按钮事件
-                        , mu = "null"//无数据默认填充数据
+                        , mu = {show:null}//无数据默认填充数据
                         , resValue = {};//重载值
                     //绑定按钮事件
                     active[type] = function () {
                         resValue = {};
                         //默认填充值
                         if(res.mu){
-                            mu = res.mu;
+                            mu["show"] = res.mu;
                         }
                         //动态获取表单数据
                         if (Type(res.data) === "array") {
-                            resValue = getFormValue(res.data,false,false,mu);
+                            resValue = getFormValue(res.data,false,true,mu);
                         }
                         //添加额外数据
                         if (res.where) {
@@ -441,7 +441,7 @@ $(function () {
                         //还原表单选项
                         for(var naa in resValue){
                             if(resValue.hasOwnProperty(naa)){
-                                if(resValue[naa] !== mu){
+                                if(resValue[naa] !== mu["show"]){
                                     $("*[name='"+naa+"']").val(resValue[naa])
                                 }
                             }
@@ -889,6 +889,10 @@ $(function () {
             });
 
     });
+}
+
+$(function () {
+    render();
 });
 
 

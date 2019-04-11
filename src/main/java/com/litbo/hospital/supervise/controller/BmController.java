@@ -7,10 +7,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
-import com.litbo.hospital.supervise.vo.BmSelectVO;
-import com.litbo.hospital.supervise.vo.BmsTreeVO;
-import com.litbo.hospital.supervise.vo.SetBmVO;
-import com.litbo.hospital.supervise.vo.WxBmHfVO;
+import com.litbo.hospital.supervise.vo.*;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -265,6 +262,16 @@ public class BmController {
         return Result.success(fwxBms);
     }
 
+    @RequestMapping("/listKgsBm") //获取可以归属的部门 包括未编号和没有子节点的部门
+    @ResponseBody
+    public Result listKgsBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                    @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                    @RequestParam(required = false) String bmName){
+
+        List<BmSelectLbVO> bms = bmService.listKgsBm(pageNum, pageSize,bmName);
+        return Result.success(new PageInfo<>(bms));
+    }
+
     @PostMapping( "/batchImportBms")
     @ResponseBody
     public Result batchImportBms(@RequestParam("file") MultipartFile file) throws Exception{
@@ -314,4 +321,18 @@ public class BmController {
         }
 
     }
+
+
+//    @GetMapping( "/setXXX")
+//    @ResponseBody
+//    public Result setXXX() throws Exception{
+//        List<BmsTreeVO> vos = bmDao.listTreeBms();
+//        for(BmsTreeVO vo:vos){
+//            if(bmDao.getAmountByPid(vo.getBmId())>0){
+//                bmDao.setxbm(vo.getBmId(),"1");
+//            }
+//        }
+//        return Result.success();
+//    }
+
 }

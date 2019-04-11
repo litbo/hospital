@@ -55,9 +55,13 @@ public class SgLcclVO {
     private Date ratifyTime;
 
     /**
-     * 单位领导意见
+     * 单位领导意见 上报意见
      */
     private String opinion;
+    /**
+     * 单位领导意见  批复意见
+     */
+    private String opinion2;
 
     /**
      * 清理人

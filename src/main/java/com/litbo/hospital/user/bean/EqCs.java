@@ -38,5 +38,6 @@ public class EqCs {
 
     private String sbcsFax;
 
+    private String sbcsCsdm;
 
 }

@@ -146,7 +146,7 @@
                 })
             }
             //页面渲染
-            renderMod = {
+            render({
                 table: {
                     table: {
                         cols: colsData
@@ -202,8 +202,7 @@
                     },
                     reSet: searchParam
                 }
-            };
-
+            });
         },
         error: function (re) {
             console.log(re);

@@ -11,6 +11,7 @@ public class SgLcclSqlProvider {
      */
     public String selectSgLccLList( DateLowerAndUpperVO dateLowerAndUpperVO) {
         SQL sql = new SQL();
+        sql.SELECT("dbo.sg_lccl.id");
         sql.SELECT("dbo.eq_info.eq_id");
         sql.SELECT("dbo.eq_info.eq_sbbh");
         sql.SELECT("dbo.eq_info.eq_name");
@@ -94,6 +95,10 @@ public class SgLcclSqlProvider {
 
         if (record.getOpinion() != null) {
             sql.SET("opinion = #{opinion,jdbcType=VARCHAR}");
+        }
+
+        if (record.getOpinion2() != null) {
+            sql.SET("opinion2 = #{opinion2,jdbcType=VARCHAR}");
         }
 
         if (record.getClearPerson() != null) {

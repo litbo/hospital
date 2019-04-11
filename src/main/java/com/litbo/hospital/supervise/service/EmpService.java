@@ -42,4 +42,8 @@ public interface EmpService {
     EmpSelectVO listSelectEmpsByUserId(String userId);
 
     List<SEmp> listBmPartnerByUserId(String userId, int pageNum, int pageSize);
+
+    List<EmpSelectVO> listSelectEmpsByUserName(int pageNum, int pageSize, String userName);
+
+    String setQzzp(MultipartFile img);
 }
