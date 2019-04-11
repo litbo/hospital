@@ -2,11 +2,13 @@ package com.litbo.hospital.user.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.security.bean.EqCslb;
+import com.litbo.hospital.security.bean.Gb;
+import com.litbo.hospital.security.bean.Jg;
 import com.litbo.hospital.security.bean.Xllb;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
-import com.litbo.hospital.user.vo.DictVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,6 +85,24 @@ public class DictController {
         List<Mz> mz = dictDao.listMz();
         return Result.success(mz);
     }
+    @RequestMapping("/listEqCslb")
+    public Result listEqCslb(){
+        List<EqCslb> cslbs = dictDao.listEqCslb();
+        return Result.success(cslbs);
+    }
+
+    @RequestMapping("/listGb")
+    public Result listGb(){
+        List<Gb> gbs = dictDao.listGb();
+        return Result.success(gbs);
+    }
+
+    @RequestMapping("/listJg")
+    public Result listJg(){
+        List<Jg> jgs = dictDao.listJg();
+        return Result.success(jgs);
+    }
+
     @RequestMapping("/listXllb")
     public Result listXllb(){
         List<Xllb> xllb = dictDao.listXllb();

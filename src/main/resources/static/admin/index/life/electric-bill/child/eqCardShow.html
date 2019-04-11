@@ -329,9 +329,9 @@
     }
 
     $.ajax({
-        url:"#",
+        url:"/lifeManage/selectEqCardShow",
         type:"POST",
-        data:{},
+        data:{eqSbbh:""},
         success:function(res){
             if(res.code === 0){
                 pintValue(res.data.value);

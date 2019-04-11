@@ -2,6 +2,9 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.security.bean.Cszj;
+import com.litbo.hospital.supervise.bean.CsZjDeleteVO;
+import com.litbo.hospital.supervise.bean.EqCszjVO;
 import com.litbo.hospital.supervise.dao.EqCsDao;
 import com.litbo.hospital.supervise.service.EqCsService;
 import com.litbo.hospital.supervise.vo.CsDeleteVO;
@@ -34,6 +37,13 @@ public class EqCsServiceImpl implements EqCsService {
     }
 
     @Override
+    public List<EqCszjVO> listEqCszjVOByX(EqCsSelectVO selectVo, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqCszjVO> cszjVOS = eqCsDao.listEqCszjVOByX(selectVo);
+        return cszjVOS;
+    }
+
+    @Override
     public EqCsInsertReadyVO readyResource() {
         EqCsInsertReadyVO readyVO = new EqCsInsertReadyVO();
 //        List<Eqcs> = eqCsDao.listEqCslb();
@@ -43,6 +53,8 @@ public class EqCsServiceImpl implements EqCsService {
 
     @Override
     public void insertEqCs(EqCs eqCs) {
+        Integer maxId = eqCsDao.getMaxEqId();
+        eqCs.setSbcsId(maxId+1);
         eqCsDao.insertEqCs(eqCs);
     }
 
@@ -89,5 +101,32 @@ public class EqCsServiceImpl implements EqCsService {
     public EqCs getEqCsById(String sbcsId) {
         if (sbcsId==null||sbcsId.equals("")) return null;
         return eqCsDao.getEqCsById(sbcsId);
+    }
+
+    @Override
+    public EqCszjVO getCszjByCszjId(String cszjId) {
+        if (cszjId==null||cszjId.equals("")) return null;
+        return eqCsDao.getCszjByCszjId(cszjId);
+    }
+
+    @Override
+    public void updateEqCs(EqCs eqCs) {
+        eqCsDao.updateEqCs(eqCs);
+    }
+
+    @Override
+    public void insertCszj(Cszj cszj) {
+        eqCsDao.insertCszj(cszj);
+    }
+
+    @Override
+    public void deleteEqCsZj(CsZjDeleteVO deleteVO) {
+        for(String cszjID:deleteVO.getCszjIds())
+            eqCsDao.deleteEqCsZj(cszjID);
+    }
+
+    @Override
+    public void upDateCszj(Cszj cszj) {
+        eqCsDao.upDateCszj(cszj);
     }
 }
