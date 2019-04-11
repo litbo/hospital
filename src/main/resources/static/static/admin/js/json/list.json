@@ -2556,7 +2556,7 @@
                   },
                   {
                     "title": "科室导入",
-                    "url": "./table.html",
+                    "url": "./admin/basic-management/department-input.html",
                     "id": "60101",
                     "shiro": "KSDR"
                   },
@@ -2690,19 +2690,19 @@
                   },
                   {
                     "title": "待修改",
-                    "url": "./admin/basic-management/revise.html",
+                    "url": "./admin/basic-management/re-revise.html",
                     "id": "60221",
                     "shiro": "GZZDZPJDXG"
                   },
                   {
                     "title": "待审核",
-                    "url": "./admin/basic-management/check-pending.html",
+                    "url": "./admin/basic-management/re-check-pending.html",
                     "id": "60222",
                     "shiro": "GZZDZPJDSH"
                   },
                   {
                     "title": "试用中",
-                    "url": "./admin/basic-management/tryout.html",
+                    "url": "./admin/basic-management/re-tryout.html",
                     "id": "60223",
                     "shiro": "GZZDZPJSYZ"
                   }
@@ -2794,7 +2794,7 @@
                 "children": [
                   {
                     "title": "编写",
-                    "url": "./admin/basic-management/begin-write.html",
+                    "url": "./admin/basic-management/begin-write1.html",
                     "id": "60310",
                     "shiro": "GWZZBX"
                   },
@@ -2827,25 +2827,25 @@
                 "children": [
                   {
                     "title": "待评价",
-                    "url": "./admin/basic-management/post-checkPending.html",
+                    "url": "./admin/basic-management/post-evaluate.html",
                     "id": "60320",
                     "shiro": "GWZZZPJDPJ"
                   },
                   {
                     "title": "待修改",
-                    "url": "./admin/basic-management/post-checkPending.html",
+                    "url": "./admin/basic-management/repost-revise.html",
                     "id": "60321",
                     "shiro": "GWZZZPJDXG"
                   },
                   {
                     "title": "待审核",
-                    "url": "./admin/basic-management/post-checkPending.html",
+                    "url": "./admin/basic-management/repost-checkPending.html",
                     "id": "60322",
                     "shiro": "GWZZZPJDSH"
                   },
                   {
                     "title": "试用中",
-                    "url": "./admin/basic-management/post-checkPending.html",
+                    "url": "./admin/basic-management/repost-tryout.html",
                     "id": "60323",
                     "shiro": "GWZZZPJSYZ"
                   }
@@ -3090,6 +3090,42 @@
                 "icon": "file-import",
                 "id": "6121",
                 "shiro": "YGXXDR"
+              }
+            ]
+          },
+          {
+            "title": "厂商管理",
+            "url": "admin&t=1&n=3",
+            "shiro": "CSGL",
+            "id": "613",
+            "children": [
+              {
+                "title": "厂商添加",
+                "url": "./admin/discipline-management/cs-queryAdd.html",
+                "icon": "search",
+                "id": "6130",
+                "shiro": "CSTJ"
+              },
+              {
+                "title": "厂商查询",
+                "url": "./admin/discipline-management/cs-query.html",
+                "icon": "file-import",
+                "id": "6131",
+                "shiro": "CSCX"
+              },
+              {
+                "title": "厂商证件录入",
+                "url": "./admin/discipline-management/csz-queryAdd.html",
+                "icon": "search",
+                "id": "6132",
+                "shiro": "CSZJLR"
+              },
+              {
+                "title": "厂商证件查询",
+                "url": "./admin/discipline-management/csz-query.html",
+                "icon": "file-import",
+                "id": "6133",
+                "shiro": "CSZJCX"
               }
             ]
           }

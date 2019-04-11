@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.security.bean.Cszj;
+import com.litbo.hospital.supervise.bean.CsZjDeleteVO;
+import com.litbo.hospital.supervise.bean.EqCszjVO;
 import com.litbo.hospital.supervise.service.EqCsService;
 import com.litbo.hospital.supervise.vo.*;
 import com.litbo.hospital.user.bean.EqCs;
@@ -35,7 +38,19 @@ public class EqCsController {
     }
     @PostMapping("/insertEqCs")
     public Result insertEqCs(@RequestBody EqCs eqCs){
-        eqCsService.insertEqCs(eqCs);
+        if(eqCs.getSbcsId()==null||eqCs.getSbcsId().equals(""))
+            eqCsService.insertEqCs(eqCs);
+        else
+            eqCsService.updateEqCs(eqCs);
+        return Result.success();
+    }
+
+    @PostMapping("/insertCszj")
+    public Result insertCszj(@RequestBody Cszj cszj){
+        if(cszj.getCszjId()==null)
+            eqCsService.insertCszj(cszj);
+        else
+            eqCsService.upDateCszj(cszj);
         return Result.success();
     }
 
@@ -44,11 +59,25 @@ public class EqCsController {
         eqCsService.deleteEqCs(deleteVO);
         return Result.success();
     }
+
+    @RequestMapping("/deleteEqCsZj")
+    public Result deleteEqCsZj(@RequestBody CsZjDeleteVO deleteVO){
+        eqCsService.deleteEqCsZj(deleteVO);
+        return Result.success();
+    }
     @RequestMapping("/getEqCsById")
     public Result getEqCsById(String sbcsId){
          EqCs eqCs =  eqCsService.getEqCsById(sbcsId);
         return Result.success(eqCs);
     }
+
+    @RequestMapping("/getCszjByCszjId")
+    public Result getCszjByCszjId(String cszjId){
+        EqCszjVO cszj =  eqCsService.getCszjByCszjId(cszjId);
+
+        return Result.success(cszj);
+    }
+
 
     @RequestMapping("/listEqcsByX")
     @ResponseBody
@@ -81,6 +110,14 @@ public class EqCsController {
                                EqCsSelectVO selectVo){
         List<EqCsVO> eqCsVOS = eqCsService.listEqCsVO(selectVo, pageNum, pageSize);
         return Result.success(new PageInfo<>(eqCsVOS));
+    }
+
+    @RequestMapping("/listEqCszjVOByX")
+    public Result listEqCszjVOByX(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                EqCsSelectVO selectVo){
+        List<EqCszjVO> cszjVOS = eqCsService.listEqCszjVOByX(selectVo, pageNum, pageSize);
+        return Result.success(new PageInfo<>(cszjVOS));
     }
     //供应商
     @PostMapping("/listEqcsByX1")
@@ -129,6 +166,22 @@ public class EqCsController {
         map.put("data",m);
         return Result.success(new JSONObject(map));
     }
+
+    @RequestMapping(value = "csSe",method = RequestMethod.POST)
+    public Result csSe(){
+        Map map =new HashMap();
+        map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
+                "    <div class='layui-input-inline mar10-0' align='center'>" +
+                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "</div>");
+        Map m = new HashMap();
+        m.put("url","/supervise/csgl/listEqcsVOByX");
+        m.put("type","reload");
+        String[] data = {"sbcsName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+    }
     //维修商
     @PostMapping("/listEqcsByX3")
     public Result listEqcsByX3(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -141,6 +194,17 @@ public class EqCsController {
     public Result eqcsTitles() {
         String title ="[{'type': 'radio'}, "+
                 "{field: 'sbcsName', title: '供货商'},"+
+                "{field: 'sbcsLxr1', title: '联系人'},"+
+                "{field: 'sbcsLxdh1', title: '联系电话'},"+
+                "{field: 'email', title: 'Email地址'}"+
+                "]";
+        return Result.success(JSON.parseArray(title));
+    }
+
+    @PostMapping("/eqcsTitles1")
+    public Result eqcsTitles1() {
+        String title ="[{'type': 'radio'}, "+
+                "{field: 'sbcsName', title: '厂商名称'},"+
                 "{field: 'sbcsLxr1', title: '联系人'},"+
                 "{field: 'sbcsLxdh1', title: '联系电话'},"+
                 "{field: 'email', title: 'Email地址'}"+
