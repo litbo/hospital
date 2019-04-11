@@ -533,7 +533,7 @@ function getFormValue(name,res,force,must){
             data[name[c]] = radioValue;
         } else if (checkBoxValue) {
             //if (checkBoxValue[0].checked === true) {
-                data[name[c]] = checkBoxValue.val();
+                data[name[c]] = checkBoxValue;
             //}
         }else{
             if(force){
