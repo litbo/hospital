@@ -96,12 +96,12 @@ public class SgLcclServiceImpl implements SgLcclService {
         sgLccl.setLcclId(idByIDAndTime);
         //添加处置信息
         sgLcclMapper.updateByEqIdSelective(sgLccl);
-        List<String> reasonIds = sgLcclVO.getReasonIds();
-        if (reasonIds != null) {
+        List<SgReason> reasonIds = sgLcclVO.getReasonIds();
+        if (reasonIds != null && reasonIds.size()>0) {
             SgReason sgReason = new SgReason();
             sgReason.setLcclId(sgLccl.getId());
-            for (String reasonId : reasonIds) {
-                sgReason.setReasonId(reasonId);
+            for (SgReason reasonId : reasonIds) {
+                sgReason.setReasonId(reasonId.getReasonId());
                 //添加报废原因
                 sgReasonMapper.insert(sgReason);
             }
@@ -116,7 +116,7 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public void insertApplyScrap(ListIdsVO sgLc) {
         SgLccl sgLccl = new SgLccl();
-        BeanUtils.copyProperties(sgLc,sgLccl);
+        BeanUtils.copyProperties(sgLc, sgLccl);
         //获取登陆人id
         LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         sgLccl.setUserId(emp.getUserId());
@@ -139,7 +139,7 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public void updateSgLccLByEqId(SgLcclVO sgLc) {
         SgLccl sgLccl = new SgLccl();
-        BeanUtils.copyProperties(sgLc,sgLccl);
+        BeanUtils.copyProperties(sgLc, sgLccl);
         List<String> ids = sgLc.getIds();
         for (String id : ids) {
             sgLccl.setId(id);
@@ -152,13 +152,13 @@ public class SgLcclServiceImpl implements SgLcclService {
      *
      * @param sgLc 上报审核信息
      */
-    @Transactional(propagation = Propagation.REQUIRED ,rollbackFor = RuntimeException.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public void updateSgLccLByEqId4(SgLcclVO sgLc) {
         SgLccl sgLccl = new SgLccl();
         EqInfo eqInfo = new EqInfo();
         eqInfo.setEqSyzt("报废");
-        BeanUtils.copyProperties(sgLc,sgLccl);
+        BeanUtils.copyProperties(sgLc, sgLccl);
 
         List<String> ids = sgLc.getIds();
         for (String id : ids) {
@@ -198,5 +198,16 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public DisposalProcessListVO selectDisposalProcess(String eqId) {
         return sgLcclMapper.selectDisposalProcess(eqId);
+    }
+
+    /**
+     * 流程处理详情
+     *
+     * @param id 流程处理主键id
+     * @return LcclToVO
+     */
+    @Override
+    public LcclToVO selectLcclById(String id) {
+        return sgLcclMapper.selectLcclById(id);
     }
 }

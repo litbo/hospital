@@ -170,4 +170,15 @@ public class SgLcclController {
     public Result selectDisposalProcess(@RequestParam(name = "eqId") String eqId) {
         return Result.success(sgLcclService.selectDisposalProcess(eqId));
     }
+
+    /**
+     * 流程处理详情
+     *
+     * @param id 处置流程id
+     * @return Result
+     */
+    @PostMapping("/selectLcclById")
+    public Result selectLcclById(@RequestParam(name = "id") String id) {
+        return Result.success(sgLcclService.selectLcclById(id));
+    }
 }

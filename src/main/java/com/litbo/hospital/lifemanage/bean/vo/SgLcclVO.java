@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+import com.litbo.hospital.lifemanage.bean.SgReason;
 import lombok.Data;
 
 import java.util.Date;
@@ -55,9 +56,13 @@ public class SgLcclVO {
     private Date ratifyTime;
 
     /**
-     * 单位领导意见
+     * 单位领导意见 上报意见
      */
     private String opinion;
+    /**
+     * 单位领导意见  批复意见
+     */
+    private String opinion2;
 
     /**
      * 清理人
@@ -102,7 +107,7 @@ public class SgLcclVO {
     /**
      * 报废原因id列表
      */
-    private List<String> reasonIds;
+    private List<SgReason> reasonIds;
 
     /**
      * 流程处理ids
