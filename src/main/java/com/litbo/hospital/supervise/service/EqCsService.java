@@ -1,6 +1,9 @@
 package com.litbo.hospital.supervise.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.security.bean.Cszj;
+import com.litbo.hospital.supervise.bean.CsZjDeleteVO;
+import com.litbo.hospital.supervise.bean.EqCszjVO;
 import com.litbo.hospital.supervise.vo.CsDeleteVO;
 import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
@@ -28,4 +31,16 @@ public interface EqCsService {
     void deleteEqCs(CsDeleteVO deleteVO);
 
     EqCs getEqCsById(String sbcsId);
+
+    void updateEqCs(EqCs eqCs);
+
+    void insertCszj(Cszj cszj);
+
+    List<EqCszjVO> listEqCszjVOByX(EqCsSelectVO selectVo, int pageNum, int pageSize);
+
+    void deleteEqCsZj(CsZjDeleteVO deleteVO);
+
+    EqCszjVO getCszjByCszjId(String cszjId);
+
+    void upDateCszj(Cszj cszj);
 }

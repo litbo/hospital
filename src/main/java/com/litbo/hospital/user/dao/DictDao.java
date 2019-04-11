@@ -1,11 +1,13 @@
 package com.litbo.hospital.user.dao;
 
+import com.litbo.hospital.security.bean.EqCslb;
+import com.litbo.hospital.security.bean.Gb;
+import com.litbo.hospital.security.bean.Jg;
 import com.litbo.hospital.security.bean.Xllb;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.DictProvider;
 import com.litbo.hospital.user.vo.DictVo;
 import com.litbo.hospital.user.vo.SIntVo;
-import lombok.Data;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -77,4 +79,10 @@ public interface DictDao {
     Integer addDictByTName(@Param("tName") String tName, @Param("dictName") String dictName, @Param("sdictId") String sdictId,@Param("dictId") Integer dictId);
     @SelectProvider(type = DictProvider.class ,method = "getLastIdByTName")
     SIntVo getLastIdByTName(String tName);
+    @Select("select *  from eq_cslb")
+    List<EqCslb> listEqCslb();
+    @Select("select *  from s_gb")
+    List<Gb> listGb();
+    @Select("select *  from s_jg")
+    List<Jg> listJg();
 }
