@@ -16,10 +16,9 @@ public class SgPlan {
     private String id;
 
     /**
-     * 制定人
+     * 制定人 接收为制定人id 返回为制定人名字
      */
     private String userId;
-
     /**
      * 科室id
      */

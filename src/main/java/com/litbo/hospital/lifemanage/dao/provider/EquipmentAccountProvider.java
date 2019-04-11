@@ -61,7 +61,7 @@ public class EquipmentAccountProvider {
         }
 
         if (StringUtils.isNotBlank(equipmentNumber)) {
-            sql.WHERE("dbo.eq_info.eq_sbbh = #{equipmentNumber,jdbcType=VARCHAR}");
+            sql.WHERE("dbo.eq_info.eq_sbbh like #{equipmentNumber,jdbcType=VARCHAR}");
         }
         return sql.toString();
     }

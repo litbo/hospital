@@ -66,6 +66,10 @@ public class SgLcclServiceImpl implements SgLcclService {
      */
     @Override
     public PageInfo<ScrappedListVO> selectScrappedList(Integer pageNum, Integer pageSize, String bmId, String isScrapped) {
+        //空字符串设为null
+        if (StringUtils.isBlank(bmId)){
+            bmId = null;
+        }
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(
                 StringUtils.isNotBlank(isScrapped) ?
@@ -83,6 +87,10 @@ public class SgLcclServiceImpl implements SgLcclService {
      */
     @Override
     public PageInfo<ScrappedListVO> selectApplyList(Integer pageNum, Integer pageSize, String bmId) {
+        //空字符串设为null
+        if (StringUtils.isBlank(bmId)){
+            bmId = null;
+        }
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(sgLcclMapper.selectApplyList(bmId));
     }

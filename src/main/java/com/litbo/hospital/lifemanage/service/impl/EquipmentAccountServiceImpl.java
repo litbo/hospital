@@ -49,6 +49,9 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
         if (StringUtils.isNotBlank(departmentCoding)) {
             departmentCoding = "%"+departmentCoding+"%";
         }
+        if (StringUtils.isNotBlank(equipmentNumber)){
+            equipmentNumber = "%"+equipmentNumber+"%";
+        }
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(equipmentAccountMapper.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber));
     }
@@ -105,6 +108,19 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
      */
     @Override
     public EqCardToVO selectEqCardShow(String eqSbbh) {
-        return equipmentAccountMapper.selectEqCardShow(eqSbbh);
+        EqCardToVO eqCardToVO = equipmentAccountMapper.selectEqCardShow(eqSbbh);
+        eqCardToVO.setAzrq(new Date())
+                .setAzwz("AZWZ")
+                .setBgr("BGR")
+                .setBxzt("BXZT")
+                .setCd("CD")
+                .setCgrq(new Date())
+                .setDsfwxs("DSFWXS")
+                .setFj("FJ")
+                .setFlbz("FLBZ")
+                .setFldm("FLDM")
+                .setGb("GB")
+                .setGlpm("GLPM");
+        return eqCardToVO;
     }
 }

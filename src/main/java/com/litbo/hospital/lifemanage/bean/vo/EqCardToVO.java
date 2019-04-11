@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.bean.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author Administrator on 2019-04-11
  */
 @Data
+@Accessors(chain = true)
 public class EqCardToVO {
     /**
      * 设备编号
