@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>处置详情页面</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -150,9 +149,9 @@
     };
 
     function pd(f) {
-        var value = $("input[name=mode]").val();
-        console.log(value);
-        if (value != '1') {
+        var value = $("input[name=mode]:checked").val();
+        //console.log(value);
+        if (value !== '1') {
             $("#bfyy").hide();
             $("#bfyy1").hide();
         } else {
