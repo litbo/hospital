@@ -55,18 +55,21 @@ public class FwHtController {
 
     @GetMapping("/list")
     public Result getAllFwHt(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
-                             
-                             @RequestParam(required = false,defaultValue = "10") Integer pageSize){
-        Result result = fwHtService.getAllFwHt(pageNum, pageSize);
+                             @RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                             @RequestParam(required = false) String htName,
+                             @RequestParam(required = false) String sbcsName){
+        Result result = fwHtService.getAllFwHt(pageNum, pageSize, htName, sbcsName);
         return result;
     }
 
     @GetMapping("/htZfList")
     public Result getFwHtZf(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
-
-                             @RequestParam(required = false,defaultValue = "10") Integer pageSize){
+                             @RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                            @RequestParam(required = false) String htName,
+                            @RequestParam(required = false) String sbcsName
+                            ){
         try {
-            PageInfo pageInfo = fwHtService.getHtZfList(pageNum, pageSize);
+            PageInfo pageInfo = fwHtService.getHtZfList(pageNum, pageSize,htName,sbcsName);
             return Result.success(pageInfo);
         }catch (Exception e){
             e.printStackTrace();

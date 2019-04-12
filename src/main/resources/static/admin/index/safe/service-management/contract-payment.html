@@ -36,16 +36,13 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="合同编号">
+                        <input type="text" name="htName" autocomplete="off" class="layui-input" placeholder="合同名称">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="合同名称">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="维修商">
+                        <input type="text" name="sbcsName" autocomplete="off" class="layui-input" placeholder="维修商">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
                     </div>
                 </form>
             </div>
@@ -98,13 +95,10 @@
                 })
             }
         },
-        reSet:{
-            url:"/fwht/list",
-            type:"search",
-            where:{
-                newValue:"thisIsNew"
-            },
-            tid:"#table"
+        reSet: {
+            url: "/fwht/htZfList",
+            type: "search",
+            data: ["htName", "sbcsName"]
         }
     }
 </script>
