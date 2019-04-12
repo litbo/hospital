@@ -49,25 +49,25 @@
                         <span>启用日期：</span>
                     </div>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="eqQysjLower" name="eqQysj" lay-verify="date" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" id="eqQysjLower" name="eqQysjLower" lay-verify="date" autocomplete="off"
+                               class="layui-input" placeholder="下限">
                     </div>
                     ~
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="eqQysjUpper" name="eqQysj" lay-verify="date" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" id="eqQysjUpper" name="eqQysjUpper" lay-verify="date" autocomplete="off"
+                               class="layui-input" placeholder="上限">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
                         <span>采购日期：</span>
                     </div>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="eqCgrqLower" name="eqCgrq" lay-verify="date" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" id="eqCgrqLower" name="eqCgrqLower" lay-verify="date" autocomplete="off"
+                               class="layui-input" placeholder="下限">
                     </div>
                     ~
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="eqCgrqUpper" name="eqCgrq" lay-verify="date" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" id="eqCgrqUpper" name="eqCgrqUpper" lay-verify="date" autocomplete="off"
+                               class="layui-input" placeholder="上限">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
                         <span>金额区间：</span>
@@ -175,13 +175,26 @@
                 ]
             },
 
-            date: [{
-                elem: "#eqQysj",
-                value: today0
-            },
+            date: [
                 {
-                    elem: "#eqCgrq",
-                    value: today0
+                    elem: "#eqQysjLower",
+                    value: "",
+                    format: "yyyy-MM-dd"
+                },
+                {
+                    elem: "#eqQysjUpper",
+                    value: "",
+                    format: "yyyy-MM-dd"
+                },
+                {
+                    elem: "#eqCgrqLower",
+                    value: "",
+                    format: "yyyy-MM-dd"
+                },
+                {
+                    elem: "#eqCgrqUpper",
+                    value: "",
+                    format: "yyyy-MM-dd"
                 }
             ]
         },
@@ -228,7 +241,7 @@
                 url: "/lifeManage/selectKsEq",
                 type: "reload",
                 data: ["state", "equipmentPinyinCode", "departmentCoding", "eqCxflId", "tgbmId", "bmId",
-                "eqQysjLower","eqQysjUpper","eqCgrqLower","eqCgrqUpper","eqPriceLower","eqPriceUpper","eqBxqx"]
+                    "eqQysjLower", "eqQysjUpper", "eqCgrqLower", "eqCgrqUpper", "eqPriceLower", "eqPriceUpper", "eqBxqx"]
             }
         }
     }
