@@ -35,15 +35,23 @@ public interface EquipmentAccountMapper {
     /**
      * 科室设备综合查询
      *
+     * @param tgbmId              托管部门id
+     * @param bmId                使用部门
+     * @param eqQysjLower         启用时间下限
+     * @param eqQysjUpper         启用时间上限
+     * @param eqCgrqLower         采购日期下限
+     * @param eqCgrqUpper         采购日期上限
+     * @param eqPriceLower        设备价格下限
+     * @param eqPriceUpper        设备价格上限
      * @param state               状态
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding    院内编码
-     * @param bxqx                是否过保
      * @param eqCxflId            设备分类Id
+     * @param bxqx                是否过保
      * @return List
      */
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectKsEq")
-    List<SgQueryCountVO> selectKsEqOne(@Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId, @Param("bxqx") String bxqx);
+    List<SgQueryCountVO> selectKsEqOne(@Param("tgbmId")String tgbmId,@Param("bmId") String bmId,@Param("eqQysjLower") String eqQysjLower,@Param("eqQysjUpper") String eqQysjUpper,@Param("eqCgrqLower") String eqCgrqLower,@Param("eqCgrqUpper") String eqCgrqUpper,@Param("eqPriceLower") String eqPriceLower,@Param("eqPriceUpper") String eqPriceUpper, @Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId, @Param("bxqx") String bxqx);
 
     /**
      * 查询设备维修的次数和维修总金额

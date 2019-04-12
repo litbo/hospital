@@ -69,6 +69,14 @@ public class EquipmentAccountProvider {
     /**
      * 科室设备综合查询
      *
+     * @param tgbmId              托管部门id
+     * @param bmId                使用部门
+     * @param eqQysjLower         启用时间下限
+     * @param eqQysjUpper         启用时间上限
+     * @param eqCgrqLower         采购日期下限
+     * @param eqCgrqUpper         采购日期上限
+     * @param eqPriceLower        设备价格下限
+     * @param eqPriceUpper        设备价格上限
      * @param state               状态
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding    院内编码
@@ -76,7 +84,7 @@ public class EquipmentAccountProvider {
      * @param bxqx                是否过保
      * @return sql
      */
-    public String selectKsEq(String state, String equipmentPinyinCode, String departmentCoding, String eqCxflId, String bxqx) {
+    public String selectKsEq(String tgbmId, String bmId, String eqQysjLower, String eqQysjUpper, String eqCgrqLower, String eqCgrqUpper, String eqPriceLower, String eqPriceUpper,String state, String equipmentPinyinCode, String departmentCoding, String eqCxflId, String bxqx) {
         SQL sql = new SQL();
         sql.SELECT("dbo.eq_info.eq_id,\n" +
                 "dbo.eq_info.eq_zcbh,\n" +
@@ -109,6 +117,30 @@ public class EquipmentAccountProvider {
         if (StringUtils.isNotBlank(eqCxflId)) {
             sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
         }
+        if (StringUtils.isNotBlank(tgbmId)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(bmId)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(eqQysjLower)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(eqQysjUpper)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(eqCgrqLower)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(eqCgrqUpper)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(eqPriceLower)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(eqPriceUpper)) {
+            sql.WHERE("dbo.eq_info.eq_cxfl_id = #{eqCxflId,jdbcType=VARCHAR}");
+        }
         // TODO 保修期限 是否过期 通过设备启用时间加上保修期限/月 大于当前日期为在保 否则为过保 bxqx == 0/1 过保/在保
         if (StringUtils.isNotBlank(bxqx) && "0".equals(bxqx)){
             sql.WHERE("1=1");
@@ -121,8 +153,6 @@ public class EquipmentAccountProvider {
 
     public static void main(String[] args) {
         EquipmentAccountProvider s = new EquipmentAccountProvider();
-        String s1 = s.selectKsEq(null, null, null, null, null);
-        System.out.println(s1);
 
     }
 }

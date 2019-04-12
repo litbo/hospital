@@ -58,9 +58,9 @@ public class EquipmentAccountController {
      * @param eqQysjUpper         启用时间上限
      * @param eqCgrqLower         采购日期下限
      * @param eqCgrqUpper         采购日期上限
-     * @param eqPriceLower"       设备价格下限
+     * @param eqPriceLower        设备价格下限
      * @param eqPriceUpper        设备价格上限
-     * @param eqBxqx                是否过保 0/1 过保/在保
+     * @param eqBxqx              是否过保 0/1 过保/在保
      * @param pageNum             当前页数
      * @param pageSize            每页显示的条数
      * @return PageInfo
@@ -82,7 +82,7 @@ public class EquipmentAccountController {
             @RequestParam(name = "eqBxqx", required = false) String eqBxqx,
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        return Result.success(equipmentAccountService.selectKsEq(state, equipmentPinyinCode, departmentCoding, eqCxflId, eqBxqx, pageNum, pageSize));
+        return Result.success(equipmentAccountService.selectKsEq(tgbmId, bmId, eqQysjLower, eqQysjUpper, eqCgrqLower, eqCgrqUpper, eqPriceLower, eqPriceUpper, state, equipmentPinyinCode, departmentCoding, eqCxflId, eqBxqx, pageNum, pageSize));
     }
 
     /**
