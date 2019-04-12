@@ -33,11 +33,12 @@ public interface EquipmentAccountService {
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding 院内编码
      * @param eqCxflId 设备分类Id
+     * @param bxqx 是否过保
      * @param pageNum 当前页数
      * @param pageSize 每页显示的条数
      * @return PageInfo
      */
-    PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding,String eqCxflId, Integer pageNum, Integer pageSize);
+    PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding,String eqCxflId,String bxqx, Integer pageNum, Integer pageSize);
 
     /**
      * 设备卡详情

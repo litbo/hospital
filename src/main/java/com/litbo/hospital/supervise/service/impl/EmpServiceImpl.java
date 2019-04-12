@@ -70,7 +70,7 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public String getIdByXm(String xm) {
+    public List<String> getIdByXm(String xm) {
         return empDao.getIdByXm(xm);
     }
 

@@ -48,27 +48,38 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
                         <span>启用日期：</span>
                     </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" id="eqQysj" name="eqQysj" lay-verify="date" autocomplete="off"
+                    <div class="layui-inline col-6 mar10-0 pad0-10">
+                        <input type="text" id="eqQysjLower" name="eqQysj" lay-verify="date" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    ~
+                    <div class="layui-inline col-6 mar10-0 pad0-10">
+                        <input type="text" id="eqQysjUpper" name="eqQysj" lay-verify="date" autocomplete="off"
                                class="layui-input">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
                         <span>采购日期：</span>
                     </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" id="eqCgrq" name="eqCgrq" lay-verify="date" autocomplete="off"
+                    <div class="layui-inline col-6 mar10-0 pad0-10">
+                        <input type="text" id="eqCgrqLower" name="eqCgrq" lay-verify="date" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    ~
+                    <div class="layui-inline col-6 mar10-0 pad0-10">
+                        <input type="text" id="eqCgrqUpper" name="eqCgrq" lay-verify="date" autocomplete="off"
                                class="layui-input">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:70px;">
                         <span>金额区间：</span>
                     </div>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="price1" name="eqPriceLower" lay-verify="date" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" id="price1" name="eqPriceLower" lay-verify="Decimal" autocomplete="off"
+                               class="layui-input" placeholder="下限">
                     </div>
+                    ~
                     <div class="layui-inline col-6 mar10-0 pad0-10">
-                        <input type="text" id="price2" name="eqPriceUpper" lay-verify="date" autocomplete="off"
-                               class="layui-input">
+                        <input type="text" id="price2" name="eqPriceUpper" lay-verify="Decimal" autocomplete="off"
+                               class="layui-input" placeholder="上限">
                     </div>
                     <!--<div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
@@ -111,7 +122,7 @@
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
-                            <select name="bmId" lay-filter="eqTgks">
+                            <select name="tgbmId" lay-filter="eqTgks">
                                 <option value="">托管科室</option>
                             </select>
                         </label>
@@ -137,6 +148,15 @@
 <script>
     renderMod = {
         form: {
+            ver: {
+                Decimal: function (value, item) {
+                    if (value !== '') {
+                        if (!(/^([1-9][\d]{0,10}|0)(\.[\d]{1,2})?$/.test(value))) {
+                            return '请填写金额';
+                        }
+                    }
+                }
+            },
             val: {
                 filter: "form",
                 select: [
@@ -157,12 +177,12 @@
 
             date: [{
                 elem: "#eqQysj",
-                value:today0
+                value: today0
             },
-            {
-                elem: "#eqCgrq",
-                value:today0
-            }
+                {
+                    elem: "#eqCgrq",
+                    value: today0
+                }
             ]
         },
         addTable: {
@@ -181,7 +201,7 @@
                     , {field: 'eqQysj', title: '启用日期', minWidth: 130, sort: true}
                     , {field: 'eqCgrq', title: '采购日期', minWidth: 130, sort: true}
                     , {field: 'eqSyzt', title: '资产状态', minWidth: 100}
-                    , {field: 'eqBxqx', title: '保修状态', minWidth: 100}
+                    , {field: 'eqBxqx', title: '保修时长/月', minWidth: 120}
                     , {field: 'sbcsName', title: '生产商', minWidth: 150}
                     , {field: 'eqTgks', title: '托管科室', minWidth: 150}
 
@@ -207,7 +227,8 @@
             reSet: {
                 url: "/lifeManage/selectKsEq",
                 type: "reload",
-                data: ["state", "equipmentPinyinCode", "departmentCoding", "eqCxflId"]
+                data: ["state", "equipmentPinyinCode", "departmentCoding", "eqCxflId", "tgbmId", "bmId",
+                "eqQysjLower","eqQysjUpper","eqCgrqLower","eqCgrqUpper","eqPriceLower","eqPriceUpper","eqBxqx"]
             }
         }
     }

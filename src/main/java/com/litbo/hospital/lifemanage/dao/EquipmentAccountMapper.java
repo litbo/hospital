@@ -38,11 +38,12 @@ public interface EquipmentAccountMapper {
      * @param state               状态
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding    院内编码
+     * @param bxqx                是否过保
      * @param eqCxflId            设备分类Id
      * @return List
      */
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectKsEq")
-    List<SgQueryCountVO> selectKsEqOne(@Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId);
+    List<SgQueryCountVO> selectKsEqOne(@Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId, @Param("bxqx") String bxqx);
 
     /**
      * 查询设备维修的次数和维修总金额
@@ -61,6 +62,7 @@ public interface EquipmentAccountMapper {
     SgQueryCountVO selectKsEqTwo(String eqId);
 
     //TODO 设备卡sql
+
     /**
      * 设备卡详情
      *

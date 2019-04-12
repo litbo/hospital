@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgPlan;
+import com.litbo.hospital.lifemanage.dao.provider.SgPlanSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
@@ -52,19 +53,8 @@ public interface SgPlanMapper {
      * @param userId   制定人
      * @return List<SgPlan>
      */
-    @Select("<script>" +
-            "select sg_plan.id, s_emp.user_xm as userId, s_bm.bm_name as bmId, sg_plan.plan_name,sg_plan.plan_date \n" +
-            "from sg_plan\n" +
-            "INNER JOIN s_bm ON sg_plan.bm_id = s_bm.bm_id \n" +
-            "INNER JOIN s_emp ON sg_plan.user_id = s_emp.user_id \n" +
-            "<where>" +
-            "<if test=\"planName != null\"> dbo.sg_plan.plan_name = #{planName,jdbcType=VARCHAR} </if>" +
-            "<if test=\"planDate != null\"> AND YEAR(dbo.sg_plan.plan_date) = YEAR(#{planDate,jdbcType=TIMESTAMP}) AND MONTH(dbo.sg_plan.plan_date) = MONTH(#{planDate,jdbcType=TIMESTAMP}) AND DAY(dbo.sg_plan.plan_date) = DAY(#{planDate,jdbcType=TIMESTAMP}) </if>" +
-            "<if test=\"userId != null\"> AND dbo.sg_plan.user_id = #{userId,jdbcType=VARCHAR} </if>" +
-            "</where>" +
-            " order by dbo.sg_plan.plan_date desc" +
-            "</script>")
-    List<SgPlan> selectPlan(@Param("planName") String planName, @Param("planDate") Date planDate, @Param("userId") String userId);
+    @SelectProvider(type = SgPlanSqlProvider.class, method = "selectPlan")
+    List<SgPlan> selectPlan(@Param("planName") String planName, @Param("planDate") Date planDate, @Param("userId") List<String> userId);
 
     /**
      * 根据部门id查询设备id

@@ -63,12 +63,13 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding 院内编码
      * @param eqCxflId 设备分类Id
+     * @param bxqx 是否过保
      * @param pageNum 当前页数
      * @param pageSize 每页显示的条数
      * @return PageInfo
      */
     @Override
-    public PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding,String eqCxflId, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding,String eqCxflId,String bxqx, Integer pageNum, Integer pageSize) {
         if (StringUtils.isNotBlank(equipmentPinyinCode)) {
             equipmentPinyinCode = "%"+equipmentPinyinCode+"%";
         }
@@ -76,9 +77,10 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
             departmentCoding = "%"+departmentCoding+"%";
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(state, equipmentPinyinCode, departmentCoding,eqCxflId);
+        List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(state, equipmentPinyinCode, departmentCoding,eqCxflId,bxqx);
 
         for (SgQueryCountVO sqcVO :sgQueryCountVOS){
+            //查询设备维修的次数和维修总金额
             SgQueryCountVO sgQueryCountVO = equipmentAccountMapper.selectKsEqTwo(sqcVO.getEqId());
             sqcVO.setRepairTimes(sgQueryCountVO.getRepairTimes());
             sqcVO.setRepairCosts(sgQueryCountVO.getRepairCosts());
