@@ -74,12 +74,12 @@
                     </div>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
                         <input type="text" id="price1" name="eqPriceLower" lay-verify="Decimal" autocomplete="off"
-                               class="layui-input" placeholder="下限">
+                               class="layui-input" placeholder="下限(整数/元)">
                     </div>
                     ~
                     <div class="layui-inline col-6 mar10-0 pad0-10">
                         <input type="text" id="price2" name="eqPriceUpper" lay-verify="Decimal" autocomplete="off"
-                               class="layui-input" placeholder="上限">
+                               class="layui-input" placeholder="上限(整数/元)">
                     </div>
                     <!--<div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
@@ -151,7 +151,7 @@
             ver: {
                 Decimal: function (value, item) {
                     if (value !== '') {
-                        if (!(/^([1-9][\d]{0,10}|0)(\.[\d]{1,2})?$/.test(value))) {
+                        if (!(/^([1-9][\d]{0,10}|0)$/.test(value))) {
                             return '请填写金额';
                         }
                     }

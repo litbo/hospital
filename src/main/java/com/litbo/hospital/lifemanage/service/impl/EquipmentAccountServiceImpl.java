@@ -84,6 +84,10 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
         if (StringUtils.isNotBlank(departmentCoding)) {
             departmentCoding = "%" + departmentCoding + "%";
         }
+        if (!StringUtils.isNumeric(eqPriceLower) || !StringUtils.isNumeric(eqPriceUpper)){
+            eqPriceLower = null;
+            eqPriceUpper = null;
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(tgbmId, bmId, eqQysjLower, eqQysjUpper, eqCgrqLower, eqCgrqUpper, eqPriceLower, eqPriceUpper,state, equipmentPinyinCode, departmentCoding, eqCxflId, bxqx);
 
