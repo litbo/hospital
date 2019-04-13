@@ -1200,7 +1200,7 @@ function changeTab(ele, callback) {
                 content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
                 id: ele.id
             });
-            console.log(ele);
+            //console.log(ele);
             element.tabChange('tab', ele.id);
         }
         callback ? callback() : null;

@@ -24,6 +24,9 @@
             margin-top: 10px;
             margin-bottom: 5px;
         }
+        .lBar{
+            margin:0 -15px;
+        }
     </style>
 </head>
 
@@ -52,7 +55,7 @@
                         <input type="text" id="eqQysjLower" name="eqQysjLower" lay-verify="date" autocomplete="off"
                                class="layui-input" placeholder="下限">
                     </div>
-                    ~
+                    <span class="lBar">~</span>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
                         <input type="text" id="eqQysjUpper" name="eqQysjUpper" lay-verify="date" autocomplete="off"
                                class="layui-input" placeholder="上限">
@@ -64,7 +67,7 @@
                         <input type="text" id="eqCgrqLower" name="eqCgrqLower" lay-verify="date" autocomplete="off"
                                class="layui-input" placeholder="下限">
                     </div>
-                    ~
+                    <span class="lBar">~</span>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
                         <input type="text" id="eqCgrqUpper" name="eqCgrqUpper" lay-verify="date" autocomplete="off"
                                class="layui-input" placeholder="上限">
@@ -76,7 +79,7 @@
                         <input type="text" id="price1" name="eqPriceLower" lay-verify="Decimal" autocomplete="off"
                                class="layui-input" placeholder="下限(整数/元)">
                     </div>
-                    ~
+                    <span class="lBar">~</span>
                     <div class="layui-inline col-6 mar10-0 pad0-10">
                         <input type="text" id="price2" name="eqPriceUpper" lay-verify="Decimal" autocomplete="off"
                                class="layui-input" placeholder="上限(整数/元)">
@@ -91,6 +94,7 @@
                             </select>
                         </label>
                     </div>-->
+                    <br />
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
                             <select name="state" lay-filter="">
