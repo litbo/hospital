@@ -41,13 +41,15 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">地点<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
+                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required"
+                           class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">意见<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlYj" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
+                    <input type="text" name="kstlYj" placeholder="请输入" autocomplete="off" lay-verify="required"
+                           class="layui-input">
                 </div>
             </div>
         </div>
@@ -91,15 +93,18 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">会议内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" name="kstlContent" lay-verify="required"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="kstlContent"
+                              lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12" style="width: 115px;">申购设备列表</label>
                 <div class="layui-input-block" style="margin-left:115px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dataTable2"><i class="fas fa-plus"></i>&nbsp;添加
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dataTable2"><i
+                            class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1"><i class="fas fa-trash-alt"></i>&nbsp;删除
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1"><i
+                            class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
             </div>
@@ -117,17 +122,17 @@
     var formData = {};
     var formData2 = {};
     renderMod = {
-        first:function(){
-          subUp({
-              url:"/lifeManage/selectSgDict",
-              type:"POST",
-              success:function(res){
-                  if(res.code === 0){
-                      formData["maxNum"] = Number(res.data["sgKstlRySl"]);
-                      //console.log(formData);
-                  }
-              }
-          });
+        first: function () {
+            subUp({
+                url: "/lifeManage/selectSgDict",
+                type: "POST",
+                success: function (res) {
+                    if (res.code === 0) {
+                        formData["maxNum"] = Number(res.data["sgKstlRySl"]);
+                        //console.log(formData);
+                    }
+                }
+            });
         },
         form: {
             date: {
@@ -135,20 +140,20 @@
             },
             submit: {
                 before: function (param) {
-                    var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]),maxNum = 15;
+                    var tv = getTableValue("table"), tv1 = getTableValue("table1", [true]), maxNum = 15;
                     if (doJudg({
                         "undefined": [formData2.radio],
                         0: [tv, tv1]
-                    })){
+                    })) {
                         putMsg({
                             alert: "请选择数据后提交！",
-                            log:[formData2,tv,tv1]
+                            log: [formData2, tv, tv1]
                         });
                         return false;
-                    }else if(tv.length < formData.maxNum){
+                    } else if (tv.length < formData.maxNum) {
 
                         putMsg({
-                            alert:"参加人数必须多于"+formData.maxNum+"人！"
+                            alert: "参加人数必须多于" + formData.maxNum + "人！"
                         });
                         return false;
                     }
@@ -162,20 +167,20 @@
                     url: "/lifeManage/insertSgKstl",
                     type: "POST",
                     data: ["kstlAddr", "kstlYj", "kstlTime", "kstlContent"],
-                    contentType:"application/json",
+                    contentType: "application/json",
                     param: {
                         1: "userIdJl",
                         2: "usersId",
                         3: "pmsId"
                     },
-                    reload:true
+                    reload: true
                 }
             }
         },
         addTable: {
             table: [
                 {
-                    elem:"#table",
+                    elem: "#table",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'userXm', title: '姓名', minWidth: 150}
@@ -189,8 +194,8 @@
                     }
                 },
                 {
-                    elem:"#table1",
-                    id:"table1",
+                    elem: "#table1",
+                    id: "table1",
                     cols: [[ //表头
                         {type: "checkbox"}
                         , {field: 'eqPmName', title: '设备名称', minWidth: 150}
@@ -221,7 +226,7 @@
                     elem: "#dataTable2",
                     cb: "/eq/listPmsCols",
                     db: "/eq/listPmsByPym",
-                    se:"/eq//pmSe",
+                    se: "/eq/pmSe",
                     name: "dtdt",
                     key: "checkbox"
                 }

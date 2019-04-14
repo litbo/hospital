@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>大型医学装备考察报告页面</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -14,13 +15,15 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style type="text/css">
-        .layui-form-item{
-            margin-top:30px;
+        .layui-form-item {
+            margin-top: 30px;
         }
-        .layui-form-label{
-            width:140px;
-            padding:8px 8px !important;
+
+        .layui-form-label {
+            width: 140px;
+            padding: 8px 8px !important;
         }
+
         .warm_btn {
             height: 45px;
             font-size: 1.3em;
@@ -84,7 +87,7 @@
     renderMod = {
         form: {
             val: {
-                filter:"form",
+                filter: "form",
                 get: {
                     url: "/lifeManage/selectSgDxyxzbkc",
                     type: "POST",
@@ -99,7 +102,7 @@
                     // 获取table数据
                     var tv = getTableValue("table");
                     var data = [];
-                    for(var i=0;i<tv.length;i++){
+                    for (var i = 0; i < tv.length; i++) {
                         data.push(tv[i]["userId"]);
                     }
                     if (doJudg({
@@ -119,13 +122,13 @@
                 form: {
                     url: "/lifeManage/insertSgDxyxzbkc",
                     type: "POST",
-                    contentType:"application/json",
+                    contentType: "application/json",
                     data: ["dxzbDdnr", "dxzbYj"],
                     param: {
                         1: "sgId",
                         2: "userIds"
                     },
-                    reload:"parent"
+                    reload: "parent"
                 }
             }
         },
@@ -153,6 +156,7 @@
                     elem: "#dataTable1",
                     cb: "/kwgl/empgl/listSelectEmpsCols",
                     db: "/kwgl/empgl/listSelectEmps",
+                    se: "/kwgl/empgl/empSe",
                     name: "dtdt",
                     key: "checkbox"
                 }
