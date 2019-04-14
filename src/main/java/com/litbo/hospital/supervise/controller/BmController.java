@@ -335,4 +335,12 @@ public class BmController {
 //        return Result.success();
 //    }
 
+//    @RequestMapping(value = "/getDir")
+//    @ResponseBody
+//    public Result getDir() throws Exception {
+//
+//        String property = System.getProperty("user.dir");
+//        return Result.success(property);
+//    }
+
 }

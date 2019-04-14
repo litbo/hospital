@@ -8,11 +8,15 @@ import com.litbo.hospital.security.bean.Cszj;
 import com.litbo.hospital.supervise.bean.CsZjDeleteVO;
 import com.litbo.hospital.supervise.bean.EqCszjVO;
 import com.litbo.hospital.supervise.service.EqCsService;
-import com.litbo.hospital.supervise.vo.*;
+import com.litbo.hospital.supervise.vo.CsDeleteVO;
+import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
+import com.litbo.hospital.supervise.vo.EqCsSelectVO;
+import com.litbo.hospital.supervise.vo.EqCsVO;
 import com.litbo.hospital.user.bean.EqCs;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -211,4 +215,14 @@ public class EqCsController {
                 "]";
         return Result.success(JSON.parseArray(title));
     }
+
+    @PostMapping( "/batchImportCszjs")
+    @ResponseBody
+    public Result batchImportCszjs(@RequestParam("file") MultipartFile file[]) throws Exception{
+        String docUrl = eqCsService.batchImportCszjs(file);
+        return Result.success(docUrl);
+    }
+
+
+
 }

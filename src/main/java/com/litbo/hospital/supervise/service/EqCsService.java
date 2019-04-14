@@ -9,6 +9,8 @@ import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
 import com.litbo.hospital.supervise.vo.EqCsSelectVO;
 import com.litbo.hospital.supervise.vo.EqCsVO;
 import com.litbo.hospital.user.bean.EqCs;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface EqCsService {
@@ -43,4 +45,6 @@ public interface EqCsService {
     EqCszjVO getCszjByCszjId(String cszjId);
 
     void upDateCszj(Cszj cszj);
+
+    String batchImportCszjs(MultipartFile[] file);
 }

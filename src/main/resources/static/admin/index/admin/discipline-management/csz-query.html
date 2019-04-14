@@ -39,6 +39,7 @@
 
 </script>
 <script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="view">查看</a>
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
 </script>
 
@@ -96,8 +97,8 @@
                             tool:"toolbar",
                             type: 2,
                             title: "添加员工",
-                            event: "add",
-                            content: "./child/employee-queryAdd.html",
+                            event: "view",
+                            content: "./csz-view.html",
                         } , {
                             type: 2,
                             title: "修改厂商信息",

@@ -291,10 +291,10 @@
             func:function(){
                 var url = $("#qzzp").val();
                 if(url){
-                    var nUrl = url.split("\\emp\\");
+                    // var nUrl = url.split("\\emp\\");
                     layOpen({
                         type:2,
-                        content:"/emp/"+nUrl[1],
+                        content:url,
                         title:"图片详情",
                         area:["80%","80%"]
                     })
