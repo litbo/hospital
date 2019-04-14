@@ -21,10 +21,10 @@ public interface SgPlanService {
      *
      * @param planName 计划名称
      * @param planDate 制定时间
-     * @param userId   制定人
+     * @param userName   制定人
      * @param pageNum  当前页数
      * @param pageSize 每页记录数
      * @return PageInfo<SgPlan>
      */
-    PageInfo<SgPlan> selectPlan(String planName, String planDate, String userId,Integer pageNum,Integer pageSize);
+    PageInfo<SgPlan> selectPlan(String planName, String planDate, String userName,Integer pageNum,Integer pageSize);
 }

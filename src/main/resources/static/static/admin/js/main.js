@@ -21,12 +21,15 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         var isActive = $('.main-layout-tab .layui-tab-title').find("li[lay-id=" + id + "]");
         if (isActive.length > 0) {
             //切换到选项卡
-            element.tabChange('tab', id);
-            layer.confirm(showMsg, function (index) {
-                var src = $(".layui-tab-item.layui-show").find("iframe").attr("src");
-                $(".layui-tab-item.layui-show").find("iframe").attr("src", src);
-                layer.close(index);
-            })
+            if(isActive.hasClass("layui-this")){
+                layer.confirm(showMsg, function (index) {
+                    var src = $(".layui-tab-item.layui-show").find("iframe").attr("src");
+                    $(".layui-tab-item.layui-show").find("iframe").attr("src", src);
+                    layer.close(index);
+                })
+            }else{
+                element.tabChange('tab', id);
+            }
         } else {
             element.tabAdd('tab', {
                 title: text,
@@ -50,12 +53,15 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         var isActive = $('.main-layout-tab .layui-tab-title').find("li[lay-id=" + id + "]");
         if (isActive.length > 0) {
             //切换到选项卡
-            element.tabChange('tab', id);
-            layer.confirm(showMsg, function (index) {
-                var src = $(".layui-tab-item.layui-show").find("iframe").attr("src");
-                $(".layui-tab-item.layui-show").find("iframe").attr("src", src);
-                layer.close(index);
-            })
+            if(isActive.hasClass("layui-this")){
+                layer.confirm(showMsg, function (index) {
+                    var src = $(".layui-tab-item.layui-show").find("iframe").attr("src");
+                    $(".layui-tab-item.layui-show").find("iframe").attr("src", src);
+                    layer.close(index);
+                })
+            }else{
+                element.tabChange('tab', id);
+            }
         } else {
             element.tabAdd('tab', {
                 title: text,

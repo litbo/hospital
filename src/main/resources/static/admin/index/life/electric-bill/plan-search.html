@@ -34,7 +34,7 @@
                    class="layui-input">
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="userId" placeholder="制定人" autocomplete="off">
+            <input class="layui-input" name="userName" placeholder="制定人" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">查找</button>
     </div>
@@ -90,7 +90,7 @@
             , reSet: {
                 url: "/lifeManage/selectPlan",
                 type: "reload",
-                data: ["planName","planDate","userId"]
+                data: ["planName","planDate","userName"]
             }
         },
         form: {

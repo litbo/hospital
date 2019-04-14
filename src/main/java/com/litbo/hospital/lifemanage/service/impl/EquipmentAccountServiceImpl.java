@@ -44,10 +44,13 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
     @Override
     public PageInfo<MachineAccountVO> selectEquipmentAccount(String category, String state, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber, Integer pageNum, Integer pageSize) {
         if (StringUtils.isNotBlank(equipmentPinyinCode)) {
-            equipmentPinyinCode = "%"+equipmentPinyinCode+"%";
+            equipmentPinyinCode = "%" + equipmentPinyinCode + "%";
         }
         if (StringUtils.isNotBlank(departmentCoding)) {
-            departmentCoding = "%"+departmentCoding+"%";
+            departmentCoding = "%" + departmentCoding + "%";
+        }
+        if (StringUtils.isNotBlank(equipmentNumber)) {
+            equipmentNumber = "%" + equipmentNumber + "%";
         }
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(equipmentAccountMapper.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber));
@@ -56,26 +59,40 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
     /**
      * 科室设备综合查询
      *
-     * @param state 状态
+     * @param tgbmId              托管部门id
+     * @param bmId                使用部门
+     * @param eqQysjLower         启用时间下限
+     * @param eqQysjUpper         启用时间上限
+     * @param eqCgrqLower         采购日期下限
+     * @param eqCgrqUpper         采购日期上限
+     * @param eqPriceLower        设备价格下限
+     * @param eqPriceUpper        设备价格上限
+     * @param state               状态
      * @param equipmentPinyinCode 设备拼音码
-     * @param departmentCoding 院内编码
-     * @param eqCxflId 设备分类Id
-     * @param pageNum 当前页数
-     * @param pageSize 每页显示的条数
+     * @param departmentCoding    院内编码
+     * @param eqCxflId            设备分类Id
+     * @param bxqx                是否过保
+     * @param pageNum             当前页数
+     * @param pageSize            每页显示的条数
      * @return PageInfo
      */
     @Override
-    public PageInfo<SgQueryCountVO> selectKsEq(String state, String equipmentPinyinCode, String departmentCoding,String eqCxflId, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgQueryCountVO> selectKsEq(String tgbmId, String bmId, String eqQysjLower, String eqQysjUpper, String eqCgrqLower, String eqCgrqUpper, String eqPriceLower, String eqPriceUpper, String state, String equipmentPinyinCode, String departmentCoding, String eqCxflId, String bxqx, Integer pageNum, Integer pageSize) {
         if (StringUtils.isNotBlank(equipmentPinyinCode)) {
-            equipmentPinyinCode = "%"+equipmentPinyinCode+"%";
+            equipmentPinyinCode = "%" + equipmentPinyinCode + "%";
         }
         if (StringUtils.isNotBlank(departmentCoding)) {
-            departmentCoding = "%"+departmentCoding+"%";
+            departmentCoding = "%" + departmentCoding + "%";
+        }
+        if (!StringUtils.isNumeric(eqPriceLower) || !StringUtils.isNumeric(eqPriceUpper)){
+            eqPriceLower = null;
+            eqPriceUpper = null;
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(state, equipmentPinyinCode, departmentCoding,eqCxflId);
+        List<SgQueryCountVO> sgQueryCountVOS = equipmentAccountMapper.selectKsEqOne(tgbmId, bmId, eqQysjLower, eqQysjUpper, eqCgrqLower, eqCgrqUpper, eqPriceLower, eqPriceUpper,state, equipmentPinyinCode, departmentCoding, eqCxflId, bxqx);
 
-        for (SgQueryCountVO sqcVO :sgQueryCountVOS){
+        for (SgQueryCountVO sqcVO : sgQueryCountVOS) {
+            //查询设备维修的次数和维修总金额
             SgQueryCountVO sgQueryCountVO = equipmentAccountMapper.selectKsEqTwo(sqcVO.getEqId());
             sqcVO.setRepairTimes(sgQueryCountVO.getRepairTimes());
             sqcVO.setRepairCosts(sgQueryCountVO.getRepairCosts());
@@ -105,6 +122,21 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
      */
     @Override
     public EqCardToVO selectEqCardShow(String eqSbbh) {
-        return equipmentAccountMapper.selectEqCardShow(eqSbbh);
+        EqCardToVO eqCardToVO = equipmentAccountMapper.selectEqCardShow(eqSbbh);
+        // TODO
+        EqCardToVO eqCardToVO1 = new EqCardToVO();
+        eqCardToVO1.setAzrq(new Date())
+                .setAzwz("AZWZ")
+                .setBgr("BGR")
+                .setBxzt("BXZT")
+                .setCd("CD")
+                .setCgrq(new Date())
+                .setDsfwxs("DSFWXS")
+                .setFj("FJ")
+                .setFlbz("FLBZ")
+                .setFldm("FLDM")
+                .setGb("GB")
+                .setGlpm("GLPM");
+        return eqCardToVO1;
     }
 }

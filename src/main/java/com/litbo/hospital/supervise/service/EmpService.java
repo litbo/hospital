@@ -16,6 +16,8 @@ public interface EmpService {
     List<SEmp> getEmpsByBmId(String bmId);
     //通过员工id获取员工信息
     SEmp getEmpsById(String id);
+    //通过姓名获取人员id
+    List<String> getIdByXm(String xm);
     //保存员工
     void saveEmp(SEmp emp);
     //删除员工
