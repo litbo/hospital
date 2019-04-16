@@ -46,7 +46,7 @@ public interface EmpDao {
             "      #{zgbzlbId,jdbcType=CHAR}, #{zgztId,jdbcType=CHAR}, #{xllbId,jdbcType=CHAR}, #{xlzyId,jdbcType=CHAR}, \n" +
             "      #{zwlbId,jdbcType=CHAR}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{byyx,jdbcType=VARCHAR}, \n" +
             "      #{qzzp,jdbcType=VARCHAR}, #{zp,jdbcType=VARCHAR},#{status},#{zcId})")
-    void saveEmp(SEmp emp);
+    Integer saveEmp(SEmp emp);
 
     @Delete("delete from s_emp where user_id=#{epmId}")
     void deleteEmpByUserId(String empId);
@@ -121,4 +121,6 @@ public interface EmpDao {
 
     @Select("select user_id from s_emp where user_xm like #{xm}")
     List<String> getIdByXm(String xm);
+    @Select("select count(*) from s_emp where qzzp like '%'+#{empQzzpfileName}+'%'")
+    Integer countEmpByQzzpName(String empQzzpfileName);
 }

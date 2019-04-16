@@ -120,4 +120,6 @@ public interface ZhiduDao {
     void scheUpdateZt();
     @Update("update s_zhiduzhize_zt set zt_czzt=2 WHERE zt_czname='试用' and zd_id=#{id}")
     void scheUpdateZtsh(String id);
+    @Select("select count(*) from s_zhidu where  doc_url  like '%'+#{zdpathFileNames}+'%'")
+    Integer countZdByUrlName(String zdpathFileName);
 }

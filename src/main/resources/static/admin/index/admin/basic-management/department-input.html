@@ -31,9 +31,10 @@
             <button type="button" class="layui-btn" id="xzmb">
                 <i class="layui-icon">&#xe601;</i>下载模板
             </button>
-            <button type="button" class="layui-btn layui-btn-warm" id="xzxz">
-                <i class="layui-icon">&#xe67c;</i>下载须知
-            </button>
+            <!--<button type="button" class="layui-btn layui-btn-warm" id="xzxz">-->
+                <!--<i class="layui-icon">&#xe67c;</i>下载须知-->
+            <!--</button>-->
+            <span style="color: red">表格标红列为必填项*</span>
         </div>
     </div>
 </div>
@@ -47,7 +48,7 @@
                 elem:"#selectFile",
                 url:"/supervise/bmgl/batchImportBms",
                 accept:"file",
-                acceptMime:"file/*",
+                acceptMime:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel",
                 auto:false,
                 bindAction:"#startUploadFile",
                 field:"file",

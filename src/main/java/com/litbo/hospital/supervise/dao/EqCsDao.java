@@ -81,4 +81,6 @@ public interface EqCsDao {
             "   img_url = #{imgUrl},yxq_date = #{yxqDate}" +
             "    where cszj_id = #{cszjId}")
     void upDateCszj(Cszj cszj);
+    @Select("select count(*) from eq_cszj where img_url like '%'+#{csCszjFileName}+'%'")
+    Integer countCsZjByimgName(String csCszjFileName);
 }

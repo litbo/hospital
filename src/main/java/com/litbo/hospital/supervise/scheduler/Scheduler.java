@@ -4,6 +4,8 @@ import com.litbo.hospital.common.utils.DeleteFileUtils;
 import com.litbo.hospital.supervise.bean.SGangwei;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
+import com.litbo.hospital.supervise.dao.EmpDao;
+import com.litbo.hospital.supervise.dao.EqCsDao;
 import com.litbo.hospital.supervise.dao.GangweiDao;
 import com.litbo.hospital.supervise.dao.ZhiduDao;
 import com.litbo.hospital.supervise.enums.ZdCzztEnumProcess;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +25,10 @@ public class Scheduler {
     private ZhiduDao zhiduDao;
     @Autowired
     private GangweiDao gangweiDao;
+    @Autowired
+    private EmpDao empDao;
+    @Autowired
+    private EqCsDao csDao;
 
     //每天凌晨执行一次
     @Scheduled(cron = "0 00 00 * * ?")
@@ -35,7 +42,51 @@ public class Scheduler {
         //日常清理html文件
         clearHtml();
 
+        refreshStaticFile();
     }
+
+    private void refreshStaticFile(){
+        String path = System.getProperty("user.dir");
+        //清理emp/qzzp里没有更新到数据的图片
+        System.out.println("emp文件清理中");
+        String empQzzpPath=path+"\\emp\\qzzp\\";
+        File empQzzpfile = new File(empQzzpPath);
+        String[]  empQzzpfileNames= empQzzpfile.list();
+        for(String empQzzpfileName:empQzzpfileNames){
+            if(empDao.countEmpByQzzpName(empQzzpfileName)==0){
+                String dd=path+"\\emp\\qzzp\\"+empQzzpfileName;
+                DeleteFileUtils.deleteFolder(dd);
+            }
+        }
+        //清理cs/cszj里和数据保存的地址不一样的照片
+        System.out.println("cs文件清理中");
+        String csCszj=path+"\\cs\\cszj\\";
+        File csCszjFile = new File(csCszj);
+        String[]  csCszjFileNames= csCszjFile.list();
+        for(String csCszjFileName:csCszjFileNames){
+            if(csDao.countCsZjByimgName(csCszjFileName)==0){
+                String dd=path+"\\cs\\cszj\\"+csCszjFileName;
+                DeleteFileUtils.deleteFolder(dd);
+            }
+        }
+
+        //清理zd里和数据保存的地址不一样的照片
+        System.out.println("zd文件清理中");
+        String zdpath=path+"\\zd\\";
+        File zdpathFile = new File(zdpath);
+        String[]  zdpathFileNames= zdpathFile.list();
+        for(String zdpathFileName:zdpathFileNames){
+            if(zhiduDao.countZdByUrlName(zdpathFileName)==0){
+                String dd=path+"\\zd\\"+zdpathFileName;
+                DeleteFileUtils.deleteFolder(dd);
+            }
+        }
+
+        System.out.println("文件清理中");
+
+
+    }
+
 
     private void setZdZt(){
         System.out.println("制度设置中");
