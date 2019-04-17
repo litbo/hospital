@@ -68,6 +68,10 @@
             width: 100%;
             height: 80px;
         }
+        .img_showc{
+            width: 60%;
+            height: 60px;
+        }
     </style>
 </head>
 
@@ -90,6 +94,7 @@
 
 <script>
     var data = tempValue("qr","d",null)
+        ,log = tempValue("rl","glo",false)
         ,showData = ""
         ,idShow = ["资产名称","品牌型号","使用部门","序列号SN","分类编码","启用日期","院内编码"]
         ,idName = ["eqName","eqXh","eqBmName","xlSN","flBh","eqQysj","eqYq"]
@@ -138,7 +143,9 @@
             }
             var $li = $("<li>").append($qrM).append($qr),
                 $code = $("<div>").attr("class","code").append($cod),
-                $top = $("<div>").attr("class","tit").append($("<h1>").text("XXXX医院")).append($("<h2>").text("固定资产卡"));
+                $top = $("<div>").attr("class","tit").append(
+                    $("<img>").attr({"src":log["sbbqtt"],class:"img_showc"})
+                ).append($("<h2>").text("固定资产卡"));
             $(".showQ ul").append($li.prepend($top).append($code));
         }
 

@@ -41,10 +41,9 @@
             <button type="button" class="layui-btn" id="xzmb">
                 <i class="layui-icon">&#xe67c;</i>下载模板
             </button>
-            <button type="button" class="layui-btn" id="xzxz">
-                <i class="layui-icon">&#xe67c;</i>下载须知
-            </button>
+            <span style="color: red">表格标红列为必填项*</span>
         </div>
+
         <form style="display: none" id="queryCourseForm">
             <input type="text" name="name" value="用户模板"  style="display: none" >
         </form>
@@ -61,7 +60,7 @@
                 elem:"#selectFile",
                 url:"/kwgl/empgl/batchImportEmps",
                 accept:"file",
-                acceptMime:"file/*",
+                acceptMime:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel",
                 auto:false,
                 bindAction:"#startUploadFile",
                 field:"file",

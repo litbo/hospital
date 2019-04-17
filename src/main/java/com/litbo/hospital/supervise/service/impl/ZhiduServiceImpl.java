@@ -48,7 +48,7 @@ public class ZhiduServiceImpl implements ZhiduService {
         String path = System.getProperty("user.dir");
         if (zhidu.getDocUrl()!=null&&!zhidu.getDocUrl().equals(""))
             zhidu.setDocUrl(zhidu.getDocUrl().replace(path+"\\","").replaceAll("\\\\","/"));
-        zhidu.setBmName(bmDao.getBmBybmid(zhidu.getBmId()).getBmName());
+        zhidu.setBmName(bmDao.getBmBybmid(zhidu.getBmId())!=null?bmDao.getBmBybmid(zhidu.getBmId()).getBmName():"");
         return zhidu;
     }
 
@@ -202,13 +202,7 @@ public class ZhiduServiceImpl implements ZhiduService {
     public void reSubmit(ZhiduSubmitVO zhiduSubmitVO) {
 
         SZhidu zdd = zhiduDao.getZdByZdId(zhiduSubmitVO.getZdId());
-        String docUrl = zdd.getDocUrl();
-        if(docUrl!=null&&!docUrl.equals(zhiduSubmitVO.getDocUrl())){   //文件重新提交
-            File file = new File(docUrl);
-            if(file.exists()){
-                file.delete();
-            }
-        }
+
 
         SZhidu zd = new SZhidu();
         zd.setZdId(zhiduSubmitVO.getZdId());

@@ -1,6 +1,5 @@
 package com.litbo.hospital.supervise.service.impl;
 
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.StringCutUtils;
@@ -16,8 +15,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -449,73 +450,82 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
-    public Integer batchImportBms(String fileName, MultipartFile file) throws  Exception {
+    @Transactional
+    public Integer batchImportBms(String fileName, MultipartFile file){
+
 
         boolean notNull = false;
         Integer status = 1;
-        if (!fileName.matches("^.+\\.(?i)(xls)$") && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
-            String error = "上传文件格式不正确";
-            status = 0;
-            return status;
-        }
-        boolean isExcel2003 = true;
-        if (fileName.matches("^.+\\.(?i)(xlsx)$")) {
-            isExcel2003 = false;
-        }
-        InputStream is = file.getInputStream();
-        Workbook wb = null;
-        if (isExcel2003) {
-            wb = new HSSFWorkbook(is);
-        } else {
-            wb = new XSSFWorkbook(is);
-        }
-        Sheet sheet = wb.getSheetAt(0);
-        if(sheet!=null){
-            notNull = true;
-        }
 
-        for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
-            Row row = sheet.getRow(r);
-            if (row == null){
-                continue;
+        try {
+            if (!fileName.matches("^.+\\.(?i)(xls)$") && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
+                String error = "上传文件格式不正确";
+                status = 0;
+                return status;
+            }
+            boolean isExcel2003 = true;
+            if (fileName.matches("^.+\\.(?i)(xlsx)$")) {
+                isExcel2003 = false;
+            }
+            InputStream is = file.getInputStream();
+            Workbook wb = null;
+            if (isExcel2003) {
+                wb = new HSSFWorkbook(is);
+            } else {
+                wb = new XSSFWorkbook(is);
+            }
+            Sheet sheet = wb.getSheetAt(0);
+            if(sheet!=null){
+                notNull = true;
             }
 
-            for (Cell c : row) {
-                if(c==null) c.setCellValue("");
+            for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
+                Row row = sheet.getRow(r);
+                if (row == null){
+                    continue;
+                }
+
+                for (Cell c : row) {
+                    if(c==null) c.setCellValue("");
+                }
+
+                SBm bm = new SBm();
+
+
+
+                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
+                row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+
+
+
+
+
+                String obmId = row.getCell(0).getStringCellValue();
+                String bmName = row.getCell(1).getStringCellValue();
+                String userId = row.getCell(2).getStringCellValue();
+                String bmTel = row.getCell(3).getStringCellValue();
+                String bmAddr = row.getCell(4).getStringCellValue();
+
+                bm.setObmId(obmId);
+    //            bm.setBmId(bmId);
+                bm.setBmId("0000000000");
+                bm.setBmName(bmName);
+                bm.setUserId(userId);
+                bm.setBmTel(bmTel);
+                bm.setBmAddr(bmAddr);
+                bm.setWxFlag("0");
+                bm.setpBmId("1000000000");
+
+                if(bmDao.saveBm(bm)<=0){
+                    return 1/0;
+                }
+
             }
-
-            SBm bm = new SBm();
-
-
-
-            row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
-            row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
-
-
-
-
-
-            String obmId = row.getCell(0).getStringCellValue();
-            String bmName = row.getCell(1).getStringCellValue();
-            String userId = row.getCell(2).getStringCellValue();
-            String bmTel = row.getCell(3).getStringCellValue();
-            String bmAddr = row.getCell(4).getStringCellValue();
-
-            bm.setObmId(obmId);
-//            bm.setBmId(bmId);
-            bm.setBmId("0000000000");
-            bm.setBmName(bmName);
-            bm.setUserId(userId);
-            bm.setBmTel(bmTel);
-            bm.setBmAddr(bmAddr);
-            bm.setWxFlag("0");
-            bm.setpBmId("1000000000");
-
-            bmDao.saveBm(bm);
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return status;

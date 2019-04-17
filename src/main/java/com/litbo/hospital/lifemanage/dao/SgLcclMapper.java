@@ -206,6 +206,7 @@ public interface SgLcclMapper {
             "<if test=\"tab == 3\"> AND dbo.sg_lccl.ratify IS NOT NULL AND dbo.sg_lccl.clear_person IS NULL AND dbo.sg_lccl.issh = 1</if>" +
             "<if test=\"tab == 4\"> AND dbo.sg_lccl.clear_person IS NOT NULL AND dbo.sg_lccl.record IS NULL</if>" +
             "</where>" +
+            "ORDER BY dbo.sg_lccl.declare_time DESC" +
             "</script>")
     List<DisposalReportListVO> selectXList(@Param("tab") String tab);
 

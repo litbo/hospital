@@ -63,7 +63,7 @@ public interface BmService {
 
     PageInfo listBmsAsLbBmsBySelectVO(int pageNum, int pageSize, BmSelectVO selectVO);
 
-    Integer batchImportBms(String fileName, MultipartFile file)throws  Exception;
+    Integer batchImportBms(String fileName, MultipartFile file)  ;
 
     List<BmsTreeVO> listTreeBms();
 
