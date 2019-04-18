@@ -69,7 +69,10 @@ public class FwWeixiuController {
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-            fwWeixiuService.jumpPj(userId,fwId);
+            int i = fwWeixiuService.jumpPj(userId, fwId);
+            if(i == 0){
+                Result.error("操作不合法");
+            }
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,12 +84,15 @@ public class FwWeixiuController {
     @GetMapping("/jumpYwwx")
     public Result jumpYwwx(FwYwwx fwYwwx){
         try {
-            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             int i = fwWeixiuService.jumpYwwx(fwYwwx);
-            if(i>0){
+            if(i == 0){
+                return Result.error("操作不合法");
+            }
+            if (i > 0) {
                 return Result.success();
-            }else {
+            }  else {
                 return Result.error("院外维修异常");
             }
         } catch (Exception e) {
@@ -101,7 +107,10 @@ public class FwWeixiuController {
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-            fwWeixiuService.addFwWeixiu(fwWeixiu,userId);
+            int i = fwWeixiuService.addFwWeixiu(fwWeixiu, userId);
+            if(i == 0){
+                return Result.error("操作不合法");
+            }
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();
