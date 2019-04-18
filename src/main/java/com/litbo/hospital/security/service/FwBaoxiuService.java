@@ -3,6 +3,7 @@ package com.litbo.hospital.security.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
+import com.litbo.hospital.security.vo.RepairInfoVo;
 
 /**
  * @author zjc
@@ -10,6 +11,12 @@ import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
  * 报修单
  */
 public interface FwBaoxiuService {
+
+    /**
+     * 维修信息显示
+     * @return
+     */
+    public RepairInfoVo wxInfoIndex();
 
 
     /**

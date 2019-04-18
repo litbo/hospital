@@ -17,6 +17,7 @@ public enum EnumProcess implements CodeEnum{
     FW_BLSJ(11,"不良事件生成"),
     FW_ZJWX(12,"直接维修"),
     FW_WX_SH(13,"维修审核"),
+    FW_YW_WX(14,"院外维修"),
     FW_BX_SL_NO(44,"三天未受理"),
     FW_WX_OVER(100,"维修完成")
     ;

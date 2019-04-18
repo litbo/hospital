@@ -48,7 +48,7 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Override
     public int jumpYwwx(FwYwwx fwYwwx) {
         int i = fwWeixiuDao.addFwYwwx(fwYwwx);
-        fwBaoxiuDao.updateBaoxiuStatus(fwYwwx.getFwId(),100);
+        fwBaoxiuDao.updateBaoxiuStatus(fwYwwx.getFwId(),14);
         FwLcjl fwLcjl = new FwLcjl();
         fwLcjl.setUserId(fwYwwx.getWxrId());
         fwLcjl.setCreatTime(new Date());
