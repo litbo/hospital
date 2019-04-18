@@ -99,7 +99,6 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
         fwBaoxiu.setId(id);
         fwBaoxiu.setBxTime(new Date());
         fwBaoxiu.setBxStatus(EnumProcess.FW_BX_SL.getCode());
-        fwBaoxiu.setJjxStatus(1);
         fwBaoxiuDao.addBaoxiu(fwBaoxiu);
         //添加流程记录
         FwLcjl fwLcjl = new FwLcjl();

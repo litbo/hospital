@@ -70,7 +70,7 @@ public interface FwWeixiuService {
      * @param fwWeixiu
      * @param userId
      */
-    public void addFwWeixiu(FwWeixiu fwWeixiu,String userId);
+    public int addFwWeixiu(FwWeixiu fwWeixiu,String userId);
 
     /**
      * 添加维修确认
