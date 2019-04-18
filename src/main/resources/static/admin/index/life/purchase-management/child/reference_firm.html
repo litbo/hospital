@@ -31,6 +31,13 @@
         .layui-form-text .layui-input-block {
             margin-left: 0 !important;
         }
+        .newFa{
+            color: #f10214;
+            margin:-5px 0 10px 150px;
+            font-size: 1.3em;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -45,13 +52,13 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">参考生产厂商<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="scsName" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
-                           style="height:38px;padding-left:60px;">
+                    <input type="text" name="scsName" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:45px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" data-id="table1" id="selectRoom">
                         选择
                     </button>
                 </div>
             </div>
+            <p class="newFa">新增生产厂商</p>
             <div class="layui-form-item">
                 <label class="layui-form-label">型号</label>
                 <div class="layui-input-block">
@@ -158,6 +165,21 @@
                     });
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index);
+                }
+            },
+            {
+                elem:".newFa",
+                func:function(){
+                    layOpen({
+                        type:2,
+                        content:"/admin/index/admin/discipline-management/cs-queryAdd.html",
+                        area:["90%","90%"],
+                        end:function(){
+                            putMsg({
+                                msg:"若你已提交成功，请直接选择一个生产厂商！"
+                            })
+                        }
+                    })
                 }
             }
         ]

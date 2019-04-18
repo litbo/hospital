@@ -31,6 +31,12 @@
             width:130px;
             padding:8px 10px!important;
         }
+        .showImg {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0 5px 5px;
+        }
     </style>
 </head>
 
@@ -84,7 +90,7 @@
 
 
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">签名照片</label>
+                <label class="layui-form-label">签名图片</label>
                 <input type="text" name="qzzp" id="qzzp" autocomplete="off" class="layui-input" lay-verify="" style="display: none" >
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
@@ -286,11 +292,11 @@
                 var url = $("#qzzp").val();
                 if(url){
                     // var nUrl = url.split("\\emp\\");
-                    console.log(nUrl);
+                    // console.log(nUrl);
                     layOpen({
-                        type:2,
+                        type:1,
                         // content:"/emp/"+nUrl[1],
-                        content:url,
+                        content:"<img src=\""+url+"\" class=\"showImg\">",
                         title:"图片详情",
                         area:["80%","80%"]
                     })
@@ -302,16 +308,6 @@
     if(!url){
         $("#ckzp").addClass("layui-btn-disabled");
     }
-   /* $(document).ready(function(){
-
-
-
-
-        $("#ckzp").click(function(){
-            if($("#ckzp").hasClass("layui-btn-disabled")) return;
-
-        });
-    });*/
 </script>
 
 

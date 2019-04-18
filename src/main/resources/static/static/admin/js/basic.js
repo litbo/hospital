@@ -1200,7 +1200,7 @@ function changeTab(ele, callback) {
                 content: '<iframe src="' + ele.url + '" name="iframe' + ele.id + '" class="iframe" framborder="0" data-id="' + ele.id + '" scrolling="auto" width="100%"  height="100%"></iframe>',
                 id: ele.id
             });
-            console.log(ele);
+            //console.log(ele);
             element.tabChange('tab', ele.id);
         }
         callback ? callback() : null;
@@ -1229,6 +1229,7 @@ window.onload = function () {
         "right": "0",
         "color": "#f10214",
         "border": "1px solid",
+        "opacity": "0.4",
         "padding": "5px",
         "z-index": "99999"
     }).html("当前页面地址：" + window.location.href).on("click", function () {

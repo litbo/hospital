@@ -49,7 +49,7 @@ public interface BmDao {
             "    values (#{obmId},#{bmId,jdbcType=CHAR}, #{bmName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
             "      #{bmTel,jdbcType=VARCHAR}, #{bmAddr,jdbcType=VARCHAR}, #{wxFlag,jdbcType=CHAR}, \n" +
             "      #{pBmId,jdbcType=CHAR},#{xbmFlag})")
-    void saveBm(SBm bm);
+    Integer saveBm(SBm bm);
 
     @SelectProvider(type = BmProvider.class ,method = "selectBmByX")
     List<SBm> getBmListByX(BmSelectVO selectVo);

@@ -2,6 +2,7 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.security.bean.Cszj;
 import com.litbo.hospital.supervise.bean.CsZjDeleteVO;
 import com.litbo.hospital.supervise.bean.EqCszjVO;
@@ -14,6 +15,7 @@ import com.litbo.hospital.supervise.vo.EqCsVO;
 import com.litbo.hospital.user.bean.EqCs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -128,5 +130,19 @@ public class EqCsServiceImpl implements EqCsService {
     @Override
     public void upDateCszj(Cszj cszj) {
         eqCsDao.upDateCszj(cszj);
+    }
+
+    @Override
+    public String batchImportCszjs(MultipartFile[] files) {
+        String path = System.getProperty("user.dir");
+        String filePath =path+"/cs/cszj/";
+        StringBuffer imgurls=new StringBuffer();
+        for(MultipartFile file:files){
+            String url = UploadFile.upload(filePath,file);
+            url = url.replaceAll("/","\\\\");
+            url=url.replace(path+"\\cs","");
+            imgurls.append(url+",");
+        }
+        return imgurls.toString();
     }
 }

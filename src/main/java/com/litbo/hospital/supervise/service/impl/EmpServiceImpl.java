@@ -20,8 +20,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -144,62 +146,72 @@ public class EmpServiceImpl implements EmpService {
 
 
     @Override
-    public Integer batchImportBms(String fileName, MultipartFile file) throws  Exception {
+    @Transactional
+    public Integer batchImportBms(String fileName, MultipartFile file)   {
 
         boolean notNull = false;
         Integer status = 1;
-        if (!fileName.matches("^.+\\.(?i)(xls)$") && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
-            String error = "上传文件格式不正确";
-            status = 0;
-            return status;
-        }
-        boolean isExcel2003 = true;
-        if (fileName.matches("^.+\\.(?i)(xlsx)$")) {
-            isExcel2003 = false;
-        }
-        InputStream is = file.getInputStream();
-        Workbook wb = null;
-        if (isExcel2003) {
-            wb = new HSSFWorkbook(is);
-        } else {
-            wb = new XSSFWorkbook(is);
-        }
-        Sheet sheet = wb.getSheetAt(0);
-        if(sheet!=null){
-            notNull = true;
-        }
 
-        for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
-            Row row = sheet.getRow(r);
-            if (row == null){
-                continue;
+        try {
+            if (!fileName.matches("^.+\\.(?i)(xls)$") && !fileName.matches("^.+\\.(?i)(xlsx)$")) {
+                String error = "上传文件格式不正确";
+                status = 0;
+                return status;
             }
-            SEmp emp = new SEmp();
+            boolean isExcel2003 = true;
 
-            for (Cell c : row) {
-                if(c==null) c.setCellValue("");
+            if (fileName.matches("^.+\\.(?i)(xlsx)$")) {
+                isExcel2003 = false;
+            }
+            InputStream is = file.getInputStream();
+            Workbook wb = null;
+            if (isExcel2003) {
+                wb = new HSSFWorkbook(is);
+            } else {
+                wb = new XSSFWorkbook(is);
+            }
+            Sheet sheet = wb.getSheetAt(0);
+            if(sheet!=null){
+                notNull = true;
             }
 
-            row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
-            row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
-            row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+            for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
+                Row row = sheet.getRow(r);
+                if (row == null){
+                    continue;
+                }
+                SEmp emp = new SEmp();
+
+                for (Cell c : row) {
+                    if(c==null) c.setCellValue("");
+                }
+
+                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
+                row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
 
 
 
-            String userId = row.getCell(0).getStringCellValue();   emp.setUserId(userId);
-            String userXm = row.getCell(1).getStringCellValue();    emp.setUserXm(userXm);
-            String sfzh = row.getCell(2).getStringCellValue();      emp.setSfzh(sfzh);
-            String jtzz = row.getCell(3).getStringCellValue();      emp.setJtzz(jtzz);
-            String tel = row.getCell(4).getStringCellValue();      emp.setTel(tel);
-            String email = row.getCell(5).getStringCellValue();    emp.setEmail(email);
-            String byyx = row.getCell(6).getStringCellValue();     emp.setByyx(byyx);
-            emp.setStatus("0");
-            empDao.saveEmp(emp);
+                String userId = row.getCell(0).getStringCellValue();   emp.setUserId(userId);
+                String userXm = row.getCell(1).getStringCellValue();    emp.setUserXm(userXm);
+                String sfzh = row.getCell(2).getStringCellValue();      emp.setSfzh(sfzh);
+                String jtzz = row.getCell(3).getStringCellValue();      emp.setJtzz(jtzz);
+                String tel = row.getCell(4).getStringCellValue();      emp.setTel(tel);
+                String email = row.getCell(5).getStringCellValue();    emp.setEmail(email);
+                String byyx = row.getCell(6).getStringCellValue();     emp.setByyx(byyx);
+                emp.setStatus("0");
 
+                if(empDao.saveEmp(emp)<=0){
+                    return 1/0;
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return status;

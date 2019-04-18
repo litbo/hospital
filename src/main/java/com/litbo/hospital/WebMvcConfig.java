@@ -16,10 +16,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/zdhtml/")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/emp/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/logo/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/eq/")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/cs/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/tmp/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/wjxz/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/downloadFile/");
+       ;
     }
 }

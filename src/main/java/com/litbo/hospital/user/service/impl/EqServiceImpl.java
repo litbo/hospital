@@ -58,6 +58,30 @@ public class EqServiceImpl implements EqService {
         }
     }
 
+    //设置设备编号
+    public String setSbbh(String pmId) {
+        //初始化设备编号
+        //年月1812 + pm编号68031409 + 级别 1 +
+        //获取当前时间
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
+        String time1 = sf.format(new Date());
+        String time = time1.substring(2,4)+time1.substring(5,time1.length());
+        EqPm pm = pmDao.getPmById(pmId);
+        //初始化分类号
+        String LastSbbh =  eqDao.getEqSbbhByPmid(pmId);
+        if(StringUtils.isNotBlank(LastSbbh)){
+            String Lastflbm = LastSbbh.substring(13,LastSbbh.length());
+            Integer flbmInt = Integer.parseInt(Lastflbm)+1;
+            String  flbm = String.format("%05d",flbmInt);
+            String sbbh = time+pm.getPid()+pm.getGlh()+flbm;
+            return sbbh;
+        }else {
+            String flbm1 = "00001";
+            String sbbh = time+pm.getPid()+pm.getGlh()+flbm1;
+            return sbbh;
+        }
+    }
+
     @Override
     public List<EqVo> getAllEq() {
         return eqDao.getAllEq();
@@ -87,11 +111,12 @@ public class EqServiceImpl implements EqService {
         //年月1812 + pm编号68031409 + 级别 1 + 流水号eqId
         //获取当前时间
         if(eqInfo.getEqPmId()!=null){
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
+            /*SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
             String time1 = sf.format(new Date());
             String time = time1.substring(2,4)+time1.substring(5,time1.length());
             EqPm pm = pmDao.getPmById(eqInfo.getEqPmId());
-            String sbbh =time+pm.getPid()+pm.getGlh()+eqInfo.getEqId();
+            String sbbh =time+pm.getPid()+pm.getGlh()+eqInfo.getEqId();*/
+            String sbbh =setSbbh(eqInfo.getEqPmId());
             eqInfo.setEqSbbh(sbbh);
         }
 
@@ -310,11 +335,7 @@ public class EqServiceImpl implements EqService {
     public Integer setPm(SetPmVo setPmVo) {
         List<String> eqIds = setPmVo.getEqIds();
         for (String eqId : eqIds) {
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
-            String time1 = sf.format(new Date());
-            String time = time1.substring(2,4)+time1.substring(5,time1.length());
-            EqPm pm = pmDao.getPmById(setPmVo.getEqPmId());
-            String sbbh =time+pm.getPid()+pm.getGlh()+eqId;
+            String sbbh = setSbbh(setPmVo.getEqPmId());
             String syzt="在用";
             if(eqDao.setPm(setPmVo.getEqPmId(),eqId,sbbh,syzt)<0){
                 return 1/0;
