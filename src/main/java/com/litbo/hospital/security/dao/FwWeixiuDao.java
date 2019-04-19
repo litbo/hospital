@@ -29,7 +29,7 @@ public interface FwWeixiuDao {
             "      #{wxjg,jdbcType=VARCHAR}, #{gcsjy,jdbcType=VARCHAR}, #{zjStatus,jdbcType=INTEGER}, \n" +
             "      #{gztjTime}, #{fwksTime,jdbcType=TIMESTAMP}, #{pcwcTime,jdbcType=TIMESTAMP}\n" +
             "      )")
-    public void addFwWeiXiu(FwWeixiu fwWeixiu);
+    public int addFwWeiXiu(FwWeixiu fwWeixiu);
 
     @Insert("insert into fw_wxqs (fw_id, qs_user, qs_shr, \n" +
             "      qs_myd, qs_jg, qs_shtime, \n" +

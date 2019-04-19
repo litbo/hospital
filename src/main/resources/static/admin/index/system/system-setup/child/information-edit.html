@@ -332,6 +332,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="layui-form-item" pane>
+                                        <label class="layui-form-label">原有</label>
+                                        <div class="layui-input-block">
+                                            <img src="#" id="eqImg" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="layui-form-item" pane>
@@ -345,6 +351,12 @@
                                         <div class="layui-input-block">
                                             <div class="img_show1">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" pane>
+                                        <label class="layui-form-label">原有</label>
+                                        <div class="layui-input-block">
+                                            <img src="#" id="paImg" />
                                         </div>
                                     </div>
                                 </div>
@@ -587,6 +599,10 @@
                     $("select[name='eqPmId']").val(String(data["eqPmId"]).trim());
 
                     form.render("select");
+                    console.log(data);
+                    console.log($.getUrlParam("eqId"));
+                    $("#eqImg").attr("src",data.eqSbzp);
+                    $("#paImg").attr("src",data.eqMpzp);
                 }
             }
         },

@@ -74,16 +74,16 @@ public class FwHtServiceImpl implements FwHtService {
     }
 
     @Override
-    public Result getAllFwHt(Integer pageNum, Integer pageSize) {
+    public Result getAllFwHt(Integer pageNum, Integer pageSize, String htName, String sbcsName) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<HtVo> pageInfo = new PageInfo<>(fwHtDao.getAllFwHt());
+        PageInfo<HtVo> pageInfo = new PageInfo<>(fwHtDao.getAllFwHt(htName,sbcsName));
         return Result.success(pageInfo);
     }
 
     @Override
-    public PageInfo getHtZfList(Integer pageNum, Integer pageSize) {
+    public PageInfo getHtZfList(Integer pageNum, Integer pageSize, String htName, String sbcsName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<HtVo> fwHtByStatus = fwHtDao.getFwHtByStatus(0);
+        List<HtVo> fwHtByStatus = fwHtDao.getFwHtByStatus(0,htName,sbcsName);
         for (HtVo ht : fwHtByStatus) {
             Integer count = fwHtDao.findFkCountByHtId(ht.getId());
             ht.setFkcs(count.toString());
