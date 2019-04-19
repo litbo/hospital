@@ -108,14 +108,10 @@ public class EqServiceImpl implements EqService {
 
 
         //初始化设备编号
-        //年月1812 + pm编号68031409 + 级别 1 + 流水号eqId
+        //年月1812 + pm编号68031409 + 级别 1 +
         //获取当前时间
         if(eqInfo.getEqPmId()!=null){
-            /*SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
-            String time1 = sf.format(new Date());
-            String time = time1.substring(2,4)+time1.substring(5,time1.length());
-            EqPm pm = pmDao.getPmById(eqInfo.getEqPmId());
-            String sbbh =time+pm.getPid()+pm.getGlh()+eqInfo.getEqId();*/
+
             String sbbh =setSbbh(eqInfo.getEqPmId());
             eqInfo.setEqSbbh(sbbh);
         }
@@ -370,6 +366,7 @@ public class EqServiceImpl implements EqService {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                eqInfo.setEqMpzp("/"+mpzp);
             }
             if(eqInfo.getEqSbzp()!=null){
                 sbzp =  UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
@@ -382,12 +379,13 @@ public class EqServiceImpl implements EqService {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                eqInfo.setEqSbzp("/"+sbzp);
             }
 
             ChangeFile.deleteDir(path+"/tmp/");
 
-            eqInfo.setEqMpzp("/"+mpzp);
-            eqInfo.setEqSbzp("/"+sbzp);
+
+
         }
         return eqDao.updateEq(eqInfo);
     }

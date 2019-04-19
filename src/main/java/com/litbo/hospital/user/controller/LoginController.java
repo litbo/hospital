@@ -91,7 +91,8 @@ public class LoginController {
     @ResponseBody
     public Result lock(String userId, String userPwd){
 
-        if(userId!=null&&userPwd!=null&&userPwd==userService.getUserByUsername(userId).getUserPwd()){
+        if(userId!=null&&userPwd!=null&&userPwd.equals(userService.getUserByUsername(userId).getUserPwd())){
+
             return Result.success();
         }
         return Result.error();
