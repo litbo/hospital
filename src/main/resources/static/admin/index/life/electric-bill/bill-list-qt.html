@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>总账目录</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline {
+            width: 140px;
+        }
+
+        .layui-field-title {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>分类标准 WS/T118-1999</legend>
+</fieldset>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="qrcode">二维码</a>
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="eqCard">设备卡</a>
+    </div>
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="">
+                    <!--<div class="layui-inline xs-100 mar10-0 pad0-10">-->
+                    <!--<select name="interest" lay-filter="aihao">-->
+                    <!--<option value="" selected>卫标分类</option>-->
+                    <!--<option value="0">军队分类</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <label>
+                            <select name="category" lay-filter="aihao">
+                                <option value="" selected>全部分类</option>
+                                <option value="68">医学类装备</option>
+                                <option value="-68">非医学类装备</option>
+                            </select>
+                        </label>
+                    </div>
+                    <!--<div class="layui-inline xs-100 mar10-0 pad0-10">-->
+                    <!--<select name="interest" lay-filter="aihao">-->
+                    <!--<option value="">全部</option>-->
+                    <!--<option value="0" selected="">有源</option>-->
+                    <!--<option value="1">无源</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <label>
+                            <select name="state" lay-filter="aihao">
+                                <option value="" selected>全部设备</option>
+                                <option value="在用">在用</option>
+                                <option value="报废">报废</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="departmentId" lay-filter="departmentId">
+                            <option value="">全部部门</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input class="layui-input" name="equipmentPinyinCode" placeholder="简称拼音码" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input class="layui-input" name="departmentCoding" placeholder="院内编码" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input class="layui-input" name="equipmentNumber" placeholder="设备编号" autocomplete="off">
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">
+                            查找
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    renderMod = {
+        addTable: {
+            table: [
+                {
+                    elem: "#table"
+                    , height: 'full-75'
+                    , cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'eqSbbh', title: '设备编号', minWidth: 200}
+                        , {field: 'eqName', title: '设备名称', minWidth: 200}
+                        , {field: 'eqYq', title: '院内编码', minWidth: 200}
+                        , {field: 'eqGg', title: '规格', minWidth: 100}
+                        , {field: 'eqXh', title: '型号', minWidth: 100}
+                        , {field: 'eqBmName', title: '所在科室', minWidth: 200}
+                        , {field: 'eqTzlb', title: '台账类别', minWidth: 180}
+                        , {field: 'eqQysj', title: '设备启用时间', minWidth: 180}
+                        , {field: 'eqSynx', title: '使用年限', minWidth: 100}
+                        , {field: 'state', title: '是否在用状态', minWidth: 130}
+                    ]]
+                    , url: "/lifeManage/selectEquipmentAccount"
+                    , method: "POST"
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                    , where: {}
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "data": res.data.list, //解析数据列表
+                            "count": res.data.total
+                        }
+                    }
+                    , done: function (obj) {
+                        tableFunc({
+                            tools:[
+                                {
+                                    event:"qrcode",
+                                    tool:"toolbar",
+                                    layOpen:false,
+                                    before:function(obj,cs){
+                                        if(cs.data.length === 0){
+                                            putMsg({
+                                                alert:"请至少选择一条数据！"
+                                            });
+                                            return false;
+                                        }
+                                        layui.sessionData("qr",{
+                                            key:"d",
+                                            value:cs
+                                        });
+                                        var $a = $("<a>").attr({"href":"./child/QRshow.html","target":"_blank"});
+                                        $a[0].click();
+                                        location.reload();
+                                        return false;
+                                    }
+                                },
+                                {
+                                    event:"eqCard",
+                                    tool:"toolbar",
+                                    layOpen:false,
+                                    before:function(obj,cs){
+                                        if(cs.data.length !== 1){
+                                            putMsg({
+                                                alert:"一次只能选中一个设备！！"
+                                            });
+                                            return false;
+                                        }
+                                        layui.sessionData("eqc",{
+                                            key:"c",
+                                            value:cs
+                                        });
+                                        var $a = $("<a>").attr({"href":"./child/eqCardShow.html","target":"_blank"});
+                                        $a[0].click();
+                                        location.reload();
+                                        return false;
+                                    }
+                                }
+                            ]
+                        })
+                    }
+                }
+            ]
+            , reSet: {
+                url: "/lifeManage/selectEquipmentAccount",
+                type: "reload",
+                data: ["category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "departmentId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
+            }
+        }
+    }
+</script>
+</body>
+
+</html>
