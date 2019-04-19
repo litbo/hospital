@@ -4,10 +4,7 @@ import com.litbo.hospital.lifemanage.bean.vo.EqCardToVO;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgQueryCountVO;
 import com.litbo.hospital.lifemanage.dao.provider.EquipmentAccountProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -30,7 +27,10 @@ public interface EquipmentAccountMapper {
      * @return List<MachineAccountVO>
      */
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectEquipmentAccount")
-    List<MachineAccountVO> selectEquipmentAccount(@Param("category") String category, @Param("state") String state, @Param("departmentId") String departmentId, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("equipmentNumber") String equipmentNumber);
+    List<MachineAccountVO> selectEquipmentAccount(
+            @Param("category") String category, @Param("state") String state,
+            @Param("departmentId") String departmentId, @Param("equipmentPinyinCode") String equipmentPinyinCode,
+            @Param("departmentCoding") String departmentCoding, @Param("equipmentNumber") String equipmentNumber);
 
     /**
      * 科室设备综合查询
@@ -51,7 +51,7 @@ public interface EquipmentAccountMapper {
      * @return List
      */
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectKsEq")
-    List<SgQueryCountVO> selectKsEqOne(@Param("tgbmId")String tgbmId,@Param("bmId") String bmId,@Param("eqQysjLower") String eqQysjLower,@Param("eqQysjUpper") String eqQysjUpper,@Param("eqCgrqLower") String eqCgrqLower,@Param("eqCgrqUpper") String eqCgrqUpper,@Param("eqPriceLower") String eqPriceLower,@Param("eqPriceUpper") String eqPriceUpper, @Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId, @Param("bxqx") String bxqx);
+    List<SgQueryCountVO> selectKsEqOne(@Param("tgbmId") String tgbmId, @Param("bmId") String bmId, @Param("eqQysjLower") String eqQysjLower, @Param("eqQysjUpper") String eqQysjUpper, @Param("eqCgrqLower") String eqCgrqLower, @Param("eqCgrqUpper") String eqCgrqUpper, @Param("eqPriceLower") String eqPriceLower, @Param("eqPriceUpper") String eqPriceUpper, @Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId, @Param("bxqx") String bxqx);
 
     /**
      * 查询设备维修的次数和维修总金额

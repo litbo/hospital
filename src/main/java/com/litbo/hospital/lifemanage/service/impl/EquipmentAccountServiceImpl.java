@@ -53,7 +53,8 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
             equipmentNumber = "%" + equipmentNumber + "%";
         }
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(equipmentAccountMapper.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber));
+        List<MachineAccountVO> machineAccountVOS = equipmentAccountMapper.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber);
+        return new PageInfo<>(machineAccountVOS);
     }
 
     /**

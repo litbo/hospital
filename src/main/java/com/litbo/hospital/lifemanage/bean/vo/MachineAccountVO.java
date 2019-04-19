@@ -70,4 +70,8 @@ public class MachineAccountVO {
      * 序列号SN
      */
     private String xlSN;
+    /**
+     * 查询总金额
+     */
+    private String zje;
 }

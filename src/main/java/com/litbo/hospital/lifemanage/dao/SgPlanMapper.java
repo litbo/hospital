@@ -66,6 +66,6 @@ public interface SgPlanMapper {
             "FROM\n" +
             "dbo.eq_info\n" +
             "WHERE\n" +
-            "dbo.eq_info.eq_bmid = #{bmId,jdbcType=VARCHAR}")
+            "dbo.eq_info.eq_bmid = #{bmId,jdbcType=VARCHAR} AND dbo.eq_info.eq_sbbh IS NOT NULL")
     List<String> getEqIdByBmId(String bmId);
 }

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>总账目录</title>
+    <title>其他台账</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -104,6 +104,9 @@
         </div>
     </div>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="application">设备卡</a>
+</script>
 <script>
     renderMod = {
         addTable: {
@@ -123,6 +126,7 @@
                         , {field: 'eqQysj', title: '设备启用时间', minWidth: 180}
                         , {field: 'eqSynx', title: '使用年限', minWidth: 100}
                         , {field: 'state', title: '是否在用状态', minWidth: 130}
+                        , {fixed: 'right', minWidth: 100, align: 'center', toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectEquipmentAccount"
                     , method: "POST"
@@ -174,6 +178,21 @@
                                             });
                                             return false;
                                         }
+                                        layui.sessionData("eqc",{
+                                            key:"c",
+                                            value:cs
+                                        });
+                                        var $a = $("<a>").attr({"href":"./child/eqCardShow.html","target":"_blank"});
+                                        $a[0].click();
+                                        location.reload();
+                                        return false;
+                                    }
+                                },
+                                {
+                                    event:"application",
+                                    tool:"toolbar",
+                                    layOpen:false,
+                                    before:function(obj,cs){
                                         layui.sessionData("eqc",{
                                             key:"c",
                                             value:cs

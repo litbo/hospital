@@ -89,4 +89,8 @@ public class SgQueryCountVO {
      * 采购日期
      */
     private String eqCgrq;
+    /**
+     * 查询总金额
+     */
+    private String zje;
 }

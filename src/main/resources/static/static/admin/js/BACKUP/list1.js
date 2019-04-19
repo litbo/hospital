@@ -629,7 +629,7 @@ var main_list =
                                 },
                                 {
                                     "title": "其他台账",
-                                    "url": "./life/electric-bill/bill-list.html",
+                                    "url": "./life/electric-bill/bill-list-qt.html",
                                     "icon": "file-invoice-dollar",
                                     "id": "370",
                                     "shiro": "a"

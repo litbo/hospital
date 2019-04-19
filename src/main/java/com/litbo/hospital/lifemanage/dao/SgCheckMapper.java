@@ -81,6 +81,7 @@ public interface SgCheckMapper {
     /**
      * 核对对比
      *
+     * @param planId    计划id
      * @param check     是否存在
      * @param checkDate 审核日期
      * @param checkUser 审核人
@@ -89,5 +90,5 @@ public interface SgCheckMapper {
      * @return List<SgCheckListVO>
      */
     @SelectProvider(type = SgCheckSqlProvider.class, method = "getListByX")
-    List<SgCheckListVO> getListByX(@Param("check") String check,@Param("checkDate") String checkDate,@Param("checkUser") String checkUser,@Param("planDate") String planDate,@Param("planUser") String planUser);
+    List<SgCheckListVO> getListByX(@Param("planId") String planId,@Param("check") String check,@Param("checkDate") String checkDate,@Param("checkUser") String checkUser,@Param("planDate") String planDate,@Param("planUser") String planUser);
 }

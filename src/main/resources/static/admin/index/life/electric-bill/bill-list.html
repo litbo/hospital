@@ -104,6 +104,9 @@
         </div>
     </div>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="application">设备卡</a>
+</script>
 <script>
     renderMod = {
         addTable: {
@@ -119,10 +122,11 @@
                         , {field: 'eqGg', title: '规格', minWidth: 100}
                         , {field: 'eqXh', title: '型号', minWidth: 100}
                         , {field: 'eqBmName', title: '所在科室', minWidth: 200}
-                        , {field: 'eqTzlb', title: '台账类别', minWidth: 180}
+                        // , {field: 'eqTzlb', title: '台账类别', minWidth: 180}
                         , {field: 'eqQysj', title: '设备启用时间', minWidth: 180}
                         , {field: 'eqSynx', title: '使用年限', minWidth: 100}
                         , {field: 'state', title: '是否在用状态', minWidth: 130}
+                        , {fixed: 'right', minWidth: 100, align: 'center', toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectEquipmentAccount"
                     , method: "POST"
@@ -141,48 +145,54 @@
                     }
                     , done: function (obj) {
                         tableFunc({
-                            tools:[
+                            tools: [
                                 {
-                                    event:"qrcode",
-                                    tool:"toolbar",
-                                    layOpen:false,
-                                    before:function(obj,cs){
-                                        if(cs.data.length === 0){
+                                    event: "qrcode",
+                                    tool: "toolbar",
+                                    layOpen: false,
+                                    before: function (obj, cs) {
+                                        if (cs.data.length === 0) {
                                             putMsg({
-                                                alert:"请至少选择一条数据！"
+                                                alert: "请至少选择一条数据！"
                                             });
                                             return false;
                                         }
-                                        layui.sessionData("qr",{
-                                            key:"d",
-                                            value:cs
+                                        layui.sessionData("qr", {
+                                            key: "d",
+                                            value: cs
                                         });
-                                        var $a = $("<a>").attr({"href":"./child/QRshow.html","target":"_blank"});
+                                        var $a = $("<a>").attr({"href": "./child/QRshow.html", "target": "_blank"});
                                         $a[0].click();
                                         location.reload();
                                         return false;
                                     }
                                 },
                                 {
-                                    event:"eqCard",
-                                    tool:"toolbar",
-                                    layOpen:false,
-                                    before:function(obj,cs){
-                                        if(cs.data.length !== 1){
+                                    event: "eqCard",
+                                    tool: "toolbar",
+                                    layOpen: false,
+                                    before: function (obj, cs) {
+                                        if (cs.data.length !== 1) {
                                             putMsg({
-                                                alert:"一次只能选中一个设备！！"
+                                                alert: "一次只能选中一个设备！！"
                                             });
                                             return false;
                                         }
-                                        layui.sessionData("eqc",{
-                                            key:"c",
-                                            value:cs
+                                        layui.sessionData("eqc", {
+                                            key: "c",
+                                            value: cs
                                         });
-                                        var $a = $("<a>").attr({"href":"./child/eqCardShow.html","target":"_blank"});
+                                        var $a = $("<a>").attr({"href": "./child/eqCardShow.html", "target": "_blank"});
                                         $a[0].click();
                                         location.reload();
                                         return false;
                                     }
+                                },
+                                {
+                                    event: "application",
+                                    type: 2,
+                                    content: "./child/eqCardShow.html",
+                                    dataUrl: ["eqSbbh"]
                                 }
                             ]
                         })
