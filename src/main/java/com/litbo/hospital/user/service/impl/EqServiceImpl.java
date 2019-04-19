@@ -393,7 +393,16 @@ public class EqServiceImpl implements EqService {
     @Override
         public EqInfo getEqById(String eqId) {
 
-        return eqDao.getEqWithNameById(eqId);
+        EqInfo eqInfo= eqDao.getEqWithNameById(eqId);
+        //查询厂商
+        if(eqInfo.getSbcsIdScs()!=null)
+            eqInfo.setScsName(eqDao.getCsById(eqInfo.getSbcsIdScs()));
+        if(eqInfo.getSbcsIdGys()!=null)
+                eqInfo.setGysName(eqDao.getCsById(eqInfo.getSbcsIdGys()));
+        if(eqInfo.getSbcsIdWxs()!=null)
+            eqInfo.setWxsName(eqDao.getCsById(eqInfo.getSbcsIdWxs()));
+
+        return eqInfo;
     }
 
     @Override
