@@ -130,7 +130,7 @@ public class EmpServiceImpl implements EmpService {
         emp.setZwlbId(emp.getZwlbId()!=null?emp.getZwlbId().trim():null);
         emp.setXllbId(emp.getXllbId()!=null?emp.getXllbId().trim():null);
         emp.setMzId(emp.getMzId()!=null?emp.getMzId().trim():null);
-        emp.setBmName(emp.getBmId()!=null?bmDao.getBmBybmid(emp.getBmId()).getBmName():null);
+        emp.setBmName(emp.getBmId()!=null?bmDao.getBmBybmid(emp.getBmId())!=null?bmDao.getBmBybmid(emp.getBmId()).getBmName():null:null);
 
 //        String path = System.getProperty("user.dir");
 //        if (emp.getQzzp()!=null&&!emp.getQzzp().equals(""))

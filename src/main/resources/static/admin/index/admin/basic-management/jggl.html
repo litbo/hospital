@@ -116,7 +116,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">科室电话</label>
                     <div class="layui-input-block">
-                        <input type="text" name="bmTel" placeholder="请输入" class="layui-input" autocomplete="off">
+                        <input type="text" name="bmTel" placeholder="请输入" class="layui-input" autocomplete="off" lay-verify="required|phone">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -175,7 +175,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">科室电话</label>
                     <div class="layui-input-block">
-                        <input type="text" name="bmTel1" placeholder="请输入" class="layui-input" autocomplete="off">
+                        <input type="text" name="bmTel1" placeholder="请输入" class="layui-input" autocomplete="off" lay-verify="required|phone">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -341,7 +341,7 @@
             bmName: $("*[name='bmName1']").val(),
             bmTel: $("*[name='bmTel1']").val(),
             wxFlag: $("*[name='wxFlag1']").val(),
-            userId:paseData["pId"]["userId"],
+            userId:formData.radio[0]["userId"],
             pBmId: paseData["pId"]["bmId"]
         };
         console.log(nData);
@@ -392,6 +392,7 @@
             wxFlag: $("*[name='wxFlag']").val(),
             userId: daa
         };
+        console.log(nData);
         for(var name in nData){
             if(nData.hasOwnProperty(name)){
                 if(nData[name] === "" || !nData[name]|| JSON.stringify(nData[name]) === "{}"){
