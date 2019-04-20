@@ -6,7 +6,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
-import com.litbo.hospital.supervise.bean.SEmp;
+import com.litbo.hospital.security.vo.RepairInfoVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,12 @@ public class FwBaoxiuController {
     @Autowired
     private FwBaoxiuService
             fwBaoxiuService;
+
+    @GetMapping("/wxInfo")
+    public Result wxInfoIndexVo(){
+        RepairInfoVo repairInfoVo = fwBaoxiuService.wxInfoIndex();
+        return Result.success(repairInfoVo);
+    }
 
     @GetMapping("/baoxiuRw")
     public Result baoxiuRw(@RequestParam(required = false,defaultValue = "10") Integer pageSize,

@@ -36,16 +36,13 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="合同编号">
+                        <input type="text" name="htName" autocomplete="off" class="layui-input" placeholder="合同名称">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="合同名称">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="" autocomplete="off" class="layui-input" placeholder="维修商">
+                        <input type="text" name="sbcsName" autocomplete="off" class="layui-input" placeholder="维修商">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
                     </div>
                 </form>
             </div>
@@ -56,54 +53,53 @@
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="xq">详情</a>
 </script>
 <script>
-    renderMod.table={
-        table:{
-            cols: [[ //表头
-                {field: 'id', title: '合同编号', minWidth: 200}
-                , {field: 'htName', title: '合同名称', minWidth: 150}
-                , {field: 'htPrice', title: '合同金额（元）', minWidth: 200,sort:true}
-                , {field: 'htTime', title: '合同日期', minWidth: 100}
-                , {field: 'sbcsName', title: '维修商', minWidth: 150}
-                , {field: 'htStatusString', title: '状态', minWidth: 150}
-                , {title:'',align:'center',minWidth:200,toolbar:'#bar'}
-            ]]
-            ,url:"/fwht/list"
-            ,request:{
-                pageName : 'pageNum',
-                limitName : 'pageSize'
-            }
-            /*,where:{
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'id', title: '合同编号', minWidth: 200}
+                    , {field: 'htName', title: '合同名称', minWidth: 150}
+                    , {field: 'htPrice', title: '合同金额（元）', minWidth: 200, sort: true}
+                    , {field: 'htTime', title: '合同日期', minWidth: 100}
+                    , {field: 'sbcsName', title: '维修商', minWidth: 150}
+                    , {field: 'htStatusString', title: '状态', minWidth: 150}
+                    , {title: '', align: 'center', minWidth: 200, toolbar: '#bar'}
+                ]]
+                , url: "/fwht/list"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                /*,where:{
                 a : 1
             }*/
-            ,parseData: function(res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "count":res.data.total,//页面的所有数据数
-                    "data": res.data.list //解析数据列表
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面的所有数据数
+                        "data": res.data.list //解析数据列表
+                    }
                 }
-            }
-            , done: function (obj) {
-                tableFunc({
-                    tools:[
-                        {
-                            event:"xq",
-                            title:"合同详情",
-                            type:2,
-                            content:"./child/contract-xq.html",
-                            dataUrl:["id"]
-                        }
-                    ]
-                })
-            }
-        },
-        reSet:{
-            url:"/fwht/list",
-            type:"search",
-            where:{
-                newValue:"thisIsNew"
+                , done: function (obj) {
+                    tableFunc({
+                        tools: [
+                            {
+                                event: "xq",
+                                title: "合同详情",
+                                type: 2,
+                                content: "./child/contract-xq.html",
+                                dataUrl: ["id"]
+                            }
+                        ]
+                    })
+                }
             },
-            tid:"#table"
+            reSet: {
+                url: "/fwht/list",
+                type: "search",
+                data: ["htName", "sbcsName"]
+            }
         }
     }
 </script>

@@ -2,6 +2,7 @@ package com.litbo.hospital.security.dao;
 
 import com.litbo.hospital.security.bean.FwFk;
 import com.litbo.hospital.security.bean.FwHt;
+import com.litbo.hospital.security.dao.sqlprovider.FwHtProvider;
 import com.litbo.hospital.security.vo.FwFkVo;
 import com.litbo.hospital.security.vo.FwHtXqVo;
 import com.litbo.hospital.security.vo.HtVo;
@@ -42,35 +43,11 @@ public interface FwHtDao {
     /**
      *   合同查询
      */
-    @Select("SELECT\n" +
-            "ht.id,\n" +
-            "ht.ht_name,\n" +
-            "ht.ht_price,\n" +
-            "ht.ht_time,\n" +
-            "cs.sbcs_name,\n" +
-            "ht.ht_status\n" +
-            "\n" +
-            "FROM\n" +
-            "dbo.fw_ht AS ht ,\n" +
-            "dbo.eq_cs AS cs\n" +
-            "WHERE\n" +
-            "ht.sbcs_id = cs.sbcs_id")
-    public List<HtVo> getAllFwHt();
+    @SelectProvider(type = FwHtProvider.class,method = "getAllFwHt")
+    public List<HtVo> getAllFwHt(@Param("htName") String htName, @Param("sbcsName") String sbcsName);
 
-    @Select("SELECT\n" +
-            "ht.id,\n" +
-            "ht.ht_name,\n" +
-            "ht.ht_price,\n" +
-            "ht.ht_time,\n" +
-            "ht.ht_zffs,\n" +
-            "cs.sbcs_name\n" +
-            "FROM\n" +
-            "dbo.fw_ht AS ht ,\n" +
-            "dbo.eq_cs AS cs\n" +
-            "WHERE\n" +
-            "ht.sbcs_id = cs.sbcs_id AND\n" +
-            "ht.ht_status = 0")
-    public List<HtVo> getFwHtByStatus(Integer htStatus);
+    @SelectProvider(type = FwHtProvider.class, method = "getFwHtByStatus")
+    public List<HtVo> getFwHtByStatus(@Param("htStatus") Integer htStatus, @Param("htName") String htName, @Param("sbcsName") String sbcsName);
 
     @Select("SELECT\n" +
             "dbo.fw_ht.id as fkHtbh,\n" +

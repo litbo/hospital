@@ -89,4 +89,10 @@ public interface EqDao {
     String getZjlyId(String eqZjlyName);
     @Select("select * from eq_pm where eq_pm_id = #{eqPmId}")
     EqPm getPmById(String eqPmId);
+    @Select("SELECT top 1  eq_sbbh FROM eq_info WHERE eq_sbbh in (SELECT eq_sbbh FROM eq_info WHERE eq_pm_id = #{eqPmId}) " +
+            "ORDER BY eq_sbbh desc")
+    String getEqSbbhByPmid(String eqPmId);
+
+    @Select("SELECT sbcs_name FROM eq_cs WHERE sbcs_id =#{sbcsId}")
+    String getCsById(Integer sbcsId);
 }

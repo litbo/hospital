@@ -31,7 +31,7 @@ public interface FwHtService {
      * @param pageSize 每页个数
      * @return
      */
-    public Result getAllFwHt(Integer pageNum, Integer pageSize);
+    public Result getAllFwHt(Integer pageNum, Integer pageSize, String htName, String sbcsName);
 
     /**
      * 合同支付查询
@@ -39,7 +39,7 @@ public interface FwHtService {
      * @param pageSize
      * @return
      */
-    public PageInfo getHtZfList(Integer pageNum, Integer pageSize);
+    public PageInfo getHtZfList(Integer pageNum, Integer pageSize, String htName, String sbcsName);
 
     public HtVo getHtVoById(String id);
 }

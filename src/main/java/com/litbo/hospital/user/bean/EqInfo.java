@@ -56,6 +56,8 @@ public class EqInfo {
     private Integer eqBxxysj;
     //维修商id
     private Integer sbcsIdWxs;
+    //维修商id
+    private String wxsName;
     //部门id
     private String eqBmid;
     //部门名称
@@ -76,6 +78,8 @@ public class EqInfo {
     private String eqZczmc;
     //设备厂商Id
     private Integer sbcsIdScs;
+
+    private String scsName;
     //品牌
     private String eqPp;
     //生产编号
@@ -86,6 +90,8 @@ public class EqInfo {
     private Integer eqSynx;
     //供应商id
     private Integer sbcsIdGys;
+
+    private String gysName;
     //合同编号
     private String eqHtbh;
     //采购日期

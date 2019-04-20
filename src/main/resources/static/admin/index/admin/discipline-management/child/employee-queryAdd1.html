@@ -82,7 +82,7 @@
             </div>
 
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">签名照片</label>
+                <label class="layui-form-label">签名图片</label>
                 <input type="text" name="qzzp" id="qzzp" autocomplete="off" class="layui-input hidden" >
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
@@ -125,7 +125,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">岗位</label>
                 <div class="layui-input-block">
-                    <select name="zwlbId" lay-filter="zwlb" lay-verify="required">
+                    <select name="zggwlbId" lay-filter="zggw" lay-verify="required">
                         <option></option>
                     </select>
                 </div>
@@ -214,7 +214,7 @@
                         text:"xllb",
                         url:"/eqdict/listXllb"
                     },{
-                        filter:"zwlb",
+                        filter:"zggw",
                         ids:"zggwlbId",
                         text:"zggwlb",
                         url:"/eqdict/zggwlb"
@@ -235,6 +235,7 @@
                     $("select[name='mzId']").val(String(data["mzId"]).trim());
                     $("select[name='xllbId']").val(String(data["xllbId"]).trim());
                     $("select[name='zwlbId']").val(String(data["zwlbId"]).trim());
+                    $("select[name='zggwlbId']").val(String(data["zggwlbId"]).trim());
                     $("select[name='zcId']").val(String(data["zcId"]).trim());
                     form.render("select");
 
@@ -262,7 +263,7 @@
                     url:"/kwgl/empgl/saveEmp",
                     type:"POST",
                     contentType:"application/json",
-                    data:["userId","userXm","mzId","sexId","sfzh","tel","xllbId","byyx","zwlbId","zcId","qzzp"],
+                    data:["userId","userXm","mzId","sexId","sfzh","tel","xllbId","byyx","zggwlbId","zwlbId","zcId","qzzp"],
                     param: {
                         1: "bmId"
                     },done:function(res){

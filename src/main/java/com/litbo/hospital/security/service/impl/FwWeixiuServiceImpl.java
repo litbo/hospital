@@ -47,27 +47,33 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
 
     @Override
     public int jumpYwwx(FwYwwx fwYwwx) {
-        int i = fwWeixiuDao.addFwYwwx(fwYwwx);
-        fwBaoxiuDao.updateBaoxiuStatus(fwYwwx.getFwId(),100);
-        FwLcjl fwLcjl = new FwLcjl();
-        fwLcjl.setUserId(fwYwwx.getWxrId());
-        fwLcjl.setCreatTime(new Date());
-        fwLcjl.setBxId(fwYwwx.getFwId());
-        fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
-        fwLcjlDao.insertFwLcjl(fwLcjl);
-        return i;
+        if(fwBaoxiuDao.findFwBaoxiu(fwYwwx.getFwId()).getBxStatus()==4){
+            int i = fwWeixiuDao.addFwYwwx(fwYwwx);
+            fwBaoxiuDao.updateBaoxiuStatus(fwYwwx.getFwId(),14);
+            FwLcjl fwLcjl = new FwLcjl();
+            fwLcjl.setUserId(fwYwwx.getWxrId());
+            fwLcjl.setCreatTime(new Date());
+            fwLcjl.setBxId(fwYwwx.getFwId());
+            fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
+            fwLcjlDao.insertFwLcjl(fwLcjl);
+            return i;
+        }
+        return 0;
     }
 
     @Override
     public int jumpPj(String userId,String fwId) {
-        int i = fwBaoxiuDao.updateBaoxiuStatus(fwId, 5);
-        FwLcjl fwLcjl = new FwLcjl();
-        fwLcjl.setUserId(userId);
-        fwLcjl.setCreatTime(new Date());
-        fwLcjl.setBxId(fwId);
-        fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
-        fwLcjlDao.insertFwLcjl(fwLcjl);
-        return i;
+        if(fwBaoxiuDao.findFwBaoxiu(fwId).getBxStatus()==4){
+            int i = fwBaoxiuDao.updateBaoxiuStatus(fwId, 5);
+            FwLcjl fwLcjl = new FwLcjl();
+            fwLcjl.setUserId(userId);
+            fwLcjl.setCreatTime(new Date());
+            fwLcjl.setBxId(fwId);
+            fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
+            fwLcjlDao.insertFwLcjl(fwLcjl);
+            return i;
+        }
+        return 0;
     }
 
     @Override
@@ -155,15 +161,19 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
 
     @Override
     @Transactional
-    public void addFwWeixiu(FwWeixiu fwWeixiu,String userId) {
-        fwWeixiuDao.addFwWeiXiu(fwWeixiu);
-        fwBaoxiuDao.updateBaoxiuStatus(fwWeixiu.getFwId(),EnumProcess.FW_WX_QR.getCode());
-        FwLcjl fwLcjl = new FwLcjl();
-        fwLcjl.setUserId(userId);
-        fwLcjl.setCreatTime(new Date());
-        fwLcjl.setBxId(fwWeixiu.getFwId());
-        fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
-        fwLcjlDao.insertFwLcjl(fwLcjl);
+    public int addFwWeixiu(FwWeixiu fwWeixiu,String userId) {
+        if(fwBaoxiuDao.findFwBaoxiu(fwWeixiu.getFwId()).getBxStatus() == 4){
+            int i = fwWeixiuDao.addFwWeiXiu(fwWeixiu);
+            fwBaoxiuDao.updateBaoxiuStatus(fwWeixiu.getFwId(),EnumProcess.FW_WX_QR.getCode());
+            FwLcjl fwLcjl = new FwLcjl();
+            fwLcjl.setUserId(userId);
+            fwLcjl.setCreatTime(new Date());
+            fwLcjl.setBxId(fwWeixiu.getFwId());
+            fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
+            fwLcjlDao.insertFwLcjl(fwLcjl);
+            return i;
+        }
+        return 0;
     }
 
 

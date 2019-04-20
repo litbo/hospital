@@ -101,4 +101,32 @@ public interface FwBaoxiuDao {
 
     @Update("update eq_info set eq_syzt = '在用' where eq_id = #{eqId}")
     public void updateEqStatussy(String eqId);
+
+    @Select("SELECT COUNT(eq_id) FROM fw_baoxiu WHERE bx_status = #{status}")
+    public int selectCountByStatus(Integer status);
+
+    @Select("SELECT COUNT(eq_id) FROM fw_baoxiu")
+    public int selectCount();
+
+    @Select("SELECT COUNT(eq_id) FROM fw_baoxiu WHERE bx_status != 100 AND jjx_status = #{status}")
+    public int selectJjxCount(Integer status);
+
+    @Select("SELECT\n" +
+            "bm.bm_name,\n" +
+            "eq.eq_name,\n" +
+            "bx.gzxx,\n" +
+            "bx.bx_time,\n" +
+            "emp.user_xm zxrName,\n" +
+            "bx.jjx_status,\n" +
+            "bx.bx_status\n" +
+            "FROM\n" +
+            "dbo.fw_baoxiu AS bx \n" +
+            "LEFT JOIN dbo.s_bm AS bm ON bx.bxks_id = bm.bm_id\n" +
+            "LEFT JOIN dbo.eq_info AS eq ON eq.eq_id = bx.eq_id\n" +
+            "LEFT JOIN fw_shouli AS sl ON bx.id = sl.id\n" +
+            "LEFT JOIN s_emp AS emp ON emp.user_id = sl.slr_id\n" +
+            "WHERE\n" +
+            "bx.bx_status != 100")
+    public List<wxInfoListVo> selectWxInfo();
+
 }

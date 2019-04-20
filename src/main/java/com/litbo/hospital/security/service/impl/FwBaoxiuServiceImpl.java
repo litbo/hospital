@@ -11,6 +11,7 @@ import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.BaoXiuRw;
 import com.litbo.hospital.security.vo.BaoxiuEqVo;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
+import com.litbo.hospital.security.vo.RepairInfoVo;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,22 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
 
     @Autowired
     private EmpDao empDao;
+
+    @Override
+    public RepairInfoVo wxInfoIndex() {
+        int wslEqCount = fwBaoxiuDao.selectCountByStatus(2);
+        int selectCount = fwBaoxiuDao.selectCount();
+        int i = fwBaoxiuDao.selectCountByStatus(100);
+        RepairInfoVo repairInfoVo = new RepairInfoVo();
+        repairInfoVo.setWslEqCount(wslEqCount);
+        repairInfoVo.setSlEqCount(selectCount-i-wslEqCount);
+        repairInfoVo.setWxEqCount(selectCount-i);
+        repairInfoVo.setDJjxEqCount(fwBaoxiuDao.selectJjxCount(1));
+        repairInfoVo.setZJjxEqCount(fwBaoxiuDao.selectJjxCount(2));
+        repairInfoVo.setGJjxEqCount(fwBaoxiuDao.selectJjxCount(3));
+        repairInfoVo.setWxInfoList(fwBaoxiuDao.selectWxInfo());
+        return repairInfoVo;
+    }
 
     @Override
     public PageInfo getBaoxiuEq(String userId,Integer pageSize,Integer pageNum,String bmName,String eqName) {
@@ -82,7 +99,6 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
         fwBaoxiu.setId(id);
         fwBaoxiu.setBxTime(new Date());
         fwBaoxiu.setBxStatus(EnumProcess.FW_BX_SL.getCode());
-        fwBaoxiu.setJjxStatus(1);
         fwBaoxiuDao.addBaoxiu(fwBaoxiu);
         //添加流程记录
         FwLcjl fwLcjl = new FwLcjl();
