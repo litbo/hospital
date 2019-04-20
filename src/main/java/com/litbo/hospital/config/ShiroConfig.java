@@ -51,9 +51,9 @@ public class  ShiroConfig {
         //过滤器
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
-
+        filterChainDefinitionMap.put("/baoxiu/wxInfo","anon");
         filterChainDefinitionMap.put("/hospital/**","anon");
-
+        filterChainDefinitionMap.put("/show.html","anon");
         filterChainDefinitionMap.put("/js/**","anon");
         filterChainDefinitionMap.put("/layui/**","anon");
         filterChainDefinitionMap.put("/static/**","anon");

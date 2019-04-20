@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>维修信息显示</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/time/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/time/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/time/main.css">
+    <style>
+        html,body{
+            min-width: 1510px;
+            height: 100%;
+            overflow: hidden;
+        }
+        img{
+            margin-top: 15px;
+        }
+        h1{
+            font-size: 4em;
+            font-weight: 800;
+            line-height: 2;
+            text-align: center;
+            margin:0;
+            letter-spacing: 20px;
+            color:#fff;
+            text-shadow:4px 4px 0 #c4c4c4
+        }
+        h2{
+            text-align: center;
+        }
+        .shows_head th{
+            text-align: center;
+            font-weight:600;
+            font-size: 19px;
+            width:15%
+        }
+        .showTable td{
+            height:40px;
+            text-align: center;
+            font-size: 17px;
+            width:15.2%
+        }
+        .showLogo{
+            width: 100%;
+            height: 60px;
+        }
+        .showBg{
+            height: 15%;
+            overflow: hidden;
+            background: #56CCF2;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to bottom, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .showMain{
+            height: 85%;
+        }
+        .showMsg{
+            margin-top: 10px;
+            padding-right: 0;
+        }
+        .showMsg li{
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            margin-bottom:10px;
+        }
+        .showTitle {
+            width: 100%;
+            height: 30px;
+            display: block;
+            border-bottom: 1px dotted #ccc;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .showNum{
+            font-size:21px;
+            font-weight: 600;
+        }
+        .showTip{
+            color:#000;
+            font-size: 14px;
+        }
+        .c_red{
+            color:#f10214;
+        }
+        .c_org{
+            color: #ff940f;
+        }
+        .c_gre{
+            color:#00B83F;
+        }
+        .c_blu{
+            color:#00b7ee;
+        }
+        .showTab{
+            height: 100%;
+        }
+        .maxCol{
+            max-width: 300px;
+            min-width: 200px;
+        }
+        .shows_head{
+            height:6%;
+        }
+        .shows_body{
+            height:91%;
+            overflow-y: auto;
+        }
+        .showTable{
+            margin:0;
+        }
+        .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even){
+            color:#ce8e2e;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row showBg">
+    <div class="col-xs-2">
+        <img src="/static/admin/images/yhd.png" class="showLogo" alt="LOGO">
+    </div>
+    <div class="col-xs-7">
+        <h1 id="title">维修信息</h1>
+    </div>
+    <div class="col-xs-3">
+        <div class="time">
+            <main>
+                <!-- 星期几 -->
+                <div class="days">
+                    <div class="day">
+                        <p class="monday">星期一</p>
+                    </div>
+                    <div class="day">
+                        <p class="tuesday">星期二</p>
+                    </div>
+                    <div class="day">
+                        <p class="wednesday">星期三</p>
+                    </div>
+                    <div class="day">
+                        <p class="thursday">星期四</p>
+                    </div>
+                    <div class="day">
+                        <p class="friday">星期五</p>
+                    </div>
+                    <div class="day">
+                        <p class="saturday">星期六</p>
+                    </div>
+                    <div class="day">
+                        <p class="sunday">星期日</p>
+                    </div>
+                </div>
+                <!-- CLOCK -->
+                <div class="clock">
+                    <!-- 小时 -->
+                    <div class="numbers">
+                        <p class="hours"></p>
+                        <p class="placeholder">88</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <!-- 分 -->
+                    <div class="numbers">
+                        <p class="minutes"></p>
+                        <p class="placeholder">88</p>
+                    </div>
+
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <!-- 秒 -->
+                    <div class="numbers">
+                        <p class="seconds"></p>
+                        <p class="placeholder">88</p>
+                    </div>
+                    <!-- 上午 / 下午 -->
+                    <div class="am-pm">
+                        <!-- AM -->
+                        <div>
+                            <p class="am">am</p>
+                        </div>
+                        <!-- PM -->
+                        <div>
+                            <p class="pm">pm</p>
+                        </div>
+                    </div>
+                </div><!-- END CLOCK -->
+            </main>
+
+        </div>
+    </div>
+</div>
+<div class="layui-row showMain">
+    <div class="col-xs-1 showMsg" style="padding-right: 0;">
+        <ul>
+            <li>
+                <span class="showTitle">科室：</span>
+                <span class="showNum">
+                    <span class="f_ks">0</span>
+                </span>
+            </li>
+            <li>
+                <span class="showTitle">设备：</span>
+                <span class="showNum">
+                    <span class="wxEqCount">0</span>
+                    <span class="showTip">(台)</span>
+                </span>
+            </li>
+            <li>
+                <span class="showTitle">受理：</span>
+                <span class="showNum">
+                    <span class="slEqCount">0</span>
+                    <span class="showTip">(台)</span>
+                </span>
+            </li>
+            <li>
+                <span class="showTitle">未受理：</span>
+                <span class="showNum c_blu">
+                    <span class="wslEqCount">0</span>
+                    <span class="showTip">(台)</span>
+                </span>
+            </li>
+            <li>
+                <span class="showTitle">高紧急：</span>
+                <span class="showNum c_red">
+                    <span class="gjjxEqCount">0</span>
+                    <span class="showTip">(台)</span>
+                </span>
+            </li>
+            <li>
+                <span class="showTitle">中紧急：</span>
+                <span class="showNum c_org">
+                    <span class="zjjxEqCount">0</span>
+                    <span class="showTip">(台)</span>
+                </span>
+            </li>
+            <li>
+                <span class="showTitle">低紧急：</span>
+                <span class="showNum c_gre">
+                    <span class="djjxEqCount">0</span>
+                    <span class="showTip">(台)</span>
+                </span>
+            </li>
+            <li>
+                <span class="showTitle">执行人：</span>
+                <span class="showNum">
+                    <span class="f_zxr">0</span>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-11 showTab">
+        <div class="shows_head">
+            <table class="layui-table" lay-even  lay-skin="line">
+                <thead>
+                <tr>
+                    <th>部门</th>
+                    <th>设备</th>
+                    <th class="maxCol">故障现象</th>
+                    <th>报修时间</th>
+                    <th>执行人</th>
+                    <th>紧急性</th>
+                    <th>当前状况</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="shows_body">
+            <table class="showTable layui-table" lay-even  lay-skin="line">
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    var timer = null
+        ,timer1 = null;
+    var loadTime = 3600000;//后台请求时间，1H = 3600000毫秒
+    function runOne(){
+        $.ajax({
+            url:"/baoxiu/wxInfo",
+            type:"GET",
+            success:function(res){
+                if(res.code === 0){
+                    for(var name in res.data){
+                        if(res.data.hasOwnProperty(name)){
+                            var $sp = $("span ."+name);
+                            if($sp.length > 0){
+                                $sp.text(res.data[name]);
+                            }
+                        }
+                    }
+
+                    var $tb = $(".showTable tbody"),list = res.data["wxInfoList"];
+                    if(list){
+                        $tb.html("");
+                        for(var i=0;i<list.length;i++){
+                            $tb.append(
+                                $("<tr>").append(
+                                    $("<td>").text(list[i]["bmName"])//部门
+                                ).append(
+                                    $("<td>").text(list[i]["eqName"])//设备
+                                ).append(
+                                    $("<td>").attr("class","maxCol").text(list[i]["gzxx"])//故障现象
+                                ).append(
+                                    $("<td>").text(list[i]["bxTime"])//报修时间
+                                ).append(
+                                    $("<td>").text(list[i]["zxrName"])//执行人
+                                ).append(
+                                    $("<td>").text(list[i]["jjxStatusString"])//紧急性
+                                ).append(
+                                    $("<td>").text(list[i]["bxStatusString"])//当前状况
+                                )
+                            )
+                        }
+                        putMsg({
+                            msg:"数据已刷新！"
+                        });
+                        scroll();
+                    }
+                }
+            }
+        })
+    }
+    function scroll() {
+        var height = $(".shows_body")[0].clientHeight;
+        var cHeight = $(".showTable")[0].clientHeight;
+        var length = 0;
+        var time = 5000//表格滚动延时 0.5s
+            ,frequency = 40;//每次移动像素 40px（初始行高大约40px）
+        function doSc(){
+            length += frequency;
+            //console.log(" length ="+length+" height ="+height," h/3 ="+height/(Number(Math.ceil(cHeight/height))+0.5)," num = "+(Number(Math.ceil(cHeight/height))+0.5));
+            if(length >= height/(Number(Math.ceil(cHeight/height))+0.5)){
+                length = 0;
+            }
+            $(".shows_body").scrollTop(length);
+        }
+        clearInterval(timer1);
+        timer1 = setInterval(doSc,time);
+
+        $(".shows_body").on("mouseover",function(){
+            clearInterval(timer1)
+        }).on("mouseleave",function(){
+            clearInterval(timer1);
+            timer1 = setInterval(doSc,time);
+        })
+    }
+    timer = setInterval(runOne,loadTime);
+    runOne();
+</script>
+<script type="text/javascript">
+    //invokes functions as soon as window loads
+    //window.onload = function(){
+        time();
+        ampm();
+        whatDay();
+        setInterval(function(){
+            time();
+            ampm();
+            whatDay();
+        }, 1000);
+    //};
+
+
+    //时间处理
+    function time(){
+        var date = new Date(),
+            hours = date.getHours(),
+            minutes = date.getMinutes(),
+            seconds = date.getSeconds();
+
+        //make clock a 12 hour clock instead of 24 hour clock
+        hours = (hours > 12) ? (hours - 12) : hours;
+        hours = (hours === 0) ? 12 : hours;
+
+        //invokes function to make sure number has at least two digits
+        hours = addZero(hours);
+        minutes = addZero(minutes);
+        seconds = addZero(seconds);
+
+        //changes the html to match results
+        document.getElementsByClassName('hours')[0].innerHTML = hours;
+        document.getElementsByClassName('minutes')[0].innerHTML = minutes;
+        document.getElementsByClassName('seconds')[0].innerHTML = seconds;
+    }
+
+    //添加0
+    function addZero (val){
+        return (val <= 9) ? ("0" + val) : val;
+    }
+
+    //上午下午判断
+    function ampm(){
+        var date = new Date(),
+            hours = date.getHours(),
+            am = document.getElementsByClassName("am")[0].classList,
+            pm = document.getElementsByClassName("pm")[0].classList;
+
+
+        (hours >= 12) ? pm.add("light-on") : am.add("light-on");
+        (hours >= 12) ? am.remove("light-on") : pm.remove("light-on");
+    }
+
+    //星期数渲染
+    function whatDay(){
+        var date = new Date(),
+            currentDay = date.getDay()-1,
+            $days = $(".day");
+        $days.each(function(index){
+            if(index === currentDay){
+                $days.eq(index).addClass("light-on");
+            }else{
+                $days.eq(index).removeClass("light-on");
+            }
+        });
+    }
+</script>
+</html>
