@@ -1,14 +1,12 @@
 package com.litbo.hospital.user.dao;
 
 import com.litbo.hospital.user.bean.EqCs;
-import com.litbo.hospital.user.dao.provider.CsProvider;
 import com.litbo.hospital.user.vo.GysVo;
 import com.litbo.hospital.user.vo.ScsVo;
 import com.litbo.hospital.user.vo.WxsVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 
@@ -33,5 +31,6 @@ public interface CsDao {
     @Select("select sbcs_id as sbcs_id_scs,sbcs_name as scsName,sbcs_lxr1,sbcs_lxdh1,email from eq_cs WHERE sb_cslb_id = 4 " +
             "AND  sbcs_name like '%'+#{sbcsName}+'%'")
     List<EqCs> listDsfWxsByX(@Param("sbcsName") String sbcsName);
+
 
 }

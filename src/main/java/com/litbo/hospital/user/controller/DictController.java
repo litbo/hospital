@@ -80,6 +80,8 @@ public class DictController {
         return Result.success(zggwlb);
     }
 
+    
+
     @RequestMapping("/listMz")
     public Result listMz(){
         List<Mz> mz = dictDao.listMz();

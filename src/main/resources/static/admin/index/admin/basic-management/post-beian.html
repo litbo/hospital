@@ -25,9 +25,9 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 </script>
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
+    <!--<div class="addBtn">-->
+        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
+    <!--</div>-->
     <div class="hidden-xs"  id="moreBar">
         <span>备案日期：</span>
         <div class="layui-input-inline">
@@ -83,13 +83,22 @@
                     }
                 }
                 , done: function (obj) {
+
                     tableFunc({
-                        tools:{
-                            type:2,
+                        "obj": obj,
+                        "toolFunc": [{
+                            type: 2,
+                            title: "再审核",
                             event: "revalue",
-                            content:"post-check-revalue.html",
+                            content: "./post-check-revalue.html",
                             dataUrl:["gwId"]
-                        }
+                        } , {
+                            type: 2,
+                            title: "职责详细信息",
+                            event: "detail",
+                            content: "./zhizi-view.html",
+                            dataUrl:["gwId"]
+                        }]
                     })
 
                 },date :{

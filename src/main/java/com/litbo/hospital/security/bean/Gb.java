@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Gb {
-    private String gbId;
+    private Integer gbId;
     private String gb;
 }

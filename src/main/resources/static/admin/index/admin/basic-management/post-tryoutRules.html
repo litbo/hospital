@@ -25,9 +25,9 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 </script>
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
+    <!--<div class="addBtn">-->
+        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
+    <!--</div>-->
     <div class="hidden-xs"  id="moreBar">
         <span>试用期开始日期：</span>
         <div class="layui-input-inline">
@@ -43,6 +43,9 @@
 </script>
 
 
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">详细</a>
+</script>
 
 
 <script>
@@ -61,6 +64,7 @@
                     , {field: 'gwId', title: '岗位职责编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'gwName', title: '岗位职责名称', minWidth: 150}
                     , {field: 'ztDate', title: '试用期开始日期', minWidth: 150,sort:true}
+                    , {fixed:'right',Width: 300,align:'center',toolbar: "#bar",template:""}
                 ]]
                 , url: "/supervise/gwgl/listGwsByGwZt?gwZt=2"
                 , request: {
@@ -80,7 +84,16 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [ {
+                            type: 2,
+                            title: "职责详细信息",
+                            event: "detail",
+                            content: "./zhizi-view.html",
+                            dataUrl:["gwId"]
+                        }]
+                    })
                 }
             },
             reSet:{
