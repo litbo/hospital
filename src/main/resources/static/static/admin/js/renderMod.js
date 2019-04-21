@@ -213,7 +213,7 @@ function render(renderParam){
 
                 //文件上传事件
                 function cUp(options) {
-                    var dataP = {}, valus = "";
+                    var dataP = {}, valus = "",backVal = null;
                     if (Type(options.data) === "array") {
                         //dataP 提交的数据 填写的表单name值
                         dataP = getFormValue(options.data);
@@ -230,8 +230,8 @@ function render(renderParam){
                     }
                     options.data = dataP;
                     //console.log(options);
-                    upload.render(options);
-                    file.func && file.func();
+                    backVal = upload.render(options);
+                    file.func && file.func(backVal);
                     if (file.bindAction) {
                         $(file.bindAction).on('click', function () {
                             return false;

@@ -28,6 +28,9 @@
             letter-spacing: 3px;
             margin: 10px 0 30px;
         }
+        td{
+            max-width: 150px
+        }
     </style>
 </head>
 <body>
@@ -348,14 +351,19 @@
                                         <label class="layui-form-label">设备照片</label>
                                         <div class="layui-input-block">
                                             <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp">选择文件</button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp_sub">上传文件</button>
                                         </div>
                                     </div>
-                                    <div class="layui-form-item" pane>
-                                        <label class="layui-form-label">预览</label>
-                                        <div class="layui-input-block">
-                                            <div class="img_show">
-                                            </div>
-                                        </div>
+                                    <div class="layui-upload-list">
+                                        <table class="layui-table">
+                                            <thead>
+                                            <tr><th>文件名</th>
+                                                <th>大小</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr></thead>
+                                            <tbody id="demoList1"></tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
@@ -363,40 +371,22 @@
                                         <label class="layui-form-label">铭牌照片</label>
                                         <div class="layui-input-block">
                                             <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="mpzp">选择文件</button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="mpzp_sub">上传文件</button>
                                         </div>
                                     </div>
-                                    <div class="layui-form-item" pane>
-                                        <label class="layui-form-label">预览</label>
-                                        <div class="layui-input-block">
-                                            <div class="img_show1">
-                                            </div>
-                                        </div>
+                                    <div class="layui-upload-list">
+                                        <table class="layui-table">
+                                            <thead>
+                                            <tr><th>文件名</th>
+                                                <th>大小</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr></thead>
+                                            <tbody id="demoList"></tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-
-                        <!--    <div class="layui-row">
-                                <div class="col-xs-12">
-                                    <fieldset class="layui-elem-field layui-field-title">
-                                        <legend>设备配置信息</legend>
-                                    </fieldset>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="layui-form-item" pane style="margin-bottom:-10px;">
-                                        <label class="layui-form-label col-xs-12" style="padding:8px 10px!important">设备配置信息</label>
-                                        <div class="layui-input-block">
-                                            <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="addNew"><i
-                                                    class="fas fa-plus"></i>&nbsp;添加
-                                            </button>
-                                            <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table" id="delNew" ><i
-                                                    class="fas fa-trash-alt"></i>&nbsp;删除
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <table id="table" lay-filter="table1"></table>
-                                </div>
-                            </div>-->
-
                             <div class="layui-row">
                                 <div class="col-xs-12">
                                     <fieldset class="layui-elem-field layui-field-title">
@@ -404,7 +394,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="layui-form-item" pane>
+                                    <div class="layui-form-item layui-form-text">
                                         <label class="layui-form-label">安装环境及要求</label>
                                         <div class="layui-input-block">
                                             <textarea class="layui-textarea" name="eqAzhjyq" placeholder="请输入..."></textarea>
@@ -434,9 +424,11 @@
         var emp =  tempValue("rl","emp",false);
         $("#userId").val(emp.userId);
         $("#userXm").val(emp.userXm);
-    })
+    });
 
     formData={};
+    formData.count = 0;//铭牌图片上传数量
+    formData.count1 = 0;//设备图片上传数量
     renderMod={
         form:{
             submit:{
@@ -462,13 +454,6 @@
                     if(formData.gys!==undefined){
                         ad.sbcsIdGys=formData.gys[0].sbcsIdGys
                     }
-              /*      if(doJudg({
-                            "undefined":[formData.radio,formData.eqMpzp,formData.eqSbzp]
-                        })){
-                        putMsg({
-                            alert:"参数不完整"
-                        })
-                    }*/
                     return param = {
                         /*1:formData.radio[0].bmId,*/
                         1:ad.eqSbzp,
@@ -498,22 +483,7 @@
                         6:"sbcsIdGys"
                     },
                     reload:true
-              /*      success:function(){
-                        alert("xx");
-                    }*/
-                }//表单提交函数
-     /*           before:function(data){
-                    for(var i=0;i<data.field.length;i++){
-                        if(data.field[i] === ""){
-                            layer.alert("请确认您填写的信息！");
-                	return false;
-                        }
-                    }
-                },*///表单提交前执行函数
-            /*    func:function(data){
-                    n++;
-                    layer.alert("您已提交 " + n + " 次！");
-                }*///表单提交后执行函数（不论成功与否）
+                }
             },
             date:[
                 {
@@ -551,17 +521,56 @@
                     url:"/eq/uploadFile",
                     accept:"images",
                     acceptMime:"image/*",
-                    auto:true,
-                    bindAction:"#file",
+                    multiple: true,
+                    auto:false,
+                    bindAction:"#sbzp_sub",
+                    number:4,
                     field:"file",
                     choose:function(obj){
-                        files = obj.pushFile();
+                        if(formData.count1 >= 4 ){
+                            putMsg({
+                                alert:"最多只能上传4张图！"
+                            });
+                            return false;
+                        }
+                        var files = obj.pushFile();
                         obj.preview(function(index,file,result){
-                            $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
-                        })
+                            var tr = $(['<tr id="upload-'+ index +'">'
+                                ,'<td>'+ file.name +'</td>'
+                                ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                                ,'<td>等待上传</td>'
+                                ,'<td>'
+                                ,'<button class="layui-btn layui-btn-xs demo-see" data-img="'+result+'">查看</button>'
+                                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                ,'</td>'
+                                ,'</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function(){
+                                layOpen({
+                                    type:1,
+                                    content:"<img src='"+$(this).attr("data-img")+"' style='width:100%;' />",
+                                    area:["80%","80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function(){
+                                layer.confirm("确认删除这张图吗？",function(){
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#mpzp").next().val("");
+                                    formData.count1 --;
+                                });
+                            });
+
+                            $("#demoList1").append(tr);
+                            formData.count1 ++;
+                        });
                     },done:function(res,index,upload){
                         if(res.code===0){
-                            formData.eqSbzp=res.data
+                            formData.eqSbzp=res.data;
                             layer.msg('选择成功！', {
                                 time: 1000 //2秒关闭（如果不配置，默认是3秒）
                             });
@@ -577,18 +586,57 @@
                     elem:"#mpzp",
                     url:"/eq/uploadFile",
                     accept:"images",
-                    acceptMime:"image/!*",
-                    auto:true,
-                    bindAction:"#sub",
+                    acceptMime:"image/*",
+                    auto:false,
+                    multiple: true,
+                    bindAction:"#mpzp_sub",
+                    number:4,
                     field:"file",
                     choose:function(obj){
-                        files = obj.pushFile();
+                        if(formData.count >= 4 ){
+                            putMsg({
+                                alert:"最多只能上传4张图！"
+                            });
+                            return false;
+                        }
+                        var files = obj.pushFile();
                         obj.preview(function(index,file,result){
-                            $(".img_show1").html($("<img>").attr({"src":result,"id":"show_img"}));
-                        })
+                            var tr = $(['<tr id="upload-'+ index +'">'
+                                ,'<td>'+ file.name +'</td>'
+                                ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                                ,'<td>等待上传</td>'
+                                ,'<td>'
+                                ,'<button class="layui-btn layui-btn-xs demo-see" data-img="'+result+'">查看</button>'
+                                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                ,'</td>'
+                                ,'</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function(){
+                                layOpen({
+                                    type:1,
+                                    content:"<img src='"+$(this).attr("data-img")+"' style='width:100%;' />",
+                                    area:["80%","80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function(){
+                                layer.confirm("确认删除这张图吗？",function(){
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#mpzp").next().val("");
+                                    formData.count --;
+                                });
+                            });
+
+                            $("#demoList").append(tr);
+                            formData.count += 1;
+                        });
                     },done:function(res,index,upload){
                         if(res.code===0){
-                            formData.eqMpzp=res.data
+                            formData.eqMpzp=res.data;
                             layer.msg('选择成功！', {
                                 time: 1000 //2秒关闭（如果不配置，默认是3秒）
                             });
