@@ -21,13 +21,11 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-</script>
+
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
+    <!--<div class="addBtn">-->
+        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
+    <!--</div>-->
     <div class="hidden-xs"  id="moreBar">
         <span>备案日期：</span>
         <div class="layui-inline">
@@ -93,12 +91,20 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        tools:{
-                            type:2,
+                        "obj": obj,
+                        "toolFunc": [{
+                            type: 2,
+                            title: "再审核",
                             event: "revalue",
-                            content:"check-revalue.html",
+                            content: "./check-revalue.html",
                             dataUrl:["zdId"]
-                        }
+                        } , {
+                            type: 2,
+                            title: "制度详细信息",
+                            event: "detail",
+                            content: "./zhidu-view.html",
+                            dataUrl:["zdId"]
+                        }]
                     })
                 }
             },

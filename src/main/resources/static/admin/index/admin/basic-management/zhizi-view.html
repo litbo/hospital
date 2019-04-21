@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>职责详情</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 6px!important;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>岗位职责信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">岗位职责名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="gwName" class="layui-input" autocomplete="off" disabled>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">本职工作</li>
+                        <li id="wdsc">文档预览</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <textarea class="layui-textarea" name="gwZz"></textarea>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="layui-upload" style="margin-top:40px;">
+                                <button type="button" class="layui-btn " id="viewFile" >查看文件</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" lay-event="shlc" id="addNew"><i
+                    class="fas"></i>&nbsp;审核流程详情
+            </button>
+        </div>
+
+    </div>
+
+
+    <input type="text" name="docUrl" class="layui-input" autocomplete="off" id="docUrl"   style="display: none">
+
+</form>
+<div id="tips">
+
+</div>
+
+
+
+<script>
+
+
+    renderMod = {
+        form:{
+            date:{
+                elem:'#date',
+                value:today
+            },
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/supervise/gwgl/getGwByGwId",
+                    type:"GET",
+                    data:{gwId:$.getUrlParam('gwId')}
+                }
+            },
+            event:[
+                {
+                    box:"radio",
+                    func:function(){
+                        var $val = $("input[name='ztCzzt']:checked").val();
+                        var xx = $.getUrlParam('ztCzname');
+                        console.log($val);
+                        if($val === "1"){
+                            $("#nextShr").addClass("hidden");
+                            $("#syDays").addClass("hidden");
+                        }else if(xx=="科长审核"){
+                            $("#nextShr").removeClass("hidden");
+                        }else if(xx=="处长审核"){
+                            $("#syDays").removeClass("hidden");
+                        }
+                    }
+                }
+            ]
+        },
+        bind: {
+            addItem: [
+                {
+                    elem:'#addNew',
+                    base:'./child/postSchedule-developmentDetail.html',
+                    key:'abc',
+                    name:'bbb',
+                    before:function(){
+                        var gwId=$.getUrlParam('gwId')
+                        return {
+                            gwId:gwId
+                        }
+                    },
+                    param:["gwId"]
+                }
+            ]
+        }
+
+    }
+
+    $(document).ready(function(){
+
+
+        $("#wdsc").click(function(){
+            var url = $("#docUrl").val()
+            if(url==null||url==""){
+                $("#viewFile").addClass("layui-btn-disabled");
+            }
+        });
+
+        $("#viewFile").click(function(){
+            if($("#viewFile").hasClass("layui-btn-disabled")) return;
+            var url=$('#docUrl').val();
+            layOpen({
+                type:2,
+                content:'/supervise/zdgl/readDocOnline?url='+url,
+                area:["80%","80%"]
+            })
+
+        });
+
+    });
+
+    $(function () {
+        var emp =  tempValue("rl","emp",false);
+        $("#userId").val(emp.userId);
+        $("#userXm").val(emp.userXm);
+        var xx = $.getUrlParam('ztCzname');
+        if (xx == "处长审核") {
+            $("#nextShr").addClass("hidden");
+            $("#syDays").removeClass("hidden");
+        } else if(xx == "科长审核"){
+            $("#nextShr").removeClass("hidden");
+            $("#syDays").addClass("hidden");
+        }
+    })
+
+
+</script>
+</body>
+
+</html>
