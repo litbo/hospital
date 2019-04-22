@@ -94,9 +94,15 @@
     $("#chKey").on("click",function(){
         layui.use("layer",function(){
             var layer = layui.layer
-                ,k =$("input[name='newKey']")
-                ,rk =$("input[name='reKey']")
+                ,k =$("input[name='newKey']").val()
+                ,rk =$("input[name='reKey']").val()
             ;
+            console.log(k);
+            console.log(rk);
+            if(!k || !rk){
+                layer.alert("请输入新密码！");
+                return false;
+            }
             if(k === rk){
                 layer.confirm("确认要修改密码吗？",function(index){
                     layer.close(index);
@@ -108,7 +114,9 @@
                         },
                         success:function (res) {
                             if(res.code === 0){
-                                layer.alert("密码修改成功！")
+                                layer.alert("密码修改成功,请重新登录！",function(){
+                                    top.location.href = "/logout";
+                                });
                             }else{
                                 layer.alert("密码修改失败，请重试！")
                             }
@@ -121,7 +129,8 @@
             }else{
                 layer.alert("两次输入密码不一致！")
             }
-        })
+        });
+        return false;
     })
 </script>
 </body>
