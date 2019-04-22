@@ -429,6 +429,8 @@
     formData={};
     formData.count = 0;//铭牌图片上传数量
     formData.count1 = 0;//设备图片上传数量
+    formData.eqMpzp = [];
+    formData.eqSbzp = [];
     renderMod={
         form:{
             submit:{
@@ -533,7 +535,7 @@
                             });
                             return false;
                         }
-                        var files = obj.pushFile();
+                        var files = this.files = obj.pushFile();
                         obj.preview(function(index,file,result){
                             var tr = $(['<tr id="upload-'+ index +'">'
                                 ,'<td>'+ file.name +'</td>'
@@ -570,14 +572,18 @@
                         });
                     },done:function(res,index,upload){
                         if(res.code===0){
-                            formData.eqSbzp=res.data;
-                            layer.msg('选择成功！', {
-                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
-                            });
+                            formData.eqSbzp.push(res.data);
+                            var tr = $("#demoList1").find('tr#upload-'+ index)
+                                ,tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
                         }
-                        console.log(arguments);
-                        return delete files[index];
+                        this.error(index, upload);
                     },error:function(index,upload){
+                        var tr = $("#demoList1").find('tr#upload-'+ index)
+                            ,tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
                         console.log("index:"+index);
                         console.log("upload"+upload);
                     }
@@ -599,7 +605,7 @@
                             });
                             return false;
                         }
-                        var files = obj.pushFile();
+                        var files = this.files = obj.pushFile();
                         obj.preview(function(index,file,result){
                             var tr = $(['<tr id="upload-'+ index +'">'
                                 ,'<td>'+ file.name +'</td>'
@@ -636,16 +642,20 @@
                         });
                     },done:function(res,index,upload){
                         if(res.code===0){
-                            formData.eqMpzp=res.data;
-                            layer.msg('选择成功！', {
-                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
-                            });
+                            formData.eqMpzp.push(res.data);
+                            var tr = $("#demoList").find('tr#upload-'+ index)
+                                ,tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
                         }
-                        console.log(arguments);
-                        return delete files[index];
+                        this.error(index, upload);
                     },error:function(index,upload){
+                        var tr = $("#demoList").find('tr#upload-'+ index)
+                            ,tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
                         console.log("index:"+index);
-                        console.log("upload"+upload);
+                        console.log("upload:"+upload);
                     }
                 }
             ],
