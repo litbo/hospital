@@ -422,7 +422,6 @@
                         ad.sbcsIdGys=formData.gys[0].sbcsIdGys
                     }
                     return param = {
-                        /*1:formData.radio[0].bmId,*/
                         1:ad.eqSbzp,
                         2:ad.eqMpzp,
                         3:ad.eqPmId,
@@ -542,7 +541,7 @@
                         })
                     },done:function(res,index,upload){
                     if(res.code===0){
-                        formData.eqMpzp=res.data
+                        formData.eqMpzp=res.data;
                         layer.msg('选择成功！', {
                             time: 1000 //2秒关闭（如果不配置，默认是3秒）
                         });
