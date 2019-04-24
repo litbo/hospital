@@ -5,10 +5,7 @@ import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.bean.EqSyxz;
 import com.litbo.hospital.user.dao.provider.EqProvider;
-import com.litbo.hospital.user.vo.EqShowVo;
-import com.litbo.hospital.user.vo.EqVo;
-import com.litbo.hospital.user.vo.SelectEqVo;
-import com.litbo.hospital.user.vo.SelectFlEqVo;
+import com.litbo.hospital.user.vo.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -22,7 +19,7 @@ public interface EqDao {
     List<EqShowVo> listShowEqs();
 
     @InsertProvider(type = EqProvider.class , method = "addEq")
-    int addEq(EqInfo eqInfo);
+    int addEq(EqInfoVo eqInfo);
 
     @SelectProvider(type = EqProvider.class , method = "selectEqByX")
     List<EqShowVo> listEqByX(SelectEqVo selectEqVo);

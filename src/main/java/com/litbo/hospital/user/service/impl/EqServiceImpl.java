@@ -14,10 +14,7 @@ import com.litbo.hospital.user.bean.EqSyxz;
 import com.litbo.hospital.user.dao.EqDao;
 import com.litbo.hospital.user.dao.PmDao;
 import com.litbo.hospital.user.service.EqService;
-import com.litbo.hospital.user.vo.EqVo;
-import com.litbo.hospital.user.vo.SelectEqVo;
-import com.litbo.hospital.user.vo.SelectFlEqVo;
-import com.litbo.hospital.user.vo.SetPmVo;
+import com.litbo.hospital.user.vo.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -95,7 +92,7 @@ public class EqServiceImpl implements EqService {
 
     @Override
     @Transactional
-    public int addEq(EqInfo eqInfo) {
+    public int addEq(EqInfoVo eqInfo) {
 
         //设置设备拼音码
         String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
@@ -128,37 +125,57 @@ public class EqServiceImpl implements EqService {
         String sbzp = null;
         String mpzpUrl =null;
         String sbzpUrl =null;
+        String totalSbzpUrl =null;
+        String totalMpzpUrl=null;
         java.io.File file = new java.io.File(filePath);
-        if(eqInfo.getEqMpzp()!=null){
-            mpzp = UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
-            mpzpUrl = filePath+mpzp;
-            if(!file.exists()){
-                file.mkdirs();
+
+        if(eqInfo.getMpzp()!=null){
+            for (String eqMpzp : eqInfo.getMpzp()) {
+                mpzp = UUID.randomUUID().toString()+eqMpzp.substring(eqMpzp.lastIndexOf("."));
+                mpzpUrl = filePath+mpzp;
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+                try {
+                    ChangeFile.changeFile(eqMpzp,mpzpUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(totalMpzpUrl==null){
+                    totalMpzpUrl="/"+mpzp;
+                }else {
+                    totalMpzpUrl = totalMpzpUrl+","+"/"+mpzp;
+                }
+
             }
-            try {
-                ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzpUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
-        if(eqInfo.getEqSbzp()!=null){
-            sbzp =  UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
-            sbzpUrl = filePath+ sbzp;
-            if(!file.exists()){
-                file.mkdirs();
+        if(eqInfo.getSbzp()!=null){
+            for (String eqSbzp : eqInfo.getSbzp()) {
+                sbzp =  UUID.randomUUID().toString()+eqSbzp.substring(eqSbzp.lastIndexOf("."));
+                sbzpUrl = filePath+ sbzp;
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+                try {
+                    ChangeFile.changeFile(eqSbzp,sbzpUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(totalSbzpUrl==null){
+                    totalSbzpUrl="/"+sbzp;
+                }else {
+                    totalSbzpUrl = totalSbzpUrl+","+"/"+sbzp;
+                }
+
             }
-            try {
-                ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzpUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
 
         ChangeFile.deleteDir(path+"/tmp/");
 
-        eqInfo.setEqMpzp("/"+mpzp);
-        eqInfo.setEqSbzp("/"+sbzp);
-
+        eqInfo.setEqMpzp(totalMpzpUrl);
+        eqInfo.setEqSbzp(totalSbzpUrl);
         //存
         return eqDao.addEq(eqInfo);
     }
@@ -211,7 +228,7 @@ public class EqServiceImpl implements EqService {
 
             for (Map<String, Object> map : mapList) {
                 /*SUser user = parseMap2Object(map, SUser.class);*/
-                EqInfo eqInfo = parseMap2Object(map,EqInfo.class);
+                EqInfoVo eqInfo = parseMap2Object(map,EqInfoVo.class);
                 if(eqInfo.getEqBmName()!=null){
                     eqInfo.setEqBmid(eqDao.getBmIdByName(eqInfo.getEqBmName()));
                 }

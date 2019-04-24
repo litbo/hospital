@@ -6,10 +6,7 @@ import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.bean.EqSyxz;
-import com.litbo.hospital.user.vo.EqVo;
-import com.litbo.hospital.user.vo.SelectEqVo;
-import com.litbo.hospital.user.vo.SelectFlEqVo;
-import com.litbo.hospital.user.vo.SetPmVo;
+import com.litbo.hospital.user.vo.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -21,7 +18,7 @@ public interface EqService {
 
     PageInfo listShowEqs(int pageNum, int pageSize);
 
-    int addEq(EqInfo eqInfo);
+    int addEq(EqInfoVo eqInfo);
 
     PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo);
 
