@@ -529,7 +529,7 @@
                     number:4,
                     field:"file",
                     choose:function(obj){
-                        if(formData.count1 >= 4 ){
+                        if(formData.count1 > 4 ){
                             putMsg({
                                 alert:"最多只能上传4张图！"
                             });
@@ -562,7 +562,7 @@
                                 layer.confirm("确认删除这张图吗？",function(){
                                     delete files[index]; //删除对应的文件
                                     tr.remove();
-                                    var inp = $("#mpzp").next().val("");
+                                    var inp = $("#sbzp").next().val("");
                                     formData.count1 --;
                                 });
                             });
@@ -599,7 +599,7 @@
                     number:4,
                     field:"file",
                     choose:function(obj){
-                        if(formData.count >= 4 ){
+                        if(formData.count > 4 ){
                             putMsg({
                                 alert:"最多只能上传4张图！"
                             });
