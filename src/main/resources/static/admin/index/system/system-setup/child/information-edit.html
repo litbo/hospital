@@ -530,14 +530,7 @@
                             });
                             return false;
                         }
-                        var files  = obj.pushFile();
-
-                        if(!isCan1){
-                            isCan1 = JSON.stringify(files);
-                        }else{
-
-                        }
-                        this.files = files;
+                        var files  = this.files = obj.pushFile();
                         obj.preview(function (index, file, result) {
                             var tr = $(['<tr id="upload-' + index + '">'
                                 , '<td>' + file.name + '</td>'
@@ -550,23 +543,18 @@
                                 , '</tr>'].join(''));
 
                             //查看
-                            tr.find('.demo-see').on('click', function () {
-                                layOpen({
-                                    type: 1,
-                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
-                                    area: ["80%", "80%"]
-                                });
-                                return false;
-                            });
+                            tr.find('.demo-see').on('click',showsI);
 
                             //删除
                             tr.find('.demo-delete').on('click', function () {
-                                layer.confirm("确认删除这张图吗？", function () {
+                                layer.confirm("确认删除这张图吗？", function (el) {
                                     delete files[index]; //删除对应的文件
                                     tr.remove();
                                     var inp = $("#sbzp").next().val("");
                                     formData.count1--;
+                                    layer.close(el);
                                 });
+                                return false;
                             });
 
                             $("#demoList1").append(tr);
@@ -574,15 +562,31 @@
                         });
                     },
                     done: function (res, index, upload) {
-                        if (res.code === 0) {
-                            formData.eqSbzp.push(res.data);
-                            var tr = $("#demoList1").find('tr#upload-' + index)
-                                , tds = tr.children();
-                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-                            tds.eq(3).html(''); //清空操作
-                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        if(formData.count1 > 4) {
+                            var tr1 = $("#demoList1").find('tr#upload-' + index)
+                                , tds1 = tr1.children();
+                            tds1.eq(2).html('<span style="color: #f19102;">等待重传</span>');
+                            putMsg({
+                                alert: "最多只能上传4张图片，请删除多余图片！"
+                            });
+                            return false;
+                        }else{
+                            if (res.code === 0) {
+                                formData.eqSbzp.push(res.data);
+                                var tr = $("#demoList1").find('tr#upload-' + index)
+                                    , tds = tr.children();
+                                tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                                tds.eq(3).html(
+                                    $("<button>").attr({
+                                        class:"layui-btn layui-btn-xs demo-see",
+                                        dataImg: res.data
+                                    }).text("查看").on("click",showsI)
+                                );
+                                return delete this.files[index]; //删除文件队列已经上传成功的文件
+                            }
+                            this.error(index, upload);
                         }
-                        this.error(index, upload);
+
                     },
                     error: function (index, upload) {
                         var tr = $("#demoList1").find('tr#upload-' + index)
@@ -603,20 +607,10 @@
                     field: "file",
                     number:4,
                     choose: function (obj) {
-                        var num = 0;
-                        for(var nn in obj.pushFile()){
-                            num ++;
-                        }
-                        if (formData.count+num > 4) {
+                        if (formData.count > 4) {
                             putMsg({
                                 alert: "上传数量已打最大值！"
                             });
-                            var ff = obj.pushFile();
-                            for(var n in ff){
-                                if(ff.hasOwnProperty(n)){
-                                    delete ff[n]
-                                }
-                            }
                             return false;
                         }
                         var files = this.files = obj.pushFile();
@@ -632,38 +626,49 @@
                                 , '</tr>'].join(''));
 
                             //查看
-                            tr.find('.demo-see').on('click', function () {
-                                layOpen({
-                                    type: 1,
-                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
-                                    area: ["80%", "80%"]
-                                });
-                                return false;
-                            });
+                            tr.find('.demo-see').on('click',showsI);
 
                             //删除
                             tr.find('.demo-delete').on('click', function () {
-                                layer.confirm("确认删除这张图吗？", function () {
+                                layer.confirm("确认删除这张图吗？", function (el) {
                                     delete files[index]; //删除对应的文件
                                     tr.remove();
                                     var inp = $("#mpzp").next().val("");
                                     formData.count--;
+                                    layer.close(el);
                                 });
+                                return false;
                             });
 
                             $("#demoList").append(tr);
                             formData.count++;
                         });
-                    }, done: function (res, index, upload) {
-                        if (res.code === 0) {
-                            formData.eqMpzp.push(res.data);
-                            var tr = $("#demoList1").find('tr#upload-' + index)
-                                , tds = tr.children();
-                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-                            tds.eq(3).html(''); //清空操作
-                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                    }
+                    ,done: function (res, index, upload) {
+                        if(formData.count > 4){
+                            var tr1 = $("#demoList").find('tr#upload-' + index)
+                                , tds1 = tr1.children();
+                            tds1.eq(2).html('<span style="color: #f19102;">等待重传</span>');
+                            putMsg({
+                                alert: "最多只能上传4张图片，请删除多余图片！"
+                            });
+                            return false;
+                        }else{
+                            if (res.code === 0) {
+                                formData.eqMpzp.push(res.data);
+                                var tr = $("#demoList").find('tr#upload-' + index)
+                                    , tds = tr.children();
+                                tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                                tds.eq(3).html(
+                                    $("<button>").attr({
+                                        class:"layui-btn layui-btn-xs demo-see",
+                                        dataImg: res.data
+                                    }).text("查看").on("click",showsI)
+                                );
+                                return delete this.files[index]; //删除文件队列已经上传成功的文件
+                            }
+                            this.error(index, upload);
                         }
-                        this.error(index, upload);
                     }, error: function (index, upload) {
                         var tr = $("#demoList1").find('tr#upload-' + index)
                             , tds = tr.children();
@@ -717,8 +722,6 @@
                     $("select[name='eqPmId']").val(String(data["eqPmId"]).trim());
 
                     form.render("select");
-                    //console.log(data);
-                    //console.log($.getUrlParam("eqId"));
                     if (data.eqSbzp) {
                         var newSb = data.eqSbzp.split(",");
                         var $sImg = $("#sbImg");
@@ -726,7 +729,7 @@
                         var tr;
                         for (var i = 0; i < newSb.length; i++) {
                             formData.count1 ++ ;
-                            formData.eqMpzp.push(newSb[i]);
+                            formData.eqSbzp.push(newSb[i]);
                             tr = $(['<tr id="upload-n' + i + '">'
                                 , '<td>图片'+(i+1)+ '</td>'
                                 , '<td>-</td>'
@@ -757,8 +760,8 @@
                                         }
                                     }
                                     $("tr#upload-n" + index).remove();
-                                    layer.close(num);
                                     formData.count1--;
+                                    layer.close(num);
                                 });
                                 return false;
                             });
@@ -804,8 +807,8 @@
                                     }
                                     //delete files[index]; //删除对应的文件
                                     $("tr#upload-n" + index).remove();
-                                    layer.close(num);
                                     formData.count1--;
+                                    layer.close(num);
                                 });
                                 return false;
                             });
@@ -858,6 +861,23 @@
 
             ]
         }
+    };
+
+    /*$(".demo-see").on("click",function(){
+        layOpen({
+            type: 1,
+            content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+            area: ["80%", "80%"]
+        });
+        return false;
+    })*/
+    function showsI() {
+        layOpen({
+            type: 1,
+            content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+            area: ["80%", "80%"]
+        });
+        return false;
     }
 </script>
 </body>
