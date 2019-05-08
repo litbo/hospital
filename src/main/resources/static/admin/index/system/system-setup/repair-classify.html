@@ -213,6 +213,7 @@
                         zTreeObj.expandNode(node,isExpand); //关键字为空时是否展开节点
                         return true;
                     }
+                    delete node["hasSearch"];
                     //节点名称和关键字都用toLowerCase()做小写处理
                     if (node[nameKey] && node[nameKey].toLowerCase().indexOf(_keywords.toLowerCase())!==-1) {
                         if(isHighLight){ //如果高亮，对文字进行高亮处理
@@ -251,7 +252,7 @@
                 }
                 var nodesShow = zTreeObj.getNodesByFilter(filterFunc); //获取匹配关键字的节点
                 processShowNodes(nodesShow, _keywords);//对获取的节点进行二次处理
-                $(".tree-container").scrollTop(0);
+                $(".ztree").scrollTop(0);
             }
 
             /**
