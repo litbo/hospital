@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class EqCsServiceImpl implements EqCsService {
@@ -55,8 +56,8 @@ public class EqCsServiceImpl implements EqCsService {
 
     @Override
     public void insertEqCs(EqCs eqCs) {
-        Integer maxId = eqCsDao.getMaxEqId();
-        eqCs.setSbcsId(maxId+1);
+
+        eqCs.setSbcsId(UUID.randomUUID().toString());
         eqCsDao.insertEqCs(eqCs);
     }
 

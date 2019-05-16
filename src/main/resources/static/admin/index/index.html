@@ -231,12 +231,13 @@
                 }else{
                     goo();
                 }
-                function goo(){
+                function goo(index){
                     layui.sessionData("pageLock",{
                         key:"lock",
                         value:"true"
                     });
                     window.locked = true;
+                    layer.close(index);
                     var inn = layOpen({
                         type: 1,
                         content: $("#lock"),

@@ -79,6 +79,7 @@
                                 if (res.code === 0) {
                                     var $sel = $("select[lay-filter='hfr']");
                                     $sel.html("");
+                                    $sel.append("<option value=\"0000000000\">请选择</option>")
                                     for (var i = 0; i < res.data.length; i++) {
                                         $sel.append($('<option>').attr("value",res.data[i]["userId"]).append(res.data[i]["userXm"]));
                                     }

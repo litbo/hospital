@@ -3,6 +3,7 @@ package com.litbo.hospital.user.dao.provider;
 
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
+import com.litbo.hospital.user.vo.EqInfoVo;
 import com.litbo.hospital.user.vo.SelectEqVo;
 import com.litbo.hospital.user.vo.SelectFlEqVo;
 import org.apache.commons.lang3.StringUtils;
@@ -88,7 +89,7 @@ public class EqProvider {
         return SQL;
     }
 
-    public String addEq(EqInfo eqInfo){
+    public String addEq(EqInfoVo eqInfo){
         String SQL=" insert into eq_info (eq_id, eq_sbbh, eq_zcbh, \n" +
                 "      eq_pm_id, eq_gg, eq_xh, \n" +
                 "      zjly_id, eq_jldw_id, eq_price, \n" +

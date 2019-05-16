@@ -9,6 +9,7 @@ import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import com.litbo.hospital.security.vo.RepairInfoVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class FwBaoxiuController {
     @Autowired
     private FwBaoxiuService
             fwBaoxiuService;
-
+    @RequiresGuest
     @GetMapping("/wxInfo")
     public Result wxInfoIndexVo(){
         RepairInfoVo repairInfoVo = fwBaoxiuService.wxInfoIndex();

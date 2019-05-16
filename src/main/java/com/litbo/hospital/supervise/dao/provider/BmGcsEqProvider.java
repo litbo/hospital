@@ -20,7 +20,7 @@ public class BmGcsEqProvider {
                 "   LEFT JOIN eq_info eq ON (swge.eq_id=eq.eq_id) where 1=1" );
         if(!"0000000000".equals(xvo.getBmId()))  sql.append(" and bm.bm_id=#{bmId} ");
         if(!"0000000000".equals(xvo.getUserId())) sql.append(" and emp.user_id=#{userId} ");
-        if(xvo.getEqPym()!=null) sql.append(" and eq.eq_pym like '%'+#{eqPym}+'%' ");
+        if(xvo.getEqPym()!=null&&!"".equals(xvo.getEqPym())) sql.append(" and eq.eq_pym like '%'+#{eqPym}+'%' ");
         return sql.toString();
     }
 }

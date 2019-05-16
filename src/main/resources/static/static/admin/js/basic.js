@@ -1229,6 +1229,7 @@ window.onload = function () {
     //     "right": "0",
     //     "color": "#f10214",
     //     "border": "1px solid",
+    //     "opacity": "0.4",
     //     "padding": "5px",
     //     "z-index": "99999"
     // }).html("当前页面地址：" + window.location.href).on("click", function () {

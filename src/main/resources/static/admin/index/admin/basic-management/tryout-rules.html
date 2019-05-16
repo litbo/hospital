@@ -20,13 +20,11 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-</script>
+
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
+    <!--<div class="addBtn">-->
+        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
+    <!--</div>-->
     <div class="hidden-xs"  id="moreBar">
         <span>试用期日期：</span>
         <div class="layui-input-inline">
@@ -41,7 +39,9 @@
 </script>
 
 
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">详细</a>
+</script>
 
 <script>
 
@@ -60,6 +60,7 @@
                     , {field: 'zdId', title: '制度编号', width:'30%',minWidth: 200,sort:true}
                     , {field: 'zdName', title: '制度名称', minWidth: 150}
                     , {field: 'ztDate', title: '试用期开始日期', minWidth: 150}
+                    , {fixed:'right',Width: 300,align:'center',toolbar: "#bar",template:""}
                 ]]
                 , url: "/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=2"
                 , request: {
@@ -79,7 +80,16 @@
                     }
                 }
                 , done: function (obj) {
-
+                    tableFunc({
+                        "obj": obj,
+                        "toolFunc": [{
+                            type: 2,
+                            title: "制度详细信息",
+                            event: "detail",
+                            content: "./zhidu-view.html",
+                            dataUrl:["zdId"]
+                        }]
+                    })
                 }
             },
             reSet:{

@@ -28,6 +28,20 @@
             letter-spacing: 3px;
             margin: 10px 0 30px;
         }
+        #mpImg,#sbImg{
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        #mpImg ul,#sbImg ul{
+            width:400%;
+        }
+        #mpImg li,#sbImg li{
+            float:left;
+        }
+        .showImg{
+            width: 150px;
+            height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -299,45 +313,22 @@
                             </div>
                             <div class="layui-row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <div class="layui-form-item" pane>
+                                    <div class="layui-form-item layui-form-text" >
                                         <label class="layui-form-label">设备照片</label>
-                                        <div class="layui-input-block">
-                                            <img src="#" id="eqImg" />
+                                        <div class="layui-input-block" id="sbImg">
+                                           <!-- <img src="#" id="eqImg" />-->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
-                                    <div class="layui-form-item" pane>
+                                    <div class="layui-form-item layui-form-text">
                                         <label class="layui-form-label">铭牌照片</label>
-                                        <div class="layui-input-block">
-                                            <img src="#" id="paImg" />
+                                        <div class="layui-input-block" id="mpImg">
+                                            <!--<img src="#" id="paImg" />-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!--<div class="layui-row">
-                                <div class="col-xs-12">
-                                    <fieldset class="layui-elem-field layui-field-title">
-                                        <legend>设备配置信息</legend>
-                                    </fieldset>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="layui-form-item" pane style="margin-bottom:-10px;">
-                                        <label class="layui-form-label col-xs-12" style="padding:8px 10px!important">设备配置信息</label>
-                                        <div class="layui-input-block">
-                                            <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="addNew"><i
-                                                    class="fas fa-plus"></i>&nbsp;添加
-                                            </button>
-                                            <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table" id="delNew" ><i
-                                                    class="fas fa-trash-alt"></i>&nbsp;删除
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <table id="table" lay-filter="table1"></table>
-                                </div>
-                            </div>-->
-
                             <div class="layui-row">
                                 <div class="col-xs-12">
                                     <fieldset class="layui-elem-field layui-field-title">
@@ -345,7 +336,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="layui-form-item layui-textarea" pane>
+                                    <div class="layui-form-item layui-form-text">
                                         <label class="layui-form-label">安装环境及要求</label>
                                         <div class="layui-input-block">
                                             <textarea class="layui-textarea" name="eqAzhjyq" disabled></textarea>
@@ -378,7 +369,6 @@
                     }
                     if(formData.eqMpzp!==undefined){
                         ad.eqMpzp=formData.eqMpzp;
-
                     }
                     if(formData.radio!==undefined){
                         ad.eqPmId=formData.radio[0].eqPmId
@@ -392,15 +382,7 @@
                     if(formData.gys!==undefined){
                         ad.sbcsIdGys=formData.gys[0].sbcsIdGys
                     }
-                    /*      if(doJudg({
-                                  "undefined":[formData.radio,formData.eqMpzp,formData.eqSbzp]
-                              })){
-                              putMsg({
-                                  alert:"参数不完整"
-                              })
-                          }*/
                     return param = {
-                        /*1:formData.radio[0].bmId,*/
                         1:ad.eqSbzp,
                         2:ad.eqMpzp,
                         3:ad.eqPmId,
@@ -428,79 +410,8 @@
                         6:"sbcsIdGys"
                     },
                     reload:true
-                    /*      success:function(){
-                              alert("xx");
-                          }*/
-                }//表单提交函数
-                /*           before:function(data){
-                               for(var i=0;i<data.field.length;i++){
-                                   if(data.field[i] === ""){
-                                       layer.alert("请确认您填写的信息！");
-                               return false;
-                                   }
-                               }
-                           },*///表单提交前执行函数
-                /*    func:function(data){
-                        n++;
-                        layer.alert("您已提交 " + n + " 次！");
-                    }*///表单提交后执行函数（不论成功与否）
-            },
-            file:[
-                {
-                    elem:"#sbzp",
-                    url:"/eq/uploadFile",
-                    accept:"images",
-                    acceptMime:"image/*",
-                    auto:true,
-                    bindAction:"#file",
-                    field:"file",
-                    choose:function(obj){
-                        files = obj.pushFile();
-                        obj.preview(function(index,file,result){
-                            $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
-                        })
-                    },done:function(res,index,upload){
-                        if(res.code===0){
-                            formData.eqSbzp=res.data
-                            layer.msg('选择成功！', {
-                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
-                            });
-                        }
-                        console.log(arguments);
-                        return delete files[index];
-                    },error:function(index,upload){
-                        console.log("index:"+index);
-                        console.log("upload"+upload);
-                    }
-                },
-                {
-                    elem:"#mpzp",
-                    url:"/eq/uploadFile",
-                    accept:"images",
-                    acceptMime:"image/!*",
-                    auto:true,
-                    bindAction:"#sub",
-                    field:"file",
-                    choose:function(obj){
-                        files = obj.pushFile();
-                        obj.preview(function(index,file,result){
-                            $(".img_show1").html($("<img>").attr({"src":result,"id":"show_img"}));
-                        })
-                    },done:function(res,index,upload){
-                        if(res.code===0){
-                            formData.eqMpzp=res.data
-                            layer.msg('选择成功！', {
-                                time: 1000 //2秒关闭（如果不配置，默认是3秒）
-                            });
-                        }
-                        console.log(arguments);
-                        return delete files[index];
-                    },error:function(index,upload){
-                        console.log("index:"+index);
-                        console.log("upload"+upload);
-                    }
                 }
-            ],
+            },
             val: {
                 get:{
                     url:"/eq/getEqById",
@@ -536,12 +447,34 @@
                     }
                 ],
                 func:function(data,form){
-                    console.log(data);
-                    console.log($.getUrlParam("eqId"));
+                    //console.log(data);
+                    //console.log($.getUrlParam("eqId"));
                     $("#eqImg").attr("src",data.eqSbzp);
                     $("#paImg").attr("src",data.eqMpzp);
-                    //$("select[name='eqBmid']").val(String(data["eqBmid"]).trim());
-                    //form.render("select");
+                    if(data.eqSbzp){
+                        var newSb = data.eqSbzp.split(",");
+                        var $sImg = $("#sbImg");
+                        $sImg.html($("<ul>"));
+                        for(var i = 0;i<newSb.length;i++){
+                            $sImg.find("ul").append(
+                                $("<li>").append(
+                                    $("<img>").attr({"src":newSb[i],"class":"showImg"})
+                                )
+                            )
+                        }
+                    }
+                    if(data.eqMpzp){
+                        var newMp = data.eqMpzp.split(",");
+                        var $mImg = $("#mpImg");
+                        $mImg.html($("<ul>"));
+                        for(var j = 0;j<newMp.length;j++){
+                            $mImg.find("ul").append(
+                                $("<li>").append(
+                                    $("<img>").attr({"src":newMp[j],"class":"showImg"})
+                                )
+                            )
+                        }
+                    }
                 }
             }
         },
@@ -579,13 +512,8 @@
                     key:"wxs",
                     name:"dtdt"
                 }
-
-
             ]
         }
-
-
-
     }
 </script>
 </body>

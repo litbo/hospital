@@ -1,0 +1,90 @@
+/*DIGITAL CLOCK FONT*/
+@font-face{
+ font-family:'digital-7';
+ src: url('./fonts/digital-7.ttf');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.time{
+	margin-top: 120px;
+}
+main {
+	width:100%;
+	text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 15px;
+    font-family: 'digital-7', sans-serif;
+}
+
+
+/* DAYS OF THE WEEK */
+div.days {
+	margin: 0 auto;
+	color: #131212;
+}
+
+div.days .day {
+	display: inline-block;
+}
+
+div.days .day p {
+	font-size: 14px;
+	font-weight: bold;
+	font-family: sans-serif;
+	text-transform: uppercase;
+	color: #ffffff2b;
+}
+
+
+/* CLOCK */
+div.clock {
+	margin: 5px 0;
+}
+
+div.clock div{
+	display: inline-block;
+	position: relative;
+}
+
+div.clock div p{
+	color:#f96f1f;
+	font-size: 80px;
+	position: relative;
+	z-index: 100;
+}
+
+div.clock .placeholder {
+	color: #ffffff2b;
+	position: absolute;
+	top: 0;
+	z-index: 50;
+}/*END CLOCK*/
+
+/* AM OR PM*/
+.am-pm {
+	font-family: sans-serif;
+	text-transform: uppercase;
+	width: 20px;
+}
+
+div.am-pm div p {
+	font-size: 12px;
+	font-weight: bold;
+	width: 100%;
+}
+
+.am, .pm {
+	color: #ffffff2b!important;
+}
+
+/*CLASS THAT CHANGES COLOR OF TEXT TO APPEAR LIKE ITS "ON"*/
+.light-on ,.light-on  p{
+	color: #f96f1f!important;
+}

@@ -58,12 +58,12 @@ public class EqController {
     }
 
     /**
-     * 添加设备
+                                                                                                                                                              * 添加设备
      *
      * @return
      **/
     @RequestMapping(value = "/addEq")
-    public Result addEq(@RequestBody EqInfo eqInfo) {
+    public Result addEq(@RequestBody EqInfoVo eqInfo) {
 
             if (es.addEq(eqInfo) > 0) {
             return Result.success();
@@ -71,10 +71,24 @@ public class EqController {
         return Result.error();
     }
     //上传文件
+    @RequestMapping("/uploadFile1")
+    public Result uploadFile(@RequestParam("file") MultipartFile[] multipartFiles){
+        String totalUrl = null;
+        for (MultipartFile multipartFile : multipartFiles) {
+            String url = es.uploadFile(multipartFile);
+            if(totalUrl!=null){
+                totalUrl = totalUrl+","+url;
+            }
+            totalUrl =url;
+        }
+       return Result.success(totalUrl);
+    }
+
     @RequestMapping("/uploadFile")
-    public Result uploadFile(@RequestParam("file") MultipartFile multipartFile){
-       String url = es.uploadFile(multipartFile);
-       return Result.success(url);
+    public Result uploadFile(@RequestParam("file") MultipartFile multipartFiles){
+
+        String url = es.uploadFile(multipartFiles);
+        return Result.success(url);
     }
 
 

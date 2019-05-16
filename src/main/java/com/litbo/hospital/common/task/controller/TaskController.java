@@ -5,7 +5,6 @@ import com.litbo.hospital.common.task.bean.Task;
 import com.litbo.hospital.common.task.service.TaskService;
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
-import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,6 @@ public class TaskController {
         //TODO  已修改
         LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
         String userId = sEmp.getUserId();
-        System.out.println(userId);
         PageInfo pageInfo = taskService.listTaskByUserId(userId,pageNum,pageSize);
         return Result.success(pageInfo);
     }

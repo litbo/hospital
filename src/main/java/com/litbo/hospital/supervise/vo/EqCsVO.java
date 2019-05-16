@@ -4,15 +4,15 @@ import lombok.Data;
 
 @Data
 public class EqCsVO {
-    private Integer sbcsId;
+    private String sbcsId;
 
-    private String sbCslbId;
+    private Integer sbCslbId;
     private String sbCslbName;
 
-    private String gbId;
+    private Integer gbId;
     private String gbName;
 
-    private String jgId;
+    private Integer jgId;
     private String jdName;
 
     private String sbcsName;

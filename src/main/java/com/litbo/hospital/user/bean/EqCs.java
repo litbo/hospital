@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 public class EqCs {
-    private Integer sbcsId;
+    private String sbcsId;
 
     private String sbCslbId;
 
