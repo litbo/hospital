@@ -10,7 +10,7 @@ import java.util.Date;
 public class EqCszjVO {
 
     private Integer cszjId;
-    private Integer sbcsId;
+    private String sbcsId;
     private String sbcsName;
     private String cszjName;
     private String cszjBh;
