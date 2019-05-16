@@ -206,9 +206,10 @@ public class EqServiceImpl implements EqService {
         ids.add(6);
         ids.add(7);
         ids.add(10);
-        ids.add(17);
+        ids.add(18);
         ids.add(19);
         ids.add(23);
+        ids.add(35);
         try {
             inputStream = new ByteArrayInputStream(file.getBytes());
             workbook = WorkbookFactory.create(inputStream);
@@ -296,6 +297,7 @@ public class EqServiceImpl implements EqService {
 
         }catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
         return 1;
     }

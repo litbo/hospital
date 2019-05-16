@@ -40,4 +40,6 @@ public class EqCs {
 
     private String sbcsCsdm;
 
+    private String sbcsZh;
+
 }

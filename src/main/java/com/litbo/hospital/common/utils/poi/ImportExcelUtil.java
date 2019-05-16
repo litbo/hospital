@@ -131,7 +131,7 @@ public class ImportExcelUtil {
                        cell = row.getCell(j);
                     for (Integer id : ids) {
                         if (j == id) {
-                            if (cell != null) {
+                            if (cell != null&&cell.getCellType()!=HSSFCell.CELL_TYPE_BLANK) {
                                 cell.setCellType(1);
                                 String stringCellValue = cell.getStringCellValue();
                                 Calendar calendar = new GregorianCalendar(1900, 0, -1);

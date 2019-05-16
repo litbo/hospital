@@ -20,6 +20,9 @@ public class EqShowVo {
 
     private String eqPym;
 
+    //设备名称id
+    private String eqNid;
+
     private String eqName;
 
     private String eqZcbh;
@@ -40,4 +43,11 @@ public class EqShowVo {
     private Date eqQysj;
 
     private String eqSyzt;
+
+    //生产日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date eqScrq;
+    //折旧年限
+    private Integer eqZjnx;
 }
