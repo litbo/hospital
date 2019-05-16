@@ -16,6 +16,8 @@ public class EqInfo {
 
     //流水号
     private String eqId;
+    //设备名称id
+    private String eqNid;
     //设备名称
     private String eqName;
     //拼音码
@@ -55,7 +57,7 @@ public class EqInfo {
     //保修响应时间
     private Integer eqBxxysj;
     //维修商id
-    private Integer sbcsIdWxs;
+    private String sbcsIdWxs;
     //维修商id
     private String wxsName;
     //部门id
@@ -77,7 +79,7 @@ public class EqInfo {
     //注册证名称
     private String eqZczmc;
     //设备厂商Id
-    private Integer sbcsIdScs;
+    private String sbcsIdScs;
 
     private String scsName;
     //品牌
@@ -89,7 +91,7 @@ public class EqInfo {
     //使用年限
     private Integer eqSynx;
     //供应商id
-    private Integer sbcsIdGys;
+    private String sbcsIdGys;
 
     private String gysName;
     //合同编号
@@ -148,6 +150,12 @@ public class EqInfo {
     private String eqBz;
     //使用范围
     private String eqSyfw;
+    //生产日期
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date eqScrq;
+    //折旧年限
+    private Integer eqZjnx;
 
 
     }

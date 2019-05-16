@@ -76,7 +76,7 @@ public interface EqDao {
     List<EqPm> listPmTree();
     @SelectProvider(type = EqProvider.class , method = "listWFlEqByX")
     List<EqShowVo> listWFlEqByX(SelectFlEqVo selectFlEqVo);
-    @Select("SELECT bm_id FROM s_bm WHERE bm_name =#{bmName}")
+    @Select("SELECT obm_id FROM s_bm WHERE bm_name =#{bmName}")
     String getBmIdByName(String bmName);
     @Select("SELECT eq_jldw_id FROM eq_jldw WHERE eq_jldw_name =#{eqJldwName}")
     String getJldwId(String eqJldwName);
@@ -91,5 +91,5 @@ public interface EqDao {
     String getEqSbbhByPmid(String eqPmId);
 
     @Select("SELECT sbcs_name FROM eq_cs WHERE sbcs_id =#{sbcsId}")
-    String getCsById(Integer sbcsId);
+    String getCsById(String sbcsId);
 }

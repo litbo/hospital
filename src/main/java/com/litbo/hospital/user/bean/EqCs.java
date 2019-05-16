@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 public class EqCs {
-    private Integer sbcsId;
+    private String sbcsId;
 
     private String sbCslbId;
 
@@ -39,5 +39,7 @@ public class EqCs {
     private String sbcsFax;
 
     private String sbcsCsdm;
+
+    private String sbcsZh;
 
 }
