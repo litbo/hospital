@@ -34,6 +34,7 @@ public interface SgCheckService {
     /**
      * 核对对比
      *
+     * @param planId    计划id
      * @param check     是否存在
      * @param checkDate 审核日期
      * @param checkUser 审核人
@@ -43,5 +44,5 @@ public interface SgCheckService {
      * @param pageSize  每页显示的记录数
      * @return PageInfo<SgCheckListVO>
      */
-    PageInfo<SgCheckListVO> selectSgCheckList(String check, String checkDate, String checkUser, String planDate, String planUser, Integer pageNum, Integer pageSize);
+    PageInfo<SgCheckListVO> selectSgCheckList(String planId,String check, String checkDate, String checkUser, String planDate, String planUser, Integer pageNum, Integer pageSize);
 }

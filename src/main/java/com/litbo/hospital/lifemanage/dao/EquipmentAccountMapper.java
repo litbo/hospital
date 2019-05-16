@@ -4,10 +4,7 @@ import com.litbo.hospital.lifemanage.bean.vo.EqCardToVO;
 import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgQueryCountVO;
 import com.litbo.hospital.lifemanage.dao.provider.EquipmentAccountProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -30,7 +27,10 @@ public interface EquipmentAccountMapper {
      * @return List<MachineAccountVO>
      */
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectEquipmentAccount")
-    List<MachineAccountVO> selectEquipmentAccount(@Param("category") String category, @Param("state") String state, @Param("departmentId") String departmentId, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("equipmentNumber") String equipmentNumber);
+    List<MachineAccountVO> selectEquipmentAccount(
+            @Param("category") String category, @Param("state") String state,
+            @Param("departmentId") String departmentId, @Param("equipmentPinyinCode") String equipmentPinyinCode,
+            @Param("departmentCoding") String departmentCoding, @Param("equipmentNumber") String equipmentNumber);
 
     /**
      * 科室设备综合查询
@@ -51,7 +51,7 @@ public interface EquipmentAccountMapper {
      * @return List
      */
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectKsEq")
-    List<SgQueryCountVO> selectKsEqOne(@Param("tgbmId")String tgbmId,@Param("bmId") String bmId,@Param("eqQysjLower") String eqQysjLower,@Param("eqQysjUpper") String eqQysjUpper,@Param("eqCgrqLower") String eqCgrqLower,@Param("eqCgrqUpper") String eqCgrqUpper,@Param("eqPriceLower") String eqPriceLower,@Param("eqPriceUpper") String eqPriceUpper, @Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId, @Param("bxqx") String bxqx);
+    List<SgQueryCountVO> selectKsEqOne(@Param("tgbmId") String tgbmId, @Param("bmId") String bmId, @Param("eqQysjLower") String eqQysjLower, @Param("eqQysjUpper") String eqQysjUpper, @Param("eqCgrqLower") String eqCgrqLower, @Param("eqCgrqUpper") String eqCgrqUpper, @Param("eqPriceLower") String eqPriceLower, @Param("eqPriceUpper") String eqPriceUpper, @Param("state") String state, @Param("equipmentPinyinCode") String equipmentPinyinCode, @Param("departmentCoding") String departmentCoding, @Param("eqCxflId") String eqCxflId, @Param("bxqx") String bxqx);
 
     /**
      * 查询设备维修的次数和维修总金额
@@ -73,10 +73,60 @@ public interface EquipmentAccountMapper {
 
     /**
      * 设备卡详情
+     * 注释的字段为表中没有的
      *
      * @param eqSbbh 设备编号
      * @return Result
      */
-    @Select("")
+    @Select("SELECT\n" +
+            "dbo.eq_pm.eq_pm_name AS sbpm,\n" +
+            "dbo.eq_info.eq_name AS sbjc,\n" +
+            "dbo.eq_info.eq_xh AS xh,\n" +
+            "dbo.eq_info.eq_gg AS gg,\n" +
+            "dbo.eq_info.eq_syfw AS syfw,\n" +
+            "dbo.eq_info.eq_qysj AS qyrq,\n" +
+            "dbo.eq_info.eq_cxfl_id AS fldm,\n" +
+            "dbo.eq_cxfl.eq_cxfl_name AS flmc,\n" +
+            //flbz 分类标准
+            "dbo.s_bm.bm_name AS syks,\n" +
+            "dbo.eq_info.eq_sybmfzr AS bgr,\n" +
+            "dbo.eq_info.eq_azwz AS azwz,\n" +
+            //fxdj 风险等级
+            //glpm 管理品目
+            "dbo.eq_info.eq_jzbh AS ajbh,\n" +
+            "dbo.eq_cs.sbcs_name AS gys,\n" +
+            "dbo.eq_info.eq_cgrq AS cgrq,\n" +
+            "dbo.eq_info.eq_pz AS pz,\n" +
+            //fj 附件
+            "dbo.eq_info.eq_htbh AS htbh,\n" +
+            //msph 免税批号
+            "dbo.eq_info.eq_zczbh AS zczh,\n" +
+            "dbo.eq_zjly.zjly_name AS jfly,\n" +
+            "dbo.eq_qdfs.qdfs_name AS qdfs,\n" +
+            "dbo.eq_info.eq_azrq AS azrq,\n" +
+            //zrrq 转入日期
+            "dbo.eq_info.eq_synx AS synx,\n" +
+            //scs 生产商
+            //scrq 生产日期
+            //sbxlh 设备序列号
+            //gb 国别
+            //wxs 维修商
+            //dsfwxs 第三方维修商
+            //cd 产地
+            //jkcp 进口产品
+            "dbo.eq_info.eq_syzt AS syzt\n" +
+            //jsct 技术状态
+            //bxzt 报修状态
+            "\n" +
+            "FROM\n" +
+            "dbo.eq_info\n" +
+            "LEFT JOIN dbo.eq_pm ON dbo.eq_info.eq_pm_id = dbo.eq_pm.eq_pm_id\n" +
+            "LEFT JOIN dbo.eq_cxfl ON dbo.eq_info.eq_cxfl_id = dbo.eq_cxfl.eq_cxfl_id\n" +
+            "LEFT JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "LEFT JOIN dbo.eq_cs ON dbo.eq_info.sbcs_id_gys = dbo.eq_cs.sbcs_id\n" +
+            "LEFT JOIN dbo.eq_zjly ON dbo.eq_info.zjly_id = dbo.eq_zjly.zjly_id\n" +
+            "LEFT JOIN dbo.eq_qdfs ON dbo.eq_info.qdfs_id = dbo.eq_qdfs.qdfs_id\n" +
+            "WHERE\n" +
+            "dbo.eq_info.eq_sbbh = #{eqSbbh,jdbcType=VARCHAR}")
     EqCardToVO selectEqCardShow(String eqSbbh);
 }

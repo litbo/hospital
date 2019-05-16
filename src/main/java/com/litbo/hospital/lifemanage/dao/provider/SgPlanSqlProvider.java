@@ -88,6 +88,7 @@ public class SgPlanSqlProvider {
             }
             sql.WHERE("dbo.sg_plan.user_id IN (" + sb.toString() + ")");
         }
+        sql.ORDER_BY("sg_plan.plan_date DESC");
         return sql.toString();
     }
 }

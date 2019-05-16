@@ -86,7 +86,10 @@ public class EquipmentAccountProvider {
      * @param bxqx                是否过保
      * @return sql
      */
-    public String selectKsEq(String tgbmId, String bmId, String eqQysjLower, String eqQysjUpper, String eqCgrqLower, String eqCgrqUpper, String eqPriceLower, String eqPriceUpper,String state, String equipmentPinyinCode, String departmentCoding, String eqCxflId, String bxqx) {
+    public String selectKsEq(
+            String tgbmId, String bmId, String eqQysjLower, String eqQysjUpper, String eqCgrqLower,
+            String eqCgrqUpper, String eqPriceLower, String eqPriceUpper, String state, String equipmentPinyinCode,
+            String departmentCoding, String eqCxflId, String bxqx) {
         SQL sql = new SQL();
         sql.SELECT("dbo.eq_info.eq_id,\n" +
                 "dbo.eq_info.eq_zcbh,\n" +
@@ -144,9 +147,9 @@ public class EquipmentAccountProvider {
             sql.WHERE("dbo.eq_info.eq_price <= #{eqPriceUpper,jdbcType=VARCHAR}");
         }
         // TODO 保修期限 是否过期 通过设备启用时间加上保修期限/月 大于当前日期为在保 否则为过保 bxqx == 0/1 过保/在保
-        if (StringUtils.isNotBlank(bxqx) && "0".equals(bxqx)){
+        if (StringUtils.isNotBlank(bxqx) && "0".equals(bxqx)) {
             sql.WHERE("1=1");
-        }else if(StringUtils.isNotBlank(bxqx) && "1".equals(bxqx)){
+        } else if (StringUtils.isNotBlank(bxqx) && "1".equals(bxqx)) {
             sql.WHERE("1=1");
         }
         sql.WHERE("dbo.eq_info.eq_sbbh IS NOT NULL AND dbo.eq_info.eq_zcbh IS NOT NULL");
@@ -155,7 +158,7 @@ public class EquipmentAccountProvider {
 
     public static void main(String[] args) {
         EquipmentAccountProvider s = new EquipmentAccountProvider();
-        String sql = s.selectKsEq(null,null,new Date().toString(),new Date().toString(),null,null,null,null,null,null,null,null,null);
+        String sql = s.selectKsEq(null, null, new Date().toString(), new Date().toString(), null, null, null, null, null, null, null, null, null);
         System.out.println(sql);
     }
 }

@@ -70,6 +70,7 @@ public class SgCheckServiceImpl implements SgCheckService {
     /**
      * 核对对比
      *
+     * @param planId    计划id
      * @param check     是否存在
      * @param checkDate 审核日期
      * @param checkUser 审核人
@@ -80,11 +81,11 @@ public class SgCheckServiceImpl implements SgCheckService {
      * @return PageInfo<SgCheckListVO>
      */
     @Override
-    public PageInfo<SgCheckListVO> selectSgCheckList(String check, String checkDate, String checkUser, String planDate, String planUser, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgCheckListVO> selectSgCheckList(String planId,String check, String checkDate, String checkUser, String planDate, String planUser, Integer pageNum, Integer pageSize) {
         if (StringUtils.isNotBlank(check)){
             check = StateEnum.getMessageByCode(Integer.parseInt(check));
         }
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo<>(sgCheckMapper.getListByX(check,checkDate,checkUser,planDate,planUser));
+        return new PageInfo<>(sgCheckMapper.getListByX(planId,check,checkDate,checkUser,planDate,planUser));
     }
 }

@@ -21,8 +21,9 @@ public class SgCheckController {
 
     /**
      * 计划查询账实核对信息
-     * @param planId 计划id
-     * @param pageNum 当前页数
+     *
+     * @param planId   计划id
+     * @param pageNum  当前页数
      * @param pageSize 每页显示记录数
      * @return Result
      */
@@ -36,7 +37,7 @@ public class SgCheckController {
     /**
      * 添加账实核对信息  审核存在
      *
-     * @param ids    核对表id
+     * @param ids 核对表id
      * @return Result
      */
     @PostMapping("/updateSgCheckYByIds")
@@ -50,7 +51,7 @@ public class SgCheckController {
     /**
      * 添加账实核对信息 审核不存在
      *
-     * @param id    核对表id
+     * @param id 核对表id
      * @return Result
      */
     @PostMapping("/updateSgCheckNByIds")
@@ -64,6 +65,7 @@ public class SgCheckController {
     /**
      * 核对对比
      *
+     * @param planId    计划id
      * @param check     是否存在
      * @param checkDate 审核日期
      * @param checkUser 审核人
@@ -74,14 +76,15 @@ public class SgCheckController {
      * @return Result
      */
     @PostMapping("/selectSgCheckList")
-    public Result selectSgCheckList(@RequestParam(name = "check",required = false) String check,
-                                    @RequestParam(name = "checkDate",required = false) String checkDate,
-                                    @RequestParam(name = "checkUser",required = false) String checkUser,
-                                    @RequestParam(name = "planDate",required = false) String planDate,
-                                    @RequestParam(name = "planUser",required = false) String planUser,
+    public Result selectSgCheckList(@RequestParam(name = "planId") String planId,
+                                    @RequestParam(name = "check", required = false) String check,
+                                    @RequestParam(name = "checkDate", required = false) String checkDate,
+                                    @RequestParam(name = "checkUser", required = false) String checkUser,
+                                    @RequestParam(name = "planDate", required = false) String planDate,
+                                    @RequestParam(name = "planUser", required = false) String planUser,
                                     @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                     @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        return Result.success(sgCheckService.selectSgCheckList(check,checkDate,checkUser,planDate,planUser,pageNum,pageSize));
+        return Result.success(sgCheckService.selectSgCheckList(planId, check, checkDate, checkUser, planDate, planUser, pageNum, pageSize));
     }
 
 }

@@ -91,7 +91,7 @@ public class EquipmentAccountController {
      * @param eqSbbh 设备编号
      * @return Result
      */
-    @PostMapping("/selectEqCardShow")
+    @RequestMapping("/selectEqCardShow")
     public Result selectEqCardShow(@RequestParam(name = "eqSbbh") String eqSbbh) {
         return Result.success(equipmentAccountService.selectEqCardShow(eqSbbh));
     }
