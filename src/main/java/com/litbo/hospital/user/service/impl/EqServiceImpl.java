@@ -195,6 +195,12 @@ public class EqServiceImpl implements EqService {
 
         return new PageInfo(eqDao.listEqByX(selectEqVo));
     }
+    @Override
+    public PageInfo listEqNameByX(int pageNum, int pageSize, String ccname) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listEqNameByX(ccname));
+    }
+
 
     @Override
     @Transactional
@@ -345,6 +351,8 @@ public class EqServiceImpl implements EqService {
     }
 
 
+
+
     @Override
     @Transactional
     public Integer setPm(SetPmVo setPmVo) {
@@ -429,6 +437,13 @@ public class EqServiceImpl implements EqService {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(eqDao.listPms());
     }
+
+    @Override
+    public PageInfo listEqName(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(eqDao.listEqName());
+    }
+
 
     @Override
     public PageInfo listFlEq(int pageNum, int pageSize) {

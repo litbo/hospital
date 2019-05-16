@@ -46,8 +46,12 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqName" autocomplete="off" class="layui-input" lay-verify="required" placeholder="请输入...">
+                                        <input type="text" name="ccname" placeholder="请选择"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="eqName" id="eqName">选择</button>
                                     </div>
+                                   <!-- <div class="layui-input-block">
+                                        <input type="text" name="eqName" autocomplete="off" class="layui-input" lay-verify="required" placeholder="请输入...">
+                                    </div>-->
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">资产编号<span class="sign">*</span></label>
@@ -445,7 +449,7 @@
 
                     }
                     if(formData.radio!==undefined){
-                            ad.eqPmId=formData.radio[0].eqPmId
+                        ad.eqPmId=formData.radio[0].eqPmId
                     }
                     if(formData.wxs!==undefined){
                         ad.sbcsIdWxs=formData.wxs[0].sbcsIdWxs
@@ -456,6 +460,12 @@
                     if(formData.gys!==undefined){
                         ad.sbcsIdGys=formData.gys[0].sbcsIdGys
                     }
+                    if(formData.radio!==undefined){
+                        ad.id=formData.radio[0].id
+                    }
+                    if(formData.radio!==undefined){
+                        ad.ccname=formData.radio[0].ccname
+                    }
                     return param = {
                         /*1:formData.radio[0].bmId,*/
                         1:ad.eqSbzp,
@@ -463,14 +473,16 @@
                         3:ad.eqPmId,
                         4:ad.sbcsIdWxs,
                         5:ad.sbcsIdScs,
-                        6:ad.sbcsIdGys
+                        6:ad.sbcsIdGys,
+                        7:ad.id,
+                        8:ad.ccname
                     }
                 },
                 form:{
                     url:"/eq/addEq",
                     type:"POST",
                     contentType:"application/json",
-                    data:["eqName","eqZcbh","eqPmId","eqGg","eqXh","zjlyId",
+                    data:["eqZcbh","eqPmId","eqGg","eqXh","zjlyId",
                             "eqJldwId","eqPrice","eqTzlb","eqBxkssj","eqBxjssj","eqBxxysj",
                             "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",
                             "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
@@ -482,7 +494,9 @@
                         3:"eqPmId",
                         4:"sbcsIdWxs",
                         5:"sbcsIdScs",
-                        6:"sbcsIdGys"
+                        6:"sbcsIdGys",
+                        7:"eqNid",
+                        8:"eqName"
                     },
                     reload:true
                 }
@@ -697,6 +711,15 @@
                     cb:"/eq/listPmsCols",
                     db:"/eq/listPms",
                     se:"/eq/pmSe",
+                    key:"radio",
+                    name:"dtdt"
+                },
+                {
+                    elem: "#eqName",
+                    data:formData,
+                    cb:"/eq/listEqNameCols",
+                    db:"/eq/listEqName",
+                    se:"/eq/eqNameSe",
                     key:"radio",
                     name:"dtdt"
                 },

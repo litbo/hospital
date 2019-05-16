@@ -1,9 +1,6 @@
 package com.litbo.hospital.user.dao;
 
-import com.litbo.hospital.user.bean.EqFj;
-import com.litbo.hospital.user.bean.EqInfo;
-import com.litbo.hospital.user.bean.EqPm;
-import com.litbo.hospital.user.bean.EqSyxz;
+import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.provider.EqProvider;
 import com.litbo.hospital.user.vo.*;
 import org.apache.ibatis.annotations.*;
@@ -92,4 +89,9 @@ public interface EqDao {
 
     @Select("SELECT sbcs_name FROM eq_cs WHERE sbcs_id =#{sbcsId}")
     String getCsById(String sbcsId);
+
+    @Select("SELECT id,c_CName FROM eq_name ")
+    List<EqName> listEqName();
+    @SelectProvider(type = EqProvider.class , method = "listEqNameByX")
+    List<EqName> listEqNameByX(String ccname);
 }

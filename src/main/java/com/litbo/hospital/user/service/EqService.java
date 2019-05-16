@@ -57,4 +57,8 @@ public interface EqService {
     PageInfo listWFlEqByX(int pageNum, int pageSize, SelectFlEqVo selectFlEqVo);
 
     EqPm getPmById(String eqPmId);
+
+    PageInfo listEqName(int pageNum, int pageSize);
+
+    PageInfo listEqNameByX(int pageNum, int pageSize, String ccname);
 }

@@ -335,4 +335,59 @@ public class EqController {
 
     }
 
+    @RequestMapping("listEqNameCols")
+    public Result listEqNameCols(@RequestParam(required = false) String key,
+                              @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+        JSONArray myJsonArray = null;
+        if ("checkbox".equals(key)) {
+            String jsonMessage = "[{'type': 'checkbox'}, " +
+                    "{field: 'id', title: '设备id'}, " +
+                    "{field: 'ccname', title: '设备名称'}]" ;
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }else  if ("radio".equals(key)){
+            String jsonMessage = "[{'type': 'radio'}, " +
+                    "{field: 'id', title: '设备id'}, " +
+                    "{field: 'ccname', title: '设备名称'}]" ;
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }
+        PageInfo date = new PageInfo(myJsonArray);
+        return Result.success(date);
+    }
+
+    @RequestMapping("/listEqName")
+    public Result listEqName(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                          @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+        PageInfo pageInfo = es.listEqName(pageNum, pageSize);
+
+        return Result.success(pageInfo);
+    }
+
+    //模糊查询
+    @RequestMapping("/listEqNameByX")
+    public Result listEqNameByX(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                                String ccname) {
+        PageInfo pageInfo = es.listEqNameByX(pageNum, pageSize, ccname);
+        return Result.success(pageInfo);
+    }
+
+    @RequestMapping(value = "/eqNameSe")
+    public Result eqNameSe(){
+        Map map =new HashMap();
+        map.put("dom",
+                "<div class='layui-inline'><input type=\"text\" name=\"ccname\" class=\"layui-input\" placeholder=\"设备名称\" autocomplete=\"off\"></div>" +
+                        "    <div class='layui-input-inline mar10-0' align='center'>" +
+                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/eq/listEqNameByX");
+        m.put("type","reload");
+        String[] data = {"ccname"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
+    }
 }
