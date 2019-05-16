@@ -195,13 +195,14 @@ public class BmServiceImpl implements BmService {
         String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(new_pbm_id));
         bmDao.setBmBeto(obm_id,new_bm_id,new_pbm_id);
 
-        if(!old_idmax_mb.getBmId().equals(bm.getBmId())) {   //如果原来平级部门id的最大值不为当前修改的部门的id，酒吧这个部门的id赋给他
+        if(old_idmax_mb!=null&&!old_idmax_mb.getBmId().equals(bm.getBmId())) {   //如果原来平级部门id的最大值不为当前修改的部门的id，酒吧这个部门的id赋给他
             bmDao.setBmIdByOid(old_idmax_mb.getObmId(),bm.getBmId());
         }
+
         //设置父节点为虚部门
         bmDao.setxbm(new_pbm_id,"1");
         //判断原父节点是否还存在子节点 如果不存在则修改虚部门标识
-        if(bmDao.getAmountByPid(bm.getpBmId())==0){
+        if(!bm.getpBmId().equals("1000000000")&&bmDao.getAmountByPid(bm.getpBmId())==0){
             bmDao.setxbm(bm.getpBmId(),"0");
         }
     }
@@ -239,7 +240,7 @@ public class BmServiceImpl implements BmService {
 
     private SBm getMaxBm(List<SBm> bms,String id) {
 
-        if(bms.size()==0) return bmDao.getBmBybmid(id);
+        if(bms==null||bms.size()==0) return bmDao.getBmBybmid(id);
         SBm idmaxbm = bms.get(0);
         for (SBm bm:bms){
             System.out.println(Long.parseLong(bm.getBmId(),16));
@@ -394,7 +395,7 @@ public class BmServiceImpl implements BmService {
                         lbbm.setBmGk("后勤");
                     }
 
-                    if(lbbm.getWxFlag().equals("1")){
+                    if(lbbm.getWxFlag()!=null&&lbbm.getWxFlag().equals("1")){
                         lbbm.setIsGlbm("是");
                     }else {
                         lbbm.setIsGlbm("否");

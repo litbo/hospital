@@ -1,13 +1,11 @@
 package com.litbo.hospital.supervise.scheduler;
 
 import com.litbo.hospital.common.utils.DeleteFileUtils;
+import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SGangwei;
 import com.litbo.hospital.supervise.bean.SZhidu;
 import com.litbo.hospital.supervise.bean.SZhiduzhizeZt;
-import com.litbo.hospital.supervise.dao.EmpDao;
-import com.litbo.hospital.supervise.dao.EqCsDao;
-import com.litbo.hospital.supervise.dao.GangweiDao;
-import com.litbo.hospital.supervise.dao.ZhiduDao;
+import com.litbo.hospital.supervise.dao.*;
 import com.litbo.hospital.supervise.enums.ZdCzztEnumProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class Scheduler {
@@ -29,6 +28,8 @@ public class Scheduler {
     private EmpDao empDao;
     @Autowired
     private EqCsDao csDao;
+    @Autowired
+    private BmDao bmDao;
 
     //每天凌晨执行一次
     @Scheduled(cron = "0 00 00 * * ?")
@@ -43,6 +44,7 @@ public class Scheduler {
         clearHtml();
 
         refreshStaticFile();
+
     }
 
     private void refreshStaticFile(){
@@ -138,5 +140,29 @@ public class Scheduler {
         String path = System.getProperty("user.dir");
         String htmlp= path+"\\zdhtml\\";
         DeleteFileUtils.deleteFolder(htmlp);
+    }
+
+    private void autoCreateBasicBm(){
+
+        saveBmIfNotEx("0100000000","1000000000","机构领导");
+        saveBmIfNotEx("0101000000","0100000000","医学装备管理委员会");
+        saveBmIfNotEx("0200000000","1000000000","管理部门");
+        saveBmIfNotEx("0300000000","1000000000","使用部门");
+        saveBmIfNotEx("0201000000","0200000000","医工");
+        saveBmIfNotEx("0202000000","0200000000","后勤");
+        saveBmIfNotEx("0203000000","0200000000","信息科");
+        saveBmIfNotEx("0301000000","0300000000","临床");
+        saveBmIfNotEx("0302000000","0300000000","医技");
+        saveBmIfNotEx("0303000000","0300000000","医辅");
+    }
+    private void saveBmIfNotEx(String bmId,String pbmId,String bmName){
+        if(bmDao.getBmBybmid(bmId)==null){
+            SBm bm = new SBm();
+            bm.setObmId(UUID.randomUUID().toString());
+            bm.setBmId(bmId);
+            bm.setBmName(bmName);
+            bm.setpBmId(pbmId);
+            bmDao.saveBm(bm);
+        }
     }
 }
