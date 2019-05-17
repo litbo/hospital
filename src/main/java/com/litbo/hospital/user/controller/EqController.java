@@ -340,17 +340,12 @@ public class EqController {
                               @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         JSONArray myJsonArray = null;
-        if ("checkbox".equals(key)) {
-            String jsonMessage = "[{'type': 'checkbox'}, " +
-                    "{field: 'id', title: '设备id'}, " +
-                    "{field: 'ccname', title: '设备名称'}]" ;
-            myJsonArray = JSONObject.parseArray(jsonMessage);
-        }else  if ("radio".equals(key)){
+
             String jsonMessage = "[{'type': 'radio'}, " +
                     "{field: 'id', title: '设备id'}, " +
                     "{field: 'ccname', title: '设备名称'}]" ;
             myJsonArray = JSONObject.parseArray(jsonMessage);
-        }
+
         PageInfo date = new PageInfo(myJsonArray);
         return Result.success(date);
     }

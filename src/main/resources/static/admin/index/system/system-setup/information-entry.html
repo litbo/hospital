@@ -223,7 +223,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">生产日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" class="layui-input" autocomplete="off" id="date3" >
+                                        <input type="text" name="eqScrq" class="layui-input" autocomplete="off" id="date3" >
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -460,11 +460,11 @@
                     if(formData.gys!==undefined){
                         ad.sbcsIdGys=formData.gys[0].sbcsIdGys
                     }
-                    if(formData.radio!==undefined){
-                        ad.id=formData.radio[0].id
+                    if(formData.name!==undefined){
+                        ad.id=formData.name[0].id
                     }
-                    if(formData.radio!==undefined){
-                        ad.ccname=formData.radio[0].ccname
+                    if(formData.name!==undefined){
+                        ad.ccname=formData.name[0].ccname
                     }
                     return param = {
                         /*1:formData.radio[0].bmId,*/
@@ -487,7 +487,7 @@
                             "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",
                             "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
                             "eqZblx","eqZjl","userId","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
-                            "eqMpzp","eqAzhjyq","eqBz"],
+                            "eqMpzp","eqAzhjyq","eqScrq","eqBz"],
                     param:{
                         1:"sbzp",
                         2:"mpzp",
@@ -696,7 +696,7 @@
                     },
                     {
                         filter:"bmList",
-                        ids: "bmId",
+                        ids: "obmId",
                         text: "bmName",
                         url: "/supervise/bmgl/listBms2"
                     }
@@ -720,7 +720,7 @@
                     cb:"/eq/listEqNameCols",
                     db:"/eq/listEqName",
                     se:"/eq/eqNameSe",
-                    key:"radio",
+                    key:"name",
                     name:"dtdt"
                 },
                 {
