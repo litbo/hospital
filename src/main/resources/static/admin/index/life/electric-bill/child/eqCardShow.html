@@ -336,20 +336,22 @@
         layui.use("layer",function(){
             var layer = layui.layer;
             layer.alert("暂无可用数据",function(){
-                //window.close();
+                window.close();
             })
         });
     }else{
-        data = dat.data;
+        data = dat;
         $.ajax({
             url:"/lifeManage/selectEqCardShow",
             type:"POST",
-            data:{eqSbbh:data[0]["eqSbbh"]},
+            data:{eqSbbh:data["eqSbbh"]},
             success:function(res){
                 if(res.code === 0){
                     //console.log(res);
                     pintValue(res.data);
-                    //printList(res.data.list);
+                    if(res.data.list){
+                        printList(res.data.list);
+                    }
                     $(".jkr").text(emp.userXm);
                     $(".jksj").text(today0+" "+time0)
                 }
