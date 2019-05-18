@@ -107,7 +107,7 @@ public interface SgLcclMapper {
             "dbo.eq_info.eq_price\n" +
             "FROM\n" +
             "dbo.eq_info\n" +
-            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id\n" +
             "<where>" +
             "dbo.eq_info.eq_sbbh IS NOT NULL AND dbo.eq_info.eq_id NOT IN ((SELECT\n" +
             "dbo.sg_lccl.eq_id\n" +
@@ -136,7 +136,7 @@ public interface SgLcclMapper {
             "dbo.sg_lccl.id\n" +
             "FROM\n" +
             "dbo.eq_info\n" +
-            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id\n" +
             "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
             "WHERE\n" +
             "dbo.sg_lccl.clear_time IS NOT NULL" +
@@ -161,7 +161,7 @@ public interface SgLcclMapper {
             "dbo.eq_info.eq_price\n" +
             "FROM\n" +
             "dbo.eq_info\n" +
-            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id\n" +
             "WHERE\n" +
             "dbo.eq_info.eq_sbbh IS NOT NULL AND dbo.eq_info.eq_id IN (SELECT\n" +
             "dbo.sg_lccl.eq_id\n" +
@@ -198,7 +198,7 @@ public interface SgLcclMapper {
             "FROM\n" +
             "dbo.eq_info\n" +
             "INNER JOIN dbo.sg_lccl ON dbo.eq_info.eq_id = dbo.sg_lccl.eq_id\n" +
-            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id\n" +
             "INNER JOIN dbo.s_emp ON dbo.sg_lccl.user_id = dbo.s_emp.user_id" +
             "<where>" +
             "<if test=\"tab == 1\"> dbo.sg_lccl.lccl_id IS NOT NULL AND dbo.sg_lccl.report_person IS NULL</if>" +

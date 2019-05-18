@@ -27,7 +27,7 @@ public class SgLcclSqlProvider {
         sql.SELECT("dbo.sg_lccl.state");
         sql.FROM("dbo.eq_info");
         sql.INNER_JOIN("dbo.sg_lccl ON dbo.sg_lccl.eq_id = dbo.eq_info.eq_id");
-        sql.INNER_JOIN("dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id");
+        sql.INNER_JOIN("dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id");
         sql.INNER_JOIN("dbo.s_emp ON dbo.sg_lccl.user_id = dbo.s_emp.user_id");
         if (dateLowerAndUpperVO != null) {
             if (dateLowerAndUpperVO.getLower()!=null){
