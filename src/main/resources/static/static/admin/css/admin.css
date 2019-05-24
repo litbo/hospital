@@ -2642,4 +2642,10 @@ html {
     margin-left: 80px;
   }
 }
+.layui-input:hover, .layui-textarea:hover {
+  border-color: #abe8f2!important;
+}
+.layui-input:focus, .layui-textarea:focus {
+  border-color: #7d96ef!important;
+}
 /*# sourceMappingURL=admin.css.map */

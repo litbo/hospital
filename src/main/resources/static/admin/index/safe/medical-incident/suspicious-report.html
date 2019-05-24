@@ -15,237 +15,312 @@
     <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-label{
+            font-weight: 600;
             padding: 8px 10px!important;
+            width:150px!important;
         }
-        .layui-form-item{
-            margin-bottom:30px;
+        .layui-input-block{
+            margin-left:150px!important;
         }
-
+        .layui-form-text .layui-form-label{
+            width:100%!important;
+        }
+        .layui-form-text .layui-input-block{
+            margin-left:0!important;
+        }
         .layui-textarea{
             min-height: 120px;
             height: 120px;
+        }
+        .c_main{
+            padding: 0 30px;
+        }
+        .m_pad{
+            padding:0;
+        }
+        .pfix{
+            position: fixed;
+            bottom:0;
+            left: 0;
+            right: 0;
+            background:#fff;
+            padding:10px 0;
+            border-top: 1px solid #dadada;
+        }
+        .cmar{
+            margin:0 auto;
+            float: none!important;
+        }
+        body{
+            min-width:500px;
+            padding-bottom: 70px;
         }
     </style>
 </head>
 
 <body>
 <form class="layui-form layui-form-pane" action="">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>安全（不良）事件流程</legend>
+    </fieldset>
     <div class="layui-row">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>安全（不良）事件流程</legend>
-        </fieldset>
-        <blockquote class="layui-elem-quote layui-text">基本信息</blockquote>
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">发现者</label>
-                <div class="layui-input-block">
-                    <select id="discoverer" name="userId" lay-filter="fxz">
-                    </select>
+        <div class="col-xs-12 c_main">
+            <div class="layui-collapse">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">报告基本情况</h2>
+                    <div class="layui-colla-content layui-show">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">报告编号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="bgbh" class="layui-input" placeholder="自动生成" disabled >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发生地</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="fsd" class="layui-input" placeholder="境内" disabled >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">报告人<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="bgr_xm" autocomplete="" lay-verify="required" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">医疗器械情况</h2>
+                    <div class="layui-colla-content layui-show">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">产品名称<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cpmc" autocomplete="" lay-verify="required" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">注册证编号<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="zczbh" placeholder="请填写" lay-verify="required" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">型号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="xh" autocomplete="" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">规格</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="gg" autocomplete="" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">产品批号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cpph" autocomplete="" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">产品编号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cpbh" autocomplete="" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">UDI</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="UDI" autocomplete="" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">生产日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="scrq" id="scdate" autocomplete="off"  placeholder="请选择日期" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">有效期至</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="yxqz" autocomplete="off"  id="update" placeholder="请选择日期" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">上市许可持有人名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="ssxkcyr_xm" autocomplete="" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">不良事件情况</h2>
+                    <div class="layui-colla-content layui-show">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">事件发生日期<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="sjfsrq" autocomplete="off"  id="evdate" lay-verify="required" placeholder="请选择日期" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发生或获知日期<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="fxhhzrq" autocomplete="off"  id="hadate" lay-verify="required" placeholder="请选择日期" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" pane>
+                            <label class="layui-form-label">伤害<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="sh" value="死亡" title="死亡">
+                                <input type="radio" name="sh" value="严重伤害" title="严重伤害">
+                                <input type="radio" name="sh" value="其他" title="其他">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">伤害表现<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="shbx" placeholder="请填写" lay-verify="required" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">器械故障表现<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qxgzbx" placeholder="请填写" lay-verify="required" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 m_pad">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">姓名</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="xm" autocomplete="" class="layui-input" placeholder="请填写">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">年龄类型</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="nllx" autocomplete="" class="layui-input" placeholder="请填写">
+                                </div>
+                            </div>
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">性别<span class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="xb" value="男" title="男">
+                                    <input type="radio" name="xb" value="女" title="女">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 m_pad">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">出生日期</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="csrq" id="gedate" autocomplete="off"  placeholder="请选择日期" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">年龄</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="nl" autocomplete="" class="layui-input" placeholder="请填写">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">病历号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="blh" autocomplete="" class="layui-input" placeholder="请填写">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">既往病史</label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="jwbs" placeholder="请填写"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">使用情况</h2>
+                    <div class="layui-colla-content layui-show">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">预期治疗疾病或作用</label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="yqzljbyzy" placeholder="请填写"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">器械使用日期<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="qxsyrq" autocomplete="off"  id="qxdate" placeholder="请选择日期" lay-verify="required" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 m_pad">
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">使用场所<span class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="sycs" value="医疗机构" title="医疗机构">
+                                    <input type="radio" name="sycs" value="家庭" title="家庭">
+                                    <input type="radio" name="sycs" value="其他" title="其他">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 m_pad">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">场所名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="csmc" autocomplete="" class="layui-input" placeholder="请填写">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">使用过程<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="sygc" lay-verify="required" placeholder="请填写"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">合并用药/械情况说明</label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="hbyy_xqksm" placeholder="请填写"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">事件初步原因分析与处置</h2>
+                    <div class="layui-colla-content layui-show">
+                        <div class="layui-form-item" pane>
+                            <label class="layui-form-label">事件后果<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="sjhg" value="产品原因（包括说明书等）" title="产品原因（包括说明书等）">
+                                <input type="checkbox" name="sjhg" value="操作原因" title="操作原因">
+                                <input type="checkbox" name="sjhg" value="患者自身原因" title="患者自身原因">
+                                <input type="checkbox" name="sjhg" value="无法确定" title="无法确定">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">事件原因分析描述</label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="sjyyfxms" placeholder="请填写"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">初步处置情况<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <textarea class="layui-textarea" name="cbczqk" lay-verify="required" placeholder="请填写"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">报告编号</label>
-                <div class="layui-input-block">
-                    <input type="text" name="bgbh" autocomplete="" class="layui-input" placeholder="自动生成" disabled >
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">报告名称</label>
-                <div class="layui-input-block">
-                    <input type="text" name="bgmc" autocomplete="" class="layui-input" placeholder="请填写" lay-verify="required">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">报告日期<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="bgTime" id="bdate" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">事件性质<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select id="nature" name="sjxz">
-                        <option value="个案" selected>个案</option>
-                        <option value="群发事件">群发事件</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">审核人</label>
-                <div class="layui-input-block">
-                    <select lay-filter="shr" name="shr">
-                    </select>
-                </div>
-            </div>
-
         </div>
 
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">设备名称<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectEquip">选择</button>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">联系电话</label>
-                <div class="layui-input-block">
-                    <input type="text" name="lxdh" autocomplete="" lay-verify="required|phone" class="layui-input" placeholder="请填写" lay-verify="required">
-                </div>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">报告人岗位<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="radio" name="bgrgw" value="医师" title="医师" checked>
-                    <input type="radio" name="bgrgw" value="技师" title="技师">
-                    <input type="radio" name="bgrgw" value="护士" title="护士">
-                    <input type="radio" name="bgrgw" value="工程师" title="工程师">
-                    <input type="radio" name="bgrgw" value="其他" title="其他">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">报告人签字<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="bgrqz" id="bgrqz" autocomplete="" class="layui-input"  readonly>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="layui-row">
-        <blockquote class="layui-elem-quote layui-text">患者情况</blockquote>
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">患者姓名</label>
-                <div class="layui-input-block">
-                    <input type="text" name="hzxm" autocomplete=""  class="layui-input" placeholder="请填写" lay-verify="required">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">年龄</label>
-                <div class="layui-input-block">
-                    <input type="text" name="hzAge" autocomplete="" class="layui-input" placeholder="请填写" lay-verify="required">
-                </div>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">性别</label>
-                <div class="layui-input-block">
-                    <input type="radio" name="hzSex" value="男" title="男" checked>
-                    <input type="radio" name="hzSex" value="女" title="女">
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">预期治疗疾病或作用<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <textarea class="layui-textarea" name="yqzlxg" placeholder="请填写" lay-verify="required"></textarea>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="layui-row">
-        <blockquote class="layui-elem-quote layui-text">事件情况</blockquote>
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 170px;">事件发生日期<span class="sign">*</span></label>
-                <div class="layui-input-block" style="margin-left: 170px">
-                    <input type="text" name="sjfsTime" id="sdate" class="layui-input" autocomplete="">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 170px;">发现或者知悉日期<span class="sign">*</span></label>
-                <div class="layui-input-block"style="margin-left: 170px">
-                    <input type="text" name="fxzxTime" id="fdate" class="layui-input" autocomplete="">
-                </div>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label" style="width: 170px;font-size: 12px;">医疗器械实际使用场所<span class="sign">*</span></label>
-                <div class="layui-input-block" style="margin-left: 170px;">
-                    <input type="radio" name="ylqxsxcs" value="医疗机构" title="医疗机构" checked>
-                    <input type="radio" name="ylqxsxcs" value="家庭" title="家庭">
-                    <input type="radio" name="ylqxsxcs" value="其他" title="其他">
-                </div>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label" style="width: 170px;">操作人员<span class="sign">*</span></label>
-                <div class="layui-input-block" style="margin-left:170px;">
-                    <input type="radio" name="czry" value="专业人员" title="专业人员" checked>
-                    <input type="radio" name="czry" value="非专业人员" title="非专业人员">
-                    <input type="radio" name="czry" value="患者" title="患者">
-                    <input type="radio" name="czry" value="其他" title="其他">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">事件后果<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="radio" name="sjhg" value="死亡" title="死亡" checked>
-                    <input type="radio" name="sjhg" value="危及生命" title="危及生命">
-                    <input type="radio" name="sjhg" value="机体功能结构永久性损伤" title="机体功能结构永久性损伤">
-                    <input type="radio" name="sjhg" value="可能导致机体功能结构永久性损伤" title="可能导致机体功能结构永久性损伤">
-                    <input type="radio" name="sjhg" value="需要内、外科治疗避免上述永久损伤" title="需要内、外科治疗避免上述永久损伤">
-                    <input type="radio" name="sjhg" value="其他（在事件陈述中说明）" title="其他（在事件陈述中说明）">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 160px;">植入日期（若植入）</label>
-                <div class="layui-input-block" style="margin-left: 160px;">
-                    <input type="text" name="zrTime" id="zdate" class="layui-input">
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-row">
-            <blockquote class="layui-elem-quote layui-text">事件主要表现</blockquote>
-            <div class="col-xs-12 col-sm-4">
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">器械故障<span class="sign">*</span></label>
-                    <div class="layui-input-block">
-                        <textarea class="layui-textarea" name="qxgz" placeholder="请填写" lay-verify="required"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">主要伤害</label>
-                    <div class="layui-input-block">
-                        <textarea class="layui-textarea" name="zysh" lay-filter placeholder="请填写" lay-verify="required"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">事件陈述</label>
-                    <div class="layui-input-block">
-                        <textarea class="layui-textarea" name="sjcs" placeholder="请填写" lay-verify="required"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--<div class="layui-row">-->
-            <!--<div class="layui-form-item">-->
-                <!--<label class="layui-form-label" style="width: 120px;">事件相关资料</label>-->
-                <!--<div class="layui-input-block" style="margin-left: 120px;">-->
-                    <!--<input type="file" accept="image/*" name="file" autocomplete="off" class="layui-input" style="padding:5px;">-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <div class="layui-row">
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit>提交</button>
-                </div>
-            </div>
+    <div class="layui-row pfix">
+        <div class="col-xs-12 col-sm-2 cmar">
+            <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" id="submit">提交</button>
         </div>
     </div>
 </form>
-
 <script>
 
     formData={};
@@ -253,73 +328,47 @@
         form:{
             date:[
                 {
-                    elem:'#zdate',
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    elem:'#scdate',
+                    value:'',
+                    format:'yyyy-MM-dd'
                 },
                 {
-                    elem: '#bdate',
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    elem: '#update',
+                    value:'',
+                    format:'yyyy-MM-dd'
                 },
                 {
-                    elem: '#sdate',
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    elem: '#evdate',
+                    value:'',
+                    format:'yyyy-MM-dd'
                 },
                 {
-                    elem: '#fdate',
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    elem: '#hadate',
+                    value:'',
+                    format:'yyyy-MM-dd'
+                },
+                {
+                    elem: '#qxdate',
+                    value:'',
+                    format:'yyyy-MM-dd'
+                },
+                {
+                    elem: '#gedate',
+                    value:'',
+                    format:'yyyy-MM-dd'
                 }
             ],
-            val:{
-                filter:"forms",
-                select:[
-                    {
-                        filter:"fxz",
-                        ids:"userId",
-                        text:"userXm",
-                        url:"/kwgl/empgl/listPartnerByUserId"
-                    }, {
-                        filter:"shr",
-                        ids:"userId",
-                        text:"userXm",
-                        url:"/kwgl/empgl/listBmPartnerByUserId"
-                    }
-                ]
-            },
             submit:{
                 form:{
                     url:"/security/blsj/insertFwBlsj",
                     type:"POST",
-                    data:["userId","bgmc","bgTime","sjxz","bgrqz","hzxm","hzAge","yqzlxg","sjfsTime","fxzxTime","zrTime",
-                        "qxgz","zysh","sjcs","hzSex","ylqxsxcs","czry","sjhg","bgrgw","eqId","lxdh","shr"],
+                    data:["bgbh","fsd","bgr_xm","cpmc","zczbh","xh","gg","cpph","cpbh","UDI","scrq", "yxqz","ssxkcyr_xm","sjfsrq","fxhhzrq","sh","shbx","sjhg","qxgzbx","xm","nllx","xb","csrq","nl","blh","jwbs","yqzljbyzy","qxsyrq","sycs","sjhg","csmc","sygc","hbyy_xqksm","sjhg","sjyyfxms","cbczqk"],
+                    add:{"eqid":$.getUrlParam("eqid")},
                     reload:true
                 }
             }
-
-        },
-        bind: {
-            selectItem: [
-                {
-                    elem: "#selectEquip",
-                    cb: "/eq/listEqbt",
-                    db: "/eq/listShowEqs",
-                    se:"/eq/eqSe",
-                    name: "dtdt",
-                    key: "radio",
-                    data:formData
-                }
-            ]
         }
     }
-    var people=tempValue("rl","emp",false);
-    $("#bgrqz").val(people.userXm)
 </script>
 </body>
 
