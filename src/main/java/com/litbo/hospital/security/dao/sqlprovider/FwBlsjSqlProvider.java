@@ -16,27 +16,20 @@ public class FwBlsjSqlProvider {
             }
         }.toString();
     }
-    public String listFwBlsj(String sjxz,String bmName,String sbcsName,String bgmc,Integer status){
+    public String listFwBlsj(Integer status, Integer lb,String cpmc, String bgrXm){
         return new SQL(){
             {
-                SELECT("b.id,f.eq_name,m.bm_name,b.bgmc,b.bg_time,b.sjxz,f.eq_gg,e.sbcs_name,f.eq_azrq");
-                FROM("fw_blsj as b");
-                LEFT_OUTER_JOIN("eq_info as f on b.eq_id = f.eq_id");
-                LEFT_OUTER_JOIN("s_bm as m on m.bm_id =  f.eq_bmid");
-                LEFT_OUTER_JOIN("eq_cs as e on e.sbcs_id = f.sbcs_id_scs");
-                if(sjxz!=null&&!"".equals(sjxz)){
-                    WHERE("b.sjxz = #{sjxz}");
+                SELECT("*");
+                FROM("fw_blsj ");
+                if(cpmc!=null&&!"".equals(cpmc)){
+                    WHERE("cpmc like '%'+#{cpmc}+'%'");
                 }
-                if(bgmc!=null&&!"".equals(bgmc)){
-                    WHERE("b.bgmc like '%'+#{bgmc}+'%'");
+                if(bgrXm!=null&&!"".equals(bgrXm)){
+                    WHERE("bgrXm like '%'+#{bgr_Xm}+'%'");
                 }
-                if(bmName!=null&&!"".equals(bmName)){
-                    WHERE("bm_name = #{bmName}");
-                }
-                if(sbcsName!=null&&!"".equals(sbcsName)){
-                    WHERE("sbcs_name like '%'+#{sbcsName}+'%'");
-                }
-                WHERE("status=#{status}");
+
+                WHERE("status=#{status} and lb = #{lb} ");
+
             }
         }.toString();
     }

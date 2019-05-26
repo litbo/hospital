@@ -84,7 +84,20 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">报告人<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="text" name="bgr_xm" autocomplete="" lay-verify="required" class="layui-input" placeholder="请填写">
+                                <input type="text" name="bgrXm" autocomplete="" lay-verify="required" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">联系电话<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="lxdh" autocomplete="" lay-verify="required" class="layui-input" placeholder="请填写">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">审核人</label>
+                            <div class="layui-input-block">
+                                <select lay-filter="shr" name="shr">
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -149,7 +162,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">上市许可持有人名称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="ssxkcyr_xm" autocomplete="" class="layui-input" placeholder="请填写">
+                                <input type="text" name="ssxkcyrXm" autocomplete="" class="layui-input" placeholder="请填写">
                             </div>
                         </div>
                     </div>
@@ -280,7 +293,7 @@
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">合并用药/械情况说明</label>
                             <div class="layui-input-block">
-                                <textarea class="layui-textarea" name="hbyy_xqksm" placeholder="请填写"></textarea>
+                                <textarea class="layui-textarea" name="hbyyXqksm" placeholder="请填写"></textarea>
                             </div>
                         </div>
                     </div>
@@ -289,12 +302,12 @@
                     <h2 class="layui-colla-title">事件初步原因分析与处置</h2>
                     <div class="layui-colla-content layui-show">
                         <div class="layui-form-item" pane>
-                            <label class="layui-form-label">事件后果<span class="sign">*</span></label>
+                            <label class="layui-form-label">事件原因分析<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="checkbox" name="sjhg" value="产品原因（包括说明书等）" title="产品原因（包括说明书等）">
-                                <input type="checkbox" name="sjhg" value="操作原因" title="操作原因">
-                                <input type="checkbox" name="sjhg" value="患者自身原因" title="患者自身原因">
-                                <input type="checkbox" name="sjhg" value="无法确定" title="无法确定">
+                                <input type="checkbox" name="sjyyfx" value="产品原因（包括说明书等）" title="产品原因（包括说明书等）">
+                                <input type="checkbox" name="sjyyfx" value="操作原因" title="操作原因">
+                                <input type="checkbox" name="sjyyfx" value="患者自身原因" title="患者自身原因">
+                                <input type="checkbox" name="sjyyfx" value="无法确定" title="无法确定">
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
@@ -329,41 +342,59 @@
             date:[
                 {
                     elem:'#scdate',
-                    value:'',
-                    format:'yyyy-MM-dd'
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
                     elem: '#update',
-                    value:'',
-                    format:'yyyy-MM-dd'
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
                     elem: '#evdate',
-                    value:'',
-                    format:'yyyy-MM-dd'
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
                     elem: '#hadate',
-                    value:'',
-                    format:'yyyy-MM-dd'
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
                     elem: '#qxdate',
-                    value:'',
-                    format:'yyyy-MM-dd'
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 },
                 {
                     elem: '#gedate',
-                    value:'',
-                    format:'yyyy-MM-dd'
+                    value:today0+" "+time0,
+                    type:"datetime",
+                    format:'yyyy-MM-dd HH:mm:ss'
                 }
             ],
+            val:{
+                filter:"forms",
+                select:[
+                     {
+                        filter:"shr",
+                        ids:"userId",
+                        text:"userXm",
+                        url:"/kwgl/empgl/listBmPartnerByUserId"
+                     }
+                ]
+            },
             submit:{
                 form:{
                     url:"/security/blsj/insertFwBlsj",
                     type:"POST",
-                    data:["bgbh","fsd","bgr_xm","cpmc","zczbh","xh","gg","cpph","cpbh","UDI","scrq", "yxqz","ssxkcyr_xm","sjfsrq","fxhhzrq","sh","shbx","sjhg","qxgzbx","xm","nllx","xb","csrq","nl","blh","jwbs","yqzljbyzy","qxsyrq","sycs","sjhg","csmc","sygc","hbyy_xqksm","sjhg","sjyyfxms","cbczqk"],
-                    add:{"eqid":$.getUrlParam("eqid")},
+                    contentType:"application/json",
+                    data:["bgbh","fsd","lxdh","bgrXm","cpmc","zczbh","xh","gg","cpph","cpbh","UDI","scrq", "yxqz","ssxkcyrXm","sjfsrq","fxhhzrq","sh","shbx","sjhg","qxgzbx","xm","nllx","xb","csrq","nl","blh","jwbs","yqzljbyzy","qxsyrq","sycs","sjhg","csmc","sygc","hbyyXqksm","sjhg","sjyyfx","sjyyfxms","cbczqk","shr"],
+                    add:{"eqId":$.getUrlParam("eqId"),"fwId":$.getUrlParam("fwId")},
                     reload:true
                 }
             }

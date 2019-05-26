@@ -37,6 +37,7 @@
     <form class="layui-form layui-form-pane" lay-filter="shouliForms">
         <div class="layui-row">
             <input type="hidden" name="slrId" placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
+            <input type="hidden" name="eqId" id="eqId"/>
             <div class="layui-collapse" lay-accordion>
                 <!--模块1-->
                 <div class="layui-colla-item">
@@ -163,6 +164,11 @@
                                                class="layui-input" autocomplete="off">
                                     </div>
                                 </div>
+
+                                <div class="layui-form-item">
+                                    <a id="blsj" href="repair-repairs1.html?eqId='+$('#name').val()'">不良事件</a>
+                                </div>
+
                             </div>
 
                             <div class="col-xs-12 col-sm-6">
@@ -194,6 +200,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -209,6 +216,7 @@
 
 
 <script>
+
     renderMod = {
         form: {
             val:{
@@ -218,6 +226,9 @@
                         data:{
                             fwId:$.getUrlParam("fwId")
                         }
+                    },
+                    func:function(){
+                        $('#blsj').attr('href','../../medical-incident/suspicious-report.html?eqId='+$("#eqId").val()+'&fwId='+$.getUrlParam("fwId"));
                     }
             },
             submit:{
