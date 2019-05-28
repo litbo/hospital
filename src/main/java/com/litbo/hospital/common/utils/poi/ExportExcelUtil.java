@@ -134,12 +134,13 @@ public class ExportExcelUtil {
         for (int i = 0; i < columnNumber; i++) {
             int orgWidth = sheet.getColumnWidth(i);
             sheet.autoSizeColumn(i, true);
-            int newWidth = (int) (sheet.getColumnWidth(i) + 100);
-            if (newWidth > orgWidth) {
-                sheet.setColumnWidth(i, newWidth);
-            } else {
-                sheet.setColumnWidth(i, orgWidth);
+            int newWidth = (int) (sheet.getColumnWidth(i) * 2);
+            if(newWidth<255*256){
+                sheet.setColumnWidth(i, newWidth < 3000 ? 3000 : newWidth);
+            }else{
+                sheet.setColumnWidth(i,6000 );
             }
+
         }
     }
 

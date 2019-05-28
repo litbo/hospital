@@ -93,11 +93,10 @@ public class FwPjzdController {
         ExcelData data = new ExcelData(titles,pjzds,"sheet");
         try {
             ExportExcelUtil.exportExcel(response,fileName,data);
-            return Result.success();
         }catch (Exception e){
             log.error("异常信息",e.getMessage(),pjSzm , pjfl);
-            return Result.error(CodeMsg.SERVER_ERROR);
         }
+        return null;
     }
     @RequestMapping(value = "fwPjzdTitle",method = RequestMethod.POST)
     public Result fwPjzdTitle(){

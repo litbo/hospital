@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class FwBlsjServiceImpl implements FwBlsjService {
@@ -86,5 +87,10 @@ public class FwBlsjServiceImpl implements FwBlsjService {
         taskDao.updateTaskById(taskId);
         return blsjDao.updateFwBlsjStatus(status,id);
 
+    }
+
+    @Override
+    public List<FwBlsj> listFwBlsjExport(String cpmc, String bgrXm) {
+        return blsjDao.listFwBlsj( EnumApplyStatus.WAIT_EXAMINE.getCode(), EnumBlsj.FW_BLSJ_SB.getCode(), cpmc, bgrXm);
     }
 }
