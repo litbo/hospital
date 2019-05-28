@@ -55,6 +55,9 @@
             min-width:500px;
             padding-bottom: 70px;
         }
+        .layui-colla-content{
+            overflow: unset;
+        }
     </style>
 </head>
 
@@ -84,13 +87,13 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">报告人<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="text" name="bgrXm" autocomplete="" lay-verify="required" class="layui-input" placeholder="请录入最大长度为20的文本">
+                                <input type="text" name="bgrXm" autocomplete="" lay-verify="required|long20" class="layui-input" placeholder="请录入最大长度为20的文本">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">联系电话<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="text" name="lxdh" autocomplete="" lay-verify="required" class="layui-input" placeholder="请填写">
+                                <input type="text" name="lxdh" autocomplete="" lay-verify="required|phone" class="layui-input" placeholder="请填写">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -108,43 +111,43 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">产品名称<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="text" name="cpmc" autocomplete="" lay-verify="required" class="layui-input" placeholder="请录入最大长度为2000的文本">
+                                <input type="text" name="cpmc" autocomplete="" lay-verify="required|long2000" class="layui-input" placeholder="请录入最大长度为2000的文本">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">注册证编号<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="text" name="zczbh" placeholder="请录入最大长度为100的文本" lay-verify="required" autocomplete="off" class="layui-input">
+                                <input type="text" name="zczbh" placeholder="请录入最大长度为100的文本" lay-verify="required|long100" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">型号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="xh" autocomplete="" class="layui-input" placeholder="请录入最大长度为3000的文本">
+                                <input type="text" name="xh" autocomplete="" class="layui-input" lay-verify="long3000" placeholder="请录入最大长度为3000的文本">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">规格</label>
                             <div class="layui-input-block">
-                                <input type="text" name="gg" autocomplete="" class="layui-input" placeholder="请录入最大长度为3000的文本">
+                                <input type="text" name="gg" autocomplete="" class="layui-input" lay-verify="long3000" placeholder="请录入最大长度为3000的文本">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">产品批号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="cpph" autocomplete="" class="layui-input" placeholder="请录入最大长度为200的文本">
+                                <input type="text" name="cpph" autocomplete="" class="layui-input" lay-verify="long200" placeholder="请录入最大长度为200的文本">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">产品编号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="cpbh" autocomplete="" class="layui-input" placeholder="请录入最大长度为200的文本">
+                                <input type="text" name="cpbh" autocomplete="" class="layui-input" lay-verify="long200" placeholder="请录入最大长度为200的文本">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">UDI</label>
                             <div class="layui-input-block">
-                                <input type="text" name="UDI" autocomplete="" class="layui-input" placeholder="请录入最大长度为200的文本">
+                                <input type="text" name="UDI" autocomplete="" class="layui-input" lay-verify="long200" placeholder="请录入最大长度为200的文本">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -193,23 +196,23 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">伤害表现<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="text" name="shbx" placeholder="请录入最大长度为2000的文本" lay-verify="required" autocomplete="off" class="layui-input">
+                                <input type="text" name="shbx" placeholder="请录入最大长度为2000的文本" lay-verify="required|long2000" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">器械故障表现<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="text" name="qxgzbx" placeholder="请录入最大长度为2000的文本" lay-verify="required" autocomplete="off" class="layui-input">
+                                <input type="text" name="qxgzbx" placeholder="请录入最大长度为2000的文本" lay-verify="required|long2000" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 m_pad">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">姓名</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="xm" autocomplete="" class="layui-input" placeholder="请录入最大长度为200的文本">
+                                    <input type="text" name="xm" autocomplete="" lay-verify="long200" class="layui-input" placeholder="请录入最大长度为200的文本">
                                 </div>
                             </div>
-                            <div class="layui-form-item">
+                            <div class="layui-form-item" pane>
                                 <label class="layui-form-label">年龄类型</label>
                                 <div class="layui-input-block">
                                     <input type="radio" name="nllx" value="岁" title="岁">
@@ -235,20 +238,20 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">年龄</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="nl" autocomplete="" class="layui-input" placeholder="请录入最大长度为10的文本">
+                                    <input type="text" name="nl" autocomplete="" lay-verify="long10" class="layui-input" placeholder="请录入最大长度为10的文本">
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">病历号</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="blh" autocomplete="" class="layui-input" placeholder="请录入最大长度为100的文本">
+                                    <input type="text" name="blh" autocomplete="" lay-verify="long100" class="layui-input" placeholder="请录入最大长度为100的文本">
                                 </div>
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">既往病史</label>
                             <div class="layui-input-block">
-                                <textarea class="layui-textarea" name="jwbs" placeholder="请录入最大长度为2000的文本"></textarea>
+                                <textarea class="layui-textarea" name="jwbs" lay-verify="long2000" placeholder="请录入最大长度为2000的文本"></textarea>
                             </div>
                         </div>
                     </div>
@@ -259,7 +262,7 @@
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">预期治疗疾病或作用</label>
                             <div class="layui-input-block">
-                                <textarea class="layui-textarea" name="yqzljbyzy" placeholder="请录入最大长度为2000的文本"></textarea>
+                                <textarea class="layui-textarea" name="yqzljbyzy" lay-verify="long2000" placeholder="请录入最大长度为2000的文本"></textarea>
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -282,20 +285,20 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">场所名称</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="csmc" autocomplete="" class="layui-input" placeholder="请录入最大长度为200的文本">
+                                    <input type="text" name="csmc" autocomplete="" lay-verify="long200" class="layui-input" placeholder="请录入最大长度为200的文本">
                                 </div>
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">使用过程<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <textarea class="layui-textarea" name="sygc" lay-verify="required" placeholder="请录入最大长度为2000的文本"></textarea>
+                                <textarea class="layui-textarea" name="sygc" lay-verify="required|long2000" placeholder="请录入最大长度为2000的文本"></textarea>
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">合并用药/械情况说明</label>
                             <div class="layui-input-block">
-                                <textarea class="layui-textarea" name="hbyyXqksm" placeholder="请录入最大长度为200的文本"></textarea>
+                                <textarea class="layui-textarea" name="hbyyXqksm" lay-verify="long200" placeholder="请录入最大长度为200的文本"></textarea>
                             </div>
                         </div>
                     </div>
@@ -306,22 +309,22 @@
                         <div class="layui-form-item" pane>
                             <label class="layui-form-label">事件原因分析<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <input type="checkbox" name="sjyyfx" value="产品原因（包括说明书等）" title="产品原因（包括说明书等）">
-                                <input type="checkbox" name="sjyyfx" value="操作原因" title="操作原因">
-                                <input type="checkbox" name="sjyyfx" value="患者自身原因" title="患者自身原因">
-                                <input type="checkbox" name="sjyyfx" value="无法确定" title="无法确定">
+                                <input type="checkbox" class="sjyyfx" name="s1" value="产品原因（包括说明书等）" title="产品原因（包括说明书等）">
+                                <input type="checkbox" class="sjyyfx" name="s2" value="操作原因" title="操作原因">
+                                <input type="checkbox" class="sjyyfx" name="s3" value="患者自身原因" title="患者自身原因">
+                                <input type="checkbox" class="sjyyfx" name="s4" value="无法确定" title="无法确定">
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">事件原因分析描述</label>
                             <div class="layui-input-block">
-                                <textarea class="layui-textarea" name="sjyyfxms" placeholder="请录入最大长度为2000的文本"></textarea>
+                                <textarea class="layui-textarea" name="sjyyfxms" lay-verify="long2000" placeholder="请录入最大长度为2000的文本"></textarea>
                             </div>
                         </div>
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">初步处置情况<span class="sign">*</span></label>
                             <div class="layui-input-block">
-                                <textarea class="layui-textarea" name="cbczqk" lay-verify="required" placeholder="请录入最大长度为2000的文本"></textarea>
+                                <textarea class="layui-textarea" name="cbczqk" lay-verify="required|long2000" placeholder="请录入最大长度为2000的文本"></textarea>
                             </div>
                         </div>
                     </div>
@@ -390,13 +393,59 @@
                      }
                 ]
             },
+            ver:{
+                long2000:function(value,item){
+                    if(value.length > 2000){
+                        return '请输入2000字符以内的内容';
+                    }
+                },
+                long3000:function(value,item){
+                    if(value.length > 3000){
+                        return '请输入3000字符以内的内容';
+                    }
+                },
+                long20:function(value,item){
+                    if(value.length > 20){
+                        return '请输入20字符以内的内容';
+                    }
+                },
+                long200:function(value,item){
+                    if(value.length > 200){
+                        return '请输入200字符以内的内容';
+                    }
+                },
+                long100:function(value,item){
+                    if(value.length > 100){
+                        return '请输入100字符以内的内容';
+                    }
+                },
+                long10:function(value,item){
+                    if(value.length > 10){
+                        return '请输入10字符以内的内容';
+                    }
+                }
+            },
             submit:{
+                before:function(){
+                    var ss="",$cks = $(".sjyyfx");
+                    for(var i=0;i<$cks.length;i++){
+                        if($cks[i].checked === true){
+                            ss += $("input[name='s"+(i+1)+"']").val() + "|"
+                        }
+                    }
+                    return param = {
+                        1:ss
+                    }
+                },
                 form:{
                     url:"/security/blsj/insertFwBlsj",
                     type:"POST",
                     contentType:"application/json",
-                    data:["bgbh","fsd","lxdh","bgrXm","cpmc","zczbh","xh","gg","cpph","cpbh","UDI","scrq", "yxqz","ssxkcyrXm","sjfsrq","fxhhzrq","sh","shbx","sjhg","qxgzbx","xm","nllx","xb","csrq","nl","blh","jwbs","yqzljbyzy","qxsyrq","sycs","sjhg","csmc","sygc","hbyyXqksm","sjhg","sjyyfx","sjyyfxms","cbczqk","shr"],
+                    data:["bgbh","fsd","lxdh","bgrXm","cpmc","zczbh","xh","gg","cpph","cpbh","UDI","scrq", "yxqz","ssxkcyrXm","sjfsrq","fxhhzrq","sh","shbx","sjhg","qxgzbx","xm","nllx","xb","csrq","nl","blh","jwbs","yqzljbyzy","qxsyrq","sycs","sjhg","csmc","sygc","hbyyXqksm","sjhg","sjyyfxms","cbczqk","shr"],
                     add:{"eqId":$.getUrlParam("eqId"),"fwId":$.getUrlParam("fwId")},
+                    param:{
+                        1:"sjyyfx"
+                    },
                     reload:true
                 }
             }
