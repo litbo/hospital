@@ -85,7 +85,7 @@ public class EqProvider {
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
-                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.obm_id";
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id";
         return SQL;
     }
 
@@ -141,7 +141,7 @@ public class EqProvider {
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
-                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.obm_id\n" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id\n" +
                 "WHERE 1=1" );
         if(StringUtils.isNotBlank(selectEqVo.getBmName()))sql.append(" and bm_name Like #{bmName}");
         if(StringUtils.isNotBlank(selectEqVo.getEqPym())) sql.append(" and eq_pym Like #{eqPym}");
@@ -337,7 +337,7 @@ public class EqProvider {
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
-                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.obm_id" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
                 " where e.eq_pm_id is not NULL";
 
         return SQL;
@@ -356,7 +356,7 @@ public class EqProvider {
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
-                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.obm_id" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
                 " where e.eq_pm_id is not NULL");
                  if(StringUtils.isNotBlank(selectFlEqVo.getBmId()))SQL.append(" and eq_bmid Like '%'+ #{bmId}+'%'");
                  if(StringUtils.isNotBlank(selectFlEqVo.getEqName()))SQL.append(" and eq_name Like '%'+ #{eqName}+'%'");
@@ -379,7 +379,7 @@ public class EqProvider {
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
-                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.obm_id" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
                 " where e.eq_pm_id is NULL");
         if(StringUtils.isNotBlank(selectFlEqVo.getBmId()))SQL.append(" and eq_bmid Like '%'+ #{bmId}+'%'");
         if(StringUtils.isNotBlank(selectFlEqVo.getEqName()))SQL.append(" and eq_name Like '%'+ #{eqName}+'%'");
@@ -400,7 +400,7 @@ public class EqProvider {
                 "FROM\n" +
                 "\tdbo.eq_info AS e\n" +
                 "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
-                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.obm_id" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id" +
                 " where e.eq_pm_id is  NULL";
 
         return SQL;
@@ -481,7 +481,7 @@ public class EqProvider {
                 "LEFT JOIN dbo.eq_qdfs AS q ON e.qdfs_id = q.qdfs_id\n" +
                 "LEFT JOIN dbo.eq_zjly AS z ON e.zjly_id = z.zjly_id " +
                 "LEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id " +
-                "LEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.obm_id " +
+                "LEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id " +
                 "where eq_id = #{id}";
         return SQL;
     }
