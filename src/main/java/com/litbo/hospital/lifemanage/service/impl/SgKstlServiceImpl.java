@@ -16,6 +16,7 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.EmpDao;
 import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.EqDao;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,8 +131,10 @@ public class SgKstlServiceImpl implements SgKstlService {
     public PageInfo<SgKstlAddSgInfoVO> selectSgKstlSbs(String userId, String eqPmName, String eqPmJc, Integer pageNum, Integer pageSize) {
         //通过人员表id获取所在部门
         SBm bm = empDao.getBmByEmpId(userId);
-        String bmId = bm.getBmId();
+        // 如果人员没有部门 返回null
+        if (!ObjectUtils.allNotNull(bm)) {return new PageInfo<>();}
 
+        String bmId = bm.getBmId();
         List<String> pmList = selectSgTlPmPmIdsByBmId(bmId);
 
         //调用品名的模糊查询 获得查询到的品名ID

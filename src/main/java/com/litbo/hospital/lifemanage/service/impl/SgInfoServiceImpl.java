@@ -166,6 +166,9 @@ public class SgInfoServiceImpl implements SgInfoService {
 
         //调用用户表方法 通过人员表id获取所在部门id和名字
         SBm bm = empDao.getBmByEmpId(userId);
+        // 如果人员没有部门 返回null
+        if (!ObjectUtils.allNotNull(bm)) {return new PageInfo<>();}
+
         String bmName = bm.getBmName();
         String bmId = bm.getBmId();
 
@@ -369,6 +372,8 @@ public class SgInfoServiceImpl implements SgInfoService {
     public PageInfo<SgInfoListVO> selectSgInfoBmList(String isSh, String userId, String bh, String sbName, Integer pageNum, Integer pageSize) {
         //根据用户id 查询部门id
         SBm bm = empDao.getBmByEmpId(userId);
+        // 如果人员没有部门 返回null
+        if (!ObjectUtils.allNotNull(bm)) {return new PageInfo<>();}
         String bmId = bm.getBmId();
         return selectSgInfoList(isSh, bmId, bh, sbName, pageNum, pageSize);
     }
