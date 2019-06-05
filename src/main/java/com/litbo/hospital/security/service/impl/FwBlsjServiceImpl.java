@@ -91,6 +91,6 @@ public class FwBlsjServiceImpl implements FwBlsjService {
 
     @Override
     public List<FwBlsj> listFwBlsjExport(String cpmc, String bgrXm) {
-        return blsjDao.listFwBlsj( EnumApplyStatus.WAIT_EXAMINE.getCode(), EnumBlsj.FW_BLSJ_SB.getCode(), cpmc, bgrXm);
+        return blsjDao.listFwBlsj( EnumApplyStatus.APPLY_APPROVAL.getCode(), EnumBlsj.FW_BLSJ_SB.getCode(), cpmc, bgrXm);
     }
 }

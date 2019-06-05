@@ -32,7 +32,7 @@ public class FwBlsj {
 
     private String ynbm;
 
-    private String UDI;
+    private String udi;
 
     private Date scrq;
 

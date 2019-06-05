@@ -25,7 +25,7 @@ public interface FwBlsjDao {
             "    values ( #{bgrq,jdbcType=TIMESTAMP}, #{sbks,jdbcType=VARCHAR}, \n" +
             "      #{lxdh,jdbcType=VARCHAR}, #{tmh,jdbcType=VARCHAR}, #{bgrXm,jdbcType=VARCHAR}, #{cpmc,jdbcType=VARCHAR}, \n" +
             "      #{zczbh,jdbcType=VARCHAR}, #{xh,jdbcType=VARCHAR}, #{gg,jdbcType=VARCHAR}, #{cpph,jdbcType=VARCHAR}, \n" +
-            "      #{cpbh,jdbcType=VARCHAR}, #{ynbm,jdbcType=VARCHAR}, #{UDI,jdbcType=VARCHAR}, #{scrq,jdbcType=TIMESTAMP}, \n" +
+            "      #{cpbh,jdbcType=VARCHAR}, #{ynbm,jdbcType=VARCHAR}, #{udi,jdbcType=VARCHAR}, #{scrq,jdbcType=TIMESTAMP}, \n" +
             "      #{yxqz,jdbcType=TIMESTAMP}, #{ssxkcyrXm,jdbcType=VARCHAR}, #{sjfsrq,jdbcType=TIMESTAMP}, \n" +
             "      #{fxhhzrq,jdbcType=TIMESTAMP}, #{sh,jdbcType=VARCHAR}, #{shbx,jdbcType=VARCHAR}, \n" +
             "      #{qxgzbx,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR}, #{csrq,jdbcType=TIMESTAMP}, \n" +
