@@ -78,7 +78,20 @@ public class EqCsController {
     @RequestMapping("/getCszjByCszjId")
     public Result getCszjByCszjId(String cszjId){
         EqCszjVO cszj =  eqCsService.getCszjByCszjId(cszjId);
-
+        if(cszj==null) return  Result.success();
+        if(cszj.getCszjZjlx()!=null&&!"".equals(cszj.getCszjZjlx())){
+            if("1".equals(cszj.getCszjZjlx())){
+                cszj.setCszjZjlx("产品注册证");
+            }else if("2".equals(cszj.getCszjZjlx())){
+                cszj.setCszjZjlx("经营许可证");
+            }else if("3".equals(cszj.getCszjZjlx())){
+                cszj.setCszjZjlx("经营许可证");
+            }else if("4".equals(cszj.getCszjZjlx())){
+                cszj.setCszjZjlx("特种设备生产许可证");
+            }
+        }else {
+            cszj.setCszjZjlx("");
+        }
         return Result.success(cszj);
     }
 

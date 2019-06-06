@@ -119,7 +119,7 @@ public interface GroupDao {
             "    INNER JOIN s_emp emp ON (emp.user_id=gpu.user_id)\n" +
             "    INNER JOIN s_bm bm ON (bm.bm_id=gp.bm_id)\n" +
             "    INNER JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
-            "    where gw.gw_name=#{gwName}")
+            "    where gw.gw_name=#{gwName} and sh_flag=2")
     List<GroupPerCateGoryUserMSGDetailVO> listPreEmps(String gwName);
 
     @SelectProvider(type = GroupProvider.class,method = "listPreEmpsByBmNameAndGwName")
