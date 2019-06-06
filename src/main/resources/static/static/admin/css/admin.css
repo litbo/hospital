@@ -1924,12 +1924,12 @@ html {
   right: 0;
   top: 0;
   z-index: 10;
-  width: 38px;
+  width: 55px;
   height: 38px;
   line-height: 30px;
   border: 1px solid #e2e2e2;
   border-radius: 2px;
-  background-color: #1e9fff;
+  background-color: #ef634c;
   text-align: center;
   cursor: pointer;
   color:#fff;
@@ -1994,6 +1994,7 @@ html {
 .names {
   float: right;
   text-align: center;
+  min-width: 150px;
 }
 .h_name {
   float: left;
