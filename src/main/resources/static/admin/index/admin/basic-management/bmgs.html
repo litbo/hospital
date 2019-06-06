@@ -34,6 +34,13 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
+                    <div class="layui-inline">
+                        <select  name="iCode">
+                            <option value="0000000000">部门状态</option>
+                            <option value="1">未设置</option>
+                            <option value="2">叶子部门</option>
+                        </select>
+                    </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input class="layui-input" name="bmName" placeholder="部门名称">
                     </div>
@@ -105,7 +112,7 @@
                 url: "/supervise/bmgl/listKgsBm",
                 type: "reload",
                 method: "GET",
-                data: ["bmName"]
+                data: ["bmName","iCode"]
             }
         }
     }

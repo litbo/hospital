@@ -266,9 +266,9 @@ public class BmController {
     @ResponseBody
     public Result listKgsBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                     @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                                    @RequestParam(required = false) String bmName){
+                                    @RequestParam(required = false) String bmName,String iCode){
 
-        List<BmSelectLbVO> bms = bmService.listKgsBm(pageNum, pageSize,bmName);
+        List<BmSelectLbVO> bms = bmService.listKgsBm(pageNum, pageSize,bmName,iCode);
         return Result.success(new PageInfo<>(bms));
     }
 
@@ -279,6 +279,13 @@ public class BmController {
         if(bmService.batchImportBms(fileName,file) == 0){
             return Result.error();
         }
+        return Result.success();
+    }
+
+    @PostMapping( "/adjustBmIdForEq")
+    @ResponseBody
+    public Result adjustBmIdForEq(){
+        bmService.adjustBmIdForEq();
         return Result.success();
     }
 

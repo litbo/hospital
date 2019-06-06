@@ -12,9 +12,9 @@ import lombok.Data;
 public class EqCs {
     private String sbcsId;
 
-    private String sbCslbId;
+    private Integer sbCslbId;
 
-    private String gbId;
+    private Integer gbId;
 
     private String jgId;
 

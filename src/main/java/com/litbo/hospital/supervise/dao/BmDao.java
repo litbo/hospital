@@ -83,5 +83,5 @@ public interface BmDao {
     @Update("update s_bm set xbm_flag=#{xbmFlag}  where bm_id=#{new_pbm_id}")
     void setxbm(@Param("new_pbm_id") String new_pbm_id, @Param("xbmFlag")String xbmFlag);
     @SelectProvider(type = BmProvider.class ,method = "listKgsBm")
-    List<BmSelectLbVO>  listKgsBm(String bmName);
+    List<BmSelectLbVO>  listKgsBm(String bmName,String iCode);
 }

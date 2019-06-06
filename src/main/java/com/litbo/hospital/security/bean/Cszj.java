@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class Cszj {
     private Integer cszjId;
-    private Integer sbcsId;
+    private String sbcsId;
     private String cszjName;
     private String cszjBh;
     private String cszjFzdw;

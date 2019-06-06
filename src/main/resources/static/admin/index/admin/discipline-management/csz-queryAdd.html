@@ -279,12 +279,19 @@
             contentType: false,
             success:(function(data) {
                 console.log(data);
+                putMsg({
+                    alert:"图片上传成功！"
+                });
+                var obj = document.getElementById('file') ;
+                obj.outerHTML=obj.outerHTML;
                 $("#imgUrl").val(data.data);
                 // console.log(data)
                 // window.confirm(data.code)
             }),
             error:(function(res) {
-                alert("失败");
+                putMsg({
+                    alert:"图片上传失败！"
+                });
             })
         });
     }

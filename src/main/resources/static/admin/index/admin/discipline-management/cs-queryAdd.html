@@ -195,7 +195,14 @@
                     //     text:"jg",
                     //     url:"/eqdict/listJg"
                     // }
-                ]
+                ],
+                func:function(data,form){
+                    //console.log(data);
+                    $("select[name='gbId']").val(String(data["gbId"]).trim());
+                    $("select[name='eqCslbId']").val(String(data["eqCslbId"]).trim());
+                    form.render("select");
+
+                }
             },
 
             submit:{

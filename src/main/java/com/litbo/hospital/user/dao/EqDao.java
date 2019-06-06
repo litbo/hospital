@@ -94,4 +94,6 @@ public interface EqDao {
     List<EqName> listEqName();
     @SelectProvider(type = EqProvider.class , method = "listEqNameByX")
     List<EqName> listEqNameByX(String ccname);
+    @Update("UPDATE eq_info SET eq_bmid = #{bmId} WHERE eq_id = #{eqId}")
+    void updateBmId(@Param("eqId") String eqId,@Param("bmId")  String bmId);
 }

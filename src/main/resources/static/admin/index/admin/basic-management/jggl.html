@@ -89,6 +89,7 @@
                         <input type="radio" name="wxFlag" value="0" title="否">
                     </div>
                 </div>
+
                 <!--<div class="layui-form-item">
                     <label class="layui-form-label">负责人</label>
                     <div class="layui-input-block">
@@ -340,7 +341,7 @@
             bmAddr: $("*[name='bmAddr1']").val(),
             bmName: $("*[name='bmName1']").val(),
             bmTel: $("*[name='bmTel1']").val(),
-            wxFlag: $("*[name='wxFlag1']").val(),
+            wxFlag: $("*[name='wxFlag1']:checked").val(),
             userId:formData.radio[0]["userId"],
             pBmId: paseData["pId"]["bmId"]
         };
@@ -389,7 +390,8 @@
             bmAddr: $("*[name='bmAddr']").val(),
             bmName: $("*[name='bmName']").val(),
             bmTel: $("*[name='bmTel']").val(),
-            wxFlag: $("*[name='wxFlag']").val(),
+            wxFlag: $("*[name='wxFlag']:checked").val(),
+
             userId: daa
         };
         console.log(nData);

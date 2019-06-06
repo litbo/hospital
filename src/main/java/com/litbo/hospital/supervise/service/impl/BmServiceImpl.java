@@ -7,6 +7,9 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.vo.*;
+import com.litbo.hospital.user.bean.EqPm;
+import com.litbo.hospital.user.dao.EqDao;
+import com.litbo.hospital.user.vo.EqVo;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -32,6 +35,8 @@ public class BmServiceImpl implements BmService {
 
     @Autowired
     private BmDao bmDao;
+    @Autowired
+    private EqDao eqDao;
     @Override
     public PageInfo getBmList(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -387,6 +392,7 @@ public class BmServiceImpl implements BmService {
         }else if(selectVO.getFlag()==3){
             for (BmSelectLbVO lbbm:lbbms){
                 if(lbbm.getBmId().startsWith("02")){
+                    lbbm.setBmLb("管理部门");
                     if(lbbm.getBmId().startsWith("0201")){
                         lbbm.setBmGk("医工");
                     }else if(lbbm.getBmId().startsWith("0202")) {
@@ -408,9 +414,9 @@ public class BmServiceImpl implements BmService {
     }
 
     @Override
-    public List<BmSelectLbVO> listKgsBm(int pageNum, int pageSize, String bmName) {
+    public List<BmSelectLbVO> listKgsBm(int pageNum, int pageSize, String bmName,String iCode) {
         PageHelper.startPage(pageNum,pageSize);
-        List<BmSelectLbVO> bms =  bmDao.listKgsBm(bmName);
+        List<BmSelectLbVO> bms =  bmDao.listKgsBm(bmName,iCode);
         for(BmSelectLbVO bm:bms){
             if(bm.getBmId().startsWith("02"))
                 bm.setBmLb("管理部门");
@@ -562,4 +568,18 @@ public class BmServiceImpl implements BmService {
         if(bmName==null||bmName.equals("")) return null;
         return bmDao.listBmsByBmName(bmName);
     }
+
+    @Override
+    public void adjustBmIdForEq() {
+        List<EqVo> allEq = eqDao.getAllEq();
+        for(EqVo eqVo:allEq){
+            SBm bm;
+            if(eqVo.getEqBmid().length()<=9){
+                bm = bmDao.getBmByOid(eqVo.getEqBmid());
+                eqDao.updateBmId(eqVo.getEqId(),bm.getBmId());
+            }
+
+        }
+    }
+
 }

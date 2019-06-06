@@ -69,7 +69,9 @@ public interface BmService {
 
     List<SBm> listBmsByBmName(int pageNum, int pageSize,String bmName);
 
-    List<BmSelectLbVO> listKgsBm(int pageNum, int pageSize, String bmName);
+    List<BmSelectLbVO> listKgsBm(int pageNum, int pageSize, String bmName,String iCode);
+
+    void adjustBmIdForEq();
 
     //通过父布门递归删除
 //    void removeBmByPid(String pid);
