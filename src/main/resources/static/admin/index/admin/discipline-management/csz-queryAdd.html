@@ -64,7 +64,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">证件类型</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cszjZjlx" autocomplete="off"  class="layui-input" >
+                    <!--<input type="text" name="cszjZjlx" autocomplete="off"  class="layui-input" >-->
+
+                    <select name="cszjZjlx">
+                        <option value="1">产品注册证</option>
+                        <option value="2">经营许可证</option>
+                        <option value="3">生产许可证</option>
+                        <option value="4">特种设备生产许可证</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -219,6 +226,12 @@
     });
 
     function getUpload(){
+        if(length==0){
+            putMsg({
+                alert:"请先选择图片！"
+            });
+            return;
+        }
         var formData = new FormData();
         var arr=new Array();
         var container;
