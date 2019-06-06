@@ -8,19 +8,12 @@
     <title>设备厂商设置</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        /*.layui-form-item .layui-form-label{*/
-        /*width:150px;*/
-        /*}*/
-        /*.layui-form-item .layui-input-block{*/
-        /*margin-left:150px;*/
-        /*}*/
         .layui-form-item{
             margin-top:35px
         }
@@ -38,8 +31,6 @@
 <form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
-
-
             <div class="layui-form-item" pane>
                 <label class="layui-form-label" style="line-height:30px">厂商<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -53,12 +44,6 @@
                 </div>
             </div>
             <div class="layui-form-item">
-
-            </div>
-
-
-
-            <div class="layui-form-item">
                 <label class="layui-form-label">证件名称<span>*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="cszjName" autocomplete="off"  class="layui-input" lay-verify="required">
@@ -70,7 +55,6 @@
                     <input type="text" name="cszjBh" autocomplete="off"  class="layui-input" lay-verify="required">
                 </div>
             </div>
-
             <div class="layui-form-item">
                 <label class="layui-form-label">发证单位</label>
                 <div class="layui-input-block">
@@ -83,28 +67,21 @@
                     <input type="text" name="cszjZjlx" autocomplete="off"  class="layui-input" >
                 </div>
             </div>
-
         </div>
 
         <div class="col-xs-12 col-sm-6">
-
-
-
             <div class="layui-form-item">
                 <label class="layui-form-label">发证日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="fzDate" class="layui-input" autocomplete="off" id="date1" lay-verify="date">
                 </div>
             </div>
-
-
             <div class="layui-form-item">
                 <label class="layui-form-label">有效期(月)<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="yxqDate" class="layui-input" autocomplete="off"  lay-verify="number">
                 </div>
             </div>
-
             <div class="layui-form-item">
                 <label class="layui-form-label">变更日期</label>
                 <div class="layui-input-block">
@@ -118,18 +95,16 @@
                 </div>
             </div>
 
-            <div id="uploadForm">
+            <div class="layui-form-item" pane>
                 <label class="layui-form-label">证件照片</label>
-                <input id="file"  type="file" multiple/>
-                <button id="upload" class="layui-btn layui-btn-sm layui-btn-normal" type="button" onclick="getUpload()">上传照片</button>
-
-
-                <!--<button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>-->
-                <!--<button type="button" class="layui-btn layui-btn-sm layui-btn-normal" lay-submit="" lay-filter="submit" id="sub">上传照片</button>-->
-                <!--<button type="button" id="ckzp" class="layui-btn layui-btn-sm layui-btn-normal" >查看照片</button>-->
+                <div class="layui-input-block">
+                    <div id="uploadForm" style="margin-left: 10px;">
+                        <input id="file"  type="file" multiple/>
+                        <button id="upload" class="layui-btn layui-btn-sm layui-btn-normal" type="button" onclick="getUpload()">上传照片</button>
+                    </div>
+                    <input type="text" id="imgUrl" name="imgUrl" autocomplete="off"  class="layui-input" style="display: none" >
+                </div>
             </div>
-            <input type="text" id="imgUrl" name="imgUrl" autocomplete="off"  class="layui-input" style="display: none" >
-
 
         </div>
         <div class="col-xs-12">
@@ -140,16 +115,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 </form>
 
-
-
-<!---->
 <script>
-
-
     var formData = {};
     renderMod = {
         form:{
@@ -197,7 +166,7 @@
                     if(formData.radio){
                         daa=formData.radio[0]["sbcsId"];
                     }else if(formData.val){
-                        console.log(formData)
+                        console.log(formData);
                         daa=formData.val.sbcsId;
                     }
                     return param = {
@@ -226,7 +195,6 @@
                             layer.alert("提交失败")
                         }
                     }
-
                 }
             }
         },bind: {
@@ -242,26 +210,22 @@
                 }
             ]
         }
-
-    }
-
-
-
+    };
 
     var length;
     $("#file").change(function () {
         length = this.files.length;
         console.log(length);
-    })
+    });
 
     function getUpload(){
         var formData = new FormData();
         var arr=new Array();
         var container;
         var i=0;
-        for(let i=0;i<length;i++){
+        for(i=0;i<length;i++){
             formData.append('file', $('#file')[0].files[i]);
-            console.log(formData.get("file"));
+            //console.log(formData.get("file"));
         }
         container=formData.getAll("file");
         for (var item in container) {
@@ -283,7 +247,7 @@
                     alert:"图片上传成功！"
                 });
                 var obj = document.getElementById('file') ;
-                obj.outerHTML=obj.outerHTML;
+                //obj.outerHTML=obj.outerHTML;
                 $("#imgUrl").val(data.data);
                 // console.log(data)
                 // window.confirm(data.code)

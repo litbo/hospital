@@ -78,10 +78,6 @@
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -91,7 +87,6 @@
                     }
                 }
                 , done: function (obj) {
-
                     tableFunc({
                         "obj": obj,
                         "toolFunc": [{
@@ -120,27 +115,15 @@
                             },
                             tool:"toolbar",
                             event:"del"
-
                         }]
                     })
-
-
-
-
-
                 }
             },
-
             reSet:{
                 url:"/supervise/csgl/listEqCszjVOByX",
                 type:"search",
-                data:["eqCslb","sbcsName"],
-                where: {
-
-                }
-
+                data:["eqCslb","sbcsName"]
             }
-
         }
     }
 </script>
