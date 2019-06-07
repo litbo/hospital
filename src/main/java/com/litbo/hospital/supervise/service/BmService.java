@@ -73,6 +73,8 @@ public interface BmService {
 
     void adjustBmIdForEq();
 
+    PageInfo listInitBms(int pageNum, int pageSize);
+
     //通过父布门递归删除
 //    void removeBmByPid(String pid);
 }

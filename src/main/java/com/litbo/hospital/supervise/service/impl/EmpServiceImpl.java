@@ -144,7 +144,31 @@ public class EmpServiceImpl implements EmpService {
         empDao.updateEmp(emp);
     }
 
+    private Integer batchImportGl(Workbook wb){
+        Sheet sheet = wb.getSheetAt(0);
+        int lastRowNum = sheet.getLastRowNum();
 
+        boolean flag = false;
+        for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
+            Row row = sheet.getRow(r);
+            if (row == null){
+                continue;
+            }
+            for (Cell c : row) {
+                c.setCellType(Cell.CELL_TYPE_STRING);
+                if(c==null||"".equals(c.getStringCellValue())){
+                    flag=true;
+                }else {
+                    flag=false;
+                    break;
+                }
+            }
+            if (flag==true){
+                lastRowNum--;
+            }
+        }
+        return lastRowNum;
+    }
     @Override
     @Transactional
     public Integer batchImportBms(String fileName, MultipartFile file)   {
@@ -175,7 +199,8 @@ public class EmpServiceImpl implements EmpService {
                 notNull = true;
             }
 
-            for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
+            Integer rowsct = batchImportGl(wb);
+            for (int r = 1; r < rowsct+1; r++) {
                 Row row = sheet.getRow(r);
                 if (row == null){
                     continue;
@@ -198,6 +223,7 @@ public class EmpServiceImpl implements EmpService {
 
                 String userId = row.getCell(0).getStringCellValue();   emp.setUserId(userId);
                 String userXm = row.getCell(1).getStringCellValue();    emp.setUserXm(userXm);
+                if("".equals(userId)||"".equals(userXm))  return 1/0;
                 String sfzh = row.getCell(2).getStringCellValue();      emp.setSfzh(sfzh);
                 String jtzz = row.getCell(3).getStringCellValue();      emp.setJtzz(jtzz);
                 String tel = row.getCell(4).getStringCellValue();      emp.setTel(tel);

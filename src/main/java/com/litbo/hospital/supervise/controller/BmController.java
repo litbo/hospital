@@ -81,6 +81,12 @@ public class BmController {
         PageInfo date = bmService.getBmList(pageNum,pageSize);
         return Result.success(date);
     }
+    @RequestMapping("/listInitBms")
+    public Result listInitBms(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo date = bmService.listInitBms(pageNum,pageSize);
+        return Result.success(date);
+    }
     //列出所有部门信息不分頁
     @GetMapping("/listBm")
     @ResponseBody

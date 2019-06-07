@@ -45,10 +45,10 @@ public interface BmDao {
     SBm getBmBybmid(String bmid);
     @Insert("insert into s_bm (obm_id,bm_id, bm_name, user_id, \n" +
             "      bm_tel, bm_addr, wx_flag, \n" +
-            "      p_bm_id,xbm_flag)\n" +
+            "      p_bm_id,xbm_flag,init_flag)\n" +
             "    values (#{obmId},#{bmId,jdbcType=CHAR}, #{bmName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, \n" +
             "      #{bmTel,jdbcType=VARCHAR}, #{bmAddr,jdbcType=VARCHAR}, #{wxFlag,jdbcType=CHAR}, \n" +
-            "      #{pBmId,jdbcType=CHAR},#{xbmFlag})")
+            "      #{pBmId,jdbcType=CHAR},#{xbmFlag},#{initFlag})")
     Integer saveBm(SBm bm);
 
     @SelectProvider(type = BmProvider.class ,method = "selectBmByX")
@@ -84,4 +84,6 @@ public interface BmDao {
     void setxbm(@Param("new_pbm_id") String new_pbm_id, @Param("xbmFlag")String xbmFlag);
     @SelectProvider(type = BmProvider.class ,method = "listKgsBm")
     List<BmSelectLbVO>  listKgsBm(String bmName,String iCode);
+    @Select("select * from s_bm where bm_id!='0000000000' and init_flag =1 ")
+    List<SBm> listInitBms();
 }

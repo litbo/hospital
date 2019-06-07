@@ -143,6 +143,7 @@ public class BmServiceImpl implements BmService {
         String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(bm.getpBmId()));
         bm.setBmId(new_bm_id);
         bm.setXbmFlag("0");
+        bm.setInitFlag("0");
         bmDao.saveBm(bm);
     }
 
@@ -456,6 +457,33 @@ public class BmServiceImpl implements BmService {
         bm.setBmId(new_bm_id);
     }
 
+    private Integer batchImportGl(Workbook wb){
+        Sheet sheet = wb.getSheetAt(0);
+        int lastRowNum = sheet.getLastRowNum();
+
+        boolean flag = false;
+        for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
+            Row row = sheet.getRow(r);
+            if (row == null){
+                continue;
+            }
+            for (Cell c : row) {
+                c.setCellType(Cell.CELL_TYPE_STRING);
+                if(c==null||"".equals(c.getStringCellValue())){
+                    flag=true;
+                }else {
+                    flag=false;
+                    break;
+                }
+            }
+            if (flag==true){
+                lastRowNum--;
+            }
+        }
+        return lastRowNum;
+    }
+
+
     @Override
     @Transactional
     public Integer batchImportBms(String fileName, MultipartFile file){
@@ -486,7 +514,9 @@ public class BmServiceImpl implements BmService {
                 notNull = true;
             }
 
-            for (int r = 1; r < sheet.getLastRowNum()+1; r++) {
+            Integer rowsct = batchImportGl(wb);
+
+            for (int r = 1; r < rowsct+1; r++) {
                 Row row = sheet.getRow(r);
                 if (row == null){
                     continue;
@@ -512,6 +542,7 @@ public class BmServiceImpl implements BmService {
 
                 String obmId = row.getCell(0).getStringCellValue();
                 String bmName = row.getCell(1).getStringCellValue();
+                if("".equals(obmId)||"".equals(bmName))  return 1/0;
                 String userId = row.getCell(2).getStringCellValue();
                 String bmTel = row.getCell(3).getStringCellValue();
                 String bmAddr = row.getCell(4).getStringCellValue();
@@ -525,6 +556,7 @@ public class BmServiceImpl implements BmService {
                 bm.setBmAddr(bmAddr);
                 bm.setWxFlag("0");
                 bm.setpBmId("1000000000");
+                bm.setInitFlag("1");
 
                 if(bmDao.saveBm(bm)<=0){
                     return 1/0;
@@ -582,4 +614,10 @@ public class BmServiceImpl implements BmService {
         }
     }
 
+    @Override
+    public PageInfo listInitBms(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SBm> initBms = bmDao.listInitBms();
+        return new PageInfo(initBms);
+    }
 }

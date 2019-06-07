@@ -162,6 +162,7 @@ public class Scheduler {
             bm.setBmId(bmId);
             bm.setBmName(bmName);
             bm.setpBmId(pbmId);
+            bm.setInitFlag("0");
             bmDao.saveBm(bm);
         }
     }
