@@ -46,17 +46,14 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="ccname" placeholder="请选择"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                        <input type="text" name="ccname" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="eqName" id="eqName">选择</button>
                                     </div>
-                                   <!-- <div class="layui-input-block">
-                                        <input type="text" name="eqName" autocomplete="off" class="layui-input" lay-verify="required" placeholder="请输入...">
-                                    </div>-->
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">资产编号<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqZcbh" autocomplete="off" class="layui-input" lay-verify="number" placeholder="请输入...">
+                                        <input type="text" name="eqZcbh" autocomplete="off" class="layui-input" lay-verify="required|number" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">

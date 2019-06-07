@@ -82,7 +82,7 @@
                 <div class="layui-input-block">
                     <!--<input type="text" name="userId" class="layui-input" autocomplete="off" lay-verify="required">-->
                     <input type="text" name="userXm" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
-                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId" style="display:none;">
+                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" id="userId" style="display:none;">
                 </div>
             </div>
             <div class="layui-form-item" id="nextShr">
@@ -97,13 +97,13 @@
             <div class="layui-form-item" id="syDays">
                 <label class="layui-form-label">试用天数<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="syDays" class="layui-input" autocomplete="off" >
+                    <input type="text" name="syDays" class="layui-input" lay-verify="required" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="ztDate" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="ztDate" class="layui-input" autocomplete="off" id="date" lay-verify="required">
                 </div>
             </div>
         </div>

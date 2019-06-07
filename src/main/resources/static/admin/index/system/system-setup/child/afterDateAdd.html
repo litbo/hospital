@@ -42,7 +42,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">提醒类别<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <select>
+                        <select lay-verify="required">
                             <option>保修期到期</option>
                             <option>aaa</option>
                             <option>bbb</option>
@@ -52,13 +52,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">提醒次数<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" class="layui-input">
+                        <input type="text" name="" autocomplete="off" class="layui-input" lay-verify="required">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">间隔时间(天)<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="" autocomplete="off" class="layui-input">
+                        <input type="text" name="" autocomplete="off" class="layui-input" lay-verify="required">
                     </div>
                 </div>
             </div>

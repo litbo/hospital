@@ -52,7 +52,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">参考生产厂商<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="scsName" lay-verify="required" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:45px;padding-left:60px;">
+                    <input type="text" name="scsName" lay-verify="required" placeholder="请选择" autocomplete="off" disabled lay-verify="required" class="layui-input" style="height:45px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" data-id="table" id="selectRoom">选择</button>
                 </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">报价<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="xhbjBj" lay-verify="Decimal" autocomplete="off" placeholder="请输入金额"
+                    <input type="text" name="xhbjBj" lay-verify="required|Decimal" autocomplete="off" placeholder="请输入金额"
                            class="layui-input">
                 </div>
             </div>

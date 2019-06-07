@@ -28,8 +28,7 @@
                 <label class="layui-form-label">制定人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <label>
-                        <input id="userXm" type="text" disabled autocomplete="off"
-                               class="layui-input">
+                        <input id="userXm" type="text" disabled autocomplete="off" class="layui-input">
                     </label>
                 </div>
             </div>
@@ -40,7 +39,7 @@
 
                 <div class="layui-input-block">
                     <label>
-                        <select name="bmId" lay-filter="bmId"></select>
+                        <select name="bmId" lay-filter="bmId" lay-verify="required"></select>
                     </label>
                 </div>
                 <!--<div class="layui-input-block">-->
@@ -50,7 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">计划名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="planName" autocomplete="off" class="layui-input">
+                    <input type="text" name="planName" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
         </div>

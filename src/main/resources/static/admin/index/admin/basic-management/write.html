@@ -37,7 +37,6 @@
                 <label class="layui-form-label">制度名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="zdName" class="layui-input" autocomplete="off" lay-verify="required">
-
                 </div>
             </div>
             <div class="layui-form-item">
@@ -102,7 +101,7 @@
                 <label class="layui-form-label">编写人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="userXm" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
-                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId" style="display:none;">
+                    <input type="text" name="userId" value="" autocomplete="off" class="layui-input" id="userId" style="display:none;">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -118,7 +117,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">编写日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="createTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">
+                    <input type="text" name="createTime" class="layui-input" autocomplete="off" id="date" lay-verify="required">
                 </div>
             </div>
         </div>
@@ -139,8 +138,6 @@
 <script>
     var formData = {};
     renderMod = {
-
-
         form:{
             date:{
                 elem:'#date',

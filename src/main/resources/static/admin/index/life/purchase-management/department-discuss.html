@@ -34,22 +34,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlTime" id="date" placeholder="yyyy-MM-dd" autocomplete="off"
-                           class="layui-input">
+                    <input type="text" name="kstlTime" id="date" placeholder="yyyy-MM-dd" autocomplete="off"  lay-verify="required" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">地点<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required"
-                           class="layui-input">
+                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">意见<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="kstlYj" placeholder="请输入" autocomplete="off" lay-verify="required"
-                           class="layui-input">
+                    <input type="text" name="kstlYj" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
         </div>
@@ -80,12 +77,8 @@
                 <!-- TODO   添加搜索人员导航 -->
 
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable1"><i
-                            class="fas fa-plus"></i>&nbsp;添加
-                    </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
-                            class="fas fa-trash-alt"></i>&nbsp;删除
-                    </button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable1"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
                 </div>
             </div>
             <table id="table" lay-filter="table"></table>
@@ -93,8 +86,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">会议内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" name="kstlContent"
-                              lay-verify="required"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="kstlContent" lay-verify="required"></textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane style="margin-bottom:-10px;">

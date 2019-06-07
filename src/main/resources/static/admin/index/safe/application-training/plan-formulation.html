@@ -41,13 +41,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">计划名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhName" autocomplete="" class="layui-input">
+                    <input type="text" name="jhName" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">主办单位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" class="layui-input">
+                    <input type="text" name="zbdw" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -109,32 +109,31 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">结束时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhJstime" class="layui-input" autocomplete="off"
-                           id="findDate">
+                    <input type="text" name="jhJstime" class="layui-input" autocomplete="off" id="findDate">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">组织者<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="userId" autocomplete="" class="layui-input">
+                    <input type="text" name="userId" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">主讲人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pxZjr" autocomplete="" class="layui-input">
+                    <input type="text" name="pxZjr" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训地点<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pxAddr" autocomplete="" class="layui-input">
+                    <input type="text" name="pxAddr" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea placeholder="" class="layui-textarea" name="pxNr" id="pxNr"></textarea>
+                    <textarea placeholder="" class="layui-textarea" name="pxNr" id="pxNr" lay-verify="required"></textarea>
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">公告类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="gglxId"  lay-filter="gglx">
+                    <select name="gglxId"  lay-filter="gglx" lay-verify="required">
                         <option>请选择</option>
                     </select>
                 </div>
@@ -41,7 +41,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">发布部门<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled lay-verify="required" class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"   id="layerBtn">选择</button>
                 </div>
             </div>
@@ -76,7 +76,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">标题<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="ggbt" autocomplete="" class="layui-input">
+                    <input type="text" name="ggbt" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
         </div>
