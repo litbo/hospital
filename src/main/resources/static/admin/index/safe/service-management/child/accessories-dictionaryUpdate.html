@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>配件字典编辑</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -15,21 +16,23 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-form-label{
-            padding: 8px 5px!important;
+        .layui-form-label {
+            padding: 8px 5px !important;
         }
-        .layui-form-label{
-            width:120px;
+
+        .layui-form-label {
+            width: 120px;
         }
-        .layui-form-item{
-            margin-bottom:30px;
+
+        .layui-form-item {
+            margin-bottom: 30px;
         }
 
     </style>
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action=""  lay-filter="forms">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6" style="margin-top: 20px;">
             <div class="layui-form-item">
@@ -46,28 +49,32 @@
                 </div>
             </div>
             <div class="layui-form-item" pane>
-                <label class="layui-form-label" >设备名称<span class="sign">*</span></label>
+                <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqId" placeholder="请选择"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="eqId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                           style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">配件名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjName" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
+                    <input type="text" name="pjName" class="layui-input" autocomplete="off" lay-verify="required"
+                           placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">配件编号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjbh" class="layui-input" autocomplete="off" lay-verify="required|number" placeholder="请输入">
+                    <input type="text" name="pjbh" class="layui-input" autocomplete="off" lay-verify="required|number"
+                           placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">规格型号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjGgxh" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
+                    <input type="text" name="pjGgxh" class="layui-input" autocomplete="off" lay-verify="required"
+                           placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -80,13 +87,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">产品注册证号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off"  ay-verify="required|number" placeholder="请输入">
+                    <input type="text" name="pjZczh" class="layui-input" autocomplete="off" ay-verify="required|number"
+                           placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">注册证到期日期</label>
                 <div class="layui-input-block">
-                    <input type="text"  name="pjZczDqTime" class="layui-input"  autocomplete="off" id="date">
+                    <input type="text" name="pjZczDqTime" class="layui-input" autocomplete="off" id="date">
                 </div>
             </div>
         </div>
@@ -95,21 +103,24 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">生产企业</label>
                 <div class="layui-input-block">
-                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                           style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectScqy">选择</button>
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">供货商</label>
                 <div class="layui-input-block">
-                    <input type="text" name="sbcsId1" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="sbcsId1" placeholder="请选择" autocomplete="off" disabled class="layui-input"
+                           style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectGhs">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">中标价<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbPrice" class="layui-input" autocomplete="off" lay-verify="required" placeholder="请输入">
+                    <input type="text" name="zbPrice" class="layui-input" autocomplete="off" lay-verify="required"
+                           placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -125,73 +136,78 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit  lay-filter="submit">立即提交</button>
+                <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
             </div>
         </div>
     </div>
 </form>
 
 
-
-
 <script>
-    formData={};
-    renderMod={
-        form:{
-            val:{
-                filter:"forms",
-                get:{
-                    url:"/security/pjzd/selectFwPjzdById",
-                    type:"GET",
-                    data:{id:$.getUrlParam('pjzdId')}
+    formData = {};
+    renderMod = {
+        form: {
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/security/pjzd/selectFwPjzdById",
+                    type: "GET",
+                    data: {id: $.getUrlParam('pjzdId')}
                 },
-                    select:[
-                        {
-                            filter:"pjBzdw",
-                            ids:"eqJldwName",
-                            text:"eqJldwName",
-                            url:"/eqdict/jldw"
-                        }
-                    ]
+                select: [
+                    {
+                        filter: "pjBzdw",
+                        ids: "eqJldwName",
+                        text: "eqJldwName",
+                        url: "/eqdict/jldw"
+                    }
+                ],
+                func:function(data){
+                    formData.eq = [{"eqId":""}];formData.scqy = [{"sbcsId":""}];formData.ghs = [{"sbcsId1":""}];
+                    formData.eq[0].eqId = data["eqid"];
+                    formData.scqy[0].sbcsId = data["sbcsId"];
+                    formData.ghs[0].sbcsId1 = data["sbcsId1"];
+                }
             },
-            date:[
+            date: [
                 {
-                    elem:'#zdate',
-                    type:"datetime",
+                    elem: '#zdate',
+                    type: "datetime",
                     format: 'yyyy-MM-dd HH:mm:ss'
                 },
                 {
                     elem: '#date',
-                    type:"datetime",
+                    type: "datetime",
                     format: 'yyyy-MM-dd HH:mm:ss'
                 }
             ],
             submit: {
                 filter: "submit",//可以不写
-                before:function(param){
-                    console.log("formD = ",formData);
+                before: function (param) {
+                    console.log("formD = ", formData);
                     return param = {
-                        1:formData.eq[0].eqId,
-                        2:formData.scqy[0].sbcsId,
-                        3:formData.ghs[0].sbcsId1,
-                        4:$.getUrlParam('pjzdId')
+                        1: formData.eq[0].eqId,
+                        2: formData.scqy[0].sbcsId,
+                        3: formData.ghs[0].sbcsId1,
+                        4: $.getUrlParam('pjzdId')
                     }
                 },
                 form: {
                     url: "/security/pjzd/updateFwPjzd",
                     type: "POST",
-                    contentType:"application/json",
-                    data:["pjfl","pjName","pjbh","pjGgxh","pjBzdw","pjZczh","zbPrice","zbTime","pjZczDqTime"],
-                    param:{
-                        1:"sbId",
-                        2:"pjScqyId",
-                        3:"pjGhsId",
-                        4:"id"
-                    }
+                    contentType: "application/json",
+                    data: ["pjfl", "pjName", "pjbh", "pjGgxh", "pjBzdw", "pjZczh", "zbPrice", "zbTime", "pjZczDqTime"],
+                    param: {
+                        1: "sbId",
+                        2: "pjScqyId",
+                        3: "pjGhsId",
+                        4: "id"
+                    },
+                    shutWin:true
                 },//表单提交函数
-                func:function(data){
-                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index);
+                func: function (data) {
+                    /*var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);*/
                 }
             }
 
@@ -201,26 +217,26 @@
                 elem: "#selectData",
                 cb: "/benefical/select/listSelectCols",
                 db: "/benefical/select/listSelect",
-                se:"/eq/eqSe",
+                se: "/eq/eqSe",
                 name: "dtdt",
                 key: "eq",
-                data:formData
-            },{
+                data: formData
+            }, {
                 elem: "#selectScqy",
                 cb: "/supervise/csgl/eqcsTitles",
                 db: "/supervise/csgl/listEqcsByX2",
-                se:"/supervise/csgl/listEqcsByX2Se",
+                se: "/supervise/csgl/listEqcsByX2Se",
                 name: "dtdt",
                 key: "scqy",
-                data:formData
-            },{
+                data: formData
+            }, {
                 elem: "#selectGhs",
                 cb: "/supervise/csgl/eqcsTitles",
                 db: "/supervise/csgl/listEqcsByX1",
-                se:"/supervise/csgl/listEqcsByX1Se",
+                se: "/supervise/csgl/listEqcsByX1Se",
                 name: "dtdt",
                 key: "ghs",
-                data:formData
+                data: formData
             }]
         }
 

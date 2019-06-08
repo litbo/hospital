@@ -420,16 +420,18 @@ function subUp(value, data, param) {
             success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
-                    if (value.reload) {
+
                         layer.alert("数据提交成功", function () {
-                            //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
-                            value.reload === "parent" ? parent.location.reload() : window.location.reload();
+                            if (value.reload) {
+                                //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
+                                value.reload === "parent" ? parent.location.reload() : window.location.reload();
+                            } else if(value.shutWin) {
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index);
+                            } else if(value.sureDo){
+                                value.sureDo();
+                            }
                         })
-                    } else {
-                        putMsg({
-                            alert: "数据提交成功！"
-                        });
-                    }
                 } else {
                     putMsg({
                         alert: "提交失败，请重试！",
