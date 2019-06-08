@@ -11,7 +11,7 @@ import com.litbo.hospital.security.service.FwPjzdService;
 import com.litbo.hospital.security.vo.DeleteFwPjzdByIdsVo;
 import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.SelectFwPjzdVo;
-import fr.opensagres.xdocreport.template.velocity.internal.Foreach;
+//import fr.opensagres.xdocreport.template.velocity.internal.Foreach;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
