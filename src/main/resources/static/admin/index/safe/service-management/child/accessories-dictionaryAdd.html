@@ -140,12 +140,17 @@
         form:{
             date:[
                 {
-                    elem:'#zdate'
-                    ,value:today0
+                    elem:'#zdate',
+                    type:"datetime",
+                    format: 'yyyy-MM-dd HH:mm:ss',
+                    value:today0+" "+time0,
+
                 },
                 {
-                    elem: '#date'
-                    , value: today0
+                    elem: '#date',
+                    type:"datetime",
+                    format: 'yyyy-MM-dd HH:mm:ss',
+                    value:today0+" "+time0,
                 }
             ],
             submit: {
@@ -167,7 +172,8 @@
                         1:"sbId",
                         2:"pjScqyId",
                         3:"pjGhsId"
-                    }
+                    },
+                    reload:true
                 },//表单提交函数
                 func:function(data){
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

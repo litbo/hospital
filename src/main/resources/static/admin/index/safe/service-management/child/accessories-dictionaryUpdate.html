@@ -173,18 +173,20 @@
                     return param = {
                         1:formData.eq[0].eqId,
                         2:formData.scqy[0].sbcsId,
-                        3:formData.ghs[0].sbcsId1
+                        3:formData.ghs[0].sbcsId1,
+                        4:$.getUrlParam('pjzdId')
                     }
                 },
                 form: {
-                    url: "/security/pjzd/insertFwPjzd",
+                    url: "/security/pjzd/updateFwPjzd",
                     type: "POST",
                     contentType:"application/json",
                     data:["pjfl","pjName","pjbh","pjGgxh","pjBzdw","pjZczh","zbPrice","zbTime","pjZczDqTime"],
                     param:{
                         1:"sbId",
                         2:"pjScqyId",
-                        3:"pjGhsId"
+                        3:"pjGhsId",
+                        4:"id"
                     }
                 },//表单提交函数
                 func:function(data){
