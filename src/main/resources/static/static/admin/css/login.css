@@ -1,129 +1,74 @@
 html {
-  height: 100%;
-  overflow: hidden;
+    height: 100%;
+    overflow: hidden;
 }
 body {
-  background: url("../images/login/login_line.jpg") left center repeat-x;
-  height: 100%;
+    height: 100%;
+    background:#f3f3f3;
 }
-/*移除表单填充色*/
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px #ececec inset;
-}
-/*按钮移上去颜色*/
-.layui-btn-primary:hover {
-  border-color: #1E9FFF;
-  color: #333;
-}
-/*页面背景色*/
-.m-login-bg {
-  background: url("../images/login/login_bg.png") left center repeat-x;
-  height: 100%;
-}
-.m-login {
-  width: 390px;
-  position: absolute;
-  left: 50%;
-  top: 49%;
-  margin-left: -195px;
-  margin-top: -170px;
-}
-.m-login h3 {
-  color: #fff;
-  text-align: center;
-  height: 60px;
-  font-size: 28px;
-}
-.m-login .copyright {
-  text-align: center;
-  color: #999;
-  padding-top: 10px;
-}
-.m-login-warp {
-  background: #fff;
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-  padding: 25px 25px 5px;
-}
-.m-login-warp .layui-input {
-  height: 40px;
-  line-height: 40px\9;
-  margin-bottom: 5px;
-  -webkit-transition-property: none;
-  transition-property: none;
-  background: #ececec;
-  border: 1px solid #ececec;
-}
-.m-login-warp .m-login-btn .layui-inline {
-  width: 49%;
-  margin: 0;
-}
-.m-login-warp .m-login-btn .layui-inline button {
-  width: 100%;
-}
-.m-login-warp .verifyImg {
-  width: 130px;
-  height: 38px;
-}
-@media screen and (max-width: 450px) {
-  .m-login {
-    width: 300px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -150px;
-    margin-top: -170px;
-  }
-  .layui-form-item .layui-inline {
+*{margin:0;padding:0;}
+
+input{
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 35px;
+    margin: 30px auto;
+    padding: 0 10px;
     display: block;
-    margin-right: 0;
-    margin-bottom: 20px;
-    clear: both;
-  }
-  .m-login-warp .m-login-btn .layui-inline {
-    width: 100%;
-    margin: 0 0 10px;
-  }
 }
 
-
-
-/*添加*/
-
-.div-logo{
-  width:100%;
-  height:40px;
-  text-align:center;
-  margin:30px 0;
-}
-.logo-img{
-  width:120px;
-  height:36px;
-  margin-bottom:0;
-}
-.sign{
-  color:red;
+h1{
+    text-align: center;
+    margin: 40px 0 50px;
+    letter-spacing: 4px;
 }
 
-
-/*验证码*/
-#canvas {
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  cursor: pointer;
+img{
+    width:100%;
+    height:100%;
 }
 
-.verify{
-  float:right;
+.backbg{
+    background:url("/static/admin/images/login/show.jpg");
+    background-size: cover;
+    height:85%;
 }
 
-.layui-form-item{
-  margin-bottom:25px;
+.mHeight{
+    height:10%;
+    text-align: center;
 }
 
-.subBut{
-  width:100%!important;
+.mHeight p{
+    line-height: 260%;
+}
+
+.bgs{
+    margin-top: 10%;
+    height: 400px;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.left{
+    height: 100%;
+}
+
+.subLogin{
+    width:87%;
+    height:37px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    background:#00b7ee;
+    color:#fff;
+    margin:30px auto;
+    display:block;
+    letter-spacing: 5px;
+}
+
+.right p{
+    text-align: center;
+    color: #f10214;
 }
