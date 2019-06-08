@@ -3,6 +3,7 @@ package com.litbo.hospital.security.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
+import com.litbo.hospital.security.vo.SelectFwPjzdVo;
 
 import java.util.List;
 
@@ -14,4 +15,9 @@ public interface FwPjzdService {
 
     List listFwPjzdExport(String pjSzm, String pjfl);
 
+    SelectFwPjzdVo selectFwPjzdById(Integer id);
+
+    Integer deleteFwPjzdById(Integer id);
+
+    Integer updateFwPjzd(Integer id);
 }

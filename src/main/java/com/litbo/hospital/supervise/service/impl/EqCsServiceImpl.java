@@ -8,15 +8,14 @@ import com.litbo.hospital.supervise.bean.CsZjDeleteVO;
 import com.litbo.hospital.supervise.bean.EqCszjVO;
 import com.litbo.hospital.supervise.dao.EqCsDao;
 import com.litbo.hospital.supervise.service.EqCsService;
-import com.litbo.hospital.supervise.vo.CsDeleteVO;
-import com.litbo.hospital.supervise.vo.EqCsInsertReadyVO;
-import com.litbo.hospital.supervise.vo.EqCsSelectVO;
-import com.litbo.hospital.supervise.vo.EqCsVO;
+import com.litbo.hospital.supervise.vo.*;
 import com.litbo.hospital.user.bean.EqCs;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -73,7 +72,14 @@ public class EqCsServiceImpl implements EqCsService {
         PageHelper.startPage(pageNum,pageSize);
         selectVo.setEqCslb("3");
         List<EqCsVO> date = eqCsDao.listEqcsByX1(selectVo);
-        return new PageInfo(date);
+        List res = new ArrayList();
+        for(EqCsVO eq:date){
+            EqCsVO1 s = new EqCsVO1();
+            BeanUtils.copyProperties(eq,s);
+            s.setSbcsId1(eq.getSbcsId());
+            res.add(s);
+        }
+        return new PageInfo(res);
     }
     @Override
     public PageInfo listEqcsByX2(int pageNum, int pageSize, EqCsSelectVO selectVo) {

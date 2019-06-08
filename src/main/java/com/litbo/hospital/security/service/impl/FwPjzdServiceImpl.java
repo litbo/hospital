@@ -7,6 +7,8 @@ import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.dao.FwPjzdDao;
 import com.litbo.hospital.security.service.FwPjzdService;
 import com.litbo.hospital.security.vo.ListFwPjzdVo;
+import com.litbo.hospital.security.vo.SelectFwPjzdVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,6 @@ import java.util.List;
 
 @Service
 public class FwPjzdServiceImpl implements FwPjzdService {
-
 
     @Autowired
     private FwPjzdDao pjzdDao;
@@ -42,5 +43,25 @@ public class FwPjzdServiceImpl implements FwPjzdService {
     @Override
     public List<ListFwPjzdVo> listFwPjzdExport(String pjSzm, String pjfl) {
         return pjzdDao.listFwPjzd(pjSzm,pjfl);
+    }
+
+    @Override
+    public SelectFwPjzdVo selectFwPjzdById(Integer id) {
+        SelectFwPjzdVo pjzdVo = new SelectFwPjzdVo();
+        FwPjzd pjzd = pjzdDao.selectFwPjzdById(id);
+        BeanUtils.copyProperties(pjzd,pjzdVo);
+        pjzdVo.setEqId(pjzd.getSbId());
+        pjzdVo.setSbcsId(pjzd.getPjScqyId());
+        pjzdVo.setSbcsId1(pjzd.getPjGhsId());
+        return pjzdVo;
+    }
+
+    @Override
+    public Integer deleteFwPjzdById(Integer id) {
+        return pjzdDao.deleteFwPjzdById(id);
+    }
+    @Override
+    public Integer updateFwPjzd(Integer id){
+        return null;
     }
 }

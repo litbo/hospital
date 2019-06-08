@@ -8,8 +8,13 @@ import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.service.FwPjzdService;
+import com.litbo.hospital.security.vo.DeleteFwPjzdByIdsVo;
+import com.litbo.hospital.security.vo.ExaminePjqlVO;
+import com.litbo.hospital.security.vo.SelectFwPjzdVo;
+import fr.opensagres.xdocreport.template.velocity.internal.Foreach;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +52,31 @@ public class FwPjzdController {
         }
 
     }
+    @RequestMapping(value = "selectFwPjzdById",method = RequestMethod.GET)
+    public Result selectFwPjqlById(Integer id){
+        try {
+            SelectFwPjzdVo pjzd = pjzdService.selectFwPjzdById(id);
+            return Result.success(pjzd);
+        }catch (Exception e){
+            log.error("异常信息",e.getMessage(),id);
+            return Result.error(CodeMsg.PARAM_ERROR);
+        }
+
+
+    }
+    @RequestMapping(value = "updateFwPjzd",method = RequestMethod.POST)
+    public Result updateFwPjzd(Integer id){
+        try {
+            Integer res = pjzdService.updateFwPjzd(id);
+            return Result.success();
+        }catch (Exception e){
+            log.error("异常信息",e.getMessage(),id);
+            return Result.error(CodeMsg.PARAM_ERROR);
+        }
+
+
+    }
+
 
 
 /**
@@ -97,6 +127,19 @@ public class FwPjzdController {
             log.error("异常信息",e.getMessage(),pjSzm , pjfl);
         }
         return null;
+    }
+    @RequestMapping(value = "deleteFwPjzdByIds",method = RequestMethod.POST)
+    public Result deleteFwPjzdByIds(@RequestBody DeleteFwPjzdByIdsVo pjzdIdsVo){
+        Integer[] ids = pjzdIdsVo.getIds();
+        if(ids.length>0){
+            for(int i =0;i<ids.length;i++){
+                Integer res = pjzdService.deleteFwPjzdById(ids[i]);
+            }
+
+        }else {
+            return Result.error(CodeMsg.PARAM_ERROR);
+        }
+        return Result.success();
     }
     @RequestMapping(value = "fwPjzdTitle",method = RequestMethod.POST)
     public Result fwPjzdTitle(){

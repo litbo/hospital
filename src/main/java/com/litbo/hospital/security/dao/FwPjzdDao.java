@@ -25,4 +25,8 @@ public interface FwPjzdDao {
     String selectFwPjzdName(Integer pjzdId);
     @Select("select pjk_sl from fw_pjk where id = #{pjzdId}")
     Integer selectFwPjkCountById(Integer pjzdId);
+    @Select("select * from fw_pjzd where id = #{id}")
+    FwPjzd selectFwPjzdById( @Param("id") Integer id);
+    @Delete("DELETE FROM fw_pjzd WHERE id =#{id}")
+    Integer deleteFwPjzdById(Integer id);
 }

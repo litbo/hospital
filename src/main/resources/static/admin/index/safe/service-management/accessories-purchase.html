@@ -40,9 +40,9 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">审核人</label>
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select lay-filter="shr" name="userId2">
+                    <select lay-filter="shr" name="userId2" lay-verify="required">
                     </select>
                 </div>
             </div>
@@ -50,7 +50,7 @@
 
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item" pane>
-                <label class="layui-form-label">原因<span class="sign">*</span></label>
+                <label class="layui-form-label">原因</label>
                 <div class="layui-input-block">
                     <input type="checkbox" class="cks" name="s1" value="定期保养" title="定期保养">
                     <input type="checkbox" class="cks" name="s2" value="自然磨损" title="自然磨损">
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
-                <label class="layui-form-label col-xs-12">成本明细项</label>
+                <label class="layui-form-label col-xs-12">成本明细项<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew" data-id="table"><i class="fas fa-plus"></i>&nbsp;添加</button>
                     <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>

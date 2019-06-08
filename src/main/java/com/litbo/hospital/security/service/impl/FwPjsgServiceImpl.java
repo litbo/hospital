@@ -45,6 +45,9 @@ public class FwPjsgServiceImpl implements FwPjsgService {
 
         List<FwPjsgZjb> fwPjsgZjbs = insertFwPjsgVo.getFwPjsgZjbs();
         for (FwPjsgZjb p:fwPjsgZjbs) {
+            if(p.getPjsgCount()==null){
+                p.setPjsgCount(1);
+            }
             p.setPjsgId(pjsg.getId());
         }
         res = pjsgZjbDao.insertFwPjsgZjbList(fwPjsgZjbs);
