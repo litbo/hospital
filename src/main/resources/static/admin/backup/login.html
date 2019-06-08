@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>登录</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css"/>
@@ -12,43 +11,54 @@
 </head>
 
 <body>
-<div class="layui-container mHeight">
-    <div class="layui-row">
-        <div class="layui-col-xs6 layui-col-sm4 layui-col-md2" style="margin-top:5px;">
-            <img src="/static/admin/images/footerlogo.png" alt="">
+<div class="m-login-bg">
+    <div class="m-login">
+        <div class="m-login-warp">
+            <h3 style="color:#000;">系统登录</h3>
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <input id="user" type="text" name="userName" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <input type="password" name="userPwd" lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item m-login-btn">
+                    <div class="layui-inline subBut">
+                        <button class="layui-btn layui-btn-normal btn" lay-submit lay-filter="login" id="check-btn">登录</button>
+                    </div>
+                </div>
+                <div class="div-logo">
+                    <img src="/static/admin/images/footerlogo.png" class="logo-img" alt="健龙世纪">
+                </div>
+            </form>
         </div>
+        <p class="copyright"><span class="sign">*</span> 初始账号，用户名和密码均为员工号 </p>
     </div>
 </div>
-<div class="layui-row backbg">
-    <div class="layui-container">
-        <div class="bgs layui-col-lg-offset7 layui-col-lg4 layui-col-xs12">
-            <div class="right layui-col-xs12">
-                <form class="layui-form">
-                    <h1>用户登录</h1>
-                    <input type="text" placeholder="用户名" name="userName" lay-verify="required" autocomplete="off">
-                    <input type="password" placeholder="密码" name="userPwd" lay-verify="required" autocomplete="off">
-                    <button class="subLogin" lay-submit lay-filter="login" id="check-btn">登录</button>
-                    <p>* 初始账号，用户名和密码均为员工号</p>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="layui-container mHeight">
-    <div class="layui-row">
-        <p>Copyright © 2019 版权所有</p>
-    </div>
-</div>
-</body>
+
 <script type="text/javascript">
+
     layui.use(['form','jquery'], function () {
         var form = layui.form,
             $ = layui.jquery,
             layer = layui.layer;
-        layui.sessionData("rl",null);
+
+       /* //自定义验证规则
+        form.verify({
+            username: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                    return '用户名不能有特殊字符';
+                }
+            }
+            , password: [
+                /(.+){6,12}$/
+                , '密码必须6到12位'
+            ]
+        });*/
+
+
         form.on('submit(login)', function (data) {
             var $ser = data.field;
-            console.log($ser);
             $.ajax({
                 url: "/hospital/submit",
                 type: "POST",
@@ -72,7 +82,7 @@
                         layui.sessionData("pageLock",null);
                         window.locked = false;
                         setTimeout(function () {
-                            location.href = "./index.html";
+                            location.href = "../index/index.html";
                         }, 1000);
                         //显示登陆成功
                         layer.msg("欢迎您  " +info.data.role);
@@ -98,4 +108,5 @@
     });
 
 </script>
+</body>
 </html>
