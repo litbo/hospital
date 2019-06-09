@@ -9,12 +9,9 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwPjzd;
 import com.litbo.hospital.security.service.FwPjzdService;
 import com.litbo.hospital.security.vo.DeleteFwPjzdByIdsVo;
-import com.litbo.hospital.security.vo.ExaminePjqlVO;
 import com.litbo.hospital.security.vo.SelectFwPjzdVo;
-//import fr.opensagres.xdocreport.template.velocity.internal.Foreach;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,12 +62,13 @@ public class FwPjzdController {
 
     }
     @RequestMapping(value = "updateFwPjzd",method = RequestMethod.POST)
-    public Result updateFwPjzd(Integer id){
+    public Result updateFwPjzd(@RequestBody FwPjzd pjzd){
         try {
-            Integer res = pjzdService.updateFwPjzd(id);
+            Integer res = pjzdService.updateFwPjzd(pjzd);
             return Result.success();
         }catch (Exception e){
-            log.error("异常信息",e.getMessage(),id);
+            e.printStackTrace();
+            log.error("异常信息",e.getMessage(),pjzd);
             return Result.error(CodeMsg.PARAM_ERROR);
         }
 

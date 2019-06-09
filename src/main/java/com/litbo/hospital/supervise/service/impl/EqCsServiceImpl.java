@@ -72,7 +72,7 @@ public class EqCsServiceImpl implements EqCsService {
         PageHelper.startPage(pageNum,pageSize);
         selectVo.setEqCslb("3");
         List<EqCsVO> date = eqCsDao.listEqcsByX1(selectVo);
-        List res = new ArrayList();
+        List<EqCsVO1> res = new ArrayList();
         for(EqCsVO eq:date){
             EqCsVO1 s = new EqCsVO1();
             BeanUtils.copyProperties(eq,s);

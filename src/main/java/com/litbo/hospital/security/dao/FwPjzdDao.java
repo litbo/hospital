@@ -29,4 +29,6 @@ public interface FwPjzdDao {
     FwPjzd selectFwPjzdById( @Param("id") Integer id);
     @Delete("DELETE FROM fw_pjzd WHERE id =#{id}")
     Integer deleteFwPjzdById(Integer id);
+    @UpdateProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjzdSqlProvider.class,method="updateFwPjzd")
+    Integer updateFwPjzd(FwPjzd pjzd);
 }

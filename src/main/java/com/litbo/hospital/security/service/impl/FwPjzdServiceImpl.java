@@ -61,7 +61,7 @@ public class FwPjzdServiceImpl implements FwPjzdService {
         return pjzdDao.deleteFwPjzdById(id);
     }
     @Override
-    public Integer updateFwPjzd(Integer id){
-        return null;
+    public Integer updateFwPjzd(FwPjzd pjzd){
+        return pjzdDao.updateFwPjzd(pjzd);
     }
 }
