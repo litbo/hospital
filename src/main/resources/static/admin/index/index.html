@@ -356,6 +356,11 @@
                 }
             });
 
+            $(".layui-nav-item a").on("click",function () {
+                if($("iframe").attr("src") === "/login.html"){
+                    location.href = "/login.html"
+                }
+            })
         })
     });
 </script>

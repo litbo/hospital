@@ -143,7 +143,7 @@ function render(renderParam){
                                 //表单默认值填充
                                 //console.log(value);
                                 form.val(val.filter || "forms", value);
-
+                                //dat 获取到的数据 form layui.form
                                 val.func && val.func(dat, form);
                             }
                         };

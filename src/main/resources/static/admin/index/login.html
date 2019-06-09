@@ -72,10 +72,10 @@
                         layui.sessionData("pageLock",null);
                         window.locked = false;
                         setTimeout(function () {
-                            location.href = "./index.html";
+                            top.location.href = "./index.html";
                         }, 1000);
                         //显示登陆成功
-                        layer.msg("欢迎您  " +info.data.role);
+                        layer.msg("欢迎您  " +info.data.role+" ，即将跳转至首页！");
                     }else{
                         layer.msg("登陆失败，请重试！");
                         console.log(info);//打印错误信息，调试用，可注释

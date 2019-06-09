@@ -428,7 +428,8 @@ function subUp(value, data, param) {
                             } else if(value.shutWin) {
                                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                 parent.layer.close(index);
-                            } else if(value.sureDo){
+                            }
+                            if(value.sureDo){
                                 value.sureDo();
                             }
                         })
