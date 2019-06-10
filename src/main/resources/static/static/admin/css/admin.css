@@ -1193,6 +1193,9 @@
   font-size: 14px;
   font-weight: 700;
 }
+input[disabled] {
+  background: #f7f7f7;
+}
 /*面板标题*/
 .panel-body {
   padding: 15px;

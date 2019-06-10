@@ -317,7 +317,7 @@
                 url: "/gg/listGgDesc",
                 success: function (res) {
                     if (res.code === 0) {
-                        addData(h_name[2], res.data.list, "ggbt", "url", "ggnr");
+                        addData(h_name[2], res.data.list, "ggbt", "url", "ngsj");
                     }
                 }
             });
@@ -342,7 +342,7 @@
                         if (n <= 7) {//只渲染7条数据（一个数据框内最多只能容纳7条数据）
                             n++;
                             containers.append($("<li>")
-                                .append($("<a>").attr("href", d[i][src] || "#")
+                                .append($("<a>").attr({"href":"javascript:void(0);","data-href": d[i][src] || "#"})
                                     .append($("<span>").attr("class", "h_ovf col-xs-9").html(d[i][item]))
                                     .append($("<span>").attr("class", "h_right col-xs-3").html(d[i][time]))
                                 ))
@@ -368,10 +368,10 @@
                 layOpen({
                     type: 2,
                     title: $(this).find(".h_ovf").html(),
-                    content: $(this).attr("href"),
+                    content: $(this).attr("data-href"),
                     area: [w + "px", h + "px"],
                     end:function(){
-                        window.location.reload();
+                        //window.location.reload();
                     }
                 });
                 return false;
