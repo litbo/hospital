@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -275,6 +276,9 @@ public class BmController {
                                     @RequestParam(required = false) String bmName,String iCode){
 
         List<BmSelectLbVO> bms = bmService.listKgsBm(pageNum, pageSize,bmName,iCode);
+        Iterator it=bms.iterator();
+
+
         return Result.success(new PageInfo<>(bms));
     }
 

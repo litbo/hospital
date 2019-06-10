@@ -7,7 +7,6 @@ import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.dao.BmDao;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.supervise.vo.*;
-import com.litbo.hospital.user.bean.EqPm;
 import com.litbo.hospital.user.dao.EqDao;
 import com.litbo.hospital.user.vo.EqVo;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -23,12 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
-
+import java.util.*;
 
 @Service
 public class BmServiceImpl implements BmService {
@@ -363,6 +357,28 @@ public class BmServiceImpl implements BmService {
         PageHelper.startPage(pageNum,pageSize);
         List<BmSelectLbVO> lbbms = bmDao.listBmsAsLbBmsBySelectVO(selectVO);
 
+        Iterator<BmSelectLbVO> it = lbbms.iterator();
+        while(it.hasNext()) {
+            BmSelectLbVO vo =  it.next();
+            if(
+                    "0100000000".equals(vo.getBmId())||
+                            "0200000000".equals(vo.getBmId())||
+                            "0300000000".equals(vo.getBmId())||
+                            "0101000000".equals(vo.getBmId())||
+                            "0201000000".equals(vo.getBmId())||
+                            "0202000000".equals(vo.getBmId())||
+                            "0203000000".equals(vo.getBmId())||
+                            "0301000000".equals(vo.getBmId())||
+                            "0302000000".equals(vo.getBmId())||
+                            "0303000000".equals(vo.getBmId())
+                    ) {
+
+                it.remove();
+            }
+
+        }
+
+
         if(selectVO.getFlag()==1){
             for (BmSelectLbVO lbbm:lbbms){
                 if(lbbm.getBmId().startsWith("02"))
@@ -418,6 +434,29 @@ public class BmServiceImpl implements BmService {
     public List<BmSelectLbVO> listKgsBm(int pageNum, int pageSize, String bmName,String iCode) {
         PageHelper.startPage(pageNum,pageSize);
         List<BmSelectLbVO> bms =  bmDao.listKgsBm(bmName,iCode);
+
+        Iterator<BmSelectLbVO> it = bms.iterator();
+        while(it.hasNext()) {
+            BmSelectLbVO vo =  it.next();
+            if(
+                    "0100000000".equals(vo.getBmId())||
+                            "0200000000".equals(vo.getBmId())||
+                            "0300000000".equals(vo.getBmId())||
+                            "0101000000".equals(vo.getBmId())||
+                            "0201000000".equals(vo.getBmId())||
+                            "0202000000".equals(vo.getBmId())||
+                            "0203000000".equals(vo.getBmId())||
+                            "0301000000".equals(vo.getBmId())||
+                            "0302000000".equals(vo.getBmId())||
+                            "0303000000".equals(vo.getBmId())
+                    ) {
+
+                it.remove();
+            }
+
+        }
+
+
         for(BmSelectLbVO bm:bms){
             if(bm.getBmId().startsWith("02"))
                 bm.setBmLb("管理部门");
@@ -573,6 +612,23 @@ public class BmServiceImpl implements BmService {
     @Override
     public List<BmsTreeVO> listTreeBms() {
         List<BmsTreeVO> vos  =  bmDao.listTreeBms();
+
+        Collections.sort(vos, new Comparator<BmsTreeVO>() {
+            @Override
+            public int compare(BmsTreeVO b1, BmsTreeVO b2) {
+                int diff = b1.getBmId().compareTo(b2.getBmId());
+                if (diff > 0) {
+                    return 1;
+                  }else if (diff < 0) {
+                    return -1;
+                    }
+                 return 0; //相等为0
+                }
+            }); // 按部门id从下到大排序
+
+
+
+
         for (BmsTreeVO treeVO :vos){
             treeVO.setUserXm(treeVO.getFzrName());
             if(treeVO.getBmId().startsWith("02")){
