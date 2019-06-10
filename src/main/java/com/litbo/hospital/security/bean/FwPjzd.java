@@ -13,11 +13,11 @@ public class FwPjzd {
 
     private Integer pjKw;
 
-    private Integer pjScqyId;
+    private String pjScqyId;
 
-    private Integer pjGhsId;
+    private String pjGhsId;
 
-    private Integer sbId;
+    private String sbId;
 
     private String pjName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -71,6 +71,7 @@ public class FwPjqlController {
                 }
             }catch (Exception e){
                 log.error("异常信息",e.getMessage());
+                e.printStackTrace();
                 return Result.error(CodeMsg.PARAM_ERROR);
             }
 

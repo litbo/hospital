@@ -14,11 +14,11 @@ public class SelectFwPjzdVo {
 
     private Integer pjKw;
 
-    private Integer sbcsId;
+    private String sbcsId;
 
-    private Integer sbcsId1;
+    private String sbcsId1;
 
-    private Integer eqId;
+    private String eqId;
 
     private String pjName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

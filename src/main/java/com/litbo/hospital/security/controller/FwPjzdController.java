@@ -65,7 +65,11 @@ public class FwPjzdController {
     public Result updateFwPjzd(@RequestBody FwPjzd pjzd){
         try {
             Integer res = pjzdService.updateFwPjzd(pjzd);
-            return Result.success();
+            if(res>0){
+                return Result.success();
+            }else {
+                return Result.error(CodeMsg.SERVER_ERROR);
+            }
         }catch (Exception e){
             e.printStackTrace();
             log.error("异常信息",e.getMessage(),pjzd);

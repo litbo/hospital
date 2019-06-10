@@ -97,6 +97,9 @@ public class FwPjqlServiceImpl implements FwPjqlService {
                 if(pjkDao.reduceFwPjkSl(pjqlZjb.getPjzdId(),pjqlZjb.getPjsgCount())==0){//如果数量不足，则回滚事务，并返回 审核失败
                     String pjName = pjzdDao.selectFwPjzdName(pjqlZjb.getPjzdId());
                     Integer num = pjzdDao.selectFwPjkCountById(pjqlZjb.getPjzdId());
+                    if(num == null){
+                        num = 0;
+                    }
                     map.put(pjName,pjqlZjb.getPjsgCount()-num);
                     flag = true;
                 }
