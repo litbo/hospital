@@ -1196,6 +1196,11 @@
 input[disabled] {
   background: #f7f7f7;
 }
+td[lay-event="openLink"] {
+    color: #255bf1;
+    text-decoration: underline;
+    cursor: pointer!important;
+}
 /*面板标题*/
 .panel-body {
   padding: 15px;

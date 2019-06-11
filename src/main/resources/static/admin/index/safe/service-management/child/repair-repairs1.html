@@ -26,7 +26,8 @@
         .layui-container {
             margin-top: 30px;
         }
-        .layui-colla-content{
+
+        .layui-colla-content {
             overflow: initial;
         }
     </style>
@@ -40,85 +41,82 @@
             <input type="hidden" name="bxrId">
             <input type="hidden" name="bxksId">
             <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">保修设备<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="eqName" disabled placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">报修人<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="userXm" disabled placeholder="请输入" lay-verify="required" class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">报修人电话</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="bxrdh" disabled placeholder="请输入" lay-verify="required"
-                                               class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">报修科室</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="bmName" disabled disabled class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">报修科室电话</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="bxksdh" placeholder="请输入" lay-verify="required"
-                                               class="layui-input" disabled autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">保修设备<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="eqName" disabled placeholder="请输入" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修人<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userXm" disabled placeholder="请输入" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修人电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bxrdh" disabled placeholder="请输入" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修科室</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bmName" disabled class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修科室电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bxksdh" placeholder="请输入" class="layui-input" disabled autocomplete="off">
+                    </div>
+                </div>
+            </div>
 
             <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">报修方式</label>
-                                    <div class="layui-input-block">
-                                        <select name="bxfs">
-                                            <option>网上报修</option>
-                                            <option>电话报修</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">故障现象</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="gzxx" placeholder="请输入" lay-verify="required"
-                                               class="layui-input" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">报修时间</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="bxTime" disabled class="layui-input" autocomplete="off"
-                                               id="repairDate">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">发现时间</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="fxTime" id="findDate" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">紧急性</label>
-                                    <div class="layui-input-block">
-                                        <select name="jjxStatus">
-                                            <option value="1">低</option>
-                                            <option value="2">中</option>
-                                            <option value="3">高</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修方式</label>
+                    <div class="layui-input-block">
+                        <select name="bxfs">
+                            <option>网上报修</option>
+                            <option>电话报修</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">故障现象<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="gzxx" placeholder="请输入" class="layui-input" lay-verify="required" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报修时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bxTime" disabled class="layui-input" autocomplete="off" id="repairDate">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发现时间<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="fxTime" id="findDate" autocomplete="off" lay-verify="required" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">紧急性</label>
+                    <div class="layui-input-block">
+                        <select name="jjxStatus">
+                            <option value="1">低</option>
+                            <option value="2">中</option>
+                            <option value="3">高</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-xs-12">
                 <div class="layui-form-item" style="margin:20px 0;">
-                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存
+                    </button>
                 </div>
             </div>
         </div>
@@ -129,35 +127,35 @@
 <script>
     renderMod = {
         form: {
-            val:{
-                filter:"baoxiuForms",
-              get:{
-                  url:"/baoxiu/baoxiuIndex",
-                  data:{
-                      eqId:$.getUrlParam("eqId")
-                  }
-              }
+            val: {
+                filter: "baoxiuForms",
+                get: {
+                    url: "/baoxiu/baoxiuIndex",
+                    data: {
+                        eqId: $.getUrlParam("eqId")
+                    }
+                }
             },
-            submit:{
-                form:{
-                    url:"/baoxiu/addBaoxiu",
-                    type:"POST",
-                    data:["eqId","bxrId","bxrdh","bxksId","bxksdh","bxfs","gzxx","bxTime","fxTime","jjxStatus"],
-                    reload:"parent"
+            submit: {
+                form: {
+                    url: "/baoxiu/addBaoxiu",
+                    type: "POST",
+                    data: ["eqId", "bxrId", "bxrdh", "bxksId", "bxksdh", "bxfs", "gzxx", "bxTime", "fxTime", "jjxStatus"],
+                    reload: "parent"
                 }
             },
             date: [
                 {
                     elem: "#findDate",
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    value: today0 + " " + time0,
+                    type: "datetime",
+                    format: 'yyyy-MM-dd HH:mm:ss'
                 },
                 {
                     elem: "#repairDate",
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    value: today0 + " " + time0,
+                    type: "datetime",
+                    format: 'yyyy-MM-dd HH:mm:ss'
                 }
             ]
         }

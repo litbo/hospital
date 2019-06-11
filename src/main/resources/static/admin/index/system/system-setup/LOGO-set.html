@@ -76,11 +76,7 @@
                         $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
                     })
                 },done:function(res,index,upload){
-                    console.log(arguments);
-                    //layui.closeAll("loading");
-                    /*layer.msg('上传成功！', {
-                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
-                    });*/
+                    //console.log(arguments);
                     layui.confirm("LOGO上传成功，重新登录后生效！是否重新登陆？",function () {
                         layui.confirm("请再次确认是否重新登录？",function () {
                             top.location = "/logout"
@@ -94,7 +90,12 @@
                 }
             }
         }
-    }
+    };
+
+    $(function(){
+        var glo = tempValue("rl","glo",false);
+        $(".img_show").html($("<img>").attr({"src":glo.logo,"id":"show_img"}));
+    })
 </script>
 </body>
 </html>
