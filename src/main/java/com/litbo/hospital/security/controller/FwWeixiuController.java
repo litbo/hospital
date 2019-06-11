@@ -30,6 +30,11 @@ public class FwWeixiuController {
     @Autowired
     private FwWeixiuService fwWeixiuService;
 
+    @PostMapping("/wxtz")
+    public Result wxtz(){
+        return Result.success();
+    }
+
     @GetMapping("/wxqsShIndexVo")
     public Result wxqsShIndexVo(String id){
         try {
