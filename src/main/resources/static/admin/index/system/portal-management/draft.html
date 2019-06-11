@@ -34,15 +34,14 @@
                 <label class="layui-form-label">公告类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select name="gglxId"  lay-filter="gglx" lay-verify="required">
-                        <option>请选择</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">发布部门<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled lay-verify="required" class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"   id="layerBtn">选择</button>
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled lay-verify="required" id="bmName" class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="hidden" name="bmId" id="bmId">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -111,6 +110,9 @@
         var emp =  tempValue("rl","emp",false);
         $("#userId").val(emp.userId);
         $("#userXm").val(emp.userXm);
+        $("#bmName").val(emp.bmName);
+        $("#bmId").val(emp.bmId);
+
     })
 
     formData = {};
@@ -142,20 +144,20 @@
             ],
             submit:{
                 filter:"submit",//可以不写
-                before:function(){
+         /*       before:function(){
 
                     return param = {
                         1:formData.radio[0].bmId
                     }
-                },
+                },*/
                 form:{//或者写作up
                     url:"/gg/addGg",
                     type:"POST",
                     contentType:"application/json",
-                    data:["kssj","jssj","ngr","ggbt","ngsj","ggnr","gglxId"],
-                    param:{
+                    data:["kssj","jssj","ngr","ggbt","ngsj","ggnr","gglxId","bmId"],
+                /*    param:{
                         1:"bmId"
-                    },
+                    },*/
                     reload:true
                 }
         }

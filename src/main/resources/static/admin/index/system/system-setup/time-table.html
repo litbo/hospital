@@ -34,7 +34,7 @@
 <body>
 
 <div class="layui-row">
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="" lay-filter="form">
         <div class="layui-row">
             <div class="col-xs-12">
                 <fieldset class="layui-elem-field layui-field-title">
@@ -129,7 +129,8 @@
                     url:"/sys/setZxsj",
                     type:"POST",
                     contentType:"application/json",
-                    data:["amSbsj","amXbsj","pmSbsj","pmXbsj"]
+                    data:["amSbsj","amXbsj","pmSbsj","pmXbsj"],
+                    reload:true
                 },//表单提交函数
                 before:function(data){
                     for(var name in data.field){
@@ -142,6 +143,14 @@
                     }
                     return true;
                 }
+            },
+            val:{
+                filter:"form",
+                get:{
+                    url:"/sys/getZxsj",
+                    type:"POST",
+                    add:{page:1,name:"默认表单"}
+                }//GET内参数需参考《内容传输与提交》文档
             }
         }
     };

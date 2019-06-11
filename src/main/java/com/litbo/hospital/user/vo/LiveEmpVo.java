@@ -8,6 +8,7 @@ public class LiveEmpVo {
     private String userId;
     private String sex;
     private String userXm;
+    private String bmId;
     private String bmName;
 
 }

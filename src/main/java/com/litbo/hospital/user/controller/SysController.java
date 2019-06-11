@@ -66,11 +66,13 @@ public class SysController {
         }
     }
 
-/*    @RequestMapping("/test")
-    public Result test(){
-        String bname = "eq_info";
-        return  Result.success(sysDao.count(bname));
-    }*/
+    @RequestMapping("/getZxsj")
+    public Result getZxsj(){
+        SysZxsj sysZxsj =  sysDao.getZxsj();
+        return Result.success(sysZxsj);
+    }
+
+
 
 
 }
