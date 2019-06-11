@@ -40,4 +40,14 @@ public class FwWxnrzdController {
         }
 
     }
+    @RequestMapping(value = "selectFwWxgznr",method = RequestMethod.GET)
+    public Result selectFwWxgznr(){
+        try {
+            return Result.success(wxnrzdService.selectFwWxnrzd(-1));
+        }catch (Exception e){
+            log.error("异常信息",e.getMessage());
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+
+    }
 }
