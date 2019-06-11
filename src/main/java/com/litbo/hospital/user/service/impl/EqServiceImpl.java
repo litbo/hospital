@@ -56,12 +56,12 @@ public class EqServiceImpl implements EqService {
     }
 
     //设置设备编号
-    public String setSbbh(String pmId) {
+    public String setSbbh(String pmId,Date qysj) {
         //初始化设备编号
-        //年月1812 + pm编号68031409 + 级别 1 +
+        //启用时间 年月1812 + pm编号68031409 + 级别 1 +
         //获取当前时间
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
-        String time1 = sf.format(new Date());
+        String time1 = sf.format(qysj);
         String time = time1.substring(2,4)+time1.substring(5,time1.length());
         EqPm pm = pmDao.getPmById(pmId);
         //初始化分类号
@@ -78,6 +78,39 @@ public class EqServiceImpl implements EqService {
             return sbbh;
         }
     }
+
+    public String setPic(String[] pics){
+        String path = System.getProperty("user.dir");
+        String filePath = path+"/eq/";
+        String tmpUrl =null;
+        String url =null;
+        String totalUrl=null;
+        java.io.File file = new java.io.File(filePath);
+        if(pics!=null){
+            for (String pic : pics) {
+                tmpUrl = UUID.randomUUID().toString()+pic.substring(pic.lastIndexOf("."));
+                url = filePath+tmpUrl;
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+                try {
+                    ChangeFile.changeFile(pic,url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(totalUrl==null){
+                    totalUrl="/"+tmpUrl;
+                }else {
+                    totalUrl = totalUrl+","+"/"+tmpUrl;
+                }
+
+            }
+
+        }
+        return totalUrl;
+
+    }
+
 
     @Override
     public List<EqVo> getAllEq() {
@@ -109,7 +142,7 @@ public class EqServiceImpl implements EqService {
         //获取当前时间
         if(eqInfo.getEqPmId()!=null){
 
-            String sbbh =setSbbh(eqInfo.getEqPmId());
+            String sbbh =setSbbh(eqInfo.getEqPmId(),eqInfo.getEqQysj());
             eqInfo.setEqSbbh(sbbh);
         }
 
@@ -118,64 +151,14 @@ public class EqServiceImpl implements EqService {
         String syzt = "在用";
         eqInfo.setEqSyzt(syzt);
 
+
         //将临时保存在tmp的图片文件保存到eq文件夹下  并将tmp文件夹清空
-        String path = System.getProperty("user.dir");
-        String filePath = path+"/eq/";
-        String mpzp =null;
-        String sbzp = null;
-        String mpzpUrl =null;
-        String sbzpUrl =null;
-        String totalSbzpUrl =null;
-        String totalMpzpUrl=null;
-        java.io.File file = new java.io.File(filePath);
+        eqInfo.setEqMpzp(setPic(eqInfo.getMpzp()));
+        eqInfo.setEqSbzp(setPic(eqInfo.getSbzp()));
 
-        if(eqInfo.getMpzp()!=null){
-            for (String eqMpzp : eqInfo.getMpzp()) {
-                mpzp = UUID.randomUUID().toString()+eqMpzp.substring(eqMpzp.lastIndexOf("."));
-                mpzpUrl = filePath+mpzp;
-                if(!file.exists()){
-                    file.mkdirs();
-                }
-                try {
-                    ChangeFile.changeFile(eqMpzp,mpzpUrl);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if(totalMpzpUrl==null){
-                    totalMpzpUrl="/"+mpzp;
-                }else {
-                    totalMpzpUrl = totalMpzpUrl+","+"/"+mpzp;
-                }
 
-            }
-
-        }
-        if(eqInfo.getSbzp()!=null){
-            for (String eqSbzp : eqInfo.getSbzp()) {
-                sbzp =  UUID.randomUUID().toString()+eqSbzp.substring(eqSbzp.lastIndexOf("."));
-                sbzpUrl = filePath+ sbzp;
-                if(!file.exists()){
-                    file.mkdirs();
-                }
-                try {
-                    ChangeFile.changeFile(eqSbzp,sbzpUrl);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if(totalSbzpUrl==null){
-                    totalSbzpUrl="/"+sbzp;
-                }else {
-                    totalSbzpUrl = totalSbzpUrl+","+"/"+sbzp;
-                }
-
-            }
-
-        }
-
-        ChangeFile.deleteDir(path+"/tmp/");
-
-        eqInfo.setEqMpzp(totalMpzpUrl);
-        eqInfo.setEqSbzp(totalSbzpUrl);
+        if(new java.io.File(System.getProperty("user.dir")+"/tmp/").exists())
+            ChangeFile.deleteDir(System.getProperty("user.dir")+"/tmp/");
         //存
         return eqDao.addEq(eqInfo);
     }
@@ -358,7 +341,8 @@ public class EqServiceImpl implements EqService {
     public Integer setPm(SetPmVo setPmVo) {
         List<String> eqIds = setPmVo.getEqIds();
         for (String eqId : eqIds) {
-            String sbbh = setSbbh(setPmVo.getEqPmId());
+            EqInfo eqInfo = eqDao.getEqById(eqId);
+            String sbbh = setSbbh(setPmVo.getEqPmId(),eqInfo.getEqQysj());
             String syzt="在用";
             if(eqDao.setPm(setPmVo.getEqPmId(),eqId,sbbh,syzt)<0){
                 return 1/0;
@@ -369,51 +353,19 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
-    public Integer updateEq(EqInfo eqInfo) {
+    public Integer updateEq(EqInfoVo eqInfo) {
         if(eqInfo.getEqName()!=null){
             String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
             eqInfo.setEqPym(pym);
         }
-        if(eqInfo.getEqMpzp()!=null||eqInfo.getEqSbzp()!=null){
-            String path = System.getProperty("user.dir");
-            String filePath = path+"/eq/";
-            String mpzp =null;
-            String sbzp = null;
-            String mpzpUrl =null;
-            String sbzpUrl =null;
-            java.io.File file = new java.io.File(filePath);
-            if(eqInfo.getEqMpzp()!=null){
-                mpzp = UUID.randomUUID().toString()+eqInfo.getEqMpzp().substring(eqInfo.getEqMpzp().lastIndexOf("."));
-                mpzpUrl = filePath+mpzp;
-                if(!file.exists()){
-                    file.mkdirs();
-                }
-                try {
-                    ChangeFile.changeFile(eqInfo.getEqMpzp(),mpzpUrl);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                eqInfo.setEqMpzp("/"+mpzp);
-            }
-            if(eqInfo.getEqSbzp()!=null){
-                sbzp =  UUID.randomUUID().toString()+eqInfo.getEqSbzp().substring(eqInfo.getEqSbzp().lastIndexOf("."));
-                sbzpUrl = filePath+ sbzp;
-                if(!file.exists()){
-                    file.mkdirs();
-                }
-                try {
-                    ChangeFile.changeFile(eqInfo.getEqSbzp(),sbzpUrl);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                eqInfo.setEqSbzp("/"+sbzp);
-            }
 
-            ChangeFile.deleteDir(path+"/tmp/");
+        if(eqInfo.getMpzp()!=null)
+            eqInfo.setEqMpzp(setPic(eqInfo.getMpzp()));
+        if(eqInfo.getSbzp()!=null)
+            eqInfo.setEqSbzp(setPic(eqInfo.getSbzp()));
+        if(new java.io.File(System.getProperty("user.dir")+"/tmp/").exists())
+            ChangeFile.deleteDir(System.getProperty("user.dir")+"/tmp/");
 
-
-
-        }
         return eqDao.updateEq(eqInfo);
     }
 

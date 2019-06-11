@@ -38,7 +38,7 @@ public interface EqDao {
     @Update("UPDATE eq_info SET eq_pm_id =#{eqPmId},eq_sbbh =#{sbbh},eq_syzt=#{eqSyzt} WHERE eq_id =#{eqId}")
     Integer setPm(@Param("eqPmId") String eqPmId,@Param("eqId") String eqId,@Param("sbbh") String sbbh,@Param("eqSyzt")String syzt);
     @UpdateProvider(type = EqProvider.class , method = "updateEq")
-    Integer updateEq(EqInfo eqInfo);
+    Integer updateEq(EqInfoVo eqInfo);
     @Select("SELECT * FROM eq_pm WHERE len(eq_pm_id)=10")
     List<EqPm> listPms();
 

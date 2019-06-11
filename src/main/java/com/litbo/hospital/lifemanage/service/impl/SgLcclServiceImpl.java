@@ -13,6 +13,7 @@ import com.litbo.hospital.lifemanage.service.SgLcclService;
 import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
+import com.litbo.hospital.user.vo.EqInfoVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -171,7 +172,7 @@ public class SgLcclServiceImpl implements SgLcclService {
     @Override
     public void updateSgLccLByEqId4(SgLcclVO sgLc) {
         SgLccl sgLccl = new SgLccl();
-        EqInfo eqInfo = new EqInfo();
+        EqInfoVo eqInfo = new EqInfoVo();
         eqInfo.setEqSyzt("报废");
         BeanUtils.copyProperties(sgLc, sgLccl);
 
