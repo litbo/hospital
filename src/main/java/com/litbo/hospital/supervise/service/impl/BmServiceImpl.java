@@ -35,11 +35,45 @@ public class BmServiceImpl implements BmService {
     public PageInfo getBmList(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<SBm> date = bmDao.getBmList();
+
+        Iterator<SBm> it = date.iterator();
+        while(it.hasNext()) {
+            SBm vo =  it.next();
+            if(
+                    "0100000000".equals(vo.getBmId())||
+                            "0200000000".equals(vo.getBmId())||
+                            "0300000000".equals(vo.getBmId())||
+                            "0101000000".equals(vo.getBmId())||
+                            "0201000000".equals(vo.getBmId())||
+                            "0202000000".equals(vo.getBmId())||
+                            "0203000000".equals(vo.getBmId())||
+                            "0301000000".equals(vo.getBmId())||
+                            "0302000000".equals(vo.getBmId())||
+                            "0303000000".equals(vo.getBmId())
+                    ) {
+
+                it.remove();
+            }
+
+        }
         return new PageInfo(date);
     }
     @Override
     public List<SBm> getBmList() {
-        return bmDao.getBmList();
+        List<SBm> bmList = bmDao.getBmList();
+        Collections.sort(bmList, new Comparator<SBm>() {
+            @Override
+            public int compare(SBm b1, SBm b2) {
+                int diff = b1.getBmId().compareTo(b2.getBmId());
+                if (diff > 0) {
+                    return 1;
+                }else if (diff < 0) {
+                    return -1;
+                }
+                return 0; //相等为0
+            }
+        }); // 按部门id从下到大排序
+        return bmList;
     }
 
     @Override
@@ -358,23 +392,23 @@ public class BmServiceImpl implements BmService {
         List<BmSelectLbVO> lbbms = bmDao.listBmsAsLbBmsBySelectVO(selectVO);
 
         Iterator<BmSelectLbVO> it = lbbms.iterator();
-        while(it.hasNext()) {
-            BmSelectLbVO vo =  it.next();
-            if(
-                    "0100000000".equals(vo.getBmId())||
-                            "0200000000".equals(vo.getBmId())||
-                            "0300000000".equals(vo.getBmId())||
-                            "0101000000".equals(vo.getBmId())||
-                            "0201000000".equals(vo.getBmId())||
-                            "0202000000".equals(vo.getBmId())||
-                            "0203000000".equals(vo.getBmId())||
-                            "0301000000".equals(vo.getBmId())||
-                            "0302000000".equals(vo.getBmId())||
-                            "0303000000".equals(vo.getBmId())
-                    ) {
+            while(it.hasNext()) {
+                BmSelectLbVO vo =  it.next();
+                if(
+                        "0100000000".equals(vo.getBmId())||
+                                "0200000000".equals(vo.getBmId())||
+                                "0300000000".equals(vo.getBmId())||
+                                "0101000000".equals(vo.getBmId())||
+                                "0201000000".equals(vo.getBmId())||
+                                "0202000000".equals(vo.getBmId())||
+                                "0203000000".equals(vo.getBmId())||
+                                "0301000000".equals(vo.getBmId())||
+                                "0302000000".equals(vo.getBmId())||
+                                "0303000000".equals(vo.getBmId())
+                        ) {
 
-                it.remove();
-            }
+                    it.remove();
+                }
 
         }
 
@@ -450,7 +484,6 @@ public class BmServiceImpl implements BmService {
                             "0302000000".equals(vo.getBmId())||
                             "0303000000".equals(vo.getBmId())
                     ) {
-
                 it.remove();
             }
 
