@@ -77,12 +77,10 @@
                         $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
                     })
                 },done:function(res,index,upload){
-                    console.log(arguments);
-                    //layui.closeAll("loading");
-                    layer.msg('上传成功！', {
+                    //console.log(arguments);
+                    layer.msg('上传成功,重新登录后可预览！', {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
                     });
-                    $(".img_show").html("");
                     return delete files[index];
                 },error:function(index,upload){
                     console.log("index:"+index);
@@ -90,7 +88,12 @@
                 }
             }
         }
-    }
+    };
+
+    $(function(){
+        var glo = tempValue("rl","glo",false);
+        $(".img_show").html($("<img>").attr({"src":glo.bbtt,"id":"show_img"}));
+    })
 </script>
 </body>
 </html>
