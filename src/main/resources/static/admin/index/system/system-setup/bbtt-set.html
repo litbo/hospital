@@ -31,14 +31,14 @@
             </div>
             <div class="col-xs-12">
                 <div class="layui-form-item" pane>
-                    <label class="layui-form-label">选择</label>
+                    <label class="layui-form-label">图片选择</label>
                     <div class="layui-input-block">
                         <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
                         <!--<input type="file" accept="image/*" name="logoFile" autocomplete="off" class="layui-input" style="padding:5px;">-->
                     </div>
                 </div>
                 <div class="layui-form-item" pane>
-                    <label class="layui-form-label">预览</label>
+                    <label class="layui-form-label">图片预览</label>
                     <div class="layui-input-block">
                         <div class="img_show">
 
@@ -51,7 +51,7 @@
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button class="layui-btn" lay-submit="" lay-filter="submit" id="sub">提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button id="loOut" class="layui-btn layui-btn-primary">重新登录</button>
                     </div>
                 </div>
             </div>
@@ -78,16 +78,34 @@
                     })
                 },done:function(res,index,upload){
                     //console.log(arguments);
-                    layer.msg('上传成功,重新登录后可预览！', {
+                    /*layer.msg('上传成功,重新登录后可预览！', {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });*/
+                    layer.confirm("LOGO上传成功，重新登录后生效！是否重新登陆？",function () {
+                        layer.confirm("请再次确认是否重新登录？",function () {
+                            top.location = "/logout"
+                        })
                     });
+                    //$(".img_show").html("");
                     return delete files[index];
                 },error:function(index,upload){
                     console.log("index:"+index);
                     console.log("upload"+upload);
                 }
             }
-        }
+        },
+        btn:[
+            {
+                elem:"#loOut",
+                func:function(){
+                    layer.confirm("重新登录后可以查看已提交成功的图片！是否重新登陆？",function () {
+                        layer.confirm("请再次确认是否重新登录？",function () {
+                            top.location = "/logout"
+                        })
+                    });
+                }
+            }
+        ]
     };
 
     $(function(){
