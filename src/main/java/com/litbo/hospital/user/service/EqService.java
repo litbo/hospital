@@ -26,7 +26,7 @@ public interface EqService {
 
     Integer setPm(SetPmVo setPmVo);
 
-    Integer updateEq(EqInfo eqInfo);
+    Integer updateEq(EqInfoVo eqInfo);
 
     EqInfo getEqById(String eqId);
 

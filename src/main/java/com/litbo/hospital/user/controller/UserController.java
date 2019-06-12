@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -50,7 +51,11 @@ public class UserController {
 
        return Result.success(userService.getUserById(userId)) ;
     }
-
+    @RequestMapping("getUserBySId")
+    public Result getUserById(HttpSession session){
+        String username  = (String) session.getAttribute("username");
+        return Result.success(userService.getUserById(username)) ;
+    }
     @RequestMapping("delUsers")
     @Transactional
     public  Result delUsers(@RequestBody ListVo listVo){

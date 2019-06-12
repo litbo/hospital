@@ -187,8 +187,8 @@
                         </div>
                         <div class="layui-form-item" pane>
                             <label class="layui-form-label">伤害<span class="sign">*</span></label>
-                            <div class="layui-input-block" lay-verify="required">
-                                <input type="radio" name="sh" value="死亡" title="死亡">
+                            <div class="layui-input-block"">
+                                <input type="radio" name="sh" value="死亡" title="死亡" checked>
                                 <input type="radio" name="sh" value="严重伤害" title="严重伤害">
                                 <input type="radio" name="sh" value="其他" title="其他">
                             </div>
@@ -222,8 +222,8 @@
                             </div>
                             <div class="layui-form-item" pane>
                                 <label class="layui-form-label">性别<span class="sign">*</span></label>
-                                <div class="layui-input-block" lay-verify="required">
-                                    <input type="radio" name="xb" value="男" title="男">
+                                <div class="layui-input-block">
+                                    <input type="radio" name="xb" value="男" title="男" checked>
                                     <input type="radio" name="xb" value="女" title="女">
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
                     <div class="layui-colla-content layui-show">
                         <div class="layui-form-item" pane>
                             <label class="layui-form-label">事件原因分析<span class="sign">*</span></label>
-                            <div class="layui-input-block" lay-verify="required">
+                            <div class="layui-input-block">
                                 <input type="checkbox" class="sjyyfx" name="s1" value="产品原因（包括说明书等）" title="产品原因（包括说明书等）">
                                 <input type="checkbox" class="sjyyfx" name="s2" value="操作原因" title="操作原因">
                                 <input type="checkbox" class="sjyyfx" name="s3" value="患者自身原因" title="患者自身原因">
@@ -426,12 +426,18 @@
                 }
             },
             submit:{
-                before:function(){
+                before:function(data){
                     var ss="",$cks = $(".sjyyfx");
                     for(var i=0;i<$cks.length;i++){
                         if($cks[i].checked === true){
                             ss += $("input[name='s"+(i+1)+"']").val() + "|"
                         }
+                    }
+                    if(ss===""){
+                        putMsg({
+                            alert:"请选择一个 事件原因分析 ！"
+                        });
+                        return false;
                     }
                     return param = {
                         1:ss

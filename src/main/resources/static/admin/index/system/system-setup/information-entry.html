@@ -15,11 +15,18 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style type="text/css">
-        .layui-form-label{
+ /*       .layui-form-label{
             width:140px;
             padding: 8px 8px!important;
-        }
-        .layui-form-item{
+        }*/
+     .layui-form-label{
+         width:150px!important;
+     }
+    .layui-input-block{
+       margin-left:150px!important;
+    }
+
+    .layui-form-item{
             margin-top:25px;
         }
         .warm_btn {
@@ -83,9 +90,9 @@
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">保修响应时间(小时)</label>
+                                    <label class="layui-form-label">保修响应时间(时)</label>
                                     <div class="layui-input-block">
-                                        <input type="number" name="eqBxxysj" autocomplete="off" class="layui-input" placeholder="请输入..." >
+                                        <input type="number" name="eqBxxysj" autocomplete="off" class="layui-input" placeholder="小时" >
                                     </div>
                                 </div>
 
@@ -153,9 +160,9 @@
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">启用日期</label>
+                                    <label class="layui-form-label">启用日期<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqQysj" id="date1"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
+                                        <input type="text" name="eqQysj" id="date1" lay-verify="required"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -267,7 +274,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用部门负责人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqSybmfzr" disabled autocomplete="off" class="layui-input" placeholder="请输入">
+                                        <input type="text" name="eqSybmfzr"  autocomplete="off" class="layui-input" placeholder="请输入">
                                     </div>
                                 </div>
                             </div>
@@ -693,7 +700,7 @@
                     },
                     {
                         filter:"bmList",
-                        ids: "obmId",
+                        ids: "bmId",
                         text: "bmName",
                         url: "/supervise/bmgl/listBms2"
                     }

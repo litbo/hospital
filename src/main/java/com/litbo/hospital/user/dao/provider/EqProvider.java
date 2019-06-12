@@ -151,7 +151,7 @@ public class EqProvider {
 
     }
 
-    public String updateEq(EqInfo eqInfo) {
+    public String updateEq(EqInfoVo eqInfo) {
         return new SQL() {
             {
                 UPDATE("eq_info");

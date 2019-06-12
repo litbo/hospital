@@ -136,6 +136,12 @@
                             ss += $("input[name='s"+(i+1)+"']").val() + "|"
                         }
                     }
+                    if(ts.length === 0){
+                        putMsg({
+                            alert:"请至少添加一项成本明细项！"
+                        });
+                        return false;
+                    }
                     return param = {
                         1: {
                             "pjRkTime":$("input[name='pjRkTime']").val(),

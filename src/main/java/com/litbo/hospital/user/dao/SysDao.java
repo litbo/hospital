@@ -29,4 +29,6 @@ public interface SysDao {
     SysDxm getDxm();
     @Select("select * from sys_wjbb")
     SysWjbb getWjbb();
+    @Select("select * from sys_zxsj")
+    SysZxsj getZxsj();
 }
