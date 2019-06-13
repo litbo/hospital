@@ -425,7 +425,8 @@ function subUp(value, data, param) {
                             if (value.reload) {
                                 //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                                 value.reload === "parent" ? parent.location.reload() : window.location.reload();
-                            } else if(value.shutWin) {
+                            }
+                            if(value.shutWin) {
                                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                 parent.layer.close(index);
                             }

@@ -1201,6 +1201,9 @@ td[lay-event="openLink"] {
     text-decoration: underline;
     cursor: pointer!important;
 }
+.layui-table-tool{
+  z-index:665!important;
+}
 /*面板标题*/
 .panel-body {
   padding: 15px;

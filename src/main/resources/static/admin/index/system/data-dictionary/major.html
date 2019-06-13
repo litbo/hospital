@@ -17,7 +17,7 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table" lay-filter="basic"></table>
+        <table id="table" lay-filter="major"></table>
     </div>
 </div>
 <script type="text/html" id="toolBar">
@@ -42,8 +42,8 @@
             </form>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="del">删除</a>
-   <!-- <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="update">修改</a>-->
+    <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">修改</a>
 </script>
 
 <script>
@@ -52,7 +52,7 @@
             cols: [[ //表头
                 {checkbox:true,fixed:true}
                 , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
-                , {field: 'dictId', title: '字典编号', minWidth: 150,event:"openLink"}
+                , {field: 'dictId', title: '字典编号', minWidth: 150}
                 , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
             ]]
             ,url:"/eqdict/zyzd"
@@ -73,7 +73,7 @@
                     "obj": obj,
                     "tools": [
                         {
-                            filter:"basic",
+                            filter:"major",
                             tool:'toolbar',
                             event:'add',
                             title:'字典设置',
@@ -81,19 +81,25 @@
                             content:'./child/major-add.html'
                         },
                         {
+                            filter:"major",
                             event:'del',
-                            title:'删除确认',
-                            type:2,
-                            content:'./child/major-del.html',
-                            dataUrl: ["bName","id"]
+                            send:{
+                                id:"table",
+                                filter:"major",
+                                name:"dictId",//发送给后台的值
+                                event:"del",
+                                url:"#"
+                            }
                         },
-                       /* {
-                            event:'update',
+                        {
+                            filter:"major",
+                            event:'edit',
                             title:'字典信息修改',
                             type:2,
-                            content:'./child/information-check.html',
-                            dataUrl: ["eqId"]
-                        }*/
+                            area:["400px","250px"],
+                            content:'./child/information-edit-major.html',
+                            dataUrl: ["dictId"]
+                        }
                     ]
                 })
             }

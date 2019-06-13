@@ -40,6 +40,10 @@
         <button class="layui-btn" data-type="reload">搜索</button>
     </form>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">修改</a>
+</script>
 
 <script>
         renderMod.addTable ={
@@ -47,7 +51,8 @@
                 cols: [[ //表头
                     {checkbox:true,fixed:true}
                     , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
-                    , {field: 'dictId', title: '字典编号', minWidth: 150,event:"openLink"}
+                    , {field: 'dictId', title: '字典编号', minWidth: 150}
+                    , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
                 ]]
                 ,url:"/eqdict/jczd"
                 , request: {
@@ -70,9 +75,29 @@
                                 filter:"basic",
                                 tool:'toolbar',
                                 event:'add',
-                                title:'字典设置',
+                                title:'添加字典',
                                 type:2,
                                 content:'./child/basic-add.html'
+                            },
+                            {
+                                filter:"basic",
+                                event:'edit',
+                                title:'字典信息修改',
+                                type:2,
+                                area:["400px","250px"],
+                                content:'./child/information-edit-basic.html',
+                                dataUrl: ["dictId"]
+                            },
+                            {
+                                filter:"basic",
+                                event:'del',
+                                send:{
+                                    id:"table",
+                                    filter:"basic",
+                                    name:"dictId",//发送给后台的值
+                                    event:"del",
+                                    url:"#"
+                                }
                             }
                         ]
                     })
