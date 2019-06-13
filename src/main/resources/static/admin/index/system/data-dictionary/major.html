@@ -41,7 +41,10 @@
                     <button class="layui-btn" data-type="reload">搜索</button>
             </form>
 </script>
-
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="del">删除</a>
+   <!-- <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="update">修改</a>-->
+</script>
 
 <script>
     renderMod.addTable ={
@@ -50,6 +53,7 @@
                 {checkbox:true,fixed:true}
                 , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
                 , {field: 'dictId', title: '字典编号', minWidth: 150,event:"openLink"}
+                , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
             ]]
             ,url:"/eqdict/zyzd"
             , request: {
@@ -75,7 +79,21 @@
                             title:'字典设置',
                             type:2,
                             content:'./child/major-add.html'
-                        }
+                        },
+                        {
+                            event:'del',
+                            title:'删除确认',
+                            type:2,
+                            content:'./child/major-del.html',
+                            dataUrl: ["bName","id"]
+                        },
+                       /* {
+                            event:'update',
+                            title:'字典信息修改',
+                            type:2,
+                            content:'./child/information-check.html',
+                            dataUrl: ["eqId"]
+                        }*/
                     ]
                 })
             }

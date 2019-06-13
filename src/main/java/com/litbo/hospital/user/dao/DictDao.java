@@ -51,19 +51,19 @@ public interface DictDao {
     List<DictVo> listJczd();
 
 
-    @Select("SELECT eq_cslb_id as dictId ,eq_cslb_name as dictName FROM eq_cslb\n" +
+    @Select("SELECT eq_cslb_id as dictId ,eq_cslb_name as dictName,b_name FROM eq_cslb\n" +
             "union all\n" +
-            "SELECT eq_cxfl_id as dictId ,eq_cxfl_name as dictName FROM eq_cxfl\n" +
+            "SELECT eq_cxfl_id as dictId ,eq_cxfl_name as dictName ,b_name FROM eq_cxfl\n" +
             "union all\n" +
-            "SELECT gzlb_id as dictId ,gzlb_name as dictName FROM eq_gzlb\n" +
+            "SELECT gzlb_id as dictId ,gzlb_name as dictName ,b_name FROM eq_gzlb\n" +
             "union all\n" +
-            "SELECT eq_jldw_id as dictId ,eq_jldw_name as dictName FROM eq_jldw\n" +
+            "SELECT eq_jldw_id as dictId ,eq_jldw_name as dictName,b_name FROM eq_jldw\n" +
             "union all\n" +
-            "SELECT qdfs_id as dictId ,qdfs_name as dictName FROM eq_qdfs\n" +
+            "SELECT qdfs_id as dictId ,qdfs_name as dictName,b_name FROM eq_qdfs\n" +
             "union all\n" +
-            "SELECT zjly_id as dictId ,zjly_name as dictName FROM eq_zjly\n" +
+            "SELECT zjly_id as dictId ,zjly_name as dictName,b_name FROM eq_zjly\n" +
             "union all\n" +
-            "SELECT syxz_id as dictId ,syxz_name as dictName FROM eq_syxz")
+            "SELECT syxz_id as dictId ,syxz_name as dictName,b_name FROM eq_syxz")
     List<DictVo> listZyzd();
     @Select("select zggwlb_id  ,zggwlb  from s_zggwlb")
     List<Zggwlb> listZggwlb();
@@ -85,4 +85,8 @@ public interface DictDao {
     List<Gb> listGb();
     @Select("select *  from s_jg")
     List<Jg> listJg();
+    @Delete("delete from #{bName} where id = #{id}")
+    Integer delByTNameAndId(String bName, String id);
+    @Select("select * from #{bName} where id = #{id}")
+    DictVo getByTNameAndId(String bName, String id);
 }

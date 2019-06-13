@@ -162,6 +162,20 @@ public class DictController {
        return Result.error();
     }
 
+    @RequestMapping("delByTNameAndId")
+    public Result delByTNameAndId(String bName,String id){
+
+        if(dictDao.delByTNameAndId(bName,id)>0){
+            return Result.success();
+        }
+        return Result.error();
+
+    }
+    @RequestMapping("getByTNameAndId")
+    public Result getByTNameAndId(String bName,String id){
+
+        return Result.success(dictDao.getByTNameAndId(bName,id));
+    }
 
 
 
