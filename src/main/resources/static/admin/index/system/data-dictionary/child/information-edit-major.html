@@ -41,16 +41,16 @@
 
 <script>
     renderMod = {
-        val:{
-            filter:"major_form",
-            get:{
-                url:"/eqdict/getByTNameAndId",
-                data:{"dictId":$.getUrlParam("dictId"),
-                    "bName":$.getUrlParam("bName")
-                }
-            }
-        },
         form:{
+            val:{
+                filter:"major_form",
+                get:{
+                    url:"/eqdict/getByTNameAndId",
+                    data:{"dictId":$.getUrlParam("dictId"),
+                        "bName":$.getUrlParam("dictName")
+                    }
+                }
+            },
             submit:{
                 filter:"submit",//可以不写
                 form:{
