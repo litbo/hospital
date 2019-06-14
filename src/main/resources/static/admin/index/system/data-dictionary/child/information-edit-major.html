@@ -44,8 +44,10 @@
         val:{
             filter:"major_form",
             get:{
-                url:"",
-                data:{"dictId":$.getUrlParam("dictId")}
+                url:"/eqdict/getByTNameAndId",
+                data:{"dictId":$.getUrlParam("dictId"),
+                    "bName":$.getUrlParam("bName")
+                }
             }
         },
         form:{

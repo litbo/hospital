@@ -163,9 +163,9 @@ public class DictController {
     }
 
     @RequestMapping("delByTNameAndId")
-    public Result delByTNameAndId(String bName,String id){
+    public Result delByTNameAndId(String bName,String dictId){
 
-        if(dictDao.delByTNameAndId(bName,id)>0){
+        if(dictDao.delByTNameAndId(bName,dictId)>0){
             return Result.success();
         }
         return Result.error();

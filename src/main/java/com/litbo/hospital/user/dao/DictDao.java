@@ -74,7 +74,8 @@ public interface DictDao {
     @Select("select *  from s_xllb")
     List<Xllb> listXllb();
     @SelectProvider(type = DictProvider.class ,method = "listDictByTName")
-    List<DictVo> listDictByTName(String tName);
+  /*  @Select("Select * FROM ${tName}")*/
+    List<DictVo> listDictByTName(@Param("tName") String tName);
     @SelectProvider(type = DictProvider.class ,method = "addDictByTName")
     Integer addDictByTName(@Param("tName") String tName, @Param("dictName") String dictName, @Param("sdictId") String sdictId,@Param("dictId") Integer dictId);
     @SelectProvider(type = DictProvider.class ,method = "getLastIdByTName")
@@ -85,8 +86,8 @@ public interface DictDao {
     List<Gb> listGb();
     @Select("select *  from s_jg")
     List<Jg> listJg();
-    @Delete("delete from #{bName} where id = #{id}")
-    Integer delByTNameAndId(String bName, String id);
-    @Select("select * from #{bName} where id = #{id}")
+    @DeleteProvider(type = DictProvider.class ,method = "delByTNameAndId")
+    Integer delByTNameAndId(@Param("bName") String bName,@Param("id") String id);
+    @Select("select * from ${bName} where id = #{id}")
     DictVo getByTNameAndId(String bName, String id);
 }

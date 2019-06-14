@@ -88,7 +88,7 @@
                                 filter:"major",
                                 name:"dictId",//发送给后台的值
                                 event:"del",
-                                url:"#"
+                                url:"/eqdict/delByTNameAndId"
                             }
                         },
                         {
@@ -98,7 +98,7 @@
                             type:2,
                             area:["400px","250px"],
                             content:'./child/information-edit-major.html',
-                            dataUrl: ["dictId"]
+                            dataUrl: ["dictId","bName"]
                         }
                     ]
                 })
