@@ -9,7 +9,12 @@ import com.litbo.hospital.security.bean.Xllb;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
+import com.litbo.hospital.user.vo.DelDictVo;
+import com.litbo.hospital.user.vo.DelDictVoo;
+import com.litbo.hospital.user.vo.DictVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -162,19 +167,25 @@ public class DictController {
        return Result.error();
     }
 
+    @Transactional
     @RequestMapping("delByTNameAndId")
-    public Result delByTNameAndId(String bName,String dictId){
+    public Result delByTNameAndId(DictVo dictVo){
 
-        if(dictDao.delByTNameAndId(bName,dictId)>0){
-            return Result.success();
+        try{
+           dictDao.delByTNameAndId(dictVo);
+
+        }catch (Exception e){
+            return Result.error();
         }
-        return Result.error();
+        return  Result.success();
+
+
 
     }
     @RequestMapping("getByTNameAndId")
-    public Result getByTNameAndId(String bName,String id){
+    public Result getByTNameAndId(String bName,String dictId){
 
-        return Result.success(dictDao.getByTNameAndId(bName,id));
+        return Result.success(dictDao.getByTNameAndId(bName,dictId));
     }
 
 

@@ -24,7 +24,7 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
+      <!--  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>-->
     </div>
     <form class="layui-form">
         字典分类：
@@ -44,7 +44,7 @@
     </form>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger"  lay-event="edit">删除</a>
 </script>
 
 <script>
@@ -54,6 +54,7 @@
                 {checkbox: true, fixed: true}
                 , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
                 , {field: 'dictId', title: '字典编号', minWidth: 150}
+                , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
 
             ]]
             , url: "/eqdict/zyzd"
@@ -79,7 +80,7 @@
                             tool:"toolbar",
                             send:{
                                 id:"table",
-                                name:"dictId",//发送给后台的参数名称
+                                name:"delDictVo",//发送给后台的参数名称
                                 filter: "major",
                                 even:"del",
                                 url:"/eqdict/delByTNameAndId",
@@ -89,11 +90,11 @@
                         {
                             filter: "major",
                             event: 'edit',
-                            title: '字典信息修改',
+                            title: '删除确认',
                             type: 2,
                             area: ["400px", "250px"],
                             content: './child/information-edit-major.html',
-                            dataUrl: ["dictId", "dictName"]
+                            dataUrl: ["dictId", "bname"]
                         },
                         {
                             filter: "major",

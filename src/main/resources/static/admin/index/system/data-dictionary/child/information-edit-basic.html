@@ -29,11 +29,12 @@
                 <label class="layui-form-label">字典名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="dictName" class="layui-input" autocomplete="off" required lay-verify="required">
+                    <input type="hidden" name="dictId" class="layui-input" autocomplete="off" required lay-verify="required">
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
-            <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="submit">保存</button>
+            <button class="layui-btn layui-btn-fluid layui-btn-danger" lay-submit="" lay-filter="submit">确认删除</button>
         </div>
     </div>
 </form>
@@ -42,21 +43,24 @@
 
 <script>
     renderMod = {
-        val:{
-            filter:"basic_form",
-            get:{
-                url:"",
-                data:{"dictId":$.getUrlParam("dictId")}
-            }
-        },
+
         form:{
+            val:{
+                filter:"basic_form",
+                get:{
+                    url:"/eqdict/getByTNameAndId",
+                    data:{"dictId":$.getUrlParam("dictId"),
+                        "bName":$.getUrlParam("bname")
+                    }
+                }
+                },
             submit:{
                 filter:"submit",//可以不写
                 form:{
-                    url:"#",
+                    url:"/eqdict/delByTNameAndId",
                     type:"POST",
-                    data:["dictName"],
-                    add:{"dictId":$.getUrlParam("dictId")},
+                    data:["dictId"],
+                    add:{"bName":$.getUrlParam("bname")},
                     shutWin:true
                 }
             }
