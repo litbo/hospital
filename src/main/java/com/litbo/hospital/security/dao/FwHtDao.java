@@ -32,7 +32,7 @@ public interface FwHtDao {
             "      #{heWxsdb,jdbcType=VARCHAR}, #{htYfdb,jdbcType=VARCHAR}, #{htZffs}, \n" +
             "      #{htJfly,jdbcType=VARCHAR}, #{htBxksTime,jdbcType=TIMESTAMP}, #{htBxjsTime,jdbcType=TIMESTAMP}, \n" +
             "      #{htXyTime,jdbcType=INTEGER}, #{htBxfw,jdbcType=VARCHAR}, #{htHpjf,jdbcType=INTEGER}, \n" +
-            "      #{htFjurl,jdbcType=VARCHAR}, #{eqId,jdbcType=INTEGER}, #{htStatus,jdbcType=INTEGER}, \n" +
+            "      #{htFjurl,jdbcType=VARCHAR}, #{eqId}, #{htStatus,jdbcType=INTEGER}, \n" +
             "      #{htMs,jdbcType=LONGVARCHAR})")
     public int addFwHt(FwHt fwHt);
 

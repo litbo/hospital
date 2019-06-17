@@ -44,7 +44,7 @@ public class FwHt {
 
     private String htFjurl;
 
-    private Integer eqId;
+    private String eqId;
 
     private Integer htStatus;
 

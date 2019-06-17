@@ -16,15 +16,15 @@ import java.util.List;
 public interface FwWeixiuDao {
 
     @Insert("insert into fw_weixiu (fw_id, xxsb_status, gzpc, \n" +
-            "      gzyy_id, gzmx_id, gzbw_id, \n" +
+            "      gzyy_id, gzmx_id, gzbw, \n" +
             "      gzwx_fs, wxgznr, wxr_id, \n" +
             "      wxsy_time, wx_price, fzwx_id, \n" +
             "      wxjg, gcsjy, zj_status, \n" +
             "      gztj_time, fwks_time, pcwc_time\n" +
             "      )\n" +
             "    values (#{fwId,jdbcType=VARCHAR}, #{xxsbStatus,jdbcType=INTEGER}, #{gzpc,jdbcType=VARCHAR}, \n" +
-            "      #{gzyyId,jdbcType=INTEGER}, #{gzmxId,jdbcType=INTEGER}, #{gzbwId,jdbcType=INTEGER}, \n" +
-            "      #{gzwxFs,jdbcType=INTEGER}, #{wxgznr,jdbcType=INTEGER}, #{wxrId,jdbcType=VARCHAR}, \n" +
+            "      #{gzyyId,jdbcType=INTEGER}, #{gzmxId,jdbcType=INTEGER}, #{gzbw}, \n" +
+            "      #{gzwxFs,jdbcType=INTEGER}, #{wxgznr}, #{wxrId,jdbcType=VARCHAR}, \n" +
             "      #{wxsyTime,jdbcType=DOUBLE}, #{wxPrice,jdbcType=DECIMAL}, #{fzwxId,jdbcType=VARCHAR}, \n" +
             "      #{wxjg,jdbcType=VARCHAR}, #{gcsjy,jdbcType=VARCHAR}, #{zjStatus,jdbcType=INTEGER}, \n" +
             "      #{gztjTime}, #{fwksTime,jdbcType=TIMESTAMP}, #{pcwcTime,jdbcType=TIMESTAMP}\n" +

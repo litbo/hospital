@@ -92,11 +92,6 @@
                 <div class="layui-input-block">
                     <select name="gzyyId" lay-filter="break_type">
                         <option value=""></option>
-                        <option value="1">人为原因</option>
-                        <option value="2">设备本身原因</option>
-                        <option value="3">外界环境原因</option>
-                        <option value="4">正常损耗原因</option>
-                        <option value="5">其他不明原因</option>
                     </select>
                 </div>
             </div>
@@ -111,17 +106,20 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">故障部位<span class="sign">*</span></label>
-                <div class="layui-input-block">
+                <!--<div class="layui-input-block">
                     <select  name="gzbwId" lay-filter="break_part">
                         <option value=""></option>
                     </select>
+                </div>-->
+                <div class="layui-input-block">
+                    <input type="text" name="gzbw" class="layui-input" autocomplete="off" placeholder="请输入" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">维修工作内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="wxgznr" lay-filter="repair_eng">
-                        <option value="1">123</option>
+                    <select name="wxgznr" lay-filter="wxgznrFilter">
+                        <option>-请选择-</option>
                     </select>
                 </div>
             </div>
@@ -181,7 +179,21 @@
                     data:{
                         wxrId:$.getUrlParam("wxrId")
                     }
-                }
+                },
+                select: [
+                    {
+                        filter:"wxgznrFilter",
+                        ids: "id",
+                        text: "wxnrzdText",
+                        url: "/security/wxnr/selectFwWxgznr"
+                    },
+                    {
+                        filter:"break_type",
+                        ids: "id",
+                        text: "wxnrzdText",
+                        url: "/security/wxnr/selectFwWxnrzd"
+                    }
+                ]
             },
             event:{
                 filter:"break_type",
@@ -198,7 +210,7 @@
                             if(res.code === 0){
                                 var datt = res.data.list || res.data;
                                 renderS(datt.gzyymx,"break_reason");
-                                renderS(datt.gzbw,"break_part");
+                                //renderS(datt.gzbw,"break_part");
                                 function renderS(d,f){
                                     //f => 需要渲染的select的lay-filter值
                                     var $d = $("select[lay-filter='"+f+"']");

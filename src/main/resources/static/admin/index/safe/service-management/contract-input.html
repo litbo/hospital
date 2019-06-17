@@ -38,7 +38,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">合同编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="id" class="layui-input" placeholder="20190101-？" autocomplete="off" >
+                    <input type="hidden" name="id" class="layui-input" placeholder="20190101-？" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
@@ -70,9 +70,9 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">维修商</label>
+                <label class="layui-form-label">维修商<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="sbcsId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="sbcsId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectWxs">选择</button>
                     <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
                 </div>
@@ -160,9 +160,9 @@
                 </div>
             </div>
             <div class="layui-form-item" pane>
-                <label class="layui-form-label" >设备名称</label>
+                <label class="layui-form-label" >设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqId" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
                 </div>
             </div>

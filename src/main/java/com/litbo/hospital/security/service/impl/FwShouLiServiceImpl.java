@@ -83,6 +83,9 @@ public class FwShouLiServiceImpl implements FwShouLiService {
     @Transactional
     @Override
     public void addShouli(FwShouli fwShouli) {
+        if(fwShouli.getYdwxTime().before(fwBaoxiuDao.findFwBaoxiu(fwShouli.getId()).getBxTime())){
+            throw new RuntimeException("约定维修时间小于报修时间");
+        }
         fwShouLiDao.addShouLi(fwShouli);
         fwBaoxiuDao.updateBaoxiuStatus(fwShouli.getId(),EnumProcess.FW_GZ_JX.getCode());
         FwLcjl fwLcjl = new FwLcjl();

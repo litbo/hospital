@@ -17,11 +17,11 @@ public class FwWeixiu {
 
     private Integer gzmxId;
 
-    private Integer gzbwId;
+    private String gzbw;
 
     private Integer gzwxFs;
 
-    private Integer wxgznr;
+    private String wxgznr;
 
     private String wxrId;
 

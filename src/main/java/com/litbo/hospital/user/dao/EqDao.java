@@ -5,6 +5,7 @@ import com.litbo.hospital.user.dao.provider.EqProvider;
 import com.litbo.hospital.user.vo.*;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 @Mapper
 public interface EqDao {
@@ -96,4 +97,6 @@ public interface EqDao {
     List<EqName> listEqNameByX(String ccname);
     @Update("UPDATE eq_info SET eq_bmid = #{bmId} WHERE eq_id = #{eqId}")
     void updateBmId(@Param("eqId") String eqId,@Param("bmId")  String bmId);
+    @Update("UPDATE eq_info SET eq_bxkssj = #{eqBxkssj}, eq_bxJssj = #{eqBxkssj} WHERE eq_id = #{eqId}")
+    void updateBxTimeById(@Param("eqId") String eqId, @Param("eqBxkssj") Date eqBxkssj, @Param("eqBxJssj") Date eqBxJssj);
 }
