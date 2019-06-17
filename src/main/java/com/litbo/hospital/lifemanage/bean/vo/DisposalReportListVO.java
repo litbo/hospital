@@ -44,7 +44,7 @@ public class DisposalReportListVO {
     /**
      * 采购日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqCgrq;
     /**
      * 单价
@@ -57,7 +57,7 @@ public class DisposalReportListVO {
     /**
      * 申报时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date declareTime;
     /**
      * 单位领导意见
