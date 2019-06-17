@@ -24,8 +24,8 @@
         .layui-form-item{
             margin-top:35px
         }
-        span{
-            color:#f10214;
+        .mini-way{
+            margin-left:30px;
         }
     </style>
 </head>
@@ -57,17 +57,16 @@
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <div class="layui-input-block">
+                <div class="mini-way">
                     <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button id="close" class="layui-btn layui-btn-primary">关闭页面</button>
                 </div>
             </div>
         </div>
 
     </div>
 </form>
-
-
 
 <script>
     renderMod = {
@@ -81,9 +80,17 @@
                     reload:"true"
                 }
             }
-        }
+        },
+        btn:[
+            {
+                elem:"#close",
+                func:function(){
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ]
     }
-
 </script>
 </body>
 

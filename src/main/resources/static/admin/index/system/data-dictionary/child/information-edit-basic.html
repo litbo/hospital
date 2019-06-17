@@ -16,7 +16,10 @@
     <script src="/static/admin/js/basic.js"></script>
     <style>
         .layui-form-item,button{
-            margin-top:35px
+            margin-top:20px;
+        }
+        .cann{
+            margin: 20px 0!important;
         }
     </style>
 </head>
@@ -28,22 +31,20 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">字典名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="dictName" class="layui-input" autocomplete="off" required lay-verify="required">
-                    <input type="hidden" name="dictId" class="layui-input" autocomplete="off" required lay-verify="required">
+                    <input type="text" name="dictName" class="layui-input" disabled>
+                    <input type="hidden" name="dictId" class="layui-input">
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
             <button class="layui-btn layui-btn-fluid layui-btn-danger" lay-submit="" lay-filter="submit">确认删除</button>
+            <button class="layui-btn layui-btn-fluid cann">取消删除</button>
         </div>
     </div>
 </form>
 
-
-
 <script>
     renderMod = {
-
         form:{
             val:{
                 filter:"basic_form",
@@ -61,12 +62,21 @@
                     type:"POST",
                     data:["dictId"],
                     add:{"bName":$.getUrlParam("bname")},
-                    shutWin:true
+                    shutWin:true,
+                    reload:"parent"
                 }
             }
-        }
+        },
+        btn:[
+            {
+                elem:".cann",
+                func:function(){
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ]
     }
-
 </script>
 </body>
 

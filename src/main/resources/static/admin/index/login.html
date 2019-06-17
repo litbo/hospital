@@ -9,6 +9,13 @@
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css"/>
     <script src="/static/admin/layui/layui.js"></script>
+    <style>
+        button[disabled] {
+            background: #f3f3f3;
+            color: #a3a3a3;
+            cursor: no-drop;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,14 +54,18 @@
             layer = layui.layer;
         layui.sessionData("rl",null);
         form.on('submit(login)', function (data) {
-            var $ser = data.field;
-            console.log($ser);
+            var $ser = data.field,that = $(this);
+            console.log($(this));
+            that.attr("disabled","");
+            that.text("正在登陆");
+            //console.log($ser);
             $.ajax({
                 url: "/hospital/submit",
                 type: "POST",
                 data: $ser,
+                async:false,
                 success: function (info) {
-                    console.log("LOGIN",info);
+                    //console.log("LOGIN",info);
                     //登陆成功跳转页面
                     if (info.code === 0) {
                         layui.sessionData("rl",{
@@ -80,18 +91,21 @@
                         layer.msg("登陆失败，请重试！");
                         console.log(info);//打印错误信息，调试用，可注释
                     }
-
+                    that.removeAttr("disabled");
+                    that.text("登陆");
                 },error:function(info){
                     layer.msg("登陆出错，请重试！");
                     console.log(info);//打印错误信息，调试用，可注释
+                    that.removeAttr("disabled");
+                    that.text("登陆");
                 }
             });
             return false;
         });
 
         //回车键触发提交
-        $("input").keydown(function(event){
-            if (event.keyCode === 13) {
+        $(document).keydown(function(event){
+            if (event.keyCode === 13 && $("#check-btn").attr("disabled") === undefined) {
                 $("#check-btn")[0].click();
             }
         })
