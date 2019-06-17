@@ -23,7 +23,6 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-      <!--  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>-->
     </div>
     <form class="layui-form">
         字典分类：
@@ -43,8 +42,6 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit">删除</a>
-    <!--
-    , {title: '操作', width: 200, align: "center", toolbar: '#bar'}-->
 </script>
 
 <script>
@@ -78,7 +75,8 @@
                                 filter:"basic",
                                 tool:'toolbar',
                                 event:'add',
-                                title:'添加字典',
+                                title:'新增字典',
+                                area:["80%","300px"],
                                 type:2,
                                 content:'./child/basic-add.html'
                             },
@@ -90,19 +88,6 @@
                                 area:["400px","250px"],
                                 content:'./child/information-edit-basic.html',
                                 dataUrl: ["dictId","bname"]
-                            },
-                            {
-                                event:"del",
-                                filter: "major",
-                                tool:"toolbar",
-                                send:{
-                                    id:"table",
-                                    name:"delDictVo",//发送给后台的参数名称
-                                    filter: "major",
-                                    even:"del",
-                                    url:"/eqdict/delByTNameAndId",
-                                    type:"POST"
-                                }
                             }
                         ]
                     })

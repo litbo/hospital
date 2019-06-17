@@ -24,12 +24,10 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-      <!--  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>-->
     </div>
     <form class="layui-form">
         字典分类：
         <div class="layui-inline">
-            <!--<input class="layui-input" name="search" id="test-table-demoReload" autocomplete="off">-->
             <select name="tName" lay-verify="">
                 <option value="eq_cslb">厂商类别</option>
                 <option value="eq_cxfl">查询分类</option>
@@ -75,19 +73,6 @@
                     "obj": obj,
                     "tools": [
                         {
-                            event:"del",
-                            filter: "major",
-                            tool:"toolbar",
-                            send:{
-                                id:"table",
-                                name:"delDictVo",//发送给后台的参数名称
-                                filter: "major",
-                                even:"del",
-                                url:"/eqdict/delByTNameAndId",
-                                type:"POST"
-                            }
-                        },
-                        {
                             filter: "major",
                             event: 'edit',
                             title: '删除确认',
@@ -100,7 +85,8 @@
                             filter: "major",
                             tool: 'toolbar',
                             event: 'add',
-                            title: '字典设置',
+                            title: '新增字典',
+                            area:["80%","300px"],
                             type: 2,
                             content: './child/major-add.html'
                         }

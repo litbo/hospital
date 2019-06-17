@@ -310,6 +310,7 @@
                 success: function (res) {
                     if (res.code === 0) {
                         addData(h_name[0], res.data.list, "workName", "url", "creatTime");
+                        clickEve(h_name[0]);
                     }
                 }
             });
@@ -318,6 +319,7 @@
                 success: function (res) {
                     if (res.code === 0) {
                         addData(h_name[2], res.data.list, "ggbt", "url", "ngsj");
+                        clickEve(h_name[2]);
                     }
                 }
             });
@@ -326,6 +328,7 @@
                 success: function (res) {
                     if (res.code === 0) {
                         addData(h_name[3], res.data.list, "wjmc", "url", "scrq");
+                        clickEve(h_name[3]);
                     }
                 }
             });
@@ -353,30 +356,30 @@
             }
         }
     });
+    //绑定按钮事件，弹出窗口显示页面
+    function clickEve(names) {
+        $(".panel_con[h_name=" + names[0] + "] a").on('click', function () {
+            var w = document.body.clientWidth - 20
+                , h = document.body.clientHeight - 20;
+
+            layOpen({
+                type: 2,
+                title: $(this).find(".h_ovf").html(),
+                content: $(this).attr("data-href"),
+                area: [w + "px", h + "px"],
+                end:function(){
+                    //window.location.reload();
+                }
+            });
+            return false;
+        });
+    }
     window.onload = function () {
         //当页面canvas加载不正确时页面重载
         var ww = $('canvas').width();
         if (ww < 100) {
             $.cookie("ww", ww);
         }
-        //绑定按钮事件，弹出窗口显示页面
-        $(function () {
-            $(".panel_con a").on('click', function () {
-                var w = document.body.clientWidth - 20
-                    , h = document.body.clientHeight - 20;
-
-                layOpen({
-                    type: 2,
-                    title: $(this).find(".h_ovf").html(),
-                    content: $(this).attr("data-href"),
-                    area: [w + "px", h + "px"],
-                    end:function(){
-                        //window.location.reload();
-                    }
-                });
-                return false;
-            });
-        })
     }
 
 </script>

@@ -121,7 +121,7 @@ public interface EquipmentAccountMapper {
             "dbo.eq_info\n" +
             "LEFT JOIN dbo.eq_pm ON dbo.eq_info.eq_pm_id = dbo.eq_pm.eq_pm_id\n" +
             "LEFT JOIN dbo.eq_cxfl ON dbo.eq_info.eq_cxfl_id = dbo.eq_cxfl.eq_cxfl_id\n" +
-            "LEFT JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id\n" +
+            "LEFT JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
             "LEFT JOIN dbo.eq_cs ON dbo.eq_info.sbcs_id_gys = dbo.eq_cs.sbcs_id\n" +
             "LEFT JOIN dbo.eq_zjly ON dbo.eq_info.zjly_id = dbo.eq_zjly.zjly_id\n" +
             "LEFT JOIN dbo.eq_qdfs ON dbo.eq_info.qdfs_id = dbo.eq_qdfs.qdfs_id\n" +

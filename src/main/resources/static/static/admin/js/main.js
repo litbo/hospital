@@ -104,27 +104,6 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
     mainMask.on('click', function () {
         mainLayout.removeClass('hide-side');
     });
-    //示范一个公告层
-    /*layer.open({
-          type: 1
-          ,title: false //不显示标题栏
-          ,closeBtn: false
-          ,area: '300px;'
-          ,shade: 0.8
-          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-          ,resize: false
-          ,btn: ['好的']
-          ,btnAlign: 'c'
-          ,moveType: 1 //拖拽模式，0或者1
-          ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">后台模版1.1版本今日更新：<br><br><br>数据列表页...<br><br>编辑删除弹出功能<br><br>失去焦点排序功能<br>数据列表页<br>数据列表页<br>数据列表页</div>'
-          ,success: function(layero){
-            var btn = layero.find('.layui-layer-btn');
-            btn.find('.layui-layer-btn0').attr({
-              href: 'http://www.layui.com/'
-              ,target: '_blank'
-            });
-          }
-        });*/
     /**
      *@todo tab切换监听
      * tab切换监听不能写字初始化加载$(function())方法内，否则不执行
