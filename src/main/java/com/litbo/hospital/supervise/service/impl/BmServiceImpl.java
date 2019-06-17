@@ -600,8 +600,6 @@ public class BmServiceImpl implements BmService {
 
                 SBm bm = new SBm();
 
-
-
                 row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
                 row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
                 row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);

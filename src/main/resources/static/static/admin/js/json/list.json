@@ -2576,19 +2576,19 @@
                 "shiro": "JGSXSZ",
                 "children": [
                   {
-                    "title": "部门类别设置",
+                    "title": "科室类别设置",
                     "url": "./admin/basic-management/department-category.html",
                     "id": "60110",
                     "shiro": "a"
                   },
                   {
-                    "title": "管理部门类别设置",
+                    "title": "管理科室类别设置",
                     "url": "./admin/basic-management/manage-department.html",
                     "id": "60111",
                     "shiro": "a"
                   },
                   {
-                    "title": "维修部门设置",
+                    "title": "维修科室设置",
                     "url": "./admin/basic-management/service-department.html",
                     "id": "60112",
                     "shiro": "WXBMSZ"
@@ -2600,7 +2600,7 @@
                     "shiro": "a"
                   },
                   {
-                    "title": "部门归属",
+                    "title": "科室归属",
                     "url": "./admin/basic-management/bmgs.html",
                     "id": "601130",
                     "shiro": "BMGS"
@@ -2904,7 +2904,7 @@
         "shiro": "KWGL",
         "children": [
           {
-            "title": "使用部门",
+            "title": "使用科室",
             "url": "admin&t=1&n=0",
             "shiro": "SYBM",
             "id": "610",
@@ -3024,7 +3024,7 @@
             ]
           },
           {
-            "title": "管理部门",
+            "title": "管理科室",
             "url": "admin&t=1&n=1",
             "shiro": "GLBM",
             "id": "611",
@@ -3037,25 +3037,25 @@
                 "shiro": "WXFGSBHF",
                 "children": [
                   {
-                    "title": "工程师负责部门划分",
+                    "title": "工程师负责科室划分",
                     "url": "./admin/discipline-management/engineer-department.html",
                     "id": "61100",
                     "shiro": "GCSFZBMHF"
                   },
                   {
-                    "title": "工程师负责部门划分查询",
+                    "title": "工程师负责科室划分查询",
                     "url": "./admin/discipline-management/engineer-search.html",
                     "id": "61101",
                     "shiro": "GCSFZBMHFCX"
                   },
                   {
-                    "title": "维修部门下的工程师负责设备划分",
+                    "title": "维修科室下的工程师负责设备划分",
                     "url": "./admin/discipline-management/service-equipment.html",
                     "id": "61102",
                     "shiro": "WXBMXDGCSFZSBHF"
                   },
                   {
-                    "title": "维修部门下的工程师负责设备划分查询",
+                    "title": "维修科室下的工程师负责设备划分查询",
                     "url": "./admin/discipline-management/repair-search.html",
                     "id": "61103",
                     "shiro": "WXBMXDGCSFZSBHFCX"
