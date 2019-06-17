@@ -9,8 +9,6 @@ import com.litbo.hospital.security.bean.Xllb;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
-import com.litbo.hospital.user.vo.DelDictVo;
-import com.litbo.hospital.user.vo.DelDictVoo;
 import com.litbo.hospital.user.vo.DictVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

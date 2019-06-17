@@ -207,17 +207,24 @@ public class EmpServiceImpl implements EmpService {
                 }
                 SEmp emp = new SEmp();
 
-                for (Cell c : row) {
-                    if(c==null) c.setCellValue("");
-                }
 
-                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
-                row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(0)==null) row.getCell(0).setCellValue("");
+                if(row.getCell(1)==null) row.getCell(1).setCellValue("");
+                if(row.getCell(2)==null) row.getCell(2).setCellValue("");
+                if(row.getCell(3)==null) row.getCell(3).setCellValue("");
+                if(row.getCell(4)==null) row.getCell(4).setCellValue("");
+                if(row.getCell(5)==null) row.getCell(5).setCellValue("");
+                if(row.getCell(6)==null) row.getCell(6).setCellValue("");
+
+
+
+                if(row.getCell(0)!=null)row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(1)!=null)row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
+                if(row.getCell(2)!=null)row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(3)!=null)row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(4)!=null)row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(5)!=null)row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(6)!=null)row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
 
 
 

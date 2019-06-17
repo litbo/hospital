@@ -594,17 +594,30 @@ public class BmServiceImpl implements BmService {
                     continue;
                 }
 
-                for (Cell c : row) {
-                    if(c==null) c.setCellValue("");
+
+                if(row.getCell(2)==null){
+                    row.createCell(2);
+                    row.getCell(2).setCellValue("");
                 }
+
+                if(row.getCell(3)==null){
+                    row.createCell(3);
+                    row.getCell(3).setCellValue("");
+                }
+                if(row.getCell(4)==null){
+                    row.createCell(4);
+                    row.getCell(4).setCellValue("");
+                }
+
+
 
                 SBm bm = new SBm();
 
-                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
-                row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-                row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(0)!=null) row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(1)!=null) row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);//设置读取转String类型
+                if(row.getCell(2)!=null)  row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(3)!=null) row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(4)!=null) row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
 
 
 
