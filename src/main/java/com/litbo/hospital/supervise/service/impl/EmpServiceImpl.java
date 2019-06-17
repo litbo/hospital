@@ -208,13 +208,51 @@ public class EmpServiceImpl implements EmpService {
                 SEmp emp = new SEmp();
 
 
-                if(row.getCell(0)==null) row.getCell(0).setCellValue("");
-                if(row.getCell(1)==null) row.getCell(1).setCellValue("");
-                if(row.getCell(2)==null) row.getCell(2).setCellValue("");
-                if(row.getCell(3)==null) row.getCell(3).setCellValue("");
-                if(row.getCell(4)==null) row.getCell(4).setCellValue("");
-                if(row.getCell(5)==null) row.getCell(5).setCellValue("");
-                if(row.getCell(6)==null) row.getCell(6).setCellValue("");
+                if(row.getCell(0)==null){
+                    row.createCell(0);
+                    row.getCell(0).setCellValue("");
+                }
+
+                if(row.getCell(1)==null){
+                    row.createCell(1);
+                    row.getCell(1).setCellValue("");
+                }
+                if(row.getCell(2)==null){
+                    row.createCell(2);
+                    row.getCell(2).setCellValue("");
+                }
+
+                if(row.getCell(3)==null){
+                    row.createCell(3);
+                    row.getCell(3).setCellValue("");
+                }
+
+                if(row.getCell(4)==null){
+                    row.createCell(4);
+                    row.getCell(4).setCellValue("");
+                }
+                if(row.getCell(5)==null){
+                    row.createCell(5);
+                    row.getCell(5).setCellValue("");
+                }
+                if(row.getCell(6)==null){
+                    row.createCell(6);
+                    row.getCell(6).setCellValue("");
+                }
+                if(row.getCell(7)==null){
+                    row.createCell(7);
+                    row.getCell(7).setCellValue("");
+                }
+
+
+//                if(row.getCell(0)==null) row.getCell(0).setCellValue("");
+//                if(row.getCell(1)==null) row.getCell(1).setCellValue("");
+//                if(row.getCell(2)==null) row.getCell(2).setCellValue("");
+//                if(row.getCell(3)==null) row.getCell(3).setCellValue("");
+//                if(row.getCell(4)==null) row.getCell(4).setCellValue("");
+//                if(row.getCell(5)==null) row.getCell(5).setCellValue("");
+//                if(row.getCell(6)==null) row.getCell(6).setCellValue("");
+//                if(row.getCell(7)==null) row.getCell(7).setCellValue("");
 
 
 
@@ -225,6 +263,7 @@ public class EmpServiceImpl implements EmpService {
                 if(row.getCell(4)!=null)row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
                 if(row.getCell(5)!=null)row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
                 if(row.getCell(6)!=null)row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+                if(row.getCell(7)!=null)row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
 
 
 
@@ -236,6 +275,10 @@ public class EmpServiceImpl implements EmpService {
                 String tel = row.getCell(4).getStringCellValue();      emp.setTel(tel);
                 String email = row.getCell(5).getStringCellValue();    emp.setEmail(email);
                 String byyx = row.getCell(6).getStringCellValue();     emp.setByyx(byyx);
+                String obmid = row.getCell(7).getStringCellValue();
+                SBm bm = bmDao.getBmByOid(obmid);
+                if(bm!=null)
+                    emp.setBmId(bm.getBmId());
                 emp.setStatus("0");
 
                 if(empDao.saveEmp(emp)<=0){
