@@ -425,7 +425,8 @@ function subUp(value, data, param) {
                             if (value.reload) {
                                 //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                                 value.reload === "parent" ? parent.location.reload() : window.location.reload();
-                            } else if(value.shutWin) {
+                            }
+                            if(value.shutWin) {
                                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                 parent.layer.close(index);
                             }
@@ -1004,7 +1005,7 @@ action = func = {
     "delTable": function (value) {
         layui.use('table', function () {
             var table = layui.table;
-            table.on("toolbar(" + value.filter + ")", function (obj) {
+            table.on("tool(" + value.filter + ")", function (obj) {
                 var ck = table.checkStatus(value.id || obj.config.id );//获取已选中数据
                 //console.log("======normalBegin=====",value);
                 //按钮匹配
@@ -1068,7 +1069,9 @@ action = func = {
                         layer.close(index);
                     });
                 } else {
-                    layer.alert("操作失败！")
+                    layer.alert("删除失败！",function(){
+                        location.reload();
+                    });
                 }
 
             };
@@ -1084,6 +1087,9 @@ action = func = {
                     showMsg = value.show[0]+ ck.data.length + value.show[1];
                 }
                 layer.confirm(showMsg, function (index) {
+                    loc=false;
+                    //上传已删除文件
+                    subUp(value);
                     //获取除去要删除的数据后的数据
                     if(!value.del || value.del === true ){
                         if (ck.isAll === true) {
@@ -1100,10 +1106,6 @@ action = func = {
                             }
                         }
                     }
-
-                    loc=false;
-                    //上传已删除文件
-                    subUp(value)
                 });
             }
     }

@@ -9,6 +9,7 @@ import com.litbo.hospital.user.dao.provider.DictProvider;
 import com.litbo.hospital.user.vo.DictVo;
 import com.litbo.hospital.user.vo.SIntVo;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -35,19 +36,19 @@ public interface DictDao {
     List<DictVo> listGgs();
     @Select("select * from sys_gglx")
     List<SysGglx> listGglx();
-    @Select("SELECT jg_id as dictId ,jg as dictName FROM s_jg\n" +
+    @Select("SELECT jg_id as dictId ,jg as dictName ,b_name as bName FROM s_jg\n" +
             "union all \n" +
-            "SELECT mz_id as dictId , mz as dictName FROM s_mz\n" +
+            "SELECT mz_id as dictId , mz as dictName ,b_name as bName FROM s_mz\n" +
             "union all\n" +
-            "SELECT xllb_id as dictId , xllb as dictName FROM s_xllb\n" +
+            "SELECT xllb_id as dictId , xllb as dictName ,b_name as bName FROM s_xllb\n" +
             "union all\n" +
-            "SELECT sex_id as dictId , sex as dictName FROM s_sex\n" +
+            "SELECT sex_id as dictId , sex as dictName ,b_name as bName FROM s_sex\n" +
             "union all\n" +
-            "SELECT gb_id as dictId , gb as dictName FROM s_gb\n" +
+            "SELECT gb_id as dictId , gb as dictName ,b_name as bName FROM s_gb\n" +
             "union all\n" +
-            "SELECT zwlb_id as dictId , zwlb as dictName FROM s_zwlb\n" +
+            "SELECT zwlb_id as dictId , zwlb as dictName ,b_name as bName FROM s_zwlb\n" +
             "union all\n" +
-            "SELECT zzmm_id as dictId , zzmm as dictName FROM s_zzmm")
+            "SELECT zzmm_id as dictId , zzmm as dictName ,b_name as bName FROM s_zzmm")
     List<DictVo> listJczd();
 
 
@@ -74,7 +75,8 @@ public interface DictDao {
     @Select("select *  from s_xllb")
     List<Xllb> listXllb();
     @SelectProvider(type = DictProvider.class ,method = "listDictByTName")
-    List<DictVo> listDictByTName(String tName);
+  /*  @Select("Select * FROM ${tName}")*/
+    List<DictVo> listDictByTName(@Param("tName") String tName);
     @SelectProvider(type = DictProvider.class ,method = "addDictByTName")
     Integer addDictByTName(@Param("tName") String tName, @Param("dictName") String dictName, @Param("sdictId") String sdictId,@Param("dictId") Integer dictId);
     @SelectProvider(type = DictProvider.class ,method = "getLastIdByTName")
@@ -85,8 +87,9 @@ public interface DictDao {
     List<Gb> listGb();
     @Select("select *  from s_jg")
     List<Jg> listJg();
-    @Delete("delete from #{bName} where id = #{id}")
-    Integer delByTNameAndId(String bName, String id);
-    @Select("select * from #{bName} where id = #{id}")
-    DictVo getByTNameAndId(String bName, String id);
+    @DeleteProvider(type = DictProvider.class ,method = "delByTNameAndId")
+    Integer delByTNameAndId(DictVo dictVo);
+   /* @Select("select * from ${bName} where id = #{id}")*/
+    @SelectProvider(type = DictProvider.class ,method = "getByTNameAndId")
+    DictVo getByTNameAndId(@Param("bName") String bName,@Param("id") String id);
 }

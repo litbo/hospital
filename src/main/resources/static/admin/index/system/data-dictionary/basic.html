@@ -23,6 +23,7 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
+      <!--  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>-->
     </div>
     <form class="layui-form">
         字典分类：
@@ -40,6 +41,11 @@
         <button class="layui-btn" data-type="reload">搜索</button>
     </form>
 </script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit">删除</a>
+    <!--
+    , {title: '操作', width: 200, align: "center", toolbar: '#bar'}-->
+</script>
 
 <script>
         renderMod.addTable ={
@@ -47,7 +53,9 @@
                 cols: [[ //表头
                     {checkbox:true,fixed:true}
                     , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
-                    , {field: 'dictId', title: '字典编号', minWidth: 150,event:"openLink"}
+                    , {field: 'dictId', title: '字典编号', minWidth: 150}
+                    , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
+
                 ]]
                 ,url:"/eqdict/jczd"
                 , request: {
@@ -70,9 +78,31 @@
                                 filter:"basic",
                                 tool:'toolbar',
                                 event:'add',
-                                title:'字典设置',
+                                title:'添加字典',
                                 type:2,
                                 content:'./child/basic-add.html'
+                            },
+                            {
+                                filter:"basic",
+                                event:'edit',
+                                title:'删除确认',
+                                type:2,
+                                area:["400px","250px"],
+                                content:'./child/information-edit-basic.html',
+                                dataUrl: ["dictId","bname"]
+                            },
+                            {
+                                event:"del",
+                                filter: "major",
+                                tool:"toolbar",
+                                send:{
+                                    id:"table",
+                                    name:"delDictVo",//发送给后台的参数名称
+                                    filter: "major",
+                                    even:"del",
+                                    url:"/eqdict/delByTNameAndId",
+                                    type:"POST"
+                                }
                             }
                         ]
                     })

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>专业字典</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -17,45 +18,46 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table" lay-filter="basic"></table>
+        <table id="table" lay-filter="major"></table>
     </div>
 </div>
 <script type="text/html" id="toolBar">
-            <div class="addBtn">
-                  <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-            </div>
-            <form class="layui-form">
-                    字典分类：
-                    <div class="layui-inline">
-                        <!--<input class="layui-input" name="search" id="test-table-demoReload" autocomplete="off">-->
-                        <select name="tName" lay-verify="">
-                            <option value="eq_cslb">厂商类别</option>
-                            <option value="eq_cxfl">查询分类</option>
-                            <option value="eq_gzlb">购置类别</option>
-                            <option value="eq_jldw">计量单位</option>
-                            <option value="eq_qdfs">取得方式</option>
-                            <option value="eq_zjly">资金来源</option>
-                            <option value="eq_syxz">使用性质</option>
-                        </select>
-                    </div>
-                    <button class="layui-btn" data-type="reload">搜索</button>
-            </form>
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
+      <!--  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>-->
+    </div>
+    <form class="layui-form">
+        字典分类：
+        <div class="layui-inline">
+            <!--<input class="layui-input" name="search" id="test-table-demoReload" autocomplete="off">-->
+            <select name="tName" lay-verify="">
+                <option value="eq_cslb">厂商类别</option>
+                <option value="eq_cxfl">查询分类</option>
+                <option value="eq_gzlb">购置类别</option>
+                <option value="eq_jldw">计量单位</option>
+                <option value="eq_qdfs">取得方式</option>
+                <option value="eq_zjly">资金来源</option>
+                <option value="eq_syxz">使用性质</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </form>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="del">删除</a>
-   <!-- <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="update">修改</a>-->
+    <a class="layui-btn layui-btn-xs layui-btn-danger"  lay-event="edit">删除</a>
 </script>
 
 <script>
-    renderMod.addTable ={
-        table:{
+    renderMod.addTable = {
+        table: {
             cols: [[ //表头
-                {checkbox:true,fixed:true}
+                {checkbox: true, fixed: true}
                 , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
-                , {field: 'dictId', title: '字典编号', minWidth: 150,event:"openLink"}
+                , {field: 'dictId', title: '字典编号', minWidth: 150}
                 , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
+
             ]]
-            ,url:"/eqdict/zyzd"
+            , url: "/eqdict/zyzd"
             , request: {
                 pageName: 'pageNum',
                 limitName: 'pageSize'
@@ -64,7 +66,7 @@
                 return {
                     "code": res.code, //解析接口状态
                     "msg": res.msg, //解析提示文本
-                    "count":res.data.total,//页面显示的数据条数
+                    "count": res.data.total,//页面显示的数据条数
                     "data": res.data.list //解析数据列表
                 }
             }
@@ -73,35 +75,43 @@
                     "obj": obj,
                     "tools": [
                         {
-                            filter:"basic",
-                            tool:'toolbar',
-                            event:'add',
-                            title:'字典设置',
-                            type:2,
-                            content:'./child/major-add.html'
+                            event:"del",
+                            filter: "major",
+                            tool:"toolbar",
+                            send:{
+                                id:"table",
+                                name:"delDictVo",//发送给后台的参数名称
+                                filter: "major",
+                                even:"del",
+                                url:"/eqdict/delByTNameAndId",
+                                type:"POST"
+                            }
                         },
                         {
-                            event:'del',
-                            title:'删除确认',
-                            type:2,
-                            content:'./child/major-del.html',
-                            dataUrl: ["bName","id"]
+                            filter: "major",
+                            event: 'edit',
+                            title: '删除确认',
+                            type: 2,
+                            area: ["400px", "250px"],
+                            content: './child/information-edit-major.html',
+                            dataUrl: ["dictId", "bname"]
                         },
-                       /* {
-                            event:'update',
-                            title:'字典信息修改',
-                            type:2,
-                            content:'./child/information-check.html',
-                            dataUrl: ["eqId"]
-                        }*/
+                        {
+                            filter: "major",
+                            tool: 'toolbar',
+                            event: 'add',
+                            title: '字典设置',
+                            type: 2,
+                            content: './child/major-add.html'
+                        }
                     ]
-                })
+                });
             }
         },
-        reSet:{
-            url:"/eqdict/listDictByTName",
-            type:"reload",
-            data:["tName"]
+        reSet: {
+            url: "/eqdict/listDictByTName",
+            type: "reload",
+            data: ["tName"]
         }
     }
 
