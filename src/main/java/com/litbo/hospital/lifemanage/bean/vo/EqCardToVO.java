@@ -49,8 +49,8 @@ public class EqCardToVO {
     /**
      * 启用日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date qysj;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date qyrq;
     /**
      * 分类代码
      */
@@ -94,6 +94,7 @@ public class EqCardToVO {
     /**
      * 采购日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date cgrq;
     /**
      * 配置
@@ -126,11 +127,12 @@ public class EqCardToVO {
     /**
      * 安装日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date azrq;
     /**
      * 转入日期
      */
-
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date zrrq;
     /**
      * 使用年限
@@ -143,6 +145,7 @@ public class EqCardToVO {
     /**
      * 生产日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date scrq;
     /**
      * 设备序列号

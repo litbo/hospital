@@ -37,7 +37,7 @@ public class EquipmentAccountProvider {
                 "dbo.eq_info.eq_synx,\n" +
                 "dbo.eq_info.eq_syzt as state");
         sql.FROM("dbo.eq_info");
-        sql.INNER_JOIN("dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id");
+        sql.INNER_JOIN("dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id");
         sql.WHERE("dbo.eq_info.eq_sbbh IS NOT NULL AND\n" +
                 "dbo.eq_info.eq_zcbh IS NOT NULL AND\n" +
                 "dbo.eq_info.eq_tzlb IS NOT NULL\n");
@@ -108,7 +108,7 @@ public class EquipmentAccountProvider {
                 "dbo.eq_cs.sbcs_name");
         sql.FROM("dbo.eq_info");
         sql.INNER_JOIN("dbo.eq_cxfl ON dbo.eq_info.eq_cxfl_id = dbo.eq_cxfl.eq_cxfl_id\n" +
-                "LEFT JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.obm_id\n" +
+                "LEFT JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
                 "LEFT JOIN dbo.eq_cs ON dbo.eq_info.sbcs_id_scs = dbo.eq_cs.sbcs_id");
         if (StringUtils.isNotBlank(state)) {
             sql.WHERE("dbo.eq_info.eq_syzt = #{state,jdbcType=VARCHAR}");

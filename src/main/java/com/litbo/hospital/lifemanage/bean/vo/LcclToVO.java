@@ -38,7 +38,7 @@ public class LcclToVO {
     /**
      * 采购日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqCgrq;
     /**
      * 设备价格
@@ -51,7 +51,7 @@ public class LcclToVO {
     /**
      * 启用日期
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqQysj;
     /**
      * 申报人
@@ -60,7 +60,7 @@ public class LcclToVO {
     /**
      * 申报时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date declareTime;
     /**
      * 处置方式
@@ -75,7 +75,7 @@ public class LcclToVO {
     /**
      * 上报时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date reportTime;
     /**
      * 审批人
@@ -89,7 +89,7 @@ public class LcclToVO {
     /**
      * 批复时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date ratifyTime;
 
     /**
@@ -100,7 +100,7 @@ public class LcclToVO {
     /**
      * 清理时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date clearTime;
 
     /**
@@ -125,7 +125,7 @@ public class LcclToVO {
     /**
      * 备案时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date recordTime;
 
     /**
