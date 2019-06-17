@@ -2,13 +2,9 @@ package com.litbo.hospital.security.controller;
 
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwWeixiu;
-import com.litbo.hospital.security.bean.FwWxqs;
 import com.litbo.hospital.security.bean.FwYwwx;
 import com.litbo.hospital.security.service.FwWeixiuService;
-import com.litbo.hospital.security.vo.FwWeiXiuIndexVo;
-import com.litbo.hospital.security.vo.FwWxqrIndexVo;
-import com.litbo.hospital.security.vo.FwWxqsShIndexVo;
-import com.litbo.hospital.security.vo.WxqrIndex;
+import com.litbo.hospital.security.vo.*;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,10 +186,11 @@ public class FwWeixiuController {
      * @return
      */
             @PostMapping("/addFwWxqs")
-    public Result addFwWxqs(FwWxqs fwWxqs){
+    public Result addFwWxqs(FwWxqsVo fwWxqs){
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
+
             fwWeixiuService.addFwWxqs(fwWxqs,userId);
             return  Result.success();
         } catch (Exception e) {
@@ -203,11 +200,11 @@ public class FwWeixiuController {
     }
 
     @PostMapping("/updateWxsh")
-    public Result updateWxsh(String fwId){
+    public Result updateWxsh(String fwId,Integer taskId){
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-            fwWeixiuService.updateFwWxqs(userId,fwId);
+            fwWeixiuService.updateFwWxqs(userId,fwId,taskId);
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();

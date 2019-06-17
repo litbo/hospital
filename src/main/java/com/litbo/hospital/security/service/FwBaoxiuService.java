@@ -3,6 +3,7 @@ package com.litbo.hospital.security.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
+import com.litbo.hospital.security.vo.FwBxLcVo;
 import com.litbo.hospital.security.vo.RepairInfoVo;
 
 /**
@@ -11,6 +12,22 @@ import com.litbo.hospital.security.vo.RepairInfoVo;
  * 报修单
  */
 public interface FwBaoxiuService {
+
+    /**
+     * 报修流程详情
+     * @param userId
+     * @return
+     */
+    public FwBxLcVo getBxLcVo(String userId);
+
+    /**
+     * 报修流程
+     * @param userId
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    public PageInfo getBxLcTable(String userId, Integer pageSize, Integer pageNum,String date,String eqName,Integer bxStatus);
 
     /**
      * 维修信息显示
@@ -32,7 +49,7 @@ public interface FwBaoxiuService {
      * @param userId
      * @return
      */
-    public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize);
+    public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize , String roleName);
 
     public FwBaoxiuIndexVo baoxiuIndex(String eqId, String empId);
 

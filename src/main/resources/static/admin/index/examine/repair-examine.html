@@ -181,7 +181,7 @@
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" id="submit">立即提交</button>
             </div>
         </div>
     </div>
@@ -201,18 +201,18 @@
                     parse:"pjList",
                     tableId:"table",
                     data:{
-                        id:$.getUrlParam("fwId")
+                        id:$.getUrlParam("id")
                     }
                 }
             },
-            submit:{
+            /*submit:{
                 form:{
                     url:"/fwWeixiu/updateWxsh",
                     type:"POST",
                     data:["fwId"],
                     reload:"parent"
                 }
-            },
+            },*/
             date: [
                 {
                     elem: "#ydRepairDate",
@@ -269,7 +269,23 @@
                 , height: "200"
                 , data: []
             }
-        }
+        },
+        btn:[{
+            elem:"#submit",
+            func:function () {
+                subUp({
+                    url:"/fwWeixiu/updateWxsh",
+                    type:"POST",
+                    data:{
+                        //id:$.getUrlParam("id"),
+                        //status:"1",
+                        taskId:$.getUrlParam("taskId"),
+                        fwId:$("input[name='fwId']").val()
+                    },
+                    shutWin:true
+                })
+            }
+        }]
     }
 
 </script>

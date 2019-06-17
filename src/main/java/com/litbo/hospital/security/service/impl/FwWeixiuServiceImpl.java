@@ -1,8 +1,12 @@
 package com.litbo.hospital.security.service.impl;
 
+import com.litbo.hospital.common.task.bean.Task;
+import com.litbo.hospital.common.task.dao.TaskDao;
 import com.litbo.hospital.security.bean.*;
 import com.litbo.hospital.security.dao.*;
+import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.enums.EnumProcess;
+import com.litbo.hospital.security.enums.EnumURL;
 import com.litbo.hospital.security.service.FwWeixiuService;
 import com.litbo.hospital.security.utils.WxGetNameUtils;
 import com.litbo.hospital.security.vo.*;
@@ -45,6 +49,9 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Autowired
     private FwPjqlZjbDao fwPjqlZjbDao;
 
+    @Autowired
+    private TaskDao taskDao;
+
     @Override
     public int jumpYwwx(FwYwwx fwYwwx) {
         if(fwBaoxiuDao.findFwBaoxiu(fwYwwx.getFwId()).getBxStatus()==4){
@@ -79,7 +86,9 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
     @Override
     public FwWxqsShIndexVo wxqsShIndexVo(String userId, String fwId) {
         FwWxqsShIndexVo wxqsShIndexVo = fwWeixiuDao.wxqsShIndexVo(fwId);
+        System.out.println(wxqsShIndexVo);
         String userXm = empDao.getUserXmById(userId);
+        System.out.println(userXm);
         wxqsShIndexVo.setShName(userXm);
         wxqsShIndexVo.setQsShr(userId);
         List<PjqlZjbExamineVO> pjqlZjbExamineVOS = fwPjqlZjbDao.selectFwPjqlByFwId(fwId);
@@ -171,6 +180,18 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
             fwLcjl.setBxId(fwWeixiu.getFwId());
             fwLcjl.setLc(EnumProcess.FW_GZ_JX.getMessage());
             fwLcjlDao.insertFwLcjl(fwLcjl);
+
+            Task task = new Task();
+            String eqName = fwBaoxiuDao.findEqNameByFwId(fwWeixiu.getFwId());
+
+            task.setWorkName(eqName+" "+ "维修完成确认");
+            task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
+            task.setUrl(EnumURL.REPAIR_CONFIRM.getMessage());
+            task.setActionName("维修确认");
+            task.setCreatTime(new Date());
+            task.setOther(fwWeixiu.getFwId());
+            task.setJsrId(fwBaoxiuDao.findBxrIdByFwId(fwWeixiu.getFwId()));
+            taskDao.insertTask(task);
             return i;
         }
         return 0;
@@ -180,21 +201,56 @@ public class FwWeixiuServiceImpl implements FwWeixiuService {
 
     @Override
     @Transactional
-    public void addFwWxqs(FwWxqs fwWxqs,String userId) {
+    public void addFwWxqs(FwWxqsVo fwWxqsVo,String userId) {
+        FwWxqs fwWxqs = fwWxqsVo.getFwWxqs();
         fwWeixiuDao.addFwWxqr(fwWxqs);
         fwBaoxiuDao.updateBaoxiuStatus(fwWxqs.getFwId(),EnumProcess.FW_WX_SH.getCode());
         FwLcjl fwLcjl = new FwLcjl(userId,new Date(),fwWxqs.getFwId(),EnumProcess.FW_WX_QR.getMessage());
         fwLcjlDao.insertFwLcjl(fwLcjl);
+        Task task = new Task();
+        String eqName = fwBaoxiuDao.findEqNameByFwId(fwWxqs.getFwId());
+
+        taskDao.updateTaskById(fwWxqsVo.getTaskId());
+
+        task.setWorkName(eqName+" "+ "维修确认审核");
+        task.setStatus(EnumApplyStatus.WAIT_EXAMINE.getCode().toString());
+        task.setUrl(EnumURL.REPAIR_EXAMINE.getMessage());
+        task.setCreatTime(new Date());
+        task.setActionName("维修确认审核");
+        task.setOther(fwWxqs.getFwId());
+        List<String> shrList = fwBaoxiuDao.shrList();
+        for (String shr : shrList) {
+            task.setJsrId(shr);
+            taskDao.insertTask(task);
+        }
+
     }
 
     @Override
-    public void updateFwWxqs(String userId,String fwId) {
+    public void updateFwWxqs(String userId,String fwId,Integer taskId) {
         fwWeixiuDao.updateFwWxsh(userId,fwId);
         FwBaoxiu fwBaoxiu = fwBaoxiuDao.findFwBaoxiu(fwId);
         fwBaoxiuDao.updateBaoxiuStatus(fwId,EnumProcess.FW_WX_OVER.getCode());
-        FwLcjl fwLcjl = new FwLcjl(userId,new Date(),fwId,EnumProcess.FW_WX_QR.getMessage());
+        FwLcjl fwLcjl = new FwLcjl(userId,new Date(),fwId,EnumProcess.FW_WX_SH.getMessage());
         fwLcjlDao.insertFwLcjl(fwLcjl);
         fwBaoxiuDao.updateEqStatussy(fwBaoxiu.getEqId());
+        //taskDao.updateTaskById(taskId);
+        Task task = taskDao.getTaskById(taskId);
+        //System.out.println(task);
+        Date date = taskDao.selectCreateTimeByTaskId(taskId);
+        //System.out.println(date);
+        List<Task> tasks = taskDao.selectTaskListByCreatTime(date);
+        //System.out.println(tasks);
+        for (Task t : tasks) {
+            if(t.equals(task)){
+                taskDao.updateTaskById(t.getTaskId());
+            }
+        }
+        /*List<String> shrList = fwBaoxiuDao.shrList();
+        for (String shr : shrList) {
+            task.setJsrId(shr);
+            taskDao.insertTask(task);
+        }*/
     }
 
 

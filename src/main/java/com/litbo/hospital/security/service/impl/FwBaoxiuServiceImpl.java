@@ -8,11 +8,9 @@ import com.litbo.hospital.security.bean.FwLcjl;
 import com.litbo.hospital.security.dao.*;
 import com.litbo.hospital.security.enums.EnumProcess;
 import com.litbo.hospital.security.service.FwBaoxiuService;
-import com.litbo.hospital.security.vo.BaoXiuRw;
-import com.litbo.hospital.security.vo.BaoxiuEqVo;
-import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
-import com.litbo.hospital.security.vo.RepairInfoVo;
+import com.litbo.hospital.security.vo.*;
 import com.litbo.hospital.supervise.dao.EmpDao;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +44,24 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     private EmpDao empDao;
 
     @Override
+    public FwBxLcVo getBxLcVo(String userId) {
+        FwBxLcVo bxLcVo = fwBaoxiuDao.bxlc(userId);
+        bxLcVo.setFwLcjlList(fwLcjlDao.getLcjlByFwId(bxLcVo.getFwId()));
+        return bxLcVo;
+    }
+
+    @Override
+    public PageInfo getBxLcTable(String userId, Integer pageSize, Integer pageNum,String date,String eqName,Integer bxStatus) {
+        PageHelper.startPage(pageNum,pageSize);
+        Date ksTime = new Date();
+        if(StringUtils.isNotBlank(date)){
+            String[] split = date.split("~");
+        }
+        PageInfo<FwBxLcTableVo> pageInfo = new PageInfo<FwBxLcTableVo>(fwBaoxiuDao.bxlcTableList(userId));
+        return pageInfo;
+    }
+
+    @Override
     public RepairInfoVo wxInfoIndex() {
         int wslEqCount = fwBaoxiuDao.selectCountByStatus(2);
         int selectCount = fwBaoxiuDao.selectCount();
@@ -70,18 +86,27 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     }
 
     @Override
-    public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize) {
+    public PageInfo baoxiuRw(String userId,Integer pageNum,Integer pageSize,String roleName) {
         List<BaoXiuRw> baoxiuRw = fwBaoxiuDao.findBaoxiuRw(userId, EnumProcess.FW_BX_SL.getCode());
         List<BaoXiuRw> baoxiuRw1 = fwShouLiDao.findBaoxiuRw(userId);
+        List<BaoXiuRw> baoxiuRw4 = fwShouLiDao.findBaoxiuRwByBxr(userId);
         String bmId = empDao.getBmIdByUserId(userId);
-        List<BaoXiuRw> baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(bmId);
+        List<BaoXiuRw> baoxiuRw2 = null;
+        System.out.println(roleName);
+        if("设备处长".equals(roleName)||"设备副处长".equals(roleName)){
+            baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(bmId);
+            baoxiuRw.addAll(baoxiuRw2);
+        }
         List<BaoXiuRw> baoxiuRw3 = fwWxfDao.getWxfRw(userId);
         baoxiuRw.addAll(baoxiuRw1);
-        baoxiuRw.addAll(baoxiuRw2);
+
         baoxiuRw.addAll(baoxiuRw3);
+        baoxiuRw.addAll(baoxiuRw4);
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<BaoXiuRw>(baoxiuRw);
     }
+
+
 
     @Override
     public FwBaoxiuIndexVo baoxiuIndex(String eqId, String empId) {

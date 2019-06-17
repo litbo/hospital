@@ -6,6 +6,7 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.FwBaoxiu;
 import com.litbo.hospital.security.service.FwBaoxiuService;
 import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
+import com.litbo.hospital.security.vo.FwBxLcVo;
 import com.litbo.hospital.security.vo.RepairInfoVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
@@ -25,6 +26,36 @@ public class FwBaoxiuController {
     @Autowired
     private FwBaoxiuService
             fwBaoxiuService;
+
+    @GetMapping("/bxlc")
+    public Result bxlc(){
+        try {
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
+            FwBxLcVo bxLcVo = fwBaoxiuService.getBxLcVo(userId);
+            return Result.success(bxLcVo);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("读取信息失败");
+        }
+    }
+
+    @GetMapping("/bxlcTable")
+    public Result bxlcTable(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                            @RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                            @RequestParam(required = false) String date, @RequestParam(required = false) String eqName
+                            , @RequestParam(required = false) Integer bxStatus){
+        try {
+            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            String userId = sEmp.getUserId();
+            PageInfo pageInfo = fwBaoxiuService.getBxLcTable(userId, pageSize, pageNum,date,eqName,bxStatus);
+            return Result.success(pageInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.error("读取信息失败");
+        }
+    }
+
     @RequiresGuest
     @GetMapping("/wxInfo")
     public Result wxInfoIndexVo(){
@@ -38,7 +69,9 @@ public class FwBaoxiuController {
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-            PageInfo pageInfo = fwBaoxiuService.baoxiuRw(userId, pageNum, pageSize);
+            String roleName = (String) SecurityUtils.getSubject().getSession().getAttribute("rolename");
+
+            PageInfo pageInfo = fwBaoxiuService.baoxiuRw(userId, pageNum, pageSize, roleName);
             return Result.success(pageInfo);
         } catch (Exception e) {
             e.printStackTrace();

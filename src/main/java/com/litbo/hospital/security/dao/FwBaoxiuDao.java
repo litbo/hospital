@@ -14,6 +14,27 @@ import java.util.List;
 @Mapper
 public interface FwBaoxiuDao {
 
+    @Select("select bx.id AS fwId,eq_name,bx_time from fw_baoxiu AS bx,eq_info as eq where  eq.eq_id = bx.eq_id" +
+            " and bx.bxr_id = #{userId}")
+    public FwBxLcVo bxlc(String userId);
+
+
+    @Select("SELECT bx.id AS fwId,eq_name,bx_time,bx.jjx_status,bx.bx_status FROM fw_baoxiu AS bx\n" +
+            "LEFT JOIN eq_info eq ON eq.eq_id = bx.eq_id\n" +
+            "WHERE bx.bxr_id = #{userId}")
+    public List<FwBxLcTableVo> bxlcTableList(String userId);
+
+    @Select("SELECT user_id FROM  s_role AS role , s_user_role AS ur WHERE\n" +
+            "role.role_name LIKE '设备%处长' AND\n" +
+            "role.role_id = ur.role_id")
+    public List<String> shrList();
+
+    @Select("select bxr_id from fw_baoxiu where id=#{id}")
+    public String findBxrIdByFwId(String id);
+
+    @Select("select eq.eq_name from fw_baoxiu as bx,eq_info eq where bx.eq_id = eq.eq_id and bx.id=#{id}")
+    public String findEqNameByFwId(String id);
+
     @Insert("insert into fw_baoxiu (id, eq_id, bxr_id, \n" +
             "      bxfs, bxrdh, bxks_id, bxksdh, \n" +
             "      bx_time, fx_time, jjx_status, \n" +

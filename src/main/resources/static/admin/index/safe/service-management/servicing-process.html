@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>维修流程</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="">
+                    <!--<input type="checkbox" name="" title="监管设备"  lay-skin="primary">-->
+                    <span>报修日期：</span>
+                    <div class="layui-input-inline">
+                        <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input">
+                    </div>
+
+                    维修状态：
+                    <div class="layui-inline">
+                        <!--<input class="layui-input" name="search" id="test-table-demoReload" autocomplete="off">-->
+                        <select name="bxStatus" lay-verify="">
+                            <option value="100">维修完成</option>
+                            <option value="2">未受理</option>
+                            <option value="3">已受理</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="eqName"  class="layui-input" placeholder="设备" autocomplete="off">
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="baoxiu">流程图</a>
+</script>
+
+<script>
+    renderMod = {
+        form:{
+            date :{
+                elem : "#date",
+                type : "datetime",
+                range:"~"
+            }
+        },
+        addTable: {
+            table: {
+                cols: [[ //表头
+                     {field: 'fwId', title: '维修编号', minWidth: 100}
+                    , {field: 'eqName', title: '设备', minWidth: 150}
+                    , {field: 'bxTime', title: '报修时间', minWidth: 200}
+                    , {field: 'jjxStatusString', title: '紧急性', minWidth: 150}
+                    , {field: 'bxStatusString', title: '报修状态', width: 150}
+                    , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
+                ]]
+                , url: "/baoxiu/bxlcTable"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        tools:[
+                            {
+                                event:"baoxiu",
+                                title:"流程",
+                                type:2,
+                                content:"./child/repair-process.html",
+                                dataUrl:["fwId"]
+                            }
+                        ]
+                    })
+                }
+            },
+            reSet:{
+                url:"/baoxiu/bxlcTable",
+                type:"search",
+                data:["date","eqName","bxStatus"]    //搜索框的name
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

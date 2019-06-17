@@ -1,7 +1,6 @@
 package com.litbo.hospital.security.service;
 
 import com.litbo.hospital.security.bean.FwWeixiu;
-import com.litbo.hospital.security.bean.FwWxqs;
 import com.litbo.hospital.security.bean.FwYwwx;
 import com.litbo.hospital.security.vo.*;
 
@@ -76,12 +75,12 @@ public interface FwWeixiuService {
      * 添加维修确认
      * @param fwWxqs
      */
-    public void addFwWxqs(FwWxqs fwWxqs,String userId);
+    public void addFwWxqs(FwWxqsVo fwWxqs,String userId);
 
     /**
      * 维修审核
      * @param userId
      */
-    public void updateFwWxqs(String userId,String fwId);
+    public void updateFwWxqs(String userId,String fwId,Integer taskId);
 
 }

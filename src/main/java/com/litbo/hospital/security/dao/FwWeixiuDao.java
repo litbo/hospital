@@ -15,6 +15,7 @@ import java.util.List;
 @Mapper
 public interface FwWeixiuDao {
 
+
     @Insert("insert into fw_weixiu (fw_id, xxsb_status, gzpc, \n" +
             "      gzyy_id, gzmx_id, gzbw, \n" +
             "      gzwx_fs, wxgznr, wxr_id, \n" +
@@ -74,7 +75,7 @@ public interface FwWeixiuDao {
             "eq.eq_id = baoxiu.eq_id AND\n" +
             "baoxiu.bxks_id = bm.bm_id AND\n" +
             "baoxiu.bxr_id = emp.user_id AND\n" +
-            "emp.bm_id = #{bmId} AND\n" +
+            //"emp.bm_id = #{bmId} AND\n" +
             "baoxiu.bx_status = 13")
     public List<BaoXiuRw> getBaoXiuRw(String bmId);
 

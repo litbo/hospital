@@ -56,8 +56,36 @@ public interface FwShouLiDao {
             "baoxiu.bxks_id = bm.bm_id AND\n" +
             "baoxiu.bxr_id = emp.user_id AND\n" +
             "shouli.slr_id = #{userId} AND\n" +
-            "baoxiu.bx_status in (4,5,10,12,44)")
+            "baoxiu.bx_status in (4,5,12,44)")
     public List<BaoXiuRw> findBaoxiuRw(String userId);
+
+
+    @Select("SELECT\n" +
+            "bm.bm_name,\n" +
+            "eq.eq_name,\n" +
+            "emp.user_xm,\n" +
+            "baoxiu.bx_time,\n" +
+            "baoxiu.jjx_status,\n" +
+            "eq.eq_id,\n" +
+            "baoxiu.bx_status,\n" +
+            "baoxiu.id AS fw_id\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.eq_info AS eq ,\n" +
+            "dbo.fw_baoxiu AS baoxiu ,\n" +
+            "dbo.fw_shouli AS shouli ,\n" +
+            "dbo.s_bm AS bm ,\n" +
+            "dbo.s_emp AS emp\n" +
+            "WHERE\n" +
+            "baoxiu.id = shouli.id AND\n" +
+            "eq.eq_id = baoxiu.eq_id AND\n" +
+            "baoxiu.bxks_id = bm.bm_id AND\n" +
+            "baoxiu.bxr_id = emp.user_id AND\n" +
+            "baoxiu.bxr_id = #{userId} AND\n" +
+            "baoxiu.bx_status = 10")
+    public List<BaoXiuRw> findBaoxiuRwByBxr(String userId);
+
+
 
     //受理页面初始化
     @Select("SELECT\n" +

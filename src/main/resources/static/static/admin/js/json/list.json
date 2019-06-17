@@ -1197,6 +1197,12 @@
                     "shiro": "WXRW"
                   },
                   {
+                    "title": "维修流程",
+                    "url": "./safe/service-management/servicing-process.html",
+                    "id": "41006",
+                    "shiro": "WXLC"
+                  },
+                  {
                     "title": "维修费申请",
                     "url": "./safe/service-management/repair-apply.html",
                     "id": "41002",

@@ -21,5 +21,4 @@ public class FwWxqs {
 
     private String qsMs;
 
-
 }

@@ -2,8 +2,6 @@ package com.litbo.hospital.user.controller;
 
 import com.litbo.hospital.common.vo.LoginVo;
 import com.litbo.hospital.result.Result;
-import com.litbo.hospital.supervise.bean.SEmp;
-import com.litbo.hospital.supervise.service.EmpService;
 import com.litbo.hospital.user.bean.SRight;
 import com.litbo.hospital.user.bean.SRole;
 import com.litbo.hospital.user.bean.SysLogo;
@@ -16,7 +14,6 @@ import com.litbo.hospital.user.vo.LiveEmpVo;
 import com.litbo.hospital.user.vo.RoleRightVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
 
 @Controller
 @RequestMapping("/hospital")
@@ -63,6 +60,7 @@ public class LoginController {
             session.setAttribute("logos",logos);
 
 
+
             SRole role =  roleDao.getRole(loginVo.getUserName());
             List<SRight> rightsByUsername=null;
             if(role!=null)
@@ -77,7 +75,7 @@ public class LoginController {
             auth.setEmp(emp);
             auth.setLogos(logos);
 
-
+            session.setAttribute("rolename",auth.getRole());
             return Result.success(auth);
 
         }catch (Exception e){
