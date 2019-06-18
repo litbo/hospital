@@ -229,18 +229,20 @@ function putMsg(errMsg,index) {
     layui.use('layer', function () {
         var layer = layui.layer;
         if(errMsg === "loadOn"){
-            back =  layer.load(1);
+
         }else if(errMsg === "loadOut"){
-            if(index){
-                layer.close(index);
-            }else{
-                layer.closeAll('loading');
-            }
+
+        }
+        switch (errMsg) {
+            case "loadOn":back =  layer.load(1);break;
+            case "close":index ? layer.close(index):layer.closeAll();break;
+            case "loadOut":index ? layer.close(index):layer.closeAll('loading');break;
+            case "closeSelf":parent.layer.close(parent.layer.getFrameIndex(window.name));break;
         }
         //console.log(errMsg);
         //LAYUI方法
         errMsg.msg && layer.msg(errMsg.msg);
-        errMsg.alert && layer.alert(errMsg.alert);
+        errMsg.alert && layer.alert(errMsg.alert,errMsg.aFunc && errMsg.aFunc["yes"],errMsg.aFunc && errMsg.aFunc["no"]);
         //Console方法
         errMsg.log && console.log(errMsg.log);
         errMsg.error && console.error(errMsg.error);
@@ -439,7 +441,7 @@ function subUp(value, data, param) {
             success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
-                        layer.alert("请求发送成功！", {icon: 1}, function () {
+                        layer.alert("请求发送成功！", {icon: 1}, function (id) {
                             if (value.reload) {
                                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                 //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
@@ -457,6 +459,8 @@ function subUp(value, data, param) {
                             if(value.sureDo){
                                 value.sureDo();
                             }
+
+                            layer.close(id);
                         })
                 } else {
                     putMsg({
@@ -471,11 +475,11 @@ function subUp(value, data, param) {
             error: function (er) {
                 putMsg({
                     alert: "提交失败，请重试！",
-                    error: "数据提交异常,错误信息为（602行）",
+                    error: "数据提交异常,错误信息为（subUp函数）",
                     log: er.responseJSON
                 });
                 putMsg({
-                    error: "错误的提交数据为（606行）:",
+                    error: "错误的提交数据为（subUp函数）:",
                     log: dataP || value.data
                 });
                 //提交失败后执行函数
@@ -497,10 +501,10 @@ function subUp(value, data, param) {
             }
             //数据回填
             value.data = dataP || value.data;
-            //强制同步提交
-            if(!value.async){
+            //强制同步提交(同步可能导致部分页面遮罩无效，故默认改为异步)
+            /*if(!value.async){
                 value.async = false;
-            }
+            }*/
             //提交数据
             $.ajax(value);
         };

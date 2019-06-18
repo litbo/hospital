@@ -15,27 +15,33 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style type="text/css">
- /*       .layui-form-label{
-            width:140px;
-            padding: 8px 8px!important;
-        }*/
-     .layui-form-label{
-         width:150px!important;
-     }
-    .layui-input-block{
-       margin-left:150px!important;
-    }
-
-    .layui-form-item{
-            margin-top:25px;
+        .layui-form-label {
+            width: 150px !important;
         }
+
+        .layui-input-block {
+            margin-left: 150px !important;
+        }
+
+        .layui-form-text .layui-form-label{
+            width:100%!important;
+        }
+        .layui-form-text .layui-input-block{
+            margin-left:0!important;
+        }
+
+        .layui-form-item {
+            margin-top: 25px;
+        }
+
         .warm_btn {
             height: 45px;
             font-size: 1.3em;
             letter-spacing: 3px;
             margin: 10px 0 30px;
         }
-        td{
+
+        td {
             max-width: 150px
         }
     </style>
@@ -51,23 +57,32 @@
                         <div class="layui-row">
                             <div class="col-xs-12 col-sm-6">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">设备名称<span class="sign">*</span></label>
+                                    <label class="layui-form-label" style="height:46px;line-height:30px;">设备名称<span
+                                            class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="ccname" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="eqName" id="eqName">选择</button>
+                                        <input type="text" name="ccname" placeholder="请选择" lay-verify="required"
+                                               autocomplete="off" disabled class="layui-input"
+                                               style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"
+                                                lay-filter="eqName" id="eqName">选择
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">资产编号<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqZcbh" autocomplete="off" class="layui-input" lay-verify="required|number" placeholder="请输入...">
+                                        <input type="text" name="eqZcbh" autocomplete="off" class="layui-input"
+                                               lay-verify="required|number" placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">品名</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqPmName" placeholder="请选择"  autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="pm" id="pm">选择</button>
+                                        <input type="text" name="eqPmName" placeholder="请选择" autocomplete="off" disabled
+                                               class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="pm"
+                                                id="pm">选择
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -86,26 +101,30 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修期开始时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqBxkssj" id="date"  placeholder="2018-12-04" autocomplete="off" class="layui-input">
+                                        <input type="text" name="eqBxkssj" id="date" placeholder="2018-12-04"
+                                               autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修响应时间(时)</label>
                                     <div class="layui-input-block">
-                                        <input type="number" name="eqBxxysj" autocomplete="off" class="layui-input" placeholder="小时" >
+                                        <input type="number" name="eqBxxysj" autocomplete="off" class="layui-input"
+                                               placeholder="小时">
                                     </div>
                                 </div>
 
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">设备型号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqXh" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqXh" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">设备规格</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqGg" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqGg" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -126,7 +145,8 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">单价(元)<span class="sign"></span></label>
                                     <div class="layui-input-block">
-                                        <input type="number" name="eqPrice" autocomplete="off" class="layui-input" placeholder="3000">
+                                        <input type="number" name="eqPrice" autocomplete="off" class="layui-input"
+                                               placeholder="3000" id="danj">
                                     </div>
                                 </div>
                             </div>
@@ -162,39 +182,45 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">启用日期<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqQysj" id="date1" lay-verify="required"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
+                                        <input type="text" name="eqQysj" id="date1" lay-verify="required"
+                                               placeholder="2018-12-04" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">保修期结束时间</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqBxjssj" id="date2"  placeholder="2018-12-04" autocomplete="off"  class="layui-input">
+                                        <input type="text" name="eqBxjssj" id="date2" placeholder="2018-12-04"
+                                               autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">维修商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="wxsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="wxs">选择</button>
+                                        <input type="text" name="wxsName" placeholder="请选择" autocomplete="off" disabled
+                                               class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="wxs">选择
+                                        </button>
                                     </div>
                                 </div>
-                               <!-- <div class="layui-form-item">
-                                    <label class="layui-form-label" style="height:46px;line-height:30px;">第三方维修商</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" >选择</button>
-                                    </div>
-                                </div>-->
+                                <!-- <div class="layui-form-item">
+                                     <label class="layui-form-label" style="height:46px;line-height:30px;">第三方维修商</label>
+                                     <div class="layui-input-block">
+                                         <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                                         <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" >选择</button>
+                                     </div>
+                                 </div>-->
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">注册证名称</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqZczmc" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqZczmc" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">注册证编码</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqZczbh" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqZczbh" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                             </div>
@@ -214,26 +240,32 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">生产商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="scsName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="scs" id="scs">选择</button>
+                                        <input type="text" name="scsName" placeholder="请选择" autocomplete="off" disabled
+                                               class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"
+                                                lay-filter="scs" id="scs">选择
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">品牌</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqPp" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqPp" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">生产日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqScrq" class="layui-input" autocomplete="off" id="date3" >
+                                        <input type="text" name="eqScrq" class="layui-input" autocomplete="off"
+                                               id="date3">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">生产编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqScbh" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text" name="eqScbh" class="layui-input" autocomplete="off"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -249,32 +281,39 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用年限(月)</label>
                                     <div class="layui-input-block">
-                                        <input type="number" name="eqSynx" autocomplete="off" class="layui-input" placeholder="60">
+                                        <input type="number" name="eqSynx" autocomplete="off" class="layui-input"
+                                               placeholder="60">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label" style="height:46px;line-height:30px;">供应商</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="gysName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="gys" id="gys">选择</button>
+                                        <input type="text" name="gysName" placeholder="请选择" autocomplete="off" disabled
+                                               class="layui-input" style="height:46px;padding-left:60px;">
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"
+                                                lay-filter="gys" id="gys">选择
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">合同编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text"  name="eqHtbh" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text" name="eqHtbh" class="layui-input" autocomplete="off"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">采购日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqCgrq"  class="layui-input" autocomplete="off" id="date4">
+                                        <input type="text" name="eqCgrq" class="layui-input" autocomplete="off"
+                                               id="date4">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用部门负责人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqSybmfzr"  autocomplete="off" class="layui-input" placeholder="请输入">
+                                        <input type="text" name="eqSybmfzr" autocomplete="off" class="layui-input"
+                                               placeholder="请输入">
                                     </div>
                                 </div>
                             </div>
@@ -283,13 +322,15 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">安装日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqAzrq" class="layui-input" autocomplete="off" id="date5">
+                                        <input type="text" name="eqAzrq" class="layui-input" autocomplete="off"
+                                               id="date5">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">安装位置</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqAzwz" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text" name="eqAzwz" class="layui-input" autocomplete="off"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -306,43 +347,50 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">折旧率</label>
                                     <div class="layui-input-block">
-                                        <input type="number" class="layui-input" name="eqZjl" autocomplete="off" placeholder="0" >
+                                        <input type="number" class="layui-input" name="eqZjl" autocomplete="off"
+                                               placeholder="0">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">建档人</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="userId" id="userXm" class="layui-input" autocomplete="off" placeholder="刘松峰">
+                                        <input type="text" name="userId" id="userXm" class="layui-input"
+                                               autocomplete="off" placeholder="刘松峰">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">建档日期</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqJdrq" class="layui-input" autocomplete="off" id="date6">
+                                        <input type="text" name="eqJdrq" class="layui-input" autocomplete="off"
+                                               id="date6">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">卷宗编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqJzbh" class="layui-input" autocomplete="off" placeholder="请输入...">
+                                        <input type="text" name="eqJzbh" class="layui-input" autocomplete="off"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">档案编号</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqDabh" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqDabh" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">院区</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqYq" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqYq" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">备注</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="eqBz" autocomplete="off" class="layui-input" placeholder="请输入...">
+                                        <input type="text" name="eqBz" autocomplete="off" class="layui-input"
+                                               placeholder="请输入...">
                                     </div>
                                 </div>
                             </div>
@@ -358,18 +406,24 @@
                                     <div class="layui-form-item" pane>
                                         <label class="layui-form-label">设备照片</label>
                                         <div class="layui-input-block">
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp">选择文件</button>
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp_sub">上传文件</button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                    id="sbzp">选择文件
+                                            </button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                    id="sbzp_sub">上传文件
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="layui-upload-list">
                                         <table class="layui-table">
                                             <thead>
-                                            <tr><th>文件名</th>
+                                            <tr>
+                                                <th>文件名</th>
                                                 <th>大小</th>
                                                 <th>状态</th>
                                                 <th>操作</th>
-                                            </tr></thead>
+                                            </tr>
+                                            </thead>
                                             <tbody id="demoList1"></tbody>
                                         </table>
                                     </div>
@@ -378,18 +432,24 @@
                                     <div class="layui-form-item" pane>
                                         <label class="layui-form-label">铭牌照片</label>
                                         <div class="layui-input-block">
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="mpzp">选择文件</button>
-                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="mpzp_sub">上传文件</button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                    id="mpzp">选择文件
+                                            </button>
+                                            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                    id="mpzp_sub">上传文件
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="layui-upload-list">
                                         <table class="layui-table">
                                             <thead>
-                                            <tr><th>文件名</th>
+                                            <tr>
+                                                <th>文件名</th>
                                                 <th>大小</th>
                                                 <th>状态</th>
                                                 <th>操作</th>
-                                            </tr></thead>
+                                            </tr>
+                                            </thead>
                                             <tbody id="demoList"></tbody>
                                         </table>
                                     </div>
@@ -405,7 +465,8 @@
                                     <div class="layui-form-item layui-form-text">
                                         <label class="layui-form-label">安装环境及要求</label>
                                         <div class="layui-input-block">
-                                            <textarea class="layui-textarea" name="eqAzhjyq" placeholder="请输入..."></textarea>
+                                            <textarea class="layui-textarea" name="eqAzhjyq"
+                                                      placeholder="请输入..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -413,7 +474,9 @@
                         </div>
                         <div class="layui-row">
                             <div class="col-xs-12">
-                                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="submit">提 交</button>
+                                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""
+                                        lay-filter="submit">提 交
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -424,282 +487,281 @@
 </div>
 
 
-
 <script>
 </script>
 <script>
-    $(function() {
-        var emp =  tempValue("rl","emp",false);
+    $(function () {
+        var emp = tempValue("rl", "emp", false);
         $("#userId").val(emp.userId);
         $("#userXm").val(emp.userXm);
     });
 
-    formData={};
+    formData = {};
     formData.count = 0;//铭牌图片上传数量
     formData.count1 = 0;//设备图片上传数量
     formData.eqMpzp = [];
     formData.eqSbzp = [];
-    renderMod={
-        form:{
-            submit:{
-                filter:"submit",//可以不写
-                before:function(){
-                    var ad={};
-                    if(formData.eqSbzp!==undefined){
-                        ad.eqSbzp=formData.eqSbzp;
+    renderMod = {
+        form: {
+            submit: {
+                filter: "submit",//可以不写
+                before: function () {
+                    var ad = {};
+                    if (formData.eqSbzp !== undefined) {
+                        ad.eqSbzp = formData.eqSbzp;
                     }
-                    if(formData.eqMpzp!==undefined){
-                        ad.eqMpzp=formData.eqMpzp;
+                    if (formData.eqMpzp !== undefined) {
+                        ad.eqMpzp = formData.eqMpzp;
 
                     }
-                    if(formData.radio!==undefined){
-                        ad.eqPmId=formData.radio[0].eqPmId
+                    if (formData.radio !== undefined) {
+                        ad.eqPmId = formData.radio[0].eqPmId
                     }
-                    if(formData.wxs!==undefined){
-                        ad.sbcsIdWxs=formData.wxs[0].sbcsIdWxs
+                    if (formData.wxs !== undefined) {
+                        ad.sbcsIdWxs = formData.wxs[0].sbcsIdWxs
                     }
-                    if(formData.scs!==undefined){
-                        ad.sbcsIdScs=formData.scs[0].sbcsIdScs
+                    if (formData.scs !== undefined) {
+                        ad.sbcsIdScs = formData.scs[0].sbcsIdScs
                     }
-                    if(formData.gys!==undefined){
-                        ad.sbcsIdGys=formData.gys[0].sbcsIdGys
+                    if (formData.gys !== undefined) {
+                        ad.sbcsIdGys = formData.gys[0].sbcsIdGys
                     }
-                    if(formData.name!==undefined){
-                        ad.id=formData.name[0].id
+                    if (formData.name !== undefined) {
+                        ad.id = formData.name[0].id
                     }
-                    if(formData.name!==undefined){
-                        ad.ccname=formData.name[0].ccname
+                    if (formData.name !== undefined) {
+                        ad.ccname = formData.name[0].ccname
                     }
                     return param = {
                         /*1:formData.radio[0].bmId,*/
-                        1:ad.eqSbzp,
-                        2:ad.eqMpzp,
-                        3:ad.eqPmId,
-                        4:ad.sbcsIdWxs,
-                        5:ad.sbcsIdScs,
-                        6:ad.sbcsIdGys,
-                        7:ad.id,
-                        8:ad.ccname
+                        1: ad.eqSbzp,
+                        2: ad.eqMpzp,
+                        3: ad.eqPmId,
+                        4: ad.sbcsIdWxs,
+                        5: ad.sbcsIdScs,
+                        6: ad.sbcsIdGys,
+                        7: ad.id,
+                        8: ad.ccname
                     }
                 },
-                form:{
-                    url:"/eq/addEq",
-                    type:"POST",
-                    contentType:"application/json",
-                    data:["eqZcbh","eqPmId","eqGg","eqXh","zjlyId",
-                            "eqJldwId","eqPrice","eqTzlb","eqBxkssj","eqBxjssj","eqBxxysj",
-                            "eqBmid","eqGlgk","eqCxflId","eqQysj","eqZczmc","eqZczbh","eqPp","eqScbh",
-                            "eqPz","eqSynx","eqHtbh","eqCgrq","eqSybmfzr","eqAzrq","eqAzwz",
-                            "eqZblx","eqZjl","userId","eqJdrq","eqJzbh","eqDabh","eqYq","eqSbzp",
-                            "eqMpzp","eqAzhjyq","eqScrq","eqBz"],
-                    param:{
-                        1:"sbzp",
-                        2:"mpzp",
-                        3:"eqPmId",
-                        4:"sbcsIdWxs",
-                        5:"sbcsIdScs",
-                        6:"sbcsIdGys",
-                        7:"eqNid",
-                        8:"eqName"
+                form: {
+                    url: "/eq/addEq",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: ["eqZcbh", "eqPmId", "eqGg", "eqXh", "zjlyId",
+                        "eqJldwId", "eqPrice", "eqTzlb", "eqBxkssj", "eqBxjssj", "eqBxxysj",
+                        "eqBmid", "eqGlgk", "eqCxflId", "eqQysj", "eqZczmc", "eqZczbh", "eqPp", "eqScbh",
+                        "eqPz", "eqSynx", "eqHtbh", "eqCgrq", "eqSybmfzr", "eqAzrq", "eqAzwz",
+                        "eqZblx", "eqZjl", "userId", "eqJdrq", "eqJzbh", "eqDabh", "eqYq", "eqSbzp",
+                        "eqMpzp", "eqAzhjyq", "eqScrq", "eqBz"],
+                    param: {
+                        1: "sbzp",
+                        2: "mpzp",
+                        3: "eqPmId",
+                        4: "sbcsIdWxs",
+                        5: "sbcsIdScs",
+                        6: "sbcsIdGys",
+                        7: "eqNid",
+                        8: "eqName"
                     },
-                    reload:true
+                    reload: true
                 }
             },
-            date:[
+            date: [
                 {
-                    elem:'#date',
-                    value:false
+                    elem: '#date',
+                    value: false
                 },
                 {
-                    elem:'#date1',
-                    value:false
+                    elem: '#date1',
+                    value: false
                 },
                 {
-                    elem:'#date2',
-                    value:false
+                    elem: '#date2',
+                    value: false
                 },
                 {
-                    elem:'#date3',
-                    value:false
+                    elem: '#date3',
+                    value: false
                 },
                 {
-                    elem:'#date4',
-                    value:false
+                    elem: '#date4',
+                    value: false
                 },
                 {
-                    elem:'#date5',
-                    value:false
+                    elem: '#date5',
+                    value: false
                 },
                 {
-                    elem:'#date6',
-                    value:today0
+                    elem: '#date6',
+                    value: today0
                 }
             ],
-            file:[
+            file: [
                 {
-                    elem:"#sbzp",
-                    url:"/eq/uploadFile",
-                    accept:"images",
-                    acceptMime:"image/*",
+                    elem: "#sbzp",
+                    url: "/eq/uploadFile",
+                    accept: "images",
+                    acceptMime: "image/*",
                     multiple: true,
-                    auto:false,
-                    bindAction:"#sbzp_sub",
-                    number:4,
-                    field:"file",
-                    choose:function(obj){
-                        if(formData.count1 > 4 ){
+                    auto: false,
+                    bindAction: "#sbzp_sub",
+                    number: 4,
+                    field: "file",
+                    choose: function (obj) {
+                        if (formData.count1 > 4) {
                             putMsg({
-                                alert:"最多只能上传4张图！"
+                                alert: "最多只能上传4张图！"
                             });
                             return false;
                         }
                         var files = this.files = obj.pushFile();
-                        obj.preview(function(index,file,result){
-                            var tr = $(['<tr id="upload-'+ index +'">'
-                                ,'<td>'+ file.name +'</td>'
-                                ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
-                                ,'<td>等待上传</td>'
-                                ,'<td>'
-                                ,'<button class="layui-btn layui-btn-xs demo-see" data-img="'+result+'">查看</button>'
-                                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-                                ,'</td>'
-                                ,'</tr>'].join(''));
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
 
                             //查看
-                            tr.find('.demo-see').on('click', function(){
+                            tr.find('.demo-see').on('click', function () {
                                 layOpen({
-                                    type:1,
-                                    content:"<img src='"+$(this).attr("data-img")+"' style='width:100%;' />",
-                                    area:["80%","80%"]
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
                                 });
                                 return false;
                             });
 
                             //删除
-                            tr.find('.demo-delete').on('click', function(){
-                                layer.confirm("确认删除这张图吗？",function(){
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function () {
                                     delete files[index]; //删除对应的文件
                                     tr.remove();
                                     var inp = $("#sbzp").next().val("");
-                                    formData.count1 --;
+                                    formData.count1--;
                                 });
                             });
 
                             $("#demoList1").append(tr);
-                            formData.count1 ++;
+                            formData.count1++;
                         });
-                    },done:function(res,index,upload){
-                        if(res.code===0){
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
                             formData.eqSbzp.push(res.data);
-                            var tr = $("#demoList1").find('tr#upload-'+ index)
-                                ,tds = tr.children();
+                            var tr = $("#demoList1").find('tr#upload-' + index)
+                                , tds = tr.children();
                             tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                             tds.eq(3).html(''); //清空操作
                             return delete this.files[index]; //删除文件队列已经上传成功的文件
                         }
                         this.error(index, upload);
-                    },error:function(index,upload){
-                        var tr = $("#demoList1").find('tr#upload-'+ index)
-                            ,tds = tr.children();
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList1").find('tr#upload-' + index)
+                            , tds = tr.children();
                         tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-                        console.log("index:"+index);
-                        console.log("upload"+upload);
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
                     }
                 },
                 {
-                    elem:"#mpzp",
-                    url:"/eq/uploadFile",
-                    accept:"images",
-                    acceptMime:"image/*",
-                    auto:false,
+                    elem: "#mpzp",
+                    url: "/eq/uploadFile",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    auto: false,
                     multiple: true,
-                    bindAction:"#mpzp_sub",
-                    number:4,
-                    field:"file",
-                    choose:function(obj){
-                        if(formData.count > 4 ){
+                    bindAction: "#mpzp_sub",
+                    number: 4,
+                    field: "file",
+                    choose: function (obj) {
+                        if (formData.count > 4) {
                             putMsg({
-                                alert:"最多只能上传4张图！"
+                                alert: "最多只能上传4张图！"
                             });
                             return false;
                         }
                         var files = this.files = obj.pushFile();
-                        obj.preview(function(index,file,result){
-                            var tr = $(['<tr id="upload-'+ index +'">'
-                                ,'<td>'+ file.name +'</td>'
-                                ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
-                                ,'<td>等待上传</td>'
-                                ,'<td>'
-                                ,'<button class="layui-btn layui-btn-xs demo-see" data-img="'+result+'">查看</button>'
-                                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-                                ,'</td>'
-                                ,'</tr>'].join(''));
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
 
                             //查看
-                            tr.find('.demo-see').on('click', function(){
+                            tr.find('.demo-see').on('click', function () {
                                 layOpen({
-                                    type:1,
-                                    content:"<img src='"+$(this).attr("data-img")+"' style='width:100%;' />",
-                                    area:["80%","80%"]
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
                                 });
                                 return false;
                             });
 
                             //删除
-                            tr.find('.demo-delete').on('click', function(){
-                                layer.confirm("确认删除这张图吗？",function(){
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function () {
                                     delete files[index]; //删除对应的文件
                                     tr.remove();
                                     var inp = $("#mpzp").next().val("");
-                                    formData.count --;
+                                    formData.count--;
                                 });
                             });
 
                             $("#demoList").append(tr);
                             formData.count += 1;
                         });
-                    },done:function(res,index,upload){
-                        if(res.code===0){
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
                             formData.eqMpzp.push(res.data);
-                            var tr = $("#demoList").find('tr#upload-'+ index)
-                                ,tds = tr.children();
+                            var tr = $("#demoList").find('tr#upload-' + index)
+                                , tds = tr.children();
                             tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                             tds.eq(3).html(''); //清空操作
                             return delete this.files[index]; //删除文件队列已经上传成功的文件
                         }
                         this.error(index, upload);
-                    },error:function(index,upload){
-                        var tr = $("#demoList").find('tr#upload-'+ index)
-                            ,tds = tr.children();
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList").find('tr#upload-' + index)
+                            , tds = tr.children();
                         tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-                        console.log("index:"+index);
-                        console.log("upload:"+upload);
+                        console.log("index:" + index);
+                        console.log("upload:" + upload);
                     }
                 }
             ],
             val: {
-                filter:"bmList",
+                filter: "bmList",
                 select: [
                     {
-                        filter:"dwList",
+                        filter: "dwList",
                         ids: "eqJldwId",
                         text: "eqJldwName",
                         url: "/eqdict/jldw"
                     },
                     {
-                        filter:"zjly",
+                        filter: "zjly",
                         ids: "zjlyId",
                         text: "zjlyName",
                         url: "/eqdict/zjly"
                     },
                     {
-                        filter:"cxfl",
+                        filter: "cxfl",
                         ids: "eqCxflId",
                         text: "eqCxflName",
                         url: "/eqdict/cxfl"
                     },
                     {
-                        filter:"bmList",
+                        filter: "bmList",
                         ids: "bmId",
                         text: "bmName",
                         url: "/supervise/bmgl/listBms2"
@@ -707,61 +769,62 @@
                 ]
             }
         },
-        bind:{
+        bind: {
             selectItem: [
                 {
                     elem: "#pm",
-                    data:formData,
-                    cb:"/eq/listPmsCols",
-                    db:"/eq/listPms",
-                    se:"/eq/pmSe",
-                    key:"radio",
-                    name:"dtdt"
+                    data: formData,
+                    cb: "/eq/listPmsCols",
+                    db: "/eq/listPms",
+                    se: "/eq/pmSe",
+                    key: "radio",
+                    name: "dtdt"
                 },
                 {
                     elem: "#eqName",
-                    data:formData,
-                    cb:"/eq/listEqNameCols",
-                    db:"/eq/listEqName",
-                    se:"/eq/eqNameSe",
-                    key:"name",
-                    name:"dtdt"
+                    data: formData,
+                    cb: "/eq/listEqNameCols",
+                    db: "/eq/listEqName",
+                    se: "/eq/eqNameSe",
+                    key: "name",
+                    name: "dtdt"
                 },
                 {
                     elem: "#scs",
-                    data:formData,
-                    cb:"/cs/scsTitle",
-                    db:"/cs/listScs",
-                    se:"/cs/listScsSe",
-                    key:"scs",
-                    name:"dtdt"
+                    data: formData,
+                    cb: "/cs/scsTitle",
+                    db: "/cs/listScs",
+                    se: "/cs/listScsSe",
+                    key: "scs",
+                    name: "dtdt"
                 },
                 {
                     elem: "#gys",
-                    data:formData,
-                    cb:"/cs/gysTitle",
-                    db:"/cs/listGys",
-                    se:"/cs/listGysSe",
-                    key:"gys",
-                    name:"dtdt"
+                    data: formData,
+                    cb: "/cs/gysTitle",
+                    db: "/cs/listGys",
+                    se: "/cs/listGysSe",
+                    key: "gys",
+                    name: "dtdt"
                 },
                 {
                     elem: "#wxs",
-                    data:formData,
-                    cb:"/cs/wxsTitle",
-                    db:"/cs/listWxs",
-                    se:"/cs/listWxsSe",
-                    key:"wxs",
-                    name:"dtdt"
+                    data: formData,
+                    cb: "/cs/wxsTitle",
+                    db: "/cs/listWxs",
+                    se: "/cs/listWxsSe",
+                    key: "wxs",
+                    name: "dtdt"
                 }
 
 
             ]
         }
-
-
-
-    }
+    };
+    //补小数位.00
+    $("#danj").on("change", function () {
+        $(this).val($(this).val() + ".00");
+    })
 </script>
 </body>
 </html>
