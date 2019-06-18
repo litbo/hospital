@@ -224,9 +224,19 @@ function markPage(text, time) {
  * @arguments errMsg -> 提示与输出信息
  * @return
  **/
-function putMsg(errMsg) {
+function putMsg(errMsg,index) {
+    var back = null;
     layui.use('layer', function () {
         var layer = layui.layer;
+        if(errMsg === "loadOn"){
+            back =  layer.load(1);
+        }else if(errMsg === "loadOut"){
+            if(index){
+                layer.close(index);
+            }else{
+                layer.closeAll('loading');
+            }
+        }
         //console.log(errMsg);
         //LAYUI方法
         errMsg.msg && layer.msg(errMsg.msg);
@@ -238,7 +248,8 @@ function putMsg(errMsg) {
         errMsg.wAlert && alert(errMsg.wAlert);
         //自定义扩展函数
         errMsg.func && errMsg.func(layer);
-    })
+    });
+    return back;
 }
 
 /**
@@ -360,10 +371,10 @@ function subUp(value, data, param) {
         return false;
     }
     //添加加载动画
-    var loadIndex = layer.load(1);
+    var loadIndex = putMsg("loadOn");
     $(".layui-layer-shade").css("opacity","0.05");
     $(".layui-layer-loading").append(
-        $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px"}).text("请求发送中")
+        $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px","color":"#787878"}).text("请求发送中")
     );
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
     var dataP = {}, valus = "";
@@ -398,7 +409,7 @@ function subUp(value, data, param) {
         xhr.open(value.method || "GET", value.url, value.async || true);
         xhr.onload = function () {
             //关闭加载动画
-            layer.close(loadIndex);
+            putMsg("loadOut");
             $(".layui-layer-shade").css("opacity","0");
             alert("上传完成!");
         };
@@ -417,7 +428,7 @@ function subUp(value, data, param) {
         $form.attr({"method": value.method || "GET", "action": value.url, "target": frameName});
         $form[0].submit();
         //关闭加载动画
-        layer.close(loadIndex);
+        putMsg("loadOut");
         $(".layui-layer-shade").css("opacity","0");
         alert("提交成功！");
         window.location.reload();
@@ -430,10 +441,10 @@ function subUp(value, data, param) {
                 if (data.code === 0) {
                         layer.alert("请求发送成功！", {icon: 1}, function () {
                             if (value.reload) {
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                 //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                                 if(value.reload === "parent"){
                                     if(value.shutWin){
-                                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                         parent.layer.close(index);
                                     }
                                     parent.location.reload()
@@ -441,7 +452,6 @@ function subUp(value, data, param) {
                                     window.location.reload();
                                 }
                             }else if(value.shutWin) {
-                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                 parent.layer.close(index);
                             }
                             if(value.sureDo){
@@ -473,7 +483,7 @@ function subUp(value, data, param) {
             },
             complete:function(){
                 //关闭加载动画
-                layer.close(loadIndex);
+                putMsg("loadOut");
                 $(".layui-layer-shade").css("opacity","0");
             }
         };
