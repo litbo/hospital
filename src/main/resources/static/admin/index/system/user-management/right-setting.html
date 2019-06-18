@@ -96,7 +96,6 @@
         nodes = {};
 
     function clickShow(event, treeId, treeNode) {
-        console.log(arguments);
         layui.use("form", function () {
             var form = layui.form;
             form.val("shows", treeNode);
@@ -104,9 +103,6 @@
     }
 
     function ckLine(event, treeId, treeNode, clickFlag) {
-        // 判断是否父节点 !treeNode.isParent
-        //if (true) {
-            //alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);
             $.ajax({
                 url: "/tree/right3",//请求的action路径
                 data: {"pid": treeNode.id},
@@ -117,17 +113,13 @@
                     if (res.code === 0) {
                         if (res.data && res.data.length > 0) {
                             var treeObj = $.fn.zTree.getZTreeObj("demo");
-                            //treeNode.halfCheck = false;
                             var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null);//获取指定父节点
-                            //console.log(parentZNode);
                             treeObj.removeChildNodes(parentZNode);
                             newNode = treeObj.addNodes(parentZNode, res.data, false);
-                            //console.log(newNode);
                         }
                     }
                 }
             });
-        //}
     }
 
 
@@ -137,7 +129,6 @@
         data: {pid: ""},
         success: function (res) {
             if (res.code === 0) {
-                //console.log(data);
                 nodes = res.data;
                 $.fn.zTree.beautify().init($("#demo"), setting, nodes);
             }
@@ -145,13 +136,12 @@
         }
     });
     $("#saveRole").on("click",function(){
+        $(".layui-layer-shade").css("opacity","0.05");
         var treeObj = $.fn.zTree.getZTreeObj("demo");
         var nodes = treeObj.getCheckedNodes(true),datas =[];
-        //console.log(nodes);
         for(var i=0;i<nodes.length;i++){
             datas.push(nodes[i]["rightId"]);
         }
-        //console.log(datas);
         subUp({
             url:"/right/setRights",
             data:["roleId"],
@@ -179,6 +169,8 @@
                 box:"select",
                 filter:"",
                 func:function(elem,value,othis){
+                    putMsg("loadOn");
+                    $(".layui-layer-shade").css("opacity","0.05");
                     var val = elem.value;
                     $.ajax({
                         url: "/right/listRightByRId",
@@ -186,11 +178,13 @@
                         data: {roleId: val},
                         success: function (res) {
                             if (res.code === 0) {
-                                console.log(res);
-                                /*nodes = res.data;*/
+                                putMsg({
+                                    msg:"权限获取成功！"
+                                });
                                 $.fn.zTree.beautify().init($("#demo"), setting, res.data);
                             }
-
+                            putMsg("loadOut");
+                            $(".layui-layer-shade").css("opacity","0");
                         }
                     });
                 }
