@@ -359,7 +359,12 @@ function subUp(value, data, param) {
         });
         return false;
     }
-
+    //添加加载动画
+    var loadIndex = layer.load(1);
+    $(".layui-layer-shade").css("opacity","0.05");
+    $(".layui-layer-loading").append(
+        $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px"}).text("请求发送中")
+    );
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
     var dataP = {}, valus = "";
     if (Type(value.data) === "array") {
@@ -380,9 +385,6 @@ function subUp(value, data, param) {
     if (value.param) {
         for (var na in value.param) {
             if (value.param.hasOwnProperty(na)) {
-                /*console.log("na = ",na);
-                console.log("value.param = ",value.param[na]);
-                console.log("param = ",param[na]);*/
                 dataP[value.param[na]] = param[na];
             }
         }
@@ -395,6 +397,9 @@ function subUp(value, data, param) {
         var xhr = new XMLHttpRequest();
         xhr.open(value.method || "GET", value.url, value.async || true);
         xhr.onload = function () {
+            //关闭加载动画
+            layer.close(loadIndex);
+            $(".layui-layer-shade").css("opacity","0");
             alert("上传完成!");
         };
         xhr.send(form);
@@ -411,6 +416,9 @@ function subUp(value, data, param) {
         var $form = $("#form");
         $form.attr({"method": value.method || "GET", "action": value.url, "target": frameName});
         $form[0].submit();
+        //关闭加载动画
+        layer.close(loadIndex);
+        $(".layui-layer-shade").css("opacity","0");
         alert("提交成功！");
         window.location.reload();
     } else {
@@ -420,8 +428,7 @@ function subUp(value, data, param) {
             success: function (data) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
-
-                        layer.alert("数据提交成功", function () {
+                        layer.alert("请求发送成功！", {icon: 1}, function () {
                             if (value.reload) {
                                 //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                                 if(value.reload === "parent"){
@@ -463,6 +470,11 @@ function subUp(value, data, param) {
                 });
                 //提交失败后执行函数
                 value.fine && value.fine(er);
+            },
+            complete:function(){
+                //关闭加载动画
+                layer.close(loadIndex);
+                $(".layui-layer-shade").css("opacity","0");
             }
         };
         //将AJAX数据同步化
@@ -476,7 +488,10 @@ function subUp(value, data, param) {
             //数据回填
             value.data = dataP || value.data;
             //强制同步提交
-            value.async = false;
+            if(!value.async){
+                value.async = false;
+            }
+            //提交数据
             $.ajax(value);
         };
         backData(value.success);

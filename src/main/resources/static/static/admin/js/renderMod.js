@@ -147,6 +147,9 @@ function render(renderParam){
                                 val.func && val.func(dat, form);
                             }
                         };
+                        //强制异步
+                        val.get.async = true;
+                        //上传数据
                         subUp(val.get)
                     }
 
