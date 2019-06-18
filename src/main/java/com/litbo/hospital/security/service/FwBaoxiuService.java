@@ -6,6 +6,8 @@ import com.litbo.hospital.security.vo.FwBaoxiuIndexVo;
 import com.litbo.hospital.security.vo.FwBxLcVo;
 import com.litbo.hospital.security.vo.RepairInfoVo;
 
+import java.text.ParseException;
+
 /**
  * @author zjc
  * @create 2018-12-03 11:01
@@ -27,7 +29,7 @@ public interface FwBaoxiuService {
      * @param pageNum
      * @return
      */
-    public PageInfo getBxLcTable(String userId, Integer pageSize, Integer pageNum,String date,String eqName,Integer bxStatus);
+    public PageInfo getBxLcTable(String userId, Integer pageSize, Integer pageNum,String date,String eqName,Integer bxStatus) throws ParseException;
 
     /**
      * 维修信息显示

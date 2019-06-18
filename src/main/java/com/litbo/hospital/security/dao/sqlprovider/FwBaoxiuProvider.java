@@ -28,6 +28,28 @@ public class FwBaoxiuProvider {
         }.toString();
     }*/
 
+    public String bxlcTableList(String userId, String ksTime, String jsTime,
+                                String eqName, Integer bxStatus){
+
+        String sql = "select bx.id AS fwId,eq_name,bx_time,bx.jjx_status,bx.bx_status from fw_baoxiu AS bx,eq_info as eq where  eq.eq_id = bx.eq_id" +
+                " and bx.bxr_id = #{userId}";
+        StringBuilder builder = new StringBuilder(sql);
+        if(StringUtils.isNotBlank(ksTime)&&StringUtils.isNotBlank(jsTime)){
+            builder.append(" and bx_time BETWEEN #{ksTime} and #{jsTime}");
+        }
+
+        if(bxStatus!=null&&bxStatus!=3){
+            builder.append(" and bx_status = #{bxStatus}");
+        }
+        if(bxStatus!=null&&bxStatus==3){
+            builder.append(" and bx_status not in (2,100)");
+        }
+        if(StringUtils.isNotBlank(eqName)){
+            builder.append(" and eq.eq_name like '%'+#{eqName}+'%'");
+        }
+        return builder.toString();
+    }
+
     public String findBaoxiuEq(String userId,String bmName,String eqName){
         String sql = "SELECT\n" +
                 "bm.bm_name,eq.eq_id,\n" +
