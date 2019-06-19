@@ -15,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -51,13 +55,22 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     }
 
     @Override
-    public PageInfo getBxLcTable(String userId, Integer pageSize, Integer pageNum,String date,String eqName,Integer bxStatus) {
+    public PageInfo getBxLcTable(String userId, Integer pageSize, Integer pageNum,String date,String eqName,Integer bxStatus) throws ParseException {
         PageHelper.startPage(pageNum,pageSize);
-        Date ksTime = new Date();
+        String ksTime = null;
+        String jsTime = null;
         if(StringUtils.isNotBlank(date)){
             String[] split = date.split("~");
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            ksTime = split[0];
+            Date jsDate = format.parse(split[1]);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(jsDate);
+            calendar.add(Calendar.DAY_OF_MONTH,1);
+            jsDate = calendar.getTime();
+            jsTime = format.format(jsDate);
         }
-        PageInfo<FwBxLcTableVo> pageInfo = new PageInfo<FwBxLcTableVo>(fwBaoxiuDao.bxlcTableList(userId));
+        PageInfo<FwBxLcTableVo> pageInfo = new PageInfo<FwBxLcTableVo>(fwBaoxiuDao.bxlcTableList(userId,ksTime,jsTime,eqName,bxStatus));
         return pageInfo;
     }
 

@@ -18,11 +18,11 @@ public interface FwBaoxiuDao {
             " and bx.bxr_id = #{userId}")
     public FwBxLcVo bxlc(String userId);
 
+    //bx.id AS fwId,eq_name,bx_time,bx.jjx_status,bx.bx_status
 
-    @Select("SELECT bx.id AS fwId,eq_name,bx_time,bx.jjx_status,bx.bx_status FROM fw_baoxiu AS bx\n" +
-            "LEFT JOIN eq_info eq ON eq.eq_id = bx.eq_id\n" +
-            "WHERE bx.bxr_id = #{userId}")
-    public List<FwBxLcTableVo> bxlcTableList(String userId);
+    @SelectProvider(type = FwBaoxiuProvider.class,method = "bxlcTableList")
+    public List<FwBxLcTableVo> bxlcTableList(@Param("userId") String userId,@Param("ksTime") String ksTime,@Param("jsTime") String jsTime,
+                                             @Param("eqName") String eqName,@Param("bxStatus") Integer bxStatus);
 
     @Select("SELECT user_id FROM  s_role AS role , s_user_role AS ur WHERE\n" +
             "role.role_name LIKE '设备%处长' AND\n" +
