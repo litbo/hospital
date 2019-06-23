@@ -133,7 +133,7 @@ public class FwBaoxiuController {
             if(i == 1){
                 return Result.success();
             }else {
-                return Result.error("该设备已报修");
+                return Result.error("该设备不在可用状态");
             }
 
         } catch (Exception e) {
