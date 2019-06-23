@@ -110,11 +110,12 @@ public class FwBaoxiuController {
     public Result baoxiuIndex(String eqId){
 //        SecurityUtils.getSubject().getSession().getAttribute("");
         try {
-            LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
+            LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
             FwBaoxiuIndexVo baoxiuIndexVo = fwBaoxiuService.baoxiuIndex(eqId, userId);
             return Result.success(baoxiuIndexVo);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return Result.error("返回数据失败");
         }
@@ -128,8 +129,13 @@ public class FwBaoxiuController {
     @PostMapping("/addBaoxiu")
     public Result addBaoxiu(FwBaoxiu fwBaoxiu){
         try {
-            fwBaoxiuService.addBaoxiu(fwBaoxiu);
-            return Result.success();
+            int i = fwBaoxiuService.addBaoxiu(fwBaoxiu);
+            if(i == 1){
+                return Result.success();
+            }else {
+                return Result.error("该设备已报修");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return Result.error();

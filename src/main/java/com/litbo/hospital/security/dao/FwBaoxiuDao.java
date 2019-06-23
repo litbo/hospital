@@ -72,6 +72,9 @@ public interface FwBaoxiuDao {
             "WHERE eq.eq_bmid = bm.bm_id AND eq.eq_id = #{eqId} AND emp.user_id = #{userId}")
     public FwBaoxiuIndexVo findBaoxiuIndexVo(@Param("eqId") String eqId,@Param("userId") String userId);
 
+    @Select("select eq_syzt from eq_info where eq_id = #{eqId}")
+    public String eqStatusByEqId(String eqId);
+
     @Select("SELECT\n" +
             "bm.bm_name,\n" +
             "eq.eq_name,\n" +

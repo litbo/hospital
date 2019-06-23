@@ -67,7 +67,7 @@ public class FwBaoxiuProvider {
                 "WHERE\n" +
                 "eq.eq_bmid = bm.bm_id AND\n" +
                 "bm.bm_id = emp.bm_id AND\n" +
-                "eq.eq_syzt = '在用' AND\n" +
+                //"eq.eq_syzt = '在用' AND\n" +
                 "emp.user_id = #{userId} ";
         if(StringUtils.isNotBlank(eqName)){
             sql+=" and eq.eq_name like '%'+#{eqName}+'%'";

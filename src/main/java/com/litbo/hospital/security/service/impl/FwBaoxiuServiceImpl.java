@@ -122,31 +122,37 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
 
 
     @Override
-    public FwBaoxiuIndexVo baoxiuIndex(String eqId, String empId) {
-
-        FwBaoxiuIndexVo baoxiuIndexVo = fwBaoxiuDao.findBaoxiuIndexVo(eqId, empId);
-
-        return baoxiuIndexVo;
+    public FwBaoxiuIndexVo baoxiuIndex(String eqId, String empId){
+            FwBaoxiuIndexVo baoxiuIndexVo = fwBaoxiuDao.findBaoxiuIndexVo(eqId, empId);
+            return baoxiuIndexVo;
     }
 
     @Transactional
     @Override
-    public void addBaoxiu(FwBaoxiu fwBaoxiu) {
-        //添加到报修单
-        String id = IDFormat.getIdByIDAndTime("fw_baoxiu", "id");
-        fwBaoxiu.setId(id);
-        fwBaoxiu.setBxTime(new Date());
-        fwBaoxiu.setBxStatus(EnumProcess.FW_BX_SL.getCode());
-        fwBaoxiuDao.addBaoxiu(fwBaoxiu);
-        //添加流程记录
-        FwLcjl fwLcjl = new FwLcjl();
-        fwLcjl.setUserId(fwBaoxiu.getBxrId());
-        fwLcjl.setBxId(id);
-        fwLcjl.setCreatTime(new Date());
-        fwLcjl.setLc(EnumProcess.FW_GZ_BX.getMessage());
-        fwLcjlDao.insertFwLcjl(fwLcjl);
-        //设置报修状态
-        fwBaoxiuDao.updateEqStatus(fwBaoxiu.getEqId());
+    public int addBaoxiu(FwBaoxiu fwBaoxiu) {
+
+        String eqStatus = fwBaoxiuDao.eqStatusByEqId(fwBaoxiu.getEqId());
+        if("在用".equals(eqStatus)){
+            //添加到报修单
+            String id = IDFormat.getIdByIDAndTime("fw_baoxiu", "id");
+            fwBaoxiu.setId(id);
+            fwBaoxiu.setBxTime(new Date());
+            fwBaoxiu.setBxStatus(EnumProcess.FW_BX_SL.getCode());
+            fwBaoxiuDao.addBaoxiu(fwBaoxiu);
+            //添加流程记录
+            FwLcjl fwLcjl = new FwLcjl();
+            fwLcjl.setUserId(fwBaoxiu.getBxrId());
+            fwLcjl.setBxId(id);
+            fwLcjl.setCreatTime(new Date());
+            fwLcjl.setLc(EnumProcess.FW_GZ_BX.getMessage());
+            fwLcjlDao.insertFwLcjl(fwLcjl);
+            //设置报修状态
+            fwBaoxiuDao.updateEqStatus(fwBaoxiu.getEqId());
+            return 1;
+        }else{
+            return 0;
+        }
+
     }
 
     @Override

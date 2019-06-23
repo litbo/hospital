@@ -59,7 +59,7 @@ public interface FwBaoxiuService {
      * 添加保修单
      * @param fwBaoxiu
      */
-    public void addBaoxiu(FwBaoxiu fwBaoxiu);
+    public int addBaoxiu(FwBaoxiu fwBaoxiu);
 
     /**
      * 根据报修单修改状态
