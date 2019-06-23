@@ -444,6 +444,10 @@ function subUp(value, data, param) {
                         layer.alert("请求发送成功！", {icon: 1}, function (id) {
                             if (value.reload) {
                                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                //自定义事件
+                                if(value.sureDo){
+                                    value.sureDo();
+                                }
                                 //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                                 if(value.reload === "parent"){
                                     if(value.shutWin){
@@ -455,16 +459,13 @@ function subUp(value, data, param) {
                                 }
                             }else if(value.shutWin) {
                                 parent.layer.close(index);
+                            }else{
+                                layer.close(id);
                             }
-                            if(value.sureDo){
-                                value.sureDo();
-                            }
-
-                            layer.close(id);
                         })
                 } else {
                     putMsg({
-                        alert: "提交失败，请重试！",
+                        alert: data.msg || "提交失败，请重试！",
                         error: "数据返回异常",
                         log: data
                     });

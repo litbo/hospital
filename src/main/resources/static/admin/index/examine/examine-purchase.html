@@ -127,15 +127,7 @@
                         sgStatus:"1"
                     },
                     shutWin:true,
-                    // success:function (data) {
-                    //     if(data.code == 0){
-                    //         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    //         parent.layer.close(index);
-                    //     }else {
-                    //         alert(data.msg);
-                    //     }
-                    //
-                    // }
+                    reload:"parent"
                 })
             }
         },{
@@ -150,16 +142,7 @@
                         sgStatus:"2"
                     },
                     shutWin:true,
-                    // success:function (data) {
-                    //     if(data.code == 0){
-                    //
-                    //         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    //         parent.layer.close(index);
-                    //     }else {
-                    //         alert(data.msg);
-                    //     }
-                    //
-                    // }
+                    reload:"parent"
                 })
             }
         }]
