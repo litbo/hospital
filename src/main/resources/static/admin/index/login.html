@@ -15,6 +15,12 @@
             color: #a3a3a3;
             cursor: no-drop;
         }
+        button:hover{
+            opacity:0.85;
+        }
+        input[disabled]{
+            background: rgba(191, 191, 191, 0.77)!important;
+        }
     </style>
 </head>
 
@@ -55,7 +61,7 @@
         layui.sessionData("rl",null);
         form.on('submit(login)', function (data) {
             var $ser = data.field,that = $(this);
-            console.log($(this));
+            //console.log($(this));
             that.attr("disabled","");
             that.text("正在登陆");
             //console.log($ser);
