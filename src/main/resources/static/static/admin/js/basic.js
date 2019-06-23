@@ -465,7 +465,7 @@ function subUp(value, data, param) {
                         })
                 } else {
                     putMsg({
-                        alert: "提交失败，请重试！",
+                        alert: data.msg || "提交失败，请重试！",
                         error: "数据返回异常",
                         log: data
                     });
