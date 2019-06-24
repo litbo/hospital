@@ -313,7 +313,7 @@
                         top:"40px",
                         left:"0",
                         "z-index":99
-                    }).on("click",function () {
+                    }).attr("class","showId").on("click",function () {
                         $(".cts2").removeClass("showMsg");
                         $(".conts").removeClass("showMsg");
                         $(this).remove();
@@ -333,7 +333,7 @@
                         top:"40px",
                         left:"0",
                         "z-index":99
-                    }).on("click",function () {
+                    }).attr("class","showId").on("click",function () {
                         $(".cts2").removeClass("showMsg");
                         $(".conts").removeClass("showMsg");
                         $(this).remove();
@@ -344,6 +344,7 @@
             $(document).on("click",function(){
                 $(".cts2").removeClass("showMsg");
                 $(".conts").removeClass("showMsg");
+                $(".showId").remove();
             });
 
             $("#goHome").on("click",function () {
@@ -355,12 +356,6 @@
                     layer.alert("您已处于首页！")
                 }
             });
-
-            $(".layui-nav-item a").on("click",function () {
-                if($("iframe").attr("src") === "/login.html"){
-                    location.href = "/login.html"
-                }
-            })
         })
     });
 </script>
