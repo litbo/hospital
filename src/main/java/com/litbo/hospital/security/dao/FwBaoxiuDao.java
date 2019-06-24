@@ -15,8 +15,8 @@ import java.util.List;
 public interface FwBaoxiuDao {
 
     @Select("select bx.id AS fwId,eq_name,bx_time from fw_baoxiu AS bx,eq_info as eq where  eq.eq_id = bx.eq_id" +
-            " and bx.bxr_id = #{userId}")
-    public FwBxLcVo bxlc(String userId);
+            " and bx.id = #{fwId}")
+    public FwBxLcVo bxlc(String fwId);
 
     //bx.id AS fwId,eq_name,bx_time,bx.jjx_status,bx.bx_status
 
