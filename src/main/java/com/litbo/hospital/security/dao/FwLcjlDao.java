@@ -18,16 +18,15 @@ public interface FwLcjlDao {
 
 
     @Select("SELECT\n" +
-            "emp.user_xm,\n" +
-            "lc.creat_time,\n" +
-            "lc.lc\n" +
+            "\temp.user_xm,\n" +
+            "\tlc.creat_time,\n" +
+            "\tlc.lc \n" +
             "FROM\n" +
-            "dbo.fw_lcjl AS lc ,\n" +
-            "dbo.s_emp AS emp\n" +
+            "\tdbo.fw_lcjl AS lc,\n" +
+            "\tdbo.s_emp AS emp \n" +
             "WHERE\n" +
-            "lc.user_id = emp.user_id AND\n" +
-            "lc.bx_id = #{fwId}\n" +
-            "\n")
+            "\tlc.user_id = emp.user_id \n" +
+            "\tAND lc.bx_id = #{fwId}")
     List<FwLcjlVo> getLcjlByFwId(String fwId);
 
 }

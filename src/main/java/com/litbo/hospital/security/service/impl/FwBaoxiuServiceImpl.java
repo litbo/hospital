@@ -48,8 +48,8 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
     private EmpDao empDao;
 
     @Override
-    public FwBxLcVo getBxLcVo(String userId) {
-        FwBxLcVo bxLcVo = fwBaoxiuDao.bxlc(userId);
+    public FwBxLcVo getBxLcVo(String fwId) {
+        FwBxLcVo bxLcVo = fwBaoxiuDao.bxlc(fwId);
         bxLcVo.setFwLcjlList(fwLcjlDao.getLcjlByFwId(bxLcVo.getFwId()));
         return bxLcVo;
     }

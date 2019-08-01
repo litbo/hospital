@@ -28,11 +28,11 @@ public class FwBaoxiuController {
             fwBaoxiuService;
 
     @GetMapping("/bxlc")
-    public Result bxlc(){
+    public Result bxlc(String fwId){
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-            FwBxLcVo bxLcVo = fwBaoxiuService.getBxLcVo(userId);
+            FwBxLcVo bxLcVo = fwBaoxiuService.getBxLcVo(fwId);
             return Result.success(bxLcVo);
         }catch (Exception e){
             e.printStackTrace();
