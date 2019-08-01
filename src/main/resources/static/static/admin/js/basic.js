@@ -1128,8 +1128,8 @@ action = func = {
                     loc=false;
                     //上传已删除文件
                     subUp(value);
-                    //获取除去要删除的数据后的数据
-                    if(!value.del || value.del === true ){
+                    //获取除去要删除的数据后的数据  !value.del ||
+                    if(value.del === true ){
                         if (ck.isAll === true) {
                             oData = [];
                         } else {
