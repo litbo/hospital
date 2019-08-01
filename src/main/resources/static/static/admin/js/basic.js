@@ -191,8 +191,8 @@ function getHash(input) {
  * @return
  **/
 function markPage(text, time) {
-    //判断只在非IE时加载遮罩功能
-    if("\v"!=="v"){
+    //判断只在非IE时加载遮罩功能,当URL中有参数c时不加载遮罩
+    if("\v"!=="v" && !$.getUrlParam("c")){
         //如果页面中不存在定位元素则创建定位元素
         var $beg = $("#begin");
         var timer = null;
@@ -215,7 +215,6 @@ function markPage(text, time) {
             }
         });
     }
-
 }
 
 /**

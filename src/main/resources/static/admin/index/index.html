@@ -28,8 +28,80 @@
         .loading i {
             font-size: 4rem;
         }
-        .showMsg{
-            display:block;
+
+        .showMsg {
+            display: block;
+        }
+
+        .lg_tools{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 40px;
+        }
+
+        .lg_cts2{
+
+        }
+        .lg_cts2>li{
+            width: 96px;
+            height: 40px;
+            float:left;
+            border-left: 1px solid #f0f0f0;
+            padding-left: 6px;
+            border-bottom: 1px solid #f0f0f0;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .lg_cts2>li:hover{
+            /*background:#00b5f9;*/
+            border-bottom:3px solid #0055aa;
+        }
+        .lg_cts2>li:hover .min_tools{
+            display: block;
+        }
+        .lg_cts2>li>ul{
+            z-index: 9999;
+            left: 0;
+            right: 0;
+            top: 40px;
+            border-radius:unset;
+        }
+        .lg_cts2 .tools_li:hover {
+            background: #fafbfd;
+        }
+        .lg_cts2>li>ul>li{
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .lg_cts2>li>a,.lg_cts2>li>ul>li>a{
+            display: block;
+            width:100%;
+            height: 100%;
+            line-height: 40px;
+        }
+        .lg_cts2>li>a>i{
+            width: 20px;
+            height: 20px;
+            font-size: 18px;
+            /*color: #4e9ef5;*/
+        }
+        .lg_cts2>li>a>p{
+            margin-top: -35px;
+            margin-left: 25px;
+            font-size: 1.3rem!important;
+        }
+        .hotShow:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            color: #1b82f1;
+            left: 35%;
+            border-top: 10px solid;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
         }
     </style>
 
@@ -50,16 +122,15 @@
         </div>
         <!--左侧主列表-->
         <ul class="layui-nav layui-nav-tree" lay-shrink="all" lay-filter="leftNav" id="main_nav_list">
-            <li class="layui-nav-item">
-                <a href="javascript:void(0);" id="goHome"><i class="fas fa-fas fa-home"></i>首页</a>
-            </li>
+
         </ul>
     </div>
     <!--右侧内容-->
     <div class="main-layout-container">
-        <!--头部-->
+        <!--顶部内容-->
         <div class="main-layout-header">
-            <div class="menu-btn menu-btn1" id="hideBtn">
+            <!--菜单折叠按钮-->
+            <div class="menu-btn menu-btn1" id="hideBtn" style="width: 40px;">
                 <a href="javascript:void(0);">
                     <i class="fas fa-bars" id="sbars"></i>
                 </a>
@@ -71,13 +142,18 @@
                     </div>
                 </div>
             </div>
-            <!--用户信息-->
+            <!--用户信息及操作-->
             <div class="info1">
-                <div class="visible-xs visible-sm info">
+                <div class="hidden-lg info">
                     <i class="fas fa-info"></i>
                 </div>
                 <ul class="layui-nav conts" lay-filter="rightNav" style="margin-right:20px;">
-                    <li class="layui-nav-item items1">
+                    <li class="layui-nav-item items1" title="首页">
+                        <a href="javascript:;" data-text="首页"  id="goHome">
+                            <i class="fas fa-fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item items1" title="锁定">
                         <a href="javascript:;" id="lockSys" data-text="系统锁定">
                             <i class="fas fa-lock"></i>
                         </a>
@@ -91,7 +167,8 @@
                             </p>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" data-url="./global/info.html" data-id='x222' data-text="信息管理">信息管理</a></dd>
+                            <dd><a href="javascript:;" data-url="./global/info.html" data-id='x222' data-text="信息管理">信息管理</a>
+                            </dd>
                             <dd><a href="javascript:" class="quit">退出</a></dd>
                         </dl>
                     </li>
@@ -100,34 +177,42 @@
         </div>
         <!--主体内容-->
         <div class="main-layout-body">
-            <!--tab 切换-->
+            <!--标签切换-->
             <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true" style="background:#fff;">
-                <ul class="layui-tab-title navs" style="margin-right:55px;">
+                <!--固定标签页-->
+                <ul class="layui-tab-title navs">//55
                     <li class="layui-this welcome" id="refresh_home">系统主页</li>
                 </ul>
-                <!--右侧折叠副列表-->
-                <div class="tools">
+                <!--右侧折叠副列表-高宽度-->
+                <div class="lg_tools visible-lg">
+                    <ul class="cts_list lg_cts2">
+
+                    </ul>
+                </div>
+                <!--右侧折叠副列表-低宽度-->
+                <div class="tools layui-hide-lg">
                     <div class="tools_more" title="点击固定/解除">
                         <i class="fas fa-th-large"></i>
                     </div>
-                    <ul class="cts2">
-                        <!--动态列表-->
+                    <!--动态列表-->
+                    <ul class="cts_list cts2">
+
                     </ul>
                 </div>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
                         <!--内容页-->
-                        <iframe src="welcome.html" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0" id="home"></iframe>
+                        <iframe src="welcome.html" width="100%" height="100%" name="iframe" scrolling="auto"
+                                class="iframe" framborder="0" id="home"></iframe>
                         <!--end-->
                     </div>
                 </div>
             </div>
         </div>
-        <!--<div class="jlsj">
-            <img src="../static/admin/images/footerlogo.png" alt="健龙世纪">
-            &lt;!&ndash;<p>医疗设备数字化管理产品和服务的</p>&ndash;&gt;
-            &lt;!&ndash;<p><b>开拓者 领航者</b></p>&ndash;&gt;
-        </div>-->
+        <!--公司LOGO-->
+        <div class="jlsj">
+            <img src="/static/admin/images/footerlogo.png" alt="健龙世纪">
+        </div>
     </div>
     <!--遮罩-->
     <div class="main-mask"></div>
@@ -137,10 +222,15 @@
                 <div class="row">
                     <div class="bg" style="width:300px;margin: 0 auto;">
                         <h1 style="text-align: center;margin-bottom: 20px;">系统已锁定</h1>
-                        <input type="text" id="uKey" lay-verify="required" placeholder="账户密码" autocomplete="off" class="layui-input">
-                        <button class="layui-btn layui-btn-normal btn layui-btn-fluid" lay-filter="login" id="check-btn" style="margin-top: 20px;">解锁</button>
+                        <input type="text" id="uKey" lay-verify="required" placeholder="账户密码" autocomplete="off"
+                               class="layui-input">
+                        <button class="layui-btn layui-btn-normal btn layui-btn-fluid" lay-filter="login"
+                                id="check-btn" style="margin-top: 20px;">解锁
+                        </button>
                         <span> </span>
-                        <button class="layui-btn layui-btn-warm btn layui-btn-fluid quit" style="margin-top: 20px;">登出</button>
+                        <button class="layui-btn layui-btn-warm btn layui-btn-fluid quit" style="margin-top: 20px;">
+                            登出
+                        </button>
                     </div>
 
                 </div>
@@ -155,11 +245,11 @@
     layui.use('element', function () {
         var element = layui.element;
         $(function () {
-            var emp = tempValue("rl","emp",false)
-                ,glo = tempValue("rl","glo",false)
-                ,loc = tempValue("pageLock","lock",false)
-                ,f = tempValue("index", "f",null)
-                ,uu = $.getUrlHash("url")
+            var emp = tempValue("rl", "emp", false)
+                , glo = tempValue("rl", "glo", false)
+                , loc = tempValue("pageLock", "lock", false)
+                , f = tempValue("index", "f", null)
+                , uu = $.getUrlHash("url")
                 , tt = $.getUrlHash("title") || "新窗口"
                 , ii = $.getUrlHash("id") || "n9999";
             //http://localhost/admin/index/index.html?p=home#url=./repair.html#title=百度首页#id=666666
@@ -182,20 +272,20 @@
                 if (emp.sex === "女") {
                     $(".user_head").attr("src", "/static/admin/images/woman.png")
                 }
-            }else{
-                layer.alert("无法获取用户信息，请重新登录！",function (index) {
+            } else {
+                layer.alert("无法获取用户信息，请重新登录！", function (index) {
                     layer.close(index);
                     location.href = "/logout"
                 })
             }
 
             //LOGO设置
-            if(glo){
-                $(".m-logo img").attr("src",glo.logo)
+            if (glo) {
+                $(".m-logo img").attr("src", glo.logo)
             }
 
             //锁定判断
-            if(loc || window.locked){
+            if (loc || window.locked) {
                 goLock(true);
             }
 
@@ -203,26 +293,26 @@
             $(".quit").on("click", function () {
                 layer.confirm("确定要退出吗？", function () {
                     location.href = "/logout";
-                    tempValue("pageLock","lock",null);
+                    tempValue("pageLock", "lock", null);
                     window.locked = false;
                 });
                 return false;
             });
 
             //页面锁定事件
-            $("#lockSys").on("click",goLock);
-
-            function goLock(cc){
+            $("#lockSys").on("click", goLock);
+            function goLock(cc) {
                 //console.log(cc);
-                if(cc !== true){
-                    layer.confirm("确认锁定系统吗？",goo);
-                }else{
+                if (cc !== true) {
+                    layer.confirm("确认锁定系统吗？", goo);
+                } else {
                     goo();
                 }
-                function goo(index){
-                    layui.sessionData("pageLock",{
-                        key:"lock",
-                        value:"true"
+
+                function goo(index) {
+                    layui.sessionData("pageLock", {
+                        key: "lock",
+                        value: "true"
                     });
                     window.locked = true;
                     layer.close(index);
@@ -238,29 +328,29 @@
                     });
                     $("#check-btn").on("click", function () {
                         var k = $("#uKey").val();
-                        if(!k){
+                        if (!k) {
                             layer.alert("请输入密码！");
                             return false;
                         }
                         $.ajax({
-                            url:"/hospital/lock",
-                            type:"POST",
-                            data:{
-                                userId:emp.userId,
-                                userPwd:k
+                            url: "/hospital/lock",
+                            type: "POST",
+                            data: {
+                                userId: emp.userId,
+                                userPwd: k
                             },
-                            success:function(res){
-                                if(res.code === 0){
-                                    tempValue("pageLock","lock",null);
+                            success: function (res) {
+                                if (res.code === 0) {
+                                    tempValue("pageLock", "lock", null);
                                     window.locked = false;
                                     layer.close(inn);
-                                }else{
+                                } else {
                                     layer.alert("系统锁定解除失败！");
                                     $("#uKey").val("");
                                     console.log(res);
                                 }
                             },
-                            error:function(res){
+                            error: function (res) {
                                 layer.alert("数据请求错误！");
                                 console.log(res);
                             }
@@ -275,7 +365,7 @@
                 var page = $.getUrlParam("p");
                 var $a = $(".menu-btn").find("a[href='?p=" + page + "']");
                 if ($a.length > 0) {
-                    $a.css("background", "#089ce20f");
+                    $a.addClass("hotShow").css("background", "#089ce20f");
                     $a.on("click", function () {
                         return false;
                     });
@@ -295,25 +385,25 @@
 
             //读取本地存储中的页面ID并打开页面（仅限当前页面存在的页面，主要用于welcome页跳转）
             if (f && typeof Number(f) === "number") {
-                var ne =$("a[data-id='" + Number(f) + "']");
-                if(ne.length>0){
+                var ne = $("a[data-id='" + Number(f) + "']");
+                if (ne.length > 0) {
                     ne[0].click();
                 }
             }
 
-            $(".tools").on('click',function (event) {
+            $(".tools").on('click', function (event) {
                 event.stopPropagation();
                 $(".cts2").toggleClass("showMsg");
                 var $con = $(".layui-tab-content");
                 $con.parent().append(
                     $("<div>").css({
-                        width:"100%",
-                        height:"100%",
-                        position:"absolute",
-                        top:"40px",
-                        left:"0",
-                        "z-index":99
-                    }).attr("class","showId").on("click",function () {
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        top: "40px",
+                        left: "0",
+                        "z-index": 99
+                    }).attr("class", "showId").on("click", function () {
                         $(".cts2").removeClass("showMsg");
                         $(".conts").removeClass("showMsg");
                         $(this).remove();
@@ -321,19 +411,19 @@
                 )
             });
 
-            $(".info1").on("click",function (event) {
+            $(".info1").on("click", function (event) {
                 event.stopPropagation();
                 $(".conts").toggleClass("showMsg");
                 var $con = $(".layui-tab-content");
                 $con.parent().append(
                     $("<div>").css({
-                        width:"100%",
-                        height:"100%",
-                        position:"absolute",
-                        top:"40px",
-                        left:"0",
-                        "z-index":99
-                    }).attr("class","showId").on("click",function () {
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        top: "40px",
+                        left: "0",
+                        "z-index": 99
+                    }).attr("class", "showId").on("click", function () {
                         $(".cts2").removeClass("showMsg");
                         $(".conts").removeClass("showMsg");
                         $(this).remove();
@@ -341,21 +431,49 @@
                 )
             });
 
-            $(document).on("click",function(){
+            $(document).on("click", function () {
                 $(".cts2").removeClass("showMsg");
                 $(".conts").removeClass("showMsg");
                 $(".showId").remove();
             });
 
-            $("#goHome").on("click",function () {
-                if($.getUrlParam("p")!=="home"){
-                    layer.confirm("即将重置所有已打开的页面，是否确认返回首页？",function () {
+            $("#goHome").on("click", function () {
+                if ($.getUrlParam("p") !== "home") {
+                    layer.confirm("即将重置所有已打开的页面，是否确认返回首页？", function () {
                         location.href = "?p=home";
                     });
-                }else{
+                } else {
                     layer.alert("您已处于首页！")
                 }
             });
+
+            window.onresize = changeSize;
+            $(function(){
+                changeSize();
+                //动态加载导航第一项(可能导致页面闪烁，因为会重新加载页面。添加参数c来阻止遮罩产生)
+                //此方案不完美，不推荐使用
+                var item1 = $(".cts_list li").eq(0);
+                var t = $.getUrlParam("t");
+                if(item1.length>0 && !t){
+                    location.href = location.origin + location.pathname +  item1.find("li").eq(0).find("a").attr("href") +"&c="+Math.random()*50;
+                }
+            });
+
+            //动态计算2-3级导航栏宽度
+            function changeSize(){
+                var winWid = $(document).outerWidth(),
+                    $li = $(".lg_cts2>li"),
+                    len = $li.eq(0).outerWidth() * $li.length;
+                    len += 10;
+                //console.log("ww",winWid);
+                if(winWid > 1170){
+                    //console.log("width:"+$li.eq(0).outerWidth(),"length:"+$li.length,"total:"+len);
+                    $(".navs").css("margin-right",len+"px");
+                    $(".lg_tools").css("width",len+"px");
+                }else{
+                    $(".navs").css("margin-right","55px");
+                }
+            }
         })
     });
 </script>
