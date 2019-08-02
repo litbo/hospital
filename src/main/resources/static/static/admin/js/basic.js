@@ -191,8 +191,8 @@ function getHash(input) {
  * @return
  **/
 function markPage(text, time) {
-    //判断只在非IE时加载遮罩功能
-    if("\v"!=="v"){
+    //判断只在非IE时加载遮罩功能,当URL中有参数c时不加载遮罩
+    if("\v"!=="v" && !$.getUrlParam("c")){
         //如果页面中不存在定位元素则创建定位元素
         var $beg = $("#begin");
         var timer = null;
@@ -215,7 +215,6 @@ function markPage(text, time) {
             }
         });
     }
-
 }
 
 /**
@@ -1129,8 +1128,8 @@ action = func = {
                     loc=false;
                     //上传已删除文件
                     subUp(value);
-                    //获取除去要删除的数据后的数据
-                    if(!value.del || value.del === true ){
+                    //获取除去要删除的数据后的数据  !value.del ||
+                    if(value.del === true ){
                         if (ck.isAll === true) {
                             oData = [];
                         } else {

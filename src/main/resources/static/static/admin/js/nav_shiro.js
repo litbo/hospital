@@ -1,10 +1,10 @@
 /*
-* 本页面注释已做删减并做代码优化，查看完整版注释请看 nav_all.js 查看未优化代码请看 old_nav.js
+* 本页面注释已做删减并做代码优化，查看完整版注释请看 nav_all.js 查看未优化代码请看 old_nav.js（只有本JS中代码为最新，其余代码均为老版本，仅作为参考）
 * */
-var $mainList = $("#main_nav_list")
-    , $viceList = $(".cts2")
-    , $mapSite = $('.map_site')
-    , $navList = $(".menus_con")
+var $mainList = $("#main_nav_list")//填充1级导航的DOM
+    , $viceList = $(".cts_list")//填充2-3级导航的DOM
+    , $mapSite = $('.map_site')//站点导航DOM
+    , $navList = $(".menus_con")//填充4-5级导航的DOM
     , n = $.getUrlParam('n')//获取URL地址中的 n 属性值，表示右侧副列表的列表项 t 下的第 n 个子列表
     , t = $.getUrlParam('t')//获取URL地址中的 t 属性值，表示右侧主列表的列表项t下
     , p = $.getUrlParam('p')//获取URL地址中的 p 属性值，表示当前页面的名称
@@ -31,7 +31,7 @@ $(function () {
                         mList = res;
                         addList($mainList, $viceList, mList);
                         element.render();
-                        console.log("导航渲染完毕!");
+                        //console.log("导航渲染完毕!");
                     }
                 })
             }
@@ -47,18 +47,20 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                 addPage(thisA[i]);
             }
             //打开左侧主列表第一个
-            /*if (p !== "home") {//首页不打开新TAB*/
-                /*var d = a.children;
+            /*if (p !== "home") {//首页不打开新TAB
+                var d = a.children;
                 if (d && !d[0].children) {
                     //changeTab(d, function () {
-                        $('.layui-nav-item').eq(1).addClass('layui-this');
+                    console.log(1,$('.layui-nav-item').eq(0));
+                        $('.layui-nav-item').eq(0).addClass('layui-this');
                     //})
                 } else {
+                    console.log(2,$('.layui-nav-child').children(':first'));
                     //changeTab(d.children[0], function () {
                         $('.layui-nav-child').children(':first').addClass('layui-this');
                     //})
-                }*/
-            //}
+                }
+            }*/
         } else {
             addPage(a);
         }
@@ -286,7 +288,8 @@ function addNav(con) {//con包含导航菜单的容器名
                 .append($("<p>").attr("class", "menu-tit").html(nList[i].title))
             )
         );
-        if(p !== "home"){
+        //添加每个页面点开后新增一个标签页
+        /*if(p !== "home"){
             if(p === nList[i].page){
                 changeTab({
                     title:nList[i].title,
@@ -294,6 +297,6 @@ function addNav(con) {//con包含导航菜单的容器名
                     id:"pageFix"
                 })
             }
-        }
+        }*/
     }
 }//通过nav_list向页面中添加顶部导航列表

@@ -1,10 +1,14 @@
 package com.litbo.hospital;
 
+import com.alibaba.fastjson.JSONObject;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import springfox.documentation.spring.web.json.Json;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +25,7 @@ public class HospitalApplication {
     public static void main(String[] args) {
         SpringApplication.run(HospitalApplication.class, args);
     }
+
 
     @Bean
     public Converter<String, Date> addNewConvert() {
