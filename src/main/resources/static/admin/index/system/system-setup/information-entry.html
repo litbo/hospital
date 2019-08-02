@@ -466,7 +466,7 @@
                                         <label class="layui-form-label">安装环境及要求</label>
                                         <div class="layui-input-block">
                                             <textarea class="layui-textarea" name="eqAzhjyq"
-                                                      placeholder="请输入..."></textarea>
+                                                      placeholder="请输入..." ></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -639,12 +639,14 @@
 
                             //删除
                             tr.find('.demo-delete').on('click', function () {
-                                layer.confirm("确认删除这张图吗？", function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
                                     delete files[index]; //删除对应的文件
                                     tr.remove();
                                     var inp = $("#sbzp").next().val("");
                                     formData.count1--;
+                                    layer.close(index);
                                 });
+                                return false;
                             });
 
                             $("#demoList1").append(tr);
@@ -709,12 +711,14 @@
 
                             //删除
                             tr.find('.demo-delete').on('click', function () {
-                                layer.confirm("确认删除这张图吗？", function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
                                     delete files[index]; //删除对应的文件
                                     tr.remove();
                                     var inp = $("#mpzp").next().val("");
                                     formData.count--;
+                                    layer.close(index);
                                 });
+                                return false;
                             });
 
                             $("#demoList").append(tr);

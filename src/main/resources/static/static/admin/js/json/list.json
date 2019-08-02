@@ -544,6 +544,12 @@
                     "url": "./life/electric-bill/bill-type.html",
                     "id": "31102",
                     "shiro": "FLZ"
+                  },
+                  {
+                    "title": "分类账",
+                    "url": "./life/electric-bill/bill-type.html",
+                    "id": "31102",
+                    "shiro": "FLZ"
                   }
                 ]
               },
@@ -1558,41 +1564,43 @@
         ],
         "id": "43"
       },
+
+
       {
         "title": "质量管理",
         "icon": "feather",
-        "shiro": "a",
+        "shiro": "YLSJ",
         "children": [
           {
             "title": "维护保养",
             "url": "safe&t=4&n=0",
             "id": "440",
-            "shiro": "a",
+            "shiro": "YLSJ",
             "children": [
               {
                 "title": "维护保养规范",
                 "url": "./table.html",
                 "id": "4400",
                 "icon": "newspaper",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "保养规范",
                     "url": "./table.html",
                     "id": "44000",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   },
                   {
                     "title": "规范编制",
                     "url": "./table.html",
                     "id": "44001",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   },
                   {
                     "title": "编制任务",
                     "url": "./table.html",
                     "id": "44002",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   }
                 ]
               },
@@ -1601,19 +1609,19 @@
                 "url": "./table.html",
                 "icon": "scroll",
                 "id": "4401",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "常规保养计划",
                     "url": "./table.html",
                     "id": "44010",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   },
                   {
                     "title": "预防性维护计划",
                     "url": "./table.html",
                     "id": "44011",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   }
                 ]
               },
@@ -1622,7 +1630,7 @@
                 "url": "./table.html",
                 "icon": "map",
                 "id": "4402",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "预防性维护待执行任务",
@@ -1819,7 +1827,7 @@
                 "url": "./table.html",
                 "icon": "info",
                 "id": "4431",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "总账",
@@ -1852,7 +1860,7 @@
                 "url": "./table.html",
                 "icon": "newspaper",
                 "id": "4432",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "检定提醒",
@@ -1891,7 +1899,7 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "4433",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "已送检计量器具清单",
@@ -1913,32 +1921,26 @@
             "title": "特种设备",
             "url": "safe&t=4&n=4",
             "id": "444",
-            "shiro": "a",
+            "shiro": "YLSJ",
             "children": [
               {
                 "title": "特种设备台账",
                 "url": "./table.html",
                 "icon": "file-invoice-dollar",
                 "id": "4440",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "特种设备",
-                    "url": "./table.html",
+                    "url": "./safe/quality-management/index1.html",
                     "id": "44400",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   },
                   {
-                    "title": "安全附件",
-                    "url": "./table.html",
+                    "title": "特种设备导入",
+                    "url": "./safe/quality-management/index2.html",
                     "id": "44401",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "特种设备录入",
-                    "url": "./table.html",
-                    "id": "44402",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   }
                 ]
               },
@@ -1947,43 +1949,25 @@
                 "url": "./table.html",
                 "icon": "check-square",
                 "id": "4441",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
-                    "title": "检测计划",
-                    "url": "./table.html",
-                    "id": "44410",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "送检任务",
-                    "url": "./table.html",
-                    "id": "44411",
-                    "shiro": "a"
-                  },
-                  {
                     "title": "送检申请",
-                    "url": "./table.html",
-                    "id": "44412",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index3.html",
+                    "id": "44410",
+                    "shiro": "YLSJ"
                   },
                   {
                     "title": "送检审批",
-                    "url": "./table.html",
-                    "id": "44413",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index4.html",
+                    "id": "44411",
+                    "shiro": "YLSJ"
                   },
                   {
                     "title": "结果录入",
-                    "url": "./table.html",
-                    "id": "44414",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "结果查看",
-                    "url": "./table.html",
-                    "id": "44415",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index5.html",
+                    "id": "44412",
+                    "shiro": "YLSJ"
                   }
                 ]
               },
@@ -1992,25 +1976,19 @@
                 "url": "./table.html",
                 "id": "4442",
                 "icon": "user",
-                "shiro": "a",
+                "shiro": "YLSJ",
                 "children": [
                   {
                     "title": "从业人员",
-                    "url": "./table.html",
+                    "url": "./safe/quality-management/index6.html",
                     "id": "44420",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "人员设置",
-                    "url": "./table.html",
-                    "id": "44421",
-                    "shiro": "a"
+                    "shiro": "YLSJ"
                   },
                   {
                     "title": "证件到期提醒",
-                    "url": "./table.html",
-                    "id": "44422",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index7.html",
+                    "id": "44421",
+                    "shiro": "YLSJ"
                   }
                 ]
               }

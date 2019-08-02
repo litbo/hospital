@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>证件录入</title>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+</head>
+<body>
+<form class="layui-form" action="" style=" width:800px;margin: 20px;">
+    <div  style="width: 400px;float:left;">
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="userXm"   lay-reqtext="姓名尚未填写" autocomplete="off" placeholder="请输入姓名" class="layui-input userXm"  disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">证件名称<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="certificate" autocomplete="off" class="layui-input certificate" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">注册编号<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemZczh"  lay-verify="required" lay-reqtext="注册编号尚未填写"
+                       autocomplete="off" placeholder="请输入注册编号" class="layui-input spemZczh">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">档案编号<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemDabh"  lay-verify="required" lay-reqtext="档案编号尚未填写"
+                       autocomplete="off" placeholder="请输入档案编号" class="layui-input spemDabh">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">发证机关<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemFzjg"  lay-verify="required" lay-reqtext="发证机关尚未填写"
+                       autocomplete="off" placeholder="请输入发证机关" class="layui-input spemFzjg">
+            </div>
+        </div>
+
+
+    </div>
+
+    <div  style="width: 400px;float:left;">
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label" style="width: 90px">上岗资质范围<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemSgzzfw"  lay-verify="required" lay-reqtext="上岗资质范围尚未填写"
+                       autocomplete="off" placeholder="请输入上岗资质范围" class="layui-input spemSgzzfw">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">签&nbsp;&nbsp;发&nbsp;&nbsp;日&nbsp;&nbsp;期<i style="color: red">*</i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemQfrq" readonly="readonly" lay-verify="spemQfrq" class="layui-input spemQfrq"
+                           id="test1" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">有效起始日期<i style="color: red">*</i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemYxqsq" readonly="readonly" lay-verify="date" class="layui-input spemYxqsq" id="test2" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">有效结束日期<i style="color: red">*</i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemYxjsq" readonly="readonly" lay-verify="date"  class="layui-input spemYxjsq" id="test3" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px;width: 400px;">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 70px">证件照片<i style="color: red">*</i></label>
+                <div class="layui-upload layui-input-inline" style="width: 250px;">
+                    <button type="button" class="layui-btn layui-btn-normal"  id="test8">选择文件</button>
+                    <button type="button" class="layui-btn" id="test9" >开始上传</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="formDemo">提交</button>
+        </div>
+    </div>
+
+</form>
+<script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //常规用法
+        laydate.render({
+            elem: '#test1'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test2'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test3'
+            ,trigger: 'click'
+        });
+    });
+
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //普通图片上传
+
+        /* var uploadInst = upload.render({
+             elem: '#test8'
+             ,url: '/upload/'
+             ,before: function(obj){
+                 //预读本地文件示例，不支持ie8
+                 obj.preview(function(index, file, result){
+                     $('#demo1').attr('src', result);
+                     var demoT = $('#demoT');
+                     demoT.html('<span >'+ file.name +'</span>');
+                     //图片链接（base64）
+                 });
+             }
+             ,done: function(res){
+                 //如果上传失败
+                 if(res.code > 0){
+                     return layer.msg('上传失败');
+                 }
+                 //上传成功
+             }
+             ,error: function(){
+                 //演示失败状态，并实现重传
+                 var demoText = $('#demoText');
+                 demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                 demoText.find('.demo-reload').on('click', function(){
+                     uploadInst.upload();
+                 });
+             }
+         });
+ */
+        upload.render({
+            elem: '#test8'
+            ,url: '/upload/'
+            ,auto: false
+            //,multiple: true
+            ,bindAction: '#test9'
+            ,done: function(res){
+                console.log(res)
+            }
+        });
+
+
+
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+    })
+</script>
+
+</body>
+</html>

@@ -433,6 +433,7 @@ function render(renderParam){
                             {
                                 url: res.url
                                 , where: resValue
+                                , method: res.method || "GET"
                                 , page:{
                                     curr: 1//返回第一页
                                 }

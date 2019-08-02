@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果录入</title>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <style>
+        #bor_input input{
+            margin-left: 2px;
+            border:none!important;
+            color: #999999;
+        }
+        #bor_input label{
+            text-align: center;
+            color: #555555;
+        }
+
+    </style>
+</head>
+<body>
+<form class="layui-form " action="" style="margin-top: 10px;margin-left: 100px;">
+    <div  class="layui-col-md8" id="bor_input" style="width: 100%;">
+        <div class="layui-col-md3" style="width: 30%">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备编号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqId" lay-verify="required"
+                           placeholder="请输入" autocomplete="off" class="layui-input speqId" disabled>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备名称:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqName" lay-verify="required"
+                           placeholder="请输入" autocomplete="off" class="layui-input speqName"   disabled>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item" >
+                <label class="layui-form-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型:</label>
+                <div class="layui-input-inline " >
+                    <!-- <input type="radio" name="speqType" value="特种设备" title="特种设备"   checked="" >
+                     <input type="radio" name="speqType" value="安全附件" title="安全附件"  >-->
+                    <input type="text" name="speqType" class="layui-input speqType"  disabled>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">规格型号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqGgxh" lay-verify="required" placeholder="请输入"
+                           autocomplete="off" class="layui-input speqGgxh"  disabled>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">生&nbsp;产&nbsp;商:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqScs" lay-verify="required" placeholder="请输入"
+                           autocomplete="off" class="layui-input speqScs"  disabled>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div  class="layui-col-md3" style="width: 30%">
+            <div class="layui-form-item" style="margin-bottom: 2px">
+                <label class="layui-form-label">使用科室:</label>
+                <div class="layui-input-inline">
+                    <input type="text" style="height: 39px;border: none;margin-left:5px;padding-left:15px;box-sizing: border-box;background: white " class="bmName" name ='bmName' id="bmName"   disabled>
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-bottom: 2px">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" style="text-align: center" >上次检测时间:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="speqJcsj"  autocomplete="off" class="layui-input  speqJcsj" value=""  disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-bottom: 2px">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" style="text-align: center" >检测周期(月):</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="speqJczq"   placeholder="请输入 检测周期（月）" autocomplete="off" class="layui-input speqJczq"  disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item " style="margin-bottom: 2px">
+                <div class="layui-inline" >
+                    <label class="layui-form-label">院&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
+                    <div class="layui-input-inline" >
+                        <input type="text" name="speqBz"  placeholder="院区" autocomplete="off" class="layui-input  speqBz"   disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-bottom: 2px">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" >单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="speqSpare1"  placeholder="请输入" autocomplete="off" class="layui-input speqSpare1" value=""   disabled>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="layui-col-md3" style="width: 30%">
+            <div class="layui-form-item">
+                <label class="layui-form-label">出厂编号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqCcbh" lay-verify="required" placeholder="请输入"
+                           autocomplete="off" class="layui-input speqCcbh"   disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">注册编号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqZczbh" lay-verify="required" placeholder="请输入"
+                           autocomplete="off" class="layui-input speqZczbh"  disabled>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item" style="margin-bottom: 10px">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" >使用编号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="speqSyzbh"  autocomplete="off" class="layui-input speqSyzbh"   disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-bottom: 10px">
+                <div class="layui-inline" >
+                    <label class="layui-form-label" >精度等级:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="aqfjJddj"  placeholder="请输入" autocomplete="off" class="layui-input aqfjJddj"   disabled>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 分割线-->
+    <div class="layui-col-md10" style="width: 80%; height: 2px;border-bottom: 1px dashed #ccc;"></div>
+    <!-- 检测证编号 检测结果-->
+    <div  class="layui-col-md10 layui-form-pane" style="width: 100%; margin-top: 50px">
+        <div class="layui-form-item">
+            <div  class="layui-col-md5 " style="width: 50%">
+                <div class="layui-inline" >
+                    <label class="layui-form-label">检测结果<i style="color: red;font-size: 20px">*</i></label>
+                    <div class="layui-input-inline">
+                        <select name="speqRun"  lay-search="" >
+                            <option value="1">合格</option>
+                            <option value="0">不合格</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div  class="layui-col-md5 " style="width: 50%;">
+                <div class="layui-inline" >
+                    <label class="layui-form-label">检测证编号<i style="color: red;font-size: 20px">*</i></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="speqJczbh" lay-verify="required" placeholder="检测证编号"
+                               autocomplete="off" class="layui-input speqJczbh"  >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    提交按钮-->
+    <div class="layui-form-item " style="float: right;margin-right: 250px;margin-top: 20px">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">录入</button>
+        </div>
+    </div>
+
+</form>
+<script>
+
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+        /*    提交*/
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'//提交弹窗
+            });
+            return false;
+        });
+
+    })
+
+</script>
+<script>
+    function ResultsEntry(result){
+        var index = layui.layer.open({
+            title : "结果录入",
+            type : 2,
+            content : "index8-result.html" ,//弹出层页面
+            area: ['98%', '535px'],
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                if(result){
+                    body.find(".SpeqId").val(result.SpeqId);
+                    body.find(".SpeqName").val(result.SpeqName);
+                    body.find(".SpeqType").val(result.SpeqType === 1 ? "安全附件" : "特种设备" );
+                    body.find(".SpeqGgxh").val(result.SpeqGgxh);
+                    body.find(".SpeqScs").val(result.SpeqScs);
+                    body.find(".SpeqCcbh").val(result.SpeqCcbh);
+                    body.find(".SpeqJczbh").val(result.SpeqJczbh);
+                    body.find(".BmName").val(result.BmName);
+                    body.find(".SpeqSyzbh").val(result.SpeqSyzbh);
+                    body.find(".SpeqJhjcrq").val(result.SpeqJhjcrq);
+                    body.find(".SpeqJczq").val(result.SpeqJczq);
+                    body.find(".SpeqBz").val(result.SpeqBz);
+                    body.find(".SpeqJcsj").val(result.SpeqJcsj);
+                    body.find(".SpeqSpare1").val(result.SpeqSpare1);
+                    body.find(".SpeqZczbh").val(result.SpeqZczbh);
+                    body.find(".AqfjJddj").val(result.AqfjJddj);
+                    body.find(".SpeqRun").val(result.SpeqRun);
+                    // 记得重新渲染表单
+                    var iframeWindow = layero.find('iframe')[0].contentWindow;
+                    iframeWindow.layui.form.render();
+                }
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500);
+
+            }
+        });
+
+
+    }
+</script>
+</body>
+</html>

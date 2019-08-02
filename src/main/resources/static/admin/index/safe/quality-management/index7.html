@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人员设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../static/admin/layui/layui.js"></script>
+</head>
+<body>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script type="text/html" id="toolbarDemo">
+    <div
+            class="layui-form-item">
+        <div class="input-contain" style="width: 340px;margin: 0 auto;">
+            <div class="layui-inline" style="width: 150px;float: left;">
+                <div class="layui-input-inline"><input class="layui-input" name="userXm" placeholder="姓名" id="userXm"
+                                                       autocomplete="off" style="width: 150px"></div>
+            </div>
+            <div class="layui-inline" style="width: 100px;float: left;">
+                <div class="layui-input-inline"><input class="layui-input" name="userId" placeholder="编号" id="userId"
+                                                       autocomplete="off" style="width: 100px"></div>
+            </div>
+            <button type="button" class="layui-btn layui-inline" style="float: right; margin:0">查找</button>
+        </div>
+    </div>
+</script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        var $ = layui.$;
+        table.render({
+            elem: '#test',
+            url: '../../../../static/admin/js/json/test/Practitioners.json',
+            toolbar: '#toolbarDemo',
+            title: '从业人员',
+            cols: [[
+                {type: 'checkbox', fixed: 'left', width: 50}
+                , {field: 'userId', title: 'ID', width: 200, fixed: 'left', unresize: true, sort: true}
+                , {field: 'userXm', title: '姓名', width: 200,}
+                , {field: 'registered', title: '证件名称', width: 250, sort: true}
+                , {field: 'spemQfrq', title: '签发日期', width: 200}
+                , {field: 'spemYxqsq', title: '有效期起始日期', width: 200}
+                , {field: 'spemYxjsq', title: '有效期截止日期', width: 250}
+            ]]
+            , page: true
+        })
+    })
+</script>
+</body>
+</html>
