@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>实时监视</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <link rel="stylesheet" href="css/dataIndex.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="iconfont/iconfont.js"></script>
+    <script src="../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<!--表格-->
+<div style="width: 68%;margin-left: 20px;float: left;">
+    <table class="layui-hide" id="table" lay-filter="table1"></table>
+</div>
+
+<!--饼图-->
+<div id="firstPieChart" style="width:20%; height:300px;float: left;margin:
+    10px 0 0 40px;"></div>
+
+<!--条形图-->
+<div id="main1" style="width: 20%;height:300px;display: inline-block;float: left;margin: 10px 0 0 40px;"></div>
+
+<script type="text/html" id="toolBar">
+    <!-- 搜索区域 -->
+    <div class="monitor_search" style="margin-top: -5px;">
+        <form class="layui-form" action="">
+            <!--管理类别-->
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 70px;margin-top: -5px;">管理类别
+                </label>
+                <div class="layui-input-inline" style="width: 110px;">
+
+                    <select name="glLb" lay-search="">
+                        <option value="0">全部设备</option>
+                        <option value="1">Ⅰ类</option>
+                        <option value="2">Ⅱ类</option>
+                        <option value="3">Ⅲ类</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--设备简称-->
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 70px;margin-top: -5px;">设备简称
+                </label>
+                <div class="layui-input-inline" style="width: 120px;">
+                    <input type="text" name="name" autocomplete="off"
+                           placeholder="" class="layui-input">
+                </div>
+            </div>
+
+            <!--科室-->
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 40px;margin-top: -5px;">科室
+                </label>
+                <div class="layui-input-inline" style="width: 180px;">
+                    <select name="bm" lay-search="">
+                        <option value="" style="color:gray;">全部科室</option>
+                        <option value="85c9ed3b-7f000010-4a135070-e07c4921"  style="color:black;">新部门</option>
+                        <option value="0001">病案室</option>
+                        <option value="0002">病案质控室</option>
+                        <option value="1061100">鼻病门诊</option>
+                        <option value="0003">B超室</option>
+                        <option value="0004">病房临床检验室</option>
+                        <option value="0005">病房消化内镜室</option>
+                        <option value="0243">保管(固定资产)</option>
+                        <option value="0242">保管(维修配件)</option>
+                        <option value="1020807">瘢痕门诊</option>
+                        <option value="0006">保健科全科医学病区</option>
+                        <option value="0329">保健科全科医学</option>
+                        <option value="0007">保健科全科医学门诊</option>
+                    </select>
+                </div>
+            </div>
+
+            <br>
+
+            <!--使用状态-->
+            <div class="layui-inline" style="margin-top: 5px;">
+                <label class="layui-form-label" style="width: 70px;margin-top: -5px;">使用状态
+                </label>
+                <div class="layui-input-inline" style="width: 110px;">
+                    <select name="runningState" lay-search="">
+                        <option value="0">全部</option>
+                        <option value="1">工作</option>
+                        <option value="2">待机</option>
+                        <option value="3">关机</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--完好状态-->
+            <div class="layui-inline" style="margin-top: 5px;">
+                <label class="layui-form-label" style="width: 70px;margin-top: -5px;">完好状态
+                </label>
+                <div class="layui-input-inline" style="width: 80px;">
+
+                    <select name="goodCondition" lay-search="">
+                        <option value="0">全部</option>
+                        <option value="1">完好</option>
+                        <option value="2">故障</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--check-->
+            <div class="layui-input-inline" style="width: 180px;margin-left:
+            10px;">
+                <input type="checkbox" name="check" title="是否急救及生命支持类"
+                       lay-skin="primary">
+            </div>
+
+            <!--按钮-->
+            <div class="layui-input-inline" style="width: 70px;margin-left: 10px;">
+                <button class="layui-btn layui-btn-sm"  data-type="reload">查询</button>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script src="layui/layui.js"></script>
+<script src="layui/echarts.js"></script>
+<script src="js/dataIndex.js"></script>
+
+<script>
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field:'department', title:'科室',fixed: 'left', unresize: true}
+                    ,{field:'id', title:'编号'}
+                    ,{field:'name', title:'设备',}
+                    ,{field:'model', title:'型号'}
+                    ,{field:'runningState', title:'运行状态'}
+                    ,{field:'goodCondition', title:'完好状态'}
+                    ,{field:'networkingStatus', title:'联网状态'}
+                ]]
+                , url: "json/monitor.json"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                // , toolbar: "#toolSearch"
+                , where: {}
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.total //总数据数
+                    }
+                }
+                ,done: function(obj){
+                    tableFunc({
+                        "tools":[
+                            {//一个基础的删除当前行数据按钮
+                                event: "delete",
+                                layOpen:false,
+                                func:function(obj){
+                                    layer.confirm('确定删除这一行吗？', function(index){
+                                        subUp({
+                                            url:"json/monitor.json",
+                                            data:{"aId":obj.data.aid},
+                                            success:function(res){
+                                                if(res.code === 0){
+                                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                                    putMsg({
+                                                        msg:"您已成功删除一条数据！"
+                                                    });
+                                                    layer.close(index);
+                                                }
+                                            }
+                                        })
+                                    });
+                                }
+                            }
+                        ]
+                    })
+                }
+            },
+
+            reSet: {
+                url: "json/monitor.json",
+                type: "reload",
+                tid: "table",
+                data: ["glLb", "name", "bm", "runningState", "goodCondition",
+                    "check"],
+                method: "POST"
+            }
+        }
+    };
+    renderMod.form = {
+        date:{
+            elem:"#date1",
+            value:today,
+            type:"datetime",
+            format:'yyyy-MM-dd',
+            isInitValue:false
+        }
+    }
+
+    // 饼图
+    function loadOneColumn() {
+        var myChart = echarts.init(document.getElementById('firstPieChart'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            color: ['#47b73d', '#fc765b'],//饼图颜色
+            title: {
+                text: '完好情况统计   ',
+                x:'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data: []
+            },
+            series: [{
+                name: '完好情况',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: []
+            }]
+        });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var names = [];    //类别数组（用于存放饼图的类别）
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: 'json/monitor-bing.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.data, function (index, item) {
+                    names.push(item.goodCondition);    //挨个取出类别并填入类别数组 
+                    brower.push({
+                        name: item.goodCondition,
+                        value: item.num
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表                
+                    legend: {
+                        data: names
+                    },
+                    series: [{
+                        data: brower
+                    }]
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadOneColumn();
+
+    //条形图
+    function loadTwoColumn() {
+        var myChart = echarts.init(document.getElementById('main1'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                text: '运行状态',
+                x:'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                data:["工作","待机","关机"],
+                x: 'right'
+            },
+            xAxis: {
+                data:["工作","待机","关机"]
+            },
+            yAxis: {
+                type : 'value'
+            },
+            series: [{
+                name: '运行状态',
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        barBorderWidth: 5,
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                                '#6b8fff','#47b73d','#ccc'];
+                            return colorList[params.dataIndex]
+                        },
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{b}\n{c}'
+                        }
+                    }
+                },
+                data: [],
+                barWidth:40,
+            }]
+        });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var names = [];    //类别数组（用于存放饼图的类别）
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: 'json/monitor-tiao.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.data, function (index, item) {
+                    names.push(item.condition);    //挨个取出类别并填入类别数组 
+                    brower.push({
+                        name: item.condition,
+                        value: item.num
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表                
+                    legend: {
+                        data: names
+                    },
+                    series: [{
+                        data: brower
+                    }]
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadTwoColumn();
+
+    //JavaScript代码区域
+    // layui.use('element', function(){
+    //     var element = layui.element;
+    // });
+    //
+    // // 表单
+    // layui.use(['form', 'layedit', 'laydate'], function(){
+    //     var form = layui.form
+    //         ,layer = layui.layer
+    //         ,layedit = layui.layedit
+    //         ,laydate = layui.laydate;
+    //
+    //     //日期
+    //     laydate.render({
+    //         elem: '#indexDateSelect'
+    //     });
+    // });
+    //
+    // // 表格
+    // layui.use('table', function(){
+    //     var table = layui.table;
+    //
+    //     table.render({
+    //         elem: '#table1'
+    //         ,url:'json/monitor.json'
+    //         ,height: 'full-30'
+    //         ,toolbar: '#toolbarDemo'
+    //         ,title: '用户数据表'
+    //         ,cellMinWidth:50
+    //         ,cols: [[
+    //             {type: 'checkbox', fixed: 'left'}
+    //             ,{field:'department', title:'科室',fixed: 'left', unresize: true}
+    //             ,{field:'id', title:'编号'}
+    //             ,{field:'name', title:'设备',}
+    //             ,{field:'model', title:'型号'}
+    //             ,{field:'runningState', title:'运行状态'}
+    //             ,{field:'goodCondition', title:'完好状态'}
+    //             ,{field:'networkingStatus', title:'联网状态'}
+    //         ]]
+    //         ,page: true
+    //     });
+    //
+    //     //头工具栏事件
+    //     table.on('toolbar(test)', function(obj){
+    //         var checkStatus = table.checkStatus(obj.config.id);
+    //         switch(obj.event){
+    //             case 'getCheckData':
+    //                 var data = checkStatus.data;
+    //                 layer.alert(JSON.stringify(data));
+    //                 break;
+    //             case 'getCheckLength':
+    //                 var data = checkStatus.data;
+    //                 layer.msg('选中了：'+ data.length + ' 个');
+    //                 break;
+    //             case 'isAll':
+    //                 layer.msg(checkStatus.isAll ? '全选': '未全选');
+    //                 break;
+    //         }
+    //     });
+    //
+    //     //监听行工具事件
+    //     table.on('tool(test)', function(obj){
+    //         var data = obj.data;
+    //         //console.log(obj)
+    //         if(obj.event === 'del'){
+    //             layer.confirm('真的删除行么', function(index){
+    //                 obj.del();
+    //                 layer.close(index);
+    //             });
+    //         } else if(obj.event === 'edit'){
+    //             layer.prompt({
+    //                 formType: 2
+    //                 ,value: data.email
+    //             }, function(value, index){
+    //                 obj.update({
+    //                     email: value
+    //                 });
+    //                 layer.close(index);
+    //             });
+    //         }
+    //     });
+    // });
+</script>
+</body>
+</html>

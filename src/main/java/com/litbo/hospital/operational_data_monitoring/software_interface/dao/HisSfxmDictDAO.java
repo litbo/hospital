@@ -3,6 +3,7 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.dao;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisSflb;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisSfxmDict;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.XmVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -42,7 +43,15 @@ public interface HisSfxmDictDAO {
      */
     @Select({"<script>",
             "SELECT Sf_XmBm as SfXmBm,Sf_XmMc as SfXmMc,Sf_Price as SfPrice,Sf_Unit as SfUnit FROM his_SFXM_DICT " +
-            "where Sf_XmMc like '%${name}%'",
+            "<where>",
+            "<if test='name != null'> AND  Sf_XmMc like '%${name}%' </if>\n" ,
+            "</where>",
             "</script>"})
     List<XmVO> selectAllByName(@Param("name") String name);
+
+    /**
+     * 删除医嘱信息
+     */
+    @Delete("delete from his_SFXM_DICT")
+    void delete();
 }

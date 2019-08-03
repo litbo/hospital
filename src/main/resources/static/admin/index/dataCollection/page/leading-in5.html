@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>软件接口</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<div class="layui-fluid" style="width: 40%;float:left;">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="demoTable">
+                    <div class="layui-inline">
+                        <input class="layui-input" name="name" id="demoReload" autocomplete="off" placeholder="请输入设备名称">
+                    </div>
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12" style="margin-top: -10px;">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table class="layui-hide" id="Lista" lay-filter="Lista"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-fluid" style="width: 53%;float: left;margin-left: -10px;">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="demoTable2">
+                    <div class="layui-inline">
+                        <input class="layui-input" name="name"
+                               id="demoReload2" autocomplete="off" placeholder="请输入医嘱名称">
+                    </div>
+                    <button class="layui-btn" data-type="reload2">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12" style="margin-top: -10px;">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table class="layui-hide" id="Listb" lay-filter="Listb"></table>
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn" lay-event="getCheckData" id="pipei" style="float: left;margin: 25px 0 20px 20px;">匹配</button>
+
+</div>
+
+<script type="text/html" id="cs">
+    <a class="layui-btn layui-btn-normal layui-btn-sm" id="csh"
+       href="javascript:;">初始化医嘱项目
+    </a>
+</script>
+
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#Lista'
+            ,url: '/eq/show' //数据接口
+            ,page: true //开启分页
+            , request: {
+                pageName: 'pageNum',
+                limitName: 'pageSize'
+            }
+            ,page: {
+                layout: ['prev', 'page', 'next', 'count', 'limit','skip']
+                //自定义分页布局
+                // ,curr: 5 //设定初始在第 5 页
+                ,groups: 1 //只显示 1 个连续页码
+                ,first: false //不显示首页
+                ,last: false //不显示尾页
+
+            }
+            ,height: 'full-120'
+            ,id: 'testReload'
+            ,toolbar:true
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'eqName', title: '设备名称'}
+            ]]
+            ,parseData: function(res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count":res.data.total,//页面的所有数据数
+                    "data": res.data.list //解析数据列表
+                }
+            }
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    } ,page: true
+                    ,where: {
+                        name: demoReload.val()
+                    }
+                }, 'data');
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#Listb'
+            ,url: '/medical/show' //数据接口
+            ,height: 'full-120'
+            ,page: true //开启分页
+            , request: {
+                pageName: 'pageNum',
+                limitName: 'pageSize'
+            }
+            ,id: 'testReload2'
+            ,toolbar: '#cs'
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'sfXmMc', title: '医嘱名称',width:'45.4%'}
+                ,{field: 'sfPrice', title: '单价(元)',width:'25%'}
+                ,{field: 'sfUnit', title: '单位',width:'20%'},
+            ]]
+            ,parseData: function(res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count":res.data.total,//页面的所有数据数
+                    "data": res.data.list //解析数据列表
+                }
+            }
+        });
+
+
+        var $ = layui.$, active = {
+            reload2: function(){
+                var demoReload = $('#demoReload2');
+
+                //执行重载
+                table.reload('testReload2', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,page: true
+                    ,where: {
+                        name: demoReload.val()
+                    }
+                }, 'data')
+            }
+        };
+
+        $('.demoTable2 .layui-btn').on('click', function(){
+            console.log($('#demoReload2').val());
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+    renderMod.btn={
+        elem:"#csh",
+        func:function(){
+            layer.confirm('初始化信息后，关联需重新绑定，请确认', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: '/medical/importData',
+                    success: function(data) {
+                        if (data.code == '0') {
+                            layer.msg('初始化成功', {icon: 1});
+                            location.reload();
+                        }
+                    },
+                    error:function(){
+                        alert("初始化失败");
+                    }
+                });
+                window.location.reload();
+            }, function(){
+                layer.msg('已取消', {
+                    time: 500
+                });
+            });
+        }
+    };
+
+    $("#pipei").click(function () {
+        var data1 = layui.table.checkStatus('testReload').data;
+        var data2 = layui.table.checkStatus('testReload2').data;
+        // console.log(data1);
+        // console.log(data2);
+        var data = {
+            'eqList':data1,
+            'xmList':data2
+        };
+        console.log(JSON.stringify(data));
+
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            contentType:'application/json;charset=UTF-8',
+            dataType: 'json',
+            url: '/medical/save',
+            data: JSON.stringify(data),
+            success: function(data) {
+                if (data.code == '0') {
+                    layer.msg('匹配成功', {icon: 1});
+                    location.reload();
+                }
+            },
+            error:function(){
+                alert("error");
+            }
+        });
+        // window.location.reload();
+    });
+
+</script>
+</body>
+</html>

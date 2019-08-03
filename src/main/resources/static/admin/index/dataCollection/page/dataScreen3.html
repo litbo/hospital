@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div id="data-screen3" style="width: 500px;height:400px;display: inline-block;float: left;"></div>
+
+<!--表格-->
+<div style="margin-left: 20px;float: left;">
+    <table class="layui-hide" id="table1" lay-filter="test"></table>
+</div>
+
+<script src="../layui/echarts.js"></script>
+<script>
+    // 表格
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#table1'
+            ,url:'../json/dataScreen2.json'
+            ,title: '设备收益指标'
+            ,size: 'sm' //小尺寸的表格
+            ,even: true //开启隔行背景
+            ,skin: 'nob'
+            ,cellMinWidth:40
+            ,width:235
+            ,cols: [[
+                {field:'name', title:'设备',unresize:true}
+                ,{field:'number', title:'工作量',unresize:true}
+                ,{field:'profit', title:'收入',unresize:true}
+                ,{field:'profitRate', title:'收益率',width:70,align:'center',unresize:true}
+            ]]
+        });
+
+    });
+    //散点图
+    function loadOneColumn() {
+        var myChart = echarts.init(document.getElementById('data-screen3'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                x: 'left',
+                text: '设备收益指标',
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            grid: {
+                left: '4%',   // 与容器左侧的距离
+                right: '13%', // 与容器右侧的距离
+                containLabel: true,
+                y: 60,
+                y2: 10,
+                bottom:32
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}:\n{c}'
+            },
+            xAxis: {
+                type: 'value',
+                name: '人数',
+                min: 0,
+                max: 600,
+                interval: 100,
+                axisLine: {
+                    show: true,
+                    onZero: true,
+                    lineStyle: {
+                        color:'#fff',
+                    },
+                },
+                splitLine: 'none',
+                data: []
+            },
+            yAxis: {
+                type: 'value',
+                name: '(￥)',
+                min: 0,
+                max: 500,
+                interval: 100,
+                axisLine: {
+                    show: true,
+                    onZero: true,
+                    lineStyle: {
+                        color:'#fff',
+                    },
+                },
+                splitLine: 'none',
+                axisLabel: {
+                    formatter: '{value} 万'
+                }
+            },
+            series: [{
+                name: '设备收益指标',
+                type: 'scatter',
+                smooth:true,
+                symbolSize: 10,
+                itemStyle: {
+                    normal: {
+                        areaStyle: {
+                            type: 'default'
+                        },
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                                '#e062ae','#ffdb5c','#ff9f7f',
+                                '#FE8463','#9BCA63'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{b}\n{c}'
+                        }
+                    }
+                },
+                data: []
+            }]
+        });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var names = [];    //类别数组
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: '../json/dataScreen2.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.data, function (index, item) {
+                    names.push(item.name);    //挨个取出类别并填入类别数组 
+                    brower.push({
+                        name: item.name,
+                        value: [item.number,item.profit]
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表                
+                    legend: {
+                        data: names
+                    },
+                    series: [{
+                        data: brower
+                    }]
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadOneColumn();
+</script>
+</body>
+</html>

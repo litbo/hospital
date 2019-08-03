@@ -1,6 +1,7 @@
 package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,7 +19,7 @@ public interface DeviceparameterService {
      * @param pageSize
      * @return
      */
-    PageInfo showEqNetWork(Integer pageNum,Integer pageSize);
+    PageInfo showEqNetWork(Integer pageNum, Integer pageSize, SearchVO searchVO);
 
     /**
      * 显示设备联网信息
@@ -26,4 +27,10 @@ public interface DeviceparameterService {
      * @return
      */
     DeviceparameterVO showOne(@Param("ip") String ip);
+
+    /**
+     * 保存设备信息
+     * @param deviceparameterVO
+     */
+    void save(DeviceparameterVO deviceparameterVO);
 }

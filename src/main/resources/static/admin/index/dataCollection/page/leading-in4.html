@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>软件接口</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<!-- 表格 -->
+<table id="table" lay-filter="table1"></table>
+
+<script type="text/html" id="toolbar">
+    <!-- 搜索区域 -->
+    <div class="index_search index_search3" style="margin-top: -10px;">
+        <a class="layui-btn layui-btn-normal layui-btn-sm" id="csh"
+           href="javascript:;"
+           style="margin-left: -250px;margin-top: -2px;">初始化手术科室
+        </a>
+        <form>
+        <!--手术科室-->
+        <div class="layui-input-inline" style="width: 150px;">
+            <input type="text" name="name" autocomplete="off" placeholder="请输入手术科室" class="layui-input">
+        </div>
+
+        <div class="layui-input-inline" style="width: 80px;">
+            <button class="layui-btn"  data-type="reload">查找</button>
+        </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">编辑</a>
+</script>
+
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field:'deptNo', title:'手术科室编号'}
+                    ,{field:'deptName', title:'手术科室名称'}
+                    ,{field:'bmName', title:'匹配科室名称'}
+                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo'}
+                ]]
+                , url: "/surgery/showSurgery"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                ,toolbar: '#toolbar'
+                , where: {}
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.total //总数据数
+                    }
+                }
+                ,done: function(obj){
+                    tableFunc({
+                        "tools":[
+                            {//打开一个新窗口，并将当前行数据中的id传递给下一页面
+                                type:2,
+                                event: "pipei",
+                                content:"in4-edit.html",
+                                area: ['500px', '400px'],
+                                dataUrl:["deptNo"],
+                                func:function(obj){
+                                    console.log(obj);
+                                }
+                            }
+                        ]
+                    })
+                }
+
+        },
+
+            reSet: {
+                url: "/surgery/showSurgery",
+                type: "reload",
+                data: ["name"]
+            }
+        }
+    };
+
+    renderMod.btn={
+        elem:"#csh",
+        func:function(){
+            layer.confirm('初始化信息后，关联需重新绑定，请确认', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                 $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: '/surgery/importData',
+                     success: function(data) {
+                         if (data.code == '0') {
+                             layer.msg('初始化成功', {icon: 1});
+                             location.reload();
+                         }
+                     },
+                    error:function(){
+                        alert("初始化失败");
+                    }
+                });
+                // window.location.reload();
+            }, function(){
+                layer.msg('已取消', {
+                    time: 500
+                });
+            });
+        }
+    };
+    layui.use('table', function() {
+        var table = layui.table;
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'pipei'){
+                // console.log(data[0]);
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    shadeClose: true,
+                    area: ['500px', '400px'],
+                    content: 'in4-edit.html' //iframe的url
+                });
+            }
+        });
+    })
+
+</script>
+</body>
+</html>

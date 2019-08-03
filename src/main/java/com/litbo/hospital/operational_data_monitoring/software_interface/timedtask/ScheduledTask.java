@@ -1,16 +1,20 @@
 package com.litbo.hospital.operational_data_monitoring.software_interface.timedtask;
 
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisSflb;
+import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisUserDict;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.PacsSflb;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.SssSflb;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.HisSflbDAO;
+import com.litbo.hospital.operational_data_monitoring.software_interface.dao.HisUserDictDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.PacsSflbDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.SssSflbDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.mapper.HisSflbMapper;
+import com.litbo.hospital.operational_data_monitoring.software_interface.mapper.HisUserDictMapper;
 import com.litbo.hospital.operational_data_monitoring.software_interface.mapper.PacsSflbMapper;
 import com.litbo.hospital.operational_data_monitoring.software_interface.mapper.SssSflbMapper;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.HISCycle;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -56,8 +60,14 @@ public class ScheduledTask {
     @Autowired
     private SssSflbDAO sssSflbDAO;
 
+    /**
+     * 导入员工信息
+     */
     @Autowired
-    private ConfigMapper configMapper;
+    private HisUserDictDAO dao;
+    @Autowired
+    private HisUserDictMapper mapper;
+
 
     /**
      * 设置定时任务
@@ -69,6 +79,8 @@ public class ScheduledTask {
         importPacs();
         //导入手术收费明细
         importSurgery();
+        //导入员工信息
+        importUser();
     }
 
     /**
@@ -86,9 +98,9 @@ public class ScheduledTask {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         //周期查询
-        Config one = configMapper.findOne(1);
-        Integer zq = new Integer(one.getCycle());
-        cal.set(Calendar.DATE, cal.get(Calendar.DATE) - zq);
+//        Config one = configMapper.findOne(1);
+//        Integer zq = new Integer(one.getCycle());
+        cal.set(Calendar.DATE, cal.get(Calendar.DATE) - 1);
         String yesterday = dateFormat.format(cal.getTime());
         hisCycle.setBeginTime(yesterday);
         List<HisSflb> hisSflbList = hisMapper.selectByTime(hisCycle);
@@ -119,17 +131,15 @@ public class ScheduledTask {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String format = dateFormat.format(date);
-        System.out.println(format);
         hisCycle.setEndTime(format);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        //周期查询set(Calendar.DATE, now.get(Calendar.DATE) - 5);
-        Config one = configMapper.findOne(1);
-        Integer zq = new Integer(one.getCycle());
-        cal.set(Calendar.DATE, cal.get(Calendar.DATE) - zq);
+        //周期查询
+//        Config one = configMapper.findOne(1);
+//        Integer zq = new Integer(one.getCycle());
+        cal.set(Calendar.DATE, cal.get(Calendar.DATE) - 1);
         String yesterday = dateFormat.format(cal.getTime());
         hisCycle.setBeginTime(yesterday);
-        System.out.println(yesterday);
         List<PacsSflb> pacsSflbList = pacsSflbMapper.selectPacsByTime(hisCycle);
         int batchCount =70;
         int batchLastIndex = batchCount - 1;
@@ -163,9 +173,9 @@ public class ScheduledTask {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         //周期查询
-        Config one = configMapper.findOne(1);
-        Integer zq = new Integer(one.getCycle());
-        cal.set(Calendar.DATE, cal.get(Calendar.DATE) - zq);
+//        Config one = configMapper.findOne(1);
+//        Integer zq = new Integer(one.getCycle());
+        cal.set(Calendar.DATE, cal.get(Calendar.DATE) - 1);
         String yesterday = dateFormat.format(cal.getTime());
         hisCycle.setBeginTime(yesterday);
         List<SssSflb> sssSflbList = sssSflbMapper.selectByTime(hisCycle);
@@ -185,4 +195,25 @@ public class ScheduledTask {
         }
     }
 
+    /**
+     * 导入部门员工信息
+     */
+    public void importUser(){
+        List<HisUserDict> PacsSflb = mapper.selectAll();
+        int batchCount =200;
+        int batchLastIndex = batchCount - 1;
+        for (int index = 0; index < PacsSflb.size() - 1;) {
+            if (batchLastIndex > PacsSflb.size() - 1) {
+                batchLastIndex = PacsSflb.size() - 1;
+                dao.saves(PacsSflb.subList(index, batchLastIndex + 1));
+                break;// 数据插入完毕,退出循环
+            } else {
+                dao.saves(PacsSflb.subList(index, batchLastIndex + 1));
+                // 设置下一批下标
+                index = batchLastIndex + 1;
+                batchLastIndex = index + (batchCount - 1);
+            }
+        }
+
+    }
 }

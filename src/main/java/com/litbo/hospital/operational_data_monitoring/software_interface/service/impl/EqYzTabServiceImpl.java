@@ -23,4 +23,9 @@ public class EqYzTabServiceImpl implements EqYzTabService {
     public void save(List<EqYzTab> eqYzTabList) {
         eqYzTabDAO.save(eqYzTabList);
     }
+
+    @Override
+    public void delete() {
+        eqYzTabDAO.delete();
+    }
 }

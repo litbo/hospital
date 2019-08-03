@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
 
 /**
  * @BelongsProject: hospital
@@ -31,11 +32,18 @@ public class DeviceparameterController {
      */
     @RequestMapping("/show")
     public Result showEqNetWork(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
-                                @RequestParam(required = false,defaultValue = "10") Integer pageSize){
-        PageInfo pageInfo = service.showEqNetWork(pageNum, pageSize);
+                                @RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                                SearchVO searchVO){
+        System.out.println(searchVO);
+        PageInfo pageInfo = service.showEqNetWork(pageNum, pageSize,searchVO);
         return Result.success(pageInfo);
     }
 
+    /**
+     * 根据ip显示设备信息
+     * @param ip
+     * @return
+     */
     @RequestMapping("/showOne")
     public Result showOne(String ip){
         DeviceparameterVO deviceparameterVO = service.showOne(ip);

@@ -31,12 +31,12 @@ public interface EqMacTabService {
      * @param searchVO
      * @return
      */
-    PageInfo showEqMacListBy(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,@Param("search") SearchVO searchVO);
+    PageInfo showEqMacListBy(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, @Param("search") SearchVO searchVO);
     /**
      * 显示设备仪联网信息
      * @return
      */
-    PageInfo showEqMacList(Integer pageNum,Integer pageSize);
+    PageInfo showEqMacList(Integer pageNum, Integer pageSize);
 
     /**
      * 根据id删除数据

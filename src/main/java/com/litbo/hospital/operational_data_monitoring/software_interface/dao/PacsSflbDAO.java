@@ -35,13 +35,13 @@ public interface PacsSflbDAO {
             "<foreach item='pacs' collection='list' separator=',' > \n" +
                     "(#{pacs.cSFID}, #{pacs.cPatID}, #{pacs.cBrXm}, \n" +
                     "      #{pacs.cBrNl}, #{pacs.cBrXb}, #{pacs.cBrBz}, \n" +
-                    "      #{pacs.cMacID}, #{pacs.cMacName}, cast(#{pacs.cStime} as date), \n" +
+                    "      #{pacs.cMacID}, #{pacs.cMacName}, cast(#{pacs.cStime} as datetime), \n" +
                     "      #{pacs.cParts}, #{pacs.cResult}, #{pacs.cImgNo}, \n" +
-                    "      #{pacs.cXmBm}, #{pacs.cXmMc}, cast(#{pacs.cYyDjsj} as date), \n" +
-                    "      #{pacs.cYUserNO},cast( #{pacs.cJhsj} as date), #{pacs.cCUserNo}, \n" +
-                    "      #{pacs.cCDeptNo}, cast( #{pacs.cCTime} as date), #{pacs.cZUserNo}, \n" +
-                    "      cast(#{pacs.cZTime} as date), #{pacs.cFUserNo}, cast(#{pacs.cFTime} as date), \n" +
-                    "      cast(#{pacs.cDTime} as date), #{pacs.cChkNo}, #{pacs.cPacsJe}\n" +
+                    "      #{pacs.cXmBm}, #{pacs.cXmMc}, cast(#{pacs.cYyDjsj} as datetime), \n" +
+                    "      #{pacs.cYUserNO},cast( #{pacs.cJhsj} as datetime), #{pacs.cCUserNo}, \n" +
+                    "      #{pacs.cCDeptNo}, cast( #{pacs.cCTime} as datetime), #{pacs.cZUserNo}, \n" +
+                    "      cast(#{pacs.cZTime} as datetime), #{pacs.cFUserNo}, cast(#{pacs.cFTime} as datetime), \n" +
+                    "      cast(#{pacs.cDTime} as datetime), #{pacs.cChkNo}, #{pacs.cPacsJe}\n" +
                     "      )",
                     "</foreach>",
             "</script>"})

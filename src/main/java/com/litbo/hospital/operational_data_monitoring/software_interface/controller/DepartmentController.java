@@ -2,6 +2,7 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.contro
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.SBmService;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.BmDe;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,9 @@ public class DepartmentController {
     @RequestMapping("/show")
     public Result showDepartment(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                                  @RequestParam(required = false,defaultValue = "1") Integer pageNum){
-        PageInfo pageInfo = sBmService.showBm(pageNum, pageSize, null);
-        return Result.success(pageInfo);
+        return Result.success(sBmService.showBm(pageNum, pageSize, null));
+       // return Result.success();
     }
+
+
 }

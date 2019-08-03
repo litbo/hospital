@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -999;
+    padding-top: 37px;
+}
+
+.mask_bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    background: url("../images/dataScreen.png") no-repeat center center;
+    background-size: cover;
+    filter: blur(80);
+}
+
+.mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    background-color: #0a0f25;
+}
+
+.row1{
+    height: 330px;
+    /*background-color: #dabbb4;*/
+}
+
+.row2{
+    height: 350px;
+    overflow: hidden;
+    /*background-color: #91c7ae;*/
+}
+
+.data-screen1 {
+    /*background-color: #bddfff;*/
+    height: 330px;
+    width: 31%;
+}
+
+.data-screen2 {
+    /*background-color: #f7ffc8;*/
+    height: 330px;
+    /*position: relative;*/
+}
+
+.data-screen3 {
+    /*background-color: #ffdfda;*/
+    width: 30%;
+    height: 330px;
+    float: right;
+}
+
+.data-screen4 {
+    /*background-color: #37a2da;*/
+    height: 350px;
+    padding: 0 10px 10px 10px;
+    box-sizing: border-box;
+    /*margin-top: -20px;*/
+}
+
+.data-screen5 {
+    height: 350px;
+    width: 35%;
+    /*background-color: #ffdfda;*/
+    /*margin-top: -20px;*/
+}
+
+.data-screen6 {
+    height: 350px;
+    /*background-color: #f7ffc8;*/
+    position: relative;
+}
+
+#data-screen1 {
+    width: 90%;
+    height: 320px;
+    margin: 10px 0 0 20px;
+    display: inline-block;
+    float: left;
+    padding: 10px;
+    /*border: 1px solid #404d80;*/
+    box-sizing: border-box;
+    /*background-color: #0a0f25;*/
+}
+
+#data-screen2 {
+    width: 90%;
+    height: 320px;
+    float: left;
+    padding: 10px;
+    /*background-color: #ffba3b;*/
+}
+
+#data-screen3 {
+    width: 90%;
+    height: 320px;
+    margin: 10px 0 0 20px;
+    display: inline-block;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #404d80;
+    background-color: #0a0f25;
+    /*background-color: #6b8fff;*/
+}
+
+#data-screen4 {
+    width: 100%;
+    height: 170px;
+    display: inline-block;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #0a0f25;
+    border: 1px solid #404d80;
+}
+
+#data-screen5 {
+    width: 99%;
+    height: 332px;
+    margin: 10px 0 0 20px;
+    display: inline-block;
+    float: left;
+    padding: 10px;
+    border: 1px solid #404d80;
+    box-sizing: border-box;
+    background-color: #0a0f25;
+}
+
+#data-screen6 {
+    width: 360px;
+    height: 350px;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    /*background-color: #ffba3b;*/
+}
+
+
+.profit {
+    margin: 0 -80px 0 0;
+    float: left;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+.layui-table-view .layui-table tr, .layui-table[lay-even] tr:nth-child(2n) {
+    background-color: #0b123c;
+    color: #eee;
+
+}
+
+.layui-table{
+    background-color: #0a0f25;
+}
+
+.layui-table tbody tr:hover {
+    background-color: #0a0f25
+}
+
+.layui-table td, .layui-table th, .layui-table-col-set, .layui-table-fixed-r, .layui-table-grid-down, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-total, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row],.layui-table[lay-skin=nob] {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #404d80;
+}

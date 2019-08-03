@@ -17,4 +17,9 @@ public interface EqYzTabService {
      * @param eqYzTabList
      */
     void save(List<EqYzTab> eqYzTabList);
+
+    /**
+     * 删除医嘱与设备关联信息
+     */
+    void delete();
 }

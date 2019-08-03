@@ -1,9 +1,12 @@
 package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao;
 
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.Deviceparameter;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -19,9 +22,17 @@ public interface DeviceparameterDAO {
      * 查询设备参数设置表信息
      * @return
      */
-    @Select("SELECT b.eq_sbbh,b.eq_name,b.eq_gg,b.eq_xh,a.DeviceCode,a.EndPointIP FROM DeviceParameter a LEFT JOIN eq_info b \n" +
-            "on a.DeviceCode = b.eq_zcbh")
-    List<DeviceparameterVO> selectAll();
+    @Select({ "<script>",
+            "SELECT b.eq_sbbh,b.eq_name,b.eq_gg,b.eq_xh,a.DeviceCode,a.EndPointIP FROM DeviceParameter a " +
+            "LEFT JOIN eq_info b \n" +
+            "on a.DeviceCode = b.eq_zcbh",
+            "<where>",
+            "<if test='macid != null'>","and a. = #{macid}","</if>",
+            "<if test='bmId != null'>","and b. = #{bmId}","</if>",
+            "<if test='eqSbbh != null'>","and b. = #{eqSbbh}","</if>",
+            "</where>"
+            ,"</script>"})
+    List<DeviceparameterVO> selectAll(SearchVO searchVO);
 
     /**
      * 查询设备联网信息
@@ -43,5 +54,12 @@ public interface DeviceparameterDAO {
             "WHERE\n" +
             "a.EndPointIP = #{ip}")
     DeviceparameterVO selectOne(@Param("ip") String ip);
+
+    /**
+     * 设置设备参数表的设备编号
+     * @param deviceparameterVO
+     */
+    @Update("update DeviceParameter set DeviceCode = #{eqSbbh} where EndPointIP = #{endPointIP}")
+    void save(DeviceparameterVO deviceparameterVO);
 
 }

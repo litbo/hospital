@@ -1,0 +1,15 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 1,
+  "data": [
+    {
+      "patientID": "001",
+      "patientName": "小明",
+      "patientType": "住院",
+      "chargingItems": "DT",
+      "money": 200,
+      "chargingStatus": "已收费"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.servic
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.DeparHisSss;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.DeparHisSssDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.DeparHisSssService;
@@ -34,5 +35,23 @@ public class DeparHisSssServiceImpl implements DeparHisSssService {
     @Override
     public void save(DeparHisSss deparHisSss) {
         dao.save(deparHisSss);
+    }
+
+    @Override
+    public PageInfo showAll(Integer pageNum,
+                            Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(dao.selectAll());
+    }
+
+    @Override
+    public PageInfo showAllBy(Integer pageNum, Integer pageSize, String name) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(dao.selectAllByName(name));
+    }
+
+    @Override
+    public void delete(String id) {
+        dao.deleteBy(id);
     }
 }

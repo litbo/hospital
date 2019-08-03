@@ -2,7 +2,10 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.servic
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.DeparHisSss;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DepartmentVO;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -19,7 +22,7 @@ public interface DeparHisSssService {
      * @return
      */
     PageInfo showDepartment(@Param("pageNum") Integer pageNum,
-                               @Param("pageSize") Integer pageSize);
+                            @Param("pageSize") Integer pageSize);
 
     /**
      *
@@ -38,4 +41,19 @@ public interface DeparHisSssService {
      * @param deparHisSss
      */
     void save(DeparHisSss deparHisSss);
+
+    /**
+     * 获取his系统科室和部门的关联信息
+     */
+    PageInfo showAll(@Param("pageNum") Integer pageNum,
+                     @Param("pageSize") Integer pageSize);
+    /**
+     * 获取his系统科室和部门的关联信息
+     */
+    PageInfo showAllBy(@Param("pageNum") Integer pageNum,
+                       @Param("pageSize") Integer pageSize,
+                       @Param("name") String name);
+
+    void delete(@Param("id") String id);
+
 }

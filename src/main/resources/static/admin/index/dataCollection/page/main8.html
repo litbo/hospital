@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>数据收集</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../layui/formSelects-v4.css"/>
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+	<script src="../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+	<!-- 表格 -->
+	<table class="layui-hide" id="table" lay-filter="table1"></table>
+
+
+	<script type="text/html" id="toolBar">
+		<!-- 搜索区域 -->
+		<div class="index_search index_search4" style="margin-top: -10px;">
+			<form class="layui-form" action="">
+				<!--收包时间-->
+				<div class="layui-inline layui-form-pane ">
+					<label class="layui-form-label">日期范围</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" name="packingTime"
+							   id="packingTime" placeholder=" - ">
+					</div>
+				</div>
+
+				<!--联网仪编号-->
+				<div class="layui-input-inline" style="width: 100px;">
+					<input type="text" name="number" autocomplete="off"
+						   placeholder="联网仪编号" class="layui-input">
+				</div>
+				<div class="layui-input-inline" style="width: 80px;">
+					<button class="layui-btn" data-type="reload">查找</button>
+				</div>
+			</form>
+		</div>
+	</script>
+
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" href="edit1.html">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui/layui.js"></script>
+<script src="../layui/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+
+	renderMod = {
+		addTable: {
+			table: {
+				cols: [[ //表头
+					{type: 'checkbox', fixed: 'left'}
+					,{field:'department', title:'所在科室', fixed: 'left', unresize: true}
+					,{field:'id', title:'设备编号'}
+					,{field:'assetsId', title:'资产编号'}
+					,{field:'name', title:'设备名称'}
+					,{field:'number', title:'联网仪编号'}
+					,{field:'packingTime', title:'收包时间'}
+					,{field:'dataPacket', title:'数据包'}
+				]]
+				, url: "../json/main8.json"
+				, method: "POST"
+				, request: {
+					pageName: 'pageNum',
+					limitName: 'pageSize'
+				}
+				// , toolbar: "#toolSearch"
+				, where: {}
+				, parseData: function (res) { //res 即为原始返回的数据
+					return {
+						"code": res.code, //解析接口状态
+						"msg": res.msg, //解析提示文本
+						"data": res.data.list, //解析数据列表
+						"count": res.data.total //总数据数
+					}
+				}
+			},
+
+			reSet: {
+				url: "../json/main8.json",
+				type: "reload",
+				tid: "table",
+				data: ["packingTime", "number"],
+				method: "POST"
+			}
+		}
+	};
+	renderMod.form = {
+		date:{
+			elem:"#date1",
+			value:today,
+			type:"datetime",
+			format:'yyyy-MM-dd',
+			isInitValue:false
+		}
+	}
+
+	//JavaScript代码区域
+	// layui.use('element', function(){
+	// 	var element = layui.element;
+	// });
+	//
+	// // 表单
+	// layui.use(['form', 'layedit', 'laydate'], function(){
+	// 	var form = layui.form
+	// 			,layer = layui.layer
+	// 			,layedit = layui.layedit
+	// 			,laydate = layui.laydate;
+	//
+	// 	//日期
+	// 	laydate.render({
+	// 		elem: '#packingTime'
+	// 		,range: true
+	// 	});
+	// });
+	//
+	//
+	//
+	// // 表格
+	// layui.use('table', function(){
+	// 	var table = layui.table;
+	//
+	// 	table.render({
+	// 		elem: '#table1'
+	// 		,url:'../json/main8.json'
+	// 		,height: 'full-40'
+	// 		,totalRow: true //开启合计行
+	// 		,toolbar: '#toolbarDemo'
+	// 		,cellMinWidth: 50
+	// 		,title: '原始记录'
+	// 		,cols: [[
+	// 			{type: 'checkbox', fixed: 'left'}
+	// 			,{field:'department', title:'所在科室', fixed: 'left', unresize: true}
+	// 			,{field:'id', title:'设备编号'}
+	// 			,{field:'assetsId', title:'资产编号'}
+	// 			,{field:'name', title:'设备名称'}
+	// 			,{field:'number', title:'联网仪编号'}
+	// 			,{field:'packingTime', title:'收包时间'}
+	// 			,{field:'dataPacket', title:'数据包'}
+	// 		]]
+	// 		,page: true
+	// 	});
+	//
+	// 	//头工具栏事件
+	// 	table.on('toolbar(test)', function(obj){
+	// 		var checkStatus = table.checkStatus(obj.config.id)
+	// 				,data = checkStatus.data; //获取选中的数据
+	// 		switch(obj.event){
+	// 			case 'add':
+	// 				layer.msg('添加');
+	// 				break;
+	// 			case 'update':
+	// 				if(data.length === 0){
+	// 					layer.msg('请选择一行');
+	// 				} else if(data.length > 1){
+	// 					layer.msg('只能同时编辑一个');
+	// 				} else {
+	// 					layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+	// 				}
+	// 				break;
+	// 			case 'delete':
+	// 				if(data.length === 0){
+	// 					layer.msg('请选择一行');
+	// 				} else {
+	// 					layer.msg('删除');
+	// 				}
+	// 				break;
+	// 		}
+	// 	});
+	//
+	// 	//监听行工具事件
+	// 	table.on('tool(test)', function(obj){
+	// 		var data = obj.data;
+	// 		//console.log(obj)
+	// 		if(obj.event === 'del'){
+	// 			layer.confirm('确认删除', function(index){
+	// 				obj.del();
+	// 				layer.close(index);
+	// 			});
+	// 		} else if(obj.event === 'edit'){
+	// 			layer.prompt({
+	// 				formType: 2
+	// 				,value: data.email
+	// 			}, function(value, index){
+	// 				obj.update({
+	// 					email: value
+	// 				});
+	// 				layer.close(index);
+	// 			});
+	// 		}
+	// 	});
+	// });
+</script>
+</body>
+</html>

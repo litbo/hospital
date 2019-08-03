@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>数据收集</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+	<script src="../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+	<!-- 表格 -->
+	<table class="layui-hide" id="table" lay-filter="table1"></table>
+
+<script type="text/html" id="toolBar">
+	<!-- 搜索区域 -->
+	<div class="index_search" style="margin-top: -10px;">
+		<form class="layui-form" action="">
+			<div class="layui-input-inline" style="width: 70px;">
+				<select name="dataSel" lay-verify="required" lay-search="">
+					<option value="">搜索</option>
+					<optgroup label="日期">
+						<option value="day" selected>日</option>
+						<option value="month">月</option>
+						<option value="year">年</option>
+					</optgroup>
+				</select>
+			</div>
+			<div class="layui-input-inline" style="width: 100px;">
+				<input type="text" name="date1" id="indexDateSelect" autocomplete="off" class="layui-input" placeholder="日期选择">
+			</div>
+			<div class="layui-input-inline" style="width: 120px;">
+				<select name="department" lay-search="">
+					<option value="">部门</option>
+					<option value="CT">CT室</option>
+					<option value="HeCi">核磁共振室</option>
+					<option value="ShePian">摄片室</option>
+					<option value="XinNei">心内导管室</option>
+					<option value="ICU">心外ICU</option>
+				</select>
+			</div>
+			<div class="layui-input-inline" style="width: 100px;">
+				<input type="text" name="indexSearch" autocomplete="off" placeholder="品名拼音码" class="layui-input">
+			</div>
+			<div class="layui-input-inline" style="width: 80px;">
+				<button class="layui-btn" data-type="reload">查找</button>
+			</div>
+		</form>
+	</div>
+</script>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+
+	renderMod = {
+		addTable: {
+			table: {
+				cols: [[ //表头
+					{type: 'checkbox', fixed: 'left'}
+					,{field:'department', title:'科室', fixed: 'left', unresize: true}
+					,{field:'number', title:'台数'}
+					,{field:'workingHours', title:'工作时长'}
+					,{field:'standbyTime', title:'待机时长'}
+				]]
+				, url: "../json/main2.json"
+				, method: "POST"
+				, request: {
+					pageName: 'pageNum',
+					limitName: 'pageSize'
+				}
+				, where: {}
+				, parseData: function (res) { //res 即为原始返回的数据
+					return {
+						"code": res.code, //解析接口状态
+						"msg": res.msg, //解析提示文本
+						"data": res.data.list, //解析数据列表
+						"count": res.data.total //总数据数
+					}
+				}
+			},
+
+			reSet: {
+				url: "../json/main2.json",
+				type: "reload",
+				tid: "table",
+				data: ["dateSel","date1", "department", "name"],
+				method: "POST"
+			}
+		}
+	};
+	renderMod.form = {
+		date:{
+			elem:"#date1",
+			value:today,
+			type:"datetime",
+			format:'yyyy-MM-dd',
+			isInitValue:false
+		}
+	}
+</script>
+</body>
+</html>

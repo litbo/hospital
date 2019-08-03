@@ -18,5 +18,7 @@ public interface SBmService {
      * @return
      */
     PageInfo showBm(@Param("pageNum") Integer pageNum,
-                    @Param("pageSize") Integer pageSize,String name);
+                    @Param("pageSize") Integer pageSize, String name);
+
+
 }

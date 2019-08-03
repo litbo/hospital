@@ -1,7 +1,11 @@
 package com.litbo.hospital.operational_data_monitoring.software_interface.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisSfxmDict;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -30,4 +34,11 @@ public interface HisSfxmDictService {
     PageInfo showXmByName(@Param("name") String name,
                           @Param("pageNum") Integer pageNum,
                           @Param("pageSize") Integer pageSize);
+
+    /**
+     * 删除医嘱信息
+     */
+    void delete();
+
+    void saves(List<HisSfxmDict> hisSfxmDictList);
 }

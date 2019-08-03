@@ -26,4 +26,6 @@ public interface SBmDAO {
             "</where>",
             "</script>"})
     List<SBm> selectBy(@Param("name") String name);
+
+
 }

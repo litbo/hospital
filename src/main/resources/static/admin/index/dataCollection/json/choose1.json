@@ -1,0 +1,28 @@
+
+{
+  "code": 0,
+  "msg": "",
+  "count": 2,
+  "data": [
+    {
+      "department": "新部门",
+      "id": "001",
+      "code": "001",
+      "name": "CT",
+      "brand": "",
+      "model": "M-1",
+      "size": "111",
+      "startupDate": "2019-7-17"
+    },
+    {
+      "department": "aaa",
+      "id": "002",
+      "code": "002",
+      "name": "DT",
+      "brand": "",
+      "model": "M-2",
+      "size": "222",
+      "startupDate": "2019-7-17"
+    }
+  ]
+}

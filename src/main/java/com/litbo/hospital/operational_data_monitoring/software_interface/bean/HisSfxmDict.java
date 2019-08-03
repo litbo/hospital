@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.software_interface.bean
  * @Author: looli
  * @CreateTime: 2019-07-26 17:57
- * @Description: todo
+ * @Description: his收费项目项目字典
  */
 @Data
 public class HisSfxmDict {

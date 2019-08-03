@@ -56,14 +56,9 @@ public class ScheduleRefreshService {
         searchCron = searchCron + timeVO.getMinutes()+" ";
         searchCron = searchCron + timeVO.getHours()+" ";
         searchCron = searchCron + "* * ?";
-        //System.out.println(searchCron);
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(cronTrigger.getKey());
         //当前Trigger使用的cron
         String currentCron = trigger.getCronExpression();
-//        System.out.println(currentCron);
-        //从数据库查询出来的
-//        String searchCron = configMapper.findOne(1).getCron();
-//        System.out.println(searchCron);
         if (currentCron.equals(searchCron)) {
             // 如果当前使用的cron表达式和从数据库中查询出来的cron表达式一致，则不刷新任务
             return Result.success();
@@ -78,7 +73,7 @@ public class ScheduleRefreshService {
             currentCron = searchCron;
             Config config = new Config();
             config.setCron(searchCron);
-            config.setTime(timeVO.getHours()+":"+timeVO.getMinutes());
+            config.setTime(timeVO.getHours()+":"+timeVO.getMinutes()+":00");
             configMapper.save(config);
             return Result.success();
         }

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.DeviceparameterDAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.DeviceparameterService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +23,19 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
 
 
     @Override
-    public PageInfo showEqNetWork(Integer pageNum, Integer pageSize) {
+    public PageInfo showEqNetWork(Integer pageNum, Integer pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(dao.selectAll());
+        return new PageInfo(dao.selectAll(searchVO));
     }
+
 
     @Override
     public DeviceparameterVO showOne(String ip) {
         return dao.selectOne(ip);
+    }
+
+    @Override
+    public void save(DeviceparameterVO deviceparameterVO) {
+        dao.save(deviceparameterVO);
     }
 }

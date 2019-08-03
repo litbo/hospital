@@ -19,6 +19,8 @@ public class DeviceparameterVO {
     private String eqName;
     /**设备编号*/
     private String eqSbbh;
+    /**设备id*/
+    private String equid;
     /**设备规格*/
     private String eqGg;
     /**设备型号*/

@@ -63,6 +63,6 @@ public class PacsSflb {
 
     private String cChkNo;
 
-    private BigDecimal cPacsJe;
+    private String cPacsJe;
     
 }

@@ -1,0 +1,1 @@
+{  "code": 0,  "msg": "",  "count": 3,  "data": [    {      "condition": "工作",      "num": 3    },    {      "condition": "待机",      "num": 2    },    {      "condition": "关机",      "num": 3    }  ]}

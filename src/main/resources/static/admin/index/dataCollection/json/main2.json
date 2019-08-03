@@ -1,0 +1,13 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 1,
+  "data": [
+    {
+      "department": "ct",
+      "number": "2",
+      "workingHours": 8,
+      "standbyTime": 5
+    }
+  ]
+}

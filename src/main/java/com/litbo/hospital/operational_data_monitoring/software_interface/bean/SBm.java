@@ -2,6 +2,9 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.bean;
 
 import lombok.Data;
 
+/**
+ * 部门信息表
+ */
 @Data
 public class SBm {
     private String bmId;
