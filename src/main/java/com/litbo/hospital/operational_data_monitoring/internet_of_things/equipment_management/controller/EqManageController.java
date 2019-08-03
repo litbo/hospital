@@ -32,9 +32,24 @@ public class EqManageController {
     public Result show(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                        @RequestParam(required = false,defaultValue = "1") Integer pageNum,
                        SearchVO searchVO){
-        System.out.println(searchVO);
-        PageInfo pageInfo = eqInfoService.selectAllBy(pageNum, pageSize, searchVO);
-        return Result.success(pageInfo);
+        if (searchVO!=null){
+            if (searchVO.getBmId() != null){
+                if (searchVO.getBmId().equals("")){
+                    searchVO.setBmId(null);
+                }
+            }
+            if (searchVO.getEqPym()!= null){
+                if (searchVO.getEqPym().equals("")){
+                    searchVO.setEqPym(null);
+                }
+            }
+            if (searchVO.getEqZcbh() != null){
+                if (searchVO.getEqZcbh().equals("")){
+                    searchVO.setEqZcbh(null);
+                }
+            }
+        }
+        return Result.success(eqInfoService.selectAllBy(pageNum, pageSize, searchVO));
     }
 
 }

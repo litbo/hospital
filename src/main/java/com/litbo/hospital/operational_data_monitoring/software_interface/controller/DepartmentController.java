@@ -27,7 +27,11 @@ public class DepartmentController {
     public Result showDepartment(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                                  @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         return Result.success(sBmService.showBm(pageNum, pageSize, null));
-       // return Result.success();
+    }
+
+    @RequestMapping("/showList")
+    public Result showDepartment(){
+        return Result.success(sBmService.showBmList());
     }
 
 

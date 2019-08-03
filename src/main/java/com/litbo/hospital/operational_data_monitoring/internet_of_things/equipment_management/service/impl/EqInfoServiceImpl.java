@@ -36,24 +36,8 @@ public class EqInfoServiceImpl implements EqInfoService {
     @Override
     public PageInfo selectAllBy(Integer pageNum, Integer pageSize,SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
-        if (searchVO!=null){
-            if (searchVO.getBmId() != null){
-                if (searchVO.getBmId().equals("")){
-                    searchVO.setBmId(null);
-                }
-            }
-            if (searchVO.getEqPym()!= null){
-                if (searchVO.getEqPym().equals("")){
-                    searchVO.setEqPym(null);
-                }
-            }
-            if (searchVO.getEqZcbh() != null){
-                if (searchVO.getEqZcbh().equals("")){
-                    searchVO.setEqZcbh(null);
-                }
-            }
-        }
         List<EqInfoVO> eqInfoVOS = eqInfoDAO.selectAllBy(searchVO);
-        return new PageInfo(eqInfoDAO.selectAllBy(searchVO));
+//        System.out.println(eqInfoVOS.size());
+        return new PageInfo(eqInfoVOS);
     }
 }

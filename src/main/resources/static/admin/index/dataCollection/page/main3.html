@@ -31,7 +31,7 @@
 			<form class="layui-form" action="">
 				<!--联网仪编号-->
 				<div class="layui-input-inline" style="width: 100px;">
-					<input type="text" name="number" autocomplete="off"
+					<input type="text" name="macid" autocomplete="off"
 						   placeholder="联网仪编号" class="layui-input">
 				</div>
 				<!--部门-->
@@ -55,7 +55,7 @@
 				</div>
 				<!--设备编号-->
 				<div class="layui-input-inline" style="width: 100px;">
-					<input type="text" name="id" autocomplete="off" placeholder="设备编号" class="layui-input">
+					<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
 				</div>
 				<div class="layui-input-inline" style="width: 80px;">
 					<button class="layui-btn" data-type="reload">查找</button>
@@ -79,27 +79,29 @@
 			table: {
 				cols: [[ //表头
 					{type: 'checkbox', fixed: 'left'}
-					,{field:'id', title:'设备编号'}
-					,{field:'name', title:'设备名称'}
-					,{field:'specifications', title:'规格'}
-					,{field:'model', title:'型号'}
-					,{field:'number', title:'联网仪编号'}
-					,{field:'IP', title:'联网仪IP'}
+					,{field:'eqSbbh', title:'设备编号'}
+					,{field:'eqName', title:'设备名称'}
+					,{field:'eqGg', title:'规格'}
+					,{field:'eqXh', title:'型号'}
+					,{field:'macID', title:'联网仪编号'}
+					,{field:'endPointIP', title:'联网仪IP'}
 					,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo'}
 				]]
-				, url: "../json/main3.json"
+				, url: "/deviceparameter/show"
 				, method: "POST"
 				, request: {
 					pageName: 'pageNum',
 					limitName: 'pageSize'
-				}
+				},page:true
 				, where: {}
 				, parseData: function (res) { //res 即为原始返回的数据
 					return {
 						"code": res.code, //解析接口状态
 						"msg": res.msg, //解析提示文本
 						"data": res.data.list, //解析数据列表
-						"count": res.data.total //总数据数
+						"count": res.data.total, //总数据数
+						// "pageNum":res.data.total.pageNum,//页数
+						// "":res.data.total.pageSize//
 					}
 				}
 				,done: function(obj){
@@ -132,10 +134,10 @@
 			},
 
 			reSet: {
-				url: "../json/main3.json",
+				url: "/deviceparameter/show",
 				type: "reload",
 				tid: "table",
-				data: ["number", "ks", "id"],
+				data: ["macid","eqSbbh"],
 				method: "POST"
 			}
 		}
@@ -144,7 +146,7 @@
 		date:{
 			elem:"#date1",
 			value:today,
-			type:"datetime",
+			type:"date",
 			format:'yyyy-MM-dd',
 			isInitValue:false
 		}

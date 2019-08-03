@@ -69,7 +69,10 @@
                 {type: 'radio', fixed: 'left'}
                 ,{field:'bmName', title:'部门名称'}
             ]]
-            ,page: true
+            ,page: true, request: {
+                pageName: 'pageNum',
+                limitName: 'pageSize'
+            }
             ,parseData: function (res) { //res 即为原始返回的数据
                 return {
                     "code": res.code, //解析接口状态

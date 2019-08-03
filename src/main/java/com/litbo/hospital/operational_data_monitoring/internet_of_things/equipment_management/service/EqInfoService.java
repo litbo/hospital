@@ -26,6 +26,6 @@ public interface EqInfoService {
      * @param searchVO
      * @return
      */
-    PageInfo selectAllBy(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,
+    PageInfo selectAllBy(Integer pageNum,Integer pageSize,
                          SearchVO searchVO);
 }

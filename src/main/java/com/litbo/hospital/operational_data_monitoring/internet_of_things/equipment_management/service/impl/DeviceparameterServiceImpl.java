@@ -2,6 +2,7 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipm
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.DeviceparameterDAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.DeviceparameterService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
@@ -30,8 +31,14 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
 
 
     @Override
-    public DeviceparameterVO showOne(String ip) {
-        return dao.selectOne(ip);
+    public DeviceparameterVO showOne(EqMacVO eqMacVO) {
+        return dao.selectOne(eqMacVO);
+    }
+
+    @Override
+    public void deleteByMacId(SearchVO searchVO) {
+        dao.delete(searchVO.getMacid());
+        dao.update(searchVO.getEqZcbh());
     }
 
     @Override
