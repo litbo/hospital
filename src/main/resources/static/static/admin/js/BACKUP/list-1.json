@@ -2206,8 +2206,7 @@
                 ]
               }
             ]
-          },
-          {
+          },{
             "title": "安全(不良)事件",
             "url": "safe&t=3&n=0",
             "id": "430",
@@ -2258,7 +2257,9 @@
             "url": "admin&t=1&n=3",
             "shiro": "CSGL",
             "id": "613",
-            "children": []
+            "children": [
+
+            ]
           },
           {
             "title": "厂商管理",
@@ -3530,63 +3531,63 @@
         "children": [
           {
             "title": "设备信息",
-            "url": "system&t=0&n=0",
+            "url": "system&t=1&n=1",
             "shiro": "SBXXZ",
-            "id": "700",
+            "id": "711",
             "children": [
               {
                 "title": "设备信息",
                 "url": "./table.html",
                 "icon": "info-circle",
-                "id": "7000",
+                "id": "7110",
                 "shiro": "SBXX",
                 "children": [
                   {
                     "title": "设备信息查询",
                     "url": "./system/system-setup/information-search.html",
-                    "id": "70000",
+                    "id": "71100",
                     "shiro": "SBXXCX"
                   },
                   {
                     "title": "设备信息导入",
                     "url": "./system/system-setup/information-import.html",
-                    "id": "70001",
+                    "id": "71101",
                     "shiro": "SBXXDR"
                   },
                   {
                     "title": "设备信息录入",
                     "url": "./system/system-setup/information-entry.html",
-                    "id": "70002",
+                    "id": "71102",
                     "shiro": "SBXXLR"
                   },
                   {
                     "title": "设备附件信息导入",
                     "url": "./system/system-setup/fjImport.html",
-                    "id": "70003",
+                    "id": "71103",
                     "shiro": "a"
                   },
                   {
                     "title": "设备附件信息录入",
                     "url": "./system/system-setup/fjEntry.html",
-                    "id": "70004",
+                    "id": "71104",
                     "shiro": "SBFJXXLR"
                   },
                   {
                     "title": "设备属性扩展",
                     "url": "./system/system-setup/device-property.html",
-                    "id": "70005",
+                    "id": "71105",
                     "shiro": "SBSXKZ"
                   },
                   {
                     "title": "设备卫标分类设置",
                     "url": "./system/system-setup/repair-classify.html",
-                    "id": "70006",
+                    "id": "71106",
                     "shiro": "SBWBFLSZ"
                   },
                   {
                     "title": "卫标已关联设备",
                     "url": "./system/system-setup/weiBiao.html",
-                    "id": "70007",
+                    "id": "71107",
                     "shiro": "WBYGLSB"
                   }
                 ]
@@ -3595,56 +3596,56 @@
                 "title": "设备确认",
                 "url": "./table.html",
                 "icon": "check-circle",
-                "id": "7001",
+                "id": "7111",
                 "shiro": "a"
               }
             ]
           },
           {
             "title": "系统设置",
-            "url": "system&t=0&n=1",
+            "url": "system&t=1&n=0",
             "shiro": "XTSZ",
-            "id": "701",
+            "id": "710",
             "children": [
               {
                 "title": "LOGO设置",
                 "url": "./system/system-setup/LOGO-set.html",
-                "id": "7010",
+                "id": "7100",
                 "icon": "sliders-h",
                 "shiro": "LOGOSZ"
               },
               {
                 "title": "报表抬头设置",
                 "url": "./system/system-setup/bbtt-set.html",
-                "id": "7011",
+                "id": "7101",
                 "icon": "sliders-h",
                 "shiro": "BBTTSZ"
               },
               {
                 "title": "设备标签抬头设置",
                 "url": "./system/system-setup/equip-head-set.html",
-                "id": "7012",
+                "id": "7102",
                 "icon": "sliders-h",
                 "shiro": "SBBQTTSZ"
               },
               {
                 "title": "文件版本设置",
                 "url": "./system/system-setup/DOCED-setup.html",
-                "id": "7013",
+                "id": "7103",
                 "icon": "sliders-h",
                 "shiro": "WJBBSZ"
               },
               {
                 "title": "短信猫设置",
                 "url": "./system/system-setup/modem-gsm.html",
-                "id": "7014",
+                "id": "7104",
                 "icon": "sliders-h",
                 "shiro": "DXMSZ"
               },
               {
                 "title": "作息时间",
                 "url": "./system/system-setup/time-table.html",
-                "id": "7015",
+                "id": "7105",
                 "icon": "sliders-h",
                 "shiro": "ZXSJ"
               }
@@ -3652,33 +3653,33 @@
           },
           {
             "title": "系统提醒",
-            "url": "system&t=0&n=2",
+            "url": "system&t=1&n=2",
             "shiro": "XTTX",
-            "id": "702",
+            "id": "712",
             "children": [
               {
                 "title": "提醒设置",
                 "url": "./table.html",
                 "icon": "sliders-h",
-                "id": "7020",
+                "id": "7120",
                 "shiro": "TXSZ",
                 "children": [
                   {
                     "title": "提醒类别",
                     "url": "./system/system-setup/reminder-classify.html",
-                    "id": "70200",
+                    "id": "71200",
                     "shiro": "TXLB"
                   },
                   {
                     "title": "日期前提醒设置",
                     "url": "./system/system-setup/preDate.html",
-                    "id": "70201",
+                    "id": "71201",
                     "shiro": "RQQTXSZ"
                   },
                   {
                     "title": "日期后提醒设置",
                     "url": "./system/system-setup/afterDate.html",
-                    "id": "70202",
+                    "id": "71202",
                     "shiro": "a"
                   }
                 ]
@@ -3687,13 +3688,13 @@
                 "title": "提醒信息",
                 "url": "./system/system-setup/reminder-information.html",
                 "icon": "bell",
-                "id": "7021",
+                "id": "7121",
                 "shiro": "a"
               }
             ]
           }
         ],
-        "id": "70"
+        "id": "71"
       },
       {
         "title": "数据字典",
@@ -3702,35 +3703,35 @@
         "children": [
           {
             "title": "数据字典",
-            "url": "system&t=1&n=0",
+            "url": "system&t=0&n=0",
             "shiro": "SJZD",
-            "id": "710",
+            "id": "700",
             "children": [
               {
                 "title": "基础字典",
                 "url": "./system/data-dictionary/basic.html",
                 "icon": "book",
-                "id": "7100",
+                "id": "7000",
                 "shiro": "JCZD"
               },
               {
                 "title": "专业字典",
                 "url": "./system/data-dictionary/major.html",
                 "icon": "torah",
-                "id": "7101",
+                "id": "7001",
                 "shiro": "ZYZD"
               },
               {
                 "title": "状态字典",
                 "url": "./system/data-dictionary/state.html",
                 "icon": "torah",
-                "id": "7102",
+                "id": "7002",
                 "shiro": "a"
               }
             ]
           }
         ],
-        "id": "71"
+        "id": "70"
       },
       {
         "title": "用户管理",
@@ -3812,36 +3813,38 @@
           },
           {
             "title": "知识库",
-            "url": "system&t=3&n=1",
+            "url": "system&t=3&n=0",
             "shiro": "GG",
-            "id": "731",
-            "children": []
+            "id": "730",
+            "children": [
+
+            ]
           },
           {
             "title": "公共下载",
-            "url": "system&t=3&n=2",
+            "url": "system&t=3&n=1",
             "shiro": "GGXZ",
-            "id": "732",
+            "id": "731",
             "children": [
               {
                 "title": "拟稿",
                 "url": "./system/portal-management/download-draft.html",
                 "icon": "pen",
-                "id": "7320",
+                "id": "7310",
                 "shiro": "NG"
               },
               {
                 "title": "审核",
                 "url": "./system/portal-management/download-auditing.html",
                 "icon": "clipboard-check",
-                "id": "7321",
+                "id": "7311",
                 "shiro": "a"
               },
               {
                 "title": "查询",
                 "url": "./system/portal-management/download-search.html",
                 "icon": "search",
-                "id": "7322",
+                "id": "7312",
                 "shiro": "CX"
               }
             ]
