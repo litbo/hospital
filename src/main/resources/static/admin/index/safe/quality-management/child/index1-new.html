@@ -126,7 +126,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label" >单价</label>
             <div class="layui-input-inline">
-                <input type="text" name="speqSpare1" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input speqSpare1">
+                <input type="text" name="speqSpare1" lay-verify="required|number" placeholder="请输入" autocomplete="off" class="layui-input speqSpare1">
             </div>
         </div>
 
@@ -249,7 +249,7 @@
                   success: function(res){
 
                         if(res.code == 0 ){
-                           alert("请求发送成功！");
+                            /*layer.msg("请求发送成功！",{icon: 6,time:3000});*/
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
                             parent.location.reload();
@@ -260,8 +260,7 @@
 
                   },
                   error:function (data) {
-
-        }
+                    }
               }) ;
 
         });

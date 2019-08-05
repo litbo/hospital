@@ -1650,38 +1650,38 @@
       {
         "title": "质量管理",
         "icon": "feather",
-        "shiro": "a",
+        "shiro": "AQZHCX",
         "children": [
           {
             "title": "维护保养",
             "url": "safe&t=4&n=0",
             "id": "440",
-            "shiro": "a",
+            "shiro": "AQZHCX",
             "children": [
               {
                 "title": "维护保养规范",
                 "url": "./table.html",
                 "id": "4400",
                 "icon": "newspaper",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "保养规范",
                     "url": "./table.html",
                     "id": "44000",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "规范编制",
                     "url": "./table.html",
                     "id": "44001",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "编制任务",
                     "url": "./table.html",
                     "id": "44002",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1690,19 +1690,19 @@
                 "url": "./table.html",
                 "icon": "scroll",
                 "id": "4401",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "常规保养计划",
                     "url": "./table.html",
                     "id": "44010",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "预防性维护计划",
                     "url": "./table.html",
                     "id": "44011",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1711,25 +1711,25 @@
                 "url": "./table.html",
                 "icon": "map",
                 "id": "4402",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "预防性维护待执行任务",
                     "url": "./table.html",
                     "id": "44020",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "常规保养待执行任务",
                     "url": "./table.html",
                     "id": "44021",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "已执行任务",
                     "url": "./table.html",
                     "id": "44022",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1738,19 +1738,19 @@
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "4403",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "综合查询",
                     "url": "./table.html",
                     "id": "44030",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "统计报表",
                     "url": "./table.html",
                     "id": "44031",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1759,7 +1759,7 @@
                 "url": "./table.html",
                 "icon": "sliders-h",
                 "id": "4404",
-                "shiro": "a"
+                "shiro": "AQZHCX"
               }
             ]
           },
@@ -1767,32 +1767,32 @@
             "title": "设备质检",
             "url": "safe&t=4&n=1",
             "id": "441",
-            "shiro": "a",
+            "shiro": "AQZHCX",
             "children": [
               {
                 "title": "检测计划",
                 "url": "./table.html",
                 "id": "4410",
                 "icon": "scroll",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "计划制定",
                     "url": "./table.html",
                     "id": "44100",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "计划修改",
                     "url": "./table.html",
                     "id": "44101",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "计划查询",
                     "url": "./table.html",
                     "id": "44102",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1801,21 +1801,21 @@
                 "url": "./table.html",
                 "icon": "newspaper",
                 "id": "4411",
-                "shiro": "a"
+                "shiro": "AQZHCX"
               },
               {
                 "title": "计划实施查询",
                 "url": "./table.html",
                 "icon": "search",
                 "id": "4412",
-                "shiro": "a"
+                "shiro": "AQZHCX"
               },
               {
                 "title": "质量检测项目设置",
                 "url": "./table.html",
                 "icon": "sliders-h",
                 "id": "4413",
-                "shiro": "a"
+                "shiro": "AQZHCX"
               }
             ]
           },
@@ -1823,32 +1823,32 @@
             "title": "设备巡检",
             "url": "safe&t=4&n=2",
             "id": "442",
-            "shiro": "a",
+            "shiro": "AQZHCX",
             "children": [
               {
                 "title": "巡检计划",
                 "url": "./table.html",
                 "icon": "scroll",
                 "id": "4420",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "计划制定",
                     "url": "./table.html",
                     "id": "44200",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "计划修改",
                     "url": "./table.html",
                     "id": "44201",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "计划查询",
                     "url": "./table.html",
                     "id": "44202",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1857,13 +1857,13 @@
                 "url": "./table.html",
                 "icon": "newspaper",
                 "id": "4421",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "设备巡检",
                     "url": "./table.html",
                     "id": "44210",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1872,7 +1872,7 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "4422",
-                "shiro": "a"
+                "shiro": "AQZHCX"
               }
             ]
           },
@@ -1880,26 +1880,26 @@
             "title": "设备计量",
             "url": "safe&t=4&n=4398",
             "id": "443",
-            "shiro": "a",
+            "shiro": "AQZHCX",
             "children": [
               {
                 "title": "查询统计",
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "4430",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "综合查询",
                     "url": "./table.html",
                     "id": "44300",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "综合统计",
                     "url": "./table.html",
                     "id": "44301",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1908,31 +1908,31 @@
                 "url": "./table.html",
                 "icon": "info",
                 "id": "4431",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "总账",
                     "url": "./table.html",
                     "id": "44310",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "分户账",
                     "url": "./table.html",
                     "id": "44311",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "报废账",
                     "url": "./table.html",
                     "id": "44312",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "计量台账录入",
                     "url": "./table.html",
                     "id": "44313",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1941,37 +1941,37 @@
                 "url": "./table.html",
                 "icon": "newspaper",
                 "id": "4432",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "检定提醒",
                     "url": "./table.html",
                     "id": "44320",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "送检申请",
                     "url": "./table.html",
                     "id": "44321",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "送检审批",
                     "url": "./table.html",
                     "id": "44322",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "检定结果录入",
                     "url": "./table.html",
                     "id": "44323",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "检定结果导入",
                     "url": "./table.html",
                     "id": "44324",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -1980,19 +1980,19 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "4433",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "已送检计量器具清单",
                     "url": "./table.html",
                     "id": "44330",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "已鉴定计量器具清单",
                     "url": "./table.html",
                     "id": "44331",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               }
@@ -2002,32 +2002,27 @@
             "title": "特种设备",
             "url": "safe&t=4&n=4",
             "id": "444",
-            "shiro": "a",
+            "shiro": "AQZHCX",
             "children": [
               {
                 "title": "特种设备台账",
                 "url": "./table.html",
                 "icon": "file-invoice-dollar",
                 "id": "4440",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "特种设备",
-                    "url": "./table.html",
+                    "url": "./safe/quality-management/index1.html",
                     "id": "44400",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
+
                   {
-                    "title": "安全附件",
-                    "url": "./table.html",
+                    "title": "特种设备导入",
+                    "url": "./safe/quality-management/index2.html",
                     "id": "44401",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "特种设备录入",
-                    "url": "./table.html",
-                    "id": "44402",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   }
                 ]
               },
@@ -2036,44 +2031,27 @@
                 "url": "./table.html",
                 "icon": "check-square",
                 "id": "4441",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
-                    "title": "检测计划",
-                    "url": "./table.html",
-                    "id": "44410",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "送检任务",
-                    "url": "./table.html",
-                    "id": "44411",
-                    "shiro": "a"
-                  },
-                  {
                     "title": "送检申请",
-                    "url": "./table.html",
-                    "id": "44412",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index3.html",
+                    "id": "44410",
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "送检审批",
-                    "url": "./table.html",
-                    "id": "44413",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index4.html",
+                    "id": "44411",
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "结果录入",
-                    "url": "./table.html",
-                    "id": "44414",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "结果查看",
-                    "url": "./table.html",
-                    "id": "44415",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index5.html",
+                    "id": "44412",
+                    "shiro": "AQZHCX"
                   }
+
                 ]
               },
               {
@@ -2081,25 +2059,19 @@
                 "url": "./table.html",
                 "id": "4442",
                 "icon": "user",
-                "shiro": "a",
+                "shiro": "AQZHCX",
                 "children": [
                   {
                     "title": "从业人员",
-                    "url": "./table.html",
+                    "url": "./safe/quality-management/index6.html",
                     "id": "44420",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "人员设置",
-                    "url": "./table.html",
-                    "id": "44421",
-                    "shiro": "a"
+                    "shiro": "AQZHCX"
                   },
                   {
                     "title": "证件到期提醒",
-                    "url": "./table.html",
-                    "id": "44422",
-                    "shiro": "a"
+                    "url": "./safe/quality-management/index7.html",
+                    "id": "44421",
+                    "shiro": "AQZHCX"
                   }
                 ]
               }

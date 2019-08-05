@@ -38,7 +38,7 @@
 <!--表格-->
 <div class="layui-row">
     <div class="col-xs-12">
-        <table  id="table" lay-filter="table1"></table>
+        <table  id="table" lay-filter="table1" ></table>
     </div>
 </div>
 
@@ -680,14 +680,14 @@
 
         <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
-    <div class="" style="float: right;margin-right: 200px">
+    <div class="" style="float: right;margin-right: 130px">
         <div class="inl" style="float: left;width: 300px">
             设备总数量（台）：
-            <input type="text" value="32 " name="num1" id="num1" style="width: 80px;border: none;background: transparent">
+            <input type="text" value="" name="num1" id="num1" style="width: 80px;border: none;background: transparent" disabled>
         </div>
-        <div class="inl"  style="float: left;width: 150px">
-            总价(元)：
-            <input type="text" value="" name="num2" id="num2" style="width: 80px;border: none;background: transparent">
+        <div class="inl"  style="float: left;width: 180px">
+            总价（元）：
+            <input type="text" value="" name="num2" id="num2" style="width: 80px;border: none;background: transparent" disabled>
         </div>
     </div>
 
@@ -708,6 +708,8 @@
         var table = layui.table
             ,$=layui.jquery;
 
+
+
         renderMod.table = {
             table: {
                 elem: '#table'
@@ -727,7 +729,7 @@
                     , {field: 'speqScs', title: '生产厂家', width: 180}
                     , {field: 'speqBz', title: '院区', width: 140}
                     , {field: 'speqType', title: '设备类型', width: 100, templet:'#speqT'}
-                    , {field: 'speqSpare1', title: '设备单价', width: 100, sort: true}
+                    , {field: 'speqSpare1', title: '单价（元）', width: 100, sort: true}
                     , {field: 'speqRun', title: '设备状态', width: 96, templet: '#statusTpl'}
 
                 ]]
@@ -743,16 +745,17 @@
                         "msg": res.msg, //解析提示文本
                         "count": res.data.total,//页面的所有数据数
                         "data": res.data.list //解析数据列表
-                    }
+                    };
                 }
                 , done: function (res, curr, count) {
+                  /*  console.log(layui.table.cache.table[0]);*/
 
                     var n = 0;//单价计算
-                    for (var i = 0; i < res.data.length; i++) {
-                        n += Number(res.data[i].speqSpare1);
+                    for (var i = 0; i < layui.table.cache.table.length; i++) {
+                        n += Number(layui.table.cache.table[i].speqSpare1);
                     }
                     $('#num1').val(count);// 设备台数
-                    /*  $('#num2').val(n.toFixed(2));//单价*/
+                      $('#num2').val(n.toFixed(2));//单价
                 }
             },
             reSet:{
@@ -784,9 +787,7 @@
                             ids.push(data[i].speqId);
                         }
                     }
-                    console.log(ids);
                       layer.confirm("确定要删除吗？", function () {
-                          console.log(ids);
                           $.ajax({
                               type: "POST",
                               url: "/specialEq/deleteSpecialEq",
@@ -847,6 +848,8 @@
 <script type="text/html" id="Tpl">
     <a  class="layui-table-link" target="_blank" title="双击可查看详细信息" style="cursor: pointer">{{ d.bmId }}</a>
 </script>
+
+
 
 <script type="text/html" id="speqT">
     {{#  if(d.speqType === 1){ }}
