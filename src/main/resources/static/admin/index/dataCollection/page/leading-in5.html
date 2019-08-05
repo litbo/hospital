@@ -55,8 +55,11 @@
             </div>
         </div>
     </div>
-    <button class="layui-btn" lay-event="getCheckData" id="pipei" style="float: left;margin: 25px 0 20px 20px;">匹配</button>
-
+    <button class="layui-btn" lay-event="getCheckData" id="pipei"
+            style="float: left;margin: 30px 0 20px 20px;">匹配</button>
+    <a class="layui-btn layui-btn-primary" lay-event="pipeiCk" id="pipeiCk"
+       style="float: left;margin: 30px 0 20px 10px;" href="pipeiCk.html">查看已匹配信息
+    </a>
 </div>
 
 <script type="text/html" id="cs">
@@ -64,6 +67,7 @@
        href="javascript:;">初始化医嘱项目
     </a>
 </script>
+
 
 
 <script src="../layui/layui.js"></script>
@@ -181,34 +185,50 @@
             active[type] ? active[type].call(this) : '';
         });
     });
-    renderMod.btn={
-        elem:"#csh",
-        func:function(){
-            layer.confirm('初始化信息后，关联需重新绑定，请确认', {
-                btn: ['确定','取消'] //按钮
-            }, function(){
-                $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: '/medical/importData',
-                    success: function(data) {
-                        if (data.code == '0') {
-                            layer.msg('初始化成功', {icon: 1});
-                            location.reload();
+    renderMod.btn=[
+        {
+            elem:"#csh",
+            func:function(){
+                layer.confirm('初始化信息后，关联需重新绑定，请确认', {
+                    btn: ['确定','取消'] //按钮
+                }, function(){
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'json',
+                        url: '/medical/importData',
+                        success: function(data) {
+                            if (data.code == '0') {
+                                layer.msg('初始化成功', {icon: 1});
+                                location.reload();
+                            }
+                        },
+                        error:function(){
+                            alert("初始化失败");
                         }
-                    },
-                    error:function(){
-                        alert("初始化失败");
-                    }
+                    });
+                    window.location.reload();
+                }, function(){
+                    layer.msg('已取消', {
+                        time: 500
+                    });
                 });
-                window.location.reload();
-            }, function(){
-                layer.msg('已取消', {
-                    time: 500
-                });
-            });
-        }
-    };
+            }
+        },
+        // {
+        //     elem:"#pipeiCk",
+        //     func:function(){
+        //         layui.layer.open({
+        //             type: 2,
+        //             title: '查看已匹配信息',
+        //             shadeClose: true,
+        //             shade: 0.8,
+        //             area: ['900px', '90%'],
+        //             content: 'pipeiCk.html' //iframe的url
+        //         });
+        //     }
+        // }
+    ];
+
 
     $("#pipei").click(function () {
         var data1 = layui.table.checkStatus('testReload').data;

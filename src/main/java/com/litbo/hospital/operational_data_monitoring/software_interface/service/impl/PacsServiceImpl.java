@@ -48,4 +48,20 @@ public class PacsServiceImpl implements PacsService {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(pacsDAO.selectAll(pacsId));
     }
+
+    @Override
+    public int isHas(String eqid) {
+        int i = pacsDAO.selectOne(eqid);
+        return i;
+    }
+
+    @Override
+    public void deleteOne(String pacsId) {
+        pacsDAO.deleteOne(pacsId);
+    }
+
+    @Override
+    public void deleteOne2(String eqId) {
+        pacsDAO.deleteOne2(eqId);
+    }
 }

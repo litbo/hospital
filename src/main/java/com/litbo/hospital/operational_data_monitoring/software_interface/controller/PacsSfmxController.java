@@ -106,20 +106,4 @@ public class PacsSfmxController {
         }
     }
 
-    /**
-     * pacs与eq做关联
-     */
-    @RequestMapping("/save")
-    public Result save(@RequestBody EqXmVO eqXmVO){
-        for (XmVO xmVO:
-            eqXmVO.getXmList()) {
-            for (EqInfo eq:
-                 eqXmVO.getEqList()) {
-
-            }
-        }
-
-
-        return Result.success();
-    }
 }

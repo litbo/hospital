@@ -7,7 +7,9 @@ import com.litbo.hospital.operational_data_monitoring.software_interface.bean.Hi
 import com.litbo.hospital.operational_data_monitoring.software_interface.mapper.HisSfxmDictMapper;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.EqYzTabService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.HisSfxmDictService;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqXm;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqXmVO;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.TD;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.XmVO;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,4 +88,97 @@ public class MedicalOrderController {
         eqYzTabService.save(eqYzTabList);
         return Result.success();
     }
+
+    /**
+     * 取消匹配
+     * @param eqXmVO
+     * @return
+     */
+    @RequestMapping("/delete")
+    public Result delete(@RequestBody EqXmVO eqXmVO){
+        List<EqYzTab> eqYzTabList = new ArrayList<>();
+        for (XmVO xmVO:
+                eqXmVO.getXmList()) {
+            for (EqInfo eq:
+                    eqXmVO.getEqList()) {
+                EqYzTab eqYzTab = new EqYzTab();
+                eqYzTab.setYzXmBm(xmVO.getSfXmBm());
+                eqYzTab.setEqId(eq.getEqId());
+                eqYzTabList.add(eqYzTab);
+            }
+        }
+        eqYzTabService.delete(eqYzTabList);
+        return Result.success();
+    }
+
+
+    /**
+     * 取消匹配 根据id删除信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteOne")
+    public Result deleteOne(String id){
+        eqYzTabService.deleteOne(id);
+        return Result.success();
+    }
+
+    /**
+     * 批量 根据id删除信息
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/deletes",method = RequestMethod.POST)
+    public Result deleteOne(
+            @RequestBody TD ids){
+        String[] ids1 = ids.getIds();
+        eqYzTabService.deletes(ids1);
+        return Result.success();
+    }
+//
+//    /**
+//     * 取消匹配
+//     * @param eqXmVO
+//     * @return
+//     */
+//    @RequestMapping("/deleteOne")
+//    public Result deleteOne(@RequestBody EqXmVO eqXmVO){
+//        List<EqYzTab> eqYzTabList = new ArrayList<>();
+//        for (XmVO xmVO:
+//                eqXmVO.getXmList()) {
+//            for (EqInfo eq:
+//                    eqXmVO.getEqList()) {
+//                EqYzTab eqYzTab = new EqYzTab();
+//                eqYzTab.setYzXmBm(xmVO.getSfXmBm());
+//                eqYzTab.setEqId(eq.getEqId());
+//                eqYzTabList.add(eqYzTab);
+//            }
+//        }
+//        eqYzTabService.delete(eqYzTabList);
+//        return Result.success();
+//    }
+
+
+    /**
+     * 查询已匹配信息
+     * @return
+     */
+    @RequestMapping("/showMsg")
+    public Result show(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                       @RequestParam(required = false,defaultValue = "1") Integer pageNum, EqXm eqXm){
+        return Result.success(eqYzTabService.show(pageNum,pageSize,eqXm));
+    }
+
+
+    /**
+     * 修改匹配信息
+     * @param eqXm
+     * @return
+     */
+    @RequestMapping("/update")
+    public Result update(EqXm eqXm){
+        eqYzTabService.update(eqXm);
+        return Result.success();
+    }
+
 }

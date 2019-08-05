@@ -33,6 +33,17 @@ public class DeparHisSssController {
         return Result.success();
     }
 
+    /**
+     * 取消关联
+     * @param hisDeptid
+     * @return
+     */
+    @RequestMapping("/delete")
+    public Result delete(String hisDeptid){
+        //删除已经存在的关联
+        sssService.delete(hisDeptid);
+        return Result.success();
+    }
 
 
 }

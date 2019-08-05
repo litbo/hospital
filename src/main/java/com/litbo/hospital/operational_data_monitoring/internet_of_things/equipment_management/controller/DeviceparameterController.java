@@ -6,11 +6,12 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipme
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+
+import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -68,10 +69,10 @@ public class DeviceparameterController {
      */
     @RequestMapping("/showOne")
     public Result showOne(EqMacVO eqMacVO){
-        System.out.println(eqMacVO);
         DeviceparameterVO deviceparameterVO = service.showOne(eqMacVO);
         return Result.success(deviceparameterVO);
     }
+
 
     /**
      * 根据联网仪编号删除一条记录
@@ -83,7 +84,6 @@ public class DeviceparameterController {
      */
     @RequestMapping("/delete")
     public Result deleteOne(SearchVO searchVO){
-        System.out.println(searchVO);
         try{
             service.deleteByMacId(searchVO);
             return Result.success();
@@ -91,4 +91,27 @@ public class DeviceparameterController {
             return Result.error();
         }
     }
+
+    /**
+     *  和单个删除一样,只不过是批量删除
+     * @param searchVOList
+     * @return
+     */
+    @RequestMapping("/deletes")
+    public Result deleteOne(List<SearchVO> searchVOList){
+        try{
+            service.deletes(searchVOList);
+            return Result.success();
+        }catch (Exception e){
+            return Result.error();
+        }
+    }
+
+
+    @RequestMapping("/save")
+    public Result save(){
+
+        return Result.success();
+    }
+
 }

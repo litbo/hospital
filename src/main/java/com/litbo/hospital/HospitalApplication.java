@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.spring.web.json.Json;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -20,6 +21,7 @@ import java.util.Date;
 @SpringBootApplication
 @EnableSwagger2
 @EnableScheduling
+@EnableTransactionManagement(proxyTargetClass = true)
 public class HospitalApplication {
 
     public static void main(String[] args) {

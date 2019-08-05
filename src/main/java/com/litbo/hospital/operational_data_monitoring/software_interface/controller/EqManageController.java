@@ -1,11 +1,11 @@
-package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.controller;
+package com.litbo.hospital.operational_data_monitoring.software_interface.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.EqInfoService;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+import com.litbo.hospital.operational_data_monitoring.software_interface.bean.EqInfo;
+import com.litbo.hospital.operational_data_monitoring.software_interface.service.EqInfoService;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.SearchEqVO;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.service.EqService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EqManageController {
 
     @Autowired
-    private EqInfoService eqInfoService;
+    private EqService eqService;
 
     /**
      * 显示设备信息
@@ -31,7 +31,7 @@ public class EqManageController {
     @RequestMapping("/show")
     public Result show(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                        @RequestParam(required = false,defaultValue = "1") Integer pageNum,
-                       SearchVO searchVO){
+                       SearchEqVO searchVO){
         if (searchVO!=null){
             if (searchVO.getBmId() != null){
                 if (searchVO.getBmId().equals("")){
@@ -49,7 +49,7 @@ public class EqManageController {
                 }
             }
         }
-        return Result.success(eqInfoService.selectAllBy(pageNum, pageSize, searchVO));
+        return Result.success(eqService.selectAllBy(pageNum, pageSize,searchVO ));
     }
 
 }
