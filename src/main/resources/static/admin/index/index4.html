@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/admin/layui/css/layui.css">
+
+    <script src="../../static/admin/js/basic.js"></script>
+    <script src="../../static/admin/layui/layui.js"></script>
+    <script src="../../static/admin/js/renderMod.js"></script>
+
+</head>
+<body>
+
+
+<div class="layui-form-item" pane="" style="margin-bottom:-10px;">
+    <label class="layui-form-label col-xs-12">成本明细项</label>
+    <div class="layui-input-block">
+        <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew"><i class="fas fa-plus"></i>&nbsp;添加</button>
+        <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+    </div>
+</div>
+<table id="table" lay-filter="table1"></table>
+
+
+
+<script>
+    renderMod = {
+        addTable :{
+            table:{
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    ,{field: 'kmName', title: '科目',minWidth: 150}
+                    ,{field: 'kmValue', title: '金额', minWidth: 150}
+                ]]
+                , toolbar:false
+                , page:false
+                , height: "200"
+                , data: []
+                , text:{
+                    none:"请点击上方按钮添加数据！"
+                }
+            }
+        },
+        bind:{
+
+        }
+    }
+</script>
+
+
+</body>
+</html>

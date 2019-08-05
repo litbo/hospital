@@ -60,17 +60,37 @@ public interface DeviceparameterDAO {
     DeviceparameterVO selectOne(EqMacVO eqMacVO);
 
     /**
-     * 删除设备联网表信息
+     * 3.删除设备联网表信息
      * @param macId
      */
     @Delete("DELETE FROM eq_mac_tab where MacID = #{macId}")
     void delete(@Param("macId") String macId);
 
     /**
-     * 更新设备参数设置表，设置设备编号为null
+     * 4.更新设备参数设置表，设置设备编号为null
      */
     @Update("UPDATE DeviceParameter SET DeviceCode = NULL WHERE DeviceCode = #{DeviceCode}")
     void update(@Param("DeviceCode") String DeviceCode);
+
+    /**
+     * 5.批量删除设备联网表信息
+     * @param macIds
+     */
+    @Delete({ "<script>",
+            "DELETE FROM eq_mac_tab where MacID in",
+            "<foreach item='id' collection='list' open='(' separator=',' close=')'> #{id} </foreach>"
+            ,"</script>"})
+    void deletes(String[] macIds);
+
+    /**
+     * 批量更新设备参数设置表，设置设备编号为null
+     * @param DeviceCodes
+     */
+    @Update({ "<script>",
+            "UPDATE DeviceParameter SET DeviceCode = NULL WHERE DeviceCode in",
+            "<foreach item='id' collection='list' open='(' separator=',' close=')'> #{id} </foreach>"
+            ,"</script>"})
+    void updates(String[] DeviceCodes);
 
     /**
      * 设置设备参数表的设备编号

@@ -24,20 +24,22 @@
            style="margin-left: -250px;margin-top: -2px;">初始化手术科室
         </a>
         <form>
-        <!--手术科室-->
-        <div class="layui-input-inline" style="width: 150px;">
-            <input type="text" name="name" autocomplete="off" placeholder="请输入手术科室" class="layui-input">
-        </div>
+            <!--手术科室-->
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="text" name="name" autocomplete="off" placeholder="请输入手术科室" class="layui-input">
+            </div>
 
-        <div class="layui-input-inline" style="width: 80px;">
-            <button class="layui-btn"  data-type="reload">查找</button>
-        </div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <button class="layui-btn"  data-type="reload">查找</button>
+            </div>
         </form>
     </div>
 </script>
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">编辑</a>
+    <button data-method="notice" class="layui-btn layui-btn-sm layui-btn-danger guanlian"
+            lay-event="guanlian">取消关联</button>
 </script>
 
 
@@ -76,18 +78,47 @@
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
                                 type:2,
                                 event: "pipei",
+                                title:"选择对应部门",
                                 content:"in4-edit.html",
-                                area: ['500px', '400px'],
+                                area: ['600px', '450px'],
                                 dataUrl:["deptNo"],
                                 func:function(obj){
                                     console.log(obj);
+                                }
+                            },
+                            {//打开一个新窗口，并将当前行数据中的id传递给下一页面
+                                type:2,
+                                event: "guanlian",
+                                layOpen:false,
+                                dataUrl:["deptNo"],
+                                func:function(obj){
+                                    layer.confirm('确定取消关联？', function(index) {
+                                        subUp({
+                                            url: "/depar/delete",
+                                            type: "POST",
+                                            data: {"hisDeptid": obj.data.deptNo},
+                                            success: function (res) {
+                                                if (res.code === 0) {
+                                                    // obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                                    putMsg({
+                                                        msg: "您已成功取消关联一条数据！"
+                                                    });window.location.reload();
+                                                } else {
+                                                    putMsg({
+                                                        msg: "取消关联，请重试！"
+                                                    });
+                                                }
+                                                layer.close(index);
+                                            }
+                                        });
+                                    });
                                 }
                             }
                         ]
                     })
                 }
 
-        },
+            },
 
             reSet: {
                 url: "/surgery/showSurgery",
@@ -103,16 +134,16 @@
             layer.confirm('初始化信息后，关联需重新绑定，请确认', {
                 btn: ['确定','取消'] //按钮
             }, function(){
-                 $.ajax({
+                $.ajax({
                     type: "POST",
                     dataType: 'json',
                     url: '/surgery/importData',
-                     success: function(data) {
-                         if (data.code == '0') {
-                             layer.msg('初始化成功', {icon: 1});
-                             location.reload();
-                         }
-                     },
+                    success: function(data) {
+                        if (data.code == '0') {
+                            layer.msg('初始化成功', {icon: 1});
+                            location.reload();
+                        }
+                    },
                     error:function(){
                         alert("初始化失败");
                     }
@@ -125,23 +156,23 @@
             });
         }
     };
-    layui.use('table', function() {
-        var table = layui.table;
-        table.on('tool(test)', function(obj){
-            var data = obj.data;
-            //console.log(obj)
-            if(obj.event === 'pipei'){
-                // console.log(data[0]);
-                layer.open({
-                    type: 2,
-                    title: '编辑',
-                    shadeClose: true,
-                    area: ['500px', '400px'],
-                    content: 'in4-edit.html' //iframe的url
-                });
-            }
-        });
-    })
+    // layui.use('table', function() {
+    //     var table = layui.table;
+    //     table.on('tool(test)', function(obj){
+    //         var data = obj.data;
+    //         //console.log(obj)
+    //         if(obj.event === 'pipei'){
+    //             // console.log(data[0]);
+    //             layer.open({
+    //                 type: 2,
+    //                 title: '选择对应科室',
+    //                 shadeClose: true,
+    //                 area: ['600px', '450px'],
+    //                 content: 'in4-edit.html' //iframe的url
+    //             });
+    //         }
+    //     });
+    // })
 
 </script>
 </body>

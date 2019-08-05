@@ -23,6 +23,14 @@ public interface EqPacsDAO {
      */
     @Delete("delete from eq_pacs")
     void delete();
+
+    /**
+     * 删除已经存在的关联
+     */
+    @Delete("delete from eq_pacs where pacs_id = #{pacsId}")
+    void deleteOne(String pacsId);
+    @Delete("delete from eq_pacs where eq_id = #{eqId}")
+    void deleteOne2(String eqId);
     /**
      * 保存pacs设备和设备的对应关系
      * @param eqPacs
@@ -47,4 +55,12 @@ public interface EqPacsDAO {
             "</where>"
     ,"</script>"})
     List<EqPacsVO> selectAll(@Param("pacsId") String pacsId);
+
+    /**
+     * 查看设备是否已经存在关联
+     * @param eqid
+     * @return
+     */
+    @Select("select count(*) from eq_pacs where eq_id = #{eqid}")
+    int selectOne(@Param("eqid") String eqid);
 }

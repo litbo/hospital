@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -164,8 +163,8 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">注&nbsp;册&nbsp;编&nbsp;号:</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="speqZczbh" lay-verify="required" placeholder="请输入"
-                                       autocomplete="off" class="layui-input speqZczbh"  disabled>
+                                <input type="text" name="speqZczbh" lay-verify="required"
+                                       autocomplete="off" class="layui-input speqZczbh"   placeholder="无" disabled>
                             </div>
                         </div>
 
@@ -173,7 +172,7 @@
                             <div class="layui-inline" >
                                 <label class="layui-form-label" >使&nbsp;用&nbsp;编&nbsp;号:</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="speqSyzbh"  autocomplete="off" class="layui-input speqSyzbh"   disabled>
+                                    <input type="text" name="speqSyzbh"  placeholder="无"  autocomplete="off" class="layui-input speqSyzbh"   disabled>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +181,7 @@
                             <div class="layui-inline" >
                                 <label class="layui-form-label" >精&nbsp;度&nbsp;等&nbsp;级:</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="aqfjJddj"  placeholder="请输入" autocomplete="off" class="layui-input aqfjJddj"   disabled>
+                                    <input type="text" name="aqfjJddj"  placeholder="无" autocomplete="off" class="layui-input aqfjJddj"   disabled>
                                 </div>
                             </div>
                         </div>
@@ -255,10 +254,11 @@
             data : {"speqId": speqId},
             success : function(springBootOtl){
                 var  data = springBootOtl;
-                 if(data !== null){
+                console.log(123);
+                if(data !== null){
                      $(".speqBh").val(data.data.speqBh);
                      $(".speqName").val(data.data.speqName);
-                     $(".speqType").val(data.data.speqType === 1 ? "安全附件" : "特种设备" );
+                     $(".speqType").val(data.data.speqType === 1 ? "特种设备" : "安全附件" );
                      $(".speqGgxh").val(data.data.speqGgxh);
                      $(".speqScs").val(data.data.speqScs);
                      $(".speqCcbh").val(data.data.speqCcbh);
@@ -273,6 +273,7 @@
                      $(".aqfjJddj").val(data.data.aqfjJddj);
                      $(".speqRun").val(data.data.speqRun === 1 ? "使用中" : "停用");
                      // 记得重新渲染表单/*form.render();*/
+
                  }else{
                      alert("查询为空");
                  }
@@ -287,7 +288,6 @@
         });
     })
 </script>
-
 <script>
    layui.use('table', function() {
         var table = layui.table;
@@ -310,24 +310,26 @@
 
         table.render({
             elem: '#test' //绑定元素
-            ,url:'/specialEq/selectSpecialEqById'//上传接口
+            ,url:'/specialEq/selectSpeqRecordBySpeqBh'//上传接口
            ,type : 'POST'
             , toolbar:false
             ,method: "POST"
             ,height:300
             , cols: [[
-                {field: 'speqBh', width: 100, title: '设备编号'}
-                , {field: 'speqJczbh', width: 200, title: '检测证编号'}
+                {type:'numbers'}
+                ,{field: 'speqBh', width: 120, title: '设备编号'}
+                , {field: 'speqJczbh', width: 150, title: '检测证编号'}
                 , {field: 'speqJcsj', width: 150, title: '检测日期', sort: true}
-                , {field: 'speqSjsqr', title: '送检申请人', minWidth: 100}
+                , {field: 'speqSjsqr', title: '送检申请人', width: 110}
                 , {field: 'speqSjsqsj', width: 150, title: '送检申请时间', sort: true}
-                , {field: 'speqSjspr', width: 100, title: '送检审批人'}
+                , {field: 'speqSjspr', width: 110, title: '送检审批人'}
                 , {field: 'speqSjspsj', width: 150, title: '送检审批时间', sort: true}
-                , {field: 'speqRun', width: 100, title: '送检结果', templet: '#statusTpl'}
+                , {field: 'speqRun', width: 115, title: '送检结果', templet: '#statusTpl'}
             ]]
             ,where:{
-                speqId : $.getUrlParam("Id")
+                speqBh : $.getUrlParam("bh")
             }
+            , page: true//开启分页
             , request: {
                 pageName: 'pageNum',
                 limitName: 'pageSize'
@@ -364,6 +366,7 @@
     })
 
 </script>
+
 <script type="text/html" id="statusTpl">
     {{#  if(d.speqRun === 0){ }}
     <span style="color: red" target="_blank">{{ "停用" }}</span>

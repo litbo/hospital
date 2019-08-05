@@ -35,4 +35,12 @@ public class DeviceparameterVO {
     private String pmacid;
     /**仪联网id*/
     private String MacID;
+    /**资产编号*/
+    private String eqZcbh;
+    /**仪联网表id*/
+    private String id;
+    /**部门id*/
+    private String eqBmid;
+    /**部门名称*/
+    private String bmName;
 }

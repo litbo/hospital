@@ -7,6 +7,8 @@ import com.litbo.hospital.operational_data_monitoring.software_interface.vo.Devi
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @BelongsProject: hospital
  * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service
@@ -36,8 +38,11 @@ public interface DeviceparameterService {
      */
     void deleteByMacId(SearchVO searchVO);
 
-
-
+    /**
+     * 批量删除
+     * @param searchVOList
+     */
+    void deletes(List<SearchVO> searchVOList);
 
 
 

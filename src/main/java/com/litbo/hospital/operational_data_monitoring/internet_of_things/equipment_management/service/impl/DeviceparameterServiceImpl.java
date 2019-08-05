@@ -10,6 +10,11 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipme
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @BelongsProject: hospital
  * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.impl
@@ -39,6 +44,26 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
     public void deleteByMacId(SearchVO searchVO) {
         dao.delete(searchVO.getMacid());
         dao.update(searchVO.getEqZcbh());
+    }
+
+    @Override
+    public void deletes(List<SearchVO> searchVOList){
+//        ArrayList<String> macId = new ArrayList<>();
+//        searchVOList.forEach(item->{
+//                if (item.getMacid()!=null){
+//                    macId.add(item.getMacid());
+//                }
+//            });
+          String[] macId = (String[]) searchVOList.stream().map(e -> e.getMacid()).toArray();
+          for (String macid :
+                      macId) {
+             System.out.println(macid);
+          }
+          String[] zcbh = (String[]) searchVOList.stream().map(e -> e.getEqZcbh()).toArray();
+          System.out.println(zcbh);
+          dao.deletes(macId);
+//        dao.deletes(searchVO.getMacid());
+//        dao.updates(searchVO.getEqZcbh());
     }
 
     @Override

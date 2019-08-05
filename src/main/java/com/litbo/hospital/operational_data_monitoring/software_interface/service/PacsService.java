@@ -34,4 +34,21 @@ public interface PacsService {
 
     PageInfo showEqPacs(Integer pageNum, Integer pageSize, String pacsId);
 
+    /**
+     * 查看设备是否已经关联
+     * @param eqid
+     * @return
+     */
+    int isHas(String eqid);
+
+    /**
+     * 删除已存在的关联
+     */
+    void deleteOne(String pacsId);
+
+    /**
+     * 删除已存在的关联
+     */
+    void deleteOne2(String eqId);
+
 }

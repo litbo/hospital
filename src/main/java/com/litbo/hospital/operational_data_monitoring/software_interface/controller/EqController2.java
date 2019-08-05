@@ -47,7 +47,22 @@ public class EqController2 {
      */
     @RequestMapping("/save")
     public Result save(EqPacs eqPacs){
+        //删除已经存在的关联
+        pacsService.deleteOne2(eqPacs.getEqId());
         pacsService.save(eqPacs);
         return Result.success();
     }
+
+    /**
+     * 取消关联
+     * @param pacsId
+     * @return
+     */
+    @RequestMapping("/delete")
+    public Result delete(String pacsId){
+        //删除已经存在的关联
+        pacsService.deleteOne(pacsId);
+        return Result.success();
+    }
+
 }

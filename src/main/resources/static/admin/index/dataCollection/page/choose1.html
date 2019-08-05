@@ -53,7 +53,7 @@
 
         //头工具栏事件
         table.on('toolbar(table1)', function(obj){
-             var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+			var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
             var data = checkStatus.data;
 
             var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
@@ -77,8 +77,8 @@
 						window.parent.location.reload();
 					}
 				},
-				error:function(){
-					alert("error");
+				error:function(data){
+					alert(data.message)
 				}
 			});
 

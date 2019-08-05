@@ -183,7 +183,10 @@
                     form:{//或者写作up
                         url:"/scheduleRefresh/updateCron",
                         type:"POST",
-                        data:["hours","minutes"]
+                        data:["hours","minutes"],
+                        success:function(){
+                            location.reload();
+                        }
                     }
                 }
             }
