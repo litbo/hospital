@@ -55,24 +55,4 @@ public class HisSfmxController {
         }
     }
 
-//    @RequestMapping("/showHISBy")
-//    public Result showHIS(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
-//                          @RequestParam(required = false,defaultValue = "1") Integer pageNum,
-//                          @RequestBody SearchVO searchVO){
-//
-//        if (!searchVO.getBeginTime().equals("") && searchVO != null){
-//            PageInfo pageInfo = sflbService.showHisSflbByTime(pageNum, pageSize, searchVO);
-//            return Result.success(pageInfo);
-//        }else {
-//            //获取当前时间前一天,并转换为字符串
-//            Calendar cal = Calendar.getInstance();
-//            cal.add(Calendar.DATE, -1);
-//            String yesterday = new SimpleDateFormat( "yyyy-MM-dd").format(cal.getTime());
-//            //封装日期
-//            SearchVO searchVO2 = new SearchVO();
-//            searchVO.setBeginTime(yesterday);
-//            PageInfo pageInfo = sflbService.showHisSflbByTime(pageNum, pageSize, searchVO);
-//            return Result.success(pageInfo);
-//        }
-//    }
 }

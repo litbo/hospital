@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="full-screen" content="true">
+    <title>数据大屏</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/dataScreen.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../layui/echarts.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../js/dataScreen.js"></script>
+</head>
+<body>
+<!--<button class="layui-btn layui-btn-sm full" style="background-color: #91c7ae;border: 1px solid #404d80;" onclick="fullScreen()">请全屏显示</button>-->
+
+
+<!--背景-->
+<div class="mask_bg"></div>
+<div class="mask"></div>
+
+<div class="">
+    <div class="layui-row row1">
+        
+        <div class="layui-col-md4 data-screen1" >
+            <!--设备运作状态图-->
+            <div id="data-screen1"></div>
+        </div>
+
+        <div class="layui-col-md4 data-screen2">
+            <!--设备收益指标-->
+            <div id="data-screen2"></div>
+            <div class="profit">
+                <table class="layui-hide" id="table1" lay-filter="test"></table>
+            </div>
+        </div>
+        
+        <div class="layui-col-md4 data-screen3">
+            <!--全院设备分布图-->
+            <div id="data-screen3"></div>
+        </div>
+    </div>
+    <div class="layui-row row2">
+        <div class="layui-col-md4 data-screen4" >
+            <table class="layui-table" lay-even="" lay-skin="nob" lay-size="sm">
+                <tbody>
+                <tr>
+                    <th>设备名称 :</th>
+                    <td id="deviceName"></td>
+                    <th>责任人 :</th>
+                    <td id="dutyOfficer"></td>
+                </tr>
+                <tr>
+                    <th>当前工作量(人) :</th>
+                    <td id="current"></td>
+                    <th>剩余工作量(人) :</th>
+                    <td id="surplus"></td>
+                </tr>
+                <tr>
+                    <th>当前电压 :</th>
+                    <td id="currVoltage"></td>
+                    <th>当前电流(kv) :</th>
+                    <td id="currElectricity"></td>
+                </tr>
+
+                <tr>
+                    <th colspan="2">球管保用(万秒次保用) :</th>
+                    <td colspan="2" id="bulb"></td>
+                </tr>
+
+                <tr>
+                    <th>用电量 :</th>
+                    <td id="eleConsumption"></td>
+                    <th>漏电电流 :</th>
+                    <td id="leakageCurrent"></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--当前工作状态-->
+            <div id="data-screen4"></div>
+        </div>
+
+        <div class="layui-col-md4 data-screen5">
+            <!--设备运作状态图-->
+            <div id="data-screen5"></div>
+        </div>
+
+        <div class="layui-col-md4 data-screen6">
+            <!--设备收益指标-->
+            <div id="data-screen6"></div>
+            <div class="profit">
+                <table class="layui-hide" id="table2" lay-filter="test" style="opacity: 0.2 !important;"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // $(".full").click(function () {
+    //     $(document.body).css("padding-top","37px");
+    // });
+    //
+    // $(document).keydown(function (event) {
+    //     if (event.keyCode == 122) {
+    //         $(document.body).css("padding-top","37px");
+    //         if (event.keyCode == 115) {
+    //             $(document.body).css("padding-top","37px");
+    //         }
+    //     }
+    // });
+
+</script>
+</body>
+</html>

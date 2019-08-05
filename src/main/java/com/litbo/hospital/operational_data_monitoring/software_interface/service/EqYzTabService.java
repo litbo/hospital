@@ -1,6 +1,8 @@
 package com.litbo.hospital.operational_data_monitoring.software_interface.service;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.EqYzTab;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqXm;
 
 import java.util.List;
 
@@ -17,4 +19,27 @@ public interface EqYzTabService {
      * @param eqYzTabList
      */
     void save(List<EqYzTab> eqYzTabList);
+
+    /**
+     * 删除医嘱与设备关联信息
+     */
+    void delete();
+
+    /**
+     * 删除医嘱与设备关联信息
+     */
+    void delete(List<EqYzTab> eqYzTabList);
+
+    PageInfo show(Integer pageNum, Integer pageSize, EqXm eqXm);
+
+    void update(EqXm eqXm);
+
+    /**
+     * 2.根据id删除关联信息
+     * @param id
+     */
+    void deleteOne(String id);
+
+    void deletes(String[] ids);
+
 }

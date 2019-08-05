@@ -39,8 +39,6 @@ public class HisSflbServiceImpl implements HisSflbService {
             Integer pageSize,
             SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
-        System.out.println("service"+searchVO);
-        System.out.println("service查到"+dao.selectByTime(searchVO).size());
         return new PageInfo(dao.selectByTime(searchVO));
     }
 }

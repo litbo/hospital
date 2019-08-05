@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div id="data-screen2" style="width: 400px;height:400px;display: inline-block;float: left;"></div>
+
+<script src="../layui/echarts.js"></script>
+<script>
+
+    function loadOneColumn() {
+        var myChart = echarts.init(document.getElementById('data-screen2'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                x: 'left',
+                text: '设备运作状态图',
+                textStyle:{
+                    color:'#eee'
+                }
+            },
+            grid: {
+                top:20
+            },
+            legend: {
+                orient : 'vertical',
+                x : 'right',
+                textStyle:{
+                    color:'#ccc'
+                },
+                data:[]
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            series: [{
+                name:'设备运作状态图',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                color: function(params) {
+                    // build a color map as your need.
+                    var colorList = [
+                        '#f19b78','#ff70ae','#fdc323','#2b92fb','#91c7ae',
+                        '#bda29a','#546570'
+                    ];
+                    return colorList[params.dataIndex]
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'bottom',
+                        formatter: '{b}\n{c}' + "台",
+                        fontsize:'22',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: true
+                    }
+                },
+                data: []
+            }]
+        });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var names = [];    //类别数组（用于存放饼图的类别）
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: '../json/dataScreen1.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.data, function (index, item) {
+                    names.push(item.status);    //挨个取出类别并填入类别数组 
+                    brower.push({
+                        name: item.status,
+                        value: item.num
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表      
+                    legend: {
+                        data: names
+                    },
+                    series: [{
+                        data: brower
+                    }]
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadOneColumn();
+</script>
+</body>
+</html>

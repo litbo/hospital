@@ -2,6 +2,7 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.dao;
 
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.DeparHisSss;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DepartmentVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -21,11 +22,6 @@ public interface DeparHisSssDAO {
      * 保存两个系统科室关联记录
      * @param deparHisSss
      */
-//    @SelectKey(keyColumn = "deptId",keyProperty = "id", statement = , before = , resultType = )
-//    @Insert("insert into depar_his_sss (deptId, his_deptId, \n" +
-//            "      sss_deptId)\n" +
-//            "    values (#{deptid,jdbcType=VARCHAR}, #{hisDeptid,jdbcType=VARCHAR}, \n" +
-//            "      #{sssDeptid,jdbcType=VARCHAR})")
     @Insert(
             {"<script>",
             "insert into depar_his_sss\n"+
@@ -99,4 +95,49 @@ public interface DeparHisSssDAO {
             "</script>"})
     List<DepartmentVO> selectByName(@Param("name") String name);
 
+    /**
+     * 删除两个系统部门关联信息
+     */
+    @Delete("delete from depar_his_sss")
+    void delete();
+
+    /**
+     * 获取手术科室信息
+     */
+    @Select("SELECT\n" +
+            "DeptNo,\n" +
+            "DeptName,\n" +
+            "bm_name\n" +
+            "FROM\n" +
+            "his_Dept_DICT \n" +
+            "LEFT JOIN depar_his_sss ON his_Dept_DICT.DeptNo = depar_his_sss.his_deptId\n" +
+            "LEFT JOIN s_bm ON depar_his_sss.deptId = s_bm.bm_id order by DeptNo")
+    List<DepartmentVO> selectAll();
+
+    /**
+     * 根据手术室名称查询部门信息
+     * @param name
+     * @return
+     */
+    @Select({"<script>",
+            "SELECT\n" +
+            "DeptNo,\n" +
+            "DeptName,\n" +
+            "bm_name\n" +
+            "FROM\n" +
+            "his_Dept_DICT \n" +
+            "LEFT JOIN depar_his_sss ON his_Dept_DICT.DeptNo = depar_his_sss.his_deptId\n" +
+            "LEFT JOIN s_bm ON depar_his_sss.deptId = s_bm.bm_id",
+            "<where>",
+            "<if test='name != null'> AND  his_Dept_DICT.DeptName like '%${name}%' </if>\n" +
+            "</where>",
+            "</script>"
+    })
+    List<DepartmentVO> selectAllByName(@Param("name") String name);
+
+    /**
+     * 删除已经存在的关联
+     */
+    @Delete("delete from depar_his_sss where his_deptId = #{id}")
+    void deleteBy(String id);
 }

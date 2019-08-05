@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * his人员项目字典
+ */
 @Data
 public class HisUserDict {
     private String userNO;

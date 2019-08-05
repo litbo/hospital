@@ -1,0 +1,40 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "department": "科室",
+      "id": "001",
+      "assetsId": "001",
+      "name": "CT",
+      "statusIdentification": "001",
+      "statusName": "时长",
+      "packingTime": "2019-7-18",
+      "startTime": "2019-7-18",
+      "endTime": "2019-7-18"
+    },
+    {
+      "department": "科室",
+      "id": "002",
+      "assetsId": "002",
+      "name": "DT",
+      "statusIdentification": "002",
+      "statusName": "时长",
+      "packingTime": "2019-7-18",
+      "startTime": "2019-7-18",
+      "endTime": "2019-7-18"
+    },
+    {
+      "department": "科室",
+      "id": "003",
+      "assetsId": "003",
+      "name": "ET",
+      "statusIdentification": "003",
+      "statusName": "时长",
+      "packingTime": "2019-7-18",
+      "startTime": "2019-7-18",
+      "endTime": "2019-7-18"
+    }
+  ]
+}

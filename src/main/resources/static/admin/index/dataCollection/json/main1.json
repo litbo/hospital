@@ -1,0 +1,15 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 1,
+  "data": [
+    {
+      "department": "ct",
+      "id": "001",
+      "name": "设备",
+      "model": "型号",
+      "standbyTime": 5,
+      "workingHours": 8
+    }
+  ]
+}

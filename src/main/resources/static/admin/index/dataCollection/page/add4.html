@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>数据收集</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="">
+
+    <p class="divideP">额定值设定</p>
+
+    <!--第一行-->
+    <div class="layui-form-item">
+        <div class="layui-inline spanDiv" style="width: 330px;">
+            <label class="layui-form-label" style="width: 100px;">设备 <i class="iconfont required">&#xe7f9;</i></label>
+            <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+                <p class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm" data-method="notice" style="margin-top: 5px;">选择</p>
+            </div>
+            <input class="equipmentSpan"  lay-verify="required" disabled>
+        </div>
+        <div class="layui-inline" style="width: 380px;">
+            <label class="layui-form-label" style="width: 120px;">每月工作天数 <i class="iconfont required">&#xe7f9;</i></label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+                <input type="text" name="workday" lay-verify="required" autocomplete="off" placeholder="" class="layui-input" value="21">
+            </div>
+        </div>
+    </div>
+
+    <!--第二行-->
+    <div class="layui-form-item">
+        <div class="layui-inline" style="width: 330px;">
+            <label class="layui-form-label" style="width: 100px;">额定值类型</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 100px;">
+                <select name="Thursday" class="hour_select" lay-filter="hour_select">
+                    <option value="1">时长</option>
+                    <option value="2">次数</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <p class="divideP">核定工<span class="shi">时</span><span class="ci">次</span></p>
+
+    <!--第三行-->
+    <div class="layui-form-item">
+        <div class="layui-inline" style="width: 330px;">
+            <label class="layui-form-label" style="width: 100px;">上午班<span class="shi">(时)</span><span class="ci">(次)</span></label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                <input type="text" name="morning" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="2">
+            </div>
+        </div>
+        <div class="layui-inline" style="width: 380px;">
+            <label class="layui-form-label" style="width: 120px;">晚班<span class="shi">(时)</span><span class="ci">(次)</span></label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+                <input type="text" name="workday" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="2">
+            </div>
+        </div>
+    </div>
+
+    <!--第四行-->
+    <div class="layui-form-item">
+        <div class="layui-inline" style="width: 330px;">
+            <label class="layui-form-label" style="width: 100px;">下午班<span class="shi">(时)</span><span class="ci">(次)</span></label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                <input type="text" name="afternoon" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="2">
+            </div>
+        </div>
+        <div class="layui-inline" style="width: 380px;">
+            <label class="layui-form-label" style="width: 120px;">满负荷工<span class="shi">时</span><span class="ci">次</span></label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+                <input type="text" name="workday" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="0">
+            </div>
+        </div>
+    </div>
+
+
+    <!--按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+            <button type="button" class="layui-btn layui-btn-primary" onclick="javascript:history.back(-1);">取消</button>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" href="main1.html">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+
+    // 表单
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#indexDateSelect'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+        // 下拉框
+        form.on('select(hour_select)', function(data){
+            if(data.value == 1){
+                $(".ci").css("display","none");
+                $(".shi").css("display","inline-block");
+                form.render('select');
+            }else{
+                $(".shi").css("display","none");
+                $(".ci").css("display","inline-block");
+                form.render('select');
+            }
+        });
+    });
+
+    //弹出层
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+
+        //触发事件
+        var active = {
+            notice: function(){
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['1000px', '90%'],
+                    content: 'choose2.html' //iframe的url
+                });
+            }
+        };
+
+        $('#layerDemo .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
+</script>
+</body>
+</html>

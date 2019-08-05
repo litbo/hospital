@@ -1,0 +1,1 @@
+{  "code": 0,  "msg": "",  "count": 1,  "data": [    {      "deviceName": "西门子64排",      "dutyOfficer": "张三",      "current": "80",      "surplus": "20",      "currVoltage": "381",      "currElectricity": "10",      "bulb": "20",      "eleConsumption": "10",      "leakageCurrent": "0"    }  ]}

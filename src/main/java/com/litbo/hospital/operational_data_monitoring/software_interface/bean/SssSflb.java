@@ -5,6 +5,9 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/***
+ * 手术室收费明细
+ */
 @Data
 public class SssSflb {
     private String sssSFID;
@@ -15,7 +18,7 @@ public class SssSflb {
     private String sssBrXb;
     private String sssBrBz;
     private String sssYXmBm;
-    private BigDecimal sssXmJe;
+    private String sssXmJe;
     private Integer sssXmSl;
     private String sssMDeptId;
     private Date sssMTime;

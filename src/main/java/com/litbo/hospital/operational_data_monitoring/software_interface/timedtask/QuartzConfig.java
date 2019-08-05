@@ -2,6 +2,7 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.timedt
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Trigger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
@@ -18,6 +19,8 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @Slf4j
 @Configuration
 public class QuartzConfig {
+    @Autowired
+    private ConfigMapper configMapper;
     /**
      * 功能：配置定时任务
      * 设置要做的任务
@@ -53,7 +56,12 @@ public class QuartzConfig {
         CronTriggerFactoryBean trigger = new CronTriggerFactoryBean();
         trigger.setJobDetail(jobDetail.getObject());
         //初始化的cron表达式(每天凌晨)
-        trigger.setCronExpression("0 0 0 * * ?");
+        Config one = configMapper.findOne(1);
+        if (one!=null&&one.getCron().equals("")){
+            trigger.setCronExpression(one.getCron());
+        }else {
+            trigger.setCronExpression("0 0 2 * * ? ");
+        }
 //        trigger.setCronExpression("0/5 * * * * ?");
         //trigger的name
         trigger.setName("srd-demo");

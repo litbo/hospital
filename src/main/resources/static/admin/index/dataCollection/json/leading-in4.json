@@ -1,0 +1,12 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 1,
+  "data": [
+    {
+      "id": "001",
+      "oDepName": "CT室",
+      "mDepName": "CT"
+    }
+  ]
+}

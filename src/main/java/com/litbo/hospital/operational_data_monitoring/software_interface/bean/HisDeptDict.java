@@ -2,6 +2,10 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.bean;
 
 import lombok.Data;
 
+/**
+ * his
+ * 部门字典
+ */
 @Data
 public class HisDeptDict {
 

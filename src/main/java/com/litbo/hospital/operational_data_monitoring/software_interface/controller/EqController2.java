@@ -1,7 +1,10 @@
 package com.litbo.hospital.operational_data_monitoring.software_interface.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.software_interface.bean.EqPacs;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.EqInfoService2;
+import com.litbo.hospital.operational_data_monitoring.software_interface.service.PacsService;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqPacsVO;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,24 +24,45 @@ import org.springframework.web.bind.annotation.RestController;
 public class EqController2 {
     @Autowired
     private EqInfoService2 service;
+    @Autowired
+    private PacsService pacsService;
 
     @RequestMapping("/show")
     public Result showEq(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
-                         @RequestParam(required = false,defaultValue = "1") Integer pageNum){
-//        if (name == null || name.equals("")){
+                         @RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                         @RequestParam(required = false) String name){
+        if (name == null || name.equals("")){
             PageInfo pageInfo = service.showEqInfo(pageNum, pageSize, null);
             return Result.success(pageInfo);
-//        }else {
-//            PageInfo pageInfo = service.showEqInfo(pageNum, pageSize, name);
-//            return Result.success(pageInfo);
-//        }
+        }else {
+            PageInfo pageInfo = service.showEqInfo(pageNum, pageSize, name);
+            return Result.success(pageInfo);
+        }
     }
 
-//    @RequestMapping("/showBy")
-//    public Result showEqBy(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
-//                           @RequestParam(required = false,defaultValue = "1") Integer pageNum,
-//                           @RequestParam("name") String name){
-//        PageInfo pageInfo = service.showEqInfo(pageNum, pageSize, name);
-//        return Result.success(pageInfo);
-//    }
+    /**
+     * 保存设备与pacs关联信息
+     * @param eqPacs
+     * @return
+     */
+    @RequestMapping("/save")
+    public Result save(EqPacs eqPacs){
+        //删除已经存在的关联
+        pacsService.deleteOne2(eqPacs.getEqId());
+        pacsService.save(eqPacs);
+        return Result.success();
+    }
+
+    /**
+     * 取消关联
+     * @param pacsId
+     * @return
+     */
+    @RequestMapping("/delete")
+    public Result delete(String pacsId){
+        //删除已经存在的关联
+        pacsService.deleteOne(pacsId);
+        return Result.success();
+    }
+
 }

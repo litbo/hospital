@@ -28,7 +28,7 @@ public interface EqDutyTabService {
     /**查询所有设备值班情况*/
     PageInfo selectAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
     /**根据条件筛选设备值班信息*/
-    PageInfo showEqDutyBy(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize,SearchVO searchVO);
+    PageInfo showEqDutyBy(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, SearchVO searchVO);
     /**根据id查询*/
     EqDutyVO getById(String id);
     /**根据id修改*/

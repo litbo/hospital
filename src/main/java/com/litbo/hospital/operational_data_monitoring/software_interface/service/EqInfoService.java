@@ -1,11 +1,8 @@
-package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service;
+package com.litbo.hospital.operational_data_monitoring.software_interface.service;
 
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqInfoVO;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.SearchEqVO;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -26,5 +23,6 @@ public interface EqInfoService {
      * @param searchVO
      * @return
      */
-    PageInfo selectAllBy(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, @Param("search") SearchVO searchVO);
+    PageInfo selectAllBy(Integer pageNum, Integer pageSize,
+                         SearchEqVO searchVO);
 }

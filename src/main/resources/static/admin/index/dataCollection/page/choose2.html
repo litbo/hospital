@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>数据收集</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+</head>
+<body>
+
+<!-- 搜索区域 -->
+	<div class="index_searchChoose2">
+		<form class="layui-form" action="">
+			<div class="layui-input-inline" style="width: 80px;">
+			<select name="indexData" lay-verify="required" lay-search="">
+			<option value="" >搜索</option>
+			<option value="10" selected>10</option>
+			<option value="20">20</option>
+			<option value="30">30</option>
+			<option value="40">40</option>
+			<option value="50">50</option>
+			<option value=100">100</option>
+			</select>
+			</div>
+			<div class="layui-input-inline" style="width: 120px;">
+			<input type="text" name="indexSearch" autocomplete="off" placeholder="设备名称拼音码" class="layui-input">
+			</div>
+			<div class="layui-input-inline" style="width: 80px;">
+			<button class="layui-btn" lay-submit="">查找</button>
+			</div>
+		</form>
+	</div>
+
+	<!-- 表格 -->
+<table class="layui-hide" id="table1" lay-filter="test"></table>
+
+
+<script type="text/html" id="toolbarDemo">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData" id="transmit">确定</button>
+</script>
+
+<!--<script type="text/html" id="barDemo">-->
+	<!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+	<!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+<!--</script>-->
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+	//JavaScript代码区域
+	layui.use('element', function(){
+		var element = layui.element;
+	});
+
+	// 表单
+	layui.use(['form', 'layedit', 'laydate'], function(){
+		var form = layui.form
+				,layer = layui.layer
+				,layedit = layui.layedit
+				,laydate = layui.laydate;
+
+		//日期
+		laydate.render({
+			elem: '#indexDateSelect'
+			,type: 'datetime'
+			,value: new Date()
+		});
+	});
+
+	//表格
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#table1'
+            ,url:'../json/choose2.json'
+            ,height: 'full-30'
+            ,toolbar: '#toolbarDemo'
+            ,cellMinWidth: 70
+            ,title: '编辑'
+            ,cols: [[
+                {type: 'radio', fixed: 'left'}
+                ,{field:'id', fixed: 'left', title:'设备编号'}
+                ,{field:'name', title:'设备名称'}
+                ,{field:'model', title:'型号'}
+                ,{field:'department', title:'部门'}
+            ]]
+            ,page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+             var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+            var arr = checkStatus.data;
+            // console.log(arr[0].name);
+            // console.log(checkStatus);
+
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+
+            parent.$('.equipmentSpan').val(arr[0].name);
+            parent.layer.tips('Look here', '#parentIframe', {time: 1000});
+            parent.layer.close(index);
+
+        });
+    });
+
+
+</script>
+</body>
+</html>

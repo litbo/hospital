@@ -67,10 +67,12 @@ public class MybatisConfigOne {
     }
 
     @Bean(name = "dataSourceOneTransactionManager")
+    @Primary
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSourceOne());
     }
     @Bean(name = "SqlSessionFactory1")
+    @Primary
     public SqlSessionFactory getSqlSessionFactory1(@Qualifier("dataSourceOne") DataSource dataSource)
             throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -84,6 +86,7 @@ public class MybatisConfigOne {
     }
 
     @Bean(name = "SqlSessionTemplate1")
+    @Primary
     public SqlSessionTemplate getSqlSessionTemplate1(
             @Qualifier("SqlSessionFactory1") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);

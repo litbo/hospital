@@ -2,7 +2,9 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.dao;
 
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisDeptDict;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisSflb;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -27,4 +29,17 @@ public interface HisDeptDictDAO {
             "</foreach>",
             "</script>"})
     void saves(List<HisDeptDict> HisDeptDictList);
+
+    /**
+     * 删除所有
+     */
+    @Delete("delete from his_Dept_DICT")
+    void delete();
+
+    /**
+     * 查询所有科室
+     * @return
+     */
+    @Select("select * from his_Dept_DICT")
+    List<HisDeptDict> selectAll();
 }

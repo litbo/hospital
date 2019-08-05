@@ -1,0 +1,23 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 5,
+  "data": [
+    {
+      "name": "CT"
+    },
+    {
+      "name": "DT"
+    },
+    {
+      "name": "ET"
+    },
+    {
+      "name": "FT"
+    },
+    {
+      "name": "GT"
+    }
+
+  ]
+}

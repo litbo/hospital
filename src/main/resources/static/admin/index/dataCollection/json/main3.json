@@ -1,0 +1,25 @@
+
+
+{
+  "code": 0,
+  "msg": "",
+  "count": 2,
+  "data": [
+    {
+      "id": "001",
+      "name": "CT",
+      "specifications": "",
+      "model": "M-1",
+      "number": "111",
+      "IP": "199.100.1"
+    },
+    {
+      "id": "002",
+      "name": "核磁共振",
+      "specifications": "",
+      "model": "M-2",
+      "number": "112",
+      "IP": "199.100.2"
+    }
+  ]
+}

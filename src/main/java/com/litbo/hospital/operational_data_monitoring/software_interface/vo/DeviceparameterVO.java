@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 public class DeviceparameterVO {
-    /**设备编号*/
+    /**资产编号*/
     private String deviceCode;
     /**终端ip*/
     private String endPointIP;
@@ -19,6 +19,8 @@ public class DeviceparameterVO {
     private String eqName;
     /**设备编号*/
     private String eqSbbh;
+    /**设备id*/
+    private String equid;
     /**设备规格*/
     private String eqGg;
     /**设备型号*/
@@ -31,4 +33,6 @@ public class DeviceparameterVO {
     private String macrule;
     /**pacs终端编号*/
     private String pmacid;
+    /**仪联网id*/
+    private String MacID;
 }

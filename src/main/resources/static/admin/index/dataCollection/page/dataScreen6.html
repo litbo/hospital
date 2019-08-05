@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="data-screen6" style="width: 500px;height:400px;display: inline-block;float: left;"></div>
+
+<script src="../layui/echarts.js"></script>
+<script>
+    // 柱状图
+    var dom = document.getElementById("data-screen6");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    app.title = '设备运作时长图';
+
+    option = {
+        title : {
+            text: '设备运作时长图',
+            x:'center'
+        },
+        barWidth:5,
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            x: 'left',
+            data:['维护', '保养', '正常']
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'value',
+                boundaryGap : [0, 0.01],
+                min: 0,
+                max: 700,
+                interval: 100,
+                axisLabel: {
+                    formatter: '{value} H'
+                }
+            }
+        ],
+        yAxis : [
+            {
+                type : 'category',
+                data : ['M5', 'M4','M3','M2','M1', 'C5','C4','C3','C2','C1']
+            }
+        ],
+        series : [
+            {
+                name:'维护',
+                type:'bar',
+                data:[490, 380, 500, 150, 530, 280, 350, 380, 190, 680 ],
+                color: function(params) {
+                    // build a color map as your need.
+                    var colorList = [
+                        '#e062ae','#37a2da','#67e0e3','#ffdb5c','#ff9f7f',
+                        '#f2ff96','#39ca0c','#7de0bd','#dabbb4','#784fe3'
+                    ];
+                    return colorList[params.dataIndex]
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'right',
+                        formatter: '{c}' + "H"
+                    }
+                },
+            }
+        ]
+    };
+
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+
+    function loadOneColumn() {
+        var myChart = echarts.init(document.getElementById('firstPieChart'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            color: ['#47b73d', '#fc765b'],//饼图颜色
+            title: {
+                text: '完好情况统计   ',
+                x:'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data: []
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                width: '50%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            series: [{
+                name: '完好情况',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: []
+            }]
+        });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var names = [];    //类别数组（用于存放饼图的类别）
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: 'json/monitor-bing.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.list, function (index, item) {
+                    names.push(item.goodCondition);    //挨个取出类别并填入类别数组 
+                    brower.push({
+                        name: item.goodCondition,
+                        value: item.num
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表                
+                    legend: {
+                        data: names
+                    },
+                    series: [{
+                        data: brower
+                    }]
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadOneColumn();
+</script>
+</body>
+</html>

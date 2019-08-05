@@ -2,11 +2,18 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipm
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.DeviceparameterDAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.DeviceparameterService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -22,13 +29,45 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
 
 
     @Override
-    public PageInfo showEqNetWork(Integer pageNum, Integer pageSize) {
+    public PageInfo showEqNetWork(Integer pageNum, Integer pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(dao.selectAll());
+        return new PageInfo(dao.selectAll(searchVO));
+    }
+
+
+    @Override
+    public DeviceparameterVO showOne(EqMacVO eqMacVO) {
+        return dao.selectOne(eqMacVO);
     }
 
     @Override
-    public DeviceparameterVO showOne(String ip) {
-        return dao.selectOne(ip);
+    public void deleteByMacId(SearchVO searchVO) {
+        dao.delete(searchVO.getMacid());
+        dao.update(searchVO.getEqZcbh());
+    }
+
+    @Override
+    public void deletes(List<SearchVO> searchVOList){
+//        ArrayList<String> macId = new ArrayList<>();
+//        searchVOList.forEach(item->{
+//                if (item.getMacid()!=null){
+//                    macId.add(item.getMacid());
+//                }
+//            });
+          String[] macId = (String[]) searchVOList.stream().map(e -> e.getMacid()).toArray();
+          for (String macid :
+                      macId) {
+             System.out.println(macid);
+          }
+          String[] zcbh = (String[]) searchVOList.stream().map(e -> e.getEqZcbh()).toArray();
+          System.out.println(zcbh);
+          dao.deletes(macId);
+//        dao.deletes(searchVO.getMacid());
+//        dao.updates(searchVO.getEqZcbh());
+    }
+
+    @Override
+    public void save(DeviceparameterVO deviceparameterVO) {
+        dao.save(deviceparameterVO);
     }
 }

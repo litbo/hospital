@@ -20,7 +20,7 @@ public class SssSflbVO {
     /**病人类型*/
     private String sBrBz;
     /**收费金额*/
-    private BigDecimal sXmJe;
+    private String sXmJe;
     /**状态*/
     private String status;
     /**项目名称*/

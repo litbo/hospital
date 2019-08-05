@@ -1,7 +1,9 @@
 package com.litbo.hospital.operational_data_monitoring.software_interface.dao;
 
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.PacsTab;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -28,4 +30,17 @@ public interface PacsTabDAO {
             "</script>"
     })
     void saves(List<PacsTab> pacsTabList);
+
+    /**
+     * 显示pacs 设备信息
+     * @return
+     */
+    @Select("select * from pacs_tab")
+    List<PacsTab> selectAll();
+
+    /**
+     * 删除pacs设备信息
+     */
+    @Delete("delete from pacs_tab")
+    void delete();
 }

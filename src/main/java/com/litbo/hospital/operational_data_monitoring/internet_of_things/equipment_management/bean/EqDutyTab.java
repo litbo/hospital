@@ -13,7 +13,7 @@ public class EqDutyTab {
     private String eqMacId;
 
 //    /**值班类型：默认行政班*/
-    private String dtype ;
+    private String dtype = "1";
 
     /**默认不值班*/
     private String w1 = "2";

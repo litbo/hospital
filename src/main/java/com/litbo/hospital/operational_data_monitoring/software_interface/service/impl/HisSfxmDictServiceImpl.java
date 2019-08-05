@@ -2,12 +2,15 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.servic
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisSfxmDict;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.HisSfxmDictDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.HisSflbService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.HisSfxmDictService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -31,5 +34,15 @@ public class HisSfxmDictServiceImpl implements HisSfxmDictService {
     public PageInfo showXmByName(String name,Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(dao.selectAllByName(name));
+    }
+
+    @Override
+    public void delete() {
+        dao.delete();
+    }
+
+    @Override
+    public void saves(List<HisSfxmDict> hisSfxmDictList) {
+        dao.saves(hisSfxmDictList);
     }
 }

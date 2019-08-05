@@ -54,12 +54,12 @@
       {
         "title": "联网设备",
         "icon": "globe-asia",
-        "shiro": "a",
+        "shiro": "CGGL",
         "children": [
           {
             "title": "运行记录",
             "url": "data&t=0&n=0",
-            "shiro": "a",
+            "shiro": "SGGL",
             "id": "200",
             "children": [
               {
@@ -67,19 +67,19 @@
                 "url": "javascript:void;",
                 "icon": "book-open",
                 "id": "2000",
-                "shiro": "a",
+                "shiro": "KSSG",
                 "children": [
                   {
                     "title": "单机运行设备",
-                    "url": "./data/network-sys/equip_record.html",
+                    "url": "./dataCollection/page/main1.html",
                     "id": "20000",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "使用科室设备运行记录",
-                    "url": "./data/network-sys/room_record.html",
+                    "url": "./dataCollection/page/main2.html",
                     "id": "20001",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   }
                 ]
               },
@@ -88,43 +88,31 @@
                 "url": "javascript:void;",
                 "icon": "network-wired",
                 "id": "2001",
-                "shiro": "a",
+                "shiro": "KSSG",
                 "children": [
                   {
                     "title": "设备联网设置",
-                    "url": "./data/network-sys/equip_network.html",
+                    "url": "./dataCollection/page/main3.html",
                     "id": "20010",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "设备值班排班设置",
-                    "url": "./data/network-sys/equip_work.html",
+                    "url": "./dataCollection/page/main4.html",
                     "id": "20011",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "设备加班设置",
-                    "url": "./data/network-sys/equip_overtime.html",
-                    "id": "20012",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "核实工时设置",
-                    "url": "./data/network-sys/work_time.html",
-                    "id": "20013",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "运行记录",
-                    "url": "./data/network-sys/run_record.html",
+                    "url": "./dataCollection/page/main7.html",
                     "id": "20014",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "原始记录",
-                    "url": "./data/network-sys/begin_record.html",
+                    "url": "./dataCollection/page/main8.html",
                     "id": "20015",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   }
                 ]
               }
@@ -133,7 +121,7 @@
           {
             "title": "工作量记录",
             "url": "data&t=0&n=1",
-            "shiro": "a",
+            "shiro": "SGGL",
             "id": "201",
             "children": [
               {
@@ -141,25 +129,25 @@
                 "url": "javascript:void;",
                 "id": "2010",
                 "icon": "industry",
-                "shiro": "a",
+                "shiro": "KSSG",
                 "children": [
                   {
                     "title": "单机工作量",
                     "url": "./data/network-sys/equip_worktime.html",
                     "id": "20100",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "科室设备工作量",
                     "url": "./data/network-sys/room_worktime.html",
                     "id": "20101",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "同种设备工作量",
                     "url": "./data/network-sys/same_worktime.html",
                     "id": "20102",
-                    "shiro": "a"
+                    "shiro": "KSTL"
                   }
                 ]
               }
@@ -167,9 +155,110 @@
           },
           {
             "title": "实时监控",
-            "url": "http://www.baidu.com",
+            "url": "data&t=0&n=2",
+            "icon": "book-open",
             "id": "202",
-            "shiro": "a"
+            "shiro": "SGGL",
+            "children": [
+              {
+                "title": "实时监控",
+                "url": "./dataCollection/monitor1.html",
+                "id": "2020",
+                "shiro": "KSSG"
+              }
+            ]
+          },
+          {
+            "title": "离线盘点",
+            "url": "data&t=0&n=3",
+            "icon": "network-wired",
+            "id": "203",
+            "shiro": "SGGL",
+            "children": [
+              {
+                "title": "离线盘点",
+                "url": "./dataCollection/lxpd-table.html",
+                "id": "2030",
+                "shiro": "KSSG"
+              }
+            ]
+          },
+          {
+            "title": "软件接口",
+            "url": "data&t=0&n=4",
+            "shiro": "SGGL",
+            "id": "204",
+            "children": [
+              {
+                "title": "收费明细数据",
+                "url": "javascript:void;",
+                "icon": "book-open",
+                "id": "2040",
+                "shiro": "KSSG",
+                "children": [
+                  {
+                    "title": "HIS收费明细",
+                    "url": "./dataCollection/page/leading-in1.html",
+                    "id": "20400",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "手术室明细",
+                    "url": "./dataCollection/page/leading-in2.html",
+                    "id": "20401",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "PACS收费明细",
+                    "url": "./dataCollection/page/leading-in3.html",
+                    "id": "20402",
+                    "shiro": "KSTL"
+                  }
+                ]
+              },
+              {
+                "title": "字典管理",
+                "url": "javascript:void;",
+                "icon": "network-wired",
+                "id": "2041",
+                "shiro": "KSSG",
+                "children": [
+                  {
+                    "title": "手术科室匹配",
+                    "url": "./dataCollection/page/leading-in4.html",
+                    "id": "20410",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "医嘱项目",
+                    "url": "./dataCollection/page/leading-in5.html",
+                    "id": "20411",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "PACS设备关联",
+                    "url": "./dataCollection/page/leading-in6.html",
+                    "id": "20412",
+                    "shiro": "KSTL"
+                  }
+                ]
+              },
+              {
+                "title": "定时任务设置",
+                "url": "javascript:void;",
+                "icon": "credit-card",
+                "id": "2042",
+                "shiro": "KSSG",
+                "children": [
+                  {
+                    "title": "定时任务设置",
+                    "url": "./dataCollection/page/leading-in7.html",
+                    "id": "20420",
+                    "shiro": "KSTL"
+                  }
+                ]
+              }
+            ]
           }
         ],
         "id": "20"
@@ -538,12 +627,6 @@
                     "url": "./life/electric-bill/bill-hueman.html",
                     "id": "31101",
                     "shiro": "FHZ"
-                  },
-                  {
-                    "title": "分类账",
-                    "url": "./life/electric-bill/bill-type.html",
-                    "id": "31102",
-                    "shiro": "FLZ"
                   },
                   {
                     "title": "分类账",
@@ -1564,43 +1647,41 @@
         ],
         "id": "43"
       },
-
-
       {
         "title": "质量管理",
         "icon": "feather",
-        "shiro": "YLSJ",
+        "shiro": "a",
         "children": [
           {
             "title": "维护保养",
             "url": "safe&t=4&n=0",
             "id": "440",
-            "shiro": "YLSJ",
+            "shiro": "a",
             "children": [
               {
                 "title": "维护保养规范",
                 "url": "./table.html",
                 "id": "4400",
                 "icon": "newspaper",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "保养规范",
                     "url": "./table.html",
                     "id": "44000",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
                   },
                   {
                     "title": "规范编制",
                     "url": "./table.html",
                     "id": "44001",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
                   },
                   {
                     "title": "编制任务",
                     "url": "./table.html",
                     "id": "44002",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
                   }
                 ]
               },
@@ -1609,19 +1690,19 @@
                 "url": "./table.html",
                 "icon": "scroll",
                 "id": "4401",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "常规保养计划",
                     "url": "./table.html",
                     "id": "44010",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
                   },
                   {
                     "title": "预防性维护计划",
                     "url": "./table.html",
                     "id": "44011",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
                   }
                 ]
               },
@@ -1630,7 +1711,7 @@
                 "url": "./table.html",
                 "icon": "map",
                 "id": "4402",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "预防性维护待执行任务",
@@ -1827,7 +1908,7 @@
                 "url": "./table.html",
                 "icon": "info",
                 "id": "4431",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "总账",
@@ -1860,7 +1941,7 @@
                 "url": "./table.html",
                 "icon": "newspaper",
                 "id": "4432",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "检定提醒",
@@ -1899,7 +1980,7 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "4433",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "已送检计量器具清单",
@@ -1921,26 +2002,32 @@
             "title": "特种设备",
             "url": "safe&t=4&n=4",
             "id": "444",
-            "shiro": "YLSJ",
+            "shiro": "a",
             "children": [
               {
                 "title": "特种设备台账",
                 "url": "./table.html",
                 "icon": "file-invoice-dollar",
                 "id": "4440",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "特种设备",
-                    "url": "./safe/quality-management/index1.html",
+                    "url": "./table.html",
                     "id": "44400",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
                   },
                   {
-                    "title": "特种设备导入",
-                    "url": "./safe/quality-management/index2.html",
+                    "title": "安全附件",
+                    "url": "./table.html",
                     "id": "44401",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "特种设备录入",
+                    "url": "./table.html",
+                    "id": "44402",
+                    "shiro": "a"
                   }
                 ]
               },
@@ -1949,25 +2036,43 @@
                 "url": "./table.html",
                 "icon": "check-square",
                 "id": "4441",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
-                    "title": "送检申请",
-                    "url": "./safe/quality-management/index3.html",
+                    "title": "检测计划",
+                    "url": "./table.html",
                     "id": "44410",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "送检任务",
+                    "url": "./table.html",
+                    "id": "44411",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "送检申请",
+                    "url": "./table.html",
+                    "id": "44412",
+                    "shiro": "a"
                   },
                   {
                     "title": "送检审批",
-                    "url": "./safe/quality-management/index4.html",
-                    "id": "44411",
-                    "shiro": "YLSJ"
+                    "url": "./table.html",
+                    "id": "44413",
+                    "shiro": "a"
                   },
                   {
                     "title": "结果录入",
-                    "url": "./safe/quality-management/index5.html",
-                    "id": "44412",
-                    "shiro": "YLSJ"
+                    "url": "./table.html",
+                    "id": "44414",
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "结果查看",
+                    "url": "./table.html",
+                    "id": "44415",
+                    "shiro": "a"
                   }
                 ]
               },
@@ -1976,19 +2081,25 @@
                 "url": "./table.html",
                 "id": "4442",
                 "icon": "user",
-                "shiro": "YLSJ",
+                "shiro": "a",
                 "children": [
                   {
                     "title": "从业人员",
-                    "url": "./safe/quality-management/index6.html",
+                    "url": "./table.html",
                     "id": "44420",
-                    "shiro": "YLSJ"
+                    "shiro": "a"
+                  },
+                  {
+                    "title": "人员设置",
+                    "url": "./table.html",
+                    "id": "44421",
+                    "shiro": "a"
                   },
                   {
                     "title": "证件到期提醒",
-                    "url": "./safe/quality-management/index7.html",
-                    "id": "44421",
-                    "shiro": "YLSJ"
+                    "url": "./table.html",
+                    "id": "44422",
+                    "shiro": "a"
                   }
                 ]
               }
