@@ -6,16 +6,21 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../../../static/admin/layui/css/layui.css">
-    <script src="../../../../../static/admin/layui/layui.js"></script>
-    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
-    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
-    <script src="../../../../../static/admin/js/basic.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css">
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../../../../static/admin/js/basic.js"></script>
     <style>
+        .layui-table-tool{
+            background: #fff;
+        }
         .layui-table-tool .layui-table-tool-self{
             position: absolute;
             height:30px;
-            top: 210px;
+            top: 90px;
             right: 10px;
             width: 120px;
             height: 30px;
@@ -628,17 +633,21 @@
     </form>
 </div>-->
 <!--表格-->
-<table class="layui-hide" id="test" lay-filter="test"></table>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table class="layui-hide" id="test" lay-filter="test"></table>
+    </div>
+</div>
 <!--头工具栏-->
 <script type="text/html" id="toolbarDemo">
-    <div style="height: 150px;">
+    <div style="height: 110px;">
 
-        <div class="content layui-collapse" style="border:none;width: 100%;height: 100px;margin-bottom: 30px;">
+        <div class="content layui-collapse" style="border:none;width: 100%;height: 20px;margin-bottom: 30px;">
             <form class="layui-form" action="" style="border:none;">
                 <div class="input-contain">
 
                     <div class="layui-inline" style="margin-top: 10px">
-                        <label class="layui-form-label">ID</label>
+                        <label class="layui-form-label">人员编号</label>
                         <div class="layui-input-inline">
 
                             <input class="layui-input" name="userId" placeholder="编号" id="userId" autocomplete="off"   >
@@ -1220,7 +1229,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="layui-form-item" style="float:right;margin-top: -40px;margin-right: 200px;">
+                    <div class="layui-form-item" style="float:right;margin-top: -45px;margin-right: 160px;">
                         <div class="layui-input-block"  >
                             <button class="layui-btn" lay-submit="" data-type="search" >查找</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -1237,12 +1246,20 @@
             <button class="layui-btn layui-btn-sm" lay-event="entry" >
                 <i class="layui-icon layui-icon-add-circle"></i>证件录入</button>
 
-            <button class="layui-btn layui-btn-sm" lay-event="cancel" style="background: #FFB800">
-                <i class="layui-icon layui-icon-close"></i>取消</button>
+            <button class="layui-btn layui-btn-sm" lay-event="cancel" style="background: #CC0033">
+                <i class="layui-icon layui-icon-close"></i>取消从业人员</button>
         </div>
     </div>
 
     </div>
+</script>
+
+<script type="text/html" id="statusTpl">
+    {{#  if(d.spemSpare1 === "0"){ }}
+    <span style="color: #f03d45;">{{ '证件未录入' }}</span>
+    {{#  } else if(d.spemSpare1 === "1") {  }}
+    <span >{{ '证件已录入 ' }}</span>
+    {{#  } }}
 </script>
 
 <script>
@@ -1271,29 +1288,13 @@
                 , title: '从业人员'
                 , cols: [[
                     {type: 'checkbox', fixed: 'left', width: 50}
-                    , {field: 'userId', title: 'ID', width: 180, unresize: true, templet: '#Tpl'}
-                    , {field: 'userXm', title: '姓名', width: 200,}
-                    , {field: 'spemZczh', title: '注册证号', width: 300}
+                    , {field: 'userId', title: '人员编号', width: 175, unresize: true, templet: '#Tpl'}
+                    , {field: 'userXm', title: '姓名', width: 200}
+                    , {field: 'spemSgzzfw', title: '上岗资质范围', width: 300}
                     , {field: 'bmName', title: '部门', width: 300}
-                    , {field: 'spemSpare1', title: '状态', width: 300, templet: '#statusTpl'}
+                    , {field: 'spemSpare1', title: '状态', width: 250, templet: '#statusTpl'}
                 ]]
-                , page: true
                 , id : "test"
-                , done: function (res, curr, count) {
-
-                    $("[data-field = 'spemSpare1']").children().each(function () {
-
-                        if ($(this).text() === '0') {
-
-                            $(this).text("证件未录入");
-
-                        } else if ($(this).text() === '1') {
-
-                            $(this).text("证件已录入");
-                        }
-
-                    })
-                }
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -1307,10 +1308,12 @@
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
+
             }
             ,reSet:{
-                url:"/specialEq/selectUserByIdAndNameAndBmName",
+                url:"/specialEq/selectSpeqUserByIdAndNameAndBmName",
                 type:"search",
+                method: "POST",
                 data:[ "userId", "userXm", "bmName"],  //搜索框的name
                 tid:"test"
             }
@@ -1337,8 +1340,10 @@
                         title : "设置从业人员",
                         type : 2,
                         content : "./child/index6-newly.html" ,//弹出层页面
-                        area: ['1100px', '510px']
-
+                        area: ['1100px', '510px'],
+                        end: function () {
+                            location.reload();
+                        }
                     });
                     break;
                 case 'cancel'://取消从业人员
@@ -1351,6 +1356,29 @@
                         for(var i = 0; i < data.length; i++){
                             cancelNum.push(data[i].userId);
                         }
+                        layer.confirm("确定要取消这一操作吗？", function () {
+                            console.log(cancelNum);
+                            $.ajax({
+                                type: "POST",
+                                url: "/specialEq/updateIsNotSpeqEm",
+                                async: false,/*同步传输*/
+                                contentType:'application/json' ,
+                                dataType: 'json',
+                                data:JSON.stringify(cancelNum),
+                                success: function (data) {
+                                    layer.closeAll('loading');
+                                      console.log(data.code);
+                                    if(data.code == 0){
+                                        layui.layer.msg("删除成功！", {icon:1, time: 2000, shade: 0.2});
+                                        console.log(data.code);
+                                        location.reload(true);
+                                    }else{
+                                        layui.layer.msg("删除失败！", {icon:2, time: 3000, shade: 0.2})
+                                    }
+                                }
+
+                            });
+                        });
 
                     }
             }
@@ -1364,15 +1392,7 @@
     });
 </script>
 <!--证件未录入时与已录入时的不同状态-->
-<script type="text/html" id="statusTpl">
-    {{#  if(d.spemSpare1 === 0){ }}
-    <span style="color: #f03d45;">{{ '证件未录入' }}</span>
-    {{#  } else if(d.spemSpare1 === "") {  }}
-    <span >{{ ' ' }}</span>
-    {{#  } else {  }}
-    {{'证件已录入'}}
-    {{#  } }}
-</script>
+
 <!--提示点击双击-->
 <script type="text/html" id="Tpl">
     <a  class="layui-table-link" target="_blank" title="双击可查看详细信息" style="cursor: pointer">{{ d.userId }}</a>
@@ -1380,13 +1400,16 @@
 <!--从业人员证件录入-->
 <script>
     function entryUser(entry){
+        var id= entry.userId;
+        var html ="./child/index6-staff.html";
+        var url =  html + "?id="+id;
         var index = layui.layer.open({
             type: 2,
             title: '从业人员证件录入',
             shadeClose: true, //点击遮罩关闭层
             area : ['900px', '500px'],
-            content: './child/index6-staff.html',
-            success : function(layero, index){
+            content:url,
+          /*  success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(entry){
                     body.find(".userId").val(entry.userId);
@@ -1400,16 +1423,16 @@
                     body.find(".spemYxqsq").val(entry.spemYxqsq);//有效起始期
                     body.find(".spemYxjsq").val(entry.spemYxjsq);//有效结束期
                     // 记得重新渲染表单
-                    /*form.render();*/
-                    /* var iframeWindow = layero.find('iframe')[0].contentWindow;
-                     iframeWindow.layui.form.render();*/
+                    /!*form.render();*!/
+                    /!* var iframeWindow = layero.find('iframe')[0].contentWindow;
+                     iframeWindow.layui.form.render();*!/
                 }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500)
-            }
+            }*/
         });
 
     }
@@ -1417,36 +1440,15 @@
 <!--从业人员详细信息-->
 <script>
     function DatIndex(datail) {
+        var id= datail.userId;
+        var html ="./child/index6-datail.html";
+        var url =  html + "?id="+id;
         var index = layui.layer.open({
             type: 2,
             title: '从业人员详细信息',
             shadeClose: true, //点击遮罩关闭层
             area: ['800px', '480px'],
-            content: './child/index6-datail.html',
-            success: function (layero, index) {
-                var body = layui.layer.getChildFrame('body', index);
-                if (datail) {
-                    body.find(".userRd").val(datail.userRd);
-                    body.find(".userXm").val(datail.userXm);
-                    body.find(".certificate").val(datail.certificate);//证件名称
-                    body.find(".spemZczh").val(datail.spemZczh);//注册编号
-                    body.find(".spemDabh").val(datail.spemDabh);// 档案编号
-                    body.find(".spemFzjg").val(datail.spemFzjg);// 发证机关
-                    body.find(".spemSgzzfw").val(datail.spemSgzzfw);//上岗资质范围
-                    body.find(".spemQfrq").val(datail.spemQfrq);// 签发日期
-                    body.find(".spemYxqsq").val(datail.spemYxqsq);//有效起始期
-                    body.find(".spemYxjsq").val(datail.spemYxjsq);//有效结束期
-                    // 记得重新渲染表单
-                    /*form.render();*/
-                    /*var iframeWindow = layero.find('iframe')[0].contentWindow;
-                    iframeWindow.layui.form.render();*/
-                }
-                setTimeout(function () {
-                    layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
-                        tips: 3
-                    });
-                }, 500)
-            }
+            content: url,
         });
     }
 </script>

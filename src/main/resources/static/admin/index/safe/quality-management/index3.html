@@ -15,6 +15,9 @@
     <![endif]-->
     <script type="text/javascript" src="../../../../static/admin/js/basic.js"></script>
    <style>
+       .layui-table-tool{
+           background: #fff;
+       }
        .layui-table-tool .layui-table-tool-self{
            position: absolute;
            height:30px;
@@ -1262,41 +1265,19 @@
     </div>
 </script>
 
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-filter="table2" lay-event="agreed" >同意申请</a>
-</script>
-
-
 <script>
     //用户数据导入
-
-   /* layui.use('table', function() {
-        var table = layui.table;
-        var $ = layui.$;
-        table.on('sort(Tast)', function (obj) { //注：tool是工具条事件名，Tast是table原始容器的属性 lay-filter="对应的值"
-            /!*console.log(obj.field); //当前排序的字段名
-            console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
-            console.log(this); //当前排序的 th 对象
-*!/
-            table.reload('Tast', {
-                initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
-                , where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
-                    field: obj.field //排序字段
-                    , order: obj.type //排序方式
-                }
-            });
-        });*/
         renderMod.table = {
             table: {
                cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'speqBh', title: '设备编号', width: 150}
+                    , {field: 'speqBh', title: '设备编号', width: 200}
                     , {field: 'speqName', title: '设备名称', width: 200}
                     , {field: 'bmId', title: '所在科室', width: 200}
-                    , {field: 'speqGgxh', title: '规格型号', width: 180}
+                    , {field: 'speqGgxh', title: '规格型号', width: 200}
                     , {field: 'speqScs', title: '生产厂家', width: 250}
-                    , {field: 'speqJhjcrq', title: '计划检测日期', width: 150}
-                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 100}
+                    , {field: 'speqJhjcrq', title: '计划检测日期', width: 180}
+
                 ]]
                 ,elem: '#Tast'
                 ,id: 'Tast'
@@ -1317,7 +1298,6 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        "obj": obj,
                         toolFunc: [
                             {
                                 send: {
@@ -1337,9 +1317,10 @@
                                 event: "application"
                             }
 
-                            ]
+                        ]
                     })
                 }
+
             }
             ,reSet:{
                 url:"/specialEqCheck/selectSpecialEquipmentCheckVoByNameAndBmIdAndScsBy0",
@@ -1349,40 +1330,6 @@
                 tid:"Tast"
             }
         }
-
-
-        //头工具栏事件
-      /*  table.on('toolbar(Tast)', function (obj) {
-
-            var $ = layui.$;
-            switch (obj.event) {
-                case 'application'://批量同意申请
-                    var checkStatus = table.checkStatus('Tast');
-                    var data = checkStatus.data;
-                    if (data.length === 0) {
-                        layer.msg("尚未选择", {icon: 2});
-                        return;
-                    }
-                    var ids = [];
-                    if (data.length > 0) {
-                        for (var i = 0; i < data.length; i++) {
-                            ids.push(data[i].id);
-                        }
-                    }
-                    break;
-            }
-
-        });*/
-        //行工具栏事件
-    /* table.on('tool(Tast)', function (obj) {
-            var data = obj.data;
-            console.log(obj);
-            /!* if (obj.event === 'agreed') {
-                 /!* data.id // 获取到的id*!/
-             }*!/
-        })*/
- /*   })*/
-
 </script>
 </body>
 </html>

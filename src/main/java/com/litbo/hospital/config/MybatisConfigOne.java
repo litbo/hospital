@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -36,7 +37,8 @@ import javax.sql.DataSource;
         "com.litbo.hospital.supervise.dao",
         "com.litbo.hospital.user.dao",
         "com.litbo.hospital.operational_data_monitoring.software_interface.dao",
-        "com.litbo.hospital.operational_data_monitoring.software_interface.timedtask"},
+        "com.litbo.hospital.operational_data_monitoring.software_interface.timedtask",
+        "com.litbo.hospital.security.specialequipment.dao"},
         sqlSessionTemplateRef = "SqlSessionTemplate1")
 public class MybatisConfigOne {
 
@@ -73,8 +75,11 @@ public class MybatisConfigOne {
             throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setVfs(SpringBootVFS.class);
+//        sessionFactory.setVfs(SpringBootVFS.class);
         sessionFactory.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+        sessionFactory.setMapperLocations(
+                new PathMatchingResourcePatternResolver().getResources("classpath:com/litbo/hospital/security/specialequipment/dao/*.xml")
+        );
         return sessionFactory.getObject();
     }
 

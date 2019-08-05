@@ -1,0 +1,67 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": {
+    "pageNum": 1,
+    "pageSize": 10,
+    "size": 4,
+    "startRow": 1,
+    "endRow": 4,
+    "total": 4,
+    "pages": 1,
+    "list": [
+      {
+        "speqId": "201907000001",
+        "speqBh": "b0123456",
+        "speqName": "赵逸剑",
+        "speqGgxh": null,
+        "speqSpare1": null,
+        "speqType": 1,
+        "speqScs": "1",
+        "bmId": "设备处",
+        "speqBz": "傻子她爹",
+        "speqRun": 1
+      },
+      {
+        "speqId": "201907000002",
+        "speqBh": "c012345",
+        "speqName": "迷你鹦鹉",
+        "speqGgxh": null,
+        "speqSpare1": null,
+        "speqType": 0,
+        "speqScs": "1",
+        "bmId": "复仇者联盟",
+        "speqBz": "傻傻的",
+        "speqRun": 1
+      },
+      {
+        "speqId": "201907000003",
+        "speqBh": "a012345",
+        "speqName": "冯玉杰",
+        "speqGgxh": null,
+        "speqSpare1": null,
+        "speqType": 1,
+        "speqScs": "1",
+        "bmId": "保卫处",
+        "speqBz": "傻子一个",
+        "speqRun": 1
+      },
+      {
+        "speqId": "201907000004",
+        "speqBh": "b0123456",
+        "speqName": "赵剑",
+        "speqGgxh": null,
+        "speqSpare1": null,
+        "speqType": 1,
+        "speqScs": "1",
+        "bmId": "设备处",
+        "speqBz": "傻子她爹",
+        "speqRun": 1
+      }
+    ]
+  }
+}
+
+
+
+

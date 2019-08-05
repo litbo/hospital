@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/admin/layui/css/layui.css">
+
+    <script src="../../static/admin/js/basic.js"></script>
+    <script src="../../static/admin/layui/layui.js" charset="uf-8"></script>
+    <script src="../../static/admin/js/renderMod.js"></script>
+
+</head>
+<body>
+
+<table class="layui-hide" id="test"></table>
+
+
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            , url: '/demo/table/user/'
+            , cols: [[
+                {type: 'checkbox'}
+                , {field: 'id', title: '合同编号', sort: true}
+                , {field: 'username', title: '设备名称'}
+                , {field: 'brand', title: '品牌'}
+                , {field: 'model', title: '型号'}
+                , {field: 'sign', title: '规格'}
+                , {field: 'number', title: '数量', sort: true}
+            ]]
+            , page: true
+        });
+    });
+</script>
+
+
+</body>
+</html>
