@@ -37,20 +37,20 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <form class="layui-form layui-form-pane hidden-xs">
-        <div class="layui-input-inline">
-            <input type="text" name="year" id="date1" lay-verify="year" placeholder="点击选择年度" autocomplete="off" class="layui-input">
-        </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
-        </div>
-        <div class="layui-input-inline">
-            <select name="bmId" lay-filter="bmId">
-                <option value="">全部部门</option>
-            </select>
-        </div>
-        <button class="layui-btn" data-type="reload1">查找</button>
-    </form>
+<form class="layui-form layui-form-pane hidden-xs">
+    <div class="layui-input-inline">
+        <input type="text" name="year" id="date1" lay-verify="year" placeholder="点击选择年度" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-inline">
+        <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
+    </div>
+    <div class="layui-input-inline">
+        <select name="bmId" lay-filter="bmId">
+            <option value="">全部部门</option>
+        </select>
+    </div>
+    <button class="layui-btn" data-type="reload1">查找</button>
+</form>
 </script>
 <script type="text/html" id="toolBar1">
     <form class="layui-form layui-form-pane hidden-xs">
@@ -96,6 +96,7 @@
                         }
                     }
                     , done: function (obj) {
+
                     }
                 }
                 , {

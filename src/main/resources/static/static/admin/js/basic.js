@@ -371,12 +371,6 @@ function subUp(value, data, param) {
         });
         return false;
     }
-    //添加加载动画
-    var loadIndex = putMsg("loadOn");
-    $(".layui-layer-shade").css("opacity","0.05");
-    $(".layui-layer-loading").append(
-        $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px","color":"#787878"}).text("请求发送中")
-    );
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
     var dataP = {}, valus = "";
     if (Type(value.data) === "array") {
@@ -434,6 +428,17 @@ function subUp(value, data, param) {
         alert("提交成功！");
         window.location.reload();
     } else {
+        //添加加载动画
+        var loadIndex = putMsg("loadOn");
+        $(".layui-layer-shade").css("opacity","0.05");
+        $(".layui-layer-loading").append(
+            $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px","color":"#787878"}).text("请求发送中")
+        );
+        //2s自动关闭（避免出现一直不消失的问题）
+        setTimeout(function () {
+            putMsg("loadOut",loadIndex);
+            $(".layui-layer-shade").css("opacity","0");
+        },2000);
         //以$ajax形式提交数据(默认)
         //以参数形式调用获取的数据解决异步数据不可外部调用与修改
         var ajaxOptions = {
@@ -1008,8 +1013,8 @@ action = func = {
     "checkTable": function (name) {
         layui.use('table', function () {
             var table = layui.table
+                , ck = table.checkStatus(name)//获取选中数据
                 , oData = table.cache[name];//获取表格所有数据
-            var ck = table.checkStatus(name);//获取选中数据
             if (ck.data.length === 0) {
                 putMsg({
                     alert: "当前未选中任何数据！"
@@ -1020,14 +1025,19 @@ action = func = {
                 if (ck.isAll === true) {
                     oData = [];
                 } else {
+                    var wDel = [];
                     for (var j = 0; j < oData.length; j++) {
                         //找出所有数据中的已选中数据并删除
-                        if (oData[j].LAY_CHECKED === true) {
-                            oData.splice(j, 1);
-                        } else {
-                            delete oData[j]["LAY_CHECKED"];
-                            delete oData[j]["LAY_TABLE_INDEX"];
+                        if (oData[j].LAY_CHECKED) {
+                            wDel.push(j);
                         }
+                    }
+                    for(var x=0;x<wDel.length;x++){
+                        oData.splice(x, 1);
+                    }
+                    for(var p=0;p<oData.length;p++){
+                        delete oData[p]["LAY_CHECKED"];
+                        delete oData[p]["LAY_TABLE_INDEX"];
                     }
                 }
                 //重新渲染表格
