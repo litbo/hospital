@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.DossierDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.Dossier">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dossier_num" jdbcType="VARCHAR" property="dossierNum" />
+    <result column="dossier_name" jdbcType="VARCHAR" property="dossierName" />
+    <result column="begin_time" jdbcType="VARCHAR" property="beginTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="dossier_nature" jdbcType="VARCHAR" property="dossierNature" />
+    <result column="save_type" jdbcType="VARCHAR" property="saveType" />
+    <result column="dossier_type" jdbcType="INTEGER" property="dossierType" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="file_localtion" jdbcType="VARCHAR" property="fileLocaltion" />
+    <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+    <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="buy_time" jdbcType="VARCHAR" property="buyTime" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="agent" jdbcType="VARCHAR" property="agent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dossier_num, dossier_name, begin_time, end_time, dossier_nature, save_type, dossier_type, 
+    description, file_localtion, record_time, record_person, specification, manufacturer, 
+    buy_time, department, agent
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..dossier
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..dossier
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.Dossier">
+    insert into hospital..dossier (dossier_num, dossier_name,
+      begin_time, end_time, dossier_nature, 
+      save_type, dossier_type, description, 
+      file_localtion, record_time, record_person, 
+      specification, manufacturer, buy_time, 
+      department, agent)
+    values (#{dossierNum,jdbcType=VARCHAR}, #{dossierName,jdbcType=VARCHAR},
+      #{beginTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{dossierNature,jdbcType=VARCHAR}, 
+      #{saveType,jdbcType=VARCHAR}, #{dossierType,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{fileLocaltion,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.Dossier">
+    insert into hospital..dossier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dossierNum != null">
+        dossier_num,
+      </if>
+      <if test="dossierName != null">
+        dossier_name,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="dossierNature != null">
+        dossier_nature,
+      </if>
+      <if test="saveType != null">
+        save_type,
+      </if>
+      <if test="dossierType != null">
+        dossier_type,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="fileLocaltion != null">
+        file_localtion,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="recordPerson != null">
+        record_person,
+      </if>
+      <if test="specification != null">
+        specification,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="buyTime != null">
+        buy_time,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="agent != null">
+        agent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dossierNum != null">
+        #{dossierNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dossierName != null">
+        #{dossierName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dossierNature != null">
+        #{dossierNature,jdbcType=VARCHAR},
+      </if>
+      <if test="saveType != null">
+        #{saveType,jdbcType=VARCHAR},
+      </if>
+      <if test="dossierType != null">
+        #{dossierType,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fileLocaltion != null">
+        #{fileLocaltion,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null">
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null">
+        #{agent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.metering.pojo.Dossier">
+    update hospital..dossier
+    <set>
+      <if test="dossierNum != null">
+        dossier_num = #{dossierNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dossierName != null">
+        dossier_name = #{dossierName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dossierNature != null">
+        dossier_nature = #{dossierNature,jdbcType=VARCHAR},
+      </if>
+      <if test="saveType != null">
+        save_type = #{saveType,jdbcType=VARCHAR},
+      </if>
+      <if test="dossierType != null">
+        dossier_type = #{dossierType,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fileLocaltion != null">
+        file_localtion = #{fileLocaltion,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        record_person = #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null">
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        buy_time = #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null">
+        agent = #{agent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.metering.pojo.Dossier">
+    update hospital..dossier
+    set dossier_num = #{dossierNum,jdbcType=VARCHAR},
+      dossier_name = #{dossierName,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      dossier_nature = #{dossierNature,jdbcType=VARCHAR},
+      save_type = #{saveType,jdbcType=VARCHAR},
+      dossier_type = #{dossierType,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      file_localtion = #{fileLocaltion,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=VARCHAR},
+      record_person = #{recordPerson,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      buy_time = #{buyTime,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      agent = #{agent,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByDossierNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..dossier
+    where dossier_num = #{dossierNum,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllDossier" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..dossier
+  </select>
+
+  <select id="selectAllDossierByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..dossier
+    where dossier_name like #{dossierName,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByDossierNum" parameterType="java.lang.String">
+    delete from hospital..dossier
+    where dossier_num = #{dossierNum,jdbcType=VARCHAR}
+  </delete>
+</mapper>

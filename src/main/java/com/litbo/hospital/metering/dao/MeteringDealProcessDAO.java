@@ -1,0 +1,26 @@
+package com.litbo.hospital.metering.dao;
+
+import com.litbo.hospital.metering.pojo.MeteringDealProcess;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface MeteringDealProcessDAO {
+    int deleteByPrimaryKey(Integer processId);
+
+    int insert(MeteringDealProcess record);
+
+    int insertSelective(MeteringDealProcess record);
+
+    MeteringDealProcess selectByPrimaryKey(Integer processId);
+
+    int updateByPrimaryKeySelective(MeteringDealProcess record);
+
+    int updateByPrimaryKey(MeteringDealProcess record);
+
+    // 查找流程
+    List<MeteringDealProcess> searchDealProcess(@Param("recordBeginTime") String recordBeginTime, @Param("recordEndTime") String recordEndTime,
+                                                @Param("department") String department, @Param("status") String status,
+                                                @Param("dealBeginTime") String dealBeginTime, @Param("dealEndTime") String dealEndTime);
+
+}
