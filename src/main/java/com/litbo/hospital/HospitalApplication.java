@@ -19,7 +19,7 @@ import java.util.Date;
 @SpringBootApplication
 @EnableSwagger2
 @EnableScheduling
-@MapperScan( basePackages = "com.litbo.hospital.security.specialequipment.dao.*")
+@MapperScan( basePackages = {"com.litbo.hospital.security.specialequipment.dao.*","com.litbo.hospital.metering.dao"})
 @EnableTransactionManagement(proxyTargetClass = true)
 public class HospitalApplication {
 
