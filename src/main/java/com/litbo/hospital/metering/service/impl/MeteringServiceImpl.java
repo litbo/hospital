@@ -135,6 +135,9 @@ public class MeteringServiceImpl implements MeteringService {
     @Override
     public int updateMeteringStatus(int id) {
         MeteringUtil m = meteringUtilDAO.selectByPrimaryKey(id);
+        if(m == null){
+            return 0;
+        }
         if(m.getDescription().equals("1")){
             m.setDescription("0");
         }else if(m.getDescription().equals("0")){

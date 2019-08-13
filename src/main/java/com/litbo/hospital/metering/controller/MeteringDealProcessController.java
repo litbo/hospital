@@ -10,6 +10,7 @@ import com.litbo.hospital.metering.vo.MeteringProcessMoreInformationVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,7 +57,10 @@ public class MeteringDealProcessController {
         // 将报表中的计量设备状态改为已经进入计量流程
         String[] ids = utilIds.split(",");
         for(String id : ids){
-            meteringService.updateMeteringStatus(Integer.parseInt(id));
+            int result = meteringService.updateMeteringStatus(Integer.parseInt(id));
+            if(result == 0){
+                return Result.error("未找到设备信息");
+            }
         }
 
         // 生成一个业务流程
@@ -92,7 +96,18 @@ public class MeteringDealProcessController {
      * @return
      */
     @RequestMapping("/searchApprovalForm.do")
-    public Result searchApprovalForm(String recordBeginTime, String recordEndTime, String department, String status, String dealBeginTime,String dealEndTime){
+    public Result searchApprovalForm(@RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
+                                     @RequestParam(name = "recordEndTime" , defaultValue = "9999/99/99") String recordEndTime,
+                                     @RequestParam(name = "department" , defaultValue = "%") String department,
+                                     @RequestParam(name = "status",defaultValue = "%") String status,
+                                     @RequestParam(name = "dealBeginTime" , defaultValue = "0000/00/00") String dealBeginTime,
+                                     @RequestParam(name = "dealEndTime" , defaultValue = "9999/99/99") String dealEndTime){
+        if(department.equals("%")){
+            department = null;
+        }
+        if(status.equals("%")){
+            status = null;
+        }
         List<MeteringApprovalForm> meteringApprovalFormList = meteringDealProcessService.searchApprovalForm(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
         if(meteringApprovalFormList.isEmpty()){
             return Result.error("未查询到任何数据");
@@ -117,7 +132,18 @@ public class MeteringDealProcessController {
      * @return
      */
     @RequestMapping("/searchFormProcess.do")
-    public Result searchFormProcess(String recordBeginTime, String recordEndTime, String department, String status, String dealBeginTime,String dealEndTime){
+    public Result searchFormProcess(@RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
+                                    @RequestParam(name = "recordEndTime" , defaultValue = "9999/99/99") String recordEndTime,
+                                    @RequestParam(name = "department" , defaultValue = "%") String department,
+                                    @RequestParam(name = "status",defaultValue = "%") String status,
+                                    @RequestParam(name = "dealBeginTime" , defaultValue = "0000/00/00") String dealBeginTime,
+                                    @RequestParam(name = "dealEndTime" , defaultValue = "9999/99/99") String dealEndTime){
+        if(department.equals("%")){
+            department = null;
+        }
+        if(status.equals("%")){
+            status = null;
+        }
         List<MeteringDealProcess> meteringDealProcessList = meteringDealProcessService.searchFormProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
         if(meteringDealProcessList.isEmpty()){
             return Result.error("未查询到任何数据");
