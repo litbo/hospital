@@ -156,12 +156,28 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/findAllMeteringUtilByDepartment.do")
-    public Result findAllMeteringUtilByDepartment(String department){
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(department);
-        if(meteringUtils.isEmpty()){
-            return Result.error("没有找到任何数据呦");
+    public PageVo findAllMeteringUtilByDepartment(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                                  @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                                  @RequestParam(name = "department" , defaultValue = "%")String department){
+        PageVo vo = new PageVo();
+        if(department.equals("%")){
+            vo.setMsg("error");
+            vo.setCode(1);
+            return vo;
         }
-        return Result.success(meteringUtils);
+        PageHelper.startPage(pageNum,pageSize);
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(department);
+
+        PageInfo info = new PageInfo(meteringUtils);
+        if(!meteringUtils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
+            return vo;
+        }
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
 
@@ -173,12 +189,23 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/findAllMeteringUtilByTime.do")
-    public Result findAllMeteringUtilByTime(String beginTime, String endTiem){
+    public PageVo findAllMeteringUtilByTime(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                            @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                            @RequestParam(name = "beginTime" , defaultValue = "0000/00/00") String beginTime,
+                                            @RequestParam(name = "endTiem" , defaultValue = "9999/99/99") String endTiem){
+        PageHelper.startPage(pageNum,pageSize);
         List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByTime(beginTime, endTiem);
-        if(meteringUtils.isEmpty()){
-            return Result.error("没有找到任何数据呦");
+        PageInfo info = new PageInfo(meteringUtils);
+        PageVo vo = new PageVo();
+        if(!meteringUtils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
+            return vo;
         }
-        return Result.success(meteringUtils);
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
 
@@ -189,12 +216,25 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/findAllNeedMeteringUtilByDepartment.do")
-    public Result findAllNeedMeteringUtilByDepartment(String department){
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(department);
-        if(meteringUtils.isEmpty()){
-            return Result.error("没有找到任何数据呦");
+    public PageVo findAllNeedMeteringUtilByDepartment(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                                      @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                                      @RequestParam(name = "department" , defaultValue = "%")String department){
+        if(department.equals("%")){
+            department = null;
         }
-        return Result.success(meteringUtils);
+        PageHelper.startPage(pageNum,pageSize);
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(department);
+        PageInfo info = new PageInfo(meteringUtils);
+        PageVo vo = new PageVo();
+        if(!meteringUtils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
+            return vo;
+        }
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
 
@@ -207,12 +247,32 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/searchMeteringUtil.do")
-    public Result searchMeteringUtil(String beginTime, String endTiem, String department, String description){
-        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(beginTime, endTiem, department, description);
-        if(meteringUtils.isEmpty()){
-            return Result.error("没有找到任何数据呦");
+    public PageVo searchMeteringUtil(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                     @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                     @RequestParam(name = "beginTime" , defaultValue = "0000/00/00") String beginTime,
+                                     @RequestParam(name = "endTiem" , defaultValue = "9999/99/99") String endTiem,
+                                     @RequestParam(name = "department" , defaultValue = "%")String department,
+                                     @RequestParam(name = "description" , defaultValue = "%") String description){
+        if(department.equals("%")){
+            department = null;
         }
-        return Result.success(meteringUtils);
+        if(description.equals("%")){
+            description = null;
+        }
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(beginTime, endTiem, department, description);
+        PageInfo info = new PageInfo(meteringUtils);
+        PageVo vo = new PageVo();
+        if(!meteringUtils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
+            return vo;
+        }
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
 
@@ -222,7 +282,9 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/getTheMonthUtil.do")
-    public Result getTheMonthNeedToMeteringUtils(String department){
+    public PageVo getTheMonthNeedToMeteringUtils(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                                 @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                                 String department){
 
         // 得到当前月的第一天和最后一天的日期
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -233,13 +295,27 @@ public class MeteringController {
         String endDay = sdf.format(calendar.getTime());
 
 //        通过日期来查询本月尚未进行计量的设备
+        PageHelper.startPage(pageNum,pageSize);
         List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(firstDay,endDay,department,"1");
-        if(meteringUtils.isEmpty()){
-            return Result.error("本月暂无需要进行计量的设备！");
+        PageInfo info = new PageInfo(meteringUtils);
+        PageVo vo = new PageVo();
+        if(!meteringUtils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
+            return vo;
         }
-        return Result.success(meteringUtils);
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
+
+    /**
+     * 删除设备历史编号信息
+     * @param id
+     * @return
+     */
     @RequestMapping("/deleteMeteringHistoryNum.do")
     public Result deleteMeteringHistroyNum(int id){
         int result = meteringHistoryNumberDAO.deleteByPrimaryKey(id);
@@ -250,12 +326,28 @@ public class MeteringController {
     }
 
 
+    /**
+     * 查询设备历史编号信息
+     * @param pageNum
+     * @param pageSize
+     * @param id
+     * @return
+     */
     @RequestMapping("/seeAllHistoryNum.do")
-    public Result seeAllHistoryNum(int id){
+    public PageVo seeAllHistoryNum(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                   @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,int id){
+        PageHelper.startPage(pageNum,pageSize);
         List<MeteringHistoryNumber> meteringHistoryNumbers = meteringHistoryNumberDAO.findAllMeteringHistoryNumber(id);
-        if(meteringHistoryNumbers.isEmpty()){
-            return Result.error("没有查到该设备的历史编号信息！");
+        PageInfo info = new PageInfo(meteringHistoryNumbers);
+        PageVo vo = new PageVo();
+        if(!meteringHistoryNumbers.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringHistoryNumbers));
+            return vo;
         }
-        return Result.success(meteringHistoryNumbers);
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 }

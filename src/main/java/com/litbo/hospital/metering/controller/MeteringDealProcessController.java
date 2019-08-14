@@ -1,5 +1,7 @@
 package com.litbo.hospital.metering.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.pojo.MeteringApprovalForm;
 import com.litbo.hospital.metering.pojo.MeteringDealProcess;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
@@ -7,6 +9,7 @@ import com.litbo.hospital.metering.service.MeteringDealProcessService;
 import com.litbo.hospital.metering.service.MeteringService;
 import com.litbo.hospital.metering.vo.MeteringApprovalFormMoreInfomationVo;
 import com.litbo.hospital.metering.vo.MeteringProcessMoreInformationVo;
+import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,7 +99,9 @@ public class MeteringDealProcessController {
      * @return
      */
     @RequestMapping("/searchApprovalForm.do")
-    public Result searchApprovalForm(@RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
+    public PageVo searchApprovalForm(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                     @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                     @RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
                                      @RequestParam(name = "recordEndTime" , defaultValue = "9999/99/99") String recordEndTime,
                                      @RequestParam(name = "department" , defaultValue = "%") String department,
                                      @RequestParam(name = "status",defaultValue = "%") String status,
@@ -108,11 +113,19 @@ public class MeteringDealProcessController {
         if(status.equals("%")){
             status = null;
         }
+        PageHelper.startPage(pageNum,pageSize);
         List<MeteringApprovalForm> meteringApprovalFormList = meteringDealProcessService.searchApprovalForm(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
-        if(meteringApprovalFormList.isEmpty()){
-            return Result.error("未查询到任何数据");
+        PageInfo info = new PageInfo(meteringApprovalFormList);
+        PageVo vo = new PageVo();
+        if(!meteringApprovalFormList.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringApprovalFormList));
+            return vo;
         }
-        return Result.success(meteringApprovalFormList);
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
 
@@ -132,7 +145,9 @@ public class MeteringDealProcessController {
      * @return
      */
     @RequestMapping("/searchFormProcess.do")
-    public Result searchFormProcess(@RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
+    public PageVo searchFormProcess(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                    @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                    @RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
                                     @RequestParam(name = "recordEndTime" , defaultValue = "9999/99/99") String recordEndTime,
                                     @RequestParam(name = "department" , defaultValue = "%") String department,
                                     @RequestParam(name = "status",defaultValue = "%") String status,
@@ -144,11 +159,19 @@ public class MeteringDealProcessController {
         if(status.equals("%")){
             status = null;
         }
+        PageHelper.startPage(pageNum,pageSize);
         List<MeteringDealProcess> meteringDealProcessList = meteringDealProcessService.searchFormProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
-        if(meteringDealProcessList.isEmpty()){
-            return Result.error("未查询到任何数据");
+        PageInfo info = new PageInfo(meteringDealProcessList);
+        PageVo vo = new PageVo();
+        if(!meteringDealProcessList.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringDealProcessList));
+            return vo;
         }
-        return Result.success(meteringDealProcessList);
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
 
