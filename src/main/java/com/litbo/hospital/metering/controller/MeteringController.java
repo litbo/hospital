@@ -1,9 +1,13 @@
 package com.litbo.hospital.metering.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
 import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
 import com.litbo.hospital.metering.service.MeteringService;
+import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,12 +128,23 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/findAllMeteringUtil.do")
-    public Result findAllMeteringUtil(){
+    public PageVo findAllMeteringUtil(int pageIndex,int pageSize){
+        PageHelper.startPage(pageIndex,pageSize);
         List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtil();
-        if(meteringUtils.isEmpty()){
-            return Result.error("没有找到任何数据呦");
+
+        PageInfo info = new PageInfo(meteringUtils);
+
+        PageVo vo = new PageVo();
+        if(!meteringUtils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
+            return vo;
         }
-        return Result.success(meteringUtils);
+
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
     }
 
 
