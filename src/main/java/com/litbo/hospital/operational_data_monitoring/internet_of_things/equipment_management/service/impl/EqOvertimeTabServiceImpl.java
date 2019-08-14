@@ -70,7 +70,7 @@ public class EqOvertimeTabServiceImpl implements EqOvertimeTabService {
     }
 
     @Override
-    public void update(EqOvertimeVO eqOvertimeTab) {
+    public void update(EqOvertimeTab eqOvertimeTab) {
         eqOvertimeTabDAO.update(eqOvertimeTab);
     }
 }

@@ -11,20 +11,29 @@ import lombok.Data;
  */
 @Data
 public class EqDutyVO {
+    /**
+     * 设备信息
+     */
     //设备值班id
     private String id;
 
+    //联网仪编号
+    private String macId;
     //设备表
     //设备名称
     private String eqName;
     //设备编号
     private String eqSbbh;
+    /**设备规格*/
+    private String eqGg;
+    /**设备型号*/
+    private String eqXh;
     //设备简称表
     //设备简称
     private String cAName;
     //来自设备值班类型表
     //设备值班类型名
-    private String cDTypeName;
+    private String cdtypeName;
     private String w1;
 
     private String w2;
@@ -80,4 +89,34 @@ public class EqDutyVO {
     private String fmW6 ;
 
     private String fmW7 ;
+
+    /**
+     * 加班信息
+     */
+
+    /**
+     * 核定工时信息
+     */
+    private String ratingType;
+
+    private String workDays;
+
+    private String amShift;
+
+    private String pmShift;
+
+    private String fmShift;
+
+    private String fullLoadTime;
+
+    private String eqMacId;
+
+    private String startDate ;
+
+    private String endDate ;
+
+    private String startTime;
+
+    private String endTime;
+
 }

@@ -40,9 +40,9 @@ public interface DeviceparameterService {
 
     /**
      * 批量删除
-     * @param searchVOList
+     * @param macIds
      */
-    void deletes(List<SearchVO> searchVOList);
+    void deletes(String[] macIds);
 
 
 
@@ -53,8 +53,16 @@ public interface DeviceparameterService {
 
 
     /**
-     * 保存设备信息
+     * 保存设备关联信息
      * @param deviceparameterVO
      */
     void save(DeviceparameterVO deviceparameterVO);
+
+    /**
+     * 更新设备关联信息
+     * @param deviceparameterVO
+     */
+    void update(DeviceparameterVO deviceparameterVO);
+
+    PageInfo showNoDutyEq(Integer pageNum, Integer pageSize, SearchVO searchVO);
 }

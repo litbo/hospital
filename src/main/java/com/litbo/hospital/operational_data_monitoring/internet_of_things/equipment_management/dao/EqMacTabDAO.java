@@ -81,14 +81,13 @@ public interface EqMacTabDAO {
             " set " +
             "DeptID = #{deptid,jdbcType=VARCHAR}," +
             "EquID = #{equid,jdbcType=VARCHAR}," +
-            "MacID = #{macid,jdbcType=VARCHAR}," +
             "MacIP = #{macip,jdbcType=VARCHAR}," +
             "flag = #{flag,jdbcType=VARCHAR}," +
             "hasPacs = #{haspacs,jdbcType=VARCHAR}," +
             "hasWorkBox = #{hasworkbox,jdbcType=VARCHAR}," +
             "MacRule = #{macrule,jdbcType=VARCHAR}," +
             " PMacID = #{pmacid,jdbcType=VARCHAR} " +
-            " where id = #{id}")
+            " where MacID = #{macid}")
     /**根据id更新*/
     void update(EqMacTab eqMacTab);
 }

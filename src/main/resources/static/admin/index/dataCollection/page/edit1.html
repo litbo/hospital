@@ -9,25 +9,31 @@
 	<link rel="stylesheet" href="../css/dataIndex.css">
 	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script src="../iconfont/iconfont.js"></script>
+	<script src="../../../../static/admin/js/basic.js"></script>
 </head>
 <body>
 
-<form class="layui-form" action="">
+<form class="layui-form" action="" style="margin-top: 20px;" lay-filter="forms">
+
+	<p class="divideP">设备联网信息</p>
 
 	<!--第一行-->
 	<div class="layui-form-item">
 		<div class="layui-inline spanDiv" style="width: 380px;">
-			<label class="layui-form-label" style="width: 100px;">设备 <i class="iconfont required">&#xe7f9;</i></label>
+			<label class="layui-form-label" style="width: 80px;margin-left: 8px;">设备 <i class="iconfont required">&#xe7f9;</i></label>
+			<input class="equipmentSpan" lay-verify="required" name="eqName" disabled style="margin-left: 20px;">
+			<input type="hidden" class="eqSbbh" name="eqSbbh" disabled>
+			<input type="hidden" class="eqId" name="eqId" disabled>
 			<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
-				<p class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm"   data-method="notice" style="margin-top: 5px;">选择</p>
+				<p class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm"   data-method="notice" style="margin-top: 5px;margin-left: 30px;">选择</p>
 			</div>
-			<input class="equipmentSpan" lay-verify="required" disabled>
 		</div>
-		<div class="layui-inline" style="width: 380px;">
-			<label class="layui-form-label" style="width: 120px;">安装Pacs/LIS</label>
-			<div class="layui-input-block">
-				<input type="radio" name="Y" value="有" title="有" checked="">
-				<input type="radio" name="Y" value="无" title="无">
+		<div class="layui-inline" style="width: 400px;">
+			<label class="layui-form-label" style="width: 140px;">联网仪编号</label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+				<input type="text" name="macID" autocomplete="off"
+					   placeholder="" class="layui-input"
+					   id="lywbh" disabled>
 			</div>
 		</div>
 	</div>
@@ -35,58 +41,74 @@
 	<!--第二行-->
 	<div class="layui-form-item">
 		<div class="layui-inline" style="width: 380px;">
-			<label class="layui-form-label" style="width: 100px;">联网仪编号 <i class="iconfont required">&#xe7f9;</i></label>
-			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
-				<input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+			<label class="layui-form-label" style="width: 100px;">联网仪IP</label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 20px;width: 200px;">
+				<input type="text" name="endPointIP" lay-verify=""
+					   autocomplete="off" placeholder="" class="layui-input"
+					   id="lywIP" disabled>
 			</div>
 		</div>
 		<div class="layui-inline" style="width: 380px;">
-			<label class="layui-form-label" style="width: 120px;">Pacs/LIS终端编号</label>
-			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
-				<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="" class="layui-input">
-			</div>
+
 		</div>
 	</div>
+
+	<p class="divideP">联网设置</p>
 
 	<!--第三行-->
 	<div class="layui-form-item">
 		<div class="layui-inline" style="width: 380px;">
-			<label class="layui-form-label" style="width: 100px;">联网仪IP</label>
-			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
-				<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="" class="layui-input">
+			<label class="layui-form-label" style="width: 100px;margin-left: 34px;">安装PACS
+				/LIS</label>
+			<div class="layui-input-block"
+				 style="display: inline-block;margin-left: 0;width: 200px;">
+				<select name="haspacs" id="azPACS" lay-filter="azPACS">
+					<option value="0">无</option>
+					<option value="1">有</option>
+				</select>
 			</div>
 		</div>
-		<div class="layui-inline" style="width: 380px;">
-			<label class="layui-form-label" style="width: 120px;">记录工作里</label>
-			<div class="layui-input-block">
-				<input type="radio" name="yes" value="有" title="有" checked="">
-				<input type="radio" name="yes" value="无" title="无">
+		<div class="layui-inline" style="width: 445px;">
+			<label class="layui-form-label" style="width: 140px;margin-left: 25px;">PACS/LIS
+				终端编号</label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+				<input type="text" name="pmacid" lay-verify="content"
+					   autocomplete="off" placeholder="" class="layui-input" id="PACSLIS" >
 			</div>
 		</div>
 	</div>
 
+
 	<!--第四行-->
 	<div class="layui-form-item">
 		<div class="layui-inline" style="width: 380px;">
-			<label class="layui-form-label" style="width: 100px;">项目标志 <i class="iconfont required">&#xe7f9;</i></label>
-			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
-				<input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+			<label class="layui-form-label" style="width: 100px;margin-left: 12px;">记录工作量
+			</label>
+			<div class="layui-input-block"
+				 style="display: inline-block;margin-left: 20px;width: 200px;">
+				<select name="hasworkbox" id="jlgzl" lay-filter="jlgzl">
+					<option value="0">无</option>
+					<option value="1">有</option>
+
+				</select>
 			</div>
 		</div>
-		<div class="layui-inline" style="width: 380px;">
-			<label class="layui-form-label" style="width: 120px;">工作里计算规则</label>
-			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
-				<select name="rule">
+		<div class="layui-inline" style="width: 440px;">
+			<label class="layui-form-label" style="width: 140px;">工作量计算规则
+			</label>
+			<div class="layui-input-block"
+				 style="display: inline-block;margin-left: 25px;width: 220px;">
+				<select name="macrule" id="jsRule">
 					<option value=""></option>
-					<option value="0">His执行科室为准</option>
 					<option value="1">His项目标志为准</option>
-					<option value="2">不计算流失工作里</option>
+					<option value="2">His执行科室为准</option>
+					<option value="3">不计算流失数据</option>
 				</select>
 			</div>
 		</div>
 	</div>
 
-	<p style="color: red;margin: 0 0 20px 110px"><i class="iconfont required">&#xe7f9;</i> 同类设备项目标志一致</p>
+	<p style="color: red;margin: 0 0 20px 110px"><i class="iconfont required">&#xe7f9;</i> 联网仪编号与联网仪IP无需手动填写</p>
 
 	<!--按钮-->
 	<div class="layui-form-item">
@@ -106,6 +128,81 @@
 <script src="../layui/layui.js"></script>
 <script src="../js/dataIndex.js"></script>
 <script>
+
+	// 取得上一页面的url
+	var url=window.location.search;
+	// console.log(url);
+	// 得到字段
+	var eqSbbh = $.getUrlParam("eqSbbh");
+	var macID =  $.getUrlParam("macID");
+	var endPointIP =  $.getUrlParam("endPointIP");
+	var haspacs =  $.getUrlParam("haspacs");
+	var hasworkbox =  $.getUrlParam("hasworkbox");
+	var macrule =  $.getUrlParam("macrule");
+	var pmacid =  $.getUrlParam("pmacid");
+
+
+	// 动态创建url
+	var macip = endPointIP;
+	//console.log(macip);
+	var url2 = "/deviceparameter/showOne?macip=" + macip + "&eqSbbh=" + eqSbbh;
+	//console.log(url2);
+	renderMod.form = {
+		val:{
+			filter:"forms",//与form标签lay-filter相同
+			get:{
+				url:url2,
+				type:"POST",
+				data:["eqName","macID","endPointIP","haspacs","pmacid","hasworkbox","macrule"]
+			},
+			func:function(data){
+				console.log(data);
+				var haspacs = data.haspacs;
+				var pmacid = data.pmacid;
+				var hasworkbox = data.hasworkbox;
+				var macrule = data.macrule;
+
+				// 如果安装PACS/LIS无，让PACS/LIS终端编号不可编辑且内容为空
+				if(haspacs == 0){
+					$("#PACSLIS").attr("disabled","true");
+					$("#PACSLIS").val(null);
+				}
+				// 如果安装PACS/LIS有，让PACS/LIS终端编号可编辑
+				else if (haspacs == 1) {
+					$("#PACSLIS").removeAttr("disabled");
+
+				}
+				// 如果安装PACS/LIS为空，让PACS/LIS终端编号不可编辑且内容为空
+				else if (haspacs == null){
+					$("#PACSLIS").attr("disabled","true");
+					$("#azPACS").find("option[value='0']").prop("selected",true);
+					$("#PACSLIS").val(null);
+					layui.form.render('select');
+				}
+
+				//如果记录工作量无，让工作量计算规则不可编辑且为空
+				if(hasworkbox == 0){
+					$("#jsRule").attr("disabled","true");
+					$("#jsRule option").find("option[value='']").prop("selected",true);
+					layui.form.render('select');
+				}
+				//如果记录工作量有，让工作量计算规则可编辑
+				else if (hasworkbox == 1) {
+					$("#jsRule").removeAttr("disabled");
+					layui.form.render('select');
+				}
+				//如果记录工作量为空，让工作量计算规则不可编辑且为空
+				else if (hasworkbox == null){
+					$("#jsRule").attr("disabled","true");
+					$("#jsgzl").find("option[value='0']").prop("selected",true);
+					$("#jsRule").find("option[value='']").prop("selected",true);
+					layui.form.render('select');
+				}
+			}
+		}
+	};
+
+
 	//JavaScript代码区域
 	layui.use('element', function(){
 		var element = layui.element;
@@ -113,6 +210,7 @@
 
 	// 表单
 	layui.use(['form', 'layedit', 'laydate'], function(){
+
 		var form = layui.form
 				,layer = layui.layer
 				,layedit = layui.layedit
@@ -125,25 +223,8 @@
 			,value: new Date()
 		});
 
-		form.verify({
-			requiredSpan: function(text){
-				if(text.length < 0){
-					return '标题至少得5个字符啊';
-				}
-			}
-			,pass: [
-				/^[\S]{6,12}$/
-				,'密码必须6到12位，且不能出现空格'
-			]
-			,content: function(value){
-				layedit.sync(editIndex);
-			}
-		});
-	});
-
-	//弹出层
-	layui.use('layer', function(){
-		var $ = layui.jquery, layer = layui.layer;
+		// 弹出层
+		var $ = layui.jquery;
 
 		//触发事件
 		var active = {
@@ -154,7 +235,7 @@
 					shadeClose: true,
 					shade: 0.8,
 					area: ['1000px', '90%'],
-					content: 'choose1.html' //iframe的url
+					content: 'choose2.html' //iframe的url
 				});
 			}
 		};
@@ -164,7 +245,69 @@
 			active[method] ? active[method].call(this, othis) : '';
 		});
 
+		form.on('submit(demo1)', function(data){
+
+			// var a = {"eqSbbh":eqSbbh};
+			var b = data.field;
+			// var dataObj = $.extend(a, b);
+			var dataJson = JSON.stringify(b);
+			// console.log(a);
+			console.log(b);
+			console.log(dataJson);
+
+			$.ajax({
+				type: "POST",
+				dataType: 'json',
+				url: '/deviceparameter/save',
+				data: dataJson,
+				contentType: 'application/json; charset=UTF-8',
+				success: function(data) {
+					if (data.code == '5'){
+						layui.layer.alert('保存成功!');
+						window.location.href = 'main3.html'
+					}
+				},
+				error:function(){
+					alert("error");
+				}
+			});
+			return false;
+		});
+
+
+		//自定义验证规则
+		form.verify({
+			content: [
+				/^[A-Za-z0-9]+$/
+				,'内容只能是数字和字母'
+			]
+		});
+
+		//时时监听layui下列框的改变
+		form.on('select(azPACS)', function(data){
+			if($("#azPACS option:checked").text() == '无'){
+				$("#PACSLIS").attr("disabled","true");
+				$("#PACSLIS").val(null);
+				form.render('select');
+			}
+			else if ($("#azPACS option:checked").text() == '有') {
+				$("#PACSLIS").removeAttr("disabled");
+				form.render('select');
+			}
+		});
+		form.on('select(jlgzl)', function(data){
+			if($("#jlgzl option:checked").text() == '无'){
+				$("#jsRule").attr("disabled","true");
+				$("#jsRule").val(null);
+				form.render('select');
+			}
+			else if ($("#jlgzl option:checked").text() == '有') {
+				$("#jsRule").removeAttr("disabled");
+				form.render('select');
+			}
+		});
 	});
+
 </script>
 </body>
 </html>

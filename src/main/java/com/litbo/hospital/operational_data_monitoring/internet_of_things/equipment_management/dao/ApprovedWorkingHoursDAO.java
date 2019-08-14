@@ -77,9 +77,13 @@ public interface ApprovedWorkingHoursDAO {
     List<ApprovedWorkingHoursVO> selectAllBy(SearchVO searchVO);
 
     /**根据id删除*/
-    @Delete("DELETE FROM approved_working_hours WHERE id = #{id}")
+    @Delete("DELETE FROM approved_working_hours WHERE eq_mac_id = #{id}")
     void delete(String id);
-
+    @Delete({"<script>",
+            "DELETE FROM approved_working_hours where eq_mac_id in",
+            "<foreach item='id' collection='array' open='(' separator=',' close=')'> #{id} </foreach>"
+            ,"</script>"})
+    void deletes(String[] ids);
     /**批量删除*/
     @Delete({
             "<script>",
@@ -124,6 +128,19 @@ public interface ApprovedWorkingHoursDAO {
             "am_shift = #{amShift,jdbcType=VARCHAR},\n" +
             "pm_shift = #{pmShift,jdbcType=VARCHAR},\n" +
             "fm_shift = #{fmShift,jdbcType=VARCHAR},\n" +
-            "full_load_time = #{fullLoadTime,jdbcType=VARCHAR}")
+            "full_load_time = #{fullLoadTime,jdbcType=VARCHAR}\n " +
+            "where eq_mac_id = #{eqMacId}")
     void update(ApprovedWorkingHours approvedWorkingHours);
+
+    /**根据eq_mac_id修改*/
+    @Update("update approved_working_hours\n" +
+            "set\n" +
+            "rating_type = #{ratingType,jdbcType=VARCHAR},\n" +
+            "work_days = #{workDays,jdbcType=VARCHAR},\n" +
+            "am_shift = #{amShift,jdbcType=VARCHAR},\n" +
+            "pm_shift = #{pmShift,jdbcType=VARCHAR},\n" +
+            "fm_shift = #{fmShift,jdbcType=VARCHAR},\n" +
+            "full_load_time = #{fullLoadTime,jdbcType=VARCHAR}" +
+            " where eq_mac_id = #{eqMacId}")
+    void update2(ApprovedWorkingHours approvedWorkingHours);
 }

@@ -52,4 +52,31 @@ public class EqManageController {
         return Result.success(eqService.selectAllBy(pageNum, pageSize,searchVO ));
     }
 
+    /**
+     * 显示设备信息
+     * @return
+     */
+    @RequestMapping("/show1")
+    public Result show1(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
+                       @RequestParam(required = false,defaultValue = "1") Integer pageNum,
+                       SearchEqVO searchVO){
+        if (searchVO!=null){
+            if (searchVO.getBmId() != null){
+                if (searchVO.getBmId().equals("")){
+                    searchVO.setBmId(null);
+                }
+            }
+            if (searchVO.getEqPym()!= null){
+                if (searchVO.getEqPym().equals("")){
+                    searchVO.setEqPym(null);
+                }
+            }
+            if (searchVO.getEqZcbh() != null){
+                if (searchVO.getEqZcbh().equals("")){
+                    searchVO.setEqZcbh(null);
+                }
+            }
+        }
+        return Result.success(eqService.selectAllBy2(pageNum, pageSize,searchVO ));
+    }
 }

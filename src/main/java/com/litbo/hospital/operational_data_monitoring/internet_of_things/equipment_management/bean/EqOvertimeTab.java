@@ -14,9 +14,9 @@ public class EqOvertimeTab {
 
     private String eqMacId;
 
-    private Date startDate = null;
+    private String startDate;
 
-    private Date endDate = null;
+    private String endDate;
 
     private String startTime;
 

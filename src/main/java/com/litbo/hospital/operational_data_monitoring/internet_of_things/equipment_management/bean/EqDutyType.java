@@ -9,6 +9,5 @@ import lombok.Data;
 @Data
 public class EqDutyType {
     private String cdtype;
-
     private String cdtypename;
 }

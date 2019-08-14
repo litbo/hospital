@@ -69,4 +69,11 @@ public interface EqService {
      */
     PageInfo selectAllBy(Integer pageNum, Integer pageSize,
                          SearchEqVO searchVO);
+    /**
+     * 根据条件查询
+     * @param searchVO
+     * @return
+     */
+    PageInfo selectAllBy2(Integer pageNum, Integer pageSize,
+                         SearchEqVO searchVO);
 }

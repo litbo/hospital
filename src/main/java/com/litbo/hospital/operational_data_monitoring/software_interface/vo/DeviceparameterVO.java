@@ -43,4 +43,6 @@ public class DeviceparameterVO {
     private String eqBmid;
     /**部门名称*/
     private String bmName;
+    /**设备id*/
+    private String eqId;
 }

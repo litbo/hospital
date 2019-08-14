@@ -63,6 +63,7 @@ public class QuartzConfig {
             trigger.setCronExpression("0 0 2 * * ? ");
         }
 //        trigger.setCronExpression("0/5 * * * * ?");
+//        trigger.setCronExpression("0 18 9 * * ? ");
         //trigger的name
         trigger.setName("srd-demo");
         return trigger;

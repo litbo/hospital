@@ -35,7 +35,7 @@ public interface HisSflbDAO {
                             "#{his.hisBrXb}, #{his.hisBrBz}, #{his.hisYXmBm}, \n" +
                             "#{his.hisXmBm}, #{his.hisXmJe}, #{his.hisXmSl}, \n" +
                             "#{his.hisMDeptID}, #{his.hisMTime}, #{his.hisstatus})\n" +
-                            "</foreach>",
+                    "</foreach>",
             "</script>"})
     void saves(List<HisSflb> hisSflbs);
 

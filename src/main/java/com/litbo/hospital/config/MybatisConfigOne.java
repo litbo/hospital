@@ -32,7 +32,7 @@ import javax.sql.DataSource;
         "com.litbo.hospital.common.task.dao",
         "com.litbo.hospital.lifemanage.dao",
         "com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao",
-        "com.litbo.hospital.operational_data_monitoring.operation_record.dao",
+        "com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.dao",
         "com.litbo.hospital.security.dao",
         "com.litbo.hospital.supervise.dao",
         "com.litbo.hospital.user.dao",
@@ -77,7 +77,6 @@ public class MybatisConfigOne {
             throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-//        sessionFactory.setVfs(SpringBootVFS.class);
         sessionFactory.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
         sessionFactory.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:com/litbo/hospital/security/specialequipment/dao/*.xml")

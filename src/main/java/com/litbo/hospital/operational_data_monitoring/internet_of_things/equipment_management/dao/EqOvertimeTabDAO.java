@@ -108,8 +108,8 @@ public interface EqOvertimeTabDAO {
     EqOvertimeVO selectById(String id);
 
     /**根据id删除加班信息*/
-    @Delete("DELETE FROM eq_overtime_tab WHERE id = #{id}")
-    void delete(String id);
+    @Delete("DELETE FROM eq_overtime_tab WHERE eq_mac_id = #{id}")
+    void delete(@Param("id") String id);
     /**根据id删除 批量删除*/
     @Delete({
             "<script>",
@@ -119,6 +119,11 @@ public interface EqOvertimeTabDAO {
     })
     void deletes(List<String> ids);
 
+    @Delete({"<script>",
+            "DELETE FROM eq_overtime_tab where eq_mac_id in",
+            "<foreach item='id' collection='array' open='(' separator=',' close=')'> #{id} </foreach>"
+            ,"</script>"})
+    void deletes2(String[] ids);
     /**根据id修改*/
     @Update("update eq_overtime_tab\n" +
             "set\n" +
@@ -126,7 +131,17 @@ public interface EqOvertimeTabDAO {
             "end_date = #{endDate,jdbcType=TIMESTAMP},\n" +
             "start_time = #{startTime,jdbcType=VARCHAR},\n" +
             "end_time = #{endTime,jdbcType=VARCHAR}\n" +
-            "where id = #{id}")
-    void update(EqOvertimeVO eqOvertime);
+            "where eq_mac_id = #{eqMacId}")
+    void update(EqOvertimeTab eqOvertime);
+
+    /**根据id修改*/
+    @Update("update eq_overtime_tab\n" +
+            "set\n" +
+            "start_date = #{startDate,jdbcType=TIMESTAMP},\n" +
+            "end_date = #{endDate,jdbcType=TIMESTAMP},\n" +
+            "start_time = #{startTime,jdbcType=VARCHAR},\n" +
+            "end_time = #{endTime,jdbcType=VARCHAR}\n" +
+            "where eq_mac_id = #{eqMacId}")
+    void update2(EqOvertimeVO eqOvertime);
 
 }

@@ -25,4 +25,5 @@ public class SearchVO {
 
     /**联网仪编号*/
     private String macid;
+
 }
