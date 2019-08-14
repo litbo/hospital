@@ -11,6 +11,7 @@ import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sun.security.util.AuthResources_it;
 
@@ -128,8 +129,9 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/findAllMeteringUtil.do")
-    public PageVo findAllMeteringUtil(int pageIndex,int pageSize){
-        PageHelper.startPage(pageIndex,pageSize);
+    public PageVo findAllMeteringUtil(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                      @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
         List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtil();
 
         PageInfo info = new PageInfo(meteringUtils);
