@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="meteringutil_id" jdbcType="INTEGER" property="meteringutilId" />
+    <result column="meteringutill_number" jdbcType="VARCHAR" property="meteringutillNumber" />
+    <result column="get_number_time" jdbcType="VARCHAR" property="getNumberTime" />
+    <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+    <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, meteringutil_id, meteringutill_number, get_number_time, record_time, record_person, 
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..metering_history_number
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..metering_history_number
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
+    insert into hospital..metering_history_number (meteringutil_id, meteringutill_number,
+      get_number_time, record_time, record_person, 
+      description)
+    values (#{meteringutilId,jdbcType=INTEGER}, #{meteringutillNumber,jdbcType=VARCHAR},
+      #{getNumberTime,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
+    insert into hospital..metering_history_number
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meteringutilId != null">
+        meteringutil_id,
+      </if>
+      <if test="meteringutillNumber != null">
+        meteringutill_number,
+      </if>
+      <if test="getNumberTime != null">
+        get_number_time,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="recordPerson != null">
+        record_person,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meteringutilId != null">
+        #{meteringutilId,jdbcType=INTEGER},
+      </if>
+      <if test="meteringutillNumber != null">
+        #{meteringutillNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="getNumberTime != null">
+        #{getNumberTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
+    update hospital..metering_history_number
+    <set>
+      <if test="meteringutilId != null">
+        meteringutil_id = #{meteringutilId,jdbcType=INTEGER},
+      </if>
+      <if test="meteringutillNumber != null">
+        meteringutill_number = #{meteringutillNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="getNumberTime != null">
+        get_number_time = #{getNumberTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        record_person = #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
+    update hospital..metering_history_number
+    set meteringutil_id = #{meteringutilId,jdbcType=INTEGER},
+      meteringutill_number = #{meteringutillNumber,jdbcType=VARCHAR},
+      get_number_time = #{getNumberTime,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=VARCHAR},
+      record_person = #{recordPerson,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findAllMeteringHistoryNumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_history_number
+    where meteringutil_id = #{meteringutilId,jdbcType=INTEGER}
+  </select>
+</mapper>

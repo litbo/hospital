@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.DossierFileDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.DossierFile">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="belong_dossier_num" jdbcType="VARCHAR" property="belongDossierNum" />
+    <result column="belong_dossier_name" jdbcType="VARCHAR" property="belongDossierName" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="buy_time" jdbcType="VARCHAR" property="buyTime" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="agent" jdbcType="VARCHAR" property="agent" />
+    <result column="file_num" jdbcType="VARCHAR" property="fileNum" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_date" jdbcType="VARCHAR" property="fileDate" />
+    <result column="file_size" jdbcType="VARCHAR" property="fileSize" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+    <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+    <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, belong_dossier_num, belong_dossier_name, specification, manufacturer, buy_time, 
+    department, agent, file_num, file_name, file_date, file_size, summary, description, 
+    file_url, record_time, record_person
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..dossier_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..dossier_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.DossierFile">
+    insert into hospital..dossier_file (belong_dossier_num, belong_dossier_name,
+      specification, manufacturer, buy_time, 
+      department, agent, file_num, 
+      file_name, file_date, file_size, 
+      summary, description, file_url, 
+      record_time, record_person)
+    values (#{belongDossierNum,jdbcType=VARCHAR}, #{belongDossierName,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{fileDate,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.DossierFile">
+    insert into hospital..dossier_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="belongDossierNum != null">
+        belong_dossier_num,
+      </if>
+      <if test="belongDossierName != null">
+        belong_dossier_name,
+      </if>
+      <if test="specification != null">
+        specification,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="buyTime != null">
+        buy_time,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="agent != null">
+        agent,
+      </if>
+      <if test="fileNum != null">
+        file_num,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="fileDate != null">
+        file_date,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="recordPerson != null">
+        record_person,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="belongDossierNum != null">
+        #{belongDossierNum,jdbcType=VARCHAR},
+      </if>
+      <if test="belongDossierName != null">
+        #{belongDossierName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null">
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null">
+        #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null">
+        #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDate != null">
+        #{fileDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        #{recordPerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.metering.pojo.DossierFile">
+    update hospital..dossier_file
+    <set>
+      <if test="belongDossierNum != null">
+        belong_dossier_num = #{belongDossierNum,jdbcType=VARCHAR},
+      </if>
+      <if test="belongDossierName != null">
+        belong_dossier_name = #{belongDossierName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null">
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        buy_time = #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="agent != null">
+        agent = #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null">
+        file_num = #{fileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDate != null">
+        file_date = #{fileDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        record_person = #{recordPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.metering.pojo.DossierFile">
+    update hospital..dossier_file
+    set belong_dossier_num = #{belongDossierNum,jdbcType=VARCHAR},
+      belong_dossier_name = #{belongDossierName,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      buy_time = #{buyTime,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      agent = #{agent,jdbcType=VARCHAR},
+      file_num = #{fileNum,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_date = #{fileDate,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=VARCHAR},
+      record_person = #{recordPerson,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllDossierFile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..dossier_file
+    where belong_dossier_name = #{dossierName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectDossierFileByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..dossier_file
+    where file_name = #{dossierFileName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByDossierFileNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..dossier_file
+    where file_num = #{fileNum,jdbcType=INTEGER}
+  </select>
+
+</mapper>

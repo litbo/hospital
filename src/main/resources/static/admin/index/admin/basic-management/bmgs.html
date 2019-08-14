@@ -55,6 +55,14 @@
 
 <script>
     renderMod = {
+        formAction:{
+
+        },
+        bind:{
+
+        }
+    }
+    renderMod = {
         addTable: {
             table: {
                 elem: "#table"
@@ -81,7 +89,6 @@
                 , done: function (obj) {
                     tableFunc(
                         {
-                            "obj": obj,
                             "toolFunc": [
                                 {
                                     tool: "toolbar",
@@ -105,7 +112,6 @@
                         }
                     )
                 }
-
             },
             reSet: {
                 url: "/supervise/bmgl/listKgsBm",
