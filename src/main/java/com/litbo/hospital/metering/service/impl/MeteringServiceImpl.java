@@ -180,6 +180,12 @@ public class MeteringServiceImpl implements MeteringService {
         String nowDate = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a").format(new Date());
         meteringutilNewMessage.setUpdateMessageTime(nowDate);
 
+
+        // 将老数据重复
+        meteringutilNewMessage.setDescription(meteringUtilTestOldMEssage02.getDescription());
+        meteringutilNewMessage.setMeteringstatus(meteringUtilTestOldMEssage02.getMeteringstatus());
+        meteringutilNewMessage.setRecordTime(meteringUtilTestOldMEssage02.getRecordTime());
+
         // 如果计量周期发生变化，则重新计算计量时间
         if(meteringUtilTestOldMessage.getMeteringInspectionCycle() != meteringutilNewMessage.getMeteringInspectionCycle()){
             // 计算出下次送去计量的时间

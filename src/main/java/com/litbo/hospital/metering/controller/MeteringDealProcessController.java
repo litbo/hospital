@@ -1,5 +1,7 @@
 package com.litbo.hospital.metering.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.pojo.MeteringApprovalForm;
@@ -7,6 +9,7 @@ import com.litbo.hospital.metering.pojo.MeteringDealProcess;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
 import com.litbo.hospital.metering.service.MeteringDealProcessService;
 import com.litbo.hospital.metering.service.MeteringService;
+import com.litbo.hospital.metering.vo.AddSomeMeteringUtilToProcessVo;
 import com.litbo.hospital.metering.vo.MeteringApprovalFormMoreInfomationVo;
 import com.litbo.hospital.metering.vo.MeteringProcessMoreInformationVo;
 import com.litbo.hospital.metering.vo.PageVo;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sound.midi.Soundbank;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +49,19 @@ public class MeteringDealProcessController {
      * @return
      */
     @RequestMapping("/addSomeMeteringUtilToProcess.do")
-    public Result addSomeMeteringUtilToProcess(String department,String utilIds){
+    public Result addSomeMeteringUtilToProcess(String content){
+        System.out.println(content);
+        AddSomeMeteringUtilToProcessVo vo = (AddSomeMeteringUtilToProcessVo) JSONObject.parse(content);
+
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0 ; i < vo.getUtilIds().size()-1 ;i++){
+            stringBuffer.append(vo.getUtilIds().get(i)).append(",");
+            System.out.println(stringBuffer);
+        }
+        stringBuffer.append(vo.getUtilIds().get(vo.getUtilIds().size()-1));
+        String utilIds = stringBuffer.toString();
+        String department = vo.getDepartment();
+        System.out.println(stringBuffer);
 
         // 组装一个表单，记录此次生成的报表
         MeteringApprovalForm form = new MeteringApprovalForm();
