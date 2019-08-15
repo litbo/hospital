@@ -28,6 +28,7 @@ import javax.sql.DataSource;
 
 /**
  * 在basePackages中加入自己的dao
+ * 加入自己的dao接口就可以了
  */
 @Configuration
 @MapperScan(basePackages = {
