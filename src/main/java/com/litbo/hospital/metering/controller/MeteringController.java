@@ -217,7 +217,7 @@ public class MeteringController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
             return vo;
         }
-        vo.setMsg("error");
+        vo.setMsg("没有查询到数据");
         vo.setCode(1);
         return vo;
     }
