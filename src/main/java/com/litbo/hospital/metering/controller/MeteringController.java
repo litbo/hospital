@@ -152,21 +152,21 @@ public class MeteringController {
 
     /**
      *  根据部门查看设备信息
-     * @param department
+     * @param bmName
      * @return
      */
     @RequestMapping("/findAllMeteringUtilByDepartment.do")
     public PageVo findAllMeteringUtilByDepartment(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                                   @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
-                                                  @RequestParam(name = "department" , defaultValue = "%")String department){
+                                                  @RequestParam(name = "bmName" , defaultValue = "%")String bmName){
         PageVo vo = new PageVo();
-        if(department.equals("%")){
+        if(bmName.equals("%")){
             vo.setMsg("error");
             vo.setCode(1);
             return vo;
         }
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(department);
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(bmName);
 
         PageInfo info = new PageInfo(meteringUtils);
         if(!meteringUtils.isEmpty()){
@@ -212,18 +212,18 @@ public class MeteringController {
 
     /**
      * 按部门查看在用设备信息
-     * @param department
+     * @param bmName
      * @return
      */
     @RequestMapping("/findAllNeedMeteringUtilByDepartment.do")
     public PageVo findAllNeedMeteringUtilByDepartment(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                                       @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
-                                                      @RequestParam(name = "department" , defaultValue = "%")String department){
-        if(department.equals("%")){
-            department = null;
+                                                      @RequestParam(name = "bmName" , defaultValue = "%")String bmName){
+        if(bmName.equals("%")){
+            bmName = null;
         }
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(department);
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(bmName);
         PageInfo info = new PageInfo(meteringUtils);
         PageVo vo = new PageVo();
         if(!meteringUtils.isEmpty()){
@@ -242,7 +242,7 @@ public class MeteringController {
      * 多条件查询
      * @param beginTime 开始时间
      * @param endTiem 结束时间
-     * @param department 部门
+     * @param bmName 部门
      * @param description 设备状态,0未进入审批流程，1已进入审批流程
      * @return
      */
@@ -251,17 +251,17 @@ public class MeteringController {
                                      @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
                                      @RequestParam(name = "beginTime" , defaultValue = "0000/00/00") String beginTime,
                                      @RequestParam(name = "endTiem" , defaultValue = "9999/99/99") String endTiem,
-                                     @RequestParam(name = "department" , defaultValue = "%")String department,
+                                     @RequestParam(name = "bmName" , defaultValue = "%")String bmName,
                                      @RequestParam(name = "description" , defaultValue = "%") String description){
-        if(department.equals("%")){
-            department = null;
+        if(bmName.equals("%")){
+            bmName = null;
         }
         if(description.equals("%")){
             description = null;
         }
 
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(beginTime, endTiem, department, description);
+        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(beginTime, endTiem, bmName, description);
         PageInfo info = new PageInfo(meteringUtils);
         PageVo vo = new PageVo();
         if(!meteringUtils.isEmpty()){
