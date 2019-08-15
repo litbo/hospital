@@ -174,8 +174,9 @@ public class MeteringController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
             return vo;
         }
-        vo.setMsg("error");
-        vo.setCode(1);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
         return vo;
     }
 
@@ -203,7 +204,7 @@ public class MeteringController {
         }
 
         if(bmName==null && meteringUtilName==null){
-            vo.setCode(1);
+            vo.setCode(0);
             vo.setMsg("请填入参数！");
             vo.setData(null);
             return vo;
@@ -247,8 +248,9 @@ public class MeteringController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
             return vo;
         }
-        vo.setMsg("error");
-        vo.setCode(1);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
         return vo;
     }
 
@@ -287,8 +289,9 @@ public class MeteringController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
             return vo;
         }
-        vo.setMsg("error");
-        vo.setCode(1);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
         return vo;
     }
 
@@ -322,8 +325,9 @@ public class MeteringController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
             return vo;
         }
-        vo.setMsg("error");
-        vo.setCode(1);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
         return vo;
     }
 
@@ -363,8 +367,9 @@ public class MeteringController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringHistoryNumbers));
             return vo;
         }
-        vo.setMsg("error");
-        vo.setCode(1);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),meteringHistoryNumbers));
         return vo;
     }
 }
