@@ -15,10 +15,7 @@ import com.litbo.hospital.metering.vo.MeteringProcessMoreInformationVo;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sound.midi.Soundbank;
 import java.text.SimpleDateFormat;
@@ -49,9 +46,9 @@ public class MeteringDealProcessController {
      * @return
      */
     @RequestMapping("/addSomeMeteringUtilToProcess.do")
-    public Result addSomeMeteringUtilToProcess(String content){
+    public Result addSomeMeteringUtilToProcess(@RequestBody String content){
         System.out.println(content);
-        AddSomeMeteringUtilToProcessVo vo = (AddSomeMeteringUtilToProcessVo) JSONObject.parse(content);
+        AddSomeMeteringUtilToProcessVo vo = JSONObject.parseObject(content,AddSomeMeteringUtilToProcessVo.class);
 
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0 ; i < vo.getUtilIds().size()-1 ;i++){
