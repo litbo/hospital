@@ -228,11 +228,19 @@
     from hospital..metering_util
   </select>
 
-  <select id="findAllMeteringUtilByDepartment" resultMap="BaseResultMap">
+  <select id="findAllMeteringUtilByDepartmentAndName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from hospital..metering_util
-    where bm_name = #{department,jdbcType=VARCHAR} and meteringStatus = '在用'
+    <where>
+      <if test="department != null">
+        bm_name like #{department,jdbcType=VARCHAR} and
+      </if>
+      <if test="name != null">
+        metering_name like #{name,jdbcType=VARCHAR} and
+      </if>
+      meteringStatus = '在用'
+    </where>
   </select>
 
   <select id="findAllMeteringUtilByTime" resultMap="BaseResultMap">
@@ -264,5 +272,12 @@
     </where>
   </select>
 
+
+  <select id="findAllMeteringUtilByDepartment" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    where bm_name = #{department,jdbcType=VARCHAR} and meteringStatus = '在用'
+  </select>
 
 </mapper>

@@ -150,6 +150,38 @@ public class MeteringController {
     }
 
 
+
+    /**
+     * 按部门查看在用设备信息
+     * @param bmName
+     * @return
+     */
+    @RequestMapping("/findAllNeedMeteringUtilByDepartment.do")
+    public PageVo findAllNeedMeteringUtilByDepartment(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                                      @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                                      @RequestParam(name = "bmName" , defaultValue = "%")String bmName){
+        if(bmName.equals("%")){
+            bmName = null;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(bmName);
+        PageInfo info = new PageInfo(meteringUtils);
+        PageVo vo = new PageVo();
+        if(!meteringUtils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
+            return vo;
+        }
+        vo.setMsg("error");
+        vo.setCode(1);
+        return vo;
+    }
+
+
+
+
+
     /**
      *  根据部门查看设备信息
      * @param bmName
@@ -158,15 +190,25 @@ public class MeteringController {
     @RequestMapping("/findAllMeteringUtilByDepartment.do")
     public PageVo findAllMeteringUtilByDepartment(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                                   @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
-                                                  @RequestParam(name = "bmName" , defaultValue = "%")String bmName){
+                                                  @RequestParam(name = "bmName" , defaultValue = "%")String bmName,
+                                                  @RequestParam(name = "meteringUtilName" , defaultValue = "%")String meteringUtilName){
         PageVo vo = new PageVo();
-        if(bmName.equals("%")){
-            vo.setMsg("error");
+        if(bmName.equals("%") ){
+            bmName = null;
+        }
+
+        if (meteringUtilName.equals("%")){
+            meteringUtilName = null;
+        }
+
+        if(bmName==null && meteringUtilName==null){
             vo.setCode(1);
+            vo.setMsg("请填入参数！");
+            vo.setData(null);
             return vo;
         }
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(bmName);
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartmentAndMeteringUtilName(bmName,meteringUtilName);
 
         PageInfo info = new PageInfo(meteringUtils);
         if(!meteringUtils.isEmpty()){
@@ -209,33 +251,6 @@ public class MeteringController {
     }
 
 
-
-    /**
-     * 按部门查看在用设备信息
-     * @param bmName
-     * @return
-     */
-    @RequestMapping("/findAllNeedMeteringUtilByDepartment.do")
-    public PageVo findAllNeedMeteringUtilByDepartment(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
-                                                      @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
-                                                      @RequestParam(name = "bmName" , defaultValue = "%")String bmName){
-        if(bmName.equals("%")){
-            bmName = null;
-        }
-        PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartment(bmName);
-        PageInfo info = new PageInfo(meteringUtils);
-        PageVo vo = new PageVo();
-        if(!meteringUtils.isEmpty()){
-            vo.setCode(0);
-            vo.setMsg("success");
-            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
-            return vo;
-        }
-        vo.setMsg("error");
-        vo.setCode(1);
-        return vo;
-    }
 
 
     /**
