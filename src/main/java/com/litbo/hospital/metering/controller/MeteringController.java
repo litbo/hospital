@@ -204,12 +204,6 @@ public class MeteringController {
             meteringUtilName = null;
         }
 
-        if(bmName==null && meteringUtilName==null){
-            vo.setCode(0);
-            vo.setMsg("请填入参数！");
-            vo.setData(vo.new DataEntity(0,new ArrayList<>()));
-            return vo;
-        }
         PageHelper.startPage(pageNum,pageSize);
         List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilByDepartmentAndMeteringUtilName(bmName,meteringUtilName);
 
