@@ -6,9 +6,9 @@
     <result column="metering_name" jdbcType="VARCHAR" property="meteringName" />
     <result column="metering_num" jdbcType="VARCHAR" property="meteringNum" />
     <result column="metering_inspection_cycle" jdbcType="VARCHAR" property="meteringInspectionCycle" />
-    <result column="bmName" jdbcType="VARCHAR" property="bmname" />
+    <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
     <result column="buy_time" jdbcType="VARCHAR" property="buyTime" />
-    <result column="userXm" jdbcType="VARCHAR" property="userxm" />
+    <result column="user_xm" jdbcType="VARCHAR" property="userXm" />
     <result column="update_message_time" jdbcType="VARCHAR" property="updateMessageTime" />
     <result column="this_metering_time" jdbcType="VARCHAR" property="thisMeteringTime" />
     <result column="util_type" jdbcType="VARCHAR" property="utilType" />
@@ -20,7 +20,7 @@
     <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, metering_name, metering_num, metering_inspection_cycle, bmName, buy_time, userXm, 
+    id, metering_name, metering_num, metering_inspection_cycle, bm_name, buy_time, user_xm, 
     update_message_time, this_metering_time, util_type, description, meteringStatus, 
     metering_system_num, metering_get_number_time, record_person, record_time
   </sql>
@@ -36,8 +36,8 @@
   </delete>
   <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringUtil">
     insert into hospital..metering_util (metering_name, metering_num,
-      metering_inspection_cycle, bmName, buy_time, 
-      userXm, update_message_time, this_metering_time, 
+      metering_inspection_cycle, bm_name, buy_time, 
+      user_xm, update_message_time, this_metering_time, 
       util_type, description, meteringStatus, 
       metering_system_num, metering_get_number_time, 
       record_person, record_time)
@@ -60,14 +60,14 @@
       <if test="meteringInspectionCycle != null">
         metering_inspection_cycle,
       </if>
-      <if test="bmname != null">
-        bmName,
+      <if test="bmName != null">
+        bm_name,
       </if>
       <if test="buyTime != null">
         buy_time,
       </if>
-      <if test="userxm != null">
-        userXm,
+      <if test="userXm != null">
+        user_xm,
       </if>
       <if test="updateMessageTime != null">
         update_message_time,
@@ -107,14 +107,14 @@
       <if test="meteringInspectionCycle != null">
         #{meteringInspectionCycle,jdbcType=VARCHAR},
       </if>
-      <if test="bmname != null">
-        #{bmname,jdbcType=VARCHAR},
+      <if test="bmName != null">
+        #{bmName,jdbcType=VARCHAR},
       </if>
       <if test="buyTime != null">
         #{buyTime,jdbcType=VARCHAR},
       </if>
-      <if test="userxm != null">
-        #{userxm,jdbcType=VARCHAR},
+      <if test="userXm != null">
+        #{userXm,jdbcType=VARCHAR},
       </if>
       <if test="updateMessageTime != null">
         #{updateMessageTime,jdbcType=VARCHAR},
@@ -157,14 +157,14 @@
       <if test="meteringInspectionCycle != null">
         metering_inspection_cycle = #{meteringInspectionCycle,jdbcType=VARCHAR},
       </if>
-      <if test="bmname != null">
-        bmName = #{bmname,jdbcType=VARCHAR},
+      <if test="bmName != null">
+        bm_name = #{bmName,jdbcType=VARCHAR},
       </if>
       <if test="buyTime != null">
         buy_time = #{buyTime,jdbcType=VARCHAR},
       </if>
-      <if test="userxm != null">
-        userXm = #{userxm,jdbcType=VARCHAR},
+      <if test="userXm != null">
+        user_xm = #{userXm,jdbcType=VARCHAR},
       </if>
       <if test="updateMessageTime != null">
         update_message_time = #{updateMessageTime,jdbcType=VARCHAR},
@@ -201,9 +201,9 @@
     set metering_name = #{meteringName,jdbcType=VARCHAR},
       metering_num = #{meteringNum,jdbcType=VARCHAR},
       metering_inspection_cycle = #{meteringInspectionCycle,jdbcType=VARCHAR},
-      bmName = #{bmname,jdbcType=VARCHAR},
+      bm_name = #{bmName,jdbcType=VARCHAR},
       buy_time = #{buyTime,jdbcType=VARCHAR},
-      userXm = #{userxm,jdbcType=VARCHAR},
+      user_xm = #{userXm,jdbcType=VARCHAR},
       update_message_time = #{updateMessageTime,jdbcType=VARCHAR},
       this_metering_time = #{thisMeteringTime,jdbcType=VARCHAR},
       util_type = #{utilType,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
     select
     <include refid="Base_Column_List" />
     from hospital..metering_util
-    where bmName = #{department,jdbcType=VARCHAR} and meteringStatus = '在用'
+    where bm_name = #{department,jdbcType=VARCHAR} and meteringStatus = '在用'
   </select>
 
   <select id="findAllMeteringUtilByTime" resultMap="BaseResultMap">
@@ -255,7 +255,7 @@
         this_metering_time &lt;= #{endTiem,jdbcType=VARCHAR} and
       </if>
       <if test="department != null">
-        bmName = #{department,jdbcType=VARCHAR} and
+        bm_name = #{department,jdbcType=VARCHAR} and
       </if>
       <if test="status != null">
         description = #{status,jdbcType=VARCHAR} and
