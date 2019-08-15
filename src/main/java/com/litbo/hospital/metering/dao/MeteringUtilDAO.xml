@@ -239,7 +239,7 @@
       <if test="name != null">
         metering_name like #{name,jdbcType=VARCHAR} and
       </if>
-      meteringStatus = '在用'
+      meteringStatus = '在用' and description = 0
     </where>
   </select>
 
@@ -268,7 +268,7 @@
       <if test="status != null">
         description = #{status,jdbcType=VARCHAR} and
       </if>
-      meteringStatus = '在用'
+      meteringStatus = '在用' and description = 0
     </where>
   </select>
 
@@ -277,7 +277,7 @@
     select
     <include refid="Base_Column_List" />
     from hospital..metering_util
-    where bm_name = #{department,jdbcType=VARCHAR} and meteringStatus = '在用'
+    where bm_name = #{department,jdbcType=VARCHAR} and meteringStatus = '在用' and description = 0
   </select>
 
 </mapper>
