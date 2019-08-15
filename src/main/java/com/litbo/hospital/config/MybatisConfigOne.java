@@ -25,6 +25,10 @@ import javax.sql.DataSource;
  * @CreateTime: 1019-07-15 15:04
  * @Description: todo
  */
+
+/**
+ * 在basePackages中加入自己的dao
+ */
 @Configuration
 @MapperScan(basePackages = {
         "com.litbo.hospital.beneficial.dao",
@@ -38,7 +42,9 @@ import javax.sql.DataSource;
         "com.litbo.hospital.user.dao",
         "com.litbo.hospital.operational_data_monitoring.software_interface.dao",
         "com.litbo.hospital.operational_data_monitoring.software_interface.timedtask",
-        "com.litbo.hospital.security.specialequipment.dao"},
+        "com.litbo.hospital.security.specialequipment.dao",
+        "com.litbo.hospital.metering.dao",
+        },
         sqlSessionTemplateRef = "SqlSessionTemplate1")
 public class MybatisConfigOne {
 
