@@ -144,8 +144,9 @@ public class MeteringController {
             return vo;
         }
 
-        vo.setMsg("error");
-        vo.setCode(1);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
         return vo;
     }
 
@@ -217,8 +218,9 @@ public class MeteringController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
             return vo;
         }
-        vo.setMsg("没有查询到数据");
-        vo.setCode(1);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),meteringUtils));
         return vo;
     }
 
