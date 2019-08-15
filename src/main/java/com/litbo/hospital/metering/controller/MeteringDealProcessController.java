@@ -41,8 +41,8 @@ public class MeteringDealProcessController {
 
     /**
      * 生成一个需要提交的计量报表，并将这个报表送进审批流程
-     * @param department 处理报表的部门
-     * @param utilIds 报表中计量设备的id，是个字符串，其中使用','隔开
+     *      处理报表的部门
+     *      报表中计量设备的id，是个字符串，其中使用','隔开
      * @return
      */
     @RequestMapping("/addSomeMeteringUtilToProcess.do")
@@ -92,7 +92,7 @@ public class MeteringDealProcessController {
             return Result.error("报表流程生成失败！请重试！");
         }
 
-        return Result.success(1,"添加成功！");
+        return Result.success(0,"添加成功！");
     }
 
 
