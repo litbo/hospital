@@ -117,7 +117,20 @@ public class MeteringServiceImpl implements MeteringService {
     }
 
     @Override
+    public List<MeteringUtil> findAllMeteringUtilByDepartmentAndMeteringUtilName(String department,String meteringUtilName) {
+        if(department != null){
+            department = department + "%";
+        }
+
+        if(meteringUtilName != null){
+            meteringUtilName = meteringUtilName + "%";
+        }
+        return meteringUtilDAO.findAllMeteringUtilByDepartmentAndName(department,meteringUtilName);
+    }
+
+    @Override
     public List<MeteringUtil> findAllMeteringUtilByDepartment(String department) {
+
         return meteringUtilDAO.findAllMeteringUtilByDepartment(department);
     }
 
@@ -162,8 +175,6 @@ public class MeteringServiceImpl implements MeteringService {
                 return 0;
             }
         }
-
-        System.out.println("================================");
 
         // 自动添加更新设备时间
         String nowDate = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a").format(new Date());
