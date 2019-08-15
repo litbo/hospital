@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sun.security.util.AuthResources_it;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -206,7 +207,7 @@ public class MeteringController {
         if(bmName==null && meteringUtilName==null){
             vo.setCode(0);
             vo.setMsg("请填入参数！");
-            vo.setData(null);
+            vo.setData(vo.new DataEntity(0,new ArrayList<>()));
             return vo;
         }
         PageHelper.startPage(pageNum,pageSize);
