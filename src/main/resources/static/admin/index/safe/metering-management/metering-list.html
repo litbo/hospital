@@ -56,6 +56,7 @@
 </script>
 
 <script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="view">查看</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="update">修改</a>
 </script>
 
@@ -113,7 +114,14 @@
                                 event:"update",
                                 title:"修改",
                                 type:2,
-                                content:"./metering-list-update.html",
+                                content:"./child/metering-list-update.html",
+                                dataUrl:["id"]
+                            }
+                            ,{
+                                event:"view",
+                                title:"查看",
+                                type:2,
+                                content:"./child/metering-list-view.html",
                                 dataUrl:["id"]
                             }
                         ]
