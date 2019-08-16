@@ -1364,7 +1364,42 @@
                     "shiro": "PJZDZ"
                   }
                 ]
-              }
+              },
+              
+              {
+				"title": "计量器具信息",
+				"url": "javascript:void;",
+				"id": "74001",
+				"shiro": "CX",
+                "icon": "book",
+				"children": [
+		          {
+		            "title": "总账",
+		            "url": "./safe/metering-management/metering-list.html",
+		            "id": "74002",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "分户账",
+		            "url": "./safe/metering-management/metering-list2.html",
+		            "id": "74003",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "计量台账录入/导入",
+		            "url": "./home/public_info.html",
+		            "id": "74004",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "计量审批",
+		            "url": "./safe/metering-management/metering-approve.html",
+		            "id": "74005",
+		            "shiro": "CX"
+		          }
+		        ]
+			}
+            	
             ]
           },
           {
