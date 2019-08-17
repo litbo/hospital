@@ -274,10 +274,16 @@ public class DossierController {
         // 删除文件
         File file = new File(filePath.toString());
         if (!file.exists()) {
-            return Result.error("删除文件失败:" + filePath + "不存在！");
+            // 删除数据库信息
+            int result = dossierService.deleterDossierFile(dossierFileId);
+
+            if (result == 0) {
+                return Result.success("删除失败");
+            }
+            return Result.success();
         } else {
             if(!file.delete()){
-                return Result.error("删除文件失败!");
+                return Result.success("删除文件失败!");
             }
         }
 
@@ -285,7 +291,7 @@ public class DossierController {
         int result = dossierService.deleterDossierFile(dossierFileId);
 
         if (result == 0) {
-            return Result.error("删除失败");
+            return Result.success("删除失败");
         }
         return Result.success();
     }
