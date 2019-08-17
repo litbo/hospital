@@ -137,7 +137,7 @@ public class MeteringDealProcessController {
             return vo;
         }
         vo.setMsg("error");
-        vo.setCode(1);
+        vo.setCode(0);
         return vo;
     }
 
@@ -183,7 +183,7 @@ public class MeteringDealProcessController {
             return vo;
         }
         vo.setMsg("error");
-        vo.setCode(1);
+        vo.setCode(0);
         return vo;
     }
 

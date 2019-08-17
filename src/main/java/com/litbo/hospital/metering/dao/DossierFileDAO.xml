@@ -8,7 +8,7 @@
     <result column="specification" jdbcType="VARCHAR" property="specification" />
     <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
     <result column="buy_time" jdbcType="VARCHAR" property="buyTime" />
-    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
     <result column="agent" jdbcType="VARCHAR" property="agent" />
     <result column="file_num" jdbcType="VARCHAR" property="fileNum" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
@@ -22,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, belong_dossier_num, belong_dossier_name, specification, manufacturer, buy_time, 
-    department, agent, file_num, file_name, file_date, file_size, summary, description, 
+    bm_name, agent, file_num, file_name, file_date, file_size, summary, description, 
     file_url, record_time, record_person
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -38,13 +38,13 @@
   <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.DossierFile">
     insert into hospital..dossier_file (belong_dossier_num, belong_dossier_name,
       specification, manufacturer, buy_time, 
-      department, agent, file_num, 
+      bm_name, agent, file_num, 
       file_name, file_date, file_size, 
       summary, description, file_url, 
       record_time, record_person)
     values (#{belongDossierNum,jdbcType=VARCHAR}, #{belongDossierName,jdbcType=VARCHAR}, 
       #{specification,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
-      #{department,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, 
+      #{bmName,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, 
       #{fileName,jdbcType=VARCHAR}, #{fileDate,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, 
       #{summary,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, 
       #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR})
@@ -67,8 +67,8 @@
       <if test="buyTime != null">
         buy_time,
       </if>
-      <if test="department != null">
-        department,
+      <if test="bmName != null">
+        bm_name,
       </if>
       <if test="agent != null">
         agent,
@@ -117,8 +117,8 @@
       <if test="buyTime != null">
         #{buyTime,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        #{department,jdbcType=VARCHAR},
+      <if test="bmName != null">
+        #{bmName,jdbcType=VARCHAR},
       </if>
       <if test="agent != null">
         #{agent,jdbcType=VARCHAR},
@@ -170,8 +170,8 @@
       <if test="buyTime != null">
         buy_time = #{buyTime,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        department = #{department,jdbcType=VARCHAR},
+      <if test="bmName != null">
+        bm_name = #{bmName,jdbcType=VARCHAR},
       </if>
       <if test="agent != null">
         agent = #{agent,jdbcType=VARCHAR},
@@ -213,7 +213,7 @@
       specification = #{specification,jdbcType=VARCHAR},
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       buy_time = #{buyTime,jdbcType=VARCHAR},
-      department = #{department,jdbcType=VARCHAR},
+      bm_name = #{bmName,jdbcType=VARCHAR},
       agent = #{agent,jdbcType=VARCHAR},
       file_num = #{fileNum,jdbcType=VARCHAR},
       file_name = #{fileName,jdbcType=VARCHAR},

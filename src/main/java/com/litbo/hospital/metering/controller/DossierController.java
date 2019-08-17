@@ -1,8 +1,11 @@
 package com.litbo.hospital.metering.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.pojo.Dossier;
 import com.litbo.hospital.metering.pojo.DossierFile;
 import com.litbo.hospital.metering.service.DossierService;
+import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +45,7 @@ public class DossierController {
     public Result addDossier(Dossier dossier,String dossierPrefix,String dossierSuffix){
         int result = dossierService.addDossier(dossier,dossierPrefix,dossierSuffix);
         if(result == 0){
-            return Result.error("添加失败,请检查您添加的信息");
+            return Result.success("添加失败,请检查您添加的信息");
         }
         return Result.success();
     }
@@ -57,25 +60,11 @@ public class DossierController {
     public Result deleteDossier(int dossierId){
         int result = dossierService.deleterDossierById(dossierId);
         if(result == 0){
-            return Result.error("删除失败！");
+            return Result.success("删除失败！");
         }
         return Result.success();
     }
 
-
-    /**
-     * 通过卷宗编号删除卷宗
-     * @param dossierNum
-     * @return
-     */
-    @RequestMapping("/deleteDossierByNum.do")
-    public Result deleteDossierByNum(String dossierNum){
-        int result = dossierService.deleterDossierByNum(dossierNum);
-        if(result == 0){
-            return Result.error("删除失败");
-        }
-        return Result.success();
-    }
 
 
     /**
@@ -87,7 +76,7 @@ public class DossierController {
     public Result updateDossier(Dossier dossier){
         int result = dossierService.updateDossier(dossier);
         if(result == 0){
-            return Result.error("信息修改失败");
+            return Result.success("信息修改失败");
         }
         return Result.success();
     }
@@ -102,54 +91,38 @@ public class DossierController {
     public Result selectDossierById(int dossierId){
         Dossier dossier = dossierService.selectDossierByID(dossierId);
         if(dossier == null){
-            return Result.error("未找到您要查找的信息");
+            return Result.success("未找到您要查找的信息");
         }
         return Result.success(dossier);
     }
 
 
-    /**
-     * 通过卷宗编号查询卷宗信息
-     * @param dossierNum
-     * @return
-     */
-    @RequestMapping("/selectDossierByDossierNum.do")
-    public Result selectDossierByDossierNum(String dossierNum){
-        Dossier dossier = dossierService.selectDossierByDossierNum(dossierNum);
-        if(dossier == null){
-            return Result.error("未找到您要查找的信息");
-        }
-        return Result.success(dossier);
-    }
-
 
     /**
-     * 通过卷宗名称查询卷宗信息
+     * 通过卷宗名称查询卷宗信息,不传值的时候查询所有
      * @param name
      * @return
      */
     @RequestMapping("/selectDossierByName.do")
-    public Result selectDossierByName(String name){
-        List<Dossier> dossiers = dossierService.selectDossierByName(name);
-        if(dossiers.isEmpty()){
-            return Result.error("未查询到该设备的信息");
+    public PageVo selectDossierByName(String name,String bmName,
+                                      @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
+                                      @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
+        PageVo vo = new PageVo();
+        PageHelper.startPage(pageNum,pageSize);
+        List<Dossier> dossiers = dossierService.selectDossierByName(name,bmName);
+        PageInfo info = new PageInfo(dossiers);
+        if(!dossiers.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),dossiers));
+            return vo;
         }
-        return Result.success(dossiers);
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),dossiers));
+        return vo;
     }
 
-
-    /**
-     * 查询所有卷宗的信息
-     * @return
-     */
-    @RequestMapping("/fidnAllDossier.do")
-    public Result fidnAllDossier(){
-        List<Dossier> dossiers = dossierService.findAllDossier();
-        if(dossiers.isEmpty()){
-            return Result.error("未查询到信息");
-        }
-        return Result.success(dossiers);
-    }
 
 
     //                                              卷宗管理部分     begin
@@ -168,7 +141,9 @@ public class DossierController {
             return Result.error("上传失败，请选择文件");
         }
 
+        // 得到文件归属的卷宗的信息
         Dossier dossier = dossierService.selectDossierByID(dossierId);
+        // 得到卷宗电子版的路径
         String filePath = dossier.getDescription();
 
         String fileName = file.getOriginalFilename();
@@ -176,18 +151,21 @@ public class DossierController {
         if(!dir.exists()){
             dir.mkdirs();
         }
-        File dest = new File(filePath + System.currentTimeMillis() + fileName);
+
+        String time = "" + System.currentTimeMillis();
+
+        File dest = new File(filePath + time + fileName);
         try {
             file.transferTo(dest);
             dossierFile.setFileName(fileName);  // 文件名
-            int result = dossierService.addDossierFile(dossierFile,filePath + System.currentTimeMillis() + fileName,dossierId);
+            int result = dossierService.addDossierFile(dossierFile,filePath + time + fileName,dossierId);
             if(result == 0){
-                return Result.error("上传失败");
+                return Result.success("上传失败");
             }
             return Result.success();
         } catch (IOException e) {
         }
-        return Result.error("上传失败");
+        return Result.success("上传失败");
     }
 
 
@@ -196,13 +174,32 @@ public class DossierController {
      * @return
      */
     @RequestMapping("/fidnAllDossierFile.do")
-    public Result fidnAllDossierFile(int dossierId) {
+    public PageVo fidnAllDossierFile(int dossierId,
+                                     @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
+                                     @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize) {
+        PageVo vo = new PageVo();
         Dossier dossiers = dossierService.selectDossierByID(dossierId);
-        List<DossierFile> dossierFiles = dossierService.findAllDossierFileByDossierName(dossiers.getDossierName());
-        if (dossierFiles.isEmpty()) {
-            return Result.error("未查询到信息");
+
+        if(dossiers == null){
+            vo.setMsg("没有查询到设备信息");
+            vo.setCode(0);
+            vo.setData(vo.new DataEntity(0,null));
+            return vo;
         }
-        return Result.success(dossierFiles);
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<DossierFile> dossierFiles = dossierService.findAllDossierFileByDossierName(dossiers.getDossierName());
+        PageInfo info = new PageInfo(dossierFiles);
+        if(!dossierFiles.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),dossierFiles));
+            return vo;
+        }
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),dossierFiles));
+        return vo;
     }
 
     /**
@@ -222,8 +219,6 @@ public class DossierController {
             filePath.append(paths[i]).append("\\\\");
         }
         filePath.append(paths[paths.length-1]);
-
-        System.out.println("下载路径是："+filePath.toString());
 
         // 将文件的路径拼接成程序可以识别的路径   end
 
