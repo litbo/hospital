@@ -6,9 +6,11 @@ import com.litbo.hospital.metering.pojo.Dossier;
 import com.litbo.hospital.metering.pojo.DossierFile;
 import com.litbo.hospital.metering.service.DossierService;
 import com.litbo.hospital.metering.util.PropertiesUtil;
+import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -120,7 +122,35 @@ public class DossierServiceImpl implements DossierService {
 
     @Override
     public int deleterDossierById(int dossierId) {
-        return dossierDAO.deleteByPrimaryKey(dossierId);
+        Dossier dossier = dossierDAO.selectByPrimaryKey(dossierId);
+        // 如果卷宗内还有文件则删除失败
+        List<DossierFile> dossierFiles = dossierFileDAO.selectAllDossierFile(dossier.getDossierNum());
+        if(dossierFiles.isEmpty()){
+            // 删除文件夹
+            // 将文件的路径拼接成程序可以识别的路径   begin
+            String[] paths = dossier.getDescription().split("\\\\");
+            StringBuffer filePath = new StringBuffer();
+            for(int i = 0 ; i < paths.length-1 ; i++){
+                filePath.append(paths[i]).append("\\\\");
+            }
+            filePath.append(paths[paths.length-1]);
+
+
+            // 将文件的路径拼接成程序可以识别的路径   end
+
+
+            // 删除文件
+            File file = new File(filePath.toString());
+            if (!file.exists()) {
+                return dossierDAO.deleteByPrimaryKey(dossierId);
+            } else {
+                if(!file.delete()){
+                    return 0;
+                }
+                return dossierDAO.deleteByPrimaryKey(dossierId);
+            }
+        }
+        return 0;
     }
 
     @Override

@@ -60,7 +60,7 @@ public class DossierController {
     public Result deleteDossier(int dossierId){
         int result = dossierService.deleterDossierById(dossierId);
         if(result == 0){
-            return Result.success("删除失败！");
+            return Result.success("删除失败！卷宗内可能还有文件");
         }
         return Result.success();
     }
@@ -256,7 +256,6 @@ public class DossierController {
     @RequestMapping("/deleteDossierFile.do")
     public Result deleteDossierFile(int dossierFileId) {
         DossierFile dossierFile = dossierService.selectDossierFile(dossierFileId);
-        String downloadPath = dossierFile.getDescription();
 
         // 将文件的路径拼接成程序可以识别的路径   begin
         String[] paths = dossierFile.getDescription().split("\\\\");
@@ -265,9 +264,6 @@ public class DossierController {
             filePath.append(paths[i]).append("\\\\");
         }
         filePath.append(paths[paths.length-1]);
-
-        System.out.println("下载路径是："+filePath.toString());
-
         // 将文件的路径拼接成程序可以识别的路径   end
 
 
