@@ -31,12 +31,12 @@
 <body>
 <div class="layui-row">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>计量信息修改</legend>
+        <legend>计量详细信息</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备名称 <span class="sign">*</span></label>
+                <label class="layui-form-label">设备名称 </label>
                 <div class="layui-input-block">
                     <input type="hidden" name="id">
                     <input type="hidden" name="meteringSystemNum">
@@ -46,7 +46,7 @@
          </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备编号 <span class="sign">*</span></label>
+                <label class="layui-form-label">设备编号 </label>
                 <div class="layui-input-block">
                     <input type="text" name="meteringNum" disabled class="layui-input">
                 </div>
@@ -55,7 +55,7 @@
            
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">生成时间 <span class="sign">*</span></label>
+                <label class="layui-form-label">生成时间 </label>
                 <div class="layui-input-block">
                     <input type="text" id="meteringGetNumberTime" name="meteringGetNumberTime" disabled class="layui-input">
                 </div>
@@ -63,7 +63,7 @@
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">审计时间 <span class="sign">*</span></label>
+                <label class="layui-form-label">审计时间 </label>
                 <div class="layui-input-block">
                     <input type="text"  name="thisMeteringTime" disabled class="layui-input">
                 </div>
@@ -71,7 +71,7 @@
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">检查周期 <span class="sign">*</span></label>
+                <label class="layui-form-label">检查周期 </label>
                 <div class="layui-input-block">
                     <input type="text" name="meteringInspectionCycle" disabled
                            class="layui-input">
@@ -80,7 +80,7 @@
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">所属部门 <span class="sign">*</span></label>
+                <label class="layui-form-label">所属部门 </label>
                 <div class="layui-input-block">
                     <input type="text" name="bmName" disabled class="layui-input">
                 </div>
@@ -88,7 +88,7 @@
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">购买时间 <span class="sign">*</span></label>
+                <label class="layui-form-label">购买时间 </label>
                 <div class="layui-input-block">
                     <input type="text" name="buyTime" disabled class="layui-input">
                 </div>
@@ -150,7 +150,6 @@
                         type: "POST",
                         data: ["id", "buyTime","meteringSystemNum","meteringGetNumberTime",
                         	"meteringName", "meteringNum", "meteringInspectionCycle","bmName","userXm","utilType","recordPerson"],
-//                         contentType: "application/json",
                     }
                 }
             },

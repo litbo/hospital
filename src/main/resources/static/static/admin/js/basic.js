@@ -881,6 +881,10 @@ action = func = {
                         newJ.content = showContent;
                     }
                     //console.log("即将弹出",newJ);
+                    if(vas.download === true){
+                    	window.location = newJ.content;
+                    	return;
+                    }
                     //若允许弹出则弹出
                     openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
@@ -1097,7 +1101,7 @@ action = func = {
             }
             //console.log("拼接完成：",value.data);
             //强制以JSON格式发送数据
-            value.contentType = "application/json";
+            value.contentType = value.contentType || "application/json";
             //提交成功回调函数
             value.success = function (res) {
                 if (res.code === 0) {

@@ -1367,7 +1367,7 @@
               },
               
               {
-				"title": "计量器具信息",
+				"title": "计量管理",
 				"url": "javascript:void;",
 				"id": "74001",
 				"shiro": "CX",
@@ -1386,7 +1386,7 @@
 		            "shiro": "CX"
 		          },
 		          {
-		            "title": "计量台账录入/导入",
+		            "title": "计量录入/导入",
 		            "url": "./home/public_info.html",
 		            "id": "74004",
 		            "shiro": "CX"
@@ -1395,6 +1395,23 @@
 		            "title": "计量审批",
 		            "url": "./safe/metering-management/metering-approve.html",
 		            "id": "74005",
+		            "shiro": "CX"
+		          }
+		        ]
+			}
+			,
+              
+              {
+				"title": "文档管理",
+				"url": "javascript:void;",
+				"id": "75001",
+				"shiro": "CX",
+                "icon": "book",
+				"children": [
+		          {
+		            "title": "文档列表",
+		            "url": "./safe/dossier-managent/dossier-list.html",
+		            "id": "75002",
 		            "shiro": "CX"
 		          }
 		        ]
