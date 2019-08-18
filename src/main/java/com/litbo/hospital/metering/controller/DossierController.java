@@ -207,9 +207,9 @@ public class DossierController {
      * @return
      */
     @RequestMapping("/downloadDossierFile.do")
-    public HttpServletResponse downloadDossierFile(int dossierFileId, HttpServletResponse response) {
+    public HttpServletResponse downloadDossierFile(int id, HttpServletResponse response) {
 
-        DossierFile dossierFile = dossierService.selectDossierFile(dossierFileId);
+        DossierFile dossierFile = dossierService.selectDossierFile(id);
         String downloadPath = dossierFile.getDescription();
 
         // 将文件的路径拼接成程序可以识别的路径   begin
