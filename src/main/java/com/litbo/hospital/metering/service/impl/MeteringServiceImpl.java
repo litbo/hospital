@@ -182,9 +182,10 @@ public class MeteringServiceImpl implements MeteringService {
 
 
         // 将老数据重复
-        meteringutilNewMessage.setDescription(meteringUtilTestOldMEssage02.getDescription());
-        meteringutilNewMessage.setMeteringstatus(meteringUtilTestOldMEssage02.getMeteringstatus());
-        meteringutilNewMessage.setRecordTime(meteringUtilTestOldMEssage02.getRecordTime());
+        meteringutilNewMessage.setDescription(meteringUtilTestOldMessage.getDescription());
+        meteringutilNewMessage.setMeteringstatus(meteringUtilTestOldMessage.getMeteringstatus());
+        meteringutilNewMessage.setRecordTime(meteringUtilTestOldMessage.getRecordTime());
+
 
         // 如果计量周期发生变化，则重新计算计量时间
         if(meteringUtilTestOldMessage.getMeteringInspectionCycle() != meteringutilNewMessage.getMeteringInspectionCycle()){

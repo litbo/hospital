@@ -19,7 +19,7 @@ public class DossierFile implements Serializable {
 
     private String buyTime;
 
-    private String department;
+    private String bmName;
 
     private String agent;
 
@@ -91,12 +91,12 @@ public class DossierFile implements Serializable {
         this.buyTime = buyTime;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getBmName() {
+        return bmName;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setBmName(String bmName) {
+        this.bmName = bmName;
     }
 
     public String getAgent() {
@@ -197,7 +197,7 @@ public class DossierFile implements Serializable {
             && (this.getSpecification() == null ? other.getSpecification() == null : this.getSpecification().equals(other.getSpecification()))
             && (this.getManufacturer() == null ? other.getManufacturer() == null : this.getManufacturer().equals(other.getManufacturer()))
             && (this.getBuyTime() == null ? other.getBuyTime() == null : this.getBuyTime().equals(other.getBuyTime()))
-            && (this.getDepartment() == null ? other.getDepartment() == null : this.getDepartment().equals(other.getDepartment()))
+            && (this.getBmName() == null ? other.getBmName() == null : this.getBmName().equals(other.getBmName()))
             && (this.getAgent() == null ? other.getAgent() == null : this.getAgent().equals(other.getAgent()))
             && (this.getFileNum() == null ? other.getFileNum() == null : this.getFileNum().equals(other.getFileNum()))
             && (this.getFileName() == null ? other.getFileName() == null : this.getFileName().equals(other.getFileName()))
@@ -220,7 +220,7 @@ public class DossierFile implements Serializable {
         result = prime * result + ((getSpecification() == null) ? 0 : getSpecification().hashCode());
         result = prime * result + ((getManufacturer() == null) ? 0 : getManufacturer().hashCode());
         result = prime * result + ((getBuyTime() == null) ? 0 : getBuyTime().hashCode());
-        result = prime * result + ((getDepartment() == null) ? 0 : getDepartment().hashCode());
+        result = prime * result + ((getBmName() == null) ? 0 : getBmName().hashCode());
         result = prime * result + ((getAgent() == null) ? 0 : getAgent().hashCode());
         result = prime * result + ((getFileNum() == null) ? 0 : getFileNum().hashCode());
         result = prime * result + ((getFileName() == null) ? 0 : getFileName().hashCode());
@@ -246,7 +246,7 @@ public class DossierFile implements Serializable {
         sb.append(", specification=").append(specification);
         sb.append(", manufacturer=").append(manufacturer);
         sb.append(", buyTime=").append(buyTime);
-        sb.append(", department=").append(department);
+        sb.append(", bmName=").append(bmName);
         sb.append(", agent=").append(agent);
         sb.append(", fileNum=").append(fileNum);
         sb.append(", fileName=").append(fileName);

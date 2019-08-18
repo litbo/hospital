@@ -145,8 +145,14 @@ public class DossierServiceImpl implements DossierService {
     }
 
     @Override
-    public List<Dossier> selectDossierByName(String name) {
-        return dossierDAO.selectAllDossierByName("%"+name+"%");
+    public List<Dossier> selectDossierByName(String name,String bmName) {
+        if(name != null){
+            name = "%"+name+"%";
+        }
+        if(bmName != null){
+            bmName = "%"+bmName+"%";
+        }
+        return dossierDAO.selectAllDossierByNameOrBmName(name,bmName);
     }
 
     @Override
@@ -183,7 +189,7 @@ public class DossierServiceImpl implements DossierService {
         dossierFile.setBelongDossierName(dossier.getDossierName());  // 卷宗名称
         dossierFile.setBelongDossierNum(dossier.getDossierNum());   // 卷宗编号
         dossierFile.setBuyTime(dossier.getBuyTime());   // 购买时间
-        dossierFile.setDepartment(dossier.getDepartment());   // 所属部门
+        dossierFile.setBmName(dossier.getBmName());   // 所属部门
 
         dossierFile.setAgent(dossier.getAgent());     // 代理商
         dossierFile.setSpecification(dossier.getSpecification());  // 规格型号

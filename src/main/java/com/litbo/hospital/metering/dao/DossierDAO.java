@@ -1,6 +1,7 @@
 package com.litbo.hospital.metering.dao;
 
 import com.litbo.hospital.metering.pojo.Dossier;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface DossierDAO {
 
     List<Dossier> selectAllDossier();
 
-    List<Dossier> selectAllDossierByName(String dossierName);
+    List<Dossier> selectAllDossierByNameOrBmName(@Param("dossierName") String dossierName,@Param("bmName") String bmName);
 
     int updateByPrimaryKeySelective(Dossier record);
 
