@@ -434,7 +434,7 @@ function subUp(value, data, param) {
         $(".layui-layer-loading").append(
             $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px","color":"#787878"}).text("请求发送中")
         );
-        //2s自动关闭（避免出现一直不消失的问题）
+        //2s自动关闭（避免出现一直不消失的问题/）
         setTimeout(function () {
             putMsg("loadOut",loadIndex);
             $(".layui-layer-shade").css("opacity","0");
@@ -564,9 +564,10 @@ function getFormValue(name,res,force,must){
             ,hideValue = $("input[type=hidden][name=" + name[c] + "]").val()
             ,textareaValue = $("textarea[name=" + name[c] + "]").val()
             ,radioValue = $("input[type=radio][name=" + name[c] + "]:checked").val()
-            ,checkBox = $("input[type=checkbox][name=" + name[c] + "]:checked")
-            ,checkBoxValue = checkBox.val();
-
+            ,checkBox = $("input[type=checkbox][name=" + name[c] + "]")
+            ,checkBoxC = $("input[type=checkbox][name=" + name[c] + "]:checked")
+            ,checkBoxValue = checkBoxC.val();
+        checkBox.length !== 0 ? force = false:"";
         //只匹配首先获取到的name抛弃后匹配成功的，
         //如强制匹配（第二参数为true）则未匹配成功则会使用其他匹配上的DOM的值
         if (inputValue) {
@@ -580,9 +581,9 @@ function getFormValue(name,res,force,must){
         } else if (radioValue) {
             data[name[c]] = radioValue;
         } else if (checkBoxValue) {
-            if(checkBox.length>1){
+            if(checkBoxC.length>1){
                 var str = [];
-                checkBox.each(function(){
+                checkBoxC.each(function(){
                     str.push($(this).val())
                 });
                 data[name[c]] = str;
@@ -598,7 +599,6 @@ function getFormValue(name,res,force,must){
                 must["show"] && (data[name[c]] = must.show || null)
             }
         }
-        //console.log(data);
     }
     return data;
 }
