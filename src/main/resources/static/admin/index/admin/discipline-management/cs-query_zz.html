@@ -64,7 +64,7 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <button class="layui-btn" id="search">查找</button>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
@@ -84,22 +84,22 @@
                 ,{field: 'approvalDate', title: '批准日期', minWidth: 100,sort:true}
                 ,{field: 'expiredDate', title: '有效期至', minWidth: 100,sort:true}
                 ,{field: 'expired', title: '是否过期', minWidth: 100,sort:true,templet: function(d){
-                	return d.expired == "1" ? "是" : "否";
-                }}
+                        return d.expired == "1" ? "是" : "否";
+                    }}
             ]]
-    		,url:"http://local.test/base/searchByPage"
-        	, request: {
-        		pageName: 'pageNum',
+            ,url:"http://local.test/base/searchByPage"
+            , request: {
+                pageName: 'pageNum',
                 limitName: 'pageSize'
-        	}
-    		, parseData: function (res){
-    			return {
-    				"code": res.code, //解析接口状态
+            }
+            , parseData: function (res){
+                return {
+                    "code": res.code, //解析接口状态
                     "msg": res.msg, //解析提示文本
-    				"count": res.result.total,
-        			"data": res.result.records
-    			}
-    		}
+                    "count": res.result.total,
+                    "data": res.result.records
+                }
+            }
         }
     };
 </script>
@@ -109,11 +109,11 @@
             , layedit = layui.layedit
             , laydate = layui.laydate
             , $=layui.jquery;
-			
+
         $(document).on('click','#search',function(){
-        	layer.msg('hello');
-         });
-    })
+            layer.msg('hello');
+        });
+    });
 </script>
 </body>
 </html>
