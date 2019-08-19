@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>数据收集</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="">
+
+    <!--第一行-->
+    <div class="layui-form-item">
+        <div class="layui-inline spanDiv" style="width: 330px;">
+            <label class="layui-form-label" style="width: 80px;">设备</label>
+            <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+            <p class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm" data-method="notice" style="margin-top: 5px;">选择</p>
+            </div>
+            <span class="equipmentSpan"></span>
+        </div>
+    </div>
+
+    <!--第二行-->
+    <div class="layui-form-item">
+        <div class="layui-inline" style="width: 330px;">
+            <label class="layui-form-label">开始日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="startDate" id="startDate" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline" style="width: 330px;">
+            <label class="layui-form-label">结束日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="endDate" id="endDate"  placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+
+    <!--第三行-->
+    <div class="layui-form-item">
+        <div class="layui-inline" style="width: 330px;">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="startTime" id="startTime"  placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline" style="width: 330px;">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="endTime" id="endTime" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+
+    <!--按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+            <button type="button" class="layui-btn layui-btn-primary" onclick="javascript:history.back(-1);">返回</button>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" href="main1.html">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+
+    // 表单
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#startDate'
+        });
+        laydate.render({
+            elem: '#endDate'
+        });
+
+
+
+        laydate.render({
+            elem: '#startTime'
+            ,type: 'time'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#endTime'
+            ,type: 'time'
+            ,trigger: 'click'
+        });
+    });
+
+    //弹出层
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+
+        //触发事件
+        var active = {
+            notice: function(){
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['1000px', '90%'],
+                    content: 'choose2.html' //iframe的url
+                });
+            }
+        };
+
+        $('#layerDemo .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
+</script>
+</body>
+</html>

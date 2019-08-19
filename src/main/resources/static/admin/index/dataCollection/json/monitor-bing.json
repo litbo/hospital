@@ -1,0 +1,1 @@
+{  "code": 0,  "msg": "",  "count": 2,  "data": [    {      "goodCondition": "完好",      "num": 9    },    {      "goodCondition": "故障",      "num": 0    }  ]}

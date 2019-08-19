@@ -1,0 +1,222 @@
+
+/* layui样式修改 */
+.layui-nav-tree .layui-nav-item a{
+    font-size: 15px;
+}
+
+.layui-nav-tree .layui-nav-item a:hover {
+    background-color: rgb(48, 183, 236);
+}
+
+.layui-nav-tree .layui-nav-itemed{
+    background-color: #1e92ff;
+}
+
+.layui-bg-blue .layui-nav-itemed>a, .layui-nav-tree.layui-bg-blue .layui-nav-title a, .layui-nav-tree.layui-bg-blue .layui-nav-title a{
+    background-color: rgb(107, 180, 236);
+}
+
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a{
+    background-color: rgb(107, 180, 236);
+}
+
+/* 顶部区域 */
+.data_top{
+    /* height: 100px; */
+}
+
+.data_top .top_logo{
+    height: 40px;
+    width: 200px;
+    margin-left: 5px;
+}
+
+.data_top .layui-layout-left{
+    margin-left: -10px;
+}
+
+.data_top .layui-nav .layui-nav-item a{
+    font-size: 14px;
+}
+
+.index_body{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+/*容器*/
+.index_bodyIn{
+    width: 85%;
+    height: 100%;
+    /*background-color: #ffd1ca;*/
+    padding: 0 5px 10px 30px;
+    box-sizing: border-box;
+}
+
+/*搜索区域*/
+.index_search{
+    width: 700px;
+    height: 60px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 6px;
+    left: 300px;
+    z-index: 999;
+}
+
+.index_search3{
+    left: 280px;
+}
+
+.index_search4{
+    width: 750px;
+    left: 250px;
+}
+
+.index_searchChoose{
+    width: 600px;
+    height: 60px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 6px;
+    left: 280px;
+    z-index: 999;
+}
+
+.index_searchChoose2{
+    width: 600px;
+    height: 60px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 6px;
+    left: 280px;
+    z-index: 999;
+}
+
+.index_search form,.index_search3 form,.index_searchChoose form,.index_searchChoose2 form{
+    float: right;
+}
+
+.index_search3 form .layui-input-inline{
+    float: left;
+}
+
+.index_search3 form .layui-form-pane{
+    float: left;
+}
+
+/*展示图片*/
+.index_show{
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    margin-top: -20px;
+}
+
+.index_show img{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*  *号  */
+.required{
+    font-size: 11px;
+    color: red;
+}
+
+/*选择后显示在的区域*/
+.spanDiv{
+    position: relative;
+}
+
+.equipmentSpan{
+    display: inline-block;
+    padding: 3px;
+    background-color: #fff;
+    position: absolute;
+    top: 10px;
+    left: 180px;
+    text-indent: 1em;
+    border:0;
+    outline: none;
+    /*color: #fff;*/
+}
+
+/*用来分割的两行p*/
+.divideP{
+    width: 80%;
+    height: 30px;
+    background-color: #eee;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    text-indent: 1em;
+    line-height: 30px;
+    font-size: 16px;
+    color: #222;
+}
+
+/*实时监视*/
+.monitor_top{
+
+}
+
+.monitor_top .monitor_logo{
+    height:60px;
+    width: 250px;
+    /*background-color: #ffdfda;*/
+    position: absolute;
+    left: 20px;
+}
+
+.monitor_logo img{
+    width: 100%;
+    height: 100%;
+}
+
+.monitor_search{
+    width: 100%;
+    height: 120px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    z-index: 999;
+    margin-top: 10px;
+    background-color: #fed3ff;
+}
+
+/*编辑页面的调整*/
+.adjustment{
+    display: inline-block;
+    width: 40px;
+    height:20px;
+    background-color: #37a2da;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.schedule_layer1,.schedule_layer2,.schedule_layer3,.schedule_layer4,.schedule_layer5,.schedule_layer6,.schedule_layer7{
+    /*background-color: #ffdfda;*/
+    width: 270px;
+    height: 200px;
+    padding: 10px 0 0 0;
+    display: none;
+    margin-top: 10px;
+    /*overflow: hidden;*/
+}
+
+.ci,.shi{
+    display: none;
+    text-indent: 0;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>数据收集</title>
+	<link rel="stylesheet" href="../layui/css/layui.css">
+	<link rel="stylesheet" href="../iconfont/iconfont.css">
+	<link rel="stylesheet" href="../css/dataIndex.css">
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../iconfont/iconfont.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="">
+
+	<!--第一行-->
+	<div class="layui-form-item">
+		<div class="layui-inline spanDiv" style="width: 380px;">
+			<label class="layui-form-label" style="width: 100px;">设备 <i class="iconfont required">&#xe7f9;</i></label>
+			<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+				<p class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm"  data-method="notice" style="margin-top: 5px;">选择</p>
+			</div>
+			<input class="equipmentSpan" lay-verify="required" disabled>
+		</div>
+		<div class="layui-inline" style="width: 380px;">
+			<label class="layui-form-label" style="width: 120px;">安装Pacs/LIS</label>
+			<div class="layui-input-block">
+				<input type="radio" name="Y" value="有" title="有" checked="">
+				<input type="radio" name="Y" value="无" title="无">
+			</div>
+		</div>
+	</div>
+
+	<!--第二行-->
+	<div class="layui-form-item">
+		<div class="layui-inline" style="width: 380px;">
+			<label class="layui-form-label" style="width: 100px;">联网仪编号 <i class="iconfont required">&#xe7f9;</i></label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+				<input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline" style="width: 380px;">
+			<label class="layui-form-label" style="width: 120px;">Pacs/LIS终端编号</label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+				<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<!--第三行-->
+	<div class="layui-form-item">
+		<div class="layui-inline" style="width: 380px;">
+			<label class="layui-form-label" style="width: 100px;">联网仪IP</label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+				<input type="text" name="title" lay-verify="" autocomplete="off" placeholder="" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline" style="width: 380px;">
+			<label class="layui-form-label" style="width: 120px;">记录工作里</label>
+			<div class="layui-input-block">
+				<input type="radio" name="yes" value="有" title="有" checked="">
+				<input type="radio" name="yes" value="无" title="无">
+			</div>
+		</div>
+	</div>
+
+	<!--第四行-->
+	<div class="layui-form-item">
+		<div class="layui-inline" style="width: 380px;">
+			<label class="layui-form-label" style="width: 100px;">项目标志 <i class="iconfont required">&#xe7f9;</i></label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+				<input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline" style="width: 380px;">
+			<label class="layui-form-label" style="width: 120px;">工作里计算规则</label>
+			<div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+				<select name="rule">
+					<option value=""></option>
+					<option value="0">His执行科室为准</option>
+					<option value="1">His项目标志为准</option>
+					<option value="2">不计算流失工作里</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<p style="color: red;margin: 0 0 20px 110px"><i class="iconfont required">&#xe7f9;</i> 同类设备项目标志一致</p>
+
+	<!--按钮-->
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+			<button type="button" class="layui-btn layui-btn-primary" onclick="javascript:history.back(-1);">取消</button>
+		</div>
+	</div>
+</form>
+
+
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" href="main1.html">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+	//JavaScript代码区域
+	layui.use('element', function(){
+		var element = layui.element;
+	});
+
+	// 表单
+	layui.use(['form', 'layedit', 'laydate'], function(){
+		var form = layui.form
+				,layer = layui.layer
+				,layedit = layui.layedit
+				,laydate = layui.laydate;
+
+		//日期
+		laydate.render({
+			elem: '#indexDateSelect'
+			,type: 'datetime'
+			,value: new Date()
+		});
+	});
+
+	//弹出层
+	layui.use('layer', function(){
+		var $ = layui.jquery, layer = layui.layer;
+
+		//触发事件
+		var active = {
+			notice: function(){
+				layer.open({
+					type: 2,
+					title: '编辑',
+					shadeClose: true,
+					shade: 0.8,
+					area: ['1000px', '90%'],
+					content: 'choose1.html' //iframe的url
+				});
+			}
+		};
+
+		$('#layerDemo .layui-btn').on('click', function(){
+			var othis = $(this), method = othis.data('method');
+			active[method] ? active[method].call(this, othis) : '';
+		});
+
+	});
+</script>
+</body>
+</html>

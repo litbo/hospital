@@ -80,9 +80,11 @@
                     }
                 }
                 , done: function (obj) {
+                    console.log(obj);
                     tableFunc({
                         "obj": obj,
-                        "toolFunc": [{
+                        "toolFunc": [
+                            {
                             send:{
                                 id:"table",
                                 filter:"table1",

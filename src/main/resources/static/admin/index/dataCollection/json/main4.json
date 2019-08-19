@@ -1,0 +1,43 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "id": "001",
+      "name": "CT",
+      "model": "M-1",
+      "Monday": "值班",
+      "Tuesday": "值班",
+      "Wednesday": "值班",
+      "Thursday": "值班",
+      "Friday": "值班",
+      "Saturday": "值班",
+      "Sunday": "值班"
+    },
+    {
+      "id": "002",
+      "name": "DT",
+      "model": "M-2",
+      "Monday": "值班",
+      "Tuesday": "值班",
+      "Wednesday": "值班",
+      "Thursday": "值班",
+      "Friday": "值班",
+      "Saturday": "值班",
+      "Sunday": "值班"
+    },
+    {
+      "id": "003",
+      "name": "ET",
+      "model": "M-3",
+      "Monday": "值班",
+      "Tuesday": "值班",
+      "Wednesday": "值班",
+      "Thursday": "值班",
+      "Friday": "值班",
+      "Saturday": "值班",
+      "Sunday": "值班"
+    }
+  ]
+}

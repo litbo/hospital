@@ -250,7 +250,7 @@ toolFunc函数为表格按钮添加点击事件,使用数组形式，每一项�
 ```javascript
 {
     "toolFunc":[{
-        "tool":"toolbar"//如操作的是表格顶部工具，此项必修修改为toolbar，否则可以不写
+        "tool":"toolbar"//如操作的是表格顶部工具，此项必须修改为toolbar，否则可以不写
     	"filter":"table1",
     	"event":"record",
     	"title":"详细内容",

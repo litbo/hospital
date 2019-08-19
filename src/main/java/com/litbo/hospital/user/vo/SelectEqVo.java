@@ -16,6 +16,7 @@ public class SelectEqVo {
     private String eqPym;
     private String eqSbbh;
     private String eqZcbh;
+    private String bmId;
 
 
 

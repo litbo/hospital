@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人员设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <!--[if IE 8]>
+   <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+   <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+
+   <script src="../../../../../static/admin/js/basic.js"></script>
+
+
+</head>
+<body>
+
+<div class="layui-row">
+   <div class="col-xs-12">
+       <table  id="table" lay-filter="table1"></table>
+   </div>
+</div>
+
+<script type="text/html" id="toolbarDemo">
+   <div class="layui-form-item">
+       <!--    头部工具-->
+        <div class="layui-btn-container" style="float: left;">
+            <button class="layui-btn layui-btn-sm" lay-event="particularly" style=" height: 38px;font-size: 15px">设置特种设备从业人员</button>
+        </div><!-- 搜索-->
+
+        <div class="input-contain" style="width: 600px;margin: 0 auto;">
+            <div class="layui-inline" style="width:230px;margin: 0 10px 0 0 ;float: left;">
+                <div  id="moreBar">
+                        <label>
+                            <select name="bmName" lay-filter="bmId">
+                                <option value="">全部部门</option>
+                            </select>
+                        </label>
+            </div>
+            </div>
+            <!--  姓名-->
+            <div class="layui-inline" style="width: 150px;float: left;">
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="userXm" placeholder="姓名" id="userXm"
+                           autocomplete="off" style="width: 150px">
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 100px;float: left;">
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="userId" placeholder="编号" id="userId"
+                           autocomplete="off" style="width: 100px">
+                </div>
+            </div>
+
+            <button type="button" class="layui-btn layui-inline"  data-type="search" style="float: right; margin:0">查找</button>
+        </div>
+    </div>
+</script>
+<script>
+
+    renderMod = {
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
+            }
+        },
+        addTable: {
+            table: {
+                elem: '#table'
+                , url: '/specialEq/selectAllUser'//接口
+                , method: "GET"
+                , toolbar: '#toolbarDemo'
+                , title: '从业人员'
+                , area: ['800px', '510px']
+                , cols: [[
+                    {type: 'checkbox', fixed: 'left', width: 50}
+                    , {field: 'userId', title: 'ID', width: 200}
+                    , {field: 'userXm', title: '姓名', width: 300}
+                    , {field: 'bmName', title: '部门', width: 420}
+
+                ]]
+                , page: true//开启分页
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面的所有数据数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        "obj": obj,
+                        toolFunc: [
+                            {
+                                send: {
+                                    id: "Tast",
+                                    title: 'table1',
+                                    name: "userIds",
+                                    event: "particularly",
+                                    url: "/specialEq/updateIsSpeqEm",
+                                    type: "POST",
+                                    show: "是否同意申请？",
+                                    contentType: "application/json",
+                                    par: "userId",
+                                    del: false,
+                                    reload: true
+                                },
+                                tool: "toolbar",
+                                event: "particularly"
+                            }
+
+
+                        ]
+                    });
+
+                }
+            }
+            , reSet: {
+                url: "/specialEq/selectUserByIdAndNameAndBmName",
+                type: "search",
+                method: "POST",
+                data: ["bmName", "userId", "userXm"],  //搜索框的name
+                tid: "table"
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>

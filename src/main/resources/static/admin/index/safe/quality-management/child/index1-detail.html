@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>修改</title>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        input[type="text"]{
+            border:none;
+            font-weight: bold;
+        }
+        .layui-form-label{
+            text-align: center;
+            font-weight: bold;
+        }
+        #num1{
+            width:250px;
+            height:30px;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+            bottom: 15px;
+            right: 9px;
+        }
+    </style>
+
+</head>
+<body>
+<form class="layui-form layui-col-md12" action="" lay-filter="form" style="margin-top: 15px;margin-left: 50px;width: 1100px">
+    <div class="layui-collapse" lay-accordion="">
+
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">基本信息</h2>
+            <div class="layui-colla-content layui-show" style="height: 320px">
+
+                <div class="layui-col-md12" style="width: 90%;">
+                    <div class="layui-col-md4" >
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">设备编号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="speqBh" lay-verify="required"
+                                       placeholder="请输入" autocomplete="off" class="layui-input speqBh" disabled>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">设&nbsp;备&nbsp;名&nbsp;称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="speqName" lay-verify="required"
+                                       placeholder="请输入" autocomplete="off" class="layui-input speqName"   disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" >
+                            <label class="layui-form-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型:</label>
+                            <div class="layui-input-inline " >
+                                <!-- <input type="radio" name="speqType" value="特种设备" title="特种设备"   checked="" >
+                                 <input type="radio" name="speqType" value="安全附件" title="安全附件"  >-->
+                                <input type="text" name="speqType" class="layui-input speqType"  disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">规&nbsp;格&nbsp;型&nbsp;号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="speqGgxh" lay-verify="required" placeholder="请输入"
+                                       autocomplete="off" class="layui-input speqGgxh"  disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">生&nbsp;&nbsp;产&nbsp;&nbsp;商:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="speqScs" lay-verify="required" placeholder="请输入"
+                                       autocomplete="off" class="layui-input speqScs"  disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">出&nbsp;厂&nbsp;编&nbsp;号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="speqCcbh" lay-verify="required" placeholder="请输入"
+                                       autocomplete="off" class="layui-input speqCcbh"   disabled>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div  class="layui-col-md4" >
+                        <div class="layui-form-item" style="margin-bottom: 10px">
+                            <label class="layui-form-label">使&nbsp;用&nbsp;科&nbsp;室:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" style="height: 39px;border: none;margin-left:5px;padding-left:15px;box-sizing: border-box;background: white " class="bmId" name ='bmId' id="bmId"   disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom: 10px">
+                            <div class="layui-inline" >
+                                <label class="layui-form-label" title="上次检测时间" >上次检测时间</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="speqJcsj"  autocomplete="off" class="layui-input speqJcsj" value=""  disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom: 10px">
+                            <div class="layui-inline" >
+                                <label class="layui-form-label" title="检测周期（月）">检&nbsp;测&nbsp;周&nbsp;期:</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="speqJczq"   placeholder="请输入 检测周期（月）" autocomplete="off" class="layui-input speqJczq"  disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item " style="margin-bottom: 10px">
+                            <div class="layui-inline" >
+                                <label class="layui-form-label">院&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
+                                <div class="layui-input-inline" >
+                                    <input type="text" name="speqBz"  placeholder="院区" autocomplete="off" class="layui-input  speqBz"   disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom: 10px">
+                            <div class="layui-inline" >
+                                <label class="layui-form-label" >单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="speqSpare1"  placeholder="请输入" autocomplete="off" class="layui-input speqSpare1" value=""   disabled>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div  class="layui-col-md4" >
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">检测证编号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="speqJczbh" lay-verify="required" placeholder="请输入"
+                                       autocomplete="off" class="layui-input speqJczbh"  disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">注&nbsp;册&nbsp;编&nbsp;号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="speqZczbh" lay-verify="required"
+                                       autocomplete="off" class="layui-input speqZczbh"   placeholder="无" disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom: 10px">
+                            <div class="layui-inline" >
+                                <label class="layui-form-label" >使&nbsp;用&nbsp;编&nbsp;号:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="speqSyzbh"  placeholder="无"  autocomplete="off" class="layui-input speqSyzbh"   disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom: 10px">
+                            <div class="layui-inline" >
+                                <label class="layui-form-label" >精&nbsp;度&nbsp;等&nbsp;级:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="aqfjJddj"  placeholder="无" autocomplete="off" class="layui-input aqfjJddj"   disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom: 10px">
+                            <div class="layui-inline" >
+                                <label class="layui-form-label" >设&nbsp;备&nbsp;状&nbsp;态:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="speqRun"  placeholder="请输入" autocomplete="off" class="layui-input speqRun"   disabled>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">历史送检结果记录</h2>
+            <div class="layui-colla-content"  style="height: 310px">
+
+                <div class="layui-col-md12"  style="width: 100%">
+
+                    <!-- 表格-->
+                    <table class="layui-hide" id="test" style="position: relative">
+                        <!--    记录-->
+                        <div id="num1"></div>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</form>
+<script>
+
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element;
+        var layer = layui.layer;
+
+        //监听折叠
+    });
+
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            ,   $ = layui.$ ;
+        form.render();
+    });
+</script>
+<script>
+        $(function(){
+        var url=window.location.search;
+            var speqId =  $.getUrlParam("id");
+       /* console.log(speqId);*/
+        $.ajax({
+            url : "/specialEq/selectSpecialEqById",
+            type : 'POST',
+            data : {"speqId": speqId},
+            success : function(springBootOtl){
+                var  data = springBootOtl;
+                console.log(123);
+                if(data !== null){
+                     $(".speqBh").val(data.data.speqBh);
+                     $(".speqName").val(data.data.speqName);
+                     $(".speqType").val(data.data.speqType === 1 ? "特种设备" : "安全附件" );
+                     $(".speqGgxh").val(data.data.speqGgxh);
+                     $(".speqScs").val(data.data.speqScs);
+                     $(".speqCcbh").val(data.data.speqCcbh);
+                     $(".speqJczbh").val(data.data.speqJczbh);
+                     $("#bmId").val(data.data.bmId);
+                     $(".speqSyzbh").val(data.data.speqSyzbh);
+                     $(".speqJczq").val(data.data.speqJczq);
+                     $(".speqBz").val(data.data.speqBz);
+                     $(".speqJcsj").val(data.data.speqJcsj);
+                     $(".speqSpare1").val(data.data.speqSpare1);
+                     $(".speqZczbh").val(data.data.speqZczbh);
+                     $(".aqfjJddj").val(data.data.aqfjJddj);
+                     $(".speqRun").val(data.data.speqRun === 1 ? "使用中" : "停用");
+                     // 记得重新渲染表单/*form.render();*/
+
+                 }else{
+                     alert("查询为空");
+                 }
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
+                },500)
+            },
+            error:function (data) {
+                alert("查询失败");
+                console.log(data);
+            }
+        });
+    })
+</script>
+<script>
+   layui.use('table', function() {
+        var table = layui.table;
+        var $ = layui.$;
+        table.on('sort(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            console.log(obj.field); //当前排序的字段名
+            console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+            console.log(this); //当前排序的 th 对象
+
+            table.reload('test', {
+                initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
+                , where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                    field: obj.field //排序字段
+                    , order: obj.type //排序方式
+                }
+            });
+        });
+
+
+
+        table.render({
+            elem: '#test' //绑定元素
+            ,url:'/specialEq/selectSpeqRecordBySpeqBh'//上传接口
+           ,type : 'POST'
+            , toolbar:false
+            ,method: "POST"
+            ,height:300
+            , cols: [[
+                {type:'numbers'}
+                ,{field: 'speqBh', width: 120, title: '设备编号'}
+                , {field: 'speqJczbh', width: 150, title: '检测证编号'}
+                , {field: 'speqJcsj', width: 150, title: '检测日期', sort: true}
+                , {field: 'speqSjsqr', title: '送检申请人', width: 110}
+                , {field: 'speqSjsqsj', width: 150, title: '送检申请时间', sort: true}
+                , {field: 'speqSjspr', width: 110, title: '送检审批人'}
+                , {field: 'speqSjspsj', width: 150, title: '送检审批时间', sort: true}
+                , {field: 'speqRun', width: 115, title: '送检结果', templet: '#statusTpl'}
+            ]]
+            ,where:{
+                speqBh : $.getUrlParam("bh")
+            }
+            , page: true//开启分页
+            , request: {
+                pageName: 'pageNum',
+                limitName: 'pageSize'
+            }
+            , parseData: function (res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "data": res.data.list, //解析数据列表
+                    "count": res.data.total
+                }
+            }
+
+
+            , done: function (res, curr, count) {
+                $('th').css({'fontWeight': 'bold'});
+
+                $("[data-field = 'speqRun']").children().each(function () {
+
+                    if ($(this).text() === "0") {
+
+                        $(this).text("停用");
+
+                    } else if ($(this).text() === "1") {
+
+                        $(this).text("使用中");
+                    }
+
+                });
+              /*  $('#num1').text("一共有"+"\t"+ res.data.length +"\t"+ "条记录");*/
+            }
+
+        });
+    })
+
+</script>
+
+<script type="text/html" id="statusTpl">
+    {{#  if(d.speqRun === 0){ }}
+    <span style="color: red" target="_blank">{{ "停用" }}</span>
+    {{#  } else if(d.speqRun === 1) { }}
+    {{ "使用中" }}
+    {{#  } }}
+</script>
+
+
+
+</body>
+</html>

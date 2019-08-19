@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div id="data-screen1" style="width: 400px;height:400px;display: inline-block;float: left;"></div>
+
+<script src="../layui/echarts.js"></script>
+<script>
+    function loadOneColumn() {
+        var myChart = echarts.init(document.getElementById('data-screen1'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                x: 'center',
+                text: '全院设备分布图',
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: [],
+                    axisLabel:{
+                        rotate:30,
+                        margin: 10
+                    },
+                    axisLine: {
+                        show: true,
+                        onZero: true,
+                        lineStyle: {
+                            color:'#eee',
+                        },
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    show: true,
+                    axisLine: {
+                        show: true,
+                        onZero: true,
+                        lineStyle: {
+                            color:'#fff',
+                        },
+                    },
+                }
+            ],
+            calculable: true,
+            grid: {
+                borderWidth: 0,
+                y: 80,
+                y2: 60
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data: []
+            },
+            series: [{
+                name: '全院设备分布图',
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                                '#e062ae','#37a2da','#67e0e3','#ffdb5c','#ff9f7f',
+                                '#FE8463','#9BCA63'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{b}\n{c}'
+                        }
+                    }
+                },
+                data: []
+            }]
+        });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var names = [];    //类别数组（用于存放饼图的类别）
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: '../json/dataScreen2.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.list, function (index, item) {
+                    names.push(item.dep);    //挨个取出类别并填入类别数组 
+                    brower.push({
+                        name: item.dep,
+                        value: item.num
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表                
+                    legend: {
+                        data: names
+                    },
+                    series: [{
+                        data: brower
+                    }],
+                    xAxis: {
+                        data:names
+                    }
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadOneColumn();
+</script>
+</body>
+</html>

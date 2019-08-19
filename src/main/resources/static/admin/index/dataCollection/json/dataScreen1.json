@@ -1,0 +1,1 @@
+{  "code": 0,  "msg": "",  "count": 5,  "data": [    {      "status": "工作",      "num": 98    },    {      "status": "故障",      "num": 2    },    {      "status": "关机",      "num": 8    },    {      "status": "待机",      "num": 70    },    {      "status": "离线",      "num": 3    }  ]}

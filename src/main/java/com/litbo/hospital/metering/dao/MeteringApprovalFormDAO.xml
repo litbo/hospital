@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.MeteringApprovalFormDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.MeteringApprovalForm">
+    <id column="form_id" jdbcType="INTEGER" property="formId" />
+    <result column="affiliate_department" jdbcType="VARCHAR" property="affiliateDepartment" />
+    <result column="form_name" jdbcType="VARCHAR" property="formName" />
+    <result column="metering_id" jdbcType="VARCHAR" property="meteringId" />
+    <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+    <result column="deal_status" jdbcType="VARCHAR" property="dealStatus" />
+    <result column="deal_time" jdbcType="VARCHAR" property="dealTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    form_id, affiliate_department, form_name, metering_id, record_time, deal_status, 
+    deal_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..metering_approval_form
+    where form_id = #{formId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..metering_approval_form
+    where form_id = #{formId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringApprovalForm">
+    insert into hospital..metering_approval_form (affiliate_department, form_name,
+      metering_id, record_time, deal_status, 
+      deal_time)
+    values (#{affiliateDepartment,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR},
+      #{meteringId,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{dealStatus,jdbcType=VARCHAR}, 
+      #{dealTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringApprovalForm">
+    insert into hospital..metering_approval_form
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="affiliateDepartment != null">
+        affiliate_department,
+      </if>
+      <if test="formName != null">
+        form_name,
+      </if>
+      <if test="meteringId != null">
+        metering_id,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="dealStatus != null">
+        deal_status,
+      </if>
+      <if test="dealTime != null">
+        deal_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="affiliateDepartment != null">
+        #{affiliateDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="formName != null">
+        #{formName,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringId != null">
+        #{meteringId,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealStatus != null">
+        #{dealStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.metering.pojo.MeteringApprovalForm">
+    update hospital..metering_approval_form
+    <set>
+      <if test="affiliateDepartment != null">
+        affiliate_department = #{affiliateDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="formName != null">
+        form_name = #{formName,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringId != null">
+        metering_id = #{meteringId,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealStatus != null">
+        deal_status = #{dealStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dealTime != null">
+        deal_time = #{dealTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where form_id = #{formId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.metering.pojo.MeteringApprovalForm">
+    update hospital..metering_approval_form
+    set affiliate_department = #{affiliateDepartment,jdbcType=VARCHAR},
+      form_name = #{formName,jdbcType=VARCHAR},
+      metering_id = #{meteringId,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=VARCHAR},
+      deal_status = #{dealStatus,jdbcType=VARCHAR},
+      deal_time = #{dealTime,jdbcType=VARCHAR}
+    where form_id = #{formId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByFormName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_approval_form
+    where form_name = #{name,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="searchApprovalForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_approval_form
+    <where>
+      <if test="recordBeginTime != null">
+        record_time >= #{recordBeginTime} and
+      </if>
+      <if test="recordEndTime != null">
+        record_time &lt;= #{recordEndTime} and
+      </if>
+      <if test="dealBeginTime != null">
+        deal_time >= #{dealBeginTime} and
+      </if>
+      <if test="dealEndTime != null">
+        deal_time &lt;= #{dealEndTime} and
+      </if>
+      <if test="department != null">
+        affiliate_department = #{department} and
+      </if>
+      <if test="status != null">
+        deal_status = #{status,jdbcType=VARCHAR} and
+      </if>
+      1 = 1
+    </where>
+  </select>
+</mapper>

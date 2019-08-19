@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>合同执行 > 到货登记</title>
+    <link rel="stylesheet" href="../../../static/admin/layui/css/layui.css">
+    <script src="../../../static/admin/js/renderMod.js"></script>
+    <script src="../../../static/admin/js/basic.js"></script>
+    <script src="../../../static/admin/layui/layui.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">收货信息</li>
+            <li>用货物信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show"> <form class="layui-form" action="">
+
+                <div class="layui-container">
+                    <div class="layui-row" layui-col-space20>
+
+
+                        <div class="layui-col-md6">
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">收货单位</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">收货人</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">收货人电话</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">目的地</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">收货人<br>详细地址</label>
+                                <div class="layui-input-block">
+                                    <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">到货时间</label>
+                                <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+                                    <input type="text" class="layui-input" id="test1" placeholder="请选择日期">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">搬家公司</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">搬运费用</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <label class="layui-form-label">接收人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <button type="button" class="layui-btn" >保存</button>
+
+                        </div>
+
+                        <div class="layui-col-md6">
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">发货单位</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">发货人</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">发货人电话</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">发货地</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">发货人<br>详细地址</label>
+                                <div class="layui-input-block">
+                                    <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">物流公司</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">运输单号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">运输方式</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="1" title="空运">
+                                    <input type="checkbox" name="" title="海运">
+                                    <input type="checkbox" name="" title="铁运">
+                                    <input type="checkbox" name="" title="汽运">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">存放地点</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+
+                            <div class="layui-btn-group" style="float: right">
+                                <button type="button" class="layui-btn">上一页</button>
+                                <button type="button" class="layui-btn">下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form></div>
+            <div class="layui-tab-item">
+
+                <form class="layui-form" action="">
+
+                    <div class="layui-container">
+                        <div class="layui-row" layui-col-space20>
+
+
+                            <div class="layui-col-md6">
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">合同编号</label>
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required">
+                                            <option value=""></option>
+                                            <option value="0">01</option>
+                                            <option value="1">02</option>
+                                            <option value="2">03</option>
+                                            <option value="3">04</option>
+                                            <option value="4">05</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">发货箱数</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">实到箱数</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入内容" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">残损箱数</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required  lay-verify="required" placeholder="0" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="layui-col-md6">
+
+
+
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">备注</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">本合同是否全部到货</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="1" title="空运">
+                                        <input type="checkbox" name="" title="海运">
+
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <table class="layui-table" id="add_table">
+                                <colgroup>
+                                    <col width="150">
+                                    <col width="200">
+                                    <col>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>货物名称</th>
+                                    <th>包装(木箱/纸箱)</th>
+                                    <th>包装箱号</th>
+                                    <th>包装外观</th>
+                                    <th>数量</th>
+                                    <th>重量(kg)</th>
+                                    <th>体积(m³)</th>
+                                    <th>货物价值</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+        <script>
+            //Demo
+            layui.use('form', function(){
+                var form = layui.form;
+
+                //监听提交
+                form.on('submit(formDemo)', function(data){
+                    layer.msg(JSON.stringify(data.field));
+                    return false;
+                });
+            });
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#test1' //指定元素
+                });
+            });
+            layui.use('element', function(){
+                var element = layui.element;
+
+                //…
+            });
+        </script>
+
+</div>
+
+
+
+
+
+</body>
+
+</html>

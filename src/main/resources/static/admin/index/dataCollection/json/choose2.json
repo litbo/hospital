@@ -1,0 +1,19 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 2,
+  "data": [
+    {
+      "id": "001",
+      "name": "CT",
+      "model": "M-1",
+      "department": "CT"
+    },
+    {
+      "id": "002",
+      "name": "DT",
+      "model": "M-2",
+      "department": "CT"
+    }
+  ]
+}

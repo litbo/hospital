@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>修改设备信息</title>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+<form class="layui-form  layui-form-pane" action="" style="margin-top: 20px;margin-left: 100px;">
+
+    <div class="layui-col-md5" style="width: 50%">
+
+        <div class="layui-form-item" style="display: none">
+            <div class="layui-input-inline">
+                <input type="text" name="speqId" lay-verify="required"
+                       placeholder="请输入" autocomplete="off" class="layui-input speqId">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备编号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="speqBh" lay-verify="required"
+                       placeholder="请输入" autocomplete="off" class="layui-input speqBh">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name=speqName" lay-verify="required"
+                       placeholder="请输入" autocomplete="off" class="layui-input speqName">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item" >
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block speqType" >
+
+                <input type="radio" name="speqType" value="1" title="特种设备" id="speqType1"  lay-filter="speqType" checked>
+                <input type="radio" name="speqType" value="0" title="安全附件" id="speqType2"  lay-filter="speqType" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">规格型号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="speqGgxh" lay-verify="required" placeholder="请输入"
+                       autocomplete="off" class="layui-input speqGgxh">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">生产商</label>
+            <div class="layui-input-inline">
+                <input type="text" name="speqScs" lay-verify="required" placeholder="请输入"
+                       autocomplete="off" class="layui-input speqScs">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">出厂编号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="speqCcbh" lay-verify="required" placeholder="请输入"
+                       autocomplete="off" class="layui-input speqCcbh">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">检测证编号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="speqJczbh" lay-verify="required" placeholder="请输入"
+                       autocomplete="off" class="layui-input speqJczbh">
+            </div>
+        </div>
+
+        <div class="layui-form-item" id="speqZczbh">
+            <label class="layui-form-label">注册编号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="speqZczbh"  placeholder="请输入" lay-verify="required"
+                       autocomplete="off" class="layui-input speqZczbh" >
+            </div>
+        </div>
+
+    </div>
+    <div  class="layui-col-md5" style="width: 50%;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">使用科室</label>
+            <div class="layui-input-inline">
+                <input type="button" class="layui-btn bmId" title="科室" value="科室"
+                       lay-filter="bmId" style="float:left;">
+                <input type="text" lay-verify="required" readonly="readonly" style="float:left; width: 100px;height: 35px;border: none;margin-left: 15px" name ='bmId' id="bmId" value="">
+            </div>
+        </div>
+
+        <div class="layui-form-item" >
+            <div class="layui-inline" >
+                <label class="layui-form-label" title="上次检测时间">上次检测时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="speqJcsj" id="date1" readonly="readonly" lay-verify="date"  placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input  speqJcsj" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" >
+            <div class="layui-inline" >
+                <label class="layui-form-label" title="检测周期（月）" >检测周期（月）</label>
+                <div class="layui-input-block">
+                    <input type="text" name="speqJczq" lay-verify="required|number"   placeholder="请输入检测周期（月）" autocomplete="off" class="layui-input speqJczq" >
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item ">
+            <div class="layui-inline" >
+                <label class="layui-form-label">院区</label>
+                <div class="layui-input-inline" >
+                    <input type="text" name="speqBz"  lay-verify="required"  placeholder="院区" autocomplete="off" class="layui-input  speqBz">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline" >
+                <label class="layui-form-label" >单价</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqSpare1" lay-verify="required"  placeholder="请输入" autocomplete="off" class="layui-input speqSpare1" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" id="speqSyzbh">
+            <div class="layui-inline" >
+                <label class="layui-form-label" >使用编号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="speqSyzbh"  lay-verify="required"  autocomplete="off" class="layui-input speqSyzbh" >
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item"  id="aqfjJddj">
+            <div class="layui-inline">
+                <label class="layui-form-label" >精度等级</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="aqfjJddj"  lay-verify="required"  placeholder="请输入" autocomplete="off" class="layui-input aqfjJddj" >
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-top: 40px">
+            <div class="layui-input-block">
+                <button  class="layui-btn" lay-submit  lay-filter="demo">保存</button>
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script>
+
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , $ = layui.$;
+
+        //日期
+
+        laydate.render({
+            elem: '#date1'
+        });
+
+
+
+        if($('#speqType1').is(':checked')){
+            $("#speqSyzbh").show();
+            $("#speqZczbh").show();
+            $("#aqfjJddj").hide();
+            $("#aqfjJddj").find(".aqfjJddj").val(" ");
+            $("#aqfjJddj").find(".aqfjJddj").removeAttr("lay-verify","required");
+            $("#speqSyzbh").find(".speqSyzbh").attr("lay-verify","required");
+            $("#speqZczbh").find(".speqZczbh").attr("lay-verify","required");
+
+        }else if($('#speqType2').is(':checked')){
+            $("#aqfjJddj").show();
+            $("#speqSyzbh").hide();
+            $("#speqZczbh").hide();
+            $("#speqSyzbh").find(".speqSyzbh").val(" ");
+            $("#speqZczbh").find(".speqZczbh").val(" ");
+            $("#aqfjJddj").find(".aqfjJddj").attr("lay-verify","required");
+            $("#speqSyzbh").find(".speqSyzbh").removeAttr("lay-verify","required");
+            $("#speqZczbh").find(".speqZczbh").removeAttr("lay-verify","required");
+        }
+
+        form.on("radio(speqType)", function (data) {
+            if (data.value === '1') {
+                $("#aqfjJddj").hide();
+                $("#speqSyzbh").show();
+                $("#speqZczbh").show();
+                $("#aqfjJddj").find(".aqfjJddj").val(" ");
+                $("#aqfjJddj").find(".aqfjJddj").removeAttr("lay-verify");
+                $("#speqSyzbh").find(".speqSyzbh").attr("lay-verify","required");
+                $("#speqZczbh").find(".speqZczbh").attr("lay-verify","required");
+
+            } else if (data.value === '0') {
+                $("#speqSyzbh").hide();
+                $("#speqZczbh").hide();
+                $("#aqfjJddj").show();
+                $("#speqSyzbh").find(".speqSyzbh").val(" ");
+                $("#speqZczbh").find(".speqZczbh").val(" ");
+                $("#aqfjJddj").find(".aqfjJddj").attr("lay-verify","required");
+                $("#speqSyzbh").find(".speqSyzbh").removeAttr("lay-verify","required");
+                $("#speqZczbh").find(".speqZczbh").removeAttr("lay-verify","required");
+
+            }
+        });
+
+
+    //查看
+        $(function(){
+            var url=window.location.search;
+            var speqId =  $.getUrlParam("id");
+            /* console.log(speqId);*/
+            $.ajax({
+                url : "/specialEq/selectSpecialEqById",
+                type : 'POST',
+                data : {"speqId": speqId},
+                success : function(springBootOtl){
+                    var  data = springBootOtl;
+                    if(data !== null){
+                        $(".speqId").val(data.data.speqId);
+                        $(".speqBh").val(data.data.speqBh);
+                        $(".speqName").val(data.data.speqName);
+                        $(".speqType input[value=" + data.data.speqType + "]").prop("checked", "checked");
+                        $(".speqGgxh").val(data.data.speqGgxh);
+                        $(".speqScs").val(data.data.speqScs);
+                        $(".speqCcbh").val(data.data.speqCcbh);
+                        $(".speqJczbh").val(data.data.speqJczbh);
+                        $("#bmId").val(data.data.bmId);
+                        $(".speqSyzbh").val(data.data.speqSyzbh);
+                        $(".speqJczq").val(data.data.speqJczq);
+                        $(".speqBz").val(data.data.speqBz);
+                        $(".speqJcsj").val(data.data.speqJcsj);
+                        $(".speqSpare1").val(data.data.speqSpare1);
+                        $(".speqZczbh").val(data.data.speqZczbh);
+                        $(".aqfjJddj").val(data.data.aqfjJddj);
+                        $(".speqRun").val(data.data.speqRun === 1 ? "使用中" : "停用");
+
+                        if (data.data.speqType === 0) {//安全附件
+                            $(".aqfjJddj").val(data.data.aqfjJddj);
+                            $(".speqSyzbh").val(" ");
+                            $(".speqZczbh").val(" ");
+                            $("#aqfjJddj").show();
+                            $("#speqSyzbh").hide();
+                            $("#speqZczbh").hide();
+                            $("#aqfjJddj").find(".aqfjJddj").attr("lay-verify", "required");
+                            $("#speqSyzbh").find(".speqSyzbh").removeAttr("lay-verify", "required");
+                            $("#speqZczbh").find(".speqZczbh").removeAttr("lay-verify", "required");
+
+                        } else if (data.data.speqType === 1) {//特种设备
+                            $(".speqSyzbh").val(data.data.speqSyzbh);
+                            $(".speqZczbh").val(data.data.speqZczbh);
+                            $(".aqfjJddj").val(" ");
+                            $("#speqSyzbh").show();
+                            $("#speqZczbh").show();
+                            $("#aqfjJddj").hide();
+                            $("#aqfjJddj").find(".aqfjJddj").removeAttr("lay-verify", "required");
+                            $("#speqSyzbh").find(".speqSyzbh").attr("lay-verify", "required");
+                            $("#speqZczbh").find(".speqZczbh").attr("lay-verify", "required");
+
+                        }
+                        // 记得重新渲染表单/*form.render();*/
+                        form.render();
+
+                    }else{
+                        alert("查询为空");
+                    }
+                },
+                error:function (data) {
+                    alert("查询失败");
+                    console.log(data);
+                }
+            });
+
+            form.on('submit(demo)', function (data) {
+                console.log(speqId);
+                $.ajax({
+                    url:'/specialEq/updateSpecialEq',
+                    type:"POST",
+                    async: false,/*同步传输*/
+                    data:JSON.stringify(data.field),
+                    dataType:'JSON',
+                    contentType:'application/json' ,
+                    success : function(springBootOtl){
+                        var  data = springBootOtl;
+                        if(data.msg === 'success'){
+                            layer.alert("修改成功", {icon:1, time:2000},function () {
+                                layer.close(layer.index);
+                                window.parent.location.reload();
+                            });
+                            // 记得重新渲染表单form.render();
+                        }else{
+                            layer.alert("修改失败",{icon:2,time:2000});
+                        }
+                        /*setTimeout(function(){
+                            layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
+                        },500)*/
+                    },
+                    error:function (data) {
+                        alert("错误");
+                    }
+
+                })
+                return false;
+            });
+        });
+
+//科室
+        $('.bmId').on('click', function () {
+            var $ = layui.jquery;
+            layui.layer.open({
+                type: 2,
+                title: '科室',
+                shadeClose: true, //点击遮罩关闭层
+                area: ['800px', '470px'],
+                content: 'index1-BM.html'
+
+            });
+
+        });
+       /* var index = parent.layer.getFrameIndex(window.name);
+        form.render();*/
+
+
+    })
+</script>
+
+
+
+</body>
+</html>

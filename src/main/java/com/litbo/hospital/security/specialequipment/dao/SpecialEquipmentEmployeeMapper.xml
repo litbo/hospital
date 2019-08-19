@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.security.specialequipment.dao.SpecialEquipmentEmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployee">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_xm" jdbcType="VARCHAR" property="userXm" />
+    <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
+    <result column="spem_sgzzfw" jdbcType="VARCHAR" property="spemSgzzfw" />
+    <result column="spem_zczh" jdbcType="VARCHAR" property="spemZczh" />
+    <result column="spem_qfrq" jdbcType="DATE" property="spemQfrq" />
+    <result column="spem_yxqsq" jdbcType="DATE" property="spemYxqsq" />
+    <result column="spem_yxjsq" jdbcType="DATE" property="spemYxjsq" />
+    <result column="spem_dabh" jdbcType="VARCHAR" property="spemDabh" />
+    <result column="spem_fzjg" jdbcType="VARCHAR" property="spemFzjg" />
+    <result column="speq_spare1" jdbcType="VARCHAR" property="speqSpare1" />
+    <result column="speq_spare2" jdbcType="VARCHAR" property="speqSpare2" />
+    <result column="speq_spare3" jdbcType="VARCHAR" property="speqSpare3" />
+    <result column="speq_spare4" jdbcType="VARCHAR" property="speqSpare4" />
+    <result column="speq_spare5" jdbcType="VARCHAR" property="speqSpare5" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployee">
+    <result column="spem_zjimage" jdbcType="LONGVARBINARY" property="spemZjimage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_xm, bm_name, spem_sgzzfw, spem_zczh, spem_qfrq, spem_yxqsq, spem_yxjsq, 
+    spem_dabh, spem_fzjg, speq_spare1, speq_spare2, speq_spare3, speq_spare4, speq_spare5
+  </sql>
+  <sql id="Blob_Column_List">
+    spem_zjimage
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployeeExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from special_eq_em
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from special_eq_em
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from special_eq_em
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from special_eq_em
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployeeExample">
+    delete from special_eq_em
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployee">
+    insert into special_eq_em (user_id, user_xm, bm_name, 
+      spem_sgzzfw, spem_zczh, spem_qfrq, 
+      spem_yxqsq, spem_yxjsq, spem_dabh, 
+      spem_fzjg, speq_spare1, speq_spare2, 
+      speq_spare3, speq_spare4, speq_spare5, 
+      spem_zjimage)
+    values (#{userId,jdbcType=VARCHAR}, #{userXm,jdbcType=VARCHAR}, #{bmName,jdbcType=VARCHAR}, 
+      #{spemSgzzfw,jdbcType=VARCHAR}, #{spemZczh,jdbcType=VARCHAR}, #{spemQfrq,jdbcType=DATE}, 
+      #{spemYxqsq,jdbcType=DATE}, #{spemYxjsq,jdbcType=DATE}, #{spemDabh,jdbcType=VARCHAR}, 
+      #{spemFzjg,jdbcType=VARCHAR}, #{speqSpare1,jdbcType=VARCHAR}, #{speqSpare2,jdbcType=VARCHAR}, 
+      #{speqSpare3,jdbcType=VARCHAR}, #{speqSpare4,jdbcType=VARCHAR}, #{speqSpare5,jdbcType=VARCHAR}, 
+      #{spemZjimage,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployee">
+    insert into special_eq_em
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userXm != null">
+        user_xm,
+      </if>
+      <if test="bmName != null">
+        bm_name,
+      </if>
+      <if test="spemSgzzfw != null">
+        spem_sgzzfw,
+      </if>
+      <if test="spemZczh != null">
+        spem_zczh,
+      </if>
+      <if test="spemQfrq != null">
+        spem_qfrq,
+      </if>
+      <if test="spemYxqsq != null">
+        spem_yxqsq,
+      </if>
+      <if test="spemYxjsq != null">
+        spem_yxjsq,
+      </if>
+      <if test="spemDabh != null">
+        spem_dabh,
+      </if>
+      <if test="spemFzjg != null">
+        spem_fzjg,
+      </if>
+      <if test="speqSpare1 != null">
+        speq_spare1,
+      </if>
+      <if test="speqSpare2 != null">
+        speq_spare2,
+      </if>
+      <if test="speqSpare3 != null">
+        speq_spare3,
+      </if>
+      <if test="speqSpare4 != null">
+        speq_spare4,
+      </if>
+      <if test="speqSpare5 != null">
+        speq_spare5,
+      </if>
+      <if test="spemZjimage != null">
+        spem_zjimage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userXm != null">
+        #{userXm,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        #{bmName,jdbcType=VARCHAR},
+      </if>
+      <if test="spemSgzzfw != null">
+        #{spemSgzzfw,jdbcType=VARCHAR},
+      </if>
+      <if test="spemZczh != null">
+        #{spemZczh,jdbcType=VARCHAR},
+      </if>
+      <if test="spemQfrq != null">
+        #{spemQfrq,jdbcType=DATE},
+      </if>
+      <if test="spemYxqsq != null">
+        #{spemYxqsq,jdbcType=DATE},
+      </if>
+      <if test="spemYxjsq != null">
+        #{spemYxjsq,jdbcType=DATE},
+      </if>
+      <if test="spemDabh != null">
+        #{spemDabh,jdbcType=VARCHAR},
+      </if>
+      <if test="spemFzjg != null">
+        #{spemFzjg,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare1 != null">
+        #{speqSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare2 != null">
+        #{speqSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare3 != null">
+        #{speqSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare4 != null">
+        #{speqSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare5 != null">
+        #{speqSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="spemZjimage != null">
+        #{spemZjimage,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployeeExample" resultType="java.lang.Long">
+    select count(*) from special_eq_em
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update special_eq_em
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userXm != null">
+        user_xm = #{record.userXm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bmName != null">
+        bm_name = #{record.bmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spemSgzzfw != null">
+        spem_sgzzfw = #{record.spemSgzzfw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spemZczh != null">
+        spem_zczh = #{record.spemZczh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spemQfrq != null">
+        spem_qfrq = #{record.spemQfrq,jdbcType=DATE},
+      </if>
+      <if test="record.spemYxqsq != null">
+        spem_yxqsq = #{record.spemYxqsq,jdbcType=DATE},
+      </if>
+      <if test="record.spemYxjsq != null">
+        spem_yxjsq = #{record.spemYxjsq,jdbcType=DATE},
+      </if>
+      <if test="record.spemDabh != null">
+        spem_dabh = #{record.spemDabh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spemFzjg != null">
+        spem_fzjg = #{record.spemFzjg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speqSpare1 != null">
+        speq_spare1 = #{record.speqSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speqSpare2 != null">
+        speq_spare2 = #{record.speqSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speqSpare3 != null">
+        speq_spare3 = #{record.speqSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speqSpare4 != null">
+        speq_spare4 = #{record.speqSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speqSpare5 != null">
+        speq_spare5 = #{record.speqSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spemZjimage != null">
+        spem_zjimage = #{record.spemZjimage,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update special_eq_em
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      user_xm = #{record.userXm,jdbcType=VARCHAR},
+      bm_name = #{record.bmName,jdbcType=VARCHAR},
+      spem_sgzzfw = #{record.spemSgzzfw,jdbcType=VARCHAR},
+      spem_zczh = #{record.spemZczh,jdbcType=VARCHAR},
+      spem_qfrq = #{record.spemQfrq,jdbcType=DATE},
+      spem_yxqsq = #{record.spemYxqsq,jdbcType=DATE},
+      spem_yxjsq = #{record.spemYxjsq,jdbcType=DATE},
+      spem_dabh = #{record.spemDabh,jdbcType=VARCHAR},
+      spem_fzjg = #{record.spemFzjg,jdbcType=VARCHAR},
+      speq_spare1 = #{record.speqSpare1,jdbcType=VARCHAR},
+      speq_spare2 = #{record.speqSpare2,jdbcType=VARCHAR},
+      speq_spare3 = #{record.speqSpare3,jdbcType=VARCHAR},
+      speq_spare4 = #{record.speqSpare4,jdbcType=VARCHAR},
+      speq_spare5 = #{record.speqSpare5,jdbcType=VARCHAR},
+      spem_zjimage = #{record.spemZjimage,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update special_eq_em
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      user_xm = #{record.userXm,jdbcType=VARCHAR},
+      bm_name = #{record.bmName,jdbcType=VARCHAR},
+      spem_sgzzfw = #{record.spemSgzzfw,jdbcType=VARCHAR},
+      spem_zczh = #{record.spemZczh,jdbcType=VARCHAR},
+      spem_qfrq = #{record.spemQfrq,jdbcType=DATE},
+      spem_yxqsq = #{record.spemYxqsq,jdbcType=DATE},
+      spem_yxjsq = #{record.spemYxjsq,jdbcType=DATE},
+      spem_dabh = #{record.spemDabh,jdbcType=VARCHAR},
+      spem_fzjg = #{record.spemFzjg,jdbcType=VARCHAR},
+      speq_spare1 = #{record.speqSpare1,jdbcType=VARCHAR},
+      speq_spare2 = #{record.speqSpare2,jdbcType=VARCHAR},
+      speq_spare3 = #{record.speqSpare3,jdbcType=VARCHAR},
+      speq_spare4 = #{record.speqSpare4,jdbcType=VARCHAR},
+      speq_spare5 = #{record.speqSpare5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployee">
+    update special_eq_em
+    <set>
+      <if test="userXm != null">
+        user_xm = #{userXm,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        bm_name = #{bmName,jdbcType=VARCHAR},
+      </if>
+      <if test="spemSgzzfw != null">
+        spem_sgzzfw = #{spemSgzzfw,jdbcType=VARCHAR},
+      </if>
+      <if test="spemZczh != null">
+        spem_zczh = #{spemZczh,jdbcType=VARCHAR},
+      </if>
+      <if test="spemQfrq != null">
+        spem_qfrq = #{spemQfrq,jdbcType=DATE},
+      </if>
+      <if test="spemYxqsq != null">
+        spem_yxqsq = #{spemYxqsq,jdbcType=DATE},
+      </if>
+      <if test="spemYxjsq != null">
+        spem_yxjsq = #{spemYxjsq,jdbcType=DATE},
+      </if>
+      <if test="spemDabh != null">
+        spem_dabh = #{spemDabh,jdbcType=VARCHAR},
+      </if>
+      <if test="spemFzjg != null">
+        spem_fzjg = #{spemFzjg,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare1 != null">
+        speq_spare1 = #{speqSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare2 != null">
+        speq_spare2 = #{speqSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare3 != null">
+        speq_spare3 = #{speqSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare4 != null">
+        speq_spare4 = #{speqSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="speqSpare5 != null">
+        speq_spare5 = #{speqSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="spemZjimage != null">
+        spem_zjimage = #{spemZjimage,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployee">
+    update special_eq_em
+    set user_xm = #{userXm,jdbcType=VARCHAR},
+      bm_name = #{bmName,jdbcType=VARCHAR},
+      spem_sgzzfw = #{spemSgzzfw,jdbcType=VARCHAR},
+      spem_zczh = #{spemZczh,jdbcType=VARCHAR},
+      spem_qfrq = #{spemQfrq,jdbcType=DATE},
+      spem_yxqsq = #{spemYxqsq,jdbcType=DATE},
+      spem_yxjsq = #{spemYxjsq,jdbcType=DATE},
+      spem_dabh = #{spemDabh,jdbcType=VARCHAR},
+      spem_fzjg = #{spemFzjg,jdbcType=VARCHAR},
+      speq_spare1 = #{speqSpare1,jdbcType=VARCHAR},
+      speq_spare2 = #{speqSpare2,jdbcType=VARCHAR},
+      speq_spare3 = #{speqSpare3,jdbcType=VARCHAR},
+      speq_spare4 = #{speqSpare4,jdbcType=VARCHAR},
+      speq_spare5 = #{speqSpare5,jdbcType=VARCHAR},
+      spem_zjimage = #{spemZjimage,jdbcType=LONGVARBINARY}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.security.specialequipment.bean.SpecialEquipmentEmployee">
+    update special_eq_em
+    set user_xm = #{userXm,jdbcType=VARCHAR},
+      bm_name = #{bmName,jdbcType=VARCHAR},
+      spem_sgzzfw = #{spemSgzzfw,jdbcType=VARCHAR},
+      spem_zczh = #{spemZczh,jdbcType=VARCHAR},
+      spem_qfrq = #{spemQfrq,jdbcType=DATE},
+      spem_yxqsq = #{spemYxqsq,jdbcType=DATE},
+      spem_yxjsq = #{spemYxjsq,jdbcType=DATE},
+      spem_dabh = #{spemDabh,jdbcType=VARCHAR},
+      spem_fzjg = #{spemFzjg,jdbcType=VARCHAR},
+      speq_spare1 = #{speqSpare1,jdbcType=VARCHAR},
+      speq_spare2 = #{speqSpare2,jdbcType=VARCHAR},
+      speq_spare3 = #{speqSpare3,jdbcType=VARCHAR},
+      speq_spare4 = #{speqSpare4,jdbcType=VARCHAR},
+      speq_spare5 = #{speqSpare5,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

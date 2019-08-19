@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>科室</title>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+  <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+  <script src="../../../../../static/admin/js/basic.js"></script>
+
+</head>
+<body>
+<script type="text/html" id="toolBar">
+<div class="demoTable" style="height: 50px;">
+
+  <div class="layui-btn-container layui-inline " demoTable style="width: 50px;margin-left: 5px;float: left">
+      <button class="layui-btn Bm" id="Bm" lay-event="getCheckData">确定</button>
+  </div>
+
+
+  <form class="layui-form layui-inline"  action="" style="width: 300px;margin-left:100px;float: left" >
+      <div class="layui-form-item layui-inline" >
+          <div class="layui-inline" style="width: 300px;height: 40px;">
+              <div  id="moreBar" style="float: left">
+                  <label>
+                    <!--  <input type="hidden" lay-filter="bmName" value="">-->
+                      <select name="bmName" lay-filter="bmName" >
+                          <option value="">全部科室</option>
+                      </select>
+                  </label>
+              </div>
+              <button type="button" class="layui-inline  layui-btn"   data-type="search"   style="float: left">查找</button>
+          </div>
+      </div>
+
+  </form>
+</div>
+</script>
+
+<div class="layui-row">
+  <div class="col-xs-12">
+<table  id="test" lay-filter="test"></table>
+  </div>
+</div>
+
+
+<script>
+    layui.use(['table', 'jquery'], function() {
+     var table = layui.table;
+     var $ = layui.$;
+
+
+
+        renderMod = {
+         form: {
+             val: {
+                 filter: "forms",
+                 select: [
+                     {
+                         filter: "bmName",
+                         ids: "bmName",
+                         text: "bmName",
+                         url: "/supervise/bmgl/listBm"
+                     }
+                 ]
+             }
+         },
+         addTable: {
+             table: {
+                 elem: '#test'
+                 , url: '/specialEq/selectSpEqBmInfo'
+                 , toolbar: '#toolBar'
+                 , cols: [[
+                     {type: 'radio'}
+                     , {field: 'bmId', title: 'ID', minWidth: 130}
+                     , {field: 'bmName', title: '科室', minWidth: 200}
+                     , {field: 'bmTel', title: '部门电话', minWidth: 130}
+                     , {field: 'userXm', width: 100, title: '负责人'}
+                     , {field: 'tel', title: '负责人电话', minWidth: 130}
+                 ]]
+                 , page: true
+                 , height: 300
+                 , parseData: function (res) { //res 即为原始返回的数据
+                     return {
+                         "code": res.code, //解析接口状态
+                         "msg": res.msg, //解析提示文本
+                         "count": res.data.total,//页面的所有数据数
+                         "data": res.data.list //解析数据列表
+                     }
+                 }
+                 , request: {
+                     pageName: 'pageNum',
+                     limitName: 'pageSize'
+                 }
+             },
+             reSet: {
+                 url: "/specialEq/selectSpEqBmInfoByName",
+                 type: "search",
+                 data: ["bmName"],
+                 method: "POST"
+             }
+         }
+     };
+
+     //确定键
+     table.on('toolbar(test)', function(obj){
+         var checkStatus = table.checkStatus(obj.config.id);
+         switch(obj.event){
+             case 'getCheckData':
+              var data = checkStatus.data;
+                 if (data.length === 0) {
+                 layer.alert("尚未选择");
+                 return;
+             }
+                /* console.log(data);
+                 console.log(data);*/
+                 parent.layui.$('#bmId').val(data[0].bmName);
+             var index = parent.layer.getFrameIndex(window.name);
+             parent.layer.close(index);
+                 break;
+            }
+     });
+ });
+</script>
+</body>
+</html>

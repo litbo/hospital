@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>从业人员详细信息</title>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+    <style>
+        input[type='text']{
+            border: none;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<form class="layui-form layui-col-md12" action="" style="width:700px;margin-left: 100px;margin-top: 50px;">
+    <div class="layui-col-md6" style="width: 340px;float: left;">
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="userXm"  lay-verify="required" lay-reqtext="姓名尚未填写" autocomplete="off" placeholder="请输入姓名" class="layui-input userXm"  disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px;">
+            <label class="layui-form-label">证件名称 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="certificate" autocomplete="off" class="layui-input certificate" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">注册编号 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemZczh"  lay-verify="required" lay-reqtext="注册编号尚未填写"
+                       autocomplete="off" placeholder="请输入注册编号" class="layui-input spemZczh" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">档案编号 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemDabh"  lay-verify="required" lay-reqtext="档案编号尚未填写"
+                       autocomplete="off" placeholder="请输入档案编号" class="layui-input spemDabh" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">发证机关 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemFzjg"  lay-verify="required" lay-reqtext="发证机关尚未填写"
+                       autocomplete="off" placeholder="请输入发证机关" class="layui-input spemFzjg" disabled>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="layui-col-md6" style="width: 345px;float: left;">
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label" style="width: 90px">上岗资质范围: </label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemSgzzfw"  lay-verify="required" lay-reqtext="上岗资质范围尚未填写"
+                       autocomplete="off" placeholder="请输入上岗资质范围" class="layui-input spemSgzzfw" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">签&nbsp;&nbsp;发&nbsp;&nbsp;日&nbsp;&nbsp;期: </label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemQfrq"  lay-verify="spemQfrq" class="layui-input spemQfrq"
+                           id="test1" placeholder="yyyy-MM-dd" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">有效起始日期: </label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemYxqsq" lay-verify="date" class="layui-input spemYxqsq" id="test2" placeholder="yyyy-MM-dd" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">有效结束日期: </label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemYxjsq" lay-verify="date"  class="layui-input spemYxjsq" id="test3" placeholder="yyyy-MM-dd" disabled>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</form>
+<script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //日期常规用法
+        laydate.render({
+            elem: '#test1'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test2'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test3'
+            ,trigger: 'click'
+        });
+    });
+
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+    });
+
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+    });
+    
+</script>
+<script>
+    $(function(){
+        var url=window.location.search;
+        var userId =  $.getUrlParam("id");
+        /* console.log(speqId);*/
+        $.ajax({
+            url : "/specialEq/selectSpemById",
+            type : 'POST',
+            data : {"userId": userId},
+            success : function(springBootOtl){
+                var  data = springBootOtl;
+                console.log(123);
+                if(data !== null){
+                    $(".userXm").val(data.data.userXm);
+                    $(".certificate").val('特种设备从业人员证');//证件名称
+                    $(".spemZczh").val(data.data.spemZczh);//注册编号
+                    $(".spemDabh").val(data.data.spemDabh);// 档案编号
+                    $(".spemFzjg").val(data.data.spemFzjg);// 发证机关
+                    $(".spemSgzzfw").val(data.data.spemSgzzfw);//上岗资质范围
+                    $(".spemQfrq").val(data.data.spemQfrq);// 签发日期
+                    $(".spemYxqsq").val(data.data.spemYxqsq);//有效起始期
+                    $(".spemYxjsq").val(data.data.spemYxjsq);//有效结束期
+                    // 记得重新渲染表单/*form.render();*/
+                }else{
+                    alert("查询为空");
+                }
+            },
+            error:function (data) {
+                alert("查询失败");
+                console.log(data);
+            }
+        });
+    })
+</script>
+
+</body>
+</html>

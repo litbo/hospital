@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>文档修改</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+        .layui-input-block button{
+        	margin:0px;
+        }
+        .PoAb0xx0{
+        	top:5px;
+        	left:10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>文档信息添加</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">案卷名称 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="hidden" name="id">
+                    <input type="text" name="dossierName" autocomplete="off" lay-verify="required" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">起始时间 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" id="beginTime" name="beginTime" lay-verify="required" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">终止时间 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" id="endTime" name="endTime" lay-verify="required" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">案卷性质 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="dossierNature" lay-verify="required|Decimal" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">案卷性质 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <select name="saveType"  class="layui-input">
+                    	<option value=''>--请选择--</option>
+                    	<option value='永久'>永久</option>
+                    	<option value='临时'>临时</option>
+                    </select>
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">案卷类型 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <select name="dossierType"  class="layui-input">
+                    	<option value=''>--请选择--</option>
+                    	<option value='8'>筹购资料</option>
+                    	<option value='9'>设备技术资料</option>
+                    	<option value='10'>管理资料</option>
+                    	<option value='11'>其他资料</option>
+                    </select>
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文件存放位置</label>
+                <div class="layui-input-block">
+                      <input type="text" name="fileLocaltion" autocomplete="off" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">卷宗负责人</label>
+                <div class="layui-input-block">
+                      <input type="text" name="recordPerson" autocomplete="off" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">规格型号</label>
+                <div class="layui-input-block">
+                      <input type="text" name="specification" autocomplete="off" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">生产厂家</label>
+                <div class="layui-input-block">
+                      <input type="text" name="manufacturer" autocomplete="off" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">购买时间</label>
+                <div class="layui-input-block">
+                      <input type="text" name="buyTime" autocomplete="off" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属部门 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="bmName" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
+                           style="padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectDepartment">选择</button>
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">代理商</label>
+                <div class="layui-input-block">
+                    <input type="text" name="agent" disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+         </div>
+        
+        <div class="col-xs-12">
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+	var formData2 = {
+			
+	};
+    renderMod = {
+            form: {
+                date: [{
+                    elem: "#beginTime",
+                    format:'yyyy/MM/dd'
+                },{
+                    elem: "#endTime",
+                    format:'yyyy/MM/dd'
+                }],
+                submit: {
+                    before: function (param) {
+                        return param = {};
+                    },
+                    form: {
+                        url: "/Dossier/updateDossier.do",
+                        type: "POST",
+                        data: [
+                        	"id","dossierNum","dossierName","beginTime",
+                        	"endTime","dossierNature","saveType","dossierType",
+                        	"description","fileLocaltion","recordTime","recordPerson",
+                        	"specification","manufacturer","buyTime","bmName","agent"]
+                    }
+                }
+            },
+            bind: {
+            	 selectItem: [
+                     {
+                         elem: "#selectDepartment",
+                         cb: "/supervise/bmgl/listSelectBmsCols",
+                         db: "/supervise/bmgl/listBms",
+                         se: "/supervise/bmgl/bmSe",
+                         key: "radio",
+                         name: "dtdt",
+                         data: formData2
+                     }
+                 ]
+            }
+    }
+</script>
+</body>
+
+</html>

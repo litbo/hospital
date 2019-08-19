@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>数据收集</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../layui/formSelects-v4.css"/>
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+	<script src="../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+	<!-- 表格 -->
+	<table class="layui-hide" id="table" lay-filter="table1"></table>
+
+
+	<script type="text/html" id="toolBar">
+		<!-- 搜索区域 -->
+		<form class="layui-form" action="" layui-filter="forms">
+			<!--收包时间-->
+			<div class="layui-inline layui-form-pane ">
+				<label class="layui-form-label">日期范围</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="date1" id="date1" placeholder=" - " style="width: 200px;">
+				</div>
+			</div>
+
+			<!--设备编号-->
+			<div class="layui-input-inline" style="width: 140px;">
+				<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
+			</div>
+
+			<!--部门-->
+			<div class="layui-input-inline" style="width: 150px;">
+				<select name="bmId"  lay-filter="bmId">
+					<option value="">全部部门</option>
+				</select>
+			</div>
+
+			<!--联网仪编号-->
+			<div class="layui-input-inline" style="width: 130px;">
+				<input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
+			</div>
+			<div class="layui-input-inline" style="width: 80px;">
+				<button class="layui-btn" data-type="reload">查找</button>
+			</div>
+		</form>
+	</script>
+
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" href="edit1.html">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui/layui.js"></script>
+<script src="../layui/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/dataIndex.js"></script>
+<script>
+
+	renderMod = {
+		addTable: {
+			table: {
+				cols: [[ //表头
+					{type: 'checkbox', fixed: 'left'}
+					,{field:'bmName', title:'所在科室', fixed: 'left', unresize: true}
+					,{field:'eqSbbh', title:'设备编号'}
+					,{field:'eqZcbh', title:'资产编号'}
+					,{field:'eqName', title:'设备名称'}
+					,{field:'macid', title:'联网仪编号'}
+					,{field:'beginTime', title:'收包时间'}
+					,{field:'workNums', title:'数据包'}
+				]]
+				, url: "/operationRecord/show2"
+				, method: "POST"
+				, request: {
+					pageName: 'pageNum',
+					limitName: 'pageSize'
+				}
+				// , toolbar: "#toolSearch"
+				, where: {}
+				, parseData: function (res) { //res 即为原始返回的数据
+					return {
+						"code": res.code, //解析接口状态
+						"msg": res.msg, //解析提示文本
+						"data": res.data.list, //解析数据列表
+						"count": res.data.total //总数据数
+					}
+				}
+			},
+
+			reSet: {
+			    url: "/operationRecord/show2",
+				type: "reload",
+				tid: "table",
+				data: ["date1", "bmId", "macid","eqSbbh"],
+				method: "POST"
+			}
+		}
+	};
+	renderMod.form = {
+		date:{
+			elem:"#date1",
+			value:today0,
+			type:"date",
+			format:'yyyy-MM-dd',
+			isInitValue:false,
+			range:true
+		},
+		val: {
+			filter: "forms",
+			select: [
+				{
+					filter: "bmId",
+					ids: "bmId",
+					text: "bmName",
+					url: "/supervise/bmgl/listBm"
+				}
+			]
+		}
+	}
+
+
+</script>
+</body>
+</html>

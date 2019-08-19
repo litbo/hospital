@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>软件接口</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <link rel="stylesheet" href="css/dataIndex.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="iconfont/iconfont.js"></script>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+    <div class="layui-header layui-bg-blue data_top">
+        <div class="layui-logo" style="z-index: 2"><img src="images/yhd.png" alt="" class="top_logo"></div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left layui-bg-blue">
+            <li class="layui-nav-item"><a href=""><i class="iconfont">&#xf281;</i> &nbsp;数据收集</a></li>
+            <li class="layui-nav-item"><a href=""><i class="iconfont">&#xe600;</i> &nbsp;全寿命管理</a></li>
+            <li class="layui-nav-item"><a href=""><i class="iconfont">&#xe603;</i> &nbsp;安全管理</a></li>
+            <li class="layui-nav-item"><a href=""><i class="iconfont">&#xe63a;</i> &nbsp;效益管理</a></li>
+            <li class="layui-nav-item"><a href=""><i class="iconfont">&#xe68a;</i> &nbsp;行政管理</a></li>
+            <li class="layui-nav-item"><a href=""><i class="iconfont">&#xe6a4;</i> &nbsp;系统管理</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe6ca;</i> &nbsp;联网管理</a>
+                <dl class="layui-nav-child">
+                <dd><a href="dataIndex.html">运行记录</a></dd>
+                <dd><a href="">工作量记录</a></dd>
+                <dd><a href="monitor.html">实时监视</a></dd>
+                <dd><a href="monitor.html">软件接口</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right layui-bg-blue">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                当前用户:xxx
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="">退出</a></li>
+        </ul>
+    </div>
+    
+    <div class="layui-side layui-bg-blue" style="width: 220px;">
+        <div class="layui-side-scroll index_side">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree layui-bg-blue"  lay-filter="test"  style="width: 220px;">
+            <li class="layui-nav-item">
+                <a href=""><i class="iconfont">&#xe648;</i> &nbsp;首页</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe645;</i> &nbsp;收费明细数据</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="#" class="site-demo-active"  data-type="tabAdd" data-url="page/leading-in1" data-id="11" data-title="HIS收费明细记录">HIS收费明细记录</a></dd>
+                    <dd><a href="#" class="site-demo-active"  data-type="tabAdd" data-url="page/leading-in2" data-id="22" data-title="手术表明细记录">手术表明细记录</a></dd>
+                    <dd><a href="#" class="site-demo-active"  data-type="tabAdd" data-url="page/leading-in3" data-id="33" data-title="PACS收费明细记录">PACS收费明细记录</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe60c;</i> &nbsp;字典管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="#" class="site-demo-active"  data-type="tabAdd" data-url="page/leading-in4" data-id="44" data-title="手术科室匹配">手术科室匹配</a></dd>
+                    <dd><a href="#" class="site-demo-active"  data-type="tabAdd" data-url="page/leading-in5" data-id="55" data-title="医嘱项目">医嘱项目</a></dd>
+                </dl>
+            </li>
+        </ul>
+        </div>
+    </div>
+    
+    <div class="layui-body index_body">
+        <!-- 内容主体区域 -->
+        <div class="index_bodyIn">
+            <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                </ul>
+                <ul class="rightmenu" style="display: none;position: absolute;">
+                    <li data-type="closethis">关闭当前</li>
+                    <li data-type="closeall">关闭所有</li>
+                </ul>
+                <div class="layui-tab-content slide-item">
+                </div>
+            </div>
+            <div class="index_show">
+                <img src="images/login/show.jpg" alt="">
+            </div>
+
+    </div>
+
+    </div>
+
+
+</div>
+
+<script src="layui/layui.js"></script>
+<script src="js/dataIndex.js"></script>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+
+
+
+    // 表格
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#table1'
+            ,url:'js/table.json'
+            ,height: 'full-130'
+            ,toolbar: '#toolbarDemo'
+            ,title: '用户数据表'
+            ,cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'department', title:'科室', width:150, fixed: 'left', unresize: true}
+                ,{field:'id', title:'设备编号', width:120, edit: 'text', sort: true}
+                ,{field:'name', title:'设备名称', width:180, edit: 'text'}
+                ,{field:'model', title:'型号', width:180}
+                ,{field:'standbyTime', title:'待机时长', width:150, sort: true}
+                ,{field:'workingHours', title:'工作时长', width:140, sort: true}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:140}
+            ]]
+            ,page: true
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.email
+                }, function(value, index){
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+
+    // tab切换
+    layui.use('element', function() {
+        var $ = layui.jquery;
+        var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            //在这里给active绑定几项事件，后面可通过active调用这些事件
+            tabAdd: function(url,id,name) {
+                //新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
+                //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
+                element.tabAdd('demo', {
+                    title: name,
+                    content: '<iframe data-frameid="'+id+'" scrolling="auto" frameborder="0" src="'+url+'.html" style="width:100%;height: 99%;"></iframe>',
+                    id: id //规定好的id
+                });
+                CustomRightClick(id); //给tab绑定右击事件
+                FrameWH();  //计算ifram层的大小
+            },
+            tabChange: function(id) {
+                //切换到指定Tab项
+                element.tabChange('demo', id); //根据传入的id传入到指定的tab项
+            },
+            tabDelete: function (id) {
+                element.tabDelete("demo", id);//删除
+            }
+            , tabDeleteAll: function (ids) {//删除所有
+                $.each(ids, function (i,item) {
+                    element.tabDelete("demo", item); //ids是一个数组，里面存放了多个id，调用tabDelete方法分别删除
+                })
+            }
+        };
+
+
+        //当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件
+        $('.site-demo-active').on('click', function() {
+            var dataid = $(this);
+
+            //这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
+            if ($(".layui-tab-title li[lay-id]").length <= 0) {
+                //如果比零小，则直接打开新的tab项
+                active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
+            } else {
+                //否则判断该tab项是否以及存在
+
+                var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
+                $.each($(".layui-tab-title li[lay-id]"), function () {
+                    //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
+                    if ($(this).attr("lay-id") == dataid.attr("data-id")) {
+                        isData = true;
+                    }
+                });
+                if (isData == false) {
+                    //标志为false 新增一个tab项
+                    active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
+                }
+            }
+            //最后不管是否新增tab，最后都转到要打开的选项页面上
+            active.tabChange(dataid.attr("data-id"));
+        });
+
+        function CustomRightClick(id) {
+            //取消右键  rightmenu属性开始是隐藏的 ，当右击的时候显示，左击的时候隐藏
+            $('.layui-tab-title li').on('contextmenu', function () { return false; });
+            $('.layui-tab-title,.layui-tab-title li').click(function () {
+                $('.rightmenu').hide();
+            });
+            //桌面点击右击
+            $('.layui-tab-title li').on('contextmenu', function (e) {
+                var popupmenu = $(".rightmenu");
+                popupmenu.find("li").attr("data-id",id); //在右键菜单中的标签绑定id属性
+
+                //判断右侧菜单的位置
+                l = ($(document).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
+                t = ($(document).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+                popupmenu.css({ left: l, top: t }).show(); //进行绝对定位
+                //alert("右键菜单")
+                return false;
+            });
+        }
+
+        $(".rightmenu li").click(function () {
+
+            //右键菜单中的选项被点击之后，判断type的类型，决定关闭所有还是关闭当前。
+            if ($(this).attr("data-type") == "closethis") {
+                //如果关闭当前，即根据显示右键菜单时所绑定的id，执行tabDelete
+                active.tabDelete($(this).attr("data-id"))
+            } else if ($(this).attr("data-type") == "closeall") {
+                var tabtitle = $(".layui-tab-title li");
+                var ids = new Array();
+                $.each(tabtitle, function (i) {
+                    ids[i] = $(this).attr("lay-id");
+                });
+                //如果关闭所有 ，即将所有的lay-id放进数组，执行tabDeleteAll
+                active.tabDeleteAll(ids);
+            }
+
+            $('.rightmenu').hide(); //最后再隐藏右键菜单
+        });
+        function FrameWH() {
+            var h = $(window).height() -41- 10 - 60 -10-44 -10 ;
+            $("iframe").css("height",h+"px");
+        }
+
+        $(window).resize(function () {
+            FrameWH();
+        })
+    });
+</script>
+</body>
+</html>

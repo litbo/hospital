@@ -1,0 +1,31 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "id": "001",
+      "name": "CT",
+      "startDate": "2019-7-17",
+      "endDate": "2019-7-20",
+      "startTime": "8:30",
+      "endTime": "18:50"
+    },
+    {
+      "id": "002",
+      "name": "DT",
+      "startDate": "2019-7-17",
+      "endDate": "2019-7-20",
+      "startTime": "8:30",
+      "endTime": "18:50"
+    },
+    {
+      "id": "003",
+      "name": "ET",
+      "startDate": "2019-7-17",
+      "endDate": "2019-7-20",
+      "startTime": "8:30",
+      "endTime": "18:50"
+    }
+  ]
+}

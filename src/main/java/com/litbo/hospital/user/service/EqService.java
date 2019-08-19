@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.SearchEqVO;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
@@ -61,4 +62,18 @@ public interface EqService {
     PageInfo listEqName(int pageNum, int pageSize);
 
     PageInfo listEqNameByX(int pageNum, int pageSize, String ccname);
+    /**
+     * 根据条件查询
+     * @param searchVO
+     * @return
+     */
+    PageInfo selectAllBy(Integer pageNum, Integer pageSize,
+                         SearchEqVO searchVO);
+    /**
+     * 根据条件查询
+     * @param searchVO
+     * @return
+     */
+    PageInfo selectAllBy2(Integer pageNum, Integer pageSize,
+                         SearchEqVO searchVO);
 }

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>软件接口</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+    <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        form {
+            margin-top: 30px;
+        }
+
+        .layui-form-label {
+            width: 150px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 150px !important;
+        }
+
+        .layui-form select {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-row">
+    <div class="col-xs-12">
+        <form class="layui-form layui-form-pane" action="" method="POST" lay-filter="form">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>当前数据导入时间</legend>
+            </fieldset>
+            <div class="layui-form-item" style="margin-left: 30px;">
+                <label class="layui-form-label">当前数据导入时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="time" placeholder="" autocomplete="off" class="layui-input"  value="00:00" style="width: 200px;" disabled>
+                </div>
+            </div>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 60px;">
+                <legend>重新设置时间</legend>
+            </fieldset>
+            <div class="layui-form-item" style="margin-left: 30px;">
+                <label class="layui-form-label">时</label>
+                <div class="layui-input-block" style="width: 200px;">
+                    <select name="hours" class="hour_select" lay-filter="hour_select" style="width: 200px;">
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-left: 30px;">
+                <label class="layui-form-label">分</label>
+                <div class="layui-input-block" style="width: 200px;">
+                    <select name="minutes" class="minute_select" lay-filter="minute_select" style="width: 200px;">
+                        <option value="00">00</option>
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="32">32</option>
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+                        <option value="45">45</option>
+                        <option value="46">46</option>
+                        <option value="47">47</option>
+                        <option value="48">48</option>
+                        <option value="49">49</option>
+                        <option value="50">50</option>
+                        <option value="51">51</option>
+                        <option value="52">52</option>
+                        <option value="53">53</option>
+                        <option value="54">54</option>
+                        <option value="55">55</option>
+                        <option value="56">56</option>
+                        <option value="57">57</option>
+                        <option value="58">58</option>
+                        <option value="59">59</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script src="../layui/layui.js"></script>
+    <script src="../js/dataIndex.js"></script>
+    <script>
+
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+        });
+
+        renderMod = {
+            form: {
+                val: {
+                    filter: "form",//与form标签lay-filter相同
+                    get: {
+                        url: "/time/showTime",
+                        type: "POST",
+                        data:{}
+                    } , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "data": res.data, //解析数据列表
+                        }
+                    }
+                },
+                submit:{
+                    filter:"",//可以不写
+                    form:{//或者写作up
+                        url:"/scheduleRefresh/updateCron",
+                        type:"POST",
+                        data:["hours","minutes"],
+                        success:function(){
+                            location.reload();
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+</html>

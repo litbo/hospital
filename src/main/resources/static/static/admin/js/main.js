@@ -212,17 +212,16 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
 
         //延时加载
         setTimeout(function () {
-            //var se = $.getUrlParam('p');
             var se = window.location.search;
             if (sessionStorage.getItem("menu")) {
                 menu = JSON.parse(sessionStorage.getItem("menu"));
                 if (menu.length === 0) {
-                    //$(".layui-nav-tree .layui-nav-item")[1].click();
+                    //当不在首页时则展开左侧第一个导航第
                     if (se !== "home") {
                         if ($('.layui-nav-tree .layui-nav-child').length > 0) {
-                            $(".layui-nav-tree .layui-nav-item").eq(1).addClass("layui-nav-itemed")
+                            $(".layui-nav-tree .layui-nav-item").eq(0).addClass("layui-nav-itemed")
                         } else {
-                            $(".layui-nav-tree .layui-nav-item").eq(1).addClass("layui-this")
+                            // $(".layui-nav-tree .layui-nav-item").eq(0).addClass("layui-this")
                         }
                     }
                     return false;

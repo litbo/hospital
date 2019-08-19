@@ -7,6 +7,8 @@ import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.common.utils.WordToPinYin;
 import com.litbo.hospital.common.utils.poi.ChangeFile;
 import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqInfoVO;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.SearchEqVO;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.bean.EqPm;
@@ -184,7 +186,20 @@ public class EqServiceImpl implements EqService {
         return new PageInfo(eqDao.listEqNameByX(ccname));
     }
 
+    @Override
+    public PageInfo selectAllBy(Integer pageNum, Integer pageSize, SearchEqVO searchVO) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqInfoVO> eqInfoVOS = eqDao.selectAllBy(searchVO);
+//        System.out.println(eqInfoVOS.size());
+        return new PageInfo(eqInfoVOS);
+    }
 
+    @Override
+    public PageInfo selectAllBy2(Integer pageNum, Integer pageSize, SearchEqVO searchVO) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqInfoVO> eqInfoVOS = eqDao.selectAllBy2(searchVO);
+        return new PageInfo(eqInfoVOS);
+    }
     @Override
     @Transactional
     public Integer importEq(MultipartFile file)  {

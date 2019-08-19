@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.MeteringDealProcessDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.MeteringDealProcess">
+    <id column="process_id" jdbcType="INTEGER" property="processId" />
+    <result column="deal_person" jdbcType="VARCHAR" property="dealPerson" />
+    <result column="form_id" jdbcType="INTEGER" property="formId" />
+    <result column="deal_time" jdbcType="VARCHAR" property="dealTime" />
+    <result column="deal_advertisement" jdbcType="VARCHAR" property="dealAdvertisement" />
+    <result column="deal_status" jdbcType="VARCHAR" property="dealStatus" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="process_name" jdbcType="VARCHAR" property="processName" />
+    <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    process_id, deal_person, form_id, deal_time, deal_advertisement, deal_status, department, 
+    process_name, record_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..metering_deal_process
+    where process_id = #{processId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..metering_deal_process
+    where process_id = #{processId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringDealProcess">
+    insert into hospital..metering_deal_process (deal_person, form_id,
+      deal_time, deal_advertisement, deal_status, 
+      department, process_name, record_time
+      )
+    values ( #{dealPerson,jdbcType=VARCHAR}, #{formId,jdbcType=INTEGER},
+      #{dealTime,jdbcType=VARCHAR}, #{dealAdvertisement,jdbcType=VARCHAR}, #{dealStatus,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{processName,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringDealProcess">
+    insert into hospital..metering_deal_process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+     <if test="dealPerson != null">
+        deal_person,
+      </if>
+      <if test="formId != null">
+        form_id,
+      </if>
+      <if test="dealTime != null">
+        deal_time,
+      </if>
+      <if test="dealAdvertisement != null">
+        deal_advertisement,
+      </if>
+      <if test="dealStatus != null">
+        deal_status,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="processName != null">
+        process_name,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="dealPerson != null">
+        #{dealPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null">
+        #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealAdvertisement != null">
+        #{dealAdvertisement,jdbcType=VARCHAR},
+      </if>
+      <if test="dealStatus != null">
+        #{dealStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="processName != null">
+        #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.metering.pojo.MeteringDealProcess">
+    update hospital..metering_deal_process
+    <set>
+      <if test="dealPerson != null">
+        deal_person = #{dealPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="formId != null">
+        form_id = #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null">
+        deal_time = #{dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealAdvertisement != null">
+        deal_advertisement = #{dealAdvertisement,jdbcType=VARCHAR},
+      </if>
+      <if test="dealStatus != null">
+        deal_status = #{dealStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="processName != null">
+        process_name = #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where process_id = #{processId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.metering.pojo.MeteringDealProcess">
+    update hospital..metering_deal_process
+    set deal_person = #{dealPerson,jdbcType=VARCHAR},
+      form_id = #{formId,jdbcType=INTEGER},
+      deal_time = #{dealTime,jdbcType=VARCHAR},
+      deal_advertisement = #{dealAdvertisement,jdbcType=VARCHAR},
+      deal_status = #{dealStatus,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      process_name = #{processName,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=VARCHAR}
+    where process_id = #{processId,jdbcType=INTEGER}
+  </update>
+
+  <select id="searchDealProcess" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_deal_process
+    <where>
+      <if test="recordBeginTime != null">
+        record_time >= #{recordBeginTime} and
+      </if>
+      <if test="recordEndTime != null">
+        record_time &lt;= #{recordEndTime} and
+      </if>
+      <if test="dealBeginTime != null">
+        deal_time >= #{dealBeginTime} and
+      </if>
+      <if test="dealEndTime != null">
+        deal_time &lt;= #{dealEndTime} and
+      </if>
+      <if test="department != null">
+        affiliate_department = #{department} and
+      </if>
+      <if test="status != null">
+        deal_status = #{status,jdbcType=VARCHAR} and
+      </if>
+        1 = 1
+    </where>
+  </select>
+</mapper>

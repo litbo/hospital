@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>证件录入</title>
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+    <style>
+        .showImg {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0 5px 5px;
+        }
+    </style>
+
+</head>
+<body>
+<form class="layui-form" action=""  lay-filter="forms" style=" width:800px;margin: 20px;">
+    <div  style="width: 400px;float:left;">
+
+        <div class="layui-form-item" style="margin-bottom: 20px; display: none">
+            <label class="layui-form-label"><i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="userId"   lay-reqtext="姓名尚未填写" autocomplete="off" placeholder="请输入姓名" class="layui-input userId"  disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="userXm"   lay-reqtext="姓名尚未填写" autocomplete="off" placeholder="请输入姓名" class="layui-input userXm"  disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">证件名称<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="certificate" autocomplete="off" class="layui-input certificate" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">注册编号<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemZczh"  lay-verify="required" lay-reqtext="注册编号尚未填写"
+                       autocomplete="off" placeholder="请输入注册编号" class="layui-input spemZczh">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">档案编号<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemDabh"  lay-verify="required" lay-reqtext="档案编号尚未填写"
+                       autocomplete="off" placeholder="请输入档案编号" class="layui-input spemDabh">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label">发证机关<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemFzjg"  lay-verify="required" lay-reqtext="发证机关尚未填写"
+                       autocomplete="off" placeholder="请输入发证机关" class="layui-input spemFzjg">
+            </div>
+        </div>
+
+
+    </div>
+
+    <div  style="width: 400px;float:left;">
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <label class="layui-form-label" style="width: 90px">上岗资质范围<i style="color: red">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" name="spemSgzzfw"  lay-verify="required" lay-reqtext="上岗资质范围尚未填写"
+                       autocomplete="off" placeholder="请输入上岗资质范围" class="layui-input spemSgzzfw">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">签&nbsp;&nbsp;发&nbsp;&nbsp;日&nbsp;&nbsp;期<i style="color: red">*</i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemQfrq" readonly="readonly" lay-verify="data" class="layui-input spemQfrq"
+                           id="test1" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">有效起始日期<i style="color: red">*</i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemYxqsq" readonly="readonly" lay-verify="date1" class="layui-input spemYxqsq" id="test2" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="margin-bottom: 20px">
+            <div class="layui-inline" >
+                <label class="layui-form-label"  style="width: 90px">有效结束日期<i style="color: red">*</i></label>
+                <div class="layui-input-inline">
+                    <input type="text" name="spemYxjsq" readonly="readonly" lay-verify="date2"  class="layui-input spemYxjsq" id="test3" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">证件照片</label>
+            <input type="hidden" name="spemZjimage" id="qzzp" autocomplete="off" class="layui-input hidden" >
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="selec1">选择文件</button>
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" lay-submit="" lay-filter="submit" id="sub">上传照片</button>
+                <button type="button" id="ckzp" class="layui-btn layui-btn-sm layui-btn-normal">查看照片</button>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
+        </div>
+    </div>
+
+</form>
+<script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //常规用法
+        laydate.render({
+            elem: '#test1'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test2'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#test3'
+            ,trigger: 'click'
+        });
+    });
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //普通图片上传
+
+     /*   upload.render({
+            elem: '#test8'
+            ,url: '/specialEq/setSpemImg'
+            ,auto: false
+            //,multiple: true
+            ,bindAction: '#test9'
+            ,before:function (res) {
+                console.log(res.url);
+            }
+            ,done: function(res){
+                console.log(res.code);
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                alert("上传成功");
+              /!*  document.getElementById("img_url").value = res.url;*!/
+
+            }
+        });*/
+
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+
+            $(function(){
+                var url=window.location.search;
+                var userId =  $.getUrlParam("id");
+                /* console.log(speqId);*/
+                $.ajax({
+                    url : "/specialEq/selectSpemById",
+                    type : 'POST',
+                    data : {"userId": userId},
+                    success : function(springBootOtl){
+                        var  data = springBootOtl;
+                        if(data !== null){
+                            if(data !== null){
+                                $(".userId").val(data.data.userId);
+                                $(".userXm").val(data.data.userXm);
+                                $(".certificate").val('特种设备从业人员证');//证件名称
+                                $(".spemZczh").val(data.data.spemZczh);//注册编号
+                                $(".spemDabh").val(data.data.spemDabh);// 档案编号
+                                $(".spemFzjg").val(data.data.spemFzjg);// 发证机关
+                                $(".spemSgzzfw").val(data.data.spemSgzzfw);//上岗资质范围
+                                $(".spemQfrq").val(data.data.spemQfrq);// 签发日期
+                                $(".spemYxqsq").val(data.data.spemYxqsq);//有效起始期
+                                $(".spemYxjsq").val(data.data.spemYxjsq);//有效结束期
+
+                                // 记得重新渲染表单/*form.render();*/
+
+                            }
+                            // 记得重新渲染表单/*form.render();*/
+                            form.render();
+
+                        }else{
+                            alert("查询为空");
+                        }
+                    },
+                    error:function (data) {
+                        alert("查询失败");
+                        console.log(data);
+                    }
+                });
+
+                form.on('submit(submit)', function (data) {
+                    console.log(JSON.stringify(data.field));
+                    $.ajax({
+                        url:'/specialEq/updateSpem',
+                        type:"POST",
+                        async: false,/*同步传输*/
+                        data:JSON.stringify(data.field),
+                        dataType:'JSON',
+                        contentType:'application/json' ,
+                        success : function(springBootOtl){
+                            var  data = springBootOtl;
+                            if(data.msg === 'success'){
+                                layer.alert("修改成功", {icon:1, time:2000},function () {
+                                    layer.close(layer.index);
+                                    window.parent.location.reload();
+                                });
+                                // 记得重新渲染表单form.render();
+                            }else{
+                                layer.alert("修改失败",{icon:2,time:2000});
+                            }
+                            /*setTimeout(function(){
+                                layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
+                            },500)*/
+                        },
+                        error:function (data) {
+                            alert("错误");
+                        }
+
+                    })
+                    return false;
+                });
+            });
+
+
+              /*  layer.msg(JSON.stringify(data.field));
+                return false;*/
+
+        });
+    })
+
+</script>
+<script>
+    renderMod = {
+        form:{
+            file:{
+                elem:"#selec1",
+                url:"/specialEq/setSpemImg",
+                accept:"images",
+                acceptMime:"image/*",
+                auto:false,
+                bindAction:"#sub",
+                field:"img",
+                choose:function(obj){
+                    layer.msg("选择成功！");
+                },done:function(res,index,upload){
+                    $("#qzzp").val(res.data);
+                    $("#selec1").text("重新选择");
+                    $("#ckzp").removeClass("layui-btn-disabled");
+                    layer.msg('上传成功！', {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                   /* return delete files[index];*/
+                },error:function(index,upload){
+                    console.log("index:"+index);
+                    console.log("upload"+upload);
+                }
+            }
+        },
+        btn:{
+            elem:"#ckzp",
+            func:function(){
+                var url = $("#qzzp").val();
+                console.log(url);
+                if(url){
+                    // var nUrl = url.split("\\emp\\");
+                    layOpen({
+                        type:1,
+                        content:"<img src=\""+url+"\" class=\"showImg\">",
+                        title:"图片详情",
+                        area:["80%","80%"]
+                    })
+                }
+            }
+        }
+    };
+
+</script>
+
+</body>
+</html>

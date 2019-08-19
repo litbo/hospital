@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>数据收集</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../iconfont/iconfont.js"></script>
+    <script src="../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<form class="layui-form " action="" lay-filter="forms">
+
+    <div class="one" style="width: 100%;margin-top: 20px;">
+
+        <p class="divideP">设备值/排班设置</p>
+
+        <!--第一行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline spanDiv" style="width: 330px;">
+                <label class="layui-form-label" style="width: 100px;">设备名称</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                    <input type="text" name="eqName" autocomplete="off" placeholder="" class="layui-input" value="" disabled style="background-color: #eee;">
+                </div>
+                <input type="hidden" class="macId" name="macId" disabled>
+            </div>
+            <div class="layui-inline" style="width: 380px;">
+                <label class="layui-form-label" style="width: 80px;">型号</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                    <input type="text" name="eqXh" autocomplete="off"
+                           placeholder="" class="layui-input" value="" disabled style="background-color: #eee;">
+                </div>
+            </div>
+        </div>
+
+        <!--第一行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 100px;">排班类型</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                    <select name="cdtypeName" id="scheduling" lay-filter="scheduling">
+                        <option value="1">行政班</option>
+                        <option value="2">夜班</option>
+                        <option value="3">24时班</option>
+                        <option value="4">白班</option>
+                        <option value="5">轮班</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 380px;">
+                <label class="layui-form-label" style="width: 80px;">规格</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                    <input type="text" name="eqGg" autocomplete="off" placeholder="" class="layui-input" value="" style="background-color: #eee;" disabled>
+                </div>
+            </div>
+        </div>
+
+        <p class="divideP">值班设置</p>
+
+
+        <!--第二行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 76px;">周一</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 24px;width: 100px;">
+                    <select name="w1" class="weekday1" lay-filter="weekday1">
+                        <option value="1">值班</option>
+                        <option value="2">不值班</option>
+                    </select>
+                </div>
+                <span class="adjustment adjustment1" data-method="notice1">调整</span>
+                <!--周一调整-->
+                <div class="schedule_layer1">
+                    <div class="layui-form-item M1">
+                        <label class="layui-form-label">上午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="amW1" class="day_select day_select1">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item A1">
+                        <label class="layui-form-label">下午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="pmW1" class="day_select day_select1">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item Night" id="N1" style="display: none">
+                        <label class="layui-form-label">晚班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="fmW1" class="night_select night_select1">
+                                <option value="1">值班</option>
+                                <option value="2" selected>不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-left: -20px;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm submit2" lay-submit="" lay-filter="demo1">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm cancel2"  style="margin-left: 60px;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 380px;">
+                <label class="layui-form-label" style="width: 76px;">周五</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 100px;">
+                    <select name="w5" class="weekday5" lay-filter="weekday5">
+                        <option value="1">值班</option>
+                        <option value="2">不值班</option>
+                    </select>
+                </div>
+                <span class="adjustment adjustment5" data-method="notice1">调整</span>
+                <!--周五调整-->
+                <div class="schedule_layer5">
+                    <div class="layui-form-item M5">
+                        <label class="layui-form-label">上午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="amW5" class="day_select day_select5">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item A5">
+                        <label class="layui-form-label">下午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="pmW5" class="day_select day_select5">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item Night" id="N5" style="display: none">
+                        <label class="layui-form-label">晚班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="fmW5" class="night_select">
+                                <option value="1">值班</option>
+                                <option value="2" selected>不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-left: -20px;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm submit2" lay-submit="" lay-filter="demo5">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm cancel2"  style="margin-left: 60px;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--第三行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 75px;">周二</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 26px;width: 100px;">
+                    <select name="w2" class="weekday2" lay-filter="weekday2">
+                        <option value="1">值班</option>
+                        <option value="2">不值班</option>
+                    </select>
+                </div>
+                <span class="adjustment adjustment2" data-method="notice1">调整</span>
+                <!--周二调整-->
+                <div class="schedule_layer2">
+                    <div class="layui-form-item M2">
+                        <label class="layui-form-label">上午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="amW2" class="day_select day_select2">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item A2">
+                        <label class="layui-form-label">下午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="pmW2" class="day_select day_select2">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item Night" id="N2" style="display: none">
+                        <label class="layui-form-label">晚班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="fmW2" class="night_select">
+                                <option value="1">值班</option>
+                                <option value="2" selected>不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-left: -20px;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm submit2" lay-submit="" lay-filter="demo2">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm cancel2"  style="margin-left: 60px;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 380px;">
+                <label class="layui-form-label" style="width: 76px;">周六</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 100px;">
+                    <select name="w6" class="weekday6" lay-filter="weekday6">
+                        <option value="1">值班</option>
+                        <option value="2">不值班</option>
+                    </select>
+                </div>
+                <span class="adjustment adjustment6" data-method="notice1">调整</span>
+                <!--周六调整-->
+                <div class="schedule_layer6">
+                    <div class="layui-form-item M6">
+                        <label class="layui-form-label">上午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="amW6" class="day_select day_select6">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item A6">
+                        <label class="layui-form-label">下午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="pmW6" class="day_select day_select6">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item Night" id="N6" style="display: none">
+                        <label class="layui-form-label">晚班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="fmW6" class="night_select">
+                                <option value="1">值班</option>
+                                <option value="2" selected>不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-left: -20px;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm submit2" lay-submit="" lay-filter="demo6">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm cancel2"  style="margin-left: 60px;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--第四行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 75px;">周三</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 26px;width: 100px;">
+                    <select name="w3" class="weekday3" lay-filter="weekday3">
+                        <option value="1">值班</option>
+                        <option value="2">不值班</option>
+                    </select>
+                </div>
+                <span class="adjustment adjustment3" data-method="notice1">调整</span>
+                <!--周三调整-->
+                <div class="schedule_layer3">
+                    <div class="layui-form-item M3">
+                        <label class="layui-form-label">上午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="amW3" class="day_select day_select3">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item A3">
+                        <label class="layui-form-label">下午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="pmW3" class="day_select day_select3">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item Night" id="N3" style="display: none">
+                        <label class="layui-form-label">晚班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="fmW3" class="night_select">
+                                <option value="1">值班</option>
+                                <option value="2" selected>不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-left: -20px;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm submit2" lay-submit="" lay-filter="demo3">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm cancel2"  style="margin-left: 60px;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 380px;">
+                <label class="layui-form-label" style="width: 76px;">周日</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 100px;">
+                    <select name="w7" class="weekday7" lay-filter="weekday7">
+                        <option value="1">值班</option>
+                        <option value="2">不值班</option>
+                    </select>
+                </div>
+                <span class="adjustment adjustment7" data-method="notice1">调整</span>
+                <!--周日调整-->
+                <div class="schedule_layer7">
+                    <div class="layui-form-item M7">
+                        <label class="layui-form-label">上午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="amW7" class="day_select day_select7">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item A7">
+                        <label class="layui-form-label">下午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="pmW7" class="day_select day_select7">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item Night" id="N7" style="display: none">
+                        <label class="layui-form-label">晚班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="fmW7" class="night_select">
+                                <option value="1">值班</option>
+                                <option value="2" selected>不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-left: -20px;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm submit2" lay-submit="" lay-filter="demo7">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm cancel2"  style="margin-left: 60px;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--第五行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 75px;">周四</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 26px;width: 100px;">
+                    <select name="w4" class="weekday4" lay-filter="weekday4">
+                        <option value="1">值班</option>
+                        <option value="2">不值班</option>
+                    </select>
+                </div>
+                <span class="adjustment adjustment4" data-method="notice1">调整</span>
+                <!--周四调整-->
+                <div class="schedule_layer4">
+                    <div class="layui-form-item M4">
+                        <label class="layui-form-label">上午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="amW4" class="day_select day_select4">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item A4">
+                        <label class="layui-form-label">下午班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="pmW4" class="day_select day_select4">
+                                <option value="1">值班</option>
+                                <option value="2">不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item Night" id="N4" style="display: none">
+                        <label class="layui-form-label">晚班</label>
+                        <div class="layui-input-block" style="width: 150px;">
+                            <select name="fmW4" class="night_select">
+                                <option value="1">值班</option>
+                                <option value="2" selected>不值班</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-left: -20px;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm submit2" lay-submit="" lay-filter="demo4">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm cancel2"  style="margin-left: 60px;">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="two" style="width: 100%;margin-top: 50px;">
+        <p class="divideP">设备加班设置</p>
+        <!--第一行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 100px;">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="startDate" id="startDate" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="margin-left: 20px;">结束日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="endDate" id="endDate"  placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <!--第二行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 100px;">开始时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="startTime" id="startTime"  placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="margin-left: 20px;">结束时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="endTime" id="endTime" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="three" style="width: 100%;margin-top: 50px;">
+        <p class="divideP">额定值设定</p>
+
+        <!--第一行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 100px;margin-left: 10px;">额定值类型</label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 100px;">
+                    <select name="ratingType" class="hour_select" lay-filter="hour_select">
+                        <option value="1">时长</option>
+                        <option value="2">次数</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 400px;">
+                <label class="layui-form-label" style="width: 143px;">每月工作天数 <i class="iconfont required">&#xe7f9;</i></label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+                    <input type="text" name="workDays" lay-verify="required" autocomplete="off" placeholder="" class="layui-input" value="21">
+                </div>
+            </div>
+        </div>
+
+        <p class="divideP">核定工<span class="shi">时</span><span class="ci">次</span></p>
+
+        <!--第三行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 100px;">上午班<span class="shi">(时)</span><span class="ci">(次)</span></label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                    <input type="text" name="amShift" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="2">
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 400px;">
+                <label class="layui-form-label" style="width: 96px;">晚班<span class="shi">(时)</span><span class="ci">(次)</span></label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 20px;width: 220px;">
+                    <input type="text" name="fmShift" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="2">
+                </div>
+            </div>
+        </div>
+
+        <!--第四行-->
+        <div class="layui-form-item" style="margin-left: 10px;">
+            <div class="layui-inline" style="width: 330px;">
+                <label class="layui-form-label" style="width: 100px;">下午班<span class="shi">(时)</span><span class="ci">(次)</span></label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
+                    <input type="text" name="pmShift" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="2">
+                </div>
+            </div>
+            <div class="layui-inline" style="width: 400px;">
+                <label class="layui-form-label" style="width: 96px;margin-left: 20px;">满负荷工<span class="shi">时</span><span class="ci">次</span></label>
+                <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+                    <input type="text" name="fullLoadTime" lay-verify="" autocomplete="off" placeholder="" class="layui-input" value="0">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="preservation">保存</button>
+            <button type="button" class="layui-btn layui-btn-primary" onclick="javascript:history.back(-1);">取消</button>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" href="main1.html" >编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/dataIndex.js"></script>
+
+<script>
+
+    // 取得上一页面的url
+    var url=window.location.search;
+    // console.log(url);
+    // 得到字段
+    var id = $.getUrlParam("id");
+    // var macId =  $.getUrlParam("macId");
+
+    // 动态创建url
+    var url2 = "/duty/showOne?id=" + id;
+    // console.log(url2);
+    renderMod.form = {
+        val:{
+            filter:"forms",//与form标签lay-filter相同
+            get:{
+                url:url2,
+                type:"POST",
+                data:["eqName","macId","id","eqXh","cdtypeName","eqGg", "w1","amW1", "pmW1","fmW1","w2","amW2","pmW2","fmW2", "w3","amW3","pmW3","fmW3","w4","amW4","pmW4","fmW4", "w5","amW5","pmW5","fmW6","w6","amW6","pmW6","fmW6", "w7","amW7","pmW7","fmW7", "startDate","startTime","endDate","endTime", "ratingtype","workDays","amShift","pmShift","fmShift","fullLoadTime"
+            ]
+            },
+            func:function(data){
+                console.log(data.cdtypeName);
+                if(data.cdtypeName == "行政班"){
+                    $("#scheduling").find("option[value='1']").prop("selected",true);
+                    $(".adjustment").css("display","inline-block");
+                    $(".Night").css("display","none");
+                    $(".night_select option[value=2]").attr("selected", true);
+                    layui.form.render('select');
+                }else if(data.cdtypeName == "夜班"){
+                    $("#scheduling").find("option[value='2']").prop("selected",true);
+                    $(".adjustment").css("display","none");
+                    $(".night_select option[value=1]").attr("selected", true);
+                    $(".day_select option[value=2]").attr("selected", true);
+                    layui.form.render('select');
+                }else if(data.cdtypeName == "24时班"){
+                    $("#scheduling").find("option[value='3']").prop("selected",true);
+                    $(".adjustment").css("display","inline-block");
+                    $(".Night").css("display","inline-block");
+                    layui.form.render('select');
+                }else if(data.cdtypeName == "白班"){
+                    $("#scheduling").find("option[value='4']").prop("selected",true);
+                    $(".adjustment").css("display","none");
+                    $(".night_select option[value=2]").attr("selected", true);
+                    $(".day_select option[value=1]").attr("selected", true);
+                    layui.form.render('select');
+                }else if(data.cdtypeName == "轮班"){
+                    $("#scheduling").find("option[value='5']").prop("selected",true);
+                    $(".adjustment").css("display","none");
+                    layui.form.render('select');
+                }
+            }
+        }
+    };
+
+/* *-*-*-*-*-*-*-*-*-*-*-* one *-*-*-*-*-*-*-*-*-*-*-* */
+
+    // select框
+    layui.use(['layer', 'jquery', 'form'], function () {
+        var layer = layui.layer,
+            $ = layui.jquery,
+            form = layui.form,
+            submit2;
+
+        // select框判断
+        form.on('select(scheduling)', function(data){
+            if(data.value == 1){
+                $(".adjustment").css("display","inline-block");
+                $(".Night").css("display","none");
+                $(".night_select").val("2");
+                form.render('select');
+            }
+            else if (data.value == 2) {
+                $(".adjustment").css("display","none");
+                $(".night_select").val("1");
+                $(".day_select").val("2");
+                form.render('select');
+            }
+            else if (data.value == 3) {
+                $(".adjustment").css("display","inline-block");
+                $(".Night").css("display","inline-block");
+                $(".night_select").val("1");
+                $(".day_select").val("1");
+                form.render('select');
+            }
+            else if (data.value == 4) {
+                $(".adjustment").css("display","none")
+                $(".night_select").val("2");
+                $(".day_select").val("1");
+                form.render('select');
+            }
+            else if (data.value == 5) {
+                $(".adjustment").css("display","none");
+                $(".night_select").val("2");
+                $(".day_select").val("2");
+                form.render('select');
+            }
+        });
+
+        // 值班/不值班判断
+        form.on('select(weekday1)', function(data){
+            if(data.value == 1){
+                $(".day_select1").val("1");
+                form.render();
+            }
+            else {
+                $(".day_select1").val("2");
+                $(".night_select").val("2");
+                form.render();
+            }
+        });
+        form.on('select(weekday2)', function(data){
+            if(data.value == 1){
+                $(".day_select2").val("1");
+                form.render();
+            }
+            else {
+                $(".day_select2").val("2");
+                $(".night_select").val("2");
+                form.render();
+            }
+        });
+        form.on('select(weekday3)', function(data){
+            if(data.value == 1){
+                $(".day_select3").val("1");
+                form.render();
+            }
+            else {
+                $(".day_select1 option[value=1]").removeAttr("selected","selected");
+                $(".day_select1").val("2");
+                $(".night_select1").val("2");
+                form.render();
+            }
+        });
+        form.on('select(weekday4)', function(data){
+            if(data.value == 1){
+                $(".day_select4").val("1");
+                form.render();
+            }
+            else {
+                $(".day_select4").val("2");
+                $(".night_select").val("2");
+                form.render();
+            }
+        });
+        form.on('select(weekday5)', function(data){
+            if(data.value == 1){
+                $(".day_select5").val("1");
+                form.render();
+            }
+            else {
+                $(".day_select5").val("2");
+                $(".night_select").val("2");
+                form.render();
+            }
+        });
+        form.on('select(weekday6)', function(data){
+            if(data.value == 1){
+                $(".day_select6").val("1");
+                form.render();
+            }
+            else {
+                $(".day_select6").val("2");
+                $(".night_select").val("2");
+                form.render();
+            }
+        });
+        form.on('select(weekday7)', function(data){
+            if(data.value == 1){
+                $(".day_select7").val("1");
+                form.render();
+            }
+            else {
+                $(".day_select7").val("2");
+                $(".night_select").val("2");
+                form.render();
+            }
+        });
+
+        // 弹出层的确定
+        form.on('submit(demo1)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+            layer.closeAll();
+
+            return false;
+        });
+
+        form.on('submit(demo2)', function(data){
+            layer.closeAll();
+            return false;
+        });
+
+        form.on('submit(demo3)', function(data){
+            layer.closeAll();
+            return false;
+        });
+
+        form.on('submit(demo4)', function(data){
+            layer.closeAll();
+            return false;
+        });
+
+        form.on('submit(demo5)', function(data){
+            layer.closeAll();
+            return false;
+        });
+
+        form.on('submit(demo6)', function(data){
+            layer.closeAll();
+            return false;
+        });
+
+        form.on('submit(demo7)', function(data){
+            layer.closeAll();
+            return false;
+        });
+
+        // 弹出层中的取消
+        $(".cancel2").click(function () {
+            layer.closeAll();
+        });
+
+
+        /*******************************/
+
+        //触发事件
+        var active = {
+            notice: function () {
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['1000px', '90%'],
+                    content: 'choose1.html' //iframe的url
+                });
+            }
+        };
+
+        $('#layerDemo .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+        //触发事件1
+        var active1 = {
+            notice1: function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: false,
+                    offset: ['170px', '700px'],
+                    scrollbar: false,
+                    btnAlign: 'c', //按钮居中
+                    area: ['320px', '220px'],
+                    content: $(".schedule_layer1")
+                });
+            }
+        };
+        $('.adjustment1').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active1[method] ? active1[method].call(this, othis) : '';
+        });
+
+        //触发事件2
+        var active2 = {
+            notice1: function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: false,
+                    offset: ['170px', '700px'],
+                    scrollbar: false,
+                    btnAlign: 'c', //按钮居中
+                    area: ['320px', '220px'],
+                    content: $(".schedule_layer2")
+                });
+            }
+        };
+        $('.adjustment2').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active2[method] ? active2[method].call(this, othis) : '';
+        });
+
+        //触发事件3
+        var active3 = {
+            notice1: function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: false,
+                    offset: ['170px', '700px'],
+                    scrollbar: false,
+                    btnAlign: 'c', //按钮居中
+                    area: ['320px', '220px'],
+                    content: $(".schedule_layer3")
+                });
+            }
+        };
+        $('.adjustment3').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active3[method] ? active3[method].call(this, othis) : '';
+        });
+
+        //触发事件4
+        var active4 = {
+            notice1: function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: false,
+                    offset: ['170px', '700px'],
+                    scrollbar: false,
+                    btnAlign: 'c', //按钮居中
+                    area: ['320px', '220px'],
+                    content: $(".schedule_layer4")
+                });
+            }
+        };
+        $('.adjustment4').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active4[method] ? active4[method].call(this, othis) : '';
+        });
+
+        //触发事件5
+        var active5 = {
+            notice1: function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: false,
+                    offset: ['170px', '700px'],
+                    scrollbar: false,
+                    btnAlign: 'c', //按钮居中
+                    area: ['320px', '220px'],
+                    content: $(".schedule_layer5")
+                });
+            }
+        };
+        $('.adjustment5').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active5[method] ? active5[method].call(this, othis) : '';
+        });
+
+        //触发事件6
+        var active6 = {
+            notice1: function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: false,
+                    offset: ['170px', '700px'],
+                    scrollbar: false,
+                    btnAlign: 'c', //按钮居中
+                    area: ['320px', '220px'],
+                    content: $(".schedule_layer6")
+                });
+            }
+        };
+        $('.adjustment6').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active6[method] ? active6[method].call(this, othis) : '';
+        });
+
+        //触发事件7
+        var active7 = {
+            notice1: function () {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: false,
+                    offset: ['170px', '700px'],
+                    scrollbar: false,
+                    btnAlign: 'c', //按钮居中
+                    area: ['320px', '220px'],
+                    content: $(".schedule_layer7")
+                });
+            }
+        };
+        $('.adjustment7').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active7[method] ? active7[method].call(this, othis) : '';
+        });
+
+
+        /*******************************/
+    });
+
+    // 表单
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#indexDateSelect'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+        form.on('submit(preservation)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                contentType:'application/json;charset=UTF-8',
+                dataType: 'json',
+                url: '/duty/update',
+                data: JSON.stringify(data.field),
+                success: function(data) {
+                    if (data.code == '0'){
+                        layui.layer.alert('保存成功!');
+                        window.location.href = 'main4.html'
+                    }
+                },
+                error:function(){
+                    alert("error");
+                }
+            });
+            console.log(JSON.stringify(data.field));
+            return false;
+        });
+    });
+
+
+/* *-*-*-*-*-*-*-*-*-*-*-* two *-*-*-*-*-*-*-*-*-*-*-* */
+    // 表单
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#startDate'
+        });
+        laydate.render({
+            elem: '#endDate'
+        });
+
+
+
+        laydate.render({
+            elem: '#startTime'
+            ,type: 'time'
+            ,trigger: 'click'
+        });
+        laydate.render({
+            elem: '#endTime'
+            ,type: 'time'
+            ,trigger: 'click'
+        });
+    });
+
+    //弹出层
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+
+        //触发事件
+        var active = {
+            notice: function(){
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['1000px', '90%'],
+                    content: 'choose2.html' //iframe的url
+                });
+            }
+        };
+
+        $('#layerDemo2 .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
+
+/* *-*-*-*-*-*-*-*-*-*-*-* three *-*-*-*-*-*-*-*-*-*-*-* */
+
+    // 表单
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#indexDateSelect'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+        // 下拉框
+        form.on('select(hour_select)', function(data){
+            if(data.value == 1){
+                $(".ci").css("display","none");
+                $(".shi").css("display","inline-block");
+                form.render('select');
+            }else{
+                $(".shi").css("display","none");
+                $(".ci").css("display","inline-block");
+                form.render('select');
+            }
+        });
+    });
+
+    //弹出层
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+
+        //触发事件
+        var active = {
+            notice: function(){
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['1000px', '90%'],
+                    content: 'choose2.html' //iframe的url
+                });
+            }
+        };
+
+        $('#layerDemo3 .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div id="data-screen4" style="width: 500px;height:400px;display: inline-block;float: left;"></div>
+
+<!--表格-->
+<div style="margin-left: 20px;float: left;">
+    <table class="layui-table" lay-even="" lay-skin="nob" >
+        <tbody>
+        <tr>
+            <th>设备名称 :</th>
+            <td id="deviceName"></td>
+            <th>责任人 :</th>
+            <td id="dutyOfficer"></td>
+        </tr>
+        <tr>
+            <th>当前工作量(人) :</th>
+            <td id="current"></td>
+            <th>剩余工作量(人) :</th>
+            <td id="surplus"></td>
+        </tr>
+        <tr>
+            <th>当前电压 :</th>
+            <td id="currVoltage"></td>
+            <th>当前电流(kv) :</th>
+            <td id="currElectricity"></td>
+        </tr>
+
+        <tr>
+            <th colspan="2">球管保用(万秒次保用) :</th>
+            <td colspan="2" id="bulb"></td>
+        </tr>
+
+        <tr>
+            <th>用电量 :</th>
+            <td id="eleConsumption"></td>
+            <th>漏电电流 :</th>
+            <td id="leakageCurrent"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="../layui/echarts.js"></script>
+<script>
+    function loadOneColumn() {
+        var myChart = echarts.init(document.getElementById('data-screen4'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                text: '当前工作状态   ',
+                x:'center',
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            xAxis: {
+                type: 'category',
+                name: '(毫安)',
+                axisLine: {
+                    show: true,
+                    onZero: true,
+                    lineStyle: {
+                        color:'#fff',
+                    },
+                },
+                data: []
+            },
+            yAxis: {
+                type: 'value',
+                name: '电流变化',
+                axisLine: {
+                    show: true,
+                    onZero: true,
+                    lineStyle: {
+                        color:'#fff',
+                    },
+                },
+            },
+            color:'#f19b78',
+            series: [{
+                name: '当前工作状态',
+                type: 'line',
+                smooth: true,
+                data: []
+            }]
+        });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: '../json/dataScreen4-.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.list, function (index, item) {
+                    brower.push({
+                        value: item.num
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表          
+                    series: [{
+                        data: brower
+                    }]
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadOneColumn();
+
+    getList();
+    function getList() {
+
+        $.ajax({
+            type : "GET",
+            url : "../json/dataScreen4.json",
+            dataType : "json",//返回的数据类型
+
+            success: function (result) {
+                console.log(1);
+                //我这里返回的是text
+                if (result != "" && result != undefined) {
+                    console.log(2);
+                    var data = result.data;
+                    console.log(data);
+                    var deviceName,
+                        dutyOfficer,
+                        current,
+                        surplus,
+                        currVoltage,
+                        currElectricity,
+                        bulb,
+                        eleConsumption,
+                        leakageCurrent;
+                    for(var i = 0; i< data.length; i++)
+                    {
+                        deviceName = data[i].deviceName;
+                        dutyOfficer = data[i].dutyOfficer;
+                        current = data[i].current;
+                        surplus = data[i].surplus;
+                        currVoltage = data[i].currVoltage;
+                        currElectricity = data[i].currElectricity;
+                        bulb = data[i].bulb;
+                        eleConsumption = data[i].eleConsumption;
+                        leakageCurrent = data[i].leakageCurrent;
+                    }//添加你拼接好的html到table里
+                    $("#deviceName").text(deviceName);
+                    $("#dutyOfficer").text(dutyOfficer);
+                    $("#current").text(current);
+                    $("#surplus").text(surplus);
+                    $("#currVoltage").text(currVoltage);
+                    $("#currElectricity").text(currElectricity);
+                    $("#bulb").text(bulb);
+                    $("#eleConsumption").text(eleConsumption);
+                    $("#leakageCurrent").text(leakageCurrent);
+                }
+            },
+            error : function() {
+                alert("查询失败！");
+            }
+        });
+    }
+</script>
+</body>
+</html>

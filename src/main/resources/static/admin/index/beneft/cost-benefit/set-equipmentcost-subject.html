@@ -107,6 +107,7 @@
                     }
                 }
                 , done: function (obj) {
+                    console.log(obj);
                     tableFunc(
                         {
                             "obj": obj,
@@ -117,7 +118,8 @@
                                     event: "edit",
                                     content: "./child/equipmentcost-edit.html",
                                     dataUrl: ["eqId"]
-                                },{
+                                },
+                                {
                                     tool:"toolbar",
                                     type: 2,
                                     title: "添加",
@@ -127,6 +129,7 @@
                             ]
 
                         })
+
                 }
 
             },
