@@ -3166,7 +3166,7 @@
               },
               {
                 "title": "厂商资质查询",
-                "url": "./admin/discipline-management/cs-query_zz.html",
+                "url": "./admin/discipline-management/cs-query_z.html",
                 "icon": "search",
                 "id": "6134",
                 "shiro": "CSZJCX"
