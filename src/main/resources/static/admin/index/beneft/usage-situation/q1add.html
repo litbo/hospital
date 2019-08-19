@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>功能利用率</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-item{
+            margin-top:35px
+        }
+        span{
+            color:#f10214;
+        }
+        .layui-form-label{
+            width:130px;
+            padding:8px 10px!important;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">设备编号<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="yxqDate" class="layui-input" autocomplete="off"  lay-verify="number">
+                    </div>
+                </div>
+                <label class="layui-form-label">设备名称<span class="sign">*</span></label>
+                <div class="layui-input-block"  >
+                    <select name="modules" lay-verify="required" lay-search="" >
+                        <option value="">设备名称</option>
+                        <option value="1">123</option>
+                        <option value="2">456</option>
+                        <option value="3">789</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">既有功能数<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="yxqDate" class="layui-input" autocomplete="off"  lay-verify="number">
+                    </div>
+                </div>
+                <label class="layui-form-label">功能使用数<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                <input type="text" name="yxqDate" class="layui-input" autocomplete="off"  lay-verify="number">
+            </div>
+
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="float:right;margin-right: 20%">
+                    <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    var formData = {};
+    renderMod = {
+        form:{
+            date:[
+                {
+                    elem:'#date1',
+                    type:"datetime"
+
+                },{
+                    elem:'#date2',
+                    type:"datetime"
+                }
+                ,{
+                    elem:'#date3',
+                    type:"datetime"
+                }
+            ],
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/supervise/csgl/getCszjByCszjId",
+                    type:"GET",
+                    save:formData,
+                    data:{cszjId:$.getUrlParam('cszjId')}
+                },
+                select:[
+                    {
+                        filter:"zc",
+                        ids:"zcId",
+                        text:"zc",
+                        url:"/eqdict/listZc"
+                    }
+                ]
+            },
+
+            submit:{
+                before: function () {
+                    var daa={};
+                    if(formData.radio){
+                        daa=formData.radio[0]["sbcsId"];
+                    }else if(formData.val){
+                        console.log(formData);
+                        daa=formData.val.sbcsId;
+                    }
+                    return param = {
+                        1: daa,
+                        2:$.getUrlParam('cszjId')
+                    };
+
+                },
+                form:{
+                    url:"/supervise/csgl/insertCszj",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["cszjName","cszjBh","cszjFzdw","cszjZjlx","fzDate","yxqDate","bgDate","bgNr","imgUrl"],
+                    param: {
+                        1: "sbcsId",
+                        2: "cszjId"
+                    },
+                    done:function(res){
+                        if(res.code === 0){
+                            layer.alert("提交成功",function () {
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index); //再执行关闭
+                                parent.location.reload();
+                            })
+                        }else {
+                            layer.alert("提交失败")
+                        }
+                    }
+                }
+            }
+        }
+    };
+</script>
+
+
+</body>
+
+</html>
