@@ -1,13 +1,12 @@
 package com.litbo.hospital.operational_data_monitoring.software_interface.service.impl;
 
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.BmVO;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.BmDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.BmDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.DeparHisSss;
 import com.litbo.hospital.operational_data_monitoring.software_interface.bean.HisDeptDict;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.DeparHisSssDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.HisDeptDictDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.service.HisDeptDictService;
-import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DepartmentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

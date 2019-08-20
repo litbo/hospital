@@ -122,7 +122,6 @@ public class EqDutyController {
         EqDutyTab eqDutyTab = new EqDutyTab();
         BeanUtils.copyProperties(eqDutyVO,eqDutyTab);
         eqDutyTab.setEqMacId(idByIDAndTime);
-        System.out.println(eqDutyTab);
         eqDutyTab.setDtype(eqDutyVO.getCdtypeName());
         eqDutyTabService.update(eqDutyTab);
 
@@ -130,13 +129,11 @@ public class EqDutyController {
         EqOvertimeTab eqOvertimeTab = new EqOvertimeTab();
         BeanUtils.copyProperties(eqDutyVO,eqOvertimeTab);
         eqOvertimeTab.setEqMacId(idByIDAndTime);
-        System.out.println(eqOvertimeTab);
         eqOvertimeTabService.update(eqOvertimeTab);
         //添加设备核定工时设置
         ApprovedWorkingHours approvedWorkingHours = new ApprovedWorkingHours();
         BeanUtils.copyProperties(eqDutyVO,eqDutyTab);
         approvedWorkingHours.setEqMacId(idByIDAndTime);
-        System.out.println(approvedWorkingHours);
         approvedWorkingHoursService.update(approvedWorkingHours);
         return Result.success();
     }

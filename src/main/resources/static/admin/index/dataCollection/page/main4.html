@@ -158,7 +158,7 @@
 									url:"/duty/deletes",
 									type:"POST",
 									contentType:"application/json",
-									par:"eqMacId",
+									par:"macId",
 									reload:true
 								},
 							},
@@ -169,7 +169,7 @@
 									layer.confirm('确定删除这一行吗？', function(index){
 										subUp({
 											url:"/duty/delete",
-											data:{"eqMacId":obj.data.eqMacId},
+											data:{"eqMacId":obj.data.macId},
 											success:function(res){
 												if(res.code === 0){
 													obj.del(); //删除对应行（tr）的DOM结构，并更新缓存

@@ -1,4 +1,4 @@
-package com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.dao;
+package com.litbo.hospital.operational_data_monitoring.internet_of_things.dao;
 
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.bean.Temp1;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.OperationRecord;

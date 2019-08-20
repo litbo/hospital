@@ -1,4 +1,4 @@
-package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao;
+package com.litbo.hospital.operational_data_monitoring.internet_of_things.dao;
 
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.BmVO;
 import org.apache.ibatis.annotations.Mapper;

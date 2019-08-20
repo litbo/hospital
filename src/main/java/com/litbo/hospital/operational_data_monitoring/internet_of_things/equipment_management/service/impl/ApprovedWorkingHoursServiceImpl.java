@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.ApprovedWorkingHoursVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.ApprovedWorkingHours;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.ApprovedWorkingHoursDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.ApprovedWorkingHoursDAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.ApprovedWorkingHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

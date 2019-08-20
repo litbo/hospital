@@ -1,4 +1,4 @@
-package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao;
+package com.litbo.hospital.operational_data_monitoring.internet_of_things.dao;
 
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @BelongsProject: hospital
- * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao
+ * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.internet_of_things.dao
  * @Author: looli
  * @CreateTime: 2019-07-30 17:09
  * @Description: todo
