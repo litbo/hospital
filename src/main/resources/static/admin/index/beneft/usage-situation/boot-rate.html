@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
+
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
@@ -19,6 +20,7 @@
             width: 80px;
         }
     </style>
+
 </head>
 
 <body>
@@ -39,16 +41,9 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10 setW">
-                        <select>
-                            <option disabled>日期类型</option>
-                            <option>日</option>
-                            <option selected>月</option>
-                            <option>年</option>
-                        </select>
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date" id="date" class="layui-input" >
+
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="modules" lay-verify="required" lay-search="">
@@ -60,6 +55,16 @@
                             <option value="5">心外ICU</option>
                         </select>
                     </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="modules" lay-verify="required" lay-search="">
+                            <option value="">设备名称</option>
+                            <option value="1">脉搏碳氧血氧测量仪</option>
+                            <option value="2">光疗设备</option>
+                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
+                            <option value="4">设备柜</option>
+                            <option value="5">监护仪(母婴监护系统主机)</option>
+                        </select>
+                    </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
                     </div>
@@ -67,61 +72,62 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#test6'
+                , range: true
+            });
+        });
 </script>
 
 
-
 <script>
-    renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                 {field: 'equip_number', title: '设备编号',width:"25%",minWidth: 150}
-                ,{field: 'equip_name', title: '设备名称',width:"25%", minWidth: 150}
-                , {field: 'starting-days', title: '开机天数', minWidth: 150,sort:true}
-                , {field: 'turnon-time', title: '应开机时间', minWidth: 150,sort:true}
-                , {field: 'boot-rate', title: '开机率', minWidth: 150,sort:true}
-                , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
-            ]]
-            , height: "full-25"
-            , "data": [
-                {
-                    "equip_number": "62583289",
-                    "equip_name": "CT",
-                    "starting-days": "10",
-                    "turnon-time": "应开机时间",
-                    "boot-rate": "开机率",
-                    "ranking": "1"
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'equip_number', title: '设备编号',width:"25%",minWidth: 150}
+                    ,{field: 'equip_name', title: '设备名称',width:"25%", minWidth: 150}
+                    , {field: 'starting-days', title: '开机天数', minWidth: 150,sort:true}
+                    , {field: 'turnon-time', title: '应开机时间', minWidth: 150,sort:true}
+                    , {field: 'boot-rate', title: '开机率', minWidth: 150,sort:true}
+                    , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
+                ]]
+                , url: "/baoxiu/bxlcTable"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
-                ,{
-                    "equip_number": "62583256",
-                    "equip_name": "CT",
-                    "starting-days": "5",
-                    "turnon-time": "应开机时间",
-                    "boot-rate": "开机率",
-                    "ranking": "2"
-                }
-                ,{
-                    "equip_number": "62584589",
-                    "equip_name": "CT",
-                    "starting-days": "3",
-                    "turnon-time": "应开机时间",
-                    "boot-rate": "开机率",
-                    "ranking": "3"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":{
-                        tool:"toolbar",
-                        title:"数据查找",
-                        event:"dataSearch",
-                        content:$("#hideXs")
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count":res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
                     }
-                })
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        tools:[
+                            {
+                                event:"",
+                                title:"",
+                                type:2,
+                                content:"",
+                                dataUrl:[""]
+                            }
+                        ]
+                    })
+                }
+            },
+            reSet:{
+                url:"/baoxiu/bxlcTable",
+                type:"search",
+                data:["","equip_name"]    //搜索框的name
             }
-        },
-        date :{
-            elem : "#date"
         }
     }
 </script>

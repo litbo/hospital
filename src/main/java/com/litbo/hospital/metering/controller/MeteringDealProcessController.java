@@ -1,5 +1,7 @@
 package com.litbo.hospital.metering.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.pojo.MeteringApprovalForm;
@@ -7,16 +9,15 @@ import com.litbo.hospital.metering.pojo.MeteringDealProcess;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
 import com.litbo.hospital.metering.service.MeteringDealProcessService;
 import com.litbo.hospital.metering.service.MeteringService;
+import com.litbo.hospital.metering.vo.AddSomeMeteringUtilToProcessVo;
 import com.litbo.hospital.metering.vo.MeteringApprovalFormMoreInfomationVo;
 import com.litbo.hospital.metering.vo.MeteringProcessMoreInformationVo;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.sound.midi.Soundbank;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -40,12 +41,24 @@ public class MeteringDealProcessController {
 
     /**
      * 生成一个需要提交的计量报表，并将这个报表送进审批流程
-     * @param department 处理报表的部门
-     * @param utilIds 报表中计量设备的id，是个字符串，其中使用','隔开
+     *      处理报表的部门
+     *      报表中计量设备的id，是个字符串，其中使用','隔开
      * @return
      */
     @RequestMapping("/addSomeMeteringUtilToProcess.do")
-    public Result addSomeMeteringUtilToProcess(String department,String utilIds){
+    public Result addSomeMeteringUtilToProcess(@RequestBody String content){
+        System.out.println(content);
+        AddSomeMeteringUtilToProcessVo vo = JSONObject.parseObject(content,AddSomeMeteringUtilToProcessVo.class);
+
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0 ; i < vo.getUtilIds().size()-1 ;i++){
+            stringBuffer.append(vo.getUtilIds().get(i)).append(",");
+            System.out.println(stringBuffer);
+        }
+        stringBuffer.append(vo.getUtilIds().get(vo.getUtilIds().size()-1));
+        String utilIds = stringBuffer.toString();
+        String department = vo.getDepartment();
+        System.out.println(stringBuffer);
 
         // 组装一个表单，记录此次生成的报表
         MeteringApprovalForm form = new MeteringApprovalForm();
@@ -79,7 +92,7 @@ public class MeteringDealProcessController {
             return Result.error("报表流程生成失败！请重试！");
         }
 
-        return Result.success(1,"添加成功！");
+        return Result.success(0,"添加成功！");
     }
 
 
@@ -124,7 +137,7 @@ public class MeteringDealProcessController {
             return vo;
         }
         vo.setMsg("error");
-        vo.setCode(1);
+        vo.setCode(0);
         return vo;
     }
 
@@ -170,7 +183,7 @@ public class MeteringDealProcessController {
             return vo;
         }
         vo.setMsg("error");
-        vo.setCode(1);
+        vo.setCode(0);
         return vo;
     }
 

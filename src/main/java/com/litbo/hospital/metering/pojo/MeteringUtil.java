@@ -15,11 +15,11 @@ public class MeteringUtil implements Serializable {
 
     private String meteringInspectionCycle;
 
-    private String department;
+    private String bmName;
 
     private String buyTime;
 
-    private String buyPerson;
+    private String userXm;
 
     private String updateMessageTime;
 
@@ -73,12 +73,12 @@ public class MeteringUtil implements Serializable {
         this.meteringInspectionCycle = meteringInspectionCycle;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getBmName() {
+        return bmName;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setBmName(String bmName) {
+        this.bmName = bmName;
     }
 
     public String getBuyTime() {
@@ -89,12 +89,12 @@ public class MeteringUtil implements Serializable {
         this.buyTime = buyTime;
     }
 
-    public String getBuyPerson() {
-        return buyPerson;
+    public String getUserXm() {
+        return userXm;
     }
 
-    public void setBuyPerson(String buyPerson) {
-        this.buyPerson = buyPerson;
+    public void setUserXm(String userXm) {
+        this.userXm = userXm;
     }
 
     public String getUpdateMessageTime() {
@@ -185,9 +185,9 @@ public class MeteringUtil implements Serializable {
             && (this.getMeteringName() == null ? other.getMeteringName() == null : this.getMeteringName().equals(other.getMeteringName()))
             && (this.getMeteringNum() == null ? other.getMeteringNum() == null : this.getMeteringNum().equals(other.getMeteringNum()))
             && (this.getMeteringInspectionCycle() == null ? other.getMeteringInspectionCycle() == null : this.getMeteringInspectionCycle().equals(other.getMeteringInspectionCycle()))
-            && (this.getDepartment() == null ? other.getDepartment() == null : this.getDepartment().equals(other.getDepartment()))
+            && (this.getBmName() == null ? other.getBmName() == null : this.getBmName().equals(other.getBmName()))
             && (this.getBuyTime() == null ? other.getBuyTime() == null : this.getBuyTime().equals(other.getBuyTime()))
-            && (this.getBuyPerson() == null ? other.getBuyPerson() == null : this.getBuyPerson().equals(other.getBuyPerson()))
+            && (this.getUserXm() == null ? other.getUserXm() == null : this.getUserXm().equals(other.getUserXm()))
             && (this.getUpdateMessageTime() == null ? other.getUpdateMessageTime() == null : this.getUpdateMessageTime().equals(other.getUpdateMessageTime()))
             && (this.getThisMeteringTime() == null ? other.getThisMeteringTime() == null : this.getThisMeteringTime().equals(other.getThisMeteringTime()))
             && (this.getUtilType() == null ? other.getUtilType() == null : this.getUtilType().equals(other.getUtilType()))
@@ -207,9 +207,9 @@ public class MeteringUtil implements Serializable {
         result = prime * result + ((getMeteringName() == null) ? 0 : getMeteringName().hashCode());
         result = prime * result + ((getMeteringNum() == null) ? 0 : getMeteringNum().hashCode());
         result = prime * result + ((getMeteringInspectionCycle() == null) ? 0 : getMeteringInspectionCycle().hashCode());
-        result = prime * result + ((getDepartment() == null) ? 0 : getDepartment().hashCode());
+        result = prime * result + ((getBmName() == null) ? 0 : getBmName().hashCode());
         result = prime * result + ((getBuyTime() == null) ? 0 : getBuyTime().hashCode());
-        result = prime * result + ((getBuyPerson() == null) ? 0 : getBuyPerson().hashCode());
+        result = prime * result + ((getUserXm() == null) ? 0 : getUserXm().hashCode());
         result = prime * result + ((getUpdateMessageTime() == null) ? 0 : getUpdateMessageTime().hashCode());
         result = prime * result + ((getThisMeteringTime() == null) ? 0 : getThisMeteringTime().hashCode());
         result = prime * result + ((getUtilType() == null) ? 0 : getUtilType().hashCode());
@@ -232,9 +232,9 @@ public class MeteringUtil implements Serializable {
         sb.append(", meteringName=").append(meteringName);
         sb.append(", meteringNum=").append(meteringNum);
         sb.append(", meteringInspectionCycle=").append(meteringInspectionCycle);
-        sb.append(", department=").append(department);
+        sb.append(", bmName=").append(bmName);
         sb.append(", buyTime=").append(buyTime);
-        sb.append(", buyPerson=").append(buyPerson);
+        sb.append(", userXm=").append(userXm);
         sb.append(", updateMessageTime=").append(updateMessageTime);
         sb.append(", thisMeteringTime=").append(thisMeteringTime);
         sb.append(", utilType=").append(utilType);

@@ -23,7 +23,7 @@ public interface DossierService {
 
     Dossier selectDossierByDossierNum(String dossierNum);
     Dossier selectDossierByID(int id);
-    List<Dossier> selectDossierByName(String name);
+    List<Dossier> selectDossierByName(String name,String bmName);
 
     List<Dossier>  findAllDossier();
 

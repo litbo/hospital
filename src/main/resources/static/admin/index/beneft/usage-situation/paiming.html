@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>完好率</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .setW{
+            width: 80px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1">
+
+        </table>
+
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+
+    <div style="font-size: 25px;text-align: center">
+        排名变化表
+    </div>
+
+
+</script>
+
+
+
+<script>
+    renderMod.addTable ={
+        table:{
+            cols: [[ //表头
+                {field: 'equip_name', title: '设备名字',minWidth: 150}
+                ,{field: 'q', title: '本次排名', minWidth: 150,sort:true}
+                ,{field: 'qq', title: '上次排名', minWidth: 150,sort:true}
+                ,{field: 'qqq', title: '排名变化', minWidth: 150,sort:true}
+            ]]
+            , height: "full-25"
+            , "data": [
+                {
+                 "equip_name": "65683289",
+                 "q": "CT",
+                 "qq": "开机时长",
+                 "qqq": "待机时长",
+                }
+               ]
+        },
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+

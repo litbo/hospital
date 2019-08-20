@@ -1364,7 +1364,59 @@
                     "shiro": "PJZDZ"
                   }
                 ]
-              }
+              },
+              
+              {
+				"title": "计量管理",
+				"url": "javascript:void;",
+				"id": "74001",
+				"shiro": "CX",
+                "icon": "book",
+				"children": [
+		          {
+		            "title": "总账",
+		            "url": "./safe/metering-management/metering-list.html",
+		            "id": "74002",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "分户账",
+		            "url": "./safe/metering-management/metering-list2.html",
+		            "id": "74003",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "计量录入/导入",
+		            "url": "./home/public_info.html",
+		            "id": "74004",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "计量审批",
+		            "url": "./safe/metering-management/metering-approve.html",
+		            "id": "74005",
+		            "shiro": "CX"
+		          }
+		        ]
+			}
+			,
+              
+              {
+				"title": "文档管理",
+				"url": "javascript:void;",
+				"id": "75001",
+				"shiro": "CX",
+                "icon": "book",
+				"children": [
+		          {
+		            "title": "文档列表",
+		            "url": "./safe/dossier-managent/dossier-list.html",
+		            "id": "75002",
+		            "shiro": "CX"
+		          }
+		        ]
+			}
+            	
             ]
           },
           {
@@ -2168,6 +2220,7 @@
                 "id": "5100",
                 "shiro": "XLKPI",
                 "children": [
+
                   {
                     "title": "开机率",
                     "url": "./beneft/usage-situation/boot-rate.html",
@@ -2187,10 +2240,40 @@
                     "shiro": "KZL"
                   },
                   {
+                    "title": "完好率",
+                    "url": "./beneft/usage-situation/pipe_tag.html",
+                    "id": "51003",
+                    "shiro": "KZL"
+                  },
+                  {
                     "title": "工作日平均闲置时间",
                     "url": "./beneft/usage-situation/average-time.html",
-                    "id": "51003",
+                    "id": "51004",
                     "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "功能利用率",
+                    "url": "./beneft/usage-situation/q1.html",
+                    "id": "51005",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "功能完好率",
+                    "url": "./beneft/usage-situation/q2.html",
+                    "id": "51006",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "预测符合率",
+                    "url": "./beneft/usage-situation/q3.html",
+                    "id": "51007",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "",
+                    "url": "./beneft/usage-situation/paiming.html",
+                    "id": "",
+                    "shiro": ""
                   }
                 ]
               },
@@ -3192,6 +3275,13 @@
                 "url": "./admin/discipline-management/csz-query.html",
                 "icon": "file-import",
                 "id": "6133",
+                "shiro": "CSZJCX"
+              },
+              {
+                "title": "厂商资质查询",
+                "url": "./admin/discipline-management/cs-query_z.html",
+                "icon": "search",
+                "id": "6134",
                 "shiro": "CSZJCX"
               }
             ]
