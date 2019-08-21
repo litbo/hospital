@@ -39,7 +39,11 @@
 <script type="text/html" id="toolBar">
 
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -74,6 +78,7 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
                     </div>
+                    <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king" >排名变化</a>
                 </form>
             </div>
         </div>
@@ -99,7 +104,8 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {field: 'equip_number', title: '设备编号', width: "25%", minWidth: 150}
+                    {type: "checkbox"}
+                    ,{field: 'equip_number', title: '设备编号', width: "25%", minWidth: 150}
                     , {field: 'equip_name', title: '设备简称', width: "25%", minWidth: 150}
                     , {field: 'work-time', title: '工作时长', minWidth: 150, sort: true}
                     , {field: 'authorized-hour', title: '核定工时', minWidth: 150, sort: true}
@@ -135,27 +141,53 @@
                     ]
                 , done: function (obj) {
                     tableFunc({
-                        "obj": obj,
-                        "toolFunc": {
+                        "toolFunc":[{
+                            type: 2,
                             tool: "toolbar",
-                            title: "数据查找",
-                            event: "dataSearch",
-                            content: $("#hideXs")
-                        }
+                            event: "add",
+                            content: "./child/pipe_tagadd.html"
+                        },{
+                            type: 2,
+                            tool: "toolbar",
+                            title: "排名",
+                            area: ['100%','70%'],
+                            event: "king",
+                            content: "./child/paiming.html"
+                        },
+                            {
+                                type: 2,
+                                tool: "toolbar",
+                                event: "edit",
+                                content: "./child/pipe_tagedit.html",
+                                // dataUrl:["pjzdId"]
+                            }
+                            ,{
+                                send:{
+                                    id:"table",
+                                    filter:"table1",
+                                    name:"ids",
+                                    event:"del",
+                                    url:"/security/pjzd/deleteFwPjzdByIds",
+                                    type:"POST",
+                                    contentType:"application/json",
+                                    par:"pjzdId",
+                                    reload:true
+                                },
+                                tool:"toolbar",
+                                event:"del"
+                            }
+                        ]
                     })
                 }
             },
-            reSet:{
-                url:"/baoxiu/bxlcTable",
-                type:"search",
-                data:["","equip_name"]    //搜索框的name
+            reSet: {
+                url: "/security/pjzd/listFwPjzd",
+                type: "reload",
+                data: ["pjfl", "pjSzm"],     //搜索框的name
+                where: {}
             }
         }
     }
-
-
-
-
 </script>
 
 
