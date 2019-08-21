@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+
+<div class="layui-row" style="margin: 10px">
+    <div class="col-xs-12">
+                    <form class="layui-form layui-form-pane" action="" >
+                        <div class="layui-row ">
+                            <div class="col-xs-12">
+                                <div class="col-xs-6" style="padding: 10px;">
+
+                                    <div class="layui-form-item" style="margin-bottom:37px ">
+                                        <label class="layui-form-label">计划名称</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="inspPlName"  autocomplete="off"  class="layui-input inspPlName" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item"  style="margin-bottom:37px ">
+                                        <label class="layui-form-label">制定时间</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="inspPlCreateTime"   autocomplete="off" class="layui-input inspPlCreateTime" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item" style="margin-bottom:37px ">
+                                        <label class="layui-form-label" >制定人</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="inspPlPlanner" autocomplete="off" disabled class="layui-input inspPlPlanner"  disabled>
+                                          <!--  <input type="hidden" id="inspPlPlanner">-->
+
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item" style="margin-bottom:20px ">
+                                        <label class="layui-form-label">状态</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="interest" autocomplete="off" disabled class="layui-input interest" disabled>
+                                            <!-- <select name="interest" lay-filter="aihao">
+                                                 <option value="">选择状态</option>
+                                                 <option value="0">停用</option>
+                                                 <option value="1">启用</option>
+                                             </select>-->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-6" style="padding: 10px;">
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">备注</label>
+                                        <div class="layui-input-block">
+                                            <textarea placeholder="" name="inspPlNote"  style="resize:none"  class="layui-textarea inspPlNote" disabled></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label" >审核人</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="inspPlAuditor" autocomplete="off" disabled class="layui-input inspPlAuditor">
+                                            <input type="hidden" id="inspPlAuditor">
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" id="but" lay-filter="demo1">变更记录</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                             </div>
+                         </div>
+                        <div class="layui-row ">
+                            <div class="col-xs-12" >
+                                <table id="table" lay-filter="table"></table>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+</div>
+<script type="text/html" id="lbTpl">
+    {{#  if(d.inspPlExecutorType === "0"){ }}
+    {{ "维修工程师" }}
+    {{#  } else if(d.inspPlExecutorType === "1") { }}
+    {{ "厂家工程师" }}
+    {{#  } else if(d.inspPlExecutorType === "2") { }}
+    {{ "维修、厂家工程师" }}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="lxTpl">
+    {{#  if(d.inspPlType === "0"){ }}
+    {{ "其它巡检" }}
+    {{#  } else if(d.inspPlType === "1") { }}
+    {{ "周期巡检" }}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="dwTpl">
+    {{#  if(d.inspPlPeriodicUnit === "0"){ }}
+    {{ "周" }}
+    {{#  } else if(d.inspPlPeriodicUnit === "1") { }}
+    {{ "月" }}
+    {{#  } }}
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="datile">查看</a>
+</script>
+<script>
+    layui.use(['form','table', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,table = layui.table
+            ,laydate = layui.laydate;
+        form.render();
+
+        renderMod = {
+            table: {
+                table: [
+                    {
+                        elem: "#table",
+                        id: "table",
+                        cols: [[ //表头
+                            {type:'numbers'}
+                            ,{field: 'inspPlExecutorType', title: '执行人类别', minWidth: 150, templet: '#lbTpl'}
+                            , {field: 'inspPlLastTime', title: '巡检开始日期', minWidth: 150}
+                            , {field: 'inspPlPeriod', title: '巡检周期', minWidth: 150}
+                            , {field: 'inspPlPeriodicUnit', title: '周期单位', minWidth: 150, templet: '#dwTpl'}
+                            , {field: 'inspPlType', title: '巡检类型', minWidth: 150, templet: '#lxTpl'}
+                            ,{fixed: 'right', title:'巡检设备', toolbar: '#barDemo', width:150}
+                        ]]
+                        , toolbar: false
+                        , page: true//开启分页
+                        , height: "200"
+                        , data: []
+                        , text: {
+                            none: "暂无数据！"
+                        }
+                        , done: function (res, curr, count) {
+                        }
+                    }
+                ]
+            }
+        };
+
+
+        $("#but").off("click").on("click",function(){
+            layer.open({
+                type: 2 //此处以iframe举例
+                ,title: '变更记录'
+                ,area: ['1100px', '400px']
+                ,content:"./index1-datile-change-record.html"
+                ,success : function () {
+                }
+            });
+            return false;
+        })
+
+
+    });
+</script>
+<!--<script>
+    /*  查看*/
+    function detailUser(detail) {
+        console.log(detail.speqId);
+        var id= detail.speqId;
+        var bh = detail.speqBh;
+        var html =" ./index1-datil-shebei.html";
+        var url =  html + "?id="+id + "&bh=" + bh;
+        layui.layer.open({
+            title: "设备信息",
+            type: 2,
+            content:url ,//弹出层页面
+            area: ['1100px', '510px']
+        });
+    }
+</script>-->
+
+
+
+</body>
+</html>
