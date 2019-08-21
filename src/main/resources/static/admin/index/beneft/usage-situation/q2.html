@@ -24,7 +24,11 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
     <div class="moreBtn hidden-xs">
         <div class="layui-inline">
@@ -37,10 +41,6 @@
         </div>
         <button class="layui-btn" data-type="search">搜索</button>
     </div>
-</script>
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">删除</a>
 </script>
 
 
@@ -62,12 +62,12 @@
         addTable: {
             table: {
                 cols: [[
-                    {checkbox: true, fixed: true}
+                    {type: "checkbox"}
                     , {field: 'sbcsCsdm', title: '设备编号', width: "15%", minWidth: 200}
                     , {field: 'sbcsName', title: '设备名称', minWidth: 150, sort: true}
                     , {field: 'sbCslbName', title: '既有功能数', minWidth: 150}
                     , {field: 'gbName', title: '功能完好数', minWidth: 150}
-                    , {fixed: 'right', title: '操作', align: 'center', minWidth: 80, toolbar: '#bar'}
+
                 ]]
                 , url: "/supervise/csgl/listEqcsVOByX"
                 , request: {
@@ -83,38 +83,51 @@
                     }
                 }
                 , done: function (obj) {
-                    action.toolFunc({
-                        type: 2,
-                        title: "修改",
-                        event: "edit",
-                        content: "./q2add.html",
-                        dataUrl: ["sbcsId"]
-                    });
                     tableFunc({
-                        "obj": obj,
-                        "toolFunc": [
+                        "toolFunc":[{
+                            type: 2,
+                            tool: "toolbar",
+                            event: "add",
+                            content: "./child/pipe_tagadd.html"
+                        },{
+                            type: 2,
+                            tool: "toolbar",
+                            title: "排名",
+                            area: ['100%','70%'],
+                            event: "king",
+                            content: "./child/paiming.html"
+                        },
                             {
-                                send: {
-                                    id: "table",
-                                    filter: "table1",
-                                    name: "sbcsIds",
-                                    event: "del",
-                                    url: "/supervise/csgl/deleteEqCs",
-                                    type: "POST",
-                                    par: "sbcsId",
-                                    reload: true
-                                },
+                                type: 2,
                                 tool: "toolbar",
-                                event: "del"
+                                event: "edit",
+                                content: "./child/pipe_tagedit.html",
+                                // dataUrl:["pjzdId"]
+                            }
+                            ,{
+                                send:{
+                                    id:"table",
+                                    filter:"table1",
+                                    name:"ids",
+                                    event:"del",
+                                    url:"/security/pjzd/deleteFwPjzdByIds",
+                                    type:"POST",
+                                    contentType:"application/json",
+                                    par:"pjzdId",
+                                    reload:true
+                                },
+                                tool:"toolbar",
+                                event:"del"
                             }
                         ]
                     })
                 }
             },
             reSet: {
-                url: "/supervise/csgl/listEqcsVOByX",
-                type: "search",
-                data: ["eqCslb", "sbcsName"]
+                url: "/security/pjzd/listFwPjzd",
+                type: "reload",
+                data: ["pjfl", "pjSzm"],     //搜索框的name
+                where: {}
             }
         }
     }
