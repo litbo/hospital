@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设备添加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<script type="text/html" id="toolBar">
+    <div class="demoTable" style="height: 50px;">
+
+        <div class="layui-btn-container layui-inline " demoTable style="width: 50px;margin-left: 5px;float: left;">
+            <button class="layui-btn Bm" id="Bm" lay-event="getCheckData">确定</button>
+        </div>
+
+
+        <form class="layui-form layui-inline"  action="" style="float: right;margin-right: -140px;" >
+            <div class="layui-form-item layui-inline" >
+                <div class="layui-inline" style="height: 40px;">
+                    <div class="layui-inline" style="float:left;margin-left: 5px;margin-right: 0;">
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="eqSbbh" placeholder="设备编号"  autocomplete="off"  >
+                        </div>
+                    </div>
+
+                    <div class="layui-inline" style="float:left;margin-right: 0;">
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="eqName" placeholder="设备名称"  autocomplete="off"  >
+                        </div>
+                    </div>
+
+                    <div class="layui-inline" style="float:left;margin-right: 0;">
+                        <div class="layui-input-inline">
+                            <input class="layui-input" name="eqXh" placeholder="设备型号"  autocomplete="off"  >
+                        </div>
+                    </div>
+
+                    <div  id="moreBar" style="float:  left">
+                        <label>
+                            <!--  <input type="hidden" lay-filter="bmName" value="">-->
+                            <select name="bmName" lay-filter="bmName" >
+                                <option value="">全部部门</option>
+                            </select>
+                        </label>
+                    </div>
+                    <button type="button" class="layui-inline  layui-btn"   data-type="search"   style="float: right">查找</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</script>
+
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table  id="test" lay-filter="test"></table>
+    </div>
+</div>
+
+
+<script>
+    layui.use(['table', 'jquery'], function() {
+        var table = layui.table;
+        var $ = layui.$;
+
+        var forMod = {};
+
+        renderMod = {
+            form: {
+                val: {
+                    filter: "forms",
+                    select: [
+                        {
+                            filter: "bmName",
+                            ids: "bmName",
+                            text: "bmName",
+                            url: "/supervise/bmgl/listBm"
+                        }
+                    ]
+                }
+            },
+            addTable: {
+                table: {
+                    elem: '#test'
+                    , url: '/inspection/otherfunction/selectAllNotSelectionEq'
+                    , toolbar: '#toolBar'
+                    ,defaultToolbar:true
+                    , cols: [[
+                        {type: 'checkbox'}
+                        , {field: 'bmName', title: '使用部门', minWidth: 200}
+                        , {field: 'eqSbbh', title: '设备编号', minWidth: 200}
+                        , {field: 'eqName', title: '设备名称', minWidth: 200}
+                        , {field: 'eqXh', width: 200, title: '设备型号'}
+
+                    ]]
+                    , page: true
+                    , height: 400
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "count": res.data.total,//页面的所有数据数
+                            "data": res.data.list //解析数据列表
+                        }
+                    }
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                },
+                reSet: {
+                    url: "/inspection/otherfunction/selectAllNotSelectionEqByEqVo",
+                    type: "search",
+                    data: ["eqSbbh","eqName","eqXh","bmName"],
+                    method: "POST"
+                }
+            },
+
+        };
+
+        //确定键
+      table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    if (data.length === 0) {
+                        layer.alert("尚未选择");
+                        return;
+                    }
+                     var da = [];
+                    var eqSbbhs = [];
+                    for(var i = 0; i <= data.length - 1; i++){
+                    if(data[i].eqSbbh !== null){
+                        eqSbbhs.push(data[i].eqSbbh);
+                        var  new1 = {};
+                        new1.bmName = data[i].bmName;
+                        new1.eqSbbh = data[i].eqSbbh;
+                        new1.eqName = data[i].eqName;
+                        new1.eqName = data[i].eqXh;
+                        new1.zt = "未设置巡检标准";
+                        da.push(new1);
+                    }
+                }
+
+                    var nameData = JSON.stringify(da);
+                  /*  console.log(nameData);*/
+                    window.localStorage.setItem('forMod',nameData);
+
+                    $.ajax({
+                        url: '/inspection/otherfunction/updateEqSbbh',
+                        type: "POST",
+                        async: false,/*同步传输*/
+                        data: JSON.stringify(eqSbbhs),
+                        dataType: 'JSON',
+                        contentType: 'application/json'
+                    });
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    break;
+            }
+        });
+    });
+</script>
+</body>
+</html>

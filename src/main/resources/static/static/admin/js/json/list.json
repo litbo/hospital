@@ -1878,52 +1878,40 @@
             "shiro": "AQZHCX",
             "children": [
               {
-                "title": "巡检计划",
-                "url": "./table.html",
+                "title": "巡检标准",
+                "url": "./safe/inspect-management/index0.html",
                 "icon": "scroll",
                 "id": "4420",
-                "shiro": "AQZHCX",
-                "children": [
-                  {
-                    "title": "计划制定",
-                    "url": "./table.html",
-                    "id": "44200",
-                    "shiro": "AQZHCX"
-                  },
-                  {
-                    "title": "计划修改",
-                    "url": "./table.html",
-                    "id": "44201",
-                    "shiro": "AQZHCX"
-                  },
-                  {
-                    "title": "计划查询",
-                    "url": "./table.html",
-                    "id": "44202",
-                    "shiro": "AQZHCX"
-                  }
-                ]
+                "shiro": "AQZHCX"
+
+              },
+              {
+                "title": "巡检计划",
+                "url": "./safe/inspect-management/index1.html",
+                "icon": "scroll",
+                "id": "4421",
+                "shiro": "AQZHCX"
+
+              },
+              {
+                "title": "巡检审批",
+                "url": "./safe/inspect-management/index2.html",
+                "icon": "newspaper",
+                "id": "4422",
+                "shiro": "AQZHCX"
               },
               {
                 "title": "巡检任务",
-                "url": "./table.html",
+                "url": "./safe/inspect-management/index3.html",
                 "icon": "newspaper",
-                "id": "4421",
-                "shiro": "AQZHCX",
-                "children": [
-                  {
-                    "title": "设备巡检",
-                    "url": "./table.html",
-                    "id": "44210",
-                    "shiro": "AQZHCX"
-                  }
-                ]
+                "id": "4423",
+                "shiro": "AQZHCX"
               },
               {
-                "title": "计划实施查询",
-                "url": "./table.html",
+                "title": "巡检结果",
+                "url": "./safe/inspect-management/index4.html",
                 "icon": "search",
-                "id": "4422",
+                "id": "4424",
                 "shiro": "AQZHCX"
               }
             ]
@@ -2268,13 +2256,8 @@
                     "url": "./beneft/usage-situation/q3.html",
                     "id": "51007",
                     "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "",
-                    "url": "./beneft/usage-situation/paiming.html",
-                    "id": "",
-                    "shiro": ""
                   }
+
                 ]
               },
               {
