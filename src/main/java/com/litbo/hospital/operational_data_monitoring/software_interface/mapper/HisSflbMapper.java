@@ -43,4 +43,35 @@ public interface HisSflbMapper {
             "</script>"
     })
     List<HisSflb> selectByTime(HISCycle cycle);
+
+
+    /**
+     * 根据时间
+     * 查询his收费明细
+     */
+    @Select({
+            "<script>",
+            "SELECT\n" +
+                    "c_SfID as hisSFID,\n" +
+                    "his_AssetNo as hisAssetNO,\n" +
+                    "c_PatID as hisPatID,\n" +
+                    "c_Sfsj as hisSfsj,\n" +
+                    "c_Brxm as hisBrXm,\n" +
+                    "c_Brxb as hisBrXb,\n" +
+                    "c_Brnl as hisBrNl,\n" +
+                    "  c_Brbz as hisBrBz,\n" +
+                    "c_Xmbm AS hisYXmBm,\n" +
+                    "c_Xmje as hisXmJe,\n" +
+                    "c_Xmsl as hisXmSl,\n" +
+                    "c_MDeptID as hisMDeptID,\n" +
+                    "MTime as hisMTime,\n" +
+                    "c_State as hisstatus",
+            "FROM\n" +
+                    "app_fd_hissflb LIMIT #{begin},#{end}\n" +
+//                    "WHERE\n" +
+//                    "c_Sfsj  &gt;= #{beginTime} \n" +
+//                    "AND c_Sfsj &lt;= #{endTime}",
+                    "</script>"
+    })
+    List<HisSflb> selectByTime2(HISCycle cycle);
 }

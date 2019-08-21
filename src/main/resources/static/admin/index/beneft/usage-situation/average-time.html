@@ -39,16 +39,8 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10 setW">
-                        <select>
-                            <option disabled>日期类型</option>
-                            <option>日</option>
-                            <option selected>月</option>
-                            <option>年</option>
-                        </select>
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date" id="date" class="layui-input" >
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="modules" lay-verify="required" lay-search="">
@@ -60,6 +52,16 @@
                             <option value="5">心外ICU</option>
                         </select>
                     </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="modules" lay-verify="required" lay-search="">
+                            <option value="">设备名称</option>
+                            <option value="1">脉搏碳氧血氧测量仪</option>
+                            <option value="2">光疗设备</option>
+                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
+                            <option value="4">设备柜</option>
+                            <option value="5">监护仪(母婴监护系统主机)</option>
+                        </select>
+                    </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
                     </div>
@@ -67,11 +69,21 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#test6'
+                , range: true
+            });
+        });
 </script>
 
 
 <script>
-    renderMod.addTable ={
+    renderMod = {
+    addTable:{
         table:{
             cols: [[ //表头
                 {field: 'equip_number', title: '设备编号',width:"25%",minWidth: 150}
@@ -121,7 +133,8 @@
         },
         date :{
             elem : "#date"
-        }
+        },
+        },
     }
 </script>
 </body>

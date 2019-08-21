@@ -35,6 +35,17 @@ public interface EqDao {
             "</where>",
             "</script>"})
     List<EqInfoVO> selectAllBy(SearchEqVO searchVO);
+    /**根据条件查询*/
+    @Select({"<script>",
+            "SELECT b.bm_name,a.eq_id,a.eq_sbbh,a.eq_zcbh,a.eq_name,a.eq_pp,a.eq_xh,a.eq_gg,a.eq_qysj \n" +
+                    "                    FROM eq_info a LEFT JOIN s_bm b  \n" +
+                    "                    on a.eq_bmid = b.bm_id WHERE \n" +
+                    "(select count(*) FROM DeviceParameter c WHERE a.eq_sbbh = c.DeviceCode)=0",
+            "<if test='eqZcbh != null'>","and a.eq_zcbh = #{eqZcbh}","</if>",
+            "<if test='bmId != null'>","and a.eq_bmid = #{bmId}","</if>",
+            "<if test='eqPym != null'>","and a.eq_pym = #{eqPym}","</if>",
+            "</script>"})
+    List<EqInfoVO> selectAllBy2(SearchEqVO searchVO);
     @Select("select top 1 eq_id FROM eq_info  ORDER BY eq_id desc")
     String getLastId();
     @Select("SELECT COUNT(*) FROM eq_info")

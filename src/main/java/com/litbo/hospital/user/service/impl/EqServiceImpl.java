@@ -193,6 +193,13 @@ public class EqServiceImpl implements EqService {
 //        System.out.println(eqInfoVOS.size());
         return new PageInfo(eqInfoVOS);
     }
+
+    @Override
+    public PageInfo selectAllBy2(Integer pageNum, Integer pageSize, SearchEqVO searchVO) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqInfoVO> eqInfoVOS = eqDao.selectAllBy2(searchVO);
+        return new PageInfo(eqInfoVOS);
+    }
     @Override
     @Transactional
     public Integer importEq(MultipartFile file)  {

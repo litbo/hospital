@@ -1,47 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>数据收集</title>
-    <link rel="stylesheet" href="../layui/css/layui.css">
-    <link rel="stylesheet" href="../iconfont/iconfont.css">
-    <link rel="stylesheet" href="../css/dataIndex.css">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../iconfont/iconfont.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>数据收集</title>
+	<link rel="stylesheet" href="../layui/css/layui.css">
+	<link rel="stylesheet" href="../iconfont/iconfont.css">
+	<link rel="stylesheet" href="../css/dataIndex.css">
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../iconfont/iconfont.js"></script>
 	<script src="../../../../static/admin/js/basic.js"></script>
 </head>
 <body>
 
-	<!-- 表格 -->
-	<table class="layui-hide" id="table" lay-filter="table1"></table>
+<!-- 表格 -->
+<table class="layui-hide" id="table" lay-filter="table1"></table>
 
-	<!--批量删除和添加-->
-	<script type="text/html" id="zq_toolbar">
-		<div class="layui-btn-container">
-			<a class="layui-btn layui-btn-sm" href="add2.html" style="background-color: #003366;"><i class="layui-icon"></i>新增</a>
-			<button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="delAll"  style="background-color: #cc0033;"><i class="layui-icon"></i>批量删除</button>
+<!--批量删除和添加-->
+<script type="text/html" id="zq_toolbar">
+	<div class="layui-btn-container">
+		<a class="layui-btn layui-btn-sm" href="add2.html" style="float: left;background-color: #003366;"><i class="layui-icon">
+		</i>新增</a>
+		<button class="layui-btn layui-btn-danger layui-btn-sm"
+				lay-event="delAll"
+				style="float: left;background-color: #cc0033;"><i class="layui-icon"></i>批量删除</button>
+	</div>
+</script>
+
+<script type="text/html" id="toolBar">
+	<!-- 搜索区域 -->
+	<a class="layui-btn layui-btn-xs" href="add2.html"
+	   style="background-color: #003366;margin-bottom: 5px;"><i class="layui-icon "></i></a>
+	<button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;margin-bottom: 5px;"><i class="layui-icon">
+	</i></button>
+	<form action="" layui-filter="forms" >
+		<div class="layui-input-inline" style="width: 130px;">
+			<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
 		</div>
-	</script>
-
-	<script type="text/html" id="toolBar">
-		<!-- 搜索区域 -->
-		<div class="index_search index_search3" style="margin-top: -10px;">
-			<form class="layui-form" action="">
-				<div class="layui-input-inline" style="width: 100px;">
-					<input type="text" name="id" autocomplete="off" placeholder="设备拼音码" class="layui-input">
-				</div>
-				<div class="layui-input-inline" style="width: 80px;">
-					<button class="layui-btn" data-type="reload">查找</button>
-				</div>
-			</form>
+		<div class="layui-input-inline" style="width: 150px;">
+			<select name="bmId" lay-filter="bmId">
+				<option value="">全部部门</option>
+			</select>
 		</div>
-	</script>
+		<div class="layui-input-inline" style="width: 100px;">
+			<input type="text" name="eqPym" autocomplete="off" placeholder="设备拼音码" class="layui-input">
+		</div>
+		<div class="layui-input-inline" style="width: 80px;">
+			<button class="layui-btn" data-type="reload">查找</button>
+		</div>
+	</form>
+</script>
 
-	<!--table编辑删除-->
-	<script type="text/html" id="barDemo">
-	<a class="layui-btn layui-btn-xs" href="edit2.html" style="background-color: #ffb800;">编辑</a>
+<!--table编辑删除-->
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs edit" href="" style="background-color:
+	#ffb800;"  lay-event="link">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"  style="background-color: #cc0033;">删除</a>
+</script>
+
+<script type="text/html" id="w1">
+	{{#if (d.w1 == 1) { }}
+	<span>值班</span>
+	{{# }else if(d.w1 == 2){ }}
+	<span>不值班</span>
+	{{# } }}
+</script>
+<script type="text/html" id="w2">
+	{{#if (d.w2 == 1) { }}
+	<span>值班</span>
+	{{# }else if(d.w2 == 2){ }}
+	<span>不值班</span>
+	{{# } }}
+</script>
+<script type="text/html" id="w3">
+	{{#if (d.w3 == 1) { }}
+	<span>值班</span>
+	{{# }else if(d.w3 == 2){ }}
+	<span>不值班</span>
+	{{# } }}
+</script>
+<script type="text/html" id="w4">
+	{{#if (d.w4 == 1) { }}
+	<span>值班</span>
+	{{# }else if(d.w4 == 2){ }}
+	<span>不值班</span>
+	{{# } }}
+</script>
+<script type="text/html" id="w5">
+	{{#if (d.w5 == 1) { }}
+	<span>值班</span>
+	{{# }else if(d.w5 == 2){ }}
+	<span>不值班</span>
+	{{# } }}
+</script>
+<script type="text/html" id="w6">
+	{{#if (d.w6 == 1) { }}
+	<span>值班</span>
+	{{# }else if(d.w6 == 2){ }}
+	<span>不值班</span>
+	{{# } }}
+</script>
+<script type="text/html" id="w7">
+	{{#if (d.w7 == 1) { }}
+	<span>值班</span>
+	{{# }else if(d.w7 == 2){ }}
+	<span>不值班</span>
+	{{# } }}
 </script>
 
 <script src="../layui/layui.js"></script>
@@ -53,19 +117,19 @@
 			table: {
 				cols: [[ //表头
 					{type: 'checkbox', fixed: 'left'}
-					,{field:'id', title:'设备编号'}
-					,{field:'name', title:'设备简称'}
-					,{field:'model', title:'值班类型'}
-					,{field:'Monday', title:'周一'}
-					,{field:'Tuesday', title:'周二'}
-					,{field:'Wednesday', title:'周三'}
-					,{field:'Thursday', title:'周四'}
-					,{field:'Friday', title:'周五'}
-					,{field:'Saturday', title:'周六'}
-					,{field:'Sunday', title:'周日'}
+					,{field:'eqSbbh', title:'设备编号'}
+					,{field:'caname', title:'设备简称',width:120}
+					,{field:'cdtypeName', title:'值班类型',width:100}
+					,{field:'w1', title:'周一', width:80,toolbar:'#w1'}
+					,{field:'w2', title:'周二', width:80,toolbar:'#w2'}
+					,{field:'w3', title:'周三', width:80,toolbar:'#w3'}
+					,{field:'w4', title:'周四', width:80,toolbar:'#w4'}
+					,{field:'w5', title:'周五', width:80,toolbar:'#w5'}
+					,{field:'w6', title:'周六', width:80,toolbar:'#w6'}
+					,{field:'w7', title:'周日', width:80,toolbar:'#w7'}
 					,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:115}
 				]]
-				, url: "../json/main4.json"
+				, url: "/duty/show"
 				, method: "POST"
 				, request: {
 					pageName: 'pageNum',
@@ -83,14 +147,29 @@
 				,done: function(obj){
 					tableFunc({
 						"tools":[
+							{
+								tool:"toolbar",
+								event:"delAll",
+								send:{
+									id:"table",
+									filter:"table1",
+									name:"eqMacIds",
+									event:"delAll",
+									url:"/duty/deletes",
+									type:"POST",
+									contentType:"application/json",
+									par:"macId",
+									reload:true
+								},
+							},
 							{//一个基础的删除当前行数据按钮
 								event: "delete",
 								layOpen:false,
 								func:function(obj){
 									layer.confirm('确定删除这一行吗？', function(index){
 										subUp({
-											url:"../json/main3.json",
-											data:{"aId":obj.data.aid},
+											url:"/duty/delete",
+											data:{"eqMacId":obj.data.macId},
 											success:function(res){
 												if(res.code === 0){
 													obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -103,6 +182,19 @@
 										})
 									});
 								}
+							},
+							{
+								event: "link",
+								layOpen:false,
+								dataUrl:["id"],
+								func:function(obj){
+									var data = obj.data;
+									var id = data.id;
+									var html ="./edit2.html";
+									var url = html + "?id="+ id;
+									$(".edit").attr('href',url);
+									// console.log(url);
+								}
 							}
 						]
 					})
@@ -110,10 +202,10 @@
 			},
 
 			reSet: {
-				url: "../json/main4.json",
+				url: "/duty/show",
 				type: "reload",
 				tid: "table",
-				data: ["id"],
+				data: ["eqSbbh","bmId","eqPym"],
 				method: "POST"
 			}
 		}
@@ -121,130 +213,23 @@
 	renderMod.form = {
 		date:{
 			elem:"#date1",
-			value:today,
-			type:"datetime",
+			value:today0,
+			type:"date",
 			format:'yyyy-MM-dd',
 			isInitValue:false
+		},
+		val: {
+			filter: "forms",
+			select: [
+				{
+					filter: "bmId",
+					ids: "bmId",
+					text: "bmName",
+					url: "/supervise/bmgl/listBm"
+				}
+			]
 		}
 	}
-
-	//JavaScript代码区域
-	// layui.use('element', function(){
-	// 	var element = layui.element;
-	// });
-	//
-	// // 表单
-	// layui.use(['form', 'layedit', 'laydate'], function(){
-	// 	var form = layui.form
-	// 			,layer = layui.layer
-	// 			,layedit = layui.layedit
-	// 			,laydate = layui.laydate;
-	//
-	// 	//日期
-	// 	laydate.render({
-	// 		elem: '#indexDateSelect'
-	// 		,type: 'datetime'
-	// 		,value: new Date()
-	// 	});
-	// });
-	//
-	// // 表格
-	// layui.use('table', function(){
-	// 	var table = layui.table;
-	//
-	// 	table.render({
-	// 		elem: '#table1'
-	// 		,url:'../json/main4.json'
-	// 		,height: 'full-40'
-	// 		,totalRow: true //开启合计行
-	// 		,toolbar: '#zq_toolbar'
-	// 		,cellMinWidth: 50
-	// 		,title: '单机设备运行记录'
-	// 		,cols: [[
-	// 			{type: 'checkbox', fixed: 'left'}
-	// 			,{field:'id', title:'设备编号'}
-	// 			,{field:'name', title:'设备简称'}
-	// 			,{field:'model', title:'值班类型'}
-	// 			,{field:'Monday', title:'周一'}
-	// 			,{field:'Tuesday', title:'周二'}
-	// 			,{field:'Wednesday', title:'周三'}
-	// 			,{field:'Thursday', title:'周四'}
-	// 			,{field:'Friday', title:'周五'}
-	// 			,{field:'Saturday', title:'周六'}
-	// 			,{field:'Sunday', title:'周日'}
-	// 			,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:115}
-	// 		]]
-	// 		,page: true
-	// 	});
-	//
-	// 	//监听头工具栏事件
-	// 	table.on('toolbar(zq_table)', function(obj){
-	// 		var checkStatus = table.checkStatus(obj.config.id)
-	// 				,data = checkStatus.data; //获取选中的数据
-	// 		//json字符串转换成Json数据 eval("("+jsonStr+")")  /JSON.parse(jsonStr)
-	// 		data = eval("("+JSON.stringify(data)+")");
-	// 		console.log(data);
-	// 		switch(obj.event){
-	// 			case 'delAll':
-	// 				if(data.length === 0){
-	// 					layer.msg('请至少选择1行', { icon: 2, time: 1500 });
-	// 				}else {
-	// 					layer.alert('您确认要删除'+data.length+'条数据吗？', {
-	// 						skin: 'layui-layer-molv' //样式类名layui-layer-lan或layui-layer-molv  自定义样式
-	// 						,closeBtn: 1    // 是否显示关闭按钮
-	// 						,anim: 1 //动画类型
-	// 						,btn: ['确定','取消'] //按钮
-	// 						,icon: 2    // icon
-	// 						,yes:function(){
-	// 							// layer.msg('确定', { icon: 1, time: 1500 });
-	// 							for (var i=0;i<data.length;i++){
-	//
-	// 								console.log(data[i]);
-	// 								// data[i].remove();
-	//
-	// 							}
-	// 							/*   //捉到所有被选中的，发异步进行删除
-    //                                layer.msg('删除成功', {icon: 1});
-    //                                $(".layui-form-checked").not('.header').parents('tr').remove();*/
-	// 						}
-	// 						,btn2:function(){
-	// 							layer.msg('好的,暂时不给您删除。',{ icon: 1, time: 1500 });
-	// 						}
-	// 					});
-	// 				}
-	// 				break;
-	// 			case 'add':
-	// 				zq_form('添加菜单','url这个值不管','','');
-	// 				//数据回显
-	// 				// $("#zq_form").setForm({id:data.id,name: data.name, url: data.url,icon:data.icon,parent:data.parent,children:data.children});
-	// 				$("#zq_form").setForm({id:''});
-	// 				break;
-	// 		}
-	// 	});
-	//
-	// 	//监听行工具事件
-	// 	table.on('tool(zq_table)', function(obj){
-	// 		var data = obj.data;
-	// 		//console.log(obj)
-	// 		if(obj.event === 'del'){
-	// 			layer.confirm('确认删除', function(index){
-	// 				obj.del();
-	// 				layer.close(index);
-	// 			});
-	// 		} else if(obj.event === 'edit'){
-	// 			layer.prompt({
-	// 				formType: 2
-	// 				,value: data.email
-	// 			}, function(value, index){
-	// 				obj.update({
-	// 					email: value
-	// 				});
-	// 				layer.close(index);
-	// 			});
-	// 		}
-	// 	});
-	// });
-
 </script>
 </body>
 </html>

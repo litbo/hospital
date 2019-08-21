@@ -69,17 +69,24 @@ public class ScheduledTask {
     private HisUserDictMapper mapper;
 
 
+    @Autowired
+    private ConfigMapper configMapper;
     /**
      * 设置定时任务
      */
     public void sayHello(){
+//        Date date = new Date();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        System.out.println(dateFormat.format(date));
         //导入his
         importHis();
-        //导入pacs
+//        Date date1 = new Date();
+//        System.out.println(dateFormat.format(date1));
+//        //导入pacs
         importPacs();
-        //导入手术收费明细
+//        //导入手术收费明细
         importSurgery();
-        //导入员工信息
+//        //导入员工信息
         importUser();
     }
 
@@ -103,21 +110,50 @@ public class ScheduledTask {
         cal.set(Calendar.DATE, cal.get(Calendar.DATE) - 1);
         String yesterday = dateFormat.format(cal.getTime());
         hisCycle.setBeginTime(yesterday);
+        /**
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(dateFormat.format(date));
+         */
+        /**
+        int begin = 0;
+        int end = 1000;
+        hisCycle.setBegin(begin);
+        hisCycle.setEnd(end);*/
         List<HisSflb> hisSflbList = hisMapper.selectByTime(hisCycle);
-        int batchCount =120;
-        int batchLastIndex = batchCount - 1;
-        for (int index = 0; index < hisSflbList.size() - 1;) {
-            if (batchLastIndex > hisSflbList.size() - 1) {
-                batchLastIndex = hisSflbList.size() - 1;
-                hisDAO.saves(hisSflbList.subList(index, batchLastIndex + 1));
-                break;// 数据插入完毕,退出循环
-            } else {
-                hisDAO.saves(hisSflbList.subList(index, batchLastIndex + 1));
-                // 设置下一批下标
-                index = batchLastIndex + 1;
-                batchLastIndex = index + (batchCount - 1);
+        //int i = 1;
+      //  while (i == 1){
+            int batchCount =120;
+            int batchLastIndex = batchCount - 1;
+            for (int index = 0; index <= hisSflbList.size() - 1;) {
+                if (batchLastIndex > hisSflbList.size() - 1) {
+                    batchLastIndex = hisSflbList.size() - 1;
+                    hisDAO.saves(hisSflbList.subList(index, batchLastIndex + 1));
+                    // 数据插入完毕,退出循环
+                    break;
+                } else {
+                    hisDAO.saves(hisSflbList.subList(index, batchLastIndex + 1));
+                    // 设置下一批下标
+                    index = batchLastIndex + 1;
+                    batchLastIndex = index + (batchCount - 1);
+                }
             }
-        }
+//            if (hisSflbList.size() >= 1000){
+//                hisSflbList.clear();
+//                begin = begin + 1000;
+//                end = end + 1000;
+//                hisCycle.setBegin(begin);
+//                hisCycle.setEnd(end);
+//                hisSflbList = hisMapper.selectByTime2(hisCycle);
+//            }else {
+//                i = 0;
+//            }
+       // }
+
+        /**
+        Date date1 = new Date();
+        System.out.println(dateFormat.format(date1));
+         */
     }
 
     /**
@@ -143,7 +179,7 @@ public class ScheduledTask {
         List<PacsSflb> pacsSflbList = pacsSflbMapper.selectPacsByTime(hisCycle);
         int batchCount =70;
         int batchLastIndex = batchCount - 1;
-        for (int index = 0; index < pacsSflbList.size() - 1;) {
+        for (int index = 0; index <= pacsSflbList.size() - 1;) {
             if (batchLastIndex > pacsSflbList.size() - 1) {
                 batchLastIndex = pacsSflbList.size() - 1;
                 pacsSflbDAO.savePacsSflbs(pacsSflbList.subList(index, batchLastIndex + 1));
@@ -181,7 +217,7 @@ public class ScheduledTask {
         List<SssSflb> sssSflbList = sssSflbMapper.selectByTime(hisCycle);
         int batchCount =90;
         int batchLastIndex = batchCount - 1;
-        for (int index = 0; index < sssSflbList.size() - 1;) {
+        for (int index = 0; index <= sssSflbList.size() - 1;) {
             if (batchLastIndex > sssSflbList.size() - 1) {
                 batchLastIndex = sssSflbList.size() - 1;
                 sssSflbDAO.saves(sssSflbList.subList(index, batchLastIndex + 1));

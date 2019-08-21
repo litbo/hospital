@@ -12,49 +12,36 @@
 	<script src="../../../../static/admin/js/basic.js"></script>
 </head>
 <body>
-
 	<!-- 表格 -->
 	<table class="layui-hide" id="table" lay-filter="table1"></table>
 
-
-
-
 <script type="text/html" id="toolBar">
 	<!-- 搜索区域 -->
-	<div class="index_search" style="margin-top: -10px;">
-		<form class="layui-form" action="">
-			<div class="layui-input-inline" style="width: 70px;">
-				<select name="dateSel" lay-verify="required" lay-search="">
-					<option value="">搜索</option>
-					<optgroup label="日期">
-						<option value="day" selected>日</option>
-						<option value="month">月</option>
-						<option value="year">年</option>
-					</optgroup>
-				</select>
-			</div>
-			<div class="layui-input-inline" style="width: 100px;">
-				<input type="text" name="date1" id="indexDateSelect"
-					   autocomplete="off" class="layui-input" placeholder="日期选择">
-			</div>
-			<div class="layui-input-inline" style="width:120px;">
-				<select name="department" lay-search="">
-					<option value="">部门</option>
-					<option value="CT">CT室</option>
-					<option value="HeCi">核磁共振室</option>
-					<option value="ShePian">摄片室</option>
-					<option value="XinNei">心内导管室</option>
-					<option value="ICU">心外ICU</option>
-				</select>
-			</div>
-			<div class="layui-input-inline" style="width: 100px;">
-				<input type="text" name="name" autocomplete="off" placeholder="品名拼音码" class="layui-input">
-			</div>
-			<div class="layui-input-inline" style="width: 80px;">
-				<button class="layui-btn" data-type="reload">查找</button>
-			</div>
-		</form>
-	</div>
+	<form class="layui-form" action="">
+		<div class="layui-input-inline" style="width: 70px;">
+			<select name="type" id="juDate" lay-filter="juDate" >
+				<option value="1">日</option>
+				<option value="2">月</option>
+				<option value="3">年</option>
+			</select>
+		</div>
+		<div class="layui-input-inline" style="width: 180px;">
+			<input type="text" name="date1" id="date1"
+				   autocomplete="off" class="layui-input" placeholder="日期选择">
+		</div>
+		<!--部门-->
+		<div class="layui-input-inline" style="width: 150px;">
+			<select name="bmId"  lay-filter="bmId">
+				<option value="">全部部门</option>
+			</select>
+		</div>
+		<div class="layui-input-inline" style="width: 100px;">
+			<input type="text" name="pym" autocomplete="off" placeholder="品名拼音码" class="layui-input">
+		</div>
+		<div class="layui-input-inline" style="width: 80px;">
+			<button class="layui-btn" data-type="reload">查找</button>
+		</div>
+	</form>
 </script>
 
 <script src="../layui/layui.js"></script>
@@ -66,14 +53,14 @@
 			table: {
 				cols: [[ //表头
 					{type: 'checkbox', fixed: 'left'}
-					,{field:'department', title:'科室', fixed: 'left', unresize: true}
-					,{field:'id', title:'设备编号'}
-					,{field:'name', title:'设备名称'}
-					,{field:'model', title:'型号'}
-					,{field:'standbyTime', title:'待机时长'}
-					,{field:'workingHours', title:'工作时长'}
+					,{field:'bmName', title:'科室', fixed: 'left', unresize: true}
+					,{field:'eqSbbh', title:'设备编号'}
+					,{field:'eqName', title:'设备名称'}
+					,{field:'eqXh', title:'型号'}
+					,{field:'standbytime', title:'待机时长'}
+					,{field:'workhours', title:'工作时长'}
 				]]
-				, url: "../json/main1.json"
+				, url: "/operationRecord/show3"
 				, method: "POST"
 				, request: {
 					pageName: 'pageNum',
@@ -89,25 +76,115 @@
 					}
 				}
 			},
-
 			reSet: {
-				url: "../json/main1.json",
+				url: "/operationRecord/show3",
 				type: "reload",
 				tid: "table",
-				data: ["dateSel","date1", "department", "name"],
+				data: ["bmId","date1","type","pym"],
 				method: "POST"
 			}
 		}
 	};
+	// layui.use('laydate', function(){
+	// 	var laydate = layui.laydate;
+	// 	//执行一个laydate实例
+	// 	laydate.render({
+	// 		elem: '#date1', //指定元素,
+	// 		value:"1998-06-25~1998-06-26"
+	// 	});
+	// });
 	renderMod.form = {
 		date:{
 			elem:"#date1",
-			value:today,
-			type:"datetime",
+			range: true,
 			format:'yyyy-MM-dd',
-			isInitValue:false
+			isInitValue:false,
+			value:today,
+			// done: function (value, date, endDate) {
+			// 	var startDate = new Date(value).getTime();
+			// 	var endTime = new Date($('#qEndTime').val()).getTime();
+			// 	if (endTime < startDate) {
+			// 		layer.msg('结束时间不能小于开始时间');
+			// 		$('#qBeginTime').val($('#qEndTime').val());
+			// 	}
+			// }
+		},
+		val: {
+			filter: "forms",
+			select: [
+				{
+					filter: "bmId",
+					ids: "bmId",
+					text: "bmName",
+					url: "/supervise/bmgl/listBm"
+				}
+			]
 		}
-	}
+	};
+
+	layui.use(['form', 'layedit', 'laydate'], function(){
+
+		var form = layui.form
+				,layer = layui.layer
+				,layedit = layui.layedit
+				,laydate = layui.laydate;
+
+		// 弹出层
+		var $ = layui.jquery;
+
+		//时时监听layui下列框的改变
+		form.on('select(juDate)', function(data){
+			if(data.value == 1){
+				console.log(1);
+				ri();
+			}
+			else if (data.value == 2) {
+				console.log(2);
+				yue();
+			}
+			else if (data.value == 3) {
+				console.log(3);
+				nian();
+			}
+		});
+
+		function ri() {
+			renderMod.form = {
+				date:{
+					elem:"#date1",
+					value:today0,
+					type:"date",
+					format:'yyyy-MM-dd',
+					range: true
+				}
+			};
+		}
+
+		function yue() {
+			renderMod.form = {
+				date:{
+					elem:"#date1",
+					value:today0,
+					type: 'month',
+					format:'yyyy-MM-dd',
+					range: true
+				}
+			};
+		}
+
+		function nian() {
+			renderMod.form = {
+				date:{
+					elem:"#date1",
+					value:today0,
+					type: 'year',
+					format:'yyyy-MM-dd',
+					range: true
+				}
+			};
+		}
+	});
+
 </script>
 </body>
 </html>

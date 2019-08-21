@@ -2,11 +2,18 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipm
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqDutyVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqOvertimeVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.ApprovedWorkingHours;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqDutyTab;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.EqDutyTabDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqOvertimeTab;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.ApprovedWorkingHoursDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.EqDutyTabDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.EqOvertimeTabDAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.EqDutyTabService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,11 +33,11 @@ public class EqDutyTabServiceImpl implements EqDutyTabService {
 
     @Autowired
     private EqDutyTabDAO eqDutyTabDAO;
+    @Autowired
+    private EqOvertimeTabDAO overtimeTabDAO;
+    @Autowired
+    private ApprovedWorkingHoursDAO approvedWorkingHoursDAO;
 
-    /**
-     * 保存：新建值班记录
-     * @param eqDutyTab
-     */
     @Override
     public void save(EqDutyTab eqDutyTab) {
         eqDutyTabDAO.save(eqDutyTab);
@@ -59,9 +66,15 @@ public class EqDutyTabServiceImpl implements EqDutyTabService {
      * @return
      */
     @Override
-    public PageInfo selectAll(Integer pageNum, Integer pageSize) {
+    public PageInfo selectAll(Integer pageNum, Integer pageSize ,SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(eqDutyTabDAO.selectAll());
+//        return new PageInfo(eqDutyTabDAO.selectAll());
+        return new PageInfo(eqDutyTabDAO.selectAllBy(searchVO));
+    }
+
+    @Override
+    public EqDutyVO showOne(String id) {
+        return eqDutyTabDAO.selectById(id);
     }
 
     /**
@@ -87,13 +100,75 @@ public class EqDutyTabServiceImpl implements EqDutyTabService {
         return eqDutyTabDAO.selectById(id);
     }
 
-    /**
-     * 根据id修改
-     * @param eqDutyTab
-     */
     @Override
     public void update(EqDutyTab eqDutyTab) {
         eqDutyTabDAO.update(eqDutyTab);
+    }
+
+    /**
+     * 新建设备值班信息
+     * @param eqDutyVO
+     */
+    @Override
+    public void saveEqDuty(EqDutyVO eqDutyVO) {
+        /**
+         * 三个表的保存对象
+         */
+        EqDutyTab eqDutyTab = new EqDutyTab();
+        BeanUtils.copyProperties(eqDutyVO,eqDutyTab);
+        eqDutyTab.setEqMacId(eqDutyVO.getEqMacId());
+        eqDutyTab.setId(IDFormat.getIdByIDAndTime("eq_duty_tab","id"));
+        EqOvertimeTab eqOvertimeTab = new EqOvertimeTab();
+        BeanUtils.copyProperties(eqDutyVO,eqOvertimeTab);
+        eqOvertimeTab.setEqMacId(eqDutyVO.getEqMacId());
+        eqOvertimeTab.setId(IDFormat.getIdByIDAndTime("eq_overtime_tab","id"));
+        ApprovedWorkingHours approvedWorkingHours = new ApprovedWorkingHours();
+        BeanUtils.copyProperties(eqDutyVO,approvedWorkingHours);
+        approvedWorkingHours.setEqMacId(eqDutyVO.getEqMacId());
+        approvedWorkingHours.setId(IDFormat.getIdByIDAndTime("approved_working_hours","id"));
+        //更新设备值班信息
+        eqDutyTabDAO.save(eqDutyTab);
+        //更新设备加班信息
+        overtimeTabDAO.save(eqOvertimeTab);
+        //更新设备核定工时信息
+        approvedWorkingHoursDAO.save(approvedWorkingHours);
+    }
+
+    /**
+     * 更新
+     * @param eqDutyVO
+     */
+    @Override
+    public void updateEqDuty(EqDutyVO eqDutyVO) {
+        /**
+         * 三个表的保存对象
+         */
+        EqDutyTab eqDutyTab = new EqDutyTab();
+        BeanUtils.copyProperties(eqDutyVO,eqDutyTab);
+        EqOvertimeVO eqOvertimeVO = new EqOvertimeVO();
+        BeanUtils.copyProperties(eqDutyVO,eqOvertimeVO);
+        ApprovedWorkingHours approvedWorkingHours = new ApprovedWorkingHours();
+        BeanUtils.copyProperties(approvedWorkingHours,eqDutyTab);
+        //更新设备值班信息
+        eqDutyTabDAO.update2(eqDutyTab);
+        //更新设备加班信息
+        overtimeTabDAO.update2(eqOvertimeVO);
+        //更新设备核定工时信息
+        approvedWorkingHoursDAO.update2(approvedWorkingHours);
+    }
+
+    @Override
+    public void deleteByEqMacId(String eqMacId) {
+        eqDutyTabDAO.delete2(eqMacId);
+        overtimeTabDAO.delete(eqMacId);
+        approvedWorkingHoursDAO.delete(eqMacId);
+    }
+
+    @Override
+    public void deleteByEqMacIds(String[] eqMacIds) {
+        eqDutyTabDAO.deletes(eqMacIds);
+        overtimeTabDAO.deletes2(eqMacIds);
+        approvedWorkingHoursDAO.deletes(eqMacIds);
     }
 
 }

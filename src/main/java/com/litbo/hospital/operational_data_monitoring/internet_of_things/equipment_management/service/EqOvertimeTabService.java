@@ -30,5 +30,5 @@ public interface EqOvertimeTabService {
     /**根据id显示信息*/
     EqOvertimeVO getById(String id);
     /**根据id修改数据*/
-    void update(EqOvertimeVO eqOvertimeTab);
+    void update(EqOvertimeTab eqOvertimeTab);
 }

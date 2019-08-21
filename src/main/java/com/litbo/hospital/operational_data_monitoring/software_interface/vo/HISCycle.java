@@ -23,4 +23,6 @@ public class HISCycle {
 //    private String days;
 //    /**定时*/
 //    private String time;
+    int begin;
+    int end;
 }

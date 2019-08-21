@@ -5,14 +5,15 @@ var $mainList = $("#main_nav_list")//填充1级导航的DOM
     , $viceList = $(".cts_list")//填充2-3级导航的DOM
     , $mapSite = $('.map_site')//站点导航DOM
     , $navList = $(".menus_con")//填充4-5级导航的DOM
-    , n = $.getUrlParam('n')//获取URL地址中的 n 属性值，表示右侧副列表的列表项 t 下的第 n 个子列表
-    , t = $.getUrlParam('t')//获取URL地址中的 t 属性值，表示右侧主列表的列表项t下
+    , n = gn = $.getUrlParam('n')//获取URL地址中的 n 属性值，表示右侧副列表的列表项 t 下的第 n 个子列表
+    , t = gt = $.getUrlParam('t')//获取URL地址中的 t 属性值，表示右侧主列表的列表项t下
     , p = $.getUrlParam('p')//获取URL地址中的 p 属性值，表示当前页面的名称
     , nN = Number(n)//Number化n值
     , tN = Number(t)
     , shiro = layui.sessionData("rl").sr
     , mList = {} //具体页面导航数据
     , nList = {};//大页面导航数据
+var firstTerm = true;
 
 $(function () {
     layui.use("element",function(){
@@ -23,7 +24,6 @@ $(function () {
             success: function (res) {
                 nList = res;
                 addNav($navList);
-                //console.log("nav already!");
                 $.ajax({
                     url: "/static/admin/js/json/list.json",
                     async: false,
@@ -31,7 +31,6 @@ $(function () {
                         mList = res;
                         addList($mainList, $viceList, mList);
                         element.render();
-                        //console.log("导航渲染完毕!");
                     }
                 })
             }
@@ -46,21 +45,6 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
             for (var i = 0; i < thisA.length; i++) {
                 addPage(thisA[i]);
             }
-            //打开左侧主列表第一个
-            /*if (p !== "home") {//首页不打开新TAB
-                var d = a.children;
-                if (d && !d[0].children) {
-                    //changeTab(d, function () {
-                    console.log(1,$('.layui-nav-item').eq(0));
-                        $('.layui-nav-item').eq(0).addClass('layui-this');
-                    //})
-                } else {
-                    console.log(2,$('.layui-nav-child').children(':first'));
-                    //changeTab(d.children[0], function () {
-                        $('.layui-nav-child').children(':first').addClass('layui-this');
-                    //})
-                }
-            }*/
         } else {
             addPage(a);
         }
@@ -160,7 +144,7 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                 }else{
                     return false;
                 }
-                $ul = $("<ul>").attr("class", "min_tools");
+                var $ul = $("<ul>").attr("class", "min_tools"),clickUrl = "javascript:void(0);";
                 for (var j = 0; j < x.tools[i].children.length; j++) {
                     var xT_iC_j = x.tools[i].children[j], bres1 = true;
                     if (shiro !== undefined) {
@@ -179,6 +163,12 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                     }else{
                         return false;
                     }
+                    //页面初始化加载可展示的第一个导航
+                    if(firstTerm && !gt && !gn){
+                        addSample(xT_iC_j);
+                        firstTerm = false;
+                    }
+                    var pt,pn;
                     //判断URL值是否为URL地址或者IP地址
                     if (/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(xT_iC_j.url) || /((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)/.test(xT_iC_j.url)) {
                         sUrl = xT_iC_j.url;
@@ -186,9 +176,11 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                     } else {
                         sUrl = "?p=" + xT_iC_j.url;
                         sTarget = "_self";
+                        pt = Number(xT_iC_j.url.split("&")[1].split("=")[1]);//获取当前渲染的项中URL的t
+                        pn = Number(xT_iC_j.url.split("&")[2].split("=")[1]);//获取当前渲染的项中URL的n
                     }
 
-                    $ul.append($("<li>").attr(
+                    var $newLi = $("<li>").attr(
                         {
                             "shiro:hasPermission": xT_iC_j.shiro
                         }).append($("<a>").attr(
@@ -200,13 +192,19 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                             "data-text": xT_iC_j.title,
                             "target": sTarget
                         }).html(xT_iC_j.title)
-                    ))
+                    );
+                    if(pt === tN && pn === nN){
+                        $newLi.find("a").addClass("nav_this");
+                    }
+
+                    $ul.append($newLi);
                 }
+                //clickUrl = xt_i.url;
                 a.append($("<li>").attr(
                     {
                         "class": "layui-nav-item",
                         "shiro:hasPermission": xt_i.shiro
-                    }).append($("<a>").attr({"href": "javascript:void(0);"}).html(a.title)
+                    }).append($("<a>").attr({"href": clickUrl}).html(a.title)
                         .prepend($("<i>").attr("class", "fas fa-" + xt_i.icon))
                         .append($("<p>").attr("class", "tools_title").html(xt_i.title))
                     ).append($ul)
@@ -225,21 +223,21 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                     if (mXit.length === 0 && mXto.length !== 0) {
                         //无默认主列表但有副列表，则使用副列表第一个列表项对应的主列表项为默认导航列表
                         addTools(list1, mX);
-                        addSample(mXto[0].children[0]);
+                        //addSample(mXto[0].children[0]);
                     } else if (mXit.length !== 0 && mXto.length === 0) {
                         //有默认主列表并且无副列表，则不渲染副列表
                         addSample(mX);
                     } else if (mXit.length !== 0 && mXto.length !== 0) {
                         //有默认导航列表并且有工具列表，则渲染主列表并且添加副列表
                         addTools(list1, mX);
-                        addSample(mX);
+                        //addSample(mX);
                     }
                     addMaps($mapSite, x);
                 } else if (n === null || t === null) {// 当URL中只有 t 与 n 属性中的一个时删除URL中的 t 与 n
                     location.search = "?p=" + p;
                 } else if (nN < mXto[tN].children.length && tN < mXto.length) {//当URL中同时有 t 与 n 时则动态加载相应的数据
                     addTools(list1, mX);
-                    addSample(mXto[tN].children[nN]);
+                    firstTerm && addSample(mXto[tN].children[nN]);
                     addMaps($mapSite, x);
                 } else {//当出现未知可能性时则直接跳转默认页面，例如：当 n 与 t 与数据实际情况不符合时，删除 t 与 n
                     location.search = "?p=" + p;

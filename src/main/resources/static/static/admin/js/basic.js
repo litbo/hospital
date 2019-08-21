@@ -191,8 +191,8 @@ function getHash(input) {
  * @return
  **/
 function markPage(text, time) {
-    //判断只在非IE时加载遮罩功能,当URL中有参数c时不加载遮罩
-    if("\v"!=="v" && !$.getUrlParam("c")){
+    //判断只在非IE时加载遮罩功能
+    if("\v"!=="v"){
         //如果页面中不存在定位元素则创建定位元素
         var $beg = $("#begin");
         var timer = null;
@@ -215,6 +215,7 @@ function markPage(text, time) {
             }
         });
     }
+
 }
 
 /**
@@ -1128,12 +1129,11 @@ action = func = {
                     loc=false;
                     //上传已删除文件
                     subUp(value);
-                    //获取除去要删除的数据后的数据  !value.del ||
-                    if(value.del === true ){
+                    //获取除去要删除的数据后的数据
+                    if(!value.del || value.del === true ){
                         if (ck.isAll === true) {
                             oData = [];
                         } else {
-                            console.log(oData);
                             for (var j = 0; j < oData.length; j++) {
                                 //找出所有数据中的已选中数据并删除
                                 if (oData[j].LAY_CHECKED === true) {
@@ -1268,17 +1268,17 @@ document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/
 
 window.onload = function () {
     //填充页面URL，便于调试页面
-    $("body").prepend($("<p>").css({
-        "position": "absolute",
-        "right": "0",
-        "color": "#f10214",
-        "border": "1px solid",
-        "opacity": "0.4",
-        "padding": "5px",
-        "z-index": "99999"
-    }).html("当前页面地址：" + window.location.href).on("click", function () {
-        $(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/
-    }));
+    // $("body").prepend($("<p>").css({
+    //     "position": "absolute",
+    //     "right": "0",
+    //     "color": "#f10214",
+    //     "border": "1px solid",
+    //     "opacity": "0.4",
+    //     "padding": "5px",
+    //     "z-index": "99999"
+    // }).html("当前页面地址：" + window.location.href).on("click", function () {
+    //     $(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/
+    // }));
     //手机版 数据查找 按钮功能绑定
     var $dataSearch = $("a[lay-event='dataSearch']");
     if ($dataSearch.length > 0) {

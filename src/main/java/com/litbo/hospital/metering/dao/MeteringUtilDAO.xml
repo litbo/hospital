@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.MeteringUtilDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.MeteringUtil">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="metering_name" jdbcType="VARCHAR" property="meteringName" />
+    <result column="metering_num" jdbcType="VARCHAR" property="meteringNum" />
+    <result column="metering_inspection_cycle" jdbcType="VARCHAR" property="meteringInspectionCycle" />
+    <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
+    <result column="buy_time" jdbcType="VARCHAR" property="buyTime" />
+    <result column="user_xm" jdbcType="VARCHAR" property="userXm" />
+    <result column="update_message_time" jdbcType="VARCHAR" property="updateMessageTime" />
+    <result column="this_metering_time" jdbcType="VARCHAR" property="thisMeteringTime" />
+    <result column="util_type" jdbcType="VARCHAR" property="utilType" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="meteringStatus" jdbcType="VARCHAR" property="meteringstatus" />
+    <result column="metering_system_num" jdbcType="VARCHAR" property="meteringSystemNum" />
+    <result column="metering_get_number_time" jdbcType="VARCHAR" property="meteringGetNumberTime" />
+    <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
+    <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, metering_name, metering_num, metering_inspection_cycle, bm_name, buy_time, user_xm, 
+    update_message_time, this_metering_time, util_type, description, meteringStatus, 
+    metering_system_num, metering_get_number_time, record_person, record_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..metering_util
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringUtil">
+    insert into hospital..metering_util (metering_name, metering_num,
+      metering_inspection_cycle, bm_name, buy_time, 
+      user_xm, update_message_time, this_metering_time, 
+      util_type, description, meteringStatus, 
+      metering_system_num, metering_get_number_time, 
+      record_person, record_time)
+    values (#{meteringName,jdbcType=VARCHAR}, #{meteringNum,jdbcType=VARCHAR}, 
+      #{meteringInspectionCycle,jdbcType=VARCHAR}, #{bmname,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
+      #{userxm,jdbcType=VARCHAR}, #{updateMessageTime,jdbcType=VARCHAR}, #{thisMeteringTime,jdbcType=VARCHAR}, 
+      #{utilType,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{meteringstatus,jdbcType=VARCHAR}, 
+      #{meteringSystemNum,jdbcType=VARCHAR}, #{meteringGetNumberTime,jdbcType=VARCHAR}, 
+      #{recordPerson,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringUtil">
+    insert into hospital..metering_util
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meteringName != null">
+        metering_name,
+      </if>
+      <if test="meteringNum != null">
+        metering_num,
+      </if>
+      <if test="meteringInspectionCycle != null">
+        metering_inspection_cycle,
+      </if>
+      <if test="bmName != null">
+        bm_name,
+      </if>
+      <if test="buyTime != null">
+        buy_time,
+      </if>
+      <if test="userXm != null">
+        user_xm,
+      </if>
+      <if test="updateMessageTime != null">
+        update_message_time,
+      </if>
+      <if test="thisMeteringTime != null">
+        this_metering_time,
+      </if>
+      <if test="utilType != null">
+        util_type,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="meteringstatus != null">
+        meteringStatus,
+      </if>
+      <if test="meteringSystemNum != null">
+        metering_system_num,
+      </if>
+      <if test="meteringGetNumberTime != null">
+        metering_get_number_time,
+      </if>
+      <if test="recordPerson != null">
+        record_person,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meteringName != null">
+        #{meteringName,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringNum != null">
+        #{meteringNum,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringInspectionCycle != null">
+        #{meteringInspectionCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        #{bmName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userXm != null">
+        #{userXm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMessageTime != null">
+        #{updateMessageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="thisMeteringTime != null">
+        #{thisMeteringTime,jdbcType=VARCHAR},
+      </if>
+      <if test="utilType != null">
+        #{utilType,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringstatus != null">
+        #{meteringstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringSystemNum != null">
+        #{meteringSystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringGetNumberTime != null">
+        #{meteringGetNumberTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.metering.pojo.MeteringUtil">
+    update hospital..metering_util
+    <set>
+      <if test="meteringName != null">
+        metering_name = #{meteringName,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringNum != null">
+        metering_num = #{meteringNum,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringInspectionCycle != null">
+        metering_inspection_cycle = #{meteringInspectionCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        bm_name = #{bmName,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        buy_time = #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userXm != null">
+        user_xm = #{userXm,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMessageTime != null">
+        update_message_time = #{updateMessageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="thisMeteringTime != null">
+        this_metering_time = #{thisMeteringTime,jdbcType=VARCHAR},
+      </if>
+      <if test="utilType != null">
+        util_type = #{utilType,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringstatus != null">
+        meteringStatus = #{meteringstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringSystemNum != null">
+        metering_system_num = #{meteringSystemNum,jdbcType=VARCHAR},
+      </if>
+      <if test="meteringGetNumberTime != null">
+        metering_get_number_time = #{meteringGetNumberTime,jdbcType=VARCHAR},
+      </if>
+      <if test="recordPerson != null">
+        record_person = #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.metering.pojo.MeteringUtil">
+    update hospital..metering_util
+    set metering_name = #{meteringName,jdbcType=VARCHAR},
+      metering_num = #{meteringNum,jdbcType=VARCHAR},
+      metering_inspection_cycle = #{meteringInspectionCycle,jdbcType=VARCHAR},
+      bm_name = #{bmName,jdbcType=VARCHAR},
+      buy_time = #{buyTime,jdbcType=VARCHAR},
+      user_xm = #{userXm,jdbcType=VARCHAR},
+      update_message_time = #{updateMessageTime,jdbcType=VARCHAR},
+      this_metering_time = #{thisMeteringTime,jdbcType=VARCHAR},
+      util_type = #{utilType,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      meteringStatus = #{meteringstatus,jdbcType=VARCHAR},
+      metering_system_num = #{meteringSystemNum,jdbcType=VARCHAR},
+      metering_get_number_time = #{meteringGetNumberTime,jdbcType=VARCHAR},
+      record_person = #{recordPerson,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByUtilNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    where metering_system_num = #{meteringSystemNum,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findAllMeteringUtil" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+  </select>
+
+  <select id="findAllMeteringUtilByDepartmentAndName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    <where>
+      <if test="department != null">
+        bm_name like #{department,jdbcType=VARCHAR} and
+      </if>
+      <if test="name != null">
+        metering_name like #{name,jdbcType=VARCHAR} and
+      </if>
+      meteringStatus = '在用' and description = 0
+    </where>
+  </select>
+
+  <select id="findAllMeteringUtilByTime" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    where this_metering_time  >= #{beginTime,jdbcType=VARCHAR} and this_metering_time &lt;= #{endTiem,jdbcType=VARCHAR} and
+    description = 0 and meteringStatus = '在用'
+  </select>
+
+  <select id="searchMeteringUtil" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    <where>
+      <if test="beginTime != null">
+        this_metering_time  >= #{beginTime,jdbcType=VARCHAR} and
+      </if>
+      <if test="endTiem != null">
+        this_metering_time &lt;= #{endTiem,jdbcType=VARCHAR} and
+      </if>
+      <if test="department != null">
+        bm_name = #{department,jdbcType=VARCHAR} and
+      </if>
+      <if test="status != null">
+        description = #{status,jdbcType=VARCHAR} and
+      </if>
+      meteringStatus = '在用' and description = 0
+    </where>
+  </select>
+
+
+  <select id="findAllMeteringUtilByDepartment" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    where bm_name = #{department,jdbcType=VARCHAR} and meteringStatus = '在用' and description = 0
+  </select>
+
+</mapper>

@@ -393,7 +393,7 @@ function render(renderParam){
                         }
                         //动态获取表单数据
                         if (Type(res.data) === "array") {
-                            resValue = getFormValue(res.data,false,true,mu);
+                            resValue = getFormValue(res.data,false,res.force !== false,mu);
                         }
                         //添加额外数据
                         if (res.where) {
@@ -451,14 +451,6 @@ function render(renderParam){
                                     //this.where = {};
                                 }
                             });
-                        //还原表单选项
-                        for(var naa in resValue){
-                            if(resValue.hasOwnProperty(naa)){
-                                if(resValue[naa] !== mu["show"]){
-                                    $("*[name='"+naa+"']").val(resValue[naa])
-                                }
-                            }
-                        }
                         form.render();
                         //还原重载前的数据
                         if (res.add === true && res.add.tableId !== undefined) {
@@ -503,6 +495,14 @@ function render(renderParam){
                                     if (Type(date[v]) === "json") {
                                         a(date[v]);
                                     }
+                                }
+                            }
+                        }
+                        //还原表单选项
+                        for(var naa in resValue){
+                            if(resValue.hasOwnProperty(naa)){
+                                if(resValue[naa] !== mu["show"]){
+                                    $("*[name='"+naa+"']").val(resValue[naa]);
                                 }
                             }
                         }
