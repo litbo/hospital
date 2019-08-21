@@ -591,6 +591,7 @@ function render(renderParam){
                         var tableId = $(this).data("id") || "table";
                         //basic.js中定义的函数
                         action.checkTable(tableId);
+                        return false;
                     })
                 },
                 addItem: function (cl) {
