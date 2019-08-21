@@ -203,35 +203,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.poi</groupId>-->
-            <!-- <artifactId>poi-ooxml</artifactId>-->
-            <!-- <version>3.15</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!-- <groupId>org.apache.poi</groupId>-->
-            <!-- <artifactId>poi-scratchpad</artifactId>-->
-            <!-- <version>3.15</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--   <groupId>fr.opensagres.xdocreport</groupId>-->
-            <!--   <artifactId>fr.opensagres.xdocreport.document</artifactId>-->
-            <!--   <version>1.0.5</version>-->
-        <!--</dependency>-->
-        <!--<dependency>  -->
-            <!--   <groupId>fr.opensagres.xdocreport</groupId>  -->
-            <!--   <artifactId>org.apache.poi.xwpf.converter.xhtml</artifactId>  -->
-            <!--   <version>1.0.5</version>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>xmlbeans</artifactId>-->
-                    <!--<groupId>org.apache.xmlbeans</groupId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-            <!-- -->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
@@ -258,7 +229,12 @@
             <artifactId>mybatis-plus</artifactId>
             <version>2.1.2</version>
         </dependency>
-
+        <!--nekohtml-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
         <!--jdbc 存储 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -305,27 +281,32 @@
                 <artifactId>selenium-support</artifactId>
                 <version>2.41.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <optional>true</optional>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
-            <resources>
-                <resource>
-                    <directory>src/main/java</directory>
-                    <includes>
-                        <include>**/*.xml</include>
-                    </includes>
-                </resource>
-                <resource>
-                    <directory>src/main/resources</directory>
-                </resource>
-            </resources>
-        </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
 
 </project>

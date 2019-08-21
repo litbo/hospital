@@ -1,19 +1,17 @@
-/**
- * @Title: com.litbo.hospital.supervise.controller.BaseController.java
- * @Package com.dao.controller
- * @Description: TODO(用一句话描述该文件做什么)
- * @author zhuyj
- * @date 2019-08-15
- */
+/**   
+* @Title: BaseController.java 
+* @Package com.dao.controller 
+* @Description: TODO(用一句话描述该文件做什么) 
+* @author zhuyj   
+* @date 2019-08-15 
+*/
 package com.litbo.hospital.supervise.controller;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.litbo.hospital.supervise.config.SpiderProperties;
 import com.litbo.hospital.supervise.bean.ItemInfo;
-import com.litbo.hospital.supervise.service.IItemInfoService;
-import com.litbo.hospital.supervise.spider.StartSpider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.litbo.hospital.supervise.config.SpiderProperties;
+import com.litbo.hospital.supervise.service.IItemInfoService;
+import com.litbo.hospital.supervise.spider.StartSpider;
+
 /**
- * @ClassName: com.litbo.hospital.supervise.controller.BaseController
+ * @ClassName: BaseController
  * @Description: TODO(这里用一句话描述这个类的作用)
  * @author: zhuyj
  * @date: 2019-08-15
@@ -44,6 +46,7 @@ public class BaseController {
 	@ResponseBody
 	public Map<String, Object> search(ItemInfo info) {
 		log.info("===============start search info===============");
+		
 		log.info(spiderProperties.getDetailPath());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", iItemInfoService.search(info));
