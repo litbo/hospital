@@ -1878,52 +1878,40 @@
             "shiro": "AQZHCX",
             "children": [
               {
-                "title": "巡检计划",
-                "url": "./table.html",
+                "title": "巡检标准",
+                "url": "./safe/inspect-management/index0.html",
                 "icon": "scroll",
                 "id": "4420",
-                "shiro": "AQZHCX",
-                "children": [
-                  {
-                    "title": "计划制定",
-                    "url": "./table.html",
-                    "id": "44200",
-                    "shiro": "AQZHCX"
-                  },
-                  {
-                    "title": "计划修改",
-                    "url": "./table.html",
-                    "id": "44201",
-                    "shiro": "AQZHCX"
-                  },
-                  {
-                    "title": "计划查询",
-                    "url": "./table.html",
-                    "id": "44202",
-                    "shiro": "AQZHCX"
-                  }
-                ]
+                "shiro": "AQZHCX"
+
+              },
+              {
+                "title": "巡检计划",
+                "url": "./safe/inspect-management/index1.html",
+                "icon": "scroll",
+                "id": "4421",
+                "shiro": "AQZHCX"
+
+              },
+              {
+                "title": "巡检审批",
+                "url": "./safe/inspect-management/index2.html",
+                "icon": "newspaper",
+                "id": "4422",
+                "shiro": "AQZHCX"
               },
               {
                 "title": "巡检任务",
-                "url": "./table.html",
+                "url": "./safe/inspect-management/index3.html",
                 "icon": "newspaper",
-                "id": "4421",
-                "shiro": "AQZHCX",
-                "children": [
-                  {
-                    "title": "设备巡检",
-                    "url": "./table.html",
-                    "id": "44210",
-                    "shiro": "AQZHCX"
-                  }
-                ]
+                "id": "4423",
+                "shiro": "AQZHCX"
               },
               {
-                "title": "计划实施查询",
-                "url": "./table.html",
+                "title": "巡检结果",
+                "url": "./safe/inspect-management/index4.html",
                 "icon": "search",
-                "id": "4422",
+                "id": "4424",
                 "shiro": "AQZHCX"
               }
             ]
@@ -2220,6 +2208,7 @@
                 "id": "5100",
                 "shiro": "XLKPI",
                 "children": [
+
                   {
                     "title": "开机率",
                     "url": "./beneft/usage-situation/boot-rate.html",
@@ -2239,11 +2228,36 @@
                     "shiro": "KZL"
                   },
                   {
+                    "title": "完好率",
+                    "url": "./beneft/usage-situation/pipe_tag.html",
+                    "id": "51003",
+                    "shiro": "KZL"
+                  },
+                  {
                     "title": "工作日平均闲置时间",
                     "url": "./beneft/usage-situation/average-time.html",
-                    "id": "51003",
+                    "id": "51004",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "功能利用率",
+                    "url": "./beneft/usage-situation/q1.html",
+                    "id": "51005",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "功能完好率",
+                    "url": "./beneft/usage-situation/q2.html",
+                    "id": "51006",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "预测符合率",
+                    "url": "./beneft/usage-situation/q3.html",
+                    "id": "51007",
                     "shiro": "GZRPJXZSJ"
                   }
+
                 ]
               },
               {
@@ -3244,6 +3258,13 @@
                 "url": "./admin/discipline-management/csz-query.html",
                 "icon": "file-import",
                 "id": "6133",
+                "shiro": "CSZJCX"
+              },
+              {
+                "title": "厂商资质查询",
+                "url": "./admin/discipline-management/cs-query_z.html",
+                "icon": "search",
+                "id": "6134",
                 "shiro": "CSZJCX"
               }
             ]

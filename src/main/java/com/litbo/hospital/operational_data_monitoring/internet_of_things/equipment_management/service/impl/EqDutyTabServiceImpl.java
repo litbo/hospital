@@ -9,9 +9,9 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipme
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.ApprovedWorkingHours;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqDutyTab;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqOvertimeTab;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.ApprovedWorkingHoursDAO;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.EqDutyTabDAO;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.EqOvertimeTabDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.ApprovedWorkingHoursDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.EqDutyTabDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.EqOvertimeTabDAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.EqDutyTabService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

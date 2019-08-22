@@ -25,11 +25,6 @@ import javax.sql.DataSource;
  * @CreateTime: 1019-07-15 15:04
  * @Description: todo
  */
-
-/**
- * 在basePackages中加入自己的dao
- * 加入自己的dao接口就可以了
- */
 @Configuration
 @MapperScan(basePackages = {
         "com.litbo.hospital.beneficial.dao",
@@ -37,16 +32,13 @@ import javax.sql.DataSource;
         "com.litbo.hospital.common.task.dao",
         "com.litbo.hospital.lifemanage.dao",
         "com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao",
-        "com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.dao",
+        "com.litbo.hospital.operational_data_monitoring.operation_record.dao",
         "com.litbo.hospital.security.dao",
         "com.litbo.hospital.supervise.dao",
         "com.litbo.hospital.user.dao",
         "com.litbo.hospital.operational_data_monitoring.software_interface.dao",
-        "com.litbo.hospital.metering.dao",
         "com.litbo.hospital.operational_data_monitoring.software_interface.timedtask",
-        "com.litbo.hospital.security.specialequipment.dao",
-        "com.litbo.hospital.metering.dao",
-        },
+        "com.litbo.hospital.security.specialequipment.dao"},
         sqlSessionTemplateRef = "SqlSessionTemplate1")
 public class MybatisConfigOne {
 
@@ -85,6 +77,7 @@ public class MybatisConfigOne {
             throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
+//        sessionFactory.setVfs(SpringBootVFS.class);
         sessionFactory.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
         sessionFactory.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:com/litbo/hospital/security/specialequipment/dao/*.xml")

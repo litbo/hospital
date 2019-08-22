@@ -5,22 +5,12 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqMacTab;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.*;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.ApprovedWorkingHoursService;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.*;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.DeviceparameterService;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.EqDutyTabService;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.EqOvertimeTabService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @BelongsProject: hospital

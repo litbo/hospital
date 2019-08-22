@@ -2,9 +2,9 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.operat
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.dao.InspectdetailDAO;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.dao.Temp1DAO;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.dao.Temp2DAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.InspectdetailDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.Temp1DAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.Temp2DAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.service.InspectdetailService;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.OperationRecord;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.SearchVO;

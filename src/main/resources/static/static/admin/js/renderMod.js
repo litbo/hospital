@@ -393,7 +393,7 @@ function render(renderParam){
                         }
                         //动态获取表单数据
                         if (Type(res.data) === "array") {
-                            resValue = getFormValue(res.data,false,true,mu);
+                            resValue = getFormValue(res.data,false,res.force !== false,mu);
                         }
                         //添加额外数据
                         if (res.where) {
@@ -591,6 +591,7 @@ function render(renderParam){
                         var tableId = $(this).data("id") || "table";
                         //basic.js中定义的函数
                         action.checkTable(tableId);
+                        return false;
                     })
                 },
                 addItem: function (cl) {

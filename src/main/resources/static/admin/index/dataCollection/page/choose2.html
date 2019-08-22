@@ -62,9 +62,10 @@
 			console.log(a);
 			var b = $.getUrlParam("pacsId");
 			console.log(b);
-			parent.$('.equipmentSpan').val(data[0].bmName);
+			parent.$('.equipmentSpan').val(data[0].eqName);
 			parent.$('.eqId').val(data[0].eqId);
 			parent.$('.eqSbbh').val(data[0].eqSbbh);
+
 
 			parent.layer.close(index);
 

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>巡检标准编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<div class="layui-row" style="margin: 20px">
+    <div class="col-xs-12">
+        <form class="layui-form layui-form-pane" action="">
+
+          <input type="hidden" name="inspPlStandardId" autocomplete="off" placeholder="请输入标题" class="layui-input inspPlStandardId">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="inspPlStandardName" autocomplete="off" placeholder="请输入标题" class="layui-input inspPlStandardName">
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">描述</label>
+                <div class="layui-input-block" >
+                    <textarea placeholder="请输入内容"  name="inspPlStandardDescription" style="height: 250px" class="layui-textarea inspPlStandardDescription"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="float: right">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , $ = layui.$;
+
+        //日期
+
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //查看
+        $(function(){
+            var url =window.location.search;
+            var inspPlStandardId =  $.getUrlParam("id");
+            console.log(inspPlStandardId);
+            $.ajax({
+                url : "/inspection/inspPlStandard/selectStandardById",
+                type : 'POST',
+                data : {"inspPlStandardId":inspPlStandardId},
+                success : function(springBootOtl){
+                    var  data = springBootOtl;
+                    if(data !== null){
+                        $(".inspPlStandardId").val(data.data.inspPlStandardId);
+                        $(".inspPlStandardName").val(data.data.inspPlStandardName);
+                        $(".inspPlStandardDescription").val(data.data.inspPlStandardDescription);
+                        // 记得重新渲染表单/*form.render();*/
+                        form.render();
+
+                    }else{
+                        alert("查询为空");
+                    }
+                },
+                error:function (data) {
+                    alert("查询失败");
+                    console.log(data);
+                }
+            });
+
+            form.on('submit(demo1)', function (data) {
+
+                $.ajax({
+                    url:'/inspection/inspPlStandard/updateInspStandard',
+                    type:"POST",
+                    async: false,/*同步传输*/
+                    data:JSON.stringify(data.field),
+                    dataType:'JSON',
+                    contentType:'application/json' ,
+                    success : function(springBootOtl){
+                        var  data = springBootOtl;
+                        if(data.msg === 'success'){
+                            layer.alert("修改成功", {icon:1, time:2000},function () {
+                                layer.close(layer.index);
+                                window.parent.location.reload();
+                            });
+                            // 记得重新渲染表单form.render();
+                        }else{
+                            layer.alert("修改失败",{icon:2,time:2000});
+                        }
+                        /*setTimeout(function(){
+                            layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
+                        },500)*/
+                    },
+                    error:function (data) {
+                        alert("错误");
+                    }
+
+                });
+                return false;
+            });
+        });
+    })
+</script>
+
+</body>
+</html>

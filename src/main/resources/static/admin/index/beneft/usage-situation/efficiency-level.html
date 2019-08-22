@@ -30,7 +30,11 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -39,18 +43,9 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10 setW">
-                        <select>
-                            <option disabled>日期类型</option>
-                            <option>日</option>
-                            <option selected>月</option>
-                            <option>年</option>
-                        </select>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
                     </div>
-                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-                    </div>
-
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <select name="modules" lay-verify="required" lay-search="">
                             <option value="">全部</option>
@@ -72,6 +67,16 @@
                             <option value="5">心外ICU</option>
                         </select>
                     </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="modules" lay-verify="required" lay-search="">
+                            <option value="">设备名称</option>
+                            <option value="1">脉搏碳氧血氧测量仪</option>
+                            <option value="2">光疗设备</option>
+                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
+                            <option value="4">设备柜</option>
+                            <option value="5">监护仪(母婴监护系统主机)</option>
+                        </select>
+                    </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
                     </div>
@@ -79,53 +84,99 @@
             </div>
         </div>
     </div>
+
+
+    <script type="text/javascript">
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#test6'
+                , range: true
+            });
+        });
 </script>
 
 
 <script>
-    renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {field: 'equip_number', title: '设备编号',width:"30%",minWidth: 150}
-                ,{field: 'equip_name', title: '设备名称',width:"30%", minWidth: 150}
-                , {field: 'utilization-ratio', title: '机时利用率', minWidth: 150,sort:true}
-                , {field: 'eff-level', title: '效率等级', minWidth: 150,sort:true}
-            ]]
-            , "data": [
-                {
-                    "equip_number": "62583289",
-                    "equip_name": "CT",
-                    "utilization-ratio": "机时利用率",
-                    "eff-level": "1"
-                }
-                ,{
-                    "equip_number": "62583289",
-                    "equip_name": "CT",
-                    "utilization-ratio": "机时利用率",
-                    "eff-level": "2"
-                }
-                ,{
-                    "equip_number": "62583289",
-                    "equip_name": "CT",
-                    "utilization-ratio": "机时利用率",
-                    "eff-level": "3"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":{
-                        tool:"toolbar",
-                        title:"数据查找",
-                        event:"dataSearch",
-                        content:$("#hideXs")
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    ,{field: 'equip_number', title: '设备编号', width: "30%", minWidth: 150}
+                    , {field: 'equip_name', title: '设备名称', width: "30%", minWidth: 150}
+                    , {field: 'utilization-ratio', title: '机时利用率', minWidth: 150, sort: true}
+                    , {field: 'eff-level', title: '效率等级', minWidth: 150, sort: true}
+                ]]
+                , "data": [
+                    {
+                        "equip_number": "62583289",
+                        "equip_name": "CT",
+                        "utilization-ratio": "机时利用率",
+                        "eff-level": "1"
                     }
-                })
+                    , {
+                        "equip_number": "62583289",
+                        "equip_name": "CT",
+                        "utilization-ratio": "机时利用率",
+                        "eff-level": "2"
+                    }
+                    , {
+                        "equip_number": "62583289",
+                        "equip_name": "CT",
+                        "utilization-ratio": "机时利用率",
+                        "eff-level": "3"
+                    }]
+
+                , done: function (obj) {
+                        tableFunc({
+                            "toolFunc":[{
+                                type: 2,
+                                tool: "toolbar",
+                                event: "add",
+                                content: "./child/pipe_tagadd.html"
+                            },{
+                                type: 2,
+                                tool: "toolbar",
+                                title: "排名",
+                                area: ['100%','70%'],
+                                event: "king",
+                                content: "./child/paiming.html"
+                            },
+                                {
+                                    type: 2,
+                                    tool: "toolbar",
+                                    event: "edit",
+                                    content: "./child/pipe_tagedit.html",
+                                    // dataUrl:["pjzdId"]
+                                }
+                                ,{
+                                    send:{
+                                        id:"table",
+                                        filter:"table1",
+                                        name:"ids",
+                                        event:"del",
+                                        url:"/security/pjzd/deleteFwPjzdByIds",
+                                        type:"POST",
+                                        contentType:"application/json",
+                                        par:"pjzdId",
+                                        reload:true
+                                    },
+                                    tool:"toolbar",
+                                    event:"del"
+                                }
+                            ]
+                        })
+                    }
+                },
+                reSet: {
+                    url: "/security/pjzd/listFwPjzd",
+                    type: "reload",
+                    data: ["pjfl", "pjSzm"],     //搜索框的name
+                    where: {}
+                }
             }
-        },
-        date :{
-            elem : "#date"
         }
-    }
 </script>
 </body>
 </html>

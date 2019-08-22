@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变更记录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<div class="layui-row ">
+    <div class="col-xs-12" >
+        <table id="table" lay-filter="table"></table>
+    </div>
+</div>
+<script>
+    layui.use(['form','table'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , table = layui.table;
+
+        form.render();
+
+        renderMod = {
+            table: {
+                table: [
+                    {
+                        elem: "#table",
+                        id: "table",
+                        cols: [[ //表头
+                             {type:'numbers'}
+                            , {field: 'inspPlChangeChangePerson', title: '变更人', minWidth: 150 }
+                            , {field: 'inspPlChangeTime', title: '变更时间', minWidth: 150 }
+                            , {field: 'inspPlChangeReason', title: '变更原因', minWidth: 150 }
+                            , {field: 'inspPlChangeAuditor', title: '审批人', minWidth: 150 }
+                            , {field: 'inspPlChangeExamineTime', title: '审批时间', minWidth: 150 }
+                            , {field: 'inspPlChangeExamineOpinion', title: '审批结果', minWidth: 150 }
+                        ]]
+                        , toolbar: false
+                        , page: true//开启分页
+                        , height: "200"
+                        , data: []
+                        , text: {
+                            none: "暂无数据！"
+                        }
+                    }
+                ]
+            }
+        };
+    })
+</script>
+
+</body>
+</html>

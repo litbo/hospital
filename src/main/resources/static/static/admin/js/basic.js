@@ -191,8 +191,8 @@ function getHash(input) {
  * @return
  **/
 function markPage(text, time) {
-    //判断只在非IE时加载遮罩功能,当URL中有参数c时不加载遮罩
-    if("\v"!=="v" && !$.getUrlParam("c")){
+    //判断只在非IE时加载遮罩功能
+    if("\v"!=="v"){
         //如果页面中不存在定位元素则创建定位元素
         var $beg = $("#begin");
         var timer = null;
@@ -215,6 +215,7 @@ function markPage(text, time) {
             }
         });
     }
+
 }
 
 /**
@@ -371,6 +372,12 @@ function subUp(value, data, param) {
         });
         return false;
     }
+    //添加加载动画
+    var loadIndex = putMsg("loadOn");
+    $(".layui-layer-shade").css("opacity","0.05");
+    $(".layui-layer-loading").append(
+        $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px","color":"#787878"}).text("请求发送中")
+    );
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
     var dataP = {}, valus = "";
     if (Type(value.data) === "array") {
@@ -428,17 +435,6 @@ function subUp(value, data, param) {
         alert("提交成功！");
         window.location.reload();
     } else {
-        //添加加载动画
-        var loadIndex = putMsg("loadOn");
-        $(".layui-layer-shade").css("opacity","0.05");
-        $(".layui-layer-loading").append(
-            $("<p>").css({"margin":"15px -55px","font-size":"2em","font-weight":"600","letter-spacing":"3px","color":"#787878"}).text("请求发送中")
-        );
-        //2s自动关闭（避免出现一直不消失的问题）
-        setTimeout(function () {
-            putMsg("loadOut",loadIndex);
-            $(".layui-layer-shade").css("opacity","0");
-        },2000);
         //以$ajax形式提交数据(默认)
         //以参数形式调用获取的数据解决异步数据不可外部调用与修改
         var ajaxOptions = {
@@ -881,10 +877,6 @@ action = func = {
                         newJ.content = showContent;
                     }
                     //console.log("即将弹出",newJ);
-                    if(vas.download === true){
-                    	window.location = newJ.content;
-                    	return;
-                    }
                     //若允许弹出则弹出
                     openT && layOpen(newJ);
                     //若有函数则执行函数，传递参数 obj 表格缓存数据 checkStatus 所有已选中数据
@@ -1017,8 +1009,8 @@ action = func = {
     "checkTable": function (name) {
         layui.use('table', function () {
             var table = layui.table
-                , ck = table.checkStatus(name)//获取选中数据
                 , oData = table.cache[name];//获取表格所有数据
+            var ck = table.checkStatus(name);//获取选中数据
             if (ck.data.length === 0) {
                 putMsg({
                     alert: "当前未选中任何数据！"
@@ -1029,19 +1021,14 @@ action = func = {
                 if (ck.isAll === true) {
                     oData = [];
                 } else {
-                    var wDel = [];
                     for (var j = 0; j < oData.length; j++) {
                         //找出所有数据中的已选中数据并删除
-                        if (oData[j].LAY_CHECKED) {
-                            wDel.push(j);
+                        if (oData[j].LAY_CHECKED === true) {
+                            oData.splice(j, 1);
+                        } else {
+                            delete oData[j]["LAY_CHECKED"];
+                            delete oData[j]["LAY_TABLE_INDEX"];
                         }
-                    }
-                    for(var x=0;x<wDel.length;x++){
-                        oData.splice(x, 1);
-                    }
-                    for(var p=0;p<oData.length;p++){
-                        delete oData[p]["LAY_CHECKED"];
-                        delete oData[p]["LAY_TABLE_INDEX"];
                     }
                 }
                 //重新渲染表格
@@ -1101,7 +1088,7 @@ action = func = {
             }
             //console.log("拼接完成：",value.data);
             //强制以JSON格式发送数据
-            value.contentType = value.contentType || "application/json";
+            value.contentType = "application/json";
             //提交成功回调函数
             value.success = function (res) {
                 if (res.code === 0) {
@@ -1142,12 +1129,11 @@ action = func = {
                     loc=false;
                     //上传已删除文件
                     subUp(value);
-                    //获取除去要删除的数据后的数据  !value.del ||
-                    if(value.del === true ){
+                    //获取除去要删除的数据后的数据
+                    if(!value.del || value.del === true ){
                         if (ck.isAll === true) {
                             oData = [];
                         } else {
-                            console.log(oData);
                             for (var j = 0; j < oData.length; j++) {
                                 //找出所有数据中的已选中数据并删除
                                 if (oData[j].LAY_CHECKED === true) {
@@ -1282,17 +1268,17 @@ document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/
 
 window.onload = function () {
     //填充页面URL，便于调试页面
-    $("body").prepend($("<p>").css({
-        "position": "absolute",
-        "right": "0",
-        "color": "#f10214",
-        "border": "1px solid",
-        "opacity": "0.4",
-        "padding": "5px",
-        "z-index": "99999"
-    }).html("当前页面地址：" + window.location.href).on("click", function () {
-        $(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/
-    }));
+    // $("body").prepend($("<p>").css({
+    //     "position": "absolute",
+    //     "right": "0",
+    //     "color": "#f10214",
+    //     "border": "1px solid",
+    //     "opacity": "0.4",
+    //     "padding": "5px",
+    //     "z-index": "99999"
+    // }).html("当前页面地址：" + window.location.href).on("click", function () {
+    //     $(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/
+    // }));
     //手机版 数据查找 按钮功能绑定
     var $dataSearch = $("a[lay-event='dataSearch']");
     if ($dataSearch.length > 0) {

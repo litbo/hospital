@@ -19,6 +19,7 @@
             width: 80px;
         }
     </style>
+    <script src="../../../../static/admin/layui/layui.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -30,7 +31,11 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -38,17 +43,10 @@
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10 setW">
-                        <select>
-                            <option disabled>日期类型</option>
-                            <option>日</option>
-                            <option selected>月</option>
-                            <option>年</option>
-                        </select>
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                <form class="layui-form layui-form-pane maxCont" action="">
+
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="modules" lay-verify="required" lay-search="">
@@ -56,72 +54,126 @@
                             <option value="1">CT室</option>
                             <option value="2">核磁公正室</option>
                             <option value="3">摄片室</option>
-                            <option value="4">内外导管室</option>
+                            <option value="4">心内导管室</option>
                             <option value="5">心外ICU</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
+                        <select name="modules" lay-verify="required" lay-search="">
+                            <option value="">设备名称</option>
+                            <option value="1">脉搏碳氧血氧测量仪</option>
+                            <option value="2">光疗设备</option>
+                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
+                            <option value="4">设备柜</option>
+                            <option value="5">监护仪(母婴监护系统主机)</option>
+                        </select>
                     </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                    </div>
+                    <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king" >排名变化</a>
                 </form>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#test6'
+                , range: true
+            });
+        });
+
 </script>
 
-
-
 <script>
-    renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {field: 'equip_number', title: '设备编号',width:"25%",minWidth: 150}
-                ,{field: 'equip_name', title: '设备简称',width:"25%", minWidth: 150}
-                , {field: 'turnon-time', title: '开机时长', minWidth: 150,sort:true}
-                , {field: 'standby-time', title: '待机时长', minWidth: 150,sort:true}
-                , {field: 'idling-rate', title: '空转率', minWidth: 150,sort:true}
-                , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
-            ]]
-            , height: "full-25"
-            , "data": [
-                {
-                    "equip_number": "65683289",
-                    "equip_name": "CT",
-                    "turnon-time": "开机时长",
-                    "standby-time": "待机时长",
-                    "idling-rate": "空转率",
-                    "ranking": "1"
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    ,{field: 'equip_number', title: '设备编号', width: "25%", minWidth: 150}
+                    , {field: 'equip_name', title: '设备简称', width: "25%", minWidth: 150}
+                    , {field: 'turnon-time', title: '开机时长', minWidth: 150, sort: true}
+                    , {field: 'standby-time', title: '待机时长', minWidth: 150, sort: true}
+                    , {field: 'idling-rate', title: '空转率', minWidth: 150, sort: true}
+                    , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
+                ]]
+                , height: "full-25"
+                , "data": [
+                    // {
+                    //     "equip_number": "65683289",
+                    //     "equip_name": "CT",
+                    //     "turnon-time": "开机时长",
+                    //     "standby-time": "待机时长",
+                    //     "idling-rate": "空转率",
+                    //     "ranking": "1"
+                    // }
+                    // ,{
+                    //     "equip_number": "62583489",
+                    //     "equip_name": "CT",
+                    //     "turnon-time": "开机时长",
+                    //     "standby-time": "待机时长",
+                    //     "idling-rate": "空转率",
+                    //     "ranking": "2"
+                    // }
+                    // ,{
+                    //     "equip_number": "62583234",
+                    //     "equip_name": "CT",
+                    //     "turnon-time": "开机时长",
+                    //     "standby-time": "待机时长",
+                    //     "idling-rate": "空转率",
+                    //     "ranking": "3"
+                    // }
+                ]
+                , done: function (obj) {
+                    tableFunc({
+                        "toolFunc":[{
+                            type: 2,
+                            tool: "toolbar",
+                            event: "add",
+                            content: "./child/pipe_tagadd.html"
+                        },{
+                            type: 2,
+                            tool: "toolbar",
+                            title: "排名",
+                            area: ['100%','70%'],
+                            event: "king",
+                            content: "./child/paiming.html"
+                        },
+                            {
+                                type: 2,
+                                tool: "toolbar",
+                                event: "edit",
+                                content: "./child/pipe_tagedit.html",
+                                // dataUrl:["pjzdId"]
+                            }
+                            ,{
+                                send:{
+                                    id:"table",
+                                    filter:"table1",
+                                    name:"ids",
+                                    event:"del",
+                                    url:"/security/pjzd/deleteFwPjzdByIds",
+                                    type:"POST",
+                                    contentType:"application/json",
+                                    par:"pjzdId",
+                                    reload:true
+                                },
+                                tool:"toolbar",
+                                event:"del"
+                            }
+                        ]
+                    })
                 }
-                ,{
-                    "equip_number": "62583489",
-                    "equip_name": "CT",
-                    "turnon-time": "开机时长",
-                    "standby-time": "待机时长",
-                    "idling-rate": "空转率",
-                    "ranking": "2"
-                }
-                ,{
-                    "equip_number": "62583234",
-                    "equip_name": "CT",
-                    "turnon-time": "开机时长",
-                    "standby-time": "待机时长",
-                    "idling-rate": "空转率",
-                    "ranking": "3"
-                }]
-            , done: function (obj) {
-                tableFunc({
-                    "obj":obj,
-                    "toolFunc":{
-                        tool:"toolbar",
-                        title:"数据查找",
-                        event:"dataSearch",
-                        content:$("#hideXs")
-                    }
-                })
+            },
+            reSet: {
+                url: "/security/pjzd/listFwPjzd",
+                type: "reload",
+                data: ["pjfl", "pjSzm"],     //搜索框的name
+                where: {}
             }
-        },
-        date :{
-            elem : "#date"
         }
     }
 </script>

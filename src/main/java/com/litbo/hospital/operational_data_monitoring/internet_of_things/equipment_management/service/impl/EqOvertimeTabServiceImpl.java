@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqOvertimeVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqOvertimeTab;
-import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.dao.EqOvertimeTabDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.EqOvertimeTabDAO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.EqOvertimeTabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
