@@ -203,20 +203,20 @@ public class MeteringDealProcessController {
         return Result.success(vo);
     }
 
-
-    /**
-     * 得到报表的详细信息
-     * @param formID 表单id
-     * @return
-     */
-    @RequestMapping("/getFormMoreInfomation.do")
-    public Result getFormMoreInfomation(int formID){
-        MeteringApprovalForm form = meteringDealProcessService.findFormByFormID(formID);
-        List<MeteringUtil> utils = meteringDealProcessService.findUtilByProcess(form.getMeteringId());
-        MeteringApprovalFormMoreInfomationVo vo = new MeteringApprovalFormMoreInfomationVo(form);
-        vo.setUtils(utils);
-        return Result.success(vo);
-    }
+//
+//    /**
+//     * 得到报表的详细信息
+//     * @param formID 表单id
+//     * @return
+//     */
+//    @RequestMapping("/getFormMoreInfomation.do")
+//    public Result getFormMoreInfomation(int formID){
+//        MeteringApprovalForm form = meteringDealProcessService.findFormByFormID(formID);
+//        List<MeteringUtil> utils = meteringDealProcessService.findUtilByProcess(form.getMeteringId());
+//        MeteringApprovalFormMoreInfomationVo vo = new MeteringApprovalFormMoreInfomationVo(form);
+//        vo.setUtils(utils);
+//        return Result.success(vo);
+//    }
 
 
     /**
@@ -244,6 +244,23 @@ public class MeteringDealProcessController {
         meteringDealProcessService.updateFormByPrimaryKeySelective(form);
 
         return Result.success();
+    }
+
+
+    /**
+     * 删除送检申请
+     * @param processId
+     * @return
+     */
+    @RequestMapping("/deleteProcess.do")
+    public Result deleteProcess(int processId){
+
+        int i = meteringDealProcessService.deleterProcess(processId);
+        if(i == 0){
+            return Result.success("删除失败！");
+        }
+        return Result.success();
+
     }
 
 

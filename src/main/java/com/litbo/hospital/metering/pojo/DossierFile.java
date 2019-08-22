@@ -43,6 +43,8 @@ public class DossierFile implements Serializable {
 
     private Integer fileType;
 
+    private String description1;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -189,6 +191,14 @@ public class DossierFile implements Serializable {
         this.fileType = fileType;
     }
 
+    public String getDescription1() {
+        return description1;
+    }
+
+    public void setDescription1(String description1) {
+        this.description1 = description1;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -218,7 +228,8 @@ public class DossierFile implements Serializable {
             && (this.getFileUrl() == null ? other.getFileUrl() == null : this.getFileUrl().equals(other.getFileUrl()))
             && (this.getRecordTime() == null ? other.getRecordTime() == null : this.getRecordTime().equals(other.getRecordTime()))
             && (this.getRecordPerson() == null ? other.getRecordPerson() == null : this.getRecordPerson().equals(other.getRecordPerson()))
-            && (this.getFileType() == null ? other.getFileType() == null : this.getFileType().equals(other.getFileType()));
+            && (this.getFileType() == null ? other.getFileType() == null : this.getFileType().equals(other.getFileType()))
+            && (this.getDescription1() == null ? other.getDescription1() == null : this.getDescription1().equals(other.getDescription1()));
     }
 
     @Override
@@ -243,6 +254,7 @@ public class DossierFile implements Serializable {
         result = prime * result + ((getRecordTime() == null) ? 0 : getRecordTime().hashCode());
         result = prime * result + ((getRecordPerson() == null) ? 0 : getRecordPerson().hashCode());
         result = prime * result + ((getFileType() == null) ? 0 : getFileType().hashCode());
+        result = prime * result + ((getDescription1() == null) ? 0 : getDescription1().hashCode());
         return result;
     }
 
@@ -270,6 +282,7 @@ public class DossierFile implements Serializable {
         sb.append(", recordTime=").append(recordTime);
         sb.append(", recordPerson=").append(recordPerson);
         sb.append(", fileType=").append(fileType);
+        sb.append(", description1=").append(description1);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

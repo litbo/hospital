@@ -9,6 +9,7 @@ import com.litbo.hospital.metering.pojo.MeteringUtil;
 import com.litbo.hospital.metering.service.MeteringService;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,20 +67,6 @@ public class MeteringController {
     }
 
 
-    /**
-     * 废弃计量设备
-     * @param meteringUtilId
-     * @return
-     */
-    @RequestMapping("/disableMeteringUtil.do")
-    public Result disableMeteringUtil(int meteringUtilId){
-        int result = meteringService.disableDevice(meteringUtilId);
-        if(result == 1){
-            return Result.success();
-        }
-        return Result.error("删除失败，请重试");
-    }
-
 
     /**
      * 更新设备信息
@@ -109,31 +96,56 @@ public class MeteringController {
         return Result.success(meteringUtil);
     }
 
-    /**
-     * 根据设备编号查询设备信息
-     * @param num 设备编号
-     * @return
-     */
-    @RequestMapping("/findMeteringUtilByNum.do")
-    public Result findMeteringUtilByNum(String num){
-        MeteringUtil meteringUtil = meteringService.findMeteringUtilByUtilNum(num);
-        if(meteringUtil == null){
-            return Result.error("没有查询到该设备的相关信息，请检查输入的id是否正确");
-        }
-        return Result.success(meteringUtil);
-    }
-
-
 
     /**
      * 查询所有的设备信息
+     * @param sign  标记
+     * @param gaugeCategory  器具类别
+     * @param meteringName  器具名称
+     * @param bmName  使用科室
+     * @param meteringstatus 器具状态
+     * @param pageNum 分页页码
+     * @param pageSize 分页每页数据数量
      * @return
      */
     @RequestMapping("/findAllMeteringUtil.do")
-    public PageVo findAllMeteringUtil(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+    public PageVo findAllMeteringUtil(@RequestParam(name = "sign" ,defaultValue = "-1") Integer sign,
+                                      @RequestParam(name = "gaugeCategory" , defaultValue = "") String gaugeCategory,
+                                      @RequestParam(name = "meteringName" ,defaultValue = "") String meteringName ,
+                                      @RequestParam(name = "bmName" , defaultValue = "") String bmName,
+                                      @RequestParam(name = "meteringstatus" , defaultValue = "") String meteringstatus,
+                                      @RequestParam(name = "beginTime" , defaultValue = "0000/00/00") String beginTime,
+                                      @RequestParam(name = "endTime" , defaultValue = "9999/99/99") String endTime,
+                                      @RequestParam(name = "needMeter",defaultValue = "")String needMeter,
+                                      @RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                       @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
+        if(gaugeCategory.equals("")){
+            gaugeCategory = null;
+        }
+
+        if(sign == -1){
+            sign = null;
+        }
+
+        if(meteringName.equals("")){
+            meteringName = null;
+        }
+
+        if(bmName.equals("")){
+            bmName = null;
+        }
+
+        if(meteringstatus.equals("")){
+            meteringstatus = null;
+        }
+
+        if(needMeter.equals("")){
+            needMeter = null;
+        }
+
+
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtil();
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilAllCheck(sign,gaugeCategory,meteringName,bmName,meteringstatus,beginTime,endTime,needMeter);
 
         PageInfo info = new PageInfo(meteringUtils);
 

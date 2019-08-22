@@ -18,11 +18,24 @@
     <result column="metering_get_number_time" jdbcType="VARCHAR" property="meteringGetNumberTime" />
     <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
     <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+    <result column="is_cycle" jdbcType="INTEGER" property="isCycle" />
+    <result column="buy_price" jdbcType="VARCHAR" property="buyPrice" />
+    <result column="specification_modle" jdbcType="VARCHAR" property="specificationModle" />
+    <result column="serial_number" jdbcType="VARCHAR" property="serialNumber" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="measuring_range" jdbcType="VARCHAR" property="measuringRange" />
+    <result column="accuracy_level" jdbcType="VARCHAR" property="accuracyLevel" />
+    <result column="legal_category" jdbcType="VARCHAR" property="legalCategory" />
+    <result column="gauge_category" jdbcType="VARCHAR" property="gaugeCategory" />
+    <result column="sign" jdbcType="INTEGER" property="sign" />
+    <result column="description1" jdbcType="VARCHAR" property="description1" />
   </resultMap>
   <sql id="Base_Column_List">
     id, metering_name, metering_num, metering_inspection_cycle, bm_name, buy_time, user_xm, 
     update_message_time, this_metering_time, util_type, description, meteringStatus, 
-    metering_system_num, metering_get_number_time, record_person, record_time
+    metering_system_num, metering_get_number_time, record_person, record_time, is_cycle, 
+    buy_price, specification_modle, serial_number, manufacturer, measuring_range, accuracy_level, 
+    legal_category, gauge_category, sign, description1
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -40,13 +53,21 @@
       user_xm, update_message_time, this_metering_time, 
       util_type, description, meteringStatus, 
       metering_system_num, metering_get_number_time, 
-      record_person, record_time)
-    values (#{meteringName,jdbcType=VARCHAR}, #{meteringNum,jdbcType=VARCHAR}, 
-      #{meteringInspectionCycle,jdbcType=VARCHAR}, #{bmname,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
-      #{userxm,jdbcType=VARCHAR}, #{updateMessageTime,jdbcType=VARCHAR}, #{thisMeteringTime,jdbcType=VARCHAR}, 
+      record_person, record_time, is_cycle, 
+      buy_price, specification_modle, serial_number, 
+      manufacturer, measuring_range, accuracy_level, 
+      legal_category, gauge_category, sign, 
+      description1)
+    values (#{meteringName,jdbcType=VARCHAR}, #{meteringNum,jdbcType=VARCHAR},
+      #{meteringInspectionCycle,jdbcType=VARCHAR}, #{bmName,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
+      #{userXm,jdbcType=VARCHAR}, #{updateMessageTime,jdbcType=VARCHAR}, #{thisMeteringTime,jdbcType=VARCHAR}, 
       #{utilType,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{meteringstatus,jdbcType=VARCHAR}, 
       #{meteringSystemNum,jdbcType=VARCHAR}, #{meteringGetNumberTime,jdbcType=VARCHAR}, 
-      #{recordPerson,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR})
+      #{recordPerson,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{isCycle,jdbcType=INTEGER}, 
+      #{buyPrice,jdbcType=VARCHAR}, #{specificationModle,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, 
+      #{manufacturer,jdbcType=VARCHAR}, #{measuringRange,jdbcType=VARCHAR}, #{accuracyLevel,jdbcType=VARCHAR}, 
+      #{legalCategory,jdbcType=VARCHAR}, #{gaugeCategory,jdbcType=VARCHAR}, #{sign,jdbcType=INTEGER}, 
+      #{description1,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringUtil">
     insert into hospital..metering_util
@@ -96,6 +117,39 @@
       <if test="recordTime != null">
         record_time,
       </if>
+      <if test="isCycle != null">
+        is_cycle,
+      </if>
+      <if test="buyPrice != null">
+        buy_price,
+      </if>
+      <if test="specificationModle != null">
+        specification_modle,
+      </if>
+      <if test="serialNumber != null">
+        serial_number,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="measuringRange != null">
+        measuring_range,
+      </if>
+      <if test="accuracyLevel != null">
+        accuracy_level,
+      </if>
+      <if test="legalCategory != null">
+        legal_category,
+      </if>
+      <if test="gaugeCategory != null">
+        gauge_category,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="description1 != null">
+        description1,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="meteringName != null">
@@ -142,6 +196,39 @@
       </if>
       <if test="recordTime != null">
         #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isCycle != null">
+        #{isCycle,jdbcType=INTEGER},
+      </if>
+      <if test="buyPrice != null">
+        #{buyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="specificationModle != null">
+        #{specificationModle,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="measuringRange != null">
+        #{measuringRange,jdbcType=VARCHAR},
+      </if>
+      <if test="accuracyLevel != null">
+        #{accuracyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="legalCategory != null">
+        #{legalCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="gaugeCategory != null">
+        #{gaugeCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="description1 != null">
+        #{description1,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -193,6 +280,39 @@
       <if test="recordTime != null">
         record_time = #{recordTime,jdbcType=VARCHAR},
       </if>
+      <if test="isCycle != null">
+        is_cycle = #{isCycle,jdbcType=INTEGER},
+      </if>
+      <if test="buyPrice != null">
+        buy_price = #{buyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="specificationModle != null">
+        specification_modle = #{specificationModle,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="measuringRange != null">
+        measuring_range = #{measuringRange,jdbcType=VARCHAR},
+      </if>
+      <if test="accuracyLevel != null">
+        accuracy_level = #{accuracyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="legalCategory != null">
+        legal_category = #{legalCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="gaugeCategory != null">
+        gauge_category = #{gaugeCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=INTEGER},
+      </if>
+      <if test="description1 != null">
+        description1 = #{description1,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -212,7 +332,18 @@
       metering_system_num = #{meteringSystemNum,jdbcType=VARCHAR},
       metering_get_number_time = #{meteringGetNumberTime,jdbcType=VARCHAR},
       record_person = #{recordPerson,jdbcType=VARCHAR},
-      record_time = #{recordTime,jdbcType=VARCHAR}
+      record_time = #{recordTime,jdbcType=VARCHAR},
+      is_cycle = #{isCycle,jdbcType=INTEGER},
+      buy_price = #{buyPrice,jdbcType=VARCHAR},
+      specification_modle = #{specificationModle,jdbcType=VARCHAR},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      measuring_range = #{measuringRange,jdbcType=VARCHAR},
+      accuracy_level = #{accuracyLevel,jdbcType=VARCHAR},
+      legal_category = #{legalCategory,jdbcType=VARCHAR},
+      gauge_category = #{gaugeCategory,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=INTEGER},
+      description1 = #{description1,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByUtilNum" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -226,6 +357,33 @@
     select
     <include refid="Base_Column_List" />
     from hospital..metering_util
+  </select>
+
+  <select id="findAllMeteringUtilAllChech" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_util
+    <where>
+      <if test="bmName != null">
+        bm_name like #{bmName,jdbcType=VARCHAR} and
+      </if>
+      <if test="sign != null">
+        sign like #{sign,jdbcType=INTEGER} and
+      </if>
+      <if test="gaugeCategory != null">
+        gauge_category like #{gaugeCategory,jdbcType=VARCHAR} and
+      </if>
+      <if test="meteringName != null">
+        metering_name like #{meteringName,jdbcType=VARCHAR} and
+      </if>
+      <if test="meteringstatus != null">
+        meteringStatus = #{meteringstatus,jdbcType=VARCHAR} and
+      </if>
+      <if test="needMeter">
+        description = #{needMeter,jdbcType=VARCHAR} and
+      </if>
+      this_metering_time  >= #{beginTime,jdbcType=VARCHAR} and this_metering_time &lt;= #{endTime,jdbcType=VARCHAR}
+    </where>
   </select>
 
   <select id="findAllMeteringUtilByDepartmentAndName" resultMap="BaseResultMap">

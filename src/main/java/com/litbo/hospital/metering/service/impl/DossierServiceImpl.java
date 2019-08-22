@@ -37,8 +37,13 @@ public class DossierServiceImpl implements DossierService {
 //                                                   卷宗管理     begin
 
     @Override
-    public List<EqInfo> selectEqNeedDossier() {
-        return dossierDAO.selectNeedDossierEq();
+    public List<EqInfo> selectEqNeedDossier(String eqName) {
+
+
+        if(eqName != null){
+            eqName = "%" + eqName + "%";
+        }
+        return dossierDAO.selectNeedDossierEq(eqName);
     }
 
     @Override

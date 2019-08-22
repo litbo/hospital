@@ -11,10 +11,11 @@
     <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="process_name" jdbcType="VARCHAR" property="processName" />
     <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Base_Column_List">
     process_id, deal_person, form_id, deal_time, deal_advertisement, deal_status, department, 
-    process_name, record_time
+    process_name, record_time, description
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,12 +30,12 @@
   <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringDealProcess">
     insert into hospital..metering_deal_process (deal_person, form_id,
       deal_time, deal_advertisement, deal_status, 
-      department, process_name, record_time
-      )
+      department, process_name, record_time, 
+      description)
     values ( #{dealPerson,jdbcType=VARCHAR}, #{formId,jdbcType=INTEGER},
       #{dealTime,jdbcType=VARCHAR}, #{dealAdvertisement,jdbcType=VARCHAR}, #{dealStatus,jdbcType=VARCHAR}, 
-      #{department,jdbcType=VARCHAR}, #{processName,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}
-      )
+      #{department,jdbcType=VARCHAR}, #{processName,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringDealProcess">
     insert into hospital..metering_deal_process
@@ -63,6 +64,9 @@
       <if test="recordTime != null">
         record_time,
       </if>
+      <if test="description != null">
+        description,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
      <if test="dealPerson != null">
@@ -88,6 +92,9 @@
       </if>
       <if test="recordTime != null">
         #{recordTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -118,6 +125,9 @@
       <if test="recordTime != null">
         record_time = #{recordTime,jdbcType=VARCHAR},
       </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
     </set>
     where process_id = #{processId,jdbcType=INTEGER}
   </update>
@@ -130,7 +140,8 @@
       deal_status = #{dealStatus,jdbcType=VARCHAR},
       department = #{department,jdbcType=VARCHAR},
       process_name = #{processName,jdbcType=VARCHAR},
-      record_time = #{recordTime,jdbcType=VARCHAR}
+      record_time = #{recordTime,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
     where process_id = #{processId,jdbcType=INTEGER}
   </update>
 

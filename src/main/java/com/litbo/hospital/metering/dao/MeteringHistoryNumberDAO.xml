@@ -8,11 +8,12 @@
     <result column="get_number_time" jdbcType="VARCHAR" property="getNumberTime" />
     <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
     <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
+    <result column="verification_number" jdbcType="VARCHAR" property="verificationNumber" />
     <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Base_Column_List">
     id, meteringutil_id, meteringutill_number, get_number_time, record_time, record_person, 
-    description
+    verification_number, description
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,10 @@
   <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
     insert into hospital..metering_history_number (meteringutil_id, meteringutill_number,
       get_number_time, record_time, record_person, 
-      description)
+      verification_number, description)
     values (#{meteringutilId,jdbcType=INTEGER}, #{meteringutillNumber,jdbcType=VARCHAR},
       #{getNumberTime,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR})
+      #{verificationNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
     insert into hospital..metering_history_number
@@ -49,6 +50,9 @@
       </if>
       <if test="recordPerson != null">
         record_person,
+      </if>
+      <if test="verificationNumber != null">
+        verification_number,
       </if>
       <if test="description != null">
         description,
@@ -69,6 +73,9 @@
       </if>
       <if test="recordPerson != null">
         #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationNumber != null">
+        #{verificationNumber,jdbcType=VARCHAR},
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
@@ -93,6 +100,9 @@
       <if test="recordPerson != null">
         record_person = #{recordPerson,jdbcType=VARCHAR},
       </if>
+      <if test="verificationNumber != null">
+        verification_number = #{verificationNumber,jdbcType=VARCHAR},
+      </if>
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
@@ -106,6 +116,7 @@
       get_number_time = #{getNumberTime,jdbcType=VARCHAR},
       record_time = #{recordTime,jdbcType=VARCHAR},
       record_person = #{recordPerson,jdbcType=VARCHAR},
+      verification_number = #{verificationNumber,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
