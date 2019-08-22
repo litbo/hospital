@@ -1402,14 +1402,20 @@
 			,
               
               {
-				"title": "文档管理",
+				"title": "设备档案管理",
 				"url": "javascript:void;",
 				"id": "75001",
 				"shiro": "CX",
                 "icon": "book",
 				"children": [
 		          {
-		            "title": "文档列表",
+		            "title": "立卷建档",
+		            "url": "./safe/dossier-managent/dossier-need-list.html",
+		            "id": "75003",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "设备档案列表",
 		            "url": "./safe/dossier-managent/dossier-list.html",
 		            "id": "75002",
 		            "shiro": "CX"

@@ -1,4 +1,4 @@
-package com.litbo.hospital.security.inspectionplan.bean;
+package com.litbo.hospital.security.inspectionplan.bean.vo;
 
 import lombok.Data;
 
