@@ -6,7 +6,7 @@ import com.litbo.hospital.metering.pojo.Dossier;
 import com.litbo.hospital.metering.pojo.DossierFile;
 import com.litbo.hospital.metering.service.DossierService;
 import com.litbo.hospital.metering.util.PropertiesUtil;
-import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.bean.EqInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,16 +34,15 @@ public class DossierServiceImpl implements DossierService {
     private String catagoryPath = "D:\\hospitalConfigFile\\";
 
 
-    //                                                   卷宗管理     begin
+//                                                   卷宗管理     begin
+
+    @Override
+    public List<EqInfo> selectEqNeedDossier() {
+        return dossierDAO.selectNeedDossierEq();
+    }
 
     @Override
     public int addDossier(Dossier dossier,String dossierNumPrefix,String dossierNumSuffix) {
-
-        // 检查卷宗编号是否重复
-        Dossier dossierCheck = dossierDAO.selectByDossierNum(dossier.getDossierNum());
-        if(dossierCheck != null){
-            return 0;
-        }
 
         // 得到卷宗编号
         String dossierNum = getPropertiesDossiesNum(dossierNumPrefix,dossierNumSuffix);
@@ -52,25 +51,11 @@ public class DossierServiceImpl implements DossierService {
         String nowtiem = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss a").format(new Date());
 
         dossier.setRecordTime(nowtiem);
+        dossier.setDossierType(0);
 
         // 生成电子文件夹
-        switch (dossier.getDossierType()){
-            case 1:{
-                dossier.setDescription(catagoryPath+"PurchaseFile\\"+dossierNum+"_"+dossier.getDossierName()+"\\");
-            }break;
-            case 2:{
-                dossier.setDescription(catagoryPath+"Equipment_technology_file\\"+dossierNum+"_"+dossier.getDossierName()+"\\");
-            }break;
-            case 3 :{
-                dossier.setDescription(catagoryPath+"management_file\\"+dossierNum+"_"+dossier.getDossierName()+"\\");
-            }break;
-            case 4:{
-                dossier.setDescription(catagoryPath+"other_file\\"+dossierNum+"_"+dossier.getDossierName()+"\\");
-            }break;
-            default:{
-                dossier.setDescription(catagoryPath+"other_file\\"+dossierNum+"_"+dossier.getDossierName()+"\\");
-            }
-        }
+        dossier.setDescription(catagoryPath+dossierNum+"_"+dossier.getDossierName()+"\\");
+
         return dossierDAO.insert(dossier);
     }
 
@@ -153,21 +138,7 @@ public class DossierServiceImpl implements DossierService {
         return 0;
     }
 
-    @Override
-    public int deleterDossierByNum(String dossierNum) {
-        Dossier dossier = dossierDAO.selectByDossierNum(dossierNum);
-        // 如果卷宗内还有文件则删除失败
-        List<DossierFile> dossierFiles = dossierFileDAO.selectAllDossierFile(dossier.getDossierNum());
-        if(dossierFiles.isEmpty()){
-            return 0;
-        }
-        return dossierDAO.deleteByDossierNum(dossierNum);
-    }
 
-    @Override
-    public Dossier selectDossierByDossierNum(String dossierNum) {
-        return dossierDAO.selectByDossierNum(dossierNum);
-    }
 
     @Override
     public Dossier selectDossierByID(int id) {
@@ -185,10 +156,8 @@ public class DossierServiceImpl implements DossierService {
         return dossierDAO.selectAllDossierByNameOrBmName(name,bmName);
     }
 
-    @Override
-    public List<Dossier> findAllDossier() {
-        return dossierDAO.selectAllDossier();
-    }
+
+
 
     //                                                  卷宗管理           end
 
@@ -196,6 +165,13 @@ public class DossierServiceImpl implements DossierService {
 
     //                                                 文件管理       begin
 
+    /**
+     * 添加卷宗中的文件
+     * @param dossierFile
+     * @param path
+     * @param dossierId
+     * @return
+     */
     @Override
     public int addDossierFile(DossierFile dossierFile,String path , int dossierId) {
 
@@ -204,12 +180,17 @@ public class DossierServiceImpl implements DossierService {
         if(dossier == null){
             return 0;
         }
+
+        // 卷宗文件加一
+        int i = dossier.getDossierType();
+        dossier.setDossierType(i++);
+        dossierDAO.updateByPrimaryKey(dossier);
+
         // 获得当前时间
         String nowTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a").format(new Date());
 
         // 文件编号的前缀
-        String prefix = dossier.getDossierNum().substring(9,12) + "-" + dossier.getDossierType() + "-";
-        System.out.println("得到的卷宗文件编号的前缀是："+prefix);
+        String prefix = dossier.getDossierNum().substring(9,12) + "-" + dossierFile.getFileType() + "-";
 
 
         // 设置dossierFile的相关信息   begin
@@ -253,14 +234,13 @@ public class DossierServiceImpl implements DossierService {
     }
 
     @Override
-    public int deleterDossierFile(int dosserFileId) {
+    public int deleterDossierFile(int dosserFileId,Dossier dossier) {
+        int i = dossier.getDossierType();
+        dossier.setDossierType(i--);
+        dossierDAO.updateByPrimaryKey(dossier);
         return dossierFileDAO.deleteByPrimaryKey(dosserFileId);
     }
 
-    @Override
-    public int updateDossierFile(DossierFile dossierFile) {
-        return dossierFileDAO.updateByPrimaryKey(dossierFile);
-    }
 
     @Override
     public DossierFile selectDossierFile(int dossierFileId) {
@@ -268,14 +248,19 @@ public class DossierServiceImpl implements DossierService {
     }
 
     @Override
-    public List<DossierFile> findAllDossierFileByDossierName(String dossierName) {
-        return dossierFileDAO.selectAllDossierFile(dossierName);
+    public Dossier selectDossierByBelongNum(String BelongNum) {
+        return dossierDAO.selectByDossierNum(BelongNum);
     }
 
     @Override
-    public List<DossierFile> findAlldossierFileByFileName(String dossierFileName) {
-        return dossierFileDAO.selectDossierFileByName(dossierFileName);
+    public List<DossierFile> findAllDossierFileByDossierNum(String dossierNum,Integer dossiserFileType,String fileName) {
+        if(fileName != null){
+            fileName = "%" + fileName + "%";
+        }
+        return dossierFileDAO.selectAllDossierFileByDossierNum(dossierNum,dossiserFileType,fileName);
     }
+
+
 
 
     //                                                   文件管理     end

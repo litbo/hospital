@@ -41,6 +41,8 @@ public class DossierFile implements Serializable {
 
     private String recordPerson;
 
+    private Integer fileType;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -179,6 +181,14 @@ public class DossierFile implements Serializable {
         this.recordPerson = recordPerson;
     }
 
+    public Integer getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(Integer fileType) {
+        this.fileType = fileType;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -207,7 +217,8 @@ public class DossierFile implements Serializable {
             && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
             && (this.getFileUrl() == null ? other.getFileUrl() == null : this.getFileUrl().equals(other.getFileUrl()))
             && (this.getRecordTime() == null ? other.getRecordTime() == null : this.getRecordTime().equals(other.getRecordTime()))
-            && (this.getRecordPerson() == null ? other.getRecordPerson() == null : this.getRecordPerson().equals(other.getRecordPerson()));
+            && (this.getRecordPerson() == null ? other.getRecordPerson() == null : this.getRecordPerson().equals(other.getRecordPerson()))
+            && (this.getFileType() == null ? other.getFileType() == null : this.getFileType().equals(other.getFileType()));
     }
 
     @Override
@@ -231,6 +242,7 @@ public class DossierFile implements Serializable {
         result = prime * result + ((getFileUrl() == null) ? 0 : getFileUrl().hashCode());
         result = prime * result + ((getRecordTime() == null) ? 0 : getRecordTime().hashCode());
         result = prime * result + ((getRecordPerson() == null) ? 0 : getRecordPerson().hashCode());
+        result = prime * result + ((getFileType() == null) ? 0 : getFileType().hashCode());
         return result;
     }
 
@@ -257,6 +269,7 @@ public class DossierFile implements Serializable {
         sb.append(", fileUrl=").append(fileUrl);
         sb.append(", recordTime=").append(recordTime);
         sb.append(", recordPerson=").append(recordPerson);
+        sb.append(", fileType=").append(fileType);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
