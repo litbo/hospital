@@ -27,6 +27,8 @@ public class MeteringDealProcess implements Serializable {
 
     private String description;
 
+    private String verificationUnit;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getProcessId() {
@@ -109,6 +111,14 @@ public class MeteringDealProcess implements Serializable {
         this.description = description;
     }
 
+    public String getVerificationUnit() {
+        return verificationUnit;
+    }
+
+    public void setVerificationUnit(String verificationUnit) {
+        this.verificationUnit = verificationUnit;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -130,7 +140,8 @@ public class MeteringDealProcess implements Serializable {
             && (this.getDepartment() == null ? other.getDepartment() == null : this.getDepartment().equals(other.getDepartment()))
             && (this.getProcessName() == null ? other.getProcessName() == null : this.getProcessName().equals(other.getProcessName()))
             && (this.getRecordTime() == null ? other.getRecordTime() == null : this.getRecordTime().equals(other.getRecordTime()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getVerificationUnit() == null ? other.getVerificationUnit() == null : this.getVerificationUnit().equals(other.getVerificationUnit()));
     }
 
     @Override
@@ -147,6 +158,7 @@ public class MeteringDealProcess implements Serializable {
         result = prime * result + ((getProcessName() == null) ? 0 : getProcessName().hashCode());
         result = prime * result + ((getRecordTime() == null) ? 0 : getRecordTime().hashCode());
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getVerificationUnit() == null) ? 0 : getVerificationUnit().hashCode());
         return result;
     }
 
@@ -166,6 +178,7 @@ public class MeteringDealProcess implements Serializable {
         sb.append(", processName=").append(processName);
         sb.append(", recordTime=").append(recordTime);
         sb.append(", description=").append(description);
+        sb.append(", verificationUnit=").append(verificationUnit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
