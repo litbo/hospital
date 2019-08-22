@@ -62,18 +62,29 @@
 
 <script>
 	var emp = tempValue("rl", "emp", false);
+	var color = ["black","green","green","blue","red","red"];
+	var values = ["未知","合格","准用","停用","封存","报废"];
     renderMod = {
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "numbers", title: '序号' },
-                    {type: "checkbox"}
-                    , {field: 'meteringName', title: '设备名称', minWidth: 100}
-                    , {field: 'bmName', title: '使用科室', minWidth: 70}
-                    , {field: 'buyTime', title: '购买时间', minWidth: 120}
-                    , {field: 'userXm', title: '购买人', minWidth: 100}
-                    , {field: 'thisMeteringTime', title: '购买时间', minWidth: 120}
-                    , {field: 'updateMessageTime', title: '最近修改时间', minWidth: 200}
+                    {type: "numbers", title: '序号' }
+                    , {field: 'sign', title: '标志', minWidth: 70,templet:function(d){
+                    	var field = this.field;
+                    	var value = d[field];
+                    	return "<span style='color:#fff;padding:2px 4px;background:"+color[value]+"'>"+(values[value] || value)+"</span>";
+                    }}
+                    , {field: 'gaugeCategory', title: '器具类别', minWidth: 100}
+                    , {field: 'meteringSystemNum', title: '器具编号', minWidth: 250}
+                    , {field: 'meteringName', title: '设备器具名称', minWidth: 150}
+                    , {field: 'specificationModle', title: '规格型号', minWidth: 100}
+                    , {field: 'measuringRange', title: '测量范围', minWidth: 100}
+                    , {field: 'accuracyLevel', title: '精度等级', minWidth: 100}
+                    , {field: 'bmName', title: '使用科室', minWidth: 150}
+                    , {field: 'meteringInspectionCycle', title: '检查周期', minWidth: 150}
+                    , {field: 'meteringGetNumberTime', title: '检定日期', minWidth: 150}
+                    , {field: 'meteringstatus', title: '状态', minWidth: 100}
+                    , {field: 'description1', title: '备注', minWidth: 100}
                     , {fixed:'right',width:150,align:'center',title:'操作',toolbar: "#bar"}
                 ]]
                 , url:"/Metering/findAllMeteringUtil.do"
@@ -123,7 +134,7 @@
                                 title:"查看",
                                 type:2,
                                 content:"./child/metering-view.html",
-                                dataUrl:["id"]
+                                dataUrl:["id","meteringstatus"]
                             }
                         ]
                     })
