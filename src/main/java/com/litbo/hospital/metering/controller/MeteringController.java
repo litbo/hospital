@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
 import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
+import com.litbo.hospital.metering.pojo.MeteringUtilStatus;
 import com.litbo.hospital.metering.service.MeteringService;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
@@ -381,5 +382,30 @@ public class MeteringController {
         vo.setCode(0);
         vo.setData(vo.new DataEntity((int) info.getTotal(),meteringHistoryNumbers));
         return vo;
+    }
+
+
+    /**
+     * 设备使用状态更改
+     * @param status
+     * @return
+     */
+    @RequestMapping("/updateUtilUseStatus.do")
+    public Result updateUtilUseStatus(MeteringUtilStatus status){
+        int result = meteringService.updateMeteringUtilUseStatus(status);
+        if(result == 0){
+            return Result.error("删除失败");
+        }
+        return Result.success();
+    }
+
+
+    @RequestMapping("/getUtilStatusMsg.do")
+    public Result getUtilStatusMsg(int id){
+        MeteringUtilStatus status = meteringService.getMeteringUtilUseStatusByUtilId(id);
+        if(status == null){
+            return Result.success();
+        }
+        return Result.success(status);
     }
 }
