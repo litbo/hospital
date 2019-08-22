@@ -12,10 +12,11 @@
     <result column="process_name" jdbcType="VARCHAR" property="processName" />
     <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="verification_unit" jdbcType="VARCHAR" property="verificationUnit" />
   </resultMap>
   <sql id="Base_Column_List">
     process_id, deal_person, form_id, deal_time, deal_advertisement, deal_status, department, 
-    process_name, record_time, description
+    process_name, record_time, description, verification_unit
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,11 +32,11 @@
     insert into hospital..metering_deal_process (deal_person, form_id,
       deal_time, deal_advertisement, deal_status, 
       department, process_name, record_time, 
-      description)
+      description, verification_unit)
     values ( #{dealPerson,jdbcType=VARCHAR}, #{formId,jdbcType=INTEGER},
       #{dealTime,jdbcType=VARCHAR}, #{dealAdvertisement,jdbcType=VARCHAR}, #{dealStatus,jdbcType=VARCHAR}, 
       #{department,jdbcType=VARCHAR}, #{processName,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR})
+      #{description,jdbcType=VARCHAR}, #{verificationUnit,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringDealProcess">
     insert into hospital..metering_deal_process
@@ -67,6 +68,9 @@
       <if test="description != null">
         description,
       </if>
+      <if test="verificationUnit != null">
+        verification_unit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
      <if test="dealPerson != null">
@@ -95,6 +99,9 @@
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationUnit != null">
+        #{verificationUnit,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -128,6 +135,9 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="verificationUnit != null">
+        verification_unit = #{verificationUnit,jdbcType=VARCHAR},
+      </if>
     </set>
     where process_id = #{processId,jdbcType=INTEGER}
   </update>
@@ -141,7 +151,8 @@
       department = #{department,jdbcType=VARCHAR},
       process_name = #{processName,jdbcType=VARCHAR},
       record_time = #{recordTime,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
+      description = #{description,jdbcType=VARCHAR},
+      verification_unit = #{verificationUnit,jdbcType=VARCHAR}
     where process_id = #{processId,jdbcType=INTEGER}
   </update>
 
@@ -150,9 +161,6 @@
     <include refid="Base_Column_List" />
     from hospital..metering_deal_process
     <where>
-      <if test="recordBeginTime != null">
-        record_time >= #{recordBeginTime} and
-      </if>
       <if test="recordEndTime != null">
         record_time &lt;= #{recordEndTime} and
       </if>
@@ -163,12 +171,28 @@
         deal_time &lt;= #{dealEndTime} and
       </if>
       <if test="department != null">
-        affiliate_department = #{department} and
+        department = #{department,jdbcType=VARCHAR} and
       </if>
       <if test="status != null">
-        deal_status = #{status,jdbcType=VARCHAR} and
+        deal_status like #{status,jdbcType=VARCHAR} and
       </if>
-        1 = 1
+        record_time >= #{recordBeginTime}
     </where>
   </select>
+
+
+    <select id="searchDealProcessNot" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hospital..metering_deal_process
+        <where>
+            <if test="recordEndTime != null">
+                record_time &lt;= #{recordEndTime} and
+            </if>
+            <if test="department != null">
+                department = #{department,jdbcType=VARCHAR} and
+            </if>
+            deal_status = '' and record_time >= #{recordBeginTime}
+        </where>
+    </select>
 </mapper>

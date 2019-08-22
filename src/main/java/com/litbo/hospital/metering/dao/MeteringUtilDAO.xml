@@ -430,7 +430,7 @@
     <include refid="Base_Column_List" />
     from hospital..metering_util
     where this_metering_time  >= #{beginTime,jdbcType=VARCHAR} and this_metering_time &lt;= #{endTiem,jdbcType=VARCHAR} and
-    description = 0 and meteringStatus = '在用'
+    description = 0 and meteringStatus = '在用' or meteringStatus = '在库'
   </select>
 
   <select id="searchMeteringUtil" resultMap="BaseResultMap">
@@ -445,12 +445,12 @@
         this_metering_time &lt;= #{endTiem,jdbcType=VARCHAR} and
       </if>
       <if test="department != null">
-        bm_name = #{department,jdbcType=VARCHAR} and
+        bm_name like #{department,jdbcType=VARCHAR} and
       </if>
       <if test="status != null">
         description = #{status,jdbcType=VARCHAR} and
       </if>
-      meteringStatus = '在用' and description = 0
+      meteringStatus = '在用'  or meteringStatus = '在库'
     </where>
   </select>
 

@@ -311,26 +311,32 @@ public class MeteringController {
 
 
     /**
-     * 得到这一个月中需要送去检查的计量设备，按照部门来分类
+     * 得到未来90天中需要送去检查的计量设备，按照部门来分类
      * @param department 部门
      * @return
      */
     @RequestMapping("/getTheMonthUtil.do")
     public PageVo getTheMonthNeedToMeteringUtils(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                                  @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
-                                                 String department){
+                                                 @RequestParam(name = "department" , defaultValue = "") String department){
+
+        if(department.equals("")){
+            department = null;
+        }
 
         // 得到当前月的第一天和最后一天的日期
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Calendar calendar = Calendar.getInstance();
+
         calendar.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
         String firstDay = sdf.format(calendar.getTime());
+        calendar.add(Calendar.MONTH,2);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));  // 设置日期为本月的最后一天
         String endDay = sdf.format(calendar.getTime());
 
-//        通过日期来查询本月尚未进行计量的设备
+//        通过日期来查询未来90天尚未进行计量的设备
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(firstDay,endDay,department,"1");
+        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(firstDay,endDay,department,"0");
         PageInfo info = new PageInfo(meteringUtils);
         PageVo vo = new PageVo();
         if(!meteringUtils.isEmpty()){
@@ -403,6 +409,11 @@ public class MeteringController {
     }
 
 
+    /**
+     * 得到设备状态信息
+     * @param id
+     * @return
+     */
     @RequestMapping("/getUtilStatusMsg.do")
     public Result getUtilStatusMsg(int id){
         MeteringUtilStatus status = meteringService.getMeteringUtilUseStatusByUtilId(id);
