@@ -46,6 +46,8 @@ public interface MeteringService {
     // 更改设备使用状态
     int updateMeteringUtilUseStatus(MeteringUtilStatus status);
 
+    MeteringUtilStatus selectStatusById(int id);
+
     // 根据设备id查询使用状态信息
     MeteringUtilStatus getMeteringUtilUseStatusByUtilId(int id);
 

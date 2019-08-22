@@ -164,7 +164,17 @@ public class MeteringServiceImpl implements MeteringService {
 
     @Override
     public int updateMeteringUtilUseStatus(MeteringUtilStatus status) {
-        return meteringUtilStatusDAO.insert(status);
+        MeteringUtilStatus status1 = meteringUtilStatusDAO.selectByUtilId(status.getUtilId());
+        if(status1 != null){
+            meteringUtilStatusDAO.deleteByPrimaryKey(status1.getId());
+        }
+        return  meteringUtilStatusDAO.insert(status);
+
+    }
+
+    @Override
+    public MeteringUtilStatus selectStatusById(int id) {
+        return meteringUtilStatusDAO.selectByPrimaryKey(id);
     }
 
     @Override
