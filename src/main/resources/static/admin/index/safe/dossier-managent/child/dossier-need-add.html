@@ -30,9 +30,6 @@
 
 <body>
 <div class="layui-row">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>文档信息添加</legend>
-    </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
@@ -90,7 +87,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">文件存放位置</label>
                 <div class="layui-input-block">
-                      <input type="text" name="fileLocaltion" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="fileLocaltion" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -98,7 +95,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">规格型号</label>
                 <div class="layui-input-block">
-                      <input type="text" name="specification" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="specification" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -106,7 +103,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">生产厂家</label>
                 <div class="layui-input-block">
-                      <input type="text" name="manufacturer" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="manufacturer" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -114,7 +111,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">购买时间</label>
                 <div class="layui-input-block">
-                      <input type="text" name="buyTime" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="buyTime" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -132,7 +129,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">代理商</label>
                 <div class="layui-input-block">
-                    <input type="text" name="agent" disabled autocomplete="off" class="layui-input">
+                    <input type="text" name="agent" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -162,6 +159,9 @@ var formData2 = {};
                     format:'yyyy/MM/dd'
                 },{
                     elem: "#endTime",
+                    format:'yyyy/MM/dd'
+                },{
+                    elem: "#buyTime",
                     format:'yyyy/MM/dd'
                 }],
                 submit: {
