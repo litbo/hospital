@@ -9,10 +9,11 @@
     <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
     <result column="deal_status" jdbcType="VARCHAR" property="dealStatus" />
     <result column="deal_time" jdbcType="VARCHAR" property="dealTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Base_Column_List">
     form_id, affiliate_department, form_name, metering_id, record_time, deal_status, 
-    deal_time
+    deal_time, description
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,10 @@
   <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringApprovalForm">
     insert into hospital..metering_approval_form (affiliate_department, form_name,
       metering_id, record_time, deal_status, 
-      deal_time)
+      deal_time, description)
     values (#{affiliateDepartment,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR},
       #{meteringId,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{dealStatus,jdbcType=VARCHAR}, 
-      #{dealTime,jdbcType=VARCHAR})
+      #{dealTime,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringApprovalForm">
     insert into hospital..metering_approval_form
@@ -53,6 +54,9 @@
       <if test="dealTime != null">
         deal_time,
       </if>
+      <if test="description != null">
+        description,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="affiliateDepartment != null">
@@ -72,6 +76,9 @@
       </if>
       <if test="dealTime != null">
         #{dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -96,6 +103,9 @@
       <if test="dealTime != null">
         deal_time = #{dealTime,jdbcType=VARCHAR},
       </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
     </set>
     where form_id = #{formId,jdbcType=INTEGER}
   </update>
@@ -106,7 +116,8 @@
       metering_id = #{meteringId,jdbcType=VARCHAR},
       record_time = #{recordTime,jdbcType=VARCHAR},
       deal_status = #{dealStatus,jdbcType=VARCHAR},
-      deal_time = #{dealTime,jdbcType=VARCHAR}
+      deal_time = #{dealTime,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
     where form_id = #{formId,jdbcType=INTEGER}
   </update>
 

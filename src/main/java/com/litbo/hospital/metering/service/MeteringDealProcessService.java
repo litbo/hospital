@@ -43,4 +43,6 @@ public interface MeteringDealProcessService {
     MeteringDealProcess selectMeteringDealProcessByPrimaryKey(int id);
 
     int updateProcessByPrimaryKeySelective(MeteringDealProcess record);
+
+    int deleterProcess(int processId);
 }

@@ -111,4 +111,9 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
     public int updateProcessByPrimaryKeySelective(MeteringDealProcess record) {
         return meteringDealProcessDAO.updateByPrimaryKeySelective(record);
     }
+
+    @Override
+    public int deleterProcess(int processId) {
+        return meteringDealProcessDAO.deleteByPrimaryKey(processId);
+    }
 }

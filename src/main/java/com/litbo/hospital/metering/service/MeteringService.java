@@ -22,12 +22,11 @@ public interface MeteringService {
 
     MeteringUtil findMeteringUtilById(int id);
 
-    MeteringUtil findMeteringUtilByUtilNum(String num);
-
-    int disableDevice(int meteringutilId);
-
     //    查询所有的设备信息
     List<MeteringUtil> findAllMeteringUtil();
+
+
+    List<MeteringUtil> findAllMeteringUtilAllCheck(Integer sign, String gaugeCategory,String meteringName,String bmName, String meteringstatus,String beginTime,String endTime,String needMeter);
 
     //    根据部门查看设备信息
 
