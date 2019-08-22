@@ -1,6 +1,7 @@
 package com.litbo.hospital.metering.dao;
 
 import com.litbo.hospital.metering.pojo.Dossier;
+import com.litbo.hospital.user.bean.EqInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface DossierDAO {
     int updateByPrimaryKeySelective(Dossier record);
 
     int updateByPrimaryKey(Dossier record);
+
+    List<EqInfo> selectNeedDossierEq();
 }

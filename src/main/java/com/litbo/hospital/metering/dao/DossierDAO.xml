@@ -19,11 +19,12 @@
     <result column="buy_time" jdbcType="VARCHAR" property="buyTime" />
     <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
     <result column="agent" jdbcType="VARCHAR" property="agent" />
+    <result column="eq_id" jdbcType="VARCHAR" property="eqId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, dossier_num, dossier_name, begin_time, end_time, dossier_nature, save_type, dossier_type, 
     description, file_localtion, record_time, record_person, specification, manufacturer, 
-    buy_time, bm_name, agent
+    buy_time, bm_name, agent, eq_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -41,13 +42,15 @@
       save_type, dossier_type, description, 
       file_localtion, record_time, record_person, 
       specification, manufacturer, buy_time, 
-      bm_name, agent)
+      bm_name, agent, eq_id
+      )
     values (#{dossierNum,jdbcType=VARCHAR}, #{dossierName,jdbcType=VARCHAR},
       #{beginTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{dossierNature,jdbcType=VARCHAR}, 
       #{saveType,jdbcType=VARCHAR}, #{dossierType,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
       #{fileLocaltion,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR}, 
       #{specification,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
-      #{bmName,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR})
+      #{bmName,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{eqId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.Dossier">
     insert into hospital..dossier
@@ -100,6 +103,9 @@
       <if test="agent != null">
         agent,
       </if>
+      <if test="eqId != null">
+        eq_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="dossierNum != null">
@@ -149,6 +155,9 @@
       </if>
       <if test="agent != null">
         #{agent,jdbcType=VARCHAR},
+      </if>
+      <if test="eqId != null">
+        #{eqId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -203,6 +212,9 @@
       <if test="agent != null">
         agent = #{agent,jdbcType=VARCHAR},
       </if>
+      <if test="eqId != null">
+        eq_id = #{eqId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -223,7 +235,8 @@
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       buy_time = #{buyTime,jdbcType=VARCHAR},
       bm_name = #{bmName,jdbcType=VARCHAR},
-      agent = #{agent,jdbcType=VARCHAR}
+      agent = #{agent,jdbcType=VARCHAR},
+      eq_id = #{eqId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -259,4 +272,9 @@
     delete from hospital..dossier
     where dossier_num = #{dossierNum,jdbcType=VARCHAR}
   </delete>
+
+
+  <select id="selectNeedDossierEq" resultType="com.litbo.hospital.user.bean.EqInfo">
+    select * from eq_info where eq_info.eq_id not in(select dossier.eq_id from dossier)
+  </select>
 </mapper>

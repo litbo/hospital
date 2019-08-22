@@ -2,6 +2,7 @@ package com.litbo.hospital.metering.service;
 
 import com.litbo.hospital.metering.pojo.Dossier;
 import com.litbo.hospital.metering.pojo.DossierFile;
+import com.litbo.hospital.user.bean.EqInfo;
 
 import java.util.List;
 
@@ -14,27 +15,21 @@ import java.util.List;
 public interface DossierService {
 
     //     卷宗管理    begin
+    // 查看还没有立卷宗的文件
+    List<EqInfo> selectEqNeedDossier();
     int addDossier(Dossier dossier,String dossierNumPrefix,String DossierNumSuffix);
-
     int updateDossier(Dossier dossier);
-
     int deleterDossierById(int dossierId);
-    int deleterDossierByNum(String dossierNum);
-
-    Dossier selectDossierByDossierNum(String dossierNum);
     Dossier selectDossierByID(int id);
     List<Dossier> selectDossierByName(String name,String bmName);
-
-    List<Dossier>  findAllDossier();
 
     //     卷宗管理    end
 
     //     文件管理    begin
     int addDossierFile(DossierFile dossierFile,String path,int dossierId);
-    int deleterDossierFile(int dosserFileId);
-    int updateDossierFile(DossierFile dossierFile);
+    int deleterDossierFile(int dosserFileId,Dossier dossier);
     DossierFile selectDossierFile(int dossierFileId);
-    List<DossierFile> findAllDossierFileByDossierName(String dossierName);
-    List<DossierFile> findAlldossierFileByFileName(String dossierFileName);
+    Dossier selectDossierByBelongNum(String BelongNum);
+    List<DossierFile> findAllDossierFileByDossierNum(String dossierNum,Integer dossiserFileType,String fileName);
     //     文件管理    end
 }
