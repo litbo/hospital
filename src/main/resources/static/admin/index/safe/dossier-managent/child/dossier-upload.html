@@ -90,6 +90,14 @@
                 </div>
             </div>
          </div>
+         <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" name="description1" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+         </div>
          
         <div class="col-xs-12">
             <div class="layui-form-item" style="margin:20px 0;">
@@ -121,7 +129,7 @@
                     auto:false,
                     bindAction:"#upData",
                     field:"file",
-                    data:["dossierId","recordPerson","fileDate","fileSize","summary","fileUrl","fileType"],
+                    data:["dossierId","recordPerson","fileDate","fileSize","summary","fileUrl","fileType","description1"],
                     done:function(res,index,upload){
                         //console.log(arguments);
                         layer.msg('提交成功！', {

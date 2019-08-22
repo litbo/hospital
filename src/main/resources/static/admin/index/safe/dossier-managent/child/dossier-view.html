@@ -91,6 +91,14 @@
                 </div>
             </div>
          </div>
+         <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" name="description1" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
         <div class="col-xs-12">
              <table id="table" lay-filter="table1"></table>
          </div>
@@ -125,6 +133,7 @@
 	  	                , {field: 'fileDate', title: '日期', minWidth: 150}
 	  	                , {field: 'fileSize', title: '页数', minWidth: 150}
 	  	                , {field: 'summary', title: '摘要', minWidth: 150}
+	  	                , {field: 'description1', title: '备注', minWidth: 150}
 	                    , {fixed:'right',width:150,align:'center',title:'操作',toolbar: "#bar"}
 	  	            ]]
 	  	            , request: {
