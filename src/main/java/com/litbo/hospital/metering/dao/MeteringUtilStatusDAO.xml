@@ -9,9 +9,10 @@
     <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
     <result column="user_xm" jdbcType="VARCHAR" property="userXm" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="cause" jdbcType="VARCHAR" property="cause" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, util_id, use_type, record_date, bm_name, user_xm, description
+    id, util_id, use_type, record_date, bm_name, user_xm, description, cause
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringUtilStatus">
     insert into hospital..meteringUtilStatus (util_id, use_type,
       record_date, bm_name, user_xm, 
-      description)
+      description, cause)
     values (#{utilId,jdbcType=INTEGER}, #{useType,jdbcType=VARCHAR},
       #{recordDate,jdbcType=VARCHAR}, #{bmName,jdbcType=VARCHAR}, #{userXm,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR})
+      #{description,jdbcType=VARCHAR}, #{cause,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringUtilStatus">
     insert into hospital..meteringUtilStatus
@@ -52,6 +53,9 @@
       <if test="description != null">
         description,
       </if>
+      <if test="cause != null">
+        cause,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="utilId != null">
@@ -71,6 +75,9 @@
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null">
+        #{cause,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -95,6 +102,9 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="cause != null">
+        cause = #{cause,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -105,7 +115,8 @@
       record_date = #{recordDate,jdbcType=VARCHAR},
       bm_name = #{bmName,jdbcType=VARCHAR},
       user_xm = #{userXm,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
+      description = #{description,jdbcType=VARCHAR},
+      cause = #{cause,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
