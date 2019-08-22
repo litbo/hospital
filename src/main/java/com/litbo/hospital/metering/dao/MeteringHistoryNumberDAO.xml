@@ -10,10 +10,13 @@
     <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
     <result column="verification_number" jdbcType="VARCHAR" property="verificationNumber" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="verification_unit" jdbcType="VARCHAR" property="verificationUnit" />
+    <result column="effective_date" jdbcType="VARCHAR" property="effectiveDate" />
+    <result column="verification_result" jdbcType="VARCHAR" property="verificationResult" />
   </resultMap>
   <sql id="Base_Column_List">
     id, meteringutil_id, meteringutill_number, get_number_time, record_time, record_person, 
-    verification_number, description
+    verification_number, description, verification_unit, effective_date, verification_result
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +31,12 @@
   <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
     insert into hospital..metering_history_number (meteringutil_id, meteringutill_number,
       get_number_time, record_time, record_person, 
-      verification_number, description)
+      verification_number, description, verification_unit, 
+      effective_date, verification_result)
     values (#{meteringutilId,jdbcType=INTEGER}, #{meteringutillNumber,jdbcType=VARCHAR},
       #{getNumberTime,jdbcType=VARCHAR}, #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR}, 
-      #{verificationNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+      #{verificationNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{verificationUnit,jdbcType=VARCHAR}, 
+      #{effectiveDate,jdbcType=VARCHAR}, #{verificationResult,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringHistoryNumber">
     insert into hospital..metering_history_number
@@ -57,6 +62,15 @@
       <if test="description != null">
         description,
       </if>
+      <if test="verificationUnit != null">
+        verification_unit,
+      </if>
+      <if test="effectiveDate != null">
+        effective_date,
+      </if>
+      <if test="verificationResult != null">
+        verification_result,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="meteringutilId != null">
@@ -79,6 +93,15 @@
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationUnit != null">
+        #{verificationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveDate != null">
+        #{effectiveDate,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationResult != null">
+        #{verificationResult,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -106,6 +129,15 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="verificationUnit != null">
+        verification_unit = #{verificationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveDate != null">
+        effective_date = #{effectiveDate,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationResult != null">
+        verification_result = #{verificationResult,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -117,7 +149,10 @@
       record_time = #{recordTime,jdbcType=VARCHAR},
       record_person = #{recordPerson,jdbcType=VARCHAR},
       verification_number = #{verificationNumber,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
+      description = #{description,jdbcType=VARCHAR},
+      verification_unit = #{verificationUnit,jdbcType=VARCHAR},
+      effective_date = #{effectiveDate,jdbcType=VARCHAR},
+      verification_result = #{verificationResult,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
