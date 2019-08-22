@@ -2,8 +2,10 @@ package com.litbo.hospital.metering.service.impl;
 
 import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
 import com.litbo.hospital.metering.dao.MeteringUtilDAO;
+import com.litbo.hospital.metering.dao.MeteringUtilStatusDAO;
 import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
+import com.litbo.hospital.metering.pojo.MeteringUtilStatus;
 import com.litbo.hospital.metering.service.MeteringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class MeteringServiceImpl implements MeteringService {
 
     @Autowired
     private MeteringHistoryNumberDAO meteringHistoryNumberDAO;
+
+    @Autowired
+    private MeteringUtilStatusDAO meteringUtilStatusDAO;
 
 
     @Override
@@ -155,6 +160,16 @@ public class MeteringServiceImpl implements MeteringService {
             m.setDescription("1");
         }
         return meteringUtilDAO.updateByPrimaryKey(m);
+    }
+
+    @Override
+    public int updateMeteringUtilUseStatus(MeteringUtilStatus status) {
+        return meteringUtilStatusDAO.insert(status);
+    }
+
+    @Override
+    public MeteringUtilStatus getMeteringUtilUseStatusByUtilId(int id) {
+        return meteringUtilStatusDAO.selectByUtilId(id);
     }
 
 
