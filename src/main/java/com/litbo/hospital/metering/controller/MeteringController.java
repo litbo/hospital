@@ -75,7 +75,10 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/updateMeteringUtil.do")
-    public Result updateMeteringUtil(MeteringUtil meteringUtil){
+    public Result updateMeteringUtil(MeteringUtil meteringUtil,MeteringUtilStatus status){
+        if(status != null){
+            updateUtilUseStatus(status);
+        }
         int result = meteringService.updateMeteringUtil(meteringUtil);
         if(result == 1){
             return Result.success();
