@@ -29,13 +29,15 @@
     <result column="gauge_category" jdbcType="VARCHAR" property="gaugeCategory" />
     <result column="sign" jdbcType="INTEGER" property="sign" />
     <result column="description1" jdbcType="VARCHAR" property="description1" />
+    <result column="date_of_manufacture" jdbcType="VARCHAR" property="dateOfManufacture" />
+    <result column="effective_date" jdbcType="VARCHAR" property="effectiveDate" />
   </resultMap>
   <sql id="Base_Column_List">
     id, metering_name, metering_num, metering_inspection_cycle, bm_name, buy_time, user_xm, 
     update_message_time, this_metering_time, util_type, description, meteringStatus, 
     metering_system_num, metering_get_number_time, record_person, record_time, is_cycle, 
     buy_price, specification_modle, serial_number, manufacturer, measuring_range, accuracy_level, 
-    legal_category, gauge_category, sign, description1
+    legal_category, gauge_category, sign, description1, date_of_manufacture, effective_date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -57,7 +59,8 @@
       buy_price, specification_modle, serial_number, 
       manufacturer, measuring_range, accuracy_level, 
       legal_category, gauge_category, sign, 
-      description1)
+      description1, date_of_manufacture, effective_date
+      )
     values (#{meteringName,jdbcType=VARCHAR}, #{meteringNum,jdbcType=VARCHAR},
       #{meteringInspectionCycle,jdbcType=VARCHAR}, #{bmName,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
       #{userXm,jdbcType=VARCHAR}, #{updateMessageTime,jdbcType=VARCHAR}, #{thisMeteringTime,jdbcType=VARCHAR}, 
@@ -67,7 +70,8 @@
       #{buyPrice,jdbcType=VARCHAR}, #{specificationModle,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, 
       #{manufacturer,jdbcType=VARCHAR}, #{measuringRange,jdbcType=VARCHAR}, #{accuracyLevel,jdbcType=VARCHAR}, 
       #{legalCategory,jdbcType=VARCHAR}, #{gaugeCategory,jdbcType=VARCHAR}, #{sign,jdbcType=INTEGER}, 
-      #{description1,jdbcType=VARCHAR})
+      #{description1,jdbcType=VARCHAR}, #{dateOfManufacture,jdbcType=VARCHAR}, #{effectiveDate,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringUtil">
     insert into hospital..metering_util
@@ -150,6 +154,12 @@
       <if test="description1 != null">
         description1,
       </if>
+      <if test="dateOfManufacture != null">
+        date_of_manufacture,
+      </if>
+      <if test="effectiveDate != null">
+        effective_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="meteringName != null">
@@ -229,6 +239,12 @@
       </if>
       <if test="description1 != null">
         #{description1,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfManufacture != null">
+        #{dateOfManufacture,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveDate != null">
+        #{effectiveDate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -313,6 +329,12 @@
       <if test="description1 != null">
         description1 = #{description1,jdbcType=VARCHAR},
       </if>
+      <if test="dateOfManufacture != null">
+        date_of_manufacture = #{dateOfManufacture,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveDate != null">
+        effective_date = #{effectiveDate,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -343,7 +365,9 @@
       legal_category = #{legalCategory,jdbcType=VARCHAR},
       gauge_category = #{gaugeCategory,jdbcType=VARCHAR},
       sign = #{sign,jdbcType=INTEGER},
-      description1 = #{description1,jdbcType=VARCHAR}
+      description1 = #{description1,jdbcType=VARCHAR},
+      date_of_manufacture = #{dateOfManufacture,jdbcType=VARCHAR},
+      effective_date = #{effectiveDate,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByUtilNum" parameterType="java.lang.String" resultMap="BaseResultMap">

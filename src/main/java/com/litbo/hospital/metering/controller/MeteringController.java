@@ -104,6 +104,9 @@ public class MeteringController {
      * @param meteringName  器具名称
      * @param bmName  使用科室
      * @param meteringstatus 器具状态
+     * @param beginTime 开始时间
+     * @param endTime  结束时间
+     * @param needMeter 是否送检
      * @param pageNum 分页页码
      * @param pageSize 分页每页数据数量
      * @return
