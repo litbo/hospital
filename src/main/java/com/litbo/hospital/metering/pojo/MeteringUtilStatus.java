@@ -21,6 +21,8 @@ public class MeteringUtilStatus implements Serializable {
 
     private String description;
 
+    private String cause;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -79,6 +81,14 @@ public class MeteringUtilStatus implements Serializable {
         this.description = description;
     }
 
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -97,7 +107,8 @@ public class MeteringUtilStatus implements Serializable {
             && (this.getRecordDate() == null ? other.getRecordDate() == null : this.getRecordDate().equals(other.getRecordDate()))
             && (this.getBmName() == null ? other.getBmName() == null : this.getBmName().equals(other.getBmName()))
             && (this.getUserXm() == null ? other.getUserXm() == null : this.getUserXm().equals(other.getUserXm()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getCause() == null ? other.getCause() == null : this.getCause().equals(other.getCause()));
     }
 
     @Override
@@ -111,6 +122,7 @@ public class MeteringUtilStatus implements Serializable {
         result = prime * result + ((getBmName() == null) ? 0 : getBmName().hashCode());
         result = prime * result + ((getUserXm() == null) ? 0 : getUserXm().hashCode());
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getCause() == null) ? 0 : getCause().hashCode());
         return result;
     }
 
@@ -127,6 +139,7 @@ public class MeteringUtilStatus implements Serializable {
         sb.append(", bmName=").append(bmName);
         sb.append(", userXm=").append(userXm);
         sb.append(", description=").append(description);
+        sb.append(", cause=").append(cause);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
