@@ -38,11 +38,14 @@ public interface RealTimeMonitoringDAO {
                     "<if test='cEquCate != null'>","and  f.c_EquCate= #{cEquCate}","</if>",
                     "<if test='bmId != null'>","and  d.bm_id = #{bmId}","</if>",
                     "<if test='cIsLife != null'>","and  f.c_IsLife= #{cIsLife}","</if>",
-                    "<if test='status != null'>","and  a.NewStatus = #{status}","</if>",
-                    "<if test='syzt != null'>","and c.eq_syzt = #{syzt}","</if>",
+                    "<if test='eqsyzt != null'>","and c.eq_syzt = #{eqsyzt}","</if>",
                     "<if test='cAName != null'>","and  g.c_AName= #{cAName}","</if>",
                     "GROUP BY\n" +
                     "\tc.eq_sbbh",
+            "<if test='eqstatus != null'>",
+            "HAVING\n" +
+                    "\tMAX ( a.NewStatus ) = #{eqstatus}",
+            "</if>",
             "</script>"})
     List<RealTimeMonitoring> select1(SearchOV searchOV);
 

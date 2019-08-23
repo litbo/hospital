@@ -14,9 +14,9 @@ public class SearchOV {
     /**是否生命支持类*/
     private String cIsLife;
     /**使用状态*/
-    private String status;
+    private String eqstatus;
     /**完好装态*/
-    private String syzt;
+    private String eqsyzt;
     /**设备简称*/
     private String cAName;
 
