@@ -1450,7 +1450,7 @@
 		          },
 		          {
 		            "title": "计划审核",
-		            "url": "",
+		            "url": "./safe/docimasy-management/docimasy-examine.html",
 		            "id": "76003",
 		            "shiro": "CX"
 		          },
