@@ -29,9 +29,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-       <button class="layui-btn layui-btn-xs" lay-event="audit">审 请</button>
-    </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -63,7 +60,7 @@ var emp = tempValue("rl", "emp", false);
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "checkbox"}
+                    {type: "numbers", title: '序号' },
                     , {field: 'meteringName', title: '设备名称', minWidth: 100}
                     , {field: 'buyTime', title: '购买时间', minWidth: 120}
                     , {field: 'userXm', title: '购买人', minWidth: 100}

@@ -30,15 +30,15 @@
 
 <body>
 <div class="layui-row">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>文档信息修改</legend>
-    </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">案卷名称 <span class="sign">*</span></label>
+                <label class="layui-form-label">卷宗名称 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="hidden" name="id">
+                    <input type="hidden" id="eqSbbh" name="eqSbbh">
+                    <input type="hidden" id="eqQysj" name="eqQysj">
+                    <input type="hidden" id="eqId" name="eqId">
+                    <input type="hidden" id="recordPerson" name="recordPerson">
                     <input type="text" name="dossierName" autocomplete="off" lay-verify="required" placeholder="请输入"
                            class="layui-input">
                 </div>
@@ -64,7 +64,7 @@
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">案卷性质 <span class="sign">*</span></label>
+                <label class="layui-form-label">卷宗性质 <span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="dossierNature" lay-verify="required|Decimal" autocomplete="off"
                            class="layui-input">
@@ -73,7 +73,7 @@
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">案卷性质 <span class="sign">*</span></label>
+                <label class="layui-form-label">保存状态<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select name="saveType"  class="layui-input">
                     	<option value=''>--请选择--</option>
@@ -83,20 +83,11 @@
                 </div>
             </div>
           </div>
-         
          <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">文件存放位置</label>
                 <div class="layui-input-block">
                       <input type="text" name="fileLocaltion" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-         </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">卷宗负责人</label>
-                <div class="layui-input-block">
-                      <input type="text" name="recordPerson" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -161,9 +152,14 @@
 
 
 <script>
-	var formData2 = {
-			
-	};
+var formData2 = {};
+	$(function(){
+		var emp = tempValue("rl", "emp", false);
+        $("#eqId").val($.getUrlParam("eqId"));
+        $("#eqSbbh").val($.getUrlParam("eqSbbh"));
+        $("#eqQysj").val($.getUrlParam("eqQysj"));
+		$("#recordPerson").val(emp.userId);
+	});
     renderMod = {
             form: {
                 date: [{
@@ -172,26 +168,21 @@
                 },{
                     elem: "#endTime",
                     format:'yyyy/MM/dd'
+                },{
+                    elem: "#buyTime",
+                    format:'yyyy/MM/dd'
                 }],
-                val: {
-                    filter: "forms",
-                    get: {
-                        url: "/Dossier/selectDossierById.do",
-                        type: "POST",
-                        data: {dossierId: $.getUrlParam("id")}
-                    }
-                },
                 submit: {
                     before: function (param) {
                         return param = {};
                     },
                     form: {
-                        url: "/Dossier/updateDossier.do",
+                        url: "/Dossier/addDossier.do",
                         type: "POST",
                         data: [
-                        	"id","dossierNum","dossierName","beginTime",
+                        	"eqSbbh","eqQysj","eqId","recordPerson","dossierName","beginTime",
                         	"endTime","dossierNature","saveType",
-                        	"description","fileLocaltion","recordTime","recordPerson",
+                        	 "fileLocaltion","recordTime", 
                         	"specification","manufacturer","buyTime","bmName","agent","description1"]
                     }
                 }

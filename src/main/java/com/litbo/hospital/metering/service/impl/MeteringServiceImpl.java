@@ -2,8 +2,10 @@ package com.litbo.hospital.metering.service.impl;
 
 import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
 import com.litbo.hospital.metering.dao.MeteringUtilDAO;
+import com.litbo.hospital.metering.dao.MeteringUtilStatusDAO;
 import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
+import com.litbo.hospital.metering.pojo.MeteringUtilStatus;
 import com.litbo.hospital.metering.service.MeteringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class MeteringServiceImpl implements MeteringService {
 
     @Autowired
     private MeteringHistoryNumberDAO meteringHistoryNumberDAO;
+
+    @Autowired
+    private MeteringUtilStatusDAO meteringUtilStatusDAO;
 
 
     @Override
@@ -96,24 +101,22 @@ public class MeteringServiceImpl implements MeteringService {
     }
 
     @Override
-    public int disableDevice(int meteringutilId){
-        // 查询台账中是否有这个设备
-        MeteringUtil meteringUtil = meteringUtilDAO.selectByPrimaryKey(meteringutilId);
-        if(meteringUtil == null){
-            return 0;
-        }
-        // 自动添加更新设备时间
-        String nowDate = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a").format(new Date());
-        meteringUtil.setUpdateMessageTime(nowDate);
-
-        // 将设备状态改为停用
-        meteringUtil.setMeteringstatus("停用");
-        return meteringUtilDAO.updateByPrimaryKey(meteringUtil);
+    public List<MeteringUtil> findAllMeteringUtil() {
+        return meteringUtilDAO.findAllMeteringUtil();
     }
 
     @Override
-    public List<MeteringUtil> findAllMeteringUtil() {
-        return meteringUtilDAO.findAllMeteringUtil();
+    public List<MeteringUtil> findAllMeteringUtilAllCheck(Integer sign, String gaugeCategory, String meteringName, String bmName, String meteringstatus,String beginTime,String endTime,String needMeter) {
+        if(gaugeCategory != null){
+            gaugeCategory = "%" + gaugeCategory + "%";
+        }
+        if(meteringName != null){
+            meteringName = "%" + meteringName + "%";
+        }
+        if(bmName != null){
+            bmName = "%" + bmName + "%";
+        }
+        return meteringUtilDAO.findAllMeteringUtilAllChech(sign,gaugeCategory,meteringName,bmName,meteringstatus,beginTime,endTime,needMeter);
     }
 
     @Override
@@ -159,6 +162,26 @@ public class MeteringServiceImpl implements MeteringService {
         return meteringUtilDAO.updateByPrimaryKey(m);
     }
 
+    @Override
+    public int updateMeteringUtilUseStatus(MeteringUtilStatus status) {
+        MeteringUtilStatus status1 = meteringUtilStatusDAO.selectByUtilId(status.getUtilId());
+        if(status1 != null){
+            meteringUtilStatusDAO.deleteByPrimaryKey(status1.getId());
+        }
+        return  meteringUtilStatusDAO.insert(status);
+
+    }
+
+    @Override
+    public MeteringUtilStatus selectStatusById(int id) {
+        return meteringUtilStatusDAO.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public MeteringUtilStatus getMeteringUtilUseStatusByUtilId(int id) {
+        return meteringUtilStatusDAO.selectByUtilId(id);
+    }
+
 
     @Override
     public int updateMeteringUtil(MeteringUtil meteringutilNewMessage) {
@@ -168,13 +191,6 @@ public class MeteringServiceImpl implements MeteringService {
             return 0;
         }
 
-        // 检查编号是否重复
-        MeteringUtil meteringUtilTestOldMEssage02 = meteringUtilDAO.selectByUtilNum(meteringutilNewMessage.getMeteringNum());
-        if(meteringUtilTestOldMEssage02 != null){
-            if(meteringutilNewMessage.getId() != meteringUtilTestOldMEssage02.getId()){
-                return 0;
-            }
-        }
 
         // 自动添加更新设备时间
         String nowDate = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a").format(new Date());
@@ -185,6 +201,7 @@ public class MeteringServiceImpl implements MeteringService {
         meteringutilNewMessage.setDescription(meteringUtilTestOldMessage.getDescription());
         meteringutilNewMessage.setMeteringstatus(meteringUtilTestOldMessage.getMeteringstatus());
         meteringutilNewMessage.setRecordTime(meteringUtilTestOldMessage.getRecordTime());
+        meteringutilNewMessage.setMeteringSystemNum(meteringUtilTestOldMessage.getMeteringSystemNum());
 
 
         // 如果计量周期发生变化，则重新计算计量时间
@@ -199,24 +216,24 @@ public class MeteringServiceImpl implements MeteringService {
             meteringutilNewMessage.setThisMeteringTime(new SimpleDateFormat("yyyy/MM/dd").format(nextMeteringTime));
         }
 
+
         int i = meteringUtilDAO.updateByPrimaryKey(meteringutilNewMessage);
-        MeteringUtil util = meteringUtilDAO.selectByUtilNum(meteringutilNewMessage.getMeteringSystemNum());
         // 如果计量编号发生变化，则在历史计量编号中添加一条新信息
-        if(meteringutilNewMessage.getMeteringNum() != util.getMeteringNum()){
+        if(meteringutilNewMessage.getMeteringNum() != meteringUtilTestOldMessage.getMeteringNum()){
             MeteringHistoryNumber meteringHistoryNumber = new MeteringHistoryNumber();
             // 记录时间
             meteringHistoryNumber.setRecordTime(nowDate);
             //计量编号
             meteringHistoryNumber.setDescription("");
-            meteringHistoryNumber.setDescription(util.getMeteringNum());
+            meteringHistoryNumber.setDescription(meteringUtilTestOldMessage.getMeteringNum());
             // 得到计量编号的时间
-            meteringHistoryNumber.setGetNumberTime(util.getMeteringGetNumberTime());
+            meteringHistoryNumber.setGetNumberTime(meteringUtilTestOldMessage.getMeteringGetNumberTime());
             // meteringutil id
-            meteringHistoryNumber.setMeteringutilId(util.getId());
+            meteringHistoryNumber.setMeteringutilId(meteringUtilTestOldMessage.getId());
             // 设备编号
-            meteringHistoryNumber.setMeteringutillNumber(util.getMeteringSystemNum());
+            meteringHistoryNumber.setMeteringutillNumber(meteringUtilTestOldMessage.getMeteringSystemNum());
             // 记录人
-            meteringHistoryNumber.setRecordPerson(util.getRecordPerson());
+            meteringHistoryNumber.setRecordPerson(meteringUtilTestOldMessage.getRecordPerson());
 
             i = meteringHistoryNumberDAO.insert(meteringHistoryNumber);
         }
@@ -229,8 +246,4 @@ public class MeteringServiceImpl implements MeteringService {
         return meteringUtilDAO.selectByPrimaryKey(meteringutilId);
     }
 
-    @Override
-    public MeteringUtil findMeteringUtilByUtilNum(String num) {
-        return meteringUtilDAO.selectByUtilNum(num);
-    }
 }

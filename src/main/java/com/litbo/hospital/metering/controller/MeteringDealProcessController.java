@@ -82,11 +82,14 @@ public class MeteringDealProcessController {
         // 生成一个业务流程
         String nowTiem = new SimpleDateFormat("yyyy/MM/dd HH:MM:ss a").format(new Date());
         MeteringDealProcess meteringDealProcess = new MeteringDealProcess();
-        meteringDealProcess.setFormId(formId);
-        meteringDealProcess.setRecordTime(nowTiem);
-        meteringDealProcess.setDealStatus("待处理");
-        meteringDealProcess.setDepartment(department);
-        meteringDealProcess.setProcessName(nowTiem + "生成的报表(" + department +")");
+        meteringDealProcess.setFormId(formId);  // 表单id
+        meteringDealProcess.setRecordTime(nowTiem);  // 申请时间
+        meteringDealProcess.setDepartment(department); //所属部门
+        meteringDealProcess.setDealAdvertisement(vo.getDealAdvertisement()); // 申请人
+        meteringDealProcess.setDealPerson(vo.getDealPerson()); // 处理人
+        meteringDealProcess.setProcessName(vo.getProcessName()); // 流程名称
+        meteringDealProcess.setVerificationUnit(vo.getVerificationUnit()); // 检定单位
+
         int result = meteringDealProcessService.addProcess(meteringDealProcess);
         if(result == 0){
             return Result.error("报表流程生成失败！请重试！");
@@ -143,14 +146,14 @@ public class MeteringDealProcessController {
 
 
     /**
-     * 多条件联合查询计量报表的流程
+     * 多条件联合查询已经处理的计量报表的流程
      * @param recordBeginTime 报表流程生成时间开始的范围
      * @param recordEndTime 报表流程生成时间结束的范围
      *             这两个参数决定了报表流程是在那个时间段生成的
      *
      * @param department  报表流程所属部门
      *
-     * @param status 报表流程状态：已处理，未处理
+     * @param status 报表流程状态：“”，通过，不通过
      *
      * @param dealBeginTime 处理时间的开始范围
      * @param dealEndTime 处理时间的结束范围
@@ -163,15 +166,17 @@ public class MeteringDealProcessController {
                                     @RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
                                     @RequestParam(name = "recordEndTime" , defaultValue = "9999/99/99") String recordEndTime,
                                     @RequestParam(name = "department" , defaultValue = "%") String department,
-                                    @RequestParam(name = "status",defaultValue = "%") String status,
+                                    @RequestParam(name = "status",defaultValue = "") String status,
                                     @RequestParam(name = "dealBeginTime" , defaultValue = "0000/00/00") String dealBeginTime,
                                     @RequestParam(name = "dealEndTime" , defaultValue = "9999/99/99") String dealEndTime){
         if(department.equals("%")){
             department = null;
         }
-        if(status.equals("%")){
+
+        if (status.equals("1")){
             status = null;
         }
+
         PageHelper.startPage(pageNum,pageSize);
         List<MeteringDealProcess> meteringDealProcessList = meteringDealProcessService.searchFormProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
         PageInfo info = new PageInfo(meteringDealProcessList);
@@ -182,7 +187,43 @@ public class MeteringDealProcessController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),meteringDealProcessList));
             return vo;
         }
-        vo.setMsg("error");
+        vo.setMsg("没有查询到相关信息");
+        vo.setCode(0);
+        return vo;
+    }
+
+
+    /**
+     * 多条件联合查询未处理的计量报表的流程
+     * @param recordBeginTime 报表流程生成时间开始的范围
+     * @param recordEndTime 报表流程生成时间结束的范围
+     *             这两个参数决定了报表流程是在那个时间段生成的
+     *
+     * @param department  报表流程所属部门
+     * @return
+     */
+    @RequestMapping("/searchFormProcessNot.do")
+    public PageVo searchFormProcessNot(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                    @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                    @RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
+                                    @RequestParam(name = "recordEndTime" , defaultValue = "9999/99/99") String recordEndTime,
+                                    @RequestParam(name = "department" , defaultValue = "%") String department){
+        if(department.equals("%")){
+            department = null;
+        }
+
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<MeteringDealProcess> meteringDealProcessList = meteringDealProcessService.searchFormProcessNot(recordBeginTime, recordEndTime, department);
+        PageInfo info = new PageInfo(meteringDealProcessList);
+        PageVo vo = new PageVo();
+        if(!meteringDealProcessList.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),meteringDealProcessList));
+            return vo;
+        }
+        vo.setMsg("没有查询到相关信息");
         vo.setCode(0);
         return vo;
     }
@@ -203,20 +244,20 @@ public class MeteringDealProcessController {
         return Result.success(vo);
     }
 
-
-    /**
-     * 得到报表的详细信息
-     * @param formID 表单id
-     * @return
-     */
-    @RequestMapping("/getFormMoreInfomation.do")
-    public Result getFormMoreInfomation(int formID){
-        MeteringApprovalForm form = meteringDealProcessService.findFormByFormID(formID);
-        List<MeteringUtil> utils = meteringDealProcessService.findUtilByProcess(form.getMeteringId());
-        MeteringApprovalFormMoreInfomationVo vo = new MeteringApprovalFormMoreInfomationVo(form);
-        vo.setUtils(utils);
-        return Result.success(vo);
-    }
+//
+//    /**
+//     * 得到报表的详细信息
+//     * @param formID 表单id
+//     * @return
+//     */
+//    @RequestMapping("/getFormMoreInfomation.do")
+//    public Result getFormMoreInfomation(int formID){
+//        MeteringApprovalForm form = meteringDealProcessService.findFormByFormID(formID);
+//        List<MeteringUtil> utils = meteringDealProcessService.findUtilByProcess(form.getMeteringId());
+//        MeteringApprovalFormMoreInfomationVo vo = new MeteringApprovalFormMoreInfomationVo(form);
+//        vo.setUtils(utils);
+//        return Result.success(vo);
+//    }
 
 
     /**
@@ -234,7 +275,7 @@ public class MeteringDealProcessController {
 
         MeteringApprovalForm form = meteringDealProcessService.findFormByFormID(process.getFormId());
         String nowTime = new SimpleDateFormat("yyyy/MM/dd hh:MM:ss a").format(new Date());
-        process.setDealStatus("已处理");
+        process.setDealStatus("通过");
         process.setDealTime(nowTime);
 
         form.setDealStatus("已处理");
@@ -244,6 +285,23 @@ public class MeteringDealProcessController {
         meteringDealProcessService.updateFormByPrimaryKeySelective(form);
 
         return Result.success();
+    }
+
+
+    /**
+     * 删除送检申请
+     * @param processId
+     * @return
+     */
+    @RequestMapping("/deleteProcess.do")
+    public Result deleteProcess(int processId){
+
+        int i = meteringDealProcessService.deleterProcess(processId);
+        if(i == 0){
+            return Result.success("删除失败！");
+        }
+        return Result.success();
+
     }
 
 

@@ -1367,7 +1367,7 @@
               },
               
               {
-				"title": "计量管理",
+				"title": "台账管理",
 				"url": "javascript:void;",
 				"id": "74001",
 				"shiro": "CX",
@@ -1386,15 +1386,42 @@
 		            "shiro": "CX"
 		          },
 		          {
-		            "title": "计量录入/导入",
+		            "title": "录入/导入",
 		            "url": "./home/public_info.html",
 		            "id": "74004",
 		            "shiro": "CX"
+		          }
+		        ]
+			}
+			,{
+				"title": "检定管理",
+				"url": "javascript:void;",
+				"id": "76001",
+				"shiro": "CX",
+                "icon": "book",
+				"children": [
+		          {
+		            "title": "计划检定",
+		            "url": "./safe/metering-management/metering-test.html",
+		            "id": "76002",
+		            "shiro": "CX"
 		          },
 		          {
-		            "title": "计量审批",
+		            "title": "计划审核",
 		            "url": "./safe/metering-management/metering-approve.html",
-		            "id": "74005",
+		            "id": "76003",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "计划管理",
+		            "url": "./safe/metering-management/metering-approve.html",
+		            "id": "76004",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "检定结果录入",
+		            "url": "./safe/metering-management/metering-approve.html",
+		            "id": "76005",
 		            "shiro": "CX"
 		          }
 		        ]
@@ -1402,14 +1429,20 @@
 			,
               
               {
-				"title": "文档管理",
+				"title": "设备档案管理",
 				"url": "javascript:void;",
 				"id": "75001",
 				"shiro": "CX",
                 "icon": "book",
 				"children": [
 		          {
-		            "title": "文档列表",
+		            "title": "立卷建档",
+		            "url": "./safe/dossier-managent/dossier-need-list.html",
+		            "id": "75003",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "设备档案列表",
 		            "url": "./safe/dossier-managent/dossier-list.html",
 		            "id": "75002",
 		            "shiro": "CX"

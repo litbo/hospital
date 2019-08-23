@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>计量修改</title>
+    <title>计量查看</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -25,6 +25,19 @@
         	top:5px;
         	left:10px;
         }
+        .layui-tab-item{
+        	background:#f1f1f1;
+        	padding-top:20px;
+        	min-height:300px;
+        }
+        #ifm{
+        	border:0;
+        	width:100%;
+        	min-height:300px;
+        }
+        .nav_status{
+        	display:none;
+        }
     </style>
 </head>
 
@@ -36,103 +49,322 @@
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备名称 </label>
+                <label class="layui-form-label">器具编号 </label>
                 <div class="layui-input-block">
                     <input type="hidden" name="id">
-                    <input type="hidden" name="meteringSystemNum">
+                    <input type="text" name="meteringSystemNum" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">器具类别 </label>
+                <div class="layui-input-block">
+                    <input type="text" name="gaugeCategory" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备器具名称 </label>
+                <div class="layui-input-block">
                     <input type="text" name="meteringName" disabled class="layui-input">
                 </div>
             </div>
          </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备编号 </label>
+                <label class="layui-form-label">规格型号 </label>
                 <div class="layui-input-block">
-                    <input type="text" name="meteringNum" disabled class="layui-input">
+                    <input type="text" name="specificationModle" disabled class="layui-input">
                 </div>
             </div>
         </div>
            
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">生成时间 </label>
+                <label class="layui-form-label">测量范围 </label>
                 <div class="layui-input-block">
-                    <input type="text" id="meteringGetNumberTime" name="meteringGetNumberTime" disabled class="layui-input">
+                    <input type="text" name="measuringRange" disabled class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">审计时间 </label>
+                <label class="layui-form-label">精度等级 </label>
                 <div class="layui-input-block">
-                    <input type="text"  name="thisMeteringTime" disabled class="layui-input">
+                    <input type="text"  name="accuracyLevel" disabled class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">检查周期 </label>
+                <label class="layui-form-label">生产厂家 </label>
                 <div class="layui-input-block">
-                    <input type="text" name="meteringInspectionCycle" disabled
-                           class="layui-input">
+                    <input type="text" name="manufacturer" disabled class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">所属部门 </label>
+                <label class="layui-form-label">出厂编号 </label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" disabled class="layui-input">
+                    <input type="text" name="serialNumber" disabled class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">购买时间 </label>
+                <label class="layui-form-label">出厂日期 </label>
                 <div class="layui-input-block">
-                    <input type="text" name="buyTime" disabled class="layui-input">
+                    <input type="text" name="dateOfManufacture" disabled class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">购买人</label>
+                <label class="layui-form-label">购买价格 </label>
                 <div class="layui-input-block">
-                	<input type="text" name="userXm"  disabled  class="layui-input">
+                    <input type="text" name="buyPrice" disabled class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备类型</label>
+                <label class="layui-form-label">管理类别</label>
                 <div class="layui-input-block">
-                    <input type="text" name="utilType" disabled class="layui-input" />
+                	<input type="text" name="utilType"  disabled  class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">记录人</label>
+                <label class="layui-form-label">法制类别</label>
                 <div class="layui-input-block">
-                	<input type="text" name="recordPerson" disabled class="layui-input">
+                	<input type="text" name="legalCategory"  disabled  class="layui-input">
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">检查周期</label>
+                <div class="layui-input-block">
+                	<input type="text" name="meteringInspectionCycle"  disabled  class="layui-input">
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">量具状态</label>
+                <div class="layui-input-block">
+                    <input type="text" name="meteringstatus" disabled class="layui-input" />
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">检定日期</label>
+                <div class="layui-input-block">
+                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+                </div>
+            </div>
+        </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">有效日期</label>
+                <div class="layui-input-block">
+                	<input type="text" name="effectiveDate" disabled class="layui-input">
                 </div>
             </div>
         </div>
           
+         <div class="col-xs-12">
+            <div class="layui-form-item">
+                 <div class="layui-tab layui-tab-card" lay-filter="demo">
+				  <ul class="layui-tab-title">
+				    <li class="layui-this" id="tab-1">在用情况</li>
+				    <li lay-id='tab-2' >检定记录</li>
+				    <li>修理记录</li>
+				    <li>备注</li>
+				  </ul>
+				  <div class="layui-tab-content">
+				    <div class="layui-tab-item layui-show col-xs-12">
+				    	<div class="nav_status" id="status1" style="display:block">
+				            <div class="layui-form-item">
+				                <label class="layui-form-label">使用类别</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                </div>
+				            </div>
+				            <div class="layui-form-item">
+				                <label class="layui-form-label">使用日期</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                </div>
+				            </div>
+				            <div class="layui-form-item">
+				                <label class="layui-form-label">使用部门</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                </div>
+				            </div>
+				            <div class="layui-form-item">
+				                <label class="layui-form-label">使用人</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                </div>
+				            </div>
+				            <div class="layui-form-item">
+				                <label class="layui-form-label">使用说明</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                </div>
+				            </div>
+			            </div>
+			            <div class="nav_status" id="status2">
+			            	<div class="layui-form-item">
+				                <label class="layui-form-label" id="field1">封存日期</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="recordDate" disabled class="layui-input">
+				                </div>
+				            </div>
+			            	<div class="layui-form-item">
+				                <label class="layui-form-label" id="field2">封存人</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="userXm" disabled class="layui-input">
+				                </div>
+				            </div>
+			            	<div class="layui-form-item">
+				                <label class="layui-form-label" id="field3">封存事由</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="cause" disabled class="layui-input">
+				                </div>
+				            </div>
+			            	<div class="layui-form-item">
+				                <label class="layui-form-label">备注</label>
+				                <div class="layui-input-block">
+				                	<input type="text" name="description" disabled class="layui-input">
+				                </div>
+				            </div>
+			            </div>
+				    </div>
+				    <div class="layui-tab-item" style="padding:0">
+        				<table id="table" lay-filter="table1"></table>
+				    </div>
+				    <div class="layui-tab-item" style="padding:0">
+        				<iframe id="ifm"></iframe>
+					</div>
+				    <div class="layui-tab-item">
+		            	<div class="layui-form-item">
+			                <label class="layui-form-label">备注</label>
+			                <div class="layui-input-block">
+			                	<input type="text" name="description1" disabled class="layui-input">
+			                </div>
+			            </div>
+				    </div>
+				  </div>
+				</div>
+            </div>
+        </div>
     </form>
 </div>
 
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="delete">删除</a>
+</script>
 
 <script>
 	var formData2 = {
 			
 	};
+	var meteringstatus = $.getUrlParam("meteringstatus");
+	function refreshIfm(h){
+		$("#ifm").height(h);
+	}
+	$(function(){
+		var fileds = {
+			"封存":["封存日期","封存人","封存事由"],
+			"报废":["报废日期","报废人","报废事由"]
+		}
+		debugger;
+		if("在用" == meteringstatus){
+			$("#status1").show();
+			$("#status2").hide();
+			$("#tab-1").text("在用情况");
+		}else if ("在库" == meteringstatus || "停用" == meteringstatus){
+			$("#status1").hide();
+			$("#status2").hide();
+			$("#tab-1").hide();
+			layui.use('element', function(){
+				var element = layui.element;
+				element.tabChange('demo', 'tab-2');
+			});
+		}else if ("封存" == meteringstatus || "报废" == meteringstatus){
+			$("#status1").hide();
+			$("#status2").show();
+			$("#tab-1").text(meteringstatus+"情况");
+			$(["field1","field2","field3"]).each(function(i,a){
+				$("#"+a).text(fileds[meteringstatus][i]);
+			});
+		}
+		$.ajax({
+			url:'/Metering/getUtilStatusMsg.do?id=' + $.getUrlParam("id"),
+			async:false,
+			success:function(d){
+				if(d && d.code ==0){
+					var data = d.data;
+					$("[name='recordDate']").val(data.recordDate);
+					$("[name='userXm']").val(data.userXm);
+					$("[name='cause']").val(data.cause);
+					$("[name='description']").val(data.description);
+				}
+			}
+		});
+		$("#ifm").attr("src","./metering-view-list.html?id="+$.getUrlParam("id"));
+	});
     renderMod = {
+            addTable: {
+                table: {
+                	 cols: [[ //表头
+                         {type: "numbers", title: '序号' }
+                         , {field: 'getNumberTime', title: '检定日期', minWidth: 150}
+                         , {field: 'effectiveDate', title: '有效日期', minWidth: 150}
+                         , {field: 'verificationNumber', title: '检定编号', minWidth: 150}
+                         , {field: 'verificationUnit', title: '检定单位', minWidth: 150}
+                         , {field: 'verificationResult', title: '检定结果', minWidth: 100}
+                         , {field: 'description', title: '备注', minWidth: 100}
+                         , {fixed:'right',width:100,align:'center',title:'操作',toolbar: "#bar"}
+                     ]]
+                     , url:"/Metering/seeAllHistoryNum.do?id=" +  $.getUrlParam("id")
+                     , request: {
+                         pageName: 'pageNum',
+                         limitName: 'pageSize'
+                     }
+                     , parseData: function (res) { //res 即为原始返回的数据
+                     	res.data = res.data || {};
+                         return {
+                             "code": res.code, //解析接口状态
+                             "msg": res.msg, //解析提示文本
+                             "count": res.data.total,//页面显示的数据条数
+                             "data": res.data.list //解析数据列表
+                         }
+                     }
+                     , done: function (obj) {
+                         tableFunc({
+                        	 tools: [{	
+                                  filter:"table1",
+                                  event:'delete',
+                                  title:'删除确认',
+                                  type:2,
+                                  area:["400px","250px"],
+                                  content:'./metering-view-delete.html',
+                                  dataUrl: ["id"]
+                              }]
+                         })
+                     }
+              	}
+            },
             form: {
-                date: {
-                    elem: "#meteringGetNumberTime",
-                    format:'yyyy/MM/dd'
-                },
                 val: {
                     filter: "forms",
                     get: {
@@ -140,31 +372,7 @@
                         type: "POST",
                         data: {id: $.getUrlParam("id")}
                     }
-                },
-                submit: {
-                    before: function (param) {
-                        return param = {};
-                    },
-                    form: {
-                        url: "/Metering/updateMeteringUtil.do",
-                        type: "POST",
-                        data: ["id", "buyTime","meteringSystemNum","meteringGetNumberTime",
-                        	"meteringName", "meteringNum", "meteringInspectionCycle","bmName","userXm","utilType","recordPerson"],
-                    }
                 }
-            },
-            bind: {
-            	 selectItem: [
-                     {
-                         elem: "#selectDepartment",
-                         cb: "/supervise/bmgl/listSelectBmsCols",
-                         db: "/supervise/bmgl/listBms",
-                         se: "/supervise/bmgl/bmSe",
-                         key: "radio",
-                         name: "dtdt",
-                         data: formData2
-                     }
-                 ]
             }
     }
 </script>

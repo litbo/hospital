@@ -19,11 +19,13 @@
     <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
     <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
     <result column="record_person" jdbcType="VARCHAR" property="recordPerson" />
+    <result column="file_type" jdbcType="INTEGER" property="fileType" />
+    <result column="description1" jdbcType="VARCHAR" property="description1" />
   </resultMap>
   <sql id="Base_Column_List">
     id, belong_dossier_num, belong_dossier_name, specification, manufacturer, buy_time, 
     bm_name, agent, file_num, file_name, file_date, file_size, summary, description, 
-    file_url, record_time, record_person
+    file_url, record_time, record_person, file_type, description1
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -41,13 +43,15 @@
       bm_name, agent, file_num, 
       file_name, file_date, file_size, 
       summary, description, file_url, 
-      record_time, record_person)
+      record_time, record_person, file_type, 
+      description1)
     values (#{belongDossierNum,jdbcType=VARCHAR}, #{belongDossierName,jdbcType=VARCHAR}, 
       #{specification,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{buyTime,jdbcType=VARCHAR}, 
       #{bmName,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR}, #{fileNum,jdbcType=VARCHAR}, 
       #{fileName,jdbcType=VARCHAR}, #{fileDate,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, 
       #{summary,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, 
-      #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR})
+      #{recordTime,jdbcType=VARCHAR}, #{recordPerson,jdbcType=VARCHAR}, #{fileType,jdbcType=INTEGER}, 
+      #{description1,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.DossierFile">
     insert into hospital..dossier_file
@@ -100,6 +104,12 @@
       <if test="recordPerson != null">
         record_person,
       </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="description1 != null">
+        description1,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="belongDossierNum != null">
@@ -149,6 +159,12 @@
       </if>
       <if test="recordPerson != null">
         #{recordPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="description1 != null">
+        #{description1,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -203,6 +219,12 @@
       <if test="recordPerson != null">
         record_person = #{recordPerson,jdbcType=VARCHAR},
       </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="description1 != null">
+        description1 = #{description1,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -223,7 +245,9 @@
       description = #{description,jdbcType=VARCHAR},
       file_url = #{fileUrl,jdbcType=VARCHAR},
       record_time = #{recordTime,jdbcType=VARCHAR},
-      record_person = #{recordPerson,jdbcType=VARCHAR}
+      record_person = #{recordPerson,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=INTEGER},
+      description1 = #{description1,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -232,6 +256,24 @@
     <include refid="Base_Column_List" />
     from hospital..dossier_file
     where belong_dossier_name = #{dossierName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllDossierFileByDossierNum" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..dossier_file
+    <where>
+      <if test="dossierNum != null">
+        belong_dossier_num = #{dossierNum,jdbcType=VARCHAR} and
+      </if>
+      <if test="dossiserFileType != null">
+        file_type = #{dossiserFileType,jdbcType=INTEGER} and
+      </if>
+      <if test="fileName != null">
+        file_name like #{fileName,jdbcType=VARCHAR} and
+      </if>
+      1=1
+    </where>
   </select>
 
   <select id="selectDossierFileByName" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -19,7 +19,15 @@ public class MeteringHistoryNumber implements Serializable {
 
     private String recordPerson;
 
+    private String verificationNumber;
+
     private String description;
+
+    private String verificationUnit;
+
+    private String effectiveDate;
+
+    private String verificationResult;
 
     private static final long serialVersionUID = 1L;
 
@@ -71,12 +79,44 @@ public class MeteringHistoryNumber implements Serializable {
         this.recordPerson = recordPerson;
     }
 
+    public String getVerificationNumber() {
+        return verificationNumber;
+    }
+
+    public void setVerificationNumber(String verificationNumber) {
+        this.verificationNumber = verificationNumber;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getVerificationUnit() {
+        return verificationUnit;
+    }
+
+    public void setVerificationUnit(String verificationUnit) {
+        this.verificationUnit = verificationUnit;
+    }
+
+    public String getEffectiveDate() {
+        return effectiveDate;
+    }
+
+    public void setEffectiveDate(String effectiveDate) {
+        this.effectiveDate = effectiveDate;
+    }
+
+    public String getVerificationResult() {
+        return verificationResult;
+    }
+
+    public void setVerificationResult(String verificationResult) {
+        this.verificationResult = verificationResult;
     }
 
     @Override
@@ -97,7 +137,11 @@ public class MeteringHistoryNumber implements Serializable {
             && (this.getGetNumberTime() == null ? other.getGetNumberTime() == null : this.getGetNumberTime().equals(other.getGetNumberTime()))
             && (this.getRecordTime() == null ? other.getRecordTime() == null : this.getRecordTime().equals(other.getRecordTime()))
             && (this.getRecordPerson() == null ? other.getRecordPerson() == null : this.getRecordPerson().equals(other.getRecordPerson()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
+            && (this.getVerificationNumber() == null ? other.getVerificationNumber() == null : this.getVerificationNumber().equals(other.getVerificationNumber()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getVerificationUnit() == null ? other.getVerificationUnit() == null : this.getVerificationUnit().equals(other.getVerificationUnit()))
+            && (this.getEffectiveDate() == null ? other.getEffectiveDate() == null : this.getEffectiveDate().equals(other.getEffectiveDate()))
+            && (this.getVerificationResult() == null ? other.getVerificationResult() == null : this.getVerificationResult().equals(other.getVerificationResult()));
     }
 
     @Override
@@ -110,7 +154,11 @@ public class MeteringHistoryNumber implements Serializable {
         result = prime * result + ((getGetNumberTime() == null) ? 0 : getGetNumberTime().hashCode());
         result = prime * result + ((getRecordTime() == null) ? 0 : getRecordTime().hashCode());
         result = prime * result + ((getRecordPerson() == null) ? 0 : getRecordPerson().hashCode());
+        result = prime * result + ((getVerificationNumber() == null) ? 0 : getVerificationNumber().hashCode());
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getVerificationUnit() == null) ? 0 : getVerificationUnit().hashCode());
+        result = prime * result + ((getEffectiveDate() == null) ? 0 : getEffectiveDate().hashCode());
+        result = prime * result + ((getVerificationResult() == null) ? 0 : getVerificationResult().hashCode());
         return result;
     }
 
@@ -126,7 +174,11 @@ public class MeteringHistoryNumber implements Serializable {
         sb.append(", getNumberTime=").append(getNumberTime);
         sb.append(", recordTime=").append(recordTime);
         sb.append(", recordPerson=").append(recordPerson);
+        sb.append(", verificationNumber=").append(verificationNumber);
         sb.append(", description=").append(description);
+        sb.append(", verificationUnit=").append(verificationUnit);
+        sb.append(", effectiveDate=").append(effectiveDate);
+        sb.append(", verificationResult=").append(verificationResult);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
