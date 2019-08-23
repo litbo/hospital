@@ -59,6 +59,7 @@
                          , {field: 'faultDescription', title: '故障描述', minWidth: 150}
                          , {field: 'repairContent', title: '修理内容', minWidth: 100}
                          , {field: 'description', title: '备注', minWidth: 100}
+                         , {fixed:'right',width:100,align:'center',title:'操作',toolbar: "#bar"}
                      ]]
                      , url:"/Metering/seedeleteMaintenanceRecords.do?id=" +  $.getUrlParam("id")
                      , request: {
@@ -78,7 +79,19 @@
 //                     	 if(parent.refreshIfm){
 //                     		 parent.refreshIfm(Math.max(300,$(".layui-table-main .layui-table").height() + 200));
 //                     	 }
+						tableFunc({
+	                    	 tools: [{	
+	                              filter:"table1",
+	                              event:'delete',
+	                              title:'删除确认',
+	                              type:2,
+	                              area:["400px","250px"],
+	                              content:'./metering-view-delete.html',
+	                              dataUrl: ["id"]
+	                          }]
+	                     })
                      }
+	                     
               	}
             },
             form: {

@@ -1387,7 +1387,7 @@
 		          },
 		          {
 		            "title": "录入/导入",
-		            "url": "./home/public_info.html",
+		            "url": "",
 		            "id": "74004",
 		            "shiro": "CX"
 		          }
@@ -1402,25 +1402,25 @@
 				"children": [
 		          {
 		            "title": "计划检定",
-		            "url": "./safe/metering-management/metering-test.html",
+		            "url": "./safe/docimasy-management/docimasy-list.html",
 		            "id": "76002",
 		            "shiro": "CX"
 		          },
 		          {
 		            "title": "计划审核",
-		            "url": "./safe/metering-management/metering-approve.html",
+		            "url": "",
 		            "id": "76003",
 		            "shiro": "CX"
 		          },
 		          {
 		            "title": "计划管理",
-		            "url": "./safe/metering-management/metering-approve.html",
+		            "url": "",
 		            "id": "76004",
 		            "shiro": "CX"
 		          },
 		          {
 		            "title": "检定结果录入",
-		            "url": "./safe/metering-management/metering-approve.html",
+		            "url": "",
 		            "id": "76005",
 		            "shiro": "CX"
 		          }
