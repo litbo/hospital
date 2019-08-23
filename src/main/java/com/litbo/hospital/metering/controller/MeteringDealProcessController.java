@@ -211,7 +211,6 @@ public class MeteringDealProcessController {
             department = null;
         }
 
-
         PageHelper.startPage(pageNum,pageSize);
         List<MeteringDealProcess> meteringDealProcessList = meteringDealProcessService.searchFormProcessNot(recordBeginTime, recordEndTime, department);
         PageInfo info = new PageInfo(meteringDealProcessList);

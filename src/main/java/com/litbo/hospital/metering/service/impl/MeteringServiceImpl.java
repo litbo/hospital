@@ -226,7 +226,6 @@ public class MeteringServiceImpl implements MeteringService {
         // 设置计量编号编号有效期
         meteringutilNewMessage.setEffectiveDate(meteringutilNewMessage.getThisMeteringTime());
 
-
         int i = meteringUtilDAO.updateByPrimaryKey(meteringutilNewMessage);
         // 如果计量编号发生变化，则在历史计量编号中添加一条新信息
         if(meteringutilNewMessage.getMeteringNum() != meteringUtilTestOldMessage.getMeteringNum()){

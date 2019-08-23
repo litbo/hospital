@@ -82,6 +82,8 @@ public class MeteringController {
         if(status != null){
             updateUtilUseStatus(status);
         }
+
+        status.setUtilId(meteringUtil.getId());
         int result = meteringService.updateMeteringUtil(meteringUtil);
         if(result == 1){
             return Result.success();
