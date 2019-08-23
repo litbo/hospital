@@ -128,6 +128,13 @@
     where form_name = #{name,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectByFormDescription" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_approval_form
+    where description = #{description,jdbcType=VARCHAR}
+  </select>
+
 
   <select id="searchApprovalForm" resultMap="BaseResultMap">
     select

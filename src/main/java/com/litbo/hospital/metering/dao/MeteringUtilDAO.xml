@@ -421,7 +421,7 @@
       <if test="name != null">
         metering_name like #{name,jdbcType=VARCHAR} and
       </if>
-      meteringStatus = '在用' and description = 0
+      description = 0
     </where>
   </select>
 

@@ -9,20 +9,14 @@ import java.util.List;
  * @Description:
  */
 public class AddSomeMeteringUtilToProcessVo {
-    private List<Integer> utilIds;
+    private String utilIds;
     private String department;
     private String verificationUnit;
     private String dealAdvertisement; //（申请人）
     private String  processName; //（计划名称），
     private String dealPerson;//（审批人）
 
-    public List<Integer> getUtilIds() {
-        return utilIds;
-    }
 
-    public void setUtilIds(List<Integer> utilIds) {
-        this.utilIds = utilIds;
-    }
 
     public String getDepartment() {
         return department;
@@ -67,7 +61,15 @@ public class AddSomeMeteringUtilToProcessVo {
     public AddSomeMeteringUtilToProcessVo() {
     }
 
-    public AddSomeMeteringUtilToProcessVo(List<Integer> utilIds, String department, String verificationUnit, String dealAdvertisement, String processName, String dealPerson) {
+    public String getUtilIds() {
+        return utilIds;
+    }
+
+    public void setUtilIds(String utilIds) {
+        this.utilIds = utilIds;
+    }
+
+    public AddSomeMeteringUtilToProcessVo(String utilIds, String department, String verificationUnit, String dealAdvertisement, String processName, String dealPerson) {
         this.utilIds = utilIds;
         this.department = department;
         this.verificationUnit = verificationUnit;

@@ -1,6 +1,7 @@
 package com.litbo.hospital.metering.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * metering_util
@@ -94,6 +95,67 @@ public class MeteringUtil implements Serializable {
 
     // 有效日期
     private String effectiveDate;
+
+    public MeteringUtil() {
+    }
+
+    public MeteringUtil(Integer id, String meteringName, String meteringNum, String meteringInspectionCycle, String bmName, String buyTime, String userXm, String updateMessageTime, String thisMeteringTime, String utilType, String description, String meteringstatus, String meteringSystemNum, String meteringGetNumberTime, String recordPerson, String recordTime, Integer isCycle, String buyPrice, String specificationModle, String serialNumber, String manufacturer, String measuringRange, String accuracyLevel, String legalCategory, String gaugeCategory, Integer sign, String description1, String dateOfManufacture, String effectiveDate) {
+        this.id = id;
+        this.meteringName = meteringName;
+        this.meteringNum = meteringNum;
+        this.meteringInspectionCycle = meteringInspectionCycle;
+        this.bmName = bmName;
+        this.buyTime = buyTime;
+        this.userXm = userXm;
+        this.updateMessageTime = updateMessageTime;
+        this.thisMeteringTime = thisMeteringTime;
+        this.utilType = utilType;
+        this.description = description;
+        this.meteringstatus = meteringstatus;
+        this.meteringSystemNum = meteringSystemNum;
+        this.meteringGetNumberTime = meteringGetNumberTime;
+        this.recordPerson = recordPerson;
+        this.recordTime = recordTime;
+        this.isCycle = isCycle;
+        this.buyPrice = buyPrice;
+        this.specificationModle = specificationModle;
+        this.serialNumber = serialNumber;
+        this.manufacturer = manufacturer;
+        this.measuringRange = measuringRange;
+        this.accuracyLevel = accuracyLevel;
+        this.legalCategory = legalCategory;
+        this.gaugeCategory = gaugeCategory;
+        this.sign = sign;
+        this.description1 = description1;
+        this.dateOfManufacture = dateOfManufacture;
+        this.effectiveDate = effectiveDate;
+    }
+
+    public MeteringUtil(List<Object> list) {
+        this.meteringName = (String) list.get(0);  // 设备名称1
+        this.meteringNum = (String) list.get(1);// 设备计量编号1
+        this.meteringGetNumberTime = (String) list.get(2); // 得到计量编号的时间1
+        this.isCycle = (Integer) list.get(3);// 是否周期1
+        this.meteringInspectionCycle = (String) list.get(4);// 设备检查周期，单位为月1
+        this.bmName = (String) list.get(5);// 所属部门1
+        this.buyTime = (String) list.get(6);// 购买时间1
+        this.userXm = (String) list.get(7);// 购买人1
+        this.utilType = (String) list.get(8);// 设备类型【A、B、C】1
+        this.meteringstatus = (String) list.get(9);// 设备状态：【在用、在库、停用、封存、报废】
+        this.buyPrice = (String) list.get(10);// 购买价格1
+        this.specificationModle = (String) list.get(11);// 规格型号1
+        this.dateOfManufacture = (String) list.get(12);// 出厂日期
+        this.serialNumber = (String) list.get(13); // 出厂编号1
+        this.manufacturer = (String) list.get(14);// 生产厂家1
+        this.measuringRange = (String) list.get(15);// 测量范围1
+        this.accuracyLevel = (String) list.get(16);// 精度等级1
+        this.legalCategory = (String) list.get(17);// 法制类别1
+        this.gaugeCategory = (String) list.get(18);// 量具类别1
+        this.sign = (Integer) list.get(19);// 标志【合格、准用、停用、封存、报废】1
+        this.description1 = (String) list.get(20);// 备注
+    }
+
+
 
     private static final long serialVersionUID = 1L;
 
