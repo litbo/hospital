@@ -21,6 +21,9 @@ public interface MeteringApprovalFormDAO {
 
     MeteringApprovalForm selectByFormName(String name);
 
+
+    MeteringApprovalForm selectByFormDescription(String description);
+
     // 查找报表
     List<MeteringApprovalForm> searchApprovalForm(@Param("recordBeginTime") String recordBeginTime,@Param("recordEndTime") String recordEndTime,
                                                   @Param("department") String department,@Param("status") String status,

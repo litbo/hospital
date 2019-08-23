@@ -41,14 +41,13 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
 
         // 生成表单名，保证表单名唯一
         String time = birthTime.split(" ")[0];
-        String formName = time + System.currentTimeMillis();
-        meteringApprovalForm.setFormName(formName);
-        meteringApprovalForm.setDealStatus("待处理");
+        String description = time + System.currentTimeMillis();
+        meteringApprovalForm.setDescription(description);
         int result = meteringApprovalFormDAO.insert(meteringApprovalForm);
         if(result == 0){
             return 0;
         }
-        return meteringApprovalFormDAO.selectByFormName(formName).getFormId();
+        return meteringApprovalFormDAO.selectByFormDescription(description).getFormId();
     }
 
     @Override

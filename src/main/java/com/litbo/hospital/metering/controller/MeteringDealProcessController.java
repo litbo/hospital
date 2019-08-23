@@ -50,19 +50,19 @@ public class MeteringDealProcessController {
         System.out.println(content);
         AddSomeMeteringUtilToProcessVo vo = JSONObject.parseObject(content,AddSomeMeteringUtilToProcessVo.class);
 
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0 ; i < vo.getUtilIds().size()-1 ;i++){
-            stringBuffer.append(vo.getUtilIds().get(i)).append(",");
-            System.out.println(stringBuffer);
-        }
-        stringBuffer.append(vo.getUtilIds().get(vo.getUtilIds().size()-1));
-        String utilIds = stringBuffer.toString();
+//        StringBuffer stringBuffer = new StringBuffer();
+//        for (int i = 0 ; i < vo.getUtilIds().size()-1 ;i++){
+//            stringBuffer.append(vo.getUtilIds().get(i)).append(",");
+//            System.out.println(stringBuffer);
+//        }
+//        stringBuffer.append(vo.getUtilIds().get(vo.getUtilIds().size()-1));
+//        String utilIds = stringBuffer.toString();
         String department = vo.getDepartment();
-        System.out.println(stringBuffer);
+//        System.out.println(stringBuffer);
 
         // 组装一个表单，记录此次生成的报表
         MeteringApprovalForm form = new MeteringApprovalForm();
-        form.setMeteringId(utilIds);
+        form.setMeteringId(vo.getUtilIds());
         form.setAffiliateDepartment(department);
 
         int formId = meteringDealProcessService.addForm(form);
@@ -71,7 +71,7 @@ public class MeteringDealProcessController {
         }
 
         // 将报表中的计量设备状态改为已经进入计量流程
-        String[] ids = utilIds.split(",");
+        String[] ids = vo.getUtilIds().split(",");
         for(String id : ids){
             int result = meteringService.updateMeteringStatus(Integer.parseInt(id));
             if(result == 0){
@@ -166,7 +166,7 @@ public class MeteringDealProcessController {
                                     @RequestParam(name = "recordBeginTime" , defaultValue = "0000/00/00") String recordBeginTime,
                                     @RequestParam(name = "recordEndTime" , defaultValue = "9999/99/99") String recordEndTime,
                                     @RequestParam(name = "department" , defaultValue = "%") String department,
-                                    @RequestParam(name = "status",defaultValue = "") String status,
+                                    @RequestParam(name = "status",defaultValue = "1") String status,
                                     @RequestParam(name = "dealBeginTime" , defaultValue = "0000/00/00") String dealBeginTime,
                                     @RequestParam(name = "dealEndTime" , defaultValue = "9999/99/99") String dealEndTime){
         if(department.equals("%")){
@@ -198,7 +198,6 @@ public class MeteringDealProcessController {
      * @param recordBeginTime 报表流程生成时间开始的范围
      * @param recordEndTime 报表流程生成时间结束的范围
      *             这两个参数决定了报表流程是在那个时间段生成的
-     *
      * @param department  报表流程所属部门
      * @return
      */
@@ -262,27 +261,17 @@ public class MeteringDealProcessController {
 
     /**
      * 审批
-     * @param processId
-     * @param dealPerson
-     * @param dealAdvertisement
      * @return
      */
     @RequestMapping("/Approval.do")
-    public Result Approval(int processId,String dealPerson,String dealAdvertisement){
-        MeteringDealProcess process = meteringDealProcessService.selectMeteringDealProcessByPrimaryKey(processId);
-        process.setDealPerson(dealPerson);
-        process.setDealAdvertisement(dealAdvertisement);
+    public Result Approval(int id , String status){
 
-        MeteringApprovalForm form = meteringDealProcessService.findFormByFormID(process.getFormId());
+        MeteringDealProcess process = meteringDealProcessService.selectMeteringDealProcessByPrimaryKey(id);
+        process.setDealStatus(status);
         String nowTime = new SimpleDateFormat("yyyy/MM/dd hh:MM:ss a").format(new Date());
-        process.setDealStatus("通过");
         process.setDealTime(nowTime);
 
-        form.setDealStatus("已处理");
-        form.setDealTime(nowTime);
-
         meteringDealProcessService.updateProcessByPrimaryKeySelective(process);
-        meteringDealProcessService.updateFormByPrimaryKeySelective(form);
 
         return Result.success();
     }

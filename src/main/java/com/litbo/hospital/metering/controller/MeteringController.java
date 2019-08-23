@@ -4,21 +4,21 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
-import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
-import com.litbo.hospital.metering.pojo.MeteringUtil;
-import com.litbo.hospital.metering.pojo.MeteringUtilStatus;
+import com.litbo.hospital.metering.pojo.*;
+import com.litbo.hospital.metering.service.MaintenanceRecordsService;
 import com.litbo.hospital.metering.service.MeteringService;
+import com.litbo.hospital.metering.util.ExcelUtil;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sun.security.util.AuthResources_it;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -37,6 +37,9 @@ public class MeteringController {
 
     @Autowired
     private MeteringHistoryNumberDAO meteringHistoryNumberDAO;
+
+    @Autowired
+    private MaintenanceRecordsService maintenanceRecordsService;
 
     /**
      * 添加计量设备信息
@@ -421,5 +424,97 @@ public class MeteringController {
             return Result.success();
         }
         return Result.success(status);
+    }
+
+
+    /**
+     * 添加修理信息
+     * @param maintenanceRecords
+     * @return
+     */
+    @RequestMapping("/addMaintenanceRecords.do")
+    public Result addMaintenanceRecords(MaintenanceRecords maintenanceRecords){
+        int result = maintenanceRecordsService.insert(maintenanceRecords);
+        if(result == 0){
+            return Result.success("添加失败");
+        }
+        return Result.success();
+    }
+
+
+    /**
+     * 删除修理信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteMaintenanceRecords.do")
+    public Result deleteMaintenanceRecords(int id){
+        int result = maintenanceRecordsService.deleteByPrimaryKey(id);
+        if(result == 0){
+            return Result.success("删除失败");
+        }
+        return Result.success();
+    }
+
+    /**
+     * 查看修理信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/seedeleteMaintenanceRecords.do")
+    public PageVo seedeleteMaintenanceRecords(int id,
+                                              @RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                              @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<MaintenanceRecords> list = maintenanceRecordsService.seeAllRecords(id);
+        PageInfo info = new PageInfo(list);
+        PageVo vo = new PageVo();
+        if(!list.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),list));
+            return vo;
+        }
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),list));
+        return vo;
+    }
+
+
+
+    @RequestMapping("/ImportExcelToAddMeteringUtil.do")
+    public void ImportExcelToAddMeteringUtil(@RequestParam("file") MultipartFile file,String userXm){
+//        if (file.isEmpty()) {
+//            return Result.error("上传失败，请选择文件");
+//        }
+//
+//        // 文件名
+//        String fileName = file.getOriginalFilename();
+//        String[] fileNameCheck = fileName.split(".");
+//        if(!fileNameCheck[1].equals("xlsx")){
+//            return Result.success("上传文件格式错误！");
+//        }
+
+
+        // 创建文件所在的文件夹
+        File dir = new File("D:\\hospitalConfigFile\\temp\\");
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+
+        String filePath = "D:\\hospitalConfigFile\\temp\\"+file.getOriginalFilename();
+
+        File dest = new File(filePath);
+
+        try {
+            file.transferTo(dest);
+        } catch (IOException e) {
+        }
+
+        List list= ExcelUtil.importExcelContent(filePath);
+        System.out.println(list);
+
     }
 }
