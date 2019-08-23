@@ -13,6 +13,7 @@ import java.util.Date;
  */
 @Data
 public class DhdjksjsVO implements Serializable {
+
     /**
      * 到货登记表id
      */

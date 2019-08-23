@@ -1,17 +1,25 @@
 package com.litbo.hospital.lifemanage.bean.vo;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.litbo.hospital.lifemanage.bean.SgDjhw;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * 到货登记表实体类
+ * @author Administrator
  */
 @Data
 public class SgDhdjVO {
+
+    /**到货登记id*/
+    private String dhdjId;
     /**
      * 收获单位
      */
@@ -55,6 +63,8 @@ public class SgDhdjVO {
     /**
      * 到货时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dhsj;
     /**
      * 物流公司
@@ -112,5 +122,5 @@ public class SgDhdjVO {
     /**
      * 登记货物列表
      */
-    private List<SgDjhw> sgDjhws;
+    private List<SgDjhw> sgDjhws=new ArrayList<>();
 }

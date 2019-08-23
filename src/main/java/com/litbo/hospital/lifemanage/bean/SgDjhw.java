@@ -1,6 +1,8 @@
 package com.litbo.hospital.lifemanage.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,8 +10,10 @@ import java.util.Date;
 /**
  * 登记货物表实体类
  */
+
 @Data
 public class SgDjhw {
+
     /**
      * 登记货物表主键
      */
@@ -25,7 +29,7 @@ public class SgDjhw {
     /**
      * 包装箱号
      */
-    private Integer djhwBzxh;
+    private String djhwBzxh;
     /**
      * 品牌
      */
@@ -57,7 +61,7 @@ public class SgDjhw {
     /**
      * 体积
      */
-    private Double djhwTj;
+    private String djhwTj;
     /**
      * 包装标识标签
      */
@@ -73,7 +77,7 @@ public class SgDjhw {
     /**
      * 重量
      */
-    private Double djhwZl;
+    private String djhwZl;
     /**
      * 防倾斜运输标识 -》0无1未变色2已变色
      */
@@ -89,5 +93,18 @@ public class SgDjhw {
     /**
      * 科室接受时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date djhwJssj;
+    /*
+    合同编号
+    * */
+    private String djhwHtid;
+    /*
+    包装外观
+    */
+    private String djhwBzwg;
+
+    /*包装破损照片路径名*/
+    private String djhwBzimgurls;
 }

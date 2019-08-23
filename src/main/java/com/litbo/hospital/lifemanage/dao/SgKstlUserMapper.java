@@ -20,5 +20,5 @@ public interface SgKstlUserMapper {
             "insert into sg_kstl_user (kstl_id, user_id)",
             "values (#{kstlId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})"
     })
-    int insertSgKstlUser(@Param("kstlId") String kstlId,@Param("userId") String usersId);
+    int insertSgKstlUser(@Param("kstlId") String kstlId, @Param("userId") String usersId);
 }

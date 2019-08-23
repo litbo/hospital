@@ -11,10 +11,12 @@ public interface SgLzfxService {
      *
      * @param sgLzfxVOs 论证分析信息
      */
+
     void insertSgLzfx(SgLzfxVO sgLzfxVOs);
 
     /**
      * 查看论证分析详情
+     *
      * @param sgInfoId 申购单id
      * @return SgLzfxVO
      */

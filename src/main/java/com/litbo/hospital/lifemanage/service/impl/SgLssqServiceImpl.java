@@ -39,7 +39,7 @@ public class SgLssqServiceImpl implements SgLssqService {
      * @return PageInfo<SgLssq>
      */
     @Override
-    public PageInfo<SgLssq> selectSgLssq(String ksId,String isKsg, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgLssq> selectSgLssq(String ksId, String isKsg, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(sgLssqMapper.selectSgLssq(ksId,isKsg));
     }

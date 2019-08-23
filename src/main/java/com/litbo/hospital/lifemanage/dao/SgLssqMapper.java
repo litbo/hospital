@@ -34,5 +34,5 @@ public interface SgLssqMapper {
      * @param isKsg 是否过期
      */
     @SelectProvider(type = SgLssqSqlProvider.class, method = "selectSgLssq")
-    List<SgLssq> selectSgLssq(@Param("ksId") String ksId,@Param("isKsg") String isKsg);
+    List<SgLssq> selectSgLssq(@Param("ksId") String ksId, @Param("isKsg") String isKsg);
 }

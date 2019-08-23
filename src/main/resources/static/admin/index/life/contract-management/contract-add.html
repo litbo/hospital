@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>医学装备录入</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+
+</head>
+<style>
+    .layui-form-label{
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space: nowrap;
+    }
+</style>
+<body>
+
+
+<!--<div class="layui-col-md12">-->
+<!--    <div class="layui-row grid-demo">-->
+
+<input type="hidden" name="htJf" value="烟台毓璜顶医院">
+<input type="hidden" name="htYf" id="htYf" value="">
+<div class="layui-col-md12">
+    <form class="layui-form layui-form-pane" id="forms" action="">
+        <div class="layui-collapse">
+            <!--                    合同基本信息-->
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><b>合同基本信息</b></h2>
+                <div class="layui-colla-content layui-show">
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-md6 layui-col-space20">
+                            <!--                            合同编号-->
+                            <div class="layui-form-item ">
+                                <label class="layui-form-label" >合同编号<span class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htBianhao"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <!--                            签约地-->
+                            <div class="layui-form-item ">
+                                <label class="layui-form-label">签约地<span class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htQyd" id="Qyd" lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="layui-col-md6 layui-col-space20">
+
+                            <!--                            乙方-->
+                            <div class="layui-form-item ">
+                                <label class="layui-form-label">乙方(卖方)<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block" style="margin-top: -5px">
+                                    <button class="layui-btn layui-btn-normal layui-btn-sm"
+                                            id="selectEmp" lay-filter="sub">选择
+                                    </button>
+                                    <button class="layui-btn layui-btn-normal layui-btn-sm"
+                                            id="addEmp">新增
+                                    </button>
+                                </div>
+                                <button class="layui-btn " style="margin-top: 32px" onclick="button1()">选择预览</button>
+                                <div class="layui-input-block" style="margin-top: -42px">
+                                    <input type="text" name="csname" disabled class="layui-input">
+                                    <input type="hidden" name="sbcsIdScs" disabled id="sbcsIdScs" class="layui-input">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--                    医学装备基本信息-->
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><b>医学装备基本信息</b></h2>
+                <div class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                        <label class="layui-form-label ">医学装备<span class="sign">*</span></label>
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-sm addNew" data-id="table"
+                                    id="dataTable1" style="background-color: #003366"><i class="fas fa-plus"></i>&nbsp;添加
+                            </button>
+                            <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table">
+                                <i class="fas fa-trash-alt" style="background-color: #cc0033"></i>&nbsp;删除
+                            </button>
+                        </div>
+                    </div>
+
+                    <table id="table" lay-filter="table"></table>
+                    <!--                    描述-->
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">描述<span class="sign">*</span></label>
+                        <div class="layui-input-block">
+                            <textarea name="desc" placeholder="请输入内容" onfocus="this.placeholder=''"
+                                      onblur="this.placeholder='请输入内容'"
+                                      autocomplete="off" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--                    医学装备的交付期-->
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><b>医学装备的交付期</b></h2>
+                <div class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">交付期(天)<span
+                                class="sign">*</span></label>
+                        <div class="layui-input-block">
+                            <input style="width: 490px" type="text" name="htJfq"  lay-verify="required"
+                                   placeholder="请输入内容" onfocus="this.placeholder=''"
+                                   onblur="this.placeholder='请输入内容'"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--                    医学装备的运输,安装和验收-->
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><b>医学装备的运输,安装和验收</b></h2>
+                <div class="layui-colla-content layui-show">
+
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-md6 layui-col-space20">
+                            <!--                                        甲方查验发现问题时乙方退货退款保证日-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">甲方查验发现问题时乙方退货退款保证日<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htBzr"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md6 layui-col-space20">
+                            <!--                                        乙方调试日-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label" style="">乙方调试日<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block"> <!-- 注意：这一层元素并不是必须的 -->
+                                    <input type="text" name="htTsr"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--                    付款方式-->
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><b>付款方式</b></h2>
+                <div class="layui-colla-content layui-show">
+
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-md6 layui-col-space20">
+                            <!--                                        验收合格付款百分比-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">验收合格付款百分比<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htYsfk"  lay-verify="required"
+                                           placeholder="%"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md6 layui-col-space20">
+                            <!--                                        质保金百分比-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">质保金百分比<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htZbj"  lay-verify="required"
+                                           placeholder="%"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--                    质量保证及售后服务-->
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><b>质量保证及售后服务</b></h2>
+                <div class="layui-colla-content layui-show">
+
+                    <div class="layui-row layui-col-space20">
+                        <div class="layui-col-md6 layui-col-space20">
+                            <!--                                        装备生产日期-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">装备生产日期<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block"> <!-- 注意：这一层元素并不是必须的 -->
+                                    <input type="text" name="htScrq" class="layui-input" id="test1"
+                                           placeholder="请选择日期">
+                                </div>
+                            </div>
+                            <!--                                        保修期(月)-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">保修期(月)<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htBxq"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <!--                                        报修响应时间(小时)-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">报修响应时间(小时)<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htBxxy"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <!--                                        报修到场时间(小时)-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">报修到场时间(小时)<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htBxdc"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md6 layui-col-space20">
+                            <!--                                        保修期满后单次故障最高费用-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label" style="width: auto">保修期满后单次故障最高费用<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htZgfg"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <!--                                        年度报修合同价不高于装备总价的百分比-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">年度报修合同价不高于装备总价的百分比<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htZgbfb"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <!--                                        年度最少保养维护次数-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">年度最少保养维护次数<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htBycs"  lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <!--                                        保修期满后维修零配件优惠价-->
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">保修期满后维修零配件优惠价<span
+                                        class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="htLpjyhj" lay-verify="required"
+                                           placeholder="请输入内容" onfocus="this.placeholder=''"
+                                           onblur="this.placeholder='请输入内容'"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""
+                        lay-filter="save">保存
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<!--                保存-->
+
+</form>
+</div>
+
+
+<script>
+
+
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({elem: '#test1'});
+    });
+
+
+    var formData = {};
+    var formData2 = {};
+    renderMod = {
+
+        addTable: {
+            table: [
+                {
+                    elem: "#table",
+                    id: "table",
+                    cols: [[ //表头
+
+                        {type: "checkbox"}
+                        , {
+                            field: 'htZbmc',
+                            title: '医学装备名称',
+                            totalRowText: '合计'
+                        }
+                        , {field: 'htGgxh', title: '规格型号'}
+                        , {field: 'htPinpai', title: '品牌'}
+                        , {field: 'htYcd', title: '原产地'}
+                        , {field: 'htDanwei', title: '单位'}
+                        , {field: 'htCount', title: '数量'}
+                        , {field: 'htDanjia', title: '单价'}
+                        , {field: 'htZongjia', title: '总价', totalRow: true}
+
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
+                    }
+                }
+            ]
+        },
+        bind: {
+            addItem: [
+                {
+                    elem: "#dataTable1",
+                    base: "./child/medical-equipment.html",
+                    name: "vg",
+                    key: "key",
+                    before: function () {
+                        $("#htYf").val($("#sbcsIdScs").val());
+                    }
+                },
+                {
+                    elem: "#addEmp",
+                    base: "./child/add-Yf.html",
+                    name: "dtdt",
+                    key: "date"
+                }
+
+            ],
+            delItem: ".delNew",
+            selectItem: [
+                {
+                    elem: "#selectEmp",
+                    cb: "/lifeManage/listHtBiaotou",
+                    db: "/cs/listScs",
+                    name: "dtdt",
+                    key: "radio",
+                    data: formData2
+                }
+
+            ]
+        },
+        form: {
+            date: {
+                elem: "#date"
+            },
+            submit: {
+                before: function (param) {
+                    var tv = getTableValue("table");
+                    // var tv2= getFormValue("forms");
+                    /*var Qyd = $("#Qyd").val();
+                    if (Qyd == '' || Qyd == undefined || Qyd == null)
+                    {
+                        window.location.reload();
+                    }*/
+                    return param = {
+                        1: tv
+                        // 2: tv2
+                    };
+
+                    
+                       
+                },
+                form: {
+                    url: "/lifeManage/addEqHt",
+                    type: "POST",
+                    data: [
+                        "htBianhao", "htQyd", "htJf", "htYf", "htJfq","htZgbfb", "htBzr", "htTsr", "htYsfk", "htZbj",
+                        "htScrq", "htBxq", "htBxxy", "htBxdc", "htZgfg", "htBycs", "htLpjyhj"
+                    ],
+                    // key:"key",
+                    contentType: "application/json",
+                    param: {
+                        1: "listZb"
+                        // 2: "htZbhz"
+                    },
+
+                    reload: true
+                }
+            }
+
+        }
+    };
+
+    function button1() {
+        $.ajax({
+            type: "get",
+            data: {
+                id: $("input[name='sbcsIdScs']").val()
+            },
+            url: "/lifeManage/selectCsNameById",
+            dataType: "json",
+            success: function (result) {
+                $("input[name='csname']").val(result.data)
+            },
+            error: function (e) {
+                alert("厂商有误，请重新选择");
+            }
+        })
+    }
+// 判断数据库中是否已存在
+    /*$.ajax({
+        type: "post",
+        url: "xxxx.action",
+        processData:true,
+        data: {"后台接受名":页面数据},
+        success: function(data){
+//data是后台传到前台的数据，data.xxx获得数据
+        },
+        error:function(XMLHttpRequest){alert("获取数据失败!")}
+    });*/
+
+// 焦点事件
+    /*$("input[name=htBianhao]").focusout(function(){
+        $.post('/login/',{
+                htBianhao:$("input[name=account]").val()
+            },
+            function(data,status){
+                if(!!data){
+                    alert('编号已存在');
+                }else{
+                    alert('111');
+                }
+            })
+
+    })*/
+
+</script>
+
+
+</body>
+</html>

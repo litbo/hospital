@@ -10,6 +10,20 @@ import java.util.Date;
  */
 @Data
 public class SgYsListVO {
+
+    /*部门Id*/
+    private String bmId;
+
+    /*部门名字*/
+    private String bmName;
+
+    /*验收Id*/
+    private String ysId;
+
+    /**
+     * 登记货物id
+     */
+    private String djhwId;
     /**
      * 合同id
      */
@@ -37,6 +51,8 @@ public class SgYsListVO {
     /**
      * 到货时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date dhsj;
+
+
 }

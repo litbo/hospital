@@ -7,6 +7,7 @@ import lombok.Data;
  *
  * @author Administrator on 2018-12-17
  */
+
 @Data
 public class ReportMessage {
     /**

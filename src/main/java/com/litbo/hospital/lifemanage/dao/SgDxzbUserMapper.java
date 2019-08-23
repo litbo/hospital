@@ -17,7 +17,7 @@ public interface SgDxzbUserMapper {
      */
     @Insert("    insert into sg_dxzb_user (dxzb_id, user_id)\n" +
             "    values (#{dxzbId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})")
-    int insertSgDxzbUser(@Param("dxzbId")String dxzbId,@Param("userId") String userId);
+    int insertSgDxzbUser(@Param("dxzbId") String dxzbId, @Param("userId") String userId);
 
     /**
      * 根据大型医学装备考察报告id删除考察人员

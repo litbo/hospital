@@ -1,6 +1,5 @@
 package com.litbo.hospital.lifemanage.service.impl;
 
-import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgLzfx;
 import com.litbo.hospital.lifemanage.bean.SgLzfxxhbj;
 import com.litbo.hospital.lifemanage.bean.vo.SgLzfxVO;
@@ -22,6 +21,7 @@ import java.util.UUID;
  */
 @Service
 public class SgLzfxServiceImpl implements SgLzfxService {
+
     @Autowired
     private SgLzfxMapper sgLzfxMapper;
     @Autowired
@@ -34,6 +34,7 @@ public class SgLzfxServiceImpl implements SgLzfxService {
      *
      * @param sgLzfxVOs 论证分析信息
      */
+
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = RuntimeException.class)
     @Override
     public void insertSgLzfx(SgLzfxVO sgLzfxVOs) {
