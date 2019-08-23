@@ -12,18 +12,32 @@
     <script src="../../../static/admin/js/basic.js"></script>
 </head>
 <body>
+<div class="layui-row">
+    <div class="layui-col-md9">
+        <div class="grid-demo grid-demo-bg1">
+            <table class="layui-hide" id="table" lay-filter="table1"></table>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="grid-demo">
+            <!--饼图-->
+            <div id="firstPieChart" style="width:90%;
+            height:300px;float: left;"></div>
 
-<!--表格-->
-<div style="width: 68%;margin-left: 20px;float: left;">
-    <table class="layui-hide" id="table" lay-filter="table1"></table>
+            <!--条形图-->
+            <div id="main1" style="width: 90%;height:300px;display:
+            inline-block;float: left;margin-left: 20px;box-sizing: border-box"></div>
+
+        </div>
+    </div>
 </div>
 
-<!--饼图-->
-<div id="firstPieChart" style="width:20%; height:300px;float: left;margin:
-    10px 0 0 40px;"></div>
 
-<!--条形图-->
-<div id="main1" style="width: 20%;height:300px;display: inline-block;float: left;margin: 10px 0 0 40px;"></div>
+<!--&lt;!&ndash;表格&ndash;&gt;-->
+<!--<div style="width: 68%;margin-left: 20px;float: left;">-->
+
+<!--</div>-->
+
 
 <script type="text/html" id="toolBar">
     <!-- 搜索区域 -->
@@ -35,8 +49,8 @@
                 </label>
                 <div class="layui-input-inline" style="width: 110px;">
 
-                    <select name="glLb" lay-search="">
-                        <option value="0">全部设备</option>
+                    <select name="cEquCate" lay-search="">
+                        <option value="">全部设备</option>
                         <option value="1">Ⅰ类</option>
                         <option value="2">Ⅱ类</option>
                         <option value="3">Ⅲ类</option>
@@ -49,31 +63,18 @@
                 <label class="layui-form-label" style="width: 70px;margin-top: -5px;">设备简称
                 </label>
                 <div class="layui-input-inline" style="width: 120px;">
-                    <input type="text" name="name" autocomplete="off"
+                    <input type="text" name="cAName" autocomplete="off"
                            placeholder="" class="layui-input">
                 </div>
             </div>
 
-            <!--科室-->
+            <!--部门-->
             <div class="layui-inline">
                 <label class="layui-form-label" style="width: 40px;margin-top: -5px;">科室
                 </label>
-                <div class="layui-input-inline" style="width: 180px;">
-                    <select name="bm" lay-search="">
-                        <option value="" style="color:gray;">全部科室</option>
-                        <option value="85c9ed3b-7f000010-4a135070-e07c4921"  style="color:black;">新部门</option>
-                        <option value="0001">病案室</option>
-                        <option value="0002">病案质控室</option>
-                        <option value="1061100">鼻病门诊</option>
-                        <option value="0003">B超室</option>
-                        <option value="0004">病房临床检验室</option>
-                        <option value="0005">病房消化内镜室</option>
-                        <option value="0243">保管(固定资产)</option>
-                        <option value="0242">保管(维修配件)</option>
-                        <option value="1020807">瘢痕门诊</option>
-                        <option value="0006">保健科全科医学病区</option>
-                        <option value="0329">保健科全科医学</option>
-                        <option value="0007">保健科全科医学门诊</option>
+                <div class="layui-input-inline" style="width: 150px;">
+                    <select name="bmId"  lay-filter="bmId">
+                        <option value="">全部部门</option>
                     </select>
                 </div>
             </div>
@@ -85,11 +86,11 @@
                 <label class="layui-form-label" style="width: 70px;margin-top: -5px;">使用状态
                 </label>
                 <div class="layui-input-inline" style="width: 110px;">
-                    <select name="runningState" lay-search="">
-                        <option value="0">全部</option>
-                        <option value="1">工作</option>
-                        <option value="2">待机</option>
-                        <option value="3">关机</option>
+                    <select name="eqstatus" lay-search="">
+                        <option value="">全部</option>
+                        <option value="01">工作</option>
+                        <option value="02">待机</option>
+                        <option value="00">关机</option>
                     </select>
                 </div>
             </div>
@@ -100,29 +101,64 @@
                 </label>
                 <div class="layui-input-inline" style="width: 80px;">
 
-                    <select name="goodCondition" lay-search="">
-                        <option value="0">全部</option>
-                        <option value="1">完好</option>
-                        <option value="2">故障</option>
+                    <select name="eqsyzt" lay-search="">
+                        <option value="">全部</option>
+                        <option value="在用">在用</option>
+                        <option value="故障">故障</option>
+                        <option value="维修">维修</option>
                     </select>
                 </div>
             </div>
 
             <!--check-->
-            <div class="layui-input-inline" style="width: 180px;margin-left:
-            10px;">
-                <input type="checkbox" name="check" title="是否急救及生命支持类"
-                       lay-skin="primary">
+            <div class="layui-inline" style="margin-top: 5px;">
+                <label class="layui-form-label"
+                       style="width: 90px;margin-top: -5px;margin-left: -5px;">急救及生命支持类
+                </label>
+                <div class="layui-input-inline" style="width: 100px;">
+
+                    <select name="cIsLife" lay-search="">
+                        <option value="">全部</option>
+                        <option value="1">是</option>
+                        <option value="2">否</option>
+                    </select>
+                </div>
             </div>
 
             <!--按钮-->
-            <div class="layui-input-inline" style="width: 70px;margin-left: 10px;">
+            <div class="layui-input-inline" style="width: 70px;margin-left:10px;margin-top: -5px;">
                 <button class="layui-btn layui-btn-sm"  data-type="reload">查询</button>
             </div>
         </form>
     </div>
 </script>
 
+<script type="text/html" id="jsonChange3">
+    {{#if (d.status === '00') { }}
+    <span>关机</span>
+    {{# }else if(d.status === '01'){ }}
+    <span>工作</span>
+    {{# }else if(d.status === '02'){ }}
+    <span>待机</span>
+    {{# }else if(d.status === '03'){ }}
+    <span>数据接口被拔掉</span>
+    {{# }else{ }}
+    <span>状态不明</span>
+    {{# } }}
+</script>
+<script type="text/html" id="jsonChange4">
+    {{#if (d.status === '00') { }}
+    <span>网络未连接</span>
+    {{# }else if(d.status === '01'){ }}
+    <span>网络连接</span>
+    {{# }else if(d.status === '02'){ }}
+    <span>网络连接</span>
+    {{# }else if(d.status === '03'){ }}
+    <span>网络未连接</span>
+    {{# }else{ }}
+    <span>状态不明</span>
+    {{# } }}
+</script>
 <script src="layui/layui.js"></script>
 <script src="layui/echarts.js"></script>
 <script src="js/dataIndex.js"></script>
@@ -134,15 +170,15 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'department', title:'科室',fixed: 'left', unresize: true}
-                    ,{field:'id', title:'编号'}
-                    ,{field:'name', title:'设备',}
-                    ,{field:'model', title:'型号'}
-                    ,{field:'runningState', title:'运行状态'}
-                    ,{field:'goodCondition', title:'完好状态'}
-                    ,{field:'networkingStatus', title:'联网状态'}
+                    ,{field:'bmName', title:'科室',fixed: 'left', unresize: true}
+                    ,{field:'eqSbbh', title:'编号'}
+                    ,{field:'eqName', title:'设备',}
+                    ,{field:'eqXh', title:'型号'}
+                    ,{field:'status', title:'运行状态',toolbar:'#jsonChange3'}
+                    ,{field:'syzt', title:'完好状态'}
+                    ,{field:'status', title:'联网状态',toolbar:'#jsonChange4'}
                 ]]
-                , url: "json/monitor.json"
+                , url: "/realtimemonitoring/show1"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
@@ -188,11 +224,10 @@
             },
 
             reSet: {
-                url: "json/monitor.json",
+                url: "/realtimemonitoring/show1",
                 type: "reload",
                 tid: "table",
-                data: ["glLb", "name", "bm", "runningState", "goodCondition",
-                    "check"],
+                data: ["cEquCate", "bmId", "cIsLife", "eqstatus", "eqsyzt","cAName"],
                 method: "POST"
             }
         }
@@ -200,19 +235,47 @@
     renderMod.form = {
         date:{
             elem:"#date1",
-            value:today,
-            type:"datetime",
+            value:today0,
+            type:"date",
             format:'yyyy-MM-dd',
-            isInitValue:false
+            range: true
+        },
+        val: {
+            filter: "forms",
+            select: [
+                {
+                    filter: "bmId",
+                    ids: "bmId",
+                    text: "bmName",
+                    url: "/supervise/bmgl/listBm"
+                }
+            ]
         }
-    }
+    };
+
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+
+
+    });
 
     // 饼图
     function loadOneColumn() {
         var myChart = echarts.init(document.getElementById('firstPieChart'));
         // 显示标题，图例和空的坐标轴
         myChart.setOption({
-            color: ['#47b73d', '#fc765b'],//饼图颜色
+            color: ['#47b73d', '#fc765b','#6b8fff  '],//饼图颜色
             title: {
                 text: '完好情况统计   ',
                 x:'center'
@@ -220,6 +283,12 @@
             tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            grid: {
+                borderWidth: 0,
+                y: 60,
+                y2: 20,
+                bottom:10
             },
             legend: {
                 orient: 'vertical',
@@ -229,8 +298,8 @@
             series: [{
                 name: '完好情况',
                 type: 'pie',
-                radius: '55%',
-                center: ['50%', '60%'],
+                radius: '54%',
+                center: ['50%', '50%'],
                 data: []
             }]
         });
@@ -239,7 +308,7 @@
         var brower = [];
         $.ajax({
             type: 'get',
-            url: 'json/monitor-bing.json',//请求数据的地址
+            url: '/realtimemonitoring/show2',//请求数据的地址
             dataType: "json",        //返回数据形式为json
             success: function (result) {
                 //请求成功时执行该函数内容，result即为服务器返回的json对象
@@ -268,7 +337,12 @@
         });
     }
     loadOneColumn();
-
+    function autoPlay() {
+        time = setInterval(function () {
+            loadOneColumn();
+        },10000);
+    }
+    autoPlay();
     //条形图
     function loadTwoColumn() {
         var myChart = echarts.init(document.getElementById('main1'));
@@ -319,7 +393,7 @@
         var brower = [];
         $.ajax({
             type: 'get',
-            url: 'json/monitor-tiao.json',//请求数据的地址
+            url: '/realtimemonitoring/show3',//请求数据的地址
             dataType: "json",        //返回数据形式为json
             success: function (result) {
                 //请求成功时执行该函数内容，result即为服务器返回的json对象
@@ -348,89 +422,12 @@
         });
     }
     loadTwoColumn();
-
-    //JavaScript代码区域
-    // layui.use('element', function(){
-    //     var element = layui.element;
-    // });
-    //
-    // // 表单
-    // layui.use(['form', 'layedit', 'laydate'], function(){
-    //     var form = layui.form
-    //         ,layer = layui.layer
-    //         ,layedit = layui.layedit
-    //         ,laydate = layui.laydate;
-    //
-    //     //日期
-    //     laydate.render({
-    //         elem: '#indexDateSelect'
-    //     });
-    // });
-    //
-    // // 表格
-    // layui.use('table', function(){
-    //     var table = layui.table;
-    //
-    //     table.render({
-    //         elem: '#table1'
-    //         ,url:'json/monitor.json'
-    //         ,height: 'full-30'
-    //         ,toolbar: '#toolbarDemo'
-    //         ,title: '用户数据表'
-    //         ,cellMinWidth:50
-    //         ,cols: [[
-    //             {type: 'checkbox', fixed: 'left'}
-    //             ,{field:'department', title:'科室',fixed: 'left', unresize: true}
-    //             ,{field:'id', title:'编号'}
-    //             ,{field:'name', title:'设备',}
-    //             ,{field:'model', title:'型号'}
-    //             ,{field:'runningState', title:'运行状态'}
-    //             ,{field:'goodCondition', title:'完好状态'}
-    //             ,{field:'networkingStatus', title:'联网状态'}
-    //         ]]
-    //         ,page: true
-    //     });
-    //
-    //     //头工具栏事件
-    //     table.on('toolbar(test)', function(obj){
-    //         var checkStatus = table.checkStatus(obj.config.id);
-    //         switch(obj.event){
-    //             case 'getCheckData':
-    //                 var data = checkStatus.data;
-    //                 layer.alert(JSON.stringify(data));
-    //                 break;
-    //             case 'getCheckLength':
-    //                 var data = checkStatus.data;
-    //                 layer.msg('选中了：'+ data.length + ' 个');
-    //                 break;
-    //             case 'isAll':
-    //                 layer.msg(checkStatus.isAll ? '全选': '未全选');
-    //                 break;
-    //         }
-    //     });
-    //
-    //     //监听行工具事件
-    //     table.on('tool(test)', function(obj){
-    //         var data = obj.data;
-    //         //console.log(obj)
-    //         if(obj.event === 'del'){
-    //             layer.confirm('真的删除行么', function(index){
-    //                 obj.del();
-    //                 layer.close(index);
-    //             });
-    //         } else if(obj.event === 'edit'){
-    //             layer.prompt({
-    //                 formType: 2
-    //                 ,value: data.email
-    //             }, function(value, index){
-    //                 obj.update({
-    //                     email: value
-    //                 });
-    //                 layer.close(index);
-    //             });
-    //         }
-    //     });
-    // });
+    function autoPlay2() {
+        time = setInterval(function () {
+            loadTwoColumn();
+        },10000);
+    }
+    autoPlay2();
 </script>
 </body>
 </html>
