@@ -33,24 +33,20 @@ public class RealTimeMonitoringController {
             if (searchOV.getCAName()!=null&&"".equals(searchOV.getCAName())){
                 searchOV.setCAName(null);
             }
+            if (searchOV.getCIsLife()!=null&&"".equals(searchOV.getCIsLife())){
+                searchOV.setCIsLife(null);
+            }
+            if (searchOV.getEqstatus()!=null&&"".equals(searchOV.getEqstatus())){
+                searchOV.setEqstatus(null);
+            }
             if (searchOV.getCEquCate()!=null&&"".equals(searchOV.getCEquCate())){
                 searchOV.setCEquCate(null);
             }
-            if (searchOV.getCIsLife()!=null){
-                if (searchOV.getCIsLife().equals("")||"on".equals(searchOV.getCIsLife())){
-                    searchOV.setCIsLife(null);
-                }else if (searchOV.getCIsLife().equals("yes")){
-                    searchOV.setCIsLife("1");
-                }
-            }
-            if (searchOV.getStatus()!=null&&"".equals(searchOV.getStatus())){
-                searchOV.setStatus(null);
-            }
-            if (searchOV.getSyzt()!=null&&"".equals(searchOV.getSyzt())){
-                searchOV.setSyzt(null);
+            if (searchOV.getEqsyzt()!=null&&"".equals(searchOV.getEqsyzt())){
+                searchOV.setEqsyzt(null);
             }
         }
-        searchOV.setCIsLife("2");
+        System.out.println(searchOV);
         return Result.success(realTimeMonitoringService.show1(pageNum,pageSize,searchOV));
     }
 
