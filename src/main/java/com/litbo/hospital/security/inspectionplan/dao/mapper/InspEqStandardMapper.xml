@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.security.inspectionplan.dao.InspEqStandardMapper">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    <id column="insp_pl_standard_id" jdbcType="VARCHAR" property="inspPlStandardId" />
+    <result column="insp_pl_standard_name" jdbcType="VARCHAR" property="inspPlStandardName" />
+    <result column="insp_pl_standard_description" jdbcType="VARCHAR" property="inspPlStandardDescription" />
+    <result column="insp_pl_standard_spare1" jdbcType="VARCHAR" property="inspPlStandardSpare1" />
+    <result column="insp_pl_standard_spare2" jdbcType="VARCHAR" property="inspPlStandardSpare2" />
+    <result column="insp_pl_standard_spare3" jdbcType="VARCHAR" property="inspPlStandardSpare3" />
+    <result column="insp_pl_standard_spare4" jdbcType="VARCHAR" property="inspPlStandardSpare4" />
+    <result column="insp_pl_standard_spare5" jdbcType="VARCHAR" property="inspPlStandardSpare5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    insp_pl_standard_id, insp_pl_standard_name, insp_pl_standard_description, insp_pl_standard_spare1, 
+    insp_pl_standard_spare2, insp_pl_standard_spare3, insp_pl_standard_spare4, insp_pl_standard_spare5
+  </sql>
+  <select id="selectByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandardExample">
+    delete from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard (insp_pl_standard_id, insp_pl_standard_name, 
+      insp_pl_standard_description, insp_pl_standard_spare1, 
+      insp_pl_standard_spare2, insp_pl_standard_spare3, 
+      insp_pl_standard_spare4, insp_pl_standard_spare5
+      )
+    values (#{inspPlStandardId,jdbcType=VARCHAR}, #{inspPlStandardName,jdbcType=VARCHAR}, 
+      #{inspPlStandardDescription,jdbcType=VARCHAR}, #{inspPlStandardSpare1,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare2,jdbcType=VARCHAR}, #{inspPlStandardSpare3,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare4,jdbcType=VARCHAR}, #{inspPlStandardSpare5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        insp_pl_standard_id,
+      </if>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name,
+      </if>
+      <if test="inspPlStandardDescription != null">
+        insp_pl_standard_description,
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1,
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2,
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3,
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4,
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        #{inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardName != null">
+        #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescription != null">
+        #{inspPlStandardDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandardExample" resultType="java.lang.Long">
+    select count(*) from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update z_insp_pl_standard
+    <set>
+      <if test="record.inspPlStandardId != null">
+        insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardName != null">
+        insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardDescription != null">
+        insp_pl_standard_description = #{record.inspPlStandardDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update z_insp_pl_standard
+    set insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{record.inspPlStandardDescription,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    <set>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescription != null">
+        insp_pl_standard_description = #{inspPlStandardDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    set insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{inspPlStandardDescription,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR}
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    <id column="insp_pl_standard_id" jdbcType="VARCHAR" property="inspPlStandardId" />
+    <result column="insp_pl_standard_name" jdbcType="VARCHAR" property="inspPlStandardName" />
+    <result column="insp_pl_standard_description" jdbcType="VARCHAR" property="inspPlStandardDescription" />
+    <result column="insp_pl_standard_spare1" jdbcType="VARCHAR" property="inspPlStandardSpare1" />
+    <result column="insp_pl_standard_spare2" jdbcType="VARCHAR" property="inspPlStandardSpare2" />
+    <result column="insp_pl_standard_spare3" jdbcType="VARCHAR" property="inspPlStandardSpare3" />
+    <result column="insp_pl_standard_spare4" jdbcType="VARCHAR" property="inspPlStandardSpare4" />
+    <result column="insp_pl_standard_spare5" jdbcType="VARCHAR" property="inspPlStandardSpare5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    insp_pl_standard_id, insp_pl_standard_name, insp_pl_standard_description, insp_pl_standard_spare1, 
+    insp_pl_standard_spare2, insp_pl_standard_spare3, insp_pl_standard_spare4, insp_pl_standard_spare5
+  </sql>
+  <select id="selectByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample">
+    delete from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard (insp_pl_standard_id, insp_pl_standard_name, 
+      insp_pl_standard_description, insp_pl_standard_spare1, 
+      insp_pl_standard_spare2, insp_pl_standard_spare3, 
+      insp_pl_standard_spare4, insp_pl_standard_spare5
+      )
+    values (#{inspPlStandardId,jdbcType=VARCHAR}, #{inspPlStandardName,jdbcType=VARCHAR}, 
+      #{inspPlStandardDescription,jdbcType=VARCHAR}, #{inspPlStandardSpare1,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare2,jdbcType=VARCHAR}, #{inspPlStandardSpare3,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare4,jdbcType=VARCHAR}, #{inspPlStandardSpare5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        insp_pl_standard_id,
+      </if>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name,
+      </if>
+      <if test="inspPlStandardDescription != null">
+        insp_pl_standard_description,
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1,
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2,
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3,
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4,
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        #{inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardName != null">
+        #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescription != null">
+        #{inspPlStandardDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultType="java.lang.Long">
+    select count(*) from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update z_insp_pl_standard
+    <set>
+      <if test="record.inspPlStandardId != null">
+        insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardName != null">
+        insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardDescription != null">
+        insp_pl_standard_description = #{record.inspPlStandardDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update z_insp_pl_standard
+    set insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{record.inspPlStandardDescription,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    <set>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescription != null">
+        insp_pl_standard_description = #{inspPlStandardDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    set insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{inspPlStandardDescription,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR}
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    <id column="insp_pl_standard_id" jdbcType="VARCHAR" property="inspPlStandardId" />
+    <result column="insp_pl_standard_name" jdbcType="VARCHAR" property="inspPlStandardName" />
+    <result column="insp_pl_standard_spare1" jdbcType="VARCHAR" property="inspPlStandardSpare1" />
+    <result column="insp_pl_standard_spare2" jdbcType="VARCHAR" property="inspPlStandardSpare2" />
+    <result column="insp_pl_standard_spare3" jdbcType="VARCHAR" property="inspPlStandardSpare3" />
+    <result column="insp_pl_standard_spare4" jdbcType="VARCHAR" property="inspPlStandardSpare4" />
+    <result column="insp_pl_standard_spare5" jdbcType="VARCHAR" property="inspPlStandardSpare5" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    <result column="insp_pl_standard_description" jdbcType="LONGVARCHAR" property="inspPlStandardDescriprion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    insp_pl_standard_id, insp_pl_standard_name, insp_pl_standard_spare1, insp_pl_standard_spare2, 
+    insp_pl_standard_spare3, insp_pl_standard_spare4, insp_pl_standard_spare5
+  </sql>
+  <sql id="Blob_Column_List">
+    insp_pl_standard_description
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample">
+    delete from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard (insp_pl_standard_id, insp_pl_standard_name, 
+      insp_pl_standard_spare1, insp_pl_standard_spare2, 
+      insp_pl_standard_spare3, insp_pl_standard_spare4, 
+      insp_pl_standard_spare5, insp_pl_standard_description
+      )
+    values (#{inspPlStandardId,jdbcType=VARCHAR}, #{inspPlStandardName,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare1,jdbcType=VARCHAR}, #{inspPlStandardSpare2,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare3,jdbcType=VARCHAR}, #{inspPlStandardSpare4,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare5,jdbcType=VARCHAR}, #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        insp_pl_standard_id,
+      </if>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name,
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1,
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2,
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3,
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4,
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5,
+      </if>
+      <if test="inspPlStandardDescriprion != null">
+        insp_pl_standard_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        #{inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardName != null">
+        #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescriprion != null">
+        #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultType="java.lang.Long">
+    select count(*) from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update z_insp_pl_standard
+    <set>
+      <if test="record.inspPlStandardId != null">
+        insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardName != null">
+        insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardDescriprion != null">
+        insp_pl_standard_description = #{record.inspPlStandardDescriprion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update z_insp_pl_standard
+    set insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{record.inspPlStandardDescriprion,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update z_insp_pl_standard
+    set insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    <set>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescriprion != null">
+        insp_pl_standard_description = #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    set insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR}
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    set insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR}
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    <id column="insp_pl_standard_id" jdbcType="VARCHAR" property="inspPlStandardId" />
+    <result column="insp_pl_standard_name" jdbcType="VARCHAR" property="inspPlStandardName" />
+    <result column="insp_pl_standard_spare1" jdbcType="VARCHAR" property="inspPlStandardSpare1" />
+    <result column="insp_pl_standard_spare2" jdbcType="VARCHAR" property="inspPlStandardSpare2" />
+    <result column="insp_pl_standard_spare3" jdbcType="VARCHAR" property="inspPlStandardSpare3" />
+    <result column="insp_pl_standard_spare4" jdbcType="VARCHAR" property="inspPlStandardSpare4" />
+    <result column="insp_pl_standard_spare5" jdbcType="VARCHAR" property="inspPlStandardSpare5" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    <result column="insp_pl_standard_description" jdbcType="LONGVARCHAR" property="inspPlStandardDescriprion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    insp_pl_standard_id, insp_pl_standard_name, insp_pl_standard_spare1, insp_pl_standard_spare2, 
+    insp_pl_standard_spare3, insp_pl_standard_spare4, insp_pl_standard_spare5
+  </sql>
+  <sql id="Blob_Column_List">
+    insp_pl_standard_description
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from z_insp_pl_standard
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample">
+    delete from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard (insp_pl_standard_id, insp_pl_standard_name, 
+      insp_pl_standard_spare1, insp_pl_standard_spare2, 
+      insp_pl_standard_spare3, insp_pl_standard_spare4, 
+      insp_pl_standard_spare5, insp_pl_standard_description
+      )
+    values (#{inspPlStandardId,jdbcType=VARCHAR}, #{inspPlStandardName,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare1,jdbcType=VARCHAR}, #{inspPlStandardSpare2,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare3,jdbcType=VARCHAR}, #{inspPlStandardSpare4,jdbcType=VARCHAR}, 
+      #{inspPlStandardSpare5,jdbcType=VARCHAR}, #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    insert into z_insp_pl_standard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        insp_pl_standard_id,
+      </if>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name,
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1,
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2,
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3,
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4,
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5,
+      </if>
+      <if test="inspPlStandardDescriprion != null">
+        insp_pl_standard_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inspPlStandardId != null">
+        #{inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardName != null">
+        #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescriprion != null">
+        #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqStandardExample" resultType="java.lang.Long">
+    select count(*) from z_insp_pl_standard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update z_insp_pl_standard
+    <set>
+      <if test="record.inspPlStandardId != null">
+        insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardName != null">
+        insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStandardDescriprion != null">
+        insp_pl_standard_description = #{record.inspPlStandardDescriprion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update z_insp_pl_standard
+    set insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{record.inspPlStandardDescriprion,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update z_insp_pl_standard
+    set insp_pl_standard_id = #{record.inspPlStandardId,jdbcType=VARCHAR},
+      insp_pl_standard_name = #{record.inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{record.inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{record.inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{record.inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{record.inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{record.inspPlStandardSpare5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    <set>
+      <if test="inspPlStandardName != null">
+        insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare1 != null">
+        insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare2 != null">
+        insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare3 != null">
+        insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare4 != null">
+        insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardSpare5 != null">
+        insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStandardDescriprion != null">
+        insp_pl_standard_description = #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    set insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR},
+      insp_pl_standard_description = #{inspPlStandardDescriprion,jdbcType=LONGVARCHAR}
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqStandard">
+    update z_insp_pl_standard
+    set insp_pl_standard_name = #{inspPlStandardName,jdbcType=VARCHAR},
+      insp_pl_standard_spare1 = #{inspPlStandardSpare1,jdbcType=VARCHAR},
+      insp_pl_standard_spare2 = #{inspPlStandardSpare2,jdbcType=VARCHAR},
+      insp_pl_standard_spare3 = #{inspPlStandardSpare3,jdbcType=VARCHAR},
+      insp_pl_standard_spare4 = #{inspPlStandardSpare4,jdbcType=VARCHAR},
+      insp_pl_standard_spare5 = #{inspPlStandardSpare5,jdbcType=VARCHAR}
+    where insp_pl_standard_id = #{inspPlStandardId,jdbcType=VARCHAR}
+  </update>
+</mapper>

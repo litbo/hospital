@@ -45,7 +45,7 @@
 						<input type="text" name="recordEndTime" class="layui-input" placeholder="生成结束时间" autocomplete="off">
                     </div>
 					<div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="department"  class="layui-input" placeholder="所属部门" autocomplete="off">
+                        <input type="text" name="department"  class="layui-input" placeholder="使用科室" autocomplete="off">
                     </div>
                     
 					<div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -81,9 +81,10 @@
         addTable: {
             table: {
                 cols: [[ //表头
+                    {type: "numbers", title: '序号' },
                     {type: "checkbox"}
                     , {field: 'processName', title: '流程名称', minWidth: 120}
-                    , {field: 'department', title: '所属部门', minWidth: 150}
+                    , {field: 'department', title: '使用科室', minWidth: 150}
                     , {field: 'dealPerson', title: '处理人', width: 100}
                     , {field: 'dealTime', title: '处理时间', width: 250}
                     , {field: 'dealStatus', title: '状态', width: 90}

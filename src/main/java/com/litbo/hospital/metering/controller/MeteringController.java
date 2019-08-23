@@ -6,9 +6,11 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
 import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
+import com.litbo.hospital.metering.pojo.MeteringUtilStatus;
 import com.litbo.hospital.metering.service.MeteringService;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,20 +68,6 @@ public class MeteringController {
     }
 
 
-    /**
-     * 废弃计量设备
-     * @param meteringUtilId
-     * @return
-     */
-    @RequestMapping("/disableMeteringUtil.do")
-    public Result disableMeteringUtil(int meteringUtilId){
-        int result = meteringService.disableDevice(meteringUtilId);
-        if(result == 1){
-            return Result.success();
-        }
-        return Result.error("删除失败，请重试");
-    }
-
 
     /**
      * 更新设备信息
@@ -87,7 +75,10 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/updateMeteringUtil.do")
-    public Result updateMeteringUtil(MeteringUtil meteringUtil){
+    public Result updateMeteringUtil(MeteringUtil meteringUtil,MeteringUtilStatus status){
+        if(status != null){
+            updateUtilUseStatus(status);
+        }
         int result = meteringService.updateMeteringUtil(meteringUtil);
         if(result == 1){
             return Result.success();
@@ -109,31 +100,59 @@ public class MeteringController {
         return Result.success(meteringUtil);
     }
 
-    /**
-     * 根据设备编号查询设备信息
-     * @param num 设备编号
-     * @return
-     */
-    @RequestMapping("/findMeteringUtilByNum.do")
-    public Result findMeteringUtilByNum(String num){
-        MeteringUtil meteringUtil = meteringService.findMeteringUtilByUtilNum(num);
-        if(meteringUtil == null){
-            return Result.error("没有查询到该设备的相关信息，请检查输入的id是否正确");
-        }
-        return Result.success(meteringUtil);
-    }
-
-
 
     /**
      * 查询所有的设备信息
+     * @param sign  标记
+     * @param gaugeCategory  器具类别
+     * @param meteringName  器具名称
+     * @param bmName  使用科室
+     * @param meteringstatus 器具状态
+     * @param beginTime 开始时间
+     * @param endTime  结束时间
+     * @param needMeter 是否送检
+     * @param pageNum 分页页码
+     * @param pageSize 分页每页数据数量
      * @return
      */
     @RequestMapping("/findAllMeteringUtil.do")
-    public PageVo findAllMeteringUtil(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+    public PageVo findAllMeteringUtil(@RequestParam(name = "sign" ,defaultValue = "-1") Integer sign,
+                                      @RequestParam(name = "gaugeCategory" , defaultValue = "") String gaugeCategory,
+                                      @RequestParam(name = "meteringName" ,defaultValue = "") String meteringName ,
+                                      @RequestParam(name = "bmName" , defaultValue = "") String bmName,
+                                      @RequestParam(name = "meteringstatus" , defaultValue = "") String meteringstatus,
+                                      @RequestParam(name = "beginTime" , defaultValue = "0000/00/00") String beginTime,
+                                      @RequestParam(name = "endTime" , defaultValue = "9999/99/99") String endTime,
+                                      @RequestParam(name = "needMeter",defaultValue = "")String needMeter,
+                                      @RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                       @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
+        if(gaugeCategory.equals("")){
+            gaugeCategory = null;
+        }
+
+        if(sign == -1){
+            sign = null;
+        }
+
+        if(meteringName.equals("")){
+            meteringName = null;
+        }
+
+        if(bmName.equals("")){
+            bmName = null;
+        }
+
+        if(meteringstatus.equals("")){
+            meteringstatus = null;
+        }
+
+        if(needMeter.equals("")){
+            needMeter = null;
+        }
+
+
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtil();
+        List<MeteringUtil> meteringUtils = meteringService.findAllMeteringUtilAllCheck(sign,gaugeCategory,meteringName,bmName,meteringstatus,beginTime,endTime,needMeter);
 
         PageInfo info = new PageInfo(meteringUtils);
 
@@ -292,26 +311,32 @@ public class MeteringController {
 
 
     /**
-     * 得到这一个月中需要送去检查的计量设备，按照部门来分类
+     * 得到未来90天中需要送去检查的计量设备，按照部门来分类
      * @param department 部门
      * @return
      */
     @RequestMapping("/getTheMonthUtil.do")
     public PageVo getTheMonthNeedToMeteringUtils(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                                  @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
-                                                 String department){
+                                                 @RequestParam(name = "department" , defaultValue = "") String department){
+
+        if(department.equals("")){
+            department = null;
+        }
 
         // 得到当前月的第一天和最后一天的日期
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Calendar calendar = Calendar.getInstance();
+
         calendar.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
         String firstDay = sdf.format(calendar.getTime());
+        calendar.add(Calendar.MONTH,2);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));  // 设置日期为本月的最后一天
         String endDay = sdf.format(calendar.getTime());
 
-//        通过日期来查询本月尚未进行计量的设备
+//        通过日期来查询未来90天尚未进行计量的设备
         PageHelper.startPage(pageNum,pageSize);
-        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(firstDay,endDay,department,"1");
+        List<MeteringUtil> meteringUtils = meteringService.searchMeteringUtil(firstDay,endDay,department,"0");
         PageInfo info = new PageInfo(meteringUtils);
         PageVo vo = new PageVo();
         if(!meteringUtils.isEmpty()){
@@ -366,5 +391,35 @@ public class MeteringController {
         vo.setCode(0);
         vo.setData(vo.new DataEntity((int) info.getTotal(),meteringHistoryNumbers));
         return vo;
+    }
+
+
+    /**
+     * 设备使用状态更改
+     * @param status
+     * @return
+     */
+    @RequestMapping("/updateUtilUseStatus.do")
+    public Result updateUtilUseStatus(MeteringUtilStatus status){
+        int result = meteringService.updateMeteringUtilUseStatus(status);
+        if(result == 0){
+            return Result.error("删除失败");
+        }
+        return Result.success();
+    }
+
+
+    /**
+     * 得到设备状态信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/getUtilStatusMsg.do")
+    public Result getUtilStatusMsg(int id){
+        MeteringUtilStatus status = meteringService.getMeteringUtilUseStatusByUtilId(id);
+        if(status == null){
+            return Result.success();
+        }
+        return Result.success(status);
     }
 }

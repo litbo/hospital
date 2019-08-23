@@ -18,9 +18,14 @@ public interface MeteringDealProcessDAO {
 
     int updateByPrimaryKey(MeteringDealProcess record);
 
-    // 查找流程
+    // 查询已处理流程
     List<MeteringDealProcess> searchDealProcess(@Param("recordBeginTime") String recordBeginTime, @Param("recordEndTime") String recordEndTime,
                                                 @Param("department") String department, @Param("status") String status,
                                                 @Param("dealBeginTime") String dealBeginTime, @Param("dealEndTime") String dealEndTime);
+
+    // 查询未处理流程
+    List<MeteringDealProcess> searchDealProcessNot(@Param("recordBeginTime") String recordBeginTime,
+                                                   @Param("recordEndTime") String recordEndTime,
+                                                   @Param("department") String department);
 
 }

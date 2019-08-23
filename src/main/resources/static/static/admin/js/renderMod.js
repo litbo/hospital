@@ -591,6 +591,7 @@ function render(renderParam){
                         var tableId = $(this).data("id") || "table";
                         //basic.js中定义的函数
                         action.checkTable(tableId);
+                        return false;
                     })
                 },
                 addItem: function (cl) {
@@ -758,7 +759,8 @@ function render(renderParam){
                                         //寻找匹配的元素并且将匹配上name值的DOM赋值
                                         for (var i = 0; i < res.length; i++) {
                                             if (item.na) {
-                                                $dom = $("input[name=" + item.na + "]");
+                                            	// lizunyi 扩展回调的时候，赋值给自定义组件
+                                                $dom = $("input[name=" + (item.assign_el_name || item.na) + "]");
                                                 //判断DOM是否存在
                                                 if ($dom.length > 0) {
                                                     $dom.val(res[i][item.na]);

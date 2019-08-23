@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>计划检定</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="addBtn">
+       <button class="layui-btn layui-btn-xs" lay-event="audit">审 请</button>
+    </div>
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="">
+                    <!--<input type="checkbox" name="" title="监管设备"  lay-skin="primary">-->
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="bmName" class="layui-input" placeholder="科室拼音码" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="beginTime"  class="layui-input" placeholder="开始时间" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="endTime"  class="layui-input" placeholder="结束时间" autocomplete="off">
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script> 
+
+<script>
+	var checkstatus = [];
+	function getCheckstatus(){
+		return checkstatus;
+	}
+	function setCheckstatus(){
+		checkstatus = [];
+	}
+	var emp = tempValue("rl", "emp", false);
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type: "numbers", title: '序号' }
+                    ,{type: "checkbox" }
+                    , {field: 'bmName', title: '部门', minWidth: 100}
+                    , {field: 'meteringSystemNum', title: '计量编号', minWidth: 250}
+                    , {field: 'meteringName', title: '计量器具', minWidth: 150}
+                    , {field: 'specificationModle', title: '周期', minWidth: 100}
+                    , {field: 'description1', title: '预定日', minWidth: 100}
+                ]]
+                , url:"/Metering/findAllMeteringUtil.do?needMeter=0"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                	res.data = res.data || {};
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                    	toolFunc:[{
+                             type:2,
+                             event:"audit",
+                             tool: "toolbar",
+                             content:"./child/metering-test-add.html",
+                             func:function(config,$checkstatus){
+                            	 checkstatus = $checkstatus.data || [];
+                             }
+                         }]
+//                     	toolFunc: [{
+//                     		send:{
+//                                 id:"table",
+//                                 filter:"table1",
+//                                 name:"utilIds",
+//                                 event:"audit",
+//                                 url:"/meteringProcess/addSomeMeteringUtilToProcess.do",
+//                                 type:"post",
+//                                 par:"id",
+//                                 confirm:false,
+//                                 reload:true,
+//                                 adds:{
+//                                 	department:emp.bmName
+//                                 }
+//                             },
+// 	                        tool:"toolbar",
+// 	                        event:"audit"
+//                          }]
+                    })
+                }
+            },
+            reSet:{
+                url:"/Metering/findAllMeteringUtil.do?needMeter=0",
+                type:"search",
+                data:["bmName","beginTime","endTime"]    //搜索框的name
+            }
+        }       
+    }
+</script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package com.litbo.hospital.metering.dao;
 
 import com.litbo.hospital.metering.pojo.MeteringUtil;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -23,6 +24,13 @@ public interface MeteringUtilDAO {
 
     //    查询所有的设备信息
     List<MeteringUtil> findAllMeteringUtil();
+
+    // 综合查询
+    List<MeteringUtil> findAllMeteringUtilAllChech(@Param("sign") Integer sign,@Param("gaugeCategory") String gaugeCategory,
+                                                   @Param("meteringName")String meteringName,@Param("bmName") String bmName,
+                                                   @Param("meteringstatus")String meteringstatus,
+                                                   @Param("beginTime") String beginTime,
+                                                   @Param("endTime") String endTime,@Param("needMeter") String needMeter);
 
     //    根据部门查看设备信息
     List<MeteringUtil> findAllMeteringUtilByDepartment(String department);

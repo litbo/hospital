@@ -7,14 +7,15 @@ import com.litbo.hospital.metering.pojo.DossierFile;
 import com.litbo.hospital.metering.service.DossierService;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.supervise.bean.SBm;
+import com.litbo.hospital.supervise.service.BmService;
+import com.litbo.hospital.user.bean.EqInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -30,20 +31,55 @@ public class DossierController {
     @Autowired
     private DossierService dossierService;
 
+    @Autowired
+    private BmService bmService;
 
     //                                              卷宗管理部分     begin
 
 
     /**
+     * 获得还没有建立卷宗的设备信息
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/getNeedDossierEq.do")
+    public PageVo getNeedDossierEq(@RequestParam(name = "eqName",defaultValue = "") String eqName,
+                                   @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
+                                   @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
+
+
+        if(eqName.equals("")){
+            eqName = null;
+        }
+
+        PageVo vo = new PageVo();
+        PageHelper.startPage(pageNum,pageSize);
+        List<EqInfo> eqInfoList = dossierService.selectEqNeedDossier(eqName);
+        PageInfo info = new PageInfo(eqInfoList);
+        if(!eqInfoList.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),eqInfoList));
+            return vo;
+        }
+        vo.setMsg("没有查询到设备信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),eqInfoList));
+        return vo;
+    }
+
+
+    /**
      * 添加卷宗
      * @param dossier
-     * @param dossierPrefix
-     * @param dossierSuffix
+     * @param eqSbbh 设备编码
+     * @param eqQysj 设备启用时间
      * @return
      */
     @RequestMapping("/addDossier.do")
-    public Result addDossier(Dossier dossier,String dossierPrefix,String dossierSuffix){
-        int result = dossierService.addDossier(dossier,dossierPrefix,dossierSuffix);
+    public Result addDossier(Dossier dossier,String eqSbbh,String eqQysj){
+        int result = dossierService.addDossier(dossier,eqSbbh.substring(0,4),eqQysj.substring(0,4));
         if(result == 0){
             return Result.success("添加失败,请检查您添加的信息");
         }
@@ -144,24 +180,70 @@ public class DossierController {
         // 得到文件归属的卷宗的信息
         Dossier dossier = dossierService.selectDossierByID(dossierId);
         // 得到卷宗电子版的路径
-        String filePath = dossier.getDescription();
+        String dossierPath = dossier.getDescription();
 
+        // 文件名
         String fileName = file.getOriginalFilename();
-        File dir = new File(filePath);
+        dossierFile.setFileName(fileName);  // 保存文件名
+
+        // 获得一个时间戳
+        String time = "" + System.currentTimeMillis();
+        // 目录路径
+        String fileFatherPath = null;
+        // 文件路径
+        String filePath = null;
+
+        // 生成电子文件
+        switch (dossierFile.getFileType()){
+            case 1:{
+                fileFatherPath = dossierPath+"PurchaseFile\\";
+                filePath = dossierPath+"PurchaseFile\\"+time+"_"+fileName;
+            }break;
+            case 2:{
+                fileFatherPath = dossierPath+"Equipment_technology_file\\";
+                filePath = dossierPath+"Equipment_technology_file\\"+time+"_"+fileName;
+            }break;
+            case 3 :{
+                fileFatherPath = dossierPath+"management_file\\";
+                filePath = dossierPath+"management_file\\"+time+"_"+fileName;
+            }break;
+            case 4:{
+                fileFatherPath = dossierPath+"other_file\\";
+                filePath = dossierPath+"other_file\\"+time+"_"+fileName;
+            }break;
+            default:{
+                fileFatherPath = dossierPath+"other_file\\";
+                filePath = dossierPath+"other_file\\"+time+"_"+fileName;
+            }
+        }
+
+
+        // 创建文件所在的文件夹
+        File dir = new File(fileFatherPath);
         if(!dir.exists()){
             dir.mkdirs();
         }
 
-        String time = "" + System.currentTimeMillis();
 
-        File dest = new File(filePath + time + fileName);
+        // 将文件的路径拼接成程序可以识别的路径   begin
+        String[] paths = filePath.split("\\\\");
+        StringBuffer filePathWindows = new StringBuffer();
+        for(int i = 0 ; i < paths.length-1 ; i++){
+            filePathWindows.append(paths[i]).append("\\\\");
+        }
+        filePathWindows.append(paths[paths.length-1]);
+        // 将文件的路径拼接成程序可以识别的路径   end
+
+
+        File dest = new File(filePathWindows.toString());
+
         try {
             file.transferTo(dest);
-            dossierFile.setFileName(fileName);  // 文件名
-            int result = dossierService.addDossierFile(dossierFile,filePath + time + fileName,dossierId);
+            int result = dossierService.addDossierFile(dossierFile,filePath,dossierId);
             if(result == 0){
                 return Result.success("上传失败");
             }
+
             return Result.success();
         } catch (IOException e) {
         }
@@ -174,7 +256,9 @@ public class DossierController {
      * @return
      */
     @RequestMapping("/fidnAllDossierFile.do")
-    public PageVo fidnAllDossierFile(int dossierId,
+    public PageVo fidnAllDossierFile(@RequestParam(name = "dossierId" ,defaultValue = "-1") Integer dossierId,
+                                     @RequestParam(name = "dosserFileType",defaultValue = "-1") Integer dosserFileType,
+                                     @RequestParam(name = "fileName",defaultValue = "") String fileName,
                                      @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                                      @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize) {
         PageVo vo = new PageVo();
@@ -187,8 +271,17 @@ public class DossierController {
             return vo;
         }
 
+        if(fileName.equals("")){
+            fileName = null;
+        }
+
+        if(dosserFileType == -1){
+            dosserFileType = null;
+        }
+
+
         PageHelper.startPage(pageNum,pageSize);
-        List<DossierFile> dossierFiles = dossierService.findAllDossierFileByDossierName(dossiers.getDossierName());
+        List<DossierFile> dossierFiles = dossierService.findAllDossierFileByDossierNum(dossiers.getDossierNum(),dosserFileType,fileName);
         PageInfo info = new PageInfo(dossierFiles);
         if(!dossierFiles.isEmpty()){
             vo.setCode(0);
@@ -256,6 +349,7 @@ public class DossierController {
     @RequestMapping("/deleteDossierFile.do")
     public Result deleteDossierFile(int dossierFileId) {
         DossierFile dossierFile = dossierService.selectDossierFile(dossierFileId);
+        Dossier dossier = dossierService.selectDossierByBelongNum(dossierFile.getBelongDossierNum());
 
         // 将文件的路径拼接成程序可以识别的路径   begin
         String[] paths = dossierFile.getDescription().split("\\\\");
@@ -271,7 +365,7 @@ public class DossierController {
         File file = new File(filePath.toString());
         if (!file.exists()) {
             // 删除数据库信息
-            int result = dossierService.deleterDossierFile(dossierFileId);
+            int result = dossierService.deleterDossierFile(dossierFileId,dossier);
 
             if (result == 0) {
                 return Result.success("删除失败");
@@ -284,8 +378,7 @@ public class DossierController {
         }
 
         // 删除数据库信息
-        int result = dossierService.deleterDossierFile(dossierFileId);
-
+        int result = dossierService.deleterDossierFile(dossierFileId,dossier);
         if (result == 0) {
             return Result.success("删除失败");
         }

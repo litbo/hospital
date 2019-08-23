@@ -21,6 +21,8 @@ public class MeteringApprovalForm implements Serializable {
 
     private String dealTime;
 
+    private String description;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getFormId() {
@@ -79,6 +81,14 @@ public class MeteringApprovalForm implements Serializable {
         this.dealTime = dealTime;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -97,7 +107,8 @@ public class MeteringApprovalForm implements Serializable {
             && (this.getMeteringId() == null ? other.getMeteringId() == null : this.getMeteringId().equals(other.getMeteringId()))
             && (this.getRecordTime() == null ? other.getRecordTime() == null : this.getRecordTime().equals(other.getRecordTime()))
             && (this.getDealStatus() == null ? other.getDealStatus() == null : this.getDealStatus().equals(other.getDealStatus()))
-            && (this.getDealTime() == null ? other.getDealTime() == null : this.getDealTime().equals(other.getDealTime()));
+            && (this.getDealTime() == null ? other.getDealTime() == null : this.getDealTime().equals(other.getDealTime()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
     }
 
     @Override
@@ -111,6 +122,7 @@ public class MeteringApprovalForm implements Serializable {
         result = prime * result + ((getRecordTime() == null) ? 0 : getRecordTime().hashCode());
         result = prime * result + ((getDealStatus() == null) ? 0 : getDealStatus().hashCode());
         result = prime * result + ((getDealTime() == null) ? 0 : getDealTime().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         return result;
     }
 
@@ -127,6 +139,7 @@ public class MeteringApprovalForm implements Serializable {
         sb.append(", recordTime=").append(recordTime);
         sb.append(", dealStatus=").append(dealStatus);
         sb.append(", dealTime=").append(dealTime);
+        sb.append(", description=").append(description);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

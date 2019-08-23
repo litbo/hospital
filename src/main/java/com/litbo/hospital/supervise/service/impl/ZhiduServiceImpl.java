@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -259,7 +258,7 @@ public class ZhiduServiceImpl implements ZhiduService {
         if(shMsgVO.getZtShyj()==null)shMsgVO.setZtShyj("");
         updateZdZt(shMsgVO.getZdId(),shMsgVO.getZtCzzt(),new Date(),shMsgVO.getZtShyj());
 
-        if(shMsgVO.getZtCzzt()==ZdCzztEnumProcess.ZD__CZZT_TG.getCode() && shMsgVO.getNextShrId()!=null){   //审核通过且继续审核
+        if(shMsgVO.getZtCzzt().equals(ZdCzztEnumProcess.ZD__CZZT_TG.getCode()) && shMsgVO.getNextShrId()!=null){   //审核通过且继续审核
 
             insertZdZt(shMsgVO.getZdId(),shMsgVO.getNextShrId(),true);
 

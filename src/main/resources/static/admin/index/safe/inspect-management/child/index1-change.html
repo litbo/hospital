@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变更</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+
+
+<div class="layui-row" style="margin: 20px">
+    <div class="col-xs-12">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>变更</legend>
+        </fieldset>
+
+        <form class="layui-form layui-form-pane" action="" >
+            <div class="layui-row ">
+                <div class="col-xs-12">
+                    <div class="col-xs-6" style="padding: 10px;">
+
+                        <div class="layui-form-item" style="margin-bottom:20px ">
+                            <label class="layui-form-label">计划名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="inspPlName" lay-verify="required" autocomplete="off" placeholder="" class="layui-input inspPlName">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item"  style="margin-bottom:20px ">
+                            <label class="layui-form-label">制定时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="inspPlCreateTime"  readonly="readonly"  id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input inspPlCreateTime">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom:20px ">
+                            <label class="layui-form-label" style="height:46px;line-height:30px;">制定人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="inspPlPlanner" placeholder="请选择" lay-verify="required"
+                                       autocomplete="off" disabled class="layui-input inspPlPlanner"
+                                       style="height:46px;padding-left:60px;" >
+                                <input type="hidden" id="inspPlPlanner">
+                                <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"
+                                        lay-filter="zhiName" id="zhiName">选择
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom:20px ">
+                            <label class="layui-form-label" style="height:46px;line-height:30px;">审核人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="inspPlAuditor" placeholder="请选择"
+                                       autocomplete="off" disabled class="layui-input inspPlAuditor"
+                                       style="height:46px;padding-left:60px;" >
+                                <input type="hidden" id="inspPlAuditor">
+                                <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"
+                                        lay-filter="shenName" id="shenName">选择
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom:20px ">
+                            <label class="layui-form-label">状态</label>
+                            <div class="layui-input-block">
+                                <select name="inspPlStatus" id="inspPlStatus">
+                                    <option value="">选择状态</option>
+                                    <option value="0">停用</option>
+                                    <option value="1">待审核</option>
+                                    <option value="2">未通过</option>
+                                    <option value="3">已通过</option>
+                                    <option value="4">二次审批</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-6" style="padding: 10px;">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" name="inspPlNote"  style="resize:none"  class="layui-textarea inspPlNote"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">变更说明</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" name="inspPlChangeReason"  style="resize:none"  class="layui-textarea inspPlChangeReason"></textarea>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12" style="margin-bottom: 100px;">
+                    <div class="layui-form-item" pane>
+
+                        <div class="layui-input-block" style="margin-left: 0">
+                            <button type="button" class="layui-btn layui-btn-normal layui-btn-sm dataTable"
+                                    data-id="table"   style="background-color: #003366">
+                                <i class="fas fa-plus"></i>&nbsp;添加
+                            </button>
+
+                            <button type="button" class="layui-btn layui-btn-danger layui-btn-sm editNew"
+                                    data-id="table"   style="background-color: #FFB800">
+                                <i  class="fas fa-pen"></i>    修改
+
+                            </button>
+
+                            <button type="button" class="layui-btn layui-btn-danger layui-btn-sm delNew"
+                                    data-id="table"  style="background-color: #CC0033">
+                                <i  class="fas fa-trash-alt"></i>&nbsp;删除
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <table id="table" lay-filter="table"></table>
+                </div>
+
+                <div class="layui-row" >
+                    <div class="col-xs-6">
+                        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="sumBer">提 交</button>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <a href="javascript:history.go(-1)" class="layui-btn layui-btn-fluid" >退出</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/html" id="lbTpl">
+    {{#  if(d.inspPlExecutorType === "0"){ }}
+    {{ "维修工程师" }}
+    {{#  } else if(d.inspPlExecutorType === "1") { }}
+    {{ "厂家工程师" }}
+    {{#  } else if(d.inspPlExecutorType === "2") { }}
+    {{ "维修、厂家工程师" }}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="lxTpl">
+    {{#  if(d.inspPlType === "0"){ }}
+    {{ "其它巡检" }}
+    {{#  } else if(d.inspPlType === "1") { }}
+    {{ "周期巡检" }}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="dwTpl">
+    {{#  if(d.inspPlPeriodicUnit === "0" || d.inspPlPeriodicUnit === 0){ }}
+    {{ "周" }}
+    {{#  } else if(d.inspPlPeriodicUnit === "1" || d.inspPlPeriodicUnit === 1) { }}
+    {{ "月" }}
+    {{#  } }}
+</script>
+
+<script>
+    layui.use(['form','table', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,table = layui.table
+            ,laydate = layui.laydate;
+        form.render();
+        var tessNum =[];
+        var tarNum = [];
+        var Numb = [];
+
+        $(function(){
+            var url=window.location.search;
+            var inspPlId =  $.getUrlParam("id");
+            console.log(inspPlId);
+            $.ajax({
+                url : "/inspection/inspPl/selectInspPlanById",
+                type : 'POST',
+                data : {"inspPlId": inspPlId},
+                dataType:'json',
+                success : function(springBootOtl){
+                    var  data = springBootOtl;
+                    if(data !== null){
+                        $(".inspPlName").val(data.data.inspPlName);
+                        $(".inspPlCreateTime").val(data.data.inspPlCreateTime);
+                        $(".inspPlNote").val(data.data.inspPlNote);
+                        $(".inspPlPlanner").val(data.data.inspPlPlanner);
+                        $(".inspPlAuditor").val(data.data.inspPlAuditor);
+                        $("#inspPlPlanner").val(data.data.inspPlPlanner);
+                        $("#inspPlAuditor").val(data.data.inspPlAuditor);
+                        $("#inspPlStatus option[value='"+ data.data.inspPlStatus +"']").prop("selected","selected");
+                        Numb = data.data.inspPlanProgramVos;
+                        table.reload('table', {
+                            data : Numb
+                        });
+                        layui.form.render();
+                        // 记得重新渲染表单/*form.render();*/
+                        /*   form.render();*/
+                    }else{
+                        alert("查询为空");
+                    }
+                },
+                error:function (data) {
+                    alert("查询失败");
+                    console.log(data);
+                }
+            });
+
+        });
+
+        renderMod = {
+            table: {
+                table: [
+                    {
+                        elem: "#table",
+                        id: "table",
+                        cols: [[ //表头
+                            {type: "checkbox"}
+                            , {field: 'inspPlExecutorType', title: '执行人类别', minWidth: 150, templet: '#lbTpl'}
+                            , {field: 'inspPlLastTime', title: '巡检开始日期', minWidth: 150}
+                            , {field: 'inspPlPeriod', title: '巡检周期', minWidth: 150}
+                            , {field: 'inspPlPeriodicUnit', title: '周期单位', minWidth: 150, templet: '#dwTpl'}
+                            , {field: 'inspPlType', title: '巡检类型', minWidth: 150, templet: '#lxTpl'}
+                        ]]
+                        , toolbar: false
+                        , page: true//开启分页
+                        , height: "200"
+                        , data: []
+                        , text: {
+                            none: "请点击上方添加按钮添加数据！"
+                        }
+                        , done: function (res, curr, count) {
+                            if (tessNum.length === 0){
+                                tessNum = Numb;
+                            }else{
+                                tessNum =  tessNum;
+                            }
+                            $(".delNew").off("click").on("click",function(){
+
+                                var checkedArr = [];
+                                for (var i = 0; i < table.cache.table.length; i++) {
+                                    if (table.cache.table[i].LAY_CHECKED == true){
+                                        checkedArr.push(i);
+                                    }
+                                }
+                                if (checkedArr.length == 0){
+                                    layer.msg("尚未选择", { icon: 5 });
+                                }
+                                var eqSbbhs = [];
+
+                                if (checkedArr.length > 1){
+                                    layer.msg("只能单个删除", { icon: 5 });
+                                    return;
+                                } else{
+                                    for (var i = 0; i < checkedArr.length; i++){
+                                        var t = checkedArr[i];
+                                        console.log(t);
+                                        console.log(tessNum);
+                                        console.log(tessNum[t]);
+                                        for (var j = 0; j <tessNum[t].inspPlanEquipmentVos.length; j ++ ){
+                                            eqSbbhs.push(tessNum[t].inspPlanEquipmentVos[j].eqSbbh);
+                                        }
+                                        tessNum.splice(t,1);
+                                        $(".layui-table-view .layui-table tbody tr[data-index=" + checkedArr[i] + "]").remove();
+                                    }
+                                }
+                                $.ajax({
+                                    url:'/inspection/otherfunction/updateEqSbbh1',
+                                    type:"POST",
+                                    async: false,/*同步传输*/
+                                    data:JSON.stringify(eqSbbhs),
+                                    dataType:'JSON',
+                                    contentType:'application/json'
+
+                                });
+
+                                console.log(tessNum);
+                                if (tessNum !== undefined) {
+                                    //向表格中添加数据
+                                    table.reload('table', {
+                                        data : tessNum
+                                    });
+                                    layui.form.render();
+                                }
+                                checkedArr.length = 0;//清除数组
+                                layer.msg('删除成功');
+                                table.reload("table");
+                            });
+
+                            $(".dataTable").off("click").on("click",function(){
+                                /* tessNum = Numb;*/
+                                layer.open({
+                                    type: 2
+                                    ,title: '添加'
+                                    ,area: ['1200px', '550px']
+                                    ,content:"./index1Edit.html"
+                                    ,end :function () {
+                                        var re = window.localStorage.getItem("TumMod");
+                                        var res = JSON.parse(re);
+                                        tessNum = tessNum.concat(res);
+
+                                        window.localStorage.removeItem("TumMod");
+                                        if (tessNum !== undefined) {
+                                            //向表格中添加数据
+                                            for (var i = 0; i < tessNum.length; i++){
+                                                if(tessNum[i] === null ){
+                                                    return;
+                                                }
+                                            }
+                                            table.reload('table', {
+                                                data : tessNum
+                                            });
+                                            layui.form.render();
+
+
+                                        }
+                                    }
+                                });
+                                console.log(tessNum);
+
+                            });
+
+                            $(".editNew").off("click").on("click",function(){
+                                /* tessNum = Numb;*/
+                                console.log(tessNum);
+                                var checkedArr = [];
+                                for (var i = 0; i < table.cache.table.length; i++) {
+                                    if (table.cache.table[i].LAY_CHECKED == true){
+                                        checkedArr.push(i);
+                                    }
+                                }
+                                console.log(checkedArr);
+                                if (checkedArr.length == 0){
+                                    layer.msg("尚未选择", { icon: 5 });
+                                    return;
+                                }
+                                if (checkedArr.length > 1 ){
+                                    layer.msg("只能选择一个", { icon: 5 });
+                                } else{
+                                    for (var i = 0; i < checkedArr.length; i++){
+                                        var t = checkedArr[i];
+                                        /* console.log(t);*/
+                                        console.log(tessNum[t]);
+                                        var taBt = JSON.stringify(tessNum[t]);
+                                        /*   console.log(taBt);*/
+                                    }
+                                    window.localStorage.setItem("taMod",taBt);
+                                }
+                                layer.open({
+                                    type: 2
+                                    ,title: '修改'
+                                    ,area: ['1200px', '550px']
+                                    ,content:"./index1Edit-edit.html"
+                                    ,end :function () {
+                                        var gb = window.localStorage.getItem("nugMod");
+                                        if(gb === null){
+                                            return;
+                                        }
+                                        var sbg = JSON.parse(gb);
+                                        /*    console.log(reg);*/
+                                        console.log(sbg);
+                                        var cheArr = [];
+                                        for (var i = 0; i < table.cache.table.length; i++) {
+                                            if (table.cache.table[i].LAY_CHECKED == true){
+                                                cheArr.push(i);
+                                            }
+                                        }
+                                        for (var i = 0; i < cheArr.length; i++) {
+                                            var t = cheArr[i];
+                                            tessNum[t] = sbg;
+                                            /* for (var j = 0; j <  tessNum[t].inspPlanEquipmentVos.length; j++) {
+                                                 tessNum[t].inspPlanEquipmentVos[j] = sbg;
+                                             }*/
+                                        }
+                                        console.log(tessNum);
+                                        window.localStorage.removeItem("gumMod");
+                                        window.localStorage.removeItem("nugMod");
+                                        if (tessNum !== undefined) {
+                                            //向表格中添加数据
+                                            if(tessNum[0] === null){
+                                                return;
+                                            }else{
+                                                table.reload('table', {
+                                                    data : tessNum
+                                                });
+                                                layui.form.render();
+                                            }
+
+                                        }
+                                    }
+                                });
+                            });
+                            console.log(tessNum);
+                        }
+                    }
+                ]
+            },
+            form: {
+                date: [
+                    {
+                        elem: '#date',
+                        value: today0
+                    }
+                ]
+            }
+            ,btn :[
+                {
+                    elem: "#zhiName",
+                    type:"click",
+                    func: function () {
+                        layui.layer.open({
+                            type: 2,
+                            title: '制定人',
+                            shadeClose: true, //点击遮罩关闭层
+                            area: ['1000px', '470px'],
+                            content: './index1-designer.html'
+                        });
+                    }
+                },
+                {
+                    elem: "#shenName",
+                    type:"click",
+                    func: function () {
+                        layui.layer.open({
+                            type: 2,
+                            title: '审核人',
+                            shadeClose: true, //点击遮罩关闭层
+                            area: ['1000px', '470px'],
+                            content: './index1-auditor.html'
+                        });
+                    }
+                }
+            ]
+
+
+
+        };
+        console.log(tessNum);
+
+
+
+        $("#sumBer").off("click").on("click",function(){
+            layui.use('layer',function() {
+                var layer = layui.layer;
+
+                if (tessNum.length === 0 ){
+                    tessNum = Numb;
+                }
+                if ($(".inspPlName").val() == "") {
+                    layer.msg("计划名称尚未填写", {icon: 2});
+                    return;
+                }
+                if ($(".inspPlCreateTime").val() == "") {
+                    layer.msg("指定时间尚未填写", {icon: 2});
+                    return;
+                }
+                if ($(".inspPlPlanner").val() == "") {
+                    layer.msg("制定人尚未填写", {icon: 2});
+                    return;
+                }
+                if ($(".inspPlNote").val() == "") {
+                    layer.msg("备注尚未填写", {icon: 2});
+                    return;
+                }
+                if ($(".inspPlAuditor").val() == "") {
+                    layer.msg("审核人尚未填写", {icon: 2});
+                    return;
+                }
+                if ($(".interest").val() == "") {
+                    layer.msg("状态尚未选择", {icon: 2});
+                    return;
+                }
+                if ($(".inspPlChangeReason").val() == "") {
+                    layer.msg("变更说明尚未填写", {icon: 2});
+                    return;
+                }
+                for (var i = 0; i < tessNum.length; i++){
+                    for (var j = 0; j < tessNum[i].inspPlanEquipmentVos.length; j++ ){
+                        if(tessNum[i].inspPlanEquipmentVos[j].length == 0){
+                            layer.msg("设备信息未添加", {icon: 2});
+                            return;
+                        }
+                    }
+                }
+                var inspPlanVo = {};
+                console.log(tessNum);
+
+                inspPlanVo["inspPlName"] = $(".inspPlName").val();
+                inspPlanVo["inspPlCreateTime"] = $(".inspPlCreateTime").val();
+                inspPlanVo["inspPlPlanner"] = $("#inspPlPlanner").val();
+                inspPlanVo["inspPlNote"] = $(".inspPlNote").val();
+                inspPlanVo["inspPlAuditor"] = $("#inspPlAuditor").val();
+
+                for (var i = 0; i < tessNum.length; i++){
+                    for (var j = 0; j < tessNum[i].inspPlanEquipmentVos.length; j++ ){
+                        console.log(tessNum[i].inspPlanEquipmentVos[j]);
+                        console.log(tessNum[i].inspPlanEquipmentVos[j].bmName);
+                        if (tessNum[i].inspPlanEquipmentVos[j].bmName === null){
+                            continue;
+                        }
+                        delete  tessNum[i].inspPlanEquipmentVos[j].bmName;
+                        delete  tessNum[i].inspPlanEquipmentVos[j].eqName;
+                        delete  tessNum[i].inspPlanEquipmentVos[j].zt;
+
+                    }
+                }
+                /* console.log(tarNum);*/
+                for (var i = 0; i < tessNum.length; i++){
+                    console.log(tessNum[i]);
+                    tessNum[i]["inspPlanEquipmentVos"] = tarNum[i];
+                }
+                inspPlanVo["inspPlanProgramVos"] = tessNum;
+                console.log(inspPlanVo);
+
+
+
+                console.log(tessNum);
+                /*   console.log(tarNum);*/
+
+                /*    $.ajax({
+                        url:'',
+                        type:"POST",
+                        async: false,/!*同步传输*!/
+                        data: ,
+                       /!* dataType:'JSON',
+                        contentType:'application/json' ,*!/
+                        success: function(res){
+
+                            if(res.code == 0 ){
+                                /!*layer.msg("请求发送成功！",{icon: 6,time:3000});*!/
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                parent.location.reload();
+
+                            }else{
+                                alert(res.msg);
+                            }
+
+                        },
+                        error:function (data) {
+                        }
+                    }) ;*/
+
+                layer.msg("提交成功", {icon: 1});
+
+            });
+
+            /*  window.history.back(-1);*/
+            return false;
+
+        })
+
+    });
+</script>
+
+</body>
+</html>

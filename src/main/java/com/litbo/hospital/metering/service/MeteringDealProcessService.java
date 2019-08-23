@@ -35,12 +35,18 @@ public interface MeteringDealProcessService {
     // 添加流程
     int addProcess(MeteringDealProcess meteringDealProcess);
 
-    // 查找流程
+    // 查找已处理流程
     List<MeteringDealProcess> searchFormProcess(String recordBeginTime, String recordEndTime,
                                                   String department, String status,
                                                   String dealBeginTime,String dealEndTime);
 
+
+    // 查找未处理流程
+    List<MeteringDealProcess> searchFormProcessNot(String recordBeginTime, String recordEndTime,String department);
+
     MeteringDealProcess selectMeteringDealProcessByPrimaryKey(int id);
 
     int updateProcessByPrimaryKeySelective(MeteringDealProcess record);
+
+    int deleterProcess(int processId);
 }

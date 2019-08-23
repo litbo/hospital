@@ -90,6 +90,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
         </dependency>
         <!--连接池-->
         <dependency>
@@ -202,35 +203,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.poi</groupId>-->
-            <!-- <artifactId>poi-ooxml</artifactId>-->
-            <!-- <version>3.15</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!-- <groupId>org.apache.poi</groupId>-->
-            <!-- <artifactId>poi-scratchpad</artifactId>-->
-            <!-- <version>3.15</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--   <groupId>fr.opensagres.xdocreport</groupId>-->
-            <!--   <artifactId>fr.opensagres.xdocreport.document</artifactId>-->
-            <!--   <version>1.0.5</version>-->
-        <!--</dependency>-->
-        <!--<dependency>  -->
-            <!--   <groupId>fr.opensagres.xdocreport</groupId>  -->
-            <!--   <artifactId>org.apache.poi.xwpf.converter.xhtml</artifactId>  -->
-            <!--   <version>1.0.5</version>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>xmlbeans</artifactId>-->
-                    <!--<groupId>org.apache.xmlbeans</groupId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-            <!-- -->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
@@ -240,26 +212,101 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
+
+        <!--mybatisplus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatisplus-spring-boot-starter</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-ehcache</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <!--nekohtml-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+        <!--jdbc 存储 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!-- webmagic jar start -->
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>webmagic-core</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>webmagic-extension</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>webmagic-selenium</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+        <!-- webmagic jar end -->
     </dependencies>
 
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
-            <resources>
-                <resource>
-                    <directory>src/main/java</directory>
-                    <includes>
-                        <include>**/*.xml</include>
-                    </includes>
-                </resource>
-                <resource>
-                    <directory>src/main/resources</directory>
-                </resource>
-            </resources>
-        </build>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>2.41.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-api</artifactId>
+                <version>2.41.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-remote-driver</artifactId>
+                <version>2.41.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-support</artifactId>
+                <version>2.41.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
 
 </project>

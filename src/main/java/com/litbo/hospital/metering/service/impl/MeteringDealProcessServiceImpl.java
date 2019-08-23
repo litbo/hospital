@@ -99,7 +99,21 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
 
     @Override
     public List<MeteringDealProcess> searchFormProcess(String recordBeginTime, String recordEndTime, String department, String status, String dealBeginTime, String dealEndTime) {
+
+
+        if(status != null){
+            if(status.equals("")){
+            return meteringDealProcessDAO.searchDealProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
+        }
+            status = "%"+status+"%";
+        }
+
         return meteringDealProcessDAO.searchDealProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
+    }
+
+    @Override
+    public List<MeteringDealProcess> searchFormProcessNot(String recordBeginTime, String recordEndTime, String department) {
+        return meteringDealProcessDAO.searchDealProcessNot(recordBeginTime, recordEndTime, department);
     }
 
     @Override
@@ -110,5 +124,10 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
     @Override
     public int updateProcessByPrimaryKeySelective(MeteringDealProcess record) {
         return meteringDealProcessDAO.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int deleterProcess(int processId) {
+        return meteringDealProcessDAO.deleteByPrimaryKey(processId);
     }
 }

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.security.inspectionplan.dao.InspEqPlanMapper">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.security.inspectionplan.bean.InspEqPlan">
+    <id column="insp_pl_id" jdbcType="VARCHAR" property="inspPlId" />
+    <id column="insp_pl_eq_sbbh" jdbcType="VARCHAR" property="inspPlEqSbbh" />
+    <result column="insp_pl_name" jdbcType="VARCHAR" property="inspPlName" />
+    <result column="insp_pl_create_time" jdbcType="DATE" property="inspPlCreateTime" />
+    <result column="insp_pl_planner" jdbcType="VARCHAR" property="inspPlPlanner" />
+    <result column="insp_pl_auditor" jdbcType="VARCHAR" property="inspPlAuditor" />
+    <result column="insp_pl_note" jdbcType="VARCHAR" property="inspPlNote" />
+    <result column="insp_pl_status" jdbcType="VARCHAR" property="inspPlStatus" />
+    <result column="insp_pl_executor_type" jdbcType="VARCHAR" property="inspPlExecutorType" />
+    <result column="insp_pl_type" jdbcType="VARCHAR" property="inspPlType" />
+    <result column="insp_pl_period" jdbcType="VARCHAR" property="inspPlPeriod" />
+    <result column="insp_pl_periodic_unit" jdbcType="INTEGER" property="inspPlPeriodicUnit" />
+    <result column="insp_pl_last_time" jdbcType="DATE" property="inspPlLastTime" />
+    <result column="insp_pl_change_reason" jdbcType="VARCHAR" property="inspPlChangeReason" />
+    <result column="insp_pl_plan_execute_time" jdbcType="DATE" property="inspPlPlanExecuteTime" />
+    <result column="insp_pl_eq_standards" jdbcType="VARCHAR" property="inspPlEqStandards" />
+    <result column="insp_pl_sprare1" jdbcType="VARCHAR" property="inspPlSprare1" />
+    <result column="insp_pl_sprare2" jdbcType="VARCHAR" property="inspPlSprare2" />
+    <result column="insp_pl_sprare3" jdbcType="VARCHAR" property="inspPlSprare3" />
+    <result column="insp_pl_sprare4" jdbcType="VARCHAR" property="inspPlSprare4" />
+    <result column="insp_pl_sprare5" jdbcType="VARCHAR" property="inspPlSprare5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    insp_pl_id, insp_pl_eq_sbbh, insp_pl_name, insp_pl_create_time, insp_pl_planner, 
+    insp_pl_auditor, insp_pl_note, insp_pl_status, insp_pl_executor_type, insp_pl_type, 
+    insp_pl_period, insp_pl_periodic_unit, insp_pl_last_time, insp_pl_change_reason, 
+    insp_pl_plan_execute_time, insp_pl_eq_standards, insp_pl_sprare1, insp_pl_sprare2, 
+    insp_pl_sprare3, insp_pl_sprare4, insp_pl_sprare5
+  </sql>
+  <select id="selectByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqPlanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from z_inspection_eq_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqPlanKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from z_inspection_eq_plan
+    where insp_pl_id = #{inspPlId,jdbcType=VARCHAR}
+      and insp_pl_eq_sbbh = #{inspPlEqSbbh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqPlanKey">
+    delete from z_inspection_eq_plan
+    where insp_pl_id = #{inspPlId,jdbcType=VARCHAR}
+      and insp_pl_eq_sbbh = #{inspPlEqSbbh,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqPlanExample">
+    delete from z_inspection_eq_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqPlan">
+    insert into z_inspection_eq_plan (insp_pl_id, insp_pl_eq_sbbh, insp_pl_name, 
+      insp_pl_create_time, insp_pl_planner, insp_pl_auditor, 
+      insp_pl_note, insp_pl_status, insp_pl_executor_type, 
+      insp_pl_type, insp_pl_period, insp_pl_periodic_unit, 
+      insp_pl_last_time, insp_pl_change_reason, insp_pl_plan_execute_time, 
+      insp_pl_eq_standards, insp_pl_sprare1, insp_pl_sprare2, 
+      insp_pl_sprare3, insp_pl_sprare4, insp_pl_sprare5
+      )
+    values (#{inspPlId,jdbcType=VARCHAR}, #{inspPlEqSbbh,jdbcType=VARCHAR}, #{inspPlName,jdbcType=VARCHAR}, 
+      #{inspPlCreateTime,jdbcType=DATE}, #{inspPlPlanner,jdbcType=VARCHAR}, #{inspPlAuditor,jdbcType=VARCHAR}, 
+      #{inspPlNote,jdbcType=VARCHAR}, #{inspPlStatus,jdbcType=VARCHAR}, #{inspPlExecutorType,jdbcType=VARCHAR}, 
+      #{inspPlType,jdbcType=VARCHAR}, #{inspPlPeriod,jdbcType=VARCHAR}, #{inspPlPeriodicUnit,jdbcType=INTEGER}, 
+      #{inspPlLastTime,jdbcType=DATE}, #{inspPlChangeReason,jdbcType=VARCHAR}, #{inspPlPlanExecuteTime,jdbcType=DATE}, 
+      #{inspPlEqStandards,jdbcType=VARCHAR}, #{inspPlSprare1,jdbcType=VARCHAR}, #{inspPlSprare2,jdbcType=VARCHAR}, 
+      #{inspPlSprare3,jdbcType=VARCHAR}, #{inspPlSprare4,jdbcType=VARCHAR}, #{inspPlSprare5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqPlan">
+    insert into z_inspection_eq_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inspPlId != null">
+        insp_pl_id,
+      </if>
+      <if test="inspPlEqSbbh != null">
+        insp_pl_eq_sbbh,
+      </if>
+      <if test="inspPlName != null">
+        insp_pl_name,
+      </if>
+      <if test="inspPlCreateTime != null">
+        insp_pl_create_time,
+      </if>
+      <if test="inspPlPlanner != null">
+        insp_pl_planner,
+      </if>
+      <if test="inspPlAuditor != null">
+        insp_pl_auditor,
+      </if>
+      <if test="inspPlNote != null">
+        insp_pl_note,
+      </if>
+      <if test="inspPlStatus != null">
+        insp_pl_status,
+      </if>
+      <if test="inspPlExecutorType != null">
+        insp_pl_executor_type,
+      </if>
+      <if test="inspPlType != null">
+        insp_pl_type,
+      </if>
+      <if test="inspPlPeriod != null">
+        insp_pl_period,
+      </if>
+      <if test="inspPlPeriodicUnit != null">
+        insp_pl_periodic_unit,
+      </if>
+      <if test="inspPlLastTime != null">
+        insp_pl_last_time,
+      </if>
+      <if test="inspPlChangeReason != null">
+        insp_pl_change_reason,
+      </if>
+      <if test="inspPlPlanExecuteTime != null">
+        insp_pl_plan_execute_time,
+      </if>
+      <if test="inspPlEqStandards != null">
+        insp_pl_eq_standards,
+      </if>
+      <if test="inspPlSprare1 != null">
+        insp_pl_sprare1,
+      </if>
+      <if test="inspPlSprare2 != null">
+        insp_pl_sprare2,
+      </if>
+      <if test="inspPlSprare3 != null">
+        insp_pl_sprare3,
+      </if>
+      <if test="inspPlSprare4 != null">
+        insp_pl_sprare4,
+      </if>
+      <if test="inspPlSprare5 != null">
+        insp_pl_sprare5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inspPlId != null">
+        #{inspPlId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlEqSbbh != null">
+        #{inspPlEqSbbh,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlName != null">
+        #{inspPlName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlCreateTime != null">
+        #{inspPlCreateTime,jdbcType=DATE},
+      </if>
+      <if test="inspPlPlanner != null">
+        #{inspPlPlanner,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlAuditor != null">
+        #{inspPlAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlNote != null">
+        #{inspPlNote,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStatus != null">
+        #{inspPlStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlExecutorType != null">
+        #{inspPlExecutorType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlType != null">
+        #{inspPlType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlPeriod != null">
+        #{inspPlPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlPeriodicUnit != null">
+        #{inspPlPeriodicUnit,jdbcType=INTEGER},
+      </if>
+      <if test="inspPlLastTime != null">
+        #{inspPlLastTime,jdbcType=DATE},
+      </if>
+      <if test="inspPlChangeReason != null">
+        #{inspPlChangeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlPlanExecuteTime != null">
+        #{inspPlPlanExecuteTime,jdbcType=DATE},
+      </if>
+      <if test="inspPlEqStandards != null">
+        #{inspPlEqStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare1 != null">
+        #{inspPlSprare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare2 != null">
+        #{inspPlSprare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare3 != null">
+        #{inspPlSprare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare4 != null">
+        #{inspPlSprare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare5 != null">
+        #{inspPlSprare5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.litbo.hospital.security.inspectionplan.bean.example.InspEqPlanExample" resultType="java.lang.Long">
+    select count(*) from z_inspection_eq_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update z_inspection_eq_plan
+    <set>
+      <if test="record.inspPlId != null">
+        insp_pl_id = #{record.inspPlId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlEqSbbh != null">
+        insp_pl_eq_sbbh = #{record.inspPlEqSbbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlName != null">
+        insp_pl_name = #{record.inspPlName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlCreateTime != null">
+        insp_pl_create_time = #{record.inspPlCreateTime,jdbcType=DATE},
+      </if>
+      <if test="record.inspPlPlanner != null">
+        insp_pl_planner = #{record.inspPlPlanner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlAuditor != null">
+        insp_pl_auditor = #{record.inspPlAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlNote != null">
+        insp_pl_note = #{record.inspPlNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlStatus != null">
+        insp_pl_status = #{record.inspPlStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlExecutorType != null">
+        insp_pl_executor_type = #{record.inspPlExecutorType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlType != null">
+        insp_pl_type = #{record.inspPlType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlPeriod != null">
+        insp_pl_period = #{record.inspPlPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlPeriodicUnit != null">
+        insp_pl_periodic_unit = #{record.inspPlPeriodicUnit,jdbcType=INTEGER},
+      </if>
+      <if test="record.inspPlLastTime != null">
+        insp_pl_last_time = #{record.inspPlLastTime,jdbcType=DATE},
+      </if>
+      <if test="record.inspPlChangeReason != null">
+        insp_pl_change_reason = #{record.inspPlChangeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlPlanExecuteTime != null">
+        insp_pl_plan_execute_time = #{record.inspPlPlanExecuteTime,jdbcType=DATE},
+      </if>
+      <if test="record.inspPlEqStandards != null">
+        insp_pl_eq_standards = #{record.inspPlEqStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlSprare1 != null">
+        insp_pl_sprare1 = #{record.inspPlSprare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlSprare2 != null">
+        insp_pl_sprare2 = #{record.inspPlSprare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlSprare3 != null">
+        insp_pl_sprare3 = #{record.inspPlSprare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlSprare4 != null">
+        insp_pl_sprare4 = #{record.inspPlSprare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspPlSprare5 != null">
+        insp_pl_sprare5 = #{record.inspPlSprare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update z_inspection_eq_plan
+    set insp_pl_id = #{record.inspPlId,jdbcType=VARCHAR},
+      insp_pl_eq_sbbh = #{record.inspPlEqSbbh,jdbcType=VARCHAR},
+      insp_pl_name = #{record.inspPlName,jdbcType=VARCHAR},
+      insp_pl_create_time = #{record.inspPlCreateTime,jdbcType=DATE},
+      insp_pl_planner = #{record.inspPlPlanner,jdbcType=VARCHAR},
+      insp_pl_auditor = #{record.inspPlAuditor,jdbcType=VARCHAR},
+      insp_pl_note = #{record.inspPlNote,jdbcType=VARCHAR},
+      insp_pl_status = #{record.inspPlStatus,jdbcType=VARCHAR},
+      insp_pl_executor_type = #{record.inspPlExecutorType,jdbcType=VARCHAR},
+      insp_pl_type = #{record.inspPlType,jdbcType=VARCHAR},
+      insp_pl_period = #{record.inspPlPeriod,jdbcType=VARCHAR},
+      insp_pl_periodic_unit = #{record.inspPlPeriodicUnit,jdbcType=INTEGER},
+      insp_pl_last_time = #{record.inspPlLastTime,jdbcType=DATE},
+      insp_pl_change_reason = #{record.inspPlChangeReason,jdbcType=VARCHAR},
+      insp_pl_plan_execute_time = #{record.inspPlPlanExecuteTime,jdbcType=DATE},
+      insp_pl_eq_standards = #{record.inspPlEqStandards,jdbcType=VARCHAR},
+      insp_pl_sprare1 = #{record.inspPlSprare1,jdbcType=VARCHAR},
+      insp_pl_sprare2 = #{record.inspPlSprare2,jdbcType=VARCHAR},
+      insp_pl_sprare3 = #{record.inspPlSprare3,jdbcType=VARCHAR},
+      insp_pl_sprare4 = #{record.inspPlSprare4,jdbcType=VARCHAR},
+      insp_pl_sprare5 = #{record.inspPlSprare5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqPlan">
+    update z_inspection_eq_plan
+    <set>
+      <if test="inspPlName != null">
+        insp_pl_name = #{inspPlName,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlCreateTime != null">
+        insp_pl_create_time = #{inspPlCreateTime,jdbcType=DATE},
+      </if>
+      <if test="inspPlPlanner != null">
+        insp_pl_planner = #{inspPlPlanner,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlAuditor != null">
+        insp_pl_auditor = #{inspPlAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlNote != null">
+        insp_pl_note = #{inspPlNote,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlStatus != null">
+        insp_pl_status = #{inspPlStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlExecutorType != null">
+        insp_pl_executor_type = #{inspPlExecutorType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlType != null">
+        insp_pl_type = #{inspPlType,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlPeriod != null">
+        insp_pl_period = #{inspPlPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlPeriodicUnit != null">
+        insp_pl_periodic_unit = #{inspPlPeriodicUnit,jdbcType=INTEGER},
+      </if>
+      <if test="inspPlLastTime != null">
+        insp_pl_last_time = #{inspPlLastTime,jdbcType=DATE},
+      </if>
+      <if test="inspPlChangeReason != null">
+        insp_pl_change_reason = #{inspPlChangeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlPlanExecuteTime != null">
+        insp_pl_plan_execute_time = #{inspPlPlanExecuteTime,jdbcType=DATE},
+      </if>
+      <if test="inspPlEqStandards != null">
+        insp_pl_eq_standards = #{inspPlEqStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare1 != null">
+        insp_pl_sprare1 = #{inspPlSprare1,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare2 != null">
+        insp_pl_sprare2 = #{inspPlSprare2,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare3 != null">
+        insp_pl_sprare3 = #{inspPlSprare3,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare4 != null">
+        insp_pl_sprare4 = #{inspPlSprare4,jdbcType=VARCHAR},
+      </if>
+      <if test="inspPlSprare5 != null">
+        insp_pl_sprare5 = #{inspPlSprare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where insp_pl_id = #{inspPlId,jdbcType=VARCHAR}
+      and insp_pl_eq_sbbh = #{inspPlEqSbbh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.security.inspectionplan.bean.InspEqPlan">
+    update z_inspection_eq_plan
+    set insp_pl_name = #{inspPlName,jdbcType=VARCHAR},
+      insp_pl_create_time = #{inspPlCreateTime,jdbcType=DATE},
+      insp_pl_planner = #{inspPlPlanner,jdbcType=VARCHAR},
+      insp_pl_auditor = #{inspPlAuditor,jdbcType=VARCHAR},
+      insp_pl_note = #{inspPlNote,jdbcType=VARCHAR},
+      insp_pl_status = #{inspPlStatus,jdbcType=VARCHAR},
+      insp_pl_executor_type = #{inspPlExecutorType,jdbcType=VARCHAR},
+      insp_pl_type = #{inspPlType,jdbcType=VARCHAR},
+      insp_pl_period = #{inspPlPeriod,jdbcType=VARCHAR},
+      insp_pl_periodic_unit = #{inspPlPeriodicUnit,jdbcType=INTEGER},
+      insp_pl_last_time = #{inspPlLastTime,jdbcType=DATE},
+      insp_pl_change_reason = #{inspPlChangeReason,jdbcType=VARCHAR},
+      insp_pl_plan_execute_time = #{inspPlPlanExecuteTime,jdbcType=DATE},
+      insp_pl_eq_standards = #{inspPlEqStandards,jdbcType=VARCHAR},
+      insp_pl_sprare1 = #{inspPlSprare1,jdbcType=VARCHAR},
+      insp_pl_sprare2 = #{inspPlSprare2,jdbcType=VARCHAR},
+      insp_pl_sprare3 = #{inspPlSprare3,jdbcType=VARCHAR},
+      insp_pl_sprare4 = #{inspPlSprare4,jdbcType=VARCHAR},
+      insp_pl_sprare5 = #{inspPlSprare5,jdbcType=VARCHAR}
+    where insp_pl_id = #{inspPlId,jdbcType=VARCHAR}
+      and insp_pl_eq_sbbh = #{inspPlEqSbbh,jdbcType=VARCHAR}
+  </update>
+</mapper>

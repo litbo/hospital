@@ -7,37 +7,93 @@ import java.io.Serializable;
  * @author 
  */
 public class MeteringUtil implements Serializable {
+
+    // id
     private Integer id;
 
+    //设备名称
     private String meteringName;
 
+    // 设备计量编号
     private String meteringNum;
 
+    // 设备检查周期，单位为月
     private String meteringInspectionCycle;
 
+    // 所属部门
     private String bmName;
 
+    // 购买时间
     private String buyTime;
 
+    // 购买人
     private String userXm;
 
+    //信息修改时间
     private String updateMessageTime;
 
+    //此次计量时间
     private String thisMeteringTime;
 
+    // 设备类型【A、B、C】
     private String utilType;
 
+    // 是否已经进入检查流程：1，进入，0未进入
     private String description;
 
+    // 设备状态：【在用、在库、停用、封存、报废】
     private String meteringstatus;
 
+    // 计量设备系统编号
     private String meteringSystemNum;
 
+    // 得到计量编号的时间
     private String meteringGetNumberTime;
 
+    // 记录人
     private String recordPerson;
 
+    // 记录时间
     private String recordTime;
+
+    // 是否周期
+    private Integer isCycle;
+
+    // 购买价格
+    private String buyPrice;
+
+    // 规格型号
+    private String specificationModle;
+
+    // 出厂编号
+    private String serialNumber;
+
+    // 生产厂家
+    private String manufacturer;
+
+    // 测量范围
+    private String measuringRange;
+
+    // 精度等级
+    private String accuracyLevel;
+
+    // 法制类别
+    private String legalCategory;
+
+    // 量具类别
+    private String gaugeCategory;
+
+    // 标志【合格、准用、停用、封存、报废】
+    private Integer sign;
+
+    // 备注
+    private String description1;
+
+    // 出厂日期
+    private String dateOfManufacture;
+
+    // 有效日期
+    private String effectiveDate;
 
     private static final long serialVersionUID = 1L;
 
@@ -169,6 +225,110 @@ public class MeteringUtil implements Serializable {
         this.recordTime = recordTime;
     }
 
+    public Integer getIsCycle() {
+        return isCycle;
+    }
+
+    public void setIsCycle(Integer isCycle) {
+        this.isCycle = isCycle;
+    }
+
+    public String getBuyPrice() {
+        return buyPrice;
+    }
+
+    public void setBuyPrice(String buyPrice) {
+        this.buyPrice = buyPrice;
+    }
+
+    public String getSpecificationModle() {
+        return specificationModle;
+    }
+
+    public void setSpecificationModle(String specificationModle) {
+        this.specificationModle = specificationModle;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getMeasuringRange() {
+        return measuringRange;
+    }
+
+    public void setMeasuringRange(String measuringRange) {
+        this.measuringRange = measuringRange;
+    }
+
+    public String getAccuracyLevel() {
+        return accuracyLevel;
+    }
+
+    public void setAccuracyLevel(String accuracyLevel) {
+        this.accuracyLevel = accuracyLevel;
+    }
+
+    public String getLegalCategory() {
+        return legalCategory;
+    }
+
+    public void setLegalCategory(String legalCategory) {
+        this.legalCategory = legalCategory;
+    }
+
+    public String getGaugeCategory() {
+        return gaugeCategory;
+    }
+
+    public void setGaugeCategory(String gaugeCategory) {
+        this.gaugeCategory = gaugeCategory;
+    }
+
+    public Integer getSign() {
+        return sign;
+    }
+
+    public void setSign(Integer sign) {
+        this.sign = sign;
+    }
+
+    public String getDescription1() {
+        return description1;
+    }
+
+    public void setDescription1(String description1) {
+        this.description1 = description1;
+    }
+
+    public String getDateOfManufacture() {
+        return dateOfManufacture;
+    }
+
+    public void setDateOfManufacture(String dateOfManufacture) {
+        this.dateOfManufacture = dateOfManufacture;
+    }
+
+    public String getEffectiveDate() {
+        return effectiveDate;
+    }
+
+    public void setEffectiveDate(String effectiveDate) {
+        this.effectiveDate = effectiveDate;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -196,7 +356,20 @@ public class MeteringUtil implements Serializable {
             && (this.getMeteringSystemNum() == null ? other.getMeteringSystemNum() == null : this.getMeteringSystemNum().equals(other.getMeteringSystemNum()))
             && (this.getMeteringGetNumberTime() == null ? other.getMeteringGetNumberTime() == null : this.getMeteringGetNumberTime().equals(other.getMeteringGetNumberTime()))
             && (this.getRecordPerson() == null ? other.getRecordPerson() == null : this.getRecordPerson().equals(other.getRecordPerson()))
-            && (this.getRecordTime() == null ? other.getRecordTime() == null : this.getRecordTime().equals(other.getRecordTime()));
+            && (this.getRecordTime() == null ? other.getRecordTime() == null : this.getRecordTime().equals(other.getRecordTime()))
+            && (this.getIsCycle() == null ? other.getIsCycle() == null : this.getIsCycle().equals(other.getIsCycle()))
+            && (this.getBuyPrice() == null ? other.getBuyPrice() == null : this.getBuyPrice().equals(other.getBuyPrice()))
+            && (this.getSpecificationModle() == null ? other.getSpecificationModle() == null : this.getSpecificationModle().equals(other.getSpecificationModle()))
+            && (this.getSerialNumber() == null ? other.getSerialNumber() == null : this.getSerialNumber().equals(other.getSerialNumber()))
+            && (this.getManufacturer() == null ? other.getManufacturer() == null : this.getManufacturer().equals(other.getManufacturer()))
+            && (this.getMeasuringRange() == null ? other.getMeasuringRange() == null : this.getMeasuringRange().equals(other.getMeasuringRange()))
+            && (this.getAccuracyLevel() == null ? other.getAccuracyLevel() == null : this.getAccuracyLevel().equals(other.getAccuracyLevel()))
+            && (this.getLegalCategory() == null ? other.getLegalCategory() == null : this.getLegalCategory().equals(other.getLegalCategory()))
+            && (this.getGaugeCategory() == null ? other.getGaugeCategory() == null : this.getGaugeCategory().equals(other.getGaugeCategory()))
+            && (this.getSign() == null ? other.getSign() == null : this.getSign().equals(other.getSign()))
+            && (this.getDescription1() == null ? other.getDescription1() == null : this.getDescription1().equals(other.getDescription1()))
+            && (this.getDateOfManufacture() == null ? other.getDateOfManufacture() == null : this.getDateOfManufacture().equals(other.getDateOfManufacture()))
+            && (this.getEffectiveDate() == null ? other.getEffectiveDate() == null : this.getEffectiveDate().equals(other.getEffectiveDate()));
     }
 
     @Override
@@ -219,6 +392,19 @@ public class MeteringUtil implements Serializable {
         result = prime * result + ((getMeteringGetNumberTime() == null) ? 0 : getMeteringGetNumberTime().hashCode());
         result = prime * result + ((getRecordPerson() == null) ? 0 : getRecordPerson().hashCode());
         result = prime * result + ((getRecordTime() == null) ? 0 : getRecordTime().hashCode());
+        result = prime * result + ((getIsCycle() == null) ? 0 : getIsCycle().hashCode());
+        result = prime * result + ((getBuyPrice() == null) ? 0 : getBuyPrice().hashCode());
+        result = prime * result + ((getSpecificationModle() == null) ? 0 : getSpecificationModle().hashCode());
+        result = prime * result + ((getSerialNumber() == null) ? 0 : getSerialNumber().hashCode());
+        result = prime * result + ((getManufacturer() == null) ? 0 : getManufacturer().hashCode());
+        result = prime * result + ((getMeasuringRange() == null) ? 0 : getMeasuringRange().hashCode());
+        result = prime * result + ((getAccuracyLevel() == null) ? 0 : getAccuracyLevel().hashCode());
+        result = prime * result + ((getLegalCategory() == null) ? 0 : getLegalCategory().hashCode());
+        result = prime * result + ((getGaugeCategory() == null) ? 0 : getGaugeCategory().hashCode());
+        result = prime * result + ((getSign() == null) ? 0 : getSign().hashCode());
+        result = prime * result + ((getDescription1() == null) ? 0 : getDescription1().hashCode());
+        result = prime * result + ((getDateOfManufacture() == null) ? 0 : getDateOfManufacture().hashCode());
+        result = prime * result + ((getEffectiveDate() == null) ? 0 : getEffectiveDate().hashCode());
         return result;
     }
 
@@ -244,6 +430,19 @@ public class MeteringUtil implements Serializable {
         sb.append(", meteringGetNumberTime=").append(meteringGetNumberTime);
         sb.append(", recordPerson=").append(recordPerson);
         sb.append(", recordTime=").append(recordTime);
+        sb.append(", isCycle=").append(isCycle);
+        sb.append(", buyPrice=").append(buyPrice);
+        sb.append(", specificationModle=").append(specificationModle);
+        sb.append(", serialNumber=").append(serialNumber);
+        sb.append(", manufacturer=").append(manufacturer);
+        sb.append(", measuringRange=").append(measuringRange);
+        sb.append(", accuracyLevel=").append(accuracyLevel);
+        sb.append(", legalCategory=").append(legalCategory);
+        sb.append(", gaugeCategory=").append(gaugeCategory);
+        sb.append(", sign=").append(sign);
+        sb.append(", description1=").append(description1);
+        sb.append(", dateOfManufacture=").append(dateOfManufacture);
+        sb.append(", effectiveDate=").append(effectiveDate);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
