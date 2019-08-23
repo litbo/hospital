@@ -36,25 +36,19 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
-                    <!--<input type="checkbox" name="" title="监管设备"  lay-skin="primary">-->
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                    <!--
+					<div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="recordBeginTime" class="layui-input" placeholder="生成开始时间" autocomplete="off">
                     </div>
 						~
 					<div class="layui-inline xs-100 mar10-0 pad0-10">
 						<input type="text" name="recordEndTime" class="layui-input" placeholder="生成结束时间" autocomplete="off">
                     </div>
+					-->
 					<div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="department"  class="layui-input" placeholder="所属部门" autocomplete="off">
+                        <input type="text" name="department"  class="layui-input" placeholder="使用科室" autocomplete="off">
                     </div>
-                    
-					<div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="status"  class="layui-input">
-								<option value=''>全部</option>
-								<option value='已处理'>已处理</option>
-								<option value='待处理'>待处理</option>
-						</select>
-                    </div>
+ 					<!--
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="dealBeginTime" class="layui-input" placeholder="处理开始时间" autocomplete="off">
                     </div>
@@ -62,6 +56,8 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
 						<input type="text" name="dealEndTime" class="layui-input" placeholder="处理结束时间" autocomplete="off">
                     </div>
+					-->
+
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
                     </div>
@@ -81,16 +77,18 @@
         addTable: {
             table: {
                 cols: [[ //表头
+                    {type: "numbers", title: '序号' },
                     {type: "checkbox"}
-                    , {field: 'processName', title: '流程名称', minWidth: 120}
-                    , {field: 'department', title: '所属部门', minWidth: 150}
-                    , {field: 'dealPerson', title: '处理人', width: 100}
-                    , {field: 'dealTime', title: '处理时间', width: 250}
-                    , {field: 'dealStatus', title: '状态', width: 90}
-                    , {field: 'recordTime', title: '记录时间', minWidth: 120}
+                    , {field: 'processName', title: '名称', minWidth: 120}
+                    , {field: 'department', title: '科室', minWidth: 150}
+                    , {field: 'recordTime', title: '申请时间', width: 100}
+                    , {field: 'dealAdvertisement', title: '申请人', width: 100}
+                    , {field: 'verificationUnit', title: '检定单位', width: 90}
+                    , {field: 'dealPerson', title: '审批人', minWidth: 120}
+                    , {field: 'description', title: '备注', minWidth: 120}
                     , {fixed:'right',width:150,align:'center',title:'操作',toolbar: "#bar"}
                 ]]
-                , url:"/meteringProcess/searchFormProcess.do"
+                , url:"/meteringProcess/searchFormProcessNot.do"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -109,23 +107,24 @@
                             event:"view",
                             title:"查看",
                             type:2,
-                            content:"./child/metering-approve-detail.html",
+                            content:"./child/docimasy-examine-view.html",
                             dataUrl:["processId"]
                         },
                         {
                             event:"audit",
                             title:"审批",
                             type:2,
-                            content:"./child/metering-approve-handle.html",
+                            area:["400px","250px"],
+                            content:"./child/docimasy-examine-audit.html",
                             dataUrl:["processId"]
                      	}]
                     })
                 }
             },
             reSet:{
-                url:"/meteringProcess/searchFormProcess.do",
+                url:"/meteringProcess/searchFormProcessNot.do",
                 type:"search",
-                data:["recordBeginTime","recordEndTime","department","status","dealBeginTime","dealEndTime"]    //搜索框的name
+                data:["department"]    //搜索框的name
             }
         }       
     }

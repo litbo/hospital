@@ -1,6 +1,7 @@
 package com.litbo.hospital.metering.service;
 
 import com.litbo.hospital.metering.pojo.MeteringUtil;
+import com.litbo.hospital.metering.pojo.MeteringUtilStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,12 +23,10 @@ public interface MeteringService {
 
     MeteringUtil findMeteringUtilById(int id);
 
-    MeteringUtil findMeteringUtilByUtilNum(String num);
-
-    int disableDevice(int meteringutilId);
-
     //    查询所有的设备信息
     List<MeteringUtil> findAllMeteringUtil();
+
+    List<MeteringUtil> findAllMeteringUtilAllCheck(Integer sign, String gaugeCategory,String meteringName,String bmName, String meteringstatus,String beginTime,String endTime,String needMeter);
 
     //    根据部门查看设备信息
 
@@ -44,7 +43,13 @@ public interface MeteringService {
     // 更改设备计量状态，传入id，如果已经开始计量则变成为进入计量流程，未进入计量变为已进入计量流程
     int updateMeteringStatus(int id);
 
+    // 更改设备使用状态
+    int updateMeteringUtilUseStatus(MeteringUtilStatus status);
 
+    MeteringUtilStatus selectStatusById(int id);
+
+    // 根据设备id查询使用状态信息
+    MeteringUtilStatus getMeteringUtilUseStatusByUtilId(int id);
 
 
 }

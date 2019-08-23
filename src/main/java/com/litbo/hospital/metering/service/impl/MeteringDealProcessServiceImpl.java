@@ -41,14 +41,13 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
 
         // 生成表单名，保证表单名唯一
         String time = birthTime.split(" ")[0];
-        String formName = time + System.currentTimeMillis();
-        meteringApprovalForm.setFormName(formName);
-        meteringApprovalForm.setDealStatus("待处理");
+        String description = time + System.currentTimeMillis();
+        meteringApprovalForm.setDescription(description);
         int result = meteringApprovalFormDAO.insert(meteringApprovalForm);
         if(result == 0){
             return 0;
         }
-        return meteringApprovalFormDAO.selectByFormName(formName).getFormId();
+        return meteringApprovalFormDAO.selectByFormDescription(description).getFormId();
     }
 
     @Override
@@ -99,7 +98,21 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
 
     @Override
     public List<MeteringDealProcess> searchFormProcess(String recordBeginTime, String recordEndTime, String department, String status, String dealBeginTime, String dealEndTime) {
+
+
+        if(status != null){
+            if(status.equals("")){
+            return meteringDealProcessDAO.searchDealProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
+        }
+            status = "%"+status+"%";
+        }
+
         return meteringDealProcessDAO.searchDealProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
+    }
+
+    @Override
+    public List<MeteringDealProcess> searchFormProcessNot(String recordBeginTime, String recordEndTime, String department) {
+        return meteringDealProcessDAO.searchDealProcessNot(recordBeginTime, recordEndTime, department);
     }
 
     @Override
@@ -110,5 +123,10 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
     @Override
     public int updateProcessByPrimaryKeySelective(MeteringDealProcess record) {
         return meteringDealProcessDAO.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int deleterProcess(int processId) {
+        return meteringDealProcessDAO.deleteByPrimaryKey(processId);
     }
 }

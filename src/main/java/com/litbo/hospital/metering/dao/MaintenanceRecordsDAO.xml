@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.MaintenanceRecordsDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.MaintenanceRecords">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="metering_util_id" jdbcType="INTEGER" property="meteringUtilId" />
+    <result column="repair_man" jdbcType="VARCHAR" property="repairMan" />
+    <result column="repair_time" jdbcType="VARCHAR" property="repairTime" />
+    <result column="fault_description" jdbcType="VARCHAR" property="faultDescription" />
+    <result column="repair_content" jdbcType="VARCHAR" property="repairContent" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MaintenanceRecords">
+    insert into hospital..maintenance_records (metering_util_id, repair_man,
+      repair_time, fault_description, repair_content, 
+      description)
+    values ( #{meteringUtilId,jdbcType=INTEGER}, #{repairMan,jdbcType=VARCHAR},
+      #{repairTime,jdbcType=VARCHAR}, #{faultDescription,jdbcType=VARCHAR}, #{repairContent,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MaintenanceRecords">
+    insert into hospital..maintenance_records
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meteringUtilId != null">
+        metering_util_id,
+      </if>
+      <if test="repairMan != null">
+        repair_man,
+      </if>
+      <if test="repairTime != null">
+        repair_time,
+      </if>
+      <if test="faultDescription != null">
+        fault_description,
+      </if>
+      <if test="repairContent != null">
+        repair_content,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meteringUtilId != null">
+        #{meteringUtilId,jdbcType=INTEGER},
+      </if>
+      <if test="repairMan != null">
+        #{repairMan,jdbcType=VARCHAR},
+      </if>
+      <if test="repairTime != null">
+        #{repairTime,jdbcType=VARCHAR},
+      </if>
+      <if test="faultDescription != null">
+        #{faultDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="repairContent != null">
+        #{repairContent,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..maintenance_records
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <select id="seeAllRecords" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from hospital..maintenance_records where metering_util_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

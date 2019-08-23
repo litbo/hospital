@@ -81,7 +81,7 @@ public class SgCheckServiceImpl implements SgCheckService {
      * @return PageInfo<SgCheckListVO>
      */
     @Override
-    public PageInfo<SgCheckListVO> selectSgCheckList(String planId,String check, String checkDate, String checkUser, String planDate, String planUser, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgCheckListVO> selectSgCheckList(String planId, String check, String checkDate, String checkUser, String planDate, String planUser, Integer pageNum, Integer pageSize) {
         if (StringUtils.isNotBlank(check)){
             check = StateEnum.getMessageByCode(Integer.parseInt(check));
         }

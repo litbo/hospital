@@ -26,5 +26,5 @@ public interface SgPlanService {
      * @param pageSize 每页记录数
      * @return PageInfo<SgPlan>
      */
-    PageInfo<SgPlan> selectPlan(String planName, String planDate, String userName,Integer pageNum,Integer pageSize);
+    PageInfo<SgPlan> selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize);
 }

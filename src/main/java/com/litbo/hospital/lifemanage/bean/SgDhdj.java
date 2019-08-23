@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -58,7 +59,8 @@ public class SgDhdj {
     /**
      * 到货时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dhsj;
     /**
      * 物流公司
@@ -116,6 +118,8 @@ public class SgDhdj {
      * 本合同是否全部到货
      */
     private String dhdjIsqbdh;
+
+
     /**
      * 扩展一
      */

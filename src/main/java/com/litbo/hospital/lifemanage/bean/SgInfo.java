@@ -184,4 +184,5 @@ public class SgInfo {
      * 配置详细需求
      */
     private String pzxq;
+
 }

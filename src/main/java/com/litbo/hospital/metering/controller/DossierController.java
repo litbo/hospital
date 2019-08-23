@@ -7,6 +7,8 @@ import com.litbo.hospital.metering.pojo.DossierFile;
 import com.litbo.hospital.metering.service.DossierService;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.supervise.bean.SBm;
+import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.user.bean.EqInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,8 @@ public class DossierController {
     @Autowired
     private DossierService dossierService;
 
+    @Autowired
+    private BmService bmService;
 
     //                                              卷宗管理部分     begin
 
@@ -40,11 +44,18 @@ public class DossierController {
      * @return
      */
     @RequestMapping("/getNeedDossierEq.do")
-    public PageVo getNeedDossierEq(@RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
+    public PageVo getNeedDossierEq(@RequestParam(name = "eqName",defaultValue = "") String eqName,
+                                   @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                                    @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
+
+
+        if(eqName.equals("")){
+            eqName = null;
+        }
+
         PageVo vo = new PageVo();
         PageHelper.startPage(pageNum,pageSize);
-        List<EqInfo> eqInfoList = dossierService.selectEqNeedDossier();
+        List<EqInfo> eqInfoList = dossierService.selectEqNeedDossier(eqName);
         PageInfo info = new PageInfo(eqInfoList);
         if(!eqInfoList.isEmpty()){
             vo.setCode(0);

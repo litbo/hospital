@@ -11,7 +11,6 @@ import com.litbo.hospital.lifemanage.bean.vo.EquipmentStoppedListVO;
 public interface EmergencyService {
     /**
      * 查询本科室所有设备
-     *
      * @param userId 用户id
      * @return PageInfo<EquipmentStoppedListVO>
      */

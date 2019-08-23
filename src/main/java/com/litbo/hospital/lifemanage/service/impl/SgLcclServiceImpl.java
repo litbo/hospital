@@ -11,7 +11,6 @@ import com.litbo.hospital.lifemanage.dao.SgReasonMapper;
 import com.litbo.hospital.lifemanage.enums.ModeEnum;
 import com.litbo.hospital.lifemanage.service.SgLcclService;
 import com.litbo.hospital.supervise.service.EmpService;
-import com.litbo.hospital.user.bean.EqInfo;
 import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.EqInfoVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;

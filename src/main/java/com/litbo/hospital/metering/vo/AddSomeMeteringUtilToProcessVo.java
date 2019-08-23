@@ -9,19 +9,16 @@ import java.util.List;
  * @Description:
  */
 public class AddSomeMeteringUtilToProcessVo {
-    private List<Integer> utilIds;
+    private String utilIds;
     private String department;
+    private String verificationUnit;
+    private String dealAdvertisement; //（申请人）
+    private String  processName; //（计划名称），
+    private String dealPerson;//（审批人）
 
-    @Override
-    public String toString() {
-        return "AddSomeMeteringUtilToProcessVo{" +
-                "utilIds=" + utilIds +
-                ", department='" + department + '\'' +
-                '}';
-    }
+
 
     public String getDepartment() {
-
         return department;
     }
 
@@ -29,19 +26,55 @@ public class AddSomeMeteringUtilToProcessVo {
         this.department = department;
     }
 
-    public List<Integer> getUtilIds() {
-        return utilIds;
+    public String getVerificationUnit() {
+        return verificationUnit;
     }
 
-    public void setUtilIds(List<Integer> utilIds) {
-        this.utilIds = utilIds;
+    public void setVerificationUnit(String verificationUnit) {
+        this.verificationUnit = verificationUnit;
+    }
+
+    public String getDealAdvertisement() {
+        return dealAdvertisement;
+    }
+
+    public void setDealAdvertisement(String dealAdvertisement) {
+        this.dealAdvertisement = dealAdvertisement;
+    }
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
+    }
+
+    public String getDealPerson() {
+        return dealPerson;
+    }
+
+    public void setDealPerson(String dealPerson) {
+        this.dealPerson = dealPerson;
     }
 
     public AddSomeMeteringUtilToProcessVo() {
     }
 
-    public AddSomeMeteringUtilToProcessVo(List<Integer> utilIds, String department) {
+    public String getUtilIds() {
+        return utilIds;
+    }
+
+    public void setUtilIds(String utilIds) {
+        this.utilIds = utilIds;
+    }
+
+    public AddSomeMeteringUtilToProcessVo(String utilIds, String department, String verificationUnit, String dealAdvertisement, String processName, String dealPerson) {
         this.utilIds = utilIds;
         this.department = department;
+        this.verificationUnit = verificationUnit;
+        this.dealAdvertisement = dealAdvertisement;
+        this.processName = processName;
+        this.dealPerson = dealPerson;
     }
 }

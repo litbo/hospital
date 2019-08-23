@@ -27,5 +27,5 @@ public interface DossierDAO {
 
     int updateByPrimaryKey(Dossier record);
 
-    List<EqInfo> selectNeedDossierEq();
+    List<EqInfo> selectNeedDossierEq(@Param("eqName") String eqName);
 }

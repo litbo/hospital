@@ -408,7 +408,7 @@
           {
             "title": "招标采购",
             "url": "life&t=0&n=1",
-            "shiro": "a",
+            "shiro": "SGGL",
             "id": "301",
             "children": [
               {
@@ -416,7 +416,7 @@
                 "url": "./table.html",
                 "icon": "shopping-cart",
                 "id": "3010",
-                "shiro": "a",
+                "shiro": "SGGL",
                 "children": [
                   {
                     "title": "计划打包",
@@ -447,37 +447,79 @@
             ]
           },
           {
-            "title": "验收管理",
+            "title": "合同管理",
             "url": "life&t=0&n=2",
             "id": "302",
+            "shiro": "SGGL",
+            "children":[
+              {
+                "title": "合同管理",
+                "url": "./table.html",
+                "icon": "credit-card",
+                "id": "3020",
+                "shiro": "KSSG",
+                "children":[
+                  {
+                    "title": "装备录入",
+                    "url": "./life/contract-management/contract-add.html",
+                    "id": "30200",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "装备查看",
+                    "url": "./life/contract-management/contract-edit.html",
+                    "id": "30201",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "零件录入",
+                    "url": "./life/contract-management/parts-contract.html",
+                    "id": "30202",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "零件查看",
+                    "url": "./life/contract-management/parts-edit.html",
+                    "id": "30203",
+                    "shiro": "KSTL"
+                  }
+                ]
+              }
+
+            ]
+          },
+          {
+            "title": "验收管理",
+            "url": "life&t=0&n=2",
+            "id": "303",
             "shiro": "a",
             "children": [
               {
                 "title": "到货登记",
                 "url": "./life/purchase-management/goods-reg.html",
                 "icon": "solar-panel",
-                "id": "3020",
+                "id": "3030",
                 "shiro": "a"
               },
               {
                 "title": "科室验收",
                 "url": "./life/purchase-management/room-reg.html",
                 "icon": "user-md",
-                "id": "3021",
+                "id": "3031",
                 "shiro": "a"
               },
               {
                 "title": "设备验收",
                 "url": "./life/purchase-management/equip-reg.html",
                 "icon": "drafting-compass",
-                "id": "3022",
+                "id": "3032",
                 "shiro": "a"
               },
               {
                 "title": "统计查询",
                 "url": "./table.html",
                 "icon": "chart-pie",
-                "id": "3023",
+                "id": "3033",
                 "shiro": "a"
               }
             ]
@@ -1367,7 +1409,7 @@
               },
               
               {
-				"title": "计量管理",
+				"title": "台账管理",
 				"url": "javascript:void;",
 				"id": "74001",
 				"shiro": "CX",
@@ -1386,15 +1428,42 @@
 		            "shiro": "CX"
 		          },
 		          {
-		            "title": "计量录入/导入",
-		            "url": "./home/public_info.html",
+		            "title": "录入/导入",
+		            "url": "",
 		            "id": "74004",
+		            "shiro": "CX"
+		          }
+		        ]
+			}
+			,{
+				"title": "检定管理",
+				"url": "javascript:void;",
+				"id": "76001",
+				"shiro": "CX",
+                "icon": "book",
+				"children": [
+		          {
+		            "title": "计划检定",
+		            "url": "./safe/docimasy-management/docimasy-list.html",
+		            "id": "76002",
 		            "shiro": "CX"
 		          },
 		          {
-		            "title": "计量审批",
-		            "url": "./safe/metering-management/metering-approve.html",
-		            "id": "74005",
+		            "title": "计划审核",
+		            "url": "./safe/docimasy-management/docimasy-examine.html",
+		            "id": "76003",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "计划管理",
+		            "url": "",
+		            "id": "76004",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "检定结果录入",
+		            "url": "",
+		            "id": "76005",
 		            "shiro": "CX"
 		          }
 		        ]
@@ -1402,14 +1471,20 @@
 			,
               
               {
-				"title": "文档管理",
+				"title": "设备档案管理",
 				"url": "javascript:void;",
 				"id": "75001",
 				"shiro": "CX",
                 "icon": "book",
 				"children": [
 		          {
-		            "title": "文档列表",
+		            "title": "立卷建档",
+		            "url": "./safe/dossier-managent/dossier-need-list.html",
+		            "id": "75003",
+		            "shiro": "CX"
+		          },
+		          {
+		            "title": "设备档案列表",
 		            "url": "./safe/dossier-managent/dossier-list.html",
 		            "id": "75002",
 		            "shiro": "CX"

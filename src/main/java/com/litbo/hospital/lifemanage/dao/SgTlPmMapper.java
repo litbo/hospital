@@ -24,7 +24,7 @@ public interface SgTlPmMapper {
             "insert into sg_tl_pm (kstl_id, eq_pm_id,kstl_sj)",
             "values (#{kstlId,jdbcType=VARCHAR}, #{eqPmId,jdbcType=VARCHAR},#{kstlSj,jdbcType=TIMESTAMP})"
     })
-    int insertSgTlPm(@Param("kstlId") String kstlId, @Param("eqPmId") String pmId, @Param("kstlSj")Date kstlSj);
+    int insertSgTlPm(@Param("kstlId") String kstlId, @Param("eqPmId") String pmId, @Param("kstlSj") Date kstlSj);
 
     /**
      * 通过科室讨论ID查询讨论的品名ID

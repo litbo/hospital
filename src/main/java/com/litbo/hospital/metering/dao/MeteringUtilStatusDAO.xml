@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.metering.dao.MeteringUtilStatusDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.metering.pojo.MeteringUtilStatus">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="util_id" jdbcType="INTEGER" property="utilId" />
+    <result column="use_type" jdbcType="VARCHAR" property="useType" />
+    <result column="record_date" jdbcType="VARCHAR" property="recordDate" />
+    <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
+    <result column="user_xm" jdbcType="VARCHAR" property="userXm" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="cause" jdbcType="VARCHAR" property="cause" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, util_id, use_type, record_date, bm_name, user_xm, description, cause
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..meteringUtilStatus
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..meteringUtilStatus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.metering.pojo.MeteringUtilStatus">
+    insert into hospital..meteringUtilStatus (util_id, use_type,
+      record_date, bm_name, user_xm, 
+      description, cause)
+    values (#{utilId,jdbcType=INTEGER}, #{useType,jdbcType=VARCHAR},
+      #{recordDate,jdbcType=VARCHAR}, #{bmName,jdbcType=VARCHAR}, #{userXm,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{cause,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.metering.pojo.MeteringUtilStatus">
+    insert into hospital..meteringUtilStatus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="utilId != null">
+        util_id,
+      </if>
+      <if test="useType != null">
+        use_type,
+      </if>
+      <if test="recordDate != null">
+        record_date,
+      </if>
+      <if test="bmName != null">
+        bm_name,
+      </if>
+      <if test="userXm != null">
+        user_xm,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="cause != null">
+        cause,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="utilId != null">
+        #{utilId,jdbcType=INTEGER},
+      </if>
+      <if test="useType != null">
+        #{useType,jdbcType=VARCHAR},
+      </if>
+      <if test="recordDate != null">
+        #{recordDate,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        #{bmName,jdbcType=VARCHAR},
+      </if>
+      <if test="userXm != null">
+        #{userXm,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null">
+        #{cause,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.metering.pojo.MeteringUtilStatus">
+    update hospital..meteringUtilStatus
+    <set>
+      <if test="utilId != null">
+        util_id = #{utilId,jdbcType=INTEGER},
+      </if>
+      <if test="useType != null">
+        use_type = #{useType,jdbcType=VARCHAR},
+      </if>
+      <if test="recordDate != null">
+        record_date = #{recordDate,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        bm_name = #{bmName,jdbcType=VARCHAR},
+      </if>
+      <if test="userXm != null">
+        user_xm = #{userXm,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null">
+        cause = #{cause,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.metering.pojo.MeteringUtilStatus">
+    update hospital..meteringUtilStatus
+    set util_id = #{utilId,jdbcType=INTEGER},
+      use_type = #{useType,jdbcType=VARCHAR},
+      record_date = #{recordDate,jdbcType=VARCHAR},
+      bm_name = #{bmName,jdbcType=VARCHAR},
+      user_xm = #{userXm,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      cause = #{cause,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByUtilId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..meteringUtilStatus
+    where util_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -83,25 +83,12 @@
                 </div>
             </div>
           </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">案卷类型 <span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="dossierType"  class="layui-input">
-                    	<option value=''>--请选择--</option>
-                    	<option value='8'>筹购资料</option>
-                    	<option value='9'>设备技术资料</option>
-                    	<option value='10'>管理资料</option>
-                    	<option value='11'>其他资料</option>
-                    </select>
-                </div>
-            </div>
-         </div>
+         
          <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">文件存放位置</label>
                 <div class="layui-input-block">
-                      <input type="text" name="fileLocaltion" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="fileLocaltion" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -109,7 +96,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">卷宗负责人</label>
                 <div class="layui-input-block">
-                      <input type="text" name="recordPerson" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="recordPerson" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -117,7 +104,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">规格型号</label>
                 <div class="layui-input-block">
-                      <input type="text" name="specification" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="specification" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -125,7 +112,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">生产厂家</label>
                 <div class="layui-input-block">
-                      <input type="text" name="manufacturer" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="manufacturer" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -133,13 +120,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">购买时间</label>
                 <div class="layui-input-block">
-                      <input type="text" name="buyTime" autocomplete="off" disabled class="layui-input">
+                      <input type="text" name="buyTime" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">所属部门 <span class="sign">*</span></label>
+                <label class="layui-form-label">使用科室 <span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="bmName" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
                            style="padding-left:60px;">
@@ -151,7 +138,15 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">代理商</label>
                 <div class="layui-input-block">
-                    <input type="text" name="agent" disabled autocomplete="off" class="layui-input">
+                    <input type="text" name="agent" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" name="description1" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -195,9 +190,9 @@
                         type: "POST",
                         data: [
                         	"id","dossierNum","dossierName","beginTime",
-                        	"endTime","dossierNature","saveType","dossierType",
+                        	"endTime","dossierNature","saveType",
                         	"description","fileLocaltion","recordTime","recordPerson",
-                        	"specification","manufacturer","buyTime","bmName","agent"]
+                        	"specification","manufacturer","buyTime","bmName","agent","description1"]
                     }
                 }
             },
