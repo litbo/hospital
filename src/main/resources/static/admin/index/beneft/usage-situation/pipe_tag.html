@@ -95,6 +95,15 @@
 </script>
 <script>
     renderMod = {
+        formAction:{
+            date:{
+                elem:"#test6",
+
+                isInitValue: false,
+                type:"datetime",
+                range:true
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
@@ -116,20 +125,6 @@
                         "ranking": "1"
                     }
                 ]
-                // , url: "/security/pjzd/listFwPjzd"
-                , method: "POST"
-                , request: {
-                    pageName: 'pageNum',
-                    limitName: 'pageSize'
-                }
-                , parseData: function (res) { //res 即为原始返回的数据
-                    return {
-                        "code": res.code, //解析接口状态
-                        "msg": res.msg, //解析提示文本
-                        "count": res.data.total,//页面的所有数据数
-                        "data": res.data.list //解析数据列表
-                    }
-                }
                 , done: function (obj) {
                     tableFunc({
                         "toolFunc":[{
@@ -152,21 +147,22 @@
                             content: "./child/pipe_tagedit.html",
                             // dataUrl:["pjzdId"]
                         }
-                            ,{
-                                send:{
-                                    id:"table",
-                                    filter:"table1",
-                                    name:"ids",
-                                    event:"del",
-                                    url:"/security/pjzd/deleteFwPjzdByIds",
-                                    type:"POST",
-                                    contentType:"application/json",
-                                    par:"pjzdId",
-                                    reload:true
-                                },
-                                tool:"toolbar",
-                                event:"del"
-                            }
+                        ,{
+                            send:{
+                                id:"table",
+                                filter:"table1",
+                                confirm:"ture",
+                                name:"ids",
+                                event:"del",
+                                url:"/security/pjzd/deleteFwPjzdByIds",
+                                type:"POST",
+                                contentType:"application/json",
+                                par:"pjzdId",
+                                reload:true
+                            },
+                            tool:"toolbar",
+                            event:"del"
+                        }
                         ]
                     })
                 }
@@ -180,6 +176,7 @@
         }
     }
 </script>
+
 </body>
 
 </html>

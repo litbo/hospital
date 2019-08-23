@@ -84,14 +84,6 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        layui.use('laydate', function() {
-            var laydate = layui.laydate;
-            laydate.render({
-                elem: '#test6'
-                , range: true
-            });
-        });
 
 </script>
 
@@ -101,6 +93,15 @@
 
 <script>
     renderMod = {
+        formAction:{
+            date:{
+                elem:"#test6",
+
+                isInitValue: false,
+                type:"datetime",
+                range:true
+            }
+        },
         addTable: {
             table: {
                 cols: [[ //表头
