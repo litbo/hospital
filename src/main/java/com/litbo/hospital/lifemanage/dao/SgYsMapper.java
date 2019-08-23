@@ -28,10 +28,11 @@ public interface SgYsMapper {
             "dbo.sg_dhdj.dhsj\n" +
             "FROM\n" +
             "dbo.sg_djhw\n" +
-            "INNER JOIN dbo.sg_dhdj ON dbo.sg_djhw.dhdj_id = dbo.sg_dhdj.dhdj_id\n" +
-            "WHERE\n" +
+            "INNER JOIN dbo.sg_dhdj ON dbo.sg_djhw.dhdj_id = dbo.sg_dhdj.dhdj_id \n" +
+            "WHERE \n" +
             "dbo.sg_djhw.user_id IS NOT NULL AND\n" +
             "dbo.sg_djhw.sg_id NOT IN (SELECT dbo.sg_ys.sg_id FROM dbo.sg_ys)\n" +
+            " and dbo.sg_dhdj.dhdj_isqbdh = '1'"+
             "ORDER BY dbo.sg_dhdj.dhsj DESC")
     List<SgYsListVO> sgYsList();
 
@@ -41,6 +42,7 @@ public interface SgYsMapper {
      * @param sgYs 验收信息
      * @return 添加记录数
      */
+
     @Insert("insert into sg_ys (ys_id, ys_dabh, ht_id,sg_id, \n" +
             "      ys_zzshjg, ys_zzshr, ys_zxd, \n" +
             "      ys_sms, ys_czsc, ys_wxsc, ys_qtjszl, \n" +
@@ -57,7 +59,7 @@ public interface SgYsMapper {
             "      ys_qysj, ys_istg, ys_thh, \n" +
             "      ys_thsj, ys_syqkyj, ys_ysjl, \n" +
             "      ys_czgc, ys_zysx, ys_byzd, \n" +
-            "      ys_cpjj, ys_zlkz, ys_thyy, zjly_id\n" +
+            "      ys_cpjj, ys_zlkz, ys_thyy, zjly_id \n" +
             "      )\n" +
             "    values (#{ysId,jdbcType=VARCHAR}, #{ysDabh,jdbcType=VARCHAR}, #{htId,jdbcType=VARCHAR},#{sgId,jdbcType=VARCHAR}, \n" +
             "      #{ysZzshjg,jdbcType=CHAR}, #{ysZzshr,jdbcType=VARCHAR}, #{ysZxd,jdbcType=VARCHAR}, \n" +
@@ -77,5 +79,14 @@ public interface SgYsMapper {
             "      #{ysCzgc,jdbcType=LONGVARCHAR}, #{ysZysx,jdbcType=LONGVARCHAR}, #{ysByzd,jdbcType=LONGVARCHAR}, \n" +
             "      #{ysCpjj,jdbcType=LONGVARCHAR}, #{ysZlkz,jdbcType=LONGVARCHAR}, #{ysThyy,jdbcType=LONGVARCHAR},\n" +
             "      #{zjlyId,jdbcType=INTEGER})")
+
     int insertSgYs(SgYs sgYs);
+
+    /*添加技术验收信息*/
+
+    /*添加商务验收信息*/
+
+    /*添加临床验收信息*/
+
+    /*验收汇总信息*/
 }

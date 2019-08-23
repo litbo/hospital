@@ -408,7 +408,7 @@
           {
             "title": "招标采购",
             "url": "life&t=0&n=1",
-            "shiro": "a",
+            "shiro": "SGGL",
             "id": "301",
             "children": [
               {
@@ -416,7 +416,7 @@
                 "url": "./table.html",
                 "icon": "shopping-cart",
                 "id": "3010",
-                "shiro": "a",
+                "shiro": "SGGL",
                 "children": [
                   {
                     "title": "计划打包",
@@ -447,37 +447,79 @@
             ]
           },
           {
-            "title": "验收管理",
+            "title": "合同管理",
             "url": "life&t=0&n=2",
             "id": "302",
+            "shiro": "SGGL",
+            "children":[
+              {
+                "title": "合同管理",
+                "url": "./table.html",
+                "icon": "credit-card",
+                "id": "3020",
+                "shiro": "KSSG",
+                "children":[
+                  {
+                    "title": "装备录入",
+                    "url": "./life/contract-management/contract-add.html",
+                    "id": "30200",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "装备查看",
+                    "url": "./life/contract-management/contract-edit.html",
+                    "id": "30201",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "零件录入",
+                    "url": "./life/contract-management/parts-contract.html",
+                    "id": "30202",
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "零件查看",
+                    "url": "./life/contract-management/parts-edit.html",
+                    "id": "30203",
+                    "shiro": "KSTL"
+                  }
+                ]
+              }
+
+            ]
+          },
+          {
+            "title": "验收管理",
+            "url": "life&t=0&n=2",
+            "id": "303",
             "shiro": "a",
             "children": [
               {
                 "title": "到货登记",
                 "url": "./life/purchase-management/goods-reg.html",
                 "icon": "solar-panel",
-                "id": "3020",
+                "id": "3030",
                 "shiro": "a"
               },
               {
                 "title": "科室验收",
                 "url": "./life/purchase-management/room-reg.html",
                 "icon": "user-md",
-                "id": "3021",
+                "id": "3031",
                 "shiro": "a"
               },
               {
                 "title": "设备验收",
                 "url": "./life/purchase-management/equip-reg.html",
                 "icon": "drafting-compass",
-                "id": "3022",
+                "id": "3032",
                 "shiro": "a"
               },
               {
                 "title": "统计查询",
                 "url": "./table.html",
                 "icon": "chart-pie",
-                "id": "3023",
+                "id": "3033",
                 "shiro": "a"
               }
             ]

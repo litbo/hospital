@@ -24,6 +24,7 @@ public class SgLzfxController {
      * @param sgLzfxVOs 论证分析信息
      * @return Result
      */
+
     @PostMapping("/insertSgLzfx")
     public Result insertSgLzfx(@RequestBody SgLzfxVO sgLzfxVOs) {
         sgLzfxService.insertSgLzfx(sgLzfxVOs);

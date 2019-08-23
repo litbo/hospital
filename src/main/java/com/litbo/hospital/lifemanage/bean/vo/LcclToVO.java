@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author Administrator on 2019-04-10
  */
+
 @Data
 @Accessors(chain = true)
 public class LcclToVO {

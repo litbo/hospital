@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Administrator on 2018-12-16
  */
+
+
 @RestController
 @RequestMapping("/lifeManage")
 public class EquipmentAccountController {
@@ -33,6 +35,7 @@ public class EquipmentAccountController {
      * @return PageInfo<MachineAccountVO>
      */
     @PostMapping("/selectEquipmentAccount")
+
     public Result selectEquipmentAccount(
             @RequestParam(name = "category", required = false) String category,
             @RequestParam(name = "state", required = false) String state,
@@ -91,6 +94,8 @@ public class EquipmentAccountController {
      * @param eqSbbh 设备编号
      * @return Result
      */
+
+
     @RequestMapping("/selectEqCardShow")
     public Result selectEqCardShow(@RequestParam(name = "eqSbbh") String eqSbbh) {
         return Result.success(equipmentAccountService.selectEqCardShow(eqSbbh));
