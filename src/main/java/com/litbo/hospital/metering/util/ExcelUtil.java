@@ -3,20 +3,15 @@ package com.litbo.hospital.metering.util;
 import com.alibaba.fastjson.JSONObject;
 import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
 import com.litbo.hospital.user.bean.EqInfo;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
-import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @Author: 樊小铭
@@ -25,6 +20,56 @@ import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
  * @Description:
  */
 public class ExcelUtil extends ImportExcelUtil {
+
+    public List<List<Object>> importContent(Workbook wb, Sheet sheetAt,Row row,int rowNum , List<Integer> ids,int startRow){
+        short cellNum = row.getLastCellNum();
+        Cell cell = null;
+        List list = new ArrayList<>();
+        for (int i = startRow;i<rowNum;i++){
+            ArrayList<String> rowList = new ArrayList<>();
+            row = sheetAt.getRow(i);
+            if(row==null){
+                continue;
+            }
+            label1: for( int j = 0 ;j<cellNum;j++){
+
+                cell = row.getCell(j);
+                for (Integer id : ids) {
+                    if (j == id) {
+                        if (cell != null&&cell.getCellType()!= HSSFCell.CELL_TYPE_BLANK) {
+                            cell.setCellType(1);
+                            String stringCellValue = cell.getStringCellValue();
+                            Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                            Date d = calendar.getTime();
+                            Date dd = DateUtils.addDays(d, Integer.parseInt(stringCellValue));
+                            String ddd = (new SimpleDateFormat("yyyy-MM-dd")).format(dd);
+                            rowList.add(ddd);
+                            continue label1;
+                        }
+                    }
+                }
+
+
+
+
+
+                if(cell == null||cell.getCellType()==HSSFCell.CELL_TYPE_BLANK){
+                    rowList.add("");
+                    continue;
+                }
+                cell.setCellType(1);
+                String cellValue = cell.getStringCellValue();
+
+                //System.out.println(cellValue);
+                rowList.add(cellValue);
+
+            }
+
+            list.add(rowList);
+        }
+        return list;
+    }
+
 
     public static List importExcelContent(String filepath){
 
@@ -55,9 +100,9 @@ public class ExcelUtil extends ImportExcelUtil {
             short cellNum = row.getLastCellNum();
             /*int rowIsNull = getRowIsNull(row, rowNum);
             System.out.println(rowIsNull);*/
-            List<String> list = readTitlesToExcel(workbook, sheetAt,row,cellNum);
+//            List<String> list = readTitlesToExcel(workbook, sheetAt,row,cellNum);
             List<List<Object>> lists = readRowsToExcel(workbook, sheetAt, row, rowNum,ids,startRow);
-            System.out.println(list);
+            System.out.println(lists);
 
 //
 //            for (List<Object> objectList : lists) {
