@@ -212,16 +212,19 @@ public class MeteringServiceImpl implements MeteringService {
 
 
         // 如果计量周期发生变化，则重新计算计量时间
-        if(meteringUtilTestOldMessage.getMeteringInspectionCycle() != meteringutilNewMessage.getMeteringInspectionCycle()){
+        if(meteringutilNewMessage.getMeteringGetNumberTime() != null && !meteringutilNewMessage.getMeteringGetNumberTime().equals("")){
             // 计算出下次送去计量的时间
             // 使用Calendar类来计算下一次的计量时间
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date(meteringutilNewMessage.getBuyTime()));
+            calendar.setTime(new Date(meteringutilNewMessage.getMeteringGetNumberTime()));
             calendar.add(Calendar.MONTH,Integer.parseInt(meteringutilNewMessage.getMeteringInspectionCycle()));
             //得到下一次的计量时间
             Date nextMeteringTime = calendar.getTime();
             meteringutilNewMessage.setThisMeteringTime(new SimpleDateFormat("yyyy/MM/dd").format(nextMeteringTime));
         }
+
+        // 设置计量编号编号有效期
+        meteringutilNewMessage.setEffectiveDate(meteringutilNewMessage.getThisMeteringTime());
 
 
         int i = meteringUtilDAO.updateByPrimaryKey(meteringutilNewMessage);
