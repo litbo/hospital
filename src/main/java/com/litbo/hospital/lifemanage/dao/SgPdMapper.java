@@ -22,7 +22,7 @@ public interface SgPdMapper {
     int insertPdId(SgPd record);
 
     /**
-     * 查询pdScanId是否存在
+     * 查询pdScanId是否重复
      * @param pdScanId
      * @return
      */
@@ -38,11 +38,11 @@ public interface SgPdMapper {
 
     /**
      * 对应设备编号（品名）的设备名字
-     * @param pdPmId
+     * @param pdSbbh
      * @return
      */
-    @Select("select eq_name from eq_info where eq_sbbh = #{pdPmId,jdbcType=VARCHAR}")
-    List<String> selectSbbhById(String pdPmId);
+    @Select("select eq_name from eq_info where eq_sbbh = #{pdSbbh,jdbcType=VARCHAR}")
+    String selectSbbhById(String pdSbbh);
 
     /**
      * 对应资产编号的设备名字
@@ -50,5 +50,25 @@ public interface SgPdMapper {
      * @return
      */
     @Select("select eq_name from eq_info where eq_zcbh = #{pdZcId,jdbcType=VARCHAR}")
-    List<String> selectZcbhById(String pdZcId);
+    String selectZcbhById(String pdZcId);
+
+    /**
+     * 通过科室id查出该科室下所有的设备名称
+     * @param bmId
+     * @return
+     */
+    @Select("select eq_name from eq_info where eq_bmid = #{bmId,jdbcType=VARCHAR}")
+    List<String> selectNameByBmId(String bmId);
+
+    /**
+     * 根据科室id查出该科室下所有的设备编号
+     */
+    @Select("select eq_sbbh from eq_info where eq_bmid = #{bmId,jdbcType=VARCHAR}")
+    List<String> selectSbbhByBmId(String bmId);
+
+    /**
+     * 根据科室id查出该科室下所有的资产编号
+     */
+    @Select("select eq_zcbh from eq_info where eq_bmid = #{bmId,jdbcType=VARCHAR}")
+    List<String> selectZcbhByBmId(String bmId);
 }

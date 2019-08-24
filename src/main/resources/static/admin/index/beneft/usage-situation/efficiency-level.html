@@ -97,7 +97,20 @@
                     , {field: 'utilization-ratio', title: '机时利用率', minWidth: 150, sort: true}
                     , {field: 'eff-level', title: '效率等级', minWidth: 150, sort: true}
                 ]]
-
+                , url: "/level/show/selectLevel"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面的所有数据数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
 
                 , done: function (obj) {
                         tableFunc({
@@ -107,14 +120,14 @@
                                 title: "排名",
                                 area: ['100%','70%'],
                                 event: "king",
-                                content: "./child/paiming.html"
+                                content: "./child/efficiency-levelpm.html"
                             }]
                         })
                     }
                 },
                 reSet: {
-                    url: "/security/pjzd/listFwPjzd",
-                    type: "reload",
+                    url: "/level/show/selectLevelByCon",
+                    type: "search",
                     data: ["pjfl", "pjSzm"],     //搜索框的name
                     where: {}
                 }
