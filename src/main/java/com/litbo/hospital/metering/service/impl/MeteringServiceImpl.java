@@ -86,9 +86,16 @@ public class MeteringServiceImpl implements MeteringService {
             // 记录时间
             meteringHistoryNumber.setRecordTime(nowDate);
             //计量编号
-            meteringHistoryNumber.setDescription(util.getMeteringNum());
+            meteringHistoryNumber.setVerificationNumber(util.getMeteringNum());
             // 得到计量编号的时间
             meteringHistoryNumber.setGetNumberTime(util.getMeteringGetNumberTime());
+
+            // 有效日期
+            meteringHistoryNumber.setVerificationUnit(util.getThisMeteringTime());
+
+            // 检定结果
+            meteringHistoryNumber.setVerificationResult("合格");
+
             // meteringutil id
             meteringHistoryNumber.setMeteringutilId(util.getId());
             // 设备编号
@@ -225,7 +232,6 @@ public class MeteringServiceImpl implements MeteringService {
 
         // 设置计量编号编号有效期
         meteringutilNewMessage.setEffectiveDate(meteringutilNewMessage.getThisMeteringTime());
-
 
         int i = meteringUtilDAO.updateByPrimaryKey(meteringutilNewMessage);
         // 如果计量编号发生变化，则在历史计量编号中添加一条新信息

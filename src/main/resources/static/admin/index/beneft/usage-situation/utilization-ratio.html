@@ -37,14 +37,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-
-    <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
-
-        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
-
-        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
-    </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -56,8 +48,16 @@
                         <input type="text" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules" lay-verify="required" lay-search="">
-                            <option value="">输入搜索部门</option>
+
+                        <select name="eqSKs" lay-filter="select" lay-search="">
+                            <option value="">请选择科室</option>
+
+                        </select>
+
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="eqSName" lay-search="">
+                            <option value="">请选择设备</option>
                             <option value="1">CT室</option>
                             <option value="2">核磁公正室</option>
                             <option value="3">摄片室</option>
@@ -66,25 +66,14 @@
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules" lay-verify="required" lay-search="">
-                            <option value="">设备名称</option>
-                            <option value="1">脉搏碳氧血氧测量仪</option>
-                            <option value="2">光疗设备</option>
-                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
-                            <option value="4">设备柜</option>
-                            <option value="5">监护仪(母婴监护系统主机)</option>
-                        </select>
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
+                        <button class="layui-btn" type="button" data-type="search">查找</button>
                     </div>
                     <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king" >排名变化</a>
                 </form>
+
             </div>
         </div>
     </div>
-
-
 </script>
 
 
@@ -93,98 +82,67 @@
 
 <script>
     renderMod = {
-        formAction:{
-            date:{
+        formAction: {
+            date: {
                 elem:"#test6",
-
                 isInitValue: false,
-                type:"datetime",
+                type:"date",
+                format:"yyyy-MM-dd",
                 range:true
-            }
+            },
+            val: {
+                filter: "select",
+                select: [
+                    {
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]}
         },
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "checkbox"}
-                    ,{field: 'equip_number', title: '设备编号', width: "25%", minWidth: 150}
-                    , {field: 'equip_name', title: '设备简称', width: "25%", minWidth: 150}
-                    , {field: 'work-time', title: '工作时长', minWidth: 150, sort: true}
-                    , {field: 'authorized-hour', title: '核定工时', minWidth: 150, sort: true}
-                    , {field: 'utilization-ratio', title: '机时利用率', minWidth: 150, sort: true}
+                    {field: 'eqCode', title: '设备编号', width: "25%", minWidth: 150}
+                    , {field: 'eqJc', title: '设备简称', width: "25%", minWidth: 150}
+                    , {field: 'realTimes', title: '工作时长', minWidth: 150, sort: true}
+                    , {field: 'workTimes', title: '核定工时', minWidth: 150, sort: true}
+                    , {field: 'rating', title: '机时利用率', minWidth: 150, sort: true}
                     , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
                 ]]
                 , height: "full-25"
-                , "data": [
-                    {
-                        "equip_number": "62583289",
-                        "equip_name": "CT",
-                        "work-time": "工作时长",
-                        "authorized-hour": "应开机时间",
-                        "utilization-ratio": "机时利用率",
-                        "ranking": "1"
+                , url: "/kpi/using/selectUsing"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面的所有数据数
+                        "data": res.data.list //解析数据列表
                     }
-                    , {
-                        "equip_number": "62583289",
-                        "equip_name": "CT",
-                        "work-time": "工作时长",
-                        "authorized-hour": "应开机时间",
-                        "utilization-ratio": "机时利用率",
-                        "ranking": "1"
-                    }
-                    , {
-                        "equip_number": "62583289",
-                        "equip_name": "CT",
-                        "work-time": "工作时长",
-                        "authorized-hour": "应开机时间",
-                        "utilization-ratio": "机时利用率",
-                        "ranking": "1"
-                    }
-                    ]
+                }
+
                 , done: function (obj) {
                     tableFunc({
                         "toolFunc":[{
-                            type: 2,
-                            tool: "toolbar",
-                            event: "add",
-                            content: "./child/pipe_tagadd.html"
-                        },{
                             type: 2,
                             tool: "toolbar",
                             title: "排名",
                             area: ['100%','70%'],
                             event: "king",
                             content: "./child/paiming.html"
-                        },
-                            {
-                                type: 2,
-                                tool: "toolbar",
-                                event: "edit",
-                                content: "./child/pipe_tagedit.html",
-                                // dataUrl:["pjzdId"]
-                            }
-                            ,{
-                                send:{
-                                    id:"table",
-                                    filter:"table1",
-                                    name:"ids",
-                                    event:"del",
-                                    url:"/security/pjzd/deleteFwPjzdByIds",
-                                    type:"POST",
-                                    contentType:"application/json",
-                                    par:"pjzdId",
-                                    reload:true
-                                },
-                                tool:"toolbar",
-                                event:"del"
-                            }
-                        ]
+                        }]
                     })
                 }
             },
             reSet: {
-                url: "/security/pjzd/listFwPjzd",
-                type: "reload",
-                data: ["pjfl", "pjSzm"],     //搜索框的name
+                url: "/kpi/using/selectUsingByCon",
+                type: "search",
+                data: ["bmSName", "eqSName"],     //搜索框的name
                 where: {}
             }
         }

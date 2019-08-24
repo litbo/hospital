@@ -58,6 +58,13 @@ public class DossierServiceImpl implements DossierService {
         dossier.setRecordTime(nowtiem);
         dossier.setDossierType(0);
 
+        // 将卷宗性质和保存状态关联
+        if(dossier.getDossierNature().equals("全过程")){
+            dossier.setSaveType("永久");
+        }else if(dossier.getDossierNature().equals("一般")){
+            dossier.setSaveType("短期");
+        }
+
         // 生成电子文件夹
         dossier.setDescription(catagoryPath+dossierNum+"_"+dossier.getDossierName()+"\\");
 

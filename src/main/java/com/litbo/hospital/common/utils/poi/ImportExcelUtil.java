@@ -169,7 +169,7 @@ public class ImportExcelUtil {
     测试
      */
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\li66\\Desktop\\医院设备管理\\设备导入\\设备导入模板.xlsx");
+        File file = new File("C:\\Users\\wang\\Desktop\\设备导入模板.xlsx");
         Workbook workbook = null;
         InputStream inputStream = null;
         List<Integer> ids = new ArrayList<>();

@@ -50,7 +50,7 @@ public interface ZhiduDao {
             "zd_zt = #{zdZt},sy_tianshu = #{syTianshu},sy_syts = #{sySyts}" +
             "  where zd_id=#{zdId}")
     void updateZd(SZhidu zd);
-    // 保存制度审核状态
+    //    // 保存制度审核状态
     @Insert("insert into s_zhiduzhize_zt ( zd_id, user_id, \n" +
             "      zt_date, zt_czname, zt_czzt, \n" +
             "      zt_shyj )\n" +
