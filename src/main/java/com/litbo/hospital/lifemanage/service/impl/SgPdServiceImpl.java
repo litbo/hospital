@@ -42,7 +42,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
     }
 
     @Override
-    public Map<String, List> selectAllData(String pdJhid) {
+    public List selectAllData(String pdJhid) {
         List<String> jhList = sgPdMapper.selectAllData(pdJhid);
         // todo //调用计划表的方法 通过计划的id获取到这个计划下所有设备表里的设备编号和资产编号
         List<String> sbbhList = new ArrayList<>();
@@ -50,7 +50,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
         sbbhList.add("1");
         zcbhList.add("1");
 
-        //设备编号 资产编号
+        //isSbbh是符合设备编号 isZcbh是符合资产编号
         List<String> isSbbh = new ArrayList<>();
         List<String> isZcbh = new ArrayList<>();
 
@@ -64,10 +64,21 @@ public class SgPdServiceImpl implements SgPdSeverice {
                 isNotExist.add(jh);
             }
         }
-        Map<String, List> result = new HashMap<>();
-        result.put("isSbbh", isSbbh);
-        result.put("isZcbh", isZcbh);
-        result.put("isNotExist", isNotExist);
+
+        Map<String, List> issbbhList = new HashMap<>();
+        Map<String, List> iszcbhList = new HashMap<>();
+        for(String sb:isSbbh){
+            issbbhList.put("isSbbhName",sgPdMapper.selectSbbhById(sb));
+        }
+        for(String zc:isZcbh){
+            iszcbhList.put("isZcbhName",sgPdMapper.selectZcbhById(zc));
+        }
+
+        List result=new ArrayList();
+        result.add(issbbhList);
+        result.add(iszcbhList);
+        result.add(isNotExist);
+
         return result;
     }
 }

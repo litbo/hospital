@@ -36,6 +36,19 @@ public interface SgPdMapper {
     @Select("select pd_scan_id from sg_pd where pd_jhid = #{pdJhid,jdbcType=VARCHAR}")
     List<String> selectAllData(String pdJhid);
 
+    /**
+     * 对应设备编号（品名）的设备名字
+     * @param pdPmId
+     * @return
+     */
+    @Select("select eq_name from eq_info where eq_sbbh = #{pdPmId,jdbcType=VARCHAR}")
+    List<String> selectSbbhById(String pdPmId);
 
-
+    /**
+     * 对应资产编号的设备名字
+     * @param pdZcId
+     * @return
+     */
+    @Select("select eq_name from eq_info where eq_zcbh = #{pdZcId,jdbcType=VARCHAR}")
+    List<String> selectZcbhById(String pdZcId);
 }

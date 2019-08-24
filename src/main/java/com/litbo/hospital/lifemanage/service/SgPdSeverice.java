@@ -3,7 +3,6 @@ package com.litbo.hospital.lifemanage.service;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface SgPdSeverice {
 
@@ -13,5 +12,5 @@ public interface SgPdSeverice {
      */
     int insertPdId(SgPdVO record);
 
-    Map<String,List> selectAllData(String jhId);
+    List selectAllData(String jhId);
 }
