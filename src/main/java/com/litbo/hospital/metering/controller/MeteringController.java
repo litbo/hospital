@@ -82,6 +82,8 @@ public class MeteringController {
         if(status != null){
             updateUtilUseStatus(status);
         }
+
+        status.setUtilId(meteringUtil.getId());
         int result = meteringService.updateMeteringUtil(meteringUtil);
         if(result == 1){
             return Result.success();
@@ -462,7 +464,7 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/seedeleteMaintenanceRecords.do")
-    public PageVo seedeleteMaintenanceRecords(int id,
+    public PageVo seedeleteMaintenanceRecords(int id,String userXm,
                                               @RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                               @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
 
@@ -485,7 +487,7 @@ public class MeteringController {
 
 
     @RequestMapping("/ImportExcelToAddMeteringUtil.do")
-    public void ImportExcelToAddMeteringUtil(@RequestParam("file") MultipartFile file,String userXm){
+    public Result ImportExcelToAddMeteringUtil(@RequestParam("file") MultipartFile file,String userXm){
 //        if (file.isEmpty()) {
 //            return Result.error("上传失败，请选择文件");
 //        }
@@ -513,8 +515,32 @@ public class MeteringController {
         } catch (IOException e) {
         }
 
-        List list= ExcelUtil.importExcelContent(filePath);
-        System.out.println(list);
+        List<List<Object>> lists= ExcelUtil.importExcelContent(filePath);
+        int i = 0 ;
+        while (  i<lists.size() && !lists.get(i).isEmpty()){
+            try {
+                MeteringUtil util = new MeteringUtil(lists.get(i));
+                util.setRecordPerson(userXm);
+                addMetering(util);
+            }catch (Exception e){
+                System.out.println("计量设备文件导入格式不对");
+                return Result.success("请检查上传文件的格式！");
+            }finally {
+                dest.delete();
+            }
+            i++;
+        }
 
+//        for(List list : lists){
+//            try {
+//                MeteringUtil util = new MeteringUtil(list);
+//                addMetering(util);
+//            }catch (ClassCastException e){
+//                System.out.println("计量设备文件导入格式不对");
+//                return Result.success("请检查上传文件的格式！");
+//            }
+//
+//        }
+        return Result.success();
     }
 }

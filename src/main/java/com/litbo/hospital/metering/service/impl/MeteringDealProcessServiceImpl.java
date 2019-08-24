@@ -102,7 +102,7 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
 
         if(status != null){
             if(status.equals("")){
-            return meteringDealProcessDAO.searchDealProcess(recordBeginTime, recordEndTime, department, status, dealBeginTime, dealEndTime);
+            return meteringDealProcessDAO.searchDealProcess(recordBeginTime, recordEndTime, department, null, dealBeginTime, dealEndTime);
         }
             status = "%"+status+"%";
         }
