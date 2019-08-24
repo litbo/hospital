@@ -77,12 +77,12 @@ public class ExcelUtil extends ImportExcelUtil {
         Workbook workbook = null;
         InputStream inputStream = null;
         List<Integer> ids = new ArrayList<>();
-        ids.add(6);
-        ids.add(7);
-        ids.add(10);
-        ids.add(18);
-        ids.add(19);
-        ids.add(23);
+//        ids.add(6);
+//        ids.add(7);
+//        ids.add(10);
+//        ids.add(18);
+//        ids.add(19);
+//        ids.add(23);
 
         try {
             inputStream = new FileInputStream(file);
@@ -94,7 +94,7 @@ public class ExcelUtil extends ImportExcelUtil {
             //获取表头
             Row row = sheetAt.getRow(2);
             //设置从第几行开始读取数据(表头所在行数)
-            int startRow=3;
+            int startRow=2;
             //设置总行数
             int rowNum = sheetAt.getLastRowNum()+1;
             short cellNum = row.getLastCellNum();
@@ -102,7 +102,7 @@ public class ExcelUtil extends ImportExcelUtil {
             System.out.println(rowIsNull);*/
 //            List<String> list = readTitlesToExcel(workbook, sheetAt,row,cellNum);
             List<List<Object>> lists = readRowsToExcel(workbook, sheetAt, row, rowNum,ids,startRow);
-            System.out.println(lists);
+
 
 //
 //            for (List<Object> objectList : lists) {

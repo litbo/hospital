@@ -86,9 +86,16 @@ public class MeteringServiceImpl implements MeteringService {
             // 记录时间
             meteringHistoryNumber.setRecordTime(nowDate);
             //计量编号
-            meteringHistoryNumber.setDescription(util.getMeteringNum());
+            meteringHistoryNumber.setVerificationNumber(util.getMeteringNum());
             // 得到计量编号的时间
             meteringHistoryNumber.setGetNumberTime(util.getMeteringGetNumberTime());
+
+            // 有效日期
+            meteringHistoryNumber.setVerificationUnit(util.getThisMeteringTime());
+
+            // 检定结果
+            meteringHistoryNumber.setVerificationResult("合格");
+
             // meteringutil id
             meteringHistoryNumber.setMeteringutilId(util.getId());
             // 设备编号
