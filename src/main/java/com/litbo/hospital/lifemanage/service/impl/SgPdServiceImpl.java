@@ -50,17 +50,23 @@ public class SgPdServiceImpl implements SgPdSeverice {
         sbbhList.add("1");
         zcbhList.add("1");
 
-        List<String> isExist = new ArrayList<>();
+        //设备编号 资产编号
+        List<String> isSbbh = new ArrayList<>();
+        List<String> isZcbh = new ArrayList<>();
+
         List<String> isNotExist = new ArrayList<>();
         for (String jh : jhList) {
-            if (sbbhList.contains(jh) || zcbhList.contains(jh)) {
-                isExist.add(jh);
+            if (sbbhList.contains(jh)) {
+                isSbbh.add(jh);
+            } else if (zcbhList.contains(jh)) {
+                isZcbh.add(jh);
             } else {
                 isNotExist.add(jh);
             }
         }
         Map<String, List> result = new HashMap<>();
-        result.put("isExist", isExist);
+        result.put("isSbbh", isSbbh);
+        result.put("isZcbh", isZcbh);
         result.put("isNotExist", isNotExist);
         return result;
     }
