@@ -1429,7 +1429,7 @@
 		          },
 		          {
 		            "title": "录入/导入",
-		            "url": "",
+		            "url": "./safe/metering-management/metering-export.html",
 		            "id": "74004",
 		            "shiro": "CX"
 		          }
@@ -1456,13 +1456,13 @@
 		          },
 		          {
 		            "title": "计划管理",
-		            "url": "",
+		            "url": "./safe/docimasy-management/docimasy-management.html",
 		            "id": "76004",
 		            "shiro": "CX"
 		          },
 		          {
 		            "title": "检定结果录入",
-		            "url": "",
+		            "url": "./safe/docimasy-management/docimasy-pass.html",
 		            "id": "76005",
 		            "shiro": "CX"
 		          }
