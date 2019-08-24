@@ -193,31 +193,31 @@
 				            <div class="layui-form-item">
 				                <label class="layui-form-label">使用类别</label>
 				                <div class="layui-input-block">
-				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                	<input type="text" name="useType" disabled class="layui-input">
 				                </div>
 				            </div>
 				            <div class="layui-form-item">
 				                <label class="layui-form-label">使用日期</label>
 				                <div class="layui-input-block">
-				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                	<input type="text" name="recordDate" disabled class="layui-input">
 				                </div>
 				            </div>
 				            <div class="layui-form-item">
 				                <label class="layui-form-label">使用部门</label>
 				                <div class="layui-input-block">
-				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                	<input type="text" name="bmName" disabled class="layui-input">
 				                </div>
 				            </div>
 				            <div class="layui-form-item">
 				                <label class="layui-form-label">使用人</label>
 				                <div class="layui-input-block">
-				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                	<input type="text" name="userXm" disabled class="layui-input">
 				                </div>
 				            </div>
 				            <div class="layui-form-item">
 				                <label class="layui-form-label">使用说明</label>
 				                <div class="layui-input-block">
-				                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
+				                	<input type="text" name="cause" disabled class="layui-input">
 				                </div>
 				            </div>
 			            </div>
@@ -286,7 +286,6 @@
 			"封存":["封存日期","封存人","封存事由"],
 			"报废":["报废日期","报废人","报废事由"]
 		}
-		debugger;
 		if("在用" == meteringstatus){
 			$("#status1").show();
 			$("#status2").hide();
@@ -317,6 +316,9 @@
 					$("[name='userXm']").val(data.userXm);
 					$("[name='cause']").val(data.cause);
 					$("[name='description']").val(data.description);
+					
+					$("[name='useType']").val(data.useType);
+					$("[name='bmName']").val(data.bmName);
 				}
 			}
 		});
@@ -333,7 +335,6 @@
                          , {field: 'verificationUnit', title: '检定单位', minWidth: 150}
                          , {field: 'verificationResult', title: '检定结果', minWidth: 100}
                          , {field: 'description', title: '备注', minWidth: 100}
-                         , {fixed:'right',width:100,align:'center',title:'操作',toolbar: "#bar"}
                      ]]
                      , url:"/Metering/seeAllHistoryNum.do?id=" +  $.getUrlParam("id")
                      , request: {
@@ -348,19 +349,6 @@
                              "count": res.data.total,//页面显示的数据条数
                              "data": res.data.list //解析数据列表
                          }
-                     }
-                     , done: function (obj) {
-                         tableFunc({
-                        	 tools: [{	
-                                  filter:"table1",
-                                  event:'delete',
-                                  title:'删除确认',
-                                  type:2,
-                                  area:["400px","250px"],
-                                  content:'./metering-view-delete.html',
-                                  dataUrl: ["id"]
-                              }]
-                         })
                      }
               	}
             },

@@ -256,6 +256,11 @@
             <artifactId>webmagic-selenium</artifactId>
             <version>0.7.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.1</version>
+        </dependency>
         <!-- webmagic jar end -->
         <!--aop-->
         <dependency>

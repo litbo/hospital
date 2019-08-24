@@ -100,31 +100,13 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                    	toolFunc: [{
-                    		send:{
-                                id:"table",
-                                filter:"table1",
-                                name:"utilIds",
-                                event:"audit",
-                                url:"/meteringProcess/addSomeMeteringUtilToProcess.do",
-                                type:"POST",
-                                par:"id",
-                                confirm:false,
-                                reload:true,
-                                adds:{
-                                	department:emp.bmName
-                                }
-                            },
-	                        tool:"toolbar",
-	                        event:"audit"
-                         }],
                         tools:[
                             {
                                 event:"update",
                                 title:"修改",
                                 type:2,
                                 content:"./child/metering-update.html",
-                                dataUrl:["id"]
+                                dataUrl:["id","meteringstatus"]
                             }
                             ,{
                                 event:"view",
@@ -138,7 +120,7 @@
                 }
             },
             reSet:{
-                url:"/Metering/findAllMeteringUtilByDepartment.do",
+                url:"/Metering/findAllMeteringUtil.do",
                 type:"search",
                 data:["bmName","meteringUtilName"]    //搜索框的name
             }

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>计量查看</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+        .layui-input-block button{
+        	margin:0px;
+        }
+        .PoAb0xx0{
+        	top:5px;
+        	left:10px;
+        }
+        .layui-tab-item{
+        	background:#f1f1f1;
+        	padding-top:20px;
+        	min-height:300px;
+        }
+        #ifm{
+        	border:0;
+        	width:100%;
+        	min-height:300px;
+        }
+        .nav_status{
+        	display:none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>计划审核信息</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称 </label>
+                <div class="layui-input-block">
+                    <input type="hidden" name="id">
+                    <input type="text" name="processName" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">科室 </label>
+                <div class="layui-input-block">
+                    <input type="text" name="department" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">申请时间 </label>
+                <div class="layui-input-block">
+                    <input type="text" name="recordTime" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">申请人 </label>
+                <div class="layui-input-block">
+                    <input type="text" name="dealAdvertisement" disabled class="layui-input">
+                </div>
+            </div>
+        </div>
+           
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">检定单位 </label>
+                <div class="layui-input-block">
+                    <input type="text" name="verificationUnit" disabled class="layui-input">
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">审批人 </label>
+                <div class="layui-input-block">
+                    <input type="text"  name="dealPerson" disabled class="layui-input">
+                </div>
+            </div>
+          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注 </label>
+                <div class="layui-input-block">
+                    <input type="text" name="description" disabled class="layui-input">
+                </div>
+            </div>
+          </div>
+          
+         <div class="col-xs-12">
+            <div class="layui-form-item">
+                 <table id="table" lay-filter="table1"></table>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+var color = ["black","green","green","blue","red","red"];
+var values = ["未知","合格","准用","停用","封存","报废"];
+    renderMod = {
+            addTable: {
+                table: {
+                	 cols: [[ //表头
+                         {type: "numbers", title: '序号' }
+                         , {field: 'sign', title: '标志', width: 70,templet:function(d){
+                         	var field = this.field;
+                        	var value = d[field];
+                        	return "<span style='color:#fff;padding:2px 4px;background:"+color[value]+"'>"+(values[value] || value)+"</span>";
+                        }}
+                         , {field: 'meteringName', title: '设备名称'}
+                         , {field: 'meteringNum', title: '检定编号'}
+                         , {field: 'meteringGetNumberTime', title: '检定时间'}
+                         , {field: 'meteringInspectionCycle', title: '检定周期'}
+                         , {field: 'legalCategory', title: '法制类别'}
+                         , {field: 'meteringstatus', title: '设备状态'}
+                     ]]
+                     , url:"/meteringProcess/getProcessMoreInfomation.do?ProcessId=" +  $.getUrlParam("processId")
+                     , request: {
+                         pageName: 'pageNum',
+                         limitName: 'pageSize'
+                     }
+                     , parseData: function (res) { //res 即为原始返回的数据
+                    	 res.data.forms = res.data.forms || [];
+                         return {
+                             "code": res.code, //解析接口状态
+                             "msg": res.msg, //解析提示文本
+                             "count": res.data.forms.length,//页面显示的数据条数
+                             "data": res.data.forms //解析数据列表
+                         }
+                     }
+              	}
+            },
+            form: {
+                val: {
+                    filter: "forms",
+                    get: {
+                        url: "/meteringProcess/getProcessMoreInfomation.do",
+                        type: "POST",
+                        data: {ProcessId: $.getUrlParam("processId")}
+                    }
+                }
+            }
+    }
+</script>
+</body>
+
+</html>
