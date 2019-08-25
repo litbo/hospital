@@ -48,16 +48,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">文件页数 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text"  id="fileSize" name="fileSize" lay-verify="required|Decimal" autocomplete="off" placeholder="请输入"
+                    <input type="text"  name="fileSize" lay-verify="required|Decimal" autocomplete="off" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
           </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">描述</label>
+                <label class="layui-form-label">摘要</label>
                 <div class="layui-input-block">
-                    <input type="text" id="summary"  name="summary" autocomplete="off" placeholder="请输入" class="layui-input">
+                    <input type="text" name="summary" autocomplete="off" placeholder="请输入" class="layui-input">
                 </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
          </div>
-         <div class="col-xs-6">
+         <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">文件类型</label>
                 <div class="layui-input-block">
@@ -84,9 +84,17 @@
          </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
+                <label class="layui-form-label">文件名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" lay-verify="required" name="fileName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
                 <label class="layui-form-label">上传文件<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="file" id="file" name="file" autocomplete="off" class="layui-input">
+                    <input type="file" id="file" lay-verify="required" name="file" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -129,7 +137,30 @@
                     auto:false,
                     bindAction:"#upData",
                     field:"file",
-                    data:["dossierId","recordPerson","fileDate","fileSize","summary","fileUrl","fileType","description1"],
+                    add:{
+                    	fileDate: function(){
+                    		return $("[name='fileDate']").val();
+                    	},
+                    	fileSize: function(){
+		            		return $("[name='fileSize']").val();
+		            	},
+		            	summary: function(){
+		            		return $("[name='summary']").val();
+		            	},
+		            	fileUrl: function(){
+		            		return $("[name='fileUrl']").val();
+		            	},
+		            	fileType: function(){
+		            		return $("[name='fileType']").val();
+		            	},
+		            	description1: function(){
+		            		return $("[name='description1']").val();
+		            	},
+		            	fileName: function(){
+		            		return $("[name='fileName']").val();
+		            	}
+                    },
+                    data:["dossierId","recordPerson"],
                     done:function(res,index,upload){
                         //console.log(arguments);
                         layer.msg('提交成功！', {

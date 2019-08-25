@@ -30,23 +30,297 @@
         </fieldset>
     </div>
     <div class="col-xs-12">
-        <div class="col-xs-12 layui-upload" style="margin-top:15px;">
+        <div class="col-xs-12 layui-upload">
             <button type="button" class="layui-btn layui-btn-normal" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
             <button type="button" class="layui-btn layui-btn-normal" style="margin-left: 10px" id="startUploadFile"><i class="layui-icon">&#xe621;</i>提交文件</button>
-        </div>
-        <div class="col-xs-12" style="margin-top:60px">
             <button type="button" class="layui-btn" id="xzmb">
                 <i class="layui-icon">&#xe601;</i>下载模板
             </button>
         </div>
     </div>
+    <div class="col-xs-12">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>计量信息录入</legend>
+        </fieldset>
+    </div>
+    <div class="col-xs-12">
+        <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+	        <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">检定编号</label>
+	                <div class="layui-input-block">
+	                    <input type="hidden" name="recordPerson" class="layui-input">
+	                    <input type="text" name="meteringNum" class="layui-input">
+	                </div>
+	            </div>
+	         </div>
+	        <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">器具名称 <span class="sign">*</span></label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="meteringName" lay-verify="required" class="layui-input">
+	                </div>
+	            </div>
+	         </div>
+	        <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">检定单位 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="verificationUnit" class="layui-input">
+	                </div>
+	            </div>
+	         </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">检定日期</label>
+	                <div class="layui-input-block">
+	                	<input type="text" id="meteringGetNumberTime" name="meteringGetNumberTime" class="layui-input">
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">是否周期</label>
+	                <div class="layui-input-block">
+	                	<select name="isCycle" lay-filter="isCycle" class="layui-input">
+	                		<option value='是'>是</option>
+	                		<option value='否'>否</option>
+	                	</select>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-xs-6" id="nav_meteringInspectionCycle">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">检查周期</label>
+	                <div class="layui-input-block">
+	                	<input type="text" name="meteringInspectionCycle"  class="layui-input">
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-xs-6" id="nav_meteringInspectionCycle">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">使用科室 <span class="sign">*</span></label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="bmName" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
+	                           style="padding-left:60px;">
+	                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectDepartment">选择</button>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">管理类别 <span class="sign">*</span></label>
+	                <div class="layui-input-block">
+	                    <select name="utilType"  class="layui-input" lay-verify="required">
+	                    	<option value=''>--请选择--</option>
+	                    	<option value='A'>A</option>
+	                    	<option value='B'>B</option>
+	                    	<option value='C'>C</option>
+	                    </select>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">量具状态</label>
+	                <div class="layui-input-block">
+	                    <select name="meteringstatus" class="layui-input" >
+	                    	<option value='在用'>在用</option>
+	                    	<option value='在库'>在库</option>
+	                    	<option value='停用'>停用</option>
+	                    	<option value='封存'>封存</option>
+	                    	<option value='报废'>报废</option>
+	                    </select>
+	                </div>
+	            </div>
+	        </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">规格型号 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="specificationModle" class="layui-input">
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">测量范围 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="measuringRange" class="layui-input">
+	                </div>
+	            </div>
+	         </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">精度等级 </label>
+	                <div class="layui-input-block">
+	                    <input type="text"  name="accuracyLevel" class="layui-input">
+	                </div>
+	            </div>
+	          </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">法制类别 <span class="sign">*</span></label>
+	                <div class="layui-input-block">
+	                    <select name="legalCategory"  class="layui-input" lay-verify="required">
+	                    	<option value=''>--请选择--</option>
+	                    	<option value='强检'>强检</option>
+	                    	<option value='非强检'>非强检</option>
+	                    </select>
+	                </div>
+	            </div>
+	          </div> 
+	          <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">器具类别 <span class="sign">*</span></label>
+	                <div class="layui-input-block">
+	                    <select name="gaugeCategory"  class="layui-input" lay-verify="required">
+	                    	<option value=''>--请选择--</option>
+	                    	<option value='生物力学类'>生物力学类</option>
+	                    	<option value='生物化学类'>生物化学类</option>
+	                    	<option value='医用热学类'>医用热学类</option>
+	                    	<option value='医用电磁学类'>医用电磁学类</option>
+	                    	<option value='医用声学类'>医用声学类</option>
+	                    	<option value='医用超声学类'>医用超声学类</option>
+	                    	<option value='医用光学类'>医用光学类</option>
+	                    	<option value='医用激光学类'>医用激光学类</option>
+	                    	<option value='医用放射类'>医用放射类</option>
+	                    </select>
+	                </div>
+	            </div>
+	         </div>
+	          <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">标志 <span class="sign">*</span></label>
+	                <div class="layui-input-block">
+	                    <select name="sign"  class="layui-input" lay-verify="required">
+	                    	<option value=''>--请选择--</option>
+	                    	<option value='1'>合格</option>
+	                    	<option value='2'>准用</option>
+	                    	<option value='3'>停用</option>
+	                    	<option value='4'>封存</option>
+	                    	<option value='5'>报废</option>
+	                    </select>
+	                </div>
+	            </div>
+	         </div>
+	         <div class="col-xs-12">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">备注</label>
+	                <div class="layui-input-block">
+	                	<input type="text" name="description1" class="layui-input">
+	                </div>
+	            </div>
+	        </div>
+	         
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">出厂日期 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="dateOfManufacture" class="layui-input">
+	                </div>
+	            </div>
+	          </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">出厂编号 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="serialNumber" class="layui-input">
+	                </div>
+	            </div>
+	        </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">生产厂家 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="manufacturer" class="layui-input">
+	                </div>
+	            </div>
+	         </div>
+	         
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">购买人 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="userXm" class="layui-input">
+	                </div>
+	            </div>
+	          </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">购买时间 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" id="buyTime" name="buyTime" class="layui-input">
+	                </div>
+	            </div>
+	          </div>
+	         <div class="col-xs-6">
+	            <div class="layui-form-item">
+	                <label class="layui-form-label">购买价格 </label>
+	                <div class="layui-input-block">
+	                    <input type="text" name="buyPrice" class="layui-input">
+	                </div>
+	            </div>
+	          </div>
+	       
+	        <div class="col-xs-12">
+	            <div class="layui-form-item" style="margin:20px 0;">
+	                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="upData">保存</button>
+	            </div>
+	        </div>
+	    </form>
+    </div>
 </div>
 
 
 <script>
+
+var formData2 = {};
 var emp = tempValue("rl", "emp", false);
+$(function(){
+	$("[name='recordPerson']").val(emp.userXm);
+	layui.use('form', function(){
+		var form = layui.form;
+		form.on('select(isCycle)', function(data){
+			 $("#nav_meteringInspectionCycle").toggle('是' == data.value);
+		});
+	});
+});
     renderMod = {
+        bind: {
+        	   selectItem: [
+                 {
+                     elem: "#selectDepartment",
+                     cb: "/supervise/bmgl/listSelectBmsCols",
+                     db: "/supervise/bmgl/listBms",
+                     se: "/supervise/bmgl/bmSe",
+                     key: "radio",
+                     name: "dtdt",
+                     data: formData2
+                 }
+             ]
+        },
         form:{
+            date: [{
+                elem: "#meteringGetNumberTime",
+                format:'yyyy/MM/dd'
+            },{
+                elem: "#buyTime",
+                format:'yyyy/MM/dd'
+            }],
+            submit: {
+                before: function (param) {
+                    return param = {};
+                },
+                form: {
+                    url: "/Metering/addMeteringUtil.do",
+                    type: "POST",
+                    data: [
+                    	"meteringName","meteringNum","verificationUnit","meteringGetNumberTime","isCycle","meteringInspectionCycle","bmName",
+                    	"buyTime","userXm","utilType","meteringstatus","buyPrice","specificationModle","dateOfManufacture","serialNumber",
+                    	"manufacturer","measuringRange","accuracyLevel","legalCategory","gaugeCategory","sign","description1","recordPerson"]
+                }
+            },
             file:{
                 elem:"#selectFile",
                 url:"/Metering/ImportExcelToAddMeteringUtil.do?userXm=" + emp.userXm,

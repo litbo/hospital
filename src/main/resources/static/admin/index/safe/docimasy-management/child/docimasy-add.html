@@ -31,7 +31,7 @@
 <body>
 <div class="layui-row">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>计量信息修改</legend>
+        <legend>计量检定信息</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
@@ -110,6 +110,8 @@
                         type: "POST",
                         contentType:"application/json",
                         data: ["utilIds", "department","verificationUnit","dealAdvertisement","processName", "dealPerson"],
+    					shutWin:true,
+                        reload: 'parent'
                     }
                 }
             },
