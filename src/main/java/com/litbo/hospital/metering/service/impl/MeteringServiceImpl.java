@@ -61,21 +61,23 @@ public class MeteringServiceImpl implements MeteringService {
             meteringutil.setMeteringstatus("在用");
         }
 
-        if(meteringutil.getMeteringGetNumberTime() != null && !meteringutil.getMeteringGetNumberTime().equals("")){
-            // 计算出下次送去计量的时间
-            // 使用Calendar类来计算下一次的计量时间
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date(meteringutil.getMeteringGetNumberTime()));
-            calendar.add(Calendar.MONTH,Integer.parseInt(meteringutil.getMeteringInspectionCycle()));
-            //得到下一次的计量时间
-            Date nextMeteringTime = calendar.getTime();
-            meteringutil.setThisMeteringTime(new SimpleDateFormat("yyyy/MM/dd").format(nextMeteringTime));
+        if(meteringutil.getMeteringInspectionCycle() != null){
+            if(meteringutil.getMeteringGetNumberTime() != null && !meteringutil.getMeteringGetNumberTime().equals("")){
+                // 计算出下次送去计量的时间
+                // 使用Calendar类来计算下一次的计量时间
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date(meteringutil.getMeteringGetNumberTime()));
+                calendar.add(Calendar.MONTH,Integer.parseInt(meteringutil.getMeteringInspectionCycle()));
+                //得到下一次的计量时间
+                Date nextMeteringTime = calendar.getTime();
+                meteringutil.setThisMeteringTime(new SimpleDateFormat("yyyy/MM/dd").format(nextMeteringTime));
+            }
+
+            // 设置计量编号编号有效期
+            meteringutil.setEffectiveDate(meteringutil.getThisMeteringTime());
+        }else{
+            meteringutil.setIsCycle(0);
         }
-
-        // 设置计量编号编号有效期
-        meteringutil.setEffectiveDate(meteringutil.getThisMeteringTime());
-
-
 
         // 将设备存放到数据库中，得到设备id
         int i = meteringUtilDAO.insert(meteringutil);
