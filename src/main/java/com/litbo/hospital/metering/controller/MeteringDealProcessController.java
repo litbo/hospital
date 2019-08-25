@@ -338,6 +338,7 @@ public class MeteringDealProcessController {
         }
         vo.setMsg("没有查询到相关信息");
         vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),utils));
         return vo;
     }
 

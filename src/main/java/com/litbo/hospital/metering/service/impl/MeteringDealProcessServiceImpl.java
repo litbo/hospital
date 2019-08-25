@@ -162,11 +162,16 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
         number.setRecordTime(new SimpleDateFormat("yyyy/MM/dd").format(new Date()));
         number.setEffectiveDate(util.getEffectiveDate());
 
+        // 更新设备信息
+        util.setDescription("0");// 从流程中拿出去
+        util.setThisMeteringTime(number.getEffectiveDate());  // 下次审计时间
+        util.setMeteringGetNumberTime(number.getGetNumberTime());
+
+
         int i = meteringUtilDAO.updateByPrimaryKey(util);
         if(i != 0){
-            i =meteringHistoryNumberDAO.insert(number);
+            i = meteringHistoryNumberDAO.insert(number);
         }
-
 
         return i;
     }
