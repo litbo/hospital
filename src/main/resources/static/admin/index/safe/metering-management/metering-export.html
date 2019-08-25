@@ -83,8 +83,8 @@
 	                <label class="layui-form-label">是否周期</label>
 	                <div class="layui-input-block">
 	                	<select name="isCycle" lay-filter="isCycle" class="layui-input">
-	                		<option value='是'>是</option>
-	                		<option value='否'>否</option>
+	                		<option value='1'>是</option>
+	                		<option value='0'>否</option>
 	                	</select>
 	                </div>
 	            </div>
@@ -313,6 +313,7 @@ $(function(){
                     return param = {};
                 },
                 form: {
+                	restore: true,
                     url: "/Metering/addMeteringUtil.do",
                     type: "POST",
                     data: [
