@@ -130,7 +130,9 @@ public class DossierServiceImpl implements DossierService {
     public int deleterDossierById(int dossierId) {
         Dossier dossier = dossierDAO.selectByPrimaryKey(dossierId);
         // 如果卷宗内还有文件则删除失败
-        List<DossierFile> dossierFiles = dossierFileDAO.selectAllDossierFile(dossier.getDossierNum());
+
+        String dossierNum = dossier.getDossierNum();
+        List<DossierFile> dossierFiles = dossierFileDAO.selectAllDossierFileByDossierNum(dossierNum.substring(0,9) + " " + dossierNum.substring(9,12)  + "-%",null,null);
         if(dossierFiles.isEmpty()){
             // 删除文件夹
             // 将文件的路径拼接成程序可以识别的路径   begin
