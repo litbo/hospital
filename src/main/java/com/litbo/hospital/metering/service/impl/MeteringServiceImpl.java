@@ -91,7 +91,10 @@ public class MeteringServiceImpl implements MeteringService {
             meteringHistoryNumber.setGetNumberTime(util.getMeteringGetNumberTime());
 
             // 有效日期
-            meteringHistoryNumber.setVerificationUnit(util.getThisMeteringTime());
+            meteringHistoryNumber.setEffectiveDate(util.getThisMeteringTime());
+
+            // 检定单位
+            meteringHistoryNumber.setVerificationUnit(util.getVerificationUnit());
 
             // 检定结果
             meteringHistoryNumber.setVerificationResult("合格");
@@ -211,11 +214,25 @@ public class MeteringServiceImpl implements MeteringService {
         meteringutilNewMessage.setUpdateMessageTime(nowDate);
 
 
-        // 将老数据重复
+        // 将固定的老数据重复
         meteringutilNewMessage.setDescription(meteringUtilTestOldMessage.getDescription());
         meteringutilNewMessage.setMeteringstatus(meteringUtilTestOldMessage.getMeteringstatus());
         meteringutilNewMessage.setRecordTime(meteringUtilTestOldMessage.getRecordTime());
         meteringutilNewMessage.setMeteringSystemNum(meteringUtilTestOldMessage.getMeteringSystemNum());
+        meteringutilNewMessage.setBuyTime(meteringUtilTestOldMessage.getBuyTime());
+        meteringutilNewMessage.setIsCycle(meteringUtilTestOldMessage.getIsCycle());
+        meteringutilNewMessage.setRecordPerson(meteringUtilTestOldMessage.getRecordPerson());
+        if(meteringutilNewMessage.getSign() == null){
+            meteringutilNewMessage.setSign(meteringUtilTestOldMessage.getSign());
+        }
+
+
+        if(meteringutilNewMessage.getMeteringNum() == null){
+            meteringutilNewMessage.setMeteringNum(meteringUtilTestOldMessage.getMeteringNum());
+            meteringutilNewMessage.setVerificationUnit(meteringUtilTestOldMessage.getVerificationUnit());
+        }
+
+
 
 
         // 如果计量周期发生变化，则重新计算计量时间
@@ -232,6 +249,14 @@ public class MeteringServiceImpl implements MeteringService {
 
         // 设置计量编号编号有效期
         meteringutilNewMessage.setEffectiveDate(meteringutilNewMessage.getThisMeteringTime());
+
+        // 修改历史记录中的计量编号有效期
+        MeteringHistoryNumber meteringHistoryNumber1 = meteringHistoryNumberDAO.selectByMeteringIdAndGetNumTime(meteringutilNewMessage.getId(),meteringutilNewMessage.getMeteringGetNumberTime());
+        if(meteringHistoryNumber1 != null){
+            meteringHistoryNumber1.setEffectiveDate(meteringutilNewMessage.getThisMeteringTime());
+            meteringHistoryNumberDAO.updateByPrimaryKey(meteringHistoryNumber1);
+        }
+
 
         int i = meteringUtilDAO.updateByPrimaryKey(meteringutilNewMessage);
         // 如果计量编号发生变化，则在历史计量编号中添加一条新信息

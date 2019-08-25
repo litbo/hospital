@@ -80,10 +80,10 @@ public class MeteringController {
     @RequestMapping("/updateMeteringUtil.do")
     public Result updateMeteringUtil(MeteringUtil meteringUtil,MeteringUtilStatus status){
         if(status != null){
+            status.setUtilId(meteringUtil.getId());
             updateUtilUseStatus(status);
         }
 
-        status.setUtilId(meteringUtil.getId());
         int result = meteringService.updateMeteringUtil(meteringUtil);
         if(result == 1){
             return Result.success();
