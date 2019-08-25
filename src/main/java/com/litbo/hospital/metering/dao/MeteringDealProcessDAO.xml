@@ -195,4 +195,11 @@
             (deal_status = '' or deal_status is null) and record_time >= #{recordBeginTime}
         </where>
     </select>
+
+
+    <select id="seeAllUtilsMeteringUtil" resultType="string">
+        SELECT form.metering_id
+        from metering_approval_form as form , metering_deal_process as pc
+        where pc.form_id = form.form_id and pc.deal_status = '通过'
+    </select>
 </mapper>

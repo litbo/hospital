@@ -170,4 +170,60 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
 
         return i;
     }
+
+    @Override
+    public List<MeteringUtil> seeAllUtilsMeteringUtil(String bmName,String utilName) {
+        // 查出来所有已经审批通过，等待结果录入的流程中包含的设备信息
+        List<String> utilIds = meteringDealProcessDAO.seeAllUtilsMeteringUtil();
+        List<MeteringUtil> utils = new ArrayList<>();
+
+        if(bmName != null && utilName != null){
+            for(String ids : utilIds){
+                String[] id = ids.split(",");
+                for(String i : id){
+                    MeteringUtil util = meteringUtilDAO.selectByPrimaryKey(Integer.valueOf(i));
+                    if(util.getBmName().equals(bmName) && util.getMeteringName().equals(utilName))
+                    utils.add(util);
+                }
+            }
+        }
+
+        if(bmName == null && utilName != null){
+            for(String ids : utilIds){
+                String[] id = ids.split(",");
+                for(String i : id){
+                    MeteringUtil util = meteringUtilDAO.selectByPrimaryKey(Integer.valueOf(i));
+                    if(util.getMeteringName().equals(utilName))
+                        utils.add(util);
+                }
+            }
+        }
+
+        if(bmName != null && utilName == null){
+            for(String ids : utilIds){
+                String[] id = ids.split(",");
+                for(String i : id){
+                    MeteringUtil util = meteringUtilDAO.selectByPrimaryKey(Integer.valueOf(i));
+                    if(util.getBmName().equals(bmName))
+                        utils.add(util);
+                }
+            }
+        }
+
+        if(bmName == null && utilName == null){
+            for(String ids : utilIds){
+                String[] id = ids.split(",");
+                for(String i : id){
+                    MeteringUtil util = meteringUtilDAO.selectByPrimaryKey(Integer.valueOf(i));
+                        utils.add(util);
+                }
+            }
+        }
+
+
+        return utils;
+    }
+
+
+
 }
