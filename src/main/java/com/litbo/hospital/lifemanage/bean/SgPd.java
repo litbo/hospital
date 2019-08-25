@@ -34,5 +34,9 @@ public class SgPd {
      *盘点计划id
      */
     private String pdJhid;
+    /**
+     *盘点完成时间
+     */
+    private Date pdWcsj;
 
 }

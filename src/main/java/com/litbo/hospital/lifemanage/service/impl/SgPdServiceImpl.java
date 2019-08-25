@@ -2,11 +2,13 @@ package com.litbo.hospital.lifemanage.service.impl;
 
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.lifemanage.bean.SgPd;
+import com.litbo.hospital.lifemanage.bean.SgPdJg;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
+import io.swagger.models.auth.In;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -67,6 +69,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
         Map<String, List> result = new HashMap<>();
         //所有查出来的该是这个科室的设备名字
         List<String> isName=new ArrayList<>();
+        List<String> bmPdZt=new ArrayList<>();
         
         for (String scanId : pdScanList) {
             if (sbbhList.contains(scanId)|| zcbhList.contains(scanId)) {
@@ -85,11 +88,34 @@ public class SgPdServiceImpl implements SgPdSeverice {
         Collections.copy(notExistName, allNameList);
         notExistName.removeAll(isName);
 
-        //返回的PDA数据 该科室下所有的设备名字 盘点的是该科室设备的名称 是该科室的但是没有扫描的设备名称
+        SgPdJg sgPdJg=new SgPdJg();
+
+        if((pdScanList.size()) > (allNameList.size())){
+            bmPdZt.add("盘亏");
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("-1");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdMapper.insertPdZt(sgPdJg);
+        }else if((pdScanList.size()) < (allNameList.size())){
+            bmPdZt.add("盘赢");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("1");
+            sgPdMapper.insertPdZt(sgPdJg);
+        }else if((pdScanList.size())==(allNameList.size())){
+            bmPdZt.add("正常");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("0");
+            sgPdMapper.insertPdZt(sgPdJg);
+        }
+
+        //返回的PDA数据 该科室下所有的设备名字 盘点的是该科室设备的名称 是该科室的但是没有扫描的设备名称 该科室盘点状态
         result.put("pdScanList",pdScanList);
         result.put("allNameList",allNameList);
         result.put("isName",isName);
         result.put("notExistName",notExistName);
+        result.put("bmPdZt",bmPdZt);
 
         return result;
     }
