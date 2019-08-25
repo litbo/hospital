@@ -53,4 +53,7 @@ public interface MeteringDealProcessService {
 
 
     int verificationResultEntry(MeteringHistoryNumber number);
+
+
+    List<MeteringUtil> seeAllUtilsMeteringUtil(String bmName,String utilName);
 }

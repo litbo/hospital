@@ -28,4 +28,8 @@ public interface MeteringDealProcessDAO {
                                                    @Param("recordEndTime") String recordEndTime,
                                                    @Param("department") String department);
 
+
+    // 查询所有已经通过审批的流程中包含的设备id
+    List<String> seeAllUtilsMeteringUtil();
+
 }
