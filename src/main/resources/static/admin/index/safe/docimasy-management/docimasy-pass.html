@@ -37,7 +37,10 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
 					<div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="department"  class="layui-input" placeholder="使用科室" autocomplete="off">
+                        <input type="text" name="bmName" class="layui-input" placeholder="科室名称" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input type="text" name="utilName"  class="layui-input" placeholder="设备关键字" autocomplete="off">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
@@ -49,32 +52,44 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="view">查看</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="input">结果录入</a>
 </script>
 
 <script>
+var color = ["black","green","green","blue","red","red"];
+var values = ["未知","合格","准用","停用","封存","报废"];
     renderMod = {
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "numbers", title: '序号' },
-                    {type: "checkbox"}
-                    , {field: 'processName', title: '名称', minWidth: 120}
-                    , {field: 'department', title: '科室', minWidth: 150}
-                    , {field: 'recordTime', title: '申请时间', width: 100}
-                    , {field: 'dealAdvertisement', title: '申请人', width: 100}
-                    , {field: 'verificationUnit', title: '检定单位', width: 90}
-                    , {field: 'dealPerson', title: '审批人', minWidth: 120}
-                    , {field: 'description', title: '备注', minWidth: 120}
-//                     , {fixed:'right',width:150,align:'center',title:'操作',toolbar: "#bar"}
+                	{type: "numbers", title: '序号' }
+                    , {field: 'sign', title: '标志', minWidth: 70,templet:function(d){
+                    	var field = this.field;
+                    	var value = d[field];
+                    	return "<span style='color:#fff;padding:2px 4px;background:"+color[value]+"'>"+(values[value] || value)+"</span>";
+                    }}
+                    , {field: 'gaugeCategory', title: '器具类别', minWidth: 100}
+                    , {field: 'meteringSystemNum', title: '器具编号', minWidth: 250}
+                    , {field: 'meteringName', title: '设备器具名称', minWidth: 150}
+                    , {field: 'specificationModle', title: '规格型号', minWidth: 100}
+                    // , {field: 'measuringRange', title: '测量范围', minWidth: 100}
+                    // , {field: 'accuracyLevel', title: '精度等级', minWidth: 100}
+                    , {field: 'bmName', title: '使用科室', minWidth: 150}
+                    , {field: 'meteringInspectionCycle', title: '检查周期', minWidth: 150}
+                    , {field: 'meteringGetNumberTime', title: '检定日期', minWidth: 150}
+                    , {field: 'meteringstatus', title: '状态', minWidth: 100}
+                    , {field: 'description1', title: '备注', minWidth: 100}
+                    , {fixed:'right',width:100,align:'center',title:'操作',toolbar: "#bar"}
                 ]]
-                , url:"/meteringProcess/searchFormProcess.do?status=通过"
+                , url:"/meteringProcess/seeAllUtilsMeteringUtil.do"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
+                	res.data = res.data || {};
+                	res.data.list = res.data.list || [];
+                	res.data.total = res.data.total || 0;
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
@@ -85,27 +100,20 @@
                 , done: function (obj) {
                     tableFunc({
                     tools:[{
-                            event:"view",
-                            title:"查看",
+                            event:"input",
+                            title:"录入",
                             type:2,
-                            content:"./child/docimasy-examine-view.html",
-                            dataUrl:["processId"]
-                        },
-                        {
-                            event:"delete",
-                            title:"删除",
-                            type:2,
-                            area:["400px","250px"],
-                            content:"./child/docimasy-management-delete.html",
-                            dataUrl:["processId"]
-                     	}]
+                            content:"./child/docimasy-pass-input.html",
+                            dataUrl:["id"]
+                        }
+                      	]
                     })
                 }
             },
             reSet:{
-                url:"/meteringProcess/searchFormProcess.do?status=通过",
+                url: "/meteringProcess/seeAllUtilsMeteringUtil.do",
                 type:"search",
-                data:["department"]    //搜索框的name
+                data:["bmName","utilName"]    //搜索框的name
             }
         }       
     }

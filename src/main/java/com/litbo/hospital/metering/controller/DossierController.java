@@ -96,7 +96,7 @@ public class DossierController {
     public Result deleteDossier(int dossierId){
         int result = dossierService.deleterDossierById(dossierId);
         if(result == 0){
-            return Result.success("删除失败！卷宗内可能还有文件");
+            return Result.error("删除失败！卷宗内可能还有文件");
         }
         return Result.success();
     }

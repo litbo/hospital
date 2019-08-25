@@ -1,6 +1,5 @@
 package com.litbo.hospital.metering.controller;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
@@ -80,10 +79,10 @@ public class MeteringController {
     @RequestMapping("/updateMeteringUtil.do")
     public Result updateMeteringUtil(MeteringUtil meteringUtil,MeteringUtilStatus status){
         if(status != null){
+            status.setUtilId(meteringUtil.getId());
             updateUtilUseStatus(status);
         }
 
-        status.setUtilId(meteringUtil.getId());
         int result = meteringService.updateMeteringUtil(meteringUtil);
         if(result == 1){
             return Result.success();
@@ -464,7 +463,7 @@ public class MeteringController {
      * @return
      */
     @RequestMapping("/seedeleteMaintenanceRecords.do")
-    public PageVo seedeleteMaintenanceRecords(int id,String userXm,
+    public PageVo seedeleteMaintenanceRecords(int id,
                                               @RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
                                               @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize){
 

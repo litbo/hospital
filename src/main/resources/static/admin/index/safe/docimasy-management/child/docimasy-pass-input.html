@@ -31,24 +31,22 @@
 <body>
 <div class="layui-row">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>计量信息修改</legend>
+        <legend>计量检定信息</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">计划名称 <span class="sign">*</span></label>
+                <label class="layui-form-label">检定日期 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="hidden" name="utilIds">
-                    <input type="hidden" name="department">
-                    <input type="hidden" name="dealAdvertisement">
-                    <input type="text" name="processName" autocomplete="off" lay-verify="required" placeholder="请输入"
+                    <input type="hidden" name="meteringutilId">
+                    <input type="text" id="getNumberTime" name="getNumberTime" autocomplete="off" lay-verify="required" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
          </div>
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">检定单位</label>
+                <label class="layui-form-label">检定单位 <span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select name="verificationUnit" class="layui-input">
                     	<option value='市计量检测中心'>市计量检测中心</option>
@@ -57,15 +55,20 @@
                 </div>
             </div>
         </div>
-           
          
          <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">审批人 <span class="sign">*</span></label>
+                <label class="layui-form-label">检定编号</label>
                 <div class="layui-input-block">
-                 	<input type="text" name="dealPerson" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
-                           style="padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectUser">选择</button>
+                 	<input type="text" name="verificationNumber" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                 	<input type="text" name="description" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
@@ -80,64 +83,30 @@
 
 
 <script>
-	var formData2 = {
-			
-	};
 	var emp = tempValue("rl", "emp", false);
-	function getIds(){
-		var chks = parent.getCheckstatus();
-		var arr = [];
-		if(chks && chks.length > 0){
-			for(var i in chks){
-				arr.push(chks[i]["id"]);
-			}
-		}
-		$("[name='utilIds']").val(arr.join(","));
-	}
 	$(function(){
-		getIds();
-		$("[name='department']").val(emp.bmName);
-		$("[name='dealAdvertisement']").val(emp.userXm);
+		$("[name='meteringutilId']").val($.getUrlParam("id"));
+		$("[name='recordPerson']").val(emp.userXm);
 	});
     renderMod = {
             form: {
+            	date: [{
+	                elem: "#getNumberTime",
+	                format:'yyyy/MM/dd'
+	            }],
                 submit: {
                     before: function (param) {
                         return param = {};
                     },
                     form: {
-                        url: "/meteringProcess/addSomeMeteringUtilToProcess.do",
+                        url: "/meteringProcess/verificationResultEntry.do",
                         type: "POST",
-                        contentType:"application/json",
-                        data: ["utilIds", "department","verificationUnit","dealAdvertisement","processName", "dealPerson"],
+                        data: ["meteringutilId", "getNumberTime","verificationUnit","recordPerson","verificationNumber", "description"],
+    					shutWin:true,
+                        reload: 'parent'
                     }
                 }
-            },
-            bind: {
-            	 selectItem: [
-                     {
-                         elem: "#selectDepartment",
-                         cb: "/supervise/bmgl/listSelectBmsCols",
-                         db: "/supervise/bmgl/listBms",
-                         se: "/supervise/bmgl/bmSe",
-                         key: "radio",
-                         name: "dtdt",
-                         data: formData2
-                     },
-                     {
-                         elem: "#selectUser",
-                         cb: "/kwgl/empgl/listSelectEmpsCols",
-                         db: "/kwgl/empgl/listSelectEmps",
-                         name: "dtdt",
-                         na:"userXm",
-                         key: "radio",
-                         data: formData2,
-                         assign_el_name:'dealPerson',
-                         se:"/kwgl/empgl/empSe"
-                     }
-                 ]                     
-            }
-            
+           } 
     }
 </script>
 </body>

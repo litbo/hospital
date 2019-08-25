@@ -28,11 +28,21 @@ public class MeteringProcessMoreInformationVo {
 
     private String processName;
 
+    private String unit;
+
     private String recordTime;
 
     private List<MeteringUtil> forms;
 
     public MeteringProcessMoreInformationVo() {
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public MeteringProcessMoreInformationVo(MeteringDealProcess process) {
@@ -44,6 +54,7 @@ public class MeteringProcessMoreInformationVo {
         this.department = process.getDepartment();
         this.processName = process.getProcessName();
         this.recordTime = process.getRecordTime();
+        this.unit = process.getVerificationUnit();
     }
 
 

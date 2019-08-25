@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.pojo.MeteringApprovalForm;
 import com.litbo.hospital.metering.pojo.MeteringDealProcess;
+import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
 import com.litbo.hospital.metering.service.MeteringDealProcessService;
 import com.litbo.hospital.metering.service.MeteringService;
@@ -290,6 +291,55 @@ public class MeteringDealProcessController {
         }
         return Result.success();
 
+    }
+
+
+    /**
+     * 检定结果录入
+     * @param number
+     * @return
+     */
+    @RequestMapping("/verificationResultEntry.do")
+    public Result verificationResultEntry(MeteringHistoryNumber number){
+        int i = meteringDealProcessService.verificationResultEntry(number);
+        if(i == 0){
+            return Result.success("保存失败！");
+        }
+        return Result.success();
+    }
+
+
+    /**
+     * 查看所有等待录入结果的设备
+     * @return
+     */
+    @RequestMapping("/seeAllUtilsMeteringUtil.do")
+    public PageVo seeAllUtilsMeteringUtil(@RequestParam(name = "pageNum" , defaultValue = "1") int pageNum,
+                                          @RequestParam(name = "pageSize" , defaultValue = "15") int pageSize,
+                                          @RequestParam(name = "bmName",defaultValue = "") String bmName,
+                                          @RequestParam(name = "utilName",defaultValue = "") String utilName){
+        if(bmName.equals("")){
+            bmName = null;
+        }
+
+        if(utilName.equals("")){
+            utilName = null;
+        }
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<MeteringUtil> utils = meteringDealProcessService.seeAllUtilsMeteringUtil(bmName,utilName);
+        PageInfo info = new PageInfo(utils);
+        PageVo vo = new PageVo();
+        if(!utils.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),utils));
+            return vo;
+        }
+        vo.setMsg("没有查询到相关信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),utils));
+        return vo;
     }
 
 

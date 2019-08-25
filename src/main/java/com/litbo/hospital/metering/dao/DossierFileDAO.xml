@@ -264,7 +264,7 @@
     from hospital..dossier_file
     <where>
       <if test="dossierNum != null">
-        belong_dossier_num = #{dossierNum,jdbcType=VARCHAR} and
+        belong_dossier_num like #{dossierNum,jdbcType=VARCHAR} and
       </if>
       <if test="dossiserFileType != null">
         file_type = #{dossiserFileType,jdbcType=INTEGER} and

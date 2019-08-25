@@ -37,7 +37,7 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="bmName" class="layui-input" placeholder="部门拼音码" autocomplete="off">
+                        <input type="text" name="bmName" class="layui-input" placeholder="科室名称" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="name"  class="layui-input" placeholder="案卷名称" autocomplete="off">
@@ -64,8 +64,8 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "numbers", title: '序号' },
-                    {type: "checkbox"}
+                    {type: "numbers", title: '序号' }
+//                  , {type: "checkbox"}
                     , {field: 'dossierNum', title: '案卷编号', minWidth: 150}
                     , {field: 'dossierName', title: '案卷名称', minWidth: 100}
                     , {field: 'bmName', title: '使用科室', minWidth: 100}
@@ -87,6 +87,8 @@
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
                 	res.data = res.data || {};
+                	res.data.list = res.data.list || [];
+                	res.data.total = res.data.total || 0;
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
