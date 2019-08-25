@@ -44,7 +44,7 @@
 <body>
 <div class="layui-row">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>计量信息修改</legend>
+        <legend>器具信息修改</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
@@ -66,7 +66,7 @@
          </div>
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备器具名称 </label>
+                <label class="layui-form-label">器具名称 </label>
                 <div class="layui-input-block">
                     <input type="text" name="meteringName" class="layui-input">
                 </div>
@@ -165,7 +165,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">检定日期</label>
                 <div class="layui-input-block">
-                	<input type="text" name="meteringGetNumberTime" class="layui-input">
+                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
                 </div>
             </div>
         </div>
@@ -173,7 +173,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">有效日期</label>
                 <div class="layui-input-block">
-                	<input type="text" name="effectiveDate" class="layui-input">
+                	<input type="text" name="effectiveDate" disabled class="layui-input">
                 </div>
             </div>
         </div>
@@ -394,7 +394,9 @@
                         	"manufacturer","serialNumber","dateOfManufacture","buyPrice",
                         	"utilType","legalCategory","meteringInspectionCycle","meteringstatus",
                         	"meteringGetNumberTime","effectiveDate","useType","recordDate",
-                        	"bmName","userXm","cause","description","description1"]
+                        	"bmName","userXm","cause","description","description1"],
+						shutWin:true,
+                        reload: 'parent'
                     }
                 }
 	        }

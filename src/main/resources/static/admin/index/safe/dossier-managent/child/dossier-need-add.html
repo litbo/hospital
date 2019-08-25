@@ -30,6 +30,9 @@
 
 <body>
 <div class="layui-row">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>立卷建档</legend>
+    </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
             <div class="layui-form-item">
@@ -53,36 +56,39 @@
                 </div>
             </div>
           </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">终止时间 <span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" id="endTime" name="endTime" lay-verify="required" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
-                </div>
-            </div>
-          </div>
+<!--          <div class="col-xs-6"> -->
+<!--             <div class="layui-form-item"> -->
+<!--                 <label class="layui-form-label">终止时间 <span class="sign">*</span></label> -->
+<!--                 <div class="layui-input-block"> -->
+<!--                     <input type="text" id="endTime" name="endTime" lay-verify="required" autocomplete="off" placeholder="请输入" -->
+<!--                            class="layui-input"> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--           </div> -->
          <div class="col-xs-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">卷宗性质 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="dossierNature" lay-verify="required|Decimal" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-          </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">保存状态<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="saveType"  class="layui-input">
+                    <select name="dossierNature" lay-verify="required|Decimal">
                     	<option value=''>--请选择--</option>
-                    	<option value='永久'>永久</option>
-                    	<option value='临时'>临时</option>
+                    	<option value='全过程'>全过程</option>
+                    	<option value='一般'>一般</option>
                     </select>
                 </div>
             </div>
           </div>
+<!--          <div class="col-xs-6"> -->
+<!--             <div class="layui-form-item"> -->
+<!--                 <label class="layui-form-label">保存状态<span class="sign">*</span></label> -->
+<!--                 <div class="layui-input-block"> -->
+<!--                     <select name="saveType"  class="layui-input"> -->
+<!--                     	<option value=''>--请选择--</option> -->
+<!--                     	<option value='永久'>永久</option> -->
+<!--                     	<option value='临时'>临时</option> -->
+<!--                     </select> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--           </div> -->
          <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">文件存放位置</label>
@@ -111,7 +117,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">购买时间</label>
                 <div class="layui-input-block">
-                      <input type="text" name="buyTime" autocomplete="off" class="layui-input">
+                      <input type="text" id="buyTime" name="buyTime" autocomplete="off" class="layui-input">
                 </div>
             </div>
          </div>
