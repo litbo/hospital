@@ -97,6 +97,9 @@ public class MeteringUtil implements Serializable {
 
     // 有效日期
     private String effectiveDate;
+	
+	// 检定单位
+	private String verificationUnit;
 
     public MeteringUtil() {
     }
@@ -139,48 +142,49 @@ public class MeteringUtil implements Serializable {
 
         this.meteringName = (String) list.get(0);  // 设备名称1
         this.meteringNum = (String) list.get(1);// 设备计量编号1
+        this.verificationUnit = list.get(2).toString(); // 检定单位
 
 //        this.meteringGetNumberTime = (String) list.get(2); // 得到计量编号的时间1
         // 转换时间格式
-        String meteringGetNumberTime = sdf.format(new Date(list.get(2).toString()));
+        String meteringGetNumberTime = sdf.format(new Date(list.get(3).toString()));
         this.meteringGetNumberTime = meteringGetNumberTime;
 
 
-        if(list.get(3).toString().equals("是")){   // 是否周期
+        if(list.get(4).toString().equals("是")){   // 是否周期
             this.isCycle = 1;
         }else{
             this.isCycle = 0;
         }
 //        this.isCycle = Integer.parseInt(list.get(3).toString()) ;// 是否周期1
-        this.meteringInspectionCycle = (String) list.get(4);// 设备检查周期，单位为月1
-        this.bmName = (String) list.get(5);// 所属部门1
+        this.meteringInspectionCycle = (String) list.get(5);// 设备检查周期，单位为月1
+        this.bmName = (String) list.get(6);// 所属部门1
 
 //        this.buyTime = (String) list.get(6);// 购买时间1
         // 转换时间格式
-        String buyTime = sdf.format(new Date(list.get(6).toString()));
+        String buyTime = sdf.format(new Date(list.get(7).toString()));
         this.buyTime = buyTime;
 
 
-        this.userXm = (String) list.get(7);// 购买人1
-        this.utilType = (String) list.get(8);// 设备类型【A、B、C】1
-        this.meteringstatus = (String) list.get(9);// 设备状态：【在用、在库、停用、封存、报废】
-        this.buyPrice = (String) list.get(10);// 购买价格1
-        this.specificationModle = (String) list.get(11);// 规格型号1
+        this.userXm = (String) list.get(8);// 购买人1
+        this.utilType = (String) list.get(9);// 设备类型【A、B、C】1
+        this.meteringstatus = (String) list.get(10);// 设备状态：【在用、在库、停用、封存、报废】
+        this.buyPrice = (String) list.get(11);// 购买价格1
+        this.specificationModle = (String) list.get(12);// 规格型号1
 
 
 //        this.dateOfManufacture = (String) list.get(12);// 出厂日期
         //转换时间格式
-        String dateOfManufacture = sdf.format(new Date(list.get(12).toString()));
+        String dateOfManufacture = sdf.format(new Date(list.get(13).toString()));
         this.dateOfManufacture = dateOfManufacture;
 
-        this.serialNumber = (String) list.get(13); // 出厂编号1
-        this.manufacturer = (String) list.get(14);// 生产厂家1
-        this.measuringRange = (String) list.get(15);// 测量范围1
-        this.accuracyLevel = (String) list.get(16);// 精度等级1
-        this.legalCategory = (String) list.get(17);// 法制类别1
-        this.gaugeCategory = (String) list.get(18);// 量具类别1
-        this.sign = Integer.parseInt(list.get(19).toString());// 标志【合格、准用、停用、封存、报废】1
-        this.description1 = (String) list.get(20);// 备注
+        this.serialNumber = (String) list.get(14); // 出厂编号1
+        this.manufacturer = (String) list.get(15);// 生产厂家1
+        this.measuringRange = (String) list.get(16);// 测量范围1
+        this.accuracyLevel = (String) list.get(17);// 精度等级1
+        this.legalCategory = (String) list.get(18);// 法制类别1
+        this.gaugeCategory = (String) list.get(19);// 量具类别1
+        this.sign = Integer.parseInt(list.get(20).toString());// 标志【合格、准用、停用、封存、报废】1
+        this.description1 = (String) list.get(21);// 备注
     }
 
 
@@ -419,6 +423,14 @@ public class MeteringUtil implements Serializable {
         this.effectiveDate = effectiveDate;
     }
 
+    public String getVerificationUnit() {
+        return verificationUnit;
+    }
+
+    public void setVerificationUnit(String verificationUnit) {
+        this.verificationUnit = verificationUnit;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -459,7 +471,8 @@ public class MeteringUtil implements Serializable {
             && (this.getSign() == null ? other.getSign() == null : this.getSign().equals(other.getSign()))
             && (this.getDescription1() == null ? other.getDescription1() == null : this.getDescription1().equals(other.getDescription1()))
             && (this.getDateOfManufacture() == null ? other.getDateOfManufacture() == null : this.getDateOfManufacture().equals(other.getDateOfManufacture()))
-            && (this.getEffectiveDate() == null ? other.getEffectiveDate() == null : this.getEffectiveDate().equals(other.getEffectiveDate()));
+            && (this.getEffectiveDate() == null ? other.getEffectiveDate() == null : this.getEffectiveDate().equals(other.getEffectiveDate()))
+            && (this.getVerificationUnit() == null ? other.getVerificationUnit() == null : this.getVerificationUnit().equals(other.getVerificationUnit()));
     }
 
     @Override
@@ -495,6 +508,7 @@ public class MeteringUtil implements Serializable {
         result = prime * result + ((getDescription1() == null) ? 0 : getDescription1().hashCode());
         result = prime * result + ((getDateOfManufacture() == null) ? 0 : getDateOfManufacture().hashCode());
         result = prime * result + ((getEffectiveDate() == null) ? 0 : getEffectiveDate().hashCode());
+        result = prime * result + ((getVerificationUnit() == null) ? 0 : getVerificationUnit().hashCode());
         return result;
     }
 
@@ -533,6 +547,7 @@ public class MeteringUtil implements Serializable {
         sb.append(", description1=").append(description1);
         sb.append(", dateOfManufacture=").append(dateOfManufacture);
         sb.append(", effectiveDate=").append(effectiveDate);
+        sb.append(", verificationUnit=").append(verificationUnit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

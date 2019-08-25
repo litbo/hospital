@@ -2,9 +2,11 @@ package com.litbo.hospital.metering.service.impl;
 
 import com.litbo.hospital.metering.dao.MeteringApprovalFormDAO;
 import com.litbo.hospital.metering.dao.MeteringDealProcessDAO;
+import com.litbo.hospital.metering.dao.MeteringHistoryNumberDAO;
 import com.litbo.hospital.metering.dao.MeteringUtilDAO;
 import com.litbo.hospital.metering.pojo.MeteringApprovalForm;
 import com.litbo.hospital.metering.pojo.MeteringDealProcess;
+import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
 import com.litbo.hospital.metering.service.MeteringDealProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +35,9 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
 
     @Autowired
     private MeteringUtilDAO meteringUtilDAO;
+
+    @Autowired
+    private MeteringHistoryNumberDAO meteringHistoryNumberDAO;
 
     @Override
     public int addForm(MeteringApprovalForm meteringApprovalForm) {
@@ -128,5 +134,40 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
     @Override
     public int deleterProcess(int processId) {
         return meteringDealProcessDAO.deleteByPrimaryKey(processId);
+    }
+
+    @Override
+    public int verificationResultEntry(MeteringHistoryNumber number) {
+        // 查出设备
+        MeteringUtil util = meteringUtilDAO.selectByPrimaryKey(number.getMeteringutilId());
+
+        // 计算出下次送去计量的时间
+        // 使用Calendar类来计算下一次的计量时间
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date(number.getGetNumberTime()));
+        calendar.add(Calendar.MONTH,Integer.parseInt(util.getMeteringInspectionCycle()));
+        //得到下一次的计量时间
+        Date nextMeteringTime = calendar.getTime();
+        util.setThisMeteringTime(new SimpleDateFormat("yyyy/MM/dd").format(nextMeteringTime));
+
+        // 有效日期
+        util.setEffectiveDate(util.getThisMeteringTime());
+
+        if(number.getVerificationNumber() != null){
+            number.setVerificationResult("合格");
+        }else{
+            number.setVerificationResult("不合格");
+        }
+        number.setMeteringutillNumber(util.getMeteringSystemNum());
+        number.setRecordTime(new SimpleDateFormat("yyyy/MM/dd").format(new Date()));
+        number.setEffectiveDate(util.getEffectiveDate());
+
+        int i = meteringUtilDAO.updateByPrimaryKey(util);
+        if(i != 0){
+            i =meteringHistoryNumberDAO.insert(number);
+        }
+
+
+        return i;
     }
 }

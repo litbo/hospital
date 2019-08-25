@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.metering.pojo.MeteringApprovalForm;
 import com.litbo.hospital.metering.pojo.MeteringDealProcess;
+import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
 import com.litbo.hospital.metering.service.MeteringDealProcessService;
 import com.litbo.hospital.metering.service.MeteringService;
@@ -290,6 +291,21 @@ public class MeteringDealProcessController {
         }
         return Result.success();
 
+    }
+
+
+    /**
+     * 检定结果录入
+     * @param number
+     * @return
+     */
+    @RequestMapping("/verificationResultEntry.do")
+    public Result verificationResultEntry(MeteringHistoryNumber number){
+        int i = meteringDealProcessService.verificationResultEntry(number);
+        if(i == 0){
+            return Result.success("保存失败！");
+        }
+        return Result.success();
     }
 
 

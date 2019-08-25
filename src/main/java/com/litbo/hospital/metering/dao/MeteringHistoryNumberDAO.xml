@@ -162,4 +162,12 @@
     from hospital..metering_history_number
     where meteringutil_id = #{meteringutilId,jdbcType=INTEGER}
   </select>
+
+
+  <select id="selectByMeteringIdAndGetNumTime" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..metering_history_number
+    where meteringutil_id = #{id,jdbcType=INTEGER} and get_number_time = #{time,jdbcType=VARCHAR}
+  </select>
 </mapper>

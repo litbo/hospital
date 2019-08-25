@@ -97,11 +97,6 @@ public class DossierServiceImpl implements DossierService {
 
     @Override
     public int updateDossier(Dossier dossier) {
-        // 检查卷宗编号是否重复
-        Dossier dossierCheck = dossierDAO.selectByDossierNum(dossier.getDossierNum());
-        if(dossierCheck != null){
-            return 0;
-        }
 
         // 查看数据库中原有信息
         Dossier dossierMessage = dossierDAO.selectByPrimaryKey(dossier.getId());
@@ -113,7 +108,21 @@ public class DossierServiceImpl implements DossierService {
         dossier.setDossierNum(dossierMessage.getDossierNum());      // 卷宗编号
         dossier.setRecordTime(dossierMessage.getRecordTime());      // 卷宗创建时间
         dossier.setRecordPerson(dossierMessage.getRecordPerson());  // 卷宗创建人
+        dossier.setDescription(dossierMessage.getDescription());  // 电子文件路径
         //     有一些不允许修改的信息，必须按照原来的进行   begin
+
+        if(dossier.getDossierNature() != null){
+            // 将卷宗性质和保存状态关联
+            if(dossier.getDossierNature().equals("全过程")){
+                dossier.setSaveType("永久");
+            }else if(dossier.getDossierNature().equals("一般")){
+                dossier.setSaveType("短期");
+            }
+        }else{
+            dossier.setDossierNature(dossierMessage.getDossierNature());
+        }
+
+
         return dossierDAO.updateByPrimaryKey(dossier);
     }
 
@@ -210,7 +219,9 @@ public class DossierServiceImpl implements DossierService {
         dossierFile.setDescription(path);    // 电子版文件下载路径
         dossierFile.setFileNum(getPropertiesDossiesFileNum(prefix));// 文件编号
         dossierFile.setBelongDossierName(dossier.getDossierName());  // 卷宗名称
-        dossierFile.setBelongDossierNum(dossier.getDossierNum());   // 卷宗编号
+
+        // 卷宗编号: 所属卷宗编号前0~8位 + “ ” + 所属卷宗编号9~11位 + “-” + 文件类型
+        dossierFile.setBelongDossierNum(dossier.getDossierNum().substring(0,9) + " " + dossier.getDossierNum().substring(9,12) + "-" + dossierFile.getFileType());
         dossierFile.setBuyTime(dossier.getBuyTime());   // 购买时间
         dossierFile.setBmName(dossier.getBmName());   // 所属部门
 
@@ -261,13 +272,21 @@ public class DossierServiceImpl implements DossierService {
 
     @Override
     public Dossier selectDossierByBelongNum(String BelongNum) {
-        return dossierDAO.selectByDossierNum(BelongNum);
+        // 卷宗编号: 所属卷宗编号前0~8位 + “ ” + 所属卷宗编号9~11位 + “-” + 文件类型
+        return dossierDAO.selectByDossierNum(BelongNum.substring(0,9)+BelongNum.substring(9,12));
     }
 
     @Override
     public List<DossierFile> findAllDossierFileByDossierNum(String dossierNum,Integer dossiserFileType,String fileName) {
         if(fileName != null){
             fileName = "%" + fileName + "%";
+        }
+        if(dossierNum != null){
+            if(dossiserFileType == null){
+                dossierNum = dossierNum.substring(0,9) + " " + dossierNum.substring(9,12)  + "-%";
+            }else{
+                dossierNum = dossierNum.substring(0,9) + " " + dossierNum.substring(9,12) + "-" + dossiserFileType;
+            }
         }
         return dossierFileDAO.selectAllDossierFileByDossierNum(dossierNum,dossiserFileType,fileName);
     }
