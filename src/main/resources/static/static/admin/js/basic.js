@@ -447,9 +447,14 @@ function subUp(value, data, param) {
                 //如果参数中没有给出默认成功函数则只判断是否传输成功，其他数据的解析将通过参数中的done内函数完成
                 if (data.code === 0) {
                         layer.alert("请求发送成功！", {icon: 1}, function (id) {
+                        	//lizunyi 扩展，当页面保存之后，没有关闭页面时，如果二次提交，则value.data 为旧的数据。这里添加个参数，进行区分
+                            if(value.restore){
+                            	value.data = value.restoreData;
+                            }
                             if (value.reload) {
                                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                                 //自定义事件
+
                                 if(value.sureDo){
                                     value.sureDo();
                                 }
@@ -506,6 +511,10 @@ function subUp(value, data, param) {
                 dataP = JSON.stringify(dataP);
             }
             //数据回填
+            //lizunyi 扩展，当页面保存之后，没有关闭页面时，如果二次提交，则value.data 为旧的数据。这里添加个参数，进行区分
+            if(value.restore){
+            	value.restoreData = value.data;
+            }
             value.data = dataP || value.data;
             //强制同步提交(同步可能导致部分页面遮罩无效，故默认改为异步)
             /*if(!value.async){
