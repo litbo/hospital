@@ -1,6 +1,6 @@
 package com.litbo.hospital.common.utils.calculate;
 
-import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 
 /**
  * description: 处理效率等级的搜索
@@ -9,7 +9,7 @@ import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
  */
 public class HandleLevel {
 
-    public static Boolean overLoad(EfficiencyLevelVO vo){
+    public static Boolean overLoad(SearchVO vo){
         String str = "超负荷运转";
         if (vo.getSearchLevel()!=null&&!vo.getSearchLevel().trim().equals("")){
             return str.contains(vo.getSearchLevel());
@@ -18,7 +18,7 @@ public class HandleLevel {
         return false;
     }
 
-    public static Boolean efficient(EfficiencyLevelVO vo){
+    public static Boolean efficient(SearchVO vo){
         String str = "高效运转";
         if (vo.getSearchLevel()!=null&&!vo.getSearchLevel().trim().equals("")){
             return str.contains(vo.getSearchLevel());
@@ -27,7 +27,7 @@ public class HandleLevel {
         return false;
     }
 
-    public static Boolean midEfficient(EfficiencyLevelVO vo){
+    public static Boolean midEfficient(SearchVO vo){
         String str = "中效运转";
         if (vo.getSearchLevel()!=null&&!vo.getSearchLevel().trim().equals("")){
             return str.contains(vo.getSearchLevel());
@@ -36,7 +36,7 @@ public class HandleLevel {
         return false;
     }
 
-    public static Boolean inefficient(EfficiencyLevelVO vo){
+    public static Boolean inefficient(SearchVO vo){
         String str = "低效运转";
         if (vo.getSearchLevel()!=null&&!vo.getSearchLevel().trim().equals("")){
             return str.contains(vo.getSearchLevel());
@@ -45,7 +45,7 @@ public class HandleLevel {
         return false;
     }
 
-    public static Boolean idle(EfficiencyLevelVO vo){
+    public static Boolean idle(SearchVO vo){
         String str = "长期闲置";
         if (vo.getSearchLevel()!=null&&!vo.getSearchLevel().trim().equals("")){
             return str.contains(vo.getSearchLevel());

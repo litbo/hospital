@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.dao;
 
 import com.litbo.hospital.efficiency.dao.provider.IdlingProvider;
 import com.litbo.hospital.efficiency.vo.IdlingVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 
@@ -24,10 +25,10 @@ public interface IdlingDAO {
 
     /**
      * 按条件搜索设备的空转率
-     * @param idlingVO
+     * @param searchVO
      * @return
      */
     @SelectProvider(type = IdlingProvider.class,method = "selectIdlingByCon")
-    List<IdlingVO> selectIdlingByCon(IdlingVO idlingVO);
+    List<IdlingVO> selectIdlingByCon(SearchVO searchVO);
 
 }

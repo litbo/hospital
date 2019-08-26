@@ -52,9 +52,10 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="eqSName" lay-search="">
                             <option value="">请选择设备</option>
+
                             <option >CT室</option>
                             <option >核磁公正室</option>
-                            <option >摄片室</option>
+                            <option >设备管理测试设备2</option>
                             <option >内外导管室</option>
                             <option >心外ICU</option>
                         </select>
@@ -130,7 +131,8 @@
             reSet: {
                 url: "/kpi/open/selectOpenByCon",
                 type: "search",
-                data: ["startSTime","endSTime","bmSName", "eqSName"],     //搜索框的name
+                // contentType: 'application/json; charset=UTF-8',
+                data: ["startSTime","bmSName","eqSName"],     //搜索框的name
                 where: {}
             }
         }

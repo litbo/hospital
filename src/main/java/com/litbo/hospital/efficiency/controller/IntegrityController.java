@@ -3,6 +3,7 @@ package com.litbo.hospital.efficiency.controller;
 
 import com.litbo.hospital.efficiency.service.IntegrityService;
 import com.litbo.hospital.efficiency.vo.IntegrityVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +29,6 @@ public class IntegrityController {
     @RequestMapping("/selectIntegrity")
     public Result selectIntegrity(@RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,
                                   @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize){
-
         return Result.success(integrityService.selectIntegrity(pageNum, pageSize));
     }
 
@@ -38,9 +38,9 @@ public class IntegrityController {
     @RequestMapping("/selectIntegrityByCon")
     public Result selectIntegrityByCon(@RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,
                                        @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
-                                       @RequestBody IntegrityVO integrityVO){
+                                       SearchVO searchVO){
 
-        return Result.success(integrityService.selectIntegrityByCon(pageNum, pageSize, integrityVO));
+        return Result.success(integrityService.selectIntegrityByCon(pageNum, pageSize, searchVO));
     }
 
 }

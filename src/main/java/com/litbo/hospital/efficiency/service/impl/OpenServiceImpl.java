@@ -6,6 +6,7 @@ import com.litbo.hospital.common.utils.calculate.Efficiency;
 import com.litbo.hospital.efficiency.dao.OpenDAO;
 import com.litbo.hospital.efficiency.service.OpenService;
 import com.litbo.hospital.efficiency.vo.OpenVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,9 +50,9 @@ public class OpenServiceImpl implements OpenService {
     }
 
     @Override
-    public PageInfo selectOpenByCon(int pageNum, int pageSize, OpenVO openVO) {
+    public PageInfo selectOpenByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<OpenVO> openVOS = openDAO.selectOpenByCon(openVO);
+        List<OpenVO> openVOS = openDAO.selectOpenByCon(searchVO);
         return new PageInfo(handleOpenData(openVOS));
     }
 }

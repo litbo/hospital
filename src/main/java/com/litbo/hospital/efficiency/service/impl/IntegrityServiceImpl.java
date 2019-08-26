@@ -6,6 +6,7 @@ import com.litbo.hospital.common.utils.calculate.Efficiency;
 import com.litbo.hospital.efficiency.dao.IntegrityDAO;
 import com.litbo.hospital.efficiency.service.IntegrityService;
 import com.litbo.hospital.efficiency.vo.IntegrityVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,9 +49,9 @@ public class IntegrityServiceImpl implements IntegrityService {
     }
 
     @Override
-    public PageInfo selectIntegrityByCon(int pageNum, int pageSize, IntegrityVO integrityVO) {
+    public PageInfo selectIntegrityByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<IntegrityVO> integrityVOS = integrityDAO.selectIntegrityByCon(integrityVO);
+        List<IntegrityVO> integrityVOS = integrityDAO.selectIntegrityByCon(searchVO);
         return new PageInfo(handleIntegrity(integrityVOS));
     }
 }

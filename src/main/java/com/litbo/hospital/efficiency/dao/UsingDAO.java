@@ -1,6 +1,7 @@
 package com.litbo.hospital.efficiency.dao;
 
 import com.litbo.hospital.efficiency.dao.provider.UsingProvider;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import com.litbo.hospital.efficiency.vo.UsingVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -24,10 +25,10 @@ public interface UsingDAO {
 
     /**
      * 按照条件搜索机时利用率
-     * @param usingVO
+     * @param searchVO
      * @return
      */
     @SelectProvider(type = UsingProvider.class,method = "selectUsingByCon")
-    List<UsingVO> selectUsingByCon(UsingVO usingVO);
+    List<UsingVO> selectUsingByCon(SearchVO searchVO);
 
 }

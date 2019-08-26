@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.dao;
 
 import com.litbo.hospital.efficiency.dao.provider.OpenProvider;
 import com.litbo.hospital.efficiency.vo.OpenVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 
@@ -25,10 +26,10 @@ public interface OpenDAO {
 
     /**
      * 按照条件查询设备的开机率
-     * @param openVO
-     * @return
+     * @param searchVO 搜索条件
+     * @return 返回
      */
     @SelectProvider(type = OpenProvider.class,method = "selectOpenByCon")
-    List<OpenVO> selectOpenByCon(OpenVO openVO);
+    List<OpenVO> selectOpenByCon(SearchVO searchVO);
 
 }

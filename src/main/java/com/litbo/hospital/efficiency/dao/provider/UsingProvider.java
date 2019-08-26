@@ -1,6 +1,7 @@
 package com.litbo.hospital.efficiency.dao.provider;
 
 import com.litbo.hospital.common.utils.calculate.HandleData;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import com.litbo.hospital.efficiency.vo.UsingVO;
 import org.apache.commons.lang3.StringUtils;
 
@@ -43,7 +44,7 @@ public class UsingProvider {
         return sql;
     }
 
-    public String selectUsingByCon(UsingVO usingVO){
+    public String selectUsingByCon(SearchVO searchVO){
 
         StringBuilder sql = new StringBuilder("SELECT MAX\n" +
                 "( dbo.eq_info.eq_sbbh ) AS eqCode,\n" +
@@ -70,19 +71,19 @@ public class UsingProvider {
                 "AND dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
                 "AND dbo.InspectDetail.NewStatus = '02'");
 
-        if (StringUtils.isNotBlank(usingVO.getEqSName())){
-            sql.append("AND dbo.eq_jiancheng.c_AName LIKE '%"+usingVO.getEqSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getEqSName())){
+            sql.append("AND dbo.eq_jiancheng.c_AName LIKE '%"+searchVO.getEqSName()+"%'");
         }
 
-        if (StringUtils.isNotBlank(usingVO.getBmSName())){
-            sql.append("AND dbo.s_bm.bm_name LIKE '%"+usingVO.getBmSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getBmSName())){
+            sql.append("AND dbo.s_bm.bm_name LIKE '%"+searchVO.getBmSName()+"%'");
         }
 
-        if (usingVO.getStartSTime()!=null&&usingVO.getEndSTime()!=null){
-            sql.append("AND dbo.eq_info.eq_qysj BETWEEN "+ HandleData.changeDate(usingVO.getStartSTime()) +" AND "+ HandleData.changeDate(usingVO.getEndSTime()));
+        if (searchVO.getStartSTime()!=null&&searchVO.getEndSTime()!=null){
+            sql.append("AND dbo.eq_info.eq_qysj BETWEEN "+ searchVO.getStartSTime() +" AND "+ searchVO.getEndSTime());
         }
 
-        if (usingVO.getStartSTime()==null||usingVO.getEndSTime()==null){
+        if (searchVO.getStartSTime()==null||searchVO.getEndSTime()==null){
             sql.append("AND dbo.InspectDetail.InspectDate = (\n" +
                     "SELECT CONVERT\n" +
                     "( VARCHAR ( 10 ), '2018-11-02', 120 )) ");

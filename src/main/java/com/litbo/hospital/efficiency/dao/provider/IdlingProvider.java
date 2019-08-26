@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.dao.provider;
 
 import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.efficiency.vo.IdlingVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -73,7 +74,7 @@ public class IdlingProvider {
         return sql;
     }
 
-    public String selectIdlingByCon(IdlingVO idlingVO){
+    public String selectIdlingByCon(SearchVO searchVO){
         StringBuilder sql = new StringBuilder("SELECT\n" +
                 "works.eqCode,works.eqJc,works.workTimes,idles.idleTimes\n" +
                 "FROM\n" +
@@ -100,22 +101,22 @@ public class IdlingProvider {
                 "AND dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
                 "AND dbo.InspectDetail.NewStatus = '01'");
 
-        if (StringUtils.isNotBlank(idlingVO.getEqSName())){
-            sql.append("AND dbo.eq_jiancheng.c_AName LIKE '%"+idlingVO.getEqSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getEqSName())){
+            sql.append("AND dbo.eq_jiancheng.c_AName LIKE '%"+searchVO.getEqSName()+"%'");
         }
 
-        if (StringUtils.isNotBlank(idlingVO.getBmSName())){
-            sql.append("AND dbo.s_bm.bm_name LIKE '%"+idlingVO.getBmSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getBmSName())){
+            sql.append("AND dbo.s_bm.bm_name LIKE '%"+searchVO.getBmSName()+"%'");
         }
 
-        if (idlingVO.getStartSTime()==null||idlingVO.getEndSTime()==null){
+        if (searchVO.getStartSTime()==null||searchVO.getEndSTime()==null){
             sql.append("AND dbo.InspectDetail.InspectDate = (\n" +
                     "SELECT CONVERT\n" +
                     "( VARCHAR ( 10 ), '2018-11-02', 120 )) ");
         }
 
-        if (idlingVO.getStartSTime()!=null&&idlingVO.getEndSTime()!=null){
-            sql.append("AND dbo.InspectDetail.CerateTime BETWEEN  "+ HandleData.changeDate(idlingVO.getStartSTime()) +" AND "+HandleData.changeDate(idlingVO.getEndSTime()));
+        if (searchVO.getStartSTime()!=null&&searchVO.getEndSTime()!=null){
+            sql.append("AND dbo.InspectDetail.CerateTime BETWEEN  "+ searchVO.getStartSTime() +" AND "+searchVO.getEndSTime());
         }
 
         sql.append("GROUP BY\n" +
@@ -144,22 +145,22 @@ public class IdlingProvider {
                 "AND dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
                 "AND dbo.InspectDetail.NewStatus = '02' ");
 
-        if (StringUtils.isNotBlank(idlingVO.getEqSName())){
-            sql.append("AND dbo.eq_jiancheng.c_AName LIKE '%"+idlingVO.getEqSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getEqSName())){
+            sql.append("AND dbo.eq_jiancheng.c_AName LIKE '%"+searchVO.getEqSName()+"%'");
         }
 
-        if (StringUtils.isNotBlank(idlingVO.getBmSName())){
-            sql.append("AND dbo.s_bm.bm_name LIKE '%"+idlingVO.getBmSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getBmSName())){
+            sql.append("AND dbo.s_bm.bm_name LIKE '%"+searchVO.getBmSName()+"%'");
         }
 
-        if (idlingVO.getStartSTime()==null||idlingVO.getEndSTime()==null){
+        if (searchVO.getStartSTime()==null||searchVO.getEndSTime()==null){
             sql.append("AND dbo.InspectDetail.InspectDate = (\n" +
                     "SELECT CONVERT\n" +
                     "( VARCHAR ( 10 ), '2018-11-02', 120 )) ");
         }
 
-        if (idlingVO.getStartSTime()!=null&&idlingVO.getEndSTime()!=null){
-            sql.append("AND dbo.InspectDetail.CerateTime BETWEEN  "+ HandleData.changeDate(idlingVO.getStartSTime()) +" AND "+HandleData.changeDate(idlingVO.getEndSTime()));
+        if (searchVO.getStartSTime()!=null&&searchVO.getEndSTime()!=null){
+            sql.append("AND dbo.InspectDetail.CerateTime BETWEEN  "+ searchVO.getStartSTime() +" AND "+searchVO.getEndSTime());
         }
 
         sql.append("GROUP BY\n" +

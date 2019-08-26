@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.dao.provider;
 
 import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.efficiency.vo.OpenVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -52,7 +53,7 @@ public class OpenProvider {
         return sql.toString();
     }
 
-    public String selectOpenByCon(OpenVO openVO){
+    public String selectOpenByCon(SearchVO searchVO){
 
         StringBuilder sql = new StringBuilder("SELECT \n" +
                 "many.eqCode,many.eqName,less.realDays,many.workDays\n" +
@@ -71,14 +72,14 @@ public class OpenProvider {
                 "WHERE\n" +
                 "dbo.approved_working_hours.rating_type = '1'");
 
-        if (StringUtils.isNotBlank(openVO.getEqSName())){
+        if (StringUtils.isNotBlank(searchVO.getEqSName())){
             sql.append(" AND dbo.eq_info.eq_name LIKE '%");
-            sql.append(openVO.getEqSName()+"%'");
+            sql.append(searchVO.getEqSName()+"%'");
         }
 
-        if (StringUtils.isNotBlank(openVO.getBmSName())){
+        if (StringUtils.isNotBlank(searchVO.getBmSName())){
             sql.append(" AND dbo.eq_info.eq_name LIKE '%");
-            sql.append(openVO.getBmSName()+"%'");
+            sql.append(searchVO.getBmSName()+"%'");
         }
 
         sql.append("GROUP BY\n" +
@@ -95,12 +96,12 @@ public class OpenProvider {
                 "dbo.InspectDetail \n" +
                 "WHERE ");
 
-        if (openVO.getStartSTime()==null||openVO.getEndSTime()==null){
+        if (searchVO.getStartSTime()==null||searchVO.getEndSTime()==null){
             sql.append("DATEDIFF( MONTH, CerateTime, '2018-11-02' ) = 0");
         }
 
-        if (openVO.getStartSTime()!=null&&openVO.getEndSTime()!=null){
-            sql.append("CerateTime BETWEEN  '"+ HandleData.changeDate(openVO.getStartSTime()) +"' AND '"+HandleData.changeDate(openVO.getEndSTime())+"'");
+        if (searchVO.getStartSTime()!=null&&searchVO.getEndSTime()!=null){
+            sql.append("CerateTime BETWEEN  '"+ searchVO.getStartSTime() +"' AND '"+searchVO.getEndSTime()+"'");
         }
 
 

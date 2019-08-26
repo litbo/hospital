@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.dao;
 
 import com.litbo.hospital.efficiency.dao.provider.IntegrityProvider;
 import com.litbo.hospital.efficiency.vo.IntegrityVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 
@@ -17,17 +18,17 @@ public interface IntegrityDAO {
 
     /**
      * 设备的完好率
-     * @return
+     * @return 设备的完好率
      */
     @SelectProvider(type = IntegrityProvider.class,method = "selectIntegrity")
     List<IntegrityVO> selectIntegrity();
 
     /**
      * 按条件搜索设备的完好率
-     * @param integrityVO
-     * @return
+     * @param searchVO 设备的完好率条件
+     * @return 设备的完好率
      */
     @SelectProvider(type = IntegrityProvider.class,method = "selectIntegrityByCon")
-    List<IntegrityVO> selectIntegrityByCon(IntegrityVO integrityVO);
+    List<IntegrityVO> selectIntegrityByCon(SearchVO searchVO);
 
 }

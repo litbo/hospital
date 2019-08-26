@@ -3,6 +3,7 @@ package com.litbo.hospital.efficiency.dao.provider;
 import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.common.utils.calculate.HandleLevel;
 import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -27,7 +28,7 @@ public class EfficiencyLevelProvider {
         return sql;
     }
 
-    public String selectLevelByCon(EfficiencyLevelVO levelVO){
+    public String selectLevelByCon(SearchVO searchVO){
         StringBuilder sql = new StringBuilder("SELECT\n" +
                 "k.eqCode,\n" +
                 "k.eqName,\n" +
@@ -42,21 +43,21 @@ public class EfficiencyLevelProvider {
                 "AND eq.eq_bmid = bm.bm_id\n" +
                 "AND k.dataStatus = '2' ");
 
-        if (levelVO.getSearchLevel()!=null&&!levelVO.getSearchLevel().trim().equals("")){
-            if (HandleLevel.overLoad(levelVO)){
+        if (searchVO.getSearchLevel()!=null&&!searchVO.getSearchLevel().trim().equals("")){
+            if (HandleLevel.overLoad(searchVO)){
                 sql.append("AND CAST(k.ratio AS DECIMAL) > 100\n");
             }
 
-            else if (HandleLevel.efficient(levelVO)){
+            else if (HandleLevel.efficient(searchVO)){
                 sql.append("AND (CAST(k.ratio AS DECIMAL) <= 100 AND CAST(k.ratio AS DECIMAL) >= lev.using)\n");
             }
-            else if (HandleLevel.midEfficient(levelVO)){
+            else if (HandleLevel.midEfficient(searchVO)){
                 sql.append("AND (CAST(k.ratio AS DECIMAL) < lev.[using] AND CAST(k.ratio AS DECIMAL) >= lev.idling)\n");
             }
-            else if (HandleLevel.inefficient(levelVO)){
+            else if (HandleLevel.inefficient(searchVO)){
                 sql.append("AND (CAST(k.ratio AS DECIMAL) < lev.idling AND CAST(k.ratio AS DECIMAL) > 0 )\n");
             }
-            else if (HandleLevel.idle(levelVO)){
+            else if (HandleLevel.idle(searchVO)){
                 sql.append("AND CAST(k.ratio AS DECIMAL) = 0\n");
             }
 
@@ -66,13 +67,13 @@ public class EfficiencyLevelProvider {
 
         }
 
-        if (levelVO.getStartTime()!=null&&levelVO.getEndTime()!=null){
-            sql.append("AND k.times BETWEEN '"+ HandleData.changeDate(levelVO.getStartTime())+
-                    "' AND '"+HandleData.changeDate(levelVO.getEndTime())+"'\n");
+        if (searchVO.getStartSTime()!=null&&searchVO.getEndSTime()!=null){
+            sql.append("AND k.times BETWEEN '"+ searchVO.getStartSTime()+
+                    "' AND '"+searchVO.getEndSTime()+"'\n");
         }
 
-        if (StringUtils.isNotBlank(levelVO.getSearchBmName())){
-            sql.append("AND bm.bm_name LIKE '%"+levelVO.getSearchBmName()+"%'\n");
+        if (StringUtils.isNotBlank(searchVO.getBmSName())){
+            sql.append("AND bm.bm_name LIKE '%"+searchVO.getBmSName()+"%'\n");
         }
 
         System.out.println(sql);

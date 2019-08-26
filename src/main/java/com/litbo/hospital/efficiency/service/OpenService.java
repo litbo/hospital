@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.efficiency.vo.OpenVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 
 /**
  * description:设备开机率的Service层
@@ -22,9 +23,9 @@ public interface OpenService {
      * 按条件搜索设备的开机率
      * @param pageNum
      * @param pageSize
-     * @param openVO
+     * @param searchVO
      * @return
      */
-    PageInfo selectOpenByCon(int pageNum, int pageSize, OpenVO openVO);
+    PageInfo selectOpenByCon(int pageNum, int pageSize, SearchVO searchVO);
 
 }

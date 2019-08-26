@@ -14,22 +14,6 @@ import java.util.Date;
 @Data
 public class IdlTimeVO {
 
-    /** 搜索的开始时间 */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date startSTime;
-
-    /** 搜索的结束时间 */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date endSTime;
-
-    /** 搜索设备名字 */
-    private String eqSName;
-
-    /** 搜索部门名字 */
-    private String bmSName;
-
     /** 设备编号 */
     private String eqCode;
 

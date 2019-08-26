@@ -8,6 +8,7 @@ import com.litbo.hospital.efficiency.dao.EfficiencyLevelDAO;
 import com.litbo.hospital.efficiency.dao.LevelDAO;
 import com.litbo.hospital.efficiency.service.EfficiencyLevelService;
 import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,13 +57,13 @@ public class EfficiencyLevelServiceImpl implements EfficiencyLevelService {
      * 按条件查询所有的效率等级
      * @param pageNum   页码
      * @param pageSize  大小
-     * @param levelVos  条件
+     * @param searchVO  条件
      * @return 返回按条件查询所有的效率等级
      */
     @Override
-    public PageInfo selectLevelByCon(int pageNum, int pageSize, EfficiencyLevelVO levelVos) {
+    public PageInfo selectLevelByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<EfficiencyLevelVO> vos = dao.selectLevelByCon(levelVos);
+        List<EfficiencyLevelVO> vos = dao.selectLevelByCon(searchVO);
         return new PageInfo(getLevels(vos));
     }
 }

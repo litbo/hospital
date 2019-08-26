@@ -7,6 +7,7 @@ import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.efficiency.dao.IdlingDAO;
 import com.litbo.hospital.efficiency.service.IdlingService;
 import com.litbo.hospital.efficiency.vo.IdlingVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,9 +52,9 @@ public class IdlingServiceImpl implements IdlingService {
     }
 
     @Override
-    public PageInfo selectIdlingByCon(int pageNum, int pageSize, IdlingVO idlingVO) {
+    public PageInfo selectIdlingByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<IdlingVO> idlingVOS = idlingDAO.selectIdlingByCon(idlingVO);
+        List<IdlingVO> idlingVOS = idlingDAO.selectIdlingByCon(searchVO);
         return new PageInfo(handData(idlingVOS));
     }
 }
