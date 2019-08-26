@@ -30,9 +30,9 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="visible-xs">
-        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
-    </div>
+<!--    <div class="visible-xs">-->
+<!--        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>-->
+<!--    </div>-->
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
@@ -51,11 +51,11 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="eqSName" lay-search="">
                             <option value="">请选择设备</option>
-                            <option value="1">CT室</option>
-                            <option value="2">核磁公正室</option>
-                            <option value="3">摄片室</option>
-                            <option value="4">内外导管室</option>
-                            <option value="5">心外ICU</option>
+                            <option >CT室</option>
+                            <option >核磁公正室</option>
+                            <option >摄片室</option>
+                            <option >内外导管室</option>
+                            <option >心外ICU</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -82,7 +82,7 @@
                 filter: "select",
                 select: [
                     {
-                        ids: "bmId",
+
                         text: "bmName",
                         url: "/supervise/bmgl/listBm"
                     }
