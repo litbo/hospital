@@ -2,9 +2,15 @@ package com.litbo.hospital.lifemanage.service.impl;
 
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.lifemanage.bean.SgPd;
+import com.litbo.hospital.lifemanage.bean.SgPdJg;
+import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
+import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
+import io.swagger.models.auth.In;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,8 @@ import java.util.*;
 public class SgPdServiceImpl implements SgPdSeverice {
     @Autowired
     private SgPdMapper sgPdMapper;
+    @Autowired
+    private SgPlanMapper sgPlanMapper;
 
     /**
      * 插入盘点扫描到的所有编号
@@ -28,6 +36,9 @@ public class SgPdServiceImpl implements SgPdSeverice {
         BeanUtils.copyProperties(record, sgPd);
         int successCount = 0;
         for (String pdScanId : record.getPid()) {
+            if (StringUtils.isBlank(pdScanId)) {
+                continue;
+            }
             String selectId = sgPdMapper.selectScanId(pdScanId);
             if (StringUtils.isNotBlank(selectId)) {
                 continue;
@@ -42,42 +53,69 @@ public class SgPdServiceImpl implements SgPdSeverice {
     }
 
     @Override
-    public List selectAllData(String pdJhid) {
-        List<String> jhList = sgPdMapper.selectAllData(pdJhid);
-        // todo //调用计划表的方法 通过计划的id获取到这个计划下所有设备表里的设备编号和资产编号
-        List<String> sbbhList = new ArrayList<>();
-        List<String> zcbhList = new ArrayList<>();
-        sbbhList.add("1");
-        zcbhList.add("1");
+    public Map<String, List> selectAllData(String pdJhid) {
+        List<String> pdScanList = sgPdMapper.selectAllData(pdJhid);
+        SgPlan sgPlan = sgPlanMapper.selectByPrimaryKey(pdJhid);
+        if (sgPlan == null) {
+            return null;
+        }
+        String bmId=sgPlan.getBmId();
 
-        //isSbbh是符合设备编号 isZcbh是符合资产编号
-        List<String> isSbbh = new ArrayList<>();
-        List<String> isZcbh = new ArrayList<>();
+        List<String> allNameList = sgPdMapper.selectNameByBmId(bmId);
 
-        List<String> isNotExist = new ArrayList<>();
-        for (String jh : jhList) {
-            if (sbbhList.contains(jh)) {
-                isSbbh.add(jh);
-            } else if (zcbhList.contains(jh)) {
-                isZcbh.add(jh);
-            } else {
-                isNotExist.add(jh);
+        List<String> sbbhList = sgPdMapper.selectSbbhByBmId(bmId);
+        List<String> zcbhList = sgPdMapper.selectZcbhByBmId(bmId);
+
+        Map<String, List> result = new HashMap<>();
+        //所有查出来的该是这个科室的设备名字
+        List<String> isName=new ArrayList<>();
+        List<String> bmPdZt=new ArrayList<>();
+        
+        for (String scanId : pdScanList) {
+            if (sbbhList.contains(scanId)|| zcbhList.contains(scanId)) {
+                String sb = sgPdMapper.selectSbbhById(scanId);
+                String zc = sgPdMapper.selectZcbhById(scanId);
+                if (ObjectUtils.allNotNull(sb)){
+                    isName.add(sb);
+                }else if(ObjectUtils.allNotNull(zc)){
+                    isName.add(zc);
+                }
             }
         }
 
-        Map<String, List> issbbhList = new HashMap<>();
-        Map<String, List> iszcbhList = new HashMap<>();
-        for(String sb:isSbbh){
-            issbbhList.put("isSbbhName",sgPdMapper.selectSbbhById(sb));
-        }
-        for(String zc:isZcbh){
-            iszcbhList.put("isZcbhName",sgPdMapper.selectZcbhById(zc));
+        List<String> notExistName =new ArrayList<>();
+        CollectionUtils.addAll(notExistName, new Object[allNameList.size()]);
+        Collections.copy(notExistName, allNameList);
+        notExistName.removeAll(isName);
+
+        SgPdJg sgPdJg=new SgPdJg();
+
+        if((pdScanList.size()) > (allNameList.size())){
+            bmPdZt.add("盘亏");
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("-1");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdMapper.insertPdZt(sgPdJg);
+        }else if((pdScanList.size()) < (allNameList.size())){
+            bmPdZt.add("盘赢");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("1");
+            sgPdMapper.insertPdZt(sgPdJg);
+        }else if((pdScanList.size())==(allNameList.size())){
+            bmPdZt.add("正常");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("0");
+            sgPdMapper.insertPdZt(sgPdJg);
         }
 
-        List result=new ArrayList();
-        result.add(issbbhList);
-        result.add(iszcbhList);
-        result.add(isNotExist);
+        //返回的PDA数据 该科室下所有的设备名字 盘点的是该科室设备的名称 是该科室的但是没有扫描的设备名称 该科室盘点状态
+        result.put("pdScanList",pdScanList);
+        result.put("allNameList",allNameList);
+        result.put("isName",isName);
+        result.put("notExistName",notExistName);
+        result.put("bmPdZt",bmPdZt);
 
         return result;
     }

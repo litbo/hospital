@@ -41,7 +41,7 @@
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <!--<input type="checkbox" name="" title="监管设备"  lay-skin="primary">-->
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="bmName" class="layui-input" placeholder="科室拼音码" autocomplete="off">
+                        <input type="text" name="bmName" class="layui-input" placeholder="科室名称" autocomplete="off">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="meteringName" class="layui-input" placeholder="设备名称" autocomplete="off">
@@ -105,6 +105,8 @@
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
                 	res.data = res.data || {};
+                	res.data.list = res.data.list || [];
+                	res.data.total = res.data.total || 0;
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
@@ -118,7 +120,7 @@
                              type:2,
                              event:"audit",
                              tool: "toolbar",
-                             content:"./child/metering-test-add.html",
+                             content:"./child/docimasy-add.html",
                              func:function(config,$checkstatus){
                             	 checkstatus = $checkstatus.data || [];
                              }

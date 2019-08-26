@@ -77,8 +77,8 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "numbers", title: '序号' },
-                    {type: "checkbox"}
+                    {type: "numbers", title: '序号' }
+//                  , {type: "checkbox"}
                     , {field: 'processName', title: '名称', minWidth: 120}
                     , {field: 'department', title: '科室', minWidth: 150}
                     , {field: 'recordTime', title: '申请时间', width: 100}
@@ -94,6 +94,9 @@
                     limitName: 'pageSize'
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
+                	res.data = res.data || {};
+                	res.data.list = res.data.list || [];
+                	res.data.total = res.data.total || 0;
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本

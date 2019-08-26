@@ -37,7 +37,7 @@ public class PropertiesUtil {
             propertiesUtil.load(in);
             return propertiesUtil.getProperty(key);
         } catch (IOException e) {
-            System.out.println("档案管理的配置文件创建失败！");
+            System.out.println("D:\\hospitalConfigFile\\dossierTimeDate.properties配置文件创建失败！");
             e.printStackTrace();
         }finally {
             try {
@@ -67,7 +67,7 @@ public class PropertiesUtil {
             propertiesUtil.store(out,null);
             return 1;
         } catch (IOException e) {
-            System.out.println("档案管理的配置文件读取异常！请检查`com/litbo/hospital/metering/util/DossierTimeDate.properties`配置文件");
+            System.out.println("档案管理的配置文件读取异常！请检查`D:\\hospitalConfigFile\\dossierTimeDate.properties`配置文件");
             e.printStackTrace();
         }finally {
             try {

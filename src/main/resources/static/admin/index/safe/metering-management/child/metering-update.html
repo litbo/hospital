@@ -44,7 +44,7 @@
 <body>
 <div class="layui-row">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>计量信息修改</legend>
+        <legend>器具信息修改</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-6">
@@ -60,13 +60,24 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">器具类别 </label>
                 <div class="layui-input-block">
-                    <input type="text" name="gaugeCategory" class="layui-input">
+                    <select name="gaugeCategory"  class="layui-input">
+                    	<option value=''>--请选择--</option>
+                    	<option value='生物力学类'>生物力学类</option>
+                    	<option value='生物化学类'>生物化学类</option>
+                    	<option value='医用热学类'>医用热学类</option>
+                    	<option value='医用电磁学类'>医用电磁学类</option>
+                    	<option value='医用声学类'>医用声学类</option>
+                    	<option value='医用超声学类'>医用超声学类</option>
+                    	<option value='医用光学类'>医用光学类</option>
+                    	<option value='医用激光学类'>医用激光学类</option>
+                    	<option value='医用放射类'>医用放射类</option>
+                    </select>
                 </div>
             </div>
          </div>
         <div class="col-xs-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备器具名称 </label>
+                <label class="layui-form-label">器具名称 </label>
                 <div class="layui-input-block">
                     <input type="text" name="meteringName" class="layui-input">
                 </div>
@@ -133,7 +144,12 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">管理类别</label>
                 <div class="layui-input-block">
-                	<input type="text" name="utilType" class="layui-input">
+                    <select name="utilType"  class="layui-input">
+                    	<option value=''>--请选择--</option>
+                    	<option value='A'>A</option>
+                    	<option value='B'>B</option>
+                    	<option value='C'>C</option>
+                    </select>
                 </div>
             </div>
           </div>
@@ -141,7 +157,11 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">法制类别</label>
                 <div class="layui-input-block">
-                	<input type="text" name="legalCategory"  class="layui-input">
+                    <select name="legalCategory"  class="layui-input">
+                    	<option value=''>--请选择--</option>
+                    	<option value='强检'>强检</option>
+                    	<option value='非强检'>非强检</option>
+                    </select>
                 </div>
             </div>
           </div>
@@ -157,7 +177,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">量具状态</label>
                 <div class="layui-input-block">
-                    <input type="text" name="meteringstatus" class="layui-input" />
+                    <select name="meteringstatus" class="layui-input" >
+                    	<option value='在用'>在用</option>
+                    	<option value='在库'>在库</option>
+                    	<option value='停用'>停用</option>
+                    	<option value='封存'>封存</option>
+                    	<option value='报废'>报废</option>
+                    </select>
                 </div>
             </div>
           </div>
@@ -165,7 +191,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">检定日期</label>
                 <div class="layui-input-block">
-                	<input type="text" name="meteringGetNumberTime" class="layui-input">
+                	<input type="text" name="meteringGetNumberTime" disabled class="layui-input">
                 </div>
             </div>
         </div>
@@ -173,7 +199,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">有效日期</label>
                 <div class="layui-input-block">
-                	<input type="text" name="effectiveDate" class="layui-input">
+                	<input type="text" name="effectiveDate" disabled class="layui-input">
                 </div>
             </div>
         </div>
@@ -330,6 +356,7 @@
 		});
 		$("#ifm").attr("src","./metering-view-list2.html?id="+$.getUrlParam("id"));
 	});
+	
 	renderMod = {
 	        addTable: {
 	            table: {
@@ -394,7 +421,9 @@
                         	"manufacturer","serialNumber","dateOfManufacture","buyPrice",
                         	"utilType","legalCategory","meteringInspectionCycle","meteringstatus",
                         	"meteringGetNumberTime","effectiveDate","useType","recordDate",
-                        	"bmName","userXm","cause","description","description1"]
+                        	"bmName","userXm","cause","description","description1"],
+						shutWin:true,
+                        reload: 'parent'
                     }
                 }
 	        }

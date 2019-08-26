@@ -2,6 +2,7 @@ package com.litbo.hospital.metering.service;
 
 import com.litbo.hospital.metering.pojo.MeteringApprovalForm;
 import com.litbo.hospital.metering.pojo.MeteringDealProcess;
+import com.litbo.hospital.metering.pojo.MeteringHistoryNumber;
 import com.litbo.hospital.metering.pojo.MeteringUtil;
 
 import java.util.List;
@@ -49,4 +50,10 @@ public interface MeteringDealProcessService {
     int updateProcessByPrimaryKeySelective(MeteringDealProcess record);
 
     int deleterProcess(int processId);
+
+
+    int verificationResultEntry(MeteringHistoryNumber number);
+
+
+    List<MeteringUtil> seeAllUtilsMeteringUtil(String bmName,String utilName);
 }

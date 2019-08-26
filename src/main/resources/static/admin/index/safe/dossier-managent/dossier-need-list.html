@@ -64,8 +64,8 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "numbers",title:"序号"},
-                    {type: "checkbox"}
+                    {type: "numbers",title:"序号"}
+//                  , {type: "checkbox"}
                     , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
                     , {field: 'eqName', title: '设备名称', minWidth: 100}
                     , {field: 'eqBxkssj', title: '保修开始时间', minWidth: 120}
@@ -83,6 +83,8 @@
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
                 	res.data = res.data || {};
+                	res.data.list = res.data.list || [];
+                	res.data.total = res.data.total || 0;
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本

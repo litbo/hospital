@@ -39,7 +39,7 @@
                 <label class="layui-form-label">案卷编号</label>
                 <div class="layui-input-block">
                     <input type="hidden" name="id">
-                    <input type="text" name="belongDossierNum" disabled class="layui-input">
+                    <input type="text" name="dossierNum" disabled class="layui-input">
                 </div>
             </div>
          </div>
@@ -91,6 +91,22 @@
                 </div>
             </div>
          </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">页数</label>
+                <div class="layui-input-block">
+                    <input type="text" name="agent" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
+         <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">摘要</label>
+                <div class="layui-input-block">
+                    <input type="text" name="agent" disabled class="layui-input">
+                </div>
+            </div>
+         </div>
          <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">备注</label>
@@ -106,6 +122,32 @@
     </form>
 </div>
 
+
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane maxCont" action="">
+                    <div class="layui-inline xs-100 mar10-0 pad0-10" style="width:200px;">
+                    <select name="dosserFileType">
+                    	<option value=''>--请选择文件类型--</option>
+                    	<option value='1'>筹购资料</option>
+                    	<option value='2'>设备技术资料</option>
+                    	<option value='3'>管理资料</option>
+                    	<option value='4'>其他资料</option>
+                    <select>
+                    </div>
+                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="download">下载</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="delete">删除</a>
@@ -173,7 +215,12 @@
  	                        ]
  	                    });
  	                }
-	  	        }
+	  	        },
+	  	        reSet:{
+	                url:"/Dossier/fidnAllDossierFile.do?dossierId="+$.getUrlParam("id"),
+	                type:"search",
+	                data:["dosserFileType"]    //搜索框的name
+	            }
 	    	}
     }
 </script>
