@@ -39,25 +39,25 @@
                 <form class="layui-form layui-form-pane maxCont" action="">
 
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
+                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="eqSKs" lay-filter="select" lay-search="">
+                        <select name="bmSName" lay-filter="select" lay-search="">
                             <option value="">请选择科室</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules"  lay-search="">
+                        <select name="eqSName"  lay-search="">
                             <option value="">设备名称</option>
-                            <option value="1">脉搏碳氧血氧测量仪</option>
-                            <option value="2">光疗设备</option>
-                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
-                            <option value="4">设备柜</option>
-                            <option value="5">监护仪(母婴监护系统主机)</option>
+                            <option >脉搏碳氧血氧测量仪</option>
+                            <option >光疗设备</option>
+                            <option >耳鼻喉综合治疗台(豪华)</option>
+                            <option >设备柜</option>
+                            <option >监护仪(母婴监护系统主机)</option>
                         </select>
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
+                        <button class="layui-btn" type="button" data-type="search">查找</button>
                     </div>
                     <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king" >排名变化</a>
                 </form>
@@ -81,7 +81,7 @@
                 filter: "select",
                 select: [
                     {
-                        ids: "bmId",
+
                         text: "bmName",
                         url: "/supervise/bmgl/listBm"
                     }
@@ -129,7 +129,7 @@
             reSet: {
                 url: "/kpi/open/selectOpenByCon",
                 type: "search",
-                data: ["bmSName", "eqSName"],     //搜索框的name
+                data: ["startSTime","bmSName", "eqSName"],     //搜索框的name
                 where: {}
             }
         }

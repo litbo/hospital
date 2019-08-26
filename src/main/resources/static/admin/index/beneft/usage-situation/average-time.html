@@ -37,11 +37,11 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
+                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
 
-                        <select name="eqSKs" lay-filter="select" lay-search="">
+                        <select name="bmSName" lay-filter="select" lay-search="">
                             <option value="">请选择科室</option>
 
                         </select>
@@ -130,7 +130,7 @@
         reSet: {
             url: "/kpi/idling/selectIdlTimeByCon",
             type: "search",
-            data: ["eqSName", "bmSName"],     //搜索框的name
+            data: ["startSTime","bmSName", "eqSName"],    //搜索框的name
             where: {}
         }
     }
