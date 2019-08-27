@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 
 /**
  * description: 使用效率等级
@@ -22,8 +23,8 @@ public interface EfficiencyLevelService {
      * 按条件查询所有的效率等级
      * @param pageNum   页码
      * @param pageSize  大小
-     * @param levelVOS  条件
+     * @param searchVO  条件
      * @return 返回按条件查询所有的效率等级
      */
-    PageInfo selectLevelByCon(int pageNum, int pageSize, EfficiencyLevelVO levelVOS);
+    PageInfo selectLevelByCon(int pageNum, int pageSize, SearchVO searchVO);
 }

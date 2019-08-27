@@ -14,22 +14,6 @@ import java.util.Date;
 @Data
 public class EfficiencyLevelVO {
 
-    /** 搜索的开始时间 */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date startTime;
-
-    /** 搜索的结束时间 */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date endTime;
-
-    /** 搜索的效率等级 */
-    private String searchLevel;
-
-    /** 搜索的部门名字 */
-    private String searchBmName;
-
     /** 设备编号 */
     private String eqCode;
 

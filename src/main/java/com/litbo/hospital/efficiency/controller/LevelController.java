@@ -23,7 +23,7 @@ public class LevelController {
     private LevelService levelService;
 
     @RequestMapping(value = "/updateLevel",method = RequestMethod.POST)
-    public Result updateLevel(@RequestBody LevelBean levelBean){
+    public Result updateLevel(LevelBean levelBean){
         if (levelService.updateLevel(levelBean)>0){
             return Result.success(levelService.selectLevel());
         }

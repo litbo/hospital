@@ -8,12 +8,6 @@ import lombok.Data;
 @Data
 public class IntegrityVO {
 
-    /**搜索科室名*/
-    private String eqSKs;
-
-    /**搜索设备名*/
-    private String eqSName;
-
     /**设备名字*/
     private String eqName;
 

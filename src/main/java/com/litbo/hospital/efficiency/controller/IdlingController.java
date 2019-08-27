@@ -1,7 +1,9 @@
 package com.litbo.hospital.efficiency.controller;
 
+import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.efficiency.service.IdlingService;
 import com.litbo.hospital.efficiency.vo.IdlingVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +32,14 @@ public class IdlingController {
     @RequestMapping("/selectIdlingByCon")
     public Result selectIdlingByCon(@RequestParam(value = "pageNUm", required = false, defaultValue = "1") int pageNum,
                                     @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                    @RequestBody IdlingVO idlingVO) {
-        return Result.success(idlingService.selectIdlingByCon(pageNum, pageSize, idlingVO));
+                                    SearchVO searchVO) {
+        searchVO = HandleData.handleSearch(searchVO);
+        if (searchVO.getStartSTime()!=null){
+            String[] strings = HandleData.splitTime(searchVO.getStartSTime());
+            searchVO.setStartSTime(strings[0]);
+            searchVO.setEndSTime(strings[1]);
+        }
+        return Result.success(idlingService.selectIdlingByCon(pageNum, pageSize, searchVO));
     }
 
 }

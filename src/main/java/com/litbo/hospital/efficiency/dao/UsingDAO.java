@@ -1,9 +1,9 @@
 package com.litbo.hospital.efficiency.dao;
 
 import com.litbo.hospital.efficiency.dao.provider.UsingProvider;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import com.litbo.hospital.efficiency.vo.UsingVO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -16,18 +16,32 @@ import java.util.List;
 public interface UsingDAO {
 
     /**
-     * 默认搜索前一天的机时利用率
-     * @return
+     * 默认搜索前一天的机时利用率将数据插入到中间表中
+     * @return  机时利用率
      */
-    @SelectProvider(type = UsingProvider.class,method = "selectUsing")
+    @UpdateProvider(type = UsingProvider.class,method = "selectUsing")
+    Integer updateUsing();
+
+    /**
+     * 从中间表中取机时利用率
+     * @return  机时利用率
+     */
+    @Select("SELECT *FROM dbo.kpi_using")
     List<UsingVO> selectUsing();
 
     /**
-     * 按照条件搜索机时利用率
-     * @param usingVO
-     * @return
+     * 删除中间表的数据
+     * @return 删除的行数
      */
-    @SelectProvider(type = UsingProvider.class,method = "selectUsingByCon")
-    List<UsingVO> selectUsingByCon(UsingVO usingVO);
+    @Delete("DELETE FROM dbo.kpi_using")
+    Integer deleteUsing();
+
+    /**
+     * 按照条件搜索机时利用率
+     * @param searchVO  机时利用率条件
+     * @return  机时利用率
+     */
+    @UpdateProvider(type = UsingProvider.class,method = "selectUsingByCon")
+    Integer updateUsingByCon(SearchVO searchVO);
 
 }

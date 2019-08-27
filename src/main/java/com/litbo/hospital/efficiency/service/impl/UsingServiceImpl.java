@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.calculate.Efficiency;
 import com.litbo.hospital.efficiency.dao.UsingDAO;
 import com.litbo.hospital.efficiency.service.UsingService;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import com.litbo.hospital.efficiency.vo.UsingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,14 +45,18 @@ public class UsingServiceImpl implements UsingService {
     @Override
     public PageInfo selectUsing(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
+        Integer integer = usingDAO.deleteUsing();
+        Integer integer1 = usingDAO.updateUsing();
         List<UsingVO> usingVOS = usingDAO.selectUsing();
         return new PageInfo(handleData(usingVOS));
     }
 
     @Override
-    public PageInfo selectUsingByCon(int pageNum, int pageSize, UsingVO usingVO) {
+    public PageInfo selectUsingByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<UsingVO> usingVOS = usingDAO.selectUsingByCon(usingVO);
-        return new PageInfo(handleData(usingVOS));
+        Integer integer = usingDAO.deleteUsing();
+        Integer integer1 = usingDAO.updateUsingByCon(searchVO);
+        List<UsingVO> vos = usingDAO.selectUsing();
+        return new PageInfo(handleData(vos));
     }
 }

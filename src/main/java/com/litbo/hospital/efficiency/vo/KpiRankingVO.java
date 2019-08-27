@@ -19,10 +19,10 @@ public class KpiRankingVO {
     /** kpi对应的比率 */
     private Double ratio;
 
-    /** 排名 */
+    /** 本次排名 */
     private Integer ranking;
 
-    /**  */
+    /** 上次排名 */
     private Integer oldRanking;
 
     /** 排名变化 */

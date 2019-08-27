@@ -6,6 +6,7 @@ import com.litbo.hospital.common.utils.calculate.Efficiency;
 import com.litbo.hospital.efficiency.dao.IdlTimeDAO;
 import com.litbo.hospital.efficiency.service.IdlTimeService;
 import com.litbo.hospital.efficiency.vo.IdlTimeVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,9 +50,9 @@ public class IdlTimeServiceImpl implements IdlTimeService {
     }
 
     @Override
-    public PageInfo selectIdlTimeByCon(int pageNum, int pageSize, IdlTimeVO idlTimeVO) {
+    public PageInfo selectIdlTimeByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<IdlTimeVO> idlTimeVOS = idlTimeDAO.selectIdlTimeByCon(idlTimeVO);
+        List<IdlTimeVO> idlTimeVOS = idlTimeDAO.selectIdlTimeByCon(searchVO);
         return new PageInfo(handData(idlTimeVOS));
     }
 }

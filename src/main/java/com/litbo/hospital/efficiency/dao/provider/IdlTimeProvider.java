@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.dao.provider;
 
 import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.efficiency.vo.IdlTimeVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -39,7 +40,7 @@ public class IdlTimeProvider {
         return sql;
     }
 
-    public String selectIdlTimeByCon(IdlTimeVO idlTimeVO){
+    public String selectIdlTimeByCon(SearchVO searchVO){
 
         StringBuilder sql = new StringBuilder("SELECT MAX\n" +
                 "( info.eq_sbbh ) AS eqCode,\n" +
@@ -60,24 +61,23 @@ public class IdlTimeProvider {
                 "AND app.eq_mac_id = mac.MacID\n" +
                 "AND insp.NewStatus = '02' ");
 
-        if (StringUtils.isNotBlank(idlTimeVO.getBmSName())){
-            sql.append("AND info.eq_name LIKE '%"+idlTimeVO.getEqSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getBmSName())){
+            sql.append("AND info.eq_name LIKE '%"+searchVO.getEqSName()+"%'");
         }
 
-        if (StringUtils.isNotBlank(idlTimeVO.getBmSName())){
-            sql.append("AND bm.bm_name LIKE '%"+idlTimeVO.getEqSName()+"%'");
+        if (StringUtils.isNotBlank(searchVO.getBmSName())){
+            sql.append("AND bm.bm_name LIKE '%"+searchVO.getEqSName()+"%'");
         }
 
-        if (idlTimeVO.getStartSTime()==null||idlTimeVO.getEndSTime()==null){
+        if (searchVO.getStartSTime()==null||searchVO.getEndSTime()==null){
             sql.append("AND DATEDIFF(MONTH, insp.CerateTime, '2018-11-02') = 0");
         }
 
-        if (idlTimeVO.getStartSTime()!=null&&idlTimeVO.getEndSTime()!=null){
-            sql.append("AND insp.CerateTime BETWEEN"+ HandleData.changeDate(idlTimeVO.getStartSTime())+" AND "+HandleData.changeDate(idlTimeVO.getEndSTime()) );
+        if (searchVO.getStartSTime()!=null&&searchVO.getEndSTime()!=null){
+            sql.append("AND insp.CerateTime BETWEEN"+ searchVO.getStartSTime()+" AND "+searchVO.getEndSTime());
         }
 
         sql.append("GROUP BY insp.MachineNumber");
-
 
         return sql.toString();
     }

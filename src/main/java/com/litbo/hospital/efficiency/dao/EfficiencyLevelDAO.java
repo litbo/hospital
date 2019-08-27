@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.dao;
 
 import com.litbo.hospital.efficiency.dao.provider.EfficiencyLevelProvider;
 import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 
@@ -24,10 +25,10 @@ public interface EfficiencyLevelDAO {
 
     /**
      * 按条件搜索的效率等级
-     * @param levelVO 搜索的条件
+     * @param searchVO 搜索的条件
      * @return 返回信息
      */
     @SelectProvider(type = EfficiencyLevelProvider.class,method = "selectLevelByCon")
-    List<EfficiencyLevelVO> selectLevelByCon(EfficiencyLevelVO levelVO);
+    List<EfficiencyLevelVO> selectLevelByCon(SearchVO searchVO);
 
 }
