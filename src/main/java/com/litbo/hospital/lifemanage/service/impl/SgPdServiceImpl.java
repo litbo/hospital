@@ -8,7 +8,6 @@ import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
-import io.swagger.models.auth.In;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +25,25 @@ public class SgPdServiceImpl implements SgPdSeverice {
     private SgPlanMapper sgPlanMapper;
 
     /**
-     * 插入盘点扫描到的所有编号
+     * 插入盘点的计划id和操作人id
+     * @param record
+     * @return
+     */
+    @Override
+    public int insertJhCz(SgPdVO record){
+        SgPd sgPd = new SgPd();
+        BeanUtils.copyProperties(record, sgPd);
+        int successCount = 0;
+        if((record.getPdJhid()!=null) && (record.getPdCzr()!=null)){
+            sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
+            sgPdMapper.insertPdId(sgPd);
+            successCount++;
+        }
+        return successCount;
+    }
+
+    /**
+     * 插入盘点扫描到的所有编号和盘点时间
      *
      * @param record
      */
@@ -36,18 +53,20 @@ public class SgPdServiceImpl implements SgPdSeverice {
         BeanUtils.copyProperties(record, sgPd);
         int successCount = 0;
         for (String pdScanId : record.getPid()) {
-            if (StringUtils.isBlank(pdScanId)) {
-                continue;
+            for (String pdScsj : record.getPdScsj()) {
+                if (StringUtils.isBlank(pdScanId)) {
+                    continue;
+                }
+                String selectId = sgPdMapper.selectScanId(pdScanId);
+                if (StringUtils.isNotBlank(selectId)) {
+                    continue;
+                }
+                sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
+                sgPd.setPdScanId(pdScanId);
+                sgPd.setPdScsj(pdScsj);
+                sgPdMapper.insertPdId(sgPd);
+                successCount++;
             }
-            String selectId = sgPdMapper.selectScanId(pdScanId);
-            if (StringUtils.isNotBlank(selectId)) {
-                continue;
-            }
-            sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
-            sgPd.setPdScanId(pdScanId);
-            sgPd.setPdScsj(new Date());
-            sgPdMapper.insertPdId(sgPd);
-            successCount++;
         }
         return successCount;
     }

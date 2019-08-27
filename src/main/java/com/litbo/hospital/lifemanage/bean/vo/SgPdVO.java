@@ -12,4 +12,5 @@ public class SgPdVO {
 
     private List<String> pid;
 
+    private List<String> pdScsj;
 }

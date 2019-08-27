@@ -17,9 +17,9 @@ public interface SgPdMapper {
      * @return
      */
     @Insert({
-            "insert into sg_pd (pd_id ,pd_scan_id, pd_czr, pd_jgid )",
-            "values (#{pdId,jdbcType=VARCHAR},#{pdScanId,jdbcType=VARCHAR}," +
-                    "#{pdCzr,jdbcType=VARCHAR},#{pdJgid,jdbcType=VARCHAR})"})
+            "insert into sg_pd (pd_id ,pd_scan_id, pd_scsj, pd_czr, pd_jhid )",
+            "values (#{pdId,jdbcType=VARCHAR},#{pdScanId,jdbcType=VARCHAR},#{pdScsj ,jdbcType=VARCHAR}," +
+                    "#{pdCzr,jdbcType=VARCHAR},#{pdJhid,jdbcType=VARCHAR})"})
     int insertPdId(SgPd record);
 
     /**
