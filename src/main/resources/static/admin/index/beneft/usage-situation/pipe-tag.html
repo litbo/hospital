@@ -37,9 +37,9 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
-                    <div class="layui-input-inline">
-                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
-                    </div>
+<!--                    <div class="layui-input-inline">-->
+<!--                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">-->
+<!--                    </div>-->
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
 
                         <select name="bmSName" lay-filter="select" lay-search="">
@@ -126,7 +126,7 @@
             reSet: {
                 url: "/kpi/integrity/selectIntegrityByCon",
                 type: "search",
-                data: ["startSTime","bmSName", "eqSName"],     //搜索框的name
+                data: ["bmSName", "eqSName"],     //搜索框的name
                 where: {}
             }
         }

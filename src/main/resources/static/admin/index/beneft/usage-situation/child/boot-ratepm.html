@@ -49,9 +49,7 @@
                 ,{field: 'ratio', title: 'Kpi对应比率',minWidth: 150}
                 ,{field: 'ranking', title: '本次排名', minWidth: 150,sort:true}
                 ,{field: 'oldRanking', title: '上次排名', minWidth: 150,sort:true}
-                ,{field: 'change', title: '排名变化', minWidth: 150,sort:true,templet: function(d){
-        return d.expired == "1" ? "↑" : "↓";
-    }}
+                ,{field: 'change', title: '排名变化', minWidth: 150,sort:true,templet: '#status'}
             ]]
             , height: "full-25"
             , url: "/kpi/ranking/selectChangeOpen"
@@ -71,7 +69,14 @@
         },
     }
 </script>
-
+<script type="text/html" id="status">
+    var change={{change}}
+              {{#  if(d.status === 1 ){}}
+                 <span style="color: #00a0e9">↓</span>
+              {{#  } else { }}
+               <span style="color:red ">"1"1</span>
+              {{#  } }}
+</script>
 </body>
 </html>
 
