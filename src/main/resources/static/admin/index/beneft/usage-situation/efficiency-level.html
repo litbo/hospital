@@ -37,11 +37,11 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
                     <div class="layui-input-inline">
-                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
+                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   >
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
 
-                        <select name="BMSName" lay-filter="select" lay-search="">
+                        <select name="bmSName" lay-filter="select" lay-search="">
                             <option value="">请选择科室</option>
 
                         </select>
@@ -50,11 +50,21 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="eqSName" lay-search="">
                             <option value="">请选择设备</option>
-                            <option value="1">CT室</option>
-                            <option value="2">核磁公正室</option>
-                            <option value="3">摄片室</option>
-                            <option value="4">内外导管室</option>
-                            <option value="5">心外ICU</option>
+                            <option>CT室</option>
+                            <option>核磁公正室</option>
+                            <option >摄片室</option>
+                            <option >内外导管室</option>
+                            <option >心外ICU</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="searchLevel" lay-search="">
+                            <option value="">请选择等级</option>
+                            <option>超负荷运转</option>
+                            <option>高效运转</option>
+                            <option>中效运转</option>
+                            <option>低效运转</option>
+                            <option>长期闲置</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -83,7 +93,7 @@
                 filter: "select",
                 select: [
                     {
-                        ids: "bmId",
+
                         text: "bmName",
                         url: "/supervise/bmgl/listBm"
                     }
@@ -92,10 +102,10 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {field: 'equip_number', title: '设备编号', width: "30%", minWidth: 150}
-                    , {field: 'equip_name', title: '设备名称', width: "30%", minWidth: 150}
-                    , {field: 'utilization-ratio', title: '机时利用率', minWidth: 150, sort: true}
-                    , {field: 'eff-level', title: '效率等级', minWidth: 150, sort: true}
+                    {field: 'eqCode', title: '设备编号', width: "30%", minWidth: 150}
+                    , {field: 'eqName', title: '设备名称', width: "30%", minWidth: 150}
+                    , {field: 'eqUsing', title: '机时利用率', minWidth: 150, sort: true}
+                    , {field: 'efficiencyLevel', title: '效率等级', minWidth: 150, sort: true}
                 ]]
                 , url: "/level/show/selectLevel"
                 , method: "POST"
@@ -128,7 +138,7 @@
                 reSet: {
                     url: "/level/show/selectLevelByCon",
                     type: "search",
-                    data: ["startSTime","bmSName", "eqSName"],     //搜索框的name
+                    data: ["startSTime","bmSName", "eqSName","searchLevel"],     //搜索框的name
                     where: {}
                 }
             }

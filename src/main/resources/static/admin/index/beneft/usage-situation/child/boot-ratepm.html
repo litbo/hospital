@@ -52,7 +52,7 @@
                 ,{field: 'change', title: '排名变化', minWidth: 150,sort:true,templet: '#status'}
             ]]
             , height: "full-25"
-            , url: "/kpi/ranking/selectChangeOpen"
+            , url: "/kpi/ranking/selectChangeOpen "
             , method: "POST"
             , request: {
                 pageName: 'pageNum',
@@ -74,7 +74,7 @@
               {{#  if(d.status === 1 ){}}
                  <span style="color: #00a0e9">↓</span>
               {{#  } else { }}
-               <span style="color:red ">"1"1</span>
+               <span style="color:red ">↑</span>
               {{#  } }}
 </script>
 </body>

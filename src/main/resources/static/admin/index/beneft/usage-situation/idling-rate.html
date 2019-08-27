@@ -101,7 +101,7 @@
                     , {field: 'rating', title: '空转率', minWidth: 150, sort: true}
                     , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
                 ]]
-                , url: "/kpi/idling/selectOpen"
+                , url: "/kpi/idling/selectIdling"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
@@ -123,9 +123,8 @@
                             title: "排名",
                             area: ['100%','70%'],
                             event: "king",
-                            content: "./child/boot-ratepm.html"
-                        },
-                        ]
+                            content: "./child/idling-ratepm.html"
+                        }]
                     })
                 }
             },
