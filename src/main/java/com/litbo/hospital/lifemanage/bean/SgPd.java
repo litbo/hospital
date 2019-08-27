@@ -17,7 +17,7 @@ public class SgPd {
     /**
      *盘点上传时间
      */
-    private Date pdScsj;
+    private String pdScsj;
     /**
      *盘点操作人
      */
