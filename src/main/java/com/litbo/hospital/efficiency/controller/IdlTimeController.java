@@ -34,6 +34,7 @@ public class IdlTimeController {
                                      @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
                                      SearchVO searchVO){
 
+        searchVO = HandleData.handleSearch(searchVO);
         if (searchVO.getStartSTime()!=null){
             String[] strings = HandleData.splitTime(searchVO.getStartSTime());
             searchVO.setStartSTime(strings[0]);

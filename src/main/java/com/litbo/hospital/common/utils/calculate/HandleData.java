@@ -1,5 +1,6 @@
 package com.litbo.hospital.common.utils.calculate;
 
+import com.litbo.hospital.efficiency.bean.LevelBean;
 import com.litbo.hospital.efficiency.vo.SearchVO;
 
 import java.math.BigDecimal;
@@ -19,6 +20,12 @@ public class HandleData {
         return split[0];
     }
 
+    public static LevelBean judge(LevelBean levelBean){
+
+
+
+        return levelBean;
+    }
 
     public static String changeDate(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

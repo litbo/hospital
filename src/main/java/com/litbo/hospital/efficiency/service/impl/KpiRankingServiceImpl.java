@@ -23,6 +23,7 @@ public class KpiRankingServiceImpl implements KpiRankingService {
      *  KpiRankingVO
      *  status: 0：月，2：日
      *  DataStatus：1：开机率，2：机时利用率，3：空转率，4：工作日闲置时间，5：完好率
+     *  空转率3 机时利用率为1 单位日
      */
 
     /**

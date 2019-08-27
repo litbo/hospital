@@ -45,6 +45,8 @@ public class UsingServiceImpl implements UsingService {
     @Override
     public PageInfo selectUsing(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
+        Integer integer = usingDAO.deleteUsing();
+        Integer integer1 = usingDAO.updateUsing();
         List<UsingVO> usingVOS = usingDAO.selectUsing();
         return new PageInfo(handleData(usingVOS));
     }
@@ -52,7 +54,9 @@ public class UsingServiceImpl implements UsingService {
     @Override
     public PageInfo selectUsingByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<UsingVO> usingVOS = usingDAO.selectUsingByCon(searchVO);
-        return new PageInfo(handleData(usingVOS));
+        Integer integer = usingDAO.deleteUsing();
+        Integer integer1 = usingDAO.updateUsingByCon(searchVO);
+        List<UsingVO> vos = usingDAO.selectUsing();
+        return new PageInfo(handleData(vos));
     }
 }

@@ -12,10 +12,14 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class OpenProvider {
 
-    public String selectOpen(){
+    public String updateOpen(){
 
-        StringBuilder sql = new StringBuilder("SELECT \n" +
-                "many.eqCode,many.eqName,less.realDays,many.workDays\n" +
+        StringBuilder sql = new StringBuilder("INSERT INTO kpi_open(eqCode,eqName,realDays,workDays)\n" +
+                "SELECT\n" +
+                "many.eqCode,\n" +
+                "many.eqName,\n" +
+                "less.realDays,\n" +
+                "many.workDays \n" +
                 "FROM\n" +
                 "(\n" +
                 "SELECT MAX\n" +
@@ -26,10 +30,8 @@ public class OpenProvider {
                 "dbo.eq_info\n" +
                 "INNER JOIN dbo.eq_mac_tab ON dbo.eq_info.eq_id = dbo.eq_mac_tab.EquID\n" +
                 "INNER JOIN dbo.approved_working_hours ON dbo.approved_working_hours.eq_mac_id = dbo.eq_mac_tab.MacID\n" +
-                "INNER JOIN dbo.InspectDetail ON dbo.InspectDetail.MachineNumber = dbo.eq_mac_tab.PMacID \n" +
-                "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
-//                "WHERE\n" +
-//                "dbo.approved_working_hours.rating_type = '2' \n" +
+                "INNER JOIN dbo.InspectDetail ON dbo.InspectDetail.MachineNumber = dbo.eq_mac_tab.PMacID\n" +
+                "INNER JOIN dbo.s_bm ON dbo.eq_info.eq_bmid = dbo.s_bm.bm_id \n" +
                 "GROUP BY\n" +
                 "dbo.eq_info.eq_sbbh \n" +
                 ") AS many,\n" +
@@ -44,7 +46,6 @@ public class OpenProvider {
                 "dbo.InspectDetail \n" +
                 "WHERE\n" +
                 "DATEDIFF( MONTH, CerateTime, '2018-11-02' ) = 0 \n" +
-                "\n" +
                 "GROUP BY\n" +
                 "dbo.InspectDetail.InspectDate \n" +
                 ") AS num \n" +
@@ -53,9 +54,10 @@ public class OpenProvider {
         return sql.toString();
     }
 
-    public String selectOpenByCon(SearchVO searchVO){
+    public String updateOpenByCon(SearchVO searchVO){
 
-        StringBuilder sql = new StringBuilder("SELECT \n" +
+        StringBuilder sql = new StringBuilder("INSERT INTO kpi_open(eqCode,eqName,realDays,workDays)\n" +
+                "SELECT \n" +
                 "many.eqCode,many.eqName,less.realDays,many.workDays\n" +
                 "FROM\n" +
                 "(\n" +
@@ -109,7 +111,7 @@ public class OpenProvider {
                 "dbo.InspectDetail.InspectDate \n" +
                 ") AS num \n" +
                 ") AS less");
-        
+
         return sql.toString();
     }
 
