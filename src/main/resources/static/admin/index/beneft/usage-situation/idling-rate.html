@@ -36,27 +36,30 @@
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane maxCont" action="">
-
+                <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
                     <div class="layui-input-inline">
-                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   readonly="readonly">
+                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
+
                         <select name="bmSName" lay-filter="select" lay-search="">
                             <option value="">请选择科室</option>
+
+                        </select>
+
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="eqSName" lay-search="">
+                            <option value="">请选择设备</option>
+                            <option >CT室</option>
+                            <option >核磁公正室</option>
+                            <option >摄片室</option>
+                            <option >内外导管室</option>
+                            <option >心外ICU</option>
+                            <option>设备管理测试设备2</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="eqSName"  lay-search="">
-                            <option value="">设备名称</option>
-                            <option >脉搏碳氧血氧测量仪</option>
-                            <option >光疗设备</option>
-                            <option >耳鼻喉综合治疗台(豪华)</option>
-                            <option >设备柜</option>
-                            <option >监护仪(母婴监护系统主机)</option>
-                        </select>
-                    </div>
-                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn" type="button" data-type="search">查找</button>
                     </div>
                     <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king" >排名变化</a>
@@ -98,8 +101,7 @@
                     , {field: 'rating', title: '空转率', minWidth: 150, sort: true}
                     , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
                 ]]
-                , height: "full-25"
-                , url: "/kpi/open/selectOpen"
+                , url: "/kpi/idling/selectOpen"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
@@ -119,21 +121,24 @@
                             type: 2,
                             tool: "toolbar",
                             title: "排名",
-                            area: ['100%', '70%'],
+                            area: ['100%','70%'],
                             event: "king",
-                            content: "./child/idling-ratepm.html"
-                        }]
+                            content: "./child/boot-ratepm.html"
+                        },
+                        ]
                     })
                 }
             },
             reSet: {
-                url: "/kpi/open/selectOpenByCon",
+                url: "/kpi/idling/selectIdlingByCon",
                 type: "search",
                 data: ["startSTime","bmSName", "eqSName"],     //搜索框的name
                 where: {}
             }
         }
+
     }
 </script>
+
 </body>
 </html>
