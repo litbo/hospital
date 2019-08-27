@@ -70,7 +70,6 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <button class="layui-btn" type="button" data-type="search">查找</button>
                     </div>
-                    <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king" >排名变化</a>
                 </form>
 
             </div>
@@ -123,16 +122,6 @@
                 }
 
                 , done: function (obj) {
-                        tableFunc({
-                            "toolFunc":[{
-                                type: 2,
-                                tool: "toolbar",
-                                title: "排名",
-                                area: ['100%','70%'],
-                                event: "king",
-                                content: "./child/efficiency-levelpm.html"
-                            }]
-                        })
                     }
                 },
                 reSet: {
