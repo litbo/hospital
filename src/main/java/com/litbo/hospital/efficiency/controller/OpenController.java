@@ -32,29 +32,7 @@ public class OpenController {
                              @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize){
         return Result.success(openService.selectOpen(pageNum, pageSize));
     }
-
-    /**@RequestMapping("/selectOpenByCon")
-    public Result selectOpenByCon(@RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,
-                                  @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
-                                  @RequestParam(value = "Time",required = false) String time,
-                                  @RequestParam(value = "bmName",required = false) String bmName,
-                                  @RequestParam(value = "eqName",required = false) String eqName) throws ParseException {
-
-        System.out.println(time);
-        System.out.println(bmName);
-        System.out.println(eqName);
-        OpenVO openVO = new OpenVO();
-        System.out.println(time);
-        if (time!=null){
-            String[] strings = HandleData.splitTime(time);
-            openVO.setStartSTime(HandleData.turnDate(strings[0]));
-            openVO.setEndSTime(HandleData.turnDate(strings[1]));
-        }
-        openVO.setBmSName(bmName);
-        openVO.setEqSName(eqName);
-        System.out.println(openVO);
-        return Result.success(openService.selectOpenByCon(pageNum, pageSize, openVO));
-    }*/
+    
 
     @RequestMapping("/selectOpenByCon")
     public Result selectOpenByCon(@RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,

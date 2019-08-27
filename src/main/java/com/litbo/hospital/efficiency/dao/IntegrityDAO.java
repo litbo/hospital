@@ -3,8 +3,7 @@ package com.litbo.hospital.efficiency.dao;
 import com.litbo.hospital.efficiency.dao.provider.IntegrityProvider;
 import com.litbo.hospital.efficiency.vo.IntegrityVO;
 import com.litbo.hospital.efficiency.vo.SearchVO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,18 +16,32 @@ import java.util.List;
 public interface IntegrityDAO {
 
     /**
-     * 设备的完好率
-     * @return 设备的完好率
+     * 查询设备的完好率并插入中间表
+     * @return 插入的行数
      */
-    @SelectProvider(type = IntegrityProvider.class,method = "selectIntegrity")
+    @UpdateProvider(type = IntegrityProvider.class,method = "selectIntegrity")
+    Integer updateIntegrity();
+
+    /**
+     * 查询中间表的数据
+     * @return  设备的完好率
+     */
+    @Select("SELECT *FROM dbo.kpi_integrity")
     List<IntegrityVO> selectIntegrity();
+
+    /**
+     * 删除中间表的数据
+     * @return  删除的行数
+     */
+    @Delete("DELETE FROM dbo.kpi_integrity")
+    Integer deleteIntegrity();
 
     /**
      * 按条件搜索设备的完好率
      * @param searchVO 设备的完好率条件
      * @return 设备的完好率
      */
-    @SelectProvider(type = IntegrityProvider.class,method = "selectIntegrityByCon")
-    List<IntegrityVO> selectIntegrityByCon(SearchVO searchVO);
+    @UpdateProvider(type = IntegrityProvider.class,method = "selectIntegrityByCon")
+    Integer updateIntegrityByCon(SearchVO searchVO);
 
 }

@@ -13,7 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 public class IdlingProvider {
 
     public String selectIdling(){
-        String sql = "SELECT\n" +
+        String sql = "INSERT INTO kpi_idling(eqCode,eqJc,workTimes,idleTimes)\n"+
+                "SELECT\n" +
                 "works.eqCode,works.eqJc,works.workTimes,idles.idleTimes\n" +
                 "FROM\n" +
                 "(\n" +
@@ -70,12 +71,12 @@ public class IdlingProvider {
                 ") AS idles\n" +
                 "WHERE works.eqCode = idles.eqCode";
 
-
         return sql;
     }
 
     public String selectIdlingByCon(SearchVO searchVO){
-        StringBuilder sql = new StringBuilder("SELECT\n" +
+        StringBuilder sql = new StringBuilder("INSERT INTO kpi_idling(eqCode,eqJc,workTimes,idleTimes)\n"+
+                "SELECT\n" +
                 "works.eqCode,works.eqJc,works.workTimes,idles.idleTimes\n" +
                 "FROM\n" +
                 "(\n" +

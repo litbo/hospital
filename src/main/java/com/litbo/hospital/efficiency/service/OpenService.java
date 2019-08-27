@@ -13,18 +13,18 @@ public interface OpenService {
 
     /**
      * 默认搜索上个月设备的开机率
-     * @param pageNum
-     * @param pageSize
-     * @return
+     * @param pageNum   页码
+     * @param pageSize  大小
+     * @return  设备的开机率
      */
     PageInfo selectOpen(int pageNum, int pageSize);
 
     /**
      * 按条件搜索设备的开机率
-     * @param pageNum
-     * @param pageSize
-     * @param searchVO
-     * @return
+     * @param pageNum   页码
+     * @param pageSize  大小
+     * @param searchVO  设备的开机率
+     * @return  设备的开机率
      */
     PageInfo selectOpenByCon(int pageNum, int pageSize, SearchVO searchVO);
 

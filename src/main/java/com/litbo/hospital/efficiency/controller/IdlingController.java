@@ -33,6 +33,7 @@ public class IdlingController {
     public Result selectIdlingByCon(@RequestParam(value = "pageNUm", required = false, defaultValue = "1") int pageNum,
                                     @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                     SearchVO searchVO) {
+        searchVO = HandleData.handleSearch(searchVO);
         if (searchVO.getStartSTime()!=null){
             String[] strings = HandleData.splitTime(searchVO.getStartSTime());
             searchVO.setStartSTime(strings[0]);

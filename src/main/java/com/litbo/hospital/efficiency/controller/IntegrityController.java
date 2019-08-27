@@ -1,6 +1,7 @@
 package com.litbo.hospital.efficiency.controller;
 
 
+import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.efficiency.service.IntegrityService;
 import com.litbo.hospital.efficiency.vo.IntegrityVO;
 import com.litbo.hospital.efficiency.vo.SearchVO;
@@ -40,6 +41,12 @@ public class IntegrityController {
                                        @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
                                        SearchVO searchVO){
 
+        searchVO = HandleData.handleSearch(searchVO);
+        if (searchVO.getStartSTime()!=null){
+            String[] strings = HandleData.splitTime(searchVO.getStartSTime());
+            searchVO.setStartSTime(strings[0]);
+            searchVO.setEndSTime(strings[1]);
+        }
         return Result.success(integrityService.selectIntegrityByCon(pageNum, pageSize, searchVO));
     }
 

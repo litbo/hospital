@@ -76,8 +76,6 @@ public class KpiRankingProvider {
                 "one.eqName = two.eqName \n" +
                 "AND one.eqCode = two.eqCode");
 
-        System.out.println(sql);
-
         return sql.toString();
     }
 

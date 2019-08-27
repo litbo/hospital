@@ -47,6 +47,8 @@ public class IdlingServiceImpl implements IdlingService {
     @Override
     public PageInfo selectIdling(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
+        Integer integer = idlingDAO.deleteIdling();
+        Integer integer1 = idlingDAO.updateIdling();
         List<IdlingVO> idlingVOS = idlingDAO.selectIdling();
         return new PageInfo(handData(idlingVOS));
     }
@@ -54,7 +56,9 @@ public class IdlingServiceImpl implements IdlingService {
     @Override
     public PageInfo selectIdlingByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<IdlingVO> idlingVOS = idlingDAO.selectIdlingByCon(searchVO);
+        Integer integer = idlingDAO.deleteIdling();
+        Integer integer1 = idlingDAO.updateIdlingByCon(searchVO);
+        List<IdlingVO> idlingVOS = idlingDAO.selectIdling();
         return new PageInfo(handData(idlingVOS));
     }
 }

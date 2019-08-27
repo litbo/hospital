@@ -44,6 +44,8 @@ public class IntegrityServiceImpl implements IntegrityService {
     @Override
     public PageInfo selectIntegrity(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
+        Integer integer = integrityDAO.deleteIntegrity();
+        Integer integer1 = integrityDAO.updateIntegrity();
         List<IntegrityVO> integrityVOS = integrityDAO.selectIntegrity();
         return new PageInfo(handleIntegrity(integrityVOS));
     }
@@ -51,7 +53,9 @@ public class IntegrityServiceImpl implements IntegrityService {
     @Override
     public PageInfo selectIntegrityByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<IntegrityVO> integrityVOS = integrityDAO.selectIntegrityByCon(searchVO);
+        Integer integer = integrityDAO.deleteIntegrity();
+        Integer integer1 = integrityDAO.updateIntegrityByCon(searchVO);
+        List<IntegrityVO> integrityVOS = integrityDAO.selectIntegrity();
         return new PageInfo(handleIntegrity(integrityVOS));
     }
 }

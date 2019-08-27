@@ -1,5 +1,6 @@
 package com.litbo.hospital.efficiency.controller;
 
+import com.litbo.hospital.common.utils.calculate.HandleData;
 import com.litbo.hospital.efficiency.service.EfficiencyLevelService;
 import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
 import com.litbo.hospital.efficiency.vo.SearchVO;
@@ -33,6 +34,12 @@ public class EfficiencyLevelController {
     public Result selectLevelByCon(@RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,
                                    @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
                                    SearchVO searchVO){
+        searchVO = HandleData.handleSearch(searchVO);
+        if (searchVO.getStartSTime()!=null){
+            String[] strings = HandleData.splitTime(searchVO.getStartSTime());
+            searchVO.setStartSTime(strings[0]);
+            searchVO.setEndSTime(strings[1]);
+        }
 
         return Result.success(levelService.selectLevelByCon(pageNum, pageSize, searchVO));
     }

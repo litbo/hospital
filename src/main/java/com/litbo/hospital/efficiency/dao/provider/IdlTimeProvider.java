@@ -79,7 +79,6 @@ public class IdlTimeProvider {
 
         sql.append("GROUP BY insp.MachineNumber");
 
-
         return sql.toString();
     }
 

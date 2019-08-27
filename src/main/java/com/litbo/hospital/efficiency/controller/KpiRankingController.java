@@ -30,7 +30,7 @@ public class KpiRankingController {
     public Result selectChangeUsing(@RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,
                                     @RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize){
 
-        return Result.success(kpiRankingService.selectChangeOpen(pageNum, pageSize));
+        return Result.success(kpiRankingService.selectChangeUsing(pageNum, pageSize));
     }
 
     @RequestMapping("/selectChangeIdling")

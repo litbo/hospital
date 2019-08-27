@@ -45,14 +45,21 @@ public class OpenServiceImpl implements OpenService {
     @Override
     public PageInfo selectOpen(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
+        Integer integer = openDAO.deleteOpen();
+        Integer integer1 = openDAO.updateOpen();
         List<OpenVO> openVOS = openDAO.selectOpen();
+        System.out.println(openVOS);
         return new PageInfo(handleOpenData(openVOS));
     }
 
     @Override
     public PageInfo selectOpenByCon(int pageNum, int pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<OpenVO> openVOS = openDAO.selectOpenByCon(searchVO);
+
+        Integer integer1 = openDAO.deleteOpen();
+
+        Integer integer = openDAO.updateOpenByCon(searchVO);
+        List<OpenVO> openVOS = openDAO.selectOpen();
         return new PageInfo(handleOpenData(openVOS));
     }
 }

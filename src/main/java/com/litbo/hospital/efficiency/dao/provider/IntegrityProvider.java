@@ -16,7 +16,8 @@ public class IntegrityProvider {
      * @return 返回sql
      */
    public String selectIntegrity(){
-       StringBuilder sql = new StringBuilder("SELECT\n" +
+       StringBuilder sql = new StringBuilder("INSERT INTO kpi_integrity(eqName,usingNums,eqNums)\n"+
+               "SELECT\n" +
                "eqNum.eqName,\n" +
                "eqUsing.usingNums,\n" +
                "eqNum.eqNums \n" +
@@ -57,7 +58,8 @@ public class IntegrityProvider {
      */
    public String selectIntegrityByCon(SearchVO searchVO){
 
-       StringBuilder sql = new StringBuilder("SELECT\n" +
+       StringBuilder sql = new StringBuilder("INSERT INTO kpi_integrity(eqName,usingNums,eqNums)\n"+
+               "SELECT\n" +
                "eqNum.eqName,\n" +
                "eqUsing.usingNums,\n" +
                "eqNum.eqNums \n" +
@@ -71,7 +73,7 @@ public class IntegrityProvider {
                "INNER JOIN dbo.s_bm bm ON info.eq_bmid = bm.bm_id ");
 
        if (StringUtils.isNotBlank(searchVO.getBmSName())||StringUtils.isNotBlank(searchVO.getEqSName())){
-           sql.append("WHERE");
+           sql.append("WHERE ");
        }
 
        if (StringUtils.isNotBlank(searchVO.getBmSName())){
@@ -80,7 +82,11 @@ public class IntegrityProvider {
        }
 
        if (StringUtils.isNotBlank(searchVO.getEqSName())){
-           sql.append("AND info.eq_name IN ( SELECT eq_info.eq_name FROM eq_info WHERE eq_info.eq_name LIKE '%");
+           if (StringUtils.isNotBlank(searchVO.getBmSName())){
+               sql.append(" AND info.eq_name IN ( SELECT eq_info.eq_name FROM eq_info WHERE eq_info.eq_name LIKE '%");
+           }else {
+               sql.append(" info.eq_name IN ( SELECT eq_info.eq_name FROM eq_info WHERE eq_info.eq_name LIKE '%");
+           }
            sql.append(searchVO.getEqSName()+"%' )");
        }
 
@@ -103,7 +109,7 @@ public class IntegrityProvider {
        }
 
        if (StringUtils.isNotBlank(searchVO.getEqSName())){
-           sql.append("AND info.eq_name IN ( SELECT eq_info.eq_name FROM eq_info WHERE eq_info.eq_name LIKE '%");
+           sql.append(" AND info.eq_name IN ( SELECT eq_info.eq_name FROM eq_info WHERE eq_info.eq_name LIKE '%");
            sql.append(searchVO.getEqSName()+"%' )");
        }
 
