@@ -7,7 +7,6 @@ import java.util.Date;
 /*应急预案流程记录*/
 @Data
 public class YjyaLclog {
-    private String yjyaId;
 
     private String yjyaBh;
 

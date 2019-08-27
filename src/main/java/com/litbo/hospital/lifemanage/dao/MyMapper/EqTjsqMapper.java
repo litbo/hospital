@@ -5,7 +5,10 @@ import com.litbo.hospital.lifemanage.bean.Example.EqTjsqExample;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.*;
 import com.litbo.hospital.lifemanage.dao.provider.MyProvider.EqTjsqProvider;
 import org.apache.ibatis.annotations.*;
-import java.util.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EqTjsqMapper {
@@ -226,6 +229,8 @@ public interface EqTjsqMapper {
     @Select("select top 1 eq_name from eq_info where" +
             " eq_sbbh=#{bianhao} ")
     String selectZbNameByZbBh(String bianhao);
+
+
 
 
 }

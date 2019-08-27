@@ -53,7 +53,8 @@ public class SqYsService2impl implements SgYsService2 {
     public PageInfo<SgYsListVO> sgWaitLcYsList(Integer pageNum, Integer pageSize, String ksid, String htid) {
         PageHelper.startPage(pageNum,pageSize);
         List<SgYsListVO> vos = sgYsMapper2.sgWaitLcYsList(ksid, htid);
-        for (int i = 0; i < vos.size(); i++) {
+        int size = vos.size();
+        for (int i = 0; i < size; i++) {
             SgYsListVO vo = vos.get(i);
             String id = vo.getYsId();
             SgYs ys = sgYsMapper2.selectByPrimaryKey(id);
@@ -63,6 +64,7 @@ public class SqYsService2impl implements SgYsService2 {
             cal.add(Calendar.MONTH, 1);
             if (new Date().getTime() < cal.getTime().getTime()) {
                 vos.remove(i);
+                size=vos.size();
             }
         }
         return new PageInfo<>(vos);

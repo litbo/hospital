@@ -15,7 +15,7 @@ public class EqTjsqProvider {
         str = "insert into  eq_tjsq (id,tj_sqks,tj_zbmc," +
                 " tj_sqly,tj_drjbr,tj_sqsj,tj_sqtpgc,tj_sqlx,tj_sfyl,tj_czjg,tj_zhz, tj_drksurl)" +
                 " values(#{id,jdbcType=VARCHAR},#{tjSqks,jdbcType=VARCHAR},#{tjZbmc,jdbcType=VARCHAR},#{tjSqly,jdbcType=VARCHAR},#{tjDrjbr,jdbcType=VARCHAR}," +
-                " #{tjSqsj,jdbcType=DATE},#{tjSqtpgc,jdbcType=VARCHAR},#{tjSqlx,jdbcType=CHAR},#{tjSfyl,jdbcType=VARCHAR},#{tjCzjg,jdbcType=VARCHAR},#{tjZhz,jdbcType=VARCHAR},#{tjDrksurl,jdbcType=VARCHAR})";
+                " #{tjSqsj,jdbcType=DATE},#{tjSqtpgc,jdbcType=VARCHAR},#{tjSqlx,jdbcType=VARCHAR},#{tjSfyl,jdbcType=VARCHAR},#{tjCzjg,jdbcType=VARCHAR},#{tjZhz,jdbcType=VARCHAR},#{tjDrksurl,jdbcType=VARCHAR})";
         return str;
     }
 
@@ -97,7 +97,7 @@ public class EqTjsqProvider {
                 "      tj_czjg = #{tjCzjg,jdbcType=VARCHAR},\n" +
                 "      tj_dpdzt = #{tjDpdzt,jdbcType=VARCHAR},\n" +
                 "      tj_zhz = #{tjZhz,jdbcType=VARCHAR},\n" +
-                "      tj_sqlx = #{tjSqlx,jdbcType=CHAR},\n" +
+                "      tj_sqlx = #{tjSqlx,jdbcType=VARCHAR},\n" +
                 "      tj_drksurl=#{tjDrksurl,jdbcType=VARCHAR}" +
                 "    where id = #{id,jdbcType=VARCHAR}";
         return str;

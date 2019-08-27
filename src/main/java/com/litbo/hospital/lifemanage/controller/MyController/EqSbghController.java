@@ -7,6 +7,7 @@ import com.litbo.hospital.lifemanage.service.MyService.EqSbghService;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Date;
 
 @RestController
@@ -104,6 +105,7 @@ public class EqSbghController {
      * @Author: NCH
      * @Date: 2019/08/07 上午 11:02
      */
+
     @PostMapping("/updateEqsbghByPrimaryKey")
     public Result updateEqsbghByPrimaryKey(@RequestBody EqSbghVO vo) {
         int i = service.insertEqSbgh(vo);

@@ -6,7 +6,7 @@ import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqSbghVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqSbghZbVO;
 import org.apache.ibatis.annotations.*;
 
-import java.util.*;
+import java.util.List;
 
 @Mapper
 public interface EqSbghMapper {

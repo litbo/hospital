@@ -9,7 +9,7 @@ import com.litbo.hospital.lifemanage.bean.vo.MyVO.SbCsVO;
 import com.litbo.hospital.lifemanage.dao.provider.MyProvider.EqHtProvider;
 import org.apache.ibatis.annotations.*;
 
-import java.util.*;
+import java.util.List;
 
 @Mapper
 public interface EqHtMapper {

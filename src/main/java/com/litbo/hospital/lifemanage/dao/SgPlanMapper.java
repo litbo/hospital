@@ -37,6 +37,12 @@ public interface SgPlanMapper {
             "from sg_plan",
             "where id = #{id,jdbcType=VARCHAR}"
     })
+    @ConstructorArgs({
+            @Arg(column = "id", javaType = String.class, jdbcType = JdbcType.VARCHAR, id = true),
+            @Arg(column = "user_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+            @Arg(column = "bm_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+            @Arg(column = "plan_name", javaType = String.class, jdbcType = JdbcType.VARCHAR)
+    })
     SgPlan selectByPrimaryKey(String id);
 
     /**

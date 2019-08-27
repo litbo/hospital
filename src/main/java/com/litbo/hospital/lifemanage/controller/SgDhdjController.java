@@ -1,10 +1,8 @@
 package com.litbo.hospital.lifemanage.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.lifemanage.bean.SgDjhw;
 import com.litbo.hospital.lifemanage.bean.vo.DhdjksjsVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgDhdjVO;
-import com.litbo.hospital.lifemanage.dao.SgDjhwMapper;
 import com.litbo.hospital.lifemanage.service.SgDhdjService;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +21,6 @@ import java.util.List;
 public class SgDhdjController {
     @Autowired
     private SgDhdjService sgDhdjService;
-    @Autowired
-    private SgDjhwMapper djhwMapper;
 
     /**
      * 选择合同编号
@@ -119,18 +115,7 @@ public class SgDhdjController {
         PageInfo<List<SgDhdjVO>> info = sgDhdjService.selectDhdjAndDjhwBy(pageNum, pageSize, htid);
         return Result.success(info);
     }
-    @PostMapping("/selectDjhwById")
-    public Result selectDjhwById(String id) {
-        SgDjhw djhw=new SgDjhw();
-        List<String> list = djhwMapper.selectAllDjhwLogid();
-        if(list.contains(id)){
-            djhw = djhwMapper.selectDjhwLogById(id);
-        }
-        else{
-            djhw=djhwMapper.selectDjhwById(id);
-        }
-        return Result.success(djhw);
-    }
+
 
 
     @RequestMapping("/importdjhwimgurls")
