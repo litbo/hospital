@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.maintenance.dao.ConsumablesDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.maintenance.pojo.Consumables">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="maintenance_id" jdbcType="INTEGER" property="maintenanceId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="cycle" jdbcType="VARCHAR" property="cycle" />
+    <result column="expired" jdbcType="VARCHAR" property="expired" />
+    <result column="not_expired" jdbcType="VARCHAR" property="notExpired" />
+    <result column="date_of_activation" jdbcType="VARCHAR" property="dateOfActivation" />
+    <result column="change_date" jdbcType="VARCHAR" property="changeDate" />
+  </resultMap>
+  <insert id="insert" parameterType="com.litbo.hospital.maintenance.pojo.Consumables">
+    insert into hospital..consumables (maintenance_id, product_name,
+      "cycle", expired, not_expired, 
+      date_of_activation, change_date)
+    values (#{maintenanceId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR},
+      #{cycle,jdbcType=VARCHAR}, #{expired,jdbcType=VARCHAR}, #{notExpired,jdbcType=VARCHAR}, 
+      #{dateOfActivation,jdbcType=VARCHAR}, #{changeDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.maintenance.pojo.Consumables">
+    insert into hospital..consumables
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+     <if test="maintenanceId != null">
+        maintenance_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="cycle != null">
+        "cycle",
+      </if>
+      <if test="expired != null">
+        expired,
+      </if>
+      <if test="notExpired != null">
+        not_expired,
+      </if>
+      <if test="dateOfActivation != null">
+        date_of_activation,
+      </if>
+      <if test="changeDate != null">
+        change_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="maintenanceId != null">
+        #{maintenanceId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="expired != null">
+        #{expired,jdbcType=VARCHAR},
+      </if>
+      <if test="notExpired != null">
+        #{notExpired,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfActivation != null">
+        #{dateOfActivation,jdbcType=VARCHAR},
+      </if>
+      <if test="changeDate != null">
+        #{changeDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

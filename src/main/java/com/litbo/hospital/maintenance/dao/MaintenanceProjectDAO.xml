@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.maintenance.dao.MaintenanceProjectDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.maintenance.pojo.MaintenanceProject">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_type" jdbcType="VARCHAR" property="projectType" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="project_level" jdbcType="VARCHAR" property="projectLevel" />
+    <result column="standard" jdbcType="VARCHAR" property="standard" />
+    <result column="first_time" jdbcType="VARCHAR" property="firstTime" />
+    <result column="implementer_type" jdbcType="VARCHAR" property="implementerType" />
+    <result column="cycle" jdbcType="VARCHAR" property="cycle" />
+    <result column="cycle_unit" jdbcType="VARCHAR" property="cycleUnit" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+  </resultMap>
+  <insert id="insert" parameterType="com.litbo.hospital.maintenance.pojo.MaintenanceProject">
+    insert into hospital..maintenance_project (project_type, project_name,
+      project_level, "standard", first_time, 
+      implementer_type, "cycle", cycle_unit, 
+      "result")
+    values (#{projectType,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
+      #{projectLevel,jdbcType=VARCHAR}, #{standard,jdbcType=VARCHAR}, #{firstTime,jdbcType=VARCHAR}, 
+      #{implementerType,jdbcType=VARCHAR}, #{cycle,jdbcType=VARCHAR}, #{cycleUnit,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.maintenance.pojo.MaintenanceProject">
+    insert into hospital..maintenance_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectType != null">
+        project_type,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="projectLevel != null">
+        project_level,
+      </if>
+      <if test="standard != null">
+        "standard",
+      </if>
+      <if test="firstTime != null">
+        first_time,
+      </if>
+      <if test="implementerType != null">
+        implementer_type,
+      </if>
+      <if test="cycle != null">
+        "cycle",
+      </if>
+      <if test="cycleUnit != null">
+        cycle_unit,
+      </if>
+      <if test="result != null">
+        "result",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectType != null">
+        #{projectType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLevel != null">
+        #{projectLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null">
+        #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTime != null">
+        #{firstTime,jdbcType=VARCHAR},
+      </if>
+      <if test="implementerType != null">
+        #{implementerType,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleUnit != null">
+        #{cycleUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectById" resultType="integer" resultMap="BaseResultMap">
+    select * from hospital..maintenance_project where id = #{id}
+  </select>
+
+  <select id="getLastId" resultType="integer">
+    select max(id) from hospital..maintenance_project;
+  </select>
+</mapper>

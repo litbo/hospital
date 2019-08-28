@@ -166,6 +166,7 @@ public class MeteringDealProcessServiceImpl implements MeteringDealProcessServic
         util.setDescription("0");// 从流程中拿出去
         util.setThisMeteringTime(number.getEffectiveDate());  // 下次审计时间
         util.setMeteringGetNumberTime(number.getGetNumberTime());
+        util.setMeteringNum(number.getVerificationNumber()); // 检定编号
 
 
         int i = meteringUtilDAO.updateByPrimaryKey(util);
