@@ -44,6 +44,16 @@ public class IDFormat {
     }
 
 
+    /*预案编号生成专用*/
+    public  static String getIdByIDAndTime2(String dbName,String userId){
+        String endId = dbIdDao.getEndId(dbName,userId);
+        int id = 0;
+        if(endId != null&&endId.length()>=6){
+            String ids = endId.substring(12, endId.length());
+            id = Integer.parseInt(ids);
+        }
+        return getTime()+new DecimalFormat("000000").format(id+1);
+    }
     public static String getTime() {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyyMM");
