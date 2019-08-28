@@ -17,7 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 /*调剂请求*/
 @RestController
@@ -48,7 +49,11 @@ public class EqTjSqController {
         LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         sq.setTjSqks(sEmp.getBmId());
 //        sq.setTjSqks("0201000000");
-        return Result.success(service.insertTjDrSq(sq));
+        int i = service.insertTjDrSq(sq);
+        if(i==0){
+            return Result.error("请求失败");
+        }
+        return Result.success(i);
     }
 
     /*签字图片上传*/

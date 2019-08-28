@@ -1,6 +1,5 @@
 package com.litbo.hospital.lifemanage.service.impl.MyServiceImpl;
 
-import cn.hutool.db.Page;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
@@ -74,7 +73,7 @@ public class EqTjjjServiceimpl implements EqTjjjService {
             List<String> strings = new ArrayList<>();
             /*如果已经归还状态变为1为已经归还*/
             for (String str : list) {
-                strings= JSONArray.parseArray(str,String.class);
+                strings=JSONArray.parseArray(str,String.class);
                 if(strings.contains((String)array.get(i))){
                     zbVO.setSfgh(1);
                 }

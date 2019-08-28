@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.service.impl;
 
 import com.litbo.hospital.lifemanage.bean.SgDxyxzbkc;
 import com.litbo.hospital.lifemanage.bean.vo.SgDxyxzbkcVO;
+import com.litbo.hospital.lifemanage.dao.SgDxyxzbkcMapper;
 import com.litbo.hospital.lifemanage.dao.SgDxzbUserMapper;
 import com.litbo.hospital.lifemanage.dao.SgInfoMapper;
 import com.litbo.hospital.lifemanage.service.SgDxyxzbkcService;
@@ -25,7 +26,7 @@ import java.util.UUID;
 @Service
 public class SgDxyxzbkcServiceImpl implements SgDxyxzbkcService {
     @Autowired
-    private com.litbo.hospital.lifemanage.dao.SgDxyxzbkcMapper SgDxyxzbkcMapper;
+    private SgDxyxzbkcMapper SgDxyxzbkcMapper;
     @Autowired
     private SgDxzbUserMapper sgDxzbUserMapper;
     @Autowired

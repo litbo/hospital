@@ -78,6 +78,7 @@ public interface SgDjhwMapper {
      */
 
     @Select("SELECT\n" +
+            "dbo.sg_djhw.djhw_id,\n" +
             "dbo.sg_djhw.djhw_dw,\n" +
             "dbo.sg_djhw.djhw_bzxh,\n" +
             "dbo.sg_djhw.djhw_pp,\n" +
@@ -112,13 +113,4 @@ public interface SgDjhwMapper {
     /*根据记录表登记货物的djhw_id查询合同号*/
     @Select("select djhw_htid from sg_djhw_log where djhw_id=#{djhwid}")
      String selectHtIdByDjhwJlid(String djhwid);
-    /*根据登记货物id查询登记货物记录*/
-    @Select("select * from sg_djhw_log where djhw_id=#{djhwid}")
-    SgDjhw selectDjhwLogById(String djhwid);
-    /*根据登记货物id查询登记货物*/
-    @Select("select * from sg_djhw where djhw_id=#{djhwid}")
-    SgDjhw selectDjhwById(String djhwid);
-    /*查询登记货物记录表里面的所有登记货物id*/
-    @Select("select djhw_id from sg_djhw_log")
-    List<String> selectAllDjhwLogid();
 }

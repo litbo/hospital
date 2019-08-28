@@ -10,7 +10,8 @@ import com.litbo.hospital.lifemanage.bean.vo.SgYsListVO;
 import com.litbo.hospital.lifemanage.dao.provider.MyProvider.SgYsProvider;
 import org.apache.ibatis.annotations.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("ALL")
 @Mapper
@@ -142,6 +143,8 @@ public interface SgYsMapper2 {
             "<if test=\" htid != null and htid!=''\">" +
             "and sg_dhdj.ht_id like CONCAT('%',#{htid},'%') " +
             "</if>" +
+            "and sg_ys.ys_ysjg is null\n" +
+            "and sg_ys.ys_ysqrsj is null\n" +
             "and sg_ys.ys_syqkyj is not null\n" +
             "and sg_ys.ys_syqkyj not like ''\n" +
             "and sg_ys.ys_ysgcs !='' \n" +
@@ -208,7 +211,7 @@ public interface SgYsMapper2 {
             "inner join s_bm on s_bm.bm_id=sg_info.bm_id\n" +
             "where s_bm.bm_id=#{ksid}\n" +
             "and sg_ys.ys_ysgcs !=''\n" +
-            "and sg_ys_ysgcs is not null\n" +
+            "and sg_ys.ys_ysgcs is not null\n" +
             "<if test=\" htid != null and htid!=''\">" +
             "and sg_dhdj.ht_id like CONCAT('%',#{htid},'%') " +
             "</if>" +
@@ -246,6 +249,7 @@ public interface SgYsMapper2 {
     List<SgYsListVO> sgBenBmLcYsList(@Param("ksid") String ksid,
                                      @Param("htid") String htid,
                                      @Param("xnsb") String xnsb);
+
 
     /**查看本科室所有汇总验收记录*/
     @Select("<script>" +
