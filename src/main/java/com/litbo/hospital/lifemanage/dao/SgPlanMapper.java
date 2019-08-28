@@ -3,7 +3,6 @@ package com.litbo.hospital.lifemanage.dao;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.dao.provider.SgPlanSqlProvider;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.JdbcType;
 
 import java.util.Date;
 import java.util.List;
@@ -37,12 +36,12 @@ public interface SgPlanMapper {
             "from sg_plan",
             "where id = #{id,jdbcType=VARCHAR}"
     })
-    @ConstructorArgs({
-            @Arg(column = "id", javaType = String.class, jdbcType = JdbcType.VARCHAR, id = true),
-            @Arg(column = "user_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
-            @Arg(column = "bm_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
-            @Arg(column = "plan_name", javaType = String.class, jdbcType = JdbcType.VARCHAR)
-    })
+//    @ConstructorArgs({
+//            @Arg(column = "id", javaType = String.class, jdbcType = JdbcType.VARCHAR, id = true),
+//            @Arg(column = "user_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+//            @Arg(column = "bm_id", javaType = String.class, jdbcType = JdbcType.VARCHAR),
+//            @Arg(column = "plan_name", javaType = String.class, jdbcType = JdbcType.VARCHAR)
+//    })
     SgPlan selectByPrimaryKey(String id);
 
     /**
@@ -68,4 +67,19 @@ public interface SgPlanMapper {
             "WHERE\n" +
             "dbo.eq_info.eq_bmid = #{bmId,jdbcType=VARCHAR} AND dbo.eq_info.eq_sbbh IS NOT NULL")
     List<String> getEqIdByBmId(String bmId);
+
+    /**
+     * 查询所有的计划名字
+     * @return
+     */
+    @Select("select plan_name from sg_plan")
+    List<String> getplanName();
+
+    /**
+     * 根据计划名称查询计划id
+     * @return
+     */
+    @Select("select id from sg_plan where plan_name = #{planName,jdbcType=VARCHAR}")
+    String selectIdByName(String planName);
+
 }
