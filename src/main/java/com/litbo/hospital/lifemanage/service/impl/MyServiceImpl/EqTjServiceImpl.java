@@ -47,7 +47,7 @@ public class EqTjServiceImpl implements EqTjService {
         String sfyl = DelSpaceUtils.deleteSpace(showVO.getTjSfyl());
         String sfqbsl = DelSpaceUtils.deleteSpace(showVO.getTjSfqbsl());
         String sqlx = DelSpaceUtils.deleteSpace(showVO.getTjSqlx());
-        criteria.andTjSqlxLike(sqlx);
+        criteria.andTjSqlxLike("%"+sqlx+"%");
         if (StringUtils.isNotBlank(bmname)) {
             criteria.andBmNameLike(bmname);
         }

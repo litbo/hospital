@@ -85,8 +85,8 @@ public class EqTjSqController {
     }
 
     /*查询所有调剂申请,查询所有替换申请是另一个,还没写，改成show.setTjSqlx("1")即可*/
-    @PostMapping("/AllTjsg")
-    public Result AllTjsg(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+    @PostMapping("/AllTjsq")
+    public Result AllTjsq(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                           @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
                           @RequestParam(required = false, name = "bmName") String bmName,
                           @RequestParam(required = false, name = "tjQssj") String tjQssj,
