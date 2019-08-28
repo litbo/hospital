@@ -8,6 +8,7 @@ import com.litbo.hospital.efficiency.dao.EfficiencyLevelDAO;
 import com.litbo.hospital.efficiency.dao.LevelDAO;
 import com.litbo.hospital.efficiency.service.EfficiencyLevelService;
 import com.litbo.hospital.efficiency.vo.EfficiencyLevelVO;
+import com.litbo.hospital.efficiency.vo.LevelVO;
 import com.litbo.hospital.efficiency.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,10 @@ public class EfficiencyLevelServiceImpl implements EfficiencyLevelService {
     @Autowired
     private LevelDAO levelDAO;
 
-    public  List<EfficiencyLevelVO> getLevels(List<EfficiencyLevelVO> list){
-
+    public  List<EfficiencyLevelVO> getLevels(List<EfficiencyLevelVO> list,Integer using,Integer idling){
         list.forEach(item->{
-            item.setEfficiencyLevel(ReLevel.getLevel(HandleData.splitPercent(item.getEqUsing()),levelDAO));
-            System.out.println(item);
+            item.setEfficiencyLevel(ReLevel.getLevel(HandleData.splitPercent(item.getEqUsing()),using,idling));
         });
-
         return list;
     }
 
@@ -47,10 +45,12 @@ public class EfficiencyLevelServiceImpl implements EfficiencyLevelService {
      */
     @Override
     public PageInfo selectLevel(int pageNum, int pageSize) {
+        LevelVO levelVO = levelDAO.selectLevel();
+        Integer using = levelVO.getUsing();
+        Integer idling = levelVO.getIdling();
         PageHelper.startPage(pageNum, pageSize);
         List<EfficiencyLevelVO> vos = dao.selectLevel();
-        System.out.println(vos);
-        return new PageInfo(getLevels(vos));
+        return new PageInfo(getLevels(vos,using,idling));
     }
 
     /**
@@ -62,8 +62,11 @@ public class EfficiencyLevelServiceImpl implements EfficiencyLevelService {
      */
     @Override
     public PageInfo selectLevelByCon(int pageNum, int pageSize, SearchVO searchVO) {
+        LevelVO levelVO = levelDAO.selectLevel();
+        Integer using = levelVO.getUsing();
+        Integer idling = levelVO.getIdling();
         PageHelper.startPage(pageNum, pageSize);
         List<EfficiencyLevelVO> vos = dao.selectLevelByCon(searchVO);
-        return new PageInfo(getLevels(vos));
+        return new PageInfo(getLevels(vos,using,idling));
     }
 }

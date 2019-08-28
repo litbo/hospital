@@ -17,7 +17,7 @@ public interface LevelDAO {
      * 查询现在的效率设置数据
      * @return 返回效率等级
      */
-    @Select("select *from efficiency_level")
+    @Select("select * from efficiency_level")
     LevelVO selectLevel();
 
     /**

@@ -40,9 +40,7 @@ public class EfficiencyLevelController {
             searchVO.setStartSTime(strings[0]);
             searchVO.setEndSTime(strings[1]);
         }
-
         return Result.success(levelService.selectLevelByCon(pageNum, pageSize, searchVO));
     }
-
 
 }

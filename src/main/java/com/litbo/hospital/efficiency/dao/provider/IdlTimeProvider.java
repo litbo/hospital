@@ -74,7 +74,7 @@ public class IdlTimeProvider {
         }
 
         if (searchVO.getStartSTime()!=null&&searchVO.getEndSTime()!=null){
-            sql.append("AND insp.CerateTime BETWEEN"+ searchVO.getStartSTime()+" AND "+searchVO.getEndSTime());
+            sql.append("AND insp.CerateTime BETWEEN '"+ searchVO.getStartSTime()+"' AND '"+searchVO.getEndSTime()+"' ");
         }
 
         sql.append("GROUP BY insp.MachineNumber");
