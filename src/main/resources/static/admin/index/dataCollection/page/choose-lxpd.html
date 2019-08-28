@@ -23,8 +23,9 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
-                            <select name="pdJhid" lay-filter="pdJhid">
-                                <option value="">计划名称</option>
+                            <select name="planName" lay-filter="select" lay-search="">
+                                <option value="">请选择科室</option>
+
                             </select>
                         </div>
                     </div>
@@ -35,7 +36,7 @@
                        onclick="javascript:$('.file').click();" />
                 <input class="fileName" readonly style="height: 38px;outline: none;border:0;"/>
                 <input type="file" class="file" style="display: none;" id="selectFile" onchange="javascript:$('.fileName').val(this.files[0].name);" />
-                <button type="button" class="layui-btn" id="startUploadFile" lay-submit="" lay-filter="demo1"
+                <button type="button" class="layui-btn" name="startUploadFile2" id="startUploadFile" lay-submit="" lay-filter="demo1"
                         style="margin-top: 50px;margin-left: 0;display: block;">提交
                 </button>
             </form>
@@ -59,22 +60,17 @@
         //选完文件后不自动上传
         upload.render({
             elem: '#selectFile'
-            ,url: '/lifeManage/uploadPd'
+            // ,url: '/lifeManage/uploadPd'
             ,auto: false
             ,accept: 'file' //普通文件
             //,multiple: true
             ,bindAction: '#startUploadFile'
             ,done: function(res){
-                console.log(res)
+                // console.log(res)
             }
         });
-
         //监听提交
         form.on('submit(demo1)', function(data){
-            // layer.alert(JSON.stringify(data.field), {
-            //     title: '最终的提交信息'
-            // });
-
             $.ajax({
                 type: "POST",
                 dataType: 'json',
@@ -94,18 +90,17 @@
         });
     });
 
-    renderMod.form = {
+    renderMod.formAction = {
         val: {
-            filter: "forms",
+            filter: "select",
             select: [
                 {
-                    filter: "pdJhid",
-                    ids: "pdJhid",
-                    text: "pdScanList",
-                    url: "/lifeManage/selectPlan"
+
+                    text: "planName",
+                    url: "/lifeManage/selectPlan",
+                    type: "POST"
                 }
-            ]
-        }
+            ]}
     }
 </script>
 </body>
