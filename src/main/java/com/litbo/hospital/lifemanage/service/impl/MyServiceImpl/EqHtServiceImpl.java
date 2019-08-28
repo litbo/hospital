@@ -196,7 +196,7 @@ public class EqHtServiceImpl implements EqHtService {
     @Override
     public Integer addSbCs(SbCsVO vo) {
         vo.setSbcsId(UUID.randomUUID().toString());
-        vo.setSbCslbId("2");
+        vo.setSbCslbId("1");
         return mapper.addSbCs(vo);
     }
 
