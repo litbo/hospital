@@ -176,9 +176,15 @@
             "shiro": "SGGL",
             "children": [
               {
-                "title": "离线盘点",
-                "url": "./dataCollection/lxpd-table.html",
+                "title": "盘点同步",
+                "url": "./dataCollection/page/choose-lxpd.html",
                 "id": "2030",
+                "shiro": "KSSG"
+              },
+              {
+                "title": "盘点计划",
+                "url": "./dataCollection/lxpd-table.html",
+                "id": "2031",
                 "shiro": "KSSG"
               }
             ]
