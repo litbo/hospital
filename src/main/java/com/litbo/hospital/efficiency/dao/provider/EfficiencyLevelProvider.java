@@ -49,7 +49,9 @@ public class EfficiencyLevelProvider {
             }
 
             else if (HandleLevel.efficient(searchVO)){
-                sql.append("AND (CAST(k.ratio AS DECIMAL) <= 100 AND CAST(k.ratio AS DECIMAL) >= lev.using)\n");
+                sql.append("AND (CAST(k.ratio AS DECIMAL) <= 100 AND CAST(k.ratio AS DECIMAL) >= lev.[using])\n");
+//                sql.append("AND (CAST(k.ratio AS DECIMAL) <= 100) \n");
+//                sql.append("AND (CAST(k.ratio AS DECIMAL) >= lev.[using]) \n");
             }
             else if (HandleLevel.midEfficient(searchVO)){
                 sql.append("AND (CAST(k.ratio AS DECIMAL) < lev.[using] AND CAST(k.ratio AS DECIMAL) >= lev.idling)\n");

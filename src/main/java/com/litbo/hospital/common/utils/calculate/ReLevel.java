@@ -8,20 +8,19 @@ import org.springframework.stereotype.Component;
 public class ReLevel {
 
 
-    public static String getLevel(String using, LevelDAO levelDAO){
+    public static String getLevel(String using, Integer us,Integer idling){
 
         Double inFact = Double.valueOf(using);
 
-        LevelVO levelVO = levelDAO.selectLevel();
 
         if (inFact>100){
             return "超负荷运转";
         }
-        else if ( inFact <= 100 && inFact > levelVO.getUsing()){
+        else if ( inFact <= 100 && inFact >= us){
             return "高效运转";
-        }else if (inFact > levelVO.getIdling() && inFact <= levelVO.getUsing() ){
+        }else if (inFact >= idling && inFact < us ){
             return "中效运转";
-        }else if (inFact > 0 && inFact <= levelVO.getIdling()){
+        }else if (inFact > 0 && inFact < idling){
             return "低效运转";
         }else if (inFact == 0){
             return "长期闲置";
