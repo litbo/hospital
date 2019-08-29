@@ -24,8 +24,7 @@
                     <div class="layui-inline">
                         <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
                             <select name="planName" lay-filter="select" lay-search="">
-                                <option value="">请选择科室</option>
-
+                                <option value="">请选择操作人</option>
                             </select>
                         </div>
                     </div>
@@ -36,7 +35,7 @@
                        onclick="javascript:$('.file').click();" />
                 <input class="fileName" readonly style="height: 38px;outline: none;border:0;"/>
                 <input type="file" class="file" style="display: none;" id="selectFile" onchange="javascript:$('.fileName').val(this.files[0].name);" />
-                <button type="button" class="layui-btn" name="startUploadFile2" id="startUploadFile" lay-submit="" lay-filter="demo1"
+                <button type="button" class="layui-btn" id="startUploadFile" lay-submit="" lay-filter="demo1"
                         style="margin-top: 50px;margin-left: 0;display: block;">提交
                 </button>
             </form>
@@ -76,6 +75,11 @@
                 dataType: 'json',
                 url: '/lifeManage/insertSgPdId',
                 data: data,
+
+
+
+
+
                 success: function(data) {
                     if (data.code == '0'){
                         layui.layer.alert('保存成功!');

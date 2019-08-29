@@ -24,7 +24,7 @@
                             <div class="layui-form-item" >
                                 <label class="layui-form-label">利用率<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="using" lay-verify="required" class="layui-input" >
+                                    <input type="text" name="using" lay-verify="using" class="layui-input" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字，利用率最高为100">
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">闲置率<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="idling" lay-verify="required" class="layui-input" >
+                                    <input type="text" name="idling" lay-verify="idling"  class="layui-input" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字，闲置率最低为0">
                                 </div>
                             </div>
 
@@ -50,24 +50,55 @@
                     </div>
                 </form>
 <script>
+    var n = 0;
+    var m = 0;
     renderMod = {
         formAction: {
+            ver:{
+                using:function(value){
+                    if(value > 100){
+                        return '利用率最高为100';
+                    }
+
+                    n = value;
+                   /* console.log(m);*/
+                },
+                idling:function(value){
+                    /*if(value < n){
+                        console.log(n);
+                        console.log(value);
+                      /!*  return '利用率不能小于闲置率'*!/
+                    }*/
+                    if(Number(value) > Number(n)){
+                        console.log(1);
+                        return '利用率不能小于闲置率'
+                    }
+                    if(value < 0){
+                        return '闲置率最底为0';
+                    }
+
+
+                   /*  m = value;
+                       console.log(m)*/
+                }
+            },
             val: {
                 filter: "subb",
                 get: {
                     url: "/efficiency/level/selectLevel",
                     type: "POST",
-                    data: ["using", "idling"],
-                }
+                    data: ["using", "idling"]
+                },
             },
             submit: {
                 filter: "sub",
                 form: {
                     url: "/efficiency/level/updateLevel",
-                    data: ["using", "idling"],
+                    data: ["using","idling"],
                     type:"POST",
+                    reload:true
                 }
-            }
+            },
         }
     }
 </script>
