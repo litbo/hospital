@@ -43,7 +43,8 @@ import javax.sql.DataSource;
         "com.litbo.hospital.operational_data_monitoring.software_interface.timedtask",
         "com.litbo.hospital.security.specialequipment.dao",
         "com.litbo.hospital.efficiency.dao",
-        "com.litbo.hospital.efficiency.configratio.dao"},
+        "com.litbo.hospital.efficiency.configratio.dao",
+        "com.litbo.hospital.maintenance.dao"},
         sqlSessionTemplateRef = "SqlSessionTemplate1")
 public class MybatisConfigOne {
 
