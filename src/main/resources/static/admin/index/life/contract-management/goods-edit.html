@@ -27,29 +27,29 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
+    <!--<div class="addBtn">
         <a class="layui-btn layui-btn-sm " style="background: #CC0033" lay-event="del" id="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
-    </div>
+    </div>-->
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="htId" placeholder="合同编号" autocomplete="off">
+            <input class="layui-input" name="htid" placeholder="合同编号" autocomplete="off">
         </div>
         <div class="layui-inline">
-            <select class="layui-input" name="dhdjIsqbdh">
+            <select class="layui-input" name="htzt">
             <option value="" disabled selected hidden>到货情况</option>
-            <option value="0">全部到货</option>
-            <option value="1">未全部到货</option>
+            <option value="1">全部到货</option>
+            <option value="0">未全部到货</option>
             </select>
         </div>
-        <div class="layui-inline">
+       <!-- <div class="layui-inline">
             <input type="text" name="htQssj" class="layui-input" id="test1"
                    placeholder="开始日期">
         </div>
-        --
+        &#45;&#45;
         <div class="layui-inline">
             <input type="text" name="htJssj" class="layui-input" id="test2"
                    placeholder="结束日期">
-        </div>
+        </div>-->
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
 </script>
@@ -89,10 +89,10 @@
                         , {field: 'htId', title: '合同编号',sort:true}
                         , {field: 'dhdjIsqbdh', title: '到货情况',
                             templet: function (d) {
-                                if (d.dhdjIsqbdh == '0')
-                                    return '未全部到货';
-                                else if (d.dhdjIsqbdh == '1')
+                                if (d.dhdjIsqbdh == '1')
                                     return '全部到货';
+                                else if (d.dhdjIsqbdh == '0')
+                                    return '未全部到货';
                             }}
                         , {field: 'dhdjFhdw', title: '发货单位'}
                         , {field: 'dhdjShdw', title: '收货单位'}
@@ -101,9 +101,9 @@
                         , {title: '操作', align: 'center', toolbar: '#barDemo'}
                     ]]
                     , url: "/lifeManage/selectAllSgDhdjAndDjhw"
-                   /* , reload: true
-                    , data: ["htSbmc",  "htYf", "htQssj", "htJssj"]
-                    , contentType: "application/json"*/
+                    , reload: true
+                    , data: ["htSbmc",  "htYf"]
+                    // , contentType: "application/json"
                     , method: "POST"
                     , page: true
                     , request: {
@@ -129,22 +129,6 @@
                                     content: './child/goods-edit2.html',
                                     area: ['100%', '100%'],
                                     dataUrl: ["htId"]
-                                },
-                                {
-                                    send: {
-                                        id: "table",
-                                        filter: "table1",
-                                        name: "ids",
-                                        event: "del",
-                                        url: "/lifeManage/deleteLpjHt",
-                                        type: "POST",
-                                        contentType: "application/json",
-                                        par: "id",
-                                        reload: true
-                                    },
-                                    tool: "toolbar",
-                                    event: "del"
-
                                 }
                             ]
                         })
@@ -156,7 +140,7 @@
                     url: "/lifeManage/selectAllSgDhdjAndDjhw",
                     type: "reload",
                     tid: "table",
-                    data: ["htId", "dhdjIsqbdh", "htQssj", "htJssj"],
+                    data: ["htid", "htzt"],
                     method: "POST"
 
                 }

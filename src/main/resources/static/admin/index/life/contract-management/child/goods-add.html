@@ -52,6 +52,13 @@
             <!--            主设备产地-->
             <div class="layui-form-item">
                 <label class="layui-form-label">主设备产地</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwSccj" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--<div class="layui-form-item">
+                <label class="layui-form-label">主设备产地</label>
                 <div class="layui-input-inline">
                     <select name="djhwSccj">
                         <option value="">请选择</option>
@@ -70,7 +77,7 @@
                         <option value=""></option>
                     </select>
                 </div>
-            </div>
+            </div>-->
             <!--            供应商-->
             <div class="layui-form-item">
                 <label class="layui-form-label">供应商</label>
@@ -159,8 +166,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">包装</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="djhwBz" value=木箱 title="木箱">
-                    <input type="radio" name="djhwBz" value="纸箱" title="纸箱" checked>
+                    <input type="radio" name="djhwBz" value="0" title="木箱">
+                    <input type="radio" name="djhwBz" value="1" title="纸箱" checked>
                 </div>
             </div><!--            包装标识-->
             <div class="layui-form-item">
@@ -174,12 +181,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">包装外观</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="djhwBzwg" value=完好 title="完好">
-                    <input type="radio" name="djhwBzwg" value="有残损" title="有残损" checked>
+                    <input type="radio" name="djhwBzwg" id="djhwBzwg1" lay-filter="su" value="0"  title="完好" >
+                    <input type="radio" name="djhwBzwg" id="djhwBzwg2" lay-filter="su" value="1" title="有残损">
                 </div>
             </div>
             <input type="hidden" name="djhwBzimgurls" value="" id="imgsurl">
 <!--            残损照片-->
+            <div id="yc">
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">残损照片</label>
                 <div class="layui-input-block">
@@ -204,6 +212,7 @@
                     <tbody id="demoList1"></tbody>
                 </table>
             </div>
+            </div>
 
 
         </div>
@@ -222,7 +231,7 @@
 <script>
 
     var new1 = {}, da = [];
-    var formData = {};
+    formData = {};
     formData.count1 = 0;
     formData.eqSbzp = [];
     renderMod = {
@@ -236,8 +245,8 @@
                     var djhwGgxh=(djhwGg+"/"+djhwXh);
                     $("#djhwGgxh").val(djhwGgxh);
                     var djhwXnsb = $("input").eq(1).val();
-                    new1 = getFormValue(["djhwXnsb","djhwXh","djhwBz","djhwGg","djhwSl","djhwZl","djhwTj","djhwHwjz"
-                        ,"sgId", "djhwBzxh", "djhwSccj", "quiz2", "djhwGys", "djhwYsbs", "djhwDw","djhwPp","djhwBzwg","djhwBsbq","djhwBzimgurls"],{},true);//"djhwXnsb": djhwXnsb,
+                    new1 = getFormValue(["djhwXnsb","djhwXh","djhwBz","djhwGg","djhwSl","djhwZl","djhwTj","djhwHwjz","djhwGgxh"
+                        ,"sgId", "djhwBzxh", "djhwSccj", "djhwGys", "djhwYsbs", "djhwDw","djhwPp","djhwBzwg","djhwBsbq","djhwBzimgurls"],{},true);//"djhwXnsb": djhwXnsb,
                     var key = $.getUrlParam('key');
                     da.push(new1);
                     layui.sessionData($.getUrlParam('vg'), {
@@ -298,7 +307,7 @@
                                    tr.remove();
                                    var inp = $("#sbzp").next().val("");
                                    formData.count1--;
-                                   layer.close(index);
+                                   // layer.close(index);
                                });
                                return false;
                            });
@@ -330,26 +339,18 @@
        }
     };
 
-
-// 图片上传
-    layui.use('upload', function () {
-        var $ = layui.jquery
-            , upload = layui.upload;
-        upload.render({
-            elem: '#test2'
-            , url: '/lifeManage/importdjhwimgurls'
-            , multiple: true
-            , before: function (obj) {
-                //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
-                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
-                });
+    layui.use('form', function() {
+        var form = layui.form;
+        form.on('radio(su)', function (data) {
+            // console.log(data.elem); //得到radio原始DOM对象
+            // console.log(data.value); //被点击的radio的value值
+            if (data.value=="0"){
+                $("#yc").hide();
             }
-            , done: function (res) {
-                //上传完毕
+            else {
+                $("#yc").show()
             }
-        });
-
+        })
     })
 
 </script>
