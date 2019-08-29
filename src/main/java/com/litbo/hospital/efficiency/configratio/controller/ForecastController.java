@@ -24,7 +24,7 @@ public class ForecastController {
 
 
     @RequestMapping(value = "/addForecast",method = RequestMethod.POST)
-    public Result addForecast(@RequestBody ForecastBean forecastBean){
+    public Result addForecast(ForecastBean forecastBean){
         return Result.success(forecastService.addForecast(forecastBean));
     }
 
@@ -35,12 +35,12 @@ public class ForecastController {
     }
 
     @RequestMapping(value = "/showForecastById",method = RequestMethod.POST)
-    public Result showForecastById(@RequestParam Integer id){
+    public Result showForecastById(Integer id){
         return Result.success(forecastService.showForecastById(id));
     }
 
     @RequestMapping(value = "/updateForecast",method = RequestMethod.POST)
-    public Result updateForecast(@RequestBody ForecastRatioVO forecastRatioVO){
+    public Result updateForecast( ForecastRatioVO forecastRatioVO){
         if (forecastService.updateForecast(forecastRatioVO)>0){
             return Result.success("已更改成功");
         }else {
@@ -49,7 +49,7 @@ public class ForecastController {
     }
 
     @RequestMapping(value = "/deleteForecast",method = RequestMethod.POST)
-    public Result deleteForecast(@RequestParam List<Integer> list){
+    public Result deleteForecast(List<Integer> list){
         Integer integer = forecastService.deleteForecast(list);
         if (integer>0){
             return Result.success("已删除"+integer+"个设备");

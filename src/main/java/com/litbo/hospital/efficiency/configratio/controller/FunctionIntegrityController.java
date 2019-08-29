@@ -23,7 +23,7 @@ public class FunctionIntegrityController {
 
 
     @RequestMapping(value = "/addIntegrity",method = RequestMethod.POST)
-    public Result addIntegrity(@RequestBody FunctionIntegrityBean integrityBean){
+    public Result addIntegrity(FunctionIntegrityBean integrityBean){
         return Result.success(integrityService.addFunctionIntegrity(integrityBean));
     }
 
@@ -34,12 +34,12 @@ public class FunctionIntegrityController {
     }
 
     @RequestMapping(value = "/showIntegrityById",method = RequestMethod.POST)
-    public Result showIntegrityById(@RequestParam Integer id){
+    public Result showIntegrityById(Integer id){
         return Result.success(integrityService.showIntegrityById(id));
     }
 
     @RequestMapping(value = "/updateIntegrity",method = RequestMethod.POST)
-    public Result updateIntegrity(@RequestBody FunctionIntegrityRatioVO integrityRatioVO){
+    public Result updateIntegrity(FunctionIntegrityRatioVO integrityRatioVO){
         if (integrityService.updateIntegrity(integrityRatioVO)>0){
             return Result.success("已更改成功");
         }else {
@@ -48,7 +48,7 @@ public class FunctionIntegrityController {
     }
 
     @RequestMapping(value = "/deleteIntegrity",method = RequestMethod.POST)
-    public Result deleteIntegrity(@RequestParam List<Integer> list){
+    public Result deleteIntegrity(List<Integer> list){
         Integer integer = integrityService.deleteIntegrity(list);
         if (integer>0){
             return Result.success("已删除"+integer+"个设备");

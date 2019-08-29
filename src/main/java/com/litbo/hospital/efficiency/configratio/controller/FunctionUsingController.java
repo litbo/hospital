@@ -4,6 +4,7 @@ import com.litbo.hospital.efficiency.configratio.bean.FunctionUsingBean;
 import com.litbo.hospital.efficiency.configratio.service.FunctionUsingService;
 import com.litbo.hospital.efficiency.configratio.vo.FunctionUsingRatioVO;
 import com.litbo.hospital.result.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,10 +18,11 @@ import java.util.List;
 @RequestMapping("/config/ratio")
 public class FunctionUsingController {
 
+    @Autowired
     private FunctionUsingService usingService;
 
     @RequestMapping(value = "/addUsing",method = RequestMethod.POST)
-    public Result addUsing(@RequestBody FunctionUsingBean usingBean){
+    public Result addUsing(FunctionUsingBean usingBean){
         return Result.success(usingService.addFunctionUsing(usingBean));
     }
 
@@ -36,7 +38,7 @@ public class FunctionUsingController {
     }
 
     @RequestMapping(value = "/updateUsing",method = RequestMethod.POST)
-    public Result updateUsing(@RequestBody FunctionUsingRatioVO usingRatioVO){
+    public Result updateUsing(FunctionUsingRatioVO usingRatioVO){
         if (usingService.updateUsing(usingRatioVO)>0){
             return Result.success("已更改成功");
         }else {
@@ -45,7 +47,7 @@ public class FunctionUsingController {
     }
 
     @RequestMapping(value = "/deleteUsing",method = RequestMethod.DELETE)
-    public Result deleteUsing(@RequestParam List<Integer> list){
+    public Result deleteUsing(List<Integer> list){
         Integer integer = usingService.deleteUsing(list);
         if (integer>0){
             return Result.success("已删除"+integer+"个设备");
