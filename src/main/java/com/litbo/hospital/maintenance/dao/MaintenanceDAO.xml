@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.maintenance.dao.MaintenanceDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.maintenance.pojo.Maintenance">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="risk_value" jdbcType="VARCHAR" property="riskValue" />
+    <result column="formulator" jdbcType="VARCHAR" property="formulator" />
+    <result column="reviewer" jdbcType="VARCHAR" property="reviewer" />
+    <result column="form_time" jdbcType="VARCHAR" property="formTime" />
+    <result column="cycle_rule" jdbcType="VARCHAR" property="cycleRule" />
+    <result column="cycle" jdbcType="VARCHAR" property="cycle" />
+    <result column="plan_type" jdbcType="VARCHAR" property="planType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="project_list" jdbcType="VARCHAR" property="projectList" />
+    <result column="risk_level" jdbcType="VARCHAR" property="riskLevel" />
+    <result column="eq_id" jdbcType="VARCHAR" property="eqId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="maintenance_results" jdbcType="VARCHAR" property="maintenanceResults" />
+    <result column="instrument_status" jdbcType="VARCHAR" property="instrumentStatus" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="maintenance_personnel" jdbcType="VARCHAR" property="maintenancePersonnel" />
+    <result column="check_time" jdbcType="VARCHAR" property="checkTime" />
+    <result column="department_receipt" jdbcType="VARCHAR" property="departmentReceipt" />
+    <result column="date_of_completion" jdbcType="VARCHAR" property="dateOfCompletion" />
+  </resultMap>
+  <insert id="insert" parameterType="com.litbo.hospital.maintenance.pojo.Maintenance">
+    insert into hospital..maintenance (risk_value, formulator,
+      reviewer, form_time, cycle_rule, 
+      "cycle", plan_type, "status", 
+      project_list, risk_level, eq_id, 
+      "name", maintenance_results, instrument_status, 
+      description, maintenance_personnel, check_time, 
+      department_receipt, date_of_completion)
+    values (#{riskValue,jdbcType=VARCHAR}, #{formulator,jdbcType=VARCHAR},
+      #{reviewer,jdbcType=VARCHAR}, #{formTime,jdbcType=VARCHAR}, #{cycleRule,jdbcType=VARCHAR}, 
+      #{cycle,jdbcType=VARCHAR}, #{planType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{projectList,jdbcType=VARCHAR}, #{riskLevel,jdbcType=VARCHAR}, #{eqId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{maintenanceResults,jdbcType=VARCHAR}, #{instrumentStatus,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{maintenancePersonnel,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, 
+      #{departmentReceipt,jdbcType=VARCHAR}, #{dateOfCompletion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.maintenance.pojo.Maintenance">
+    insert into hospital..maintenance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="riskValue != null">
+        risk_value,
+      </if>
+      <if test="formulator != null">
+        formulator,
+      </if>
+      <if test="reviewer != null">
+        reviewer,
+      </if>
+      <if test="formTime != null">
+        form_time,
+      </if>
+      <if test="cycleRule != null">
+        cycle_rule,
+      </if>
+      <if test="cycle != null">
+        "cycle",
+      </if>
+      <if test="planType != null">
+        plan_type,
+      </if>
+      <if test="status != null">
+        "status",
+      </if>
+      <if test="projectList != null">
+        project_list,
+      </if>
+      <if test="riskLevel != null">
+        risk_level,
+      </if>
+      <if test="eqId != null">
+        eq_id,
+      </if>
+      <if test="name != null">
+        "name",
+      </if>
+      <if test="maintenanceResults != null">
+        maintenance_results,
+      </if>
+      <if test="instrumentStatus != null">
+        instrument_status,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="maintenancePersonnel != null">
+        maintenance_personnel,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="departmentReceipt != null">
+        department_receipt,
+      </if>
+      <if test="dateOfCompletion != null">
+        date_of_completion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="riskValue != null">
+        #{riskValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formulator != null">
+        #{formulator,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null">
+        #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="formTime != null">
+        #{formTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleRule != null">
+        #{cycleRule,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null">
+        #{planType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="projectList != null">
+        #{projectList,jdbcType=VARCHAR},
+      </if>
+      <if test="riskLevel != null">
+        #{riskLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="eqId != null">
+        #{eqId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+       <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="maintenancePersonnel != null">
+        #{maintenancePersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentReceipt != null">
+        #{departmentReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfCompletion != null">
+        #{dateOfCompletion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="getEQMessage" resultType="com.litbo.hospital.maintenance.vo.EqInfoVo">
+    SELECT eq.eq_id as id ,eq.eq_name as name , eq.eq_sbbh as num , eq.eq_xh as model ,eq.eq_gg as specification , m.risk_level as riskLevel ,m.risk_value as riskValue,bm.bm_name as bmName
+    FROM eq_info as eq LEFT JOIN maintenance as m
+    on eq.eq_id = m.eq_id  , s_bm as bm
+    <where>
+      <if test="bmName != null">
+        bm.bm_name like #{bmName} and
+      </if>
+      <if test="eqName != null">
+        eq.eq_name like #{eqName} and
+      </if>
+      <if test="riskLevel != null">
+        m.risk_level = #{riskLevel} and
+      </if>
+      eq.eq_bmid = bm.bm_id
+    </where>
+
+  </select>
+
+
+  <select id="selectByEqId" parameterType="string" resultMap="BaseResultMap">
+    select * from maintenance where eq_id = #{eqId,jdbcType=VARCHAR}
+  </select>
+
+
+  <update id="updateByPremaryKey" parameterType="com.litbo.hospital.maintenance.pojo.Maintenance">
+    update maintenance
+    <set>
+      <if test="riskValue != null">
+        risk_value = #{riskValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formulator != null">
+        formulator = #{formulator,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null">
+        reviewer = #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="formTime != null">
+        form_time = #{formTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleRule != null">
+        cycle_rule = #{cycleRule,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null">
+        cycle = #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null">
+        plan_type = #{planType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="projectList != null">
+        project_list = #{projectList,jdbcType=VARCHAR},
+      </if>
+      <if test="riskLevel != null">
+        risk_level = #{riskLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="eqId != null">
+        eq_id = #{eqId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        "name" = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="maintenancePersonnel != null">
+        maintenance_personnel = #{maintenancePersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentReceipt != null">
+        department_receipt = #{departmentReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfCompletion != null">
+        date_of_completion =  #{dateOfCompletion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectEq" resultType="com.litbo.hospital.maintenance.vo.AddEqVo">
+    select eq_id as id , eq_name as name
+    from eq_info
+    <where>
+      <if test="bmName != null">
+        eq_bmid = #{bmName} and
+      </if>
+      <if test="pym != null">
+        eq_pym = #{pym} and
+      </if>
+      <if test="factory != null">
+        sbcs_id_scs = #{factory} and
+      </if>
+      <if test="model != null">
+        eq_xh = #{model} and
+      </if>
+      <if test="similarClass != null">
+
+      </if>
+      1=1
+    </where>
+  </select>
+
+  <select id="selectEqById" resultType="com.litbo.hospital.user.bean.EqInfo">
+    select * from eq_info where eq_id = #{id}
+  </select>
+
+  <select id="seeAllMaintenancePlan" resultType="com.litbo.hospital.maintenance.vo.MaintenancePlanVo">
+    SELECT id as id , name as name , form_time as recordTime , plan_type as planType ,status as status
+    from maintenance as m
+    <where>
+      <if test="planName != null">
+        "name" like #{planName} and
+      </if>
+      <if test="beginTime != null">
+        form_time >= #{beginTime} and
+      </if>
+      <if test="endTime != null">
+        form_time &lt;= #{endTime} and
+      </if>
+      <if test="status != null">
+        status = #{status} and
+      </if>
+      1=1
+    </where>
+  </select>
+
+  <select id="selectById" parameterType="integer" resultMap="BaseResultMap">
+    select * from maintenance where id = #{id}
+  </select>
+
+
+</mapper>

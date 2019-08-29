@@ -35,7 +35,7 @@
                                     <div class="layui-form-item ">
                                         <label class="layui-form-label">保修期(月)<span class="sign">*</span></label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="htBxq" lay-verify="required"
+                                            <input type="text" name="htBxq" lay-verify="required|number"
                                                    placeholder="请输入内容" onfocus="this.placeholder=''"
                                                    onblur="this.placeholder='请输入内容'"
                                                    autocomplete="off" class="layui-input">
@@ -56,7 +56,7 @@
                                     <div class="layui-form-item ">
                                         <label class="layui-form-label">交货时间<span class="sign">*</span></label>
                                         <div class="layui-input-block"> <!-- 注意：这一层元素并不是必须的 -->
-                                            <input type="text" name="htJhsj" class="layui-input" id="test1"
+                                            <input type="text" name="htJhsj" class="layui-input" id="test1" lay-verify="required"
                                                    placeholder="请选择日期">
                                         </div>
                                     </div>
@@ -72,14 +72,24 @@
                                                     id="addEmp">新增
                                             </button>
                                         </div>
-                                        <button class="layui-btn " style="margin-top: 32px" onclick="button1()">选择预览
+                                        <label class="layui-form-label">选择预览<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="scsName" class="layui-input">
+                                        </div>
+                                       <!-- <button class="layui-btn " style="margin-top: 32px" onclick="button1()">选择预览
                                         </button>
                                         <div class="layui-input-block" style="margin-top: -42px">
                                             <input type="text" name="csname" disabled class="layui-input">
                                             <input type="hidden" name="sbcsIdScs" disabled id="sbcsIdScs"
                                                    class="layui-input">
-                                        </div>
+                                        </div>-->
                                     </div>
+                                    <!--<div class="layui-form-item ">
+                                        <label class="layui-form-label">选择预览<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="scsName" class="layui-input">
+                                        </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -195,23 +205,35 @@
     var formData2 = {};
     renderMod = {
         form: {
-            date: {
-                elem: "#date"
-            },
             submit: {
                 before: function (param) {
                     var tv = getTableValue("table");
-                    return param = {1: tv};
+                    var ab=$("#scsName").val();
+                    $("#htYfName").val(ab);
+                    if (doJudg({
+                        "undefined": [formData2.radio],
+                        0: [tv]
+                    })) {
+                        putMsg({
+                            alert: "无法提交空数据！"
+                        });
+                        return false;
+                    }
+                    return param = {
+                        1: tv,
+                        2: formData2.radio[0]["sbcsIdScs"]
+                    };
                 },
                 form: {
                     url: "/lifeManage/addEqLpjHt",
                     type: "POST",
                     data: [
-                        "htJf", "htYf", "htBxq", "htJhsj", "htSbmc", "htGzms", "htGzfx", "htCjje", "htJfrq", "htYfdh", "htKhhzh", "htYfrq", "sbbh","htYsfk"
+                        "htJf",  "htBxq", "htJhsj", "htSbmc", "htGzms", "htGzfx", "htCjje", "htJfrq", "htYfdh", "htKhhzh", "htYfrq", "sbbh","htYsfk"
                     ],
                     contentType: "application/json",
                     param: {
-                        1: 'listLpj'
+                        1: 'listLpj',
+                        2:"htYf"
                     },
                     reload: true
                 }
@@ -267,11 +289,8 @@
             selectItem: [
                 {
                     elem: "#selectEmp",
-                    // cb: "/kwgl/empgl/listSelectEmpsCols",
                     cb: "/lifeManage/listHtBiaotou",
                     db: "/cs/listScs",
-                    // db: "/kwgl/empgl/listPartnerByUserId",
-                    //  url: "/lifeManage/SbCsList",
                     name: "dtdt",
                     key: "radio",
                     data: formData2

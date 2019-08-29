@@ -40,7 +40,7 @@ public class SgYsController2 {
         return Result.success(info);
     }
 
-    @GetMapping("/sgWaitLcYsList")
+    @PostMapping("/sgWaitLcYsList")
     public Result sgWaitLcYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer
                                          pageNum,
                                  @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
