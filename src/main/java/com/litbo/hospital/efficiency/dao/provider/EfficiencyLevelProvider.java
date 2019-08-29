@@ -50,14 +50,12 @@ public class EfficiencyLevelProvider {
 
             else if (HandleLevel.efficient(searchVO)){
                 sql.append("AND (CAST(k.ratio AS DECIMAL) <= 100 AND CAST(k.ratio AS DECIMAL) >= lev.[using])\n");
-//                sql.append("AND (CAST(k.ratio AS DECIMAL) <= 100) \n");
-//                sql.append("AND (CAST(k.ratio AS DECIMAL) >= lev.[using]) \n");
             }
             else if (HandleLevel.midEfficient(searchVO)){
-                sql.append("AND (CAST(k.ratio AS DECIMAL) < lev.[using] AND CAST(k.ratio AS DECIMAL) >= lev.idling)\n");
+                sql.append("AND (CAST(k.ratio AS DECIMAL) < lev.[using] AND CAST(k.ratio AS DECIMAL) >= lev.[idling])\n");
             }
             else if (HandleLevel.inefficient(searchVO)){
-                sql.append("AND (CAST(k.ratio AS DECIMAL) < lev.idling AND CAST(k.ratio AS DECIMAL) > 0 )\n");
+                sql.append("AND (CAST(k.ratio AS DECIMAL) < lev.[idling] AND CAST(k.ratio AS DECIMAL) > 0 )\n");
             }
             else if (HandleLevel.idle(searchVO)){
                 sql.append("AND CAST(k.ratio AS DECIMAL) = 0\n");
@@ -77,8 +75,6 @@ public class EfficiencyLevelProvider {
         if (StringUtils.isNotBlank(searchVO.getBmSName())){
             sql.append("AND bm.bm_name LIKE '%"+searchVO.getBmSName()+"%'\n");
         }
-
-        System.out.println(sql);
 
         return sql.toString();
     }

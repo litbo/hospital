@@ -20,7 +20,7 @@ public class LevelServiceImpl implements LevelService {
 
     /**
      * 查询效率等级
-     * @return
+     * @return  效率等级
      */
     @Override
     public LevelVO selectLevel() {
@@ -30,7 +30,7 @@ public class LevelServiceImpl implements LevelService {
     /**
      * 更新效率等级的数值
      * @param levelBean     利用率 闲置率
-     * @return
+     * @return  更改后的效率等级
      */
     @Override
     public Integer updateLevel(LevelBean levelBean) {

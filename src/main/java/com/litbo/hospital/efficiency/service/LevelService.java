@@ -12,7 +12,7 @@ public interface LevelService {
 
         /**
          * 显示使用效率
-         * @return
+         * @return 使用效率
          */
         LevelVO selectLevel();
 
