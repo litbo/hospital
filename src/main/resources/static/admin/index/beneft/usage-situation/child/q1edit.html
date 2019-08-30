@@ -21,6 +21,10 @@
         span{
             color:#f10214;
         }
+        .layui-form-label{
+            width:130px;
+            padding:8px 10px!important;
+        }
     </style>
 </head>
 
@@ -50,37 +54,54 @@
         <div class="col-xs-12 col-sm-4 layui-col-sm-offset1">
             <div class="layui-form-item">
                 <div class="layui-form-item">
-                    <label class="layui-form-label"style="width: 150px">实际临床工作量<span class="sign">*</span></label>
+                    <label class="layui-form-label">既有功能数<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="actualNum" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                        <input type="text" name="exitNum" class="layui-input" autocomplete="off"  lay-verify="number">
                     </div>
                 </div>
-                <label class="layui-form-label"style="width: 150px">预测临床工作量<span class="sign">*</span></label>
+                <label class="layui-form-label">功能使用数<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="forecastNum" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
-                </div>
-
+                <input type="text" name="usingNum" class="layui-input" autocomplete="off"  lay-verify="number">
             </div>
-            <div class="col-xs-12">
-                <div class="layui-form-item">
-                    <div class="layui-input-block layui-col-sm-offset9">
-                        <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
+
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <div class="layui-input-block layui-col-sm-offset9">
+                    <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </form>
 
 <script>
     renderMod = {
         form:{
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/config/ratio/ updateUsing",
+                    type:"GET",
+                    save:formData,
+                    data:{cszjId:$.getUrlParam('cszjId')}
+                },
+                select:[
+                    {
+                        filter:"zc",
+                        ids:"zcId",
+                        text:"zc",
+                        url:"/eqdict/listZc"
+                    }
+                ]
+            },
             submit:{
                 form:{
-                    url:"/config/ratio/addForecast",
+                    url:"/config/ratio/addUsing",
                     type:"POST",
-                    data:["eqSbbh","eqName","actualNum","forecastNum"],
+                    data:["eqSbbh","eqName","usingNum","exitNum"],
                     done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {
