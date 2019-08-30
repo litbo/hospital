@@ -1,56 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>厂商资质查询</title>
-    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
-    <!--[if IE 8]>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>厂商信息查询</title>
+<link rel="stylesheet" type="text/css"
+	href="/static/admin/layui/css/layui.css" />
+<link rel="stylesheet" type="text/css"
+	href="/static/admin/css/admin.css" />
+<script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+<!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="/static/admin/js/basic.js"></script>
-    <script src="/static/admin/layui/layui.js"></script>
-    <style>
-        .layui-form-item{
-            margin-top:35px
-        }
-
-        .span{
-            color:#f10214;
-        }
-        .layui-form-label{
-            width:130px;
-            padding:8px 10px!important;
-        }
-    </style>
+<script src="/static/admin/js/basic.js"></script>
 </head>
+
 <body>
-<div class="col-xs-12">
-    <div class="layui-row">
-        <div class="col-xs-12 padRight">
-            <table id="table" lay-filter="table1"></table>
-
-        </div>
-    </div>
-
-</div>
+	<div class="layui-row">
+		<div class="col-xs-12">
+			<table id="table" lay-filter="table1"></table>
+		</div>
+	</div>
 
 <script type="text/html" id="toolBar">
-    <div class="layui-inline xs-100 mar10-0 pad0-10"style="font-size: 18px;color: #393D49;width: 100%">
-        国家药检局：<span><button type="button" class="layui-btn site-demo-active" data-type="loading">数据爬虫</button><button id="king" type="button" class="layui-btn">同步数据</button></span>
+	<div class="layui-inline xs-100 mar10-0 pad0-10"style="font-size: 18px;color: #393D49;width: 100%">
+        国家药检局：<span><button type="button" class="layui-btn site-demo-active" id="startSpider"  data-type="loading">数据爬虫</button><button id="saveDate" type="button" class="layui-btn">同步数据</button></span>
         <div class="layui-progress" lay-filter="demo">
             <div class="layui-progress-bar" lay-percent="0%"></div>
         </div>
     </div>
-
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane hidden-xs" >
                     <div class="layui-inline xs-100 mar10-0 pad0-10"style="font-size: 18px;color: #393D49">医疗器械查询：</div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="approvalNum" lay-verify="title" autocomplete="off" placeholder="请输入注册证编号" class="layui-input">
@@ -62,46 +46,86 @@
                         <input type="text" name="productName" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn" id="search">查找</button>
+                        <button class="layui-btn" data-type="search">查找</button>
                     </div>
-
-                </form>
             </div>
         </div>
     </div>
-
-
-
 </script>
+
 <script>
-    renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {field: 'approvalNum', title: '注册证编号',minWidth: 100,sort:true}
-                ,{field: 'enterprise', title: '注册人名称', minWidth: 100,sort:true}
-                ,{field: 'enterpriseAddress', title: '注册人住所', minWidth: 100,sort:true}
-                ,{field: 'productName', title: '产品名称', minWidth: 100,sort:true}
-                ,{field: 'approvalDate', title: '批准日期', minWidth: 100,sort:true}
-                ,{field: 'expiredDate', title: '有效期至', minWidth: 100,sort:true}
-                ,{field: 'expired', title: '是否过期', minWidth: 100,sort:true,templet: function(d){
-                        return d.expired == "1" ? "是" : "否";
-                    }}
-            ]]
-            ,url:"/base/searchByPage"
-            , request: {
-                pageName: 'pageNum',
-                limitName: 'pageSize'
-            }
-            , parseData: function (res){
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "count": res.result.total,
-                    "data": res.result.records
-                }
-            }
-        }
-    };
+	renderMod = {
+		addTable : {
+			table : {
+				cols : [ [ //表头
+				{
+					field : 'approvalNum',
+					title : '注册证编号',
+					minWidth : 100,
+					sort : true
+				}, {
+					field : 'enterprise',
+					title : '注册人名称',
+					minWidth : 100,
+					sort : true
+				}, {
+					field : 'enterpriseAddress',
+					title : '注册人住所',
+					minWidth : 100,
+					sort : true
+				}, {
+					field : 'productName',
+					title : '产品名称',
+					minWidth : 100,
+					sort : true
+				}, {
+					field : 'approvalDate',
+					title : '批准日期',
+					minWidth : 100,
+					sort : true
+				}, {
+					field : 'expiredDate',
+					title : '有效期至',
+					minWidth : 100,
+					sort : true
+				}, {
+					field : 'expired',
+					title : '是否过期',
+					minWidth : 100,
+					sort : true,
+					templet : function(d) {
+						return d.expired == "1" ? "是" : "否";
+					}
+				} ] ],
+				url : "/base/searchByPage",
+				request : {
+					pageName : 'pageNum',
+					limitName : 'pageSize'
+				},
+				parseData : function(res) { //res 即为原始返回的数据
+					return {
+						"code" : res.code, //解析接口状态
+						"msg" : res.msg, //解析提示文本
+						"count" : res.result.total,
+						"data" : res.result.list
+					}
+				}
+			},
+			reSet : {
+				url : "/base/searchByPage",
+				type : "search",
+				data : [ "approvalNum", "enterprise", "productName"],
+				parseData : function(res) { //res 即为原始返回的数据
+					return {
+						"code" : res.code, //解析接口状态
+						"msg" : res.msg, //解析提示文本
+						"count" : res.result.total,
+						"data" : res.result.list
+					}
+				}
+			}
+		}
+	}
 </script>
 <script>
     layui.use(['form', 'layedit', 'laydate','jquery'], function() {
@@ -109,11 +133,37 @@
             , layedit = layui.layedit
             , laydate = layui.laydate
             , $=layui.jquery;
+			
+        $(document).on('click','#startSpider',function(){
+        	$.ajax({
+                url: "/base/startSpider",
+                type: "GET",
+                success: function (info) {
+                	layer.msg(info.result);
 
-        $(document).on('click','#search',function(){
-            layer.msg('hello');
+                },error:function(info){
+                    layer.msg("请求失败，请重试！");
+                }
+        	})
         });
-    });
+        
+        $(document).on('click','#saveDate',function(){
+        	$.ajax({
+                url: "/base/insertToDb",
+                type: "GET",
+                success: function (info) {
+                	if(info.code == 0){
+                		layer.msg("入库成功，其中更新：" + info.updateNum + "条，新增：" + + info.newNum + "条");
+                	}else{
+                		layer.msg(info.result);
+                	}
+
+                },error:function(info){
+                    layer.msg("请求失败，请重试！");
+                }
+        	})
+        });
+    })
 </script>
 </body>
 </html>
