@@ -79,23 +79,14 @@
 
 <script>
     renderMod = {
-        form:{
+        formAction:{
             val:{
                 filter:"forms",
                 get:{
                     url:"/config/ratio/ updateUsing",
-                    type:"GET",
-                    save:formData,
-                    data:{cszjId:$.getUrlParam('cszjId')}
-                },
-                select:[
-                    {
-                        filter:"zc",
-                        ids:"zcId",
-                        text:"zc",
-                        url:"/eqdict/listZc"
-                    }
-                ]
+                    type:"POST",
+                    data:["eqSbbh",'eqName','usingNum','exitNum']
+                }
             },
             submit:{
                 form:{

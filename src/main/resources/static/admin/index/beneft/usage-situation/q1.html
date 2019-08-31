@@ -66,22 +66,38 @@
                             area: ['75%', '60%'],
                             content: "./child/q1add.html"
                         },
-
-                            {
-                                tool: "toolbar",
-                                event: "del",
-                                send:{
-                                    url:"/config/ratio/deleteUsing",
-                                    name:"gwIds",
-                                    par:"id",
-                                    type:"DELETE",
-                                    reload:true
+                        {
+                            tool: "toolbar",
+                            event: "edit",
+                            send:{
+                                url:"/config/ratio/ showUsingById",
+                                name:"gwIds",
+                                par:"id",
+                                type:"POST",
+                                confirm:false,
+                                success:{
+                                    tool:"toolbar",
+                                    type:2,
+                                    event:"edit",
+                                    title:"修改",
+                                    area:['75%','60%'],
+                                    content:"./child/q1edit.html"
                                 }
                             }
+                         },
+                         {
+                            tool: "toolbar",
+                            event: "del",
+                            send:{
+                                url:"/config/ratio/deleteUsing",
+                                name:"gwIds",
+                                par:"id",
+                                type:"DELETE",
+                                reload:true
+                            }
+                          }
                         ]
-
                     })
-
                 }
             }
         }
