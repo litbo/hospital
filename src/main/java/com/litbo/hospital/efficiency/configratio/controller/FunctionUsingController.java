@@ -4,9 +4,12 @@ import com.litbo.hospital.efficiency.configratio.bean.FunctionUsingBean;
 import com.litbo.hospital.efficiency.configratio.service.FunctionUsingService;
 import com.litbo.hospital.efficiency.configratio.vo.FunctionUsingRatioVO;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.supervise.vo.GangweiDeleteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,7 +37,10 @@ public class FunctionUsingController {
 
     @RequestMapping(value = "/showUsingById",method = RequestMethod.POST)
     public Result showUsingById(@RequestParam Integer id){
+        System.out.println("++++++++++");
+        System.out.println(id);
         return Result.success(usingService.showUsingById(id));
+
     }
 
     @RequestMapping(value = "/updateUsing",method = RequestMethod.POST)
@@ -46,9 +52,20 @@ public class FunctionUsingController {
         }
     }
 
+
     @RequestMapping(value = "/deleteUsing",method = RequestMethod.DELETE)
-    public Result deleteUsing(List<Integer> list){
-        Integer integer = usingService.deleteUsing(list);
+    public Result deleteUsing(@RequestBody GangweiDeleteVO gangweiDeleteVO){
+        String[] ids = gangweiDeleteVO.getGwIds();
+        int k = ids.length;
+        ArrayList<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            int i1 = Integer.parseInt(ids[i]);
+            integers.add(i1);
+        }
+
+        Integer integer= usingService.deleteUsing(integers);
+
+
         if (integer>0){
             return Result.success("已删除"+integer+"个设备");
         }else {
