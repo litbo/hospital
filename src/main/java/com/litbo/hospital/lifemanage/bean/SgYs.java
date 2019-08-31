@@ -241,4 +241,7 @@ public class SgYs {
   /*  登记货物id*/
 
     private String djhwId;
+
+    /*是否质检*/
+    private String ysSfzj;
 }

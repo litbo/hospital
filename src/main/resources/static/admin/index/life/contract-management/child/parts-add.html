@@ -27,15 +27,15 @@
             <label class="layui-form-label">配件名称<span class="sign">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="htPjmc" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                       lay-verify="required">
+                       id="htPjmc" lay-verify="required">
             </div>
         </div>
         <!--            规格型号-->
         <div class="layui-form-item">
             <label class="layui-form-label">规格型号<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="htGgxh'" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                       lay-verify="required">
+                <input type="text" name="htGgxh" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                       id="htGgxh" lay-verify="required">
             </div>
         </div>
         <!--            数量-->
@@ -43,7 +43,7 @@
             <label class="layui-form-label">数量<span class="sign">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="htCount"  id="htCount" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                       lay-verify="required">
+                       id="htCount" lay-verify="required" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
             </div>
         </div>
         <!--            报价-->
@@ -51,7 +51,13 @@
             <label class="layui-form-label">报价</label>
             <div class="layui-input-block">
                 <input type="text" name="htBj" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                       lay-verify="required">
+                       id="htBj" lay-verify="required"  t_value="" o_value="" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;
+                           else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;
+                           if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;
+                           else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;
+                           if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}">
             </div>
         </div>
         <!--            优惠价-->
@@ -59,15 +65,27 @@
             <label class="layui-form-label">优惠价</label>
             <div class="layui-input-block">
                 <input type="text" name="htYhj" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                       lay-verify="required">
+                       id="htYhj" lay-verify="required"  t_value="" o_value="" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;
+                           else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;
+                           if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;
+                           else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;
+                           if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}">
             </div>
         </div>
         <!--            总价-->
         <div class="layui-form-item">
             <label class="layui-form-label">总价</label>
             <div class="layui-input-block">
-                <input type="text" name="htZj" id="htZj" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                       lay-verify="required">
+                <input type="text" name="htZj" id="htZj" class="layui-input" placeholder="请输入内容" autocomplete="off" lay-verify="required"
+                       t_value="" o_value="" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;
+                           else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;
+                           if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;
+                           else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;
+                           if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}">
             </div>
         </div>
     </div>
@@ -91,6 +109,12 @@
             {
                 elem: '#reload',
                 func: function () {
+                    if ($("#htPjmc").val() === ""||$("#htCount").val()===""||$("#htBj").val()===""||$("#htYhj").val()===""
+                        ||$("#htZj").val()===""||$("#htGgxh").val()===""){
+                        // console.log(getFormValue());
+                        attr();
+                        return;
+                    }
                     var htCount=$("htCount").val();
                     var htZj=$("htZj").val();
                     var htYsfk=(htCount*htZj);

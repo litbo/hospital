@@ -9,6 +9,7 @@ import com.litbo.hospital.lifemanage.MyUtils.DelSpaceUtils;
 import com.litbo.hospital.lifemanage.bean.Example.YjyaZdExample;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.YjyaLclogVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.YjyaZdVO;
+import com.litbo.hospital.lifemanage.dao.MyMapper.EqTjsqMapper;
 import com.litbo.hospital.lifemanage.dao.MyMapper.YjyaLclogMapper;
 import com.litbo.hospital.lifemanage.dao.MyMapper.YjyaZdMapper;
 import com.litbo.hospital.lifemanage.service.MyService.YjyaLclogService;
@@ -29,7 +30,8 @@ public class YjyaZdServiceImpl implements YjyaZdService {
     private YjyaLclogMapper logmapper;
     @Autowired
     private YjyaLclogService logservice;
-
+@Autowired
+private EqTjsqMapper tjmapper;
     @Override
     public int insertYjyaZd(YjyaZdVO vo) {
         String id = IDFormat.getIdByIDAndTime2("yjya_zd", "yjya_bh");
@@ -66,6 +68,7 @@ public class YjyaZdServiceImpl implements YjyaZdService {
 
         /*同时修改记录*/
         BeanUtils.copyProperties(old,lclogVO);
+        lclogVO.setYjyaZpjshsj(old.getYjyaZpjsqrq());
         if(zpj){
             lclogVO.setYjyaBakssj(null);
         }
@@ -86,7 +89,7 @@ public class YjyaZdServiceImpl implements YjyaZdService {
     }
 
     @Override
-    public List<YjyaZdVO> selectAllPtYa(String bh, String mc, String ngr, Date qssj,Date jssj) {
+    public List<YjyaZdVO> selectAllPtYa(String bh, String mc, String ngr, Date qssj, Date jssj) {
         YjyaZdExample example = getSameExample(bh, mc, ngr, qssj, jssj);
         YjyaZdExample.Criteria criteria = example.getOredCriteria().get(0);
         criteria.andYjyaShrIsNull();
@@ -113,18 +116,25 @@ public class YjyaZdServiceImpl implements YjyaZdService {
     }
 
     @Override
-    public PageInfo<YjyaZdVO> selectAllSh(Integer pageNum,Integer pageSize,String bh, String mc, String ngr, Date qssj,Date jssj) {
+    public PageInfo<YjyaZdVO> selectAllSh(Integer pageNum, Integer pageSize, String bh, String mc, String ngr, Date qssj, Date jssj) {
         PageHelper.startPage(pageNum,pageSize);
         List<YjyaZdVO> list = selectAllPtYa( bh,  mc, ngr, qssj, jssj);
         list.addAll(selectAllZpjYa(bh, mc,ngr,qssj,jssj));
         return new PageInfo<>(list);
     }
 
+    @Override
+    public YjyaZdVO selectOneYjyaByBh(String bh) {
+        YjyaZdVO vo = mapper.selectOneYjyaByBh(bh);
+        vo.setBmName(tjmapper.selectBmNameByBmid(vo.getYjyaFbbm()));
+        return vo;
+    }
+
     private YjyaZdExample getSameExample(String bh, String mc, String ngr, Date qssj, Date jssj){
 
-        bh=DelSpaceUtils.deleteSpace(bh);
-        mc=DelSpaceUtils.deleteSpace(mc);
-        ngr=DelSpaceUtils.deleteSpace(ngr);
+        bh= DelSpaceUtils.deleteSpace(bh);
+        mc= DelSpaceUtils.deleteSpace(mc);
+        ngr= DelSpaceUtils.deleteSpace(ngr);
         YjyaZdExample example = new YjyaZdExample();
         YjyaZdExample.Criteria criteria = example.createCriteria();
         if(StringUtils.isNotBlank

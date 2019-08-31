@@ -76,7 +76,7 @@ public class EqTjsqProvider {
     public String selectByPrimaryKey() {
         str = " select id, tj_sqtj, tj_dcks," +
                 "     tj_lxr, tj_dwsj, tj_zbbm," +
-                "     tj_ggxh, tj_tpsl, tj_sysc," +
+                "    tj_gg,tj_xh, tj_ggxh, tj_tpsl, tj_sysc," +
                 "     tj_zbztjc, tj_fjjc, tj_dcjbr ," +
                 "     tj_dpsj,tj_dcksurl ,tj_zhz,tj_sqzbbms,tj_sqzbcounts,tj_dclx from tj_zbdc where id = #{id}";
         return str;

@@ -28,6 +28,7 @@ public class YjyaZdVO {
 
     private String yjyaFbbm;
 
+    private String bmName;
     private String yjyaNr;
 
     private String yjyaShr;

@@ -213,12 +213,12 @@
         <!--        布局2-->
         <div class="col-xs-6">
             <!--                            本合同是否全部到货-->
-            <div class="layui-form-item " style="margin-top: 20px">
+           <!-- <div class="layui-form-item " style="margin-top: 20px">
                 <label class="layui-form-label" style="width: auto">本合同是否全部到货<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" id="dhdjIsqbdh" name="dhdjIsqbdh" disabled class="layui-input">
                 </div>
-            </div>
+            </div>-->
             <!--                            备注-->
             <div class="layui-form-item layui-form-text" style="margin-top: 10px">
                 <label class="layui-form-label">备注</label>
@@ -239,17 +239,41 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+<!--<script type="text/html">
+    {{#  if(d.djhwGgxh ===null){ }}
+    <span style="color: #F581B1;">{{ xxx }}</span>
+    {{#  }
+    else { }}
+    {{ yyy }}
+    {{#  } }}
+</script>-->
 <script>
+    /*console.log(d.dhdjCsxs);
+    console.log(d.dhdjBz);*/
     renderMod = {
         addTable: {
             table: [
                 {
                     cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'djhwId', title: '货物ID'}
+                        // , {field: 'djhwId', title: '货物ID'}
                         , {field: 'djhwXnsb', title: '货物名称'}
-                        , {field: 'djhwBz', title: '包装'}
-                        , {field: 'djhwGgxh', title: '规格型号'}
+                        , {field: 'djhwBz', title: '包装',templet: function (d) {
+                                if (d.djhwBz == '0')
+                                    return '木箱';
+                                else if (d.djhwBz == '1')
+                                    return '纸箱';
+                            }
+
+                        }
+                        , {field: 'djhwGg', title: '规格'}
+                        ,{field: 'djhwXh', title: '型号'}
+                        // , {field: 'djhwGgxh', title: '规格型号'}
+                            /*templet: function (sgDjhws) {
+                            console.log(sgDjhws.djhwGg);
+                            console.log(sgDjhws.djhwXh);
+                            // $("djhwGgxh").val(sgDjhws.djhwGg +"/" + sgDjhws.djhwXh);}*/
+
                         , {field: 'djhwSl', title: '数量'}
                         , {field: 'djhwZl', title: '重量(kg)'}
                         , {field: 'djhwTj', title: '体积(m³)'}
@@ -311,7 +335,8 @@
                         a="汽运";
                         $("#dhdjYsfs").val(a);
                     }
-                    var b=$("#dhdjIsqbdh").val();
+                    /*var b=$("#dhdjIsqbdh").val();
+                    console.log(b);
                     if (b=="0"){
                         b="全部到货";
                         $("#dhdjIsqbdh").val(b);
@@ -319,7 +344,7 @@
                     else if (b=="1") {
                         b="未全部到货";
                         $("#dhdjIsqbdh").val(b);
-                    }
+                    }*/
 
                 }
             },

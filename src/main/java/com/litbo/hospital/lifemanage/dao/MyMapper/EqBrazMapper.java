@@ -37,7 +37,7 @@ public interface EqBrazMapper {
         "      br_sj = #{brSj,jdbcType=DATE}\n" +
         "    where id = #{id,jdbcType=VARCHAR}")
     int updateEqBraz(EqBraz braz);
-    @Select("select * from eq_braz where id=#{id} ")
-    EqBraz selectEqBrazById(String id);
+    @Select("select * from eq_braz where br_bxid=#{bxid} ")
+    EqBraz selectEqBrazById(String bxid);
 
 }

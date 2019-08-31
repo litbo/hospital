@@ -15,7 +15,7 @@ public interface YjyaLclogMapper {
             "      yjya_sykssj, yjya_bakssj, yjya_qykssj, \n" +
             "      yjya_zpjsqr, yjya_zpjsqsj, yjya_zpjshr, \n" +
             "      yjya_zpjshsj)\n" +
-            "    values (#{yjyaId,jdbcType=VARCHAR}, #{yjyaBh,jdbcType=VARCHAR}, #{yjyaNgr,jdbcType=VARCHAR}, \n" +
+            "      values (#{yjyaBh,jdbcType=VARCHAR}, #{yjyaNgr,jdbcType=VARCHAR}, \n" +
             "      #{yjyaNgrq,jdbcType=DATE}, #{yjyaShr,jdbcType=VARCHAR}, #{yjyaShrq,jdbcType=DATE}, \n" +
             "      #{yjyaSykssj,jdbcType=DATE}, #{yjyaBakssj,jdbcType=DATE}, #{yjyaQykssj,jdbcType=DATE}, \n" +
             "      #{yjyaZpjsqr,jdbcType=VARCHAR}, #{yjyaZpjsqsj,jdbcType=DATE}, #{yjyaZpjshr,jdbcType=VARCHAR}, \n" +
@@ -30,7 +30,7 @@ public interface YjyaLclogMapper {
     @Select("select l.yjya_bh, l.yjya_ngr, l.yjya_ngrq, l.yjya_shr, " +
             " l.yjya_shrq, l.yjya_sykssj, l.yjya_bakssj, \n" +
             "    l.yjya_qykssj, l.yjya_zpjsqr, l.yjya_zpjsqsj, l.yjya_zpjshr, l.yjya_zpjshsj," +
-            "  y.yjya_shyj,y.yjya_zpjyj,y.yjya_zpjjg,y.yjya_zpjyy,y.yjya_zt" +
+            "  y.yjya_shyj,y.yjya_name,y.yjya_nr,y.yjya_zpjyj,y.yjya_zpjjg,y.yjya_zpjyy,y.yjya_zt" +
             "  from yjya_lclog l " +
             "  inner join yjya_zd y on l.yjya_bh=y.yjya_bh" +
             " where l.yjya_bh=#{bh}")
@@ -41,7 +41,7 @@ public interface YjyaLclogMapper {
             " select l.yjya_bh, l.yjya_ngr, l.yjya_ngrq, l.yjya_shr, " +
             " l.yjya_shrq, l.yjya_sykssj, l.yjya_bakssj, \n" +
             "    l.yjya_qykssj, l.yjya_zpjsqr, l.yjya_zpjsqsj, l.yjya_zpjshr, l.yjya_zpjshsj," +
-            "  y.yjya_shyj,y.yjya_zpjyj,y.yjya_zpjjg,y.yjya_zpjyy,y.yjya_zt" +
+            "  y.yjya_shyj,y.yjya_name,y.yjya_zpjyj,y.yjya_zpjjg,y.yjya_zpjyy,y.yjya_zt" +
             "  from yjya_lclog l " +
             "  inner join yjya_zd y on l.yjya_bh=y.yjya_bh\n" +
             "<where>" +

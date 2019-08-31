@@ -9,6 +9,7 @@ import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,21 @@ public class YjyaLclogController {
             mapper.updateYaStatus(bh, "0");
         }
         return Result.success();
+
+    }
+
+
+    /*查询总记录数，已备案数,试用中数,已弃用数*/
+
+    @PostMapping("/AllTypeCount")
+    public Result AllTypeCount() {
+
+        List list = service.selectAllYalogByExample(1, 10, null, null, null, null, null).getList();
+        List list2 = service.selectAllYalogByExample(1, 10, "2", null, null, null, null).getList();
+        List list3 = service.selectAllYalogByExample(1, 10, "1", null, null, null, null).getList();
+        List list4 = service.selectAllYalogByExample(1, 10, "0", null, null, null, null).getList();
+        List<Integer> asList = Arrays.asList(list.size(),list2.size(),list3.size(),list4.size());
+        return Result.success(asList);
 
     }
 

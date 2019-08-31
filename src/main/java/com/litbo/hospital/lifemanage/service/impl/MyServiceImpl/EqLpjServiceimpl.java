@@ -131,7 +131,7 @@ public class EqLpjServiceimpl implements EqLpjService {
         JSONArray array = JSONArray.parseArray(lpjht.getHtLpjhz());
         int size = array.size();
         for (int i = 0; i < size; i++) {
-            list.add(array.getObject(i,EqLpjHtZbVO.class));
+            list.add(array.getObject(i, EqLpjHtZbVO.class));
         }
         lpjht.setListLpj(list);
         return lpjht;

@@ -1,7 +1,6 @@
 package com.litbo.hospital.lifemanage.controller;
 
 import com.alibaba.fastjson.JSON;
-
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
 import com.litbo.hospital.result.Result;
@@ -9,7 +8,8 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/lifeManage")

@@ -17,10 +17,8 @@ public class MbLrController {
     private MbLrService service;
 
 
-
-
     /*/**
-     * 方法功能描述:
+     * 方法功能描述: 模板增加
      * @Param: [mb]
      * @Return: com.litbo.hospital.result.Result
      * @Description:
@@ -31,7 +29,7 @@ public class MbLrController {
     public Result ListEqInfo(@RequestBody MbLr mb) {
         int i = service.insertMbLr(mb);
         if(i==1){
-            return Result.success();
+            return Result.success(i);
         }
         else{
             return Result.error("添加模板失败");

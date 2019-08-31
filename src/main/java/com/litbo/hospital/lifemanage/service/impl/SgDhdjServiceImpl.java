@@ -93,7 +93,7 @@ public class SgDhdjServiceImpl implements SgDhdjService {
         for (MultipartFile file : files) {
             String url = UploadFile.upload(filePath, file);
             url = url.replaceAll("/", "\\\\");
-//            url = url.replace(path + "\\bzps", "");
+            url = url.replace(path + "\\bzps", "");
             imgurls.append(url + ",");
         }
 

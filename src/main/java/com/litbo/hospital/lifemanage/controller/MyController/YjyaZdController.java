@@ -53,7 +53,7 @@ public class YjyaZdController {
     public Result updateYjyaZd(@RequestBody YjyaZdVO vo) {
         int i = service.updateYjyaZd(vo);
         if (i == 1) {
-            return Result.success();
+            return Result.success(i);
         } else {
             return Result.error("请求失败");
         }
@@ -84,21 +84,28 @@ public class YjyaZdController {
      * @Author: NCH
      */
     @PostMapping("/selectAllSh")
-    public Result selectAllSh(@RequestParam(required = false,defaultValue = "1",name = "pageNum")Integer pageNum,
-                              @RequestParam(required = false,defaultValue = "1",name = "pageSize")Integer pageSize,
-                              @RequestParam(required = false,name = "bh")String bh,
-                              @RequestParam(required = false,name = "mc")String mc,
-                              @RequestParam(required = false,name = "ngr")String ngr,
-                              @RequestParam(required = false,name = "qssj")String qssj,
-                              @RequestParam(required = false,name = "jssj")String jssj
-                              ) {
+    public Result selectAllSh(@RequestParam(required = false, defaultValue = "1", name = "pageNum") Integer pageNum,
+                              @RequestParam(required = false, defaultValue = "10", name = "pageSize") Integer pageSize,
+                              @RequestParam(required = false, name = "bh") String bh,
+                              @RequestParam(required = false, name = "mc") String mc,
+                              @RequestParam(required = false, name = "ngr") String ngr,
+                              @RequestParam(required = false, name = "qssj") String qssj,
+                              @RequestParam(required = false, name = "jssj") String jssj
+    ) {
         Date qs = String2DateUtil.StringtoDate(qssj);
         Date js = String2DateUtil.StringtoDate(qssj);
-        PageInfo<YjyaZdVO> info = service.selectAllSh(pageNum,pageSize,bh,mc,ngr,qs,js);
+        PageInfo<YjyaZdVO> info = service.selectAllSh(pageNum, pageSize, bh, mc, ngr, qs, js);
         return Result.success(info);
 
     }
 
+    /*查询一条预案详情*/
+    @PostMapping("/selectOneYjyaByBh")
+    public Result selectOneYjyaByBh(@RequestParam(name = "bh") String bh) {
+        YjyaZdVO yjyaZdVO = service.selectOneYjyaByBh(bh);
+        return Result.success(yjyaZdVO);
+
+    }
 
     /*/**
      * 方法功能描述: 修改单个预案状态
@@ -108,7 +115,7 @@ public class YjyaZdController {
      * @Author: NCH
      */
     @PostMapping("/updateYaStatu")
-    public Result updateYaStatu(@RequestParam(name = "bh") String bh, @RequestParam (name = "zt") String zt) {
+    public Result updateYaStatu(@RequestParam(name = "bh") String bh, @RequestParam(name = "zt") String zt) {
         int i = mapper.updateYaStatus(bh, zt);
         if (i == 1) {
             return Result.success();
@@ -116,6 +123,8 @@ public class YjyaZdController {
             return Result.error("请求失败");
         }
     }
+
+
 
 
 

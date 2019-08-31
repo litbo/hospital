@@ -24,4 +24,5 @@ public interface YjyaZdService {
 
     /*查询上面两个审核总和*/
     PageInfo<YjyaZdVO> selectAllSh(Integer pageNum, Integer pageSize, String bh, String mc, String ngr, Date qssj, Date jssj);
+    YjyaZdVO selectOneYjyaByBh(String bh);
 }

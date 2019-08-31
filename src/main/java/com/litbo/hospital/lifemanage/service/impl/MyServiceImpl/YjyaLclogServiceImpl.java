@@ -43,20 +43,31 @@ public class YjyaLclogServiceImpl implements YjyaLclogService {
         for (int i = 0; i < size; i++) {
             YjyaLclogVO vo1 = vos.get(i);
             Date date = vo1.getYjyaSykssj();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            cal.add(Calendar.MONTH, 1);
-            /*判断并修改预案记录状态,同时修改制订预案为已备案*/
-            if("1".equals(vo1.getYjyaZt())){
-                if (new Date().getTime() >= cal.getTime().getTime()){
-                    vo1.setYjyaBakssj(cal.getTime());
-                    YjyaZdVO zdVO = new YjyaZdVO();
-                    zdVO.setYjyaBh(vo1.getYjyaBh());
-                    updateYalog(vo);
-                    service.updateYjyaZd(zdVO);
-                }
+            /*判断是否有审核时间*/
+            if(date!=null){
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                cal.add(Calendar.MONTH, 1);
+                /*判断并修改预案记录状态,同时修改制订预案为已备案*/
+                if("1".equals(vo1.getYjyaZt())){
+                    if (new Date().getTime() >= cal.getTime().getTime()){
+                        vo1.setYjyaBakssj(cal.getTime());
+                        YjyaZdVO zdVO = new YjyaZdVO();
+                        zdVO.setYjyaBh(vo1.getYjyaBh());
+                        updateYalog(vo);
+                        service.updateYjyaZd(zdVO);
+                    }
             }
 
+            }
+
+        }
+
+        int size1 = vos.size();
+        for (int i = 0; i < size1; i++) {
+            YjyaLclogVO lclogVO = vos.get(i);
+            if(lclogVO.getYjyaShr()==null || lclogVO.getYjyaShrq()==null )
+                vos.remove(i);
         }
         return new PageInfo(vos);
     }

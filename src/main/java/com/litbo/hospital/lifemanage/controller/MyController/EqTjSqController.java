@@ -111,6 +111,35 @@ public class EqTjSqController {
 
     }
 
+
+
+
+    @PostMapping("/AllThsq")
+    public Result AllThsq(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                          @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
+                          @RequestParam(required = false, name = "bmName") String bmName,
+                          @RequestParam(required = false, name = "tjQssj") String tjQssj,
+                          @RequestParam(required = false, name = "tjJssj") String tjJssj,
+                          @RequestParam(required = false, name = "sfyl") String sfyl,
+                          @RequestParam(required = false, name = "sfqbsl") String sfqbsl
+    ) {
+//        LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        //TODO 仅有综合设备科可以查询替换设备
+//        if("0301b50000".equals(sEmp.getBmId())){
+        Date qssj = String2DateUtil.StringtoDate(tjQssj);
+        Date jssj = String2DateUtil.StringtoDate(tjJssj);
+
+        EqTjShowVO show = new EqTjShowVO(bmName, qssj, jssj, sfyl, sfqbsl);
+        show.setTjSqlx("1");
+        PageInfo info = service.selectByExample(pageNum, pageSize, show);
+        return Result.success(info);
+//        }
+//        else{
+//            return Result.success("无所属权限！");
+//        }
+
+    }
+
     /*主键查看单个调剂请求申请*/
     @PostMapping("/selectTjsqByPrimaryKey")
     public Result selectByPrimary(@RequestParam(name = "id") String id) {

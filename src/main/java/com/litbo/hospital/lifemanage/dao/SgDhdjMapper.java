@@ -79,6 +79,7 @@ public interface SgDhdjMapper {
             "dbo.sg_djhw.djhw_id,\n" +
             "dbo.sg_dhdj.ht_id,\n" +
             "dbo.sg_dhdj.sg_id,\n" +
+            "dbo.sg_djhw.user_id,\n" +
             "dbo.sg_dhdj.dhdj_fhdw,\n" +
             "dbo.sg_dhdj.dhdj_ysdh,\n" +
             "dbo.sg_info.bh,\n" +
@@ -123,6 +124,7 @@ public interface SgDhdjMapper {
             "dbo.sg_dhdj.dhdj_fhxs,\n" +
             "dbo.sg_dhdj.dhdj_sdxs,\n" +
             "dbo.sg_dhdj.dhdj_csxs,\n" +
+            "dbo.sg_dhdj.dhdj_bz,\n" +
             "dbo.sg_dhdj.dhdj_mdd\n" +
             "FROM\n" +
             "dbo.sg_dhdj\n" +

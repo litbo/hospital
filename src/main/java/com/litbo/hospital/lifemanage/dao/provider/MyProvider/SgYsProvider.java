@@ -75,22 +75,6 @@ public class SgYsProvider {
 
     }
     private String getSelectAll(){
-        return " select ys_id, ys_dabh, ht_id, \n" +
-                "      sg_id, ys_zzshjg, ys_zzshr, \n" +
-                "      ys_zxd, ys_sms, ys_czsc, ys_wxsc, \n" +
-                "      ys_qtjszl, ys_cphgzm, ys_bxk, ys_3crz, \n" +
-                "      ys_jlqjrz, ys_bgd, ys_jyjyzm, ys_isgfxqx, \n" +
-                "      ys_bzbs, ys_bq, ys_gfxsms, ys_hgzm, \n" +
-                "      ys_qtcl, ys_syks, ys_sbxh, \n" +
-                "      ys_gb, ys_sccs, ys_cd, \n" +
-                "      ys_scrq, ys_dj, ys_xlh, \n" +
-                "      ys_fjmcxh, ys_fjxlh, ys_ysgcs, \n" +
-                "      ys_csgcs, ys_lxdh, ys_xgsxn, \n" +
-                "      ys_ysrq, ys_syqkyj, ys_syksfzr, \n" +
-                "      ys_ysjl, ys_glsyr, ys_ksfzr, \n" +
-                "      ys_ysjg, ys_ysqrsj, ys_qysj, \n" +
-                "      ys_czgc, ys_zysx, ys_byzd, \n" +
-                "      ys_cpjj, ys_zlkz, ys_istg, \n" +
-                "      ys_thh, ys_thyy, ys_thsj from sg_ys ";
+        return " select * from sg_ys ";
     }
 }

@@ -91,4 +91,5 @@ public class EqTjZbdcVO {
 
     /*调出类型*/
     private String tjDclx;
+
 }

@@ -66,12 +66,10 @@
 </div>
 <script>
 
-/*var a=$.getUrlParam("userId");
-console.log(a);
-$("#userId").val(a);*/
+
 var a=$.getUrlParam("djhwId");
-$("#djhwId").val(a)
-console.log(a);
+$("#djhwId").val(a);
+// console.log(a);
 var emp=tempValue("rl", "emp", false);
 $("#userId").val(emp.userXm);
     renderMod = {
@@ -81,11 +79,8 @@ $("#userId").val(emp.userXm);
                     url: "/lifeManage/updateSgDhdjKsjs",
                     type: "POST",
                     data: ["userId", "djhwId"],
-                    // contentType: "application/json",
-                    param: {
-                        // 1: 'listLpj'
-                    },
-                    reload: true
+                    reload: "parent"
+                    // reload:true
                 }
             },
             date: [

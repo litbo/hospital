@@ -11,7 +11,8 @@ import java.util.Date;
 public class YjyaLclogVO {
 
     private String yjyaBh;
-
+    private String yjyaName;
+    private String yjyaNr;
     private String yjyaNgr;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -45,6 +46,7 @@ public class YjyaLclogVO {
 
     /*审核意见*/
     private String yjyaShyj;
+
     /*再评价审核意见*/
     private String yjyaZpjyj;
     /*再评价结果*/

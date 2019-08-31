@@ -49,7 +49,7 @@ public class EqTjServiceImpl implements EqTjService {
         String sqlx = DelSpaceUtils.deleteSpace(showVO.getTjSqlx());
         criteria.andTjSqlxLike("%"+sqlx+"%");
         if (StringUtils.isNotBlank(bmname)) {
-            criteria.andBmNameLike(bmname);
+            criteria.andBmNameLike("%"+bmname+"%");
         }
         if (StringUtils.isNotBlank(sfyl)) {
             criteria.andTjSfylLike(sfyl);
@@ -241,6 +241,9 @@ public class EqTjServiceImpl implements EqTjService {
     //TODO 已经加入院区和部门的条件查询
     @Override
     public PageInfo selectAllEqInfo(String sbName, String bmname, String yq) {
+        if(StringUtils.isBlank(yq)){
+            yq=null;
+        }
         List<EqInfoShowVO> vos = mapper.selectAllEqInfo(sbName, bmname, yq);
 
         return new PageInfo(vos);

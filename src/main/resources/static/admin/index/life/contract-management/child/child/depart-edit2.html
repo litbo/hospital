@@ -15,6 +15,35 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+    <style type="text/css">
+        .layui-form-label{
+            width:140px;
+            padding: 8px 5px!important;
+        }
+        .layui-form-item{
+            margin-top:25px;
+        }
+        .warm_btn {
+            height: 45px;
+            font-size: 1.3em;
+            letter-spacing: 3px;
+            margin: 10px 0 30px;
+        }
+        #mpImg,#sbImg{
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        #mpImg ul,#sbImg ul{
+            width:400%;
+        }
+        #mpImg li,#sbImg li{
+            float:left;
+        }
+        .showImg{
+            width: 150px;
+            height: 150px;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,6 +59,13 @@
                 <label class="layui-form-label">申购单编号</label>
                 <div class="layui-input-block">
                     <input type="text" name="sgId" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">科室接收人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userId" class="layui-input" disabled>
                 </div>
             </div>
             <!--            包装箱号-->
@@ -130,7 +166,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">包装</label>
                 <div class="layui-input-block">
-                    <input type="text" name="djhwBz" class="layui-input" disabled>
+                    <input type="text" name="djhwBz" id="djhwBz" class="layui-input" disabled>
                 </div>
             </div><!--            包装标识-->
             <div class="layui-form-item">
@@ -143,12 +179,12 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">包装外观</label>
                 <div class="layui-input-block">
-                    <input type="text" name="djhwBzwg" class="layui-input" disabled>
+                    <input type="text" name="djhwBzwg" id="djhwBzwg" class="layui-input" disabled>
                 </div>
             </div>
             <input type="hidden" name="djhwBzimgurls" value="" id="imgsurl">
 <!--            残损照片-->
-            <div class="layui-form-item layui-form-text" >
+            <div class="layui-form-item layui-form-text" id="yc">
                 <label class="layui-form-label">残损照片</label>
                 <div class="layui-input-block" id="sbImg">
                     <!-- <img src="#" id="eqImg" />-->
@@ -162,10 +198,7 @@
 <script>
     /*var a=$.getUrlParam("djhwId");
     console.log(a);*/
-    var new1 = {}, da = [];
-    var formData = {};
-    formData.count1 = 0;
-    // formData.eqSbzp = [];
+     formData = {};
     renderMod = {
         form: {
             val: {
@@ -177,20 +210,39 @@
                     parse: [],
                     tableId: []
                 },
-                func: function () {
-                    // $("#eqImg").attr("src",data.eqSbzp);
-                    /*if(data.eqSbzp){
-                        var newSb = data.eqSbzp.split("#imgsurl");
+                func: function (data,form) {
+                    var a=$("#djhwBzwg").val();
+                    if (a=="1"){
+                        a="完好";
+                        $("#djhwBzwg").val(a);
+                        $("#yc").hide()
+                    }
+                    else {
+                        a="残损";
+                        $("#djhwBzwg").val(a);
+                        $("#yc").show()
+                    }
+                    var b=$("#djhwBz").val();
+                    if (b=="0"){
+                        b="木箱";
+                        $("#djhwBz").val(b);
+                    }
+                    else {
+                        b="纸箱";
+                        $("#djhwBz").val(b);
+                    }
+                    if(data.djhwBzimgurls){
+                        var newSb = data.djhwBzimgurls.split(",");
                         var $sImg = $("#sbImg");
                         $sImg.html($("<ul>"));
-                        for(var i = 0;i<newSb.length;i++){
+                        for(var i = 0;i<newSb.length-1;i++){
                             $sImg.find("ul").append(
                                 $("<li>").append(
                                     $("<img>").attr({"src":newSb[i],"class":"showImg"})
                                 )
                             )
                         }
-                    }*/
+                    }
                 }
             },
             date: [

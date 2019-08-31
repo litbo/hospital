@@ -159,7 +159,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">包装</label>
                 <div class="layui-input-block">
-                    <input type="text" name="djhwBz" class="layui-input" disabled>
+                    <input type="text" name="djhwBz" id="djhwBz" class="layui-input" disabled>
                 </div>
             </div><!--            包装标识-->
             <div class="layui-form-item">
@@ -175,8 +175,9 @@
                     <input type="text" name="djhwBzwg" id="djhwBzwg" class="layui-input" disabled>
                 </div>
             </div>
-            <input type="hidden" name="djhwBzimgurls" value="" id="imgsurl">
+<!--            <input type="hidden" name="djhwBzimgurls" id="imgsurl">-->
 <!--            残损照片-->
+<!--            id="yc"-->
             <div class="layui-form-item layui-form-text" id="yc">
                 <label class="layui-form-label">残损照片</label>
                 <div class="layui-input-block" id="sbImg">
@@ -201,37 +202,35 @@
                     data: {id: $.getUrlParam("djhwId")}
                 },
                 func: function (data,form) {
+                    // console.log(data.djhwBzimgurls);
                     var a=$("#djhwBzwg").val();
-                    if (a=="0"){
+                    if (a=="1"){
                         a="完好";
                         $("#djhwBzwg").val(a);
-                        $("#yc").hide()
+                        $("#yc").hide();
                     }
                     else {
                         a="残损";
                         $("#djhwBzwg").val(a);
-                        $("#yc").show()
+                        $("#yc").show();
                     }
-                    var b=$("#djhwBzwg").val();
+                    var b=$("#djhwBz").val();
                     if (b=="0"){
                         b="木箱";
-                        $("#djhwBzwg").val(b);
+                        $("#djhwBz").val(b);
                     }
                     else {
                         b="纸箱";
-                        $("#djhwBzwg").val(b);
+                        $("#djhwBz").val(b);
                     }
-                    /*var tu=$("#imgsurl").val();
-                    console.log(tu);*/
-                    // $("#eqImg").attr("src",data.eqSbzp);
                     if(data.djhwBzimgurls){
                         var newSb = data.djhwBzimgurls.split(",");
-                        /*var newSb1= newSb.splice(i,1);
-                        console.log(newSb1);*/
-                        // var newSb = $
+                        // console.log(newSb);
                         var $sImg = $("#sbImg");
                         $sImg.html($("<ul>"));
                         for(var i = 0;i<newSb.length-1;i++){
+                            console.log(newSb[i])
+                            console.log("\n")
                             $sImg.find("ul").append(
                                 $("<li>").append(
                                     $("<img>").attr({"src":newSb[i],"class":"showImg"})

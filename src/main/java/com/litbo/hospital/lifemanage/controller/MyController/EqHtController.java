@@ -45,7 +45,7 @@ public class EqHtController {
         Date qssj =  String2DateUtil.StringtoDate(htQssj);
         Date jssj =  String2DateUtil.StringtoDate(htJssj);
         EqHtShowVO showVO = new EqHtShowVO(htYf,htZt,htBianhao,qssj,jssj);
-/**/
+
         service.loginCheckHtStatus();
         PageInfo<EqHtShowVO> list = service.ListHtAccount(pageNum, pageSize, showVO);
         return Result.success(list);

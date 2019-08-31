@@ -46,15 +46,14 @@ public class SqYsService2impl implements SgYsService2 {
 
     @Override
     public int insertJs(SgJsYsVO js) {
-        return 0;
+        return sgYsMapper2.insertJs(js);
     }
 
     @Override
     public PageInfo<SgYsListVO> sgWaitLcYsList(Integer pageNum, Integer pageSize, String ksid, String htid) {
         PageHelper.startPage(pageNum,pageSize);
         List<SgYsListVO> vos = sgYsMapper2.sgWaitLcYsList(ksid, htid);
-        int size = vos.size();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < vos.size(); i++) {
             SgYsListVO vo = vos.get(i);
             String id = vo.getYsId();
             SgYs ys = sgYsMapper2.selectByPrimaryKey(id);
@@ -64,7 +63,6 @@ public class SqYsService2impl implements SgYsService2 {
             cal.add(Calendar.MONTH, 1);
             if (new Date().getTime() < cal.getTime().getTime()) {
                 vos.remove(i);
-                size=vos.size();
             }
         }
         return new PageInfo<>(vos);
@@ -127,6 +125,12 @@ public class SqYsService2impl implements SgYsService2 {
     @Override
     public List<Map<String, String>> selectAllBmIdAndName() {
         return sgYsMapper2.selectAllBmIdAndName();
+    }
+    @Override
+    public SgYs slectOneYsJl(String ysid) {
+
+        SgYs ys = sgYsMapper2.selectByPrimaryKey(ysid);
+        return ys;
     }
 
 
