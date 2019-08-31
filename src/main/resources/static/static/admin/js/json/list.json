@@ -463,31 +463,31 @@
                 "url": "./table.html",
                 "icon": "credit-card",
                 "id": "3020",
-                "shiro": "KSSG",
+                "shiro": "SGGL",
                 "children":[
                   {
-                    "title": "装备录入",
+                    "title": "设备录入",
                     "url": "./life/contract-management/contract-add.html",
                     "id": "30200",
-                    "shiro": "KSTL"
+                    "shiro": "SGGL"
                   },
                   {
-                    "title": "装备查看",
+                    "title": "设备查看",
                     "url": "./life/contract-management/contract-edit.html",
                     "id": "30201",
-                    "shiro": "KSTL"
+                    "shiro": "SGGL"
                   },
                   {
                     "title": "零件录入",
                     "url": "./life/contract-management/parts-contract.html",
                     "id": "30202",
-                    "shiro": "KSTL"
+                    "shiro": "SGGL"
                   },
                   {
                     "title": "零件查看",
                     "url": "./life/contract-management/parts-edit.html",
                     "id": "30203",
-                    "shiro": "KSTL"
+                    "shiro": "SGGL"
                   }
                 ]
               }
@@ -496,37 +496,93 @@
           },
           {
             "title": "验收管理",
-            "url": "life&t=0&n=2",
+            "url": "life&t=0&n=3",
             "id": "303",
-            "shiro": "a",
+            "shiro": "SGGL",
             "children": [
               {
                 "title": "到货登记",
-                "url": "./life/purchase-management/goods-reg.html",
-                "icon": "solar-panel",
-                "id": "3030",
-                "shiro": "a"
-              },
-              {
-                "title": "科室验收",
-                "url": "./life/purchase-management/room-reg.html",
-                "icon": "user-md",
-                "id": "3031",
-                "shiro": "a"
-              },
-              {
-                "title": "设备验收",
-                "url": "./life/purchase-management/equip-reg.html",
-                "icon": "drafting-compass",
-                "id": "3032",
-                "shiro": "a"
-              },
-              {
-                "title": "统计查询",
                 "url": "./table.html",
-                "icon": "chart-pie",
-                "id": "3033",
-                "shiro": "a"
+                "icon": "credit-card",
+                "id": "3030",
+                "shiro": "SGGL",
+                "children":[
+                  {
+                    "title": "到货登记",
+                    "url": "./life/contract-management/goods.html",
+                    "id": "30300",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "到货查看",
+                    "url": "./life/contract-management/goods-edit.html",
+                    "id": "30301",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "科室接收",
+                    "url": "./life/contract-management/depart.html",
+                    "id": "30302",
+                    "shiro": "SGGL"
+                  }
+                ]
+              },
+              {
+                "title": "验收管理",
+                "url": "./table.html",
+                "icon": "credit-card",
+                "id": "3031",
+                "shiro": "SGGL",
+                "children":[
+                  {
+                    "title": "商务验收",
+                    "url": "./life/acceptance/acceptance-shangwu.html",
+                    "id": "30310",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "商务验收查看",
+                    "url": "./life/acceptance/acceptance-shangwu-ex.html",
+                    "id": "30311",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "技术验收",
+                    "url": "./life/acceptance/acceptance-jishu.html",
+                    "id": "30312",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "技术验收查看",
+                    "url": "./life/acceptance/acceptance-jishu-ex.html",
+                    "id": "30313",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "临床验收",
+                    "url": "./life/acceptance/acceptance-linchuang.html",
+                    "id": "30314",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "临床验收查看",
+                    "url": "./life/acceptance/acceptance-linchuang-ex.html",
+                    "id": "30315",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "汇总验收",
+                    "url": "./life/acceptance/acceptance-huizong.html",
+                    "id": "30316",
+                    "shiro": "SGGL"
+                  },
+                  {
+                    "title": "汇总验收查看",
+                    "url": "./life/acceptance/acceptance-huizong-ex.html",
+                    "id": "30317",
+                    "shiro": "SGGL"
+                  }
+                ]
               }
             ]
           }
@@ -753,139 +809,93 @@
       {
         "title": "应急管理",
         "icon": "exclamation-triangle",
-        "shiro": "a",
+        "shiro": "SYGL",
         "children": [
           {
             "title": "应急预案",
             "url": "life&t=2&n=0",
             "id": "320",
-            "shiro": "a",
+            "shiro": "SYGL",
             "children": [
+
               {
-                "title": "应急预案查询",
-                "url": "./table.html",
-                "icon": "search",
-                "id": "3200",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "已备案",
-                    "url": "./table.html",
-                    "id": "32000",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "试用中",
-                    "url": "./table.html",
-                    "id": "32001",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "已弃用",
-                    "url": "./table.html",
-                    "id": "32002",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "应急预案制定",
+                "title": "应急预案管理",
                 "url": "./table.html",
                 "icon": "pencil-alt",
                 "id": "3201",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
-                    "title": "开始指定",
+                    "title": "应急预案制订",
                     "url": "./table.html",
                     "id": "32010",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
-                    "title": "制订收件箱",
+                    "title": "应急预案审核",
                     "url": "./table.html",
                     "id": "32011",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "应急预案再评价",
-                "url": "./table.html",
-                "icon": "comment-alt",
-                "id": "3202",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "再评价收件箱",
-                    "url": "./table.html",
-                    "id": "32020",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "进度查询",
-                "url": "./table.html",
-                "icon": "search",
-                "id": "3203",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "制订进度",
-                    "url": "./table.html",
-                    "id": "32030",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
-                    "title": "再评价进度",
+                    "title": "应急预案再评价",
                     "url": "./table.html",
-                    "id": "32031",
-                    "shiro": "a"
+                    "id": "32012",
+                    "shiro": "SYGL"
                   }
                 ]
               },
               {
-                "title": "模板录入和查询",
+                "title": "应急预案模板管理",
                 "url": "./table.html",
                 "icon": "paperclip",
                 "id": "3204",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "模板录入",
                     "url": "./table.html",
                     "id": "32040",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
                     "title": "模板列表",
                     "url": "./table.html",
                     "id": "32041",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
+              },
+              {
+                "title": "统计查询",
+                "url": "./table.html",
+                "icon": "search",
+                "id": "3200",
+                "shiro": "SYGL"
               }
+
+
+
             ]
           },
           {
             "title": "应急替代",
             "url": "life&t=2&n=1",
             "id": "321",
-            "shiro": "a",
+            "shiro": "SYGL",
             "children": [
               {
                 "title": "紧急报停",
                 "url": "./table.html",
                 "icon": "minus-circle",
                 "id": "3210",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "紧急报停搜查",
                     "url": "./table.html",
                     "id": "32100",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               },
@@ -894,13 +904,13 @@
                 "url": "./table.html",
                 "icon": "screwdriver",
                 "id": "3211",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "搜查设备",
                     "url": "./table.html",
                     "id": "32110",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               },
@@ -909,19 +919,19 @@
                 "url": "./table.html",
                 "icon": "check",
                 "id": "3212",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "等待替换",
                     "url": "./table.html",
                     "id": "32120",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
                     "title": "替换完成",
                     "url": "./table.html",
                     "id": "32121",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               },
@@ -930,26 +940,26 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "3213",
-                "shiro": "a"
+                "shiro": "SYGL"
               },
               {
                 "title": "总结报告",
                 "url": "./table.html",
                 "icon": "flag",
                 "id": "3214",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "总结评价",
                     "url": "./table.html",
                     "id": "32140",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
                     "title": "应急替代报告",
                     "url": "./table.html",
                     "id": "32141",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               },
@@ -958,13 +968,13 @@
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "3215",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "搜查结果查询",
                     "url": "./table.html",
                     "id": "32150",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               }
@@ -974,41 +984,33 @@
             "title": "应急调配",
             "url": "life&t=2&n=2",
             "id": "322",
-            "shiro": "a",
+            "shiro": "SYGL",
             "children": [
               {
-                "title": "设备调配",
+                "title": "调配申请",
                 "url": "./table.html",
                 "icon": "puzzle-piece",
                 "id": "3220",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "查询调用",
-                    "url": "./table.html",
-                    "id": "32200",
-                    "shiro": "a"
-                  }
-                ]
+                "shiro": "SYGL"
               },
               {
                 "title": "设备送达",
                 "url": "./table.html",
                 "icon": "check-circle",
                 "id": "3221",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "未送达调配单",
                     "url": "./table.html",
                     "id": "32210",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
                     "title": "已送达调配单",
                     "url": "./table.html",
                     "id": "32211",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               },
@@ -1017,13 +1019,13 @@
                 "url": "./table.html",
                 "icon": "undo-alt",
                 "id": "3222",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "收条",
                     "url": "./table.html",
                     "id": "32220",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               },
@@ -1032,19 +1034,19 @@
                 "url": "./table.html",
                 "icon": "umbrella-beach",
                 "id": "3223",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "调配跟踪",
                     "url": "./table.html",
                     "id": "32230",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
                     "title": "使用监视",
                     "url": "./table.html",
                     "id": "32231",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               },
@@ -1053,26 +1055,26 @@
                 "url": "./table.html",
                 "icon": "envelope-open-text",
                 "id": "3224",
-                "shiro": "a"
+                "shiro": "SYGL"
               },
               {
                 "title": "查询&统计",
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "3225",
-                "shiro": "a",
+                "shiro": "SYGL",
                 "children": [
                   {
                     "title": "事件查询",
                     "url": "./table.html",
                     "id": "32250",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   },
                   {
                     "title": "统计报表",
                     "url": "./table.html",
                     "id": "32251",
-                    "shiro": "a"
+                    "shiro": "SYGL"
                   }
                 ]
               }
