@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>到货登记 > 货物增加</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+
+
+<form class="layui-form layui-form-pane" action="" lay-filter="wxfForms">
+    <div class="layui-row layui-col-space20">
+        <div class="layui-col-md6">
+            <!--        <input type="hidden" name="user1Id">-->
+            <!--        <input type="hidden" id="taskId" name="taskId" value="">-->
+
+            <!--            申购单编号-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">申购单编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sgId" id="sgId" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            包装箱号-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">包装箱号<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwBzxh" id="djhwBzxh" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            箱内设备-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">箱内设备</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwXnsb" id="djhwXnsb" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            主设备产地-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">主设备产地</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwSccj" id="djhwSccj" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            供应商-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">供应商</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwGys" id="djhwGys" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            体积-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">体积</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwTj" id="djhwTj" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            货物价值-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">货物价值</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwHwjz" id="djhwHwjz" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            重量-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">重量</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwZl" id="djhwZl" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            防倾斜标识-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">防倾斜标识</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="djhwYsbs" value="无" title="无" checked>
+                    <input type="radio" name="djhwYsbs" value="已变色" title="已变色">
+                    <input type="radio" name="djhwYsbs" value="未变色" title="未变色">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <!--            单位-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">单位</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwDw" id="djhwDw" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            品牌-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">品牌</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwPp" id="djhwPp" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            规格-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">规格</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwGg" id="djhwGg" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            型号-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">型号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwXh" id="djhwXh" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <input type="hidden" name="djhwGgxh" id="djhwGgxh" class="layui-input">
+            <!--            数量-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">数量</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwSl" id="djhwSl" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                </div>
+            </div>
+            <!--            包装-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">包装</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="djhwBz" value="0" title="木箱" checked>
+                    <input type="radio" name="djhwBz" value="1" title="纸箱">
+                </div>
+            </div><!--            包装标识-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">包装标识</label>
+                <div class="layui-input-block">
+                    <input type="text" name="djhwBsbq" id="djhwBsbq" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            包装外观-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">包装外观</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="djhwBzwg" id="djhwBzwg1" lay-filter="su" value="1"  title="完好" >
+                    <input type="radio" name="djhwBzwg" id="djhwBzwg2" lay-filter="su" value="0" title="有残损" checked>
+                </div>
+            </div>
+            <input type="hidden" name="djhwBzimgurls" value="" id="imgsurl">
+            <!--            残损照片-->
+            <div id="yc">
+                <div class="layui-form-item" pane>
+                    <label class="layui-form-label">残损照片</label>
+                    <div class="layui-input-block">
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                id="sbzp">选择文件
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                id="sbzp_sub">上传文件
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-upload-list">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>文件名</th>
+                            <th>大小</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="demoList1"></tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!--保存-->
+    <div class="col-xs-12">
+        <div class="layui-form-item" style="margin:20px 0;">
+            <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save"
+                    id="reload">确定
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+
+    var new1 = {}, da = [];
+    formData = {};
+    formData.count1 = 0;
+    formData.eqSbzp = [];
+    renderMod = {
+
+        btn: [
+            {
+                elem: '#reload',
+                func: function () {
+
+                    var djhwGg=$("#djhwGg").val();
+                    var djhwXh=$("#djhwXh").val();
+                    console.log($("#djhwGg").val());
+                    if ($("#djhwGg").val() === ""||$("#djhwXh").val()===""||$("#djhwXnsb").val()===""||$("#djhwSl").val()===""
+                        ||$("#djhwZl").val()===""||$("#djhwTj").val()===""||$("#djhwHwjz").val()===""||$("#sgId").val()===""
+                        ||$("#djhwBzxh").val()===""||$("#djhwSccj").val()===""||$("#djhwGys").val()===""||$("#djhwDw").val()===""
+                        ||$("#djhwPp").val()===""||$("#djhwBsbq").val()===""){
+                        // console.log(getFormValue());
+                        attr();
+                        return;
+                    }
+                    var djhwGgxh=(djhwGg+"/"+djhwXh);
+                    $("#djhwGgxh").val(djhwGgxh);
+                    var djhwXnsb = $("input").eq(1).val();
+                    new1 = getFormValue(["djhwXnsb","djhwXh","djhwGg","djhwSl","djhwZl","djhwTj","djhwHwjz","djhwGgxh"
+                        ,"sgId", "djhwBzxh", "djhwSccj", "djhwGys", "djhwDw","djhwPp","djhwBsbq","djhwBzwg","djhwYsbs","djhwBz", "djhwBzimgurls"],{},true);//"djhwXnsb": djhwXnsb,
+                    var key = $.getUrlParam('key');
+                    da.push(new1);
+                    layui.sessionData($.getUrlParam('vg'), {
+                        key: key,
+                        value: da
+                    });
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ],
+
+        form:{
+            file: [
+                {
+                    elem: "#sbzp",
+                    url: "/lifeManage/importdjhwimgurls",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    multiple: true,
+                    auto: false,
+                    bindAction: "#sbzp_sub",
+                    number: 6,
+                    field: "imgs",
+                    choose: function (obj) {
+                        if (formData.count1 > 6) {
+                            putMsg({
+                                alert: "最多只能上传6张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#sbzp").next().val("");
+                                    formData.count1--;
+                                    // layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList1").append(tr);
+                            formData.count1++;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData.eqSbzp.push(res.data);
+                            var tr = $("#demoList1").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            $("#imgsurl").val($("#imgsurl").val()+res.data);
+                            console.log($("#imgsurl").val())
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList1").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
+                    }
+                }
+            ]
+        }
+    };
+
+    layui.use('form', function() {
+        var form = layui.form;
+        form.on('radio(su)', function (data) {
+            // console.log(data.elem); //得到radio原始DOM对象
+            // console.log(data.value); //被点击的radio的value值
+            if (data.value=="1"){
+                $("#yc").hide();
+            }
+            else {
+                $("#yc").show()
+            }
+        })
+    })
+
+</script>
+
+
+</body>
+</html>

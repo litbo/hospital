@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>合同录入 > 零件录入</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+
+
+<form class="layui-form layui-form-pane" action="" lay-filter="wxfForms">
+    <div class="layui-row">
+        <input class="hidden" name="htYsfk" id="htYsfk">
+        <!--            配件名称-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">配件名称<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="htPjmc" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                       id="htPjmc" lay-verify="required">
+            </div>
+        </div>
+        <!--            规格型号-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">规格型号<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="htGgxh" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                       id="htGgxh" lay-verify="required">
+            </div>
+        </div>
+        <!--            数量-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">数量<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="htCount"  id="htCount" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                       id="htCount" lay-verify="required" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+            </div>
+        </div>
+        <!--            报价-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">报价</label>
+            <div class="layui-input-block">
+                <input type="text" name="htBj" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                       id="htBj" lay-verify="required"  t_value="" o_value="" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;
+                           else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;
+                           if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;
+                           else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;
+                           if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}">
+            </div>
+        </div>
+        <!--            优惠价-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">优惠价</label>
+            <div class="layui-input-block">
+                <input type="text" name="htYhj" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                       id="htYhj" lay-verify="required"  t_value="" o_value="" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;
+                           else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;
+                           if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;
+                           else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;
+                           if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}">
+            </div>
+        </div>
+        <!--            总价-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">总价</label>
+            <div class="layui-input-block">
+                <input type="text" name="htZj" id="htZj" class="layui-input" placeholder="请输入内容" autocomplete="off" lay-verify="required"
+                       t_value="" o_value="" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;
+                           else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;
+                           if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                       onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;
+                           else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;
+                           if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}">
+            </div>
+        </div>
+    </div>
+    <!--保存-->
+    <div class="col-xs-12">
+        <div class="layui-form-item" style="margin:20px 0;">
+            <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save"
+                    id="reload">确定
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    var new1 = {}, da = [];
+    var formData = {};
+    renderMod = {
+
+        btn: [
+            {
+                elem: '#reload',
+                func: function () {
+                    if ($("#htPjmc").val() === ""||$("#htCount").val()===""||$("#htBj").val()===""||$("#htYhj").val()===""
+                        ||$("#htZj").val()===""||$("#htGgxh").val()===""){
+                        // console.log(getFormValue());
+                        attr();
+                        return;
+                    }
+                    var htCount=$("htCount").val();
+                    var htZj=$("htZj").val();
+                    var htYsfk=(htCount*htZj);
+                    var htGgxh = $("input").eq(1).val();
+                    new1 = getFormValue(["htPjmc", "htCount", "htBj", "htYhj", "htZj","htYsfk"], {"htGgxh": htGgxh}, true);
+                    var key = $.getUrlParam('key');
+                    da.push(new1);
+                    layui.sessionData($.getUrlParam('vg'), {
+                        key: key,
+                        value: da
+                    });
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ]
+
+
+    };
+
+
+</script>
+
+
+</body>
+</html>

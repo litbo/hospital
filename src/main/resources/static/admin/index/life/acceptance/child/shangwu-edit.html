@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>到货登记 > 货物增加</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css">
+    <script type="text/javascript" src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 180px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 180px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+
+<form class="layui-form layui-form-pane" action="" lay-filter="wxfForms">
+    <div class="layui-row layui-col-space20">
+        <div class="layui-col-md6">
+        <!--        <input type="hidden" name="user1Id">-->
+        <!--        <input type="hidden" id="taskId" name="taskId" value="">-->
+
+            <!--            档案编号-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">档案编号<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysDabh" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required|number">
+                </div>
+            </div>
+            <!--            合同编号-->
+            <!--<div class="layui-form-item">
+                <label class="layui-form-label">合同编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="htId'" id="htId" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>-->
+
+            <!--            申购单编号-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">申购单编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sgId" id="sgId" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            资质审核结果-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">资质审核结果</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysZzshjg" id="ysZzshjg" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            资质审核人-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">资质审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysZzshr" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            装箱单-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">装箱单<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysZxd" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+
+            <!--            说明书-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">说明书</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysSms" id="ysSms" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            操作手册-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">操作手册</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysCzsc" id="ysCzsc" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            维修手册-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">维修手册</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysWxsc" id="ysWxsc" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            其他技术资料-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">其他技术资料</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysQtjszl" id="ysQtjszl" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            产品合格证明-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">产品合格证明</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysCphgzm" id="ysCphgzm" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            是否质检-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否质检</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysSfzj" id="ysSfzj" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-md6">
+
+            <!--            保修卡-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">保修卡</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysBxk" id="ysBxk" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            3c认证-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">3c认证</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ys3crz"id="ys3crz" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            计量器具认证-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">计量器具认证</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysJlqjrz" id="ysJlqjrz" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            报关单-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">报关单</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysBgd" id="ysBgd" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            检验检疫证明-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">检验检疫证明</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysJyjyzm" id="ysJyjyzm" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            是否是高风险器械-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否是高风险器械</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysIsgfxqx" id="ysIsgfxqx" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            包装标识-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">包装标识</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysBzbs" id="ysBzbs" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            标签-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">标签</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysBq" id="ysBq" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            高风险说明书-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">高风险说明书</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysGfxsms" id="ysGfxsms" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            合格证明-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">合格证明</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysHgzm" id="ysHgzm" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            其他材料-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">其他材料</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysQtcl" id="ysQtcl" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+
+<input class="hidden" name="djhwId" id="djhwId">
+        </div>
+    </div>
+    <!--保存-->
+    <div class="col-xs-12">
+        <div class="layui-form-item">
+            <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""
+                    lay-filter="save">保存
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    /*$("#htId").val($.getUrlParam("htId"));
+    $("#sgId").val($.getUrlParam("sgId"));
+    $("#djhwId").val($.getUrlParam("djhwId"));*/
+    // console.log($("#djhwId").val());
+    renderMod={
+        form: {
+            val:{
+                filter:"wxfForms",
+                get:{
+                    url:"/lifeManage/selectOneYsJl",
+                    type:"POST",
+                    data: {ysId: $.getUrlParam("ysId")}
+                },
+                func: function () {
+                    // 说明书
+                    var a=$("#ysSms").val();
+                    a=a.replace(/\s*/g,"");
+                    console.log(a);
+                    if (a=="0"){
+                        a="无";
+                        $("#ysSms").val(a);
+                    }
+                    else if (a=="1"){
+                        a="中文";
+                        $("#dhdjYsfs").val(a);
+                    }
+                    else if (a=="2"){
+                        a="英文";
+                        $("#dhdjYsfs").val(a);
+                    }
+                    // 资质审核结果
+                    var b=$("#ysZzshjg").val();
+                    b=b.replace(/\s*/g,"");
+                    if (b=="0"){
+                        b="不符合";
+                        $("#ysZzshjg").val(b);
+                    }
+                    else if (b=="1") {
+                        b="符合";
+                        $("#ysZzshjg").val(b);
+                    }
+                    // 操作手册
+
+                    var c=$("#ysCzsc").val();
+                    c=c.replace(/\s*/g,"");
+                    if (c=="0"){
+                        c="无";
+                        $("#ysCzsc").val(c);
+                    }
+                    else if (c=="1") {
+                        c="有";
+                        $("#ysCzsc").val(c);
+                    }
+                    // 维修手册
+
+                    var d=$("#ysWxsc").val();
+                    d=d.replace(/\s*/g,"");
+                    if (d=="0"){
+                        d="无";
+                        $("#ysWxsc").val(d);
+                    }
+                    else if (d=="1") {
+                        d="有";
+                        $("#ysWxsc").val(d);
+                    }
+                    // 其他技术资料
+
+                    var e=$("#ysQtjszl").val();
+                    e=e.replace(/\s*/g,"");
+                    if (e=="0"){
+                        e="无";
+                        $("#ysQtjszl").val(e);
+                    }
+                    else if (e=="1") {
+                        e="有";
+                        $("#ysQtjszl").val(e);
+                    }
+                    // 产品合格证明
+                    var f=$("#ysCphgzm").val();
+                    f=f.replace(/\s*/g,"");
+                    if (f=="0"){
+                        f="无";
+                        $("#ysCphgzm").val(f);
+                    }
+                    else if (f=="1") {
+                        f="有";
+                        $("#ysCphgzm").val(f);
+                    }
+                    // 是否质检
+                    var g=$("#ysSfzj").val();
+                    g=g.replace(/\s*/g,"");
+                    if (g=="0"){
+                        g="否";
+                        $("#ysSfzj").val(g);
+                    }
+                    else if (g=="1") {
+                        g="是";
+                        $("#ysSfzj").val(g);
+                    }
+                    // 标签
+                    var h=$("#ysBq").val();
+                    h=h.replace(/\s*/g,"");
+                    if (h=="0"){
+                        h="无";
+                        $("#ysBq").val(h);
+                    }
+                    else if (h=="1") {
+                        h="有";
+                        $("#ysBq").val(h);
+                    }
+                    // 高风险说明书
+                    var i=$("#ysGfxsms").val();
+                    i=i.replace(/\s*/g,"");
+                    if (i=="0"){
+                        i="无";
+                        $("#ysGfxsms").val(i);
+                    }
+                    else if (i=="1") {
+                        i="有";
+                        $("#ysGfxsms").val(i);
+                    }
+                    // 保修卡
+                    var j=$("#ysBxk").val();
+                    j=j.replace(/\s*/g,"");
+                    if (j=="0"){
+                        j="无";
+                        $("#ysBxk").val(j);
+                    }
+                    else if (j=="1") {
+                        j="有";
+                        $("#ysBxk").val(j);
+                    }
+                    // 3c认证
+                    var k=$("#ys3crz").val();
+                    k=k.replace(/\s*/g,"");
+                    if (k=="0"){
+                        k="无";
+                        $("#ys3crz").val(k);
+                    }
+                    else if (k=="1") {
+                        k="有";
+                        $("#ys3crz").val(k);
+                    }
+                    // 计量器具认证
+                    var l=$("#ysJlqjrz").val();
+                    l=l.replace(/\s*/g,"");
+                    if (l=="0"){
+                        l="无";
+                        $("#ysJlqjrz").val(l);
+                    }
+                    else if (l=="1") {
+                        l="有";
+                        $("#ysJlqjrz").val(l);
+                    }
+                    // 报关单
+                    var m=$("#ysBgd").val();
+                    m=m.replace(/\s*/g,"");
+                    if (m=="0"){
+                        m="无";
+                        $("#ysBgd").val(m);
+                    }
+                    else if (m=="1") {
+                        m="有";
+                        $("#ysBgd").val(m);
+                    }
+                    // 检验检疫证明
+                    var n=$("#ysJyjyzm").val();
+                    n=n.replace(/\s*/g,"");
+                    if (n=="0"){
+                        n="无";
+                        $("#ysJyjyzm").val(n);
+                    }
+                    else if (n=="1") {
+                        n="有";
+                        $("#ysJyjyzm").val(n);
+                    }
+                    // 是否是高风险器械
+                    var o=$("#ysIsgfxqx").val();
+                    o=o.replace(/\s*/g,"");
+                    if (o=="0"){
+                        o="否";
+                        $("#ysIsgfxqx").val(o);
+                    }
+                    else if (o=="1") {
+                        o="是";
+                        $("#ysIsgfxqx").val(o);
+                    }
+                    // 包装标识
+                    var p=$("#ysBzbs").val();
+                    p=p.replace(/\s*/g,"");
+                    if (p=="0"){
+                        p="无";
+                        $("#ysBzbs").val(p);
+                    }
+                    else if (p=="1") {
+                        p="有";
+                        $("#ysBzbs").val(p);
+                    }
+                    // 合格证明
+                    var q=$("#ysHgzm").val();
+                    q=q.replace(/\s*/g,"");
+                    if (q=="0"){
+                        q="无";
+                        $("#ysHgzm").val(q);
+                    }
+                    else if (q=="1") {
+                        q="有";
+                        $("#ysHgzm").val(q);
+                    }
+                    // 其他材料
+                    var r=$("#ysQtcl").val();
+                    r=r.replace(/\s*/g,"");
+                    if (r=="0"){
+                        r="无";
+                        $("#ysQtcl").val(r);
+                        // console.log(r);
+                    }
+                    else if (r=="1") {
+                        r="有";
+                        $("#ysQtcl").val(r);
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+
+
+</body>
+</html>
