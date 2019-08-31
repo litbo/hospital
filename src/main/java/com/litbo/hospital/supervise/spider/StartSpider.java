@@ -9,6 +9,7 @@ package com.litbo.hospital.supervise.spider;
 
 import com.litbo.hospital.supervise.config.SpiderProperties;
 import com.litbo.hospital.supervise.util.FileUtil;
+import com.litbo.hospital.supervise.util.SpringBeanUtil;
 
 import us.codecraft.webmagic.Spider;
 
@@ -22,11 +23,7 @@ public class StartSpider implements Runnable {
 	
 	public static boolean isRuning = false;
 
-	private SpiderProperties spiderProperties;
-
-	public StartSpider(SpiderProperties spiderProperties) {
-		this.spiderProperties = spiderProperties;
-	}
+	private SpiderProperties spiderProperties  = SpringBeanUtil.getBean("spiderProperties");;
 
 	@SuppressWarnings("resource")
 	@Override
@@ -40,12 +37,12 @@ public class StartSpider implements Runnable {
 		isRuning = true;
 		
 		Spider.create(new CfdaProcessor())
-				.addUrl(spiderProperties.getStarUrl())
-				.addPipeline(new MyFilePipeline(spiderProperties.getSavePath()))
-				.setDownloader(new CfdaSeleniumDownloader().setSleepTime(Integer.valueOf(spiderProperties.getSleepTime())))
-				.thread(Integer.valueOf(spiderProperties.getThreadNum()))
-				.run();
-		
+			.addUrl(spiderProperties.getStarUrl())
+			.addPipeline(new MyFilePipeline(spiderProperties.getSavePath()))
+			.setDownloader(new CfdaSeleniumDownloader().setSleepTime(Integer.valueOf(spiderProperties.getSleepTime())))
+			.thread(Integer.valueOf(spiderProperties.getThreadNum()))
+			.run();
+			
 		try {
 			FileUtil.close();
 		} catch (Exception e) {

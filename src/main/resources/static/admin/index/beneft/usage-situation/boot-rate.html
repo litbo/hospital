@@ -57,6 +57,7 @@
                             <option >摄片室</option>
                             <option >内外导管室</option>
                             <option >心外ICU</option>
+                            <option>设备管理测试设备2</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -74,8 +75,7 @@
         formAction: {
             date: {
                 elem:"#test6",
-                Value: true,
-                // isInitValue: false,
+                isInitValue: false,
                 type:"date",
                 format:"yyyy-MM-dd",
                 range:true
@@ -130,7 +130,7 @@
             reSet: {
                 url: "/kpi/open/selectOpenByCon",
                 type: "search",
-                data: ["startSTime","endSTime","bmSName", "eqSName"],     //搜索框的name
+                data: ["startSTime","bmSName", "eqSName"],     //搜索框的name
                 where: {}
             }
         }

@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>效率等级设置</title>
+    <title>效率等级</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -13,52 +13,94 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
-    <style>
-        .layui-form-label{
-            padding: 8px 10px!important;
-        }
-        .layui-form-item{
-            margin-bottom:25px
-        }
-    </style>
 </head>
-
 <body>
-<form class="layui-form layui-form-pane" action="">
-    <div class="layui-row">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>效率等级设置</legend>
-        </fieldset>
-        <div class="col-xs-12 col-sm-12">
-            <div class="layui-form-item">
-                <label class="layui-form-label">利用率<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" autocomplete="off" class="layui-input" value="75" lay-verify="required">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">闲置率<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" autocomplete="off" class="layui-input" value="80" lay-verify="required">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="layui-row">
-        <div class="col-xs-12  col-sm-12">
-            <div class="layui-form-item" style="margin-top:25px;margin-left:-120px;">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-<div id="tips">
+                <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="" lay-filter="subb">
+                    <div class="layui-row">
+                        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                            <legend>效率等级设置</legend>
+                        </fieldset>
+                        <div class="col-xs-6 col-sm-4 layui-col-sm-offset1" >
+                            <div class="layui-form-item" >
+                                <label class="layui-form-label">利用率<span class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="using" lay-verify="using" class="layui-input" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字，利用率最高为100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4 layui-col-sm-offset1">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">闲置率<span class="sign">*</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="idling" lay-verify="idling"  class="layui-input" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字，闲置率最低为0">
+                                </div>
+                            </div>
 
-</div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="col-xs-2  col-sm-2 layui-col-sm-offset9">
+                            <div class="layui-form-item" style="margin-top:25px;margin-left:-120px;">
+                                <div class="layui-input-block">
+                                    <button type="submit"  class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+<script>
+    var n = 0;
+    var m = 0;
+    renderMod = {
+        formAction: {
+            ver:{
+                using:function(value){
+                    if(value > 100){
+                        return '利用率最高为100';
+                    }
 
+                    n = value;
+                   /* console.log(m);*/
+                },
+                idling:function(value){
+                    /*if(value < n){
+                        console.log(n);
+                        console.log(value);
+                      /!*  return '利用率不能小于闲置率'*!/
+                    }*/
+                    if(Number(value) > Number(n)){
+                        console.log(1);
+                        return '利用率不能小于闲置率'
+                    }
+                    if(value < 0){
+                        return '闲置率最底为0';
+                    }
+
+
+                   /*  m = value;
+                       console.log(m)*/
+                }
+            },
+            val: {
+                filter: "subb",
+                get: {
+                    url: "/efficiency/level/selectLevel",
+                    type: "POST",
+                    data: ["using", "idling"]
+                },
+            },
+            submit: {
+                filter: "sub",
+                form: {
+                    url: "/efficiency/level/updateLevel",
+                    data: ["using","idling"],
+                    type:"POST",
+                    reload:true
+                }
+            },
+        }
+    }
+</script>
 </body>
-
 </html>

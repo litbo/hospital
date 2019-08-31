@@ -25,11 +25,35 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+<!--<script type="text/html" id="toolBar">
+    &lt;!&ndash;<div class="addBtn">
+        <a class="layui-btn layui-btn-sm layui-btn-normal "  lay-event="del" >接收</a>
+    </div>&ndash;&gt;
+    <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="htId" placeholder="合同编号" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+</script>-->
+
+<script id="barDemo" type="text/html">
+    {{# if(d.userId===""||d.userId=== null){ }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">查看</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="accept">接收</a>
+    {{# } else { }}  
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">查看</a>
+    {{# } }}
+
+</script>
 
 
 <script>
     // var a=$
     // console.log("a")
+    var emp=tempValue("rl", "emp", false);
+    var abc=emp.userId;
+
     renderMod = {
         addTable: {
             table: [
@@ -43,11 +67,12 @@
                     , {field: 'dhsj', title: '接收时间'}
                     , {field: 'dhdjCfdd', title: '存放地点'}
                     , {field: 'dhdjSdxs', title: '实到箱数'}
-                    , { title:'操作',align:'center', toolbar: '#barDemo'}
+                    // , {field: 'userId', title: '接收人'}
+                    , {field: 'userId',title:'操作',align:'center', toolbar: '#barDemo'}
                 ]]
                 , url: "/lifeManage/selectDjhwKsjs"
                 , method: "POST"
-                ,where:{ userId:"666666" }
+                ,where:{ userId:abc}
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -61,17 +86,52 @@
                         }
                     }
                     , done: function (obj) {
-
+                        console.log(obj);
+                        tableFunc({
+                            toolFunc: [
+                                {
+                                    title:"table1",
+                                    event: 'edit',
+                                    type: 2,
+                                    content: './child/depart-edit.html',
+                                    area: ['100%', '100%'],
+                                    dataUrl: ["djhwId"]
+                                },
+                                {
+                                    title:"table1",
+                                    event: 'accept',
+                                    type: 2,
+                                    content: './child/depart-accept.html',
+                                    area: ['50%', '50%'],
+                                    dataUrl: ["userId","djhwId"]
+                                }
+                                /*{
+                                    send:{
+                                        id:"table",
+                                        filter:"table1",
+                                        name:"eqIds",
+                                        event:"del",
+                                        url:"/lifeManage/updateSgDhdjKsjs",
+                                        type:"POST",
+                                        par:"eqId",
+                                        show:"确定接收选中的数据吗？",
+                                        reload:true,
+                                        reTable:true
+                                    },
+                                    event:"del",
+                                    tool:"toolbar"
+                                }*/
+                            ]
+                        })
                     }
-
             }
-            ]
+            ],
 
-            // reSet: {
-            //     url: "/lifeManage/selectSgInfoKsshList",
-            //     type: "reload",
-            //     data: ["eqPmPym", "bh"]
-            // }
+            reSet: {
+                url: "/lifeManage/selectDjhwKsjs",
+                type: "reload",
+                data: ["htid"]
+            }
         }
     }
 </script>

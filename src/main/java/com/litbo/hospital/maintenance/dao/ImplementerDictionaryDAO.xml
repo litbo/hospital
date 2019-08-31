@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.maintenance.dao.ImplementerDictionaryDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.maintenance.pojo.ImplementerDictionary">
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <insert id="insert" parameterType="com.litbo.hospital.maintenance.pojo.ImplementerDictionary">
+    insert into hospital..implementer_dictionary ("type")
+    values (#{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.maintenance.pojo.ImplementerDictionary">
+    insert into hospital..implementer_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        "type",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+    select * from hospital..implementer_dictionary where "type" = #{name}
+  </select>
+
+  <delete id="deleteByName" parameterType="string">
+    delete from hospital..implementer_dictionary where "type" = #{name}
+  </delete>
+
+  <select id="findAllType" resultType="string">
+    select "type" from hospital..implementer_dictionary
+  </select>
+</mapper>

@@ -4,7 +4,9 @@ import com.litbo.hospital.lifemanage.bean.SgDict;
 import com.litbo.hospital.lifemanage.service.SgDictService;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * SgDictController 申购字典Controller

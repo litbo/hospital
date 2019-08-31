@@ -7,7 +7,6 @@ import com.litbo.hospital.metering.pojo.DossierFile;
 import com.litbo.hospital.metering.service.DossierService;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
-import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.service.BmService;
 import com.litbo.hospital.user.bean.EqInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,7 +183,7 @@ public class DossierController {
 
         // 文件名
         String fileName = file.getOriginalFilename();
-        dossierFile.setFileName(fileName);  // 保存文件名
+//        dossierFile.setFileName(fileName);  // 保存文件名
 
         // 获得一个时间戳
         String time = "" + System.currentTimeMillis();

@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgPd;
+import com.litbo.hospital.lifemanage.bean.SgPdJg;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -16,10 +17,18 @@ public interface SgPdMapper {
      * @return
      */
     @Insert({
-            "insert into sg_pd (pd_id ,pd_scan_id, pd_czr, pd_jhid )",
-            "values (#{pdId,jdbcType=VARCHAR},#{pdScanId,jdbcType=VARCHAR}," +
+            "insert into sg_pd (pd_id ,pd_scan_id, pd_scsj, pd_czr, pd_jhid )",
+            "values (#{pdId,jdbcType=VARCHAR},#{pdScanId,jdbcType=VARCHAR},#{pdScsj ,jdbcType=VARCHAR}," +
                     "#{pdCzr,jdbcType=VARCHAR},#{pdJhid,jdbcType=VARCHAR})"})
     int insertPdId(SgPd record);
+
+    /**
+     * 插入科室盘点状态和完成时间
+     * @return
+     */
+    @Insert("insert into sg_pd_jg (pd_jgId,pd_wcsj,pd_bmzt) values (#{pdJgId ,jdbcType=VARCHAR},#{pdWcsj ,jdbcType=DATE}," +
+            "#{pdBmzt,jdbcType=VARCHAR})")
+    int insertPdZt(SgPdJg sgPdJg);
 
     /**
      * 查询pdScanId是否重复
@@ -71,4 +80,6 @@ public interface SgPdMapper {
      */
     @Select("select eq_zcbh from eq_info where eq_bmid = #{bmId,jdbcType=VARCHAR}")
     List<String> selectZcbhByBmId(String bmId);
+
+
 }

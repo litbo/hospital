@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.efficiency.vo.IntegrityVO;
+import com.litbo.hospital.efficiency.vo.SearchVO;
 
 /**
  *   设备完好率Service层
@@ -22,9 +23,9 @@ public interface IntegrityService {
      * 按条件搜索完好率
      * @param pageNum 页码
      * @param pageSize 大小
-     * @param integrityVO 搜索的关键词
+     * @param searchVO 搜索的关键词
      * @return 返回值
      */
-    PageInfo selectIntegrityByCon(int pageNum, int pageSize, IntegrityVO integrityVO);
+    PageInfo selectIntegrityByCon(int pageNum, int pageSize, SearchVO searchVO);
 
 }

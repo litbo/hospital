@@ -4,11 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgCheck;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
+import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
 import com.litbo.hospital.supervise.service.EmpService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -16,7 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * 审核计划ServiceImpl
@@ -100,5 +105,28 @@ public class SgPlanServiceImpl implements SgPlanService {
         return new PageInfo<>(
                 userId.size()==0 && StringUtils.isNotBlank(userName) ?
                 null : sgPlanMapper.selectPlan(planName, date, userId));
+    }
+
+    /**
+     * 查询所有的计划名字
+     * @return
+     */
+    @Override
+    public List<String> getplanName() {
+        System.out.println(sgPlanMapper.getplanName());
+        return sgPlanMapper.getplanName();
+    }
+
+    /**
+     * 根据计划名称查询计划id
+     * @return
+     */
+    @Override
+    public String selectIdByName(SgPlanVO sgPlanVO) {
+        SgPlan sgPlan=new SgPlan();
+        BeanUtils.copyProperties(sgPlanVO,sgPlan);
+        String planName=sgPlanVO.getPlanName();
+        String id=sgPlanMapper.selectIdByName(planName);
+        return id;
     }
 }

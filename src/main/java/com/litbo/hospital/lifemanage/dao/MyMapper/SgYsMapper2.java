@@ -10,7 +10,8 @@ import com.litbo.hospital.lifemanage.bean.vo.SgYsListVO;
 import com.litbo.hospital.lifemanage.dao.provider.MyProvider.SgYsProvider;
 import org.apache.ibatis.annotations.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("ALL")
 @Mapper
@@ -26,15 +27,15 @@ public interface SgYsMapper2 {
             " sg_djhw.djhw_xnsb,sg_djhw.djhw_gg,\n" +
             " sg_djhw.djhw_xh,sg_djhw.djhw_sl,\n" +
             " sg_dhdj.ht_id,sg_dhdj.dhsj\n" +
-            " from sg_djhw\n" +
+            " from sg_djhw " +
             " INNER JOIN dbo.sg_dhdj " +
             " ON dbo.sg_djhw.dhdj_id = dbo.sg_dhdj.dhdj_id\n" +
             " INNER JOIN sg_info on sg_info.id=sg_djhw.sg_id \n" +
             " inner join s_bm on s_bm.bm_id=sg_info.bm_id\n" +
             " where s_bm.bm_id=#{ksid}\n" +
-            " and dbo.sg_djhw.djhw_id not in\n" +
-            " (select dbo.sg_ys.djhw_id  from  sg_ys " +
-            " where dbo.sg_ys.djhw_id !='' and dbo.sg_ys.djhw_id is not null)\n" +
+            " and dbo.sg_djhw.djhw_id not in" +
+            " ( select dbo.sg_ys.djhw_id  from  sg_ys " +
+            " where dbo.sg_ys.djhw_id !='' and dbo.sg_ys.djhw_id is not null)" +
             " <if test=\" htid != null and htid!=''\">" +
             " and sg_dhdj.ht_id like CONCAT('%',#{htid},'%') " +
             " </if>" +
@@ -47,11 +48,11 @@ public interface SgYsMapper2 {
     @Insert("insert into sg_ys (ys_id,ys_dabh,ht_id,sg_id,ys_zzshjg,ys_zzshr,ys_zxd,ys_sms,ys_czsc," +
             " ys_wxsc,ys_qtjszl,ys_cphgzm,ys_bxk," +
             " ys_3crz,ys_jlqjrz,ys_bgd,ys_jyjyzm,ys_isgfxqx,ys_bzbs," +
-            " ys_bq,ys_gfxsms,ys_hgzm,ys_qtcl,djhw_id) " +
+            " ys_bq,ys_gfxsms,ys_hgzm,ys_qtcl,djhw_id,ys_sfzj) " +
             " values (#{ysId,jdbcType=VARCHAR},#{ysDabh},#{htId},#{sgId},#{ysZzshjg},#{ysZzshr},#{ysZxd},#{ysSms},#{ysCzsc}," +
             " #{ysWxsc},#{ysQtjszl},#{ysCphgzm},#{ysBxk}," +
             " #{ys3crz},#{ysJlqjrz},#{ysBgd},#{ysJyjyzm},#{ysIsgfxqx},#{ysBzbs},#{ysBq},#{ysGfxsms},#{ysHgzm}," +
-            " #{ysQtcl},#{djhwId})")
+            " #{ysQtcl},#{djhwId},#{ysSfzj})")
     int insertSw(SgSwYsVO sw);
 
     /**本科室待技术验收设备查询*/
@@ -106,7 +107,7 @@ public interface SgYsMapper2 {
             "inner join s_bm on s_bm.bm_id=sg_info.bm_id\n" +
             "where s_bm.bm_id=#{ksid}\n" +
             "and sg_ys.ys_syqkyj is null\n " +
-            "or sg_ys.ys_syqkyj like ''\n" +
+//            "or sg_ys.ys_syqkyj like ''\n" +
             "<if test=\" htid != null and htid!=''\">" +
             "and sg_dhdj.ht_id like CONCAT('%',#{htid},'%') " +
             "</if>" +
@@ -142,6 +143,8 @@ public interface SgYsMapper2 {
             "<if test=\" htid != null and htid!=''\">" +
             "and sg_dhdj.ht_id like CONCAT('%',#{htid},'%') " +
             "</if>" +
+            "and sg_ys.ys_ysjg is null\n" +
+            "and sg_ys.ys_ysqrsj is null\n" +
             "and sg_ys.ys_syqkyj is not null\n" +
             "and sg_ys.ys_syqkyj not like ''\n" +
             "and sg_ys.ys_ysgcs !='' \n" +
@@ -160,7 +163,9 @@ public interface SgYsMapper2 {
     /*插入验收情况汇总*/
     @Update("update  sg_ys" +
             " set ys_ysjg=#{ysYsjg,jdbcType=VARCHAR}," +
-            " ys_ysqrsj=#{ysYsqrsj,jdbcType=DATE},ys_qysj=#{ysQysj,jdbcType=DATE},ys_istg=#{ysIstg,jdbcType=VARCHAR}," +
+            " ys_ysqrsj=#{ysYsqrsj,jdbcType=DATE},ys_qysj=#{ysQysj,jdbcType=DATE}," +
+            "ys_czgc=#{ysCzgc},ys_zysx=#{ysZysx},ys_byzd=#{ysByzd},ys_cpjj=#{ysCpjj},ys_zlkz=#{ysZlkz}," +
+            "ys_istg=#{ysIstg,jdbcType=VARCHAR}," +
             " ys_thh=#{ysThh,jdbcType=VARCHAR},ys_thsj=#{ysThsj,jdbcType=DATE},ys_thyy=#{ysThyy,jdbcType=VARCHAR}" +
             " where ys_id=#{ysId}")
     int insertHz(SgHzYsVO hz);
@@ -208,7 +213,7 @@ public interface SgYsMapper2 {
             "inner join s_bm on s_bm.bm_id=sg_info.bm_id\n" +
             "where s_bm.bm_id=#{ksid}\n" +
             "and sg_ys.ys_ysgcs !=''\n" +
-            "and sg_ys_ysgcs is not null\n" +
+            "and sg_ys.ys_ysgcs is not null\n" +
             "<if test=\" htid != null and htid!=''\">" +
             "and sg_dhdj.ht_id like CONCAT('%',#{htid},'%') " +
             "</if>" +

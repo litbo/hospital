@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Data
 public class EqBraz {
+
     private String id;
 
     private String brBxid;

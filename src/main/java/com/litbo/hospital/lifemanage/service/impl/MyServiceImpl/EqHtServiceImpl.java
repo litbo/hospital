@@ -196,7 +196,7 @@ public class EqHtServiceImpl implements EqHtService {
     @Override
     public Integer addSbCs(SbCsVO vo) {
         vo.setSbcsId(UUID.randomUUID().toString());
-        vo.setSbCslbId("2");
+        vo.setSbCslbId("1");
         return mapper.addSbCs(vo);
     }
 
@@ -206,22 +206,25 @@ public class EqHtServiceImpl implements EqHtService {
         List<LoginCheckHtStatusVO> vos = mapper.loginCheckHtStatus();
         for (int i = 0; i < vos.size(); i++) {
             String s = mapper.selectHtZbHzById(vos.get(i).getHtId());
-            JSONArray array = JSONArray.parseArray(s);
-            if (array.size() == vos.get(i).getCount()) {
-                EqHt eqHt = mapper.selectByPrimaryId(vos.get(i).getHtId());
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(vos.get(i).getDate());
-                cal.add(Calendar.MONTH, eqHt.getHtBxq());
-                long lasttime = cal.getTime().getTime();
-                if (new Date().getTime() - lasttime >= 0) {
-                    EqHt ht = mapper.selectByPrimaryId(vos.get(i).getHtId());
-                    if (!"2".equals(ht.getHtZt())) {
-                        ht.setHtZt("2");
-                        updateByPrimaryId(ht);
-                    }
+            if(s!=null){
+                JSONArray array = JSONArray.parseArray(s);
+                if (array.size() == vos.get(i).getCount()) {
+                    EqHt eqHt = mapper.selectByPrimaryId(vos.get(i).getHtId());
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(vos.get(i).getDate());
+                    cal.add(Calendar.MONTH, eqHt.getHtBxq());
+                    long lasttime = cal.getTime().getTime();
+                    if (new Date().getTime() - lasttime >= 0) {
+                        EqHt ht = mapper.selectByPrimaryId(vos.get(i).getHtId());
+                        if (!"2".equals(ht.getHtZt())) {
+                            ht.setHtZt("2");
+                            updateByPrimaryId(ht);
+                        }
 
+                    }
                 }
             }
+
         }
 
 

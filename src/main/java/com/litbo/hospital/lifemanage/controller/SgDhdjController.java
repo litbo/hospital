@@ -23,9 +23,8 @@ import java.util.List;
 public class SgDhdjController {
     @Autowired
     private SgDhdjService sgDhdjService;
-    @Autowired
-    private SgDjhwMapper djhwMapper;
-
+@Autowired
+private SgDjhwMapper djhwMapper;
     /**
      * 选择合同编号
      */
@@ -61,17 +60,16 @@ public class SgDhdjController {
     public Result selectDjhwKsjs(@RequestParam(name = "userId") String userId,
                                  @RequestParam(name = "pageNum", defaultValue = "1", required = false) Integer pageNum,
                                  @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize) {
-        Result<PageInfo<DhdjksjsVO>> result = null;
-        try {
-            result = Result.success(sgDhdjService.selectDjhwKsjs(userId, pageNum, pageSize));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.success(result);
+
+
+        PageInfo<DhdjksjsVO> info = sgDhdjService.selectDjhwKsjs(userId, pageNum, pageSize);
+
+        return Result.success(info);
     }
 
     /**
      * 科室接收
+     *
      * @param djhwId 登记货物id
      * @param userId 登陆人id
      * @return Result
@@ -93,6 +91,8 @@ public class SgDhdjController {
     public Result selectSgDhdjDetails(@RequestParam(name = "djhwId") String djhwId) {
         return Result.success(sgDhdjService.selectSgDhdjDetails(djhwId));
     }
+
+    @PostMapping("/selectAllSgDhdjAndDjhw")
     /*
      * 方法功能描述:
      * @Param: [pageNum, pageSize, htid, htzt]
@@ -101,7 +101,7 @@ public class SgDhdjController {
      * @Author: NCH
      * @Date: 2019/08/01 下午 16:37
      */
-    @PostMapping("/selectAllSgDhdjAndDjhw")
+
     public Result selectAllSgDhdjAndDjhw(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
                                          @RequestParam(required = false, name = "htid") String htid,
@@ -111,7 +111,7 @@ public class SgDhdjController {
         return Result.success(info);
     }
 
-    @GetMapping("/selectOneSgDhdjAndDjhwByHtid")
+    @PostMapping("/selectOneSgDhdjAndDjhwByHtid")
     public Result selectOneSgDhdjAndDjhwByHtid(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                                @RequestParam(value = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
                                                String htid) {
@@ -119,6 +119,7 @@ public class SgDhdjController {
         PageInfo<List<SgDhdjVO>> info = sgDhdjService.selectDhdjAndDjhwBy(pageNum, pageSize, htid);
         return Result.success(info);
     }
+
     @PostMapping("/selectDjhwById")
     public Result selectDjhwById(String id) {
         SgDjhw djhw=new SgDjhw();
@@ -127,10 +128,11 @@ public class SgDhdjController {
             djhw = djhwMapper.selectDjhwLogById(id);
         }
         else{
-            djhw=djhwMapper.selectDjhwById(id);
+         djhw=djhwMapper.selectDjhwById(id);
         }
         return Result.success(djhw);
     }
+
 
 
     @RequestMapping("/importdjhwimgurls")
@@ -139,4 +141,6 @@ public class SgDhdjController {
         String docUrl = sgDhdjService.Importdjhwimgurls(imgs);
         return Result.success(docUrl);
     }
+
+
 }

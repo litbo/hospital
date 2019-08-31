@@ -46,6 +46,7 @@ public class SgDjhw {
      * 型号
      */
     private String djhwXh;
+
     /**
      * 数量
      */

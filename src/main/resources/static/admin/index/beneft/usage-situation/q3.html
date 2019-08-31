@@ -30,45 +30,21 @@
 
         <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
-    <div class="moreBtn hidden-xs">
-        <div class="layui-inline">
-            <select name="eqCslb" lay-filter="eqcslb">
-                <option></option>
-            </select>
-        </div>
-        <div class="layui-inline">
-            <input type="text" name="sbcsName" class="layui-input" autocomplete="off" placeholder="厂商名称">
-        </div>
-        <button class="layui-btn" data-type="search">搜索</button>
-    </div>
 </script>
 
 <script>
     renderMod = {
-        form: {
-            val: {
-                filter: "forms",
-                select: [
-                    {
-                        filter: "eqcslb",
-                        ids: "eqCslbId",
-                        text: "eqCslbName",
-                        url: "/eqdict/listEqCslb"
-                    }
-                ]
-            }
-        },
         addTable: {
             table: {
                 cols: [[
                     {type: "checkbox"}
-                    , {field: 'sbcsCsdm', title: '设备编号', width: "15%", minWidth: 200}
-                    , {field: 'sbcsName', title: '设备名称', minWidth: 150, sort: true}
-                    , {field: 'sbCslbName', title: '实际临床工作量', minWidth: 150}
-                    , {field: 'gbName', title: '预测临床工作量', minWidth: 150}
-
+                    , {field: 'eqSbbh', title: '设备编号', width: "15%", minWidth: 200}
+                    , {field: 'eqName', title: '设备名称', minWidth: 150, sort: true}
+                    , {field: 'actualNum', title: '实际临床工作量', minWidth: 150, sort: true}
+                    , {field: 'forecastNum', title: '预测临床工作量', minWidth: 150, sort: true}
+                    , {field: 'ratio', title: '比率', minWidth: 150, sort: true}
                 ]]
-                , url: "/supervise/csgl/listEqcsVOByX"
+                , url: "/config/ratio/showForecast"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -86,21 +62,15 @@
                         "toolFunc":[{
                             type: 2,
                             tool: "toolbar",
+                            title:"添加",
+                            area: ['75%', '60%'],
                             event: "add",
-                            content: "./child/pipe_tagadd.html"
+                            content: "./child/q3add.html"
                         },{
-                            type: 2,
-                            tool: "toolbar",
-                            title: "排名",
-                            area: ['100%','70%'],
-                            event: "king",
-                            content: "./child/paiming.html"
-                        },
-                            {
                                 type: 2,
                                 tool: "toolbar",
                                 event: "edit",
-                                content: "./child/pipe_tagedit.html",
+                                content: "./child/q3edit.html",
                                 // dataUrl:["pjzdId"]
                             }
                             ,{
@@ -121,12 +91,6 @@
                         ]
                     })
                 }
-            },
-            reSet: {
-                url: "/security/pjzd/listFwPjzd",
-                type: "reload",
-                data: ["pjfl", "pjSzm"],     //搜索框的name
-                where: {}
             }
         }
     }

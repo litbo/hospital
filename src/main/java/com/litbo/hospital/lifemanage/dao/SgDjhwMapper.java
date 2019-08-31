@@ -73,11 +73,13 @@ public interface SgDjhwMapper {
 
     /**
      * 科室接收货物详情信息
+     *
      * @param djhwId 到货登记id
      * @return SgDjhw
      */
 
     @Select("SELECT\n" +
+            "dbo.sg_djhw.djhw_id ,\n" +
             "dbo.sg_djhw.djhw_dw,\n" +
             "dbo.sg_djhw.djhw_bzxh,\n" +
             "dbo.sg_djhw.djhw_pp,\n" +

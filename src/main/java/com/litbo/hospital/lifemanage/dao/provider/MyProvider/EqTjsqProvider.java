@@ -15,7 +15,7 @@ public class EqTjsqProvider {
         str = "insert into  eq_tjsq (id,tj_sqks,tj_zbmc," +
                 " tj_sqly,tj_drjbr,tj_sqsj,tj_sqtpgc,tj_sqlx,tj_sfyl,tj_czjg,tj_zhz, tj_drksurl)" +
                 " values(#{id,jdbcType=VARCHAR},#{tjSqks,jdbcType=VARCHAR},#{tjZbmc,jdbcType=VARCHAR},#{tjSqly,jdbcType=VARCHAR},#{tjDrjbr,jdbcType=VARCHAR}," +
-                " #{tjSqsj,jdbcType=DATE},#{tjSqtpgc,jdbcType=VARCHAR},#{tjSqlx,jdbcType=CHAR},#{tjSfyl,jdbcType=VARCHAR},#{tjCzjg,jdbcType=VARCHAR},#{tjZhz,jdbcType=VARCHAR},#{tjDrksurl,jdbcType=VARCHAR})";
+                " #{tjSqsj,jdbcType=DATE},#{tjSqtpgc,jdbcType=VARCHAR},#{tjSqlx,jdbcType=VARCHAR},#{tjSfyl,jdbcType=VARCHAR},#{tjCzjg,jdbcType=VARCHAR},#{tjZhz,jdbcType=VARCHAR},#{tjDrksurl,jdbcType=VARCHAR})";
         return str;
     }
 
@@ -76,7 +76,7 @@ public class EqTjsqProvider {
     public String selectByPrimaryKey() {
         str = " select id, tj_sqtj, tj_dcks," +
                 "     tj_lxr, tj_dwsj, tj_zbbm," +
-                "     tj_ggxh, tj_tpsl, tj_sysc," +
+                "    tj_gg,tj_xh, tj_ggxh, tj_tpsl, tj_sysc," +
                 "     tj_zbztjc, tj_fjjc, tj_dcjbr ," +
                 "     tj_dpsj,tj_dcksurl ,tj_zhz,tj_sqzbbms,tj_sqzbcounts,tj_dclx from tj_zbdc where id = #{id}";
         return str;
@@ -97,7 +97,7 @@ public class EqTjsqProvider {
                 "      tj_czjg = #{tjCzjg,jdbcType=VARCHAR},\n" +
                 "      tj_dpdzt = #{tjDpdzt,jdbcType=VARCHAR},\n" +
                 "      tj_zhz = #{tjZhz,jdbcType=VARCHAR},\n" +
-                "      tj_sqlx = #{tjSqlx,jdbcType=CHAR},\n" +
+                "      tj_sqlx = #{tjSqlx,jdbcType=VARCHAR},\n" +
                 "      tj_drksurl=#{tjDrksurl,jdbcType=VARCHAR}" +
                 "    where id = #{id,jdbcType=VARCHAR}";
         return str;

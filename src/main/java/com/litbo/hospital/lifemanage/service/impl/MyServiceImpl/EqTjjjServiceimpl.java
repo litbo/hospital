@@ -1,6 +1,5 @@
 package com.litbo.hospital.lifemanage.service.impl.MyServiceImpl;
 
-import cn.hutool.db.Page;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
@@ -68,13 +67,12 @@ public class EqTjjjServiceimpl implements EqTjjjService {
         /*查询改调剂交接单号已经归还的设备编号*/
         List<String> list = sbghMapper.selectAllSbgh2(id);
 
-
         for (int i = 0; i < size; i++) {
             EqSbghZbVO zbVO = sbghMapper.selectEq2ByBianhao((String) array.get(i));
             List<String> strings = new ArrayList<>();
             /*如果已经归还状态变为1为已经归还*/
             for (String str : list) {
-                strings= JSONArray.parseArray(str,String.class);
+                strings = JSONArray.parseArray(str,String.class);
                 if(strings.contains((String)array.get(i))){
                     zbVO.setSfgh(1);
                 }

@@ -63,9 +63,9 @@
                         , {field: 'htId', title: '合同编号',sort:true}
                         , {field: 'dhdjIsqbdh', title: '到货情况',
                             templet: function (d) {
-                                if (d.dhdjIsqbdh == '0')
+                                if (d.dhdjIsqbdh == '1')
                                     return '全部到货';
-                                else if (d.dhdjIsqbdh == '1')
+                                else if (d.dhdjIsqbdh == '0')
                                     return '未全部到货';
                             }}
                         , {field: 'dhdjFhdw', title: '发货单位'}

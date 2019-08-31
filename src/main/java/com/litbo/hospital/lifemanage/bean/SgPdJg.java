@@ -9,7 +9,7 @@ public class SgPdJg {
     /**
      *盘点结果号
      */
-    private String pdJgid;
+    private String pdJgId;
     /**
      *盘点流水号
      */
@@ -17,7 +17,7 @@ public class SgPdJg {
     /**
      *该科室所有的品名id
      */
-    private Integer pdPmId;
+    private String pdSbId;
     /**
      *该科室所有的资产编号
      */
@@ -27,7 +27,7 @@ public class SgPdJg {
      */
     private Date pdWcsj;
     /**
-     *单个数据盘点状态
+     *科室盘点状态
      */
-    private Integer pdZt;
+    private String pdBmzt;
 }

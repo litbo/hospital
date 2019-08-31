@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.service.impl;
 
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.lifemanage.bean.SgPd;
+import com.litbo.hospital.lifemanage.bean.SgPdJg;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
@@ -24,7 +25,25 @@ public class SgPdServiceImpl implements SgPdSeverice {
     private SgPlanMapper sgPlanMapper;
 
     /**
-     * 插入盘点扫描到的所有编号
+     * 插入盘点的计划id和操作人id
+     * @param record
+     * @return
+     */
+    @Override
+    public int insertJhCz(SgPdVO record){
+        SgPd sgPd = new SgPd();
+        BeanUtils.copyProperties(record, sgPd);
+        int successCount = 0;
+        if((record.getPdJhid()!=null) && (record.getPdCzr()!=null)){
+            sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
+            sgPdMapper.insertPdId(sgPd);
+            successCount++;
+        }
+        return successCount;
+    }
+
+    /**
+     * 插入盘点扫描到的所有编号和盘点时间
      *
      * @param record
      */
@@ -34,18 +53,20 @@ public class SgPdServiceImpl implements SgPdSeverice {
         BeanUtils.copyProperties(record, sgPd);
         int successCount = 0;
         for (String pdScanId : record.getPid()) {
-            if (StringUtils.isBlank(pdScanId)) {
-                continue;
+            for (String pdScsj : record.getPdScsj()) {
+                if (StringUtils.isBlank(pdScanId)) {
+                    continue;
+                }
+                String selectId = sgPdMapper.selectScanId(pdScanId);
+                if (StringUtils.isNotBlank(selectId)) {
+                    continue;
+                }
+                sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
+                sgPd.setPdScanId(pdScanId);
+                sgPd.setPdScsj(pdScsj);
+                sgPdMapper.insertPdId(sgPd);
+                successCount++;
             }
-            String selectId = sgPdMapper.selectScanId(pdScanId);
-            if (StringUtils.isNotBlank(selectId)) {
-                continue;
-            }
-            sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
-            sgPd.setPdScanId(pdScanId);
-            sgPd.setPdScsj(new Date());
-            sgPdMapper.insertPdId(sgPd);
-            successCount++;
         }
         return successCount;
     }
@@ -67,6 +88,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
         Map<String, List> result = new HashMap<>();
         //所有查出来的该是这个科室的设备名字
         List<String> isName=new ArrayList<>();
+        List<String> bmPdZt=new ArrayList<>();
         
         for (String scanId : pdScanList) {
             if (sbbhList.contains(scanId)|| zcbhList.contains(scanId)) {
@@ -85,11 +107,34 @@ public class SgPdServiceImpl implements SgPdSeverice {
         Collections.copy(notExistName, allNameList);
         notExistName.removeAll(isName);
 
-        //返回的PDA数据 该科室下所有的设备名字 盘点的是该科室设备的名称 是该科室的但是没有扫描的设备名称
+        SgPdJg sgPdJg=new SgPdJg();
+
+        if((pdScanList.size()) > (allNameList.size())){
+            bmPdZt.add("盘亏");
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("-1");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdMapper.insertPdZt(sgPdJg);
+        }else if((pdScanList.size()) < (allNameList.size())){
+            bmPdZt.add("盘赢");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("1");
+            sgPdMapper.insertPdZt(sgPdJg);
+        }else if((pdScanList.size())==(allNameList.size())){
+            bmPdZt.add("正常");
+            sgPdJg.setPdJgId(IDFormat.getIdByIDAndTime("sg_pd_jg", "pd_jgId"));
+            sgPdJg.setPdWcsj(new Date());
+            sgPdJg.setPdBmzt("0");
+            sgPdMapper.insertPdZt(sgPdJg);
+        }
+
+        //返回的PDA数据 该科室下所有的设备名字 盘点的是该科室设备的名称 是该科室的但是没有扫描的设备名称 该科室盘点状态
         result.put("pdScanList",pdScanList);
         result.put("allNameList",allNameList);
         result.put("isName",isName);
         result.put("notExistName",notExistName);
+        result.put("bmPdZt",bmPdZt);
 
         return result;
     }

@@ -16,17 +16,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.litbo.hospital.supervise.config.*;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.litbo.hospital.supervise.bean.ItemInfo;
-import com.litbo.hospital.supervise.spider.StartSpider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.supervise.bean.ItemInfo;
+import com.litbo.hospital.supervise.config.SpiderProperties;
 import com.litbo.hospital.supervise.dao.ItemInfoDao;
 import com.litbo.hospital.supervise.service.IItemInfoService;
+import com.litbo.hospital.supervise.spider.StartSpider;
 
 /** 
 * @ClassName: IItemInfoServiceImpl 
@@ -43,61 +43,6 @@ public class ItemInfoServiceImpl implements IItemInfoService{
 	@Autowired
 	private SpiderProperties spiderProperties;
 
-	/** 
-	* @Title: search 
-	* @Description: 根据条件查询全部
-	* @return 
-	* @see IItemInfoService #search()
-	*/
-	@Override
-	public List<ItemInfo> search(ItemInfo info) {
-		// TODO Auto-generated method stub
-		
-		return itemInfoDao.selectList(condition(info));
-	}
-
-
-	/** 
-	* @Title: search 
-	* @Description: 根据条件分页查询
-	* @param page
-	* @return 
-	* @see IItemInfoService #search(com.baomidou.mybatisplus.plugins.Page)
-	*/
-	@Override
-	public Page<ItemInfo> search(Page<ItemInfo> page, ItemInfo info) {
-		// TODO Auto-generated method stub
-		return page.setRecords(itemInfoDao.selectMyPage(page, condition(info)));
-	}
-	
-	/** 
-	* @Title: condition 
-	* @Description: 配置查询条件 
-	* @param info
-	* @return EntityWrapper<ItemInfo>
-	*/
-	private EntityWrapper<ItemInfo> condition(ItemInfo info){
-		EntityWrapper<ItemInfo> wrapper = new EntityWrapper<>();
-		if(info != null) {
-			if(info.getEsId() != null) {
-				wrapper.like("ES_ID", info.getEsId());
-			}
-			
-			if(info.getProductName() != null) {
-				wrapper.like("PRODUCT_NAME", info.getProductName());
-			}
-			
-			if(info.getApprovalNum() != null) {
-				wrapper.like("APPROVAL_NUM", info.getApprovalNum());
-			}
-			
-			if(info.getEnterprise() != null) {
-				wrapper.like("ENTERPRISE", info.getEnterprise());
-			}
-		}
-        wrapper.orderBy("ES_ID", false);
-		return wrapper;
-	}
 
 
 	/* (非 Javadoc) 
@@ -162,6 +107,27 @@ public class ItemInfoServiceImpl implements IItemInfoService{
 		}
 		
 		return map;
+	}
+
+
+
+	/* (非 Javadoc) 
+	* <p>Title: search</p> 
+	* <p>Description: </p> 
+	* @param info
+	* @param pageNum
+	* @param pageSize
+	* @return 
+	* @see com.litbo.hospital.supervise.service.IItemInfoService#search(com.litbo.hospital.supervise.bean.ItemInfo, int, int) 
+	*/
+	@Override
+	public PageInfo<ItemInfo> search(ItemInfo info, int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(pageNum,pageSize);
+		
+		List<ItemInfo> list = itemInfoDao.selectByPage(info);
+		
+		return new PageInfo<ItemInfo>(list);
 	}
 
 }

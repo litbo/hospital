@@ -49,7 +49,7 @@
                 ,{field: 'ratio', title: 'Kpi对应比率',minWidth: 150}
                 ,{field: 'ranking', title: '本次排名', minWidth: 150,sort:true}
                 ,{field: 'oldRanking', title: '上次排名', minWidth: 150,sort:true}
-                ,{field: 'change', title: '排名变化', minWidth: 150,sort:true}
+                ,{field: 'change', title: '排名变化', minWidth: 150,align:'center',sort:true,templet:'#status'}
             ]]
             , height: "full-25"
             , url: "/kpi/ranking/selectChangeIntegrity"
@@ -69,7 +69,15 @@
         },
     }
 </script>
-
+<script type="text/html" id="status">
+    {{#  if(d.change > "0"){ }}
+    <span style="color: #ff0000; ">{{ d.change }}↑</span>
+    {{#  } else if(d.change == "0") { }}
+    <span style="color: #00a0e9;">-</span>
+    {{#  } else { }}
+    <span style="color: #00a0e9;">{{ d.change }}↓</span>
+    {{#  } }}
+</script>
 </body>
 </html>
 

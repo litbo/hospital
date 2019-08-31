@@ -22,7 +22,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * 到货登记表Service实现类
@@ -90,7 +93,7 @@ public class SgDhdjServiceImpl implements SgDhdjService {
         for (MultipartFile file : files) {
             String url = UploadFile.upload(filePath, file);
             url = url.replaceAll("/", "\\\\");
-//            url = url.replace(path + "\\bzps", "");
+            url = url.replace(path + "\\bzps", "");
             imgurls.append(url + ",");
         }
 

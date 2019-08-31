@@ -17,7 +17,7 @@ public class SgPd {
     /**
      *盘点上传时间
      */
-    private Date pdScsj;
+    private String pdScsj;
     /**
      *盘点操作人
      */
@@ -34,5 +34,9 @@ public class SgPd {
      *盘点计划id
      */
     private String pdJhid;
+    /**
+     *盘点完成时间
+     */
+    private Date pdWcsj;
 
 }

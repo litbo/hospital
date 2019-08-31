@@ -1,12 +1,12 @@
 package com.litbo.hospital.lifemanage.service.MyService;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.SgYs;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.SgHzYsVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.SgJsYsVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.SgLcYsVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.SgSwYsVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgYsListVO;
-
 
 import java.util.List;
 import java.util.Map;
@@ -96,6 +96,7 @@ public interface SgYsService2 {
      * 查询所有科室的部门id和部门名字
      */
     List<Map<String, String>> selectAllBmIdAndName();
-
+    /*查看验收记录详情*/
+    SgYs slectOneYsJl(String ysid);
 
 }

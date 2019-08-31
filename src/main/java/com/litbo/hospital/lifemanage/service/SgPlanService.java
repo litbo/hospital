@@ -2,6 +2,9 @@ package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
+import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
+
+import java.util.List;
 
 /**
  * 审核计划Service
@@ -27,4 +30,12 @@ public interface SgPlanService {
      * @return PageInfo<SgPlan>
      */
     PageInfo<SgPlan> selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询所有的计划名字
+     * @return
+     */
+    List<String> getplanName();
+
+    String selectIdByName(SgPlanVO sgPlanVO);
 }

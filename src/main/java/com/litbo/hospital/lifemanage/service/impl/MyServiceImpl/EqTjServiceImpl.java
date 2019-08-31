@@ -22,7 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -45,9 +47,9 @@ public class EqTjServiceImpl implements EqTjService {
         String sfyl = DelSpaceUtils.deleteSpace(showVO.getTjSfyl());
         String sfqbsl = DelSpaceUtils.deleteSpace(showVO.getTjSfqbsl());
         String sqlx = DelSpaceUtils.deleteSpace(showVO.getTjSqlx());
-        criteria.andTjSqlxLike(sqlx);
+        criteria.andTjSqlxLike("%"+sqlx+"%");
         if (StringUtils.isNotBlank(bmname)) {
-            criteria.andBmNameLike(bmname);
+            criteria.andBmNameLike("%"+bmname+"%");
         }
         if (StringUtils.isNotBlank(sfyl)) {
             criteria.andTjSfylLike(sfyl);
@@ -239,6 +241,9 @@ public class EqTjServiceImpl implements EqTjService {
     //TODO 已经加入院区和部门的条件查询
     @Override
     public PageInfo selectAllEqInfo(String sbName, String bmname, String yq) {
+        if(StringUtils.isBlank(yq)){
+            yq=null;
+        }
         List<EqInfoShowVO> vos = mapper.selectAllEqInfo(sbName, bmname, yq);
 
         return new PageInfo(vos);

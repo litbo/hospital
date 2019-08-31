@@ -7,11 +7,9 @@
 */
 package com.litbo.hospital.supervise.service;
 
-import java.util.List;
 import java.util.Map;
 
-import com.baomidou.mybatisplus.plugins.Page;
-
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.ItemInfo;
 
 /** 
@@ -21,9 +19,8 @@ import com.litbo.hospital.supervise.bean.ItemInfo;
 * @date: 2019-08-15 
 */
 public interface IItemInfoService {
-	public List<ItemInfo> search(ItemInfo info);
 	
-	public Page<ItemInfo> search(Page<ItemInfo> page,ItemInfo info);
-
+	public PageInfo<ItemInfo> search(ItemInfo info ,int pageNum,int pageSize);
+	
 	public Map<String, Object> saveItem();
 }

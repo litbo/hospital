@@ -5,7 +5,9 @@ import com.litbo.hospital.lifemanage.bean.Example.EqTjjjExample;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqTjjjShowVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqTjjjVO;
 import com.litbo.hospital.lifemanage.dao.provider.MyProvider.TjjjProvider;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 

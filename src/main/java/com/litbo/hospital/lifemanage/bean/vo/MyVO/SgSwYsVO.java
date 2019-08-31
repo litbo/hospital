@@ -100,4 +100,7 @@ public class SgSwYsVO {
 
     /*到货登记id*/
     private String djhwId;
+
+    /*是否质检*/
+    private String ysSfzj;
 }

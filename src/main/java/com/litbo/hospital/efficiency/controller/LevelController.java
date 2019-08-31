@@ -22,15 +22,15 @@ public class LevelController {
     @Autowired
     private LevelService levelService;
 
-    @RequestMapping(value = "/updateLevel",method = RequestMethod.POST)
-    public Result updateLevel(@RequestBody LevelBean levelBean){
+    @RequestMapping(value = "/updateLevel")
+    public Result updateLevel(LevelBean levelBean){
         if (levelService.updateLevel(levelBean)>0){
             return Result.success(levelService.selectLevel());
         }
         return Result.error();
     }
 
-    @RequestMapping(value = "/selectLevel",method = RequestMethod.POST)
+    @RequestMapping(value = "/selectLevel")
     public Result selectLevel(){
         return Result.success(levelService.selectLevel());
     }

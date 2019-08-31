@@ -46,7 +46,7 @@ public class SqYsService2impl implements SgYsService2 {
 
     @Override
     public int insertJs(SgJsYsVO js) {
-        return 0;
+        return sgYsMapper2.insertJs(js);
     }
 
     @Override
@@ -125,6 +125,12 @@ public class SqYsService2impl implements SgYsService2 {
     @Override
     public List<Map<String, String>> selectAllBmIdAndName() {
         return sgYsMapper2.selectAllBmIdAndName();
+    }
+    @Override
+    public SgYs slectOneYsJl(String ysid) {
+
+        SgYs ys = sgYsMapper2.selectByPrimaryKey(ysid);
+        return ys;
     }
 
 

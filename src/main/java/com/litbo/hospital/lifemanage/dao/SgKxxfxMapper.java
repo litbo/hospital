@@ -1,7 +1,10 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SgKxxfx;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * 可行性分析表Mapper接口

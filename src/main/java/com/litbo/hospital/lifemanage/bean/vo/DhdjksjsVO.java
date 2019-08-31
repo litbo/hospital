@@ -43,8 +43,11 @@ public class DhdjksjsVO implements Serializable {
      * 存放地点
      */
     private String dhdjCfdd;
+
     /**
      * 实到箱数
      */
     private Integer dhdjSdxs;
+
+    private String userId;
 }

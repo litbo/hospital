@@ -17,7 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 /*调剂请求*/
 @RestController
@@ -48,7 +49,11 @@ public class EqTjSqController {
         LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         sq.setTjSqks(sEmp.getBmId());
 //        sq.setTjSqks("0201000000");
-        return Result.success(service.insertTjDrSq(sq));
+        int i = service.insertTjDrSq(sq);
+        if(i==0){
+            return Result.error("请求失败");
+        }
+        return Result.success(i);
     }
 
     /*签字图片上传*/
@@ -80,8 +85,8 @@ public class EqTjSqController {
     }
 
     /*查询所有调剂申请,查询所有替换申请是另一个,还没写，改成show.setTjSqlx("1")即可*/
-    @PostMapping("/AllTjsg")
-    public Result AllTjsg(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+    @PostMapping("/AllTjsq")
+    public Result AllTjsq(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                           @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
                           @RequestParam(required = false, name = "bmName") String bmName,
                           @RequestParam(required = false, name = "tjQssj") String tjQssj,
@@ -97,6 +102,35 @@ public class EqTjSqController {
 
         EqTjShowVO show = new EqTjShowVO(bmName, qssj, jssj, sfyl, sfqbsl);
         show.setTjSqlx("0");
+        PageInfo info = service.selectByExample(pageNum, pageSize, show);
+        return Result.success(info);
+//        }
+//        else{
+//            return Result.success("无所属权限！");
+//        }
+
+    }
+
+
+
+
+    @PostMapping("/AllThsq")
+    public Result AllThsq(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                          @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
+                          @RequestParam(required = false, name = "bmName") String bmName,
+                          @RequestParam(required = false, name = "tjQssj") String tjQssj,
+                          @RequestParam(required = false, name = "tjJssj") String tjJssj,
+                          @RequestParam(required = false, name = "sfyl") String sfyl,
+                          @RequestParam(required = false, name = "sfqbsl") String sfqbsl
+    ) {
+//        LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        //TODO 仅有综合设备科可以查询替换设备
+//        if("0301b50000".equals(sEmp.getBmId())){
+        Date qssj = String2DateUtil.StringtoDate(tjQssj);
+        Date jssj = String2DateUtil.StringtoDate(tjJssj);
+
+        EqTjShowVO show = new EqTjShowVO(bmName, qssj, jssj, sfyl, sfqbsl);
+        show.setTjSqlx("1");
         PageInfo info = service.selectByExample(pageNum, pageSize, show);
         return Result.success(info);
 //        }

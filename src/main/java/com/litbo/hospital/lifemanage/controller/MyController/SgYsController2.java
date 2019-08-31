@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.controller.MyController;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.SgYs;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.SgHzYsVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.SgJsYsVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.SgLcYsVO;
@@ -24,7 +25,7 @@ public class SgYsController2 {
     @PostMapping("/sgWaitSwYsList")
     public Result sgWaitSwYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                  @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                 @RequestParam(required = false) String htid) {
+                                 @RequestParam(name = "htid",required = false) String htid) {
         LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         PageInfo<SgYsListVO> info = service.sgWaitSwYsList(pageNum, pageSize, sEmp.getBmId(), htid);
         return Result.success(info);
@@ -34,17 +35,17 @@ public class SgYsController2 {
     public Result sgWaitJsYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer
                                          pageNum,
                                  @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                 @RequestParam(required = false) String htid) {
+                                 @RequestParam(name = "htid",required = false) String htid) {
         LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         PageInfo<SgYsListVO> info = service.sgWaitJsYsList(pageNum, pageSize, sEmp.getBmId(), htid);
         return Result.success(info);
     }
 
-    @GetMapping("/sgWaitLcYsList")
+    @PostMapping("/sgWaitLcYsList")
     public Result sgWaitLcYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer
                                          pageNum,
                                  @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                 @RequestParam(required = false) String htid) {
+                                 @RequestParam(name = "htid",required = false) String htid) {
         LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         PageInfo<SgYsListVO> info = service.sgWaitLcYsList(pageNum, pageSize, sEmp.getBmId(), htid);
         return Result.success(info);
@@ -54,7 +55,7 @@ public class SgYsController2 {
     public Result sgWaitHzYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer
                                          pageNum,
                                  @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                 @RequestParam(required = false) String htid) {
+                                 @RequestParam(name = "htid",required = false) String htid) {
         LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
         PageInfo<SgYsListVO> info = service.sgWaitHzYsList(pageNum, pageSize, sEmp.getBmId(), htid);
         return Result.success(info);
@@ -82,21 +83,21 @@ public class SgYsController2 {
     @PostMapping("/sgBenBmSwYsList")
     public Result sgBenBmSwYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                   @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                  @RequestParam(name = "ksid") String ksid,
-                                  @RequestParam(name = "htid") String htid,
-                                  @RequestParam(name = "xnsb")String xnsb) {
-
-        return Result.success(service.sgBenBmSwYsList(pageNum,pageSize,ksid,htid,xnsb));
+                                  @RequestParam(name = "ksid",required = false) String ksid,
+                                  @RequestParam(name = "htid",required = false) String htid,
+                                  @RequestParam(name = "xnsb",required = false)String xnsb) {
+        LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        return Result.success(service.sgBenBmSwYsList(pageNum,pageSize,sEmp.getBmId(),htid,xnsb));
     }
 
     @PostMapping("/sgBenBmJsYsList")
     public Result sgBenBmJsYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                   @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                  @RequestParam(name = "ksid") String ksid,
-                                  @RequestParam(name = "htid") String htid,
-                                  @RequestParam(name = "xnsb")String xnsb) {
-
-        return Result.success(service.sgBenBmJsYsList(pageNum,pageSize,ksid,htid,xnsb));
+                                  @RequestParam(name = "ksid", required = false) String ksid,
+                                  @RequestParam(name = "htid", required = false) String htid,
+                                  @RequestParam(name = "xnsb", required = false)String xnsb) {
+        LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        return Result.success(service.sgBenBmJsYsList(pageNum,pageSize,sEmp.getBmId(),htid,xnsb));
     }
 
 
@@ -105,34 +106,40 @@ public class SgYsController2 {
 
     public Result sgBenBmLcYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                   @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                  @RequestParam(name = "ksid") String ksid,
-                                  @RequestParam(name = "htid") String htid,
-                                  @RequestParam(name = "xnsb")String xnsb) {
-
-        return Result.success(service.sgBenBmLcYsList(pageNum,pageSize,ksid,htid,xnsb));
+                                  @RequestParam(name = "ksid", required = false) String ksid,
+                                  @RequestParam(name = "htid", required = false) String htid,
+                                  @RequestParam(name = "xnsb", required = false)String xnsb) {
+        LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        return Result.success(service.sgBenBmLcYsList(pageNum,pageSize,sEmp.getBmId(),htid,xnsb));
     }
 
 
     @PostMapping("/sgBenBmHzYsList")
     public Result sgBenBmHzYsList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                   @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                  @RequestParam(name = "ksid") String ksid,
-                                  @RequestParam(name = "htid") String htid,
-                                  @RequestParam(name = "xnsb")String xnsb) {
-
-        return Result.success(service.sgBenBmHzYsList(pageNum,pageSize,ksid,htid,xnsb));
+                                  @RequestParam(name = "ksid", required = false) String ksid,
+                                  @RequestParam(name = "htid", required = false) String htid,
+                                  @RequestParam(name = "xnsb", required = false)String xnsb) {
+        LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+        return Result.success(service.sgBenBmHzYsList(pageNum,pageSize,sEmp.getBmId(),htid,xnsb));
     }
 
     @PostMapping("/selectAllYsJl")
     public Result selectAllYsJl(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                 @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
-                                @RequestParam(name = "htid") String htid,
-                                @RequestParam(name = "bmid")String bmid) {
+                                @RequestParam(name = "htid", required = false) String htid,
+                                @RequestParam(name = "bmid", required = false)String bmid) {
 
         return Result.success(service.selectAllYsJl(pageNum,pageSize,htid,bmid));
     }
 
 
+    @PostMapping("/selectOneYsJl")
+    public Result selectOneYsJl(String ysId) {
+
+        SgYs ys = service.slectOneYsJl(ysId);
+        return Result.success(ys);
+    }
     @GetMapping("/selectAllBmIdAndName")
     public Result selectAllBmIdAndName() {
 

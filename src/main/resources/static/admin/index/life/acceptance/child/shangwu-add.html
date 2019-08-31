@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>到货登记 > 货物增加</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../static/admin/css/admin.css">
+    <script type="text/javascript" src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../../../../../static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 180px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 180px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+
+<form class="layui-form layui-form-pane" action="" lay-filter="wxfForms">
+    <div class="layui-row layui-col-space20">
+        <div class="layui-col-md6">
+            <!--        <input type="hidden" name="user1Id">-->
+            <!--        <input type="hidden" id="taskId" name="taskId" value="">-->
+
+            <!--            档案编号-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">档案编号<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysDabh" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required|number">
+                </div>
+            </div>
+            <!--            合同编号-->
+            <!--<div class="layui-form-item">
+                <label class="layui-form-label">合同编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="htId'" id="htId" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>-->
+
+            <!--            申购单编号-->
+            <!-- <div class="layui-form-item">
+                 <label class="layui-form-label">申购单编号</label>
+                 <div class="layui-input-block">
+                     <input type="text" name="sgId" id="sgId" class="layui-input" disabled autocomplete="off"
+                            lay-verify="required">
+                 </div>
+             </div>-->
+            <!--            资质审核人-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">资质审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysZzshr" id="ysZzshr" class="layui-input" placeholder="请输入内容"
+                           autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            说明书-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">说明书</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysSms" value="0" title="无" checked>
+                    <input type="radio" name="ysSms" value="1" title="中文">
+                    <input type="radio" name="ysSms" value="2" title="英文">
+                </div>
+            </div>
+            <!--            资质审核结果-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">资质审核结果</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysZzshjg" id="djhwBzwg1" value="0" title="不符合" checked>
+                    <input type="radio" name="ysZzshjg" id="djhwBzwg2" value="1" title="符合">
+                </div>
+            </div>
+            <!--            操作手册-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">操作手册</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysCzsc" value="0" title="无" checked>
+                    <input type="radio" name="ysCzsc" value="1" title="有">
+                </div>
+            </div>
+            <!--            维修手册-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">维修手册</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysWxsc" value="0" title="无" checked>
+                    <input type="radio" name="ysWxsc" value="1" title="有">
+                </div>
+            </div>
+            <!--            其他技术资料-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">其他技术资料</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysQtjszl" value="0" title="无" checked>
+                    <input type="radio" name="ysQtjszl" value="1" title="有">
+                </div>
+            </div>
+            <!--            产品合格证明-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">产品合格证明</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysCphgzm" value="0" title="无" checked>
+                    <input type="radio" name="ysCphgzm" value="1" title="有">
+                </div>
+            </div>
+            <!--            是否质检-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否质检</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysSfzj" value="0" title="否" checked>
+                    <input type="radio" name="ysSfzj" value="1" title="是">
+                </div>
+            </div>
+            <!--            标签-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">标签</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysBq" value="0" title="无" checked>
+                    <input type="radio" name="ysBq" value="1" title="有">
+                </div>
+            </div>
+            <!--            高风险说明书-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">高风险说明书</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysGfxsms" value="0" title="无" checked>
+                    <input type="radio" name="ysGfxsms" value="1" title="有">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <!--            申购单编号-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">申购单编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="sgId" id="sgId" class="layui-input" disabled autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            装箱单-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">装箱单<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="ysZxd" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="required">
+                </div>
+            </div>
+            <!--            保修卡-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">保修卡</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysBxk" value="0" title="无" checked>
+                    <input type="radio" name="ysBxk" value="1" title="有">
+                </div>
+            </div>
+            <!--            3c认证-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">3c认证</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ys3crz" value="0" title="无" checked>
+                    <input type="radio" name="ys3crz" value="1" title="有">
+                </div>
+            </div>
+            <!--            计量器具认证-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">计量器具认证</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysJlqjrz" value="0" title="无" checked>
+                    <input type="radio" name="ysJlqjrz" value="1" title="有">
+                </div>
+            </div>
+            <!--            报关单-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">报关单</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysBgd" value="0" title="无" checked>
+                    <input type="radio" name="ysBgd" value="1" title="有">
+                </div>
+            </div>
+            <!--            检验检疫证明-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">检验检疫证明</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysJyjyzm" value="0" title="无" checked>
+                    <input type="radio" name="ysJyjyzm" value="1" title="有">
+                </div>
+            </div>
+            <!--            是否是高风险器械-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否是高风险器械</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysIsgfxqx" value="0" title="否" checked>
+                    <input type="radio" name="ysIsgfxqx" value="1" title="是">
+                </div>
+            </div>
+            <!--            包装标识-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">包装标识</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysBzbs" value="0" title="无" checked>
+                    <input type="radio" name="ysBzbs" value="1" title="有">
+                </div>
+            </div>
+            <!--            合格证明-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">合格证明</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysHgzm" value="0" title="无" checked>
+                    <input type="radio" name="ysHgzm" value="1" title="有">
+                </div>
+            </div>
+            <!--            其他材料-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">其他材料</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="ysQtcl" value="0" title="无" checked>
+                    <input type="radio" name="ysQtcl" value="1" title="有">
+                </div>
+            </div>
+
+            <input class="hidden" name="djhwId" id="djhwId">
+            <input class="hidden" name="htId" id="htId">
+        </div>
+    </div>
+    <!--保存-->
+    <div class="col-xs-12">
+        <div class="layui-form-item">
+            <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""
+                    lay-filter="save">保存
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    var emp = tempValue("rl", "emp", false);
+    $("#ysZzshr").val(emp.userXm);
+    $("#htId").val($.getUrlParam("htId"));
+    $("#sgId").val($.getUrlParam("sgId"));
+    $("#djhwId").val($.getUrlParam("djhwId"));
+    // console.log($("#djhwId").val());
+    renderMod = {
+        form: {
+            submit: {
+                before: function (param) {
+                    var a = $("#htId").val();
+                    var b = $("#djhwId").val();
+                    return param = {
+                        1: a,
+                        2: b
+                    };
+                },
+                form: {
+                    url: "/lifeManage/insertSw",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: ["ysDabh", "sgId", "ysZzshjg", "ysZzshr", "ysZxd", "ysSms", "ysCzsc", "ysWxsc", "ysQtjszl","ysSfzj",
+                        "ysCphgzm", "ysBxk", "ys3crz", "ysJlqjrz", "ysBgd", "ysJyjyzm", "ysIsgfxqx", "ysBzbs", "ysBq", "ysGfxsms", "ysHgzm", "ysQtcl"],
+                    // reload: true,
+                    param: {
+                        1: "htId",
+                        2.: "djhwId"
+                    },
+                    reload: "parent"
+                }//表单提交函数
+            }
+        }
+    }
+</script>
+
+
+</body>
+</html>

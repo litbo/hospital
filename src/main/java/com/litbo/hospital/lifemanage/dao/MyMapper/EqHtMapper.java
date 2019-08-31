@@ -9,7 +9,7 @@ import com.litbo.hospital.lifemanage.bean.vo.MyVO.SbCsVO;
 import com.litbo.hospital.lifemanage.dao.provider.MyProvider.EqHtProvider;
 import org.apache.ibatis.annotations.*;
 
-import java.util.*;
+import java.util.List;
 
 @Mapper
 public interface EqHtMapper {
@@ -88,7 +88,7 @@ public interface EqHtMapper {
 
     /*新增设备厂商*/
     @Insert(" insert into eq_cs (sbcs_id,sb_cslb_id,sbcs_name)" +
-            " values(#{sbcsId},#{sbCslbId},#{sbcsName},)")
+            " values(#{sbcsId},#{sbCslbId},#{sbcsName})")
     int addSbCs(SbCsVO vo);
 
     /*合同的装备数量跟已经验收的装备数量相等时执行,获取最后装备的

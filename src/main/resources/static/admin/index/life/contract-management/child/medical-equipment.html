@@ -41,7 +41,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">医学装备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htZbmc" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                    <input type="text" name="htZbmc" id="htZbmc" class="layui-input" placeholder="请输入内容" autocomplete="off"
                            lay-verify="required">
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">规格型号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htGgxh'" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                    <input type="text" name="htGgxh" id="htGgxh" class="layui-input" placeholder="请输入内容" autocomplete="off"
                            lay-verify="required">
                 </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">品牌<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htPinpai" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                    <input type="text" name="htPinpai" id="htPinpai" class="layui-input" placeholder="请输入内容" autocomplete="off"
                            lay-verify="required">
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">原产地</label>
                 <div class="layui-input-block">
-                    <input type="text" name="htYcd" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                    <input type="text" name="htYcd" id="htYcd" class="layui-input" placeholder="请输入内容" autocomplete="off"
                            lay-verify="required">
                 </div>
             </div>
@@ -78,16 +78,22 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">数量<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htCount" id="a" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                           lay-verify="disable">
+                    <input type="text" name="htCount" id="htCount" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="disable"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" >
                 </div>
             </div>
             <!--            单价-->
             <div class="layui-form-item">
                 <label class="layui-form-label">单价<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htDanjia" id="b" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                           lay-verify="disable">
+                    <input type="text" name="htDanjia" id="htDanjia" class="layui-input" placeholder="请输入内容" autocomplete="off"
+                           lay-verify="disable" t_value="" o_value="" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;
+                           else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                           onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;
+                           if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"
+                           onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;
+                           else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;
+                           if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}">
                 </div>
             </div>
             <!--            总价-->
@@ -98,7 +104,7 @@
                            lay-verify="disable">
                 </div>
             </div>-->
-            <input type="hidden" name="htZongjia" id="c" class="layui-input"  autocomplete="off">
+            <input type="hidden" name="htZongjia" id="htZongjia" class="layui-input"  autocomplete="off">
             <!--            单位-->
             <div class="layui-form-item">
                 <label class="layui-form-label">单位<span class="sign">*</span></label>
@@ -142,16 +148,22 @@
             {
                 elem: '#reload',
                 func: function () {
-                    var a=$("#a").val();
-                    var b=$("#b").val();
+                    if ($("#htZbmc").val() === ""||$("#htPinpai").val()===""||$("#htYcd").val()===""||$("#htCount").val()===""
+                        ||$("#htDanjia").val()===""||$("#htGgxh").val()===""){
+                        // console.log(getFormValue());
+                        attr();
+                        return;
+                    }
+                    var a=$("#htCount").val();
+                    var b=$("#htDanjia").val();
                     var c=(a*b);
-                    $("#c").val(c);
+                    $("#htZongjia").val(c);
                     var htGgxh = $("input").eq(1).val();
                     new1 =
-                    getFormValue(["htZbmc","htPinpai","htYcd","htCount","htDanjia","htZongjia"],{"htGgxh":htGgxh,"htDanwei":$("select[name='eqJldwId']").val()},true);
+                        getFormValue(["htZbmc","htPinpai","htYcd","htCount","htDanjia","htZongjia"],{"htGgxh":htGgxh,"htDanwei":$("select[name='eqJldwId']").val()},true);
                     var key = $.getUrlParam('key');
                     da.push(new1);
-                     console.log(new1);
+                    console.log(new1);
                     layui.sessionData($.getUrlParam('vg'), {
                         key: key,
                         value: da
