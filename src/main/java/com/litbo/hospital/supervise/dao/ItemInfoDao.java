@@ -9,12 +9,14 @@ package com.litbo.hospital.supervise.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.litbo.hospital.supervise.bean.ItemInfo;
+import com.litbo.hospital.supervise.dao.provider.ItemInfoProvider;
 
 /** 
 * @ClassName: ItemInfoDao 
@@ -22,6 +24,22 @@ import com.litbo.hospital.supervise.bean.ItemInfo;
 * @author: zhuyj
 * @date: 2019-08-15 
 */
-public interface ItemInfoDao extends BaseMapper<ItemInfo>{
-	List<ItemInfo> selectMyPage(RowBounds rowBounds, @Param("ew") Wrapper<ItemInfo> wrapper);
+@Mapper
+public interface ItemInfoDao{
+	@SelectProvider(type = ItemInfoProvider.class ,method = "selectByPage")
+	List<ItemInfo> selectByPage(ItemInfo ItemInfo);
+	
+	@Select("SELECT ES_ID, PRODUCT_NAME, APPROVAL_NUM, ENTERPRISE, ENTERPRISE_ADDRESS, APPROVAL_DATE, EXPIRED_DATE, "
+			+ " case when datediff(day,EXPIRED_DATE,GetDate()) >= -1 then 1 else 0 end AS expired " 
+			+ " from ITEM_INFO where ES_ID = #{esId}")
+	ItemInfo selectById(String esId);
+	
+	@Insert("INSERT INTO ITEM_INFO(ES_ID, PRODUCT_NAME, APPROVAL_NUM, ENTERPRISE, ENTERPRISE_ADDRESS, APPROVAL_DATE, EXPIRED_DATE) " +
+           " VALUES (#{esId}, #{productName}, #{approvalNum}, #{enterprise}, #{enterpriseAddress}, #{approvalDate}, #{expiredDate})")
+	Integer insert(ItemInfo ItemInfo);
+	
+	@Update("UPDATE ITEM_INFO SET PRODUCT_NAME = #{productName}, APPROVAL_NUM = #{approvalNum}, ENTERPRISE = #{enterprise},"
+			+ " ENTERPRISE_ADDRESS = #{enterpriseAddress}, APPROVAL_DATE = #{approvalDate}, EXPIRED_DATE = #{expiredDate}"
+			+ " WHERE ES_ID = #{esId}")
+	void updateById(ItemInfo ItemInfo);
 }
