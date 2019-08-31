@@ -66,36 +66,54 @@
                             area: ['75%', '60%'],
                             content: "./child/q1add.html"
                         },
-                        {
-                            tool: "toolbar",
-                            event: "edit",
-                            send:{
-                                url:"/config/ratio/ showUsingById",
-                                name:"gwIds",
-                                par:"id",
-                                type:"POST",
-                                confirm:false,
-                                success:{
-                                    tool:"toolbar",
-                                    type:2,
-                                    event:"edit",
-                                    title:"修改",
-                                    area:['75%','60%'],
-                                    content:"./child/q1edit.html"
+                            // {
+                            //     tool: "toolbar",
+                            //     event: "edit",
+                            //     send:{
+                            //         url:"/config/ratio/ showUsingById",
+                            //         name:"gwIds",
+                            //         par:"id",
+                            //         type:"POST",
+                            //         confirm:false,
+                            //         dataUrl:["id"],
+                            //         success:{
+                            //             tool:"toolbar",
+                            //             type:2,
+                            //             event:"edit",
+                            //             title:"修改",
+                            //             area:['75%','60%'],
+                            //             content:"./child/q1edit.html"
+                            //         }
+                            //     }
+                            //  },
+                            {
+                                tool: "toolbar",
+                                event: "del",
+                                send:{
+                                    url:"/config/ratio/deleteUsing",
+                                    name:"ids",
+                                    par:"id",
+                                    type:"DELETE",
+                                    reload:true
                                 }
-                            }
-                         },
-                         {
-                            tool: "toolbar",
-                            event: "del",
-                            send:{
-                                url:"/config/ratio/deleteUsing",
-                                name:"gwIds",
-                                par:"id",
-                                type:"DELETE",
-                                reload:true
-                            }
-                          }
+                            },
+                            {
+                                before:function(obj,cs){
+                                    if(cs.data.length !== 1){
+                                        putMsg({
+                                            alert:"一次只能选中一个设备！！"
+                                        });
+                                        return false;
+                                    }
+                                },
+                                event:"edit",
+                                tool:"toolbar",
+                                type: 2,
+                                title: "排名",
+                                area: ['100%','70%'],
+                                content: "./child/q1edit.html"
+
+                            },
                         ]
                     })
                 }
@@ -105,4 +123,5 @@
 
 </script>
 </body>
+</html>
 </html>

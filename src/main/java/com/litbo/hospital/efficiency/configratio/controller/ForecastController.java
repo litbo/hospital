@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.configratio.controller;
 
 import com.litbo.hospital.efficiency.configratio.bean.ForecastBean;
 import com.litbo.hospital.efficiency.configratio.service.ForecastService;
+import com.litbo.hospital.efficiency.configratio.vo.DeleteVO;
 import com.litbo.hospital.efficiency.configratio.vo.ForecastRatioVO;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +50,16 @@ public class ForecastController {
     }
 
     @RequestMapping(value = "/deleteForecast",method = RequestMethod.POST)
-    public Result deleteForecast(List<Integer> list){
-        Integer integer = forecastService.deleteForecast(list);
-        if (integer>0){
-            return Result.success("已删除"+integer+"个设备");
+    public Result deleteForecast(@RequestBody DeleteVO deleteVO){
+        if (deleteVO.getIds()!=null){
+            Integer integer = forecastService.deleteForecast(deleteVO.getIds());
+            if (integer>0){
+                return Result.success("已删除"+integer+"个设备");
+            }else {
+                return Result.error("请选中需要删除的设备");
+            }
         }else {
-            return Result.error("请选中需要删除的设备");
+            return Result.error();
         }
     }
 

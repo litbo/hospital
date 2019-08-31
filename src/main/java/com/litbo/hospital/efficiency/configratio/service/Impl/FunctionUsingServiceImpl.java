@@ -73,11 +73,11 @@ public class FunctionUsingServiceImpl implements FunctionUsingService {
 
     /**
      * 批量删除功能完好率
-     * @param list id
+     * @param ids id
      * @return 共删除几条
      */
     @Override
-    public Integer deleteUsing(List<Integer> list) {
-        return usingDAO.deleteUsing(list);
+    public Integer deleteUsing(Integer[] ids) {
+        return usingDAO.deleteUsing(ids);
     }
 }

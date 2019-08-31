@@ -70,7 +70,7 @@ public interface FunctionIntegrityDAO {
 
     /**
      * 批量删除功能完好率
-     * @param list id
+     * @param ids id
      * @return 删除几条
      */
     @Delete({
@@ -81,6 +81,6 @@ public interface FunctionIntegrityDAO {
             "</foreach>",
             "</script>"
     })
-    Integer deleteIntegrity(@Param("list") List<Integer> list);
+    Integer deleteIntegrity(Integer[] ids);
 
 }

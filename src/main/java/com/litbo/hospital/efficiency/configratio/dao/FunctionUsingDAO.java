@@ -70,17 +70,17 @@ public interface FunctionUsingDAO {
 
     /**
      * 批量删除功能利用率
-     * @param list id
+     * @param ids id
      * @return 删除几条
      */
     @Delete({
             "<script>",
             "DELETE FROM dbo.function_using WHERE id in",
-            "<foreach item = 'item' index = 'index' collection = 'list' open = '(' separator = ',' close = ')'>",
+            "<foreach item = 'item' index = 'index' collection = 'array' open = '(' separator = ',' close = ')'>",
             "#{item}",
             "</foreach>",
             "</script>"
     })
-    Integer deleteUsing(@Param("list") List<Integer> list);
+    Integer deleteUsing(Integer[] ids);
 
 }
