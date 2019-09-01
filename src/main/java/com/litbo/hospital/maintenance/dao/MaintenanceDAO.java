@@ -41,4 +41,8 @@ public interface MaintenanceDAO {
 
     Maintenance selectById(int id);
 
+
+    int deletePlan(int id);
+
+
 }

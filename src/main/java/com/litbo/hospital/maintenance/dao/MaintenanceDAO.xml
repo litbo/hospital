@@ -290,5 +290,9 @@
     select * from maintenance where id = #{id}
   </select>
 
+  <delete id="deletePlan" parameterType="integer">
+    delete from maintenance where id = #{id}
+  </delete>
+
 
 </mapper>
