@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看巡检标准</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row" style="margin: 20px">
+    <div class="col-xs-12">
+        <form class="layui-form layui-form-pane" action="" >
+            <div class="layui-row ">
+                <div class="col-xs-12">
+                    <div class="col-xs-6" style="padding: 10px;">
+
+                        <div class="layui-form-item" style="margin-bottom:37px ">
+                            <label class="layui-form-label">设备名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="eqName"  autocomplete="off"  class="layui-input eqName" disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom:37px ">
+                            <label class="layui-form-label">使用科室</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="bmName"  autocomplete="off"  class="layui-input bmName" disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" style="margin-bottom:37px ">
+                            <label class="layui-form-label">院内编码</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="eqSbbh"  autocomplete="off"  class="layui-input eqSbbh" disabled>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-form-item" style="margin-bottom:37px ">
+                            <label class="layui-form-label">巡检日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="inspPlExecutorTime"  autocomplete="off"  class="layui-input inspPlExecutorTime" disabled>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-form-item" style="margin-bottom:37px ">
+                            <label class="layui-form-label">功能参数</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="eqXh"  autocomplete="off"  class="layui-input eqXh" disabled>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-xs-6" style="padding: 10px;">
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">参与人员<!--PoAb0xx0-->
+                            </label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" name="inspPlPeople" disabled  style="resize:none;min-height: 97px"  class="layui-textarea inspPlPeople"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">执行人员<!--PoAb0xx0-->
+                            </label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="" name="inspPlExecutor" disabled  style="resize:none;min-height: 97px"  class="layui-textarea inspPlExecutor"></textarea>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="inspPlOtherProblem"  class="layui-input inspPlOtherProblem" disabled>
+                        <input type="hidden"  id="inspPlStandardResults"  class="layui-input inspPlStandardResults" disabled>
+
+                        <div class="layui-form-item" >
+                            <button type="button" class="warm_btn layui-btn " id="biaoZhun">查看巡检标准</button>
+
+                            <button type="button" class="layui-btn " id="keShi" >查看科室签名</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    layui.use(['form','table', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,table = layui.table
+            ,laydate = layui.laydate;
+        form.render();
+        var gAll = {}, hAll = [];
+
+        $(function(){
+            var url= window.location.search;
+            var inspReId =  $.getUrlParam("id");
+            console.log(inspReId);
+            $.ajax({
+                url : "/inspection/inspPlRecord/selectRecordByRecordId",
+                type : 'POST',
+                data : {"inspReId":inspReId},
+                dataType:'json',
+                success : function(data){
+                    if(data !== null){
+                        console.log(data);
+                        $(".bmName").val(data.data.bmName);
+                        $(".eqName").val(data.data.eqName);
+                        $(".eqSbbh").val(data.data.eqSbbh);
+                        $(".eqXh").val(data.data.eqXh);
+                        $(".inspPlExecutor").val(data.data.inspPlExecutor);
+                        $(".inspPlExecutorTime").val(data.data.inspPlExecutorTime);
+                        $(".inspPlPeople").val(data.data.inspPlPeople);
+                        $(".inspPlOtherProblem").val(data.data.inspPlOtherProblem);
+                        $(".inspPlStandardResults").val(data.data.inspPlStandardResults);
+                        var tAll = data.data.inspPlStandardNames;
+                        var n = $("#inspPlStandardResults").val();
+                        var y = $("#inspPlOtherProblem").val();
+                        var nAll = JSON.parse(n);
+                      var yAll = JSON.parse(y);
+                       /* console.log(tAll);*/
+                        console.log(tAll.length);
+                        for ( var i = 0; i < tAll.length; i++){
+                            gAll["inspPlStandardNames"] = tAll[i];
+                            gAll["inspPlStandardResults"] = nAll[i];
+                            gAll["inspPlOtherProblem"] = yAll[i];
+                            hAll.push(gAll);
+                            gAll = {};
+                        }
+
+                    }else{
+                        alert("查询为空");
+                    }
+                },
+                error:function (data) {
+                    alert("查询失败");
+                    console.log(data);
+                }
+            });
+
+        });
+
+
+        $("#biaoZhun").off("click").on("click",function() {
+            console.log(hAll);
+            var thAll = JSON.stringify(hAll);
+            window.localStorage.setItem('hAllNumg', thAll);
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layui.layer.open({
+                    type: 2,
+                    title: '巡检标准',
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['90%', '85%'],
+                     content: './index4-chakanbiaoz1.html'
+                });
+                /*  window.history.back(-1);*/
+                return false;
+            })
+        });
+
+            $("#keShi").off("click").on("click",function(){
+                layui.use('layer',function() {
+                    var layer = layui.layer;
+                    layui.layer.open({
+                        type: 2,
+                        title: '科室签名',
+                        shadeClose: true, //点击遮罩关闭层
+                        area: ['90%', '85%'],
+                        /* content: './index1-designer.html'*/
+                    });
+                    /*  window.history.back(-1);*/
+                    return false;
+                })
+            })
+        })
+</script>
+</html>

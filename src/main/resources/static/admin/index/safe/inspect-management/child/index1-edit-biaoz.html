@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>巡检标准</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table  id="test" lay-filter="test"></table>
+    </div>
+</div>
+
+<script>
+    layui.use(['table', 'jquery'], function() {
+        var table = layui.table;
+        var $ = layui.$;
+        var dem = window.localStorage.getItem("biaoZhun");
+        var deom = JSON.parse(dem);
+        console.log(deom);
+        renderMod = {
+            addTable: {
+                table: {
+                    elem: '#test'
+                    , cols: [[
+                        {type:'numbers'}
+                        ,{field: 'inspPlStandardName', title: '名称', minWidth: 200}
+                        , {field: 'inspPlStandardDescription', title: '描述', minWidth: 200}
+                    ]]
+                    , toolbar: false
+                    , page: true
+                    , height: 450
+                    ,data:  deom
+                }
+            }
+        };
+    });
+</script>
+
+</body>
+</html>

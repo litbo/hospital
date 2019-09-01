@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果录入</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row" style="margin: 20px">
+    <div class="col-xs-12">
+        <form class="layui-form layui-form-pane" action="" >
+            <div class="layui-row ">
+                <div class="col-xs-12">
+                    <div class="col-xs-6" style="padding: 10px;">
+                        <input type="hidden" autocomplete="off"  class="layui-input inspPlId" disabled>
+                        <div class="layui-form-item" style="margin-bottom:60px ">
+                            <label class="layui-form-label">计划名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="inspPlName"  autocomplete="off"  class="layui-input inspPlName" disabled>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" >
+                            <label class="layui-form-label">制定时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="inspPlCreateTime" disabled autocomplete="off" class="layui-input inspPlCreateTime">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-6" style="padding: 10px;">
+
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">参与人员
+                            </label>
+                            <div class="layui-input-block">
+                                <textarea  name="inspRePlPeople" placeholder="参与人员名字请用逗号隔开"   style="resize:none"  class="layui-textarea inspRePlPeople"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="layui-row" >
+                    <div class="col-xs-12" style="margin-bottom: 50px;">
+                        <table id="table" lay-filter="table"></table>
+                    </div>
+                </div>
+
+                <div class="layui-row" >
+                    <div class="col-xs-12">
+                        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="sumBer">提 交</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/html" id="toolBar">
+    <a class="layui-btn layui-btn-xs" lay-event="chang">更改负责人签字</a>
+    <a style="color: red; margin-left: 50px">负责人签字默认选择该设备所在科室的负责人，若负责人改变，需重新选定负责人签字</a>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="setting">录入</a>
+</script>
+<script type="text/html" id="birDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="datile">查看签字</a>
+
+</script>
+<script type="text/html" id="Tpl">
+    {{#  if(d.zt === "未设置"){ }}
+    <span style="color: #cb0033;">{{ "未录入" }}</span>
+    {{#  } else if(d.zt === "已设置") { }}
+    <span style="color: #009587;">{{ "已录入" }}</span>
+    {{#  } }}
+</script>
+
+<script>
+    layui.use(['form','table', 'layedit', 'laydate'], function(){
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,table = layui.table
+                ,laydate = layui.laydate;
+            form.render();
+        var Numb = [];
+        var Tnum = [];
+        var tOm;
+        renderMod = {
+            table: {
+                table: [
+                    {
+                        elem: "#table",
+                        id: "table",
+                        cols: [[ //表头
+                            {type: 'checkbox'}
+                            , {type:'numbers'}
+                            ,{field: 'eqSbbh', title: '设备编号', minWidth: 200}
+                            , {field: 'eqName', title: '设备名称', minWidth: 150}
+                            , {field: 'bmName', title: '科室名称', minWidth: 100}
+                            , {field: 'zt', title: '录入/未录入状态', Width: 50,templet: "#Tpl"}
+                            , {fixed: '', title:'科室签名', toolbar: '#birDemo', width:100}
+                            ,{fixed: 'right', title:'巡检标准', toolbar: '#barDemo', width:100}
+                        ]]
+                        , toolbar: "#toolBar"
+                        , page: true//开启分页
+                        , height: "300"
+                        ,defaultToolbar:true
+                        ,data: []
+                        , text: {
+                            none: "请点击上方添加按钮添加数据！"
+                        }
+                        , done: function (res, curr, count) {
+
+                        }
+                    }
+                ]
+            }
+        };
+
+        $(function(){
+            var url= window.location.search;
+            var inspPlId =  $.getUrlParam("id");
+            console.log(inspPlId);
+            $.ajax({
+                url : "/inspection/inspPlRecord/selectInspPlById",
+                type : 'POST',
+                data : {"inspPlId": inspPlId},
+                dataType:'json',
+                success : function(springBootOtl){
+                    var  data = springBootOtl;
+                    if(data !== null){
+                        console.log(data);
+                        $(".inspPlCreateTime").val(data.data.inspPlCreateTime);
+                        $(".inspPlId").val(data.data.inspPlId);
+                        $(".inspPlName").val(data.data.inspPlName);
+                       Numb = data.data.inspSelectPlanEqVos;
+                       for (var i= 0; i < Numb.length; i++){
+                           Numb[i]["zt"] = "未设置";
+                       }
+                        table.reload('table', {
+                            data : Numb
+                        });
+                        layui.form.render();
+                    }else{
+                        alert("查询为空");
+                    }
+                },
+                error:function (data) {
+                    alert("查询失败");
+                    console.log(data);
+                }
+            });
+
+        });
+
+
+        table.on('tool(table)', function(obj) {
+            var data = obj.data;
+            var Numg = [];
+            for (var i = 0; i < Numb.length; i++) {
+                if (Numb[i].eqSbbh === data.eqSbbh) {
+                    if (Numb[i].inspSelectPlanEqStandardsVos === null) {
+                        Numg = data.inspSelectPlanEqStandardsVos;
+                    } else {
+                        Numg = Numb[i].inspSelectPlanEqStandardsVos;
+                    }
+                }
+            }
+            var Nug = JSON.stringify(Numg);
+            console.log(Numg);
+            console.log(Numb);
+            window.localStorage.setItem('gumNumg', Nug);
+            if (obj.event === 'setting') {
+                var dat = JSON.stringify(data);
+                layui.layer.open({
+                    title: "巡检结果录入",
+                    type: 2,
+                    closeBtn: false,
+                    content: " ./index3-biaozhun.html",//弹出层页面
+                    area: ['94%', '95%'],
+                    end: function () {
+
+                        var tandardId = window.localStorage.getItem("dardsVos1");
+                        var tandardProblem = window.localStorage.getItem("dardsVos2");
+                        var scription = window.localStorage.getItem("dardsVos3");
+                        var tAll = window.localStorage.getItem("dardsVosAll");
+                        var dardId = JSON.parse(tandardId);
+                        var Problem = JSON.parse(tandardProblem);
+                        var ription = JSON.parse(scription);
+                        var dataAll = JSON.parse(tAll);
+                        for (var i = 0; i < Numb.length; i++) {
+                            if (data.eqSbbh === Numb[i].eqSbbh) {
+                                Numb[i]["inspSelectPlanEqStandardsVos"] = dataAll;
+                                Numb[i]["inspPlStandardIds"] = dardId;
+                                Numb[i]["inspPlStandardResults"] = ription;
+                                Numb[i]["inspPlOtherProblem"] = Problem;
+                                Numb[i]["zt"] = "已设置";
+                            }
+                        }
+                        table.reload('table', {
+                            data: Numb
+                        });
+
+
+                        window.localStorage.removeItem("dardsVos1");
+                        window.localStorage.removeItem("dardsVos2");
+                        window.localStorage.removeItem("dardsVos3");
+                        window.localStorage.removeItem("dardsVosAll");
+
+                    }
+                });
+            } else if (obj.event === 'datile') {
+                data
+                var img = new Image();
+                if (tOm === undefined) {
+                    img.src = data.qzzp;
+                }else {
+                    img.src = tOm;
+                }
+               /* console.log(tOm);
+                console.log(data.qzzp);*/
+
+                var height = img.height + 50; //获取图片高度
+                var width = img.width; //获取图片宽度
+                var imgHtml = "<img src='" + img.src + "' >";
+                layer.open({
+                    type: 1,
+                   /* shade: 0.8,*/
+                    offset: 'auto',
+                    area: ['95%', '95%'],
+                    shadeClose: true,//点击外围关闭弹窗
+                    scrollbar: false,//不现实滚动条
+                    content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    cancel: function () {
+                        //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+                    }
+
+
+                });
+                layer.msg('点击任意处关闭');
+            }
+        });
+                table.on('toolbar(table)', function (obj) {
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    switch (obj.event) {
+                        case 'chang':
+                            var data = checkStatus.data;
+                            console.log(data);
+                            if (data.length === 0) {
+                                layer.alert("尚未选择");
+                                return;
+                            }
+                            console.log(data);
+                            layui.layer.open({
+                                title: "巡检标准设置",
+                                type: 2,
+                                closeBtn: false,
+                                content: " ./index3-pepo.html",//弹出层页面
+                                area: ['94%', '95%'],
+                                end: function () {
+                                    var t = window.localStorage.getItem("nOd");
+                                    tOm = JSON.parse(t);
+                                   /* data[0].qzzp = tOm;*/
+                                     console.log(tOm);
+                                     for (var i = 0; i < Numb.length; i++){
+                                         if (data[0].eqSbbh === Numb[i].eqSbbh) {
+
+                                             Numb[i]["qzzp"] = tOm;
+                                         }
+                                     }
+                                    console.log(Numb);
+                                    window.localStorage.removeItem("nOd");
+                                }
+                            });
+
+                    }
+                });
+
+                $("#sumBer").off("click").on("click", function () {
+
+
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        if ($(".inspRePlPeople").val() == "") {
+                            layer.msg("参与人员尚未填写", {icon: 2});
+                            return;
+                        }
+                        console.log(Numb);
+                        for (var i = 0; i < Numb.length; i++) {
+                            if (Numb[i].inspPlStandardResults === undefined) {
+                                layer.msg("巡检标准尚未完全处理，请重新检查", {icon: 2});
+                                return;
+                            } else {
+                                for (var j = 0; j < Numb[i].inspPlStandardResults.length; j++) {
+                                    if (Numb[i].inspPlStandardResults[j] === false && Numb[i].inspPlOtherProblem[j] === "") {
+                                        layer.msg(Numb[i].eqName + "的标准尚未完全处理，请重新检查", {icon: 2});
+                                        return;
+                                    }
+                                }
+                            }
+
+                        }
+                        ;
+
+                        for (var n = 0; n < Numb.length; n++) {
+                            delete Numb[n].bmName;
+                            delete Numb[n].eqName;
+                            delete Numb[n].eqXh;
+                            delete Numb[n].zt;
+                            delete Numb[n].inspSelectPlanEqStandardsVos;
+
+                        }
+                        console.log(Numb);
+                        var inspEqPlRecordVo = {};
+                        inspEqPlRecordVo["inspPlId"] = $(".inspPlId").val();
+                        inspEqPlRecordVo["inspPlPeople"] = $(".inspRePlPeople").val();
+                        inspEqPlRecordVo["inspEqPlRecordEqVos"] = Numb;
+                        console.log(Numb);
+                        console.log(inspEqPlRecordVo);
+                        $.ajax({
+                            url: '/inspection/inspPlRecord/insertInspRecord',
+                            type: "POST",
+                            async: false,
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            data: JSON.stringify(inspEqPlRecordVo),
+                            success: function (res) {
+                                if (res.code == 0) {
+                                    layer.msg("提交成功！", {icon: 6, time: 3000});
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                    parent.location.reload();
+                                } else {
+                                    alert(res.msg);
+                                }
+                            },
+                            error: function (data) {
+                            }
+                        });
+                    });
+                    return false;
+
+                })
+
+
+        });
+</script>
+</body>
+</html>

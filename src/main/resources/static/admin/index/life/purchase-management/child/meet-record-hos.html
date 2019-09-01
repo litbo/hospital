@@ -111,7 +111,7 @@
             },
             submit: {
                 before: function () {
-                    var dat = tempValue("dtds", "aa", false);
+                    var dat = tempValue("dtds", "InspEqPlanChange.java", false);
                     if (dat && (dat.length === 0 || $("#opp").val() === "")) {
                         putMsg({
                             alert: "未选中数据或未填写意见！",
@@ -119,7 +119,7 @@
                         });
                         return false;
                     }
-                    tempValue("dtds", "aa");
+                    tempValue("dtds", "InspEqPlanChange.java");
                     return param = {
                         1: dat
                     }

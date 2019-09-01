@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看巡检标准</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row" >
+    <div class="col-xs-12" style="margin-bottom: 50px;">
+        <table id="table" lay-filter="table"></table>
+    </div>
+</div>
+
+<script type="text/html" id="Tpl">
+    {{#  if(d.inspPlStandardResults === "true"){ }}
+    {{ "合格" }}
+    {{#  } else if(d.inspPlStandardResults === "false") { }}
+    {{ "不合格" }}
+    {{#  } }}
+</script>
+
+<script>
+    layui.use(['form','table', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,table = layui.table
+            ,laydate = layui.laydate;
+        form.render();
+        var thAll = window.localStorage.getItem("hAllNumg");
+        var ghAll = JSON.parse(thAll);
+        renderMod = {
+            table: {
+                table: [
+                    {
+                        elem: "#table",
+                        id: "table",
+                        cols: [[ //表头
+                            {type:'numbers'}
+                            ,{field: 'inspPlStandardNames', title: '名称', minWidth: 150}
+                            , {field: 'inspPlStandardResults', title: '状态', minWidth: 150, templet: "#Tpl"}
+                            , {field: 'inspPlOtherProblem', title: '存在问题', minWidth: 150}
+                        ]]
+                        , toolbar: false
+                        , page: true//开启分页
+                        , height: "200"
+                        , data: ghAll
+                        , text: {
+                            none: "请点击上方添加按钮添加数据！"
+                        }
+                        , done: function (res, curr, count) {
+
+                        }
+                    }
+                ]
+            }
+        };
+
+
+
+    });
+</script>
+
+</body>
+</html>

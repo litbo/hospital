@@ -5,18 +5,20 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.inspectionplan.bean.InspEqPlan;
-import com.litbo.hospital.security.inspectionplan.bean.vo.InspPlanEquipmentVo;
-import com.litbo.hospital.security.inspectionplan.bean.vo.InspPlanProgramVo;
-import com.litbo.hospital.security.inspectionplan.bean.vo.InspPlanSelectVo;
-import com.litbo.hospital.security.inspectionplan.bean.vo.InspPlanVo;
+import com.litbo.hospital.security.inspectionplan.bean.vo.*;
+import com.litbo.hospital.security.inspectionplan.bean.vo.SelectVo.InspPlanEquipmentVo1;
+import com.litbo.hospital.security.inspectionplan.bean.vo.SelectVo.InspPlanProgramVo1;
+import com.litbo.hospital.security.inspectionplan.bean.vo.SelectVo.InspPlanVo1;
 import com.litbo.hospital.security.inspectionplan.dao.InspPlDrawUpDao;
 import com.litbo.hospital.security.inspectionplan.dao.InspectionManageDao;
 import com.litbo.hospital.security.inspectionplan.service.InspectionManageService;
 import com.litbo.hospital.security.specialequipment.utils.GenerateId;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -34,11 +36,125 @@ public class InspectionManageServiceImpl implements InspectionManageService {
     @Autowired
     private InspectionManageDao
             inspectionManageDao;
-    @Autowired
-    private InspPlDrawUpDao
-            inspPlDrawUpDao;
 
 
+
+    /**
+     * 功能描述: 查询变更记录是否存在
+     *
+     * @Param:
+     * @Return:
+     * @Author: ZYJ
+     * @Date: 2019/8/20 0020 12:43
+     */
+    public void selectRecordIsNot(InspPlanVo inspPlanVo, String changePerson) {
+        String s = inspectionManageDao.selectRecordIsNot(inspPlanVo.getInspPlanId());
+        if(StringUtils.isNullOrEmpty(s)){
+            String inspPlChangeId = GenerateId.getIdByIDAndTime("z_inspection_eq_plan_change", "insp_pl_change_id");
+            inspectionManageDao.insertChangeRecord1(inspPlChangeId, inspPlanVo.getInspPlanId(),
+                    changePerson, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), inspPlanVo.getInspPlChangeReason());
+        }else {
+            inspectionManageDao.updateChangeRecord1(inspectionManageDao.selectRecordChangeId(inspPlanVo.getInspPlanId()), inspPlanVo.getInspPlanId(),
+                    changePerson, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), inspPlanVo.getInspPlChangeReason());
+        }
+
+    }
+    /**
+     * 功能描述: 更改巡检计划信息
+     *
+     * @Param: InspPlanVo11
+     * @Return: void
+     * @Author: ZYJ
+     * @Date: 2019/8/18 0018 18:44
+     */
+    @Transactional
+    public int updateInspPlan(InspPlanVo inspPlanVo, String userId){
+
+//        selectRecordIsNot(inspPlanVo, userId);
+
+        //取出对应计划的Id
+        String inspPlanId = inspPlanVo.getInspPlanId();
+        String planner = inspectionManageDao.selectInspPlPlanner(inspPlanId);
+        String spare3 = inspectionManageDao.selectInspPlSpare3(inspPlanId);
+
+
+        //1.删除原有的数据 但是保存他的主键值
+        inspectionManageDao.deleteInspPlByPlId(inspPlanId);
+
+
+        //2.将原来的主键插入进去 并且将新的数据插入
+        InspEqPlan inspEqPlan = new InspEqPlan();
+
+
+        //生成巡检计划Id插入
+        inspEqPlan.setInspPlId(inspPlanId);
+        //插入巡检计划信息
+        inspEqPlan.setInspPlChangeReason(inspPlanVo.getInspPlChangeReason());
+        inspEqPlan.setInspPlName(inspPlanVo.getInspPlName());
+        inspEqPlan.setInspPlPlanner(planner);
+        inspEqPlan.setInspPlSprare3(spare3);
+        inspEqPlan.setInspPlCreateTime(inspPlanVo.getInspPlCreateTime());
+        inspEqPlan.setInspPlAuditor(inspPlanVo.getInspPlAuditor());
+        inspEqPlan.setInspPlSprare4(inspPlanVo.getInspPlSpare4());
+        inspEqPlan.setInspPlNote(inspPlanVo.getInspPlNote());
+        inspEqPlan.setInspPlStatus(inspPlanVo.getInspPlStatus());
+
+
+        inspEqPlan.setInspPlLastTime(inspPlanVo.getInspPlLastTime());
+        inspEqPlan.setInspPlPeriod(inspPlanVo.getInspPlPeriod());
+        inspEqPlan.setInspPlPeriodicUnit(inspPlanVo.getInspPlPeriodicUnit());
+
+        inspEqPlan.setInspPlExecutorType(inspPlanVo.getInspPlExecutorType());
+        inspEqPlan.setInspPlType(inspPlanVo.getInspPlType());
+        //日期判断 周|月
+        Calendar calendar = Calendar.getInstance();
+        Date date = inspEqPlan.getInspPlLastTime();
+        calendar.setTime(date);
+        int i = Integer.parseInt(inspEqPlan.getInspPlPeriod());
+
+        if(inspEqPlan.getInspPlPeriodicUnit() == 0){
+
+            calendar.add(Calendar.WEEK_OF_MONTH,i);
+        }else {
+            i = i*inspEqPlan.getInspPlPeriodicUnit();
+            calendar.add(Calendar.MONTH, i);
+        }
+        inspEqPlan.setInspPlPlanExecuteTime(calendar.getTime());
+        ArrayList<InspPlanEquipmentVo> inspPlanEquipmentVos = inspPlanVo.getInspPlanEquipmentVos();
+        for (InspPlanEquipmentVo inspPlanEquipmentVo : inspPlanEquipmentVos) {
+            String[] inspPlStandards = inspPlanEquipmentVo.getInspPlStandards();
+            String inspPlStandard = JSON.toJSONString(inspPlStandards);
+
+            //插入对应的 设备编号和对应的设备标准数组
+            inspEqPlan.setInspPlEqSbbh(inspPlanEquipmentVo.getEqSbbh());
+            inspEqPlan.setInspPlEqStandards(inspPlStandard);
+
+            //封装完毕，插入表中
+            inspectionManageDao.insertInspPlan(inspEqPlan);
+        }
+
+
+
+        //清除所有选定项
+        inspectionManageDao.updateSelectionToZero();
+
+        return 1;
+
+    }
+
+    /**
+     * 功能描述: 变更设备选定情况
+     *
+     * @Param: ArrayList<InspEqPlan>
+     * @Return: void
+     * @Author: ZYJ
+     * @Date: 2019/8/21 0021 0:15
+     */
+    public void changeEqSelection(List<InspEqPlan> inspEqPlans){
+        for (InspEqPlan inspEqPlan : inspEqPlans) {
+            inspectionManageDao.updateEqSelectionBySbbh(inspEqPlan.getInspPlEqSbbh());
+        }
+    }
     /**
      * 功能描述:根据巡检计划Id查询巡检计划信息
      *
@@ -47,89 +163,68 @@ public class InspectionManageServiceImpl implements InspectionManageService {
      * @Author: ZYJ
      * @Date: 2019/8/14 0014 15:25
      */
-    public InspPlanVo selectInspPlanById(String inspPlId){
+    public InspPlanVo1 selectInspPlanById(String inspPlId){
         List<InspEqPlan> inspEqPlans = inspectionManageDao.selectInspPlanById(inspPlId);
-        InspPlanVo inspPlanVo = new InspPlanVo();
-        ArrayList<InspPlanProgramVo> inspPlanProgramVos = new ArrayList<InspPlanProgramVo>();
-        ArrayList arrayList = new ArrayList<Integer>();
+        changeEqSelection(inspEqPlans);
+        InspPlanVo1 inspPlanVo1 = new InspPlanVo1();
 
         InspEqPlan inspEqPlan = inspEqPlans.get(0);
 
         //第一步 封装计划基本信息
-        inspPlanVo.setInspPlName(inspEqPlan.getInspPlName());
-        inspPlanVo.setInspPlPlanner(inspEqPlan.getInspPlPlanner());
-        inspPlanVo.setInspPlAuditor(inspEqPlan.getInspPlAuditor());
-        inspPlanVo.setInspPlCreateTime(inspEqPlan.getInspPlCreateTime());
-        inspPlanVo.setInspPlNote(inspEqPlan.getInspPlNote());
-        inspPlanVo.setInspPlStatus(inspEqPlan.getInspPlStatus());
+        inspPlanVo1.setInspPlanId(inspEqPlan.getInspPlId());
+        inspPlanVo1.setInspPlName(inspEqPlan.getInspPlName());
+        inspPlanVo1.setInspPlPlanner(inspEqPlan.getInspPlPlanner()+"+"+
+                inspectionManageDao.selectUserNameById(inspEqPlan.getInspPlPlanner()));
+        inspPlanVo1.setInspPlAuditor(inspEqPlan.getInspPlAuditor()+"+"+
+                inspectionManageDao.selectUserNameById(inspEqPlan.getInspPlAuditor()));
+        inspPlanVo1.setInspPlCreateTime(inspEqPlan.getInspPlCreateTime());
+        inspPlanVo1.setInspPlNote(inspEqPlan.getInspPlNote());
+        inspPlanVo1.setInspPlStatus(inspEqPlan.getInspPlStatus());
+        inspPlanVo1.setInspPlChangeReason(inspEqPlan.getInspPlChangeReason());
 
-        //求出此计划有几个项目
-        for (int i = 0; i < inspEqPlans.size(); i++) {
-            String inspPlSprare1 = inspEqPlans.get(i).getInspPlSprare1();
-            arrayList.add(Integer.parseInt(inspPlSprare1));
-        }
-        int[] d = new int[arrayList.size()];
-        for(int i = 0;i<arrayList.size();i++){
-            d[i] = (int)arrayList.get(i);
-        }
-        Arrays.sort(d);
-        int a = d[d.length - 1];
+        inspPlanVo1.setInspPlPeriodicUnit(inspEqPlan.getInspPlPeriodicUnit());
+        inspPlanVo1.setInspPlPeriod(inspEqPlan.getInspPlPeriod());
+        inspPlanVo1.setInspPlLastTime(inspEqPlan.getInspPlLastTime());
+        inspPlanVo1.setInspPlExecutorType(inspEqPlan.getInspPlExecutorType());
+        inspPlanVo1.setInspPlType(inspEqPlan.getInspPlType());
 
+        ArrayList<InspPlanEquipmentVo1> inspPlanEquipmentVos = new ArrayList<>();
+        for (InspEqPlan eqPlan : inspEqPlans) {
+            ArrayList arrayList1 = new ArrayList<String>();
+            InspPlanEquipmentVo1 inspPlanEquipmentVo1 = new InspPlanEquipmentVo1();
+            String inspPlEqStandards = eqPlan.getInspPlEqStandards();
+            JSONArray objects = JSON.parseArray(inspPlEqStandards);
+            if(objects.size()!= 0) {
+                for (int j = 0; j < objects.size(); j++) {
 
+                    arrayList1.add(objects.getString(j));
 
-        for (int i = 1; i < a+1; i++) {
-            String s = String.valueOf(i);
-            InspPlanProgramVo inspPlanProgramVo = new InspPlanProgramVo();
-
-            for (InspEqPlan eqPlan : inspEqPlans) {
-                if(eqPlan.getInspPlSprare1().equals(s)){
-                    //封装program的基本信息
-                    inspPlanProgramVo.setInspPlType(eqPlan.getInspPlType());
-                    inspPlanProgramVo.setInspPlPeriodicUnit(eqPlan.getInspPlPeriodicUnit());
-                    inspPlanProgramVo.setInspPlPeriod(eqPlan.getInspPlPeriod());
-                    inspPlanProgramVo.setInspPlLastTime(eqPlan.getInspPlLastTime());
-                    inspPlanProgramVo.setInspPlExecutorType(eqPlan.getInspPlExecutorType());
-                    break;
+                    arrayList1.add(inspectionManageDao.selectStandardNameById(
+                            objects.getString(j)
+                    ));
+                    arrayList1.add(inspectionManageDao.selectStandardDescriptionById(
+                            objects.getString(j)
+                    ));
                 }
+
+                String [] array = (String [])arrayList1.toArray(new String[0]);
+                InspEquipmentVo inspEquipmentVo = inspectionManageDao.selectEqVoById(eqPlan.getInspPlEqSbbh());
+                inspPlanEquipmentVo1.setEqName(inspEquipmentVo.getEqName());
+                inspPlanEquipmentVo1.setEqXh(inspEquipmentVo.getEqXh());
+                inspPlanEquipmentVo1.setBmName(inspEquipmentVo.getBmName());
+                inspPlanEquipmentVo1.setInspPlStandards(array);
+                inspPlanEquipmentVo1.setEqSbbh(eqPlan.getInspPlEqSbbh());
+
+
+                inspPlanEquipmentVos.add(inspPlanEquipmentVo1);
+
             }
-
-            ArrayList<InspPlanEquipmentVo> inspPlanEquipmentVos = new ArrayList<>();
-
-            for (InspEqPlan eqPlan : inspEqPlans) {
-
-                //相当于把同一个项目的eqPlan取出来
-                if(eqPlan.getInspPlSprare1().equals(s)){
-                    ArrayList arrayList1 = new ArrayList<String>();
-                    InspPlanEquipmentVo inspPlanEquipmentVo = new InspPlanEquipmentVo();
-                    String inspPlEqStandards = eqPlan.getInspPlEqStandards();
-                    JSONArray objects = JSON.parseArray(inspPlEqStandards);
-                    if(objects.size()!= 0){
-                        for (int j = 0; j < objects.size(); j++) {
-                            arrayList1.add(objects.getString(j));
-                        }
-                    }
-
-                    String [] array = (String [])arrayList1.toArray(new String[0]);
-
-                    inspPlanEquipmentVo.setInspPlStandards(array);
-                    inspPlanEquipmentVo.setEqSbbh(eqPlan.getInspPlEqSbbh());
-                    //把同一个项目的设备信息添加进去
-                    inspPlanEquipmentVos.add(inspPlanEquipmentVo);
-
-                }
-            }
-
-            inspPlanProgramVo.setInspPlanEquipmentVos(inspPlanEquipmentVos);
-
-            inspPlanProgramVos.add(inspPlanProgramVo);
-
         }
-        //将programs添加到Vo中
-        inspPlanVo.setInspPlanProgramVos(inspPlanProgramVos);
+
+        inspPlanVo1.setInspPlanEquipmentVo1s(inspPlanEquipmentVos);
 
 
-
-        return inspPlanVo;
+        return inspPlanVo1;
     }
 
 
@@ -143,7 +238,23 @@ public class InspectionManageServiceImpl implements InspectionManageService {
      */
     public PageInfo<InspPlanSelectVo> selectAllInspPlanVo(int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(inspectionManageDao.selectAllInspPlanVo());
+        List<InspPlanSelectVo> inspPlanSelectVos = inspectionManageDao.selectAllInspPlanVo();
+        for (InspPlanSelectVo inspPlanSelectVo : inspPlanSelectVos) {
+            inspPlanSelectVo.setInspPlAuditor(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlAuditor()));
+            inspPlanSelectVo.setInspPlPlanner(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlPlanner()));
+
+        }
+        return new PageInfo<>(inspPlanSelectVos);
+    }
+    public PageInfo<InspPlanSelectVo1> selectAllResultInspPlanVo(int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<InspPlanSelectVo1> inspPlanSelectVos = inspectionManageDao.selectAllResultInspPlanVo();
+        for (InspPlanSelectVo1 inspPlanSelectVo : inspPlanSelectVos) {
+            inspPlanSelectVo.setInspPlAuditor(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlAuditor()));
+            inspPlanSelectVo.setInspPlPlanner(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlPlanner()));
+
+        }
+        return new PageInfo<>(inspPlanSelectVos);
     }
 
     /**
@@ -159,8 +270,80 @@ public class InspectionManageServiceImpl implements InspectionManageService {
                                                        String inspPlAuditor, String inspPlStatus){
 
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(inspectionManageDao.selectInspPlanVo(inspPlName, inspPlPlanner,
-                inspPlAuditor, inspPlStatus));
+        List<InspPlanSelectVo> inspPlanSelectVos = inspectionManageDao.selectInspPlanVo(inspPlName, inspPlPlanner,
+                inspPlAuditor, inspPlStatus);
+        for (InspPlanSelectVo inspPlanSelectVo : inspPlanSelectVos) {
+            inspPlanSelectVo.setInspPlAuditor(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlAuditor()));
+            inspPlanSelectVo.setInspPlPlanner(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlPlanner()));
+
+        }
+        return new PageInfo<>(inspPlanSelectVos);
+    }
+    /**
+     * 功能描述: 查询巡检计划列表
+     *
+     * @Param: inspPlName inspPlPlanner inspPlAuditor inspPlStatus
+     * @Return:
+     * @Author: ZYJ
+     * @Date: 2019/8/13 0013 16:03
+     */
+    public PageInfo<InspPlanSelectVo1> selectResultInspPlanVo(int pageNum, int pageSize,
+                                                       String inspPlName, String inspPlPlanner,
+                                                       String inspPlAuditor, String inspPlStatus){
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<InspPlanSelectVo1> inspPlanSelectVos = inspectionManageDao.selectResultInspPlanVo(inspPlName, inspPlPlanner,
+                inspPlAuditor, inspPlStatus);
+        for (InspPlanSelectVo1 inspPlanSelectVo : inspPlanSelectVos) {
+            inspPlanSelectVo.setInspPlAuditor(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlAuditor()));
+            inspPlanSelectVo.setInspPlPlanner(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlPlanner()));
+
+        }
+        return new PageInfo<>(inspPlanSelectVos);
+    }
+
+
+
+    /**
+     * 功能描述: 查询巡检计划列表
+     *
+     * @Param:
+     * @Return:
+     * @Author: ZYJ
+     * @Date: 2019/8/13 0013 16:03
+     */
+    public PageInfo<InspPlanSelectVo> selectAllApproveInspPlanVo(int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<InspPlanSelectVo> inspPlanSelectVos = inspectionManageDao.selectAllApproveInspPlanVo();
+        for (InspPlanSelectVo inspPlanSelectVo : inspPlanSelectVos) {
+            inspPlanSelectVo.setInspPlAuditor(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlAuditor()));
+            inspPlanSelectVo.setInspPlPlanner(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlPlanner()));
+
+        }
+        return new PageInfo<>(inspPlanSelectVos);
+    }
+
+    /**
+     * 功能描述: 查询巡检计划列表
+     *
+     * @Param: inspPlName inspPlPlanner inspPlAuditor inspPlStatus
+     * @Return:
+     * @Author: ZYJ
+     * @Date: 2019/8/13 0013 16:03
+     */
+    public PageInfo<InspPlanSelectVo> selectApproveInspPlanVo(int pageNum, int pageSize,
+                                                       String inspPlName, String inspPlPlanner,
+                                                       String inspPlAuditor, String inspPlStatus){
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<InspPlanSelectVo> inspPlanSelectVos = inspectionManageDao.selectApproveInspPlanVo(inspPlName, inspPlPlanner,
+                inspPlAuditor, inspPlStatus);
+        for (InspPlanSelectVo inspPlanSelectVo : inspPlanSelectVos) {
+            inspPlanSelectVo.setInspPlAuditor(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlAuditor()));
+            inspPlanSelectVo.setInspPlPlanner(inspectionManageDao.selectUserNameById(inspPlanSelectVo.getInspPlPlanner()));
+
+        }
+        return new PageInfo<>(inspPlanSelectVos);
     }
 
     /**
@@ -172,10 +355,9 @@ public class InspectionManageServiceImpl implements InspectionManageService {
      * @Date: 2019/8/12 0012 19:16
      */
     @Transactional
-    public synchronized int addInspPlan(InspPlanVo inspPlanVo) {
+    public synchronized int addInspPlan(InspPlanVo inspPlanVo, String planner, String inspPlSpare3) {
 
         InspEqPlan inspEqPlan = new InspEqPlan();
-        ArrayList<InspPlanProgramVo> inspPlanProgramVos = inspPlanVo.getInspPlanProgramVos();
 
         String programs = "1";
 
@@ -186,55 +368,54 @@ public class InspectionManageServiceImpl implements InspectionManageService {
         inspEqPlan.setInspPlId(inspPlId);
         //插入巡检计划信息
         inspEqPlan.setInspPlName(inspPlanVo.getInspPlName());
-        inspEqPlan.setInspPlPlanner(inspPlanVo.getInspPlPlanner());
+        inspEqPlan.setInspPlPlanner(planner);
+        inspEqPlan.setInspPlSprare3(inspPlSpare3);
         inspEqPlan.setInspPlCreateTime(inspPlanVo.getInspPlCreateTime());
         inspEqPlan.setInspPlAuditor(inspPlanVo.getInspPlAuditor());
+        inspEqPlan.setInspPlSprare4(inspPlanVo.getInspPlSpare4());
         inspEqPlan.setInspPlNote(inspPlanVo.getInspPlNote());
         inspEqPlan.setInspPlStatus(inspPlanVo.getInspPlStatus());
 
+        inspEqPlan.setInspPlLastTime(inspPlanVo.getInspPlLastTime());
+        inspEqPlan.setInspPlPeriod(inspPlanVo.getInspPlPeriod());
+        inspEqPlan.setInspPlPeriodicUnit(inspPlanVo.getInspPlPeriodicUnit());
+        inspEqPlan.setInspPlExecutorType(inspPlanVo.getInspPlExecutorType());
+        inspEqPlan.setInspPlType(inspPlanVo.getInspPlType());
+        //日期判断 周|月
+        Calendar calendar = Calendar.getInstance();
+        Date date = inspEqPlan.getInspPlLastTime();
+        calendar.setTime(date);
+        int i = Integer.parseInt(inspEqPlan.getInspPlPeriod());
 
-        for (InspPlanProgramVo inspPlanProgramVo : inspPlanProgramVos) {
-            //插入巡检项目基本信息
-            inspEqPlan.setInspPlSprare1(programs);
-            inspEqPlan.setInspPlExecutorType(inspPlanProgramVo.getInspPlExecutorType());
-            inspEqPlan.setInspPlLastTime(inspPlanProgramVo.getInspPlLastTime());
-            inspEqPlan.setInspPlPeriod(inspPlanProgramVo.getInspPlPeriod());
-            inspEqPlan.setInspPlPeriodicUnit(inspPlanProgramVo.getInspPlPeriodicUnit());
-            inspEqPlan.setInspPlType(inspPlanProgramVo.getInspPlType());
+        if(inspEqPlan.getInspPlPeriodicUnit() == 0){
 
-            //日期判断 周|月
-            Calendar calendar = Calendar.getInstance();
-            Date date = inspEqPlan.getInspPlLastTime();
-            calendar.setTime(date);
-            int i = Integer.parseInt(inspEqPlan.getInspPlPeriod());
-
-            if(inspEqPlan.getInspPlPeriodicUnit() == 0){
-
-                calendar.add(Calendar.WEEK_OF_MONTH,i);
-            }else {
-                i = i*inspEqPlan.getInspPlPeriodicUnit();
-                calendar.add(Calendar.MONTH, i);
-            }
-            inspEqPlan.setInspPlPlanExecuteTime(calendar.getTime());
-
-            ArrayList<InspPlanEquipmentVo> inspPlanEquipmentVos = inspPlanProgramVo.getInspPlanEquipmentVos();
-
-            for (InspPlanEquipmentVo inspPlanEquipmentVo : inspPlanEquipmentVos) {
-                String[] inspPlStandards = inspPlanEquipmentVo.getInspPlStandards();
-                String inspPlStandard = JSON.toJSONString(inspPlStandards);
-
-                //插入对应的 设备编号和对应的设备标准数组
-                inspEqPlan.setInspPlEqSbbh(inspPlanEquipmentVo.getEqSbbh());
-                inspEqPlan.setInspPlEqStandards(inspPlStandard);
-
-                //封装完毕，插入表中
-                inspectionManageDao.insertInspPlan(inspEqPlan);
-            }
-
-            int add = Integer.parseInt(programs);
-            add+=1;
-            programs = String.valueOf(add);
+            calendar.add(Calendar.WEEK_OF_MONTH,i);
+        }else {
+            i = i*inspEqPlan.getInspPlPeriodicUnit();
+            calendar.add(Calendar.MONTH, i);
         }
+        inspEqPlan.setInspPlPlanExecuteTime(calendar.getTime());
+
+
+
+        ArrayList<InspPlanEquipmentVo> inspPlanEquipmentVos = inspPlanVo.getInspPlanEquipmentVos();
+
+        for (InspPlanEquipmentVo inspPlanEquipmentVo : inspPlanEquipmentVos) {
+            String[] inspPlStandards = inspPlanEquipmentVo.getInspPlStandards();
+            String inspPlStandard = JSON.toJSONString(inspPlStandards);
+
+            //插入对应的 设备编号和对应的设备标准数组
+            inspEqPlan.setInspPlEqSbbh(inspPlanEquipmentVo.getEqSbbh());
+            inspEqPlan.setInspPlEqStandards(inspPlStandard);
+
+            //封装完毕，插入表中
+            inspectionManageDao.insertInspPlan(inspEqPlan);
+        }
+
+
+
+
+        inspectionManageDao.updateSelectionToZero();
 
         return 1;
     }

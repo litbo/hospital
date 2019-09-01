@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>巡检标准</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../static/admin/layui/css/layui.css">
+    <script src="../../../../../static/admin/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../../../../static/admin/css/admin.css">
+    <script src="../../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="../../../../../static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table  id="test" lay-filter="test"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+        <div class="demoTable" style="height: 50px;">
+            <div class="layui-btn-container layui-inline " demoTable style="width: 50px;margin-left: 5px;float: left">
+                <button class="layui-btn Bm" id="Bm" title="如果需要退出/提交，请点击这里" lay-event="getCheckData">确定/退出</button>
+            </div>
+        </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">录入</a>
+</script>
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="inspPlStandardDescription" value="{{d.inspPlStandardId}}" lay-skin="switch" lay-text="合格|不合格" lay-filter="inspPlStandardDescription" {{ d.inspPlStandardDescription === true ? "checked" : "" }}>
+</script>
+<script>
+    layui.use(['form','table', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,table = layui.table
+            ,laydate = layui.laydate;
+        form.render();
+        var tre = window.localStorage.getItem("gumNumg");
+        var tra = JSON.parse(tre);
+
+        for (var i = 0; i < tra.length; i++){
+           /* console.log(tra[i].inspPlStandardDescription);*/
+            if ( tra[i].inspPlStandardDescription === undefined) {
+                tra[i]["inspPlStandardDescription"] = false;
+                tra[i]["inspReOtherProblem"] = "";
+            }else{
+                tra = tra;
+            }
+
+        }
+        console.log(tra);
+        renderMod = {
+            addTable: {
+                table: {
+                    elem: '#test'
+                    , toolbar: '#toolBar'
+                    ,defaultToolbar:true
+                    , cols: [[
+                        {type:'numbers'}
+                        , {field: 'inspPlStandardName', title: '名称', minWidth: 200}
+                        , {field: 'inspPlStandardDescription', title: '结果',templet: '#switchTpl', minWidth: 200}
+                        ,{fixed: 'right', title:'存在问题', toolbar: '#barDemo', width:150}
+                    ]]
+                    , page: true
+                    ,data: tra
+                    , height: 300
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "count": res.data.total,//页面的所有数据数
+                            "data": res.data.list //解析数据列表
+                        }
+                    }
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                    , done: function (res, curr, count) {
+                        console.log(res);
+                        var scription = [],Problem = [], tandardId=[];
+                        $("#Bm").off("click").on("click",function(){
+                            console.log(tra);
+                            for (var i = 0; i < tra.length; i++){
+                                if (tra[i].inspPlStandardDescription === true && tra[i].inspReOtherProblem === "") {
+                                    tra[i].inspReOtherProblem = "没问题";
+                                }
+                                tandardId.push(tra[i].inspPlStandardId);
+                                Problem.push(tra[i].inspReOtherProblem);
+                                scription.push(tra[i].inspPlStandardDescription);
+                            }
+                            var t1 = JSON.stringify(tandardId);
+                            var t2 = JSON.stringify(Problem);
+                            var t3 = JSON.stringify(scription);
+                            var tAll = JSON.stringify(tra);
+                            window.localStorage.setItem("dardsVos1",t1);
+                            window.localStorage.setItem("dardsVos2",t2);
+                            window.localStorage.setItem("dardsVos3",t3);
+                            window.localStorage.setItem("dardsVosAll",tAll );
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        })
+                    }
+                }
+            }
+        };
+        form.on('switch(inspPlStandardDescription)', function(obj){
+            for (var i = 0; i < tra.length; i++){
+                if (tra[i].inspPlStandardId === this.value) {
+                    tra[i]["inspPlStandardDescription"] = obj.elem.checked;
+                }
+            }
+            console.log(obj.elem.checked);
+        });
+
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            console.log(data);
+            if(obj.event === 'edit'){
+
+                for (var i = 0; i < tra.length; i++){
+                    if (data.inspPlStandardId === tra[i].inspPlStandardId) {
+                        data["inspReOtherProblem"] = tra[i].inspReOtherProblem;
+                    }
+                }
+
+                layer.prompt({
+                    title:"存在问题"
+                    ,formType: 2
+                    ,value: data.inspReOtherProblem
+                }, function(value, index) {
+                    data["inspReOtherProblem"] = value;
+                    for (var t = 0; t < tra.length; t++) {
+                       /* console.log(t);
+                        console.log(tra[t]);*/
+                        if (tra[t].inspPlStandardId === data.inspPlStandardId) {
+                            tra[t] = data;
+                        }
+                    }
+                  /*  console.log(tra);*/
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
