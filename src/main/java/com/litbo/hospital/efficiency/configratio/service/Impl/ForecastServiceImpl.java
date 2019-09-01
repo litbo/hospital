@@ -10,8 +10,6 @@ import com.litbo.hospital.efficiency.configratio.vo.ForecastRatioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * description: 预测符合率
  * @author: sz
@@ -30,9 +28,12 @@ public class ForecastServiceImpl implements ForecastService {
      */
     @Override
     public Integer addForecast(ForecastBean forecastBean) {
-        forecastBean.setRatio(Double.valueOf(Efficiency.result(forecastBean.getActualNum(),forecastBean.getForecastNum())));
-        Integer integer = forecastDAO.addForecast(forecastBean);
-        return integer;
+        if (forecastDAO.selectByEqCode(forecastBean.getEqSbbh())==null){
+            forecastBean.setRatio(Double.valueOf(Efficiency.result(forecastBean.getActualNum(),forecastBean.getForecastNum())));
+            return forecastDAO.addForecast(forecastBean);
+        }else {
+            return 0;
+        }
     }
 
     /**
@@ -66,6 +67,7 @@ public class ForecastServiceImpl implements ForecastService {
     public Integer updateForecast(ForecastRatioVO forecastRatioVO) {
         if (forecastDAO.selectByEqCode(forecastRatioVO.getEqSbbh())==null||
                 forecastDAO.selectByEqCode(forecastRatioVO.getEqSbbh())==1){
+            forecastRatioVO.setRatio(Efficiency.result(forecastRatioVO.getForecastNum(),forecastRatioVO.getActualNum()));
             return forecastDAO.updateForecast(forecastRatioVO);
         }else {
             return 0;

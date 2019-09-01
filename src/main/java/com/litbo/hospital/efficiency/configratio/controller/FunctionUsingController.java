@@ -5,13 +5,8 @@ import com.litbo.hospital.efficiency.configratio.service.FunctionUsingService;
 import com.litbo.hospital.efficiency.configratio.vo.DeleteVO;
 import com.litbo.hospital.efficiency.configratio.vo.FunctionUsingRatioVO;
 import com.litbo.hospital.result.Result;
-import com.litbo.hospital.supervise.vo.GangweiDeleteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * description: 功能利用率
@@ -29,7 +24,11 @@ public class FunctionUsingController {
 
     @RequestMapping(value = "/addUsing",method = RequestMethod.POST)
     public Result addUsing(FunctionUsingBean usingBean){
-        return Result.success(usingService.addFunctionUsing(usingBean));
+        if (usingService.addFunctionUsing(usingBean)>0){
+            return Result.success();
+        }else {
+            return Result.error();
+        }
     }
 
     @RequestMapping(value = "/showUsing",method = RequestMethod.GET)
@@ -50,8 +49,7 @@ public class FunctionUsingController {
 
     @RequestMapping(value = "/updateUsing",method = RequestMethod.POST)
     public Result updateUsing(FunctionUsingRatioVO usingRatioVO){
-        System.out.println("+++++++++++++++++");
-        System.out.println(usingRatioVO);
+        usingRatioVO.setId(integer);
         if (usingService.updateUsing(usingRatioVO)>0){
             return Result.success("已更改成功");
         }else {

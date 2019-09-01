@@ -10,8 +10,6 @@ import com.litbo.hospital.efficiency.configratio.vo.FunctionIntegrityRatioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * description: 功能完好率Service层
  * @author: sz
@@ -30,9 +28,12 @@ public class FunctionIntegrityServiceImpl implements FunctionIntegrityService {
      */
     @Override
     public Integer addFunctionIntegrity(FunctionIntegrityBean integrityBean) {
-        integrityBean.setRatio(Double.valueOf(Efficiency.result(integrityBean.getIntegrityNum(),integrityBean.getExitNum())));
-        Integer integer = integrityDAO.addFunctionIntegrity(integrityBean);
-        return integer;
+        if (integrityDAO.selectIntegrityByeqSbbh(integrityBean.getEqSbbh())==null){
+            integrityBean.setRatio(Double.valueOf(Efficiency.result(integrityBean.getIntegrityNum(),integrityBean.getExitNum())));
+            return integrityDAO.addFunctionIntegrity(integrityBean);
+        }else {
+            return 0;
+        }
     }
 
     /**
@@ -64,10 +65,12 @@ public class FunctionIntegrityServiceImpl implements FunctionIntegrityService {
      */
     @Override
     public Integer updateIntegrity(FunctionIntegrityRatioVO integrityRatioVO) {
-        if (integrityDAO.selectIntegrityByeqSbbh(integrityRatioVO.getEqSbbh())!=null){
-            return 0;
-        }else {
+        if (integrityDAO.selectIntegrityByeqSbbh(integrityRatioVO.getEqSbbh())==null||
+                integrityDAO.selectIntegrityByeqSbbh(integrityRatioVO.getEqSbbh())==1){
+            integrityRatioVO.setRatio(Efficiency.result(integrityRatioVO.getIntegrityNum(),integrityRatioVO.getExitNum()));
             return integrityDAO.updateIntegrity(integrityRatioVO);
+        }else {
+            return 0;
         }
     }
 

@@ -4,8 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.efficiency.configratio.bean.ForecastBean;
 import com.litbo.hospital.efficiency.configratio.vo.ForecastRatioVO;
 
-import java.util.List;
-
 /**
  * description: 预测符合率
  * @author: sz
