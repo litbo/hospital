@@ -56,7 +56,7 @@ public class ForecastController {
         }
     }
 
-    @RequestMapping(value = "/deleteForecast",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteForecast",method = RequestMethod.DELETE)
     public Result deleteForecast(@RequestBody DeleteVO deleteVO){
         if (deleteVO.getIds()!=null){
             Integer integer = forecastService.deleteForecast(deleteVO.getIds());

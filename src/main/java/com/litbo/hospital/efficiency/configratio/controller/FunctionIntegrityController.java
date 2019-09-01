@@ -54,7 +54,7 @@ public class FunctionIntegrityController {
         }
     }
 
-    @RequestMapping(value = "/deleteIntegrity",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteIntegrity",method = RequestMethod.DELETE)
     public Result deleteIntegrity(@RequestBody DeleteVO deleteVO){
         if (deleteVO.getIds()!=null){
             Integer integer = integrityService.deleteIntegrity(deleteVO.getIds());

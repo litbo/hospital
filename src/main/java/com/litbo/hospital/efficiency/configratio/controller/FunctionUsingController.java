@@ -25,6 +25,8 @@ public class FunctionUsingController {
     @Autowired
     private FunctionUsingService usingService;
 
+    private Integer integer;
+
     @RequestMapping(value = "/addUsing",method = RequestMethod.POST)
     public Result addUsing(FunctionUsingBean usingBean){
         return Result.success(usingService.addFunctionUsing(usingBean));
@@ -37,13 +39,19 @@ public class FunctionUsingController {
     }
 
     @RequestMapping(value = "/showUsingById",method = RequestMethod.POST)
-    public Result showUsingById(@RequestParam Integer id){
-        return Result.success(usingService.showUsingById(id));
+    public void showUsingById(@RequestParam Integer id){
+        integer = id;
+    }
 
+    @RequestMapping(value = "/returnUsing",method = RequestMethod.POST)
+    public Result returnUsing(){
+        return Result.success(usingService.showUsingById(integer));
     }
 
     @RequestMapping(value = "/updateUsing",method = RequestMethod.POST)
     public Result updateUsing(FunctionUsingRatioVO usingRatioVO){
+        System.out.println("+++++++++++++++++");
+        System.out.println(usingRatioVO);
         if (usingService.updateUsing(usingRatioVO)>0){
             return Result.success("已更改成功");
         }else {
