@@ -13,6 +13,7 @@ import java.util.Date;
 @Data
 public class InspPlanVo {
 
+    private String inspPlanId;
     private String inspPlName;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -20,13 +21,30 @@ public class InspPlanVo {
     private Date inspPlCreateTime;
 
     private String inspPlPlanner;
+    private String inspPlSpare3;
 
     private String inspPlAuditor;
+    private String inspPlSpare4;
 
     private String inspPlStatus;
 
+    private String inspPlChangeReason;
+
     private String inspPlNote;
 
-    private ArrayList<InspPlanProgramVo> inspPlanProgramVos;
+
+    private String inspPlPeriod;
+
+    private Integer inspPlPeriodicUnit;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date inspPlLastTime;
+
+    private String inspPlExecutorType;
+
+    private String inspPlType;
+
+    private ArrayList<InspPlanEquipmentVo> inspPlanEquipmentVos;
 
 }

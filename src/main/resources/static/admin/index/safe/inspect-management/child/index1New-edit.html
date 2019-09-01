@@ -36,12 +36,12 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item"  style="margin-bottom:37px ">
+                       <!-- <div class="layui-form-item"  style="margin-bottom:37px ">
                             <label class="layui-form-label">上次巡检日期</label>
                             <div class="layui-input-block">
                                 <input type="text" name="inspPlLastTime"   readonly="readonly"  id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input inspPlLastTime">
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
                     <div class="col-xs-6" style="padding: 10px;">
@@ -57,7 +57,7 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item" style="margin-bottom:37px ">
+                      <!--  <div class="layui-form-item" style="margin-bottom:37px ">
                             <label class="layui-form-label">巡检周期</label>
                             <div class="layui-input-block">
                                 <input type="text" name="inspPlPeriod" id="inspPlPeriod" placeholder="只能输入数字" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')">
@@ -73,13 +73,13 @@
                                     <option value="1">月</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
 
                 </div>
 
-                <div class="col-xs-12" style="margin-bottom: 100px;">
+                <div class="col-xs-12" style="margin-bottom: 50px;">
                     <div class="layui-form-item" pane >
 
                         <div class="layui-input-block  demoTable" style="margin-left: 0">
@@ -106,7 +106,7 @@
 
                 <div class="layui-row">
                     <div class="col-xs-12">
-                        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="sumBer">提 交
+                        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="sumBer">提 交/退 出
                         </button>
                     </div>
 
@@ -210,7 +210,7 @@
                                 layer.open({
                                     type: 2
                                     ,title: '添加设备'
-                                    ,area: ['1100px', '500px']
+                                    ,area: ['93%', '93%']
                                     ,content:"./index1New-new.html"
                                     ,end :function () {
 
@@ -256,7 +256,7 @@
                                     layer.open({
                                         type: 2 //此处以iframe举例
                                         ,title: '巡检标准'
-                                        ,area: ['800px', '400px']
+                                        ,area: ['85%', '85%']
                                         ,content:"./index1-new-inspection.html"
                                         ,success : function () {
                                         }
@@ -316,22 +316,22 @@
                     layer.msg("执行人类别尚未填写", {icon: 2});
                     return ;
                 }
-                if ($(".inspPlLastTime").val() == "") {
+              /*  if ($(".inspPlLastTime").val() == "") {
                     layer.msg("指定时间未填写", {icon: 2});
                     return;
-                }
+                }*/
                 if ($("#inspPlType").val()  == "") {
                     layer.msg("巡检类型未填写", {icon: 2});
                     return;
                 }
-                if ($("#inspPlPeriod").val() == "") {
+                /*if ($("#inspPlPeriod").val() == "") {
                     layer.msg("巡检周期未填写", {icon: 2});
                     return;
                 }
                 if ($("#inspPlPeriodicUnit").val()  == "") {
                     layer.msg("周期单位未填写", {icon: 2});
                     return;
-                }
+                }*/
                /* if(ress.length === 0){
                     layer.msg("巡检设备未选择", {icon: 2});
                     return;
@@ -346,10 +346,10 @@
 
                 Tre["inspPlExecutorType"] = $("#inspPlExecutorType").val();
                 Tre["inspPlExecutorType"] = $("#inspPlExecutorType").val();
-                Tre["inspPlLastTime"] = $(".inspPlLastTime").val();
+              /*  Tre["inspPlLastTime"] = $(".inspPlLastTime").val();*/
                 Tre["inspPlType"] = $("#inspPlType").val();
-                Tre["inspPlPeriod"] = $("#inspPlPeriod").val();
-                Tre["inspPlPeriodicUnit"] = $("#inspPlPeriodicUnit").val();
+               /* Tre["inspPlPeriod"] = $("#inspPlPeriod").val();
+                Tre["inspPlPeriodicUnit"] = $("#inspPlPeriodicUnit").val();*/
 
                 var treData = JSON.stringify(Tre);
                 var resData = JSON.stringify(ress);

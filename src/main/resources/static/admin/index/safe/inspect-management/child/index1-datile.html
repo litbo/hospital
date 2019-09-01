@@ -39,6 +39,13 @@
                                         </div>
                                     </div>
 
+                                    <div class="layui-form-item"  style="margin-bottom:37px ">
+                                        <label class="layui-form-label" style="font-size: 12px">上次巡检日期</label>
+                                        <div class="layui-input-block">
+                                            <input type="text"  autocomplete="off" class="layui-input inspPlLastTime" disabled>
+                                        </div>
+                                    </div>
+
                                     <div class="layui-form-item" style="margin-bottom:37px ">
                                         <label class="layui-form-label" >制定人</label>
                                         <div class="layui-input-block">
@@ -48,25 +55,43 @@
                                         </div>
                                     </div>
 
-                                    <div class="layui-form-item" style="margin-bottom:20px ">
-                                        <label class="layui-form-label">状态</label>
+                                    <div class="layui-form-item" style="margin-bottom:37px ">
+                                        <label class="layui-form-label">执行人类别</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="interest" autocomplete="off" disabled class="layui-input interest" disabled>
-                                            <!-- <select name="interest" lay-filter="aihao">
-                                                 <option value="">选择状态</option>
-                                                 <option value="0">停用</option>
-                                                 <option value="1">启用</option>
-                                             </select>-->
+                                            <input type="text" autocomplete="off" class="layui-input inspPlExecutorType" disabled>
+
+                                          <!-- <select name="inspPlExecutorType" id="inspPlExecutorType">
+                                            <option value="">请选择</option>
+                                            <option value="0">维修工程师</option>
+                                            <option value="1">厂家工程师</option>
+                                            <option value="2">维修、厂家工程师</option>
+                                        </select>-->
                                         </div>
                                     </div>
 
-
+                                   <!-- <div class="layui-form-item" style="margin-bottom:20px ">
+                                        <label class="layui-form-label">状态</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="interest" autocomplete="off" disabled class="layui-input interest" disabled>
+                                            &lt;!&ndash; <select name="interest" lay-filter="aihao">
+                                                 <option value="">选择状态</option>
+                                                 <option value="0">停用</option>
+                                                 <option value="1">启用</option>
+                                             </select>&ndash;&gt;
+                                        </div>
+                                    </div>-->
+                                   <!-- <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" id="but" lay-filter="demo1">变更记录</button>
+                                        </div>
+                                    </div>
+-->
                                 </div>
                                 <div class="col-xs-6" style="padding: 10px;">
                                     <div class="layui-form-item layui-form-text">
                                         <label class="layui-form-label">备注</label>
                                         <div class="layui-input-block">
-                                            <textarea placeholder="" name="inspPlNote"  style="resize:none"  class="layui-textarea inspPlNote" disabled></textarea>
+                                            <textarea placeholder="" name="inspPlNote"  style="resize:none;min-height: 65px;"  class="layui-textarea inspPlNote" disabled></textarea>
                                         </div>
                                     </div>
 
@@ -78,15 +103,43 @@
                                         </div>
                                     </div>
 
-                                    <div class="layui-form-item">
+                                    <div class="layui-form-item" >
+                                        <label class="layui-form-label">巡检周期</label>
                                         <div class="layui-input-block">
-                                            <button class="layui-btn" id="but" lay-filter="demo1">变更记录</button>
+                                            <input type="text"  class="layui-input inspPlPeriod" disabled>
                                         </div>
                                     </div>
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">周期单位</label>
+                                        <div class="layui-input-block">
+                                            <input type="text"   class="layui-input inspPlPeriodicUnit" disabled>
+                                            <!-- <select name="inspPlPeriodicUnit" id="inspPlPeriodicUnit" >
+                                                 <option value="">请选择</option>
+                                                 <option value="0">周</option>
+                                                 <option value="1">月</option>
+                                             </select>-->
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item" style="margin-bottom:37px ">
+                                        <label class="layui-form-label">巡检类型</label>
+                                        <div class="layui-input-block">
+                                            <input type="text"  autocomplete="off" class="layui-input inspPlType" disabled>
+                                      <!--  <select name="inspPlType" id="inspPlType" >
+                                            <option value="">请选择</option>
+                                            <option value="0">其它巡检</option>
+                                            <option value="1">周期巡检</option>
+                                        </select>-->
+                                        </div>
+                                    </div>
+
 
                                 </div>
                              </div>
                          </div>
+
+
                         <div class="layui-row ">
                             <div class="col-xs-12" >
                                 <table id="table" lay-filter="table"></table>
@@ -133,7 +186,6 @@
             ,table = layui.table
             ,laydate = layui.laydate;
         form.render();
-
         renderMod = {
             table: {
                 table: [
@@ -142,19 +194,18 @@
                         id: "table",
                         cols: [[ //表头
                             {type:'numbers'}
-                            ,{field: 'inspPlExecutorType', title: '执行人类别', minWidth: 150, templet: '#lbTpl'}
-                            , {field: 'inspPlLastTime', title: '巡检开始日期', minWidth: 150}
-                            , {field: 'inspPlPeriod', title: '巡检周期', minWidth: 150}
-                            , {field: 'inspPlPeriodicUnit', title: '周期单位', minWidth: 150, templet: '#dwTpl'}
-                            , {field: 'inspPlType', title: '巡检类型', minWidth: 150, templet: '#lxTpl'}
-                            ,{fixed: 'right', title:'巡检设备', toolbar: '#barDemo', width:150}
+                            , {field: 'bmName', title: '使用部门', minWidth: 150}
+                            , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
+                            , {field: 'eqName', title: '设备名称', minWidth: 150}
+                            , {field: 'eqName', title: '设备型号', minWidth: 150}
+                            ,{fixed: 'right', title:'巡检标准', toolbar: '#barDemo', width:150}
                         ]]
                         , toolbar: false
-                        , page: true//开启分页
-                        , height: "200"
+                        , page: true
+                        , height: "230"
                         , data: []
                         , text: {
-                            none: "暂无数据！"
+                            none: "请点击上方添加按钮添加数据！"
                         }
                         , done: function (res, curr, count) {
                         }
@@ -163,40 +214,157 @@
             }
         };
 
+        $(function(){
+            var url=window.location.search;
+            var inspPlId =  $.getUrlParam("id");
+            console.log(inspPlId);
+            $.ajax({
+                url : "/inspection/inspPl/selectInspPlanById",
+                type : 'POST',
+                data : {"inspPlId": inspPlId},
+                dataType:'json',
+                success : function(springBootOtl){
+                    var  data = springBootOtl;
+                    console.log(data);
+                    if(data !== null){
+                        $(".inspPlName").val(data.data.inspPlName);
+                        $(".inspPlCreateTime").val(data.data.inspPlCreateTime);
+                        $(".inspPlNote").val(data.data.inspPlNote);
+                        var x , xeq = [],gmq=[],s = "",y= "",x1 , xeq1 = [],gmq1=[],s1 = "",y1= "";
+                        for (x in data.data.inspPlAuditor) {
+                            if (data.data.inspPlAuditor[x] === "+"){
+                                continue;
+                            }
+                            if (data.data.inspPlAuditor[x] <= "9"){
+                                xeq.push(data.data.inspPlAuditor[x]);
+                            }else{
+                                gmq.push(data.data.inspPlAuditor[x]);
+                            }
+                        }
+                        for (var j = 0; j< xeq.length; j ++ ){
+                            s += xeq[j];
+                        }
+                        for (var j = 0; j< gmq.length; j ++ ){
+                            y += gmq[j];
+                        }
 
-        $("#but").off("click").on("click",function(){
-            layer.open({
-                type: 2 //此处以iframe举例
-                ,title: '变更记录'
-                ,area: ['1100px', '400px']
-                ,content:"./index1-datile-change-record.html"
-                ,success : function () {
+                        for (x1 in data.data.inspPlPlanner) {
+                            if (data.data.inspPlPlanner[x1] === "+"){
+                                continue;
+                            }
+                            if (data.data.inspPlPlanner[x1] <= "9"){
+                                xeq1.push(data.data.inspPlPlanner[x1]);
+                            }else{
+                                gmq1.push(data.data.inspPlPlanner[x1]);
+                            }
+                        }
+                        for (var j = 0; j< xeq1.length; j ++ ){
+                            s1 += xeq1[j];
+                        }
+                        for (var j = 0; j< gmq1.length; j ++ ){
+                            y1 += gmq1[j];
+                        }
+
+                        $(".inspPlAuditor").val(y);
+                       /* $("#inspPlAuditor").val(s);*/
+
+
+                        $(".inspPlPlanner").val(y1);
+                        /*$("#inspPlPlanner").val(s1);*/
+                        console.log(y1);
+
+                        $(".inspPlLastTime").val(data.data.inspPlLastTime);
+                        $(".inspPlPeriod").val(data.data.inspPlPeriod);
+
+                        var Unit = "";
+                        if (data.data.inspPlPeriodicUnit === "0" || data.data.inspPlPeriodicUnit === 0){
+                            Unit  = "周";
+                        }else if (data.data.inspPlPeriodicUnit === "1" || data.data.inspPlPeriodicUnit === 1){
+                            Unit  = "月";
+                        }
+
+                        var tyP="", PlT = "";
+                        if (data.data.inspPlExecutorType === "0"){
+                            var tyP = "维修工程师";
+                        }else if (data.data.inspPlExecutorType === "1"){
+                            var tyP = "厂家工程师";
+                        }else if (data.data.inspPlExecutorType === "2"){
+                            var tyP = "维修、厂家工程师";
+                        }
+                        console.log(data.data.inspPlExecutorType);
+                        if (data.data.inspPlType === "0"){
+                            PlT = "其它巡检";
+                        }else if (data.data.inspPlType === "1"){
+                            PlT = "周期巡检";
+                        }
+
+
+                        $(".inspPlExecutorType").val(tyP);
+                        $(".inspPlType").val(PlT);
+                        $(".inspPlPeriodicUnit").val(Unit);
+
+                        var Numb = data.data.inspPlanEquipmentVo1s;
+                        table.reload('table', {
+                            data : Numb
+                        });
+                        console.log(Numb);
+                        layui.form.render();
+                        // 记得重新渲染表单/*form.render();*/
+                        /*   form.render();*/
+                    }else{
+                        alert("查询为空");
+                    }
+                },
+                error:function (data) {
+                    alert("查询失败");
+                    console.log(data);
                 }
             });
-            return false;
-        })
 
+        });
+
+        table.on('tool(table)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'datile'){
+                console.log(data);
+                var n = 0;
+                var biaoZhun = [],zhun = [],nely = [];
+                var numZh = {};
+                console.log(data.inspPlStandards);
+                for (var i = 0; i < data.inspPlStandards.length; i++){
+                    n += 1;
+                    if (n <= 3){
+                        biaoZhun.push(data.inspPlStandards[i]);
+                        if ( n === 3){
+                            console.log(biaoZhun);
+                            zhun.push(biaoZhun);
+                            n = 0;
+                            biaoZhun = [];
+                        }
+                    }
+                }
+                console.log(zhun);
+                for (var j = 0; j < zhun.length; j++){
+                    numZh["inspPlStandardId"] = zhun[j][0];
+                    numZh["inspPlStandardName"] = zhun[j][1];
+                    numZh["inspPlStandardDescription"] = zhun[j][2];
+                    nely.push(numZh);
+                    numZh = {};
+                }
+                /* console.log(nely);*/
+                var danly = JSON.stringify(nely);
+                /* console.log(danly);*/
+                window.localStorage.setItem('zhunMod', danly);
+                layui.layer.open({
+                    title: "巡检标准",
+                    type: 2,
+                    content:" ./index1-datil-biaozhun.html",//弹出层页面
+                    area: ['94%', '95%']
+                });
+            }
+        });
 
     });
 </script>
-<!--<script>
-    /*  查看*/
-    function detailUser(detail) {
-        console.log(detail.speqId);
-        var id= detail.speqId;
-        var bh = detail.speqBh;
-        var html =" ./index1-datil-shebei.html";
-        var url =  html + "?id="+id + "&bh=" + bh;
-        layui.layer.open({
-            title: "设备信息",
-            type: 2,
-            content:url ,//弹出层页面
-            area: ['1100px', '510px']
-        });
-    }
-</script>-->
-
-
-
 </body>
 </html>
