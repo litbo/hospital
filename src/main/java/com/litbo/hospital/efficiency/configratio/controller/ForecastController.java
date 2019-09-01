@@ -23,6 +23,7 @@ public class ForecastController {
     @Autowired
     private ForecastService forecastService;
 
+    private Integer integer;
 
     @RequestMapping(value = "/addForecast",method = RequestMethod.POST)
     public Result addForecast(ForecastBean forecastBean){
@@ -36,8 +37,14 @@ public class ForecastController {
     }
 
     @RequestMapping(value = "/showForecastById",method = RequestMethod.POST)
-    public Result showForecastById(Integer id){
-        return Result.success(forecastService.showForecastById(id));
+    public void showForecastById(Integer id){
+        integer = id;
+
+    }
+
+    @RequestMapping(value = "/returnForecast",method = RequestMethod.POST)
+    public Result returnForecast(){
+        return Result.success(forecastService.showForecastById(integer));
     }
 
     @RequestMapping(value = "/updateForecast",method = RequestMethod.POST)

@@ -22,6 +22,7 @@ public class FunctionIntegrityController {
     @Autowired
     private FunctionIntegrityService integrityService;
 
+    private Integer integer;
 
     @RequestMapping(value = "/addIntegrity",method = RequestMethod.POST)
     public Result addIntegrity(FunctionIntegrityBean integrityBean){
@@ -35,8 +36,13 @@ public class FunctionIntegrityController {
     }
 
     @RequestMapping(value = "/showIntegrityById",method = RequestMethod.POST)
-    public Result showIntegrityById(Integer id){
-        return Result.success(integrityService.showIntegrityById(id));
+    public void showIntegrityById(Integer id){
+        integer = id;
+    }
+
+    @RequestMapping(value = "/returnIntegrity",method = RequestMethod.POST)
+    public Result returnIntegrity(){
+        return Result.success(integrityService.showIntegrityById(integer));
     }
 
     @RequestMapping(value = "/updateIntegrity",method = RequestMethod.POST)
