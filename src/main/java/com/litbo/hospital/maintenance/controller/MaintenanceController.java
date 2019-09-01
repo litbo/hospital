@@ -81,12 +81,12 @@ public class MaintenanceController {
 
 
     /**
-     * 查看所有的实施人类型
+     * 查看所有的项目名称
      * @return
      */
     @RequestMapping("/seeAllType.do")
-    public Result seeAllType(){
-        List types = maintenanceService.seeAllType();
+    public Result seeAllType(String type){
+        List types = maintenanceService.seeAllType(type);
         if(types.isEmpty()){
             return Result.success("未查询到数据");
         }
@@ -145,7 +145,7 @@ public class MaintenanceController {
      * @return
      */
     @RequestMapping("/addMaintenance.do")
-    public Result addMaintenance(Maintenance maintenance,String applicable_eq){
+    public Result addMaintenance(Maintenance maintenance,String applicable_eq,Boolean ifNotRisk){
 
         // 得到此设备的信息
         EqInfo eqInfo = maintenanceService.selectEqById(maintenance.getEqId());
@@ -153,7 +153,7 @@ public class MaintenanceController {
         List <AddEqVo> addErrorList = new ArrayList<>();
 
         switch (applicable_eq){
-            case "1":{  // 同厂家同类型
+            case "1":{  // 同厂家同型号
                 list = maintenanceService.selectEqBy(eqInfo.getSbcsIdScs(),eqInfo.getEqXh(),null,null,null);
             }break;
             case "2":{  // 同类设备
@@ -174,8 +174,15 @@ public class MaintenanceController {
 
         // 添加数据
         for(AddEqVo vo : list){
+            // 查看数据库中是否已经存在他的风险值
+            Maintenance maintenance1 = maintenanceService.selectByEqId(vo.getId());
+            if(maintenance1 == null){
+                if(ifNotRisk == true){
+                    addRiskValue(vo.getId(),maintenanceService.selectByEqId(maintenance.getEqId()).getRiskValue());
+                }
+            }
             maintenance.setEqId(vo.getId());
-            result = maintenanceService.addMaintenance(maintenance,vo.getName());
+            result = maintenanceService.addMaintenance(maintenance,vo.getName(),ifNotRisk);
             if(result == 0){
                 addErrorList.add(vo);
             }
@@ -270,6 +277,21 @@ public class MaintenanceController {
 
 
     /**
+     * 删除维护保养计划
+     * @param planId 计划id
+     * @return
+     */
+    @RequestMapping("/deletePlan.do")
+    public Result deletePlan(int planId){
+        int result = maintenanceService.deletePlan(planId);
+        if(result == 0){
+            return Result.success("任务添加失败");
+        }
+        return Result.success();
+    }
+
+
+    /**
      * 维护保养任务结果录入
      * @param maintenanceId  维护保养计划id
      * @param maintenanceResults 维护结果
@@ -310,14 +332,52 @@ public class MaintenanceController {
 
 
     //                                                   字典管理      begin
-    @RequestMapping("/deleteType.do")
-    public Result deleteType(String name){
-        int result = maintenanceService.deleteType(name);
+    @RequestMapping("/deleteValue.do")
+    public Result deleteValue(String value){
+        int result = maintenanceService.deleteType(value);
         if(result == 0){
             return Result.success("删除失败");
         }
         return Result.success();
 
+    }
+
+
+    /**
+     * 查看所有字典
+     * @param pageIndex  页码
+     * @param pageSize 每页数据量
+     * @param type 项目类型
+     * @param value 项目名称
+     * @return
+     */
+    @RequestMapping("/findAllKey.do")
+    public PageVo findAllKey(@RequestParam(name = "pageIndex" , defaultValue = "1")int pageIndex,
+                             @RequestParam(name = "pageSize" , defaultValue = "15")int pageSize,
+                             @RequestParam(name = "type",defaultValue = "") String type,
+                             @RequestParam(name = "value",defaultValue = "") String value){
+        if(type.equals("")){
+            type = null;
+        }
+
+        if(value.equals("")){
+            value = null;
+        }
+        PageVo vo = new PageVo();
+        PageHelper.startPage(pageIndex,pageSize);
+        List allKey = maintenanceService.findAllKey(type,value);
+
+        PageInfo info = new PageInfo(allKey);
+        if(!allKey.isEmpty()){
+            vo.setCode(0);
+            vo.setMsg("success");
+            vo.setData(vo.new DataEntity((int) info.getTotal(),allKey));
+            return vo;
+        }
+        vo.setMsg("没有查询到信息");
+        vo.setCode(0);
+        vo.setData(vo.new DataEntity((int) info.getTotal(),allKey));
+        return vo;
     }
     //                                                   字典管理      end
 

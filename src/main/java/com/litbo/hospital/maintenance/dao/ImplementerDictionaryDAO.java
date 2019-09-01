@@ -1,6 +1,7 @@
 package com.litbo.hospital.maintenance.dao;
 
 import com.litbo.hospital.maintenance.pojo.ImplementerDictionary;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface ImplementerDictionaryDAO {
 
     int deleteByName(String Name);
 
-    List<String> findAllType();
+    List<String> findAllType(String type);
+
+    List<ImplementerDictionary> selectAll(@Param("type") String type,@Param("value") String value);
 
 }

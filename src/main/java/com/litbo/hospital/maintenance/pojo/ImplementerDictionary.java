@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class ImplementerDictionary implements Serializable {
     private String type;
 
+    private String value;
+
     private static final long serialVersionUID = 1L;
 
     public String getType() {
@@ -17,6 +19,14 @@ public class ImplementerDictionary implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
@@ -31,7 +41,8 @@ public class ImplementerDictionary implements Serializable {
             return false;
         }
         ImplementerDictionary other = (ImplementerDictionary) that;
-        return (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()));
+        return (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getValue() == null ? other.getValue() == null : this.getValue().equals(other.getValue()));
     }
 
     @Override
@@ -39,6 +50,7 @@ public class ImplementerDictionary implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getValue() == null) ? 0 : getValue().hashCode());
         return result;
     }
 

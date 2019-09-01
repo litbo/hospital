@@ -10,4 +10,5 @@ public interface MaintenanceProjectDAO {
     MaintenanceProject selectById(int id);
 
     int getLastId();
+
 }

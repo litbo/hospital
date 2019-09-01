@@ -22,7 +22,7 @@ public interface MaintenanceService {
     List<EqInfoVo> getEQMessage(String riskLevel,String bmName,String eqName);
 
     // 添加规范
-    int addMaintenance(Maintenance maintenance,String eqName);
+    int addMaintenance(Maintenance maintenance,String eqName,Boolean ifNotRisk);
 
     // 添加设备风险值
     int addMaintenance(Maintenance maintenance);
@@ -33,7 +33,11 @@ public interface MaintenanceService {
     //按条件查找设备
     List<AddEqVo> selectEqBy(String factory,String model,String bmName,String similarClass,String pym);
 
-    List<String> seeAllType();
+    List<String> seeAllType(String type);
+
+    List findAllKey(String type,String value);
+
+    Maintenance selectByEqId(String id);
 
     EqInfo selectEqById(String id);
 
@@ -44,6 +48,8 @@ public interface MaintenanceService {
 
     // 将计划变为任务
     int planToTask(int id);
+
+    int deletePlan(int id);
 
     // 添加设备易耗品
     int addConsumables(Consumables consumables);

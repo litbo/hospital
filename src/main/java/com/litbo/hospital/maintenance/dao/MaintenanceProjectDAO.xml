@@ -90,6 +90,7 @@
   </select>
 
   <select id="getLastId" resultType="integer">
-    select max(id) from hospital..maintenance_project;
+    select MAX(id) from hospital..maintenance_project
   </select>
+
 </mapper>

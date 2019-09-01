@@ -3,10 +3,11 @@
 <mapper namespace="com.litbo.hospital.maintenance.dao.ImplementerDictionaryDAO">
   <resultMap id="BaseResultMap" type="com.litbo.hospital.maintenance.pojo.ImplementerDictionary">
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
   </resultMap>
   <insert id="insert" parameterType="com.litbo.hospital.maintenance.pojo.ImplementerDictionary">
-    insert into hospital..implementer_dictionary ("type")
-    values (#{type,jdbcType=VARCHAR})
+    insert into hospital..implementer_dictionary ("type", "value")
+    values (#{type,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.maintenance.pojo.ImplementerDictionary">
     insert into hospital..implementer_dictionary
@@ -14,10 +15,16 @@
       <if test="type != null">
         "type",
       </if>
+      <if test="value != null">
+        "value",
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -27,10 +34,25 @@
   </select>
 
   <delete id="deleteByName" parameterType="string">
-    delete from hospital..implementer_dictionary where "type" = #{name}
+    delete from hospital..implementer_dictionary where "value" = #{name}
   </delete>
 
   <select id="findAllType" resultType="string">
-    select "type" from hospital..implementer_dictionary
+    select "value" from hospital..implementer_dictionary where "type" = #{type}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from hospital..implementer_dictionary
+    <where>
+      <if test="type != null">
+        "type" = #{type} and
+      </if>
+      <if test="value != null">
+        "value" = #{value} and
+      </if>
+      1=1
+    </where>
+  </select>
+
+
 </mapper>
