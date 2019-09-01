@@ -25,8 +25,6 @@ public class FunctionUsingController {
     @Autowired
     private FunctionUsingService usingService;
 
-    private Integer integer;
-
     @RequestMapping(value = "/addUsing",method = RequestMethod.POST)
     public Result addUsing(FunctionUsingBean usingBean){
         return Result.success(usingService.addFunctionUsing(usingBean));
@@ -39,13 +37,9 @@ public class FunctionUsingController {
     }
 
     @RequestMapping(value = "/showUsingById",method = RequestMethod.POST)
-    public void showUsingById(@RequestParam Integer id){
-        integer = id;
-    }
+    public Result showUsingById(@RequestParam Integer id){
+        return Result.success(usingService.showUsingById(id));
 
-    @RequestMapping(value = "/returnUsing",method = RequestMethod.POST)
-    public Result returnUsing(){
-        return Result.success(usingService.showUsingById(integer));
     }
 
     @RequestMapping(value = "/updateUsing",method = RequestMethod.POST)

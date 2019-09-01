@@ -66,34 +66,66 @@
                             area: ['75%', '60%'],
                             event: "add",
                             content: "./child/q3add.html"
-                        },{
-                                type: 2,
-                                tool: "toolbar",
-                                event: "edit",
-                                content: "./child/q3edit.html",
-                                // dataUrl:["pjzdId"]
+                        },  {
+                            tool: "toolbar",
+                            event: "del",
+                            send:{
+                                url:"/config/ratio/deleteUsing",
+                                name:"ids   ",
+                                par:"id",
+                                type:"DELETE",
+                                reload:true
                             }
-                            ,{
-                                send:{
-                                    id:"table",
-                                    filter:"table1",
-                                    name:"ids",
-                                    event:"del",
-                                    url:"/security/pjzd/deleteFwPjzdByIds",
-                                    type:"POST",
-                                    contentType:"application/json",
-                                    par:"pjzdId",
-                                    reload:true
+                        },
+                            {
+                                before:function(obj,cs){
+                                    if(cs.data.length !== 1){
+                                        putMsg({
+                                            alert:"请选中一条数据！！"
+                                        });
+                                        return false;
+                                    }else {
+
+
+                                    }
                                 },
+                                event:"edit",
                                 tool:"toolbar",
-                                event:"del"
-                            }
+                                type: 2,
+                                title: "修改",
+                                area:['75%','60%'],
+                                content: "./child/q1edit.html",
+                                func:function(obj,data){
+                                    console.log(data.data[0].id);
+                                    subUp({
+                                        url: "/config/ratio/showUsingById",
+                                        type: "POST",
+
+                                        data: {"id": data.data[0].id},
+                                        success:function(res){
+                                            if(res.code === 0){
+                                                /* putMsg({
+                                                     msg:"您已成功删除一条数据！"
+                                                 });*/
+                                            }else{
+                                                /* putMsg({
+                                                     msg:"删除失败，请重试！"
+                                                 });*/
+                                            }
+                                            /* layer.close(index);*/
+                                        },
+                                        error:function () {
+                                            /* alert(1);*/
+                                        }
+                                    });
+                                }
+                            },
                         ]
                     })
-                }
+                },
             }
         }
-    }
+    };
 </script>
 </body>
 </html>

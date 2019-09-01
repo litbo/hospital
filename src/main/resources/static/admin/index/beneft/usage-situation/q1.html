@@ -38,7 +38,6 @@
             table: {
                 cols: [[
                     {type: "checkbox"}
-                    ,{field: 'id', title: '设备编号', width: "15%", minWidth: 200}
                     , {field: 'eqSbbh', title: '设备编号', width: "15%", minWidth: 200}
                     , {field: 'eqName', title: '设备名称', minWidth: 150, sort: true}
                     , {field: 'exitNum', title: '既有功能数', minWidth: 150, sort: true}
@@ -84,7 +83,7 @@
                             before:function(obj,cs){
                                 if(cs.data.length !== 1){
                                     putMsg({
-                                        alert:"一次只能选中一个设备！！"
+                                        alert:"请选中一条数据！！"
                                     });
                                     return false;
                                 }else {
@@ -122,7 +121,6 @@
                                         }
                                     });
                                 }
-                            // dataUrl:["id"]
                         },
                         ]
                     })
