@@ -51,6 +51,7 @@ public class ForecastController {
 
     @RequestMapping(value = "/updateForecast",method = RequestMethod.POST)
     public Result updateForecast(ForecastRatioVO forecastRatioVO){
+        forecastRatioVO.setId(integer);
         if (forecastService.updateForecast(forecastRatioVO)>0){
             return Result.success("已更改成功");
         }else {

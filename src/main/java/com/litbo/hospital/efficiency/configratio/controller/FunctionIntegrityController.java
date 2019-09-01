@@ -44,11 +44,13 @@ public class FunctionIntegrityController {
 
     @RequestMapping(value = "/returnIntegrity",method = RequestMethod.POST)
     public Result returnIntegrity(){
+        System.out.println(integrityService.showIntegrityById(integer));
         return Result.success(integrityService.showIntegrityById(integer));
     }
 
     @RequestMapping(value = "/updateIntegrity",method = RequestMethod.POST)
     public Result updateIntegrity(FunctionIntegrityRatioVO integrityRatioVO){
+        integrityRatioVO.setId(integer);
         if (integrityService.updateIntegrity(integrityRatioVO)>0){
             return Result.success("已更改成功");
         }else {
