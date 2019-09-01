@@ -81,14 +81,14 @@
                 get:{
                     url:"/config/ratio/returnForecast",
                     type:"POST",
-                    data: ["eqSbbh", "eqName","exitNum","usingNum"],
+                    data: ["eqSbbh", "eqName","actualNum","forecastNum"],
                 },
             },
             submit: {
                 form:{
                     url:"/config/ratio/updateForecast",
                     type:"POST",
-                    data: ["eqSbbh", "eqName","exitNum","usingNum"],
+                    data: ["eqSbbh", "eqName","actualNum","forecastNum"],
                     done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {
