@@ -12,13 +12,13 @@
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="/static/admin/js/basic.js"></script>
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
 </head>
 
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table" lay-filter="table1"></table>
+        <table id="table" class="layui-hide" lay-filter="table1"></table>
     </div>
 </div>
 
@@ -26,17 +26,19 @@
     <div class="addBtn">
         <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+        <button class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
 
-        <button class="layui-btn layui-btn-sm" lay-event="del" data-type="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
 </script>
 <script>
+    var dd = 0;
     renderMod = {
         addTable: {
             table: {
                 cols: [[
                     {type: "checkbox"}
+                    ,{field: 'id', title: '设备编号', width: "15%", minWidth: 200}
                     , {field: 'eqSbbh', title: '设备编号', width: "15%", minWidth: 200}
                     , {field: 'eqName', title: '设备名称', minWidth: 150, sort: true}
                     , {field: 'exitNum', title: '既有功能数', minWidth: 150, sort: true}
@@ -58,7 +60,8 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        toolFunc:[{
+                        toolFunc:[
+                            {
                             tool: "toolbar",
                             type: 2,
                             event: "add",
@@ -66,62 +69,56 @@
                             area: ['75%', '60%'],
                             content: "./child/q1add.html"
                         },
-                            // {
-                            //     tool: "toolbar",
-                            //     event: "edit",
-                            //     send:{
-                            //         url:"/config/ratio/ showUsingById",
-                            //         name:"gwIds",
-                            //         par:"id",
-                            //         type:"POST",
-                            //         confirm:false,
-                            //         dataUrl:["id"],
-                            //         success:{
-                            //             tool:"toolbar",
-                            //             type:2,
-                            //             event:"edit",
-                            //             title:"修改",
-                            //             area:['75%','60%'],
-                            //             content:"./child/q1edit.html"
-                            //         }
-                            //     }
-                            //  },
                             {
                                 tool: "toolbar",
                                 event: "del",
                                 send:{
                                     url:"/config/ratio/deleteUsing",
-                                    name:"ids",
+                                    name:"ids   ",
                                     par:"id",
                                     type:"DELETE",
                                     reload:true
                                 }
                             },
-                            {
-                                before:function(obj,cs){
-                                    if(cs.data.length !== 1){
-                                        putMsg({
-                                            alert:"一次只能选中一个设备！！"
-                                        });
-                                        return false;
-                                    }
-                                },
-                                event:"edit",
-                                tool:"toolbar",
-                                type: 2,
-                                title: "排名",
-                                area: ['100%','70%'],
-                                content: "./child/q1edit.html"
 
+                       /* {
+                            before:function(obj,cs){
+                                if(cs.data.length !== 1){
+                                    putMsg({
+                                        alert:"一次只能选中一个设备！！"
+                                    });
+                                    return false;
+                                }else {
+                                    console.log(cs.data[0].id)
+
+                                }
                             },
+                            event:"edit",
+                            tool:"toolbar",
+                            type: 2,
+                            title: "修改",
+                            area:['75%','60%'],
+                            content: "./child/q1edit.html",
+                            dataUrl:["id"]
+                        },*/
+                            {
+                                // before:function(){
+                                //   console.log(ids)
+                                // },
+                                // title: "table",
+                                // event: 'edit',
+                                // tool:"toolbar",
+                                // type: 2,
+                                // content: './child/q1edit.html',
+                                // area: ['100%', '100%'],
+                                // dataUrl: ["ids"]
+                            }
                         ]
                     })
-                }
+                },
             }
         }
-    }
-
+    };
 </script>
 </body>
-</html>
 </html>

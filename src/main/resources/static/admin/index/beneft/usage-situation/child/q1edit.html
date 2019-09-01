@@ -78,36 +78,39 @@
 </form>
 
 <script>
-    renderMod = {
-        formAction:{
-            val:{
-                filter:"forms",
-                get:{
-                    url:"/config/ratio/ updateUsing",
-                    type:"POST",
-                    data:["eqSbbh",'eqName','usingNum','exitNum']
-                }
-            },
-            submit:{
-                form:{
-                    url:"/config/ratio/addUsing",
-                    type:"POST",
-                    data:["eqSbbh","eqName","usingNum","exitNum"],
-                    done:function(res){
-                        if(res.code === 0){
-                            layer.alert("提交成功",function () {
-                                var index = parent.layer.getFrameIndex(window.name);
-                                parent.layer.close(index); //再执行关闭
-                                parent.location.reload();
-                            })
-                        }else {
-                            layer.alert("提交失败")
-                        }
-                    }
-                }
-            }
-        }
-    };
+    // renderMod = {
+    //     formAction:{
+    //         val:{
+    //             before:{
+    //
+    //             },
+    //             filter:"forms",
+    //             get:{
+    //                 type:"POST",
+    //                 data:["eqSbbh",'eqName','exitNum','usingNum']
+    //
+    //             }
+    //         },
+            // submit:{
+            //     form:{
+            //         url:"/config/ratio/addUsing",
+            //         type:"POST",
+            //         data:["eqSbbh","eqName","usingNum","exitNum"],
+            //         done:function(res){
+            //             if(res.code === 0){
+            //                 layer.alert("提交成功",function () {
+            //                     var index = parent.layer.getFrameIndex(window.name);
+            //                     parent.layer.close(index); //再执行关闭
+            //                     parent.location.reload();
+            //                 })
+            //             }else {
+            //                 layer.alert("提交失败")
+            //             }
+            //         }
+            //     }
+            // }
+    //     }
+    // }
 </script>
 
 
