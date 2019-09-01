@@ -76,7 +76,7 @@ public interface FunctionIntegrityDAO {
     @Delete({
             "<script>",
             "DELETE FROM dbo.function_integrity WHERE id in",
-            "<foreach item = 'item' index = 'index' collection = 'list' open = '(' separator = ',' close = ')'>",
+            "<foreach item = 'item' index = 'index' collection = 'array' open = '(' separator = ',' close = ')'>",
             "#{item}",
             "</foreach>",
             "</script>"
