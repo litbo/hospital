@@ -80,8 +80,7 @@
                                     reload:true
                                 }
                             },
-
-                       /* {
+                        {
                             before:function(obj,cs){
                                 if(cs.data.length !== 1){
                                     putMsg({
@@ -89,7 +88,7 @@
                                     });
                                     return false;
                                 }else {
-                                    console.log(cs.data[0].id)
+
 
                                 }
                             },
@@ -99,20 +98,32 @@
                             title: "修改",
                             area:['75%','60%'],
                             content: "./child/q1edit.html",
-                            dataUrl:["id"]
-                        },*/
-                            {
-                                // before:function(){
-                                //   console.log(ids)
-                                // },
-                                // title: "table",
-                                // event: 'edit',
-                                // tool:"toolbar",
-                                // type: 2,
-                                // content: './child/q1edit.html',
-                                // area: ['100%', '100%'],
-                                // dataUrl: ["ids"]
+                            func:function(obj,data){
+                                console.log(data.data[0].id);
+                                subUp({
+                                    url: "/config/ratio/showUsingById",
+                                    type: "POST",
+
+                                    data: {"id": data.data[0].id},
+                                    success:function(res){
+                                        if(res.code === 0){
+                                           /* putMsg({
+                                                msg:"您已成功删除一条数据！"
+                                            });*/
+                                        }else{
+                                           /* putMsg({
+                                                msg:"删除失败，请重试！"
+                                            });*/
+                                        }
+                                       /* layer.close(index);*/
+                                    },
+                                    error:function () {
+                                       /* alert(1);*/
+                                    }
+                                });
                             }
+                            // dataUrl:["id"]
+                        },
                         ]
                     })
                 },
