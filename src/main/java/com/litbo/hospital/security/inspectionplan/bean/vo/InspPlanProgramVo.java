@@ -14,17 +14,6 @@ import java.util.Date;
 @Data
 public class InspPlanProgramVo {
 
-    private String inspPlExecutorType;
-
-    private String inspPlType;
-
-    private String inspPlPeriod;
-
-    private Integer inspPlPeriodicUnit;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date inspPlLastTime;
 
     private ArrayList<InspPlanEquipmentVo> inspPlanEquipmentVos;
 

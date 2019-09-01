@@ -247,17 +247,14 @@
                   dataType:'JSON',
                   contentType:'application/json' ,
                   success: function(res){
-
                         if(res.code == 0 ){
                             /*layer.msg("请求发送成功！",{icon: 6,time:3000});*/
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
                             parent.location.reload();
-
                         }else{
                             alert(res.msg);
                         }
-
                   },
                   error:function (data) {
                     }

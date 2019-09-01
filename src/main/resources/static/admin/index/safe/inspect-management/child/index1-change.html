@@ -24,15 +24,15 @@
             <legend>变更</legend>
         </fieldset>
 
-        <form class="layui-form layui-form-pane" action="" >
+        <form class="layui-form layui-form-pane" >
             <div class="layui-row ">
                 <div class="col-xs-12">
                     <div class="col-xs-6" style="padding: 10px;">
-
+                        <input type="hidden"  autocomplete="off" class="layui-input inspPlId">
                         <div class="layui-form-item" style="margin-bottom:20px ">
                             <label class="layui-form-label">计划名称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="inspPlName" lay-verify="required" autocomplete="off" placeholder="" class="layui-input inspPlName">
+                                <input type="text" autocomplete="off" placeholder="" class="layui-input inspPlName">
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@
                         <div class="layui-form-item" style="margin-bottom:20px ">
                             <label class="layui-form-label" style="height:46px;line-height:30px;">制定人</label>
                             <div class="layui-input-block">
-                                <input type="text" name="inspPlPlanner" placeholder="请选择" lay-verify="required"
+                                <input type="text" name="inspPlPlanner" placeholder="请选择"
                                        autocomplete="off" disabled class="layui-input inspPlPlanner"
                                        style="height:46px;padding-left:60px;" >
                                 <input type="hidden" id="inspPlPlanner">
@@ -72,13 +72,9 @@
                         <div class="layui-form-item" style="margin-bottom:20px ">
                             <label class="layui-form-label">状态</label>
                             <div class="layui-input-block">
-                                <select name="inspPlStatus" id="inspPlStatus">
-                                    <option value="">选择状态</option>
+                                <select name="inspPlStatus" class="inspPlStatus">
+                                    <option value="4">启用</option>
                                     <option value="0">停用</option>
-                                    <option value="1">待审核</option>
-                                    <option value="2">未通过</option>
-                                    <option value="3">已通过</option>
-                                    <option value="4">二次审批</option>
                                 </select>
                             </div>
                         </div>
@@ -88,14 +84,14 @@
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">备注</label>
                             <div class="layui-input-block">
-                                <textarea placeholder="" name="inspPlNote"  style="resize:none"  class="layui-textarea inspPlNote"></textarea>
+                                <textarea placeholder=""  style="resize:none"  class="layui-textarea inspPlNote"></textarea>
                             </div>
                         </div>
 
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">变更说明</label>
                             <div class="layui-input-block">
-                                <textarea placeholder="" name="inspPlChangeReason"  style="resize:none"  class="layui-textarea inspPlChangeReason"></textarea>
+                                <textarea placeholder="" style="resize:none"  class="layui-textarea inspPlChangeReason"></textarea>
                             </div>
                         </div>
 
@@ -117,7 +113,6 @@
                             <button type="button" class="layui-btn layui-btn-danger layui-btn-sm editNew"
                                     data-id="table"   style="background-color: #FFB800">
                                 <i  class="fas fa-pen"></i>    修改
-
                             </button>
 
                             <button type="button" class="layui-btn layui-btn-danger layui-btn-sm delNew"
@@ -133,11 +128,11 @@
 
                 <div class="layui-row" >
                     <div class="col-xs-6">
-                        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="sumBer">提 交</button>
+                        <button  class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="sumBer">提 交</button>
                     </div>
 
                     <div class="col-xs-6">
-                        <a href="javascript:history.go(-1)" class="layui-btn layui-btn-fluid" >退出</a>
+                        <button class="layui-btn layui-btn-fluid" id="tui" >退出</button>
                     </div>
 
 
@@ -182,46 +177,57 @@
             ,laydate = layui.laydate;
         form.render();
         var tessNum =[];
-        var tarNum = [];
+
         var Numb = [];
 
         $(function(){
-            var url=window.location.search;
+            var url = window.location.search;
             var inspPlId =  $.getUrlParam("id");
             console.log(inspPlId);
             $.ajax({
                 url : "/inspection/inspPl/selectInspPlanById",
                 type : 'POST',
-                data : {"inspPlId": inspPlId},
                 dataType:'json',
-                success : function(springBootOtl){
-                    var  data = springBootOtl;
+                data : {"inspPlId": inspPlId},
+                success : function(data){
                     if(data !== null){
+                        var num = 0;
+                        console.log(data);
+                        $(".inspPlId").val(data.data.inspPlanId);
                         $(".inspPlName").val(data.data.inspPlName);
                         $(".inspPlCreateTime").val(data.data.inspPlCreateTime);
                         $(".inspPlNote").val(data.data.inspPlNote);
                         $(".inspPlPlanner").val(data.data.inspPlPlanner);
+                        
+
                         $(".inspPlAuditor").val(data.data.inspPlAuditor);
                         $("#inspPlPlanner").val(data.data.inspPlPlanner);
                         $("#inspPlAuditor").val(data.data.inspPlAuditor);
-                        $("#inspPlStatus option[value='"+ data.data.inspPlStatus +"']").prop("selected","selected");
+                        $(".inspPlChangeReason").val(data.data.inspPlChangeReason);
+                        if (data.data.inspPlStatus !== "0" || data.data.inspPlStatus !== 0 ){
+                            num = 4;
+                        }
+                        $("#inspPlStatus option[value='"+ num +"']").prop("selected","selected");
+                    /*    for ( ) */
+                        
                         Numb = data.data.inspPlanProgramVos;
                         table.reload('table', {
                             data : Numb
                         });
                         layui.form.render();
                         // 记得重新渲染表单/*form.render();*/
-                        /*   form.render();*/
+
                     }else{
                         alert("查询为空");
                     }
+
                 },
                 error:function (data) {
                     alert("查询失败");
                     console.log(data);
                 }
             });
-
+            tessNum = Numb;
         });
 
         renderMod = {
@@ -246,13 +252,9 @@
                             none: "请点击上方添加按钮添加数据！"
                         }
                         , done: function (res, curr, count) {
-                            if (tessNum.length === 0){
-                                tessNum = Numb;
-                            }else{
-                                tessNum =  tessNum;
-                            }
                             $(".delNew").off("click").on("click",function(){
 
+                                console.log(tessNum);
                                 var checkedArr = [];
                                 for (var i = 0; i < table.cache.table.length; i++) {
                                     if (table.cache.table[i].LAY_CHECKED == true){
@@ -264,22 +266,22 @@
                                 }
                                 var eqSbbhs = [];
 
-                                if (checkedArr.length > 1){
-                                    layer.msg("只能单个删除", { icon: 5 });
-                                    return;
-                                } else{
-                                    for (var i = 0; i < checkedArr.length; i++){
-                                        var t = checkedArr[i];
-                                        console.log(t);
-                                        console.log(tessNum);
-                                        console.log(tessNum[t]);
-                                        for (var j = 0; j <tessNum[t].inspPlanEquipmentVos.length; j ++ ){
-                                            eqSbbhs.push(tessNum[t].inspPlanEquipmentVos[j].eqSbbh);
-                                        }
-                                        tessNum.splice(t,1);
-                                        $(".layui-table-view .layui-table tbody tr[data-index=" + checkedArr[i] + "]").remove();
+                                for (var i = 0; i < checkedArr.length; i++){
+                                    var t = checkedArr[i];
+                                    if (t === 0){
+                                        t = checkedArr[i];
+                                    } else{
+                                        t = checkedArr[i] - 1;
                                     }
+                                    for (var j = 0; j <tessNum[t].inspPlanEquipmentVos.length; j ++ ){
+                                        eqSbbhs.push(tessNum[t].inspPlanEquipmentVos[j].eqSbbh);
+                                    }
+                                    console.log(tessNum[t]);
+                                    tessNum.splice(t,1);
+                                    $(".layui-table-view .layui-table tbody tr[data-index=" + checkedArr[i] + "]").remove();
+
                                 }
+
                                 $.ajax({
                                     url:'/inspection/otherfunction/updateEqSbbh1',
                                     type:"POST",
@@ -291,6 +293,9 @@
                                 });
 
                                 console.log(tessNum);
+                                if (tessNum.length === 0) {
+                                    tessNum =  tessNum;
+                                }
                                 if (tessNum !== undefined) {
                                     //向表格中添加数据
                                     table.reload('table', {
@@ -304,17 +309,21 @@
                             });
 
                             $(".dataTable").off("click").on("click",function(){
-                                /* tessNum = Numb;*/
+                                if (tessNum.length === 0){
+                                    tessNum = Numb;
+                                }else{
+                                    tessNum =  tessNum;
+                                }
                                 layer.open({
                                     type: 2
                                     ,title: '添加'
-                                    ,area: ['1200px', '550px']
+                                    ,area: ['95%', '95%']
                                     ,content:"./index1Edit.html"
                                     ,end :function () {
                                         var re = window.localStorage.getItem("TumMod");
                                         var res = JSON.parse(re);
                                         tessNum = tessNum.concat(res);
-
+                                        console.log(tessNum);
                                         window.localStorage.removeItem("TumMod");
                                         if (tessNum !== undefined) {
                                             //向表格中添加数据
@@ -327,8 +336,6 @@
                                                 data : tessNum
                                             });
                                             layui.form.render();
-
-
                                         }
                                     }
                                 });
@@ -337,7 +344,11 @@
                             });
 
                             $(".editNew").off("click").on("click",function(){
-                                /* tessNum = Numb;*/
+                                if (tessNum.length === 0){
+                                    tessNum = Numb;
+                                }else{
+                                    tessNum =  tessNum;
+                                }
                                 console.log(tessNum);
                                 var checkedArr = [];
                                 for (var i = 0; i < table.cache.table.length; i++) {
@@ -365,7 +376,7 @@
                                 layer.open({
                                     type: 2
                                     ,title: '修改'
-                                    ,area: ['1200px', '550px']
+                                    ,area: ['95%', '95%']
                                     ,content:"./index1Edit-edit.html"
                                     ,end :function () {
                                         var gb = window.localStorage.getItem("nugMod");
@@ -373,8 +384,7 @@
                                             return;
                                         }
                                         var sbg = JSON.parse(gb);
-                                        /*    console.log(reg);*/
-                                        console.log(sbg);
+                                        /* console.log(sbg);*/
                                         var cheArr = [];
                                         for (var i = 0; i < table.cache.table.length; i++) {
                                             if (table.cache.table[i].LAY_CHECKED == true){
@@ -389,7 +399,6 @@
                                              }*/
                                         }
                                         console.log(tessNum);
-                                        window.localStorage.removeItem("gumMod");
                                         window.localStorage.removeItem("nugMod");
                                         if (tessNum !== undefined) {
                                             //向表格中添加数据
@@ -406,6 +415,7 @@
                                     }
                                 });
                             });
+
                             console.log(tessNum);
                         }
                     }
@@ -415,7 +425,8 @@
                 date: [
                     {
                         elem: '#date',
-                        value: today0
+                        value: today0,
+                        trigger:"click"
                     }
                 ]
             }
@@ -448,12 +459,26 @@
                 }
             ]
 
-
-
         };
         console.log(tessNum);
+        $("#tui").off("click").on("click",function(){
+            console.log(1);
+            $.ajax({
+                url:'/inspection/otherfunction/updateSelectionToZero',
+                async: false,/*同步传输*/
+                success: function(res){
+                    if(res.code == 0 ){
+                        window.location.href = "javascript:history.go(-1)";
+                        parent.location.reload();
+                    }else{
+                        alert(res.msg);
+                    }
+                },
+                error:function (data) {
+                }
+            }) ;
 
-
+        });
 
         $("#sumBer").off("click").on("click",function(){
             layui.use('layer',function() {
@@ -491,6 +516,7 @@
                     return;
                 }
                 for (var i = 0; i < tessNum.length; i++){
+                    console.log(tessNum[i].inspPlanEquipmentVos);
                     for (var j = 0; j < tessNum[i].inspPlanEquipmentVos.length; j++ ){
                         if(tessNum[i].inspPlanEquipmentVos[j].length == 0){
                             layer.msg("设备信息未添加", {icon: 2});
@@ -500,68 +526,50 @@
                 }
                 var inspPlanVo = {};
                 console.log(tessNum);
-
+                inspPlanVo["inspPlanId"] = $(".inspPlId").val();
                 inspPlanVo["inspPlName"] = $(".inspPlName").val();
                 inspPlanVo["inspPlCreateTime"] = $(".inspPlCreateTime").val();
                 inspPlanVo["inspPlPlanner"] = $("#inspPlPlanner").val();
                 inspPlanVo["inspPlNote"] = $(".inspPlNote").val();
                 inspPlanVo["inspPlAuditor"] = $("#inspPlAuditor").val();
+                inspPlanVo["inspPlChangeReason"] = $(".inspPlChangeReason").val();
+                inspPlanVo["inspPlStatus"] = $(".inspPlStatus").val();
 
                 for (var i = 0; i < tessNum.length; i++){
                     for (var j = 0; j < tessNum[i].inspPlanEquipmentVos.length; j++ ){
-                        console.log(tessNum[i].inspPlanEquipmentVos[j]);
-                        console.log(tessNum[i].inspPlanEquipmentVos[j].bmName);
-                        if (tessNum[i].inspPlanEquipmentVos[j].bmName === null){
-                            continue;
+                        if (tessNum[i].inspPlanEquipmentVos[j].bmName !== undefined){
+                            delete  tessNum[i].inspPlanEquipmentVos[j].bmName;
+                            delete  tessNum[i].inspPlanEquipmentVos[j].eqName;
+                            delete  tessNum[i].inspPlanEquipmentVos[j].eqXh;
+                            delete  tessNum[i].inspPlanEquipmentVos[j].zt;
                         }
-                        delete  tessNum[i].inspPlanEquipmentVos[j].bmName;
-                        delete  tessNum[i].inspPlanEquipmentVos[j].eqName;
-                        delete  tessNum[i].inspPlanEquipmentVos[j].zt;
-
                     }
                 }
                 /* console.log(tarNum);*/
-                for (var i = 0; i < tessNum.length; i++){
-                    console.log(tessNum[i]);
-                    tessNum[i]["inspPlanEquipmentVos"] = tarNum[i];
-                }
                 inspPlanVo["inspPlanProgramVos"] = tessNum;
                 console.log(inspPlanVo);
-
-
-
-                console.log(tessNum);
-                /*   console.log(tarNum);*/
-
-                /*    $.ajax({
-                        url:'',
-                        type:"POST",
-                        async: false,/!*同步传输*!/
-                        data: ,
-                       /!* dataType:'JSON',
-                        contentType:'application/json' ,*!/
-                        success: function(res){
-
-                            if(res.code == 0 ){
-                                /!*layer.msg("请求发送成功！",{icon: 6,time:3000});*!/
-                                var index = parent.layer.getFrameIndex(window.name);
-                                parent.layer.close(index);
-                                parent.location.reload();
-
-                            }else{
-                                alert(res.msg);
-                            }
-
-                        },
-                        error:function (data) {
+                $.ajax({
+                    url: '/inspection/inspPl/updateInspPlan',
+                    type:"POST",
+                    async: false,/*同步传输*/
+                    data:JSON.stringify(inspPlanVo),
+                    dataType:'JSON',
+                    contentType:'application/json' ,
+                    success: function(res){
+                        if(res.code == 0 ){
+                            layer.msg("请求发送成功！",{icon: 6,time:3000});
+                            /*var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);*/
+                            parent.location.reload();
+                        }else{
+                            alert(res.msg);
                         }
-                    }) ;*/
-
-                layer.msg("提交成功", {icon: 1});
-
+                    },
+                    error:function (data) {
+                        alert("错误" + data);
+                    }
+                }) ;
             });
-
-            /*  window.history.back(-1);*/
             return false;
 
         })

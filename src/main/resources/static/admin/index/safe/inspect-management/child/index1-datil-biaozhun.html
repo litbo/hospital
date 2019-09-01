@@ -21,38 +21,26 @@
         <table  id="test" lay-filter="test"></table>
     </div>
 </div>
+
 <script>
     layui.use(['table', 'jquery'], function() {
         var table = layui.table;
         var $ = layui.$;
-        var inspection = '';
-
+        var dem = window.localStorage.getItem("zhunMod");
+        var deom = JSON.parse(dem);
         renderMod = {
             addTable: {
                 table: {
                     elem: '#test'
-                 /*   , url: '/inspection/inspPlStandard/selectAllInspStandard'*/
-                    , toolbar: '#toolBar'
-                    ,defaultToolbar:true
                     , cols: [[
-                       /* {type: 'checkbox'}*/
-                         {field: 'inspPlStandardName', title: '名称', minWidth: 200}
+                        {type:'numbers'}
+                         ,{field: 'inspPlStandardName', title: '名称', minWidth: 200}
                         , {field: 'inspPlStandardDescription', title: '描述', minWidth: 200}
                     ]]
+                    , toolbar: false
                     , page: true
                     , height: 300
-                    , parseData: function (res) { //res 即为原始返回的数据
-                        return {
-                            "code": res.code, //解析接口状态
-                            "msg": res.msg, //解析提示文本
-                            "count": res.data.total,//页面的所有数据数
-                            "data": res.data.list //解析数据列表
-                        }
-                    }
-                    , request: {
-                        pageName: 'pageNum',
-                        limitName: 'pageSize'
-                    }
+                    ,data:  deom
                 }
             }
         };

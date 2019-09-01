@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>新增</title>
+    <title>修改</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -36,12 +36,6 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item"  style="margin-bottom:37px ">
-                            <label class="layui-form-label">上次巡检日期</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="inspPlLastTime"   readonly="readonly"  id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input inspPlLastTime">
-                            </div>
-                        </div>
 
                     </div>
                     <div class="col-xs-6" style="padding: 10px;">
@@ -57,29 +51,13 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item" style="margin-bottom:37px ">
-                            <label class="layui-form-label">巡检周期</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="inspPlPeriod" id="inspPlPeriod" placeholder="只能输入数字" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')">
-                            </div>
-                        </div>
 
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">周期单位</label>
-                            <div class="layui-input-block">
-                                <select name="inspPlPeriodicUnit" id="inspPlPeriodicUnit" >
-                                    <option value="">请选择</option>
-                                    <option value="0">周</option>
-                                    <option value="1">月</option>
-                                </select>
-                            </div>
-                        </div>
 
                     </div>
 
                 </div>
 
-                <div class="col-xs-12" style="margin-bottom: 100px;">
+                <div class="col-xs-12" style="margin-bottom: 50px;">
                     <div class="layui-form-item" pane >
 
                         <div class="layui-input-block  demoTable" style="margin-left: 0">
@@ -131,22 +109,21 @@
         var ret = window.localStorage.getItem("taMod");
         console.log(ret);
         var reg = JSON.parse(ret);
+        for (var i = 0; i < reg.inspPlanEquipmentVos.length; i++){
+            reg.inspPlanEquipmentVos[i]["zt"] = "已设置";
+        }
+        console.log(reg.inspPlanEquipmentVos);
         var teg = reg.inspPlanEquipmentVos;
         $("#inspPlExecutorType").find("option[value= '"+reg.inspPlExecutorType+"']").prop("selected","selected");
         $("#inspPlType").find("option[value='"+ reg.inspPlType +"']").prop("selected", "selected");
-        $("#inspPlPeriodicUnit").find("option[value='"+reg.inspPlPeriodicUnit+"']").prop("selected","selected");
-        $(".inspPlLastTime").val(reg.inspPlLastTime);
-        $("#inspPlPeriod").val(reg.inspPlPeriod);
+       /* $("#inspPlPeriodicUnit").find("option[value='"+reg.inspPlPeriodicUnit+"']").prop("selected","selected");
+       /!* $(".inspPlLastTime").val(reg.inspPlLastTime);
+        $("#inspPlPeriod").val(reg.inspPlPeriod);*!/*/
 
         form.render();
 
         ress = reg;
         console.log(ress);
-        var wer = [];
-        for (var i = 0; i < ress.inspPlanEquipmentVos.length; i++){
-            wer.push(ress.inspPlanEquipmentVos[i].eqSbbh);
-        }
-        console.log(wer);
         renderMod = {
             table: {
                 table: [
@@ -159,31 +136,16 @@
                             , {field: 'bmName', title: '使用部门', minWidth: 150}
                             , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
                             , {field: 'eqName', title: '设备名称', minWidth: 150}
-                            , {field: 'eqName', title: '设备型号', minWidth: 150}
+                            , {field: 'eqXh', title: '设备型号', minWidth: 150}
                             , {field: 'zt', title: '状态', Width: 80 }
                         ]]
                         , toolbar: false
                         , height: "200"
                         ,data: teg
-                       /* ,where:{
-                            eqSbbh : wer
-                        }*/
                         , text: {
                             none: "请点击上方添加按钮添加数据！"
                         }
                         , page: true//开启分页
-                       /* , request: {
-                            pageName: 'pageNum',
-                            limitName: 'pageSize'
-                        }
-                        , parseData: function (res) { //res 即为原始返回的数据
-                            return {
-                                "code": res.code, //解析接口状态
-                                "msg": res.msg, //解析提示文本
-                                "data": res.data.list, //解析数据列表
-                                "count": res.data.total
-                            }
-                        }*/
                         , done: function (res, curr, count) {
                             /*   删除*/
                             $(".delNew").off("click").on("click",function(){
@@ -200,13 +162,13 @@
                                 for (var i = 0; i < checkedArr.length; i++){
                                     var t = checkedArr[i];
                                     eqSbbhs.push(table.cache.table[t].eqSbbh);
-                                    ress.splice(t,1);
+                                    ress.inspPlanEquipmentVos.splice(t,1);
                                     $(".layui-table-view .layui-table tbody tr[data-index=" + checkedArr[i] + "]").remove();
                                 }
-                                if (ress !== undefined) {
+                                if (ress.inspPlanEquipmentVos !== undefined) {
                                     //向表格中添加数据
                                     table.reload('table', {
-                                        data : ress
+                                        data : ress.inspPlanEquipmentVos
                                     });
                                     layui.form.render();
                                 }
@@ -228,7 +190,7 @@
                                 layer.open({
                                     type: 2
                                     ,title: '添加设备'
-                                    ,area: ['1100px', '500px']
+                                    ,area: ['93%', '93%']
                                     ,content:"./index1New-new.html"
                                     ,end :function () {
 
@@ -238,13 +200,15 @@
                                         }
                                         var res = JSON.parse(re);
                                         console.log(res);
-                                        var arrRes = res.concat(teg);
-                                        console.log(arrRes);
-                                        if (arrRes === null) {
+                                      /*  var arrRes = res.concat(teg);*/
+                                      /*  console.log(arrRes);*/
+                                        if (res === null) {
                                             return;
                                         }else{
-                                            for(var i = 0; i < arrRes.length; i++){
-                                                ress.push(arrRes[i]);
+                                            for(var i = 0; i < res.length; i++){
+                                                console.log(res[i]);
+                                                console.log(ress.inspPlanEquipmentVos);
+                                                ress.inspPlanEquipmentVos.push(res[i]);
                                             }
                                             console.log(ress);
                                             window.localStorage.removeItem("forMod");
@@ -252,7 +216,7 @@
                                             if (ress !== undefined) {
                                                 //向表格中添加数据
                                                 table.reload('table', {
-                                                    data: ress
+                                                    data: ress.inspPlanEquipmentVos
                                                 });
                                                 layui.form.render();
                                             }
@@ -277,9 +241,10 @@
                                     layer.open({
                                         type: 2 //此处以iframe举例
                                         ,title: '巡检标准'
-                                        ,area: ['800px', '400px']
+                                        ,area: ['93%', '93%']
                                         ,content:"./index1-new-inspection.html"
                                         ,success : function () {
+
                                         }
                                         ,end :function () {
                                             var Tar = [];
@@ -292,20 +257,22 @@
                                                 var t =  Tar[i];
                                                 var aLla = sessionStorage.getItem("al");
                                                 console.log(aLla);
-                                                ress[t]['inspPlStandardId'] = JSON.parse(aLla);
+                                                ress.inspPlanEquipmentVos[t]['inspPlStandardId'] = JSON.parse(aLla);
                                                 if (aLla !== null){
-                                                    ress[t]['zt'] = "已设置";
+                                                    ress.inspPlanEquipmentVos[t]['zt'] = "已设置";
                                                 }
-                                                if (ress !== undefined) {
+                                                if (ress.inspPlanEquipmentVos !== undefined) {
                                                     //向表格中添加数据
-                                                    if(ress[0] === null){
+                                                    if(ress.inspPlanEquipmentVos[0] === null){
                                                         return;
                                                     }else {
                                                         table.reload('table', {
-                                                            data: ress
+                                                            data: ress.inspPlanEquipmentVos
                                                         });
 
                                                         layui.form.render();
+                                                        console.log(ress);
+                                                        console.log(ress.inspPlanEquipmentVos);
                                                     }
                                                 }
                                             }
@@ -319,14 +286,15 @@
                     }
                 ]
             }
-            , form: {
+           /* , form: {
                 date: [
                     {
                         elem: '#date',
-                        value: today0
+                        value: today0,
+                        trigger:"click"
                     }
                 ]
-            }
+            }*/
         };
 
         $("#sumBer").off("click").on("click",function(){
@@ -337,22 +305,22 @@
                     layer.msg("执行人类别尚未填写", {icon: 2});
                     return ;
                 }
-                if ($(".inspPlLastTime").val() == "") {
+               /* if ($(".inspPlLastTime").val() == "") {
                     layer.msg("指定时间未填写", {icon: 2});
                     return;
-                }
+                }*/
                 if ($("#inspPlType").val()  == "") {
                     layer.msg("巡检类型未填写", {icon: 2});
                     return;
                 }
-                if ($("#inspPlPeriod").val() == "") {
+                /*if ($("#inspPlPeriod").val() == "") {
                     layer.msg("巡检周期未填写", {icon: 2});
                     return;
                 }
                 if ($("#inspPlPeriodicUnit").val()  == "") {
                     layer.msg("周期单位未填写", {icon: 2});
                     return;
-                }
+                }*/
                  if(ress.length === 0){
                      layer.msg("巡检设备未选择", {icon: 2});
                      return;
@@ -367,10 +335,10 @@
 
                 ress.inspPlExecutorType = $("#inspPlExecutorType").val();
                 ress.inspPlExecutorType = $("#inspPlExecutorType").val();
-                ress.inspPlLastTime = $(".inspPlLastTime").val();
+               /* ress.inspPlLastTime = $(".inspPlLastTime").val();*/
                 ress.inspPlType = $("#inspPlType").val();
-                ress.inspPlPeriod = $("#inspPlPeriod").val();
-                ress.inspPlPeriodicUnit = $("#inspPlPeriodicUnit").val();
+               /* ress.inspPlPeriod = $("#inspPlPeriod").val();
+                ress.inspPlPeriodicUnit = $("#inspPlPeriodicUnit").val();*/
 
                /* var treData = JSON.stringify(Tre);*/
                 var resData = JSON.stringify(ress);

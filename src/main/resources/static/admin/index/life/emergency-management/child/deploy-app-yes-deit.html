@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>查看单个调剂请求</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="layui-row">
+    <!--<fieldset class="layui-elem-field layui-field-title">
+        <legend>设备购置合同</legend>
+    </fieldset>-->
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+
+        <!--        布局1-->
+        <div class="col-xs-6">
+            <!--            调出科室-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">调出科室</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" class="layui-input" disabled>
+                </div>
+            </div>
+            <!--            联系人-->
+            <div class="layui-form-item ">
+                <label class="layui-form-label">联系人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <!--        布局2-->
+        <div class="col-xs-6">
+            <!--            调入科室-->
+            <div class="layui-form-item ">
+                <label class="layui-form-label">调入科室</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <!--            总数量-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">总数量</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="col-xs-12">
+        <table id="table" class="layui-hide" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script>
+    renderMod = {
+        table: {
+            table: [
+                {
+                    // id: "table",
+                    cols: [[ //表头
+                        // {type: "checkbox"}
+                         {field: '', title: '设备编码'}
+                        , {field: '', title: '装备名称'}
+                        , {field: '', title: '规格/型号'}
+                    ]]
+                    , url: "/lifeManage/sgWaitSwYsList"
+                    // , data: ['htid']
+                    // ,where:{ htid: "5" }
+                    , method: "POST"
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "data": res.data.list, //解析数据列表
+                            "count": res.data.total
+                        }
+                    }
+                    , done: function (obj) {
+                        console.log("123");
+                        tableFunc({
+                            toolFunc: [
+                                {
+                                    title: "table",
+                                    event: 'YS',
+                                    type: 2,
+                                    content: './child/deploy-app-edit3.html',
+                                    area: ['100%', '100%'],
+                                    dataUrl: ["htId"]
+                                }]
+                        })
+                    }
+                }
+
+            ]
+
+        },
+        form: {
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/lifeManage/selectLpjHtByPrimary",
+                    type: "POST",
+                    data: {id: $.getUrlParam("id")},
+                    parse: ["listLpj"],
+                    tableId: ["table"]
+                },
+                func: function () {
+                    //执行判断函数
+                    // pd();
+                }
+            }
+        }
+    }
+
+</script>
+</body>
+
+</html>

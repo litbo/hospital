@@ -24,62 +24,22 @@
                 <div class="col-xs-12">
                     <div class="col-xs-6" style="padding: 10px;">
 
-                        <div class="layui-form-item" style="margin-bottom:37px ">
-                            <label class="layui-form-label">执行人类别</label>
-                            <div class="layui-input-block">
-                                <select name="inspPlExecutorType" id="inspPlExecutorType">
-                                    <option value="">请选择</option>
-                                    <option value="0">维修工程师</option>
-                                    <option value="1">厂家工程师</option>
-                                    <option value="2">维修、厂家工程师</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="layui-form-item"  style="margin-bottom:37px ">
-                            <label class="layui-form-label">上次巡检日期</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="inspPlLastTime"   readonly="readonly"  id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input inspPlLastTime">
-                            </div>
-                        </div>
+
+
 
                     </div>
                     <div class="col-xs-6" style="padding: 10px;">
 
-                        <div class="layui-form-item" style="margin-bottom:37px ">
-                            <label class="layui-form-label">巡检类型</label>
-                            <div class="layui-input-block">
-                                <select name="inspPlType" id="inspPlType" >
-                                    <option value="">请选择</option>
-                                    <option value="0">其它巡检</option>
-                                    <option value="1">周期巡检</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="layui-form-item" style="margin-bottom:37px ">
-                            <label class="layui-form-label">巡检周期</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="inspPlPeriod" id="inspPlPeriod" placeholder="只能输入数字" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')">
-                                </div>
-                        </div>
 
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">周期单位</label>
-                            <div class="layui-input-block">
-                                <select name="inspPlPeriodicUnit" id="inspPlPeriodicUnit" >
-                                    <option value="">请选择</option>
-                                    <option value="0">周</option>
-                                    <option value="1">月</option>
-                                </select>
-                            </div>
-                        </div>
+
 
                     </div>
 
                 </div>
 
-                <div class="col-xs-12" style="margin-bottom: 100px;">
+                <div class="col-xs-12" style="margin-bottom: 50px;">
                     <div class="layui-form-item" pane >
 
                         <div class="layui-input-block  demoTable" style="margin-left: 0">
@@ -88,10 +48,6 @@
                                 <i class="fas fa-plus"></i>&nbsp;添加
                             </button>
 
-                            <button type="button" class="layui-btn layui-btn-danger layui-btn-sm setNew"
-                                    data-type="setNew" id="setTable" style="background-color: #CC0033">
-                                        设置巡检标准
-                            </button>
 
                             <button type="button" class="layui-btn layui-btn-danger layui-btn-sm delNew"
                                     data-type="delNew"   style="background-color: #CC0033">
@@ -129,196 +85,12 @@
         var ress =[];
 
 
-        renderMod = {
-            table: {
-                table: [
-                    {
-                        elem: "#table",
-                        id: "table",
-                        cols: [[ //表头
-                            {type: "checkbox"}
-                            , {field: 'bmName', title: '使用部门', minWidth: 150}
-                            , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
-                            , {field: 'eqName', title: '设备名称', minWidth: 150}
-                            , {field: 'eqName', title: '设备型号', minWidth: 150}
-                            , {field: 'zt', title: '状态', Width: 80 }
-                        ]]
-                        , toolbar: false
-                        , page: true//开启分页
-                        , height: "200"
-                        ,data:[]
-                        , text: {
-                            none: "请点击上方添加按钮添加数据！"
-                        }
-                        , done: function (res, curr, count) {
-                         /*   删除*/
-                            $(".delNew").off("click").on("click",function(){
-                                var checkedArr = [];
-                                for (var i = 0; i < table.cache.table.length; i++) {
-                                    if (table.cache.table[i].LAY_CHECKED == true){
-                                        checkedArr.push(i);
-                                    }
-                                }
-                                if (checkedArr.length == 0){
-                                    layer.msg("尚未选择", { icon: 5 });
-                                }
-                                var eqSbbhs =[];
-                                for (var i = 0; i < checkedArr.length; i++){
-                                    var t = checkedArr[i];
-                                    eqSbbhs.push(table.cache.table[t].eqSbbh);
-                                    ress.splice(t,1);
-                                    $(".layui-table-view .layui-table tbody tr[data-index=" + checkedArr[i] + "]").remove();
-                                }
-                                if (ress !== undefined) {
-                                    //向表格中添加数据
-                                    table.reload('table', {
-                                        data : ress
-                                    });
-                                    layui.form.render();
-                                }
-                                checkedArr.length = 0;//清除数组
-                                layer.msg('删除成功');
-                                table.reload();
-                                $.ajax({
-                                    url:'/inspection/otherfunction/updateEqSbbh1',
-                                    type:"POST",
-                                    async: false,/*同步传输*/
-                                    data:JSON.stringify(eqSbbhs),
-                                    dataType:'JSON',
-                                    contentType:'application/json'
 
-                                })
-                            });
-                          /*  增加*/
-                            $(".addNew").off("click").on("click",function(){
-
-                                layer.open({
-                                    type: 2
-                                    ,title: '添加设备'
-                                    ,area: ['1100px', '500px']
-                                    ,content:"./index1New-new.html"
-                                    ,end :function () {
-                                        var re = window.localStorage.getItem("forMod");
-                                        var res = JSON.parse(re);
-                                      if (res === null) {
-                                          return;
-                                      }else{
-                                          for(var i = 0; i < res.length; i++){
-                                              ress.push(res[i]);
-                                          }
-                                          window.localStorage.removeItem("forMod");
-
-                                          if (ress !== undefined) {
-                                              //向表格中添加数据
-                                              table.reload('table', {
-                                                  data: ress
-                                              });
-                                              layui.form.render();
-                                          }
-                                      }
-                                    }
-                                });
-                            });
-                          /*  设置*/
-                            $(".setNew").off("click").on("click",function(){
-
-                                var Ty = [];
-                                for (var i = 0; i < table.cache.table.length; i++) {
-                                    if (table.cache.table[i].LAY_CHECKED == true){
-                                        Ty.push(i);
-                                    }
-                                }
-                                var Len = Ty.length;
-                                if (Len === 0){
-                                    layer.msg("尚未选择", { icon: 5 });
-                                    return;
-                                }else{
-                                    layer.open({
-                                        type: 2 //此处以iframe举例
-                                        ,title: '巡检标准'
-                                        ,area: ['800px', '400px']
-                                        ,content:"./index1-new-inspection.html"
-                                        ,success : function () {
-                                        }
-                                        ,end :function () {
-                                            var Tar = [];
-                                            for (var i = 0; i < table.cache.table.length; i++) {
-                                                if (table.cache.table[i].LAY_CHECKED == true){
-                                                    Tar.push(i);
-                                                }
-                                            }
-                                              for (var i = 0; i < Tar.length; i++){
-                                                  var t =  Tar[i];
-                                                  var aLla = window.sessionStorage.getItem("al");
-                                                  if (aLla === null){
-                                                      return;
-                                                  } else{
-                                                      ress[t]['inspPlStandards'] = JSON.parse(aLla);
-                                                   /*   console.log(aLla);*/
-                                                      window.localStorage.removeItem("al");
-                                                      if (aLla !== null ){
-                                                          ress[t]['zt'] = "已设置";
-                                                      }
-                                                      if (ress !== undefined) {
-                                                          //向表格中添加数据
-                                                          /* console.log(ress[0]);*/
-                                                          if(ress[0] === null){
-                                                              return;
-                                                          }else {
-                                                              table.reload('table', {
-                                                                  data: ress
-                                                              });
-
-                                                              layui.form.render();
-                                                          }
-                                                      }
-                                                  }
-
-                                            }
-                                        }
-                                    });
-                                }
-                                Ty.length = 0;//清除数组
-                                table.reload("table");
-                            });
-                        }
-                    }
-                ]
-            }
-            , form: {
-                date: [
-                    {
-                        elem: '#date',
-                        value: today0
-                    }
-                ]
-            }
-     };
 
         $("#sumBer").off("click").on("click",function(){
             layui.use('layer',function() {
                 var layer = layui.layer;
-                if ($("#inspPlExecutorType").val() == "") {
 
-                    layer.msg("执行人类别尚未填写", {icon: 2});
-                    return ;
-                }
-                if ($(".inspPlLastTime").val() == "") {
-                    layer.msg("指定时间未填写", {icon: 2});
-                    return;
-                }
-                if ($("#inspPlType").val()  == "") {
-                    layer.msg("巡检类型未填写", {icon: 2});
-                    return;
-                }
-                if ($("#inspPlPeriod").val() == "") {
-                    layer.msg("巡检周期未填写", {icon: 2});
-                    return;
-                }
-                if ($("#inspPlPeriodicUnit").val()  == "") {
-                    layer.msg("周期单位未填写", {icon: 2});
-                    return;
-                }
                 if(ress.length === 0){
                     layer.msg("巡检设备未选择", {icon: 2});
                     return;
@@ -333,11 +105,11 @@
                 var Tre = {};
 
                Tre["inspPlExecutorType"] = $("#inspPlExecutorType").val();
-               Tre["inspPlExecutorType"] = $("#inspPlExecutorType").val();
-               Tre["inspPlLastTime"] = $(".inspPlLastTime").val();
-               Tre["inspPlType"] = $("#inspPlType").val();
-               Tre["inspPlPeriod"] = $("#inspPlPeriod").val();
-               Tre["inspPlPeriodicUnit"] = $("#inspPlPeriodicUnit").val();
+            /*   Tre["inspPlExecutorType"] = $("#inspPlExecutorType").val();*/
+              /* Tre["inspPlLastTime"] = $(".inspPlLastTime").val();*/
+
+              /* Tre["inspPlPeriod"] = $("#inspPlPeriod").val();
+               Tre["inspPlPeriodicUnit"] = $("#inspPlPeriodicUnit").val();*/
 
                 var treData = JSON.stringify(Tre);
                 var resData = JSON.stringify(ress);

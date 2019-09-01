@@ -21,7 +21,7 @@
         .layui-table-tool .layui-table-tool-self{
             position: absolute;
             height:30px;
-            top: 110px;
+            top: 150px;
             right: 10px;
             width: 120px;
             height: 30px;
@@ -48,23 +48,24 @@
 
 <!--头部工具-->
 <script type="text/html" id="toolBar">
-    <div style="height: 120px;">
-        <div class="content layui-collapse " style="height: 80px;border:none;margin-top:10px;margin-bottom: 10px;">
+    <div style="height: 160px;">
+        <div class="content layui-collapse " style="height: 120px;border:none;margin-top:10px;margin-bottom: 10px;">
             <form class="layui-form demoTable" action=""  style="border:none;">
 
 
                 <div class="layui-form-item ">
+
                     <div class="layui-inline" style="margin-top: 10px">
-                        <label class="layui-form-label">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+                        <label class="layui-form-label">计划名称</label>
                         <div class="layui-input-inline">
                             <input type="text" name="inspPlName"   autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
                     <div class="layui-inline">
-                        <label class="layui-form-label">设备编号</label>
+                        <label class="layui-form-label">设备名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="inspPlPlanner"  autocomplete="off" class="layui-input">
+                            <input type="text" name="eqName"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
@@ -78,14 +79,31 @@
                                 </label>
                             </div>
                         </div>
-
                 </div>
-                <div class="layui-form-item" style="float:right;margin-right: 70px;margin-top: -67px">
-                    <div class="layui-input-block"  >
-                        <button type="button" class="layui-btn"   data-type="search" >查找</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+
+                <div class="layui-form-item ">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">起始日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="beginTime" id="tedat" lay-verify="date" placeholder="yyyy-MM-dd" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">结束日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="endTime"  id="tedat1" lay-verify="date" placeholder="yyyy-MM-dd" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <div class="layui-input-block"  >
+                            <button type="button" class="layui-btn"   data-type="search" >查找</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
                     </div>
                 </div>
+
 
             </form>
         </div>
@@ -140,12 +158,27 @@
                             url: "/supervise/bmgl/listBm"
                         }
                     ]
-                }
+                },
+                  date: [
+                        {
+                            elem: '#tedat',
+                            trigger:"click",
+                            value: today0,
+                            format: 'yyyy-MM-dd'
+                        }
+                        , {
+                            elem: '#tedat1',
+                            trigger:"click",
+                            value: today0,
+                            format: 'yyyy-MM-dd'
+                        }
+                    ]
+
             },
             addTable: {
                 table: {
                     elem: '#table'
-                    , url: '/inspection/inspPl/selectAllInspPlanVo'//接口
+                    , url: '/inspection/inspPlRecord/selectRecordVo'//接口
                     , method: "GET"
                     , toolbar: '#toolBar'
                     , height: '800'
@@ -155,10 +188,11 @@
                     , cols: [[
                         {type: 'checkbox'}
                         , {type:'numbers'}
-                        , {field: 'inspPlEqName', title: '设备名称', minWidth:150}
-                        , {field: 'inspReId', title: '设备编号',minWidth:150}
-                        , {field: 'inspPlCreateTime', title: '型号',minWidth:150}
-                        , {field: 'inspPlEqApartment', title: '科室', minWidth:150}
+                        , {field: 'inspPlName', title: '计划名称',minWidth:150}
+                        , {field: 'eqName', title: '设备名称', minWidth:150}
+                        , {field: 'eqSbbh', title: '设备编号',minWidth:150}
+                        , {field: 'bmName', title: '科室', minWidth:150}
+                        , {field: 'inspPlExecutorTime', title: '巡检日期', minWidth:150 ,sort: true}
                     ]]
                     , page: true//开启分页
                     , request: {
@@ -175,14 +209,14 @@
                         };
                     }
                     , done: function (res, curr, count) {
-
+                        console.log(res);
                     }
                 }
                 , reSet:{
-                    url:"/inspection/inspPl/selectInspPlanVo",
+                    url:"/inspection/inspPlRecord/selectRecordVoByCondition",
                     type:"search",
                     method: "post",
-                    data:[ "inspPlName", "inspPlStatus", "inspPlPlanner", "inspPlAuditor"],  //搜索框的name
+                    data:[ "inspPlName", "eqName", "bmName","beginTime","endTime"],  //搜索框的name
                 }
             }
         };
@@ -192,7 +226,6 @@
         table.on('toolbar(table1)', function(obj){
             var $ = layui.$;
             switch(obj.event){
-
                 case 'record':
                     var checkStatus = table.checkStatus('table');
                     var data = checkStatus.data;
@@ -204,46 +237,24 @@
                         layer.msg("只能选择一个");
                         return;
                     }
-                    recordUser(data[0]);
+                    console.log(data);
+                    var id= data[0].inspReId;
+                    console.log(id);
+                    var html =" ./child/index4-chakanbiaozhun.html";
+                    var url =  html + "?id="+id;
+                    layui.layer.open({
+                        title: "查看巡检记录",
+                        type: 2,
+                        content:url ,//弹出层页面
+                        area: ['95%', '95%']
+                    });
 
                     break;
             }
         });
-        //双击出详情
-        /* table.on('rowDouble(table1)', function(obj){
-             var data = obj.data;
-             console.log(data);
-             detailUser(data);
-             /!*  obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');*!/
-         });*/
     })
 
 
 </script>
-<!--提示双击可查看-->
-<!--
-<script type="text/html" id="Tpl">
-    <a  class="layui-table-link" target="_blank" title="双击可查看详细信息" style="cursor: pointer">{{ d.bmId }}</a>
-</script>
-
-<script>
-    /*  查看*/
-    function recordUser(detail) {
-        console.log(detail.speqId);
-        var id= detail.speqId;
-        var bh = detail.speqBh;
-        var html =" ./child/index1-detail.html";
-        var url =  html + "?id="+id + "&bh=" + bh;
-        layui.layer.open({
-            title: "巡检记录",
-            type: 2,
-            content:url ,//弹出层页面
-            area: ['1200px', '510px']
-        });
-    }
-</script>
-
--->
-
 </body>
 </html>
