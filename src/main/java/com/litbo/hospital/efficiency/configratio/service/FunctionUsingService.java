@@ -44,9 +44,9 @@ public interface FunctionUsingService {
 
     /**
      * 批量删除功能完好率
-     * @param list id
+     * @param ids id
      * @return 共删除几条
      */
-    Integer deleteUsing(List<Integer> list);
+    Integer deleteUsing(Integer[] ids);
 
 }

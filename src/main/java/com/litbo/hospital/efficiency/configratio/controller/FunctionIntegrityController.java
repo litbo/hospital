@@ -2,6 +2,7 @@ package com.litbo.hospital.efficiency.configratio.controller;
 
 import com.litbo.hospital.efficiency.configratio.bean.FunctionIntegrityBean;
 import com.litbo.hospital.efficiency.configratio.service.FunctionIntegrityService;
+import com.litbo.hospital.efficiency.configratio.vo.DeleteVO;
 import com.litbo.hospital.efficiency.configratio.vo.FunctionIntegrityRatioVO;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class FunctionIntegrityController {
     @Autowired
     private FunctionIntegrityService integrityService;
 
+    private Integer integer;
 
     @RequestMapping(value = "/addIntegrity",method = RequestMethod.POST)
     public Result addIntegrity(FunctionIntegrityBean integrityBean){
@@ -34,8 +36,13 @@ public class FunctionIntegrityController {
     }
 
     @RequestMapping(value = "/showIntegrityById",method = RequestMethod.POST)
-    public Result showIntegrityById(Integer id){
-        return Result.success(integrityService.showIntegrityById(id));
+    public void showIntegrityById(Integer id){
+        integer = id;
+    }
+
+    @RequestMapping(value = "/returnIntegrity",method = RequestMethod.POST)
+    public Result returnIntegrity(){
+        return Result.success(integrityService.showIntegrityById(integer));
     }
 
     @RequestMapping(value = "/updateIntegrity",method = RequestMethod.POST)
@@ -48,12 +55,16 @@ public class FunctionIntegrityController {
     }
 
     @RequestMapping(value = "/deleteIntegrity",method = RequestMethod.POST)
-    public Result deleteIntegrity(List<Integer> list){
-        Integer integer = integrityService.deleteIntegrity(list);
-        if (integer>0){
-            return Result.success("已删除"+integer+"个设备");
+    public Result deleteIntegrity(@RequestBody DeleteVO deleteVO){
+        if (deleteVO.getIds()!=null){
+            Integer integer = integrityService.deleteIntegrity(deleteVO.getIds());
+            if (integer>0){
+                return Result.success("已删除"+integer+"个设备");
+            }else {
+                return Result.error("请选中需要删除的设备");
+            }
         }else {
-            return Result.error("请选中需要删除的设备");
+            return Result.error();
         }
     }
 

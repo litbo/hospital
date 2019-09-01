@@ -39,7 +39,7 @@ public interface ForecastDAO {
      * @return 返回预测符合率
      */
     @Select("SELECT *FROM dbo.forecast_ratio where id = #{id}")
-    ForecastRatioVO showForecastById(@Param("id") Integer id);
+    ForecastRatioVO showForecastById(Integer id);
 
     /**
      * 根据设备编号查询预测符合率
@@ -47,7 +47,7 @@ public interface ForecastDAO {
      * @return 几个
      */
     @Select("SELECT *FROM dbo.forecast_ratio where eqSbbh = #{code}")
-    Integer selectByEqCode(@Param("code") String code);
+    Integer selectByEqCode(String code);
 
     /**
      * 更新设备预测符合率
@@ -71,17 +71,17 @@ public interface ForecastDAO {
 
     /**
      * 批量删除预测符合率
-     * @param list id
+     * @param ids id
      * @return 删除几条
      */
     @Delete({
             "<script>",
             "DELETE FROM dbo.forecast_ratio WHERE id in",
-            "<foreach item = 'item' index = 'index' collection = 'list' open = '(' separator = ',' close = ')'>",
+            "<foreach item = 'item' index = 'index' collection = 'array' open = '(' separator = ',' close = ')'>",
             "#{item}",
             "</foreach>",
             "</script>"
     })
-    Integer deleteForecast(@Param("list") List<Integer> list);
+    Integer deleteForecast(Integer[] ids);
 
 }

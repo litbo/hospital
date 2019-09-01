@@ -44,10 +44,10 @@ public interface ForecastService {
 
     /**
      * 批量删除预测符合率
-     * @param list 预测符合率id
+     * @param ids 预测符合率id
      * @return 删除几条
      */
-    Integer deleteForecast(List<Integer> list);
+    Integer deleteForecast(Integer[] ids);
 
 
 }

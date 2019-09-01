@@ -44,9 +44,9 @@ public interface FunctionIntegrityService {
 
     /**
      * 批量删除功能完好率
-     * @param list 功能完好率id
+     * @param ids 功能完好率id
      * @return 批量删除的条数
      */
-    Integer deleteIntegrity(List<Integer> list);
+    Integer deleteIntegrity(Integer[] ids);
 
 }

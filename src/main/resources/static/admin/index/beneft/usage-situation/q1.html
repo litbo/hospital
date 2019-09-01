@@ -12,13 +12,13 @@
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="/static/admin/js/basic.js"></script>
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
 </head>
 
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table id="table" lay-filter="table1"></table>
+        <table id="table" class="layui-hide" lay-filter="table1"></table>
     </div>
 </div>
 
@@ -26,12 +26,13 @@
     <div class="addBtn">
         <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+        <button class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
 
-        <button class="layui-btn layui-btn-sm" lay-event="del" data-type="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
 </script>
 <script>
+    var dd = 0;
     renderMod = {
         addTable: {
             table: {
@@ -58,7 +59,8 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        toolFunc:[{
+                        toolFunc:[
+                            {
                             tool: "toolbar",
                             type: 2,
                             event: "add",
@@ -66,27 +68,66 @@
                             area: ['75%', '60%'],
                             content: "./child/q1add.html"
                         },
-
                             {
                                 tool: "toolbar",
                                 event: "del",
                                 send:{
                                     url:"/config/ratio/deleteUsing",
-                                    name:"gwIds",
+                                    name:"ids   ",
                                     par:"id",
                                     type:"DELETE",
                                     reload:true
                                 }
-                            }
+                            },
+                        {
+                            before:function(obj,cs){
+                                if(cs.data.length !== 1){
+                                    putMsg({
+                                        alert:"请选中一条数据！！"
+                                    });
+                                    return false;
+                                }else {
+
+
+                                }
+                            },
+                            event:"edit",
+                            tool:"toolbar",
+                            type: 2,
+                            title: "修改",
+                            area:['75%','60%'],
+                            content: "./child/q1edit.html",
+                                func:function(obj,data){
+                                    console.log(data.data[0].id);
+                                    subUp({
+                                        url: "/config/ratio/showUsingById",
+                                        type: "POST",
+
+                                        data: {"id": data.data[0].id},
+                                        success:function(res){
+                                            if(res.code === 0){
+                                               /* putMsg({
+                                                    msg:"您已成功删除一条数据！"
+                                                });*/
+                                            }else{
+                                               /* putMsg({
+                                                    msg:"删除失败，请重试！"
+                                                });*/
+                                            }
+                                           /* layer.close(index);*/
+                                        },
+                                        error:function () {
+                                           /* alert(1);*/
+                                        }
+                                    });
+                                }
+                        },
                         ]
-
                     })
-
-                }
+                },
             }
         }
-    }
-
+    };
 </script>
 </body>
 </html>

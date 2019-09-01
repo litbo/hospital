@@ -79,29 +79,20 @@
 
 <script>
     renderMod = {
-        form:{
+        formAction:{
             val:{
                 filter:"forms",
                 get:{
-                    url:"/config/ratio/ updateUsing",
-                    type:"GET",
-                    save:formData,
-                    data:{cszjId:$.getUrlParam('cszjId')}
-                },
-                select:[
-                    {
-                        filter:"zc",
-                        ids:"zcId",
-                        text:"zc",
-                        url:"/eqdict/listZc"
-                    }
-                ]
-            },
-            submit:{
-                form:{
-                    url:"/config/ratio/addUsing",
+                    url:"/config/ratio/returnUsing",
                     type:"POST",
-                    data:["eqSbbh","eqName","usingNum","exitNum"],
+                    data: ["eqSbbh", "eqName","exitNum","usingNum"],
+                },
+            },
+            submit: {
+                form:{
+                    url:"/config/ratio/updateUsing",
+                    type:"POST",
+                    data: ["eqSbbh", "eqName","exitNum","usingNum"],
                     done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {
@@ -114,9 +105,9 @@
                         }
                     }
                 }
-            }
-        }
-    };
+            },
+        },
+    }
 </script>
 
 

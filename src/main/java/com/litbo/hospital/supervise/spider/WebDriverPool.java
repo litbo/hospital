@@ -82,8 +82,7 @@ public class WebDriverPool {
 			
 			// "phantomjs_exec_path"
 			if (spiderProperties.getExecPath() != null) {
-				String driverPath = WebDriverPool.class.getClassLoader().getResource(spiderProperties.getExecPath()).getPath();
-				builder.usingPhantomJSExecutable(new File(driverPath));
+				builder.usingPhantomJSExecutable(new File(spiderProperties.getExecPath()));
 			} else {
 				throw new IOException(
 						String.format(
