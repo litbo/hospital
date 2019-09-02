@@ -10,6 +10,7 @@ package com.litbo.hospital.supervise.util;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -33,8 +34,6 @@ public class FileUtil {
 	
 	private static SpiderProperties spiderProperties = SpringBeanUtil.getBean("spiderProperties");
 	
-	private static BufferedWriter out ;
-	
 	public static void init() throws Exception{
 		log.info("intit file:" + spiderProperties.getSavePath());
 		File file = new File(spiderProperties.getSavePath());
@@ -45,26 +44,24 @@ public class FileUtil {
 		}
 		
 		file.createNewFile();
-		
-		out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)), 1024);
 	}
 	
 	public static void appendFile(String content) throws Exception{
-		if(out != null) {
+		BufferedWriter out = null;		
+		try {
+			File file = new File(spiderProperties.getSavePath());
+			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)), 1024);
 			out.write(content);
 			out.flush();
-		}else {
-			init();
-		}
-	}
-	
-	public static void close() {
-		try {
-			if(out != null) {
-				out.close();
-			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		}finally {
+			if(out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+				}
+			}
 		}
 	}
 }
