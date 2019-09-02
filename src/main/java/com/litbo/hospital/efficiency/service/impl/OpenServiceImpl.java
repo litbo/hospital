@@ -48,7 +48,6 @@ public class OpenServiceImpl implements OpenService {
         Integer integer = openDAO.deleteOpen();
         Integer integer1 = openDAO.updateOpen();
         List<OpenVO> openVOS = openDAO.selectOpen();
-        System.out.println(openVOS);
         return new PageInfo(handleOpenData(openVOS));
     }
 
