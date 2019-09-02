@@ -61,7 +61,8 @@ public interface FunctionUsingDAO {
             "<if test='ratioVO.eqSbbh != null'> eqSbbh = #{ratioVO.eqSbbh},</if>",
             "<if test='ratioVO.eqName != null'> eqName = #{ratioVO.eqName},</if>",
             "<if test='ratioVO.exitNum != null'> exitNum = #{ratioVO.exitNum},</if>",
-            "<if test='ratioVO.usingNum != null'> usingNum = #{ratioVO.usingNum}</if>",
+            "<if test='ratioVO.usingNum != null'> usingNum = #{ratioVO.usingNum},</if>",
+            "<if test='ratioVO.ratio != null'> ratio = #{ratioVO.ratio}</if>",
             "</set>",
             "where id = #{ratioVO.id}",
             "</script>"

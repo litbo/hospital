@@ -62,6 +62,7 @@ public interface FunctionIntegrityDAO {
             "<if test = 'integrityRatioVO.eqName != null'>eqName = #{integrityRatioVO.eqName},</if>",
             "<if test = 'integrityRatioVO.exitNum != null'>exitNum = #{integrityRatioVO.exitNum},</if>",
             "<if test = 'integrityRatioVO.integrityNum != null'>integrityNum = #{integrityRatioVO.integrityNum},</if>",
+            "<if test = 'integrityRatioVO.ratio != null'>ratio = #{integrityRatioVO.ratio}</if>",
             "</set>",
             "where id = #{integrityRatioVO.id}",
             "</script>"

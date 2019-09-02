@@ -66,7 +66,7 @@ public class ForecastServiceImpl implements ForecastService {
     @Override
     public Integer updateForecast(ForecastRatioVO forecastRatioVO) {
         if (forecastDAO.selectByEqCode(forecastRatioVO.getEqSbbh())==null||
-                forecastDAO.selectByEqCode(forecastRatioVO.getEqSbbh())==1){
+                forecastDAO.selectByEqCode(forecastRatioVO.getEqSbbh()).equals(forecastRatioVO.getId())){
             forecastRatioVO.setRatio(Efficiency.result(forecastRatioVO.getForecastNum(),forecastRatioVO.getActualNum()));
             return forecastDAO.updateForecast(forecastRatioVO);
         }else {

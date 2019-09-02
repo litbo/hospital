@@ -62,6 +62,7 @@ public interface ForecastDAO {
             "<if test = 'forecastRatioVO.eqName != null'>eqName = #{forecastRatioVO.eqName},</if>",
             "<if test = 'forecastRatioVO.actualNum != null'>actualNum = #{forecastRatioVO.actualNum},</if>",
             "<if test = 'forecastRatioVO.forecastNum != null'>forecastNum = #{forecastRatioVO.forecastNum},</if>",
+            "<if test = 'forecastRatioVO.ratio != null'> ratio = #{forecastRatioVO.ratio}</if>",
             "</set>",
             "where id = #{forecastRatioVO.id}",
             "</script>"
