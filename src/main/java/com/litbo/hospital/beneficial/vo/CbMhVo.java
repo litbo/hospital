@@ -12,13 +12,9 @@ import java.util.Date;
 @Data
 public class CbMhVo {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date kssj;
+    private String kssj;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date jssj;
+    private String jssj;
 
     private String bmNameByx;
 
