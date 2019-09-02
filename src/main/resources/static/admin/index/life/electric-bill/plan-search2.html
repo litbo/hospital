@@ -23,39 +23,41 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
-
 <script type="text/html" id="toolBar">
-    <div class="hidden-xs">
-        <div class="layui-inline">
-            <input class="layui-input" name="planName" id="test-table-demoReload" placeholder="计划名称" autocomplete="off">
-        </div>
-        <div class="layui-inline">
-            <input type="text" name="planDate" id="date" placeholder="计划时间" autocomplete="off"
-                   class="layui-input">
-        </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="userName" placeholder="制定人" autocomplete="off">
-        </div>
-        <button class="layui-btn" data-type="reload">查找</button>
-    </div>
+
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">账实核对</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="upPlan">核对上传</a>
+
+
+
+    <div class="layui-inline">
+                    <label class="layui-form-label col-sm-12">盘点计划：<span>0000</span></label>
+    </div>
+
+    <div class="layui-inline">
+                    <label class="layui-form-label col-sm-12">已盘：<span>0000</span></label>
+
+    </div>
+    <a lay-event="another" class="layui-btn layui-btn-sm layui-btn-normal" style="margin-bottom: 1%;font-size: 14px;background-color: #0053b5">盘盈：<span>0000</span></a>
+
+    <a lay-event="notnull" class="layui-btn layui-btn-sm layui-btn-normal" style="margin-bottom: 1%;font-size: 14px;background-color: #b81f17">盘亏：<span >0000</span></a>
+
+
+
+
 </script>
 <script>
     renderMod = {
         addTable: {
-            table: [
-                {
+            table: [{
                     elem: "#table"
                     , height: 'full-75'
                     , cols: [[ //表头
-                        {field: 'planName', title: '计划名称', minWidth: 400}
-                        , {field: 'userId', title: '制定人', minWidth: 150}
-                        , {field: 'bmId', title: '科室', minWidth: 150}
-                        , {field: 'planDate', title: '制定日期', minWidth: 150}
-                        , {fixed:'right',minWidth: 200,align:'center',toolbar: "#bar"}
+                        {field: 'planName', title: '计划名称', minWidth: 100,templet:'#status'}
+                        , {field: 'userId', title: '制定人',minWidth: 80,templet:'#statuss'}
+                        , {field: 'bmId', title: '科室',minWidth: 100,templet:'#statusss'}
+                        , {field: 'planDate', title: '制定日期',minWidth: 100,templet:'#statussss'}
+                        , {fixed:'right',title:'盘点结果显示',width:500,minWidth: 200,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectPlan"
                     , method: "POST"
@@ -72,35 +74,64 @@
                             "count":res.data.total
                         }
                     }
-                    , done: function (obj) {
-                        tableFunc({
-                            tools:[
-                                {
-                                    event:"detail",
-                                    type:2,
-                                    content:"./purchase-check.html",
-                                    dataUrl:["id"]
-                                }
-                            ]
-                        })
-                    }
+                , done: function (obj) {
+                    tableFunc({
+                        tools:[
+                            {
+                                event:"another",
+                                type:2,
+                                content:"./purchase-check.html",
+                                dataUrl:["id"]
+                            },{
+                                event:"notnull",
+                                type:2,
+                                content:"./purchase-check.html",
+                                dataUrl:["id"]
+                            }
+                        ]
+                    })
+                }
                 }
             ]
-            , reSet: {
-                url: "/lifeManage/selectPlan",
-                type: "reload",
-                data: ["planName","planDate","userName"]
-            }
         },
-        form: {
-            date: [{
-                    elem: "#date"
-                    , value: ""
-                    , format: "yyyy-MM-dd"
-                }]
-        }
     }
 </script>
+<!--<script type="text/html" id="status">-->
+<!--    {{#  if(d.change == "0"){ }}-->
+<!--    <span style="color: #ff0000; ">{{d.planName}}</span>-->
+<!--    {{#  } else if(d.change == "1") { }}-->
+<!--    <span style="color: #95e904;">{{d.planName}}</span>-->
+<!--    {{#  } else { }}-->
+<!--    <span style="color: #0004e9;">{{d.planName}}</span>-->
+<!--    {{#  } }}-->
+<!--</script>-->
+<!--<script type="text/html" id="statuss">-->
+<!--    {{#  if(d.change == "0"){ }}-->
+<!--    <span style="color: #ff0000; ">{{d.userId}}</span>-->
+<!--    {{#  } else if(d.change == "1") { }}-->
+<!--    <span style="color: #95e904;">{{d.userId}}</span>-->
+<!--    {{#  } else { }}-->
+<!--    <span style="color: #0004e9;">{{d.userId}}</span>-->
+<!--    {{#  } }}-->
+<!--</script>-->
+<!--<script type="text/html" id="statusss">-->
+<!--    {{#  if(d.change == "0"){ }}-->
+<!--    <span style="color: #ff0000; ">{{d.bmId}}</span>-->
+<!--    {{#  } else if(d.change == "1") { }}-->
+<!--    <span style="color: #95e904;">d.bmId</span>-->
+<!--    {{#  } else { }}-->
+<!--    <span style="color: #0004e9;">{{d.bmId}}</span>-->
+<!--    {{#  } }}-->
+<!--</script>-->
+<!--<script type="text/html" id="statussss">-->
+<!--    {{#  if(d.change == "0"){ }}-->
+<!--    <span style="color: #ff0000; ">{{d.planDate}}</span>-->
+<!--    {{#  } else if(d.change == "1") { }}-->
+<!--    <span style="color: #95e904;">{{d.planDate}}</span>-->
+<!--    {{#  } else { }}-->
+<!--    <span style="color: #0004e9;">{{d.planDate}}</span>-->
+<!--    {{#  } }}-->
+<!--</script>-->
 </body>
 
 </html>
