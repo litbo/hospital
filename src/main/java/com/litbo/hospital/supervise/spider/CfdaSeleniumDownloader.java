@@ -9,6 +9,7 @@ package com.litbo.hospital.supervise.spider;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -99,50 +100,8 @@ public class CfdaSeleniumDownloader implements Downloader, Closeable{
 		
 		try{
 			String url = request.getUrl();
-			if(!url.matches(".*?/cfda$")){
-				List<WebElement> trElements = webDriver.findElements(By.xpath("//div[@class='detail_list']//table/tbody/tr"));
-				ItemInfo itemInfo = new ItemInfo();
-				for(WebElement trElement : trElements) {
-					if(trElement.findElements(By.xpath("td")).size() == 2) {
-						WebElement fristTd = trElement.findElement(By.xpath("td[1]"));
-						
-						String value = trElement.findElement(By.xpath("td[2]")).getText();
-						if(fristTd.getText().equals("批准日期")) {
-							itemInfo.setApprovalDate(value.replaceAll("\\.", "-"));
-						}
-						if(fristTd.getText().equals("有效期") || fristTd.getText().equals("有效期至") || fristTd.getText().equals("有效期截止日")) {
-							if(itemInfo.getExpiredDate() == null || itemInfo.getExpiredDate().equals("")) {
-								itemInfo.setExpiredDate(value.replaceAll("\\.", "-"));
-							}
-						}
-						if(fristTd.getText().equals("地址") || fristTd.getText().equals("注册人住所") || fristTd.getText().equals("生产厂地址（中文）")) {
-							if(itemInfo.getEnterpriseAddress() == null || itemInfo.getEnterpriseAddress().equals("")) {
-								itemInfo.setEnterpriseAddress(value);
-							}
-						}
-						if(fristTd.getText().equals("生产单位") || fristTd.getText().equals("注册人名称") || fristTd.getText().equals("生产厂商名称（中文）") || fristTd.getText().equals("生产厂商名称（英文）")) {
-							if(itemInfo.getEnterprise() == null || itemInfo.getEnterprise().equals("")) {
-								itemInfo.setEnterprise(value);
-							}
-							
-						}
-						if(fristTd.getText().equals("注册号") || fristTd.getText().equals("注册证编号")) {
-							if(itemInfo.getApprovalNum() == null || itemInfo.getApprovalNum().equals("")) {
-								itemInfo.setApprovalNum(value);
-							}
-						}
-						if(fristTd.getText().equals("产品名称") || fristTd.getText().equals("产品名称（中文）")) {
-							if(itemInfo.getProductName() == null || itemInfo.getProductName().equals("")) {
-								itemInfo.setProductName(value);
-							}
-						}
-						String[] splitUrl = url.split("/");
-						itemInfo.setEsId(splitUrl[splitUrl.length - 1]);
-					}
-				}
-				page.putField("info", JSON.toJSONString(itemInfo));
-			}else {
-	        	int menuSize = webDriver.findElements(By.xpath("//ul[@class='show_lits ylqx']//li")).size();
+			if(url.matches(".*?/cfda$")) {
+				int menuSize = webDriver.findElements(By.xpath("//ul[@class='show_lits ylqx']//li")).size();
 				for(int i = 1; i <= menuSize; i++) {
 					WebElement menuElement = webDriver.findElement(By.xpath("//ul[@class='show_lits ylqx']//li[" + i + "]"));
 					menuElement.click();
@@ -150,20 +109,68 @@ public class CfdaSeleniumDownloader implements Downloader, Closeable{
 					WebDriverWait wait = new WebDriverWait(webDriver, 20);
 					waitDone(wait);
 					
-					getInfo(webDriver, page);
+					int totalNum = Integer.valueOf(webDriver.findElement(By.xpath("//b[@class='totalPage']")).getText());
 					
-					
-					int totalNum = Integer.valueOf(webDriver.findElement(By.xpath("//b[@class='totalPage']")).getText()) ;
-					for(int j = 2; j <= totalNum; j++) {
-						WebElement nextPage = webDriver.findElement(By.xpath("//a[@class='laypage_next']"));
-						nextPage.click();
-						waitDone(wait);
-						getInfo(webDriver, page);
-					}
-					
-					
+					page.addTargetRequest(url + "/result?searchTable=" + URLEncoder.encode(menuElement.getText(), "UTF-8") + "&totalNum=" + totalNum + "&currentPage=1");
 				}
-	        }
+
+				
+			}else if(url.matches(".*?totalNum=(\\d+)&currentPage=(\\d+)$")) {
+								
+				getInfo(webDriver, page);
+				
+				
+				Pattern pattern_page = Pattern.compile(".*?totalNum=(\\d+)&currentPage=(\\d+)$",Pattern.CASE_INSENSITIVE);
+		        Matcher matcher_page = pattern_page.matcher(url);		        
+		        matcher_page.find();
+		        
+		        int totalNum = Integer.valueOf(matcher_page.group(1));
+		        int currentPage = Integer.valueOf(matcher_page.group(2));
+		        if((currentPage + 1) < totalNum) {
+		        	page.addTargetRequest(url.replace("currentPage=" + currentPage, "currentPage=" + (currentPage + 1)));
+		        }
+		        
+			}else {
+				List<WebElement> trElements = webDriver.findElements(By.xpath("//div[@class='detail_list']//table/tbody/tr"));
+				ItemInfo itemInfo = new ItemInfo();
+				for(WebElement trElement : trElements) {
+					List<WebElement> tds = trElement.findElements(By.xpath("td"));
+					if(tds.size() == 2) {
+						WebElement fristTd = tds.get(0);
+						
+						String name = fristTd.getText();
+						String value = tds.get(1).getText();
+						if(name.equals("批准日期")) {
+							itemInfo.setApprovalDate(value.replaceAll("\\.", "-"));
+						}else if(name.equals("有效期") || name.equals("有效期至") || name.equals("有效期截止日")) {
+							if(itemInfo.getExpiredDate() == null || itemInfo.getExpiredDate().equals("")) {
+								itemInfo.setExpiredDate(value.replaceAll("\\.", "-"));
+							}
+						}else if(name.equals("地址") || name.equals("注册人住所") || name.equals("生产厂地址（中文）")) {
+							if(itemInfo.getEnterpriseAddress() == null || itemInfo.getEnterpriseAddress().equals("")) {
+								itemInfo.setEnterpriseAddress(value);
+							}
+						}else if(name.equals("生产单位") || name.equals("注册人名称") || name.equals("生产厂商名称（中文）") || name.equals("生产厂商名称（英文）")) {
+							if(itemInfo.getEnterprise() == null || itemInfo.getEnterprise().equals("")) {
+								itemInfo.setEnterprise(value);
+							}
+							
+						}else if(name.equals("注册号") || name.equals("注册证编号")) {
+							if(itemInfo.getApprovalNum() == null || itemInfo.getApprovalNum().equals("")) {
+								itemInfo.setApprovalNum(value);
+							}
+						}else if(name.equals("产品名称") || name.equals("产品名称（中文）")) {
+							if(itemInfo.getProductName() == null || itemInfo.getProductName().equals("")) {
+								itemInfo.setProductName(value);
+							}
+						}
+						String[] splitUrl = url.split("/");
+						itemInfo.setEsId(splitUrl[splitUrl.length - 1]);
+					}
+
+				}
+				page.putField("info", JSON.toJSONString(itemInfo));
+			}
 		
 		}catch(Exception e){
 			e.printStackTrace();
@@ -188,9 +195,10 @@ public class CfdaSeleniumDownloader implements Downloader, Closeable{
 	}
 	
 	private void getInfo(WebDriver webDriver, Page page) {
-		int liSize = webDriver.findElements(By.xpath("//ul[@id='data_content']//li/a")).size();
+		int liSize = webDriver.findElements(By.xpath("//li/a")).size();
+		
 		for(int j = 1; j <= liSize; j++) {
-			WebElement liElement = webDriver.findElement(By.xpath("//ul[@id='data_content']//li[" + j + "]/a"));
+			WebElement liElement = webDriver.findElement(By.xpath("//li[" + j + "]/a"));
 			
 			String val = liElement.getAttribute("onclick");
 			
