@@ -66,10 +66,11 @@ public class FunctionUsingServiceImpl implements FunctionUsingService {
     @Override
     public Integer updateUsing(FunctionUsingRatioVO usingRatioVO) {
         if (usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh())==null||
-                usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh())==1){
+                usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh()).equals(usingRatioVO.getId())){
             usingRatioVO.setRatio(Efficiency.result(usingRatioVO.getUsingNum(),usingRatioVO.getExitNum()));
             return usingDAO.updateUsing(usingRatioVO);
         }else {
+            System.out.println(usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh()).intValue());
             return 0;
         }
     }

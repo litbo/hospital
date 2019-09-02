@@ -66,7 +66,7 @@ public class FunctionIntegrityServiceImpl implements FunctionIntegrityService {
     @Override
     public Integer updateIntegrity(FunctionIntegrityRatioVO integrityRatioVO) {
         if (integrityDAO.selectIntegrityByeqSbbh(integrityRatioVO.getEqSbbh())==null||
-                integrityDAO.selectIntegrityByeqSbbh(integrityRatioVO.getEqSbbh())==1){
+                integrityDAO.selectIntegrityByeqSbbh(integrityRatioVO.getEqSbbh()).equals(integrityRatioVO.getId())){
             integrityRatioVO.setRatio(Efficiency.result(integrityRatioVO.getIntegrityNum(),integrityRatioVO.getExitNum()));
             return integrityDAO.updateIntegrity(integrityRatioVO);
         }else {
