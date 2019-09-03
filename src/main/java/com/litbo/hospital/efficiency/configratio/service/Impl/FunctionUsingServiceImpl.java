@@ -10,8 +10,6 @@ import com.litbo.hospital.efficiency.configratio.vo.FunctionUsingRatioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * description: 功能利用率Service层
  * @author: sz
@@ -30,9 +28,12 @@ public class FunctionUsingServiceImpl implements FunctionUsingService {
      */
     @Override
     public Integer addFunctionUsing(FunctionUsingBean usingBean) {
-        usingBean.setRatio(Double.valueOf(Efficiency.result(usingBean.getUsingNum(),usingBean.getExitNum())));
-        Integer integer = usingDAO.addFunctionUsing(usingBean);
-        return integer;
+        if (usingDAO.selectUsingByEqBh(usingBean.getEqSbbh())==null){
+            usingBean.setRatio(Double.valueOf(Efficiency.result(usingBean.getUsingNum(),usingBean.getExitNum())));
+            return usingDAO.addFunctionUsing(usingBean);
+        }else {
+            return 0;
+        }
     }
 
     /**
@@ -64,10 +65,13 @@ public class FunctionUsingServiceImpl implements FunctionUsingService {
      */
     @Override
     public Integer updateUsing(FunctionUsingRatioVO usingRatioVO) {
-        if (usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh())!=null){
-            return 0;
-        }else {
+        if (usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh())==null||
+                usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh()).equals(usingRatioVO.getId())){
+            usingRatioVO.setRatio(Efficiency.result(usingRatioVO.getUsingNum(),usingRatioVO.getExitNum()));
             return usingDAO.updateUsing(usingRatioVO);
+        }else {
+            System.out.println(usingDAO.selectUsingByEqBh(usingRatioVO.getEqSbbh()).intValue());
+            return 0;
         }
     }
 

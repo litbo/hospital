@@ -14,84 +14,17 @@
     <script src="../../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../../static/admin/js/basic.js"></script>
+
 </head>
 <body>
+
+
 <div class="layui-row ">
     <div class="col-xs-12" >
         <table id="table" lay-filter="table"></table>
     </div>
 </div>
-<div class="layui-row" style="margin: 20px">
-    <div class="col-xs-12">
-        <form class="layui-form layui-form-pane" action="">
-            <div class="layui-row ">
-                <div class="col-xs-12">
-                    <div class="col-xs-6" style="padding: 10px;">
 
-                        <div class="layui-form-item" style="margin-bottom:37px ">
-                            <label class="layui-form-label">执行人类别</label>
-                            <div class="layui-input-block">
-                                <input type="text"  autocomplete="off" class="layui-input inspPlExecutorType" disabled>
-
-                               <!-- <select name="inspPlExecutorType" id="inspPlExecutorType">
-                                    <option value="">请选择</option>
-                                    <option value="0">维修工程师</option>
-                                    <option value="1">厂家工程师</option>
-                                    <option value="2">维修、厂家工程师</option>
-                                </select>-->
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item"  style="margin-bottom:37px ">
-                            <label class="layui-form-label">上次巡检日期</label>
-                            <div class="layui-input-block">
-                                <input type="text"  autocomplete="off" class="layui-input inspPlLastTime" disabled>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-xs-6" style="padding: 10px;">
-
-                        <div class="layui-form-item" style="margin-bottom:37px ">
-                            <label class="layui-form-label">巡检类型</label>
-                            <div class="layui-input-block">
-                                <input type="text"  autocomplete="off" class="layui-input inspPlType" disabled>
-                                <!--<select name="inspPlType" id="inspPlType" >
-                                    <option value="">请选择</option>
-                                    <option value="0">其它巡检</option>
-                                    <option value="1">周期巡检</option>
-                                </select>-->
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item" style="margin-bottom:37px ">
-                            <label class="layui-form-label">巡检周期</label>
-                            <div class="layui-input-block">
-                                <input type="text"  class="layui-input inspPlPeriod" disabled>
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">周期单位</label>
-                            <div class="layui-input-block">
-                                <input type="text"   class="layui-input inspPlPeriodicUnit" disabled>
-                               <!-- <select name="inspPlPeriodicUnit" id="inspPlPeriodicUnit" >
-                                    <option value="">请选择</option>
-                                    <option value="0">周</option>
-                                    <option value="1">月</option>
-                                </select>-->
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-        </form>
-    </div>
-</div>
 <script>
     layui.use(['form','table', 'layedit', 'laydate'], function() {
         var form = layui.form
@@ -99,6 +32,9 @@
             , layedit = layui.layedit
             , table = layui.table
             , laydate = layui.laydate;
+        var dem = window.localStorage.getItem("datileMod");
+        var deom = JSON.parse(dem);
+        console.log(deom);
         renderMod = {
             table: {
                 table: [
@@ -106,7 +42,7 @@
                         elem: "#table",
                         id: "table",
                         cols: [[ //表头
-                            {type: "checkbox"}
+                            {type:'numbers'}
                             , {field: 'bmName', title: '使用部门', minWidth: 150}
                             , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
                             , {field: 'eqName', title: '设备名称', minWidth: 150}
@@ -114,9 +50,9 @@
                             ,{fixed: 'right', title:'巡检标准', toolbar: '#barDemo', width:150}
                         ]]
                         , toolbar: false
-                        , page: false
-                        , height: "200"
-                        , data: []
+                        , page: true
+                        , height: "230"
+                        , data: deom.inspPlanEquipmentVos
                         , text: {
                             none: "请点击上方添加按钮添加数据！"
                         }
@@ -126,25 +62,53 @@
                 ]
             }
         };
+
+       /* console.log(deom);*/
+      /*
+
+*/
+        table.on('tool(table)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'datile'){
+                console.log(data);
+                var n = 0;
+                var biaoZhun = [],zhun = [],nely = [];
+                var numZh = {};
+                console.log(data.inspPlStandards);
+                for (var i = 0; i < data.inspPlStandards.length; i++){
+                    n += 1;
+                   if (n <= 3){
+                       biaoZhun.push(data.inspPlStandards[i]);
+                       if ( n === 3){
+                           console.log(biaoZhun);
+                           zhun.push(biaoZhun);
+                           n = 0;
+                           biaoZhun = [];
+                       }
+                   }
+                }
+                console.log(zhun);
+                for (var j = 0; j < zhun.length; j++){
+                    numZh["inspPlStandardId"] = zhun[j][0];
+                    numZh["inspPlStandardName"] = zhun[j][1];
+                    numZh["inspPlStandardDescription"] = zhun[j][2];
+                    nely.push(numZh);
+                    numZh = {};
+                }
+               /* console.log(nely);*/
+                  var danly = JSON.stringify(nely);
+               /* console.log(danly);*/
+                window.localStorage.setItem('zhunMod', danly);
+                layui.layer.open({
+                    title: "巡检标准",
+                    type: 2,
+                    content:" ./index1-datil-biaozhun.html",//弹出层页面
+                    area: ['94%', '95%']
+                });
+            }
+        });
+
     })
 </script>
-<!--<script>
-    /*  查看*/
-    function detailUser(detail) {
-        console.log(detail.speqId);
-        var id= detail.speqId;
-        var bh = detail.speqBh;
-        var html =" ./child/index1-detail-biaozhun.html";
-        var url =  html + "?id="+id + "&bh=" + bh;
-        layui.layer.open({
-            title: "巡检标准",
-            type: 2,
-            content:url ,//弹出层页面
-            area: ['900px', '510px']
-        });
-    }
-</script>-->
-
-
 </body>
 </html>

@@ -754,7 +754,7 @@
                     "shiro": "ZSHDJHZD"
                   },
                   {
-                    "title": "计划查询",
+                    "title": "科室自盘",
                     "url": "./life/electric-bill/plan-search.html",
                     "id": "31111",
                     "shiro": "ZSHDJHCX"
@@ -762,7 +762,7 @@
                   {
                     "title": "核实对比",
                     "url": "./life/electric-bill/plan-search2.html",
-                    "id": "31113",
+                    "id": "31112",
                     "shiro": "HSDB"
                   }
                 ]

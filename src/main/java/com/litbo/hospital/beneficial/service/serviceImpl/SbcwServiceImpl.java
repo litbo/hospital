@@ -59,6 +59,7 @@ public class SbcwServiceImpl implements SbcwService {
         return new PageInfo(sbcwDao.listSr());
     }
 
+    @Override
     public PageInfo listSrByX(int pageNum, int pageSize, CbMhVo cbMhVo) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(sbcwDao.listSrByX(cbMhVo));

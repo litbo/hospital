@@ -21,7 +21,7 @@
         .layui-table-tool .layui-table-tool-self{
             position: absolute;
             height:30px;
-            top: 170px;
+            top: 110px;
             right: 10px;
             width: 120px;
             height: 30px;
@@ -31,6 +31,9 @@
         }
         .layui-form-label{
             width: 100px;
+        }
+        .layui-form-select{
+            display: none;
         }
     </style>
 </head>
@@ -48,8 +51,8 @@
 
 <!--头部工具-->
 <script type="text/html" id="toolBar">
-    <div style="height: 180px;">
-        <div class="content layui-collapse " style="height: 140px;border:none;margin-top:10px;margin-bottom: 10px;">
+    <div style="height: 120px;">
+        <div class="content layui-collapse " style="height: 80px;border:none;margin-top:10px;margin-bottom: 10px;">
             <form class="layui-form demoTable" action=""  style="border:none;">
 
                 <div class="layui-form-item ">
@@ -60,23 +63,12 @@
                         </div>
                     </div>
 
-                    <div class="layui-inline" style="margin-left: 200px">
-                        <label class="layui-form-label">审批状态</label>
-                        <div class="layui-input-inline">
-                            <select name="inspPlStatus" lay-filter="">
-                                <option value="">选择审批状态</option>
-                                <option value="0" >停用</option>
-                                <option value="1">未审核</option>
-                                <option value="2">未通过</option>
-                                <option value="3">已通过</option>
-                                <option value="4">二次审批</option>
 
-                            </select>
-                        </div>
-                    </div>
+                    <select name="inspPlStatus" >
 
-                </div>
-                <div class="layui-form-item ">
+                        <option value="1" >待审核</option>
+
+                       </select>
 
                     <div class="layui-inline">
                         <label class="layui-form-label">制&nbsp;定&nbsp;人</label>
@@ -86,7 +78,7 @@
                     </div>
 
 
-                    <div class="layui-inline" style="margin-left: 200px">
+                    <div class="layui-inline">
                         <label class="layui-form-label">审&nbsp;核&nbsp;人</label>
                         <div class="layui-input-inline">
                             <input type="text" name="inspPlAuditor"  placeholder="" autocomplete="off" class="layui-input">
@@ -96,7 +88,7 @@
 
 
                 </div>
-                <div class="layui-form-item" style="float:right;margin-right: 90px;margin-top: -60px">
+                <div class="layui-form-item" style="float:right;margin-right: 90px;margin-top: -65px">
                     <div class="layui-input-block"  >
                         <button type="button" class="layui-btn"   data-type="search" >查找</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -145,7 +137,7 @@
             addTable: {
                 table: {
                     elem: '#table'
-                    , url: '/inspection/inspPl/selectAllInspPlanVo'//接口
+                    , url: '/inspection/inspPl/selectApproveAllInspPlanVo'//接口
                     , method: "GET"
                     , toolbar: '#toolBar'
                     , height: '800'
@@ -155,9 +147,9 @@
                     , cols: [[
                         {type: 'checkbox'}
                         , {type:'numbers'}
-                        , {field: 'inspPlName', title: '名称', minWidth:150}
+                        , {field: 'inspPlName', title: '名称', minWidth:150,templet: '#Tpl'}
                         , {field: 'inspPlPlanner', title: '制定人',minWidth:150}
-                        , {field: 'inspPlCreateTime', title: '制定时间',minWidth:150}
+                        , {field: 'inspPlCreateTime', title: '制定时间',minWidth:150, sort: true}
                         , {field: 'inspPlAuditor', title: '审核人', minWidth:150}
                         , {field: 'inspPlStatus', title: '审核状态',minWidth:150, templet: '#speqT'}
                     ]]
@@ -184,7 +176,7 @@
                                         title: 'table1',
                                         name: "inspPlIds",
                                         event: "agree",
-                                     /*   url: "/specialEqCheck/applicationForInspection",*/
+                                        url: "/inspection/inspPl/approvedForInspection",
                                         type: "POST",
                                         show: "是否同意审批请？",
                                         contentType:"application/json",
@@ -201,7 +193,7 @@
                                         title: 'table1',
                                         name: "inspPlIds",
                                         event: "disagree",
-                                       /* url: "/specialEqCheck/applicationForInspection",*/
+                                        url: "/inspection/inspPl/rejectedForInspection",
                                         type: "POST",
                                         show: "是否同意审批请？",
                                         contentType:"application/json",
@@ -218,92 +210,43 @@
                     }
                 }
                 , reSet:{
-                    url:"/inspection/inspPl/selectInspPlanVo",
+                    url:"/inspection/inspPl/selectApproveInspPlanVo",
                     type:"search",
                     method: "post",
                     data:[ "inspPlName", "inspPlStatus", "inspPlPlanner", "inspPlAuditor"],  //搜索框的name
                 }
             }
         };
-
-
-        //头工具栏事件
-        /* table.on('toolbar(table1)', function(obj){
-             var $ = layui.$;
-             switch(obj.event){
-                 //删除
-              /!*   case 'delete':
-
-                     var checkStatus = table.checkStatus('table');
-                     var data = checkStatus.data;
-                     if (data.length === 0) {
-                         layer.msg("尚未选择");
-                         return;
-                     }
-                     var ids = [];
-                     if (data.length > 0) {
-                         for (var i = 0; i < data.length; i++) {
-                             ids.push(data[i].speqId);
-                         }
-                     }
-                     layer.confirm("确定要删除吗？", function () {
-                         $.ajax({
-                             type: "POST",
-                             url: "/specialEq/deleteSpecialEq",
-                             async: false,/!*同步传输*!/
-                             contentType:'application/json' ,
-                             dataType: 'json',
-                             data:JSON.stringify(ids),
-                             success: function (data) {
-                                 layer.closeAll('loading');
-                                 /!*  console.log(data.code);*!/
-                                 if(data.code === 0){
-                                     layer.msg("删除成功！", {icon:1, time: 2000, shade: 0.2});
-                                     location.reload(true);
-                                 }else{
-                                     layer.msg("删除失败！", {icon:2, time: 3000, shade: 0.2})
-                                 }
-                             }
-
-                         });
-                     });
-                     break;*!/
-             }
-         });*/
         //双击出详情
-        /* table.on('rowDouble(table1)', function(obj){
-             var data = obj.data;
-             console.log(data);
-             detailUser(data);
-             /!*  obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');*!/
-         });*/
+        table.on('rowDouble(table1)', function(obj){
+            var data = obj.data;
+            console.log(data);
+            detailUser(data);
+            /*  obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');*/
+        });
     })
 
 
 </script>
 <!--提示双击可查看-->
-<!--
 <script type="text/html" id="Tpl">
-    <a  class="layui-table-link" target="_blank" title="双击可查看详细信息" style="cursor: pointer">{{ d.bmId }}</a>
+    <a  class="layui-table-link" target="_blank" title="双击可查看详细信息" style="cursor: pointer">{{ d.inspPlName }}</a>
 </script>
 
 <script>
     /*  查看*/
     function detailUser(detail) {
-        console.log(detail.speqId);
-        var id= detail.speqId;
-        var bh = detail.speqBh;
-        var html =" ./child/index1-detail.html";
-        var url =  html + "?id="+id + "&bh=" + bh;
+        var id= detail.inspPlId;
+        var html =" ./child/index1-datile.html";
+        var url =  html + "?id="+id;
         layui.layer.open({
             title: "详细信息",
             type: 2,
             content:url ,//弹出层页面
-            area: ['1200px', '510px']
+            area: ['95%', '90%']
         });
     }
 </script>
--->
 
 </body>
 </html>

@@ -8,8 +8,6 @@ import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * description: 功能预测率
  * @author: sz
@@ -27,7 +25,11 @@ public class ForecastController {
 
     @RequestMapping(value = "/addForecast",method = RequestMethod.POST)
     public Result addForecast(ForecastBean forecastBean){
-        return Result.success(forecastService.addForecast(forecastBean));
+        if (forecastService.addForecast(forecastBean)>0){
+            return Result.success();
+        }else {
+            return Result.error();
+        }
     }
 
     @RequestMapping(value = "/showForecast",method = RequestMethod.GET)
@@ -48,7 +50,8 @@ public class ForecastController {
     }
 
     @RequestMapping(value = "/updateForecast",method = RequestMethod.POST)
-    public Result updateForecast( ForecastRatioVO forecastRatioVO){
+    public Result updateForecast(ForecastRatioVO forecastRatioVO){
+        forecastRatioVO.setId(integer);
         if (forecastService.updateForecast(forecastRatioVO)>0){
             return Result.success("已更改成功");
         }else {
@@ -56,7 +59,7 @@ public class ForecastController {
         }
     }
 
-    @RequestMapping(value = "/deleteForecast",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteForecast",method = RequestMethod.DELETE)
     public Result deleteForecast(@RequestBody DeleteVO deleteVO){
         if (deleteVO.getIds()!=null){
             Integer integer = forecastService.deleteForecast(deleteVO.getIds());

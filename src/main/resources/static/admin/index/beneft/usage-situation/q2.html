@@ -71,8 +71,8 @@
                             tool: "toolbar",
                             event: "del",
                             send:{
-                                url:"/config/ratio/deleteUsing",
-                                name:"ids   ",
+                                url:"/config/ratio/deleteIntegrity",
+                                name:"ids",
                                 par:"id",
                                 type:"DELETE",
                                 reload:true
@@ -95,11 +95,11 @@
                                 type: 2,
                                 title: "修改",
                                 area:['75%','60%'],
-                                content: "./child/q1edit.html",
+                                content: "./child/q2edit.html",
                                 func:function(obj,data){
                                     console.log(data.data[0].id);
                                     subUp({
-                                        url: "/config/ratio/showUsingById",
+                                        url: "/config/ratio/showIntegrityById",
                                         type: "POST",
 
                                         data: {"id": data.data[0].id},

@@ -75,12 +75,20 @@
 
 <script>
     renderMod = {
-        form:{
-            submit:{
-                form:{
-                    url:"/config/ratio/addForecast",
+        formAction:{
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/config/ratio/returnForecast",
                     type:"POST",
-                    data:["eqSbbh","eqName","actualNum","forecastNum"],
+                    data: ["eqSbbh", "eqName","actualNum","forecastNum"],
+                },
+            },
+            submit: {
+                form:{
+                    url:"/config/ratio/updateForecast",
+                    type:"POST",
+                    data: ["eqSbbh", "eqName","actualNum","forecastNum"],
                     done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {
@@ -89,15 +97,14 @@
                                 parent.location.reload();
                             })
                         }else {
-                            layer.alert("提交失败")
+                            layer.alert("编号重复")
                         }
                     }
                 }
-            }
-        }
-    };
+            },
+        },
+    }
 </script>
-
 
 </body>
 

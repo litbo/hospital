@@ -89,6 +89,7 @@ public interface InspPlDrawUpService {
      */
     PageInfo<InspEquipmentVo> selectAllSelectionEq(int pageNum, int pageSize);
 
+
     /**
      * 功能描述: 查询所有在此计划选中设备根据eqVo
      *

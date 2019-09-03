@@ -37,6 +37,12 @@ public class HandleData {
         return changeDate(date);
     }
 
+    public static String getMonthDate(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE,-1);
+        return changeDate(calendar.getTime());
+    }
+
     public static String[] splitTime(String times){
         String[] split = times.split(" ~ ");
         return split;

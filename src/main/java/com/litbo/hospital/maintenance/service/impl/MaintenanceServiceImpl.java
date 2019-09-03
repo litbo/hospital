@@ -55,7 +55,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
-    public int addMaintenance(Maintenance maintenance,String eqName) {
+    public int addMaintenance(Maintenance maintenance,String eqName,Boolean ifNotRisk) {
         Maintenance maintenanceMessage = maintenanceDAO.selectByEqId(maintenance.getEqId());
         // 该设备还没有风险值，所以要返回
         if(maintenanceMessage == null){
@@ -102,16 +102,18 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Override
     public int addMaintenanceProject(MaintenanceProject maintenanceProject) {
-        // 更新实施人类型字典
-        ImplementerDictionary type = implementerDictionaryDAO.selectByName(maintenanceProject.getImplementerType());
+        // 更新项目名称
+        ImplementerDictionary type = implementerDictionaryDAO.selectByName(maintenanceProject.getProjectType());
         int result = 0;
         if(type == null){
             ImplementerDictionary newType = new ImplementerDictionary();
-            newType.setType(maintenanceProject.getImplementerType());
+            newType.setType(maintenanceProject.getProjectType());
+            newType.setValue(maintenanceProject.getProjectName());
             result =  implementerDictionaryDAO.insert(newType);
             if(result == 0)
                 return 0;
         }
+
 
         // 添加项目
         result = maintenanceProjectDAO.insert(maintenanceProject);
@@ -127,8 +129,21 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
-    public List<String> seeAllType() {
-        return implementerDictionaryDAO.findAllType();
+    public List<String> seeAllType(String type) {
+        return implementerDictionaryDAO.findAllType(type);
+    }
+
+    @Override
+    public List findAllKey(String type,String value) {
+        if(value != null){
+            value = "%" + value +"%";
+        }
+        return implementerDictionaryDAO.selectAll(type,value);
+    }
+
+    @Override
+    public Maintenance selectByEqId(String id) {
+        return maintenanceDAO.selectByEqId(id);
     }
 
     @Override
@@ -161,6 +176,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         Maintenance maintenance = maintenanceDAO.selectById(id);
         maintenance.setStatus("已备案");
         return maintenanceDAO.updateByPremaryKey(maintenance);
+    }
+
+    @Override
+    public int deletePlan(int id) {
+        return maintenanceDAO.deletePlan(id);
     }
 
     @Override

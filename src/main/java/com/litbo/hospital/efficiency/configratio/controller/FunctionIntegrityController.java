@@ -8,8 +8,6 @@ import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * description: 功能完好率
  * @author: sz
@@ -26,7 +24,11 @@ public class FunctionIntegrityController {
 
     @RequestMapping(value = "/addIntegrity",method = RequestMethod.POST)
     public Result addIntegrity(FunctionIntegrityBean integrityBean){
-        return Result.success(integrityService.addFunctionIntegrity(integrityBean));
+        if (integrityService.addFunctionIntegrity(integrityBean)>0){
+            return Result.success();
+        }else {
+            return Result.error();
+        }
     }
 
     @RequestMapping(value = "/showIntegrity",method = RequestMethod.GET)
@@ -47,6 +49,7 @@ public class FunctionIntegrityController {
 
     @RequestMapping(value = "/updateIntegrity",method = RequestMethod.POST)
     public Result updateIntegrity(FunctionIntegrityRatioVO integrityRatioVO){
+        integrityRatioVO.setId(integer);
         if (integrityService.updateIntegrity(integrityRatioVO)>0){
             return Result.success("已更改成功");
         }else {
@@ -54,9 +57,10 @@ public class FunctionIntegrityController {
         }
     }
 
-    @RequestMapping(value = "/deleteIntegrity",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteIntegrity",method = RequestMethod.DELETE)
     public Result deleteIntegrity(@RequestBody DeleteVO deleteVO){
         if (deleteVO.getIds()!=null){
+            System.out.println(deleteVO);
             Integer integer = integrityService.deleteIntegrity(deleteVO.getIds());
             if (integer>0){
                 return Result.success("已删除"+integer+"个设备");

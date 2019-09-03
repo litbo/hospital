@@ -79,12 +79,20 @@
 
 <script>
     renderMod = {
-        form:{
-            submit:{
-                form:{
-                    url:"/config/ratio/addIntegrity",
+        formAction:{
+            val:{
+                filter:"forms",
+                get:{
+                    url:"/config/ratio/returnIntegrity",
                     type:"POST",
-                    data:["eqSbbh","eqName","integrityNum","exitNum"],
+                    data: ["eqSbbh", "eqName","exitNum","integrityNum"],
+                },
+            },
+            submit: {
+                form:{
+                    url:"/config/ratio/updateIntegrity",
+                    type:"POST",
+                    data: ["eqSbbh", "eqName","exitNum","integrityNum"],
                     done:function(res){
                         if(res.code === 0){
                             layer.alert("提交成功",function () {
@@ -93,15 +101,14 @@
                                 parent.location.reload();
                             })
                         }else {
-                            layer.alert("提交失败")
+                            layer.alert("编号重复")
                         }
                     }
                 }
-            }
-        }
-    };
+            },
+        },
+    }
 </script>
-
 
 </body>
 

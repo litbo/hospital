@@ -48,11 +48,12 @@ public class RadioServiceImpl implements RadioService {
 
         for (OpenVO openVO : list) {
             KpiBean bean = new KpiBean();
+            //设置开机率的时间 单位为月
+            bean.setTimes(HandleData.getMonthDate());
             bean.setEqCode(openVO.getEqCode());
             bean.setEqName(openVO.getEqName());
             bean.setRatio(openVO.getRating());
             bean.setRanking(openVO.getRanking());
-            bean.setTimes(HandleData.getNewDate());
             bean.setStatus("0");
             bean.setDataStatus("1");
             beanList.add(bean);
@@ -71,11 +72,12 @@ public class RadioServiceImpl implements RadioService {
 
         for (UsingVO usingVO : list) {
             KpiBean bean = new KpiBean();
+            // 时间单位为日
+            bean.setTimes(HandleData.getNewDate());
             bean.setEqCode(usingVO.getEqCode());
             bean.setEqName(usingVO.getEqJc());
             bean.setRatio(HandleData.splitPercent(usingVO.getRating()));
             bean.setRanking(usingVO.getRanking());
-            bean.setTimes(HandleData.getNewDate());
             bean.setStatus("2");
             bean.setDataStatus("2");
             beanList.add(bean);
@@ -94,11 +96,12 @@ public class RadioServiceImpl implements RadioService {
 
         for (IdlingVO idlingVO : list) {
             KpiBean bean = new KpiBean();
+            // 时间单位为日
+            bean.setTimes(HandleData.getNewDate());
             bean.setEqCode(idlingVO.getEqCode());
             bean.setEqName(idlingVO.getEqJc());
             bean.setRatio(idlingVO.getRating());
             bean.setRanking(idlingVO.getRanking());
-            bean.setTimes(HandleData.getNewDate());
             bean.setStatus("2");
             bean.setDataStatus("3");
             beanList.add(bean);
@@ -118,11 +121,12 @@ public class RadioServiceImpl implements RadioService {
 
         for (IdlTimeVO idlTimeVO : list) {
             KpiBean bean = new KpiBean();
+            //设置闲置时间 单位为月
+            bean.setTimes(HandleData.getMonthDate());
             bean.setEqCode(idlTimeVO.getEqCode());
             bean.setEqName(idlTimeVO.getEqName());
             bean.setRatio(idlTimeVO.getAvgTimes());
             bean.setRanking(idlTimeVO.getRanking());
-            bean.setTimes(HandleData.getNewDate());
             bean.setStatus("0");
             bean.setDataStatus("4");
             beanList.add(bean);
@@ -141,10 +145,11 @@ public class RadioServiceImpl implements RadioService {
 
         for (com.litbo.hospital.efficiency.vo.IntegrityVO IntegrityVO : list) {
             KpiBean bean = new KpiBean();
+            //设置完好率时间 单位为月
+            bean.setTimes(HandleData.getMonthDate());
             bean.setEqName(IntegrityVO.getEqName());
             bean.setRatio(IntegrityVO.getRating());
             bean.setRanking(IntegrityVO.getRanking());
-            bean.setTimes(HandleData.getNewDate());
             bean.setStatus("0");
             bean.setDataStatus("5");
             beanList.add(bean);

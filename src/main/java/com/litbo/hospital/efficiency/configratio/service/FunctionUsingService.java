@@ -4,8 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.efficiency.configratio.bean.FunctionUsingBean;
 import com.litbo.hospital.efficiency.configratio.vo.FunctionUsingRatioVO;
 
-import java.util.List;
-
 /**
  * description: 功能利用率
  * @author: sz

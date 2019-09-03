@@ -66,7 +66,7 @@
                         , {field: 'inspPlStandardDescription', title: '描述', minWidth: 200}
                     ]]
                     , page: true
-                    , height: 300
+                    , height: 380
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -100,12 +100,26 @@
                             layer.alert("尚未选择");
                             return;
                         }else{
+                            var tBz = [];
+                            for (var i = 0; i < data.length; i++){
+
+                                for (var p in data[i]){
+                                    if ( data[i][p] !== null){
+                                        tBz.push(data[i][p]);
+                                    }
+
+                                }
+
+                            }
+                            console.log(tBz);
                             var list = [];
                             for(var i = 0; i < data.length; i++){
                                 list.push(data[i].inspPlStandardId);
                             }
                             var listData = JSON.stringify(list);
+                            var listBz = JSON.stringify(tBz);
                             window.sessionStorage.setItem("al", listData);
+                            window.sessionStorage.setItem("alBz", listBz);
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
                         }

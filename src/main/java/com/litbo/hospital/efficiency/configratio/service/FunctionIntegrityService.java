@@ -4,8 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.efficiency.configratio.bean.FunctionIntegrityBean;
 import com.litbo.hospital.efficiency.configratio.vo.FunctionIntegrityRatioVO;
 
-import java.util.List;
-
 /**
  * description: 功能完好率
  * @author: sz
