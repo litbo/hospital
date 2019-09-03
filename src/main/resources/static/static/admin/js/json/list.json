@@ -1808,7 +1808,7 @@
                   },
                   {
                     "title": "规范编制",
-                    "url": "./table.html",
+                    "url": "./safe/keeprepair-management/standard-list.html",
                     "id": "44001",
                     "shiro": "AQZHCX"
                   },
@@ -1829,7 +1829,7 @@
                 "children": [
                   {
                     "title": "常规保养计划",
-                    "url": "./table.html",
+                    "url": "./safe/keeprepair-management/routine-plan.html",
                     "id": "44010",
                     "shiro": "AQZHCX"
                   },
@@ -1850,7 +1850,7 @@
                 "children": [
                   {
                     "title": "预防性维护待执行任务",
-                    "url": "./table.html",
+                    "url": "./safe/keeprepair-management/deal-task.html",
                     "id": "44020",
                     "shiro": "AQZHCX"
                   },
@@ -1862,7 +1862,7 @@
                   },
                   {
                     "title": "已执行任务",
-                    "url": "./table.html",
+                    "url": "./safe/keeprepair-management/done-task.html",
                     "id": "44022",
                     "shiro": "AQZHCX"
                   }
@@ -1877,7 +1877,7 @@
                 "children": [
                   {
                     "title": "综合查询",
-                    "url": "./table.html",
+                    "url": "./safe/keeprepair-management/comprehensive-list.html",
                     "id": "44030",
                     "shiro": "AQZHCX"
                   },
