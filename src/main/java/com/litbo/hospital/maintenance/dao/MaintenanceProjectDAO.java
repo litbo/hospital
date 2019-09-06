@@ -11,4 +11,8 @@ public interface MaintenanceProjectDAO {
 
     int getLastId();
 
+    int deleteProject(int id);
+
+    int updateProject(MaintenanceProject record);
+
 }

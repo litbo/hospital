@@ -62,6 +62,8 @@ public class MaintenanceController {
         {
             bmName = null;
         }
+
+
         PageVo vo = new PageVo();
         PageHelper.startPage(pageIndex,pageSize);
         List<EqInfoVo> eqInfoList = maintenanceService.getEQMessage(riskLevel, bmName, eqName);
@@ -130,6 +132,34 @@ public class MaintenanceController {
     @RequestMapping("/addMaintenanceProject.do")
     public Result addMaintenanceProject(MaintenanceProject maintenanceProject){
         int result = maintenanceService.addMaintenanceProject(maintenanceProject);
+        if(result == 0){
+            return Result.success("添加失败");
+        }
+        return Result.success(result);
+    }
+
+    /**
+     * 删除项目
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteMaintenanceProject.do")
+    public Result deleteMaintenanceProject(int id){
+        int result = maintenanceService.deleteMaintenanceProject(id);
+        if(result == 0){
+            return Result.success("添加失败");
+        }
+        return Result.success(result);
+    }
+
+    /**
+     * 修改项目
+     * @param maintenanceProject
+     * @return
+     */
+    @RequestMapping("/updateMaintenanceProject.do")
+    public Result updateMaintenanceProject(MaintenanceProject maintenanceProject){
+        int result = maintenanceService.updateMaintenanceProject(maintenanceProject);
         if(result == 0){
             return Result.success("添加失败");
         }

@@ -124,6 +124,16 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
+    public int updateMaintenanceProject(MaintenanceProject maintenanceProject) {
+        return maintenanceProjectDAO.updateProject(maintenanceProject);
+    }
+
+    @Override
+    public int deleteMaintenanceProject(int id) {
+        return maintenanceProjectDAO.deleteProject(id);
+    }
+
+    @Override
     public List<AddEqVo> selectEqBy(String factory, String model, String bmName, String similarClass, String pym) {
         return maintenanceDAO.selectEq(factory, model, bmName, similarClass, pym);
     }

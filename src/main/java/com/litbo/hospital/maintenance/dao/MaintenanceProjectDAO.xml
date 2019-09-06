@@ -93,4 +93,42 @@
     select MAX(id) from hospital..maintenance_project
   </select>
 
+  <delete id="deleteProject" parameterType="integer">
+    delete from hospital..maintenance_project where id = #{id}
+  </delete>
+
+  <update id="updateProject" parameterType="com.litbo.hospital.maintenance.pojo.MaintenanceProject">
+    update hospital..maintenance_project
+    <set>
+      <if test="projectType != null">
+        project_type = #{projectType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLevel != null">
+        project_level = #{projectLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="standard != null">
+        "standard" = #{standard,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTime != null">
+        first_time = #{firstTime,jdbcType=VARCHAR},
+      </if>
+      <if test="implementerType != null">
+        implementer_type = #{implementerType,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null">
+        "cycle" = #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleUnit != null">
+        cycle_unit = #{cycleUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        "result" =  #{result,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
 </mapper>

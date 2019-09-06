@@ -30,6 +30,11 @@ public interface MaintenanceService {
     // 添加规范中的项目
     int addMaintenanceProject(MaintenanceProject maintenanceProject);
 
+    // 修改项目
+    int updateMaintenanceProject(MaintenanceProject maintenanceProject);
+
+    int deleteMaintenanceProject(int id);
+
     //按条件查找设备
     List<AddEqVo> selectEqBy(String factory,String model,String bmName,String similarClass,String pym);
 
