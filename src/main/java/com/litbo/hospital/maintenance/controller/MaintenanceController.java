@@ -9,6 +9,7 @@ import com.litbo.hospital.maintenance.service.MaintenanceService;
 import com.litbo.hospital.maintenance.vo.AddEqVo;
 import com.litbo.hospital.maintenance.vo.EqInfoVo;
 import com.litbo.hospital.maintenance.vo.MaintenancePlanVo;
+import com.litbo.hospital.maintenance.vo.PlanContentVo;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqInfo;
@@ -167,11 +168,35 @@ public class MaintenanceController {
     }
 
 
+    /**
+     * 添加项规范的时候添加项目信息
+     * @param maintenance 规范信息
+     * @param applicable_eq 使用设备
+     * @param ifNotRisk 是否使用默认值
+     * @param maintenanceProject 项目信息
+     * @return
+     */
+    @RequestMapping("/addMaintenanceAndProject.do")
+    public Result addMaintenanceAndProject(Maintenance maintenance,String applicable_eq,Boolean ifNotRisk,MaintenanceProject ... maintenanceProject){
+
+        StringBuffer lists = new StringBuffer();
+
+        for(MaintenanceProject m : maintenanceProject){
+            int id = maintenanceService.addMaintenanceProject(m);
+            lists.append(id).append(',');
+        }
+
+        maintenance.setProjectList(lists.toString());
+        return addMaintenance(maintenance, applicable_eq, ifNotRisk);
+    }
+
+
 
     /**
      * 添加规范
      * @param maintenance 规范信息
      * @param applicable_eq 适用设备
+     * @param ifNotRisk 没有风险值的时候是否设置默认值
      * @return
      */
     @RequestMapping("/addMaintenance.do")
@@ -284,11 +309,15 @@ public class MaintenanceController {
      */
     @RequestMapping("/seePlanContent.do")
     public Result seePlanContent(int id){
+        Maintenance m = maintenanceService.seePlan(id);
         List<MaintenanceProject> list = maintenanceService.seePlanContent(id);
+
+        PlanContentVo vo = new PlanContentVo(m,list);
+
         if(list.isEmpty()){
             return Result.success("未查询到数据");
         }
-        return Result.success(list);
+        return Result.success(vo);
     }
 
     /**

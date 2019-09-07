@@ -39,7 +39,6 @@ import javax.sql.DataSource;
         "com.litbo.hospital.supervise.dao",
         "com.litbo.hospital.user.dao",
         "com.litbo.hospital.metering.dao",
-        "com.litbo.hospital.check_before_use.dao",
         "com.litbo.hospital.operational_data_monitoring.software_interface.dao",
         "com.litbo.hospital.operational_data_monitoring.software_interface.timedtask",
         "com.litbo.hospital.security.specialequipment.dao",

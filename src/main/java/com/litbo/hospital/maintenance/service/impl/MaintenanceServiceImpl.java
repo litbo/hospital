@@ -13,7 +13,6 @@ import com.litbo.hospital.maintenance.vo.AddEqVo;
 import com.litbo.hospital.maintenance.vo.EqInfoVo;
 import com.litbo.hospital.maintenance.vo.MaintenancePlanVo;
 import com.litbo.hospital.user.bean.EqInfo;
-import org.apache.regexp.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -179,6 +178,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
             list.add(project);
         }
         return list;
+    }
+
+    @Override
+    public Maintenance seePlan(int id) {
+        return maintenanceDAO.selectById(id);
     }
 
     @Override

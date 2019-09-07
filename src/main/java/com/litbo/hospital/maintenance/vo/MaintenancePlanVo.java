@@ -1,5 +1,7 @@
 package com.litbo.hospital.maintenance.vo;
 
+import com.litbo.hospital.maintenance.pojo.Maintenance;
+
 /**
  * @Author: 樊小铭
  * Date: 2019/8/28 11:44
@@ -73,5 +75,14 @@ public class MaintenancePlanVo {
         this.recordTime = recordTime;
         this.planType = planType;
         this.status = status;
+    }
+
+
+    public MaintenancePlanVo(Maintenance maintenance) {
+        this.id = maintenance.getId();
+        this.name = maintenance.getName();
+        this.recordTime = maintenance.getFormTime();
+        this.planType = maintenance.getPlanType();
+        this.status = maintenance.getStatus();
     }
 }

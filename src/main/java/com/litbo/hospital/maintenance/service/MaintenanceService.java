@@ -51,6 +51,8 @@ public interface MaintenanceService {
     // 查看计划内容
     List<MaintenanceProject> seePlanContent(int id);
 
+    Maintenance seePlan(int id);
+
     // 将计划变为任务
     int planToTask(int id);
 
