@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>开机率</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <script src="../../../../static/admin/layui/layui.js" charset="utf-8"></script>
+    <style>
+        .setW{
+            width: 80px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
+                    <div class="layui-input-inline">
+                        <input type="text" name="time" class="layui-input" id="test6" placeholder="点击选择日期">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+
+                        <input type="text" name="planName" class="layui-input" id="" placeholder="请填写计划名称">
+
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn" type="button" data-type="search">查找</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</script>
+<script id="barDemo" type="text/html">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="king">计划内容</a>
+</script>
+<script>
+    renderMod = {
+        formAction: {
+
+            date: {
+                elem:"#test6",
+                isInitValue: false,
+                type:"date",
+                format:"yyyy-MM-dd",
+                range:true
+            },
+        },
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'name', title: '计划名称',width:"25%", minWidth: 150}
+                    , {field: 'recordTime', title: '制定时间', minWidth: 150,sort:true}
+                    , {field: 'planType', title: '计划类型', minWidth: 150,sort:true}
+                    , {field: 'status', title: '状态', minWidth: 150,sort:true}
+                    , {title: '操作', align: 'center', toolbar: '#barDemo'}
+                ]]
+                , url: "/maintenance/seeAllMaintenancePlan.do"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面的所有数据数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                    tableFunc({
+                        toolFunc: [
+                            {
+                                title:"计划内容",
+                                event: 'king',
+                                type: 2,
+                                content: './child/maintenancejh.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["id"],
+                                func:function(obj,data){
+                                    // console.log(obj.data.id)
+                                }
+                            }
+                            // {
+                            //     before:function(obj,cs){
+                            //         if(cs.data.length !== 1){
+                            //             putMsg({
+                            //                 alert:"请选中一条数据！！"
+                            //             });
+                            //             return false;
+                            //         }else {
+                            //
+                            //
+                            //         }
+                            //     },
+                            //     event:"king",
+                            //     tool:"toolbar",
+                            //     type: 2,
+                            //     title: "计划内容",
+                            //     area:['75%','60%'],
+                            //     content: './child/maintenancejh.html',
+                            //     func:function(obj,data){
+                            //         console.log(data.data[0].id);
+                            //         subUp({
+                            //             url: "/config/ratio/showUsingById",
+                            //             type: "POST",
+                            //
+                            //             data: {"id": data.data[0].id},
+                            //             success:function(res){
+                            //                 if(res.code === 0){
+                            //                     /* putMsg({
+                            //                          msg:"您已成功删除一条数据！"
+                            //                      });*/
+                            //                 }else{
+                            //                     /* putMsg({
+                            //                          msg:"删除失败，请重试！"
+                            //                      });*/
+                            //                 }
+                            //                 /* layer.close(index);*/
+                            //             },
+                            //             error:function () {
+                            //                 /* alert(1);*/
+                            //             }
+                            //         });
+                            //     }
+                            // },
+                        ]
+                    })
+                }
+            },
+            reSet: {
+                url: "/maintenance/seeAllMaintenancePlan.do",
+                type: "search",
+                data: ["planName"],
+                where: {},
+                dat:["#test6","beginTime","endTime","~"],//时间选择器的拆分
+            }
+        }
+    }
+</script>
+
+
+</body>
+
+</html>

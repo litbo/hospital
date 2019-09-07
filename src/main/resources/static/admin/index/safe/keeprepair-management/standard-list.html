@@ -22,136 +22,104 @@
 </head>
 
 <body>
-    <div class="layui-row col-xs-12 padRight">
-	    <fieldset class="layui-elem-field layui-field-title">
-	        <legend>规范制定</legend>
-	    </fieldset>
-	    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
-	        <div class="col-xs-6">
-	            <div class="layui-form-item">
-	                <label class="layui-form-label">设备 <span class="sign">*</span></label>
-	                <div class="layui-input-block">
-	                    <input type="text" name="eqId" autocomplete="off" lay-verify="required" placeholder="请输入"
-	                           class="layui-input">
-	                </div>
-	            </div>
-	         </div>
-	         <div class="col-xs-6">
-	            <div class="layui-form-item">
-	                <label class="layui-form-label">适用设备 </label>
-	                <div class="layui-input-block">
-	                    <select name="applicable_eq">
-	                    	<option value='1'>同厂家同型号</option>
-	                    	<option value='2'>同类设备</option>
-	                    	<option value='3'>同简称设备</option>
-	                    	<option value='4'>按科室</option>
-	                    	<option value='5'>全部设备</option>
-	                    </select>
-	                </div>
-	            </div>
-	          </div>
-	         <div class="col-xs-6">
-	            <div class="layui-form-item">
-	                <label class="layui-form-label">制定人 <span class="sign">*</span></label>
-	                <div class="layui-input-block">
-	                    <input type="text" name="formulator" disabled="disabled" autocomplete="off" lay-verify="required" placeholder="请输入"
-	                           class="layui-input">
-	                </div>
-	            </div>
-	         </div>
-	         <div class="col-xs-6">
-	            <div class="layui-form-item">
-	                <label class="layui-form-label">审核人 <span class="sign">*</span></label>
-	                <div class="layui-input-block">
-                 	<input type="text" name="reviewer" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
+<div class="layui-row col-xs-12 padRight">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>规范制定</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="hidden" name="eqId" disabled class="layui-input eqId">
+                    <input type="hidden" name="projectList" disabled class="layui-input projectList">
+                    <input type="text"  placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input " id="eqId"
+                           style="padding-left:60px;">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="selectUsera" id="selectUsera">选择</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">适用设备</label>
+                <div class="layui-input-block">
+                    <select name="applicable_eq">
+                        <option>同厂家同型号</option>
+                        <option>同类设备</option>
+                        <option>同简称设备</option>
+                        <option>按科室</option>
+                        <option>全部设备</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">制定人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="formulator" disabled="disabled" autocomplete="off" lay-verify="required" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="reviewer" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
                            style="padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectUser">选择</button>
-	                </div>
-	            </div>
-	         </div>
-	         <div class="col-xs-6">
-	            <div class="layui-form-item">
-	                <label class="layui-form-label">制定时间 <span class="sign">*</span></label>
-	                <div class="layui-input-block">
-	                    <input type="text" id="formTime" name="formTime" autocomplete="off" lay-verify="required" placeholder="请输入"
-	                           class="layui-input">
-	                </div>
-	            </div>
-	         </div>
-	         <div class="col-xs-6">
-	            <div class="layui-form-item">
-	                <label class="layui-form-label">周期规则 </label>
-	                <div class="layui-input-block">
-	                    <select name="cycleRule">
-	                    	<option value='按风险值估算'>按风险值估算</option>
-	                    	<option value='按厂家规定'>按厂家规定</option>
-	                    </select>
-	                </div>
-	            </div>
-	         </div>
-	    </form>
-		<div>
-		    <div class="col-xs-12 padRight">
-		        <table id="table" lay-filter="table1"></table>
-		    </div>
-		</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">制定时间<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" id="test6" name="formTime" autocomplete="off" lay-verify="required" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">周期规则</label>
+                <div class="layui-input-block">
+                    <select name="cycleRule">
+                        <option>按风险值估算</option>
+                        <option>按厂家规定</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div>
+        <div class="layui-colla-item">
+            <div class="layui-colla-content layui-show">
+                <div class="addBtn">
+                    <button class="layui-btn layui-btn-sm addNew" data-id="table" lay-event="add" id="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+                    <button class="layui-btn layui-btn-sm delNew" lay-event="del" id="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+                </div>
+                <table id="table" lay-filter="table"></table>
+            </div>
+        </div>
     </div>
-
-<script type="text/html" id="toolBar">
-    <div class="addBtn">
-       <button class="layui-btn layui-btn-xs" lay-event="add">新 建</button>
-    </div>
-</script>
-
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="view">查看</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="update">修改</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="delete">删除</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="upload">归档</a>
-</script>
-
+    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">提交</button>
+</div>
 <script>
-	var formData2 = {};
-	var emp = tempValue("rl", "emp", false);
-	$(function(){
-		$("[name='formulator']").val(emp.userXm);
-	});
+    var formData2 = {};
+    var emp = tempValue("rl", "emp", false);
+    var projectList = localStorage.getItem("fa");
+    $(function(){
+        $("[name='formulator']").val(emp.userXm);
+    });
     renderMod = {
-   		form:{
-            date: [{
-                elem: "#formTime",
-                format:'yyyy/MM/dd'
-            }]
-   		},
-	   	 bind: {
-	    	 selectItem: [
-	             {
-	                 elem: "#selectDepartment",
-	                 cb: "/supervise/bmgl/listSelectBmsCols",
-	                 db: "/supervise/bmgl/listBms",
-	                 se: "/supervise/bmgl/bmSe",
-	                 key: "radio",
-	                 name: "dtdt",
-	                 data: formData2
-	             },
-	             {
-	                 elem: "#selectUser",
-	                 cb: "/kwgl/empgl/listSelectEmpsCols",
-	                 db: "/kwgl/empgl/listSelectEmps",
-	                 name: "dtdt",
-	                 na:"userXm",
-	                 key: "radio",
-	                 data: formData2,
-	                 assign_el_name:'reviewer',
-	                 se:"/kwgl/empgl/empSe"
-	             }
-	         ]                     
-	    },
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type: "numbers", title: '序号' }
-//                  , {type: "checkbox"}
+                    {type: "checkbox"}
+                    ,{type: "numbers", title: '序号' }
                     , {field: 'projectType', title: '项目类型', minWidth: 150}
                     , {field: 'projectName', title: '项目名称', minWidth: 150}
                     , {field: 'projectLevel', title: '级别', minWidth: 100}
@@ -160,39 +128,131 @@
                     , {field: 'cycleUnit', title: '周期单位', minWidth: 100}
                     , {field: 'implementerType', title: '实施人类型', minWidth: 120}
                     , {field: 'firstTime', title: '首次实施', minWidth: 100}
-                    , {fixed:'right',width:300,align:'center',title:'操作',toolbar: "#bar"}
                 ]]
-        		, url:"/Metering/findAllMeteringUtil.do?needMeter=111"
-                , request: {
-                    pageName: 'pageNum',
-                    limitName: 'pageSize'
-                }
-                , parseData: function (res) { //res 即为原始返回的数据
-                	res.data = res.data || {};
-                	res.data.list = res.data.list || [];
-                	res.data.total = res.data.total || 0;
-                    return {
-                        "code": res.code, //解析接口状态
-                        "msg": res.msg, //解析提示文本
-                        "count": res.data.total,//页面显示的数据条数
-                        "data": res.data.list //解析数据列表
-                    }
-                }
-                , done: function (obj) {
-                    tableFunc({
-                    	toolFunc:[{
-                            type:2,
-                            event:"add",
-                            tool: "toolbar",
-                            content:"./child/standard-add.html",
-                            func:function(config,$checkstatus){
-                           	 	
+                , toolbar: false
+                , page: false
+                , height: "200"
+                , data: []
+                , text: {
+                    none: "请点击上方按钮添加数据！"
+                },
+                done:function (res) {
+                    $("#del").off("click").on("click",function(){
+
+                        var checkedArr = [];
+                        for (var i = 0; i < table.cache.table.length; i++) {
+                            if (table.cache.table[i].LAY_CHECKED == true){
+                                checkedArr.push(i);
                             }
-                        }]
+                        }
+                        var eqSbbhs =[];
+                        for (var i = 0; i < checkedArr.length; i++){
+                            var t = checkedArr[i];
+                            eqSbbhs.push(table.cache.table[t].id);
+                        }
+                        checkedArr.length = 0;//清除数组
+                      /*  $.ajax({
+                            url:'/inspection/otherfunction/updateEqSbbh1',
+                            type:"POST",
+                            async: false,/!*同步传输*!/
+                            data:JSON.stringify(eqSbbhs),
+                            dataType:'JSON',
+                            contentType:'application/json'
+
+                        })*/
+                    });
+                }
+            }
+        },
+        bind: {
+            selectItem: [
+                {
+                    elem: "#selectUser",
+                    cb: "/kwgl/empgl/listSelectEmpsCols",
+                    db: "/kwgl/empgl/listSelectEmps",
+                    name: "dtdt",
+                    na:"userXm",
+                    key: "radio",
+                    data: formData2,
+                    assign_el_name:'reviewer',
+                    se:"/kwgl/empgl/empSe"
+                },
+            ],
+            addItem:[
+                {
+                    elem:"#add",
+                    area: ['75%', '60%'],
+                    base: "./child/standard-add.html",
+                    name: "vg",
+                    key: "key",
+                    before:function(){
+                        var a = localStorage.sitename;
+                        var tv = getTableValue("table");
+
+                    },
+                },
+            ],
+            delItem: ".delNew",
+        },
+        form: {
+            date: {
+                elem:"#test6",
+                isInitValue: false,
+                type:"date",
+                format:"yyyy-MM-dd",
+            },
+            submit: {
+                    before:function(){
+                        layui.use(['table'], function(){
+                            var  layer = layui.layer
+                                ,table = layui.table;
+                            layui.layer.open({
+                                type: 0
+                                ,title: '提示'
+                                ,area: ['20%', '20%']
+                                ,shade: 0.3
+                                ,content: '是够同步风险值'
+                                ,btn: ['确认', '取消'] //只是为了演示
+                                ,yes: function(){
+                                    alert(123)
+                                }
+                                ,btn2: function(){
+                                    layer.close();
+                                }
+                            });
+                        })
+                    },
+                form: {
+                    url: "/maintenance/addMaintenance.do",
+                    type: "POST",
+                    data: [
+                        "eqId","applicable_eq","formulator","reviewer", "formTime", "cycleRule","id",
+                    ],
+                    where:{projectList:"projectList"},
+                    reload: true
+                }
+            }
+        },
+
+        btn:[
+            {
+                elem:"#selectUsera",
+                type:"click",
+                func:function(){
+                    layui.use(['table'], function(){
+                        var  layer = layui.layer
+                            ,table = layui.table;
+                            layui.layer.open({
+                                type: 2,
+                                title: '设备名',
+                                shadeClose: true, //点击遮罩关闭层
+                                area: ['90%', '90%'],
+                                content: './child/s1.html'
+                            });
                     })
                 }
             }
-        }       
+        ]
     }
 </script>
 </body>
