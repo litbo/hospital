@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>规范编制列表</title>
+    <title>规范编制</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -105,12 +105,13 @@
             </div>
         </div>
     </div>
-    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="save">提交</button>
+    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="btnn" lay-filter="btnn">提交</button>
 </div>
 <script>
     var formData2 = {};
+    var projectList = [], tm = "";
     var emp = tempValue("rl", "emp", false);
-    var projectList = localStorage.getItem("fa");
+
     $(function(){
         $("[name='formulator']").val(emp.userXm);
     });
@@ -137,6 +138,11 @@
                     none: "请点击上方按钮添加数据！"
                 },
                 done:function (res) {
+                    var ty = localStorage.getItem("fa");
+                    tm =ty;
+                    localStorage.removeItem("fa");
+                    projectList.push(tm);
+                   console.log(projectList);
                     $("#del").off("click").on("click",function(){
 
                         var checkedArr = [];
@@ -188,7 +194,6 @@
                     before:function(){
                         var a = localStorage.sitename;
                         var tv = getTableValue("table");
-
                     },
                 },
             ],
@@ -201,39 +206,38 @@
                 type:"date",
                 format:"yyyy-MM-dd",
             },
-            submit: {
-                    before:function(){
-                        layui.use(['table'], function(){
-                            var  layer = layui.layer
-                                ,table = layui.table;
-                            layui.layer.open({
-                                type: 0
-                                ,title: '提示'
-                                ,area: ['20%', '20%']
-                                ,shade: 0.3
-                                ,content: '是够同步风险值'
-                                ,btn: ['确认', '取消'] //只是为了演示
-                                ,yes: function(){
-                                    alert(123)
-                                }
-                                ,btn2: function(){
-                                    layer.close();
-                                }
-                            });
-                        })
-                    },
-                form: {
+            submit:{
+                filter:"btnn",//可以不写
+                form:{//或者写作up
                     url: "/maintenance/addMaintenance.do",
                     type: "POST",
                     data: [
-                        "eqId","applicable_eq","formulator","reviewer", "formTime", "cycleRule","id",
+                        "eqId","applicable_eq","formulator","reviewer", "formTime", "cycleRule",
                     ],
-                    where:{projectList:"projectList"},
-                    reload: true
-                }
-            }
-        },
-
+                    param:["projectList"],
+                    reload: true,
+                },
+                // before:function(data){
+                //     layui.use(['table'], function(){
+                //         var  layer = layui.layer
+                //             ,table = layui.table;
+                //         layui.layer.open({
+                //             type: 0
+                //             ,title: '提示'
+                //             ,area: ['20%', '20%']
+                //             ,shade: 0.3
+                //             ,content: '是够同步风险值'
+                //             ,btn: ['是', '否']
+                //             ,yes: function(){
+                //                 // alert(123)
+                //             }
+                //             ,btn2: function(){
+                //             }
+                //         });
+                //     })
+                // },
+                }//表单提交后执行函数（不论成功与否）
+            },
         btn:[
             {
                 elem:"#selectUsera",
@@ -245,7 +249,7 @@
                             layui.layer.open({
                                 type: 2,
                                 title: '设备名',
-                                shadeClose: true, //点击遮罩关闭层
+                                shadeClose: true,
                                 area: ['90%', '90%'],
                                 content: './child/s1.html'
                             });

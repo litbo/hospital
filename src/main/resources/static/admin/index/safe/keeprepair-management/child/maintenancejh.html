@@ -31,7 +31,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">计划名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="name" autocomplete="off" disabled class="layui-input">
+                    <input type="text" name="name" id="name" autocomplete="off" disabled class="layui-input">
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">制定时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="recordTime" autocomplete="off" disabled class="layui-input">
+                    <input type="text" name="recordTime" id="recordTime" autocomplete="off" disabled class="layui-input">
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">计划类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="planType" disabled="disabled" autocomplete="off" lay-verify="required" placeholder="请输入"
+                    <input type="text" name="planType" id="planType" disabled="disabled" autocomplete="off" lay-verify="required" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -56,7 +56,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">状态<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="status" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input">
+                    <input type="text" name="status" id="status" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input">
                 </div>
             </div>
         </div>
@@ -70,7 +70,6 @@
 
 <script>
 
-
     renderMod = {
         formAction:{
             val:{
@@ -79,17 +78,26 @@
                     url:"/maintenance/seePlanContent.do",
                     type:"POST",
                     data: {id:$.getUrlParam("id")},
-                    parse:["obj"],
+                    parse:["projects"],
                     tableId:["table"],
-                    // dat:["name","recordTime","planType","status"]
-
+                    add:["name","recordTime","planType","status"]
                 },
                 func:function (obj) {
+                    // var vo = JSON.stringify(obj.vo);
+                    console.log(id)
+                    var name = obj.vo.name;
+                    var recordTime = obj.vo.recordTime;
+                    var planType = obj.vo.planType;
+                    var status = obj.vo.status;
+                    document.getElementById("name").value = name;
+                    document.getElementById("recordTime").value = recordTime;
+                    document.getElementById("planType").value = planType;
+                    document.getElementById("status").value = status;
+                    var projects = JSON.stringify(obj.projects);
                     var s = JSON.stringify(obj);
                     localStorage.setItem("t",s);
-                    // console.log(localStorage.getItem("t"));
-                }
 
+                }
             },
         },
         addTable: {
@@ -121,13 +129,8 @@
                         "data": res.data.list //解析数据列表
                     }
                 },
-                done:function (obj) {
-
-                }
                 }
         },
-
-
     }
 </script>
 </body>

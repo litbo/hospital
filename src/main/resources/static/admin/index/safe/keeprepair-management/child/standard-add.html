@@ -106,6 +106,7 @@
                             type:"POST",
                             data:["projectType","projectName","projectLevel","standard","firstTime","implementerType","cycle","cycleUnit"],
                             done: function (data) {
+                                console.log(data.data)
                                 localStorage.setItem("fa",data.data);
                                     if ($("#projectType").val() === ""||$("#projectName").val()===""||$("#projectLevel").val()===""||$("#standard").val()===""
                                         ||$("#firstTime").val()===""||$("#implementerType").val()===""||$("#cycle").val()===""||$("#cycleUnit").val()===""){
@@ -120,10 +121,8 @@
                                         key: key,
                                         value: da
                                     });
-
                                     var index = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(index);
-
                             },
                         }
                     },

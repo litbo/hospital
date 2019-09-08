@@ -128,6 +128,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
+    public MaintenanceProject selectProjectById(int id) {
+        return maintenanceProjectDAO.selectById(id);
+    }
+
+    @Override
     public int deleteMaintenanceProject(int id) {
         return maintenanceProjectDAO.deleteProject(id);
     }
@@ -188,7 +193,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Override
     public int planToTask(int id) {
         Maintenance maintenance = maintenanceDAO.selectById(id);
-        maintenance.setStatus("已备案");
+        maintenance.setStatus("待执行");
         return maintenanceDAO.updateByPremaryKey(maintenance);
     }
 

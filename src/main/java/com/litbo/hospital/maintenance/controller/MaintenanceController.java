@@ -133,10 +133,11 @@ public class MaintenanceController {
     @RequestMapping("/addMaintenanceProject.do")
     public Result addMaintenanceProject(MaintenanceProject maintenanceProject){
         int result = maintenanceService.addMaintenanceProject(maintenanceProject);
+        MaintenanceProject m = maintenanceService.selectProjectById(result);
         if(result == 0){
             return Result.success("添加失败");
         }
-        return Result.success(result);
+        return Result.success(m);
     }
 
     /**

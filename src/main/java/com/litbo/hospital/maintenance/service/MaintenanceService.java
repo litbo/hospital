@@ -33,6 +33,8 @@ public interface MaintenanceService {
     // 修改项目
     int updateMaintenanceProject(MaintenanceProject maintenanceProject);
 
+    MaintenanceProject selectProjectById(int id);
+
     int deleteMaintenanceProject(int id);
 
     //按条件查找设备

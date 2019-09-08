@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>预防性维护计划</title>
+    <title>预防性维护已完成任务</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -56,14 +56,12 @@
     </div>
 </script>
 <script id="barDemo" type="text/html">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="king">计划内容</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="aad">生成任务</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="king">归档</a>
 </script>
-
 <script>
     renderMod = {
         formAction: {
+
             date: {
                 elem:"#test6",
                 isInitValue: false,
@@ -88,7 +86,7 @@
                     limitName: 'pageSize'
                 }
                 ,where:{
-                    status:"试用中"
+                    status:"已完成"
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
@@ -110,72 +108,9 @@
                                 area: ['90%', '90%'],
                                 dataUrl: ["id"],
                                 func:function(obj,data){
-                                    console.log("id="+obj.data.id)
+                                    // console.log(obj.data.id)
                                 }
-                            },
-                            {
-                                event:"del",
-                                layOpen:false,
-                                func:function (obj,data) {
-                                    console.log(obj.data.id);
-                                    if(obj.event === 'del'){
-                                        layer.confirm('真的删除行么', function(index){
-                                            obj.del();
-                                            // console.log(data.value);
-                                            $.ajax({
-                                                url:'/maintenance/deletePlan.do',
-                                                type:"POST",
-                                                async: false,/*同步传输*/
-                                                data:{"planId":obj.data.id},
-                                                dataType:'JSON',
-                                                /*  contentType:'application/json' ,*/
-                                                success: function(res){
-                                                    if(res.code == 0 ){
-                                                        layer.close(index);
-                                                    }else{
-                                                        alert(res.msg);
-                                                    }
-                                                },
-                                                error:function (data) {
-                                                }
-                                            }) ;
-
-                                        });
-                                    }
-                                }
-                            },
-                            {
-                                event:"aad",
-                                layOpen:false,
-                                func:function (obj,data) {
-                                    console.log(obj.data.id)
-                                    if(obj.event === 'aad'){
-
-                                            $.ajax({
-                                                url:'/maintenance/planToTask.do',
-                                                type:"POST",
-                                                async: false,/*同步传输*/
-                                                data:{"id":obj.data.id},
-                                                dataType:'JSON',
-                                                /*  contentType:'application/json' ,*/
-                                                success: function(res){
-                                                    if(res.code == 0 ){
-                                                        // layer.close(index);
-                                                    location.replace(location)
-
-                                                    }else{
-                                                        alert(res.msg);
-                                                    }
-                                                },
-                                                error:function (data) {
-                                                }
-                                            }) ;
-
-
-                                    }
-                                },
-                            },
-
+                            }
                         ]
                     })
                 }
@@ -188,8 +123,9 @@
                 dat:["#test6","beginTime","endTime","~"],//时间选择器的拆分
             }
         }
-    };
+    }
 </script>
+
 
 </body>
 

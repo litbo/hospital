@@ -1895,6 +1895,13 @@
                 "icon": "sliders-h",
                 "id": "4404",
                 "shiro": "AQZHCX"
+              },
+              {
+                "title": "字典",
+                "url": "./safe/keeprepair-management/dict.html",
+                "icon": "sliders-h",
+                "id": "4405",
+                "shiro": "AQZHCX"
               }
             ]
           },
