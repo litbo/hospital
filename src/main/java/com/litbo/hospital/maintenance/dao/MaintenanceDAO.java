@@ -23,12 +23,12 @@ public interface MaintenanceDAO {
 
     int updateByPremaryKey(Maintenance record);
 
-    // TODO: 2019/8/28 还需要添加同分类查询
     List<AddEqVo> selectEq(@Param("factory") String factory,
                            @Param("model") String model,
                            @Param("bmName") String bmName,
                            @Param("similarClass") String similarClass,
                            @Param("pym") String pym);
+
 
 
     EqInfo selectEqById(String id);

@@ -72,6 +72,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         maintenance.setEqId(maintenanceMessage.getEqId());   // 设备id
         maintenance.setRiskValue(maintenanceMessage.getRiskValue()); // 风险值
         maintenance.setRiskLevel(maintenanceMessage.getRiskLevel()); // 风险等级
+        maintenance.setPlanType("预防性维护计划");  // 计划类型
         if(maintenance.getCycleRule().equals("按风险值估算")){   // 周期
             switch (maintenance.getRiskLevel()){
                 case "高":
@@ -141,6 +142,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     public List<AddEqVo> selectEqBy(String factory, String model, String bmName, String similarClass, String pym) {
         return maintenanceDAO.selectEq(factory, model, bmName, similarClass, pym);
     }
+
 
     @Override
     public List<String> seeAllType(String type) {

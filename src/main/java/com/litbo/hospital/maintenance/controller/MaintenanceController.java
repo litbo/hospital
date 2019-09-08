@@ -213,7 +213,7 @@ public class MaintenanceController {
                 list = maintenanceService.selectEqBy(eqInfo.getSbcsIdScs(),eqInfo.getEqXh(),null,null,null);
             }break;
             case "2":{  // 同类设备
-
+                list = maintenanceService.selectEqBy(null,null,null,eqInfo.getEqCxflId(),null);
             }break;
             case "3":{ // 按照简称
                 list = maintenanceService.selectEqBy(null,null,null,null,eqInfo.getEqPym());
