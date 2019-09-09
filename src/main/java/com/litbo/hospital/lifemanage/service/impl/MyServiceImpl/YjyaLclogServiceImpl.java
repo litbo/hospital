@@ -54,7 +54,8 @@ public class YjyaLclogServiceImpl implements YjyaLclogService {
                         vo1.setYjyaBakssj(cal.getTime());
                         YjyaZdVO zdVO = new YjyaZdVO();
                         zdVO.setYjyaBh(vo1.getYjyaBh());
-                        updateYalog(vo);
+                        zdVO.setYjyaZt("2");
+                        updateYalog(vo1);
                         service.updateYjyaZd(zdVO);
                     }
             }
@@ -63,12 +64,7 @@ public class YjyaLclogServiceImpl implements YjyaLclogService {
 
         }
 
-        int size1 = vos.size();
-        for (int i = 0; i < size1; i++) {
-            YjyaLclogVO lclogVO = vos.get(i);
-            if(lclogVO.getYjyaShr()==null || lclogVO.getYjyaShrq()==null )
-                vos.remove(i);
-        }
+        vos.removeIf(item -> item.getYjyaShr() == null || item.getYjyaShrq() == null);
         return new PageInfo(vos);
     }
 

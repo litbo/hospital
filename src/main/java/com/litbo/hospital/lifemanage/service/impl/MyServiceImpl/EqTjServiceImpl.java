@@ -12,7 +12,9 @@ import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.common.utils.UploadFile;
 import com.litbo.hospital.lifemanage.MyUtils.DelSpaceUtils;
 import com.litbo.hospital.lifemanage.bean.Example.EqTjsqExample;
+import com.litbo.hospital.lifemanage.bean.MyBean.EqBraz;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.*;
+import com.litbo.hospital.lifemanage.dao.MyMapper.EqBrazMapper;
 import com.litbo.hospital.lifemanage.dao.MyMapper.EqTjsqMapper;
 import com.litbo.hospital.lifemanage.service.MyService.EqTjService;
 import org.apache.commons.lang3.StringUtils;
@@ -21,10 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -32,7 +31,8 @@ public class EqTjServiceImpl implements EqTjService {
 
     @Autowired
     private EqTjsqMapper mapper;
-
+    @Autowired
+    private EqBrazMapper brazmapper;
 
     /*条件查或者查询全部*/
     @Override
@@ -47,15 +47,25 @@ public class EqTjServiceImpl implements EqTjService {
         String sfyl = DelSpaceUtils.deleteSpace(showVO.getTjSfyl());
         String sfqbsl = DelSpaceUtils.deleteSpace(showVO.getTjSfqbsl());
         String sqlx = DelSpaceUtils.deleteSpace(showVO.getTjSqlx());
-        criteria.andTjSqlxLike("%"+sqlx+"%");
+        criteria.andTjSqlxLike("%" + sqlx + "%");
         if (StringUtils.isNotBlank(bmname)) {
-            criteria.andBmNameLike("%"+bmname+"%");
+            criteria.andBmNameLike("%" + bmname + "%");
+        }
+        if (StringUtils.isBlank(bmname)) {
+            bmname = null;
         }
         if (StringUtils.isNotBlank(sfyl)) {
             criteria.andTjSfylLike(sfyl);
         }
+
+        if (StringUtils.isBlank(sfyl)) {
+            sfyl = null;
+        }
         if (StringUtils.isNotBlank(sfqbsl)) {
             criteria.andTjSfqbslLike(sfqbsl);
+        }
+        if (StringUtils.isBlank(sfqbsl)) {
+            sfqbsl = null;
         }
         if (showVO.getTjQssj() != null) {
             criteria.andTjSqsjGreaterThanOrEqualTo(showVO.getTjQssj());
@@ -161,9 +171,19 @@ public class EqTjServiceImpl implements EqTjService {
     @Override
     public int insertTjDrSq(EqTjsqVO sq) {
         List<TjZbMcNameCount> list = sq.getZbmclist();
+        list.stream().forEach(item-> item.setUuid(UUID.randomUUID().toString()));
         String s = JSON.toJSONString(list);
         sq.setTjZbmc(s);
-        sq.setId(IDFormat.getIdByIDAndTime("eq_tjsq", "id"));
+        String id = IDFormat.getIdByIDAndTime("eq_tjsq", "id");
+        sq.setId(id);
+        /*调配增加病人安置记录*/
+        if("1".equals(sq.getTjSqlx())){
+            EqBraz braz = new EqBraz();
+            braz.setId(id);
+            braz.setBrBxid(id);
+            brazmapper.insertEqBraz(braz);
+        }
+
         return mapper.insertTjDrSq(sq);
     }
 
@@ -185,7 +205,7 @@ public class EqTjServiceImpl implements EqTjService {
     public int deleteZbDcById(String id) {
 
         EqTjZbdcVO eqTjZbdcVO = mapper.selectByPrimaryKey(id);
-        String zbbm=eqTjZbdcVO.getTjZbbm();
+        String zbbm = eqTjZbdcVO.getTjZbbm();
         JSONArray zbbms = JSONArray.parseArray(zbbm);
         String sqzbbms = eqTjZbdcVO.getTjSqzbbms();
         JSONArray jsonArray = JSONArray.parseArray(sqzbbms);
@@ -199,20 +219,20 @@ public class EqTjServiceImpl implements EqTjService {
         int size2 = list.size();
         for (int i = 0; i < size2; i++) {
             for (int k = 0; k < size; k++) {
-                  if(list.get(i).getSbbh().equals(jsonArray.get(k))){
-                      TjZbMcNameCount tjZb= list.get(i);
-                      tjZb.setYslcount(tjZb.getYslcount()-(int)jsonArray2.get(k));
-                      System.out.println("");
-                  }
+                if (list.get(i).getUuid().equals(jsonArray.get(k))) {
+                    TjZbMcNameCount tjZb = list.get(i);
+                    tjZb.setYslcount(tjZb.getYslcount() - (int) jsonArray2.get(k));
+                }
             }
         }
-        mapper.updateSqZbBykey(eqTjZbdcVO.getTjSqtj(), JSON.toJSONString(list));
+        int i = mapper.updateSqZbBykey(eqTjZbdcVO.getTjSqtj(), JSON.toJSONString(list));
+        EqTjsqVO vo = mapper.selectSqJlByKey(eqTjZbdcVO.getTjSqtj());
         for (Object o : zbbms) {
-            mapper.updateEqInfoSfJc((String)o, "0");
+            mapper.updateEqInfoSfJc((String) o, "0");
         }
 
-        tjsqVO.setTjSfqbsl("0");
-        updateByPrimaryKey(tjsqVO);
+        vo.setTjSfqbsl("0");
+        updateByPrimaryKey(vo);
 
         return mapper.deleteZbDcById(id);
     }
@@ -241,8 +261,12 @@ public class EqTjServiceImpl implements EqTjService {
     //TODO 已经加入院区和部门的条件查询
     @Override
     public PageInfo selectAllEqInfo(String sbName, String bmname, String yq) {
-        if(StringUtils.isBlank(yq)){
-            yq=null;
+        if (StringUtils.isBlank(yq)) {
+            yq = null;
+        }
+        if(StringUtils.isBlank(bmname))
+        {
+            bmname=null;
         }
         List<EqInfoShowVO> vos = mapper.selectAllEqInfo(sbName, bmname, yq);
 
@@ -273,13 +297,20 @@ public class EqTjServiceImpl implements EqTjService {
                     && StringUtils.isNotBlank(zbdcVO.getTjSqtj())) {
                 /*判断是否在同一科室的同一张调剂单且调配单未送达借东西(不同指挥长不同调剂单)*/
                 EqTjZbdcVO vo = mapper.selectTjjd(zbdcVO.getTjDcks(), zbdcVO.getTjSqtj(), zbdcVO.getTjZhz());
+                /*若类型不一致则视为调配*/
+                if(vo!=null&&zbdcVO.getTjDclx()!=null&&vo.getTjDclx()!=null){
+                    if (!vo.getTjDclx().equals(zbdcVO.getTjDclx())) {
+                        vo = null;
+                    }
+                }
+
                 if (vo != null && StringUtils.isNotBlank(vo.getId())) {
                     add = false;
                     /*修改*/
                     String zbbm = vo.getTjZbbm();
                     String ggxh = vo.getTjGgxh();
                     String sqzbbm = vo.getTjSqzbbms();
-                    String sqcount=vo.getTjSqzbcounts();
+                    String sqcount = vo.getTjSqzbcounts();
                     JSONArray sqcounts = JSONArray.parseArray(sqcount);
                     ggxh = ggxh.replaceAll("null", "");
                     JSONArray bmarray = JSONArray.parseArray(zbbm);
@@ -297,17 +328,15 @@ public class EqTjServiceImpl implements EqTjService {
 
                     JSONArray sqzbbms = JSONArray.parseArray(sqzbbm);
                     if (StringUtils.isNotBlank(zbdcVO.getTjSqzbbms())) {
-                        int s=sqzbbms.size();
+                        int s = sqzbbms.size();
                         for (int i = 0; i < s; i++) {
-                            if(!zbdcVO.getTjSqzbbms().equals(sqzbbms.get(i))){
+                            if (!zbdcVO.getTjSqzbbms().equals(sqzbbms.get(i))) {
                                 sqcounts.add(listzbdc.size());
-                            }
-                            else{
-                                if(sqcounts.size()==0){
+                            } else {
+                                if (sqcounts.size() == 0) {
                                     sqcounts.add(listzbdc.size());
-                                }
-                                else {
-                                    sqcounts.set(i,(int)sqcounts.get(i)+1);
+                                } else {
+                                    sqcounts.set(i, (int) sqcounts.get(i) + 1);
                                 }
                             }
                         }
@@ -396,25 +425,25 @@ public class EqTjServiceImpl implements EqTjService {
         JSONArray array = JSONArray.parseArray(tjZbmc);
         List<TjZbMcNameCount> list = array.toJavaList(TjZbMcNameCount.class);
         for (TjZbMcNameCount count : list) {
-            if (tjsqzbbm.equals(count.getSbbh())) {
+            if(count.getUuid().equals(vo.getUuid()))
+            {
                 count.setYslcount(count.getYslcount() + size);
             }
         }
 
-        boolean qbcl=false;
+        boolean qbcl = false;
         for (TjZbMcNameCount count : list) {
-            if(count.getCount()==count.getYslcount())
-            {
-                qbcl=true;
-            }
-            else {
-                qbcl=false;
+            if (count.getCount() <= count.getYslcount()) {
+                qbcl = true;
+            } else {
+                qbcl = false;
+                break;
             }
         }
 
-        if(qbcl){
+        if (qbcl) {
             tjsqVO.setTjSfqbsl("1");
-           updateByPrimaryKey(tjsqVO);
+            updateByPrimaryKey(tjsqVO);
         }
 
         mapper.updateSqZbBykey(s, JSON.toJSONString(list));
@@ -496,7 +525,7 @@ public class EqTjServiceImpl implements EqTjService {
             tjsq.setId(vo.getTjSqtj());
             tjsq.setTjZbmc(zbmcArray.toString());
             updateByPrimaryKey(tjsq);
-            int i = mapper.updateDcZb(id, zbbmjson, ggxhjson, null,null ,new Date());
+            int i = mapper.updateDcZb(id, zbbmjson, ggxhjson, null, null, new Date());
             updateZbCount(id);
         }
         return 1;
@@ -508,12 +537,19 @@ public class EqTjServiceImpl implements EqTjService {
         EqTjZbdcVO eqTjZbdcVO = mapper.selectByPrimaryKey(id);
         ArrayList<String> list = new ArrayList<>();
         JSONArray array = JSONArray.parseArray(eqTjZbdcVO.getTjZbbm());
+        JSONArray array2 = JSONArray.parseArray(eqTjZbdcVO.getTjGgxh());
+
+        List<EqDpdInfoZbVO> vos = new ArrayList<>();
         int size = array.size();
         for (int i = 0; i < size; i++) {
             String s = mapper.selectZbNameByZbBh((String) array.get(i));
-            list.add(s);
+            EqDpdInfoZbVO vo = new EqDpdInfoZbVO();
+            vo.setTjZbName(s);
+            vo.setTjZbbm((String)array.get(i));
+            vo.setTjGgxh((String) array2.get(i));
+            vos.add(vo);
         }
-        eqTjZbdcVO.setTjZbName(list);
+        eqTjZbdcVO.setDczblist(vos);
         eqTjZbdcVO.setTjDcksName(mapper.selectBmNameByBmid(eqTjZbdcVO.getTjDcks()));
         return eqTjZbdcVO;
     }
@@ -526,22 +562,28 @@ public class EqTjServiceImpl implements EqTjService {
 
     /*查询未送达调配单*/
     @Override
-    public PageInfo selectWsdYsd() {
+    public PageInfo selectWsdYsd(Integer pageNum,Integer pageSize,String lx) {
+
+        PageHelper.startPage(pageNum,pageSize);
         List<EqTjDpdVO> vos = mapper.selectWsdDpd();
         for (int i = 0; i < vos.size(); i++) {
             vos.get(i).setZbSdks(mapper.selectKsNameByID(vos.get(i).getZbSdks()));
         }
+
+        vos.removeIf(item->!lx.equals(item.getTjDclx()));
+
         return new PageInfo(vos);
     }
 
     /*查询验收单已送达*/
     @Override
-    public PageInfo selectYsdYsd() {
+    public PageInfo selectYsdYsd(Integer pageNum,Integer pageSize,String lx) {
 
         List<EqTjDpdVO> vos = mapper.selectYsdDpd();
         for (int i = 0; i < vos.size(); i++) {
             vos.get(i).setZbSdks(mapper.selectKsNameByID(vos.get(i).getZbSdks()));
         }
+        vos.removeIf(item->!lx.equals(item.getTjDclx()));
         return new PageInfo(vos);
     }
 
