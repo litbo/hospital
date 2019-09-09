@@ -37,17 +37,20 @@ public class EqTjjjController {
      * @Author: NCH
      * @Date: 2019/08/04 上午 9:59
      */
-    @PostMapping("/selectByExample")
+    @PostMapping("/selectTjjjByExample")
     public Result selectByExample(
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
             @RequestParam(required = false, name = "tjjjQssj") String tjjjQssj,
-            @RequestParam(required = false, name = "tjjjJssj") String tjjjJssj) {
+            @RequestParam(required = false, name = "tjjjJssj") String tjjjJssj,
+            @RequestParam(name = "lx") String lx
+            ) {
         Date qssj = String2DateUtil.StringtoDate(tjjjQssj);
         Date jssj = String2DateUtil.StringtoDate(tjjjJssj);
         EqTjjjShowVO vo = new EqTjjjShowVO();
         vo.setTjjjQssj(qssj);
         vo.setTjjjJssj(jssj);
+        vo.setTjjjJllx(lx);
         PageInfo<EqTjjjShowVO> info = service.selectByExample(pageNum, pageSize, vo);
 
         return Result.success(info);
@@ -61,7 +64,7 @@ public class EqTjjjController {
      * @Author: NCH
      * @Date: 2019/08/04 上午 10:33
      */
-    @PostMapping("/selectByPrimaryKey")
+    @PostMapping("/selectTjjjByPrimaryKey")
     public Result selectByPrimaryKey(@RequestParam(name = "id") String id) {
         EqTjjjVO tjjjVO = service.selectByPrimaryKey(id);
         return Result.success(tjjjVO);

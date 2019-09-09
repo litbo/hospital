@@ -125,7 +125,7 @@ public interface EqTjsqMapper {
             "    where eq_name like CONCAT('%',#{sbName},'%') " +
             "    and   e.eq_syzt = '在用' and e.eq_sfjc='0'" +
             "  <if test =\"bmname != null and bmname!=''\">" +
-            "  and bm_name =  #{bmname} " +
+            "  and bm_name like CONCAT('%',#{bmname},'%') " +
             "  </if> " +
             "  <if test =\"yq !=null and yq!='' \"> " +
             "  and eq_yq=#{yq}" +
@@ -159,7 +159,7 @@ public interface EqTjsqMapper {
     EqTjZbdcVO selectTjjd(@Param("dcksid") String dcksid, @Param("sqtjid") String sqtjid, @Param("zhz") String zhz);
 
     /*查找所有未送达验收单,点替换之后装备状态变成待借出,未送达调配单+1，别人将无法查找到*/
-    @Select("select  t.id, t.tj_dpsj,t.tj_zhz,s.bm_name ,e.tj_sqks as zbSdks \n" +
+    @Select("select  t.id, t.tj_dpsj,t.tj_zhz,s.bm_name ,e.tj_sqks as zbSdks,tj_dclx \n" +
             "    from  tj_zbdc t \n " +
             "    inner join eq_tjsq e on e.id=t.tj_sqtj " +
             "    inner join s_bm s on t.tj_dcks= s.bm_id" +
@@ -167,7 +167,7 @@ public interface EqTjsqMapper {
     List<EqTjDpdVO> selectWsdDpd();
 
     /*查找所有验收单已送达*/
-    @Select("select t.id, t.tj_dpsj,e.tj_zhz,s.bm_name  ,e.tj_sqks as zbSdks\n" +
+    @Select("select t.id, t.tj_dpsj,t.tj_zhz,s.bm_name  ,e.tj_sqks as zbSdks,tj_dclx\n" +
             "    from  tj_zbdc t \n " +
             "    inner join eq_tjsq e on e.id=t.tj_sqtj " +
             "    inner join s_bm s on t.tj_dcks= s.bm_id" +
@@ -199,7 +199,7 @@ public interface EqTjsqMapper {
     @Update("update eq_tjsq set tj_zbmc=#{zbmc} where id=#{id} ")
     int updateSqZbBykey(@Param("id") String id, @Param("zbmc") String zbmc);*/
     /*根据调剂申请的装备名称和替换数量修改调剂申请装备的名称和数量*/
-    @Update("update eq_tjsq set tj_zbmc=#{zbmc} where id=#{id}")
+    @Update("update eq_tjsq set tj_zbmc=#{zbmc,jdbcType=VARCHAR} where id=#{id}")
     int updateSqZbBykey(@Param("id") String id, @Param("zbmc") String zbmc);
 
     /*根据主键修改装备调出*/

@@ -36,13 +36,13 @@ public class YjyaLclogVO {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     /*再评价申请时间【应急预案再评价申请】*/
-    private Date yjyaZpjsqsj;
+    private Date yjyaZpjsqrq;
     /*再评价审核人【再评价审核】*/
     private String yjyaZpjshr;
     /*再评价审核时间【再评价审核】*/
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date yjyaZpjshsj;
+    private Date yjyaZpjshrq;
 
     /*审核意见*/
     private String yjyaShyj;
@@ -56,6 +56,8 @@ public class YjyaLclogVO {
     private String yjyaZpjyy;
 
     private String yjyaZt;
+
+    private String yjyaZpjjd;
 
 
 }

@@ -64,7 +64,7 @@ public class YjyaZdVO {
 
     private String yjyaBbhdxg;
 
-
+   private String yjyaZpjjd;
 
     /*引入辅助字段，判断为再评价审核还是普通审核*/
 

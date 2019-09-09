@@ -93,7 +93,7 @@ public class YjyaZdController {
                               @RequestParam(required = false, name = "jssj") String jssj
     ) {
         Date qs = String2DateUtil.StringtoDate(qssj);
-        Date js = String2DateUtil.StringtoDate(qssj);
+        Date js = String2DateUtil.StringtoDate(jssj);
         PageInfo<YjyaZdVO> info = service.selectAllSh(pageNum, pageSize, bh, mc, ngr, qs, js);
         return Result.success(info);
 

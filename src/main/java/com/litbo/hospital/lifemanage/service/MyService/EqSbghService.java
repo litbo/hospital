@@ -12,12 +12,12 @@ public interface EqSbghService {
     int insertEqSbgh(EqSbghVO sbgh);
 
     /*归还设备记录全部查询与条件查询*/
-    PageInfo selectAllSbgh(Integer pageNum, Integer pageSize, String bmid, Date qssj, Date jssj);
+    PageInfo selectAllSbgh(Integer pageNum, Integer pageSize, String bmid, Date qssj, Date jssj, String lx);
 
     /*单个查归还记录*/
     EqSbghVO selectOneSbghByPrimaryKey(String id);
     /*根据设备编号查询设备调剂交接Id,所属科室和借出科室*/
-    EqSbghZbVO selectEq2ByBianhao(String sbbh);
+    EqSbghZbVO selectEq2ByBianhao(String sbbh, String lx);
 
     /*根据调剂交接id查询已经归还的设备编号*/
     PageInfo selectAllSbgh(Integer pageNum, Integer pageSize, String dpjjid);

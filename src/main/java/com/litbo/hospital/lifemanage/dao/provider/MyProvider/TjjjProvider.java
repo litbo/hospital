@@ -1,13 +1,13 @@
 package com.litbo.hospital.lifemanage.dao.provider.MyProvider;
 
-import com.litbo.hospital.lifemanage.bean.MyBean.EqTjjj;
 
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqTjjjVO;
 
 public class TjjjProvider {
     private static String str = "";
 
     /*交接记录录入*/
-    public String insertTjjj(EqTjjj tjjj) {
+    public String insertTjjj(EqTjjjVO vo) {
 
         str = "  insert into eq_tjjj (id, tjjj_bianma, tjjj_count, \n" +
                 "      tjjj_tprq, tjjj_tpsj, tjjj_dpgc, \n" +

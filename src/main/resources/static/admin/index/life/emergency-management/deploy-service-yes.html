@@ -40,17 +40,15 @@
                     , cols: [[ //表头
                         {type: "checkbox"}
                         // , {field: 'djhwId', title: 'XXX'}
-                        , {field: '', title: '调配单号',sort:true}
-                        , {field: '', title: '调配时间'}
-                        , {field: '', title: '指挥长'}
-                        , {field: '', title: '调出科室'}
-                        , {field: '', title: '调入科室'}
+                        , {field: 'tjDpsj', title: '调配时间'}
+                        , {field: 'tjZhz', title: '指挥长'}
+                        , {field: 'bmName', title: '调出科室'}
+                        , {field: 'zbSdks', title: '调入科室'}
                         , { title: '操作', align: 'center', toolbar: '#barDemo'}
                     ]]
-                    , url: "/lifeManage/sgWaitSwYsList"
-                    // , data: ['htid']
-                    // ,where:{ htid: "5" }
+                    , url: "/lifeManage/selectYsdDpd"
                     , method: "POST"
+                    ,where: { lx: "0"}
                     , request: {
                         pageName: 'pageNum',
                         limitName: 'pageSize'
@@ -71,9 +69,9 @@
                                     title: "table",
                                     event: 'edit',
                                     type: 2,
-                                    content: './child/shangwu-add.html',
+                                    content: './child/deploy-app-yes-deit.html',
                                     area: ['100%', '100%'],
-                                    dataUrl: ["htId","sgId","djhwId"]
+                                    dataUrl: ["id"]
                                 }]
                         })
                     }

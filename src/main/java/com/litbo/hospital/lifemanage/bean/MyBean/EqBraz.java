@@ -22,10 +22,13 @@ public class EqBraz {
     private Integer brAge;
 
     private String brSex;
-
     private String brJjdy;
+//    private List<String> brJjdys=new ArrayList<>();
 
-    private String brBqgc;
+
+   private String brBqgc;
+
+//    private List<String> brBqgcs=new ArrayList<>();
 
     private String brBqbh;
 

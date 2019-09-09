@@ -21,7 +21,7 @@ public interface TjjjMapper {
     /*全查或者根据部门名称查询并且按照日期排序*/
     @Select("<script>" +
         "select id,tjjj_drks,tjjj_dcks,tjjj_tprq" +
-        ",tjjj_drjbr,tjjj_dcjbr,eq_sfqbgh from eq_tjjj\n" +
+        ",tjjj_drjbr,tjjj_dcjbr,eq_sfqbgh,tjjj_jllx from eq_tjjj\n" +
         " <if test=\"_parameter != null\">\n" +
         " <where>\n" +
         "      <foreach collection=\"oredCriteria\" item=\"criteria\" separator=\"or\">\n" +

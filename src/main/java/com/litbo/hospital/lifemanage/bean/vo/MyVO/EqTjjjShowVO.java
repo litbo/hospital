@@ -12,9 +12,10 @@ public class EqTjjjShowVO {
     /*主键*/
     private String id;
 
+   private String  tjjjJllx;
     /*调入科室*/
     private String tjjjDrks;
-
+    private String tjjjDrksName;
     /*调配日期*/
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -22,6 +23,8 @@ public class EqTjjjShowVO {
 
     /*调出科室*/
     private String tjjjDcks;
+
+    private String tjjjDcksName;
 
     /*搜索起始时间*/
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")

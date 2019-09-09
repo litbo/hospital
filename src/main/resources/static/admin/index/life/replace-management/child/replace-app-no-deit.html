@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>查看单个调剂请求</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="layui-row">
+    <!--<fieldset class="layui-elem-field layui-field-title">
+        <legend>设备购置合同</legend>
+    </fieldset>-->
+    <div class="layui-tab">
+        <div class="layui-tab-content">
+            <form class="layui-form layui-form-pane" lay-filter="forms">
+                <div class="layui-collapse">
+                    <!--        布局1-->
+                    <div class="col-xs-6">
+                        <!--            调出科室-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">调出科室</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjDcksName" class="layui-input" disabled>
+                            </div>
+                        </div>
+                        <!--            联系人-->
+                        <div class="layui-form-item ">
+                            <label class="layui-form-label">联系人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjLxr" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            调出经办人-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">调出经办人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjDcjbr" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            替代到位时间-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">替代到位时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjDwsj" id="date1" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            使用时长-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">使用时长</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjSysc" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            指挥长-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">指挥长</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjZhz" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            总数量-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">总数量</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjTpsl" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <!--        布局2-->
+                    <div class="col-xs-6">
+                        <!--            装备状态检查-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">装备状态检查</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjZbztjc" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            附件检查-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">附件检查</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjFjjc" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            替代处理时间-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">替代处理时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tjDpsj" id="date2" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            调出科室签字图片-->
+                        <!-- <div class="layui-form-item">
+                             <label class="layui-form-label">调出科室签字图片</label>
+                             <div class="layui-input-block">
+                                 <input type="text" name="tjDcksurl" class="layui-input">
+                             </div>
+                         </div>-->
+
+                        <!--            调出科室签字图片-->
+                        <input type="hidden" name="tjDcksurl" id="tjDcksurl" class="layui-input">
+                        <div id="yc">
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">调出科室签字图片</label>
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                            id="sbzp">选择文件
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                            id="sbzp_sub">上传文件
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="layui-upload-list">
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>文件名</th>
+                                        <th>大小</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="demoList1"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--            签字图片-->
+                        <div class="layui-form-item layui-form-text" id="yc1">
+                            <label class="layui-form-label">签字图片</label>
+                            <div class="layui-input-block" id="sbImg">
+                                <!-- <img src="#" id="eqImg" />-->
+                            </div>
+                        </div>
+                    </div>
+                    <input class="layui-input" id="id" name="id" type="hidden">
+                    <input class="layui-input" id="tjDcjd" name="tjDcjd" type="hidden">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <table id="table" class="layui-hide" lay-filter="table1"></table>
+    </div>
+    <div class="col-xs-12"id="btn">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="Bc" id="Bc">保存</button>
+        <button class="layui-btn" lay-submit="" lay-filter="Sd" id="Sd">送达</button>
+    </div>
+</div>
+
+<script>
+    console.log($.getUrlParam("id"));
+    $("#id").val($.getUrlParam("id"));
+    formData = {};
+    formData.count1 = 0;
+    formData.eqSbzp = [];
+    renderMod = {
+        table: {
+            table: [
+                {
+                    // id: "table",
+                    cols: [[ //表头
+                        // {type: "checkbox"}
+                        {field: 'tjZbbm', title: '设备编码'}
+                        , {field: 'tjZbName', title: '装备名称'}
+                        , {field: 'tjGgxh', title: '规格/型号'}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
+                    }
+                }
+
+            ]
+
+        },
+        form: {
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/lifeManage/selectOneZbdc",
+                    type: "POST",
+                    data: {id: $.getUrlParam("id")},
+                    parse: ["dczblist"],
+                    tableId: ["table"]
+                },
+                func: function (data, form) {
+                    /*$("#btn button").click(function () {
+                        console.log(this.id);
+                    });*/
+                    if (data.tjDcksurl) {
+                        $.cookie("lzh", $("#id").val());
+                        // $.cookie("olds", olds.toString());
+                        var newSb = data.tjDcksurl.split(",");
+                        // console.log(newSb);
+                        var $sImg = $("#sbImg");
+                        $sImg.html($("<ul>"));
+                        for (var i = 0; i < newSb.length - 1; i++) {
+                            console.log(newSb[i]);
+                            console.log("\n");
+                            $sImg.find("ul").append(
+                                $("<li>").append(
+                                    $("<img>").attr({"src": newSb[i], "class": "showImg"})
+                                )
+                            )
+                        }
+                    }
+                    var t = $("#tjDcksurl").val();
+                    // t = t.replace(/\s*/g, "");
+                    if (t == "") {
+                        $("#yc1").hide();
+                        $("#yc").show();
+                    } else {
+                        $("#yc").hide();
+                        $("#yc1").show();
+                    }
+                }
+            },
+            submit: {
+                // filter: "Bc",
+                form: {
+                    url: "/lifeManage/updateOneZbdc",
+                    type: "POST",
+                    data: ["tjDcksName", "tjLxr", "tjDcjbr", "tjDwsj", "tjSysc", "tjZhz", "tjTpsl", "tjZbztjc", "tjFjjc", "tjDpsj", "tjDcksurl"
+                        , "id", "tjDcjd"],
+                    contentType: "application/json",
+                    reload: "parent"
+                    // reload: true
+                }
+            },
+            date: [
+                {
+                    elem: "#date1",
+                    value: today0,
+                    type: "date",
+                    format: 'yyyy-MM-dd'
+                },
+                {
+                    elem: "#date2",
+                    value: today0,
+                    type: "date",
+                    format: 'yyyy-MM-dd'
+                }
+            ],
+            file: [
+                {
+                    elem: "#sbzp",
+                    url: "/lifeManage/importdjhwimgurls",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    multiple: true,
+                    auto: false,
+                    bindAction: "#sbzp_sub",
+                    number: 6,
+                    field: "imgs",
+                    choose: function (obj) {
+                        if (formData.count1 > 6) {
+                            putMsg({
+                                alert: "最多只能上传6张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#sbzp").next().val("");
+                                    formData.count1--;
+                                    layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList1").append(tr);
+                            formData.count1++;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData.eqSbzp.push(res.data);
+                            var tr = $("#demoList1").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            $("#tjDcksurl").val($("#tjDcksurl").val() + res.data);
+                            console.log($("#tjDcksurl").val())
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList1").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
+                    }
+                }
+            ]
+        }
+    };
+    $("#btn button").click(function () {
+        console.log(this.id);
+        if (this.id==="Sd"){
+            $("#tjDcjd").val("1");
+            if ($("#tjLxr").val() === ""||$("#tjDcjbr").val()===""||$("#tjSysc").val()===""||$("#tjZbztjc").val()===""
+                ||$("#tjFjjc").val()===""||$("#tjDcksurl").val()===""){
+                // console.log(getFormValue());
+                // layer.open("必填项不能为空");
+                // alert("必填项不能为空")
+                // attr("xxx")
+                layer.alert("必填项不能为空");
+                return false
+            }
+        }
+    })
+
+    /*layui.use('form', function() {
+    var form = layui.form;
+    form.on('submit(*)', function(data){
+    console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+    })
+    })
+
+        /* $(function () {
+             renderMod = {
+                 form: {
+                     submit: {
+                         filter: "Sd",
+                         form: {
+                             url: "/lifeManage/updateOneZbdc",
+                             type: "POST",
+                             data: ["tjDcksName", "tjLxr", "tjDcjbr", "tjDwsj", "tjSysc", "tjZhz", "tjTpsl", "tjZbztjc", "tjFjjc", "tjDpsj", "tjDcksurl"
+                                 , "id", "tjDcjd"],
+                             contentType: "application/json",
+                             reload: "parent"
+                             // reload: true
+                         }
+                     }
+                 }
+             }
+         });*/
+</script>
+<!--<script type="text/javascript">
+    function SdAction() {
+        // alert("111");
+        document.forms.action = "/lifeManage/updateOneZbdc";
+        document.forms.submit();
+    }
+</script>-->
+</body>
+
+</html>

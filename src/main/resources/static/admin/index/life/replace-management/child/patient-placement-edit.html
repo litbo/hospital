@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>查看单个调剂请求</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<div class="layui-row">
+    <div class="layui-tab">
+        <div class="layui-tab-content">
+            <form class="layui-form layui-form-pane" lay-filter="forms">
+                <div class="layui-collapse">
+
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>病人基本情况</legend>
+                    </fieldset>
+                    <!--        布局1-->
+                    <div class="col-xs-6">
+                        <!--            记录日期-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">记录日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="brSj" id="date1" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            姓名-->
+                        <div class="layui-form-item ">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="brName" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            年龄-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">年龄</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="brAge" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            性别-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="brSex" id="brSex1" lay-filter="su" value="0" title="男">
+                                <input type="radio" name="brSex" id="brSex2" lay-filter="su" value="1" title="女">
+                            </div>
+                        </div>
+                    </div>
+                    <!--        布局2-->
+                    <div class="col-xs-6">
+                        <!--            住院门诊号-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">住院门诊号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="brZrmz" id="brZrmz" class="layui-input">
+                            </div>
+                        </div>
+                        <!--            疾病-->
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">疾病</label>
+                            <div class="layui-input-block">
+                                <textarea type="text" name="brJibing" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>病人救治措施</legend>
+                        </fieldset>
+                        <!--                    紧急代用-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">紧急代用</label>
+                            <div class="layui-input-block" id="sa">
+                                <input type="checkbox" name="brJjdy" value="0" id="brJjdy0" lay-filter="Fu" title="呼吸球和面罩">
+                                <input type="checkbox" name="brJjdy" value="1" id="brJjdy1" lay-filter="Fu" title="注射泵">
+                                <input type="checkbox" name="brJjdy" value="2" id="brJjdy2" lay-filter="Fu" title="吸痰器">
+                                <input type="checkbox" name="brJjdy" value="3" id="brJjdy3" lay-filter="Fu" title="人工推注">
+                                <input type="checkbox" name="brJjdy" value="4" id="brJjdy4" lay-filter="Fu" title="输液泵">
+                            </div>
+                        </div>
+                        <!--                    病情观察-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">病情观察</label>
+                            <div class="layui-input-block"id="sas">
+                                <input type="checkbox" name="brBqgc" id="brBqgc0" lay-filter="Fu1" value="0" title="人工看护">
+                                <input type="checkbox" name="brBqgc" id="brBqgc1" lay-filter="Fu1" value="1" title="严密观察">
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="id" name="id">
+                        <input type="hidden" name="brBxid" id="brBxid">
+                        <!--                    病情变化-->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">病情变化</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="brBqbh" value="0" title="未见变化" checked>
+                                <input type="radio" name="brBqbh" value="1" title="稍有波动">
+                                <input type="radio" name="brBqbh" value="2" title="略有改善">
+                                <input type="radio" name="brBqbh" value="3" title="病情加重">
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>确认签名</legend>
+                    </fieldset>
+                    <div class="col-xs-6">
+                        <!--                                    医生签名-->
+                        <input type="hidden" name="brYisheng" value="" id="brYisheng">
+                        <div id="yc">
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">医生签名</label>
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                            id="sbzp">选择文件
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                            id="sbzp_sub">上传文件
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="layui-upload-list">
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>文件名</th>
+                                        <th>大小</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="demoList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--            医生签名-->
+                        <div class="layui-form-item layui-form-text" id="ycs">
+                            <label class="layui-form-label">签字图片</label>
+                            <div class="layui-input-block" id="sbImg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <!--                                    护士签名-->
+                        <input type="hidden" name="brHushi" value="" id="brHushi">
+                        <div id="yc1">
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">护士签名</label>
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                            id="sbzp1">选择文件
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                            id="sbzp_sub1">上传文件
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="layui-upload-list">
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th>文件名</th>
+                                        <th>大小</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="demoList1"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--            医生签名-->
+                        <div class="layui-form-item layui-form-text" id="yc1s">
+                            <label class="layui-form-label">签字图片</label>
+                            <div class="layui-input-block" id="sbImg1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--<input type="hidden" id="brJjdy" name="xxx">-->
+    <div class="col-xs-12">
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="Bc" id="Bc">保存</button>
+    </div>
+</div>
+
+<script>
+    /*$("#brJjdy0").prop("checked","checked");
+    $("#brJjdy1").prop("checked","checked");*/
+    // $("#brJjdy1").prop("checked",true);
+    var cc = $.getUrlParam("id");
+    $("#id").val(cc);
+    formData = {};
+    formData.count1 = 0;
+    formData.eqSbzp = [];
+    formData1 = {};
+    formData1.count1 = 0;
+    formData1.eqSbzp = [];
+    renderMod = {
+        form: {
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/lifeManage/selectBrazById",
+                    type: "POST",
+                    data: {id: $.getUrlParam("id")}
+                },
+                func: function (data, form) {
+                    if (data.brJjdy.indexOf("0") >= "0") {
+                        $("#brJjdy0").attr("checked", true);
+                        form.render();
+                    }
+                    if (data.brJjdy.indexOf("1") >= "0") {
+                        $("#brJjdy1").attr("checked", true);
+                        form.render();
+                    }
+                    if (data.brJjdy.indexOf("2") >= "0") {
+                        $("#brJjdy2").attr("checked", true);
+                        form.render();
+                    }
+                    if (data.brJjdy.indexOf("3") >= "0") {
+                        $("#brJjdy3").attr("checked", true);
+                        form.render();
+                    }
+                    if (data.brJjdy.indexOf("4") >= "0") {
+                        $("#brJjdy4").attr("checked", true);
+                        form.render();
+                    }
+                    if (data.brBqgc.indexOf("0") >= "0") {
+                        $("#brBqgc0").attr("checked", true);
+                        form.render();
+                    }
+                    if (data.brBqgc.indexOf("1") >= "0") {
+                        $("#brBqgc1").attr("checked", true);
+                        form.render();
+                    }
+                    if (data.brYisheng) {
+                        var newSb = data.brYisheng.split(",");
+                        var $sImg = $("#sbImg");
+                        $sImg.html($("<ul>"));
+                        for (var i = 0; i < newSb.length - 1; i++) {
+                            $sImg.find("ul").append(
+                                $("<li>").append(
+                                    $("<img>").attr({"src": newSb[i], "class": "showImg"})
+                                )
+                            )
+                        }
+                    }
+                    if (data.brHushi) {
+                        var newSb1 = data.brHushi.split(",");
+                        var $sImg1 = $("#sbImg1");
+                        $sImg1.html($("<ul>"));
+                        for (var j = 0; j < newSb1.length - 1; j++) {
+                            $sImg1.find("ul").append(
+                                $("<li>").append(
+                                    $("<img>").attr({"src": newSb1[i], "class": "showImg"})
+                                )
+                            )
+                        }
+                    }
+                    var t = $("#brYisheng").val();
+                    if (t == "") {
+                        $("#ycs").hide();
+                        $("#yc").show();
+                    } else {
+                        $("#yc").hide();
+                        $("#ycs").show();
+                    }
+                    var p = $("#brHushi").val();
+                    if (p == "") {
+                        $("#yc1s").hide();
+                        $("#yc1").show();
+                    } else {
+                        $("#yc1").hide();
+                        $("#yc1s").show();
+                    }
+                }
+            },
+            submit: {
+                // filter: "Bc",
+                before: function (param) {
+                    var arr=[];
+                    var arrs=[];
+                    $("#sa input:checkbox[name='brJjdy']:checked").each(function(i){
+                        arr[i]=$(this).val();
+                    });
+                    $("#sas input:checkbox[name='brBqgc']:checked").each(function(i){
+                        arrs[i]=$(this).val();
+                    });
+                    console.log(arr);
+                     arr.join(',');
+                     arrs.join(',');
+                    return param = {
+                        1: arr.join(','),
+                        2: arrs.join(',')
+                    };
+
+
+                },
+                form: {
+                    url: "/lifeManage/updateBraz",
+                    type: "POST",
+                    data: ["brSj", "brName", "brAge", "brSex", "brZrmz", "brJibing", "brJjdy",
+                        "brBqgc", "brBqbh", "brYisheng", "brHushi"
+                        , "id", "brBxid"],
+                    contentType: "application/json",
+                    reload: "parent",
+                    param: {
+                        1: "brJjdy",
+                        2: "brBqgc"
+                    }
+                }
+            },
+            date: [
+                {
+                    elem: "#date1",
+                    value: today0,
+                    type: "date",
+                    format: 'yyyy-MM-dd'
+                }
+            ],
+            file: [
+                {
+                    elem: "#sbzp",
+                    url: "/lifeManage/importdjhwimgurls",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    multiple: true,
+                    auto: false,
+                    bindAction: "#sbzp_sub",
+                    number: 6,
+                    field: "imgs",
+                    choose: function (obj) {
+                        if (formData.count1 > 6) {
+                            putMsg({
+                                alert: "最多只能上传6张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#sbzp").next().val("");
+                                    formData.count1--;
+                                    layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList").append(tr);
+                            formData.count1++;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData.eqSbzp.push(res.data);
+                            var tr = $("#demoList").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            $("#brYisheng").val($("#brYisheng").val() + res.data);
+                            console.log($("#brYisheng").val())
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
+                    }
+                },
+                {
+                    elem: "#sbzp1",
+                    url: "/lifeManage/importdjhwimgurls",
+                    accept: "images",
+                    acceptMime: "image/!*",
+                    multiple: true,
+                    auto: false,
+                    bindAction: "#sbzp_sub1",
+                    number: 6,
+                    field: "imgs",
+                    choose: function (obj) {
+                        if (formData1.count1 > 6) {
+                            putMsg({
+                                alert: "最多只能上传6张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#sbzp1").next().val("");
+                                    formData1.count1--;
+                                    layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList1").append(tr);
+                            formData1.count1++;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData1.eqSbzp.push(res.data);
+                            var tr = $("#demoList1").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            $("#brHushi").val($("#brHushi").val() + res.data);
+                            console.log($("#brHushi").val())
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList1").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
+                    }
+                }]
+        }
+    };
+   /* layui.use('form', function () {
+        var form = layui.form;
+        form.on('checkbox(Fu)', function (data) {
+            console.log(data);
+            // console.log(data.value);
+            // console.log(data.elem.checked);
+            // console.log(data.elem);
+            if (data.elem.checked === "true") {
+                da.push(data.value)
+            }
+        });
+        form.on('checkbox(Fu1)', function (data) {
+            da1.push(data.value)
+        });
+    })*/
+</script>
+</body>
+</html>

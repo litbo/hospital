@@ -39,74 +39,154 @@
 
 <div class="layui-row">
     <div class="col-xs-12">
-    <table id="table" class="layui-hide" lay-filter="table1"></table>
+        <table  class="layui-hide" id="table" lay-filter="table"></table>
     </div>
 </div>
 
-<script type="text/html" id="toolBar">
+<script type="text/html" id="toolbar">
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="" placeholder="部门">
+            <input class="layui-input" name="bmname" placeholder="部门名称">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
+        <button class="layui-btn"  lay-submit="">调配</button>
     </div>
 </script>
 
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">调配</a>
-</script>
-
 <script>
-    renderMod = {
-        table: {
-            table: [
-                {
-                    cols: [[ //表头
-                        {type: "checkbox"}
-                        , {field: '', title: '设备编号'}
-                        , {field: '', title: '设备名称'}
-                        , {field: '', title: '部门'}
-                        , {field: '', title: '规格'}
-                        , {field: '', title: '型号'}
-                        , {field: '', title: '院区'}
-                        , {title: '操作', align: 'center', toolbar: '#bar'}
-                    ]]
-                    , url: "/lifeManage/sgWaitSwYsList"
-                    , method: "POST"
-                    , request: {
-                        pageName: 'pageNum',
-                        limitName: 'pageSize'
-                    }
-                    , parseData: function (res) { //res 即为原始返回的数据
-                        return {
-                            "code": res.code, //解析接口状态
-                            "msg": res.msg, //解析提示文本
-                            "data": res.data.list, //解析数据列表
-                            "count": res.data.total
-                        }
-                    }
-                    , done: function (obj) {
-                        console.log("123");
-                        tableFunc({
-                            toolFunc: [
-                                {
-                                    title: "table",
-                                    event: 'YS',
-                                    type: 2,
-                                    content: '',
-                                    area: ['100%', '100%'],
-                                    dataUrl: ["htId"]
-                                }]
-                        })
-                    }
-                }
+    var list=new Array();
+    var emp=tempValue("rl", "emp", false);
 
-            ]
+    var com = $.cookie("lzh");
+    var a=$.getUrlParam("name");
+    var oldsbbh=$.getUrlParam("sbbh");
+    var olduuid=$.getUrlParam("uuid");
+    var cou=$.getUrlParam("count");
+    var ysl=$.getUrlParam("yslcount");
+    var jian=cou-ysl;
+     layui.use('table', function() {
+         var table = layui.table;
+         renderMod = {
+             table: {
+                 table: [
+                     {
+                         cols: [[ //表头
+                             {type: "checkbox"}
+                             , {field: 'eqSbbh', title: '设备编号'}
+                             , {field: 'eqName', title: '设备名称'}
+                             , {field: 'bmName', title: '部门'}
+                             , {field: 'eqGg', title: '规格'}
+                             , {field: 'eqXh', title: '型号'}
+                             , {field: 'eqYq', title: '院区'}
+                             // , {title: '操作', align: 'center', toolbar: '#bar'}
+                         ]]
+                         , id: 'table'
+                         , toolbar: '#toolbar'
+                         , url: "/lifeManage/selectAllEqInfo"
+                         , where: {sbName: a}
+                         , method: "POST"
+                         , request: {
+                             pageName: 'pageNum',
+                             limitName: 'pageSize'
+                         }
+                         , parseData: function (res) { //res 即为原始返回的数据
+                             return {
+                                 "code": res.code, //解析接口状态
+                                 "msg": res.msg, //解析提示文本
+                                 "data": res.data.list, //解析数据列表
+                                 "count": res.data.total
+                             }
+                         }
+                         , done: function () {
+                         }
+                     }
+                 ]
+                 , reSet: [
+                     {
+                         url: "/lifeManage/selectAllEqInfo",
+                         type: "reload",
+                         tid: "table",
+                         data: ["bmname"],
+                         method: "POST"
 
-        }
-    }
+                     }
+                 ]
+             },
+             form: {
+                 submit: {
+                     before: function (param) {
+                         list=new Array();
+                         var checkStatus = table.checkStatus("table"); //idTest 即为基础参数 id 对应的值
+                         var length = checkStatus.data.length;
+                         var data = checkStatus.data;
+                         for(var i=0;i<length;i++) {
+                             var bmId = data[i].bmId;
+                             var eqSbbh = data[i].eqSbbh;
+                             var eqName = data[i].eqName;
+                             var object=new Object();
+                             object.tjSqtj=com;
+                             object.tjDcks=bmId;
+                             object.tjZbbm=eqSbbh;
+                             object.tjDclx='0';
+                             object.zbName=eqName;
+                             object.oldSbbh=oldsbbh;
+                             object.tjSqzbbms=olduuid;
+                             object.uuid=olduuid;
+                             object.tjZhz=emp.userXm;
+                             object.tjGg=data[i].eqGg;
+                             object.tjXh=data[i].eqXh;
+                             list.push(object)
+                         }
+                         console.log(list.length);
+                         console.log(jian);
+                         if (list.length>jian)
+                         {
+                             putMsg({
+                                 alert: "调配数量不能大于" + jian + "条！"
+
+                             });
+                             return false;
+                         }
+                         $.ajax({
+                             type: "POST",
+                             data: JSON.stringify(list),
+                             url: "/lifeManage/insertZbdc",
+
+                             contentType: "application/json",
+                             success: function (result) {
+                                 // alert("success")
+                                 layer.alert("调配成功！")
+                                 list=new Array();
+                                 setTimeout(function(){
+                                     window.top.location.reload();
+                                 },1000)
+
+                                 // console.log(result.data);
+                             },
+                             error: function (e) {
+                                 alert("error");
+                                 list=new Array();
+                                 location.reload();
+                             }
+                         })
+                     },
+                     form: {
+                         url: "/lifeManage/addEqLpjHt",
+                         type: "POST",
+                         data: ["eqSbbh"],
+                         contentType: "application/json",
+                         // reload: "parent"
+                         reload: true
+                     }
+                 }
+             }
+         }
+     })
+    /* })*/
+
 
 </script>
+
 </body>
 
 </html>

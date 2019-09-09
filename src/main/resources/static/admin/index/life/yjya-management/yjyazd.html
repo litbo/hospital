@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>应急预案制订</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="" style="margin-top: 20px;" lay-filter="forms">
+
+    <!--第一行-->
+    <div class="layui-form-item">
+        <div class="layui-inline spanDiv" style="width: 380px;">
+            <label class="layui-form-label" style="width: 100px;">预案名称</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 20px;width: 200px;">
+                <input type="text" name="yjyaName" autocomplete="off" placeholder="" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-inline" style="width: 400px;">
+            <label class="layui-form-label" style="width: 114px;">类别</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 26px;width: 220px;">
+                <input id="yjyaLx" type="text" name="yjyaLx" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <!--第二行-->
+    <div class="layui-form-item">
+        <div class="layui-inline" style="width: 380px;">
+            <label class="layui-form-label" style="width: 86px;">拟稿人</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 34px;width: 200px;">
+                <input id="yjyaNgr" type="text" name="yjyaNgr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline" style="width: 400px;">
+            <label class="layui-form-label" style="width: 140px;">拟稿日期</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 220px;">
+                <input id="yjyaNgrq" type="text" name="yjyaNgrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <!--第三行-->
+    <div class="layui-form-item">
+        <div class="layui-inline" style="width: 380px;">
+            <label class="layui-form-label" style="width: 86px;">总页数</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 34px;width: 200px;">
+                <input id="yjyaZys" type="text" name="yjyaZys" lay-verify="required" autocomplete="off" placeholder="" class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline" style="width: 400px;">
+            <label class="layui-form-label" style="width: 126px;">版本号</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 14px;width: 220px;">
+                <input id="yjyaBbh" type="text" name="yjyaBbh" lay-verify="required" autocomplete="off" placeholder="" class="layui-input" >
+            </div>
+        </div>
+    </div>
+
+    <!--第四行-->
+    <div class="layui-form-item">
+        <div class="layui-inline spanDiv" style="width: 380px;position: relative;">
+            <label class="layui-form-label" style="width: 72px;">模板</label>
+            <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+                <p class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm"  data-method="notice" style="margin-top: 5px;margin-left: 50px;">选择</p>
+            </div>
+            <input class="equipmentSpan" readonly style="border:0;outline:none;background-color: #fff;position: absolute;top: 10px;right: 10px;">
+            <input type="hidden" class="mbNr">
+        </div>
+        <div class="layui-inline" style="width: 380px;">
+            <a class="layui-btn layui-btn-sm" id="drmb" style="margin-left: 100px;">导入模板</a>
+        </div>
+    </div>
+
+    <!--第五行-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">预案内容</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 20px;width: 700px;">
+                <textarea class="layui-textarea" id="yjyaNr"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <input id="yjyaFbbm" type="hidden" name="yjyaFbbm" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+
+    <!--按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+
+    var emp = tempValue("rl", "emp", false);
+    // console.log(emp);
+    // $("#pdCzr").val(emp.userXm);
+    var index;
+
+    //console.log(bmUrl);
+    renderMod.form = {
+        val:{
+            filter:"forms",//与form标签lay-filter相同
+            get:{
+                url:"/lifeManage/selectYalogByBh",
+                type:"POST",
+                data:{bh:$.getUrlParam("yjyaBh")}
+            },
+            func:function(data) {
+                // 获取时间
+                function CurentTime()
+                {
+                    var now = new Date();
+
+                    var year = now.getFullYear();       //年
+                    var month = now.getMonth() + 1;     //月
+                    var day = now.getDate();            //日
+
+                    var clock = year + "-";
+
+                    if(month < 10)
+                        clock += "0";
+
+                    clock += month + "-";
+
+                    if(day < 10)
+                        clock += "0";
+
+                    clock += day;
+
+                    return(clock);
+                }
+                $("#yjyaNgr").val(emp.userXm);
+                $("#yjyaLx").val("应急预案");
+                $("#yjyaNgrq").val(CurentTime());
+                $("#yjyaFbbm").val(emp.bmId);
+                $("#yjyaBbh ").val("V1.0");
+                // console.log(data);
+            }
+        },
+        date:{
+            elem:"#yjyaZpjsqrq",
+            format:'yyyy-MM-dd',
+            isInitValue:true,
+            value:today
+        }
+    };
+
+    // 表单
+    layui.use(['form','layedit'], function(){
+
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+        index = layedit.build('yjyaNr'); //建立编辑器
+
+        //触发事件
+        var active = {
+            notice: function(){
+                layer.open({
+                    type: 2,
+                    title: '选择',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['1000px', '90%'],
+                    content: 'child/choose.html' //iframe的url
+                });
+            }
+        };
+
+        $('#layerDemo .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+
+
+
+        form.on('submit(demo1)', function(data){
+
+            var obj = {yjyaNr:layedit.getContent(index)};
+
+            var dataObj = Object.assign(obj,data.field);
+
+            // console.log(dataObj);
+
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: '/lifeManage/insertYjyaZd',
+                data: JSON.stringify(dataObj),
+                contentType: 'application/json; charset=UTF-8',
+                success: function(result) {
+                    layui.layer.alert('提交成功!');
+                    window.parent.location.reload();
+                },
+                error:function(){
+                    layer.alert(JSON.stringify(data.field), {
+                        title: '最终的提交信息'
+                    });
+                    alert("error");
+                }
+            });
+            return false;
+        });
+
+        $('#drmb').on('click', function(){
+            // console.log($(".mbNr").val());
+            layedit.setContent(index, $(".mbNr").val());
+        });
+    });
+
+
+
+
+
+</script>
+
+</body>
+</html>

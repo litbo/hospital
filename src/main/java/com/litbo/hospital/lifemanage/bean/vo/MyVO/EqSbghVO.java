@@ -18,10 +18,10 @@ public class EqSbghVO {
     private String eqZbbm;
 
     /*装备编码集合*/
-    private List<String> zbbmlist;
+    private List<String> zbbmlist = new ArrayList<>();
 
     /*展示的数据（装备名称，规格,型号，装备编码）*/
-    private List<EqSbghZbVO> list = new ArrayList<>();
+    private List<EqSbghZbVO> asdlist = new ArrayList<>();
 
     /*装备数量*/
     private Integer eqCount;

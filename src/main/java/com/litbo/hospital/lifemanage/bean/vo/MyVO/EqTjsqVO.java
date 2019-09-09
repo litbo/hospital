@@ -46,6 +46,10 @@ public class EqTjsqVO {
     /*性质(是否演练，仅调剂使用)*/
     private String tjSfyl;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tjTprq;
+
     /*
     应急替换申请状态(紧急报停(成功/失败),
    科室搜查(未查找到可用设备,查找到可用设备),

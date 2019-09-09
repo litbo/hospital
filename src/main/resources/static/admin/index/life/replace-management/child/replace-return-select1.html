@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>查看单个归还请求</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form layui-form-pane" lay-filter="forms">
+    <div class="layui-row" style="margin: 20px">
+        <div class="col-xs-12">
+            <div class="col-xs-6">
+<!--                归还科室-->
+                <div class="layui-form-item ">
+                    <label class="layui-form-label">归还科室</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="eqGhksName" id="eqGhksName" disabled
+                               autocomplete="off" class="layui-input">
+                    </div>
+<!--                    drksName-->
+                </div>
+                <input type="hidden" name="eqGhks" id="eqGhks" class="layui-input">
+<!--                归还日期-->
+                <div class="layui-form-item ">
+                    <label class="layui-form-label">归还日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="eqGhrq" readonly="readonly" id="date" lay-verify="date"
+                               placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input eqGhrq">
+                    </div>
+                </div>
+
+                <!--                                    归还经办人签字图片-->
+                <input type="hidden" name="eqDrurl" value="" id="eqDrurl">
+                <div class="layui-form-item layui-form-text" id="yc">
+                    <label class="layui-form-label">归还经办人签字图片</label>
+                    <div class="layui-input-block" id="sbImg">
+                        <!-- <img src="#" id="eqImg" />-->
+                    </div>
+                </div>
+
+                <!--归还id-->
+                <input type="hidden" name="eqDpjjid" id="eqDpjjid" class="layui-input">
+                <input type="hidden" autocomplete="off" value="0" name="interest" class="layui-input">
+            </div>
+            <div class="col-xs-6">
+<!--                接收科室-->
+                <div class="layui-form-item ">
+                    <label class="layui-form-label">接收科室</label>
+                    <div class="layui-input-block">
+                        <input type="text"  name="eqJsksName" id="eqJsksName" disabled class="layui-input">
+                    </div>
+                </div>
+<!--                dcksName-->
+                <input type="hidden"  name="eqJsks" id="eqJsks"  class="layui-input">
+
+<!--                检查设备-->
+                <div class="layui-form-item ">
+                    <label class="layui-form-label">检查设备</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="eqZbjc" id="eqZbjc" disabled class="layui-input">
+                    </div>
+                </div>
+
+
+                <!--                                    接收经办人签字图片-->
+                <input type="hidden" name="eqDcurl" value="" id="eqDcurl">
+                <div class="layui-form-item layui-form-text" id="yc1">
+                    <label class="layui-form-label">接收经办人签字图片</label>
+                    <div class="layui-input-block" id="sbImg1">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="col-xs-12" style="margin-bottom: 10px;">
+    <table id="table" lay-filter="table1"></table>
+</div>
+<script>
+    $("#eqGhksName").val($.getUrlParam("eqGhksName"));
+    $("#eqJsksName").val($.getUrlParam("eqJsksName"));
+    // console.log($.getUrlParam("id"));
+    formData = {};
+    formData.count1 = 0;
+    formData.eqSbzp = [];
+    formData1 = {};
+    formData1.count1 = 0;
+    formData1.eqSbzp = [];
+    renderMod = {
+        addTable: {
+            table: [
+                {
+                    elem: "#table",
+                    id: "table",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'eqSbbh', title: '设备编号', minWidth: 150}
+                        , {field: 'eqName', title: '设备名称', minWidth: 150}
+                        , {field: 'eqGg', title: '设备规格', minWidth: 150}
+                        , {field: 'eqXh', title: '设备型号', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
+                    }
+                }
+
+            ]
+        },
+        form: {
+           val:{
+               filter: "forms",
+               get: {
+                   url: "/lifeManage/selectOneSbghByPrimaryKey",
+                   type: "POST",
+                   data: {id: $.getUrlParam("id")},
+                   parse: ["asdlist"],
+                   tableId: ["table"]
+               },
+               func: function (data, form) {
+                   console.log(data)
+                   if (data.eqDrurl) {
+                       var newSb = data.eqDrurl.split(",");
+                       var $sImg = $("#sbImg");
+                       $sImg.html($("<ul>"));
+                       for (var i = 0; i < newSb.length - 1; i++) {
+                           $sImg.find("ul").append(
+                               $("<li>").append(
+                                   $("<img>").attr({"src": newSb[i], "class": "showImg"})
+                               )
+                           )
+                       }
+                   }
+                   if (data.eqDcurl) {
+                       var newSb1 = data.eqDcurl.split(",");
+                       var $sImg1 = $("#sbImg1");
+                       $sImg1.html($("<ul>"));
+                       for (var j = 0; j < newSb1.length - 1; j++) {
+                           $sImg1.find("ul").append(
+                               $("<li>").append(
+                                   $("<img>").attr({"src": newSb1[j], "class": "showImg"})
+                               )
+                           )
+                       }
+                   }
+               },
+            date: [
+                {
+                    elem: '#date',
+                    value: today0
+                }
+            ]
+           }
+        }
+    };
+</script>
+</body>
+</html>

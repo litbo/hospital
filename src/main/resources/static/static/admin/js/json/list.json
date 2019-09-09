@@ -819,7 +819,7 @@
             "children": [
 
               {
-                "title": "应急预案管理",
+                "title": "预案管理",
                 "url": "./table.html",
                 "icon": "pencil-alt",
                 "id": "3201",
@@ -827,20 +827,14 @@
                 "children": [
                   {
                     "title": "应急预案制订",
-                    "url": "./table.html",
+                    "url": "./life/yjya-management/yjyazd.html",
                     "id": "32010",
                     "shiro": "SYGL"
                   },
                   {
                     "title": "应急预案审核",
-                    "url": "./table.html",
+                    "url": "./life/yjya-management/yjyash.html",
                     "id": "32011",
-                    "shiro": "SYGL"
-                  },
-                  {
-                    "title": "应急预案再评价",
-                    "url": "./table.html",
-                    "id": "32012",
                     "shiro": "SYGL"
                   }
                 ]
@@ -854,13 +848,13 @@
                 "children": [
                   {
                     "title": "模板录入",
-                    "url": "./table.html",
+                    "url": "./life/yjya-management/mblr.html",
                     "id": "32040",
                     "shiro": "SYGL"
                   },
                   {
                     "title": "模板列表",
-                    "url": "./table.html",
+                    "url": "./life/yjya-management/mblb.html",
                     "id": "32041",
                     "shiro": "SYGL"
                   }
@@ -868,7 +862,7 @@
               },
               {
                 "title": "统计查询",
-                "url": "./table.html",
+                "url": "./life/yjya-management/statistical-query.html",
                 "icon": "search",
                 "id": "3200",
                 "shiro": "SYGL"
@@ -885,78 +879,105 @@
             "shiro": "SYGL",
             "children": [
               {
-                "title": "紧急报停",
+                "title": "设备替代",
                 "url": "./table.html",
-                "icon": "minus-circle",
+                "icon": "puzzle-piece",
                 "id": "3210",
                 "shiro": "SYGL",
-                "children": [
+                "children":[
                   {
-                    "title": "紧急报停搜查",
-                    "url": "./table.html",
+                    "title": "替代申请",
+                    "url": "./life/replace-management/replace-app.html",
                     "id": "32100",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "替代申请列表",
+                    "url": "./life/replace-management/replace-app-edit.html",
+                    "id": "32201",
                     "shiro": "SYGL"
                   }
                 ]
               },
               {
-                "title": "替代设备搜查",
+                "title": "设备送达",
                 "url": "./table.html",
-                "icon": "screwdriver",
+                "icon": "check-circle",
                 "id": "3211",
                 "shiro": "SYGL",
                 "children": [
                   {
-                    "title": "搜查设备",
-                    "url": "./table.html",
+                    "title": "未送达替代单",
+                    "url": "./life/replace-management/replace-service-no.html",
                     "id": "32110",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "已送达替代单",
+                    "url": "./life/replace-management/replace-service-yes.html",
+                    "id": "32111",
                     "shiro": "SYGL"
                   }
                 ]
               },
               {
-                "title": "设备替换完成",
+                "title": "替代交接",
                 "url": "./table.html",
-                "icon": "check",
+                "icon": "envelope-open-text",
                 "id": "3212",
                 "shiro": "SYGL",
-                "children": [
+                "children":[
                   {
-                    "title": "等待替换",
-                    "url": "./table.html",
+                    "title": "交接录入",
+                    "url": "./life/replace-management/handovers-add.html",
                     "id": "32120",
                     "shiro": "SYGL"
                   },
                   {
-                    "title": "替换完成",
-                    "url": "./table.html",
+                    "title": "交接查询",
+                    "url": "./life/replace-management/handovers-edit.html",
                     "id": "32121",
                     "shiro": "SYGL"
                   }
                 ]
               },
               {
-                "title": "病人安置记录",
+                "title": "设备归还",
                 "url": "./table.html",
-                "icon": "clipboard-list",
+                "icon": "undo-alt",
                 "id": "3213",
-                "shiro": "SYGL"
+                "shiro": "SYGL",
+                "children": [
+                  {
+                    "title": "设备归还录入",
+                    "url": "./life/replace-management/raplace-eq-return.html",
+                    "id": "32130",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "归还查询",
+                    "url": "./life/replace-management/replace-return-select.html",
+                    "id": "32131",
+                    "shiro": "SYGL"
+                  }
+
+                ]
               },
               {
-                "title": "总结报告",
+                "title": "调配跟踪",
                 "url": "./table.html",
-                "icon": "flag",
+                "icon": "umbrella-beach",
                 "id": "3214",
                 "shiro": "SYGL",
                 "children": [
                   {
-                    "title": "总结评价",
+                    "title": "调配跟踪",
                     "url": "./table.html",
                     "id": "32140",
                     "shiro": "SYGL"
                   },
                   {
-                    "title": "应急替代报告",
+                    "title": "使用监视",
                     "url": "./table.html",
                     "id": "32141",
                     "shiro": "SYGL"
@@ -964,19 +985,11 @@
                 ]
               },
               {
-                "title": "查询&统计",
-                "url": "./table.html",
-                "icon": "chart-pie",
+                "title": "病人安置记录",
+                "url": "./life/replace-management/patient-placement.html",
+                "icon": "umbrella-beach",
                 "id": "3215",
-                "shiro": "SYGL",
-                "children": [
-                  {
-                    "title": "搜查结果查询",
-                    "url": "./table.html",
-                    "id": "32150",
-                    "shiro": "SYGL"
-                  }
-                ]
+                "shiro": "SYGL"
               }
             ]
           },
@@ -987,11 +1000,25 @@
             "shiro": "SYGL",
             "children": [
               {
-                "title": "调配申请",
+                "title": "设备调配",
                 "url": "./table.html",
                 "icon": "puzzle-piece",
                 "id": "3220",
-                "shiro": "SYGL"
+                "shiro": "SYGL",
+                "children":[
+                  {
+                    "title": "调配申请",
+                    "url": "./life/emergency-management/deploy-app.html",
+                    "id": "32200",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "调配申请列表",
+                    "url": "./life/emergency-management/deploy-app-edit.html",
+                    "id": "32201",
+                    "shiro": "SYGL"
+                  }
+                ]
               },
               {
                 "title": "设备送达",
@@ -1002,29 +1029,56 @@
                 "children": [
                   {
                     "title": "未送达调配单",
-                    "url": "./table.html",
+                    "url": "./life/emergency-management/deploy-service-no.html",
                     "id": "32210",
                     "shiro": "SYGL"
                   },
                   {
                     "title": "已送达调配单",
-                    "url": "./table.html",
+                    "url": "./life/emergency-management/deploy-service-yes.html",
                     "id": "32211",
                     "shiro": "SYGL"
                   }
                 ]
               },
               {
-                "title": "设备归还",
+                "title": "调配交接",
                 "url": "./table.html",
-                "icon": "undo-alt",
+                "icon": "envelope-open-text",
                 "id": "3222",
+                "shiro": "SYGL",
+                "children":[
+                  {
+                    "title": "交接录入",
+                    "url": "./life/emergency-management/handover-add.html",
+                    "id": "32220",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "交接查询",
+                    "url": "./life/emergency-management/handover-edit.html",
+                    "id": "32221",
+                    "shiro": "SYGL"
+                  }
+                ]
+              },
+              {
+                "title": "设备归还",
+                "url": "./table.ht ml",
+                "icon": "undo-alt",
+                "id": "3223",
                 "shiro": "SYGL",
                 "children": [
                   {
-                    "title": "收条",
-                    "url": "./table.html",
-                    "id": "32220",
+                    "title": "设备归还录入",
+                    "url": "./life/emergency-management/eq-return.html",
+                    "id": "32230",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "归还查询",
+                    "url": "./life/emergency-management/return-select.html",
+                    "id": "32231",
                     "shiro": "SYGL"
                   }
                 ]
@@ -1033,47 +1087,19 @@
                 "title": "调配跟踪",
                 "url": "./table.html",
                 "icon": "umbrella-beach",
-                "id": "3223",
+                "id": "3224",
                 "shiro": "SYGL",
                 "children": [
                   {
                     "title": "调配跟踪",
                     "url": "./table.html",
-                    "id": "32230",
+                    "id": "32240",
                     "shiro": "SYGL"
                   },
                   {
                     "title": "使用监视",
                     "url": "./table.html",
-                    "id": "32231",
-                    "shiro": "SYGL"
-                  }
-                ]
-              },
-              {
-                "title": "汇总考评",
-                "url": "./table.html",
-                "icon": "envelope-open-text",
-                "id": "3224",
-                "shiro": "SYGL"
-              },
-              {
-                "title": "查询&统计",
-                "url": "./table.html",
-                "icon": "chart-pie",
-                "id": "3225",
-                "shiro": "SYGL",
-                "children": [
-                  {
-                    "title": "事件查询",
-                    "url": "./table.html",
-                    "id": "32250",
-                    "shiro": "SYGL"
-                  },
-                  {
-                    "title": "统计报表",
-                    "url": "./table.html",
-                    "id": "32251",
+                    "id": "32241",
                     "shiro": "SYGL"
                   }
                 ]

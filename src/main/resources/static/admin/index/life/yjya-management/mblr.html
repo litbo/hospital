@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>查看</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="" style="margin-top: 20px;" lay-filter="forms">
+
+    <!--第一行-->
+    <div class="layui-form-item">
+        <div class="layui-inline spanDiv">
+            <label class="layui-form-label" style="width: 100px;">模板名称</label>
+            <div class="layui-input-block"
+                 style="display: inline-block;margin-left: 20px;width: 600px;">
+                <input type="text" name="mbMc" autocomplete="off"
+                       placeholder="" class="layui-input" >
+            </div>
+        </div>
+    </div>
+
+    <!--第二行-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">模板内容</label>
+            <div class="layui-input-block"
+                 style="display: inline-block;margin-left: 20px;width: 600px;">
+                <textarea name="mbNr" class="layui-textarea" id="mbNr" lay-verify="required"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!--按钮-->
+    <div class="layui-form-item" style="margin-left: 30px;">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+
+    var emp = tempValue("rl", "emp", false);
+
+    // 表单
+    layui.use(['form'], function(){
+
+        var form = layui.form
+            ,layer = layui.layer;
+
+        form.on('submit(demo1)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: '/lifeManage/insertMbLr',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json; charset=UTF-8',
+                success: function(result) {
+                    layui.layer.alert('提交成功!');
+                    window.parent.location.reload();
+                },
+                error:function(){
+                    layer.alert(JSON.stringify(data.field), {
+                        title: '最终的提交信息'
+                    });
+                    alert("error");
+                }
+            });
+            return false;
+        });
+    });
+
+
+</script>
+
+<script>
+
+
+</script>
+</body>
+</html>

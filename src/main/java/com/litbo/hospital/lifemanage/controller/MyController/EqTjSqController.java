@@ -4,10 +4,7 @@ package com.litbo.hospital.lifemanage.controller.MyController;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.MyUtils.String2DateUtil;
-import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqTjShowVO;
-import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqTjZbdcVO;
-import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqTjsqVO;
-import com.litbo.hospital.lifemanage.bean.vo.MyVO.TjZbMcNameCount;
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.*;
 import com.litbo.hospital.lifemanage.dao.MyMapper.EqTjsqMapper;
 import com.litbo.hospital.lifemanage.service.MyService.EqTjService;
 import com.litbo.hospital.result.Result;
@@ -17,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -152,7 +150,9 @@ public class EqTjSqController {
 
     /*删除调剂请求们*/
     @PostMapping("/deleteTjsqs")
-    public Result deleteIds(@RequestBody List<String> ids) {
+    public Result deleteIds(@RequestBody DeleteHtsByIdsVO vo) {
+        String[] list = vo.getIds();
+        List<String> ids = Arrays.asList(list);
         for (int i = 0; i < ids.size(); i++) {
             service.deleteByPrimaryKey(ids.get(i));
         }
@@ -192,8 +192,9 @@ public class EqTjSqController {
      */
     /*删除整条调出装备记录*/
     @PostMapping("/deleteTjZbdc")
-    public Result deleteTjZbdc(@RequestBody List<String> ids) {
+    public Result deleteTjZbdc(@RequestBody DeleteHtsByIdsVO vo) {
         int i = 1;
+        String[] ids = vo.getIds();
         for (String id : ids) {
             i = service.deleteZbDcById(id);
             if (i == 0) {
@@ -207,10 +208,10 @@ public class EqTjSqController {
 
     /*根据主键查询一条装备调出记录*/
     @PostMapping("/selectOneZbdc")
-    public EqTjZbdcVO selectOneZbdc(@RequestParam("id") String id) {
+    public Result selectOneZbdc(@RequestParam("id") String id) {
         EqTjZbdcVO vo = service.selectTjZbdcByPrimary(id);
 
-        return vo;
+        return Result.success(vo);
     }
 
     /*根据主键修改一条装备调出记录*/
@@ -239,18 +240,26 @@ public class EqTjSqController {
 
     /*查看所有未送达调配单*/
     @PostMapping("/selectWsdDpd")
-    public Result selectWsdDpd() {
-        PageInfo info = service.selectWsdYsd();
+    public Result selectWsdDpd(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                               @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
+                               @RequestParam(name = "lx") String lx ) {
+        PageInfo info = service.selectWsdYsd(pageNum,pageSize,lx);
         return Result.success(info);
     }
 
     /*查看所有已送达调配单*/
     @PostMapping("/selectYsdDpd")
+    public Result selectYsdDpd(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                               @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
+                               @RequestParam(name = "lx") String lx) {
+        PageInfo info = service.selectYsdYsd(pageNum,pageSize,lx);
+        return Result.success(info);
+    }
+/*
+    @PostMapping("/selectYsdDpd")
     public Result selectYsdDpd() {
         PageInfo info = service.selectYsdYsd();
         return Result.success(info);
-    }
-
-
+    }*/
 
 }

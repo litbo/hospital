@@ -6,6 +6,7 @@ import com.litbo.hospital.lifemanage.bean.MyBean.EqBraz;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface EqBrazMapper {
@@ -22,7 +23,7 @@ public interface EqBrazMapper {
             "      #{brSj,jdbcType=DATE})")
     int insertEqBraz(EqBraz braz);
 
-    @Select("update eq_braz\n" +
+    @Update("update eq_braz\n" +
         "    set br_bxid = #{brBxid,jdbcType=VARCHAR},\n" +
         "      br_zrmz = #{brZrmz,jdbcType=VARCHAR},\n" +
         "      br_name = #{brName,jdbcType=VARCHAR},\n" +
@@ -36,7 +37,7 @@ public interface EqBrazMapper {
         "      br_hushi = #{brHushi,jdbcType=VARCHAR},\n" +
         "      br_sj = #{brSj,jdbcType=DATE}\n" +
         "    where id = #{id,jdbcType=VARCHAR}")
-    int updateEqBraz(EqBraz braz);
+    Integer updateEqBraz(EqBraz braz);
     @Select("select * from eq_braz where br_bxid=#{bxid} ")
     EqBraz selectEqBrazById(String bxid);
 

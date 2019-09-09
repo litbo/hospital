@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.controller.MyController;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.MyUtils.String2DateUtil;
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.DeleteHtsByIdsVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.YjyaLclogVO;
 import com.litbo.hospital.lifemanage.dao.MyMapper.YjyaZdMapper;
 import com.litbo.hospital.lifemanage.service.MyService.YjyaLclogService;
@@ -70,10 +71,18 @@ public class YjyaLclogController {
      * @Author: NCH
      */
     @PostMapping("/updateYaStatus")
-    public Result updateYaStatus(@RequestBody List<String> bhs) {
+    public Result updateYaStatus(@RequestBody DeleteHtsByIdsVO vo) {
+        String[] bhs = vo.getIds();
 
         for (String bh : bhs) {
-            mapper.updateYaStatus(bh, "0");
+            YjyaLclogVO vo1 = new YjyaLclogVO();
+            vo1.setYjyaBh(bh);
+            vo1.setYjyaQykssj(new Date());
+            if(service.selectYalogByBh(bh).getYjyaQykssj()==null){
+                mapper.updateYaStatus(bh, "0");
+                service.updateYalog(vo1);
+            }
+
         }
         return Result.success();
 
@@ -85,11 +94,10 @@ public class YjyaLclogController {
     @PostMapping("/AllTypeCount")
     public Result AllTypeCount() {
 
-        List list = service.selectAllYalogByExample(1, 10, null, null, null, null, null).getList();
         List list2 = service.selectAllYalogByExample(1, 10, "2", null, null, null, null).getList();
         List list3 = service.selectAllYalogByExample(1, 10, "1", null, null, null, null).getList();
         List list4 = service.selectAllYalogByExample(1, 10, "0", null, null, null, null).getList();
-        List<Integer> asList = Arrays.asList(list.size(),list2.size(),list3.size(),list4.size());
+        List<Integer> asList = Arrays.asList(list2.size()+list3.size()+list4.size(),list2.size(),list3.size(),list4.size());
         return Result.success(asList);
 
     }

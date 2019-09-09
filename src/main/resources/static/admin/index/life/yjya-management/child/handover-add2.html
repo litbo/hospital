@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="col-xs-12" >
+            <div class="layui-col-md6 layui-col-space20" style="margin-top: 20px;margin-left: 10px">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">设备数量<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="eqName" id="eqName" class="layui-input" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""
+                        lay-filter="save" id="reload">保存
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var new1 = {}, da = [];
+    var formData = {};
+    formData2={};
+    var emp=tempValue("rl", "emp", false);
+    renderMod = {
+        btn: [
+            {
+                elem: '#reload',
+                func: function () {
+                    if ($("#eqName").val() === ""){
+                        attr();
+                        return;
+                    }
+                    new1 = getFormValue(["eqName"],{},true);
+                    var key = $.getUrlParam('key');
+                    da.push(new1);
+                    // console.log(new1);
+                    layui.sessionData($.getUrlParam('vg'), {
+                        key: key,
+                        value: da
+                    });
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ]
+
+    };
+</script>
+</body>
+</html>

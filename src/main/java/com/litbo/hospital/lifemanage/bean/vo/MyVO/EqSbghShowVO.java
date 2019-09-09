@@ -18,9 +18,14 @@ public class EqSbghShowVO {
 
     /*归还科室*/
     private String eqGhks;
+    private String eqGhksName;
+
 
     /*接收科室*/
     private String eqJsks;
+    private String eqJsksName;
+
+    private   String eqGhlx;
 
 
 }

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>审核</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="" style="margin-top: 20px;" lay-filter="forms">
+
+    <!--第一行-->
+    <div class="layui-form-item">
+        <div class="layui-inline spanDiv">
+            <label class="layui-form-label">预案编号</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <input type="text" name="yjyaBh" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">总页数</label>
+            <div class="layui-input-block">
+                <input type="text" name="yjyaZys" autocomplete="off" placeholder="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline spanDiv">
+            <label class="layui-form-label">类别</label>
+            <div class="layui-input-block">
+                <input type="text" name="yjyaLx" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <!--第二行-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">预案名称</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <input type="text" name="yjyaName" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">拟稿人</label>
+            <div class="layui-input-block">
+                <input type="text" name="yjyaNgr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">拟稿日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="yjyaNgrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <!--第三行-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">部门名称</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <input type="text" name="bmName" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">版本号</label>
+            <div class="layui-input-block">
+                <input id="yjyaBbh" type="text" name="yjyaBbh" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <!--第二行-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">预案内容</label>
+            <div class="layui-input-block" style="width: 760px;">
+                <textarea name="yjyaNr" class="layui-textarea" id="yjyaNr" lay-verify="required" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+
+    <!--第五行-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">审核人</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <input id="yjyaShr" type="text" name="yjyaShr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">审核日期</label>
+            <div class="layui-input-block">
+                <input id="yjyaShrq" type="text" name="yjyaShrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">试用天数(天)</label>
+            <div class="layui-input-block">
+                <input id="yjyaSyts" type="text" name="yjyaSyts" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <!--第六行-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">审核意见</label>
+            <div class="layui-input-block" style="width: 760px;">
+                <textarea name="yjyaShyj" class="layui-textarea" id="yjyaShyj" lay-verify="required"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <input id="yjyaZt" type="hidden" name="yjyaZt" autocomplete="off"
+           placeholder="" value="1" class="layui-input" readonly>
+
+    <!--按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+        </div>
+    </div>
+
+
+</form>
+
+<script>
+
+    var emp = tempValue("rl", "emp", false);
+
+    //console.log(bmUrl);
+    renderMod.form = {
+        val:{
+            filter:"forms",//与form标签lay-filter相同
+            get:{
+                url:"/lifeManage/selectOneYjyaByBh",
+                type:"POST",
+                data:{bh:$.getUrlParam("yjyaBh")}
+            },
+            func:function(data) {
+                // 获取时间
+                function CurentTime()
+                {
+                    var now = new Date();
+
+                    var year = now.getFullYear();       //年
+                    var month = now.getMonth() + 1;     //月
+                    var day = now.getDate();            //日
+
+                    var clock = year + "-";
+
+                    if(month < 10)
+                        clock += "0";
+
+                    clock += month + "-";
+
+                    if(day < 10)
+                        clock += "0";
+
+                    clock += day;
+
+                    return(clock);
+                }
+                $("#yjyaShr").val(emp.userXm);
+                $("#yjyaShrq").val(CurentTime());
+                $("#yjyaSyts").val("30");
+                $("#yjyaZt").val("1");
+                $("#yjyaBbh ").val("V1.0");
+                console.log(data);
+            }
+        },
+        date:{
+            elem:"#yjyaZpjsqsj",
+            format:'yyyy-MM-dd',
+            isInitValue:true,
+            value:today
+        }
+    };
+
+    // 表单
+    layui.use(['form'], function(){
+
+        var form = layui.form
+            ,layer = layui.layer;
+
+        form.on('submit(demo1)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: '/lifeManage/updateSysjYjyaZd',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json; charset=UTF-8',
+                success: function(result) {
+                    layui.layer.alert('提交成功!');
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    window.parent.location.reload();
+                },
+                error:function(){
+                    layer.alert(JSON.stringify(data.field), {
+                        title: '最终的提交信息'
+                    });
+                    alert("error");
+                }
+            });
+            return false;
+        });
+    });
+
+
+</script>
+</body>
+</html>

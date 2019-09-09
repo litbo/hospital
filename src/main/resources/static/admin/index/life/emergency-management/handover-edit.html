@@ -28,11 +28,11 @@
 <script type="text/html" id="toolBar">
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" id="test1"
+            <input type="text" name="tjjjQssj" class="layui-input" id="test1"
                    placeholder="起始日期">
         </div>
         <div class="layui-inline">
-            <input type="text" name="" class="layui-input" id="test2"
+            <input type="text" name="tjjjJssj" class="layui-input" id="test2"
                    placeholder="结束日期">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
@@ -71,15 +71,22 @@
                     , toolbar: "#toolBar"
                     , cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: '', title: '调入科室',sort:true}
-                        , {field: '', title: '调出科室'}
-                        , {field: '', title: '调配日期'}
-                        , {field: '', title: '调入经办人'}
-                        , {field: '', title: '调出经办人'}
-                        , {field: '', title: '是否全部归还'}
+                        , {field: 'tjjjDrksName', title: '调入科室',sort:true}
+                        , {field: 'tjjjDcksName', title: '调出科室'}
+                        , {field: 'tjjjTprq', title: '调配日期'}
+                        , {field: 'tjjjDrjbr', title: '调入经办人'}
+                        , {field: 'tjjjDcjbr', title: '调出经办人'}
+                        , {field: 'eqSfqbgh', title: '是否全部归还',
+                            templet: function (d) {
+                                if (d.eqSfqbgh == '0')
+                                    return '否';
+                                else if (d.eqSfqbgh == '1')
+                                    return '是';
+                            }}
                         , { title: '操作', align: 'center', toolbar: '#barDemo'}
                     ]]
-                    , url: "/lifeManage/sgWaitSwYsList"
+                    , url: "/lifeManage/selectTjjjByExample"
+                    ,where: {lx:"0"}
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
@@ -94,16 +101,16 @@
                         }
                     }
                     , done: function (obj) {
-                        console.log("123");
+                        // console.log("123");
                         tableFunc({
                             toolFunc: [
                                 {
                                     title: "table",
                                     event: 'edit',
                                     type: 2,
-                                    content: './child',
+                                    content: './child/handover-edit2.html',
                                     area: ['100%', '100%'],
-                                    dataUrl: ["htId"]
+                                    dataUrl: ["id"]
                                 }]
                         })
                     }
@@ -111,10 +118,10 @@
             ]
             , reSet: [
                 {
-                    url: "/lifeManage/sgWaitSwYsList",
+                    url: "/lifeManage/selectTjjjByExample",
                     type: "reload",
                     tid: "table",
-                    data: ["htid"],
+                    data: ["tjjjQssj","tjjjJssj"],
                      method: "POST"
                 }
             ]

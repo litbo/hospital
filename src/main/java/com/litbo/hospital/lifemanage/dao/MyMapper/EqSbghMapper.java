@@ -39,7 +39,7 @@ public interface EqSbghMapper {
     int updateSbghByPrimaryKey(EqSbghVO vo);
 
     /*归还设备记录查询*/
-    @Select("<script>select id,eq_count,eq_ghrq,eq_ghks,eq_jsks from eq_sbgh \n" +
+    @Select("<script>select id,eq_count,eq_ghrq,eq_ghks,eq_jsks,eq_ghlx from eq_sbgh \n" +
             "<if test=\"_parameter != null\">" +
             "<where>\n" +
             "      <foreach collection=\"oredCriteria\" item=\"criteria\" separator=\"or\">\n" +
@@ -81,9 +81,20 @@ public interface EqSbghMapper {
             " from eq_info e\n" +
             " inner join eq_tjjj t on t.tjjj_bianma like CONCAT('%',#{sbbh},'%') \n" +
             " where e.eq_sbbh=#{sbbh}\n" +
-            " and t.eq_sfqbgh = '0' ")
+            " and t.eq_sfqbgh = '0' and e.eq_sfjc = '1' ")
     EqSbghZbVO selectEq2ByBianhao(String sbbh);
-
+/*查询本调剂交接已经归还的设备*/
+    @Select(" select t.id, e.eq_sbbh,e.eq_name,e.eq_gg,e.eq_xh,t.tjjj_drks,t.tjjj_dcks\n " +
+            " from eq_info e\n" +
+            " inner join eq_tjjj t on t.tjjj_bianma like CONCAT('%',#{sbbh},'%') \n" +
+            " where e.eq_sbbh=#{sbbh}\n" +
+            " ")
+    EqSbghZbVO selectEq3ByBianhao(String sbbh);
+    /*根据设备编号查询设备调剂交接Id,所属科室和借出科室*/
+    @Select(" select e.eq_sbbh,e.eq_name,e.eq_gg,e.eq_xh\n " +
+            " from eq_info e\n" +
+            " where e.eq_sbbh=#{sbbh} ")
+    EqSbghZbVO selectEq2ByBianhao2(String sbbh);
 
     /*根据调剂交接id查询已经归还的设备编号,
     * 之后查询此记录是否有调入和调出的签字,
@@ -100,6 +111,8 @@ public interface EqSbghMapper {
             "and eq_sfqbgh = '0' ")
     List<String> selectElseZb(@Param("drks") String drks,
                               @Param("dcks") String dcks);
+
+
 
 
 }

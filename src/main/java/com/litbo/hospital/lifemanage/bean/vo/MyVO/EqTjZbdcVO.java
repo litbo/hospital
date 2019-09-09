@@ -14,6 +14,10 @@ public class EqTjZbdcVO {
     /*主键*/
     private String id;
 
+
+    private String oldSbbh;
+
+    private String uuid;
     /*申请调剂Id*/
     private String tjSqtj;
 
@@ -43,6 +47,7 @@ public class EqTjZbdcVO {
     /*展示调出装备的装备名字*/
     private List<String> tjZbName;
 
+    private List<EqDpdInfoZbVO> dczblist;
 
     /*规格*/
     private String tjGg;

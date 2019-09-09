@@ -24,6 +24,8 @@ public class EqTjDpdVO {
 
     /*调剂送达科室名称*/
     private String zbSdks;
+/*调出类型*/
+    private String tjDclx;
 
 
 }

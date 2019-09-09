@@ -18,7 +18,6 @@
 </head>
 <body>
 
-
 <div class="layui-row">
     <div class="col-xs-12">
         <table id="table" class="layui-hide" lay-filter="table1"></table>
@@ -33,7 +32,7 @@
 
 <script id="barDemo" type="text/html">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">查看</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="sd">送达</a>
+<!--    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="sd">送达</a>-->
 </script>
 
 <script>
@@ -47,22 +46,23 @@
                     , cols: [[ //表头
                         {type: "checkbox"}
                         // , {field: 'djhwId', title: 'XXX'}
-                        , {field: '', title: '调配单号',sort:true}
-                        , {field: '', title: '调配时间'}
-                        , {field: '', title: '指挥长'}
-                        , {field: '', title: '调出科室'}
-                        , {field: '', title: '调入科室'}
+                        // , {field: '', title: '调配单号',sort:true}
+                        , {field: 'tjDpsj', title: '调配时间'}
+                        , {field: 'tjZhz', title: '指挥长'}
+                        , {field: 'bmName', title: '调出科室'}
+                        , {field: 'zbSdks', title: '调入科室'}
                         , { title: '操作', align: 'center', toolbar: '#barDemo'}
                     ]]
-                    , url: "/lifeManage/sgWaitSwYsList"
-                    // , data: ['htid']
-                    // ,where:{ htid: "5" }
+                    , url: "/lifeManage/selectWsdDpd"
+                    // , data: {lx:$("#lx").val()}
+                    ,where:{ lx: "0" }
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , parseData: function (res) { //res 即为原始返回的数据
+                    , parseData: function (res) {
+                        //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
                             "msg": res.msg, //解析提示文本
@@ -78,15 +78,31 @@
                                     title: "table",
                                     event: 'edit',
                                     type: 2,
-                                    content: './child/deploy-app-no-edit.html',
+                                    content: './child/deploy-app-no-deit.html',
                                     area: ['100%', '100%'],
-                                    dataUrl: ["htId"]
+                                    dataUrl: ["id"]
+                                },
+                                {
+                                    send: {
+                                        id: "table",
+                                        filter: "table1",
+                                        name: "ids",
+                                        event: "del",
+                                        url: "/lifeManage/deleteTjZbdc",
+                                        type: "POST",
+                                        contentType: "application/json",
+                                        par: "id",
+                                        reload: true
+                                    },
+                                    tool: "toolbar",
+                                    event: "del"
+
                                 }]
                         })
                     }
                 }
             ]
-            , reSet: [
+            /*, reSet: [
                 {
                     url: "/lifeManage/sgWaitSwYsList",
                     type: "reload",
@@ -94,7 +110,7 @@
                     data: ["htid"],
                      method: "POST"
                 }
-            ]
+            ]*/
         }
     }
 </script>

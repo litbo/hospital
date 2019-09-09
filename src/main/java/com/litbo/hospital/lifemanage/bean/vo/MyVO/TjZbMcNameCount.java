@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class TjZbMcNameCount {
+    private String uuid;
     private String sbbh;
     private String name;
     private int count;

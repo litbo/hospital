@@ -2,10 +2,7 @@ package com.litbo.hospital.lifemanage.dao.MyMapper;
 
 import com.litbo.hospital.lifemanage.bean.Example.YjyaZdExample;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.YjyaZdVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -52,7 +49,11 @@ public interface YjyaZdMapper {
             "      yjya_zpjshr = #{yjyaZpjshr,jdbcType=VARCHAR},\n" +
             "      yjya_zpjshrq = #{yjyaZpjshrq,jdbcType=DATE},\n" +
             "      yjya_zpjjg = #{yjyaZpjjg,jdbcType=VARCHAR},\n" +
-            "      yjya_zpjyj = #{yjyaZpjyj,jdbcType=VARCHAR}\n" +
+            "      yjya_zpjyj = #{yjyaZpjyj,jdbcType=VARCHAR},\n" +
+            "      yjya_zysdxg = #{yjyaZysdxg},\n" +
+            "      yjya_nrdxg = #{yjyaNrdxg,jdbcType=VARCHAR},\n" +
+            "      yjya_bbhdxg = #{yjyaBbhdxg,jdbcType=VARCHAR},\n" +
+            "      yjya_zpjjd = #{yjyaZpjjd,jdbcType=VARCHAR}\n" +
             "    where yjya_bh = #{yjyaBh,jdbcType=VARCHAR}")
     int updateYjyaZd(YjyaZdVO vo);
 
@@ -60,7 +61,7 @@ public interface YjyaZdMapper {
     @Select("<script>" +
             " select yjya_bh, yjya_name, yjya_lx, yjya_zys, yjya_bbh, yjya_ngr, yjya_ngrq, yjya_fbbm, \n" +
             "    yjya_nr, yjya_shr, yjya_shrq, yjya_shyj, yjya_syts, yjya_zt, yjya_zpjsqr, yjya_zpjsqrq, \n" +
-            "    yjya_zpjyy, yjya_zpjshr, yjya_zpjshrq, yjya_zpjjg, yjya_zpjyj,yjya_zysdxg,yjya_nrdxg,yjya_bbhdxg\n" +
+            "    yjya_zpjyy, yjya_zpjshr, yjya_zpjshrq, yjya_zpjjg, yjya_zpjyj,yjya_zysdxg,yjya_nrdxg,yjya_bbhdxg,yjya_zpjjd\n" +
             "   from yjya_zd" +
             " <if test=\"_parameter != null\">" +
             "  <where>\n" +
@@ -101,10 +102,10 @@ public interface YjyaZdMapper {
 
     /*修改预案状态*/
     @Update("update yjya_zd set yjya_zt=#{zt} where yjya_bh=#{bh}")
-    int updateYaStatus(String bh, String zt);
+    int updateYaStatus(@Param("bh") String bh, @Param("zt") String zt);
 
     /*将审核人，审核意见等信息置空*/
-    @Update("update yjya_zd set yjya_zpjshrq = null,yjya_zpjjg = null,yjya_zpjyj=null,yjya_zpjshr = null" +
+    @Update("update yjya_zd set yjya_zpjshrq = null,yjya_zpjjg = null,yjya_zpjyj=null,yjya_zpjshr = null\n" +
             "where yjya_bh=#{bh} ")
     int ClearShr(String bh);
 

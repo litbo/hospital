@@ -13,13 +13,13 @@ public interface YjyaLclogMapper {
     @Insert(" insert into yjya_lclog (yjya_bh, yjya_ngr, \n" +
             "      yjya_ngrq, yjya_shr, yjya_shrq, \n" +
             "      yjya_sykssj, yjya_bakssj, yjya_qykssj, \n" +
-            "      yjya_zpjsqr, yjya_zpjsqsj, yjya_zpjshr, \n" +
-            "      yjya_zpjshsj)\n" +
+            "      yjya_zpjsqr, yjya_zpjsqrq, yjya_zpjshr, \n" +
+            "      yjya_zpjshrq)\n" +
             "      values (#{yjyaBh,jdbcType=VARCHAR}, #{yjyaNgr,jdbcType=VARCHAR}, \n" +
             "      #{yjyaNgrq,jdbcType=DATE}, #{yjyaShr,jdbcType=VARCHAR}, #{yjyaShrq,jdbcType=DATE}, \n" +
             "      #{yjyaSykssj,jdbcType=DATE}, #{yjyaBakssj,jdbcType=DATE}, #{yjyaQykssj,jdbcType=DATE}, \n" +
-            "      #{yjyaZpjsqr,jdbcType=VARCHAR}, #{yjyaZpjsqsj,jdbcType=DATE}, #{yjyaZpjshr,jdbcType=VARCHAR}, \n" +
-            "      #{yjyaZpjshsj,jdbcType=DATE})")
+            "      #{yjyaZpjsqr,jdbcType=VARCHAR}, #{yjyaZpjsqrq,jdbcType=DATE}, #{yjyaZpjshr,jdbcType=VARCHAR}, \n" +
+            "      #{yjyaZpjshrq,jdbcType=DATE})")
     int insertYjyaLclog(YjyaLclogVO vo);
 
     /*查询流程记录中所有的预案编号*/
@@ -29,7 +29,7 @@ public interface YjyaLclogMapper {
     /*根据预案编号查询此记录*/
     @Select("select l.yjya_bh, l.yjya_ngr, l.yjya_ngrq, l.yjya_shr, " +
             " l.yjya_shrq, l.yjya_sykssj, l.yjya_bakssj, \n" +
-            "    l.yjya_qykssj, l.yjya_zpjsqr, l.yjya_zpjsqsj, l.yjya_zpjshr, l.yjya_zpjshsj," +
+            "    l.yjya_qykssj, l.yjya_zpjsqr, l.yjya_zpjsqrq, l.yjya_zpjshr, l.yjya_zpjshrq," +
             "  y.yjya_shyj,y.yjya_name,y.yjya_nr,y.yjya_zpjyj,y.yjya_zpjjg,y.yjya_zpjyy,y.yjya_zt" +
             "  from yjya_lclog l " +
             "  inner join yjya_zd y on l.yjya_bh=y.yjya_bh" +
@@ -40,8 +40,8 @@ public interface YjyaLclogMapper {
     @Select("<script>" +
             " select l.yjya_bh, l.yjya_ngr, l.yjya_ngrq, l.yjya_shr, " +
             " l.yjya_shrq, l.yjya_sykssj, l.yjya_bakssj, \n" +
-            "    l.yjya_qykssj, l.yjya_zpjsqr, l.yjya_zpjsqsj, l.yjya_zpjshr, l.yjya_zpjshsj," +
-            "  y.yjya_shyj,y.yjya_name,y.yjya_zpjyj,y.yjya_zpjjg,y.yjya_zpjyy,y.yjya_zt" +
+            "    l.yjya_qykssj, l.yjya_zpjsqr, l.yjya_zpjsqrq, l.yjya_zpjshr, l.yjya_zpjshrq," +
+            "  y.yjya_shyj,y.yjya_name,y.yjya_zpjyj,y.yjya_zpjjg,y.yjya_zpjyy,y.yjya_zt,y.yjya_zpjjd\n" +
             "  from yjya_lclog l " +
             "  inner join yjya_zd y on l.yjya_bh=y.yjya_bh\n" +
             "<where>" +
@@ -58,7 +58,7 @@ public interface YjyaLclogMapper {
             " and l.yjya_bh like CONCAT('%',#{yabh},'%') " +
             "</if>" +
             " <if test=\"yaname != null\">\n" +
-            " and l.yaname like CONCAT('%',#{yaname},'%')" +
+            " and y.yjya_name like CONCAT('%',#{yaname},'%')" +
             "</if>" +
             "</where>" +
             "</script>")
@@ -77,9 +77,9 @@ public interface YjyaLclogMapper {
             "      yjya_bakssj = #{yjyaBakssj,jdbcType=DATE},\n" +
             "      yjya_qykssj = #{yjyaQykssj,jdbcType=DATE},\n" +
             "      yjya_zpjsqr = #{yjyaZpjsqr,jdbcType=VARCHAR},\n" +
-            "      yjya_zpjsqsj = #{yjyaZpjsqsj,jdbcType=DATE},\n" +
+            "      yjya_zpjsqrq = #{yjyaZpjsqrq,jdbcType=DATE},\n" +
             "      yjya_zpjshr = #{yjyaZpjshr,jdbcType=VARCHAR},\n" +
-            "      yjya_zpjshsj = #{yjyaZpjshsj,jdbcType=DATE}\n" +
+            "      yjya_zpjshrq = #{yjyaZpjshrq,jdbcType=DATE}\n" +
             "    where yjya_bh = #{yjyaBh,jdbcType=VARCHAR}")
     int updateYalog(YjyaLclogVO vo);
 }

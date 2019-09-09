@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>设备调配 > 调配申请</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12" >
+        <div class="layui-col-md12">
+            <div class="layui-tab">
+                <div class="layui-tab-content">
+                    <form class="layui-form layui-form-pane" action="">
+                        <div class="layui-collapse">
+                            <div class="layui-row layui-col-space20">
+                                <div class="layui-col-md6 layui-col-space20" style="margin-top: 20px;margin-left: 10px">
+
+                                    <!--                            调入科室-->
+                                    <div class="layui-form-item " >
+                                        <label class="layui-form-label">调入科室<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="tjjjDrks" id="tjjjDrks"
+                                                   placeholder="请输入内容" onfocus="this.placeholder=''"
+                                                   onblur="this.placeholder='请输入内容'"
+                                                   autocomplete="off" class="layui-input" >
+                                        </div>
+                                    </div>
+                                    <!--                            调入经办人-->
+                                    <div class="layui-form-item " >
+                                        <label class="layui-form-label">调入经办人<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="tjjjDrjbr" id="tjjjDrjbr"
+                                                   placeholder="请输入内容" onfocus="this.placeholder=''"
+                                                   onblur="this.placeholder='请输入内容'"
+                                                   autocomplete="off" class="layui-input" >
+                                        </div>
+                                    </div>
+                                    <!--                                        接收日期-->
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">接收日期<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="tjjjJsrq" id="date1" placeholder=""
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <!--                    交接过程记录-->
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">交接过程记录<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                    <textarea name="tjjjDpgc" placeholder="请输入内容" onfocus="this.placeholder=''"
+                                              onblur="this.placeholder='请输入内容'"
+                                              autocomplete="off" class="layui-textarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <!--                            调配方附件检查-->
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">调配方附件检查<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <textarea type="text" name="tjjjDpffjjc" id="tjjjDpffjjc"
+                                                      placeholder="请输入内容" onfocus="this.placeholder=''"
+                                                      onblur="this.placeholder='请输入内容'"
+                                                      autocomplete="off" class="layui-textarea" ></textarea>
+                                        </div>
+                                    </div>
+                                    <!--                                    设备归还集合-->
+                                    <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                                        <label class="layui-form-label ">设备<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn layui-btn-sm addNew" data-id="table"
+                                                    id="dataTable1" style="background-color: #003366"><i class="fas fa-plus"></i>&nbsp;添加
+                                            </button>
+                                            <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table">
+                                                <i class="fas fa-trash-alt" style="background-color: #cc0033"></i>&nbsp;删除
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <table id="table" lay-filter="table1"></table>
+                                    <!--                                    设备调出签字图片-->
+                                    <input type="hidden" name="tjjjDcurl" value="" id="tjjjDcurl">
+                                    <div id="yc">
+                                        <div class="layui-form-item" pane>
+                                            <label class="layui-form-label">设备调出签字图片</label>
+                                            <div class="layui-input-block">
+                                                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                        id="sbzp">选择文件
+                                                </button>
+                                                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                        id="sbzp_sub">上传文件
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-upload-list">
+                                            <table class="layui-table">
+                                                <thead>
+                                                <tr>
+                                                    <th>文件名</th>
+                                                    <th>大小</th>
+                                                    <th>状态</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="demoList"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-md6 layui-col-space20" style="margin-top: 20px;">
+                                    <!--                            调出科室-->
+                                    <div class="layui-form-item " >
+                                        <label class="layui-form-label">调出科室<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <select id="tjjjDcks" name="tjjjDcks" lay-filter="matching" lay-verify="required">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--                            调出经办人-->
+                                    <div class="layui-form-item " >
+                                        <label class="layui-form-label">调出经办人<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="tjjjDcjbr" id="tjjjDcjbr"
+                                                   placeholder="请输入内容" onfocus="this.placeholder=''"
+                                                   onblur="this.placeholder='请输入内容'"
+                                                   autocomplete="off" class="layui-input" lay-verify="required">
+                                        </div>
+                                    </div>
+                                    <!--                            调配时长-->
+                                    <div class="layui-form-item " >
+                                        <label class="layui-form-label">调配时长(小时)<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="tjjjDpsc" id="tjjjDpsc"
+                                                   placeholder="请输入内容" onfocus="this.placeholder=''"
+                                                   onblur="this.placeholder='请输入内容'"
+                                                   autocomplete="off" lay-verify="required|number" class="layui-input" >
+                                        </div>
+                                    </div>
+                                    <!--                    接收方设备状态检查-->
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">接收方设备状态检查<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                    <textarea name="tjjjJsfztjc" placeholder="请输入内容" onfocus="this.placeholder=''"
+                                              onblur="this.placeholder='请输入内容'"
+                                              autocomplete="off" class="layui-textarea" lay-verify="required"></textarea>
+                                        </div>
+                                    </div>
+                                    <!--                            调配方状态检查-->
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">调配方状态检查<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                            <textarea type="text" name="tjjjDpfztjc" id="tjjjDpfztjc"
+                                                      placeholder="请输入内容" onfocus="this.placeholder=''"
+                                                      onblur="this.placeholder='请输入内容'"
+                                                      autocomplete="off" class="layui-textarea"lay-verify="required" ></textarea>
+                                        </div>
+                                    </div>
+                                    <!--            记录类型-->
+
+                                    <input type="hidden" name="tjjjJllx" id="tjjjJllx" value="1"/>
+                                    <!--            调配时间-->
+                                    <div class="layui-form-item ">
+                                        <label class="layui-form-label">调配时间</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="tjjjTpsj" id="date2" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <!--                    接收方附件检查-->
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">接收方附件检查<span class="sign">*</span></label>
+                                        <div class="layui-input-block">
+                                    <textarea name="tjjjJsffjjc" placeholder="请输入内容" onfocus="this.placeholder=''"
+                                              onblur="this.placeholder='请输入内容'"
+                                              autocomplete="off" class="layui-textarea" lay-verify="required"></textarea>
+                                        </div>
+                                    </div>
+                                    <!--                                    设备调入签字图片-->
+                                    <input type="hidden" name="tjjjDrurl" value="" id="tjjjDrurl">
+                                    <div id="yc1" style="margin-top: 45px">
+                                        <div class="layui-form-item" pane>
+                                            <label class="layui-form-label">设备调入签字图片</label>
+                                            <div class="layui-input-block">
+                                                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                        id="sbzp1">选择文件
+                                                </button>
+                                                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                                                        id="sbzp_sub1">上传文件
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-upload-list">
+                                            <table class="layui-table">
+                                                <thead>
+                                                <tr>
+                                                    <th>文件名</th>
+                                                    <th>大小</th>
+                                                    <th>状态</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="demoList1"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--                                        保存-->
+                        <div class="col-xs-12">
+                            <div class="layui-form-item">
+                                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""
+                                        lay-filter="save">保存
+                                </button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="bmId" id="bmId">
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var da=[];
+    formData = {};
+    formData.count1 = 0;
+    formData.eqSbzp = [];
+    formData1 = {};
+    formData1.count1 = 0;
+    formData1.eqSbzp = [];
+    var formData2 = {};
+    var emp=tempValue("rl", "emp", false);
+    console.log(emp);
+    $("#tjjjDrks").val(emp.bmName);
+    $("#bmId").val(emp.bmId);
+    /*console.log(emp);*/
+    renderMod = {
+        addTable: {
+            table: [
+                {
+                    // elem: "#table",
+                    // id: "table",
+                    cols: [[ //表头
+                        {type: "checkbox"},
+                        {field: 'eqName', title: '设备编号'}
+
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , data: []
+                    , text: {
+                        none: "请点击上方按钮添加数据！"
+                    }
+                }
+            ]
+
+        },
+        form: {
+            val:{
+                select: [
+                    {
+                        filter: "matching",
+                        ids: "bm_id",
+                        text: "bm_name",
+                        url: "/lifeManage/selectAllBmIdAndName"
+                    }
+                ]
+            },
+            submit: {
+                before: function (param) {
+
+                    var tv1=$("#bmId").val();
+                    var tv = getTableValue("table");
+                    console.log($("#tjjjDcurl").val());
+                    if(tv.length===0||$("#tjjjDcurl").val()==""||$("#tjjjDcurl").val()==null||$("#tjjjDrurl").val()==""||$("#tjjjDrurl").val()==null){
+                        layer.alert("设备和签字不能为空！")
+                        return false
+                    }
+                    $("#tjjjJllx").val("1")
+                    return param = {
+                        1:tv,
+                        2:tv1
+                    };
+                    // console.log(formData2);
+                },
+                form: {
+                    url: "/lifeManage/insertTjjj",
+                    type: "POST",
+                    data: ["tjjjDcks","tjjjDrjbr","tjjjDcjbr","tjjjJllx","tjjjJsrq","tjjjDpgc"
+                        ,"tjjjDpsc","tjjjJsfztjc","tjjjJsffjjc","tjjjDcurl","tjjjDrurl","tjjjDpffjjc","tjjjDpfztjc","tjjjTpsj"],
+                    contentType: "application/json",
+                    // dataType: "json",
+                    param: {1:"listsbgh",
+                        2:"tjjjDrks"
+                    },
+                    reload: "parent"
+                    ,done:function(){
+                        // console.log(111);
+                    }
+                }
+            },
+            date: [
+                {
+                    elem: "#date1",
+                    value: today0,
+                    type: "date",
+                    format: 'yyyy-MM-dd'
+                },,
+                {
+                    elem: "#date2",
+                    value: today0,
+                    type: "date",
+                    format: 'yyyy-MM-dd'
+                }
+            ],
+            file: [
+                {
+                    elem: "#sbzp",
+                    url: "/lifeManage/importdjhwimgurls",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    multiple: true,
+                    auto: false,
+                    bindAction: "#sbzp_sub",
+                    number: 6,
+                    field: "imgs",
+                    choose: function (obj) {
+                        if (formData.count1 > 6) {
+                            putMsg({
+                                alert: "最多只能上传6张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#sbzp").next().val("");
+                                    formData.count1--;
+                                    layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList").append(tr);
+                            formData.count1++;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData.eqSbzp.push(res.data);
+                            var tr = $("#demoList").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            $("#tjjjDcurl").val($("#tjjjDcurl").val()+res.data);
+                            console.log($("#tjjjDcurl").val())
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
+                    }
+                },
+                {
+                    elem: "#sbzp1",
+                    url: "/lifeManage/importdjhwimgurls",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    multiple: true,
+                    auto: false,
+                    bindAction: "#sbzp_sub1",
+                    number: 6,
+                    field: "imgs",
+                    choose: function (obj) {
+                        if (formData1.count1 > 6) {
+                            putMsg({
+                                alert: "最多只能上传6张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#sbzp1").next().val("");
+                                    formData1.count1--;
+                                    layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList1").append(tr);
+                            formData1.count1++;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData1.eqSbzp.push(res.data);
+                            var tr = $("#demoList1").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            $("#tjjjDrurl").val($("#tjjjDrurl").val()+res.data);
+                            console.log($("#tjjjDrurl").val())
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList1").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
+                    }
+                }
+            ]
+        },
+        bind: {
+            addItem: [
+                {
+                    elem: "#dataTable1",
+                    base: "./child/handover-add2.html",
+                    name: "vg",
+                    key: "key",
+                    before: function () {
+                        // console.log("scsName");
+                        // $("#htYf").val($("#sbcsIdScs").val());
+                    }
+                }
+
+            ],
+            delItem: ".delNew"
+            /*selectItem: [
+                {
+                    elem: "#selectEmp",
+                    cb: "/eq/listEqbt",
+                    db: "/eq/listEqByX?bmName="+ emp.bmName,
+                    name: "dtdt",
+                    key: "radio",
+                    data: formData2,
+                    end:function(){
+                        attr();
+                        alert("123")
+                        console.log(formData2);
+                    }
+                }
+
+            ]*/
+        }
+
+    };
+</script>
+
+
+</body>
+</html>
