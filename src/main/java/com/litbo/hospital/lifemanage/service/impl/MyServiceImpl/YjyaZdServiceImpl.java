@@ -64,11 +64,14 @@ private EqTjsqMapper tjmapper;
             old.setYjyaZpjshrq(null);
 
         }
+        if("".equals(old.getYjyaZpjjd())){
+            old.setYjyaZpjjd("0");
+        }
          mapper.updateYjyaZd(old);
 
         /*同时修改记录*/
         BeanUtils.copyProperties(old,lclogVO);
-        lclogVO.setYjyaZpjshsj(old.getYjyaZpjsqrq());
+//        lclogVO.setYjyaZpjshrq(old.getYjyaZpjsqrq());
         if(zpj){
             lclogVO.setYjyaBakssj(null);
         }
@@ -78,13 +81,33 @@ private EqTjsqMapper tjmapper;
     @Override
     public int updateShYjyaZd(YjyaZdVO vo) {
         YjyaZdVO old = mapper.selectOneYjyaByBh(vo.getYjyaBh());
+        YjyaLclogVO lclogVO = new YjyaLclogVO();
+        /*更新试用时间*/
+        boolean gxsysj=false;
         BeanUtil.copyProperties(vo, old, true,
                 CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+        if(old.getYjyaZpjjd()!=null){
+            if("0".equals(old.getYjyaZpjjd())){
+                if("1".equals(old.getYjyaZpjjg())){
+                    old.setYjyaZt("1");
+                    old.setYjyaNr(old.getYjyaNrdxg());
+                    old.setYjyaBbh(old.getYjyaBbhdxg());
+                    old.setYjyaZys(Integer.parseInt(old.getYjyaZysdxg()));
+                    gxsysj=true;
+                }
+                old.setYjyaZpjjd("1");
+            }
+        }
+
+
         mapper.updateYjyaZd(old);
-        YjyaLclogVO lclogVO = new YjyaLclogVO();
-        lclogVO.setYjyaSykssj(new Date());
+
         /*同时修改记录*/
         BeanUtils.copyProperties(vo,lclogVO);
+        lclogVO.setYjyaSykssj(old.getYjyaShrq());
+        if(gxsysj){
+            lclogVO.setYjyaSykssj(new Date());
+        }
         return  logservice.updateYalog(lclogVO);
     }
 

@@ -111,7 +111,7 @@ public class EqTjjjServiceimpl implements EqTjjjService {
         List<String> list = sbghMapper.selectAllSbgh2(id);
 
         for (int i = 0; i < size; i++) {
-            EqSbghZbVO zbVO = sbghMapper.selectEq2ByBianhao((String) array.get(i));
+            EqSbghZbVO zbVO = sbghMapper.selectEq3ByBianhao((String) array.get(i));
             List<String> strings = new ArrayList<>();
             /*如果已经归还状态变为1为已经归还*/
             for (String str : list) {

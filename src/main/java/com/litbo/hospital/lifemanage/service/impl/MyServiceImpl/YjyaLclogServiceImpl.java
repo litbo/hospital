@@ -9,6 +9,7 @@ import com.litbo.hospital.lifemanage.bean.vo.MyVO.YjyaZdVO;
 import com.litbo.hospital.lifemanage.dao.MyMapper.YjyaLclogMapper;
 import com.litbo.hospital.lifemanage.service.MyService.YjyaLclogService;
 import com.litbo.hospital.lifemanage.service.MyService.YjyaZdService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +36,21 @@ public class YjyaLclogServiceImpl implements YjyaLclogService {
     }
 
     @Override
-    public PageInfo selectAllYalogByExample(Integer pageNum, Integer pageSize, String zt, Date qssj, Date jssj, String yabh, String yaname) {
+    public PageInfo selectAllYalogByExample(Integer pageNum, Integer pageSize
+            , String zt, Date qssj, Date jssj, String yabh, String yaname){
         PageHelper.startPage(pageNum,pageSize);
+        if(StringUtils.isBlank(zt))
+    {
+        zt=null;
+    }
+           if(StringUtils.isBlank(yabh))
+    {
+        yabh=null;
+    }
+              if(StringUtils.isBlank(yaname))
+    {
+        yaname=null;
+    }
         List<YjyaLclogVO> vos = mapper.selectAllYalogByExample(zt, qssj, jssj, yabh, yaname);
         YjyaLclogVO vo = new YjyaLclogVO();
         int size = vos.size();
@@ -55,7 +69,7 @@ public class YjyaLclogServiceImpl implements YjyaLclogService {
                         YjyaZdVO zdVO = new YjyaZdVO();
                         zdVO.setYjyaBh(vo1.getYjyaBh());
                         zdVO.setYjyaZt("2");
-                        updateYalog(vo1);
+                        updateYalog(vo);
                         service.updateYjyaZd(zdVO);
                     }
             }
