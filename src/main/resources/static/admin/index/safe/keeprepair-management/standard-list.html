@@ -22,6 +22,7 @@
 </head>
 
 <body>
+
 <div class="layui-row col-xs-12 padRight">
     <fieldset class="layui-elem-field layui-field-title">
         <legend>规范制定</legend>
@@ -31,9 +32,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">设备<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="hidden" name="eqId" disabled class="layui-input eqId">
-                    <input type="hidden" name="projectList" disabled class="layui-input projectList">
-                    <input type="text"  placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input " id="eqId"
+                    <input type="hidden" name="eqId" disabled class="layui-input eqId" id="eqIdName">
+                    <input type="text" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input " id="eqId"
                            style="padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" lay-filter="selectUsera" id="selectUsera">选择</button>
                 </div>
@@ -43,7 +43,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">适用设备</label>
                 <div class="layui-input-block">
-                    <select name="applicable_eq">
+                    <select name="applicable_eq" id="applicable_eq">
                         <option>同厂家同型号</option>
                         <option>同类设备</option>
                         <option>同简称设备</option>
@@ -57,7 +57,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">制定人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="formulator" disabled="disabled" autocomplete="off" lay-verify="required" placeholder="请输入"
+                    <input type="text" name="formulator" id="formulator" disabled="disabled" autocomplete="off" lay-verify="required" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -66,7 +66,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="reviewer" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
+                    <input type="text" name="reviewer" id="reviewer" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input"
                            style="padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectUser">选择</button>
                 </div>
@@ -76,7 +76,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">制定时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" id="test6" name="formTime" autocomplete="off" lay-verify="required" placeholder="请输入"
+                    <input type="text" id="formTime" name="formTime" autocomplete="off" lay-verify="required" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">周期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" id="cycle" autocomplete="off" lay-verify="required" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -85,14 +94,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">周期规则</label>
                 <div class="layui-input-block">
-                    <select name="cycleRule">
+                    <select name="cycleRule" id="cycleRule">
                         <option>按风险值估算</option>
                         <option>按厂家规定</option>
                     </select>
                 </div>
             </div>
         </div>
+
     </form>
+</div>
     <div>
         <div class="layui-colla-item">
             <div class="layui-colla-content layui-show">
@@ -124,7 +135,6 @@
                     , {field: 'projectType', title: '项目类型', minWidth: 150}
                     , {field: 'projectName', title: '项目名称', minWidth: 150}
                     , {field: 'projectLevel', title: '级别', minWidth: 100}
-                    , {field: 'standard', title: '标准', minWidth: 100}
                     , {field: 'cycle', title: '周期', minWidth: 120}
                     , {field: 'cycleUnit', title: '周期单位', minWidth: 100}
                     , {field: 'implementerType', title: '实施人类型', minWidth: 120}
@@ -208,15 +218,35 @@
             },
             submit:{
                 filter:"btnn",//可以不写
-                form:{//或者写作up
-                    url: "/maintenance/addMaintenance.do",
-                    type: "POST",
-                    data: [
-                        "eqId","applicable_eq","formulator","reviewer", "formTime", "cycleRule",
-                    ],
-                    param:["projectList"],
-                    reload: true,
-                },
+
+                func:function (obj,data) {
+
+                    console.log("ids = " + localStorage.getItem("projectsIds").toString());
+                    $.post("http://localhost:8080/maintenance/addMaintenance.do",
+                        {
+                            eqId:document.getElementById("eqIdName").value,
+                            applicable_eq:document.getElementById("applicable_eq").value,
+                            formulator:document.getElementById("formulator").value,
+                            reviewer:document.getElementById("reviewer").value,
+                            formTime:document.getElementById("formTime").value,
+                            cycleRule:document.getElementById("cycleRule").value,
+                            cycle:document.getElementById("cycle").value,
+                            projectList:localStorage.getItem("projectsIds").toString(),
+                            ifNotRisk:false,
+                        },
+                        function(data,status){
+                            localStorage.removeItem("projectsIds")
+                        });
+                }
+                // form:{//或者写作up
+                //     url: "/maintenance/addMaintenance.do",
+                //     type: "POST",
+                //     data: [
+                //         "eqId","applicable_eq","formulator","reviewer", "formTime", "cycleRule",
+                //     ],
+                //     param:["projectList"],
+                //     reload: true,
+                // },
                 // before:function(data){
                 //     layui.use(['table'], function(){
                 //         var  layer = layui.layer

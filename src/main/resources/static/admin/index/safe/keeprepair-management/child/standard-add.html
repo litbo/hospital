@@ -26,61 +26,74 @@
     </style>
 </head>
 <body>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>添加数据</legend>
+</fieldset>
 <form class="layui-form layui-form-pane" action="" lay-filter="wxfForms">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">项目类型<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="projectType" id="projectType" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                           lay-verify="required">
+                <div class="layui-input-block ">
+                    <select name="projectType">
+                        <option value="">请选择项目类型</option>
+                        <option value="外观检查">外观检查</option>
+                        <option value="清洁保养">清洁保养</option>
+                        <option value="更换维修">更换维修</option>
+                        <option value="功能检查">功能检查</option>
+                        <option value="性能测试校正">性能测试校正</option>
+                        <option value="安全检查">安全检查</option>
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">项目名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="projectName" id="projectName" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                           lay-verify="required">
+                    <select name="projectName">
+                        <option value="">请选择项目名称</option>
+                        <option value="按风险值估算">按风险值估算</option>
+                        <option value="按厂家规定">按厂家规定</option>
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">级别<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="projectLevel" id="projectLevel" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                           lay-verify="required">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">标准</label>
-                <div class="layui-input-block">
-                    <input type="text" name="standard" id="standard" class="layui-input" placeholder="请输入内容" autocomplete="off"
-                           lay-verify="required">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">首次实施时间<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="firstTime" id="firstTime" class="layui-input" placeholder="请输入内容" autocomplete="off">
+                    <select name="projectLevel">
+                        <option>一级保养</option>
+                        <option selected = "selected">二级保养</option>
+                        <option >日常保养</option>
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">实施人类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="implementerType" id="implementerType" class="layui-input" placeholder="请输入内容" autocomplete="off">
+                    <select name="cycleRule">
+                        <option>请选择实施人类型</option>
+                        <option value="设备使用操作人员">设备使用操作人员</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 120px">首次实施时间<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="firstTime" id="test6" class="layui-input col-sm-11" placeholder="请输入内容" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 120px">周期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="cycle" id="cycle" class="layui-input col-sm-11" placeholder="请输入内容" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">周期<span class="sign">*</span></label>
+                <label class="layui-form-label" style="width: 120px">单位<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="cycle" id="cycle" class="layui-input" placeholder="请输入内容" autocomplete="off">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">单位<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="cycleUnit" id="cycleUnit" class="layui-input" placeholder="请输入内容" autocomplete="off">
+                    <input type="text" name="cycleUnit" id="cycleUnit" class="layui-input col-sm-11" placeholder="请输入内容" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -100,14 +113,30 @@
     renderMod = {
 
                 form:{
+                    date: [{
+                        elem:"#test6",
+                        isInitValue: false,
+                        type:"date",
+                        format:"yyyy-MM-dd",
+                    },{
+                        elem:"#test5",
+                        isInitValue: false,
+                        type:"date",
+                        format:"yyyy-MM-dd",
+                    }],
                     submit:{
                         form:{
                             url:"/maintenance/addMaintenanceProject.do",
                             type:"POST",
                             data:["projectType","projectName","projectLevel","standard","firstTime","implementerType","cycle","cycleUnit"],
                             done: function (data) {
-                                console.log(data.data)
-                                localStorage.setItem("fa",data.data);
+                                if(localStorage.getItem("projectsIds") != null){
+                                    var projectsIds = localStorage.getItem("projectsIds");
+                                    projectsIds = projectsIds + ',' + data.data.id;
+                                    localStorage.setItem("projectsIds",projectsIds);
+                                }else{
+                                    localStorage.setItem("projectsIds",data.data.id);
+                                }
                                     if ($("#projectType").val() === ""||$("#projectName").val()===""||$("#projectLevel").val()===""||$("#standard").val()===""
                                         ||$("#firstTime").val()===""||$("#implementerType").val()===""||$("#cycle").val()===""||$("#cycleUnit").val()===""){
                                         attr();
