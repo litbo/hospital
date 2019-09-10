@@ -2372,7 +2372,73 @@
                     "url": "./beneft/usage-situation/q3.html",
                     "id": "51007",
                     "shiro": "GZRPJXZSJ"
+                  },
+
+
+
+
+
+                  {
+                    "title": "计量审批列表",
+                    "url": "./safe/docimasy-management/docimasy-examine.html",
+                    "id": "51008",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "计划检定",
+                    "url": "./safe/docimasy-management/docimasy-list.html",
+                    "id": "51009",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "计量审批列表",
+                    "url": "./safe/docimasy-management/docimasy-management.html",
+                    "id": "51010",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "计量审批列表",
+                    "url": "./safe/docimasy-management/docimasy-pass.html",
+                    "id": "51011",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "设备档案列表",
+                    "url": "./safe/dossier-managent/dossier-list.html",
+                    "id": "51012",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "设备建档列表",
+                    "url": "./safe/dossier-managent/dossier-need-list.html",
+                    "id": "51012",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "计量查询",
+                    "url": "./safe/metering-management/metering-export.html",
+                    "id": "51013",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "设备建档列表",
+                    "url": "./safe/metering-management/metering-list.html",
+                    "id": "51014",
+                    "shiro": "GZRPJXZSJ"
+                  },
+                  {
+                    "title": "设备建档列表",
+                    "url": "./safe/metering-management/metering-list2.html",
+                    "id": "51015",
+                    "shiro": "GZRPJXZSJ"
                   }
+
+
+
+
+
+
+
 
                 ]
               },

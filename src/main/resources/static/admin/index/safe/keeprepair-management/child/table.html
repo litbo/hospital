@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>结果录入</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-inline{
+            width:140px;
+        }
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>结果录入</legend>
+</fieldset>
+    <table class="layui-table" lay-skin="" lay-size="bg">
+        <colgroup>
+            <col width="10%" >
+            <col width="50%">
+            <col width="20%">
+            <col width="20%">
+        </colgroup>
+        <colgroup>
+            <tr>
+                <th colspan="2">评分标准</th>
+                <th>权重</th>
+                <th>分数</th>
+            </tr>
+        </colgroup>
+        <colgroup>
+            <tr>
+                <th rowspan="5">设备的临床功能</th>
+                <td>不接触患者</td>
+                <td>1</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>设备可能直接接触患者，但是并不起关键作用</td>
+                <td>2</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>设备用于患者疾病诊断或直接监护</td>
+                <td>3</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>设备用于直接为患者治疗</td>
+                <td>4</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>设备用于生命力支持和急救</td>
+                <td>5</td>
+                <td></td>
+            </tr>
+        </colgroup>
+        <colgroup>
+            <tr>
+                <th rowspan="4">设备故障风险</th>
+                <td>设备故障不会导致风险</td>
+                <td>1</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>设备故障导致低风险</td>
+                <td>2</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>设备故障会导致治疗失误，诊断错误或对患者监护失效</td>
+                <td>3</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>设备故障可能导致患者或使用者的严重损伤乃至死亡</td>
+                <td>4</td>
+                <td></td>
+            </tr>
+        </colgroup>
+        <colgroup>
+            <tr>
+                <th rowspan="5">PM对设备的影响</th>
+                <td>维护或检查对设备可靠性没有影响</td>
+                <td>1</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>PM对避免常见设备故障的作用不明显</td>
+                <td>2</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>PM能提示设备故障类型</td>
+                <td>3</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>PM能避免常见设备故障</td>
+                <td>4</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>特定的规定或制造商要求进行的预防性维护或测试</td>
+                <td>5</td>
+                <td></td>
+            </tr>
+        </colgroup>
+        <colgroup>
+            <tr>
+                <th rowspan="2">事故历史</th>
+                <td>没有显著的事故历史</td>
+                <td>1</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>存在显著的事故历史</td>
+                <td>2</td>
+                <td></td>
+            </tr>
+
+        </colgroup>
+        <colgroup>
+            <tr>
+                <th rowspan="2">制造商/管理部门的特殊要求</th>
+                <td>没有要求</td>
+                <td>1</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>有独立于数值评级体系的测试要求</td>
+                <td>2</td>
+                <td></td>
+            </tr>
+        </colgroup>
+        <colgroup>
+            <tr>
+                <th colspan="3">总分</th>
+                <td></td>
+            </tr>
+
+        </colgroup>
+    </table>
+
+
+
+        <button class="layui-btn col-sm-12" style="margin-top: 50px" type="button">提交</button>
+</form>
+
+<script>
+
+    renderMod = {
+
+        addTable: {
+
+        },
+    }
+</script>
+</body>
+
+</html>
