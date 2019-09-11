@@ -44,11 +44,11 @@
                 <label class="layui-form-label">适用设备</label>
                 <div class="layui-input-block">
                     <select name="applicable_eq" id="applicable_eq">
-                        <option>同厂家同型号</option>
-                        <option>同类设备</option>
-                        <option>同简称设备</option>
-                        <option>按科室</option>
-                        <option>全部设备</option>
+                        <option value="1">同厂家同型号</option>
+                        <option value="2">同类设备</option>
+                        <option value="3">同简称设备</option>
+                        <option value="4">按科室</option>
+                        <option value="5">全部设备</option>
                     </select>
                 </div>
             </div>
@@ -221,7 +221,7 @@
 
                 func:function (obj,data) {
 
-                    console.log("ids = " + localStorage.getItem("projectsIds").toString());
+                    console.log("ids = " + localStorage.getItem("projectsIds"));
                     $.post("http://localhost:8080/maintenance/addMaintenance.do",
                         {
                             eqId:document.getElementById("eqIdName").value,
@@ -235,6 +235,7 @@
                             ifNotRisk:false,
                         },
                         function(data,status){
+                            console.log("yijing qingqiu")
                             localStorage.removeItem("projectsIds")
                         });
                 }
