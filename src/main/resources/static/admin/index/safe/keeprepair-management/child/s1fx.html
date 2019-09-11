@@ -19,7 +19,7 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend>风险值设置</legend>
     </fieldset>
-    <table class="layui-table" lay-skin="" lay-size="bg">
+    <table class="layui-table" lay-skin="" lay-size="sm">
         <colgroup>
             <col width="10%">
             <col width="50%">
@@ -39,27 +39,27 @@
                 <tr>
                     <td>不接触患者</td>
                     <td>1</td>
-                    <td></td>
+                    <td onclick="updateAd('1')"><input name="1" type="radio" value="1"/></td>
                 </tr>
                 <tr>
                     <td>设备可能直接接触患者，但是并不起关键作用</td>
                     <td>2</td>
-                    <td></td>
+                    <td><input name="1" type="radio" value="2" /></td>
                 </tr>
                 <tr>
                     <td>设备用于患者疾病诊断或直接监护</td>
                     <td>3</td>
-                    <td></td>
+                    <td><input name="1" type="radio" value="3" /></td>
                 </tr>
                 <tr>
                     <td>设备用于直接为患者治疗</td>
                     <td>4</td>
-                    <td></td>
+                    <td><input name="1" type="radio" value="4" /></td>
                 </tr>
                 <tr>
                     <td>设备用于生命力支持和急救</td>
                     <td>5</td>
-                    <td></td>
+                    <td><input name="1" type="radio" value="5" /></td>
                 </tr>
             </tr>
         </colgroup>
@@ -69,22 +69,22 @@
                 <tr>
                     <td>设备故障不会导致风险</td>
                     <td>1</td>
-                    <td></td>
+                    <td><input name="2" type="radio" value="1" /></td>
                 </tr>
                 <tr>
                     <td>设备故障导致低风险</td>
                     <td>2</td>
-                    <td></td>
+                    <td><input name="2" type="radio" value="2" /></td>
                 </tr>
                 <tr>
                     <td>设备故障会导致治疗失误，诊断错误或对患者监护失效</td>
                     <td>3</td>
-                    <td></td>
+                    <td><input name="2" type="radio" value="3" /></td>
                 </tr>
                 <tr>
                     <td>设备故障可能导致患者或使用者的严重损伤乃至死亡</td>
                     <td>4</td>
-                    <td></td>
+                    <td><input name="2" type="radio" value="4" /></td>
             </tr>
             </tr>
         </colgroup>
@@ -93,27 +93,27 @@
                 <th rowspan="6">PM对设备的影响</th>
                 <tr><td>维护或检查对设备可靠性没有影响</td>
                     <td>1</td>
-                    <td></td>
+                    <td><input name="3" type="radio" value="1" /></td>
                 </tr>
                 <tr>
                     <td>PM对避免常见设备故障的作用不明显</td>
                     <td>2</td>
-                    <td></td>
+                    <td><input name="3" type="radio" value="2" /></td>
                 </tr>
                 <tr>
                     <td>PM能提示设备故障类型</td>
                     <td>3</td>
-                    <td></td>
+                    <td><input name="3" type="radio" value="3" /></td>
                 </tr>
                 <tr>
                     <td>PM能避免常见设备故障</td>
                     <td>4</td>
-                    <td></td>
+                    <td><input name="3" type="radio" value="4" /></td>
                 </tr>
                 <tr>
                     <td>特定的规定或制造商要求进行的预防性维护或测试</td>
                     <td>5</td>
-                    <td></td>
+                    <td><input name="3" type="radio" value="5" /></td>
                 </tr>
             </tr>
         </colgroup>
@@ -123,12 +123,12 @@
                 <tr>
                     <td>没有显著的事故历史</td>
                     <td>1</td>
-                    <td></td>
+                    <td><input name="4" type="radio" value="1" /></td>
                 </tr>
                 <tr>
                     <td>存在显著的事故历史</td>
                     <td>2</td>
-                    <td></td>
+                    <td><input name="4" type="radio" value="2" /></td>
                 </tr>
             </tr>
         </colgroup>
@@ -138,33 +138,59 @@
                 <tr>
                     <td>没有要求</td>
                     <td>1</td>
-                    <td></td>
+                    <td><input name="5"  type="radio" value="1" /></td>
                 </tr>
                 <tr>
                     <td>有独立于数值评级体系的测试要求</td>
                     <td>2</td>
-                    <td></td>
+                    <td><input name="5" type="radio" value="2" /></td>
                 </tr>
             </tr>
         </colgroup>
         <colgroup>
             <tr>
                 <th colspan="3" >总分</th>
-                <td></td>
+                <td id="zf"></td>
             </tr>
         </colgroup>
     </table>
 
-    <button class="layui-btn col-sm-12" style="margin-top: 50px" type="button">提交</button>
+    <button class="layui-btn col-sm-12" style="margin-top: 50px" id="btnn" lay-filter="btnn" type="button" onclick="f()" >提交</button>
 </form>
-
 <script>
+    var ad = 0;
+    function f() {
+        var ad1 = $("input[name='1']:checked").val();
+        var ad2 = $("input[name='2']:checked").val();
+        var ad3 = $("input[name='3']:checked").val();
+        var ad4 = $("input[name='4']:checked").val();
+        var ad5 = $("input[name='5']:checked").val();
+        // c=parseInt(a)+parseInt(b)
 
-    renderMod = {
+        if (ad1==undefined || ad2==undefined || ad3==undefined || ad4==undefined || ad5==undefined){
+            alert("123")
+        }
+        var ad = parseInt(ad1)+parseInt(ad2)+parseInt(ad3)+parseInt(ad4)+parseInt(ad5)
+        document.getElementById("zf").innerHTML = ad;
+        console.log(ad)
 
-        addTable: {
 
-        },
+        $.post("http://localhost:8080/maintenance/addRiskValue.do"+ad,function(data,status){
+            alert("Data: " + data + "nStatus: " + status);
+        });
+
+
+    }
+
+    function updateAd(checkName) {
+        //通过名字获取  getElementsByName
+        var obj = document.getElementsByName(checkName);
+        for(var i=0; i<obj.length; i ++){
+            if(obj[i].checked){
+                ad = parseInt(obj[i].value) + parseInt(ad)
+                document.getElementById("zf").innerHTML = ad;
+            }
+        }
     }
 </script>
 </body>

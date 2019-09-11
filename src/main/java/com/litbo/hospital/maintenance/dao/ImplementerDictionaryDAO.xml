@@ -45,10 +45,10 @@
     select * from hospital..implementer_dictionary
     <where>
       <if test="type != null">
-        "type" = #{type} and
+        "type" like #{type} and
       </if>
       <if test="value != null">
-        "value" = #{value} and
+        "value" like #{value} and
       </if>
       1=1
     </where>

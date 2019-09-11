@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>预防性维护计划</title>
+    <title>字典</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -29,15 +29,33 @@
         <table id="table" lay-filter="table1" ></table>
     </div>
 </div>
+
+
+
+<script type="text/html" id="toolBar">
+
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
+                    <div class="layui-input-inline">
+                        <input type="text" name="type" class="layui-input"  placeholder="请输入项目类型">
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="value" class="layui-input"  placeholder="请输入项目名称">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn" type="button" data-type="search">查找</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</script>
 <script id="barDemo" type="text/html">
     <button class="layui-btn layui-btn-sm layui-btn-normal" id="deleteBtn" lay-event="del">删除</button>
 </script>
-
-
-
-
-
-
 <script>
 
 
@@ -77,7 +95,12 @@
                         }
                     },
                 },
-
+                reSet: {
+                    url: "/maintenance/findAllKey.do",
+                    type: "search",
+                    data: ["type", "value"],     //搜索框的name
+                    where: {}
+                }
             }
         };
 

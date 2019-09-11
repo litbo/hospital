@@ -151,6 +151,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Override
     public List findAllKey(String type,String value) {
+        if(type != null){
+            type = "%" + type +"%";
+        }
         if(value != null){
             value = "%" + value +"%";
         }
