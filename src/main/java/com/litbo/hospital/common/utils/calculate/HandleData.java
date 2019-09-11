@@ -20,12 +20,6 @@ public class HandleData {
         return split[0];
     }
 
-    public static LevelBean judge(LevelBean levelBean){
-
-
-
-        return levelBean;
-    }
 
     public static String changeDate(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -38,6 +32,7 @@ public class HandleData {
     }
 
     public static String getMonthDate(){
+        //每月第一天找到上个月最后一天的日期
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE,-1);
         return changeDate(calendar.getTime());

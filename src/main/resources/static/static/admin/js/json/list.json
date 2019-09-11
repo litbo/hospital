@@ -2686,12 +2686,12 @@
       {
         "title": "定期评价",
         "icon": "user-edit",
-        "shiro": "a",
+        "shiro": "DQPJ",
         "children": [
           {
             "title": "使用评价",
             "url": "beneft&t=2&n=0",
-            "shiro": "a",
+            "shiro": "SYPJ",
             "id": "520",
             "children": [
               {
@@ -2699,19 +2699,19 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5200",
-                "shiro": "a",
+                "shiro": "GZXL",
                 "children": [
                   {
                     "title": "机时利用率",
                     "url": "./table.html",
                     "id": "52000",
-                    "shiro": "a"
+                    "shiro": "JSLYL"
                   },
                   {
                     "title": "完好率",
                     "url": "./table.html",
                     "id": "52001",
-                    "shiro": "a"
+                    "shiro": "WHL"
                   }
                 ]
               },
@@ -2720,19 +2720,19 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5201",
-                "shiro": "a",
+                "shiro": "PZXL",
                 "children": [
                   {
                     "title": "预测工作量符合率",
                     "url": "./table.html",
                     "id": "52010",
-                    "shiro": "a"
+                    "shiro": "YCGZLFHL"
                   },
                   {
                     "title": "功能利用率",
                     "url": "./table.html",
                     "id": "52011",
-                    "shiro": "a"
+                    "shiro": "GNLYL"
                   }
                 ]
               },
@@ -2741,13 +2741,13 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5202",
-                "shiro": "a",
+                "shiro": "YYXL",
                 "children": [
                   {
                     "title": "投资收益率",
                     "url": "./table.html",
                     "id": "52020",
-                    "shiro": "a"
+                    "shiro": "TZSYL"
                   }
                 ]
               },
@@ -2756,13 +2756,13 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5203",
-                "shiro": "a",
+                "shiro": "ZHPJ",
                 "children": [
                   {
                     "title": "综合评价",
                     "url": "./table.html",
                     "id": "52030",
-                    "shiro": "a"
+                    "shiro": "ZHPJ"
                   }
                 ]
               },
@@ -2771,37 +2771,37 @@
                 "url": "./table.html",
                 "icon": "clipboard-list",
                 "id": "5204",
-                "shiro": "a",
+                "shiro": "PJBZSZ",
                 "children": [
                   {
                     "title": "使用效率等级设置",
                     "url": "./table.html",
                     "id": "52040",
-                    "shiro": "a"
+                    "shiro": "SYXLDJSZ"
                   },
                   {
                     "title": "完好等级设置",
                     "url": "./table.html",
                     "id": "52041",
-                    "shiro": "a"
+                    "shiro": "WHLDJSZ"
                   },
                   {
                     "title": "预测符合等级设置",
                     "url": "./table.html",
                     "id": "52042",
-                    "shiro": "a"
+                    "shiro": "YCFHLDJSZ"
                   },
                   {
                     "title": "功能利用等级设置",
                     "url": "./table.html",
                     "id": "52043",
-                    "shiro": "a"
+                    "shiro": "GNLYLDJSZ"
                   },
                   {
                     "title": "投资收益等级设置",
                     "url": "./table.html",
                     "id": "52044",
-                    "shiro": "a"
+                    "shiro": "TZSYDJSZ"
                   }
                 ]
               }
