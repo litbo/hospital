@@ -62,21 +62,21 @@ public class SpecificationServiceImpl implements SpecificationService {
     @Override
     public PageInfo<EqInfoVO2> searchAppointEqInfos(@RequestParam(name="pageNum",required = false ,defaultValue = "1")Integer pageNum,
                                                     @RequestParam(name="pageSize",required = false,defaultValue = "10")Integer pageSize,
-                                                    String sbbh, String eqName, String pym, String bmName) {
+                                                    String sbbh, String eqName, String eqPym, String bmName) {
         EqInfoVO2 eqInfoVO2 = new EqInfoVO2();
-        if (sbbh == null | sbbh.trim().equals(""))
+        if (sbbh == null | "".equals(sbbh))
             sbbh = null;
-        if (eqName == null | eqName.trim().equals(""))
+        if (eqName == null | "".equals(eqName))
             eqName = null;
-        if (pym == null | pym.trim().equals(""))
-            pym = null;
-        if (bmName == null | bmName.trim().equals(""))
+        if (eqPym == null | "".equals(eqPym))
+            eqPym = null;
+        if (bmName == null | "".equals(bmName))
             bmName = null;
 
 
         eqInfoVO2.setEqSbbh(sbbh);
         eqInfoVO2.setEqName(eqName);
-        eqInfoVO2.setPym(pym);
+        eqInfoVO2.setEqPym(eqPym);
         eqInfoVO2.setBmName(bmName);
 
 

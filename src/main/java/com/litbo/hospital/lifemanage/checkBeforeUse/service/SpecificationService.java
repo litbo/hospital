@@ -14,7 +14,7 @@ public interface SpecificationService {
 
     PageInfo<UserVo> searchAppointUsers(Integer pageNum,Integer pageSize,String name);
 
-    PageInfo<EqInfoVO2> searchAppointEqInfos(Integer pageNum, Integer pageSize, String sbbh, String eqName, String pym, String bmName);
+    PageInfo<EqInfoVO2> searchAppointEqInfos(Integer pageNum, Integer pageSize, String sbbh, String eqName, String eqPym, String bmName);
 
     Integer saveStandard(SaveStandardVO saveStandardVO);
 

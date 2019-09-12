@@ -15,18 +15,20 @@ public interface SpecificationDao {
     @Select("SELECT\n" +
             "dbo.s_emp.user_id,\n" +
             "dbo.s_emp.bm_id,\n" +
-            "dbo.s_bm.bm_name\n" +
+            "dbo.s_bm.bm_name,\n" +
+            "dbo.s_emp.user_xm\n" +
             "\n" +
             "FROM\n" +
-            "dbo.s_emp ,\n" +
-            "dbo.s_bm\n" +
+            "\tdbo.s_emp,\n" +
+            "\tdbo.s_bm\n" +
             "WHERE\n" +
-            "dbo.s_emp.bm_id = dbo.s_bm.bm_id\n")
+            "\tdbo.s_emp.bm_id = dbo.s_bm.bm_id\n")
     List<UserVo> searchUsers();
 
     @Select("<script>" +
             "SELECT\n" +
             "        dbo.s_emp.user_id,\n" +
+            "        dbo.s_emp.bm_id,\n" +
             "        dbo.s_emp.user_xm,\n" +
             "        dbo.s_bm.bm_name\n" +
             "    FROM\n" +
@@ -50,6 +52,7 @@ public interface SpecificationDao {
             "      dbo.eq_info.eq_id,\n" +
             "      dbo.eq_info.eq_xh,\n" +
             "      dbo.eq_info.eq_gg,\n" +
+            "      dbo.eq_info.eq_pp,\n" +
             "      dbo.eq_info.eq_tzlb\n" +
             "    FROM\n" +
             "      dbo.s_bm,\n" +
@@ -58,16 +61,16 @@ public interface SpecificationDao {
             "      dbo.s_bm.bm_id = dbo.eq_info.eq_bmid\n" +
             "    " +
             "        <if test=\"eqSbbh != null\">\n" +
-            "            and dbo.eq_info.eq_sbbh = #{eqSbbh}\n" +
+            "            and dbo.eq_info.eq_sbbh like CONCAT('%',#{eqSbbh},'%')\n" +
             "        </if>\n" +
             "        <if test=\"eqName != null\">\n" +
-            "            and dbo.eq_info.eq_name = #{eqName}\n" +
+            "            and dbo.eq_info.eq_name like CONCAT('%',#{eqName},'%')\n" +
             "        </if>\n" +
-            "        <if test=\"pym != null\">\n" +
-            "            and dbo.eq_info.eq_pym = #{pym}\n" +
+            "        <if test=\"eqPym != null\">\n" +
+            "            and dbo.eq_info.eq_pym like CONCAT('%',#{eqPym},'%')\n" +
             "        </if>\n" +
             "        <if test=\"bmName != null\">\n" +
-            "            and dbo.s_bm.bm_name = #{bmName}\n" +
+            "            and dbo.s_bm.bm_name like CONCAT('%',#{bmName},'%')\n" +
             "        </if>" +
             "   " +
             "</script>")

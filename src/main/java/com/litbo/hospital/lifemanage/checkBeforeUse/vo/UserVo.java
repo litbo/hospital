@@ -8,5 +8,6 @@ public class UserVo {
     private String userId;
     private String userXm;
     private String bmName;
+    private String bmId;
 
 }

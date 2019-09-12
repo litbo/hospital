@@ -6,6 +6,7 @@ import com.litbo.hospital.lifemanage.checkBeforeUse.vo.SaveStandardProjectVO;
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.SaveStandardVO;
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.SearchStandardVO;
 import com.litbo.hospital.result.Result;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,8 +43,13 @@ public class SpecificationController {
 
 
     @GetMapping("getAppointEqInfos")
-    public Result getAppointEqInfos(Integer pageNum,Integer pageSize,String sbbh,String eqName,String pym,String bmId){
-        return Result.success(specificationService.searchAppointEqInfos(pageNum,pageSize,sbbh,eqName,pym,bmId));
+    public Result getAppointEqInfos(Integer pageNum, Integer pageSize,
+                                    @RequestParam(required = false,value = "eqSbbh") String sbbh,
+                                    @RequestParam(required = false,value = "eqName") String eqName,
+                                    @RequestParam(required = false,value = "eqPym") String eqPym,
+                                    @RequestParam(required = false,value = "bmName") String bmName){
+
+        return Result.success(specificationService.searchAppointEqInfos(pageNum,pageSize,sbbh,eqName,eqPym,bmName));
     }
 
 

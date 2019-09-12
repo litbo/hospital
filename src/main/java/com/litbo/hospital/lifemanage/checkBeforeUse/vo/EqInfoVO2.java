@@ -10,7 +10,7 @@ public class EqInfoVO2 {
     /**设备名称*/
     private String eqName;
     /**拼音码*/
-    private String pym;
+    private String eqPym;
     /**部门名称*/
     private String bmName;
     /**品牌*/
