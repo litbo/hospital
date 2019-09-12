@@ -44,6 +44,7 @@ import javax.sql.DataSource;
         "com.litbo.hospital.security.specialequipment.dao",
         "com.litbo.hospital.efficiency.dao",
         "com.litbo.hospital.efficiency.configratio.dao",
+        "com.litbo.hospital.lifemanage.checkBeforeUse.dao",
         "com.litbo.hospital.maintenance.dao"},
         sqlSessionTemplateRef = "SqlSessionTemplate1")
 public class MybatisConfigOne {
