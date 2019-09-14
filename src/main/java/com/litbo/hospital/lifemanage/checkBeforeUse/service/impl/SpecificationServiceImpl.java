@@ -134,9 +134,42 @@ public class SpecificationServiceImpl implements SpecificationService {
         Integer i = specificationDao.updateStandardResult(standardId,result);
         if (result == 1){
             i = specificationDao.updateStandardCycleDateTrue(standardId);
+
+
+            SearchStandardVO standardVO = specificationDao.searchStandard(standardId);
+            List<SearchStandardProjectVO> list= specificationDao.searchAllProject(standardId);
+            standardVO.setList(list);
+
+            EqInfoVO2 eqInfoVO2 = new EqInfoVO2();
+
+            eqInfoVO2.setEqSbbh(null);
+            eqInfoVO2.setEqName(null);
+            eqInfoVO2.setEqPym(null);
+            eqInfoVO2.setBmName(null);
+
+            List<EqInfoVO2> eqInfos = specificationDao.searchAppointEqInfos(eqInfoVO2);
+
+            eqInfoVO2.setEqSbbh(standardVO.getEquipmentNumber());
+
+
+
+            if ("同类设备".equals(standardVO.getApplicableEquipment())){
+
+            }else if ("同厂家同型号".equals(standardVO.getApplicableEquipment())){
+
+            }else if ("同简称设备".equals(standardVO.getApplicableEquipment())){
+
+            }else if ("全部设备".equals(standardVO.getApplicableEquipment())){
+
+            }else {
+                i = 0;
+            }
         }else {
             i = specificationDao.updateStandardCycleDateFalse(standardId);
         }
+
+
+
 
         if (i == 1)
             return "true";

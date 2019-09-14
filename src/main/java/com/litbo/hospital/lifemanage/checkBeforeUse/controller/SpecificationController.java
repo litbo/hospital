@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.checkBeforeUse.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.checkBeforeUse.service.SpecificationService;
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.SaveStandardProjectVO;
@@ -25,19 +26,40 @@ public class SpecificationController {
      * @return 所有设备信息
      */
     @GetMapping("getEqInfos")
-    public Result getEqInfos(Integer pageNum, Integer pageSize){
+    public Result getEqInfos(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         return Result.success(specificationService.searchEqInfos(pageNum,pageSize));
     }
 
 
+    @GetMapping("eqInfosTitle")
+    public Result eqInfosTitle(){
+        String title ="[{'type': 'radio'}, "+
+                "{field: 'bmName', title: '部门名称'},"+
+                "{field: 'eqId', title: '设备id'},"+
+                "{field: 'eqName', title: '设备名称'},"+
+                "{field: 'eqSbbh', title: '设备编号'},"+
+                "{field: 'eqZcbh', title: '资产编号'},"+
+                "{field: 'eqGg', title: '设备规格'},"+
+                "{field: 'eqXh', title: '设备型号'},"+
+                "{field: 'eqQysj', title: '启用时间'},"+
+                "{field: 'eqPp', title: '品牌'}"+
+                "]";
+        return Result.success(JSON.parseArray(title));
+    }
+
+
     @GetMapping("getUsers")
-    public Result getUsers(Integer pageNum, Integer pageSize){
+    public Result getUsers(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         return Result.success(specificationService.searchUsers(pageNum,pageSize));
     }
 
 
     @GetMapping("getAppointUsers")
-    public Result geAppointUsers(Integer pageNum,Integer pageSize,String name){
+    public Result geAppointUsers(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 String name){
         return Result.success(specificationService.searchAppointUsers(pageNum,pageSize,name));
     }
 
@@ -74,7 +96,9 @@ public class SpecificationController {
 
 
     @GetMapping("searchAllStandards")
-    public Result searchAllStandards(Integer pageNum,Integer pageSize,@RequestParam(required = false,value = "result") Integer result){
+    public Result searchAllStandards(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                     @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                     @RequestParam(required = false,value = "result") Integer result){
         PageInfo<SearchStandardVO> pageInfo = specificationService.searchAllStandards(pageNum,pageSize,result);
         return Result.success(pageInfo);
     }
