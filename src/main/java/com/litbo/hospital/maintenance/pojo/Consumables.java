@@ -9,19 +9,19 @@ import java.io.Serializable;
 public class Consumables implements Serializable {
     private Integer id;
 
-    private Integer maintenanceId;
+    private Integer maintenanceId; // 维护保养任务id
 
-    private String productName;
+    private String productName; // 名称
 
-    private String cycle;
+    private String cycle;   //更换周期
 
-    private String expired;
+    private String expired;  // 过期、更换
 
-    private String notExpired;
+    private String notExpired;  // 未过期
 
-    private String dateOfActivation;
+    private String dateOfActivation;   // 起用日期
 
-    private String changeDate;
+    private String changeDate;  // 更换日期
 
     private static final long serialVersionUID = 1L;
 

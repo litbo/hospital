@@ -1440,92 +1440,7 @@
                     "shiro": "PJZDZ"
                   }
                 ]
-              },
-              
-              {
-				"title": "台账管理",
-				"url": "javascript:void;",
-				"id": "74001",
-				"shiro": "CX",
-                "icon": "book",
-				"children": [
-		          {
-		            "title": "总账",
-		            "url": "./safe/metering-management/metering-list.html",
-		            "id": "74002",
-		            "shiro": "CX"
-		          },
-		          {
-		            "title": "分户账",
-		            "url": "./safe/metering-management/metering-list2.html",
-		            "id": "74003",
-		            "shiro": "CX"
-		          },
-		          {
-		            "title": "录入/导入",
-		            "url": "./safe/metering-management/metering-export.html",
-		            "id": "74004",
-		            "shiro": "CX"
-		          }
-		        ]
-			}
-			,{
-				"title": "检定管理",
-				"url": "javascript:void;",
-				"id": "76001",
-				"shiro": "CX",
-                "icon": "book",
-				"children": [
-		          {
-		            "title": "计划检定",
-		            "url": "./safe/docimasy-management/docimasy-list.html",
-		            "id": "76002",
-		            "shiro": "CX"
-		          },
-		          {
-		            "title": "计划审核",
-		            "url": "./safe/docimasy-management/docimasy-examine.html",
-		            "id": "76003",
-		            "shiro": "CX"
-		          },
-		          {
-		            "title": "计划管理",
-		            "url": "./safe/docimasy-management/docimasy-management.html",
-		            "id": "76004",
-		            "shiro": "CX"
-		          },
-		          {
-		            "title": "检定结果录入",
-		            "url": "./safe/docimasy-management/docimasy-pass.html",
-		            "id": "76005",
-		            "shiro": "CX"
-		          }
-		        ]
-			}
-			,
-              
-              {
-				"title": "设备档案管理",
-				"url": "javascript:void;",
-				"id": "75001",
-				"shiro": "CX",
-                "icon": "book",
-				"children": [
-		          {
-		            "title": "立卷建档",
-		            "url": "./safe/dossier-managent/dossier-need-list.html",
-		            "id": "75003",
-		            "shiro": "CX"
-		          },
-		          {
-		            "title": "设备档案列表",
-		            "url": "./safe/dossier-managent/dossier-list.html",
-		            "id": "75002",
-		            "shiro": "CX"
-		          }
-		        ]
-			}
-            	
+              }
             ]
           },
           {
@@ -2034,121 +1949,88 @@
           },
           {
             "title": "设备计量",
-            "url": "safe&t=4&n=4398",
+            "url": "safe&t=4&n=3",
             "id": "443",
             "shiro": "AQZHCX",
             "children": [
               {
-                "title": "查询统计",
-                "url": "./table.html",
-                "icon": "chart-pie",
+                "title": "台账管理",
+                "url": "javascript:void;",
                 "id": "4430",
-                "shiro": "AQZHCX",
-                "children": [
-                  {
-                    "title": "综合查询",
-                    "url": "./table.html",
-                    "id": "44300",
-                    "shiro": "AQZHCX"
-                  },
-                  {
-                    "title": "综合统计",
-                    "url": "./table.html",
-                    "id": "44301",
-                    "shiro": "AQZHCX"
-                  }
-                ]
-              },
-              {
-                "title": "计量器具信息",
-                "url": "./table.html",
-                "icon": "info",
-                "id": "4431",
-                "shiro": "AQZHCX",
+                "shiro": "CX",
+                "icon": "book",
                 "children": [
                   {
                     "title": "总账",
-                    "url": "./table.html",
-                    "id": "44310",
-                    "shiro": "AQZHCX"
+                    "url": "./safe/metering-management/metering-list.html",
+                    "id": "44300",
+                    "shiro": "CX"
                   },
                   {
                     "title": "分户账",
-                    "url": "./table.html",
-                    "id": "44311",
-                    "shiro": "AQZHCX"
+                    "url": "./safe/metering-management/metering-list2.html",
+                    "id": "44301",
+                    "shiro": "CX"
                   },
                   {
-                    "title": "报废账",
-                    "url": "./table.html",
-                    "id": "44312",
-                    "shiro": "AQZHCX"
-                  },
-                  {
-                    "title": "计量台账录入",
-                    "url": "./table.html",
-                    "id": "44313",
-                    "shiro": "AQZHCX"
+                    "title": "录入/导入",
+                    "url": "./safe/metering-management/metering-export.html",
+                    "id": "44302",
+                    "shiro": "CX"
                   }
                 ]
-              },
-              {
-                "title": "计量任务",
-                "url": "./table.html",
-                "icon": "newspaper",
-                "id": "4432",
-                "shiro": "AQZHCX",
+              }
+            ,{
+                "title": "检定管理",
+                "url": "javascript:void;",
+                "id": "4431",
+                "shiro": "CX",
+                "icon": "book",
                 "children": [
                   {
-                    "title": "检定提醒",
-                    "url": "./table.html",
-                    "id": "44320",
-                    "shiro": "AQZHCX"
+                    "title": "计划检定",
+                    "url": "./safe/docimasy-management/docimasy-list.html",
+                    "id": "44310",
+                    "shiro": "CX"
                   },
                   {
-                    "title": "送检申请",
-                    "url": "./table.html",
-                    "id": "44321",
-                    "shiro": "AQZHCX"
+                    "title": "计划审核",
+                    "url": "./safe/docimasy-management/docimasy-examine.html",
+                    "id": "44311",
+                    "shiro": "CX"
                   },
                   {
-                    "title": "送检审批",
-                    "url": "./table.html",
-                    "id": "44322",
-                    "shiro": "AQZHCX"
+                    "title": "计划管理",
+                    "url": "./safe/docimasy-management/docimasy-management.html",
+                    "id": "44312",
+                    "shiro": "CX"
                   },
                   {
                     "title": "检定结果录入",
-                    "url": "./table.html",
-                    "id": "44323",
-                    "shiro": "AQZHCX"
-                  },
-                  {
-                    "title": "检定结果导入",
-                    "url": "./table.html",
-                    "id": "44324",
-                    "shiro": "AQZHCX"
+                    "url": "./safe/docimasy-management/docimasy-pass.html",
+                    "id": "44313",
+                    "shiro": "CX"
                   }
                 ]
               },
               {
-                "title": "计量查询",
-                "url": "./table.html",
-                "icon": "search",
-                "id": "4433",
-                "shiro": "AQZHCX",
+                "title": "设备档案管理",
+                "url": "javascript:void;",
+                "id": "4432",
+                "shiro": "CX",
+                "icon": "book",
                 "children": [
                   {
-                    "title": "已送检计量器具清单",
-                    "url": "./table.html",
-                    "id": "44330",
-                    "shiro": "AQZHCX"
+                    "title": "立卷建档",
+                    "url": "./safe/dossier-managent/dossier-need-list.html",
+                    "id": "44320",
+                    "shiro": "CX"
                   },
                   {
-                    "title": "已鉴定计量器具清单",
-                    "url": "./table.html",
-                    "id": "44331",
-                    "shiro": "AQZHCX"
+                    "title": "设备档案列表",
+                    "url": "./safe/dossier-managent/dossier-list.html",
+                    "id": "44321",
+                    "shiro": "CX"
                   }
                 ]
               }
@@ -2372,74 +2254,7 @@
                     "url": "./beneft/usage-situation/q3.html",
                     "id": "51007",
                     "shiro": "YCFHL"
-                  },
-
-
-
-
-
-                  {
-                    "title": "计量审批列表",
-                    "url": "./safe/docimasy-management/docimasy-examine.html",
-                    "id": "51008",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "计划检定",
-                    "url": "./safe/docimasy-management/docimasy-list.html",
-                    "id": "51009",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "计量审批列表",
-                    "url": "./safe/docimasy-management/docimasy-management.html",
-                    "id": "51010",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "计量审批列表",
-                    "url": "./safe/docimasy-management/docimasy-pass.html",
-                    "id": "51011",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "设备档案列表",
-                    "url": "./safe/dossier-managent/dossier-list.html",
-                    "id": "51012",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "设备建档列表",
-                    "url": "./safe/dossier-managent/dossier-need-list.html",
-                    "id": "51012",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "计量查询",
-                    "url": "./safe/metering-management/metering-export.html",
-                    "id": "51013",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "设备建档列表",
-                    "url": "./safe/metering-management/metering-list.html",
-                    "id": "51014",
-                    "shiro": "GZRPJXZSJ"
-                  },
-                  {
-                    "title": "设备建档列表",
-                    "url": "./safe/metering-management/metering-list2.html",
-                    "id": "51015",
-                    "shiro": "GZRPJXZSJ"
                   }
-
-
-
-
-
-
-
-
                 ]
               },
               {

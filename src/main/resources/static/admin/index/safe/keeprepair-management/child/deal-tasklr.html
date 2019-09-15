@@ -86,13 +86,76 @@
             </div>
         </div>
     </div>
+
 </div>
+    <div>
+        <div class="layui-colla-item">
+            <div class="layui-colla-content layui-show">
+                <div class="addBtn">
+                    <button class="layui-btn layui-btn-sm addNew" data-id="table" lay-event="add" id="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+                    <button class="layui-btn layui-btn-sm delNew" lay-event="del" id="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+                </div>
+                <table id="table" lay-filter="table"></table>
+            </div>
+        </div>
+    </div>
         <button class="layui-btn col-sm-12" style="margin-top: 50px" type="button">提交</button>
 </form>
 
 <script>
-
+    var id = localStorage.getItem("dealId");
+    console.log(id);
     renderMod = {
+        bind: {
+            addItem:[
+                {
+                    elem:"#add",
+                    area: ['75%', '60%'],
+                    base: "./child/deal-add.html",
+                    name: "vg",
+                    key: "key",
+                    before:function(){
+                        var a = localStorage.sitename;
+                        var tv = getTableValue("table");
+                    },
+                },
+            ],
+            delItem: ".delNew",
+        },
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    ,{type: "numbers", title: '序号' }
+                    , {field: 'productName', title: '名称', minWidth: 150}
+                    , {field: 'cycle', title: '更换周期', minWidth: 100}
+                    , {field: 'expired', title: '过期、更换', minWidth: 120}
+                    , {field: 'notExpired', title: '未过期', minWidth: 100}
+                    , {field: 'dateOfActivation', title: '起用日期', minWidth: 120}
+                    , {field: 'changeDate', title: '更换日期', minWidth: 100}
+                ]]
+                , toolbar: false
+                , page: false
+                , height: "200"
+                , data: []
+                , text: {
+                    none: "请点击上方按钮添加数据！"
+                },
+                done:function (res) {
+
+
+
+
+                }
+            }
+        },
+
+
+
+
+
+
         formAction:{
             date: [{
                 elem:"#test6",
@@ -105,9 +168,6 @@
                 type:"date",
                 format:"yyyy-MM-dd",
             }]
-        },
-        addTable: {
-
         },
     }
 </script>
