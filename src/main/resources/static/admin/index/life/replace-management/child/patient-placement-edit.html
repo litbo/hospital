@@ -73,7 +73,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">性别</label>
                             <div class="layui-input-block">
-                                <input type="radio" name="brSex" id="brSex1" lay-filter="su" value="0" title="男">
+                                <input type="radio" name="brSex" id="brSex1" lay-filter="su" value="0" title="男" checked>
                                 <input type="radio" name="brSex" id="brSex2" lay-filter="su" value="1" title="女">
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                         </div>
                         <!--            医生签名-->
                         <div class="layui-form-item layui-form-text" id="ycs">
-                            <label class="layui-form-label">签字图片</label>
+                            <label class="layui-form-label">医生签名</label>
                             <div class="layui-input-block" id="sbImg">
                             </div>
                         </div>
@@ -202,6 +202,7 @@
                                 </table>
                             </div>
                         </div>
+
                         <!--            医生签名-->
                         <div class="layui-form-item layui-form-text" id="yc1s">
                             <label class="layui-form-label">签字图片</label>
@@ -288,7 +289,7 @@
                         for (var j = 0; j < newSb1.length - 1; j++) {
                             $sImg1.find("ul").append(
                                 $("<li>").append(
-                                    $("<img>").attr({"src": newSb1[i], "class": "showImg"})
+                                    $("<img>").attr({"src": newSb1[j], "class": "showImg"})
                                 )
                             )
                         }

@@ -54,12 +54,12 @@
       {
         "title": "联网设备",
         "icon": "globe-asia",
-        "shiro": "CGGL",
+        "shiro": "LWSB",
         "children": [
           {
             "title": "运行记录",
             "url": "data&t=0&n=0",
-            "shiro": "SGGL",
+            "shiro": "YXJLZ",
             "id": "200",
             "children": [
               {
@@ -67,19 +67,19 @@
                 "url": "javascript:void;",
                 "icon": "book-open",
                 "id": "2000",
-                "shiro": "KSSG",
+                "shiro": "YXJL1",
                 "children": [
                   {
                     "title": "单机运行设备",
                     "url": "./dataCollection/page/main1.html",
                     "id": "20000",
-                    "shiro": "KSTL"
+                    "shiro": "DJYXSB"
                   },
                   {
                     "title": "使用科室设备运行记录",
                     "url": "./dataCollection/page/main2.html",
                     "id": "20001",
-                    "shiro": "KSTL"
+                    "shiro": "SYKSSBYXJL"
                   }
                 ]
               },
@@ -88,31 +88,31 @@
                 "url": "javascript:void;",
                 "icon": "network-wired",
                 "id": "2001",
-                "shiro": "KSSG",
+                "shiro": "SBLWSZZ",
                 "children": [
                   {
                     "title": "设备联网设置",
                     "url": "./dataCollection/page/main3.html",
                     "id": "20010",
-                    "shiro": "KSTL"
+                    "shiro": "SBLWSZ"
                   },
                   {
                     "title": "设备值班排班设置",
                     "url": "./dataCollection/page/main4.html",
                     "id": "20011",
-                    "shiro": "KSTL"
+                    "shiro": "SBZBPBSZ"
                   },
                   {
                     "title": "运行记录",
                     "url": "./dataCollection/page/main7.html",
                     "id": "20014",
-                    "shiro": "KSTL"
+                    "shiro": "YXJL2"
                   },
                   {
                     "title": "原始记录",
                     "url": "./dataCollection/page/main8.html",
                     "id": "20015",
-                    "shiro": "KSTL"
+                    "shiro": "YSJL"
                   }
                 ]
               }
@@ -121,7 +121,7 @@
           {
             "title": "工作量记录",
             "url": "data&t=0&n=1",
-            "shiro": "SGGL",
+            "shiro": "GZLJL",
             "id": "201",
             "children": [
               {
@@ -129,25 +129,25 @@
                 "url": "javascript:void;",
                 "id": "2010",
                 "icon": "industry",
-                "shiro": "KSSG",
+                "shiro": "SBGZLJL",
                 "children": [
                   {
                     "title": "单机工作量",
                     "url": "./data/network-sys/equip_worktime.html",
                     "id": "20100",
-                    "shiro": "KSTL"
+                    "shiro": "DJGZL"
                   },
                   {
                     "title": "科室设备工作量",
                     "url": "./data/network-sys/room_worktime.html",
                     "id": "20101",
-                    "shiro": "KSTL"
+                    "shiro": "KSSBZGL"
                   },
                   {
                     "title": "同种设备工作量",
                     "url": "./data/network-sys/same_worktime.html",
                     "id": "20102",
-                    "shiro": "KSTL"
+                    "shiro": "TZSBGZL"
                   }
                 ]
               }
@@ -158,13 +158,13 @@
             "url": "data&t=0&n=2",
             "icon": "book-open",
             "id": "202",
-            "shiro": "SGGL",
+            "shiro": "SSJKZ",
             "children": [
               {
                 "title": "实时监控",
                 "url": "./dataCollection/monitor1.html",
                 "id": "2020",
-                "shiro": "KSSG"
+                "shiro": "SSJK"
               }
             ]
           },
@@ -173,26 +173,26 @@
             "url": "data&t=0&n=3",
             "icon": "network-wired",
             "id": "203",
-            "shiro": "SGGL",
+            "shiro": "LXPD",
             "children": [
               {
                 "title": "盘点同步",
                 "url": "./dataCollection/page/choose-lxpd.html",
                 "id": "2030",
-                "shiro": "KSSG"
+                "shiro": "PDTB"
               },
               {
                 "title": "盘点计划",
                 "url": "./dataCollection/lxpd-table.html",
                 "id": "2031",
-                "shiro": "KSSG"
+                "shiro": "PDJH"
               }
             ]
           },
           {
             "title": "软件接口",
             "url": "data&t=0&n=4",
-            "shiro": "SGGL",
+            "shiro": "RJJK",
             "id": "204",
             "children": [
               {
@@ -200,25 +200,25 @@
                 "url": "javascript:void;",
                 "icon": "book-open",
                 "id": "2040",
-                "shiro": "KSSG",
+                "shiro": "SFMXSJ",
                 "children": [
                   {
                     "title": "HIS收费明细",
                     "url": "./dataCollection/page/leading-in1.html",
                     "id": "20400",
-                    "shiro": "KSTL"
+                    "shiro": "HISSFMX"
                   },
                   {
                     "title": "手术室明细",
                     "url": "./dataCollection/page/leading-in2.html",
                     "id": "20401",
-                    "shiro": "KSTL"
+                    "shiro": "SSSMX"
                   },
                   {
                     "title": "PACS收费明细",
                     "url": "./dataCollection/page/leading-in3.html",
                     "id": "20402",
-                    "shiro": "KSTL"
+                    "shiro": "PACSSFMX"
                   }
                 ]
               },
@@ -227,25 +227,25 @@
                 "url": "javascript:void;",
                 "icon": "network-wired",
                 "id": "2041",
-                "shiro": "KSSG",
+                "shiro": "ZDGL1",
                 "children": [
                   {
                     "title": "手术科室匹配",
                     "url": "./dataCollection/page/leading-in4.html",
                     "id": "20410",
-                    "shiro": "KSTL"
+                    "shiro": "SSKSPP"
                   },
                   {
                     "title": "医嘱项目",
                     "url": "./dataCollection/page/leading-in5.html",
                     "id": "20411",
-                    "shiro": "KSTL"
+                    "shiro": "YZXM"
                   },
                   {
                     "title": "PACS设备关联",
                     "url": "./dataCollection/page/leading-in6.html",
                     "id": "20412",
-                    "shiro": "KSTL"
+                    "shiro": "PACSSBGL"
                   }
                 ]
               },
@@ -254,13 +254,13 @@
                 "url": "javascript:void;",
                 "icon": "credit-card",
                 "id": "2042",
-                "shiro": "KSSG",
+                "shiro": "DSRWSZZ",
                 "children": [
                   {
                     "title": "定时任务设置",
                     "url": "./dataCollection/page/leading-in7.html",
                     "id": "20420",
-                    "shiro": "KSTL"
+                    "shiro": "DSRWSZ"
                   }
                 ]
               }
@@ -730,7 +730,7 @@
                     "title": "分户账",
                     "url": "./life/electric-bill/bill-hueman.html",
                     "id": "31101",
-                    "shiro": "FHZ"
+                    "shiro": "FHZ1"
                   },
                   {
                     "title": "分类账",
@@ -784,7 +784,7 @@
                     "title": "综合查询",
                     "url": "./life/electric-bill/zh-search.html",
                     "id": "31121",
-                    "shiro": "ZHCX"
+                    "shiro": "ZHCX1"
                   },
                   {
                     "title": "综合统计",
@@ -809,13 +809,13 @@
       {
         "title": "应急管理",
         "icon": "exclamation-triangle",
-        "shiro": "SYGL",
+        "shiro": "YJGL",
         "children": [
           {
             "title": "应急预案",
             "url": "life&t=2&n=0",
             "id": "320",
-            "shiro": "SYGL",
+            "shiro": "YJYA",
             "children": [
 
               {
@@ -823,19 +823,19 @@
                 "url": "./table.html",
                 "icon": "pencil-alt",
                 "id": "3201",
-                "shiro": "SYGL",
+                "shiro": "YAGL",
                 "children": [
                   {
                     "title": "应急预案制订",
                     "url": "./life/yjya-management/yjyazd.html",
                     "id": "32010",
-                    "shiro": "SYGL"
+                    "shiro": "YJYAZD"
                   },
                   {
                     "title": "应急预案审核",
                     "url": "./life/yjya-management/yjyash.html",
                     "id": "32011",
-                    "shiro": "SYGL"
+                    "shiro": "YJYASH"
                   }
                 ]
               },
@@ -844,19 +844,19 @@
                 "url": "./table.html",
                 "icon": "paperclip",
                 "id": "3204",
-                "shiro": "SYGL",
+                "shiro": "YJYAMBGL",
                 "children": [
                   {
                     "title": "模板录入",
                     "url": "./life/yjya-management/mblr.html",
                     "id": "32040",
-                    "shiro": "SYGL"
+                    "shiro": "MBLR"
                   },
                   {
                     "title": "模板列表",
                     "url": "./life/yjya-management/mblb.html",
                     "id": "32041",
-                    "shiro": "SYGL"
+                    "shiro": "MBLB"
                   }
                 ]
               },
@@ -865,7 +865,7 @@
                 "url": "./life/yjya-management/statistical-query.html",
                 "icon": "search",
                 "id": "3200",
-                "shiro": "SYGL"
+                "shiro": "TJCX1"
               }
 
 
@@ -876,26 +876,26 @@
             "title": "应急替代",
             "url": "life&t=2&n=1",
             "id": "321",
-            "shiro": "SYGL",
+            "shiro": "YJTD",
             "children": [
               {
                 "title": "设备替代",
                 "url": "./table.html",
                 "icon": "puzzle-piece",
                 "id": "3210",
-                "shiro": "SYGL",
+                "shiro": "SBTD",
                 "children":[
                   {
                     "title": "替代申请",
                     "url": "./life/replace-management/replace-app.html",
                     "id": "32100",
-                    "shiro": "SYGL"
+                    "shiro": "TDSQ"
                   },
                   {
                     "title": "替代申请列表",
                     "url": "./life/replace-management/replace-app-edit.html",
                     "id": "32201",
-                    "shiro": "SYGL"
+                    "shiro": "TDSQLB"
                   }
                 ]
               },
@@ -904,19 +904,19 @@
                 "url": "./table.html",
                 "icon": "check-circle",
                 "id": "3211",
-                "shiro": "SYGL",
+                "shiro": "SBSDT",
                 "children": [
                   {
                     "title": "未送达替代单",
                     "url": "./life/replace-management/replace-service-no.html",
                     "id": "32110",
-                    "shiro": "SYGL"
+                    "shiro": "WSDTDD"
                   },
                   {
                     "title": "已送达替代单",
                     "url": "./life/replace-management/replace-service-yes.html",
                     "id": "32111",
-                    "shiro": "SYGL"
+                    "shiro": "YSDTDD"
                   }
                 ]
               },
@@ -925,19 +925,19 @@
                 "url": "./table.html",
                 "icon": "envelope-open-text",
                 "id": "3212",
-                "shiro": "SYGL",
+                "shiro": "TDJJ",
                 "children":[
                   {
                     "title": "交接录入",
                     "url": "./life/replace-management/handovers-add.html",
                     "id": "32120",
-                    "shiro": "SYGL"
+                    "shiro": "JJLRT"
                   },
                   {
                     "title": "交接查询",
                     "url": "./life/replace-management/handovers-edit.html",
                     "id": "32121",
-                    "shiro": "SYGL"
+                    "shiro": "JJCXT"
                   }
                 ]
               },
@@ -946,19 +946,19 @@
                 "url": "./table.html",
                 "icon": "undo-alt",
                 "id": "3213",
-                "shiro": "SYGL",
+                "shiro": "SBGHT",
                 "children": [
                   {
                     "title": "设备归还录入",
                     "url": "./life/replace-management/raplace-eq-return.html",
                     "id": "32130",
-                    "shiro": "SYGL"
+                    "shiro": "SBGHLRT"
                   },
                   {
                     "title": "归还查询",
                     "url": "./life/replace-management/replace-return-select.html",
                     "id": "32131",
-                    "shiro": "SYGL"
+                    "shiro": "GHCXT"
                   }
 
                 ]
@@ -968,19 +968,19 @@
                 "url": "./table.html",
                 "icon": "umbrella-beach",
                 "id": "3214",
-                "shiro": "SYGL",
+                "shiro": "TPGZZT",
                 "children": [
                   {
                     "title": "调配跟踪",
                     "url": "./table.html",
                     "id": "32140",
-                    "shiro": "SYGL"
+                    "shiro": "TPGZT"
                   },
                   {
                     "title": "使用监视",
                     "url": "./table.html",
                     "id": "32141",
-                    "shiro": "SYGL"
+                    "shiro": "SYJST"
                   }
                 ]
               },
@@ -989,7 +989,7 @@
                 "url": "./life/replace-management/patient-placement.html",
                 "icon": "umbrella-beach",
                 "id": "3215",
-                "shiro": "SYGL"
+                "shiro": "BRAZJL"
               }
             ]
           },
@@ -997,26 +997,26 @@
             "title": "应急调配",
             "url": "life&t=2&n=2",
             "id": "322",
-            "shiro": "SYGL",
+            "shiro": "YJTP",
             "children": [
               {
                 "title": "设备调配",
                 "url": "./table.html",
                 "icon": "puzzle-piece",
                 "id": "3220",
-                "shiro": "SYGL",
+                "shiro": "SBTP",
                 "children":[
                   {
                     "title": "调配申请",
                     "url": "./life/emergency-management/deploy-app.html",
                     "id": "32200",
-                    "shiro": "SYGL"
+                    "shiro": "TPSQ"
                   },
                   {
                     "title": "调配申请列表",
                     "url": "./life/emergency-management/deploy-app-edit.html",
                     "id": "32201",
-                    "shiro": "SYGL"
+                    "shiro": "TPSQLB"
                   }
                 ]
               },
@@ -1025,19 +1025,19 @@
                 "url": "./table.html",
                 "icon": "check-circle",
                 "id": "3221",
-                "shiro": "SYGL",
+                "shiro": "SBSDTP",
                 "children": [
                   {
                     "title": "未送达调配单",
                     "url": "./life/emergency-management/deploy-service-no.html",
                     "id": "32210",
-                    "shiro": "SYGL"
+                    "shiro": "WSDTPD"
                   },
                   {
                     "title": "已送达调配单",
                     "url": "./life/emergency-management/deploy-service-yes.html",
                     "id": "32211",
-                    "shiro": "SYGL"
+                    "shiro": "YSDTPD"
                   }
                 ]
               },
@@ -1046,19 +1046,19 @@
                 "url": "./table.html",
                 "icon": "envelope-open-text",
                 "id": "3222",
-                "shiro": "SYGL",
+                "shiro": "TPJJ",
                 "children":[
                   {
                     "title": "交接录入",
                     "url": "./life/emergency-management/handover-add.html",
                     "id": "32220",
-                    "shiro": "SYGL"
+                    "shiro": "JJLRTP"
                   },
                   {
                     "title": "交接查询",
                     "url": "./life/emergency-management/handover-edit.html",
                     "id": "32221",
-                    "shiro": "SYGL"
+                    "shiro": "JJCXTP"
                   }
                 ]
               },
@@ -1067,19 +1067,19 @@
                 "url": "./table.ht ml",
                 "icon": "undo-alt",
                 "id": "3223",
-                "shiro": "SYGL",
+                "shiro": "SBGHTP",
                 "children": [
                   {
                     "title": "设备归还录入",
                     "url": "./life/emergency-management/eq-return.html",
                     "id": "32230",
-                    "shiro": "SYGL"
+                    "shiro": "SBGHLRTP"
                   },
                   {
                     "title": "归还查询",
                     "url": "./life/emergency-management/return-select.html",
                     "id": "32231",
-                    "shiro": "SYGL"
+                    "shiro": "GHCXTP"
                   }
                 ]
               },
@@ -1088,19 +1088,19 @@
                 "url": "./table.html",
                 "icon": "umbrella-beach",
                 "id": "3224",
-                "shiro": "SYGL",
+                "shiro": "TPGZZTP",
                 "children": [
                   {
                     "title": "调配跟踪",
                     "url": "./table.html",
                     "id": "32240",
-                    "shiro": "SYGL"
+                    "shiro": "TPGZTP"
                   },
                   {
                     "title": "使用监视",
                     "url": "./table.html",
                     "id": "32241",
-                    "shiro": "SYGL"
+                    "shiro": "SYJSTP"
                   }
                 ]
               }
@@ -1431,7 +1431,7 @@
                 "url": "./table.html",
                 "icon": "book",
                 "id": "4102",
-                "shiro": "ZDGL",
+                "shiro": "ZDGL2",
                 "children": [
                   {
                     "title": "配件字典",
@@ -1587,7 +1587,7 @@
                     "title": "计划制定",
                     "url": "./safe/application-training/plan-formulation.html",
                     "id": "42000",
-                    "shiro": "JHZD"
+                    "shiro": "JHZD1"
                   }
                 ]
               },
@@ -1656,7 +1656,7 @@
                     "title": "计划查询",
                     "url": "./safe/application-training/plan-query.html",
                     "id": "42030",
-                    "shiro": "JHCX"
+                    "shiro": "JHCX1"
                   },
                   {
                     "title": "人员上岗资质",
@@ -1708,7 +1708,7 @@
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "4301",
-                "shiro": "TJCX",
+                "shiro": "TJCX2",
                 "children": [
                   {
                     "title": "综合查询",
@@ -1814,13 +1814,13 @@
                 "url": "./table.html",
                 "icon": "chart-pie",
                 "id": "4403",
-                "shiro": "TJCX",
+                "shiro": "TJCX3",
                 "children": [
                   {
                     "title": "综合查询",
                     "url": "./safe/keeprepair-management/comprehensive-list.html",
                     "id": "44030",
-                    "shiro": "ZHCX"
+                    "shiro": "ZHCX2"
                   },
                   {
                     "title": "统计报表",
@@ -1842,7 +1842,7 @@
                 "url": "./safe/keeprepair-management/dict.html",
                 "icon": "sliders-h",
                 "id": "4405",
-                "shiro": "ZZ"
+                "shiro": "ZD"
               }
             ]
           },
@@ -1863,7 +1863,7 @@
                     "title": "计划制定",
                     "url": "./table.html",
                     "id": "44100",
-                    "shiro": "JHZD"
+                    "shiro": "JHZD2"
                   },
                   {
                     "title": "计划修改",
@@ -1875,7 +1875,7 @@
                     "title": "计划查询",
                     "url": "./table.html",
                     "id": "44102",
-                    "shiro": "JHCX"
+                    "shiro": "JHCX2"
                   }
                 ]
               },
@@ -1964,13 +1964,13 @@
                     "title": "总账",
                     "url": "./safe/metering-management/metering-list.html",
                     "id": "44300",
-                    "shiro": "ZZ"
+                    "shiro": "ZZL"
                   },
                   {
                     "title": "分户账",
                     "url": "./safe/metering-management/metering-list2.html",
                     "id": "44301",
-                    "shiro": "FHZ"
+                    "shiro": "FHZ2"
                   },
                   {
                     "title": "录入/导入",

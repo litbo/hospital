@@ -88,7 +88,7 @@
                     <div class="layui-input-block">
                         <input type="text" name="eqZbjc" id="eqZbjc"
                                placeholder="请输入检查设备"
-                               autocomplete="off" lay-verify="required"class="layui-input">
+                               autocomplete="off" lay-verify="required" class="layui-input">
                     </div>
                 </div>
 
@@ -223,6 +223,11 @@
                     contentType: "application/json",
                     param: {1:"asdlist"},
                     reload: "parent"
+                },
+                func: function(){
+                    setTimeout(function () {window.top.location.reload();
+                    },1000)
+
                 }
             },
             date: [

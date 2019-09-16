@@ -200,17 +200,16 @@
         },
         form: {
             submit: {
-                before: function (param) {
+                before:function (param) {
+
                     var tv = getTableValue("table");
-                    $("#eqDpjjid").val(tv[0].id);
-                    if (doJudg({
-                        0: [tv]
-                    })) {
-                        putMsg({
-                            alert: "无法提交空数据！"
-                        });
-                        return false;
+                    console.log(tv)
+
+                    if(tv.length==0||$("#eqDrurl").val()==""||$("#eqDrurl").val()==null||$("#eqDcurl").val()==""||$("#eqDcurl").val()==null){
+                        layer.alert("设备和签字不能为空！");
+                        return false
                     }
+                    $("#eqDpjjid").val(tv[0].id);
                     return param = {
                         1:tv
                     };
