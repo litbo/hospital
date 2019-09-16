@@ -95,7 +95,30 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
                         "data-text": aList_j.title
                     }).html(aList_j.title)
                     .prepend($("<span>").attr("class", "l-line"))
-                ))
+                 ));
+                if(aList_j.children){
+                    var $dll = $("<dl>");
+                    for(var m=0;m<aList_j.children.length;m++){
+                        for (var ms = 0; ms < shiro.length; ms++) {
+                            if (aList_j.children[m].shiro === shiro[ms].rightName) {
+                                $dll.append($("<dd>").attr(
+                                    {
+                                        "shiro:hasPermission": aList_j.children[m].shiro,
+                                        "style":"margin:1px 0 1px 10px;"
+                                    }).append($("<a>").attr(
+                                    {
+                                        "href": "javascript:void(0);",
+                                        "data-url": aList_j.children[m].url,
+                                        "data-id": aList_j.children[m].id,
+                                        "data-text": aList_j.children[m].title
+                                    }).html(aList_j.children[m].title)
+                                    .prepend($("<span>").attr({"class": "l-line-w"}))
+                                ));
+                            }
+                        }
+                    }
+                    $dl.append($dll);
+                }
             }
             list.append($("<li>").attr(
                 {
