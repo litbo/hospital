@@ -32,7 +32,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">维护结果<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="maintenanceResults" id="recordTime" autocomplete="off"  class="layui-input" placeholder="请输入">
+                    <input type="text" name="maintenanceResults" id="maintenanceResults" autocomplete="off"  class="layui-input" placeholder="请输入">
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">仪器现状<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="instrumentStatus" id="planType" autocomplete="off" lay-verify="required" placeholder="请输入"
+                    <input type="text" name="instrumentStatus" id="instrumentStatus" autocomplete="off" lay-verify="required" placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">备注<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="description" id="status" placeholder="请输入" lay-verify="required" autocomplete="off"  class="layui-input">
+                    <input type="text" name="description" id="description" placeholder="请输入" lay-verify="required" autocomplete="off"  class="layui-input">
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">维护人员<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="maintenancePersonnel" id="name" autocomplete="off"  class="layui-input" placeholder="请输入">
+                <input type="text" name="maintenancePersonnel" id="maintenancePersonnel" autocomplete="off"  class="layui-input" placeholder="请输入">
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">部门签收<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="departmentReceipt"  autocomplete="off" lay-verify="required" placeholder="请上传签名图片"
+                <input type="text" name="departmentReceipt" id="departmentReceipt"  autocomplete="off" lay-verify="required" placeholder="请上传签名图片"
                        class="layui-input">
             </div>
         </div>
@@ -100,24 +100,50 @@
             </div>
         </div>
     </div>
-        <button class="layui-btn col-sm-12" style="margin-top: 50px" type="button">提交</button>
+    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="btnn" lay-filter="btnn">提交</button>
 </form>
-
 <script>
+
+
     var id = localStorage.getItem("dealId");
-    console.log(id);
     renderMod = {
+        submit: {
+            filter: "btnn",//可以不写
+
+            func: function (obj, data) {
+
+                var a=document.getElementById("maintenanceResults").value;
+                console.log(a);
+                $.post("http://localhost:8080/maintenance/resultAdd.do",
+                    {
+                        maintenanceResults: document.getElementById("instrumentStatus").value,
+                        instrumentStatus: document.getElementById("instrumentStatus").value,
+                        description: document.getElementById("description").value,
+                        maintenancePersonnel: document.getElementById("maintenancePersonnel").value,
+                        checkTime: document.getElementById("test5").value,
+                        departmentReceipt: document.getElementById("departmentReceipt").value,
+                        dateOfCompletion: document.getElementById("test6").value,
+                        projectList: localStorage.getItem("projectsIds").toString(),
+                        ifNotRisk: false,
+                    },
+                    /*function (data, status) {
+                        console.log("yijing qingqiu")
+                        localStorage.removeItem("projectsIds")
+                    }*/);
+            }
+
+        },
         bind: {
             addItem:[
                 {
                     elem:"#add",
                     area: ['75%', '60%'],
-                    base: "./child/deal-add.html",
+                    base: "deal-add.html",
                     name: "vg",
                     key: "key",
                     before:function(){
-                        var a = localStorage.sitename;
-                        var tv = getTableValue("table");
+                        // var a = localStorage.sitename;
+                        // var tv = getTableValue("table");
                     },
                 },
             ],
@@ -143,19 +169,9 @@
                     none: "请点击上方按钮添加数据！"
                 },
                 done:function (res) {
-
-
-
-
                 }
             }
         },
-
-
-
-
-
-
         formAction:{
             date: [{
                 elem:"#test6",
@@ -172,5 +188,4 @@
     }
 </script>
 </body>
-
 </html>

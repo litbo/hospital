@@ -33,62 +33,45 @@
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">项目类型<span class="sign">*</span></label>
-                <div class="layui-input-block ">
-                    <select name="projectType" id="projectType">
-                        <option value="" data-id="0">请选择项目类型</option>
-
-                    </select>
+                <label class="layui-form-label">名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="productName"  class="layui-input " placeholder="请输入内容" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">项目名称<span class="sign">*</span></label>
+                <label class="layui-form-label">更换周期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="projectName" id="projectName">
-                        <option value="" data-id="0">请选择项目名称</option>
-                    </select>
+                    <input type="text" name="cycle"  class="layui-input " placeholder="请输入内容" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">级别<span class="sign">*</span></label>
+                <label class="layui-form-label">过期、更换<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="projectLevel">
-                        <option>一级保养</option>
-                        <option selected = "selected">二级保养</option>
-                        <option >日常保养</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">实施人类型<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="cycleRule">
-                        <option>请选择实施人类型</option>
-                        <option value="设备使用操作人员">设备使用操作人员</option>
-                    </select>
+                    <input type="text" name="expired"  class="layui-input " placeholder="请输入内容" autocomplete="off">
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 120px">首次实施时间<span class="sign">*</span></label>
+                <label class="layui-form-label">未过期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="firstTime" id="test6" class="layui-input col-sm-11" placeholder="请输入内容" autocomplete="off">
+                    <input type="text" name="notExpired" class="layui-input " placeholder="请输入内容" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">启用日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="dateOfActivation" class="layui-input " placeholder="请输入内容" autocomplete="off">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 120px">周期<span class="sign">*</span></label>
+                <label class="layui-form-label">更换日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="cycle" id="cycle" class="layui-input col-sm-11" placeholder="请输入内容" autocomplete="off">
+                    <input type="text" name="changeDate" class="layui-input " placeholder="请输入内容" autocomplete="off">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 120px">单位<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="cycleUnit" id="cycleUnit" class="layui-input col-sm-11" placeholder="请输入内容" autocomplete="off">
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="col-xs-12">
@@ -98,103 +81,37 @@
             </button>
         </div>
     </div>
+
 </form>
 <div id="tips"></div>
-
-<!--projectType  projectName-->
-<script>
-    //首次刷新页面获取一级产品类别列表
-    function cplbs(){
-        $.ajax({
-            async:false,
-            type:"post",
-            url:"/member/selectionzgx_cplb.jspx",
-            data:{id:1},  //一级产品类别的父ID
-            success:function(data){
-                $("#projectType").empty();
-                $("#projectType").append("<option value= '' data-id='0'>请选择项目类型</option>")
-                for(var i=0;i<data.length;i++){
-                    $("#projectType").append("<option value='"+data[i].cname+"' data-id='"+data[i].id+"'>"+data[i].cname+"</option>");
-                }
-            }
-        })
-    }
-
-    //选中一级产品类别后，获取并刷新二级产品类别列表
-    function cplb(){
-        var options=$("#projectType option:selected");
-        var value=options.data("id");
-        $.ajax({
-            async:false,
-            type:"post",
-            url:"/member/selectionzgx_cplb.jspx",
-            data:{id:value}, //二级产品类别的父ID
-            success:function(data){
-                $("#projectName").empty();
-                $("#projectName").append("<option value= '' data-id='0'>请选择项目名称</option>")
-                for(var i=0;i<data.length;i++){
-                    $("#projectName").append("<option value='"+data[i].cname+"' data-id='"+data[i].id+"'>"+data[i].cname+"</option>");
-                }
-            }
-        })
-    }
-
-</script>
-
-
 <script>
     var new1 = {}, da = [];
     var formData = {};
     renderMod = {
-
-                form:{
-                    date: [{
-                        elem:"#test6",
-                        isInitValue: false,
-                        type:"date",
-                        format:"yyyy-MM-dd",
-                    },{
-                        elem:"#test5",
-                        isInitValue: false,
-                        type:"date",
-                        format:"yyyy-MM-dd",
-                    }],
-                    submit:{
-                        form:{
-                            url:"/maintenance/addMaintenanceProject.do",
-                            type:"POST",
-                            data:["projectType","projectName","projectLevel","standard","firstTime","implementerType","cycle","cycleUnit"],
-                            done: function (data) {
-                                if(localStorage.getItem("projectsIds") != null){
-                                    var projectsIds = localStorage.getItem("projectsIds");
-                                    projectsIds = projectsIds + ',' + data.data.id;
-                                    localStorage.setItem("projectsIds",projectsIds);
-                                }else{
-                                    localStorage.setItem("projectsIds",data.data.id);
-                                }
-                                    if ($("#projectType").val() === ""||$("#projectName").val()===""||$("#projectLevel").val()===""||$("#standard").val()===""
-                                        ||$("#firstTime").val()===""||$("#implementerType").val()===""||$("#cycle").val()===""||$("#cycleUnit").val()===""){
-                                        attr();
-                                        return;
-                                    }
-                                    new1 =
-                                        getFormValue(["projectType","projectName","projectLevel","standard","firstTime","implementerType","cycle","cycleUnit"],{},true);
-                                    var key = $.getUrlParam('key');
-                                    da.push(new1);
-                                    layui.sessionData($.getUrlParam('vg'), {
-                                        key: key,
-                                        value: da
-                                    });
-                                    var index = parent.layer.getFrameIndex(window.name);
-                                    parent.layer.close(index);
-                            },
-                        }
-                    },
-                },
-
-
-
+        btn: [
+            {
+                elem: '#sub',
+                func: function () {
+                    if ($("#productName").val() === ""||$("#cycle").val()===""||$("#expired").val()===""||$("#notExpired").val()===""
+                        ||$("#dateOfActivation").val()===""||$("#changeDate").val()===""){
+                        attr();
+                        return;
+                    }
+                    new1 =
+                        getFormValue(["productName","cycle","expired","notExpired","dateOfActivation","changeDate"],{},true);
+                    var key = $.getUrlParam('key');
+                    da.push(new1);
+                    layui.sessionData($.getUrlParam('vg'), {
+                        key: key,
+                        value: da
+                    });
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                }
+            }
+        ],
     };
+
 </script>
 </body>
 
