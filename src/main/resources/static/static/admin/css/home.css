@@ -125,3 +125,15 @@
 .layui-tab-content>.layui-tab-item{
     height:93%!important;
 }
+
+.l-line-w{
+    width: 12px;
+    display: inline-block;
+    line-height: 50px;
+    height: 50px;
+    float: left;
+    font-size: 20px;
+    margin-right: 10px;
+    margin-left: 30px;
+    background: url(../images/l-line-white.png) left center no-repeat;
+}
