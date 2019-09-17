@@ -19,11 +19,17 @@ input{
 }
 
 h1{
+    color: white;
     text-align: center;
     margin: 40px 0 50px;
-    letter-spacing: 4px;
-}
 
+}
+h1 a{
+    margin-left: 5px;
+    font-size: 16px;
+    color: white;
+    font-family: Arial;
+}
 img{
     width:100%;
     height:100%;
@@ -49,8 +55,7 @@ img{
 .bgs{
     margin-top: 20%;
     height: 400px;
-    background: #fff;
-    opacity:0.9;
+    background: rgba(255,255,255,0.4);
     border-radius: 5px;
     overflow: hidden;
 }
