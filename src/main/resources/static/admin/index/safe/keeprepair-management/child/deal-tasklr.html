@@ -14,15 +14,10 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
-    <style>
-        .layui-inline{
-            width:140px;
-        }
-    </style>
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+<form class="layui-form layui-form-pane" action="" lay-filter="">
 <fieldset class="layui-elem-field layui-field-title">
     <legend>结果录入</legend>
 </fieldset>
@@ -65,7 +60,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">检查日期<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="checkTime"  id="test5" placeholder="请选择时间" autocomplete="off"  class="layui-input">
+                <input type="text"  name="checkTime" id="checkTime" placeholder="请选择时间" autocomplete="off"  class="layui-input">
             </div>
         </div>
     </div>
@@ -82,7 +77,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">完成日期<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="dateOfCompletion" id="test6" placeholder="请选择时间" lay-verify="required" autocomplete="off"  class="layui-input">
+                <input type="text" name="dateOfCompletion" id="dateOfCompletion" placeholder="请选择时间" lay-verify="required" autocomplete="off"  class="layui-input">
             </div>
         </div>
     </div>
@@ -100,37 +95,32 @@
             </div>
         </div>
     </div>
-    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" id="btnn" lay-filter="btnn">提交</button>
+    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="submit" >提交</button>
 </form>
-<script>
-
-
+<!--<script>-->
+<!--    $("btnn").click(function(){-->
+<!--        $.post("maintenance/resultAdd.do",-->
+<!--            {-->
+<!--                maintenanceId: document.getElementById("instrumentStatus").value,-->
+<!--                maintenanceResults: document.getElementById("instrumentStatus").value,-->
+<!--                instrumentStatus: document.getElementById("instrumentStatus").value,-->
+<!--                description: document.getElementById("description").value,-->
+<!--                maintenancePersonnel: document.getElementById("maintenancePersonnel").value,-->
+<!--                checkTime: document.getElementById("checkTime").value,-->
+<!--                departmentReceipt: document.getElementById("departmentReceipt").value,-->
+<!--                dateOfCompletion: document.getElementById("dateOfCompletion").value,-->
+<!--            },-->
+<!--            function(data,status){-->
+<!--                alert("数据: \n" + data + "\n状态: " + status);-->
+<!--            });-->
+<!--    });-->
+<!--    </script>-->
+    <script>
     var id = localStorage.getItem("dealId");
+    console.log(localStorage.getItem("key"))
+
     renderMod = {
-        submit: {
-            filter: "btnn",//可以不写
 
-            func: function (obj, data) {
-                $.post("http://localhost:8080/maintenance/resultAdd.do",
-                    {
-                        maintenanceResults: document.getElementById("instrumentStatus").value,
-                        instrumentStatus: document.getElementById("instrumentStatus").value,
-                        description: document.getElementById("description").value,
-                        maintenancePersonnel: document.getElementById("maintenancePersonnel").value,
-                        checkTime: document.getElementById("test5").value,
-                        departmentReceipt: document.getElementById("departmentReceipt").value,
-                        dateOfCompletion: document.getElementById("test6").value,
-                        projectList: localStorage.getItem("projectsIds").toString(),
-                        ifNotRisk: false,
-                    },
-                    function (data, status) {
-                        console.log(vg);
-                        localStorage.removeItem("projectsIds")
-                    });
-                parent.layer.close(index);
-            }
-
-        },
         bind: {
             addItem:[
                 {
@@ -140,7 +130,7 @@
                     name: "vg",
                     key: "key",
                     func:function(obj,data){
-                        console.log(obj)//获取名称为“key”的值)
+
                         // var a = localStorage.sitename;
                         // var tv = getTableValue("table");
                     },
@@ -173,16 +163,32 @@
         },
         formAction:{
             date: [{
-                elem:"#test6",
+                elem:"#dateOfCompletion",
                 isInitValue: false,
                 type:"date",
                 format:"yyyy-MM-dd",
             },{
-                elem:"#test5",
+                elem:"#checkTime",
                 isInitValue: false,
                 type:"date",
                 format:"yyyy-MM-dd",
-            }]
+            }],
+            submit: {
+                form: {
+                    url: "/maintenance/resultAdd.do",
+                    type: "POST",
+                    data: ["maintenanceResults", "instrumentStatus", "description", "maintenancePersonnel", "checkTime", "departmentReceipt", "dateOfCompletion"],
+                    add:{
+                        maintenanceId:id
+
+                    },
+                    done:function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index); //再执行关闭
+                        parent.location.reload();
+                    }
+                },
+            }
         },
     }
 </script>

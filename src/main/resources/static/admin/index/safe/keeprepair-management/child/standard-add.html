@@ -36,8 +36,13 @@
                 <label class="layui-form-label">项目类型<span class="sign">*</span></label>
                 <div class="layui-input-block ">
                     <select name="projectType" id="projectType">
-                        <option value="" data-id="0">请选择项目类型</option>
-
+                        <option value="">请选择项目类型</option>
+                        <option value="外观检查">外观检查</option>
+                        <option value="清洁保养">清洁保养</option>
+                        <option value="更换维修">更换维修</option>
+                        <option value="功能检查">功能检查</option>
+                        <option value="性能检测校正">性能检测校正</option>
+                        <option value="安全检查">安全检查</option>
                     </select>
                 </div>
             </div>
@@ -103,42 +108,31 @@
 
 <!--projectType  projectName-->
 <script>
-    //首次刷新页面获取一级产品类别列表
-    function cplbs(){
-        $.ajax({
-            async:false,
-            type:"post",
-            url:"/member/selectionzgx_cplb.jspx",
-            data:{id:1},  //一级产品类别的父ID
-            success:function(data){
-                $("#projectType").empty();
-                $("#projectType").append("<option value= '' data-id='0'>请选择项目类型</option>")
-                for(var i=0;i<data.length;i++){
-                    $("#projectType").append("<option value='"+data[i].cname+"' data-id='"+data[i].id+"'>"+data[i].cname+"</option>");
-                }
-            }
-        })
-    }
-
-    //选中一级产品类别后，获取并刷新二级产品类别列表
-    function cplb(){
-        var options=$("#projectType option:selected");
-        var value=options.data("id");
-        $.ajax({
-            async:false,
-            type:"post",
-            url:"/member/selectionzgx_cplb.jspx",
-            data:{id:value}, //二级产品类别的父ID
-            success:function(data){
-                $("#projectName").empty();
-                $("#projectName").append("<option value= '' data-id='0'>请选择项目名称</option>")
-                for(var i=0;i<data.length;i++){
-                    $("#projectName").append("<option value='"+data[i].cname+"' data-id='"+data[i].id+"'>"+data[i].cname+"</option>");
-                }
-            }
-        })
-    }
-
+    $("projectType").ready(function(){
+        $("#projectType").change(function(){
+            alert("文本已被修改");
+        });
+    });
+   // function changeEventHandler(e) {
+   //     console.log("123")
+   //     $.post("/maintenance/seeAllType.do",
+   //            {
+   //               value: $('#projectType option:selected') .val()
+   //            },
+   //            function(data,status){
+   //                    alert("数据: \n" + data + "\n状态: " + status);
+   //            }
+   //     )
+   // }
+   // $("projectType").change(function(){
+   //     $.post("/maintenance/seeAllType.do",
+   //         {
+   //           value: $('#projectType option:selected') .val()
+   //         },
+   //         function(data,status){
+   //             alert("数据: \n" + data + "\n状态: " + status);
+   //         });
+   // });
 </script>
 
 
@@ -146,7 +140,6 @@
     var new1 = {}, da = [];
     var formData = {};
     renderMod = {
-
                 form:{
                     date: [{
                         elem:"#test6",

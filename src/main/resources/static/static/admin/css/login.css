@@ -32,22 +32,25 @@ img{
 .backbg{
     background:url("/static/admin/images/login/show.jpg");
     background-size: cover;
-    height:85%;
+    width: 1920px;
+    height: 900px;
 }
 
 .mHeight{
+    margin-top: 20px;
     height:10%;
     text-align: center;
 }
 
 .mHeight p{
-    line-height: 260%;
+    color: #b2b2b2;
 }
 
 .bgs{
-    margin-top: 10%;
+    margin-top: 20%;
     height: 400px;
     background: #fff;
+    opacity:0.9;
     border-radius: 5px;
     overflow: hidden;
 }
