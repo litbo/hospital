@@ -715,26 +715,6 @@
                     "url": "./life/electric-bill/plan-search2.html",
                     "id": "31112",
                     "shiro": "HSDB"
-                  },
-                  {
-                    "title": "离线盘点",
-                    "url": "data&t=0&n=3",
-                    "id": "31113",
-                    "shiro": "LXPD",
-                    "children": [
-                      {
-                        "title": "盘点同步",
-                        "url": "./dataCollection/page/choose-lxpd.html",
-                        "id": "311130",
-                        "shiro": "PDTB"
-                      },
-                      {
-                        "title": "盘点计划",
-                        "url": "./dataCollection/lxpd-table.html",
-                        "id": "311131",
-                        "shiro": "PDJH"
-                      }
-                    ]
                   }
                 ]
               },
@@ -798,10 +778,34 @@
               }
             ]
           },
+
+          {
+            "title": "离线盘点",
+            "url": "life&t=1&n=3",
+            "icon": "clipboard-check",
+            "id": "313",
+            "shiro": "LXPD",
+            "children": [
+              {
+                "title": "盘点同步",
+                "url": "./dataCollection/page/choose-lxpd.html",
+                "id": "3130",
+                "icon": "clipboard-check",
+                "shiro": "PDTB"
+              },
+              {
+                "title": "盘点计划",
+                "url": "./dataCollection/lxpd-table.html",
+                "id": "3131",
+                "icon": "clipboard-check",
+                "shiro": "PDJH"
+              }
+            ]
+          },
           {
             "title": "电子登记表",
-            "url": "life&t=1&n=3",
-            "id": "313",
+            "url": "life&t=1&n=4",
+            "id": "314",
             "shiro": "DZDJB",
             "icon": "book"
           }
