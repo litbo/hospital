@@ -91,7 +91,7 @@
         btn: [
             {
                 elem: '#sub',
-                func: function () {
+                func: function (obj) {
                     if ($("#productName").val() === ""||$("#cycle").val()===""||$("#expired").val()===""||$("#notExpired").val()===""
                         ||$("#dateOfActivation").val()===""||$("#changeDate").val()===""){
                         attr();
@@ -106,6 +106,7 @@
                         value: da
                     });
                     var index = parent.layer.getFrameIndex(window.name);
+                    console.log(obj)
                     parent.layer.close(index);
                 }
             }

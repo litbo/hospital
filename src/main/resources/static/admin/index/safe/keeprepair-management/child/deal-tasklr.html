@@ -111,9 +111,6 @@
             filter: "btnn",//可以不写
 
             func: function (obj, data) {
-
-                var a=document.getElementById("maintenanceResults").value;
-                console.log(a);
                 $.post("http://localhost:8080/maintenance/resultAdd.do",
                     {
                         maintenanceResults: document.getElementById("instrumentStatus").value,
@@ -126,10 +123,11 @@
                         projectList: localStorage.getItem("projectsIds").toString(),
                         ifNotRisk: false,
                     },
-                    /*function (data, status) {
-                        console.log("yijing qingqiu")
+                    function (data, status) {
+                        console.log(vg);
                         localStorage.removeItem("projectsIds")
-                    }*/);
+                    });
+                parent.layer.close(index);
             }
 
         },
@@ -141,7 +139,8 @@
                     base: "deal-add.html",
                     name: "vg",
                     key: "key",
-                    before:function(){
+                    func:function(obj,data){
+                        console.log(obj)//获取名称为“key”的值)
                         // var a = localStorage.sitename;
                         // var tv = getTableValue("table");
                     },
