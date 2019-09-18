@@ -171,7 +171,7 @@
 
           {
             "title": "软件接口",
-            "url": "data&t=0&n=4",
+            "url": "data&t=0&n=3",
             "shiro": "RJJK",
             "id": "204",
             "children": [
@@ -803,7 +803,7 @@
             ]
           },
           {
-            "title": "电子登记表",
+            "title": "使用登记",
             "url": "life&t=1&n=4",
             "id": "314",
             "shiro": "DZDJB",
@@ -1242,130 +1242,33 @@
     "tools": [
 
       {
-        "title": "风险管理",
-        "icon": "exclamation-triangle",
-        "shiro": "snjadkbjsemhdbs",
-        "children": [
-          {
-            "title": "风险管理",
-            "url": "safe&t=0&n=0",
-            "shiro": "snjadkbjsemhdbs",
-            "id": "400",
-            "children": [
-              {
-                "title": "风险分析",
-                "url": "./table.html",
-                "icon": "poll",
-                "id": "FXFX",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "风险分值定义",
-                    "url": "./table.html",
-                    "id": "40000",
-                    "shiro": "FXFZDY"
-                  },
-                  {
-                    "title": "风险等级",
-                    "url": "./safe/risk-management/risk-rating.html",
-                    "id": "40001",
-                    "shiro": "FXDJ"
-                  }
-                ]
-              },
-              {
-                "title": "风险评价",
-                "url": "./table.html",
-                "icon": "user-edit",
-                "id": "4001",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "风险监测",
-                    "url": "./table.html",
-                    "id": "40010",
-                    "shiro": "FXJC"
-                  },
-                  {
-                    "title": "风险预警",
-                    "url": "./table.html",
-                    "id": "40011",
-                    "shiro": "FXYJ"
-                  },
-                  {
-                    "title": "实时监视",
-                    "url": "./table.html",
-                    "id": "40012",
-                    "shiro": "SSJS"
-                  }
-                ]
-              },
-              {
-                "title": "风险控制",
-                "url": "./table.html",
-                "icon": "sliders-h",
-                "id": "4002",
-                "shiro": "FXKZ",
-                "children": [
-                  {
-                    "title": "风险控制实施",
-                    "url": "./table.html",
-                    "id": "40020",
-                    "shiro": "FXKZSS"
-                  },
-                  {
-                    "title": "质控等级目录",
-                    "url": "./table.html",
-                    "id": "40021",
-                    "shiro": "ZKDJML"
-                  },
-                  {
-                    "title": "分级风控方案",
-                    "url": "./table.html",
-                    "id": "40022",
-                    "shiro": "FJFKFA"
-                  },
-                  {
-                    "title": "设备风控单",
-                    "url": "./table.html",
-                    "id": "40023",
-                    "shiro": "SBFKD"
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "id": "40"
-      },
-      {
         "title": "维修管理",
         "icon": "wrench",
         "shiro": "WXGL",
         "children": [
           {
             "title": "设备维修",
-            "url": "safe&t=1&n=0",
-            "id": "410",
+            "url": "safe&t=0&n=0",
+            "id": "400",
             "shiro": "SBWX",
             "children": [
               {
                 "title": "维修任务",
                 "url": "./table.html",
                 "icon": "wrench",
-                "id": "4100",
+                "id": "4000",
                 "shiro": "WXRWZ",
                 "children": [
                   {
                     "title": "报修",
                     "url": "./safe/service-management/repair.html",
-                    "id": "41000",
+                    "id": "40000",
                     "shiro": "BXIU"
                   },
                   {
                     "title": "维修任务",
                     "url": "./safe/service-management/servicing-task.html",
-                    "id": "41001",
+                    "id": "40001",
                     "shiro": "WXRW"
                   },
                   {
@@ -1377,19 +1280,19 @@
                   {
                     "title": "维修费申请",
                     "url": "./safe/service-management/repair-apply.html",
-                    "id": "41002",
+                    "id": "40002",
                     "shiro": "WXFSQ"
                   },
                   {
                     "title": "满意度再评价",
                     "url": "./table.html",
-                    "id": "41003",
+                    "id": "40003",
                     "shiro": "a"
                   },
                   {
                     "title": "补录维修报告",
                     "url": "./safe/service-management/additional-record.html",
-                    "id": "41004",
+                    "id": "40004",
                     "shiro": "BLWXBG"
                   }
                 ]
@@ -1398,37 +1301,37 @@
                 "title": "查询&统计",
                 "url": "./table.html",
                 "icon": "chart-pie",
-                "id": "4101",
+                "id": "4001",
                 "shiro": "a",
                 "children": [
                   {
                     "title": "工程师工作情况",
                     "url": "./table.html",
-                    "id": "41010",
+                    "id": "40010",
                     "shiro": "a"
                   },
                   {
                     "title": "信息设备维修查询",
                     "url": "./table.html",
-                    "id": "41011",
+                    "id": "40011",
                     "shiro": "a"
                   },
                   {
                     "title": "维修查询",
                     "url": "./table.html",
-                    "id": "41012",
+                    "id": "40012",
                     "shiro": "a"
                   },
                   {
                     "title": "本科维修费汇总",
                     "url": "./table.html",
-                    "id": "41013",
+                    "id": "40013",
                     "shiro": "a"
                   },
                   {
                     "title": "综合查询",
                     "url": "./table.html",
-                    "id": "41014",
+                    "id": "40014",
                     "shiro": "a"
                   }
                 ]
@@ -1437,13 +1340,13 @@
                 "title": "字典管理",
                 "url": "./table.html",
                 "icon": "book",
-                "id": "4102",
+                "id": "4002",
                 "shiro": "ZDGL2",
                 "children": [
                   {
                     "title": "配件字典",
                     "url": "./safe/service-management/accessories-dictionary.html",
-                    "id": "41020",
+                    "id": "40020",
                     "shiro": "PJZDZ"
                   }
                 ]
@@ -1452,33 +1355,33 @@
           },
           {
             "title": "维修合同",
-            "url": "safe&t=1&n=1",
-            "id": "411",
+            "url": "safe&t=0&n=1",
+            "id": "401",
             "shiro": "WXHT",
             "children": [
               {
                 "title": "报修合同",
                 "url": "./table.html",
                 "icon": "scroll",
-                "id": "4110",
+                "id": "4010",
                 "shiro": "BXHT",
                 "children": [
                   {
                     "title": "合同录入",
                     "url": "./safe/service-management/contract-input.html",
-                    "id": "41100",
+                    "id": "40100",
                     "shiro": "HTLR"
                   },
                   {
                     "title": "合同支付",
                     "url": "./safe/service-management/contract-payment.html",
-                    "id": "41101",
+                    "id": "40101",
                     "shiro": "HTZF"
                   },
                   {
                     "title": "合同查询",
                     "url": "./safe/service-management/contract-search.html",
-                    "id": "41102",
+                    "id": "40102",
                     "shiro": "HTCX"
                   }
                 ]
@@ -1487,21 +1390,21 @@
           },
           {
             "title": "维修配件",
-            "url": "safe&t=1&n=2",
-            "id": "412",
+            "url": "safe&t=0&n=2",
+            "id": "402",
             "shiro": "WXPJ",
             "children": [
               {
                 "title": "配件申购",
                 "url": "./safe/service-management/accessories-purchase.html",
                 "icon": "shopping-cart",
-                "id": "4120",
+                "id": "4020",
                 "shiro": "PJSG"
               },
               {
                 "title": "入库查询",
                 "url": "./safe/service-management/ruku-search.html",
-                "id": "4121",
+                "id": "4021",
                 "icon": "sign-out-alt",
                 "shiro": "RKCX"
               },
@@ -1509,60 +1412,60 @@
                 "icon": "gavel",
                 "title": "出库查询",
                 "url": "./safe/service-management/chuku-search.html",
-                "id": "4122",
+                "id": "4022",
                 "shiro": "CKCX"
               },
               {
                 "title": "库存查询",
                 "url": "./safe/service-management/stock-check.html",
                 "icon": "search",
-                "id": "4124",
+                "id": "4024",
                 "shiro": "KCCX"
               },
               {
                 "title": "配件字典",
                 "url": "./safe/service-management/accessories-dictionary.html",
                 "icon": "torah",
-                "id": "4125",
+                "id": "4025",
                 "shiro": "PJZD"
               }
             ]
           },
           {
             "title": "维修发票",
-            "url": "safe&t=1&n=3",
-            "id": "413",
+            "url": "safe&t=0&n=3",
+            "id": "403",
             "shiro": "WXFP",
             "children": [
               {
                 "title": "维修发票管理",
                 "url": "./table.html",
-                "id": "4130",
+                "id": "4030",
                 "icon": "receipt",
                 "shiro": "WXFPGL",
                 "children": [
                   {
                     "title": "维修发票登记",
                     "url": "./safe/maintenance-management/invoice-registration.html",
-                    "id": "41300",
+                    "id": "40300",
                     "shiro": "WXFPDJ"
                   },
                   {
                     "title": "维修发票审核",
                     "url": "./safe/maintenance-management/invoice-audit.html",
-                    "id": "41301",
+                    "id": "40301",
                     "shiro": "WXFPSH"
                   },
                   {
                     "title": "维修发票查询",
                     "url": "./safe/maintenance-management/invoice-inquiry.html",
-                    "id": "41302",
+                    "id": "40302",
                     "shiro": "WXFPCX"
                   },
                   {
                     "title": "院外发票查询",
                     "url": "./safe/maintenance-management/invoice-ywfp-inquiry.html",
-                    "id": "41303",
+                    "id": "40303",
                     "shiro": "YWFPCX"
                   }
                 ]
@@ -1570,7 +1473,7 @@
             ]
           }
         ],
-        "id": "41"
+        "id": "40"
       },
       {
         "title": "应用培训",
@@ -1579,7 +1482,7 @@
         "children": [
           {
             "title": "人员培训",
-            "url": "safe&t=2&n=0",
+            "url": "safe&t=1&n=0",
             "id": "420",
             "shiro": "RYPX",
             "children": [
@@ -1691,7 +1594,7 @@
         "children": [
           {
             "title": "安全(不良)事件",
-            "url": "safe&t=3&n=0",
+            "url": "safe&t=2&n=0",
             "id": "430",
             "shiro": "AQ(BL)SJ",
             "children": [
@@ -1737,7 +1640,7 @@
         "children": [
               {
                 "title": "风险管理",
-                "url": "safe&t=4&n=0",
+                "url": "safe&t=3&n=0",
                 "shiro": "FXGL",
                 "id": "440",
                 "children": [
@@ -1828,7 +1731,7 @@
 
           {
             "title": "维护保养",
-            "url": "safe&t=4&n=1",
+            "url": "safe&t=3&n=1",
             "id": "441",
             "shiro": "WHBY",
             "children": [
@@ -1946,7 +1849,7 @@
           },
           {
             "title": "设备质检",
-            "url": "safe&t=4&n=2",
+            "url": "safe&t=3&n=2",
             "id": "442",
             "shiro": "SBZJ",
             "children": [
@@ -2002,7 +1905,7 @@
           },
           {
             "title": "设备巡检",
-            "url": "safe&t=4&n=3",
+            "url": "safe&t=3&n=3",
             "id": "443",
             "shiro": "SBXJ",
             "children": [
@@ -2047,7 +1950,7 @@
           },
           {
             "title": "设备计量",
-            "url": "safe&t=4&n=4",
+            "url": "safe&t=3&n=4",
             "id": "444",
             "shiro": "SBJL",
             "children": [
@@ -2115,7 +2018,7 @@
           },
           {
             "title": "特种设备",
-            "url": "safe&t=4&n=5",
+            "url": "safe&t=3&n=5",
             "id": "445",
             "shiro": "TZSBZ",
             "children": [
