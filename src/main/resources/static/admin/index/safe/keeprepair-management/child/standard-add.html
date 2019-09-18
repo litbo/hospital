@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>新建数据</title>
+    <title>123</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -27,7 +27,7 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title">
-    <legend>添加数据</legend>
+    <legend>添加保养项目</legend>
 </fieldset>
 <form class="layui-form layui-form-pane" action="" lay-filter="wxfForms">
     <div class="layui-row">
@@ -35,7 +35,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">项目类型<span class="sign">*</span></label>
                 <div class="layui-input-block ">
-                    <select name="projectType" id="projectType">
+                    <select name="projectType" id="projectType"  lay-filter="demo" lay-verify="required" onchange="teset(this.value)">
                         <option value="">请选择项目类型</option>
                         <option value="外观检查">外观检查</option>
                         <option value="清洁保养">清洁保养</option>
@@ -107,36 +107,36 @@
 <div id="tips"></div>
 
 <!--projectType  projectName-->
+
+
 <script>
-    $("projectType").ready(function(){
-        $("#projectType").change(function(){
-            alert("文本已被修改");
+    layui.use(['layer', 'jquery', 'form'], function () {
+        var layer = layui.layer,
+            $ = layui.jquery,
+            form = layui.form;
+
+        form.on('select(demo)', function(data){
+            if(data.value == 1){
+             alert("123")
+            }else{
+                var type =$('#projectType option:selected') .val();//选中的值
+                console.log(type)
+                $.get("/maintenance/seeAllType.do?type="+type,function(data,status){
+
+                    var projectName = data.data;
+                    $("#projectName").empty()
+                        for(var i in projectName){
+                            console.log(i+projectName)
+                            // $("#projectName").append("<option value=\""+projectName[i]+"\">"+projectName[i]+"</option>")
+                            $("#projectName").append("<option>123</option>")
+                    }
+                });
+            }
         });
     });
-   // function changeEventHandler(e) {
-   //     console.log("123")
-   //     $.post("/maintenance/seeAllType.do",
-   //            {
-   //               value: $('#projectType option:selected') .val()
-   //            },
-   //            function(data,status){
-   //                    alert("数据: \n" + data + "\n状态: " + status);
-   //            }
-   //     )
-   // }
-   // $("projectType").change(function(){
-   //     $.post("/maintenance/seeAllType.do",
-   //         {
-   //           value: $('#projectType option:selected') .val()
-   //         },
-   //         function(data,status){
-   //             alert("数据: \n" + data + "\n状态: " + status);
-   //         });
-   // });
 </script>
-
-
 <script>
+
     var new1 = {}, da = [];
     var formData = {};
     renderMod = {

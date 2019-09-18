@@ -174,7 +174,7 @@
         // c=parseInt(a)+parseInt(b)
 
         if (ad1==undefined || ad2==undefined || ad3==undefined || ad4==undefined || ad5==undefined){
-            alert("123")
+            alert("风险值为全部设置")
         }
         var ad = parseInt(ad1)+parseInt(ad2)+parseInt(ad3)+parseInt(ad4)+parseInt(ad5)
         document.getElementById("zf").innerHTML = ad;
@@ -184,7 +184,9 @@
         $.post("http://localhost:8080/maintenance/addRiskValue.do?eqId="+maintenanceEqId+"&riskValue="+ad,function(data,status){
             alert("Data: " + data + "nStatus: " + status);
         });
-
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index); //再执行关闭
+        parent.location.reload();
 
     }
 
