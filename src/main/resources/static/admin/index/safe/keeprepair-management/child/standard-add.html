@@ -49,7 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">项目名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="projectName" id="projectName">
+                    <select name="projectName" id="project">
                         <option value="" data-id="0">请选择项目名称</option>
                     </select>
                 </div>
@@ -119,17 +119,17 @@
             if(data.value == 1){
              alert("123")
             }else{
-                var type =$('#projectType option:selected') .val();//选中的值
+                var type =$('#projectType option:selected').val();//选中的值
                 console.log(type)
                 $.get("/maintenance/seeAllType.do?type="+type,function(data,status){
 
                     var projectName = data.data;
-                    $("#projectName").empty()
-                        for(var i in projectName){
-                            console.log(i+projectName)
-                            // $("#projectName").append("<option value=\""+projectName[i]+"\">"+projectName[i]+"</option>")
-                            $("#projectName").append("<option>123</option>")
+                    console.log(projectName);
+                    $("#project").empty()
+                     for(var i in projectName){
+                         $("#project").append("<option value=\""+projectName+"\">"+projectName+"</option>")
                     }
+                    layui.form.render("select");
                 });
             }
         });
