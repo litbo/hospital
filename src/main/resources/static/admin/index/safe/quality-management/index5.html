@@ -145,13 +145,13 @@
                 , sort: true
                 , cols: [[
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'speqBh', title: '设备编号', width: 150}
-                    , {field: 'speqName', title: '设备名称', width: 200}
-                    , {field: 'bmId', title: '所在科室', width: 200, templet: '#Tpl'}
-                    , {field: 'speqGgxh', title: '规格型号', width: 180}
-                    , {field: 'speqScs', title: '生产厂家', width: 250}
-                    , {field: 'speqJhjcrq', title: '计划检测日期', width: 150}
-                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 96}
+                    , {field: 'speqBh', title: '设备编号', minWidth: 150}
+                    , {field: 'speqName', title: '设备名称', minWidth: 200}
+                    , {field: 'bmId', title: '所在科室', minWidth: 200, templet: '#Tpl'}
+                    , {field: 'speqGgxh', title: '规格型号', minWidth: 180}
+                    , {field: 'speqScs', title: '生产厂家', minWidth: 250}
+                    , {field: 'speqJhjcrq', title: '计划检测日期', minWidth: 150}
+                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', minWidth: 96}
                 ]]
                 , id: "tast"
                 , page: true//开启分页
@@ -184,7 +184,6 @@
                 ResultsEntry(data);
                 /*  console.log(data);*/
             }
-
             /*  console.log(data)
 */
         })
@@ -202,7 +201,7 @@
             title : "结果录入",
             type : 2,
             content :url ,//弹出层页面
-            area: ['98%', '535px']
+            area: ['98%', '95%']
 
         });
 

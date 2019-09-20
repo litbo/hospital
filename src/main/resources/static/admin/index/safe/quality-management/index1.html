@@ -178,15 +178,15 @@
                     , sort: true
                     , cols: [[
                         {type: 'checkbox', fixed: 'left', field: 'table1'}
-                        , {field: 'bmId', title: '所在科室', width: 170, templet: '#Tpl'}
-                        , {field: 'speqBh', title: '设备编号', width: 120}
-                        , {field: 'speqName', title: '设备名称', width: 150}
-                        , {field: 'speqGgxh', title: '规格型号', width: 150}
-                        , {field: 'speqScs', title: '生产厂家', width: 180}
-                        , {field: 'speqBz', title: '院区', width: 140}
-                        , {field: 'speqType', title: '设备类型', width: 100, templet: '#speqT'}
-                        , {field: 'speqSpare1', title: '单价（元）', width: 100, sort: true}
-                        , {field: 'speqRun', title: '设备状态', width: 96, templet: '#statusTpl'}
+                        , {field: 'bmId', title: '所在科室', minWidth: 170, templet: '#Tpl'}
+                        , {field: 'speqBh', title: '设备编号', minWidth: 120}
+                        , {field: 'speqName', title: '设备名称', minWidth: 150}
+                        , {field: 'speqGgxh', title: '规格型号', minWidth: 150}
+                        , {field: 'speqScs', title: '生产厂家', minWidth: 180}
+                        , {field: 'speqBz', title: '院区', minWidth: 140}
+                        , {field: 'speqType', title: '设备类型', minWidth: 100, templet: '#speqT'}
+                        , {field: 'speqSpare1', title: '单价（元）', minWidth: 100, sort: true}
+                        , {field: 'speqRun', title: '设备状态', minWidth: 96, templet: '#statusTpl'}
 
                     ]]
                     , page: true//开启分页
@@ -334,7 +334,7 @@
             title: "详细信息",
             type: 2,
             content:url ,//弹出层页面
-            area: ['1200px', '510px']
+            area: ['95%', '95%']
         });
     }
 </script>
@@ -350,7 +350,7 @@
             title: "编辑信息",
             type: 2,
             content: url,//弹出层页面
-            area: ['1000px', '530px'],
+            area: ['95%', '95%'],
         })
      }
 </script>

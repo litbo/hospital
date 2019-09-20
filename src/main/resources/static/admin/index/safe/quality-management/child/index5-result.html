@@ -24,9 +24,11 @@
     </style>
 </head>
 <body>
-<form class="layui-form " action="" style="margin-top: 10px;margin-left: 100px;">
-    <div  class="layui-col-md8" id="bor_input" style="width: 100%;">
-        <div class="layui-col-md3" style="width: 30%">
+<div class="layui-row" style="margin: 20px">
+    <div class="col-xs-12">
+    <form class="layui-form " action="" style="margin-top: 10px;margin-left: 100px;">
+    <div  id="bor_input" >
+        <div class="layui-col-md4" >
 
             <div class="layui-form-item" style="display: none">
                 <label class="layui-form-label">设备:</label>
@@ -81,7 +83,7 @@
             </div>
 
         </div>
-        <div  class="layui-col-md3" style="width: 30%">
+        <div  class="layui-col-md4" >
             <div class="layui-form-item" style="margin-bottom: 2px">
                 <label class="layui-form-label">使用科室:</label>
                 <div class="layui-input-inline">
@@ -127,7 +129,7 @@
 
 
         </div>
-        <div class="layui-col-md3" style="width: 30%">
+        <div class="layui-col-md4" >
             <div class="layui-form-item">
                 <label class="layui-form-label">出厂编号:</label>
                 <div class="layui-input-inline">
@@ -201,7 +203,7 @@
         </div>
     </div>
     <!-- 分割线-->
-    <div class="layui-col-md10" style="width: 80%; height: 2px;border-bottom: 1px dashed #ccc;"></div>
+    <div class="layui-col-md12" style="width: 80%; height: 2px;border-bottom: 1px dashed #ccc;"></div>
     <!-- 检测证编号 检测结果-->
     <div  class="layui-col-md10 layui-form-pane" style="width: 100%; margin-top: 50px">
         <div class="layui-form-item">
@@ -235,6 +237,8 @@
     </div>
 
 </form>
+    </div>
+</div>
 <script>
 
     layui.use('element', function(){

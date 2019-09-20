@@ -41,7 +41,9 @@
 
 </head>
 <body>
-<form class="layui-form layui-col-md12" action="" lay-filter="form" style="margin-top: 15px;margin-left: 50px;width: 1100px">
+<div class="layui-row " style="margin: 10px;">
+    <div class="col-xs-12">
+  <form class="layui-form " action="" lay-filter="form">
     <div class="layui-collapse" lay-accordion="">
 
         <div class="layui-colla-item">
@@ -52,7 +54,7 @@
                     <div class="layui-col-md4" >
                         <div class="layui-form-item">
                             <label class="layui-form-label">设备编号:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" name="speqBh" lay-verify="required"
                                        placeholder="请输入" autocomplete="off" class="layui-input speqBh" disabled>
                             </div>
@@ -61,7 +63,7 @@
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">设&nbsp;备&nbsp;名&nbsp;称:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" name="speqName" lay-verify="required"
                                        placeholder="请输入" autocomplete="off" class="layui-input speqName"   disabled>
                             </div>
@@ -69,7 +71,7 @@
 
                         <div class="layui-form-item" >
                             <label class="layui-form-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型:</label>
-                            <div class="layui-input-inline " >
+                            <div class="layui-input-block " >
                                 <!-- <input type="radio" name="speqType" value="特种设备" title="特种设备"   checked="" >
                                  <input type="radio" name="speqType" value="安全附件" title="安全附件"  >-->
                                 <input type="text" name="speqType" class="layui-input speqType"  disabled>
@@ -78,7 +80,7 @@
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">规&nbsp;格&nbsp;型&nbsp;号:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" name="speqGgxh" lay-verify="required" placeholder="请输入"
                                        autocomplete="off" class="layui-input speqGgxh"  disabled>
                             </div>
@@ -86,7 +88,7 @@
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">生&nbsp;&nbsp;产&nbsp;&nbsp;商:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" name="speqScs" lay-verify="required" placeholder="请输入"
                                        autocomplete="off" class="layui-input speqScs"  disabled>
                             </div>
@@ -94,7 +96,7 @@
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">出&nbsp;厂&nbsp;编&nbsp;号:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" name="speqCcbh" lay-verify="required" placeholder="请输入"
                                        autocomplete="off" class="layui-input speqCcbh"   disabled>
                             </div>
@@ -106,7 +108,7 @@
                     <div  class="layui-col-md4" >
                         <div class="layui-form-item" style="margin-bottom: 10px">
                             <label class="layui-form-label">使&nbsp;用&nbsp;科&nbsp;室:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" style="height: 39px;border: none;margin-left:5px;padding-left:15px;box-sizing: border-box;background: white " class="bmId" name ='bmId' id="bmId"   disabled>
                             </div>
                         </div>
@@ -132,7 +134,7 @@
                         <div class="layui-form-item " style="margin-bottom: 10px">
                             <div class="layui-inline" >
                                 <label class="layui-form-label">院&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
-                                <div class="layui-input-inline" >
+                                <div class="layui-input-block" >
                                     <input type="text" name="speqBz"  placeholder="院区" autocomplete="off" class="layui-input  speqBz"   disabled>
                                 </div>
                             </div>
@@ -141,7 +143,7 @@
                         <div class="layui-form-item" style="margin-bottom: 10px">
                             <div class="layui-inline" >
                                 <label class="layui-form-label" >单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价:</label>
-                                <div class="layui-input-inline">
+                                <div class="layui-input-block">
                                     <input type="text" name="speqSpare1"  placeholder="请输入" autocomplete="off" class="layui-input speqSpare1" value=""   disabled>
                                 </div>
                             </div>
@@ -154,7 +156,7 @@
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">检测证编号:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" name="speqJczbh" lay-verify="required" placeholder="请输入"
                                        autocomplete="off" class="layui-input speqJczbh"  disabled>
                             </div>
@@ -162,7 +164,7 @@
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">注&nbsp;册&nbsp;编&nbsp;号:</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-block">
                                 <input type="text" name="speqZczbh" lay-verify="required"
                                        autocomplete="off" class="layui-input speqZczbh"   placeholder="无" disabled>
                             </div>
@@ -171,7 +173,7 @@
                         <div class="layui-form-item" style="margin-bottom: 10px">
                             <div class="layui-inline" >
                                 <label class="layui-form-label" >使&nbsp;用&nbsp;编&nbsp;号:</label>
-                                <div class="layui-input-inline">
+                                <div class="layui-input-block">
                                     <input type="text" name="speqSyzbh"  placeholder="无"  autocomplete="off" class="layui-input speqSyzbh"   disabled>
                                 </div>
                             </div>
@@ -180,7 +182,7 @@
                         <div class="layui-form-item" style="margin-bottom: 10px">
                             <div class="layui-inline" >
                                 <label class="layui-form-label" >精&nbsp;度&nbsp;等&nbsp;级:</label>
-                                <div class="layui-input-inline">
+                                <div class="layui-input-block">
                                     <input type="text" name="aqfjJddj"  placeholder="无" autocomplete="off" class="layui-input aqfjJddj"   disabled>
                                 </div>
                             </div>
@@ -189,7 +191,7 @@
                         <div class="layui-form-item" style="margin-bottom: 10px">
                             <div class="layui-inline" >
                                 <label class="layui-form-label" >设&nbsp;备&nbsp;状&nbsp;态:</label>
-                                <div class="layui-input-inline">
+                                <div class="layui-input-block">
                                     <input type="text" name="speqRun"  placeholder="请输入" autocomplete="off" class="layui-input speqRun"   disabled>
                                 </div>
                             </div>
@@ -204,18 +206,12 @@
 
         <div class="layui-colla-item">
             <h2 class="layui-colla-title">历史送检结果记录</h2>
-            <div class="layui-colla-content"  style="height: 310px">
-
-                <div class="layui-col-md12"  style="width: 100%">
-
+            <div class="layui-colla-content"  style="height: 100%;">
                     <!-- 表格-->
-                    <table class="layui-hide" id="test" style="position: relative">
+                    <table class="layui-table" id="test">
                         <!--    记录-->
-                        <div id="num1"></div>
+                       <!-- <div id="num1"></div>-->
                     </table>
-
-                </div>
-
             </div>
 
         </div>
@@ -224,6 +220,8 @@
 
 
 </form>
+    </div>
+</div>
 <script>
 
     //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
@@ -254,7 +252,6 @@
             data : {"speqId": speqId},
             success : function(springBootOtl){
                 var  data = springBootOtl;
-                console.log(123);
                 if(data !== null){
                      $(".speqBh").val(data.data.speqBh);
                      $(".speqName").val(data.data.speqName);
@@ -277,9 +274,6 @@
                  }else{
                      alert("查询为空");
                  }
-                setTimeout(function(){
-                    layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {tips: 3});
-                },500)
             },
             error:function (data) {
                 alert("查询失败");
@@ -314,17 +308,17 @@
            ,type : 'POST'
             , toolbar:false
             ,method: "POST"
-            ,height:300
+            ,height: "full"
             , cols: [[
                 {type:'numbers'}
-                ,{field: 'speqBh', width: 120, title: '设备编号'}
-                , {field: 'speqJczbh', width: 150, title: '检测证编号'}
-                , {field: 'speqJcsj', width: 150, title: '检测日期', sort: true}
-                , {field: 'speqSjsqr', title: '送检申请人', width: 110}
-                , {field: 'speqSjsqsj', width: 150, title: '送检申请时间', sort: true}
+                ,{field: 'speqBh', minWidth: 50, title: '设备编号'}
+                , {field: 'speqJczbh', minWidth: 150, title: '检测证编号'}
+                , {field: 'speqJcsj', width: 130, title: '检测日期', sort: true}
+                , {field: 'speqSjsqr', width: 110 ,title: '送检申请人'}
+                , {field: 'speqSjsqsj', width: 130, title: '送检申请时间', sort: true}
                 , {field: 'speqSjspr', width: 110, title: '送检审批人'}
-                , {field: 'speqSjspsj', width: 150, title: '送检审批时间', sort: true}
-                , {field: 'speqRun', width: 115, title: '送检结果', templet: '#statusTpl'}
+                , {field: 'speqSjspsj', width: 130, title: '送检审批时间', sort: true}
+                , {field: 'speqRun', width: 100, title: '送检结果', templet: '#statusTpl'}
             ]]
             ,where:{
                 speqBh : $.getUrlParam("bh")

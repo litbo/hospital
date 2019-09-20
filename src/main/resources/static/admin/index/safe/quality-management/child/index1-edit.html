@@ -15,12 +15,14 @@
     <script src="../../../../../static/admin/js/basic.js"></script>
 </head>
 <body>
-<form class="layui-form  layui-form-pane" action="" style="margin-top: 20px;margin-left: 100px;">
+<div class="layui-row" style="margin: 20px">
+    <div class="col-xs-12">
+        <form class="layui-form  layui-form-pane" action="" >
 
-    <div class="layui-col-md5" style="width: 50%">
+    <div class="layui-col-md6" style="padding: 10px;">
 
         <div class="layui-form-item" style="display: none">
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name="speqId" lay-verify="required"
                        placeholder="请输入" autocomplete="off" class="layui-input speqId">
             </div>
@@ -28,7 +30,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">设备编号</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name="speqBh" lay-verify="required"
                        placeholder="请输入" autocomplete="off" class="layui-input speqBh">
             </div>
@@ -37,7 +39,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">设备名称</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name=speqName" lay-verify="required"
                        placeholder="请输入" autocomplete="off" class="layui-input speqName">
             </div>
@@ -55,7 +57,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">规格型号</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name="speqGgxh" lay-verify="required" placeholder="请输入"
                        autocomplete="off" class="layui-input speqGgxh">
             </div>
@@ -63,7 +65,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">生产商</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name="speqScs" lay-verify="required" placeholder="请输入"
                        autocomplete="off" class="layui-input speqScs">
             </div>
@@ -71,7 +73,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">出厂编号</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name="speqCcbh" lay-verify="required" placeholder="请输入"
                        autocomplete="off" class="layui-input speqCcbh">
             </div>
@@ -79,7 +81,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">检测证编号</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name="speqJczbh" lay-verify="required" placeholder="请输入"
                        autocomplete="off" class="layui-input speqJczbh">
             </div>
@@ -87,17 +89,17 @@
 
         <div class="layui-form-item" id="speqZczbh">
             <label class="layui-form-label">注册编号</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="text" name="speqZczbh"  placeholder="请输入" lay-verify="required"
                        autocomplete="off" class="layui-input speqZczbh" >
             </div>
         </div>
 
     </div>
-    <div  class="layui-col-md5" style="width: 50%;">
+    <div  class="layui-col-md6" style="padding: 10px;">
         <div class="layui-form-item">
             <label class="layui-form-label">使用科室</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <input type="button" class="layui-btn bmId" title="科室" value="科室"
                        lay-filter="bmId" style="float:left;">
                 <input type="text" lay-verify="required" readonly="readonly" style="float:left; width: 100px;height: 35px;border: none;margin-left: 15px" name ='bmId' id="bmId" value="">
@@ -125,7 +127,7 @@
         <div class="layui-form-item ">
             <div class="layui-inline" >
                 <label class="layui-form-label">院区</label>
-                <div class="layui-input-inline" >
+                <div class="layui-input-block" >
                     <input type="text" name="speqBz"  lay-verify="required"  placeholder="院区" autocomplete="off" class="layui-input  speqBz">
                 </div>
             </div>
@@ -134,7 +136,7 @@
         <div class="layui-form-item">
             <div class="layui-inline" >
                 <label class="layui-form-label" >单价</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-block">
                     <input type="text" name="speqSpare1" lay-verify="required"  placeholder="请输入" autocomplete="off" class="layui-input speqSpare1" value="">
                 </div>
             </div>
@@ -143,7 +145,7 @@
         <div class="layui-form-item" id="speqSyzbh">
             <div class="layui-inline" >
                 <label class="layui-form-label" >使用编号</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-block">
                     <input type="text" name="speqSyzbh"  lay-verify="required"  autocomplete="off" class="layui-input speqSyzbh" >
                 </div>
             </div>
@@ -152,7 +154,7 @@
         <div class="layui-form-item"  id="aqfjJddj">
             <div class="layui-inline">
                 <label class="layui-form-label" >精度等级</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-block">
                     <input type="text" name="aqfjJddj"  lay-verify="required"  placeholder="请输入" autocomplete="off" class="layui-input aqfjJddj" >
                 </div>
             </div>
@@ -167,7 +169,8 @@
     </div>
 
 </form>
-
+    </div>
+</div>
 <script>
 
     layui.use('element', function(){

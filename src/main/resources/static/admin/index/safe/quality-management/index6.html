@@ -149,12 +149,12 @@
                     , toolbar: '#toolbarDemo'
                     , title: '从业人员'
                     , cols: [[
-                        {type: 'checkbox', fixed: 'left', width: 50}
-                        , {field: 'userId', title: '人员编号', width: 175, unresize: true, templet: '#Tpl'}
-                        , {field: 'userXm', title: '姓名', width: 200}
-                        , {field: 'spemSgzzfw', title: '上岗资质范围', width: 300}
-                        , {field: 'bmName', title: '部门', width: 300}
-                        , {field: 'spemSpare1', title: '状态', width: 250, templet: '#statusTpl'}
+                        {type: 'checkbox', fixed: 'left', minWidth: 50}
+                        , {field: 'userId', title: '人员编号', minWidth: 175, unresize: true, templet: '#Tpl'}
+                        , {field: 'userXm', title: '姓名', minWidth: 200}
+                        , {field: 'spemSgzzfw', title: '上岗资质范围', minWidth: 300}
+                        , {field: 'bmName', title: '部门', minWidth: 300}
+                        , {field: 'spemSpare1', title: '状态',minWidth: 250, templet: '#statusTpl'}
                     ]]
                     , id: "test"
                     , parseData: function (res) { //res 即为原始返回的数据
@@ -203,7 +203,7 @@
                         title : "设置从业人员",
                         type : 2,
                         content : "./child/index6-newly.html" ,//弹出层页面
-                        area: ['1100px', '510px'],
+                        area: ['94%', '94%'],
                         end: function () {
                             location.reload();
                         }
@@ -270,7 +270,7 @@
             type: 2,
             title: '从业人员证件录入',
             shadeClose: true, //点击遮罩关闭层
-            area : ['900px', '500px'],
+            area : ['80%', '80%'],
             content:url
         });
 
@@ -286,7 +286,7 @@
             type: 2,
             title: '从业人员详细信息',
             shadeClose: true, //点击遮罩关闭层
-            area: ['800px', '480px'],
+            area: ['80%', '80%'],
             content: url,
         });
     }

@@ -33,12 +33,12 @@
                 toolbar: '#toolbarDemo',
                 title: '从业人员',
                 cols: [[
-                    {type: 'checkbox', fixed: 'left', width: 50}
-                    , {field: 'userId', title: 'ID', width: 200}
-                    , {field: 'userXm', title: '姓名', width: 200}
-                    , {field: 'spemQfrq', title: '签发日期', width: 280}
-                    , {field: 'spemYxqsq', title: '有效期起始日期', width: 280}
-                    , {field: 'spemYxjsq', title: '有效期截止日期', width: 269}
+                    {type: 'checkbox', fixed: 'left', minWidth: 50}
+                    , {field: 'userId', title: 'ID', minWidth: 200}
+                    , {field: 'userXm', title: '姓名', minWidth: 200}
+                    , {field: 'spemQfrq', title: '签发日期', minWidth: 280}
+                    , {field: 'spemYxqsq', title: '有效期起始日期', minWidth: 280}
+                    , {field: 'spemYxjsq', title: '有效期截止日期', minWidth: 269}
                 ]]
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
