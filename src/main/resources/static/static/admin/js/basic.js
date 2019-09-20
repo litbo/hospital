@@ -371,7 +371,6 @@ function subUp(value, data, param) {
         });
         return false;
     }
-    //NEW
     //判断是否需要半自动获取表单数据(根据input的name属性自动获取所有的数据)
     var dataP = {}, valus = "";
     if (Type(value.data) === "array") {
@@ -451,15 +450,15 @@ function subUp(value, data, param) {
                             if(value.restore){
                             	value.data = value.restoreData;
                             }
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            //自定义事件
                             if (value.reload) {
-                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                                //自定义事件
-
                                 if(value.sureDo){
                                     value.sureDo();
                                 }
                                 //当reload = truthy 时 判断reload等于 "parent"父级重载 否则本级重载
                                 if(value.reload === "parent"){
+                                    //此处可以不用，因为当父级重载时，弹窗会自动消失
                                     if(value.shutWin){
                                         parent.layer.close(index);
                                     }
