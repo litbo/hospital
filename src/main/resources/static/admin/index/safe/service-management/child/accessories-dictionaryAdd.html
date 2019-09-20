@@ -24,7 +24,6 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-
     </style>
 </head>
 
@@ -80,7 +79,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">产品注册证号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off"  ay-verify="required|number" placeholder="请输入">
+                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off"  lay-verify="required|number" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -119,9 +118,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -130,9 +127,6 @@
         </div>
     </div>
 </form>
-
-
-
 
 <script>
     var formData = {};
@@ -155,16 +149,14 @@
             ],
             submit: {
                 before:function(param){
-                    if(!(formData.eq[0] && formData.scqy[0] && formData.ghs[0])){
-                        putMsg({
-                            alert:"数据选择项为必填项目，请至少选择一个项目！"
-                        });
-                        return false;
-                    }
+                    var a=[null,null,null];
+                    formData.eq ? a[0] = formData.eq[0].eqId : "";
+                    formData.scqy ? a[1] = formData.scqy[0].sbcsId : "";
+                    formData.ghs ? a[2] = formData.ghs[0].sbcsId1 : "";
                     return param = {
-                        1:formData.eq[0].eqId,
-                        2:formData.scqy[0].sbcsId,
-                        3:"111"
+                        1:a[0],
+                        2:a[1],
+                        3:a[2]
                     }
                 },
                 form: {
@@ -177,7 +169,7 @@
                         2:"pjScqyId",
                         3:"pjGhsId"
                     },
-                    shutWin:true
+                    reload:"parent"
                 }
             },
             val:{
@@ -191,7 +183,6 @@
                     }
                 ]
             }
-
         },
         bind: {
             selectItem: [{
@@ -220,7 +211,6 @@
                 data:formData
             }]
         }
-
     }
 </script>
 </body>
