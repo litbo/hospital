@@ -3,6 +3,7 @@ package com.litbo.hospital.security.controller;
 import com.litbo.hospital.result.CodeMsg;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.service.FwPjkService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FwPjkController {
     @Autowired
     private FwPjkService pjkService;
+    @ApiOperation(value = "查询配件库")
     @RequestMapping(value = "listFwPjk",method = RequestMethod.GET)
     public Result listFwPjk(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,

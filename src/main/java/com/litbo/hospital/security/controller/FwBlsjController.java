@@ -74,7 +74,7 @@ public class FwBlsjController {
 //                             @RequestParam(required = false)String sbcsName, @RequestParam(required = false)String bgmc){
         return  Result.success(blsjService.listFwBlsjWaitExamine(pageNum,pageSize,cpmc,bgrXm));
     }
-
+    @ApiOperation(value = "通过id查询不良事件")
     @RequestMapping(value = "selectFwBlsjById",method = RequestMethod.GET)
     public Result selectFwBlsjById(Integer id) {
         try {

@@ -8,6 +8,7 @@ import com.litbo.hospital.security.enums.EnumApplyStatus;
 import com.litbo.hospital.security.service.FwFpService;
 import com.litbo.hospital.security.vo.SelectFwFpByIdVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ public class FwFpController {
      * @param fp
      * @return
      */
+    @ApiOperation(value = "插入发票信息")
     @RequestMapping(value = "insertFwFp",method = RequestMethod.POST)
     public Result insertFwFp( FwFp fp){
         //TODO 已修改
@@ -90,6 +92,7 @@ public class FwFpController {
      * @param fp
      * @return
      */
+    @ApiOperation(value = "更新发票审核信息")
     @RequestMapping(value = "updateFwFpStatus",method = RequestMethod.POST)
     public Result updateFwFpStatus(FwFp fp){
 
@@ -113,6 +116,7 @@ public class FwFpController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "通过id查询发票")
     @RequestMapping(value = "selectFwFpById",method = RequestMethod.GET)
     public Result selectFwFpById(Integer id){
         SelectFwFpByIdVo fp = fpService.selectFwFpById(id);

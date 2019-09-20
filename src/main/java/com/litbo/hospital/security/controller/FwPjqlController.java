@@ -95,6 +95,7 @@ public class FwPjqlController {
         }
 
     }
+    @ApiOperation(value = "查询单个配件请领")
     @RequestMapping(value = "selectFwPjqlById",method = RequestMethod.GET)
     public Result selectFwPjqlById(Integer id,Integer taskId){
         try {
