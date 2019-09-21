@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>规范内容</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <div class="layui-row" style="margin-top: 15px;">
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">设备</label>
+                <div class="layui-input-block">
+                    <input type="text" name="equipmentNam" autocomplete="off" class="layui-input" readonly>
+                    <input id="standardName" type="hidden" name="standardName" autocomplete="off" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">适用设备</label>
+                <div class="layui-input-block">
+                    <select name="applicableEquipment" disabled>
+                        <option value="同厂家同型号">同厂家同型号</option>
+                        <option value="同类设备">同类设备</option>
+                        <option value="同简称设备">同简称设备</option>
+                        <option value="全部设备">全部设备</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="reviewerName" autocomplete="off" lay-verify="" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">周期(天)</label>
+                <div class="layui-input-block">
+                    <input type="number" min="1" name="cycle" id="cycle" placeholder="" autocomplete="off" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">制订人</label>
+                <div class="layui-input-block">
+                    <input type="text" id="designerName" placeholder="" autocomplete="off" class="layui-input" readonly>
+                    <input type="hidden" name="designerNumber" id="designerNumber" placeholder="" autocomplete="off" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">制订时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="date" id="date" placeholder="" autocomplete="off" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12">
+            <div class="layui-form-item" pane style="margin-bottom:-10px;">
+                <label class="layui-form-label col-xs-12">项目列表</label>
+            </div>
+            <table id="table" lay-filter="table"></table>
+            <div class="col-xs-12">
+                <div class="layui-form-item">
+                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="demo1">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="tips">
+
+</div>
+
+<script type="text/html" id="jsonChange">
+    {{#if (d.typeId === "01") { }}
+    <span>作业检查</span>
+    {{# }else if(d.typeId === "02"){ }}
+    <span>安全隐患检查</span>
+    {{# }else{ }}
+    <span>状态检查</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="jsonChange2">
+    {{#if (d.projectId === "0101") { }}
+    <span>日常保养</span>
+    {{# }else if(d.projectId === "0102"){ }}
+    <span>清洗消毒灭菌</span>
+    {{# }else if(d.projectId === "0103"){ }}
+    <span>主机外观</span>
+    {{# }else if(d.projectId === "0104"){ }}
+    <span>附件情况</span>
+    {{# }else if(d.projectId === "0105"){ }}
+    <span>交接状况</span>
+    {{# }else if(d.projectId === "0201"){ }}
+    <span>安全隐患</span>
+    {{# }else if(d.projectId === "0301"){ }}
+    <span>开机自检状况</span>
+    {{# }else{ }}
+    <span>装备工作情况</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="jsonChange3">
+    {{#if (d.operationId === "01") { }}
+    <span>正常/不正常</span>
+    {{# }else if(d.operationId === "02"){ }}
+    <span>进行/未进行</span>
+    {{# }else{ }}
+    <span>处理/未处理</span>
+    {{# } }}
+</script>
+
+<script>
+    var formData = {};
+    var emp = tempValue("rl", "emp", false);
+    $("#designerName").val(emp.userXm);
+    $("#designerNumber").val(emp.userId);
+
+    console.log($.getUrlParam("standardId"));
+
+
+    renderMod = {
+        table: {
+            table: [
+                {
+                    elem: "#table",
+                    id: "table",
+                    cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'typeId', toolbar:'#jsonChange', title: '项目类型', minWidth: 150}
+                        , {field: 'projectId', toolbar:'#jsonChange2', title: '项目名称', minWidth: 150}
+                        , {field: 'operationId', toolbar:'#jsonChange3', title: '项目操作', minWidth: 150}
+                    ]]
+                    , toolbar: false
+                    , page: false
+                    , height: "200"
+                    , url: "/lifeManage/getStandard"
+                    , text: {
+                        none: "暂无数据！"
+                    }
+                    , method: "POST"
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                    , where: {}
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        console.log(res);
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "data": res.data.list, //解析数据列表
+                            "count": res.data.total //总数据数
+                        }
+                    }
+                }
+            ]
+        },
+        form: {
+            date: {
+                elem: "#date"
+            },
+            val:{
+                filter:"forms",//与form标签lay-filter相同
+                get:{
+                    url:"/lifeManage/getStandard",
+                    type:"POST",
+                    data:{standardId:$.getUrlParam("standardId")}
+                },
+                func:function(data) {
+                    console.log(data);
+                }
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

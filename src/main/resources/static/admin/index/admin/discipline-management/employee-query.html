@@ -25,8 +25,11 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add"><i class="fas fa-plus"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+
     </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
@@ -39,7 +42,8 @@
     </div>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+    <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+
 </script>
 
 
@@ -114,7 +118,8 @@
                                 event:"del",
                                 url:"/kwgl/empgl/deleteEmpsByUserIds",
                                 type:"POST",
-                                par:"userId"
+                                par:"userId",
+                                reload:true
                             },
                             tool:"toolbar",
                             event:"del"

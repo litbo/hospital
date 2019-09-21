@@ -24,12 +24,11 @@
         .layui-form-item{
             margin-bottom:30px;
         }
-
     </style>
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="" >
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6" style="margin-top: 20px;">
             <div class="layui-form-item">
@@ -80,7 +79,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">产品注册证号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off"  ay-verify="required|number" placeholder="请输入">
+                    <input type="text" name="pjZczh" class="layui-input"  autocomplete="off"  lay-verify="required|number" placeholder="请输入">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -119,20 +118,15 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit  lay-filter="submit">立即提交</button>
+                <button class="layui-btn" lay-submit>立即提交</button>
             </div>
         </div>
     </div>
 </form>
-
-
-
 
 <script>
     var formData = {};
@@ -154,13 +148,15 @@
                 }
             ],
             submit: {
-                filter: "submit",//可以不写
                 before:function(param){
-                    console.log("formD = ",formData);
+                    var a=[null,null,null];
+                    formData.eq ? a[0] = formData.eq[0].eqId : "";
+                    formData.scqy ? a[1] = formData.scqy[0].sbcsId : "";
+                    formData.ghs ? a[2] = formData.ghs[0].sbcsId1 : "";
                     return param = {
-                        1:formData.eq[0].eqId,
-                        2:formData.scqy[0].sbcsId,
-                        3:formData.ghs[0].sbcsId1
+                        1:a[0],
+                        2:a[1],
+                        3:a[2]
                     }
                 },
                 form: {
@@ -173,7 +169,7 @@
                         2:"pjScqyId",
                         3:"pjGhsId"
                     },
-                    shutWin:true
+                    reload:"parent"
                 }
             },
             val:{
@@ -187,7 +183,6 @@
                     }
                 ]
             }
-
         },
         bind: {
             selectItem: [{
@@ -216,7 +211,6 @@
                 data:formData
             }]
         }
-
     }
 </script>
 </body>

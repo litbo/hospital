@@ -42,7 +42,10 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
      * @return PageInfo<MachineAccountVO>
      */
     @Override
-    public PageInfo<MachineAccountVO> selectEquipmentAccount(String category, String state, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber, Integer pageNum, Integer pageSize) {
+    public PageInfo<MachineAccountVO> selectEquipmentAccount(String category, String state,String tzlb, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber, Integer pageNum, Integer pageSize) {
+        if (StringUtils.isNotBlank(tzlb)) {
+            tzlb = "%" + tzlb + "%";
+        }
         if (StringUtils.isNotBlank(equipmentPinyinCode)) {
             equipmentPinyinCode = "%" + equipmentPinyinCode + "%";
         }
@@ -53,7 +56,7 @@ public class EquipmentAccountServiceImpl implements EquipmentAccountService {
             equipmentNumber = "%" + equipmentNumber + "%";
         }
         PageHelper.startPage(pageNum, pageSize);
-        List<MachineAccountVO> machineAccountVOS = equipmentAccountMapper.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber);
+        List<MachineAccountVO> machineAccountVOS = equipmentAccountMapper.selectEquipmentAccount(category, state,tzlb, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber);
         return new PageInfo<>(machineAccountVOS);
     }
 

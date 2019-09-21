@@ -52,6 +52,9 @@
                     <!--</select>-->
                     <!--</div>-->
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <input class="layui-input" name="tzlb" placeholder="台账类别" autocomplete="off">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
                             <select name="category" lay-filter="aihao">
                                 <option value="" selected>全部分类</option>
@@ -142,7 +145,7 @@
             , reSet: {
                 url: "/lifeManage/selectEquipmentAccount",
                 type: "reload",
-                data: ["category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
+                data: ["category","tzlb", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
             }
         }
     }

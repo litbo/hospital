@@ -22,7 +22,7 @@ public class EquipmentAccountProvider {
      * @param equipmentNumber     设备编码
      * @return sql
      */
-    public String selectEquipmentAccount(String category, String state, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber) {
+    public String selectEquipmentAccount(String category, String state,String tzlb, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber) {
         SQL sql = new SQL();
         sql.SELECT("dbo.eq_info.eq_id,\n" +
                 "dbo.eq_info.eq_sbbh,\n" +
@@ -51,6 +51,9 @@ public class EquipmentAccountProvider {
         }
         if (StringUtils.isNotBlank(state)) {
             sql.WHERE("dbo.eq_info.eq_syzt = #{state,jdbcType=VARCHAR}");
+        }
+        if (StringUtils.isNotBlank(tzlb)) {
+            sql.WHERE("dbo.eq_info.eq_tzlb  like CONCAT('%',#{tzlb},'%') ");
         }
         if (StringUtils.isNotBlank(departmentId)) {
             sql.WHERE("dbo.eq_info.eq_bmid = #{departmentId,jdbcType=VARCHAR}");

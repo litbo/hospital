@@ -80,6 +80,23 @@ public class EqHtController {
         }
     }
 
+    /*合同编号查重*/
+    @PostMapping("/checkHtBianhao")
+    public Result checkHtBianhao(@RequestParam(name = "htBianhao") String htBianhao) {
+
+        if (service.selectHtIds().contains(htBianhao)) {
+            return Result.error("合同编号已存在,请重新填写");
+        }
+
+        else return null;
+
+      /*  if (Arrays.asList("1","2","3","11").contains(htBianhao)) {
+            return Result.error("合同编号已存在,请重新填写");
+        }
+        else return null;*/
+
+    }
+
     /*保存新增生产厂*/
     @PostMapping("/addScs")
     public Result addScs(@RequestBody SbCsVO vo) {

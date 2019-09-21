@@ -24,7 +24,7 @@ public interface EquipmentAccountService {
      * @param pageSize            每页显示的条数
      * @return PageInfo<MachineAccountVO>
      */
-    PageInfo<MachineAccountVO> selectEquipmentAccount(String category, String state, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber, Integer pageNum, Integer pageSize);
+    PageInfo<MachineAccountVO> selectEquipmentAccount(String category, String state,String tzlb, String departmentId, String equipmentPinyinCode, String departmentCoding, String equipmentNumber, Integer pageNum, Integer pageSize);
 
     /**
      * 科室设备综合查询
