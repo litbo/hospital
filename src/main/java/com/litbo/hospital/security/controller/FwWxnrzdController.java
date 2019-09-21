@@ -28,7 +28,7 @@ public class FwWxnrzdController {
         }
 
     }
-
+    @ApiOperation(value = "获取首个维修内容")
     @GetMapping("/wxnrZdIndex")
     public Result wxnrZdIndex(@RequestParam(required = false,defaultValue = "1") Integer gzyyId , @RequestParam(required = false,defaultValue = "6") Integer gzmxId){
         try {
@@ -40,6 +40,8 @@ public class FwWxnrzdController {
         }
 
     }
+
+    @ApiOperation(value = "获取维修内容")
     @RequestMapping(value = "selectFwWxgznr",method = RequestMethod.GET)
     public Result selectFwWxgznr(){
         try {

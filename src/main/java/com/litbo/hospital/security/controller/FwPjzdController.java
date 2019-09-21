@@ -49,6 +49,7 @@ public class FwPjzdController {
         }
 
     }
+    @ApiOperation(value = "查询单个配件字典")
     @RequestMapping(value = "selectFwPjzdById",method = RequestMethod.GET)
     public Result selectFwPjqlById(Integer id){
         try {
@@ -61,6 +62,7 @@ public class FwPjzdController {
 
 
     }
+    @ApiOperation(value = "更新配件字典")
     @RequestMapping(value = "updateFwPjzd",method = RequestMethod.POST)
     public Result updateFwPjzd(@RequestBody FwPjzd pjzd){
         try {
@@ -91,7 +93,7 @@ public class FwPjzdController {
      */
 
     @ApiOperation(value = "查询所有配件字典")
-    @RequestMapping(value = "/listFwPjzd",method = RequestMethod.POST)
+    @RequestMapping(value = "/listFwPjzd")
     public Result listFwPjzd(@RequestParam(value = "pjSzm",required = false,defaultValue = "") String pjSzm,
                               @RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                               @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
@@ -130,6 +132,7 @@ public class FwPjzdController {
         }
         return null;
     }
+    @ApiOperation(value = "删除配件字典")
     @RequestMapping(value = "deleteFwPjzdByIds",method = RequestMethod.POST)
     public Result deleteFwPjzdByIds(@RequestBody DeleteFwPjzdByIdsVo pjzdIdsVo){
         Integer[] ids = pjzdIdsVo.getIds();
@@ -143,6 +146,7 @@ public class FwPjzdController {
         }
         return Result.success();
     }
+    @ApiOperation(value = "配件字典标题")
     @RequestMapping(value = "fwPjzdTitle",method = RequestMethod.POST)
     public Result fwPjzdTitle(){
         String title ="[{'type': 'checkbox'}, "+
@@ -157,6 +161,7 @@ public class FwPjzdController {
         return Result.success(JSON.parseArray(title));
 
     }
+    @ApiOperation(value = "配件分类标题")
     @RequestMapping(value = "fwPjzdSe")
     public Result fwPjzdSe(){
         Map map =new HashMap();

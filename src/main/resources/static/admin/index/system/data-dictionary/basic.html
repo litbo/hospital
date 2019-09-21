@@ -22,7 +22,11 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+<!--        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i>添加</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete" ><i class="fas fa-trash-alt"></i>删除</a>-->
     </div>
     <form class="layui-form">
         字典分类：
@@ -40,21 +44,23 @@
         <button class="layui-btn" data-type="reload">搜索</button>
     </form>
 </script>
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit">删除</a>
-</script>
 
 <script>
-        renderMod.addTable ={
-            table:{
+    layui.use('table', function () {
+        // 操作对象
+        var table = layui.table
+            , $ = layui.jquery;
+
+        renderMod.addTable = {
+            table: {
                 cols: [[ //表头
-                    {checkbox:true,fixed:true}
+                    {checkbox: true, fixed: true}
                     , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
                     , {field: 'dictId', title: '字典编号', minWidth: 150}
-                    , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
+                   /* , {title: '操作', width: 200, align: "center", toolbar: '#bar'}*/
 
                 ]]
-                ,url:"/eqdict/jczd"
+                , url: "/eqdict/jczd"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -63,42 +69,125 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count":res.data.total,//页面显示的数据条数
+                        "count": res.data.total,//页面显示的数据条数
                         "data": res.data.list //解析数据列表
                     }
                 }
                 , done: function (obj) {
-                    tableFunc({
-                        "obj": obj,
-                        "tools": [
-                            {
-                                filter:"basic",
-                                tool:'toolbar',
-                                event:'add',
-                                title:'新增字典',
-                                area:["80%","500px"],
-                                type:2,
-                                content:'./child/basic-add.html'
-                            },
-                            {
-                                filter:"basic",
-                                event:'edit',
-                                title:'删除确认',
-                                type:2,
-                                area:["400px","250px"],
-                                content:'./child/information-edit-basic.html',
-                                dataUrl: ["dictId","bname"]
-                            }
-                        ]
-                    })
+                    console.log(obj);
+                    /*   tableFunc({
+                           "obj": obj,
+                           "tools": [
+                               {
+                                   filter: "basic",
+                                   tool: 'toolbar',
+                                   event: 'add',
+                                   title: '新增字典',
+                                   area: ["80%", "500px"],
+                                   type: 2,
+                                   content: './child/basic-add.html'
+                               },
+                               /!*{
+                                   filter: "basic",
+                                   tool: 'toolbar',
+                                   event: 'del',
+                                   title: '删除确认',
+                                   url: "/eqdict/getByTNameAndId",
+                                   data: ["dictId", "bName"],
+
+                                   /!* type:2,
+                                   area:["400px","250px"],
+                                   content:'./child/information-edit-basic.html',
+                                   dataUrl: ["dictId","bname"]*!/
+                               },*!/
+                           /!*    {
+                                   filter: "basic",
+                                   tool: "toolbar",
+                                   event: "del",
+                                   send: {
+                                       url: "/eqdict/getByTNameAndId",
+                                       /!*  data:["dictId", "bName"],*!/
+                                       name: "deleteVo",
+                                       par: {dictId: "dictId", bName: "bName"},
+                                       type: "DELETE",
+                                       reload: true
+                                   }
+                               }*!/
+                           ]
+                       })*/
                 }
             },
-            reSet:{
-                url:"/eqdict/listDictByTName",
-                type:"reload",
-                data:["tName"]
+            reSet: {
+                url: "/eqdict/listDictByTName",
+                type: "reload",
+                data: ["tName"]
             }
-        }
+        },
+            table.on('toolbar(basic)', function (obj) {
+                var $ = layui.$;
+                switch (obj.event) {
+                    case 'add':
+                        layui.layer.open({
+                            title : "新增字典",
+                            type : 2,
+                            content: './child/basic-add.html' ,//弹出层页面
+                            area: ["60%", "70%"]//弹出层的长宽
+                        });
+                        break;
+                    //删除
+                    case 'delete':
+
+                        var checkStatus = table.checkStatus('table');
+                        var data = checkStatus.data;
+                        if (data.length === 0) {
+                            layer.msg("尚未选择");
+                            return;
+                        }
+                        var deVo = [],ziDian = {};
+                        if (data.length > 0) {
+                            for (var i = 0; i < data.length; i++) {
+                                ziDian["dictId"] = data[i].dictId;
+                               /* ziDian["dictName"] = data[i].dictName;*/
+                                ziDian["bName"] = data[i].bname;
+                                console.log(ziDian);
+                                deVo.push(ziDian);
+                                ziDian = {};
+                            }
+                            var deleteVo = {};
+                            deleteVo["dictVos"] = deVo;
+                            console.log(deleteVo);
+                        }
+                        layer.confirm("确定要删除吗？", function () {
+                            $.ajax({
+                                type: "POST",
+                                url: "/specialEq/deleteSpecialEq",
+                                async: false,/*同步传输*/
+                                contentType: 'application/json',
+                                // dataType: 'json',
+                                data: {
+                                    dictVos:deleteVo.toString(),
+                                },
+                               /* data: {"deleteVo":JSON.stringify(deVo)} ,*/
+                                success: function (data) {
+                                    console.log(data);
+                                    layer.closeAll('loading');
+                                    if (data.code === 0) {
+                                        layer.msg("删除成功！", {icon: 1, time: 2000, shade: 0.2});
+                                        location.reload(true);
+                                    } else {
+                                        layer.msg("删除失败！", {icon: 2, time: 3000, shade: 0.2})
+                                    }
+                                },
+                                error:function (data) {
+                                    layer.msg("请求错误", {icon: 2, time: 3000, shade: 0.2})
+                                }
+
+                            });
+                        });
+                        break;
+                }
+            });
+    })
     </script>
 </body>
 </html>
