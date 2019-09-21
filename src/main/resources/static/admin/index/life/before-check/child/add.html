@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>参考型号及报价</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 145px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 145px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+        .newFa{
+            color: #f10214;
+            margin:-5px 0 10px 150px;
+            font-size: 1.3em;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layui-row" style="margin-top: 20px;">
+    <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="col-xs-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目类型</label>
+                <div class="layui-input-block">
+                    <select name="typeId" id="typeId"  lay-filter="typeId">
+                        <option value="01">作业检查</option>
+                        <option value="02">安全隐患检查</option>
+                        <option value="03">状态检查</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称</label>
+                <div class="layui-input-block">
+                    <select name="projectId" id="projectId">
+<!--                        <option value="0101">日常保养</option>-->
+<!--                        <option value="0102">清洗消毒灭菌</option>-->
+<!--                        <option value="0103">主机外观</option>-->
+<!--                        <option value="0104">附件情况</option>-->
+<!--                        <option value="0105">交接状况</option>-->
+<!--                        <option value="0201">安全隐患</option>-->
+<!--                        <option value="0301">开机自检状况</option>-->
+<!--                        <option value="0302">装备工作情况</option>-->
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目操作</label>
+                <div class="layui-input-block">
+                    <select name="operationId" id="operationId">
+                        <option value="01">正常/不正常</option>
+                        <option value="02">进行/未进行</option>
+                        <option value="03">处理/未处理</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="layui-form-item" style="margin:20px 0;">
+                <button class="warm_btn layui-btn layui-btn-warm" lay-submit="" lay-filter="reload" id="reload">确定</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+
+    if ($("#typeId").val() === "01") {
+        //保证不重复添加
+        $("#projectId").empty();
+        //添加子元素
+        $("#projectId").append(
+            "<option value='0101'>日常保养</option>" +
+            "<option value='0102'>清洗消毒灭菌</option>" +
+            "<option value='0103'>主机外观</option>" +
+            "<option value='0104'>附件情况</option>" +
+            "<option value='0105'>交接状况</option>"
+        );
+    } else if ($("#typeId").val() === "02") {
+        //保证不重复添加
+        $("#projectId").empty();
+        //添加子元素
+        $("#projectId").append(
+            "<option value='0201'>安全隐患</option>"
+        );
+    } else if ($("#typeId").val() === "03") {
+        //保证不重复添加
+        $("#projectId").empty();
+        //添加子元素
+        $("#projectId").append(
+            "<option value='0301'>开机自检状况</option>" +
+            "<option value='0302'>装备工作情况</option>"
+        );
+    }
+
+    layui.use(['layer', 'jquery', 'form'], function () {
+        var layer = layui.layer,
+            $ = layui.jquery,
+            form = layui.form;
+
+        // select框判断
+        form.on('select(typeId)', function (data) {
+            // console.log(data.value);
+            if (data.value === "01") {
+                //保证不重复添加
+                $("#projectId").empty();
+                //添加子元素
+                $("#projectId").append(
+                    "<option value='0101'>日常保养</option>" +
+                    "<option value='0102'>清洗消毒灭菌</option>" +
+                    "<option value='0103'>主机外观</option>" +
+                    "<option value='0104'>附件情况</option>" +
+                    "<option value='0105'>交接状况</option>"
+                );
+                form.render('select');
+            } else if (data.value === "02") {
+                //保证不重复添加
+                $("#projectId").empty();
+                //添加子元素
+                $("#projectId").append(
+                    "<option value='0201'>安全隐患</option>"
+                );
+                form.render('select');
+            } else if (data.value === "03") {
+                //保证不重复添加
+                $("#projectId").empty();
+                //添加子元素
+                $("#projectId").append(
+                    "<option value='0301'>开机自检状况</option>" +
+                    "<option value='0302'>装备工作情况</option>"
+                );
+                form.render('select');
+            }
+        });
+    });
+
+    // 表单
+    // layui.use(['form','layedit'], function(){
+    //
+    //     var form = layui.form
+    //         ,layer = layui.layer;
+    //
+    //     //触发事件
+    //
+    //     form.on('submit(reload)', function(data){
+    //
+    //         layer.alert(JSON.stringify(data.field), {
+    //             title: '最终的提交信息'
+    //         });
+    //
+    //         // $.ajax({
+    //         //     type: "POST",
+    //         //     dataType: 'json',
+    //         //     url: '/lifeManage/insertYjyaZd',
+    //         //     data: JSON.stringify(dataObj),
+    //         //     contentType: 'application/json; charset=UTF-8',
+    //         //     success: function(result) {
+    //         //         layui.layer.alert('提交成功!');
+    //         //         window.parent.location.reload();
+    //         //     },
+    //         //     error:function(){
+    //         //         layer.alert(JSON.stringify(data.field), {
+    //         //             title: '最终的提交信息'
+    //         //         });
+    //         //         alert("error");
+    //         //     }
+    //         // });
+    //         return false;
+    //     });
+    // });
+
+    var formData = {};
+    renderMod = {
+
+        btn: [
+            {
+                elem: '#reload',
+                func: function () {
+                    var new1 = {}, da = [];
+                    new1.typeId = $("#typeId").val();
+                    new1.projectId = $("#projectId").val();
+                    new1.operationId = $("#operationId").val();
+                    var key = $.getUrlParam('key');
+                    da.push(new1);
+                    // console.log(new1);
+                    // console.log(da);
+                    layui.sessionData($.getUrlParam('vg'), {
+                        key: key,
+                        value: da
+                    });
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                }
+            }
+        ]
+    };
+</script>
+</html>
