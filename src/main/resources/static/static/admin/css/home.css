@@ -96,13 +96,14 @@
     border-top: 1px solid #f5f5f5;
 }
 .com_bg{
-    width:1500px;
+    width:2000px;
     height: 40px;
     margin: 0 auto;
 }
 .com_logo img{
+
     height: 100%;
-    float: left;
+    margin-left: 5%;
     padding-left: 10px;
 }
 .com_logo p{

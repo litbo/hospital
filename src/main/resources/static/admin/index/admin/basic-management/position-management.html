@@ -22,13 +22,18 @@
 </div>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
 </script>
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+
+
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+
+
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
@@ -101,10 +106,12 @@ renderMod = {
                                 event:"del",
                                 url:"/supervise/gwgl/deleteGwByGwIds",
                                 type:"POST",
-                                par:"gwId"
+                                par:"gwId",
+                                reload:true
                             },
                             tool:"toolbar",
-                            event:"del"
+                            event:"del",
+
 
                         }
                         ]
