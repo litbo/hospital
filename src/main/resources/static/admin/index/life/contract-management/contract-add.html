@@ -47,7 +47,7 @@
                             <div class="layui-form-item ">
                                 <label class="layui-form-label" >合同编号<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao"  lay-verify="required|number"
+                                    <input type="text" name="htBianhao" id="htBianhao" lay-verify="required|number"
                                            placeholder="请输入内容" onfocus="this.placeholder=''"
                                            onblur="this.placeholder='请输入内容'"
                                            autocomplete="off" class="layui-input">
@@ -330,7 +330,28 @@
 
 
 <script>
+$("#htBianhao").blur(function(){
+    $.ajax({
+        url : "/lifeManage/checkHtBianhao",
+        type : "POST",
+        // async:false,
+        // dataType : "JSON",
+        data:{
+            "htBianhao":$("#htBianhao").val(),
+            // "assetId":value
+        },
+        success : function(data) {
+            console.log(data)
+            if(data.msg!=null && data.msg!=""){
+                layer.alert(data.msg)
+            }
+            else{
 
+            }
+            // layer.alert(data.msg)
+        }
+    });
+})
 
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function () {
@@ -462,48 +483,36 @@
         }
     };
 
-    /*function button1() {
-        $.ajax({
-            type: "get",
-            data: {
-                id: $("input[name='sbcsIdScs']").val()
-            },
-            url: "/lifeManage/selectCsNameById",
-            dataType: "json",
-            success: function (result) {
-                $("input[name='csname']").val(result.data)
-            },
-            error: function (e) {
-                alert("厂商有误，请重新选择");
-            }
-        })
-    }*/
-// 判断数据库中是否已存在
-    /*$.ajax({
-        type: "post",
-        url: "xxxx.action",
-        processData:true,
-        data: {"后台接受名":页面数据},
-        success: function(data){
-//data是后台传到前台的数据，data.xxx获得数据
-        },
-        error:function(XMLHttpRequest){alert("获取数据失败!")}
-    });*/
-
-// 焦点事件
-    /*$("input[name=htBianhao]").focusout(function(){
-        $.post('/login/',{
-                htBianhao:$("input[name=account]").val()
-            },
-            function(data,status){
-                if(!!data){
-                    alert('编号已存在');
-                }else{
-                    alert('111');
+    function checkDuplicate(value){
+        var bool = true;
+        if(!isNull(value)){
+            $.Ajax({
+                url : "lifeManage/checkHtBianhao",
+                type : "POST",
+                // async:false,
+                // dataType : "JSON",
+                data:{
+                    "htBianhao":$("#htBianhao").val(),
+                    // "assetId":value
+                },
+                success : function(data) {
+                    alert("yes")
                 }
-            })
+            });
+        }else{
+            bool =  true;
+        }
+        return bool;
+    }
 
-    })*/
+    // jQuery.validator.addMethod("isCkeckDuplicate",function(value, element){
+    //     var tmp = checkDuplicate(value);
+    //     if(tmp){
+    //         return true
+    //     }else{
+    //         return false;
+    //     }
+    // },"该编号已存在，请重新编辑！")
 
 </script>
 
