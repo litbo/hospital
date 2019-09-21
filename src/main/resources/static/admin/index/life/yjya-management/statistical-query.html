@@ -41,7 +41,7 @@
         <!--日期-->
         <div class="layui-input-inline" style="width: 150px;">
             <input type="text" name="qssj" id="date1"
-                   autocomplete="off" class="layui-input" placeholder="起始时间-">
+                   autocomplete="off" class="layui-input" placeholder="起始时间">
         </div>
         <div class="layui-input-inline" style="width: 150px;">
             <input type="text" name="jssj" id="date2"
@@ -186,17 +186,21 @@
             }
         },page: true
     };
-    renderMod.form = {
+    renderMod.formAction={
         date:[
             {
-                elem:"#date1",
-                isInitValue:false,
-                format:'yyyy-MM-dd'
+                elem: "#date1",
+                type: "date",
+                format: 'yyyy-MM-dd',
+                value: today0,
+                isInitValue: false
             },
             {
-                elem:"#date2",
-                isInitValue:false,
-                format:'yyyy-MM-dd'
+                elem: "#date2",
+                type: "date",
+                format: 'yyyy-MM-dd',
+                value: today0,
+                isInitValue: false
             }
         ]
     }

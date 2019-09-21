@@ -131,19 +131,23 @@
             }
         },page: true
     };
-    renderMod.form = {
+    renderMod.formAction={
         date:[
             {
-                elem:"#date1",
-                isInitValue:false,
-                format:'yyyy-MM-dd'
+                elem: "#date1",
+                type: "date",
+                format: 'yyyy-MM-dd',
+                value: today0,
+                isInitValue: false
             },
             {
-                elem:"#date2",
-                isInitValue:false,
-                format:'yyyy-MM-dd'
+                elem: "#date2",
+                type: "date",
+                format: 'yyyy-MM-dd',
+                value: today0,
+                isInitValue: false
             }
-        ]
+            ]
     }
 
 </script>
