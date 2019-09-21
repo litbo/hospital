@@ -2253,17 +2253,18 @@
                     "shiro": "JSLYL"
                   },
                   {
-                    "title": "空转率",
-                    "url": "./beneft/usage-situation/idling-rate.html",
-                    "id": "51002",
-                    "shiro": "KZL"
-                  },
-                  {
                     "title": "完好率",
                     "url": "./beneft/usage-situation/pipe-tag.html",
-                    "id": "51003",
-                    "shiro": "WHL"
+                    "id": "51002",
+                    "shiro": "WHL2"
                   },
+                  {
+                    "title": "空转率",
+                    "url": "./beneft/usage-situation/idling-rate.html",
+                    "id": "51003",
+                    "shiro": "KZL"
+                  },
+
                   {
                     "title": "工作日平均闲置时间",
                     "url": "./beneft/usage-situation/average-time.html",
