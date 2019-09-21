@@ -32,6 +32,7 @@ public interface EquipmentAccountMapper {
     @SelectProvider(type = EquipmentAccountProvider.class, method = "selectEquipmentAccount")
     List<MachineAccountVO> selectEquipmentAccount(
             @Param("category") String category, @Param("state") String state,
+            @Param("tzlb")String tzlb,
             @Param("departmentId") String departmentId, @Param("equipmentPinyinCode") String equipmentPinyinCode,
             @Param("departmentCoding") String departmentCoding, @Param("equipmentNumber") String equipmentNumber);
 
