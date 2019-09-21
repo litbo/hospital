@@ -23,7 +23,9 @@
 </div>
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+      <!--  <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>-->
     </div>
     <form class="layui-form">
         字典分类：
@@ -41,35 +43,38 @@
         <button class="layui-btn" data-type="reload">搜索</button>
     </form>
 </script>
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs layui-btn-danger"  lay-event="edit">删除</a>
-</script>
+<!--<script type="text/html" id="bar">
+ &lt;!&ndash;<a class="layui-btn layui-btn-xs layui-btn-danger"  lay-event="edit">删除</a>&ndash;&gt;
+</script>-->
 
 <script>
-    renderMod.addTable = {
-        table: {
-            cols: [[ //表头
-                {checkbox: true, fixed: true}
-                , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
-                , {field: 'dictId', title: '字典编号', minWidth: 150}
-                , {title: '操作', width: 200, align: "center", toolbar: '#bar'}
-
-            ]]
-            , url: "/eqdict/zyzd"
-            , request: {
-                pageName: 'pageNum',
-                limitName: 'pageSize'
-            }
-            , parseData: function (res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "count": res.data.total,//页面显示的数据条数
-                    "data": res.data.list //解析数据列表
+    layui.use('table', function () {
+        // 操作对象
+        var table = layui.table
+            , $ = layui.jquery;
+        renderMod.addTable = {
+            table: {
+                cols: [[ //表头
+                    {checkbox: true, fixed: true}
+                    , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
+                    , {field: 'dictId', title: '字典编号', minWidth: 150}
+                  /*  , {title: '操作', width: 200, align: "center", toolbar: '#bar'}*/
+                ]]
+                , url: "/eqdict/zyzd"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
-            }
-            , done: function (obj) {
-                tableFunc({
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    /* tableFunc({
                     "obj": obj,
                     "tools": [
                         {
@@ -91,15 +96,79 @@
                             content: './child/major-add.html'
                         }
                     ]
-                });
+                });*/
+                }
+            },
+            reSet: {
+                url: "/eqdict/listDictByTName",
+                type: "reload",
+                data: ["tName"]
             }
-        },
-        reSet: {
-            url: "/eqdict/listDictByTName",
-            type: "reload",
-            data: ["tName"]
-        }
-    }
+        };
+
+        table.on('toolbar(major)', function (obj) {
+            var $ = layui.$;
+            switch (obj.event) {
+                case 'add':
+                    layui.layer.open({
+                        title: '新增字典',
+                        type : 2,
+                        content: './child/major-add.html' ,//弹出层页面
+                        area: ["60%", "70%"]//弹出层的长宽
+                    });
+                    break;
+                //删除
+                case 'delete':
+
+                    var checkStatus = table.checkStatus('table');
+                    var data = checkStatus.data;
+                    if (data.length === 0) {
+                        layer.msg("尚未选择");
+                        return;
+                    }
+                    var deVo = [],ziDian = {};
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            ziDian["dictId"] = data[i].dictId;
+                            /* ziDian["dictName"] = data[i].dictName;*/
+                            ziDian["bName"] = data[i].bname;
+                            console.log(ziDian);
+                            deVo.push(ziDian);
+                            ziDian = {};
+                        }
+                        var deleteVo = {};
+                        deleteVo["dictVos"] = deVo;
+                        console.log(deleteVo);
+                    }
+                    layer.confirm("确定要删除吗？", function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/specialEq/deleteSpecialEq",
+                            async: false,/*同步传输*/
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            data: JSON.stringify(deleteVo),
+                            /* data: {"deleteVo":JSON.stringify(deVo)} ,*/
+                            success: function (data) {
+                                console.log(data);
+                                layer.closeAll('loading');
+                                if (data.code === 0) {
+                                    layer.msg("删除成功！", {icon: 1, time: 2000, shade: 0.2});
+                                    location.reload(true);
+                                } else {
+                                    layer.msg("删除失败！", {icon: 2, time: 3000, shade: 0.2})
+                                }
+                            },
+                            error:function (data) {
+                                layer.msg("请求错误", {icon: 2, time: 3000, shade: 0.2})
+                            }
+
+                        });
+                    });
+                    break;
+            }
+        });
+    })
 
 </script>
 </body>
