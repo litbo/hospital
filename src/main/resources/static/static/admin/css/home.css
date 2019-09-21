@@ -98,7 +98,9 @@
 .com_bg{
     width:1500px;
     height: 40px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .com_logo img{
     height: 100%;
