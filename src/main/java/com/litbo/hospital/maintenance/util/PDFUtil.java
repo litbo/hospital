@@ -4,11 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.litbo.hospital.common.utils.poi.InsertPDF;
+import com.litbo.hospital.maintenance.pojo.Consumables;
+import com.litbo.hospital.maintenance.pojo.Maintenance;
+import com.litbo.hospital.maintenance.pojo.MaintenanceProject;
+import com.litbo.hospital.maintenance.vo.MaintenanceMessageVo;
 import org.apache.poi.ss.usermodel.Cell;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +25,38 @@ import java.util.Map;
  */
 public class PDFUtil extends InsertPDF {
 
-    public static void main(String[] args) {//生成pdf
+    public static void main(String[] args) {
+        MaintenanceMessageVo maintenanceMessage = new MaintenanceMessageVo();
+
+        maintenanceMessage.setBaoYangShiJian("1");
+        maintenanceMessage.setBeiZhu("1");
+        maintenanceMessage.setChanDi("1");
+        maintenanceMessage.setDanJia("1");
+        maintenanceMessage.setEqCatagory("1");
+        maintenanceMessage.setFenLeiBianMa("1");
+        maintenanceMessage.setGuiGeXingHao("1");
+        maintenanceMessage.setJianChaRiQi("1");
+        maintenanceMessage.setKeShiQianShou("1");
+        maintenanceMessage.setQiYongShiJian("1");
+        maintenanceMessage.setSheBeiMingCheng("1");
+        maintenanceMessage.setShengChanChangJia("1");
+        maintenanceMessage.setShiYongKeShi("1");
+        maintenanceMessage.setWanChengRiQi("1");
+        maintenanceMessage.setWeiBaoRen("1");
+        maintenanceMessage.setWeiBaoZeRenRen("set");
+        maintenanceMessage.setWeiHuRenYuan("sdfs");
+        maintenanceMessage.setXuLieHao("sdfsdf");
+        maintenanceMessage.setYiQiXianZhuang("sdfsdf");
+
+
+        List<MaintenanceProject> projects = new ArrayList<>();
+        List<List<MaintenanceProject>> projectsList = new ArrayList<>();
+        projectsList.add(projects);
+        List<Consumables> consumables = new ArrayList<>();
+        createPDF(maintenanceMessage,projectsList,consumables);
+    }
+
+    public static void createPDF(MaintenanceMessageVo maintenanceMessage, List<List<MaintenanceProject>> projects, List<Consumables> consumables) {//生成pdf
         BaseFont bf;
         Font font = null;
         try {
@@ -64,9 +101,33 @@ public class PDFUtil extends InsertPDF {
 
 
 //                                  装备类别信息    begin
+            String a1,a2,a3,a4,a5,a6;
+            a1 = a2 = a3 = a4 = a5 = a6 = "□";
+            switch (maintenanceMessage.getEqCatagory()){
+                case "急救类":{
+                    a1 = "√";
+                }break;
+                case "生命支持":{
+                    a2 = "√";
+                }break;
+                case "辐射类":{
+                    a3 = "√";
+                }break;
+                case "灭菌类":{
+                    a4 = "√";
+                }break;
+                case "50万元以上":{
+                    a5 = "√";
+                }break;
+                case "大型设备":{
+                    a6 = "√";
+                }break;
+                default: {
 
+                }
+            }
 
-            cell = new PdfPCell(new Paragraph("急救类□",font));//
+            cell = new PdfPCell(new Paragraph("急救类"+a1,font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(1);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -76,7 +137,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-            cell = new PdfPCell(new Paragraph("生命支持□",font));//
+            cell = new PdfPCell(new Paragraph("生命支持"+a2,font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(1);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -85,7 +146,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("辐射类□",font));//
+            cell = new PdfPCell(new Paragraph("辐射类"+a3,font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(1);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -94,7 +155,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("灭菌类□",font));//
+            cell = new PdfPCell(new Paragraph("灭菌类"+a4,font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(1);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -103,7 +164,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("50万元以上□",font));//
+            cell = new PdfPCell(new Paragraph("50万元以上"+a5,font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(1);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -112,7 +173,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("大型设备□",font));//
+            cell = new PdfPCell(new Paragraph("大型设备"+a6,font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(1);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -140,7 +201,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f); // 设置高度
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getWeiBaoRen(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(2);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -160,7 +221,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getWeiBaoZeRenRen(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(2);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -183,7 +244,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getFenLeiBianMa(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(3);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -202,7 +263,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f); // 设置高度
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getSheBeiMingCheng(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(2);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -221,7 +282,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getGuiGeXingHao(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(3);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -240,7 +301,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f); // 设置高度
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getXuLieHao(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(2);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -259,7 +320,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getShengChanChangJia(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(3);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -278,7 +339,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f); // 设置高度
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getChanDi(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(2);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -297,7 +358,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getShiYongKeShi(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(3);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -316,7 +377,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f); // 设置高度
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getQiYongShiJian(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(2);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -335,7 +396,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getDanJia(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(3);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -354,7 +415,7 @@ public class PDFUtil extends InsertPDF {
             cell.setFixedHeight(30f); // 设置高度
             table.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("",font));//
+            cell = new PdfPCell(new Paragraph(maintenanceMessage.getBaoYangShiJian(),font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setColspan(2);  // 设置列数
             cell.setRowspan(1);  // 设置行数
@@ -364,7 +425,7 @@ public class PDFUtil extends InsertPDF {
             table.addCell(cell);
 
 
-//                                  检查维护    begin
+//                                                   检查维护表头    begin
 
             cell = new PdfPCell(new Paragraph("检查维护",font));//
 //            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -374,6 +435,110 @@ public class PDFUtil extends InsertPDF {
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
             cell.setFixedHeight(30f); // 设置高度
             table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("项目",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(1);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("检查维护内容",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(3);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("检查维护结果\n（1）合格 （2）修复 （3）待修",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(3);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+//                                                   检查维护表头    end
+
+
+//                                                检查项目     begin
+            for(List<MaintenanceProject> projectList : projects){
+                cell = new PdfPCell(new Paragraph("外观\n及附件",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                cell.setColspan(1);  // 设置列数
+                cell.setRowspan(1);  // 设置行数
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+                cell.setFixedHeight(30f); // 设置高度
+                table.addCell(cell);
+            }
+
+            cell = new PdfPCell(new Paragraph("外观\n及附件",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(1);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("检查维护结果\n（1）合格 （2）修复 （3）待修",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(3);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("检查维护结果\n（1）合格 （2）修复 （3）待修",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(3);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+//                                                功能及附件     end
+
+
+
+
+
+//                                                功能检查     begin
+
+            cell = new PdfPCell(new Paragraph("功能\n检查",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(1);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("检查维护结果\n（1）合格 （2）修复 （3）待修",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(3);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("检查维护结果\n（1）合格 （2）修复 （3）待修",font));//
+//            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setColspan(3);  // 设置列数
+            cell.setRowspan(1);  // 设置行数
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE); //垂直居中
+            cell.setFixedHeight(30f); // 设置高度
+            table.addCell(cell);
+
+//                                                功能检查    end
 
 
 

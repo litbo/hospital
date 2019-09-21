@@ -17,7 +17,7 @@
 <body>
 <div class="layui-row">
 	<div class="col-xs-12">
-		<table id="table" lay-filter="table1"></table>
+		<table id="table" lay-filter="table1" class="layui-table" lay-data="{id: 'idTest'}"></table>
 	</div>
 </div>
 <script type="text/html" id="toolBar">
@@ -116,6 +116,12 @@
                             layui.use(['table'], function(){
                                 var  layer = layui.layer
                                     ,table = layui.table;
+
+                                var checkStatus = table.checkStatus('idTest'); //idTest 即为基础参数 id 对应的值
+
+                                console.log(checkStatus.data) //获取选中行的数据
+
+
                                 layui.layer.open({
                                     type: 2,
                                     title: '风险设置',
@@ -131,6 +137,7 @@
 						return;
 
 				}
+
 					parent.layui.$('.eqId').val(data[0].id);
 					parent.layui.$('#eqId').val(data[0].name);
 					var index = parent.layer.getFrameIndex(window.name);
