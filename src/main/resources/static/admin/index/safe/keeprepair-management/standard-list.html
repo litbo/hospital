@@ -153,30 +153,30 @@
                     localStorage.removeItem("fa");
                     projectList.push(tm);
                    console.log(projectList);
-                    $("#del").off("click").on("click",function(){
-
-                        var checkedArr = [];
-                        for (var i = 0; i < table.cache.table.length; i++) {
-                            if (table.cache.table[i].LAY_CHECKED == true){
-                                checkedArr.push(i);
-                            }
-                        }
-                        var eqSbbhs =[];
-                        for (var i = 0; i < checkedArr.length; i++){
-                            var t = checkedArr[i];
-                            eqSbbhs.push(table.cache.table[t].id);
-                        }
-                        checkedArr.length = 0;//清除数组
-                      /*  $.ajax({
-                            url:'/inspection/otherfunction/updateEqSbbh1',
-                            type:"POST",
-                            async: false,/!*同步传输*!/
-                            data:JSON.stringify(eqSbbhs),
-                            dataType:'JSON',
-                            contentType:'application/json'
-
-                        })*/
-                    });
+                    // $("#del").off("click").on("click",function(){
+                    //
+                    //     var checkedArr = [];
+                    //     for (var i = 0; i < table.cache.table.length; i++) {
+                    //         if (table.cache.table[i].LAY_CHECKED == true){
+                    //             checkedArr.push(i);
+                    //         }
+                    //     }
+                    //     var eqSbbhs =[];
+                    //     for (var i = 0; i < checkedArr.length; i++){
+                    //         var t = checkedArr[i];
+                    //         eqSbbhs.push(table.cache.table[t].id);
+                    //     }
+                    //     checkedArr.length = 0;//清除数组
+                    //   /*  $.ajax({
+                    //         url:'/inspection/otherfunction/updateEqSbbh1',
+                    //         type:"POST",
+                    //         async: false,/!*同步传输*!/
+                    //         data:JSON.stringify(eqSbbhs),
+                    //         dataType:'JSON',
+                    //         contentType:'application/json'
+                    //
+                    //     })*/
+                    // });
                 }
             }
         },
