@@ -3,10 +3,7 @@ package com.litbo.hospital.lifemanage.controller;
 import com.litbo.hospital.lifemanage.service.EquipmentAccountService;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 电子台账Controller
@@ -34,18 +31,19 @@ public class EquipmentAccountController {
      * @param pageSize            每页显示的条数
      * @return PageInfo<MachineAccountVO>
      */
-    @PostMapping("/selectEquipmentAccount")
+    @RequestMapping("/selectEquipmentAccount")
 
     public Result selectEquipmentAccount(
             @RequestParam(name = "category", required = false) String category,
             @RequestParam(name = "state", required = false) String state,
+            @RequestParam(name = "tzlb", required = false) String tzlb,
             @RequestParam(name = "departmentId", required = false) String departmentId,
             @RequestParam(name = "equipmentPinyinCode", required = false) String equipmentPinyinCode,
             @RequestParam(name = "departmentCoding", required = false) String departmentCoding,
             @RequestParam(name = "equipmentNumber", required = false) String equipmentNumber,
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        return Result.success(equipmentAccountService.selectEquipmentAccount(category, state, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber, pageNum, pageSize));
+        return Result.success(equipmentAccountService.selectEquipmentAccount(category, state,tzlb, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber, pageNum, pageSize));
     }
 
     /**
