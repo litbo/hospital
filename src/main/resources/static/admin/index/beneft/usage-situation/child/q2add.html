@@ -33,12 +33,13 @@
     <div class="layui-row">
         <div class="col-xs-12 col-sm-4 layui-col-sm-offset1">
             <div class="layui-form-item">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">设备编号<span class="sign">*</span></label>
-                    <div class="layui-input-block">
-                        <input type="text" name="eqSbbh" class="layui-input" autocomplete="off"  lay-verify="number">
-                    </div>
+                <label class="layui-form-label">设备编号<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="eqSbbh" class="layui-input" autocomplete="off"  lay-verify="number">
                 </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block"  >
                     <select name="eqName" lay-verify="required" lay-search="" >
@@ -52,25 +53,29 @@
         </div>
 
         <div class="col-xs-12 col-sm-4 layui-col-sm-offset1">
+
             <div class="layui-form-item">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">既有功能数<span class="sign">*</span></label>
-                    <div class="layui-input-block">
-                        <input type="text" name="exitNum" class="layui-input" autocomplete="off"  lay-verify="number">
-                    </div>
+                <label class="layui-form-label">既有功能数<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="exitNum" class="layui-input" autocomplete="off"  lay-verify="number">
                 </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">功能完好数<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="integrityNum" class="layui-input" autocomplete="off"  lay-verify="number">
                 </div>
 
             </div>
-            <div class="col-xs-12">
-                <div class="layui-form-item">
-                    <div class="layui-input-block layui-col-sm-offset9">
-                        <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="col-xs-12" style="position: relative">
+            <div class="layui-form-item" style="position: absolute; right: 150px; bottom: -70px;">
+                <div class="layui-input-block" >
+                    <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </div>
