@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -84,6 +86,22 @@ public class DossierServiceImpl implements DossierService {
 
         String nowtiem = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss a").format(new Date());
 
+        // 生成终止时间
+        String beginTime = dossier.getBeginTime();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(beginTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        calendar.add(Calendar.MONTH,15*12); // 结束时间为开始时间往后十五年
+        String endTime = sdf.format(calendar.getTime());
+        dossier.setEndTime(endTime);
+
         dossier.setRecordTime(nowtiem);
         dossier.setDossierType(0);
 
@@ -137,6 +155,7 @@ public class DossierServiceImpl implements DossierService {
         dossier.setRecordTime(dossierMessage.getRecordTime());      // 卷宗创建时间
         dossier.setRecordPerson(dossierMessage.getRecordPerson());  // 卷宗创建人
         dossier.setDescription(dossierMessage.getDescription());  // 电子文件路径
+        dossier.setDossierType(dossierMessage.getDossierType());  // 文件数
         //     有一些不允许修改的信息，必须按照原来的进行   begin
 
         if(dossier.getDossierNature() != null){

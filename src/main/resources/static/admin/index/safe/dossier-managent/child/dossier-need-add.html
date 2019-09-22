@@ -164,19 +164,19 @@ var formData2 = {};
         $("#eqId").val($.getUrlParam("eqId"));
         $("#eqSbbh").val($.getUrlParam("eqSbbh"));
         $("#eqQysj").val($.getUrlParam("eqQysj"));
-		$("#recordPerson").val(emp.userId);
+		$("#recordPerson").val(emp.username);
 	});
     renderMod = {
             form: {
                 date: [{
                     elem: "#beginTime",
-                    format:'yyyy/MM/dd'
+                    format:'yyyy-MM-dd'
                 },{
                     elem: "#endTime",
-                    format:'yyyy/MM/dd'
+                    format:'yyyy-MM-dd'
                 },{
                     elem: "#buyTime",
-                    format:'yyyy/MM/dd'
+                    format:'yyyy-MM-dd'
                 }],
                 submit: {
                     before: function (param) {

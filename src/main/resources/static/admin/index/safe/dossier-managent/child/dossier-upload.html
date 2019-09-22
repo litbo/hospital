@@ -34,6 +34,58 @@
         <legend>文件上传</legend>
     </fieldset>
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文件类型</label>
+                <div class="layui-input-block">
+                    <select name="fileType">
+                        <option value='1'>筹购资料</option>
+                        <option value='2'>设备技术资料</option>
+                        <option value='3'>管理资料</option>
+                        <option value='4'>其他资料</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文件名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" lay-verify="required" name="fileName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文件页数 <span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text"  name="fileSize" lay-verify="required|Decimal" autocomplete="off" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">存放位置<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" id="fileUrl" name="fileUrl" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">摘要</label>
+                <div class="layui-input-block">
+                    <input type="text" name="summary" autocomplete="off" placeholder="请输入" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
         <div class="col-xs-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">文件日期 <span class="sign">*</span></label>
@@ -44,52 +96,9 @@
                 </div>
             </div>
          </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">文件页数 <span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text"  name="fileSize" lay-verify="required|Decimal" autocomplete="off" placeholder="请输入"
-                           class="layui-input">
-                </div>
-            </div>
-          </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">摘要</label>
-                <div class="layui-input-block">
-                    <input type="text" name="summary" autocomplete="off" placeholder="请输入" class="layui-input">
-                </div>
-            </div>
-          </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">文件存放位置<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" id="fileUrl" name="fileUrl" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-         </div>
-         <div class="col-xs-12">
-            <div class="layui-form-item">
-                <label class="layui-form-label">文件类型</label>
-                <div class="layui-input-block">
-                    <select name="fileType">
-                    	<option value='1'>筹购资料</option>
-                    	<option value='2'>设备技术资料</option>
-                    	<option value='3'>管理资料</option>
-                    	<option value='4'>其他资料</option>
-                    <select>
-                </div>
-            </div>
-         </div>
-         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">文件名称<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" lay-verify="required" name="fileName" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-         </div>
+
+
+
          <div class="col-xs-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">上传文件<span class="sign">*</span></label>
