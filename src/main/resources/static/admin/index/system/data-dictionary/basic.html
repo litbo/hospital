@@ -55,8 +55,9 @@
             table: {
                 cols: [[ //表头
                     {checkbox: true, fixed: true}
+                    , {field: 'dictId', title: '序号', minWidth: 150}
                     , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400}
-                    , {field: 'dictId', title: '字典编号', minWidth: 150}
+
                    /* , {title: '操作', width: 200, align: "center", toolbar: '#bar'}*/
 
                 ]]
@@ -122,7 +123,7 @@
                 type: "reload",
                 data: ["tName"]
             }
-        },
+        };
             table.on('toolbar(basic)', function (obj) {
                 var $ = layui.$;
                 switch (obj.event) {

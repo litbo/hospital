@@ -13,29 +13,6 @@
     <script src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
-    <style>
-        .layui-table-tool{
-            background: #fff;
-            border: none;
-        }
-        .layui-table-tool .layui-table-tool-self{
-            position: absolute;
-            height:30px;
-            top: 100px;
-            right: 10px;
-            width: 120px;
-            height: 30px;
-        }
-        .layui-table-tool-temp{
-            padding-right: 20px;
-        }
-        .layui-form-label{
-            width: 100px;
-        }
-        .layui-form-select{
-            display: none;
-        }
-    </style>
 </head>
 <body>
 
@@ -51,56 +28,36 @@
 
 <!--头部工具-->
 <script type="text/html" id="toolBar">
-    <div style="height: 110px;">
-        <div class="content layui-collapse " style="height: 80px;border:none;margin-top:10px;margin-bottom: 10px;">
+
             <form class="layui-form demoTable" action=""  style="border:none;">
 
-                <div class="layui-form-item ">
-                    <div class="layui-inline" style="margin-top: 10px">
-                        <label class="layui-form-label" style="text-align: center;width: 120px;">巡检计划名称</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="inspPlName"   autocomplete="off" class="layui-input">
-                        </div>
+                <div  class="addBtn">
+                    <div class="layui-inline" >
+                            <input type="text" name="inspPlName" placeholder="巡检计划名称"  autocomplete="off" class="layui-input">
                     </div>
-
 <!--
-
                     <select name="inspPlStatus" >
                         <option value="1" >待审核</option>
                     </select>
 -->
-
-
                     <div class="layui-inline">
-                        <label class="layui-form-label">制&nbsp;定&nbsp;人</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="inspPlPlanner"  autocomplete="off" class="layui-input">
-                        </div>
+                         <input type="text" name="inspPlPlanner" placeholder="制定人"  autocomplete="off" class="layui-input">
                     </div>
 
                     <input type="hidden" name="inspPlStatus"  value=""  autocomplete="off" class="layui-input">
 
                     <div class="layui-inline" >
-                        <label class="layui-form-label">审&nbsp;核&nbsp;人</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="inspPlAuditor"  placeholder="" autocomplete="off" class="layui-input">
-                        </div>
+                          <input type="text" name="inspPlAuditor"  placeholder="审核人" autocomplete="off" class="layui-input">
                     </div>
 
-
-
-                </div>
-                <div class="layui-form-item" style="float:right;margin-right: 90px;margin-top: -65px">
-                    <div class="layui-input-block"  >
+                    <div class="layui-inline"  >
                         <button type="button" class="layui-btn"   data-type="search" >查找</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                      <!--  <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                     </div>
+
                 </div>
 
             </form>
-        </div>
-
-
 
 
       <!--  <div class="layui-btn-container" style="float: left;margin-left: 30px;">
@@ -155,7 +112,6 @@
                     , url: '/inspection/inspPl/selectResultAllInspPlanVo'//接口
                     , method: "GET"
                     , toolbar: '#toolBar'
-                    , height: '800'
                     , title: '用户数据表'
                     , totalRow: true
                     , sort: true

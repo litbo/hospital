@@ -13,11 +13,6 @@
     <script src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
-    <style>
-        .layui-table-tool {
-            height: 60px;
-        }
-    </style>
 </head>
 <body>
 <div class="layui-row">
@@ -30,31 +25,24 @@
 </div>
 
 <script type="text/html" id="toolBar">
-
-
-    <form class="layui-form layui-inline"  action="" style="width: 300px;margin-left: 150px;margin-top: 0" >
-        <div class="layui-form-item layui-inline" >
-            <div class="layui-inline" style="width: 300px;height: 38px;">
-                <div class="layui-inline" style="float:left;">
-                    <div class="layui-input-inline">
-                        <input class="layui-input" name="inspPlStandardName" placeholder="名称"  autocomplete="off"  >
-                    </div>
-                </div>
-                <button type="button" class="layui-inline  layui-btn"   data-type="search"   style="float: left">查找</button>
-            </div>
-        </div>
-
-    </form>
-
-    <div class="layui-btn-container" style="float: left;margin-left: 30px;">
+    <div class="addBtn">
         <button class="layui-btn layui-btn-sm" lay-event="increase" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
         <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
 
-        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>批量删除</button>
     </div>
+    <form class="layui-form" >
+            <div class="layui-inline" >
+                <input class="layui-input" name="inspPlStandardName" placeholder="名称"  autocomplete="off"  >
+            </div>
+           <div class="layui-input-inline">
+                <button type="button" class="layui-inline  layui-btn"   data-type="search" >查找</button>
+             </div>
 
+    </form>
 </script>
+
 <script>
     //用户数据导入
     layui.use('element', function(){
@@ -73,7 +61,6 @@
                     , url: '/inspection/inspPlStandard/selectAllInspStandard'//接口
                     , method: "GET"
                     , toolbar: '#toolBar'
-                    , height: '800'
                     , title: '用户数据表'
                     , totalRow: true
                     , sort: true

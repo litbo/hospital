@@ -30,8 +30,8 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add"><i class="fas fa-plus"></i></a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add" style="background: #003366"><i class="fas fa-plus"></i>&nbsp;新增</a>
+        <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="edit" style="background: #CC0033"><i class="fas fa-trash-alt"></i>&nbsp;批量删除</a>
     </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -67,7 +67,8 @@
     renderMod.addTable ={
         table:{
             cols: [[ //表头
-                {field: 'authorized_person', title: '项目编号', minWidth: 200,sort:true}
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'authorized_person', title: '项目编号', minWidth: 200,sort:true}
                 , {field: 'authorized_depart', title: '项目名称', minWidth: 200}
                 , {field: 'authorized_depart', title: '创建时间', minWidth: 200,sort:true}
                 , {field: 'authorized_depart', title: '投资状态', minWidth: 200,sort:true}
