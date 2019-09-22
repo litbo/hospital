@@ -23,8 +23,7 @@
 
 <script type="text/html" id="toolBar">
     <!-- 搜索区域 -->
-    <div class="index_search" id="moreBar" style="margin-top: -10px;">
-        <form action="">
+    <form action="">
         <!--日期-->
         <div class="layui-input-inline" style="width: 100px;">
             <input type="text" name="beginTime" id="date1" autocomplete="off"
@@ -49,12 +48,11 @@
                    placeholder="请输入PACS设备编号" class="layui-input">
         </div>
 
-        <div class="layui-input-inline" style="width: 80px;">
-            <button class="layui-btn" data-type="reload">
-                查找</button>
+        <div class="layui-input-inline">
+            <button class="layui-btn" data-type="reload">查找</button>
+            <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
         </div>
-        </form>
-    </div>
+    </form>
 </script>
 <script type="text/html" id="jsonChange2">
     {{#if (d.cbrBz == 'ZY') { }}

@@ -27,8 +27,8 @@
 <script type="text/html" id="toolBar">
 	<!-- 搜索区域 -->
 	<button class="layui-btn layui-btn-xs" lay-event="delAll"
-			style="background-color: #cc0033;height: 22px;width: 30px;margin-bottom: 5px;font-size: 15px;">
-		<i class="layui-icon" style="margin-top: -15px;"></i>
+			style="background-color: #cc0033;height: 22px;margin-bottom: 5px;font-size: 12px;">
+		<i class="layui-icon" style="margin-top: -15px;"></i>批量删除
 	</button>
 	<form action="" layui-filter="forms" style="margin-top: 0;">
 		<!--联网仪编号-->
@@ -46,8 +46,9 @@
 		<div class="layui-input-inline" style="width: 130px;">
 			<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
 		</div>
-		<div class="layui-input-inline" style="width: 80px;">
+		<div class="layui-input-inline">
 			<button class="layui-btn" data-type="reload">查找</button>
+			<button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
 		</div>
 	</form>
 </script>
