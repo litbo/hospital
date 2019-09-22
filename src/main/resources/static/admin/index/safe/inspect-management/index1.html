@@ -14,7 +14,7 @@
     <![endif]-->
    <script src="../../../../static/admin/js/basic.js"></script>
     <style>
-        .layui-table-tool{
+      /*  .layui-table-tool{
             background: #fff;
             border: none;
         }
@@ -31,7 +31,7 @@
         }
         .layui-form-label{
             width: 100px;
-        }
+        }*/
     </style>
 </head>
 <body>
@@ -48,21 +48,18 @@
 
 <!--头部工具-->
 <script type="text/html" id="toolBar">
-    <div style="height: 180px;">
-        <div class="content layui-collapse " style="height: 140px;border:none;margin-top:10px;margin-bottom: 10px;">
-            <form class="layui-form demoTable" action=""  style="border:none;">
+    <div  class="addBtn" >
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+    </div>
+            <form class="layui-form demoTable" action="">
 
-                <div class="layui-form-item ">
-                    <div class="layui-inline" style="margin-top: 10px">
-                        <label class="layui-form-label">计划名称</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="inspPlName"   autocomplete="off" class="layui-input">
-                        </div>
+                <div class="layui-inline">
+                            <input type="text" name="inspPlName" placeholder="计划名称"  autocomplete="off" class="layui-input">
                     </div>
 
-                    <div class="layui-inline" style="margin-left: 200px">
-                        <label class="layui-form-label">审批状态</label>
-                        <div class="layui-input-inline">
+                <div class="layui-inline">
                             <select name="inspPlStatus" lay-filter="">
                                 <option value="">选择审批状态</option>
                                 <option value="0" >停用</option>
@@ -71,53 +68,21 @@
                                 <option value="3">已通过</option>
                             </select>
                         </div>
+
+                <div class="layui-inline">
+                            <input type="text" name="inspPlPlanner" placeholder="制定人"  autocomplete="off" class="layui-input">
                     </div>
 
-                </div>
-                <div class="layui-form-item ">
-
-                    <div class="layui-inline">
-                        <label class="layui-form-label">制&nbsp;定&nbsp;人</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="inspPlPlanner"  autocomplete="off" class="layui-input">
-                        </div>
+                <div class="layui-inline" >
+                            <input type="text" name="inspPlAuditor"  placeholder="审核人" autocomplete="off" class="layui-input">
                     </div>
 
-
-                    <div class="layui-inline" style="margin-left: 200px">
-                        <label class="layui-form-label">审&nbsp;核&nbsp;人</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="inspPlAuditor"  placeholder="" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-
-
-
-                </div>
-                <div class="layui-form-item" style="float:right;margin-right: 90px;margin-top: -60px">
-                    <div class="layui-input-block"  >
-                        <button type="button" class="layui-btn"   data-type="search" >查找</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
+                <div class="layui-inline"  >
+                    <button type="button" class="layui-btn"   data-type="search" >查找</button>
+                    <!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                 </div>
 
             </form>
-        </div>
-
-
-
-
-        <div class="layui-btn-container" style="float: left;margin-left: 30px;">
-           <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>
-                新增
-            </button>
-
-            <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
-
-            <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
-        </div>
-
-    </div>
 
 </script>
 
@@ -157,7 +122,6 @@
                     , url: '/inspection/inspPl/selectAllInspPlanVo'//接口
                     , method: "GET"
                     , toolbar: '#toolBar'
-                    , height: '800'
                     , title: '用户数据表'
                     , totalRow: true
                     , sort: true

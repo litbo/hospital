@@ -133,8 +133,31 @@
                     </div>
 
                 </div>
-
                 <div class="col-xs-12" style="margin-bottom: 50px;">
+                    <div class="layui-form-item" pane>
+
+                        <div class="layui-input-block" style="margin-left: 0">
+                            <button  type="button" class="layui-btn  layui-btn-sm addNew" data-type="addNew"  style="background-color: #003366">
+                                <i class="layui-icon layui-icon-add-1"></i>&nbsp;添加
+                            </button>
+
+                            <button type="button" class="layui-btn  layui-btn-sm setNew" data-type="setNew" id="setTable">设置巡检标准</button>
+
+                            <!-- <button type="button" class="layui-btn layui-btn-danger layui-btn-sm editNew"
+                                     data-id="table"   style="background-color: #FFB800">
+                                 <i  class="fas fa-pen"></i>    修改
+                             </button>-->
+
+                            <button type="button" class="layui-btn layui-btn-sm delNew" data-type="delNew"   style="background-color: #CC0033">
+                                <i  class="layui-icon layui-icon-delete"></i>&nbsp;删除
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <table id="table" lay-filter="table"></table>
+                </div>
+             <!--   <div class="col-xs-12" style="margin-bottom: 50px;">
                     <div class="layui-form-item" pane >
 
                         <div class="layui-input-block  demoTable" style="margin-left: 0">
@@ -152,8 +175,8 @@
                                     data-type="delNew"   style="background-color: #CC0033">
                                 <i  class="fas fa-trash-alt"></i>&nbsp;删除
                             </button>
-                           <!-- <p style="color: red;display: block;"><i style="font-weight: bolder">注:</i>设置巡检标准将会覆盖原来设置的巡检标准</p>
--->
+                           &lt;!&ndash; <p style="color: red;display: block;"><i style="font-weight: bolder">注:</i>设置巡检标准将会覆盖原来设置的巡检标准</p>
+&ndash;&gt;
 
                         </div>
 
@@ -161,15 +184,15 @@
                     </div>
 
                     <table id="table" lay-filter="table"></table>
-                </div>
+                </div>-->
 
                 <div class="layui-row" >
                     <div class="col-xs-6">
-                        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="sumBer">提 交</button>
+                        <button class="layui-btn  layui-btn-fluid" id="sumBer">提 交</button>
                     </div>
 
                     <div class="col-xs-6">
-                        <button class="layui-btn layui-btn-fluid" id="tui" >退出</button>
+                        <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" id="tui" >退出</button>
                     </div>
 
 
