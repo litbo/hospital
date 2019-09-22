@@ -44,7 +44,7 @@
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sz">批量设置为用户</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除用户信息<i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除用户信息</a>
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
@@ -63,6 +63,7 @@
         <div class="layui-inline">
             <input class="layui-input" name="userId" placeholder="工号" id="test-table-demoReload" autocomplete="off">
         </div>
+
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
 </script>
@@ -101,7 +102,8 @@
                             title: "设为系统用户",
                             type: 2,
                             content: "./child/setUser.html",
-                            dataUrl: ["userId"]
+                            dataUrl: ["userId"],
+                            area: ["50%", "70%"],
                         }, {
                             send:{
                                 id:"table",
