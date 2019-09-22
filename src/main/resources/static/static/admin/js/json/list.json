@@ -808,6 +808,77 @@
             "id": "314",
             "shiro": "DZDJB",
             "icon": "book"
+          },
+          {
+            "title": "用前检查",
+            "url": "life&t=1&n=5",
+            "id": "315",
+            "shiro": "SYGL",
+            "children": [
+              {
+                "title": "用前检查任务",
+                "url": "./table.html",
+                "icon": "search",
+                "id": "3150",
+                "shiro": "SYGL",
+                "children": [
+                  {
+                    "title": "待执行任务",
+                    "url": "./life/before-check/pending-task.html",
+                    "id": "31500",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "已执行任务",
+                    "url": "./life/before-check/executed-mission.html",
+                    "id": "31501",
+                    "shiro": "SYGL"
+                  }
+                ]
+              },
+              {
+                "title": "统计查询",
+                "url": "javascript",
+                "icon": "pencil-alt",
+                "shiro": "SYGL",
+                "id": "3121",
+                "children": [
+                  {
+                    "title": "分科室统计",
+                    "url": "./life/before-check/sectional-statistics.html",
+                    "id": "31510",
+                    "shiro": "SYGL"
+                  }
+                ]
+              },
+              {
+                "title": "用前检查规范",
+                "url": "./table.html",
+                "icon": "comment-alt",
+                "id": "3152",
+                "shiro": "SYGL",
+                "children": [
+                  {
+                    "title": "规范查询",
+                    "url": "./life/before-check/standard-query.html",
+                    "id": "31520",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "规范编制",
+                    "url": "./life/before-check/specifications.html",
+                    "id": "31521",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "编制任务",
+                    "url": "./life/before-check/prepare-task.html",
+                    "id": "31522",
+                    "shiro": "SYGL"
+                  }
+                ]
+              }
+            ]
           }
 
         ],
