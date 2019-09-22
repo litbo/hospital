@@ -21,7 +21,7 @@
     <!-- 搜索区域 -->
     <form action="">
         <div class="layui-input-inline" style="width: 120px;">
-            <select name="gf" lay-search="">
+            <select name="standardId" lay-filter="standardId" lay-search="">
                 <option value="">规范</option>
             </select>
         </div>
@@ -33,11 +33,11 @@
         </div>
         <!--设备名称-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="sbName" autocomplete="off" placeholder="请输入设备名称" class="layui-input">
+            <input type="text" name="eqName" autocomplete="off" placeholder="请输入设备名称" class="layui-input">
         </div>
         <!--设备编码-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="sbBm" autocomplete="off" placeholder="请输入设备编码" class="layui-input">
+            <input type="text" name="eqSbbh" autocomplete="off" placeholder="请输入设备编码" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn" data-type="reload">查找</button>
@@ -57,10 +57,12 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'standardName', title:'规范名称',width:220}
-                    ,{field:'eqName', title:'设备名称', width:180}
-                    ,{field:'eqSbbh',title:'设备编号'}
-                    ,{field:'bmName',title:'科室', width:200}
+                    ,{field:'standardName', title:'规范名称',minWidth:240}
+                    ,{field:'typeName', title:'项目类型',minWidth:240}
+                    ,{field:'projectName', title:'项目名称',minWidth:240}
+                    ,{field:'eqName', title:'设备名称', minWidth:180}
+                    ,{field:'eqSbbh',title:'设备编号',minWidth:250}
+                    ,{field:'bmName',title:'科室', minWidth:220}
                     ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
                 ]]
                 , url: "/lifeManage/searchUnfinishedStandardTask"
@@ -98,10 +100,10 @@
             },
 
             reSet: {
-                url: "/lifeManage/selectAllYalogByExample",
+                url: "/lifeManage/searchAppointUnfinishedStandardTasks",
                 type: "reload",
                 method: "POST",
-                data: ["zt","qssj", "jssj", "yabh", "yaname"]
+                data: ["standardId","bmId", "eqName", "eqSbbh"]
             }
         },page: true
     };
@@ -121,6 +123,12 @@
                     ids: "bmId",
                     text: "bmName",
                     url: "/supervise/bmgl/listBm"
+                },
+                {
+                    filter: "standardId",
+                    ids: "standardId",
+                    text: "standardName",
+                    url: "/lifeManage/searchAllStandards2"
                 }
             ]
         }

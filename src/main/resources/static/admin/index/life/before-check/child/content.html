@@ -24,19 +24,22 @@
     <div class="layui-row" style="margin-top: 15px;">
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item" pane>
+                <input type="hidden" id="standardId">
                 <label class="layui-form-label">设备</label>
                 <div class="layui-input-block">
-                    <input type="text" name="equipmentName" autocomplete="off" class="layui-input" readonly>
+                    <input type="text" id="equipmentName" name="equipmentName" autocomplete="off" class="layui-input" readonly>
                     <input id="standardName" type="hidden" name="standardName" autocomplete="off" readonly>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">适用设备</label>
-                <div class="layui-input-block">
-                    <select name="applicableEquipment" disabled>
+<!--                <div class="layui-input-block">-->
+<!--                    <input type="text" name="date" id="applicableEquipment" placeholder="" autocomplete="off" class="layui-input" readonly>-->
+<!--                </div>-->
+                <div class="layui-input-block" >
+                    <select id="applicableEquipment" name="applicableEquipment" disabled>
                         <option value="同厂家同型号">同厂家同型号</option>
                         <option value="同类设备">同类设备</option>
-                        <option value="同简称设备">同简称设备</option>
                         <option value="全部设备">全部设备</option>
                     </select>
                 </div>
@@ -44,7 +47,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人</label>
                 <div class="layui-input-block">
-                    <input type="text" name="reviewerName" autocomplete="off" lay-verify="" class="layui-input" readonly>
+                    <input type="text" id="reviewerName" name="reviewerName" autocomplete="off" lay-verify="" class="layui-input" readonly>
                 </div>
             </div>
         </div>
@@ -136,12 +139,13 @@
 
     console.log($.getUrlParam("standardId"));
 
-    $("#equipmentName").val($.getUrlParam("equipmentName"));
-    $("#applicableEquipment").val($.getUrlParam("applicableEquipment"));
-    $("#reviewerName").val($.getUrlParam("reviewerName"));
-    $("#cycle").val($.getUrlParam("cycle"));
-    $("#designerName").val($.getUrlParam("designerName"));
-    $("#date").val($.getUrlParam("date"));
+
+    // $("#equipmentName").val($.getUrlParam("equipmentName"));
+    // $("#applicableEquipment").val($.getUrlParam("applicableEquipment"));
+    // $("#reviewerName").val($.getUrlParam("reviewerName"));
+    // $("#cycle").val($.getUrlParam("cycle"));
+    // $("#designerName").val($.getUrlParam("designerName"));
+    // $("#date").val($.getUrlParam("date"));
 
 
     renderMod = {
@@ -172,6 +176,26 @@
                         standardId:$.getUrlParam("standardId")
                     }
                     , parseData: function (res) { //res 即为原始返回的数据
+                        console.log(res.data);
+                        $("#equipmentName").val(res.data.equipmentName);
+                        $("#equipmentNumber").val(res.data.equipmentNumber);
+                        b = res.data.applicableEquipment;
+                        var a = $("#applicableEquipment");
+                        // a.val(b);
+
+                        a.find("option").each(function(){
+                            console.log($(this).text());
+                            if($(this).text() === b){
+                                console.log(1);
+                               $(this).attr("selected",true);
+                                layui.form.render();
+                           }
+                        });
+                        $("#reviewerName").val(res.data.reviewerName);
+                        $("#cycle").val(res.data.cycle);
+                        $("#designerName").val(res.data.designerName);
+                        $("#designerNumber").val(res.data.designerNumber);
+                        $("#date").val(res.data.date);
                         return {
                             "code": res.code, //解析接口状态
                             "msg": res.msg, //解析提示文本
@@ -180,7 +204,7 @@
                         }
                     }
                     ,done: function(res){
-                        console.log(res);
+                        // console.log(res);
                     }
                 }
             ]

@@ -99,6 +99,11 @@ public class SpecificationServiceImpl implements SpecificationService {
     }
 
     @Override
+    public List<SearchStandardVO> searchAllStandards2(Integer result) {
+        return specificationDao.searchAllStandards(result);
+    }
+
+    @Override
     public PageInfo<SearchStandardVO> searchAllStandards(@RequestParam(name="pageNum",required = false ,defaultValue = "1")Integer pageNum,
                                                          @RequestParam(name="pageSize",required = false ,defaultValue = "10")Integer pageSize,
                                                          Integer result) {
@@ -112,6 +117,8 @@ public class SpecificationServiceImpl implements SpecificationService {
             List<SearchStandardProjectVO> list= specificationDao.searchAllProject(s.getStandardId());
             s.setList(list);
         });
+
+
 
 
 
@@ -156,12 +163,12 @@ public class SpecificationServiceImpl implements SpecificationService {
             List<SaveTaskBufferVO> saveTaskBufferVOS = new ArrayList<>();
 
             if ("同类设备".equals(standardVO.getApplicableEquipment())){
+                System.out.println(eqInfo);
+                eqInfos.forEach(System.out::println);
                 eqInfos.removeIf(a->!a.getEqSbbh().substring(4,14).equals(eqInfo.getEqSbbh().substring(4,14)));
             }else if ("同厂家同型号".equals(standardVO.getApplicableEquipment())){
                 eqInfos.removeIf(a->!(a.getEqXh().equals(eqInfo.getEqXh()) && a.getSbcsIdScs().equals(eqInfo.getSbcsIdScs())
                                     && a.getEqGg().equals(eqInfo.getEqGg())));
-            }else if ("同简称设备".equals(standardVO.getApplicableEquipment())){
-                eqInfos.removeIf(a->!a.getEqPym().equals(eqInfo.getEqPym()));
             }else if ("全部设备".equals(standardVO.getApplicableEquipment())){
 
             }else {
@@ -270,7 +277,42 @@ public class SpecificationServiceImpl implements SpecificationService {
     @Override
     public PageInfo<SearchStandardTaskVO> searchAppointStandardTasks(int pageNum, int pageSize, Integer standardId, String bmId, String eqName, String eqSbbh,Integer result) {
         PageHelper.startPage(pageNum,pageSize);
+        System.out.println(result);
+        System.out.println(standardId);
+        System.out.println(bmId);
         List<SearchStandardTaskVO> searchStandardTaskVOS =  specificationDao.searchAppointStandardTasks(standardId,bmId,eqName,eqSbbh,result);
+        searchStandardTaskVOS.forEach(System.out::println);
+        PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = new PageInfo<>(searchStandardTaskVOS);
+        return searchStandardTaskVOPageInfo;
+    }
+
+    @Override
+    public PageInfo<SearchStandardTaskVO> searchAppointFinishedStandardTasks(int pageNum, int pageSize, Integer standardId, String bmId, String eqName, String eqSbbh,Integer result) {
+        PageHelper.startPage(pageNum,pageSize);
+        System.out.println(result);
+        System.out.println(standardId);
+        System.out.println(bmId);
+        List<SearchStandardTaskVO> searchStandardTaskVOS =  specificationDao.searchAppointFinishedStandardTasks(standardId,bmId,eqName,eqSbbh,result);
+        searchStandardTaskVOS.forEach(System.out::println);
+        if (result != null )
+            searchStandardTaskVOS.forEach(a->{
+                if (a.getOperationId().equals("01")){
+                    if (a.getTaskResult() == 1)
+                        a.setResultName("正常");
+                    else
+                        a.setResultName("不正常");
+                }else if (a.getOperationId().equals("02")){
+                    if (a.getTaskResult() == 1)
+                        a.setResultName("进行");
+                    else
+                        a.setResultName("未进行");
+                }else if (a.getOperationId().equals("03")){
+                    if (a.getTaskResult() == 1)
+                        a.setResultName("处理");
+                    else
+                        a.setResultName("未处理");
+                }
+            });
         PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = new PageInfo<>(searchStandardTaskVOS);
         return searchStandardTaskVOPageInfo;
     }

@@ -26,10 +26,11 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">选择</label>
                 <div class="layui-input-block">
-                    <select name="operationId" id="operationId">
-                        <option value="01">通过审核</option>
-                        <option value="02">不通过</option>
+                    <select name="result" id="result">
+                        <option value="1">通过审核</option>
+                        <option value="0">不通过</option>
                     </select>
+                    <input type="hidden" name="standardId" id="standardId">
                 </div>
             </div>
         </div>
@@ -44,6 +45,7 @@
 <script>
 
     console.log($.getUrlParam("standardId"));
+    $("#standardId").val($.getUrlParam("standardId"));
 
     layui.use(['form', 'layedit', 'laydate'], function(){
         var form = layui.form
@@ -53,8 +55,25 @@
 
         //监听提交
         form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+                dataType: 'text',
+                url: '/lifeManage/saveStandardResult',
+                data: data.field,
+                success: function(data) {
+                    layui.layer.alert('保存成功!');
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
+                    window.parent.location.reload();
+                },
+                error:function(){
+                    alert("error");
+                }
             });
             return false;
         });

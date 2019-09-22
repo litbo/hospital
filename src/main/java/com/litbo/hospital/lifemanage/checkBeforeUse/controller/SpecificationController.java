@@ -146,15 +146,26 @@ public class SpecificationController {
         return Result.success(pageInfo);
     }
 
+    @GetMapping("searchAllStandards2")
+    public Result searchAllStandards2(@RequestParam(required = false,value = "result") Integer result){
+        List<SearchStandardVO> pageInfo = specificationService.searchAllStandards2(result);
+        return Result.success(pageInfo);
+    }
+
 
     @PostMapping("getStandard")
     public Result searchStandard(Integer standardId){
+        System.out.println(standardId);
         SearchStandardVO standardVO = specificationService.searchStandard(standardId);
+        System.out.println(standardVO);
         return Result.success(standardVO);
     }
 
+
     @PostMapping("saveStandardResult")
-    public Result saveStandardResult(Integer standardId,Integer result){
+    public Result saveStandardResult(Integer standardId, Integer result){
+        System.out.println(standardId);
+        System.out.println(result);
         String r = specificationService.updateStandardResult(standardId,result);
         return Result.success(r);
     }
@@ -214,7 +225,7 @@ public class SpecificationController {
                                              @RequestParam(value = "bmId",required = false) String bmId,
                                              @RequestParam(value = "eqName",required = false) String eqName,
                                              @RequestParam(value = "eqSbbh",required = false) String eqSbbh){
-        PageInfo<SearchStandardTaskVO> p = specificationService.searchAppointStandardTasks(pageNum,pageSize,
+        PageInfo<SearchStandardTaskVO> p = specificationService.searchAppointFinishedStandardTasks(pageNum,pageSize,
                 standardId,bmId,eqName,eqSbbh,
                 1);
         return Result.success(p);

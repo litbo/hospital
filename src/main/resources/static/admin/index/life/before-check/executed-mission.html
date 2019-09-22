@@ -18,15 +18,12 @@
 <table class="layui-hide" id="table" lay-filter="table1"></table>
 
 <script type="text/html" id="toolBar">
+    <!-- 搜索区域 -->
     <form action="">
-        <!--日期-->
         <div class="layui-input-inline" style="width: 120px;">
-            <input type="text" name="qssj" id="date1"
-                   autocomplete="off" class="layui-input" placeholder="起始时间">
-        </div>
-        <div class="layui-input-inline" style="width: 120px;">
-            <input type="text" name="jssj" id="date2"
-                   autocomplete="off" class="layui-input" placeholder="结束时间">
+            <select name="standardId" lay-filter="standardId" lay-search="">
+                <option value="">规范</option>
+            </select>
         </div>
         <!--部门-->
         <div class="layui-input-inline" style="width: 150px;">
@@ -36,15 +33,11 @@
         </div>
         <!--设备名称-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="sbName" autocomplete="off" placeholder="请输入设备名称" class="layui-input">
+            <input type="text" name="eqName" autocomplete="off" placeholder="请输入设备名称" class="layui-input">
         </div>
         <!--设备编码-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="sbBm" autocomplete="off" placeholder="请输入设备编码" class="layui-input">
-        </div>
-        <!--实施人-->
-        <div class="layui-input-inline" style="width: 120px;">
-            <input type="text" name="ssr" autocomplete="off" placeholder="实施人" class="layui-input">
+            <input type="text" name="eqSbbh" autocomplete="off" placeholder="请输入设备编码" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn" data-type="reload">查找</button>
@@ -64,14 +57,16 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'eqName', title:'设备',width:140}
-                    ,{field:'eqSbbh', title:'设备编号', width:180}
+                    ,{field:'eqName', title:'设备',minWidth:140}
+                    ,{field:'typeName', title:'项目类型',minWidth:240}
+                    ,{field:'projectName', title:'项目名称',minWidth:240}
+                    ,{field:'eqSbbh', title:'设备编号', minWidth:180}
                     ,{field:'bmName',title:'科室'}
-                    ,{field:'standardName',title:'规范', width:180}
-                    ,{field:'userXm', title:'实施人', width:130}
-                    ,{field:'operationDate', title:'实施时间', width:130}
-                    ,{field:'resultName', title:'任务结果', width:130}
-                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
+                    ,{field:'standardName',title:'规范', minWidth:180}
+                    ,{field:'userXm', title:'实施人', minWidth:130}
+                    ,{field:'operationDate', title:'实施时间', minWidth:130}
+                    ,{field:'resultName', title:'任务结果', minWidth:130}
+                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',minWidth:150}
                 ]]
                 , url: "/lifeManage/searchFinishedStandardTask"
                 , method: "POST"
@@ -108,10 +103,10 @@
             },
 
             reSet: {
-                url: "/lifeManage/selectAllYalogByExample",
+                url: "/lifeManage/searchAppointFinishedStandardTasks",
                 type: "reload",
                 method: "POST",
-                data: ["zt","qssj", "jssj", "yabh", "yaname"]
+                data: ["standardId","bmId", "eqName", "eqSbbh"]
             }
         },page: true
     };
@@ -120,12 +115,14 @@
             {
                 elem:"#date1",
                 isInitValue:false,
-                format:'yyyy-MM-dd'
+                format:'yyyy-MM-dd',
+                value:today0
             },
             {
                 elem:"#date2",
                 isInitValue:false,
-                format:'yyyy-MM-dd'
+                format:'yyyy-MM-dd',
+                value:today0
             }
         ],
         val: {
@@ -136,6 +133,12 @@
                     ids: "bmId",
                     text: "bmName",
                     url: "/supervise/bmgl/listBm"
+                },
+                {
+                    filter: "standardId",
+                    ids: "standardId",
+                    text: "standardName",
+                    url: "/lifeManage/searchAllStandards2"
                 }
             ]
         }

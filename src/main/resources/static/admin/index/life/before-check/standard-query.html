@@ -22,10 +22,10 @@
     <button class="layui-btn layui-btn-xs" lay-event="add" style="background-color: #cc0033;">新规范编制</button>
     <form action="">
         <div class="layui-input-inline" style="width: 120px;">
-            <select name="zt" lay-search="">
+            <select name="result" lay-search="">
                 <option value="">规范状态</option>
-                <option value="1">已备案</option>
-                <option value="2">试用中</option>
+                <option value="1">已审核</option>
+                <option value="2">审核失败</option>
                 <option value="3">待审核</option>
             </select>
         </div>
@@ -41,12 +41,12 @@
 </script>
 
 <script type="text/html" id="jsonChange">
-    {{#if (d.yjyaZt === "2") { }}
-    <span style="color:green">已备案</span>
-    {{# }else if(d.yjyaZt === "1"){ }}
-    <span style="color:blue">试用中</span>
+    {{#if (d.result === 1) { }}
+    <span style="color:green">审核通过</span>
+    {{# }else if(d.result === 0){ }}
+    <span style="color:red">审核未通过</span>
     {{# }else{ }}
-    <span style="color:red">已弃用</span>
+    <span style="color:blue">待审核</span>
     {{# } }}
 </script>
 
@@ -127,10 +127,10 @@
             },
 
             reSet: {
-                url: "/lifeManage/selectAllYalogByExample",
+                url: "/lifeManage/searchAllStandards",
                 type: "reload",
                 method: "POST",
-                data: ["zt","qssj", "jssj", "yabh", "yaname"]
+                data: ["result"]
             }
         },page: true
     };
