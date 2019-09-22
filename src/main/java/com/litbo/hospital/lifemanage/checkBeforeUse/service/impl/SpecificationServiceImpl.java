@@ -7,12 +7,10 @@ import com.litbo.hospital.lifemanage.checkBeforeUse.service.SpecificationService
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.*;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.EqInfoDAO;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqInfoVO;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service("SpecificationService")
@@ -49,12 +47,13 @@ public class SpecificationServiceImpl implements SpecificationService {
     public PageInfo<UserVo> searchAppointUsers(@RequestParam(name="pageNum",required = false ,defaultValue = "1") Integer pageNum,
                                             @RequestParam(name="pageSize",required = false,defaultValue = "10")Integer pageSize,
                                                String name) {
-        if (name == null | name.trim().equals(""))
+        if (name == null | "".trim().equals(name))
             name = null;
         UserVo userVo = new UserVo();
         userVo.setUserXm(name);
         PageHelper.startPage(pageNum,pageSize);
         List<UserVo> userVos = specificationDao.searchAppointUsers(userVo);
+        userVos.forEach(System.out::println);
         PageInfo<UserVo> userVoPageInfo = new PageInfo<>(userVos);
         return userVoPageInfo;
     }
@@ -149,23 +148,43 @@ public class SpecificationServiceImpl implements SpecificationService {
 
             List<EqInfoVO2> eqInfos = specificationDao.searchAppointEqInfos(eqInfoVO2);
 
-            eqInfoVO2.setEqSbbh(standardVO.getEquipmentNumber());
+
+            EqInfoVO2 eqInfo = specificationDao.searchEqInfosBySbbh(standardVO.getEquipmentNumber());
 
 
+
+            List<SaveTaskBufferVO> saveTaskBufferVOS = new ArrayList<>();
 
             if ("同类设备".equals(standardVO.getApplicableEquipment())){
-
+                eqInfos.removeIf(a->!a.getEqSbbh().substring(4,14).equals(eqInfo.getEqSbbh().substring(4,14)));
             }else if ("同厂家同型号".equals(standardVO.getApplicableEquipment())){
-
+                eqInfos.removeIf(a->!(a.getEqXh().equals(eqInfo.getEqXh()) && a.getSbcsIdScs().equals(eqInfo.getSbcsIdScs())
+                                    && a.getEqGg().equals(eqInfo.getEqGg())));
             }else if ("同简称设备".equals(standardVO.getApplicableEquipment())){
-
+                eqInfos.removeIf(a->!a.getEqPym().equals(eqInfo.getEqPym()));
             }else if ("全部设备".equals(standardVO.getApplicableEquipment())){
 
             }else {
                 i = 0;
             }
+            if (i!=0){
+                eqInfos.forEach(e->{
+                    list.forEach(l->{
+                        SaveTaskBufferVO saveTaskBufferVo = new SaveTaskBufferVO();
+                        saveTaskBufferVo.setEquipmentNumber(e.getEqSbbh());
+                        saveTaskBufferVo.setOperationId(l.getOperationId());
+                        saveTaskBufferVo.setProjectId(l.getProjectId());
+                        saveTaskBufferVo.setStandardId(standardId);
+                        saveTaskBufferVo.setStandardName(standardVO.getStandardName());
+                        saveTaskBufferVOS.add(saveTaskBufferVo);
+                    });
+                });
+                saveTaskBufferVOS.forEach(System.out::println);
+                i = specificationDao.saveTaskBuffers(saveTaskBufferVOS);
+            }
         }else {
             i = specificationDao.updateStandardCycleDateFalse(standardId);
+            i = specificationDao.deleteTaskBufferByStandardId(standardId);
         }
 
 
@@ -175,5 +194,84 @@ public class SpecificationServiceImpl implements SpecificationService {
             return "true";
         else
             return "false";
+    }
+
+    @Override
+    public String deleteTaskBufferByStandardId(Integer standardId) {
+        Integer i = specificationDao.deleteTaskBufferByStandardId(standardId);
+        if (i == 1)
+            return "true";
+        else
+            return "false";
+    }
+
+    @Override
+    public PageInfo<SearchStandardTaskVO> searchTodayUnfinishedStandardTask(int pageNum, int pageSize) {
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<SearchStandardTaskVO> searchStandardTaskVOS = specificationDao.searchTodayUnfinishedStandardTask();
+        /*searchStandardTaskVOS.forEach(a->{
+            if (a.getOperationId().equals("01")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("正常");
+                else
+                    a.setResultName("不正常");
+            }else if (a.getOperationId().equals("02")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("进行");
+                else
+                    a.setResultName("未进行");
+            }else if (a.getOperationId().equals("03")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("处理");
+                else
+                    a.setResultName("未处理");
+            }
+        });*/
+        PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = new PageInfo<>(searchStandardTaskVOS);
+        return searchStandardTaskVOPageInfo;
+    }
+
+    @Override
+    public PageInfo<SearchStandardTaskVO> searchTodayFinishedStandardTask(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SearchStandardTaskVO> searchStandardTaskVOS = specificationDao.searchTodayFinishedStandardTask();
+        searchStandardTaskVOS.forEach(a->{
+            if (a.getOperationId().equals("01")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("正常");
+                else
+                    a.setResultName("不正常");
+            }else if (a.getOperationId().equals("02")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("进行");
+                else
+                    a.setResultName("未进行");
+            }else if (a.getOperationId().equals("03")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("处理");
+                else
+                    a.setResultName("未处理");
+            }
+        });
+        PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = new PageInfo<>(searchStandardTaskVOS);
+        return searchStandardTaskVOPageInfo;
+    }
+
+    @Override
+    public String searchStandardTaskResult(Integer taskId, Integer taskResult, String operatorNumber) {
+        Integer i = specificationDao.updateStandardTaskResult(taskId,taskResult,operatorNumber);
+        if (i == 1)
+            return "true";
+        else
+            return "false";
+    }
+
+    @Override
+    public PageInfo<SearchStandardTaskVO> searchAppointStandardTasks(int pageNum, int pageSize, Integer standardId, String bmId, String eqName, String eqSbbh,Integer result) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SearchStandardTaskVO> searchStandardTaskVOS =  specificationDao.searchAppointStandardTasks(standardId,bmId,eqName,eqSbbh,result);
+        PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = new PageInfo<>(searchStandardTaskVOS);
+        return searchStandardTaskVOPageInfo;
     }
 }
