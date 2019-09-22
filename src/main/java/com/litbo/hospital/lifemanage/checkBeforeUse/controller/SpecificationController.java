@@ -1,20 +1,20 @@
 package com.litbo.hospital.lifemanage.checkBeforeUse.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.checkBeforeUse.service.SpecificationService;
-import com.litbo.hospital.lifemanage.checkBeforeUse.vo.SaveStandardProjectVO;
-import com.litbo.hospital.lifemanage.checkBeforeUse.vo.SaveStandardVO;
-import com.litbo.hospital.lifemanage.checkBeforeUse.vo.SearchStandardVO;
+import com.litbo.hospital.lifemanage.checkBeforeUse.vo.*;
 import com.litbo.hospital.result.Result;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/lifeManager")
+@RequestMapping("/lifeManage")
 public class SpecificationController {
 
     @Autowired
@@ -25,14 +25,14 @@ public class SpecificationController {
      * 查找所有设备
      * @return 所有设备信息
      */
-    @GetMapping("getEqInfos")
+    @PostMapping("getEqInfos")
     public Result getEqInfos(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                              @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
         return Result.success(specificationService.searchEqInfos(pageNum,pageSize));
     }
 
 
-    @GetMapping("eqInfosTitle")
+    @PostMapping("eqInfosTitle")
     public Result eqInfosTitle(){
         String title ="[{'type': 'radio'}, "+
                 "{field: 'bmName', title: '部门名称'},"+
@@ -49,6 +49,19 @@ public class SpecificationController {
     }
 
 
+    @PostMapping("usersTitle")
+    public Result usersTitle(){
+        String title ="[{'type': 'radio'}, "+
+                "{field: 'userId', title: '用户Id'},"+
+                "{field: 'userXm', title: '用户姓名'},"+
+                "{field: 'bmName', title: '部门名称'},"+
+                "{field: 'bmId', title: '部门Id'},"+
+                "]";
+        return Result.success(JSON.parseArray(title));
+    }
+
+
+
     @GetMapping("getUsers")
     public Result getUsers(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
@@ -56,16 +69,43 @@ public class SpecificationController {
     }
 
 
-    @GetMapping("getAppointUsers")
+    @PostMapping("getAppointUsers")
     public Result geAppointUsers(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                  @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                                  String name){
         return Result.success(specificationService.searchAppointUsers(pageNum,pageSize,name));
     }
 
+    @GetMapping("getAppointUsers2")
+    public Result geAppointUsers2(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 String name){
+        return Result.success(specificationService.searchAppointUsers(pageNum,pageSize,name));
+    }
 
-    @GetMapping("getAppointEqInfos")
-    public Result getAppointEqInfos(Integer pageNum, Integer pageSize,
+    @PostMapping("/userSe")
+    public Result bmSe(){
+        Map map =new HashMap();
+        map.put("dom",
+                "<div class='layui-inline'><input type=\"text\" name=\"name\" class=\"layui-input\" placeholder=\"用户姓名\" autocomplete=\"off\"></div>" +
+                        "    <div class='layui-input-inline mar10-0' align='center'>" +
+                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/lifeManage/getAppointUsers2");
+        m.put("type","reload");
+        String[] data = {"name"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
+    }
+
+
+    @PostMapping("getAppointEqInfos")
+    public Result getAppointEqInfos(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                    @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                                     @RequestParam(required = false,value = "eqSbbh") String sbbh,
                                     @RequestParam(required = false,value = "eqName") String eqName,
                                     @RequestParam(required = false,value = "eqPym") String eqPym,
@@ -77,6 +117,9 @@ public class SpecificationController {
 
     @PostMapping("saveStandard")
     public Result saveStandard(@RequestBody SaveStandardVO saveStandardVO){
+
+
+        System.out.println(saveStandardVO);
 
 
         System.out.println(saveStandardVO);
@@ -95,7 +138,7 @@ public class SpecificationController {
     }
 
 
-    @GetMapping("searchAllStandards")
+    @PostMapping("searchAllStandards")
     public Result searchAllStandards(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
                                      @RequestParam(required = false,value = "result") Integer result){
@@ -104,7 +147,7 @@ public class SpecificationController {
     }
 
 
-    @GetMapping("getStandard")
+    @PostMapping("getStandard")
     public Result searchStandard(Integer standardId){
         SearchStandardVO standardVO = specificationService.searchStandard(standardId);
         return Result.success(standardVO);
@@ -115,6 +158,74 @@ public class SpecificationController {
         String r = specificationService.updateStandardResult(standardId,result);
         return Result.success(r);
     }
+
+
+    @DeleteMapping("deleteTaskBufferByStandardId")
+    public Result deleteTaskBufferByStandardId(Integer standardId){
+        System.out.println(standardId);
+        String r = specificationService.deleteTaskBufferByStandardId(standardId);
+        return Result.success(r);
+    }
+
+
+    @PostMapping("searchUnfinishedStandardTask")
+    public Result searchUnfinishedStandardTask(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = specificationService.searchTodayUnfinishedStandardTask(pageNum,pageSize);
+        return Result.success(searchStandardTaskVOPageInfo);
+    }
+
+    @PostMapping("searchFinishedStandardTask")
+    public Result searchFinishedStandardTask(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        System.out.println(2);
+        PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = specificationService.searchTodayFinishedStandardTask(pageNum,pageSize);
+        return Result.success(searchStandardTaskVOPageInfo);
+    }
+
+
+    @PostMapping("saveStandardTaskResult")
+    public Result saveStandardTaskResult(@RequestBody SaveStandardTaskResult saveStandardTaskResult){
+        System.out.println(saveStandardTaskResult);
+        String operatorNumber = saveStandardTaskResult.getOperatorNumber();
+        Integer taskId = saveStandardTaskResult.getTaskId();
+        Integer taskResult = saveStandardTaskResult.getTaskResult();
+        String r = specificationService.searchStandardTaskResult(taskId,taskResult,operatorNumber);
+        return Result.success(r);
+    }
+
+    @PostMapping("searchAppointUnfinishedStandardTasks")
+    public Result searchAppointUnfinishedStandardTasks(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                         @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                         @RequestParam(value = "standardId",required = false) Integer standardId,
+                                         @RequestParam(value = "bmId",required = false) String bmId,
+                                         @RequestParam(value = "eqName",required = false) String eqName,
+                                         @RequestParam(value = "eqSbbh",required = false) String eqSbbh){
+        PageInfo<SearchStandardTaskVO> p = specificationService.searchAppointStandardTasks(pageNum,pageSize,
+                                                                                standardId,bmId,eqName,eqSbbh,
+                                                                                null);
+        return Result.success(p);
+    }
+
+    @PostMapping("searchAppointFinishedStandardTasks")
+    public Result searchAppointFinishedStandardTasks(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                             @RequestParam(value = "standardId",required = false) Integer standardId,
+                                             @RequestParam(value = "bmId",required = false) String bmId,
+                                             @RequestParam(value = "eqName",required = false) String eqName,
+                                             @RequestParam(value = "eqSbbh",required = false) String eqSbbh){
+        PageInfo<SearchStandardTaskVO> p = specificationService.searchAppointStandardTasks(pageNum,pageSize,
+                standardId,bmId,eqName,eqSbbh,
+                1);
+        return Result.success(p);
+    }
+
+
+
+
+
+
+
 
 
 

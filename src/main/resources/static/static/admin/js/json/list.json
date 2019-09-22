@@ -84,35 +84,35 @@
                 ]
               },
               {
-                "title": "设备联网设置",
+                "title": "仪联网设置",
                 "url": "javascript:void;",
                 "icon": "network-wired",
                 "id": "2001",
-                "shiro": "SBLWSZZ",
+                "shiro": "KSSG",
                 "children": [
                   {
                     "title": "设备联网设置",
                     "url": "./dataCollection/page/main3.html",
                     "id": "20010",
-                    "shiro": "SBLWSZ"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "设备值班排班设置",
                     "url": "./dataCollection/page/main4.html",
                     "id": "20011",
-                    "shiro": "SBZBPBSZ"
+                    "shiro": "KSTL"
                   },
                   {
-                    "title": "运行记录",
+                    "title": "仪联网运行记录",
                     "url": "./dataCollection/page/main7.html",
                     "id": "20014",
-                    "shiro": "YXJL2"
+                    "shiro": "KSTL"
                   },
                   {
-                    "title": "原始记录",
+                    "title": "仪联网原始记录",
                     "url": "./dataCollection/page/main8.html",
                     "id": "20015",
-                    "shiro": "YSJL"
+                    "shiro": "KSTL"
                   }
                 ]
               }
@@ -808,6 +808,77 @@
             "id": "314",
             "shiro": "DZDJB",
             "icon": "book"
+          },
+          {
+            "title": "用前检查",
+            "url": "life&t=1&n=5",
+            "id": "315",
+            "shiro": "SYGL",
+            "children": [
+              {
+                "title": "用前检查任务",
+                "url": "./table.html",
+                "icon": "search",
+                "id": "3150",
+                "shiro": "SYGL",
+                "children": [
+                  {
+                    "title": "待执行任务",
+                    "url": "./life/before-check/pending-task.html",
+                    "id": "31500",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "已执行任务",
+                    "url": "./life/before-check/executed-mission.html",
+                    "id": "31501",
+                    "shiro": "SYGL"
+                  }
+                ]
+              },
+              {
+                "title": "统计查询",
+                "url": "javascript",
+                "icon": "pencil-alt",
+                "shiro": "SYGL",
+                "id": "3121",
+                "children": [
+                  {
+                    "title": "分科室统计",
+                    "url": "./life/before-check/sectional-statistics.html",
+                    "id": "31510",
+                    "shiro": "SYGL"
+                  }
+                ]
+              },
+              {
+                "title": "用前检查规范",
+                "url": "./table.html",
+                "icon": "comment-alt",
+                "id": "3152",
+                "shiro": "SYGL",
+                "children": [
+                  {
+                    "title": "规范查询",
+                    "url": "./life/before-check/standard-query.html",
+                    "id": "31520",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "规范编制",
+                    "url": "./life/before-check/specifications.html",
+                    "id": "31521",
+                    "shiro": "SYGL"
+                  },
+                  {
+                    "title": "编制任务",
+                    "url": "./life/before-check/prepare-task.html",
+                    "id": "31522",
+                    "shiro": "SYGL"
+                  }
+                ]
+              }
+            ]
           }
 
         ],
@@ -2105,7 +2176,7 @@
         "children": [
           {
             "title": "厂商管理",
-            "url": "safe&t=5&n=0",
+            "url": "safe&t=4&n=0",
             "id": "450",
             "shiro": "CSGL",
             "children": [

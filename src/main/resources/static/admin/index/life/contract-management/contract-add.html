@@ -344,14 +344,12 @@ $("#htBianhao").blur(function(){
             console.log(data)
             if(data.msg!=null && data.msg!=""){
                 layer.alert(data.msg)
-            }
-            else{
-
+                $("#htBianhao").val("")
             }
             // layer.alert(data.msg)
         }
     });
-})
+});
 
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function () {
@@ -482,37 +480,6 @@ $("#htBianhao").blur(function(){
 
         }
     };
-
-    function checkDuplicate(value){
-        var bool = true;
-        if(!isNull(value)){
-            $.Ajax({
-                url : "lifeManage/checkHtBianhao",
-                type : "POST",
-                // async:false,
-                // dataType : "JSON",
-                data:{
-                    "htBianhao":$("#htBianhao").val(),
-                    // "assetId":value
-                },
-                success : function(data) {
-                    alert("yes")
-                }
-            });
-        }else{
-            bool =  true;
-        }
-        return bool;
-    }
-
-    // jQuery.validator.addMethod("isCkeckDuplicate",function(value, element){
-    //     var tmp = checkDuplicate(value);
-    //     if(tmp){
-    //         return true
-    //     }else{
-    //         return false;
-    //     }
-    // },"该编号已存在，请重新编辑！")
 
 </script>
 

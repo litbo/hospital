@@ -10,26 +10,23 @@ import java.util.List;
 @Data
 public class SearchStandardVO {
     private Integer standardId;
-
     private String standardName;
-
     private String equipmentNumber;
-
     private String equipmentName;
-
     private String applicableEquipment;
-
     private String designerNumber;
-
     private String designerName;
-
     private String reviewerName;
-
     private String reviewerNumber;
-
     private Integer cycle;
-
     private Integer result;
+    /**设备厂商id*/
+    private String sbcsIdScs;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date cycleDate;
+
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

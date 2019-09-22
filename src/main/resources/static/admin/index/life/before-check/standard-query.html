@@ -37,7 +37,7 @@
 
 <script>
     window.emp = tempValue("rl", "emp", false);
-    console.log(emp);
+    // console.log(emp);
 </script>
 
 <script type="text/html" id="jsonChange">
@@ -53,10 +53,10 @@
 <script type="text/html" id="barDemo">
     {{#if (d.reviewerName === emp.userXm) { }}
     <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">规范内容</a>
-    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="zpj">重新审核</a>
+    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="sh">重新审核</a>
     {{# }else{ }}
     <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">规范内容</a>
-    <a class="layui-btn layui-btn-sm layui-btn-primary" lay-event="zpj" style="background-color: #ccc;color:white">没有权限</a>
+    <a class="layui-btn layui-btn-sm layui-btn-primary"  style="background-color: #ccc;color:white">没有权限</a>
     {{# } }}
 </script>
 
@@ -102,9 +102,20 @@
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
                                 type:2,
                                 event: "pipei",
+                                title:"规范内容",
+                                content:"child/content.html",
+                                area: ['1000px', '450px'],
+                                dataUrl:["standardId","equipmentName","applicableEquipment","reviewerName","cycle","designerName","date"],
+                                func:function(obj){
+                                    // console.log(obj);
+                                }
+                            },
+                            {//打开一个新窗口，并将当前行数据中的id传递给下一页面
+                                type:2,
+                                event: "sh",
                                 title:"审核",
                                 content:"child/audit.html",
-                                area: ['400px', '300px'],
+                                area: ['450px', '300px'],
                                 dataUrl:["standardId"],
                                 func:function(obj){
                                     // console.log(obj);

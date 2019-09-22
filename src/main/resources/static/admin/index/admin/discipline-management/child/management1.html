@@ -183,10 +183,17 @@
                     key:'abc',
                     name:'bbb',
                     before:function(){
-                        var ids = formData.radio[0].bmId;
-                      return {
-                          bmId:ids
-                      }
+                         if(formData.radio){
+                            var ids = formData.radio[0].bmId;
+                            return {
+                                bmId:ids
+                            }
+                        }else{
+                            putMsg({
+                                alert:"请选择一个科室！"
+                            });
+                            return "noLay";
+                        }
                     },
                     param:["bmId"]
                 }

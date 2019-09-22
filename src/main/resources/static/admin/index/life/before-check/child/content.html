@@ -26,7 +26,7 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备</label>
                 <div class="layui-input-block">
-                    <input type="text" name="equipmentNam" autocomplete="off" class="layui-input" readonly>
+                    <input type="text" name="equipmentName" autocomplete="off" class="layui-input" readonly>
                     <input id="standardName" type="hidden" name="standardName" autocomplete="off" readonly>
                 </div>
             </div>
@@ -76,11 +76,11 @@
                 <label class="layui-form-label col-xs-12">项目列表</label>
             </div>
             <table id="table" lay-filter="table"></table>
-            <div class="col-xs-12">
-                <div class="layui-form-item">
-                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="demo1">保存</button>
-                </div>
-            </div>
+<!--            <div class="col-xs-12">-->
+<!--                <div class="layui-form-item">-->
+<!--                    <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="demo1">保存</button>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </form>
@@ -131,10 +131,17 @@
 <script>
     var formData = {};
     var emp = tempValue("rl", "emp", false);
-    $("#designerName").val(emp.userXm);
-    $("#designerNumber").val(emp.userId);
+    // $("#designerName").val(emp.userXm);
+    // $("#designerNumber").val(emp.userId);
 
     console.log($.getUrlParam("standardId"));
+
+    $("#equipmentName").val($.getUrlParam("equipmentName"));
+    $("#applicableEquipment").val($.getUrlParam("applicableEquipment"));
+    $("#reviewerName").val($.getUrlParam("reviewerName"));
+    $("#cycle").val($.getUrlParam("cycle"));
+    $("#designerName").val($.getUrlParam("designerName"));
+    $("#date").val($.getUrlParam("date"));
 
 
     renderMod = {
@@ -161,9 +168,10 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , where: {}
+                    , where: {
+                        standardId:$.getUrlParam("standardId")
+                    }
                     , parseData: function (res) { //res 即为原始返回的数据
-                        console.log(res);
                         return {
                             "code": res.code, //解析接口状态
                             "msg": res.msg, //解析提示文本
@@ -171,25 +179,28 @@
                             "count": res.data.total //总数据数
                         }
                     }
+                    ,done: function(res){
+                        console.log(res);
+                    }
                 }
             ]
         },
-        form: {
-            date: {
-                elem: "#date"
-            },
-            val:{
-                filter:"forms",//与form标签lay-filter相同
-                get:{
-                    url:"/lifeManage/getStandard",
-                    type:"POST",
-                    data:{standardId:$.getUrlParam("standardId")}
-                },
-                func:function(data) {
-                    console.log(data);
-                }
-            }
-        }
+        // form: {
+        //     date: {
+        //         elem: "#date"
+        //     },
+        //     val:{
+        //         filter:"forms",//与form标签lay-filter相同
+        //         get:{
+        //             url:"/lifeManage/getStandard",
+        //             type:"POST",
+        //             data:{standardId:$.getUrlParam("standardId")}
+        //         },
+        //         func:function(data) {
+        //             console.log(data);
+        //         }
+        //     }
+        // }
     }
 </script>
 </body>
