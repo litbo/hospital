@@ -218,7 +218,7 @@ public interface SpecificationDao {
             "\tdbo.standards.designer_number = dbo.s_emp.user_id\n" +
             "AND dbo.standards.reviewer_number = a.user_id\n" +
             "AND dbo.standards.equipment_number = dbo.eq_info.eq_sbbh\n" +
-            "AND dbo.standards.standard_id = 7")
+            "AND dbo.standards.standard_id = #{standardId}")
     SearchStandardVO searchStandard(Integer standardId);
 
     @Update("UPDATE dbo.standards\n" +
@@ -462,4 +462,66 @@ public interface SpecificationDao {
             "    </choose>" +
             "</script>")
     List<SearchStandardTaskVO> searchAppointStandardTasks(Integer standardId, String bmId, String eqName, String eqSbbh,Integer result);
+
+
+    @Select("<script>" +
+            "SELECT\n" +
+            "\tdbo.eq_info.eq_sbbh,\n" +
+            "\tdbo.standard_task.task_id,\n" +
+            "\tdbo.standard_task.standard_name,\n" +
+            "\tdbo.standard_task.task_result,\n" +
+            "\tdbo.standard_task.operation_id,\n" +
+            "\tdbo.standard_task.project_id,\n" +
+            "\tdbo.standard_task.standard_id,\n" +
+            "\tdbo.eq_info.eq_name,\n" +
+            "\tdbo.standard_task.[date],\n" +
+            "\tdbo.standard_inspection.project_name,\n" +
+            "\tdbo.standard_inspection.type_name,\n" +
+            "\tdbo.project_inspection_operation.operation_name,\n" +
+            "\tdbo.eq_info.eq_bmid,\n" +
+            "\tdbo.s_bm.bm_name,\n" +
+            "\tdbo.standard_task.[operation_date],\n" +
+            "\tdbo.standard_task.operator_number,\n" +
+            "\tdbo.s_emp.user_xm\n" +
+            "\n" +
+            "    FROM\n" +
+            "        dbo.standard_task,\n" +
+            "        dbo.eq_info,\n" +
+            "        dbo.standard_inspection,\n" +
+            "        dbo.project_inspection_operation,\n" +
+            "        dbo.s_emp,\n" +
+            "        dbo.s_bm\n" +
+            "    WHERE\n" +
+            "    dbo.standard_task.equipment_number = dbo.eq_info.eq_sbbh AND\n" +
+            "    dbo.standard_task.operator_number = dbo.s_emp.user_id AND" +
+            "    datediff(\n" +
+            "        DAY,\n" +
+            "        dbo.standard_task.[date],\n" +
+            "        GETDATE()\n" +
+            "    ) = 0 AND\n" +
+            "    dbo.standard_task.project_id = dbo.standard_inspection.project_id AND\n" +
+            "    dbo.standard_task.operation_id = dbo.project_inspection_operation.operation_id AND\n" +
+            "    dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "    <if test=\"standardId != null\">\n" +
+            "    AND dbo.standard_task.standard_id = #{standardId}\n" +
+            "    </if>\n" +
+            "    <if test=\"bmId != null and bmId != ''\">\n" +
+            "        AND dbo.s_bm.bm_id LIKE CONCAT('%',#{bmId},'%')\n" +
+            "    </if>\n" +
+            "    <if test=\"eqName != null and eqName != ''\">\n" +
+            "    AND dbo.eq_info.eq_name LIKE CONCAT('%',#{eqName},'%')\n" +
+            "    </if>\n" +
+            "    <if test=\"eqSbbh != null and eqSbbh != ''\">\n" +
+            "    AND dbo.eq_info.eq_sbbh LIKE CONCAT('%',#{eqSbbh},'%')\n" +
+            "    </if>\n" +
+            "    <choose>\n" +
+            "        <when test=\"result == 1\">\n" +
+            "            AND dbo.standard_task.task_result IS NOT NULL\n" +
+            "        </when>\n" +
+            "        <otherwise>\n" +
+            "            AND dbo.standard_task.task_result IS NULL\n" +
+            "        </otherwise>\n" +
+            "    </choose>" +
+            "</script>")
+    List<SearchStandardTaskVO> searchAppointFinishedStandardTasks(Integer standardId, String bmId, String eqName, String eqSbbh,Integer result);
 }

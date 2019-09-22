@@ -35,4 +35,8 @@ public interface SpecificationService {
     String searchStandardTaskResult(Integer taskId, Integer taskResult, String operatorNumber);
 
     PageInfo<SearchStandardTaskVO> searchAppointStandardTasks(int pageNum, int pageSize, Integer standardId, String bmId, String eqName, String eqSbbh,Integer result);
+
+    PageInfo<SearchStandardTaskVO> searchAppointFinishedStandardTasks(int pageNum, int pageSize, Integer standardId, String bmId, String eqName, String eqSbbh,Integer result);
+
+    List<SearchStandardVO> searchAllStandards2(Integer result);
 }
