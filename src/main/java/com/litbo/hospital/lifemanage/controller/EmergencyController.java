@@ -23,7 +23,7 @@ public class EmergencyController {
      * @param userId 用户id
      * @return Result
      */
-    @PostMapping("/selectEmergencyList")
+        @PostMapping("/selectEmergencyList")
     public Result selectEmergencyList(@RequestParam(name = "userId") String userId) {
         return Result.success(emergencyService.selectEmergencyList(userId));
     }

@@ -27,12 +27,6 @@ public class SearchStandardVO {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date cycleDate;
 
-    /**设备厂商id*/
-    private String sbcsIdScs;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private Date cycleDate;
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

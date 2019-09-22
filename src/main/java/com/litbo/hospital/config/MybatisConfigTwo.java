@@ -26,16 +26,16 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.litbo.hospital.operational_data_monitoring.software_interface.mapper",
         sqlSessionTemplateRef = "SqlSessionTemplate2")
 public class MybatisConfigTwo {
-    @Value("${spring.datasource.two.url}")
+    @Value("${spring.datasource.one.url}")
     private String url;
 
-    @Value("${spring.datasource.two.username}")
+    @Value("${spring.datasource.one.username}")
     private String user;
 
-    @Value("${spring.datasource.two.password}")
+    @Value("${spring.datasource.one.password}")
     private String password;
 
-    @Value("${spring.datasource.two.driverClassName}")
+    @Value("${spring.datasource.one.driverClassName}")
     private String driverClass;
 
     @Bean(name = "dataSourceTwo")
