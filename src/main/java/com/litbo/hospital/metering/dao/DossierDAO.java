@@ -28,4 +28,6 @@ public interface DossierDAO {
     int updateByPrimaryKey(Dossier record);
 
     List<EqInfo> selectNeedDossierEq(@Param("eqName") String eqName);
+
+    String getDepartment(String key);
 }

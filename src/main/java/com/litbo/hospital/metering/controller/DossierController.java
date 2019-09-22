@@ -78,7 +78,7 @@ public class DossierController {
      */
     @RequestMapping("/addDossier.do")
     public Result addDossier(Dossier dossier,String eqSbbh,String eqQysj){
-        int result = dossierService.addDossier(dossier,eqSbbh.substring(0,4),eqQysj.substring(0,4));
+        int result = dossierService.addDossier(dossier,eqSbbh.substring(0,4),eqQysj.substring(0,4),eqSbbh);
         if(result == 0){
             return Result.success("添加失败,请检查您添加的信息");
         }
@@ -348,7 +348,13 @@ public class DossierController {
     @RequestMapping("/deleteDossierFile.do")
     public Result deleteDossierFile(int dossierFileId) {
         DossierFile dossierFile = dossierService.selectDossierFile(dossierFileId);
+        if(dossierFile == null){
+            return Result.success("未找到此文件");
+        }
         Dossier dossier = dossierService.selectDossierByBelongNum(dossierFile.getBelongDossierNum());
+        if(dossier == null){
+            System.out.println("未找到卷宗信息！");
+        }
 
         // 将文件的路径拼接成程序可以识别的路径   begin
         String[] paths = dossierFile.getDescription().split("\\\\");

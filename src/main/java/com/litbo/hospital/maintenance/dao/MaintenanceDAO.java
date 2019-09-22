@@ -3,6 +3,7 @@ package com.litbo.hospital.maintenance.dao;
 import com.litbo.hospital.maintenance.pojo.Maintenance;
 import com.litbo.hospital.maintenance.vo.AddEqVo;
 import com.litbo.hospital.maintenance.vo.EqInfoVo;
+import com.litbo.hospital.maintenance.vo.MaintenanceMessageVo;
 import com.litbo.hospital.maintenance.vo.MaintenancePlanVo;
 import com.litbo.hospital.user.bean.EqInfo;
 import org.apache.ibatis.annotations.Param;
@@ -43,6 +44,8 @@ public interface MaintenanceDAO {
 
 
     int deletePlan(int id);
+
+    MaintenanceMessageVo getMessgeVo(String id);
 
 
 }

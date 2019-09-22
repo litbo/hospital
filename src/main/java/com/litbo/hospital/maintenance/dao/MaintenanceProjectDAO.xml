@@ -89,6 +89,8 @@
     select * from hospital..maintenance_project where id = #{id}
   </select>
 
+
+
   <select id="getLastId" resultType="integer">
     select MAX(id) from hospital..maintenance_project
   </select>

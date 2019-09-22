@@ -31,7 +31,7 @@ public class DossierServiceImpl implements DossierService {
     @Autowired
     private DossierFileDAO dossierFileDAO;
 
-    private String catagoryPath = "D:\\hospitalConfigFile\\";
+    private String catagoryPath = "C:\\hospitalConfigFile\\";
 
 
 //                                                   卷宗管理     begin
@@ -71,6 +71,34 @@ public class DossierServiceImpl implements DossierService {
         return dossierDAO.insert(dossier);
     }
 
+
+    @Override
+    public int addDossier(Dossier dossier,String dossierNumPrefix,String dossierNumSuffix,String sbbh) {
+
+        String bm = dossierDAO.getDepartment(sbbh);
+        dossier.setBmName(bm);
+
+        // 得到卷宗编号
+        String dossierNum = getPropertiesDossiesNum(dossierNumPrefix,dossierNumSuffix);
+        dossier.setDossierNum(dossierNum);
+
+        String nowtiem = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss a").format(new Date());
+
+        dossier.setRecordTime(nowtiem);
+        dossier.setDossierType(0);
+
+        // 将卷宗性质和保存状态关联
+        if(dossier.getDossierNature().equals("全过程")){
+            dossier.setSaveType("永久");
+        }else if(dossier.getDossierNature().equals("一般")){
+            dossier.setSaveType("短期");
+        }
+
+        // 生成电子文件夹
+        dossier.setDescription(catagoryPath+dossierNum+"_"+dossier.getDossierName()+"\\");
+
+        return dossierDAO.insert(dossier);
+    }
 
     /**
      * 拼接卷宗的编号
@@ -153,7 +181,7 @@ public class DossierServiceImpl implements DossierService {
                 return dossierDAO.deleteByPrimaryKey(dossierId);
             } else {
                 if(!file.delete()){
-                    return 0;
+                    return dossierDAO.deleteByPrimaryKey(dossierId);
                 }
                 return dossierDAO.deleteByPrimaryKey(dossierId);
             }
@@ -205,8 +233,12 @@ public class DossierServiceImpl implements DossierService {
         }
 
         // 卷宗文件加一
+        if(dossier.getDossierType() == null){
+            dossier.setDossierType(0);
+        }
         int i = dossier.getDossierType();
-        dossier.setDossierType(i++);
+        i++;
+        dossier.setDossierType(i);
         dossierDAO.updateByPrimaryKey(dossier);
 
         // 获得当前时间
@@ -275,7 +307,7 @@ public class DossierServiceImpl implements DossierService {
     @Override
     public Dossier selectDossierByBelongNum(String BelongNum) {
         // 卷宗编号: 所属卷宗编号前0~8位 + “ ” + 所属卷宗编号9~11位 + “-” + 文件类型
-        return dossierDAO.selectByDossierNum(BelongNum.substring(0,9)+BelongNum.substring(9,12));
+        return dossierDAO.selectByDossierNum(BelongNum.substring(0,9)+BelongNum.substring(10,13));
     }
 
     @Override

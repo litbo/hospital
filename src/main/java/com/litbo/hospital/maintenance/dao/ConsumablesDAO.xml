@@ -68,4 +68,8 @@
       </if>
     </trim>
   </insert>
+
+    <select id="getConsumables" parameterType="integer" resultMap="BaseResultMap">
+        select * from hospital..consumables where maintenance_id = #{id}
+    </select>
 </mapper>

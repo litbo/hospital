@@ -15,7 +15,7 @@ public class PropertiesUtil {
 
     private static FileInputStream in = null;
     private static FileOutputStream out = null;
-    private static String fileUrl = "D:\\hospitalConfigFile\\";
+    private static String fileUrl = "C:\\hospitalConfigFile\\";
     private static String fileName = "dossierTimeDate.properties";
 
     private PropertiesUtil(){
@@ -37,7 +37,7 @@ public class PropertiesUtil {
             propertiesUtil.load(in);
             return propertiesUtil.getProperty(key);
         } catch (IOException e) {
-            System.out.println("D:\\hospitalConfigFile\\dossierTimeDate.properties配置文件创建失败！");
+            System.out.println("C:\\hospitalConfigFile\\dossierTimeDate.properties配置文件创建失败！");
             e.printStackTrace();
         }finally {
             try {

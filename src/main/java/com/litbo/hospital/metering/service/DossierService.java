@@ -18,6 +18,7 @@ public interface DossierService {
     // 查看还没有立卷宗的文件
     List<EqInfo> selectEqNeedDossier(String eqName);
     int addDossier(Dossier dossier,String dossierNumPrefix,String DossierNumSuffix);
+    int addDossier(Dossier dossier,String dossierNumPrefix,String DossierNumSuffix,String sbbh);
     int updateDossier(Dossier dossier);
     int deleterDossierById(int dossierId);
     Dossier selectDossierByID(int id);

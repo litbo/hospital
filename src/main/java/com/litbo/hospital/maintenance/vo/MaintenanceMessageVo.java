@@ -11,21 +11,21 @@ public class MaintenanceMessageVo {
     private String weiBaoRen;// 维保人
     private String weiBaoZeRenRen;// 维保责任人
     private String fenLeiBianMa; // 设备分类编码
-    private String sheBeiMingCheng;// 装备名称
-    private String guiGeXingHao;// 规格型号
+    private String sheBeiMingCheng;// 装备名称   1
+    private String guiGeXingHao;// 规格型号     1
     private String xuLieHao;// 序列号
     private String shengChanChangJia;// 生产厂家
     private String chanDi;// 产地
-    private String shiYongKeShi;// 使用科室
-    private String qiYongShiJian;// 启用时间
-    private String danJia;// 单价
+    private String shiYongKeShi;// 使用科室1
+    private String qiYongShiJian;// 启用时间  1
+    private String danJia;// 单价        1
     private String baoYangShiJian;// 保养时间
-    private String yiQiXianZhuang;// 仪器现状
-    private String beiZhu;// 备注
-    private String weiHuRenYuan;// 维护人员
-    private String jianChaRiQi;// 检查日期
-    private String keShiQianShou;// 科室签收
-    private String wanChengRiQi;// 完成日期
+    private String yiQiXianZhuang;// 仪器现状1
+    private String beiZhu;// 备注1
+    private String weiHuRenYuan;// 维护人员 1
+    private String jianChaRiQi;// 检查日期 1
+    private String keShiQianShou;// 科室签收 1
+    private String wanChengRiQi;// 完成日期 1
 
     public MaintenanceMessageVo() {
     }

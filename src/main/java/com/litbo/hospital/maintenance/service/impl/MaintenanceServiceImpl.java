@@ -11,6 +11,7 @@ import com.litbo.hospital.maintenance.pojo.MaintenanceProject;
 import com.litbo.hospital.maintenance.service.MaintenanceService;
 import com.litbo.hospital.maintenance.vo.AddEqVo;
 import com.litbo.hospital.maintenance.vo.EqInfoVo;
+import com.litbo.hospital.maintenance.vo.MaintenanceMessageVo;
 import com.litbo.hospital.maintenance.vo.MaintenancePlanVo;
 import com.litbo.hospital.user.bean.EqInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,6 +182,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Override
     public List<MaintenanceProject> seePlanContent(int id) {
         Maintenance maintenance = maintenanceDAO.selectById(id);
+        if(maintenance == null){
+            return new ArrayList<>();
+        }
         String[] projects = maintenance.getProjectList().split(",");
         List<MaintenanceProject> list = new ArrayList<>();
         for(String i : projects){
@@ -213,6 +217,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
+    public List<Consumables> getConsumables(int id) {
+        return consumablesDAO.getConsumables(id);
+    }
+
+    @Override
     public int resultAdd(int maintenanceId, String maintenanceResults, String instrumentStatus, String description,
                          String maintenancePersonnel, String checkTime, String departmentReceipt, String dateOfCompletion) {
         Maintenance maintenance = maintenanceDAO.selectById(maintenanceId);
@@ -231,4 +240,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     public int deleteType(String name) {
         return implementerDictionaryDAO.deleteByName(name);
     }
+
+    @Override
+    public MaintenanceMessageVo getMessgeVo(String id) {
+        return maintenanceDAO.getMessgeVo(id);
+    }
+
+
 }

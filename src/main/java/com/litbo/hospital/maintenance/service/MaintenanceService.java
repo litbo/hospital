@@ -5,6 +5,7 @@ import com.litbo.hospital.maintenance.pojo.Maintenance;
 import com.litbo.hospital.maintenance.pojo.MaintenanceProject;
 import com.litbo.hospital.maintenance.vo.AddEqVo;
 import com.litbo.hospital.maintenance.vo.EqInfoVo;
+import com.litbo.hospital.maintenance.vo.MaintenanceMessageVo;
 import com.litbo.hospital.maintenance.vo.MaintenancePlanVo;
 import com.litbo.hospital.user.bean.EqInfo;
 
@@ -63,12 +64,16 @@ public interface MaintenanceService {
     // 添加设备易耗品
     int addConsumables(Consumables consumables);
 
+    List<Consumables> getConsumables(int id);
+
 
     // 维护保养结果录入
     int resultAdd(int maintenanceId,String maintenanceResults,String instrumentStatus,String description,
                   String maintenancePersonnel,String checkTime,String departmentReceipt,String dateOfCompletion);
 
     int deleteType(String name);
+
+    MaintenanceMessageVo getMessgeVo(String id);
 
 
 }

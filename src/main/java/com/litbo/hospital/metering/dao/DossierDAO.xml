@@ -295,4 +295,10 @@
       eq_info.eq_id not in(select DISTINCT eq_id from dossier WHERE eq_id &lt;> '')
     </where>
   </select>
+
+  <select id="getDepartment" parameterType="string" resultType="string">
+    select s_bm.bm_name
+    from eq_info,s_bm
+    WHERE eq_bmid = s_bm.bm_id and eq_sbbh = #{key}
+  </select>
 </mapper>

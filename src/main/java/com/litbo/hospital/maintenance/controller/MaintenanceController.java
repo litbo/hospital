@@ -6,10 +6,8 @@ import com.litbo.hospital.maintenance.pojo.Consumables;
 import com.litbo.hospital.maintenance.pojo.Maintenance;
 import com.litbo.hospital.maintenance.pojo.MaintenanceProject;
 import com.litbo.hospital.maintenance.service.MaintenanceService;
-import com.litbo.hospital.maintenance.vo.AddEqVo;
-import com.litbo.hospital.maintenance.vo.EqInfoVo;
-import com.litbo.hospital.maintenance.vo.MaintenancePlanVo;
-import com.litbo.hospital.maintenance.vo.PlanContentVo;
+import com.litbo.hospital.maintenance.util.PDFUtil;
+import com.litbo.hospital.maintenance.vo.*;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqInfo;
@@ -440,6 +438,131 @@ public class MaintenanceController {
         return vo;
     }
     //                                                   字典管理      end
+
+
+    /**
+     * 将维护结果生成PDF文件并保存到卷宗中
+     * @param id 维护计划id
+     * @return
+     */
+    @RequestMapping("/createDossierFile")
+    public Result createDossierFile(int id){
+
+//                                            维护项目信息        begin
+
+        Maintenance maintenance = maintenanceService.seePlan(id);
+
+        // 拿到维护计划的项目
+        List<MaintenanceProject> projectList = maintenanceService.seePlanContent(id);
+
+        List<List<MaintenanceProject>> ProjectLists= new ArrayList<>();
+
+        if(!projectList.isEmpty()){
+            List<MaintenanceProject> projectList1 = new ArrayList<>();
+            List<MaintenanceProject> projectList2 = new ArrayList<>();
+            List<MaintenanceProject> projectList3 = new ArrayList<>();
+            List<MaintenanceProject> projectList4 = new ArrayList<>();
+            List<MaintenanceProject> projectList5 = new ArrayList<>();
+            List<MaintenanceProject> projectList6 = new ArrayList<>();
+
+
+            for(MaintenanceProject project : projectList){
+                switch (project.getProjectType()){
+                    case "外观检查":{
+                        projectList1.add(project);
+                    }break;
+                    case "清洁保养":{
+                        projectList2.add(project);
+                    }break;
+                    case "更换维修":{
+                        projectList3.add(project);
+                    }break;
+                    case "功能检查":{
+                        projectList4.add(project);
+                    }break;
+                    case "性能检测校正":{
+                        projectList5.add(project);
+                    }break;
+                    case "安全检查":{
+                        projectList6.add(project);
+                    }break;
+                    default:{
+
+                    }
+                }
+            }
+
+
+
+            if(!projectList1.isEmpty()){
+                ProjectLists.add(projectList1);
+            }
+
+            if(!projectList2.isEmpty()){
+                ProjectLists.add(projectList2);
+            }
+
+            if(!projectList3.isEmpty()){
+                ProjectLists.add(projectList3);
+            }
+
+            if(!projectList4.isEmpty()){
+                ProjectLists.add(projectList4);
+            }
+
+            if(!projectList5.isEmpty()){
+                ProjectLists.add(projectList5);
+            }
+
+            if(!projectList6.isEmpty()){
+                ProjectLists.add(projectList6);
+            }
+        }
+
+//                                            维护项目信息        end
+
+
+//                                            设备信息        begin
+        MaintenanceMessageVo maintenanceMessage = new MaintenanceMessageVo();
+
+        maintenanceMessage.setBaoYangShiJian("1");
+        maintenanceMessage.setBeiZhu("1");
+        maintenanceMessage.setChanDi("1");
+        maintenanceMessage.setDanJia("1");
+        maintenanceMessage.setEqCatagory("灭菌类");
+        maintenanceMessage.setFenLeiBianMa("1");
+        maintenanceMessage.setGuiGeXingHao("1");
+        maintenanceMessage.setJianChaRiQi("1");
+        maintenanceMessage.setKeShiQianShou("1");
+        maintenanceMessage.setQiYongShiJian("1");
+        maintenanceMessage.setSheBeiMingCheng("1");
+        maintenanceMessage.setShengChanChangJia("1");
+        maintenanceMessage.setShiYongKeShi("1");
+        maintenanceMessage.setWanChengRiQi("1");
+        maintenanceMessage.setWeiBaoRen("1");
+        maintenanceMessage.setWeiBaoZeRenRen("set");
+        maintenanceMessage.setWeiHuRenYuan("sdfs");
+        maintenanceMessage.setXuLieHao("sdfsdf");
+        maintenanceMessage.setYiQiXianZhuang("sdfsdf");
+
+
+//                                            设备信息        end
+
+
+//        易耗品  begin
+        List<Consumables> consumables = maintenanceService.getConsumables(id);
+//        易耗品  end
+
+        System.out.println("maintenanceMessage:\n"+maintenanceMessage+"\nProjectLists:\n"+ProjectLists+"\nconsumables\n"+consumables);
+
+
+//        生成文件
+        PDFUtil.createPDF(maintenanceMessage,ProjectLists,consumables);
+
+
+        return Result.success();
+
+    }
 
 
 

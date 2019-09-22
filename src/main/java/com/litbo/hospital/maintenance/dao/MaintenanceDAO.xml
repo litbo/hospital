@@ -294,5 +294,14 @@
     delete from maintenance where id = #{id}
   </delete>
 
+  <select id="getMessgeVo" parameterType="string" resultType="com.litbo.hospital.maintenance.vo.MaintenanceMessageVo">
+    SELECT info.eq_name as 'sheBeiMingCheng',info.eq_qysj as 'qiYongShiJian',info.eq_gg as 'guiGeXingHao',
+      bm.bm_name as 'shiYongKeShi', info.eq_price as 'danJia' , info.eq_bz as 'beiZhu',info.eq_syzt as 'yiQiXianZhuang',
+      maintenance.maintenance_personnel as 'weiHuRenYuan',maintenance.check_time as 'jianChaRiQi' ,
+      maintenance.department_receipt as 'keShiQianShou', maintenance.date_of_completion as 'wanChengRiQi'
+    from eq_info as info , s_bm as bm , maintenance
+    where info.eq_bmid = bm.bm_id and maintenance.eq_id = info.eq_id and maintenance.id = #{id}
+  </select>
+
 
 </mapper>
