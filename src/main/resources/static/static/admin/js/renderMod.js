@@ -663,6 +663,9 @@ function render(renderParam){
                                     }
                                 }
                             }
+                            if(ss === "noLay"){
+                                return false;
+                            }
                             //弹出自定义窗口
                             layOpen({
                                 type: 2,

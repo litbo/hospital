@@ -24,7 +24,8 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
+       <!-- <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>-->
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
     </div>
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
@@ -90,7 +91,8 @@
                                 event:'add',
                                 title:'提醒策略设置',
                                 type:2,
-                                content:'./child/preDateAdd.html'
+                                content:'./child/preDateAdd.html',
+                                area: ["80%", "80%"]
                             }
                         ]
                     })

@@ -26,4 +26,13 @@ public interface SpecificationService {
 
     String updateStandardResult(Integer standardId,Integer result);
 
+    String deleteTaskBufferByStandardId(Integer standardId);
+
+    PageInfo<SearchStandardTaskVO> searchTodayUnfinishedStandardTask(int pageNum, int pageSize);
+
+    PageInfo<SearchStandardTaskVO> searchTodayFinishedStandardTask(int pageNum, int pageSize);
+
+    String searchStandardTaskResult(Integer taskId, Integer taskResult, String operatorNumber);
+
+    PageInfo<SearchStandardTaskVO> searchAppointStandardTasks(int pageNum, int pageSize, Integer standardId, String bmId, String eqName, String eqSbbh,Integer result);
 }

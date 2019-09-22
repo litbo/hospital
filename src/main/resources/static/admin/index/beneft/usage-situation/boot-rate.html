@@ -17,7 +17,7 @@
     <script src="/static/admin/js/basic.js"></script>
     <script src="../../../../static/admin/layui/layui.js" charset="utf-8"></script>
     <style>
-        .setW{
+        .setW {
             width: 80px;
         }
     </style>
@@ -52,18 +52,18 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="eqSName" lay-search="">
                             <option value="">请选择设备</option>
-                            <option >CT室</option>
-                            <option >核磁公正室</option>
-                            <option >摄片室</option>
-                            <option >内外导管室</option>
-                            <option >心外ICU</option>
+                            <option>CT室</option>
+                            <option>核磁公正室</option>
+                            <option>摄片室</option>
+                            <option>内外导管室</option>
+                            <option>心外ICU</option>
                             <option>设备管理测试设备2</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <button class="layui-btn" type="button" data-type="search">查找</button>
                     </div>
-                    <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king" >排名变化</a>
+                    <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king">排名变化</a>
                 </form>
 
             </div>
@@ -74,31 +74,33 @@
     renderMod = {
         formAction: {
             date: {
-                elem:"#test6",
+                elem: "#test6",
                 isInitValue: false,
-                type:"date",
-                format:"yyyy-MM-dd",
-                range:true
+                type: "date",
+                format: "yyyy-MM-dd",
+                value: today0,
+                range: true
             },
-         val: {
-            filter: "select",
-            select: [
-                {
-                    text: "bmName",
-                    url: "/supervise/bmgl/listBm"
-                }
-            ]}
+            val: {
+                filter: "select",
+                select: [
+                    {
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
+            }
         },
         addTable: {
             table: {
                 cols: [[ //表头
-                        {field: 'eqCode', title: '设备编号',width:"25%",minWidth: 150}
-                        ,{field: 'eqName', title: '设备名称',width:"25%", minWidth: 150}
-                        , {field: 'realDays', title: '开机天数', minWidth: 150,sort:true}
-                        , {field: 'workDays', title: '应开机时间', minWidth: 150,sort:true}
-                        , {field: 'rating', title: '开机率', minWidth: 150,sort:true}
-                        , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
-                        ]]
+                    {field: 'eqCode', title: '设备编号', width: "25%", minWidth: 150}
+                    , {field: 'eqName', title: '设备名称', width: "25%", minWidth: 150}
+                    , {field: 'realDays', title: '开机天数', minWidth: 150, sort: true}
+                    , {field: 'workDays', title: '应开机时间', minWidth: 150, sort: true}
+                    , {field: 'rating', title: '开机率', minWidth: 150, sort: true}
+                    , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
+                ]]
                 , url: "/kpi/open/selectOpen"
                 , method: "POST"
                 , request: {
@@ -115,11 +117,11 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        "toolFunc":[{
+                        "toolFunc": [{
                             type: 2,
                             tool: "toolbar",
                             title: "排名",
-                            area: ['100%','70%'],
+                            area: ['100%', '70%'],
                             event: "king",
                             content: "./child/boot-ratepm.html"
                         },
@@ -130,7 +132,7 @@
             reSet: {
                 url: "/kpi/open/selectOpenByCon",
                 type: "search",
-                data: ["startSTime","bmSName", "eqSName"],     //搜索框的name
+                data: ["startSTime", "bmSName", "eqSName"],     //搜索框的name
                 where: {}
             }
         }

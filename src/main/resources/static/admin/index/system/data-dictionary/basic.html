@@ -24,7 +24,7 @@
     <div class="addBtn">
         <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>批量删除</button>
 <!--        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i>添加</a>
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete" ><i class="fas fa-trash-alt"></i>删除</a>-->
     </div>
@@ -161,13 +161,14 @@
                             $.ajax({
                                 type: "POST",
                                 url: "/specialEq/deleteSpecialEq",
-                                async: false,/*同步传输*/
+                                /*async: false,/!*同步传输*!/*/
                                 contentType: 'application/json',
-                                // dataType: 'json',
-                                data: {
-                                    dictVos:deleteVo.toString(),
-                                },
-                               /* data: {"deleteVo":JSON.stringify(deVo)} ,*/
+                             /*   contentType: "application/json;charset=UTF-8",*/
+                               dataType: 'json',
+                               /* data: {
+                                    "dictVos":JSON.stringify(deleteVo),
+                                },*/
+                                data: JSON.stringify(deleteVo),
                                 success: function (data) {
                                     console.log(data);
                                     layer.closeAll('loading');

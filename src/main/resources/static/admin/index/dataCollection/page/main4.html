@@ -29,10 +29,8 @@
 
 <script type="text/html" id="toolBar">
 	<!-- 搜索区域 -->
-	<a class="layui-btn layui-btn-xs" href="add2.html"
-	   style="background-color: #003366;margin-bottom: 5px;"><i class="layui-icon "></i></a>
-	<button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;margin-bottom: 5px;"><i class="layui-icon">
-	</i></button>
+	<a class="layui-btn layui-btn-xs" href="add2.html" style="background-color: #003366;margin-bottom: 5px;"><i class="layui-icon "></i>新增</a>
+	<button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;margin-bottom: 5px;"><i class="layui-icon"></i>批量删除</button>
 	<form action="" layui-filter="forms" >
 		<div class="layui-input-inline" style="width: 130px;">
 			<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
@@ -45,8 +43,9 @@
 		<div class="layui-input-inline" style="width: 100px;">
 			<input type="text" name="eqPym" autocomplete="off" placeholder="设备拼音码" class="layui-input">
 		</div>
-		<div class="layui-input-inline" style="width: 80px;">
+		<div class="layui-input-inline">
 			<button class="layui-btn" data-type="reload">查找</button>
+			<button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
 		</div>
 	</form>
 </script>

@@ -63,8 +63,8 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
                             <select name="interest" lay-filter="aihao">
-                                <option value="">全部</option>
-                                <option value="0" selected>有源</option>
+                                <option value="" selected>全部</option>
+                                <option value="0" >有源</option>
                                 <option value="1">无源</option>
                             </select>
                         </label>
@@ -140,7 +140,8 @@
             reSet: {
                 url: "/lifeManage/selectEquipmentAccount",
                 type: "reload",
-                data: ["interest","category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"]
+                data: ["interest","category", "state", "departmentId", "equipmentPinyinCode", "departmentCoding", "equipmentNumber"],
+                method: "POST"
             }
         },
         form: {

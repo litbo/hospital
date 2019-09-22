@@ -24,4 +24,7 @@ public class EqInfoVO2 {
     /**部门ID*/
     private String bmId;
 
+    /**设备厂商id*/
+    private String sbcsIdScs;
+
 }

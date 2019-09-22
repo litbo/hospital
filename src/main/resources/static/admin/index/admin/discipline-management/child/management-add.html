@@ -130,7 +130,7 @@
             {
                 elem:'#addNew',
                 func:function(){
-                    var new1 = {};
+                   var new1 = {};
                     new1.userId = $('#userId').val();
                     for(var i=0;i<$("#userId option").length;i++){
                         if($("#userId option")[i].value===new1.userId){
@@ -151,11 +151,14 @@
                         return false;
                     }
                     bg.push(new1);
-                    layui.use('table',function(){
-                        var table = layui.table;
+                    layui.use(['table','form'],function(){
+                        var table = layui.table,form = layui.form;
                         table.reload('table',{
                             data:bg
-                        })
+                        });
+                        $('#userId').val("");
+                        $('#gwId').val("");
+                        form.render();
                     })
                 }
             },
