@@ -33,7 +33,7 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
+        <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="edit" style="background: #CC0033"><i class="fas fa-trash-alt"></i>&nbsp;批量删除</a>
     </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
@@ -43,7 +43,7 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10 setType">
-                        <select name="modules" lay-verify="required" lay-search="">
+                        <select name="modules" lay-search="">
                             <option value="">病人类型</option>
                             <option value="1">门诊</option>
                             <option value="2">住院</option>
@@ -56,9 +56,8 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input class="layui-input" name="search" placeholder="病人ID">
                     </div>
-                    <label>报告完成时间</label>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="date" id="date" lay-verify="date" autocomplete="off" class="layui-input">
+                        <input type="text" name="date" id="date1" autocomplete="off" class="layui-input" placeholder="报告完成时间">
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">查找</button>
@@ -74,7 +73,8 @@
     renderMod.addTable ={
         table:{
             cols: [[ //表头
-                {field: 'patientID', title: '病人ID', minWidth: 150,sort:true}
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'patientID', title: '病人ID', minWidth: 150,sort:true}
                 , {field: 'patientName', title: '病人姓名', minWidth: 150}
                 , {field: 'patientSex', title: '病人姓名', minWidth: 100}
                 , {field: 'patientType', title: '病人类型', minWidth: 200}
@@ -95,7 +95,7 @@
                     "report-ftime": "报告完成时间",          //报告完成时间
                     "check-oddnum": "检查单号",             //检查单号
                     "check-project": "检查项目",            //检查项目
-                    "pro-price": 2000,                     //项目金额
+                    "pro-price": 2000                     //项目金额
                 }
             ]
             , done: function (obj) {
@@ -111,8 +111,10 @@
             }
         },
         date:{
-            elem:"#date",
-            range:"-"
+            elem:"#date1",
+            value:today0,
+            format:'yyyy-MM-dd',
+            isInitValue:false,
         },
         form:{
 
