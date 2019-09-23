@@ -106,6 +106,7 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="eqCard">设备卡</a>
+<!--    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="eqCard">附件信息</a>-->
 </script>
 <script>
     renderMod = {
@@ -115,18 +116,19 @@
                     elem: "#table"
                     , height: 'full-75'
                     , cols: [[ //表头
-                        {type: "checkbox"}
-                        , {field: 'eqSbbh', title: '设备编号', minWidth: 200}
+                        {type: "checkbox"},
+                        {type: "numbers", title: '序号' }
+                        , {field: 'eqSbbh', title: '设备编号', minWidth: 180}
                         , {field: 'eqName', title: '设备名称', minWidth: 200}
-                        , {field: 'eqYq', title: '院内编码', minWidth: 200}
-                        , {field: 'eqGg', title: '规格', minWidth: 100}
-                        , {field: 'eqXh', title: '型号', minWidth: 100}
-                        , {field: 'eqBmName', title: '所在科室', minWidth: 200}
-                        , {field: 'eqTzlb', title: '台账类别', minWidth: 180}
-                        , {field: 'eqQysj', title: '设备启用时间', minWidth: 180}
-                        , {field: 'eqSynx', title: '使用年限', minWidth: 100}
+                        , {field: 'eqYq', title: '院内编码', minWidth: 100}
+                        , {field: 'eqGg', title: '规格', minWidth: 30}
+                        , {field: 'eqXh', title: '型号', minWidth: 30}
+                        , {field: 'eqBmName', title: '所在科室', minWidth: 170}
+                        , {field: 'eqTzlb', title: '台账类别', minWidth: 130}
+                        , {field: 'eqQysj', title: '设备启用时间', minWidth: 130}
+                        , {field: 'eqSynx', title: '使用年限', minWidth: 50}
                         , {field: 'state', title: '是否在用状态', minWidth: 130}
-                        , {fixed:'right',minWidth: 100,align:'center',toolbar: "#bar"}
+                        , {fixed:'',minWidth: 180,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectEquipmentAccount"
                     , method: "POST"

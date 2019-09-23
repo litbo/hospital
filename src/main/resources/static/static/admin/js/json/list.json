@@ -3520,14 +3520,8 @@
                 "icon": "torah",
                 "id": "7001",
                 "shiro": "ZYZD"
-              },
-              {
-                "title": "状态字典",
-                "url": "./system/data-dictionary/state.html",
-                "icon": "torah",
-                "id": "7002",
-                "shiro": "a"
               }
+
             ]
           }
         ],
