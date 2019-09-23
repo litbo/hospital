@@ -97,7 +97,7 @@
             <div class="layui-form-item" id="syDays">
                 <label class="layui-form-label">试用天数<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="syDays" class="layui-input" lay-verify="required" autocomplete="off" >
+                    <input type="text" name="syDays" class="layui-input"  autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
@@ -184,7 +184,7 @@
                     func:function(){
                         var $val = $("input[name='ztCzzt']:checked").val();
                         var xx = $.getUrlParam('ztCzname');
-                        console.log($val);
+                        console.log(xx);
                         if($val === "1"){
                             $("#nextShr").addClass("hidden");
                             $("#syDays").addClass("hidden");
@@ -245,6 +245,7 @@
         $("#userId").val(emp.userId);
         $("#userXm").val(emp.userXm);
         var xx = $.getUrlParam('ztCzname');
+
         if (xx == "处长审核") {
             $("#nextShr").addClass("hidden");
             $("#syDays").removeClass("hidden");
