@@ -824,7 +824,7 @@
                 "children": [
                   {
                     "title": "待执行任务",
-                    "url": "./life/before-check/pending-task.html",
+                    "url": "./life/before-check/standard.html",
                     "id": "31500",
                     "shiro": "SYGL"
                   },

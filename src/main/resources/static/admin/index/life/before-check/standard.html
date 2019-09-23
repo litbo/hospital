@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>待执行任务</title>
+    <title>待审核页面</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -20,54 +20,55 @@
 <script type="text/html" id="toolBar">
     <!-- 搜索区域 -->
     <form action="" lay-filter="forms">
-        <!--部门-->
-        <div class="layui-input-inline" style="width: 150px;">
-            <select name="bmId"  lay-filter="bmId">
-                <option value="">科室</option>
+        <div class="layui-input-inline" style="width: 180px;">
+            <select name="standardId" lay-filter="standardId" lay-search="">
+                <option value="">规范</option>
             </select>
-        </div>
-        <!--设备名称-->
-        <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="eqName" autocomplete="off" placeholder="请输入设备名称" class="layui-input">
-        </div>
-        <!--设备编码-->
-        <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="eqSbbh" autocomplete="off" placeholder="请输入设备编码" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn" data-type="reload">查找</button>
-            <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
         </div>
     </form>
 </script>
 
+<script>
+    window.emp = tempValue("rl", "emp", false);
+    // console.log(emp);
+</script>
+
+<script type="text/html" id="jsonChange">
+    {{#if (d.result === 1) { }}
+    <span style="color:green">审核通过</span>
+    {{# }else if(d.result === 0){ }}
+    <span style="color:red">审核未通过</span>
+    {{# }else{ }}
+    <span style="color:blue">待审核</span>
+    {{# } }}
+</script>
+
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">检查</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">结果录入</a>
 </script>
 
 <script>
-
     renderMod = {
         addTable: {
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'projectName', title:'项目名称',minWidth:240}
-                    ,{field:'typeName', title:'项目类型',minWidth:240}
-                    ,{field:'eqName', title:'设备名称', minWidth:180}
-                    ,{field:'eqSbbh',title:'设备编号',minWidth:250}
-                    ,{field:'bmName',title:'科室', minWidth:220}
-                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:130}
+                    ,{field:'standardName', title:'规范名称'}
+                    ,{field:'designerName',title:'制订人', width:180}
+                    ,{field:'date', title:'制订时间', width:150}
+                    ,{field:'applicableEquipment', title:'适用设备', width:150}
+                    ,{fixed: 'right', title:'规范任务', align:'center', toolbar: '#barDemo',width:210}
                 ]]
-                , url: "/lifeManage/searchUnfinishedStandardTask"
+                , url: "/lifeManage/searchAllStandards"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                , where: {
-                    standardId:$.getUrlParam("standardId")
-                }
+                , where: {}
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -77,15 +78,23 @@
                     }
                 }
                 ,done: function(obj){
+                    for (var i=0; i < obj.data.length;i++ ) {
+                        var emp = tempValue("rl", "emp", false);
+                        console.log(obj.data[i].reviewerName);
+                        if (obj.data[i].reviewerName === emp.userXm){
+
+                        }
+                    }
+
                     tableFunc({
                         "tools":[
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
                                 type:2,
                                 event: "pipei",
-                                title:"检查",
-                                content:"child/check.html",
-                                area: ['500px', '250px'],
-                                dataUrl:["taskId","operationId"],
+                                title:"规范内容",
+                                content:"pending-task.html",
+                                area: ['1000px', '450px'],
+                                dataUrl:["standardId"],
                                 func:function(obj){
                                     // console.log(obj);
                                 }
@@ -96,21 +105,26 @@
             },
 
             reSet: {
-                url: "/lifeManage/searchAppointUnfinishedStandardTasks",
+                url: "/lifeManage/searchAllStandards",
                 type: "reload",
                 method: "POST",
-                data: ["standardId","bmId", "eqName", "eqSbbh"]
+                data: ["standardId"]
             }
         },page: true
     };
     renderMod.form = {
-        date:{
-            elem:"#date1",
-            range: true,
-            format:'yyyy-MM-dd',
-            isInitValue:false,
-            value:today
-        },
+        date:[
+            {
+                elem:"#date1",
+                isInitValue:false,
+                format:'yyyy-MM-dd'
+            },
+            {
+                elem:"#date2",
+                isInitValue:false,
+                format:'yyyy-MM-dd'
+            }
+        ],
         val: {
             filter: "forms",
             select: [
@@ -130,6 +144,11 @@
         }
     };
 
+    layui.use('table', function() {
+        var table = layui.table;
+        var checkStatus =table.checkStatus('table');
+        console.log(table.data);
+    })
 </script>
 </body>
 </html>

@@ -23,13 +23,15 @@
 <div class="layui-row" style="margin-top: 20px;">
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-12">
-            <div class="layui-form-item">
+            <div class="layui-form-item" pane="">
                 <label class="layui-form-label">选择</label>
-                <div class="layui-input-block">
-                    <select name="taskResult" id="operationId">
-<!--                        <option value="01">正常</option>-->
-<!--                        <option value="02">不正常</option>-->
-                    </select>
+                <div class="layui-input-block" id="operationId">
+<!--                    <select name="taskResult">-->
+<!--&lt;!&ndash;                        <option value="01">正常</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <option value="02">不正常</option>&ndash;&gt;-->
+<!--                    </select>-->
+<!--                    <input type="radio" name="taskResult" value="1" title="正常">-->
+<!--                    <input type="radio" name="taskResult" value="0" title="不正常">-->
                     <input type="hidden" id="taskId" name="taskId">
                     <input type="hidden" id="operatorNumber" name="operatorNumber">
                 </div>
@@ -57,24 +59,24 @@
         $("#operationId").empty();
         //添加子元素
         $("#operationId").append(
-            "<option value='1'>正常</option>" +
-            "<option value='0'>不正常</option>"
+            "<input type='radio' name='taskResult' value='1' title='正常' checked>" +
+            "<input type='radio' name='taskResult' value='0' title='不正常'>"
         );
     }else if(operationId === "02"){
         //保证不重复添加
         $("#operationId").empty();
         //添加子元素
         $("#operationId").append(
-            "<option value='1'>进行</option>" +
-            "<option value='0'>未进行</option>"
+            "<input type='radio' name='taskResult' value='1' title='进行' checked>" +
+            "<input type='radio' name='taskResult' value='0' title='未进行'>"
         );
     }else{
         //保证不重复添加
         $("#operationId").empty();
         //添加子元素
         $("#operationId").append(
-            "<option value='1'>处理</option>" +
-            "<option value='0'>未处理</option>"
+            "<input type='radio' name='taskResult' value='1' title='处理' checked>" +
+            "<input type='radio' name='taskResult' value='0' title='未处理'>"
         );
     }
 
