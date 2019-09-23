@@ -71,7 +71,7 @@
                                     <div class="layui-input-block">
                                         <select name="eqTzlb" lay-filter="tzlb">
                                             <option value="低值耐用品类">低值耐用品类</option>
-                                            <option value="固定资产类">固定资产类</option>
+                                            <option value="固定资产类"  selected="selected">固定资产类</option>
                                             <option value="基建类">基建类</option>
                                             <option value="第三方类">第三方类</option>
                                             <option value="试用类">试用类</option>
@@ -105,18 +105,12 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">单位</label>
+                                    <label class="layui-form-label">单价(元)<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <select name="eqJldwId" lay-filter="dwList">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">单价<span class="sign">*</span></label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="eqPrice" autocomplete="off" class="layui-input"
-                                               placeholder="3000">
+                                        <input type = "text" name="eqPrice" autocomplete="off" class="layui-input" placeholder="0.00"
+                                               maxlength="8" id="test" onblur="this.value=outputmoney(this.value);"/>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +128,7 @@
                                     <div class="layui-input-block">
                                         <select name="eqGlgk" lay-filter="">
                                             <option value="信息">信息</option>
-                                            <option value="医工">医工</option>
+                                            <option value="医工" selected="selected">医工</option>
                                             <option value="后勤">后勤</option>
                                         </select>
                                     </div>
@@ -179,6 +173,13 @@
                                     <label class="layui-form-label">注册证编码</label>
                                     <div class="layui-input-block">
                                         <input type="text" name="eqZczbh" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">单位</label>
+                                    <div class="layui-input-block">
+                                        <select name="eqJldwId" lay-filter="dwList">
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -416,6 +417,36 @@
 
 
 <script>
+    // 使数字1111111变成11,111,111.00，保留两位小数。
+    function outputmoney(number) {
+        number = number.replace(/\,/g, "");
+        if(isNaN(number) || number == "")return "";
+        number = Math.round(number * 100) / 100;
+        if (number < 0)
+            return '-' + outputdollars(Math.floor(Math.abs(number) - 0) + '') + outputcents(Math.abs(number) - 0);
+        else
+            return outputdollars(Math.floor(number - 0) + '') + outputcents(number - 0);
+    }
+    //格式化金额
+    function outputdollars(number) {
+        if (number.length <= 3)
+            return (number == '' ? '0' : number);
+        else {
+            var mod = number.length % 3;
+            var output = (mod == 0 ? '' : (number.substring(0, mod)));
+            for (i = 0; i < Math.floor(number.length / 3); i++) {
+                if ((mod == 0) && (i == 0))
+                    output += number.substring(mod + 3 * i, mod + 3 * i + 3);
+                else
+                    output += ',' + number.substring(mod + 3 * i, mod + 3 * i + 3);
+            }
+            return (output);
+        }
+    }
+    function outputcents(amount) {
+        amount = Math.round(((amount) - Math.floor(amount)) * 100);
+        return (amount < 10 ? '.0' + amount : '.' + amount);
+    }
 </script>
 <script>
     formData = {};
