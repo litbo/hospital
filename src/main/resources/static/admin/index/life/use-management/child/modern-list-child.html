@@ -38,27 +38,14 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" lay-filter="forms" action="">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-12">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">模板名称</label>
-                <div class="layui-input-block">
-                    <input type="text" name="mbMc" autocomplete="off" class="layui-input">
-                </div>
-            </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">模板内容<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="mbNr" id="mbNr" class="layui-textarea"></textarea>
+                    <textarea type="text" name="mbNr" id="mbNr" class="layui-textarea" readonly></textarea>
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12">
-            <div class="layui-form-item">
-                <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit=""
-                        lay-filter="save">保存
-                </button>
             </div>
         </div>
     </div>
@@ -71,19 +58,16 @@
 <script>
     renderMod = {
         form: {
-            submit: {
-                form: {
-                    url: "/lifeManage/insertCzGcMb",
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/lifeManage/selectOneCzGcMb",
                     type: "POST",
-                    data: ["mbMc", "mbNr"],
-                    // key:"key",
-                    contentType: "application/json",
-                    reload:"parent"
+                    data: {id: $.getUrlParam("mbId")},
                 }
             }
-
         }
-    };
+    }
 </script>
 </body>
 
