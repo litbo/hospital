@@ -19,7 +19,7 @@ public class FwHt {
 
     private BigDecimal htPrice;
 
-    private Integer sbcsId;
+    private String sbcsId;
 
     private String heWxsdb;
 
