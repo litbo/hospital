@@ -819,7 +819,13 @@ function render(renderParam){
                     date.range = bars;
                 }
                 //默认日期渲染
-                date.value = today + " " + bars + " " + today;
+                if(date.value){
+                    if(Type(date.value) === "array"){
+                        date.value = value[0] + " " + bars + " " + value[1];
+                    }
+                }else if(date.value !== false){
+                    date.value = today + " " + bars + " " + today;
+                }
             }
             //日期选择器渲染
             laydate.render(date);
