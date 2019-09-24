@@ -1,9 +1,14 @@
 package com.litbo.hospital.lifemanage.controller.MyController;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.MyUtils.String2DateUtil;
 import com.litbo.hospital.lifemanage.bean.MyBean.CzGc;
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.CzGcShowEqVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.DeleteHtsByIdsVO;
+import com.litbo.hospital.lifemanage.dao.MyMapper.CzGcMapper;
 import com.litbo.hospital.lifemanage.service.MyService.CzGcService;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,8 @@ import java.util.List;
 public class CzGcController {
     @Autowired
     private CzGcService service;
+    @Autowired
+    private CzGcMapper mapper;
 
     /*录入*/
     @PostMapping("/insertOneCzgc")
@@ -117,6 +124,63 @@ public class CzGcController {
         int j = service.Tjcx(null, null, "0", null, null, null, null).getList().size();
 
         return Result.success(Arrays.asList(i + k + j, i, k, j));
+    }
+
+
+    @PostMapping("/CzGcSelectEq")
+    public Result CzGcSelectEq(@RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
+                               @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(name = "eqName", required = false) String eqName) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<CzGcShowEqVO> vos = mapper.selectAllEqInfo(eqName);
+        return Result.success(new PageInfo<>(vos));
+    }
+
+
+    @PostMapping("/listCzgcZbBt")
+    public Result listSelectEmpsCols(@RequestParam(required = false) String key) {
+        JSONArray myJsonArray = null;
+        if ("checkbox".equals(key)) {
+            String jsonMessage = "[{'type': 'checkbox'}, " +
+                    "{field: 'eqSbbh', title: '设备编号'}, " +
+                    "{field: 'eqName', title: '设备名称'}, " +
+                    "{field: 'eqPp', title: '设备品牌'}, " +
+                    "{field: 'eqGg', title: '设备规格'}, " +
+                    "{field: 'eqXh', title: '设备型号'}, " +
+                    "{field: 'eqPmName', title: '设备品名'}]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        } else if ("radio".equals(key)) {
+            String jsonMessage = "[{'type': 'radio'}, " +
+                    "{field: 'eqSbbh', title: '设备编号'}, " +
+                    "{field: 'eqName', title: '设备名称'}, " +
+                    "{field: 'eqPp', title: '设备品牌'}, " +
+                    "{field: 'eqGg', title: '设备规格'}, " +
+                    "{field: 'eqXh', title: '设备型号'}, " +
+                    "{field: 'eqPmName', title: '设备品名'}]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }
+        PageInfo date = new PageInfo(myJsonArray);
+        return Result.success(date);
+    }
+
+    @PostMapping("/listCzgcMbBt")
+    public Result listCzgcMbBt(@RequestParam(required = false) String key) {
+        JSONArray myJsonArray = null;
+        if ("checkbox".equals(key)) {
+            String jsonMessage = "[{'type': 'checkbox'}, " +
+                    "{field: 'mbId', title: '模板编号'}, " +
+                    "{field: 'mbMc', title: '模板名称'}, " +
+                    "]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        } else if ("radio".equals(key)) {
+            String jsonMessage = "[{'type': 'radio'}, " +
+                    "{field: 'mbId', title: '模板编号'}, " +
+                    "{field: 'mbMc', title: '模板名称'}, " +
+                    "]";
+            myJsonArray = JSONObject.parseArray(jsonMessage);
+        }
+        PageInfo date = new PageInfo(myJsonArray);
+        return Result.success(date);
     }
 
 }

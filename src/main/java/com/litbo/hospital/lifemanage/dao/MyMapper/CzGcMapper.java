@@ -135,5 +135,16 @@ public interface CzGcMapper {
             "e.eq_pm_id=ep.eq_pm_id where e.eq_sbbh=#{sbbh} ")
     CzGcShowEqVO selectEqBySbbh(String sbbh);
 
+    /*选择设备*/
+    @Select("<script>" +
+            "select e.eq_sbbh,ep.eq_pm_name,e.eq_name,e.eq_pp,e.eq_gg,e.eq_xh\n" +
+            "from eq_info e inner join eq_pm ep on\n" +
+            "e.eq_pm_id=ep.eq_pm_id\n" +
+            "<if test=\" eqName!=null and eqName!='' \">" +
+            " where eqName like CONCAT('%',#{eqName},'%')\n" +
+            "</if>" +
+            "</script> ")
+    List<CzGcShowEqVO> selectAllEqInfo(@Param("eqName") String eqName);
+
 
 }
