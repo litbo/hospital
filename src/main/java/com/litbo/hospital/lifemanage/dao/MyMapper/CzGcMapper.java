@@ -14,7 +14,7 @@ public interface CzGcMapper {
 
     /*查询所有待审核操作规程*/
     @Select("<script>" +
-            "select id,cz_gc_mc,cz_gc_lb,cz_gc_zys,cz_gc_bbh,cz_gc_ngr,cz_gc_ngrq\n" +
+            "select * \n" +
             "from cz_gc\n" +
             "<where>" +
             " ((cz_gc_shr is null and cz_gc_shrq is null)\n" +

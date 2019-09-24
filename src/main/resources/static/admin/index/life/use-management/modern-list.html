@@ -26,13 +26,16 @@
 
 <script type="text/html" id="toolBar">
     <div class="hidden-xs">
-        <div class="layui-inline">
-            <input class="layui-input" name="mbmc" placeholder="模板名称" autocomplete="off">
-        </div>
+        <form action="">
+            <div class="layui-inline">
+                <input class="layui-input" name="mbmc" placeholder="模板名称" autocomplete="off">
+            </div>
 
-        <div class="layui-input-inline">
-            <button class="layui-btn" data-type="reload">查找</button>
-        </div>
+            <div class="layui-input-inline">
+                <button class="layui-btn" data-type="reload">查找</button>
+                <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
+            </div>
+        </form>
     </div>
 </script>
 <script type="text/html" id="bar">
@@ -45,7 +48,7 @@
         addTable: {
             table: {
                 cols: [[
-                      {field: 'mbId', title: '模板编号'}
+                    {field: 'mbId', title: '模板编号'}
                     , {field: 'mbMc', title: '模板名称'}
                     , {title: '操作', align: 'center', toolbar: '#bar'}
                 ]]
@@ -72,7 +75,7 @@
                     tableFunc({
                         toolFunc: [
                             {
-                                title: "table1",
+                                title: "详情",
                                 event: 'detail',
                                 type: 2,
                                 content: './child/modern-list-child.html',
@@ -110,24 +113,24 @@
                 }
             ]
         }
-      /*  form: {
-            date: [
-                {
-                    elem: "#date1",
-                    value: today0,
-                    type: "date",
-                    format: 'yyyy-MM-dd',
-                    isInitValue: false
-                },
-                {
-                    elem: "#date2",
-                    value: today0,
-                    type: "date",
-                    format: 'yyyy-MM-dd',
-                    isInitValue: false
-                }
-            ]
-        }*/
+        /*  form: {
+              date: [
+                  {
+                      elem: "#date1",
+                      value: today0,
+                      type: "date",
+                      format: 'yyyy-MM-dd',
+                      isInitValue: false
+                  },
+                  {
+                      elem: "#date2",
+                      value: today0,
+                      type: "date",
+                      format: 'yyyy-MM-dd',
+                      isInitValue: false
+                  }
+              ]
+          }*/
     }
 </script>
 </body>

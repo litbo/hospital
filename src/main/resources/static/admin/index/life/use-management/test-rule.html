@@ -24,40 +24,41 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-sm " style="background: #CC0033" lay-event="del" id="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
-    </div>
+
     <div class="hidden-xs" id="moreBar">
+        <form action="">
             <div class="layui-inline">
-                <input class="layui-input" name="czGcId" placeholder="操作规程编号">
+                <input class="layui-input" name="bh" placeholder="操作规程编号">
             </div>
             <div class="layui-inline">
-                <input class="layui-input" name="czGcName" placeholder="操作规程名称">
+                <input class="layui-input" name="mc" placeholder="操作规程名称">
             </div>
             <div class="layui-inline">
-                <input class="layui-input" name="czGcNgr" placeholder="拟稿人">
+                <input class="layui-input" name="ngr" placeholder="拟稿人">
             </div>
         <div class="layui-inline">
-            <input type="text" name="htQssj" class="layui-input" id="date1"
+            <input type="text" name="qssj" class="layui-input" id="date1"
                    placeholder="开始日期">
         </div>
         --
         <div class="layui-inline">
-            <input type="text" name="htJssj" class="layui-input" id="date2"
+            <input type="text" name="jssj" class="layui-input" id="date2"
                    placeholder="结束日期">
         </div>
             <div class="layui-input-inline">
                 <button class="layui-btn" data-type="reload">查找</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
+        </form>
     </div>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">审核</a>
-    <!--{{# if(d.czGcShr===""||d.czGcShr=== null){ }}
+<!--    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">审核</a>-->
+    {{# if(d.shlx==="0"){ }}
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">审核</a>
     {{# } else { }}  
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit2">再审核</a>
-    {{# } }}-->
+    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="edit2">再评价审核</a>
+    {{# } }}
 </script>
 
 
@@ -66,9 +67,8 @@
         addTable: {
             table: {
                 cols: [[
-                    {type: "checkbox"}
-                    , {field: 'czGcId', title: '操作规程编号'}
-                    , {field: 'czGcName', title: '操作规程名称'}
+                      {field: 'id', title: '操作规程编号'}
+                    , {field: 'czGcMc', title: '操作规程名称'}
                     , {field: 'czGcZys', title: '总页数'}
                     , {field: 'czGcBbh', title: '版本号'}
                     , {field: 'czGcLb', title: '类别'}
@@ -76,7 +76,7 @@
                     , {field: 'czGcNgrq', title: '拟稿日期'}
                     , {title: '操作', align: 'center', toolbar: '#bar'}
                 ]]
-                , url: "/lifeManage/selectAllHt"
+                , url: "/lifeManage/DshCzgcCx"
                 // , reload: true
                 // , contentType: "application/json"
                 , method: "POST"
@@ -104,7 +104,7 @@
                                 type: 2,
                                 content: './child/test-rule-child.html',
                                 area: ['90%', '90%'],
-                                dataUrl: ["czGcId"]
+                                dataUrl: ["id"]
                             },
                             {
                                 title: "table1",
@@ -114,32 +114,16 @@
                                 area: ['90%', '90%'],
                                 dataUrl: ["czGcId"]
                             }
-                           /* {
-                                send: {
-                                    id: "table",
-                                    filter: "table1",
-                                    name: "ids",
-                                    event: "del",
-                                    url: "/lifeManage/deleteHtsByPrimaryKey",
-                                    type: "POST",
-                                    contentType: "application/json",
-                                    par: "id",
-                                    reload: true
-                                },
-                                tool: "toolbar",
-                                event: "del"
-
-                            }*/
                         ]
                     })
                 }
             }
             , reSet: [
                 {
-                    url: "/lifeManage/selectAllHt",
+                    url: "/lifeManage/DshCzgcCx",
                     type: "reload",
                     tid: "table",
-                    data: ["htZt", "htBianhao", "htYf", "htQssj", "htJssj"],
+                    data: ["bh", "mc", "ngr", "qssj", "jssj"],
                     method: "POST"
 
                 }

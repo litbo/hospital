@@ -14,9 +14,7 @@ import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/lifeManage")
@@ -135,6 +133,25 @@ public class CzGcController {
         List<CzGcShowEqVO> vos = mapper.selectAllEqInfo(eqName);
         return Result.success(new PageInfo<>(vos));
     }
+
+    /*@RequestMapping(value = "/pmSe")
+    public Result pmSe(){
+        Map map =new HashMap();
+        map.put("dom",
+                "<div class='layui-inline'><input type=\"text\" name=\"eqName\" class=\"layui-input\" placeholder=\"设备名称\" autocomplete=\"off\"></div>" +
+                        "    <div class='layui-input-inline mar10-0' align='center'>" +
+                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "</div>");
+
+        Map m = new HashMap();
+        m.put("url","/lifeManage/listPmsByPym");
+        m.put("type","reload");
+        String[] data = {"eqName"};
+        m.put("data",data);
+        map.put("data",m);
+        return Result.success(new JSONObject(map));
+
+    }*/
 
 
     @PostMapping("/listCzgcZbBt")
