@@ -23,13 +23,11 @@
 <div class="layui-row" style="margin-top: 20px;">
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
         <div class="col-xs-12">
-            <div class="layui-form-item">
-                <label class="layui-form-label">选择</label>
+            <div class="layui-form-item" pane="">
+                <label class="layui-form-label" style="line-height:1.6">选择</label>
                 <div class="layui-input-block">
-                    <select name="result" id="result">
-                        <option value="1">通过审核</option>
-                        <option value="0">不通过</option>
-                    </select>
+                    <input type="radio" name="result" value="1" title="通过审核" checked>
+                    <input type="radio" name="result" value="0" title="不通过">
                     <input type="hidden" name="standardId" id="standardId">
                 </div>
             </div>
