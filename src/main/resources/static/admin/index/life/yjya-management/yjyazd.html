@@ -71,7 +71,7 @@
             <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
                 <p class="layui-btn layui-btn-radius layui-btn-normal layui-btn-sm"  data-method="notice" style="margin-top: 5px;margin-left: 50px;">选择</p>
             </div>
-            <input class="equipmentSpan" readonly style="border:0;outline:none;background-color: #fff;position: absolute;top: 10px;right: 10px;">
+            <input class="equipmentSpan" readonly style="border:0;outline:none;background-color: #fff;position: absolute;top: 10px;right: 0;">
             <input type="hidden" class="mbNr">
         </div>
         <div class="layui-inline" style="width: 380px;">
@@ -84,7 +84,8 @@
         <div class="layui-inline">
             <label class="layui-form-label" style="width: 100px;">预案内容</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 20px;width: 700px;">
-                <textarea class="layui-textarea" id="yjyaNr"></textarea>
+                <textarea class="layui-textarea" id="yjyaNr" ></textarea>
+<!--                <textarea class="layui-textarea" name="yjyaNr" id="yjyaNrText" lay-verify="content1"></textarea>-->
             </div>
         </div>
     </div>
@@ -179,12 +180,21 @@
             }
         };
 
+        // form.verify({
+        //     content1: function(value) {
+        //         return layedit.getText(index);
+        //     }
+        // });
+
         $('#layerDemo .layui-btn').on('click', function(){
             var othis = $(this), method = othis.data('method');
             active[method] ? active[method].call(this, othis) : '';
         });
 
+        $("body").delegate(".yjyaNr","propertychange input", function(){
+            console.log($(this).val());
 
+        });
 
 
         form.on('submit(demo1)', function(data){
@@ -194,7 +204,7 @@
 
             var dataObj = Object.assign(obj,data.field);
 
-            // console.log(dataObj);
+            console.log(dataObj);
 
             // layer.alert(JSON.stringify(data.field), {
             //     title: '最终的提交信息'
@@ -211,7 +221,7 @@
                     window.parent.location.reload();
                 },
                 error:function(){
-                    layer.alert(JSON.stringify(data.field), {
+                    layer.alert(JSON.stringify(dataObj), {
                         title: '最终的提交信息'
                     });
                     alert("error");
