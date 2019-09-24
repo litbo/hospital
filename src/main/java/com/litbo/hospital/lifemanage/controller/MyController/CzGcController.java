@@ -127,7 +127,7 @@ public class CzGcController {
     }
 
 
-    @PostMapping("/CzGcSelectEq")
+    @RequestMapping("/CzGcSelectEq")
     public Result CzGcSelectEq(@RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
                                @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize,
             @RequestParam(name = "eqName", required = false) String eqName) {

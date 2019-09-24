@@ -14,7 +14,7 @@ public class CzGcMbController {
     private CzGcMbService service;
 
     /*查询所有或条件查询操作规程模板*/
-    @PostMapping("/selectCzGcMb")
+    @RequestMapping("/selectCzGcMb")
     public Result selectCzGcMb(
             @RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize,
