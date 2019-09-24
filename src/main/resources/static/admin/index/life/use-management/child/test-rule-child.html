@@ -44,13 +44,6 @@
             <legend>设备信息</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">已入库设备</label>
-                <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-xs" id="selectEmp">选择</button>
-                    <button class="layui-btn layui-btn-normal layui-btn-xs">导入设备信息</button>
-                </div>
-            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">设备品名<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -87,58 +80,16 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">操作规程名称 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcMc" placeholder="请输入" autocomplete="off" lay-verify="required"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">模板</label>
-                <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-xs" id="selectEmp2">选择</button>
-                    <button class="layui-btn layui-btn-normal layui-btn-xs">导入模板信息</button>
+                    <input type="text" name="title" disabled class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">操作规程内容</label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="czGcNr" id="czGcNr" class="layui-textarea"></textarea>
+                    <textarea type="text" name="czGcNr" disabled id="czGcNr" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
-            <input type="hidden" name="gcUrl" id="gcUrl">
-            <div id="yc">
-                <div class="layui-form-item" pane>
-                    <label class="layui-form-label">上传图片</label>
-                    <div class="layui-input-block">
-                        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
-                                id="sbzp">选择图片
-                        </button>
-                        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
-                                id="sbzp_sub">上传图片
-                        </button>
-                    </div>
-                </div>
-                <div class="layui-upload-list">
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th>文件名</th>
-                            <th>大小</th>
-                            <th>状态</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody id="demoList1"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="layui-row">
-        <fieldset class="layui-elem-field layui-field-title">
-            <legend>编写信息</legend>
-        </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">拟稿人<span class="sign">*</span></label>
@@ -155,11 +106,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">总页数<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcZys" lay-verify="required|number" class="layui-input">
+                    <input type="text" name="czGcZys" disabled class="layui-input">
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">拟稿日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -170,6 +119,39 @@
                 <label class="layui-form-label">版本号<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="czGcBbh" disabled value="V1.0" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>审核信息</legend>
+        </fieldset>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="czGcShr" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="czGcShrq" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">试用天数(天)<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="czGcSyts" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">审核意见<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <textarea type="text" name="czGcShyj" autocomplete="off" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
@@ -193,8 +175,6 @@
     formData = {};
     formData.count1 = 0;
     formData.eqSbzp = [];
-    formDate2={};
-    formDate3={};
     var emp=tempValue("rl", "emp", false);
     console.log(emp);
     $("#bmId").val(emp.bmId);
@@ -207,11 +187,35 @@
     });
 
     renderMod = {
-        bind: {
+
+       /* addTable: {
+
+        },*/
+        /*bind: {
+            addItem: [
+                {
+                    elem: "#dataTable1",
+                    base: "./child/medical-equipment.html",
+                    name: "vg",
+                    key: "key",
+                    before: function () {
+                        // console.log("scsName");
+                        // $("#htYf").val($("#sbcsIdScs").val());
+                    }
+                },
+                {
+                    elem: "#addEmp",
+                    base: "./child/add-Yf.html",
+                    name: "dtdt",
+                    key: "date"
+                }
+
+            ],
+            delItem: ".delNew",
             selectItem: [
                 {
                     elem: "#selectEmp",
-                    cb: "/lifeManage/",
+                    cb: "/lifeManage/listHtBiaotou",
                     db: "/cs/listScs",
                     name: "dtdt",
                     key: "radio",
@@ -219,21 +223,10 @@
                     func:function(){
                         console.log(formData2);
                     }
-                },
-                {
-                    elem: "#selectEmp2",
-                    cb: "/lifeManage/",
-                    db: "/cs/listScs",
-                    name: "dtdt",
-                    key: "radio",
-                    data: formData3,
-                    func:function(){
-                        console.log(formData3);
-                    }
                 }
 
             ]
-        },
+        },*/
         form: {
             submit: {
                /* before: function (param) {
@@ -257,10 +250,11 @@
 
                 },*/
                 form: {
-                    url: "/lifeManage/",
+                    url: "/lifeManage/addEqHt",
                     type: "POST",
                     data: [
-                        "eqId","czGcMc", "czGcNr","gcUrl","czGcNgr", "czGcLb", "czGcZys", "czGcNgrq", "czGcBbh"
+                        "htBianhao", "htQyd", "htJf","htJfq","htZgbfb", "htBzr", "htTsr", "htYsfk", "htZbj",
+                        "htScrq", "htBxq", "htBxxy", "htBxdc", "htZgfg", "htBycs", "htLpjyhj","sbcsIdScs","htYfName"
                     ],
                     // key:"key",
                     contentType: "application/json",

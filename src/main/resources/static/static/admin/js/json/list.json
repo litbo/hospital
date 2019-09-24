@@ -552,109 +552,53 @@
             "shiro": "a",
             "children": [
               {
-                "title": "操作规程查询",
+                "title": "操作规程管理",
                 "url": "./table.html",
                 "icon": "search",
                 "id": "3100",
                 "shiro": "a",
                 "children": [
                   {
-                    "title": "已备案操作规程",
-                    "url": "./life/use-management/record-rule.html",
+                    "title": "编写",
+                    "url": "./life/use-management/edit-rule.html",
                     "id": "31000",
                     "shiro": "a"
                   },
                   {
-                    "title": "试用中操作规程",
+                    "title": "审核",
                     "url": "./life/use-management/test-rule.html",
                     "id": "31001",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "已停用操作规程",
-                    "url": "./life/use-management/banned-rule.html",
-                    "id": "31002",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "操作规程制定",
-                "url": "javascript",
-                "icon": "pencil-alt",
-                "shiro": "a",
-                "id": "3101",
-                "children": [
-                  {
-                    "title": "编写",
-                    "url": "./life/use-management/edit-rule.html",
-                    "id": "31010",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "操作规程制定流程",
-                    "url": "./life/use-management/process-rule.html",
-                    "id": "31011",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "操作规程再评价",
-                "url": "./table.html",
-                "icon": "comment-alt",
-                "id": "3102",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "操作规程再评价流程",
-                    "url": "./life/use-management/again-rule.html",
-                    "id": "31020",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "进度查询",
-                "url": "./table.html",
-                "icon": "spinner",
-                "id": "3103",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "制定进度",
-                    "url": "./life/use-management/process-edit.html",
-                    "id": "31030",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "再评价进度",
-                    "url": "./life/use-management/process-again.html",
-                    "id": "31031",
                     "shiro": "a"
                   }
                 ]
               },
               {
                 "title": "操作规程模板",
-                "url": "./table.html",
-                "id": "3104",
-                "icon": "paperclip",
+                "url": "javascript",
+                "icon": "pencil-alt",
                 "shiro": "a",
+                "id": "3101",
                 "children": [
                   {
                     "title": "模板列表",
-                    "url": "./life/use-management/modern-children.html",
-                    "id": "31040",
+                    "url": "./life/use-management/modern-list.html",
+                    "id": "31010",
                     "shiro": "a"
                   },
                   {
                     "title": "录入模板",
                     "url": "./life/use-management/modern-edit.html",
-                    "id": "31041",
+                    "id": "31011",
                     "shiro": "a"
                   }
                 ]
+              },
+              {
+                "title": "统计查询",
+                "url": "./life/use-management/statistical-querys.html",
+                "icon": "comment-alt",
+                "id": "3102",
+                "shiro": "a"
               }
             ]
           },
