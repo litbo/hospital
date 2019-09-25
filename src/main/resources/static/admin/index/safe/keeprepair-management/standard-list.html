@@ -110,7 +110,7 @@
                 <div class="addBtn">
                     <button class="layui-btn layui-btn-sm addNew" data-id="table" lay-event="add" id="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-                    <button class="layui-btn layui-btn-sm delNew" lay-event="del" id="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+                    <button class="layui-btn layui-btn-sm delNew" lay-event="del" id="delNew" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
                 </div>
                 <table id="table" lay-filter="table"></table>
             </div>
@@ -166,15 +166,6 @@
                             eqSbbhs.push(table.cache.table[t].id);
                         }
                         checkedArr.length = 0;//清除数组
-                      /*  $.ajax({
-                            url:'/inspection/otherfunction/updateEqSbbh1',
-                            type:"POST",
-                            async: false,/!*同步传输*!/
-                            data:JSON.stringify(eqSbbhs),
-                            dataType:'JSON',
-                            contentType:'application/json'
-
-                        })*/
                     });
                 }
             }
@@ -206,7 +197,7 @@
                     },
                 },
             ],
-            delItem: ".delNew",
+            delItem: "#delNew",
         },
         form: {
             date: {
@@ -227,7 +218,6 @@
                         btn: ['是', '否'] //按钮
                     }, function (index) {
                         apap = true;
-                        console.log(apap)
                         $.ajax({
                             url: "http://localhost:8080/maintenance/addMaintenance.do",
                             data: {
