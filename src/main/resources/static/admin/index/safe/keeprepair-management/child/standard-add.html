@@ -160,7 +160,7 @@
                         form:{
                             url:"/maintenance/addMaintenanceProject.do",
                             type:"POST",
-                            data:["projectType","projectName","projectLevel","standard","firstTime","implementerType","cycle","cycleUnit"],
+                            data:["projectType","projectName","projectLevel","standard","cycleRule","firstTime","implementerType","cycle","cycleUnit"],
                             done: function (data) {
                                 if(localStorage.getItem("projectsIds") != null){
                                     var projectsIds = localStorage.getItem("projectsIds");
@@ -169,13 +169,13 @@
                                 }else{
                                     localStorage.setItem("projectsIds",data.data.id);
                                 }
-                                    if ($("#projectType").val() === ""||$("#projectName").val()===""||$("#projectLevel").val()===""||$("#standard").val()===""
+                                    if ($("#projectType").val() === ""||$("#projectName").val()===""||$("#projectLevel").val()===""||$("#standard").val()===""||$("#cycleRule").val()===""
                                         ||$("#firstTime").val()===""||$("#implementerType").val()===""||$("#cycle").val()===""||$("#cycleUnit").val()===""){
                                         attr();
                                         return;
                                     }
                                     new1 =
-                                        getFormValue(["projectType","projectName","projectLevel","standard","firstTime","implementerType","cycle","cycleUnit"],{},true);
+                                        getFormValue(["projectType","projectName","projectLevel","standard","cycleRule","firstTime","implementerType","cycle","cycleUnit"],{},true);
                                     var key = $.getUrlParam('key');
                                     da.push(new1);
                                     layui.sessionData($.getUrlParam('vg'), {

@@ -122,7 +122,7 @@
     var formData2 = {};
     var projectList = [], tm = "";
     var emp = tempValue("rl", "emp", false);
-
+    var apap = "";
     $(function(){
         $("[name='formulator']").val(emp.userXm);
     });
@@ -152,7 +152,6 @@
                     tm =ty;
                     localStorage.removeItem("fa");
                     projectList.push(tm);
-                   console.log(projectList);
                     $("#del").off("click").on("click",function(){
 
                         var checkedArr = [];
@@ -211,64 +210,96 @@
         },
         form: {
             date: {
-                elem:"#formTime",
-                isInitValue: false,
-                type:"date",
-                format:"yyyy-MM-dd",
+                elem: "#formTime",
+                value: false,
+                type: "date",
+                format: "yyyy-MM-dd",
             },
-            submit:{
-                filter:"btnn",//可以不写
+            submit: {
+                filter: "btnn",
+                func: function (obj, data) {
+                    var adad = "";
+                    if (localStorage.getItem("projectsIds") == null) {
+                        layer.alert("保养项目未添加")
+                    }
+                    adad = localStorage.getItem("projectsIds").toString();
+                    layer.confirm('是否同步风险值？', {
+                        btn: ['是', '否'] //按钮
+                    }, function (index) {
+                        apap = true;
+                        console.log(apap)
+                        $.ajax({
+                            url: "http://localhost:8080/maintenance/addMaintenance.do",
+                            data: {
+                                eqId: document.getElementById("eqIdName").value,
+                                applicable_eq: document.getElementById("applicable_eq").value,
+                                formulator: document.getElementById("formulator").value,
+                                reviewer: document.getElementById("reviewer").value,
+                                formTime: document.getElementById("formTime").value,
+                                cycleRule: document.getElementById("cycleRule").value,
+                                cycle: document.getElementById("cycle").value,
+                                projectList: adad,
+                                ifNotRisk: apap
+                            },
+                            success: function (data) {
+                                if (data.code === 0) {
+                                    $("searchResult").html(data.msg);
+                                    layer.msg("添加成功");
+                                    localStorage.removeItem("projectsIds");
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
 
-                func:function (obj,data) {
-
-                    console.log("ids = " + localStorage.getItem("projectsIds"));
-                    $.post("http://localhost:8080/maintenance/addMaintenance.do",
-                        {
-                            eqId:document.getElementById("eqIdName").value,
-                            applicable_eq:document.getElementById("applicable_eq").value,
-                            formulator:document.getElementById("formulator").value,
-                            reviewer:document.getElementById("reviewer").value,
-                            formTime:document.getElementById("formTime").value,
-                            cycleRule:document.getElementById("cycleRule").value,
-                            cycle:document.getElementById("cycle").value,
-                            projectList:localStorage.getItem("projectsIds").toString(),
-                            ifNotRisk:false,
-                        },
-                        function(data,status){
-                            console.log("yijing qingqiu")
-                            localStorage.removeItem("projectsIds")
+                                } else {
+                                    $("#searchResult").html("出现错误：" + data.msg);
+                                    layer.alert("添加失败")
+                                }
+                            },
+                            error: function (jqXHR) {
+                                layer.msg("添加失败！请检查信息是否全部填写")
+                            }
                         });
-                }
-                // form:{//或者写作up
-                //     url: "/maintenance/addMaintenance.do",
-                //     type: "POST",
-                //     data: [
-                //         "eqId","applicable_eq","formulator","reviewer", "formTime", "cycleRule",
-                //     ],
-                //     param:["projectList"],
-                //     reload: true,
-                // },
-                // before:function(data){
-                //     layui.use(['table'], function(){
-                //         var  layer = layui.layer
-                //             ,table = layui.table;
-                //         layui.layer.open({
-                //             type: 0
-                //             ,title: '提示'
-                //             ,area: ['20%', '20%']
-                //             ,shade: 0.3
-                //             ,content: '是够同步风险值'
-                //             ,btn: ['是', '否']
-                //             ,yes: function(){
-                //                 // alert(123)
-                //             }
-                //             ,btn2: function(){
-                //             }
-                //         });
-                //     })
-                // },
-                }//表单提交后执行函数（不论成功与否）
+                        layer.close(index);
+                    }, function () {
+                        apap = false;
+                        $.ajax({
+                            url: "http://localhost:8080/maintenance/addMaintenance.do",
+                            data: {
+                                eqId: document.getElementById("eqIdName").value,
+                                applicable_eq: document.getElementById("applicable_eq").value,
+                                formulator: document.getElementById("formulator").value,
+                                reviewer: document.getElementById("reviewer").value,
+                                formTime: document.getElementById("formTime").value,
+                                cycleRule: document.getElementById("cycleRule").value,
+                                cycle: document.getElementById("cycle").value,
+                                projectList: adad,
+                                ifNotRisk: apap
+                            },
+                            success: function (data) {
+                                if (data.code === 0) {
+                                    $("searchResult").html(data.msg);
+                                    layer.msg("添加成功");
+                                    localStorage.removeItem("projectsIds");
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+
+                                } else {
+                                    $("#searchResult").html("出现错误：" + data.msg);
+                                    layer.alert("添加失败")
+                                }
+                            },
+                            error: function (jqXHR) {
+                                layer.msg("添加失败！请检查信息是否全部填写")
+                            }
+
+                        })
+                    });
+
+                },
+
             },
+        },
         btn:[
             {
                 elem:"#selectUsera",
