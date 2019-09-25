@@ -120,14 +120,18 @@
              alert("123")
             }else{
                 var type =$('#projectType option:selected').val();//选中的值
-                console.log(type)
+                console.log("选中的值："+type)
                 $.get("/maintenance/seeAllType.do?type="+type,function(data,status){
 
                     var projectName = data.data;
-                    console.log(projectName);
+                    console.log("从后端获得的数据："+projectName);
+
+                    // 将数据分割：
+                    projectName = projectName.toString().split(',');
+
                     $("#project").empty()
                      for(var i in projectName){
-                         $("#project").append("<option value=\""+projectName+"\">"+projectName+"</option>")
+                         $("#project").append("<option value=\""+projectName[i]+"\">"+projectName[i]+"</option>")
                     }
                     layui.form.render("select");
                 });

@@ -33,6 +33,10 @@
     select * from hospital..implementer_dictionary where "type" = #{name}
   </select>
 
+  <select id="selectByName1" parameterType="string" resultMap="BaseResultMap">
+    select * from hospital..implementer_dictionary where "type" = #{name}
+  </select>
+
   <delete id="deleteByName" parameterType="string">
     delete from hospital..implementer_dictionary where "value" = #{name}
   </delete>
