@@ -29,9 +29,9 @@ public interface DeviceparameterDAO {
                     "\ta.EndPointIP\n" +
                     "\tFROM\n" +
                     "\tDeviceParameter a\n" +
-                    "\tLEFT JOIN eq_info b ON a.DeviceCode = b.eq_sbbh\n" +
-                    "\tLEFT JOIN eq_mac_tab c ON b.eq_id = c.EquID\n" +
-                    "\tLEFT JOIN s_bm d ON b.eq_bmid = d.bm_id",
+                    "\tinner JOIN eq_info b ON a.DeviceCode = b.eq_sbbh\n" +
+                    "\tinner JOIN eq_mac_tab c ON b.eq_id = c.EquID\n" +
+                    "\tinner JOIN s_bm d ON b.eq_bmid = d.bm_id",
             "<where>",
             "<if test='macid != null'>","and c.MacID = #{macid}","</if>",
             "<if test='bmId != null'>","and b.eq_bmid = #{bmId}","</if>",
@@ -117,7 +117,7 @@ public interface DeviceparameterDAO {
      * @param macIds
      */
     @Delete({ "<script>",
-            "DELETE FROM eq_mac_tab where MacID in",
+            "DELETE FROM eq_mac_tab where MacID in\n",
             "<foreach item='id' collection='array' open='(' separator=',' close=')'> #{id} </foreach>"
             ,"</script>"})
     void deletes(String[] macIds);

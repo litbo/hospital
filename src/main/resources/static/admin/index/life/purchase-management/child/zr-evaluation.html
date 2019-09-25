@@ -82,6 +82,7 @@
 
 
 <script>
+    var j=0;
     formData = {};
     renderMod = {
         form: {
@@ -114,9 +115,14 @@
                     },
                     success:function(res){
                         if(res.code === 0){
-                            parent.layer.msg("提交成功！");
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
+                            layer.alert("提交成功")
+                            if(j==0){
+                                setTimeout(function () {
+                                    window.parent.location.reload();
+
+                                },1000)
+                            }
+
                         }
                         //console.log("提交成功！",res);
                     }
@@ -124,6 +130,7 @@
                 func:function(){
                     //价格大于10W弹出新页面
                     if(top.tempData.mm >= 100000){
+                        j=1;
                         layOpen({
                             type:2,
                             site:"parent",

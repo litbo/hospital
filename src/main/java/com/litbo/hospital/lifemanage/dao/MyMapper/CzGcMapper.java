@@ -140,8 +140,8 @@ public interface CzGcMapper {
             "select e.eq_sbbh,ep.eq_pm_name,e.eq_name,e.eq_pp,e.eq_gg,e.eq_xh\n" +
             "from eq_info e inner join eq_pm ep on\n" +
             "e.eq_pm_id=ep.eq_pm_id\n" +
-            "<if test=\" eqName!=null and eqName!='' \">" +
-            " where eqName like CONCAT('%',#{eqName},'%')\n" +
+            "<if test=\" eqName!=null and eqName !='' \">" +
+            " where e.eq_name like CONCAT('%',#{eqName},'%')\n" +
             "</if>" +
             "</script> ")
     List<CzGcShowEqVO> selectAllEqInfo(@Param("eqName") String eqName);

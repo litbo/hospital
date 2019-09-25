@@ -62,6 +62,7 @@ public class SgInfoServiceImpl implements SgInfoService {
         SgInfoVO sgInfoVO = new SgInfoVO();
         //添加申购单基本信息
         SgInfo sgInfo = sgInfoMapper.selectSgInfoById(sgInfoId);
+
         BeanUtils.copyProperties(sgInfo, sgInfoVO);
         //查询托管部门名称
         if (StringUtils.isNotBlank(sgInfo.getTgBmId())){
@@ -98,12 +99,16 @@ public class SgInfoServiceImpl implements SgInfoService {
 
         //查询申购单的id是否存在
         String sgInfoBh = sgInfoMapper.selectSgInfoBhById(sgInfo.getId());
+        SgInfo info = sgInfoMapper.selectSgInfoById(sgInfoVO.getId());
         // 如果申购单编号不存在生成一个编号
         if (StringUtils.isBlank(sgInfoBh)) {
             //按照格式生成申购单编号 日期+流水号
             sgInfoBh = IDFormat.getIdByIDAndTime("sg_info", "bh");
         }
         sgInfo.setBh(sgInfoBh);
+        if(StringUtils.isBlank(sgInfoVO.getTgBmId()) && info!=null){
+            sgInfo.setTgBmId(info.getTgBmId());
+        }
         sgInfoMapper.updateSgInfoById(sgInfo);
 
         //根据申购单id删除对应的功能配置
