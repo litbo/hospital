@@ -149,8 +149,7 @@
                     if (data.length > 0) {
                         console.log("data:"+JSON.stringify(data))
                         for (var i = 0; i < data.length; i++) {
-                            // ziDian.dictId = data[i].dictId;
-                            ziDian.dictId = '0002';
+                            ziDian.dictId = data[i].dictId;
                             ziDian.dictName = data[i].bname;
                             ziDian.bName = data[i].bname;
                             console.log("字典信息："+JSON.stringify(ziDian));
