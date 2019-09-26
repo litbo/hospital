@@ -46,12 +46,13 @@
         table.on('toolbar(table1)', function(obj){
 
             var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
-            var data = checkStatus.data;
+            console.log(obj.config)
 
+            var data = checkStatus.data;
             var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 
-            var a = data[0].id;
-            // console.log(a);
+            var a = data[0].mbId;
+            console.log(a);
 
             $.ajax({
                 type: "POST",
