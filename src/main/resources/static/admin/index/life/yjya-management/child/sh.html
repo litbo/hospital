@@ -81,7 +81,11 @@
         <div class="layui-inline">
             <label class="layui-form-label">预案内容</label>
             <div class="layui-input-block" style="width: 760px;">
-                <textarea name="yjyaNr" class="layui-textarea" id="yjyaNr" lay-verify="required" readonly></textarea>
+                <textarea class="layui-textarea" name="yjyaNr" id="yjyaNr" disabled></textarea>
+<!--                <textarea name="yjyaNr" class="layui-textarea" id="yjyaNr" lay-verify="required" readonly></textarea>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <button class="layui-btn" type="button" id="btn_forbidden">禁用编辑器</button>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
@@ -114,7 +118,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">审核意见</label>
             <div class="layui-input-block" style="width: 760px;">
-                <textarea name="yjyaShyj" class="layui-textarea" id="yjyaShyj" lay-verify="required"></textarea>
+                <textarea name="yjyaShyj" class="layui-textarea layui-hide" id="yjyaShyj" lay-verify="required"></textarea>
             </div>
         </div>
     </div>
@@ -133,6 +137,55 @@
 </form>
 
 <script>
+
+    // function btnClick(){
+    //     $("#btn_forbidden").click(function(){
+    //
+    //     })
+    // }
+    //
+    // $(document).ready(function(){
+    //     btnClick();
+    // });
+
+    // 表单
+    layui.use(['form','layedit'], function(){
+
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+        index = layedit.build('yjyaNr'); //建立编辑器
+
+
+
+        form.on('submit(demo1)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: '/lifeManage/updateSysjYjyaZd',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json; charset=UTF-8',
+                success: function(result) {
+                    layui.layer.alert('提交成功!');
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    window.parent.location.reload();
+                },
+                error:function(){
+                    layer.alert(JSON.stringify(data.field), {
+                        title: '最终的提交信息'
+                    });
+                    alert("error");
+                }
+            });
+            return false;
+        });
+    });
 
     var emp = tempValue("rl", "emp", false);
 
@@ -174,6 +227,8 @@
                 $("#yjyaSyts").val("30");
                 $("#yjyaZt").val("1");
                 $("#yjyaBbh ").val("V1.0");
+                layui.layedit.setContent(index, data.yjyaNr);
+                $("#yjyaNr").next().find('iframe').contents().find('body').prop("contenteditable",false);
                 console.log(data);
             }
         },
@@ -185,39 +240,7 @@
         }
     };
 
-    // 表单
-    layui.use(['form'], function(){
 
-        var form = layui.form
-            ,layer = layui.layer;
-
-        form.on('submit(demo1)', function(data){
-            // layer.alert(JSON.stringify(data.field), {
-            //     title: '最终的提交信息'
-            // });
-
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: '/lifeManage/updateSysjYjyaZd',
-                data: JSON.stringify(data.field),
-                contentType: 'application/json; charset=UTF-8',
-                success: function(result) {
-                    layui.layer.alert('提交成功!');
-                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭
-                    window.parent.location.reload();
-                },
-                error:function(){
-                    layer.alert(JSON.stringify(data.field), {
-                        title: '最终的提交信息'
-                    });
-                    alert("error");
-                }
-            });
-            return false;
-        });
-    });
 
 
 </script>
