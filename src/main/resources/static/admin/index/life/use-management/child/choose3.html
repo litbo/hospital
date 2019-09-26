@@ -24,7 +24,7 @@
     <form action="" style="float: right;margin-top: -5px;">
         <!--模板名称-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="eqName" autocomplete="off" placeholder="设备名称" class="layui-input">
+            <input type="text" name="mbmc" autocomplete="off" placeholder="请输入模板名称" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn" data-type="reload">查找</button>
@@ -32,6 +32,9 @@
     </form>
 </script>
 
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">查看详情</a>
+</script>
 
 <script>
 
@@ -43,17 +46,30 @@
         table.on('toolbar(table1)', function(obj){
 
             var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
-            console.log(checkStatus);
             var data = checkStatus.data;
-            console.log(data);
+
             var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-            // $.cookie("eqSbbh2",data.eqSbbh);
+
             var a = data[0].id;
-            parent.$('#eqName').val(data[0].eqName);
-            parent.$('#eqPmName2').val(data[0].eqPmName);
-            parent.$('#eqPp2').val(data[0].eqPp);
-            parent.$('#eqGg2').val(data[0].eqGg);
-            parent.$('#eqXh2').val(data[0].eqXh);
+            // console.log(a);
+
+            $.ajax({
+                type: "POST",
+                data: {id:a},
+                url: '/lifeManage/selectOneMb',
+                success: function(result) {
+                    console.log(result.data.mbNr);
+                    parent.$('#czGcNr2').val(result.data.mbNr);
+                },
+                error:function(){
+                    alert("error");
+                }
+            });
+
+            var b = data[0].mbMc;
+            // console.log(b);
+            parent.$('.equipmentSpan').val(data[0].mbMc);
+            // parent.$('#czGcNr2').val(result.data.mbNr);
             parent.layer.close(index);
 
         });
@@ -64,14 +80,11 @@
             table: {
                 cols: [[ //表头
                     {type: 'radio', fixed: 'left'}
-                    ,{field:'eqSbbh',title:'设备编号'}
-                    ,{field:'eqName',title:'设备名称'}
-                    ,{field:'eqPp',title:'设备品牌'}
-                    ,{field:'eqGg',title:'设备规格'}
-                    ,{field:'eqXh',title:'设备型号'}
-                    ,{field:'eqPmName',title:'设备品名'}
+                    ,{field:'id', title:'编号',width:200}
+                    ,{field:'mbMc',title:'模板名称'}
+                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
                 ]]
-                , url: "/lifeManage/CzGcSelectEq"
+                , url: "/lifeManage/selectAllMb"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
@@ -93,7 +106,7 @@
                                 type:2,
                                 event: "pipei",
                                 title:"查看详情",
-                                content:"ckxq2.html",
+                                content:"ckxq22.html",
                                 area: ['800px', '350px'],
                                 dataUrl:["id"],
                                 func:function(obj){
@@ -105,10 +118,10 @@
                 }
             },
             reSet: {
-                url: "/lifeManage/CzGcSelectEq",
+                url: "/lifeManage/selectAllMb",
                 type: "reload",
                 method: "POST",
-                data: ["eqName"]
+                data: ["mbmc"]
             }
         }
         ,page: true
