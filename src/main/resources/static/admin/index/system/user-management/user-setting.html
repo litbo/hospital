@@ -37,10 +37,19 @@
     {{# if (d.status=== 1) { }}  
     <a class="layui-btn layui-btn-xs" lay-event="edit">系统用户</a>
     {{# } else { }}  
-    <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit" class="">设为系统用户</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit" >设为用户</a>
     {{# } }}  
 
 </script>
+<script type="text/html" id="plat">
+    {{# if (d.status=== 1) { }}  
+    <a class="layui-btn layui-btn-xs" lay-event="szjs">设置角色</a>
+    {{# } else { }}  
+    <a  class="layui-btn layui-btn-xs layui-btn-warm" lay-event=" " style="background:#ccc;">设置角色</a>
+    {{# } }} 
+
+</script>
+
 <script type="text/html" id="toolBar">
     <div class="addBtn">
         <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sz">批量设置为用户</a>
@@ -48,21 +57,29 @@
     </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="bmName" placeholder="部门" id="bmName" autocomplete="off">
-          <!--  <select lay-filter="bmList" name="bmId" lay-verify="required">
-                <option value="0000000000">部门</option>
-            </select>-->
-        </div>
-        <div class="layui-inline">
             <select name="status" id="status" lay-filter="xtUser">
-                <option></option>
+                <option value="">全部用户</option>
                 <option value="0" id="show1">非系统用户</option>
                 <option value="1" id="show2">系统用户</option>
             </select>
         </div>
+
         <div class="layui-inline">
             <input class="layui-input" name="userId" placeholder="工号" id="test-table-demoReload" autocomplete="off">
         </div>
+
+        <div class="layui-inline">
+            <input class="layui-input" name="userXm" placeholder="姓名" autocomplete="off">
+        </div>
+
+        <div class="layui-inline">
+            <input class="layui-input" name="bmName" placeholder="科室" id="bmName" autocomplete="off">
+          <!--  <select lay-filter="bmList" name="bmId" lay-verify="required">
+                <option value="0000000000">部门</option>
+            </select>-->
+        </div>
+
+
 
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
@@ -74,12 +91,12 @@
             table: {
                 cols: [[ //表头
                     {checkbox: true, fixed: true}
-                    , {field: 'bmName', title: '部门', minWidth: 200}
+
                     , {field: 'userId', title: '工号', minWidth: 150}
                     , {field: 'userXm', title: '姓名', minWidth: 150}
-                    , {field: 'sex', title: '性别', minWidth: 150}
-                    , {field: 'zwlb', title: '职务类别'}
-                    , {title: '操作', width: 200, align: "center",templet:'#plet'}
+                    , {field: 'bmName', title: '所在科室', minWidth: 200}
+                    , {title: '系统用户设置', width: 200, align: "center",templet:'#plet'}
+                    , {title: '用户角色设置', width: 200, align: "center",templet:'#plat'}
                 ]]
                 , url: "/kwgl/empgl/listSelectEmps"
                 , request: {
@@ -95,6 +112,7 @@
                     }
                 },
                 done:function (obj) {
+                    console.log(obj);
                     tableFunc({
                         "obj": obj,
                         "toolFunc": [{
@@ -104,7 +122,15 @@
                             content: "./child/setUser.html",
                             dataUrl: ["userId"],
                             area: ["50%", "70%"],
-                        }, {
+                        },  {
+
+                            event:"szjs",
+                            title:"设置角色",
+                            type:2,
+                            content:"./child/role-settingEdit.html",
+                            dataUrl:["userId"],
+                             area: ["50%", "70%"]
+                        },{
                             send:{
                                 id:"table",
                                 filter:"table1",
@@ -144,7 +170,7 @@
             reSet: {
                 url: "/kwgl/empgl/listSelectEmpBybmIdAndUserIdAndStatus",
                 type: "reload",
-                data: ["userId","bmName", "status"]
+                data: ["userId","userXm","bmName", "status"]
             }
         }
       /*  form:{
