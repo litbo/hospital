@@ -25,7 +25,7 @@ public class FwBlsjSqlProvider {
                     WHERE("cpmc like '%'+#{cpmc}+'%'");
                 }
                 if(bgrXm!=null&&!"".equals(bgrXm)){
-                    WHERE("bgrXm like '%'+#{bgr_Xm}+'%'");
+                    WHERE("bgr_xm like '%'+#{bgrXm}+'%'");
                 }
 
                 WHERE("status=#{status} and lb = #{lb} ");
