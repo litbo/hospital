@@ -75,6 +75,7 @@ public class SpecialEquipmentController {
     //删除特种设备信息根据设备id
     @PostMapping("/deleteSpecialEq")
     public Result deleteSpecialEq(@RequestBody String[] speqIds){
+
         try {
             for (String speqId : speqIds) {
                 specialEquipmentService.deleteSpecialEq(speqId.trim());

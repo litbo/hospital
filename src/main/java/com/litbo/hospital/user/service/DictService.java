@@ -25,4 +25,5 @@ public interface DictService {
     PageInfo listZyzd(int pageNum, int pageSize);
 
     Integer addDictByTName(String tName, String dictName);
+
 }

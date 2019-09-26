@@ -24,7 +24,7 @@
     <div class="addBtn">
         <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>批量删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
         <!--        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i>添加</a>
                 <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete" ><i class="fas fa-trash-alt"></i>删除</a>-->
     </div>
@@ -57,9 +57,8 @@
                     {checkbox: true, fixed: true}
                     , {field: 'dictId', title: '序号', minWidth: 150,sort:true}
                     , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400,sort:true}
-                    , {field: 'bname', title: '部门名称', width: '30%', minWidth: 400,sort:true}
-
-                    /* , {title: '操作', width: 200, align: "center", toolbar: '#bar'}*/
+                  /* ,{field: 'bname', title: '部门名称', width: '30%', minWidth: 400,sort:true} */
+                  /* ,{title: '操作', width: 200, align: "center", toolbar: '#bar'} */
 
                 ]]
                 , url: "/eqdict/jczd"

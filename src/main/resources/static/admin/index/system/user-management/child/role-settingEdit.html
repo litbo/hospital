@@ -44,18 +44,21 @@
                     <input type="hidden" name="userId" disabled class="layui-input" autocomplete="off">
                 </div>
             </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">角色<span>*</span></label>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户组</label>
                 <div class="layui-input-block">
-                    <input type="text" name="roleName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="roleList">选择</button>
+                    <select name="roleId" lay-filter="yhz">
+                        <option value="">请选择角色...</option>
+
+                    </select>
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
+                <div class="layui-input-block" style="margin-left: 60%">
+                    <button class="layui-btn layui-btn-lg" lay-submit="" lay-filter="submit">保存</button>
+                    <button class="layui-btn layui-btn-lg" id="quXiao" >取消</button>
                 </div>
             </div>
         </div>
@@ -71,33 +74,39 @@
     renderMod = {
         form: {
             val:{
-                filter:"userForm",
-                get:{
-                    url:"/user/getUserById",
-                    data:{
-                            userId:$.getUrlParam("userId")
+                filter: "userForm",
+                get: {
+                    url: "/user/getUserById",
+                    data: {
+                        userId: $.getUrlParam("userId")
                     }
+                },
+                select:{
+                    filter:"yhz",
+                    url:"/role/listRoleNoLimit",
+                    ids:"roleId",
+                    text:"roleName"
                 }
             },
             submit:{
-                before :function(){
+               /* before :function(){
                     return param = {
                         1: formData.radio[0].roleId
                     }
-                },
+                },*/
                 form:{
                     filter:"submit",
                     url:"/role/setRole",
                     type:"POST",
-                    data:["userId"],
-                    param:{
+                    data:["userId","roleId"],
+                    /*param:{
                         1:"roleId"
-                    },
+                    },*/
                     reload:"parent"
                 }
             }
         },
-        bind:{
+        /*bind:{
             selectItem: [
                 {
                     elem: "#roleList",
@@ -108,8 +117,18 @@
                     name:"dtdt"
                 }
             ]
-        }
+        }*/
     }
+</script>
+<script>
+    layui.use('layer', function() { //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
+       $("#quXiao").on('click', function(){
+           layer.close(layer.index);
+           window.parent.location.reload();
+        })
+    })
 </script>
 </body>
 
