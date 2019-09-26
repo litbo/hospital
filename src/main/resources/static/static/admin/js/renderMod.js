@@ -451,7 +451,7 @@ function render(renderParam){
                                     //this.where = {};
                                 }
                             });
-                        form.render();
+                        //form.render();
                         //还原重载前的数据
                         if (res.add === true && res.add.tableId !== undefined) {
                             cData = table.cache(res.add.tableId);
@@ -470,14 +470,14 @@ function render(renderParam){
                                 val = formAction.val;
                                 if (val && val.select) {
                                     if (Type(val.select) === "json") {
-                                        getSelect(val.select);
+                                        getSelect(val.select, undefined, resValue);
                                     } else if (Type(val.select) === "array") {
                                         for (var s = 0; s < val.select.length; s++) {
-                                            getSelect(val.select[s]);
+                                            getSelect(val.select[s], undefined, resValue);
                                         }
                                     }
                                     //重新渲染下拉
-                                    form.render("select");
+                                    //form.render("select");
                                 }
                             }
                         }
@@ -513,6 +513,8 @@ function render(renderParam){
                             active[type] ? active[type].call(this) : '';
                             return active[type] ? false : "";//存在type则阻止其他事件，否则继续执行
                         });
+                        
+                        form.render();
                     };
 
                     //首次页面渲染后按钮事件绑定
@@ -833,7 +835,7 @@ function render(renderParam){
         }
 
         //下拉列表动态加载
-        function getSelect(re, tab) {
+        function getSelect(re, tab, useVal) {
             //re 提交的数据
             var id = re.ids || "id",
                 text = re.text || "text",
@@ -850,6 +852,16 @@ function render(renderParam){
                         }
                         if (datt.length > 10) {
                             $d.attr("lay-search", "");
+                        }
+                        //下拉数据展示
+                        if(Type(useVal) === "json"){
+                            for(var name in useVal){
+                                if(useVal.hasOwnProperty(name)){
+                                    if(name === filter){
+                                        $d.val(useVal[name]);
+                                    }
+                                }
+                            }
                         }
                         //表单下拉单独重新渲染
                         form.render("select");
