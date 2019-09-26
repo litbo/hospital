@@ -110,37 +110,37 @@
                         "data": res.data.list //解析数据列表
                     }
                 }
-                , done: function (obj) {
-                    tableFunc({
-                    	toolFunc:[{
-                             type:2,
-                             event:"audit",
-                             tool: "toolbar",
-                             content:"./child/docimasy-add.html",
-                             func:function(config,$checkstatus){
-                            	 checkstatus = $checkstatus.data || [];
-                             }
-                         }]
-//                     	toolFunc: [{
-//                     		send:{
-//                                 id:"table",
-//                                 filter:"table1",
-//                                 name:"utilIds",
-//                                 event:"audit",
-//                                 url:"/meteringProcess/addSomeMeteringUtilToProcess.do",
-//                                 type:"post",
-//                                 par:"id",
-//                                 confirm:false,
-//                                 reload:true,
-//                                 adds:{
-//                                 	department:emp.bmName
-//                                 }
-//                             },
-// 	                        tool:"toolbar",
-// 	                        event:"audit"
-//                          }]
-                    })
-                }
+                // , done: function (obj) {
+                //     tableFunc({
+                //     	toolFunc:[{
+                //              type:2,
+                //              event:"audit",
+                //              tool: "toolbar",
+                //              content:"./child/docimasy-add.html",
+                //              func:function(config,$checkstatus){
+                //             	 checkstatus = $checkstatus.data || [];
+                //              }
+                //          }],
+                //     	toolFunc: [{
+                //     		send:{
+                //                 id:"table",
+                //                 filter:"table1",
+                //                 name:"utilIds",
+                //                 event:"audit",
+                //                 url:"/meteringProcess/addSomeMeteringUtilToProcess.do",
+                //                 type:"post",
+                //                 par:"id",
+                //                 confirm:false,
+                //                 reload:true,
+                //                 adds:{
+                //                 	department:emp.bmName
+                //                 }
+                //             },
+	            //             tool:"toolbar",
+	            //             event:"audit"
+                //          }]
+                //     })
+                // }
             },
             reSet:{
                 url: "/maintenance/seeAllMaintenancePlan.do",
