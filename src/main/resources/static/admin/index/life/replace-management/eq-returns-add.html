@@ -339,7 +339,7 @@
                     number: 6,
                     field: "imgs",
                     choose: function (obj) {
-                        if (formData.count1 > 6) {
+                        if (formData.count1 >= 6) {
                             putMsg({
                                 alert: "最多只能上传6张图！"
                             });
@@ -413,9 +413,9 @@
                     number: 6,
                     field: "imgs",
                     choose: function (obj) {
-                        if (formData1.count1 > 6) {
+                        if (formData1.count1 >= 1) {
                             putMsg({
-                                alert: "最多只能上传6张图！"
+                                alert: "最多只能上传1张图！"
                             });
                             return false;
                         }

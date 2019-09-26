@@ -338,18 +338,18 @@
             file: [
                 {
                     elem: "#sbzp",
-                    url: "/lifeManage/insertOneCzgc",
+                    url: "/lifeManage/importdjhwimgurls",
                     accept: "images",
                     acceptMime: "image/*",
                     multiple: true,
                     auto: false,
                     bindAction: "#sbzp_sub",
-                    number: 6,
+                    number: 2,
                     field: "imgs",
                     choose: function (obj) {
-                        if (formData.count1 > 1) {
+                        if (formData.count1 >= 1) {
                             putMsg({
-                                alert: "最多只能上传1张图！"
+                                alert: "最多只能上传1张图片！"
                             });
                             return false;
                         }
