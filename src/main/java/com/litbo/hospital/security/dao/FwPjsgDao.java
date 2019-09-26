@@ -17,8 +17,8 @@ public interface FwPjsgDao {
             "    values (#{userId1,jdbcType=VARCHAR}, #{pjRkTime,jdbcType=TIMESTAMP}, " +
             "      #{userId2,jdbcType=VARCHAR}, #{sgShTime,jdbcType=TIMESTAMP}, #{sgStatus,jdbcType=INTEGER}, " +
             "      #{sgYy,jdbcType=VARCHAR}, #{sgSqsx,jdbcType=LONGVARCHAR})")
-    @Options(useGeneratedKeys = true, keyColumn = "id")
-    int insertFwPjsg(FwPjsg pjsg);
+    @Options(useGeneratedKeys = true,keyProperty="id")
+    Integer insertFwPjsg(FwPjsg pjsg);
 
     @SelectProvider(type=com.litbo.hospital.security.dao.sqlprovider.FwPjsgSqlProvider.class,method="listFwPjsg")
     List<FwPjsg> listFwPjsg(FwPjsg fwPjsg);

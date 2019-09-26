@@ -213,6 +213,7 @@
 </div>
 </body>
 <script>
+    var k=0;
     var formData = {};
     renderMod = {
         table: {
@@ -365,9 +366,18 @@
                     },
                     success: function (res) {
                         if (res.code === 0) {
-                            parent.layer.msg("提交成功！");
+                            /*parent.layer.msg("提交成功！");
                             var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
+                            parent.layer.close(index);*/
+                            layer.alert("提交成功")
+                            if(k==0){
+                                setTimeout(function () {
+                                    window.parent.location.reload();
+
+                                },1000)
+                            }
+
+
                         }
                         //console.log("提交成功！",res);
                     }
@@ -375,8 +385,12 @@
                 func: function () {
                     var mm = Number($("#gjpd").val());
                     top.tempData.mm = mm;
+
                     //价格大于1W弹出新页面
+                    console.log(k)
                     if (mm >= 10000) {
+                        k=1;
+                        console.log(k)
                         layOpen({
                             type: 2,
                             site: "parent",

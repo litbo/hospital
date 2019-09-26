@@ -25,8 +25,8 @@
         <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
         <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>批量删除</button>
-<!--        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i>添加</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete" ><i class="fas fa-trash-alt"></i>删除</a>-->
+        <!--        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i>添加</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete" ><i class="fas fa-trash-alt"></i>删除</a>-->
     </div>
     <form class="layui-form">
         字典分类：
@@ -57,8 +57,9 @@
                     {checkbox: true, fixed: true}
                     , {field: 'dictId', title: '序号', minWidth: 150,sort:true}
                     , {field: 'dictName', title: '字典名称', width: '45%', minWidth: 400,sort:true}
+                    , {field: 'bname', title: '部门名称', width: '30%', minWidth: 400,sort:true}
 
-                   /* , {title: '操作', width: 200, align: "center", toolbar: '#bar'}*/
+                    /* , {title: '操作', width: 200, align: "center", toolbar: '#bar'}*/
 
                 ]]
                 , url: "/eqdict/jczd"
@@ -124,72 +125,74 @@
                 data: ["tName"]
             }
         };
-            table.on('toolbar(basic)', function (obj) {
-                var $ = layui.$;
-                switch (obj.event) {
-                    case 'add':
-                        layui.layer.open({
-                            title : "新增字典",
-                            type : 2,
-                            content: './child/basic-add.html' ,//弹出层页面
-                            area: ["60%", "70%"]//弹出层的长宽
-                        });
-                        break;
-                    //删除
-                    case 'delete':
+        table.on('toolbar(basic)', function (obj) {
+            var $ = layui.$;
+            switch (obj.event) {
+                case 'add':
+                    layui.layer.open({
+                        title : "新增字典",
+                        type : 2,
+                        content: './child/basic-add.html' ,//弹出层页面
+                        area: ["60%", "70%"]//弹出层的长宽
+                    });
+                    break;
+                //删除
+                case 'delete':
 
-                        var checkStatus = table.checkStatus('table');
-                        var data = checkStatus.data;
-                        if (data.length === 0) {
-                            layer.msg("尚未选择");
-                            return;
+                    var checkStatus = table.checkStatus('table');
+                    var data = checkStatus.data;
+                    if (data.length === 0) {
+                        layer.msg("尚未选择");
+                        return;
+                    }
+                    var deVo = [],ziDian = {dictId:"",dictName:"",bName:""};
+                    if (data.length > 0) {
+                        console.log("data:"+JSON.stringify(data))
+                        for (var i = 0; i < data.length; i++) {
+                            // ziDian.dictId = data[i].dictId;
+                            ziDian.dictId = '0002';
+                            ziDian.dictName = data[i].bname;
+                            ziDian.bName = data[i].bname;
+                            console.log("字典信息："+JSON.stringify(ziDian));
+                            deVo.push(ziDian);
+                            ziDian = {};
                         }
-                        var deVo = [],ziDian = {};
-                        if (data.length > 0) {
-                            for (var i = 0; i < data.length; i++) {
-                                ziDian["dictId"] = data[i].dictId;
-                               /* ziDian["dictName"] = data[i].dictName;*/
-                                ziDian["bName"] = data[i].bname;
-                                console.log(ziDian);
-                                deVo.push(ziDian);
-                                ziDian = {};
-                            }
-                            var deleteVo = {};
-                            deleteVo["dictVos"] = deVo;
-                            console.log(deleteVo);
-                        }
-                        layer.confirm("确定要删除吗？", function () {
-                            $.ajax({
-                                type: "POST",
-                                url: "/specialEq/deleteSpecialEq",
-                                /*async: false,/!*同步传输*!/*/
-                                contentType: 'application/json',
-                             /*   contentType: "application/json;charset=UTF-8",*/
-                               dataType: 'json',
-                               /* data: {
-                                    "dictVos":JSON.stringify(deleteVo),
-                                },*/
-                                data: JSON.stringify(deleteVo),
-                                success: function (data) {
-                                    console.log(data);
-                                    layer.closeAll('loading');
-                                    if (data.code === 0) {
-                                        layer.msg("删除成功！", {icon: 1, time: 2000, shade: 0.2});
-                                        location.reload(true);
-                                    } else {
-                                        layer.msg("删除失败！", {icon: 2, time: 3000, shade: 0.2})
-                                    }
-                                },
-                                error:function (data) {
-                                    layer.msg("请求错误", {icon: 2, time: 3000, shade: 0.2})
+                        var deleteVo = {};
+                        deleteVo["dictVos"] = deVo;
+                        console.log("deleteVo:"+JSON.stringify(deleteVo));
+                    }
+                    layer.confirm("确定要删除吗？", function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/eqdict/delByTNameAndIds",
+                            /*async: false,/!*同步传输*!/*/
+                            contentType: 'application/json',
+                            /*   contentType: "application/json;charset=UTF-8",*/
+                            dataType: 'json',
+                            /* data: {
+                                 "dictVos":JSON.stringify(deleteVo),
+                             },*/
+                            data: JSON.stringify(deleteVo),
+                            success: function (data) {
+                                console.log(data);
+                                layer.closeAll('loading');
+                                if (data.code === 0) {
+                                    layer.msg("删除成功！", {icon: 1, time: 2000, shade: 0.2});
+                                    location.reload(true);
+                                } else {
+                                    layer.msg("删除失败！", {icon: 2, time: 3000, shade: 0.2})
                                 }
+                            },
+                            error:function (data) {
+                                layer.msg("请求错误", {icon: 2, time: 3000, shade: 0.2})
+                            }
 
-                            });
                         });
-                        break;
-                }
-            });
+                    });
+                    break;
+            }
+        });
     })
-    </script>
+</script>
 </body>
 </html>

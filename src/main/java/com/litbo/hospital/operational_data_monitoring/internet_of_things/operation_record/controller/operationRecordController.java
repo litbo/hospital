@@ -5,6 +5,7 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.operati
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.service.InspectdetailbackService;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.SearchVO;
 import com.litbo.hospital.result.Result;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -177,9 +178,12 @@ public class operationRecordController {
         //日期格式处理
         if (searchVO.getDate1()!= null){
             if (searchVO.getType().equals("1")){
-                searchVO.setBeginTime(searchVO.getDate1().substring(0,searchVO.getDate1().indexOf(" ~ ")));
-                searchVO.setEndTime(searchVO.getDate1().substring(searchVO.getDate1().indexOf(" ~ ")+3,
-                        searchVO.getDate1().length()));
+                if(StringUtils.isNotBlank(searchVO.getDate1())){
+                    searchVO.setBeginTime(searchVO.getDate1().substring(0,searchVO.getDate1().indexOf(" ~ ")));
+                    searchVO.setEndTime(searchVO.getDate1().substring(searchVO.getDate1().indexOf(" ~ ")+3,
+                            searchVO.getDate1().length()));
+                }
+
             }
             if (searchVO.getType().equals("2")){
                 searchVO.setBeginTime(searchVO.getDate1().substring(0,7));

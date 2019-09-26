@@ -63,7 +63,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">设备品名<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text"  id="eqPmName" disabled class="layui-input">
+                    <input type="text" name="eqPmName" id="eqPmName" disabled class="layui-input">
+                    <input type="hidden" id="eqPmName2">
                 </div>
             </div>
         </div>
@@ -72,18 +73,21 @@
                 <label class="layui-form-label">设备品牌</label>
                 <div class="layui-input-block">
                     <input type="text" name="eqPp" id="eqPp" disabled class="layui-input">
+                    <input type="hidden" id="eqPp2">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">设备规格</label>
                 <div class="layui-input-block">
                     <input type="text" name="eqGg" id="eqGg" disabled class="layui-input">
+                    <input type="hidden" id="eqGg2">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">设备型号</label>
                 <div class="layui-input-block">
                     <input type="text" name="eqXh" id="eqXh" disabled class="layui-input">
+                    <input type="hidden" id="eqXh2">
                 </div>
             </div>
         </div>
@@ -96,7 +100,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">操作规程名称 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcMc" placeholder="请输入" autocomplete="off" lay-verify="required"
+                    <input type="text" name="czGcMc" id="czGcMc" placeholder="请输入" autocomplete="off" lay-verify="required"
                            class="layui-input">
                 </div>
             </div>
@@ -104,6 +108,8 @@
                 <label class="layui-form-label">模板</label>
                 <div class="layui-input-block">
                     <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp2">选择</button>
+                    <input class="equipmentSpan" readonly style="border:0;outline:none;background-color: #fff;position: absolute;top: 10px;right: 10px;">
+                    <input type="hidden" class="mbNr">
                     <input class="layui-btn layui-btn-sm" id="put2" value="导入模板信息" readonly>
                 </div>
             </div>
@@ -111,6 +117,7 @@
                 <label class="layui-form-label">操作规程内容</label>
                 <div class="layui-input-block">
                     <textarea type="text" name="czGcNr" id="czGcNr" class="layui-textarea"></textarea>
+                    <input type="hidden" id="czGcNr2">
                 </div>
             </div>
         </div>
@@ -207,24 +214,29 @@
     var emp=tempValue("rl", "emp", false);
     $("#bmId").val(emp.bmId);
     $("#czGcNgr").val(emp.userXm);
-
     // 富文本
     layui.use('layedit', function(){
         var layedit = layui.layedit;
-        layedit.build('czGcNr'); //建立编辑器
+        var index=layedit.build('czGcNr');
+        // layedit.build('czGcNr'); //建立编辑器
 
-        var active = {
-            notice: function(){
-                layer.open({
-                    type: 2,
-                    title: '选择',
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['1000px', '90%'],
-                    content: 'child/choose.html' //iframe的url
-                });
-            }
-        };
+        /*$('#eqName').on('click', function(){
+            console.log($(".eqName").val());
+            layedit.setContent(index, $(".eqName").val());
+        });*/
+
+        $('#put').on('click', function(){
+            var a=$("#eqPmName2").val();
+            console.log(a);
+            $("#eqPmName").val(a);
+            $("#eqPp").val($("#eqPp2").val());
+            $("#eqGg").val($("#eqGg2").val());
+            $("#eqXh").val($("#eqXh2").val());
+            // console.log(formData2);
+        });
+        $('#put2').on('click', function(){
+            layedit.setContent(index, $("#czGcNr2").val());
+        });
     });
     $('#selectEmp').on('click', function(){
         layer.open({
@@ -237,18 +249,16 @@
             // content: 'child/modern-list-child.html'
         });
     });
-
-    $('#put').on('click', function(){
-        // console.log(formData2.radio[0].eqPmName)
-        $("#eqPmName").attr("name","eqPmName");
-        $("#eqPmName").val(formData2.radio[0].eqPmName);
-        $("#eqPp").val(formData2.radio[0].eqPp);
-        $("#eqGg").val(formData2.radio[0].eqGg);
-        $("#eqXh").val(formData2.radio[0].eqXh);
-        // console.log(formData2);
-    });
-    $('#put2').on('click', function(){
-        $("#czGcNr").val();
+    $('#selectEmp2').on('click', function(){
+        layer.open({
+            type: 2,
+            title: '选择',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1000px', '90%'],
+            content: 'child/choose3.html'
+            // content: 'child/modern-list-child.html'
+        });
     });
 
     renderMod = {
@@ -266,7 +276,7 @@
                     func:function(){
                     }
                 },*/
-                {
+               /* {
                     elem: "#selectEmp2",
                     cb: "/lifeManage/",
                     db: "/cs/listScs",
@@ -276,7 +286,7 @@
                     func:function(){
                         console.log(formData3);
                     }
-                }
+                }*/
 
             ]
         },

@@ -282,6 +282,7 @@
 <script>
 </script>
 <script>
+    var ee=0;
     formData={};
     renderMod={
         form:{
@@ -329,9 +330,14 @@
                     },
                     success:function(res){
                         if(res.code === 0){
-                            parent.layer.msg("提交成功！");
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
+                            layer.alert("提交成功")
+if(ee==0){
+
+    setTimeout(function () {
+        window.top.location.reload();
+
+    },1000)
+}
                         }
                         //console.log("提交成功！",res);
                     }
@@ -339,6 +345,7 @@
                 func:function(){
                     //价格大于100W才弹出页面
                     if(top.tempData.mm >= 1000000){
+                        ee=1;
                         layOpen({
                             type:2,
                             site:"parent",

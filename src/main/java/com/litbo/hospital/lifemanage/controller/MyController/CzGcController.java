@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.MyUtils.String2DateUtil;
 import com.litbo.hospital.lifemanage.bean.MyBean.CzGc;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.CzGcShowEqVO;
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.CzGcVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.DeleteHtsByIdsVO;
 import com.litbo.hospital.lifemanage.dao.MyMapper.CzGcMapper;
 import com.litbo.hospital.lifemanage.service.MyService.CzGcService;
@@ -128,30 +129,18 @@ public class CzGcController {
     @RequestMapping("/CzGcSelectEq")
     public Result CzGcSelectEq(@RequestParam(required = false, name = "pageNum", defaultValue = "1") Integer pageNum,
                                @RequestParam(required = false, name = "pageSize", defaultValue = "10") Integer pageSize,
-            @RequestParam(name = "eqName", required = false) String eqName) {
+                               @RequestParam(name = "eqName", required = false) String eqName) {
         PageHelper.startPage(pageNum,pageSize);
         List<CzGcShowEqVO> vos = mapper.selectAllEqInfo(eqName);
         return Result.success(new PageInfo<>(vos));
     }
 
-    /*@RequestMapping(value = "/pmSe")
-    public Result pmSe(){
-        Map map =new HashMap();
-        map.put("dom",
-                "<div class='layui-inline'><input type=\"text\" name=\"eqName\" class=\"layui-input\" placeholder=\"设备名称\" autocomplete=\"off\"></div>" +
-                        "    <div class='layui-input-inline mar10-0' align='center'>" +
-                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
-                        "</div>");
+    @RequestMapping("/selectOneCzgc")
+    public Result CzGcSelectEq(@RequestParam(name = "id") String id) {
+        CzGcVO vo = service.selectOneCzgc(id);
+        return Result.success(vo);
+    }
 
-        Map m = new HashMap();
-        m.put("url","/lifeManage/listPmsByPym");
-        m.put("type","reload");
-        String[] data = {"eqName"};
-        m.put("data",data);
-        map.put("data",m);
-        return Result.success(new JSONObject(map));
-
-    }*/
 
 
     @PostMapping("/listCzgcZbBt")

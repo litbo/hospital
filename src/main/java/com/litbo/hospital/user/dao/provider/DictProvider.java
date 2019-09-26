@@ -79,22 +79,146 @@ public class DictProvider {
 
 
     public String delByTNameAndId(DictVo dictVo) {
-        StringBuffer sql =new StringBuffer();
-        if("s_jg".equals(dictVo.getBName()))sql.append("Delete FROM s_jg where jg_id = #{dictId}");
-        if("s_mz".equals(dictVo.getBName()))sql.append("Delete FROM s_mz where mz_id = #{dictId} ");
-        if("s_xllb".equals(dictVo.getBName()))sql.append("Delete FROM s_xllb where xllb_id = #{dictId}  ");
-        if("s_sex".equals(dictVo.getBName()))sql.append("Delete FROM s_sex where sex_id = #{dictId}  ");
-        if("s_gb".equals(dictVo.getBName()))sql.append("Delete FROM s_gb where gb_id = #{dictId}  ");
-        if("s_zwlb".equals(dictVo.getBName()))sql.append("Delete FROM s_zwlb where zwlb_id = #{dictId}  ");
-        if("s_zzmm".equals(dictVo.getBName()))sql.append("Delete FROM s_zzmm where zzmm_id = #{dictId}  ");
-        if("eq_cslb".equals(dictVo.getBName()))sql.append("Delete FROM eq_cslb where eq_cslb_id = #{dictId}  ");
-        if("eq_cxfl".equals(dictVo.getBName()))sql.append("Delete FROM eq_cxfl where eq_cxfl_id = #{dictId}  ");
-        if("eq_gzlb".equals(dictVo.getBName()))sql.append("Delete FROM eq_gzlb where gzlb_id = #{dictId}  ");
-        if("eq_jldw".equals(dictVo.getBName()))sql.append("Delete FROM eq_jldw where eq_jldw_id = #{dictId} ");
-        if("eq_qdfs".equals(dictVo.getBName()))sql.append("Delete FROM eq_qdfs where qdfs_id = #{dictId} ");
-        if("eq_zjly".equals(dictVo.getBName()))sql.append("Delete FROM eq_zjly where zjly_id = #{dictId} ");
-        if("eq_syxz".equals(dictVo.getBName()))sql.append("Delete FROM eq_syxz where syxz_id = #{dictId} ");
+
+        SQL sql = null;
+        String dictId = dictVo.getDictId();
+
+        switch (dictVo.getBName()) {
+            case "s_jg": {
+                sql = new SQL() {
+                    {
+                        DELETE_FROM("s_jg");
+                        WHERE("jg_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "s_mz": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("s_mz");
+                        WHERE("mz_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "s_xllb": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("s_xllb");
+                        WHERE("xllb_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "s_sex": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("s_sex");
+                        WHERE("sex_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "s_gb": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("s_gb");
+                        WHERE("gb_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "s_zwlb": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("s_zwlb");
+                        WHERE("zwlb_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "s_zzmm": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("s_zzmm");
+                        WHERE("zzmm_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "eq_cslb": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("eq_cslb");
+                        WHERE("eq_cslb_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "eq_cxfl": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("eq_cxfl");
+                        WHERE("eq_cxfl_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "eq_gzlb": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("eq_gzlb");
+                        WHERE("gzlb_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "eq_jldw": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("eq_jldw");
+                        WHERE("eq_jldw_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "eq_qdfs": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("eq_qdfs");
+                        WHERE("qdfs_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "eq_zjly": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("eq_zjly");
+                        WHERE("zjly_id = #{dictId}");
+                    }
+                };
+            }break;
+            case "eq_syxz": {
+                sql =  new SQL() {
+                    {
+                        DELETE_FROM("eq_syxz");
+                        WHERE("syxz_id = #{dictId}");
+                    }
+                };
+            }
+
+        }
+
+        System.out.println(sql.toString());
         return sql.toString();
+
+//        StringBuffer sql =new StringBuffer();
+//        if("s_jg".equals(dictVo.getBName()))sql.append("Delete FROM s_jg where jg_id = #{dictId}");
+//        if("s_mz".equals(dictVo.getBName()))sql.append("Delete FROM s_mz where mz_id = #{dictId} ");
+//        if("s_xllb".equals(dictVo.getBName()))sql.append("Delete FROM s_xllb where xllb_id = #{dictId}  ");
+//        if("s_sex".equals(dictVo.getBName()))sql.append("Delete FROM s_sex where sex_id = #{dictId}  ");
+//        if("s_gb".equals(dictVo.getBName()))sql.append("Delete FROM s_gb where gb_id = #{dictId}  ");
+//        if("s_zwlb".equals(dictVo.getBName()))sql.append("Delete FROM s_zwlb where zwlb_id = #{dictId}  ");
+//        if("s_zzmm".equals(dictVo.getBName()))sql.append("Delete FROM s_zzmm where zzmm_id = #{dictId}  ");
+//        if("eq_cslb".equals(dictVo.getBName()))sql.append("Delete FROM eq_cslb where eq_cslb_id = #{dictId}  ");
+//        if("eq_cxfl".equals(dictVo.getBName()))sql.append("Delete FROM eq_cxfl where eq_cxfl_id = #{dictId}  ");
+//        if("eq_gzlb".equals(dictVo.getBName()))sql.append("Delete FROM eq_gzlb where gzlb_id = #{dictId}  ");
+//        if("eq_jldw".equals(dictVo.getBName()))sql.append("Delete FROM eq_jldw where eq_jldw_id = #{dictId} ");
+//        if("eq_qdfs".equals(dictVo.getBName()))sql.append("Delete FROM eq_qdfs where qdfs_id = #{dictId} ");
+//        if("eq_zjly".equals(dictVo.getBName()))sql.append("Delete FROM eq_zjly where zjly_id = #{dictId} ");
+//        if("eq_syxz".equals(dictVo.getBName()))sql.append("Delete FROM eq_syxz where syxz_id = #{dictId} ");
+//        System.out.println("sql:"+sql);
+//        return sql.toString();
     }
 
 

@@ -2,6 +2,7 @@ package com.litbo.hospital.lifemanage.bean.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,8 @@ public class SgYbghhyVO {
     /**
      * 时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ybghhySj;
     /**
      * 地点
@@ -47,6 +50,7 @@ public class SgYbghhyVO {
     /**
      * 审核时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date shsj;
     /**

@@ -20,7 +20,7 @@ public class SgCkcssb {
     private String sgId;
 
     @ApiModelProperty(value = "设备厂商id",name = "sbcsId", dataType = "Integer", required = true)
-    private Integer sbcsId;
+    private String sbcsId;
 
     @ApiModelProperty(value = "设备厂商名字",name = "sbcsName", dataType = "String", required = true)
     private String scsName;

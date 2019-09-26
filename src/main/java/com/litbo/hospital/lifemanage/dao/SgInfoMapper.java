@@ -44,6 +44,7 @@ public interface SgInfoMapper {
     @Select("SELECT\n" +
             "dbo.sg_info.id,\n" +
             "dbo.sg_info.bm_id,\n" +
+            "dbo.sg_info.jcl,\n" +
             "dbo.sg_info.bh,\n" +
             "dbo.sg_info.eq_pm_id,\n" +
             "dbo.sg_info.tg_bm_id,\n" +
