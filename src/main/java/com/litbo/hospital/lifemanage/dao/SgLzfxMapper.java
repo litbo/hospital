@@ -72,7 +72,7 @@ public interface SgLzfxMapper {
             "dbo.sg_info.id = #{sgInfoId,jdbcType=VARCHAR}")
     SgLzfxVO selectSgLzfx(String sgInfoId);
 
-    @Select("select dbo.sg_lzfxxhbj.xhbj_xh, dbo.sg_lzfxxhbj.xhbj_bj, dbo.eq_cs.sbcs_name\n" +
+    @Select("select dbo.eq_cs.sbcs_name,dbo.sg_lzfxxhbj.sbcs_id,dbo.sg_lzfxxhbj.xhbj_xh, dbo.sg_lzfxxhbj.xhbj_bj, dbo.eq_cs.sbcs_name\n" +
             "from dbo.sg_lzfxxhbj \n" +
             "LEFT JOIN dbo.eq_cs ON dbo.sg_lzfxxhbj.sbcs_id = dbo.eq_cs.sbcs_id\n" +
             "WHERE lzfx_id = #{lzfxId,jdbcType=VARCHAR}\n")

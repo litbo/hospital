@@ -15,12 +15,12 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-form-label{
-            padding: 8px 6px!important;
-        }
-        .layui-form-label{
-            width:120px;
-        }
+        /*.layui-form-label{*/
+        /*    padding: 8px 6px!important;*/
+        /*}*/
+        /*.layui-form-label{*/
+        /*    width:120px;*/
+        /*}*/
         .layui-form-item{
             margin-bottom:30px;
         }
@@ -38,7 +38,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">合同编号</label>
                 <div class="layui-input-block">
-                    <input type="hidden" name="id" class="layui-input" placeholder="20190101-？" autocomplete="off" >
+                    <input type="text" name="id" disabled class="layui-input" placeholder="自动编号" autocomplete="off" >
                 </div>
             </div>
             <div class="layui-form-item">
@@ -69,10 +69,10 @@
                     <input type="text" name="htPrice" class="layui-input" autocomplete="off" placeholder="0" required lay-verify="required">
                 </div>
             </div>
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item" >
                 <label class="layui-form-label">维修商<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="sbcsId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="sbcsId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectWxs">选择</button>
                     <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
                 </div>
@@ -146,33 +146,33 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item">
                 <label class="layui-form-label">含配件费</label>
                 <div class="layui-input-block">
                     <input type="radio" name="htHpjf" value="1" title="是">
                     <input type="radio" name="htHpjf" value="2" title="否" checked>
                 </div>
             </div>
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item">
                 <label class="layui-form-label">合同附件</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="sbzp">选择文件</button>
+                    <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="padding-left:80px;">
+                    <button class="layui-btn layui-btn-sm layui-btn-normal PoAb0xx0" id="sbzp">选择文件</button>
                 </div>
             </div>
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item">
                 <label class="layui-form-label" >设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
+                    <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="padding-left:60px;">
                     <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
                 </div>
             </div>
         </div>
 
     </div>
-
     <div class="layui-row">
         <div class="layui-form-item">
-            <div class="layui-input-block">
+            <div class="layui-input-block" style="margin-left: 40%">
                 <button class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
@@ -291,21 +291,21 @@
             date: [
                 {
                     elem: "#htDate",
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    value: false,
+                    type:"date",
+                    format:'yyyy-MM-dd'
                 },
                 {
                     elem: "#htKsDate",
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    value:false,
+                    type:"date",
+                    format:'yyyy-MM-dd'
                 },
                 {
                     elem: "#htJsDate",
-                    value:today0+" "+time0,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    value:false,
+                    type:"date",
+                    format:'yyyy-MM-dd'
                 }
             ],
             file:[

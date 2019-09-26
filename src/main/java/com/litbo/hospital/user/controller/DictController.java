@@ -9,6 +9,7 @@ import com.litbo.hospital.security.bean.Xllb;
 import com.litbo.hospital.user.bean.*;
 import com.litbo.hospital.user.dao.DictDao;
 import com.litbo.hospital.user.service.DictService;
+import com.litbo.hospital.user.vo.DeleteVo;
 import com.litbo.hospital.user.vo.DictVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -173,18 +174,50 @@ public class DictController {
            dictDao.delByTNameAndId(dictVo);
 
         }catch (Exception e){
+            System.out.println("删除失败");
             return Result.error();
         }
         return  Result.success();
+    }
 
 
+    /**
+     * 删除字典
+     * @param deleteVo
+     * @return
+     */
+    @RequestMapping("delByTNameAndIds")
+    public Result deleteTNameAndIds(@RequestBody DeleteVo deleteVo){
+        System.out.println("请求到了删除方法！");
+        System.out.println(deleteVo);
+        int result = 0 ;
+        DictVo[] dictVos = deleteVo.getDictVos();
+        for(DictVo vo : dictVos){
+            vo.setBName(vo.getDictName());
+            System.out.println("vo的信息："+vo);
+            Result resultMessage = delByTNameAndId(vo);
+            if(resultMessage.getCode() != 0){
+                result++;
+            }
+        }
+
+        if(result == 0){
+            return Result.success();
+        }
+        return Result.success("有"+result+"个数据未成功删除！");
 
     }
+
+
+
     @RequestMapping("getByTNameAndId")
     public Result getByTNameAndId(String bName,String dictId){
 
         return Result.success(dictDao.getByTNameAndId(bName,dictId));
     }
+
+
+
 
 
 

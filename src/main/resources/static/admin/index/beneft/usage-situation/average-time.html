@@ -29,9 +29,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="visible-xs">
-        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
-    </div>
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
@@ -73,11 +70,11 @@
     renderMod = {
         formAction: {
             date: {
-                elem:"#test6",
-                isInitValue: false,
-                type:"date",
-                format:"yyyy-MM-dd",
-                range:true
+                elem: "#test6",
+                value:false,
+                type: "date",
+                format: "yyyy-MM-dd",
+                range: true
             },
             val: {
                 filter: "select",

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>统计查询</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+
+<!-- 表格 -->
+<table class="layui-hide" id="table" lay-filter="table1"></table>
+
+<p style="margin-bottom: 50px;float: right;margin-right: 20px;font-size:17px;color:#666;">
+    预案合计：<span style="color:#666" id="yahj"></span>件&nbsp;
+    已备案：<span style="color:#666" id="yba"></span>件&nbsp;
+    试用中：<span style="color:#666" id="syz"></span>件&nbsp;
+    已弃用：<span style="color:#666" id="yqy"></span>件
+</p>
+
+<script type="text/html" id="toolBar">
+    <!-- 搜索区域 -->
+    <button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;height: 22px;margin-bottom: 5px;font-size: 15px;">
+        <i class="layui-icon" style="margin-top: -15px;font-size: 13px;"></i>弃用
+    </button>
+    <form action="">
+        <div class="layui-input-inline" style="width: 120px;">
+            <select name="zt" lay-search="">
+                <option value="">标志</option>
+                <option value="2">已备案</option>
+                <option value="1">试用中</option>
+                <option value="0">已弃用</option>
+            </select>
+        </div>
+        <!--日期-->
+        <div class="layui-input-inline" style="width: 150px;">
+            <input type="text" name="qssj" id="date1"
+                   autocomplete="off" class="layui-input" placeholder="起始时间">
+        </div>
+        <div class="layui-input-inline" style="width: 150px;">
+            <input type="text" name="jssj" id="date2"
+                   autocomplete="off" class="layui-input" placeholder="结束时间">
+        </div>
+        <!--预案编号-->
+        <div class="layui-input-inline" style="width: 160px;">
+            <input type="text" name="bh" autocomplete="off" placeholder="操作规程编号" class="layui-input">
+        </div>
+        <!--预案名称-->
+        <div class="layui-input-inline" style="width: 160px;">
+            <input type="text" name="mc" autocomplete="off" placeholder="操作规程名称" class="layui-input">
+        </div>
+        <div class="layui-input-inline">
+            <button class="layui-btn" data-type="reload">查找</button>
+            <button type="reset" class="layui-btn layui-btn-primary" >重置</button>
+        </div>
+    </form>
+</script>
+
+<script type="text/html" id="xh">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="jsonChange">
+    {{#if (d.czGcZt === "2") { }}
+    <span class="layui-btn layui-btn-xs">已备案</span>
+    {{# }else if(d.czGcZt === "1"){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">试用中</span>
+    {{# }else{ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger">已弃用</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="barDemo">
+    {{#if ((d.czGcZt === "2" && d.yjyaZpjjd==null) || (d.czGcZt === "2" && d.yjyaZpjjd==="1")) { }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">查看</a>
+    <button data-method="notice" class="layui-btn layui-btn-sm layui-btn-danger guanlian" lay-event="zpj">再评价</button>
+    {{# }else{ }}
+    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">查看</a>
+    {{# } }}
+</script>
+
+<script>
+    function pText(){
+        $.ajax({
+            type: "POST",
+            url: '/lifeManage/AllTypeCount',
+            success: function(result) {
+                $("#yahj").text(result.data[0]);
+                $("#yba").text(result.data[1]);
+                $("#syz").text(result.data[2]);
+                $("#yqy").text(result.data[3]);
+            },
+            error:function(){
+
+                alert("error");
+            }
+        });
+    };
+    pText();
+
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    ,{field:'xh', title:'序号',templet:'#xh',width:80}
+                    ,{field:'czGcZt', toolbar:'#jsonChange', title:'标志', width:80}
+                    ,{field:'czGcId',title:'编号'}
+                    ,{field:'czGcName',title:'名称', width:140}
+                    ,{field:'czGcNgr', title:'拟稿人', width:130}
+                    ,{field:'CzGcShr', title:'审核人', width:130}
+                    ,{field:'czGcShrq', title:'审核日期'}
+                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
+                ]]
+                , url: "/lifeManage/CzGcTjCx"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , where: {}
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count": res.data.total //总数据数
+                    }
+                }
+                ,done: function(obj){
+                    tableFunc({
+                        "tools":[
+                            {
+                                tool:"toolbar",
+                                event:"delAll",
+                                send:{
+                                    id:"table",
+                                    filter:"table1",
+                                    name:"ids",
+                                    event:"delAll",
+                                    url:"/lifeManage/QyCzGcs",
+                                    type:"POST",
+                                    contentType:"application/json",
+                                    par:"id",
+                                    reload:true
+                                }
+                            },
+                            {//打开一个新窗口，并将当前行数据中的id传递给下一页面
+                                type:2,
+                                event: "pipei",
+                                title:"查看",
+                                content:"child/view-stats2.html",
+                                area: ['1000px', '450px'],
+                                dataUrl:["id"],
+                                func:function(obj){
+                                    // console.log(obj);
+                                }
+                            },
+                            {//打开一个新窗口，并将当前行数据中的id传递给下一页面
+                                type:2,
+                                event: "zpj",
+                                content: 'child/zpj2.html',
+                                area: ['1000px', '90%'],
+                                dataUrl:["id"],
+                                func:function(obj){
+                                    console.log(obj);
+                                }
+                            }
+                        ]
+                    })
+                }
+            },
+
+            reSet: {
+                url: "/lifeManage/CzGcTjCx",
+                type: "reload",
+                method: "POST",
+                data: ["zt","qssj", "jssj", "bh", "mc"]
+            }
+        },page: true
+    };
+    renderMod.formAction={
+        date:[
+            {
+                elem: "#date1",
+                type: "date",
+                format: 'yyyy-MM-dd',
+                value: today0,
+                isInitValue: false
+            },
+            {
+                elem: "#date2",
+                type: "date",
+                format: 'yyyy-MM-dd',
+                value: today0,
+                isInitValue: false
+            }
+        ]
+    }
+
+</script>
+</body>
+</html>

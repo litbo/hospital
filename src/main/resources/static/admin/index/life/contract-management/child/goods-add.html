@@ -261,7 +261,7 @@
                     number: 6,
                     field: "imgs",
                     choose: function (obj) {
-                        if (formData.count1 > 6) {
+                        if (formData.count1 >= 6) {
                             putMsg({
                                 alert: "最多只能上传6张图！"
                             });

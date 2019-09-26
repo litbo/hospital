@@ -42,7 +42,7 @@ public class HtVo {
     private String fkcs; //付款数
 
 
-    public HtVo(String id, String htName, BigDecimal htPrice, Timestamp htTime, String sbcsName, Integer htStatus) {
+    public HtVo(String id, String htName, BigDecimal htPrice, Timestamp htTime, String sbcsName, Integer htStatus, String fkHtbh) {
         this.id = id;
         this.htName = htName;
         this.htPrice = htPrice;
@@ -50,6 +50,7 @@ public class HtVo {
         this.sbcsName = sbcsName;
         this.htStatus = htStatus;
         if(htStatus == 0){
+            System.out.println(htStatus);
             this.htStatusString = "未支付";
         }else if (htStatus == 1){
             this.htStatusString = "已支付";

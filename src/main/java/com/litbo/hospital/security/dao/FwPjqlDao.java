@@ -19,7 +19,7 @@ public interface FwPjqlDao {
             "      #{qrTime,jdbcType=TIMESTAMP}, #{sqStatus,jdbcType=INTEGER}, #{qlyy,jdbcType=LONGVARCHAR}" +
             "      )"
     })
-    @Options(useGeneratedKeys = true, keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty="id")
     Integer insertFwPjql(FwPjql pjql);
 
     @Update("update fw_pjql set sq_status = #{status}, qr_time = #{date} where qrr_id = #{qrrId} and id = #{id} and sq_status = 0")

@@ -167,8 +167,17 @@ public class SpecificationServiceImpl implements SpecificationService {
                 eqInfos.forEach(System.out::println);
                 eqInfos.removeIf(a->!a.getEqSbbh().substring(4,14).equals(eqInfo.getEqSbbh().substring(4,14)));
             }else if ("同厂家同型号".equals(standardVO.getApplicableEquipment())){
-                eqInfos.removeIf(a->!(a.getEqXh().equals(eqInfo.getEqXh()) && a.getSbcsIdScs().equals(eqInfo.getSbcsIdScs())
-                                    && a.getEqGg().equals(eqInfo.getEqGg())));
+                eqInfos.removeIf(a->{
+                    if (a.getSbcsIdScs() == null || a.getEqGg() == null || a.getEqXh() == null || eqInfo == null)
+                        return true;
+                    else{
+                        if ((a.getEqXh().equals(eqInfo.getEqXh()) && a.getSbcsIdScs().equals(eqInfo.getSbcsIdScs())
+                                && a.getEqGg().equals(eqInfo.getEqGg())))
+                            return false;
+                        else
+                            return true;
+                    }
+                });
             }else if ("全部设备".equals(standardVO.getApplicableEquipment())){
 
             }else {

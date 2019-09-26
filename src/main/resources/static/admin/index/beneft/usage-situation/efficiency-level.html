@@ -37,7 +37,7 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
                     <div class="layui-input-inline">
-                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期"   >
+                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期" readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
 
@@ -82,11 +82,11 @@
     renderMod = {
         formAction: {
             date: {
-                elem:"#test6",
-                isInitValue: false,
-                type:"date",
-                format:"yyyy-MM-dd",
-                range:true
+                elem: "#test6",
+                value:false,
+                type: "date",
+                format: "yyyy-MM-dd",
+                range: true
             },
             val: {
                 filter: "select",

@@ -61,7 +61,7 @@ public class YjyaLclogServiceImpl implements YjyaLclogService {
             if(date!=null){
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
-                cal.add(Calendar.MONTH, 1);
+                cal.add(Calendar.DATE,30);
                 /*判断并修改预案记录状态,同时修改制订预案为已备案*/
                 if("1".equals(vo1.getYjyaZt())){
                     if (new Date().getTime() >= cal.getTime().getTime()){

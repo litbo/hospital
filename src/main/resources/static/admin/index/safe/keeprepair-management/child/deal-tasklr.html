@@ -22,8 +22,8 @@
     <legend>结果录入</legend>
 </fieldset>
 <div class="layui-row col-xs-12 padRight">
-
-        <div class="col-xs-6">
+    <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">维护结果<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">仪器现状<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -40,7 +40,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6">
+
+        <div class="col-xs-12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">维护人员<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="maintenancePersonnel" id="maintenancePersonnel" autocomplete="off"  class="layui-input" placeholder="请输入">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
             <div class="layui-form-item">
                 <label class="layui-form-label">备注<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -48,15 +57,9 @@
                 </div>
             </div>
         </div>
-    <div class="col-xs-6">
-        <div class="layui-form-item">
-            <label class="layui-form-label">维护人员<span class="sign">*</span></label>
-            <div class="layui-input-block">
-                <input type="text" name="maintenancePersonnel" id="maintenancePersonnel" autocomplete="off"  class="layui-input" placeholder="请输入">
-            </div>
-        </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-12">
         <div class="layui-form-item">
             <label class="layui-form-label">检查日期<span class="sign">*</span></label>
             <div class="layui-input-block">
@@ -64,22 +67,32 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-6">
-        <div class="layui-form-item">
-            <label class="layui-form-label">部门签收<span class="sign">*</span></label>
-            <div class="layui-input-block">
-                <input type="text" name="departmentReceipt" id="departmentReceipt"  autocomplete="off" lay-verify="required" placeholder="请上传签名图片"
-                       class="layui-input">
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6">
+
+
+    <div class="col-xs-12">
         <div class="layui-form-item">
             <label class="layui-form-label">完成日期<span class="sign">*</span></label>
             <div class="layui-input-block">
                 <input type="text" name="dateOfCompletion" id="dateOfCompletion" placeholder="请选择时间" lay-verify="required" autocomplete="off"  class="layui-input">
             </div>
         </div>
+    </div>
+    <div class="col-xs-12">
+    <div class="layui-form-item">
+            <label class="layui-form-label">部门签收<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-fluid" id="test1" style="padding: 0;margin: 0">上传图片</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="layui-form-item">
+            <div class="layui-upload-list" style="padding: 0;margin: 0">
+                <img class="layui-upload-img" id="demo1" style="float: right; width: 110px;height: 50px;padding: 0;margin: 0">
+                <p id="demoText"></p>
+            </div>
+        </div>
+    </div>
     </div>
 
 </div>
@@ -97,6 +110,44 @@
     </div>
     <button class="warm_btn layui-btn layui-btn-warm layui-btn-fluid" lay-submit="" lay-filter="submit" >提交</button>
 </form>
+<script>
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1',
+            url:"../upload"
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                console.log(img)
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+                localStorage.setItem("img",uploadInst);
+                console.log(uploadInst)
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+
+                });
+            }
+        });
+
+    })
+</script>
 <!--<script>-->
 <!--    $("btnn").click(function(){-->
 <!--        $.post("maintenance/resultAdd.do",-->
@@ -116,11 +167,11 @@
 <!--    });-->
 <!--    </script>-->
     <script>
+    var img = localStorage.getItem("img")
+    localStorage.removeItem("img");
+
     var id = localStorage.getItem("dealId");
-    console.log(localStorage.getItem("key"))
-
     renderMod = {
-
         bind: {
             addItem:[
                 {
@@ -164,12 +215,12 @@
         formAction:{
             date: [{
                 elem:"#dateOfCompletion",
-                isInitValue: false,
+                value: false,
                 type:"date",
                 format:"yyyy-MM-dd",
             },{
                 elem:"#checkTime",
-                isInitValue: false,
+                value: false,
                 type:"date",
                 format:"yyyy-MM-dd",
             }],

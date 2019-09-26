@@ -12,6 +12,8 @@ public interface ImplementerDictionaryDAO {
 
     ImplementerDictionary selectByName(String name);
 
+    List<ImplementerDictionary> selectByName1(String name);
+
     int deleteByName(String Name);
 
     List<String> findAllType(String type);

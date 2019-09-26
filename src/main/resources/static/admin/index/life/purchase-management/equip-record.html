@@ -157,6 +157,7 @@
                                         key: "sgIdss",
                                         value: data
                                     })
+                                    window.parent.location.reload();
                                 }
                             },
                             {
@@ -244,8 +245,8 @@
                 {//选择 “时间” 日期选择器
                     elem: "#datey"
                     , type: "datetime"
-                    , value: today + " " + time
-                    , format: 'yyyy-MM-dd HH:mm:ss'
+                    , value: today+ " " + time
+                    , fsormat: 'yyyy-MM-dd HH:mm:ss'
                 }]
         }
     }

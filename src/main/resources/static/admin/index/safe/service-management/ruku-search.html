@@ -30,9 +30,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="visible-xs">
-        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
-    </div>
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
@@ -40,9 +37,8 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="pjName" class="layui-input" placeholder="配件名称" autocomplete="off">
                     </div>
-                    <span>入库时间：</span>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="pjRkTimeStart"  class="layui-input"  autocomplete="off" id="date">
+                        <input type="text" name="pjRkTimeStart"  class="layui-input"  autocomplete="off" id="date" placeholder="请选择入库时间" >
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="reload" lay-filter="demo1">查找</button>
@@ -60,8 +56,10 @@
         form:{
             date:{
                 elem:'#date',
-                range:"~",
-                value:today0
+                value:false,
+                type: "date",
+                format: "yyyy-MM-dd",
+                range: true
             }
         },
         addTable: {
