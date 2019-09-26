@@ -56,7 +56,7 @@
             $.ajax({
                 type: "POST",
                 data: {id:a},
-                url: '/lifeManage/selectOneMb',
+                url: '/lifeManage/selectOneCzGcMb',
                 success: function(result) {
                     console.log(result.data.mbNr);
                     parent.$('#czGcNr2').val(result.data.mbNr);
@@ -80,11 +80,11 @@
             table: {
                 cols: [[ //表头
                     {type: 'radio', fixed: 'left'}
-                    ,{field:'id', title:'编号',width:200}
+                    ,{field:'mbId', title:'编号',width:200}
                     ,{field:'mbMc',title:'模板名称'}
                     ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
                 ]]
-                , url: "/lifeManage/selectAllMb"
+                , url: "/lifeManage/selectCzGcMb"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
@@ -108,7 +108,7 @@
                                 title:"查看详情",
                                 content:"ckxq22.html",
                                 area: ['800px', '350px'],
-                                dataUrl:["id"],
+                                dataUrl:["mbId"],
                                 func:function(obj){
                                     // console.log(obj);
                                 }
@@ -118,7 +118,7 @@
                 }
             },
             reSet: {
-                url: "/lifeManage/selectAllMb",
+                url: "/lifeManage/selectCzGcMb",
                 type: "reload",
                 method: "POST",
                 data: ["mbmc"]
