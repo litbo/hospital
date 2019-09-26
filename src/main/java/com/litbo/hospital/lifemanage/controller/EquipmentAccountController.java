@@ -1,7 +1,11 @@
 package com.litbo.hospital.lifemanage.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.vo.MachineAccountVO;
 import com.litbo.hospital.lifemanage.service.EquipmentAccountService;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +47,10 @@ public class EquipmentAccountController {
             @RequestParam(name = "equipmentNumber", required = false) String equipmentNumber,
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        return Result.success(equipmentAccountService.selectEquipmentAccount(category, state,tzlb, departmentId, equipmentPinyinCode, departmentCoding, equipmentNumber, pageNum, pageSize));
+        LiveEmpVo sEmp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+
+        PageInfo<MachineAccountVO> info = equipmentAccountService.selectEquipmentAccount(category, state, tzlb, sEmp.getBmId(), equipmentPinyinCode, departmentCoding, equipmentNumber, pageNum, pageSize);
+        return Result.success(info);
     }
 
     /**

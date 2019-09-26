@@ -92,6 +92,7 @@ public interface YjyaZdMapper {
             "      </foreach>\n" +
             "    </where>" +
             "    </if>" +
+            " order by yjya_bh desc " +
             "</script>")
     List<YjyaZdVO> selectYjyaZdByExample(YjyaZdExample example);
 

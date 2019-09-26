@@ -81,7 +81,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">预案内容</label>
             <div class="layui-input-block" style="width: 760px;">
-                <textarea class="layui-textarea" name="yjyaNr" id="yjyaNr" disabled></textarea>
+                <textarea class="layui-textarea" name="yjyaNr" id="yjyaNr" readonly="readonly" disabled></textarea>
 <!--                <textarea name="yjyaNr" class="layui-textarea" id="yjyaNr" lay-verify="required" readonly></textarea>-->
 <!--                <div class="layui-input-block">-->
 <!--                    <button class="layui-btn" type="button" id="btn_forbidden">禁用编辑器</button>-->
@@ -118,7 +118,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">审核意见</label>
             <div class="layui-input-block" style="width: 760px;">
-                <textarea name="yjyaShyj" class="layui-textarea layui-hide" id="yjyaShyj" lay-verify="required"></textarea>
+                <textarea name="yjyaShyj" class="layui-textarea" id="yjyaShyj" lay-verify="required"></textarea>
             </div>
         </div>
     </div>
@@ -155,7 +155,9 @@
             ,layer = layui.layer
             ,layedit = layui.layedit;
 
-        index = layedit.build('yjyaNr'); //建立编辑器
+        index = layedit.build('yjyaNr',{
+            tool:['|']
+        }); //建立编辑器
 
 
 
@@ -227,9 +229,10 @@
                 $("#yjyaSyts").val("30");
                 $("#yjyaZt").val("1");
                 $("#yjyaBbh ").val("V1.0");
-                layui.layedit.setContent(index, data.yjyaNr);
+
                 $("#yjyaNr").next().find('iframe').contents().find('body').prop("contenteditable",false);
-                console.log(data);
+
+                layui.layedit.setContent(index, data.yjyaNr);
             }
         },
         date:{

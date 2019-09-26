@@ -228,21 +228,6 @@
                     "shiro": "PACSSBGL"
                   }
                 ]
-              },
-              {
-                "title": "定时任务设置",
-                "url": "javascript:void;",
-                "icon": "credit-card",
-                "id": "2042",
-                "shiro": "DSRWSZZ",
-                "children": [
-                  {
-                    "title": "定时任务设置",
-                    "url": "./dataCollection/page/leading-in7.html",
-                    "id": "20420",
-                    "shiro": "DSRWSZ"
-                  }
-                ]
               }
             ]
           }

@@ -69,13 +69,13 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'yjyaBh',title:'应急预案编号'}
+                    ,{field:'yjyaBh',title:'应急预案编号',sort:true}
                     ,{field:'yjyaName',title:'应急预案名称'}
                     ,{field:'yjyaLx',title:'类别', width:130}
                     ,{field:'yjyaZys', title:'总页数', width:100}
                     ,{field:'yjyaBbh', title:'版本号', width:100}
                     ,{field:'yjyaNgr', title:'拟稿人', width:120}
-                    ,{field:'yjyaNgrq', title:'拟稿日期', width:120}
+                    ,{field:'yjyaNgrq', title:'拟稿日期', width:120,sort:true}
                     ,{fixed: 'right', title:'操作', align:'center', toolbar: '#jsonChange',width:100}
                 ]]
                 , url: "/lifeManage/selectAllSh"

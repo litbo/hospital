@@ -45,16 +45,16 @@
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="" lay-filter="forms">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                   <!-- <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="interest" lay-filter="aihao">
                             <option value="1" selected>卫标分类</option>
                             <option value="0">军队分类</option>
                         </select>
-                    </div>
+                    </div>-->
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
                             <select name="category" lay-filter="aihao">
-                                <option value="" selected>全部分类</option>
+                                <option value="" selected>全部设备类别</option>
                                 <option value="68">医学类装备</option>
                                 <option value="-68">非医学类装备</option>
                             </select>
@@ -63,7 +63,7 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
                             <select name="interest" lay-filter="aihao">
-                                <option value="" selected>全部</option>
+                                <option value="" selected>是否有源</option>
                                 <option value="0" >有源</option>
                                 <option value="1">无源</option>
                             </select>
@@ -72,20 +72,17 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <label>
                             <select name="state" lay-filter="aihao">
-                                <option value="" selected>全部设备</option>
+                                <option value="" selected>设备状态</option>
                                 <option value="在用">在用</option>
                                 <option value="报废">报废</option>
                             </select>
                         </label>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" class="layui-input" name="equipmentPinyinCode" placeholder="简称拼音码" autocomplete="off">
+                        <input type="text" class="layui-input" name="equipmentPinyinCode" placeholder="设备名拼音码" autocomplete="off">
                     </div>
-                    <div class="layui-input-inline">
-                        <select name="departmentId" lay-filter="part">
-                            <option value="">全部部门</option>
-                        </select>
-                    </div>
+                    <input type="text" class="hidden" name="departmentId" placeholder="设备名拼音码" autocomplete="off">
+
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">
                             查找
@@ -104,6 +101,8 @@
 
 
 <script>
+    /*var emp=tempValue("rl", "emp", false);
+    $("#departmentId").val(emp.bmId)*/
     renderMod = {
         addTable : {
             table: {
@@ -123,6 +122,7 @@
                     // , {field: 'authorized_depart', title: '质检状态', minWidth: 100}
                 ]]
                 , url: "/lifeManage/selectEquipmentAccount"
+                // where:{departmentId:emp.bmId}
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',

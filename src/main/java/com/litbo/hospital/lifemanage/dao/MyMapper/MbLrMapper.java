@@ -20,6 +20,7 @@ public interface MbLrMapper {
             " <if test=\"mbmc != null\">\n" +
             " where mb_mc like CONCAT('%',#{mbmc},'%')" +
             "</if>" +
+            " order by id desc " +
             "</script>")
     List<MbLr> selectAllMb(@Param("mbmc") String mbmc);
 

@@ -164,7 +164,23 @@
             ,layer = layui.layer
             ,layedit = layui.layedit;
 
-        index = layedit.build('yjyaNr'); //建立编辑器
+        index = layedit.build('yjyaNr',{
+            tool:[
+                'strong' //加粗
+                ,'italic' //斜体
+                ,'underline' //下划线
+                ,'del' //删除线
+                ,'|' //分割线
+                ,'left' //左对齐
+                ,'center' //居中对齐
+                ,'right' //右对齐
+                ,'|' //分割线
+                ,'link' //超链接
+                ,'unlink' //清除链接
+                ,'face' //表情
+            ]
+
+        }); //建立编辑器
 
         //触发事件
         var active = {
@@ -199,9 +215,9 @@
 
         form.on('submit(demo1)', function(data){
 
-            var obj = {yjyaNr:layedit.getText(index)};
-            // console.log(obj);
-
+            var obj = {yjyaNr:layedit.getContent(index)};
+            /*console.log(layedit.getContent(index))
+         alert(layedit.getContent(index))*/
             var dataObj = Object.assign(obj,data.field);
 
             console.log(dataObj);
@@ -217,8 +233,12 @@
                 data: JSON.stringify(dataObj),
                 contentType: 'application/json; charset=UTF-8',
                 success: function(result) {
+                    console.log(JSON.stringify(dataObj))
                     layui.layer.alert('提交成功!');
-                    window.parent.location.reload();
+                    setTimeout(function () {
+                        window.parent.location.reload();
+                    },1000)
+
                 },
                 error:function(){
                     layer.alert(JSON.stringify(dataObj), {

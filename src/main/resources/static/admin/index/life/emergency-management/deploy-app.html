@@ -303,7 +303,7 @@
                             tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                             tds.eq(3).html(''); //清空操作
                             $("#imgsurl").val($("#imgsurl").val()+res.data);
-                            console.log($("#imgsurl").val())
+                            // console.log($("#imgsurl").val())
                             return delete this.files[index]; //删除文件队列已经上传成功的文件
                         }
                         this.error(index, upload);
@@ -311,8 +311,8 @@
                         var tr = $("#demoList1").find('tr#upload-' + index)
                             , tds = tr.children();
                         tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-                        console.log("index:" + index);
-                        console.log("upload" + upload);
+                        // console.log("index:" + index);
+                        // console.log("upload" + upload);
                     }
                 }
             ]

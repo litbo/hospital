@@ -110,7 +110,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">预案内容</label>
             <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
-                <textarea id="yjyaNr" name="yjyaNr" class="layui-textarea" readonly></textarea>
+                <textarea class="layui-textarea" name="yjyaNr" id="yjyaNr" readonly="readonly" disabled></textarea>
             </div>
         </div>
     </div>
@@ -187,7 +187,14 @@
     var b = $.getUrlParam("yjyaBh");
     // console.log(b);
     var bmUrl = "/lifeManage/selectYalogByBh" + b;
-
+    layui.use('layedit', function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+        index = layedit.build('yjyaNr',{
+            tool:['|','|']
+        }); //建立编辑器
+    });
     //console.log(bmUrl);
     renderMod.form = {
         val:{
@@ -198,7 +205,7 @@
                 data:{bh:$.getUrlParam("yjyaBh")}
             },
             func:function(data) {
-                // console.log(data);
+                console.log(data);
                 // 判断表单是否为空
                 function hidden(id) {
                     var idValue = $(id).val();
@@ -226,6 +233,9 @@
                 hidden("#yjyaZpjjg");
                 hidden("#yjyaZt");
                 hidden("#yjyaQykssj");
+                $("#yjyaNr").next().find('iframe').contents().find('body').prop("contenteditable",false);
+
+                layui.layedit.setContent(index, data.yjyaNr);
             }
         }
     };
