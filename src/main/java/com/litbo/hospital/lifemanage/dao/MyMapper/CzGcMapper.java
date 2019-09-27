@@ -38,6 +38,7 @@ public interface CzGcMapper {
             " and cz_gc_ngrq &lt;=#{jssj}\n" +
             "</if>" +
             "</where>" +
+            " order by id desc " +
             "</script>")
     List<CzGc> AllDshCzgc(@Param("bh") String bh, @Param("mc") String mc, @Param("ngr") String ngr, @Param("qssj") Date qssj, @Param("jssj") Date jssj);
 
@@ -90,7 +91,7 @@ public interface CzGcMapper {
             "      cz_gc_nrdxg = #{czGcNrdxg,jdbcType=VARCHAR},\n" +
             "      cz_gc_zysdxg = #{czGcZysdxg,jdbcType=VARCHAR},\n" +
             "      cz_gc_bbhdxg = #{czGcBbhdxg,jdbcType=VARCHAR},\n" +
-            "      cz_gc_zpj_shyj = #{czGcZpjShyj,jdbcType=VARCHAR}"+
+            "      cz_gc_zpj_shyj = #{czGcZpjShyj,jdbcType=VARCHAR},\n"+
             "      cz_gc_syts = #{czGcSyts,jdbcType=INTEGER},\n" +
             "      cz_gc_bakssj = #{czGcBakssj,jdbcType=DATE},\n" +
             "      cz_gc_qykssj = #{czGcQykssj,jdbcType=DATE}\n" +

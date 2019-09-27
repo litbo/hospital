@@ -54,7 +54,7 @@
                     <input class="layui-btn layui-btn-sm" id="put" value="导入设备信息" readonly>
                 </div>
             </div>
-            <input type="text" name="eqSbbh" id="eqSbbh">
+            <input type="text" class="hidden" name="eqSbbh" id="eqSbbh">
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -347,7 +347,7 @@
                     url: "/lifeManage/insertOneCzgc",
                     type: "POST",
                     data: [
-                        "eqSbbh","czGcMc", "czGcNr","gcUrl","czGcNgr", "czGcLb", "czGcZys", "czGcNgrq", "czGcBbh"
+                        "eqSbbh","czGcMc", "czGcNr","gcUrl","czGcNgr", "czGcLb", "czGcZys", "czGcNgrq", "czGcBbh","bmId"
                     ],
                     // key:"key",
                     contentType: "application/json",
