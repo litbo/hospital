@@ -34,6 +34,8 @@ public class RoleController {
         }
         return Result.error();
     }
+
+
     //为用户设置角色
     @RequestMapping("/setRole")
     public Result setRole(String userId,String roleId){
@@ -44,9 +46,9 @@ public class RoleController {
         return Result.error();
     }
 
+
     //批量设置角色
     @RequestMapping("/setRoles")
-
     public Result setRoles(@RequestBody SetRolesVo setRolesVo){
         List<String> userIds = setRolesVo.getUserIds();
         for (String userId : userIds) {
@@ -56,6 +58,7 @@ public class RoleController {
         }
         return Result.success();
     }
+
     //查询所有用户基本信息
     @RequestMapping("/listUsers")
     public Result listUsers(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -98,6 +101,17 @@ public class RoleController {
         PageInfo date = new PageInfo(myJsonArray);
 
         return Result.success(date);
+    }
+
+
+    /**
+     * 樊小铭 2019年9月27日
+     * 将角色和岗位进行关联
+     * @return
+     */
+    @RequestMapping("getRoles")
+    public Result getRoles(){
+        return Result.success(roleService.getRoles());
     }
 
 }

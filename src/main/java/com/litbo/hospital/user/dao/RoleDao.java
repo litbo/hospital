@@ -1,5 +1,6 @@
 package com.litbo.hospital.user.dao;
 
+import com.litbo.hospital.supervise.bean.SGangwei;
 import com.litbo.hospital.user.bean.SRole;
 import com.litbo.hospital.user.dao.provider.RoleProvider;
 import com.litbo.hospital.user.vo.SelectUserVo;
@@ -54,4 +55,21 @@ public interface RoleDao {
             "WHERE\n" +
             "u.user_name = #{userName}")
     SRole getRole(String userName);
+
+
+    /**
+     * 樊小铭  2019年9月27日
+     * 从岗位表中拿出岗位信息作为权限
+     * @return
+     */
+    @Select("select gw_id as roleId, gw_name as roleName from s_gangwei")
+    List<SRole> getGangWei();
+
+    /**
+     * 樊小铭  2019年9月27日
+     * 从岗位表中拿出岗位信息作为权限
+     * @return
+     */
+    @Select("select gw_name as roleName from s_gangwei where gw_id = #{id}")
+    String getGangWeiMessage(String id);
 }
