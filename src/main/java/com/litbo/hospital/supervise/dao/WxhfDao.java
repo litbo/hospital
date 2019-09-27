@@ -41,4 +41,6 @@ public interface WxhfDao {
     void wxBmGcsEqXcHf(String bgId);
     @SelectProvider(type = BmGcsEqProvider.class,method = "selectBmGcsEqByX")
     List<SWxbmGcsEqSelect> getBmGcsEqByX(BmGcsEqSelectXVO xvo);
+    @Select(" select count(*) from s_gcs_bm where user_id = #{userId} and bm_id=#{bmId}")
+    int isxzd(String userId, String bmId);
 }
