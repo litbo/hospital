@@ -54,6 +54,7 @@
                     <input class="layui-btn layui-btn-sm" id="put" value="导入设备信息" readonly>
                 </div>
             </div>
+            <input type="text" name="eqSbbh" id="eqSbbh">
             <div class="layui-form-item">
                 <label class="layui-form-label">设备名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -193,7 +194,7 @@
             <div class="layui-form-item subBtn">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+<!--                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                 </div>
             </div>
         </div>
@@ -214,11 +215,31 @@
     var emp=tempValue("rl", "emp", false);
     $("#bmId").val(emp.bmId);
     $("#czGcNgr").val(emp.userXm);
+    var layedit,form,layer;
     // 富文本
     layui.use('layedit', function(){
-        var layedit = layui.layedit;
-        var index=layedit.build('czGcNr');
-        // layedit.build('czGcNr'); //建立编辑器
+        form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+        index = layedit.build('czGcNr',{
+            tool:[
+                'strong' //加粗
+                ,'italic' //斜体
+                ,'underline' //下划线
+                ,'del' //删除线
+                ,'|' //分割线
+                ,'left' //左对齐
+                ,'center' //居中对齐
+                ,'right' //右对齐
+                ,'|' //分割线
+                ,'link' //超链接
+                ,'unlink' //清除链接
+                ,'face' //表情
+            ]
+
+        })
+
 
         /*$('#eqName').on('click', function(){
             console.log($(".eqName").val());
@@ -238,7 +259,11 @@
             layedit.setContent(index, $("#czGcNr2").val());
         });
     });
-    $('#selectEmp').on('click', function(){
+
+
+
+
+        $('#selectEmp').on('click', function(){
         layer.open({
             type: 2,
             title: '选择',
@@ -312,11 +337,17 @@
 
 
                 },*/
+                before:function(){
+                    // var obj = {czGcNr:layedit.getContent(index)};
+                    $("#czGcNr").val(layedit.getContent(index))
+                    return true;
+
+                },
                 form: {
                     url: "/lifeManage/insertOneCzgc",
                     type: "POST",
                     data: [
-                        "eqId","czGcMc", "czGcNr","gcUrl","czGcNgr", "czGcLb", "czGcZys", "czGcNgrq", "czGcBbh"
+                        "eqSbbh","czGcMc", "czGcNr","gcUrl","czGcNgr", "czGcLb", "czGcZys", "czGcNgrq", "czGcBbh"
                     ],
                     // key:"key",
                     contentType: "application/json",
@@ -324,7 +355,7 @@
                         1: "listZb",
                         2:"htYf"
                     },*/
-                    reload: true
+                    reload: "parent"
                 }
             },
             date: [

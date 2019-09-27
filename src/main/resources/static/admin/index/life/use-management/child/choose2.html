@@ -43,14 +43,16 @@
         table.on('toolbar(table1)', function(obj){
 
             var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
-            console.log(checkStatus);
+            // console.log(checkStatus);
             var data = checkStatus.data;
-            console.log(data);
+            // console.log(data);
             var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
             // $.cookie("eqSbbh2",data.eqSbbh);
             var a = data[0].id;
             parent.$('#eqName').val(data[0].eqName);
             parent.$('#eqPmName2').val(data[0].eqPmName);
+            parent.$('#eqSbbh').val(data[0].eqSbbh);
+            // parent.$('#czGcNr2').val(data[0].czGcNr2);
             parent.$('#eqPp2').val(data[0].eqPp);
             parent.$('#eqGg2').val(data[0].eqGg);
             parent.$('#eqXh2').val(data[0].eqXh);
