@@ -364,7 +364,7 @@
                         taskId:$.getUrlParam("taskId"),
                         status:"1"
                     },
-                    shutWin:true,
+                    reload:"parent"
                     // success:function (data) {
                     //     if(data.code == 0){
                     //         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
@@ -375,7 +375,8 @@
                     //
                     // }
                 })
-            }
+            },
+
         },{
             elem:"#disagree",
             func:function () {
@@ -387,7 +388,7 @@
                         taskId:$.getUrlParam("taskId"),
                         status:"2"
                     },
-                    shutWin:true,
+                    reload:"parent"
                     // success:function (data) {
                     //     if(data.code == 0){
                     //
