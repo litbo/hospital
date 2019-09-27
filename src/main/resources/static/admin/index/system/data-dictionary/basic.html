@@ -175,7 +175,7 @@
                                 console.log(data);
                                 layer.closeAll('loading');
                                 if (data.code === 0) {
-                                    layer.msg("删除成功！", {icon: 1, time: 2000, shade: 0.2});
+                                    layer.msg(data.data, {icon: 1, time: 2000, shade: 0.2});
                                     location.reload(true);
                                 } else {
                                     layer.msg("删除失败！", {icon: 2, time: 3000, shade: 0.2})

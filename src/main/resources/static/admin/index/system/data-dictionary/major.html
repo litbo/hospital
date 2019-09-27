@@ -130,9 +130,9 @@
                     var deVo = [],ziDian = {};
                     if (data.length > 0) {
                         for (var i = 0; i < data.length; i++) {
-                            ziDian["dictId"] = data[i].dictId;
-                            /* ziDian["dictName"] = data[i].dictName;*/
-                            ziDian["bName"] = data[i].bname;
+                            ziDian.dictId = data[i].dictId;
+                            ziDian.dictName = data[i].bname;
+                            ziDian.bName = data[i].bname;
                             console.log(ziDian);
                             deVo.push(ziDian);
                             ziDian = {};
@@ -144,7 +144,7 @@
                     layer.confirm("确定要删除吗？", function () {
                         $.ajax({
                             type: "POST",
-                            url: "/specialEq/deleteSpecialEq",
+                            url: "/eqdict/delByTNameAndIds",
                             async: false,/*同步传输*/
                             contentType: 'application/json',
                             dataType: 'json',

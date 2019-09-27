@@ -166,19 +166,6 @@ public class DictController {
        return Result.error();
     }
 
-    @Transactional
-    @RequestMapping("delByTNameAndId")
-    public Result delByTNameAndId(DictVo dictVo){
-
-        try{
-           dictDao.delByTNameAndId(dictVo);
-
-        }catch (Exception e){
-            System.out.println("删除失败");
-            return Result.error();
-        }
-        return  Result.success();
-    }
 
 
     /**
@@ -186,6 +173,7 @@ public class DictController {
      * @param deleteVo
      * @return
      */
+    @Transactional
     @RequestMapping("delByTNameAndIds")
     public Result deleteTNameAndIds(@RequestBody DeleteVo deleteVo){
         System.out.println("请求到了删除方法！");
@@ -194,15 +182,13 @@ public class DictController {
         DictVo[] dictVos = deleteVo.getDictVos();
         for(DictVo vo : dictVos){
             vo.setBName(vo.getDictName());
-            System.out.println("vo的信息："+vo);
-            Result resultMessage = delByTNameAndId(vo);
-            if(resultMessage.getCode() != 0){
+            if(dictDao.delByTNameAndId(vo)<= 0){
                 result++;
             }
         }
 
         if(result == 0){
-            return Result.success();
+            return Result.success("已删除所选数据");
         }
         return Result.success("有"+result+"个数据未成功删除！");
 
@@ -215,7 +201,6 @@ public class DictController {
 
         return Result.success(dictDao.getByTNameAndId(bName,dictId));
     }
-
 
 
 
