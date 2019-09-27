@@ -37,25 +37,25 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label">发布部门<span class="sign">*</span></label>
+            <div class="layui-form-item">
+                <label class="layui-form-label">标题<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled lay-verify="required" id="bmName" class="layui-input" style="height:46px;padding-left:60px;">
-                    <input type="hidden" name="bmId" id="bmId">
+                    <input type="text" name="ggbt" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">起始日期</label>
                 <div class="layui-input-block">
                     <input type="text" id="date1" name="kssj" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">截止日期</label>
-                <div class="layui-input-block">
-                    <input type="text" name="jssj" id="date2" autocomplete="off" class="layui-input">
-                </div>
-            </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label class="layui-form-label">截止日期</label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <input type="text" name="jssj" id="date2" autocomplete="off" class="layui-input">-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -72,10 +72,11 @@
                     <input type="text" name="ngsj" disabled autocomplete="off" class="layui-input"id="date3" value="2018-12-09">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">标题<span class="sign">*</span></label>
+            <div class="layui-form-item" pane>
+                <label class="layui-form-label">发布部门<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="ggbt" autocomplete="" class="layui-input" lay-verify="required">
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled lay-verify="required" id="bmName" class="layui-input">
+                    <input type="hidden" name="bmId" id="bmId">
                 </div>
             </div>
         </div>
@@ -93,8 +94,8 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn layui-btn-lg" style="margin-left: 45%" lay-submit="" lay-filter="submit">提交</button>
+                <button id="close" class="layui-btn layui-btn-lg">取消</button>
             </div>
         </div>
     </div>
@@ -102,9 +103,6 @@
 <div id="tips">
 
 </div>
-
-
-
 <script>
     $(function() {
         var emp =  tempValue("rl","emp",false);
@@ -131,11 +129,10 @@
             date:[
                 {
                     elem:"#date1",
-                    value:today0
-                },
-                {
-                    elem:"#date2",
-                    value:today0
+                    value:false,
+                    type: "date",
+                    format: "yyyy-MM-dd",
+                    range: true
                 },
                 {
                     elem:"#date3",

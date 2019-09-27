@@ -102,13 +102,10 @@
     </div>
 </div>
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>批量删除</button>
-        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>-->
-    </div>
+
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input xs-100" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
@@ -164,29 +161,29 @@
                         "data": res.data.list //解析数据列表
                     }
                 }
-                , done: function (obj) {
-                    tableFunc({
-                        "obj": obj,
-                        "toolFunc": [  {
-                            send:{
-                                id:"table",
-                                filter:"table1",
-                                name:"ggIds",
-                                event:"del",
-                                url:"/gg/delGg",
-                                type:"POST",
-                                par:"id",
-                                reload:true,
-                                reTable:true
-                            },
-                            tool:"toolbar",
-                            event:"del"
-
-                        }
-
-                        ]
-                    })
-                }
+                // , done: function (obj) {
+                //     tableFunc({
+                //         "obj": obj,
+                //         "toolFunc": [  {
+                //             send:{
+                //                 id:"table",
+                //                 filter:"table1",
+                //                 name:"ggIds",
+                //                 event:"del",
+                //                 url:"/gg/delGg",
+                //                 type:"POST",
+                //                 par:"id",
+                //                 reload:true,
+                //                 reTable:true
+                //             },
+                //             tool:"toolbar",
+                //             event:"del"
+                //
+                //         }
+                //
+                //         ]
+                //     })
+                // }
             },
 
             reSet:{
