@@ -14,6 +14,14 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-checkbox-disbaled span {
+             background-color: #E2E2E2 !important;
+        }
+        .layui-form-checked span, .layui-form-checked:hover span {
+            background-color: #5FB878 !important;
+        }
+    </style>
 </head>
 
 <form class="layui-form layui-form-pane" action="" lay-filter="form">
@@ -121,11 +129,11 @@
         <div class="layui-form-item" id="bfyy" style="display:none;" pane>
             <label class="layui-form-label">报废原因</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="reasonIds" value="1" disabled title="严重损坏无法修复或维修费用过高">
+                <input type="checkbox"  name="reasonIds"  value="1" disabled title="严重损坏无法修复或维修费用过高">
                 <input type="checkbox" name="reasonIds" value="2" disabled title="国家有明确要求">
                 <input type="checkbox" name="reasonIds" value="3" disabled title="失效或功能低下、技术落后，不能满足使用需求">
             </div>
-            <div class="layui-input-block">
+            <div class="layui-input-block" >
                 <input type="checkbox" name="reasonIds" value="4" disabled title="严重污染环境，危害人身安全与健康">
                 <input type="checkbox" name="reasonIds" value="5" disabled title="国家规定淘汰">
             </div>
