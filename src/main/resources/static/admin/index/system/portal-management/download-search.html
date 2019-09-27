@@ -23,11 +23,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>批量删除</button>
-
-<!--        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>-->
-    </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
             <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
@@ -61,29 +56,6 @@
                 }
             }
 
-            , done: function (obj) {
-                tableFunc({
-                    "obj": obj,
-                    "toolFunc": [  {
-                        send:{
-                            id:"table",
-                            filter:"table1",
-                            name:"ggxzIds",
-                            event:"del",
-                            url:"/ggxz/delGgxz",
-                            type:"POST",
-                            par:"id",
-                            reload:true,
-                            reTable:true
-                        },
-                        tool:"toolbar",
-                        event:"del"
-
-                    }
-
-                    ]
-                })
-            }
 
         }
     }

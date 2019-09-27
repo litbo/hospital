@@ -1403,7 +1403,7 @@ var main_list =
                                     "list": [
                                         {
                                             "title": "合同录入",
-                                            "url": "./safe/service-management/contract-input.html",
+                                            "url": "./safe/service-management/contract-input1.html",
                                             "id": "4395",
                                             "shiro": "a"
                                         },

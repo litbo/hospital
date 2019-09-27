@@ -26,25 +26,11 @@
         "shiro": "a"
       },
       {
-        "title": "共享信息",
-        "url": "javascript:void;",
-        "id": "12",
+        "title": "通知公告",
+        "url": "./home/announcement.html",
+        "id": "1",
         "icon": "star",
-        "shiro": "a",
-        "children": [
-          {
-            "title": "通知公告",
-            "url": "./home/announcement.html",
-            "id": "120",
-            "shiro": "a"
-          },
-          {
-            "title": "公共信息",
-            "url": "./home/public_info.html",
-            "id": "121",
-            "shiro": "a"
-          }
-        ]
+        "shiro": "a"
       }
     ]
   },
@@ -1368,7 +1354,7 @@
                 "children": [
                   {
                     "title": "合同录入",
-                    "url": "./safe/service-management/contract-input.html",
+                    "url": "./safe/service-management/contract-input1.html",
                     "id": "40100",
                     "shiro": "HTLR"
                   },
@@ -3641,13 +3627,6 @@
                 "shiro": "YHSZ"
               },
               {
-                "title": "角色设置",
-                "url": "./system/user-management/role-setting.html",
-                "icon": "users-cog",
-                "id": "7201",
-                "shiro": "JSSZ"
-              },
-              {
                 "title": "用户权限分配",
                 "url": "./system/user-management/right-setting.html",
                 "icon": "user-lock",
@@ -3692,7 +3671,7 @@
                 "shiro": "GGCX"
               },
               {
-                "title": "公告类别管理",
+                "title": "字典管理",
                 "url": "./system/portal-management/announce-category.html",
                 "icon": "sliders-h",
                 "id": "7303",
@@ -3707,21 +3686,21 @@
             "id": "731",
             "children": [
               {
-                "title": "拟稿",
+                "title": "文件上传",
                 "url": "./system/portal-management/download-draft.html",
                 "icon": "pen",
                 "id": "7310",
                 "shiro": "NG"
               },
               {
-                "title": "审核",
+                "title": "上传审核",
                 "url": "./system/portal-management/download-auditing.html",
                 "icon": "clipboard-check",
                 "id": "7311",
                 "shiro": "a"
               },
               {
-                "title": "查询",
+                "title": "统计查询",
                 "url": "./system/portal-management/download-search.html",
                 "icon": "search",
                 "id": "7312",

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>规范编制</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        /*.layui-form-label{*/
+        /*    padding: 8px 6px!important;*/
+        /*}*/
+        /*.layui-form-label{*/
+        /*    width:120px;*/
+        /*}*/
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="layui-row col-xs-12 padRight">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-row">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>保维合同录入</legend>
+            </fieldset>
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">合同编号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="id" disabled class="layui-input" placeholder="自动编号" autocomplete="off" >
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">合同名称<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="htName" class="layui-input" autocomplete="off" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">合同日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="htTime" class="layui-input" autocomplete="off" id="htDate">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">合同类型</label>
+                    <div class="layui-input-block">
+                        <select name="htLx">
+                            <option>维修合同</option>
+                            <option>111</option>
+                            <option>222</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">合同金额<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="htPrice" class="layui-input" autocomplete="off" placeholder="0" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item" >
+                    <label class="layui-form-label">维修商<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="sbcsId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="padding-left:60px;">
+                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectWxs">选择</button>
+                        <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">维修商代表</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="heWxsdb" class="layui-input"  autocomplete="off" >
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">院方代表</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="htYfdb" class="layui-input"  autocomplete="off" placeholder="Admin">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">合同描述</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="htMs"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">支付方式</label>
+                    <div class="layui-input-block">
+                        <select name="htZffs">
+                            <option value="1">一次</option>
+                            <option value="2">二次</option>
+                            <option value="3">三次</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">经费来源</label>
+                    <div class="layui-input-block">
+                        <select name="">
+                            <option>其他</option>
+                            <option>111</option>
+                            <option>222</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">保修开始日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="htBxksTime" class="layui-input" autocomplete="off" id="htKsDate">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">保修结束日期</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="htBxjsTime" class="layui-input" autocomplete="off" id="htJsDate">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">响应时间(小时)</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="htXyTime" class="layui-input"  autocomplete="off" placeholder="72">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">保修范围</label>
+                    <div class="layui-input-block">
+                        <select name="htBxfw">
+                            <option>全保</option>
+                            <option>111</option>
+                            <option>222</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">含配件费</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="htHpjf" value="1" title="是">
+                        <input type="radio" name="htHpjf" value="2" title="否" checked>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">合同附件</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input fileName" style="padding-left:80px;">
+                        <button type="button" value="选择文件" class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"
+                                onclick="javascript:$('.file').click();">选择文件</button>
+                        <input type="file" class="file" style="display: none;" id="selectFile" onchange="javascript:$('.fileName').val(this.files[0].name);" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" >设备名称<span class="sign">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="padding-left:60px;">
+                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<button class="warm_btn layui-btn layui-btn-fluid layui-btn-warm" lay-submit="" id="btnn" lay-filter="btnn">提交</button>
+</div>
+<script>
+    var formData = {};
+
+
+    layui.use(['form', 'upload'], function() {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form;
+
+
+        //选完文件后不自动上传
+        upload.render({
+            elem: '#selectFile',
+            url: "/eq/uploadFile",
+            accept: "file",
+            acceptMime: "file/*",
+            auto: false,
+            bindAction: "#file",
+            field: "file",
+            choose: function (obj) {
+                obj.preview(function (index, file, result) {
+                    console.log(index); //得到文件索引
+                    console.log(file); //得到文件对象
+                    console.log(result); //得到文件base64编码，比如图片
+                })
+            }, done: function (res, index, upload) {
+                if (res.code === 0) {
+                    formData.htFjurl = res.data
+                    layer.msg('选择成功！', {
+                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                }
+            }
+        });
+    });
+
+
+
+    renderMod = {
+        bind: {
+            selectItem: [{
+                elem: "#selectData",
+                cb: "/benefical/select/listSelectCols",
+                db: "/benefical/select/listSelect",
+                name: "dtdt",
+                key: "eq",
+                data: formData
+            },
+                {
+                    elem: "#selectWxs",
+                    cb: "/supervise/csgl/eqcsTitles",
+                    db: "/supervise/csgl/listEqCs",
+                    name: "dtdt",
+                    key: "bm",
+                    data: formData
+                }]
+        },
+        form: {
+            // file:[
+            //     {
+            //         elem:"#sbzp",
+            //         url:"/eq/uploadFile",
+            //         accept:"file",
+            //         acceptMime:"file/*",
+            //         auto:true,
+            //         bindAction:"#file",
+            //         field:"file",
+            //         choose:function(obj){
+            //             files = obj.pushFile();
+            //             obj.preview(function(index,file,result){
+            //                 $(".img_show").html($("<img>").attr({"src":result,"id":"show_img"}));
+            //             })
+            //         },done:function(res,index,upload){
+            //             if(res.code===0){
+            //                 formData.htFjurl=res.data
+            //                 layer.msg('选择成功！', {
+            //                     time: 1000 //2秒关闭（如果不配置，默认是3秒）
+            //                 });
+            //             }
+            //             console.log(arguments);
+            //             return delete files[index];
+            //         },error:function(index,upload){
+            //             console.log("index:"+index);
+            //             console.log("upload"+upload);
+            //         }
+            //     },],
+            date: [
+                {
+                    elem: "#htDate",
+                    value: false,
+                    type:"date",
+                    format:'yyyy-MM-dd'
+                },
+                {
+                    elem: "#htKsDate",
+                    value:false,
+                    type:"date",
+                    format:'yyyy-MM-dd'
+                },
+                {
+                    elem: "#htJsDate",
+                    value:false,
+                    type:"date",
+                    format:'yyyy-MM-dd'
+                }
+            ],
+            submit:{
+                filter: "btnn",
+                form:{
+                    url:"/fwht/add",
+                    type:"POST",
+                    data:["id","htName","htTime","htLx","htPrice","sbcsId","heWxsdb","htYfdb","htZffs",
+                        "htJfly","htBxksTime","htBxjsTime","htXyTime","htBxfw","htHpjf","htFjurl","eqId","htMs"],
+                    reload:"parent"
+                }
+            },
+        },
+    }
+</script>
+</body>
+
+</html>

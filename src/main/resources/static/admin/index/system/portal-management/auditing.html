@@ -24,7 +24,7 @@
 
 <script type="text/html" id="toolBar">
     <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="edit" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>批量删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="edit" style="background: #CC0033"><i class="layui-icon layui-icon-delete"></i>删除</button>
         <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
     </div>
     <div class="hidden-xs" id="moreBar">
@@ -57,10 +57,6 @@
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -78,11 +74,8 @@
                 url:"eq/listEqByX",
                 type:"serch",
                 where: {
-
                 }
-
             }
-
         }
 
 
