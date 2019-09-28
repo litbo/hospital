@@ -99,4 +99,11 @@ public class WxhfServiceImpl implements WxhfService {
         List<SWxbmGcsEqSelect> data = wxhfDao.getBmGcsEqByX(xvo);
         return new PageInfo(data);
     }
+
+    @Override
+    public Boolean isxzd(String userId, String bmId) {
+        int ct= wxhfDao.isxzd(userId,bmId);
+        if (ct>0) return true;
+        return false;
+    }
 }

@@ -38,22 +38,36 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+
+
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <fieldset class="layui-elem-field layui-field-title">
             <legend>设备信息</legend>
         </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
+                <label class="layui-form-label">设备编号<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input readonly type="text" name="eqSbbh"  class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" readonly name="eqName"  class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">设备品名<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqPmName" disabled class="layui-input">
+                    <input type="text" name="eqPmName" readonly  class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">设备品牌</label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqPp" disabled class="layui-input">
+                    <input type="text" name="eqPp" readonly class="layui-input">
                 </div>
             </div>
         </div>
@@ -61,15 +75,28 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">设备规格</label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqGg" disabled class="layui-input">
+                    <input type="text" name="eqGg" readonly class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">设备型号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqXh" disabled class="layui-input">
+                    <input type="text" name="eqXh" readonly class="layui-input">
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="bmName" id="bmName" readonly class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-block">
+                        <img id="gcc" src="" style="display:block;color: red;" alt="未上传图片或图片异常">
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="layui-row">
@@ -80,13 +107,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">操作规程名称 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" disabled class="layui-input">
+                    <input type="text" name="czGcMc" readonly class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">操作规程内容</label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="czGcNr" disabled id="czGcNr" class="layui-textarea"></textarea>
+                    <textarea type="text" name="czGcNr" readonly id="czGcNr" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
@@ -94,31 +121,31 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">拟稿人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcNgr" id="czGcNgr" disabled class="layui-input">
+                    <input type="text" name="czGcNgr" id="czGcNgr" readonly class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">类别<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcLb" disabled value="操作流程" class="layui-input">
+                    <input type="text" name="czGcLb" readonly value="操作流程" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">总页数<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcZys" disabled class="layui-input">
+                    <input type="text" name="czGcZys" readonly class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">拟稿日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcNgrq" id="czGcNgrq" disabled class="layui-input">
+                    <input type="text" name="czGcNgrq" id="czGcNgrq" readonly class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">版本号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcBbh" disabled value="V1.0" class="layui-input">
+                    <input type="text" name="czGcBbh" readonly value="V1.0" class="layui-input">
                 </div>
             </div>
         </div>
@@ -131,19 +158,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcShr" autocomplete="off" class="layui-input">
+                    <input readonly type="text" name="czGcShr" id="czGcShr" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">审核日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcShrq" autocomplete="off" class="layui-input">
+                    <input readonly type="text" name="czGcShrq" id="czGcShrq" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">试用天数(天)<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcSyts" autocomplete="off" class="layui-input">
+                    <input readonly type="text" name="czGcSyts" id="czGcSyts" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -151,206 +178,145 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">审核意见<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="czGcShyj" autocomplete="off" class="layui-textarea"></textarea>
+                    <textarea type="text" name="czGcShyj" id="czGcShyj" autocomplete="off" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
+
+        <input type="text" name="gcUrl" id="gcUrl" class="hidden">
         <div class="col-xs-12">
             <div class="layui-form-item subBtn">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+<!--                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                 </div>
             </div>
         </div>
     </div>
+    <input type="text" class="hidden" id="czGcZt" name="czGcZt">
     <input type="hidden" name="bmId" id="bmId" class="layui-input">
+    <input type="text" class="hidden" name="id" id="id">
+
+
 </form>
+
+
 <div id="tips">
 
 </div>
 
 
 <script>
-    formData = {};
-    formData.count1 = 0;
-    formData.eqSbzp = [];
-    var emp=tempValue("rl", "emp", false);
-    console.log(emp);
-    $("#bmId").val(emp.bmId);
-    $("#czGcNgr").val(emp.userXm);
 
-    // 富文本
-    layui.use('layedit', function(){
-        var layedit = layui.layedit;
-        layedit.build('czGcNr'); //建立编辑器
+    $("#id").val($.getUrlParam("id"));
+    // function btnClick(){
+    //     $("#btn_forbidden").click(function(){
+    //
+    //     })
+    // }
+    //
+    // $(document).ready(function(){
+    //     btnClick();
+    // });
+
+    // 表单
+    layui.use(['form','layedit'], function(){
+
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+        index = layedit.build('czGcNr',{
+            tool:[]
+        }); //建立编辑器
+
+
+
+        form.on('submit(demo1)', function(data){
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // });
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: '/lifeManage/CzgcAfterSh',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json; charset=UTF-8',
+                success: function(result) {
+                    layui.layer.alert('提交成功!');
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    window.top.location.reload();
+                },
+                error:function(){
+                    layer.alert(JSON.stringify(data.field), {
+                        title: '最终的提交信息'
+                    });
+                    layer.alert("error");
+                }
+            });
+            return false;
+        });
     });
 
-    renderMod = {
+    var emp = tempValue("rl", "emp", false);
 
-       /* addTable: {
-
-        },*/
-        /*bind: {
-            addItem: [
-                {
-                    elem: "#dataTable1",
-                    base: "./child/medical-equipment.html",
-                    name: "vg",
-                    key: "key",
-                    before: function () {
-                        // console.log("scsName");
-                        // $("#htYf").val($("#sbcsIdScs").val());
-                    }
-                },
-                {
-                    elem: "#addEmp",
-                    base: "./child/add-Yf.html",
-                    name: "dtdt",
-                    key: "date"
-                }
-
-            ],
-            delItem: ".delNew",
-            selectItem: [
-                {
-                    elem: "#selectEmp",
-                    cb: "/lifeManage/listHtBiaotou",
-                    db: "/cs/listScs",
-                    name: "dtdt",
-                    key: "radio",
-                    data: formData2,
-                    func:function(){
-                        console.log(formData2);
-                    }
-                }
-
-            ]
-        },*/
-        form: {
-            submit: {
-               /* before: function (param) {
-                    var tv = getTableValue("table");
-                    var ab=$("#scsName").val();
-                    $("#htYfName").val(ab);
-                    if (doJudg({
-                        "undefined": [formData2.radio],
-                        0: [tv]
-                    })) {
-                        putMsg({
-                            alert: "无法提交空数据！"
-                        });
-                        return false;
-                    }
-                    return param = {
-                        1: tv,
-                        2: formData2.radio[0]["sbcsIdScs"]
-                    };
-
-
-                },*/
-                form: {
-                    url: "/lifeManage/addEqHt",
-                    type: "POST",
-                    data: [
-                        "htBianhao", "htQyd", "htJf","htJfq","htZgbfb", "htBzr", "htTsr", "htYsfk", "htZbj",
-                        "htScrq", "htBxq", "htBxxy", "htBxdc", "htZgfg", "htBycs", "htLpjyhj","sbcsIdScs","htYfName"
-                    ],
-                    // key:"key",
-                    contentType: "application/json",
-                  /*  param: {
-                        1: "listZb",
-                        2:"htYf"
-                    },*/
-                    reload: true
-                }
+    //console.log(bmUrl);
+    renderMod.form = {
+        val:{
+            filter:"forms",//与form标签lay-filter相同
+            get:{
+                url:"/lifeManage/selectOneCzgc",
+                type:"POST",
+                data:{id:$.getUrlParam("id")}
             },
-            date: [
+            func:function(data) {
+                // 获取时间
+                function CurentTime()
                 {
-                    elem: "#czGcNgrq",
-                    value: today0,
-                    type: "date",
-                    format: 'yyyy-MM-dd'
+                    var now = new Date();
+
+                    var year = now.getFullYear();       //年
+                    var month = now.getMonth() + 1;     //月
+                    var day = now.getDate();            //日
+
+                    var clock = year + "-";
+
+                    if(month < 10)
+                        clock += "0";
+
+                    clock += month + "-";
+
+                    if(day < 10)
+                        clock += "0";
+
+                    clock += day;
+
+                    return(clock);
                 }
-            ],
-            file: [
-                {
-                    elem: "#sbzp",
-                    url: "/lifeManage/importdjhwimgurls",
-                    accept: "images",
-                    acceptMime: "image/*",
-                    multiple: true,
-                    auto: false,
-                    bindAction: "#sbzp_sub",
-                    number: 6,
-                    field: "imgs",
-                    choose: function (obj) {
-                        if (formData.count1 > 1) {
-                            putMsg({
-                                alert: "最多只能上传1张图！"
-                            });
-                            return false;
-                        }
-                        var files = this.files = obj.pushFile();
-                        obj.preview(function (index, file, result) {
-                            var tr = $(['<tr id="upload-' + index + '">'
-                                , '<td>' + file.name + '</td>'
-                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
-                                , '<td>等待上传</td>'
-                                , '<td>'
-                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
-                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-                                , '</td>'
-                                , '</tr>'].join(''));
+                $("#czGcShr").val(emp.userXm);
+                $("#czGcShrq").val(CurentTime());
+                $("#czGcSyts").val("30");
+                $("#czGcZt").val("1");
+                var url= $("#gcUrl").val();
+                $("#gcc").attr("src",url.substring(0, url.lastIndexOf(',')))
+                $("#czGcNr").next().find('iframe').contents().find('body').prop("contenteditable",false);
+                layui.layedit.setContent(index, data.czGcNr);
 
-                            //查看
-                            tr.find('.demo-see').on('click', function () {
-                                layOpen({
-                                    type: 1,
-                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
-                                    area: ["80%", "80%"]
-                                });
-                                return false;
-                            });
-
-                            //删除
-                            tr.find('.demo-delete').on('click', function () {
-                                layer.confirm("确认删除这张图吗？", function (index) {
-                                    delete files[index]; //删除对应的文件
-                                    tr.remove();
-                                    var inp = $("#sbzp").next().val("");
-                                    formData.count1--;
-                                    layer.close(index);
-                                });
-                                return false;
-                            });
-
-                            $("#demoList1").append(tr);
-                            formData.count1++;
-                        });
-                    }, done: function (res, index, upload) {
-                        if (res.code === 0) {
-                            formData.eqSbzp.push(res.data);
-                            var tr = $("#demoList1").find('tr#upload-' + index)
-                                , tds = tr.children();
-                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-                            tds.eq(3).html(''); //清空操作
-                            $("#gcUrl").val($("#gcUrl").val() + res.data);
-                            console.log($("#gcUrl").val())
-                            return delete this.files[index]; //删除文件队列已经上传成功的文件
-                        }
-                        this.error(index, upload);
-                    }, error: function (index, upload) {
-                        var tr = $("#demoList1").find('tr#upload-' + index)
-                            , tds = tr.children();
-                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-                        console.log("index:" + index);
-                        console.log("upload" + upload);
-                    }
-                }
-            ]
+            }
+        },
+        date:{
+            elem:"#yjyaZpjsqsj",
+            format:'yyyy-MM-dd',
+            isInitValue:true,
+            value:today
         }
-    }
+    };
+
+
+
+
 </script>
 </body>
 
