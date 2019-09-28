@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
@@ -96,6 +97,7 @@
             <div class="layui-input-block">
                 <button class="layui-btn layui-btn-lg" style="margin-left: 45%" lay-submit="" lay-filter="submit">提交</button>
                 <button id="close" class="layui-btn layui-btn-lg">取消</button>
+                <button class="layui-btn site-demo-active" id="ddel" data-type="tabDelete">删除</button>
             </div>
         </div>
     </div>
@@ -103,6 +105,9 @@
 <div id="tips">
 
 </div>
+
+
+
 <script>
     $(function() {
         var emp =  tempValue("rl","emp",false);
