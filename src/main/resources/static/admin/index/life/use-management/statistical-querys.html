@@ -16,9 +16,10 @@
 
 <!-- 表格 -->
 <table class="layui-hide" id="table" lay-filter="table1"></table>
+<br>
 
 <p style="margin-bottom: 50px;float: right;margin-right: 20px;font-size:17px;color:#666;">
-    预案合计：<span style="color:#666" id="yahj"></span>件&nbsp;
+    操作规程合计：<span style="color:#666" id="yahj"></span>件&nbsp;
     已备案：<span style="color:#666" id="yba"></span>件&nbsp;
     试用中：<span style="color:#666" id="syz"></span>件&nbsp;
     已弃用：<span style="color:#666" id="yqy"></span>件
@@ -91,7 +92,7 @@
     function pText(){
         $.ajax({
             type: "POST",
-            url: '/lifeManage/AllTypeCount',
+            url: '/lifeManage/CzgcTypeCount',
             success: function(result) {
                 $("#yahj").text(result.data[0]);
                 $("#yba").text(result.data[1]);
@@ -113,10 +114,10 @@
                     {type: 'checkbox', fixed: 'left'}
                     ,{field:'xh', title:'序号',templet:'#xh',width:80}
                     ,{field:'czGcZt', toolbar:'#jsonChange', title:'标志', width:80}
-                    ,{field:'czGcId',title:'编号'}
-                    ,{field:'czGcName',title:'名称', width:140}
+                    ,{field:'id',title:'编号'}
+                    ,{field:'czGcMc',title:'名称', width:140}
                     ,{field:'czGcNgr', title:'拟稿人', width:130}
-                    ,{field:'CzGcShr', title:'审核人', width:130}
+                    ,{field:'czGcShr', title:'审核人', width:130}
                     ,{field:'czGcShrq', title:'审核日期'}
                     ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
                 ]]

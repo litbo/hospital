@@ -94,17 +94,24 @@ public interface CzGcMapper {
             "      cz_gc_zpj_shyj = #{czGcZpjShyj,jdbcType=VARCHAR},\n"+
             "      cz_gc_syts = #{czGcSyts,jdbcType=INTEGER},\n" +
             "      cz_gc_bakssj = #{czGcBakssj,jdbcType=DATE},\n" +
-            "      cz_gc_qykssj = #{czGcQykssj,jdbcType=DATE}\n" +
+            "      cz_gc_qykssj = #{czGcQykssj,jdbcType=DATE},\n" +
+            "      cz_gc_zpjjd=#{czGcZpjjd,jdbcType=VARCHAR}" +
             "    where id = #{id,jdbcType=VARCHAR}")
     int updateOneCzgc(CzGc gc);
 
     /*弃用*/
-    @Update("update cz_gc set cz_gc_zt ='0' where id=#{id}")
-    int updateCzgcZt(String id);
+    @Update("<script>" +
+            "update cz_gc set cz_gc_zt ='0'" +
+            "<if test=\" date !=null\">" +
+            ",cz_gc_qykssj = #{date,jdbcType=DATE}" +
+            "</if>"+
+            " where id=#{id}" +
+            "</script>")
+    int updateCzgcZt(@Param("id") String id, @Param("date") Date date);
 
     /*统计查询*/
     @Select("<script>" +
-            "select cz_gc_zt,id,cz_gc_mc,cz_gc_ngr,cz_gc_shr,cz_gc_shrq,cz_gc_zpjjd from cz_gc\n" +
+            "select cz_gc_zt,id,cz_gc_sxrq,cz_gc_mc,cz_gc_ngr,cz_gc_shr,cz_gc_shrq,cz_gc_zpjjd from cz_gc\n" +
             "<where>" +
             " cz_gc_shr is not null and cz_gc_shrq is not null\n"+
             "<if test=\" zt!=null and zt!='' \">" +
@@ -123,6 +130,7 @@ public interface CzGcMapper {
             "and cz_gc_mc like CONCAT('%',#{mc},'%')\n " +
             "</if>" +
             "</where>" +
+            " order by id desc" +
             "</script>")
     List<CzGc> Tjcx(@Param("zt") String zt, @Param("qssj") Date qssj, @Param("jssj") Date jssj, @Param("bh") String bh, @Param("mc") String mc);
 

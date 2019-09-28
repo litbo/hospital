@@ -69,6 +69,12 @@
                 <input id="czGcShrq" type="text" name="czGcShrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
+        <div class="layui-inline" style="margin-left: 8px;">
+            <label class="layui-form-label" style="width: 100px;">生效日期</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
+                <input id="czGcSxrq" type="text" name="czGcSxrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
         <div class="layui-inline">
             <label class="layui-form-label" style="width: 90px;">审核意见</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
@@ -92,6 +98,12 @@
                 <input id="czGcZys" type="text" name="czGcZys" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">操作规程内容</label>
+            <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
+                <textarea id="czGcNr" name="czGcNr" class="layui-textarea" readonly></textarea>
+            </div>
+        </div>
         <div class="layui-inline" style="margin-left: 10px;">
             <label class="layui-form-label" style="width: 90px;">部门名称</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 130px;">
@@ -102,6 +114,12 @@
             <label class="layui-form-label" style="width: 100px;">版本号</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
                 <input id="czGcBbh" type="text" name="czGcBbh" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline" style="margin-left: 15px;">
+            <label class="layui-form-label">试用天数(天)</label>
+            <div class="layui-input-block" style="width: 140px;">
+                <input id="czGcSyts" name="czGcSyts" class="layui-input" readonly></input>
             </div>
         </div>
     </div>
@@ -157,25 +175,6 @@
 
     </div>
 
-    <!--第九行-->
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">生效日期</label>
-            <div class="layui-input-block" style="width: 750px;">
-                <input id="czGcSxrq" name="czGcSxrq" class="layui-input" readonly></input>
-            </div>
-        </div>
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">试用天数(天)</label>
-            <div class="layui-input-block" style="width: 750px;">
-                <input id="czGcSyts" name="czGcSyts" class="layui-input" readonly></input>
-            </div>
-        </div>
-    </div>
-
-
-
-
 
 
     <!--第八行-->
@@ -216,7 +215,14 @@
 </form>
 
 <script>
-
+    layui.use('layedit', function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+        index = layedit.build('czGcNr',{
+            tool:[]
+        }); //建立编辑器
+    });
 
 
     //console.log(bmUrl);
@@ -259,6 +265,10 @@
                 hidden("#czGcZt");
                 hidden("#czGcQykssj");
                 hidden("#czGcZpjShyj");
+
+                $("#czGcNr").next().find('iframe').contents().find('body').prop("contenteditable",false);
+
+                layui.layedit.setContent(index, data.czGcNr);
             }
         }
     };
