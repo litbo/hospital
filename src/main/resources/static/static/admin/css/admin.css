@@ -2662,3 +2662,26 @@ html {
   border-color: #7d96ef!important;
 }
 /*# sourceMappingURL=admin.css.map */
+
+ body{
+   background-color: #f2f2f2;
+ }
+.layui-table-tool{
+  background-color: #fff;
+}
+.layui-table-box{
+  margin: 10px 10px;
+  background-color: #fff;
+  box-sizing: border-box !important;
+}
+.layui-table-page{
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 10px;
+}
+.layui-table-view{
+  background-color: #fff;
+}
+.addBtn{
+  margin-top: 5px;
+}
