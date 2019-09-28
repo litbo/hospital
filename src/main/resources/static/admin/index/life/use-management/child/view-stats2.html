@@ -11,207 +11,228 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 130px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 130px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+
+        input[type="file"] {
+            margin: 7px;
+        }
+    </style>
 </head>
 <body>
 
-<form class="layui-form" action="" style="margin-top: 20px;" lay-filter="forms">
-
-    <!--第一行-->
-    <div class="layui-form-item">
-        <div class="layui-inline spanDiv">
-            <label class="layui-form-label">设备编号</label>
-            <div class="layui-input-block" style="width: 200px;">
-                <input id="eqSbbh" type="text" name="eqSbbh" autocomplete="off" placeholder="" class="layui-input" readonly>
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>基本信息</legend>
+    </fieldset>
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备编号</label>
+                <div class="layui-input-block" >
+                    <input id="eqSbbh" type="text" name="eqSbbh" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">版本号</label>
+                <div class="layui-input-block">
+                    <input id="czGcBbh" type="text" name="czGcBbh" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
             </div>
         </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 80px;">操作规程名称</label>
-            <div class="layui-input-block" style="width: 150px;">
-                <input id="czGcMc" type="text" name="czGcMc" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item" >
+                <label class="layui-form-label" >部门名称</label>
+                <div class="layui-input-block" >
+                    <input id="bmName" type="text" name="bmName" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">试用天数(天)</label>
+                <div class="layui-input-block">
+                    <input id="czGcSyts" name="czGcSyts" class="layui-input" readonly>
+                </div>
             </div>
         </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">图片</label>
-            <div class="layui-input-block" style="width: 160px;">
-                <input id="gcUrl" type="text" name="gcUrl" autocomplete="off" placeholder="" class="hidden" readonly>
-                <img src="" id="gcc" style="color: red" alt="图片未上传或图片加载异常">
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-block">
+                    <select id="czGcZt" name="czGcZt" lay-filter="" disabled>
+                        <option value="2">已备案</option>
+                        <option value="1">试用中</option>
+                        <option value="0">已弃用</option>
+                    </select>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!--第二行-->
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">操作规程拟稿人</label>
-            <div class="layui-input-block" style="width: 200px;">
-                <input id="czGcNgr" type="text" name="czGcNgr" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 80px;">拟稿日期</label>
-            <div class="layui-input-block" style="width: 150px;">
-                <input id="czGcNgrq" type="text" name="czGcNgrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">审核人</label>
-            <div class="layui-input-block" style="width: 160px;">
-                <input id="czGcShr" type="text" name="czGcShr" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-    </div>
-
-    <!--第四行-->
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 8px;">
-            <label class="layui-form-label" style="width: 100px;">审核日期</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
-                <input id="czGcShrq" type="text" name="czGcShrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline" style="margin-left: 8px;">
-            <label class="layui-form-label" style="width: 100px;">生效日期</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
-                <input id="czGcSxrq" type="text" name="czGcSxrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 90px;">审核意见</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="czGcShyj" type="text" name="czGcShyj" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">类别</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="czGcLb" type="text" name="czGcLb" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-
-    </div>
-
-    <!--第六行-->
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 8px;">
-            <label class="layui-form-label" style="width: 100px;">总页数</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
-                <input id="czGcZys" type="text" name="czGcZys" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">操作规程内容</label>
-            <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
-                <textarea id="czGcNr" name="czGcNr" class="layui-textarea" readonly></textarea>
-            </div>
-        </div>
-        <div class="layui-inline" style="margin-left: 10px;">
-            <label class="layui-form-label" style="width: 90px;">部门名称</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 130px;">
-                <input id="bmName" type="text" name="bmName" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">版本号</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="czGcBbh" type="text" name="czGcBbh" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">试用天数(天)</label>
-            <div class="layui-input-block" style="width: 140px;">
-                <input id="czGcSyts" name="czGcSyts" class="layui-input" readonly></input>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-block" >
+                    <input id="gcUrl" type="text" name="gcUrl" autocomplete="off" placeholder="" class="hidden" readonly>
+                    <img src="" id="gcc" alt="图片未上传或图片加载异常">
+                </div>
             </div>
         </div>
     </div>
-
-    <!--第六行-->
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">再评价申请人</label>
-            <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
-                <input id="czGcZpjsqr" name="czGcZpjsqr" class="layui-input" readonly></input>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>操作规程及审核信息</legend>
+    </fieldset>
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">操作规程名称</label>
+                <div class="layui-input-block">
+                    <input id="czGcMc" type="text" name="czGcMc" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" >生效日期</label>
+                <div class="layui-input-block" >
+                    <input id="czGcSxrq" type="text" name="czGcSxrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">操作规程拟稿人</label>
+                <div class="layui-input-block" >
+                    <input id="czGcNgr" type="text" name="czGcNgr" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" >类别</label>
+                <div class="layui-input-block" >
+                    <input id="czGcLb" type="text" name="czGcLb" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人</label>
+                <div class="layui-input-block">
+                    <input id="czGcShr" type="text" name="czGcShr" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label" >拟稿日期</label>
+                <div class="layui-input-block" >
+                    <input id="czGcNgrq" type="text" name="czGcNgrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item" >
+                <label class="layui-form-label" >总页数</label>
+                <div class="layui-input-block" >
+                    <input id="czGcZys" type="text" name="czGcZys" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" >审核日期</label>
+                <div class="layui-input-block" >
+                    <input id="czGcShrq" type="text" name="czGcShrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
             </div>
         </div>
     </div>
-
-    <!--第六行-->
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">再评价申请日期</label>
-            <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
-                <input id="czGcZpjSqrq" name="czGcZpjSqrq" class="layui-input" readonly></input>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">再评价原因</label>
-            <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
-                <textarea id="czGcZpjyy" name="czGcZpjyy" class="layui-textarea" readonly></textarea>
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">操作规程内容</label>
+                <div class="layui-input-block">
+                    <textarea id="czGcNr" name="czGcNr" class="layui-textarea" readonly></textarea>
+                </div>
             </div>
         </div>
     </div>
-
-    <!--第二行-->
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价审核人</label>
-            <div class="layui-input-block" style="width: 750px;">
-                <textarea id="czGcZpjShr" name="czGcZpjShr" class="layui-input" readonly></textarea>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>再评价审核信息</legend>
+    </fieldset>
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价审核结果</label>
+                <div class="layui-input-block">
+                    <select id="czGcZpjShjg" name="czGcZpjShjg" lay-filter="" disabled>
+                        <option value="1">通过</option>
+                        <option value="0">不通过</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备案开始时间</label>
+                <div class="layui-input-block">
+                    <input id="czGcBakssj" type="text" name="czGcBakssj" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">弃用开始时间</label>
+                <div class="layui-input-block">
+                    <input id="czGcQykssj" type="text" name="czGcQykssj" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
             </div>
         </div>
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价审核日期</label>
-            <div class="layui-input-block" style="width: 750px;">
-                <textarea id="czGcZpsShrq" name="czGcZpsShrq" class="layui-input" readonly></textarea>
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价申请人</label>
+                <div class="layui-input-block" >
+                    <input id="czGcZpjsqr" name="czGcZpjsqr" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价审核人</label>
+                <div class="layui-input-block">
+                    <input id="czGcZpjShr" name="czGcZpjShr" class="layui-input" readonly>
+                </div>
             </div>
         </div>
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价审核意见</label>
-            <div class="layui-input-block" style="width: 750px;">
-                <textarea id="czGcZpjShyj" name="czGcZpjShyj" class="layui-textarea" readonly></textarea>
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价申请日期</label>
+                <div class="layui-input-block">
+                    <input id="czGcZpjSqrq" name="czGcZpjSqrq" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价审核日期</label>
+                <div class="layui-input-block">
+                    <input id="czGcZpsShrq" name="czGcZpsShrq" class="layui-input" readonly>
+                </div>
             </div>
         </div>
-
-
-
+        <div class="col-xs-12 col-sm-12">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label" >审核意见</label>
+                <div class="layui-input-block" >
+                    <textarea id="czGcShyj" type="text" name="czGcShyj" class="layui-textarea" readonly></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">再评价原因</label>
+                <div class="layui-input-block">
+                    <textarea id="czGcZpjyy" name="czGcZpjyy" class="layui-textarea" readonly></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">再评价审核意见</label>
+                <div class="layui-input-block">
+                    <textarea id="czGcZpjShyj" name="czGcZpjShyj" class="layui-textarea" readonly></textarea>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
-    <!--第八行-->
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价审核结果</label>
-            <div class="layui-input-block" style="width: 200px;">
-                <select id="czGcZpjShjg" name="czGcZpjShjg" lay-filter="" disabled>
-                    <option value="1">通过</option>
-                    <option value="0">不通过</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">状态</label>
-            <div class="layui-input-block" style="width: 150px;">
-                <select id="czGcZt" name="czGcZt" lay-filter="" disabled>
-                    <option value="2">已备案</option>
-                    <option value="1">试用中</option>
-                    <option value="0">已弃用</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">备案开始时间</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="czGcBakssj" type="text" name="czGcBakssj" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">弃用开始时间</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="czGcQykssj" type="text" name="czGcQykssj" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-    </div>
-
 </form>
 
 <script>
