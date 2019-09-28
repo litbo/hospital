@@ -48,7 +48,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">起始日期</label>
                 <div class="layui-input-block">
-                    <input type="text" id="date1" name="kssj" autocomplete="off" class="layui-input">
+                    <input type="text" id="date1" name="dateqs" autocomplete="off" class="layui-input">
+                    <input type="hidden" id="kssj" name="kssj" autocomplete="off" class="layui-input">
+                    <input type="hidden" id="jssj" name="jssj" autocomplete="off" class="layui-input">
                 </div>
             </div>
 <!--            <div class="layui-form-item">-->
@@ -116,8 +118,15 @@
         $("#bmName").val(emp.bmName);
         $("#bmId").val(emp.bmId);
 
-    })
-
+    });
+    // $("#date1").bind('input change',function(date1){
+    //     console.log(kssj.val)
+    //     debugger
+    //     var arr = obj.field.dateqs.split(' ~ ');
+    //     $("#kssj").val(arr[0]);
+    //     $("#jssj").val(arr[1]);
+    //     debugger
+    // });
     formData = {};
     renderMod= {
         form:{
@@ -139,29 +148,24 @@
                     format: "yyyy-MM-dd",
                     range: true
                 },
-                {
-                    elem:"#date3",
-                    value:today0
-                }
             ],
             submit:{
-                filter:"submit",//可以不写
-         /*       before:function(){
-
-                    return param = {
-                        1:formData.radio[0].bmId
-                    }
-                },*/
+                before:function(){
+                    var val=$("#date1").val()
+                    console.log(val);
+                    var arr = val.split(' ~ ');
+                    $("#kssj").val(arr[0]);
+                    $("#jssj").val(arr[1]);
+                    return true
+                },
                 form:{//或者写作up
                     url:"/gg/addGg",
                     type:"POST",
                     contentType:"application/json",
-                    data:["kssj","jssj","ngr","ggbt","ngsj","ggnr","gglxId","bmId"],
-                /*    param:{
-                        1:"bmId"
-                    },*/
-                    reload:true
-                }
+                    data:["ngr","ggbt","ngsj","ggnr","gglxId","bmId","kssj","jssj"],
+
+                    reload:true,
+                },
         }
         },
         bind:{
