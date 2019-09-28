@@ -23,6 +23,13 @@ public class WxhfController {
 
     @PostMapping("/gcsBmHf")
     public Result wxrBmHf(@RequestBody WxrBmInsertVO wxrBmInsertVO){
+
+        for (String bmId : wxrBmInsertVO.getBmIds()){
+            Boolean isxzd = wxhfService.isxzd(wxrBmInsertVO.getUserId(), bmId);
+            if (isxzd){
+                return Result.error(99,"请勿重复划分！");
+            }
+        }
         wxhfService.wxrBmHf(wxrBmInsertVO);
         return Result.success();
     }

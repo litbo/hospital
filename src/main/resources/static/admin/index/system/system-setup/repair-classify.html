@@ -63,19 +63,8 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <form class="layui-form layui-form-pane">
-            <div class="layui-form-item fixTop">
-                <label class="layui-form-label">预期用途</label>
-                <div class="layui-input-block">
-                    <input type="text" name="name" id="use" class="layui-input" autocomplete="off" placeholder="请选择" disabled>
-                </div>
-            </div>
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">产品描述</label>
-                <div class="layui-input-block">
-                    <textarea class="layui-textarea" id="des" autocomplete="off" placeholder="请选择" disabled></textarea>
-                </div>
-            </div>
-            <div class="layui-row">
+
+            <div class="layui-row" >
                     <div class="tree-container col-xs-12 col-md-4">
                         <div class="search_tree">
                             <input class="layui-input" type="text" placeholder="模糊查找" style="width: 76%;float: left;" id="tree_search">
@@ -90,6 +79,20 @@
                     <div class="col-xs-12 col-md-8 padRight">
                         <table id="table" lay-filter="table1"></table>
                     </div>
+                <div class="col-xs-12 col-md-5" id="xianShi" >
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">预期用途</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" name="name" id="use" autocomplete="off" placeholder="请选择" disabled></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">产品描述</label>
+                    <div class="layui-input-block">
+                        <textarea class="layui-textarea" id="des" autocomplete="off" placeholder="请选择" disabled></textarea>
+                    </div>
+                </div>
+            </div>
             </div>
             <div class="layui-form-item">
                 <button class="layui-btn layui-btn-fluid" lay-submit="" id="saveType">提交</button>
@@ -122,6 +125,7 @@
 </script>
 
 <script>
+    $("#xianShi").hide();
     var setting = {
             view: {
                 showLine: false,
@@ -165,9 +169,45 @@
 
     //列表项点击事件
     function clickShow(event, treeId, treeNode) {
+       /* console.log(event);*/
         if(!treeNode.nocheck){
             $("#des").val(treeNode["cpms"]);
             $("#use").val(treeNode["yqyt"]);
+          /*  $("#xianShi").show();*/
+            layui.use('layer', function() { //独立版的layer无需执行这一句
+                var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: 0,
+                    shadeClose: true,
+                    skin: 'yourclass',
+                    area: ['50%', '50%'],
+                    content:$('#xianShi')
+                   /* content: '<div class="layui-form-item layui-form-text">\n' +
+                        '                    <label class="layui-form-label">预期用途</label>\n' +
+                        '                    <div class="layui-input-block">\n' +
+                        '                        <textarea class="layui-textarea" name="name" id="use" autocomplete="off"  placeholder="请选择" disabled>' + treeNode["cpms"] + '</textarea>\n' +
+                        '                    </div>\n' +
+                        '                </div>\n' +
+                        '                <div class="layui-form-item layui-form-text">\n' +
+                        '                    <label class="layui-form-label">产品描述</label>\n' +
+                        '                    <div class="layui-input-block">\n' +
+                        '                        <textarea class="layui-textarea" id="des" autocomplete="off" placeholder="请选择" disabled>' + treeNode["yqyt"] + '</textarea>\n' +
+                        '                    </div>\n' +
+                        '                </div>'
+                    , success: function (layero) {
+                        console.log(treeNode["cpms"]);
+                        console.log(treeNode["yqyt"]);
+                        /!* $("#des").val(treeNode["cpms"]);
+                    $("#use").val(treeNode["yqyt"]);*!/
+                    }*/
+
+                });
+            })
+
+
         }
     }
 

@@ -26,4 +26,6 @@ public interface WxhfService {
     void wxBmGcsEqXcHf(String[] bgids);
     //获取部门工程师设备通过模糊查询
     PageInfo getBmGcsEqByX(int pageNum, int pageSize, BmGcsEqSelectXVO xvo);
+
+    Boolean isxzd(String userId,String bmId);
 }

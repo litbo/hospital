@@ -1129,6 +1129,10 @@ action = func = {
                         value.reload && window.location.reload();
                         layer.close(index);
                     });
+                }else if(res.code === 99){
+                    layer.alert(res.msg,function(){
+                        location.reload();
+                    });
                 } else {
                     layer.alert("删除失败！",function(){
                         location.reload();
