@@ -12,7 +12,7 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
 </head>
-<body>
+<body style="background-color: #f2f2f2;">
 
 <!-- 表格 -->
 <table class="layui-hide" id="table" lay-filter="table1"></table>
@@ -26,9 +26,7 @@
 
 <script type="text/html" id="toolBar">
     <!-- 搜索区域 -->
-    <button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;height: 22px;margin-bottom: 5px;font-size: 15px;">
-        <i class="layui-icon" style="margin-top: -15px;font-size: 13px;"></i>弃用
-    </button>
+
     <form action="">
         <div class="layui-input-inline" style="width: 120px;">
             <select name="zt" lay-search="">
@@ -60,6 +58,12 @@
             <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
         </div>
     </form>
+    <hr class="devideHr">
+    <div class="addBtn">
+    <button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;height: 22px;margin-bottom: 5px;font-size: 15px;">
+        <i class="layui-icon" style="margin-top: -15px;font-size: 13px;"></i>弃用
+    </button>
+    </div>
 </script>
 
 <script type="text/html" id="xh">

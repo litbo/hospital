@@ -15,7 +15,9 @@ import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/lifeManage")
@@ -96,7 +98,7 @@ public class CzGcController {
 
     /*弃用*/
     @PostMapping("/QyCzGcs")
-    public Result QyCzGcs(  @RequestBody DeleteHtsByIdsVO vo) {
+    public Result QyCzGcs(@RequestBody DeleteHtsByIdsVO vo) {
         boolean yes=true;
         String[] ids = vo.getIds();
         for (int i = 0; i < ids.length; i++) {
@@ -118,9 +120,9 @@ public class CzGcController {
     @PostMapping("/CzgcTypeCount")
     public Result CzgcTypeCount() {
 
-        int i = service.Tjcx(null, null, "2", null, null, null, null).getList().size();
-        int k = service.Tjcx(null, null, "1", null, null, null, null).getList().size();
-        int j = service.Tjcx(null, null, "0", null, null, null, null).getList().size();
+        int i = service.Tjcx(1, 10, "2", null, null, null, null).getList().size();
+        int k = service.Tjcx(1, 10, "1", null, null, null, null).getList().size();
+        int j = service.Tjcx(1, 10, "0", null, null, null, null).getList().size();
 
         return Result.success(Arrays.asList(i + k + j, i, k, j));
     }

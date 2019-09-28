@@ -61,6 +61,7 @@ public interface YjyaLclogMapper {
             " and y.yjya_name like CONCAT('%',#{yaname},'%')" +
             "</if>" +
             "</where>" +
+            " order by l.yjya_bh desc " +
             "</script>")
 
     List<YjyaLclogVO> selectAllYalogByExample(@Param("zt") String zt, @Param("qssj") Date qssj,

@@ -5,7 +5,6 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
-import com.litbo.hospital.lifemanage.MyUtils.String2DateUtil;
 import com.litbo.hospital.lifemanage.bean.MyBean.CzGc;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.CzGcShowEqVO;
 import com.litbo.hospital.lifemanage.bean.vo.MyVO.CzGcVO;
@@ -20,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -37,7 +35,7 @@ public class CzGcServiceImpl implements CzGcService {
 
         List<CzGc> gcs = mapper.AllDshCzgc(bh, mc, ngr, qssj, jssj);
         gcs.forEach(item -> {
-            if (item.getCzGcZpjsqr() != null && item.getCzGcZpjShr() == null) {
+            if (item.getCzGcZpjsqr() != null && StringUtils.isBlank(item.getCzGcZpjShr()) ) {
                 item.setShlx("1");
             } else {
                 item.setShlx("0");
@@ -48,15 +46,16 @@ public class CzGcServiceImpl implements CzGcService {
 
     @Override
     public int insertCzgc(CzGc gc) {
+
         gc.setId("ST-OPE-"+ IDFormat.getIdByIDAndTime3("cz_gc","id"));
         return mapper.insertCzgc(gc);
     }
 
     @Override
     public int ShAfterUpdate(CzGc gc) {
-
+      boolean zpjtg=false;
         /*再评价审核时*/
-        if (StringUtils.isBlank(gc.getCzGcZpjShr()) && StringUtils.isNotBlank(gc.getCzGcZpjsqr())) {
+        if (StringUtils.isNotBlank(gc.getCzGcZpjShr()) && StringUtils.isNotBlank(gc.getCzGcZpjsqr())) {
             /*再评价审核通过时*/
             if("1".equals(gc.getCzGcZpjShjg())){
                 gc.setCzGcNr(gc.getCzGcNrdxg());
@@ -64,8 +63,10 @@ public class CzGcServiceImpl implements CzGcService {
                 gc.setCzGcZys(gc.getCzGcZysdxg());
                 gc.setCzGcZt("1");
                 gc.setCzGcSxrq(new Date());
+                zpjtg=true;
 
             }
+
             /*审核未通过时啥也不干*/
             CzGcVO vo = mapper.selectOneCzgc(gc.getId());
             BeanUtil.copyProperties(gc, vo, true,
@@ -75,12 +76,17 @@ public class CzGcServiceImpl implements CzGcService {
             gc.setCzGcZpjjd("1");
         }
         /*普通审核啥也不干*/
-
+        else{
+            gc.setCzGcSxrq(gc.getCzGcShrq());
+        }
         CzGcVO vo = mapper.selectOneCzgc(gc.getId());
         BeanUtil.copyProperties(gc, vo, true,
                 CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
         BeanUtil.copyProperties(vo, gc, true,
                 CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+        if(zpjtg){
+            gc.setCzGcBakssj(null);
+        }
         return mapper.updateOneCzgc(gc);
     }
 
@@ -106,13 +112,20 @@ public class CzGcServiceImpl implements CzGcService {
 
     @Override
     public int updateCzgcZt(String id) {
-        return mapper.updateCzgcZt(id);
+        CzGcVO vo = mapper.selectOneCzgc(id);
+        if(vo.getCzGcQykssj()!=null){
+            return mapper.updateCzgcZt(id, null);
+        }
+        else{
+            return mapper.updateCzgcZt(id, new Date());
+        }
     }
 
     @Override
     public PageInfo<CzGc> Tjcx(Integer pageNum, Integer pageSize, String zt, Date qssj, Date jssj, String bh, String mc) {
         PageHelper.startPage(pageNum, pageSize);
         List<CzGc> gcs = mapper.Tjcx(zt, qssj, jssj, bh, mc);
+        System.out.println();
         gcs.forEach(item->{
             Date date = item.getCzGcSxrq();
             if(date!=null){

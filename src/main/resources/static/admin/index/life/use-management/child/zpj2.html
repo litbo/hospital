@@ -11,108 +11,166 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label {
+            width: 130px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 130px !important;
+        }
+
+        .layui-form-text .layui-form-label {
+            width: 100% !important;
+        }
+
+        .layui-form-text .layui-input-block {
+            margin-left: 0 !important;
+        }
+
+        input[type="file"] {
+            margin: 7px;
+        }
+    </style>
 </head>
 <body>
 
-<form class="layui-form" action="" style="margin-top: 20px;" lay-filter="forms">
-
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">操作规程编号</label>
+                <div class="layui-input-block">
+                    <input id="czGcBh" type="text" name="id" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">操作规程名称</label>
+                <div class="layui-input-block">
+                    <input id="czGcName" type="text" name="czGcMc" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价申请人</label>
+                <div class="layui-input-block">
+                    <input id="czGcZpjsqr" type="text" name="czGcZpjsqr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">总页数待修改</label>
+                <div class="layui-input-block">
+                    <input id="czGcZysdxg" type="text" name="czGcZysdxg" autocomplete="off" placeholder="" class="layui-input"  lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">拟稿人</label>
+                <div class="layui-input-block">
+                    <input id="czGcNgr" type="text" name="czGcNgr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人</label>
+                <div class="layui-input-block">
+                    <input id="czGcShr" type="text" name="czGcShr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">再评价申请日期</label>
+                <div class="layui-input-block">
+                    <input id="czGcZpjSqrq" type="text" name="czGcZpjSqrq" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">版本号待修改</label>
+                <div class="layui-input-block">
+                    <input id="czGcBbhdxg" type="text" name="czGcBbhdxg" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">拟稿日期</label>
+                <div class="layui-input-block">
+                    <input id="czGcNgrq" type="text" name="czGcNgrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核日期</label>
+                <div class="layui-input-block">
+                    <input id="czGcShrq" type="text" name="czGcShrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核意见</label>
+                <div class="layui-input-block">
+                    <input id="czGcShyj" type="text" name="czGcShyj" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="layui-form-item layui-form-text">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">再评价原因</label>
+                    <div class="layui-input-block">
+                        <textarea id="czGcZpjyy" name="czGcZpjyy" class="layui-textarea" lay-verify="required"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12">
+            <div class="layui-form-item layui-form-text">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">待修改内容</label>
+                    <div class="layui-input-block">
+                        <textarea id="czGcNrdxg" name="czGcNrdxg" class="layui-textarea" lay-verify="required"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-4"></div>
+        <div class="col-xs-12 col-sm-4"></div>
+        <div class="col-xs-12 col-sm-4"></div>
+    </div>
     <!--第一行-->
     <div class="layui-form-item">
-        <div class="layui-inline spanDiv">
-            <label class="layui-form-label">预案编号</label>
-            <div class="layui-input-block" style="width: 200px;">
-                <input id="yjyaBh" type="text" name="yjyaBh" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 80px;">拟稿人</label>
-            <div class="layui-input-block" style="width: 150px;">
-                <input id="yjyaNgr" type="text" name="yjyaNgr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">拟稿日期</label>
-            <div class="layui-input-block" style="width: 160px;">
-                <input id="yjyaNgrq" type="text" name="yjyaNgrq" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
+
+
+
     </div>
 
     <!--第二行-->
     <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">预案名称</label>
-            <div class="layui-input-block" style="width: 200px;">
-                <input id="yjyaName" type="text" name="yjyaName" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 80px;">审核人</label>
-            <div class="layui-input-block" style="width: 150px;">
-                <input id="yjyaShr" type="text" name="yjyaShr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">审核日期</label>
-            <div class="layui-input-block" style="width: 160px;">
-                <input id="yjyaShrq" type="text" name="yjyaShrq" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
+
+
+
     </div>
 
     <!--第五行-->
     <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 8px;">
-            <label class="layui-form-label" style="width: 100px;">再评价申请人</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
-                <input id="yjyaZpjsqr" type="text" name="yjyaZpjsqr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">再评价申请时间</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 130px;">
-                <input id="yjyaZpjsqrq"  type="text" name="yjyaZpjsqrq" autocomplete="off" placeholder="" class="layui-input" readonly>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">总页数待修改</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="yjyaZysdxg" type="text" name="yjyaZysdxg" autocomplete="off" placeholder="" class="layui-input"  lay-verify="required">
-            </div>
-        </div>
+
+
+
     </div>
 
     <!--    第九行-->
     <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 8px;">
-            <label class="layui-form-label" style="width: 100px;">版本号待修改</label>
-            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
-                <input id="yjyaBbhdxg" type="text" name="yjyaBbhdxg" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
-            </div>
-        </div>
+
+
     </div>
 
     <!--第七行-->
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价原因</label>
-            <div class="layui-input-block" style="width: 750px;">
-                <textarea id="yjyaZpjyy" name="yjyaZpjyy" class="layui-textarea" lay-verify="required"></textarea>
-            </div>
-        </div>
-    </div>
+
 
     <!--第8行-->
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">待修改内容</label>
-            <div class="layui-input-block" style="width: 750px;">
-                <textarea id="yjyaNrdxg" name="yjyaNrdxg" class="layui-textarea" lay-verify="required"></textarea>
-            </div>
-        </div>
-    </div>
 
-     <input id="yjyaZpjjd" name="yjyaZpjjd" value="0" type="hidden"></input>
+
+     <input id="czGcZpjjd" name="czGcZpjjd" value="0" type="hidden">
 
 
     <!--按钮-->
@@ -135,26 +193,26 @@
         val:{
             filter:"forms",//与form标签lay-filter相同
             get:{
-                url:"/lifeManage/selectYalogByBh",
+                url:"/lifeManage/selectOneCzgc",
                 type:"POST",
-                data:{bh:$.getUrlParam("yjyaBh")}
+                data:{id:$.getUrlParam("id")}
             },
             func:function(data) {
-                $("#yjyaZpjsqr").val(emp.userXm);
-                $("#yjyaZpjsqrq").val("");
-                $("#yjyaZpjyy").val("");
-                $("#yjyaNrdxg").val("");
-                $("#yjyaZysdxg").val("");
-                $("#yjyaBbhdxg").val("");
+                $("#czGcZpjsqr").val(emp.userXm);
+                $("#czGcZpjsqrq").val("");
+                $("#czGcZpjyy").val("");
+                $("#czGcNrdxg").val("");
+                $("#czGcZysdxg").val("");
+                $("#czGcBbhdxg").val("");
                 console.log(data);
             }
         },
-        date:{
-            elem:"#yjyaZpjsqrq",
+        /*date:{
+            elem:"#czGcZpjSqrq",
             format:'yyyy-MM-dd',
             isInitValue:true,
             value:today
-        }
+        }*/
     };
 
     // 表单
@@ -171,7 +229,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: '/lifeManage/updateYjyaZd',
+                url: '/lifeManage/CzgcPtXg',
                 data: JSON.stringify(data.field),
                 contentType: 'application/json; charset=UTF-8',
                 success: function(result) {

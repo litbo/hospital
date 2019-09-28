@@ -12,13 +12,14 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
 </head>
-<body>
+<body style="background-color: #f2f2f2;">
 
 <!-- 表格 -->
 <table class="layui-hide" id="table" lay-filter="table1"></table>
+<br>
 
 <p style="margin-bottom: 50px;float: right;margin-right: 20px;font-size:17px;color:#666;">
-    预案合计：<span style="color:#666" id="yahj"></span>件&nbsp;
+    操作规程合计：<span style="color:#666" id="yahj"></span>件&nbsp;
     已备案：<span style="color:#666" id="yba"></span>件&nbsp;
     试用中：<span style="color:#666" id="syz"></span>件&nbsp;
     已弃用：<span style="color:#666" id="yqy"></span>件
@@ -26,9 +27,6 @@
 
 <script type="text/html" id="toolBar">
     <!-- 搜索区域 -->
-    <button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;height: 22px;margin-bottom: 5px;font-size: 15px;">
-        <i class="layui-icon" style="margin-top: -15px;font-size: 13px;"></i>弃用
-    </button>
     <form action="">
         <div class="layui-input-inline" style="width: 120px;">
             <select name="zt" lay-search="">
@@ -60,6 +58,12 @@
             <button type="reset" class="layui-btn layui-btn-primary" >重置</button>
         </div>
     </form>
+    <hr class="devideHr">
+    <div class="addBtn">
+    <button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;height: 22px;margin-bottom: 5px;font-size: 15px;">
+        <i class="layui-icon" style="margin-top: -15px;font-size: 13px;"></i>弃用
+    </button>
+    </div>
 </script>
 
 <script type="text/html" id="xh">
@@ -91,7 +95,7 @@
     function pText(){
         $.ajax({
             type: "POST",
-            url: '/lifeManage/AllTypeCount',
+            url: '/lifeManage/CzgcTypeCount',
             success: function(result) {
                 $("#yahj").text(result.data[0]);
                 $("#yba").text(result.data[1]);
@@ -113,12 +117,12 @@
                     {type: 'checkbox', fixed: 'left'}
                     ,{field:'xh', title:'序号',templet:'#xh',width:80}
                     ,{field:'czGcZt', toolbar:'#jsonChange', title:'标志', width:80}
-                    ,{field:'czGcId',title:'编号'}
-                    ,{field:'czGcName',title:'名称', width:140}
+                    ,{field:'id',title:'编号'}
+                    ,{field:'czGcMc',title:'名称', width:140}
                     ,{field:'czGcNgr', title:'拟稿人', width:130}
-                    ,{field:'CzGcShr', title:'审核人', width:130}
+                    ,{field:'czGcShr', title:'审核人', width:130}
                     ,{field:'czGcShrq', title:'审核日期'}
-                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
+                    ,{fixed: 'right', title:'操作', align:'left', toolbar: '#barDemo',width:150}
                 ]]
                 , url: "/lifeManage/CzGcTjCx"
                 , method: "POST"
@@ -156,7 +160,7 @@
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
                                 type:2,
                                 event: "pipei",
-                                title:"查看",
+                                title:"查看详情",
                                 content:"child/view-stats2.html",
                                 area: ['1000px', '450px'],
                                 dataUrl:["id"],
@@ -167,6 +171,7 @@
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
                                 type:2,
                                 event: "zpj",
+                                title:"查看详情",
                                 content: 'child/zpj2.html',
                                 area: ['1000px', '90%'],
                                 dataUrl:["id"],

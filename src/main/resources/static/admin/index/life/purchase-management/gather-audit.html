@@ -16,7 +16,7 @@
     <script src="/static/admin/js/basic.js"></script>
 </head>
 
-<body>
+<body style="background-color: #f2f2f2;">
 <div class="layui-row">
     <div class="col-xs-12">
 
@@ -27,9 +27,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <button class="layui-btn layui-btn-xs" lay-event="audit">审 核</button>
-    </div>
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
             <input class="layui-input" name="eqPmPym" placeholder="设备拼音码" autocomplete="off">
@@ -38,6 +35,10 @@
             <input class="layui-input" name="bh" placeholder="申购单号" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-xs" lay-event="audit">审 核</button>
     </div>
 </script>
 <script type="text/html" id="bar">
