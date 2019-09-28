@@ -14,6 +14,30 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        body{
+            background-color: #f2f2f2;
+        }
+        .layui-table-tool{
+            background-color: #fff;
+        }
+        .layui-table-box{
+            margin: 10px 10px;
+            background-color: #fff;
+            box-sizing: border-box !important;
+        }
+        .layui-table-page{
+            background-color: #fff;
+            border-bottom: 1px solid #e6e6e6;
+            margin-bottom: 10px;
+        }
+        .layui-table-view{
+            background-color: #fff;
+        }
+        .addBtn{
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
 <div class="layui-row">
@@ -21,12 +45,9 @@
         <table id="table" lay-filter="major"></table>
     </div>
 </div>
+
+
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
-        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
-      <!--  <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>-->
-    </div>
     <form class="layui-form">
         字典分类：
         <div class="layui-inline">
@@ -42,6 +63,11 @@
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </form>
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+        <!--  <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>-->
+    </div>
 </script>
 <!--<script type="text/html" id="bar">
  &lt;!&ndash;<a class="layui-btn layui-btn-xs layui-btn-danger"  lay-event="edit">删除</a>&ndash;&gt;
