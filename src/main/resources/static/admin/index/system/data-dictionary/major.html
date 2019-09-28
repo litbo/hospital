@@ -20,9 +20,13 @@
         }
         .layui-table-tool{
             background-color: #fff;
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 5px;
+            border-bottom: 0;
         }
         .layui-table-box{
-            margin: 10px 10px;
+            margin: 0 10px 10px 10px;
             background-color: #fff;
             box-sizing: border-box !important;
         }
@@ -35,7 +39,16 @@
             background-color: #fff;
         }
         .addBtn{
-            margin-top: 5px;
+            margin-top: 20px;
+        }
+
+        .devideHr{
+            width: 100%;
+            position: absolute;
+            margin-left: -15px;
+            padding: 0;
+            margin-top: 10px;
+            background-color: #f6f6f6;
         }
     </style>
 </head>
@@ -63,6 +76,7 @@
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </form>
+    <hr class="devideHr">
     <div class="addBtn">
         <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
         <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
