@@ -2705,7 +2705,7 @@
                     "shiro": "JGGL"
                   },
                   {
-                    "title": "科室导入",
+                    "title": "科室管理",
                     "url": "./admin/basic-management/department-input.html",
                     "id": "60101",
                     "shiro": "KSDR"

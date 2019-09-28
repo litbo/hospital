@@ -15,34 +15,98 @@
     <script src="/static/admin/js/basic.js"></script>
 </head>
 <body>
-
 <div class="layui-row">
-    <div class="col-xs-12">
-        <fieldset class="layui-elem-field layui-field-title">
-            <legend>部门信息导入</legend>
-        </fieldset>
-    </div>
-    <div class="col-xs-12">
-        <div class="col-xs-12 layui-upload" style="margin-top:15px;">
-            <button type="button" class="layui-btn layui-btn-normal" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
-            <button type="button" class="layui-btn layui-btn-normal" style="margin-left: 10px" id="startUploadFile"><i class="layui-icon">&#xe621;</i>提交文件</button>
-        </div>
-        <div class="col-xs-12" style="margin-top:60px">
-            <button type="button" class="layui-btn" id="xzmb">
-                <i class="layui-icon">&#xe601;</i>下载模板
-            </button>
-            <!--<button type="button" class="layui-btn layui-btn-warm" id="xzxz">-->
-                <!--<i class="layui-icon">&#xe67c;</i>下载须知-->
-            <!--</button>-->
-            <span style="color: red">表格标红列为必填项*</span>
-        </div>
+    <div class="col-xs-12 padRight">
+        <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+<script type="text/html" id="toolBar">
+    <div class="visible-xs">
+        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
+    </div>
+    <div class="hidden-xs" id="hideXs">
+        <div class="layui-row">
+            <div class="col-xs-12" style="padding:0">
+                <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
+                    <div class="layui-input-inline">
+                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期" readonly="readonly">
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
 
+                        <select name="bmSName" lay-filter="select" lay-search="">
+                            <option value="">请选择科室</option>
+
+                        </select>
+
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <select name="eqSName" lay-search="">
+                            <option value="">请选择设备</option>
+                            <option>CT室</option>
+                            <option>核磁公正室</option>
+                            <option>摄片室</option>
+                            <option>内外导管室</option>
+                            <option>心外ICU</option>
+                            <option>设备管理测试设备2</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline xs-100 mar10-0 pad0-10">
+                        <button class="layui-btn" type="button" data-type="search">查找</button>
+                    </div>
+                </form>
+                <hr class="devideHr">
+                <div class="addBtn">
+                    <button type="button" class="layui-btn layui-btn-normal" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
+                    <button type="button" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe621;</i>提交文件</button>
+                    <button type="button" class="layui-btn" id="xzmb">
+                        <i class="layui-icon">&#xe601;</i>下载模板
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</script>
 
 
 <script>
     renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {field: 'eqCode', title: '设备编号', width: "25%", minWidth: 150}
+                    , {field: 'eqName', title: '设备名称', width: "25%", minWidth: 150}
+                    , {field: 'realDays', title: '开机天数', minWidth: 150, sort: true}
+                    , {field: 'workDays', title: '应开机时间', minWidth: 150, sort: true}
+                    , {field: 'rating', title: '开机率', minWidth: 150, sort: true}
+                    , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
+                ]]
+                , url: "/kpi/open/selectOpen"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面的所有数据数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+
+                }
+            },
+            reSet: {
+                url: "/kpi/open/selectOpenByCon",
+                type: "search",
+                data: ["startSTime", "bmSName", "eqSName"],     //搜索框的name
+                where: {}
+            }
+        },
         form:{
             file:{
                 elem:"#selectFile",
