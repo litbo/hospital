@@ -77,7 +77,7 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    {{#if ((d.czGcZt === "2" && d.yjyaZpjjd==null) || (d.czGcZt === "2" && d.yjyaZpjjd==="1")) { }}
+    {{#if ((d.czGcZt === "2" && d.czGcZpjjd==null) || (d.czGcZt === "2" && d.czGcZpjjd==="1")) { }}
     <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">查看</a>
     <button data-method="notice" class="layui-btn layui-btn-sm layui-btn-danger guanlian" lay-event="zpj">再评价</button>
     {{# }else{ }}
@@ -86,6 +86,8 @@
 </script>
 
 <script>
+
+
     function pText(){
         $.ajax({
             type: "POST",
