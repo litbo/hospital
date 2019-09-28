@@ -2663,9 +2663,9 @@ html {
 }
 /*# sourceMappingURL=admin.css.map */
 
-body{
-  background-color: #f2f2f2;
-}
+/*body{*/
+/*  background-color: #f2f2f2;*/
+/*}*/
 .layui-table-tool{
   background-color: #fff;
   position: relative;
