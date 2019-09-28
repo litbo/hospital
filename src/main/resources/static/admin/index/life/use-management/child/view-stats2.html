@@ -19,21 +19,22 @@
     <!--第一行-->
     <div class="layui-form-item">
         <div class="layui-inline spanDiv">
-            <label class="layui-form-label">预案编号</label>
+            <label class="layui-form-label">设备编号</label>
             <div class="layui-input-block" style="width: 200px;">
-                <input id="yjyaBh" type="text" name="yjyaBh" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="eqSbbh" type="text" name="eqSbbh" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label" style="width: 80px;">拟稿人</label>
+            <label class="layui-form-label" style="width: 80px;">操作规程名称</label>
             <div class="layui-input-block" style="width: 150px;">
-                <input id="yjyaNgr" type="text" name="yjyaNgr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcMc" type="text" name="czGcMc" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">拟稿日期</label>
+            <label class="layui-form-label">图片</label>
             <div class="layui-input-block" style="width: 160px;">
-                <input id="yjyaNgrq" type="text" name="yjyaNgrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="gcUrl" type="text" name="gcUrl" autocomplete="off" placeholder="" class="hidden" readonly>
+                <img src="" id="gcc" style="color: red" alt="图片未上传或图片加载异常">
             </div>
         </div>
     </div>
@@ -41,21 +42,21 @@
     <!--第二行-->
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">预案名称</label>
+            <label class="layui-form-label">操作规程拟稿人</label>
             <div class="layui-input-block" style="width: 200px;">
-                <input id="yjyaName" type="text" name="yjyaName" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcNgr" type="text" name="czGcNgr" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label" style="width: 80px;">审核人</label>
+            <label class="layui-form-label" style="width: 80px;">拟稿日期</label>
             <div class="layui-input-block" style="width: 150px;">
-                <input id="yjyaShr" type="text" name="yjyaShr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcNgrq" type="text" name="czGcNgrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">审核日期</label>
+            <label class="layui-form-label">审核人</label>
             <div class="layui-input-block" style="width: 160px;">
-                <input id="yjyaShrq" type="text" name="yjyaShrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcShr" type="text" name="czGcShr" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
     </div>
@@ -63,21 +64,21 @@
     <!--第四行-->
     <div class="layui-form-item">
         <div class="layui-inline" style="margin-left: 8px;">
-            <label class="layui-form-label" style="width: 100px;">试用开始时间</label>
+            <label class="layui-form-label" style="width: 100px;">审核日期</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
-                <input id="yjyaSykssj" type="text" name="yjyaSykssj" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcShrq" type="text" name="czGcShrq" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label" style="width: 90px;">再评价申请人</label>
+            <label class="layui-form-label" style="width: 90px;">审核意见</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="yjyaZpjsqr" type="text" name="yjyaZpjsqr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcShyj" type="text" name="czGcShyj" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">再评价申请时间</label>
+            <label class="layui-form-label" style="width: 100px;">类别</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="yjyaZpjsqrq" type="text" name="yjyaZpjsqrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcLb" type="text" name="czGcLb" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
 
@@ -86,21 +87,21 @@
     <!--第六行-->
     <div class="layui-form-item">
         <div class="layui-inline" style="margin-left: 8px;">
-            <label class="layui-form-label" style="width: 100px;">备案开始时间</label>
+            <label class="layui-form-label" style="width: 100px;">总页数</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 170px;">
-                <input id="yjyaBakssj" type="text" name="yjyaBakssj" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcZys" type="text" name="czGcZys" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline" style="margin-left: 10px;">
-            <label class="layui-form-label" style="width: 90px;">再评价审核人</label>
+            <label class="layui-form-label" style="width: 90px;">部门名称</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 130px;">
-                <input id="yjyaZpjshr" type="text" name="yjyaZpjshr" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="bmName" type="text" name="bmName" lay-verify="" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;">再评价审核时间</label>
+            <label class="layui-form-label" style="width: 100px;">版本号</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="yjyaZpjshrq" type="text" name="yjyaZpjshrq" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcBbh" type="text" name="czGcBbh" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
     </div>
@@ -108,9 +109,9 @@
     <!--第六行-->
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">预案内容</label>
+            <label class="layui-form-label">再评价申请人</label>
             <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
-                <textarea id="yjyaNr" name="yjyaNr" class="layui-textarea" readonly></textarea>
+                <input id="czGcZpjsqr" name="czGcZpjsqr" class="layui-input" readonly></input>
             </div>
         </div>
     </div>
@@ -118,9 +119,15 @@
     <!--第六行-->
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">审核意见</label>
+            <label class="layui-form-label">再评价申请日期</label>
             <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
-                <textarea id="yjyaShyj" name="yjyaShyj" class="layui-textarea" readonly></textarea>
+                <input id="czGcZpjSqrq" name="czGcZpjSqrq" class="layui-input" readonly></input>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">再评价原因</label>
+            <div class="layui-input-block" style="width: 750px;display:inline-block;margin-left: 15px;">
+                <textarea id="czGcZpjyy" name="czGcZpjyy" class="layui-textarea" readonly></textarea>
             </div>
         </div>
     </div>
@@ -128,19 +135,40 @@
     <!--第二行-->
     <div class="layui-form-item">
         <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价意见</label>
+            <label class="layui-form-label">再评价审核人</label>
             <div class="layui-input-block" style="width: 750px;">
-                <textarea id="yjyaZpjyj" name="yjyaZpjyj" class="layui-textarea" readonly></textarea>
+                <textarea id="czGcZpjShr" name="czGcZpjShr" class="layui-input" readonly></textarea>
             </div>
         </div>
+        <div class="layui-inline" style="margin-left: 15px;">
+            <label class="layui-form-label">再评价审核日期</label>
+            <div class="layui-input-block" style="width: 750px;">
+                <textarea id="czGcZpsShrq" name="czGcZpsShrq" class="layui-input" readonly></textarea>
+            </div>
+        </div>
+        <div class="layui-inline" style="margin-left: 15px;">
+            <label class="layui-form-label">再评价审核意见</label>
+            <div class="layui-input-block" style="width: 750px;">
+                <textarea id="czGcZpjShyj" name="czGcZpjShyj" class="layui-textarea" readonly></textarea>
+            </div>
+        </div>
+
+
+
     </div>
 
     <!--第九行-->
     <div class="layui-form-item">
         <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价原因</label>
+            <label class="layui-form-label">生效日期</label>
             <div class="layui-input-block" style="width: 750px;">
-                <textarea id="yjyaZpjyy" name="yjyaZpjyy" class="layui-textarea" readonly></textarea>
+                <input id="czGcSxrq" name="czGcSxrq" class="layui-input" readonly></input>
+            </div>
+        </div>
+        <div class="layui-inline" style="margin-left: 15px;">
+            <label class="layui-form-label">试用天数(天)</label>
+            <div class="layui-input-block" style="width: 750px;">
+                <input id="czGcSyts" name="czGcSyts" class="layui-input" readonly></input>
             </div>
         </div>
     </div>
@@ -153,9 +181,9 @@
     <!--第八行-->
     <div class="layui-form-item">
         <div class="layui-inline" style="margin-left: 15px;">
-            <label class="layui-form-label">再评价结果</label>
+            <label class="layui-form-label">再评价审核结果</label>
             <div class="layui-input-block" style="width: 200px;">
-                <select id="yjyaZpjjg" name="yjyaZpjjg" lay-filter="" disabled>
+                <select id="czGcZpjShjg" name="czGcZpjShjg" lay-filter="" disabled>
                     <option value="1">通过</option>
                     <option value="0">不通过</option>
                 </select>
@@ -164,7 +192,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block" style="width: 150px;">
-                <select id="yjyaZt" name="yjyaZt" lay-filter="" disabled>
+                <select id="czGcZt" name="czGcZt" lay-filter="" disabled>
                     <option value="2">已备案</option>
                     <option value="1">试用中</option>
                     <option value="0">已弃用</option>
@@ -172,9 +200,15 @@
             </div>
         </div>
         <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">备案开始时间</label>
+            <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
+                <input id="czGcBakssj" type="text" name="czGcBakssj" autocomplete="off" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
             <label class="layui-form-label" style="width: 100px;">弃用开始时间</label>
             <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 140px;">
-                <input id="yjyaQykssj" type="text" name="yjyaQykssj" autocomplete="off" placeholder="" class="layui-input" readonly>
+                <input id="czGcQykssj" type="text" name="czGcQykssj" autocomplete="off" placeholder="" class="layui-input" readonly>
             </div>
         </div>
     </div>
@@ -183,19 +217,16 @@
 
 <script>
 
-    // 动态创建url
-    var b = $.getUrlParam("yjyaBh");
-    // console.log(b);
-    var bmUrl = "/lifeManage/selectYalogByBh" + b;
+
 
     //console.log(bmUrl);
     renderMod.form = {
         val:{
             filter:"forms",//与form标签lay-filter相同
             get:{
-                url:"/lifeManage/selectYalogByBh",
+                url:"/lifeManage/selectOneCzgc",
                 type:"POST",
-                data:{bh:$.getUrlParam("yjyaBh")}
+                data:{id:$.getUrlParam("id")}
             },
             func:function(data) {
                 // console.log(data);
@@ -207,35 +238,37 @@
                     }
                 }
 
-                hidden("#yjyaBh");
-                hidden("#yjyaNgr");
-                hidden("#yjyaNgrq");
-                hidden("#yjyaName");
-                hidden("#yjyaShr");
-                hidden("#yjyaShrq");
-                hidden("#yjyaSykssj");
-                hidden("#yjyaZpjsqr");
-                hidden("#yjyaZpjsqrq");
-                hidden("#yjyaBakssj");
-                hidden("#yjyaZpjshr");
-                hidden("#yjyaZpjshrq");
-                hidden("#yjyaShyj");
-                hidden("#yjyaZpjyj");
-                hidden("#yjyaZpjyy");
-                hidden("#yjyaZpjyy");
-                hidden("#yjyaZpjjg");
-                hidden("#yjyaZt");
-                hidden("#yjyaQykssj");
+                var url = $("#gcUrl").val();
+                $("#gcc").attr('src',url.substring(0,url.lastIndexOf(',')))
+                hidden("#czGcBh");
+                hidden("#czGcNgr");
+                hidden("#czGcNgrq");
+                hidden("#czGcName");
+                hidden("#czGcShr");
+                hidden("#czGcZpsShrq");
+                hidden("#czGcSxrq");
+                hidden("#czGcZpjsqr");
+                hidden("#czGcZpjSqrq");
+                hidden("#czGcBakssj");
+                hidden("#czGcZpjShr");
+                hidden("#czGcShyj");
+                hidden("#czGcZpjyj");
+                hidden("#czGcZpjyy");
+                hidden("#czGcZpjyy");
+                hidden("#czGcZpjShjg");
+                hidden("#czGcZt");
+                hidden("#czGcQykssj");
+                hidden("#czGcZpjShyj");
             }
         }
     };
 
 
-    // console.log($("#yjyaZpjsqr").val());
+    // console.log($("#czGcZpjsqr").val());
 
 
-    // if($("#yjyaZpjsqr").val()=="" || $("#yjyaZpjsqr").val()==null || $("#yjyaZpjsqr").val()==undefined){
-    //     $("#yjyaZpjsqr").parent().parent().css("display","none");
+    // if($("#czGcZpjsqr").val()=="" || $("#czGcZpjsqr").val()==null || $("#czGcZpjsqr").val()==undefined){
+    //     $("#czGcZpjsqr").parent().parent().css("display","none");
     // }
 
 </script>
