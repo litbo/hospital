@@ -2,18 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>数据收集</title>
-    <link rel="stylesheet" href="../layui/css/layui.css">
-    <link rel="stylesheet" href="../iconfont/iconfont.css">
-    <link rel="stylesheet" href="../css/dataIndex.css">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../iconfont/iconfont.js"></script>
-	<script src="../../../../static/admin/js/basic.js"></script>
+    <title>单机运行设备</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css">
+	<link rel="stylesheet" href="../css/dataIndex.css">
+	<script type="text/javascript" src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+	<!--[if IE 8]>
+	<script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="../../../../static/admin/js/basic.js"></script>
 </head>
-<body>
-	<!-- 表格 -->
-	<table class="layui-hide" id="table" lay-filter="table1"></table>
+
+<body style="background-color:#f2f2f2;">
+
+<!--表格-->
+<div class="layui-row">
+	<div class="col-xs-12">
+		<table class="layui-hide" id="table" lay-filter="table1"></table>
+	</div>
+</div>
 
 <script type="text/html" id="toolBar">
 	<!-- 搜索区域 -->
@@ -40,12 +50,10 @@
 		</div>
 		<div class="layui-input-inline">
 			<button class="layui-btn" data-type="reload">查找</button>
-			<button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
 		</div>
 	</form>
 </script>
 
-<script src="../layui/layui.js"></script>
 <script src="../js/dataIndex.js"></script>
 <script>
 
@@ -54,12 +62,12 @@
 			table: {
 				cols: [[ //表头
 					{type: 'checkbox', fixed: 'left'}
-					,{field:'bmName', title:'科室', fixed: 'left', unresize: true}
+					,{field:'bmName', title:'科室'}
 					,{field:'eqSbbh', title:'设备编号'}
 					,{field:'eqName', title:'设备名称'}
 					,{field:'eqXh', title:'型号'}
 					,{field:'standbytime', title:'待机时长'}
-					,{field:'workhours', title:'工作时长'}
+					,{field:'workhours', title:'工作时长',width:150}
 				]]
 				, url: "/operationRecord/show3"
 				, method: "POST"
@@ -99,16 +107,7 @@
 			elem:"#date1",
 			range: true,
 			format:'yyyy-MM-dd',
-			isInitValue:false,
-			value:today,
-			// done: function (value, date, endDate) {
-			// 	var startDate = new Date(value).getTime();
-			// 	var endTime = new Date($('#qEndTime').val()).getTime();
-			// 	if (endTime < startDate) {
-			// 		layer.msg('结束时间不能小于开始时间');
-			// 		$('#qBeginTime').val($('#qEndTime').val());
-			// 	}
-			// }
+			value:false
 		},
 		val: {
 			filter: "forms",
@@ -122,69 +121,6 @@
 			]
 		}
 	};
-
-	layui.use(['form', 'layedit', 'laydate'], function(){
-
-		var form = layui.form
-				,layer = layui.layer
-				,layedit = layui.layedit
-				,laydate = layui.laydate;
-
-		// 弹出层
-		var $ = layui.jquery;
-
-		//时时监听layui下列框的改变
-		form.on('select(juDate)', function(data){
-			if(data.value == 1){
-				console.log(1);
-				ri();
-			}
-			else if (data.value == 2) {
-				console.log(2);
-				yue();
-			}
-			else if (data.value == 3) {
-				console.log(3);
-				nian();
-			}
-		});
-
-		function ri() {
-			renderMod.form = {
-				date:{
-					elem:"#date1",
-					value:today0,
-					type:"date",
-					format:'yyyy-MM-dd',
-					range: true
-				}
-			};
-		}
-
-		function yue() {
-			renderMod.form = {
-				date:{
-					elem:"#date1",
-					value:today0,
-					type: 'month',
-					format:'yyyy-MM-dd',
-					range: true
-				}
-			};
-		}
-
-		function nian() {
-			renderMod.form = {
-				date:{
-					elem:"#date1",
-					value:today0,
-					type: 'year',
-					format:'yyyy-MM-dd',
-					range: true
-				}
-			};
-		}
-	});
 
 </script>
 </body>

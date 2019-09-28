@@ -2,37 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <title>匹配查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>数据收集</title>
-    <link rel="stylesheet" href="../layui/css/layui.css">
-    <link rel="stylesheet" href="../iconfont/iconfont.css">
-    <link rel="stylesheet" href="../css/dataIndex.css">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../iconfont/iconfont.js"></script>
-    <script src="../../../../static/admin/js/basic.js"></script>
-    <script src="../../../../static/admin/js/renderMod.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
 </head>
-<body>
+<body style="background-color:#f2f2f2;">
 
-<!-- 表格 -->
-<table class="layui-hide" id="table" lay-filter="table1"></table>
+<!--表格-->
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table class="layui-hide" id="table" lay-filter="test"></table>
+    </div>
+</div>
 
 <script type="text/html" id="toolBar">
     <!-- 搜索区域 -->
-    <button class="layui-btn layui-btn-sm" lay-event="delAll" id="delAll"
-            style="background-color: #cc0033;" ><i
-            class="layui-icon" data-type="getCheckData"></i>批量删除</button>
-    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-            onclick="javascript:history.back(-1);">返回</button>
-    <div class="layui-input-inline" style="width: 100px;margin-left: 550px;">
-        <input type="text" name="eqName" autocomplete="off"
-               placeholder="设备名称" class="layui-input">
-    </div>
-    <div class="layui-input-inline" style="width: 100px;">
-        <input type="text" name="sfXmMc" autocomplete="off" placeholder="医嘱名称" class="layui-input">
-    </div>
-    <div class="layui-input-inline" style="width: 80px;">
-        <button class="layui-btn" data-type="reload">查找</button>
+    <form action="">
+        <div class="layui-input-inline">
+            <input type="text" name="eqName" autocomplete="off" placeholder="设备名称" class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="sfXmMc" autocomplete="off" placeholder="医嘱名称" class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width: 80px;">
+            <button class="layui-btn" data-type="reload">查找</button>
+        </div>
+    </form>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-sm" lay-event="delAll" id="delAll" style="background-color: #cc0033;" ><i class="layui-icon" data-type="getCheckData"></i>批量删除</button>
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:history.back(-1);">返回</button>
     </div>
 </script>
 

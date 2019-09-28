@@ -4,16 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>实时监视</title>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <link rel="stylesheet" href="iconfont/iconfont.css">
-    <link rel="stylesheet" href="css/dataIndex.css">
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="iconfont/iconfont.js"></script>
-    <script src="../../../static/admin/js/basic.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
 </head>
-<body>
+<body style="background-color: #f2f2f2;">
 <div class="layui-row">
-    <div class="layui-col-md9">
+    <div class="layui-col-md9" style="padding-left: 10px;box-sizing: border-box">
         <div class="grid-demo grid-demo-bg1">
             <table class="layui-hide" id="table" lay-filter="table1"></table>
         </div>
@@ -159,7 +160,6 @@
     <span>状态不明</span>
     {{# } }}
 </script>
-<script src="layui/layui.js"></script>
 <script src="layui/echarts.js"></script>
 <script src="js/dataIndex.js"></script>
 

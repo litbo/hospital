@@ -11,9 +11,9 @@
     <script src="../iconfont/iconfont.js"></script>
     <script src="../../../../static/admin/js/basic.js"></script>
 </head>
-<body>
+<body style="background-color: #f2f2f2;">
 
-<div class="layui-fluid" style="width: 40%;float:left;">
+<div class="layui-fluid" style="width: 40%;float:left;margin-top: 10px;">
     <div class="layui-col-md12">
         <div class="layui-card">
             <div class="layui-card-body">
@@ -34,7 +34,7 @@
         </div>
     </div>
 </div>
-<div class="layui-fluid" style="width: 53%;float: left;margin-left: -10px;">
+<div class="layui-fluid" style="width: 53%;float: left;margin-left: -10px;margin-top: 10px;">
     <div class="layui-col-md12">
         <div class="layui-card">
             <div class="layui-card-body">
@@ -55,17 +55,12 @@
             </div>
         </div>
     </div>
-    <button class="layui-btn" lay-event="getCheckData" id="pipei"
-            style="float: left;margin: 30px 0 20px 20px;">匹配</button>
-    <a class="layui-btn layui-btn-primary" lay-event="pipeiCk" id="pipeiCk"
-       style="float: left;margin: 30px 0 20px 10px;" href="pipeiCk.html">查看已匹配信息
-    </a>
+    <a class="layui-btn layui-btn-primary" lay-event="pipeiCk" id="pipeiCk" style="float: right;margin: 30px 0 20px 10px;" href="pipeiCk.html">查看已匹配信息</a>
+    <button class="layui-btn" lay-event="getCheckData" id="pipei" style="float: right;margin: 30px 0 20px 20px;">匹配</button>
 </div>
 
 <script type="text/html" id="cs">
-    <a class="layui-btn layui-btn-normal layui-btn-sm" id="csh"
-       href="javascript:;">初始化医嘱项目
-    </a>
+    <a class="layui-btn layui-btn-normal layui-btn-sm" id="csh" href="javascript:;">初始化医嘱项目</a>
 </script>
 
 

@@ -2,20 +2,27 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<title>设备值班排班设置</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>数据收集</title>
-	<link rel="stylesheet" href="../layui/css/layui.css">
-	<link rel="stylesheet" href="../iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css">
 	<link rel="stylesheet" href="../css/dataIndex.css">
-	<script src="../js/jquery-3.3.1.min.js"></script>
-	<script src="../iconfont/iconfont.js"></script>
-	<script src="../../../../static/admin/js/basic.js"></script>
+	<script type="text/javascript" src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
+	<!--[if IE 8]>
+	<script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="../../../../static/admin/js/basic.js"></script>
 </head>
-<body>
+<body style="background-color: #f2f2f2;">
 
 <!-- 表格 -->
-<table class="layui-hide" id="table" lay-filter="table1"></table>
-
+<div class="layui-row">
+	<div class="col-xs-12">
+		<table class="layui-hide" id="table" lay-filter="table1"></table>
+	</div>
+</div>
 <!--批量删除和添加-->
 <script type="text/html" id="zq_toolbar">
 	<div class="layui-btn-container">
@@ -29,8 +36,6 @@
 
 <script type="text/html" id="toolBar">
 	<!-- 搜索区域 -->
-	<a class="layui-btn layui-btn-xs" href="add2.html" style="background-color: #003366;margin-bottom: 5px;"><i class="layui-icon "></i>新增</a>
-	<button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;margin-bottom: 5px;"><i class="layui-icon"></i>批量删除</button>
 	<form action="" layui-filter="forms" >
 		<div class="layui-input-inline" style="width: 130px;">
 			<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
@@ -45,9 +50,13 @@
 		</div>
 		<div class="layui-input-inline">
 			<button class="layui-btn" data-type="reload">查找</button>
-			<button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
 		</div>
 	</form>
+	<hr class="devideHr">
+	<div class="addBtn">
+		<a class="layui-btn layui-btn-sm" href="add2.html" style="background-color: #003366;"><i class="layui-icon "></i>新增</a>
+		<button class="layui-btn layui-btn-sm" lay-event="delAll" style="background-color: #cc0033;"><i class="layui-icon"></i>批量删除</button>
+	</div>
 </script>
 
 <!--table编辑删除-->
