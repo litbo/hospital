@@ -109,7 +109,7 @@ public class EqCsController {
         Map map =new HashMap();
         map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +
-                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "<button class='layui-btn' data-type='reload'>查询</button>" +
                 "</div>");
         Map m = new HashMap();
         m.put("url","/supervise/csgl/listEqcsByX");
@@ -149,7 +149,7 @@ public class EqCsController {
         Map map =new HashMap();
         map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +
-                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "<button class='layui-btn' data-type='reload'>查询</button>" +
                 "</div>");
         Map m = new HashMap();
         m.put("url","/supervise/csgl/listEqcsByX1");
@@ -173,7 +173,7 @@ public class EqCsController {
         Map map =new HashMap();
         map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +
-                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "<button class='layui-btn' data-type='reload'>查询</button>" +
                 "</div>");
         Map m = new HashMap();
         m.put("url","/supervise/csgl/listEqcsByX2");
@@ -189,7 +189,7 @@ public class EqCsController {
         Map map =new HashMap();
         map.put("dom","<div class='layui-inline'><input type=\"text\" name=\"sbcsName\" class=\"layui-input\" placeholder=\"厂商名称\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +
-                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "<button class='layui-btn' data-type='reload'>查询</button>" +
                 "</div>");
         Map m = new HashMap();
         m.put("url","/supervise/csgl/listEqcsVOByX");

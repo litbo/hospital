@@ -175,7 +175,7 @@ public class FwPjzdController {
                 "<div class='layui-inline'><input type=\"text\" name=\"pjSzm\" class=\"layui-input\" " +
                 "placeholder=\"配件拼音码\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +
-                "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                "<button class='layui-btn' data-type='reload'>查询</button>" +
                 "</div>");
         Map m = new HashMap();
         m.put("url","/security/pjzd/listFwPjzd");

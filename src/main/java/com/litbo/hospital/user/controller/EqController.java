@@ -301,7 +301,7 @@ public class EqController {
         map.put("dom",
                 "<div class='layui-inline'><input type=\"text\" name=\"pym\" class=\"layui-input\" placeholder=\"品名拼音码\" autocomplete=\"off\"></div>" +
                         "    <div class='layui-input-inline mar10-0' align='center'>" +
-                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "<button class='layui-btn' data-type='reload'>查询</button>" +
                         "</div>");
 
         Map m = new HashMap();
@@ -322,7 +322,7 @@ public class EqController {
                         "<div class='layui-inline'><input type=\"text\" name=\"eqZcbh\" class=\"layui-input\" placeholder=\"资产编码\" autocomplete=\"off\"></div>" +
                         "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"部门名称\" autocomplete=\"off\"></div>" +
                         "    <div class='layui-input-inline mar10-0' align='center'>" +
-                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "<button class='layui-btn' data-type='reload'>查询</button>" +
                         "</div>");
 
         Map m = new HashMap();
@@ -373,7 +373,7 @@ public class EqController {
         map.put("dom",
                 "<div class='layui-inline'><input type=\"text\" name=\"ccname\" class=\"layui-input\" placeholder=\"设备名称\" autocomplete=\"off\"></div>" +
                         "    <div class='layui-input-inline mar10-0' align='center'>" +
-                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "<button class='layui-btn' data-type='reload'>查询</button>" +
                         "</div>");
 
         Map m = new HashMap();

@@ -62,7 +62,7 @@ public class BmController {
         map.put("dom",
                 "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"部门名称\" autocomplete=\"off\"></div>" +
                         "    <div class='layui-input-inline mar10-0' align='center'>" +
-                        "<button class='layui-btn' data-type='reload'>搜索</button>" +
+                        "<button class='layui-btn' data-type='reload'>查询</button>" +
                         "</div>");
 
         Map m = new HashMap();

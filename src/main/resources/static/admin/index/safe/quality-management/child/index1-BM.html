@@ -17,13 +17,14 @@
 <script type="text/html" id="toolBar">
 <div class="demoTable" style="height: 50px;">
 
-  <div class="layui-inline " demoTable >
+  <div class="layui-btn-container layui-inline " demoTable style="width: 50px;margin-left: 5px;float: left">
       <button class="layui-btn Bm" id="Bm" lay-event="getCheckData">确定</button>
   </div>
 
 
-  <form class="layui-form layui-inline  layui-btn-sm"  action="" >
-          <div class="layui-inline">
+  <form class="layui-form layui-inline"  action="" style="width: 300px;margin-left:100px;float: left" >
+      <div class="layui-form-item layui-inline" >
+          <div class="layui-inline" style="width: 300px;height: 40px;">
               <div  id="moreBar" style="float: left">
                   <label>
                     <!--  <input type="hidden" lay-filter="bmName" value="">-->
@@ -32,9 +33,8 @@
                       </select>
                   </label>
               </div>
+              <button type="button" class="layui-inline  layui-btn"   data-type="search"   style="float: left">查找</button>
           </div>
-      <div class="layui-inline" >
-      <button type="button" class="layui-inline layui-btn"   data-type="search"   style="float: left">查找</button>
       </div>
 
   </form>
@@ -83,7 +83,7 @@
                      , {field: 'tel', title: '负责人电话', minWidth: 130}
                  ]]
                  , page: true
-                 , height: 400
+                 , height: 300
                  , parseData: function (res) { //res 即为原始返回的数据
                      return {
                          "code": res.code, //解析接口状态
