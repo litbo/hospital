@@ -60,9 +60,10 @@
     </form>
     <hr class="devideHr">
     <div class="addBtn">
-    <button class="layui-btn layui-btn-xs" lay-event="delAll" style="background-color: #cc0033;height: 22px;margin-bottom: 5px;font-size: 15px;">
-        <i class="layui-icon" style="margin-top: -15px;font-size: 13px;"></i>弃用
-    </button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="delAll" style="background-color: #cc0033;">
+            <i class="layui-icon">弃用</i>
+        </button>
     </div>
 </script>
 
@@ -90,17 +91,17 @@
 </script>
 
 <script>
-    function pText(){
+    function pText() {
         $.ajax({
             type: "POST",
             url: '/lifeManage/AllTypeCount',
-            success: function(result) {
+            success: function (result) {
                 $("#yahj").text(result.data[0]);
                 $("#yba").text(result.data[1]);
                 $("#syz").text(result.data[2]);
                 $("#yqy").text(result.data[3]);
             },
-            error:function(){
+            error: function () {
 
                 alert("error");
             }
@@ -113,15 +114,15 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'xh', title:'序号',templet:'#xh',width:80}
-                    ,{field:'yjyaZt', toolbar:'#jsonChange', title:'标志', width:80}
-                    ,{field:'yjyaBh',title:'编号'}
-                    ,{field:'yjyaName',title:'名称', width:140}
-                    ,{field:'yjyaNgr', title:'拟稿人', width:130}
-                    ,{field:'yjyaShr', title:'审核人', width:130}
-                    ,{field:'yjyaShrq', title:'审核日期'}
+                    , {field: 'xh', title: '序号', templet: '#xh', width: 80}
+                    , {field: 'yjyaZt', toolbar: '#jsonChange', title: '标志', width: 80}
+                    , {field: 'yjyaBh', title: '编号'}
+                    , {field: 'yjyaName', title: '名称', width: 140}
+                    , {field: 'yjyaNgr', title: '拟稿人', width: 130}
+                    , {field: 'yjyaShr', title: '审核人', width: 130}
+                    , {field: 'yjyaShrq', title: '审核日期'}
                     // ,{field:'yjyaZpjjd', title:'再评价进度'}
-                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
+                    , {fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo', width: 150}
                 ]]
                 , url: "/lifeManage/selectAllYalogByExample"
                 , method: "POST"
@@ -138,42 +139,42 @@
                         "count": res.data.total //总数据数
                     }
                 }
-                ,done: function(obj){
+                , done: function (obj) {
                     tableFunc({
-                        "tools":[
+                        "tools": [
                             {
-                                tool:"toolbar",
-                                event:"delAll",
-                                send:{
-                                    id:"table",
-                                    filter:"table1",
-                                    name:"ids",
-                                    event:"delAll",
-                                    url:"/lifeManage/updateYaStatus",
-                                    type:"POST",
-                                    contentType:"application/json",
-                                    par:"yjyaBh",
-                                    reload:true
+                                tool: "toolbar",
+                                event: "delAll",
+                                send: {
+                                    id: "table",
+                                    filter: "table1",
+                                    name: "ids",
+                                    event: "delAll",
+                                    url: "/lifeManage/updateYaStatus",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    par: "yjyaBh",
+                                    reload: true
                                 }
                             },
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
-                                type:2,
+                                type: 2,
                                 event: "pipei",
-                                title:"查看",
-                                content:"child/view-stats.html",
+                                title: "查看",
+                                content: "child/view-stats.html",
                                 area: ['1000px', '450px'],
-                                dataUrl:["yjyaBh"],
-                                func:function(obj){
+                                dataUrl: ["yjyaBh"],
+                                func: function (obj) {
                                     // console.log(obj);
                                 }
                             },
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
-                                type:2,
+                                type: 2,
                                 event: "zpj",
                                 content: 'child/zpj.html',
                                 area: ['1000px', '90%'],
-                                dataUrl:["yjyaBh"],
-                                func:function(obj){
+                                dataUrl: ["yjyaBh"],
+                                func: function (obj) {
                                     console.log(obj);
                                 }
                             }
@@ -186,12 +187,12 @@
                 url: "/lifeManage/selectAllYalogByExample",
                 type: "reload",
                 method: "POST",
-                data: ["zt","qssj", "jssj", "yabh", "yaname"]
+                data: ["zt", "qssj", "jssj", "yabh", "yaname"]
             }
-        },page: true
+        }, page: true
     };
-    renderMod.formAction={
-        date:[
+    renderMod.formAction = {
+        date: [
             {
                 elem: "#date1",
                 type: "date",
