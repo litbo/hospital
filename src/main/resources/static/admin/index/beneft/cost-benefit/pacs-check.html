@@ -15,6 +15,9 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
+        body{
+            background-color: #f2f2f2;
+        }
         .setW{
             width: 80px;
         }
@@ -32,9 +35,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="edit" style="background: #CC0033"><i class="fas fa-trash-alt"></i>&nbsp;批量删除</a>
-    </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -65,6 +65,10 @@
                 </form>
             </div>
         </div>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="edit" style="background: #CC0033"><i class="fas fa-trash-alt"></i>&nbsp;批量删除</a>
     </div>
 </script>
 

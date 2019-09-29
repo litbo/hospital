@@ -17,7 +17,7 @@
     <script src="/static/admin/js/basic.js"></script>
 </head>
 
-<body>
+<body style="background-color: #f2f2f2;">
 <div class="layui-row">
     <div class="col-xs-12 padRight">
         <table id="table" lay-filter="table1"></table>
@@ -25,9 +25,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-sm" lay-event="addData" style="background: #003366"><i class="fas fa-plus"></i>新增</a>
-    </div>
     <div class="visible-xs" id="check">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -70,12 +67,16 @@
                             <option value="20">创伤骨科病房</option>
                         </select>
                     </div>
-                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10" align="center">
+                    <div class="layui-input-inline xs-100 mar10-0 pad0-10" align="center">
                         <button class="layui-btn" data-type="reload">查找</button>
                     </div>
                 </form>
             </div>
         </div>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm" lay-event="addData" style="background: #003366"><i class="fas fa-plus"></i>新增</a>
     </div>
 </script>
 <script type="text/html" id="bar">

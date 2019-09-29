@@ -15,6 +15,9 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
+        body{
+            background-color: #f2f2f2;
+        }
         .layui-inline{
             width:140px;
         }
@@ -29,9 +32,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -72,6 +72,10 @@
                 </form>
             </div>
         </div>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm" lay-event="edit" style="background-color: #cc0033;"><i class="fas fa-trash-alt"></i>&nbsp;删除</a>
     </div>
 </script>
 

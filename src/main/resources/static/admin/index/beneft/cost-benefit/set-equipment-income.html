@@ -17,7 +17,7 @@
     <script src="/static/admin/js/basic.js"></script>
 </head>
 
-<body>
+<body style="background-color: #f2f2f2;">
 <div class="layui-row">
     <div class="col-xs-12 padRight">
         <table id="table" lay-filter="table1"></table>
@@ -25,9 +25,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>
-    </div>
     <div class="visible-xs" id="check">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch" id="dataSearch">数据检索</a>
     </div>
@@ -76,6 +73,10 @@
                 </form>
             </div>
         </div>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm" lay-event="add" style="background-color: #003366;"><i class="fas fa-plus"></i>&nbsp;新增</a>
     </div>
 </script>
 <script type="text/html" id="bar">
