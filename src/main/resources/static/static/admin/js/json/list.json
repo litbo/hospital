@@ -2883,8 +2883,8 @@
                 "title": "规章制度模板",
                 "url": "./table.html",
                 "icon": "paperclip",
-                "id": "6024",
-                "shiro": "a",
+                "id": "",
+                "shiro": "",
                 "children": [
                   {
                     "title": "模板列表",
@@ -3027,7 +3027,7 @@
                 "url": "./table.html",
                 "icon": "paperclip",
                 "id": "6034",
-                "shiro": "a",
+                "shiro": "",
                 "children": [
                   {
                     "title": "模板列表",

@@ -131,7 +131,7 @@
 
         <div class="layui-row">
             <div class="layui-col-xs12">
-                <div class="layui-form-item" style="margin:20px 0;">
+                <div class="layui-form-item" style="margin:20px 0; float: right">
                     <button class="layui-btn" layui-submit="" id="saveD">保存信息</button>
                 </div>
             </div>
@@ -139,67 +139,6 @@
     </form>
 </div>
 
-<div class="hidden" id="openView">
-    <form class="layui-form layui-form-pane" lay-filter="showIn" action="">
-        <div class="layui-row">
-            <div class="col-xs-12">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">科室名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="bmName1" placeholder="请输入" class="layui-input" autocomplete="off">
-                    </div>
-                </div>
-                <div class="layui-form-item" pane>
-                    <label class="layui-form-label">维修科室</label>
-                    <div class="layui-input-block" style="line-height:40px">
-                        <input type="radio" name="wxFlag1" value="1" title="是" checked>
-                        <input type="radio" name="wxFlag1" value="0" title="否">
-                    </div>
-                </div>
-
-                <div class="layui-form-item" pane>
-                    <label class="layui-form-label" style="line-height:30px">负责人<span class="sign">*</span></label>
-                    <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;"
-                                id="selectRoom">选择
-                        </button>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label" style="height:46px;line-height:30px;">负责人预览</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="userXm" placeholder="请选择" autocomplete="off" lay-verify="required"
-                               disabled class="layui-input" style="height:46px;">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">科室电话</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="bmTel1" placeholder="请输入" class="layui-input" autocomplete="off" lay-verify="required|phone">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">地址</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input" placeholder="请输入" name="bmAddr1" autocomplete="off">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-row">
-            <div class="col-xs-12">
-                <div class="layui-form-item" style="margin:10px 0;">
-                    <button class="layui-btn" id="addIn">确认添加</button>
-                </div>
-                <div class="layui-form-item" style="margin:10px 0;">
-                    <button class="warm-btn layui-btn layui-btn-normal layui-btn-fluid" id="canal">取消</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 
 <script>
     var setting = {

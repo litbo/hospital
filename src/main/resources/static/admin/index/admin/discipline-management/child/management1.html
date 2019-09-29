@@ -48,9 +48,6 @@
                 </div>
 
             </div>
-            <div class="layui-form-item">
-
-            </div>
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -68,14 +65,7 @@
 
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="userId2" id="" lay-verify="required" lay-filter="shr" lay-verify="required">
-                        <option></option>
-                    </select>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="layui-row">
@@ -93,8 +83,16 @@
             </div>
             <table id="table" lay-filter="table1"></table>
         </div>
+        <div class="layui-form-item col-xs-6" style="float: left">
+            <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <select name="userId2" id="" lay-verify="required" lay-filter="shr" lay-verify="required">
+                    <option></option>
+                </select>
+            </div>
+        </div>
         <div class="col-xs-12">
-            <div class="layui-form-item">
+            <div class="layui-form-item" style="float: right;margin-right: 5%">
                 <button class="layui-btn" lay-submit="" lay-filter="save">保存
                 </button>
             </div>

@@ -86,15 +86,7 @@
         </fieldset>
         <div class="col-xs-12 col-sm-6">
 
-            <div class="layui-form-item">
-                <label class="layui-form-label">审核人<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <!--<input type="text" name="userName2"  autocomplete="off" class="layui-input" lay-verify="required">-->
-                    <input type="text" name="userXmaa" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXmaa" disabled>
-                    <input type="text" name="userIdaa" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userIdaa" style="display:none;">
 
-                </div>
-            </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">审核结果<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -110,6 +102,15 @@
                     <input type="text" name="shTime" class="layui-input" autocomplete="off" id="date" lay-verify="date">
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <!--<input type="text" name="userName2"  autocomplete="off" class="layui-input" lay-verify="required">-->
+                    <input type="text" name="userXmaa" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXmaa" disabled>
+                    <input type="text" name="userIdaa" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userIdaa" style="display:none;">
+
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item layui-form-text">
@@ -120,7 +121,7 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="layui-form-item">
+            <div class="layui-form-item" style="margin-right: 5%;float: right">
                 <button class="layui-btn" lay-submit="" lay-filter="save">审核提交
                 </button>
             </div>

@@ -31,9 +31,6 @@
 <body>
 <form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
-        <fieldset class="layui-elem-field layui-field-title">
-            <legend>科室管理团队分工</legend>
-        </fieldset>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item" pane>
                 <label class="layui-form-label" style="line-height:30px">科室<span class="sign">*</span></label>
@@ -48,9 +45,7 @@
                 </div>
 
             </div>
-            <div class="layui-form-item">
 
-            </div>
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -67,14 +62,7 @@
                     <input type="text" name="userId1" value="" autocomplete="off" class="layui-input" lay-verify="required" id="userId1" style="display:none;">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="userId2" id="" lay-verify="required" lay-filter="shr">
-                        <option></option>
-                    </select>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="layui-row">
@@ -92,8 +80,16 @@
             </div>
             <table id="table" lay-filter="table1"></table>
         </div>
+        <div class="layui-form-item col-xs-6">
+            <label class="layui-form-label" style="line-height:20px">审核人<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <select name="userId2" id="" lay-verify="required" lay-filter="shr">
+                    <option></option>
+                </select>
+            </div>
+        </div>
         <div class="col-xs-12">
-            <div class="layui-form-item">
+            <div class="layui-form-item" style="float: right;margin-right: 5%">
                 <button class="layui-btn" lay-submit="" lay-filter="save">保存
                 </button>
             </div>
