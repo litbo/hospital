@@ -18,6 +18,9 @@
         .layui-inline{
             width:140px;
         }
+        body{
+            background: #f2f2f2;
+        }
     </style>
 </head>
 
@@ -29,9 +32,7 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" href="/security/blsj/listFwBlsjExport" target="_blank">导出EXCEL</a>
-    </div>
+
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -51,6 +52,11 @@
                 </form>
             </div>
         </div>
+    </div>
+
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-normal" href="/security/blsj/listFwBlsjExport" target="_blank">导出EXCEL</a>
     </div>
 </script>
 

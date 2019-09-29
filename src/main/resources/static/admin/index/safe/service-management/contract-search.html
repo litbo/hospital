@@ -18,6 +18,9 @@
         .layui-inline{
             width:140px;
         }
+        body{
+            background: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -61,9 +64,9 @@
                     , {field: 'htName', title: '合同名称', minWidth: 150}
                     , {field: 'htPrice', title: '合同金额（元）', minWidth: 200, sort: true}
                     , {field: 'htTime', title: '合同日期', minWidth: 100}
-                    , {field: 'sbcsName', title: '维修商', minWidth: 150}
-                    , {field: 'htStatusString', title: '状态', minWidth: 150}
-                    , {title: '', align: 'center', minWidth: 200, toolbar: '#bar'}
+                    , {field: 'sbcsName', title: '维修商', minWidth: 200}
+                    , {field: 'htStatusString', title: '状态', minWidth: 80}
+                    , {title: '', align: 'center', minWidth: 80, toolbar: '#bar'}
                 ]]
                 , url: "/fwht/list"
                 , request: {
@@ -89,7 +92,8 @@
                                 title: "合同详情",
                                 type: 2,
                                 content: "./child/contract-xq.html",
-                                dataUrl: ["id"]
+                                dataUrl: ["id"],
+                                area:["80%","75%"]
                             }
                         ]
                     })

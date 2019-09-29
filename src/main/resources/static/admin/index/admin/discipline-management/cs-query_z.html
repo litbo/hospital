@@ -26,30 +26,32 @@
 	</div>
 
 <script type="text/html" id="toolBar">
-	<div class="layui-inline xs-100 mar10-0 pad0-10"style="font-size: 18px;color: #393D49;width: 100%">
-        国家药检局：<span><button type="button" class="layui-btn site-demo-active" id="startSpider"  data-type="loading">数据爬虫</button><button id="saveDate" type="button" class="layui-btn">同步数据</button></span>
-        <div class="layui-progress" lay-filter="demo">
-            <div class="layui-progress-bar" lay-percent="0%"></div>
-        </div>
-    </div>
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10"style="font-size: 18px;color: #393D49">医疗器械查询：</div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="approvalNum" lay-verify="title" autocomplete="off" placeholder="请输入注册证编号" class="layui-input">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="enterprise" lay-verify="title" autocomplete="off" placeholder="请输入注册人名称" class="layui-input">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="productName" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn" data-type="search">查找</button>
-                    </div>
+                <div class="layui-inline xs-100 mar10-0 pad0-10"style="font-size: 18px;color: #393D49">医疗器械查询：</div>
+                <div class="layui-inline xs-100 mar10-0 pad0-10">
+                    <input type="text" name="approvalNum" lay-verify="title" autocomplete="off" placeholder="请输入注册证编号" class="layui-input">
+                </div>
+                <div class="layui-inline xs-100 mar10-0 pad0-10">
+                    <input type="text" name="enterprise" lay-verify="title" autocomplete="off" placeholder="请输入注册人名称" class="layui-input">
+                </div>
+                <div class="layui-inline xs-100 mar10-0 pad0-10">
+                    <input type="text" name="productName" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+                </div>
+                <div class="layui-inline xs-100 mar10-0 pad0-10">
+                    <button class="layui-btn" data-type="search">查找</button>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="layui-progress" lay-filter="demo">
+        <div class="layui-progress-bar" lay-percent="0%"></div>
+    </div>
+    <div class="layui-inline xs-100 mar10-0 pad0-10"style="font-size: 18px;color: #393D49;width: 100%">
+        国家药检局：<span><button type="button" class="layui-btn site-demo-active layui-btn-sm" id="startSpider"  data-type="loading">数据爬虫</button>
+        <button id="saveDate" type="button" class="layui-btn layui-btn-sm">同步数据</button></span>
+
     </div>
 </script>
 

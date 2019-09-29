@@ -6,32 +6,18 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css">
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
-    <!--[if IE 8]>
-    <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="../../../../static/admin/js/basic.js"></script>
-    <style>
-        .layui-table-tool{
-            background: #fff;
-        }
-        .layui-table-tool .layui-table-tool-self{
-            position: absolute;
-            height:30px;
-            top: 170px;
-            right: 10px;
-            width: 120px;
-            height: 30px;
-        }
-        .layui-table-tool-temp{
-            padding-right: 20px;
-        }
-        .layui-form-label{
-            width: 100px;
-        }
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        body{
+            background: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -45,94 +31,67 @@
 
 <!--头部工具-->
 <script type="text/html" id="toolBar">
-    <div style="height: 180px;">
-        <div class="content layui-collapse " style="height: 140px;border:none;margin-top:10px;margin-bottom: 10px;">
-            <form class="layui-form demoTable" action=""  style="border:none;">
-
-                <div class="layui-form-item ">
-                    <div class="layui-inline" style="margin-top: 10px">
-                        <label class="layui-form-label">设备编号</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="speqBh"   autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">设备名称</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="speqName"  placeholder="" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">生产厂家</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="speqScs"  autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item ">
-                    <div class="layui-inline" style="margin-top: 10px">
-                        <label class="layui-form-label">设备类型</label>
-                        <div class="layui-input-inline">
-                            <select name="speqType" lay-filter="">
-                                <option value="2">选择设备类型</option>
-                                <option value="1">特殊设备</option>
-                                <option value="0" >安全附件</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">设备状态</label>
-                        <div class="layui-input-inline">
-                            <select name="speqRun" lay-filter="">
-                                <option value="2">选择设备状态</option>
-                                <option value="1">使用中</option>
-                                <option value="0" >停用中</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline" >
-                        <label class="layui-form-label">所在科室</label>
-                        <div class="layui-input-inline">
-                           <!-- <select name="bmId" lay-filter="bmId" lay-search="" style="width: 150px">-->
-                                <select name="bmId" lay-filter="bmId" style="width: 150px">
-                                    <option value="">全部科室</option>
-                                </select>
-                           <!-- </select>-->
-                        </div>
-                    </div>
-
-                </div>
-                <div class="layui-form-item" style="position: absolute;bottom: -10px;right: 100px">
-                    <div class="layui-input-block"  >
-                        <button type="button" class="layui-btn"   data-type="search" >查找</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
+    <form class="layui-form demoTable" action=""  >
+        <div class="layui-inline" style="width: 130px">
+             <input type="text" name="speqBh"  placeholder="设备编号"   autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline" style="width: 130px">
+              <input type="text" name="speqName" placeholder="设备名称" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline" style="width: 130px">
+               <input type="text" name="speqScs" placeholder="生产厂家"  autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline" >
+                <!-- <select name="bmId" lay-filter="bmId" lay-search="" style="width: 150px">-->
+                <select name="bmId" lay-filter="bmId" style="width: 150px">
+                    <option value="">全部科室</option>
+                </select>
+                <!-- </select>-->
+         </div>
+         <div class="layui-inline">
+                <select name="speqType" lay-filter="">
+                    <option value="2">选择设备类型</option>
+                    <option value="1">特殊设备</option>
+                    <option value="0" >安全附件</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <select name="speqRun" lay-filter="">
+                    <option value="2">选择设备状态</option>
+                    <option value="1">使用中</option>
+                    <option value="0" >停用中</option>
+                </select>
+            </div>
+            <div class="layui-inline" >
+                  <button type="button" class="layui-btn"   data-type="search" >查找</button>
+                     <!--   <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+            </div>
 
             </form>
+        <hr class="devideHr">
+    <div class="addBtn " >
+        <button class="layui-btn layui-btn-sm addi" lay-event="increase" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+        <button  class="layui-btn layui-btn-sm editi" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+
+        <button class="layui-btn layui-btn-sm deli" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal layui-upload" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
+
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal layui-upload" style="margin-left: 10px" id="startUploadFile"><i class="layui-icon">&#xe621;</i>提交文件</button>
+
+        <button type="button" class="layui-btn layui-btn-sm" id="xzmb"> <i class="layui-icon">&#xe601;</i> 下载模板</button>
+
+        <div class="" style="float: right;">
+            <div class="inl" style="float: left;width: 300px">
+                设备总数量（台）：
+                <input type="text" value="" name="num1" id="num1" style="width: 80px;border: none;background: transparent" disabled>
+            </div>
+            <div class="inl"  style="float: left;width: 180px">
+                总价（元）：
+                <input type="text" value="" name="num2" id="num2" style="width: 80px;border: none;background: transparent" disabled>
+            </div>
         </div>
-
-
-
-
-    <div class="layui-btn-container" style="float: left;margin-left: 30px;">
-        <button class="layui-btn layui-btn-sm" lay-event="increase" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
-
-        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
-
-        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
-    </div>
-    <div class="" style="float: right;margin-right: 130px">
-        <div class="inl" style="float: left;width: 300px">
-            设备总数量（台）：
-            <input type="text" value="" name="num1" id="num1" style="width: 80px;border: none;background: transparent" disabled>
-        </div>
-        <div class="inl"  style="float: left;width: 180px">
-            总价（元）：
-            <input type="text" value="" name="num2" id="num2" style="width: 80px;border: none;background: transparent" disabled>
-        </div>
-    </div>
-
     </div>
 
 </script>
@@ -155,7 +114,6 @@
         renderMod= {
             form: {
                 val: {
-                   /* filter: "forms",*/
                     select: [
                         {
                             filter: "bmId",
@@ -164,8 +122,61 @@
                             url: "/supervise/bmgl/listBm"
                         }
                     ]
+                },
+                file:{
+                    elem:"#selectFile",
+                    url:"/specialEq/importSpeqInfo",
+                    accept:"file",
+                    acceptMime:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel",
+                    auto:false,
+                    bindAction:"#startUploadFile",
+                    field:"file",
+                    done:function(res,index,upload){
+                        //console.log(arguments);
+                        layer.msg('导入成功！', {
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                    },error:function(index,upload){
+                        console.log("index:"+index);
+                        console.log("upload"+upload);
+                    }
                 }
             },
+            btn:[
+                {
+                    elem:"#xzxz",
+                    func:function(){
+                        putMsg({
+                            alert:"表格标红列为必填项"
+                        })
+                    }
+                },
+                {
+                    elem:"#xzmb",
+                    func:function(){
+                        var url = '/specialEq/downloadExcel';
+                        //创建一个form用于提交数据
+                        var form=$("<form>");
+                        form.attr({
+                            "style":"display:none",
+                            "target":"",
+                            "method":"post",
+                            "action":url
+                        });
+                        $("body").append(form);//将表单放置在web中
+                        //插入表单内容（用于发送给后台）
+                        var input1=$("<input>");
+                        input1.attr({
+                            "type":"hidden",
+                            "name":"name",
+                            "value":"特种设备信息模板"
+                        });
+                        form.append(input1);
+
+                        form.submit();//表单提交
+                    }
+                }
+            ],
             addTable: {
                 table: {
                     elem: '#table'
