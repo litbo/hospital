@@ -14,7 +14,7 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
 </head>
-<body>
+<body  style="background-color: #f2f2f2;">
 <div class="layui-row">
     <div class="col-xs-12">
         <table id="table" lay-filter="table1"></table>
@@ -26,15 +26,7 @@
 </script>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-
-
-        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
-
-
-    </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-input-inline">
             <select name="gwLevel" lay-verify="required" lay-search="">
@@ -48,6 +40,16 @@
             <input class="layui-input" name="gwName" placeholder="岗位名称" id="test-table-demoReload" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="search">搜索</button>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+
+
+        <button class="layui-btn layui-btn-sm" lay-event="del" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+
+
     </div>
 </script>
 

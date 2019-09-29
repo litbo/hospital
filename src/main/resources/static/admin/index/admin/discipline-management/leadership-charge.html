@@ -16,7 +16,7 @@
     <script src="/static/admin/js/basic.js"></script>
 </head>
 
-<body>
+<body style="background-color: #f2f2f2;">
 <div class="layui-row">
     <div class="col-xs-12">
         <table id="table" lay-filter="table1"></table>
@@ -24,15 +24,16 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">划分</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
-    </div>
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
             <input type="text" name="" class="layui-input" autocomplete="off" placeholder="维修工程师">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="add">划分</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger"><i class="fas fa-trash-alt"></i></a>
     </div>
 </script>
 
