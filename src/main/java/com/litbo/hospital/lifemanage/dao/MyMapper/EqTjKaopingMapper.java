@@ -26,7 +26,7 @@ public interface EqTjKaopingMapper {
     @Select("select tj_sfyl from eq_tjsq where id=#{id}")
     String getSfylBySqid(String id);
 
-    /*根据装备调出id查询当前调配单的需要送达的设备和部门信息*/
+    /*根据装备调出id查询当前调配单的需要送达的设备和科室信息*/
     @Select(" select tj_dcks bmid ,tj_zbbm zbmc,tj_tpsl count from tj_zbdc where " +
             " id=#{dpdid}")
     List<EqTjKaoPingKsListVO> getAllTjKs(String dpdid);

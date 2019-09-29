@@ -39,9 +39,9 @@ public class DeviceparameterVO {
     private String eqZcbh;
     /**仪联网表id*/
     private String id;
-    /**部门id*/
+    /**科室id*/
     private String eqBmid;
-    /**部门名称*/
+    /**科室名称*/
     private String bmName;
     /**设备id*/
     private String eqId;

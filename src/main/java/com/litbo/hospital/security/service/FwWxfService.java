@@ -15,7 +15,7 @@ import java.util.List;
 public interface FwWxfService {
 
     /**
-     * 获取审批人   暂定为本部门的所有人
+     * 获取审批人   暂定为本科室的所有人
      * @param userId
      * @return
      */

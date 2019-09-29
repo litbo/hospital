@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface SBmDAO {
     /**
-     * 获取部门id和部门名称
+     * 获取科室id和科室名称
      * @param name
      * @return
      */

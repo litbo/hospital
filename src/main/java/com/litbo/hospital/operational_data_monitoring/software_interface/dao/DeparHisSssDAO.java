@@ -57,7 +57,7 @@ public interface DeparHisSssDAO {
     void save(DeparHisSss deparHisSss);
 
     /**
-     * 查看部门匹配情况
+     * 查看科室匹配情况
      * @return
      */
     @Select("SELECT\n" +
@@ -75,7 +75,7 @@ public interface DeparHisSssDAO {
 
 
     /**
-     * 根据条件筛选查看部门匹配情况
+     * 根据条件筛选查看科室匹配情况
      * @return
      */
     @Select(
@@ -96,7 +96,7 @@ public interface DeparHisSssDAO {
     List<DepartmentVO> selectByName(@Param("name") String name);
 
     /**
-     * 删除两个系统部门关联信息
+     * 删除两个系统科室关联信息
      */
     @Delete("delete from depar_his_sss")
     void delete();
@@ -115,7 +115,7 @@ public interface DeparHisSssDAO {
     List<DepartmentVO> selectAll();
 
     /**
-     * 根据手术室名称查询部门信息
+     * 根据手术室名称查询科室信息
      * @param name
      * @return
      */

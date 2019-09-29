@@ -14,7 +14,7 @@ public class SearchEqVO {
     /**资产编号*/
     private String eqZcbh;
 
-    /**部门id*/
+    /**科室id*/
     private String bmId;
 
     /**设备拼音码*/

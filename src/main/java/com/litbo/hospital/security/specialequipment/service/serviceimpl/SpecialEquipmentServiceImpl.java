@@ -49,13 +49,13 @@ public class SpecialEquipmentServiceImpl implements SpecialEquipmentService {
             specialEquipmentCheckDao;
 
 
-    //查询部门信息
+    //查询科室信息
     @Override
     public PageInfo selectSpEqBmInfo(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo(specialEquipmentMapper.selectSpEqBmInfo());
     }
-    //查询部门信息根据部门名称
+    //查询科室信息根据科室名称
     @Override
     public PageInfo selectSpEqBmInfoByName(int pageNum, int pageSize, String bmName) {
         PageHelper.startPage(pageNum, pageSize);

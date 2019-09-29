@@ -277,7 +277,7 @@ public class EqController {
             String jsonMessage = "[{'type': 'checkbox'}, " +
                     "{field: 'eqSbbh', title: '设备编号''}, " +
                     "{field: 'eqName', title: '设备名称'}" +
-                    "{field: 'bmName', title: '部门名称'}" +
+                    "{field: 'bmName', title: '科室名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
@@ -285,7 +285,7 @@ public class EqController {
             String jsonMessage = "[{'type': 'radio'}, " +
                     "{field: 'eqSbbh', title: '设备编号'}, " +
                     "{field: 'eqName', title: '设备名称'}" +
-                    "{field: 'bmName', title: '部门名称'}" +
+                    "{field: 'bmName', title: '科室名称'}" +
                     "{field: 'eqGg', title: '规格'}" +
                     "{field: 'eqXh', title: '型号'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
@@ -320,7 +320,7 @@ public class EqController {
                 "<div class='layui-inline'><input type=\"text\" name=\"eqPym\" class=\"layui-input\" placeholder=\"设备拼音码\" autocomplete=\"off\"></div>" +
                         "<div class='layui-inline'><input type=\"text\" name=\"eqSbbh\" class=\"layui-input\" placeholder=\"设备编码\" autocomplete=\"off\"></div>" +
                         "<div class='layui-inline'><input type=\"text\" name=\"eqZcbh\" class=\"layui-input\" placeholder=\"资产编码\" autocomplete=\"off\"></div>" +
-                        "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"部门名称\" autocomplete=\"off\"></div>" +
+                        "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"科室名称\" autocomplete=\"off\"></div>" +
                         "    <div class='layui-input-inline mar10-0' align='center'>" +
                         "<button class='layui-btn' data-type='reload'>查询</button>" +
                         "</div>");

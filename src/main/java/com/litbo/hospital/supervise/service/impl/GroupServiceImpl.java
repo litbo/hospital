@@ -177,41 +177,41 @@ public class GroupServiceImpl implements GroupService {
         for(SGroupSelectVO selectGroup:selectGroups){
             Integer groupId = selectGroup.getGroupId();  //团队id
             GroupMSGDetailVO msgDetailVO = new GroupMSGDetailVO();
-            msgDetailVO.setBmName(selectGroup.getBmName());   // 设置部门名
+            msgDetailVO.setBmName(selectGroup.getBmName());   // 设置科室名
 
-//    使用部门医学装备管理小组组长             组长
-//    使用部门医学装备管理小组副组长          副组长
-//    使用部门质量安全管理人员	           质安管理人员
-//    使用部门资产管理员                   资产管理人员
-//    使用部门计量员                       计量管理人员
-//    使用部门监测联络员                    监测联络员
-//    使用部门质检员                       质控管理人员
+//    使用科室医学装备管理小组组长             组长
+//    使用科室医学装备管理小组副组长          副组长
+//    使用科室质量安全管理人员	           质安管理人员
+//    使用科室资产管理员                   资产管理人员
+//    使用科室计量员                       计量管理人员
+//    使用科室监测联络员                    监测联络员
+//    使用科室质检员                       质控管理人员
 
-            //获得组长    根据id查人员和岗位       select emp.user_xm,gw.gw_name from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) WHERE gw.gw_name='使用部门质量安全管理人员'
-            List<String> zzs = groupDao.getEmpXMByGIdAndGWXm(groupId, "使用部门医学装备管理小组组长");
+            //获得组长    根据id查人员和岗位       select emp.user_xm,gw.gw_name from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) WHERE gw.gw_name='使用科室质量安全管理人员'
+            List<String> zzs = groupDao.getEmpXMByGIdAndGWXm(groupId, "使用科室医学装备管理小组组长");
             msgDetailVO.setZzs(ListToArrStr(zzs));
             //获得副组长
-            List<String> fzzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门医学装备管理小组副组长");
+            List<String> fzzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室医学装备管理小组副组长");
             msgDetailVO.setFzzs(ListToArrStr(fzzs));
 
             //获得质安管理人员
-            List<String> zagls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质量安全管理人员");
+            List<String> zagls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室质量安全管理人员");
             msgDetailVO.setZagls(ListToArrStr(zagls));
 
             //获得资产管理人员
-            List<String> zcgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门资产管理员");
+            List<String> zcgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室资产管理员");
             msgDetailVO.setZcgls(ListToArrStr(zcgls));
 
             //获得计量管理人员
-            List<String> jzgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门计量员");
+            List<String> jzgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室计量员");
             msgDetailVO.setJlgls(ListToArrStr(jzgls));
 
             //获得监测联络员
-            List<String> jclls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门监测联络员");
+            List<String> jclls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室监测联络员");
             msgDetailVO.setJclls(ListToArrStr(jclls));
 
             //获得质控管理人员
-            List<String> zkgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质检员");
+            List<String> zkgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室质检员");
             msgDetailVO.setZkgls(ListToArrStr(zkgls));
             msgDetails.add(msgDetailVO);
         }
@@ -234,41 +234,41 @@ public class GroupServiceImpl implements GroupService {
                 continue;
             }
             GroupMSGDetailVO msgDetailVO = new GroupMSGDetailVO();
-            msgDetailVO.setBmName(selectGroup.getBmName());   // 设置部门名
+            msgDetailVO.setBmName(selectGroup.getBmName());   // 设置科室名
 
-//    使用部门医学装备管理小组组长             组长
-//    使用部门医学装备管理小组副组长          副组长
-//    使用部门质量安全管理人员	           质安管理人员
-//    使用部门资产管理员                   资产管理人员
-//    使用部门计量员                       计量管理人员
-//    使用部门监测联络员                    监测联络员
-//    使用部门质检员                       质控管理人员
+//    使用科室医学装备管理小组组长             组长
+//    使用科室医学装备管理小组副组长          副组长
+//    使用科室质量安全管理人员	           质安管理人员
+//    使用科室资产管理员                   资产管理人员
+//    使用科室计量员                       计量管理人员
+//    使用科室监测联络员                    监测联络员
+//    使用科室质检员                       质控管理人员
 
-            //获得组长    根据id查人员和岗位       select emp.user_xm,gw.gw_name from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) WHERE gw.gw_name='使用部门质量安全管理人员'
-            List<String> zzs = groupDao.getEmpXMByGIdAndGWXm(groupId, "使用部门医学装备管理小组组长");
+            //获得组长    根据id查人员和岗位       select emp.user_xm,gw.gw_name from s_group_users users  INNER JOIN s_emp emp on (users.user_id=emp.user_id) INNER JOIN s_gangwei gw ON (users.gw_id=gw.gw_id) WHERE gw.gw_name='使用科室质量安全管理人员'
+            List<String> zzs = groupDao.getEmpXMByGIdAndGWXm(groupId, "使用科室医学装备管理小组组长");
             msgDetailVO.setZzs(ListToArrStr(zzs));
             //获得副组长
-            List<String> fzzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门医学装备管理小组副组长");
+            List<String> fzzs = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室医学装备管理小组副组长");
             msgDetailVO.setFzzs(ListToArrStr(fzzs));
 
             //获得质安管理人员
-            List<String> zagls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质量安全管理人员");
+            List<String> zagls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室质量安全管理人员");
             msgDetailVO.setZagls(ListToArrStr(zagls));
 
             //获得资产管理人员
-            List<String> zcgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门资产管理员");
+            List<String> zcgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室资产管理员");
             msgDetailVO.setZcgls(ListToArrStr(zcgls));
 
             //获得计量管理人员
-            List<String> jzgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门计量员");
+            List<String> jzgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室计量员");
             msgDetailVO.setJlgls(ListToArrStr(jzgls));
 
             //获得监测联络员
-            List<String> jclls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门监测联络员");
+            List<String> jclls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室监测联络员");
             msgDetailVO.setJclls(ListToArrStr(jclls));
 
             //获得质控管理人员
-            List<String> zkgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用部门质检员");
+            List<String> zkgls = groupDao.getEmpXMByGIdAndGWXm(groupId,"使用科室质检员");
             msgDetailVO.setZkgls(ListToArrStr(zkgls));
             msgDetails.add(msgDetailVO);
         }

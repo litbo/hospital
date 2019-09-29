@@ -62,7 +62,7 @@ public class GroupController {
     }
 
 
-    //获得科室管理团队通过审核code部门名称和团队名称的组联模糊查询
+    //获得科室管理团队通过审核code科室名称和团队名称的组联模糊查询
     @GetMapping("/listSelectGroupsByBmNameAndGNameAndShCode")
     public Result listSelectGroupsByBmNameAndGNameAndShCode(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                                       @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName,String groupName,String shCode){
@@ -86,7 +86,7 @@ public class GroupController {
     //提交前数据准备
     @GetMapping("/readyForSubmit")
     public Result readyForSubmit(){
-        // 获取所有部门
+        // 获取所有科室
         List<SBm> bmList = bmService.getYZBmList();
         //  审核人准备
 
@@ -151,7 +151,7 @@ public class GroupController {
         return Result.success(date);
     }
 
-    //获得所有管理部门的基本详情信息
+    //获得所有管理科室的基本详情信息
     @GetMapping("/getGroupsMSGDetail")
     public Result getGroupsMSGDetail(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                    @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
@@ -160,7 +160,7 @@ public class GroupController {
         return Result.success(date);
     }
 
-    //获得管理部门的基本详情信息通过科室名称
+    //获得管理科室的基本详情信息通过科室名称
     @GetMapping("/getGroupsMSGDetailByBmName")
     public Result getGroupsMSGDetailByBmName(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,String bmName){
@@ -169,7 +169,7 @@ public class GroupController {
         return Result.success(date);
     }
 
-    //获得未成立部门
+    //获得未成立科室
     @GetMapping("/listWclGroupBm")
     public Result listWclGroupBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                      @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){

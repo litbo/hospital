@@ -6,7 +6,7 @@ import com.litbo.hospital.supervise.bean.SEmp;
 import java.util.List;
 
 public class GroupReadyForSubmitVO {  // 数据准备
-    //所有部门
+    //所有科室
     private List<SBm> bms;
     //所有审核人
     private List<SEmp> shrs;

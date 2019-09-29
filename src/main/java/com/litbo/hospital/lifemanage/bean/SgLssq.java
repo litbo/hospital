@@ -19,7 +19,7 @@ public class SgLssq {
      */
     private String lssqSqr;
     /**
-     * 被授权部门
+     * 被授权科室
      */
     private String lssqBsqks;
     /**

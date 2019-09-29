@@ -24,7 +24,7 @@ public class IdlingVO {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date endSTime;
 
-    /**搜索的部门名称*/
+    /**搜索的科室名称*/
     private String bmSName;
 
     /** 搜索设备名称 */

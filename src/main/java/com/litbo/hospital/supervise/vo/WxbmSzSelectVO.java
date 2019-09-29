@@ -1,7 +1,7 @@
 package com.litbo.hospital.supervise.vo;
 
 public class WxbmSzSelectVO {
-//    部门名称	部门编号	拼音码	部门类别	管理部门类别	是否维修部门
+//    科室名称	科室编号	拼音码	科室类别	管理科室类别	是否维修科室
     private String bmName;
     private String bmId;
     private String pym;

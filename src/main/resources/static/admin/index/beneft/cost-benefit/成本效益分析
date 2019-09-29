@@ -3,7 +3,7 @@
        a、直接成本统计   analyissis-evaluation.html
               data": [
                        {
-                           "bmName": "部门名称",
+                           "bmName": "科室名称",
                            "eqName": "设备名称",
                            "eqNum": "院内编号",
                            "eqXh": "设备型号",
@@ -23,7 +23,7 @@
 
             "data": [
                             {
-                                "bmName": 部门名称,
+                                "bmName": 科室名称,
                                 "eqName": 设备名称,
                                 "eqNum": 院内编号,
                                 "eqXh": 设备型号,
@@ -38,7 +38,7 @@
        c、收入统计       cevenue-statistics.html
                 "data": [
                                 {
-                                    "bmName": "CT室",                 //部门名称
+                                    "bmName": "CT室",                 //科室名称
                                     "eqName": "测试型号1",            //设备名称
                                     "jcs": 0,                          //检查室
                                     "eqNum": "181268031101310000",    //院内编号
@@ -55,7 +55,7 @@
        d、效益分析表     benefit-analysis.html
               "data": [
                               {
-                                  "bmName": "CT室",                 //部门名称
+                                  "bmName": "CT室",                 //科室名称
                                   "eqName": "测试型号1",            //设备名称
                                   "eqNum": "181268031101310000",    //院内编号
                                   "eqXh": "测试型号1",               //设备型号
@@ -73,7 +73,7 @@
        e、效益评价表 benefit-statistics.html
              "data": [
                             {
-                                "bmName": "CT室",                 //部门名称
+                                "bmName": "CT室",                 //科室名称
                                 "eqName": "测试型号1",            //设备名称
                                 "eqNum": "181268031101310000",    //院内编号
                                 "eqXh": "测试型号1",               //设备型号
@@ -109,7 +109,7 @@
     1、设备成本科目预设(set-equipmentcost-subject.html)
          "data": [
                         {
-                            "bmName": "CT室",           //部门名称
+                            "bmName": "CT室",           //科室名称
                             "eqName": "cs设备编号4",     //设备名称
                             "eqXh": "测试型号1",         //设备编号
                             "eqId": "10000"              //设备id，不显示，用于点击编辑按钮传入到下个页面
@@ -132,7 +132,7 @@
           1、设备成本科目预设(set-equipmentcost-subject.html)
                  "data": [
                                 {
-                                    "bmName": "CT室",           //部门名称
+                                    "bmName": "CT室",           //科室名称
                                     "eqName": "cs设备编号4",     //设备名称
                                     "eqXh": "测试型号1",         //设备编号
                                     "eqId": "10000"              //设备id，不显示，用于点击编辑按钮传入到下个页面

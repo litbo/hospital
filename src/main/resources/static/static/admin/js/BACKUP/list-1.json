@@ -3191,7 +3191,7 @@
         "shiro": "KWGL",
         "children": [
           {
-            "title": "使用部门",
+            "title": "使用科室",
             "url": "admin&t=1&n=0",
             "shiro": "SYBM",
             "id": "610",
@@ -3311,7 +3311,7 @@
             ]
           },
           {
-            "title": "管理部门",
+            "title": "管理科室",
             "url": "admin&t=1&n=1",
             "shiro": "GLBM",
             "id": "611",

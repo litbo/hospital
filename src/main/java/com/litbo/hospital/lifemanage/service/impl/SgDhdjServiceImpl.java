@@ -111,7 +111,7 @@ public class SgDhdjServiceImpl implements SgDhdjService {
      */
     @Override
     public PageInfo<DhdjksjsVO> selectDjhwKsjs(String userId, Integer pageNum, Integer pageSize) {
-        //通过用户id查询所在的部门id
+        //通过用户id查询所在的科室id
 
         SBm bm = empDao.getBmByEmpId(userId);
         String bmId = bm.getBmId();

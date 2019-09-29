@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class SetBmVO implements Serializable {
-    private String pbmId;    //新父部门
-    private String[] obmIds;  //待处理的部门
+    private String pbmId;    //新父科室
+    private String[] obmIds;  //待处理的科室
 
 }

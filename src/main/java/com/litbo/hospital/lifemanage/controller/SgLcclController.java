@@ -39,7 +39,7 @@ public class SgLcclController {
      *
      * @param pageNum    当前页数
      * @param pageSize   每页显示记录数
-     * @param bmId       部门id
+     * @param bmId       科室id
      * @param isScrapped 是否已报废 0 或 null未报废 1已报废
      * @return PageInfo<DisposalQueryVO>
      */
@@ -56,7 +56,7 @@ public class SgLcclController {
      *
      * @param pageNum  当前页数
      * @param pageSize 每页显示记录数
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @return PageInfo<DisposalQueryVO>
      */
     @PostMapping("/selectApplyList")

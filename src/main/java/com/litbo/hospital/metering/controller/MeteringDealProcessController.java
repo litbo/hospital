@@ -42,7 +42,7 @@ public class MeteringDealProcessController {
 
     /**
      * 生成一个需要提交的计量报表，并将这个报表送进审批流程
-     *      处理报表的部门
+     *      处理报表的科室
      *      报表中计量设备的id，是个字符串，其中使用','隔开
      * @return
      */
@@ -85,7 +85,7 @@ public class MeteringDealProcessController {
         MeteringDealProcess meteringDealProcess = new MeteringDealProcess();
         meteringDealProcess.setFormId(formId);  // 表单id
         meteringDealProcess.setRecordTime(nowTiem);  // 申请时间
-        meteringDealProcess.setDepartment(department); //所属部门
+        meteringDealProcess.setDepartment(department); //所属科室
         meteringDealProcess.setDealAdvertisement(vo.getDealAdvertisement()); // 申请人
         meteringDealProcess.setDealPerson(vo.getDealPerson()); // 处理人
         meteringDealProcess.setProcessName(vo.getProcessName()); // 流程名称
@@ -106,7 +106,7 @@ public class MeteringDealProcessController {
      * @param recordEndTime 报表生成时间结束的范围
      *             这两个参数决定了报表是在那个时间段生成的
      *
-     * @param department  报表所属部门
+     * @param department  报表所属科室
      *
      * @param status 报表状态：已处理，未处理
      *
@@ -152,7 +152,7 @@ public class MeteringDealProcessController {
      * @param recordEndTime 报表流程生成时间结束的范围
      *             这两个参数决定了报表流程是在那个时间段生成的
      *
-     * @param department  报表流程所属部门
+     * @param department  报表流程所属科室
      *
      * @param status 报表流程状态：“”，通过，不通过
      *
@@ -199,7 +199,7 @@ public class MeteringDealProcessController {
      * @param recordBeginTime 报表流程生成时间开始的范围
      * @param recordEndTime 报表流程生成时间结束的范围
      *             这两个参数决定了报表流程是在那个时间段生成的
-     * @param department  报表流程所属部门
+     * @param department  报表流程所属科室
      * @return
      */
     @RequestMapping("/searchFormProcessNot.do")

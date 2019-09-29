@@ -36,10 +36,10 @@ public interface SpecialEquipmentMapper {
 
     int updateByPrimaryKey(SpecialEquipment record);
 
-    //查询所有部门信息
+    //查询所有科室信息
     @Select("select e.bm_id,b.bm_name,b.bm_tel,e.user_xm,e.tel FROM s_emp AS e,s_bm as b WHERE b.user_id = e.user_id")
     List<SpEqBmInfoVo> selectSpEqBmInfo();
-    //查询部门信息根据部门名称
+    //查询科室信息根据科室名称
     @Select("select e.bm_id,b.bm_name,b.bm_tel,e.user_xm,e.tel \n" +
             "FROM s_emp AS e,s_bm as b \n" +
             "WHERE b.user_id = e.user_id \n" +

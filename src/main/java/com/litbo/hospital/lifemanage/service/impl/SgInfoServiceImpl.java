@@ -64,7 +64,7 @@ public class SgInfoServiceImpl implements SgInfoService {
         SgInfo sgInfo = sgInfoMapper.selectSgInfoById(sgInfoId);
 
         BeanUtils.copyProperties(sgInfo, sgInfoVO);
-        //查询托管部门名称
+        //查询托管科室名称
         if (StringUtils.isNotBlank(sgInfo.getTgBmId())){
             SBm sBm = bmDao.getBmBybmid(sgInfo.getTgBmId());
             if (ObjectUtils.allNotNull(sBm)){
@@ -169,9 +169,9 @@ public class SgInfoServiceImpl implements SgInfoService {
     @Override
     public PageInfo<SgInfoSumAuditListVO> selectSgInfoKsshList(String eqPmPym, String bh, String userId, Integer pageNum, Integer pageSize) {
 
-        //调用用户表方法 通过人员表id获取所在部门id和名字
+        //调用用户表方法 通过人员表id获取所在科室id和名字
         SBm bm = empDao.getBmByEmpId(userId);
-        // 如果人员没有部门 返回null
+        // 如果人员没有科室 返回null
         if (!ObjectUtils.allNotNull(bm)) {return new PageInfo<>();}
 
         String bmName = bm.getBmName();
@@ -202,7 +202,7 @@ public class SgInfoServiceImpl implements SgInfoService {
     /**
      * 显示申购单工程处审核列表
      *
-     * @param bmId     查看具体部门id
+     * @param bmId     查看具体科室id
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
@@ -234,7 +234,7 @@ public class SgInfoServiceImpl implements SgInfoService {
      * 显示申购单装备委员会审核列表
      *
      * @param eqPmPym  设备拼音码
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param bh       申购单编号
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
@@ -269,7 +269,7 @@ public class SgInfoServiceImpl implements SgInfoService {
     /**
      * 显示申购单院办公室审核列表
      *
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param bh       申购单编号
      * @param eqSbPym  设备拼音码
      * @param pageNum  页数
@@ -320,7 +320,7 @@ public class SgInfoServiceImpl implements SgInfoService {
      * 申购设备公示查询列表
      *
      * @param isSh     是否通过审核
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param bh       申购单编号
      * @param sbPym    设备拼音码
      * @param pageNum  页数
@@ -375,9 +375,9 @@ public class SgInfoServiceImpl implements SgInfoService {
      */
     @Override
     public PageInfo<SgInfoListVO> selectSgInfoBmList(String isSh, String userId, String bh, String sbName, Integer pageNum, Integer pageSize) {
-        //根据用户id 查询部门id
+        //根据用户id 查询科室id
         SBm bm = empDao.getBmByEmpId(userId);
-        // 如果人员没有部门 返回null
+        // 如果人员没有科室 返回null
         if (!ObjectUtils.allNotNull(bm)) {return new PageInfo<>();}
         String bmId = bm.getBmId();
         return selectSgInfoList(isSh, bmId, bh, sbName, pageNum, pageSize);

@@ -25,7 +25,7 @@ public class CountIncomeVO {
     private BigDecimal keJe;
     /** 科目收入类型 */
     private String kmCjdm;
-    /** 部门名称 */
+    /** 科室名称 */
     private String bmName;
     /** 设备名称 */
     private String eqName;

@@ -53,7 +53,7 @@ public class SearchStandardTaskVO {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date operationDate;
 
-    /**部门名称*/
+    /**科室名称*/
     private String bmName;
 
 

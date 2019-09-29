@@ -156,7 +156,7 @@ public class EmpController {
         return Result.success(emps);
     }
 
-    //获取登陆人的同部门伙伴信息  只包括userId和userXm
+    //获取登陆人的同科室伙伴信息  只包括userId和userXm
     @RequestMapping("/listPartnerByUserId")
     public Result listPartnerByUserId(
             @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,

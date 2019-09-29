@@ -6015,7 +6015,7 @@ var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figca
 	// We have to close these tags to support XHTML (#13200)
 	wrapMap = {
 		option: [ 1, "<select multiple='multiple'>", "</select>" ],
-		legend: [ 1, "<fieldset>", "</fieldset>" ],
+		legend: [ 1, "<!--        <fieldset>", "</fieldset>-->" ],
 		area: [ 1, "<map>", "</map>" ],
 		param: [ 1, "<object>", "</object>" ],
 		thead: [ 1, "<table>", "</table>" ],

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.software_interface.controller
  * @Author: looli
  * @CreateTime: 2019-07-28 10:21
- * @Description: 获取部门信息
+ * @Description: 获取科室信息
  */
 @RestController
 @RequestMapping("/department")

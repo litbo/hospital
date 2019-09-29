@@ -61,7 +61,7 @@ public class SgLcclServiceImpl implements SgLcclService {
      *
      * @param pageNum  当前页数
      * @param pageSize 每页显示记录数
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @return PageInfo<ScrappedListVO>
      */
     @Override
@@ -82,7 +82,7 @@ public class SgLcclServiceImpl implements SgLcclService {
      *
      * @param pageNum  当前页数
      * @param pageSize 每页显示记录数
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @return PageInfo<ScrappedListVO>
      */
     @Override

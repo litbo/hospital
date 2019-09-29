@@ -33,8 +33,8 @@ public class OperationRecord {
     //联网仪编号
     private String macid;
 
-    //部门信息
-    //部门名称
+    //科室信息
+    //科室名称
     private String bmName;
     private String bmId;
 

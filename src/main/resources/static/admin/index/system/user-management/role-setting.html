@@ -42,7 +42,7 @@
     </div>
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="bmName" placeholder="部门名称" autocomplete="off">
+            <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">
         </div>
         <div class="layui-inline">
             <select name="status">
@@ -68,7 +68,7 @@
                     , {field: 'userId', title: '工号', width: 150,sort:true}
                     , {field:'name',title:'用户名',width:300}
                     , {field:'roleName',title:'角色',minWidth:300}
-                    , {field:'bmName',title:'部门',minWidth:300}
+                    , {field:'bmName',title:'科室',minWidth:300}
                     , {field:"status",title:'操作',toolbar:'#bar',width:200,align:'center'}
                 ]]
                 , url: "/role/listUsers"

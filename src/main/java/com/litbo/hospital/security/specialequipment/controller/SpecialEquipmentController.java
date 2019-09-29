@@ -28,7 +28,7 @@ public class SpecialEquipmentController {
     @Autowired
     private SpecialEquipmentService specialEquipmentService ;
 
-    //查询部门以及负责人信息
+    //查询科室以及负责人信息
     @GetMapping("/selectSpEqBmInfo")
     public Result selectSpEqBmInfo(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                                    @RequestParam(required = false,defaultValue = "1") Integer pageNum){
@@ -42,7 +42,7 @@ public class SpecialEquipmentController {
 
 
     }
-    //查询部门以及负责人信息根据部门名称
+    //查询科室以及负责人信息根据科室名称
     @PostMapping("/selectSpEqBmInfoByName")
     public Result selectSpEqBmInfoByName(@RequestParam(required = false,defaultValue = "10") Integer pageSize,
                                          @RequestParam(required = false,defaultValue = "1") Integer pageNum,

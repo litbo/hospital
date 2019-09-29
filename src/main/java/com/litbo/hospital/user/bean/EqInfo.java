@@ -60,9 +60,9 @@ public class EqInfo {
     private String sbcsIdWxs;
     //维修商id
     private String wxsName;
-    //部门id
+    //科室id
     private String eqBmid;
-    //部门名称
+    //科室名称
     private String eqBmName;
     //管理归口
     private String eqGlgk;
@@ -100,7 +100,7 @@ public class EqInfo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date eqCgrq;
-    //使用部门负责人
+    //使用科室负责人
     private String eqSybmfzr;
     //安装日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")

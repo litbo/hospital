@@ -276,7 +276,7 @@ public class DossierServiceImpl implements DossierService {
         // 卷宗编号: 所属卷宗编号前0~8位 + “ ” + 所属卷宗编号9~11位 + “-” + 文件类型
         dossierFile.setBelongDossierNum(dossier.getDossierNum().substring(0,9) + " " + dossier.getDossierNum().substring(9,12) + "-" + dossierFile.getFileType());
         dossierFile.setBuyTime(dossier.getBuyTime());   // 购买时间
-        dossierFile.setBmName(dossier.getBmName());   // 所属部门
+        dossierFile.setBmName(dossier.getBmName());   // 所属科室
 
         dossierFile.setAgent(dossier.getAgent());     // 代理商
         dossierFile.setSpecification(dossier.getSpecification());  // 规格型号

@@ -10,7 +10,7 @@
             维修单号-选择（ maintenance-number.html）
                 "data": [
                                 {
-                                    "department": 'B超室',        //所在部门
+                                    "department": 'B超室',        //所在科室
                                     "equ_id": "030515610730",     //维修单号
                                     "equ_name": "诊断床",         //设备名称
                                     "equ_model": "HB-150Y",       //型号
@@ -22,7 +22,7 @@
                 a、报修设备-选择(repair-equipment-select.html)
                     "data": [
                                     {
-                                        "department": '病案室',          //部门
+                                        "department": '病案室',          //科室
                                         "equ_id": "17090830149044",      //设备编号
                                         "hospital_id": "90007289",       //院内编号
                                         "equ_name": "计算机主机",        //设备名称

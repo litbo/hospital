@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface SBmService {
     /**
-     * 获取部门信息
+     * 获取科室信息
      * @param name
      * @return
      */

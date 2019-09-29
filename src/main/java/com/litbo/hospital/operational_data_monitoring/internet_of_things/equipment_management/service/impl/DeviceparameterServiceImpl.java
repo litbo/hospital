@@ -82,7 +82,7 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
     public void save(DeviceparameterVO deviceparameterVO) {
         //1.参数设置表设置设备编号（和修改一样）
         dao.updateDeviceCode(deviceparameterVO);
-        //2.设备联网表插入数据 生成id,macid 保存设备id，部门id,联网仪ip,有无pacs,有无工作量记录，记录规则，pacs设备编号
+        //2.设备联网表插入数据 生成id,macid 保存设备id，科室id,联网仪ip,有无pacs,有无工作量记录，记录规则，pacs设备编号
         EqMacTab eqMacTab = copyEqMacTab(deviceparameterVO);
         eqMacTab.setId(IDFormat.getIdByIDAndTime("eq_mac_tab","id"));
         eqMacTab.setMacid(deviceparameterVO.getMacID());

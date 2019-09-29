@@ -33,7 +33,7 @@
             </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10" style="width: 120px;">
                 <select id="department" name="" lay-search="">
-                    <option value="" >请选择部门</option>
+                    <option value="" >请选择科室</option>
                     <option value="0000"  >aaa</option>
                     <option value="0001"  >病案室</option>
                     <option value="0002"  >病案质控室</option>
@@ -614,7 +614,7 @@
         table:{
             cols: [[ //表头
                 {type:"radio"}
-                , {field: 'department', title: '部门', minWidth: 120}
+                , {field: 'department', title: '科室', minWidth: 120}
                 , {field: 'equ_id', title: '设备编号', minWidth: 150}
                 , {field: 'hospital_id', title: '院内编号', minWidth: 120}
                 , {field: 'equ_name', title: '设备名称', minWidth: 120}
@@ -625,7 +625,7 @@
             ]]
             , "data": [
                 {
-                    "department": '病案室',          //部门
+                    "department": '病案室',          //科室
                     "equ_id": "17090830149044",      //设备编号
                     "hospital_id": "90007289",       //院内编号
                     "equ_name": "计算机主机",        //设备名称

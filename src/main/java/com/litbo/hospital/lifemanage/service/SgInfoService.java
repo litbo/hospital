@@ -44,7 +44,7 @@ public interface SgInfoService {
     /**
      * 显示申购单工程处审核列表
      *
-     * @param bmId     查看具体部门id
+     * @param bmId     查看具体科室id
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
      * @return SgInfoSumAuditListVO
@@ -62,7 +62,7 @@ public interface SgInfoService {
      * 显示申购单装备委员会审核列表
      *
      * @param eqPmPym  设备拼音码
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param bh       申购单编号
      * @param pageNum  页数
      * @param pageSize 每页显示记录数
@@ -80,7 +80,7 @@ public interface SgInfoService {
     /**
      * 显示申购单院办公室审核列表
      *
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param bh       申购单编号
      * @param eqSbPym  设备拼音码
      * @param pageNum  页数
@@ -109,7 +109,7 @@ public interface SgInfoService {
      * 申购设备公示查询列表
      *
      * @param isSh     是否通过审核
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param bh       申购单编号
      * @param sbPjm   设备拼音码
      * @param pageNum  页数

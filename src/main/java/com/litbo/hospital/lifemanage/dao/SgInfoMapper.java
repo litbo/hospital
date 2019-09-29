@@ -28,7 +28,7 @@ public interface SgInfoMapper {
      *
      * @param sgInfoId 申购单ID
      * @param pmId     品名ID
-     * @param bmId     部门ID
+     * @param bmId     科室ID
      * @param kstlId   科室讨论id
      * @return 添加记录数
      */
@@ -155,7 +155,7 @@ public interface SgInfoMapper {
     /**
      * 显示科室汇总审核列表
      *
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param sgInfoBh 申购单编号
      * @param pmList   品名列表
      * @return List<SgInfoSumAuditListVO>
@@ -182,7 +182,7 @@ public interface SgInfoMapper {
     /**
      * 显示申购单工程处审核列表
      *
-     * @param bmId 查看具体部门id
+     * @param bmId 查看具体科室id
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoGccshList")
@@ -220,7 +220,7 @@ public interface SgInfoMapper {
      *
      * @param eqPmPym 设备拼音码
      * @param bh      申购单编号
-     * @param bmId    部门id
+     * @param bmId    科室id
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoSgZbwyhhyList")
@@ -256,7 +256,7 @@ public interface SgInfoMapper {
      * 显示申购单院办公会审核列表
      *
      * @param bh   编号
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return List<SgInfoSumAuditListVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgInfoYbgsShList")
@@ -292,7 +292,7 @@ public interface SgInfoMapper {
      * 装备委员会年度采购计划
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @param bh   申购单编号
      * @return List<SgInfoSumAuditListVO>
      */
@@ -303,7 +303,7 @@ public interface SgInfoMapper {
      * 院办公会年度采购计划
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @param bh   申购单编号
      * @return List<SgInfoSumAuditListVO>
      */
@@ -314,7 +314,7 @@ public interface SgInfoMapper {
      * 院办公会年度采购预算
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return List<YearBudgetVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgYbghhyYearBudget")
@@ -324,7 +324,7 @@ public interface SgInfoMapper {
      * 装备委员会年度采购预算
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return List<YearBudgetVO>
      */
     @SelectProvider(type = SgInfoSqlProvider.class, method = "selectSgZbwyhYearBudget")
@@ -351,7 +351,7 @@ public interface SgInfoMapper {
      * 申购设备公示查询列表
      *
      * @param isSh  是否通过审核
-     * @param bmId  部门id
+     * @param bmId  科室id
      * @param bh    申购单编号
      * @param sbPym 设备拼音码
      * @return List<SgInfoListVO>

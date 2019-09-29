@@ -29,7 +29,7 @@ public class EqTjSqController {
     @Autowired
     private EqTjsqMapper mapper;
 
-    /*查询本部门所有设备*/
+    /*查询本科室所有设备*/
     @PostMapping("/ListEqInfo")
     public Result ListEqInfo(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                              @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,
@@ -63,7 +63,7 @@ public class EqTjSqController {
         return Result.success("\\" + docUrl);
     }
 
-    /*查询或条件查询本部门所有调剂申请*/
+    /*查询或条件查询本科室所有调剂申请*/
     @PostMapping("/listBenBmTjSq")
     public Result selectBenBmByExample(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                        @RequestParam(name = "pageSzie", required = false, defaultValue = "10") Integer pageSize,

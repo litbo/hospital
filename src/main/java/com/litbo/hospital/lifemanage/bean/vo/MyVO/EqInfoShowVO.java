@@ -13,10 +13,10 @@ public class EqInfoShowVO {
     /*装备编号*/
     private String eqSbbh;
 
-    /*部门id*/
+    /*科室id*/
     private String bmId;
 
-    /*部门名称*/
+    /*科室名称*/
     private String bmName;
 
     /*设备名称*/

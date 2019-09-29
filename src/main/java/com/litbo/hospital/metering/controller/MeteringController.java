@@ -177,7 +177,7 @@ public class MeteringController {
 
 
     /**
-     * 按部门查看在用设备信息
+     * 按科室查看在用设备信息
      * @param bmName
      * @return
      */
@@ -209,7 +209,7 @@ public class MeteringController {
 
 
     /**
-     *  根据部门查看设备信息
+     *  根据科室查看设备信息
      * @param bmName
      * @return
      */
@@ -279,7 +279,7 @@ public class MeteringController {
      * 多条件查询
      * @param beginTime 开始时间
      * @param endTiem 结束时间
-     * @param bmName 部门
+     * @param bmName 科室
      * @param description 设备状态,0未进入审批流程，1已进入审批流程
      * @return
      */
@@ -315,8 +315,8 @@ public class MeteringController {
 
 
     /**
-     * 得到未来90天中需要送去检查的计量设备，按照部门来分类
-     * @param department 部门
+     * 得到未来90天中需要送去检查的计量设备，按照科室来分类
+     * @param department 科室
      * @return
      */
     @RequestMapping("/getTheMonthUtil.do")

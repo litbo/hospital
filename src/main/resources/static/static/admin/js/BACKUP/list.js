@@ -2920,19 +2920,19 @@ var main_list =
                                     "shiro": "a",
                                     "children": [
                                         {
-                                            "title": "部门类别设置",
+                                            "title": "科室类别设置",
                                             "url": "./admin/basic-management/department-category.html",
                                             "id": "610",
                                             "shiro": "a"
                                         },
                                         {
-                                            "title": "管理部门类别设置",
+                                            "title": "管理科室类别设置",
                                             "url": "./admin/basic-management/manage-department.html",
                                             "id": "611",
                                             "shiro": "a"
                                         },
                                         {
-                                            "title": "维修部门设置",
+                                            "title": "维修科室设置",
                                             "url": "./admin/basic-management/service-department.html",
                                             "id": "612",
                                             "shiro": "a"
@@ -3241,7 +3241,7 @@ var main_list =
                     "shiro": "a",
                     "children": [
                         {
-                            "title": "使用部门",
+                            "title": "使用科室",
                             "url": "admin&t=1&n=0",
                             "shiro": "a",
                             "id": "656",
@@ -3361,7 +3361,7 @@ var main_list =
                             ]
                         },
                         {
-                            "title": "管理部门",
+                            "title": "管理科室",
                             "url": "admin&t=1&n=1",
                             "shiro": "a",
                             "id": "674",
@@ -3374,25 +3374,25 @@ var main_list =
                                     "shiro": "a",
                                     "children": [
                                         {
-                                            "title": "工程师负责部门划分",
+                                            "title": "工程师负责科室划分",
                                             "url": "./admin/discipline-management/engineer-department.html",
                                             "id": "676",
                                             "shiro": "a"
                                         },
                                         {
-                                            "title": "工程师负责部门划分查询",
+                                            "title": "工程师负责科室划分查询",
                                             "url": "./admin/discipline-management/engineer-search.html",
                                             "id": "677",
                                             "shiro": "a"
                                         },
                                         {
-                                            "title": "维修部门下的工程师负责设备划分",
+                                            "title": "维修科室下的工程师负责设备划分",
                                             "url": "./admin/discipline-management/service-equipment.html",
                                             "id": "678",
                                             "shiro": "a"
                                         },
                                         {
-                                            "title": '维修部门下的工程师负责设备划分查询',
+                                            "title": '维修科室下的工程师负责设备划分查询',
                                             "url": './admin/discipline-management/repair-search.html',
                                             "id": '6781',
                                             "shiro": 'a'

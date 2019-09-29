@@ -18,7 +18,7 @@ public class EmergencyController {
     private EmergencyService emergencyService;
 
     /**
-     * 查询本部门所有设备
+     * 查询本科室所有设备
      *
      * @param userId 用户id
      * @return Result

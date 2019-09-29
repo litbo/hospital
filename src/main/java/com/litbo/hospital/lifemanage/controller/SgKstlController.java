@@ -48,7 +48,7 @@ public class SgKstlController {
     }
 
     /**
-     * 显示部门下的所有讨论的设备
+     * 显示科室下的所有讨论的设备
      *
      * @param eqPmName 设备名称
      * @param eqPmJc   设备简称

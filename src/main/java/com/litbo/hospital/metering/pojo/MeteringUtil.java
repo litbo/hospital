@@ -23,7 +23,7 @@ public class MeteringUtil implements Serializable {
     // 设备检查周期，单位为月
     private String meteringInspectionCycle;
 
-    // 所属部门
+    // 所属科室
     private String bmName;
 
     // 购买时间
@@ -157,7 +157,7 @@ public class MeteringUtil implements Serializable {
         }
 //        this.isCycle = Integer.parseInt(list.get(3).toString()) ;// 是否周期1
         this.meteringInspectionCycle = (String) list.get(5);// 设备检查周期，单位为月1
-        this.bmName = (String) list.get(6);// 所属部门1
+        this.bmName = (String) list.get(6);// 所属科室1
 
 //        this.buyTime = (String) list.get(6);// 购买时间1
         // 转换时间格式

@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class BmSelectVO {
     private Integer flag;
-    private String bmName;   //部门名称关键词
-    private String bmlb;    //部门类别
+    private String bmName;   //科室名称关键词
+    private String bmlb;    //科室类别
     private String gklb;    //归口类别
     private Integer isWx;   //是否维修
 

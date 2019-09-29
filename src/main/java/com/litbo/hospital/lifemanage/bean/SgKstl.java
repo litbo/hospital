@@ -18,7 +18,7 @@ public class SgKstl {
      */
     private String userIdJl;
     /**
-     * 部门id关联部门表id
+     * 科室id关联科室表id
      */
     private String bmId;
     /**

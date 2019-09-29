@@ -257,8 +257,8 @@ public class EqTjServiceImpl implements EqTjService {
         return mapper.updateZbdcByprimaryKey(old);
     }
 
-    /*根据设备名称和部门名称模糊查询可调剂设备*/
-    //TODO 已经加入院区和部门的条件查询
+    /*根据设备名称和科室名称模糊查询可调剂设备*/
+    //TODO 已经加入院区和科室的条件查询
     @Override
     public PageInfo selectAllEqInfo(String sbName, String bmname, String yq) {
         if (StringUtils.isBlank(yq)) {
@@ -276,7 +276,7 @@ public class EqTjServiceImpl implements EqTjService {
     /*
      * 需要提供调剂申请id，调出装备科室Id,申请调剂装备名称
      * */
-    /*录入或者修改调出设备部门信息*/
+    /*录入或者修改调出设备科室信息*/
 
     @Override
     public int insertTjZbdc(List<EqTjZbdcVO> listzbdc) {

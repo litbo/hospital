@@ -27,7 +27,7 @@ public class SgZrpjbg {
      */
     private String pjbgZbxm;
     /**
-     * 准入评价报告部门负责人
+     * 准入评价报告科室负责人
      */
     private String pjbgBmfzr;
     /**

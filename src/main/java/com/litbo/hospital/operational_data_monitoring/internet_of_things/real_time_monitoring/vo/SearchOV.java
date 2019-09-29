@@ -9,7 +9,7 @@ import lombok.Data;
 public class SearchOV {
     /**管理类别*/
     private String cEquCate;
-    /**部门id*/
+    /**科室id*/
     private String bmId;
     /**是否生命支持类*/
     private String cIsLife;

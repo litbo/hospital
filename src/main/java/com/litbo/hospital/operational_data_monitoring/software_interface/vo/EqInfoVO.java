@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 public class EqInfoVO {
-    /**部门名称*/
+    /**科室名称*/
     private String bmName;
     /**设备id*/
     private String eqId;

@@ -18,7 +18,7 @@ public interface TjjjMapper {
     @InsertProvider(type = TjjjProvider.class,method = "insertTjjj")
     int insertTjjj(EqTjjjVO tjjj);
 
-    /*全查或者根据部门名称查询并且按照日期排序*/
+    /*全查或者根据科室名称查询并且按照日期排序*/
     @Select("<script>" +
         "select id,tjjj_drks,tjjj_dcks,tjjj_tprq" +
         ",tjjj_drjbr,tjjj_dcjbr,eq_sfqbgh,tjjj_jllx from eq_tjjj\n" +

@@ -92,7 +92,7 @@ public interface SgLcclMapper {
     /**
      * 待报废清单
      *
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return List<ScrappedListVO>
      */
     @Select("<script>" +
@@ -120,7 +120,7 @@ public interface SgLcclMapper {
 
     /**
      * 已报废清单
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return List<ScrappedListVO>
      */
     @Select("<script>" +
@@ -146,7 +146,7 @@ public interface SgLcclMapper {
     /**
      * 处置申请
      *
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return List<ScrappedListVO>
      */
     @Select("<script>" +

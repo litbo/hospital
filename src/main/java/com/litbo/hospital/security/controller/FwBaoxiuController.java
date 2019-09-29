@@ -174,7 +174,7 @@ public class FwBaoxiuController {
                 "{field: 'eqGg', title: '规格'},"+
                 "{field: 'eqXh', title: '型号'},"+
                 "{field: 'wxfCjrgf', title: '费用'},"+
-                "{field: 'bmName', title: '部门'}"+
+                "{field: 'bmName', title: '科室'}"+
                 "]";
         return Result.success(JSON.parseArray(title));
     }
