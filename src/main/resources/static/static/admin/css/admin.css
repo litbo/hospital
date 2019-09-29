@@ -1341,7 +1341,7 @@ td[lay-event="openLink"] {
   width: auto;
 }
 .layui-nav-no-bg.layui-nav-tree .layui-nav-item a:hover {
-  background-color: transparent;
+  background-color: rgb(47,115,154);
   color: #00b5f9;
 }
 .layui-nav-no-bg.layui-nav .layui-nav-item a {
@@ -1362,12 +1362,11 @@ td[lay-event="openLink"] {
 .layui-nav-no-bg.layui-nav-tree .layui-nav-child dd.layui-this,
 .layui-nav-no-bg.layui-nav-tree .layui-this,
 .layui-nav-no-bg.layui-nav-tree .layui-this > a:hover {
-  background-color: #fff;
-  color: #00b5f9;
+  background-color: rgb(224,226,226);
 }
 .layui-nav-no-bg.layui-nav-tree .layui-this > a {
   background-color: #fff;
-  color: #00b5f9;
+
   border-left: 3px solid #00b5f9;
   margin-right: -20px;
 }
@@ -1579,6 +1578,7 @@ html {
   height: 100%;
 }
 .main-layout.hide-side .main-layout-side {
+
   left: -220px;
 }
 .main-layout.hide-side .main-layout-container {
@@ -1587,7 +1587,7 @@ html {
 .main-layout-side {
   width: 220px;
   height: 100%;
-  background: #089ce2;
+  background-color: rgb(47,115,154);
   position: absolute;
   left: 0;
   top: 0;
@@ -1602,7 +1602,7 @@ html {
 .main-layout-side .m-logo {
   width: 100%;
   height: 60px;
-  background: #00b5f9;
+  background-color: rgb(60,141,188);
 }
 .main-layout-side .m-logo img {
   width: 100%;
@@ -1621,7 +1621,7 @@ html {
   top: 2px;
 }
 .main-layout-side .layui-nav-itemed > a {
-  background: #4E5465;
+  background: rgb(31,99,138);
 }
 .main-layout-side .layui-nav-item a i {
   margin-right: 10px;
@@ -1634,7 +1634,7 @@ html {
   color: #fff;
 }
 .main-layout-side .layui-nav-tree .layui-nav-child a:hover {
-  color: #00b5f9;
+  background-color: rgb(61,177,223);
 }
 .main-layout-side .layui-nav-tree .layui-nav-child a .l-line {
   width: 12px;
@@ -1647,12 +1647,15 @@ html {
   margin-left: 30px;
   background: url("../images/l-line.png") left center no-repeat;
 }
+.layui-nav-itemed>.layui-nav-child{
+  background-color: rgb(78,142,175);
+}
 .main-layout-side .layui-nav-tree .layui-nav-child dd.layui-this,
 .main-layout-side .layui-nav-tree .layui-this {
-  background-color: #089ce2;
+  background-color: rgb(61,177,223);
 }
 .main-layout-side .layui-nav-tree .layui-nav-child .layui-this > a {
-  background-color: #4E5465;
+  background-color: rgb(61,177,223);
 }
 .main-layout-side .layui-nav-tree .layui-this > a {
   background-color: rgba(0, 181, 249, 0.8);
@@ -1680,6 +1683,7 @@ html {
   line-height: 55px;
 }
 .layui-nav-tree .layui-nav-item {
+  background-color: rgb(47,115,154);
   line-height: 55px;
 }
 .menu-btn {
