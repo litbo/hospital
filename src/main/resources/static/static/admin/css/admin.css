@@ -2707,3 +2707,16 @@ background-color: rgb(51,122,183);
 .layui-btn-primary{
   background-color: #FFFFFF;
 }
+
+/*新增*/
+.addi{
+  background-color: rgb(51,122,183);
+}
+/*修改*/
+.editi{
+  background-color: rgb(240,173,78);
+}
+/*删除*/
+.deli{
+  background-color: rgb(217,83,79);
+}
