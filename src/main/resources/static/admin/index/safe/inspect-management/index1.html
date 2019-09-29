@@ -14,68 +14,45 @@
     <![endif]-->
    <script src="../../../../static/admin/js/basic.js"></script>
     <style>
-      /*  .layui-table-tool{
-            background: #fff;
-            border: none;
-        }
-        .layui-table-tool .layui-table-tool-self{
-            position: absolute;
-            height:30px;
-            top: 170px;
-            right: 10px;
-            width: 120px;
-            height: 30px;
-        }
-        .layui-table-tool-temp{
-            padding-right: 20px;
-        }
-        .layui-form-label{
-            width: 100px;
-        }*/
-    </style>
+    body{
+        background: #f2f2f2;
+    }
+</style>
 </head>
 <body>
 
 <!--表格-->
 <div class="layui-row">
     <div class="col-xs-12">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+       <!-- <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>巡检计划</legend>
-        </fieldset>
+        </fieldset>-->
         <table  id="table" lay-filter="table1" ></table>
     </div>
 </div>
 
 <!--头部工具-->
 <script type="text/html" id="toolBar">
-    <div  class="addBtn" >
-        <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
-        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
-        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
-    </div>
             <form class="layui-form demoTable" action="">
-
                 <div class="layui-inline">
-                            <input type="text" name="inspPlName" placeholder="计划名称"  autocomplete="off" class="layui-input">
-                    </div>
-
+                       <input type="text" name="inspPlName" placeholder="计划名称"  autocomplete="off" class="layui-input">
+                </div>
                 <div class="layui-inline">
-                            <select name="inspPlStatus" lay-filter="">
-                                <option value="">选择审批状态</option>
-                                <option value="0" >停用</option>
-                                <option value="1">待审核</option>
-                                <option value="2">未通过</option>
-                                <option value="3">已通过</option>
-                            </select>
-                        </div>
-
+                       <select name="inspPlStatus" lay-filter="">
+                           <option value="">选择审批状态</option>
+                           <option value="0" >停用</option>
+                           <option value="1">待审核</option>
+                           <option value="2">未通过</option>
+                           <option value="3">已通过</option>
+                       </select>
+                </div>
                 <div class="layui-inline">
-                            <input type="text" name="inspPlPlanner" placeholder="制定人"  autocomplete="off" class="layui-input">
-                    </div>
+                      <input type="text" name="inspPlPlanner" placeholder="制定人"  autocomplete="off" class="layui-input">
+                 </div>
 
                 <div class="layui-inline" >
-                            <input type="text" name="inspPlAuditor"  placeholder="审核人" autocomplete="off" class="layui-input">
-                    </div>
+                    <input type="text" name="inspPlAuditor"  placeholder="审核人" autocomplete="off" class="layui-input">
+                 </div>
 
                 <div class="layui-inline"  >
                     <button type="button" class="layui-btn"   data-type="search" >查找</button>
@@ -83,7 +60,12 @@
                 </div>
 
             </form>
-
+            <hr class="devideHr">
+            <div  class="addBtn" >
+                <button class="layui-btn layui-btn-sm" lay-event="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+                <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #FFB800">  <i class="layui-icon layui-icon-edit"></i>修改</button>
+                <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+            </div>
 </script>
 
 <script src="../../../../static/admin/layui/layui.js" charset="utf-8"></script>

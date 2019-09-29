@@ -15,8 +15,8 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-inline{
-            width:140px;
+        body{
+            background: #f2f2f2;
         }
     </style>
 </head>
@@ -56,14 +56,14 @@
     renderMod.table={
         table:{
             cols: [[ //表头
-                {field: 'id', title: '合同编号', minWidth: 200}
+                {field: 'id', title: '合同编号', minWidth: 150}
                 , {field: 'htName', title: '合同名称', minWidth: 150}
-                , {field: 'htPrice', title: '合同金额（元）', minWidth: 200,sort:true}
-                , {field: 'htTime', title: '合同日期', minWidth: 100}
-                , {field: 'sbcsName', title: '维修商', minWidth: 150}
-                , {field: 'fkzs', title: '支付方式', minWidth: 150}
-                , {field: 'fkcs', title: '已付款', minWidth: 150}
-                , {title:'',align:'center',minWidth:200,toolbar:'#bar'}
+                , {field: 'htPrice', title: '合同金额（元）', minWidth: 150,sort:true}
+                , {field: 'htTime', title: '合同日期', minWidth: 150}
+                , {field: 'sbcsName', title: '维修商', minWidth: 200}
+                , {field: 'fkzs', title: '支付方式', minWidth: 100}
+                , {field: 'fkcs', title: '已付款', minWidth: 50}
+                , {title:'',align:'center',minWidth:80,toolbar:'#bar'}
             ]]
             ,url:"/fwht/htZfList"
             ,request:{
@@ -89,7 +89,8 @@
                             title:"支付",
                             type:2,
                             content:"./child/contract-pay.html",
-                            dataUrl:["id"]
+                            dataUrl:["id"],
+                            area:["80%","75%"]
                         }
                     ]
                 })

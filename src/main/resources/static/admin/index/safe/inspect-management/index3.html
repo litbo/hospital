@@ -13,15 +13,20 @@
     <script src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="../../../../static/admin/js/basic.js"></script>
+    <style>
+        body{
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 
 <!--表格-->
 <div class="layui-row">
     <div class="col-xs-12">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>巡检任务</legend>
-        </fieldset>
+        </fieldset>-->
         <table  id="table" lay-filter="table1" ></table>
     </div>
 </div>
@@ -29,9 +34,8 @@
 <!--头部工具-->
 <script type="text/html" id="toolBar">
 
-            <form class="layui-form demoTable" action=""  style="border:none;">
+            <form class="layui-form " action=""  style="border:none;">
 
-                <div  class="addBtn">
                     <div class="layui-inline" >
                             <input type="text" name="inspPlName" placeholder="巡检计划名称"  autocomplete="off" class="layui-input">
                     </div>
@@ -54,12 +58,7 @@
                         <button type="button" class="layui-btn"   data-type="search" >查找</button>
                       <!--  <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                     </div>
-
-                </div>
-
             </form>
-
-
       <!--  <div class="layui-btn-container" style="float: left;margin-left: 30px;">
             <a href="./child/index1-new.html" style="color: white;text-decoration: none"><button class="layui-btn layui-btn-sm" lay-event="increase" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>
                 新增
@@ -69,7 +68,6 @@
 
             <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
         </div>-->
-
 
     </div>
 

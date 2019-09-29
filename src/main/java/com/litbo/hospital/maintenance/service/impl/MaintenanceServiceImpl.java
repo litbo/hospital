@@ -17,6 +17,7 @@ import com.litbo.hospital.user.bean.EqInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -233,13 +234,15 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                          String maintenancePersonnel, String checkTime, String departmentReceipt, String dateOfCompletion) {
         Maintenance maintenance = maintenanceDAO.selectById(maintenanceId);
         maintenance.setStatus("已完成");
-        maintenance.setMaintenanceResults(maintenanceResults);
-        maintenance.setInstrumentStatus(instrumentStatus);
-        maintenance.setDescription(description);
-        maintenance.setMaintenancePersonnel(maintenancePersonnel);
-        maintenance.setCheckTime(checkTime);
-        maintenance.setDepartmentReceipt(departmentReceipt);
-        maintenance.setDateOfCompletion(dateOfCompletion);
+        maintenance.setMaintenanceResults(maintenanceResults);  // 保养结果
+        maintenance.setInstrumentStatus(instrumentStatus);  // 仪器现状
+        maintenance.setDescription(description); //备注
+        maintenance.setMaintenancePersonnel(maintenancePersonnel);  // 维护人
+        maintenance.setDepartmentReceipt(departmentReceipt); // 科室签收
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String time = sdf.format(System.currentTimeMillis());
+        maintenance.setDateOfCompletion(time); // 完成日期
         return maintenanceDAO.updateByPremaryKey(maintenance);
     }
 

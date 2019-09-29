@@ -14,6 +14,11 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        body{
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,10 +60,10 @@
                 cols: [[ //表头
                     {field: 'ywfpHm', title: '发票号码', minWidth: 160}
                     , {field: 'eqName', title: '维修设备', minWidth: 120}
-                    , {field: 'ywfpPrice', title: '发票金额', minWidth: 120}
-                    , {field: 'userName', title: '登记人', minWidth: 120}
-                    , {field: 'ywfpSdTime', title: '登记时间', minWidth: 180}
-                    , {field: 'sbcsName', title: '维修厂商', minWidth: 120}
+                    , {field: 'ywfpPrice', title: '发票金额', minWidth: 100}
+                    , {field: 'userName', title: '登记人', minWidth: 50}
+                    , {field: 'ywfpSdTime', title: '登记时间', width: 90}
+                    , {field: 'sbcsName', title: '维修厂商', minWidth: 180}
                 ]]
                 , url: "/security/ywFp/listFwYwFp"
                 , request: {

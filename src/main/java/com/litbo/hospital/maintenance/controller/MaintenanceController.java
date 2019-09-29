@@ -201,6 +201,22 @@ public class MaintenanceController {
     @RequestMapping("/addMaintenance.do")
     public Result addMaintenance(Maintenance maintenance,String applicable_eq,Boolean ifNotRisk){
 
+        // 添加保养内容的周期    begin
+        String projects = maintenance.getProjectList();
+        String[] project = projects.split(",");
+        for(String i : project){
+            try {
+                MaintenanceProject mp = maintenanceService.selectProjectById(Integer.parseInt(i));
+                mp.setCycle(maintenance.getCycle());
+                maintenanceService.updateMaintenanceProject(mp);
+            }catch (Exception e){
+                System.out.println("预防性维护保养添加规范时无法解析保养内容");
+            }
+
+        }
+        // 添加保养内容的周期    end
+
+
         // 得到此设备的信息
         EqInfo eqInfo = maintenanceService.selectEqById(maintenance.getEqId());
         List <AddEqVo> list = new ArrayList<>();
@@ -356,16 +372,13 @@ public class MaintenanceController {
      * @param instrumentStatus 仪器现状
      * @param description 备注
      * @param maintenancePersonnel 维护人员
-     * @param checkTime 检查日期
-     * @param departmentReceipt 部门签收
-     * @param dateOfCompletion 完成日期
      * @return
      */
     @RequestMapping("/resultAdd.do")
     public Result resultAdd(int maintenanceId,String maintenanceResults,String instrumentStatus,String description,
-                            String maintenancePersonnel,String checkTime,String departmentReceipt,String dateOfCompletion){
+                            String maintenancePersonnel){
 
-        int result = maintenanceService.resultAdd(maintenanceId, maintenanceResults, instrumentStatus, description, maintenancePersonnel, checkTime, departmentReceipt, dateOfCompletion);
+        int result = maintenanceService.resultAdd(maintenanceId, maintenanceResults, instrumentStatus, description, maintenancePersonnel, null,null,null);
         if(result == 0){
             return Result.success("插入失败");
         }

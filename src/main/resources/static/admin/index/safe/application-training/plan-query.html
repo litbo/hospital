@@ -14,6 +14,11 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        body{
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,9 +29,7 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
+
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -39,6 +42,11 @@
                 <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search">查找</button>
             </div>
         </form>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
     </div>
 </script>
 <script type="text/html" id="bar">

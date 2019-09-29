@@ -20,6 +20,9 @@
         .setW{
             width: 80px;
         }
+        body{
+            background: #f2f2f2;
+        }
     </style>
 </head>
 
@@ -99,10 +102,15 @@
                                 title:"结果录入",
                                 event: 'king',
                                 type: 2,
-                                content: './child/deal-tasklr.html',
+                                content: './child/deal-taskAdd.html',
                                 area: ['90%', '90%'],
                                 func:function(obj,data){
-                                    localStorage.setItem("dealId",obj.data.id)
+
+                                    $.ajax({
+                                        url:"/maintenance/seePlanContent.do?id="+obj.data.id,
+                                        success:function(result){
+                                            localStorage.setItem("dealContent",JSON.stringify(result))
+                                        }});
                                 }
                             }
                         ]
