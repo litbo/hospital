@@ -75,7 +75,7 @@ public class ForecastServiceImpl implements ForecastService {
     }
 
     /**
-     * 批量删除预测符合率
+     * 删除预测符合率
      * @param ids 预测符合率id
      * @return 删除几条
      */

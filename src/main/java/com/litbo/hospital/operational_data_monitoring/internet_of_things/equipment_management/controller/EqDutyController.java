@@ -150,7 +150,7 @@ public class EqDutyController {
     }
 
     /**
-     * 批量删除
+     * 删除
      * @param eqMacIds
      * @return
      */

@@ -56,7 +56,7 @@ public interface EqMacTabDAO {
     @Delete("DELETE FROM eq_mac_tab where id = #{id}")
     void deleteById(String id);
 
-    /**根据id批量删除*/
+    /**根据id删除*/
     @Delete({
             "<script>",
             "DELETE FROM eq_mac_tab where id in",

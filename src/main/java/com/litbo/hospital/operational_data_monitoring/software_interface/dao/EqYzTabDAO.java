@@ -64,7 +64,7 @@ public interface  EqYzTabDAO {
         void deleteOne(String id);
 
         /**
-         * 批量删除
+         * 删除
          * @param ids
          */
         @Delete({"<script>",

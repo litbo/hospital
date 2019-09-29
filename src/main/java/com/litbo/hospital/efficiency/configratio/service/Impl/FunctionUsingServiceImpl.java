@@ -76,7 +76,7 @@ public class FunctionUsingServiceImpl implements FunctionUsingService {
     }
 
     /**
-     * 批量删除功能完好率
+     * 删除功能完好率
      * @param ids id
      * @return 共删除几条
      */

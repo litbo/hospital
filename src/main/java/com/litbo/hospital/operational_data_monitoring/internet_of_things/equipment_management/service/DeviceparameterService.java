@@ -39,7 +39,7 @@ public interface DeviceparameterService {
     void deleteByMacId(SearchVO searchVO);
 
     /**
-     * 批量删除
+     * 删除
      * @param macIds
      */
     void deletes(String[] macIds);

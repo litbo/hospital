@@ -45,7 +45,7 @@ public interface EqMacTabService {
     void delete(String id);
 
     /**
-     * 根据id批量删除数据
+     * 根据id删除数据
      * @param ids
      */
     void deletes(List<String> ids);

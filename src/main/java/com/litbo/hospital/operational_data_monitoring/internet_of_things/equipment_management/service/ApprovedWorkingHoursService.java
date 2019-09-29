@@ -20,7 +20,7 @@ public interface ApprovedWorkingHoursService {
     void save(ApprovedWorkingHours approvedWorkingHours);
     /**根据id删除*/
     void delete(String id);
-    /**批量删除*/
+    /**删除*/
     void deletes(List<String> ids);
     /**显示所有核定工时设置信息*/
     PageInfo selectAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);

@@ -184,7 +184,7 @@ public class EqController {
         return Result.success();
 
     }
-    //批量删除设备
+    //删除设备
     @RequestMapping("/delEq")
     @ResponseBody
     public Result delEq(@RequestBody ListVo listVo){

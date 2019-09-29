@@ -113,7 +113,7 @@ public interface DeviceparameterDAO {
     void updateDeviceCode(DeviceparameterVO deviceparameterVO);
 
     /**
-     * 5.批量删除设备联网表信息
+     * 5.删除设备联网表信息
      * @param macIds
      */
     @Delete({ "<script>",

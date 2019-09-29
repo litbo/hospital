@@ -116,7 +116,7 @@ public interface EqDutyTabDAO {
             ,"</script>"})
     void deletes(String[] ids);
 
-    //根据id批量删除设备值班数据
+    //根据id删除设备值班数据
     @Delete({
             "<script>",
             "DELETE FROM eq_duty_tab where id in",

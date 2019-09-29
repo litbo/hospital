@@ -75,9 +75,9 @@ public class FunctionIntegrityServiceImpl implements FunctionIntegrityService {
     }
 
     /**
-     * 批量删除功能完好率
+     * 删除功能完好率
      * @param ids 功能完好率id
-     * @return 批量删除的条数
+     * @return 删除的条数
      */
     @Override
     public Integer deleteIntegrity(Integer[] ids) {

@@ -105,7 +105,7 @@ public class DeviceparameterController {
     }
 
     /**
-     *  和单个删除一样,只不过是批量删除
+     *  和单个删除一样,只不过是删除
      * @param td
      * @return
      */

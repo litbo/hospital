@@ -41,9 +41,9 @@ public interface FunctionIntegrityService {
     Integer updateIntegrity(FunctionIntegrityRatioVO integrityRatioVO);
 
     /**
-     * 批量删除功能完好率
+     * 删除功能完好率
      * @param ids 功能完好率id
-     * @return 批量删除的条数
+     * @return 删除的条数
      */
     Integer deleteIntegrity(Integer[] ids);
 

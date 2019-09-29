@@ -53,7 +53,7 @@ public class EqDutyTabServiceImpl implements EqDutyTabService {
     }
 
     /**
-     * 批量删除
+     * 删除
      * @param ids
      */
     @Override

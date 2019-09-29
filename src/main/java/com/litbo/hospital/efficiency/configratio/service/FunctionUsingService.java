@@ -41,7 +41,7 @@ public interface FunctionUsingService {
     Integer updateUsing(FunctionUsingRatioVO usingRatioVO);
 
     /**
-     * 批量删除功能完好率
+     * 删除功能完好率
      * @param ids id
      * @return 共删除几条
      */

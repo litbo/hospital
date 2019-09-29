@@ -3194,7 +3194,7 @@ Clip.prototype = {
             }
 
             // 动画完成将这个控制器标识为待删除
-            // 在Animation.update中进行批量删除
+            // 在Animation.update中进行删除
             this._needsRemove = true;
             return 'destroy';
         }

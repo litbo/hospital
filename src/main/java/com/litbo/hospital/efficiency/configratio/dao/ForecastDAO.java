@@ -71,7 +71,7 @@ public interface ForecastDAO {
 
 
     /**
-     * 批量删除预测符合率
+     * 删除预测符合率
      * @param ids id
      * @return 删除几条
      */

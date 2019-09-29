@@ -98,7 +98,7 @@ public class EqMacTabServiceImpl implements EqMacTabService {
         eqMacTabDAO.deleteById(id);
     }
     /**
-     * 根据id批量删除数据
+     * 根据id删除数据
      * @param ids
      */
     @Override

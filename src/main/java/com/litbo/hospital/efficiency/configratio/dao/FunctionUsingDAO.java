@@ -70,7 +70,7 @@ public interface FunctionUsingDAO {
     Integer updateUsing(@Param("ratioVO") FunctionUsingRatioVO ratioVO);
 
     /**
-     * 批量删除功能利用率
+     * 删除功能利用率
      * @param ids id
      * @return 删除几条
      */

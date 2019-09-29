@@ -23,7 +23,7 @@ public interface EqDutyTabService {
     void save(EqDutyTab eqDutyTab);
     /**删除：根据id删除*/
     void delete(String id);
-    /**根据id批量删除*/
+    /**根据id删除*/
     void deletes(List<String> ids);
     /**查询所有设备值班情况*/
     PageInfo selectAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, SearchVO searchVO);
@@ -49,6 +49,6 @@ public interface EqDutyTabService {
 
     /**删除：根据id删除*/
     void deleteByEqMacId(String eqMacId);
-    /**根据id批量删除*/
+    /**根据id删除*/
     void deleteByEqMacIds(String[] eqMacIds);
 }

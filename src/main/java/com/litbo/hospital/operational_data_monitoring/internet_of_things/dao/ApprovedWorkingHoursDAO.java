@@ -84,7 +84,7 @@ public interface ApprovedWorkingHoursDAO {
             "<foreach item='id' collection='array' open='(' separator=',' close=')'> #{id} </foreach>"
             ,"</script>"})
     void deletes(String[] ids);
-    /**批量删除*/
+    /**删除*/
     @Delete({
             "<script>",
             "DELETE FROM approved_working_hours WHERE id in",

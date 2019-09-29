@@ -21,7 +21,7 @@ public interface EqOvertimeTabService {
     void save(EqOvertimeTab eqOvertime);
     /**根据id删除信息*/
     void delete(String id);
-    /**批量删除信息*/
+    /**删除信息*/
     void deletes(List<String> ids);
     /**显示所有加班信息*/
     PageInfo showAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);

@@ -110,7 +110,7 @@ public interface EqOvertimeTabDAO {
     /**根据id删除加班信息*/
     @Delete("DELETE FROM eq_overtime_tab WHERE eq_mac_id = #{id}")
     void delete(@Param("id") String id);
-    /**根据id删除 批量删除*/
+    /**根据id删除 删除*/
     @Delete({
             "<script>",
             "DELETE FROM eq_overtime_tab WHERE id in",
