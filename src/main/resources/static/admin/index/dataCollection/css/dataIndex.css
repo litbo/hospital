@@ -1,25 +1,4 @@
 
-/* layui样式修改 */
-.layui-nav-tree .layui-nav-item a{
-    font-size: 15px;
-}
-
-.layui-nav-tree .layui-nav-item a:hover {
-    background-color: rgb(48, 183, 236);
-}
-
-.layui-nav-tree .layui-nav-itemed{
-    background-color: #1e92ff;
-}
-
-.layui-bg-blue .layui-nav-itemed>a, .layui-nav-tree.layui-bg-blue .layui-nav-title a, .layui-nav-tree.layui-bg-blue .layui-nav-title a{
-    background-color: rgb(107, 180, 236);
-}
-
-.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a{
-    background-color: rgb(107, 180, 236);
-}
-
 /* 顶部区域 */
 .data_top{
     /* height: 100px; */
@@ -128,7 +107,7 @@
 
 /*  *号  */
 .required{
-    font-size: 11px;
+    font-size: 11px !important;
     color: red;
 }
 
@@ -147,7 +126,6 @@
     text-indent: 1em;
     border:0;
     outline: none;
-    /*color: #fff;*/
 }
 
 /*用来分割的两行p*/
@@ -197,7 +175,7 @@
     display: inline-block;
     width: 40px;
     height:20px;
-    background-color: #37a2da;
+    background-color: rgb(240,173,78);
     text-align: center;
     border-radius: 5px;
     color: #fff;
