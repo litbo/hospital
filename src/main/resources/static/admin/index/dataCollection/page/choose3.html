@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>数据收集</title>
-    <link rel="stylesheet" href="../layui/css/layui.css">
-    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
     <link rel="stylesheet" href="../css/dataIndex.css">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../iconfont/iconfont.js"></script>
-    <script src="../../../../static/admin/js/basic.js"></script>
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
 </head>
 <body>
 
@@ -18,28 +23,25 @@
 
 <script type="text/html" id="toolBar">
     <!-- 搜索区域 -->
-    <div class="index_searchChoose" style="margin-top: -10px;">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData"
-                id="transmit"
-                style="margin-left: -250px;float:left;margin-top: 2px;">确定
-        </button>
-
-        <form class="layui-form" action="">
-            <div class="layui-input-inline" style="width: 160px;">
-                <input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
-            </div>
-            <div class="layui-input-inline" style="width: 150px;">
-                <select name="bmId" lay-filter="bmId">
-                    <option value="">全部科室</option>
-                </select>
-            </div>
-            <div class="layui-input-inline" style="width: 140px;">
-                <input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
-            </div>
-            <div class="layui-input-inline" style="width: 80px;">
-                <button class="layui-btn"  data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
-            </div>
-        </form>
+    <form class="layui-form" action="">
+        <div class="layui-input-inline" style="width: 160px;">
+            <input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width: 150px;">
+            <select name="bmId" lay-filter="bmId">
+                <option value="">全部科室</option>
+            </select>
+        </div>
+        <div class="layui-input-inline" style="width: 140px;">
+            <input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width: 80px;">
+            <button class="layui-btn"  data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+        </div>
+    </form>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData" id="transmit">确定</button>
     </div>
 </script>
 
