@@ -13,6 +13,11 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style>
+        body{
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,10 +28,7 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-       <!-- <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>-->
-       <button class="layui-btn layui-btn-sm addi" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
-    </div>
+
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
@@ -36,6 +38,11 @@
                 <button class="layui-btn" lay-submit="" lay-filter="demo1"><i class="layui-icon layui-icon-search"></i>查询</button>
             </div>
         </form>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <!-- <a class="layui-btn layui-btn-xs" lay-event="add"><i class="fas fa-plus"></i></a>-->
+        <button class="layui-btn layui-btn-sm addi" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
     </div>
 </script>
 
