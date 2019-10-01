@@ -18,6 +18,9 @@
         .layui-inline {
             width: 140px;
         }
+         body{
+             background: #f2f2f2;
+         }
     </style>
 </head>
 <body>
@@ -45,16 +48,13 @@
     {{# if (d.status=== 1) { }}  
     <a class="layui-btn layui-btn-xs" lay-event="szjs">设置角色</a>
     {{# } else { }}  
-    <a  class="layui-btn layui-btn-xs layui-btn-warm" lay-event=" " style="background:#ccc;">设置角色</a>
+    <a   class="layui-btn layui-btn-xs layui-btn-warm" lay-event=" " style="background:#ccc;pointer-events:none">设置角色</a>
     {{# } }} 
 
 </script>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sz">批量设置为用户</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除用户信息</a>
-    </div>
+
     <div class="hidden-xs" id="moreBar">
         <div class="layui-inline">
             <select name="status" id="status" lay-filter="xtUser">
@@ -82,6 +82,12 @@
 
 
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+    </div>
+    <hr class="devideHr">
+
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sz">批量设置为用户</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除用户信息</a>
     </div>
 </script>
 
