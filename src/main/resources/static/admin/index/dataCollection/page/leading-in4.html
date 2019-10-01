@@ -8,18 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <link rel="stylesheet" href="../css/dataIndex.css">
     <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="/static/admin/js/basic.js"></script>
 </head>
-<body style="background-color:#f2f2f2;">
+<body style="background-color: #f2f2f2;">
 
-<!--表格-->
+<!-- 表格 -->
 <div class="layui-row">
     <div class="col-xs-12">
-        <table class="layui-hide" id="table" lay-filter="test"></table>
+        <table class="layui-hide" id="table" lay-filter="table1"></table>
     </div>
 </div>
 
@@ -32,17 +33,17 @@
         </div>
 
         <div class="layui-input-inline" style="width: 80px;">
-            <button class="layui-btn"  data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+            <button class="layui-btn"  data-type="reload">查找</button>
         </div>
     </form>
     <hr class="devideHr">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-normal layui-btn-sm" id="csh" href="javascript:;">初始化手术科室</a>
+        <a class="layui-btn layui-btn-normal layui-btn-sm" id="csh" href="javascript:;" style="margin-top: -2px;">初始化手术科室</a>
     </div>
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">编辑</a>
+    <a class="layui-btn layui-btn-sm editi pipei" lay-event="pipei">编辑</a>
     <button data-method="notice" class="layui-btn layui-btn-sm layui-btn-danger guanlian"
             lay-event="guanlian">取消关联</button>
 </script>
@@ -59,7 +60,7 @@
                     {field:'deptNo', title:'手术科室编号'}
                     ,{field:'deptName', title:'手术科室名称'}
                     ,{field:'bmName', title:'匹配科室名称'}
-                    ,{title:'操作', align:'center', toolbar: '#barDemo',width:200}
+                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo'}
                 ]]
                 , url: "/surgery/showSurgery"
                 , method: "POST"
@@ -83,9 +84,9 @@
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
                                 type:2,
                                 event: "pipei",
-                                title:"选择对应科室",
+                                title:"选择对应部门",
                                 content:"in4-edit.html",
-                                area: ['600px', '450px'],
+                                area: ['700px', '450px'],
                                 dataUrl:["deptNo"],
                                 func:function(obj){
                                     console.log(obj);
@@ -113,7 +114,7 @@
                                                         msg: "取消关联，请重试！"
                                                     });
                                                 }
-                                                layer.close(index);
+                                                // layer.close(index);
                                             }
                                         });
                                     });

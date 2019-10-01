@@ -17,6 +17,9 @@
        /* .layui-inline{
             width:140px;
         }*/
+       body{
+           background: #f2f2f2;
+       }
     </style>
 </head>
 
@@ -28,9 +31,7 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="cancel">解除卫标分类</a>
-    </div>
+
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
@@ -47,6 +48,10 @@
                 <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
             </div>
         </form>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn  layui-btn-sm  layui-btn-warm" lay-event="cancel">解除卫标分类</a>
     </div>
 </script>
 
