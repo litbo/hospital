@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.litbo.hospital.check.mapper.CheckMaper">
+    <resultMap id="CheckMap" type="com.litbo.hospital.check.pojo.Equipment">
+        <id column="id" property="id"></id>
+        <result property="eq_id" column="eq_id"></result>
+        <result property="date" column="date"></result>
+        <result property="user_id" column="user_id"></result>
+        <result property="checks" column="checks"></result>
+        <result property="plan_id" column="plan_id"></result>
+    </resultMap>
+    <select id="getCheck" resultMap="CheckMap"  parameterType="String">
+        select  s.eq_id, s.date , s.user_id, s.checks, s.plan_id ,  e.eq_name
+        from sg_check  s join eq_info  e on s.eq_id = e.eq_id
+        where plan_id = #{plan_id}
+    </select>
+
+
+
+
+
+</mapper>
