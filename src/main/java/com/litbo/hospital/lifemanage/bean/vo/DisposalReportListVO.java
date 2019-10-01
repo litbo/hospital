@@ -30,7 +30,7 @@ public class DisposalReportListVO {
      */
     private String eqName;
     /**
-     * 部门名字
+     * 科室名字
      */
     private String bmName;
     /**

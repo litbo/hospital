@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 public interface SpecialEquipmentService {
 
 
-    //查询部门信息
+    //查询科室信息
     PageInfo selectSpEqBmInfo(int pageNum, int pageSize);
-    //查询部门信息根据部门名称
+    //查询科室信息根据科室名称
     PageInfo selectSpEqBmInfoByName(int pageNum, int pageSize, String bmName);
 
 

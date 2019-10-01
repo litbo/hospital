@@ -56,8 +56,8 @@ public interface SgPlanMapper {
     List<SgPlan> selectPlan(@Param("planName") String planName, @Param("planDate") Date planDate, @Param("userId") List<String> userId);
 
     /**
-     * 根据部门id查询设备id
-     * @param bmId 部门id
+     * 根据科室id查询设备id
+     * @param bmId 科室id
      * @return 设备id列表
      */
     @Select("SELECT\n" +

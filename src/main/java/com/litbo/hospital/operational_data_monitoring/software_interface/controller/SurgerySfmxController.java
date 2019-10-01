@@ -99,7 +99,7 @@ public class SurgerySfmxController {
         //删除之前的数据
         deptDictService.delete();
         /**
-         * 查询his系统部门数据并导入系统
+         * 查询his系统科室数据并导入系统
          */
         List<HisDeptDict> hisDeptDictList = mapper.selectAll();
         int batchCount =500;

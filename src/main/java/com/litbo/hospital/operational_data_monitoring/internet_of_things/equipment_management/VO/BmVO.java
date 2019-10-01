@@ -9,7 +9,7 @@ import lombok.Data;
  * @CreateTime: 2019-07-21 11:21
  * @Description: todo
  */
-//部门
+//科室
 @Data
 public class BmVO {
     private String bmId;

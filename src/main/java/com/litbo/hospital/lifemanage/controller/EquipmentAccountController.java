@@ -27,7 +27,7 @@ public class EquipmentAccountController {
      *
      * @param category            购置类别
      * @param state               状态
-     * @param departmentId        部门id
+     * @param departmentId        科室id
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding    院内编码
      * @param equipmentNumber     设备编码
@@ -60,8 +60,8 @@ public class EquipmentAccountController {
      * @param equipmentPinyinCode 设备拼音码
      * @param departmentCoding    院内编码
      * @param eqCxflId            设备分类Id
-     * @param tgbmId              托管部门id
-     * @param bmId                使用部门
+     * @param tgbmId              托管科室id
+     * @param bmId                使用科室
      * @param eqQysjLower         启用时间下限
      * @param eqQysjUpper         启用时间上限
      * @param eqCgrqLower         采购日期下限

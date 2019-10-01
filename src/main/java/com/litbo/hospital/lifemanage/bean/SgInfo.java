@@ -16,7 +16,7 @@ public class SgInfo {
      */
     private String id;
     /**
-     * 部门id 关联s_bm表
+     * 科室id 关联s_bm表
      */
     private String bmId;
     /**

@@ -71,7 +71,7 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
      * 装备委员会年度采购计划
      *
      * @param year     年份
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param bh       申购单编号
      * @param pageNum  当前页数
      * @param pageSize 每页显示的记录数
@@ -88,7 +88,7 @@ public class SgZbwyhhyServiceImpl implements SgZbwyhhyService {
      * 装备委员会年度采购预算
      *
      * @param year     年份
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param pageNum  当前页数
      * @param pageSize 每页显示的记录数
      * @return PageInfo<YearBudgetVO>

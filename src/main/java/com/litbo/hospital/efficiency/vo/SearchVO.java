@@ -16,7 +16,7 @@ public class SearchVO {
     /** 搜索的结束时间 */
     private String endSTime;
 
-    /** 搜索部门的名字 */
+    /** 搜索科室的名字 */
     private String bmSName;
 
     /** 搜索设备的名字 */

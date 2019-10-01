@@ -11,7 +11,7 @@ public class EqInfoVO2 {
     private String eqName;
     /**拼音码*/
     private String eqPym;
-    /**部门名称*/
+    /**科室名称*/
     private String bmName;
     /**品牌*/
     private String eqPp;
@@ -21,7 +21,7 @@ public class EqInfoVO2 {
     private String eqXh;
     /**台账类别*/
     private String eqTzlb;
-    /**部门ID*/
+    /**科室ID*/
     private String bmId;
 
     /**设备厂商id*/

@@ -93,7 +93,7 @@ public interface SgYsService2 {
                            String htid, String bmid);
 
     /**
-     * 查询所有科室的部门id和部门名字
+     * 查询所有科室的科室id和科室名字
      */
     List<Map<String, String>> selectAllBmIdAndName();
     /*查看验收记录详情*/

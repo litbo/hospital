@@ -53,7 +53,7 @@ public class SgKstlServiceImpl implements SgKstlService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public boolean insertSgKstl(SgKstlVO sgKstlVO) {
-        //通过人员id 查询部门id
+        //通过人员id 查询科室id
         SBm bmByEmpId = empDao.getBmByEmpId(sgKstlVO.getUserId());
         sgKstlVO.setBmId(bmByEmpId.getBmId());
 
@@ -80,10 +80,10 @@ public class SgKstlServiceImpl implements SgKstlService {
     }
 
     /**
-     * 通过部门id查询讨论表的id
+     * 通过科室id查询讨论表的id
      *
-     * @param bmId 部门ID
-     * @return 部门所有的讨论ID
+     * @param bmId 科室ID
+     * @return 科室所有的讨论ID
      */
     @Override
     public List<String> selectSgKstlIdsByBmId(String bmId) {
@@ -91,10 +91,10 @@ public class SgKstlServiceImpl implements SgKstlService {
     }
 
     /**
-     * 通过部门id查询所有的品名ID
+     * 通过科室id查询所有的品名ID
      *
-     * @param bmId 部门ID
-     * @return 部门讨论的所有需购买设备的品名列表
+     * @param bmId 科室ID
+     * @return 科室讨论的所有需购买设备的品名列表
      */
     @Override
     public List<String> selectSgTlPmPmIdsByBmId(String bmId) {
@@ -118,7 +118,7 @@ public class SgKstlServiceImpl implements SgKstlService {
     }
 
     /**
-     * 显示部门下的所有讨论的设备
+     * 显示科室下的所有讨论的设备
      *
      * @param userId   登陆人id
      * @param eqPmName 设备名称
@@ -129,9 +129,9 @@ public class SgKstlServiceImpl implements SgKstlService {
      */
     @Override
     public PageInfo<SgKstlAddSgInfoVO> selectSgKstlSbs(String userId, String eqPmName, String eqPmJc, Integer pageNum, Integer pageSize) {
-        //通过人员表id获取所在部门
+        //通过人员表id获取所在科室
         SBm bm = empDao.getBmByEmpId(userId);
-        // 如果人员没有部门 返回null
+        // 如果人员没有科室 返回null
         if (!ObjectUtils.allNotNull(bm)) {return new PageInfo<>();}
 
         String bmId = bm.getBmId();
@@ -144,7 +144,7 @@ public class SgKstlServiceImpl implements SgKstlService {
             for (EqPm eqPm : eqDao.listPmsByPym(eqPmJc)) {
                 pms.add(eqPm.getEqPmId());
             }
-//          把通过部门查询的品名list和模糊查询到的品名list 取交集
+//          把通过科室查询的品名list和模糊查询到的品名list 取交集
             pmList.retainAll(pms);
         }
         // 如果pmList为空 或者没有数据 就返回null的数据

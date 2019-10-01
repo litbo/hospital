@@ -21,7 +21,7 @@ public class SgKstlToVO {
      */
     private String userNameJl;
     /**
-     * 部门名称 关联部门表id
+     * 科室名称 关联科室表id
      */
     private String bmName;
     /**

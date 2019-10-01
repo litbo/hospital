@@ -34,7 +34,7 @@ public class FwShouLiIndexVo {
 
     private String eqBxStatus; //保修状态
 
-    private String bmName; //报修部门名字
+    private String bmName; //报修科室名字
 
     private String bxksdh; //报修科室电话
 

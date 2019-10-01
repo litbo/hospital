@@ -4,30 +4,30 @@
   "count": 1000,
   "data": [
     {
-      "BmId": "部门编号",
-      "BmName": "部门名称",
-      "BmTel": "部门电话",
+      "BmId": "科室编号",
+      "BmName": "科室名称",
+      "BmTel": "科室电话",
       "UserXm": "负责人",
       "tel": "负责人电话"
     },
     {
-      "BmId": "部门编号",
-      "BmName": "部门名称",
-      "BmTel": "部门电话",
+      "BmId": "科室编号",
+      "BmName": "科室名称",
+      "BmTel": "科室电话",
       "UserXm": "负责人",
       "tel": "负责人电话"
     },
     {
-      "BmId": "部门编号",
-      "BmName": "部门名称",
-      "BmTel": "部门电话",
+      "BmId": "科室编号",
+      "BmName": "科室名称",
+      "BmTel": "科室电话",
       "UserXm": "负责人",
       "tel": "负责人电话"
     },
     {
-      "BmId": "部门编号",
-      "BmName": "部门名称",
-      "BmTel": "部门电话",
+      "BmId": "科室编号",
+      "BmName": "科室名称",
+      "BmTel": "科室电话",
       "UserXm": "负责人",
       "tel": "负责人电话"
     }

@@ -36,7 +36,7 @@ public class MaintenanceController {
     /**
      * 查看需要编制保养规范的设备
      * @param riskLevel 风险等级
-     * @param bmName 部门名称
+     * @param bmName 科室名称
      * @param eqName 设备名
      * @param pageIndex 页码
      * @param pageSize 每页数据量

@@ -32,7 +32,7 @@ public interface MeteringUtilDAO {
                                                    @Param("beginTime") String beginTime,
                                                    @Param("endTime") String endTime,@Param("needMeter") String needMeter);
 
-    //    根据部门查看设备信息
+    //    根据科室查看设备信息
     List<MeteringUtil> findAllMeteringUtilByDepartment(String department);
     List<MeteringUtil> findAllMeteringUtilByDepartmentAndName(@Param("department") String department,@Param("name") String name);
 
@@ -40,7 +40,7 @@ public interface MeteringUtilDAO {
     List<MeteringUtil> findAllMeteringUtilByTime(@Param("beginTime")String beginTime, @Param("endTiem") String endTiem);
 
 
-    //   根据时间，部门，审计状态联合查询
+    //   根据时间，科室，审计状态联合查询
     List<MeteringUtil> searchMeteringUtil(@Param("beginTime")String beginTime, @Param("endTiem") String endTiem,
                                           @Param("department")String department,@Param("status")String status);
 

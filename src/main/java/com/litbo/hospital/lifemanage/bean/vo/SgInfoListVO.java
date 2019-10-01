@@ -14,7 +14,7 @@ public class SgInfoListVO {
      */
     private String id;
     /**
-     * 申购部门名字
+     * 申购科室名字
      */
     private String bmName;
     /**

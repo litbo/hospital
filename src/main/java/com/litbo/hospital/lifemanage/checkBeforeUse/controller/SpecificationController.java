@@ -35,7 +35,7 @@ public class SpecificationController {
     @PostMapping("eqInfosTitle")
     public Result eqInfosTitle(){
         String title ="[{'type': 'radio'}, "+
-                "{field: 'bmName', title: '部门名称'},"+
+                "{field: 'bmName', title: '科室名称'},"+
                 "{field: 'eqId', title: '设备id'},"+
                 "{field: 'eqName', title: '设备名称'},"+
                 "{field: 'eqSbbh', title: '设备编号'},"+
@@ -54,8 +54,8 @@ public class SpecificationController {
         String title ="[{'type': 'radio'}, "+
                 "{field: 'userId', title: '用户Id'},"+
                 "{field: 'userXm', title: '用户姓名'},"+
-                "{field: 'bmName', title: '部门名称'},"+
-                "{field: 'bmId', title: '部门Id'},"+
+                "{field: 'bmName', title: '科室名称'},"+
+                "{field: 'bmId', title: '科室Id'},"+
                 "]";
         return Result.success(JSON.parseArray(title));
     }

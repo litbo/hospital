@@ -12,7 +12,7 @@ import java.util.List;
 public interface EmpService {
     //获取所有维修人员
     List<SEmp> getWxEmps();
-    //通过部门获取员工
+    //通过科室获取员工
     List<SEmp> getEmpsByBmId(String bmId);
     //通过员工id获取员工信息
     SEmp getEmpsById(String id);
@@ -22,17 +22,17 @@ public interface EmpService {
     void saveEmp(SEmp emp);
     //删除员工
     void deleteEmpByUserId(String empId);
-    //通过成员id获得部门信息w
+    //通过成员id获得科室信息w
     SBm getBmByEmpId(String empId);
-    //通过部门id获得员工信息
+    //通过科室id获得员工信息
     List<SEmp> listEmpByBmId(String bmId);
     //获取Emp基本信息
     PageInfo listSelectEmps(int pageNum, int pageSize);
-    //获取Emp基本信息通过部门id和userId status
+    //获取Emp基本信息通过科室id和userId status
     PageInfo listSelectEmpBybmIdAndUserId(int pageNum, int pageSize, String bmId, String userId,String status,String bmName);
 
 
-    //获取登陆人的同部门伙伴信息
+    //获取登陆人的同科室伙伴信息
     List<SEmp> listPartnerByUserId(String userId,int pageNum,int pageSize);
 
     EmpVO getEmpsByUserId(String userId);

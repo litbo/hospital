@@ -72,7 +72,7 @@ public class BmServiceImpl implements BmService {
                 }
                 return 0; //相等为0
             }
-        }); // 按部门id从下到大排序
+        }); // 按科室id从下到大排序
         return bmList;
     }
 
@@ -103,9 +103,9 @@ public class BmServiceImpl implements BmService {
             if(bm.getBmId().startsWith("01")){
                 szSelectVO.setBmLb("机构领导");
             }else if(bm.getBmId().startsWith("02")){
-                szSelectVO.setBmLb("管理部门");
+                szSelectVO.setBmLb("管理科室");
             }else{
-                szSelectVO.setBmLb("使用部门");
+                szSelectVO.setBmLb("使用科室");
             }
 
             if(bm.getBmId().startsWith("0201")){
@@ -166,7 +166,7 @@ public class BmServiceImpl implements BmService {
     @Override
     public void saveBm(SBm bm) {
         bm.setObmId(UUID.randomUUID().toString());
-        List<SBm> new_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的部门信息
+        List<SBm> new_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的科室信息
         SBm new_idmax_mb = getMaxBm(new_bmListByPid,bm.getpBmId());
         String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(bm.getpBmId()));
         bm.setBmId(new_bm_id);
@@ -210,8 +210,8 @@ public class BmServiceImpl implements BmService {
 
     @Override
     public void setBmsBeto(SetBmVO bmVO) {
-        String new_pbm_id = bmVO.getPbmId();   //获取父部门
-        String[] obm_ids = bmVO.getObmIds();   //获取子部门
+        String new_pbm_id = bmVO.getPbmId();   //获取父科室
+        String[] obm_ids = bmVO.getObmIds();   //获取子科室
         for(String obm_id:obm_ids){
             setBmBeto(obm_id,new_pbm_id);       //设置归属
         }
@@ -220,8 +220,8 @@ public class BmServiceImpl implements BmService {
     @Override
     public void setBmBeto(String obm_id, String new_pbm_id) {
         SBm bm = bmDao.getBmByOid(obm_id); // 获得需要修改bm的信息
-        List<SBm> old_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的部门信息
-        List<SBm> new_bmListByPid = bmDao.getBmListByPid(new_pbm_id); //获取新平级下的部门信息
+        List<SBm> old_bmListByPid = bmDao.getBmListByPid(bm.getpBmId()); //获取平级下的科室信息
+        List<SBm> new_bmListByPid = bmDao.getBmListByPid(new_pbm_id); //获取新平级下的科室信息
 
         SBm old_idmax_mb = getMaxBm(old_bmListByPid,bm.getpBmId());    //
         SBm new_idmax_mb = getMaxBm(new_bmListByPid,new_pbm_id);    //
@@ -229,13 +229,13 @@ public class BmServiceImpl implements BmService {
         String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(new_pbm_id));
         bmDao.setBmBeto(obm_id,new_bm_id,new_pbm_id);
 
-        if(old_idmax_mb!=null&&!old_idmax_mb.getBmId().equals(bm.getBmId())) {   //如果原来平级部门id的最大值不为当前修改的部门的id，酒吧这个部门的id赋给他
+        if(old_idmax_mb!=null&&!old_idmax_mb.getBmId().equals(bm.getBmId())) {   //如果原来平级科室id的最大值不为当前修改的科室的id，酒吧这个科室的id赋给他
             bmDao.setBmIdByOid(old_idmax_mb.getObmId(),bm.getBmId());
         }
 
-        //设置父节点为虚部门
+        //设置父节点为虚科室
         bmDao.setxbm(new_pbm_id,"1");
-        //判断原父节点是否还存在子节点 如果不存在则修改虚部门标识
+        //判断原父节点是否还存在子节点 如果不存在则修改虚科室标识
         if(!bm.getpBmId().equals("1000000000")&&bmDao.getAmountByPid(bm.getpBmId())==0){
             bmDao.setxbm(bm.getpBmId(),"0");
         }
@@ -329,11 +329,11 @@ public class BmServiceImpl implements BmService {
                 lbbm.setBmId(bm.getBmId());
                 lbbm.setBmName(bm.getBmName());
                 if(bm.getBmId().startsWith("02"))
-                    lbbm.setBmLb("管理部门");
+                    lbbm.setBmLb("管理科室");
                 else if (bm.getBmId().startsWith("01")){
                     lbbm.setBmLb("机构领导");
                 }else if(bm.getBmId().startsWith("03")){
-                    lbbm.setBmLb("使用部门");
+                    lbbm.setBmLb("使用科室");
                 }else{
                     lbbm.setBmLb("未设置");
                 }
@@ -416,11 +416,11 @@ public class BmServiceImpl implements BmService {
         if(selectVO.getFlag()==1){
             for (BmSelectLbVO lbbm:lbbms){
                 if(lbbm.getBmId().startsWith("02"))
-                    lbbm.setBmLb("管理部门");
+                    lbbm.setBmLb("管理科室");
                 else if (lbbm.getBmId().startsWith("01")){
                     lbbm.setBmLb("机构领导");
                 }else if(lbbm.getBmId().startsWith("03")){
-                    lbbm.setBmLb("使用部门");
+                    lbbm.setBmLb("使用科室");
                 }else{
                     lbbm.setBmLb("未设置");
                 }
@@ -443,7 +443,7 @@ public class BmServiceImpl implements BmService {
         }else if(selectVO.getFlag()==3){
             for (BmSelectLbVO lbbm:lbbms){
                 if(lbbm.getBmId().startsWith("02")){
-                    lbbm.setBmLb("管理部门");
+                    lbbm.setBmLb("管理科室");
                     if(lbbm.getBmId().startsWith("0201")){
                         lbbm.setBmGk("医工");
                     }else if(lbbm.getBmId().startsWith("0202")) {
@@ -492,11 +492,11 @@ public class BmServiceImpl implements BmService {
 
         for(BmSelectLbVO bm:bms){
             if(bm.getBmId().startsWith("02"))
-                bm.setBmLb("管理部门");
+                bm.setBmLb("管理科室");
             else if (bm.getBmId().startsWith("01")){
                 bm.setBmLb("机构领导");
             }else if(bm.getBmId().startsWith("03")){
-                bm.setBmLb("使用部门");
+                bm.setBmLb("使用科室");
             }else{
                 bm.setBmLb("未设置");
             }
@@ -523,7 +523,7 @@ public class BmServiceImpl implements BmService {
 
         String bmId = bm1.getBmId();
         bm.setpBmId(bmId);
-        List<SBm> new_bmListByPid = bmDao.getBmListByPid(bmId); //获取平级下的部门信息
+        List<SBm> new_bmListByPid = bmDao.getBmListByPid(bmId); //获取平级下的科室信息
         SBm new_idmax_mb = getMaxBm(new_bmListByPid,bmId);
         String new_bm_id = createNewBmId(new_idmax_mb,new_idmax_mb.getBmId().equals(bmId));
         bm.setBmId(new_bm_id);
@@ -668,7 +668,7 @@ public class BmServiceImpl implements BmService {
                     }
                  return 0; //相等为0
                 }
-            }); // 按部门id从下到大排序
+            }); // 按科室id从下到大排序
 
 
 

@@ -1,8 +1,8 @@
 package com.litbo.hospital.supervise.vo;
 
 public class WxBmGcsEqInsertVO {
-    private String bmId;    //维修部门id
-    private String userId;  //维修部门的人员
+    private String bmId;    //维修科室id
+    private String userId;  //维修科室的人员
     private String[] eqIds; // 维修划分的设备
 
     public String getBmId() {

@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 public class SearchVO {
-    /**部门编号*/
+    /**科室编号*/
     private String bmId;
     /**品名拼音码*/
     private String pmpym;

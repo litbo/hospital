@@ -28,7 +28,7 @@ public interface MeteringService {
 
     List<MeteringUtil> findAllMeteringUtilAllCheck(Integer sign, String gaugeCategory,String meteringName,String bmName, String meteringstatus,String beginTime,String endTime,String needMeter);
 
-    //    根据部门查看设备信息
+    //    根据科室查看设备信息
 
     List<MeteringUtil> findAllMeteringUtilByDepartment(String department);
     List<MeteringUtil> findAllMeteringUtilByDepartmentAndMeteringUtilName(String department,String meteringUtilName);
@@ -36,7 +36,7 @@ public interface MeteringService {
     //    查找在某一时间段需要计量的设备信息
     List<MeteringUtil> findAllMeteringUtilByTime(String beginTime,String endTiem);
 
-    //   根据时间，部门，审计状态联合查询
+    //   根据时间，科室，审计状态联合查询
     List<MeteringUtil> searchMeteringUtil(String beginTime, String endTiem,
                                           String department,String status);
 

@@ -11,52 +11,52 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface BmService {
-    //返回所有部门
+    //返回所有科室
     PageInfo getBmList(int pageNum, int pageSize);
-    //返回所有部门不分頁
+    //返回所有科室不分頁
     List<SBm> getBmList();
-    //返回所有虚部门
+    //返回所有虚科室
     PageInfo getXBmList(int pageNum, int pageSize);
-    //返回所有叶子部门
+    //返回所有叶子科室
     PageInfo getYZBmList(int pageNum, int pageSize);
-    //返回所有虚部门
+    //返回所有虚科室
     List<SBm> getXBmList();
-    //返回所有叶子部门
+    //返回所有叶子科室
     List<SBm> getYZBmList();
-    //返回所有管理部门
+    //返回所有管理科室
     PageInfo getGLBmList(int pageNum, int pageSize);
-    //返回所有维修部门
+    //返回所有维修科室
     List<SBm> getWxBmList();
-    //保存部门
+    //保存科室
     void saveBm(SBm bm);
 
     void updateBm(SBm bm);
-    //根据父节点查部门
+    //根据父节点查科室
     PageInfo getBmListByPid(int pageNum, int pageSize, String pid);
-    //根据oid查部门
+    //根据oid查科室
     SBm getBmByOid(String id);
-    //根据id查部门
+    //根据id查科室
     SBm getBmByBmId(String bmid);
     //模糊查詢
     PageInfo getBmListByX(int pageNum, int pageSize, BmSelectVO selectVo);
-    //通过部门id刪除
+    //通过科室id刪除
     void removeBmByOBmId(String oid);
-    //判断部门是否为子节点
+    //判断科室是否为子节点
     boolean isZJD(String oid);
-    //判断部门们是否为子节点
+    //判断科室们是否为子节点
     boolean isAllZJD(String[] bm_ids);
-    //设置部门归属
+    //设置科室归属
     void setBmsBeto(SetBmVO bmVO);
     void setBmBeto(String obm_id, String new_pbm_id );
-    //设置为维修部门
+    //设置为维修科室
     void setWxbm(String[] obmid, int wxFlag);
-    //获取所有维修部门
+    //获取所有维修科室
     List<SBm> getWxBms();
-    //获取所有非维修部门
+    //获取所有非维修科室
     List<SBm> getFwxBms();
-    //获取所有非维修部门
+    //获取所有非维修科室
     PageInfo getFwxBms(int pageNum, int pageSize);
-    //获取所有非维修部门通过部门名
+    //获取所有非维修科室通过科室名
     PageInfo listFWXBmByBmName(int pageNum, int pageSize, String bmName);
 
     PageInfo listBmsAsLbBms(int pageNum, int pageSize,int flag);

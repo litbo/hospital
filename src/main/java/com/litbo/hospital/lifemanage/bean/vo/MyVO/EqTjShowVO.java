@@ -24,7 +24,7 @@ public class EqTjShowVO {
     private String id;
 
 
-    /*调剂部门名字*/
+    /*调剂科室名字*/
     private String bmName;
 
 

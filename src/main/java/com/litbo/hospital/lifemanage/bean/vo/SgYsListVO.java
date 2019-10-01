@@ -11,10 +11,10 @@ import java.util.Date;
 @Data
 public class SgYsListVO {
 
-    /*部门Id*/
+    /*科室Id*/
     private String bmId;
 
-    /*部门名字*/
+    /*科室名字*/
     private String bmName;
 
     /*验收Id*/

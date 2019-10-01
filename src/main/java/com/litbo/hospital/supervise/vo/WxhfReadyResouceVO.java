@@ -7,7 +7,7 @@ import com.litbo.hospital.user.bean.EqInfo;
 import java.util.List;
 
 public class WxhfReadyResouceVO{
-    private List<SBm>  wxbms;   // 维修部门
+    private List<SBm>  wxbms;   // 维修科室
     private List<SEmp> wxemps;   // 维修人员
     private List<SBm>  kes;     //  目标维修科室
     private List<EqInfo> eqInfos; //目标设备

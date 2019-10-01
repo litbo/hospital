@@ -37,7 +37,7 @@
     <div class="layui-input-inline"
          style="float:left;width: 120px;margin-left: 350px;margin-top: -4px;">
         <input type="text" name="bmName" autocomplete="off"
-               placeholder="请输入部门名称" class="layui-input">
+               placeholder="请输入科室名称" class="layui-input">
     </div>
     <div class="layui-input-inline" style="float:left;width: 80px;margin-left: 10px;margin-top: -4px;">
         <button class="layui-btn"  data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -130,7 +130,7 @@
             table: {
                 cols: [[ //表头
                     {type: 'radio', fixed: 'left'}
-                    ,{field:'bmName', title:'部门名称'}
+                    ,{field:'bmName', title:'科室名称'}
                 ]]
                 , url: "/department/show"
                 , method: "POST"

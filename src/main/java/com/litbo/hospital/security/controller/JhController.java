@@ -67,7 +67,7 @@ public class JhController {
         String title ="[{'type': 'checkbox'}, "+
                 "{field: 'empId', title: '用户Id'},"+
                 "{field: 'userXm', title: '用户姓名'},"+
-                "{field: 'bmName', title: '部门'},"+
+                "{field: 'bmName', title: '科室'},"+
                 "]";
         return Result.success(JSON.parseArray(title));
     }

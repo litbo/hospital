@@ -25,7 +25,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/supervise/bmgl")
-@Api(tags = "部门管理")
+@Api(tags = "科室管理")
 public class BmController {
 
     @Autowired
@@ -43,13 +43,13 @@ public class BmController {
         JSONArray myJsonArray = null;
         if ("checkbox".equals(key)){
             String jsonMessage = "[{'type': 'checkbox'}, " +
-                    "{field: 'bmId', title: '部门ID'}, " +
-                    "{field: 'bmName', title: '部门名称'}]";
+                    "{field: 'bmId', title: '科室ID'}, " +
+                    "{field: 'bmName', title: '科室名称'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
         }else if ("radio".equals(key)){
             String jsonMessage = "[{'type': 'radio'}, " +
-                    "{field: 'bmId', title: '部门ID'}, " +
-                    "{field: 'bmName', title: '部门名称'}]";
+                    "{field: 'bmId', title: '科室ID'}, " +
+                    "{field: 'bmName', title: '科室名称'}]";
             myJsonArray = JSONObject.parseArray(jsonMessage);
         }
         PageInfo date = new PageInfo(myJsonArray);
@@ -60,7 +60,7 @@ public class BmController {
     public Result bmSe(){
         Map map =new HashMap();
         map.put("dom",
-                "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"部门名称\" autocomplete=\"off\"></div>" +
+                "<div class='layui-inline'><input type=\"text\" name=\"bmName\" class=\"layui-input\" placeholder=\"科室名称\" autocomplete=\"off\"></div>" +
                         "    <div class='layui-input-inline mar10-0' align='center'>" +
                         "<button class='layui-btn' data-type='reload'>查询</button>" +
                         "</div>");
@@ -75,7 +75,7 @@ public class BmController {
 
     }
 
-    //列出所有部门信息
+    //列出所有科室信息
     @RequestMapping("/listBms")
     public Result getBmList(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
@@ -88,14 +88,14 @@ public class BmController {
         PageInfo date = bmService.listInitBms(pageNum,pageSize);
         return Result.success(date);
     }
-    //列出所有部门信息不分頁
+    //列出所有科室信息不分頁
     @GetMapping("/listBm")
     @ResponseBody
     public Result getBmList(){
         return Result.success(bmService.getBmList());
 
     }
-    //列出所有部门信息
+    //列出所有科室信息
     @GetMapping("/listBms2")
     @ResponseBody
     public Result getBmLsist2(){
@@ -146,21 +146,21 @@ public class BmController {
         return Result.success(date);
     }
 
-    //查询部门信息通过老id
+    //查询科室信息通过老id
     @GetMapping("/getBmByOid")
     @ResponseBody
     public Result getBmByOid(@RequestParam String oid){
         SBm date = bmService.getBmByOid(oid);
         return Result.success(date);
     }
-    //列出所有维修部门信息
+    //列出所有维修科室信息
     @GetMapping("/listWXbms")
     @ResponseBody
     public Result listWXbms(){
         List<SBm> date = bmService.getWxBmList();
         return Result.success(date);
     }
-    //列出所有部门信息通过父id
+    //列出所有科室信息通过父id
     @GetMapping("/listBmsByPid")
     @ResponseBody
     public Result getBmListByPid(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -180,7 +180,7 @@ public class BmController {
     }
 
 
-    //保存部门信息
+    //保存科室信息
     @PostMapping("/saveBm")
     @ResponseBody
     public Result saveBm(@RequestBody SBm bm){
@@ -194,26 +194,26 @@ public class BmController {
         bmService.updateBm(bm);
         return Result.success();
     }
-    //删除部门通过老id
+    //删除科室通过老id
     @GetMapping("/removeBmByOBmId")
     @ResponseBody
     public Result removeBmByOBmId(@RequestParam String obmId){
         boolean flag = true;
         flag = bmService.isZJD(obmId);
-        if(!flag) return Result.error("删除部门必须为叶子部门！！");
+        if(!flag) return Result.error("删除科室必须为叶子科室！！");
         bmService.removeBmByOBmId(obmId);
         return Result.success();
     }
 
-    //设置部门归属 调整部门
+    //设置科室归属 调整科室
     @PostMapping("/setBmBeto")
     @ResponseBody
     public Result setBmBeto(@RequestBody SetBmVO bmVO){
         boolean flag = true;
         flag = bmService.isAllZJD(bmVO.getObmIds());
-        //判断部门是否为叶子部门
-        if(!flag) return Result.error("部门必须为叶子部门！！");
-        //调整部门
+        //判断科室是否为叶子科室
+        if(!flag) return Result.error("科室必须为叶子科室！！");
+        //调整科室
         bmService.setBmsBeto(bmVO);
         return Result.success();
     }
@@ -226,22 +226,22 @@ public class BmController {
         return Result.success();
     }
 
-    //设置维修部门
+    //设置维修科室
     @PostMapping("/hfWxbm")
     @ResponseBody
     public Result hfWxbm(@RequestBody WxBmHfVO wxBmHfVO){
-        bmService.setWxbm(wxBmHfVO.getObmIds(),1);  // 1 为维修部门
+        bmService.setWxbm(wxBmHfVO.getObmIds(),1);  // 1 为维修科室
         return Result.success();
     }
-    //去除维修部门
+    //去除维修科室
     @PostMapping("/qchfWxbm")
     @ResponseBody
     public Result qchfWxbm(@RequestBody WxBmHfVO wxBmHfVO){
-        bmService.setWxbm(wxBmHfVO.getObmIds(),0);  // 0 为非维修部门
+        bmService.setWxbm(wxBmHfVO.getObmIds(),0);  // 0 为非维修科室
         return Result.success();
     }
 
-    //  获取叶子部门
+    //  获取叶子科室
     @GetMapping("/listGLBm")
     @ResponseBody
     public Result listGLBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -269,7 +269,7 @@ public class BmController {
         return Result.success(fwxBms);
     }
 
-    @RequestMapping("/listKgsBm") //获取可以归属的部门 包括未编号和没有子节点的部门
+    @RequestMapping("/listKgsBm") //获取可以归属的科室 包括未编号和没有子节点的科室
     @ResponseBody
     public Result listKgsBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                                     @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,

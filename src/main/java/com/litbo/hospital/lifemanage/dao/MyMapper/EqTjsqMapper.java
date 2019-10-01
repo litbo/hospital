@@ -30,14 +30,14 @@ public interface EqTjsqMapper {
     @UpdateProvider(type = EqTjsqProvider.class, method = "updateByPrimaryKey")
     int updateByPrimaryKey(EqTjsqVO tj);
 
-    /*根据部门编号查询部门名字*/
+    /*根据科室编号查询科室名字*/
     @Select("select top 1 bm_name from s_bm where bm_id = #{bmid}")
     String selectBmNameByBmid(String bmid);
     /*装备申请记录主键查询*/
     @SelectProvider(type = EqTjsqProvider.class, method = "selectSqJlByKey")
     EqTjsqVO selectSqJlByKey(String id);
 
-    /*查询本部门调剂申请记录*/
+    /*查询本科室调剂申请记录*/
     @Select("<script>" + "select id, bm_name,tj_zbmc,tj_drjbr,tj_sqsj\n" +
             " from s_bm \n" +
             " INNER JOIN eq_tjsq on s_bm.bm_id=eq_tjsq.tj_sqks" +
@@ -118,7 +118,7 @@ public interface EqTjsqMapper {
     /*根据主键删除装备调出*/
     @Delete("delete from tj_zbdc where id=#{id}")
     int deleteZbDcById(String id);
-    /*根据设备名称和部门名称模糊查询可调剂设备 参数为设备名，部门id，调剂科室名，院区*/
+    /*根据设备名称和科室名称模糊查询可调剂设备 参数为设备名，科室id，调剂科室名，院区*/
     @Select("<script> select eq_id,eq_sbbh,bm_id,bm_name,eq_name,eq_gg,eq_xh,eq_yq \n" +
             "    from eq_info e  \n" +
             "    inner join s_bm  s on e.eq_bmid = s.bm_id\n" +

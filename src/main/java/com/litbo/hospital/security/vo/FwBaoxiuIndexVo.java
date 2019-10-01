@@ -20,9 +20,9 @@ public class FwBaoxiuIndexVo {
 
     private String bxrdh; //用户电话
 
-    private String bxksId; //报修部门id
+    private String bxksId; //报修科室id
 
-    private String bmName; //报修部门名字
+    private String bmName; //报修科室名字
 
     private String bxksdh; //报修科室电话
 

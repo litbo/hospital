@@ -52,7 +52,7 @@
                     // , {field: 'work-name', title: '职称', minWidth: 150}
                     , {field: 'tel', title: '联系电话', minWidth: 150}
                 ]]
-                , url: "/sybm/ksgl/listPreEmps?gwName=使用部门资产管理员"
+                , url: "/sybm/ksgl/listPreEmps?gwName=使用科室资产管理员"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -75,7 +75,7 @@
             },
 
             reSet:{
-                url:"/sybm/ksgl/listPreEmpsByBmNameAndUserXm?gwName=使用部门资产管理员",
+                url:"/sybm/ksgl/listPreEmpsByBmNameAndUserXm?gwName=使用科室资产管理员",
                 type:"search",
                 data:["userXm","bmName"],
                 where: {

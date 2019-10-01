@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * his
- * 部门字典
+ * 科室字典
  */
 @Data
 public class HisDeptDict {

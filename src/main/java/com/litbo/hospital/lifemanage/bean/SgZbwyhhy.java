@@ -42,11 +42,11 @@ public class SgZbwyhhy {
      */
     private String zbwyhhyDd;
     /**
-     * 主管部门
+     * 主管科室
      */
     private String zbwyhhyZgbm;
     /**
-     * 主管部门意见
+     * 主管科室意见
      */
     private String zbwyhhyZgbmyj;
     /**

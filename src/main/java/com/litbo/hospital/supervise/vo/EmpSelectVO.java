@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class EmpSelectVO {
 
-//    部门	编号	姓名	性别	学历	岗位  毕业院校
+//    科室	编号	姓名	性别	学历	岗位  毕业院校
     private String bmName;
     private String userId;
     private String userXm;

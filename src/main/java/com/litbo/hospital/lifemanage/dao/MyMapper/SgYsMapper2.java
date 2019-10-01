@@ -300,7 +300,7 @@ public interface SgYsMapper2 {
             "</script>")
     List<SgYsListVO> selectAllYsJl(@Param("htid") String htid, @Param("bmid") String bmid);
 
-    /**查询所有科室的部门id和部门名字*/
+    /**查询所有科室的科室id和科室名字*/
     @Select("select bm_id,bm_name from s_bm")
     List<Map<String, String>> selectAllBmIdAndName();
 

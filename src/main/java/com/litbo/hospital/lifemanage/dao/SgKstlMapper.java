@@ -31,10 +31,10 @@ public interface SgKstlMapper {
     Integer insertSgKstl(SgKstl sgKstl);
 
     /**
-     * 通过部门id查询讨论表的信息
+     * 通过科室id查询讨论表的信息
      *
-     * @param bmId 部门ID
-     * @return 部门所有的讨论ID
+     * @param bmId 科室ID
+     * @return 科室所有的讨论ID
      */
     @Select("SELECT\n" +
             "sg_kstl.kstl_id\n" +

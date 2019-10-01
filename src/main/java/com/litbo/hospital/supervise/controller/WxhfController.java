@@ -72,7 +72,7 @@ public class WxhfController {
         return Result.success(pageInfo);
     }
 
-    //维修部门下的工程师对应的设备的划分
+    //维修科室下的工程师对应的设备的划分
     @PostMapping("/wxBmGcsEqHf")
     public Result wxBmGcsEqHf(@RequestBody WxBmGcsEqInsertVO wxBmGcsEqInsertVO){
         wxhfService.wxBmGcsEqHf(wxBmGcsEqInsertVO);

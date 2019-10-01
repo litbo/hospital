@@ -30,7 +30,7 @@ public class WxhfServiceImpl implements WxhfService {
     public WxhfReadyResouceVO getWxhfReadyResouceVO() {
         WxhfReadyResouceVO wxhfReadyResouceVO = new WxhfReadyResouceVO();
 
-        List<SBm> wxBms =  bmService.getWxBms();   //维修部门
+        List<SBm> wxBms =  bmService.getWxBms();   //维修科室
         List<SEmp> wxEmps = empService.getWxEmps();//维修人员
         List<SBm> fwxBms = bmService.getFwxBms();//科室
 //        List<EqInfo> allEq = eqDao.;//科室设备

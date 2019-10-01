@@ -20,18 +20,18 @@ public interface SgKstlService {
     boolean insertSgKstl(SgKstlVO sgKstlVO);
 
     /**
-     * 通过部门id查询讨论表的id
+     * 通过科室id查询讨论表的id
      *
-     * @param bmId 部门ID
-     * @return 部门所有的讨论表ID
+     * @param bmId 科室ID
+     * @return 科室所有的讨论表ID
      */
     List<String> selectSgKstlIdsByBmId(String bmId);
 
     /**
-     * 通过部门id查询所有的品名ID
+     * 通过科室id查询所有的品名ID
      *
-     * @param bmId 部门ID
-     * @return 部门讨论的所有需购买设备的品名列表
+     * @param bmId 科室ID
+     * @return 科室讨论的所有需购买设备的品名列表
      */
     List<String> selectSgTlPmPmIdsByBmId(String bmId);
 
@@ -44,7 +44,7 @@ public interface SgKstlService {
     List<SgKstlAddSgInfoVO> selectSgKstlVOByPmIds(List<String> pmId);
 
     /**
-     * 显示部门下的所有讨论的设备
+     * 显示科室下的所有讨论的设备
      *
      * @param userId   登陆人id
      * @param eqPmName 设备名称

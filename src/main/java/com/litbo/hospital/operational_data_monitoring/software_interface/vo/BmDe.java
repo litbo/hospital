@@ -11,7 +11,7 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.vo;
 import lombok.Data;
 
 /**
- * 部门id 和 手术科室id
+ * 科室id 和 手术科室id
  */
 @Data
 public class BmDe {

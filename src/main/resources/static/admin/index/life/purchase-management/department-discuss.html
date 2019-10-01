@@ -14,14 +14,14 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
-    <style>
+    <!--<style>
         .warm_btn {
             height: 45px;
             font-size: 1.3em;
             letter-spacing: 3px;
             margin: 10px 0 30px;
         }
-    </style>
+    </style>-->
 </head>
 
 <body>
@@ -77,8 +77,8 @@
                 <!-- TODO   添加搜索人员导航 -->
 
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="dataTable1"><i class="fas fa-plus"></i>&nbsp;添加</button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew addi" data-id="table" id="dataTable1"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew deli" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
                 </div>
             </div>
             <table id="table" lay-filter="table"></table>
@@ -92,10 +92,10 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12" style="width: 115px;">申购设备列表</label>
                 <div class="layui-input-block" style="margin-left:115px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table1" id="dataTable2"><i
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew addi" data-id="table1" id="dataTable2"><i
                             class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table1"><i
+                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew deli" data-id="table1"><i
                             class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>
@@ -104,8 +104,7 @@
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" lay-filter="save">保存
-                </button>
+                <button class="layui-btn" style="float: right;margin-right:5%" lay-submit="" lay-filter="save">保存</button>
             </div>
         </div>
     </div>

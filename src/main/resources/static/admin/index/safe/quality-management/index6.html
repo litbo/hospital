@@ -48,11 +48,11 @@
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="bmName" lay-filter="bmName" lay-search="">
-                            <option value="">请选择部门</option>
+                            <option value="">请选择科室</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn" lay-submit="" data-type="search" >查找</button>
+                        <button class="layui-btn" lay-submit="" data-type="search" ><i class="layui-icon layui-icon-search"></i>查询</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </form>
@@ -113,7 +113,7 @@
                         , {field: 'userId', title: '人员编号', minWidth: 175, unresize: true, templet: '#Tpl'}
                         , {field: 'userXm', title: '姓名', minWidth: 200}
                         , {field: 'spemSgzzfw', title: '上岗资质范围', minWidth: 300}
-                        , {field: 'bmName', title: '部门', minWidth: 300}
+                        , {field: 'bmName', title: '科室', minWidth: 300}
                         , {field: 'spemSpare1', title: '状态',minWidth: 250, templet: '#statusTpl'}
                     ]]
                     , id: "test"

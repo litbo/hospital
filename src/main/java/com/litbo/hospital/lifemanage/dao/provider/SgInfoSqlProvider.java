@@ -64,7 +64,7 @@ public class SgInfoSqlProvider {
     /**
      * 显示科室汇总审核列表
      *
-     * @param bmId     部门id
+     * @param bmId     科室id
      * @param sgInfoBh 申购单编号
      * @param pmList   品名列表
      */
@@ -108,7 +108,7 @@ public class SgInfoSqlProvider {
     /**
      * 显示工程处审核列表
      *
-     * @param bmId 查看具体部门id
+     * @param bmId 查看具体科室id
      */
     public String selectSgInfoGccshList(String bmId) {
         return new SQL() {{
@@ -138,7 +138,7 @@ public class SgInfoSqlProvider {
      * 显示申购单装备委员会审核列表
      *
      * @param eqPmPym 品名拼音码
-     * @param bmId    部门id
+     * @param bmId    科室id
      * @param bh      申购单编号
      */
     public String selectSgInfoSgZbwyhhyList(String eqPmPym, String bmId, String bh) {
@@ -175,7 +175,7 @@ public class SgInfoSqlProvider {
     /**
      * 显示申购单院办公会审核列表
      *
-     * @param bmId    部门id
+     * @param bmId    科室id
      * @param bh      申购单编号
      * @param eqSbPym 品名拼音码
      */
@@ -214,7 +214,7 @@ public class SgInfoSqlProvider {
      * 装备委员会年度采购计划
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @param bh   申购单编号
      */
     public String selectSgZbwyhYearPurchase(String year, String bmId, String bh) {
@@ -252,7 +252,7 @@ public class SgInfoSqlProvider {
      * 院办公会年度采购计划
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @param bh   申购单编号
      */
     public String selectSgYbghhyYearPurchase(String year, String bmId, String bh) {
@@ -290,7 +290,7 @@ public class SgInfoSqlProvider {
      * 院办公会年度采购预算
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return sql
      */
     public String selectSgYbghhyYearBudget(String year, String bmId) {
@@ -320,7 +320,7 @@ public class SgInfoSqlProvider {
      * 装备委员会年度采购预算
      *
      * @param year 年份
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return sql
      */
     public String selectSgZbwyhYearBudget(String year, String bmId) {
@@ -350,7 +350,7 @@ public class SgInfoSqlProvider {
      * SgInfoList
      *
      * @param isSh  是否通过审核
-     * @param bmId  部门id
+     * @param bmId  科室id
      * @param bh    申购单编号
      * @param sbPym 品名拼音码
      * @return sql

@@ -71,7 +71,7 @@ public class SelectController {
                 "eqPmName": null,
                 "eqGg": "测试规格1",
                 "eqXh": "测试型号1",
-                "bmName": "管理部门",
+                "bmName": "管理科室",
                 "eqQysj": "2017-06-04T16:00:00.000+0000",
                 "eqSyzt": "在用"
             * */

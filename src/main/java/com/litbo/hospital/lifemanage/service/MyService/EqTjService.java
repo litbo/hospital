@@ -16,7 +16,7 @@ public interface EqTjService {
                              Integer pageSize,
                              EqTjShowVO showVO);
 
-    /*条件查或全查本部门调剂申请*/
+    /*条件查或全查本科室调剂申请*/
     PageInfo selectByBenBmExample(Integer pageNum,
                                   Integer pageSize,
                                   EqTjShowVO showVO);
@@ -46,7 +46,7 @@ public interface EqTjService {
     /*修改装备调出*/
     int updateZbdcByPrimaryKey(EqTjZbdcVO vo);
 
-    /*根据设备名称和部门名称模糊查询可调剂设备*/
+    /*根据设备名称和科室名称模糊查询可调剂设备*/
 
     PageInfo selectAllEqInfo(String sbName, String bmname, String yq);
 

@@ -31,7 +31,7 @@ public class EmergencyServiceImpl implements EmergencyService {
      */
     @Override
     public PageInfo<EquipmentStoppedListVO> selectEmergencyList(String userId) {
-        //通过用户id查询部门id
+        //通过用户id查询科室id
         SBm bm = empDao.getBmByEmpId(userId);
         String bmName = bm.getBmName();
         String bmId = bm.getBmId();

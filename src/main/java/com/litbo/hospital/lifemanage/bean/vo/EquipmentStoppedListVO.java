@@ -14,11 +14,11 @@ public class EquipmentStoppedListVO {
      */
     private String eqId;
     /**
-     * 部门id
+     * 科室id
      */
     private String eqBmId;
     /**
-     * 部门名称
+     * 科室名称
      */
     private String bmName;
     /**

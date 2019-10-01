@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class SgKstlSqlProvider {
     /**
-     * 通过部门id和品名id查询申购单id、申购单编号
+     * 通过科室id和品名id查询申购单id、申购单编号
      *
      * @param pmIds 品名ID
      * @return sql语句

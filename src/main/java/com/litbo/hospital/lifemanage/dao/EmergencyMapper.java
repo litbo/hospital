@@ -16,7 +16,7 @@ public interface EmergencyMapper {
     /**
      * 查询本科室所有设备
      *
-     * @param bmId 部门id
+     * @param bmId 科室id
      * @return List<EquipmentStoppedListVO>
      */
     @Select("SELECT\n" +

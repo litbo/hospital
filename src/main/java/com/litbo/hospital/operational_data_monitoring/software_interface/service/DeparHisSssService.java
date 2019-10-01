@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface DeparHisSssService {
     /**
-     * 显示两个系统部门匹配信息
+     * 显示两个系统科室匹配信息
      * @param pageNum
      * @param pageSize
      * @return
@@ -43,12 +43,12 @@ public interface DeparHisSssService {
     void save(DeparHisSss deparHisSss);
 
     /**
-     * 获取his系统科室和部门的关联信息
+     * 获取his系统科室和科室的关联信息
      */
     PageInfo showAll(@Param("pageNum") Integer pageNum,
                      @Param("pageSize") Integer pageSize);
     /**
-     * 获取his系统科室和部门的关联信息
+     * 获取his系统科室和科室的关联信息
      */
     PageInfo showAllBy(@Param("pageNum") Integer pageNum,
                        @Param("pageSize") Integer pageSize,

@@ -21,10 +21,10 @@ public class FwVo {
     private String eqName; //报修设备名称
     @ApiModelProperty(value = "报修人姓名")
     private String username; //报修人姓名
-    @ApiModelProperty(value = "报修部门id")
-    private String bmId; //报修部门id
-    @ApiModelProperty(value = "报修部门名字")
-    private String bmName; //报修部门名字
+    @ApiModelProperty(value = "报修科室id")
+    private String bmId; //报修科室id
+    @ApiModelProperty(value = "报修科室名字")
+    private String bmName; //报修科室名字
     @ApiModelProperty(value = "报修设备规格")
     private String eqGg; //报修设备规格
     @ApiModelProperty(value = "报修设备型号")

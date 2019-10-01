@@ -10,11 +10,11 @@ import lombok.Data;
 @Data
 public class YearBudgetVO {
     /**
-     * 部门id
+     * 科室id
      */
     private String bmIdBudget;
     /**
-     * 部门名字
+     * 科室名字
      */
     private String bmNameBudget;
     /**

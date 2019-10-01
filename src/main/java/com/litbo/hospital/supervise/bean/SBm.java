@@ -7,7 +7,7 @@ public class SBm {
     private String bmId;
 
     /**
-     * 托管部门id 和bmId相同
+     * 托管科室id 和bmId相同
      */
     private String tgBmId;
 

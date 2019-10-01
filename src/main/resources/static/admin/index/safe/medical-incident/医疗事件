@@ -5,7 +5,7 @@
                 设备名称选择     susipcous-select.html
                  "data": [
                                 {
-                                    "department": '部门',
+                                    "department": '科室',
                                     "equ_id": "设备编号",
                                     "equ_name": "设备名称",
                                     "equ_model": "型号",
