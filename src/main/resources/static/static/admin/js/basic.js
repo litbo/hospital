@@ -842,10 +842,12 @@ action = func = {
                         for (var x = 0; x < value.length; x++) {
                             if (event === value[x].event) {
                                 vas = value[x];
+                                break;
                             }else{
                                 num++;
                             }
                         }
+                        //判断当未匹配成功条数num与总数据条数相等时不执行任何操作，直接返回
                         if(num === value.length){
                             num = 0;
                             return false;
@@ -871,7 +873,7 @@ action = func = {
                         }
                     }
                     //判断是否允许自定义layer窗口弹出
-                    if (vas.layOpen !== undefined) openT = Boolean(vas.layOpen);
+                    openT = vas.layOpen !== undefined ? Boolean(vas.layOpen): true;
                     //弹出前执行函数
                     if(vas.before){
                         var nnf = vas.before(obj,checkStatus);
