@@ -15,29 +15,31 @@
 </head>
 <body>
 <script type="text/html" id="toolBar">
-<div class="demoTable" style="height: 50px;">
+<div class="demoTable">
 
-  <div class="layui-btn-container layui-inline " demoTable style="width: 50px;margin-left: 5px;float: left">
-      <button class="layui-btn Bm" id="Bm" lay-event="getCheckData">确定</button>
-  </div>
+    <div class=" layui-inline" >
+    <button class="layui-btn Bm" id="Bm" lay-event="getCheckData">确定</button>
+    </div>
+    <!-- <hr class="devideHr">
+   <div class="addBtn">-->
 
-
-  <form class="layui-form layui-inline"  action="" style="width: 300px;margin-left:100px;float: left" >
-      <div class="layui-form-item layui-inline" >
-          <div class="layui-inline" style="width: 300px;height: 40px;">
-              <div  id="moreBar" style="float: left">
-                  <label>
+    <!--</div>-->
+    <form class="layui-form demoTable layui-inline" >
+        <div class=" layui-inline" >
+            <div  id="moreBar" style="float: left">
+                <label>
                     <!--  <input type="hidden" lay-filter="bmName" value="">-->
-                      <select name="bmName" lay-filter="bmName" >
-                          <option value="">全部科室</option>
-                      </select>
-                  </label>
-              </div>
-              <button type="button" class="layui-inline  layui-btn"   data-type="search"   style="float: left"><i class="layui-icon layui-icon-search"></i>查询</button>
-          </div>
-      </div>
+                    <select name="bmName" lay-filter="bmName" >
+                        <option value="">全部科室</option>
+                    </select>
+                </label>
+            </div>
+            <button type="button " class="layui-inline  layui-btn"   data-type="search"   style="float: left"><i class="layui-icon layui-icon-search"></i>查询</button>
+        </div>
 
-  </form>
+    </form>
+
+
 </div>
 </script>
 
@@ -83,7 +85,7 @@
                      , {field: 'tel', title: '负责人电话', minWidth: 130}
                  ]]
                  , page: true
-                 , height: 300
+              /*   , height: 300*/
                  , parseData: function (res) { //res 即为原始返回的数据
                      return {
                          "code": res.code, //解析接口状态
