@@ -14,27 +14,11 @@
     <script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="../../../../static/admin/js/basic.js"></script>
-   <style>
-       .layui-table-tool{
-           background: #fff;
-       }
-       .layui-table-tool .layui-table-tool-self{
-           position: absolute;
-           height:30px;
-           top: 130px;
-           right: 10px;
-           width: 120px;
-           height: 30px;
-       }
-       .layui-table-tool-temp{
-           padding-right: 20px;
-       }
-       .layui-form-label{
-           width: 100px;
-       }
-   </style>
-
-
+    <style>
+        body{
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 <div class="layui-row">
@@ -44,60 +28,36 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div style="height: 150px;">
-        <div class="content layui-collapse" style="width: 100%;height: 120px;border:none;margin-bottom: 0">
-            <form class="layui-form" action="" style="border:none;">
-
-                <div class="layui-form-item ">
-                    <div class="layui-inline" style="margin-top: 10px">
-                        <label class="layui-form-label">设备编号</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="speqBh"  autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline"  style="margin-left: 100px">
-                        <label class="layui-form-label">设备名称</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="speqName"  placeholder="" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="layui-form-item">
-
-                    <div class="layui-inline" >
-                        <label class="layui-form-label">所在科室</label>
-                        <div class="layui-input-inline">
-                            <!-- <select name="bmId" lay-filter="bmId" lay-search="" style="width: 150px">-->
-                            <select name="bmId" lay-filter="bmId" style="width: 150px">
-                                <option value="">全部科室</option>
-                            </select>
-                            <!-- </select>-->
-                        </div>
-                    </div>
-                    <div class="layui-inline" style="margin-left: 100px">
-                        <label class="layui-form-label">生产厂家</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="speqScs"  autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="layui-form-item" style="float:right;margin-right: 90px;margin-top: -60px">
-                    <div class="layui-input-block"  >
-                        <button class="layui-btn" lay-submit=""  data-type="search" ><i class="layui-icon layui-icon-search"></i>查询</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-
-            </form>
+    <form class="layui-form" action="" style="border:none;">
+        <div class="layui-inline" >
+            <input type="text" name="speqBh"  placeholder="设备编号" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline">
+            <input type="text" name="speqName"  placeholder="设备名称" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline" >
+                <!-- <select name="bmId" lay-filter="bmId" lay-search="" style="width: 150px">-->
+                <select name="bmId" lay-filter="bmId" style="width: 150px">
+                    <option value="">全部科室</option>
+                </select>
+                <!-- </select>-->
+        </div>
+        <div class="layui-inline">
+            <input type="text" name="speqScs" placeholder="生产厂家" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-block"  >
+                <button class="layui-btn" lay-submit=""  data-type="search" ><i class="layui-icon layui-icon-search"></i>查询</button>
+           <!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+            </div>
         </div>
 
-    <div class="layui-btn-container" style="margin-left: 30px;">
-        <button class="layui-btn layui-btn-sm" lay-event="application">批量同意申请</button>
+            </form>
+    <hr class="devideHr">
+    <div class="addBtn">
+            <button class="layui-btn layui-btn-sm" lay-event="application">批量同意申请</button>
     </div>
 
-    </div>
 </script>
 
 <script>
@@ -132,7 +92,7 @@
                     , id: 'Tast'
                     , toolbar: '#toolBar'
                     , url: '/specialEqCheck/selectSpecialEquipmentCheckVoBy0'//接口
-                    , height: '500'
+                  /*  , height: '500'*/
                     , request: {
                         pageName: 'pageNum',
                         limitName: 'pageSize'

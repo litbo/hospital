@@ -15,6 +15,9 @@
         .setW{
             width: 80px;
         }
+        body{
+            background: #f2f2f2;
+        }
     </style>
 
 </head>
@@ -29,13 +32,7 @@
 </div>
 <!--头工具栏-->
 <script type="text/html" id="toolbarDemo">
-    <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="newly" style=" background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-        <button class="layui-btn layui-btn-sm" lay-event="entry">   <i class="layui-icon layui-icon-add-circle"></i>证件录入</button>
-
-        <button class="layui-btn layui-btn-sm" lay-event="cancel" style="background: #CC0033">  <i class="layui-icon layui-icon-close"></i>取消从业人员</button>
-    </div>
     <div class="hidden-xs" id="hideXs">
         <div class="layui-row">
             <div class="col-xs-12" style="padding:0">
@@ -53,12 +50,20 @@
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <button class="layui-btn" lay-submit="" data-type="search" ><i class="layui-icon layui-icon-search"></i>查询</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                       <!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                     </div>
                 </form>
 
             </div>
         </div>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-sm" lay-event="newly" style=" background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="entry">   <i class="layui-icon layui-icon-add-circle"></i>证件录入</button>
+
+        <button class="layui-btn layui-btn-sm" lay-event="cancel" style="background: #CC0033">  <i class="layui-icon layui-icon-close"></i>取消从业人员</button>
     </div>
 </script>
 

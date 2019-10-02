@@ -23,8 +23,8 @@
 </div>
 
 <script type="text/html" id="toolBar">
-        <div class="demoTable" style="height: 50px;">
-            <div class="layui-btn-container layui-inline " demoTable style="width: 50px;margin-left: 5px;float: left">
+        <div class="demoTable" >
+            <div class="layui-inline" >
                 <button class="layui-btn Bm" id="Bm" title="如果需要退出/提交，请点击这里" lay-event="getCheckData">确定/退出</button>
             </div>
         </div>
@@ -71,7 +71,7 @@
                     ]]
                     , page: true
                     ,data: tra
-                    , height: 300
+                  /*  , height: 300*/
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态

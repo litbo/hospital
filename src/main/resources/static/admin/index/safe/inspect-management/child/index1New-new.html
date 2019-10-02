@@ -18,45 +18,41 @@
 <body>
 
 <script type="text/html" id="toolBar">
-    <div class="demoTable" style="height: 50px;">
+    <div class="demoTable">
 
-        <div class="layui-btn-container layui-inline " demoTable style="width: 50px;margin-left: 5px;float: left;">
+        <div class=" layui-inline " >
             <button class="layui-btn Bm" id="Bm" lay-event="getCheckData">确定</button>
         </div>
 
 
-        <form class="layui-form layui-inline"  action="" style="float: right;margin-right: -140px;" >
-            <div class="layui-form-item layui-inline" >
-                <div class="layui-inline" style="height: 40px;">
-                    <div class="layui-inline" style="float:left;margin-left: 5px;margin-right: 0;">
+        <form class="layui-form layui-inline"  action="" >
+
+                    <div class="layui-inline" >
                         <div class="layui-input-inline">
                             <input class="layui-input" name="eqSbbh" placeholder="设备编号"  autocomplete="off"  >
                         </div>
                     </div>
 
-                    <div class="layui-inline" style="float:left;margin-right: 0;">
+                    <div class="layui-inline">
                         <div class="layui-input-inline">
                             <input class="layui-input" name="eqName" placeholder="设备名称"  autocomplete="off"  >
                         </div>
                     </div>
 
-                    <div class="layui-inline" style="float:left;margin-right: 0;">
+                    <div class="layui-inline">
                         <div class="layui-input-inline">
                             <input class="layui-input" name="eqXh" placeholder="设备型号"  autocomplete="off"  >
                         </div>
                     </div>
-
-                    <div  id="moreBar" style="float:  left">
-                        <label>
-                            <!--  <input type="hidden" lay-filter="bmName" value="">-->
-                            <select name="bmName" lay-filter="bmName" >
-                                <option value="">全部科室</option>
-                            </select>
-                        </label>
-                    </div>
-                    <button type="button" class="layui-inline  layui-btn"   data-type="search"   style="float: right"><i class="layui-icon layui-icon-search"></i>查询</button>
-                </div>
+            <div class="layui-inline" id="moreBar">
+                <label>
+                    <!--  <input type="hidden" lay-filter="bmName" value="">-->
+                    <select name="bmName" lay-filter="bmName" >
+                        <option value="">全部科室</option>
+                    </select>
+                </label>
             </div>
+                    <button type="button" class="layui-inline  layui-btn"   data-type="search"   style="float: right"><i class="layui-icon layui-icon-search"></i>查询</button>
 
         </form>
     </div>
