@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -9,6 +9,8 @@
     <title>计划制定</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <link rel="stylesheet" href="multi.css">
+    <link rel="stylesheet" type="text/css" href="formSelects-v4.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
@@ -17,18 +19,18 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
-        <!--        <fieldset class="layui-elem-field layui-field-title">
+        <!--<fieldset class="layui-elem-field layui-field-title">
             <legend>账实核对计划</legend>
         </fieldset>-->
         <div class="col-xs-12">
-            <div class="layui-form-item">
-                <input id="userId" name="userId" type="hidden">
+            <div class="layui-form-item" style="margin-top: 10px;">
+                <input id="userId" name="user_id" type="hidden">
                 <label class="layui-form-label">制定人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <label>
-                        <input id="userXm" type="text" disabled autocomplete="off" class="layui-input">
+                        <input id="userXm" type="text" readonly autocomplete="off" class="layui-input">
                     </label>
                 </div>
             </div>
@@ -37,9 +39,11 @@
 
                 <!-- TODO   添加搜索科室导航 -->
 
-                <div class="layui-input-block">
+                <div class="layui-input-block" style="position: relative;">
                     <label>
-                        <select name="bmId" lay-filter="bmId" lay-verify="required"></select>
+                        <input id="bmName" type="text" readonly autocomplete="off" class="layui-input">
+                        <input id="bmId" name="bm_id" type="hidden" disabled autocomplete="off" class="layui-input">
+                        <a class="layui-btn layui-btn-sm pipei" id="chooseBm" lay-event="pipei" style="position: absolute;top: 10%;right: 3%;">选择</a>
                     </label>
                 </div>
                 <!--<div class="layui-input-block">-->
@@ -47,9 +51,15 @@
                 <!--</div>-->
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">制订时间</label>
+                <div class="layui-input-block">
+                    <input type="text" id="planTime" name="plan_date" autocomplete="off" lay-verify="required" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">计划名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="planName" autocomplete="off" lay-verify="required" class="layui-input">
+                    <input type="text" name="plan_name" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
         </div>
@@ -69,6 +79,7 @@
 
 </div>
 
+<script src="formSelects-v4.js" type="text/javascript" charset="utf-8"></script><script src="../layui/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var formData = {};
     renderMod = {
@@ -86,39 +97,122 @@
             },
             date: {
                 elem: "#date"
-            },
-            submit: {
-                form: {
-                    url: "/lifeManage/insertPlan",
-                    type: "POST",
-                    data: ["userId", "bmId", "planName"],
-                    before: function () {
-                        var tv = getTableValue("table"), tv1 = getTableValue("table2", [true]);
-                        if (doJudg({
-                            "undefined": [formData.person, formData.user],
-                            0: [tv, tv1]
-                        })) {
-                            putMsg({
-                                alert: "无法提交空数据！"
-                            });
-                            return false;
-                        }
-                        return param = {
-                            1: formData.person.userIdJl,
-                            2: tv1,
-                            3: tv
-                        };
-                    },
-                    reload:true
-                }
             }
+            // submit: {
+            //     form: {
+            //         url: "/lifeManage/insertPlan",
+            //         type: "POST",
+            //         data: ["userId", "bmId", "planName"],
+            //         before: function () {
+            //             var tv = getTableValue("table"), tv1 = getTableValue("table2", [true]);
+            //             if (doJudg({
+            //                 "undefined": [formData.person, formData.user],
+            //                 0: [tv, tv1]
+            //             })) {
+            //                 putMsg({
+            //                     alert: "无法提交空数据！"
+            //                 });
+            //                 return false;
+            //             }
+            //             return param = {
+            //                 1: formData.person.userIdJl,
+            //                 2: tv1,
+            //                 3: tv
+            //             };
+            //         },
+            //         reload:true
+            //     }
+            // }
         }
     };
     $(function() {
         var emp =  tempValue("rl","emp",false);
         $("#userId").val(emp.userId);
         $("#userXm").val(emp.userXm);
-    })
+        // 获取时间
+        function CurentTime()
+        {
+            var now = new Date();
+
+            var year = now.getFullYear();       //年
+            var month = now.getMonth() + 1;     //月
+            var day = now.getDate();            //日
+
+            var hh = now.getHours();            //时
+            var mm = now.getMinutes();          //分
+            var ss = now.getSeconds();           //秒
+
+            var clock = year + "-";
+            if(month < 10)
+                clock += "0";
+            clock += month + "-";
+            if(day < 10)
+                clock += "0";
+            clock += day + " ";
+            if(hh < 10)
+                clock += "0";
+            clock += hh + ":";
+            if (mm < 10) clock += '0';
+            clock += mm + ":";
+
+            if (ss < 10) clock += '0';
+            clock += ss;
+            return(clock);
+        }
+
+        $("#planTime").val(CurentTime());
+    });
+
+    // 表单
+    layui.use(['form'], function(){
+
+        var form = layui.form
+            ,layer = layui.layer;
+
+        form.on('submit(demo1)', function(data){
+
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+
+            // $.ajax({
+            //     type: "POST",
+            //     dataType: 'json',
+            //     url: '/lifeManage/insertYjyaZd',
+            //     data: JSON.stringify(dataObj),
+            //     contentType: 'application/json; charset=UTF-8',
+            //     success: function(result) {
+            //         console.log(JSON.stringify(dataObj))
+            //         layui.layer.alert('提交成功!');
+            //         setTimeout(function () {
+            //             window.parent.location.reload();
+            //         },1000)
+            //
+            //     },
+            //     error:function(){
+            //         layer.alert(JSON.stringify(dataObj), {
+            //             title: '最终的提交信息'
+            //         });
+            //         alert("error");
+            //     }
+            // });
+            return false;
+        });
+    });
+
+    renderMod.btn={
+        elem:"#chooseBm",
+        func:function(){
+            layer.open({
+                type: 2,
+                title: '选择',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['700px', '400px'],
+                content: 'child/chooseBm.html' //iframe的url
+            });
+        }
+    };
 
 </script>
 </body>

@@ -41,7 +41,7 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">账实核对</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="upPlan">核对上传</a>
+<!--    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="upPlan">核对上传</a>-->
 </script>
 <script>
     renderMod = {
@@ -55,7 +55,7 @@
                         , {field: 'userId', title: '制定人', minWidth: 150}
                         , {field: 'bmId', title: '科室', minWidth: 150}
                         , {field: 'planDate', title: '制定日期', minWidth: 150}
-                        , {fixed:'right',minWidth: 200,align:'center',toolbar: "#bar"}
+                        , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectPlan"
                     , method: "POST"

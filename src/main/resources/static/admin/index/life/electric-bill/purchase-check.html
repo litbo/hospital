@@ -26,9 +26,15 @@
 
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="bmName" id="bmName" placeholder="设备名称" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+        <hr class="devideHr">
         <div class="addBtn">
-            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-submit="" lay-event="detailYes">核对存在</a>
-            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-submit="" lay-event="detailNo">核对不存在</a>
+            <a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailYes">核对存在</a>
+            <a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailNo">核对不存在</a>
+            <a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailIn">核对录入</a>
         </div>
     </form>
 
@@ -111,7 +117,7 @@
             reSet: {
                 url: "/lifeManage/selectSgCheck",
                 type: "reload",
-                data: ["planName", "planDate", "userId"]
+                data: ["bmName", "planDate", "userId"]
             },
             form: {
                 val: {
