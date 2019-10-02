@@ -49,6 +49,14 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="king2">待修</a>
 </script>
 <script>
+
+    var id = localStorage.getItem("dealId")
+    $.ajax({
+        url:"/maintenance/seePlanContent.do?id="+id,
+        success:function(result){
+            localStorage.setItem("dealContent",JSON.stringify(result))
+        }});
+
     var res1 = localStorage.getItem("dealContent");
     renderMod = {
         addTable: {
@@ -71,32 +79,46 @@
                         "data": res.data.list //解析数据列表
                     }
                 }
-                , done: function (obj) {
+                , done: function (obj,index) {
                     tableFunc({
                         tools:[
                         {
                             title:"合格",
                             event: 'king',
-                            func:function(event,data,cs){
-                                console.log("dayin:"+cs.data.length)
-
-                                localStorage.setItem("dealId",obj.data.id)
+                            func:function(obj,data) {
+                                var id = obj.data.id;
+                                $.ajax({
+                                    url: "/maintenance/addProjectResult.do?maintenanceId=" + id + "&maintenanceResults=合格" + "&maintenancePersonnel=张三",
+                                    success: function (result) {
+                                        localStorage.setItem("dealContent", JSON.stringify(result))
+                                    }
+                                });
                             }
                         },
                         {
                             title:"修复",
                             event: 'king1',
                             func:function(obj,data){
-                               /* console.log(""+JSON.stringify(obj))*/
-                                localStorage.setItem("dealId",obj.data.id)
+                                var id = obj.data.id;
+                                $.ajax({
+                                    url: "/maintenance/addProjectResult.do?maintenanceId=" + id + "&maintenanceResults=修复" + "&maintenancePersonnel=张三",
+                                    success: function (result) {
+                                        localStorage.setItem("dealContent", JSON.stringify(result))
+                                    }
+                                });
                             }
                         },
                         {
                             title:"待修",
                             event: 'king2',
                             func:function(obj,data){
-                                console.log(""+JSON.stringify(obj))
-                                localStorage.setItem("dealId",obj.data.id)
+                                var id = obj.data.id;
+                                $.ajax({
+                                    url: "/maintenance/addProjectResult.do?maintenanceId=" + id + "&maintenanceResults=待修" + "&maintenancePersonnel=张三",
+                                    success: function (result) {
+                                        localStorage.setItem("dealContent", JSON.stringify(result))
+                                    }
+                                });
                             }
                         }]
                     })

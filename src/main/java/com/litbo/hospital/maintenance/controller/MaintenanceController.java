@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -377,7 +378,6 @@ public class MaintenanceController {
     @RequestMapping("/resultAdd.do")
     public Result resultAdd(int maintenanceId,String maintenanceResults,String instrumentStatus,String description,
                             String maintenancePersonnel){
-
         int result = maintenanceService.resultAdd(maintenanceId, maintenanceResults, instrumentStatus, description, maintenancePersonnel, null,null,null);
         if(result == 0){
             return Result.success("插入失败");
@@ -387,12 +387,53 @@ public class MaintenanceController {
 
 
     /**
+     * 维护保养完成之后让任务的状态变为已完成
+     * @param id
+     * maintenanceResults; // 维护保养结果
+     * instrumentStatus; // 仪器现状
+     * description;  // 备注
+     * maintenancePersonnel;  // 维护人员
+     * departmentReceipt;  // 科室签收
+     * @return
+     */
+    @RequestMapping("/resultOver.do")
+    public Result resultOver(int id){
+//        int result = maintenanceService.resultAdd();
+        int result = 0;
+        if(result == 0){
+            return Result.success("插入失败");
+        }
+        return Result.success();
+    }
+
+
+    /**
+     * 维护保养的结果一项一项进行录入
+     * @param maintenanceId
+     * @param maintenanceResults
+     * @param maintenancePersonnel
+     * @return
+     */
+    @RequestMapping("/addProjectResult.do")
+    public Result addProjectResult(int maintenanceId,String maintenanceResults,String maintenancePersonnel){
+
+        int result = maintenanceService.projectResultAdd(maintenanceId, maintenanceResults, maintenancePersonnel);
+        if(result == 0){
+            return Result.success("插入失败");
+        }
+        return Result.success();
+    }
+
+
+
+    /**
      * 添加设备中的易耗品
      * @param consumables
      * @return
      */
     @RequestMapping("/addConsumables.do")
     public  Result addConsumables(Consumables consumables){
+        System.out.println(consumables);
         int result = maintenanceService.addConsumables(consumables);
         if(result == 0){
             return Result.success("插入失败");
@@ -463,13 +504,20 @@ public class MaintenanceController {
 
 //                                            维护项目信息        begin
 
-        Maintenance maintenance = maintenanceService.seePlan(id);
+        Maintenance maintenance = maintenanceService.seePlan(id);  // 维护保养计划信息
+        EqInfo eqInfo = maintenanceService.selectEqById(maintenance.getEqId());  // 设备信息
+        if(eqInfo == null || maintenance == null){
+            System.out.println("eqinfo:"+eqInfo+"\nmaintenance:"+maintenance);
+            return Result.error(0,"没有查询到设备信息或设备检查规范信息");
+        }
 
         // 拿到维护计划的项目
         List<MaintenanceProject> projectList = maintenanceService.seePlanContent(id);
 
         List<List<MaintenanceProject>> ProjectLists= new ArrayList<>();
 
+
+        // 吧维护计划的项目按照类别分开
         if(!projectList.isEmpty()){
             List<MaintenanceProject> projectList1 = new ArrayList<>();
             List<MaintenanceProject> projectList2 = new ArrayList<>();
@@ -538,25 +586,30 @@ public class MaintenanceController {
 //                                            设备信息        begin
         MaintenanceMessageVo maintenanceMessage = new MaintenanceMessageVo();
 
-        maintenanceMessage.setBaoYangShiJian("1");
-        maintenanceMessage.setBeiZhu("1");
-        maintenanceMessage.setChanDi("1");
-        maintenanceMessage.setDanJia("1");
-        maintenanceMessage.setEqCatagory("灭菌类");
-        maintenanceMessage.setFenLeiBianMa("1");
-        maintenanceMessage.setGuiGeXingHao("1");
-        maintenanceMessage.setJianChaRiQi("1");
-        maintenanceMessage.setKeShiQianShou("1");
-        maintenanceMessage.setQiYongShiJian("1");
-        maintenanceMessage.setSheBeiMingCheng("1");
-        maintenanceMessage.setShengChanChangJia("1");
-        maintenanceMessage.setShiYongKeShi("1");
-        maintenanceMessage.setWanChengRiQi("1");
-        maintenanceMessage.setWeiBaoRen("1");
-        maintenanceMessage.setWeiBaoZeRenRen("set");
-        maintenanceMessage.setWeiHuRenYuan("sdfs");
-        maintenanceMessage.setXuLieHao("sdfsdf");
-        maintenanceMessage.setYiQiXianZhuang("sdfsdf");
+        maintenanceMessage.setBaoYangShiJian(maintenance.getDateOfCompletion());   // 保养时间
+        maintenanceMessage.setBeiZhu(eqInfo.getEqBz());   // 备注
+        maintenanceMessage.setChanDi("1");                // 产地
+        if (eqInfo.getEqPrice() != null){
+            maintenanceMessage.setDanJia(eqInfo.getEqPrice().toString());   // 单价
+        }
+        maintenanceMessage.setEqCatagory("灭菌类");    // 设备分类
+        maintenanceMessage.setFenLeiBianMa(eqInfo.getEqCxflId());   // 分类编码
+        maintenanceMessage.setGuiGeXingHao(eqInfo.getEqGg()+eqInfo.getEqXh());      // 规格型号
+        maintenanceMessage.setJianChaRiQi(maintenance.getCheckTime());      // 检查日期
+        maintenanceMessage.setKeShiQianShou("1");       // 科室签收
+        if(eqInfo.getEqQysj() != null){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            maintenanceMessage.setQiYongShiJian(sdf.format(eqInfo.getEqQysj())); // 启用时间
+        }
+        maintenanceMessage.setSheBeiMingCheng(eqInfo.getEqName());  // 设备名称
+        maintenanceMessage.setShengChanChangJia(eqInfo.getScsName());   // 生产厂家
+        maintenanceMessage.setShiYongKeShi(eqInfo.getEqBmName());   // 使用科室
+        maintenanceMessage.setWanChengRiQi(maintenance.getDateOfCompletion());  // 完成日期
+        maintenanceMessage.setWeiBaoRen("1");   // 维保人
+        maintenanceMessage.setWeiBaoZeRenRen("set");    // 维保责任人
+        maintenanceMessage.setWeiHuRenYuan(maintenance.getMaintenancePersonnel());  // 维护人员
+        maintenanceMessage.setXuLieHao(eqInfo.getEqSbbh()); // 序列号
+        maintenanceMessage.setYiQiXianZhuang(maintenance.getInstrumentStatus());    // 仪器现状
 
 
 //                                            设备信息        end
@@ -570,7 +623,13 @@ public class MaintenanceController {
 
 
 //        生成文件
-        PDFUtil.createPDF(maintenanceMessage,ProjectLists,consumables);
+        try{
+            PDFUtil.createPDF(maintenanceMessage,ProjectLists,consumables);
+        }catch (Exception e){
+            System.out.println("生成PDF错误！");
+        }finally {
+            // 删除文件
+        }
 
 
         return Result.success();

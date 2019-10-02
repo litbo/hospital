@@ -46,14 +46,7 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">项目名称<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="projectName" id="project">
-                        <option value="" data-id="0">请选择项目名称</option>
-                    </select>
-                </div>
-            </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">级别<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -67,14 +60,26 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">实施人类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="cycleRule">
+                    <select name="implementerType">
                         <option>请选择实施人类型</option>
                         <option value="设备使用操作人员">设备使用操作人员</option>
+                        <option value="维修工程师">维修工程师</option>
+                        <option value="维修工程师和厂家人员">维修工程师和厂家人员</option>
+
                     </select>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <select name="projectName" id="project">
+                        <option value="" data-id="0">请选择项目名称</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 120px">首次实施时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -82,22 +87,22 @@
                 </div>
             </div>
 
-            <div class="layui-form-item">
-                <label class="layui-form-label" >周期<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="number" name="cycle" id="cycle" class="layui-input" placeholder="请输入数字" autocomplete="off">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" >单位<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="cycleUnit" id="cycleUnit">
-                        <option value="天">天</option>
-                        <option selected value="月">月</option>
-                        <option value="年">年</option>
-                    </select>
-                </div>
-            </div>
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label" >周期<span class="sign">*</span></label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<input type="number" name="cycle" id="cycle" class="layui-input" placeholder="请输入数字" autocomplete="off">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label" >单位<span class="sign">*</span></label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<select name="cycleUnit" id="cycleUnit">-->
+                        <!--<option value="天">天</option>-->
+                        <!--<option selected value="月">月</option>-->
+                        <!--<option value="年">年</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
     <div class="col-xs-12">
