@@ -13,6 +13,6 @@ public class FwYwwx {
 
     private String wxrId;
 
-    private Integer sbcsIdWxs;
+    private String sbcsIdWxs;
 
 }

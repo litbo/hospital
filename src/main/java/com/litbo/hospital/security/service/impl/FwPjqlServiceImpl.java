@@ -42,7 +42,8 @@ public class FwPjqlServiceImpl implements FwPjqlService {
     private TaskDao taskDao;
     @Autowired
     private FwPjzdDao pjzdDao;
-
+@Autowired
+private FwBaoxiuDao fwBaoxiuDao;
     /***
      *插入配件请领信息
      * @param insertFwPjqlVo
@@ -78,8 +79,13 @@ public class FwPjqlServiceImpl implements FwPjqlService {
         task.setUrl(EnumURL.EXAMINE_APPLY.getMessage());
         task.setJsrId(pjql.getQlrId());
         task.setOther(pjql.getId().toString());
-        task.setWorkName(insertFwPjqlVo.getSEmp().getBmName()+" "+insertFwPjqlVo.getSEmp().getUserXm()+" "+"配件请领审核");
-        taskDao.insertTask(task);
+        task.setWorkName(insertFwPjqlVo.getSEmp().getBmName() + " " + insertFwPjqlVo.getSEmp().getUserXm() + " " + "配件请领审核");
+        List<String> list = fwBaoxiuDao.zlshrList();
+        for (String s : list) {
+            task.setJsrId(s);
+            taskDao.insertTask(task);
+        }
+
         return res;
     }
     @Transactional
@@ -113,6 +119,7 @@ public class FwPjqlServiceImpl implements FwPjqlService {
             pjck.setPjCkTime(new Date());
             pjck.setUserId(qrrId);
             pjck.setQlId(id);
+
 
             if(pjckDao.insertFwPjck(pjck)==0){
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

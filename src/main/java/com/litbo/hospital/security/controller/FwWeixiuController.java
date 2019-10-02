@@ -6,12 +6,10 @@ import com.litbo.hospital.security.bean.FwYwwx;
 import com.litbo.hospital.security.service.FwWeixiuService;
 import com.litbo.hospital.security.vo.*;
 import com.litbo.hospital.user.vo.LiveEmpVo;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -186,11 +184,17 @@ public class FwWeixiuController {
      * @return
      */
             @PostMapping("/addFwWxqs")
-    public Result addFwWxqs(FwWxqsVo fwWxqs){
+    public Result addFwWxqs(String qsUser, String qsMs,
+                            String qsJg,String qsMyd,String fwId){
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
-
+            FwWxqsVo fwWxqs=new FwWxqsVo();
+            fwWxqs.getFwWxqs().setQsUser(qsUser);
+            fwWxqs.getFwWxqs().setQsMs(qsMs);
+            fwWxqs.getFwWxqs().setQsJg(qsJg);
+            fwWxqs.getFwWxqs().setQsMyd(qsMyd);
+            fwWxqs.getFwWxqs().setFwId(fwId);
             fwWeixiuService.addFwWxqs(fwWxqs,userId);
             return  Result.success();
         } catch (Exception e) {
