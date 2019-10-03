@@ -55,6 +55,7 @@
 </script>
 <script id="barDemo" type="text/html">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="king">结果录入</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="over">任务完成</a>
 
 </script>
 <script>
@@ -105,12 +106,19 @@
                                 content: './child/deal-taskAdd.html',
                                 area: ['90%', '90%'],
                                 func:function(obj,data){
+                                    localStorage.setItem("dealId",obj.data.id)
+                                }
+                            },
+                            {
+                                title:"任务完成",
+                                event: 'over',
+                                type: 2,
+                                content: './child/deal-tasklr.html',
+                                area: ['90%', '90%'],
+                                func:function(obj,data){
 
-                                    $.ajax({
-                                        url:"/maintenance/seePlanContent.do?id="+obj.data.id,
-                                        success:function(result){
-                                            localStorage.setItem("dealContent",JSON.stringify(result))
-                                        }});
+                                    localStorage.setItem("dealId",obj.data.id)
+
                                 }
                             }
                         ]

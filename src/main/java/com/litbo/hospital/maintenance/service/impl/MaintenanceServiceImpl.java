@@ -247,6 +247,17 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
+    public int projectResultAdd(int maintenanceId, String maintenanceResults, String maintenancePersonnel) {
+        MaintenanceProject project = maintenanceProjectDAO.selectById(maintenanceId);
+        if(project == null){
+            return 0;
+        }
+        project.setResult(maintenanceResults);
+        project.setStandard(maintenancePersonnel);
+        return maintenanceProjectDAO.updateProject(project);
+    }
+
+    @Override
     public int deleteType(String name) {
         return implementerDictionaryDAO.deleteByName(name);
     }

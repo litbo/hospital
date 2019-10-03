@@ -14,6 +14,9 @@ public class FwWxqsVo {
 
     private Integer taskId;
 
-   // private Integer status;
+    public FwWxqsVo() {
+        this.fwWxqs=new FwWxqs();
+    }
+// private Integer status;
 
 }

@@ -71,6 +71,10 @@ public interface MaintenanceService {
     int resultAdd(int maintenanceId,String maintenanceResults,String instrumentStatus,String description,
                   String maintenancePersonnel,String checkTime,String departmentReceipt,String dateOfCompletion);
 
+
+    // 维护保养结果录入
+    int projectResultAdd(int maintenanceId,String maintenanceResults,String maintenancePersonnel);
+
     int deleteType(String name);
 
     MaintenanceMessageVo getMessgeVo(String id);

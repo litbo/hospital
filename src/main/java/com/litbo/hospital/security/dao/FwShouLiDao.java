@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface FwShouLiDao {
 
-    @Select("SELECT COUNT(*) FROM fw_shouli where id = #{fwId}")
+    @Select("SELECT COUNT(*) AS count FROM fw_shouli where id = #{fwId}")
     public int getShouliByFwId(String fwId);
 
 

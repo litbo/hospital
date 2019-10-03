@@ -25,9 +25,14 @@ public interface FwBaoxiuDao {
                                              @Param("eqName") String eqName,@Param("bxStatus") Integer bxStatus);
 
     @Select("SELECT user_id FROM  s_role AS role , s_user_role AS ur WHERE\n" +
-            "role.role_name LIKE '设备%处长' AND\n" +
+            "role.role_name LIKE '设备%处%长' AND\n" +
             "role.role_id = ur.role_id")
     public List<String> shrList();
+    /*管申购配件的人*/
+    @Select("SELECT user_id FROM  s_role AS role , s_user_role AS ur WHERE\n" +
+            "role.role_name LIKE '质量管理科科长' AND\n" +
+            "role.role_id = ur.role_id")
+    public List<String> zlshrList();
 
     @Select("select bxr_id from fw_baoxiu where id=#{id}")
     public String findBxrIdByFwId(String id);

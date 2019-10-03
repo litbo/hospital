@@ -106,7 +106,7 @@ public class FwBaoxiuServiceImpl implements FwBaoxiuService {
         String bmId = empDao.getBmIdByUserId(userId);
         List<BaoXiuRw> baoxiuRw2 = null;
         System.out.println(roleName);
-        if("设备处长".equals(roleName)||"设备副处长".equals(roleName)){
+        if("设备处(科)长".equals(roleName)||"设备副处(科)长".equals(roleName)){
             baoxiuRw2 = fwWeixiuDao.getBaoXiuRw(bmId);
             baoxiuRw.addAll(baoxiuRw2);
         }

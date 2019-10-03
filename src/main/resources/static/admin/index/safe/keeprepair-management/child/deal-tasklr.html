@@ -23,21 +23,23 @@
 </fieldset>-->
 <div class="layui-row col-xs-12 padRight">
     <div class="col-xs-12 col-sm-6">
-        <div class="col-xs-12">
-            <div class="layui-form-item">
-                <label class="layui-form-label">维护结果<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="maintenanceResults" id="maintenanceResults" autocomplete="off"  class="layui-input" placeholder="请输入">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="layui-form-item">
-                <label class="layui-form-label">仪器现状<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="instrumentStatus" id="instrumentStatus" autocomplete="off" lay-verify="required" placeholder="请输入"
-                           class="layui-input">
-                </div>
+        <!--<div class="col-xs-12">-->
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">维护结果<span class="sign">*</span></label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<input type="text" name="maintenanceResults" id="maintenanceResults" autocomplete="off"  class="layui-input" placeholder="请输入">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">仪器现状<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <select name="implementerType">
+                    <option value="1.正常" aria-checked="true">1.正常</option>
+                    <option value="2.有部分问题，可以使用">2.有部分问题，可以使用</option>
+                    <option value="3.故障，需进一步维修">3.故障，需进一步维修</option>
+                    <option value="4.不能使用">4.不能使用</option>
+                </select>
             </div>
         </div>
 
@@ -59,24 +61,15 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-6">
-    <div class="col-xs-12">
-        <div class="layui-form-item">
-            <label class="layui-form-label">检查日期<span class="sign">*</span></label>
-            <div class="layui-input-block">
-                <input type="text"  name="checkTime" id="checkTime" placeholder="请选择时间" autocomplete="off"  class="layui-input">
-            </div>
-        </div>
-    </div>
+    <!--<div class="col-xs-12">-->
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">检查日期<span class="sign">*</span></label>-->
+            <!--<div class="layui-input-block">-->
+                <!--<input type="text"  name="checkTime" id="checkTime" placeholder="请选择时间" autocomplete="off"  class="layui-input">-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
-
-    <div class="col-xs-12">
-        <div class="layui-form-item">
-            <label class="layui-form-label">完成日期<span class="sign">*</span></label>
-            <div class="layui-input-block">
-                <input type="text" name="dateOfCompletion" id="dateOfCompletion" placeholder="请选择时间" lay-verify="required" autocomplete="off"  class="layui-input">
-            </div>
-        </div>
-    </div>
     <div class="col-xs-12">
     <div class="layui-form-item">
             <label class="layui-form-label">科室签收<span class="sign">*</span></label>
@@ -171,6 +164,7 @@
     localStorage.removeItem("img");
 
     var id = localStorage.getItem("dealId");
+
     renderMod = {
         bind: {
             addItem:[
