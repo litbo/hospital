@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.litbo.hospital.check.mapper.PlanMapper">
+<mapper namespace="com.litbo.hospital.lifemanage.check.mapper.PlanMapper">
 
 
-    <resultMap id="CheckMap" type="com.litbo.hospital.check.pojo.Check">
+    <resultMap id="CheckMap" type="com.litbo.hospital.lifemanage.check.pojo.Check">
         <id column="id" property="id"></id>
         <result property="eq_id" column="eq_id"></result>
         <result property="date" column="date"></result>
         <result property="checks" column="checks"></result>
         <result property="plan_id" column="plan_id"></result>
+
     </resultMap>
-    <insert id="insertPlan1" parameterType="com.litbo.hospital.check.pojo.Plan">
+    <insert id="insertPlan1" parameterType="com.litbo.hospital.lifemanage.check.pojo.Plan">
         insert into sg_plan(id,user_id,bm_id,plan_name,plan_date) values (
         #{id},#{user_id},#{bm_id},#{plan_name},#{plan_date}
         )
     </insert>
 
-    <select id="getEqIdByBmId" parameterType="String" >
-        select eq_name from eq_info where eq_bmid=#{bmId}
+    <select id="getEqIdByBmId" parameterType="String" resultType="String">
+        select eq_id from eq_info where eq_bmid=#{bmId} AND dbo.eq_info.eq_sbbh IS NOT NULL
     </select>
-    <insert id="insertSelective"  parameterType="com.litbo.hospital.check.pojo.Check">
+    <insert id="insertSelective"  parameterType="com.litbo.hospital.lifemanage.check.pojo.Check">
         insert into sg_check (id,eq_id,date,checks,plan_id)
         values (#{id},#{eq_id},#{date},#{checks},#{plan_id})
     </insert>
