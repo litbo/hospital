@@ -171,31 +171,28 @@
 
         form.on('submit(demo1)', function(data){
 
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-
-            // $.ajax({
-            //     type: "POST",
-            //     dataType: 'json',
-            //     url: '/lifeManage/insertYjyaZd',
-            //     data: JSON.stringify(dataObj),
-            //     contentType: 'application/json; charset=UTF-8',
-            //     success: function(result) {
-            //         console.log(JSON.stringify(dataObj))
-            //         layui.layer.alert('提交成功!');
-            //         setTimeout(function () {
-            //             window.parent.location.reload();
-            //         },1000)
-            //
-            //     },
-            //     error:function(){
-            //         layer.alert(JSON.stringify(dataObj), {
-            //             title: '最终的提交信息'
-            //         });
-            //         alert("error");
-            //     }
+            // layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
             // });
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: '/Check/planWork',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json; charset=UTF-8',
+                success: function(result) {
+                    console.log(JSON.stringify(data.field))
+                    // layui.layer.alert('提交成功!');
+                    // setTimeout(function () {
+                    //     window.parent.location.reload();
+                    // },1000)
+
+                },
+                error:function(){
+                    alert("error");
+                }
+            });
             return false;
         });
     });
