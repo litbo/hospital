@@ -171,9 +171,9 @@
 
         form.on('submit(demo1)', function(data){
 
-            // layer.alert(JSON.stringify(data.field), {
-            //     title: '最终的提交信息'
-            // });
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
 
             $.ajax({
                 type: "POST",
@@ -183,7 +183,7 @@
                 contentType: 'application/json; charset=UTF-8',
                 success: function(result) {
                     console.log(JSON.stringify(data.field))
-                    // layui.layer.alert('提交成功!');
+                    layui.layer.alert('提交成功!');
                     // setTimeout(function () {
                     //     window.parent.location.reload();
                     // },1000)

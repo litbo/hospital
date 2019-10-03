@@ -34,4 +34,15 @@ public class SgPlan {
      */
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date planDate;
+
+    @Override
+    public String toString() {
+        return "SgPlan{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", bmId='" + bmId + '\'' +
+                ", planName='" + planName + '\'' +
+                ", planDate=" + planDate +
+                '}';
+    }
 }
