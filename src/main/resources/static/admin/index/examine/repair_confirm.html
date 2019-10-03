@@ -267,7 +267,7 @@
                     ,{field: 'pjZczDqTime', title: '到期时间', minWidth: 150}
                     ,{field: 'scqyName', title: '生产企业', minWidth: 150}
                     ,{field: 'ghsName', title: '供货商', minWidth: 150}
-                    ,{field: 'ghsName', title: '申购数量', minWidth: 150}
+                    ,{field: 'pjsgCount', title: '申购数量', minWidth: 150}
                 ]]
                 , toolbar:false
                 , page:false
@@ -288,11 +288,11 @@
                         //id:$.getUrlParam("id"),
                         //status:"1",
                         taskId:$.getUrlParam("taskId"),
-                        'fwWxqs.qsUser':$("input[name='qsUser']").val(),
-                        'fwWxqs.qsMs':$("input[name='qsMs']").val(),
-                        'fwWxqs.qsJg':$("input[name='qsJg']").val(),
-                        'fwWxqs.qsMyd':$("input[name='qsMyd']").val(),
-                        'fwWxqs.fwId':$("input[name='fwId']").val()
+                        'qsUser':$("input[name='qsUser']").val(),
+                        'qsMs':$("input[name='qsMs']").val(),
+                        'qsJg':$("input[name='qsJg']").val(),
+                        'qsMyd':$("input[name='qsMyd']").val(),
+                        'fwId':$("input[name='fwId']").val()
                     },
                     shutWin:true
                 })
