@@ -90,6 +90,7 @@ public class SgPlanServiceImpl implements SgPlanService {
         if (StringUtils.isNotBlank(userName)) {
             userName = "%" + userName + "%";
             userId = empService.getIdByXm(userName);
+            System.out.println("员工id:"+userId);
         }
         Date date = null;
         if (StringUtils.isNotBlank(planDate)) {
@@ -100,11 +101,34 @@ public class SgPlanServiceImpl implements SgPlanService {
                 e.printStackTrace();
             }
         }
+        System.out.println(planName+"aaa/n"
+                +planDate+"aaa/n"+userName+"aaa/n"+pageNum+"aaa/n"+pageSize
+        );
         PageHelper.startPage(pageNum, pageSize);
         // 如果接收的userName 不为空且查询不到userid时 直接返回null 否则 进行查询
-        return new PageInfo<>(
-                userId.size()==0 && StringUtils.isNotBlank(userName) ?
-                null : sgPlanMapper.selectPlan(planName, date, userId));
+
+        System.out.println("aaaaaaaaaaaaaaaaaaaaa");
+        if (userId.size()==0 && StringUtils.isNotBlank(userName)){
+            System.out.println("空");
+            return  new PageInfo<>();
+        }else{
+            System.out.println("不为空");
+            try {
+                System.out.println("userID"+userId);
+                System.out.println("planName"+planName);
+                System.out.println("date"+date);
+                List<SgPlan> str = sgPlanMapper.selectPlan(planName, date, userId);
+                for (SgPlan sp : str){
+                    System.out.println(sp);
+                }
+            }catch (Exception e){
+                System.out.println("出错");
+            }
+            return new PageInfo<> (sgPlanMapper.selectPlan(planName, date, userId));
+        }
+//        return new PageInfo<>(
+//                userId.size()==0 && StringUtils.isNotBlank(userName) ?
+//                null : sgPlanMapper.selectPlan(planName, date, userId));
     }
 
     /**

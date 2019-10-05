@@ -74,8 +74,9 @@ public interface SgCheckMapper {
             "dbo.eq_info\n" +
             "INNER JOIN dbo.sg_check ON dbo.eq_info.eq_id = dbo.sg_check.eq_id\n" +
             "WHERE\n" +
-            "dbo.sg_check.plan_id = #{planId,jdbcType=VARCHAR} " +
-            "AND dbo.sg_check.user_id is null AND dbo.eq_info.eq_sbbh IS NOT NULL")
+            "dbo.sg_check.plan_id = #{planId,jdbcType=VARCHAR} "
+//            + "AND dbo.sg_check.user_id is null AND dbo.eq_info.eq_sbbh IS NOT NULL"
+    )
     List<SgCheckVO> getListByPlanId(String planId);
 
     /**

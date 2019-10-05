@@ -55,6 +55,7 @@ public interface SgPlanMapper {
     @SelectProvider(type = SgPlanSqlProvider.class, method = "selectPlan")
     List<SgPlan> selectPlan(@Param("planName") String planName, @Param("planDate") Date planDate, @Param("userId") List<String> userId);
 
+
     /**
      * 根据科室id查询设备id
      * @param bmId 科室id
