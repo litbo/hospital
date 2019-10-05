@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>待审核页面</title>
+    <title>设备</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -40,15 +40,15 @@
     // console.log(emp);
 </script>
 
-<script type="text/html" id="jsonChange">
-    {{#if (d.result === 1) { }}
-    <span style="color:green">审核通过</span>
-    {{# }else if(d.result === 0){ }}
-    <span style="color:red">审核未通过</span>
-    {{# }else{ }}
-    <span style="color:blue">待审核</span>
-    {{# } }}
-</script>
+<!--<script type="text/html" id="jsonChange">-->
+<!--    {{#if (d.result === 1) { }}-->
+<!--    <span style="color:green">审核通过</span>-->
+<!--    {{# }else if(d.result === 0){ }}-->
+<!--    <span style="color:red">审核未通过</span>-->
+<!--    {{# }else{ }}-->
+<!--    <span style="color:blue">待审核</span>-->
+<!--    {{# } }}-->
+<!--</script>-->
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">结果录入</a>
@@ -60,13 +60,13 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'standardName', title:'规范名称'}
-                    ,{field:'designerName',title:'制订人', width:180}
-                    ,{field:'date', title:'制订时间', width:150}
-                    ,{field:'applicableEquipment', title:'适用设备', width:150}
+                    ,{field:'bmId', title:'规范名称'}
+                    // ,{field:'designerName',title:'制订人', width:180}
+                    // ,{field:'date', title:'制订时间', width:150}
+                    // ,{field:'applicableEquipment', title:'适用设备', width:150}
                     ,{fixed: 'right', title:'规范任务', align:'center', toolbar: '#barDemo',width:210}
                 ]]
-                , url: "/lifeManage/searchAllStandards"
+                , url: "/lifeManage/searchUnFinishedTaskEqs"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',

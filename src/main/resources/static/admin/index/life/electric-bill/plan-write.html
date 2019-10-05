@@ -178,7 +178,7 @@
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: '/Check/planWork',
+                url: '/lifeManage/insertPlan',
                 data: JSON.stringify(data.field),
                 contentType: 'application/json; charset=UTF-8',
                 success: function(result) {
