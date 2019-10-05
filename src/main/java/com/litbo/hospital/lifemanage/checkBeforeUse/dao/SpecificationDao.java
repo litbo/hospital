@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.checkBeforeUse.dao;
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.*;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,25 @@ public interface SpecificationDao {
             "    </if>\n" +
             "</script>")
     List<UserVo> searchAppointUsers(UserVo userVo);
+
+    @Select("SELECT\n" +
+            "      dbo.eq_info.eq_sbbh,\n" +
+            "      dbo.eq_info.eq_name,\n" +
+            "      dbo.eq_info.eq_pym,\n" +
+            "      dbo.s_bm.bm_id,\n" +
+            "      dbo.s_bm.bm_name,\n" +
+            "      dbo.eq_info.eq_id,\n" +
+            "      dbo.eq_info.eq_xh,\n" +
+            "      dbo.eq_info.eq_gg,\n" +
+            "      dbo.eq_info.sbcs_id_scs,\n" +
+            "      dbo.eq_info.eq_pp,\n" +
+            "      dbo.eq_info.eq_tzlb\n" +
+            "    FROM\n" +
+            "      dbo.s_bm,\n" +
+            "      dbo.eq_info\n" +
+            "    WHERE\n" +
+            "      dbo.s_bm.bm_id = dbo.eq_info.eq_bmid")
+    List<EqInfoVO2> searchAllEqInfo();
 
     @Select("<script>" +
             "SELECT\n" +
@@ -353,6 +373,44 @@ public interface SpecificationDao {
     List<SearchStandardTaskVO> searchTodayUnfinishedStandardTask();
 
     @Select("SELECT\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.standard_task.task_id,\n" +
+            "dbo.standard_task.standard_name,\n" +
+            "dbo.standard_task.task_result,\n" +
+            "dbo.standard_task.operation_id,\n" +
+            "dbo.standard_task.project_id,\n" +
+            "dbo.standard_task.standard_id,\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.standard_task.[date],\n" +
+            "dbo.standard_inspection.project_name,\n" +
+            "dbo.standard_inspection.type_name,\n" +
+            "dbo.project_inspection_operation.operation_name,\n" +
+            "dbo.eq_info.eq_bmid,\n" +
+            "dbo.s_bm.bm_name,\n" +
+            "dbo.standard_task.[operation_date],\n" +
+            "dbo.standard_task.operator_number\n" +
+            "\n" +
+            "FROM\n" +
+            "\tdbo.standard_task,\n" +
+            "\tdbo.eq_info,\n" +
+            "\tdbo.standard_inspection,\n" +
+            "\tdbo.project_inspection_operation,\n" +
+            "\tdbo.s_bm\n" +
+            "WHERE\n" +
+            "\tdbo.standard_task.equipment_number = dbo.eq_info.eq_sbbh\n" +
+            "AND datediff(\n" +
+            "\tday,\n" +
+            "\tdbo.standard_task.[date],\n" +
+            "\tGETDATE()\n" +
+            ") = 0\n" +
+            "AND dbo.standard_task.project_id = dbo.standard_inspection.project_id\n" +
+            "AND dbo.standard_task.task_result IS NULL\n" +
+            "AND dbo.standard_task.operation_id = dbo.project_inspection_operation.operation_id\n" +
+            "AND dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "AND dbo.eq_info.eq_sbbh = #{eqSbbh}")
+    List<SearchStandardTaskVO> searchTodayUnfinishedStandardTaskByEqSbbh(String eqSbbh);
+
+    @Select("SELECT\n" +
             "\tdbo.eq_info.eq_sbbh,\n" +
             "\tdbo.standard_task.task_id,\n" +
             "\tdbo.standard_task.standard_name,\n" +
@@ -390,6 +448,47 @@ public interface SpecificationDao {
             "AND dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
             "AND dbo.standard_task.operator_number = dbo.s_emp.user_id")
     List<SearchStandardTaskVO> searchTodayFinishedStandardTask();
+
+
+    @Select("SELECT\n" +
+            "\tdbo.eq_info.eq_sbbh,\n" +
+            "\tdbo.standard_task.task_id,\n" +
+            "\tdbo.standard_task.standard_name,\n" +
+            "\tdbo.standard_task.task_result,\n" +
+            "\tdbo.standard_task.operation_id,\n" +
+            "\tdbo.standard_task.project_id,\n" +
+            "\tdbo.standard_task.standard_id,\n" +
+            "\tdbo.eq_info.eq_name,\n" +
+            "\tdbo.standard_task.[date],\n" +
+            "\tdbo.standard_inspection.project_name,\n" +
+            "\tdbo.standard_inspection.type_name,\n" +
+            "\tdbo.project_inspection_operation.operation_name,\n" +
+            "\tdbo.eq_info.eq_bmid,\n" +
+            "\tdbo.s_bm.bm_name,\n" +
+            "\tdbo.standard_task.operator_number,\n" +
+            "\tdbo.standard_task.[operation_date],\n" +
+            "\tdbo.s_emp.user_xm\n" +
+            "FROM\n" +
+            "\tdbo.standard_task,\n" +
+            "\tdbo.eq_info,\n" +
+            "\tdbo.standard_inspection,\n" +
+            "\tdbo.project_inspection_operation,\n" +
+            "\tdbo.s_bm,\n" +
+            "\tdbo.s_emp\n" +
+            "WHERE\n" +
+            "\tdbo.standard_task.equipment_number = dbo.eq_info.eq_sbbh\n" +
+            "AND datediff(\n" +
+            "\tDAY,\n" +
+            "\tdbo.standard_task.[date],\n" +
+            "\tGETDATE()\n" +
+            ") = 0\n" +
+            "AND dbo.standard_task.project_id = dbo.standard_inspection.project_id\n" +
+            "AND dbo.standard_task.task_result IS NOT NULL\n" +
+            "AND dbo.standard_task.operation_id = dbo.project_inspection_operation.operation_id\n" +
+            "AND dbo.eq_info.eq_bmid = dbo.s_bm.bm_id\n" +
+            "AND dbo.standard_task.operator_number = dbo.s_emp.user_id\n" +
+            "AND dbo.eq_info.eq_sbbh = #{eqSbbh}")
+    List<SearchStandardTaskVO> searchTodayFinishedStandardTaskByEqSbbh(String eqSbbh);
 
     @Update("UPDATE standard_task\n" +
             "SET task_result = #{ taskResult }, operation_date = GETDATE(),\n" +
@@ -524,4 +623,157 @@ public interface SpecificationDao {
             "    </choose>" +
             "</script>")
     List<SearchStandardTaskVO> searchAppointFinishedStandardTasks(Integer standardId, String bmId, String eqName, String eqSbbh,Integer result);
+
+    @Select("SELECT\n" +
+            "dbo.standards.applicable_equipment,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
+            "dbo.eq_info.sbcs_id_scs,\n" +
+            "dbo.eq_info.eq_sbbh\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.eq_info ,\n" +
+            "dbo.standards\n" +
+            "WHERE\n" +
+            "dbo.eq_info.eq_sbbh = dbo.standards.equipment_number\n")
+    List<SearchStandardEqVo> searchAllStandardEqVos();
+
+    @Select("SELECT DISTINCT\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.s_bm.bm_name,\n" +
+            "dbo.s_bm.bm_id,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
+            "dbo.eq_info.eq_pp\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.eq_info ,\n" +
+            "dbo.standard_task ,\n" +
+            "dbo.s_bm\n" +
+            "WHERE\n" +
+            "dbo.eq_info.eq_sbbh = dbo.standard_task.equipment_number AND\n" +
+            "dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
+            "    datediff(\n" +
+            "        DAY,\n" +
+            "        dbo.standard_task.[date],\n" +
+            "        GETDATE()\n" +
+            "    ) = 0 AND\n" +
+            "dbo.s_bm.bm_id = #{bmId} AND\n" +
+            "dbo.standard_task.task_result IS NULL\n")
+    List<TaskEqVo> searchUnFinishedTaskEqs(String bmId);
+
+    @Select("SELECT DISTINCT\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.s_bm.bm_name,\n" +
+            "dbo.s_bm.bm_id,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
+            "dbo.eq_info.eq_pp\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.eq_info ,\n" +
+            "dbo.standard_task ,\n" +
+            "dbo.s_bm\n" +
+            "WHERE\n" +
+            "dbo.eq_info.eq_sbbh = dbo.standard_task.equipment_number AND\n" +
+            "dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
+            "    datediff(\n" +
+            "        DAY,\n" +
+            "        dbo.standard_task.[date],\n" +
+            "        GETDATE()\n" +
+            "    ) = 0 AND\n" +
+            "dbo.s_bm.bm_id = #{bmId} AND\n" +
+            "dbo.standard_task.task_result IS NOT NULL\n")
+    List<TaskEqVo> searchFinishedTaskEqs(String bmId);
+
+    @Select("SELECT\n" +
+            "\tdbo.eq_info.eq_sbbh,\n" +
+            "\tdbo.standard_task.task_id,\n" +
+            "\tdbo.standard_task.standard_name,\n" +
+            "\tdbo.standard_task.task_result,\n" +
+            "\tdbo.standard_task.operation_id,\n" +
+            "\tdbo.standard_task.project_id,\n" +
+            "\tdbo.standard_task.standard_id,\n" +
+            "\tdbo.eq_info.eq_name,\n" +
+            "\tdbo.standard_task.[date],\n" +
+            "\tdbo.standard_inspection.project_name,\n" +
+            "\tdbo.standard_inspection.type_name,\n" +
+            "\tdbo.project_inspection_operation.operation_name,\n" +
+            "\tdbo.eq_info.eq_bmid,\n" +
+            "\tdbo.s_bm.bm_name,\n" +
+            "\tdbo.standard_task.[operation_date],\n" +
+            "\tdbo.standard_task.operator_number,\n" +
+            "\tdbo.s_emp.user_xm\n" +
+            "\n" +
+            "    FROM\n" +
+            "        dbo.standard_task,\n" +
+            "        dbo.eq_info,\n" +
+            "        dbo.standard_inspection,\n" +
+            "        dbo.project_inspection_operation,\n" +
+            "        dbo.s_emp,\n" +
+            "        dbo.s_bm\n" +
+            "    WHERE\n" +
+            "    dbo.standard_task.equipment_number = dbo.eq_info.eq_sbbh AND\n" +
+            "    dbo.standard_task.operator_number = dbo.s_emp.user_id AND" +
+            "    datediff(\n" +
+            "        DAY,\n" +
+            "        dbo.standard_task.[date],\n" +
+            "        GETDATE()\n" +
+            "    ) = 0 AND\n" +
+            "    dbo.standard_task.project_id = dbo.standard_inspection.project_id AND\n" +
+            "    dbo.standard_task.operation_id = dbo.project_inspection_operation.operation_id AND\n" +
+            "    dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
+            "    dbo.standard_task.equipment_number = #{eqSbbh}\n")
+    List<SearchStandardTaskVO> searchEqTask(String eqSbbh);
+
+
+    @Select("SELECT DISTINCT\n" +
+            "dbo.s_bm.bm_id,\n" +
+            "dbo.s_bm.bm_name\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.standard_task,\n" +
+            "dbo.s_bm ,\n" +
+            "dbo.eq_info\n" +
+            "WHERE\n" +
+            "dbo.standard_task.equipment_number = dbo.eq_info.eq_sbbh AND\n" +
+            "dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
+            "DATEDIFF(DAY, standard_task.[date], GETDATE()-1) = 0\n")
+    List<BmTaskEqVO> searchAllTaskBm();
+
+
+    @Select("SELECT\n" +
+            "Count(DISTINCT dbo.eq_info.eq_name)\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.standard_task ,\n" +
+            "dbo.s_bm ,\n" +
+            "dbo.eq_info\n" +
+            "WHERE\n" +
+            "dbo.standard_task.equipment_number = dbo.eq_info.eq_sbbh AND\n" +
+            "dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
+            "DATEDIFF(DAY, standard_task.[date], #{date}) = 0 AND\n" +
+            "dbo.s_bm.bm_id = #{bmId}\n" +
+            "GROUP BY\n" +
+            "dbo.s_bm.bm_name\n")
+    Integer searchEqTotal(String bmId, LocalDate date);
+
+    @Select("SELECT\n" +
+            "Count(DISTINCT dbo.eq_info.eq_name)\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.standard_task ,\n" +
+            "dbo.s_bm ,\n" +
+            "dbo.eq_info\n" +
+            "WHERE\n" +
+            "dbo.standard_task.equipment_number = dbo.eq_info.eq_sbbh AND\n" +
+            "dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
+            "DATEDIFF(DAY, standard_task.[date], #{date}) = 0 AND\n" +
+            "dbo.standard_task.task_result IS NULL AND\n" +
+            "dbo.s_bm.bm_id = #{bmId}\n" +
+            "GROUP BY\n" +
+            "dbo.s_bm.bm_name\n")
+    Integer searchNotDoneEqTotal(String bmId,LocalDate date);
 }

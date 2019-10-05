@@ -39,8 +39,6 @@ public class Test {
 
     @org.junit.Test
     public void t2(){
-        PageInfo<EqInfoVO> eqInfoVOPageInfo = specificationService.searchEqInfos(1, 10);
-        eqInfoVOPageInfo.getList().forEach(System.out::println);
     }
 
     @org.junit.Test

@@ -6,9 +6,13 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.checkBeforeUse.service.SpecificationService;
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.*;
 import com.litbo.hospital.result.Result;
+import net.sf.cglib.core.Local;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -229,6 +233,105 @@ public class SpecificationController {
                 standardId,bmId,eqName,eqSbbh,
                 1);
         return Result.success(p);
+    }
+
+
+    @PostMapping("searchUnFinishedTaskEqs")
+    public Result searchUnFinishedTaskEqs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                               @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                               String bmId){
+
+
+        System.out.println(bmId);
+        PageInfo<TaskEqVo> taskEqVoPageInfo = specificationService.searchTaskEqs(pageNum,pageSize,bmId,0);
+
+        return Result.success(taskEqVoPageInfo);
+    }
+
+
+    @PostMapping("searchFinishedTaskEqs")
+    public Result searchFinishedTaskEqs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                String bmId){
+
+
+        System.out.println(bmId);
+        PageInfo<TaskEqVo> taskEqVoPageInfo = specificationService.searchTaskEqs(pageNum,pageSize,bmId,1);
+
+        return Result.success(taskEqVoPageInfo);
+    }
+
+    @PostMapping("searchUnFinishedEqTask")
+    public Result searchUnFinishedEqTask(String eqSbbh){
+        System.out.println(eqSbbh);
+        List<SearchStandardTaskVO> searchStandardTaskVOS = specificationService.searchUnFinishedEqTask(eqSbbh);
+        return Result.success(searchStandardTaskVOS);
+    }
+
+    @PostMapping("searchFinishedEqTask")
+    public Result searchFinishedEqTask(String eqSbbh){
+        System.out.println(eqSbbh);
+        List<SearchStandardTaskVO> searchStandardTaskVOS = specificationService.searchFinishedEqTask(eqSbbh);
+        return Result.success(searchStandardTaskVOS);
+    }
+
+    @PostMapping("saveTaskResult")
+    public Result saveTaskResult(@RequestBody ResultList list){
+
+        list.getList().forEach(a->{
+            System.out.println(a.getTaskId() + "----" + a.getOperatorNumber() +"----" + a.getUserXm()+ "----" + a.getTaskResult());
+        });
+        specificationService.saveTaskResult(list.getList());
+        return Result.success();
+    }
+
+
+    /**
+     * 查找当天科室的检查情况
+     * @return 检查情况
+     */
+    @GetMapping("searchUseForBmEq")
+    public Result searchUseForBmEq(){
+        List<BmTaskEqVO> bmTaskEqVOS = specificationService.searchBmTaskEqsByDay();
+        bmTaskEqVOS.forEach(System.out::println);
+        return Result.success(bmTaskEqVOS);
+
+    }
+
+    /**
+     * 查找部门分科室查询
+     * @param startDate 开始时间 默认  上个月一号
+     * @param endDate   结束时间 默认  上个月最后一天
+     * @param bmId      科室id
+     * @param bmName    科室名称
+     * @return          查询结果
+     */
+    @GetMapping("searchUseForBmEqByDate")
+    public Result searchUseForBmEqByDate(@RequestParam(value = "startDate",required = false)String startDate,
+                                         @RequestParam(value = "endDate",required = false) String endDate,
+                                         @RequestParam("bmId") String bmId,
+                                         @RequestParam(value = "bmName") String bmName){
+        LocalDate today = LocalDate.now().minusMonths(1);
+
+
+        LocalDate s = null;
+        LocalDate e = null;
+        if (endDate == null){
+            e = today.with(TemporalAdjusters.lastDayOfMonth());
+        }else {
+            e = LocalDate.parse(endDate);
+        }
+        if (startDate == null){
+            s = LocalDate.of(today.getYear(),today.getMonth(),1);
+        }else {
+            s = LocalDate.parse(startDate);
+        }
+
+        List<BmTaskEqVO> bmTaskEqVOS = specificationService.searchUseForBmEqByDate(s,e,bmId,bmName);
+
+        bmTaskEqVOS.forEach(System.out::println);
+
+        return Result.success(bmTaskEqVOS);
     }
 
 
