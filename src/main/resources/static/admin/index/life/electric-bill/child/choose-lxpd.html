@@ -20,37 +20,37 @@
         <div class="col-xs-12">
             <form class="layui-form" action="" layui-filter="forms">
                 <!--操作人id-->
-                <input type="hidden" id="pdCzr" name="pdCzr">
+                <input type="hidden" id="userId" name="userId">
+                <input type="hidden" id="pd_jhid" name="pd_jhid">
                 <!--计划下拉框-->
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">
-                            <select name="planName" lay-filter="select" lay-search="">
-                                <option value="">请选择操作人</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="layui-form-item">-->
+<!--                    <div class="layui-inline">-->
+<!--                        <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">-->
+<!--                            <select name="planName" lay-filter="select" lay-search="">-->
+<!--                                <option value="">请选择操作人</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!--上传文件-->
-                <input type="button" value="选择文件" class="layui-btn layui-btn-normal"
-                       style="height: 40px;width: 200px;outline: none;border:0;text-align: center;"
-                       onclick="javascript:$('.file').click();" />
+                <input type="button" value="选择文件" class="layui-btn layui-btn-normal" style="height: 40px;width: 200px;outline: none;border:0;text-align: center;" onclick="javascript:$('.file').click();" />
                 <input class="fileName" readonly style="height: 38px;outline: none;border:0;"/>
-                <input type="file" class="file" style="display: none;" id="selectFile" onchange="javascript:$('.fileName').val(this.files[0].name);" />
-                <button type="button" class="layui-btn" id="startUploadFile" lay-submit="" lay-filter="demo1"
-                        style="margin-top: 50px;margin-left: 0;display: block;">提交
+                <input type="file" class="file" name="multipartFile" style="display: none;" id="selectFile" onchange="javascript:$('.fileName').val(this.files[0].name);" />
+                <button type="button" class="layui-btn" id="startUploadFile" lay-submit="" lay-filter="demo1" style="margin-top: 50px;margin-left: 0;display: block;">提交
                 </button>
             </form>
         </div>
     </div>
 </div>
 
-<script src="../layui/layui.js"></script>
-<script src="../js/dataIndex.js"></script>
+<!--<script src="../layui/layui.js"></script>-->
+<!--<script src="../js/dataIndex.js"></script>-->
 <script>
 
     var emp = tempValue("rl", "emp", false);
-    $("#pdCzr").val(emp.userId);
+    $("#userId").val(emp.userId);
+    $("#pd_jhid").val($.getUrlParam("id"));
+    console.log($.getUrlParam("id"));
 
     layui.use(['form', 'upload'], function(){
         var $ = layui.jquery
@@ -72,20 +72,22 @@
         });
         //监听提交
         form.on('submit(demo1)', function(data){
+            console.log(data);
+            var obj = {
+                userId:data.field.userId,
+                pd_jhid:data.field.pd_jhid
+            };
+            var objJson = JSON.stringify(obj);
             $.ajax({
                 type: "POST",
                 dataType: 'json',
                 url: '/lifeManage/insertSgPdId',
-                data: data,
-
-
-
-
-
+                contentType: 'application/json; charset=UTF-8',
+                data: objJson,
                 success: function(data) {
                     if (data.code == '0'){
                         layui.layer.alert('保存成功!');
-                        window.location.href = '../lxpd-table.html'
+                        // window.location.href = '../lxpd-table.html'
                     }
                 },
                 error:function(){
@@ -96,18 +98,17 @@
         });
     });
 
-    renderMod.formAction = {
-        val: {
-            filter: "select",
-            select: [
-                {
-
-                    text: "planName",
-                    url: "/lifeManage/selectPlan",
-                    type: "POST"
-                }
-            ]}
-    }
+    // renderMod.formAction = {
+    //     val: {
+    //         filter: "select",
+    //         select: [
+    //             {
+    //                 text: "planName",
+    //                 url: "/lifeManage/selectPlan",
+    //                 type: "POST"
+    //             }
+    //         ]}
+    // }
 </script>
 </body>
 </html>
