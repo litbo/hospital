@@ -51,14 +51,14 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'kc',title:'科室'}
-                    ,{field:'fgsbs',title:'覆盖设备数', width:180}
-                    ,{field:'zxsbs', title:'执行设备数', width:180}
-                    ,{field:'zxs', title:'执行数', width:170}
-                    ,{field:'zxl', title:'执行率', width:170}
+                    ,{field:'bmName',title:'科室'}
+                    ,{field:'totalEqs',title:'覆盖设备数', minWidth:180}
+                    ,{field:'doneEqs', title:'执行设备数', minWidth:180}
+                    ,{field:'enforced', title:'执行率', minWidth:170}
+                    ,{field:'date', title:'日期', minWidth:170}
                     ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
                 ]]
-                , url: "/lifeManage/selectAllYalogByExample"
+                , url: "/lifeManage/searchUseForBmEq"
                 , method: "POST"
                 , request: {
                     pageName: 'pageNum',
@@ -93,10 +93,10 @@
             },
 
             reSet: {
-                url: "/lifeManage/selectAllYalogByExample",
+                url: "/lifeManage/searchUseForBmEqByDate",
                 type: "reload",
                 method: "POST",
-                data: ["zt","qssj", "jssj", "yabh", "yaname"]
+                data: ["startDate","endDtae", "bmId", "bmName"]
             }
         },page: true
     };
@@ -104,7 +104,7 @@
         date:[
             {
                 elem:"#date1",
-                isInitValue:false,
+                value:today0,
                 format:'yyyy-MM-dd'
             }
         ],

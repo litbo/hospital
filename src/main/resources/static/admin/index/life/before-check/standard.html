@@ -60,10 +60,10 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    ,{field:'bmId', title:'规范名称'}
-                    // ,{field:'designerName',title:'制订人', width:180}
-                    // ,{field:'date', title:'制订时间', width:150}
-                    // ,{field:'applicableEquipment', title:'适用设备', width:150}
+                    ,{field:'bmId', title:'科室id'}
+                    ,{field:'eqSbbh',title:'设备编号', minWidth:180}
+                    ,{field:'bmName', title:'科室', minWidth:150}
+                    ,{field:'eqName', title:'设备名称', minWidth:150}
                     ,{fixed: 'right', title:'规范任务', align:'center', toolbar: '#barDemo',width:210}
                 ]]
                 , url: "/lifeManage/searchUnFinishedTaskEqs"
@@ -72,7 +72,9 @@
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                , where: {}
+                , where: {
+                    bmId:emp.bmId
+                }
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -82,13 +84,13 @@
                     }
                 }
                 ,done: function(obj){
-                    for (var i=0; i < obj.data.length;i++ ) {
-                        var emp = tempValue("rl", "emp", false);
-                        console.log(obj.data[i].reviewerName);
-                        if (obj.data[i].reviewerName === emp.userXm){
-
-                        }
-                    }
+                    // for (var i=0; i < obj.data.length;i++ ) {
+                    //     var emp = tempValue("rl", "emp", false);
+                    //     console.log(obj.data[i].reviewerName);
+                    //     if (obj.data[i].reviewerName === emp.userXm){
+                    //
+                    //     }
+                    // }
 
                     tableFunc({
                         "tools":[
@@ -98,7 +100,7 @@
                                 title:"规范内容",
                                 content:"pending-task.html",
                                 area: ['1000px', '450px'],
-                                dataUrl:["standardId"],
+                                dataUrl:["eqSbbh"],
                                 func:function(obj){
                                     // console.log(obj);
                                 }
@@ -151,7 +153,7 @@
     layui.use('table', function() {
         var table = layui.table;
         var checkStatus =table.checkStatus('table');
-        console.log(table.data);
+        // console.log(table.data);
     })
 </script>
 </body>
