@@ -60,12 +60,12 @@ public class EqHtShowVO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date htYfrq;
 
-    /*搜索起始时间*/
+    /*查询起始时间*/
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date htQssj;
 
-    /*搜索结束时间*/
+    /*查询结束时间*/
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date htJssj;

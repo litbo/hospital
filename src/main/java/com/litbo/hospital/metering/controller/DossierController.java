@@ -126,7 +126,7 @@ public class DossierController {
     public Result selectDossierById(int dossierId){
         Dossier dossier = dossierService.selectDossierByID(dossierId);
         if(dossier == null){
-            return Result.success("未找到您要查找的信息");
+            return Result.success("未找到您要查询的信息");
         }
         return Result.success(dossier);
     }

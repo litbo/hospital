@@ -195,7 +195,7 @@ public class SgInfoServiceImpl implements SgInfoService {
         for (SgInfoSumAuditListVO selectKsShHz : selectKsShHzs) {
             selectKsShHz.setBmName(bmName);
         }
-        // 通过设备品名查找没有找到结果 返回null
+        // 通过设备品名查询没有找到结果 返回null
         return StringUtils.isNotBlank(eqPmPym) && pmIds.size() <= 0 ? new PageInfo<>() : new PageInfo<>(selectKsShHzs);
     }
 

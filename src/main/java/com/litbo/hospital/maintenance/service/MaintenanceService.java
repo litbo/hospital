@@ -38,7 +38,7 @@ public interface MaintenanceService {
 
     int deleteMaintenanceProject(int id);
 
-    //按条件查找设备
+    //按条件查询设备
     List<AddEqVo> selectEqBy(String factory,String model,String bmName,String similarClass,String pym);
 
     List<String> seeAllType(String type);

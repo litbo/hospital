@@ -225,7 +225,7 @@ public class SgLcclServiceImpl implements SgLcclService {
     public LcclToVO selectLcclById(String id) {
         LcclToVO lcclToVO = sgLcclMapper.selectLcclById(id);
         if (lcclToVO != null) {
-            //通过人员id查找人员name
+            //通过人员id查询人员name
             lcclToVO.setUserId(lcclToVO.getUserId() != null ? empService.getEmpsById(lcclToVO.getUserId()).getUserXm() : null)
                     .setReportPerson(lcclToVO.getReportPerson() != null ? empService.getEmpsById(lcclToVO.getReportPerson()).getUserXm() : null)
                     .setRatify(lcclToVO.getRatify() != null ? empService.getEmpsById(lcclToVO.getRatify()).getUserXm() : null)

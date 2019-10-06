@@ -16,7 +16,7 @@ import java.util.List;
 public interface UsingDAO {
 
     /**
-     * 默认搜索前一天的机时利用率将数据插入到中间表中
+     * 默认查询前一天的机时利用率将数据插入到中间表中
      * @return  机时利用率
      */
     @UpdateProvider(type = UsingProvider.class,method = "selectUsing")
@@ -37,7 +37,7 @@ public interface UsingDAO {
     Integer deleteUsing();
 
     /**
-     * 按照条件搜索机时利用率
+     * 按照条件查询机时利用率
      * @param searchVO  机时利用率条件
      * @return  机时利用率
      */

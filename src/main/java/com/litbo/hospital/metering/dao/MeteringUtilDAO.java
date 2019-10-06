@@ -36,7 +36,7 @@ public interface MeteringUtilDAO {
     List<MeteringUtil> findAllMeteringUtilByDepartment(String department);
     List<MeteringUtil> findAllMeteringUtilByDepartmentAndName(@Param("department") String department,@Param("name") String name);
 
-    //    查找在某一时间段需要计量的设备信息
+    //    查询在某一时间段需要计量的设备信息
     List<MeteringUtil> findAllMeteringUtilByTime(@Param("beginTime")String beginTime, @Param("endTiem") String endTiem);
 
 

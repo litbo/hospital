@@ -36,7 +36,7 @@ public class EqDutyController {
     private ApprovedWorkingHoursService approvedWorkingHoursService;
     /**
      *  显示设备值班信息
-     *  根据条件查找
+     *  根据条件查询
      * @param pageNum
      * @param pageSize
      * @param searchVO

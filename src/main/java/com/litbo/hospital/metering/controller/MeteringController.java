@@ -246,7 +246,7 @@ public class MeteringController {
 
 
     /**
-     * 查找在某一时间段需要计量的设备信息
+     * 查询在某一时间段需要计量的设备信息
      * @param beginTime
      * @param endTiem
      * @return

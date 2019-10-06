@@ -2,7 +2,7 @@
  * User: Jinqn
  * Date: 14-04-08
  * Time: 下午16:34
- * 上传图片对话框逻辑代码,包括tab: 远程图片/上传图片/在线图片/搜索图片
+ * 上传图片对话框逻辑代码,包括tab: 远程图片/上传图片/在线图片/查询图片
  */
 
 (function () {
@@ -964,7 +964,7 @@
         }
     };
 
-    /*搜索图片 */
+    /*查询图片 */
     function SearchImage() {
         this.init();
     }
@@ -975,7 +975,7 @@
         initEvents: function(){
             var _this = this;
 
-            /* 点击搜索按钮 */
+            /* 点击查询按钮 */
             domUtils.on($G('searchBtn'), 'click', function(){
                 var key = $G('searchTxt').value;
                 if(key && key != lang.searchRemind) {
@@ -988,14 +988,14 @@
                 $G('searchListUl').innerHTML = '';
                 $G('searchType').selectedIndex = 0;
             });
-            /* 搜索框聚焦 */
+            /* 查询框聚焦 */
             domUtils.on($G('searchTxt'), 'focus', function(){
                 var key = $G('searchTxt').value;
                 if(key && key == lang.searchRemind) {
                     $G('searchTxt').value = '';
                 }
             });
-            /* 搜索框回车键搜索 */
+            /* 查询框回车键查询 */
             domUtils.on($G('searchTxt'), 'keydown', function(e){
                 var keyCode = e.keyCode || e.which;
                 if (keyCode == 13) {

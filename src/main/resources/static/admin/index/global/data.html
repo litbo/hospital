@@ -54,13 +54,13 @@
 <script>
     var $url_cols = $.getUrlParam("cb") || "",//表头链接
         $url_data = $.getUrlParam("db") || "",//表格数据获取链接
-        $url_search = $.getUrlParam("se") || "",//表格搜索相关数据获取链接
+        $url_search = $.getUrlParam("se") || "",//表格查询相关数据获取链接
         $key = $.getUrlParam("key") || "",//页面判断参数
         $name = $.getUrlParam("vg") || "",
         $value = $.getUrlParam("v") || $key,
         colsData = [],//表头判断
-        searchDom = $("#toolBar"),//搜索数据DOM
-        searchParam = false,//搜索参数,false不使用
+        searchDom = $("#toolBar"),//查询数据DOM
+        searchParam = false,//查询参数,false不使用
         isTruth = false
     ;
     //判断非必填参数是否有效
@@ -122,7 +122,7 @@
                 colsData.push(datt);
             }
             isTruth = true;
-            //判断是否有se参数（是否加载搜索数据）
+            //判断是否有se参数（是否加载查询数据）
             if ($url_search !== "") {
                 subUp({
                     url: $url_search,
@@ -130,7 +130,7 @@
                     data: {key: $key},
                     async: false,//同步
                     success: function (res) {
-                        //渲染搜索DOM
+                        //渲染查询DOM
                         res.data['dom'] && searchDom.html("<form class=\"layui-form layui-form-pane maxCont\" id=\"search\" action=\"\">\n" +
                             "        <div class=\"layui-inline xs-100 mar10-0 pad0-10\" style=\"margin-right:10px;\">\n" +
                             "            <a class=\"layui-btn layui-btn-warm\" lay-event=\"setThisData\">选定数据</a>\n" +

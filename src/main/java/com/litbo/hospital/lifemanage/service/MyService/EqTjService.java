@@ -62,10 +62,10 @@ public interface EqTjService {
     /*改变装备借出状态*/
     int updateEqInfoSfJc(String sbbh, String status);
 
-    /*查找所有待借出设备,点替换之后装备状态变成待借出,未送达调配单+1，别人将无法查找到*/
+    /*查询所有待借出设备,点替换之后装备状态变成待借出,未送达调配单+1，别人将无法查询到*/
     PageInfo selectWsdYsd(Integer pageNum, Integer pageSize, String lx);
 
-    /*查找所有已借出设备/验收单已送达*/
+    /*查询所有已借出设备/验收单已送达*/
     PageInfo selectYsdYsd(Integer pageNum, Integer pageSize, String lx);
 
     /*修改待调剂装备的信息*/

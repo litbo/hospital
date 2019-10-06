@@ -3,7 +3,7 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.real_t
 import lombok.Data;
 
 /**
- * 实时监视搜索条件
+ * 实时监视查询条件
  */
 @Data
 public class SearchOV {

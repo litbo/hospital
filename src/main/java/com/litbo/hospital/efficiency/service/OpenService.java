@@ -12,7 +12,7 @@ import com.litbo.hospital.efficiency.vo.SearchVO;
 public interface OpenService {
 
     /**
-     * 默认搜索上个月设备的开机率
+     * 默认查询上个月设备的开机率
      * @param pageNum   页码
      * @param pageSize  大小
      * @return  设备的开机率
@@ -20,7 +20,7 @@ public interface OpenService {
     PageInfo selectOpen(int pageNum, int pageSize);
 
     /**
-     * 按条件搜索设备的开机率
+     * 按条件查询设备的开机率
      * @param pageNum   页码
      * @param pageSize  大小
      * @param searchVO  设备的开机率

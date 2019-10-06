@@ -1279,12 +1279,12 @@ window.onload = function () {
     // }).html("当前页面地址：" + window.location.href).on("click", function () {
     //     $(this).remove()/*if(confirm("删除此内容？")){$(this).remove()}*/
     // }));
-    //手机版 数据查找 按钮功能绑定
+    //手机版 数据查询 按钮功能绑定
     var $dataSearch = $("a[lay-event='dataSearch']");
     if ($dataSearch.length > 0) {
         $dataSearch.on('click', function () {
             layOpen({
-                title: "数据查找",
+                title: "数据查询",
                 content: $("#hideXs")
             });
             return false;

@@ -31,7 +31,7 @@ public class InspectdetailbackServiceImpl implements InspectdetailbackService {
     private Temp2DAO temp2DAO;
 
     /**
-     * 分页显示符合搜索条件的数据
+     * 分页显示符合查询条件的数据
      * @param pageNum
      * @param pageSize
      * @param searchVO
@@ -44,7 +44,7 @@ public class InspectdetailbackServiceImpl implements InspectdetailbackService {
     }
 
     /**
-     * 分页显示符合搜索条件的原始记录
+     * 分页显示符合查询条件的原始记录
      * @param pageNum
      * @param pageSize
      * @param searchVO

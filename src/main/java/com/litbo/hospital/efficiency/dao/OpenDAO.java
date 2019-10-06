@@ -39,7 +39,7 @@ public interface OpenDAO {
 
     /**
      * 按照条件查询设备的开机率
-     * @param searchVO 搜索条件
+     * @param searchVO 查询条件
      * @return 返回
      */
     @UpdateProvider(type = OpenProvider.class,method = "updateOpenByCon")

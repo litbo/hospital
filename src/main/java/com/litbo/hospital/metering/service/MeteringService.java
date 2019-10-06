@@ -33,7 +33,7 @@ public interface MeteringService {
     List<MeteringUtil> findAllMeteringUtilByDepartment(String department);
     List<MeteringUtil> findAllMeteringUtilByDepartmentAndMeteringUtilName(String department,String meteringUtilName);
 
-    //    查找在某一时间段需要计量的设备信息
+    //    查询在某一时间段需要计量的设备信息
     List<MeteringUtil> findAllMeteringUtilByTime(String beginTime,String endTiem);
 
     //   根据时间，科室，审计状态联合查询

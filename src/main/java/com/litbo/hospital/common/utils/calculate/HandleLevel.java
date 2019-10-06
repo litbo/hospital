@@ -3,7 +3,7 @@ package com.litbo.hospital.common.utils.calculate;
 import com.litbo.hospital.efficiency.vo.SearchVO;
 
 /**
- * description: 处理效率等级的搜索
+ * description: 处理效率等级的查询
  * @author: sz
  * @date: 2019/8/5 17:50
  */

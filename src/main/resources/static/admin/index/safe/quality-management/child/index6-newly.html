@@ -31,7 +31,7 @@
        <!--    头部工具-->
         <div class="layui-btn-container" style="float: left;">
             <button class="layui-btn layui-btn-sm" lay-event="particularly" style=" height: 38px;font-size: 15px">设置特种设备从业人员</button>
-        </div><!-- 搜索-->
+        </div><!-- 查询-->
 
         <div class="input-contain" style="width: 600px;margin: 0 auto;">
             <div class="layui-inline" style="width:230px;margin: 0 10px 0 0 ;float: left;">
@@ -137,7 +137,7 @@
                 url: "/specialEq/selectUserByIdAndNameAndBmName",
                 type: "search",
                 method: "POST",
-                data: ["bmName", "userId", "userXm"],  //搜索框的name
+                data: ["bmName", "userId", "userXm"],  //查询框的name
                 tid: "table"
             }
         }

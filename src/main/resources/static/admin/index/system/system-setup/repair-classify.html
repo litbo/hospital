@@ -67,7 +67,7 @@
             <div class="layui-row" >
                     <div class="tree-container col-xs-12 col-md-4">
                         <div class="search_tree">
-                            <input class="layui-input" type="text" placeholder="模糊查找" style="width: 76%;float: left;" id="tree_search">
+                            <input class="layui-input" type="text" placeholder="模糊查询" style="width: 76%;float: left;" id="tree_search">
                             <button class="layui-btn" style="margin-left: 10px;width:20%;" id="tree_btn"><i class="layui-icon layui-icon-search"></i>查询</button>
                         </div>
                         <div class="ztree ztree-liulinwj ztree-liulinwj-folder">
@@ -161,7 +161,7 @@
                 nodes = res.data;
                 $("#tree span").remove();
                 $.fn.zTree.beautify().init($("#tree"), setting, res.data);
-                fuzzySearch('tree','#tree_btn','#tree_search',null,true); //初始化模糊搜索方法
+                fuzzySearch('tree','#tree_btn','#tree_search',null,true); //初始化模糊查询方法
             }
 
         }
@@ -241,7 +241,7 @@
                     return false;
                 }
 
-                // 查找符合条件的叶子节点
+                // 查询符合条件的叶子节点
                 function filterFunc(node) {
                     if(node && node.oldname && node.oldname.length>0){
                         node[nameKey] = node.oldname; //如果存在原始名称则恢复原始名称
@@ -325,7 +325,7 @@
             }
 
             /*
-            //输入框输入后直接查找
+            //输入框输入后直接查询
             if(searchField){
                 //监听关键字input输入框文字变化事件
                 $(searchField).bind('input propertychange', function() {
@@ -337,7 +337,7 @@
             if(searchBtn){
                 $(searchBtn).on("click",function(){
                     putMsg({
-                        msg:"查找中..."
+                        msg:"查询中..."
                     });
                     var _keywords = $(searchField).val();
                     searchNodeLazy(_keywords); //调用延时处理
@@ -356,7 +356,7 @@
                     ztreeFilter(zTreeObj,_keywords);    //延时执行筛选方法
                     $(searchField).focus();//输入框重新获取焦点
                     putMsg({
-                        msg:"查找完毕！"
+                        msg:"查询完毕！"
                     });
                 }, 500);
             }

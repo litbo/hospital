@@ -258,7 +258,7 @@ UE.I18N['zh-cn'] = {
             'lang_tab_remote':"插入图片", //节点
             'lang_tab_upload':"本地上传",
             'lang_tab_online':"在线管理",
-            'lang_tab_search':"图片搜索",
+            'lang_tab_search':"图片查询",
             'lang_input_url':"地 址：",
             'lang_input_size':"大 小：",
             'lang_input_width':"宽度",
@@ -271,9 +271,9 @@ UE.I18N['zh-cn'] = {
             'lang_start_upload':"开始上传",
             'lock':{'title':"锁定宽高比例"}, //属性
             'searchType':{'title':"图片类型", 'options':["新闻", "壁纸", "表情", "头像"]}, //select的option
-            'searchTxt':{'value':"请输入搜索关键词"},
+            'searchTxt':{'value':"请输入查询关键词"},
             'searchBtn':{'value':"百度一下"},
-            'searchReset':{'value':"清空搜索"},
+            'searchReset':{'value':"清空查询"},
             'noneAlign':{'title':'无浮动'},
             'leftAlign':{'title':'左浮动'},
             'rightAlign':{'title':'右浮动'},
@@ -306,7 +306,7 @@ UE.I18N['zh-cn'] = {
         'numError':"请输入正确的长度或者宽度值！例如：123，400",
         'imageUrlError':"不允许的图片格式或者图片域！",
         'imageLoadError':"图片加载失败！请检查链接地址或网络状态！",
-        'searchRemind':"请输入搜索关键词",
+        'searchRemind':"请输入查询关键词",
         'searchLoading':"图片加载中，请稍后……",
         'searchRetry':" :( ，抱歉，没有找到图片！请重试一次！"
     },
@@ -343,14 +343,14 @@ UE.I18N['zh-cn'] = {
     'insertvideo':{
         'static':{
             'lang_tab_insertV':"插入视频",
-            'lang_tab_searchV':"搜索视频",
+            'lang_tab_searchV':"查询视频",
             'lang_tab_uploadV':"上传视频",
             'lang_video_url':"视频网址",
             'lang_video_size':"视频尺寸",
             'lang_videoW':"宽度",
             'lang_videoH':"高度",
             'lang_alignment':"对齐方式",
-            'videoSearchTxt':{'value':"请输入搜索关键字！"},
+            'videoSearchTxt':{'value':"请输入查询关键字！"},
             'videoType':{'options':["全部", "热门", "娱乐", "搞笑", "体育", "科技", "综艺"]},
             'videoSearchBtn':{'value':"百度一下"},
             'videoSearchReset':{'value':"清空结果"},
@@ -464,10 +464,10 @@ UE.I18N['zh-cn'] = {
     },
     'music':{
         'static':{
-            'lang_input_tips':"输入歌手/歌曲/专辑，搜索您感兴趣的音乐！",
-            'J_searchBtn':{value:'搜索歌曲'}
+            'lang_input_tips':"输入歌手/歌曲/专辑，查询您感兴趣的音乐！",
+            'J_searchBtn':{value:'查询歌曲'}
         },
-        'emptyTxt':'未搜索到相关音乐结果，请换一个关键词试试。',
+        'emptyTxt':'未查询到相关音乐结果，请换一个关键词试试。',
         'chapter':'歌曲',
         'singer':'歌手',
         'special':'专辑',
@@ -515,7 +515,7 @@ UE.I18N['zh-cn'] = {
     'gmap':{
         'static':{
             'lang_input_address':'地址',
-            'lang_input_search':'搜索',
+            'lang_input_search':'查询',
             'address':{value:"北京"}
         },
         searchError:'无法定位到该地址!'
@@ -567,7 +567,7 @@ UE.I18N['zh-cn'] = {
             lang_city:"城市",
             lang_address:"地址",
             city:{value:"北京"},
-            lang_search:"搜索",
+            lang_search:"查询",
             lang_dynamicmap:"插入动态地图"
         },
         cityMsg:"请选择城市",
@@ -575,10 +575,10 @@ UE.I18N['zh-cn'] = {
     },
     'searchreplace':{
         'static':{
-            lang_tab_search:"查找",
+            lang_tab_search:"查询",
             lang_tab_replace:"替换",
-            lang_search1:"查找",
-            lang_search2:"查找",
+            lang_search1:"查询",
+            lang_search2:"查询",
             lang_replace:"替换",
             lang_searchReg:'支持正则表达式，添加前后斜杠标示为正则表达式，例如“/表达式/”',
             lang_searchReg1:'支持正则表达式，添加前后斜杠标示为正则表达式，例如“/表达式/”',
@@ -591,8 +591,8 @@ UE.I18N['zh-cn'] = {
             repalceBtn:{value:"替换"},
             repalceAllBtn:{value:"全部替换"}
         },
-        getEnd:"已经搜索到文章末尾！",
-        getStart:"已经搜索到文章头部",
+        getEnd:"已经查询到文章末尾！",
+        getStart:"已经查询到文章头部",
         countMsg:"总共替换了{#count}处！"
     },
     'snapscreen':{

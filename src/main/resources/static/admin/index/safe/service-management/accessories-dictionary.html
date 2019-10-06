@@ -54,7 +54,7 @@
                     <input type="text" name="pjSzm" class="layui-input" placeholder="配件拼音码" autocomplete="off">
                 </div>
                 <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">查找
+                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1" data-type="reload">查询
                     </button>
                 </div>
             </div>
@@ -141,7 +141,7 @@
             reSet: {
                 url: "/security/pjzd/listFwPjzd",
                 type: "reload",
-                data: ["pjfl", "pjSzm"],     //搜索框的name
+                data: ["pjfl", "pjSzm"],     //查询框的name
                 where: {}
 
             }

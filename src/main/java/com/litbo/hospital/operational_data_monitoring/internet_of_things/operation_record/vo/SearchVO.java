@@ -7,7 +7,7 @@ import lombok.Data;
  * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo
  * @Author: looli
  * @CreateTime: 2019-07-23 10:50
- * @Description: 搜索条件
+ * @Description: 查询条件
  */
 @Data
 public class SearchVO {

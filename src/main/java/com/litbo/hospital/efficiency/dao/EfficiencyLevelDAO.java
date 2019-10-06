@@ -24,8 +24,8 @@ public interface EfficiencyLevelDAO {
     List<EfficiencyLevelVO> selectLevel();
 
     /**
-     * 按条件搜索的效率等级
-     * @param searchVO 搜索的条件
+     * 按条件查询的效率等级
+     * @param searchVO 查询的条件
      * @return 返回信息
      */
     @SelectProvider(type = EfficiencyLevelProvider.class,method = "selectLevelByCon")

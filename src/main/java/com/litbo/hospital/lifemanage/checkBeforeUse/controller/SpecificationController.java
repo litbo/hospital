@@ -26,7 +26,7 @@ public class SpecificationController {
 
 
     /**
-     * 查找所有设备
+     * 查询所有设备
      * @return 所有设备信息
      */
     @PostMapping("getEqInfos")
@@ -287,7 +287,7 @@ public class SpecificationController {
 
 
     /**
-     * 查找当天科室的检查情况
+     * 查询当天科室的检查情况
      * @return 检查情况
      */
     @GetMapping("searchUseForBmEq")
@@ -299,7 +299,7 @@ public class SpecificationController {
     }
 
     /**
-     * 查找部门分科室查询
+     * 查询部门分科室查询
      * @param startDate 开始时间 默认  上个月一号
      * @param endDate   结束时间 默认  上个月最后一天
      * @param bmId      科室id

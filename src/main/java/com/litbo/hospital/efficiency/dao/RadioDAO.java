@@ -16,7 +16,7 @@ import java.util.List;
 public interface RadioDAO {
 
     /**
-     * 将搜索到的数据插入数据库
+     * 将查询到的数据插入数据库
      * @param kpiBean 插入数据库的对象
      * @return 返回
      */

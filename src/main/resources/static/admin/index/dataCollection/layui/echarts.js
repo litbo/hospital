@@ -615,7 +615,7 @@ function filter(obj, cb, context) {
 }
 
 /**
- * 数组项查找
+ * 数组项查询
  * @memberOf module:zrender/core/util
  * @param {Array} obj
  * @param {Function} cb

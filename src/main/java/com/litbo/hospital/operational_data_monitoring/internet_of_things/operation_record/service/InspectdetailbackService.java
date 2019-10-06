@@ -14,7 +14,7 @@ public interface InspectdetailbackService {
     /**
      * 显示所选时间段内的数据
      * 分页
-     * 搜索
+     * 查询
      * @param pageNum
      * @param pageSize
      * @param searchVO
@@ -25,7 +25,7 @@ public interface InspectdetailbackService {
     /**
      * 显示所选时间段原始记录
      * 分页
-     * 搜索
+     * 查询
      * @param pageNum
      * @param pageSize
      * @param searchVO

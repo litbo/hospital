@@ -310,7 +310,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			othis.removeAttr('name') && othis.attr('_name', fs.config.formname);
 			othis.removeAttr('lay-verify') && othis.attr('_lay-verify', fs.config.layverify);
 
-			//如果可搜索, 加上事件
+			//如果可查询, 加上事件
 			if (fs.config.isSearch) {
 				ajaxs[id] = $.extend({}, ajax, { searchUrl: fs.config.searchUrl }, ajaxs[id]);
 				$(document).on('input', 'div.' + PNAME + '[FS_ID="' + id + '"] .' + INPUT, function (e) {
@@ -349,7 +349,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 		var fs = data[id],
 		    isCreate = fs.config.isCreate,
 		    reElem = $('dl[xid="' + id + '"]').parents('.' + FORM_SELECT);
-		//如果开启了远程搜索
+		//如果开启了远程查询
 		if (searchUrl) {
 			if (ajaxConfig.searchVal) {
 				inputValue = ajaxConfig.searchVal;
@@ -501,7 +501,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 		var label = reElem.find('.' + LABEL);
 		var dl = reElem.find('dl[xid]');
 		if (isSearch) {
-			//如果是远程搜索, 这里需要判重
+			//如果是远程查询, 这里需要判重
 			var oldVal = data[id].values;
 			oldVal.forEach(function (item, index) {
 				dl.find('dd[lay-value="' + item.value + '"]').addClass(THIS);
@@ -570,7 +570,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 		html.push('<div style="clear: both; height: 288px;"></div>');
 		html.push('</div>');
 		reElem.find('dl').html(html.join(''));
-		reElem.find('.' + INPUT).css('display', 'none'); //联动暂时不支持搜索
+		reElem.find('.' + INPUT).css('display', 'none'); //联动暂时不支持查询
 	};
 
 	Common.prototype.renderReplace = function (id, dataArr) {
@@ -850,7 +850,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 				}
 			}
 
-			//如果点击的是可搜索的input
+			//如果点击的是可查询的input
 			if (othis.is('.' + INPUT)) {
 				_this11.changeShow(title, true);
 				return false;
@@ -1188,7 +1188,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 		//移除表单验证的红色边框
 		div.parents('.' + FORM_TITLE).prev().removeClass('layui-form-danger');
 
-		//清空搜索值
+		//清空查询值
 		fs.config.clearInput && this.clearInput(id);
 
 		this.commonHandler(id, div);

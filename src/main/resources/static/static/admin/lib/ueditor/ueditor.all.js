@@ -606,8 +606,8 @@ var utils = UE.utils = {
      * 获取元素item在数组array中首次出现的位置, 如果未找到item， 则返回-1
      * @method indexOf
      * @remind 该方法的匹配过程使用的是恒等“===”
-     * @param { Array } array 需要查找的数组对象
-     * @param { * } item 需要在目标数组中查找的值
+     * @param { Array } array 需要查询的数组对象
+     * @param { * } item 需要在目标数组中查询的值
      * @return { int } 返回item在目标数组array中首次出现的位置， 如果在数组中未找到item， 则返回-1
      * @example
      * ```javascript
@@ -620,12 +620,12 @@ var utils = UE.utils = {
      */
 
     /**
-     * 获取元素item数组array中首次出现的位置, 如果未找到item， 则返回-1。通过start的值可以指定搜索的起始位置。
+     * 获取元素item数组array中首次出现的位置, 如果未找到item， 则返回-1。通过start的值可以指定查询的起始位置。
      * @method indexOf
      * @remind 该方法的匹配过程使用的是恒等“===”
-     * @param { Array } array 需要查找的数组对象
-     * @param { * } item 需要在目标数组中查找的值
-     * @param { int } start 搜索的起始位置
+     * @param { Array } array 需要查询的数组对象
+     * @param { * } item 需要在目标数组中查询的值
+     * @param { int } start 查询的起始位置
      * @return { int } 返回item在目标数组array中的start位置之后首次出现的位置， 如果在数组中未找到item， 则返回-1
      * @example
      * ```javascript
@@ -2076,12 +2076,12 @@ var domUtils = dom.domUtils = {
         return domUtils.getPosition(node, doc) == 10;
     },
     /**
-     * 根据给定的过滤规则filterFn， 查找符合该过滤规则的node节点的第一个祖先节点，
-     * 查找的起点是给定node节点的父节点。
+     * 根据给定的过滤规则filterFn， 查询符合该过滤规则的node节点的第一个祖先节点，
+     * 查询的起点是给定node节点的父节点。
      * @method findParent
-     * @param { Node } node 需要查找的节点
+     * @param { Node } node 需要查询的节点
      * @param { Function } filterFn 自定义的过滤方法。
-     * @warning 查找的终点是到body节点为止
+     * @warning 查询的终点是到body节点为止
      * @remind 自定义的过滤方法filterFn接受一个Node对象作为参数， 该对象代表当前执行检测的祖先节点。 如果该
      *          节点满足过滤条件， 则要求返回true， 这时将直接返回该节点作为findParent()的结果， 否则， 请返回false。
      * @return { Node | Null } 如果找到符合过滤条件的节点， 就返回该节点， 否则返回NULL
@@ -2089,7 +2089,7 @@ var domUtils = dom.domUtils = {
      * ```javascript
      * var filterNode = UE.dom.domUtils.findParent( document.body.firstChild, function ( node ) {
      *
-     *     //由于查找的终点是body节点， 所以永远也不会匹配当前过滤器的条件， 即这里永远会返回false
+     *     //由于查询的终点是body节点， 所以永远也不会匹配当前过滤器的条件， 即这里永远会返回false
      *     return node.tagName === "HTML";
      *
      * } );
@@ -2100,13 +2100,13 @@ var domUtils = dom.domUtils = {
      */
 
     /**
-     * 根据给定的过滤规则filterFn， 查找符合该过滤规则的node节点的第一个祖先节点，
-     * 如果includeSelf的值为true，则查找的起点是给定的节点node， 否则， 起点是node的父节点
+     * 根据给定的过滤规则filterFn， 查询符合该过滤规则的node节点的第一个祖先节点，
+     * 如果includeSelf的值为true，则查询的起点是给定的节点node， 否则， 起点是node的父节点
      * @method findParent
-     * @param { Node } node 需要查找的节点
+     * @param { Node } node 需要查询的节点
      * @param { Function } filterFn 自定义的过滤方法。
-     * @param { Boolean } includeSelf 查找过程是否包含自身
-     * @warning 查找的终点是到body节点为止
+     * @param { Boolean } includeSelf 查询过程是否包含自身
+     * @warning 查询的终点是到body节点为止
      * @remind 自定义的过滤方法filterFn接受一个Node对象作为参数， 该对象代表当前执行检测的祖先节点。 如果该
      *          节点满足过滤条件， 则要求返回true， 这时将直接返回该节点作为findParent()的结果， 否则， 请返回false。
      * @remind 如果includeSelf为true， 则过滤器第一次执行时的参数会是节点本身。
@@ -2146,11 +2146,11 @@ var domUtils = dom.domUtils = {
         return null;
     },
     /**
-     * 查找node的节点名为tagName的第一个祖先节点， 查找的起点是node节点的父节点。
+     * 查询node的节点名为tagName的第一个祖先节点， 查询的起点是node节点的父节点。
      * @method findParentByTagName
-     * @param { Node } node 需要查找的节点对象
-     * @param { Array } tagNames 需要查找的父节点的名称数组
-     * @warning 查找的终点是到body节点为止
+     * @param { Node } node 需要查询的节点对象
+     * @param { Array } tagNames 需要查询的父节点的名称数组
+     * @warning 查询的终点是到body节点为止
      * @return { Node | NULL } 如果找到符合条件的节点， 则返回该节点， 否则返回NULL
      * @example
      * ```javascript
@@ -2161,13 +2161,13 @@ var domUtils = dom.domUtils = {
      */
 
     /**
-     * 查找node的节点名为tagName的祖先节点， 如果includeSelf的值为true，则查找的起点是给定的节点node，
+     * 查询node的节点名为tagName的祖先节点， 如果includeSelf的值为true，则查询的起点是给定的节点node，
      * 否则， 起点是node的父节点。
      * @method findParentByTagName
-     * @param { Node } node 需要查找的节点对象
-     * @param { Array } tagNames 需要查找的父节点的名称数组
-     * @param { Boolean } includeSelf 查找过程是否包含node节点自身
-     * @warning 查找的终点是到body节点为止
+     * @param { Node } node 需要查询的节点对象
+     * @param { Array } tagNames 需要查询的父节点的名称数组
+     * @param { Boolean } includeSelf 查询过程是否包含node节点自身
+     * @warning 查询的终点是到body节点为止
      * @return { Node | NULL } 如果找到符合条件的节点， 则返回该节点， 否则返回NULL
      * @example
      * ```javascript
@@ -2184,9 +2184,9 @@ var domUtils = dom.domUtils = {
         }, includeSelf);
     },
     /**
-     * 查找节点node的祖先节点集合， 查找的起点是给定节点的父节点，结果集中不包含给定的节点。
+     * 查询节点node的祖先节点集合， 查询的起点是给定节点的父节点，结果集中不包含给定的节点。
      * @method findParents
-     * @param { Node } node 需要查找的节点对象
+     * @param { Node } node 需要查询的节点对象
      * @return { Array } 给定节点的祖先节点数组
      * @grammar UE.dom.domUtils.findParents(node)  => Array  //返回一个祖先节点数组集合，不包含自身
      * @grammar UE.dom.domUtils.findParents(node,includeSelf)  => Array  //返回一个祖先节点数组集合，includeSelf指定是否包含自身
@@ -2195,11 +2195,11 @@ var domUtils = dom.domUtils = {
      */
 
     /**
-     * 查找节点node的祖先节点集合， 如果includeSelf的值为true，
+     * 查询节点node的祖先节点集合， 如果includeSelf的值为true，
      * 则返回的结果集中允许出现当前给定的节点， 否则， 该节点不会出现在其结果集中。
      * @method findParents
-     * @param { Node } node 需要查找的节点对象
-     * @param { Boolean } includeSelf 查找的结果中是否允许包含当前查找的节点对象
+     * @param { Node } node 需要查询的节点对象
+     * @param { Boolean } includeSelf 查询的结果中是否允许包含当前查询的节点对象
      * @return { Array } 给定节点的祖先节点数组
      */
     findParents:function (node, includeSelf, filterFn, closerFirst) {
@@ -2273,7 +2273,7 @@ var domUtils = dom.domUtils = {
     },
 
     /**
-     * 取得node节点的下一个兄弟节点， 如果该节点其后没有兄弟节点， 则递归查找其父节点之后的第一个兄弟节点，
+     * 取得node节点的下一个兄弟节点， 如果该节点其后没有兄弟节点， 则递归查询其父节点之后的第一个兄弟节点，
      * 直到找到满足条件的节点或者递归到BODY节点之后才会结束。
      * @method getNextDomNode
      * @param { Node } node 需要获取其后的兄弟节点的节点对象
@@ -2304,7 +2304,7 @@ var domUtils = dom.domUtils = {
      * </body>
      * <script>
      *
-     *     //由于id为test的i节点之后没有兄弟节点， 则查找其父节点（div）后面的兄弟节点
+     *     //由于id为test的i节点之后没有兄弟节点， 则查询其父节点（div）后面的兄弟节点
      *     //output: b节点
      *     console.log( UE.dom.domUtils.getNextDomNode( document.getElementById( "test" ) ) );
      *
@@ -2315,10 +2315,10 @@ var domUtils = dom.domUtils = {
     /**
      * 取得node节点的下一个兄弟节点， 如果startFromChild的值为ture，则先获取其子节点，
      * 如果有子节点则直接返回第一个子节点；如果没有子节点或者startFromChild的值为false，
-     * 则执行<a href="#UE.dom.domUtils.getNextDomNode(Node)">getNextDomNode(Node node)</a>的查找过程。
+     * 则执行<a href="#UE.dom.domUtils.getNextDomNode(Node)">getNextDomNode(Node node)</a>的查询过程。
      * @method getNextDomNode
      * @param { Node } node 需要获取其后的兄弟节点的节点对象
-     * @param { Boolean } startFromChild 查找过程是否从其子节点开始
+     * @param { Boolean } startFromChild 查询过程是否从其子节点开始
      * @return { Node | NULL } 如果找满足条件的节点， 则返回该节点， 否则返回NULL
      * @see UE.dom.domUtils.getNextDomNode(Node)
      */
@@ -3004,7 +3004,7 @@ var domUtils = dom.domUtils = {
      * 原生方法getElementsByTagName的封装
      * @method getElementsByTagName
      * @param { Node } node 目标节点对象
-     * @param { String } tagName 需要查找的节点的tagName， 多个tagName以空格分割
+     * @param { String } tagName 需要查询的节点的tagName， 多个tagName以空格分割
      * @return { Array } 符合条件的节点集合
      */
     getElementsByTagName:function (node, name,filter) {
@@ -7069,7 +7069,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
 
         /**
          * 同步数据到编辑器所在的form
-         * 从编辑器的容器节点向上查找form元素，若找到，就同步编辑内容到找到的form里，为提交数据做准备，主要用于是手动提交的情况
+         * 从编辑器的容器节点向上查询form元素，若找到，就同步编辑内容到找到的form里，为提交数据做准备，主要用于是手动提交的情况
          * 后台取得数据的键值，使用你容器上的name属性，如果没有就使用参数里的textarea项
          * @method sync
          * @example
@@ -7080,7 +7080,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          */
 
         /**
-         * 根据传入的formId，在页面上查找要同步数据的表单，若找到，就同步编辑内容到找到的form里，为提交数据做准备
+         * 根据传入的formId，在页面上查询要同步数据的表单，若找到，就同步编辑内容到找到的form里，为提交数据做准备
          * 后台取得数据的键值，该键值默认使用给定的编辑器容器的name属性，如果没有name属性则使用参数项里给定的“textarea”项
          * @method sync
          * @param { String } formID 指定一个要同步数据的form的id,编辑器的数据会同步到你指定form下
@@ -9212,9 +9212,9 @@ var filterWord = UE.filterWord = function () {
         },
 
         /**
-         * 在当前节点下，根据id查找节点
+         * 在当前节点下，根据id查询节点
          * @method getNodeById
-         * @param { String } id 要查找的id
+         * @param { String } id 要查询的id
          * @return { UE.uNode } 返回找到的节点
          * @example
          * ```javascript
@@ -9233,9 +9233,9 @@ var filterWord = UE.filterWord = function () {
         },
 
         /**
-         * 在当前节点下，根据元素名称查找节点列表
+         * 在当前节点下，根据元素名称查询节点列表
          * @method getNodesByTagName
-         * @param { String } tagNames 要查找的元素名称
+         * @param { String } tagNames 要查询的元素名称
          * @return { Array } 返回找到的节点列表
          * @example
          * ```javascript
@@ -12743,7 +12743,7 @@ UE.plugins['paragraph'] = function() {
 //            var startNode = editor.selection.getStart(),
 //                parents;
 //            if ( startNode ) {
-//                //查找所有的是block的父亲节点
+//                //查询所有的是block的父亲节点
 //                parents = domUtils.findParents( startNode, true, block, true );
 //                for ( var i = 0,ci; ci = parents[i++]; ) {
 //                    if ( ci.getAttribute( 'dir' ) ) {
@@ -22778,12 +22778,12 @@ UE.plugins['formatmatch'] = function(){
 
 // plugins/searchreplace.js
 ///import core
-///commands 查找替换
+///commands 查询替换
 ///commandsName  SearchReplace
 ///commandsTitle  查询替换
 ///commandsDialog  dialogs\searchreplace
 /**
- * @description 查找替换
+ * @description 查询替换
  * @author zhanyi
  */
 

@@ -15,7 +15,7 @@ public interface InspectdetailService {
     /**
      * 显示当天数据
      * 分页
-     * 搜索
+     * 查询
      * @param pageNum
      * @param pageSize
      * @param searchVO
@@ -26,7 +26,7 @@ public interface InspectdetailService {
     /**
      * 显示当天的数据
      * 分页
-     * 搜索
+     * 查询
      * @param pageNum
      * @param pageSize
      * @param searchVO

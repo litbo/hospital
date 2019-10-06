@@ -2,7 +2,7 @@ package com.litbo.hospital.lifemanage.bean.vo.MyVO;
 
 import lombok.Data;
 
-/*查找可调剂设备*/
+/*查询可调剂设备*/
 
 @Data
 public class EqInfoShowVO {

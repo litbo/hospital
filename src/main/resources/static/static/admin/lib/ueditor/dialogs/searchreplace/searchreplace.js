@@ -61,7 +61,7 @@ $G('searchtab').onmousedown = function(){
 function getMatchCase(id) {
     return $G(id).checked ? true : false;
 }
-//查找
+//查询
 $G("nextFindBtn").onclick = function (txt, dir, mcase) {
     var findtxt = $G("findtxt").value, obj;
     if (!findtxt) {

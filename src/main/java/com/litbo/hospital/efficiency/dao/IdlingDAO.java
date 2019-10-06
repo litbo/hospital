@@ -16,7 +16,7 @@ import java.util.List;
 public interface IdlingDAO {
 
     /**
-     * 默认搜索前一天的空转率并将数据插入到中间表中
+     * 默认查询前一天的空转率并将数据插入到中间表中
      * @return  插入几行数据
      */
     @UpdateProvider(type = IdlingProvider.class,method = "selectIdling")
@@ -37,7 +37,7 @@ public interface IdlingDAO {
     Integer deleteIdling();
 
     /**
-     * 按条件搜索设备的空转率
+     * 按条件查询设备的空转率
      * @param searchVO  设备的空转率条件
      * @return  设备的空转率
      */

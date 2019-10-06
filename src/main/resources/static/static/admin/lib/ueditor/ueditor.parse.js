@@ -429,7 +429,7 @@ UE.parse.register('table', function (utils) {
             }
         });
 
-        //按照标签名查找父节点
+        //按照标签名查询父节点
         function findParentByTagName(target, tagNames) {
             var i, current = target;
             tagNames = utils.isArray(tagNames) ? tagNames:[tagNames];

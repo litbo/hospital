@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 public class IntegrityProvider {
 
     /**
-     * 默认搜索设备的完好率
+     * 默认查询设备的完好率
      * @return 返回sql
      */
    public String selectIntegrity(){
@@ -52,7 +52,7 @@ public class IntegrityProvider {
    }
 
     /**
-     * 按条件搜索设备的完好率
+     * 按条件查询设备的完好率
      * @param searchVO 设备的完好率条件
      * @return  设备的完好率
      */

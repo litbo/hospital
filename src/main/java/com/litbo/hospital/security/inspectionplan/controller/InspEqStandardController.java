@@ -94,7 +94,7 @@ public class InspEqStandardController {
 
 
     /**
-     * 功能描述: 查询所有巡检计划标准项 & 根据name 查找
+     * 功能描述: 查询所有巡检计划标准项 & 根据name 查询
      *
      * @Param: [pageSize, pageNum]
      * @Return: com.litbo.hospital.result.Result

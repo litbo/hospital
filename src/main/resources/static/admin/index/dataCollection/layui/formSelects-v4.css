@@ -145,7 +145,7 @@ div[xm-select-skin='warm'] dd .xm-cz:hover{color: #FFB800;}
 div[xm-select-skin='danger'] dd .xm-cz:hover{color: #FF5722;}
 
 
-/* 下拉里面的搜索 */
+/* 下拉里面的查询 */
 .xm-select-tips .xm-input{border: none; border-bottom: 1px solid #E6E6E6; padding-left: 27px;}
 .xm-select-tips .icon-sousuo{position: absolute;}
 .xm-select-tips.xm-dl-input{display: none;}

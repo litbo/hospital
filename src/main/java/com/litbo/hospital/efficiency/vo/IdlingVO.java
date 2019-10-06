@@ -14,20 +14,20 @@ import java.util.Date;
 @Data
 public class IdlingVO {
 
-    /** 搜索的开始时间 */
+    /** 查询的开始时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date startSTime;
 
-    /** 搜索的结束时间 */
+    /** 查询的结束时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date endSTime;
 
-    /**搜索的科室名称*/
+    /**查询的科室名称*/
     private String bmSName;
 
-    /** 搜索设备名称 */
+    /** 查询设备名称 */
     private String eqSName;
 
     /**设备编号*/

@@ -37,7 +37,7 @@ public interface IntegrityDAO {
     Integer deleteIntegrity();
 
     /**
-     * 按条件搜索设备的完好率
+     * 按条件查询设备的完好率
      * @param searchVO 设备的完好率条件
      * @return 设备的完好率
      */

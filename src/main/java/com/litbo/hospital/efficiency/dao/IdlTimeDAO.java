@@ -17,14 +17,14 @@ import java.util.List;
 public interface IdlTimeDAO {
 
     /**
-     * 默认搜索一月的数据
+     * 默认查询一月的数据
      * @return 工作日闲置时间
      */
     @SelectProvider(type = IdlTimeProvider.class,method = "selectIdlTime")
     List<IdlTimeVO> selectIdlTime();
 
     /**
-     * 按条件搜索设备的工作日闲置时间
+     * 按条件查询设备的工作日闲置时间
      * @param searchVO  工作日闲置时间条件
      * @return  工作日闲置时间
      */

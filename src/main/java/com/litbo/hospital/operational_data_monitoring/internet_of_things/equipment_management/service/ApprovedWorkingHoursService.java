@@ -26,7 +26,7 @@ public interface ApprovedWorkingHoursService {
     PageInfo selectAll(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
     /**根据条件筛选核定工时设置信息*/
     PageInfo showEqApproBy(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, SearchVO searchVO);
-    /**根据id查找*/
+    /**根据id查询*/
     ApprovedWorkingHoursVO getById(String id);
     /**根据id修改*/
     void update(ApprovedWorkingHours approvedWorkingHours);

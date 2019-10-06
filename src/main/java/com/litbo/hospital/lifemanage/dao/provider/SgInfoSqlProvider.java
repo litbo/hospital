@@ -374,15 +374,15 @@ public class SgInfoSqlProvider {
             FROM("dbo.sg_info\n" +
                     "INNER JOIN dbo.eq_pm ON dbo.sg_info.eq_pm_id = dbo.eq_pm.eq_pm_id\n" +
                     "INNER JOIN dbo.s_bm ON dbo.sg_info.bm_id = dbo.s_bm.bm_id");
-            //科室查找
+            //科室查询
             if (StringUtils.isNotBlank(bmId)) {
                 WHERE(" dbo.sg_info.bm_id = #{bmId,jdbcType=VARCHAR} ");
             }
-            //通过申购单编号查找
+            //通过申购单编号查询
             if (StringUtils.isNotBlank(bh)) {
                 WHERE(" dbo.sg_info.bh = #{bh,jdbcType=VARCHAR} ");
             }
-            //通过设备拼音码查找
+            //通过设备拼音码查询
             if (StringUtils.isNotBlank(sbPym)) {
                 WHERE(" pym like #{sbPym,jdbcType=VARCHAR} ");
             }

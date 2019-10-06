@@ -12,7 +12,7 @@ import com.litbo.hospital.efficiency.vo.SearchVO;
 public interface IntegrityService {
 
     /**
-     * 默认搜索完好率
+     * 默认查询完好率
      * @param pageNum 页码
      * @param pageSize 大小
      * @return  返回值
@@ -20,10 +20,10 @@ public interface IntegrityService {
     PageInfo selectIntegrity(int pageNum, int pageSize);
 
     /**
-     * 按条件搜索完好率
+     * 按条件查询完好率
      * @param pageNum 页码
      * @param pageSize 大小
-     * @param searchVO 搜索的关键词
+     * @param searchVO 查询的关键词
      * @return 返回值
      */
     PageInfo selectIntegrityByCon(int pageNum, int pageSize, SearchVO searchVO);

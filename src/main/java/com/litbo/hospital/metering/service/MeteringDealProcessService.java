@@ -18,12 +18,12 @@ public interface MeteringDealProcessService {
     // 添加报表，返回报表的id
     int addForm(MeteringApprovalForm meteringApprovalForm);
 
-    // 查找报表
+    // 查询报表
     List<MeteringApprovalForm> searchApprovalForm(String recordBeginTime, String recordEndTime,
                                                   String department, String status,
                                                   String dealBeginTime,String dealEndTime);
 
-    // 根据流程中的id字符串查找所有的设备信息
+    // 根据流程中的id字符串查询所有的设备信息
     List<MeteringUtil> findUtilByProcess(String ids);
 
     // 根据流程找到这个流程中的报表
@@ -36,13 +36,13 @@ public interface MeteringDealProcessService {
     // 添加流程
     int addProcess(MeteringDealProcess meteringDealProcess);
 
-    // 查找已处理流程
+    // 查询已处理流程
     List<MeteringDealProcess> searchFormProcess(String recordBeginTime, String recordEndTime,
                                                   String department, String status,
                                                   String dealBeginTime,String dealEndTime);
 
 
-    // 查找未处理流程
+    // 查询未处理流程
     List<MeteringDealProcess> searchFormProcessNot(String recordBeginTime, String recordEndTime,String department);
 
     MeteringDealProcess selectMeteringDealProcessByPrimaryKey(int id);
