@@ -3056,16 +3056,49 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "6040",
-                "shiro": "PBGL"
+                "shiro": "PBGL",
+                "children": [
+                  {
+                    "title": "排班",
+                    "url": "./admin/basic-management/dayToDay-management/Scheduling.html",
+                    "id": "604040",
+                    "shiro": "PBGL"
+                  },
+                  {
+                    "title": "值班",
+                    "url": "./admin/basic-management/dayToDay-management/beOnDuty.html",
+                    "id": "60401",
+                    "shiro": "PBGL"
+                  },
+                  {
+                    "title": "统计",
+                    "url": "./admin/basic-management/dayToDay-management/theStatisticsOnDuty.html",
+                    "id": "60402",
+                    "shiro": "PBGL"
+                  }
+              ]
               },
               {
                 "title": "考勤管理",
                 "url": "./table.html",
                 "icon": "pencil-alt",
                 "id": "6041",
-                "shiro": "KQGL"
+                "shiro": "KQGL",
+                "children": [
+                  {
+                    "title": "签到",
+                    "url": "./admin/basic-management/dayToDay-management/signDesk.html",
+                    "id": "60410",
+                    "shiro": "KQGL"
+                  },
+                  {
+                    "title": "统计",
+                    "url": "./admin/basic-management/dayToDay-management/signInStatistics.html",
+                    "id": "60411",
+                    "shiro": "KQGL"
+                  }
+                ]
               }
-
             ]
           }
 

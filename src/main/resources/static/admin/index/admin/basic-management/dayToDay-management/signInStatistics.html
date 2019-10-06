@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>签到统计</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+<script type="text/html" id="toolBar">
+    <div class="moreBtn hidden-xs" >
+        <div class="layui-inline">
+            <input class="layui-input" name="name" placeholder="编号" autocomplete="off">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="name" placeholder="名字" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+    </div>
+</script>
+<script>
+    renderMod = {
+        addTable: {
+            table: {
+                cols: [[ //表头
+                    {type:"checkbox"}
+                    , {field: 'bianHao', title: '编号', minWidth: 200}
+                    , {field: 'name', title: '名字', minWidth: 200}
+                    , {field: 'name', title: '出勤次数', minWidth: 200, sort: true}
+                    , {field: 'name', title: '迟到次数', minWidth: 200, sort: true}
+                    , {field: 'name', title: '请假次数', minWidth: 200, sort: true}
+                    , {field: 'name', title: '早退次数', minWidth: 200, sort: true}
+
+                ]]
+                /*   , url: "/supervise/gwgl/listGws"*/
+                ,id:"table"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list ,//解析数据列表
+                        "count":res.data.total
+                    }
+                }
+
+                , done: function (obj) {
+
+                }
+            },
+
+            reSet:{
+                url:"",
+                type:"reload",
+                method: "post",
+                data:["name"]
+
+            }
+
+        },
+    }
+</script>
+</body>
+</html>
