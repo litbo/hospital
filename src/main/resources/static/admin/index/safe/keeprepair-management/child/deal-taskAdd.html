@@ -51,11 +51,11 @@
 <script>
 
     var id = localStorage.getItem("dealId")
-    $.ajax({
-        url:"/maintenance/seePlanContent.do?id="+id,
-        success:function(result){
-            localStorage.setItem("dealContent",JSON.stringify(result))
-        }});
+    // $.ajax({
+    //     url:"/maintenance/seePlanContent.do?id="+id,
+    //     success:function(result){
+    //         localStorage.setItem("dealContent",JSON.stringify(result))
+    //     }});
 
     var res1 = localStorage.getItem("dealContent");
     renderMod = {
@@ -70,8 +70,9 @@
                     , {field: 'implementerType', title: '实施人类型', minWidth: 120}
                     , {title: '操作', align: 'center', toolbar: '#barDemo'}
                 ]]
-                ,data:JSON.parse(res1).data.projects
+                , url:"/maintenance/seePlanContent.do?id="+id
                 , parseData: function (res) { //res 即为原始返回的数据
+                    console.log(res);
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
@@ -80,6 +81,7 @@
                     }
                 }
                 , done: function (obj,index) {
+
                     tableFunc({
                         tools:[
                         {
