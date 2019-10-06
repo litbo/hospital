@@ -122,7 +122,7 @@ public interface EmpDao {
     public String getBmIdByUserId(String userId);
 
     @Select("select user_id from s_emp where user_xm like #{xm}")
-    List<String> getIdByXm(String xm);
+    List<String> getIdByXm(@Param("xm") String xm);
     @Select("select count(*) from s_emp where qzzp like '%'+#{empQzzpfileName}+'%'")
     Integer countEmpByQzzpName(String empQzzpfileName);
 }

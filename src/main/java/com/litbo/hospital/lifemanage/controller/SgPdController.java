@@ -5,14 +5,16 @@ import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
 import com.litbo.hospital.result.Result;
 import io.swagger.annotations.Api;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/lifeManage")
+@RequestMapping(value = "/lifeManage")
 @Api(tags = "离线盘点")
 public class SgPdController {
     @Autowired
@@ -24,13 +26,19 @@ public class SgPdController {
      * @return
      * @throws IOException
      */
-    @PostMapping("/uploadPd")
-    public Result uploadPdScan(MultipartFile multipartFile) throws IOException {
+    @PostMapping(value = "/uploadPd")
+//    @RequestMapping(value = "/uploadPd")
+    @ResponseBody
+    public Result uploadPdScan(@Param("multipartFile") MultipartFile multipartFile) throws IOException {
+        System.out.println("bbb");
         if (!multipartFile.isEmpty()) {
             SgPdVO sgPdVO;
             byte[] bytes = multipartFile.getBytes();
             String s = new String(bytes, 0, bytes.length);
             System.out.println(s);
+            System.out.println("------------------");
+            System.out.println("------------------");
+            System.out.println("------------------");
             sgPdVO = JSON.parseObject(s, SgPdVO.class);
             return Result.success(sgPdService.insertPdId(sgPdVO));
         } else {

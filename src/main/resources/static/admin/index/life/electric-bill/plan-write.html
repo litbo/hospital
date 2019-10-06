@@ -133,15 +133,12 @@
         function CurentTime()
         {
             var now = new Date();
-
             var year = now.getFullYear();       //年
             var month = now.getMonth() + 1;     //月
             var day = now.getDate();            //日
-
             var hh = now.getHours();            //时
             var mm = now.getMinutes();          //分
             var ss = now.getSeconds();           //秒
-
             var clock = year + "-";
             if(month < 10)
                 clock += "0";
@@ -154,31 +151,24 @@
             clock += hh + ":";
             if (mm < 10) clock += '0';
             clock += mm + ":";
-
             if (ss < 10) clock += '0';
             clock += ss;
             return(clock);
         }
-
         $("#planTime").val(CurentTime());
     });
-
     // 表单
     layui.use(['form'], function(){
-
         var form = layui.form
             ,layer = layui.layer;
-
         form.on('submit(demo1)', function(data){
-
             layer.alert(JSON.stringify(data.field), {
                 title: '最终的提交信息'
             });
-
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: '/lifeManage/insertPlan',
+                url: '/Check/planWork',
                 data: JSON.stringify(data.field),
                 contentType: 'application/json; charset=UTF-8',
                 success: function(result) {
@@ -187,7 +177,6 @@
                     // setTimeout(function () {
                     //     window.parent.location.reload();
                     // },1000)
-
                 },
                 error:function(){
                     alert("error");
@@ -196,7 +185,6 @@
             return false;
         });
     });
-
     renderMod.btn={
         elem:"#chooseBm",
         func:function(){
@@ -210,7 +198,6 @@
             });
         }
     };
-
 </script>
 </body>
 
