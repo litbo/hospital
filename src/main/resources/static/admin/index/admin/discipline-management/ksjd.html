@@ -25,10 +25,12 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <input class="layui-input" name="userXm" placeholder="科室名称" autocomplete="off">
+            <select name="bmName" lay-filter="bmName">
+                <option value="">全部科室</option>
+            </select>
         </div>
         <div class="layui-inline">
-            <input class="layui-input" name="bmName" placeholder="团队名称" autocomplete="off">
+            <input class="layui-input" name="tdName" placeholder="团队名称" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
@@ -69,13 +71,26 @@
             },
 
             reSet:{
-                url:"",
+                url:"/sybm/ksgl/getEstablishJd",
                 type:"search",
-                data:["",""],
+                data:["bmName","tdName"],
                 where: {
 
                 }
 
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmName",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
             }
         }
     }

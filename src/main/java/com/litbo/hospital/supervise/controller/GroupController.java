@@ -199,9 +199,12 @@ public class GroupController {
 
     @GetMapping("/getEstablishJd")
     public Result getEstablishJd(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+                                 @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                 @RequestParam(name="tdName",required = false)String tdName,
+                                 @RequestParam(name="bmName",required = false)String bmName
+                                 ){
 
-        PageInfo info = groupService.getEstablishJd(pageNum,pageSize);
+        PageInfo info = groupService.getEstablishJd(pageNum,pageSize,tdName,bmName);
 
         return Result.success(info);
     }

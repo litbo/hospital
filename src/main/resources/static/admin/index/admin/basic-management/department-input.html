@@ -35,7 +35,6 @@
 
                         <select name="bmSName" lay-filter="select" lay-search="">
                             <option value="">请选择科室</option>
-
                         </select>
 
                     </div>
@@ -123,6 +122,17 @@
                     console.log("index:"+index);
                     console.log("upload"+upload);
                 }
+            },
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "select",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
             }
         },
         btn:[

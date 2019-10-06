@@ -39,7 +39,9 @@
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input class="layui-input" name="bmName" placeholder="科室名称">
+                        <select name="bmName" lay-filter="bmName">
+                            <option value="">全部科室</option>
+                        </select>
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10" align="center">
                         <button class="layui-btn" data-type="reload">查询</button>
@@ -119,6 +121,19 @@
                 type: "reload",
                 method: "GET",
                 data: ["bmName","iCode"]
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmName",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
             }
         }
     }
