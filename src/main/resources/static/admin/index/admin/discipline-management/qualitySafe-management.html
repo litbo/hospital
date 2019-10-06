@@ -26,8 +26,10 @@
 <script type="text/html" id="toolBar">
 
     <div class="moreBtn hidden-xs" >
-        <div class="layui-inline">
-            <input class="layui-input" name="bmName" placeholder="科室" autocomplete="off">
+        <div class="layui-input-inline">
+            <select name="bmName" lay-filter="bmId">
+                <option value="">全部科室</option>
+            </select>
         </div>
         <button class="layui-btn" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
@@ -83,6 +85,19 @@
                 where: {
 
                 }
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/department/showList"
+                    }
+                ]
             }
         }
     }
