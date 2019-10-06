@@ -527,19 +527,19 @@
                 "url": "./table.html",
                 "icon": "search",
                 "id": "3100",
-                "shiro": "a",
+                "shiro": "CZGCGL",
                 "children": [
                   {
                     "title": "编写",
                     "url": "./life/use-management/edit-rule.html",
                     "id": "31000",
-                    "shiro": "a"
+                    "shiro": "CZGCBX"
                   },
                   {
                     "title": "审核",
                     "url": "./life/use-management/test-rule.html",
                     "id": "31001",
-                    "shiro": "a"
+                    "shiro": "CZGCSH"
                   }
                 ]
               },
@@ -547,20 +547,20 @@
                 "title": "操作规程模板",
                 "url": "javascript",
                 "icon": "pencil-alt",
-                "shiro": "a",
+                "shiro": "CZGCMB",
                 "id": "3101",
                 "children": [
                   {
                     "title": "模板列表",
                     "url": "./life/use-management/modern-list.html",
                     "id": "31010",
-                    "shiro": "a"
+                    "shiro": "CZGCMBLB"
                   },
                   {
                     "title": "录入模板",
                     "url": "./life/use-management/modern-edit.html",
                     "id": "31011",
-                    "shiro": "a"
+                    "shiro": "CZGCLRMB"
                   }
                 ]
               },
@@ -569,7 +569,7 @@
                 "url": "./life/use-management/statistical-querys.html",
                 "icon": "comment-alt",
                 "id": "3102",
-                "shiro": "a"
+                "shiro": "CZGCTJCX"
               }
             ]
           },
