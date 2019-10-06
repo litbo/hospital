@@ -26,7 +26,9 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
+            <select name="bmName" lay-filter="bmId">
+                <option value="">全部科室</option>
+            </select>
         </div>
         <div class="layui-inline">
             <input type="text" name="userId" class="layui-input" autocomplete="off" placeholder="员工编号">
@@ -62,6 +64,12 @@
                         ids:"bmId",
                         text:"bmName",
                         url:"/supervise/bmgl/listBms2"
+                    },
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/department/showList"
                     }
                 ]
             }

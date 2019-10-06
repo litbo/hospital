@@ -14,11 +14,7 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
-    <style>
-        .layui-inline{
-            width:140px;
-        }
-    </style>
+
 </head>
 
 <body style="background-color: #f2f2f2;">
@@ -34,7 +30,9 @@
             <button class="layui-btn" lay-event="qchf">清除划分</button>
         </div>
         <div class="layui-inline">
-            <input type="text" name="bmName" class="layui-input" autocomplete="off" placeholder="科室名称">
+            <select name="bmName" lay-filter="bmId">
+                <option value="">全部科室</option>
+            </select>
         </div>
         <div class="layui-inline">
             <input type="text" name="userXm" class="layui-input" autocomplete="off" placeholder="工程师">
@@ -98,6 +96,19 @@
                 where: {
 
                 }
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/department/showList"
+                    }
+                ]
             }
         }
     }
