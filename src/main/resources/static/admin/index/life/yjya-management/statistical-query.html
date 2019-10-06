@@ -15,7 +15,11 @@
 <body style="background-color: #f2f2f2;">
 
 <!-- 表格 -->
-<table class="layui-hide" id="table" lay-filter="table1"></table>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
 
 <p style="margin-bottom: 50px;float: right;margin-right: 20px;font-size:17px;color:#666;">
     预案合计：<span style="color:#666" id="yahj"></span>件&nbsp;
@@ -55,15 +59,11 @@
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
-            <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
         </div>
     </form>
     <hr class="devideHr">
     <div class="addBtn">
-
-        <button class="layui-btn layui-btn-sm" lay-event="delAll" style="background-color: #cc0033;">
-            <i class="layui-icon">弃用</i>
-        </button>
+        <button class="layui-btn layui-btn-sm deli" lay-event="delAll"><i class="layui-icon">弃用</i></button>
     </div>
 </script>
 

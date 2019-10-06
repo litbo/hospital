@@ -4,7 +4,9 @@ import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
 import com.litbo.hospital.result.Result;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -39,13 +41,18 @@ public class SgPlanController {
      * @param pageSize 每页记录数
      * @return Result
      */
-    @PostMapping("/selectPlan")
+    @RequestMapping(  value = "/selectPlan")
     public Result selectPlan(
+//            @Param("planName")String planName, @Param("planDate" )String planDate,@Param("userName") String userName,
+//            @Param("pageNum") Integer pageNum,@Param(value = "pageSize")Integer pageSize)
             @RequestParam(name = "planName",required = false) String planName,
             @RequestParam(name = "planDate",required = false) String planDate,
             @RequestParam(name = "userName",required = false) String userName,
             @RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pageSize) {
+            @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pageSize)
+    {
+        pageNum =1;
+        pageSize=10;
         return Result.success(sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize));
     }
 

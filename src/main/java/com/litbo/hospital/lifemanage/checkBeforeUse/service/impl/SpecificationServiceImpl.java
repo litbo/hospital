@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service("SpecificationService")
 public class SpecificationServiceImpl implements SpecificationService {
@@ -25,12 +28,35 @@ public class SpecificationServiceImpl implements SpecificationService {
     private SpecificationDao specificationDao;
 
     @Override
-    public PageInfo<EqInfoVO> searchEqInfos(@RequestParam(name="pageNum",required = false,defaultValue = "1")Integer pageNum,
+    public PageInfo<EqInfoVO2> searchEqInfos(@RequestParam(name="pageNum",required = false,defaultValue = "1")Integer pageNum,
                                         @RequestParam(name="pageSize",required = false,defaultValue = "10")Integer pageSize) {
 
         PageHelper.startPage(pageNum, pageSize);
-        List<EqInfoVO> eqInfoVOS = eqInfoDAO.selectAll();
-        PageInfo<EqInfoVO> eqInfoVOPageInfo = new PageInfo<>(eqInfoVOS);
+
+
+        List<EqInfoVO2> eqInfoVO2s = specificationDao.searchAllEqInfo();
+        List<SearchStandardEqVo> searchAllStandardEqVos = specificationDao.searchAllStandardEqVos();
+        for (SearchStandardEqVo s : searchAllStandardEqVos){
+            eqInfoVO2s.removeIf(a->a.getEqSbbh().equals(s.getEqSbbh()));
+            if (s.getApplicableEquipment().equals("同类设备")){
+                eqInfoVO2s.removeIf(a->a.getEqSbbh().substring(4,14).equals(s.getEqSbbh().substring(4,14)));
+            }else if (s.getApplicableEquipment().equals("同厂家同型号")){
+                eqInfoVO2s.removeIf(a->{
+                    if (a.getSbcsIdScs() == null || a.getEqGg() == null || a.getEqXh() == null || s == null)
+                        return false;
+                    else{
+                        if ((a.getEqXh().equals(s.getEqXh()) && a.getSbcsIdScs().equals(s.getSbcsIdScs())
+                                && a.getEqGg().equals(s.getEqGg())))
+                            return true;
+                        else
+                            return false;
+                    }
+                });
+            }else{
+                eqInfoVO2s.removeIf(a->true);
+            }
+        }
+        PageInfo<EqInfoVO2> eqInfoVOPageInfo = new PageInfo<>(eqInfoVO2s);
         return eqInfoVOPageInfo;
     }
 
@@ -324,5 +350,110 @@ public class SpecificationServiceImpl implements SpecificationService {
             });
         PageInfo<SearchStandardTaskVO> searchStandardTaskVOPageInfo = new PageInfo<>(searchStandardTaskVOS);
         return searchStandardTaskVOPageInfo;
+    }
+
+    @Override
+    public PageInfo<TaskEqVo> searchTaskEqs(int pageNum, int pageSize, String bmId,int r) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<TaskEqVo> taskEqVos = null;
+        if (r == 0)
+            taskEqVos = specificationDao.searchUnFinishedTaskEqs(bmId);
+        else
+            taskEqVos = specificationDao.searchFinishedTaskEqs(bmId);
+
+        PageInfo<TaskEqVo> taskEqVoPageInfo = new PageInfo<>(taskEqVos);
+        return taskEqVoPageInfo;
+    }
+
+
+    @Override
+    public List<SearchStandardTaskVO> searchUnFinishedEqTask(String eqSbbh) {
+        return specificationDao.searchTodayUnfinishedStandardTaskByEqSbbh(eqSbbh);
+    }
+
+    @Override
+    public List<SearchStandardTaskVO> searchFinishedEqTask(String eqSbbh) {
+        List<SearchStandardTaskVO> searchStandardTaskVOS = specificationDao.searchTodayFinishedStandardTaskByEqSbbh(eqSbbh);
+        searchStandardTaskVOS.forEach(a->{
+            if (a.getOperationId().equals("01")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("正常");
+                else
+                    a.setResultName("不正常");
+            }else if (a.getOperationId().equals("02")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("进行");
+                else
+                    a.setResultName("未进行");
+            }else if (a.getOperationId().equals("03")){
+                if (a.getTaskResult() == 1)
+                    a.setResultName("处理");
+                else
+                    a.setResultName("未处理");
+            }
+        });
+        return searchStandardTaskVOS;
+    }
+
+
+
+    @Override
+    public int saveTaskResult(List<SearchStandardTaskVO> list) {
+        list.forEach(l->{
+            specificationDao.updateStandardTaskResult(l.getTaskId(),l.getTaskResult(),l.getOperatorNumber());
+        });
+        return 0;
+    }
+
+
+    @Override
+    public List<BmTaskEqVO> searchBmTaskEqsByDay(){
+        List<BmTaskEqVO> list = specificationDao.searchAllTaskBm();
+        list.forEach(bte->{
+            bte.setDate(LocalDate.now().minusDays(1));
+            int eqTotal = specificationDao.searchEqTotal(bte.getBmId(),LocalDate.now().minusDays(1));
+            bte.setTotalEqs(eqTotal);
+            int notDoneTotal = specificationDao.searchNotDoneEqTotal(bte.getBmId(),LocalDate.now().minusDays(1));
+            bte.setDoneEqs(eqTotal - notDoneTotal);
+            bte.setEnforced((eqTotal-notDoneTotal)*1.0/eqTotal);
+        });
+
+        return list;
+    }
+
+
+    @Override
+    public List<BmTaskEqVO> searchUseForBmEqByDate(LocalDate startDate, LocalDate endDate,String bmId,String bmName) {
+        List<BmTaskEqVO> list = new ArrayList<>();
+        long distance = ChronoUnit.DAYS.between(startDate, endDate);
+        if (distance < 1) {
+            return list;
+        }
+        Stream.iterate(startDate, d -> {
+            return d.plusDays(1);
+        }).limit(distance + 1).forEach(f -> {
+            BmTaskEqVO bte = new BmTaskEqVO();
+
+            bte.setBmId(bmId);
+            bte.setBmName(bmName);
+            bte.setDate(f);
+
+            Integer eqTotal = specificationDao.searchEqTotal(bte.getBmId(),f);
+            if (eqTotal == null)
+                eqTotal = 0;
+            bte.setTotalEqs(eqTotal);
+            Integer notDoneTotal = specificationDao.searchNotDoneEqTotal(bte.getBmId(),f);
+            if (notDoneTotal == null)
+                notDoneTotal = 0;
+            bte.setDoneEqs(eqTotal - notDoneTotal);
+            if (eqTotal == 0)
+                bte.setEnforced(0);
+            else
+                bte.setEnforced((eqTotal-notDoneTotal)*1.0/eqTotal);
+
+
+            list.add(bte);
+        });
+        return list;
     }
 }

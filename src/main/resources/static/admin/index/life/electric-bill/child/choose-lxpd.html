@@ -61,13 +61,13 @@
         //选完文件后不自动上传
         upload.render({
             elem: '#selectFile'
-            // ,url: '/lifeManage/uploadPd'
+            ,url: '/lifeManage/uploadPd'
             ,auto: false
             ,accept: 'file' //普通文件
-            //,multiple: true
+            ,multiple: true
             ,bindAction: '#startUploadFile'
             ,done: function(res){
-                // console.log(res)
+                console.log(res)
             }
         });
         //监听提交

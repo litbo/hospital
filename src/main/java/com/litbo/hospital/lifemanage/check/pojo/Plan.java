@@ -6,13 +6,24 @@ import java.util.Date;
 import java.util.List;
 
 public class Plan {
+    @Override
+    public String toString() {
+        return "Plan{" +
+                "id='" + id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", bm_id='" + bm_id + '\'' +
+                ", plan_name='" + plan_name + '\'' +
+                ", plan_date=" + plan_date +
+                '}';
+    }
+
     /*
-    * id	主键
-2	user_id	制定人id
-3	bm_id	科室id
-4	plan_name   计划名称
-5	plan_date	计划时间
-*/
+        * id	主键
+    2	user_id	制定人id
+    3	bm_id	科室id
+    4	plan_name   计划名称
+    5	plan_date	计划时间
+    */
     private String id;
     private String user_id;
     private String bm_id;

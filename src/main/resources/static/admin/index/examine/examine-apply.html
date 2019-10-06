@@ -124,37 +124,37 @@
                         shyy:$("textarea[name='shyy']").val()
                     },
                     success:function(res){
-                       /* if(res.code==1){
+                        /* if(res.code==1){
 
-                            layer.alert(res.msg+"   是否申购？")
-                        }*/
-                       if(res.code==1){
-                           layer.open({
-                               type: 1
-                               ,title: false //不显示标题栏
-                               ,closeBtn: false
-                               ,area: '250px;'
-                               // ,shade: 0.8
-                               ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                               ,btn: ['确定', '取消']
-                               ,btnAlign: 'c'
-                               ,moveType: 0 //拖拽模式，0或者1
-                               ,content: '<div style="padding: 50px; line-height: 22px; /*background-color: #393D49;*/ /*color: #fff;*/ font-weight: 300;">'+res.msg+'<br>是否跳转配件申购界面？</div>'
-                               ,success: function(layero){
-                                   var btn = layero.find('.layui-layer-btn');
-                                   btn.find('.layui-layer-btn0').attr({
-                                       href: '/admin/index/safe/service-management/accessories-purchase.html/'
-                                       // ,target: '_blank'
-                                   });
-                               }
-                           });
-                       }
-                       if(res.code==0){
-                           layer.alert("请求成功");
-                           setTimeout(function () {
-                               window.parent.location.reload();
-                           },1000)
-                       }
+                             layer.alert(res.msg+"   是否申购？")
+                         }*/
+                        if(res.code==1){
+                            layer.open({
+                                type: 1
+                                ,title: false //不显示标题栏
+                                ,closeBtn: false
+                                ,area: '250px;'
+                                // ,shade: 0.8
+                                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                                ,btn: ['确定', '取消']
+                                ,btnAlign: 'c'
+                                ,moveType: 0 //拖拽模式，0或者1
+                                ,content: '<div style="padding: 50px; line-height: 22px; /*background-color: #393D49;*/ /*color: #fff;*/ font-weight: 300;">'+res.msg+'<br>是否跳转配件申购界面？</div>'
+                                ,success: function(layero){
+                                    var btn = layero.find('.layui-layer-btn');
+                                    btn.find('.layui-layer-btn0').attr({
+                                        href: '/admin/index/safe/service-management/accessories-purchase.html/'
+                                        // ,target: '_blank'
+                                    });
+                                }
+                            });
+                        }
+                        if(res.code==0){
+                            layer.alert("请求成功");
+                            setTimeout(function () {
+                                window.parent.location.reload();
+                            },1000)
+                        }
 
                     },
                     shutWin:true

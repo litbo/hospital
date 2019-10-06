@@ -74,13 +74,11 @@
 
         </div>
     </div>
-    <div class="col-xs-12">
-        <div class="layui-form-item" style="margin:20px 0;">
+
             <button class="layui-btn" lay-submit=""
-                    lay-filter="submit" id="sub" onclick="submit()">提交
+                    lay-filter="submit" id="sub" style="float: right;margin-right:  20%;">提交
             </button>
-        </div>
-    </div>
+
 
 </form>
 <div id="tips"></div>
@@ -88,7 +86,6 @@
     var new1 = {}, da = [],dealDataAll = [];
     var formData = {};
 
-    function submit(){
         var productName = document.getElementById("productName");
         var cycle = document.getElementById("cycle");
         var expired = document.getElementById("expired");
@@ -96,72 +93,55 @@
         var dateOfActivation = document.getElementById("dateOfActivation");
         var changeDate = document.getElementById("changeDate");
 
-        $.ajax({
-            url: "/maintenance/addConsumables.do",
-            success: function (result) {
-                localStorage.setItem("dealContent", JSON.stringify(result))
-            },
-            data:{
-                productName:productName, // 名称
-                cycle:cycle,   //更换周期
-                expired:expired,  // 过期、更换
-                notExpired:notExpired,  // 未过期
-                dateOfActivation:dateOfActivation,   // 起用日期
-                changeDate:changeDate  // 更换日期
-            }
-        });
-    }
-
-
     renderMod = {
-        btn: [
-            {
-                elem: '#sub',
-                func: function (obj, data) {
-                    if ($("#productName").val() === ""||$("#cycle").val()===""||$("#expired").val()===""||$("#notExpired").val()===""
-                        ||$("#dateOfActivation").val()===""||$("#changeDate").val()===""){
-                        attr();
-                        return;
-                    }
+        formAction:{
+            submit: {
+                form: {
+                    url: "/maintenance/addConsumables.do",
+                    type: "POST",
+                    data: [
+                        "productName", // 名称
+                        "cycle",   //更换周期
+                        "expired",  // 过期、更换
+                        "notExpired",  // 未过期
+                        "dateOfActivation",   // 起用日期
+                        "changeDate"  // 更换日期
+                    ],
+                        done: function (obj, data) {
+                            if ($("#productName").val() === ""||$("#cycle").val()===""||$("#expired").val()===""||$("#notExpired").val()===""
+                                ||$("#dateOfActivation").val()===""||$("#changeDate").val()===""){
+                                attr();
+                                return;
+                            }
+                        new1 =
+                            getFormValue(["productName","cycle","expired","notExpired","dateOfActivation","changeDate"],{},true);
+                        var key = $.getUrlParam('key');
+                        da.push(new1);
+                        layui.sessionData($.getUrlParam('vg'), {  // var dealData = JSON.parse(localStorage.getItem("dealAddData"))
+                            // console.log(dealData)
+                            // dealData.push(new1)
+                            // localStorage.setItem("dealAddData",JSON.stringify(dealData));
+                            // console.log("localstory里面保存的数据："+dealData)
+                            key: key,
+                            value: da
+                        });
+                        if(localStorage.getItem("dealAddData") != null){
 
-                    // productName; // 名称
-                    // cycle;   //更换周期
-                    // expired;  // 过期、更换
-                    // notExpired;  // 未过期
-                    // dateOfActivation;   // 起用日期
-                    // changeDate;  // 更换日期
 
+                        }else{
+                            var dealData = localStorage.setItem("dealAddData",new1);
+                            console.log(dealDataAll)
+                        }
 
+                        console.log(da)
 
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    },
 
-                    new1 =
-                        getFormValue(["productName","cycle","expired","notExpired","dateOfActivation","changeDate"],{},true);
-                    var key = $.getUrlParam('key');
-                    da.push(new1);
-                    layui.sessionData($.getUrlParam('vg'), {  // var dealData = JSON.parse(localStorage.getItem("dealAddData"))
-                        // console.log(dealData)
-                        // dealData.push(new1)
-                        // localStorage.setItem("dealAddData",JSON.stringify(dealData));
-                        // console.log("localstory里面保存的数据："+dealData)
-                        key: key,
-                        value: da
-                    });
-                    if(localStorage.getItem("dealAddData") != null){
-
-
-                    }else{
-                        var dealData = localStorage.setItem("dealAddData",new1);
-                        console.log(dealDataAll)
-                    }
-
-                    console.log(da)
-
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);
                 },
-
-            }
-        ],
+                }
+            },
     };
 
 </script>

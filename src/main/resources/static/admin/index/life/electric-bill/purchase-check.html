@@ -34,11 +34,19 @@
         <div class="addBtn">
             <a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailYes">核对存在</a>
             <a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailNo">核对不存在</a>
-            <a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailIn">核对录入</a>
+            <a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailIn">核对多余</a>
         </div>
     </form>
-
 </script>
+
+<script type="text/html" id="jsonChange">
+    {{#if (d.yjyaZt == 1) { }}
+    <span class="layui-btn layui-btn-xs">存在</span>
+    {{# }else if(d.yjyaZt == 0){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">不存在</span>
+    {{# } }}
+</script>
+
 <script>
     renderMod = {
         addTable: {
@@ -53,7 +61,7 @@
                         , {field: 'eqXh', title: '型号', minWidth: 150}
                         , {field: 'date', title: '审核日期', minWidth: 200, sort: true}
                         , {field: 'userId', title: '审核人', minWidth: 150}
-                        , {field: 'checks', title: '是否存在', minWidth: 150}
+                        , {field: 'checks', title: '是否存在', toolbar: '#jsonChange', minWidth: 150}
                     ]]
                     , url: "/lifeManage/selectSgCheck"
                     , method: "POST"
@@ -108,6 +116,13 @@
                                     },
                                     tool: "toolbar",
                                     event: "detailNo"
+                                },
+                                {
+                                    event:"detailIn",
+                                    type:2,
+                                    tool: "toolbar",
+                                    content:"child/detailIn.html",
+                                    dataUrl:["id"]
                                 }
                             ]
                         })

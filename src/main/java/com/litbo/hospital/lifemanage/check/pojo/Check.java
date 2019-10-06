@@ -14,6 +14,8 @@ user_id
 checks
 plan_id
 */
+
+
     private String id;
     private String eq_id;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
@@ -71,5 +73,18 @@ plan_id
 
     public String getPlan_id() {
         return plan_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Check{" +
+
+                ", id='" + id + '\'' +
+                ", eq_id='" + eq_id + '\'' +
+                ", date=" + date +
+                ", user_id='" + user_id + '\'' +
+                ", checks='" + checks + '\'' +
+                ", plan_id='" + plan_id + '\'' +
+                '}';
     }
 }

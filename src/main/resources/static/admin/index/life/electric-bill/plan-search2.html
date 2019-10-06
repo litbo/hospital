@@ -35,16 +35,20 @@
 <script type="text/html" id="bar">
 
     <div class="layui-inline">
-        <label class="layui-form-label col-sm-12">盘点计划：<span>0000</span></label>
+        <a lay-event="allP" class="layui-btn layui-btn-sm">盘点计划:<span>0000</span></a>
     </div>
-    <a lay-event="allP" class="layui-btn layui-btn-sm">目录</a>
 
     <div class="layui-inline">
-        <label class="layui-form-label col-sm-12">已盘：<span>0000</span></label>
+        <a lay-event="haveP" class="layui-btn layui-btn-sm editi">已盘:<span>0000</span></a>
     </div>
-    <a lay-event="haveP" class="layui-btn layui-btn-sm editi">目录</a>
-    <a lay-event="another" class="layui-btn layui-btn-sm addi">盘盈：<span>0000</span></a>
-    <a lay-event="notnull" class="layui-btn layui-btn-sm deli">盘亏：<span >0000</span></a>
+
+    <div class="layui-inline">
+        <a lay-event="another" class="layui-btn layui-btn-sm addi">盘盈：<span>0000</span></a>
+    </div>
+
+    <div class="layui-inline">
+        <a lay-event="notnull" class="layui-btn layui-btn-sm deli">盘亏：<span >0000</span></a>
+    </div>
 
 </script>
 <script type="text/html" id="cz">
@@ -62,7 +66,7 @@
                         , {field: 'bmId', title: '科室',minWidth: 100,templet:'#statusss'}
                         , {title: '操作',width: 100,align:'center',templet:'#cz'}
                         , {field: 'planDate', title: '制定日期',width: 110,templet:'#statussss'}
-                        , {title:'盘点结果显示',minWidth: 600,align:'center',toolbar: "#bar"}
+                        , {title:'盘点结果显示',minWidth: 400,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectPlan"
                     , method: "POST"
@@ -96,6 +100,7 @@
                                 event:"pipei",
                                 type:2,
                                 content:"child/choose-lxpd.html",
+                                area: ['700px', '400px'],
                                 dataUrl:["id"]
                             },{
                                 event:"haveP",

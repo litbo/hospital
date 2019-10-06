@@ -2,7 +2,9 @@ package com.litbo.hospital.lifemanage.dao.provider;
 
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;
@@ -67,7 +69,8 @@ public class SgPlanSqlProvider {
      * @param userId   制定人
      * @return sql
      */
-    public String selectPlan(String planName, Date planDate, List<String> userId) {
+//    @Autowired
+    public String selectPlan(@Param("planName") String planName, @Param("planDate") Date planDate, @Param("userId") List<String> userId) {
         SQL sql = new SQL();
         sql.SELECT("sg_plan.id, s_emp.user_xm as userId, s_bm.bm_name as bmId, sg_plan.plan_name,sg_plan.plan_date");
         sql.FROM("sg_plan");

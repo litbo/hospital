@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 public interface PlanService {
-
-    @Autowired
     public void insertPlan1(Plan plan);
 }
