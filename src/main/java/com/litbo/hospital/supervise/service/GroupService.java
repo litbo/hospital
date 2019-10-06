@@ -37,7 +37,7 @@ public interface GroupService {
     //通过岗位名称人员姓名科室名称联合模糊获取每个队伍相对应的人员信息
     PageInfo listPreEmpsByBmNameAndGwName(int pageNum, int pageSize, String gwName, String userXm, String bmName);
 
-    PageInfo getEstablishJd(int pageNum, int pageSize);
+    PageInfo getEstablishJd(int pageNum, int pageSize,String tdName,String bmName);
 
     void reSubmitGroups(GroupInsertDetailVO groupInsertDetailVO);
 }

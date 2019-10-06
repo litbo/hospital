@@ -27,7 +27,9 @@
 
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">
+            <select name="bmName" lay-filter="bmName">
+                <option value="">全部科室</option>
+            </select>
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="groupName" placeholder="团队名称" autocomplete="off">
@@ -91,6 +93,19 @@
 
             }
 
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmName",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
+            }
         }
     }
 </script>
