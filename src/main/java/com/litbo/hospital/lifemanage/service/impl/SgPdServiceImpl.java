@@ -1,5 +1,7 @@
 package com.litbo.hospital.lifemanage.service.impl;
 
+import cn.hutool.json.JSONObject;
+import com.alibaba.druid.support.json.JSONUtils;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.lifemanage.bean.SgPd;
 import com.litbo.hospital.lifemanage.bean.SgPdJg;
@@ -8,6 +10,7 @@ import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -82,7 +85,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
     }
 
     @Override
-    public Map<String, List> selectAllData(String pdJhid) {
+    public String selectAllData(String pdJhid) {
         List<String> pdScanList = sgPdMapper.selectAllData(pdJhid);
         SgPlan sgPlan = sgPlanMapper.selectByPrimaryKey(pdJhid);
         if (sgPlan == null) {
@@ -146,6 +149,24 @@ public class SgPdServiceImpl implements SgPdSeverice {
         result.put("notExistName",notExistName);
         result.put("bmPdZt",bmPdZt);
 
-        return result;
+
+//        List<String> keylist =new ArrayList<>(result.keySet());
+////        for(String key:keylist ){
+////            System.out.println(key);
+////        }
+//
+//        List<Object> valuesList = new ArrayList<Object>(result.values());
+//        for(Object str:valuesList){
+//            System.out.println(str);
+//        }
+//        System.out.println(valuesList.get(2));
+//        valuesList.get(3);
+
+
+        String msg=	JSONUtils.toJSONString(result);
+        System.out.println(msg);
+        System.out.println(msg.toString());
+
+        return msg;
     }
 }
