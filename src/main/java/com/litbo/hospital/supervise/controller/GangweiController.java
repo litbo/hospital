@@ -48,8 +48,7 @@ public class GangweiController {
     }
     @GetMapping("/listGws")
     public Result getGws(@RequestParam(value = "pageNum" ,required = false , defaultValue = "1") int pageNum,
-                         @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize,
-                         @RequestParam(name = "bmName",required = false)String bmName){
+                         @RequestParam(value = "pageSize",required = false ,defaultValue = "10") int pageSize){
         PageInfo date = gangweiService.getGws(pageNum,pageSize);
         return Result.success(date);
     }

@@ -31,7 +31,7 @@ public interface GroupService {
     //获得管理科室的基本详情信息通过科室名称
     PageInfo getGroupsMSGDetailByBmName(int pageNum, int pageSize, String bmName);
     //获得未成立管理团队的科室
-    PageInfo listWclGroupBm(int pageNum, int pageSize,String bmName);
+    PageInfo listWclGroupBm(int pageNum, int pageSize);
     //通过岗位名称获取每个队伍相对应的人员信息
     PageInfo listPreEmps(int pageNum, int pageSize, String gwName);
     //通过岗位名称人员姓名科室名称联合模糊获取每个队伍相对应的人员信息

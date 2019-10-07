@@ -3,10 +3,10 @@ package com.litbo.hospital.supervise.bean;
 import java.util.Date;
 
 public class SGangwei {
-
     private Integer gwId;
     private String gwName;
     private String gwLevel;
+
 
     private String gwZz;
     private String userId;

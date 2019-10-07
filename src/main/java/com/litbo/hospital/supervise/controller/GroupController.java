@@ -172,10 +172,9 @@ public class GroupController {
     //获得未成立科室
     @GetMapping("/listWclGroupBm")
     public Result listWclGroupBm(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                                     @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                                 @RequestParam(name="bmName" ,required = false) String bmName){
+                                     @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
 
-        PageInfo date =  groupService.listWclGroupBm(pageNum,pageSize,bmName);
+        PageInfo date =  groupService.listWclGroupBm(pageNum,pageSize);
         return Result.success(date);
     }
 

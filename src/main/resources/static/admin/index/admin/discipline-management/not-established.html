@@ -27,11 +27,9 @@
 
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <select name="bmName" lay-filter="bmName">
-                <option value="">全部科室</option>
-            </select>
+            <input class="layui-input" name="search" placeholder="所有科室" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
 </script>
 
@@ -118,28 +116,14 @@
             },
 
             reSet:{
-                url:"/sybm/ksgl/listWclGroupBm",
-                type:"search",
-                data:["bmName"],
+                url:"eq/listEqByX",
+                type:"serch",
                 where: {
 
                 }
 
             }
 
-        },
-        form: {
-            val: {
-                filter: "forms",
-                select: [
-                    {
-                        filter: "bmName",
-                        ids: "bmName",
-                        text: "bmName",
-                        url: "/supervise/bmgl/listBm"
-                    }
-                ]
-            }
         }
     }
 </script>
