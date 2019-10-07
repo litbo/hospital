@@ -148,7 +148,7 @@ public class MaintenanceController {
     public Result deleteMaintenanceProject(int id){
         int result = maintenanceService.deleteMaintenanceProject(id);
         if(result == 0){
-            return Result.success("添加失败");
+            return Result.success("删除失败");
         }
         return Result.success(result);
     }

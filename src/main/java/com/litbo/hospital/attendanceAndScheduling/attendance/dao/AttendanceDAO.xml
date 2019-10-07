@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.attendanceAndScheduling.attendance.dao.AttendanceDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.attendanceAndScheduling.attendance.pojo.Attendance">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="emp_id" jdbcType="VARCHAR" property="empId" />
+    <result column="sign_time" jdbcType="VARCHAR" property="signTime" />
+    <result column="sign_type" jdbcType="VARCHAR" property="signType" />
+  </resultMap>
+  <insert id="insert" parameterType="com.litbo.hospital.attendanceAndScheduling.attendance.pojo.Attendance">
+    insert into hospital..Attendance ( emp_id, sign_time,sign_type)
+    values ( #{empId,jdbcType=VARCHAR}, #{signTime,jdbcType=VARCHAR}, 
+      #{signType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.attendanceAndScheduling.attendance.pojo.Attendance">
+    insert into hospital..Attendance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="signType != null">
+        sign_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=VARCHAR},
+      </if>
+      <if test="signType != null">
+        #{signType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="getSelfStaff" parameterType="string" resultType="com.litbo.hospital.attendanceAndScheduling.attendance.vo.UserInfoVo">
+    SELECT e.user_id as id , e.user_xm as name , bm.bm_name as bm , e.tel as tel , zc.zc
+    FROM s_emp AS e LEFT JOIN s_bm as bm  ON e.bm_id = bm.bm_id LEFT JOIN s_zc as zc on zc.zc_id = e.zc_id
+    <where>
+      <if test="id != null">
+        e.bm_id = #{id} and
+      </if>
+      <if test="name != null">
+        e.user_xm = #{name} and
+      </if>
+      1=1
+    </where>
+  </select>
+
+  <select id="countSign" parameterType="string" resultType="integer">
+      select * from s_emp
+  </select>
+
+</mapper>

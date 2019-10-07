@@ -197,6 +197,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         List<MaintenanceProject> list = new ArrayList<>();
         for(String i : projects){
             MaintenanceProject project = maintenanceProjectDAO.selectById(Integer.parseInt(i));
+            if(project == null){
+                continue;
+            }
             list.add(project);
         }
         return list;
