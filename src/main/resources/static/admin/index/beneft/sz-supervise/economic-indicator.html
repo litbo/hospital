@@ -51,12 +51,8 @@
                         <input type="text" name="date" id="date" class="layui-input">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select>
-                            <option>科室</option>
-                            <option>CT室</option>
-                            <option>核磁共振室</option>
-                            <option>摄片室</option>
-                            <option>心内导管室</option>
+                        <select name="bmId" lay-filter="bmId">
+                            <option value="">全部科室</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -71,12 +67,27 @@
     </div>
     <hr class="devideHr">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-sm" lay-event="edit" style="background-color: #cc0033;"><i class="fas fa-trash-alt"></i>&nbsp;删除</a>
+        <a class="layui-btn layui-btn-sm deli" lay-event="edit"><i class="fas fa-trash-alt"></i>&nbsp;删除</a>
     </div>
 </script>
 
 
 <script>
+    renderMod={
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/department/showList"
+                    }
+                ]
+            }
+        }
+    };
     renderMod.addTable ={
         table:{
             cols: [[ //表头
@@ -127,9 +138,6 @@
         date:{
             elem:'#date'
         },
-        form:{
-
-        }
     }
 </script>
 </body>

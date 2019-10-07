@@ -112,16 +112,12 @@
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label" style="line-height:30px">科室<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label" style="height:46px;line-height:30px;">科室选择预览</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="bmName" placeholder="请选择" autocomplete="off" lay-verify="required" disabled class="layui-input" style="height:46px;">
-                    </div>
+                        <input type="text" name="bmName" placeholder="请选择" autocomplete="off" lay-verify="required" disabled class="layui-input col-sm-10">
 
+                        <button class="layui-btn col-sm-2" style="margin: 0" id="selectRoom">选择</button>
+                    </div>
                 </div>
+
 
             </div>
             <div class="layui-form-item">
@@ -161,7 +157,7 @@
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <div class="layui-input-block">
+                <div class="layui-input-block" style="margin: 20px 20px;float: right">
                     <button class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
                 </div>
             </div>

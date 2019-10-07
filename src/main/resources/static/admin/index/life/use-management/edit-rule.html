@@ -47,20 +47,21 @@
             <legend>设备信息</legend>
         </fieldset>-->
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item">
                 <label class="layui-form-label">已入库设备</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
-                    <input class="layui-btn layui-btn-sm" id="put" value="导入设备信息" readonly>
+                    <input type="text" name="eqName" id="eqName" disabled class="layui-input col-sm-6">
+                    <button class="layui-btn col-sm-2" id="selectEmp" style="margin: 0;margin-right: 1px">选择</button>
+                    <input class="layui-btn col-sm-3" id="put" style="margin: 0" value="导入设备信息" readonly>
                 </div>
             </div>
             <input type="text" class="hidden" name="eqSbbh" id="eqSbbh">
-            <div class="layui-form-item">
-                <label class="layui-form-label">设备名称<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="eqName" id="eqName" disabled class="layui-input">
-                </div>
-            </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label class="layui-form-label">设备名称<span class="sign">*</span></label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <input type="text" name="eqName" id="eqName" disabled class="layui-input">-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">设备品名<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -105,13 +106,13 @@
                            class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item">
                 <label class="layui-form-label">模板</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp2">选择</button>
-                    <input class="equipmentSpan" readonly style="border:0;outline:none;background-color: #fff;position: absolute;top: 10px;right: 10px;">
+                    <input class="equipmentSpan layui-input col-sm-6">
+                    <button class="layui-btn col-sm-2" style="margin: 0;margin-right: 1px" id="selectEmp2">选择</button>
                     <input type="hidden" class="mbNr">
-                    <input class="layui-btn layui-btn-sm" id="put2" value="导入模板信息" readonly>
+                    <input class="layui-btn col-sm-3" style="margin: 0" id="put2" value="导入模板信息" readonly>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">

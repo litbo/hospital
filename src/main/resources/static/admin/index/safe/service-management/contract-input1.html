@@ -74,8 +74,8 @@
                 <div class="layui-form-item" >
                     <label class="layui-form-label">维修商<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="sbcsId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="padding-left:60px;">
-                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectWxs">选择</button>
+                        <input type="text" name="sbcsId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input col-sm-10">
+                        <button class="layui-btn col-sm-2" style="margin: 0" id="selectWxs">选择</button>
                         <!--<button class="layui-btn layui-btn-xs layui-btn-normal" name="pjScqyId" lay-event="choose">选择</button>-->
                     </div>
                 </div>
@@ -158,17 +158,18 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">合同附件</label>
                     <div class="layui-input-block">
-                        <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input fileName" style="padding-left:80px;">
-                        <button type="button" value="选择文件" class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0"
-                                onclick="javascript:$('.file').click();">选择文件</button>
+                        <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input col-sm-10 fileName">
                         <input type="file" class="file" style="display: none;" id="selectFile" onchange="javascript:$('.fileName').val(this.files[0].name);" />
+                        <button type="button" value="选择文件" class="layui-btn col-sm-2" style="margin: 0"
+                                onclick="javascript:$('.file').click();">选择文件</button>
+
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label" >设备名称<span class="sign">*</span></label>
                     <div class="layui-input-block">
-                        <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input" style="padding-left:60px;">
-                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectData">选择</button>
+                        <input type="text" name="eqId" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input col-sm-10">
+                        <button class="layui-btn col-sm-2" style="margin: 0" id="selectData">选择</button>
                     </div>
                 </div>
             </div>

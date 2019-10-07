@@ -33,25 +33,15 @@
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">科室选择<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectRoom">选择</button>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">选择预览</label>
-                <div class="layui-input-block">
-                    <input type="text" name="bmName" class="layui-input" readonly>
+                    <input type="text" name="bmName" class="layui-input col-sm-10" readonly>
+                    <button class="layui-btn col-sm-2" style="margin: 0" id="selectRoom">选择</button>
                 </div>
             </div>
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">设备选择</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEquip">选择</button>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">选择预览</label>
-                <div class="layui-input-block">
-                    <input type="text" name="eqName" class="layui-input" readonly>
+                    <input type="text" name="eqName" class="layui-input col-sm-10" readonly>
+                    <button class="layui-btn col-sm-2" style="margin: 0" id="selectEquip">选择</button>
                 </div>
             </div>
         </div>
@@ -77,15 +67,15 @@
             <div class="layui-form-item" pane   style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12">收入明细项</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="addNew" data-id="table"><i class="fas fa-plus"></i>&nbsp;添加</button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm" id="delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addi" id="addNew" data-id="table"><i class="fas fa-plus"></i>&nbsp;添加</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-sm deli" id="delNew" data-id="table"><i class="fas fa-trash-alt"></i>&nbsp;删除</button>
                 </div>
             </div>
             <table id="table" lay-filter="table1"></table>
         </div>
         <div class="col-xs-12">
             <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
+                <button class="layui-btn" style="margin: 20px 20px;float: right" lay-submit="" lay-filter="save">保存</button>
             </div>
         </div>
     </div>
