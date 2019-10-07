@@ -32,18 +32,13 @@
 <form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="layui-row">
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" pane>
-                <label class="layui-form-label" style="line-height:30px">科室<span class="sign">*</span></label>
+            <div class="layui-form-item" >
+                <label class="layui-form-label" >科室<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-sm layui-btn-normal" style="line-height:30px;" id="selectRoom">选择</button>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="height:46px;line-height:30px;">选择预览</label>
-                <div class="layui-input-block">
-                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                </div>
+                    <input type="text" name="bmName" placeholder="请选择" autocomplete="off" disabled class="layui-input col-sm-10">
 
+                    <button class="layui-btn col-sm-2" style="margin: 0" id="selectRoom">选择</button>
+                </div>
             </div>
 
         </div>
@@ -70,10 +65,10 @@
             <div class="layui-form-item" pane style="margin-bottom:-10px;">
                 <label class="layui-form-label col-xs-12" style="padding:8px 10px!important">团队人员列表</label>
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm addNew" data-id="table" id="addNew"><i
+                    <button class="layui-btn layui-btn-normal layui-btn-sm addi addNew" data-id="table" id="addNew"><i
                             class="fas fa-plus"></i>&nbsp;添加
                     </button>
-                    <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table"><i
+                    <button class="layui-btn layui-btn-danger layui-btn-sm deli delNew" data-id="table"><i
                             class="fas fa-trash-alt"></i>&nbsp;删除
                     </button>
                 </div>

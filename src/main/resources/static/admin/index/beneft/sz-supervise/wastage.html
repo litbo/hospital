@@ -29,9 +29,6 @@
 </div>
 
 <script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>
-    </div>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -58,12 +55,8 @@
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select>
-                            <option>科室</option>
-                            <option>科室</option>
-                            <option>CT室</option>
-                            <option>核磁共振室</option>
-                            <option>摄片室</option>
+                        <select name="bmId" lay-filter="bmId">
+                            <option value="">全部科室</option>
                         </select>
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
@@ -77,6 +70,21 @@
 
 
 <script>
+    renderMod={
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/department/showList"
+                    }
+                ]
+            }
+        }
+    };
     renderMod.addTable ={
         table:{
             cols: [[ //表头
@@ -125,10 +133,9 @@
         date:{
             elem:'#date'
         },
-        form:{
 
-        }
-    }
+    };
+
 </script>
 </body>
 
