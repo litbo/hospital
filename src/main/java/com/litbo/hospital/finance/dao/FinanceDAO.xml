@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.finance.dao.FinanceDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.finance.pojo.Finance">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="years_of_use" jdbcType="VARCHAR" property="yearsOfUse" />
+    <result column="annual_operating_expenses" jdbcType="VARCHAR" property="annualOperatingExpenses" />
+    <result column="annual_working_day" jdbcType="VARCHAR" property="annualWorkingDay" />
+    <result column="overhaul_year" jdbcType="VARCHAR" property="overhaulYear" />
+    <result column="daily_workload" jdbcType="VARCHAR" property="dailyWorkload" />
+    <result column="overhaul_cost" jdbcType="VARCHAR" property="overhaulCost" />
+    <result column="charges" jdbcType="VARCHAR" property="charges" />
+    <result column="annual_discount_rate" jdbcType="VARCHAR" property="annualDiscountRate" />
+    <result column="expected_annual_interest_rate" jdbcType="VARCHAR" property="expectedAnnualInterestRate" />
+    <result column="investment_status" jdbcType="VARCHAR" property="investmentStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, "name", amount, create_time, years_of_use, annual_operating_expenses, annual_working_day, 
+    overhaul_year, daily_workload, overhaul_cost, charges, annual_discount_rate, expected_annual_interest_rate, 
+    investment_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..finance
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..finance
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.finance.pojo.Finance">
+    insert into hospital..finance (id, "name", amount, 
+      create_time, years_of_use, annual_operating_expenses, 
+      annual_working_day, overhaul_year, daily_workload, 
+      overhaul_cost, charges, annual_discount_rate, 
+      expected_annual_interest_rate, investment_status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{yearsOfUse,jdbcType=VARCHAR}, #{annualOperatingExpenses,jdbcType=VARCHAR}, 
+      #{annualWorkingDay,jdbcType=VARCHAR}, #{overhaulYear,jdbcType=VARCHAR}, #{dailyWorkload,jdbcType=VARCHAR}, 
+      #{overhaulCost,jdbcType=VARCHAR}, #{charges,jdbcType=VARCHAR}, #{annualDiscountRate,jdbcType=VARCHAR}, 
+      #{expectedAnnualInterestRate,jdbcType=VARCHAR}, #{investmentStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.finance.pojo.Finance">
+    insert into hospital..finance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        "name",
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="yearsOfUse != null">
+        years_of_use,
+      </if>
+      <if test="annualOperatingExpenses != null">
+        annual_operating_expenses,
+      </if>
+      <if test="annualWorkingDay != null">
+        annual_working_day,
+      </if>
+      <if test="overhaulYear != null">
+        overhaul_year,
+      </if>
+      <if test="dailyWorkload != null">
+        daily_workload,
+      </if>
+      <if test="overhaulCost != null">
+        overhaul_cost,
+      </if>
+      <if test="charges != null">
+        charges,
+      </if>
+      <if test="annualDiscountRate != null">
+        annual_discount_rate,
+      </if>
+      <if test="expectedAnnualInterestRate != null">
+        expected_annual_interest_rate,
+      </if>
+      <if test="investmentStatus != null">
+        investment_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="yearsOfUse != null">
+        #{yearsOfUse,jdbcType=VARCHAR},
+      </if>
+      <if test="annualOperatingExpenses != null">
+        #{annualOperatingExpenses,jdbcType=VARCHAR},
+      </if>
+      <if test="annualWorkingDay != null">
+        #{annualWorkingDay,jdbcType=VARCHAR},
+      </if>
+      <if test="overhaulYear != null">
+        #{overhaulYear,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyWorkload != null">
+        #{dailyWorkload,jdbcType=VARCHAR},
+      </if>
+      <if test="overhaulCost != null">
+        #{overhaulCost,jdbcType=VARCHAR},
+      </if>
+      <if test="charges != null">
+        #{charges,jdbcType=VARCHAR},
+      </if>
+      <if test="annualDiscountRate != null">
+        #{annualDiscountRate,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedAnnualInterestRate != null">
+        #{expectedAnnualInterestRate,jdbcType=VARCHAR},
+      </if>
+      <if test="investmentStatus != null">
+        #{investmentStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.finance.pojo.Finance">
+    update hospital..finance
+    <set>
+      <if test="name != null">
+        "name" = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="yearsOfUse != null">
+        years_of_use = #{yearsOfUse,jdbcType=VARCHAR},
+      </if>
+      <if test="annualOperatingExpenses != null">
+        annual_operating_expenses = #{annualOperatingExpenses,jdbcType=VARCHAR},
+      </if>
+      <if test="annualWorkingDay != null">
+        annual_working_day = #{annualWorkingDay,jdbcType=VARCHAR},
+      </if>
+      <if test="overhaulYear != null">
+        overhaul_year = #{overhaulYear,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyWorkload != null">
+        daily_workload = #{dailyWorkload,jdbcType=VARCHAR},
+      </if>
+      <if test="overhaulCost != null">
+        overhaul_cost = #{overhaulCost,jdbcType=VARCHAR},
+      </if>
+      <if test="charges != null">
+        charges = #{charges,jdbcType=VARCHAR},
+      </if>
+      <if test="annualDiscountRate != null">
+        annual_discount_rate = #{annualDiscountRate,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedAnnualInterestRate != null">
+        expected_annual_interest_rate = #{expectedAnnualInterestRate,jdbcType=VARCHAR},
+      </if>
+      <if test="investmentStatus != null">
+        investment_status = #{investmentStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.finance.pojo.Finance">
+    update hospital..finance
+    set "name" = #{name,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      years_of_use = #{yearsOfUse,jdbcType=VARCHAR},
+      annual_operating_expenses = #{annualOperatingExpenses,jdbcType=VARCHAR},
+      annual_working_day = #{annualWorkingDay,jdbcType=VARCHAR},
+      overhaul_year = #{overhaulYear,jdbcType=VARCHAR},
+      daily_workload = #{dailyWorkload,jdbcType=VARCHAR},
+      overhaul_cost = #{overhaulCost,jdbcType=VARCHAR},
+      charges = #{charges,jdbcType=VARCHAR},
+      annual_discount_rate = #{annualDiscountRate,jdbcType=VARCHAR},
+      expected_annual_interest_rate = #{expectedAnnualInterestRate,jdbcType=VARCHAR},
+      investment_status = #{investmentStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="allFinance" resultType="com.litbo.hospital.finance.pojo.Finance">
+    select * from hospital..finance
+    <where>
+      <if test="name != null">
+        "name" like #{name} and
+      </if>
+      <if test="status != null">
+        investment_status = #{status} and
+      </if>
+      1=1
+    </where>
+  </select>
+
+</mapper>
