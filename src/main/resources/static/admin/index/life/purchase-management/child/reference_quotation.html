@@ -31,13 +31,7 @@
         .layui-form-text .layui-input-block {
             margin-left: 0 !important;
         }
-        .newFa{
-            color: #f10214;
-            margin:-5px 0 10px 150px;
-            font-size: 1.3em;
-            text-decoration: underline;
-            cursor: pointer;
-        }
+
     </style>
 </head>
 
@@ -48,15 +42,15 @@
         <legend>参考型号及报价</legend>
     </fieldset>-->
     <form class="layui-form layui-form-pane" action="" lay-filter="forms">
-        <div class="col-xs-12">
+        <div class="col-xs-6">
             <div class="layui-form-item" pane>
                 <label class="layui-form-label">参考生产厂商<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="scsName" lay-verify="required" placeholder="请选择" autocomplete="off" disabled lay-verify="required" class="layui-input" style="height:45px;padding-left:60px;">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" data-id="table" id="selectRoom">选择</button>
+                    <input type="text" name="scsName" lay-verify="required" placeholder="请选择" autocomplete="off" disabled lay-verify="required" class="layui-input col-xs-10">
+                    <button class="layui-btn col-xs-2" style="margin: 0" data-id="table" id="selectRoom">选择</button>
                 </div>
             </div>
-            <p class="newFa">新增生产厂商</p>
+            <button class="layui-btn" style="background-color: red">新增生产厂商</button>
         </div>
         <div class="col-xs-6">
             <div class="layui-form-item">
@@ -85,7 +79,7 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="layui-form-item" style="margin:20px 0;">
+            <div class="layui-form-item" style="margin:20px 20px;float:right;">
                 <button class="layui-btn" lay-submit="" id="reload">确定</button>
             </div>
         </div>

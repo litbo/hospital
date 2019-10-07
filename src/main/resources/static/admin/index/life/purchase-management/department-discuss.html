@@ -37,12 +37,7 @@
                     <input type="text" name="kstlTime" id="date" placeholder="yyyy-MM-dd" autocomplete="off"  lay-verify="required" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">地点<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
-                </div>
-            </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">意见<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -52,19 +47,17 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" pane>
+            <div class="layui-form-item">
                 <label class="layui-form-label">记录人<span class="sign">*</span></label>
-
-                <!-- TODO   添加查询人员导航 -->
-
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-normal layui-btn-sm" id="selectEmp">选择</button>
+                    <input type="text" name="userXm" disabled autocomplete="off" class="layui-input col-xs-10">
+                    <button class="layui-btn col-xs-2" id="selectEmp" style="margin: 0">选择</button>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">选择预览</label>
+                <label class="layui-form-label">地点<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="userXm" disabled autocomplete="off" class="layui-input">
+                    <input type="text" name="kstlAddr" placeholder="请输入" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
         </div>
