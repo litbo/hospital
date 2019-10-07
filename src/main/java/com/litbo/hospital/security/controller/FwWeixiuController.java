@@ -185,7 +185,7 @@ public class FwWeixiuController {
      */
             @PostMapping("/addFwWxqs")
     public Result addFwWxqs(String qsUser, String qsMs,
-                            String qsJg,String qsMyd,String fwId){
+                            String qsJg,String qsMyd,String fwId,Integer taskId){
         try {
             LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
             String userId = sEmp.getUserId();
@@ -195,6 +195,7 @@ public class FwWeixiuController {
             fwWxqs.getFwWxqs().setQsJg(qsJg);
             fwWxqs.getFwWxqs().setQsMyd(qsMyd);
             fwWxqs.getFwWxqs().setFwId(fwId);
+            fwWxqs.setTaskId(taskId);
             fwWeixiuService.addFwWxqs(fwWxqs,userId);
             return  Result.success();
         } catch (Exception e) {

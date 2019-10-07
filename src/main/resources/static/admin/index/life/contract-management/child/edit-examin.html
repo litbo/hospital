@@ -14,24 +14,6 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="/static/admin/js/basic.js"></script>
-    <style>
-        .layui-form-label {
-            width: 145px !important;
-        }
-
-        .layui-input-block {
-            margin-left: 145px !important;
-        }
-
-        .layui-form-text .layui-form-label {
-            width: 100% !important;
-        }
-
-        .layui-form-text .layui-input-block {
-            margin-left: 0 !important;
-        }
-    </style>
-
 
 </head>
 <!--
@@ -207,12 +189,11 @@
         <div class="layui-form-item" pane style="margin-bottom:-10px;">
             <label class="layui-form-label ">医学装备<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-sm addNew" data-id="table"
-                        id="dataTable1" style="background-color: #003366"><i class="fas fa-plus"></i>&nbsp;添加
+                <button class="layui-btn layui-btn-sm addNew addi" data-id="table"
+                        id="dataTable1"><i class="layui-icon layui-icon-add-1"></i>添加
                 </button>
-                <!--                    <button>删除</button>-->
-                <button class="layui-btn layui-btn-danger layui-btn-sm delNew" data-id="table">
-                    <i class="fas fa-trash-alt" style="background-color: #cc0033"></i>&nbsp;删除
+                <button class="layui-btn layui-btn-danger layui-btn-sm delNew deli" data-id="table">
+                    <i class="layui-icon layui-icon-delete"></i>&nbsp;删除
                 </button>
             </div>
         </div>
@@ -220,7 +201,7 @@
     </div>
 
 <!--    提交-->
-    <div class="layui-row">
+    <div class="layui-row" style="float: right;margin: 20px 20px">
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>

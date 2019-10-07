@@ -401,7 +401,8 @@
                   },
                   {
                     "title": "零部件合同录入",
-                    "url": "./life/contract-management/parts-contract.html",                    "id": "30104",
+                    "url": "./life/contract-management/parts-contract.html",
+                    "id": "30104",
                     "shiro": "LBJHTLR"
                   },
 
