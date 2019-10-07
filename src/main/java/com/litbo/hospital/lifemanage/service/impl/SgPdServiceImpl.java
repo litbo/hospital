@@ -60,19 +60,23 @@ public class SgPdServiceImpl implements SgPdSeverice {
                 if (StringUtils.isBlank(pdScanId)) {
                     continue;
                 }
-                String selectId = sgPdMapper.selectScanId(pdScanId);
-                if (StringUtils.isNotBlank(selectId)) {
-                    continue;
-                }
-                sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
-                sgPd.setPdScanId(pdScanId);
-                sgPd.setPdScsj(pdScsj);
-                sgPd.setPdJhid(pdJhid);
+//                String selectId = sgPdMapper.selectScanId(pdScanId); //检查重复
+//                if (StringUtils.isNotBlank(selectId)) {
+//                    continue;
+//                }
 
-
-                sgPdMapper.insertPdId(sgPd);
-                successCount++;
+            sgPd.setPdScsj(pdScsj);
             }
+            sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
+            sgPd.setPdScanId(pdScanId);
+
+//              sgPd.setPdScsj(record.getPdScsj());
+            sgPd.setPdJhid(pdJhid);
+
+
+            sgPdMapper.insertPdId(sgPd);
+            System.out.println("成功");
+            successCount++;
         }
         return successCount;
     }
