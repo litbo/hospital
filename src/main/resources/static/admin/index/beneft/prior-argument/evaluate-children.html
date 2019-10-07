@@ -49,34 +49,24 @@
             </div>
         </div>
     </div>
-    <hr class="devideHr">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add" style="background: #003366"><i class="fas fa-plus"></i>&nbsp;新增</a>
-        <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="edit" style="background: #CC0033"><i class="fas fa-trash-alt"></i>&nbsp;删除</a>
-    </div>
 </script>
 
-<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="cor">编辑</a>
-</script>
+
 
 <script>
-    var sex="报本点作用率";
     renderMod.addTable ={
         table:{
             cols: [[ //表头
                 {type: 'checkbox', fixed: 'left'}
                 ,{field: '', title: '设备编号'}
+                , {field: '', title: '使用科室'}
                 , {field: '', title: '设备名称'}
-                , {field: '', title: '型号'}
-                , {field: '', title: '科室'}
-                , {field: '', title: '投资方案'}
-                , {field: '', title: '日平均成本'}
-                , {field: '', title: '保利点'}
-                , {field: '', title: '保本点'}
-                , {field: 'sex', title: '<span title="'+sex+'">'+sex+'</span>'}
-                , {field: '', title: '安全边际'}
-                , {fixed: 'right', align: 'center', toolbar: '#bar', title: '操作'}
+                , {field: '', title: '规格'}
+                , {field: '', title: '启用日期'}
+                , {field: '', title: '使用年份'}
+                , {field: '', title: '诊疗单位'}
+                , {field: '', title: '实际工作量'}
+                , {field: '', title: '评价等级'}
             ]]
             , url: "/lifeManage/selectAllHt"
             // , reload: true
