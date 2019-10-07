@@ -1271,15 +1271,9 @@
                     "shiro": "WXFSQ"
                   },
                   {
-                    "title": "满意度再评价",
-                    "url": "./table.html",
-                    "id": "40003",
-                    "shiro": "a"
-                  },
-                  {
                     "title": "补录维修报告",
                     "url": "./safe/service-management/additional-record.html",
-                    "id": "40004",
+                    "id": "40003",
                     "shiro": "BLWXBG"
                   }
                 ]
@@ -1740,12 +1734,6 @@
                     "url": "./safe/keeprepair-management/standard-list.html",
                     "id": "44101",
                     "shiro": "GFBZ"
-                  },
-                  {
-                    "title": "编制任务",
-                    "url": "./table.html",
-                    "id": "44102",
-                    "shiro": "BZRW"
                   }
                 ]
               },
