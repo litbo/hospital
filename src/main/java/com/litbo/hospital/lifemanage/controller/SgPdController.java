@@ -1,8 +1,11 @@
 package com.litbo.hospital.lifemanage.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
+import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import io.swagger.annotations.Api;
 import org.apache.ibatis.annotations.Param;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/lifeManage")
@@ -76,8 +80,17 @@ public class SgPdController {
      * @return
      */
     @GetMapping("/selectAllData")
-    public Result selectAllData(@RequestParam String pdJhid) {
-        return Result.success(sgPdService.selectAllData(pdJhid));
+    public PageInfo selectAllData(@RequestParam(name = "pdJhid") String pdJhid
+                                , @RequestParam (name = "pageNum",defaultValue = "1")Integer pageNum,
+                                  @RequestParam (name = "pageSize",defaultValue = "15")Integer pageSize
+    ) {
+
+        PageHelper.startPage(pageNum,pageSize);
+
+        List<Object> str = sgPdService.selectAllData(pdJhid);
+        PageInfo pageInfo = new PageInfo(str);
+
+        return pageInfo;
     }
 
 }

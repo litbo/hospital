@@ -85,7 +85,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
     }
 
     @Override
-    public String selectAllData(String pdJhid) {
+    public List<Object> selectAllData(String pdJhid) {
         List<String> pdScanList = sgPdMapper.selectAllData(pdJhid);
         SgPlan sgPlan = sgPlanMapper.selectByPrimaryKey(pdJhid);
         if (sgPlan == null) {
@@ -151,14 +151,14 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
 
 //        List<String> keylist =new ArrayList<>(result.keySet());
-////        for(String key:keylist ){
-////            System.out.println(key);
-////        }
-//
-//        List<Object> valuesList = new ArrayList<Object>(result.values());
-//        for(Object str:valuesList){
-//            System.out.println(str);
+//       for(String key:keylist ){
+//           System.out.println(key);
 //        }
+//
+        List<Object> valuesList = new ArrayList<Object>(result.values());
+        for(Object str:valuesList){
+            System.out.println(str);
+        }
 //        System.out.println(valuesList.get(2));
 //        valuesList.get(3);
 
@@ -167,6 +167,6 @@ public class SgPdServiceImpl implements SgPdSeverice {
         System.out.println(msg);
         System.out.println(msg.toString());
 
-        return msg;
+        return valuesList;
     }
 }
