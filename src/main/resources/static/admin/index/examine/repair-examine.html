@@ -142,19 +142,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">确认结果<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <select name="qsJg" id="qsJg" disabled>
-                    <option value="合格" >合格</option>
-                    <option value="不合格">不合格</option>
-                </select>
+                <input type="text" name="qsJg" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">满意度<span class="sign">*</span></label>
             <div class="layui-input-block">
-                <select name="qsMyd" id="qsMyd" disabled>
-                    <option value="满意">满意</option>
-                    <option value="不满意">不满意</option>
-                </select>
+                <input type="text" name="qsMyd" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
             </div>
         </div>
         <input type="hidden" name="id">

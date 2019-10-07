@@ -25,7 +25,7 @@
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs" action="">
         <div class="layui-input-inline">
-            <select name="modules"  lay-search="">
+            <select name="modules" lay-verify="required" lay-search="">
                 <option value="day">日</option>
                 <option value="month">月</option>
                 <option value="year">年</option>
@@ -35,7 +35,7 @@
             <input type="text" name="date" id="date1" lay-verify="date" placeholder="请选择日期" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <select name="modules"   lay-filter="bmId" lay-search="">
+            <select name="modules" lay-verify="required"  lay-filter="bmId" lay-search="">
                 <option value="">全部科室</option>
             </select>
         </div>
