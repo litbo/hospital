@@ -35,6 +35,7 @@ public class FinanceController {
      */
     @RequestMapping("/addFinance.do")
     public Result addFinance(Finance finance){
+        System.out.println(finance);
         int result = financeService.addFinance(finance);
         if(result == 0 ){
             return Result.success("添加失败！");

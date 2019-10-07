@@ -106,14 +106,14 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">投资意见<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <textarea type="text" name="htBianhao" class="layui-textarea" disabled></textarea>
+                            <textarea type="text" name="htBianhao" class="layui-textarea" ></textarea>
                         </div>
                     </div>
                     <!--                            签批人-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">签批人<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="htBianhao" class="layui-input" >
                         </div>
                     </div>
                 </div>
@@ -126,41 +126,7 @@
 
 
 <script>
-    /*$("#htBianhao").blur(function(){
-        $.ajax({
-            url : "/lifeManage/checkHtBianhao",
-            type : "POST",
-            // async:false,
-            // dataType : "JSON",
-            data:{
-                "htBianhao":$("#htBianhao").val(),
-                // "assetId":value
-            },
-            success : function(data) {
-                console.log(data)
-                if(data.msg!=null && data.msg!=""){
-                    layer.alert(data.msg)
-                    $("#htBianhao").val("")
-                }
-                // layer.alert(data.msg)
-            }
-        });
-    });*/
 
-    //注意：导航 依赖 element 模块，否则无法进行功能性操作
-    /*layui.use('element', function () {
-        var element = layui.element;
-    });
-    layui.use('form', function () {
-        var form = layui.form;
-    });
-    layui.use('laydate', function () {
-        var laydate = layui.laydate;
-        laydate.render({elem: '#test1'});
-    });*/
-
-    // var yf=$.getUrlParam("sbcsIdScs");
-    // console.log(yf);
     var formData = {};
     var formData2 = {};
     renderMod = {

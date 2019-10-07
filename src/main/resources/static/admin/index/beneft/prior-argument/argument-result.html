@@ -34,23 +34,18 @@
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
     <div class="hidden-xs" id="hideXs">
-        <div class="layui-row">
-            <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane maxCont" action="">
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select>
-                            <option>投资分析</option>
-                            <option>财务分析结果</option>
-                        </select>
-                    </div>
-                    <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1"><i
-                                class="layui-icon layui-icon-search"></i>查询
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="name" placeholder="项目名称">
         </div>
+        <div class="layui-inline">
+            <select class="layui-input" name="status">
+                <option>投资状态</option>
+                <option value="未投资">未投资</option>
+                <option value="已投资">已投资</option>
+            </select>
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+        <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
     </div>
     <hr class="devideHr">
     <div class="addBtn">
@@ -73,14 +68,14 @@
             table: {
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'authorized_person', title: '项目编号'}
-                    , {field: 'authorized_depart', title: '项目名称'}
-                    , {field: 'authorized_depart', title: '创建时间'}
-                    , {field: 'authorized_depart', title: '投资状态'}
-                    , {field: 'authorized_depart', title: '使用年限'}
-                    , {fixed: 'right', align: 'center', toolbar: '#bar', title: '操作'}
+                    , {field: 'id', title: '项目编号'}
+                    , {field: 'name', title: '项目名称'}
+                    , {field: 'createTime', title: '创建时间'}
+                    , {field: 'investmentStatus', title: '投资状态'}
+                    , {field: 'yearsOfUse', title: '使用年限'}
+                    , {fixed: 'right', align: 'center', toolbar: '#bar',minWidth:"500px", title: '操作'}
                 ]]
-                , url: "/lifeManage/selectAllHt"
+                , url: "/Finance/allFinance.do"
                 // , reload: true
                 // , contentType: "application/json"
                 , method: "POST"
@@ -121,6 +116,12 @@
                         ]
                     })
                 }
+            },
+            reSet: {
+                url: "/Finance/allFinance.do",
+                type: "reload",
+                method: "POST",
+                data: ["name","status"]
             }
         }
     }
