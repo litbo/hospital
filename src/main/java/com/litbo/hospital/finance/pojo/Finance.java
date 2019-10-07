@@ -35,6 +35,8 @@ public class Finance implements Serializable {
 
     private String investmentStatus;    // 投资状态
 
+    private String unit;  // 日工作量单位
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -149,6 +151,14 @@ public class Finance implements Serializable {
         this.investmentStatus = investmentStatus;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -174,7 +184,8 @@ public class Finance implements Serializable {
             && (this.getCharges() == null ? other.getCharges() == null : this.getCharges().equals(other.getCharges()))
             && (this.getAnnualDiscountRate() == null ? other.getAnnualDiscountRate() == null : this.getAnnualDiscountRate().equals(other.getAnnualDiscountRate()))
             && (this.getExpectedAnnualInterestRate() == null ? other.getExpectedAnnualInterestRate() == null : this.getExpectedAnnualInterestRate().equals(other.getExpectedAnnualInterestRate()))
-            && (this.getInvestmentStatus() == null ? other.getInvestmentStatus() == null : this.getInvestmentStatus().equals(other.getInvestmentStatus()));
+            && (this.getInvestmentStatus() == null ? other.getInvestmentStatus() == null : this.getInvestmentStatus().equals(other.getInvestmentStatus()))
+            && (this.getUnit() == null ? other.getUnit() == null : this.getUnit().equals(other.getUnit()));
     }
 
     @Override
@@ -195,6 +206,7 @@ public class Finance implements Serializable {
         result = prime * result + ((getAnnualDiscountRate() == null) ? 0 : getAnnualDiscountRate().hashCode());
         result = prime * result + ((getExpectedAnnualInterestRate() == null) ? 0 : getExpectedAnnualInterestRate().hashCode());
         result = prime * result + ((getInvestmentStatus() == null) ? 0 : getInvestmentStatus().hashCode());
+        result = prime * result + ((getUnit() == null) ? 0 : getUnit().hashCode());
         return result;
     }
 
@@ -218,6 +230,7 @@ public class Finance implements Serializable {
         sb.append(", annualDiscountRate=").append(annualDiscountRate);
         sb.append(", expectedAnnualInterestRate=").append(expectedAnnualInterestRate);
         sb.append(", investmentStatus=").append(investmentStatus);
+        sb.append(", unit=").append(unit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

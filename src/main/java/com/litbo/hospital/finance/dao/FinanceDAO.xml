@@ -16,35 +16,36 @@
     <result column="annual_discount_rate" jdbcType="VARCHAR" property="annualDiscountRate" />
     <result column="expected_annual_interest_rate" jdbcType="VARCHAR" property="expectedAnnualInterestRate" />
     <result column="investment_status" jdbcType="VARCHAR" property="investmentStatus" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
   </resultMap>
   <sql id="Base_Column_List">
     id, "name", amount, create_time, years_of_use, annual_operating_expenses, annual_working_day, 
     overhaul_year, daily_workload, overhaul_cost, charges, annual_discount_rate, expected_annual_interest_rate, 
-    investment_status
+    investment_status, unit
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from hospital..finance
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from hospital..finance
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.litbo.hospital.finance.pojo.Finance">
     insert into hospital..finance (id, "name", amount, 
       create_time, years_of_use, annual_operating_expenses, 
       annual_working_day, overhaul_year, daily_workload, 
       overhaul_cost, charges, annual_discount_rate, 
-      expected_annual_interest_rate, investment_status
-      )
+      expected_annual_interest_rate, investment_status, 
+      unit)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{yearsOfUse,jdbcType=VARCHAR}, #{annualOperatingExpenses,jdbcType=VARCHAR}, 
       #{annualWorkingDay,jdbcType=VARCHAR}, #{overhaulYear,jdbcType=VARCHAR}, #{dailyWorkload,jdbcType=VARCHAR}, 
       #{overhaulCost,jdbcType=VARCHAR}, #{charges,jdbcType=VARCHAR}, #{annualDiscountRate,jdbcType=VARCHAR}, 
-      #{expectedAnnualInterestRate,jdbcType=VARCHAR}, #{investmentStatus,jdbcType=VARCHAR}
-      )
+      #{expectedAnnualInterestRate,jdbcType=VARCHAR}, #{investmentStatus,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.finance.pojo.Finance">
     insert into hospital..finance
@@ -91,6 +92,9 @@
       <if test="investmentStatus != null">
         investment_status,
       </if>
+      <if test="unit != null">
+        unit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -134,6 +138,9 @@
       </if>
       <if test="investmentStatus != null">
         #{investmentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,8 +186,11 @@
       <if test="investmentStatus != null">
         investment_status = #{investmentStatus,jdbcType=VARCHAR},
       </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.finance.pojo.Finance">
     update hospital..finance
@@ -196,8 +206,9 @@
       charges = #{charges,jdbcType=VARCHAR},
       annual_discount_rate = #{annualDiscountRate,jdbcType=VARCHAR},
       expected_annual_interest_rate = #{expectedAnnualInterestRate,jdbcType=VARCHAR},
-      investment_status = #{investmentStatus,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+      investment_status = #{investmentStatus,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 
   <select id="allFinance" resultType="com.litbo.hospital.finance.pojo.Finance">
