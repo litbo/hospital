@@ -26,10 +26,8 @@
 <script type="text/html" id="toolBar">
     <div class="moreBtn hidden-xs" >
         <div class="layui-inline">
-            <select>
-                <option>科室</option>
-                <option>aaa</option>
-                <option>bbb</option>
+            <select name="bmName" lay-filter="bmName">
+                <option value="">全部科室</option>
             </select>
         </div>
         <div class="layui-inline">
@@ -39,7 +37,7 @@
             <input class="layui-input" name="search" placeholder="设备编号" autocomplete="off">
         </div>
 
-        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+        <button class="layui-btn" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
     <hr class="devideHr">
     <div class="addBtn">
@@ -106,10 +104,23 @@
             reSet:{
                 url:"",
                 type:"search",
-                data:[""],
+                data:["bmName"],
                 where: {
 
                 }
+            }
+        },
+        form: {
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmName",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBm"
+                    }
+                ]
             }
         }
     }

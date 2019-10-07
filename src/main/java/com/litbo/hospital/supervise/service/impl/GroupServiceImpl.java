@@ -302,9 +302,12 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public PageInfo listWclGroupBm(int pageNum, int pageSize) {
+    public PageInfo listWclGroupBm(int pageNum, int pageSize,String bmName) {
         PageHelper.startPage(pageNum,pageSize);
         List<SBm> bms = groupDao.listWclGroupBm();
+        if(StringUtils.isNotBlank(bmName)){
+            bms.removeIf(item->!item.getBmName().contains(bmName));
+        }
         return new PageInfo(bms);
     }
 
