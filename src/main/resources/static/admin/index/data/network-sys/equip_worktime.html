@@ -35,13 +35,8 @@
             <input type="text" name="date" id="date1" lay-verify="date" placeholder="请选择日期" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <select name="modules" lay-verify="required" lay-search="">
-                <option value="">输入查询科室</option>
-                <option value="CT">CT室</option>
-                <option value="HC">核磁公正室</option>
-                <option value="SP">摄片室</option>
-                <option value="DG">内外导管室</option>
-                <option value="ICU">心外ICU</option>
+            <select name="modules" lay-verify="required"  lay-filter="bmId" lay-search="">
+                <option value="">全部科室</option>
             </select>
         </div>
         <div class="layui-inline">
@@ -102,13 +97,23 @@
         }
     };
     renderMod.formAction={
+        val: {
+            filter: "forms",
+            select: [
+                {
+                    filter: "bmId",
+                    ids: "bmId",
+                    text: "bmName",
+                    url: "/department/showList"
+                }
+            ]
+        },
         date:
             {
                 elem: "#date1",
                 type: "date",
                 format: 'yyyy-MM-dd',
-                value: today0,
-                isInitValue: false
+                value: false,
             }
     }
 
