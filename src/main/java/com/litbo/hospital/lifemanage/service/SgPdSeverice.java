@@ -11,7 +11,7 @@ public interface SgPdSeverice {
      * 插入盘点扫描到的所有编号
      * @param
      */
-    int insertPdId(SgPdVO record);
+    int insertPdId(SgPdVO record,String pdJhid);
 
     int insertJhCz(SgPdVO record);
 

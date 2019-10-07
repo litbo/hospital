@@ -29,21 +29,29 @@ public class SgPdController {
     @PostMapping(value = "/uploadPd")
 //    @RequestMapping(value = "/uploadPd")
     @ResponseBody
-    public Result uploadPdScan(@Param("multipartFile") MultipartFile multipartFile) throws IOException {
-        System.out.println("bbb");
-        if (!multipartFile.isEmpty()) {
-            SgPdVO sgPdVO;
-            byte[] bytes = multipartFile.getBytes();
-            String s = new String(bytes, 0, bytes.length);
-            System.out.println(s);
-            System.out.println("------------------");
-            System.out.println("------------------");
-            System.out.println("------------------");
-            sgPdVO = JSON.parseObject(s, SgPdVO.class);
-            return Result.success(sgPdService.insertPdId(sgPdVO));
-        } else {
-            return Result.error("这是一个空文件");
+    public Result uploadPdScan(@RequestParam("multipartFile") MultipartFile multipartFile,@RequestParam String pdJhid) {
+
+        try {
+            System.out.println(pdJhid);
+            System.out.println("上传");
+            System.out.println("上传");
+            System.out.println("上传");
+            if (!multipartFile.isEmpty()) {
+                SgPdVO sgPdVO;
+                byte[] bytes = multipartFile.getBytes();
+                String s = new String(bytes, 0, bytes.length);
+                System.out.println(s);
+                sgPdVO = JSON.parseObject(s, SgPdVO.class);
+                return Result.success(sgPdService.insertPdId(sgPdVO,pdJhid));
+            } else {
+                return Result.error("这是一个空文件");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return Result.success();
+
+
     }
 
     /**
@@ -51,8 +59,13 @@ public class SgPdController {
      *
      * @param record
      */
-    @PostMapping("/insertSgPdId")
-    public Result insertSgPd(@RequestBody SgPdVO record) {
+    @PostMapping(value = "/insertSgPdId")
+//    public Result insertSgPd(@RequestParam SgPdVO record) {
+        public Result insertSgPd(@RequestParam SgPdVO record) {
+        System.out.println(record.toString());
+        System.out.println("iiiiiiiiiiiiiii");
+        System.out.println("iiiiiiiiiiiiiii");
+        System.out.println("iiiiiiiiiiiiiii");
         return Result.success(sgPdService.insertJhCz(record));
     }
 

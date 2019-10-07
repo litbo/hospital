@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.controller;
 
+import com.litbo.hospital.lifemanage.bean.SgCheck;
 import com.litbo.hospital.lifemanage.bean.vo.ListIdsVO;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
 import com.litbo.hospital.result.Result;
@@ -42,9 +43,14 @@ public class SgCheckController {
      */
     @PostMapping("/updateSgCheckYByIds")
     public Result updateSgCheckYByIds(@RequestBody ListIdsVO ids) {
-        //获取登陆人id
-        LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
-        sgCheckService.updateSgCheckByIds(ids.getIds(), emp.getUserId(), "1");
+        try{
+            //获取登陆人id
+            LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
+            sgCheckService.updateSgCheckByIds(ids.getIds(), emp.getUserId(), "1");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return Result.success();
     }
 
@@ -87,4 +93,13 @@ public class SgCheckController {
         return Result.success(sgCheckService.selectSgCheckList(planId, check, checkDate, checkUser, planDate, planUser, pageNum, pageSize));
     }
 
+    /*
+    * @Param planId 需要修改计划plan_id为planId
+    * @Param eqId  设备录入表的设备id  eqId
+    * */
+    @RequestMapping("addOther")//盘亏录入
+    public Result addOther(SgCheck sgChcck){
+        sgCheckService.addOther(sgChcck);
+        return  Result.success();
+    }
 }

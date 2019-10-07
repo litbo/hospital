@@ -26,7 +26,7 @@ public class PlanServiceImp implements PlanService {
             plan.setId(planId);
             plan.setPlan_date(new Date());
             planMapper.insertPlan1(plan);
-            System.out.println(plan.getBm_id());
+//            System.out.println(plan.getBm_id());
             //查询科室的设备列表
             List<String> eqList = planMapper.getEqIdByBmId(plan.getBm_id());
             // 把计划核对的设备添加进核对表Check表

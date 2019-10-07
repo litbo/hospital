@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgCheck;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckListVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
+import com.litbo.hospital.lifemanage.dao.AddMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.enums.StateEnum;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * SgCheckService
@@ -30,6 +32,9 @@ public class SgCheckServiceImpl implements SgCheckService {
     private SgCheckMapper sgCheckMapper;
     @Autowired
     private EmpDao empDao;
+
+    @Autowired
+    private AddMapper addMapper;
 
     /**
      * 计划下的所有待核对的设备列表
@@ -87,5 +92,20 @@ public class SgCheckServiceImpl implements SgCheckService {
         }
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(sgCheckMapper.getListByX(planId,check,checkDate,checkUser,planDate,planUser));
+    }
+
+    @Override
+    public void addOther(SgCheck sgCheck) {
+        try{
+
+            String planId = UUID.randomUUID().toString();
+            sgCheck.setId(planId);
+            addMapper.addOther(sgCheck);
+//            sgCheck.setEqId(sgCheck.getChecks());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 }

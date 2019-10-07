@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.SgCheck;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckListVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 
@@ -45,4 +46,7 @@ public interface SgCheckService {
      * @return PageInfo<SgCheckListVO>
      */
     PageInfo<SgCheckListVO> selectSgCheckList(String planId, String check, String checkDate, String checkUser, String planDate, String planUser, Integer pageNum, Integer pageSize);
+
+    public void addOther(SgCheck sgCheck);
+
 }

@@ -31,6 +31,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
      */
     @Override
     public int insertJhCz(SgPdVO record){
+
         SgPd sgPd = new SgPd();
         BeanUtils.copyProperties(record, sgPd);
         int successCount = 0;
@@ -48,8 +49,10 @@ public class SgPdServiceImpl implements SgPdSeverice {
      * @param record
      */
     @Override
-    public int insertPdId(SgPdVO record) {
+    public int insertPdId(SgPdVO record,String pdJhid) {
+        System.out.println(pdJhid+"盘点计划id");
         SgPd sgPd = new SgPd();
+        sgPd.setPdJhid(pdJhid);
         BeanUtils.copyProperties(record, sgPd);
         int successCount = 0;
         for (String pdScanId : record.getPid()) {
@@ -64,6 +67,9 @@ public class SgPdServiceImpl implements SgPdSeverice {
                 sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
                 sgPd.setPdScanId(pdScanId);
                 sgPd.setPdScsj(pdScsj);
+                sgPd.setPdJhid(pdJhid);
+
+
                 sgPdMapper.insertPdId(sgPd);
                 successCount++;
             }
@@ -105,7 +111,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
         List<String> notExistName =new ArrayList<>();
         CollectionUtils.addAll(notExistName, new Object[allNameList.size()]);
         Collections.copy(notExistName, allNameList);
-        notExistName.removeAll(isName);
+        notExistName.removeAll(isName);  //这个不删除
 
         SgPdJg sgPdJg=new SgPdJg();
 
