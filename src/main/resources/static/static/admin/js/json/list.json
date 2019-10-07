@@ -2163,27 +2163,15 @@
                 "shiro": "a",
                 "children": [
                   {
-                    "title": "项目方案录入",
-                    "url": "./beneft/prior-argument/scheme-input.html",
+                    "title": "项目论证方案",
+                    "url": "./beneft/prior-argument/argument-result.html",
                     "id": "50000",
                     "shiro": "a"
                   },
                   {
-                    "title": "项目论证结果",
-                    "url": "./beneft/prior-argument/argument-result.html",
-                    "id": "50001",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "项目财务指标",
-                    "url": "./beneft/prior-argument/financial-index.html",
-                    "id": "50002",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "设备与方案关联",
+                    "title": "设备预期效益",
                     "url": "./beneft/prior-argument/scheme-association.html",
-                    "id": "50003",
+                    "id": "50001",
                     "shiro": "a"
                   }
                 ]
