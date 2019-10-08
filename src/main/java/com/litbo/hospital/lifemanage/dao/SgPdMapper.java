@@ -43,7 +43,7 @@ public interface SgPdMapper {
      * @param pdJhid
      */
     @Select("select pd_scan_id from sg_pd where pd_jhid = #{pdJhid,jdbcType=VARCHAR}")
-    List<String> selectAllData(String pdJhid);
+    List<SgPd> selectAllData(String pdJhid);
 
     /**
      * 对应设备编号（品名）的设备名字

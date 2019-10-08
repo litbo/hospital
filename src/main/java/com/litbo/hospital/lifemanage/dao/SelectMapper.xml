@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.litbo.hospital.lifemanage.dao.SelectMapper">
+
+    <resultMap id="ListMap" type="com.litbo.hospital.lifemanage.bean.SelectVO">
+        <result property="eqName" column="eq_name"></result>
+        <result property="bmName" column="bm_name"></result>
+        <result property="eqSbbh" column="eq_sbbh"></result>
+    </resultMap>
+
+    <select id="listAllDate" parameterType="String" resultMap="ListMap">
+       select eq_sbbh,eq_name,s.bm_name from eq_info e join s_bm s on e.eq_bmid=s.bm_id
+       where eq_sbbh=#{pdScanId}
+    </select>
+
+    <select id="getBmName" parameterType="String" resultType="String">
+        select bm_name from s_bm where bm_id=#{bmId}
+    </select>
+    
+    <select id="listCheckDate" resultMap="ListMap" parameterType="String">
+    select eq_sbbh,eq_name,s.bm_name from eq_info e join s_bm s on e.eq_bmid=s.bm_id
+    where  bm_id =#{bmId}
+    </select>
+</mapper>
