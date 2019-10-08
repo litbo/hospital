@@ -43,6 +43,7 @@ public class SelectServiceImp implements SelectService {
 
         // 临时集合
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
+        List<SelectVO> listTemp2 = new ArrayList<SelectVO>();//盘亏集合
         for (int i = 0;i < adllDate.size(); i++) {
             // 保存不为空的元素
             if (adllDate.get(i) != null) {
@@ -50,6 +51,8 @@ public class SelectServiceImp implements SelectService {
                 System.out.println(asd);
                 if (getAllBmName.equals(asd)){
                     listTemp.add(adllDate.get(i));
+                }else {
+                    listTemp2.add(adllDate.get(i));
                 }
             }
 
@@ -90,7 +93,7 @@ public class SelectServiceImp implements SelectService {
         * */
         List<SelectVO> adllDate2 = selectMapper.listCheckDate(bmId);
 
-        System.out.println(adllDate2);
+        System.out.println(adllDate2); //所有应该盘的。
         List<SelectVO> allDate3 = new ArrayList<>();
         for(SelectVO a : adllDate){
             if(adllDate2.contains(a)){
@@ -110,6 +113,41 @@ public class SelectServiceImp implements SelectService {
         PageHelper.startPage(pageNum, pageSize);
         List<SelectVO> adllDate3 = selectMapper.listCheckDate(bmId);
         return new PageInfo<>(adllDate3);
+    }
+    @Override
+    public PageInfo<SelectVO> selectLess(@Param("pdJhid")String pdJhid,
+                                        @Param("bmId") String bmId
+            , @Param("pageNum")Integer pageNum
+            , @Param("pageSize")Integer pageSize) {
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
+        String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
+        List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
+        for (SgPd sgPd : list) {
+            adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+        }
+
+        // 临时集合
+        List<SelectVO> listTemp = new ArrayList<SelectVO>();
+        List<SelectVO> listTemp2 = new ArrayList<SelectVO>();//盘亏集合
+        for (int i = 0;i < adllDate.size(); i++) {
+            // 保存不为空的元素
+            if (adllDate.get(i) != null) {
+                String asd = adllDate.get(i).getBmName();
+                System.out.println(asd);
+                if (getAllBmName.equals(asd)){
+                    listTemp.add(adllDate.get(i));
+                }else {
+                    listTemp2.add(adllDate.get(i));
+                }
+            }
+
+        }
+
+        adllDate = listTemp;
+
+        return new PageInfo<>(listTemp2);
     }
 }
 

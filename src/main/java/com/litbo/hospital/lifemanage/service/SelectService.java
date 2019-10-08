@@ -20,4 +20,8 @@ public interface SelectService {
 
     PageInfo<SelectVO>  selectNot(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
     PageInfo<SelectVO>  allList(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
+     PageInfo<SelectVO> selectLess(@Param("pdJhid")String pdJhid,
+                                   @Param("bmId") String bmId,
+                                   @Param("pageNum")Integer pageNum
+                                , @Param("pageSize")Integer pageSize);
 }

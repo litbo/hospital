@@ -15,7 +15,7 @@ public class SelectControllerA {
     @Autowired
     private SelectService selectService;
     @ResponseBody
-    @RequestMapping("/existInfo") //盘点已经存在的
+    @RequestMapping("/existInfo") //已盘
     public Result existInfoController(@RequestParam("pdJhid")String pdJhid,
                                  @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
@@ -24,7 +24,7 @@ public class SelectControllerA {
     }
 
     @ResponseBody
-    @RequestMapping("/notExist")//盘点不存在的
+    @RequestMapping("/notExist")//盘亏的
     public Result noteExistController(@RequestParam("pdJhid")String pdJhid,
                                       @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
@@ -34,13 +34,23 @@ public class SelectControllerA {
 
     }
     @ResponseBody
-    @RequestMapping("/allList")//盘点不存在的
+    @RequestMapping("/allList")//盘点所有的
     public Result allListController(@RequestParam("pdJhid")String pdJhid,
                                       @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
 
         return Result.success(selectService.allList(pdJhid,bmId,pageNum,pageSize));
+
+    }
+    @ResponseBody
+    @RequestMapping("/selectLess")//盘盈的
+    public Result selectLessController(@RequestParam("pdJhid")String pdJhid,
+                                    @RequestParam("bmId") String bmId
+            ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
+            ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
+
+        return Result.success(selectService.selectLess(pdJhid,bmId,pageNum,pageSize));
 
     }
 
