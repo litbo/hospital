@@ -29,6 +29,14 @@ public class RoleServiceImpl implements RoleService {
     public Integer addRole(SRole role) {
 //        String roleId = String.valueOf(Integer.parseInt(roleDao.getLastId())+1);
 //        role.setRoleId(roleId);
+        List<SRole> list = roleDao.listRoles();
+
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getRoleId().equals(role.getRoleId()))
+            {
+                return 1;
+            }
+        }
         return roleDao.addRole(role);
     }
 
