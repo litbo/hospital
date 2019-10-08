@@ -29,13 +29,13 @@
         <div class="layui-inline">
             <input class="layui-input" name="eq_name" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
         </div>
-<!--        <div class="layui-inline">-->
-<!--            <input type="text" name="planDate" id="date" placeholder="计划时间" autocomplete="off"-->
-<!--                   class="layui-input">-->
-<!--        </div>-->
-<!--        <div class="layui-inline">-->
-<!--            <input class="layui-input" name="userName" placeholder="制定人" autocomplete="off">-->
-<!--        </div>-->
+        <!--        <div class="layui-inline">-->
+        <!--            <input type="text" name="planDate" id="date" placeholder="计划时间" autocomplete="off"-->
+        <!--                   class="layui-input">-->
+        <!--        </div>-->
+        <!--        <div class="layui-inline">-->
+        <!--            <input class="layui-input" name="userName" placeholder="制定人" autocomplete="off">-->
+        <!--        </div>-->
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
 </script>
@@ -45,7 +45,10 @@
 </script>
 <script>
 
-    console.log($.getUrlParam("pd_jhid"));
+    var aid= $.getUrlParam("id")
+    var bid= $.getUrlParam("bmId")
+    console.log(aid);
+    console.log(bid);
     renderMod = {
         addTable: {
             table: [
@@ -53,17 +56,20 @@
                     elem: "#table"
                     , height: 'full-75'
                     , cols: [[ //表头
-                        {field: 'eq_name', title: '设备名称', minWidth: 400}
-
+                        {field: 'eqName', title: '设备', minWidth: 400},
+                        {field: 'eqName', title: '设备名称', minWidth: 400},
+                        {field: 'eqName', title: '设备名称', minWidth: 400}
                     ]]
-                    , url: "/lifeManage/selectAllData"
+                    , url: "/checkInfo/allList"
                     , method: "POST"
                     , request: {
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
+
                     , where: {
-                        pd_jhid:$.getUrlParam("pd_jhid")
+                        pdJhid:aid,
+                        bmId: bid
                     }
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
@@ -102,6 +108,17 @@
             }]
         }
     }
+
+    // $.post("/lifeManage/selectAllData",{pdJhid:$.getUrlParam("pdJhid")}, function (data, status) {
+    //
+    //     console.log(data);
+    //     var pdScanList=data.pdScanList;
+    //     alert(  Object.getOwnPropertyNames(pdScanList).length);
+    //
+    //     for(var k=0;k<Object.getOwnPropertyNames(pdScanList).length;k++ ){
+    //         alert("keys名称是："+pdScanList[k]);
+    //     }
+    // });
 </script>
 </body>
 

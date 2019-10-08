@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgCheck;
+import com.litbo.hospital.lifemanage.bean.SgPd;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
@@ -119,6 +120,8 @@ public class SgPlanServiceImpl implements SgPlanService {
             }catch (Exception e){
                 System.out.println("出错");
             }
+            System.out.println(sgPlanMapper.selectPlan(planName, date, userId));
+            System.out.println();
             return new PageInfo<> (sgPlanMapper.selectPlan(planName, date, userId));
         }
 //        return new PageInfo<>(

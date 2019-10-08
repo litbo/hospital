@@ -13,6 +13,7 @@ public class SgPlan {
     /**
      * 主键
      */
+    private String bmName;
     private String id;
 
     /**
@@ -38,7 +39,8 @@ public class SgPlan {
     @Override
     public String toString() {
         return "SgPlan{" +
-                "id='" + id + '\'' +
+                "bmName='" + bmName + '\'' +
+                ", id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
                 ", bmId='" + bmId + '\'' +
                 ", planName='" + planName + '\'' +

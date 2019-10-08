@@ -72,7 +72,7 @@ public class SgPlanSqlProvider {
 //    @Autowired
     public String selectPlan(@Param("planName") String planName, @Param("planDate") Date planDate, @Param("userId") List<String> userId) {
         SQL sql = new SQL();
-        sql.SELECT("sg_plan.id, s_emp.user_xm as userId, s_bm.bm_name as bmId, sg_plan.plan_name,sg_plan.plan_date");
+        sql.SELECT("sg_plan.id,sg_plan.bm_id as bmId, s_emp.user_xm as userId, s_bm.bm_name as bmName, sg_plan.plan_name,sg_plan.plan_date");
         sql.FROM("sg_plan");
         sql.INNER_JOIN("s_bm ON sg_plan.bm_id = s_bm.bm_id INNER JOIN s_emp ON sg_plan.user_id = s_emp.user_id ");
         if (StringUtils.isNotBlank(planName)) {
