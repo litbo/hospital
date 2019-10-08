@@ -11,6 +11,7 @@ import com.litbo.hospital.supervise.vo.EmpSelectVO;
 import com.litbo.hospital.supervise.vo.EmpVO;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import io.swagger.annotations.Api;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -100,8 +101,10 @@ public class EmpController {
     @GetMapping("/listSelectEmpBybmIdAndUserIdAndStatus")
     public Result listSelectEmps(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                                 String bmId, String userId,String status,String bmName) {
-        PageInfo info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId,status,bmName);
+                                 String bmId, String userId,String status,String bmName,String userXm) {
+
+          PageInfo  info = empService.listSelectEmpBybmIdAndUserId(pageNum, pageSize, bmId, userId,status,bmName,userXm);
+
         return Result.success(info);
     }
 

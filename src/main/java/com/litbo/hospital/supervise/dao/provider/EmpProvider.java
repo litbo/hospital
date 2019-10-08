@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 public class EmpProvider {
-    public String selectEmpsByX(String bmId,String userId,String status,String bmName){
+    public String selectEmpsByX(String bmId,String userId,String status,String bmName,String userXm){
 
         StringBuffer sql = new StringBuffer("" +
                 "  SELECT bm.bm_name, emp.user_xm, emp.user_id, sex.sex, xllb.xllb, zwlb.zwlb, emp.byyx,zggw.zggwlb,emp.status" +
@@ -21,6 +21,9 @@ public class EmpProvider {
 
         if(bmId!=null&& !"0000000000".equals(bmId)) {
             sql.append(" and bm.bm_id Like '%'+#{bmId}+'%'");
+        }
+        if(StringUtils.isNotBlank(userXm)){
+            sql.append(" and emp.user_xm Like '%'+#{userXm}+'%'");
         }
 
         return sql.toString();

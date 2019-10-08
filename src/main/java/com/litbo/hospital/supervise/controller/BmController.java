@@ -117,7 +117,6 @@ public class BmController {
     }
 
     @GetMapping ("/listTreeBms")
-
     @ResponseBody
     public List<BmsTreeVO> listTreeBms(){
         List<BmsTreeVO> bmList = bmService.listTreeBms();

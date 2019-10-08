@@ -76,7 +76,7 @@
                 <div class="layui-form-item glBan" pane>
                     <label class="layui-form-label">归口</label>
                     <div class="layui-input-block" style="line-height:40px">
-                        <input type="radio" name="gkCode" value="0" title="医工" checked>
+                        <input type="radio" name="gkCode" value="0" title="医工" >
                         <input type="radio" name="gkCode" value="1" title="信息">
                         <input type="radio" name="gkCode" value="2" title="后勤">
                         <input type="radio" name="gkCode" value="3" title="其他">
@@ -85,7 +85,7 @@
                 <div class="layui-form-item" pane>
                     <label class="layui-form-label">维修科室</label>
                     <div class="layui-input-block" style="line-height:40px">
-                        <input type="radio" name="wxFlag" value="1" title="是" checked>
+                        <input type="radio" name="wxFlag" value="1" title="是">
                         <input type="radio" name="wxFlag" value="0" title="否">
                     </div>
                 </div>
@@ -204,6 +204,7 @@
         layui.use("form", function () {
             var form = layui.form;
             readyData = treeNode;
+            // console.log(treeNode)
             form.val("shows", treeNode);
         })
     }
