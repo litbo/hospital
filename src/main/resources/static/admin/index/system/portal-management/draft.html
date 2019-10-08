@@ -26,9 +26,6 @@
 <body>
 <form class="layui-form layui-form-pane" style="margin-top: 20px;" action="">
     <div class="layui-row">
-        <!--        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend>公告</legend>
-        </fieldset>-->
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">公告类型<span class="sign">*</span></label>
@@ -52,12 +49,6 @@
                     <input type="hidden" id="jssj" name="jssj" autocomplete="off" class="layui-input">
                 </div>
             </div>
-<!--            <div class="layui-form-item">-->
-<!--                <label class="layui-form-label">截止日期</label>-->
-<!--                <div class="layui-input-block">-->
-<!--                    <input type="text" name="jssj" id="date2" autocomplete="off" class="layui-input">-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -65,13 +56,12 @@
                 <label class="layui-form-label">拟稿人</label>
                 <div class="layui-input-block">
                     <input type="text" name="ngr" placeholder="请输入..." autocomplete="off" class="layui-input" lay-verify="required" id="userXm" disabled>
-             <!--       <input type="text" name="ngr" disabled autocomplete="off" class="layui-input" value="Admin">-->
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">拟稿时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="ngsj" disabled autocomplete="off" class="layui-input"id="date3" value="2018-12-09">
+                    <input type="text" name="ngsj" disabled autocomplete="off" class="layui-input"id="date3" >
                 </div>
             </div>
             <div class="layui-form-item" pane>
@@ -83,7 +73,6 @@
             </div>
         </div>
     </div>
-
     <div class="layui-row">
         <div class="col-xs-12">
             <div class="layui-form-item layui-form-text">
@@ -103,11 +92,7 @@
     </div>
 </form>
 <div id="tips">
-
 </div>
-
-
-
 <script>
     $(function() {
         var emp =  tempValue("rl","emp",false);
@@ -117,14 +102,7 @@
         $("#bmId").val(emp.bmId);
 
     });
-    // $("#date1").bind('input change',function(date1){
-    //     console.log(kssj.val)
-    //     debugger
-    //     var arr = obj.field.dateqs.split(' ~ ');
-    //     $("#kssj").val(arr[0]);
-    //     $("#jssj").val(arr[1]);
-    //     debugger
-    // });
+
     formData = {};
     renderMod= {
         form:{
@@ -146,6 +124,12 @@
                     format: "yyyy-MM-dd",
                     range: true
                 },
+                {
+                    elem:"#date3",
+                    value:today,
+                    type: "date",
+                    format: "yyyy-MM-dd",
+                }
             ],
             submit:{
                 before:function(){
@@ -176,7 +160,6 @@
                 name:"dtdt"
             }
         }
-
     }
 </script>
 </body>

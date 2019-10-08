@@ -5,85 +5,125 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title>公告类别管理</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
-    <script src="/static/admin/js/basic.js"></script>
-    <style>
-        .layui-form-label{
-            padding: 8px 10px!important;
-        }
-        .layui-form-item{
-            margin-bottom:30px;
-        }
-    </style>
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
 </head>
 
-<body>
-<form class="layui-form layui-form-pane" action="">
-    <div class="layui-row">
-        <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item" style="margin-top:30px;">
-                <label class="layui-form-label">公告类型<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="gglxName" class="layui-input" autocomplete="off" lay-verify="required">
-                </div>
-            </div>
-        </div>
+<body  style="background-color: #f2f2f2;">
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" class="layui-hide" lay-filter="table1"></table>
     </div>
-
-    <div class="layui-row">
-        <div class="layui-form-item" style="float: right;margin-right: 5%;">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-            </div>
-        </div>
-    </div>
-</form>
-<div id="tips">
-
 </div>
 
+<script type="text/html" id="toolBar" >
+    <div class="addBtn" style="margin-top: 0">
+        <button class="layui-btn layui-btn-sm addi" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
 
+        <button class="layui-btn layui-btn-sm editi" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>修改</button>
 
+        <button class="layui-btn layui-btn-sm deli" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</button>
+    </div>
+</script>
 <script>
+    var dd = 0;
     renderMod = {
-        form:{
-            submit:{
-                filter:"submit",//可以不写
-                form:{
-                    url:"/gg/addGglb",
-                    type:"POST",
-                    data:["gglxName"],
-                    reload:"true"
-                },//表单提交函数
-                before:function(data){
-                    //console.log("1111");
-                    //console.log(data);
-                    for(var name in data.field){
-                        if(data.field.hasOwnProperty(name)){
-                            if(data.field[name] === ""){
-                                //console.log(i);
-                                //console.log(data.field[i]);
-                                layer.alert("请确认您填写的信息！");
-                                return false;
-                            }
-                            //console.log("is true");
-                        }
-                    }
-                    return true;
+        addTable: {
+            table: {
+                cols: [[
+                    {type: "checkbox"}
+                    , {field: 'eqSbbh', title: '设备编号', minWidth: 200, sort: true}
+                    , {field: 'eqName', title: '公告类型', minWidth: 150, sort: true}
+                ]]
+                , url: "/config/ratio/showUsing"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
                 }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        toolFunc:[
+                            {
+                                tool: "toolbar",
+                                type: 2,
+                                event: "add",
+                                title:"添加",
+                                area: ['40%', '40%'],
+                                content: "./child/announce-category-add.html"
+                            },
+                            {
+                                tool: "toolbar",
+                                event: "del",
+                                send:{
+                                    url:"/config/ratio/deleteUsing",
+                                    name:"ids",
+                                    par:"id",
+                                    type:"DELETE",
+                                    reload:true
+                                }
+                            },
+                            {
+                                before:function(obj,cs){
+                                    if(cs.data.length !== 1){
+                                        putMsg({
+                                            alert:"请选中一条数据！！"
+                                        });
+                                        return false;
+                                    }else {
+
+                                    }
+                                },
+                                event:"edit",
+                                tool:"toolbar",
+                                type: 2,
+                                title: "修改",
+                                area:['75%','60%'],
+                                content: "./child/q1edit.html",
+                                func:function(obj,data){
+                                    console.log(data.data[0].id);
+                                    subUp({
+                                        url: "/config/ratio/showUsingById",
+                                        type: "POST",
+
+                                        data: {"id": data.data[0].id},
+                                        success:function(res){
+                                            if(res.code === 0){
+                                                /* putMsg({
+                                                     msg:"您已成功删除一条数据！"
+                                                 });*/
+                                            }else{
+                                                /* putMsg({
+                                                     msg:"删除失败，请重试！"
+                                                 });*/
+                                            }
+                                            /* layer.close(index);*/
+                                        },
+                                        error:function () {
+                                            /* alert(1);*/
+                                        }
+                                    });
+                                }
+                            },
+                        ]
+                    })
+                },
             }
         }
-    }
-
-
+    };
 </script>
 </body>
-
 </html>

@@ -22,82 +22,6 @@
         }
     </style>
 </head>
-<!--<body>
-<div class="layui-row">
-    <div class="col-xs-12">
-        <table id="table" lay-filter="table1"></table>
-    </div>
-</div>
-
-<script type="text/html" id="toolBar">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="fas fa-trash-alt"></i></a>
-    </div>
-    <div class="hidden-xs"  id="moreBar">
-        <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
-        </div>
-        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
-    </div>
-
-</script>
-
-
-<script>
-    renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"},
-                {field: 'ggbt', title: '公告类型', minWidth: 120, sort: true}
-                , {field: 'bmName', title: '公告名称', minWidth: 250,width:"30%",}
-                , {field: 'ngsj', title: '发布科室', minWidth: 160}
-                , {field: 'ggnr', title: '发布时间', minWidth: 150,sort:true}
-                , {field: 'ggnr', title: '有效期',minWidth: 150}
-                , {title:'操作',align:'center',minWidth:200,toolbar:'#bar'}
-            ]],
-            url:"/ggxz/listGgxzs",
-            request: {
-                pageName: 'pageNum',
-                limitName: 'pageSize'
-            },
-            parseData: function (res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "count":res.data.total,//页面显示的数据条数
-                    "data": res.data.list //解析数据列表
-                }
-            }
-
-            , done: function (obj) {
-                tableFunc({
-                    "obj": obj,
-                    "toolFunc": [  {
-                        send:{
-                            id:"table",
-                            filter:"table1",
-                            name:"ggxzIds",
-                            event:"del",
-                            url:"/ggxz/delGgxz",
-                            type:"POST",
-                            par:"id",
-                            reload:true,
-                            reTable:true
-                        },
-                        tool:"toolbar",
-                        event:"del"
-
-                    }
-
-                    ]
-                })
-            }
-
-        }
-    }
-</script>
-
-</body>-->
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
@@ -114,22 +38,6 @@
     </div>
 
 </script>
-<!--<script type="text/html" id="toolBar">
-    <div class="hidden-xs" id="moreBar">
-        <form class="layui-form layui-form-pane" action="">
-            <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="" autocomplete="off">
-            </div>
-            <div class="layui-input-inline">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1"><i class="layui-icon layui-icon-search"></i>查询</button>
-            </div>
-        </form>
-    </div>
-</script>-->
-<script type="text/html" id="bar">
-<a class="layui-btn layui-btn-xs layui-btn-normal">查看明细</a>
-</script>
-
 
 <script>
 
@@ -142,20 +50,12 @@
                     , {field: 'bmName', title: '发布科室', minWidth: 250,width:"30%",}
                     , {field: 'ngsj', title: '拟稿时间', minWidth: 160}
                     , {field: 'ggnr', title: '公告内容', minWidth: 150,sort:true}
-                 /*   , {title:'操作',align:'center',minWidth:200,toolbar:'#bar'}*/
                 ]]
                  , url: "/gg/listShowGg"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                ,"data":[
-                    {}
-                ]
-                /*   , where: {
-                       bmId: ""
-
-                   }*/
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
