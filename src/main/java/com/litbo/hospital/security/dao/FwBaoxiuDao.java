@@ -30,7 +30,7 @@ public interface FwBaoxiuDao {
     public List<String> shrList();
     /*管申购配件的人*/
     @Select("SELECT user_id FROM  s_role AS role , s_user_role AS ur WHERE\n" +
-            "role.role_name LIKE '质量管理科科长' AND\n" +
+            "role.role_name LIKE '管理部门库管员' AND\n" +
             "role.role_id = ur.role_id")
     public List<String> zlshrList();
 
