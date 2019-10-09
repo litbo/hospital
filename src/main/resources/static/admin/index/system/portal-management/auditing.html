@@ -95,7 +95,7 @@
                                     }else {
                                         console.log(cs.data[0].id);
                                         layer.confirm('确认通过审核？',{
-                                            btn: ['是','否']
+                                            btn: ['确认','取消']
                                         },function(index){
                                             $.ajax({
                                                 url: "http://localhost:8080/gg/checkGg",
