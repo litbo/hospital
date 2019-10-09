@@ -63,7 +63,7 @@
                     , cols: [[ //表头
                         {field: 'planName', title: '计划名称', minWidth: 100,templet:'#status'}
                         , {field: 'userId', title: '制定人',width: 100,templet:'#statuss'}
-                        , {field: 'bmId', title: '科室',minWidth: 100,templet:'#statusss'}
+                        , {field: 'bmName', title: '科室',minWidth: 100,templet:'#statusss'}
                         , {title: '操作',width: 100,align:'center',templet:'#cz'}
                         , {field: 'planDate', title: '制定日期',width: 110,templet:'#statussss'}
                         , {title:'盘点结果显示',minWidth: 400,align:'center',toolbar: "#bar"}
@@ -90,13 +90,13 @@
                             {
                                 event:"another",
                                 type:2,
-                                content:"",
-                                dataUrl:["id"]
+                                content:"child/allP2.html",
+                                dataUrl:["id","bmId"]
                             },{
                                 event:"notnull",
                                 type:2,
-                                content:"",
-                                dataUrl:["id"]
+                                content:"child/allP3.html",
+                                dataUrl:["id","bmId"]
                             },{
                                 event:"pipei",
                                 type:2,
@@ -106,13 +106,14 @@
                             },{
                                 event:"haveP",
                                 type:2,
-                                content:"child/haveP.html",
-                                dataUrl:["id"]
+                                content:"child/allP1.html",
+                                dataUrl:["id","bmId"]
                             },{
                                 event:"allP",
                                 type:2,
                                 content:"child/allP.html",
-                                dataUrl:["id"]
+                                dataUrl:["id","bmId"],
+
                             }
                         ]
                     })

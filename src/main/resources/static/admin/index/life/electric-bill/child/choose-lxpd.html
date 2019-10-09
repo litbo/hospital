@@ -21,17 +21,17 @@
             <form class="layui-form" action="" layui-filter="forms">
                 <!--操作人id-->
                 <input type="hidden" id="userId" name="userId">
-                <input type="hidden" id="pd_jhid" name="pd_jhid">
+                <input type="hidden" id="pdJhid" name="pdJhid">
                 <!--计划下拉框-->
-<!--                <div class="layui-form-item">-->
-<!--                    <div class="layui-inline">-->
-<!--                        <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">-->
-<!--                            <select name="planName" lay-filter="select" lay-search="">-->
-<!--                                <option value="">请选择操作人</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="layui-form-item">-->
+                <!--                    <div class="layui-inline">-->
+                <!--                        <div class="layui-input-block" style="display: inline-block;margin-left: 0;width: 200px;">-->
+                <!--                            <select name="planName" lay-filter="select" lay-search="">-->
+                <!--                                <option value="">请选择操作人</option>-->
+                <!--                            </select>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <!--上传文件-->
                 <input type="button" value="选择文件" class="layui-btn layui-btn-normal" style="height: 40px;width: 200px;outline: none;border:0;text-align: center;" onclick="javascript:$('.file').click();" />
                 <input class="fileName" readonly style="height: 38px;outline: none;border:0;"/>
@@ -49,7 +49,7 @@
 
     var emp = tempValue("rl", "emp", false);
     $("#userId").val(emp.userId);
-    $("#pd_jhid").val($.getUrlParam("id"));
+    $("#pdJhid").val($.getUrlParam("id"));
     console.log($.getUrlParam("id"));
 
     layui.use(['form', 'upload'], function(){
@@ -66,36 +66,41 @@
             ,accept: 'file' //普通文件
             ,multiple: true
             ,bindAction: '#startUploadFile'
+            ,data: {
+                pdJhid: function(){
+                    return $.getUrlParam("id");
+                }
+            }
             ,done: function(res){
                 console.log(res)
             }
         });
         //监听提交
-        form.on('submit(demo1)', function(data){
-            console.log(data);
-            var obj = {
-                userId:data.field.userId,
-                pd_jhid:data.field.pd_jhid
-            };
-            var objJson = JSON.stringify(obj);
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: '/lifeManage/insertSgPdId',
-                contentType: 'application/json; charset=UTF-8',
-                data: objJson,
-                success: function(data) {
-                    if (data.code == '0'){
-                        layui.layer.alert('保存成功!');
-                        // window.location.href = '../lxpd-table.html'
-                    }
-                },
-                error:function(){
-                    alert("error");
-                }
-            });
-            return false;
-        });
+        // form.on('submit(demo1)', function(data){
+        //     console.log(data);
+        //     var obj = {
+        //         // userId:data.field.userId,
+        //         pdJhid:data.field.pdJhid
+        //     };
+        //     var objJson = JSON.stringify(obj);
+        //     $.ajax({
+        //         type: "POST",
+        //         dataType: 'json',
+        //         url: '/lifeManage/insertSgPdId',
+        //         contentType: 'application/json; charset=UTF-8',
+        //         data: objJson,
+        //         success: function(data) {
+        //             if (data.code == '0'){
+        //                 layui.layer.alert('保存成功!');
+        //                 // window.location.href = '../lxpd-table.html'
+        //             }
+        //         },
+        //         error:function(){
+        //             alert("error");
+        //         }
+        //     });
+        //     return false;
+        // });
     });
 
     // renderMod.formAction = {

@@ -15,5 +15,5 @@ public interface SgPdSeverice {
 
     int insertJhCz(SgPdVO record);
 
-    List<Object> selectAllData(String jhId);
+    Object selectAllData(String pdJhid);
 }

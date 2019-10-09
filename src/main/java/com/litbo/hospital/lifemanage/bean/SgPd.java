@@ -39,4 +39,67 @@ public class SgPd {
      */
     private Date pdWcsj;
 
+    public String getPdId() {
+        return pdId;
+    }
+
+    public void setPdId(String pdId) {
+        this.pdId = pdId;
+    }
+
+    public String getPdScanId() {
+        return pdScanId;
+    }
+
+    public void setPdScanId(String pdScanId) {
+        this.pdScanId = pdScanId;
+    }
+
+    public String getPdScsj() {
+        return pdScsj;
+    }
+
+    public void setPdScsj(String pdScsj) {
+        this.pdScsj = pdScsj;
+    }
+
+    public String getPdCzr() {
+        return pdCzr;
+    }
+
+    public void setPdCzr(String pdCzr) {
+        this.pdCzr = pdCzr;
+    }
+
+    public String getPdBmId() {
+        return pdBmId;
+    }
+
+    public void setPdBmId(String pdBmId) {
+        this.pdBmId = pdBmId;
+    }
+
+    public String getPdBmzt() {
+        return pdBmzt;
+    }
+
+    public void setPdBmzt(String pdBmzt) {
+        this.pdBmzt = pdBmzt;
+    }
+
+    public String getPdJhid() {
+        return pdJhid;
+    }
+
+    public void setPdJhid(String pdJhid) {
+        this.pdJhid = pdJhid;
+    }
+
+    public Date getPdWcsj() {
+        return pdWcsj;
+    }
+
+    public void setPdWcsj(Date pdWcsj) {
+        this.pdWcsj = pdWcsj;
+    }
 }

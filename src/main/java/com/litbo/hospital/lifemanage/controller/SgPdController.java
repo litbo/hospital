@@ -79,18 +79,30 @@ public class SgPdController {
      * @param
      * @return
      */
-    @GetMapping("/selectAllData")
-    public PageInfo selectAllData(@RequestParam(name = "pdJhid") String pdJhid
+    @RequestMapping("/selectAllData")
+    public Result selectAllData(@RequestParam(name = "pdJhid") String pdJhid
                                 , @RequestParam (name = "pageNum",defaultValue = "1")Integer pageNum,
                                   @RequestParam (name = "pageSize",defaultValue = "15")Integer pageSize
     ) {
 
         PageHelper.startPage(pageNum,pageSize);
-
-        List<Object> str = sgPdService.selectAllData(pdJhid);
-        PageInfo pageInfo = new PageInfo(str);
-
-        return pageInfo;
+//        List<Object> str = sgPdService.selectAllData(pdJhid);
+//       Object object= sgPdService.selectAllData(pdJhid);
+//        PageInfo info = new PageInfo(str);
+//
+//        PageVo vo = new PageVo();
+//        if(!str.isEmpty()){
+//            vo.setCode(0);
+//            vo.setMsg("success");
+//            vo.setData(vo.new DataEntity((int) info.getTotal(),str));
+//            System.out.println(vo);
+//            return vo;
+//        }
+//        System.out.println(vo);
+//        vo.setMsg("没有查询到设备信息");
+//        vo.setCode(0);
+//        vo.setData(vo.new DataEntity((int) info.getTotal(),str));
+        return Result.success(sgPdService.selectAllData(pdJhid));
     }
 
 }

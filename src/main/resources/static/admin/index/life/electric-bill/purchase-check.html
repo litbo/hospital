@@ -39,13 +39,7 @@
     </form>
 </script>
 
-<script type="text/html" id="jsonChange">
-    {{#if (d.yjyaZt == 1) { }}
-    <span class="layui-btn layui-btn-xs">存在</span>
-    {{# }else if(d.yjyaZt == 0){ }}
-    <span class="layui-btn layui-btn-xs layui-btn-normal">不存在</span>
-    {{# } }}
-</script>
+
 
 <script>
     renderMod = {
@@ -61,7 +55,7 @@
                         , {field: 'eqXh', title: '型号', minWidth: 150}
                         , {field: 'date', title: '审核日期', minWidth: 200, sort: true}
                         , {field: 'userId', title: '审核人', minWidth: 150}
-                        , {field: 'checks', title: '是否存在', toolbar: '#jsonChange', minWidth: 150}
+                        , {field: 'checks', title: '是否存在', minWidth: 150}
                     ]]
                     , url: "/lifeManage/selectSgCheck"
                     , method: "POST"
@@ -81,6 +75,7 @@
                         }
                     }
                     , done: function (obj) {
+                        console.log(obj);
                         tableFunc({
                             toolFunc: [
                                 {

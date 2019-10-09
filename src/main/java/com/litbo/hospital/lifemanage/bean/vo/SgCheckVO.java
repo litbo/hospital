@@ -15,6 +15,7 @@ public class SgCheckVO {
     /**
      * 审核id
      */
+
     private String id;
     /**
      * 设备编号
