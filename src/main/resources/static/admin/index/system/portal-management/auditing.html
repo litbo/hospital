@@ -41,7 +41,8 @@
     </div>
     <hr class="devideHr">
     <div class="addBtn">
-        <button class="layui-btn layui-btn-sm" lay-event="edit" style="background: #CC0033"><i class="layui-icon layui-icon-delete"></i>删除</button>
+        <button class="layui-btn layui-btn-sm deli" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</button>
+        <button class="layui-btn layui-btn-sm addi" lay-event="edit" id="edit"><i class="layui-icon layui-icon-delete"></i>审核</button>
         <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
     </div>
 </script>
@@ -70,7 +71,68 @@
                     }
                 }
                 , done: function (obj) {
-                }
+
+                    tableFunc({
+                        toolFunc:[
+                            {
+                                tool: "toolbar",
+                                event: "del",
+                                send:{
+                                    url:"/gg/delGg",
+                                    name:"id",
+                                    par:"id",
+                                    type:"GET",
+                                    reload:true
+                                }
+                            },
+                            {
+                                func:function(obj,cs){
+                                    if(cs.data.length !== 1){
+                                        putMsg({
+                                            alert:"请选中一条数据！！"
+                                        });
+                                        return false;
+                                    }else {
+                                        console.log(cs.data[0].id);
+                                        layer.confirm('确认通过审核？',{
+                                            btn: ['是','否']
+                                        },function(index){
+                                            $.ajax({
+                                                url: "http://localhost:8080/gg/checkGg",
+                                                data: {
+                                                    id: cs.data[0].id
+                                                },
+                                                success: function (data) {
+                                                    console.log(data);
+                                                    if (data.code === 0) {
+                                                        $("searchResult").html(data.msg);
+                                                        layer.msg("审核成功,1秒后刷新页面");
+                                                        localStorage.removeItem("projectsIds");
+                                                        setTimeout(function () {
+                                                            window.location.reload();
+                                                        }, 1000);
+
+                                                    } else {
+                                                        $("#searchResult").html("出现错误：" + data.msg);
+                                                        layer.alert("审核失败")
+                                                    }
+                                                },
+                                                error: function () {
+                                                    layer.msg("审核失败")
+                                                }
+                                            });
+                                            layer.close(index);
+                                        },function(index){
+                                            window.close()
+                                        })
+                                    }
+                                },
+                                event:"edit",
+                                layOpen:false,
+                            }
+                        ]
+                    });
+                },
             },
             reSet:{
                 url:"eq/listEqByX",
