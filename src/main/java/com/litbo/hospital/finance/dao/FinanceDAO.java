@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface FinanceDAO {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Finance record);
 
@@ -14,7 +14,7 @@ public interface FinanceDAO {
 
     int insertSelective(Finance record);
 
-    Finance selectByPrimaryKey(Integer id);
+    Finance selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Finance record);
 

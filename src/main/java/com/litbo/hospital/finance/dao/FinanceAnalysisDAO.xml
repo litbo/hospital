@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.finance.dao.FinanceAnalysisDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.finance.pojo.FinanceAnalysis">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="finance_id" jdbcType="VARCHAR" property="financeId" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="investment_amount" jdbcType="DOUBLE" property="investmentAmount" />
+    <result column="overhaul" jdbcType="DOUBLE" property="overhaul" />
+    <result column="estimated_income" jdbcType="DOUBLE" property="estimatedIncome" />
+    <result column="operating_expenses" jdbcType="DOUBLE" property="operatingExpenses" />
+    <result column="net_cash_flow" jdbcType="DOUBLE" property="netCashFlow" />
+    <result column="count_net_case_flow" jdbcType="DOUBLE" property="countNetCaseFlow" />
+    <result column="discount_factor" jdbcType="DOUBLE" property="discountFactor" />
+    <result column="present_value" jdbcType="VARCHAR" property="presentValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, finance_id, "year", investment_amount, overhaul, estimated_income, operating_expenses, 
+    net_cash_flow, count_net_case_flow, discount_factor, present_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..finance_analysis
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hospital..finance_analysis
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.finance.pojo.FinanceAnalysis">
+    insert into hospital..finance_analysis (finance_id, "year",
+      investment_amount, overhaul, estimated_income, 
+      operating_expenses, net_cash_flow, count_net_case_flow, 
+      discount_factor, present_value)
+    values ( #{financeId,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER},
+      #{investmentAmount,jdbcType=DOUBLE}, #{overhaul,jdbcType=DOUBLE}, #{estimatedIncome,jdbcType=DOUBLE}, 
+      #{operatingExpenses,jdbcType=DOUBLE}, #{netCashFlow,jdbcType=DOUBLE}, #{countNetCaseFlow,jdbcType=DOUBLE}, 
+      #{discountFactor,jdbcType=DOUBLE}, #{presentValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.finance.pojo.FinanceAnalysis">
+    insert into hospital..finance_analysis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="financeId != null">
+        finance_id,
+      </if>
+      <if test="year != null">
+        "year",
+      </if>
+      <if test="investmentAmount != null">
+        investment_amount,
+      </if>
+      <if test="overhaul != null">
+        overhaul,
+      </if>
+      <if test="estimatedIncome != null">
+        estimated_income,
+      </if>
+      <if test="operatingExpenses != null">
+        operating_expenses,
+      </if>
+      <if test="netCashFlow != null">
+        net_cash_flow,
+      </if>
+      <if test="countNetCaseFlow != null">
+        count_net_case_flow,
+      </if>
+      <if test="discountFactor != null">
+        discount_factor,
+      </if>
+      <if test="presentValue != null">
+        present_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="financeId != null">
+        #{financeId,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="investmentAmount != null">
+        #{investmentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="overhaul != null">
+        #{overhaul,jdbcType=DOUBLE},
+      </if>
+      <if test="estimatedIncome != null">
+        #{estimatedIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingExpenses != null">
+        #{operatingExpenses,jdbcType=DOUBLE},
+      </if>
+      <if test="netCashFlow != null">
+        #{netCashFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="countNetCaseFlow != null">
+        #{countNetCaseFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="discountFactor != null">
+        #{discountFactor,jdbcType=DOUBLE},
+      </if>
+      <if test="presentValue != null">
+        #{presentValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.finance.pojo.FinanceAnalysis">
+    update hospital..finance_analysis
+    <set>
+      <if test="financeId != null">
+        finance_id = #{financeId,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        "year" = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="investmentAmount != null">
+        investment_amount = #{investmentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="overhaul != null">
+        overhaul = #{overhaul,jdbcType=DOUBLE},
+      </if>
+      <if test="estimatedIncome != null">
+        estimated_income = #{estimatedIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingExpenses != null">
+        operating_expenses = #{operatingExpenses,jdbcType=DOUBLE},
+      </if>
+      <if test="netCashFlow != null">
+        net_cash_flow = #{netCashFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="countNetCaseFlow != null">
+        count_net_case_flow = #{countNetCaseFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="discountFactor != null">
+        discount_factor = #{discountFactor,jdbcType=DOUBLE},
+      </if>
+      <if test="presentValue != null">
+        present_value = #{presentValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.finance.pojo.FinanceAnalysis">
+    update hospital..finance_analysis
+    set finance_id = #{financeId,jdbcType=VARCHAR},
+      "year" = #{year,jdbcType=INTEGER},
+      investment_amount = #{investmentAmount,jdbcType=DOUBLE},
+      overhaul = #{overhaul,jdbcType=DOUBLE},
+      estimated_income = #{estimatedIncome,jdbcType=DOUBLE},
+      operating_expenses = #{operatingExpenses,jdbcType=DOUBLE},
+      net_cash_flow = #{netCashFlow,jdbcType=DOUBLE},
+      count_net_case_flow = #{countNetCaseFlow,jdbcType=DOUBLE},
+      discount_factor = #{discountFactor,jdbcType=DOUBLE},
+      present_value = #{presentValue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getFinanceAnalysis" parameterType="string" resultMap="BaseResultMap">
+    select * from hospital..finance_analysis where finance_id = #{id}
+  </select>
+</mapper>

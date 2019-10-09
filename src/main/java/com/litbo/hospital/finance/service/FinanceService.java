@@ -1,6 +1,7 @@
 package com.litbo.hospital.finance.service;
 
 import com.litbo.hospital.finance.pojo.Finance;
+import com.litbo.hospital.finance.vo.FinanceVo;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface FinanceService {
     int addFinance(Finance finance);
 
     List<Finance> allFinance(String name,String status);
+
+    FinanceVo getMessage(String id);
 }

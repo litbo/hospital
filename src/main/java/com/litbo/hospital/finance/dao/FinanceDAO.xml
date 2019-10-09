@@ -21,7 +21,7 @@
   <sql id="Base_Column_List">
     id, "name", amount, create_time, years_of_use, annual_operating_expenses, annual_working_day, 
     overhaul_year, daily_workload, overhaul_cost, charges, annual_discount_rate, expected_annual_interest_rate, 
-    investment_status, unit
+    investment_status, unit, amount_get, NPV, IRR, amount_advance, check_person
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -39,13 +39,17 @@
       annual_working_day, overhaul_year, daily_workload, 
       overhaul_cost, charges, annual_discount_rate, 
       expected_annual_interest_rate, investment_status, 
-      unit)
+      unit, amount_get, NPV, 
+      IRR, amount_advance, check_person
+      )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{yearsOfUse,jdbcType=VARCHAR}, #{annualOperatingExpenses,jdbcType=VARCHAR}, 
       #{annualWorkingDay,jdbcType=VARCHAR}, #{overhaulYear,jdbcType=VARCHAR}, #{dailyWorkload,jdbcType=VARCHAR}, 
       #{overhaulCost,jdbcType=VARCHAR}, #{charges,jdbcType=VARCHAR}, #{annualDiscountRate,jdbcType=VARCHAR}, 
       #{expectedAnnualInterestRate,jdbcType=VARCHAR}, #{investmentStatus,jdbcType=VARCHAR}, 
-      #{unit,jdbcType=VARCHAR})
+      #{unit,jdbcType=VARCHAR}, #{amountGet,jdbcType=VARCHAR}, #{npv,jdbcType=VARCHAR}, 
+      #{irr,jdbcType=VARCHAR}, #{amountAdvance,jdbcType=VARCHAR}, #{checkPerson,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.finance.pojo.Finance">
     insert into hospital..finance
@@ -95,6 +99,21 @@
       <if test="unit != null">
         unit,
       </if>
+      <if test="amountGet != null">
+        amount_get,
+      </if>
+      <if test="npv != null">
+        NPV,
+      </if>
+      <if test="irr != null">
+        IRR,
+      </if>
+      <if test="amountAdvance != null">
+        amount_advance,
+      </if>
+      <if test="checkPerson != null">
+        check_person,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -141,6 +160,21 @@
       </if>
       <if test="unit != null">
         #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="amountGet != null">
+        #{amountGet,jdbcType=VARCHAR},
+      </if>
+      <if test="npv != null">
+        #{npv,jdbcType=VARCHAR},
+      </if>
+      <if test="irr != null">
+        #{irr,jdbcType=VARCHAR},
+      </if>
+      <if test="amountAdvance != null">
+        #{amountAdvance,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPerson != null">
+        #{checkPerson,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -189,6 +223,21 @@
       <if test="unit != null">
         unit = #{unit,jdbcType=VARCHAR},
       </if>
+      <if test="amountGet != null">
+        amount_get = #{amountGet,jdbcType=VARCHAR},
+      </if>
+      <if test="npv != null">
+        NPV = #{npv,jdbcType=VARCHAR},
+      </if>
+      <if test="irr != null">
+        IRR = #{irr,jdbcType=VARCHAR},
+      </if>
+      <if test="amountAdvance != null">
+        amount_advance = #{amountAdvance,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPerson != null">
+        check_person = #{checkPerson,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -207,7 +256,12 @@
       annual_discount_rate = #{annualDiscountRate,jdbcType=VARCHAR},
       expected_annual_interest_rate = #{expectedAnnualInterestRate,jdbcType=VARCHAR},
       investment_status = #{investmentStatus,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR}
+      unit = #{unit,jdbcType=VARCHAR},
+      amount_get = #{amountGet,jdbcType=VARCHAR},
+      NPV = #{npv,jdbcType=VARCHAR},
+      IRR = #{irr,jdbcType=VARCHAR},
+      amount_advance = #{amountAdvance,jdbcType=VARCHAR},
+      check_person = #{checkPerson,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
