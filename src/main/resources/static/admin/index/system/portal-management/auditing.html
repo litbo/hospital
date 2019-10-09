@@ -47,6 +47,7 @@
     </div>
 </script>
 <script>
+    var ids=[];
     renderMod = {
         addTable: {
             table: {
@@ -85,22 +86,47 @@
                                     reload:true
                                 }
                             },
+                            // {
+                            //     tool: "toolbar",
+                            //     event: "edit",
+                            //     send:{
+                            //         func:function(){
+                            //             layer.msg(123)
+                            //         },
+                            //         url:"/gg/checkGg",
+                            //         name:"id",
+                            //         par:"id",
+                            //         type:"POST",
+                            //         reload:true
+                            //     }
+                            // },
                             {
                                 func:function(obj,cs){
-                                    if(cs.data.length !== 1){
+                                    if(cs.data.length === 0){
                                         putMsg({
-                                            alert:"请选中一条数据！！"
+                                            alert:"请选中数据！！"
                                         });
                                         return false;
                                     }else {
-                                        console.log(cs.data[0].id);
+                                        // cs.data[0].id,cs.data[1].id,cs.data[2].id,
+                                        //     cs.data[3].id,cs.data[4].id,cs.data[5].id,cs.data[6].id,
+                                        //     cs.data[7].id,cs.data[8].id,cs.data[9].id,cs.data[10].id,
+                                        //     cs.data[11].id,cs.data[12].id,cs.data[13].id,cs.data[14].id,cs.data[15].id
+                                        ids = [ cs.data[0].id,cs.data[1].id,cs.data[2].id,
+                                                cs.data[3].id,cs.data[4].id,cs.data[5].id,
+                                            cs.data[6].id,cs.data[7].id,cs.data[8].id,
+                                            cs.data[9].id,cs.data[10].id,cs.data[11].id,
+                                            cs.data[12].id,cs.data[13].id,cs.data[14].id,]
+
                                         layer.confirm('确认通过审核？',{
                                             btn: ['确认','取消']
                                         },function(index){
                                             $.ajax({
                                                 url: "http://localhost:8080/gg/checkGg",
                                                 data: {
-                                                    id: cs.data[0].id
+
+                                                    "id": ids,
+
                                                 },
                                                 success: function (data) {
                                                     console.log(data);
