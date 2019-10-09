@@ -5,13 +5,16 @@ import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SysGg;
 import com.litbo.hospital.user.dao.GgDao;
 import com.litbo.hospital.user.service.GgService;
+import com.litbo.hospital.user.vo.CheckVo;
+import com.litbo.hospital.user.vo.DelVo;
 import com.litbo.hospital.user.vo.ListVo;
+import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 *
@@ -23,8 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class GgController {
     @Autowired
     private GgService ggService;
-    @Autowired
-    private GgDao ggDao;
     //增加公告
     @RequestMapping("/addGg")
     public Result addGg(@RequestBody SysGg gg){
@@ -62,12 +63,17 @@ public class GgController {
 
     //通过审核
     @RequestMapping("/checkGg")
-    public Result checkGg(Integer id){
-        if(ggService.checkGg(id)>0){
-            return Result.success();
+    public Result checkGg(@RequestBody CheckVo chids){
+        if(chids.getId()!=null){
+            Integer integer = ggService.checkGg(chids.getId());
+            if(integer>0){
+                return Result.success();
+            }else {
+                return Result.error("请选中数据");
+            }
+        }else{
+            return Result.error();
         }
-        return Result.error();
-
     }
 
     //通过Id查询公告信息
@@ -85,18 +91,20 @@ public class GgController {
         }
         return Result.error();
     }
-
-    @RequestMapping("delGg")
+    //删除待审核公告
+    @RequestMapping("/delGg")
     @Transactional
-    public Result delGg( @RequestBody ListVo listVo){
-
-        for (String id : listVo.getGgIds()) {
-            if(ggDao.delGg(Integer.parseInt(id))<=0){
-                return Result.error();
+    public Result delGg(@RequestBody DelVo ggids){
+        if(ggids.getId()!=null){
+            Integer integer = ggService.delGg(ggids.getId());
+            if (integer>0){
+                return Result.success("已删除"+integer+"个公告");
+            }else {
+                return Result.error("请选中数据");
             }
-
+        }else{
+            return Result.error();
         }
-        return Result.success();
 
     }
 

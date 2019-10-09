@@ -14,7 +14,7 @@ public interface GgDao {
     @SelectProvider(type = GgProvider.class , method = "listShowGgs")
     List<SysGgVo> listShowGgs();
     @UpdateProvider(type = GgProvider.class , method = "checkGg")
-    int checkGg(Integer id);
+    int checkGg(Integer[] ids);
 
     @SelectProvider(type = GgProvider.class , method = "getGgById")
     SysGgVo getGgById(Integer id);
@@ -25,8 +25,15 @@ public interface GgDao {
     Integer addGglb(@Param("gglxName") String gglxName, @Param("gglxId") Integer gglxId);
     @Select("select top 1 gglx_id from sys_gglx order by gglx_id desc" )
     Integer getLastId();
-    @Delete("delete from sys_gg where id =#{id}")
-    Integer delGg(int parseInt);
+    @Delete({
+            "<script>",
+            "DELETE FROM dbo.sys_gg WHERE id in",
+            "<foreach item = 'item' index = 'index' collection = 'array' open = '(' separator = ',' close = ')'>",
+            "#{item}",
+            "</foreach>",
+            "</script>"
+    })
+    Integer delGg(Integer [] ids);
     @SelectProvider(type = GgProvider.class , method = "listGgDesc")
     List<SysGgVo> listGgDesc();
 }

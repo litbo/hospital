@@ -11,7 +11,7 @@ public interface GgService {
 
     PageInfo listShowGgs(int pageNum, int pageSize);
 
-    int checkGg(Integer id);
+    Integer checkGg(Integer[] ids);
 
     SysGgVo getGgById(Integer id);
 
@@ -20,5 +20,7 @@ public interface GgService {
     Integer addGglb(String gglxName);
 
     PageInfo listGgDesc(int pageNum, int pageSize);
+
+    Integer delGg(Integer[] ids);
 
 }

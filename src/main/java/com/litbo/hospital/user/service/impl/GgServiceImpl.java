@@ -25,6 +25,9 @@ public class GgServiceImpl implements GgService {
         return ggDao.addGg(gg);
     }
 
+    public Integer delGg(Integer[] ids){
+        return ggDao.delGg(ids);
+    }
     @Override
     public PageInfo listShowGgs(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -33,8 +36,8 @@ public class GgServiceImpl implements GgService {
     }
 
     @Override
-    public int checkGg(Integer id) {
-        return ggDao.checkGg(id);
+    public Integer checkGg(Integer[] ids) {
+        return ggDao.checkGg(ids);
     }
 
     @Override
