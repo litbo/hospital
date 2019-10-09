@@ -24,8 +24,7 @@ public class FwWxfProvider {
                 "LEFT JOIN fw_wxf AS wxf ON baoxiu.id = wxf.fw_id\n" +
                 "WHERE\n" +
                 "shouli.slr_id = #{userId} AND\n" +
-                "baoxiu.bx_status = 100 AND\n" +
-                "wxf.wxf_status IS NULL");
+                "baoxiu.bx_status = 100 ");
         if(StringUtils.isNotBlank(fwId)){
             sql.append(" and shouli.id = #{fwId}");
         }

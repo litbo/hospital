@@ -85,15 +85,17 @@ public interface FwWxfDao {
             "dbo.fw_baoxiu AS baoxiu ,\n" +
             "dbo.s_bm AS bm ,\n" +
             "dbo.s_emp AS emp ,\n" +
-            "dbo.fw_wxf AS wxf\n" +
+            "dbo.fw_wxf AS wxf,\n" +
+            "dbo.s_user_role as role\n" +
             "WHERE\n" +
             "baoxiu.id = wxf.fw_id AND\n" +
             "eq.eq_id = baoxiu.eq_id AND\n" +
             "baoxiu.bxks_id = bm.bm_id AND\n" +
-            "baoxiu.bxr_id = emp.user_id AND\n" +
-            "wxf.user2_id = #{userId} AND\n" +
-            "wxf.wxf_status = 0")
-    public List<BaoXiuRw> getWxfRw(String userId);
+            "baoxiu.bxr_id = emp.user_id and role.role_id in('1046','1047')\n" +
+            " and role.user_id = #{userId}\n" +
+            "AND\n" +
+            " wxf.wxf_status = 0")
+    public List<BaoXiuRw> getWxfRw(@Param("userId") String userId);
 
     @Select("SELECT\n" +
             "wxf.id,\n" +
