@@ -14,9 +14,6 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        .layui-inline{
-            width:140px;
-        }
         body{
             background: #f2f2f2;
         }
@@ -32,7 +29,7 @@
 
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input xs-100" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
@@ -64,29 +61,6 @@
                         "data": res.data.list //解析数据列表
                     }
                 }
-                // , done: function (obj) {
-                //     tableFunc({
-                //         "obj": obj,
-                //         "toolFunc": [  {
-                //             send:{
-                //                 id:"table",
-                //                 filter:"table1",
-                //                 name:"ggIds",
-                //                 event:"del",
-                //                 url:"/gg/delGg",
-                //                 type:"POST",
-                //                 par:"id",
-                //                 reload:true,
-                //                 reTable:true
-                //             },
-                //             tool:"toolbar",
-                //             event:"del"
-                //
-                //         }
-                //
-                //         ]
-                //     })
-                // }
             },
 
             reSet:{
