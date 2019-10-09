@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.finance.pojo.Finance;
 import com.litbo.hospital.finance.service.FinanceService;
+import com.litbo.hospital.finance.vo.FinanceVo;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,17 @@ public class FinanceController {
         vo.setData(vo.new DataEntity((int) info.getTotal(),list));
         return vo;
 
+    }
+
+    /**
+     * 查看信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/getMessage.do")
+    public Result getMessage(String id){
+        FinanceVo vo = financeService.getMessage(id);
+        return Result.success(vo);
     }
 
 
