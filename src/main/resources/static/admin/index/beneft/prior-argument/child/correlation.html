@@ -26,7 +26,7 @@
 </style>
 <body>
 
-
+<input type="hidden" name="eqId" id="eqId">
 <div class="layui-col-md12">
     <form class="layui-form layui-form-pane" id="forms" action="">
         <div class="layui-collapse">
@@ -54,7 +54,7 @@
                                 <label class="layui-form-label">投资方案<span
                                         class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="scsName" disabled id="scsName1" class="layui-input col-sm-7">
+                                    <input type="text" name="financeId" disabled id="financeId" class="layui-input col-sm-7">
                                     <button class="layui-btn col-sm-2" style="margin: 0;margin-right: 1px"
                                             id="selectEmp1" lay-filter="sub">选择
                                     </button>
@@ -74,8 +74,8 @@
                             <div class="layui-form-item " style="margin-top: 20px">
                                 <label class="layui-form-label" style="width: auto">工作量低限提醒<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="radio" name="dhdjIsqbdh" value="1" title="提醒" checked>
-                                    <input type="radio" name="dhdjIsqbdh" value="0" title="不提醒">
+                                    <input type="radio" name="tiXing" value="提醒" title="提醒" checked>
+                                    <input type="radio" name="tiXing" value="不提醒" title="不提醒">
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <div class="layui-form-item" style="margin-top: 20px">
                                 <label class="layui-form-label">提醒天数<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="dhdjFhxs" lay-verify="required|number"
+                                    <input type="text" name="day" lay-verify="required|number"
                                            placeholder="请输入内容"
                                            onfocus="this.placeholder=''"
                                            onblur="this.placeholder='请输入内容'" autocomplete="off" class="layui-input">
@@ -112,41 +112,29 @@
 
 
 <script>
-$("#htBianhao").blur(function(){
-    $.ajax({
-        url : "/lifeManage/checkHtBianhao",
-        type : "POST",
-        // async:false,
-        // dataType : "JSON",
-        data:{
-            "htBianhao":$("#htBianhao").val(),
-            // "assetId":value
-        },
-        success : function(data) {
-            console.log(data)
-            if(data.msg!=null && data.msg!=""){
-                layer.alert(data.msg)
-                $("#htBianhao").val("")
-            }
-            // layer.alert(data.msg)
-        }
-    });
-});
 
-    //注意：导航 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function () {
-        var element = layui.element;
+    $('#selectEmp').on('click', function () {
+        layer.open({
+            type: 2,
+            title: '选择',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1000px', '90%'],
+            content: 'child/s1s.html'
+            // content: 'child/modern-list-child.html'
+        });
     });
-    layui.use('form', function () {
-        var form = layui.form;
+    $('#selectEmp1').on('click', function () {
+        layer.open({
+            type: 2,
+            title: '选择',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1000px', '90%'],
+            content: 'child/choose2s.html'
+            // content: 'child/modern-list-child.html'
+        });
     });
-    layui.use('laydate', function () {
-        var laydate = layui.laydate;
-        laydate.render({elem: '#test1'});
-    });
-
-    // var yf=$.getUrlParam("sbcsIdScs");
-    // console.log(yf);
     var formData = {};
     var formData2 = {};
     renderMod = {
@@ -183,80 +171,14 @@ $("#htBianhao").blur(function(){
                 }
             ]
         },
-        bind: {
-            addItem: [
-                {
-                    elem: "#dataTable1",
-                    base: "./child/medical-equipment.html",
-                    name: "vg",
-                    key: "key",
-                    before: function () {
-                        // console.log("scsName");
-                        // $("#htYf").val($("#sbcsIdScs").val());
-                    }
-                },
-                {
-                    elem: "#addEmp",
-                    base: "./child/add-Yf.html",
-                    name: "dtdt",
-                    key: "date"
-                }
-
-            ],
-            delItem: ".delNew",
-            selectItem: [
-                {
-                    elem: "#selectEmp",
-                    cb: "/lifeManage/listHtBiaotou",
-                    db: "/cs/listScs",
-                    name: "dtdt",
-                    key: "radio",
-                    data: formData2,
-                    func:function(){
-                        console.log(formData2);
-                    }
-                }
-
-            ]
-        },
         form: {
             submit: {
-                before: function (param) {
-                    var tv = getTableValue("table");
-                    // var yf=$("#sbcsIdScs").val();
-                    var ab=$("#scsName").val();
-                    $("#htYfName").val(ab);
-                    if (doJudg({
-                        "undefined": [formData2.radio],
-                        0: [tv]
-                    })) {
-                        putMsg({
-                            alert: "无法提交空数据！"
-                        });
-                        return false;
-                    }
-                    return param = {
-                        1: tv,
-                        2: formData2.radio[0]["sbcsIdScs"]
-                    };
 
-                       
-                },
                 form: {
-                    url: "/lifeManage/addEqHt",
+                    url: "/Finance/guanLian.do",
                     type: "POST",
-                    data: [
-                        "htBianhao", "htQyd", "htJf","htJfq","htZgbfb", "htBzr", "htTsr", "htYsfk", "htZbj",
-                        "htScrq", "htBxq", "htBxxy", "htBxdc", "htZgfg", "htBycs", "htLpjyhj","sbcsIdScs","htYfName"
-                    ],
-                    // key:"key",
-                    contentType: "application/json",
-                    param: {
-                        1: "listZb",
-                        2:"htYf"
-                    },
-
-                    reload: true
+                    data: ["eqId", "financeId", "tiXing","day"],
+                    reload: "parent"
                 }
             }
 

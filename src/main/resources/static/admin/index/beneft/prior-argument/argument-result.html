@@ -50,17 +50,23 @@
     </div>
     </form>
     <hr class="devideHr">
-    <div class="addBtn">
+    <div class="addBtn" id="toolBars">
         <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="scheme-input.html"><i class="fas fa-plus"></i>&nbsp;新增</a>
-        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="edit"><i class="fas fa-trash-alt"></i>&nbsp;删除</a>
+        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="delAll"><i class="fas fa-trash-alt"></i>&nbsp;删除</a>
     </div>
 </script>
 
 <script type="text/html" id="bar">
+    {{# if(d.investmentStatus==="未投资"){ }}
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="cal">计算过程</a>
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">论证报告</a>
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">报告附件</a>
     <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="inv">投资</a>
+    {{# } else { }}
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="cal">计算过程</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">论证报告</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">报告附件</a>
+    {{# } }}
 </script>
 
 
@@ -75,7 +81,7 @@
                     , {field: 'createTime', title: '创建时间'}
                     , {field: 'investmentStatus', title: '投资状态'}
                     , {field: 'yearsOfUse', title: '使用年限'}
-                    , {align: 'left', toolbar: '#bar',minWidth:"500px", title: '操作'}
+                    , {align: 'left', toolbar: '#bar', title: '操作'}
                 ]]
                 , url: "/Finance/allFinance.do"
                 // , reload: true
@@ -97,7 +103,9 @@
                 }
 
                 , done: function (obj) {
+                    console.log(obj);
                     tableFunc({
+
                         toolFunc: [
                             {
                                 title: "计算过程",
@@ -114,6 +122,21 @@
                                 content: './child/investment.html',
                                 area: ['90%', '90%'],
                                 dataUrl: ["id"]
+                            },
+                            {
+                                tool: "toolbar",
+                                event: "delAll",
+                                send: {
+                                    id: "table",
+                                    filter: "table1",
+                                    name: "id",
+                                    event: "delAll",
+                                    url: "/Finance/delProject.do",
+                                    type: "POST",
+                                    // contentType:"application/json",
+                                    par: "id",
+                                    reload: true
+                                }
                             }
                         ]
                     })
