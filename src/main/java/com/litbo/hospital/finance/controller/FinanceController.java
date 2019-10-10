@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.finance.pojo.Finance;
 import com.litbo.hospital.finance.pojo.FinanceAndEq;
 import com.litbo.hospital.finance.service.FinanceService;
+import com.litbo.hospital.finance.vo.DeleteVo;
 import com.litbo.hospital.finance.vo.FinanceEqVo;
 import com.litbo.hospital.finance.vo.FinanceVo;
 import com.litbo.hospital.metering.vo.PageVo;
@@ -48,12 +49,16 @@ public class FinanceController {
 
     /**
      * 删除
-     * @param id
+     * @param vo
      * @return
      */
     @RequestMapping("/delProject.do")
-    public Result delProject(String id){
-        return Result.success(financeService.delFinance(id));
+    public Result delProject(@RequestBody DeleteVo vo){
+        List<String> ids = vo.getIds();
+        for(String id : ids){
+            financeService.delFinance(id);
+        }
+        return Result.success();
     }
 
 
