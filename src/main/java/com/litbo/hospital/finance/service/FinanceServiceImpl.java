@@ -2,11 +2,14 @@ package com.litbo.hospital.finance.service;
 
 import com.litbo.hospital.common.vo.Test;
 import com.litbo.hospital.finance.dao.FinanceAnalysisDAO;
+import com.litbo.hospital.finance.dao.FinanceAndEqDAO;
 import com.litbo.hospital.finance.dao.FinanceDAO;
 import com.litbo.hospital.finance.dao.ProfitAndLossDAO;
 import com.litbo.hospital.finance.pojo.Finance;
 import com.litbo.hospital.finance.pojo.FinanceAnalysis;
+import com.litbo.hospital.finance.pojo.FinanceAndEq;
 import com.litbo.hospital.finance.pojo.ProfitAndLoss;
+import com.litbo.hospital.finance.vo.FinanceEqVo;
 import com.litbo.hospital.finance.vo.FinanceVo;
 import com.litbo.hospital.metering.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,10 @@ public class FinanceServiceImpl implements FinanceService {
     @Autowired
     private ProfitAndLossDAO profitAndLossDAO;
 
+
+    @Autowired
+    private FinanceAndEqDAO financeAndEqDAO;
+
     @Override
     public int addFinance(Finance finance) {
 
@@ -51,6 +58,9 @@ public class FinanceServiceImpl implements FinanceService {
             num = new DecimalFormat("000000").format(tempNum);
             PropertiesUtil.setPropertie("FinanceNum",num);
         }
+
+        //创建时间
+        finance.setCreateTime(new SimpleDateFormat("yyyy年MM月dd日").format(new Date()));
 
 
         // 生成id
@@ -467,6 +477,40 @@ public class FinanceServiceImpl implements FinanceService {
         vo.setProfitAndLosses(profitAndLosses);
 
         return vo;
+    }
+
+    @Override
+    public int touZi(String id , String name , String advance) {
+        Finance f = financeDAO.selectByPrimaryKey(id);
+        f.setInvestmentStatus("已投资");
+        f.setAmountAdvance(advance);
+        f.setCheckPerson(name);
+        return financeDAO.updateByPrimaryKey(f);
+    }
+
+    @Override
+    public int guanlian(FinanceAndEq eq) {
+        return financeAndEqDAO.insert(eq);
+    }
+
+    @Override
+    public List<FinanceEqVo> getGuanLian(String eqNum, String eqName, String name, String bmName) {
+        if(eqNum != null){
+            eqNum = "%" + eqNum + "%";
+        }
+
+        if(eqName != null){
+            eqName = "%" + eqName + "%";
+        }
+
+        if(name != null){
+            name = "%" + name + "%";
+        }
+
+        if(bmName != null){
+            bmName = "%" + bmName + "%";
+        }
+        return financeAndEqDAO.getGuanLian(eqNum, eqName, name, bmName);
     }
 
 

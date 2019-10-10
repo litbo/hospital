@@ -58,51 +58,18 @@ public class SgPdController {
 
     }
 
-    /**
-     * 插入盘点扫描到的所有编号
-     *
-     * @param record
-     */
-    @PostMapping(value = "/insertSgPdId")
-//    public Result insertSgPd(@RequestParam SgPdVO record) {
-        public Result insertSgPd(@RequestParam SgPdVO record) {
-        System.out.println(record.toString());
-        System.out.println("iiiiiiiiiiiiiii");
-        System.out.println("iiiiiiiiiiiiiii");
-        System.out.println("iiiiiiiiiiiiiii");
-        return Result.success(sgPdService.insertJhCz(record));
+    @ResponseBody
+    @RequestMapping("/insertStatus")// 插入所有状态数据
+    public Result insertStatusController(@RequestParam("pdJhid")String pdJhid,
+                                       @RequestParam("bmId") String bmId
+            ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
+            ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
+
+        sgPdService.insetStatus(pdJhid,bmId,pageNum,pageSize);
+
+        return Result.success();
     }
 
-    /**
-     * 返回盘点数据的状态
-     *
-     * @param
-     * @return
-     */
-    @RequestMapping("/selectAllData")
-    public Result selectAllData(@RequestParam(name = "pdJhid") String pdJhid
-                                , @RequestParam (name = "pageNum",defaultValue = "1")Integer pageNum,
-                                  @RequestParam (name = "pageSize",defaultValue = "15")Integer pageSize
-    ) {
 
-        PageHelper.startPage(pageNum,pageSize);
-//        List<Object> str = sgPdService.selectAllData(pdJhid);
-//       Object object= sgPdService.selectAllData(pdJhid);
-//        PageInfo info = new PageInfo(str);
-//
-//        PageVo vo = new PageVo();
-//        if(!str.isEmpty()){
-//            vo.setCode(0);
-//            vo.setMsg("success");
-//            vo.setData(vo.new DataEntity((int) info.getTotal(),str));
-//            System.out.println(vo);
-//            return vo;
-//        }
-//        System.out.println(vo);
-//        vo.setMsg("没有查询到设备信息");
-//        vo.setCode(0);
-//        vo.setData(vo.new DataEntity((int) info.getTotal(),str));
-        return Result.success(sgPdService.selectAllData(pdJhid));
-    }
 
 }

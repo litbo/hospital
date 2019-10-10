@@ -120,8 +120,7 @@ public class SgPlanServiceImpl implements SgPlanService {
             }catch (Exception e){
                 System.out.println("出错");
             }
-            System.out.println(sgPlanMapper.selectPlan(planName, date, userId));
-            System.out.println();
+
             return new PageInfo<> (sgPlanMapper.selectPlan(planName, date, userId));
         }
 //        return new PageInfo<>(
