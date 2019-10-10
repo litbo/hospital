@@ -3,7 +3,9 @@ package com.litbo.hospital.finance.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.finance.pojo.Finance;
+import com.litbo.hospital.finance.pojo.FinanceAndEq;
 import com.litbo.hospital.finance.service.FinanceService;
+import com.litbo.hospital.finance.vo.FinanceEqVo;
 import com.litbo.hospital.finance.vo.FinanceVo;
 import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
@@ -96,6 +98,71 @@ public class FinanceController {
     public Result getMessage(String id){
         FinanceVo vo = financeService.getMessage(id);
         return Result.success(vo);
+    }
+
+    /**
+     * 投资
+     * @param id
+     * @return
+     */
+    @RequestMapping("/touZi.do")
+    public Result touZi(String id){
+        financeService.touZi(id);
+        return Result.success();
+    }
+
+
+    /**
+     * 关联设备及投资方案
+     * @param eq
+     * @return
+     */
+    @RequestMapping("/guanLian.do")
+    public Result guanLian(FinanceAndEq eq){
+        int resutl = financeService.guanlian(eq);
+        return Result.success(resutl);
+    }
+
+    /**
+     * 查看已经关联过的设备信息以及投资方案信息
+     * @param eqNum  设备编号
+     * @param eqName 设备名称
+     * @param name  名称
+     * @param bmName 部门名称
+     * @param pageSize  每页数据量
+     * @param pageSize 页码
+     * @return
+     */
+    public Result seeGuanLian(@RequestParam(name = "eqNum" , defaultValue = "") String eqNum ,
+                              @RequestParam(name = "eqName" , defaultValue = "") String eqName ,
+                              @RequestParam(name = "name" , defaultValue = "") String name ,
+                              @RequestParam(name = "bmName" , defaultValue = "") String bmName ,
+                              @RequestParam(name = "pageNum" , defaultValue = "1") int pageNum ,
+                              @RequestParam(name = "pageSize" , defaultValue = "15")int pageSize){
+        if(eqName.equals("")){
+            eqName = null;
+        }
+
+        if(eqNum.equals("")){
+            eqNum = null;
+        }
+
+        if (name.equals("")){
+            name = null;
+        }
+
+        if(bmName.equals("")){
+            bmName = null;
+        }
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<FinanceEqVo> vo = financeService.getGuanLian(eqNum, eqName, name, bmName);
+
+        PageInfo info = new PageInfo(vo);
+
+
+        return Result.success();
+
     }
 
 
