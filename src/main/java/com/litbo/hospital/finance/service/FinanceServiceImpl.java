@@ -480,9 +480,11 @@ public class FinanceServiceImpl implements FinanceService {
     }
 
     @Override
-    public int touZi(String id) {
+    public int touZi(String id , String name , String advance) {
         Finance f = financeDAO.selectByPrimaryKey(id);
         f.setInvestmentStatus("已投资");
+        f.setAmountAdvance(advance);
+        f.setCheckPerson(name);
         return financeDAO.updateByPrimaryKey(f);
     }
 

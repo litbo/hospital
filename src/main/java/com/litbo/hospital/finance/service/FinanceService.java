@@ -21,7 +21,7 @@ public interface FinanceService {
 
     FinanceVo getMessage(String id);
 
-    int touZi(String id);
+    int touZi(String id , String name , String advance);
 
     int guanlian(FinanceAndEq eq);
 

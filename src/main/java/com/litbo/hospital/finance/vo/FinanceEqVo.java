@@ -10,25 +10,25 @@ import com.litbo.hospital.finance.pojo.Finance;
  */
 public class FinanceEqVo {
 
-    private String eqNum;
+    private String eqNum;  // 设备编号
 
-    private String eqName;
+    private String eqName; // 设备名称
 
-    private String xh;
+    private String xh; // 型号
 
-    private String bm;
+    private String bm;  // 科室
 
-    private String tzfa;
+    private String tzfa;  // 投资方案
 
-    private String avgDay;
+    private String avgDay;  // 日平均成本
 
-    private String bld;
+    private String bld;  // 保利点
 
-    private String bbd;
+    private String bbd; // 保本点
 
-    private String bbdzyl;
+    private String bbdzyl; // 保本点作用率
 
-    private String aqbj;
+    private String aqbj; // 安全边际
 
     @Override
     public String toString() {
