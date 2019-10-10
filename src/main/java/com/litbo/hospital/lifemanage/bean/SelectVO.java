@@ -39,12 +39,17 @@ public class SelectVO {
         this.bmName = bmName;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(bmName.equals(((SelectVO)obj).getBmName()))
-            return true;//这里以name为判定标准。
-        else {
-            return false;
-        }
+        @Override
+        public boolean equals(Object obj) {
+            if(eqName.equals(((SelectVO)obj).getEqName()))
+                return true;//这里以name为判定标准。
+            else {
+                return false;
+            }
+
     }
+
+
+
+
 }

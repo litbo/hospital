@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.PdResult;
 import com.litbo.hospital.lifemanage.bean.SelectVO;
 import com.litbo.hospital.lifemanage.bean.SgPd;
+import com.litbo.hospital.lifemanage.bean.SgPdZt;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,6 @@ public interface SelectService {
                                    @Param("bmId") String bmId,
                                    @Param("pageNum")Integer pageNum
                                 , @Param("pageSize")Integer pageSize);
+
+    PageInfo<SgPdZt>  findInfo(String pdJhid, String eqName, Integer pageNum, Integer pageSize);
 }

@@ -1,8 +1,11 @@
 package com.litbo.hospital.lifemanage.dao;
 
 import com.litbo.hospital.lifemanage.bean.SelectVO;
+import com.litbo.hospital.lifemanage.bean.SgPdZt;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -14,5 +17,11 @@ public interface SelectMapper {
 //    String getBmId(String planId);
 
     List<SelectVO> listCheckDate(String bmId);
+
+    void insertZt(SgPdZt sgPdZt);
+
+    void updateZt( SgPdZt sgPdZt);
+
+    List<SgPdZt> findInfo(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
 }
 

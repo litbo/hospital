@@ -34,7 +34,7 @@ public class SelectControllerA {
 
     }
     @ResponseBody
-    @RequestMapping("/allList")//盘点所有的
+    @RequestMapping("/allList")//盘点计划的
     public Result allListController(@RequestParam("pdJhid")String pdJhid,
                                       @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
@@ -43,8 +43,9 @@ public class SelectControllerA {
         return Result.success(selectService.allList(pdJhid,bmId,pageNum,pageSize));
 
     }
+
     @ResponseBody
-    @RequestMapping("/selectLess")//盘盈的
+    @RequestMapping("/selectLess")//盘盈
     public Result selectLessController(@RequestParam("pdJhid")String pdJhid,
                                     @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
@@ -53,5 +54,24 @@ public class SelectControllerA {
         return Result.success(selectService.selectLess(pdJhid,bmId,pageNum,pageSize));
 
     }
+
+    @ResponseBody
+    @RequestMapping("findInfo")
+    public Result findYipan(
+            @RequestParam("eqName")String eqName,
+            @RequestParam("pdJhid")String pdJhid,
+            @RequestParam("pageNum")Integer pageNum,
+            @RequestParam("pageSize")Integer pageSize
+    ){
+        return Result.success(selectService.findInfo(pdJhid,eqName,pageNum,pageSize));
+
+
+
+    }
+
+
+
+
+
 
 }

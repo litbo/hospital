@@ -1,5 +1,7 @@
 package com.litbo.hospital.lifemanage.service;
 
+import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.SelectVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 
 import java.util.List;
@@ -13,7 +15,9 @@ public interface SgPdSeverice {
      */
     int insertPdId(SgPdVO record,String pdJhid);
 
-    int insertJhCz(SgPdVO record);
+//    int insertJhCz(SgPdVO record);
 
-    Object selectAllData(String pdJhid);
+    void insetStatus(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
+
+//    Object selectAllData(String pdJhid);
 }

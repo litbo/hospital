@@ -54,8 +54,28 @@ public class SgCheckListVO {
      * 审核人
      */
     private String checkUser;
+
+    @Override
+    public String toString() {
+        return "SgCheckListVO{" +
+                "id='" + id + '\'' +
+                ", eqSbbh='" + eqSbbh + '\'' +
+                ", eqName='" + eqName + '\'' +
+                ", eqGg='" + eqGg + '\'' +
+                ", eqXh='" + eqXh + '\'' +
+                ", planUser='" + planUser + '\'' +
+                ", bmName='" + bmName + '\'' +
+                ", planDate=" + planDate +
+                ", date=" + date +
+                ", checkUser='" + checkUser + '\'' +
+                ", checks='" + checks + '\'' +
+                '}';
+    }
+
     /**
      * 是否存在
      */
     private String checks;
+
+
 }
