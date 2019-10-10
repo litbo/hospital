@@ -47,6 +47,24 @@
   </insert>
 
   <select id="getGuanLian" resultType="com.litbo.hospital.finance.vo.FinanceEqVo">
-
+SELECT eq_info.eq_id as eqNum ,eq_info.eq_name as eqName ,eq_info.eq_xh as xh , s_bm.bm_name as bm , finance.name as tzfa,
+p.avg_day_loss as avgDay ,p.bao_li as bld ,p.ping_heng as bbd ,p.zuo_ye_lv as bbdzyl ,
+p.bian_ji as aqbj
+from finance , finance_and_eq , eq_info , profit_and_loss as p , s_bm
+<where>
+  <if test="name != null">
+    finance.name like #{name} and
+  </if>
+  <if test="eqNum != null">
+    eq_info.eq_id = #{eqNum} and
+  </if>
+  <if test="eqName != null">
+    eq_info.eq_name like #{eqName} and
+  </if>
+  <if test="bmName != null">
+    s_bm.bm_name like #{bmName} and
+  </if>
+  finance.id = finance_and_eq.finance_id and finance_and_eq.eq_id = eq_info.eq_id and finance.id = p.project_id and s_bm.bm_id = eq_info.eq_bmid
+</where>
   </select>
 </mapper>

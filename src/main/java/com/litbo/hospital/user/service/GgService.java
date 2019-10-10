@@ -11,7 +11,7 @@ public interface GgService {
 
     PageInfo listShowGgs(int pageNum, int pageSize);
 
-    Integer checkGg(Integer[] ids);
+    Integer checkGg(Integer id);
 
     SysGgVo getGgById(Integer id);
 

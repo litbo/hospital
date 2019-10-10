@@ -38,7 +38,7 @@
 
 
 <div class="layui-col-md12">
-    <form class="layui-form layui-form-pane" id="forms" action="">
+    <form class="layui-form layui-form-pane" lay-filter="forms" id="forms" action="">
         <div class="layui-collapse">
             <div class="layui-row layui-col-space20">
                 <div class="layui-col-md6 layui-col-space20">
@@ -46,28 +46,28 @@
                     <div class="layui-form-item ">
                         <label class="layui-form-label">项目编号<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="id" class="layui-input" disabled>
                         </div>
                     </div>
                     <!--                            投资金额-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">投资金额<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="amount" class="layui-input" disabled>
                         </div>
                     </div>
                     <!--                            投资回收期(年)-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">投资回收期(年)<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="amountGet" class="layui-input" disabled>
                         </div>
                     </div>
-                    <!--                            NVP(元)-->
+                    <!--                            NPV(元)-->
                     <div class="layui-form-item ">
-                        <label class="layui-form-label">NVP(元)<span class="sign">*</span></label>
+                        <label class="layui-form-label">NPV(元)<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="npv" class="layui-input" disabled>
                         </div>
                     </div>
                 </div>
@@ -76,28 +76,28 @@
                     <div class="layui-form-item ">
                         <label class="layui-form-label">项目名称<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="name" class="layui-input" disabled>
                         </div>
                     </div>
                     <!--                            年运营费(元)-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">年运营费(元)<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="annualOperatingExpenses" class="layui-input" disabled>
                         </div>
                     </div>
                     <!--                            使用年限(年)-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">使用年限(年)<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="yearsOfUse" class="layui-input" disabled>
                         </div>
                     </div>
                     <!--                            IRR-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">IRR<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="irr" class="layui-input" disabled>
                         </div>
                     </div>
                 </div>
@@ -106,120 +106,82 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">投资意见<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <textarea type="text" name="htBianhao" class="layui-textarea" ></textarea>
+                            <textarea type="text" name="amountAdvance" class="layui-textarea" lay-verify="required"></textarea>
                         </div>
                     </div>
                     <!--                            签批人-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">签批人<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" >
+                            <input type="text" name="checkPerson" id="checkPerson" class="layui-input"disabled>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="layui-btn" style="float: right;margin-right:5%;margin-top:10px" lay-submit="" lay-filter="save">保存</button>
+        <button class="layui-btn" style="float: right;margin-right:5%;margin-top:10px" lay-submit="" lay-filter="">保存</button>
     </form>
 </div>
 <!--                保存-->
 
 
 <script>
-
+    var emp=tempValue("rl", "emp", false);
+    // console.log(emp);
+    $("#checkPerson").val(emp.userXm);
     var formData = {};
     var formData2 = {};
     renderMod = {
-
-        addTable: {
-            table: [
-                {
-                    elem: "#table",
-                    id: "table",
-                    cols: [[ //表头
-
-                        {type: "checkbox"}
-                        , {
-                            field: 'htZbmc',
-                            title: '医学装备名称',
-                            totalRowText: '合计'
-                        }
-                        , {field: '', title: '年度'}
-                        , {field: '', title: '投资额(元)'}
-                        , {field: '', title: '大修(元)'}
-                        , {field: '', title: '预计收入(元)'}
-                        , {field: '', title: '运营费用(元)'}
-                        , {field: '', title: '净现金流量(元)'}
-                        , {field: '', title: '累计净现金流量(元)'}
-                        , {field: '', title: '折现因子'}
-                        , {field: '', title: '现值(元)'}
-
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "暂无数据！"
-                    }
+        form: {
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/Finance/getMessage.do",
+                    type: "POST",
+                    data: {id: $.getUrlParam("id")}
                 },
-                {
-                    elem: "#table1",
-                    id: "table",
-                    cols: [[ //表头
-
-                        {type: "checkbox"}
-                        , {
-                            field: 'htZbmc',
-                            title: '医学装备名称',
-                            totalRowText: '合计'
-                        }
-                        , {field: '', title: '折旧年限'}
-                        , {field: '', title: '每年折旧(元)'}
-                        , {field: '', title: '每年运营费用(元)'}
-                        , {field: '', title: '成本合计(元)'}
-                        , {field: '', title: '每工作日平均成本(元)'}
-                        , {field: '', title: '保利点(小时)'}
-                        , {field: '', title: '盈亏平衡点(小时)'}
-                        , {field: '', title: '盈亏平衡点作业率'}
-                        , {field: '', title: '安全边际'}
-
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "暂无数据！"
-                    }
-                },
-                {
-                    elem: "#table2",
-                    id: "table",
-                    cols: [[ //表头
-
-                        {type: "checkbox"}
-                        , {
-                            field: 'htZbmc',
-                            title: '医学装备名称',
-                            totalRowText: '合计'
-                        }
-                        , {field: '', title: '敏感因素'}
-                        , {field: '', title: '变动幅度'}
-                        , {field: '', title: 'IRR'}
-                        , {field: '', title: 'IRR变动率'}
-                        , {field: '', title: '敏感系数'}
-
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "暂无数据！"
-                    }
+                func: function (a) {
+                    console.log(a);
+                    $("[name='id']").val(a.finance.id);//项目编号
+                    $("[name='amount']").val(a.finance.amount);//投资金额
+                    $("[name='yearsOfUse']").val(a.finance.yearsOfUse);//使用年限
+                    // $("[name='annualWorkingDay']").val(a.finance.annualWorkingDay);//年工作日
+                    // $("[name='dailyWorkload']").val(a.finance.dailyWorkload);//日工作量
+                    // $("[name='charges']").val(a.finance.charges);//收费标准
+                    $("[name='name']").val(a.finance.name);//项目名称
+                    // $("[name='createTime']").val(a.finance.createTime);//创建时间
+                    $("[name='annualOperatingExpenses']").val(a.finance.annualOperatingExpenses);//年运营费
+                    // $("[name='overhaulYear']").val(a.finance.overhaulYear);//大修年度
+                    // $("[name='overhaulCost']").val(a.finance.overhaulCost);//大修费用
+                    // $("[name='expectedAnnualInterestRate']").val(a.finance.expectedAnnualInterestRate);//期望收益率
+                    $("[name='amountGet']").val(a.finance.amountGet);//投资回收期
+                    $("[name='npv']").val(a.finance.npv);//净现值
+                    $("[name='irr']").val(a.finance.irr);//内部收益率
                 }
-            ]
+            },
+            submit: {
+               /* before: function (param) {
+                    var tv = getTableValue("table");
+                    // var tv2= getFormValue("forms");
+                    // console.log("formD = ", formData);
+                    return param = {
+                        1: tv
+                        // 2: tv2
+                        // 2.: $.getUrlParam('id')
+                    }
+                },*/
+                form: {
+                    url: "/Finance/touZi.do",
+                    type: "POST",
+                    // contentType: "application/json",
+                    data: ["id","amountAdvance", "checkPerson"],
+                   /* param: {
+                        1: "listLpj"
+                    },*/
+                    // shutWin: true
+                    reload: "parent"
+                }
+            }
         }
     };
 

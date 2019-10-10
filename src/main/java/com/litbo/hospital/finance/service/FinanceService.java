@@ -17,11 +17,13 @@ public interface FinanceService {
 
     int addFinance(Finance finance);
 
+    int delFinance(String id);
+
     List<Finance> allFinance(String name,String status);
 
     FinanceVo getMessage(String id);
 
-    int touZi(String id);
+    int touZi(String id , String name , String advance);
 
     int guanlian(FinanceAndEq eq);
 

@@ -36,13 +36,12 @@ public class GgServiceImpl implements GgService {
     }
 
     @Override
-    public Integer checkGg(Integer[] ids) {
-        return ggDao.checkGg(ids);
+    public Integer checkGg(Integer id) {
+        return ggDao.checkGg(id);
     }
 
     @Override
     public SysGgVo getGgById(Integer id) {
-
         return ggDao.getGgById(id);
     }
 

@@ -63,7 +63,7 @@
 			table: {
 				cols: [[
 					{type: "radio"}
-					, {field: 'id', title: '设备编号', width: "15%", minWidth: 200, sort: true}
+					, {field: 'id', title: '设备id', width: "15%", minWidth: 200, sort: true}
                     , {field: 'name', title: '设备名称', minWidth: 200, sort: true}
                     , {field: 'num', title: '设备编号',  minWidth: 200, sort: true}
                     , {field: 'model', title: '型号', minWidth: 200, sort: true}
@@ -111,35 +111,8 @@
 					// console.log(data[0].riskValue);
 					console.log(data[0].id);
 					localStorage.setItem("maintenanceEqId",data[0].id);//以“key”为名称存储一个值“value”
-					if (data[0].riskValue === null){
-                            alert("风险值未设置，请设置风险值")
-                            layui.use(['table'], function(){
-                                var  layer = layui.layer
-                                    ,table = layui.table;
-
-                                var checkStatus = table.checkStatus('idTest'); //idTest 即为基础参数 id 对应的值
-
-                                console.log(checkStatus.data) //获取选中行的数据
-
-
-                                layui.layer.open({
-                                    type: 2,
-                                    title: '风险设置',
-                                    shadeClose: true, //点击遮罩关闭层
-                                    area: ['90%', '90%'],
-                                    content: 's1fx.html',
-									before:function(obj,data){
-										console.log(data.data[0].id);
-									}
-                                });
-                            });
-
-						return;
-
-				}
-
-					parent.layui.$('.eqId').val(data[0].id);
-					parent.layui.$('#eqId').val(data[0].name);
+					parent.layui.$('#scsName').val(data[0].name);
+					parent.layui.$('#eqId').val(data[0].id);
 					var index = parent.layer.getFrameIndex(window.name);
 					parent.layer.close(index);
 					break;

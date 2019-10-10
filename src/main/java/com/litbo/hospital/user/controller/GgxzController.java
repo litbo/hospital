@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SysGgxz;
 import com.litbo.hospital.user.service.GgxzService;
+import com.litbo.hospital.user.vo.DelGgxzVo;
 import com.litbo.hospital.user.vo.ListVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,16 +85,20 @@ public class GgxzController {
         return Result.success(ggxzService.getGgxzById(id));
     }
 
-    @RequestMapping("delGgxz")
+    @RequestMapping("/delGgxz")
     @Transactional
-    public Result delGgxz( @RequestBody ListVo listVo){
-
-        for (String id : listVo.getGgxzIds()) {
-            if(ggxzService.delGgxz(Integer.parseInt(id))<=0){
-                return Result.error();
+    public Result delGgxz(@RequestBody DelGgxzVo ggxzVo){
+        if(ggxzVo.getId()!=null){
+            Integer integer = ggxzService.delGgxz(ggxzVo.getId());
+            if(integer>0){
+                return Result.success();
             }
-         }
-        return Result.success();
+            else{
+                return Result.success("请选中数据");
+            }
+        }else {
+            return Result.error();
+        }
 
     }
 

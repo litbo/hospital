@@ -3,18 +3,11 @@ package com.litbo.hospital.user.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.SysGg;
-import com.litbo.hospital.user.dao.GgDao;
 import com.litbo.hospital.user.service.GgService;
-import com.litbo.hospital.user.vo.CheckVo;
 import com.litbo.hospital.user.vo.DelVo;
-import com.litbo.hospital.user.vo.ListVo;
-import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 /**
 *
@@ -63,16 +56,14 @@ public class GgController {
 
     //通过审核
     @RequestMapping("/checkGg")
-    public Result checkGg(@RequestBody CheckVo chids){
-        if(chids.getId()!=null){
-            Integer integer = ggService.checkGg(chids.getId());
-            if(integer>0){
-                return Result.success();
-            }else {
-                return Result.error("请选中数据");
+    public Result checkGg(@RequestParam("id[]") Integer[] ids){
+        if(ids.length>0){
+            for(Integer id:ids){
+                ggService.checkGg(id);
             }
-        }else{
-            return Result.error();
+            return Result.success();
+        }else {
+            return Result.error("请选中数据");
         }
     }
 

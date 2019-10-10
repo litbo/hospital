@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.finance.pojo.Finance;
 import com.litbo.hospital.finance.pojo.FinanceAndEq;
 import com.litbo.hospital.finance.service.FinanceService;
+import com.litbo.hospital.finance.vo.DeleteVo;
 import com.litbo.hospital.finance.vo.FinanceEqVo;
 import com.litbo.hospital.finance.vo.FinanceVo;
 import com.litbo.hospital.metering.vo.PageVo;
@@ -38,12 +39,26 @@ public class FinanceController {
      */
     @RequestMapping("/addFinance.do")
     public Result addFinance(Finance finance){
-        System.out.println(finance);
         int result = financeService.addFinance(finance);
         if(result == 0 ){
             return Result.success("添加失败！");
         }
         return Result.success("添加成功！");
+    }
+
+
+    /**
+     * 删除
+     * @param vo
+     * @return
+     */
+    @RequestMapping("/delProject.do")
+    public Result delProject(@RequestBody DeleteVo vo){
+        List<String> ids = vo.getIds();
+        for(String id : ids){
+            financeService.delFinance(id);
+        }
+        return Result.success();
     }
 
 
@@ -102,12 +117,16 @@ public class FinanceController {
 
     /**
      * 投资
-     * @param id
+     * @param id 项目id
+     * @param checkPerson 审核人
+     * @param amountAdvance  意见
      * @return
      */
     @RequestMapping("/touZi.do")
-    public Result touZi(String id){
-        financeService.touZi(id);
+    public Result touZi(@RequestParam(name = "id" , defaultValue = "") String id ,
+                        @RequestParam(name = "checkPerson" , defaultValue = "") String checkPerson ,
+                        @RequestParam(name = "amountAdvance" , defaultValue = "") String amountAdvance){
+        financeService.touZi(id , checkPerson ,amountAdvance);
         return Result.success();
     }
 
@@ -123,6 +142,10 @@ public class FinanceController {
         return Result.success(resutl);
     }
 
+
+
+
+
     /**
      * 查看已经关联过的设备信息以及投资方案信息
      * @param eqNum  设备编号
@@ -133,7 +156,8 @@ public class FinanceController {
      * @param pageSize 页码
      * @return
      */
-    public Result seeGuanLian(@RequestParam(name = "eqNum" , defaultValue = "") String eqNum ,
+    @RequestMapping("/seeGuanLian.do")
+    public PageVo seeGuanLian(@RequestParam(name = "eqNum" , defaultValue = "") String eqNum ,
                               @RequestParam(name = "eqName" , defaultValue = "") String eqName ,
                               @RequestParam(name = "name" , defaultValue = "") String name ,
                               @RequestParam(name = "bmName" , defaultValue = "") String bmName ,
@@ -160,9 +184,19 @@ public class FinanceController {
 
         PageInfo info = new PageInfo(vo);
 
+        PageVo pageVo = new PageVo();
 
-        return Result.success();
+        if(vo.isEmpty()){
+            pageVo.setMsg("没有查询到设备信息");
+            pageVo.setCode(0);
+            pageVo.setData(pageVo.new DataEntity((int) info.getTotal(),vo));
+            return pageVo;
+        }
 
+        pageVo.setCode(0);
+        pageVo.setMsg("success");
+        pageVo.setData(pageVo.new DataEntity((int) info.getTotal(),vo));
+        return pageVo;
     }
 
 

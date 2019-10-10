@@ -74,16 +74,6 @@ public class GgProvider {
         return  sql;
     }
 
-    public String checkGg(Integer id){
-        String sql =  "<script> update sys_gg set status = 1 where id in " +
-                "<foreach item='it' index=''index collection='array'" +
-                "open='(' separator = ',' close = ')'>" +
-                "#{it}"+
-                "</foreach>" +
-                "</script>";
-        return sql;
-    }
-
     public String getGgById(Integer id){
         String sql ="SELECT\n" +
                 "g.id,\n" +

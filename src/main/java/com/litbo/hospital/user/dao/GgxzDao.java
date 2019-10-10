@@ -23,6 +23,10 @@ public interface GgxzDao {
 
     @SelectProvider(type = GgxzProvider.class , method = "getGgxzById")
     SysGgxz getGgxzById(Integer id);
-    @Delete("delete from sys_ggxz where id =#{id}")
-    Integer delGgxz(int id);
+    @Delete("<script>DELETE FROM dbo.sys_ggxz WHERE  id in" +
+            "<foreach item='ggxzid' index='index' collection='array' open = '(' separator = ',' close = ')'>" +
+            "#{ggxzid}" +
+            "</foreach>" +
+            "</script>")
+    Integer delGgxz(Integer[] ggxzids);
 }
