@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.finance.dao.FinanceAndEqDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.finance.pojo.FinanceAndEq">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="eq_id" jdbcType="VARCHAR" property="eqId" />
+    <result column="finance_id" jdbcType="VARCHAR" property="financeId" />
+    <result column="ti_xing" jdbcType="VARCHAR" property="tiXing" />
+    <result column="day" jdbcType="VARCHAR" property="day" />
+  </resultMap>
+  <insert id="insert" parameterType="com.litbo.hospital.finance.pojo.FinanceAndEq">
+    insert into hospital..finance_and_eq (eq_id, finance_id,
+      ti_xing, "day")
+    values (#{eqId,jdbcType=VARCHAR}, #{financeId,jdbcType=VARCHAR},
+      #{tiXing,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.finance.pojo.FinanceAndEq">
+    insert into hospital..finance_and_eq
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+     <if test="eqId != null">
+        eq_id,
+      </if>
+      <if test="financeId != null">
+        finance_id,
+      </if>
+      <if test="tiXing != null">
+        ti_xing,
+      </if>
+      <if test="day != null">
+        "day",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eqId != null">
+        #{eqId,jdbcType=VARCHAR},
+      </if>
+      <if test="financeId != null">
+        #{financeId,jdbcType=VARCHAR},
+      </if>
+      <if test="tiXing != null">
+        #{tiXing,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="getGuanLian" resultType="com.litbo.hospital.finance.vo.FinanceEqVo">
+
+  </select>
+</mapper>
