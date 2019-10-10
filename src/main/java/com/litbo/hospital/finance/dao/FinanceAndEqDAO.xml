@@ -47,6 +47,10 @@
   </insert>
 
   <select id="getGuanLian" resultType="com.litbo.hospital.finance.vo.FinanceEqVo">
-
+SELECT eq_info.eq_id as eqNum ,eq_info.eq_name as eqName ,eq_info.eq_xh as xh , eq_info.eq_bmid as bm , finance.name as tzfa,
+p.avg_day_loss as avgDay ,p.bao_li as bld ,p.ping_heng as bbd ,p.zuo_ye_lv as bbdzyl ,
+p.bian_ji as aqbj
+from finance , finance_and_eq , eq_info , profit_and_loss as p
+WHERE finance.id = finance_and_eq.finance_id and finance_and_eq.eq_id = eq_info.eq_id and finance.id = p.project_id
   </select>
 </mapper>

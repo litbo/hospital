@@ -103,13 +103,13 @@ public class FinanceController {
     /**
      * 投资
      * @param id 项目id
-     * @param name 审核人
-     * @param advance  意见
+     * @param checkPerson 审核人
+     * @param amountAdvance  意见
      * @return
      */
     @RequestMapping("/touZi.do")
-    public Result touZi(String id , String name , String advance){
-        financeService.touZi(id , name ,advance);
+    public Result touZi(String id , String checkPerson , String amountAdvance){
+        financeService.touZi(id , checkPerson ,amountAdvance);
         return Result.success();
     }
 
