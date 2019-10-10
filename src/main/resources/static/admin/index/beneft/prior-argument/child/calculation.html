@@ -41,7 +41,7 @@
 
 
 <div class="layui-col-md12">
-    <form class="layui-form layui-form-pane" id="forms" action="">
+    <form class="layui-form layui-form-pane" lay-filter="forms" id="forms" action="">
         <div class="layui-collapse">
             <!--                    核心假设-->
             <div class="layui-colla-item">
@@ -53,42 +53,42 @@
                             <div class="layui-form-item ">
                                 <label class="layui-form-label" >项目编号<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="id" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            投资金额-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">投资金额<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="amount" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            使用年限-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">使用年限<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="yearsOfUse" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            年工作日-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">年工作日<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="annualWorkingDay" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            日工作量-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">日工作量<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="dailyWorkload" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            收费标准-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">收费标准<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="charges" class="layui-input" disabled>
                                 </div>
                             </div>
                         </div>
@@ -97,42 +97,42 @@
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">项目名称<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="name" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            创建时间-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">创建时间<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="createTime" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            年运营费-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">年运营费<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="annualOperatingExpenses" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            大修年度-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">大修年度<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="overhaulYear" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            大修费用-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">大修费用<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="overhaulCost" class="layui-input" disabled>
                                 </div>
                             </div>
                             <!--                            期望收益率-->
                             <div class="layui-form-item ">
                                 <label class="layui-form-label">期望收益率<span class="sign">*</span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="htBianhao" class="layui-input" disabled>
+                                    <input type="text" name="expectedAnnualInterestRate" class="layui-input" disabled>
                                 </div>
                             </div>
                         </div>
@@ -148,21 +148,21 @@
                     <div class="layui-form-item ">
                         <label class="layui-form-label">投资回收期<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="amountGet" class="layui-input" disabled>
                         </div>
                     </div>
                     <!--                            净现值(NPV)-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">净现值(NPV)<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="npv" class="layui-input" disabled>
                         </div>
                     </div>
                     <!--                            内部收益率(IRR)-->
                     <div class="layui-form-item ">
                         <label class="layui-form-label">内部收益率(IRR)<span class="sign">*</span></label>
                         <div class="layui-input-block">
-                            <input type="text" name="htBianhao" class="layui-input" disabled>
+                            <input type="text" name="irr" class="layui-input" disabled>
                         </div>
                     </div>
                 </div>
@@ -238,22 +238,15 @@
                     elem: "#table",
                     id: "table",
                     cols: [[ //表头
-
-                        {type: "checkbox"}
-                        , {
-                            field: 'htZbmc',
-                            title: '医学装备名称',
-                            totalRowText: '合计'
-                        }
-                        , {field: '', title: '年度'}
-                        , {field: '', title: '投资额(元)'}
-                        , {field: '', title: '大修(元)'}
-                        , {field: '', title: '预计收入(元)'}
-                        , {field: '', title: '运营费用(元)'}
-                        , {field: '', title: '净现金流量(元)'}
-                        , {field: '', title: '累计净现金流量(元)'}
-                        , {field: '', title: '折现因子'}
-                        , {field: '', title: '现值(元)'}
+                         {field: 'year', title: '年度'}
+                        , {field: 'investmentAmount', title: '投资额(元)'}
+                        , {field: 'overhaul', title: '大修(元)'}
+                        , {field: 'estimatedIncome', title: '预计收入(元)'}
+                        , {field: 'operatingExpenses', title: '运营费用(元)'}
+                        , {field: 'netCashFlow', title: '净现金流量(元)'}
+                        , {field: 'countNetCaseFlow', title: '累计净现金流量(元)'}
+                        , {field: 'discountFactor', title: '折现因子'}
+                        , {field: 'presentValue', title: '现值(元)'}
 
                     ]]
                     , toolbar: false
@@ -266,24 +259,17 @@
                 },
                 {
                     elem: "#table1",
-                    id: "table",
+                    id: "table1",
                     cols: [[ //表头
-
-                        {type: "checkbox"}
-                        , {
-                            field: 'htZbmc',
-                            title: '医学装备名称',
-                            totalRowText: '合计'
-                        }
-                        , {field: '', title: '折旧年限'}
-                        , {field: '', title: '每年折旧(元)'}
-                        , {field: '', title: '每年运营费用(元)'}
-                        , {field: '', title: '成本合计(元)'}
-                        , {field: '', title: '每工作日平均成本(元)'}
-                        , {field: '', title: '保利点(小时)'}
-                        , {field: '', title: '盈亏平衡点(小时)'}
-                        , {field: '', title: '盈亏平衡点作业率'}
-                        , {field: '', title: '安全边际'}
+                         {field: 'yearsOfUse', title: '折旧年限'}
+                        , {field: 'yearLoss', title: '每年折旧(元)'}
+                        , {field: 'yearYunying', title: '每年运营费用(元)'}
+                        , {field: 'totleLoss', title: '成本合计(元)'}
+                        , {field: 'avgDayLoss', title: '每工作日平均成本(元)'}
+                        , {field: 'baoLi', title: '保利点(小时)'}
+                        , {field: 'pingHeng', title: '盈亏平衡点(小时)'}
+                        , {field: 'zuoYeLv', title: '盈亏平衡点作业率'}
+                        , {field: 'bianJi', title: '安全边际'}
 
                     ]]
                     , toolbar: false
@@ -296,16 +282,9 @@
                 },
                 {
                     elem: "#table2",
-                    id: "table",
+                    id: "table2",
                     cols: [[ //表头
-
-                        {type: "checkbox"}
-                        , {
-                            field: 'htZbmc',
-                            title: '医学装备名称',
-                            totalRowText: '合计'
-                        }
-                        , {field: '', title: '敏感因素'}
+                         {field: '', title: '敏感因素'}
                         , {field: '', title: '变动幅度'}
                         , {field: '', title: 'IRR'}
                         , {field: '', title: 'IRR变动率'}
@@ -321,6 +300,70 @@
                     }
                 }
             ]
+        },
+        form: {
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/Finance/getMessage.do",
+                    type: "POST",
+                    data: {id: $.getUrlParam("id")},
+                    parse: ["analyses","profiAndlosses"],
+                    tableId: ["table","table1"]
+                },
+                func: function (a) {
+                    $("[name='id']").val(a.finance.id);//项目编号
+                    $("[name='amount']").val(a.finance.amount);//投资金额
+                    $("[name='yearsOfUse']").val(a.finance.yearsOfUse);//使用年限
+                    $("[name='annualWorkingDay']").val(a.finance.annualWorkingDay);//年工作日
+                    $("[name='dailyWorkload']").val(a.finance.dailyWorkload);//日工作量
+                    $("[name='charges']").val(a.finance.charges);//收费标准
+                    $("[name='name']").val(a.finance.name);//项目名称
+                    $("[name='createTime']").val(a.finance.createTime);//创建时间
+                    $("[name='annualOperatingExpenses']").val(a.finance.annualOperatingExpenses);//年运营费
+                    $("[name='overhaulYear']").val(a.finance.overhaulYear);//大修年度
+                    $("[name='overhaulCost']").val(a.finance.overhaulCost);//大修费用
+                    $("[name='expectedAnnualInterestRate']").val(a.finance.expectedAnnualInterestRate);//期望收益率
+                    $("[name='amountGet']").val(a.finance.amountGet);//投资回收期
+                    $("[name='npv']").val(a.finance.npv);//净现值
+                    $("[name='irr']").val(a.finance.irr);//内部收益率
+                }
+            }
+            /*date: [
+                {
+                    elem: '#zdate',
+                    type: "date",
+                    format: 'yyyy-MM-dd'
+                }
+            ]*/
+            /*submit: {
+                filter: "submit",//可以不写
+                before: function (param) {
+                    var tv = getTableValue("table");
+                    // var tv2= getFormValue("forms");
+                    // console.log("formD = ", formData);
+                    return param = {
+                        1: tv
+                        // 2: tv2
+                        // 2.: $.getUrlParam('id')
+                    }
+                },
+                form: {
+                    url: "/lifeManage/updateLpjHtByPrimaryKey",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: ["id", "htBxq", "htJhsj", "htJf", "htYf", "htSbmc", "htGzfx", "htZgfg", "htGzms", "htCjje"],
+                    param: {
+                        // 1: "sbId",
+                        // 2: "pjScqyId",
+                        // 3: "pjGhsId",
+                        1: "listLpj"
+                        // 2: "htZbhz"
+                    },
+                    // shutWin: true
+                    reload: true
+                }
+            }*/
         }
     };
 
