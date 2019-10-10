@@ -162,9 +162,10 @@
         var form = layui.form
             ,layer = layui.layer;
         form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
+            // layer.alert(JSON.stringify(data.field),
+            //     {
+            //     title: '最终的提交信息'
+            // });
             $.ajax({
                 type: "POST",
                 dataType: 'json',

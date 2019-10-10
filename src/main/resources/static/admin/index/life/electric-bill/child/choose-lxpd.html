@@ -50,7 +50,8 @@
     var emp = tempValue("rl", "emp", false);
     $("#userId").val(emp.userId);
     $("#pdJhid").val($.getUrlParam("id"));
-    console.log($.getUrlParam("id"));
+    $("#bmId").val($.getUrlParam("bmId"));
+    console.log($.getUrlParam("bmId"))
 
     layui.use(['form', 'upload'], function(){
         var $ = layui.jquery
@@ -70,37 +71,40 @@
                 pdJhid: function(){
                     return $.getUrlParam("id");
                 }
-            }
-            ,done: function(res){
-                console.log(res)
-            }
+            },
+            success: function(data) {
+                            if (data.code == '0'){
+                                layui.layer.alert('保存成功!');
+                                // window.location.href = '../lxpd-table.html'
+                            }
+                        },
+                        error:function(){
+                            alert("error");
+                        }
         });
-        //监听提交
-        // form.on('submit(demo1)', function(data){
-        //     console.log(data);
-        //     var obj = {
-        //         // userId:data.field.userId,
-        //         pdJhid:data.field.pdJhid
-        //     };
-        //     var objJson = JSON.stringify(obj);
-        //     $.ajax({
-        //         type: "POST",
-        //         dataType: 'json',
-        //         url: '/lifeManage/insertSgPdId',
-        //         contentType: 'application/json; charset=UTF-8',
-        //         data: objJson,
-        //         success: function(data) {
-        //             if (data.code == '0'){
-        //                 layui.layer.alert('保存成功!');
-        //                 // window.location.href = '../lxpd-table.html'
-        //             }
-        //         },
-        //         error:function(){
-        //             alert("error");
-        //         }
-        //     });
-        //     return false;
-        // });
+        // 监听提交
+        form.on('submit(demo1)', function(obj,data){
+
+            var objJson = JSON.stringify(obj);
+            $.ajax({
+                type: "POST",
+                url: '/lifeManage/insertStatus',
+                data: {
+                    "pdJhid":$.getUrlParam("id"),
+                    "bmId":$.getUrlParam("bmId")
+                },
+            success: function(data) {
+                    if (data.code == '0'){
+                        layui.layer.alert('保存成功!');
+                        // window.location.href = '../lxpd-table.html'
+                    }
+                },
+                error:function(){
+                    alert("error");
+                }
+            });
+            return false;
+        });
     });
 
     // renderMod.formAction = {

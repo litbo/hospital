@@ -55,6 +55,7 @@
     <a class="layui-btn layui-btn-sm editi" lay-event="pipei">核对上传</a>
 </script>
 <script>
+    // console.log(bmId);
     renderMod = {
         addTable: {
             table: [{
@@ -102,7 +103,7 @@
                                 type:2,
                                 content:"child/choose-lxpd.html",
                                 area: ['500px', '350px'],
-                                dataUrl:["id"]
+                                dataUrl:["id","bmId"]
                             },{
                                 event:"haveP",
                                 type:2,
@@ -120,7 +121,22 @@
                 }
                 }
             ]
+
+            , reSet: {
+                url: "/lifeManage/selectPlan",
+                type: "reload",
+                data: ["planName","planDate","userName"],
+                method:"post"
+            }
+
         },
+        form: {
+            date: [{
+                elem: "#date"
+                , value: ""
+                , format: "yyyy-MM-dd"
+            }]
+        }
     }
 </script>
 <!--<script type="text/html" id="status">-->
