@@ -47,7 +47,7 @@
                                     <label class="layui-form-label">选择设备<span class="sign">*</span></label>
                                     <div class="layui-input-block">
                                         <input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" >选择</button>
+                                        <button class="layui-btn layui-btn-normal layui-btn-sm PoAb0xx0" id="selectEmp" >选择</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -547,6 +547,18 @@
 
 
 <script>
+    $('#selectEmp').on('click', function() {
+        // alert("xxx")
+        layer.open({
+            type: 2,
+            title: '选择',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1000px', '90%'],
+            content: './child/choose2s.html'
+            // content: './child/repair-repairs1'
+        });
+    });
     renderMod = {
         form: {
             date: [
