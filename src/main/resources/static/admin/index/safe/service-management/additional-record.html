@@ -43,19 +43,19 @@
                     <div class="layui-colla-content layui-show">
                         <div class="layui-row">
                             <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item" pane>
+                                <div class="layui-form-item">
                                     <label class="layui-form-label">选择设备<span class="sign">*</span></label>
                                     <div class="layui-input-block">
-                                        <input type="text"  name="eqName" placeholder="请选择" style="display:inline-block;" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <input type="button" class="layui-btn  layui-btn-sm" id="selectEmp" value="选择" ></input>
+                                        <input type="text"  name="eqName" placeholder="请选择" autocomplete="off" disabled class="layui-input col-sm-10">
+                                        <input type="button" class="layui-btn col-sm-2" style="margin: 0" id="selectEmp" value="选择" >
                                     </div>
-                                    <input type="text" class="hidden"  name="eqId" placeholder="请选择"  autocomplete="off"  class="layui-input" style="height:46px;padding-left:60px;">
+                                    <input type="text" class="hidden"  name="eqId" placeholder="请选择"  autocomplete="off"  class="layui-input" >
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">故障现象<span class="sign">*</span></label>
                                     <div class="layui-input-block">
                                         <!--<input type="text" name="title" placeholder="请选择" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">-->
-                                        <textarea name="gznr" id="gznr" cols="30" rows="10"></textarea>
+                                        <textarea name="gznr" id="gznr" class="col-sm-12" rows="10"></textarea>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -101,11 +101,11 @@
                             </div>
 
                             <div class="col-xs-12 col-sm-6">
-                                <div class="layui-form-item" pane>
+                                <div class="layui-form-item">
                                     <label class="layui-form-label">故障现象编码</label>
                                     <div class="layui-input-block">
-                                        <input type="text" placeholder="请选择" style="display:inline-block;" autocomplete="off" disabled class="layui-input" style="height:46px;padding-left:60px;">
-                                        <button type="button" value="选择" class=" layui-btn-normal layui-btn-sm " id="searchgzxx"><i class="layui-icon layui-icon-search"></i>查询</button>
+
+                                        <button type="button" value="选择" class="layui-btn col-sm-2" style="margin: 0" id="searchgzxx">查询</button>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
