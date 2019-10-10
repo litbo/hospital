@@ -69,12 +69,24 @@
             }
 
             , done: function (obj) {
+
                 tableFunc({
-                    "obj":obj,
-                    "addMsg":2,
-                    "addLink":"table1"
-                })
-            }
+                    toolFunc:[
+                        {
+                            tool: "toolbar",
+                            event: "del",
+                            send:{
+                                url:"/ggxz/delGgxz",
+                                name:"id",
+                                par:"id",
+                                type:"POST",
+                                reload:true
+                            }
+                        },
+
+                    ]
+                });
+            },
 
         }
     }

@@ -54,10 +54,10 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="startSTime" class="layui-input" id="date" placeholder="点击选择日期">
+                        <input type="text" name="startSTime" class="layui-input" id="date" placeholder="点击选择日期" readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules" lay-verify="required" lay-search="">
+                        <select name="modules" lay-search="">
                             <option value="">设备名称</option>
                             <option value="1">脉搏碳氧血氧测量仪</option>
                             <option value="2">光疗设备</option>
@@ -67,29 +67,11 @@
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules" lay-verify="required" lay-search="">
-                            <option value="">科室名称</option>
-                            <option value="1">病案室</option>
-                            <option value="2">病案质控室</option>
-                            <option value="3">B超室</option>
-                            <option value="4">病房临床检验室</option>
-                            <option value="5">病房消化内镜室</option>
-                            <option value="6">保健科全科医学病区</option>
-                            <option value="7">保健科门诊</option>
-                            <option value="8">病理科</option>
-                            <option value="9">变态反应（哮喘）门诊</option>
-                            <option value="10">保卫处</option>
-                            <option value="11">肠道检验室</option>
-                            <option value="12">病房消化内镜室</option>
-                            <option value="13">产房</option>
-                            <option value="14">产科二病区</option>
-                            <option value="15">产科门诊</option>
-                            <option value="16">产科三病区</option>
-                            <option value="17">产科一病区</option>
-                            <option value="18">产前筛查实验室</option>
-                            <option value="19">CT室</option>
-                            <option value="20">创伤骨科病房</option>
+
+                        <select name="modules" lay-filter="bmId">
+                            <option value="">全部科室</option>
                         </select>
+
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -144,6 +126,17 @@
             }
         },
         form:{
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmId",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/department/showList"
+                    }
+                ]
+            },
             date:{
                 elem:"#date",
                 value: false,

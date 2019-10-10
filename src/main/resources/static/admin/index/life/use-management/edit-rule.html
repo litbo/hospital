@@ -34,6 +34,7 @@
         input[type="file"] {
             margin: 7px;
         }
+
         /*input::-webkit-input-placeholder{
             color: whitesmoke;
         }*/
@@ -56,12 +57,12 @@
                 </div>
             </div>
             <input type="text" class="hidden" name="eqSbbh" id="eqSbbh">
-<!--            <div class="layui-form-item">-->
-<!--                <label class="layui-form-label">设备名称<span class="sign">*</span></label>-->
-<!--                <div class="layui-input-block">-->
-<!--                    <input type="text" name="eqName" id="eqName" disabled class="layui-input">-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="layui-form-item">-->
+            <!--                <label class="layui-form-label">设备名称<span class="sign">*</span></label>-->
+            <!--                <div class="layui-input-block">-->
+            <!--                    <input type="text" name="eqName" id="eqName" disabled class="layui-input">-->
+            <!--                </div>-->
+            <!--            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">设备品名<span class="sign">*</span></label>
                 <div class="layui-input-block">
@@ -102,7 +103,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">操作规程名称 <span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="czGcMc" id="czGcMc" placeholder="请输入" autocomplete="off" lay-verify="required"
+                    <input type="text" name="czGcMc" id="czGcMc" placeholder="请输入" autocomplete="off"
+                           lay-verify="required"
                            class="layui-input">
                 </div>
             </div>
@@ -194,8 +196,10 @@
         <div class="col-xs-12">
             <div class="layui-form-item ">
                 <div class="layui-input-block">
-                    <button class="layui-btn" style="float: right;margin-right:5%;margin-top:10px" lay-submit="" lay-filter="demo1">保存</button>
-<!--                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+                    <button class="layui-btn" style="float: right;margin-right:5%;margin-top:10px" lay-submit=""
+                            lay-filter="demo1">保存
+                    </button>
+                    <!--                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                 </div>
             </div>
         </div>
@@ -211,32 +215,32 @@
     formData = {};
     formData.count1 = 0;
     formData.eqSbzp = [];
-    formData2={};
-    formData3={};
-    var emp=tempValue("rl", "emp", false);
+    formData2 = {};
+    formData3 = {};
+    var emp = tempValue("rl", "emp", false);
     $("#bmId").val(emp.bmId);
     $("#czGcNgr").val(emp.userXm);
-    var layedit,form,layer;
+    var layedit, form, layer;
     // 富文本
-    layui.use('layedit', function(){
+    layui.use('layedit', function () {
         form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit;
+            , layer = layui.layer
+            , layedit = layui.layedit;
 
-        index = layedit.build('czGcNr',{
-            tool:[
+        index = layedit.build('czGcNr', {
+            tool: [
                 'strong' //加粗
-                ,'italic' //斜体
-                ,'underline' //下划线
-                ,'del' //删除线
-                ,'|' //分割线
-                ,'left' //左对齐
-                ,'center' //居中对齐
-                ,'right' //右对齐
-                ,'|' //分割线
-                ,'link' //超链接
-                ,'unlink' //清除链接
-                ,'face' //表情
+                , 'italic' //斜体
+                , 'underline' //下划线
+                , 'del' //删除线
+                , '|' //分割线
+                , 'left' //左对齐
+                , 'center' //居中对齐
+                , 'right' //右对齐
+                , '|' //分割线
+                , 'link' //超链接
+                , 'unlink' //清除链接
+                , 'face' //表情
             ]
 
         });
@@ -247,8 +251,8 @@
             layedit.setContent(index, $(".eqName").val());
         });*/
 
-        $('#put').on('click', function(){
-            var a=$("#eqPmName2").val();
+        $('#put').on('click', function () {
+            var a = $("#eqPmName2").val();
             // console.log(a);
             $("#eqPmName").val(a);
             $("#eqPp").val($("#eqPp2").val());
@@ -256,15 +260,13 @@
             $("#eqXh").val($("#eqXh2").val());
             // console.log(formData2);
         });
-        $('#put2').on('click', function(){
+        $('#put2').on('click', function () {
             layedit.setContent(index, $("#czGcNr2").val());
         });
     });
 
 
-
-
-        $('#selectEmp').on('click', function(){
+    $('#selectEmp').on('click', function () {
         layer.open({
             type: 2,
             title: '选择',
@@ -275,7 +277,7 @@
             // content: 'child/modern-list-child.html'
         });
     });
-    $('#selectEmp2').on('click', function(){
+    $('#selectEmp2').on('click', function () {
         layer.open({
             type: 2,
             title: '选择',
@@ -302,43 +304,43 @@
                     func:function(){
                     }
                 },*/
-               /* {
-                    elem: "#selectEmp2",
-                    cb: "/lifeManage/",
-                    db: "/cs/listScs",
-                    name: "dtdt",
-                    key: "radio",
-                    data: formData3,
-                    func:function(){
-                        console.log(formData3);
-                    }
-                }*/
+                /* {
+                     elem: "#selectEmp2",
+                     cb: "/lifeManage/",
+                     db: "/cs/listScs",
+                     name: "dtdt",
+                     key: "radio",
+                     data: formData3,
+                     func:function(){
+                         console.log(formData3);
+                     }
+                 }*/
 
             ]
         },
         form: {
             submit: {
-               /* before: function (param) {
-                    var tv = getTableValue("table");
-                    var ab=$("#scsName").val();
-                    $("#htYfName").val(ab);
-                    if (doJudg({
-                        "undefined": [formData2.radio],
-                        0: [tv]
-                    })) {
-                        putMsg({
-                            alert: "无法提交空数据！"
-                        });
-                        return false;
-                    }
-                    return param = {
-                        1: tv,
-                        2: formData2.radio[0]["sbcsIdScs"]
-                    };
+                /* before: function (param) {
+                     var tv = getTableValue("table");
+                     var ab=$("#scsName").val();
+                     $("#htYfName").val(ab);
+                     if (doJudg({
+                         "undefined": [formData2.radio],
+                         0: [tv]
+                     })) {
+                         putMsg({
+                             alert: "无法提交空数据！"
+                         });
+                         return false;
+                     }
+                     return param = {
+                         1: tv,
+                         2: formData2.radio[0]["sbcsIdScs"]
+                     };
 
 
-                },*/
-                before:function(){
+                 },*/
+                before: function () {
                     // var obj = {czGcNr:layedit.getContent(index)};
                     $("#czGcNr").val(layedit.getContent(index));
                     return true;
@@ -348,14 +350,14 @@
                     url: "/lifeManage/insertOneCzgc",
                     type: "POST",
                     data: [
-                        "eqSbbh","czGcMc", "czGcNr","gcUrl","czGcNgr", "czGcLb", "czGcZys", "czGcNgrq", "czGcBbh","bmId"
+                        "eqSbbh", "czGcMc", "czGcNr", "gcUrl", "czGcNgr", "czGcLb", "czGcZys", "czGcNgrq", "czGcBbh", "bmId"
                     ],
                     // key:"key",
                     contentType: "application/json",
-                  /*  param: {
-                        1: "listZb",
-                        2:"htYf"
-                    },*/
+                    /*  param: {
+                          1: "listZb",
+                          2:"htYf"
+                      },*/
                     reload: "parent"
                 }
             },

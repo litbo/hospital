@@ -30,6 +30,7 @@
 </div>
 
 <script type="text/html" id="toolBar">
+    <form>
     <div class="visible-xs">
         <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
     </div>
@@ -39,14 +40,15 @@
         </div>
         <div class="layui-inline">
             <select class="layui-input" name="status">
-                <option>投资状态</option>
+                <option value="">投资状态</option>
                 <option value="未投资">未投资</option>
                 <option value="已投资">已投资</option>
             </select>
         </div>
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
-        <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 0;">重置</button>
+        <button type="reset" class="layui-btn layui-btn-primary" >重置</button>
     </div>
+    </form>
     <hr class="devideHr">
     <div class="addBtn">
         <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="scheme-input.html"><i class="fas fa-plus"></i>&nbsp;新增</a>
@@ -73,7 +75,7 @@
                     , {field: 'createTime', title: '创建时间'}
                     , {field: 'investmentStatus', title: '投资状态'}
                     , {field: 'yearsOfUse', title: '使用年限'}
-                    , {fixed: 'right', align: 'center', toolbar: '#bar',minWidth:"500px", title: '操作'}
+                    , {align: 'left', toolbar: '#bar',minWidth:"500px", title: '操作'}
                 ]]
                 , url: "/Finance/allFinance.do"
                 // , reload: true

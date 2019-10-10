@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litbo.hospital.finance.dao.ProfitAndLossDAO">
+  <resultMap id="BaseResultMap" type="com.litbo.hospital.finance.pojo.ProfitAndLoss">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="year_loss" jdbcType="VARCHAR" property="yearLoss" />
+    <result column="year_yunying" jdbcType="VARCHAR" property="yearYunying" />
+    <result column="totle_loss" jdbcType="VARCHAR" property="totleLoss" />
+    <result column="avg_day_loss" jdbcType="VARCHAR" property="avgDayLoss" />
+    <result column="bao_li" jdbcType="VARCHAR" property="baoLi" />
+    <result column="ping_heng" jdbcType="VARCHAR" property="pingHeng" />
+    <result column="zuo_ye_lv" jdbcType="VARCHAR" property="zuoYeLv" />
+    <result column="bian_ji" jdbcType="VARCHAR" property="bianJi" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project_id, year_loss, year_yunying, totle_loss, avg_day_loss, bao_li, ping_heng, 
+    zuo_ye_lv, bian_ji
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hospital..profit_and_loss
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hospital..profit_and_loss
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.litbo.hospital.finance.pojo.ProfitAndLoss">
+    insert into hospital..profit_and_loss (project_id, year_loss,
+      year_yunying, totle_loss, avg_day_loss, 
+      bao_li, ping_heng, zuo_ye_lv, 
+      bian_ji)
+    values (#{projectId,jdbcType=VARCHAR}, #{yearLoss,jdbcType=VARCHAR},
+      #{yearYunying,jdbcType=VARCHAR}, #{totleLoss,jdbcType=VARCHAR}, #{avgDayLoss,jdbcType=VARCHAR}, 
+      #{baoLi,jdbcType=VARCHAR}, #{pingHeng,jdbcType=VARCHAR}, #{zuoYeLv,jdbcType=VARCHAR}, 
+      #{bianJi,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.litbo.hospital.finance.pojo.ProfitAndLoss">
+    insert into hospital..profit_and_loss
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="yearLoss != null">
+        year_loss,
+      </if>
+      <if test="yearYunying != null">
+        year_yunying,
+      </if>
+      <if test="totleLoss != null">
+        totle_loss,
+      </if>
+      <if test="avgDayLoss != null">
+        avg_day_loss,
+      </if>
+      <if test="baoLi != null">
+        bao_li,
+      </if>
+      <if test="pingHeng != null">
+        ping_heng,
+      </if>
+      <if test="zuoYeLv != null">
+        zuo_ye_lv,
+      </if>
+      <if test="bianJi != null">
+        bian_ji,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="yearLoss != null">
+        #{yearLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="yearYunying != null">
+        #{yearYunying,jdbcType=VARCHAR},
+      </if>
+      <if test="totleLoss != null">
+        #{totleLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="avgDayLoss != null">
+        #{avgDayLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="baoLi != null">
+        #{baoLi,jdbcType=VARCHAR},
+      </if>
+      <if test="pingHeng != null">
+        #{pingHeng,jdbcType=VARCHAR},
+      </if>
+      <if test="zuoYeLv != null">
+        #{zuoYeLv,jdbcType=VARCHAR},
+      </if>
+      <if test="bianJi != null">
+        #{bianJi,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.litbo.hospital.finance.pojo.ProfitAndLoss">
+    update hospital..profit_and_loss
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="yearLoss != null">
+        year_loss = #{yearLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="yearYunying != null">
+        year_yunying = #{yearYunying,jdbcType=VARCHAR},
+      </if>
+      <if test="totleLoss != null">
+        totle_loss = #{totleLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="avgDayLoss != null">
+        avg_day_loss = #{avgDayLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="baoLi != null">
+        bao_li = #{baoLi,jdbcType=VARCHAR},
+      </if>
+      <if test="pingHeng != null">
+        ping_heng = #{pingHeng,jdbcType=VARCHAR},
+      </if>
+      <if test="zuoYeLv != null">
+        zuo_ye_lv = #{zuoYeLv,jdbcType=VARCHAR},
+      </if>
+      <if test="bianJi != null">
+        bian_ji = #{bianJi,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.litbo.hospital.finance.pojo.ProfitAndLoss">
+    update hospital..profit_and_loss
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      year_loss = #{yearLoss,jdbcType=VARCHAR},
+      year_yunying = #{yearYunying,jdbcType=VARCHAR},
+      totle_loss = #{totleLoss,jdbcType=VARCHAR},
+      avg_day_loss = #{avgDayLoss,jdbcType=VARCHAR},
+      bao_li = #{baoLi,jdbcType=VARCHAR},
+      ping_heng = #{pingHeng,jdbcType=VARCHAR},
+      zuo_ye_lv = #{zuoYeLv,jdbcType=VARCHAR},
+      bian_ji = #{bianJi,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getMessage" resultMap="BaseResultMap" parameterType="string">
+    select * from hospital..profit_and_loss where project_id = #{id};
+  </select>
+</mapper>

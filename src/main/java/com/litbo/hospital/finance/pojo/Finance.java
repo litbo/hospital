@@ -37,6 +37,16 @@ public class Finance implements Serializable {
 
     private String unit;  // 日工作量单位
 
+    private String amountGet; // 投资回收期
+
+    private String npv;   // 净现值
+
+    private String irr; //内部收益率
+
+    private String amountAdvance;   // 审批意见
+
+    private String checkPerson;  // 审批人
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -159,6 +169,46 @@ public class Finance implements Serializable {
         this.unit = unit;
     }
 
+    public String getAmountGet() {
+        return amountGet;
+    }
+
+    public void setAmountGet(String amountGet) {
+        this.amountGet = amountGet;
+    }
+
+    public String getNpv() {
+        return npv;
+    }
+
+    public void setNpv(String npv) {
+        this.npv = npv;
+    }
+
+    public String getIrr() {
+        return irr;
+    }
+
+    public void setIrr(String irr) {
+        this.irr = irr;
+    }
+
+    public String getAmountAdvance() {
+        return amountAdvance;
+    }
+
+    public void setAmountAdvance(String amountAdvance) {
+        this.amountAdvance = amountAdvance;
+    }
+
+    public String getCheckPerson() {
+        return checkPerson;
+    }
+
+    public void setCheckPerson(String checkPerson) {
+        this.checkPerson = checkPerson;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -185,7 +235,12 @@ public class Finance implements Serializable {
             && (this.getAnnualDiscountRate() == null ? other.getAnnualDiscountRate() == null : this.getAnnualDiscountRate().equals(other.getAnnualDiscountRate()))
             && (this.getExpectedAnnualInterestRate() == null ? other.getExpectedAnnualInterestRate() == null : this.getExpectedAnnualInterestRate().equals(other.getExpectedAnnualInterestRate()))
             && (this.getInvestmentStatus() == null ? other.getInvestmentStatus() == null : this.getInvestmentStatus().equals(other.getInvestmentStatus()))
-            && (this.getUnit() == null ? other.getUnit() == null : this.getUnit().equals(other.getUnit()));
+            && (this.getUnit() == null ? other.getUnit() == null : this.getUnit().equals(other.getUnit()))
+            && (this.getAmountGet() == null ? other.getAmountGet() == null : this.getAmountGet().equals(other.getAmountGet()))
+            && (this.getNpv() == null ? other.getNpv() == null : this.getNpv().equals(other.getNpv()))
+            && (this.getIrr() == null ? other.getIrr() == null : this.getIrr().equals(other.getIrr()))
+            && (this.getAmountAdvance() == null ? other.getAmountAdvance() == null : this.getAmountAdvance().equals(other.getAmountAdvance()))
+            && (this.getCheckPerson() == null ? other.getCheckPerson() == null : this.getCheckPerson().equals(other.getCheckPerson()));
     }
 
     @Override
@@ -207,6 +262,11 @@ public class Finance implements Serializable {
         result = prime * result + ((getExpectedAnnualInterestRate() == null) ? 0 : getExpectedAnnualInterestRate().hashCode());
         result = prime * result + ((getInvestmentStatus() == null) ? 0 : getInvestmentStatus().hashCode());
         result = prime * result + ((getUnit() == null) ? 0 : getUnit().hashCode());
+        result = prime * result + ((getAmountGet() == null) ? 0 : getAmountGet().hashCode());
+        result = prime * result + ((getNpv() == null) ? 0 : getNpv().hashCode());
+        result = prime * result + ((getIrr() == null) ? 0 : getIrr().hashCode());
+        result = prime * result + ((getAmountAdvance() == null) ? 0 : getAmountAdvance().hashCode());
+        result = prime * result + ((getCheckPerson() == null) ? 0 : getCheckPerson().hashCode());
         return result;
     }
 
@@ -231,6 +291,11 @@ public class Finance implements Serializable {
         sb.append(", expectedAnnualInterestRate=").append(expectedAnnualInterestRate);
         sb.append(", investmentStatus=").append(investmentStatus);
         sb.append(", unit=").append(unit);
+        sb.append(", amountGet=").append(amountGet);
+        sb.append(", npv=").append(npv);
+        sb.append(", irr=").append(irr);
+        sb.append(", amountAdvance=").append(amountAdvance);
+        sb.append(", checkPerson=").append(checkPerson);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
