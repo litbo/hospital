@@ -40,6 +40,5 @@ public class FwPjzd {
     private String pjbh;
 
     private BigDecimal zbPrice;
-    private int pjcount;
 
 }

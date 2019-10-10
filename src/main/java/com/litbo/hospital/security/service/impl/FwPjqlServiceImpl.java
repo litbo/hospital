@@ -98,31 +98,16 @@ private FwBaoxiuDao fwBaoxiuDao;
             Map<String,Integer> map = new HashMap();
             List<FwPjqlZjb> pjqlZjbs = pjqlZjbDao.listFwPjqlByBjqlId(id);
             Boolean flag = false;
-            boolean reduce=true;
-            for(FwPjqlZjb pjqlZjb:pjqlZjbs) {
-                if (pjqlZjb.getPjsgCount() - pjkDao.selectpjslById(pjqlZjb.getPjzdId()) > 0) {
-                    reduce = false;
-                }
-                if(!reduce) {
-                    //如果数量不足，则回滚事务，并返回 审核失败
+
+            for(FwPjqlZjb pjqlZjb:pjqlZjbs){
+                if(pjkDao.reduceFwPjkSl(pjqlZjb.getPjzdId(),pjqlZjb.getPjsgCount())==0){//如果数量不足，则回滚事务，并返回 审核失败
                     String pjName = pjzdDao.selectFwPjzdName(pjqlZjb.getPjzdId());
-                    Integer num = pjkDao.selectpjslById(pjqlZjb.getPjzdId());
-                    if (num == null) {
+                    Integer num = pjzdDao.selectFwPjkCountById(pjqlZjb.getPjzdId());
+                    if(num == null){
                         num = 0;
                     }
-                    int i = pjqlZjb.getPjsgCount() - num;
-                    if(i>0){
-                        map.put(pjName,i);
-                    }
-
+                    map.put(pjName,pjqlZjb.getPjsgCount()-num);
                     flag = true;
-
-                }
-
-            }
-            if(reduce){
-                for(FwPjqlZjb pjqlZjb:pjqlZjbs) {
-                    pjkDao.reduceFwPjkSl(pjqlZjb.getPjzdId(),pjqlZjb.getPjsgCount());
                 }
             }
             if(flag){

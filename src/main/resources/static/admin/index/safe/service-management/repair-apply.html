@@ -55,12 +55,7 @@
 </script>
 
 <script type="text/html" id="bar">
-
-    {{#if (d.wxfStatusString === "未申请") { }}
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="wxf">申请</a>
-    {{# }else { }}
-    <a class="layui-btn-sm  layui-btn-disabled" style="pointer-events:none;font-size:15px"  href ="javascript:volid(0);"  disabled="true" lay-event="wxf">申请</a>
-    {{# } }}
 </script>
 
 <script>
@@ -73,7 +68,7 @@
                     , {field: 'bmName', title: '科室名称', minWidth: 200}
                     , {field: 'bxTime', title: '报修时间', width: 200}
                     , {field: 'wxfStatusString', title: '申请状态', width: 200}
-                    , {title:'操作',fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
+                    , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
                 ]]
                 , url: "/wxf/wxfList"
                 , request: {
