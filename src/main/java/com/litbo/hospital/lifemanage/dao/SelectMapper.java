@@ -23,5 +23,8 @@ public interface SelectMapper {
     void updateZt( SgPdZt sgPdZt);
 
     List<SgPdZt> findInfo(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+ List<SgPdZt> findYipan(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+ List<SgPdZt> findPanying(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+ List<SgPdZt> findPankui(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
 }
 

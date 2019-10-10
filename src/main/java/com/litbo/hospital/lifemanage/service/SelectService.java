@@ -27,4 +27,7 @@ public interface SelectService {
                                 , @Param("pageSize")Integer pageSize);
 
     PageInfo<SgPdZt>  findInfo(String pdJhid, String eqName, Integer pageNum, Integer pageSize);
+    PageInfo<SgPdZt>  findYipan(String pdJhid, String eqName, Integer pageNum, Integer pageSize);
+    PageInfo<SgPdZt>  findPanying(String pdJhid, String eqName, Integer pageNum, Integer pageSize);
+    PageInfo<SgPdZt> findPankui(String pdJhid, String eqName, Integer pageNum, Integer pageSize);
 }

@@ -56,18 +56,40 @@ public class SelectControllerA {
     }
 
     @ResponseBody
-    @RequestMapping("findInfo")
+    @RequestMapping("findInfo")  //查找全部
+    public Result findAll(
+            @RequestParam("eqName")String eqName,
+            @RequestParam("pdJhid")String pdJhid,
+            @RequestParam("pageNum")Integer pageNum,
+            @RequestParam("pageSize")Integer pageSize
+    ){ return Result.success(selectService.findInfo(pdJhid,eqName,pageNum,pageSize)); }
+
+    @ResponseBody
+    @RequestMapping("findYipan") //查找已盘
     public Result findYipan(
             @RequestParam("eqName")String eqName,
             @RequestParam("pdJhid")String pdJhid,
             @RequestParam("pageNum")Integer pageNum,
             @RequestParam("pageSize")Integer pageSize
-    ){
-        return Result.success(selectService.findInfo(pdJhid,eqName,pageNum,pageSize));
+    ){ return Result.success(selectService.findYipan(pdJhid,eqName,pageNum,pageSize)); }
 
+    @ResponseBody
+    @RequestMapping("findPanying")  //查找盘盈
+    public Result findPanying(
+            @RequestParam("eqName")String eqName,
+            @RequestParam("pdJhid")String pdJhid,
+            @RequestParam("pageNum")Integer pageNum,
+            @RequestParam("pageSize")Integer pageSize
+    ){ return Result.success(selectService.findPanying(pdJhid,eqName,pageNum,pageSize)); }
 
-
-    }
+    @ResponseBody
+    @RequestMapping("findPankui")  //查找盘亏
+    public Result findPankui(
+            @RequestParam("eqName")String eqName,
+            @RequestParam("pdJhid")String pdJhid,
+            @RequestParam("pageNum")Integer pageNum,
+            @RequestParam("pageSize")Integer pageSize
+    ){ return Result.success(selectService.findPankui(pdJhid,eqName,pageNum,pageSize)); }
 
 
 

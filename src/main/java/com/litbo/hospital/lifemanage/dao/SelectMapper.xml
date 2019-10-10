@@ -47,4 +47,17 @@
         select * from sg_pdzt where pd_jhid=#{pdJhid}
         and eq_name like '%${eqName}%' and pd_zt in ('已盘','盘亏')
     </select>
+
+    <select id="findYipan" parameterType="String" resultMap="Map2">
+        select * from sg_pdzt where pd_jhid=#{pdJhid}
+        and eq_name like '%${eqName}%' and pd_zt = '已盘'
+    </select>
+    <select id="findPanying" parameterType="String" resultMap="Map2">
+        select * from sg_pdzt where pd_jhid=#{pdJhid}
+        and eq_name like '%${eqName}%' and pd_zt = '盘盈'
+    </select>
+    <select id="findPankui" parameterType="String" resultMap="Map2">
+        select * from sg_pdzt where pd_jhid=#{pdJhid}
+        and eq_name like '%${eqName}%' and pd_zt = '盘亏'
+    </select>
 </mapper>

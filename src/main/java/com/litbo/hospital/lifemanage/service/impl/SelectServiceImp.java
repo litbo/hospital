@@ -146,9 +146,26 @@ public class SelectServiceImp implements SelectService {
     @Override
     public PageInfo<SgPdZt> findInfo(String pdJhid, String eqName, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<SgPdZt> listYipan = selectMapper.findInfo(pdJhid,eqName);
+        List<SgPdZt> listAll = selectMapper.findInfo(pdJhid,eqName);
         System.out.println(selectMapper.findInfo(pdJhid,eqName));
+        return new PageInfo<>(listAll);
+    }
+
+
+    public PageInfo<SgPdZt>  findYipan(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<SgPdZt> listYipan = selectMapper.findInfo(pdJhid,eqName);
         return new PageInfo<>(listYipan);
+    }
+    public PageInfo<SgPdZt>  findPanying(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<SgPdZt> listPanying = selectMapper.findInfo(pdJhid,eqName);
+        return new PageInfo<>(listPanying);
+    }
+    public PageInfo<SgPdZt> findPankui(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<SgPdZt> listPankui = selectMapper.findInfo(pdJhid,eqName);
+        return new PageInfo<>(listPankui);
     }
 }
 
