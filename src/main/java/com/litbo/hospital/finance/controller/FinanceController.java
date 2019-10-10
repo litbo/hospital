@@ -102,12 +102,14 @@ public class FinanceController {
 
     /**
      * 投资
-     * @param id
+     * @param id 项目id
+     * @param checkPerson 审核人
+     * @param amountAdvance  意见
      * @return
      */
     @RequestMapping("/touZi.do")
-    public Result touZi(String id){
-        financeService.touZi(id);
+    public Result touZi(String id , String checkPerson , String amountAdvance){
+        financeService.touZi(id , checkPerson ,amountAdvance);
         return Result.success();
     }
 
@@ -133,7 +135,8 @@ public class FinanceController {
      * @param pageSize 页码
      * @return
      */
-    public Result seeGuanLian(@RequestParam(name = "eqNum" , defaultValue = "") String eqNum ,
+    @RequestMapping("/seeGuanLian.do")
+    public PageVo seeGuanLian(@RequestParam(name = "eqNum" , defaultValue = "") String eqNum ,
                               @RequestParam(name = "eqName" , defaultValue = "") String eqName ,
                               @RequestParam(name = "name" , defaultValue = "") String name ,
                               @RequestParam(name = "bmName" , defaultValue = "") String bmName ,
@@ -160,9 +163,19 @@ public class FinanceController {
 
         PageInfo info = new PageInfo(vo);
 
+        PageVo pageVo = new PageVo();
 
-        return Result.success();
+        if(vo.isEmpty()){
+            pageVo.setMsg("没有查询到设备信息");
+            pageVo.setCode(0);
+            pageVo.setData(pageVo.new DataEntity((int) info.getTotal(),vo));
+            return pageVo;
+        }
 
+        pageVo.setCode(0);
+        pageVo.setMsg("success");
+        pageVo.setData(pageVo.new DataEntity((int) info.getTotal(),vo));
+        return pageVo;
     }
 
 
