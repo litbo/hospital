@@ -9,13 +9,13 @@ import java.io.Serializable;
 public class FinanceAndEq implements Serializable {
     private Integer id;
 
-    private String eqId;
+    private String eqId;  // 设备id
 
-    private String financeId;
+    private String financeId;  // 项目id
 
-    private String tiXing;
+    private String tiXing;  // 是否提醒
 
-    private String day;
+    private String day;  // 提醒天数
 
     private static final long serialVersionUID = 1L;
 
