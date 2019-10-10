@@ -47,7 +47,7 @@
     </div>
 </script>
 <script>
-    var ids=[];
+
     renderMod = {
         addTable: {
             table: {
@@ -108,15 +108,16 @@
                                         });
                                         return false;
                                     }else {
-                                        // cs.data[0].id,cs.data[1].id,cs.data[2].id,
-                                        //     cs.data[3].id,cs.data[4].id,cs.data[5].id,cs.data[6].id,
-                                        //     cs.data[7].id,cs.data[8].id,cs.data[9].id,cs.data[10].id,
-                                        //     cs.data[11].id,cs.data[12].id,cs.data[13].id,cs.data[14].id,cs.data[15].id
-                                        ids = [ cs.data[0].id,cs.data[1].id,cs.data[2].id,
-                                                cs.data[3].id,cs.data[4].id,cs.data[5].id,
-                                            cs.data[6].id,cs.data[7].id,cs.data[8].id,
-                                            cs.data[9].id,cs.data[10].id,cs.data[11].id,
-                                            cs.data[12].id,cs.data[13].id,cs.data[14].id,]
+                                        var ids = [];
+
+                                        for(var i =0;i < cs.data.length;i++){
+                                            ids.push(cs.data[i].id);
+                                        }
+                                        // ids = [ cs.data[0].id,cs.data[1].id,cs.data[2].id,
+                                        //         cs.data[3].id,cs.data[4].id,cs.data[5].id,
+                                        //     cs.data[6].id,cs.data[7].id,cs.data[8].id,
+                                        //     cs.data[9].id,cs.data[10].id,cs.data[11].id,
+                                        //     cs.data[12].id,cs.data[13].id,cs.data[14].id,]
 
                                         layer.confirm('确认通过审核？',{
                                             btn: ['确认','取消']
@@ -125,7 +126,7 @@
                                                 url: "http://localhost:8080/gg/checkGg",
                                                 data: {
 
-                                                    "id": ids,
+                                                    "id": ids
 
                                                 },
                                                 success: function (data) {
