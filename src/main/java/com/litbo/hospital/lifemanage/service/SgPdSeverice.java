@@ -17,7 +17,7 @@ public interface SgPdSeverice {
 
 //    int insertJhCz(SgPdVO record);
 
-    void insetStatus(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
+    void insetStatus(String pdJhid, String bmId);
 
 //    Object selectAllData(String pdJhid);
 }

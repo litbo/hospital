@@ -87,9 +87,9 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
 
     @Override
-    public void insetStatus(String pdJhid, String bmId, Integer pageNum, Integer pageSize) {
+    public void insetStatus(String pdJhid, String bmId) {
 
-        PageHelper.startPage(pageNum, pageSize);
+
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号

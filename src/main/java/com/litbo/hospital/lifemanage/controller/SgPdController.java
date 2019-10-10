@@ -61,11 +61,9 @@ public class SgPdController {
     @ResponseBody
     @RequestMapping("/insertStatus")// 插入所有状态数据
     public Result insertStatusController(@RequestParam("pdJhid")String pdJhid,
-                                       @RequestParam("bmId") String bmId
-            ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
-            ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
+                                       @RequestParam("bmId") String bmId){
 
-        sgPdService.insetStatus(pdJhid,bmId,pageNum,pageSize);
+        sgPdService.insetStatus(pdJhid,bmId);
 
         return Result.success();
     }
