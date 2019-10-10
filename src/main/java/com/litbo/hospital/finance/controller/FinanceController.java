@@ -38,12 +38,22 @@ public class FinanceController {
      */
     @RequestMapping("/addFinance.do")
     public Result addFinance(Finance finance){
-        System.out.println(finance);
         int result = financeService.addFinance(finance);
         if(result == 0 ){
             return Result.success("添加失败！");
         }
         return Result.success("添加成功！");
+    }
+
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delProject.do")
+    public Result delProject(String id){
+        return Result.success(financeService.delFinance(id));
     }
 
 
@@ -108,7 +118,9 @@ public class FinanceController {
      * @return
      */
     @RequestMapping("/touZi.do")
-    public Result touZi(String id , String checkPerson , String amountAdvance){
+    public Result touZi(@RequestParam(name = "id" , defaultValue = "") String id ,
+                        @RequestParam(name = "checkPerson" , defaultValue = "") String checkPerson ,
+                        @RequestParam(name = "amountAdvance" , defaultValue = "") String amountAdvance){
         financeService.touZi(id , checkPerson ,amountAdvance);
         return Result.success();
     }
@@ -124,6 +136,10 @@ public class FinanceController {
         int resutl = financeService.guanlian(eq);
         return Result.success(resutl);
     }
+
+
+
+
 
     /**
      * 查看已经关联过的设备信息以及投资方案信息

@@ -17,6 +17,8 @@ public interface FinanceService {
 
     int addFinance(Finance finance);
 
+    int delFinance(String id);
+
     List<Finance> allFinance(String name,String status);
 
     FinanceVo getMessage(String id);
