@@ -17,5 +17,5 @@ public interface GgxzService {
 
     SysGgxz getGgxzById(Integer id);
 
-    Integer delGgxz(int id);
+    Integer delGgxz(Integer[] ggxzids);
 }

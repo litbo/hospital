@@ -13,8 +13,8 @@ public interface GgDao {
     int addGg(SysGg gg);
     @SelectProvider(type = GgProvider.class , method = "listShowGgs")
     List<SysGgVo> listShowGgs();
-    @UpdateProvider(type = GgProvider.class , method = "checkGg")
-    int checkGg(Integer[] ids);
+    @Update(" UPDATE dbo.sys_gg SET status = 1 WHERE id = #{id}")
+    int checkGg(Integer id);
 
     @SelectProvider(type = GgProvider.class , method = "getGgById")
     SysGgVo getGgById(Integer id);
