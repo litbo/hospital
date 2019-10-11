@@ -29,6 +29,7 @@ public class SgCheckController {
      * @return Result
      */
     @PostMapping("/selectSgCheck")
+    @ResponseBody
     public Result selectSgCheck(@RequestParam(name = "planId") String planId,
                                 @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                 @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
@@ -42,8 +43,10 @@ public class SgCheckController {
      * @return Result
      */
     @PostMapping("/updateSgCheckYByIds")
+    @ResponseBody
     public Result updateSgCheckYByIds(@RequestBody ListIdsVO ids) {
         try{
+//            System.out.println(ids.getIds());
             //获取登陆人id
             LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
             sgCheckService.updateSgCheckByIds(ids.getIds(), emp.getUserId(), "1");
@@ -101,5 +104,15 @@ public class SgCheckController {
     public Result addOther(SgCheck sgChcck){
         sgCheckService.addOther(sgChcck);
         return  Result.success();
+    }
+
+
+    @RequestMapping("/findListByEqName")
+    @ResponseBody
+    public Result findByEqNameController(@RequestParam(name = "planId") String planId,
+                                @RequestParam("eqName") String eqName,
+                                @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        return Result.success(sgCheckService.findListByEqName(planId, eqName, pageNum,pageSize));
     }
 }

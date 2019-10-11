@@ -79,6 +79,26 @@ public interface SgCheckMapper {
     )
     List<SgCheckVO> getListByPlanId(String planId);
 
+
+
+    @Select("SELECT\n" +
+            "dbo.sg_check.id,\n" +
+            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.eq_info.eq_name,\n" +
+            "dbo.eq_info.eq_gg,\n" +
+            "dbo.eq_info.eq_xh,\n" +
+            "dbo.sg_check.[date],\n" +
+            "dbo.sg_check.user_id,\n" +
+            "dbo.sg_check.checks\n" +
+            "FROM\n" +
+            "dbo.eq_info\n" +
+            "INNER JOIN dbo.sg_check ON dbo.eq_info.eq_id = dbo.sg_check.eq_id\n" +
+            "WHERE\n" +
+            "dbo.sg_check.plan_id = #{planId,jdbcType=VARCHAR} "
+            + "AND dbo.eq_info.eq_name like '%${eqName}%'"
+    )
+    List<SgCheckListVO> findListByEqName(@Param("planId") String planId,@Param("eqName") String eqName);
+
     /**
      * 核对对比
      *

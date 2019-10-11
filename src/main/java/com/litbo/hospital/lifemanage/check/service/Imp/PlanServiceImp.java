@@ -36,7 +36,7 @@ public class PlanServiceImp implements PlanService {
                 check.setPlan_id(planId);
                 check.setId(UUID.randomUUID().toString());
                 planMapper.insertSelective(check); //附增加到check表单
-                System.out.println(check.toString()+"aaaaaaaaaaaaaaaaaaa");
+//                System.out.println(check.toString()+"aaaaaaaaaaaaaaaaaaa");
             }
         }catch (Exception e){
             e.printStackTrace();

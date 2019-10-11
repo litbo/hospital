@@ -107,5 +107,14 @@ public class SgCheckServiceImpl implements SgCheckService {
         }
 
 
+
+    }
+
+
+    @Override
+    public PageInfo<SgCheckListVO> findListByEqName(String planId, String eqName,Integer pageNum,Integer pageSize) {
+
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo<>(sgCheckMapper.findListByEqName(planId,eqName));
     }
 }
