@@ -1,6 +1,7 @@
 package com.litbo.hospital.finance.dao;
 
 import com.litbo.hospital.finance.pojo.ProfitAndLoss;
+import com.litbo.hospital.finance.vo.ProfitAndLossVo;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface ProfitAndLossDAO {
 
     int updateByPrimaryKey(ProfitAndLoss record);
 
-    List<ProfitAndLoss> getMessage(String id);
+    List<ProfitAndLossVo> getMessage(String id);
 }

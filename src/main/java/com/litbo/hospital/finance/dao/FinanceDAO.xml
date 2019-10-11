@@ -17,11 +17,20 @@
     <result column="expected_annual_interest_rate" jdbcType="VARCHAR" property="expectedAnnualInterestRate" />
     <result column="investment_status" jdbcType="VARCHAR" property="investmentStatus" />
     <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="amount_get" jdbcType="VARCHAR" property="amountGet" />
+    <result column="NPV" jdbcType="VARCHAR" property="npv" />
+    <result column="IRR" jdbcType="VARCHAR" property="irr" />
+    <result column="amount_advance" jdbcType="VARCHAR" property="amountAdvance" />
+    <result column="check_person" jdbcType="VARCHAR" property="checkPerson" />
+    <result column="eq_id" jdbcType="VARCHAR" property="eqId" />
+    <result column="ti_xing" jdbcType="VARCHAR" property="tiXing" />
+    <result column="day" jdbcType="VARCHAR" property="day" />
   </resultMap>
   <sql id="Base_Column_List">
     id, "name", amount, create_time, years_of_use, annual_operating_expenses, annual_working_day, 
     overhaul_year, daily_workload, overhaul_cost, charges, annual_discount_rate, expected_annual_interest_rate, 
-    investment_status, unit, amount_get, NPV, IRR, amount_advance, check_person
+    investment_status, unit, amount_get, NPV, IRR, amount_advance, check_person, eq_id, 
+    ti_xing, "day"
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,6 +38,15 @@
     from hospital..finance
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByEqId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hospital..finance
+    where eq_id = #{id}
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from hospital..finance
     where id = #{id,jdbcType=VARCHAR}
@@ -40,16 +58,16 @@
       overhaul_cost, charges, annual_discount_rate, 
       expected_annual_interest_rate, investment_status, 
       unit, amount_get, NPV, 
-      IRR, amount_advance, check_person
-      )
+      IRR, amount_advance, check_person, 
+      eq_id, ti_xing, "day")
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{yearsOfUse,jdbcType=VARCHAR}, #{annualOperatingExpenses,jdbcType=VARCHAR}, 
       #{annualWorkingDay,jdbcType=VARCHAR}, #{overhaulYear,jdbcType=VARCHAR}, #{dailyWorkload,jdbcType=VARCHAR}, 
       #{overhaulCost,jdbcType=VARCHAR}, #{charges,jdbcType=VARCHAR}, #{annualDiscountRate,jdbcType=VARCHAR}, 
       #{expectedAnnualInterestRate,jdbcType=VARCHAR}, #{investmentStatus,jdbcType=VARCHAR}, 
       #{unit,jdbcType=VARCHAR}, #{amountGet,jdbcType=VARCHAR}, #{npv,jdbcType=VARCHAR}, 
-      #{irr,jdbcType=VARCHAR}, #{amountAdvance,jdbcType=VARCHAR}, #{checkPerson,jdbcType=VARCHAR}
-      )
+      #{irr,jdbcType=VARCHAR}, #{amountAdvance,jdbcType=VARCHAR}, #{checkPerson,jdbcType=VARCHAR}, 
+      #{eqId,jdbcType=VARCHAR}, #{tiXing,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.finance.pojo.Finance">
     insert into hospital..finance
@@ -114,6 +132,15 @@
       <if test="checkPerson != null">
         check_person,
       </if>
+      <if test="eqId != null">
+        eq_id,
+      </if>
+      <if test="tiXing != null">
+        ti_xing,
+      </if>
+      <if test="day != null">
+        "day",
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -175,6 +202,15 @@
       </if>
       <if test="checkPerson != null">
         #{checkPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="eqId != null">
+        #{eqId,jdbcType=VARCHAR},
+      </if>
+      <if test="tiXing != null">
+        #{tiXing,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -238,6 +274,15 @@
       <if test="checkPerson != null">
         check_person = #{checkPerson,jdbcType=VARCHAR},
       </if>
+      <if test="eqId != null">
+        eq_id = #{eqId,jdbcType=VARCHAR},
+      </if>
+      <if test="tiXing != null">
+        ti_xing = #{tiXing,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null">
+        "day" = #{day,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -261,7 +306,10 @@
       NPV = #{npv,jdbcType=VARCHAR},
       IRR = #{irr,jdbcType=VARCHAR},
       amount_advance = #{amountAdvance,jdbcType=VARCHAR},
-      check_person = #{checkPerson,jdbcType=VARCHAR}
+      check_person = #{checkPerson,jdbcType=VARCHAR},
+      eq_id = #{eqId,jdbcType=VARCHAR},
+      ti_xing = #{tiXing,jdbcType=VARCHAR},
+      "day" = #{day,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -275,6 +323,28 @@
         investment_status = #{status} and
       </if>
       1=1
+    </where>
+  </select>
+
+  <select id="getGuanLian" parameterType="com.litbo.hospital.finance.pojo.FinanceAndEq"
+          resultType="com.litbo.hospital.finance.vo.FinanceEqVo">
+    SELECT eq_info.eq_id as eqNum ,eq_info.eq_name as eqName ,eq_info.eq_xh as xh , s_bm.bm_name as bm , finance.name as tzfa,
+    p.avg_day_loss as avgDay ,p.bao_li as bld ,p.ping_heng as bbd ,p.zuo_ye_lv as bbdzyl ,p.bian_ji as aqbj
+    from finance , eq_info ,  profit_and_loss as p ,s_bm
+    <where>
+      <if test="name != null">
+        finance.name like #{name} and
+      </if>
+      <if test="eqNum != null">
+        eq_info.eq_id = #{eqNum} and
+      </if>
+      <if test="eqName != null">
+        eq_info.eq_name like #{eqName} and
+      </if>
+      <if test="bmName != null">
+        s_bm.bm_name like #{bmName} and
+      </if>
+      finance.eq_id = eq_info.eq_id and eq_info.eq_bmid = s_bm.bm_id and p.project_id = finance.id
     </where>
   </select>
 

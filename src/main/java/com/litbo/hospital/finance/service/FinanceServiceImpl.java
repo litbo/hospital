@@ -11,6 +11,7 @@ import com.litbo.hospital.finance.pojo.FinanceAndEq;
 import com.litbo.hospital.finance.pojo.ProfitAndLoss;
 import com.litbo.hospital.finance.vo.FinanceEqVo;
 import com.litbo.hospital.finance.vo.FinanceVo;
+import com.litbo.hospital.finance.vo.ProfitAndLossVo;
 import com.litbo.hospital.metering.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,12 +125,7 @@ public class FinanceServiceImpl implements FinanceService {
 
         // 计算IRR      begin
 
-        int useYear = Integer.parseInt(finance.getYearsOfUse());
-        double[] a = new double[useYear];
-        for(int  i = 0 ; i <= year ; i++){
-            a[i] = financeAnalyses.get(i).getNetCashFlow();
-        }
-        finance.setIrr(String.valueOf(getIRR(useYear,a)));
+
         // 计算IRR      end
 
 
@@ -150,6 +146,15 @@ public class FinanceServiceImpl implements FinanceService {
     @Override
     public int delFinance(String id) {
         return financeDAO.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int getFiance(FinanceAndEq eq) {
+        Finance finance = financeDAO.selectByPrimaryKey(eq.getFinanceId());
+        finance.setEqId(eq.getEqId());
+        finance.setTiXing(eq.getTiXing());
+        finance.setDay(eq.getDay());
+        return financeDAO.updateByPrimaryKey(finance);
     }
 
 
@@ -388,7 +393,7 @@ public class FinanceServiceImpl implements FinanceService {
         List<FinanceAnalysis> financeAnalyses = financeAnalysisDAO.getFinanceAnalysis(id);
 
         // 查询Profitandloss信息
-        List<ProfitAndLoss> profitAndLosses = profitAndLossDAO.getMessage(id);
+        List<ProfitAndLossVo> profitAndLosses = profitAndLossDAO.getMessage(id);
 
         FinanceVo vo = new FinanceVo();
         vo.setAnalyses(financeAnalyses);
@@ -426,7 +431,7 @@ public class FinanceServiceImpl implements FinanceService {
         if(bmName != null){
             bmName = "%" + bmName + "%";
         }
-        return financeAndEqDAO.getGuanLian(eqNum, eqName, name, bmName);
+        return financeDAO.getGuanLian(eqNum, eqName, name, bmName);
     }
 
 
