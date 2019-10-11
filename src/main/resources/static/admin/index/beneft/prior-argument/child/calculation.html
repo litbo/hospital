@@ -224,7 +224,7 @@
                     elem: "#table1",
                     id: "table1",
                     cols: [[ //表头
-                         {field: 'yearsOfUse', title: '折旧年限'}
+                         {field: 'year', title: '折旧年限'}
                         , {field: 'yearLoss', title: '每年折旧(元)'}
                         , {field: 'yearYunying', title: '每年运营费用(元)'}
                         , {field: 'totleLoss', title: '成本合计(元)'}
@@ -271,7 +271,7 @@
                     url: "/Finance/getMessage.do",
                     type: "POST",
                     data: {id: $.getUrlParam("id")},
-                    parse: ["analyses","profiAndlosses"],
+                    parse: ["analyses","profitAndLosses"],
                     tableId: ["table","table1"]
                 },
                 func: function (a) {

@@ -13,7 +13,7 @@ public interface GgService {
 
     Integer checkGg(Integer id);
 
-    SysGgVo getGgById(Integer id);
+    PageInfo getGgByBname(int pageNum, int pageSize,String bName);
 
     PageInfo listWaits(int pageNum, int pageSize);
 

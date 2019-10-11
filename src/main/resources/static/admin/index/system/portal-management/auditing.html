@@ -32,10 +32,10 @@
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
-                <input class="layui-input" name="search" placeholder="" autocomplete="off">
+                <input class="layui-input" name="search" placeholder="请输入查询的公告标题" autocomplete="off">
             </div>
             <div class="layui-input-inline">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1"><i class="layui-icon layui-icon-search"></i>查询</button>
+                <button class="layui-btn" type="button" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
             </div>
         </form>
     </div>
@@ -53,7 +53,7 @@
             table: {
                 cols: [[ //表头
                     {type:"checkbox"}
-                    , {field: 'ggbt', title: '公告名称', minWidth: 150, sort: true}
+                    , {field: 'ggbt', title: '公告标题', minWidth: 150, sort: true}
                     , {field: 'bmName', title: '发布科室', minWidth: 150, sort: true}
                     , {field: 'ngsj', title: '发布时间', minWidth: 150, sort: true}
                     , {field: 'ggnr', title: '公告内容',width:"30%", minWidth: 150}
@@ -159,9 +159,11 @@
                 },
             },
             reSet:{
-                url:"eq/listEqByX",
-                type:"serch",
+                url:"/gg/getGgByBt",
+                type: "search",
+                data: ["search"],     //查询框的name
                 where: {
+
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.litbo.hospital.user.dao.provider;
 
 import com.litbo.hospital.user.bean.SysGg;
+import org.apache.ibatis.annotations.Param;
 
 public class GgProvider {
 
@@ -31,7 +32,7 @@ public class GgProvider {
                 "FROM\n" +
                 "dbo.sys_gg AS g\n" +
                 "LEFT JOIN dbo.sys_gglx AS x ON g.gglx_id= x.gglx_id\n" +
-                "LEFT JOIN dbo.s_bm AS b ON g.bm_id= b.bm_id";
+                "LEFT JOIN dbo.s_bm AS b ON g.bm_id= b.bm_id WHERE g.status=1";
         return  sql;
     }
     public String listGgDesc(){
@@ -74,7 +75,7 @@ public class GgProvider {
         return  sql;
     }
 
-    public String getGgById(Integer id){
+    public String getGgByBname(@Param("bName") String bName){
         String sql ="SELECT\n" +
                 "g.id,\n" +
                 "g.kssj,\n" +
@@ -90,7 +91,7 @@ public class GgProvider {
                 "dbo.sys_gg AS g\n" +
                 "LEFT JOIN dbo.sys_gglx AS x ON g.gglx_id= x.gglx_id\n" +
                 "LEFT JOIN dbo.s_bm AS b ON g.bm_id= b.bm_id " +
-                "where g.id = #{id}";
-        return  sql;
+                "WHERE g.ggbt LIKE '%${bName}%' AND g.status = 0";
+        return sql;
     }
 }
