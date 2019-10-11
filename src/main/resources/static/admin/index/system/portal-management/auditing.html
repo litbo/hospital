@@ -32,7 +32,7 @@
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
-                <input class="layui-input" name="ggbt" placeholder="请输入查询的公告标题" autocomplete="off">
+                <input class="layui-input" name="search" placeholder="请输入查询的公告标题" autocomplete="off">
             </div>
             <div class="layui-input-inline">
                 <button class="layui-btn" type="button" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -161,7 +161,7 @@
             reSet:{
                 url:"/gg/getGgByBt",
                 type: "search",
-                data: ["ggbt"],     //查询框的name
+                data: ["search"],     //查询框的name
                 where: {
 
                 }

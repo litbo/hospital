@@ -41,8 +41,9 @@ public class GgServiceImpl implements GgService {
     }
 
     @Override
-    public SysGgVo getGgById(Integer id) {
-        return ggDao.getGgById(id);
+    public PageInfo getGgByBname(int pageNum,int pageSize,String bName){
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(ggDao.getByBname(bName));
     }
 
     @Override
