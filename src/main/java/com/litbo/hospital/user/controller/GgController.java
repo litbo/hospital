@@ -67,11 +67,12 @@ public class GgController {
         }
     }
 
-    //通过Id查询公告信息
-    @RequestMapping("/getGgById")
-    public Result getGgById(Integer id){
-
-        return Result.success(ggService.getGgById(id));
+    //查询公告信息
+    @RequestMapping("/getGgByBt")
+    public Result getByBname(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                             @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSiz,@RequestParam("search") String bName){
+        PageInfo pageInfo = ggService.getGgByBname(pageNum,pageSiz,bName);
+        return Result.success(pageInfo);
     }
 
     //添加公告类别
