@@ -138,8 +138,7 @@ public class FinanceController {
      */
     @RequestMapping("/guanLian.do")
     public Result guanLian(FinanceAndEq eq){
-        int resutl = financeService.guanlian(eq);
-        return Result.success(resutl);
+        return Result.success(financeService.getFiance(eq));
     }
 
 

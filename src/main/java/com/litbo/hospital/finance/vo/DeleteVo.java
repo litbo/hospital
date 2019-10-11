@@ -11,6 +11,9 @@ import java.util.List;
 public class DeleteVo {
     private List<String> ids;
 
+    public DeleteVo() {
+    }
+
     @Override
     public String toString() {
         return "DeleteVo{" +

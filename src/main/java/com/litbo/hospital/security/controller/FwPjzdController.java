@@ -166,6 +166,7 @@ public class FwPjzdController {
     public Result fwPjzdSe(){
         Map map =new HashMap();
         map.put("dom","<div class='layui-inline'><select class='layui-select' name='pjfl'>" +
+                "<option value='' selected>选择配件类型</option>"+
                 "<option value='维材-医疗维修'>维材-医疗维修</option>" +
                 "<option value='维材-办公维修'>维材-办公维修</option>" +
                 "<option value='维材-普通维修'>维材-普通维修</option>" +
@@ -173,7 +174,7 @@ public class FwPjzdController {
                 "<option value='维材-其他'>维材-其他</option>" +
                 "</select> </div> " +
                 "<div class='layui-inline'><input type=\"text\" name=\"pjSzm\" class=\"layui-input\" " +
-                "placeholder=\"配件拼音码\" autocomplete=\"off\"></div>" +
+                "placeholder=\"配件名称\" autocomplete=\"off\"></div>" +
                 "    <div class='layui-input-inline mar10-0' align='center'>" +
                 "<button class='layui-btn' data-type='reload'>查询</button>" +
                 "</div>");

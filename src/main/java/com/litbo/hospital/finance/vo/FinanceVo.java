@@ -17,7 +17,7 @@ public class FinanceVo {
 
     private List<FinanceAnalysis> analyses;
 
-    private List<ProfitAndLoss> profitAndLosses;
+    private List<ProfitAndLossVo> profitAndLosses;
 
     public FinanceVo() {
     }
@@ -47,15 +47,15 @@ public class FinanceVo {
         this.analyses = analyses;
     }
 
-    public List<ProfitAndLoss> getProfitAndLosses() {
+    public List<ProfitAndLossVo> getProfitAndLosses() {
         return profitAndLosses;
     }
 
-    public void setProfitAndLosses(List<ProfitAndLoss> profitAndLosses) {
+    public void setProfitAndLosses(List<ProfitAndLossVo> profitAndLosses) {
         this.profitAndLosses = profitAndLosses;
     }
 
-    public FinanceVo(Finance finance, List<FinanceAnalysis> analyses, List<ProfitAndLoss> profitAndLosses) {
+    public FinanceVo(Finance finance, List<FinanceAnalysis> analyses, List<ProfitAndLossVo> profitAndLosses) {
         this.finance = finance;
         this.analyses = analyses;
         this.profitAndLosses = profitAndLosses;

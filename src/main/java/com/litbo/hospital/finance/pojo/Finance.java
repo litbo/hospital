@@ -47,6 +47,12 @@ public class Finance implements Serializable {
 
     private String checkPerson;  // 审批人
 
+    private String eqId;
+
+    private String tiXing;
+
+    private String day;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -209,6 +215,30 @@ public class Finance implements Serializable {
         this.checkPerson = checkPerson;
     }
 
+    public String getEqId() {
+        return eqId;
+    }
+
+    public void setEqId(String eqId) {
+        this.eqId = eqId;
+    }
+
+    public String getTiXing() {
+        return tiXing;
+    }
+
+    public void setTiXing(String tiXing) {
+        this.tiXing = tiXing;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -240,7 +270,10 @@ public class Finance implements Serializable {
             && (this.getNpv() == null ? other.getNpv() == null : this.getNpv().equals(other.getNpv()))
             && (this.getIrr() == null ? other.getIrr() == null : this.getIrr().equals(other.getIrr()))
             && (this.getAmountAdvance() == null ? other.getAmountAdvance() == null : this.getAmountAdvance().equals(other.getAmountAdvance()))
-            && (this.getCheckPerson() == null ? other.getCheckPerson() == null : this.getCheckPerson().equals(other.getCheckPerson()));
+            && (this.getCheckPerson() == null ? other.getCheckPerson() == null : this.getCheckPerson().equals(other.getCheckPerson()))
+            && (this.getEqId() == null ? other.getEqId() == null : this.getEqId().equals(other.getEqId()))
+            && (this.getTiXing() == null ? other.getTiXing() == null : this.getTiXing().equals(other.getTiXing()))
+            && (this.getDay() == null ? other.getDay() == null : this.getDay().equals(other.getDay()));
     }
 
     @Override
@@ -267,6 +300,9 @@ public class Finance implements Serializable {
         result = prime * result + ((getIrr() == null) ? 0 : getIrr().hashCode());
         result = prime * result + ((getAmountAdvance() == null) ? 0 : getAmountAdvance().hashCode());
         result = prime * result + ((getCheckPerson() == null) ? 0 : getCheckPerson().hashCode());
+        result = prime * result + ((getEqId() == null) ? 0 : getEqId().hashCode());
+        result = prime * result + ((getTiXing() == null) ? 0 : getTiXing().hashCode());
+        result = prime * result + ((getDay() == null) ? 0 : getDay().hashCode());
         return result;
     }
 
@@ -296,6 +332,9 @@ public class Finance implements Serializable {
         sb.append(", irr=").append(irr);
         sb.append(", amountAdvance=").append(amountAdvance);
         sb.append(", checkPerson=").append(checkPerson);
+        sb.append(", eqId=").append(eqId);
+        sb.append(", tiXing=").append(tiXing);
+        sb.append(", day=").append(day);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

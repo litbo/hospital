@@ -145,7 +145,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getMessage" resultMap="BaseResultMap" parameterType="string">
-    select * from hospital..profit_and_loss where project_id = #{id};
+  <select id="getMessage" resultType="com.litbo.hospital.finance.vo.ProfitAndLossVo" parameterType="string">
+    select p.id , p.project_id as projectId , p.year_loss as yearLoss, p.year_yunying as yearYunying ,
+          p.totle_loss as totleLoss, p.avg_day_loss  as avgDayLoss, p.bao_li as baoLi, p.ping_heng as pingHeng ,
+          p.zuo_ye_lv as zuoYeLv ,  p.bian_ji as bianJi , finance.years_of_use as year
+    from hospital..profit_and_loss as p , finance where project_id = #{id} and finance.id = p.project_id
   </select>
 </mapper>
