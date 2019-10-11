@@ -13,7 +13,7 @@ public class FwPjzdSqlProvider {
                 LEFT_OUTER_JOIN("eq_cs AS ghs ON fw_pjzd.pj_ghs_id = ghs.sbcs_id");
                 LEFT_OUTER_JOIN("eq_cs AS scqy on fw_pjzd.pj_scqy_id = scqy.sbcs_id");
                 if (pjSzm!=null&&!"".equals(pjSzm)) {
-                    WHERE("pj_szm like '%'+#{pjSzm}+'%'");
+                    WHERE("pj_name like '%'+#{pjSzm}+'%'");
                 }
                 if (pjfl!=null&&!"".equals(pjfl)){
                     WHERE("pjfl = #{pjfl}");
