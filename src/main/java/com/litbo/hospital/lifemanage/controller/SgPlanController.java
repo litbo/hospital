@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
@@ -42,18 +43,16 @@ public class SgPlanController {
      * @return Result
      */
     @RequestMapping(  value = "/selectPlan")
+    @ResponseBody
     public Result selectPlan(
-//            @Param("planName")String planName, @Param("planDate" )String planDate,@Param("userName") String userName,
-//            @Param("pageNum") Integer pageNum,@Param(value = "pageSize")Integer pageSize)
             @RequestParam(name = "planName",required = false) String planName,
             @RequestParam(name = "planDate",required = false) String planDate,
             @RequestParam(name = "userName",required = false) String userName,
-            @RequestParam(name = "pageNum",required = false,defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pageSize)
+            @RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+            @RequestParam(value = "pageSize",required = false,defaultValue="15") int pageSize)
     {
-        pageNum =1;
-        pageSize=10;
-        return Result.success(sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize));
+        PageInfo pageInfo = sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize);
+        return Result.success(pageInfo);
     }
 
     /**

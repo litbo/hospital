@@ -32,7 +32,6 @@ public class SelectServiceImp implements SelectService {
                                     , @Param("pageNum")Integer pageNum
                                     , @Param("pageSize")Integer pageSize) {
 
-        PageHelper.startPage(pageNum, pageSize);
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
@@ -60,6 +59,7 @@ public class SelectServiceImp implements SelectService {
 
 
 
+        PageHelper.startPage(pageNum, pageSize);
 
 
         return new PageInfo<>(adllDate);
@@ -67,7 +67,6 @@ public class SelectServiceImp implements SelectService {
 
     @Override
     public PageInfo<SelectVO> selectNot(String pdJhid, String bmId, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
@@ -97,14 +96,15 @@ public class SelectServiceImp implements SelectService {
                 adllDate2.remove(a);
             }
         }
+        PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(adllDate2);//返回
     }
 
     @Override
     public PageInfo<SelectVO> allList(String pdJhid, String bmId, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
         List<SelectVO> adllDate3 = selectMapper.listCheckDate(bmId);
 
+        PageHelper.startPage(pageNum, pageSize);
 
         return new PageInfo<>(adllDate3);
     }
@@ -114,7 +114,6 @@ public class SelectServiceImp implements SelectService {
             , @Param("pageNum")Integer pageNum
             , @Param("pageSize")Integer pageSize) {
 
-        PageHelper.startPage(pageNum,pageSize);
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
@@ -138,33 +137,33 @@ public class SelectServiceImp implements SelectService {
             }
 
         }
-
+        PageHelper.startPage(pageNum,pageSize);
         adllDate = listTemp;
         return new PageInfo<>(listTemp2);
     }
 
     @Override
     public PageInfo<SgPdZt> findInfo(String pdJhid, String eqName, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
         List<SgPdZt> listAll = selectMapper.findInfo(pdJhid,eqName);
-        System.out.println(selectMapper.findInfo(pdJhid,eqName));
+//        System.out.println(selectMapper.findInfo(pdJhid,eqName));
+        PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(listAll);
     }
 
 
     public PageInfo<SgPdZt>  findYipan(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
-        PageHelper.startPage(pageNum,pageSize);
         List<SgPdZt> listYipan = selectMapper.findYipan(pdJhid,eqName);
+        PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(listYipan);
     }
     public PageInfo<SgPdZt>  findPanying(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
-        PageHelper.startPage(pageNum,pageSize);
         List<SgPdZt> listPanying = selectMapper.findPanying(pdJhid,eqName);
+        PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(listPanying);
     }
     public PageInfo<SgPdZt> findPankui(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
-        PageHelper.startPage(pageNum,pageSize);
         List<SgPdZt> listPankui = selectMapper.findPankui(pdJhid,eqName);
+        PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(listPankui);
     }
 }

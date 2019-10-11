@@ -30,7 +30,7 @@ public interface SgPlanService {
      * @param pageSize 每页记录数
      * @return PageInfo<SgPlan>
      */
-    PageInfo<SgPlan> selectPlan(@Param("planName") String planName, @Param("planDate")
+    PageInfo selectPlan(@Param("planName") String planName, @Param("planDate")
             String planDate, @Param("userName") String userName, @Param("pageNum") Integer pageNum,
                                 @Param("pageSize") Integer pageSize);
 

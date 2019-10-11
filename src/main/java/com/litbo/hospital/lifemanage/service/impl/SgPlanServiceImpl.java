@@ -74,7 +74,9 @@ public class SgPlanServiceImpl implements SgPlanService {
      * @return PageInfo<SgPlan>
      */
     @Override
-    public PageInfo<SgPlan> selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize) {
+    public PageInfo selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize) {
+
+        System.out.println(PageHelper.startPage(pageNum, pageSize));
         // 把空字符串 转换为null
         if (StringUtils.isBlank(planName)) {
             planName = null;
@@ -105,7 +107,7 @@ public class SgPlanServiceImpl implements SgPlanService {
 //        System.out.println(planName+"aaa/n"
 //                +planDate+"aaa/n"+userName+"aaa/n"+pageNum+"aaa/n"+pageSize
 //        );
-        PageHelper.startPage(pageNum, pageSize);
+
         // 如果接收的userName 不为空且查询不到userid时 直接返回null 否则 进行查询
 
         if (userId.size()==0 && StringUtils.isNotBlank(userName)){
@@ -121,7 +123,8 @@ public class SgPlanServiceImpl implements SgPlanService {
                 System.out.println("出错");
             }
 
-            return new PageInfo<> (sgPlanMapper.selectPlan(planName, date, userId));
+            PageHelper.startPage(pageNum, pageSize);
+            return new PageInfo(sgPlanMapper.selectPlan(planName, date, userId));
         }
 //        return new PageInfo<>(
 //                userId.size()==0 && StringUtils.isNotBlank(userName) ?
