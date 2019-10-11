@@ -21,6 +21,8 @@ public interface GgService {
 
     PageInfo listGgDesc(int pageNum, int pageSize);
 
+    PageInfo listShowGglxs(int pageNum, int pageSize);
+
     Integer delGg(Integer[] ids);
 
 }

@@ -28,8 +28,10 @@ public class GgServiceImpl implements GgService {
     public Integer delGg(Integer[] ids){
         return ggDao.delGg(ids);
     }
+
     @Override
     public PageInfo listShowGgs(int pageNum, int pageSize) {
+
         PageHelper.startPage(pageNum,pageSize);
 
         return new PageInfo(ggDao.listShowGgs());
@@ -68,5 +70,13 @@ public class GgServiceImpl implements GgService {
             sysGg.setUrl(basePath + "admin/index/system/portal-management/child/ggShow.html?ggId="+sysGg.getId());
         }
         return new PageInfo(sysGgs);
+    }
+
+    @Override
+    public PageInfo listShowGglxs(int pageNum, int pageSize) {
+
+        PageHelper.startPage(pageNum,pageSize);
+
+        return new PageInfo(ggDao.listShowGglxs());
     }
 }

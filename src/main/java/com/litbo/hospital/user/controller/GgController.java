@@ -29,7 +29,12 @@ public class GgController {
         return Result.error();
 
     }
-
+    @RequestMapping("/listShowGglx")
+    public Result listGglxs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo pageInfo = ggService.listShowGglxs(pageNum,pageSize);
+        return Result.success(pageInfo);
+    }
     //查询公告信息
     @RequestMapping("/listShowGg")
     public Result listGgs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,

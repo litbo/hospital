@@ -1,5 +1,6 @@
 package com.litbo.hospital.user.dao;
 
+import com.litbo.hospital.user.bean.SysGglx;
 import com.litbo.hospital.user.vo.SysGgVo;
 import com.litbo.hospital.user.bean.SysGg;
 import com.litbo.hospital.user.dao.provider.GgProvider;
@@ -15,7 +16,8 @@ public interface GgDao {
     List<SysGgVo> listShowGgs();
     @Update(" UPDATE dbo.sys_gg SET status = 1 WHERE id = #{id}")
     int checkGg(Integer id);
-
+    @Select("SELECT * FROM dbo.sys_gglx")
+    List<SysGglx> listShowGglxs();
     @SelectProvider(type = GgProvider.class , method = "getGgByBname")
     List<SysGgVo> getByBname(@Param("bName") String bName);
 
