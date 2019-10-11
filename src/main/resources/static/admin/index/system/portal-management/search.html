@@ -29,9 +29,9 @@
 
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="search" placeholder="请输入查询公告标题" id="test-table-demoReload" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+        <button class="layui-btn" type="button" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
 
 </script>
@@ -65,7 +65,8 @@
 
             reSet:{
                 url:"eq/listEqByX",
-                type:"serch",
+                type:"search",
+                data:["search"],
                 where: {
 
                 }
