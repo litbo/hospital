@@ -4,10 +4,7 @@ import com.litbo.hospital.result.Result;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/checkInfo")
@@ -92,8 +89,12 @@ public class SelectControllerA {
     ){ return Result.success(selectService.findPankui(pdJhid,eqName,pageNum,pageSize)); }
 
 
+    @ResponseBody
+    @RequestMapping("/listNum")
+    public Result listNum(@RequestParam("pdJhid")String pdJhid
+                            ,@RequestParam("pageNum")Integer pageNum,
+                          @RequestParam("pageSize")Integer pageSize){
+        return Result.success(selectService.listNum( pdJhid ,pageNum,pageSize));
 
-
-
-
+    }
 }

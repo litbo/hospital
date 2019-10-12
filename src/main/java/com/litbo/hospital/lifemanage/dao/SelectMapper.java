@@ -1,6 +1,8 @@
 package com.litbo.hospital.lifemanage.dao;
 
+import com.litbo.hospital.lifemanage.bean.ListNum;
 import com.litbo.hospital.lifemanage.bean.SelectVO;
+import com.litbo.hospital.lifemanage.bean.SgPd;
 import com.litbo.hospital.lifemanage.bean.SgPdZt;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,15 +18,18 @@ public interface SelectMapper {
     String getBmName(String bmId);
 //    String getBmId(String planId);
 
+   List<SgPd> selectAllScan(String pdJhid);
     List<SelectVO> listCheckDate(String bmId);
 
     void insertZt(SgPdZt sgPdZt);
 
     void updateZt( SgPdZt sgPdZt);
-
     List<SgPdZt> findInfo(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
- List<SgPdZt> findYipan(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
- List<SgPdZt> findPanying(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
- List<SgPdZt> findPankui(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+  List<SgPdZt> findYipan(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+  List<SgPdZt> findPanying(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+  List<SgPdZt> findPankui(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+
+ ListNum getListNum();
+
 }
 

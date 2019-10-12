@@ -1,7 +1,7 @@
 package com.litbo.hospital.lifemanage.bean;
 
 public class SgPdZt {
-    String eqBh;
+    String eqSbbh;
     String eqName;
     String bmName;
     String pdZt;
@@ -10,7 +10,7 @@ public class SgPdZt {
     @Override
     public String toString() {
         return "SgPdZt{" +
-                "eqBh='" + eqBh + '\'' +
+                "eqSbbh='" + eqSbbh + '\'' +
                 ", eqName='" + eqName + '\'' +
                 ", bmName='" + bmName + '\'' +
                 ", pdZt='" + pdZt + '\'' +
@@ -18,12 +18,12 @@ public class SgPdZt {
                 '}';
     }
 
-    public String getEqBh() {
-        return eqBh;
+    public String getEqSbbh() {
+        return eqSbbh;
     }
 
-    public void setEqBh(String eqBh) {
-        this.eqBh = eqBh;
+    public void setEqSbbh(String eqSbbh) {
+        this.eqSbbh = eqSbbh;
     }
 
     public String getEqName() {

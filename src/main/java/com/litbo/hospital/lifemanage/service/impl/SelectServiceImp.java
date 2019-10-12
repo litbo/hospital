@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
+import com.litbo.hospital.lifemanage.bean.ListNum;
 import com.litbo.hospital.lifemanage.bean.SelectVO;
 import com.litbo.hospital.lifemanage.bean.SgPd;
 import com.litbo.hospital.lifemanage.bean.SgPdZt;
@@ -54,13 +55,14 @@ public class SelectServiceImp implements SelectService {
             }
 
         }
-
+        System.out.println("pdJhid"+pdJhid);
+        System.out.println("bmId"+bmId);
             adllDate = listTemp;
 
 
 
         PageHelper.startPage(pageNum, pageSize);
-
+//        System.out.println("已盘"+adllDate);
 
         return new PageInfo<>(adllDate);
     }
@@ -97,6 +99,8 @@ public class SelectServiceImp implements SelectService {
             }
         }
         PageHelper.startPage(pageNum, pageSize);
+        System.out.println("盘亏"+adllDate2);
+
         return new PageInfo<>(adllDate2);//返回
     }
 
@@ -139,6 +143,9 @@ public class SelectServiceImp implements SelectService {
         }
         PageHelper.startPage(pageNum,pageSize);
         adllDate = listTemp;
+
+        System.out.println("盘盈"+listTemp2);
+
         return new PageInfo<>(listTemp2);
     }
 
@@ -165,6 +172,16 @@ public class SelectServiceImp implements SelectService {
         List<SgPdZt> listPankui = selectMapper.findPankui(pdJhid,eqName);
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(listPankui);
+    }
+
+
+
+    public PageInfo<ListNum> listNum(String pdJhid ,Integer pageNum, Integer pageSize){
+        ListNum getNum = selectMapper.getListNum();
+        System.out.println();
+        PageHelper.startPage(pageNum,pageSize);
+
+        return new PageInfo<>();
     }
 }
 

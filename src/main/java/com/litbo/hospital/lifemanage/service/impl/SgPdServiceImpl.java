@@ -89,7 +89,6 @@ public class SgPdServiceImpl implements SgPdSeverice {
     @Override
     public void insetStatus(String pdJhid, String bmId) {
 
-
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
@@ -121,21 +120,21 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
         SgPdZt sgPdZt = new SgPdZt();
         sgPdZt.setPdJhid(pdJhid);
-//        System.out.println("已盘的"+listTemp);
+        System.out.println("已盘的"+listTemp);
 //        SgPdZt sgPdZt4 = new SgPdZt();
         for (SelectVO sgPd :listTemp){
             sgPdZt.setBmName(sgPd.getBmName());
-            sgPdZt.setEqBh(sgPd.getEqSbbh());
+            sgPdZt.setEqSbbh(sgPd.getEqSbbh());
             sgPdZt.setEqName(sgPd.getEqName());
             sgPdZt.setPdZt("已盘");
             selectMapper.insertZt(sgPdZt);
         }
         System.out.println("2");
 
-//        System.out.println("盘盈"+listTemp2);
+        System.out.println("盘盈"+listTemp2);
         for (SelectVO sgPd :listTemp2){
             sgPdZt.setBmName(sgPd.getBmName());
-            sgPdZt.setEqBh(sgPd.getEqSbbh());
+            sgPdZt.setEqSbbh(sgPd.getEqSbbh());
             sgPdZt.setEqName(sgPd.getEqName());
             sgPdZt.setPdZt("盘盈");
             selectMapper.insertZt(sgPdZt);
@@ -144,10 +143,10 @@ public class SgPdServiceImpl implements SgPdSeverice {
         System.out.println("3");
 
 
-//        System.out.println("盘亏的"+adllDate2);
+        System.out.println("盘亏的"+adllDate2);
         for (SelectVO sgPd :adllDate2){
             sgPdZt.setBmName(sgPd.getBmName());
-            sgPdZt.setEqBh(sgPd.getEqSbbh());
+            sgPdZt.setEqSbbh(sgPd.getEqSbbh());
             sgPdZt.setEqName(sgPd.getEqName());
             sgPdZt.setPdZt("盘亏");
             selectMapper.insertZt(sgPdZt);
@@ -155,19 +154,21 @@ public class SgPdServiceImpl implements SgPdSeverice {
         System.out.println("4");
 
 
-//        System.out.println("盘点计划的"+adllDate3);
+        System.out.println("盘点计划的"+adllDate3);
         for (SelectVO sgPd :adllDate3){
             if (allDate3.contains(adllDate2)||allDate3.contains(listTemp)){
                 adllDate3.remove(adllDate2);
                 allDate3.remove(listTemp);
                 sgPdZt.setBmName(sgPd.getBmName());
-                sgPdZt.setEqBh(sgPd.getEqSbbh());
+                sgPdZt.setEqSbbh(sgPd.getEqSbbh());
                 sgPdZt.setEqName(sgPd.getEqName());
                 sgPdZt.setPdZt("正常");
                 selectMapper.insertZt(sgPdZt);
             }
         }
         System.out.println("1");
+
+
 
 
     }

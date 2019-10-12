@@ -12,8 +12,19 @@
         <result column="pd_zt" property="pdZt"></result>
         <result property="eqName" column="eq_name"></result>
         <result property="bmName" column="bm_name"></result>
-        <result property="eqBh" column="eq_bh"></result>
+        <result property="eqSbbh" column="eq_sbbh"></result>
     </resultMap>
+
+    <resultMap id="Map3" type="com.litbo.hospital.lifemanage.bean.SgPd">
+        <result column="pd_jhid" property="pdJhid"></result>
+        <result property="pdScanId" column="pd_scan_id"></result>
+    </resultMap>
+    <!--<resultMap id="Map4" type="com.litbo.hospital.lifemanage.bean.ListNum">-->
+        <!--<result column="pd_jhid" property="allNum"></result>-->
+        <!--<result property="pdScanId" column="yiPanNum"></result>-->
+        <!--<result property="pdScanId" column="panYingNum"></result>-->
+        <!--<result property="pdScanId" column="panKuiNum"></result>-->
+    <!--</resultMap>-->
 
     <select id="listAllDate" parameterType="String" resultMap="ListMap">
        select eq_sbbh,eq_name,s.bm_name from eq_info e join s_bm s on e.eq_bmid=s.bm_id
@@ -29,8 +40,8 @@
     where  bm_id =#{bmId} and eq_sbbh is not null
     </select>
     <insert id="insertZt" parameterType="com.litbo.hospital.lifemanage.bean.SgPdZt">
-        insert into sg_pdzt (eq_bh,eq_name,bm_name,pd_zt,pd_jhid)values (
-        #{eqBh},#{eqName},#{bmName}, #{pdZt},#{pdJhid}
+        insert into sg_pdzt (eq_sbbh,eq_name,bm_name,pd_zt,pd_jhid)values (
+        #{eqSbbh},#{eqName},#{bmName}, #{pdZt},#{pdJhid}
         )
     </insert>
     <update id="updateZt" parameterType="com.litbo.hospital.lifemanage.bean.SgPdZt" >
@@ -40,7 +51,7 @@
                 pd_zt = #{pdZt}
             </if>
         </set>
-         where eq_bh = #{eqBh}
+         where eqSbbh = #{eqSbbh}
     </update>
 
     <select id="findInfo" parameterType="String" resultMap="Map2">
@@ -59,5 +70,21 @@
     <select id="findPankui" parameterType="String" resultMap="Map2">
         select * from sg_pdzt where pd_jhid=#{pdJhid}
         and eq_name like '%${eqName}%' and pd_zt = '盘亏'
+    </select>
+
+
+    <select id="selectAllScan" parameterType="String" resultMap="Map3">
+        select pd_scan_id from sg_pd where pd_jhid=#{pdJhid}
+    </select>
+
+
+    <select id="getListNum" resultMap="Map2">
+    SELECT
+    sum(CASE pd_zt WHEN '盘盈' THEN 1 ELSE 0 END) AS panYingNum,
+    sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS panKuiNum,
+    sum(CASE pd_zt WHEN '已盘' THEN 1 ELSE 0 END) AS yiPanNum,
+    sum(CASE pd_zt WHEN '已盘' THEN 1 ELSE 0 END)+sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS allNum
+    FROM
+    sg_pdzt
     </select>
 </mapper>

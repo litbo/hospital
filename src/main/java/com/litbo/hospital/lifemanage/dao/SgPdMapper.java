@@ -4,6 +4,7 @@ import com.litbo.hospital.lifemanage.bean.SgPd;
 import com.litbo.hospital.lifemanage.bean.SgPdJg;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public interface SgPdMapper {
      * @param pdJhid
      */
     @Select("select pd_scan_id from sg_pd where pd_jhid = #{pdJhid,jdbcType=VARCHAR}")
-    List<SgPd> selectAllData(String pdJhid);
+    List<SgPd> selectAllData(@Param("pdJhid")String pdJhid);
 
     /**
      * 对应设备编号（品名）的设备名字
