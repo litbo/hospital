@@ -268,6 +268,14 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
+    public int addKeyAndValue(String key, String Value) {
+        ImplementerDictionary i = new ImplementerDictionary();
+        i.setType(key);
+        i.setValue(Value);
+        return implementerDictionaryDAO.insert(i);
+    }
+
+    @Override
     public MaintenanceMessageVo getMessgeVo(String id) {
         return maintenanceDAO.getMessgeVo(id);
     }

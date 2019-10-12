@@ -456,6 +456,14 @@ public class MaintenanceController {
     }
 
 
+    // 添加字典
+    @RequestMapping("/addKeyValue.do")
+    public Result addKeyValue(String key , String value){
+        maintenanceService.addKeyAndValue(key,value);
+        return Result.success();
+    }
+
+
     /**
      * 查看所有字典
      * @param pageIndex  页码
