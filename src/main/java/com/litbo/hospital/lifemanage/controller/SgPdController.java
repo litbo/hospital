@@ -33,20 +33,18 @@ public class SgPdController {
     @PostMapping(value = "/uploadPd")
 //    @RequestMapping(value = "/uploadPd")
     @ResponseBody
-    public Result uploadPdScan(@RequestParam("multipartFile") MultipartFile multipartFile,@RequestParam String pdJhid) {
+    public Result uploadPdScan(@RequestParam("bmId")String bmId,@RequestParam("multipartFile") MultipartFile multipartFile,@RequestParam String pdJhid) {
 
         try {
-            System.out.println(pdJhid);
-            System.out.println("上传");
-            System.out.println("上传");
-            System.out.println("上传");
             if (!multipartFile.isEmpty()) {
                 SgPdVO sgPdVO;
                 byte[] bytes = multipartFile.getBytes();
                 String s = new String(bytes, 0, bytes.length);
                 System.out.println(s);
                 sgPdVO = JSON.parseObject(s, SgPdVO.class);
-                return Result.success(sgPdService.insertPdId(sgPdVO,pdJhid));
+                sgPdService.insertPdId(sgPdVO,pdJhid);
+                sgPdService.insetStatus(pdJhid,bmId);
+                return Result.success();
             } else {
                 return Result.error("这是一个空文件");
             }
@@ -63,6 +61,8 @@ public class SgPdController {
     public Result insertStatusController(@RequestParam("pdJhid")String pdJhid,
                                        @RequestParam("bmId") String bmId){
 
+
+        System.out.println("88888888888");
         sgPdService.insetStatus(pdJhid,bmId);
 
         return Result.success();
