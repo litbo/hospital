@@ -108,7 +108,7 @@
                 <div class="addBtn">
                     <button class="layui-btn layui-btn-sm addNew" data-id="table" lay-event="add" id="add" style="background: #003366"> <i class="layui-icon layui-icon-add-1"></i>新增</button>
 
-                    <button class="layui-btn layui-btn-sm delNew" lay-event="del" id="delNew" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+                    <button class="layui-btn layui-btn-sm delNew dell" lay-event="del" id="delNew" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
                 </div>
                 <table id="table" lay-filter="table"></table>
             </div>
@@ -143,24 +143,35 @@
                     none: "请点击上方按钮添加数据！"
                 },
                 done:function (res) {
+                    console.log(res);
                     var ty = localStorage.getItem("fa");
                     tm =ty;
                     localStorage.removeItem("fa");
                     projectList.push(tm);
-                    $("#del").off("click").on("click",function(){
 
+                    $(".dell").on("click",function(){
                         var checkedArr = [];
-                        for (var i = 0; i < table.cache.table.length; i++) {
-                            if (table.cache.table[i].LAY_CHECKED == true){
+                        for (var i = 0; i < res.data.length; i++) {
+                            if (res.data[i].LAY_CHECKED == true){
                                 checkedArr.push(i);
                             }
                         }
-                        var eqSbbhs =[];
+                        var pids =[];
                         for (var i = 0; i < checkedArr.length; i++){
                             var t = checkedArr[i];
-                            eqSbbhs.push(table.cache.table[t].id);
+                            pids.push(res.data[t].projectsId);
                         }
-                        checkedArr.length = 0;//清除数组
+                        checkedArr.length = 0;
+                        console.log(pids);
+                        $.ajax({
+                            url:'/maintenance/deleteMaintenanceProject.do',
+                            type:"POST",
+                            async: false,/*同步传输*/
+                            data:JSON.stringify(pids),
+                            dataType:'JSON',
+                            contentType:'application/json'
+
+                        })
                     });
                 }
             }

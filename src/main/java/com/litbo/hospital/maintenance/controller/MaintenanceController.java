@@ -12,6 +12,7 @@ import com.litbo.hospital.metering.vo.PageVo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -141,16 +142,16 @@ public class MaintenanceController {
 
     /**
      * 删除项目
-     * @param id
+     * @param pids
      * @return
      */
     @RequestMapping("/deleteMaintenanceProject.do")
-    public Result deleteMaintenanceProject(int id){
-        int result = maintenanceService.deleteMaintenanceProject(id);
-        if(result == 0){
-            return Result.success("删除失败");
+    public Result deleteMaintenanceProject(@RequestBody String ... pids){
+        System.out.println(pids);
+        for(String i : pids){
+            maintenanceService.deleteMaintenanceProject(Integer.parseInt(i));
         }
-        return Result.success(result);
+        return Result.success();
     }
 
     /**

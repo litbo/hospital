@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -255,8 +256,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         if(project == null){
             return 0;
         }
-        project.setResult(maintenanceResults);
-        project.setStandard(maintenancePersonnel);
+        project.setResult(maintenanceResults);  // 结果
+        project.setFirstTime(new SimpleDateFormat( "yyyy-MM-dd").format(new Date())); // 首次执行时间
+        project.setStandard(maintenancePersonnel);  // 维护人
         return maintenanceProjectDAO.updateProject(project);
     }
 

@@ -78,6 +78,7 @@
                     </select>
                 </div>
             </div>
+            <input type="hidden" id="projectsId" name="projectsId">
             <!--<div class="layui-form-item">-->
                 <!--<label class="layui-form-label" >周期<span class="sign">*</span></label>-->
                 <!--<div class="layui-input-block">-->
@@ -151,6 +152,7 @@
                             type:"POST",
                             data:["projectType","projectName","projectLevel","implementerType"],
                             done: function (data) {
+                                console.log(data.data);
                                 if(localStorage.getItem("projectsIds") != null){
                                     var projectsIds = localStorage.getItem("projectsIds");
                                     projectsIds = projectsIds + ',' + data.data.id;
@@ -162,11 +164,13 @@
                                         attr();
                                         return;
                                     }
+                                    $("#projectsId").val(data.data.id);
                                     new1 =
-                                        getFormValue(["projectType","projectName","projectLevel","implementerType"],{},true);
+                                        getFormValue(["projectType","projectName","projectLevel","implementerType","projectsId"],{},true);
                                     var key = $.getUrlParam('key');
                                     da.push(new1);
-                                    layui.sessionData($.getUrlParam('vg'), {
+                                console.log(da);
+                                layui.sessionData($.getUrlParam('vg'), {
                                         key: key,
                                         value: da
                                     });
