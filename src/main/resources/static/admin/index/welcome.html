@@ -334,6 +334,7 @@
             });
 
             function addData(name, d, item, src, time) {
+
                 for (var j = 0; j < name.length; j++) {
                     var containers = $("div[h_name='" + name[j] + "'] ul"), n = 0;
                     containers.html("");//清空已有内容，避免数据污染
@@ -361,16 +362,16 @@
         $(".panel_con[h_name=" + names[0] + "] a").on('click', function () {
             var w = document.body.clientWidth - 20
                 , h = document.body.clientHeight - 20;
-
-            layOpen({
-                type: 2,
-                title: $(this).find(".h_ovf").html(),
-                content: $(this).attr("data-href"),
-                area: [w + "px", h + "px"],
-                end:function(){
-                    //window.location.reload();
-                }
-            });
+            window.open($(this).attr("data-href"))
+            // layOpen({
+            //     type: 2,
+            //     title: $(this).find(".h_ovf").html(),
+            //     content: $(this).attr("data-href"),
+            //     area: [15,15],
+            //     end:function(){
+            //         //window.location.reload();
+            //     }
+            // });
             return false;
         });
     }
