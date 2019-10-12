@@ -22,6 +22,9 @@
     <div class="col-xs-12">
         <table id="table" lay-filter="table1"></table>
     </div>
+
+    <input type="hidden" class="planId">
+    <input type="hidden" class="eqId">
 </div>
 
 <script type="text/html" id="toolBar">
@@ -42,6 +45,12 @@
 
 
 <script>
+    // console.log($.getUrlParam("id"));
+    var planId = $.getUrlParam("id");
+    var eqId = $.getUrlParam("bmId");
+    localStorage.setItem("planId",$.getUrlParam("id"));
+    localStorage.setItem("eqId",$.getUrlParam("id"));
+
     renderMod = {
         addTable: {
             table: [
@@ -116,8 +125,7 @@
                                     event:"detailIn",
                                     type:2,
                                     tool: "toolbar",
-                                    content:"child/detailIn.html",
-                                    dataUrl:["id"]
+                                    content:"child/detailIn.html"
                                 }
                             ]
                         })
@@ -129,28 +137,29 @@
                 type: "reload",
                 data: ["bmName", "planDate", "userId"]
             },
-            form: {
-                val: {
-                    filter: "forms",
-                    get: {
-                        url: "/lifeManage/selectSgCheck",
-                        type: "POST",
-                        data: {planId: $.getUrlParam("id")}
-                        // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
-                        //有add时必需时data为表单name数组，否则请直接使用data赋值
-                    }//get内参数需参考《内容传输与提交》文档
-                }, submit: {
-                    form: {
-                        url: "/lifeManage/updateSgCheckByIds",
-                        type: "POST",
-                        data: [],
-                        success: function () {
-                            alert("审核成功");
-                        }
-                    }
-                }
-
-            }
+            // form: {
+            //     val: {
+            //         filter: "forms",
+            //         get: {
+            //             url: "/lifeManage/selectSgCheck",
+            //             type: "POST",
+            //             data: {planId: $.getUrlParam("id")}
+            //             // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
+            //             //有add时必需时data为表单name数组，否则请直接使用data赋值
+            //         }//get内参数需参考《内容传输与提交》文档
+            //     },
+            //     submit: {
+            //         form: {
+            //             url: "lifeManage/addOther",
+            //             type: "POST",
+            //             data: [],
+            //             success: function () {
+            //                 alert("审核成功");
+            //             }
+            //         }
+            //     }
+            //
+            // }
         }
     }
 </script>

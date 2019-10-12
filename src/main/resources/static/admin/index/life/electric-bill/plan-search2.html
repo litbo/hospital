@@ -35,7 +35,7 @@
 <script type="text/html" id="bar">
 
     <div class="layui-inline">
-        <a lay-event="allP" class="layui-btn layui-btn-sm">盘点计划:<span>0000</span></a>
+        <a lay-event="allP" class="layui-btn layui-btn-sm">盘点计划:<span id="allP"></span></a>
     </div>
 
     <div class="layui-inline">
@@ -56,6 +56,9 @@
 </script>
 <script>
     // console.log(bmId);
+    // console.log(layui.sessionData("allP", "count"));
+    // console.log($("#allP"));
+    // $("#allP").text(layui.sessionData("allP", "count"));
     renderMod = {
         addTable: {
             table: [{
@@ -85,7 +88,7 @@
                         }
                     }
                 , done: function (obj) {
-                    // console.log(obj);
+                    console.log(obj);
                     tableFunc({
                         tools:[
                             {

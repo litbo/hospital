@@ -73,13 +73,14 @@
                         }
                     }
                     , done: function (obj) {
+                        console.log(obj);
                         tableFunc({
                             tools:[
                                 {
                                     event:"detail",
                                     type:2,
                                     content:"./purchase-check.html",
-                                    dataUrl:["id"]
+                                    dataUrl:["id","bmId"]
                                 }
                             ]
                         })
