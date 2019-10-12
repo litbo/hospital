@@ -8,6 +8,7 @@ import com.litbo.hospital.maintenance.vo.EqInfoVo;
 import com.litbo.hospital.maintenance.vo.MaintenanceMessageVo;
 import com.litbo.hospital.maintenance.vo.MaintenancePlanVo;
 import com.litbo.hospital.user.bean.EqInfo;
+import sun.awt.SunHints;
 
 import java.util.List;
 
@@ -76,6 +77,8 @@ public interface MaintenanceService {
     int projectResultAdd(int maintenanceId,String maintenanceResults,String maintenancePersonnel);
 
     int deleteType(String name);
+
+    int addKeyAndValue(String key, String Value);
 
     MaintenanceMessageVo getMessgeVo(String id);
 

@@ -54,11 +54,11 @@
             </div>
         </div>
     </div>
+    <div class="addBtn" style="margin-top: 0">
+        <button class="layui-btn layui-btn-sm addi" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
+    </div>
+</script>
 
-</script>
-<script id="barDemo" type="text/html">
-    <button class="layui-btn layui-btn-sm layui-btn-normal" id="deleteBtn" lay-event="del">删除</button>
-</script>
 <script>
 
 
@@ -79,8 +79,8 @@
             addTable: {
                 table: {
                     cols: [[ //表头
-                        {field: 'type', title: '项目类型',width:"45%", minWidth: 150}
-                        , {field: 'value', title: '项目名称', width:"45%", sort:true}
+                        {field: 'type', title: '项目类型', width: "45%", minWidth: 150}
+                        , {field: 'value', title: '项目名称', width: "45%", sort: true}
                         , {title: '操作', align: 'center', toolbar: '#barDemo'}
                     ]]
                     , url: "/maintenance/findAllKey.do"
@@ -96,6 +96,20 @@
                             "count": res.data.total,//页面的所有数据数
                             "data": res.data.list //解析数据列表
                         }
+                    },
+                    done: function (obj) {
+                        tableFunc({
+                            toolFunc: [
+                                {
+                                    tool: "toolbar",
+                                    type: 2,
+                                    event: "add",
+                                    title: "添加",
+                                    area: ['60%', '40%'],
+                                    content: "./child/dict-add.html"
+                                },
+                            ]
+                        })
                     },
                 },
                 reSet: {

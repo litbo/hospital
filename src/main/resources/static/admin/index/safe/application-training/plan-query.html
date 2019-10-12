@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>计划查询</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
@@ -15,93 +16,186 @@
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
     <style>
-        body{
+        body {
             background: #f2f2f2;
         }
     </style>
 </head>
 
 <body>
-<div class="layui-row">
-    <div class="col-xs-12 padRight">
-        <table id="table" lay-filter="table1"></table>
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">应用培训</li>
+        <li>人员培训</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 100px;">
+        <div class="layui-tab-item layui-show">
+            <div class="layui-row">
+                <div class="col-xs-12 padRight">
+                    <table id="table" lay-filter="table1"></table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-row">
+                <div class="col-xs-12 padRight">
+                    <table id="table1" lay-filter="table2"></table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<script type="text/html" id="toolBar">
 
-    <div class="visible-xs">
-        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
-    </div>
-    <div class=" hidden-xs"  id="hideXs">
+<script type="text/html" id="toolBar">
+    <div class=" hidden-xs" id="hideXs">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
                 <input class="layui-input" name="jhName" placeholder="计划名称" autocomplete="off">
             </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search"><i
+                        class="layui-icon layui-icon-search"></i>查询
+                </button>
             </div>
         </form>
     </div>
     <hr class="devideHr">
     <div class="addBtn">
-        <button  class="layui-btn layui-btn-sm" lay-event="edit" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
-        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit"><i class="fas fa-trash-alt"></i></a>-->
+        <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulation.html"><i
+                class="fas fa-plus"></i>&nbsp;新增</a>
+        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="delAll"><i
+                class="fas fa-trash-alt"></i>&nbsp;删除</a>
     </div>
 </script>
+
+<script type="text/html" id="toolBars">
+    <div class=" hidden-xs" id="hideXss">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-input-inline xs-100 mar10-0 pad0-10">
+                <input class="layui-input" name="jhName" placeholder="名称" autocomplete="off">
+            </div>
+            <div class="layui-input-inline xs-100 mar10-0 pad0-10">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search"><i
+                        class="layui-icon layui-icon-search"></i>查询
+                </button>
+            </div>
+        </form>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulations.html"><i
+                class="fas fa-plus"></i>&nbsp;新增</a>
+        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="delAll"><i
+                class="fas fa-trash-alt"></i>&nbsp;删除</a>
+    </div>
+</script>
+
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情</a>
 </script>
 
+<script type="text/html" id="bars">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情s</a>
+</script>
+
 
 <script>
-    renderMod.addTable ={
-        table:{
-            cols: [[ //表头
-                {type:"checkbox"}
-                , {field: 'jhName', title: '计划名称', minWidth: 150}
-                , {field: 'pxAddr', title: '培训地点', minWidth: 150}
-                , {field: 'jhPxlx', title: '培训类型', minWidth: 150}
-                , {field: 'jhPxxz', title: '培训性质', minWidth: 150}
-                , {field: 'ZZZName', title: '组织者', minWidth: 150}
-                , {field: 'jhKstime', title: '开始日期', minWidth: 150}
-                , {field: 'jhJstime', title: '结束日期', minWidth: 150}
-                , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
-            ]],
-            url: "/Jh/jhList"
-            , request: {
-                pageName: 'pageNum',
-                limitName: 'pageSize'
-            }
-            , parseData: function (res) { //res 即为原始返回的数据
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.msg, //解析提示文本
-                    "count":res.data.total,//页面显示的数据条数
-                    "data": res.data.list //解析数据列表
+    renderMod.addTable = {
+        table: [
+            {
+                id: "tables",
+                elem: "#table",
+                toolbar: "#toolBar",
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    , {field: 'jhName', title: '培训名称', minWidth: 150}
+                    , {field: 'pxAddr', title: '培训地点', minWidth: 150}
+                    , {field: 'jhPxlx', title: '培训类型', minWidth: 150}
+                    , {field: 'jhPxxz', title: '培训性质', minWidth: 150}
+                    , {field: 'ZZZName', title: '组织者', minWidth: 150}
+                    , {field: 'jhKstime', title: '开始日期', minWidth: 150}
+                    , {field: 'jhJstime', title: '结束日期', minWidth: 150}
+                    , {fixed: 'right', minWidth: 150, align: 'center', toolbar: "#bar"}
+                ]],
+                url: "/Jh/jhList"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        tools: [
+                            {
+                                event: "jhxq",
+                                title: "计划详情",
+                                type: 2,
+                                content: "./child/personnel-xqinput.html",
+                                dataUrl: ["id"]
+                            }
+                        ]
+                    })
+                }
+            },
+            {
+                id: "table1s",
+                elem: "#table1",
+                toolbar:"#toolBars",
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    , {field: 'jhName', title: '培训名称', minWidth: 150}
+                    , {field: 'pxAddr', title: '培训地点', minWidth: 150}
+                    , {field: 'jhPxlx', title: '培训类型', minWidth: 150}
+                    , {field: 'jhPxxz', title: '培训性质', minWidth: 150}
+                    , {field: 'ZZZName', title: '组织者', minWidth: 150}
+                    , {field: 'jhKstime', title: '开始日期', minWidth: 150}
+                    , {field: 'jhJstime', title: '结束日期', minWidth: 150}
+                    , {fixed: 'right', minWidth: 150, align: 'center', toolbar: "#bars"}
+                ]],
+                url: "/Jh/jhList"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+                , done: function (obj) {
+                    tableFunc({
+                        tools: [
+                            {
+                                event: "jhxq",
+                                title: "计划详情",
+                                type: 2,
+                                content: "./child/personnel-xqinput.html",
+                                dataUrl: ["id"]
+                            }
+                        ]
+                    })
                 }
             }
-            , done: function (obj) {
-                tableFunc({
-                    tools:[
-                        {
-                            event:"jhxq",
-                            title:"计划详情",
-                            type:2,
-                            content:"./child/personnel-xqinput.html",
-                            dataUrl:["id"]
-                        }
-                    ]
-                })
-            }
-        },
-        reSet:{
-            url:"/Jh/jhList",
-            type:"search",
-            data:["jhName"]    //查询框的name
+        ],
+        reSet: {
+            tid: "#tables",
+            url: "/Jh/jhList",
+            type: "search",
+            data: ["jhName"]    //查询框的name
         }
 
-        }
+    }
 </script>
 </body>
 </html>
