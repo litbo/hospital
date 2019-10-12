@@ -40,34 +40,39 @@
             <legend>医疗器械生产/经营许可证验证</legend>
         </fieldset>-->
         <div class="col-xs-12 col-sm-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">培训名称<span class="sign">*</span></label>
+            <div class="layui-form-item ">
+                <label class="layui-form-label">设备选择<span
+                        class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhName" autocomplete="" class="layui-input" lay-verify="required">
+                    <input type="text" name="scsName" disabled id="scsName" class="layui-input col-sm-10">
+                    <button class="layui-btn col-sm-2" style="margin: 0"
+                            id="selectEmp" lay-filter="sub">选择
+                    </button>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">开始日期<span class="sign">*</span></label>
+                <label class="layui-form-label">院内编码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete=""id="date1" class="layui-input" lay-verify="required">
+                    <input type="text" name="zbdw" autocomplete="" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">结束日期<span class="sign">*</span></label>
+                <label class="layui-form-label">培训科室<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" id="date2" class="layui-input" lay-verify="required">
+                    <input type="text" name="scsName" disabled id="scsNames" class="layui-input col-sm-10">
+                    <button class="layui-btn col-sm-2" style="margin: 0;"
+                            id="selectEmps" lay-filter="sub">选择
+                    </button>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">主板单位<span class="sign">*</span></label>
+                <label class="layui-form-label">培训方式<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" class="layui-input" lay-verify="required">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">组织者<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" class="layui-input" lay-verify="required">
+                    <select>
+                        <option value="科内培训">科内培训</option>
+                        <option value="院内培训">院内培训</option>
+                        <option value="院外培训">院外培训</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -76,41 +81,35 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhKstime" value="培训编号自动生成" class="layui-input" disabled>
+                    <input type="text" name="jhKstime" class="layui-input" disabled>
                 </div>
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">分类编码<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="jhKstime" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">培训类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select>
-                        <option>1</option>
-                        <option>2</option>
+                        <option value="新产品新技术规范化培训">新产品新技术规范化培训</option>
+                        <option value="临床验收培训">临床验收培训</option>
+                        <option value="使用过程中培训">使用过程中培训</option>
                     </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">培训性质<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">培训地点<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容类别<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
+                    <input type="checkbox" name="节能减排" title="节能减排">
+                    <input type="checkbox" name="岗位职责" title="岗位职责" checked>
+                    <input type="checkbox" name="临床使用安全" title="临床使用安全">
+                    <input type="checkbox" name="应急管理" title="应急管理">
+                    <input type="checkbox" name="安全生产" title="安全生产">
+                    <input type="checkbox" name="其他培训" title="其他培训">
                 </div>
             </div>
         </div>

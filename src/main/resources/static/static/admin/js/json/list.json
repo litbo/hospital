@@ -1470,99 +1470,24 @@
             "children": [
               {
                 "title": "培训计划",
-                "url": "./table.html",
+                "url": "./safe/application-training/plan-query.html",
                 "id": "4200",
                 "icon": "scroll",
-                "shiro": "PXJH",
-                "children": [
-                  {
-                    "title": "计划制定",
-                    "url": "./safe/application-training/plan-formulation.html",
-                    "id": "42000",
-                    "shiro": "JHZD1"
-                  }
-                ]
+                "shiro": "PXJH"
               },
               {
-                "title": "人员档案",
+                "title": "待训人员",
                 "url": "./table.html",
                 "icon": "user-tag",
                 "id": "4201",
-                "shiro": "RYDA",
-                "children": [
-                  {
-                    "title": "人员名单",
-                    "url": "./table.html",
-                    "id": "42010",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "待训人员",
-                    "url": "./table.html",
-                    "id": "42011",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "人员录入",
-                    "url": "./safe/application-training/personnel-input.html",
-                    "id": "42012",
-                    "shiro": "RYLR"
-                  },
-                  {
-                    "title": "考核",
-                    "url": "./safe/application-training/personnel-check.html",
-                    "id": "42013",
-                    "shiro": "KH"
-                  }
-                ]
+                "shiro": "RYDA"
               },
               {
-                "title": "培训过程",
+                "title": "结果录入",
                 "url": "./table.html",
                 "icon": "user-clock",
                 "id": "4202",
-                "shiro": "a",
-                "children": [
-                  {
-                    "title": "签到",
-                    "url": "./table.html",
-                    "id": "42020",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "颁证",
-                    "url": "./table.html",
-                    "id": "42022",
-                    "shiro": "a"
-                  }
-                ]
-              },
-              {
-                "title": "培训查询",
-                "url": "./table.html",
-                "icon": "user-friends",
-                "id": "4203",
-                "shiro": "PXCX",
-                "children": [
-                  {
-                    "title": "计划查询",
-                    "url": "./safe/application-training/plan-query.html",
-                    "id": "42030",
-                    "shiro": "JHCX1"
-                  },
-                  {
-                    "title": "人员上岗资质",
-                    "url": "./table.html",
-                    "id": "42031",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "设备上岗资质",
-                    "url": "./table.html",
-                    "id": "42032",
-                    "shiro": "a"
-                  }
-                ]
+                "shiro": "a"
               }
             ]
           }
