@@ -39,9 +39,9 @@
         </fieldset>-->
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">项目编号<span class="sign">*</span></label>
+                <label class="layui-form-label">项目名称<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" value="项目编号自动生成" class="layui-input" disabled>
+                    <input type="text" name="name" autocomplete="off" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -109,10 +109,10 @@
                 <label class="layui-form-label">期望年利润</label>
                 <div class="layui-input-block">
                     <div class="input-c">
-                        <input type="text" name="expectedAnnualInterestRate" autocomplete="off" class="layui-input">
+                        <input type="text" name="expectedAnnualInterestRate" id="expectedAnnualInterestRate" autocomplete="off" class="layui-input">
                     </div>
                     <div class="input-s">
-                        <input type="text" name="" autocomplete="off" class="layui-input" value="元" disabled>
+                        <input type="text" name="" autocomplete="off" class="layui-input" value="%" disabled>
                     </div>
                 </div>
             </div>
@@ -120,9 +120,9 @@
 
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">项目名称<span class="sign">*</span></label>
+                <label class="layui-form-label">项目编号<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="name" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="text" name="title" value="项目编号自动生成" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -172,7 +172,7 @@
                 <label class="layui-form-label">年贴现率<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <div class="input-c">
-                        <input type="text" name="annualDiscountRate" autocomplete="off" class="layui-input" lay-verify="required">
+                        <input type="text" name="annualDiscountRate" id="annualDiscountRate" autocomplete="off" class="layui-input" lay-verify="required">
                     </div>
                     <div class="input-s">
                         <input type="text" name="" autocomplete="off" class="layui-input" value="%" disabled>
@@ -202,36 +202,33 @@
     renderMod = {
         form: {
             submit: {
-               /* before: function (param) {
-                    var tv = getTableValue("table");
-                    // var yf=$("#sbcsIdScs").val();
-                    var ab=$("#scsName").val();
-                    $("#htYfName").val(ab);
-                    if (doJudg({
-                        "undefined": [formData2.radio],
-                        0: [tv]
-                    })) {
-                        putMsg({
-                            alert: "无法提交空数据！"
-                        });
-                        return false;
-                    }
+                before: function (param) {
+                    var a=$("#expectedAnnualInterestRate").val();
+                    var aa=a/100;
+                    var b=$("#annualDiscountRate").val();
+                    var bb=b/100;
                     return param = {
-                        1: tv,
-                        2: formData2.radio[0]["sbcsIdScs"]
+                        1: aa,
+                        2: bb
                     };
 
 
-                },*/
+                },
                 form: {
                     url: "/Finance/addFinance.do",
                     type: "POST",
                     data: [
                         "name","amount","createTime","yearsOfUse","annualOperatingExpenses","annualWorkingDay","overhaulYear",
-                        "dailyWorkload","overhaulCost","charges","annualDiscountRate","expectedAnnualInterestRate","unit"
+                        "dailyWorkload","overhaulCost","charges","unit"
                     ],
-
+                    param: {
+                        1: "expectedAnnualInterestRate",
+                        2:"annualDiscountRate"
+                    },
                     reload: true
+                },
+                func:function () {
+                    window.history.go(-1);
                 }
             },
             date: [

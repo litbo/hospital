@@ -12,6 +12,7 @@ import com.litbo.hospital.finance.pojo.ProfitAndLoss;
 import com.litbo.hospital.finance.vo.FinanceEqVo;
 import com.litbo.hospital.finance.vo.FinanceVo;
 import com.litbo.hospital.finance.vo.ProfitAndLossVo;
+import com.litbo.hospital.finance.vo.Text1;
 import com.litbo.hospital.metering.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,6 +125,11 @@ public class FinanceServiceImpl implements FinanceService {
 
 
         // 计算IRR      begin
+        double[] a = new double[1000];
+        for(int i = 0 ; i < financeAnalyses.size() ; i++){
+            a[i] = financeAnalyses.get(i).getNetCashFlow();
+        }
+        double d2 = Text1.getIrr(financeAnalyses.size()-1,a);
 
 
         // 计算IRR      end
@@ -131,6 +137,7 @@ public class FinanceServiceImpl implements FinanceService {
 
         DecimalFormat df = new DecimalFormat(".00");
         String getAmount = df.format(yearIndex-1+d);
+        finance.setIrr(df.format(d2*100));
         finance.setAmountGet(getAmount);
         finance.setNpv(df.format(npv));
 
@@ -139,6 +146,8 @@ public class FinanceServiceImpl implements FinanceService {
         for(ProfitAndLoss p : profitAndLoss){
             profitAndLossDAO.insert(p);
         }
+
+
 
         return financeDAO.insert(finance);
     }
@@ -155,58 +164,6 @@ public class FinanceServiceImpl implements FinanceService {
         finance.setTiXing(eq.getTiXing());
         finance.setDay(eq.getDay());
         return financeDAO.updateByPrimaryKey(finance);
-    }
-
-
-    /*#include <bits/stdc++.h>
-    using namespace std;
-
-    double a[1000];
-    int n;
-
-    double f(double r) {
-        double sum = 0;
-        for(int i = 1; i <= n; ++i) {
-            sum += a[i]/pow(1+r,i-1);
-        }
-        return sum;
-    }
-
-    int main () {
-        scanf("%d",&n);
-        for(int i = 1; i <= n; ++i) scanf("%lf",&a[i]);
-        double l = -1, r = 10000, ans, mid;
-        for(int i = 1; i <= 1000; ++i) {
-            mid = (l+r)/2.0;
-            if(f(mid) < 0) r = mid;
-            else l = mid;
-        }
-        printf("%f\n",(l+r)/2.0);
-        return 0;
-    }*/
-
-    /**
-     * 计算irr
-     * @param year 使用年数
-     * @param a 净现金流量数组
-     * @return
-     */
-    private double getIRR(int year , double[] a){
-        double l = -1, r = 10000, ans, mid;
-        for(int i = 1; i <= 1000; ++i) {
-            mid = (l+r)/2.0;
-            if(f(mid,year,a) < 0) r = mid;
-            else l = mid;
-        }
-        return (l+r)/2.0;
-    }
-
-    private double f(double r , int n , double[] a) {
-        double sum = 0;
-        for(int i = 1; i <= n; ++i) {
-            sum += a[i]/pow(1+r,i-1);
-        }
-        return sum;
     }
 
 
@@ -244,7 +201,11 @@ public class FinanceServiceImpl implements FinanceService {
         p5.setBaoLi(df.format((Double.valueOf(p5.getAvgDayLoss()) + Double.valueOf(finance.getAmount()) * Double.valueOf(finance.getExpectedAnnualInterestRate())) / Double.valueOf(finance.getCharges())));
 
 
-        // 盈亏平衡点作业率=1－（（利润总额 /营业收入×100％）/（边际贡献/销售收入）*100%）
+        //        安全边际率=销售利润率/（（固定成本+利润）/销售收入）
+        p5.setBianJi(df.format(Double.valueOf(p5.getPingHeng()) / Double.valueOf(finance.getDailyWorkload()) * 100));
+
+        // 盈亏平衡点作业率=1－安全边际率
+        p5.setZuoYeLv(df.format(1-Double.valueOf(p5.getBianJi()) / 100));
 
         List<ProfitAndLoss> list = new ArrayList<>();
         list.add(p5);
