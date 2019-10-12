@@ -4,6 +4,8 @@ import com.litbo.hospital.lifemanage.bean.SgCheck;
 import com.litbo.hospital.lifemanage.bean.vo.ListIdsVO;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
 import com.litbo.hospital.result.Result;
+import com.litbo.hospital.user.service.EqService;
+import com.litbo.hospital.user.vo.EqInfoVo;
 import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,8 @@ import javax.servlet.http.HttpSession;
 public class SgCheckController {
     @Autowired
     private SgCheckService sgCheckService;
-
+    @Autowired
+    EqService es;
     /**
      * 计划查询账实核对信息
      *
@@ -105,12 +108,22 @@ public class SgCheckController {
     * @Param planId 需要修改计划plan_id为planId
     * @Param eqId  设备录入表的设备id  eqId
     * */
-    @RequestMapping("addOther")//盘亏录入
-    public Result addOther(SgCheck sgChcck){
-        sgCheckService.addOther(sgChcck);
-        return  Result.success();
-    }
+//    @RequestMapping("addOther")//盘亏录入
+//    public Result addOther(SgCheck sgChcck){
+//        sgCheckService.addOther(sgChcck);
+//        return  Result.success();
+//    }
+    @RequestMapping(value = "/addEq")
+    public Result addEq(@RequestBody EqInfoVo eqInfo,@RequestParam("planId") String planId) {
 
+        System.out.println(eqInfo);
+        System.out.println(planId);
+            SgCheck sgChcck = new SgCheck();
+            sgChcck.setEqId(eqInfo.getEqId());
+            sgChcck.setPlanId(planId);
+            sgCheckService.addOther(sgChcck);
+            return Result.success();
+    }
 
     @RequestMapping("/findListByEqName")
     @ResponseBody
