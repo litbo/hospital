@@ -204,9 +204,9 @@
             submit: {
                 before: function (param) {
                     var a=$("#expectedAnnualInterestRate").val();
-                    var aa=a/100;
+                    var aa=a/100.0;
                     var b=$("#annualDiscountRate").val();
-                    var bb=b/100;
+                    var bb=b/100.0;
                     return param = {
                         1: aa,
                         2: bb

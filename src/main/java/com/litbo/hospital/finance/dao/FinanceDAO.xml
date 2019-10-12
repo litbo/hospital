@@ -323,7 +323,7 @@
         investment_status = #{status} and
       </if>
       1=1
-    </where>
+    </where> order by id desc
   </select>
 
   <select id="getGuanLian" parameterType="com.litbo.hospital.finance.pojo.FinanceAndEq"
