@@ -16,7 +16,8 @@ public class EqInfoShowVO {
     /*科室id*/
     private String bmId;
 
-    /*科室名称*/
+    private String eqBmid;
+  /*科室名称*/
     private String bmName;
 
     /*设备名称*/
