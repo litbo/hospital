@@ -61,6 +61,8 @@ public class SgCheckServiceImpl implements SgCheckService {
     @Override
     public void updateSgCheckByIds(List<String> ids, String userId, String check) {
         //通过人员id获取用户姓名
+        System.out.println("改改");
+        System.out.println("改改");
         SEmp emp = empDao.getEmpsById(userId);
         SgCheck sgCheck = new SgCheck();
         for (String id : ids) {
@@ -68,6 +70,7 @@ public class SgCheckServiceImpl implements SgCheckService {
             sgCheck.setId(id);
             sgCheck.setDate(new Date());
             sgCheck.setChecks(StateEnum.getMessageByCode(Integer.parseInt(check)));
+            System.out.println("改改");
             sgCheckMapper.updateByPrimaryKeySelective(sgCheck);
         }
     }

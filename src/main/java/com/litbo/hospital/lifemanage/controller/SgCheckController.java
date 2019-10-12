@@ -9,6 +9,8 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * 账实核对Controller
  *
@@ -42,12 +44,15 @@ public class SgCheckController {
      * @param ids 核对表id
      * @return Result
      */
-    @PostMapping("/updateSgCheckYByIds")
+    @RequestMapping("/updateSgCheckYByIds")
     @ResponseBody
     public Result updateSgCheckYByIds(@RequestBody ListIdsVO ids) {
+        System.out.println(ids);
         try{
 //            System.out.println(ids.getIds());
             //获取登陆人id
+//            LiveEmpVo emp = (LiveEmpVo) session.getAttribute("emp");
+
             LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
             sgCheckService.updateSgCheckByIds(ids.getIds(), emp.getUserId(), "1");
         }catch (Exception e){
@@ -63,7 +68,7 @@ public class SgCheckController {
      * @param id 核对表id
      * @return Result
      */
-    @PostMapping("/updateSgCheckNByIds")
+    @RequestMapping("/updateSgCheckNByIds")
     public Result updateSgCheckNByIds(@RequestBody ListIdsVO id) {
         //获取登陆人id
         LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
