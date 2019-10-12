@@ -70,4 +70,10 @@ public interface GgDao {
     Integer delSjzd(Integer [] ids);
     @SelectProvider(type = GgProvider.class , method = "listGgDesc")
     List<SysGgVo> listGgDesc();
+    @Select("select * from sys_gg where id=#{id}")
+    SysGgVo  selectGgDesc(Integer id);
+    @Select("select  gglx_name from sys_gglx where gglx_id=#{id}")
+    String selectGgTzLx(Integer id);
+
+
 }

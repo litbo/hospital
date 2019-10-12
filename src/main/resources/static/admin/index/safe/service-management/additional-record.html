@@ -646,12 +646,12 @@
             table:{
                 cols: [[ //表头
                     {type: "checkbox"},
-                    {field: 'pjbh', title: '配件编号'},
-                    {field: 'pjName', title: '配件名称'},
-                    {field: 'pjGgxh', title: '规格型号'},
-                    {field: 'pjZczh', title: '品牌'},
-                    {field: 'pjsgCount', title: '数量（可编辑）',edit:true,templet:"#number"},
-                    {field: 'ghsName', title: '生产商'}
+                    {field: 'pjbh', minWidth: 200, title: '配件编号'},
+                    {field: 'pjName', minWidth: 150, title: '配件名称'},
+                    {field: 'pjGgxh',  minWidth: 150,title: '规格型号'},
+                    {field: 'pjZczh', minWidth: 150, title: '品牌'},
+                    {field: 'pjsgCount', minWidth: 200, title: '数量（可编辑）',edit:true,templet:"#number"},
+                    {field: 'ghsName', minWidth: 150, title: '生产商'}
                 ]]
                 , toolbar:false
                 , page:false
