@@ -26,6 +26,7 @@ var date = new Date()
         mm:0,
         lay:""
     }
+    , addData_I = {}
     , allData = null;
 
 //日期补零
@@ -1016,6 +1017,8 @@ action = func = {
                 height: hh
             });
 
+            addData_I[name] = oData;//将获取到的数据保存到临时变量中便于删除操作
+            
             //信息提示
             /*if (res.length === 0) {
                 layer.msg("重复数据无法添加！");
@@ -1029,39 +1032,60 @@ action = func = {
         layui.use('table', function () {
             var table = layui.table
                 , ck = table.checkStatus(name)//获取选中数据
-                , oData = table.cache[name];//获取表格所有数据
+                , oData = addData_I[name];//获取表格所有数据
             if (ck.data.length === 0) {
                 putMsg({
                     alert: "当前未选中任何数据！"
                 });
                 return false;
             }
-            layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
-                if (ck.isAll === true) {
-                    oData = [];
-                } else {
-                    var wDel = [];
-                    for (var j = 0; j < oData.length; j++) {
-                        //找出所有数据中的已选中数据并删除
-                        if (oData[j].LAY_CHECKED) {
-                            wDel.push(j);
+            if (ck.isAll === true) {
+                layer.confirm("请选择您要删除的数据？",{btn: ['本页数据', '所有数据']}, function (index) {
+                    del();
+                    layer.close(index);
+                },function(index){
+                    layer.confirm("确定要删除所有已添加的数据吗？", function (index) {
+                        table.reload(name, {
+                            data: []
+                        });
+                        addData_I[name] = [];
+                        putMsg({
+                            msg:"已成功删除所有数据！"
+                        });
+                        layer.close(index);
+                    });
+                    layer.close(index);
+                })
+            }else{
+                layer.confirm("确定要删除这" + ck.data.length + "条数据吗？", function (index) {
+                    del();
+                    layer.close(index);
+                });
+            }
+            function del(){
+                for (var j = 0; j < oData.length; j++) {
+                    for(var i=0;i<ck.data.length;i++){
+                        delete ck.data[i]["LAY_CHECKED"];
+                        delete ck.data[i]["LAY_TABLE_INDEX"];
+                        oData[j] ? delete oData[j]["LAY_TABLE_INDEX"] : '';
+                        if(JSON.stringify(oData[j]) === JSON.stringify(ck.data[i])){
+                            oData.splice(j,1);
+                            j--;
                         }
                     }
-                    for(var x=0;x<wDel.length;x++){
-                        oData.splice(x, 1);
-                    }
-                    for(var p=0;p<oData.length;p++){
-                        delete oData[p]["LAY_CHECKED"];
-                        delete oData[p]["LAY_TABLE_INDEX"];
-                    }
                 }
+
                 //重新渲染表格
                 table.reload(name, {
                     data: oData
                 });
-                layer.close(index);
-            });
 
+                addData_I[name] = oData;
+
+                putMsg({
+                    msg:"已成功删除选中数据！"
+                });
+            }
         });
     },
     //表格外获取选中数据并删除选中数据（可提交数据）
