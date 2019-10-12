@@ -74,7 +74,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">制定时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" id="formTime" name="formTime" autocomplete="off" lay-verify="required" placeholder="请输入"
+                    <input type="text" id="formTime" name="formTime" autocomplete="off" lay-verify="required" disabled placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -134,7 +134,6 @@
                     , {field: 'projectName', title: '项目名称', minWidth: 150}
                     , {field: 'projectLevel', title: '级别', minWidth: 100}
                     , {field: 'implementerType', title: '实施人类型', minWidth: 120}
-                    , {field: 'firstTime', title: '首次实施', minWidth: 100}
                 ]]
                 , toolbar: false
                 , page: false
@@ -183,7 +182,7 @@
             addItem:[
                 {
                     elem:"#add",
-                    area: ['75%', '60%'],
+                    // area: "min",
                     base: "./child/standard-add.html",
                     name: "vg",
                     key: "key",
@@ -198,7 +197,7 @@
         form: {
             date: {
                 elem: "#formTime",
-                value: false,
+                value: today,
                 type: "date",
                 format: "yyyy-MM-dd",
             },
