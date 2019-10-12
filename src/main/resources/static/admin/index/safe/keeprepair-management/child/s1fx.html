@@ -26,15 +26,15 @@
             <col width="20%">
             <col width="20%">
         </colgroup>
-        <colgroup>
+        <thead >
             <tr>
                 <th colspan="2">评分标准</th>
                 <th>权重</th>
                 <th>分数</th>
-            </tr>
-        </colgroup>
-        <colgroup>
-            <tr>
+             </tr>
+        </thead >
+        <tbody >
+            <tr >
                 <th rowspan="6">设备的临床功能</th>
                 <tr>
                     <td>不接触患者</td>
@@ -56,14 +56,13 @@
                     <td>4</td>
                     <td onclick="updateAd('1')"><input name="1" type="radio" value="4" /></td>
                 </tr>
-                <tr>
+                <tr  style="border-bottom:red 2px">
                     <td>设备用于生命力支持和急救</td>
                     <td>5</td>
                     <td onclick="updateAd('1')"><input name="1" type="radio" value="5" /></td>
                 </tr>
             </tr>
-        </colgroup>
-        <colgroup>
+
             <tr>
                 <th rowspan="5">设备故障风险</th>
                 <tr>
@@ -87,8 +86,7 @@
                     <td onclick="updateAd('4')"><input name="2" type="radio" value="4" /></td>
             </tr>
             </tr>
-        </colgroup>
-        <colgroup>
+
             <tr>
                 <th rowspan="6">PM对设备的影响</th>
                 <tr><td>维护或检查对设备可靠性没有影响</td>
@@ -116,8 +114,7 @@
                     <td onclick="updateAd('5')"><input name="3" type="radio" value="5" /></td>
                 </tr>
             </tr>
-        </colgroup>
-        <colgroup>
+
             <tr>
                 <th rowspan="3">事故历史</th>
                 <tr>
@@ -131,8 +128,7 @@
                     <td onclick="updateAd('2')"><input name="4" type="radio" value="2" /></td>
                 </tr>
             </tr>
-        </colgroup>
-        <colgroup>
+
             <tr>
                 <th rowspan="3">制造商/管理科室的特殊要求</th>
                 <tr>
@@ -146,13 +142,13 @@
                     <td onclick="updateAd('2')"><input name="5" type="radio" value="2" /></td>
                 </tr>
             </tr>
-        </colgroup>
-        <colgroup>
+        </tbody>
+        <tfoot>
             <tr>
                 <th colspan="3" >总分</th>
                 <td id="zf"></td>
             </tr>
-        </colgroup>
+        </tfoot>
     </table>
 
     <button class="layui-btn col-sm-12" style="margin-top: 50px" id="btnn" lay-filter="btnn" type="button" onclick="f()" >提交</button>
@@ -161,8 +157,10 @@
 
 
 <script>
-    var maintenanceEqId = localStorage.getItem("maintenanceEqId");//获取名称为“key”的值
+    var maintenanceEqId = localStorage.getItem("id");//获取名称为“key”的值
+    var na = localStorage.getItem("name");//获取名称为“key”的值
     console.log(maintenanceEqId);
+    console.log(na);
     localStorage.removeItem("maintenanceEqId");//删除名称为“key”的信息。
     var ad = 0;
     function f() {
@@ -184,10 +182,12 @@
         $.post("http://localhost:8080/maintenance/addRiskValue.do?eqId="+maintenanceEqId+"&riskValue="+ad,function(data,status){
             alert("Data: " + data + "nStatus: " + status);
         });
+        parent.parent.layui.$('.eqId').val(maintenanceEqId);
+        parent.parent.layui.$('#eqId').val(na);
         var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index); //再执行关闭
-        parent.location.reload();
-
+        parent.layer.closeAll();
+      /*  parent.parent.layer.close(index); *///再执行关闭
+       /* parent.parent.location.reload();*/
     }
 
     function updateAd(checkName) {
