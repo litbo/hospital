@@ -3614,17 +3614,10 @@
                 "shiro": "NG"
               },
               {
-                "title": "上传审核",
+                "title": "统计查询",
                 "url": "./system/portal-management/download-auditing.html",
                 "icon": "clipboard-check",
                 "id": "7311",
-                "shiro": "a"
-              },
-              {
-                "title": "统计查询",
-                "url": "./system/portal-management/download-search.html",
-                "icon": "search",
-                "id": "7312",
                 "shiro": "CX"
               }
             ]

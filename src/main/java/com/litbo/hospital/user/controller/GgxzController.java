@@ -59,10 +59,11 @@ public class GgxzController {
     }
 
     //查询待审核任务
-    @RequestMapping("listWaits")
+    @RequestMapping("/listWaits")
     public Result listWaits(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
-        PageInfo pageInfo = ggxzService.listWaits(pageNum,pageSize);
+                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                            @RequestParam(required = false,name = "wjmc") String wjmc){
+        PageInfo pageInfo = ggxzService.listWaits(pageNum,pageSize,wjmc);
         return Result.success(pageInfo);
     }
 

@@ -31,7 +31,7 @@
 
     <div class="hidden-xs"  id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="search" placeholder="" id="test-table-demoReload" autocomplete="off">
+            <input class="layui-input" name="wjmc" placeholder="请输入文件名称" id="test-table-demoReload" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
@@ -88,6 +88,11 @@
                 });
             },
 
+        },
+        reSet: {
+            url:"/ggxz/listWaits",
+            type: "reload",
+            data: ["wjmc"]
         }
     }
 </script>

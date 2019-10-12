@@ -13,7 +13,7 @@ public interface GgxzService {
 
     int ggxzFail(Integer id);
 
-    PageInfo listWaits(int pageNum, int pageSize);
+    PageInfo listWaits(int pageNum, int pageSize,String wjmc);
 
     SysGgxz getGgxzById(Integer id);
 

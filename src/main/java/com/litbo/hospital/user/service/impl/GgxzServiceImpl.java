@@ -8,11 +8,13 @@ import com.litbo.hospital.common.utils.poi.ChangeFile;
 import com.litbo.hospital.user.bean.SysGgxz;
 import com.litbo.hospital.user.dao.GgxzDao;
 import com.litbo.hospital.user.service.GgxzService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -61,9 +63,13 @@ public class GgxzServiceImpl implements GgxzService {
     }
 
     @Override
-    public PageInfo listWaits(int pageNum, int pageSize) {
+    public PageInfo listWaits(int pageNum, int pageSize,String wjmc) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(ggxzDao.listWaits());
+        List<SysGgxz> list = ggxzDao.listWaits();
+        if(StringUtils.isNotBlank(wjmc)){
+            list.removeIf(sysGgxz -> !sysGgxz.getWjmc().contains(wjmc));
+        }
+        return new PageInfo(list);
     }
 
     @Override
