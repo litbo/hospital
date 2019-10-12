@@ -2,6 +2,8 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqInfoShowVO;
+import com.litbo.hospital.lifemanage.dao.MyMapper.EqTjsqMapper;
 import com.litbo.hospital.supervise.bean.SBm;
 import com.litbo.hospital.supervise.bean.SEmp;
 import com.litbo.hospital.supervise.dao.WxhfDao;
@@ -25,6 +27,8 @@ public class WxhfServiceImpl implements WxhfService {
     private EmpService empService;
     @Autowired
     private EqDao eqDao;
+    @Autowired
+    private EqTjsqMapper tjsqMapper;
 
     @Override
     public WxhfReadyResouceVO getWxhfReadyResouceVO() {
@@ -59,9 +63,16 @@ public class WxhfServiceImpl implements WxhfService {
     }
 
     @Override
-    public PageInfo getWxbmGcsEqMSG() {
-
-        return new PageInfo(wxhfDao.getWxbmGcsEqMSG());
+    public PageInfo getWxbmGcsEqMSG(Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<SWxbmGcsEqSelect> msg = wxhfDao.getWxbmGcsEqMSG();
+        msg.forEach(item->{
+            EqInfoShowVO vo = wxhfDao.selectEqInfoByeqId(item.getEqId());
+            item.setEqBmName(tjsqMapper.selectBmNameByBmid(vo.getEqBmid()));
+            item.setEqGg(vo.getEqGg());
+            item.setEqXh(vo.getEqXh());
+        });
+        return new PageInfo(msg);
     }
 
     @Override
@@ -97,6 +108,12 @@ public class WxhfServiceImpl implements WxhfService {
     public PageInfo getBmGcsEqByX(int pageNum, int pageSize, BmGcsEqSelectXVO xvo) {
         PageHelper.startPage(pageNum,pageSize);
         List<SWxbmGcsEqSelect> data = wxhfDao.getBmGcsEqByX(xvo);
+        data.forEach(item->{
+            EqInfoShowVO vo = wxhfDao.selectEqInfoByeqId(item.getEqId());
+            item.setEqBmName(tjsqMapper.selectBmNameByBmid(vo.getEqBmid()));
+            item.setEqGg(vo.getEqGg());
+            item.setEqXh(vo.getEqXh());
+        });
         return new PageInfo(data);
     }
 

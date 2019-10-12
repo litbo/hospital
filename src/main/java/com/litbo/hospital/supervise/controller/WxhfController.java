@@ -67,8 +67,9 @@ public class WxhfController {
 
 
     @GetMapping("/getWxbmGcsEqMSG")
-    public Result getWxbmGcsEqMSG(){
-        PageInfo pageInfo  = wxhfService.getWxbmGcsEqMSG();
+    public Result getWxbmGcsEqMSG(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                  @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo pageInfo  = wxhfService.getWxbmGcsEqMSG(pageNum,pageSize);
         return Result.success(pageInfo);
     }
 

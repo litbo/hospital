@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.dao;
 
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqInfoShowVO;
 import com.litbo.hospital.supervise.dao.provider.BmGcsEqProvider;
 import com.litbo.hospital.supervise.dao.provider.GcsBmProvider;
 import com.litbo.hospital.supervise.vo.BmGcsEqSelectXVO;
@@ -23,6 +24,8 @@ public interface WxhfDao {
             "LEFT JOIN eq_info eq ON (swge.eq_id=eq.eq_id)")
 //    select * from s_wxbm_gcs_eq swge INNER JOIN s_bm bm ON(swge.bm_id=bm.bm_id) INNER JOIN s_emp emp on (swge.user_id=emp.user_id) INNER JOIN eq_info eq ON (swge.eq_id=eq.eq_id)
     List<SWxbmGcsEqSelect> getWxbmGcsEqMSG();
+   @Select("select * from eq_info where eq_id=#{eqId}")
+    EqInfoShowVO selectEqInfoByeqId(String eqId);
 
     @Select(" select sgb.gb_id,sgb.user_id,emp.user_xm,sgb.bm_id,bm.bm_name " +
             " from s_gcs_bm sgb LEFT JOIN s_emp emp ON (sgb.user_id=emp.user_id) " +

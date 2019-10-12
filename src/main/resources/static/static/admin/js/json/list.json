@@ -2607,12 +2607,7 @@
                     "id": "60100",
                     "shiro": "JGGL"
                   },
-                  {
-                    "title": "科室管理",
-                    "url": "./admin/basic-management/department-input.html",
-                    "id": "60101",
-                    "shiro": "KSDR"
-                  },
+
                   {
                     "title": "岗位管理",
                     "url": "./admin/basic-management/position-management.html",
@@ -2628,18 +2623,8 @@
                 "id": "6011",
                 "shiro": "JGSXSZ",
                 "children": [
-                  {
-                    "title": "科室类别设置",
-                    "url": "./admin/basic-management/department-category.html",
-                    "id": "60110",
-                    "shiro": "a"
-                  },
-                  {
-                    "title": "管理科室类别设置",
-                    "url": "./admin/basic-management/manage-department.html",
-                    "id": "60111",
-                    "shiro": "a"
-                  },
+
+
                   {
                     "title": "维修科室设置",
                     "url": "./admin/basic-management/service-department.html",
@@ -2647,15 +2632,15 @@
                     "shiro": "WXBMSZ"
                   },
                   {
-                    "title": "科室系统字典",
-                    "url": "./admin/basic-management/department-system.html",
+                    "title": "科室导入",
+                    "url": "./admin/basic-management/department-input.html",
                     "id": "60113",
-                    "shiro": "a"
+                    "shiro": "KSDR"
                   },
                   {
                     "title": "科室归属",
                     "url": "./admin/basic-management/bmgs.html",
-                    "id": "601130",
+                    "id": "60114",
                     "shiro": "BMGS"
                   }
                 ]

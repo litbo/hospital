@@ -19,7 +19,7 @@ public interface WxhfService {
     PageInfo getGcsBmMSGByGcsNameAndBmName(int pageNum, int pageSize, String userXm, String bmName);
 
     //获取维修科室工程师划分信息
-    PageInfo getWxbmGcsEqMSG();
+    PageInfo getWxbmGcsEqMSG(Integer pageNum,Integer pageSize);
     //维修科室下的工程师对应的设备的划分
     void wxBmGcsEqHf(WxBmGcsEqInsertVO wxBmGcsEqInsertVO);
     //清除维修科室下工程师对设备划分
