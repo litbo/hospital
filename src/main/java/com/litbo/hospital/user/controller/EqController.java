@@ -41,15 +41,6 @@ public class EqController {
         return Result.success(es.listShowEqs(pageNum, pageSize));
     }
 
-    //模糊查询
-    @RequestMapping("/listEqByX")
-    public Result listEqByX(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
-                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                            SelectEqVo selectEqVo) {
-        PageInfo pageInfo = es.listEqByX(pageNum, pageSize, selectEqVo);
-        return Result.success(pageInfo);
-    }
-
     //通过设备id 查询设备信息
     @RequestMapping("/getEqById")
     public Result getEqById(String eqId) {

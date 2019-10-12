@@ -25,11 +25,12 @@
 <script type="text/html" id="toolBar" >
     <div class="addBtn" style="margin-top: 0">
         <button class="layui-btn layui-btn-sm addi" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
-
-        <button class="layui-btn layui-btn-sm editi" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>修改</button>
-
         <button class="layui-btn layui-btn-sm deli" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</button>
     </div>
+</script>
+
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
 </script>
 <script>
     var dd = 0;
@@ -38,10 +39,10 @@
             table: {
                 cols: [[
                     {type: "checkbox"}
-                    , {field: 'eqSbbh', title: '序号', minWidth: 200, sort: true}
-                    , {field: 'eqName', title: '公告类型', minWidth: 150, sort: true}
+                    ,{title: '序号',templet: '#xuhao'}
+                    , {field: 'gglxName', title: '公告类型', minWidth: 150, sort: true}
                 ]]
-                , url: "/config/ratio/showUsing"
+                , url: "/gg/listShowGglx"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -69,9 +70,9 @@
                                 tool: "toolbar",
                                 event: "del",
                                 send:{
-                                    url:"/config/ratio/deleteUsing",
+                                    url:"/gg/delSjzd",
                                     name:"ids",
-                                    par:"id",
+                                    par:"gglxId",
                                     type:"DELETE",
                                     reload:true
                                 }

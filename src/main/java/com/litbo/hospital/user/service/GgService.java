@@ -13,13 +13,19 @@ public interface GgService {
 
     Integer checkGg(Integer id);
 
-    SysGgVo getGgById(Integer id);
+    PageInfo getGgByBname(int pageNum, int pageSize,String bName);
+
+    Integer delSjzd(Integer[] ids);
+
+    PageInfo listChGg(int pageNum, int pageSize,String name);
 
     PageInfo listWaits(int pageNum, int pageSize);
 
     Integer addGglb(String gglxName);
 
     PageInfo listGgDesc(int pageNum, int pageSize);
+
+    PageInfo listShowGglxs(int pageNum, int pageSize);
 
     Integer delGg(Integer[] ids);
 

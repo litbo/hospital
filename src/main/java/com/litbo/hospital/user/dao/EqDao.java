@@ -21,8 +21,6 @@ public interface EqDao {
     @InsertProvider(type = EqProvider.class , method = "addEq")
     int addEq(EqInfoVo eqInfo);
 
-    @SelectProvider(type = EqProvider.class , method = "selectEqByX")
-    List<EqShowVo> listEqByX(SelectEqVo selectEqVo);
     /**根据条件查询*/
     @Select({"<script>",
             "SELECT b.bm_name,a.eq_id,a.eq_sbbh,a.eq_zcbh,a.eq_name,a.eq_pp,a.eq_xh,a.eq_gg,a.eq_qysj " +

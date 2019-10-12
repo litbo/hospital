@@ -26,7 +26,7 @@
     
     <select id="listCheckDate" resultMap="ListMap" parameterType="String">
     select eq_sbbh,eq_name,s.bm_name from eq_info e join s_bm s on e.eq_bmid=s.bm_id
-    where  bm_id =#{bmId}
+    where  bm_id =#{bmId} and eq_sbbh is not null
     </select>
     <insert id="insertZt" parameterType="com.litbo.hospital.lifemanage.bean.SgPdZt">
         insert into sg_pdzt (eq_bh,eq_name,bm_name,pd_zt,pd_jhid)values (
