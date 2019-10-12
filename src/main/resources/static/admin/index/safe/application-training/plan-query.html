@@ -62,7 +62,7 @@
     </div>
     <hr class="devideHr">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulation.html"><i
+        <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulations.html"><i
                 class="fas fa-plus"></i>&nbsp;新增</a>
         <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="delAll"><i
                 class="fas fa-trash-alt"></i>&nbsp;删除</a>
@@ -84,7 +84,7 @@
     </div>
     <hr class="devideHr">
     <div class="addBtn">
-        <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulations.html"><i
+        <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulation.html"><i
                 class="fas fa-plus"></i>&nbsp;新增</a>
         <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="delAll"><i
                 class="fas fa-trash-alt"></i>&nbsp;删除</a>
@@ -92,11 +92,13 @@
 </script>
 
 <script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="">添加人员</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情</a>
 </script>
 
 <script type="text/html" id="bars">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情s</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="">添加人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情</a>
 </script>
 
 
@@ -116,7 +118,7 @@
                     , {field: 'ZZZName', title: '组织者', minWidth: 150}
                     , {field: 'jhKstime', title: '开始日期', minWidth: 150}
                     , {field: 'jhJstime', title: '结束日期', minWidth: 150}
-                    , {fixed: 'right', minWidth: 150, align: 'center', toolbar: "#bar"}
+                    , {fixed: 'right', width:300, align: 'center', toolbar: "#bar"}
                 ]],
                 url: "/Jh/jhList"
                 , request: {
@@ -133,10 +135,11 @@
                 }
                 , done: function (obj) {
                     tableFunc({
-                        tools: [
+                        toolFunc: [
                             {
                                 event: "jhxq",
                                 title: "计划详情",
+                                area: ['90%', '90%'],
                                 type: 2,
                                 content: "./child/personnel-xqinput.html",
                                 dataUrl: ["id"]
