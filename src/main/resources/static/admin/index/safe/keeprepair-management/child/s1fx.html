@@ -183,14 +183,13 @@
 
 
         $.post("http://localhost:8080/maintenance/addRiskValue.do?eqId="+maintenanceEqId+"&riskValue="+ad,function(data,status){
-            alert("Data: " + data + "nStatus: " + status);
+
         });
         parent.parent.layui.$('.eqId').val(maintenanceEqId);
         parent.parent.layui.$('#eqId').val(na);
         var index = parent.layer.getFrameIndex(window.name);
         parent.layer.closeAll();
-      /*  parent.parent.layer.close(index); *///再执行关闭
-       /* parent.parent.location.reload();*/
+
     }
 
     function updateAd(checkName) {
