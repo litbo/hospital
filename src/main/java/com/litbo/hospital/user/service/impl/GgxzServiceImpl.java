@@ -68,8 +68,8 @@ public class GgxzServiceImpl implements GgxzService {
 
     @Override
     public SysGgxz getGgxzById(Integer id) {
-
-        return ggxzDao.getGgxzById(id);
+        SysGgxz ggxz = ggxzDao.getGgxzById(id);
+        return ggxz;
     }
 
     @Override

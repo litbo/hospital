@@ -15,7 +15,9 @@
     <script src="/static/admin/js/basic.js"></script>
 </head>
 <body>
-<form class="layui-form layui-form-pane" action="" lay-filter="forms">
+<div class="layui-row">
+    <div class="col-xs-12">
+        <form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <!--        <fieldset class="layui-elem-field layui-field-title">
         <legend>风险值设置</legend>
     </fieldset>-->
@@ -34,14 +36,14 @@
              </tr>
         </thead >
         <tbody >
-            <tr >
+            <tr  style="border-bottom: 2px solid #999">
                 <th rowspan="6">设备的临床功能</th>
                 <tr>
                     <td>不接触患者</td>
                     <td>1</td>
                     <td onclick="updateAd('1')"><input name="1" type="radio" value="1"/></td>
                 </tr>
-                <tr>
+                <tr >
                     <td>设备可能直接接触患者，但是并不起关键作用</td>
                     <td>2</td>
                     <td onclick="updateAd('1')"><input name="1" type="radio" value="2" /></td>
@@ -56,16 +58,16 @@
                     <td>4</td>
                     <td onclick="updateAd('1')"><input name="1" type="radio" value="4" /></td>
                 </tr>
-                <tr  style="border-bottom:red 2px">
+                <tr style="border-bottom: 2px solid #999">
                     <td>设备用于生命力支持和急救</td>
                     <td>5</td>
                     <td onclick="updateAd('1')"><input name="1" type="radio" value="5" /></td>
                 </tr>
             </tr>
 
-            <tr>
+            <tr  style="border-bottom: 2px solid #999">
                 <th rowspan="5">设备故障风险</th>
-                <tr>
+                <tr >
                     <td>设备故障不会导致风险</td>
                     <td>1</td>
                     <td onclick="updateAd('1')"><input name="2" type="radio" value="1" /></td>
@@ -80,14 +82,14 @@
                     <td>3</td>
                     <td onclick="updateAd('3')"><input name="2" type="radio" value="3" /></td>
                 </tr>
-                <tr>
+                <tr  style="border-bottom: 2px solid #999">
                     <td>设备故障可能导致患者或使用者的严重损伤乃至死亡</td>
                     <td>4</td>
                     <td onclick="updateAd('4')"><input name="2" type="radio" value="4" /></td>
-            </tr>
+                </tr>
             </tr>
 
-            <tr>
+            <tr  style="border-bottom: 2px solid #999">
                 <th rowspan="6">PM对设备的影响</th>
                 <tr><td>维护或检查对设备可靠性没有影响</td>
                     <td>1</td>
@@ -108,35 +110,35 @@
                     <td>4</td>
                     <td onclick="updateAd('4')"><input name="3" type="radio" value="4" /></td>
                 </tr>
-                <tr>
+                <tr  style="border-bottom: 2px solid #999">
                     <td>特定的规定或制造商要求进行的预防性维护或测试</td>
                     <td>5</td>
                     <td onclick="updateAd('5')"><input name="3" type="radio" value="5" /></td>
                 </tr>
             </tr>
 
-            <tr>
+            <tr  style="border-bottom: 2px solid #999">
                 <th rowspan="3">事故历史</th>
                 <tr>
                     <td>没有显著的事故历史</td>
                     <td>1</td>
                     <td onclick="updateAd('1')"><input name="4" type="radio" value="1" /></td>
                 </tr>
-                <tr>
+                <tr style="border-bottom: 2px solid #999">
                     <td>存在显著的事故历史</td>
                     <td>2</td>
                     <td onclick="updateAd('2')"><input name="4" type="radio" value="2" /></td>
                 </tr>
             </tr>
 
-            <tr>
+            <tr style="border-bottom: 2px solid #999">
                 <th rowspan="3">制造商/管理科室的特殊要求</th>
                 <tr>
                     <td>没有要求</td>
                     <td>1</td>
                     <td onclick="updateAd('1')"><input name="5"  type="radio" value="1" /></td>
                 </tr>
-                <tr>
+                <tr  style="border-bottom: 2px solid #999">
                     <td>有独立于数值评级体系的测试要求</td>
                     <td>2</td>
                     <td onclick="updateAd('2')"><input name="5" type="radio" value="2" /></td>
@@ -151,9 +153,10 @@
         </tfoot>
     </table>
 
-    <button class="layui-btn col-sm-12" style="margin-top: 50px" id="btnn" lay-filter="btnn" type="button" onclick="f()" >提交</button>
+    <button class="layui-btn col-sm-12" style="margin-top: 50px;margin-bottom: 20px" id="btnn" lay-filter="btnn" type="button" onclick="f()" >提交</button>
 </form>
-
+    </div>
+</div>
 
 
 <script>
