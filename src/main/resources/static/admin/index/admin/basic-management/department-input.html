@@ -16,95 +16,19 @@
 </head>
 <body  style="background-color: #f2f2f2;">
 <div class="layui-row">
-    <div class="col-xs-12 padRight">
-        <table id="table" lay-filter="table1"></table>
+    <div class="col-xs-12 padRight" style="margin: 10% 0 0 0">
+        <button type="button" class="layui-btn layui-btn-lg" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
+        <button type="button" class="layui-btn layui-btn-lg"><i class="layui-icon">&#xe621;</i>提交文件</button>
+        <br><br><br>
+        <button type="button" class="layui-btn layui-btn-lg" id="xzmb">
+            <i class="layui-icon">&#xe601;</i>下载模板
+        </button>
     </div>
 </div>
-<script type="text/html" id="toolBar">
-    <div class="visible-xs">
-        <a class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-sm" lay-event="dataSearch">数据检索</a>
-    </div>
-    <div class="hidden-xs" id="hideXs">
-        <div class="layui-row">
-            <div class="col-xs-12" style="padding:0">
-                <form class="layui-form layui-form-pane hidden-xs" id="moreBar" action="">
-                    <div class="layui-input-inline">
-                        <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期" readonly="readonly">
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
 
-                        <select name="bmSName" lay-filter="select" lay-search="">
-                            <option value="">请选择科室</option>
-                        </select>
-
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="eqSName" lay-search="">
-                            <option value="">请选择设备</option>
-                            <option>CT室</option>
-                            <option>核磁公正室</option>
-                            <option>摄片室</option>
-                            <option>内外导管室</option>
-                            <option>心外ICU</option>
-                            <option>设备管理测试设备2</option>
-                        </select>
-                    </div>
-                    <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn" type="button" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
-                    </div>
-                </form>
-                <hr class="devideHr">
-                <div class="addBtn">
-                    <button type="button" class="layui-btn layui-btn-sm" id="selectFile"><i class="layui-icon">&#xe621;</i>选择文件</button>
-                    <button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe621;</i>提交文件</button>
-                    <button type="button" class="layui-btn layui-btn-sm" id="xzmb">
-                        <i class="layui-icon">&#xe601;</i>下载模板
-                    </button>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-</script>
 <script>
     renderMod = {
-        addTable: {
-            table: {
-                cols: [[ //表头
-                    {field: 'eqCode', title: '设备编号', width: "25%", minWidth: 150}
-                    , {field: 'eqName', title: '设备名称', width: "25%", minWidth: 150}
-                    , {field: 'realDays', title: '开机天数', minWidth: 150, sort: true}
-                    , {field: 'workDays', title: '应开机时间', minWidth: 150, sort: true}
-                    , {field: 'rating', title: '开机率', minWidth: 150, sort: true}
-                    , {field: 'ranking', title: '排名', minWidth: 150, sort: true}
-                ]]
-                , url: "/kpi/open/selectOpen"
-                , method: "POST"
-                , request: {
-                    pageName: 'pageNum',
-                    limitName: 'pageSize'
-                }
-                , parseData: function (res) { //res 即为原始返回的数据
-                    return {
-                        "code": res.code, //解析接口状态
-                        "msg": res.msg, //解析提示文本
-                        "count": res.data.total,//页面的所有数据数
-                        "data": res.data.list //解析数据列表
-                    }
-                }
-                , done: function (obj) {
-
-                }
-            },
-            reSet: {
-                url: "/kpi/open/selectOpenByCon",
-                type: "search",
-                data: ["startSTime", "bmSName", "eqSName"],     //查询框的name
-                where: {}
-            }
-        },
-        form:{
+        formAction:{
             file:{
                 elem:"#selectFile",
                 url:"/supervise/bmgl/batchImportBms",
@@ -123,17 +47,6 @@
                     console.log("upload"+upload);
                 }
             },
-            val: {
-                filter: "forms",
-                select: [
-                    {
-                        filter: "select",
-                        ids: "bmName",
-                        text: "bmName",
-                        url: "/supervise/bmgl/listBm"
-                    }
-                ]
-            }
         },
         btn:[
             {

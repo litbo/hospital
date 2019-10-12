@@ -1,0 +1,32 @@
+删除、修改、新增按钮的style 全部删除 
+删除在class中加	deli
+修改在class中加	editi
+新增在class中加	addi 
+
+有 审核人 的页面统一  左下角
+所有的选择 在input后面 
+页面底部按钮全部靠右 大小固定 颜色统一
+
+
+
+<div class="layui-input-inline" style="width: 120px;">
+				<select name="bmId" lay-filter="bmId">
+					<option value="">全部科室</option>
+				</select>
+			</div>
+
+---------------------------------
+
+	form: {
+			val: {
+				filter: "forms",
+				select: [
+					{
+						filter: "bmId",
+						ids: "bmId",
+						text: "bmName",
+						url: "/department/showList"
+					}
+				]
+			}
+		}
