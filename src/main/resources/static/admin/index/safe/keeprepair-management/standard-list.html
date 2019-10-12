@@ -74,7 +74,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">制定时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" id="formTime" name="formTime" autocomplete="off" lay-verify="required" placeholder="请输入"
+                    <input type="text" id="formTime" name="formTime" autocomplete="off" lay-verify="required" disabled placeholder="请输入"
                            class="layui-input">
                 </div>
             </div>
@@ -182,7 +182,7 @@
             addItem:[
                 {
                     elem:"#add",
-                    area: ['75%', '60%'],
+                    // area: "min",
                     base: "./child/standard-add.html",
                     name: "vg",
                     key: "key",
@@ -197,7 +197,7 @@
         form: {
             date: {
                 elem: "#formTime",
-                value: false,
+                value: today,
                 type: "date",
                 format: "yyyy-MM-dd",
             },

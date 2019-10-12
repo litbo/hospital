@@ -50,25 +50,11 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">级别<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select name="projectLevel">
-                        <option>一级保养</option>
-                        <option selected = "selected">二级保养</option>
-                        <option >日常保养</option>
-                    </select>
+                    <input type="text" id="projectLevel" name="projectLevel" autocomplete="off" lay-verify="required" disabled value="二级保养"
+                           class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">实施人类型<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <select name="implementerType">
-                        <option>请选择实施人类型</option>
-                        <option value="设备使用操作人员">设备使用操作人员</option>
-                        <option value="维修工程师">维修工程师</option>
-                        <option value="维修工程师和厂家人员">维修工程师和厂家人员</option>
 
-                    </select>
-                </div>
-            </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
@@ -81,12 +67,17 @@
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 120px">首次实施时间<span class="sign">*</span></label>
+                <label class="layui-form-label">实施人类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="firstTime" id="test6" class="layui-input col-sm-11" placeholder="请输入内容" autocomplete="off">
+                    <select name="implementerType">
+                        <option>请选择实施人类型</option>
+                        <option value="设备使用操作人员">设备使用操作人员</option>
+                        <option value="维修工程师">维修工程师</option>
+                        <option value="维修工程师和厂家人员">维修工程师和厂家人员</option>
+
+                    </select>
                 </div>
             </div>
-
             <!--<div class="layui-form-item">-->
                 <!--<label class="layui-form-label" >周期<span class="sign">*</span></label>-->
                 <!--<div class="layui-input-block">-->
@@ -106,7 +97,7 @@
         </div>
     </div>
     <div class="col-xs-12">
-        <div class="layui-form-item" style="margin:20px 0;">
+        <div class="layui-form-item" style="margin:20px 20px;float: right">
             <button class="layui-btn" lay-submit=""
                     lay-filter="submit" id="sub">提交
             </button>
@@ -154,22 +145,11 @@
     var formData = {};
     renderMod = {
                 form:{
-                    date: [{
-                        elem:"#test6",
-                        value: false,
-                        type:"date",
-                        format:"yyyy-MM-dd",
-                    },{
-                        elem:"#test5",
-                        value: false,
-                        type:"date",
-                        format:"yyyy-MM-dd",
-                    }],
                     submit:{
                         form:{
                             url:"/maintenance/addMaintenanceProject.do",
                             type:"POST",
-                            data:["projectType","projectName","projectLevel","standard","cycleRule","firstTime","implementerType","cycle","cycleUnit"],
+                            data:["projectType","projectName","projectLevel","implementerType"],
                             done: function (data) {
                                 if(localStorage.getItem("projectsIds") != null){
                                     var projectsIds = localStorage.getItem("projectsIds");
@@ -178,13 +158,12 @@
                                 }else{
                                     localStorage.setItem("projectsIds",data.data.id);
                                 }
-                                    if ($("#projectType").val() === ""||$("#projectName").val()===""||$("#projectLevel").val()===""||$("#standard").val()===""||$("#cycleRule").val()===""
-                                        ||$("#firstTime").val()===""||$("#implementerType").val()===""||$("#cycle").val()===""||$("#cycleUnit").val()===""){
+                                    if ($("#projectType").val() === ""||$("#projectName").val()===""||$("#projectLevel").val()===""||$("#implementerType").val()===""){
                                         attr();
                                         return;
                                     }
                                     new1 =
-                                        getFormValue(["projectType","projectName","projectLevel","standard","cycleRule","firstTime","implementerType","cycle","cycleUnit"],{},true);
+                                        getFormValue(["projectType","projectName","projectLevel","implementerType"],{},true);
                                     var key = $.getUrlParam('key');
                                     da.push(new1);
                                     layui.sessionData($.getUrlParam('vg'), {
@@ -192,7 +171,7 @@
                                         value: da
                                     });
                                     var index = parent.layer.getFrameIndex(window.name);
-                                    parent.layer.close(index);
+                                    // parent.layer.close(index);
                             },
                         }
                     },
