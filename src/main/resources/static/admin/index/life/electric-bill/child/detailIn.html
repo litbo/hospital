@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>查看</title>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>设备信息录入</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
@@ -11,85 +14,546 @@
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
     <script src="/static/admin/js/basic.js"></script>
+    <style type="text/css">
+        .layui-form-label {
+            width: 150px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 150px !important;
+        }
+
+        .layui-form-text .layui-form-label{
+            width:100%!important;
+        }
+        .layui-form-text .layui-input-block{
+            margin-left:0!important;
+        }
+
+        .layui-form-item {
+            margin-top: 25px;
+        }
+
+        .warm_btn {
+            height: 45px;
+            font-size: 1.3em;
+            letter-spacing: 3px;
+            margin: 10px 0 30px;
+        }
+
+        td {
+            max-width: 150px
+        }
+    </style>
 </head>
 <body>
+<div class="layui-row">
+    <div class="col-xs-12">
 
-<form class="layui-form" action="" style="margin-top: 20px;" lay-filter="forms">
-
-    <!--第一行-->
-    <div class="layui-form-item">
-        <div class="layui-inline spanDiv">
-            <label class="layui-form-label" style="width: 100px;">设备名称</label>
-            <div class="layui-input-block"
-                 style="display: inline-block;margin-left: 20px;width: 600px;">
-                <input type="text" name="mbMc" autocomplete="off"
-                       placeholder="" class="layui-input" >
-            </div>
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">设备名称<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="ccname" placeholder="请选择" lay-verify="required" autocomplete="off" disabled class="layui-input col-sm-10">
+                                <button class="layui-btn col-sm-2" lay-filter="eqName" id="eqName" style="margin:0">选择</button>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">资产编号<span class="sign">*</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" name="eqZcbh" autocomplete="off" class="layui-input" lay-verify="required|number" placeholder="请输入...">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">设备型号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="eqXh" autocomplete="off" class="layui-input" placeholder="请输入...">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">设备规格</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="eqGg" autocomplete="off" class="layui-input" placeholder="请输入...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">使用科室</label>
+                            <div class="layui-input-block">
+                                <select name="eqBmid" lay-filter="bmList">
+                                    <option value="">请选择...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">管理归口<span class="sign"></span></label>
+                            <div class="layui-input-block">
+                                <select name="eqGlgk" lay-filter="">
+                                    <option value="信息">信息</option>
+                                    <option value="医工" selected="selected">医工</option>
+                                    <option value="后勤">后勤</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">设备分类</label>
+                            <div class="layui-input-block">
+                                <select name="eqCxflId" lay-filter="cxfl">
+                                    <option value="">请选择...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">单位</label>
+                            <div class="layui-input-block">
+                                <select name="eqJldwId" lay-filter="dwList">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row" style="float: right; margin-right: 5%;">
+                    <div class="col-xs-12" >
+                        <button class="layui-btn" lay-submit="" lay-filter="submit">提 交</button>
+                        <button id="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
+</div>
 
-    <!--第二行-->
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width: 100px;"></label>
-            <div class="layui-input-block"
-                 style="display: inline-block;margin-left: 20px;width: 600px;">
-                <textarea name="mbNr" class="layui-textarea" id="mbNr" lay-verify="required"></textarea>
-            </div>
-        </div>
-    </div>
-
-    <!--按钮-->
-    <div class="layui-form-item" style="margin-left: 30px;">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-        </div>
-    </div>
-
-</form>
 
 <script>
+    // 使数字1111111变成11,111,111.00，保留两位小数。
+    function outputmoney(number) {
+        number = number.replace(/\,/g, "");
+        if(isNaN(number) || number == "")return "";
+        number = Math.round(number * 100) / 100;
+        if (number < 0)
+            return '-' + outputdollars(Math.floor(Math.abs(number) - 0) + '') + outputcents(Math.abs(number) - 0);
+        else
+            return outputdollars(Math.floor(number - 0) + '') + outputcents(number - 0);
+    }
+    //格式化金额
+    function outputdollars(number) {
+        if (number.length <= 3)
+            return (number == '' ? '0' : number);
+        else {
+            var mod = number.length % 3;
+            var output = (mod == 0 ? '' : (number.substring(0, mod)));
+            for (i = 0; i < Math.floor(number.length / 3); i++) {
+                if ((mod == 0) && (i == 0))
+                    output += number.substring(mod + 3 * i, mod + 3 * i + 3);
+                else
+                    output += ',' + number.substring(mod + 3 * i, mod + 3 * i + 3);
+            }
+            return (output);
+        }
+    }
+    function outputcents(amount) {
+        amount = Math.round(((amount) - Math.floor(amount)) * 100);
+        return (amount < 10 ? '.0' + amount : '.' + amount);
+    }
+</script>
+<script>
+    $(function () {
+        var emp = tempValue("rl", "emp", false);
+        $("#userId").val(emp.userId);
+        $("#userXm").val(emp.userXm);
+        var planId = localStorage.getItem("planId");
+        var eqId = localStorage.getItem("eqId");
 
-    var emp = tempValue("rl", "emp", false);
+        console.log(planId);
+        console.log(eqId);
+    });
+
+    formData = {};
+    formData.count = 0;//铭牌图片上传数量
+    formData.count1 = 0;//设备图片上传数量
+    formData.eqMpzp = [];
+    formData.eqSbzp = [];
+    renderMod = {
+        form: {
+            submit: {
+                filter: "submit",//可以不写
+                before: function () {
+                    var ad = {};
+                    if (formData.eqSbzp !== undefined) {
+                        ad.eqSbzp = formData.eqSbzp;
+                    }
+                    if (formData.eqMpzp !== undefined) {
+                        ad.eqMpzp = formData.eqMpzp;
+
+                    }
+                    if (formData.radio !== undefined) {
+                        ad.eqPmId = formData.radio[0].eqPmId
+                    }
+                    if (formData.wxs !== undefined) {
+                        ad.sbcsIdWxs = formData.wxs[0].sbcsIdWxs
+                    }
+                    if (formData.scs !== undefined) {
+                        ad.sbcsIdScs = formData.scs[0].sbcsIdScs
+                    }
+                    if (formData.gys !== undefined) {
+                        ad.sbcsIdGys = formData.gys[0].sbcsIdGys
+                    }
+                    if (formData.name !== undefined) {
+                        ad.id = formData.name[0].id
+                    }
+                    if (formData.name !== undefined) {
+                        ad.ccname = formData.name[0].ccname
+                    }
+                    return param = {
+                        /*1:formData.radio[0].bmId,*/
+                        1: ad.eqSbzp,
+                        2: ad.eqMpzp,
+                        3: ad.eqPmId,
+                        4: ad.sbcsIdWxs,
+                        5: ad.sbcsIdScs,
+                        6: ad.sbcsIdGys,
+                        7: ad.id,
+                        8: ad.ccname
+                    }
+                },
+                form: {
+                    url: "/eq/addEq",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: ["eqZcbh", "eqPmId", "eqGg", "eqXh", "zjlyId",
+                        "eqJldwId", "eqPrice", "eqTzlb", "eqBxkssj", "eqBxjssj", "eqBxxysj",
+                        "eqBmid", "eqGlgk", "eqCxflId", "eqQysj", "eqZczmc", "eqZczbh", "eqPp", "eqScbh",
+                        "eqPz", "eqSynx", "eqHtbh", "eqCgrq", "eqSybmfzr", "eqAzrq", "eqAzwz",
+                        "eqZblx", "eqZjl", "userId", "eqJdrq", "eqJzbh", "eqDabh", "eqYq", "eqSbzp",
+                        "eqMpzp", "eqAzhjyq", "eqScrq", "eqBz"],
+                    param: {
+                        1: "sbzp",
+                        2: "mpzp",
+                        3: "eqPmId",
+                        4: "sbcsIdWxs",
+                        5: "sbcsIdScs",
+                        6: "sbcsIdGys",
+                        7: "eqNid",
+                        8: "eqName"
+                    },
+                    reload: true
+                }
+            },
+            date: [
+                {
+                    elem: '#date',
+                    value: false
+                },
+                {
+                    elem: '#date1',
+                    value: false
+                },
+                {
+                    elem: '#date2',
+                    value: false
+                },
+                {
+                    elem: '#date3',
+                    value: false
+                },
+                {
+                    elem: '#date4',
+                    value: false
+                },
+                {
+                    elem: '#date5',
+                    value: false
+                },
+                {
+                    elem: '#date6',
+                    value: today0
+                }
+            ],
+            file: [
+                {
+                    elem: "#sbzp",
+                    url: "/eq/uploadFile",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    multiple: true,
+                    auto: false,
+                    bindAction: "#sbzp_sub",
+                    number: 4,
+                    field: "file",
+                    choose: function (obj) {
+                        if (formData.count1 > 4) {
+                            putMsg({
+                                alert: "最多只能上传4张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#sbzp").next().val("");
+                                    formData.count1--;
+                                    layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList1").append(tr);
+                            formData.count1++;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData.eqSbzp.push(res.data);
+                            var tr = $("#demoList1").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList1").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload" + upload);
+                    }
+                },
+                {
+                    elem: "#mpzp",
+                    url: "/eq/uploadFile",
+                    accept: "images",
+                    acceptMime: "image/*",
+                    auto: false,
+                    multiple: true,
+                    bindAction: "#mpzp_sub",
+                    number: 4,
+                    field: "file",
+                    choose: function (obj) {
+                        if (formData.count > 4) {
+                            putMsg({
+                                alert: "最多只能上传4张图！"
+                            });
+                            return false;
+                        }
+                        var files = this.files = obj.pushFile();
+                        obj.preview(function (index, file, result) {
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + result + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+
+                            //查看
+                            tr.find('.demo-see').on('click', function () {
+                                layOpen({
+                                    type: 1,
+                                    content: "<img src='" + $(this).attr("data-img") + "' style='width:100%;' />",
+                                    area: ["80%", "80%"]
+                                });
+                                return false;
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                layer.confirm("确认删除这张图吗？", function (index) {
+                                    delete files[index]; //删除对应的文件
+                                    tr.remove();
+                                    var inp = $("#mpzp").next().val("");
+                                    formData.count--;
+                                    layer.close(index);
+                                });
+                                return false;
+                            });
+
+                            $("#demoList").append(tr);
+                            formData.count += 1;
+                        });
+                    }, done: function (res, index, upload) {
+                        if (res.code === 0) {
+                            formData.eqMpzp.push(res.data);
+                            var tr = $("#demoList").find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            tds.eq(3).html(''); //清空操作
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }, error: function (index, upload) {
+                        var tr = $("#demoList").find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        console.log("index:" + index);
+                        console.log("upload:" + upload);
+                    }
+                }
+            ],
+            val: {
+                filter: "bmList",
+                select: [
+                    {
+                        filter: "dwList",
+                        ids: "eqJldwId",
+                        text: "eqJldwName",
+                        url: "/eqdict/jldw"
+                    },
+                    {
+                        filter: "zjly",
+                        ids: "zjlyId",
+                        text: "zjlyName",
+                        url: "/eqdict/zjly"
+                    },
+                    {
+                        filter: "cxfl",
+                        ids: "eqCxflId",
+                        text: "eqCxflName",
+                        url: "/eqdict/cxfl"
+                    },
+                    {
+                        filter: "bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listBms2"
+                    }
+                ]
+            }
+        },
+        bind: {
+            selectItem: [
+                {
+                    elem: "#pm",
+                    data: formData,
+                    cb: "/eq/listPmsCols",
+                    db: "/eq/listPms",
+                    se: "/eq/pmSe",
+                    key: "radio",
+                    name: "dtdt"
+                },
+                {
+                    elem: "#eqName",
+                    data: formData,
+                    cb: "/eq/listEqNameCols",
+                    db: "/eq/listEqName",
+                    se: "/eq/eqNameSe",
+                    key: "name",
+                    name: "dtdt"
+                },
+                {
+                    elem: "#scs",
+                    data: formData,
+                    cb: "/cs/scsTitle",
+                    db: "/cs/listScs",
+                    se: "/cs/listScsSe",
+                    key: "scs",
+                    name: "dtdt"
+                },
+                {
+                    elem: "#gys",
+                    data: formData,
+                    cb: "/cs/gysTitle",
+                    db: "/cs/listGys",
+                    se: "/cs/listGysSe",
+                    key: "gys",
+                    name: "dtdt"
+                },
+                {
+                    elem: "#wxs",
+                    data: formData,
+                    cb: "/cs/wxsTitle",
+                    db: "/cs/listWxs",
+                    se: "/cs/listWxsSe",
+                    key: "wxs",
+                    name: "dtdt"
+                }
+
+
+            ]
+        }
+    };
 
     // 表单
-    layui.use(['form'], function(){
+    layui.use(['form','laydate'], function(){
 
         var form = layui.form
-            ,layer = layui.layer;
+            ,layer = layui.layer
+            ,laydate = layui.laydate;
 
-        form.on('submit(demo1)', function(data){
-            // layer.alert(JSON.stringify(data.field), {
+        //日期
+        laydate.render({
+            elem: '#indexDateSelect'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+        // 弹出层
+        var $ = layui.jquery;
+
+        form.on('submit(submit)', function(data){
+            // console.log(parent.$(".planId"));
+            // var planId = parent.$(".planId").val();
+            // var eqId = parent.$(".eqId").val();
+
+            var planId = localStorage.getItem("planId");
+            var eqId = localStorage.getItem("eqId");
+
+            console.log(planId);
+            console.log(eqId);
+
+            var a = {"planId":planId,"eqId":eqId};
+            var dataJson = JSON.stringify(a);
+            console.log(a);
+            // console.log(b);
+            console.log(dataJson);
+
+            // layer.alert(JSON.stringify(dataJson), {
             //     title: '最终的提交信息'
             // });
 
             $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: '/lifeManage/insertMbLr',
-                data: JSON.stringify(data.field),
+                url: '/lifeManage/addOther',
+                data: a,
                 contentType: 'application/json; charset=UTF-8',
-                success: function(result) {
-                    layui.layer.alert('提交成功!');
-                    window.parent.location.reload();
+                success: function(data) {
+                    layui.layer.alert('保存成功!');
                 },
                 error:function(){
-                    layer.alert(JSON.stringify(data.field), {
-                        title: '最终的提交信息'
-                    });
                     alert("error");
                 }
             });
             return false;
         });
     });
-
-
-</script>
-
-<script>
-
-
 </script>
 </body>
 </html>

@@ -45,10 +45,11 @@
 </script>
 <script>
 
-    var aid= $.getUrlParam("id")
-    var bid= $.getUrlParam("bmId")
-    console.log(aid);
-    console.log(bid);
+    var aid= $.getUrlParam("id");
+    var bid= $.getUrlParam("bmId");
+    // console.log(aid);
+    // console.log(bid);
+    // console.log(layui.table.data);
     renderMod = {
         addTable: {
             table: [
@@ -80,6 +81,7 @@
                         }
                     }
                     , done: function (obj) {
+                        // console.log(obj.count);
                         tableFunc({
                             tools:[
                                 {
