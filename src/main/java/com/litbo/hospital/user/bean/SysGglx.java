@@ -8,5 +8,4 @@ public class SysGglx {
     private Integer gglxId;
     private String gglxName;
 
-
 }

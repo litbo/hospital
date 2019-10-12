@@ -16,10 +16,30 @@ public interface GgDao {
     List<SysGgVo> listShowGgs();
     @Update(" UPDATE dbo.sys_gg SET status = 1 WHERE id = #{id}")
     int checkGg(Integer id);
+
     @Select("SELECT * FROM dbo.sys_gglx")
     List<SysGglx> listShowGglxs();
+
     @SelectProvider(type = GgProvider.class , method = "getGgByBname")
     List<SysGgVo> getByBname(@Param("bName") String bName);
+
+    @Select("SELECT\n" +
+            "g.id,\n" +
+            "g.kssj,\n" +
+            "g.jssj,\n" +
+            "g.ggbt,\n" +
+            "g.ngr,\n" +
+            "g.ngsj,\n" +
+            "g.ggnr,\n" +
+            "g.status,\n" +
+            "x.gglx_name,\n" +
+            "b.bm_name\n" +
+            "FROM\n" +
+            "dbo.sys_gg AS g\n" +
+            "LEFT JOIN dbo.sys_gglx AS x ON g.gglx_id= x.gglx_id\n" +
+            "LEFT JOIN dbo.s_bm AS b ON g.bm_id= b.bm_id " +
+            "WHERE g.ggbt LIKE '%${name}%' AND g.status = 1")
+    List<SysGgVo> listChGg(@Param("name") String name);
 
     @SelectProvider(type = GgProvider.class , method = "listWaits")
     List<SysGgVo> listWaits();
@@ -38,6 +58,16 @@ public interface GgDao {
             "</script>"
     })
     Integer delGg(Integer [] ids);
+
+    @Delete({
+            "<script>",
+            "DELETE FROM dbo.sys_gglx WHERE gglx_id in",
+            "<foreach item = 'id' index = 'index' collection = 'array' open = '(' separator = ',' close = ')'>",
+            "#{id}",
+            "</foreach>",
+            "</script>"
+    })
+    Integer delSjzd(Integer [] ids);
     @SelectProvider(type = GgProvider.class , method = "listGgDesc")
     List<SysGgVo> listGgDesc();
 }

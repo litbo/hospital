@@ -15,6 +15,10 @@ public interface GgService {
 
     PageInfo getGgByBname(int pageNum, int pageSize,String bName);
 
+    Integer delSjzd(Integer[] ids);
+
+    PageInfo listChGg(int pageNum, int pageSize,String name);
+
     PageInfo listWaits(int pageNum, int pageSize);
 
     Integer addGglb(String gglxName);

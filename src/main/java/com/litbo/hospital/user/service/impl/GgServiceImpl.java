@@ -31,10 +31,19 @@ public class GgServiceImpl implements GgService {
 
     @Override
     public PageInfo listShowGgs(int pageNum, int pageSize) {
-
         PageHelper.startPage(pageNum,pageSize);
-
         return new PageInfo(ggDao.listShowGgs());
+    }
+
+    @Override
+    public PageInfo listChGg(int pageNum, int pageSize,String name) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(ggDao.listChGg(name));
+    }
+
+    @Override
+    public Integer delSjzd(Integer[] ids){
+        return ggDao.delSjzd(ids);
     }
 
     @Override
