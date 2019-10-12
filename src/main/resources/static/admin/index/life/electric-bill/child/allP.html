@@ -27,7 +27,7 @@
 <script type="text/html" id="toolBar">
     <div class="hidden-xs">
         <div class="layui-inline">
-            <input class="layui-input" name="eq_name" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
+            <input class="layui-input" name="eqName" id="test-table-demoReload" placeholder="设备名称" autocomplete="off">
         </div>
         <!--        <div class="layui-inline">-->
         <!--            <input type="text" name="planDate" id="date" placeholder="计划时间" autocomplete="off"-->
@@ -96,9 +96,9 @@
                 }
             ]
             , reSet: {
-                url: "/lifeManage/selectPlan",
+                url: "/checkInfo/findInfo",
                 type: "reload",
-                data: ["eq_name","planDate","userName"],
+                data: ["eqName","planDate","userName"],
                 method:"post"
             }
         },
