@@ -1,8 +1,10 @@
 package com.litbo.hospital.lifemanage.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.ListNum;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
+import com.litbo.hospital.lifemanage.service.SelectService;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
 import com.litbo.hospital.result.Result;
 import org.apache.ibatis.annotations.Param;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/lifeManage")
 public class SgPlanController {
     @Autowired
+    private SelectService selectService;
+    @Autowired
     private SgPlanService sgPlanService;
     /**
      * 计划制定
@@ -29,6 +33,7 @@ public class SgPlanController {
     @PostMapping("/insertPlan")
     public Result insertPlan(SgPlan sgPlan) {
         sgPlanService.insertPlan(sgPlan);
+
         return Result.success();
     }
 
@@ -52,6 +57,8 @@ public class SgPlanController {
             @RequestParam(value = "pageSize",required = false,defaultValue="15") int pageSize)
     {
         PageInfo pageInfo = sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize);
+
+
         return Result.success(pageInfo);
     }
 

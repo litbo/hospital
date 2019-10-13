@@ -93,8 +93,13 @@ public class SgPdServiceImpl implements SgPdSeverice {
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
         for (SgPd sgPd : list) {
-            adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
+
 
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
         List<SelectVO> listTemp2 = new ArrayList<SelectVO>();//盘亏集合

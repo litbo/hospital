@@ -36,8 +36,14 @@ public class SelectServiceImp implements SelectService {
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
+//        List<SelectVO> listVo = new ArrayList<>();
+        SelectVO s1= new SelectVO();
         for (SgPd sgPd : list) {
-                adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
 
         // 临时集合
@@ -73,8 +79,14 @@ public class SelectServiceImp implements SelectService {
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
         for (SgPd sgPd : list) {
-            adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
+
+
 
         // 临时集合
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
@@ -122,8 +134,13 @@ public class SelectServiceImp implements SelectService {
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
         for (SgPd sgPd : list) {
-            adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
+
 
         // 临时集合
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
@@ -177,7 +194,7 @@ public class SelectServiceImp implements SelectService {
 
 
     public PageInfo<ListNum> listNum(String pdJhid ,Integer pageNum, Integer pageSize){
-        ListNum getNum = selectMapper.getListNum();
+        ListNum getNum = selectMapper.getListNum(pdJhid);
         System.out.println(getNum);
         PageHelper.startPage(pageNum,pageSize);
 

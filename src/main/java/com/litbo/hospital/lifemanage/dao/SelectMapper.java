@@ -14,23 +14,23 @@ import java.util.List;
 @Mapper
 public interface SelectMapper {
 
-   SelectVO listAllDate(String pdScanId);//扫描的设备id
+    List<SelectVO> listAllDate(String pdScanId);//扫描的设备id
     String getBmName(String bmId);
 //    String getBmId(String planId);
 
     String listBmName(String id);
-   List<SgPd> selectAllScan(String pdJhid);
+    List<SgPd> selectAllScan(String pdJhid);
     List<SelectVO> listCheckDate(String bmId);
 
     void insertZt(SgPdZt sgPdZt);
 
     void updateZt( SgPdZt sgPdZt);
     List<SgPdZt> findInfo(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
-  List<SgPdZt> findYipan(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
-  List<SgPdZt> findPanying(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
-  List<SgPdZt> findPankui(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+    List<SgPdZt> findYipan(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+    List<SgPdZt> findPanying(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
+    List<SgPdZt> findPankui(@Param("pdJhid") String pdJhid,@Param("eqName") String eqName);
 
- ListNum getListNum();
+    ListNum getListNum(String planId);
 
 }
 
