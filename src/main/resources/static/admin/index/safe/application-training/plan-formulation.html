@@ -76,7 +76,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhPxbh" class="layui-input" disabled>
+                    <input type="text" name="jhPxbh" id="jhPxbh" class="layui-input" disabled>
                 </div>
             </div>
 
@@ -147,13 +147,17 @@
 
 <script>
     renderMod.form={
-       /* val: {
+        val: {
             filter: "forms",
             get: {
                 url: "/px/getNum",
                 type: "POST"
+            },
+            func: function (res) {
+                console.log(res);
+                $("#jhPxbh").val(res);
             }
-        },*/
+        },
         date: [
             {
                 elem: "#date1",
