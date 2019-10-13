@@ -27,7 +27,7 @@ public interface JhZdService {
     public Result addJhZd(JhZd jhZd);
 
     //计划查询
-    public Result listJhZd(int pageNum, int pageSize, String createdate, String jhName);
+    public PageInfo listJhZd(int pageNum, int pageSize);
 
     //计划人员列表录入初始化
     public Result jhrylrListIndex(int pageNum, int pageSize, String createdate, String jhName);

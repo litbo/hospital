@@ -78,10 +78,10 @@ public class JhZdServiceImpl implements JhZdService {
      * 条件分页查询
      * @return
      */
-    public Result listJhZd(int pageNum, int pageSize, String createdate,String jhName){
+    public PageInfo listJhZd(int pageNum, int pageSize){
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<JhZdVo> pageInfo = new PageInfo<>(jhZdDao.jhzdList(createdate,jhName));
-        return Result.success(pageInfo);
+        PageInfo<JhZdVo> pageInfo = new PageInfo<>(jhZdDao.jhzdList());
+        return pageInfo;
     }
 
     @Override
