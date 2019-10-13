@@ -23,10 +23,10 @@ public interface PxDao {
             "      jh_pxxz, jh_pxnrlb, \n" +
             "      user_id,px_addr, \n" +
             "      px_nr)\n" +
-            "    VALUES (#{jhName}, #{zbdw}, \n" +
-            "      #{jhKstime}, #{jhJstime},#{jhPxlx}, \n" +
-            "      #{jhPxxz}, #{jhPxnrlb},\n" +
-            "      #{userId}, #{pxAddr}, \n" +
-            "      #{pxNr})")
+            "    VALUES (#{jhName,jdbcType=VARCHAR}, #{zbdw,jdbcType=VARCHAR}, \n" +
+            "      #{jhKstime2,jdbcType=DATE}, #{jhJstime2,jdbcType=DATE},#{jhPxlx,jdbcType=VARCHAR}, \n" +
+            "      #{jhPxxz,jdbcType=VARCHAR}, #{jhPxnrlb,jdbcType=VARCHAR},\n" +
+            "      #{userId,jdbcType=VARCHAR}, #{pxAddr,jdbcType=VARCHAR}, \n" +
+            "      #{pxNr,jdbcType=VARCHAR})")
     Integer addYypxjh(RyPxJhVo ryPxJhVo);
 }
