@@ -6,6 +6,7 @@ import com.litbo.hospital.lifemanage.bean.*;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
+import com.litbo.hospital.lifemanage.dao.SgPdMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SelectService;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
@@ -41,6 +42,8 @@ public class SgPlanServiceImpl implements SgPlanService {
 
     @Autowired
     private SelectMapper selectMapper;
+    @Autowired
+    private SgPdMapper sgPdMapper;
     /**
      * 计划制定
      *
@@ -129,16 +132,24 @@ public class SgPlanServiceImpl implements SgPlanService {
             List<SgPlan> sgPlan = sgPlanMapper.selectPlan(planName, date, userId);
             List<SgPlanList> sgPlanLists= new ArrayList<>();
             ListNum listNum = new ListNum();
+            SgPlanList sgList = new SgPlanList();
             for (SgPlan sg:sgPlan){
+                listNum = selectMapper.getListNum(sg.getId());
 
-                 listNum = selectMapper.getListNum(sg.getId());
                  if (listNum==null){
-                     return new PageInfo(sgPlanMapper.selectPlan(planName, date, userId));
+                     List<SelectVO> adllDate3 = selectMapper.listCheckDate(sg.getBmId());
+                     System.out.println(adllDate3.size());
+                     sgList = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+                             sg.getPlanDate(),adllDate3.size(), 0,
+                             0,adllDate3.size());
+                     sgPlanLists.add(sgList);
                  }else {
-                     SgPlanList sgList = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+
+                      sgList = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
                              sg.getPlanDate(),listNum.getAllNum(), listNum.getYiPanNum(),
                              listNum.getPanYingNum(),listNum.getPanKuiNum());
                      sgPlanLists.add(sgList);
+                     System.out.println(sgList.toString());
                  }
 
 

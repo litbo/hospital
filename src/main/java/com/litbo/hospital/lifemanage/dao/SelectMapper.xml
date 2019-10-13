@@ -86,6 +86,7 @@
     sum(CASE pd_zt WHEN '已盘' THEN 1 ELSE 0 END)+sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS 'allNum'
     FROM
     sg_pdzt
+    where pd_jhid = #{planId}
     </select>
 
     <select id="listBmName" parameterType="String" resultType="String">

@@ -5,6 +5,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class SgPlanList {
+    public SgPlanList(String bmName, String id, String userId, String bmId, String planName, Date planDate) {
+        this.bmName = bmName;
+        this.id = id;
+        this.userId = userId;
+        this.bmId = bmId;
+        this.planName = planName;
+        this.planDate = planDate;
+    }
+
+    public SgPlanList() {
+    }
+
     public SgPlanList(String bmName, String id, String userId, String bmId, String planName,
                       Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
         this.bmName = bmName;
@@ -128,5 +140,21 @@ public class SgPlanList {
 
     public void setPanKuiNum(Integer panKuiNum) {
         this.panKuiNum = panKuiNum;
+    }
+
+    @Override
+    public String toString() {
+        return "SgPlanList{" +
+                "bmName='" + bmName + '\'' +
+                ", id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", bmId='" + bmId + '\'' +
+                ", planName='" + planName + '\'' +
+                ", planDate=" + planDate +
+                ", allNum=" + allNum +
+                ", yiPanNum=" + yiPanNum +
+                ", panYingNum=" + panYingNum +
+                ", panKuiNum=" + panKuiNum +
+                '}';
     }
 }
