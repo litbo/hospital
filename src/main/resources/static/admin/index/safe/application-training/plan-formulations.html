@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>计划制定</title>
     <link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css"/>
@@ -44,7 +45,7 @@
                 <label class="layui-form-label">设备选择<span
                         class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="scsName" disabled id="scsName" class="layui-input col-sm-10">
+                    <input type="text" name="eqName" disabled id="eqName" class="layui-input col-sm-10">
                     <button class="layui-btn col-sm-2" style="margin: 0"
                             id="selectEmp" lay-filter="sub">选择
                     </button>
@@ -53,13 +54,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">院内编码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" class="layui-input" disabled>
+                    <input type="text" name="eqZcbh" autocomplete="" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训科室<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="scsName" disabled id="scsNames" class="layui-input col-sm-10">
+                    <input type="text" name="pxks" disabled id="pxks" class="layui-input col-sm-10">
                     <button class="layui-btn col-sm-2" style="margin: 0;"
                             id="selectEmps" lay-filter="sub">选择
                     </button>
@@ -68,11 +69,25 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训方式<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select>
+                    <select name="pxfs">
                         <option value="科内培训">科内培训</option>
                         <option value="院内培训">院内培训</option>
                         <option value="院外培训">院外培训</option>
                     </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="kstime" autocomplete="" id="date1" class="layui-input"
+                           lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束日期<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" name="jstime" autocomplete="" id="date2" class="layui-input"
+                           lay-verify="required">
                 </div>
             </div>
         </div>
@@ -81,20 +96,20 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhKstime" class="layui-input" disabled>
+                    <input type="text" name="pxbh" class="layui-input" disabled>
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">分类编码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhKstime" class="layui-input" disabled>
+                    <input type="text" name="eqSbbh" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select>
+                    <select name="pxlx">
                         <option value="新产品新技术规范化培训">新产品新技术规范化培训</option>
                         <option value="临床验收培训">临床验收培训</option>
                         <option value="使用过程中培训">使用过程中培训</option>
@@ -104,12 +119,12 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容类别<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="节能减排" title="节能减排">
-                    <input type="checkbox" name="岗位职责" title="岗位职责" checked>
-                    <input type="checkbox" name="临床使用安全" title="临床使用安全">
-                    <input type="checkbox" name="应急管理" title="应急管理">
-                    <input type="checkbox" name="安全生产" title="安全生产">
-                    <input type="checkbox" name="其他培训" title="其他培训">
+                    <input type="checkbox" name="pxnrlb" value="节能减排" title="节能减排">
+                    <input type="checkbox" name="pxnrlb" value="岗位职责" title="岗位职责" checked>
+                    <input type="checkbox" name="pxnrlb" value="临床使用安全" title="临床使用安全">
+                    <input type="checkbox" name="pxnrlb" value="应急管理" title="应急管理">
+                    <input type="checkbox" name="pxnrlb" value="安全生产" title="安全生产">
+                    <input type="checkbox" name="pxnrlb" value="其他培训" title="其他培训">
                 </div>
             </div>
         </div>
@@ -119,7 +134,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">培训内容</label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="jhKstime" class="layui-textarea" autocomplete="off"></textarea>
+                    <textarea type="text" name="pxnr" class="layui-textarea" autocomplete="off"></textarea>
                 </div>
             </div>
         </div>
@@ -128,7 +143,6 @@
         <div class="layui-form-item" style="float: right;margin-right: 20%;">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit="" lay-filter="sub">保存</button>
-                <button class="layui-btn" oncancel="true">取消</button>
             </div>
         </div>
     </div>
@@ -137,59 +151,53 @@
 
 </div>
 
-
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    // 设置当前日期
-    var date = new Date();
-    var date1 = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-
-    var setDate1 = document.getElementById('date');
-    var setDate2 = document.getElementById('date1');
-    setDate1.value = currentdate;
-    setDate2.value = currentdate;
-</script>
-
-
 <script>
-    renderMod.form={
-        date: [
-            {
-                elem: "#date1",
-                value:today0,
-                type:"date",
-                format:'yyyy-MM-dd'
-            },
-            {
-                elem: "#date2",
-                value:today0,
-                type:"date",
-                format:'yyyy-MM-dd'
-            }
-        ],
-        submit:{
-            filter:true,
-            form:{
-                url:"/Jh/jhAdd",
-                type:"POST",
-                data:["jhName","zbdw","jhKstime","jhJstime","jhPxlx","jhPxxz","jhPxnrlb","jhSblx","userId",
-                    "pxZjr","pxAddr","pxNr"],
-                success:function(res){
-                    window.location.href="/admin/index/safe/application-training/plan-query.html"
+    var formData2={};
+    renderMod = {
+        bind: {
+            selectItem: [
+                {
+                    elem: "#selectEmp",
+                    cb: "/lifeManage/listHtBiaotou",
+                    db: "/cs/listScs",
+                    name: "dtdt",
+                    key: "radio",
+                    data: formData2,
+                    func:function(){
+                        console.log(formData2);
+                    }
+                }
+
+            ]
+        },
+        form: {
+            date: [
+                {
+                    elem: "#date1",
+                    value: today0,
+                    type: "date",
+                    format: 'yyyy-MM-dd'
                 },
-                error:function(r){
-                    xonsole.log(r);
+                {
+                    elem: "#date2",
+                    value: today0,
+                    type: "date",
+                    format: 'yyyy-MM-dd'
+                }
+            ],
+            submit: {
+                filter: true,
+                form: {
+                    url: "/Jh/jhAdd",
+                    type: "POST",
+                    data: ["jhName", "zbdw", "jhKstime", "jhJstime", "jhPxlx", "jhPxxz", "jhPxnrlb", "jhSblx", "userId",
+                        "pxZjr", "pxAddr", "pxNr"],
+                    success: function (res) {
+                        window.location.href = "/admin/index/safe/application-training/plan-query.html"
+                    }
+                    /*error: function (r) {
+                        // xonsole.log(r);
+                    }*/
                 }
             }
         }

@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<form class="layui-form layui-form-pane">
+<form class="layui-form layui-form-pane" lay-filter="forms">
     <div class="layui-row">
         <!--        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>医疗器械生产/经营许可证验证</legend>
@@ -49,17 +49,17 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">开始日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete=""id="date1" class="layui-input" lay-verify="required">
+                    <input type="text" name="jhKstime" autocomplete=""id="date1" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结束日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" id="date2" class="layui-input" lay-verify="required">
+                    <input type="text" name="jhJstime" autocomplete="" id="date2" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">主板单位<span class="sign">*</span></label>
+                <label class="layui-form-label">主办单位<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="zbdw" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
@@ -67,7 +67,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">组织者<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" class="layui-input" lay-verify="required">
+                    <input type="text" name="userId" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
         </div>
@@ -76,41 +76,45 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhKstime" value="培训编号自动生成" class="layui-input" disabled>
+                    <input type="text" name="jhPxbh" class="layui-input" disabled>
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">培训类型<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
+                    <select name="jhPxlx">
+                        <option value="新产品新技术规范化培训">新产品新技术规范化培训</option>
+                        <option value="临床验收培训">临床验收培训</option>
+                        <option value="使用过程中培训">使用过程中培训</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训性质<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
+                    <select name="jhPxxz">
+                        <option value="岗位培训">岗位培训</option>
+                        <option value="机械培训">机械培训</option>
+                        <option value="行政部门组织培训">行政部门组织培训</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训地点<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="zbdw" autocomplete="" class="layui-input" lay-verify="required">
+                    <input type="text" name="pxAddr" autocomplete="" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容类别<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
+                    <input type="checkbox" name=jhPxnrlb" value="节能减排" title="节能减排">
+                    <input type="checkbox" name=jhPxnrlb" value="岗位职责" title="岗位职责" checked>
+                    <input type="checkbox" name="jhPxnrlb" value="临床使用安全" title="临床使用安全">
+                    <input type="checkbox" name="jhPxnrlb" value="应急管理" title="应急管理">
+                    <input type="checkbox" name="jhPxnrlb" value="安全生产" title="安全生产">
+                    <input type="checkbox" name="jhPxnrlb" value="其他培训" title="其他培训">
                 </div>
             </div>
         </div>
@@ -120,7 +124,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">培训内容</label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="jhKstime" class="layui-textarea" autocomplete="off"></textarea>
+                    <textarea type="text" name="jhNr" class="layui-textarea" autocomplete="off"></textarea>
                 </div>
             </div>
         </div>
@@ -128,8 +132,7 @@
     <div class="layui-row">
         <div class="layui-form-item" style="float: right;margin-right: 20%;">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="sub">保存</button>
-                <button class="layui-btn" oncancel="true">取消</button>
+                <button class="layui-btn" lay-submit="" lay-filter="">保存</button>
             </div>
         </div>
     </div>
@@ -139,32 +142,18 @@
 </div>
 
 
-<script src="../../../../static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    // 设置当前日期
-    var date = new Date();
-    var date1 = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
 
-    var setDate1 = document.getElementById('date');
-    var setDate2 = document.getElementById('date1');
-    setDate1.value = currentdate;
-    setDate2.value = currentdate;
-</script>
 
 
 <script>
     renderMod.form={
+       /* val: {
+            filter: "forms",
+            get: {
+                url: "/px/getNum",
+                type: "POST"
+            }
+        },*/
         date: [
             {
                 elem: "#date1",
@@ -180,17 +169,17 @@
             }
         ],
         submit:{
-            filter:true,
             form:{
-                url:"/Jh/jhAdd",
+                url:"/px/addRypxjh",
+                // url: "/lifeManage/addEqHt",
                 type:"POST",
-                data:["jhName","zbdw","jhKstime","jhJstime","jhPxlx","jhPxxz","jhPxnrlb","jhSblx","userId",
-                    "pxZjr","pxAddr","pxNr"],
+                // contentType: "application/json",
+                data:["jhName","jhKstime","jhJstime","zbdw","userId","jhPxlx","jhPxxz","pxAddr","jhNr"],
                 success:function(res){
                     window.location.href="/admin/index/safe/application-training/plan-query.html"
                 },
                 error:function(r){
-                    xonsole.log(r);
+                    layer.alert("error");
                 }
             }
         }
