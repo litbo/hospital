@@ -1,8 +1,11 @@
 package com.litbo.hospital.security.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.finance.pojo.FinanceAnalysis;
+import com.litbo.hospital.metering.util.PropertiesUtil;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.bean.JhRylr;
 import com.litbo.hospital.security.bean.JhZd;
@@ -12,12 +15,13 @@ import com.litbo.hospital.security.vo.JhKhVo;
 import com.litbo.hospital.security.vo.JhRyCjLr;
 import com.litbo.hospital.security.vo.JhryVo;
 import com.litbo.hospital.supervise.vo.JhEmpVo;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author zjc
@@ -105,11 +109,9 @@ public class JhController {
 
     @GetMapping("/jhList")
     public Result getAllJhZd(@RequestParam(required = false,defaultValue = "1") Integer pageNum,
-                             @RequestParam(required = false,defaultValue = "10") Integer pageSize,
-                             @RequestParam(required = false) String createdate, @RequestParam(value = "jhName",required = false) String jhName){
-
-        Result result = jhZdService.listJhZd(pageNum, pageSize,createdate,jhName);
-        return result;
+                             @RequestParam(required = false,defaultValue = "10") Integer pageSize){
+        PageInfo pageInfo = jhZdService.listJhZd(pageNum, pageSize);
+        return Result.success(pageInfo);
     }
 
     /**
@@ -226,5 +228,23 @@ public class JhController {
         }
     }
 
+    @Test
+    public void test(){
+       // JSONArray myJsonArray = null;
 
+            String jsonMessage = "[{'type': 'checkbox'}, " +
+                    "{field: 'userId', title: '人员ID'}, " +
+                    "{field: 'userId', title: '人员ID'}, " +
+                    "{field: 'userId', title: '人员ID'}, " +
+                    "{field: 'userXm', title: '人员姓名'}]";
+        JSONArray  myJsonArray = JSONObject.parseArray(jsonMessage);
+        System.out.println(myJsonArray);
+//            String jsonMessage = "[{'type': 'radio'}, " +
+//                    "{field: 'userId', title: '人员ID'}, " +
+//                    "{field: 'userXm', title: '人员姓名'}]";
+//            myJsonArray = JSONObject.parseArray(jsonMessage);
+//
+        PageInfo date = new PageInfo(myJsonArray);
+        System.out.println(date);
+    }
 }

@@ -16,18 +16,27 @@ import java.util.List;
 public interface JhZdDao {
 
     @Insert("insert into jh_zd (jh_name, zbdw,jh_kstime, jh_jstime, jh_pxlx, \n" +
-            "      jh_pxxz, jh_pxnrlb, jh_sblx, \n" +
-            "      user_id, px_zjr, px_addr, \n" +
+            "      jh_pxxz, jh_pxnrlb,\n" +
+            "      user_id, px_addr, \n" +
             "      px_nr)\n" +
             "    values (#{jhName}, #{zbdw}, \n" +
             "      #{jhKstime}, #{jhJstime}, #{jhPxlx}, \n" +
-            "      #{jhPxxz}, #{jhPxnrlb}, #{jhSblx}, \n" +
-            "      #{userId}, #{pxZjr}, #{pxAddr}, \n" +
+            "      #{jhPxxz}, #{jhPxnrlb}, \n" +
+            "      #{userId}, #{pxAddr}, \n" +
             "      #{pxNr})")
     public int addJhZd(JhZd jhZd);
 
-    @SelectProvider(type = JhZdProvider.class,method = "findList")
-    public List<JhZdVo> jhzdList(@Param("createdate") String createdate, @Param("jhName") String jhName);
+    @Select("SELECT jh.jh_name," +
+            "jh.px_addr,\n" +
+            "jh.jh_pxlx,\n" +
+            "jh.jh_pxxz,\n" +
+            "jh.jh_kstime,\n" +
+            "jh.jh_jstime,\n" +
+            "jh.user_id as userXm,\n" +
+            "jh.id,\n" +
+            "jh.user_id " +
+            "FROM jh_zd AS jh")
+    public List<JhZdVo> jhzdList();
 
     @SelectProvider(type = JhZdProvider.class,method = "findListByKsTime")
     public List<JhZdVo> jhrylrListIndex(@Param("createdate") String createdate, @Param("jhName") String jhName);
