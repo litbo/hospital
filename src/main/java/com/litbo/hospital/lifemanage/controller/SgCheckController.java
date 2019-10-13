@@ -1,7 +1,12 @@
 package com.litbo.hospital.lifemanage.controller;
 
+import com.litbo.hospital.lifemanage.bean.SelectVO;
 import com.litbo.hospital.lifemanage.bean.SgCheck;
+import com.litbo.hospital.lifemanage.bean.SgPdZt;
 import com.litbo.hospital.lifemanage.bean.vo.ListIdsVO;
+import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
+import com.litbo.hospital.lifemanage.dao.SelectMapper;
+import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.service.EqService;
@@ -10,6 +15,8 @@ import com.litbo.hospital.user.vo.LiveEmpVo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -24,6 +31,11 @@ public class SgCheckController {
     private SgCheckService sgCheckService;
     @Autowired
     EqService es;
+
+    @Autowired
+    SelectMapper selectMapper;
+    @Autowired
+    SgCheckMapper sgCheckMapper;
     /**
      * 计划查询账实核对信息
      *
@@ -117,16 +129,39 @@ public class SgCheckController {
 
 
 
+
         String planId = eqInfo.getPlanId();
         if (es.addEq(eqInfo) > 0) {
 
-            System.out.println(eqInfo);
-            System.out.println(planId);
             SgCheck sgChcck = new SgCheck();
             sgChcck.setEqId(eqInfo.getEqId());
             sgChcck.setPlanId(planId);
             sgCheckService.addOther(sgChcck);
-            return Result.success();
+
+            System.out.println(eqInfo.getEqSbbh());
+            try{
+                //插入盘点状态
+
+//                List<String> listBmName =selectMapper.listBmName(eqInfo.getEqSbbh());
+//                String name []=null;
+//                for (int i=0;i<listBmName.size();i++){
+//                        name[i] = listBmName.get(i);
+//                }
+//                String eqName = name[0];
+                String eqName = selectMapper.listBmName(eqInfo.getEqId());
+                System.out.println(eqName);
+                SgPdZt sgPdZt = new SgPdZt();
+                sgPdZt.setPdJhid(eqInfo.getPlanId());
+                sgPdZt.setBmName(eqName);
+                sgPdZt.setEqSbbh(eqInfo.getEqSbbh());
+                sgPdZt.setEqName(eqInfo.getEqName());
+                sgPdZt.setPdZt("盘亏");
+                selectMapper.insertZt(sgPdZt);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
         }
 
             return Result.success();

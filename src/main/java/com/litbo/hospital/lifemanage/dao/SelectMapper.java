@@ -18,6 +18,7 @@ public interface SelectMapper {
     String getBmName(String bmId);
 //    String getBmId(String planId);
 
+    String listBmName(String id);
    List<SgPd> selectAllScan(String pdJhid);
     List<SelectVO> listCheckDate(String bmId);
 

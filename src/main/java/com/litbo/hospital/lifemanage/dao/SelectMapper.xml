@@ -78,7 +78,7 @@
     </select>
 
 
-    <select id="getListNum" resultMap="Map2">
+    <select id="getListNum" resultType="com.litbo.hospital.lifemanage.bean.ListNum">
     SELECT
     sum(CASE pd_zt WHEN '盘盈' THEN 1 ELSE 0 END) AS panYingNum,
     sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS panKuiNum,
@@ -87,4 +87,10 @@
     FROM
     sg_pdzt
     </select>
+
+    <select id="listBmName" parameterType="String" resultType="String">
+        select bm_name from eq_info e join s_bm s on e.eq_bmid=s.bm_id
+       where  e.eq_id = #{id}
+    </select>
+
 </mapper>
