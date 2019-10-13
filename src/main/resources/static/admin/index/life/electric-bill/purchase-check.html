@@ -30,7 +30,7 @@
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="bmName" id="bmName" placeholder="设备名称" autocomplete="off">
+            <input class="layui-input" name="eqName" id="eqName" placeholder="设备名称" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
         <hr class="devideHr">
@@ -133,9 +133,9 @@
                 }
             ],
             reSet: {
-                url: "/checkInfo/findInfo",
+                url: "/lifeManage/findListByEqName",
                 type: "reload",
-                data: ["bmName", "planDate", "userId"]
+                data: ["eqName", "planDate", "userId"]
             },
             // form: {
             //     val: {
