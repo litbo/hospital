@@ -105,6 +105,8 @@ public class SgCheckServiceImpl implements SgCheckService {
             sgCheck.setId(planId);
             addMapper.addOther(sgCheck);
 //            sgCheck.setEqId(sgCheck.getChecks());
+
+
         }catch (Exception e){
             e.printStackTrace();
         }

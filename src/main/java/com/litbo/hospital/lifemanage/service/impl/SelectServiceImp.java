@@ -178,7 +178,7 @@ public class SelectServiceImp implements SelectService {
 
     public PageInfo<ListNum> listNum(String pdJhid ,Integer pageNum, Integer pageSize){
         ListNum getNum = selectMapper.getListNum();
-        System.out.println();
+        System.out.println(getNum);
         PageHelper.startPage(pageNum,pageSize);
 
         return new PageInfo<>();
