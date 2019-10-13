@@ -11,7 +11,6 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 
 /**
  * 账实核对Controller
@@ -114,14 +113,22 @@ public class SgCheckController {
 //        return  Result.success();
 //    }
     @RequestMapping(value = "/addEq")
-    public Result addEq(@RequestBody EqInfoVo eqInfo,@RequestParam("planId") String planId) {
+    public Result addEq(@RequestBody EqInfoVo eqInfo) {
 
-        System.out.println(eqInfo);
-        System.out.println(planId);
+
+
+        String planId = eqInfo.getPlanId();
+        if (es.addEq(eqInfo) > 0) {
+
+            System.out.println(eqInfo);
+            System.out.println(planId);
             SgCheck sgChcck = new SgCheck();
             sgChcck.setEqId(eqInfo.getEqId());
             sgChcck.setPlanId(planId);
             sgCheckService.addOther(sgChcck);
+            return Result.success();
+        }
+
             return Result.success();
     }
 
