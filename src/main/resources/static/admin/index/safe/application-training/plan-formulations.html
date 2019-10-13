@@ -118,7 +118,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容类别<span class="sign">*</span></label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" id="sa">
                     <input type="checkbox" name="pxnrlb" value="节能减排" title="节能减排">
                     <input type="checkbox" name="pxnrlb" value="岗位职责" title="岗位职责" checked>
                     <input type="checkbox" name="pxnrlb" value="临床使用安全" title="临床使用安全">
@@ -189,18 +189,13 @@
                 before: function (param) {
                     var arr=[];
                     var arrs=[];
-                    $("#sa input:checkbox[name='brJjdy']:checked").each(function(i){
+                    $("#sa input:checkbox[name='pxnrlb']:checked").each(function(i){
                         arr[i]=$(this).val();
-                    });
-                    $("#sas input:checkbox[name='brBqgc']:checked").each(function(i){
-                        arrs[i]=$(this).val();
                     });
                     console.log(arr);
                     arr.join(',');
-                    arrs.join(',');
                     return param = {
-                        1: arr.join(','),
-                        2: arrs.join(',')
+                        1: arr.join(',')
                     };
 
 
@@ -210,12 +205,15 @@
                     type: "POST",
                     data: ["jhName", "zbdw", "jhKstime", "jhJstime", "jhPxlx", "jhPxxz", "jhPxnrlb", "jhSblx", "userId",
                         "pxZjr", "pxAddr", "pxNr"],
+                    param: {
+                        1: "pxnrlb"
+                    },
                     success: function (res) {
                         window.location.href = "/admin/index/safe/application-training/plan-query.html"
-                    }
-                    /*error: function (r) {
+                    },
+                    error: function (r) {
                         // xonsole.log(r);
-                    }*/
+                    }
                 }
             }
         }
