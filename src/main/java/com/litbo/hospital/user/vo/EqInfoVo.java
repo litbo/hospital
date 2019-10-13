@@ -11,7 +11,15 @@ import java.util.Date;
 
 @Data
 public class EqInfoVo {
+    public String getPlanId() {
+        return planId;
+    }
 
+    public void setPlanId(String planId) {
+        this.planId = planId;
+    }
+
+    private String planId;
     //流水号
     private String eqId;
 
@@ -159,6 +167,7 @@ public class EqInfoVo {
     private Date eqScrq;
     //折旧年限
     private Integer eqZjnx;
+
 
 
 }
