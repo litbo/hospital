@@ -3,12 +3,14 @@ package com.litbo.hospital.security.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.MyUtils.String2DateUtil;
 import com.litbo.hospital.metering.util.PropertiesUtil;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.service.PxService;
 import com.litbo.hospital.security.vo.BmVo;
 import com.litbo.hospital.security.vo.RyPxJhVo;
 import com.litbo.hospital.security.vo.YyPxJhVo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.ResultExtractor;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,11 +66,13 @@ public class PxController {
     }
 
     @RequestMapping("/addRypxjh")
-    public Result addYypxjh(RyPxJhVo ryPxJhVo){
+    public Result addYypxjh(RyPxJhVo ryPxJhVo) {
+        ryPxJhVo.setJhJstime2(String2DateUtil.StringtoDate(ryPxJhVo.getJhJstime()));
+        ryPxJhVo.setJhKstime2(String2DateUtil.StringtoDate(ryPxJhVo.getJhKstime()));
         Integer integer = pxService.addYypxjh(ryPxJhVo);
-        if(integer>0){
+        if (integer > 0) {
             return Result.success();
-        }else{
+        } else {
             return Result.error();
         }
     }

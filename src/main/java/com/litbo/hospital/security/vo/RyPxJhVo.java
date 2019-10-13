@@ -17,11 +17,13 @@ public class RyPxJhVo {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date jhKstime;
+    private Date jhKstime2;
 
+    String jhKstime;
+    String jhJstime;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date jhJstime;
+    private Date jhJstime2;
 
     private String jhPxlx;
 

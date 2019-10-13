@@ -49,13 +49,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">开始日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhKstime" autocomplete=""id="date1" class="layui-input" lay-verify="required">
+                    <input type="text" name="jhKstime" id="date1" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结束日期<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhJstime" autocomplete="" id="date2" class="layui-input" lay-verify="required">
+                    <input type="text" name="jhJstime" id="date2" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -108,7 +108,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容类别<span class="sign">*</span></label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" id="sa">
                     <input type="checkbox" name=jhPxnrlb" value="节能减排" title="节能减排">
                     <input type="checkbox" name=jhPxnrlb" value="岗位职责" title="岗位职责" checked>
                     <input type="checkbox" name="jhPxnrlb" value="临床使用安全" title="临床使用安全">
@@ -124,7 +124,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">培训内容</label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="jhNr" class="layui-textarea" autocomplete="off"></textarea>
+                    <textarea type="text" name="pxNr" class="layui-textarea" autocomplete="off"></textarea>
                 </div>
             </div>
         </div>
@@ -169,12 +169,28 @@
             }
         ],
         submit:{
+            before: function (param) {
+                var arr=[];
+                $("#sa input:checkbox[name='jhPxnrlb']:checked").each(function(i){
+                    arr[i]=$(this).val();
+                });
+                console.log(arr);
+                arr.join(',');
+                return param = {
+                    1: arr.join(','),
+                };
+
+
+            },
             form:{
                 url:"/px/addRypxjh",
                 // url: "/lifeManage/addEqHt",
                 type:"POST",
                 // contentType: "application/json",
-                data:["jhName","jhKstime","jhJstime","zbdw","userId","jhPxlx","jhPxxz","pxAddr","jhNr"],
+                data:["jhName","jhKstime","jhJstime","zbdw","userId","jhPxlx","jhPxxz","pxAddr","pxNr"],
+                param: {
+                    1: "jhPxnrlb"
+                },
                 success:function(res){
                     window.location.href="/admin/index/safe/application-training/plan-query.html"
                 },

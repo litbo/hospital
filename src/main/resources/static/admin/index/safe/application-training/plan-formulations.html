@@ -186,7 +186,25 @@
                 }
             ],
             submit: {
-                filter: true,
+                before: function (param) {
+                    var arr=[];
+                    var arrs=[];
+                    $("#sa input:checkbox[name='brJjdy']:checked").each(function(i){
+                        arr[i]=$(this).val();
+                    });
+                    $("#sas input:checkbox[name='brBqgc']:checked").each(function(i){
+                        arrs[i]=$(this).val();
+                    });
+                    console.log(arr);
+                    arr.join(',');
+                    arrs.join(',');
+                    return param = {
+                        1: arr.join(','),
+                        2: arrs.join(',')
+                    };
+
+
+                },
                 form: {
                     url: "/Jh/jhAdd",
                     type: "POST",
