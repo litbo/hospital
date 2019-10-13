@@ -78,7 +78,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
 //              sgPd.setPdScsj(record.getPdScsj());
             sgPd.setPdJhid(pdJhid);
             sgPdMapper.insertPdId(sgPd);
-            System.out.println("成功");
+//            System.out.println("成功");
             successCount++;
         }
         return successCount;
@@ -125,7 +125,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
         SgPdZt sgPdZt = new SgPdZt();
         sgPdZt.setPdJhid(pdJhid);
-        System.out.println("已盘的"+listTemp);
+//        System.out.println("已盘的"+listTemp);
 //        SgPdZt sgPdZt4 = new SgPdZt();
         for (SelectVO sgPd :listTemp){
             sgPdZt.setBmName(sgPd.getBmName());
@@ -134,9 +134,9 @@ public class SgPdServiceImpl implements SgPdSeverice {
             sgPdZt.setPdZt("已盘");
             selectMapper.insertZt(sgPdZt);
         }
-        System.out.println("2");
+//        System.out.println("2");
 
-        System.out.println("盘盈"+listTemp2);
+//        System.out.println("盘盈"+listTemp2);
         for (SelectVO sgPd :listTemp2){
             sgPdZt.setBmName(sgPd.getBmName());
             sgPdZt.setEqSbbh(sgPd.getEqSbbh());
@@ -145,7 +145,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
             selectMapper.insertZt(sgPdZt);
         }
 
-        System.out.println("3");
+//        System.out.println("3");
 
 
         System.out.println("盘亏的"+adllDate2);
@@ -156,10 +156,10 @@ public class SgPdServiceImpl implements SgPdSeverice {
             sgPdZt.setPdZt("盘亏");
             selectMapper.insertZt(sgPdZt);
         }
-        System.out.println("4");
+//        System.out.println("4");
 
 
-        System.out.println("盘点计划的"+adllDate3);
+//        System.out.println("盘点计划的"+adllDate3);
         for (SelectVO sgPd :adllDate3){
             if (allDate3.contains(adllDate2)||allDate3.contains(listTemp)){
                 adllDate3.remove(adllDate2);
@@ -171,7 +171,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
                 selectMapper.insertZt(sgPdZt);
             }
         }
-        System.out.println("1");
+//        System.out.println("1");
 
 
 

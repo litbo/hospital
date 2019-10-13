@@ -43,7 +43,11 @@ public class SgPdController {
                 System.out.println(s);
                 sgPdVO = JSON.parseObject(s, SgPdVO.class);
                 sgPdService.insertPdId(sgPdVO,pdJhid);
-                sgPdService.insetStatus(pdJhid,bmId);
+                try{
+                    sgPdService.insetStatus(pdJhid,bmId);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 return Result.success();
             } else {
                 return Result.error("这是一个空文件");
