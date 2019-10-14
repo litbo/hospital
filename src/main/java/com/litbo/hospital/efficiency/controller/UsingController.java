@@ -6,6 +6,7 @@ import com.litbo.hospital.efficiency.service.UsingService;
 import com.litbo.hospital.efficiency.vo.SearchVO;
 import com.litbo.hospital.efficiency.vo.UsingVO;
 import com.litbo.hospital.result.Result;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +36,11 @@ public class UsingController {
     @RequestMapping("/selectUsingByCon")
     public Result selectUsingByCon(@RequestParam(value = "pageNum",required = false,defaultValue = "1") int pageNum,
                                    @RequestParam(value = "pageSize",required = false,defaultValue = "10")  int pageSize,
-                                   SearchVO searchVO){
+                                   SearchVO searchVO,String select){
         searchVO = HandleData.handleSearch(searchVO);
+        if(StringUtils.isNotBlank(select)){
+            searchVO.setBmSName(select);
+        }
         if (searchVO.getStartSTime()!=null){
             String[] strings = HandleData.splitTime(searchVO.getStartSTime());
             searchVO.setStartSTime(strings[0]);

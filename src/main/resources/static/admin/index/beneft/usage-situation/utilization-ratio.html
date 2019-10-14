@@ -46,7 +46,7 @@
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
 
-                        <select name="bmSName" id="bmSName" lay-filter="select" lay-search="">
+                        <select name="select" id="select" lay-filter="select" lay-search="">
                             <option value="">请选择科室</option>
                         </select>
                     </div>
@@ -77,7 +77,7 @@
             if(data.value == 1){
                 alert("123")
             }else{
-                var type =$('#bmSName option:selected').val();//选中的值
+                var type =$('#select option:selected').val();//选中的值
                 console.log("选中的值："+type)
                 $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){
                     console.log(data)
@@ -159,7 +159,7 @@
             reSet: {
                 url: "/kpi/using/selectUsingByCon",
                 type: "search",
-                data: ["startSTime","bmSName", "eqSName"],     //查询框的name
+                data: ["startSTime","select", "eqSName"],     //查询框的name
                 where: {}
             }
         }
