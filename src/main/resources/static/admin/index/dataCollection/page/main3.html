@@ -64,7 +64,6 @@
 <!--编辑删除-->
 <script type="text/html" id="barDemo">
 	<a class="layui-btn layui-btn-xs edit editi" href="" lay-event="link">编辑</a>
-	<a class="layui-btn layui-btn-xs deli" lay-event="delete">删除</a>
 </script>
 
 <script src="../js/dataIndex.js"></script>
@@ -77,8 +76,9 @@
 					{type: 'checkbox', fixed: 'left'}
 					,{field:'eqSbbh', title:'设备编号'}
 					,{field:'eqName', title:'设备名称'}
-					,{field:'eqGg', title:'规格'}
-					,{field:'eqXh', title:'型号'}
+					,{field:'eqGg' ,title:'规格 型号'}
+                    ,{field:'' ,title:'所在科室'}
+					// ,{field:'eqXh', title:'型号'}
 					,{field:'macID', title:'联网仪编号'}
 					,{field:'endPointIP', title:'联网仪IP'}
 					,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo'}
@@ -143,21 +143,21 @@
 							},
 							{
 								event: "link",
-								layOpen:false,
-								dataUrl:["eqSbbh","endPointIP","haspacs","hasworkbox","macrule","pmacid"],
-								func:function(obj){
-									var data = obj.data;
-									var eqSbbh = data.eqSbbh;
-									var macID= data.macID;
-									var endPointIP = data.endPointIP;
-									var haspacs = data.haspacs;
-									var hasworkbox = data.hasworkbox;
-									var macrule = data.macrule;
-									var pmacid = data.pmacid;
-									var html ="./edit1.html";
-									var url = html + "?eqSbbh="+ eqSbbh + "&endPointIP=" + endPointIP;
-									$(".edit").attr('href',url);
-								}
+								// layOpen:false,
+								// dataUrl:["eqSbbh","endPointIP","haspacs","hasworkbox","macrule","pmacid"],
+								// func:function(obj){
+								// 	var data = obj.data;
+								// 	var eqSbbh = data.eqSbbh;
+								// 	var macID= data.macID;
+								// 	var endPointIP = data.endPointIP;
+								// 	var haspacs = data.haspacs;
+								// 	var hasworkbox = data.hasworkbox;
+								// 	var macrule = data.macrule;
+								// 	var pmacid = data.pmacid;
+								// 	var html ="./edit1.html";
+								// 	var url = html + "?eqSbbh="+ eqSbbh + "&endPointIP=" + endPointIP;
+								// 	$(".edit").attr('href',url);
+								// }
 							}
 						]
 					})
