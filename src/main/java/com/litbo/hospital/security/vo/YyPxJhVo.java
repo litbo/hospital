@@ -11,7 +11,7 @@ public class YyPxJhVo {
 
     private Integer id;
 
-    private String eqName;
+    private String eqId;
 
     private String pxbh;
 
@@ -21,7 +21,7 @@ public class YyPxJhVo {
 
     private String pxfs;
 
-    private String pxks;
+    private String ksId;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -32,8 +32,6 @@ public class YyPxJhVo {
     private String jstime;
 
     private String pxlx;
-
-    private String pxnrlb;
 
     private String pxnr;
 

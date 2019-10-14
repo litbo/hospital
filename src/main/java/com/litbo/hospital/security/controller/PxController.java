@@ -49,7 +49,7 @@ public class PxController {
     public Result getBmBt(){
         JSONArray myJson = null;
         String jsonMessage = "[{'type':'radio'},{field:'bmId',title:'科室id'}," +
-                "{field:'bmName',title:'科室'}]";
+                "{field:'pxfs',title:'科室'}]";
         myJson = JSONObject.parseArray(jsonMessage);
         return Result.success(myJson);
     }
