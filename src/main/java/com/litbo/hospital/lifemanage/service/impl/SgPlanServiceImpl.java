@@ -2,12 +2,13 @@ package com.litbo.hospital.lifemanage.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.lifemanage.bean.SgCheck;
-import com.litbo.hospital.lifemanage.bean.SgPd;
-import com.litbo.hospital.lifemanage.bean.SgPlan;
+import com.litbo.hospital.lifemanage.bean.*;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
+import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
+import com.litbo.hospital.lifemanage.dao.SgPdMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
+import com.litbo.hospital.lifemanage.service.SelectService;
 import com.litbo.hospital.lifemanage.service.SgPlanService;
 import com.litbo.hospital.supervise.service.EmpService;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +40,12 @@ public class SgPlanServiceImpl implements SgPlanService {
     @Autowired
     private EmpService empService;
 
+    @Autowired
+    private SelectMapper selectMapper;
+    @Autowired
+    private SgPdMapper sgPdMapper;
+    @Autowired
+    private SelectService selectService;
     /**
      * 计划制定
      *
@@ -76,7 +83,7 @@ public class SgPlanServiceImpl implements SgPlanService {
     @Override
     public PageInfo selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize) {
 
-        System.out.println(PageHelper.startPage(pageNum, pageSize));
+//        System.out.println(PageHelper.startPage(pageNum, pageSize));
         // 把空字符串 转换为null
         if (StringUtils.isBlank(planName)) {
             planName = null;
@@ -104,31 +111,40 @@ public class SgPlanServiceImpl implements SgPlanService {
                 e.printStackTrace();
             }
         }
-//        System.out.println(planName+"aaa/n"
-//                +planDate+"aaa/n"+userName+"aaa/n"+pageNum+"aaa/n"+pageSize
-//        );
-
-        // 如果接收的userName 不为空且查询不到userid时 直接返回null 否则 进行查询
-
         if (userId.size()==0 && StringUtils.isNotBlank(userName)){
             System.out.println("空");
             return  new PageInfo<>();
         }else{
             try {
                 List<SgPlan> str = sgPlanMapper.selectPlan(planName, date, userId);
-//                for (SgPlan sp : str){
-//                    System.out.println(sp);
-//                }
             }catch (Exception e){
                 System.out.println("出错");
             }
+            List<SgPlan> sgPlan = sgPlanMapper.selectPlan(planName, date, userId);
+            List<SgPlanList> sgPlanLists= new ArrayList<>();
+            ListNum listNum = new ListNum();
+            SgPlanList sgList = new SgPlanList();
+            for (SgPlan sg:sgPlan){
+                listNum = selectMapper.getListNum(sg.getId());
 
+                  if  (listNum==null){
+                     List<SelectVO> adllDate3 = selectMapper.listCheckDate(sg.getBmId());
+//                     System.out.println(adllDate3.size());
+                     sgList = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+                             sg.getPlanDate(),adllDate3.size(), 0,
+                             0,adllDate3.size());
+                     sgPlanLists.add(sgList);
+                 }
+                 if (listNum!=null){
+                      sgList = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+                             sg.getPlanDate(),listNum.getAllNum(), listNum.getYiPanNum(),
+                             listNum.getPanYingNum(),listNum.getPanKuiNum());
+                     sgPlanLists.add(sgList);
+                 }
+            }
             PageHelper.startPage(pageNum, pageSize);
-            return new PageInfo(sgPlanMapper.selectPlan(planName, date, userId));
+            return  new PageInfo(sgPlanLists);
         }
-//        return new PageInfo<>(
-//                userId.size()==0 && StringUtils.isNotBlank(userName) ?
-//                null : sgPlanMapper.selectPlan(planName, date, userId));
     }
 
     /**

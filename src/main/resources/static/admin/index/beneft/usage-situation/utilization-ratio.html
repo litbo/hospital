@@ -46,19 +46,14 @@
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
 
-                        <select name="bmSName" lay-filter="select" lay-search="">
+                        <select name="select" id="select" lay-filter="select" lay-search="">
                             <option value="">请选择科室</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="eqSName" lay-search="">
+                        <select name="eqSName" id="eqSName" lay-search="">
                             <option value="">请选择设备</option>
-                            <option >CT室</option>
-                            <option >核磁公正室</option>
-                            <option >摄片室</option>
-                            <option >内外导管室</option>
-                            <option >心外ICU</option>
-                            <option >空调器具</option>
+
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
@@ -70,6 +65,37 @@
             </div>
         </div>
     </div>
+</script>
+
+<script>
+    layui.use(['layer', 'jquery', 'form'], function () {
+        var layer = layui.layer,
+            $ = layui.jquery,
+            form = layui.form;
+
+        form.on('select(select)', function(data){
+            if(data.value == 1){
+                alert("123")
+            }else{
+                var type =$('#select option:selected').val();//选中的值
+                console.log("选中的值："+type)
+                $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){
+                    console.log(data)
+                    var eqSName = data.data;
+                    // console.log("从后端获得的数据："+eqSName);
+
+                    // 将数据分割：
+                    // eqSName = eqSName.toString().split(',');
+
+                    $("#eqSName").empty()
+                    for(var i in eqSName){
+                        $("#eqSName").append("<option value=\""+eqSName[i].eqName+"\">"+eqSName[i].eqName+"</option>")
+                    }
+                    layui.form.render("select");
+                });
+            }
+        });
+    });
 </script>
 <script>
     renderMod = {
@@ -87,7 +113,7 @@
                     {
 
                         text: "bmName",
-                        url: "/supervise/bmgl/listBm"
+                        url: "/supervise/bmgl/listDelXks"
                     }
                 ]}
         },
@@ -133,7 +159,7 @@
             reSet: {
                 url: "/kpi/using/selectUsingByCon",
                 type: "search",
-                data: ["startSTime","bmSName", "eqSName"],     //查询框的name
+                data: ["startSTime","select", "eqSName"],     //查询框的name
                 where: {}
             }
         }

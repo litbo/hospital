@@ -55,7 +55,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
      */
     @Override
     public int insertPdId(SgPdVO record,String pdJhid) {
-        System.out.println(pdJhid+"盘点计划id");
+//        System.out.println(pdJhid+"盘点计划id");
         SgPd sgPd = new SgPd();
         sgPd.setPdJhid(pdJhid);
         BeanUtils.copyProperties(record, sgPd);
@@ -78,7 +78,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
 //              sgPd.setPdScsj(record.getPdScsj());
             sgPd.setPdJhid(pdJhid);
             sgPdMapper.insertPdId(sgPd);
-            System.out.println("成功");
+//            System.out.println("成功");
             successCount++;
         }
         return successCount;
@@ -93,8 +93,13 @@ public class SgPdServiceImpl implements SgPdSeverice {
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
         for (SgPd sgPd : list) {
-            adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+//            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
+
 
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
         List<SelectVO> listTemp2 = new ArrayList<SelectVO>();//盘亏集合
@@ -120,7 +125,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
         SgPdZt sgPdZt = new SgPdZt();
         sgPdZt.setPdJhid(pdJhid);
-        System.out.println("已盘的"+listTemp);
+//        System.out.println("已盘的"+listTemp);
 //        SgPdZt sgPdZt4 = new SgPdZt();
         for (SelectVO sgPd :listTemp){
             sgPdZt.setBmName(sgPd.getBmName());
@@ -129,9 +134,9 @@ public class SgPdServiceImpl implements SgPdSeverice {
             sgPdZt.setPdZt("已盘");
             selectMapper.insertZt(sgPdZt);
         }
-        System.out.println("2");
+//        System.out.println("2");
 
-        System.out.println("盘盈"+listTemp2);
+//        System.out.println("盘盈"+listTemp2);
         for (SelectVO sgPd :listTemp2){
             sgPdZt.setBmName(sgPd.getBmName());
             sgPdZt.setEqSbbh(sgPd.getEqSbbh());
@@ -140,10 +145,10 @@ public class SgPdServiceImpl implements SgPdSeverice {
             selectMapper.insertZt(sgPdZt);
         }
 
-        System.out.println("3");
+//        System.out.println("3");
 
 
-        System.out.println("盘亏的"+adllDate2);
+//        System.out.println("盘亏的"+adllDate2);
         for (SelectVO sgPd :adllDate2){
             sgPdZt.setBmName(sgPd.getBmName());
             sgPdZt.setEqSbbh(sgPd.getEqSbbh());
@@ -151,10 +156,10 @@ public class SgPdServiceImpl implements SgPdSeverice {
             sgPdZt.setPdZt("盘亏");
             selectMapper.insertZt(sgPdZt);
         }
-        System.out.println("4");
+//        System.out.println("4");
 
 
-        System.out.println("盘点计划的"+adllDate3);
+//        System.out.println("盘点计划的"+adllDate3);
         for (SelectVO sgPd :adllDate3){
             if (allDate3.contains(adllDate2)||allDate3.contains(listTemp)){
                 adllDate3.remove(adllDate2);
@@ -166,7 +171,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
                 selectMapper.insertZt(sgPdZt);
             }
         }
-        System.out.println("1");
+//        System.out.println("1");
 
 
 

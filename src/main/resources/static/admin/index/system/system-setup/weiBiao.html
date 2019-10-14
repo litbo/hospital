@@ -35,10 +35,10 @@
     <div class="hidden-xs" id="moreBar">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-inline">
-              <!--  <select name="bmId" lay-filter="bmList" lay-verify="required" lay-search="">
-                    <option value="0000000000">科室</option>
-                </select>-->
-                <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">
+               <select name="bmName" lay-filter="bmList" lay-verify="required" lay-search="">
+                    <option value="">全部科室</option>
+                </select>
+<!--                <input class="layui-input" name="bmName" placeholder="科室名称" autocomplete="off">-->
             </div>
             <div class="layui-inline">
                 <input class="layui-input" name="eqName" placeholder="设备名称" autocomplete="off">
@@ -122,9 +122,9 @@
                 select: [
                     {
                         filter:"bmList",
-                        ids: "bmId",
+                        ids: "bmName",
                         text: "bmName",
-                        url: "/supervise/bmgl/listBms"
+                        url: "/supervise/bmgl/listDelXks"
                     }
                 ]
             }

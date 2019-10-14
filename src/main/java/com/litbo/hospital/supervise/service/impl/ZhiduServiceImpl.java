@@ -157,7 +157,6 @@ public class ZhiduServiceImpl implements ZhiduService {
         return zdzts.get(0).getZtCzname();
     }
 
-
     @Override
     public void submit(ZhiduSubmitVO zhiduSubmitVO) {
 
@@ -181,7 +180,6 @@ public class ZhiduServiceImpl implements ZhiduService {
         zd.setZdXgcs(0);   //修改次数为0
         //先保存制度信息
         zhiduDao.saveZd(zd);
-
         //封装状态审核信息   提交状态
         SZhiduzhizeZt ztc = new SZhiduzhizeZt();
         ztc.setZdId(zd.getZdId());

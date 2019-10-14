@@ -260,12 +260,10 @@ public class EqProvider {
                 if(eqInfo.getEqYq()!=null) {
                     SET("eq_yq=#{eqYq}");
                 }
-                if(eqInfo.getEqSbzp()!=null) {
                     SET("eq_sbzp=#{eqSbzp}");
-                }
-                if(eqInfo.getEqMpzp()!=null) {
+
                     SET("eq_mpzp=#{eqMpzp}");
-                }
+
                 if(eqInfo.getEqAzhjyq()!=null) {
                     SET("eq_azhjyq=#{eqAzhjyq}");
                 }

@@ -3,11 +3,15 @@ package com.litbo.hospital.user.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqInfoVO;
+import com.litbo.hospital.operational_data_monitoring.software_interface.vo.SearchEqVO;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.bean.EqFj;
 import com.litbo.hospital.user.bean.EqInfo;
+import com.litbo.hospital.user.dao.EqDao;
 import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +27,8 @@ public class EqController {
 
     @Autowired
     EqService es;
-
+    @Autowired
+    EqDao eqdao;
     //查询所有设备信息
     @RequestMapping("/listEqs")
     public Result listEq(Model model) {
@@ -357,6 +362,20 @@ public class EqController {
         PageInfo pageInfo = es.listEqNameByX(pageNum, pageSize, ccname);
         return Result.success(pageInfo);
     }
+
+    //科室名字查询科室设备
+    @RequestMapping("/selectEqInfoByBmName")
+    public Result selectEqInfoByBmName(@RequestParam(required = true,name = "bmName") String bmName) {
+        String bmId = eqdao.getBmIdByName(bmName);
+        SearchEqVO vo = new SearchEqVO();
+        vo.setBmId(bmId);
+        List<EqInfoVO> vos = eqdao.selectAllBy(vo);
+        if(StringUtils.isNotBlank(bmId))
+        return Result.success(vos);
+        else return Result.success();
+    }
+
+
 
     @RequestMapping(value = "/eqNameSe")
     public Result eqNameSe(){

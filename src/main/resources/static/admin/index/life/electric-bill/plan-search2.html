@@ -33,23 +33,23 @@
     <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
 </script>
 <script type="text/html" id="bar">
-
+    {{#  { }}
     <div class="layui-inline">
-        <a lay-event="allP" class="layui-btn layui-btn-sm">盘点计划:<span id="allP"></span></a>
+        <a lay-event="allP" class="layui-btn layui-btn-sm">盘点计划:{{d.allNum}}</a>
     </div>
 
     <div class="layui-inline">
-        <a lay-event="haveP" class="layui-btn layui-btn-sm editi">已盘:<span>0000</span></a>
+        <a lay-event="haveP" class="layui-btn layui-btn-sm editi">已盘:{{d.yiPanNum}}</a>
     </div>
 
     <div class="layui-inline">
-        <a lay-event="another" class="layui-btn layui-btn-sm addi">盘盈：<span>0000</span></a>
+        <a lay-event="another" class="layui-btn layui-btn-sm addi">盘盈：{{d.panYingNum}}</a>
     </div>
 
     <div class="layui-inline">
-        <a lay-event="notnull" class="layui-btn layui-btn-sm deli">盘亏：<span >0000</span></a>
+        <a lay-event="notnull" class="layui-btn layui-btn-sm deli">盘亏：{{d.panKuiNum}}</a>
     </div>
-
+    {{#  } }}
 </script>
 <script type="text/html" id="cz">
     <a class="layui-btn layui-btn-sm editi" lay-event="pipei">核对上传</a>
@@ -62,33 +62,35 @@
     renderMod = {
         addTable: {
             table: [{
-                    elem: "#table"
-                    , height: 'full-75'
-                    , cols: [[ //表头
-                        {field: 'planName', title: '计划名称', minWidth: 100,templet:'#status'}
-                        , {field: 'userId', title: '制定人',width: 100,templet:'#statuss'}
-                        , {field: 'bmName', title: '科室',minWidth: 100,templet:'#statusss'}
-                        , {title: '操作',width: 100,align:'center',templet:'#cz'}
-                        , {field: 'planDate', title: '制定日期',width: 110,templet:'#statussss'}
-                        , {title:'盘点结果显示',minWidth: 400,align:'center',toolbar: "#bar"}
-                    ]]
-                    , url: "/lifeManage/selectPlan"
-                    , method: "POST"
-                    , request: {
-                        pageName: 'pageNum',
-                        limitName: 'pageSize'
+                elem: "#table"
+                , height: 'full-75'
+                , cols: [[ //表头
+                    {field: 'planName', title: '计划名称', minWidth: 100,templet:'#status'}
+                    , {field: 'userId', title: '制定人',width: 100,templet:'#statuss'}
+                    , {field: 'bmName', title: '科室',minWidth: 100,templet:'#statusss'}
+                    , {title: '操作',width: 100,align:'center',templet:'#cz'}
+                    , {field: 'planDate', title: '制定日期',width: 110,templet:'#statussss'}
+                    , {title:'盘点结果显示',minWidth: 400,align:'center',toolbar: "#bar"}
+                ]]
+                , url: "/lifeManage/selectPlan"
+                , method: "POST"
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+                , where: {}
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "data": res.data.list, //解析数据列表
+                        "count":res.data.total
                     }
-                    , where: {}
-                    , parseData: function (res) { //res 即为原始返回的数据
-                        return {
-                            "code": res.code, //解析接口状态
-                            "msg": res.msg, //解析提示文本
-                            "data": res.data.list, //解析数据列表
-                            "count":res.data.total
-                        }
-                    }
+                }
                 , done: function (obj) {
-                    console.log(obj);
+                    // console.log(obj.data);
+                    // for(var i=0;i<obj.data.length;i++){}
+
                     tableFunc({
                         tools:[
                             {
@@ -122,7 +124,7 @@
                         ]
                     })
                 }
-                }
+            }
             ]
 
             , reSet: {

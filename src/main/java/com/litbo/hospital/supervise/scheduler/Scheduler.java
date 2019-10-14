@@ -145,12 +145,12 @@ public class Scheduler {
     private void autoCreateBasicBm(){
 
         saveBmIfNotEx("0100000000","1000000000","机构领导");
-        saveBmIfNotEx("0101000000","0100000000","医学装备管理委员会");
+//        saveBmIfNotEx("0101000000","0100000000","医学装备管理委员会");
 
         saveBmIfNotEx("0200000000","1000000000","管理科室");
         saveBmIfNotEx("0201000000","0200000000","医工");
         saveBmIfNotEx("0202000000","0200000000","后勤");
-        saveBmIfNotEx("0203000000","0200000000","信息科");
+        saveBmIfNotEx("0203000000","0200000000","信息");
 
         saveBmIfNotEx("0300000000","1000000000","使用科室");
         saveBmIfNotEx("0301000000","0300000000","临床");

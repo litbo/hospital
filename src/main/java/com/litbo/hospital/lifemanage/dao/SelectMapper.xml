@@ -78,14 +78,15 @@
     </select>
 
 
-    <select id="getListNum" resultType="com.litbo.hospital.lifemanage.bean.ListNum">
+    <select id="getListNum" parameterType="String" resultType="com.litbo.hospital.lifemanage.bean.ListNum">
     SELECT
-    sum(CASE pd_zt WHEN '盘盈' THEN 1 ELSE 0 END) AS panYingNum,
-    sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS panKuiNum,
-    sum(CASE pd_zt WHEN '已盘' THEN 1 ELSE 0 END) AS yiPanNum,
-    sum(CASE pd_zt WHEN '已盘' THEN 1 ELSE 0 END)+sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS allNum
+    sum(CASE pd_zt WHEN '盘盈' THEN 1 ELSE 0 END) AS 'panYingNum',
+    sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS 'panKuiNum',
+    sum(CASE pd_zt WHEN '已盘' THEN 1 ELSE 0 END) AS 'yiPanNum',
+    sum(CASE pd_zt WHEN '已盘' THEN 1 ELSE 0 END)+sum(CASE pd_zt WHEN '盘亏' THEN 1 ELSE 0 END) AS 'allNum'
     FROM
     sg_pdzt
+    where pd_jhid = #{planId}
     </select>
 
     <select id="listBmName" parameterType="String" resultType="String">

@@ -457,7 +457,8 @@
         form: {
             submit: {
                 filter: "submit",//可以不写
-                before: function () {
+                before: function (data) {
+
                     var ad = {};
                     if (formData.eqSbzp !== undefined) {
                         ad.eqSbzp = formData.eqSbzp;
@@ -507,8 +508,11 @@
                         6: "sbcsIdGys",
                         7: "eqId"
                     },
-                    reload: true
-                }
+                    reload: 'parent'
+                },
+                func:function(data){
+                    console.log(data)
+                }//
             },
             date: [
                 {
@@ -606,9 +610,9 @@
                                 tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                                 tds.eq(3).html(
                                     $("<button>").attr({
-                                        class:"layui-btn layui-btn-xs demo-see",
+                                        class:"hidden",
                                         dataImg: res.data
-                                    }).text("查看").on("click",showsI)
+                                    }).text("设备照片").on("click",showsI)
                                 );
                                 return delete this.files[index]; //删除文件队列已经上传成功的文件
                             }
@@ -620,8 +624,8 @@
                         var tr = $("#demoList1").find('tr#upload-' + index)
                             , tds = tr.children();
                         tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-                        console.log("index:" + index);
-                        console.log("upload" + upload);
+                        // console.log("index:" + index);
+                        // console.log("upload" + upload);
                     }
                 },
                 {
@@ -635,9 +639,9 @@
                     field: "file",
                     number:4,
                     choose: function (obj) {
-                        if (formData.count > 4) {
+                        if (formData.count >= 4) {
                             putMsg({
-                                alert: "上传数量已打最大值！"
+                                alert: "上传数量已达最大值！"
                             });
                             return false;
                         }
@@ -673,7 +677,7 @@
                         });
                     }
                     ,done: function (res, index, upload) {
-                        if(formData.count > 4){
+                        if(formData.count >= 4){
                             var tr1 = $("#demoList").find('tr#upload-' + index)
                                 , tds1 = tr1.children();
                             tds1.eq(2).html('<span style="color: #f19102;">等待重传</span>');
@@ -689,9 +693,9 @@
                                 tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                                 tds.eq(3).html(
                                     $("<button>").attr({
-                                        class:"layui-btn layui-btn-xs demo-see",
+                                        class:"hidden",
                                         dataImg: res.data
-                                    }).text("查看").on("click",showsI)
+                                    }).text("铭牌").on("click",showsI)
                                 );
                                 return delete this.files[index]; //删除文件队列已经上传成功的文件
                             }
@@ -701,8 +705,8 @@
                         var tr = $("#demoList1").find('tr#upload-' + index)
                             , tds = tr.children();
                         tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-                        console.log("index:" + index);
-                        console.log("upload" + upload);
+                        // console.log("index:" + index);
+                        // console.log("upload" + upload);
                     }
                 }
             ],
@@ -737,11 +741,11 @@
                         filter: "bmList",
                         ids: "bmId",
                         text: "bmName",
-                        url: "/supervise/bmgl/listBms2"
+                        url: " /supervise/bmgl/listDelXks"
                     }
                 ],
                 func: function (data, form) {
-                    console.log($.getUrlParam("eqId"));
+                    // console.log($.getUrlParam("eqId"));
                     $("select[name='zjlyId']").val(String(data["zjlyId"]).trim());
                     $("select[name='eqBmid']").val(String(data["eqBmid"]).trim());
                     $("select[name='eqJldwId']").val(String(data["eqJldwId"]).trim());
@@ -804,12 +808,12 @@
                         for (var j = 0; j < newMp.length; j++) {
                             formData.count ++ ;
                             formData.eqMpzp.push(newMp[j]);
-                            tr = $(['<tr id="upload-n' + i + '">'
+                            tr = $(['<tr id="upload-k' + j + '">'
                                 , '<td>图片'+(j+1)+ '</td>'
                                 , '<td>-</td>'
                                 , '<td>原上传</td>'
                                 , '<td>'
-                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + newMp[i] + '">查看</button>'
+                                , '<button class="layui-btn layui-btn-xs demo-see" data-img="' + newMp[j] + '">查看</button>'
                                 , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
                                 , '</td>'
                                 , '</tr>'].join(''));
@@ -834,7 +838,7 @@
                                         }
                                     }
                                     //delete files[index]; //删除对应的文件
-                                    $("tr#upload-n" + index).remove();
+                                    $("tr#upload-k" + index).remove();
                                     formData.count1--;
                                     layer.close(num);
                                 });

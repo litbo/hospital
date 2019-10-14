@@ -134,7 +134,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" >职称</label>
                 <div class="layui-input-block">
-                    <select name="zcId" lay-filter="zc" lay-verify="required">
+                    <select name="zcId" lay-filter="zc" >
                         <option></option>
                     </select>
                 </div>
@@ -249,11 +249,11 @@
             submit:{
                 before: function () {
                     var daa={};
-                    console.log(formData);
+                    // console.log(formData);
                     if(formData.radio){
                         daa=formData.radio[0]["bmId"];
                     }else if(formData.val){
-                        console.log(formData);
+                        // console.log(formData);
                         daa=formData.val.bmId;
                     }
                     return param = {

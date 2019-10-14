@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface SelectService {
 
-
     PageInfo<SelectVO> selectAll(@Param("pdJhid")String pdJhid,
                                  @Param("bmId") String bmId
             , @Param("pageNum")Integer pageNum
@@ -29,4 +28,5 @@ public interface SelectService {
     PageInfo<SgPdZt> findPankui(String pdJhid, String eqName, Integer pageNum, Integer pageSize);
 
     PageInfo<ListNum> listNum(String pdJhid ,Integer pageNum, Integer pageSize);
+
 }

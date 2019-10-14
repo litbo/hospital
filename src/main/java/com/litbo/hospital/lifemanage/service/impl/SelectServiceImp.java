@@ -36,8 +36,14 @@ public class SelectServiceImp implements SelectService {
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
+//        List<SelectVO> listVo = new ArrayList<>();
+        SelectVO s1= new SelectVO();
         for (SgPd sgPd : list) {
-                adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
 
         // 临时集合
@@ -55,8 +61,8 @@ public class SelectServiceImp implements SelectService {
             }
 
         }
-        System.out.println("pdJhid"+pdJhid);
-        System.out.println("bmId"+bmId);
+//        System.out.println("pdJhid"+pdJhid);
+//        System.out.println("bmId"+bmId);
             adllDate = listTemp;
 
 
@@ -73,8 +79,14 @@ public class SelectServiceImp implements SelectService {
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
         for (SgPd sgPd : list) {
-            adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
+
+
 
         // 临时集合
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
@@ -99,7 +111,7 @@ public class SelectServiceImp implements SelectService {
             }
         }
         PageHelper.startPage(pageNum, pageSize);
-        System.out.println("盘亏"+adllDate2);
+//        System.out.println("盘亏"+adllDate2);
 
         return new PageInfo<>(adllDate2);//返回
     }
@@ -122,9 +134,12 @@ public class SelectServiceImp implements SelectService {
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
         for (SgPd sgPd : list) {
-            adllDate.add(selectMapper.listAllDate(sgPd.getPdScanId()));
+            System.out.println(sgPd.getPdScanId());
+            List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
+            for (SelectVO selectVO :listVo){
+                adllDate.add(selectVO);
+            }
         }
-
         // 临时集合
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
         List<SelectVO> listTemp2 = new ArrayList<SelectVO>();//盘盈
@@ -144,7 +159,7 @@ public class SelectServiceImp implements SelectService {
         PageHelper.startPage(pageNum,pageSize);
         adllDate = listTemp;
 
-        System.out.println("盘盈"+listTemp2);
+//        System.out.println("盘盈"+listTemp2);
 
         return new PageInfo<>(listTemp2);
     }
@@ -177,7 +192,7 @@ public class SelectServiceImp implements SelectService {
 
 
     public PageInfo<ListNum> listNum(String pdJhid ,Integer pageNum, Integer pageSize){
-        ListNum getNum = selectMapper.getListNum();
+        ListNum getNum = selectMapper.getListNum(pdJhid);
         System.out.println(getNum);
         PageHelper.startPage(pageNum,pageSize);
 

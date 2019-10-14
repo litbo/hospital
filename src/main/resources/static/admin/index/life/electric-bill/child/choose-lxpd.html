@@ -73,8 +73,15 @@
             }
             ,bindAction: '#startUploadFile'
             ,done: function(res){
+                layui.layer.alert('保存成功!');
                 console.log(res)
             }
+            ,error: function(){
+                layui.layer.alert('保存失败!');
+            }
+
+
+
         });
 
         //监听提交
