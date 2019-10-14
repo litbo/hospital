@@ -92,9 +92,9 @@
                 filter: "select",
                 select: [
                     {
-
+                        ids: "bmName",
                         text: "bmName",
-                        url: "/supervise/bmgl/listBm"
+                        url: "/supervise/bmgl/listDelXks"
                     }
                 ]}
         },
@@ -127,8 +127,7 @@
                 reSet: {
                     url: "/level/show/selectLevelByCon",
                     type: "search",
-                    data: ["startSTime","bmSName", "eqSName","searchLevel"],     //查询框的name
-                    where: {}
+                    data: ["startSTime","bmSName", "eqSName","searchLevel"]
                 }
             }
         }
