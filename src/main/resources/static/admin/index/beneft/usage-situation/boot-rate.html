@@ -73,17 +73,17 @@
             }else{
                 var type =$('#bmSName option:selected').val();//选中的值
                 console.log("选中的值："+type)
-                $.get("/maintenance/seeAllType.do?type="+type,function(data,status){
-
+                $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){
+                     console.log(data)
                     var eqSName = data.data;
-                    console.log("从后端获得的数据："+eqSName);
+                    // console.log("从后端获得的数据："+eqSName);
 
                     // 将数据分割：
-                    eqSName = eqSName.toString().split(',');
+                    // eqSName = eqSName.toString().split(',');
 
-                    $("#project").empty()
+                    $("#eqSName").empty()
                     for(var i in eqSName){
-                        $("#project").append("<option value=\""+eqSName[i]+"\">"+eqSName[i]+"</option>")
+                        $("#eqSName").append("<option value=\""+eqSName[i].eqName+"\">"+eqSName[i].eqName+"</option>")
                     }
                     layui.form.render("select");
                 });
