@@ -2,6 +2,9 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipm
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.DeleteHtsByIdsVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.DeviceparameterDAO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqInfoVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.TD;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.ApprovedWorkingHours;
@@ -13,6 +16,7 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipme
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.EqOvertimeTabService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import com.litbo.hospital.result.Result;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
@@ -38,6 +42,8 @@ public class DeviceparameterController {
     private EqOvertimeTabService eqOvertimeTabService;
     @Autowired
     private ApprovedWorkingHoursService approvedWorkingHoursService;
+    @Autowired
+    private DeviceparameterDAO dao;
     /**
      * 显示设备联网信息
      * @param pageSize
@@ -52,6 +58,12 @@ public class DeviceparameterController {
         /**
          * 排除前端信息传递空字符串的影响
          */
+        if(StringUtils.isBlank(searchVO.getMachineNumber())){
+            searchVO.setMachineNumber(null);
+        }
+        if(StringUtils.isBlank(searchVO.getEqZcbh())){
+            searchVO.setEqZcbh(null);
+        }
         if (searchVO.getBmId() != null){
             if ("".equals(searchVO.getBmId())){
                 searchVO.setBmId(null);
@@ -83,6 +95,16 @@ public class DeviceparameterController {
     public Result showOne(EqMacVO eqMacVO){
         DeviceparameterVO deviceparameterVO = service.showOne(eqMacVO);
         return Result.success(deviceparameterVO);
+    }
+
+    @RequestMapping("/deleByLwyId")
+    public Result showOne(@RequestBody DeleteHtsByIdsVO vo){
+        String[] ids = vo.getIds();
+        for (int i = 0; i < ids.length; i++) {
+            dao.deleteLwxByLwxBh(ids[i]);
+            dao.deletLwxByLwxBh2(ids[i]);
+        }
+        return Result.success();
     }
 
 

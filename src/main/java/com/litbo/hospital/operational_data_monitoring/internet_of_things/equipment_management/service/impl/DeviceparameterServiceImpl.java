@@ -9,8 +9,11 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.*;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.DeviceparameterService;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -33,11 +36,20 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
     @Autowired
     private ApprovedWorkingHoursDAO approvedWorkingHoursDAO;
 
-
     @Override
     public PageInfo showEqNetWork(Integer pageNum, Integer pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(dao.selectAll(searchVO));
+        List<DeviceparameterVO> vos = dao.selectAll(searchVO);
+        vos.forEach(item->{
+            if(StringUtils.isBlank(item.getEqGg())){
+                item.setEqGg("");
+            }
+            if(StringUtils.isBlank(item.getEqXh())){
+                item.setEqXh("");
+            }
+            item.setEqGgXh(item.getEqGg()+" "+item.getEqXh());
+        });
+        return new PageInfo(vos);
     }
 
 
@@ -117,7 +129,7 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
         EqMacTab eqMacTab = new EqMacTab();
         eqMacTab.setMacid(deviceparameterVO.getMacID());
         eqMacTab.setEquid(deviceparameterVO.getEqId());
-        eqMacTab.setMacip(deviceparameterVO.getEndPointIP());
+        eqMacTab.setMacip(deviceparameterVO.getEndPointIp());
         eqMacTab.setPmacid(deviceparameterVO.getPmacid());
         eqMacTab.setMacrule(deviceparameterVO.getMacrule());
         eqMacTab.setHasworkbox(deviceparameterVO.getHasworkbox());

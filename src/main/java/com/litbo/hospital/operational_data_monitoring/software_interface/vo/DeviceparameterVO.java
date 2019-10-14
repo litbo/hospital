@@ -14,7 +14,7 @@ public class DeviceparameterVO {
     /**资产编号*/
     private String deviceCode;
     /**终端ip*/
-    private String endPointIP;
+    private String endPointIp;
     /**设备名称*/
     private String eqName;
     /**设备编号*/
@@ -25,6 +25,7 @@ public class DeviceparameterVO {
     private String eqGg;
     /**设备型号*/
     private String eqXh;
+    private String eqGgXh;
     /**有无pacs终端*/
     private String haspacs;
     /**有无工作量记录*/
@@ -45,4 +46,9 @@ public class DeviceparameterVO {
     private String bmName;
     /**设备id*/
     private String eqId;
+    /*终端编号*/
+    private String MachineNumber;
+    /*联网仪IP*/
+
+
 }
