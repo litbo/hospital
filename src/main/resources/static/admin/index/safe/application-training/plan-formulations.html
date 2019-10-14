@@ -46,6 +46,7 @@
                         class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="eqName" disabled id="eqName" class="layui-input col-sm-7">
+                    <input type="hidden" id="eqId">
                     <button class="layui-btn col-sm-2" style="margin: 0;margin-right: 1px"
                             id="selectEmp" lay-filter="sub">选择
                     </button>
@@ -57,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">院内编码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqZcbh" id="eqZcbh" autocomplete="" class="layui-input" disabled>
+                    <input type="text"  id="eqZcbh" autocomplete="" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -106,7 +107,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">分类编码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqSbbh" id="eqSbbh" class="layui-input" disabled>
+                    <input type="text"  id="eqSbbh" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -155,10 +156,12 @@
 </div>
 
 <script>
+    var formData={};
     var formData2={};
     $('#put').on('click', function () {
         $("#eqZcbh").val(formData2.radio[0]["eqZcbh"]);
         $("#eqSbbh").val(formData2.radio[0]["eqSbbh"]);
+        $("#eqId").val(formData2.radio[0]["eqId"]);
     });
     renderMod = {
         bind: {
@@ -175,6 +178,16 @@
                     func:function(res){
                         console.log(123);
                     }
+                },
+                {
+                    elem: "#selectEmps",
+                    // cb: "/lifeManage/listHtBiaotou",
+                    cb: "/px/getBmBt",
+                    // db: "/cs/listScs",
+                    db: "/px/getYypxKsNr",
+                    name: "dtdt",
+                    key: "radio",
+                    data: formData
                 }
 
             ]
@@ -206,30 +219,38 @@
             ],
             submit: {
                 before: function (param) {
+                    var a=$("#eqId").val();
+                    var b=$("#eqZcbh").val();
+                    var c=$("#eqSbbh").val();
                     var arr=[];
                     $("#sa input:checkbox[name='pxnrlb']:checked").each(function(i){
                         arr[i]=$(this).val();
-
                     });
                     console.log(arr);
                     arr.join(',');
                     return param = {
-                        1: arr.join(',')
+                        1: arr.join(','),
+                        2: a,
+                        3: b,
+                        4: c
                     };
                 },
                 form: {
-                    url: "/Jh/jhAdd",
+                    url: "/px/addYypxjh",
                     type: "POST",
-                    data: ["jhName", "zbdw", "jhKstime", "jhJstime", "jhPxlx", "jhPxxz", "jhPxnrlb", "jhSblx", "userId",
-                        "pxZjr", "pxAddr", "pxNr"],
+                    data: ["eqName",  "pxks", "pxfs", "kstime", "jstime", "pxbh",
+                        "pxlx","pxnr"],
                     param: {
-                        1: "pxnrlb"
+                        1: "pxnrlb",
+                        2: "eqId",
+                        3: "eqZcbh",
+                        4: "eqSbbh"
                     },
                     success: function (res) {
                         window.location.href = "/admin/index/safe/application-training/plan-query.html"
                     },
                     error: function (r) {
-                        // xonsole.log(r);
+                        layer.alert("error");
                     }
                 }
             }

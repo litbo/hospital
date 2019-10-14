@@ -20,7 +20,7 @@ public interface PxDao {
     @Select("SELECT y.id,e.eq_pm_name,y.pxlx,y.pxfs,s.bm_name," +
             "y.kstime,y.jstime FROM jh_yypx AS y " +
             "INNER JOIN s_bm AS s ON y.ks_id = s.bm_id " +
-            "INNER JOIN eq_info AS e ON y.eq_id = e.e.eq_pm_id")
+            "INNER JOIN eq_pm AS e ON y.eq_id = e.eq_pm_id")
     List<ListYyVo> findAllYyJh();
 
     @Insert("INSERT INTO jh_zd (jh_name,zbdw,jh_kstime,jh_jstime,jh_pxlx,\n" +
