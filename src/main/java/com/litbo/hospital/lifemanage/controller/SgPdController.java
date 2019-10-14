@@ -40,7 +40,7 @@ public class SgPdController {
                 SgPdVO sgPdVO;
                 byte[] bytes = multipartFile.getBytes();
                 String s = new String(bytes, 0, bytes.length);
-                System.out.println(s);
+//                System.out.println(s);
                 sgPdVO = JSON.parseObject(s, SgPdVO.class);
                 sgPdService.insertPdId(sgPdVO,pdJhid);
                 try{
@@ -66,7 +66,7 @@ public class SgPdController {
                                        @RequestParam("bmId") String bmId){
 
 
-        System.out.println("88888888888");
+//        System.out.println("88888888888");
         sgPdService.insetStatus(pdJhid,bmId);
 
         return Result.success();

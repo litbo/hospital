@@ -129,7 +129,7 @@ public class SgPlanServiceImpl implements SgPlanService {
 
                   if  (listNum==null){
                      List<SelectVO> adllDate3 = selectMapper.listCheckDate(sg.getBmId());
-                     System.out.println(adllDate3.size());
+//                     System.out.println(adllDate3.size());
                      sgList = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
                              sg.getPlanDate(),adllDate3.size(), 0,
                              0,adllDate3.size());

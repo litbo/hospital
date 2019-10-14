@@ -55,7 +55,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
      */
     @Override
     public int insertPdId(SgPdVO record,String pdJhid) {
-        System.out.println(pdJhid+"盘点计划id");
+//        System.out.println(pdJhid+"盘点计划id");
         SgPd sgPd = new SgPd();
         sgPd.setPdJhid(pdJhid);
         BeanUtils.copyProperties(record, sgPd);
@@ -93,7 +93,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
         for (SgPd sgPd : list) {
-            System.out.println(sgPd.getPdScanId());
+//            System.out.println(sgPd.getPdScanId());
             List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
             for (SelectVO selectVO :listVo){
                 adllDate.add(selectVO);
@@ -148,7 +148,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
 //        System.out.println("3");
 
 
-        System.out.println("盘亏的"+adllDate2);
+//        System.out.println("盘亏的"+adllDate2);
         for (SelectVO sgPd :adllDate2){
             sgPdZt.setBmName(sgPd.getBmName());
             sgPdZt.setEqSbbh(sgPd.getEqSbbh());
