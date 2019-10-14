@@ -90,23 +90,36 @@ public class EqServiceImpl implements EqService {
         java.io.File file = new java.io.File(filePath);
         if(pics!=null){
             for (String pic : pics) {
-                tmpUrl = UUID.randomUUID().toString()+pic.substring(pic.lastIndexOf("."));
-                url = filePath+tmpUrl;
-                if(!file.exists()){
-                    file.mkdirs();
-                }
-                try {
-                    ChangeFile.changeFile(pic,url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if(totalUrl==null){
-                    totalUrl="/"+tmpUrl;
-                }else {
-                    totalUrl = totalUrl+","+"/"+tmpUrl;
+                if(pic.contains(":")){
+                    tmpUrl = UUID.randomUUID().toString()+pic.substring(pic.lastIndexOf("."));
+                    url = filePath+tmpUrl;
+                    if(!file.exists()){
+                        file.mkdirs();
+                    }
+                    try {
+                        ChangeFile.changeFile(pic,url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if(totalUrl==null){
+                        totalUrl="/"+tmpUrl;
+                    }else {
+                        totalUrl = totalUrl+","+"/"+tmpUrl;
+                    }
+
                 }
 
-            }
+                else{
+                    if(totalUrl==null){
+                        totalUrl=pic;
+                    }
+                    else{
+                        totalUrl=totalUrl+","+pic;
+                    }
+                }
+                }
+
+
 
         }
         return totalUrl;
@@ -219,6 +232,9 @@ public class EqServiceImpl implements EqService {
             for (Map<String, Object> map : mapList) {
                 /*SUser user = parseMap2Object(map, SUser.class);*/
                 EqInfoVo eqInfo = parseMap2Object(map,EqInfoVo.class);
+                if(eqInfo.getEqName().contains("*")){
+                    return 1;
+                }
                 if(eqInfo.getEqBmName()!=null){
                     eqInfo.setEqBmid(eqDao.getBmIdByName(eqInfo.getEqBmName()));
                 }
@@ -235,10 +251,9 @@ public class EqServiceImpl implements EqService {
                 eqInfo.setEqId(setLsh());
                 //设置拼音码
                 String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
-                if(pym!=""){
+                if(StringUtils.isNotBlank(pym)){
                     eqInfo.setEqPym(pym);
                 }
-
                if(eqDao.addEq(eqInfo)<=0){
                     return 1/0;
                }
@@ -354,18 +369,19 @@ public class EqServiceImpl implements EqService {
 
     @Override
     public Integer updateEq(EqInfoVo eqInfo) {
-        if(eqInfo.getEqName()!=null){
+        if(StringUtils.isNotBlank(eqInfo.getEqName())){
             String pym =  WordToPinYin.toPinYin(eqInfo.getEqName());
             eqInfo.setEqPym(pym);
         }
 
         if(eqInfo.getMpzp()!=null)
             eqInfo.setEqMpzp(setPic(eqInfo.getMpzp()));
+
         if(eqInfo.getSbzp()!=null)
             eqInfo.setEqSbzp(setPic(eqInfo.getSbzp()));
-        if(new java.io.File(System.getProperty("user.dir")+"/tmp/").exists())
+      /*  if(new java.io.File(System.getProperty("user.dir")+"/tmp/").exists())
             ChangeFile.deleteDir(System.getProperty("user.dir")+"/tmp/");
-
+*/
         return eqDao.updateEq(eqInfo);
     }
 

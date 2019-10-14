@@ -35,27 +35,17 @@ public class BmServiceImpl implements BmService {
     public PageInfo getBmList(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<SBm> date = bmDao.getBmList();
+        date.removeIf(vo->"0100000000".equals(vo.getBmId())||
+        "0200000000".equals(vo.getBmId())||
+        "0300000000".equals(vo.getBmId())||
+        "0101000000".equals(vo.getBmId())||
+        "0201000000".equals(vo.getBmId())||
+        "0202000000".equals(vo.getBmId())||
+        "0203000000".equals(vo.getBmId())||
+        "0301000000".equals(vo.getBmId())||
+        "0302000000".equals(vo.getBmId())||
+        "0303000000".equals(vo.getBmId()));
 
-        Iterator<SBm> it = date.iterator();
-        while(it.hasNext()) {
-            SBm vo =  it.next();
-            if(
-                    "0100000000".equals(vo.getBmId())||
-                            "0200000000".equals(vo.getBmId())||
-                            "0300000000".equals(vo.getBmId())||
-                            "0101000000".equals(vo.getBmId())||
-                            "0201000000".equals(vo.getBmId())||
-                            "0202000000".equals(vo.getBmId())||
-                            "0203000000".equals(vo.getBmId())||
-                            "0301000000".equals(vo.getBmId())||
-                            "0302000000".equals(vo.getBmId())||
-                            "0303000000".equals(vo.getBmId())
-                    ) {
-
-                it.remove();
-            }
-
-        }
         return new PageInfo(date);
     }
     @Override
@@ -625,7 +615,7 @@ public class BmServiceImpl implements BmService {
 
                 String obmId = row.getCell(0).getStringCellValue();
                 String bmName = row.getCell(1).getStringCellValue();
-                if("".equals(obmId)||"".equals(bmName))  return 1/0;
+                if(obmId.contains("*")||bmName.contains("*"))  return 1;
                 String userId = row.getCell(2).getStringCellValue();
                 String bmTel = row.getCell(3).getStringCellValue();
                 String bmAddr = row.getCell(4).getStringCellValue();
@@ -698,7 +688,8 @@ public class BmServiceImpl implements BmService {
     public List<SBm> listBmsByBmName(int pageNum, int pageSize,String bmName) {
         PageHelper.startPage(pageNum,pageSize);
         if(bmName==null||bmName.equals("")) return null;
-        return bmDao.listBmsByBmName(bmName);
+        List<SBm> bms = bmDao.listBmsByBmName(bmName);
+        return bms;
     }
 
     @Override

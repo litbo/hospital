@@ -269,7 +269,7 @@ public class EmpServiceImpl implements EmpService {
 
                 String userId = row.getCell(0).getStringCellValue();   emp.setUserId(userId);
                 String userXm = row.getCell(1).getStringCellValue();    emp.setUserXm(userXm);
-                if("".equals(userId)||"".equals(userXm))  return 1/0;
+                if(userId.contains("*")||userXm.contains("*"))  return 1;
                 String sfzh = row.getCell(2).getStringCellValue();      emp.setSfzh(sfzh);
                 String jtzz = row.getCell(3).getStringCellValue();      emp.setJtzz(jtzz);
                 String tel = row.getCell(4).getStringCellValue();      emp.setTel(tel);

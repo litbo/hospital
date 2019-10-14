@@ -14,7 +14,7 @@ public interface BmDao {
 
     @Select("select bm_id, bm_id as tgBmId, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm where bm_id!='0000000000'")
     List<SBm> getBmList();
-    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm" +
+    @Select("select bm_id, bm_name, user_id, bm_tel, bm_addr, wx_flag, p_bm_id,obm_id,xbm_flag from s_bm\n" +
             " where xbm_flag=1 and bm_id!='0000000000' ")
     List<SBm> getXBmList();
 
