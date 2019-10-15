@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class ListYyVo {
-    private Integer id;
+    private String id;
 
     private String eqName;
 

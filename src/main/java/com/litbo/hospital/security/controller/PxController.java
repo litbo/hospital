@@ -73,8 +73,8 @@ public class PxController {
 
     @RequestMapping("/addYypxjh")
     public Result addYypxjh(@RequestBody YyPxJhVo yyPxJhVo){
+        System.out.println(yyPxJhVo.toString());
        String str =  yyPxJhVo.getPxnrlb();
-       System.out.println(str);
        String[] strs = str.split(",");
         for(String s:strs){
             yyPxJhVo.setPxnrlb(s);
@@ -93,23 +93,4 @@ public class PxController {
         }
         return Result.success();
     }
-
-    //生成培训编号
-    @RequestMapping("/getNum")
-    public Result getNum(){
-        String num = PropertiesUtil.getPropertie("num");
-        if(num==null) {
-            num = "000001";
-            PropertiesUtil.setPropertie("num",num);
-        } else{
-            Integer tmpNum = Integer.parseInt(num);
-            tmpNum++;
-            num = new DecimalFormat("000000").format(tmpNum);
-            PropertiesUtil.setPropertie("num",num);
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String Pnum = sdf.format(new Date()).substring(2) + num;
-        return Result.success(Pnum);
-    }
-
 }
