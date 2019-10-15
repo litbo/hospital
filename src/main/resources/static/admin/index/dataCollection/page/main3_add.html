@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title></title>
+    <title>参数设置</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
 
@@ -17,9 +17,6 @@
     <style>
         .layui-form-item{
             margin-top:35px
-        }
-        span{
-            color:#f10214;
         }
         .layui-form-label{
             width:130px;
@@ -42,7 +39,7 @@
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">工作模式</label>
                 <div class="layui-input-block"  >
-                    <select name="eqName" lay-verify="required" lay-search="" >
+                    <select name="inspectType" lay-verify="required" lay-search="" >
                         <option selected>电流</option>
                         <option >距离</option>
                         <option >图像</option>
@@ -56,67 +53,67 @@
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">启动电流</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                      <input type="text" disabled class="layui-input col-sm-1" placeholder="秒" >
+                    <input type="text" name="startElectic" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                      <input type="text" disabled class="layui-input col-sm-2" placeholder="秒" >
                 </div>
             </div>
 
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">接近距离</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="厘米" >
+                    <input type="text" name="inDistance" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="厘米" >
                 </div>
             </div>
 
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">图像启动</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="流明" >
+                    <input type="text" name="imageStart" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="流明" >
                 </div>
             </div>
 
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">重量启动</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="千克" >
+                    <input type="text" name="weightStart" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="千克" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">光电计数比例</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="%" >
+                    <input type="text" name="pECounting" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="%" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">心跳包间隔</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="秒" >
+                    <input type="text" name="heartTime" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="秒" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">维修预警时长</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="小时" >
+                    <input type="text" name="repairRemind" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="小时" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">待机功率</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="千瓦" >
+                    <input type="text" name="usingNum" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="千瓦" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">用电电压</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="秒" >
+                    <input type="text" name="usingNum" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="秒" >
 
                 </div>
 
@@ -141,44 +138,44 @@
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">保持时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="秒" >
+                    <input type="text" name="keepTime" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="秒" >
                 </div>
 
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">结束电流</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="秒" >
+                    <input type="text" name="endElectic" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="秒" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">远离距离</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="厘米" >
+                    <input type="text" name="outDistance" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="厘米" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
-                <label class="layui-form-label">图像结果</label>
+                <label class="layui-form-label">图像结束</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="流明" >
+                    <input type="text" name="imageEnd" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="流明" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">重量结束</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="千克" >
+                    <input type="text" name="weightEnd" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="千克" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">误差率</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="%" >
+                    <input type="text" name="usingNum" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="%" >
                 </div>
             </div>
 
@@ -186,31 +183,31 @@
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">数据包间隔</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="秒" >
+                    <input type="text" name="repeatInterval" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="秒" >
                 </div>
             </div>
 
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">保养预警时长</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="小时" >
+                    <input type="text" name="maintainRemind" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="小时" >
                 </div>
             </div>
 
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">工作功率</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="千瓦" >
+                    <input type="text" name="usingNum" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="千瓦" >
                 </div>
             </div>
             <div class="layui-form-item col-sm-12">
                 <label class="layui-form-label">最大电流</label>
                 <div class="layui-input-block">
-                    <input type="text" name="usingNum" class="layui-input col-sm-11" autocomplete="off"  lay-verify="number">
-                    <input type="text" disabled class="layui-input col-sm-1" placeholder="秒" >
+                    <input type="text" name="usingNum" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" disabled class="layui-input col-sm-2" placeholder="秒" >
                 </div>
             </div>
 
