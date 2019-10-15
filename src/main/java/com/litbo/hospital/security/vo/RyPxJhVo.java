@@ -2,6 +2,7 @@ package com.litbo.hospital.security.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.junit.Test;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
 @Data
 public class RyPxJhVo {
 
-    private Integer id;
+    private String id;
 
     private String jhName;
 
@@ -17,13 +18,11 @@ public class RyPxJhVo {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String jhKstime;
+    private Date jhKstime;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String jhJstime;
-
-    private String jhPxbh;
+    private Date jhJstime;
 
     private String jhPxlx;
 
@@ -36,5 +35,9 @@ public class RyPxJhVo {
     private String pxAddr;
 
     private String pxNr;
+
+    private String jhPxbh;
+
+
 
 }

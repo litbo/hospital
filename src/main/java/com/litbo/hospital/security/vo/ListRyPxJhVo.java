@@ -7,35 +7,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Data
-public class YyPxJhVo {
+public class ListRyPxJhVo {
 
     private String id;
 
-    private String eqId;
+    private String jhName;
 
-    private String pxbh;
-
-    private String eqZcbh;
-
-    private String eqSbbh;
-
-    private String pxfs;
-
-    private String ksId;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date kstime;
+    private Date jhKstime;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date jstime;
+    private Date jhJstime;
 
-    private String pxlx;
+    private String jhPxlx;
 
-    private String pxnr;
+    private String jhPxxz;
 
-    private String pxnrlb;
+    private String userId;
 
+    private String pxAddr;
 
 }

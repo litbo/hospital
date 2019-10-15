@@ -7,8 +7,10 @@ import com.litbo.hospital.metering.util.PropertiesUtil;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.service.PxService;
 import com.litbo.hospital.security.vo.BmVo;
+import com.litbo.hospital.security.vo.KsFzVo;
 import com.litbo.hospital.security.vo.RyPxJhVo;
 import com.litbo.hospital.security.vo.YyPxJhVo;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.ibatis.executor.ResultExtractor;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 @RestController
 @RequestMapping("/px")
@@ -29,6 +28,10 @@ public class PxController {
     @Autowired
     private PxService pxService;
 
+    @RequestMapping("/findAllRyjh")
+    public Result findAllRyjh(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
+            return Result.success(pxService.findAllRyjh(pageNum,pageSize));
+    }
     @RequestMapping("/findAllYyjh")
     public Result findAllYyJh(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
         PageInfo pageInfo = pxService.findAllYyJh(pageNum,pageSize);
@@ -49,7 +52,7 @@ public class PxController {
     public Result getBmBt(){
         JSONArray myJson = null;
         String jsonMessage = "[{'type':'radio'},{field:'bmId',title:'科室id'}," +
-                "{field:'pxfs',title:'科室'}]";
+                "{field:'pxks',title:'科室'}]";
         myJson = JSONObject.parseArray(jsonMessage);
         return Result.success(myJson);
     }
@@ -64,22 +67,24 @@ public class PxController {
     @RequestMapping("/getYypxKsNr")
     public Result getYypxKsNr(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize){
-        List<BmVo> listBm = pxService.getYypxKsNr(pageNum,pageSize);
+        List<KsFzVo> listBm = pxService.getYypxKsNr(pageNum,pageSize);
         return Result.success(new PageInfo(listBm));
     }
 
     @RequestMapping("/addYypxjh")
-    public Result addYypxjh(@RequestBody YyPxJhVo yyPxJhVo,@RequestParam("pxnrlb") String[] pxnrlb){
-
-        System.out.println(yyPxJhVo);
-
+    public Result addYypxjh(@RequestBody YyPxJhVo yyPxJhVo){
+       String str =  yyPxJhVo.getPxnrlb();
+       System.out.println(str);
+       String[] strs = str.split(",");
+        for(String s:strs){
+            yyPxJhVo.setPxnrlb(s);
+            pxService.addYypxjh(yyPxJhVo);
+        }
         return Result.success();
     }
 
     @RequestMapping("/addRypxjh")
     public Result addRypxjh(@RequestBody RyPxJhVo ryPxJhVo){
-        System.out.println(ryPxJhVo.toString());
-        System.out.println(ryPxJhVo.getPxNr());
         String string = ryPxJhVo.getJhPxnrlb();
         String [] strs = string.split(",");
         for(String str:strs){
@@ -107,18 +112,4 @@ public class PxController {
         return Result.success(Pnum);
     }
 
-    @Test
-    public void test(){
-        List list = new ArrayList();
-        list.add("ssjla");
-        List list1 = new ArrayList();
-        list1.add("87979");
-        List l = new ArrayList();
-        l.add(list);
-        l.add(list1);
-        for(Object o:l){
-            System.out.println(o);
-        }
-        System.out.println(l);
-    }
 }

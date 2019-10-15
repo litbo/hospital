@@ -97,8 +97,8 @@
 </script>
 
 <script type="text/html" id="bars">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="">添加人员s</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxqs">详情s</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="">添加人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxqs">详情</a>
 </script>
 
 
@@ -164,7 +164,7 @@
                     , {field: 'jhJstime', title: '结束日期', minWidth: 150}
                     , {fixed: 'right', width: 180, align: 'center', toolbar: "#bars"}
                 ]],
-                url: "/Jh/jhList"
+                url: "/px/findAllRyjh"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -197,7 +197,7 @@
         ],
         reSet: {
             tid: "#tables",
-            url: "/Jh/jhList",
+            url: "/px//findAllYyjh",
             type: "search",
             data: ["jhName"]    //查询框的name
         }
