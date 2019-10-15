@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>合同查看</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+</head>
+<body  style="background-color: #f2f2f2;">
+
+
+<div class="layui-row">
+
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<script type="text/html" id="toolBar">
+    <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <select class="layui-input" name="htZt">
+                <option value="0">年</option>
+                <option value="1">月</option>
+                <option value="2">日</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htBianhao" placeholder="科室">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htYf" placeholder="名称">
+        </div>
+        <div class="layui-inline">
+            <input type="text" name="htQssj" class="layui-input" id="test1"
+                   placeholder="日期">
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm " style="background: #CC0033" lay-event="del" id="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+    </div>
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">编辑</a>
+</script>
+
+
+<script>
+    renderMod = {
+        formAction: {
+            date: [
+                {
+                    elem: "#test1",
+                    type: "date",
+                    format: 'yyyy-MM-dd',
+                    value: false,
+                    range: true
+                },
+            ]
+
+        },
+        addTable: {
+            table: {
+                // elem: "#table",
+                cols: [[ //表头
+                    {type: "checkbox"}
+                    , {field: 'htZt', title: '工作时长', sort: true,}
+                    , {field: 'htBianhao', title: '待机时长', sort: true}
+                    , {field: 'htYfName', title: '关机时长'}
+                    , {field: 'htCjje', title: '故障时长'}
+                    , {title: '操作', align: 'center', toolbar: '#bar'}
+                ]]
+                , url: "/lifeManage/selectAllHt"
+                // , reload: true
+                // , contentType: "application/json"
+                , method: "POST"
+                , page: true
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+
+                , done: function (obj) {
+                    tableFunc({
+                        toolFunc: [
+                            {
+                                title: "table1",
+                                event: 'edit',
+                                type: 2,
+                                content: './child/edit-examin.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["id"]
+                            },
+                            {
+                                send: {
+                                    id: "table",
+                                    filter: "table1",
+                                    name: "ids",
+                                    event: "del",
+                                    url: "/lifeManage/deleteHtsByPrimaryKey",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    par: "id",
+                                    reload: true
+                                },
+                                tool: "toolbar",
+                                event: "del"
+
+                            }
+                        ]
+                    })
+                }
+            }
+            , reSet: [
+                {
+                    url: "/lifeManage/selectAllHt",
+                    type: "reload",
+                    tid: "table",
+                    data: ["htZt", "htBianhao", "htYf", "htQssj", "htJssj"],
+                    method: "POST"
+
+                }
+            ]
+        }
+
+    };
+
+
+</script>
+
+
+</body>
+</html>
