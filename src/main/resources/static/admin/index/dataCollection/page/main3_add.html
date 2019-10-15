@@ -31,7 +31,7 @@
         <div class="layui-form-item col-sm-12">
             <label class="layui-form-label">设备编号</label>
             <div class="layui-input-block">
-                <input type="text" name="usingNum" class="layui-input col-sm-12" autocomplete="off"  lay-verify="number">
+                <input type="text" name="deviceCode" class="layui-input col-sm-12" autocomplete="off"  lay-verify="number">
             </div>
         </div>
 
@@ -133,7 +133,7 @@
     <div class="col-xs-12 col-sm-6 ">
 
         <div class="layui-form-item col-sm-12 ">
-            <input type="" style="border: 0;background-color: #ffffff" disabled class="layui-input-block">
+            <input type="" name="lwybh" id="lwybh" style="border: 0;background-color: #ffffff" disabled class="layui-input-block">
         </div>
         <div class="layui-form-item col-sm-12">
             <label class="layui-form-label">保持时间</label>
@@ -160,7 +160,7 @@
         <div class="layui-form-item col-sm-12">
             <label class="layui-form-label">图像结束</label>
             <div class="layui-input-block">
-                <input type="text" name="imageEnd" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
+                    <input type="text" name="imageEnd" class="layui-input col-sm-10" autocomplete="off"  lay-verify="number">
                 <input type="text" disabled class="layui-input col-sm-2" placeholder="流明" >
             </div>
         </div>
@@ -232,27 +232,38 @@
 </form>
 
 <script>
-    // $("#pdJhid").val($.getUrlParam("machineNumber"));
-    var aa = $.getUrlParam("machineNumber")
-    console.log(aa);
+    $("#lwybh").val($.getUrlParam("machineNumber"));
+    var lwybh = $.getUrlParam("machineNumber")
+    // console.log(aa);
+
     renderMod = {
         form:{
+            val:{
+                filter:"forms",
+
+                get:{
+                    url:"/deviceparameter/showOneLwxByLwyBh",
+                    type:"POST",
+                    data:{lwybh:lwybh},
+                    // dat:["deviceCode","inspectType","startElectic","inDistance","imageStart","weightStart","pECounting","heartTime","repairRemind","waitPower","voltage","maxCurrent","minCurrent","keepTime","endElectic","outDistance","imageEnd","weightEnd","errorRate","repeatInterval","maintainRemind","workPower","maxElectic"]
+                },
+            },
             submit:{
                 form:{
                     url:"/config/ratio/addUsing",
                     type:"POST",
                     data:["eqSbbh","eqName","usingNum","exitNum"],
-                    done:function(res){
-                        if(res.code === 0){
-                            layer.alert("提交成功",function () {
-                                var index = parent.layer.getFrameIndex(window.name);
-                                parent.layer.close(index); //再执行关闭
-                                parent.location.reload();
-                            })
-                        }else {
-                            layer.alert("编号重复")
-                        }
-                    }
+                    // done:function(res){
+                    //     if(res.code === 0){
+                    //         layer.alert("提交成功",function () {
+                    //             var index = parent.layer.getFrameIndex(window.name);
+                    //             parent.layer.close(index); //再执行关闭
+                    //             parent.location.reload();
+                    //         })
+                    //     }else {
+                    //         layer.alert("编号重复")
+                    //     }
+                    // }
                 }
             }
         }
