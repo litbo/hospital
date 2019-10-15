@@ -97,6 +97,9 @@ public class DeviceparameterController {
         return Result.success(deviceparameterVO);
     }
 
+
+
+
     @RequestMapping("/deleByLwyId")
     public Result showOne(@RequestBody DeleteHtsByIdsVO vo){
         String[] ids = vo.getIds();

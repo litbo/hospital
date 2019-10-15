@@ -19,6 +19,9 @@ public interface DeviceparameterDAO {
      * 1.查询设备参数设置表信息
      * @return
      */
+
+
+
     @Select( "<script>"+
             "SELECT\n" +
                     "\tb.eq_zcbh,\n" +

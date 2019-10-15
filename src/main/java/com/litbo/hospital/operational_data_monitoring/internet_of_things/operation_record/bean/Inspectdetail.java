@@ -12,6 +12,9 @@ import java.util.Date;
 @Data
 public class Inspectdetail {
 
+
+
+
     private Integer ID;
     /**终端编号*/
     private String machineNumber;

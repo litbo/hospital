@@ -32,6 +32,8 @@ public interface DeviceparameterService {
      */
     DeviceparameterVO showOne(EqMacVO eqMacVO);
 
+
+
     /**
      * 删除设备联网信息
      * @param searchVO

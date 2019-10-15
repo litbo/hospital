@@ -71,6 +71,8 @@ public class Deviceparameter {
 
     private String remark1;
 
+
+
     private String remark2;
 
     private String remark3;

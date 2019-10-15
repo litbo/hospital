@@ -25,6 +25,9 @@ import java.util.List;
  */
 @Service
 public class DeviceparameterServiceImpl implements DeviceparameterService {
+
+
+
     @Autowired
     private DeviceparameterDAO dao;
     @Autowired

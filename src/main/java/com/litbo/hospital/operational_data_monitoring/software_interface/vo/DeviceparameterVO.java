@@ -13,6 +13,8 @@ import java.util.Objects;
  */
 @Data
 public class DeviceparameterVO {
+
+
     /**资产编号*/
     private String deviceCode;
     /**终端ip*/
