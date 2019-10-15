@@ -108,10 +108,4 @@ public class Deviceparameter {
     private String qulityNum;
 
     private String errorRate;
-
-    private String machineNumber;
-    private String maintainStatus;
-    private String softVerChange;
-    private String hardCloseFlag;
-
 }

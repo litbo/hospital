@@ -32,8 +32,8 @@ public interface DeviceparameterDAO {
                     "\td.end_point_ip as endPointIp ,\n" +
                     "\ti.MachineNumber as  MachineNumber \n" +
                     "\tFROM\n" +
-                    "\tInspectDetail i\n" +
-                    "\tinner JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
+                    "\tInspectDetailBack i\n" +
+                    "\tleft JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
                     "\tleft JOIN eq_info b ON d.DeviceCode = b.eq_zcbh\n" +
                     "\tleft JOIN s_bm s ON b.eq_bmid = s.bm_id"+
             "<where>"+
