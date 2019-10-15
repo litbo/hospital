@@ -4,14 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
-import com.litbo.hospital.lifemanage.bean.ListNum;
-import com.litbo.hospital.lifemanage.bean.SelectVO;
-import com.litbo.hospital.lifemanage.bean.SgPd;
-import com.litbo.hospital.lifemanage.bean.SgPdZt;
+import com.litbo.hospital.lifemanage.bean.*;
+import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
 import com.litbo.hospital.lifemanage.service.SelectService;
+import com.litbo.hospital.lifemanage.service.SgCheckService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +26,8 @@ public class SelectServiceImp implements SelectService {
     private SelectMapper selectMapper;
     @Autowired
     private SgCheckMapper sgCheckMapper;
+    @Autowired
+    private SgCheckService sgCheckService;
     @Override
     public PageInfo<SelectVO> selectAll(@Param("pdJhid")String pdJhid,
                                         @Param("bmId") String bmId
@@ -106,7 +107,17 @@ public class SelectServiceImp implements SelectService {
 
         }
         adllDate = listTemp;
-        List<SelectVO> adllDate2 = selectMapper.listCheckDate(bmId);
+//        List<SelectVO> adllDate2 = selectMapper.listCheckDate(bmId);
+        List<SelectVO> adllDate2 = new ArrayList<>();
+//                selectMapper.listCheckDate(bmId);
+        String getAllBmName2 = selectMapper.getBmName(bmId); //对应planid下的部门
+        List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(pdJhid);
+        for (SgCheckVO s2:adllDate4){
+            SelectVO selectVO = new SelectVO(s2.getEqZcbh(),s2.getEqName(),getAllBmName2);
+            adllDate2.add(selectVO);
+        }
+
+
         System.out.println("addate2"+adllDate2);
         for(SelectVO a : adllDate){
             if(adllDate2.contains(a)){
@@ -121,7 +132,14 @@ public class SelectServiceImp implements SelectService {
 
     @Override
     public PageInfo<SelectVO> allList(String pdJhid, String bmId, Integer pageNum, Integer pageSize) {
-        List<SelectVO> adllDate3 = selectMapper.listCheckDate(bmId);
+        List<SelectVO> adllDate3 = new ArrayList<>();
+//                selectMapper.listCheckDate(bmId);
+        String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
+        List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(pdJhid);
+        for (SgCheckVO s1:adllDate4){
+            SelectVO selectVO = new SelectVO(s1.getEqZcbh(),s1.getEqName(),getAllBmName);
+            adllDate3.add(selectVO);
+        }
 
         PageHelper.startPage(pageNum, pageSize);
         System.out.println("盘点计划的"+adllDate3);

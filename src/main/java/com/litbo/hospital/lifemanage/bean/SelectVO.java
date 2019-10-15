@@ -6,6 +6,15 @@ public class SelectVO {
     private String eqName;
     private String bmName;
 
+    public SelectVO() {
+    }
+
+    public SelectVO(String eqSbbh, String eqName, String bmName) {
+        this.eqSbbh = eqSbbh;
+        this.eqName = eqName;
+        this.bmName = bmName;
+    }
+
     @Override
     public String toString() {
         return "SelectVO{" +

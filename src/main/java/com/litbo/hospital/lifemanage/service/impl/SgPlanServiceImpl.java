@@ -3,6 +3,7 @@ package com.litbo.hospital.lifemanage.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.*;
+import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
@@ -129,14 +130,28 @@ public class SgPlanServiceImpl implements SgPlanService {
             for (SgPlan sg:sgPlan){
                 System.out.println(sg.getPlanName());
                 listNum = selectMapper.getListNum(sg.getId());
-                List<SelectVO> adllDate3 = selectMapper.listCheckDate(sg.getBmId());
+//                List<SelectVO> adllDate3 = selectMapper.listCheckDate(sg.getBmId());
+
+
+
+                List<SelectVO> adllDate3 = new ArrayList<>();
+                String getAllBmName = selectMapper.getBmName(sg.getBmId()); //对应planid下的部门
+                List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(sg.getId());
+                System.out.println(adllDate4);
+                for (SgCheckVO s1:adllDate4){
+                    SelectVO selectVO = new SelectVO(s1.getEqZcbh(),s1.getEqName(),getAllBmName);
+                    adllDate3.add(selectVO);
+                }
+
+
+
                 List<SgPlanList> sgPlanLists2= new ArrayList<>();
                 if  (listNum ==null){
                       sgList.setAllNum(adllDate3.size());
                       SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
                              sg.getPlanDate(),adllDate3.size(), 0,
                              0,adllDate3.size());
-                    System.out.println("空"+sgList1);
+//                    System.out.println("空"+sgList1);
 
                      sgPlanLists2.add(sgList1);
                 }
@@ -146,10 +161,10 @@ public class SgPlanServiceImpl implements SgPlanService {
                              sg.getPlanDate(),adllDate3.size(), listNum.getYiPanNum(),
                              listNum.getPanYingNum(),listNum.getPanKuiNum());
                      sgPlanLists.add(sgList1);
-                     System.out.println("部位空"+sgList1);
+//                     System.out.println("部位空"+sgList1);
                  }
 
-                System.out.println("总共"+sgPlanLists);
+//                System.out.println("总共"+sgPlanLists);
             }
             PageHelper.startPage(pageNum, pageSize);
             return  new PageInfo(sgPlanLists);

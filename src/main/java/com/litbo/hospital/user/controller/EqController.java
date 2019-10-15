@@ -62,6 +62,7 @@ public class EqController {
     public Result addEq(@RequestBody EqInfoVo eqInfo) {
 
             if (es.addEq(eqInfo) > 0) {
+                
             return Result.success();
         }
         return Result.error();

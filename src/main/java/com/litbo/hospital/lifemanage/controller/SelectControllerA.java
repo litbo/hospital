@@ -1,5 +1,6 @@
 package com.litbo.hospital.lifemanage.controller;
 import com.litbo.hospital.lifemanage.service.SelectService;
+import com.litbo.hospital.lifemanage.service.SgCheckService;
 import com.litbo.hospital.result.Result;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public class SelectControllerA {
     @Autowired
     private SelectService selectService;
+
+
     @ResponseBody
     @RequestMapping("/existInfo") //已盘
     public Result existInfoController(@RequestParam("pdJhid")String pdJhid,
@@ -59,7 +62,9 @@ public class SelectControllerA {
             @RequestParam("pdJhid")String pdJhid,
             @RequestParam("pageNum")Integer pageNum,
             @RequestParam("pageSize")Integer pageSize
-    ){ return Result.success(selectService.findInfo(pdJhid,eqName,pageNum,pageSize)); }
+    ){
+        return Result.success(selectService.findInfo(pdJhid,eqName,pageNum,pageSize));
+    }
 
     @ResponseBody
     @RequestMapping("/findYipan") //查找已盘

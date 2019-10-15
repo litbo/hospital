@@ -8,6 +8,7 @@ import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
+import com.litbo.hospital.lifemanage.service.SgPdSeverice;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.user.service.EqService;
 import com.litbo.hospital.user.vo.EqInfoVo;
@@ -36,6 +37,8 @@ public class SgCheckController {
     SelectMapper selectMapper;
     @Autowired
     SgCheckMapper sgCheckMapper;
+    @Autowired
+    SgPdSeverice sgPdService;
     /**
      * 计划查询账实核对信息
      *
@@ -139,7 +142,7 @@ public class SgCheckController {
 
 //            List<SelectVO> adllDate3 = selectMapper.listCheckDate(eqInfo.getEqBmid());
 
-
+//            sgPdService.insetStatus(pdJhid,bmId);
             try{
                 String eqName = selectMapper.listBmName(eqInfo.getEqId());
                 SgPdZt sgPdZt = new SgPdZt();
