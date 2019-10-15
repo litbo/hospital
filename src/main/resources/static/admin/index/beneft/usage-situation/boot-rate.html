@@ -41,8 +41,7 @@
                         <input type="text" name="startSTime" class="layui-input" id="test6" placeholder="点击选择日期" readonly="readonly">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-
-                        <select name="bmSName" id="bmSName" lay-filter="select" lay-search="" lay-verify="required" onchange="teset(this.value)">
+                        <select name="select" id="select"  lay-filter="select" lay-search="" lay-verify="required" onchange="teset(this.value)">
                             <option value="">请选择科室</option>
                         </select>
                     </div>
@@ -52,7 +51,7 @@
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <button class="layui-btn" type="button" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
+                        <button class="layui-btn" type="button" data-type="search"><i class="layui-icon layui-icon-search" onclick="c()"></i>查询</button>
                     </div>
                     <a class="layui-btn" style="float: right;margin-right: 30%" lay-event="king">排名变化</a>
                 </form>
@@ -62,36 +61,41 @@
     </div>
 </script>
 <script>
-    layui.use(['layer', 'jquery', 'form'], function () {
-        var layer = layui.layer,
-            $ = layui.jquery,
-            form = layui.form;
-
-        form.on('select(select)', function(data){
-            if(data.value == 1){
-                alert("123")
-            }else{
-                var type =$('#bmSName option:selected').val();//选中的值
-                console.log("选中的值："+type)
-                $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){
-                     console.log(data)
-                    var eqSName = data.data;
-                    // console.log("从后端获得的数据："+eqSName);
-
-                    // 将数据分割：
-                    // eqSName = eqSName.toString().split(',');
-
-                    $("#eqSName").empty()
-                    for(var i in eqSName){
-                        $("#eqSName").append("<option value=\""+eqSName[i].eqName+"\">"+eqSName[i].eqName+"</option>")
-                    }
-                    layui.form.render("select");
-                });
-            }
+    function b(){
+        layui.use(['layer', 'jquery', 'form'], function () {
+            var layer = layui.layer,
+                $ = layui.jquery,
+                form = layui.form;
+            form.on('select(select)', function(data){
+                if(data.value == 1){
+                    alert(" 123")
+                }else{
+                    var type =$('#select option:selected').val();//选中的值
+                    console.log("选中的值："+type)
+                    $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){
+                        console.log(data)
+                        var eqSName = data.data;
+                        // console.log("从后端获得的数据："+eqSName);
+                        // 将数据分割：
+                        // eqSName = eqSName.toString().split(',');
+                        $("#eqSName").empty()
+                        for(var i in eqSName){
+                            $("#eqSName").append("<option value=\""+eqSName[i].eqName+"\">"+eqSName[i].eqName+"</option>")
+                        }
+                        layui.form.render("select");
+                    });
+                }
+            });
         });
-    });
+    }
+    b();
+    function c() {
+        alert('133')
+        console.log('112542445245')
+    }
 </script>
 <script>
+    var a,b;
     renderMod = {
         formAction: {
             date: {
@@ -152,11 +156,10 @@
             reSet: {
                 url: "/kpi/open/selectOpenByCon",
                 type: "search",
-                data: ["startSTime", "bmSName", "eqSName"],     //查询框的name
+                data: ["startSTime", "select", "eqSName"],     //查询框的name
                 where: {}
             }
         }
-
     }
 </script>
 

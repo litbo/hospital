@@ -11,6 +11,7 @@ import lombok.Data;
  */
 @Data
 public class SearchVO {
+    private String MachineNumber;
     /**资产编号*/
     private String eqZcbh;
 
@@ -25,5 +26,7 @@ public class SearchVO {
 
     /**联网仪编号*/
     private String macid;
+    /**联网仪编号*/
+    private String deviceCode;
 
 }

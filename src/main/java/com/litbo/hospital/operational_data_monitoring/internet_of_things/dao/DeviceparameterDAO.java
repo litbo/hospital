@@ -19,29 +19,37 @@ public interface DeviceparameterDAO {
      * 1.查询设备参数设置表信息
      * @return
      */
-    @Select({ "<script>",
+    @Select( "<script>"+
             "SELECT\n" +
-                    "\tb.eq_sbbh,\n" +
+                    "\tb.eq_zcbh,\n" +
                     "\tb.eq_name,\n" +
                     "\tb.eq_gg,\n" +
                     "\tb.eq_xh,\n" +
-                    "\tc.MacID,\n" +
-                    "\ta.EndPointIP\n" +
+                    "\ts.bm_name,\n" +
+                    "\td.end_point_ip as endPointIp ,\n" +
+                    "\ti.MachineNumber as  MachineNumber \n" +
                     "\tFROM\n" +
-                    "\tDeviceParameter a\n" +
-                    "\tinner JOIN eq_info b ON a.DeviceCode = b.eq_sbbh\n" +
-                    "\tinner JOIN eq_mac_tab c ON b.eq_id = c.EquID\n" +
-                    "\tinner JOIN s_bm d ON b.eq_bmid = d.bm_id",
-            "<where>",
-            "<if test='macid != null'>","and c.MacID = #{macid}","</if>",
-            "<if test='bmId != null'>","and b.eq_bmid = #{bmId}","</if>",
-            "<if test='eqSbbh != null'>","and b.eq_sbbh = #{eqSbbh}","</if>",
-            "</where>"
-            ,"order by  a.EndPointIP desc,b.eq_sbbh DESC"
-            ,"</script>"})
+                    "\tInspectDetailBack i\n" +
+                    "\tleft JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
+                    "\tleft JOIN eq_info b ON d.DeviceCode = b.eq_zcbh\n" +
+                    "\tleft JOIN s_bm s ON b.eq_bmid = s.bm_id"+
+            "<where>"+
+            "<if test='MachineNumber != null'>"+
+            " i.MachineNumber like CONCAT('%',#{MachineNumber},'%')" +
+            "</if>"+
+            "<if test='bmId != null'>"+
+            "and b.eq_bmid = #{bmId}"+
+            "</if>"+
+            "<if test='eqZcbh != null'>"+
+            "and b.eq_zcbh like  CONCAT('%',#{eqZcbh},'%') "+"</if>"+
+            "</where>"+
+            " order by b.eq_zcbh DESC"+
+            "</script>")
     List<DeviceparameterVO> selectAll(SearchVO searchVO);
-
-
+   @Delete("delete from InspectDetailBack where MachineNumber=#{lwxbh}")
+   int deleteLwxByLwxBh(String lwxbh);
+    @Delete("delete from DeviceParameter where MachineNumber=#{lwxbh}")
+    int deletLwxByLwxBh2(String lwxbh);
     @Select({ "<script>",
             "SELECT\n" +
                     "\tc.MacID,\n" +

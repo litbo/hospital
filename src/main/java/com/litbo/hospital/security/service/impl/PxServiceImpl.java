@@ -24,11 +24,21 @@ public class PxServiceImpl implements PxService {
         return new PageInfo(pxDao.getYypxNr());
     }
 
-    public Integer addYypxjh(RyPxJhVo ryPxJhVo){
-        return pxDao.addYypxjh(ryPxJhVo);
-    }
-   public List<BmVo> getYypxKsNr(int pageNum,int pageSize){
+    public PageInfo findAllYyJh(int pageNum,int pageSize){
         PageHelper.startPage(pageNum,pageSize);
-        return pxDao.getYypxKsNr();
-   }
+        return new PageInfo(pxDao.findAllYyJh());
+    }
+
+    public Integer addRypxjh(RyPxJhVo ryPxJhVo){
+        return pxDao.addRypxjh(ryPxJhVo);
+    }
+
+    public Integer addYypxjh(YyPxJhVo yyPxJhVo){
+        return pxDao.addYypxjh(yyPxJhVo);
+    }
+    public List<BmVo> getYypxKsNr(int pageNum,int pageSize){
+            PageHelper.startPage(pageNum,pageSize);
+            return pxDao.getYypxKsNr();
+    }
+
 }

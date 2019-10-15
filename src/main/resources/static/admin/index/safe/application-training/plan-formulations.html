@@ -45,16 +45,20 @@
                 <label class="layui-form-label">设备选择<span
                         class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqName" disabled id="eqName" class="layui-input col-sm-10">
-                    <button class="layui-btn col-sm-2" style="margin: 0"
+                    <input type="text" name="eqName" disabled id="eqName" class="layui-input col-sm-7">
+                    <input type="hidden" id="eqId">
+                    <button class="layui-btn col-sm-2" style="margin: 0;margin-right: 1px"
                             id="selectEmp" lay-filter="sub">选择
+                    </button>
+                    <button class="layui-btn col-sm-2" style="margin: 0"
+                            id="put" lay-filter="sub">导入信息
                     </button>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">院内编码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqZcbh" autocomplete="" class="layui-input" disabled>
+                    <input type="text"  id="eqZcbh" autocomplete="" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -96,14 +100,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训编号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pxbh" class="layui-input" disabled>
+                    <input type="text" name="pxbh" id="pxbh" class="layui-input" disabled>
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">分类编码<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqSbbh" class="layui-input" disabled>
+                    <input type="text"  id="eqSbbh" class="layui-input" disabled>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -118,7 +122,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容类别<span class="sign">*</span></label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" id="sa">
                     <input type="checkbox" name="pxnrlb" value="节能减排" title="节能减排">
                     <input type="checkbox" name="pxnrlb" value="岗位职责" title="岗位职责" checked>
                     <input type="checkbox" name="pxnrlb" value="临床使用安全" title="临床使用安全">
@@ -152,25 +156,53 @@
 </div>
 
 <script>
+    var formData={};
     var formData2={};
+    $('#put').on('click', function () {
+        $("#eqZcbh").val(formData2.radio[0]["eqZcbh"]);
+        $("#eqSbbh").val(formData2.radio[0]["eqSbbh"]);
+        $("#eqId").val(formData2.radio[0]["eqId"]);
+    });
     renderMod = {
         bind: {
             selectItem: [
                 {
                     elem: "#selectEmp",
-                    cb: "/lifeManage/listHtBiaotou",
-                    db: "/cs/listScs",
+                    // cb: "/lifeManage/listHtBiaotou",
+                    cb: "/px/getYypxBt",
+                    // db: "/cs/listScs",
+                    db: "/px/getYypxNr",
                     name: "dtdt",
                     key: "radio",
                     data: formData2,
-                    func:function(){
-                        console.log(formData2);
+                    func:function(res){
+                        console.log(123);
                     }
+                },
+                {
+                    elem: "#selectEmps",
+                    // cb: "/lifeManage/listHtBiaotou",
+                    cb: "/px/getBmBt",
+                    // db: "/cs/listScs",
+                    db: "/px/getYypxKsNr",
+                    name: "dtdt",
+                    key: "radio",
+                    data: formData
                 }
 
             ]
         },
         form: {
+            val: {
+                filter: "forms",
+                get: {
+                    url: "/px/getNum",
+                    type: "POST"
+                },
+                func: function (res) {
+                    $("#pxbh").val(res);
+                }
+            },
             date: [
                 {
                     elem: "#date1",
@@ -187,35 +219,39 @@
             ],
             submit: {
                 before: function (param) {
+                    var a=$("#eqId").val();
+                    var b=$("#eqZcbh").val();
+                    var c=$("#eqSbbh").val();
                     var arr=[];
-                    var arrs=[];
-                    $("#sa input:checkbox[name='brJjdy']:checked").each(function(i){
+                    $("#sa input:checkbox[name='pxnrlb']:checked").each(function(i){
                         arr[i]=$(this).val();
-                    });
-                    $("#sas input:checkbox[name='brBqgc']:checked").each(function(i){
-                        arrs[i]=$(this).val();
                     });
                     console.log(arr);
                     arr.join(',');
-                    arrs.join(',');
                     return param = {
                         1: arr.join(','),
-                        2: arrs.join(',')
+                        2: a,
+                        3: b,
+                        4: c
                     };
-
-
                 },
                 form: {
-                    url: "/Jh/jhAdd",
+                    url: "/px/addYypxjh",
                     type: "POST",
-                    data: ["jhName", "zbdw", "jhKstime", "jhJstime", "jhPxlx", "jhPxxz", "jhPxnrlb", "jhSblx", "userId",
-                        "pxZjr", "pxAddr", "pxNr"],
+                    data: ["eqName",  "pxks", "pxfs", "kstime", "jstime", "pxbh",
+                        "pxlx","pxnr"],
+                    param: {
+                        1: "pxnrlb",
+                        2: "eqId",
+                        3: "eqZcbh",
+                        4: "eqSbbh"
+                    },
                     success: function (res) {
                         window.location.href = "/admin/index/safe/application-training/plan-query.html"
+                    },
+                    error: function (r) {
+                        layer.alert("error");
                     }
-                    /*error: function (r) {
-                        // xonsole.log(r);
-                    }*/
                 }
             }
         }
