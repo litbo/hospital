@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class YyPxJhVo {
 
-    private Integer id;
+    private String id;
 
     private String eqId;
 
@@ -25,15 +25,17 @@ public class YyPxJhVo {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String kstime;
+    private Date kstime;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String jstime;
+    private Date jstime;
 
     private String pxlx;
 
     private String pxnr;
+
+    private String pxnrlb;
 
 
 }

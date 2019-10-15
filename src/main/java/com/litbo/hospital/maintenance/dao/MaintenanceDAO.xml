@@ -22,6 +22,7 @@
     <result column="check_time" jdbcType="VARCHAR" property="checkTime" />
     <result column="department_receipt" jdbcType="VARCHAR" property="departmentReceipt" />
     <result column="date_of_completion" jdbcType="VARCHAR" property="dateOfCompletion" />
+    <result column="first_time" jdbcType="VARCHAR" property="firstTime" />
   </resultMap>
   <insert id="insert" parameterType="com.litbo.hospital.maintenance.pojo.Maintenance">
     insert into hospital..maintenance (risk_value, formulator,
@@ -30,14 +31,16 @@
       project_list, risk_level, eq_id, 
       "name", maintenance_results, instrument_status, 
       description, maintenance_personnel, check_time, 
-      department_receipt, date_of_completion)
+      department_receipt, date_of_completion, first_time
+      )
     values (#{riskValue,jdbcType=VARCHAR}, #{formulator,jdbcType=VARCHAR},
       #{reviewer,jdbcType=VARCHAR}, #{formTime,jdbcType=VARCHAR}, #{cycleRule,jdbcType=VARCHAR}, 
       #{cycle,jdbcType=VARCHAR}, #{planType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{projectList,jdbcType=VARCHAR}, #{riskLevel,jdbcType=VARCHAR}, #{eqId,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{maintenanceResults,jdbcType=VARCHAR}, #{instrumentStatus,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{maintenancePersonnel,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, 
-      #{departmentReceipt,jdbcType=VARCHAR}, #{dateOfCompletion,jdbcType=VARCHAR})
+      #{departmentReceipt,jdbcType=VARCHAR}, #{dateOfCompletion,jdbcType=VARCHAR}, #{firstTime,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.litbo.hospital.maintenance.pojo.Maintenance">
     insert into hospital..maintenance
@@ -99,6 +102,9 @@
       <if test="dateOfCompletion != null">
         date_of_completion,
       </if>
+      <if test="firstTime != null">
+        first_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="riskValue != null">
@@ -137,7 +143,13 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-       <if test="description != null">
+      <if test="maintenanceResults != null">
+        #{maintenanceResults,jdbcType=VARCHAR},
+      </if>
+      <if test="instrumentStatus != null">
+        #{instrumentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
       <if test="maintenancePersonnel != null">
@@ -151,6 +163,9 @@
       </if>
       <if test="dateOfCompletion != null">
         #{dateOfCompletion,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTime != null">
+        #{firstTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

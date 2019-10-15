@@ -4,31 +4,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+
 @Data
-public class ListYyVo {
+public class ListRyPxJhVo {
+
     private String id;
 
-    private String eqName;
+    private String jhName;
 
-    private String pxbh;
-
-    private String eqZcbh;
-
-    private String eqSbbh;
-
-    private String bmName;
-
-    private String ksId;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String kstime;
+    private Date jhKstime;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String jstime;
+    private Date jhJstime;
 
-    private String pxlx;
+    private String jhPxlx;
 
-    private String pxnr;
+    private String jhPxxz;
+
+    private String userId;
+
+    private String pxAddr;
+
 }

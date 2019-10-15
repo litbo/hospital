@@ -2,6 +2,7 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.dao;
 
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.Deviceparameter;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import org.apache.ibatis.annotations.*;
 
@@ -19,6 +20,9 @@ public interface DeviceparameterDAO {
      * 1.查询设备参数设置表信息
      * @return
      */
+
+
+
     @Select( "<script>"+
             "SELECT\n" +
                     "\tb.eq_zcbh,\n" +
@@ -29,8 +33,8 @@ public interface DeviceparameterDAO {
                     "\td.end_point_ip as endPointIp ,\n" +
                     "\ti.MachineNumber as  MachineNumber \n" +
                     "\tFROM\n" +
-                    "\tInspectDetailBack i\n" +
-                    "\tleft JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
+                    "\tInspectDetail i\n" +
+                    "\tinner JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
                     "\tleft JOIN eq_info b ON d.DeviceCode = b.eq_zcbh\n" +
                     "\tleft JOIN s_bm s ON b.eq_bmid = s.bm_id"+
             "<where>"+
@@ -148,5 +152,72 @@ public interface DeviceparameterDAO {
      */
     @Update("update DeviceParameter set DeviceCode = #{eqSbbh} where EndPointIP = #{endPointIP}")
     void save(DeviceparameterVO deviceparameterVO);
+
+    /*/**
+     * 方法功能描述: my
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/15 下午 3:07
+     */
+
+    @Select("select * from DeviceParameter where MachineNumber=#{lwybh}")
+    Deviceparameter showOneLwxByLwyBh(String lwybh);
+    @Update("update DeviceParameter\n" +
+            "    set DeviceCode = #{deviceCode,jdbcType=VARCHAR},\n" +
+            "      InspectType = #{inspectType,jdbcType=VARCHAR},\n" +
+            "      KeepTime = #{keepTime,jdbcType=VARCHAR},\n" +
+            "      StartElectic = #{startElectic,jdbcType=VARCHAR},\n" +
+            "      EndElectic = #{endElectic,jdbcType=VARCHAR},\n" +
+            "      InDistance = #{inDistance,jdbcType=VARCHAR},\n" +
+            "      OutDistance = #{outDistance,jdbcType=VARCHAR},\n" +
+            "      ImageStart = #{imageStart,jdbcType=VARCHAR},\n" +
+            "      ImageEnd = #{imageEnd,jdbcType=VARCHAR},\n" +
+            "      WeightStart = #{weightStart,jdbcType=VARCHAR},\n" +
+            "      WeightEnd = #{weightEnd,jdbcType=VARCHAR},\n" +
+            "      PECounting = #{PECounting,jdbcType=VARCHAR},\n" +
+            "      Spare = #{spare,jdbcType=VARCHAR},\n" +
+            "      HeartTime = #{heartTime,jdbcType=VARCHAR},\n" +
+            "      RepeatInterval = #{repeatInterval,jdbcType=VARCHAR},\n" +
+            "      end_point_ip = #{endPointIP,jdbcType=VARCHAR},\n" +
+            "      EndPointPort = #{endPointPort,jdbcType=VARCHAR},\n" +
+            "      RepairRemind = #{repairRemind,jdbcType=VARCHAR},\n" +
+            "      MaintainRemind = #{maintainRemind,jdbcType=VARCHAR},\n" +
+            "      SumWorkTime = #{sumWorkTime,jdbcType=VARCHAR},\n" +
+            "      SumWaitTime = #{sumWaitTime,jdbcType=VARCHAR},\n" +
+            "      ClearTime = #{clearTime,jdbcType=TIMESTAMP},\n" +
+            "      SumCloseTime = #{sumCloseTime,jdbcType=VARCHAR},\n" +
+            "      SumRepairTime = #{sumRepairTime,jdbcType=VARCHAR},\n" +
+            "      SumMaintainTime = #{sumMaintainTime,jdbcType=VARCHAR},\n" +
+            "      UnRepairOpenTime = #{unRepairOpenTime,jdbcType=VARCHAR},\n" +
+            "      StopTime = #{stopTime,jdbcType=VARCHAR},\n" +
+//            "      IfHaveDetail = #{ifHaveDetail,jdbcType=BIT},\n" +
+            "      MaxElectic = #{maxElectic,jdbcType=VARCHAR},\n" +
+            "      WaiteElectic = #{waiteElectic,jdbcType=VARCHAR},\n" +
+            "      Remark1 = #{remark1,jdbcType=VARCHAR},\n" +
+            "      Remark2 = #{remark2,jdbcType=VARCHAR},\n" +
+            "      Remark3 = #{remark3,jdbcType=VARCHAR},\n" +
+            "      Remark4 = #{remark4,jdbcType=VARCHAR},\n" +
+            "      WaitPower = #{waitPower,jdbcType=VARCHAR},\n" +
+            "      WorkPower = #{workPower,jdbcType=VARCHAR},\n" +
+            "      Voltage = #{voltage,jdbcType=VARCHAR},\n" +
+            "      ReportPrice = #{reportPrice,jdbcType=VARCHAR},\n" +
+            "      CouplingAgentPrice = #{couplingAgentPrice,jdbcType=VARCHAR},\n" +
+            "      FilmPrice = #{filmPrice,jdbcType=VARCHAR},\n" +
+            "      ReagentPersonPrice = #{reagentPersonPrice,jdbcType=VARCHAR},\n" +
+            "      ReagentItemPrice = #{reagentItemPrice,jdbcType=VARCHAR},\n" +
+            "      UserType = #{userType,jdbcType=VARCHAR},\n" +
+            "      MaxCurrent = #{maxCurrent,jdbcType=VARCHAR},\n" +
+            "      MinCurrent = #{minCurrent,jdbcType=VARCHAR},\n" +
+            "      RepairFees = #{repairFees,jdbcType=VARCHAR},\n" +
+            "      MaintainFees = #{maintainFees,jdbcType=VARCHAR},\n" +
+            "      QulityNum = #{qulityNum,jdbcType=VARCHAR},\n" +
+            "      ErrorRate = #{errorRate,jdbcType=VARCHAR},\n" +
+            "      MaintainStatus = #{maintainStatus,jdbcType=VARCHAR},\n" +
+            "      SoftVerChange = #{softVerChange,jdbcType=VARCHAR},\n" +
+            "      HardCloseFlag = #{hardCloseFlag,jdbcType=VARCHAR}\n" +
+            "    where MachineNumber = #{machineNumber,jdbcType=VARCHAR}")
+    int  updateOneLwxByLwyBh(Deviceparameter deviceparameter);
 
 }

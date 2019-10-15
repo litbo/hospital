@@ -12,6 +12,9 @@ import java.util.Date;
 @Data
 public class Inspectdetail {
 
+
+
+
     private Integer ID;
     /**终端编号*/
     private String machineNumber;
@@ -29,4 +32,17 @@ public class Inspectdetail {
     private Date endTime;
     /**心跳包数量*/
     private Integer workNums;
+
+    private String manuFault;
+    private Integer Current;
+    private Integer DayTotalPower;
+    private String TempStatus;
+    private Integer TempValue;
+    private String HumiStatus;
+    private Integer HumiValue;
+    private String SmokeStatus;
+    private Integer SmokeValue;
+    private String PositionStatus;
+    private String PositionValue;
+    private Integer CurrWeight;
 }

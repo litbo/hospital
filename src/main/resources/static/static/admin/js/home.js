@@ -100,6 +100,24 @@ layui.use('element', function () {
             });
             return false;
         });
+        //数据大屏
+        $("#sjdp").click(function () {
+            layer.open({
+                type: 2,
+                title:"",
+                maxmin:true,
+                area:['100%','100%'],
+                content:['./dataCollection/page/dataScreen.html'],//数据大屏url
+            });
+            layer.full(index);
+        });
+
+
+
+
+
+
+
 
         //页面锁定事件
         $("#lockSys").on("click", goLock);

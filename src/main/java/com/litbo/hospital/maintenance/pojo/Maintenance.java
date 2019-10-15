@@ -47,6 +47,8 @@ public class Maintenance implements Serializable {
 
     private String dateOfCompletion;  // 完成日期
 
+    private String firstTime;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -209,6 +211,14 @@ public class Maintenance implements Serializable {
         this.dateOfCompletion = dateOfCompletion;
     }
 
+    public String getFirstTime() {
+        return firstTime;
+    }
+
+    public void setFirstTime(String firstTime) {
+        this.firstTime = firstTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -240,7 +250,8 @@ public class Maintenance implements Serializable {
             && (this.getMaintenancePersonnel() == null ? other.getMaintenancePersonnel() == null : this.getMaintenancePersonnel().equals(other.getMaintenancePersonnel()))
             && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
             && (this.getDepartmentReceipt() == null ? other.getDepartmentReceipt() == null : this.getDepartmentReceipt().equals(other.getDepartmentReceipt()))
-            && (this.getDateOfCompletion() == null ? other.getDateOfCompletion() == null : this.getDateOfCompletion().equals(other.getDateOfCompletion()));
+            && (this.getDateOfCompletion() == null ? other.getDateOfCompletion() == null : this.getDateOfCompletion().equals(other.getDateOfCompletion()))
+            && (this.getFirstTime() == null ? other.getFirstTime() == null : this.getFirstTime().equals(other.getFirstTime()));
     }
 
     @Override
@@ -267,6 +278,7 @@ public class Maintenance implements Serializable {
         result = prime * result + ((getCheckTime() == null) ? 0 : getCheckTime().hashCode());
         result = prime * result + ((getDepartmentReceipt() == null) ? 0 : getDepartmentReceipt().hashCode());
         result = prime * result + ((getDateOfCompletion() == null) ? 0 : getDateOfCompletion().hashCode());
+        result = prime * result + ((getFirstTime() == null) ? 0 : getFirstTime().hashCode());
         return result;
     }
 
@@ -296,6 +308,7 @@ public class Maintenance implements Serializable {
         sb.append(", checkTime=").append(checkTime);
         sb.append(", departmentReceipt=").append(departmentReceipt);
         sb.append(", dateOfCompletion=").append(dateOfCompletion);
+        sb.append(", firstTime=").append(firstTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

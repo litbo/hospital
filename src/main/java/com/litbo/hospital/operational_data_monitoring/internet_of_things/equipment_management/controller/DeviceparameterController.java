@@ -8,6 +8,7 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipme
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.TD;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.ApprovedWorkingHours;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.Deviceparameter;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqDutyTab;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqOvertimeTab;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.ApprovedWorkingHoursService;
@@ -97,12 +98,17 @@ public class DeviceparameterController {
         return Result.success(deviceparameterVO);
     }
 
+
+
+
     @RequestMapping("/deleByLwyId")
     public Result showOne(@RequestBody DeleteHtsByIdsVO vo){
         String[] ids = vo.getIds();
         for (int i = 0; i < ids.length; i++) {
-            dao.deleteLwxByLwxBh(ids[i]);
-            dao.deletLwxByLwxBh2(ids[i]);
+            int bh = dao.deleteLwxByLwxBh(ids[i]);
+            if(bh==1){
+                dao.deletLwxByLwxBh2(ids[i]);
+            }
         }
         return Result.success();
     }
@@ -204,4 +210,37 @@ public class DeviceparameterController {
         PageInfo pageInfo = service.showNoDutyEq(pageNum,pageSize,searchVO);
         return Result.success(pageInfo);
     }
+    /*/**
+     * 方法功能描述: 根据联网仪编号查询详情
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/15 下午 3:16
+     */
+
+    @RequestMapping("/showOneLwxByLwyBh")
+    public Result showOneLwxByLwyBh(String lwybh){
+        Deviceparameter bh = dao.showOneLwxByLwyBh(lwybh);
+        return Result.success(bh);
+    }
+    /*/**
+     * 方法功能描述: 根据联网仪编号修改
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/15 下午 3:16
+     */
+
+    @RequestMapping("/updateOneLwxByLwyBh")
+    public Result updateOneLwxByLwyBh(@RequestBody Deviceparameter deviceparameter){
+        int i = service.updateOneLwxByLwyBh(deviceparameter);
+        if(i==1){
+            return Result.success();
+        }
+        return Result.error();
+    }
+
+
 }

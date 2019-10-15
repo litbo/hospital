@@ -80,14 +80,14 @@
             </div>
         </div>
         <div class="col-xs-6">
-            <div class="layui-form-item">
-                <label class="layui-form-label">周期<span class="sign">*</span></label>
-                <div class="layui-input-block">
-                    <input type="text" id="cycle" autocomplete="off" lay-verify="required" placeholder="请输入"
-                           class="layui-input">
-                </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">周期<span class="sign">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" id="cycle" autocomplete="off" lay-verify="required" placeholder="请输入"
+                       class="layui-input">
             </div>
         </div>
+    </div>
         <div class="col-xs-6">
             <div class="layui-form-item">
                 <label class="layui-form-label">周期规则</label>
@@ -99,7 +99,15 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-xs-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">首次执行时间<span class="sign">*</span></label>
+                <div class="layui-input-block">
+                    <input type="text" id="firstTime" autocomplete="off" lay-verify="required" placeholder="请输入"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
     </form>
 </div>
     <div>
@@ -220,6 +228,7 @@
                         layer.alert("保养项目未添加")
                     }
                     adad = localStorage.getItem("projectsIds").toString();
+                    localStorage.removeItem("projectsIds");
                     layer.confirm('是否要为没有风险值的设备同步为此设备的风险值？', {
                         btn: ['是', '否'] //按钮
                     }, function (index) {

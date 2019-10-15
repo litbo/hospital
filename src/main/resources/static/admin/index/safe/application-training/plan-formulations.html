@@ -64,6 +64,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训科室<span class="sign">*</span></label>
                 <div class="layui-input-block">
+                    <input type="hidden" id="bmId">
                     <input type="text" name="pxks" disabled id="pxks" class="layui-input col-sm-10">
                     <button class="layui-btn col-sm-2" style="margin: 0;"
                             id="selectEmps" lay-filter="sub">选择
@@ -222,29 +223,34 @@
                     var a=$("#eqId").val();
                     var b=$("#eqZcbh").val();
                     var c=$("#eqSbbh").val();
+                    $("#bmId").val(formData.radio[0]["bmId"]);
+                    var d=$("#bmId").val();
+                    console.log(d);
                     var arr=[];
                     $("#sa input:checkbox[name='pxnrlb']:checked").each(function(i){
                         arr[i]=$(this).val();
                     });
-                    console.log(arr);
                     arr.join(',');
                     return param = {
                         1: arr.join(','),
                         2: a,
                         3: b,
-                        4: c
+                        4: c,
+                        5: d
                     };
                 },
                 form: {
                     url: "/px/addYypxjh",
                     type: "POST",
-                    data: ["eqName",  "pxks", "pxfs", "kstime", "jstime", "pxbh",
+                    data: ["eqId",  "pxks", "pxfs", "kstime", "jstime", "pxbh",
                         "pxlx","pxnr"],
+                    contentType: "application/json",
                     param: {
                         1: "pxnrlb",
                         2: "eqId",
                         3: "eqZcbh",
-                        4: "eqSbbh"
+                        4: "eqSbbh",
+                        5: "ksId"
                     },
                     success: function (res) {
                         window.location.href = "/admin/index/safe/application-training/plan-query.html"

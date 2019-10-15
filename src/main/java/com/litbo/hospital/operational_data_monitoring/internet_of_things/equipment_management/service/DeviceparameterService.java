@@ -3,6 +3,7 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipm
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.Deviceparameter;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
@@ -31,6 +32,8 @@ public interface DeviceparameterService {
      * @return 返回设备联网相关信息
      */
     DeviceparameterVO showOne(EqMacVO eqMacVO);
+
+
 
     /**
      * 删除设备联网信息
@@ -65,4 +68,7 @@ public interface DeviceparameterService {
     void update(DeviceparameterVO deviceparameterVO);
 
     PageInfo showNoDutyEq(Integer pageNum, Integer pageSize, SearchVO searchVO);
+
+    int  updateOneLwxByLwyBh(Deviceparameter deviceparameter);
+
 }

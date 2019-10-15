@@ -105,25 +105,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Override
     public int addMaintenanceProject(MaintenanceProject maintenanceProject) {
-        // 更新项目名称
-        List<ImplementerDictionary> type = implementerDictionaryDAO.selectByName1(maintenanceProject.getProjectType());
         int result = 0;
-
-        for(ImplementerDictionary dictionary : type){
-            if(dictionary.getValue().equals(maintenanceProject.getProjectName())){
-                result = 1;
-            }
-        }
-
-        if(result == 0){
-            ImplementerDictionary newType = new ImplementerDictionary();
-            newType.setType(maintenanceProject.getProjectType());
-            newType.setValue(maintenanceProject.getProjectName());
-            result =  implementerDictionaryDAO.insert(newType);
-            if(result == 0)
-                return 0;
-        }
-
 
         // 添加项目
         result = maintenanceProjectDAO.insert(maintenanceProject);

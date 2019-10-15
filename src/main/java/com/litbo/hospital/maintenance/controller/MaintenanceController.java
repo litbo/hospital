@@ -495,14 +495,14 @@ public class MaintenanceController {
             vo.setData(vo.new DataEntity((int) info.getTotal(),allKey));
             return vo;
         }
-        vo.setMsg("没有查询到信息");
         vo.setCode(0);
         vo.setData(vo.new DataEntity((int) info.getTotal(),allKey));
         return vo;
     }
+
+
+
     //                                                   字典管理      end
-
-
     /**
      * 将维护结果生成PDF文件并保存到卷宗中
      * @param id 维护计划id

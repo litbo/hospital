@@ -179,9 +179,9 @@ public class FinanceServiceImpl implements FinanceService {
         ProfitAndLoss p5 = new ProfitAndLoss();
         p5.setProjectId(finance.getId());
 
+        DecimalFormat df = new DecimalFormat("#.00");
 
         // 每年折旧
-        DecimalFormat df = new DecimalFormat(".0");
         p5.setYearLoss(df.format(Double.valueOf(finance.getAmount()) / year));
 
         // 每年运营费用
@@ -197,15 +197,48 @@ public class FinanceServiceImpl implements FinanceService {
         p5.setPingHeng(df.format(Double.valueOf(p5.getAvgDayLoss()) / Double.valueOf(finance.getCharges())));
 
 
-        // 保利点
-        p5.setBaoLi(df.format((Double.valueOf(p5.getAvgDayLoss()) + Double.valueOf(finance.getAmount()) * Double.valueOf(finance.getExpectedAnnualInterestRate())) / Double.valueOf(finance.getCharges())));
+        // 保利点   每日平均工作成本 *  （ 期望年利率 + 1 ） / 收费标准
+//          投入金额 / year / 工作天数 / 价格     * ( Double.valueOf(finance.getExpectedAnnualInterestRate()) + 1 )
+        p5.setBaoLi(df.format((Double.valueOf(finance.getAmount()) + Double.valueOf(finance.getOverhaulCost())) / Double.valueOf(finance.getYearsOfUse()) / Double.valueOf(finance.getAnnualWorkingDay()) / Double.valueOf(finance.getCharges())+ Double.valueOf(p5.getPingHeng()))) ;
 
 
-        //        安全边际率=销售利润率/（（固定成本+利润）/销售收入）
-        p5.setBianJi(df.format(Double.valueOf(p5.getPingHeng()) / Double.valueOf(finance.getDailyWorkload()) * 100));
+        //安全边际率=销售利润率/边际贡献率*100%=50.67/97=52.24%
+        //
+        //销售利润率＝利润总额 /营业收入×100％=38000元/75000元=50.67%
+        //
+        //边际贡献率=边际贡献/销售收入=73000/75000=97%
+        //
+        //边际贡献＝固定成本+利润=35000+38000=73000
+        //
+        //成本：折旧成本25000元+运营成本2000元*5
+        //
+        //利润总额＝营业收入－营业成本－费用=75000-35000-2000=38000元
+
+        Double contentGet = Double.valueOf(finance.getAnnualWorkingDay()) * Double.valueOf(finance.getDailyWorkload()) * Double.valueOf(finance.getCharges()) * Double.valueOf(finance.getYearsOfUse());
+
+        System.out.println("营业收入:"+contentGet.toString());
+
+        Double chengBen = Double.valueOf(finance.getAmount()) + Double.valueOf(finance.getAnnualOperatingExpenses()) * Double.valueOf(finance.getYearsOfUse());
+
+        System.out.println("营业成本："+chengBen.toString());
+
+        Double liRunZongE = contentGet - chengBen - Double.valueOf(finance.getOverhaulCost());
+
+        System.out.println("利润总额："+liRunZongE.toString());
+
+        Double bianJiGongXianLv = ( chengBen + liRunZongE )  / contentGet;
+
+        System.out.println("边际贡献率:" + bianJiGongXianLv.toString());
+
+        Double anQuanBianJiLv = liRunZongE / contentGet / bianJiGongXianLv;
+
+        System.out.println("安全边际率：" + anQuanBianJiLv.toString());
+
+
+        p5.setBianJi(String.valueOf(anQuanBianJiLv * 100));
 
         // 盈亏平衡点作业率=1－安全边际率
-        p5.setZuoYeLv(df.format(1-Double.valueOf(p5.getBianJi()) / 100));
+        p5.setZuoYeLv(df.format((1 - anQuanBianJiLv) * 100));
 
         List<ProfitAndLoss> list = new ArrayList<>();
         list.add(p5);

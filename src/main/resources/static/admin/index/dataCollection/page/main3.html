@@ -64,7 +64,7 @@
 
 <!--编辑删除-->
 <script type="text/html" id="barDemo">
-	<a class="layui-btn layui-btn-xs edit editi" href="" lay-event="link">编辑</a>
+	<a class="layui-btn layui-btn-xs edit editi" lay-event="link">编辑</a>
 </script>
 
 <script src="../js/dataIndex.js"></script>
@@ -116,6 +116,15 @@
 									reload:true
 								},
 							},
+                            {
+                                event:"link",
+                                type: 2,
+                                area: ['100%', '90%'],
+                                title:"编辑",
+                                content:"./main3_add.html",
+                                dataUrl:["machineNumber"]
+
+                            },
 							{//一个基础的删除当前行数据按钮
 								event: "delete",
 								layOpen:false,
@@ -142,24 +151,26 @@
 									});
 								}
 							},
-							{
-								event: "link",
-								// layOpen:false,
-								// dataUrl:["eqSbbh","endPointIP","haspacs","hasworkbox","macrule","pmacid"],
-								// func:function(obj){
-								// 	var data = obj.data;
-								// 	var eqSbbh = data.eqSbbh;
-								// 	var macID= data.macID;
-								// 	var endPointIP = data.endPointIP;
-								// 	var haspacs = data.haspacs;
-								// 	var hasworkbox = data.hasworkbox;
-								// 	var macrule = data.macrule;
-								// 	var pmacid = data.pmacid;
-								// 	var html ="./edit1.html";
-								// 	var url = html + "?eqSbbh="+ eqSbbh + "&endPointIP=" + endPointIP;
-								// 	$(".edit").attr('href',url);
-								// }
-							}
+							// {
+							// 	event: "",
+                            //     type: 2,
+                            //     content:"./main3_add.html"
+							// 	// layOpen:false,
+							// 	// dataUrl:["eqSbbh","endPointIP","haspacs","hasworkbox","macrule","pmacid"],
+							// 	// func:function(obj){
+							// 	// 	var data = obj.data;
+							// 	// 	var eqSbbh = data.eqSbbh;
+							// 	// 	var macID= data.macID;
+							// 	// 	var endPointIP = data.endPointIP;
+							// 	// 	var haspacs = data.haspacs;
+							// 	// 	var hasworkbox = data.hasworkbox;
+							// 	// 	var macrule = data.macrule;
+							// 	// 	var pmacid = data.pmacid;
+							// 	// 	var html ="./edit1.html";
+							// 	// 	var url = html + "?eqSbbh="+ eqSbbh + "&endPointIP=" + endPointIP;
+							// 	// 	$(".edit").attr('href',url);
+							// 	// }
+							// }
 						]
 					})
 				}
