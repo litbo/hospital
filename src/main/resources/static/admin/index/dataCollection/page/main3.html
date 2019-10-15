@@ -116,6 +116,15 @@
 									reload:true
 								},
 							},
+                            {
+                                event:"link",
+                                type: 2,
+                                area: ['100%', '90%'],
+                                title:"编辑",
+                                content:"./main3_add.html",
+                                dataUrl:["machineNumber"]
+
+                            },
 							{//一个基础的删除当前行数据按钮
 								event: "delete",
 								layOpen:false,
@@ -142,26 +151,6 @@
 									});
 								}
 							},
-                            // {
-                            //     title:"任务完成",
-                            //     event: 'over',
-                            //     type: 2,
-                            //     content: '.main3_add.html',
-                            //     area: ['90%', '90%'],
-                            //     func:function(obj,data){
-                            //
-                            //         localStorage.setItem("dealId",obj.data.id)
-                            //
-                            //     }
-                            // },
-                            {
-                                type: 2,
-                                event: "link",
-                                title:"编辑",
-                                area: ['100%', '60%'],
-                                content: "./main3_add.html",
-                                dataUrl:["machineNumber"]
-                            },
 							// {
 							// 	event: "",
                             //     type: 2,
