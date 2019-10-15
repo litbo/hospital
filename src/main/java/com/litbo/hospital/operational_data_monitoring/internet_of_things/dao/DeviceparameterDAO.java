@@ -152,7 +152,72 @@ public interface DeviceparameterDAO {
      */
     @Update("update DeviceParameter set DeviceCode = #{eqSbbh} where EndPointIP = #{endPointIP}")
     void save(DeviceparameterVO deviceparameterVO);
+
+    /*/**
+     * 方法功能描述: my
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/15 下午 3:07
+     */
+
     @Select("select * from DeviceParameter where MachineNumber=#{lwybh}")
     Deviceparameter showOneLwxByLwyBh(String lwybh);
+    @Update("update DeviceParameter\n" +
+            "    set DeviceCode = #{devicecode,jdbcType=VARCHAR},\n" +
+            "      InspectType = #{inspecttype,jdbcType=VARCHAR},\n" +
+            "      KeepTime = #{keeptime,jdbcType=VARCHAR},\n" +
+            "      StartElectic = #{startelectic,jdbcType=VARCHAR},\n" +
+            "      EndElectic = #{endelectic,jdbcType=VARCHAR},\n" +
+            "      InDistance = #{indistance,jdbcType=VARCHAR},\n" +
+            "      OutDistance = #{outdistance,jdbcType=VARCHAR},\n" +
+            "      ImageStart = #{imagestart,jdbcType=VARCHAR},\n" +
+            "      ImageEnd = #{imageend,jdbcType=VARCHAR},\n" +
+            "      WeightStart = #{weightstart,jdbcType=VARCHAR},\n" +
+            "      WeightEnd = #{weightend,jdbcType=VARCHAR},\n" +
+            "      PECounting = #{pecounting,jdbcType=VARCHAR},\n" +
+            "      Spare = #{spare,jdbcType=VARCHAR},\n" +
+            "      HeartTime = #{hearttime,jdbcType=VARCHAR},\n" +
+            "      RepeatInterval = #{repeatinterval,jdbcType=VARCHAR},\n" +
+            "      end_point_ip = #{endPointIp,jdbcType=VARCHAR},\n" +
+            "      EndPointPort = #{endpointport,jdbcType=VARCHAR},\n" +
+            "      RepairRemind = #{repairremind,jdbcType=VARCHAR},\n" +
+            "      MaintainRemind = #{maintainremind,jdbcType=VARCHAR},\n" +
+            "      SumWorkTime = #{sumworktime,jdbcType=VARCHAR},\n" +
+            "      SumWaitTime = #{sumwaittime,jdbcType=VARCHAR},\n" +
+            "      ClearTime = #{cleartime,jdbcType=TIMESTAMP},\n" +
+            "      SumCloseTime = #{sumclosetime,jdbcType=VARCHAR},\n" +
+            "      SumRepairTime = #{sumrepairtime,jdbcType=VARCHAR},\n" +
+            "      SumMaintainTime = #{summaintaintime,jdbcType=VARCHAR},\n" +
+            "      UnRepairOpenTime = #{unrepairopentime,jdbcType=VARCHAR},\n" +
+            "      StopTime = #{stoptime,jdbcType=VARCHAR},\n" +
+//            "      IfHaveDetail = #{ifhavedetail,jdbcType=BIT},\n" +
+            "      MaxElectic = #{maxelectic,jdbcType=VARCHAR},\n" +
+            "      WaiteElectic = #{waiteelectic,jdbcType=VARCHAR},\n" +
+            "      Remark1 = #{remark1,jdbcType=VARCHAR},\n" +
+            "      Remark2 = #{remark2,jdbcType=VARCHAR},\n" +
+            "      Remark3 = #{remark3,jdbcType=VARCHAR},\n" +
+            "      Remark4 = #{remark4,jdbcType=VARCHAR},\n" +
+            "      WaitPower = #{waitpower,jdbcType=VARCHAR},\n" +
+            "      WorkPower = #{workpower,jdbcType=VARCHAR},\n" +
+            "      Voltage = #{voltage,jdbcType=VARCHAR},\n" +
+            "      ReportPrice = #{reportprice,jdbcType=VARCHAR},\n" +
+            "      CouplingAgentPrice = #{couplingagentprice,jdbcType=VARCHAR},\n" +
+            "      FilmPrice = #{filmprice,jdbcType=VARCHAR},\n" +
+            "      ReagentPersonPrice = #{reagentpersonprice,jdbcType=VARCHAR},\n" +
+            "      ReagentItemPrice = #{reagentitemprice,jdbcType=VARCHAR},\n" +
+            "      UserType = #{usertype,jdbcType=VARCHAR},\n" +
+            "      MaxCurrent = #{maxcurrent,jdbcType=VARCHAR},\n" +
+            "      MinCurrent = #{mincurrent,jdbcType=VARCHAR},\n" +
+            "      RepairFees = #{repairfees,jdbcType=VARCHAR},\n" +
+            "      MaintainFees = #{maintainfees,jdbcType=VARCHAR},\n" +
+            "      QulityNum = #{qulitynum,jdbcType=VARCHAR},\n" +
+            "      ErrorRate = #{errorrate,jdbcType=VARCHAR},\n" +
+            "      MaintainStatus = #{maintainstatus,jdbcType=VARCHAR},\n" +
+            "      SoftVerChange = #{softverchange,jdbcType=VARCHAR},\n" +
+            "      HardCloseFlag = #{hardcloseflag,jdbcType=VARCHAR}\n" +
+            "    where MachineNumber = #{machinenumber,jdbcType=VARCHAR}")
+    int  updateOneLwxByLwyBh(Deviceparameter deviceparameter);
 
 }
