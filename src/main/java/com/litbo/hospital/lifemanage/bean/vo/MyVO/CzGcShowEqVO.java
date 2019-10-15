@@ -10,4 +10,5 @@ public class CzGcShowEqVO {
     private String eqPp;
     private String eqGg;
     private String eqXh;
+    private String eqZcbh;
 }
