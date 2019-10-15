@@ -101,8 +101,10 @@ public class DeviceparameterController {
     public Result showOne(@RequestBody DeleteHtsByIdsVO vo){
         String[] ids = vo.getIds();
         for (int i = 0; i < ids.length; i++) {
-            dao.deleteLwxByLwxBh(ids[i]);
-            dao.deletLwxByLwxBh2(ids[i]);
+            int bh = dao.deleteLwxByLwxBh(ids[i]);
+            if(bh==1){
+                dao.deletLwxByLwxBh2(ids[i]);
+            }
         }
         return Result.success();
     }

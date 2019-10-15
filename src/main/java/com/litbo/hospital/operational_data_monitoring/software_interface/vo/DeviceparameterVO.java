@@ -2,6 +2,8 @@ package com.litbo.hospital.operational_data_monitoring.software_interface.vo;
 
 import lombok.Data;
 
+import java.util.Objects;
+
 /**
  * @BelongsProject: hospital
  * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.software_interface.vo
@@ -50,5 +52,16 @@ public class DeviceparameterVO {
     private String MachineNumber;
     /*联网仪IP*/
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeviceparameterVO that = (DeviceparameterVO) o;
+        return MachineNumber.equals(that.MachineNumber);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(MachineNumber);
+    }
 }

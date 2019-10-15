@@ -35,15 +35,16 @@
 	<!-- 查询区域 -->
 	<form action="" layui-filter="forms" style="margin-top: 0;">
 
+
+		<!--设备编号-->
+		<div class="layui-input-inline" style="width: 130px;">
+			<input type="text" name="eqZcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
+		</div>
 		<!--科室-->
 		<div class="layui-input-inline" style="width: 140px;">
 			<select name="bmId"  lay-filter="bmId">
 				<option value="">全部科室</option>
 			</select>
-		</div>
-		<!--设备编号-->
-		<div class="layui-input-inline" style="width: 130px;">
-			<input type="text" name="eqZcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
 		</div>
 		<!--联网仪编号-->
 		<div class="layui-input-inline" style="width: 130px;">
@@ -80,7 +81,7 @@
 					,{field:'eqGgXh' ,title:'规格 型号'}
 					,{field:'bmName' ,title:'所在科室'}
 					,{field:'machineNumber', title:'联网仪编号'}
-					,{field:'endPointIp', title:'联网仪IP'}
+					// ,{field:'endPointIp', title:'联网仪IP'}
 					,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo'}
 				]]
 				, url: "/deviceparameter/show"
