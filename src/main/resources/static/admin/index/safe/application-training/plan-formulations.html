@@ -244,12 +244,13 @@
                     type: "POST",
                     data: ["eqId",  "pxks", "pxfs", "kstime", "jstime", "pxbh",
                         "pxlx","pxnr"],
+                    contentType: "application/json",
                     param: {
                         1: "pxnrlb",
                         2: "eqId",
                         3: "eqZcbh",
                         4: "eqSbbh",
-                        5: "bmId"
+                        5: "ksId"
                     },
                     success: function (res) {
                         window.location.href = "/admin/index/safe/application-training/plan-query.html"
