@@ -1,9 +1,13 @@
 package com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
+import com.litbo.hospital.lifemanage.bean.vo.MyVO.EqTjsqVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.Deviceparameter;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqMacTab;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.*;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.DeviceparameterService;
@@ -125,6 +129,15 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
     public PageInfo showNoDutyEq(Integer pageNum, Integer pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(dao.selectNoDutyEq(searchVO));
+    }
+
+    @Override
+    public int updateOneLwxByLwyBh(Deviceparameter deviceparameter) {
+        Deviceparameter oldlwy = dao.showOneLwxByLwyBh(deviceparameter.getMachineNumber());
+        BeanUtil.copyProperties(deviceparameter, oldlwy, true,
+                CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+       dao.updateOneLwxByLwyBh(oldlwy);
+        return 0;
     }
 
     /**

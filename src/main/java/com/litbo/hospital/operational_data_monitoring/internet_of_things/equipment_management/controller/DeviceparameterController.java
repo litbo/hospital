@@ -210,10 +210,37 @@ public class DeviceparameterController {
         PageInfo pageInfo = service.showNoDutyEq(pageNum,pageSize,searchVO);
         return Result.success(pageInfo);
     }
+    /*/**
+     * 方法功能描述: 根据联网仪编号查询详情
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/15 下午 3:16
+     */
+
     @RequestMapping("/showOneLwxByLwyBh")
     public Result showOneLwxByLwyBh(String lwybh){
         Deviceparameter bh = dao.showOneLwxByLwyBh(lwybh);
         return Result.success(bh);
     }
+    /*/**
+     * 方法功能描述: 根据联网仪编号修改
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/15 下午 3:16
+     */
+
+    @RequestMapping("/updateOneLwxByLwyBh")
+    public Result updateOneLwxByLwyBh(@RequestBody Deviceparameter deviceparameter){
+        int i = service.updateOneLwxByLwyBh(deviceparameter);
+        if(i==1){
+            return Result.success();
+        }
+        return Result.error();
+    }
+
 
 }

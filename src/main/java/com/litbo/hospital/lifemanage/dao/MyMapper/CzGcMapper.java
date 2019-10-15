@@ -139,7 +139,7 @@ public interface CzGcMapper {
     CzGcVO selectOneCzgc(String id);
 
     /*根据设备编号查询设备信息*/
-    @Select("select e.eq_sbbh,ep.eq_pm_name,e.eq_name,e.eq_pp,e.eq_gg,e.eq_xh\n" +
+    @Select("select e.eq_sbbh,ep.eq_pm_name,e.eq_name,e.eq_pp,e.eq_gg,e.eq_xh,e.eq_zcbh\n" +
             "from eq_info e inner join eq_pm ep on\n" +
             "e.eq_pm_id=ep.eq_pm_id where e.eq_sbbh=#{sbbh} ")
     CzGcShowEqVO selectEqBySbbh(String sbbh);
