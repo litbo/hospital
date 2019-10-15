@@ -2,6 +2,7 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.dao;
 
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.SearchVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.Deviceparameter;
 import com.litbo.hospital.operational_data_monitoring.software_interface.vo.DeviceparameterVO;
 import org.apache.ibatis.annotations.*;
 
@@ -32,8 +33,8 @@ public interface DeviceparameterDAO {
                     "\td.end_point_ip as endPointIp ,\n" +
                     "\ti.MachineNumber as  MachineNumber \n" +
                     "\tFROM\n" +
-                    "\tInspectDetailBack i\n" +
-                    "\tleft JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
+                    "\tInspectDetail i\n" +
+                    "\tinner JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
                     "\tleft JOIN eq_info b ON d.DeviceCode = b.eq_zcbh\n" +
                     "\tleft JOIN s_bm s ON b.eq_bmid = s.bm_id"+
             "<where>"+
@@ -151,5 +152,7 @@ public interface DeviceparameterDAO {
      */
     @Update("update DeviceParameter set DeviceCode = #{eqSbbh} where EndPointIP = #{endPointIP}")
     void save(DeviceparameterVO deviceparameterVO);
+    @Select("select * from DeviceParameter where MachineNumber=#{lwybh}")
+    Deviceparameter showOneLwxByLwyBh(String lwybh);
 
 }

@@ -8,6 +8,7 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipme
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.EqMacVO;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.VO.TD;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.ApprovedWorkingHours;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.Deviceparameter;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqDutyTab;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.bean.EqOvertimeTab;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.equipment_management.service.ApprovedWorkingHoursService;
@@ -104,8 +105,10 @@ public class DeviceparameterController {
     public Result showOne(@RequestBody DeleteHtsByIdsVO vo){
         String[] ids = vo.getIds();
         for (int i = 0; i < ids.length; i++) {
-            dao.deleteLwxByLwxBh(ids[i]);
-            dao.deletLwxByLwxBh2(ids[i]);
+            int bh = dao.deleteLwxByLwxBh(ids[i]);
+            if(bh==1){
+                dao.deletLwxByLwxBh2(ids[i]);
+            }
         }
         return Result.success();
     }
@@ -207,4 +210,10 @@ public class DeviceparameterController {
         PageInfo pageInfo = service.showNoDutyEq(pageNum,pageSize,searchVO);
         return Result.success(pageInfo);
     }
+    @RequestMapping("/showOneLwxByLwyBh")
+    public Result showOneLwxByLwyBh(String lwybh){
+        Deviceparameter bh = dao.showOneLwxByLwyBh(lwybh);
+        return Result.success(bh);
+    }
+
 }
