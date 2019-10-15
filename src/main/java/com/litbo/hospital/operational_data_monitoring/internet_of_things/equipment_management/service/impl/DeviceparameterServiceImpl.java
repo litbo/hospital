@@ -136,8 +136,8 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
         Deviceparameter oldlwy = dao.showOneLwxByLwyBh(deviceparameter.getMachineNumber());
         BeanUtil.copyProperties(deviceparameter, oldlwy, true,
                 CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
-       dao.updateOneLwxByLwyBh(oldlwy);
-        return 0;
+        int i = dao.updateOneLwxByLwyBh(oldlwy);
+        return i;
     }
 
     /**
