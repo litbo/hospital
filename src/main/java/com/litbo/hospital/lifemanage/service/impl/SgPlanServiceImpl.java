@@ -128,7 +128,7 @@ public class SgPlanServiceImpl implements SgPlanService {
 
 
             for (SgPlan sg:sgPlan){
-                System.out.println(sg.getPlanName());
+//                System.out.println(sg.getPlanName());
                 listNum = selectMapper.getListNum(sg.getId());
 //                List<SelectVO> adllDate3 = selectMapper.listCheckDate(sg.getBmId());
 
@@ -137,7 +137,7 @@ public class SgPlanServiceImpl implements SgPlanService {
                 List<SelectVO> adllDate3 = new ArrayList<>();
                 String getAllBmName = selectMapper.getBmName(sg.getBmId()); //对应planid下的部门
                 List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(sg.getId());
-                System.out.println(adllDate4);
+//                System.out.println(adllDate4);
                 for (SgCheckVO s1:adllDate4){
                     SelectVO selectVO = new SelectVO(s1.getEqZcbh(),s1.getEqName(),getAllBmName);
                     adllDate3.add(selectVO);

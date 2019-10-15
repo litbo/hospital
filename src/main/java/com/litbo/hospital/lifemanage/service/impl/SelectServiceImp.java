@@ -69,7 +69,7 @@ public class SelectServiceImp implements SelectService {
 
 
 
-        System.out.println("已盘"+adllDate);
+//        System.out.println("已盘"+adllDate);
 
         return new PageInfo<>(adllDate);
     }
@@ -125,7 +125,7 @@ public class SelectServiceImp implements SelectService {
             }
         }
         PageHelper.startPage(pageNum, pageSize);
-        System.out.println("盘亏"+adllDate2);
+//        System.out.println("盘亏"+adllDate2);
 
         return new PageInfo<>(adllDate2);//返回
     }
@@ -133,7 +133,7 @@ public class SelectServiceImp implements SelectService {
     @Override
     public PageInfo<SelectVO> allList(String pdJhid, String bmId, Integer pageNum, Integer pageSize) {
         List<SelectVO> adllDate3 = new ArrayList<>();
-//                selectMapper.listCheckDate(bmId);
+//          List<SelectVO> adllDate3 =      selectMapper.listCheckDate(bmId);
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(pdJhid);
         for (SgCheckVO s1:adllDate4){
@@ -142,7 +142,7 @@ public class SelectServiceImp implements SelectService {
         }
 
         PageHelper.startPage(pageNum, pageSize);
-        System.out.println("盘点计划的"+adllDate3);
+//        System.out.println("盘点计划的"+adllDate3);
         return new PageInfo<>(adllDate3);
     }
     @Override
@@ -180,7 +180,7 @@ public class SelectServiceImp implements SelectService {
         PageHelper.startPage(pageNum,pageSize);
         adllDate = listTemp;
 
-        System.out.println("盘盈"+listTemp2);
+//        System.out.println("盘盈"+listTemp2);
 
         return new PageInfo<>(listTemp2);
     }
