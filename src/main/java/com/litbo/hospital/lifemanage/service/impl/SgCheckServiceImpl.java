@@ -94,6 +94,7 @@ public class SgCheckServiceImpl implements SgCheckService {
             check = StateEnum.getMessageByCode(Integer.parseInt(check));
         }
         PageHelper.startPage(pageNum,pageSize);
+        System.out.println(sgCheckMapper.getListByX(planId,check,checkDate,checkUser,planDate,planUser).toString());
         return new PageInfo<>(sgCheckMapper.getListByX(planId,check,checkDate,checkUser,planDate,planUser));
     }
 

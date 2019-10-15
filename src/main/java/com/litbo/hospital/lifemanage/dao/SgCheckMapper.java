@@ -63,7 +63,7 @@ public interface SgCheckMapper {
      */
     @Select("SELECT\n" +
             "dbo.sg_check.id,\n" +
-            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.eq_info.eq_zcbh,\n" +
             "dbo.eq_info.eq_name,\n" +
             "dbo.eq_info.eq_gg,\n" +
             "dbo.eq_info.eq_xh,\n" +
@@ -83,7 +83,7 @@ public interface SgCheckMapper {
 
     @Select("SELECT\n" +
             "dbo.sg_check.id,\n" +
-            "dbo.eq_info.eq_sbbh,\n" +
+            "dbo.eq_info.eq_zcbh,\n" +
             "dbo.eq_info.eq_name,\n" +
             "dbo.eq_info.eq_gg,\n" +
             "dbo.eq_info.eq_xh,\n" +

@@ -32,6 +32,7 @@ public class SelectServiceImp implements SelectService {
                                         @Param("bmId") String bmId
                                     , @Param("pageNum")Integer pageNum
                                     , @Param("pageSize")Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
 
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
@@ -67,17 +68,20 @@ public class SelectServiceImp implements SelectService {
 
 
 
-        PageHelper.startPage(pageNum, pageSize);
-//        System.out.println("已盘"+adllDate);
+        System.out.println("已盘"+adllDate);
 
         return new PageInfo<>(adllDate);
     }
 
     @Override
     public PageInfo<SelectVO> selectNot(String pdJhid, String bmId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
+//        List<SelectVO> listVo = new ArrayList<>();
+        SelectVO s1= new SelectVO();
         for (SgPd sgPd : list) {
             System.out.println(sgPd.getPdScanId());
             List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
@@ -85,8 +89,6 @@ public class SelectServiceImp implements SelectService {
                 adllDate.add(selectVO);
             }
         }
-
-
 
         // 临时集合
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
@@ -103,15 +105,16 @@ public class SelectServiceImp implements SelectService {
             }
 
         }
+        adllDate = listTemp;
         List<SelectVO> adllDate2 = selectMapper.listCheckDate(bmId);
-
+        System.out.println("addate2"+adllDate2);
         for(SelectVO a : adllDate){
             if(adllDate2.contains(a)){
                 adllDate2.remove(a);
             }
         }
         PageHelper.startPage(pageNum, pageSize);
-//        System.out.println("盘亏"+adllDate2);
+        System.out.println("盘亏"+adllDate2);
 
         return new PageInfo<>(adllDate2);//返回
     }
@@ -121,7 +124,7 @@ public class SelectServiceImp implements SelectService {
         List<SelectVO> adllDate3 = selectMapper.listCheckDate(bmId);
 
         PageHelper.startPage(pageNum, pageSize);
-
+        System.out.println("盘点计划的"+adllDate3);
         return new PageInfo<>(adllDate3);
     }
     @Override
@@ -159,7 +162,7 @@ public class SelectServiceImp implements SelectService {
         PageHelper.startPage(pageNum,pageSize);
         adllDate = listTemp;
 
-//        System.out.println("盘盈"+listTemp2);
+        System.out.println("盘盈"+listTemp2);
 
         return new PageInfo<>(listTemp2);
     }

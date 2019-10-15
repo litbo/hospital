@@ -92,18 +92,21 @@ public class SgPdServiceImpl implements SgPdSeverice {
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
+//        List<SelectVO> listVo = new ArrayList<>();
+        SelectVO s1= new SelectVO();
         for (SgPd sgPd : list) {
-//            System.out.println(sgPd.getPdScanId());
+            System.out.println(sgPd.getPdScanId());
             List<SelectVO> listVo=selectMapper.listAllDate(sgPd.getPdScanId());
             for (SelectVO selectVO :listVo){
                 adllDate.add(selectVO);
             }
         }
 
-
+        // 临时集合
         List<SelectVO> listTemp = new ArrayList<SelectVO>();
         List<SelectVO> listTemp2 = new ArrayList<SelectVO>();//盘亏集合
         for (int i = 0;i < adllDate.size(); i++) {
+            // 保存不为空的元素
             if (adllDate.get(i) != null) {
                 String asd = adllDate.get(i).getBmName();
                 if (getAllBmName.equals(asd)){
@@ -114,8 +117,9 @@ public class SgPdServiceImpl implements SgPdSeverice {
             }
 
         }
+        adllDate = listTemp;
         List<SelectVO> adllDate2 = selectMapper.listCheckDate(bmId);
-        List<SelectVO> allDate3 = new ArrayList<>();
+        System.out.println("addate2"+adllDate2);
         for(SelectVO a : adllDate){
             if(adllDate2.contains(a)){
                 adllDate2.remove(a);
@@ -148,7 +152,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
 //        System.out.println("3");
 
 
-//        System.out.println("盘亏的"+adllDate2);
+        System.out.println("盘亏的"+adllDate2);
         for (SelectVO sgPd :adllDate2){
             sgPdZt.setBmName(sgPd.getBmName());
             sgPdZt.setEqSbbh(sgPd.getEqSbbh());
@@ -160,17 +164,17 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
 
 //        System.out.println("盘点计划的"+adllDate3);
-        for (SelectVO sgPd :adllDate3){
-            if (allDate3.contains(adllDate2)||allDate3.contains(listTemp)){
-                adllDate3.remove(adllDate2);
-                allDate3.remove(listTemp);
-                sgPdZt.setBmName(sgPd.getBmName());
-                sgPdZt.setEqSbbh(sgPd.getEqSbbh());
-                sgPdZt.setEqName(sgPd.getEqName());
-                sgPdZt.setPdZt("正常");
-                selectMapper.insertZt(sgPdZt);
-            }
-        }
+//        for (SelectVO sgPd :adllDate3){
+//            if (allDate3.contains(adllDate2)||allDate3.contains(listTemp)){
+//                adllDate3.remove(adllDate2);
+//                allDate3.remove(listTemp);
+//                sgPdZt.setBmName(sgPd.getBmName());
+//                sgPdZt.setEqSbbh(sgPd.getEqSbbh());
+//                sgPdZt.setEqName(sgPd.getEqName());
+//                sgPdZt.setPdZt("正常");
+//                selectMapper.insertZt(sgPdZt);
+//            }
+//        }
 //        System.out.println("1");
 
 

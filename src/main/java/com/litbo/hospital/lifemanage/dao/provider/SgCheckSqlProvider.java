@@ -72,7 +72,7 @@ public class SgCheckSqlProvider {
     public String getListByX(String planId,String check, String checkDate, String checkUser, String planDate, String planUser) {
         return new SQL() {{
             SELECT("dbo.sg_check.id,\n" +
-                    "dbo.eq_info.eq_sbbh,\n" +
+                    "dbo.eq_info.eq_zcbh,\n" +
                     "dbo.eq_info.eq_name,\n" +
                     "dbo.eq_info.eq_gg,\n" +
                     "dbo.eq_info.eq_xh,\n" +
@@ -105,7 +105,7 @@ public class SgCheckSqlProvider {
             if (StringUtils.isNotBlank(planUser)){
                 WHERE(" dbo.sg_plan.user_id = #{planUser,jdbcType=VARCHAR}");
             }
-            WHERE("dbo.eq_info.eq_sbbh IS NOT NULL");
+            WHERE("dbo.eq_info.eq_zcbh IS NOT NULL");
             WHERE("dbo.sg_plan.id  = #{planId,jdbcType=VARCHAR}"
 
             );

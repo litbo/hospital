@@ -12,6 +12,7 @@ import java.util.Date;
  */
 @Data
 public class SgCheckListVO {
+    String eqZcbh;
     /**
      * 审核id
      */
@@ -58,7 +59,8 @@ public class SgCheckListVO {
     @Override
     public String toString() {
         return "SgCheckListVO{" +
-                "id='" + id + '\'' +
+                "eqZcbh='" + eqZcbh + '\'' +
+                ", id='" + id + '\'' +
                 ", eqSbbh='" + eqSbbh + '\'' +
                 ", eqName='" + eqName + '\'' +
                 ", eqGg='" + eqGg + '\'' +

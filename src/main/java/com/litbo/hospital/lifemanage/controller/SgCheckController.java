@@ -112,6 +112,9 @@ public class SgCheckController {
                                     @RequestParam(name = "planUser", required = false) String planUser,
                                     @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                     @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        System.out.println("aaaaaaaa");
+        System.out.println("aaaaaaaa");
+        System.out.println("aaaaaaaa");
         return Result.success(sgCheckService.selectSgCheckList(planId, check, checkDate, checkUser, planDate, planUser, pageNum, pageSize));
     }
 
@@ -126,34 +129,23 @@ public class SgCheckController {
 //    }
     @RequestMapping(value = "/addEq")
     public Result addEq(@RequestBody EqInfoVo eqInfo) {
-
-
-
-
         String planId = eqInfo.getPlanId();
         if (es.addEq(eqInfo) > 0) {
-
             SgCheck sgChcck = new SgCheck();
             sgChcck.setEqId(eqInfo.getEqId());
             sgChcck.setPlanId(planId);
             sgCheckService.addOther(sgChcck);
-
             System.out.println(eqInfo.getEqSbbh());
-            try{
-                //插入盘点状态
 
-//                List<String> listBmName =selectMapper.listBmName(eqInfo.getEqSbbh());
-//                String name []=null;
-//                for (int i=0;i<listBmName.size();i++){
-//                        name[i] = listBmName.get(i);
-//                }
-//                String eqName = name[0];
+//            List<SelectVO> adllDate3 = selectMapper.listCheckDate(eqInfo.getEqBmid());
+
+
+            try{
                 String eqName = selectMapper.listBmName(eqInfo.getEqId());
-                System.out.println(eqName);
                 SgPdZt sgPdZt = new SgPdZt();
                 sgPdZt.setPdJhid(eqInfo.getPlanId());
                 sgPdZt.setBmName(eqName);
-                sgPdZt.setEqSbbh(eqInfo.getEqSbbh());
+                sgPdZt.setEqSbbh(eqInfo.getEqZcbh());
                 sgPdZt.setEqName(eqInfo.getEqName());
                 sgPdZt.setPdZt("盘亏");
                 selectMapper.insertZt(sgPdZt);
