@@ -32,7 +32,7 @@
             <label class="layui-form-label">设备编号</label>
             <div class="layui-input-block">
                 <input type="text" name="deviceCode" class="layui-input col-sm-10" autocomplete="off"  >
-                <button class="layui-btn col-sm-2" style="margin: 0;">选择</button>
+                <button class="layui-btn col-sm-2" id="selectEmp" style="margin: 0">选择</button>
             </div>
         </div>
 
@@ -253,13 +253,23 @@
 <script>
     $("#machineNumber").val($.getUrlParam("machineNumber"));
     var machineNumber = $.getUrlParam("machineNumber")
-    console.log($("#machineNumber").val());
 
     renderMod = {
+        btn:{
+        layer.open({
+            type: 2,
+            title: '选择',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1000px', '90%'],
+            content: 'child/choose2.html'
+            // content: 'child/modern-list-child.html'
+        });
+    });
+        }
         form:{
             val:{
                 filter:"forms",
-
                 get:{
                     url:"/deviceparameter/showOneLwxByLwyBh",
                     type:"POST",
