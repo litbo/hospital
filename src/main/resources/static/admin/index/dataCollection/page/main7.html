@@ -48,9 +48,9 @@
 		</div>
 
 		<!--联网仪编号-->
-		<div class="layui-input-inline" style="width: 130px;">
+		<!--<div class="layui-input-inline" style="width: 130px;">
 			<input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
-		</div>
+		</div>-->
 		<div class="layui-input-inline">
 			<button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
 		</div>
@@ -71,16 +71,18 @@
 			table: {
 				cols: [[ //表头
 					{type: 'checkbox', fixed: 'left'}
-					,{field:'bmName', title:'科室', fixed: 'left', unresize: true}
-					,{field:'eqSbbh', title:'设备编号'}
+					// ,{field:'bmName', title:'科室', fixed: 'left', unresize: true}
+					// ,{field:'eqSbbh', title:'设备编号'}
 					,{field:'eqZcbh', title:'资产编号'}
 					,{field:'eqName', title:'设备名称'}
 					,{field:'macid', title:'联网仪编号'}
-					,{field:'newStatus', title:'状态标识'}
+					// ,{field:'newStatus', title:'状态标识'}
 					,{field:'newStatus', title:'状态名称'}
-					,{field:'beginTime', title:'收包时间'}
+					// ,{field:'beginTime', title:'收包时间'}
 					,{field:'beginTime', title:'开始时间'}
 					,{field:'endTime', title:'结束时间'}
+					,{field:'workTime', title:'工作时长'}
+					,{field:'positionValue', title:'所在位置'}
 				]]
 				, url: "/operationRecord/show1"
 				, method: "POST"

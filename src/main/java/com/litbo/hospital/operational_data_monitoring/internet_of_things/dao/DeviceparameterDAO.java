@@ -22,34 +22,34 @@ public interface DeviceparameterDAO {
      */
 
 
+ @Select( "<script>"+
+         "SELECT\n" +
+         "\tb.eq_zcbh,\n" +
+         "\tb.eq_name,\n" +
+         "\tb.eq_gg,\n" +
+         "\tb.eq_xh,\n" +
+         "\ts.bm_name,\n" +
+         "\td.end_point_ip AS endPointIp,\n" +
+         "\td.MachineNumber AS MachineNumber \n" +
+         "  FROM\n" +
+         "\tDeviceParameter d\n" +
+         "\tleft JOIN eq_info b ON d.DeviceCode = b.eq_zcbh\n" +
+         "\tLEFT JOIN s_bm s ON b.eq_bmid = s.bm_id\n" +
+         "\twhere d.MachineNumber in (select distinct MachineNumber from DeviceParameter) "+
+         "<where>"+
+         "<if test='MachineNumber != null'>"+
+         " d.MachineNumber like CONCAT('%',#{MachineNumber},'%')" +
+         "</if>"+
+         "<if test='bmId != null'>"+
+         "and b.eq_bmid = #{bmId}"+
+         "</if>"+
+         "<if test='eqZcbh != null'>"+
+         "and b.eq_zcbh like  CONCAT('%',#{eqZcbh},'%') "+"</if>"+
+         "</where>"+
+         " order by d.MachineNumber DESC"+
+         "</script>")
+ List<DeviceparameterVO> selectAll(SearchVO searchVO);
 
-    @Select( "<script>"+
-            "SELECT\n" +
-                    "\tb.eq_zcbh,\n" +
-                    "\tb.eq_name,\n" +
-                    "\tb.eq_gg,\n" +
-                    "\tb.eq_xh,\n" +
-                    "\ts.bm_name,\n" +
-                    "\td.end_point_ip as endPointIp ,\n" +
-                    "\ti.MachineNumber as  MachineNumber \n" +
-                    "\tFROM\n" +
-                    "\tInspectDetail i\n" +
-                    "\tinner JOIN DeviceParameter d ON d.MachineNumber = i.MachineNumber\n" +
-                    "\tleft JOIN eq_info b ON d.DeviceCode = b.eq_zcbh\n" +
-                    "\tleft JOIN s_bm s ON b.eq_bmid = s.bm_id"+
-            "<where>"+
-            "<if test='MachineNumber != null'>"+
-            " i.MachineNumber like CONCAT('%',#{MachineNumber},'%')" +
-            "</if>"+
-            "<if test='bmId != null'>"+
-            "and b.eq_bmid = #{bmId}"+
-            "</if>"+
-            "<if test='eqZcbh != null'>"+
-            "and b.eq_zcbh like  CONCAT('%',#{eqZcbh},'%') "+"</if>"+
-            "</where>"+
-            " order by b.eq_zcbh DESC"+
-            "</script>")
-    List<DeviceparameterVO> selectAll(SearchVO searchVO);
    @Delete("delete from InspectDetailBack where MachineNumber=#{lwxbh}")
    int deleteLwxByLwxBh(String lwxbh);
     @Delete("delete from DeviceParameter where MachineNumber=#{lwxbh}")
@@ -176,7 +176,7 @@ public interface DeviceparameterDAO {
             "      ImageEnd = #{imageEnd,jdbcType=VARCHAR},\n" +
             "      WeightStart = #{weightStart,jdbcType=VARCHAR},\n" +
             "      WeightEnd = #{weightEnd,jdbcType=VARCHAR},\n" +
-            "      PECounting = #{PECounting,jdbcType=VARCHAR},\n" +
+            "      PECounting = #{pECounting,jdbcType=VARCHAR},\n" +
             "      Spare = #{spare,jdbcType=VARCHAR},\n" +
             "      HeartTime = #{heartTime,jdbcType=VARCHAR},\n" +
             "      RepeatInterval = #{repeatInterval,jdbcType=VARCHAR},\n" +

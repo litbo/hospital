@@ -33,7 +33,7 @@ public class Deviceparameter {
 
     private String weightEnd;
 
-    private String PECounting;
+    private String pECounting;
 
     private String spare;
 

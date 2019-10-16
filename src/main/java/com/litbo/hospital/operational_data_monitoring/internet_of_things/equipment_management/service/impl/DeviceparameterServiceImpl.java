@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -48,9 +49,6 @@ public class DeviceparameterServiceImpl implements DeviceparameterService {
     public PageInfo showEqNetWork(Integer pageNum, Integer pageSize, SearchVO searchVO) {
         PageHelper.startPage(pageNum,pageSize);
         List<DeviceparameterVO> vos = dao.selectAll(searchVO);
-        HashSet h = new HashSet(vos);
-        vos.clear();
-        vos.addAll(h);
         vos.forEach(item->{
             if(StringUtils.isBlank(item.getEqGg())){
                 item.setEqGg("");
