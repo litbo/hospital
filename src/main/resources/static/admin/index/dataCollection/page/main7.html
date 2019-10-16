@@ -37,7 +37,7 @@
 
 		<!--设备编号-->
 		<div class="layui-input-inline" style="width: 140px;">
-			<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
+			<input type="text" name="eqZcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
 		</div>
 
 		<!--科室-->
@@ -72,7 +72,7 @@
 				cols: [[ //表头
 					{type: 'checkbox', fixed: 'left'}
 					// ,{field:'bmName', title:'科室', fixed: 'left', unresize: true}
-					// ,{field:'eqSbbh', title:'设备编号'}
+					// ,{field:'eqZcbh', title:'设备编号'}
 					,{field:'eqZcbh', title:'资产编号'}
 					,{field:'eqName', title:'设备名称'}
 					,{field:'macid', title:'联网仪编号'}
@@ -105,7 +105,7 @@
 				url: "/operationRecord/show1",
 				type: "reload",
 				tid: "table",
-				data: ["date1", "bmId", "macid","eqSbbh"],
+				data: ["date1", "bmId", "macid","eqZcbh"],
 				method: "POST"
 			}
 		}

@@ -1,8 +1,11 @@
 package com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @BelongsProject: hospital
@@ -18,8 +21,12 @@ public class OperationRecord {
     /**设备状态*/
     private String newStatus;
     /**开始时间*/
+    @JsonFormat(pattern = "yyyy-MM-dd HH:ss:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:ss:mm")
     private Date beginTime;
     /**结束时间*/
+    @JsonFormat(pattern = "yyyy-MM-dd HH:ss:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:ss:mm")
     private Date endTime;
     /**心跳包数量*/
     private Integer workNums;
@@ -32,6 +39,8 @@ public class OperationRecord {
     //设备联网信息
     //联网仪编号
     private String macid;
+    //联网仪编号
+    private String machineNumber;
 
     //科室信息
     //科室名称
@@ -47,6 +56,21 @@ public class OperationRecord {
     private String eqName;
     //设备型号
     private String eqXh;
+    /*重量*/
+    private String currWeight;
 
     private String pym;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OperationRecord that = (OperationRecord) o;
+        return machineNumber.equals(that.machineNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(machineNumber);
+    }
 }

@@ -2,8 +2,12 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.dao;
 
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.OperationRecord;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.SearchVO;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -14,6 +18,7 @@ import java.util.List;
  * @CreateTime: 2019-07-22 16:52
  * @Description: 设备运行情况操作
  */
+@Mapper
 public interface InspectdetailDAO {
     /**
      * 根据条件查询
@@ -245,4 +250,70 @@ public interface InspectdetailDAO {
                     "standby.bm_name",
             "</script>"})
     List<OperationRecord> select4(SearchVO searchVO);
+
+
+
+    /*/**
+     * 方法功能描述: 查询所有联网仪最新运行记录
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/16 下午 6:57
+     */
+
+    @Select("<script>" +
+            "select e.eq_name,d.DeviceCode,i.ID, i.MachineNumber, i.InspectDate,i. NewStatus, i.CerateTime, i.Remark, \n" +
+            "i.BeginTime,i. EndTime, \n" +
+            "    i.WorkNums, i.ManuFault,  i.DayTotalPower, i.TempStatus, " +
+            "i.TempValue, i.HumiStatus, i.HumiValue, \n" +
+            "    i.SmokeStatus, i.SmokeValue, i.PositionStatus," +
+            " i.PositionValue, i.CurrWeight\n" +
+            "   from InspectDetail i,DeviceParameter d\n" +
+            "inner join eq_info e on e.eq_zcbh=d.DeviceCode\n" +
+            "inner join (SELECT MachineNumber, MAX ( dbo.InspectDetail.CerateTime ) as maxtime  FROM dbo.InspectDetail  GROUP BY MachineNumber ) AS  d2 on d2.MachineNumber=.MachineNumber\n" +
+            "inner join s_bm s on e.eq_bmid=s.bm_id\n" +
+            "<where>" +
+            " d2.maxtime=i.CerateTime\n" +
+            "  <if test =\"zcbh != null and zcbh!=''\">" +
+            "  and  d.DeviceCode like CONCAT('%',#{zcbh},'%') " +
+            "  </if> " +
+            "  <if test =\"bmid != null and bmid!=''\">" +
+            "  and e.eq_bmid =#{bmid} " +
+            "  </if> " +
+            "  <if test =\"qssj != null \">" +
+            "  and i.BeginTime &gt;=#{qssj} " +
+            "  </if> " +
+            "  <if test =\"jssj != null \">" +
+            "  and i.BeginTime &lt;=#{jssj} " +
+            "  </if> " +
+            "</where>\n" +
+            "order by i.BeginTime desc " +
+            "</script>")
+    List<OperationRecord> showAllYlxNewYxjl(@Param("qssj") Date qssj, @Param("jssj") Date jssj, @Param("zcbh") String zcbh, @Param("bmid") String bmid);
+
+/*/**
+ * 方法功能描述:查询本编号所有运行记录
+ * @Param:
+ * @Return:
+ * @Description:
+ * @Author: NCH
+ * @Date: 2019/10/16 下午 11:29
+ */
+
+    @Select("select e.eq_name,d.DeviceCode,i.ID, i.MachineNumber, i.InspectDate,i. NewStatus, i.CerateTime, i.Remark, \n" +
+            "i.BeginTime,i. EndTime, \n" +
+            "    i.WorkNums, i.ManuFault,  i.DayTotalPower, i.TempStatus, " +
+            "i.TempValue, i.HumiStatus, i.HumiValue, \n" +
+            "    i.SmokeStatus, i.SmokeValue, i.PositionStatus," +
+            " i.PositionValue, i.CurrWeight\n" +
+            "   from InspectDetail i\n" +
+            "inner join DeviceParameter d on d.MachineNumber=i.MachineNumber\n" +
+            "inner join eq_info e on e.eq_zcbh=d.DeviceCode\n" +
+            "inner join s_bm s on e.eq_bmid=s.bm_id\n" +
+            "where i.MachineNumber=#{lwybh}"+
+            "order by i.BeginTime desc "
+            )
+    List<OperationRecord> showOnelYlxYxjl(String lwybh);
+
 }
