@@ -67,10 +67,15 @@ renderMod = {
                 layer.msg('导入成功！', {
                     time: 2000 //2秒关闭（如果不配置，默认是3秒）
                 });
+                setTimeout(function () {
+                    window.parent.location.reload()
+                },1000)
+
             },error:function(index,upload){
                 console.log("index:"+index);
                 console.log("upload"+upload);
-            }
+            },
+
         }
     },
     btn:[

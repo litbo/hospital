@@ -93,7 +93,7 @@
                         , {title: '操作', align: 'center', toolbar: '#barDemo'}
                     ]]
                     , url: "/lifeManage/selectAllLpjHt"
-                    , reload: true
+                    , reload: 'parent'
                     , data: ["htSbmc",  "htYf", "htQssj", "htJssj"]
                     // , contentType: "application/json"
                     , method: "POST"
@@ -130,7 +130,7 @@
                                         type: "POST",
                                         contentType: "application/json",
                                         par: "id",
-                                        reload: true
+                                        reload: 'parent'
                                     },
                                     tool: "toolbar",
                                     event: "del"

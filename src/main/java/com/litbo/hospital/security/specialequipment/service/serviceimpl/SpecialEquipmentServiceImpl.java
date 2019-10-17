@@ -264,7 +264,11 @@ public class SpecialEquipmentServiceImpl implements SpecialEquipmentService {
                 String speqId = specialEquipment.getSpeqId();
 
                 if(StringUtils.isBlank(speqId)){
-                    speqId = GenerateId.getIdByIDAndTime("special_eq", "speq_id");
+                    try {
+                        speqId = GenerateId.getIdByIDAndTime("special_eq", "speq_id");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 specialEquipment.setSpeqId(speqId);
                 Date date = DateUtils
