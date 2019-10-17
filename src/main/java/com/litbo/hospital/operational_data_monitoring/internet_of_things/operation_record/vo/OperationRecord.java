@@ -60,17 +60,7 @@ public class OperationRecord {
     private String currWeight;
 
     private String pym;
+    private String deviceCode;
+    private String positionValue;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OperationRecord that = (OperationRecord) o;
-        return machineNumber.equals(that.machineNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(machineNumber);
-    }
 }

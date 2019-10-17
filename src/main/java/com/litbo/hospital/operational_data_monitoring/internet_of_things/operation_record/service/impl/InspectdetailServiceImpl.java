@@ -8,10 +8,12 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.dao.Tem
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.service.InspectdetailService;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.OperationRecord;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.SearchVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -119,5 +121,36 @@ public class InspectdetailServiceImpl implements InspectdetailService {
         PageHelper.startPage(pageNum,pageSize);
         //返回临时表数据
         return new PageInfo(temp2DAO.select());
+    }
+
+    @Override
+        public PageInfo<OperationRecord> showAllYlxNewYxjl(Integer pageNum, Integer pageSize,Date qssj, Date jssj, String zcbh, String bmid) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<OperationRecord> list = inspectdetailDAO.showAllYlxNewYxjl(qssj, jssj, zcbh, bmid);
+        list.forEach(item->{
+            if(item.getEndTime()==null|| item.getBeginTime()==null){
+                item.setWorkHours("\\");
+            }
+            else if(item.getEndTime()!=null && item.getBeginTime()!=null){
+                item.setWorkHours(String.valueOf((item.getEndTime().getTime()-item.getBeginTime().getTime())/1000));
+            }
+        });
+        return new PageInfo<>(list);
+    }
+
+    @Override
+    public PageInfo<OperationRecord> showOnelYlxYxjl(Integer pageNum, Integer pageSize,String lwybh) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<OperationRecord> list = inspectdetailDAO.showOnelYlxYxjl(lwybh);
+        list.forEach(item->{
+            if(item.getEndTime()==null|| item.getBeginTime()==null){
+                item.setWorkHours("\\");
+            }
+            else if(item.getEndTime()!=null && item.getBeginTime()!=null){
+                item.setWorkHours(String.valueOf((item.getEndTime().getTime()-item.getBeginTime().getTime())/1000));
+            }
+        });
+
+        return new PageInfo<>(list);
     }
 }

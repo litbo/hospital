@@ -24,4 +24,21 @@ public class String2DateUtil {
         }
 
     }
+    public static Date StringtoDateSfm(String str){
+        if(StringUtils.isNotBlank(str)){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = null;
+            try {
+                date = format.parse(str);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return date;
+        }
+
+        else{
+            return null;
+        }
+
+    }
 }

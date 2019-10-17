@@ -2,7 +2,13 @@ package com.litbo.hospital.operational_data_monitoring.internet_of_things.operat
 
 import com.github.pagehelper.PageInfo;
 
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.OperationRecord;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.SearchVO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
+
 /**
  * @BelongsProject: hospital
  * @BelongsPackage: com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.service
@@ -51,4 +57,9 @@ public interface InspectdetailService {
      * @return
      */
     PageInfo showNow4(Integer pageNum,Integer pageSize,SearchVO searchVO);
+
+    PageInfo<OperationRecord> showAllYlxNewYxjl( Integer pageNum, Integer pageSize,Date qssj,  Date jssj, String zcbh,  String bmid);
+
+    PageInfo<OperationRecord> showOnelYlxYxjl(Integer pageNum, Integer pageSize,String lwybh);
+
 }
