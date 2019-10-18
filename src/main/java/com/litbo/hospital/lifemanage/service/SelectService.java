@@ -10,14 +10,14 @@ import java.util.List;
 
 public interface SelectService {
 
-    PageInfo<SelectVO> selectAll(@Param("pdJhid")String pdJhid,
+    PageInfo<SgPdZt> yipan(@Param("pdJhid")String pdJhid,
                                  @Param("bmId") String bmId
             , @Param("pageNum")Integer pageNum
             , @Param("pageSize")Integer pageSize);
 
-    PageInfo<SelectVO>  selectNot(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
-    PageInfo<SelectVO>  allList(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
-     PageInfo<SelectVO> selectLess(@Param("pdJhid")String pdJhid,
+    PageInfo<SgPdZt>  pankui(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
+    PageInfo<SgPdZt>  allList(String pdJhid, String bmId, Integer pageNum, Integer pageSize);
+     PageInfo<SgPdZt> panYing(@Param("pdJhid")String pdJhid,
                                    @Param("bmId") String bmId,
                                    @Param("pageNum")Integer pageNum
                                 , @Param("pageSize")Integer pageSize);

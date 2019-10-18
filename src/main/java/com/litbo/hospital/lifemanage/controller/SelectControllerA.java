@@ -22,8 +22,7 @@ public class SelectControllerA {
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
 
-        PageHelper.startPage(pageNum,pageSize);
-        return Result.success(selectService.selectAll(pdJhid,bmId,pageNum,pageSize));
+        return Result.success(selectService.yipan(pdJhid,bmId,pageNum,pageSize));
     }
 
     @ResponseBody
@@ -32,8 +31,8 @@ public class SelectControllerA {
                                       @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
-        PageHelper.startPage(pageNum,pageSize);
-        return Result.success(selectService.selectNot(pdJhid,bmId,pageNum,pageSize));
+
+        return Result.success(selectService.pankui(pdJhid,bmId,pageNum,pageSize));
 
     }
     @ResponseBody
@@ -53,7 +52,7 @@ public class SelectControllerA {
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
         PageHelper.startPage(pageNum,pageSize);
-        return Result.success(selectService.selectLess(pdJhid,bmId,pageNum,pageSize));
+        return Result.success(selectService.panYing(pdJhid,bmId,pageNum,pageSize));
 
     }
 
