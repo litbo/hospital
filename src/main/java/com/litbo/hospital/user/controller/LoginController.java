@@ -42,6 +42,7 @@ public class LoginController {
     @RequestMapping("/submit")
     @ResponseBody
     public Result submit(@Valid LoginVo loginVo, BindingResult bindingResult){
+
         if(bindingResult.hasErrors()) {
             return Result.error(bindingResult.getFieldErrorCount());
         }
@@ -55,6 +56,7 @@ public class LoginController {
             Session session =  subject.getSession();
             session.setAttribute("username",loginVo.getUserName());
             LiveEmpVo emp =  userService.getLiveUserById(loginVo.getUserName());
+            System.out.println("emp:" + emp);
             session.setAttribute("emp",emp);
             SysLogo logos =logoDao.selectLogo();
             session.setAttribute("logos",logos);
@@ -74,6 +76,8 @@ public class LoginController {
             auth.setRightList(rightsByUsername);
             auth.setEmp(emp);
             auth.setLogos(logos);
+
+            System.out.println(auth);
 
             session.setAttribute("rolename",auth.getRole());
             return Result.success(auth);

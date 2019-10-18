@@ -23,9 +23,12 @@ public class TaskServiceImpl implements TaskService {
     public PageInfo listTaskByUserId(String userId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<Task> res = taskDao.listTaskByUserId(userId);
-        for (Task task:res) {
-            task.setUrl(task.getUrl()+"?id="+task.getOther()+"&taskId="+task.getTaskId());
+        if(!res.isEmpty()){
+            for (Task task:res) {
+                task.setUrl(task.getUrl()+"?id="+task.getOther()+"&taskId="+task.getTaskId());
+            }
         }
+
         return new PageInfo(res);
     }
 

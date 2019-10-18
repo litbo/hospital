@@ -27,6 +27,7 @@ public class TaskController {
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize){
         //TODO  已修改
         LiveEmpVo sEmp = (LiveEmpVo)SecurityUtils.getSubject().getSession().getAttribute("emp");
+
         String userId = sEmp.getUserId();
         PageInfo pageInfo = taskService.listTaskByUserId(userId,pageNum,pageSize);
         return Result.success(pageInfo);
