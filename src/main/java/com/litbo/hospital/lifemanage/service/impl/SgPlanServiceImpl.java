@@ -143,24 +143,24 @@ public class SgPlanServiceImpl implements SgPlanService {
                 List<SgPlanList> sgPlanLists2= new ArrayList<>();
                 if (listNum==null){
                     sgList.setAllNum(adllDate3.size());
-//     修改               SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-//                            sg.getPlanDate(),num, 0,
-//                            0,num);
                     SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-                            sg.getPlanDate(),0, 0,
+                            sg.getPlanDate(),num, 0,
                             0,0);
+//                    SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+//                            sg.getPlanDate(),0, 0,
+//                            0,0);
                     sgPlanLists2.add(sgList1);
                 }
                 sgPlanLists.addAll(sgPlanLists2);
                 if (listNum != null) {
                     if  (listNum.getYiPanNum() ==0 ){
                         sgList.setAllNum(adllDate3.size());
-//    修改                    SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-//                                sg.getPlanDate(),num, 0,
-//                                0,num);
                         SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-                                sg.getPlanDate(),0, 0,
+                                sg.getPlanDate(),num, 0,
                                 0,0);
+//                        SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+//                                sg.getPlanDate(),0, 0,
+//                                0,0);
                         sgPlanLists2.add(sgList1);
                     }
                     sgPlanLists.addAll(sgPlanLists2);

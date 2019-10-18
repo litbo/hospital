@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>账实核对</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+</head>
+
+<body>
+<div class="layui-row">
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+
+    <input type="hidden" class="planId">
+    <input type="hidden" class="eqId">
+</div>
+
+<script type="text/html" id="toolBar">
+    <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <input class="layui-input" name="eqName" id="eqName" placeholder="设备名称" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+        <hr class="devideHr">
+        <div class="addBtn">
+            <!--<a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailYes">正常</a>-->
+            <!--<a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailNo">盘盈</a>-->
+            <!--<a class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-event="detailIn">盘亏录入</a>-->
+        </div>
+    </form>
+</script>
+
+
+
+<script>
+    // console.log($.getUrlParam("id"));
+    var planId = $.getUrlParam("id");
+    var eqId = $.getUrlParam("bmId");
+    localStorage.setItem("planId",$.getUrlParam("id"));
+    localStorage.setItem("eqId",$.getUrlParam("id"));
+
+    renderMod = {
+        addTable: {
+            table: [
+                {
+                    elem: "#table"
+                    , cols: [[ //表头
+                        {type: "checkbox"}
+                        , {field: 'eqZcbh', title: '资产编号', minWidth: 150}
+                        , {field: 'eqName', title: '设备名称', minWidth: 150}
+                        , {field: 'eqGg', title: '规格', minWidth: 130}
+                        , {field: 'eqXh', title: '型号', minWidth: 130}
+                        // , {field: 'date', title: '审核日期', minWidth: 200, sort: true}
+                        // , {field: 'userId', title: '审核人', minWidth: 150}
+                        // , {field: 'checks', title: '是否存在', minWidth: 150}
+                    ]]
+                    , url: "/lifeManage/selectSgCheck"
+                    , method: "POST"
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                    , where: {
+                        planId: $.getUrlParam("id")
+                    }
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "data": res.data.list, //解析数据列表
+                            "count": res.data.total //总数据数
+                        }
+                    }
+                    , done: function (obj) {
+                        console.log(obj);
+                        tableFunc({
+                            toolFunc: [
+                                {
+                                    send: {
+                                        id: "table",
+                                        filter: "table1",
+                                        name: "ids",
+                                        event: "detailYes",
+                                        url: "/lifeManage/updateSgCheckYByIds",
+                                        type: "POST",
+                                        par: "id",
+                                        show: "核对设备存在",
+                                        del: false,
+                                        reload: 'parent',
+                                        reTable: true
+                                    },
+                                    tool: "toolbar",
+                                    event: "detailYes"
+                                },
+                                {
+                                    send: {
+                                        id: "table",
+                                        filter: "table1",
+                                        name: "ids",
+                                        event: "detailNo",
+                                        url: "/lifeManage/updateSgCheckNByIds",
+                                        type: "POST",
+                                        par: "id",
+                                        show: "核对设备不存在",
+                                        del: false,
+                                        reload: 'parent',
+                                        reTable: true
+                                    },
+                                    tool: "toolbar",
+                                    event: "detailNo"
+                                },
+                                {
+                                    event:"detailIn",
+                                    type:2,
+                                    tool: "toolbar",
+                                    content:"child/detailIn.html"
+                                }
+                            ]
+                        })
+                    }
+                }
+            ],
+            reSet: {
+                url: "/lifeManage/findListByEqName",
+                type: "reload",
+                data: ["eqName", "planDate", "userId"]
+            },
+            // form: {
+            //     val: {
+            //         filter: "forms",
+            //         get: {
+            //             url: "/lifeManage/selectSgCheck",
+            //             type: "POST",
+            //             data: {planId: $.getUrlParam("id")}
+            //             // add:{page:1,name:"默认表单",sgDictId:$.getUrlParam("sgDictId")}
+            //             //有add时必需时data为表单name数组，否则请直接使用data赋值
+            //         }//get内参数需参考《内容传输与提交》文档
+            //     },
+            //     submit: {
+            //         form: {
+            //             url: "lifeManage/addOther",
+            //             type: "POST",
+            //             data: [],
+            //             success: function () {
+            //                 alert("审核成功");
+            //             }
+            //         }
+            //     }
+            //
+            // }
+        }
+    }
+</script>
+</body>
+</html>
