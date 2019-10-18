@@ -128,41 +128,45 @@ public class SgPlanServiceImpl implements SgPlanService {
 
 
             for (SgPlan sg:sgPlan){
-//                System.out.println(sg.getPlanName());
                 listNum = selectMapper.getListNum(sg.getId());
-//                List<SelectVO> adllDate3 = selectMapper.listCheckDate(sg.getBmId());
-
-
-
                 List<SelectVO> adllDate3 = new ArrayList<>();
-                String getAllBmName = selectMapper.getBmName(sg.getBmId()); //对应planid下的部门
-                List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(sg.getId());
+                String BmId = sg.getBmId();
+                String getAllBmName = selectMapper.getBmName(BmId); //对应planid下的部门
+                String planId = sg.getId();
+                List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(planId);
 //                System.out.println(adllDate4);
                 for (SgCheckVO s1:adllDate4){
                     SelectVO selectVO = new SelectVO(s1.getEqZcbh(),s1.getEqName(),getAllBmName);
                     adllDate3.add(selectVO);
                 }
-
-
-
+                int num = adllDate3.size();
                 List<SgPlanList> sgPlanLists2= new ArrayList<>();
-                if  (listNum ==null){
-                      sgList.setAllNum(adllDate3.size());
-                      SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-                             sg.getPlanDate(),adllDate3.size(), 0,
-                             0,adllDate3.size());
-//                    System.out.println("空"+sgList1);
-
-                     sgPlanLists2.add(sgList1);
+                if (listNum==null){
+                    sgList.setAllNum(adllDate3.size());
+                    SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+                            sg.getPlanDate(),num, 0,
+                            0,num);
+                    sgPlanLists2.add(sgList1);
                 }
                 sgPlanLists.addAll(sgPlanLists2);
-                 if (listNum!=null){
-                     SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-                             sg.getPlanDate(),adllDate3.size(), listNum.getYiPanNum(),
-                             listNum.getPanYingNum(),listNum.getPanKuiNum());
-                     sgPlanLists.add(sgList1);
-//                     System.out.println("部位空"+sgList1);
-                 }
+                if (listNum != null) {
+                    if  (listNum.getYiPanNum() ==0 ){
+                        sgList.setAllNum(adllDate3.size());
+                        SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+                                sg.getPlanDate(),num, 0,
+                                0,num);
+                        sgPlanLists2.add(sgList1);
+                    }
+                    sgPlanLists.addAll(sgPlanLists2);
+                    if (listNum.getYiPanNum()>0){
+                        SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+                                sg.getPlanDate(),listNum.getAllNum(), listNum.getYiPanNum(),
+                                listNum.getPanYingNum(),listNum.getPanKuiNum());
+                        sgPlanLists.add(sgList1);
+//                        System.out.println("部位空"+sgList1);
+                    }
+                }
+
 
 //                System.out.println("总共"+sgPlanLists);
             }
