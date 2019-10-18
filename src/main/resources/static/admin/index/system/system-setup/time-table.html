@@ -131,7 +131,7 @@
                     type:"POST",
                     contentType:"application/json",
                     data:["amSbsj","amXbsj","pmSbsj","pmXbsj"],
-                    reload:true
+                    reload:'parent'
                 },//表单提交函数
                 before:function(data){
                     for(var name in data.field){

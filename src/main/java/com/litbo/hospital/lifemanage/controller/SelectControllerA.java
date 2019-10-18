@@ -1,4 +1,5 @@
 package com.litbo.hospital.lifemanage.controller;
+import com.github.pagehelper.PageHelper;
 import com.litbo.hospital.lifemanage.service.SelectService;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
 import com.litbo.hospital.result.Result;
@@ -20,7 +21,10 @@ public class SelectControllerA {
                                  @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
-        return Result.success(selectService.selectAll(pdJhid,bmId,pageNum,pageSize));
+
+//        return Result.success(selectService.selectAll(pdJhid,bmId,pageNum,pageSize));
+        String eqName="";
+        return Result.success(selectService.findYipan(pdJhid,eqName,pageNum,pageSize));
     }
 
     @ResponseBody
@@ -29,9 +33,9 @@ public class SelectControllerA {
                                       @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
-
-        return Result.success(selectService.selectNot(pdJhid,bmId,pageNum,pageSize));
-
+//        return Result.success(selectService.selectNot(pdJhid,bmId,pageNum,pageSize));
+        String eqName="";
+        return Result.success(selectService.findPankui(pdJhid,eqName,pageNum,pageSize));
     }
     @ResponseBody
     @RequestMapping("/allList")//盘点计划的
@@ -40,7 +44,9 @@ public class SelectControllerA {
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
 
-        return Result.success(selectService.allList(pdJhid,bmId,pageNum,pageSize));
+//        return Result.success(selectService.allList(pdJhid,bmId,pageNum,pageSize));
+        String eqName="";
+        return Result.success(selectService.findInfo(pdJhid,eqName,pageNum,pageSize));
 
     }
 
@@ -50,9 +56,9 @@ public class SelectControllerA {
                                     @RequestParam("bmId") String bmId
             ,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize){
-
-        return Result.success(selectService.selectLess(pdJhid,bmId,pageNum,pageSize));
-
+//        return Result.success(selectService.selectLess(pdJhid,bmId,pageNum,pageSize));
+        String eqName="";
+        return Result.success(selectService.findPanying(pdJhid,eqName,pageNum,pageSize));
     }
 
     @ResponseBody

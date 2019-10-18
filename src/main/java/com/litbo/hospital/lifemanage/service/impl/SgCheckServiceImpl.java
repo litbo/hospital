@@ -61,8 +61,8 @@ public class SgCheckServiceImpl implements SgCheckService {
     @Override
     public void updateSgCheckByIds(List<String> ids, String userId, String check) {
         //通过人员id获取用户姓名
-        System.out.println("改改");
-        System.out.println("改改");
+//        System.out.println("改改");
+//        System.out.println("改改");
         SEmp emp = empDao.getEmpsById(userId);
         SgCheck sgCheck = new SgCheck();
         for (String id : ids) {
@@ -70,7 +70,7 @@ public class SgCheckServiceImpl implements SgCheckService {
             sgCheck.setId(id);
             sgCheck.setDate(new Date());
             sgCheck.setChecks(StateEnum.getMessageByCode(Integer.parseInt(check)));
-            System.out.println("改改");
+//            System.out.println("改改");
             sgCheckMapper.updateByPrimaryKeySelective(sgCheck);
         }
     }
@@ -94,7 +94,7 @@ public class SgCheckServiceImpl implements SgCheckService {
             check = StateEnum.getMessageByCode(Integer.parseInt(check));
         }
         PageHelper.startPage(pageNum,pageSize);
-        System.out.println(sgCheckMapper.getListByX(planId,check,checkDate,checkUser,planDate,planUser).toString());
+//        System.out.println(sgCheckMapper.getListByX(planId,check,checkDate,checkUser,planDate,planUser).toString());
         return new PageInfo<>(sgCheckMapper.getListByX(planId,check,checkDate,checkUser,planDate,planUser));
     }
 
@@ -106,8 +106,6 @@ public class SgCheckServiceImpl implements SgCheckService {
             sgCheck.setId(planId);
             addMapper.addOther(sgCheck);
 //            sgCheck.setEqId(sgCheck.getChecks());
-
-
         }catch (Exception e){
             e.printStackTrace();
         }

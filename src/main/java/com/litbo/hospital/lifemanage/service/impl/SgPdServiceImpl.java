@@ -7,18 +7,22 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.lifemanage.bean.*;
+import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
+import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
 import com.litbo.hospital.lifemanage.dao.SgPlanMapper;
 import com.litbo.hospital.lifemanage.service.SgPdSeverice;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
+
 
 @Service
 public class SgPdServiceImpl implements SgPdSeverice {
@@ -28,6 +32,8 @@ public class SgPdServiceImpl implements SgPdSeverice {
     private SgPlanMapper sgPlanMapper;
     @Autowired
     private SelectMapper selectMapper;
+    @Autowired
+    SgCheckMapper sgCheckMapper;
 
 //    /**
 //     * 插入盘点的计划id和操作人id
@@ -118,8 +124,17 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
         }
         adllDate = listTemp;
-        List<SelectVO> adllDate2 = selectMapper.listCheckDate(bmId);
-        System.out.println("addate2"+adllDate2);
+        List<SelectVO> adllDate2 = new ArrayList<>();
+//                selectMapper.listCheckDate(bmId);
+        String getAllBmName2 = selectMapper.getBmName(bmId); //对应planid下的部门
+        List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(pdJhid);
+        for (SgCheckVO s2:adllDate4){
+            SelectVO selectVO = new SelectVO(s2.getEqZcbh(),s2.getEqName(),getAllBmName2);
+            adllDate2.add(selectVO);
+        }
+
+
+//        System.out.println("addate2"+adllDate2);
         for(SelectVO a : adllDate){
             if(adllDate2.contains(a)){
                 adllDate2.remove(a);
@@ -151,13 +166,39 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
 //        System.out.println("3");
 
+        List<SgPdZt> listPankui = selectMapper.findPankui(pdJhid,"");
+//        System.out.println("盘亏+++"+listPankui.size()+listPankui);
+        List<SelectVO> lisSbbh = new ArrayList<>(); //现存盘亏的
+        for (SgPdZt sgPdZt1 :listPankui){
+            SelectVO selectVO = new SelectVO(sgPdZt1.getEqSbbh(),sgPdZt1.getEqName(),sgPdZt1.getBmName());
+            lisSbbh.add(selectVO);
+        }
+//        System.out.println("插入的"+adllDate2.size()+adllDate2);
+//        adllDate2.addAll(lisSbbh);
+//        System.out.println("盘亏的jia"+adllDate2.size());
 
-        System.out.println("盘亏的"+adllDate2);
-        for (SelectVO sgPd :adllDate2){
+
+        List<SelectVO> listAll = new ArrayList();
+        List<SelectVO> resultList= new ArrayList();
+        listAll.addAll(lisSbbh);
+        listAll.addAll(adllDate2);
+        for (int i = 0; i < listAll.size(); i++) {
+            if(adllDate2.contains(listAll.get(i))&&lisSbbh.contains(listAll.get(i))){
+                continue;
+            }else{
+                resultList.add(listAll.get(i));
+            }
+        }
+//        System.out.println("genxinhoude"+resultList.size()+resultList);
+
+
+        for (SelectVO sgPd :resultList){
+
             sgPdZt.setBmName(sgPd.getBmName());
             sgPdZt.setEqSbbh(sgPd.getEqSbbh());
             sgPdZt.setEqName(sgPd.getEqName());
             sgPdZt.setPdZt("盘亏");
+            // int size = userList.size(); 此处一定不要在这里将size写死，因为size是一直在变的
             selectMapper.insertZt(sgPdZt);
         }
 //        System.out.println("4");
@@ -181,4 +222,35 @@ public class SgPdServiceImpl implements SgPdSeverice {
 
 
     }
+
+
+
+
+    @Test
+    public void test(){
+
+        List<SelectVO> list1 = new ArrayList<>();
+        list1.add(new SelectVO("aa","bb","cc"));
+        list1.add(new SelectVO("aa1","bb1","cc1"));
+        List<SelectVO> list2 = new ArrayList<>();
+        list2.add(new SelectVO("aa","bb","cc"));
+        list2.add(new SelectVO("22","22","22"));
+        list2.add(new SelectVO("33","33","33"));
+
+
+        List<SelectVO> listAll = new ArrayList();
+        List<SelectVO> resultList= new ArrayList();
+        listAll.addAll(list1);
+        listAll.addAll(list2);
+        for (int i = 0; i < listAll.size(); i++) {
+            if(list1.contains(listAll.get(i))&&list2.contains(listAll.get(i))){
+                continue;
+            }else{
+                resultList.add(listAll.get(i));
+            }
+        }
+        System.out.println(resultList);
+    }
+
+
 }

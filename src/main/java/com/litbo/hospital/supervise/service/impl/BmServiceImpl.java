@@ -615,7 +615,7 @@ public class BmServiceImpl implements BmService {
 
                 String obmId = row.getCell(0).getStringCellValue();
                 String bmName = row.getCell(1).getStringCellValue();
-                if(obmId.contains("*")||bmName.contains("*"))  return 1;
+                if(obmId.contains("*"))  return 1;
                 String userId = row.getCell(2).getStringCellValue();
                 String bmTel = row.getCell(3).getStringCellValue();
                 String bmAddr = row.getCell(4).getStringCellValue();

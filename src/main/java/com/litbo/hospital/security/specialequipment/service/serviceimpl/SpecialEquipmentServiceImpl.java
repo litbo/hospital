@@ -257,9 +257,18 @@ public class SpecialEquipmentServiceImpl implements SpecialEquipmentService {
                 SpecialEquipment specialEquipment = parseMap2Object(map, SpecialEquipment.class);
                 //初始化设备流水号
                 //设置特种设备流水号
+                if(specialEquipment.getSpeqBh().contains("*"))
+                {
+                    return 1;
+                }
                 String speqId = specialEquipment.getSpeqId();
+
                 if(StringUtils.isBlank(speqId)){
-                    speqId = GenerateId.getIdByIDAndTime("special_eq", "speq_id");
+                    try {
+                        speqId = GenerateId.getIdByIDAndTime("special_eq", "speq_id");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 specialEquipment.setSpeqId(speqId);
                 Date date = DateUtils
@@ -269,7 +278,7 @@ public class SpecialEquipmentServiceImpl implements SpecialEquipmentService {
                 int i = specialEquipmentMapper.insertSelective(specialEquipment);
 
                 if(i<=0){
-                    System.out.println("error");
+                    return 1/0;
                 }
             }
 

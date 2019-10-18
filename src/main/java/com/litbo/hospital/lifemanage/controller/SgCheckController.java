@@ -115,9 +115,9 @@ public class SgCheckController {
                                     @RequestParam(name = "planUser", required = false) String planUser,
                                     @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                     @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        System.out.println("aaaaaaaa");
-        System.out.println("aaaaaaaa");
-        System.out.println("aaaaaaaa");
+//        System.out.println("aaaaaaaa");
+//        System.out.println("aaaaaaaa");
+//        System.out.println("aaaaaaaa");
         return Result.success(sgCheckService.selectSgCheckList(planId, check, checkDate, checkUser, planDate, planUser, pageNum, pageSize));
     }
 
