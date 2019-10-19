@@ -18,6 +18,11 @@
 <div class="layui-row">
     <div class="col-xs-12">
         <table class="layui-hide" id="table" lay-filter="table1"></table>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1" style="float: right;margin-right: 5%;">提交</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -45,11 +50,34 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">检查</a>
+    {{#if (d.operationId === "01") { }}
+    <form class="layui-form forms" action="" lay-filter="forms">
+<!--        <input type="radio" name="taskResult" value="1" title="正常" checked>-->
+<!--        <input type="radio" name="taskResult" value="0" title="不正常">-->
+        <select name="taskResult">
+            <option value="01">正常</option>
+            <option value="02">不正常</option>
+        </select>
+    </form>
+    {{# }else if(d.operationId === "02"){ }}
+    <form class="layui-form forms" action="" lay-filter="forms">
+    <input type='radio' name='taskResult' value='1' title='进行' checked>
+    <input type='radio' name='taskResult' value='0' title='未进行'>
+    </form>
+    {{# }else{ }}
+    <form class="layui-form forms" action="" lay-filter="forms">
+    <input type='radio' name='taskResult' value='1' title='处理' checked>
+    <input type='radio' name='taskResult' value='0' title='未处理'>
+    </form>
+    {{# } }}
 </script>
 
+<!--<script type="text/html" id="barDemo">-->
+<!--    <a class="layui-btn layui-btn-sm layui-btn-normal pipei" lay-event="pipei">检查</a>-->
+<!--</script>-->
+
 <script>
-    console.log($.getUrlParam("eqSbbh"));
+    // console.log($.getUrlParam("eqSbbh"));
     renderMod = {
         addTable: {
             table: {
@@ -60,7 +88,7 @@
                     ,{field:'eqName', title:'设备名称', minWidth:180}
                     ,{field:'eqSbbh',title:'设备编号',minWidth:250}
                     ,{field:'bmName',title:'科室', minWidth:220}
-                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:130}
+                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:180}
                 ]]
                 , url: "/lifeManage/searchUnFinishedEqTask"
                 , method: "POST"
@@ -75,11 +103,13 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "data": res.data.list, //解析数据列表
+                        "data": res.data, //解析数据列表
                         "count": res.data.total //总数据数
                     }
                 }
+                ,page:false
                 ,done: function(obj){
+                    console.log(obj);
                     tableFunc({
                         "tools":[
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
@@ -132,6 +162,55 @@
             ]
         }
     };
+
+    // 表单
+    layui.use(['form','layedit'], function(){
+
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+        
+        form.on('submit(demo1)', function(data){
+
+            var data1 = form.val("forms");
+            console.log(data1);
+
+            console.log($(".forms").val());
+
+            // layer.alert(JSON.stringify(data1), {
+            //     title: '最终的提交信息'
+            // });
+
+            // $.ajax({
+            //     type: "POST",
+            //     dataType: 'json',
+            //     url: '/lifeManage/insertYjyaZd',
+            //     data: JSON.stringify(dataObj),
+            //     contentType: 'application/json; charset=UTF-8',
+            //     success: function(result) {
+            //         console.log(JSON.stringify(dataObj))
+            //         layui.layer.alert('提交成功!');
+            //         setTimeout(function () {
+            //             window.parent.location.reload();
+            //         },1000)
+            //
+            //     },
+            //     error:function(){
+            //         layer.alert(JSON.stringify(dataObj), {
+            //             title: '最终的提交信息'
+            //         });
+            //         alert("error");
+            //     }
+            // });
+            return false;
+        });
+
+        $('#drmb').on('click', function(){
+            // console.log($(".mbNr").val());
+            layedit.setContent(index, $(".mbNr").val());
+        });
+    });
 
 </script>
 </body>
