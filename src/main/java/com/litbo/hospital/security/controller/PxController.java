@@ -88,7 +88,6 @@ public class PxController {
 
     @RequestMapping("/addYypxjh")
     public Result addYypxjh(@RequestBody YyPxJhVo yyPxJhVo){
-        System.out.println(yyPxJhVo.toString());
        String str =  yyPxJhVo.getPxnrlb();
        String[] strs = str.split(",");
         for(String s:strs){

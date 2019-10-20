@@ -1,15 +1,14 @@
 package com.litbo.hospital.security.controller;
 
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.service.PxDelAndSelService;
 import com.litbo.hospital.security.vo.EmpVo;
-import com.litbo.hospital.security.vo.ListYyVo;
-import org.apache.ibatis.annotations.Select;
+import com.litbo.hospital.security.vo.LSRyVo;
+import com.litbo.hospital.security.vo.TjRyVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,4 +63,20 @@ public class PxDelAndSelController {
         PageInfo pageInfo = new PageInfo(list);
         return Result.success(pageInfo);
     }
+
+    @RequestMapping("/selectRy")
+    public Result selectRy(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
+        List<TjRyVo> list = pxDelAndSelService.selectRy(pageNum,pageSize);
+        return Result.success(new PageInfo(list));
+    }
+
+    @RequestMapping("/insertRy")
+    public Result insertRy(@RequestBody LSRyVo lsRyVo){
+        TjRyVo[] tjRyVos = lsRyVo.getTjRyVos();
+        for(TjRyVo tjRyVo:tjRyVos){
+           pxDelAndSelService.insertRy(tjRyVo);
+        }
+        return Result.success();
+    }
+
 }

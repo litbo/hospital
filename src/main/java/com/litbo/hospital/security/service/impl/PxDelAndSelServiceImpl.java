@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.security.dao.PxDelAndSelDao;
 import com.litbo.hospital.security.service.PxDelAndSelService;
 import com.litbo.hospital.security.vo.EmpVo;
+import com.litbo.hospital.security.vo.TjRyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Service
 public class PxDelAndSelServiceImpl implements PxDelAndSelService {
+
     @Autowired(required = false)
     PxDelAndSelDao pxDelAndSelDao;
 
@@ -42,5 +44,14 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
         return new PageInfo(pxDelAndSelDao.selYyJh(eqName));
      }
 
+    @Override
+    public List<TjRyVo> selectRy(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return pxDelAndSelDao.selectRy();
+    }
 
+    @Override
+    public Integer insertRy(TjRyVo tjRyVo) {
+        return pxDelAndSelDao.insertRy(tjRyVo);
+    }
 }

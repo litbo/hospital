@@ -3,10 +3,8 @@ package com.litbo.hospital.security.dao;
 import com.litbo.hospital.security.vo.EmpVo;
 import com.litbo.hospital.security.vo.ListRyPxJhVo;
 import com.litbo.hospital.security.vo.ListYyVo;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.litbo.hospital.security.vo.TjRyVo;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -36,5 +34,12 @@ public interface PxDelAndSelDao {
     @Select("SELECT e.user_id,e.user_xm AS userName,s.bm_name\n" +
             "FROM dbo.s_emp AS e INNER JOIN dbo.s_bm AS s ON e.bm_id=s.bm_id")
     List<EmpVo> getRyBtNr();
+
+    @Insert("INSERT INTO jh_lsry(tjry_id,user_name,bm_name,user_id) VALUES (#{tjryId,jdbcType=VARCHAR}," +
+            "#{userName,jdbcType=VARCHAR},#{bmName,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER})")
+    Integer insertRy(TjRyVo tjRyVo);
+
+    @Select("SELECT bm_name AS bmName,user_id AS userId,user_name AS userName FROM jh_tjry")
+    List<TjRyVo> selectRy();
 
 }
