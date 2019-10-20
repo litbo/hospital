@@ -92,12 +92,12 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="">添加人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加人员</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情</a>
 </script>
 
 <script type="text/html" id="bars">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="">添加人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加人员</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxqs">详情</a>
 </script>
 
@@ -133,7 +133,6 @@
                     }
                 }
                 , done: function (obj) {
-                    merge(obj);
                     tableFunc({
                         toolFunc: [
                             {
@@ -143,6 +142,15 @@
                                 area: ['90%', '90%'],
                                 type: 2,
                                 content: "./child/personnel-xqinput.html",
+                                dataUrl: ["id"]
+                            },
+                            {
+                                filter:"table1",
+                                event: "add",
+                                title: "添加人员",
+                                area: ['90%', '90%'],
+                                type: 2,
+                                content: "./child/addRY.html",
                                 dataUrl: ["id"]
                             }
                         ]
@@ -178,7 +186,6 @@
                     }
                 }
                 , done: function (obj) {
-                    merge(obj);
                     tableFunc({
                         toolFunc: [
                             {
@@ -188,6 +195,15 @@
                                 area: ['90%', '90%'],
                                 type: 2,
                                 content: "./child/personnel-xqinput.html",
+                                dataUrl: ["id"]
+                            },
+                            {
+                                filter:"table1",
+                                event: "add",
+                                title: "添加人员",
+                                area: ['90%', '90%'],
+                                type: 2,
+                                content: "./child/addRY.html",
                                 dataUrl: ["id"]
                             }
                         ]
@@ -204,7 +220,7 @@
 
     };
 
-    function merge(obj) {
+    /*function merge(obj) {
         var data = obj.data;
         var mergeIndex = 0;//定位需要添加合并属性的行数
         var mark = 1; //这里涉及到简单的运算，mark是计算每次需要合并的格子数
@@ -231,7 +247,7 @@
             mergeIndex = 0;
             mark = 1;
         }
-    }
+    }*/
 </script>
 </body>
 </html>
