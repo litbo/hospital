@@ -49,9 +49,9 @@
             console.log(checkStatus.data);//获取选中行的数据
             $.ajax({
                 type: "POST",
-                url: "/px/addYypxjh",
+                url: "/px/insertRy",
                 // async: false,/*同步传输*/
-                // contentType: 'application/json',
+                contentType: 'application/json',
                 dataType: 'json',
                 data: checkStatus.data,
                 /* data: {"deleteVo":JSON.stringify(deVo)} ,*/
