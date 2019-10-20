@@ -21,119 +21,82 @@
 <div class="layui-row">
 
     <div class="col-xs-12">
-        <table id="table" lay-filter="table1"></table>
+        <table id="table" lay-data="{id: 'idTest'}" lay-filter="table1"></table>
     </div>
 </div>
 
-<!--<script type="text/html" id="toolBar">
-    <div class="hidden-xs" id="moreBar">
-        <div class="layui-inline">
-            <select class="layui-input" name="htZt">
-                <option value="" disabled selected hidden>全部合同状态</option>
-                <option value="0">已签订</option>
-                <option value="1">执行中</option>
-                <option value="2">已完成</option>
-            </select>
-        </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="htBianhao" placeholder="合同编号">
-        </div>
-        <div class="layui-inline">
-            <input class="layui-input" name="htYf" placeholder="供货商">
-        </div>
-        <div class="layui-inline">
-            <input type="text" name="htQssj" class="layui-input" id="test1"
-                   placeholder="开始日期">
-        </div>
-        &#45;&#45;
-        <div class="layui-inline">
-            <input type="text" name="htJssj" class="layui-input" id="test2"
-                   placeholder="结束日期">
-        </div>
-        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
-    </div>
-    <hr class="devideHr">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-sm " style="background: #CC0033" lay-event="del" id="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
-    </div>
-</script>-->
-
-<!--<script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">查看历史记录</a>
-</script>
 <script type="text/html" id="toolBar">
-    &lt;!&ndash; 查询区域 &ndash;&gt;
-    <form class="layui-form" action="" layui-filter="forms">
-        &lt;!&ndash;收包时间&ndash;&gt;
-        <div class="layui-inline layui-form-pane ">
-            <label class="layui-form-label">日期范围</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" name="qssj" id="date1" placeholder="请选择日期" style="width: 200px;">
-            </div>
-        </div>
+    <!-- 查询区域 -->
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckData" id="transmit" style="float: left;">确定</button>
 
-        &lt;!&ndash;设备编号&ndash;&gt;
-        <div class="layui-input-inline" style="width: 140px;">
-            <input type="text" name="zcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
+    <form action="" style="float: right;margin-top: -5px;">
+        <!--模板名称-->
+        <div class="layui-input-inline" style="width: 160px;">
+            <input type="text" name="eqName" autocomplete="off" placeholder="人员编号" class="layui-input">
         </div>
-
-        &lt;!&ndash;科室&ndash;&gt;
-        <div class="layui-input-inline" style="width: 150px;">
-            <select name="bmid"  lay-filter="bmid">
-                <option value="">全部科室</option>
-            </select>
-        </div>
-
-        &lt;!&ndash;联网仪编号&ndash;&gt;
-        &lt;!&ndash;<div class="layui-input-inline" style="width: 130px;">
-            <input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
-        </div>&ndash;&gt;
         <div class="layui-input-inline">
             <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
         </div>
     </form>
-</script>-->
+</script>
+
 
 <script>
-    renderMod = {
-        formAction: {
-            date: [
-                {
-                    elem:"#date1",
-                    value:false,
-                    type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss',
-                    range:true
+    layui.use('table', function() {
+        var table = layui.table;
+        table.on('toolbar(table1)', function (obj) {
+            var checkStatus = table.checkStatus('idTest'); //idTest 即为基础参数 id 对应的值
+            console.log(checkStatus.data);//获取选中行的数据
+            $.ajax({
+                type: "POST",
+                url: "/px/addYypxjh",
+                // async: false,/*同步传输*/
+                // contentType: 'application/json',
+                dataType: 'json',
+                data: checkStatus.data,
+                /* data: {"deleteVo":JSON.stringify(deVo)} ,*/
+                success: function (data) {
+                    layer.alert("y")
                 },
-                {
-                    elem: "#test2",
-                    type: "date",
-                    format: 'yyyy-MM-dd',
-                    value: false
+                error:function (data) {
+                    layer.alert("x")
                 }
-            ],
-            val: {
-                filter: "forms",
-                select: [
-                    {
-                        filter: "bmid",
-                        ids: "bmId",
-                        text: "bmName",
-                        url: "/supervise/bmgl/listDelXks"
-                    }
-                ]
+
+            });
+
+        });
+
+    });
+   /* $('#transmit').on('click', function () {
+        console.log("111");
+        $.ajax({
+            type: "POST",
+            url: "/px/addYypxjh",
+            async: false,/!*同步传输*!/
+            contentType: 'application/json',
+            dataType: 'json',
+            data: checkStatus.data,
+            /!* data: {"deleteVo":JSON.stringify(deVo)} ,*!/
+            success: function (data) {
+                layer.alert("y")
+            },
+            error:function (data) {
+                layer.alert("x")
             }
 
-        },
+        });
+    });*/
+    renderMod = {
         addTable: {
             table: {
+                id:"idTest",
                 // elem: "#table",
                 cols: [[ //表头
                     {type: "checkbox"}
-                    , {field: 'deviceCode', title: '人员', sort: true}
-                    , {field: 'eqName', title: '科室', sort: true}
+                    , {field: 'userName', title: '人员姓名', sort: true}
+                    , {field: 'bmName', title: '科室', sort: true}
                 ]]
-                , url: "/operationRecord/showAllYlxNewYxjl"
+                , url: "/px/getRyBtNr"
                 // , reload: 'parent'
                 // , contentType: "application/json"
                 , method: "POST"
