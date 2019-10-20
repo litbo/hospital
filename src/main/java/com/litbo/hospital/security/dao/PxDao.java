@@ -26,12 +26,12 @@ public interface PxDao {
     @Insert("INSERT INTO jh_zd (id,jh_name,zbdw,jh_kstime,jh_jstime,jh_pxlx,jh_pxxz,jh_pxnrlb,\n" +
             "user_id,px_addr, \n" +
             "px_nr,jh_pxbh)\n" +
-            "VALUES (#{id,jdbcType=VARCHAR},#{jhName,jdbcType=VARCHAR},#{zbdw}, \n" +
-            "#{jhKstime},#{jhJstime},#{jhPxlx}, \n" +
-            "#{jhPxxz}, #{jhPxnrlb},\n" +
-            "#{userId},#{pxAddr}, \n" +
-            "#{pxNr}" +
-            ",#{jhPxbh})")
+            "VALUES (#{id,jdbcType=VARCHAR},#{jhName,jdbcType=VARCHAR},#{zbdw,jdbcType=VARCHAR}, \n" +
+            "#{jhKstime},#{jhJstime},#{jhPxlx,jdbcType=VARCHAR}, \n" +
+            "#{jhPxxz,jdbcType=VARCHAR}, #{jhPxnrlb,jdbcType=VARCHAR},\n" +
+            "#{userId,jdbcType=VARCHAR},#{pxAddr,jdbcType=VARCHAR}, \n" +
+            "#{pxNr,jdbcType=VARCHAR}" +
+            ",#{jhPxbh,jdbcType=VARCHAR})")
     Integer addRypxjh(RyPxJhVo ryPxJhVo);
 
     @Insert("INSERT INTO jh_yypx (id,eq_id,eq_zcbh,eq_sbbh,pxbh,pxfs,pxlx" +

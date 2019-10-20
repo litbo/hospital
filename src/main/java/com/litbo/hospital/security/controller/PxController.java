@@ -38,22 +38,37 @@ public class PxController {
         return Result.success(pageInfo);
     }
     @RequestMapping("/getYypxBt")
-    public Result getYypxBt(){
+    public Result getYypxBt(@RequestParam(required = false) String key){
 
         JSONArray myJson = null;
-        String jsonMessage = "[{'type':'radio'},{field:'eqId',title:'设备id'},{field:'eqName',title:'设备名称'}," +
-                "{field:'eqZcbh',title:'院内编码'},{field:'eqSbbh',title:'分类编码'}]";
+        if ("radio".equals(key)) {
+            String jsonMessage = "[{'type':'radio'},{field:'eqId',title:'设备id'},{field:'eqName',title:'设备名称'}," +
+                    "{field:'eqZcbh',title:'院内编码'},{field:'eqSbbh',title:'分类编码'}]";
 
-        myJson = JSONObject.parseArray(jsonMessage);
+            myJson = JSONObject.parseArray(jsonMessage);
+        }
+        if ("checkbox".equals(key)) {
+            String jsonMessage = "[{'type':'checkbox'},{field:'eqId',title:'设备id'},{field:'eqName',title:'设备名称'}," +
+                    "{field:'eqZcbh',title:'院内编码'},{field:'eqSbbh',title:'分类编码'}]";
+
+            myJson = JSONObject.parseArray(jsonMessage);
+        }
         return Result.success(new PageInfo(myJson));
     }
 
     @RequestMapping("/getBmBt")
-    public Result getBmBt(){
+    public Result getBmBt(@RequestParam(required = false) String key){
         JSONArray myJson = null;
-        String jsonMessage = "[{'type':'radio'},{field:'bmId',title:'科室id'}," +
-                "{field:'pxks',title:'科室'}]";
-        myJson = JSONObject.parseArray(jsonMessage);
+        if("radio".equals(key)){
+            String jsonMessage = "[{'type':'radio'},{field:'bmId',title:'科室id'}," +
+                    "{field:'pxks',title:'科室'}]";
+            myJson = JSONObject.parseArray(jsonMessage);
+        }
+        if("checkbox".equals(key)){
+            String jsonMessage = "[{'type':'checkbox'},{field:'bmId',title:'科室id'}," +
+                    "{field:'pxks',title:'科室'}]";
+            myJson = JSONObject.parseArray(jsonMessage);
+        }
         return Result.success(myJson);
     }
 
