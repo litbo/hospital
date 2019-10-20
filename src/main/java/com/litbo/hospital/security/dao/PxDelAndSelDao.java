@@ -35,7 +35,7 @@ public interface PxDelAndSelDao {
             "FROM dbo.s_emp AS e INNER JOIN dbo.s_bm AS s ON e.bm_id=s.bm_id")
     List<EmpVo> getRyBtNr();
 
-    @Insert("INSERT INTO jh_lsry(tjry_id,user_name,bm_name,user_id) VALUES (#{tjryId,jdbcType=VARCHAR}," +
+    @Insert("INSERT INTO jh_tjry(tjry_id,user_name,bm_name,user_id) VALUES (#{tjryId,jdbcType=VARCHAR}," +
             "#{userName,jdbcType=VARCHAR},#{bmName,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER})")
     Integer insertRy(TjRyVo tjRyVo);
 

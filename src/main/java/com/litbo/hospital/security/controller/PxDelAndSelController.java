@@ -71,7 +71,7 @@ public class PxDelAndSelController {
     }
 
     @RequestMapping("/insertRy")
-    public Result insertRy(@RequestBody LSRyVo lsRyVo){
+        public Result insertRy(@RequestBody LSRyVo lsRyVo){
         TjRyVo[] tjRyVos = lsRyVo.getTjRyVos();
         for(TjRyVo tjRyVo:tjRyVos){
            pxDelAndSelService.insertRy(tjRyVo);//

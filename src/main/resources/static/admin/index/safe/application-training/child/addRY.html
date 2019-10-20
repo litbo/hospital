@@ -47,13 +47,16 @@
         table.on('toolbar(table1)', function (obj) {
             var checkStatus = table.checkStatus('idTest'); //idTest 即为基础参数 id 对应的值
             console.log(checkStatus.data);//获取选中行的数据
+            var obj = new Object();
+            obj.tjRyVos=checkStatus.data;
+            console.log(obj)
             $.ajax({
                 type: "POST",
                 url: "/px/insertRy",
                 // async: false,/*同步传输*/
                 contentType: 'application/json',
-                dataType: 'json',
-                data: checkStatus.data,
+                // dataType: 'json',
+                data: JSON.stringify(obj),
                 /* data: {"deleteVo":JSON.stringify(deVo)} ,*/
                 success: function (data) {
                     layer.alert("y")
