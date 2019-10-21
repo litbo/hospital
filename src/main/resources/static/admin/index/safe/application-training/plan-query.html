@@ -51,10 +51,10 @@
     <div class=" hidden-xs" id="hideXs">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <input class="layui-input" name="jhName" placeholder="计划名称" autocomplete="off">
+                <input class="layui-input" name="name" placeholder="计划名称" autocomplete="off">
             </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search"><i
+                <button class="layui-btn"  data-type="reload"><i
                         class="layui-icon layui-icon-search"></i>查询
                 </button>
             </div>
@@ -64,7 +64,7 @@
     <div class="addBtn">
         <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulations.html"><i
                 class="fas fa-plus"></i>&nbsp;新增</a>
-        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="delAll"><i
+        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="del"><i
                 class="fas fa-trash-alt"></i>&nbsp;删除</a>
     </div>
 </script>
@@ -76,7 +76,7 @@
                 <input class="layui-input" name="jhName" placeholder="名称" autocomplete="off">
             </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" data-type="search"><i
+                <button class="layui-btn"  data-type="reload"><i
                         class="layui-icon layui-icon-search"></i>查询
                 </button>
             </div>
@@ -86,7 +86,7 @@
     <div class="addBtn">
         <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulation.html"><i
                 class="fas fa-plus"></i>&nbsp;新增</a>
-        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="delAll"><i
+        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="dels"><i
                 class="fas fa-trash-alt"></i>&nbsp;删除</a>
     </div>
 </script>
@@ -152,6 +152,22 @@
                                 type: 2,
                                 content: "./child/addRY.html",
                                 dataUrl: ["id"]
+                            },
+                            {
+                                send: {
+                                    id: "table",
+                                    filter: "table1",
+                                    name: "id",
+                                    event: "del",
+                                    url: "/px/delYyjh",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    par: "id",
+                                    reload: 'parent'
+                                },
+                                tool: "toolbar",
+                                event: "del"
+
                             }
                         ]
                     })
@@ -198,56 +214,46 @@
                                 dataUrl: ["id"]
                             },
                             {
-                                filter:"table1",
+                                filter:"table2",
                                 event: "add",
                                 title: "添加人员",
                                 area: ['90%', '90%'],
                                 type: 2,
                                 content: "./child/addRY.html",
                                 dataUrl: ["id"]
+                            },
+                            {
+                                send: {
+                                    id: "table1",
+                                    filter: "table2",
+                                    name: "id",
+                                    event: "dels",
+                                    url: "/px/delYyjh",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    par: "id",
+                                    reload: 'parent'
+                                },
+                                // tool: "toolBars",
+                                // event: "dels"
+
                             }
                         ]
                     })
                 }
             }
         ],
-        reSet: {
-            tid: "#tables",
-            url: "/px//findAllYyjh",
-            type: "search",
-            data: ["jhName"]    //查询框的name
+         reSet: [
+        {
+            url: "/px//selYyjh",
+            // url: "/lifeManage/selectAllHt",
+            type: "reload",
+            tid: "tables",
+            data: ["name"],
+            method: "POST"
         }
-
-    };
-
-    /*function merge(obj) {
-        var data = obj.data;
-        var mergeIndex = 0;//定位需要添加合并属性的行数
-        var mark = 1; //这里涉及到简单的运算，mark是计算每次需要合并的格子数
-        var columsName = ['jhName'];//需要合并的列名称
-        var columsIndex = [1];//需要合并的列索引值
-        for (var k = 0; k < columsName.length; k++) {//这里循环所有要合并的列
-            var trArr = $(".layui-table-body>.layui-table").find("tr");//所有行
-            for (var i = 1; i < obj.data.length; i++) { //这里循环表格当前的数据
-                var tdCurArr = trArr.eq(i).find("td").eq(columsIndex[k]);//获取当前行的当前列
-                var tdPreArr = trArr.eq(mergeIndex).find("td").eq(columsIndex[k]);//获取相同列的第一列
-                if (data[i][columsName[k]] === data[i - 1][columsName[k]]) { //后一行的值与前一行的值做比较，相同就需要合并
-                    mark += 1;
-                    tdPreArr.each(function () {//相同列的第一列增加rowspan属性
-                        $(this).attr("rowspan", mark);
-                    });
-                    tdCurArr.each(function () {//当前行隐藏
-                        $(this).css("display", "none");
-                    });
-                } else {
-                    mergeIndex = i;
-                    mark = 1;//一旦前后两行的值不一样了，那么需要合并的格子数mark就需要重新计算
-                }
-            }
-            mergeIndex = 0;
-            mark = 1;
-        }
-    }*/
+    ]
+    }
 </script>
 </body>
 </html>
