@@ -341,7 +341,7 @@ public class BmController {
         res.setCharacterEncoding("UTF-8");
         res.setContentType("text/html");
         /* String filePath = getClass().getResource("/templates/" + fileName).getPath();*/
-        String filePath = System.getProperty("user.dir") + "/templates/" + fileName;
+        String filePath =   "C://muban/templates/" + fileName;
         String userAgent = req.getHeader("User-Agent");
         if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
             fileName = java.net.URLEncoder.encode(fileName, "UTF-8");
