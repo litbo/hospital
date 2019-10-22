@@ -60,8 +60,7 @@
             date :{
                 elem : "#date",
                 type : "date",
-                value:false,
-                range:"~"
+                value:false
             }
         },
         addTable: {
@@ -112,8 +111,8 @@
             reSet:{
                 url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=3",
                 type:"search",
-                data:["zdName"],    //查询框的name
-                dat:["#date","startTime","endTime","~"]
+                data:["zdName","startTime"]  //查询框的name
+                // dat:["#date","startTime","endTime","~"]
             }
         }
     }

@@ -31,7 +31,7 @@
     <div class="hidden-xs"  id="moreBar">
         <span>备案日期：</span>
         <div class="layui-input-inline">
-            <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input">
+            <input type="text"  id="date" name="startTime" lay-verify="date" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
             <input class="layui-input" name="gwName" placeholder="岗位职责名称"  autocomplete="off">
@@ -53,8 +53,7 @@
             date :{
                 elem : "#date",
                 type : "date",
-                value:false,
-                range:"~"
+                value:false
             }
         },
         addTable: {
@@ -105,14 +104,14 @@
                 },date :{
                     elem : "#date",
                     type : "date",
-                    value:false,
+                    value:false
                 }
             },
             reSet:{
                 url:"/supervise/gwgl/listGwsByTimeAndZdNameAndZt?gwZt=3",
                 type:"search",
-                data:["gwName"],    //查询框的name
-                dat:["#date","startTime","endTime","~"]
+                data:["startTime","gwName"]   //查询框的name
+                // dat:["#date","startTime","endTime","~"]
             }
         }
     }
