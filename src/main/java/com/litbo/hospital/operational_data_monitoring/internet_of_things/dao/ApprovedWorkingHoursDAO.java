@@ -130,7 +130,7 @@ public interface ApprovedWorkingHoursDAO {
             "fm_shift = #{fmShift,jdbcType=VARCHAR},\n" +
             "full_load_time = #{fullLoadTime,jdbcType=VARCHAR}\n " +
             "where eq_mac_id = #{eqMacId}")
-    void update(ApprovedWorkingHours approvedWorkingHours);
+    int update(ApprovedWorkingHours approvedWorkingHours);
 
     /**根据eq_mac_id修改*/
     @Update("update approved_working_hours\n" +

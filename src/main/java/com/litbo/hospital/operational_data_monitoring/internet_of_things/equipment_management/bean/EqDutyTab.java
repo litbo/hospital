@@ -17,6 +17,8 @@ public class EqDutyTab {
 
     /**默认不值班*/
     private String w1 = "2";
+    private String cAName ;
+    private String cdtypeName ;
 
     private String w2 = "2";
 

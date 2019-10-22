@@ -58,6 +58,19 @@
     </div>
 </script>-->
 
+<script type="text/html" id="newStatus">
+    {{#if (d.newStatus === "00" ) { }}
+    <span>关机</span>
+    {{# }else if(d.newStatus === "01"){ }}
+    <span>工作中</span>
+    {{# }else if(d.newStatus === "02"){ }}
+    <span>空闲</span>
+    {{# }else if(d.newStatus === "03"){ }}
+    <span>故障</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
 
 <script>
     var machineNumber = $.getUrlParam("machineNumber");
@@ -68,7 +81,7 @@
                 cols: [[ //表头
                      {field: 'deviceCode', title: '资产编号', sort: true}
                     , {field: 'eqName', title: '设备名称', sort: true}
-                    , {field: 'newStatus', title: '工作状态'}
+                    , {field: 'newStatus', toolbar: '#newStatus', title: '工作状态'}
                     , {field: 'beginTime', title: '开始时间', sort: true}
                     , {field: 'endTime', title: '结束时间', sort: true}
                     , {field: 'workHours', title: '工作时长(秒)'}

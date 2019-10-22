@@ -67,34 +67,27 @@ public interface EqDutyTabDAO {
     /**根据条件筛选设备值班信息*/
     @Select({
             "<script>",
-            "SELECT\n" +
-                    "b.id,\n" +
-                    "a.MacID as macId,\n" +
-                    "d.eq_sbbh,\n" +
-                    "g.c_AName,\n" +
-                    "c.cDtypeName,\n" +
-                    "b.W1,\n" +
-                    "b.W2,\n" +
-                    "b.W3,\n" +
-                    "b.W4,\n" +
-                    "b.W5,\n" +
-                    "b.W6,\n" +
-                    "b.W7 \n" +
-                    "FROM\n" +
-                    "eq_mac_tab a,\n" +
-                    "eq_duty_tab b,\n" +
-                    "eq_duty_type c,\n" +
-                    "eq_info d,\n" +
-                    "eq_name e,\n" +
-                    "eq_sbjcfl f,\n" +
-                    "eq_jiancheng g\n" +
-                    "WHERE\n" +
-                    "a.MacID = b.eq_mac_id \n" +
-                    "AND b.DType = c.cDType \n" +
-                    "AND a.EquID = d.eq_id\n" +
-                    "AND d.eq_nid = e.id\n" +
-                    "AND e.c_BID = f.id\n" +
-                    "AND f.c_EquSimpleId = g.id\n",
+            "SELECT \n" +
+                    "                    b.id,\n" +
+                    "                    a.DeviceCode as macId,\n" +
+                    "                    d.eq_sbbh,\n" +
+                    "                    g.c_AName,\n" +
+                    "                    c.cDtypeName,\n" +
+                    "                    b.W1,\n" +
+                    "                    b.W2,\n" +
+                    "                   b.W3,\n" +
+                    "                    b.W4,\n" +
+                    "                    b.W5,\n" +
+                    "                    b.W6,\n" +
+                    "                    b.W7 \n" +
+                    "                    FROM\n" +
+                    "                    DeviceParameter a \n" +
+                    "\tinner join eq_duty_tab b on b.eq_mac_id= a.DeviceCode \n" +
+                    "\tinner join  eq_duty_type c on c.cDtype=b.DType\n" +
+                    "\tinner join eq_info d on d.eq_zcbh=a.DeviceCode\n" +
+                    "\tinner join  eq_name e on  d.eq_nid = e.id \n" +
+                    "\tinner join eq_sbjcfl f on   e.c_BID = f.id\n" +
+                    "\tinner join eq_jiancheng g on   f.c_EquSimpleId = g.id\n" +
                     "<if test='eqPym != null'> AND d.eq_pym = #{eqPym} </if>\n" +
                     "<if test='eqSbbh != null'> AND d.eq_sbbh = #{eqSbbh} </if>",
                     "<if test='bmId != null'> AND d.eq_bmid = #{bmId} </if>",
@@ -126,73 +119,65 @@ public interface EqDutyTabDAO {
     void deleteByIds(List<String> ids);
 
     //根据id查询
-    @Select("SELECT\n" +
-            "\tb.id,\n" +
-            "a.MacID as macId,"+
-            "\td.eq_sbbh,\n" +
-            "\td.eq_name,\n" +
-            "\td.eq_gg,\n" +
-            "\td.eq_xh,\n" +
-            "\tg.c_AName,\n" +
-            "\tc.cDtypeName,\n" +
-            "\tb.W1,\n" +
-            "\tb.W2,\n" +
-            "\tb.W3,\n" +
-            "\tb.W4,\n" +
-            "\tb.W5,\n" +
-            "\tb.W6,\n" +
-            "\tb.W7,\n" +
-            "\tb.am_w1,\n" +
-            "\tb.am_w2,\n" +
-            "\tb.am_w3,\n" +
-            "\tb.am_w4,\n" +
-            "\tb.am_w5,\n" +
-            "\tb.am_w6,\n" +
-            "\tb.am_w7,\n" +
-            "\tb.pm_w1,\n" +
-            "\tb.pm_w2,\n" +
-            "\tb.pm_w3,\n" +
-            "\tb.pm_w4,\n" +
-            "\tb.pm_w5,\n" +
-            "\tb.pm_w6,\n" +
-            "\tb.pm_w7,\n" +
-            "\tb.fm_w1,\n" +
-            "\tb.fm_w2,\n" +
-            "\tb.fm_w3,\n" +
-            "\tb.fm_w4,\n" +
-            "\tb.fm_w5,\n" +
-            "\tb.fm_w6,\n" +
-            "\tb.fm_w7,\n" +
-            "\ti.start_date,\n" +
-            "\ti.start_time,\n" +
-            "\ti.end_date,\n" +
-            "\ti.end_time,\n" +
-            "\th.work_days,\n" +
-            "\th.rating_type,\n" +
-            "\th.am_shift,\n" +
-            "\th.pm_shift,\n" +
-            "\th.fm_shift,\n" +
-            "\th.full_load_time \n" +
-            "FROM\n" +
-            "\teq_mac_tab a,\n" +
-            "\teq_duty_tab b,\n" +
-            "\teq_duty_type c,\n" +
-            "\teq_info d,\n" +
-            "\teq_name e,\n" +
-            "\teq_sbjcfl f,\n" +
-            "\teq_jiancheng g,\n" +
-            "\teq_overtime_tab i,\n" +
-            "\tapproved_working_hours h \n" +
-            "WHERE\n" +
-            "\ta.MacID = b.eq_mac_id \n" +
-            "\tAND b.DType = c.cDType \n" +
-            "\tAND a.EquID = d.eq_id \n" +
-            "\tAND d.eq_nid = e.id \n" +
-            "\tAND e.c_BID = f.id \n" +
-            "\tAND f.c_EquSimpleId = g.id \n" +
-            "\tAND b.eq_mac_id = i.eq_mac_id \n" +
-            "\tAND b.eq_mac_id = h.eq_mac_id \n" +
-            "\tAND b.id\t=#{id}")
+    @Select("SELECT \n" +
+            "            b.id,\n" +
+            "            a.DeviceCode as macId,\n" +
+            "            d.eq_sbbh,\n" +
+            "            d.eq_name,\n" +
+            "            d.eq_gg,\n" +
+            "            d.eq_xh,\n" +
+            "            g.c_AName,\n" +
+            "            c.cDtypeName,\n" +
+            "            b.W1,\n" +
+            "            b.W2,\n" +
+            "            b.W3,\n" +
+            "            b.W4,\n" +
+            "            b.W5,\n" +
+            "            b.W6,\n" +
+            "            b.W7,\n" +
+            "            b.am_w1,\n" +
+            "            b.am_w2,\n" +
+            "            b.am_w3,\n" +
+            "            b.am_w4,\n" +
+            "            b.am_w5,\n" +
+            "            b.am_w6,\n" +
+            "            b.am_w7,\n" +
+            "            b.pm_w1,\n" +
+            "            b.pm_w2,\n" +
+            "            b.pm_w3,\n" +
+            "            b.pm_w4,\n" +
+            "            b.pm_w5,\n" +
+            "            b.pm_w6,\n" +
+            "            b.pm_w7,\n" +
+            "            b.fm_w1,\n" +
+            "            b.fm_w2,\n" +
+            "            b.fm_w3,\n" +
+            "            b.fm_w4,\n" +
+            "            b.fm_w5,\n" +
+            "            b.fm_w6,\n" +
+            "            b.fm_w7,\n" +
+            "            i.start_date,\n" +
+            "            i.start_time,\n" +
+            "            i.end_date,\n" +
+            "            i.end_time,\n" +
+            "            h.work_days,\n" +
+            "            h.rating_type,\n" +
+            "            h.am_shift,\n" +
+            "            h.pm_shift,\n" +
+            "            h.fm_shift,\n" +
+            "            h.full_load_time \n" +
+            "            FROM\n" +
+            "            DeviceParameter a\t\t\n" +
+            "\tinner join   eq_duty_tab b on  a.DeviceCode = b.eq_mac_id \n" +
+            "\tinner join   eq_duty_type c on b.DType = c.cDType \n" +
+            "\tinner join  eq_info d on  a.DeviceCode = d.eq_zcbh \n" +
+            "\tinner join  eq_name e on d.eq_nid = e.id \n" +
+            "\tinner join  eq_sbjcfl f on e.c_BID = f.id \n" +
+            "\tinner join  eq_overtime_tab i on b.eq_mac_id = i.eq_mac_id \n" +
+            "\tinner join  approved_working_hours h on b.eq_mac_id = h.eq_mac_id \n" +
+            "\tinner join   eq_jiancheng g on f.c_EquSimpleId = g.id\n" +
+            "          WHERE\n" +
+            "           b.id=#{id}")
     EqDutyVO selectById(String id);
 
     //根据id修改

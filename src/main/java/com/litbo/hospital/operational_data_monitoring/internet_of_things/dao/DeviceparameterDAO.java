@@ -56,24 +56,23 @@ public interface DeviceparameterDAO {
     int deletLwxByLwxBh2(String lwxbh);
     @Select({ "<script>",
             "SELECT\n" +
-                    "\tc.MacID,\n" +
+                    "\ta.MachineNumber ,\n" +
                     "\tb.eq_name,\n" +
-                    "\ta.EndPointIP,\n" +
+                    "\ta.end_point_ip,\n" +
                     "\td.bm_name, \n" +
-                    "b.eq_sbbh,",
+                    "a.DeviceCode ,",
                     "b.eq_xh,",
                     "b.eq_gg",
                     "FROM\n" +
                     "\tDeviceParameter a\n" +
-                    "\tLEFT JOIN eq_info b ON a.DeviceCode = b.eq_sbbh\n" +
-                    "\tLEFT JOIN eq_mac_tab c ON b.eq_id = c.EquID\n" +
-                    "\tLEFT JOIN s_bm d ON b.eq_bmid = d.bm_id \n" +
+                    "\tinner JOIN eq_info b ON a.DeviceCode = b.eq_zcbh\n" +
+//                    "\tLEFT JOIN eq_mac_tab c ON b.eq_id = c.EquID\n" +
+                    "\tinner JOIN s_bm d ON b.eq_bmid = d.bm_id \n" +
                     "WHERE\n" +
-                    "\tc.MacID != '' \n" +
-                    "\tAND ( SELECT COUNT(*) FROM eq_duty_tab WHERE eq_mac_id = c.MacID ) = 0",
-                    "<if test='macid != null'>","and c.MacID = #{macid}","</if>",
+                    "\t ( SELECT COUNT(*) FROM eq_duty_tab WHERE eq_mac_id = a.DeviceCode ) = 0",
+                    "<if test='macid != null'>","and a.MachineNumber like concat( '%', #{macid},'%')","</if>",
                     "<if test='bmId != null'>","and b.eq_bmid = #{bmId}","</if>",
-                    "<if test='eqSbbh != null'>","and b.eq_sbbh = #{eqSbbh}","</if>",
+                    "<if test='eqZcbh != null'>","and b.eq_zcbh  like concat( '%', #{eqZcbh},'%')","</if>",
             "</script>"})
     List<DeviceparameterVO> selectNoDutyEq(SearchVO searchVO);
 

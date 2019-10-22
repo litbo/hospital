@@ -25,7 +25,7 @@
     <!-- 查询区域 -->
     <form class="layui-form" action="">
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
+            <input type="text" name="eqZcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
         </div>
         <div class="layui-input-inline" style="width: 150px;">
             <select name="bmId" lay-filter="bmId">
@@ -65,7 +65,7 @@
             parent.$('.equipmentSpan').val(data[0].eqName);
             parent.$('.eqXh').val(data[0].eqXh);
             parent.$('.eqGg').val(data[0].eqGg);
-            parent.$('.macId').val(data[0].macID);
+            parent.$('.macId').val(data[0].deviceCode);
             parent.layer.close(index);
         });
     });
@@ -76,10 +76,10 @@
                 cols: [[ //表头
                     {type: 'radio', fixed: 'left'}
                     ,{field:'bmName', title:'科室', fixed: 'left', unresize: true}
-                    ,{field:'eqSbbh', title:'设备编号'}
+                    ,{field:'deviceCode', title:'资产编号'}
                     ,{field:'eqName', title:'设备名称'}
-                    ,{field:'macID', title:'联网仪编号'}
-                    ,{field:'endPointIP', title:'联网仪IP'}
+                    ,{field:'machineNumber', title:'联网仪编号'}
+                    ,{field:'endPointIp', title:'联网仪IP'}
                 ]]
                 , url: "/deviceparameter/showNoDutyEq"
                 , method: "POST"
@@ -102,7 +102,7 @@
                 url: "/deviceparameter/showNoDutyEq",
                 type: "reload",
                 tid: "table",
-                data: ["eqSbbh","bmId", "macid"],
+                data: ["eqZcbh","bmId", "macid"],
                 method: "POST"
             }
         },
