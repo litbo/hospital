@@ -12,6 +12,8 @@ public class ListYyPxJhVo {
     private String id;
 
     private String eqName;
+
+    private String pxnrlb;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date kstime;

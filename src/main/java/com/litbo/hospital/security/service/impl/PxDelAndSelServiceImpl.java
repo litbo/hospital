@@ -18,17 +18,28 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
     @Autowired(required = false)
     PxDelAndSelDao pxDelAndSelDao;
 
-    public Integer DelRyjh(int pageNum,int pageSize){
-        return pxDelAndSelDao.DelRyjh();
+    @Override
+    public PageInfo selByName(int pageNum, int pageSize, String rName) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(pxDelAndSelDao.selByName(rName));
     }
 
-    public Integer DelYyjh(int pageNum,int pageSize){
-        return pxDelAndSelDao.DelYyjh();
+    public Integer DelRyjh(String [] strs){
+        return pxDelAndSelDao.DelRyjh(strs);
+    }
+
+    @Override
+    public PageInfo selXxRy(String id) {
+        return null;
+    }
+
+    public Integer DelYyjh(String [] strs){
+        return pxDelAndSelDao.DelYyjh(strs);
     }
 
     @Override
     public PageInfo selRyjh(int pageNum, int pageSize, String name) {
-
+        PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(pxDelAndSelDao.selRyjh(name));
     }
 
@@ -40,9 +51,10 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
     }
 
     @Override
-    public PageInfo selYyjh(int pageNum,int pageSize,String eqName)
+    public PageInfo selYyjh(int pageNum,int pageSize,String name)
      {
-        return new PageInfo(pxDelAndSelDao.selYyJh(eqName));
+         PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(pxDelAndSelDao.selYyJh(name));
      }
 
     @Override
@@ -55,5 +67,11 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
     public Integer insertRy(TjRyVo tjRyVo) {
         tjRyVo.setTjryId(UUID.randomUUID().toString());
         return pxDelAndSelDao.insertRy(tjRyVo);
+    }
+
+    @Override
+    public PageInfo findAllRy(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(pxDelAndSelDao.findAllRy());
     }
 }

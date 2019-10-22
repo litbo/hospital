@@ -11,5 +11,7 @@ public class TjRyVo {
 
     private String bmName;
 
-    private Integer userId;
+    private String userId;
+
+    private String jhId;
 }

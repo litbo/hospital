@@ -32,7 +32,7 @@
     <form action="" style="float: right;margin-top: -5px;">
         <!--模板名称-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="eqName" autocomplete="off" placeholder="人员编号" class="layui-input">
+            <input type="text" name="eqName" autocomplete="off" placeholder="科室" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -70,25 +70,25 @@
         });
 
     });
-   /* $('#transmit').on('click', function () {
-        console.log("111");
-        $.ajax({
-            type: "POST",
-            url: "/px/addYypxjh",
-            async: false,/!*同步传输*!/
-            contentType: 'application/json',
-            dataType: 'json',
-            data: checkStatus.data,
-            /!* data: {"deleteVo":JSON.stringify(deVo)} ,*!/
-            success: function (data) {
-                layer.alert("y")
-            },
-            error:function (data) {
-                layer.alert("x")
-            }
+    /* $('#transmit').on('click', function () {
+         console.log("111");
+         $.ajax({
+             type: "POST",
+             url: "/px/addYypxjh",
+             async: false,/!*同步传输*!/
+             contentType: 'application/json',
+             dataType: 'json',
+             data: checkStatus.data,
+             /!* data: {"deleteVo":JSON.stringify(deVo)} ,*!/
+             success: function (data) {
+                 layer.alert("y")
+             },
+             error:function (data) {
+                 layer.alert("x")
+             }
 
-        });
-    });*/
+         });
+     });*/
     renderMod = {
         addTable: {
             table: {
@@ -96,8 +96,8 @@
                 // elem: "#table",
                 cols: [[ //表头
                     {type: "checkbox"}
-                    , {field: 'userName', title: '人员姓名', sort: true}
                     , {field: 'bmName', title: '科室', sort: true}
+                    , {field: 'userName', title: '人员姓名', sort: true}
                 ]]
                 , url: "/px/getRyBtNr"
                 // , reload: 'parent'

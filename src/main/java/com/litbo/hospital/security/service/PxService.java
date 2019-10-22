@@ -21,5 +21,4 @@ public interface PxService {
 
     PageInfo findAllRyjh(int pageNum,int pageSize);
 
-
 }

@@ -89,25 +89,25 @@
                     elem: "#ksDate",
                     value:today0+" "+time0,
                     type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    format:'yyyy-MM-dd'
                 },
                 {
                     elem: "#jsDate",
                     value:today0+" "+time0,
                     type:"datetime",
-                    format:'yyyy-MM-dd HH:mm:ss'
+                    format:'yyyy-MM-dd'
                 }
             ]
         },
         addTable :{
             table:{
                 cols: [[ //表头
-                     {field: 'ssks', title: '所属科室',minWidth: 150}
+                     {field: 'bmName', title: '所属科室',minWidth: 150}
                     ,{field: 'userId', title: '人员ID',minWidth: 150}
-                    ,{field: 'userXm', title: '人员姓名', minWidth: 150}
-                    ,{field: 'jhlrCj', title: '人员成绩', minWidth: 150}
+                    ,{field: 'userName', title: '人员姓名', minWidth: 150}
+                //    ,{field: 'jhlrCj', title: '人员成绩', minWidth: 150}
                 ]],
-                url: "/px/findAllYyjh"
+                url: "/px/findAllRy"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
