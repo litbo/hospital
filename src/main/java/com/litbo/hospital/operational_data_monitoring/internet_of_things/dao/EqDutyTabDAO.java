@@ -85,9 +85,9 @@ public interface EqDutyTabDAO {
                     "\tinner join eq_duty_tab b on b.eq_mac_id= a.DeviceCode \n" +
                     "\tinner join  eq_duty_type c on c.cDtype=b.DType\n" +
                     "\tinner join eq_info d on d.eq_zcbh=a.DeviceCode\n" +
-                    "\tinner join  eq_name e on  d.eq_nid = e.id \n" +
-                    "\tinner join eq_sbjcfl f on   e.c_BID = f.id\n" +
-                    "\tinner join eq_jiancheng g on   f.c_EquSimpleId = g.id\n" +
+                    "\tleft  join  eq_name e on  d.eq_nid = e.id \n" +
+                    "\tleft  join eq_sbjcfl f on   e.c_BID = f.id\n" +
+                    "\tleft  join eq_jiancheng g on   f.c_EquSimpleId = g.id\n" +
                     "<if test='eqPym != null'> AND d.eq_pym = #{eqPym} </if>\n" +
                     "<if test='eqSbbh != null'> AND d.eq_sbbh = #{eqSbbh} </if>",
                     "<if test='bmId != null'> AND d.eq_bmid = #{bmId} </if>",
@@ -171,11 +171,11 @@ public interface EqDutyTabDAO {
             "\tinner join   eq_duty_tab b on  a.DeviceCode = b.eq_mac_id \n" +
             "\tinner join   eq_duty_type c on b.DType = c.cDType \n" +
             "\tinner join  eq_info d on  a.DeviceCode = d.eq_zcbh \n" +
-            "\tinner join  eq_name e on d.eq_nid = e.id \n" +
-            "\tinner join  eq_sbjcfl f on e.c_BID = f.id \n" +
+            "\tleft join  eq_name e on d.eq_nid = e.id \n" +
+            "\tleft join  eq_sbjcfl f on e.c_BID = f.id \n" +
             "\tinner join  eq_overtime_tab i on b.eq_mac_id = i.eq_mac_id \n" +
             "\tinner join  approved_working_hours h on b.eq_mac_id = h.eq_mac_id \n" +
-            "\tinner join   eq_jiancheng g on f.c_EquSimpleId = g.id\n" +
+            "\tleft join   eq_jiancheng g on f.c_EquSimpleId = g.id\n" +
             "          WHERE\n" +
             "           b.id=#{id}")
     EqDutyVO selectById(String id);
