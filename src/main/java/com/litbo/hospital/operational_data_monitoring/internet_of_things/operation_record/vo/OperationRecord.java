@@ -62,5 +62,23 @@ public class OperationRecord {
     private String pym;
     private String deviceCode;
     private String positionValue;
+    /*电流*/
+    private Integer nowCurrent;
+    /*电流状态*/
+    private String currentStatus;
+    /*温度*/
+    private String tempValue;
+    /*温度状态*/
+    private String tempStatus;
+    /*湿度*/
+    private String humiValue;
+    /*湿度状态*/
+   private String humiStatus;
+    /*烟雾*/
+    private String smokeValue;
+    /*烟雾状态*/
+    private String smokeStatus;
+
+
 
 }

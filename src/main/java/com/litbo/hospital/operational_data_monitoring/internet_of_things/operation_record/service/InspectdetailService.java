@@ -59,7 +59,11 @@ public interface InspectdetailService {
     PageInfo showNow4(Integer pageNum,Integer pageSize,SearchVO searchVO);
 
     PageInfo<OperationRecord> showAllYlxNewYxjl( Integer pageNum, Integer pageSize,Date qssj,  Date jssj, String zcbh,  String bmid);
+    PageInfo<OperationRecord> showAllYlxNewYxjl2( Integer pageNum, Integer pageSize,Date qssj,  Date jssj, String zcbh,  String bmName,String eqSName);
+    PageInfo<OperationRecord> showAllYxhjNewYxjl( Integer pageNum, Integer pageSize,Date qssj,  Date jssj, String zcbh,  String bmid);
 
     PageInfo<OperationRecord> showOnelYlxYxjl(Integer pageNum, Integer pageSize,String lwybh);
+    PageInfo showOnelYlxYxjl2(Integer pageNum, Integer pageSize,String lwybh,String time);
+    PageInfo<OperationRecord> showOnelYxhjYxjl(Integer pageNum, Integer pageSize,String lwybh);
 
 }

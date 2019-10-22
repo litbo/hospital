@@ -6,6 +6,7 @@ import com.litbo.hospital.operational_data_monitoring.internet_of_things.operati
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.service.InspectdetailbackService;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.OperationRecord;
 import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.SearchVO;
+import com.litbo.hospital.operational_data_monitoring.internet_of_things.operation_record.vo.WorkTimeVO;
 import com.litbo.hospital.result.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @BelongsProject: hospital
@@ -321,6 +324,136 @@ public class operationRecordController {
                                     @RequestParam(required = false, defaultValue = "10") Integer pageSize
                                     , @RequestParam(required = false, name = "qssj") String qssj,
                                     @RequestParam(required = false, name = "zcbh") String zcbh,
+                                    @RequestParam(required = false, name = "bmid") String bmid,
+                                    @RequestParam(required = false, name = "eqSName") String eqSName,
+                                    @RequestParam(required = false, name = "bmName") String bmName
+                                    ) {
+        PageInfo info=null;
+
+        Date qs =null;
+        Date js=null;
+        if(StringUtils.isNotBlank(qssj)){
+            String[] split = qssj.split("\\~");
+            if(split.length>1){
+                if(split[0].length()>6){
+                    qs = String2DateUtil.StringtoDateSfm(split[0]);
+                    js = String2DateUtil.StringtoDateSfm(split[1]);
+                }
+                else{
+                    qs = String2DateUtil.StringtoDateOnlyYear(split[0]);
+                    js = String2DateUtil.StringtoDateOnlyYear(split[1]);
+                }
+            }
+        }
+        if(StringUtils.isBlank(bmid)&&StringUtils.isNotBlank(bmName)){
+        info = inspectdetailService.showAllYlxNewYxjl2(pageNum, pageSize, qs, js, zcbh, bmName,eqSName);
+
+        }
+        else{
+            info = inspectdetailService.showAllYlxNewYxjl(pageNum, pageSize, qs, js, zcbh, bmid);
+        }
+        return Result.success(info);
+    }
+
+
+    @RequestMapping("/showOnelYlxYxjl")
+    public Result showOnelYlxYxjl(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
+                                    @RequestParam(required = false, defaultValue = "10") Integer pageSize
+                         ,@RequestParam( name = "lwybh") String lwybh
+
+    ) {
+        PageInfo<OperationRecord> info = inspectdetailService.showOnelYlxYxjl(pageNum, pageSize, lwybh);
+        return Result.success(info);
+    }
+    @RequestMapping("/showOnelYlxYxjl2")
+    public Result showOnelYlxYxjl2(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
+                                  @RequestParam(required = false, defaultValue = "10") Integer pageSize
+            ,@RequestParam( name = "lwybh") String lwybh,
+            @RequestParam( name = "time",defaultValue = "月") String time,
+            @RequestParam( name = "qssj",defaultValue = "") String qssj
+
+                                   ) {
+        SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
+        SimpleDateFormat ym = new SimpleDateFormat("yyyy-MM");
+        if(time.equals("年")){
+            if(qssj.length()>11){
+                qssj="";
+            }
+        }
+        if(time.equals("月")){
+            if(qssj.length()<12){
+                qssj="";
+            }
+        }
+        Date qs=null;
+        Date js=null;
+        if(StringUtils.isNotBlank(qssj)){
+            String[] split = qssj.split("\\~");
+            if(split.length>1){
+                if(split[0].length()>6){
+                    if(split[0].length()<9){
+
+                        try {
+                            qs=ym.parse(split[0]) ;
+                            js=ym.parse(split[1]) ;
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else{
+                        qs = String2DateUtil.StringtoDateSfm(split[0]);
+                        js = String2DateUtil.StringtoDateSfm(split[1]);
+                    }
+
+                }
+                else{
+                    qs = String2DateUtil.StringtoDateOnlyYear(split[0]);
+                    js = String2DateUtil.StringtoDateOnlyYear(split[1]);
+                }
+            }
+        }
+
+        PageInfo info = inspectdetailService.showOnelYlxYxjl2(pageNum, pageSize, lwybh,time);
+        List<WorkTimeVO> list = info.getList();
+        Date qs2=qs;
+        Date js2=js;
+       if(time.equals("年") &&StringUtils.isNotBlank(qssj)){
+           list.removeIf(item->{
+               try {
+                   if(yyyy.parse(item.getDatetime()).getTime()>=qs2.getTime()&&
+                           yyyy.parse(item.getDatetime()).getTime()<=js2.getTime()){
+                       return false;
+                   }
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+               return true;
+
+           });
+       }
+       else if(time.equals("月") &&StringUtils.isNotBlank(qssj)){
+            list.removeIf(item->{
+                try {
+                    if(ym.parse(item.getDatetime()).getTime()>=qs2.getTime()&&
+                            ym.parse(item.getDatetime()).getTime()<=js2.getTime()){
+                        return false;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+
+            });
+        }
+        return Result.success(info);
+    }
+
+
+    @RequestMapping("/showAllYxhjNewYxjl")
+    public Result showAllYxhjNewYxjl(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
+                                    @RequestParam(required = false, defaultValue = "10") Integer pageSize
+            , @RequestParam(required = false, name = "qssj") String qssj,
+                                    @RequestParam(required = false, name = "zcbh") String zcbh,
                                     @RequestParam(required = false, name = "bmid") String bmid) {
         Date qs =null;
         Date js=null;
@@ -331,16 +464,16 @@ public class operationRecordController {
                 js = String2DateUtil.StringtoDateSfm(split[1]);
             }
         }
-        PageInfo<OperationRecord> info = inspectdetailService.showAllYlxNewYxjl(pageNum, pageSize, qs, js, zcbh, bmid);
+        PageInfo<OperationRecord> info = inspectdetailService.showAllYxhjNewYxjl(pageNum, pageSize, qs, js, zcbh, bmid);
         return Result.success(info);
     }
 
 
-    @RequestMapping("/showOnelYlxYxjl")
-    public Result showOnelYlxYxjl(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
-                                    @RequestParam(required = false, defaultValue = "10") Integer pageSize
-                         ,@RequestParam( name = "lwybh") String lwybh) {
-        PageInfo<OperationRecord> info = inspectdetailService.showOnelYlxYxjl(pageNum, pageSize,lwybh);
+    @RequestMapping("/showOnelYxhjYxjl")
+    public Result showOnelYxhjYxjl(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
+                                  @RequestParam(required = false, defaultValue = "10") Integer pageSize
+            ,@RequestParam( name = "lwybh") String lwybh) {
+        PageInfo<OperationRecord> info = inspectdetailService.showOnelYlxYxjl(pageNum, pageSize, lwybh);
         return Result.success(info);
     }
 

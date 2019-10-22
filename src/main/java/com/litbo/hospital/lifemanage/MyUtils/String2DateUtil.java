@@ -41,4 +41,21 @@ public class String2DateUtil {
         }
 
     }
+    public static Date StringtoDateOnlyYear(String str){
+        if(StringUtils.isNotBlank(str)){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy");
+            Date date = null;
+            try {
+                date = format.parse(str);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return date;
+        }
+
+        else{
+            return null;
+        }
+
+    }
 }

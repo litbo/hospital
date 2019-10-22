@@ -35,10 +35,10 @@ public interface DeviceparameterDAO {
          "\tDeviceParameter d\n" +
          "\tleft JOIN eq_info b ON d.DeviceCode = b.eq_zcbh\n" +
          "\tLEFT JOIN s_bm s ON b.eq_bmid = s.bm_id\n" +
-         "\twhere d.MachineNumber in (select distinct MachineNumber from DeviceParameter) "+
-         "<where>"+
+         "<where>" +
+         "\td.MachineNumber in (select distinct MachineNumber from DeviceParameter)\n"+
          "<if test='MachineNumber != null'>"+
-         " d.MachineNumber like CONCAT('%',#{MachineNumber},'%')" +
+         " and d.MachineNumber like CONCAT('%',#{MachineNumber},'%')" +
          "</if>"+
          "<if test='bmId != null'>"+
          "and b.eq_bmid = #{bmId}"+

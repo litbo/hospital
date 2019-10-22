@@ -35,12 +35,7 @@
 	<!-- 查询区域 -->
 	<form action="" layui-filter="forms" style="margin-top: 0;">
 
-		<!--科室-->
-		<div class="layui-input-inline" style="width: 140px;">
-			<select name="bmId"  lay-filter="bmId">
-				<option value="">全部科室</option>
-			</select>
-		</div>
+
 		<!--设备编号-->
 		<div class="layui-input-inline" style="width: 130px;">
 			<input type="text" name="eqZcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
@@ -50,16 +45,23 @@
 			<input type="text" name="MachineNumber" autocomplete="off"
 				   placeholder="联网仪编号" class="layui-input">
 		</div>
+		<!--科室-->
+		<div class="layui-input-inline" style="width: 140px;">
+			<select name="bmId"  lay-filter="bmId">
+				<option value="">全部科室</option>
+			</select>
+		</div>
 		<div class="layui-input-inline">
 			<button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
 		</div>
 	</form>
 	<hr class="devideHr">
 	<div class="addBtn">
-		<button class="layui-btn layui-btn-sm deli" lay-event="delAll">
-			<i class="layui-icon" style="margin-top: -15px;"></i>删除
-		</button>
+	<!--	<button class="layui-btn layui-btn-sm deli" lay-event="delAll">
+&lt;!&ndash;			<i class="layui-icon" style="margin-top: -15px;"></i>删除&ndash;&gt;
+		</button>-->
 	</div>
+	<br>
 </script>
 
 <!--编辑删除-->
@@ -74,8 +76,7 @@
 		addTable: {
 			table: {
 				cols: [[ //表头
-					{type: 'checkbox', fixed: 'left'}
-					,{field:'eqZcbh', title:'资产编号'}
+					{field:'eqZcbh', title:'资产编号'}
 					,{field:'eqName', title:'设备名称'}
 					,{field:'eqGgXh' ,title:'规格 型号'}
 					,{field:'bmName' ,title:'所在科室'}
