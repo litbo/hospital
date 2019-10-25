@@ -1319,7 +1319,7 @@ document.write("<link rel=\"stylesheet\" href=\"/static/admin/css/all.min.css\"/
 
 
 window.onload = function () {
-    //填充页面URL，便于调试页面
+//     //填充页面URL，便于调试页面
     $("body").prepend($("<p>").css({
         "position": "absolute",
         "right": "0",

@@ -14,5 +14,6 @@ public class FwBlsjVO {
     private String eqGg;//设备规格
     private String sbcsName;//生产商
     private Date eqAzrq;//设备安装时间
+    private Integer pdfStatus;
 
 }

@@ -222,7 +222,8 @@ public class SpecificationServiceImpl implements SpecificationService {
                     });
                 });
                 saveTaskBufferVOS.forEach(System.out::println);
-                i = specificationDao.saveTaskBuffers(saveTaskBufferVOS);
+                if (saveTaskBufferVOS.size()>0)
+                    i = specificationDao.saveTaskBuffers(saveTaskBufferVOS);
             }
         }else {
             i = specificationDao.updateStandardCycleDateFalse(standardId);

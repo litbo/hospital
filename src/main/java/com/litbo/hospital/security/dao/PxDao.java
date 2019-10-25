@@ -17,21 +17,21 @@ public interface PxDao {
     @Select("SELECT bm_id AS bmId,bm_name AS pxks FROM dbo.s_bm")
     List<KsFzVo> getYypxKsNr();
 
-    @Select("SELECT y.id,e.eq_name,y.pxnrlb,y.pxlx,y.pxfs,s.bm_name,\n" +
+    @Select("SELECT y.id,e.eq_name,y.pxnrlb,y.pxlx,y.pxfs,s.bm_name AS pxks,\n" +
             "            y.kstime,y.jstime FROM jh_yypx AS y\n" +
             "            JOIN s_bm AS s ON y.ks_id = s.bm_id\t\t\t\t\t\n" +
             "            JOIN eq_info AS e ON e.eq_id=y.eq_id")
-    List<ListYyVo> findAllYyJh();
+    List<ListYyPxJhVo> findAllYyJh();
 
     @Insert("INSERT INTO jh_zd (id,jh_name,zbdw,jh_kstime,jh_jstime,jh_pxlx,jh_pxxz,jh_pxnrlb,\n" +
             "user_id,px_addr, \n" +
             "px_nr,jh_pxbh)\n" +
-            "VALUES (#{id,jdbcType=VARCHAR},#{jhName,jdbcType=VARCHAR},#{zbdw}, \n" +
-            "#{jhKstime},#{jhJstime},#{jhPxlx}, \n" +
-            "#{jhPxxz}, #{jhPxnrlb},\n" +
-            "#{userId},#{pxAddr}, \n" +
-            "#{pxNr}" +
-            ",#{jhPxbh})")
+            "VALUES (#{id,jdbcType=VARCHAR},#{jhName,jdbcType=VARCHAR},#{zbdw,jdbcType=VARCHAR}, \n" +
+            "#{jhKstime},#{jhJstime},#{jhPxlx,jdbcType=VARCHAR}, \n" +
+            "#{jhPxxz,jdbcType=VARCHAR}, #{jhPxnrlb,jdbcType=VARCHAR},\n" +
+            "#{userId,jdbcType=VARCHAR},#{pxAddr,jdbcType=VARCHAR}, \n" +
+            "#{pxNr,jdbcType=VARCHAR}" +
+            ",#{jhPxbh,jdbcType=VARCHAR})")
     Integer addRypxjh(RyPxJhVo ryPxJhVo);
 
     @Insert("INSERT INTO jh_yypx (id,eq_id,eq_zcbh,eq_sbbh,pxbh,pxfs,pxlx" +
@@ -43,8 +43,8 @@ public interface PxDao {
             "#{kstime},#{jstime})")
     Integer addYypxjh(YyPxJhVo yyPxJhVo);
 
-    @Select("SELECT id,jh_name AS jhName,px_addr AS pxAddr," +
-            "jh_pxlx AS jhPxlx,jh_pxxz AS jhPxxz,user_id AS userId" +
-            ",jh_kstime AS jhKstime,jh_jstime AS jhJstime FROM dbo.jh_zd")
+    @Select("SELECT id,jh_name,px_addr," +
+            "jh_pxlx,jh_pxnrlb,jh_pxxz" +
+            ",jh_kstime,jh_jstime FROM dbo.jh_zd")
     List<ListRyPxJhVo> findAllRyJh();
 }

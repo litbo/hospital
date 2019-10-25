@@ -96,4 +96,6 @@ public class FwBlsj {
 
     private String fwId;
 
+    private Integer pdfStatus;
+
 }

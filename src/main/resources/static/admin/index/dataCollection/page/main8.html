@@ -1,134 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>仪联网原始记录</title>
-	<meta name="renderer" content="webkit">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" type="text/css" href="../../../../static/admin/layui/css/layui.css">
-	<link rel="stylesheet" type="text/css" href="../../../../static/admin/css/admin.css">
-	<link rel="stylesheet" href="../css/dataIndex.css">
-	<script type="text/javascript" src="../../../../static/admin/js/jquery-3.3.1.min.js"></script>
-	<!--[if IE 8]>
-	<script type="text/javascript" src="../../../../static/admin/js/jquery-1.11.3.min.js"></script>
-	<![endif]-->
-	<script type="text/javascript" src="../../../../static/admin/js/basic.js"></script>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>运行环境</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
 </head>
 <body style="background-color: #f2f2f2;">
 
-<!-- 表格 -->
+
 <div class="layui-row">
-	<div class="col-xs-12">
-		<table class="layui-hide" id="table" lay-filter="table1"></table>
-	</div>
+
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
 </div>
 
-	<script type="text/html" id="toolBar">
-		<!-- 查询区域 -->
-		<form class="layui-form" action="" layui-filter="forms">
-			<!--收包时间-->
-			<div class="layui-inline layui-form-pane ">
-				<label class="layui-form-label">日期范围</label>
-				<div class="layui-input-inline">
-					<input type="text" class="layui-input" name="date1" id="date1" placeholder="请选择日期" style="width: 200px;">
-				</div>
-			</div>
+<!--<script type="text/html" id="toolBar">
+    <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <select class="layui-input" name="htZt">
+                <option value="" disabled selected hidden>全部合同状态</option>
+                <option value="0">已签订</option>
+                <option value="1">执行中</option>
+                <option value="2">已完成</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htBianhao" placeholder="合同编号">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htYf" placeholder="供货商">
+        </div>
+        <div class="layui-inline">
+            <input type="text" name="htQssj" class="layui-input" id="test1"
+                   placeholder="开始日期">
+        </div>
+        &#45;&#45;
+        <div class="layui-inline">
+            <input type="text" name="htJssj" class="layui-input" id="test2"
+                   placeholder="结束日期">
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm " style="background: #CC0033" lay-event="del" id="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+    </div>
+</script>-->
 
-			<!--设备编号-->
-			<div class="layui-input-inline" style="width: 140px;">
-				<input type="text" name="eqSbbh" autocomplete="off" placeholder="设备编号" class="layui-input">
-			</div>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">查看历史记录</a>
+</script>
+<script type="text/html" id="toolBar">
+    <!-- 查询区域 -->
+    <form class="layui-form" action="" layui-filter="forms">
+        <!--收包时间-->
+        <div class="layui-inline layui-form-pane ">
+            <label class="layui-form-label">日期范围</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="qssj" id="date1" placeholder="请选择日期" style="width: 200px;">
+            </div>
+        </div>
 
-			<!--科室-->
-			<div class="layui-input-inline" style="width: 150px;">
-				<select name="bmId"  lay-filter="bmId">
-					<option value="">全部科室</option>
-				</select>
-			</div>
+        <!--设备编号-->
+        <div class="layui-input-inline" style="width: 140px;">
+            <input type="text" name="zcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
+        </div>
 
-			<!--联网仪编号-->
-			<div class="layui-input-inline" style="width: 130px;">
-				<input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
-			</div>
-			<div class="layui-input-inline">
-				<button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
-			</div>
-		</form>
-	</script>
+        <!--科室-->
+        <div class="layui-input-inline" style="width: 150px;">
+            <select name="bmid" lay-filter="bmid">
+                <option value="">全部科室</option>
+            </select>
+        </div>
 
-<script type="text/html" id="barDemo">
-	<a class="layui-btn layui-btn-xs" href="edit1.html">编辑</a>
-	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <!--联网仪编号-->
+        <!--<div class="layui-input-inline" style="width: 130px;">
+            <input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
+        </div>-->
+        <div class="layui-input-inline">
+            <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+        </div>
+    </form>
+</script>
+<script type="text/html" id="newStatus">
+    {{#if (d.newStatus === "00" ) { }}
+    <span>关机</span>
+    {{# }else if(d.newStatus === "01"){ }}
+    <span>工作中</span>
+    {{# }else if(d.newStatus === "02"){ }}
+    <span>空闲</span>
+    {{# }else if(d.newStatus === "03"){ }}
+    <span>故障</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
+<script type="text/html" id="currentStatus">
+    {{#if (d.nowCurrent!=null&&(d.currentStatus === "0"||d.currentStatus === ""||d.currentStatus === null) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.nowCurrent}}</span>
+    {{# }else if(d.nowCurrent!=null&&(d.currentStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.nowCurrent}}</span>
+    {{# }else if(d.nowCurrent!=null&&(d.currentStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger"style="background-color: red">{{d.nowCurrent}}</span>
+    {{# }else if(d.nowCurrent!=null){ }}
+    <span>{{d.nowCurrent}}</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
+<script type="text/html" id="humiValue">
+    {{#if (d.humiValue!=null&&(d.humiStatus === "0"||d.humiStatus === ""||d.humiStatus === null) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.humiValue}}</span>
+    {{# }else if(d.humiValue!=null&&(d.humiStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.humiValue}}</span>
+    {{# }else if(d.humiValue!=null&&(d.humiStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger"style="background-color: red">{{d.humiValue}}</span>
+    {{# }else if(d.humiValue!=null) { }}
+    <span>{{d.humiValue}}</span>
+    {{# }else  { }}
+    <span>\</span>
+    {{# } }}
 </script>
 
-<script src="../layui/layui.js"></script>
-<script src="../layui/formSelects-v4.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/dataIndex.js"></script>
+<script type="text/html" id="smokeValue">
+    {{#if (d.smokeValue!=null&&(d.smokeStatus === "0"||d.smokeStatus === ""||d.smokeStatus === null ) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.smokeValue}}</span>
+    {{# }else if(d.smokeValue!=null&&(d.smokeStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.smokeValue}}</span>
+    {{# }else if(d.smokeValue!=null&&(d.smokeStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger"style="background-color: red">{{d.smokeValue}}</span>
+    {{# }else if(d.smokeValue!=null){ }}
+    <span>{{d.smokeValue}}</span>
+    {{# }else { }}
+    <span class="">\</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="tempValue">
+    {{#if (d.tempValue!=null&&(d.tempStatus === "0"||d.tempStatus === ""||d.tempStatus === null) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.tempValue}}</span>
+    {{# }else if(d.tempValue!=null&&(d.tempStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.tempValue}}</span>
+    {{# }else if(d.tempStatus!=null&&(d.tempStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger">{{d.tempValue}}</span>
+    {{# }else if(d.tempStatus!=null){ }}
+    <span>{{d.tempValue}}</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
+
+
 <script>
+    renderMod = {
+        formAction: {
+            date: [
+                {
+                    elem: "#date1",
+                    value: false,
+                    type: "datetime",
+                    format: 'yyyy-MM-dd HH:mm:ss',
+                    range: true
+                },
+                {
+                    elem: "#test2",
+                    type: "date",
+                    format: 'yyyy-MM-dd HH:mm:ss',
+                    value: false,
+                }
+            ],
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "bmid",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listDelXks"
+                    }
+                ]
+            }
 
-	renderMod = {
-		addTable: {
-			table: {
-				cols: [[ //表头
-					{type: 'checkbox', fixed: 'left'}
-					,{field:'bmName', title:'所在科室', fixed: 'left', unresize: true}
-					,{field:'eqSbbh', title:'设备编号'}
-					,{field:'eqZcbh', title:'资产编号'}
-					,{field:'eqName', title:'设备名称'}
-					,{field:'macid', title:'联网仪编号'}
-					,{field:'beginTime', title:'收包时间'}
-					,{field:'workNums', title:'数据包'}
-				]]
-				, url: "/operationRecord/show2"
-				, method: "POST"
-				, request: {
-					pageName: 'pageNum',
-					limitName: 'pageSize'
-				}
-				// , toolbar: "#toolSearch"
-				, where: {}
-				, parseData: function (res) { //res 即为原始返回的数据
-					return {
-						"code": res.code, //解析接口状态
-						"msg": res.msg, //解析提示文本
-						"data": res.data.list, //解析数据列表
-						"count": res.data.total //总数据数
-					}
-				}
-			},
+        },
+        addTable: {
+            table: {
+                // elem: "#table",
+                cols: [[ //表头
+                     {field: 'deviceCode', title: '资产编号', sort: true}
+                    , {field: 'eqName', title: '设备名称', sort: true}
+                    , {field: 'newStatus',toolbar: '#newStatus', title: '工作状态', sort: true}
+                    , {field: 'nowCurrent', toolbar: '#currentStatus', title: '电流值', sort: true}
+                    , {field: 'currWeight', title: '重量值', sort: true}
+                    , {field: 'tempValue',toolbar: '#tempValue',  title: '温度值', sort: true}
+                    , {field: 'humiValue',toolbar: '#humiValue', title: '湿度值', sort: true}
+                    , {field: 'smokeValue', toolbar: '#smokeValue', title: '烟雾值', sort: true}
+                    , {field: 'beginTime', title: '记录时间', sort: true}
+                    , {title: '操作', align: 'center', toolbar: '#bar'}
 
-			reSet: {
-			    url: "/operationRecord/show2",
-				type: "reload",
-				tid: "table",
-				data: ["date1", "bmId", "macid","eqSbbh"],
-				method: "POST"
-			}
-		}
-	};
-	renderMod.form = {
-		date:{
-			elem:"#date1",
-			value:false,
-			type:"date",
-			format:'yyyy-MM-dd',
-			range:true
-		},
-		val: {
-			filter: "forms",
-			select: [
-				{
-					filter: "bmId",
-					ids: "bmId",
-					text: "bmName",
-                    url: "/supervise/bmgl/listDelXks"
-				}
-			]
-		}
-	}
+                ]]
+                , url: "/operationRecord/showAllYxhjNewYxjl"
+                // , reload: 'parent'
+                // , contentType: "application/json"
+                , method: "POST"
+                , page: true
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+
+                , done: function (obj) {
+                    tableFunc({
+                        toolFunc: [
+                            {
+                                title: "历史运行环境",
+                                event: 'edit',
+                                type: 2,
+                                content: '3.html',
+                                area: ['90%', '90%'],
+                                dataUrl: ["machineNumber"]
+                            }
+                        ]
+                    })
+                }
+            }
+            , reSet: [
+                {
+                    url: "/operationRecord/showAllYlxNewYxjl",
+                    type: "reload",
+                    tid: "table",
+                    data: ["qssj", "bmid", "zcbh"],
+                    method: "POST"
+
+                }
+            ]
+        }
+
+    };
 
 
 </script>
+
+
 </body>
 </html>

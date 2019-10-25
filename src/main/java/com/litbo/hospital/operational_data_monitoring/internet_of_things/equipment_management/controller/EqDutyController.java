@@ -72,6 +72,7 @@ public class EqDutyController {
      * @param id
      * @return
      */
+
     @RequestMapping("/showOne")
     public Result showOne(String id){
         EqDutyVO eqDutyVO = eqDutyTabService.showOne(id);
@@ -99,11 +100,14 @@ public class EqDutyController {
         BeanUtils.copyProperties(eqDutyVO,eqDutyTab);
         eqOvertimeTab.setEqMacId(idByIDAndTime);
         eqOvertimeTab.setId(IDFormat.getIdByIDAndTime("eq_overtime_tab","id"));
-        System.out.println(eqOvertimeTab);
+        eqOvertimeTab.setStartDate(eqDutyVO.getStartDate());
+        eqOvertimeTab.setEndDate(eqDutyVO.getEndDate());
+        eqOvertimeTab.setEndTime(eqDutyVO.getEndTime());
+        eqOvertimeTab.setStartTime(eqDutyVO.getStartTime());
         eqOvertimeTabService.save(eqOvertimeTab);
         //添加设备核定工时设置
         ApprovedWorkingHours approvedWorkingHours = new ApprovedWorkingHours();
-        BeanUtils.copyProperties(eqDutyVO,eqDutyTab);
+        BeanUtils.copyProperties(eqDutyVO,approvedWorkingHours);
         approvedWorkingHours.setId(IDFormat.getIdByIDAndTime("approved_working_hours","id"));
         approvedWorkingHours.setEqMacId(idByIDAndTime);
         System.out.println(approvedWorkingHours);
@@ -132,7 +136,7 @@ public class EqDutyController {
         eqOvertimeTabService.update(eqOvertimeTab);
         //添加设备核定工时设置
         ApprovedWorkingHours approvedWorkingHours = new ApprovedWorkingHours();
-        BeanUtils.copyProperties(eqDutyVO,eqDutyTab);
+        BeanUtils.copyProperties(eqDutyVO,approvedWorkingHours);
         approvedWorkingHours.setEqMacId(idByIDAndTime);
         approvedWorkingHoursService.update(approvedWorkingHours);
         return Result.success();

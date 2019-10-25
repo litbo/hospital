@@ -408,13 +408,13 @@
             <div class="layui-inline" style="width: 330px;">
                 <label class="layui-form-label" style="width: 100px;">开始日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="startDate" id="startDate" placeholder="" autocomplete="off" class="layui-input">
+                    <input type="text" name="startDate" id="startDate" lay-verify="required"  placeholder="请选择" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline" style="width: 330px;">
                 <label class="layui-form-label" style="margin-left: 20px;">结束日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="endDate" id="endDate"  placeholder="" autocomplete="off" class="layui-input">
+                    <input type="text" name="endDate" id="endDate"  placeholder="请选择" autocomplete="off" lay-verify="required" class="layui-input">
                 </div>
             </div>
         </div>
@@ -424,13 +424,13 @@
             <div class="layui-inline" style="width: 330px;">
                 <label class="layui-form-label" style="width: 100px;">开始时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="startTime" id="startTime"  placeholder="" autocomplete="off" class="layui-input">
+                    <input type="text" name="startTime" id="startTime" lay-verify="required"  placeholder="请选择" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline" style="width: 330px;">
                 <label class="layui-form-label" style="margin-left: 20px;">结束时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="endTime" id="endTime" placeholder="" autocomplete="off" class="layui-input">
+                    <input type="text" name="endTime" id="endTime" lay-verify="required"  placeholder="请选择" autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -953,10 +953,18 @@
 
         //日期
         laydate.render({
-            elem: '#startDate'
+            elem: '#startDate',
+            format: "yyyy-MM-dd",
+            range: false,
+            type: "date",
+            value: false
         });
         laydate.render({
-            elem: '#endDate'
+            elem: '#endDate',
+            format: "yyyy-MM-dd",
+            range: false,
+            type: "date",
+            value: false
         });
 
 

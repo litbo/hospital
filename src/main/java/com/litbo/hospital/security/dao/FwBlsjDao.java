@@ -47,4 +47,9 @@ public interface FwBlsjDao {
 
     @Update("update fw_blsj set status = #{status} where id = #{id}")
     int updateFwBlsjStatus(@Param("status") Integer status, @Param("id") Integer id);
+
+
+    @Update("update fw_blsj set pdf_status = #{status} where id = #{id}")
+    int updatePDFStatus(@Param("status") Integer status, @Param("id") Integer id);
+
 }

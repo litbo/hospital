@@ -115,4 +115,11 @@ public class Deviceparameter {
     private String maintainStatus;
     private String softVerChange;
     private String hardCloseFlag;
+    private String maxWdCurrent;
+    private String minWdCurrent;
+    private String maxSdCurrent;
+    private String minSdCurrent;
+    private String maxYwCurrent;
+    private String minYwCurrent;
+
 }

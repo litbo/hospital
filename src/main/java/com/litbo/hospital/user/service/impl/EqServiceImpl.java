@@ -71,12 +71,12 @@ public class EqServiceImpl implements EqService {
         if(StringUtils.isNotBlank(LastSbbh)){
             String Lastflbm = LastSbbh.substring(13,LastSbbh.length());
             Integer flbmInt = Integer.parseInt(Lastflbm)+1;
-            String  flbm = String.format("%05d",flbmInt);
-            String sbbh = time+pm.getPid()+pm.getGlh()+flbm;
+            String  flbm = flbmInt.toString().substring(2);
+            String sbbh = time+pm.getEqPmId()+pm.getGlh()+flbm;
             return sbbh;
         }else {
             String flbm1 = "00001";
-            String sbbh = time+pm.getPid()+pm.getGlh()+flbm1;
+            String sbbh = time+pm.getEqPmId()+pm.getGlh()+flbm1;
             return sbbh;
         }
     }

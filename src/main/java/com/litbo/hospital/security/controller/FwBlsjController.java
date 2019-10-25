@@ -66,6 +66,8 @@ public class FwBlsjController {
                                    @RequestParam(value = "pageSize" ,required = false,defaultValue="10")int pageSize,
                              @RequestParam(required = false) String cpmc, @RequestParam(required = false)String bgrXm){
         return  Result.success(blsjService.listFwBlsj(pageNum,pageSize,cpmc,bgrXm));
+
+
     }
     @RequestMapping(value = "listFwBlsjWaitExamine",method = RequestMethod.GET)
     public Result listFwBlsjWaitExamine(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
@@ -107,5 +109,7 @@ public class FwBlsjController {
         }
         return null;
     }
+
+
 
 }

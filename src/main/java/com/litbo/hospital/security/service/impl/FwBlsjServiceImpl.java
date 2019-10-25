@@ -91,6 +91,11 @@ public class FwBlsjServiceImpl implements FwBlsjService {
 
     @Override
     public List<FwBlsj> listFwBlsjExport(String cpmc, String bgrXm) {
-        return blsjDao.listFwBlsj( EnumApplyStatus.APPLY_APPROVAL.getCode(), EnumBlsj.FW_BLSJ_SB.getCode(), cpmc, bgrXm);
+        List<FwBlsj> list =  blsjDao.listFwBlsj( EnumApplyStatus.APPLY_APPROVAL.getCode(), EnumBlsj.FW_BLSJ_SB.getCode(), cpmc, bgrXm);
+        for(FwBlsj f : list){
+            f.setPdfStatus((f.getPdfStatus()+1));
+            blsjDao.updatePDFStatus(f.getPdfStatus(),f.getId());
+        }
+        return list;
     }
 }

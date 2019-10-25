@@ -19,6 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/phantomjs/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/zdhtml/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/emp/")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/templates/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/logo/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/eq/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/cs/")

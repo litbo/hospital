@@ -49,10 +49,6 @@ public class ExcelUtil extends ImportExcelUtil {
                     }
                 }
 
-
-
-
-
                 if(cell == null||cell.getCellType()==HSSFCell.CELL_TYPE_BLANK){
                     rowList.add("");
                     continue;
@@ -77,12 +73,6 @@ public class ExcelUtil extends ImportExcelUtil {
         Workbook workbook = null;
         InputStream inputStream = null;
         List<Integer> ids = new ArrayList<>();
-//        ids.add(6);
-//        ids.add(7);
-//        ids.add(10);
-//        ids.add(18);
-//        ids.add(19);
-//        ids.add(23);
 
         try {
             inputStream = new FileInputStream(file);

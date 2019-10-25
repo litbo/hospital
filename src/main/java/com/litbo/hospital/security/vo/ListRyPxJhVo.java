@@ -26,8 +26,8 @@ public class ListRyPxJhVo {
 
     private String jhPxxz;
 
-    private String userId;
-
     private String pxAddr;
+
+    private String jhPxnrlb;
 
 }

@@ -1,9 +1,8 @@
 package com.litbo.hospital.lifemanage.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
-
 import com.litbo.hospital.lifemanage.bean.*;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
@@ -33,8 +32,6 @@ public class SelectServiceImp implements SelectService {
                                         @Param("bmId") String bmId
                                     , @Param("pageNum")Integer pageNum
                                     , @Param("pageSize")Integer pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
@@ -65,19 +62,17 @@ public class SelectServiceImp implements SelectService {
         }
 //        System.out.println("pdJhid"+pdJhid);
 //        System.out.println("bmId"+bmId);
-            adllDate = listTemp;
+        PageHelper.startPage(pageNum,pageSize);
+        adllDate = listTemp;
 
 
 
 //        System.out.println("已盘"+adllDate);
-
         return new PageInfo<>(adllDate);
     }
 
     @Override
     public PageInfo<SelectVO> selectNot(String pdJhid, String bmId, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
@@ -118,13 +113,12 @@ public class SelectServiceImp implements SelectService {
         }
 
 
-        System.out.println("addate2"+adllDate2);
+//        System.out.println("addate2"+adllDate2);
         for(SelectVO a : adllDate){
             if(adllDate2.contains(a)){
                 adllDate2.remove(a);
             }
         }
-        PageHelper.startPage(pageNum, pageSize);
 //        System.out.println("盘亏"+adllDate2);
 
         return new PageInfo<>(adllDate2);//返回
@@ -140,9 +134,8 @@ public class SelectServiceImp implements SelectService {
             SelectVO selectVO = new SelectVO(s1.getEqZcbh(),s1.getEqName(),getAllBmName);
             adllDate3.add(selectVO);
         }
-
-        PageHelper.startPage(pageNum, pageSize);
 //        System.out.println("盘点计划的"+adllDate3);
+        PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(adllDate3);
     }
     @Override
@@ -150,7 +143,6 @@ public class SelectServiceImp implements SelectService {
                                         @Param("bmId") String bmId
             , @Param("pageNum")Integer pageNum
             , @Param("pageSize")Integer pageSize) {
-
         List<SelectVO> adllDate = new ArrayList<SelectVO>();  //所有数据
         String getAllBmName = selectMapper.getBmName(bmId); //对应planid下的部门
         List<SgPd> list = sgPdMapper.selectAllData(pdJhid); //查询所有插入的扫描到的编号
@@ -177,7 +169,6 @@ public class SelectServiceImp implements SelectService {
             }
 
         }
-        PageHelper.startPage(pageNum,pageSize);
         adllDate = listTemp;
 
 //        System.out.println("盘盈"+listTemp2);
@@ -187,35 +178,35 @@ public class SelectServiceImp implements SelectService {
 
     @Override
     public PageInfo<SgPdZt> findInfo(String pdJhid, String eqName, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         List<SgPdZt> listAll = selectMapper.findInfo(pdJhid,eqName);
 //        System.out.println(selectMapper.findInfo(pdJhid,eqName));
-        PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(listAll);
     }
 
 
     public PageInfo<SgPdZt>  findYipan(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
-        List<SgPdZt> listYipan = selectMapper.findYipan(pdJhid,eqName);
         PageHelper.startPage(pageNum,pageSize);
+        List<SgPdZt> listYipan = selectMapper.findYipan(pdJhid,eqName);
         return new PageInfo<>(listYipan);
     }
     public PageInfo<SgPdZt>  findPanying(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
-        List<SgPdZt> listPanying = selectMapper.findPanying(pdJhid,eqName);
         PageHelper.startPage(pageNum,pageSize);
+        List<SgPdZt> listPanying = selectMapper.findPanying(pdJhid,eqName);
         return new PageInfo<>(listPanying);
     }
     public PageInfo<SgPdZt> findPankui(String pdJhid, String eqName, Integer pageNum, Integer pageSize){
-        List<SgPdZt> listPankui = selectMapper.findPankui(pdJhid,eqName);
         PageHelper.startPage(pageNum,pageSize);
+        List<SgPdZt> listPankui = selectMapper.findPankui(pdJhid,eqName);
         return new PageInfo<>(listPankui);
     }
 
 
 
     public PageInfo<ListNum> listNum(String pdJhid ,Integer pageNum, Integer pageSize){
-        ListNum getNum = selectMapper.getListNum(pdJhid);
-        System.out.println(getNum);
         PageHelper.startPage(pageNum,pageSize);
+        ListNum getNum = selectMapper.getListNum(pdJhid);
+//        System.out.println(getNum);
 
         return new PageInfo<>();
     }

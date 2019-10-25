@@ -84,7 +84,7 @@
                     , {align: 'left', toolbar: '#bar', title: '操作'}
                 ]]
                 , url: "/Finance/allFinance.do"
-                // , reload: true
+                // , reload: 'parent'
                 // , contentType: "application/json"
                 , method: "POST"
                 , page: true
@@ -135,7 +135,7 @@
                                     type: "POST",
                                     // contentType:"application/json",
                                     par: "id",
-                                    reload: true
+                                    reload: 'parent'
                                 }
                             }
                         ]

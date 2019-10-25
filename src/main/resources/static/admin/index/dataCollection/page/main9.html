@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>运行时长</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+</head>
+<body style="background-color: #f2f2f2;">
+
+
+<div class="layui-row">
+
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<!--<script type="text/html" id="toolBar">
+    <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <select class="layui-input" name="htZt">
+                <option value="" disabled selected hidden>全部合同状态</option>
+                <option value="0">已签订</option>
+                <option value="1">执行中</option>
+                <option value="2">已完成</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htBianhao" placeholder="合同编号">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htYf" placeholder="供货商">
+        </div>
+        <div class="layui-inline">
+            <input type="text" name="htQssj" class="layui-input" id="test1"
+                   placeholder="开始日期">
+        </div>
+        &#45;&#45;
+        <div class="layui-inline">
+            <input type="text" name="htJssj" class="layui-input" id="test2"
+                   placeholder="结束日期">
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm " style="background: #CC0033" lay-event="del" id="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+    </div>
+</script>-->
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit">运行详情</a>
+</script>
+<script type="text/html" id="toolBar">
+    <!-- 查询区域 -->
+    <form class="layui-form" action="" layui-filter="forms">
+
+        <div class="layui-inline layui-form-pane ">
+            <select id="select" name="time" lay-filter="select" >
+                <option value="月" selected>月报</option>
+                <option value="年">年报</option>
+            </select>
+        </div>
+
+
+        <!--设备编号-->
+        <div class="layui-input-inline" style="width: 140px;">
+            <input type="text" name="zcbh" autocomplete="off" placeholder="资产编号" class="layui-input">
+        </div>
+
+        <!--科室-->
+        <div class="layui-input-inline" style="width: 150px;">
+            <select id="select2" name="bmName" lay-filter="select2">
+                <option value="">全部科室</option>
+            </select>
+        </div>
+        <div class="layui-input-inline" style="width: 150px;">
+            <select name="eqSName" id="eqSName">
+                <option value="">请选择设备</option>
+            </select>
+        </div>
+
+        <!--联网仪编号-->
+        <!--<div class="layui-input-inline" style="width: 130px;">
+            <input type="text" name="macid" autocomplete="off" placeholder="联网仪编号" class="layui-input">
+        </div>-->
+        <div class="layui-input-inline">
+            <button class="layui-btn" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
+        </div>
+    </form>
+</script>
+
+
+<script>
+    $.cookie("timeselect",'月')
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('select(select)',function(data){
+            var option=data.value;
+            if(option==="年"){
+                $("#date1").hide()
+                $("#date2").show()
+                $("#date2").attr("name","qssj");
+                $("#date1").attr("name","quit");
+                var val =$('#select option:selected').val();//选中的值
+                $.cookie("timeselect",val)
+            }
+            else if(option==="月"){
+
+                $("#date2").hide()
+                $("#date1").show()
+                $("#date1").attr("name","qssj");
+                $("#date2").attr("name","quit");
+                var val =$('#select option:selected').val();//选中的值
+                $.cookie("timeselect",val)
+            }
+
+        });
+    });
+
+
+    $("#date1").on("input",function(e){
+        //获取input输入的值
+        console.log(e.delegateTarget.value);
+    });
+</script>
+<script type="text/html" id="newStatus">
+    {{#if (d.newStatus === "00" ) { }}
+    <span>关机</span>
+    {{# }else if(d.newStatus === "01"){ }}
+    <span>工作中</span>
+    {{# }else if(d.newStatus === "02"){ }}
+    <span>空闲</span>
+    {{# }else if(d.newStatus === "03"){ }}
+    <span>故障</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
+<script type="text/html" id="currentStatus">
+    {{#if (d.nowCurrent!=null&&(d.currentStatus === "0"||d.currentStatus === ""||d.currentStatus === null) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.nowCurrent}}</span>
+    {{# }else if(d.nowCurrent!=null&&(d.currentStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.nowCurrent}}</span>
+    {{# }else if(d.nowCurrent!=null&&(d.currentStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger"style="background-color: red">{{d.nowCurrent}}</span>
+    {{# }else if(d.nowCurrent!=null){ }}
+    <span>{{d.nowCurrent}}</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
+<script type="text/html" id="humiValue">
+    {{#if (d.humiValue!=null&&(d.humiStatus === "0"||d.humiStatus === ""||d.humiStatus === null) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.humiValue}}</span>
+    {{# }else if(d.humiValue!=null&&(d.humiStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.humiValue}}</span>
+    {{# }else if(d.humiValue!=null&&(d.humiStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger"style="background-color: red">{{d.humiValue}}</span>
+    {{# }else if(d.humiValue!=null) { }}
+    <span>{{d.humiValue}}</span>
+    {{# }else  { }}
+    <span>\</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="smokeValue">
+    {{#if (d.smokeValue!=null&&(d.smokeStatus === "0"||d.smokeStatus === ""||d.smokeStatus === null ) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.smokeValue}}</span>
+    {{# }else if(d.smokeValue!=null&&(d.smokeStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.smokeValue}}</span>
+    {{# }else if(d.smokeValue!=null&&(d.smokeStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger"style="background-color: red">{{d.smokeValue}}</span>
+    {{# }else if(d.smokeValue!=null){ }}
+    <span>{{d.smokeValue}}</span>
+    {{# }else { }}
+    <span class="">\</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="tempValue">
+    {{#if (d.tempValue!=null&&(d.tempStatus === "0"||d.tempStatus === ""||d.tempStatus === null) ) { }}
+    <span class="layui-btn  layui-btn-xs" style="background-color: #00B83F">{{d.tempValue}}</span>
+    {{# }else if(d.tempValue!=null&&(d.tempStatus === "1")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-normal">{{d.tempValue}}</span>
+    {{# }else if(d.tempStatus!=null&&(d.tempStatus === "2")){ }}
+    <span class="layui-btn layui-btn-xs layui-btn-danger">{{d.tempValue}}</span>
+    {{# }else if(d.tempStatus!=null){ }}
+    <span>{{d.tempValue}}</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
+<script>
+
+
+        layui.use(['layer', 'jquery', 'form'], function () {
+            var layer = layui.layer,
+                $ = layui.jquery,
+                form = layui.form;
+            form.on('select(select2)', function(data){
+                if(data.value == 1){
+                    alert(" 123")
+                }else{
+                    var type =$('#select2 option:selected').val();//选中的值
+                    $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){
+                        var eqSName = data.data;
+                        // console.log("从后端获得的数据："+eqSName);
+                        // 将数据分割：
+                        // eqSName = eqSName.toString().split(',');
+                        $("#eqSName").empty()
+                        for(var i in eqSName){
+                            $("#eqSName").append("<option value=\""+eqSName[i].eqName+"\">"+eqSName[i].eqName+"</option>")
+                        }
+                        layui.form.render("select");
+                    });
+                }
+            });
+        });
+
+
+</script>
+
+<script>
+    renderMod = {
+        formAction: {
+            date: [
+                {
+                    elem: "#date1",
+                    value: false,
+                    type: "month",
+                    format: 'yyyy-MM',
+                    range: true
+                },
+                {
+                    elem: "#date2",
+                    type: "year",
+                    format: 'yyyy',
+                    value: false,
+                    range: true
+                }
+            ],
+            val: {
+                filter: "forms",
+                select: [
+                    {
+                        filter: "select2",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listDelXks"
+                    }
+                ]
+            }
+
+        },
+        addTable: {
+            table: {
+                // elem: "#table",
+                cols: [[ //表头
+                     {field: 'deviceCode', title: '资产编号', sort: true}
+                    , {field: 'eqName', title: '设备名称', sort: true}
+                    , {title: '操作', align: 'center', toolbar: '#bar'}
+
+                ]]
+                , url: "/operationRecord/showAllYxhjNewYxjl"
+                // , reload: 'parent'
+                // , contentType: "application/json"
+                , method: "POST"
+                , page: true
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+
+                , done: function (obj) {
+
+                        tableFunc({
+                            toolFunc: [
+                                {
+                                    title: "运行时长",
+                                    event: 'edit',
+                                    type: 2,
+                                    content: '5.html',
+                                    area: ['90%', '90%'],
+                                    dataUrl: ["machineNumber"]
+                                }
+                            ]
+                        })
+
+
+                }
+            }
+            , reSet: [
+                {
+                    url: "/operationRecord/showAllYlxNewYxjl",
+                    type: "search",
+                    tid: "table",
+                    data: ["qssj", "bmName", "zcbh","eqSName"],
+                    method: "POST"
+
+                }
+            ]
+        }
+
+    };
+
+
+</script>
+
+
+</body>
+</html>

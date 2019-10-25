@@ -9,7 +9,7 @@ import java.util.List;
  * metering_util
  * @author 
  */
-public class MeteringUtil implements Serializable {
+public class  MeteringUtil implements Serializable {
 
     // id
     private Integer id;

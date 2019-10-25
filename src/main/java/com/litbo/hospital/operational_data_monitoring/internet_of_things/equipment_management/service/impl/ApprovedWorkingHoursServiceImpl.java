@@ -61,6 +61,7 @@ public class ApprovedWorkingHoursServiceImpl implements ApprovedWorkingHoursServ
 
     @Override
     public void update(ApprovedWorkingHours approvedWorkingHours) {
-        dao.update(approvedWorkingHours);
+        int i = dao.update(approvedWorkingHours);
+        System.out.println("");
     }
 }

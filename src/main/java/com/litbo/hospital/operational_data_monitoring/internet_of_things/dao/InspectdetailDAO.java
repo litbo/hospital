@@ -253,28 +253,40 @@ public interface InspectdetailDAO {
 
 
 
-    /*/**
-     * 方法功能描述: 查询所有联网仪最新运行记录
-     * @Param:
-     * @Return:
-     * @Description:
-     * @Author: NCH
-     * @Date: 2019/10/16 下午 6:57
-     */
-
     @Select("<script>" +
-            "select e.eq_name,d.DeviceCode,i.ID, i.MachineNumber, i.InspectDate,i. NewStatus, i.CerateTime, i.Remark, \n" +
-            "i.BeginTime,i. EndTime, \n" +
-            "    i.WorkNums, i.ManuFault,  i.DayTotalPower, i.TempStatus, " +
-            "i.TempValue, i.HumiStatus, i.HumiValue, \n" +
-            "    i.SmokeStatus, i.SmokeValue, i.PositionStatus," +
-            " i.PositionValue, i.CurrWeight\n" +
-            "   from InspectDetail i,DeviceParameter d\n" +
-            "inner join eq_info e on e.eq_zcbh=d.DeviceCode\n" +
-            "inner join (SELECT MachineNumber, MAX ( dbo.InspectDetail.CerateTime ) as maxtime  FROM dbo.InspectDetail  GROUP BY MachineNumber ) AS  d2 on d2.MachineNumber=.MachineNumber\n" +
-            "inner join s_bm s on e.eq_bmid=s.bm_id\n" +
+            "SELECT\n" +
+            "\te.eq_name,\n" +
+            "\td.DeviceCode,\n" +
+            "\ti.ID,\n" +
+            "\ti.MachineNumber,\n" +
+            "\ti.InspectDate,\n" +
+            "\ti.NewStatus,\n" +
+            "\ti.CerateTime,\n" +
+            "\ti.Remark,\n" +
+            "\t i.BeginTime,\n" +
+            "\ti.EndTime,\n" +
+            "\t i.WorkNums,\n" +
+            "\ti.ManuFault,\n" +
+            "\ti.NowCurrent ,\n" +
+            "\ti.DayTotalPower,\n" +
+            "\ti.TempStatus,\n" +
+            "\t i.TempValue,\n" +
+            "\ti.HumiStatus,\n" +
+            "\ti.HumiValue,\n" +
+            "\t i.SmokeStatus,\n" +
+            "\ti.SmokeValue,\n" +
+            "\ti.PositionStatus,\n" +
+            "\t i.PositionValue,\n" +
+            "\ti.CurrWeight\n" +
+            "FROM\n" +
+            "\tInspectDetail i,\n" +
+            "\t (SELECT MachineNumber, MAX(CerateTime ) AS maxtime FROM InspectDetail GROUP BY MachineNumber ) AS d2 \n" +
+            "\tinner join DeviceParameter d on d.MachineNumber=d2.MachineNumber\n" +
+            "\tINNER JOIN eq_info e ON e.eq_zcbh = d.DeviceCode \n" +
+            "\tINNER JOIN s_bm s ON e.eq_bmid = s.bm_id\n" +
             "<where>" +
             " d2.maxtime=i.CerateTime\n" +
+            " and d2.MachineNumber=i.MachineNumber\n" +
             "  <if test =\"zcbh != null and zcbh!=''\">" +
             "  and  d.DeviceCode like CONCAT('%',#{zcbh},'%') " +
             "  </if> " +
@@ -288,9 +300,65 @@ public interface InspectdetailDAO {
             "  and i.BeginTime &lt;=#{jssj} " +
             "  </if> " +
             "</where>\n" +
-            "order by i.BeginTime desc " +
+            "\torder by i.BeginTime desc "+
             "</script>")
     List<OperationRecord> showAllYlxNewYxjl(@Param("qssj") Date qssj, @Param("jssj") Date jssj, @Param("zcbh") String zcbh, @Param("bmid") String bmid);
+    @Select("<script>" +
+            "SELECT\n" +
+            "\te.eq_name,\n" +
+            "\td.DeviceCode,\n" +
+            "\ti.ID,\n" +
+            "\ti.MachineNumber,\n" +
+            "\ti.InspectDate,\n" +
+            "\ti.NewStatus,\n" +
+            "\ti.CerateTime,\n" +
+            "\ti.Remark,\n" +
+            "\t i.BeginTime,\n" +
+            "\ti.EndTime,\n" +
+            "\t i.WorkNums,\n" +
+            "\ti.ManuFault,\n" +
+            "\ti.NowCurrent ,\n" +
+            "\ti.DayTotalPower,\n" +
+            "\ti.TempStatus,\n" +
+            "\t i.TempValue,\n" +
+            "\ti.HumiStatus,\n" +
+            "\ti.HumiValue,\n" +
+            "\t i.SmokeStatus,\n" +
+            "\ti.SmokeValue,\n" +
+            "\ti.PositionStatus,\n" +
+            "\t i.PositionValue,\n" +
+            "\ti.CurrWeight\n" +
+            "FROM\n" +
+            "\tInspectDetail i,\n" +
+            "\t (SELECT MachineNumber, MAX(CerateTime ) AS maxtime FROM InspectDetail GROUP BY MachineNumber ) AS d2 \n" +
+            "\tinner join DeviceParameter d on d.MachineNumber=d2.MachineNumber\n" +
+            "\tINNER JOIN eq_info e ON e.eq_zcbh = d.DeviceCode \n" +
+            "\tINNER JOIN s_bm s ON e.eq_bmid = s.bm_id\n" +
+            "<where>" +
+            " d2.maxtime=i.CerateTime\n" +
+            " and d2.MachineNumber=i.MachineNumber\n" +
+            "  <if test =\"zcbh != null and zcbh!=''\">" +
+            "  and  d.DeviceCode like CONCAT('%',#{zcbh},'%') " +
+            "  </if> " +
+            "  <if test =\"bmName != null and bmName!=''\">" +
+            "  and  s.bm_name like CONCAT('%',#{bmName},'%')  " +
+            "  </if> " +
+            "  <if test =\"eqSName != null and eqSName!=''\">" +
+            "  and  e.eq_name =#{eqSName}  " +
+            "  </if> " +
+            "</where>\n" +
+            "\torder by i.BeginTime desc "+
+            "</script>")
+    List<OperationRecord> showAllYlxNewYxjl2(@Param("qssj") Date qssj, @Param("jssj") Date jssj, @Param("zcbh") String zcbh, @Param("bmName") String bmName,@Param("eqSName")String eqSName);
+
+    /*/**
+     * 方法功能描述: 查询所有联网仪最新运行记录
+     * @Param:
+     * @Return:
+     * @Description:
+     * @Author: NCH
+     * @Date: 2019/10/16 下午 6:57
+     */
 
 /*/**
  * 方法功能描述:查询本编号所有运行记录
@@ -301,19 +369,19 @@ public interface InspectdetailDAO {
  * @Date: 2019/10/16 下午 11:29
  */
 
-    @Select("select e.eq_name,d.DeviceCode,i.ID, i.MachineNumber, i.InspectDate,i. NewStatus, i.CerateTime, i.Remark, \n" +
+    @Select("select e.eq_name,d.DeviceCode ,i.ID, i.MachineNumber, i.InspectDate,i. NewStatus, i.CerateTime, i.Remark, \n" +
             "i.BeginTime,i. EndTime, \n" +
-            "    i.WorkNums, i.ManuFault,  i.DayTotalPower, i.TempStatus, " +
+            "    i.WorkNums, i.ManuFault,i.NowCurrent,i.DayTotalPower, i.TempStatus, " +
             "i.TempValue, i.HumiStatus, i.HumiValue, \n" +
             "    i.SmokeStatus, i.SmokeValue, i.PositionStatus," +
-            " i.PositionValue, i.CurrWeight\n" +
+            " i.PositionValue, i.CurrWeight \n" +
             "   from InspectDetail i\n" +
             "inner join DeviceParameter d on d.MachineNumber=i.MachineNumber\n" +
             "inner join eq_info e on e.eq_zcbh=d.DeviceCode\n" +
             "inner join s_bm s on e.eq_bmid=s.bm_id\n" +
             "where i.MachineNumber=#{lwybh}"+
-            "order by i.BeginTime desc "
+            "\torder by i.BeginTime desc "
             )
-    List<OperationRecord> showOnelYlxYxjl(String lwybh);
+    List<OperationRecord> showOnelYlxYxjl(@Param("lwybh") String lwybh);
 
 }

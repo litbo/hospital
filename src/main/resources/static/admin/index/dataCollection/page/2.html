@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>运行记录历史纪录</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css">
+    <script type="text/javascript" src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/static/admin/js/basic.js"></script>
+</head>
+<body  style="background-color: #f2f2f2;">
+
+
+<div class="layui-row">
+
+    <div class="col-xs-12">
+        <table id="table" lay-filter="table1"></table>
+    </div>
+</div>
+
+<!--<script type="text/html" id="toolBar">
+    <div class="hidden-xs" id="moreBar">
+        <div class="layui-inline">
+            <select class="layui-input" name="htZt">
+                <option value="" disabled selected hidden>全部合同状态</option>
+                <option value="0">已签订</option>
+                <option value="1">执行中</option>
+                <option value="2">已完成</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htBianhao" placeholder="合同编号">
+        </div>
+        <div class="layui-inline">
+            <input class="layui-input" name="htYf" placeholder="供货商">
+        </div>
+        <div class="layui-inline">
+            <input type="text" name="htQssj" class="layui-input" id="test1"
+                   placeholder="开始日期">
+        </div>
+        &#45;&#45;
+        <div class="layui-inline">
+            <input type="text" name="htJssj" class="layui-input" id="test2"
+                   placeholder="结束日期">
+        </div>
+        <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+    </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <a class="layui-btn layui-btn-sm " style="background: #CC0033" lay-event="del" id="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+    </div>
+</script>-->
+
+<script type="text/html" id="newStatus">
+    {{#if (d.newStatus === "00" ) { }}
+    <span>关机</span>
+    {{# }else if(d.newStatus === "01"){ }}
+    <span>工作中</span>
+    {{# }else if(d.newStatus === "02"){ }}
+    <span>空闲</span>
+    {{# }else if(d.newStatus === "03"){ }}
+    <span>故障</span>
+    {{# }else { }}
+    <span>\</span>
+    {{# } }}
+</script>
+
+<script>
+    var machineNumber = $.getUrlParam("machineNumber");
+    renderMod = {
+        addTable: {
+            table: {
+                // elem: "#table",
+                cols: [[ //表头
+                     {field: 'deviceCode', title: '资产编号', sort: true}
+                    , {field: 'eqName', title: '设备名称', sort: true}
+                    , {field: 'newStatus', toolbar: '#newStatus', title: '工作状态'}
+                    , {field: 'beginTime', title: '开始时间', sort: true}
+                    , {field: 'endTime', title: '结束时间', sort: true}
+                    , {field: 'workHours', title: '工作时长(秒)'}
+                    , {field: 'positionValue', title: '所在位置'}
+                ]]
+                , url: "/operationRecord/showOnelYlxYxjl"
+                // , reload: 'parent'
+                // , contentType: "application/json"
+                , method: "POST"
+                , page: true,
+                where:{lwybh:machineNumber}
+                , request: {
+                    pageName: 'pageNum',
+                    limitName: 'pageSize'
+                }
+
+                , parseData: function (res) { //res 即为原始返回的数据
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.data.total,//页面显示的数据条数
+                        "data": res.data.list //解析数据列表
+                    }
+                }
+
+                , done: function (obj) {
+                    tableFunc({
+
+                    })
+                }
+            }
+
+        }
+
+    };
+
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -45,6 +45,7 @@ public class PxServiceImpl implements PxService {
         yyPxJhVo.setId(UUID.randomUUID().toString());
         return pxDao.addYypxjh(yyPxJhVo);
     }
+
     public List<KsFzVo> getYypxKsNr(int pageNum, int pageSize){
             PageHelper.startPage(pageNum,pageSize);
     //        System.out.println(pxDao.getYypxKsNr());

@@ -28,7 +28,7 @@
     <div class="hidden-xs"  id="moreBar">
         <span>试用期日期：</span>
         <div class="layui-input-inline">
-            <input type="text"  id="date" name="date" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
+            <input type="text"  id="date" name="startTime" lay-verify="date" autocomplete="off" class="layui-input" placeholder="开始时间">
         </div>
 
         <div class="layui-inline">
@@ -50,8 +50,7 @@
             date :{
                 elem : "#date",
                 type : "date",
-                value:false,
-                range:"~"
+                value:false
             }
         },
         addTable: {
@@ -96,8 +95,8 @@
             reSet:{
                 url:"/supervise/zdgl/listZdsByTimeAndZdNameAndZt?zdZt=2",
                 type:"search",
-                data:["bmName"],    //查询框的name
-                dat:["#date","startTime","endTime","~"]
+                data:["zdName","startTime"]   //查询框的name
+                // dat:["#date","startTime","endTime","~"]
             }
         }
     }

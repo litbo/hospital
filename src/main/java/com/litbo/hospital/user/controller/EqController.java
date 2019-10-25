@@ -92,6 +92,9 @@ public class EqController {
     @RequestMapping("/setPm")
     public Result setPm(@RequestBody SetPmVo setPmVo) {
 
+         if(setPmVo.getEqPmId().length()<10){
+             return Result.error("请继续选择卫标子类");
+         }
         if (es.setPm(setPmVo) < 0) {
             return Result.error();
         }
