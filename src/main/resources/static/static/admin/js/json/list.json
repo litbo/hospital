@@ -696,58 +696,35 @@
           },
 
           {
-            "title": "离线盘点",
-            "url": "life&t=1&n=3",
-            "icon": "clipboard-check",
-            "id": "313",
-            "shiro": "LXPD",
-            "children": [
-              {
-                "title": "盘点同步",
-                "url": "./dataCollection/page/choose-lxpd.html",
-                "id": "3130",
-                "icon": "clipboard-check",
-                "shiro": "PDTB"
-              },
-              {
-                "title": "盘点计划",
-                "url": "./dataCollection/lxpd-table.html",
-                "id": "3131",
-                "icon": "clipboard-check",
-                "shiro": "PDJH"
-              }
-            ]
-          },
-          {
             "title": "使用登记",
-            "url": "life&t=1&n=4",
-            "id": "314",
+            "url": "life&t=1&n=3",
+            "id": "313",
             "shiro": "DZDJB",
             "icon": "book"
           },
           {
             "title": "用前检查",
-            "url": "life&t=1&n=5",
-            "id": "315",
+            "url": "life&t=1&n=4",
+            "id": "314",
             "shiro": "SYGL",
             "children": [
               {
                 "title": "用前检查任务",
                 "url": "./table.html",
                 "icon": "search",
-                "id": "3150",
+                "id": "3140",
                 "shiro": "SYGL",
                 "children": [
                   {
                     "title": "待执行任务",
                     "url": "./life/before-check/standard.html",
-                    "id": "31500",
+                    "id": "31400",
                     "shiro": "SYGL"
                   },
                   {
                     "title": "已执行任务",
                     "url": "./life/before-check/executed-mission.html",
-                    "id": "31501",
+                    "id": "31401",
                     "shiro": "SYGL"
                   }
                 ]
@@ -757,12 +734,12 @@
                 "url": "javascript",
                 "icon": "pencil-alt",
                 "shiro": "SYGL",
-                "id": "3121",
+                "id": "3141",
                 "children": [
                   {
                     "title": "分科室统计",
                     "url": "./life/before-check/sectional-statistics.html",
-                    "id": "31510",
+                    "id": "31410",
                     "shiro": "SYGL"
                   }
                 ]
@@ -771,25 +748,19 @@
                 "title": "用前检查规范",
                 "url": "./table.html",
                 "icon": "comment-alt",
-                "id": "3152",
+                "id": "3142",
                 "shiro": "SYGL",
                 "children": [
                   {
                     "title": "规范查询",
                     "url": "./life/before-check/standard-query.html",
-                    "id": "31520",
+                    "id": "31420",
                     "shiro": "SYGL"
                   },
                   {
                     "title": "规范编制",
                     "url": "./life/before-check/specifications.html",
-                    "id": "31521",
-                    "shiro": "SYGL"
-                  },
-                  {
-                    "title": "编制任务",
-                    "url": "./life/before-check/prepare-task.html",
-                    "id": "31522",
+                    "id": "31421",
                     "shiro": "SYGL"
                   }
                 ]

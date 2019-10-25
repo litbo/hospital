@@ -52,19 +52,21 @@
                 cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
                     ,{field:'bmName',title:'科室'}
-                    ,{field:'totalEqs',title:'覆盖设备数', minWidth:180}
-                    ,{field:'doneEqs', title:'执行设备数', minWidth:180}
-                    ,{field:'enforced', title:'执行率', minWidth:170}
-                    ,{field:'date', title:'日期', minWidth:170}
-                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:150}
+                    ,{field:'totalEqs',title:'覆盖设备数', minWidth:100}
+                    ,{field:'doneEqs', title:'执行设备数', minWidth:100}
+                    ,{field:'enforced', title:'执行率', minWidth:100}
+                    ,{field:'date', title:'日期', width:120}
                 ]]
-                , url: "/lifeManage/searchUseForBmEq"
+                , url: "/lifeManage/searchUseForBmEqByDate"
                 , method: "GET"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
                 }
-                , where: {}
+                , where: {
+                    bmId:$.getUrlParam("bmId"),
+                    bmName:$.getUrlParam("bmName")
+                }
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
                         "code": res.code, //解析接口状态
@@ -74,21 +76,7 @@
                     }
                 }
                 ,done: function(obj){
-                    tableFunc({
-                        "tools":[
-                            {//打开一个新窗口，并将当前行数据中的id传递给下一页面
-                                type:2,
-                                event: "pipei",
-                                title:"查看",
-                                content:"child/chakan.html",
-                                area: ['1000px', '450px'],
-                                dataUrl:["bmId","bmName"],
-                                func:function(obj){
-                                    // console.log(obj);
-                                }
-                            }
-                        ]
-                    })
+
                 }
             },
 
@@ -100,26 +88,6 @@
             // }
         },page: true
     };
-    renderMod.form = {
-        date:[
-            {
-                elem:"#date1",
-                value:false,
-                format:'yyyy-MM-dd'
-            }
-        ],
-        val: {
-            filter: "forms",
-            select: [
-                {
-                    filter: "bmId",
-                    ids: "bmId",
-                    text: "bmName",
-                        url: "/supervise/bmgl/listDelXks"
-                }
-            ]
-        }
-    }
 
 </script>
 </body>

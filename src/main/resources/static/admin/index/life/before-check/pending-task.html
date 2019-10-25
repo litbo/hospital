@@ -20,7 +20,7 @@
         <table class="layui-hide" id="table" lay-filter="table1"></table>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1" style="float: right;margin-right: 5%;">提交</button>
+                <button class="layui-btn Bm" id="Bm" lay-submit="" lay-filter="demo1" lay-event="getCheckData" style="float: right;margin-right: 5%;">提交</button>
             </div>
         </div>
     </div>
@@ -101,29 +101,27 @@
                     var tra = obj.data;
 
                     for (var i = 0; i < tra.length; i++){
-                        if(tra[i].taskResult == " "){
+                        if(tra[i].taskResult == null){
                             tra[i]["taskResult"] = 1;
                         }else{
-                            tra[i]["taskResult"] = 0;
+                            tra = tra;
                         }
                     }
+                    console.log(tra);
 
                     layui.form.on('switch(taskResult)', function(obj){
-                        console.log(obj.elem.checked);
+                        console.log(obj);
 
                         for (var i = 0; i < tra.length; i++){
                             if(obj.elem.checked == true){
                                 tra[i]["taskResult"] = 1;
-                                return false;
-                            }else{
+                                console.log(1);
+                            }else if(obj.elem.checked == false){
                                 tra[i]["taskResult"] = 0;
-                                return false;
+                                console.log(2);
                             }
-                            // if (tra[i].inspPlStandardId === this.value) {
-
-                            // }
                         }
-                        console.log($(".taskResult").val());
+                        // console.log($(".taskResult").val());
                         console.log(tra);
                     });
 
