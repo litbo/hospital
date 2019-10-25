@@ -4,7 +4,7 @@ $(function () {
     dataScreen3();
     dataScreen4();
     dataScreen5();
-    fullScreen();
+    dataScreen6();
 });
 
 //设备运作状态图
@@ -118,7 +118,7 @@ function dataScreen2() {
             ,width:235
             ,cols: [[
                 {field:'name', title:'设备',unresize:true}
-                ,{field:'number', title:'工作量',unresize:true}
+                ,{field:'number', title:'工量',unresize:true}
                 ,{field:'profit', title:'收入',unresize:true}
                 ,{field:'profitRate', title:'收益率',width:70,align:'center',unresize:true}
             ]]
@@ -656,14 +656,128 @@ function dataScreen5() {
     loadOneColumn();
 }
 
-//全屏
-function fullScreen(){
-    layui.use('layer', function() { //独立版的layer无需执行这一句
-        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-        layer.msg('请按f11键全屏显示', {
-            time: 10000, //20s后自动关闭
-            btn: ['明白了'],
-            btnAlign: 'c'
+//设备运行时长图
+function dataScreen6(){
+    function loadOneColumn() {
+        var myChart = echarts.init(document.getElementById('data-screen6'));
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                x: 'center',
+                text: '设备运作时长图',
+                textStyle:{
+                    color:'#eee'
+                }
+            },
+            barWidth:5,
+            tooltip: {
+                trigger: 'item'
+            },
+            xAxis: [
+                {
+                    type : 'value',
+                    boundaryGap : [0, 0.01],
+                    min: 0,
+                    max: 700,
+                    interval: 100,
+                    axisLabel: {
+                        formatter: '{value} H'
+                    },
+                    axisLine: {
+                        show: true,
+                        onZero: true,
+                        lineStyle: {
+                            color:'#eee',
+                        },
+                    },
+                }
+            ],
+            yAxis: [
+                {
+                    type : 'category',
+                    data : [],
+                    axisLine: {
+                        show: true,
+                        onZero: true,
+                        lineStyle: {
+                            color:'#eee',
+                        },
+                    },
+                }
+            ],
+            calculable: true,
+            grid: {
+                borderWidth: 0,
+                y: 60,
+                y2: 70,
+                bottom:30
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data: []
+            },
+            series: [{
+                name: '全院设备分布图',
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                                '#f19b78','#ff70ae','#fdc323','#2b92fb','#91c7ae',
+                                '#bda29a','#546570','#CA8622','#A7908E','#D74462'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        label: {
+                            show: true,
+                            position: 'right',
+                            formatter: '{b}\n{c}'
+                        }
+                    }
+                },
+                data: []
+            }]
         });
-    });
+        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        var names = [];    //类别数组（用于存放饼图的类别）
+        var brower = [];
+        $.ajax({
+            type: 'get',
+            url: '../json/dataScreen6.json',//请求数据的地址
+            dataType: "json",        //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                $.each(result.data, function (index, item) {
+                    names.push(item.name);    //挨个取出类别并填入类别数组 
+                    brower.push({
+                        name: item.name,
+                        value: item.hour
+                    });
+                });
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表                
+                    legend: {
+                        data: names
+                    },
+                    series: [{
+                        data: brower
+                    }],
+                    yAxis: {
+                        data:names
+                    }
+                });
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                myChart.hideLoading();
+            }
+        });
+    }
+    loadOneColumn();
 }
+
+//全屏
+

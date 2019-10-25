@@ -51,24 +51,11 @@
 
 <script type="text/html" id="barDemo">
     {{#if (d.operationId === "01") { }}
-    <form class="layui-form forms" action="" lay-filter="forms">
-<!--        <input type="radio" name="taskResult" value="1" title="正常" checked>-->
-<!--        <input type="radio" name="taskResult" value="0" title="不正常">-->
-        <select name="taskResult">
-            <option value="01">正常</option>
-            <option value="02">不正常</option>
-        </select>
-    </form>
+    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="正&nbsp;&nbsp;常|不正常" lay-filter="taskResult" {{ d.itaskResult == '' ? '' : 'checked' }}>
     {{# }else if(d.operationId === "02"){ }}
-    <form class="layui-form forms" action="" lay-filter="forms">
-    <input type='radio' name='taskResult' value='1' title='进行' checked>
-    <input type='radio' name='taskResult' value='0' title='未进行'>
-    </form>
+    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="进&nbsp;&nbsp;行|未进行" lay-filter="taskResult" {{ d.itaskResult == '' ? '' : 'checked' }}>
     {{# }else{ }}
-    <form class="layui-form forms" action="" lay-filter="forms">
-    <input type='radio' name='taskResult' value='1' title='处理' checked>
-    <input type='radio' name='taskResult' value='0' title='未处理'>
-    </form>
+    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="处&nbsp;&nbsp;理|未处理" lay-filter="taskResult" {{ d.itaskResult == '' ? '' : 'checked' }}>
     {{# } }}
 </script>
 
@@ -88,7 +75,7 @@
                     ,{field:'eqName', title:'设备名称', minWidth:180}
                     ,{field:'eqSbbh',title:'设备编号',minWidth:250}
                     ,{field:'bmName',title:'科室', minWidth:220}
-                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:180}
+                    ,{fixed: 'right', title:'操作', align:'center', toolbar: '#barDemo',width:120}
                 ]]
                 , url: "/lifeManage/searchUnFinishedEqTask"
                 , method: "POST"
@@ -109,7 +96,37 @@
                 }
                 ,page:false
                 ,done: function(obj){
-                    console.log(obj);
+                    console.log(obj.data);
+                    layui.form.render();
+                    var tra = obj.data;
+
+                    for (var i = 0; i < tra.length; i++){
+                        if(tra[i].taskResult == " "){
+                            tra[i]["taskResult"] = 1;
+                        }else{
+                            tra[i]["taskResult"] = 0;
+                        }
+                    }
+
+                    layui.form.on('switch(taskResult)', function(obj){
+                        console.log(obj.elem.checked);
+
+                        for (var i = 0; i < tra.length; i++){
+                            if(obj.elem.checked == true){
+                                tra[i]["taskResult"] = 1;
+                                return false;
+                            }else{
+                                tra[i]["taskResult"] = 0;
+                                return false;
+                            }
+                            // if (tra[i].inspPlStandardId === this.value) {
+
+                            // }
+                        }
+                        console.log($(".taskResult").val());
+                        console.log(tra);
+                    });
+
                     tableFunc({
                         "tools":[
                             {//打开一个新窗口，并将当前行数据中的id传递给下一页面
@@ -164,19 +181,27 @@
     };
 
     // 表单
-    layui.use(['form','layedit'], function(){
+    layui.use(['form','table'], function(){
 
         var form = layui.form
             ,layer = layui.layer
-            ,layedit = layui.layedit;
+            ,table = layui.table;
 
-        
+        // form.on('switch(taskResult)', function(obj){
+        //     console.log(obj.elem.checked);
+        //     if(obj.elem.checked == true){
+        //         $(".taskResult").val(1);
+        //     }else{
+        //         $(".taskResult").val(0);
+        //     }
+        //     console.log($(".taskResult").val());
+        // });
+
+
         form.on('submit(demo1)', function(data){
 
             var data1 = form.val("forms");
             console.log(data1);
-
-            console.log($(".forms").val());
 
             // layer.alert(JSON.stringify(data1), {
             //     title: '最终的提交信息'
@@ -206,10 +231,6 @@
             return false;
         });
 
-        $('#drmb').on('click', function(){
-            // console.log($(".mbNr").val());
-            layedit.setContent(index, $(".mbNr").val());
-        });
     });
 
 </script>

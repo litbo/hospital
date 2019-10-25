@@ -12,8 +12,11 @@
     <script src="../js/dataScreen.js"></script>
 </head>
 <body>
-<!--<button class="layui-btn layui-btn-sm full" style="background-color: #91c7ae;border: 1px solid #404d80;" onclick="fullScreen()">请全屏显示</button>-->
-
+<button class="layui-btn layui-btn-sm full"
+        style="background-color: #0a0f25;border: 1px solid #404d80;position:
+        absolute;top: 10px;right: 20px;height: 40px;border-radius: 10px"
+        id="btn">点击进入全屏显示
+</button>
 
 <!--背景-->
 <div class="mask_bg"></div>
@@ -21,7 +24,7 @@
 
 <div class="">
     <div class="layui-row row1">
-        
+
         <div class="layui-col-md4 data-screen1" >
             <!--设备运作状态图-->
             <div id="data-screen1"></div>
@@ -34,7 +37,7 @@
                 <table class="layui-hide" id="table1" lay-filter="test"></table>
             </div>
         </div>
-        
+
         <div class="layui-col-md4 data-screen3">
             <!--全院设备分布图-->
             <div id="data-screen3"></div>
@@ -88,26 +91,42 @@
         <div class="layui-col-md4 data-screen6">
             <!--设备收益指标-->
             <div id="data-screen6"></div>
-            <div class="profit">
-                <table class="layui-hide" id="table2" lay-filter="test" style="opacity: 0.2 !important;"></table>
-            </div>
+            <!--            <div class="profit">-->
+            <!--                <table class="layui-hide" id="table2" lay-filter="test" style="opacity: 0.2 !important;"></table>-->
+            <!--            </div>-->
         </div>
     </div>
 </div>
 
 <script>
-    // $(".full").click(function () {
-    //     $(document.body).css("padding-top","37px");
-    // });
-    //
-    // $(document).keydown(function (event) {
-    //     if (event.keyCode == 122) {
-    //         $(document.body).css("padding-top","37px");
-    //         if (event.keyCode == 115) {
-    //             $(document.body).css("padding-top","37px");
-    //         }
-    //     }
-    // });
+    $("#btn").on("click",function () {
+        var element = document.documentElement; //若要全屏页面中div，var element= document.getElementById("divID");
+        //IE 10及以下ActiveXObject
+        if (window.ActiveXObject) {
+            var WsShell = new ActiveXObject('WScript.Shell');
+            WsShell.SendKeys('{F11}');
+        }
+        //HTML W3C 提议
+        else if (element.requestFullScreen) {
+            element.requestFullScreen();
+        }
+        //IE11
+        else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        }
+        // Webkit (works in Safari5.1 and Chrome 15)
+        else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+        }
+        // Firefox (works in nightly)
+        else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        }
+    });
+
+    $(function () {
+        $("#btn")[0].click();
+    })
 
 </script>
 </body>
