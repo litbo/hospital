@@ -282,14 +282,15 @@ function addList(list, list1, main_list) {//list:包含主列表的容器 list1:
 }//动态的向页面中添加列表
 
 function addMaps(con, x) {//con:包含位置地图的容器名 x:当前页面的序号
-     var location = "//"+window.location.host + window.location.pathname;//获取当前页面不包含任何属性值的根地址（例：//www.XXX.com/index.html）    for (var i = 0; i < nList.length; i++) {
+     var location = "//"+window.location.host + window.location.pathname;//获取当前页面不包含任何属性值的根地址（例：//www.XXX.com/index.html）    
+     for (var i = 0; i < nList.length; i++) {
         if (p === nList[i].page) {
             if (n !== null && t !== null) {
                 addSite(p, nList[i].title, mList[x].tools[tN].children[nN]);
             } else {
                 addSite("home", "首页", nList[i]);
             }
-        }
+      }
     }
 
     function addSite(p, txt, title) {//p:跳转页面名 txt:上一项文字 title:当前项文字
