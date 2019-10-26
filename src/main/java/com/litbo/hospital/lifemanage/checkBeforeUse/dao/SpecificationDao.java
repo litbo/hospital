@@ -20,23 +20,35 @@ public interface SpecificationDao {
             "dbo.s_emp.user_xm\n" +
             "\n" +
             "FROM\n" +
-            "\tdbo.s_emp,\n" +
-            "\tdbo.s_bm\n" +
+            "dbo.s_emp ,\n" +
+            "dbo.s_bm ,\n" +
+            "dbo.s_user_role ,\n" +
+            "dbo.s_role\n" +
             "WHERE\n" +
-            "\tdbo.s_emp.bm_id = dbo.s_bm.bm_id\n")
+            "dbo.s_emp.bm_id = dbo.s_bm.bm_id AND\n" +
+            "dbo.s_user_role.user_id = dbo.s_emp.user_id AND\n" +
+            "dbo.s_role.role_id = dbo.s_user_role.role_id AND\n" +
+            "dbo.s_role.role_name LIKE '%处%长'\n" +
+            "\n")
     List<UserVo> searchUsers();
 
     @Select("<script>" +
             "SELECT\n" +
-            "        dbo.s_emp.user_id,\n" +
-            "        dbo.s_emp.bm_id,\n" +
-            "        dbo.s_emp.user_xm,\n" +
-            "        dbo.s_bm.bm_name\n" +
-            "    FROM\n" +
-            "        dbo.s_bm,\n" +
-            "        dbo.s_emp\n" +
-            "    WHERE\n" +
-            "        dbo.s_bm.bm_id = dbo.s_emp.bm_id\n" +
+            "dbo.s_emp.user_id,\n" +
+            "dbo.s_emp.bm_id,\n" +
+            "dbo.s_bm.bm_name,\n" +
+            "dbo.s_emp.user_xm\n" +
+            "\n" +
+            "FROM\n" +
+            "dbo.s_emp ,\n" +
+            "dbo.s_bm ,\n" +
+            "dbo.s_user_role ,\n" +
+            "dbo.s_role\n" +
+            "WHERE\n" +
+            "dbo.s_emp.bm_id = dbo.s_bm.bm_id AND\n" +
+            "dbo.s_user_role.user_id = dbo.s_emp.user_id AND\n" +
+            "dbo.s_role.role_id = dbo.s_user_role.role_id AND\n" +
+            "dbo.s_role.role_name LIKE '%处%长'\n" +
             "    <if test=\"userXm!=null\">\n" +
             "        and dbo.s_emp.user_xm like CONCAT('%',#{userXm},'%') \n" +
             "    </if>\n" +

@@ -32,16 +32,20 @@
     <form action="" style="float: right;margin-top: -5px;">
         <!--模板名称-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="eqName" autocomplete="off" placeholder="科室" class="layui-input">
+            <input type="text" name="rName" autocomplete="off" placeholder="科室" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
+            <button class="layui-btn"  data-type="reload"><i
+                    class="layui-icon layui-icon-search"></i>查询
+            </button>
         </div>
     </form>
 </script>
 
 
 <script>
+    var aa=$.getUrlParam("id");
+    console.log(aa);
     layui.use('table', function() {
         var table = layui.table;
         table.on('toolbar(table1)', function (obj) {
@@ -57,7 +61,24 @@
                 contentType: 'application/json',
                 // dataType: 'json',
                 data: JSON.stringify(obj),
-                /* data: {"deleteVo":JSON.stringify(deVo)} ,*/
+                //  data: {tjRyVos:JSON.stringify(obj),id:aa} ,
+                // param:{"id":aa},
+                success: function (data) {
+                    layer.alert("y")
+                },
+                error:function (data) {
+                    layer.alert("x")
+                }
+
+            });
+            $.ajax({
+                type: "POST",
+                url: "/px/insertRy",
+                // async: false,/*同步传输*/
+                contentType: 'application/json',
+                dataType: 'json',
+                 data: {"id":aa} ,
+                // param:{"id":aa},
                 success: function (data) {
                     layer.alert("y")
                 },
@@ -102,6 +123,7 @@
                 , url: "/px/getRyBtNr"
                 // , reload: 'parent'
                 // , contentType: "application/json"
+                ,where:{id:aa}
                 , method: "POST"
                 , page: true
                 , request: {
@@ -135,12 +157,11 @@
             }
             , reSet: [
                 {
-                    url: "/operationRecord/showAllYlxNewYxjl",
+                    url: "/px/selByName",
                     type: "reload",
-                    tid: "table",
-                    data: ["qssj", "bmid", "zcbh"],
+                    tid: "idTest",
+                    data: ["rName"],
                     method: "POST"
-
                 }
             ]
         }

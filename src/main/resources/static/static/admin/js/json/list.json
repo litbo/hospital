@@ -1447,14 +1447,14 @@
                 "shiro": "PXJH"
               },
               {
-                "title": "待训人员",
-                "url": "./table.html",
+                "title": "培训考核",
+                "url": "./safe/application-training/plan-querys.html",
                 "icon": "user-tag",
                 "id": "4201",
                 "shiro": "RYDA"
               },
               {
-                "title": "结果录入",
+                "title": "查询统计",
                 "url": "./table.html",
                 "icon": "user-clock",
                 "id": "4202",

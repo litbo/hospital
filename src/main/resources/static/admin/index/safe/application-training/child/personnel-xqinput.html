@@ -71,19 +71,19 @@
 
 
 <script>
+    console.log($.getUrlParam("id"));
     renderMod={
         form: {
-            /*val:{
+            val:{
                 filter:"khForms",
                 get:{
-                    url:"/Jh/jhkhIndex",
-                    parse:"empList",
-                    tableId:"table",
-                    data:{
-                        jhId:$.getUrlParam("id")
-                    }
+                    url:"/px/findAllRy",
+                    type: "POST",
+                    // parse:"empList",
+                    // tableId:"table",
+                    data: {id: $.getUrlParam("id")},
                 }
-            },*/
+            },
             date: [
                 {
                     elem: "#ksDate",

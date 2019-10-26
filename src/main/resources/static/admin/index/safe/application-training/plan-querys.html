@@ -59,8 +59,7 @@
 
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加人员</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="kaohe">考核</a>
 </script>
 
 
@@ -76,7 +75,6 @@
                 cols: [[ //应用培训表头
                     {type: "checkbox"}
                     , {field: 'eqName', title: '设备名称', minWidth: 150}
-                    // , {field: 'id', title: '计划id', minWidth: 150}
                     , {field: 'pxlx', title: '培训类型', minWidth: 150}
                     , {field: 'pxfs', title: '方式', minWidth: 150}
                     , {field: 'pxks', title: '培训科室', minWidth: 150}
@@ -103,42 +101,17 @@
                         toolFunc: [
                             {
                                 filter:"table1",
-                                event: "jhxq",
-                                title: "计划详情",
+                                event: "kaohe",
+                                title: "考核",
                                 area: ['90%', '90%'],
                                 type: 2,
-                                content: "./child/personnel-xqinput.html",
+                                content: "./child/kaohe.html",
                                 dataUrl: ["id"]
                             },
-                            {
-                                filter:"table1",
-                                event: "add",
-                                title: "添加人员",
-                                area: ['90%', '90%'],
-                                type: 2,
-                                content: "./child/addRY.html",
-                                dataUrl: ["id"]
-                            },
-                            {
-                                send: {
-                                    id: "table",
-                                    filter: "table1",
-                                    name: "id",
-                                    event: "del",
-                                    url: "/px/delYyjh",
-                                    type: "POST",
-                                    contentType: "application/json",
-                                    par: "id",
-                                    reload: 'parent'
-                                },
-                                tool: "toolbar",
-                                event: "del"
-
-                            }
                         ]
                     })
                 }
-            },
+            }
         ],
          reSet: [
         {

@@ -60,7 +60,7 @@ public class  ShiroConfig {
 
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**","authc");
-//       filterChainDefinitionMap.put("/**","anon");
+      // filterChainDefinitionMap.put("/**","anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
