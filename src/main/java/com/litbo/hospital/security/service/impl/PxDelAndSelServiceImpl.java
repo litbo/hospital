@@ -64,6 +64,12 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
     }
 
     @Override
+    public PageInfo kh(int pageNum, int pageSize, String id) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo(pxDelAndSelDao.kh(id));
+    }
+
+    @Override
     public PageInfo findAllRy(int pageNum,int pageSize,String id) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(pxDelAndSelDao.findAllRy(id));

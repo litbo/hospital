@@ -21,6 +21,14 @@ public class PxDelAndSelController {
     @Autowired(required = false)
     PxDelAndSelService pxDelAndSelService;
 
+    @RequestMapping("kh")
+    public Result kh(@RequestParam(value = "pageNum",required = false, defaultValue = "1") int pageNum,
+                     @RequestParam(value = "pageSize",required = false, defaultValue = "15") int pageSize,
+                     @RequestParam("id") String id){
+        PageInfo pageInfo = pxDelAndSelService.kh(pageNum,pageSize,id);
+        return Result.success(pageInfo);
+    }
+
 
     @RequestMapping("/selByName")
     public Result selByName(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
