@@ -31,11 +31,6 @@ public class PxServiceImpl implements PxService {
         return new PageInfo(pxDao.findAllYyJh());
     }
 
-    public PageInfo findAllRyjh(int pageNum,int pageSize){
-        PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(pxDao.findAllRyJh());
-    }
-
     public Integer addRypxjh(RyPxJhVo ryPxJhVo){
         ryPxJhVo.setId(UUID.randomUUID().toString());
         return pxDao.addRypxjh(ryPxJhVo);

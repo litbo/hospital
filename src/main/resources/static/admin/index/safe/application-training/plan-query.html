@@ -24,6 +24,7 @@
 
 <body>
 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    <div class="layui-tab-content" style="height: 100px;">
         <div class="layui-tab-item layui-show">
             <div class="layui-row">
                 <div class="col-xs-12 padRight">
@@ -31,6 +32,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 
@@ -57,14 +59,10 @@
 </script>
 
 
-
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">添加人员</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="jhxq">详情</a>
 </script>
-
-
-
 
 <script>
     renderMod.addTable = {
@@ -76,7 +74,6 @@
                 cols: [[ //应用培训表头
                     {type: "checkbox"}
                     , {field: 'eqName', title: '设备名称', minWidth: 150}
-                    // , {field: 'id', title: '计划id', minWidth: 150}
                     , {field: 'pxlx', title: '培训类型', minWidth: 150}
                     , {field: 'pxfs', title: '方式', minWidth: 150}
                     , {field: 'pxks', title: '培训科室', minWidth: 150}
@@ -138,7 +135,7 @@
                         ]
                     })
                 }
-            },
+            }
         ],
          reSet: [
         {

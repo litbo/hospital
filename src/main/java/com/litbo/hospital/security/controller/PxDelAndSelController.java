@@ -4,10 +4,7 @@ package com.litbo.hospital.security.controller;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.service.PxDelAndSelService;
-import com.litbo.hospital.security.vo.EmpVo;
-import com.litbo.hospital.security.vo.LSRyVo;
-import com.litbo.hospital.security.vo.StringVo;
-import com.litbo.hospital.security.vo.TjRyVo;
+import com.litbo.hospital.security.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -31,24 +31,6 @@ public class PxDelAndSelController {
         return Result.success(pageInfo);
     }
 
-    @RequestMapping("/selXxRy")
-    public Result selXxRy(@RequestParam("id") String id){
-        return Result.success();
-    }
-    @RequestMapping("/delRyjh")
-    public Result delRyjh(@RequestBody StringVo strVo){
-        if(strVo.getId()!=null){
-            Integer integer = pxDelAndSelService.DelRyjh(strVo.getId());
-            if(integer > 0){
-                return Result.success("已删除"+integer+"个数据");
-            }else {
-                return Result.error("请选中数据");
-            }
-        }else{
-            return Result.error();
-        }
-    }
-
     @RequestMapping("/delYyjh")
     public Result delYyjh(@RequestBody StringVo stringVo,HttpSession httpSessionsession){
        // System.out.println(httpSessionsession.getAttribute("id"));
@@ -62,13 +44,6 @@ public class PxDelAndSelController {
         }else{
             return Result.error();
         }
-    }
-
-    @RequestMapping("/selRyjh")
-    public Result selRyjh(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize,
-                          @RequestParam("jhName") String name,HttpSession sessions){
-        PageInfo pageInfo = pxDelAndSelService.selRyjh(pageNum,pageSize,name);
-        return Result.success(pageInfo);
     }
 
     @RequestMapping("/selYyjh")
@@ -95,11 +70,12 @@ public class PxDelAndSelController {
     }
 
     @RequestMapping("/insertRy")
-    public Result insertRy(@RequestBody LSRyVo lsRyVo){
+    public Result insertRy(@RequestBody LSRyVo lsRyVo,@RequestParam("id") String id){
         TjRyVo[] tjRyVos = lsRyVo.getTjRyVos();
         for(TjRyVo tjRyVo:tjRyVos){
-           pxDelAndSelService.insertRy(tjRyVo);
+            pxDelAndSelService.insertRy(tjRyVo,id);
         }
+
         return Result.success();
     }
 

@@ -28,7 +28,6 @@ public class GgController {
             return Result.success();
         }
         return Result.error();
-
     }
 
     //模糊查询通过审核的信息,根据标题进行查询

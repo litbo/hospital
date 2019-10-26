@@ -75,5 +75,4 @@ public interface GgDao {
     @Select("select  gglx_name from sys_gglx where gglx_id=#{id}")
     String selectGgTzLx(Integer id);
 
-
 }

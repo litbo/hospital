@@ -7,20 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface PxDelAndSelDao {
-    @Delete("<script>DELETE FROM jh_zd WHERE id IN <foreach item='str' index='index' " +
-            "collection='array' open='(' separator=',' close=')'>" +
-            "#{str}</foreach></script>")
-    Integer DelRyjh(String [] strs);
 
     @Delete("<script>DELETE FROM jh_yypx WHERE id IN <foreach item='item' index='index' " +
             "collection='array' open='(' separator=',' close=')'>" +
             "#{item}</foreach></script>")
     Integer DelYyjh(String [] strs);
-
-    @Select("SELECT id,jh_name AS jhName,px_addr," +
-            "jh_pxlx,jh_pxnrlb,jh_pxxz AS jhPxxz" +
-            ",jh_kstime,jh_jstime FROM dbo.jh_zd WHERE jh_name LIKE '%${name}%'")
-    List<ListRyPxJhVo> selRyjh(@Param("name") String name);
 
     @Select("SELECT y.id,e.eq_name,y.pxnrlb,y.pxlx,y.pxfs,s.bm_name AS pxks,\n" +
             "            y.kstime,y.jstime FROM jh_yypx AS y\n" +
@@ -46,7 +37,7 @@ public interface PxDelAndSelDao {
             " bm_name LIKE '%${rName}%'")
     List<TjRyVo> selByName(@Param("rName") String rName);
 
-    @Select("")
-    List<Object> selXxRy(String id);
+    @Select("SELECT DISTINCT user_id AS userId FROM dbo.jh_tjry")
+    List<RyIdVo> findUserId();
 
 }

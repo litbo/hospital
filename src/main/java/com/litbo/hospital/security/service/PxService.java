@@ -18,7 +18,4 @@ public interface PxService {
     Integer addYypxjh(YyPxJhVo yyPxJhVo);
 
     PageInfo findAllYyJh(int pageNum,int pageSize);
-
-    PageInfo findAllRyjh(int pageNum,int pageSize);
-
 }

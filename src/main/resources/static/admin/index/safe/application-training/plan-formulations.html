@@ -112,18 +112,23 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">培训类型<span class="sign">*</span></label>
+                <label class="layui-form-label">培训性质<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select name="pxlx">
-                        <option value="新产品新技术规范化培训">新产品新技术规范化培训</option>
-                        <option value="临床验收培训">临床验收培训</option>
-                        <option value="使用过程中培训">使用过程中培训</option>
+                        <option value="岗位培训">岗位培训</option>
+                        <option value="岗位再培训">岗位再培训</option>
+                        <option value="应用培训">应用培训</option>
+                        <option value="质安'二基'培训">质安'二基'培训</option>
+                        <option value="进修培训">进修培训</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">培训内容类别<span class="sign">*</span></label>
                 <div class="layui-input-block" id="sa">
+                    <input type="checkbox" name="pxnrlb" value="新产品新技术规范化" title="新产品新技术规范化">
+                    <input type="checkbox" name="pxnrlb" value="使用过程中" title="使用过程中">
+                    <input type="checkbox" name="pxnrlb" value="临床验收" title="临床验收">
                     <input type="checkbox" name="pxnrlb" value="节能减排" title="节能减排">
                     <input type="checkbox" name="pxnrlb" value="岗位职责" title="岗位职责" checked>
                     <input type="checkbox" name="pxnrlb" value="临床使用安全" title="临床使用安全">

@@ -42,9 +42,4 @@ public interface PxDao {
             "#{pxnr}," +
             "#{kstime},#{jstime})")
     Integer addYypxjh(YyPxJhVo yyPxJhVo);
-
-    @Select("SELECT id,jh_name,px_addr," +
-            "jh_pxlx,jh_pxnrlb,jh_pxxz" +
-            ",jh_kstime,jh_jstime FROM dbo.jh_zd")
-    List<ListRyPxJhVo> findAllRyJh();
 }

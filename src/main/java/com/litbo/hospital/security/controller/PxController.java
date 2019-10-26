@@ -28,10 +28,7 @@ public class PxController {
     @Autowired
     private PxService pxService;
 
-    @RequestMapping("/findAllRyjh")
-    public Result findAllRyjh(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
-            return Result.success(pxService.findAllRyjh(pageNum,pageSize));
-    }
+
     @RequestMapping("/findAllYyjh")
     public Result findAllYyJh(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
         PageInfo pageInfo = pxService.findAllYyJh(pageNum,pageSize);
