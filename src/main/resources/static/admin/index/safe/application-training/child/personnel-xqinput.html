@@ -36,21 +36,21 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">设备培训</label>
                 <div class="layui-input-block">
-                    <input type="text" name="eqName" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
+                    <input type="text" name="eqName" class="layui-input" placeholder="Admin" autocomplete="off" disabled lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">开始时间</label>
                 <div class="layui-input-block">
                     <input type="text" name="kstime" class="layui-input" autocomplete="off"
-                           id="ksDate">
+                           disabled id="ksDate">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结束时间</label>
                 <div class="layui-input-block">
                     <input type="text" name="jstime" class="layui-input" autocomplete="off"
-                           id="jsDate">
+                           disabled id="jsDate">
                 </div>
             </div>
         </div>
@@ -75,27 +75,27 @@
     var aa=$.getUrlParam("id");
     renderMod={
          form: {
-        //     val:{
-        //         filter:"khForms",
-        //         get:{
-        //             url:"/px/findAllRy",
-        //             type: "POST",
-        //             // parse:"empList",
-        //             // tableId:"table",
-        //             data: {id: $.getUrlParam("id")},
-        //         }
-        //     },
+            val:{
+                filter:"khForms",
+                get:{
+                    url:"/px/findAllRy",
+                    type: "POST",
+                    // parse:"empList",
+                    // tableId:"table",
+                    data: {id: $.getUrlParam("id")},
+                }
+            },
             date: [
                 {
                     elem: "#ksDate",
-                    value:today0+" "+time0,
-                    type:"datetime",
+                    value:today0,
+                    type:"date",
                     format:'yyyy-MM-dd'
                 },
                 {
                     elem: "#jsDate",
-                    value:today0+" "+time0,
-                    type:"datetime",
+                    value:today0,
+                    type:"date",
                     format:'yyyy-MM-dd'
                 }
             ]
