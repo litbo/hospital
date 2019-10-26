@@ -51,11 +51,11 @@
 
 <script type="text/html" id="barDemo">
     {{#if (d.operationId === "01") { }}
-    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="正&nbsp;&nbsp;常|不正常" lay-filter="taskResult" {{ d.itaskResult == '' ? '' : 'checked' }}>
+    <input type="checkbox" name="taskResult" class="qq" lay-skin="switch" lay-text="正&nbsp;&nbsp;常|不正常" lay-filter="taskResult">
     {{# }else if(d.operationId === "02"){ }}
-    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="进&nbsp;&nbsp;行|未进行" lay-filter="taskResult" {{ d.itaskResult == '' ? '' : 'checked' }}>
+    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="进&nbsp;&nbsp;行|未进行" lay-filter="taskResult" >
     {{# }else{ }}
-    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="处&nbsp;&nbsp;理|未处理" lay-filter="taskResult" {{ d.itaskResult == '' ? '' : 'checked' }}>
+    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="处&nbsp;&nbsp;理|未处理" lay-filter="taskResult" >
     {{# } }}
 </script>
 
@@ -96,7 +96,7 @@
                 }
                 ,page:false
                 ,done: function(obj){
-                    console.log(obj.data);
+                    // console.log(obj.data);
                     layui.form.render();
                     var tra = obj.data;
 
@@ -107,22 +107,42 @@
                             tra = tra;
                         }
                     }
-                    console.log(tra);
+                   localStorage.setItem("tableData",JSON.stringify(tra));
 
                     layui.form.on('switch(taskResult)', function(obj){
-                        console.log(obj);
 
                         for (var i = 0; i < tra.length; i++){
-                            if(obj.elem.checked == true){
-                                tra[i]["taskResult"] = 1;
-                                console.log(1);
+                            // console.log(obj.elem.checked);
+                            console.log($("input[name='taskResult']"));
+                            console.log(tra);
+                            if(tra[i].taskResult == true){
+
+                                localStorage.setItem("tableData",'');
+
+                                // console.log(i);
+                                tra[i].taskResult = 1;
+                                layui.form.render();
+                                // console.log(1);
+                                localStorage.setItem("tableData",JSON.stringify(tra));
                             }else if(obj.elem.checked == false){
-                                tra[i]["taskResult"] = 0;
-                                console.log(2);
+                                localStorage.setItem("tableData",'');
+                                // console.log(localStorage.getItem("tableData"));
+                                // console.log(i);
+
+                                tra[i].taskResult = 0;
+                                // console.log(2);
+                                layui.form.render();
+                                localStorage.setItem("tableData",JSON.stringify(tra));
+                                // console.log(tra);
+
                             }
+
                         }
                         // console.log($(".taskResult").val());
-                        console.log(tra);
+                        // console.log(tra[0].taskResult);
+                        // console.log(tra[1].taskResult);
+                        // console.log(obj.);
+
                     });
 
                     tableFunc({
@@ -199,16 +219,20 @@
         form.on('submit(demo1)', function(data){
 
             var data1 = form.val("forms");
-            console.log(data1);
-
-            // layer.alert(JSON.stringify(data1), {
+            // console.log(data1);
+            var tableData = localStorage.getItem("tableData");
+            console.log(tableData);
+            // layer.alert(JSON.str ingify(tableData), {
             //     title: '最终的提交信息'
             // });
+            layer.alert(tableData, {
+                title: '最终的提交信息'
+            });
 
             // $.ajax({
             //     type: "POST",
             //     dataType: 'json',
-            //     url: '/lifeManage/insertYjyaZd',
+            //     url: '/lifeManage/saveTaskResult',
             //     data: JSON.stringify(dataObj),
             //     contentType: 'application/json; charset=UTF-8',
             //     success: function(result) {
