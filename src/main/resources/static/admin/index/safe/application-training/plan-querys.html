@@ -33,31 +33,6 @@
         </div>
 </div>
 
-
-<script type="text/html" id="toolBar">
-    <div class=" hidden-xs" id="hideXs">
-        <form class="layui-form layui-form-pane" action="">
-            <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <input class="layui-input" name="name" placeholder="设备名称" autocomplete="off">
-            </div>
-            <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <button class="layui-btn"  data-type="reload"><i
-                        class="layui-icon layui-icon-search"></i>查询
-                </button>
-            </div>
-        </form>
-    </div>
-    <hr class="devideHr">
-    <div class="addBtn">
-        <a class="layui-btn layui-btn-sm layui-btn-normal addNew addi" href="plan-formulations.html"><i
-                class="fas fa-plus"></i>&nbsp;新增</a>
-        <a class="layui-btn layui-btn-sm layui-btn-danger delNew deli" lay-event="del"><i
-                class="fas fa-trash-alt"></i>&nbsp;删除</a>
-    </div>
-</script>
-
-
-
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="kaohe">考核</a>
 </script>
@@ -73,8 +48,8 @@
                 elem: "#table",
                 toolbar: "#toolBar",
                 cols: [[ //应用培训表头
-                    {type: "checkbox"}
-                    , {field: 'eqName', title: '设备名称', minWidth: 150}
+                   // {type: "checkbox"}
+                      {field: 'eqName', title: '设备名称', minWidth: 150}
                     , {field: 'pxlx', title: '培训类型', minWidth: 150}
                     , {field: 'pxfs', title: '方式', minWidth: 150}
                     , {field: 'pxks', title: '培训科室', minWidth: 150}

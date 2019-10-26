@@ -30,7 +30,8 @@ public class PxController {
 
 
     @RequestMapping("/findAllYyjh")
-    public Result findAllYyJh(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
+    public Result findAllYyJh(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize){
         PageInfo pageInfo = pxService.findAllYyJh(pageNum,pageSize);
         return Result.success(pageInfo);
     }

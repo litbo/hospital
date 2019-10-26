@@ -31,24 +31,25 @@
         <!--        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
             <legend>计划信息</legend>
         </fieldset>-->
+        <!--<span class="sign">*</span>-->
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">计划名称<span class="sign">*</span></label>
+                <label class="layui-form-label">设备培训</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhName" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
+                    <input type="text" name="eqName" class="layui-input" placeholder="Admin" autocomplete="off" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">开始时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhKstime" class="layui-input" autocomplete="off"
+                    <input type="text" name="kstime" class="layui-input" autocomplete="off"
                            id="ksDate">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结束时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="jhJstime" class="layui-input" autocomplete="off"
+                    <input type="text" name="jstime" class="layui-input" autocomplete="off"
                            id="jsDate">
                 </div>
             </div>
@@ -71,19 +72,19 @@
 
 
 <script>
-    console.log($.getUrlParam("id"));
+    var aa=$.getUrlParam("id");
     renderMod={
-        form: {
-            val:{
-                filter:"khForms",
-                get:{
-                    url:"/px/findAllRy",
-                    type: "POST",
-                    // parse:"empList",
-                    // tableId:"table",
-                    data: {id: $.getUrlParam("id")},
-                }
-            },
+         form: {
+        //     val:{
+        //         filter:"khForms",
+        //         get:{
+        //             url:"/px/findAllRy",
+        //             type: "POST",
+        //             // parse:"empList",
+        //             // tableId:"table",
+        //             data: {id: $.getUrlParam("id")},
+        //         }
+        //     },
             date: [
                 {
                     elem: "#ksDate",
@@ -108,9 +109,10 @@
                 //    ,{field: 'jhlrCj', title: '人员成绩', minWidth: 150}
                 ]],
                 url: "/px/findAllRy"
+                ,where:{id:aa}
                 , request: {
                     pageName: 'pageNum',
-                    limitName: 'pageSize'
+                    limitName: 'pageSize',
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {
@@ -133,7 +135,7 @@
         var data = obj.data;
         var mergeIndex = 0;//定位需要添加合并属性的行数
         var mark = 1; //这里涉及到简单的运算，mark是计算每次需要合并的格子数
-        var columsName = ['pxks'];//需要合并的列名称
+        var columsName = ['bmName'];//需要合并的列名称
         var columsIndex = [0];//需要合并的列索引值
         for (var k = 0; k < columsName.length; k++) {//这里循环所有要合并的列
             var trArr = $(".layui-table-body>.layui-table").find("tr");//所有行

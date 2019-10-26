@@ -20,22 +20,32 @@ public interface PxDelAndSelDao {
     List<ListYyPxJhVo> selYyJh(@Param("name") String name);
 
     @Select("SELECT e.user_id,e.user_xm AS userName,s.bm_name\n" +
-            "FROM dbo.s_emp AS e INNER JOIN dbo.s_bm AS s ON e.bm_id=s.bm_id")
-    List<EmpVo> getRyBtNr();
+            "FROM dbo.s_emp AS e INNER JOIN dbo.s_bm AS s ON e.bm_id=s.bm_id " +
+            "WHERE e.user_id NOT IN (SELECT user_id FROM dbo.jh_tjry WHERE jh_id = #{id})")
+    List<EmpVo> getRyBtNr(@Param("id") String id);
 
-    @Insert("INSERT INTO jh_tjry(tjry_id,user_name,bm_name,user_id) VALUES (#{tjryId,jdbcType=VARCHAR}," +
-            "#{userName,jdbcType=VARCHAR},#{bmName,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER})")
+    @Insert("INSERT INTO jh_tjry(tjry_id,user_name,bm_name,user_id,jh_id) VALUES (#{tjryId,jdbcType=VARCHAR}," +
+            "#{userName,jdbcType=VARCHAR},#{bmName,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{jhId,jdbcType=VARCHAR})")
     Integer insertRy(TjRyVo tjRyVo);
 
     @Select("SELECT bm_name AS bmName,user_id AS userId,user_name AS userName FROM jh_tjry")
     List<TjRyVo> selectRy();
 
-    @Select("SELECT DISTINCT user_id AS userId,bm_name AS bmName,user_name AS userName FROM jh_tjry")
-    List<TjRyVo> findAllRy();
+//    @Select("SELECT DISTINCT user_id AS userId,bm_name AS bmName,user_name AS userName " +
+//            "FROM jh_tjry WHERE jh_id = #{id}")
+//    List<TjRyVo> findAllRy(@Param("id") String id);
 
-    @Select("SELECT bm_name AS bmName,user_id AS userId,user_name AS userName FROM jh_tjry WHERE" +
-            " bm_name LIKE '%${rName}%'")
-    List<TjRyVo> selByName(@Param("rName") String rName);
+    @Select("SELECT DISTINCT e.eq_name AS eqName,j.user_id AS userId,j.bm_name AS bmName,\n" +
+            "    j.user_name AS userName,jh.kstime,jh.jstime FROM jh_tjry AS j\n" +
+            "    INNER JOIN jh_yypx AS jh ON j.jh_id = jh.id\n" +
+            "    INNER JOIN eq_info AS e ON jh.eq_id = e.eq_id WHERE jh_id = #{id}")
+    List<TjRyVo> findAllRy(@Param("id") String id);
+
+    @Select("SELECT e.user_id,e.user_xm AS userName,s.bm_name\n" +
+            "FROM dbo.s_emp AS e INNER JOIN dbo.s_bm AS s ON e.bm_id=s.bm_id " +
+            "WHERE e.user_id NOT IN (SELECT user_id FROM dbo.jh_tjry WHERE jh_id = #{id}) " +
+            "AND s.bm_name LIKE '%${rName}%'")
+    List<TjRyVo> selByName(@Param("rName") String rName,@Param("id") String id);
 
     @Select("SELECT DISTINCT user_id AS userId FROM dbo.jh_tjry")
     List<RyIdVo> findUserId();

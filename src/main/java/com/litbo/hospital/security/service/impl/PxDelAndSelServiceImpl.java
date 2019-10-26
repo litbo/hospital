@@ -7,6 +7,7 @@ import com.litbo.hospital.security.service.PxDelAndSelService;
 import com.litbo.hospital.security.vo.EmpVo;
 import com.litbo.hospital.security.vo.RyIdVo;
 import com.litbo.hospital.security.vo.TjRyVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,9 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
     PxDelAndSelDao pxDelAndSelDao;
 
     @Override
-    public PageInfo selByName(int pageNum, int pageSize, String rName) {
+    public PageInfo selByName(int pageNum,int pageSize,@Param("rName") String rName,@Param("id") String id) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(pxDelAndSelDao.selByName(rName));
+        return new PageInfo(pxDelAndSelDao.selByName(rName,id));
     }
 
     @Override
@@ -36,9 +37,9 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
 
 
     @Override
-    public List<EmpVo> getRyBtNr(int pageNum, int pageSize) {
+    public List<EmpVo> getRyBtNr(int pageNum, int pageSize,String id) {
         PageHelper.startPage(pageNum,pageSize);
-        List<EmpVo> list = pxDelAndSelDao.getRyBtNr();
+        List<EmpVo> list = pxDelAndSelDao.getRyBtNr(id);
         return list;
     }
 
@@ -56,15 +57,15 @@ public class PxDelAndSelServiceImpl implements PxDelAndSelService {
     }
 
     @Override
-    public Integer insertRy(TjRyVo tjRyVo,String id) {
+    public Integer insertRy(@Param("tjRyVo") TjRyVo tjRyVo, @Param("id") String id) {
         tjRyVo.setTjryId(UUID.randomUUID().toString());
         tjRyVo.setJhId(id);
         return pxDelAndSelDao.insertRy(tjRyVo);
     }
 
     @Override
-    public PageInfo findAllRy(int pageNum,int pageSize) {
+    public PageInfo findAllRy(int pageNum,int pageSize,String id) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(pxDelAndSelDao.findAllRy());
+        return new PageInfo(pxDelAndSelDao.findAllRy(id));
     }
 }

@@ -64,30 +64,13 @@
                 //  data: {tjRyVos:JSON.stringify(obj),id:aa} ,
                 // param:{"id":aa},
                 success: function (data) {
-                    layer.alert("y")
+                    layer.alert("添加成功!")
                 },
                 error:function (data) {
-                    layer.alert("x")
+                    layer.alert("添加失败,请重试!")
                 }
 
             });
-            $.ajax({
-                type: "POST",
-                url: "/px/insertRy",
-                // async: false,/*同步传输*/
-                contentType: 'application/json',
-                dataType: 'json',
-                 data: {"id":aa} ,
-                // param:{"id":aa},
-                success: function (data) {
-                    layer.alert("y")
-                },
-                error:function (data) {
-                    layer.alert("x")
-                }
-
-            });
-
         });
 
     });
@@ -122,7 +105,7 @@
                 ]]
                 , url: "/px/getRyBtNr"
                 // , reload: 'parent'
-                // , contentType: "application/json"
+                //, contentType: "application/json"
                 ,where:{id:aa}
                 , method: "POST"
                 , page: true
