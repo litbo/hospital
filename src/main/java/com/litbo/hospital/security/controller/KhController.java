@@ -30,7 +30,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/Jh")
-public class JhController {
+public class KhController {
 
     @Autowired
     private JhZdService jhZdService;

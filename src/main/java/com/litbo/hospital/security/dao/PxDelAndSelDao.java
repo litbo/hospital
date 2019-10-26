@@ -36,10 +36,10 @@ public interface PxDelAndSelDao {
 //    List<TjRyVo> findAllRy(@Param("id") String id);
 
     @Select("SELECT DISTINCT e.eq_name AS eqName,j.user_id AS userId,j.bm_name AS bmName,\n" +
-            "    j.user_name AS userName,jh.kstime,jh.jstime FROM jh_tjry AS j\n" +
+            "    j.user_name AS userName,jh.kstime AS kstime,jh.jstime AS jstime FROM jh_tjry AS j\n" +
             "    INNER JOIN jh_yypx AS jh ON j.jh_id = jh.id\n" +
             "    INNER JOIN eq_info AS e ON jh.eq_id = e.eq_id WHERE jh_id = #{id}")
-    List<TjRyVo> findAllRy(@Param("id") String id);
+    List<XqZsVo> findAllRy(@Param("id") String id);
 
     @Select("SELECT e.user_id,e.user_xm AS userName,s.bm_name\n" +
             "FROM dbo.s_emp AS e INNER JOIN dbo.s_bm AS s ON e.bm_id=s.bm_id " +

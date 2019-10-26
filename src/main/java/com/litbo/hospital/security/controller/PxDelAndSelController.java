@@ -90,6 +90,11 @@ public class PxDelAndSelController {
             ,required = false, defaultValue = "15") int pageSize,@RequestParam("id") String id){
        //System.out.println("详情++++"+id);
         PageInfo pageInfo = pxDelAndSelService.findAllRy(pageNum,pageSize,id);
+//        List<Object> list = pageInfo.getList();
+//        for(Object o:list){
+//            System.out.println(o);
+//        }
+       // System.out.println(pageInfo.getList());
         return Result.success(pageInfo);
     }
 
