@@ -5,35 +5,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class SgPlanList {
-    public SgPlanList(String bmName, String id, String userId, String bmId, String planName, Date planDate) {
-        this.bmName = bmName;
-        this.id = id;
-        this.userId = userId;
-        this.bmId = bmId;
-        this.planName = planName;
-        this.planDate = planDate;
-    }
 
-    public SgPlanList() {
-    }
-
-    public SgPlanList(String bmName, String id, String userId, String bmId, String planName,
-                      Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
-        this.bmName = bmName;
-        this.id = id;
-        this.userId = userId;
-        this.bmId = bmId;
-        this.planName = planName;
-        this.planDate = planDate;
-        this.allNum = allNum;
-        this.yiPanNum = yiPanNum;
-        this.panYingNum = panYingNum;
-        this.panKuiNum = panKuiNum;
-    }
 
     /**
      * 主键
      */
+
+    private  String fileStatus;
+    private String checkStatus;
 
     private String bmName;
     private String id;
@@ -142,10 +121,76 @@ public class SgPlanList {
         this.panKuiNum = panKuiNum;
     }
 
+
+
+    public String getCheckStatus() {
+        return checkStatus;
+    }
+
+    public void setCheckStatus(String checkStatus) {
+        this.checkStatus = checkStatus;
+    }
+
+    public SgPlanList(String checkStatus, String bmName, String id, String userId, String bmId, String planName, Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
+        this.checkStatus = checkStatus;
+        this.bmName = bmName;
+        this.id = id;
+        this.userId = userId;
+        this.bmId = bmId;
+        this.planName = planName;
+        this.planDate = planDate;
+        this.allNum = allNum;
+        this.yiPanNum = yiPanNum;
+        this.panYingNum = panYingNum;
+        this.panKuiNum = panKuiNum;
+    }
+    public SgPlanList(String bmName, String id, String userId, String bmId, String planName, Date planDate) {
+        this.bmName = bmName;
+        this.id = id;
+        this.userId = userId;
+        this.bmId = bmId;
+        this.planName = planName;
+        this.planDate = planDate;
+    }
+
+    public SgPlanList() {
+    }
+
+    public SgPlanList(String bmName, String id, String userId, String bmId, String planName,
+                      Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
+        this.bmName = bmName;
+        this.id = id;
+        this.userId = userId;
+        this.bmId = bmId;
+        this.planName = planName;
+        this.planDate = planDate;
+        this.allNum = allNum;
+        this.yiPanNum = yiPanNum;
+        this.panYingNum = panYingNum;
+        this.panKuiNum = panKuiNum;
+    }
+
+    public SgPlanList(String fileStatus, String checkStatus, String bmName, String id, String userId, String bmId, String planName, Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
+        this.fileStatus = fileStatus;
+        this.checkStatus = checkStatus;
+        this.bmName = bmName;
+        this.id = id;
+        this.userId = userId;
+        this.bmId = bmId;
+        this.planName = planName;
+        this.planDate = planDate;
+        this.allNum = allNum;
+        this.yiPanNum = yiPanNum;
+        this.panYingNum = panYingNum;
+        this.panKuiNum = panKuiNum;
+    }
+
     @Override
     public String toString() {
         return "SgPlanList{" +
-                "bmName='" + bmName + '\'' +
+                "fileStatus='" + fileStatus + '\'' +
+                ", checkStatus='" + checkStatus + '\'' +
+                ", bmName='" + bmName + '\'' +
                 ", id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
                 ", bmId='" + bmId + '\'' +
