@@ -55,7 +55,6 @@
     <a class="layui-btn layui-btn-sm editi" lay-event="pipei">核对上传</a>
 </script>
 <script>
-    // console.log(bmId);
     // console.log(layui.sessionData("allP", "count"));
     // console.log($("#allP"));
     // $("#allP").text(layui.sessionData("allP", "count"));
@@ -65,7 +64,8 @@
                 elem: "#table"
                 , height: 'full-75'
                 , cols: [[ //表头
-                    {field: 'planName', title: '计划名称', minWidth: 100,templet:'#status'}
+                    {field: 'fileStatus', title: '上传状态w', minWidth: 100,templet:'#status'}
+                    ,{field: 'planName', title: '计划名称', minWidth: 100,templet:'#status'}
                     , {field: 'userId', title: '制定人',width: 100,templet:'#statuss'}
                     , {field: 'bmName', title: '科室',minWidth: 100,templet:'#statusss'}
                     , {title: '操作',width: 100,align:'center',templet:'#cz'}

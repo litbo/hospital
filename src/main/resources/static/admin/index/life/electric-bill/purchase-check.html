@@ -30,7 +30,7 @@
 <script type="text/html" id="toolBar">
     <form class="layui-form layui-form-pane hidden-xs" id="moreBar">
         <div class="layui-inline">
-            <input class="layui-input" name="bmName" id="bmName" placeholder="设备名称" autocomplete="off">
+            <input class="layui-input" name="eqName" id="eqName" placeholder="设备名称" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
         <hr class="devideHr">
@@ -58,10 +58,10 @@
                     elem: "#table"
                     , cols: [[ //表头
                         {type: "checkbox"}
-                        , {field: 'eqSbbh', title: '设备编号', minWidth: 250}
-                        , {field: 'eqName', title: '设备名称', minWidth: 300}
-                        , {field: 'eqGg', title: '规格', minWidth: 150}
-                        , {field: 'eqXh', title: '型号', minWidth: 150}
+                        , {field: 'eqZcbh', title: '资产编号', minWidth: 150}
+                        , {field: 'eqName', title: '设备名称', minWidth: 150}
+                        , {field: 'eqGg', title: '规格', minWidth: 130}
+                        , {field: 'eqXh', title: '型号', minWidth: 130}
                         , {field: 'date', title: '审核日期', minWidth: 200, sort: true}
                         , {field: 'userId', title: '审核人', minWidth: 150}
                         , {field: 'checks', title: '是否存在', minWidth: 150}
@@ -133,9 +133,9 @@
                 }
             ],
             reSet: {
-                url: "/checkInfo/findInfo",
+                url: "/lifeManage/findListByEqName",
                 type: "reload",
-                data: ["bmName", "planDate", "userId"]
+                data: ["eqName", "planDate", "userId"]
             },
             // form: {
             //     val: {
