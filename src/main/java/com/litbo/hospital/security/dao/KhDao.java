@@ -13,7 +13,7 @@ import java.util.List;
 public interface KhDao {
 
     @Select("SELECT user_id AS userId,user_name AS userName FROM jh_tjry WHERE jh_id = #{id} " +
-            "AND username NOT IN (SELECT user_name FROM jh_khlr WHERE jh_id = #{id})")
+            "AND user_name NOT IN (SELECT user_name FROM jh_khlr WHERE jh_id = #{id})")
     List<KhVo> kh(@Param("id") String id);
 
     @Insert("INSERT INTO jh_khlr VALUES()")

@@ -52,7 +52,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训人员<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="pxry" class="layui-input" >
+                    <input type="text" name="pxry" id="pxry" class="layui-input">
                 </div>
             </div>
             <input type="hidden" name="id">
@@ -93,101 +93,127 @@
 </div>
 <div id="tips"></div>
 <script type="text/html" id="switchTpl">
-    <input type="checkbox" name="inspPlStandardDescription" value="{{d.inspPlStandardId}}" lay-skin="switch" lay-text="是|否" lay-filter="inspPlStandardDescription" {{ d.inspPlStandardDescription === true ? "checked" : "" }}>
+    <input type="checkbox" name="inspPlStandardDescription" value="{{d.LAY_TABLE_INDEX}}" lay-skin="switch"
+           lay-text="是|否" lay-filter="inspPlStandardDescription" {{ d.inspPlStandardDescription=== true
+           ? "checked" : "" }}>
 </script>
 
-<!--<script type="text/html" id="in1">
-    <input type="text" name="llcj" id="inin{{d.id}}">
-</script>-->
+<script type="text/html" id="bar">
+    <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="xianshi">考核</button>
+</script>
 
 <script>
-    var aa=$.getUrlParam("id");
-    renderMod = {
-        table: {
-            table: [
-                {
-                    id: "table",
-                    cols: [[ //表头
-                        {type:'numbers'},
-                         {field: 'userName', title: '参加人员'}
-                        , {field: 'pxjg', title: '培训结果',templet: '#switchTpl'}
-                        , {field: 'llcj', title: '理论成绩',edit:'text'}
-                        , {field: 'sjcz', title: '实际操作',edit:'text'}
-                        , {field: 'khjg', title: '考核结果'}
-                    ]]
-                    , url: "/px/kh"
-                    // , reload: 'parent'
-                    //, contentType: "application/json"
-                    ,where:{id:aa}
-                    , method: "POST"
-                    , page: true
-                    , request: {
-                        pageName: 'pageNum',
-                        limitName: 'pageSize'
-                    }
+    layui.use('table', function () {
+        var table = layui.table
+            ,form = layui.form;
+        var aa = $.getUrlParam("id");
+        renderMod = {
+            table: {
+                table: [
+                    {
+                        id: "table",
+                        cols: [[ //表头
+                            {type: 'numbers'},
+                            // ,{type: 'checkbox'},
+                            {field: 'userName', title: '参加人员'}
+                            , {field: 'pxjgs', title: '培训结果', templet: '#switchTpl'}
+                            , {field: 'pxjg', title: '培训结果', hide:true}
+                            , {field: 'llcj', title: '理论成绩', edit: 'text'}
+                            , {field: 'sjcz', title: '实际操作', edit: 'text'}
+                            , {field: 'khjg', title: '考核结果', toolbar: "#bar"}
+                        ]]
+                        , url: "/px/kh"
+                        // , reload: 'parent'
+                        //, contentType: "application/json"
+                        , where: {id: aa}
+                        , method: "POST"
+                        , page: true
+                        , request: {
+                            pageName: 'pageNum',
+                            limitName: 'pageSize'
+                        }
 
-                    , parseData: function (res) { //res 即为原始返回的数据
-                        return {
-                            "code": res.code, //解析接口状态
-                            "msg": res.msg, //解析提示文本
-                            "count": res.data.total,//页面显示的数据条数
-                            "data": res.data.list //解析数据列表
+                        , parseData: function (res) { //res 即为原始返回的数据
+                            return {
+                                "code": res.code, //解析接口状态
+                                "msg": res.msg, //解析提示文本
+                                "count": res.data.total,//页面显示的数据条数
+                                "data": res.data.list //解析数据列表
+                            }
+                        }
+                        , done: function (obj) {
                         }
                     }
-                    , done: function (obj) {
+                ]
+            },
+            form: {
+                val: {
+                    filter: "forms",
+                    get: {
+                        url: "/px/kh",
+                        type: "POST",
+                        data: {id: $.getUrlParam("id")}
+                    }
+                },
+                date: [
+                    {
+                        elem: '#zdate',
+                        type: "date",
+                        format: 'yyyy-MM-dd'
+                    }
+                ],
+                submit: {
+                    before: function (param) {
+
+                        for (i = 0; i < tv.length; i++) {
+                            if (tv[i].llcj >= 60 && tv[i].sjcz >= 60) {
+                                tv[i].khjg = "合格"
+                            } else {
+                                tv[i].khjg = "不合格"
+                            }
+                            console.log(tv[i].khjg);
+                        }
+                        console.log(tv);
+                        return param = {
+                            1: tv
+                        };
+                    },
+                    form: {
+                        url: "/px/khBc",
+                        // url: "/lifeManage/addEqHt",
+                        type: "POST",
+                        data: ["pxry", "ksry", "khry", "pjyj"],
+                        contentType: "application/json",
+                        param: {
+                            1: "listZb"
+                        },
+                        reload: 'parent'
                     }
                 }
-            ]
-        },
-        form: {
-            val: {
-                filter: "forms",
-                get: {
-                    url: "/px/kh",
-                    type: "POST",
-                    data: {id: $.getUrlParam("id")}
-                }
-            },
-            date: [
-                {
-                    elem: '#zdate',
-                    type: "date",
-                    format: 'yyyy-MM-dd'
-                }
-            ],
-            submit: {
-                before: function (param) {
-                    var tv = getTableValue("table");
-                    return param = {
-                        1: tv
-                    };
-                },
-                form: {
-                    // url: "/px/khBc",
-                    url: "/lifeManage/addEqHt",
-                    type: "POST",
-                    data: ["pxry", "ksry", "khry","pjyj"],
-                    contentType: "application/json",
-                    param: {
-                        1: "listZb"
-                    },
-                    reload: 'parent'
-                }
             }
-        }
-    };
-    layui.use('table', function(){
-        var table = layui.table;
+        };
 
         //监听单元格编辑
-        table.on('edit(table)', function(obj){
+        /*table.on('edit(table)', function (obj) {
             var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field; //得到字段
             console.log(obj);
-            layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
+            layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+        });*/
+        form.on('switch(inspPlStandardDescription)', function (obj) {
+            var tv = getTableValue("table");
+            var efg=this.value;
+            var abc=obj.elem.checked;
+                if (abc===true) {
+                    tv[efg].pxjg = "是";
+                } else {
+                    tv[efg].pxjg = "否";
+                }
+            window.tv=tv;
         });
     });
+
 </script>
 </body>
 
