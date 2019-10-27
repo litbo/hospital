@@ -52,7 +52,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">培训人员<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htJf" class="layui-input" disabled>
+                    <input type="text" name="pxry" id="pxry" class="layui-input">
                 </div>
             </div>
             <input type="hidden" name="id">
@@ -60,14 +60,14 @@
             <div class="layui-form-item ">
                 <label class="layui-form-label">科室责任人<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htBxq" class="layui-input">
+                    <input type="text" name="ksry" class="layui-input">
                 </div>
             </div>
             <!--            考核人员-->
             <div class="layui-form-item ">
                 <label class="layui-form-label">考核人员<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <input type="text" name="htBxq" class="layui-input">
+                    <input type="text" name="khry" class="layui-input">
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">评价意见<span class="sign">*</span></label>
                 <div class="layui-input-block">
-                    <textarea name="desc" autocomplete="off" class="layui-textarea"></textarea>
+                    <textarea name="pjyj" autocomplete="off" class="layui-textarea"></textarea>
                 </div>
             </div>
         </div>
@@ -92,109 +92,127 @@
     </div>
 </div>
 <div id="tips"></div>
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="inspPlStandardDescription" value="{{d.LAY_TABLE_INDEX}}" lay-skin="switch"
+           lay-text="是|否" lay-filter="inspPlStandardDescription" {{ d.inspPlStandardDescription=== true
+           ? "checked" : "" }}>
+</script>
 
+<script type="text/html" id="bar">
+    <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="xianshi">考核</button>
+</script>
 
 <script>
-    renderMod = {
-        table: {
-            table: [
-                {
-                    id: "table",
-                    cols: [[ //表头
-                        , {field: 'cjry', title: '参加人员'}
-                        , {field: 'pxry', title: '培训人员'}
-                        , {field: 'llcj', title: '理论成绩'}
-                        , {field: 'sjcz', title: '实际操作'}
-                        , {field: 'khjg', title: '考核结果'}
-                    ]]
-                    , toolbar: false
-                    , page: false
-                    , height: "200"
-                    , data: []
-                    , text: {
-                        none: "无数据信息！"
+    layui.use('table', function () {
+        var table = layui.table
+            ,form = layui.form;
+        var aa = $.getUrlParam("id");
+        renderMod = {
+            table: {
+                table: [
+                    {
+                        id: "table",
+                        cols: [[ //表头
+                            {type: 'numbers'},
+                            // ,{type: 'checkbox'},
+                            {field: 'userName', title: '参加人员'}
+                            , {field: 'pxjgs', title: '培训结果', templet: '#switchTpl'}
+                            , {field: 'pxjg', title: '培训结果', hide:true}
+                            , {field: 'llcj', title: '理论成绩', edit: 'text'}
+                            , {field: 'sjcz', title: '实际操作', edit: 'text'}
+                            , {field: 'khjg', title: '考核结果', toolbar: "#bar"}
+                        ]]
+                        , url: "/px/kh"
+                        // , reload: 'parent'
+                        //, contentType: "application/json"
+                        , where: {id: aa}
+                        , method: "POST"
+                        , page: true
+                        , request: {
+                            pageName: 'pageNum',
+                            limitName: 'pageSize'
+                        }
+
+                        , parseData: function (res) { //res 即为原始返回的数据
+                            return {
+                                "code": res.code, //解析接口状态
+                                "msg": res.msg, //解析提示文本
+                                "count": res.data.total,//页面显示的数据条数
+                                "data": res.data.list //解析数据列表
+                            }
+                        }
+                        , done: function (obj) {
+                        }
                     }
-                }
-
-            ]
-
-        }
-        /*form: {
-            val: {
-                filter: "forms",
-                get: {
-                    url: "/lifeManage/selectLpjHtByPrimary",
-                    type: "POST",
-                    data: {id: $.getUrlParam("id")},
-                    parse: ["listLpj"],
-                    tableId: ["table"]
-                },
-                func: function () {
-                    //执行判断函数
-                    // pd();
-                }
+                ]
             },
-            date: [
-                {
-                    elem: '#zdate',
-                    type: "date",
-                    format: 'yyyy-MM-dd'
-                }
-            ],
-            submit: {
-                filter: "submit",//可以不写
-                before: function (param) {
-                    var tv = getTableValue("table");
-                    // var tv2= getFormValue("forms");
-                    // console.log("formD = ", formData);
-                    return param = {
-                        1: tv
-                        // 2: tv2
-                        // 2.: $.getUrlParam('id')
+            form: {
+                val: {
+                    filter: "forms",
+                    get: {
+                        url: "/px/kh",
+                        type: "POST",
+                        data: {id: $.getUrlParam("id")}
                     }
                 },
-                form: {
-                    url: "/lifeManage/updateLpjHtByPrimaryKey",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: ["id", "htBxq", "htJhsj", "htJf", "htYf", "htSbmc", "htGzfx", "htZgfg", "htGzms", "htCjje"],
-                    param: {
-                        // 1: "sbId",
-                        // 2: "pjScqyId",
-                        // 3: "pjGhsId",
-                        1: "listLpj"
-                        // 2: "htZbhz"
+                date: [
+                    {
+                        elem: '#zdate',
+                        type: "date",
+                        format: 'yyyy-MM-dd'
+                    }
+                ],
+                submit: {
+                    before: function (param) {
+
+                        for (i = 0; i < tv.length; i++) {
+                            if (tv[i].llcj >= 60 && tv[i].sjcz >= 60) {
+                                tv[i].khjg = "合格"
+                            } else {
+                                tv[i].khjg = "不合格"
+                            }
+                            console.log(tv[i].khjg);
+                        }
+                        console.log(tv);
+                        return param = {
+                            1: tv
+                        };
                     },
-                    // shutWin: true
-                    reload: 'parent'
+                    form: {
+                        url: "/px/khBc",
+                        // url: "/lifeManage/addEqHt",
+                        type: "POST",
+                        data: ["pxry", "ksry", "khry", "pjyj"],
+                        contentType: "application/json",
+                        param: {
+                            1: "listZb"
+                        },
+                        reload: 'parent'
+                    }
                 }
             }
-        }*/
-    }
+        };
 
-    /*function pd(f) {
-        //f:是否允许弹出提示信息，false 默认允许
-        var mm = Number($("#gjpd").val());
-        //在超过1W时显示一个内容，其他情况使用一个内容
-        if (mm >= 10000) {
-            $("#showMin").addClass("hidden");
-            $("#showMax").removeClass("hidden");
-        } else {
-            $("#showMin").removeClass("hidden");
-            $("#showMax").addClass("hidden");
-        }
-    }*/
-
-    /*$(function () {
-        var ss = null;
-        pd(true);
-        $("#gjpd").on("change", pd).keydown(function (event) {
-            if (event.keyCode === 13) {
-                pd();
-                return false;
-            }
+        //监听单元格编辑
+        /*table.on('edit(table)', function (obj) {
+            var value = obj.value //得到修改后的值
+                , data = obj.data //得到所在行所有键值
+                , field = obj.field; //得到字段
+            console.log(obj);
+            layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+        });*/
+        form.on('switch(inspPlStandardDescription)', function (obj) {
+            var tv = getTableValue("table");
+            var efg=this.value;
+            var abc=obj.elem.checked;
+                if (abc===true) {
+                    tv[efg].pxjg = "是";
+                } else {
+                    tv[efg].pxjg = "否";
+                }
+            window.tv=tv;
         });
-    })*/
+    });
 
 </script>
 </body>

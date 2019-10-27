@@ -17,10 +17,16 @@ public interface PxDao {
     @Select("SELECT bm_id AS bmId,bm_name AS pxks FROM dbo.s_bm")
     List<KsFzVo> getYypxKsNr();
 
-    @Select("SELECT y.id,e.eq_name,y.pxnrlb,y.pxlx,y.pxfs,s.bm_name AS pxks,\n" +
+//    @Select("SELECT y.id,e.eq_name,y.pxnrlb,y.pxlx,y.pxfs,s.bm_name AS pxks,\n" +
+//            "            y.kstime,y.jstime FROM jh_yypx AS y\n" +
+//            "            JOIN s_bm AS s ON y.ks_id = s.bm_id\t\t\t\t\t\n" +
+//            "            JOIN eq_info AS e ON e.eq_id=y.eq_id")
+//    List<ListYyPxJhVo> findAllYyJh();
+
+
+    @Select("SELECT y.id,y.pxnrlb,y.pxlx,y.pxfs,s.bm_name AS pxks,\n" +
             "            y.kstime,y.jstime FROM jh_yypx AS y\n" +
-            "            JOIN s_bm AS s ON y.ks_id = s.bm_id\t\t\t\t\t\n" +
-            "            JOIN eq_info AS e ON e.eq_id=y.eq_id")
+            "            JOIN s_bm AS s ON y.ks_id = s.bm_id\n")
     List<ListYyPxJhVo> findAllYyJh();
 
     @Insert("INSERT INTO jh_zd (id,jh_name,zbdw,jh_kstime,jh_jstime,jh_pxlx,jh_pxxz,jh_pxnrlb,\n" +

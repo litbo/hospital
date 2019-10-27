@@ -41,9 +41,6 @@ public interface PxDelAndSelDao {
             "    INNER JOIN eq_info AS e ON jh.eq_id = e.eq_id WHERE jh_id = #{id}")
     List<XqZsVo> findAllRy(@Param("id") String id);
 
-    @Select("SELECT user_id AS userId,user_name AS userName FROM jh_tjry WHERE jh_id = #{id}")
-    List<KhVo> kh(@Param("id") String id);
-
     @Select("SELECT e.user_id,e.user_xm AS userName,s.bm_name\n" +
             "FROM dbo.s_emp AS e INNER JOIN dbo.s_bm AS s ON e.bm_id=s.bm_id " +
             "WHERE e.user_id NOT IN (SELECT user_id FROM dbo.jh_tjry WHERE jh_id = #{id}) " +

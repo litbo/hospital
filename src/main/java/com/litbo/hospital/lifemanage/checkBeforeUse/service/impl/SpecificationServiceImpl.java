@@ -355,14 +355,35 @@ public class SpecificationServiceImpl implements SpecificationService {
 
     @Override
     public PageInfo<TaskEqVo> searchTaskEqs(int pageNum, int pageSize, String bmId,int r) {
-        PageHelper.startPage(pageNum,pageSize);
+        // PageHelper.startPage(pageNum,pageSize);
         List<TaskEqVo> taskEqVos = null;
-        if (r == 0)
+        if (r == 0) {
             taskEqVos = specificationDao.searchUnFinishedTaskEqs(bmId);
-        else
+            taskEqVos.forEach(System.out::println);
+        }
+        else if (r == 1)
             taskEqVos = specificationDao.searchFinishedTaskEqs(bmId);
+        else {
+            taskEqVos = specificationDao.searchUnFinishedTaskEqs(bmId);
+            List<TaskEqVo> temp = specificationDao.searchFinishedTaskEqs(bmId);
+            taskEqVos.addAll(temp);
+        }
 
-        PageInfo<TaskEqVo> taskEqVoPageInfo = new PageInfo<>(taskEqVos);
+        if (pageNum <= 0)
+            pageNum = 1;
+        else if (pageNum > (taskEqVos.size()/pageSize) + 1)
+            pageNum = taskEqVos.size()/pageSize;
+
+
+        int off;
+        if (taskEqVos.size() < pageNum * pageSize)
+            off = taskEqVos.size();
+        else
+            off = pageNum * pageSize;
+
+
+
+        PageInfo<TaskEqVo> taskEqVoPageInfo = new PageInfo<>(taskEqVos.subList((pageNum - 1) * pageSize,off));
         return taskEqVoPageInfo;
     }
 
