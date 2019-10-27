@@ -19,6 +19,8 @@ public class TaskEqVo {
 
     private String eqPp;
 
+    private String finish;
+
 
 
 }

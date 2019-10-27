@@ -336,6 +336,18 @@ public class SpecificationController {
 
 
 
+    @GetMapping("searchTaskEqs")
+    public Result searchTaskEqs(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                          @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                                          String bmId){
+
+
+        System.out.println(bmId);
+        PageInfo<TaskEqVo> taskEqVoPageInfo = specificationService.searchTaskEqs(pageNum,pageSize,bmId,3);
+
+        return Result.success(taskEqVoPageInfo);
+    }
+
 
 
 
