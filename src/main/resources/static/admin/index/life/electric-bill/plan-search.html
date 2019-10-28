@@ -23,7 +23,13 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
-
+<script type="text/html" id="status">
+    {{#  if(d.checkStatus == "已审核"){ }}
+    <span class="layui-btn layui-btn-sm">{{d.checkStatus}}</span>
+    {{#  } else if(d.checkStatus == "未审核") { }}
+    <span class="layui-btn layui-btn-sm deli">{{d.checkStatus}}</span>
+    {{#  } }}
+</script>
 <script type="text/html" id="toolBar">
     <div class="hidden-xs">
         <div class="layui-inline">
@@ -51,11 +57,11 @@
                     elem: "#table"
                     , height: 'full-75'
                     , cols: [[ //表头
-                        {field: 'checkStatus', title: '审核状态', minWidth: 150}
-                        ,{field: 'planName', title: '计划名称', minWidth: 400}
-                        , {field: 'userId', title: '制定人', minWidth: 150}
+                        {field: 'checkStatus', title: '审核状态', minWidth: 150,templet:'#status'}
+                        ,{field: 'planName', title: '计划名称', minWidth: 300}
+                        , {field: 'userId', title: '制定人', minWidth: 120}
                         , {field: 'bmName', title: '科室', minWidth: 150}
-                        , {field: 'planDate', title: '制定日期', minWidth: 150}
+                        , {field: 'planDate', title: '制定日期', width: 120}
                         , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectPlan"

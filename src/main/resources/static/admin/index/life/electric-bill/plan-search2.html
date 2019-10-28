@@ -22,6 +22,13 @@
         <table id="table" lay-filter="table1"></table>
     </div>
 </div>
+<script type="text/html" id="status">
+    {{#  if(d.checkStatus == "已审核"){ }}
+    <span class="layui-btn layui-btn-sm">{{d.checkStatus}}</span>
+    {{#  } else if(d.checkStatus == "未审核") { }}
+    <span class="layui-btn layui-btn-sm deli">{{d.checkStatus}}</span>
+    {{#  } }}
+</script>
 <script type="text/html" id="toolBar">
     <div class="layui-inline">
         <input class="layui-input" name="planName" id="test-table-demoReload" placeholder="计划名称" autocomplete="off">
@@ -64,12 +71,12 @@
                 elem: "#table"
                 , height: 'full-75'
                 , cols: [[ //表头
-                    {field: 'fileStatus', title: '上传状态w', minWidth: 100,templet:'#status'}
-                    ,{field: 'planName', title: '计划名称', minWidth: 100,templet:'#status'}
-                    , {field: 'userId', title: '制定人',width: 100,templet:'#statuss'}
-                    , {field: 'bmName', title: '科室',minWidth: 100,templet:'#statusss'}
+                    {field: 'checkStatus', title: '上传状态', minWidth: 100,templet:'#status'}
+                    ,{field: 'planName', title: '计划名称', minWidth: 100}
+                    , {field: 'userId', title: '制定人',width: 100}
+                    , {field: 'bmName', title: '科室',minWidth: 100}
                     , {title: '操作',width: 100,align:'center',templet:'#cz'}
-                    , {field: 'planDate', title: '制定日期',width: 110,templet:'#statussss'}
+                    , {field: 'planDate', title: '制定日期',width: 110}
                     , {title:'盘点结果显示',minWidth: 400,align:'center',toolbar: "#bar"}
                 ]]
                 , url: "/lifeManage/selectPlan"
@@ -88,7 +95,7 @@
                     }
                 }
                 , done: function (obj) {
-                    // console.log(obj.data);
+                    console.log(obj.data);
                     // for(var i=0;i<obj.data.length;i++){}
 
                     tableFunc({
@@ -118,7 +125,7 @@
                                 event:"allP",
                                 type:2,
                                 content:"child/allP_Check.html",
-                                dataUrl:["id","bmId"],
+                                dataUrl:["id","bmId"]
 
                             }
                         ]
