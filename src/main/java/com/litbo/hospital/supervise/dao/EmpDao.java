@@ -60,11 +60,11 @@ public interface EmpDao {
     List<SEmp> listEmpByBmId(String bmId);
     @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id,emp.status,zggw.zggwlb, sex.sex,xllb.xllb,zwlb.zwlb,emp.byyx\n" +
             " from s_emp emp\n" +
-            " LEFT JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
-            " LEFT JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
-            " LEFT JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
-            " LEFT JOIN s_zggwlb zggw ON (zggw.zggwlb_id=emp.zggwlb_id)\n" +
-            " LEFT JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id)")
+            " inner JOIN s_bm bm ON (emp.bm_id=bm.bm_id)\n" +
+            " left JOIN s_sex sex ON (sex.sex_id=emp.sex_id)\n" +
+            " left JOIN s_xllb xllb ON (xllb.xllb_id=emp.xllb_id)\n" +
+            " left JOIN s_zggwlb zggw ON (zggw.zggwlb_id=emp.zggwlb_id)\n" +
+            " left JOIN s_zwlb zwlb ON (zwlb.zwlb_id=emp.zwlb_id)")
     List<EmpSelectVO> listSelectEmps();
     @Select(" SELECT bm.bm_name,emp.user_xm,emp.user_id,emp.status, sex.sex,xllb.xllb,zwlb.zwlb,emp.byyx\n" +
             " from s_emp emp\n" +

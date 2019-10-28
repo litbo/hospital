@@ -23,7 +23,7 @@ public class CwProvider {
         "dbo.b_sbcw , "+
                 "dbo.eq_info "+
         "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id "+
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh"+
         "GROUP BY "+
         "dbo.b_sbcw.eq_id ";
 
@@ -46,12 +46,11 @@ public class CwProvider {
                 "sum(case dbo.b_sbcw.km_name when '医疗风险费' then km_value ELSE 0 END) AS ylfxf, "+
                 "sum(case dbo.b_sbcw.km_name when '水费' then km_value ELSE 0  END) +sum(case km_name when '电费' then km_value ELSE 0  END) +sum(case km_name when '维保费' then km_value ELSE 0  END) + sum(case km_name when '配件费' then km_value ELSE 0  END) AS qt, "+
                 "sum(case dbo.b_sbcw.km_cjdm when '1' then km_value ELSE 0  END) AS zj "+
-
                 "FROM "+
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id "
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "
                 );
 
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
@@ -102,7 +101,7 @@ public class CwProvider {
                 "dbo.eq_info "+
 
         "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id "+
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "+
         "GROUP BY "+
         "dbo.b_sbcw.eq_id ; ";
         return sql;
@@ -123,7 +122,7 @@ public class CwProvider {
                 "dbo.eq_info "+
 
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id ");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh");
 
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
@@ -173,7 +172,7 @@ public class CwProvider {
                 "dbo.eq_info "+
 
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id "+
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh"+
                 "GROUP BY "+
                 "dbo.b_sbcw.eq_id ; ";
         return sql;
@@ -195,7 +194,7 @@ public class CwProvider {
                 "dbo.eq_info "+
 
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id ");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh ");
         ;
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
@@ -242,7 +241,7 @@ public class CwProvider {
         "dbo.b_sbcw , "+
         "dbo.eq_info "+
         "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id "+
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "+
 
         "GROUP BY "+
         "dbo.b_sbcw.eq_id ";
@@ -264,7 +263,7 @@ public class CwProvider {
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id ");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh ");
 
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
@@ -310,7 +309,7 @@ public class CwProvider {
         "dbo.b_sbcw , "+
         "dbo.eq_info "+
         "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id "+
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "+
 
         "GROUP BY "+
         "dbo.b_sbcw.eq_id ";
@@ -331,7 +330,7 @@ public class CwProvider {
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_id ");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh");
 
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");

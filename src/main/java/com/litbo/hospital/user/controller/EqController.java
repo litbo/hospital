@@ -104,7 +104,7 @@ public class EqController {
     //Excel导入设备信息
     @RequestMapping("/importEq")
     public Result importEq(MultipartFile file) {
-        if (es.importEq(file) < 0) {
+        if (es.importEq(file) <= 0) {
             return Result.error();
         }
         return Result.success();

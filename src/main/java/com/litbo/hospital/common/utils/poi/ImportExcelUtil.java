@@ -2,6 +2,7 @@ package com.litbo.hospital.common.utils.poi;
 
 import com.alibaba.fastjson.JSONObject;
 import com.litbo.hospital.user.bean.EqInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -101,8 +102,14 @@ public class ImportExcelUtil {
         //short cellNum = row.getLastCellNum();
         for (int i = 0; i < cellNum; i++) {
             Cell cell = row.getCell(i);
-            String stringCellValue = cell.getStringCellValue();
-            list.add(stringCellValue);
+            if(cell!=null){
+                String stringCellValue = cell.getStringCellValue();
+                if(StringUtils.isNotBlank(stringCellValue)){
+                    list.add(stringCellValue);
+                }
+
+            }
+
         }
         return list;
     }
@@ -134,11 +141,13 @@ public class ImportExcelUtil {
                             if (cell != null&&cell.getCellType()!=HSSFCell.CELL_TYPE_BLANK) {
                                 cell.setCellType(1);
                                 String stringCellValue = cell.getStringCellValue();
-                                Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                /*Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                 Date d = calendar.getTime();
-                                Date dd = DateUtils.addDays(d, Integer.parseInt(stringCellValue));
-                                String ddd = (new SimpleDateFormat("yyyy-MM-dd")).format(dd);
-                                rowList.add(ddd);
+                                Date dd = DateUtils.addDays(d, Integer.parseInt(stringCellValue));*/
+                                if(StringUtils.isNotBlank(stringCellValue)){
+//                                    String ddd = new SimpleDateFormat("yyyy-MM-dd").format(stringCellValue);
+                                    rowList.add(stringCellValue);
+                                }
                                 continue label1;
                             }
                         }
