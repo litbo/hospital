@@ -104,6 +104,9 @@ public interface EqDao {
     String getJldwId(String eqJldwName);
     @Select("SELECT eq_cxfl_id FROM eq_cxfl WHERE eq_cxfl_name =#{eqCxflName}")
     String getCxflId(String eqCxflName);
+    @Select("SELECT bm_id from s_bm left join  eq_info on eq_info.eq_bmid=s_bm.obm_id\n" +
+            "where eq_info.eq_bmid=#{obmid}")
+    String getNewBmId(String obmid);
     @Select("SELECT zjly_id FROM eq_zjly WHERE zjly_name =#{eqZjlyName}")
     String getZjlyId(String eqZjlyName);
     @Select("select * from eq_pm where eq_pm_id = #{eqPmId}")

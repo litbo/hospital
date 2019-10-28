@@ -60,7 +60,7 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="startSTime" class="layui-input" id="date" placeholder="点击选择日期">
+                        <input type="text" name="qssj" class="layui-input" id="date" placeholder="点击选择日期">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="modules"  lay-search="">
@@ -131,7 +131,7 @@
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.msg, //解析提示文本
-                        "count":res.data.size,
+                        "count":res.data.total,
                         "data": res.data.list //解析数据列表
                     }
                 }
@@ -147,10 +147,11 @@
                     })
                 }
             },reSet:{
-                url:"/benefical/sbcw/listJjcbByX",
+                url:"/benefical/sbcw/listJjcb",
                 type:"search",
-                data:["bmNameByx","eqNameByx"],
-                dat:["#date","kssj","jssj"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
+                data:["qssj"]
+                // data:["bmNameByx","eqNameByx"],
+                // dat:["#date","kssj","jssj"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
             }
         },
         form:{

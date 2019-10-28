@@ -3,26 +3,27 @@ package com.litbo.hospital.beneficial.service;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.beneficial.vo.CbMhVo;
 
+import java.util.Date;
 import java.util.List;
 
 public interface SbcwService {
-    PageInfo listZjcb(int pageNum, int pageSize);
+    PageInfo listZjcb(int pageNum, int pageSize, Date kssj, Date jssj);
 
     PageInfo listZjcbByX(int pageNum, int pageSize, CbMhVo cbMhVo);
 
-    PageInfo listJjcb(int pageNum, int pageSize);
+    PageInfo listJjcb(int pageNum, int pageSize,Date qs,Date js);
 
     PageInfo listJjcbByX(int pageNum, int pageSize, CbMhVo cbMhVo);
 
-    PageInfo listSr(int pageNum, int pageSize);
+    PageInfo listSr(int pageNum, int pageSize,Date qs,Date js);
 
     PageInfo listSrByX(int pageNum, int pageSize, CbMhVo cbMhVo);
 
-    PageInfo listXyFx(int pageNum, int pageSize);
+    PageInfo listXyFx(int pageNum, int pageSize,Date qs,Date js);
 
     PageInfo listXyFxByX(int pageNum, int pageSize, CbMhVo cbMhVo);
 
-    PageInfo listXyPj(int pageNum, int pageSize);
+    PageInfo listXyPj(int pageNum, int pageSize,Date qs,Date js);
 
     PageInfo listXyPjByX(int pageNum, int pageSize, CbMhVo cbMhVo);
 

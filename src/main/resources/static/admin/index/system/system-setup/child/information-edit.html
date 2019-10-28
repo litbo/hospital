@@ -118,7 +118,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用科室</label>
                                     <div class="layui-input-block">
-                                        <select name="eqObmid" lay-filter="bmList">
+                                        <select name="eqBmid" lay-filter="bmList">
                                             <option value="">选择科室</option>
                                         </select>
                                     </div>
@@ -496,7 +496,7 @@
                     contentType: "application/json",
                     data: ["eqName", "eqZcbh", "eqPmId", "eqGg", "eqXh", "zjlyId",
                         "eqJldwId", "eqPrice", "eqTzlb", "eqBxkssj", "eqBxjssj", "eqBxxysj",
-                        "eqObmid", "eqGlgk", "eqCxflId", "eqQysj", "eqZczmc", "eqZczbh", "eqPp", "eqScbh",
+                        "eqBmid", "eqGlgk", "eqCxflId", "eqQysj", "eqZczmc", "eqZczbh", "eqPp", "eqScbh",
                         "eqPz", "eqSynx", "eqHtbh", "eqCgrq", "eqSybmfzr", "eqAzrq", "eqAzwz",
                         "eqZblx", "eqZjl", "userName", "eqJdrq", "eqJzbh", "eqDabh", "eqYq", "eqSbzp",
                         "eqMpzp", "eqAzhjyq"],
@@ -740,19 +740,19 @@
                     },
                     {
                         filter: "bmList",
-                        ids: "obmId",
+                        ids: "bmId",
                         text: "bmName",
                         url: " /supervise/bmgl/listDelXks"
                     }
                 ],
                 func: function (data, form) {
                     // console.log($.getUrlParam("eqId"));
-                    $("select[name='zjlyId']").val(String(data["zjlyId"]).trim());
-                    $("select[name='eqObmid']").val(String(data["eqObmid"]).trim());
-                    $("select[name='eqJldwId']").val(String(data["eqJldwId"]).trim());
-                    $("select[name='eqCxflId']").val(String(data["eqCxflId"]).trim());
-                    $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
-                    $("select[name='eqPmId']").val(String(data["eqPmId"]).trim());
+                    // $("select[name='zjlyId']").val(String(data["zjlyId"]).trim());
+                    // $("select[name='eqBmid']").val(String(data["eqBmid"]).trim());
+                    // $("select[name='eqJldwId']").val(String(data["eqJldwId"]).trim());
+                    // $("select[name='eqCxflId']").val(String(data["eqCxflId"]).trim());
+                    // $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());
+                    // $("select[name='eqPmId']").val(String(data["eqPmId"]).trim());
 
                     form.render("select");
                     if (data.eqSbzp) {

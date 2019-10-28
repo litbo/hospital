@@ -355,10 +355,10 @@ public class EqServiceImpl implements EqService {
                     } else if (k == 27) {
                         eqInfo.setEqBz(s);
                     } else if (k == 28) {
-                        /*if (s != null) {
+                        if (s != null) {
                             eqInfo.setEqBmid(eqDao.getOBmIdByName(s));
-                        }*/
-                        eqInfo.setEqBmid(s);
+                        }
+//                        eqInfo.setEqBmid(eqDao.getNewBmId(s));
                     } else if (k == 29) {
                         if (s != null) {
                             eqInfo.setEqJldwId(eqDao.getJldwId(s));

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 public class CwProvider {
     public String listZjcb(){
 
-        String sql = "SELECT "+
+        String sql = "<script> SELECT "+
         "Max(dbo.b_sbcw.bm_name) AS bmName, "+
         "Max(dbo.b_sbcw.eq_name) AS eqName, "+
         "Max(dbo.eq_info.eq_sbbh) AS eqNum, "+
@@ -22,10 +22,19 @@ public class CwProvider {
         "FROM "+
         "dbo.b_sbcw , "+
                 "dbo.eq_info "+
-        "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh"+
+        "WHERE\n "+
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n"+
+                "<if test = \" qssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &gt;=#{qssj} " +
+                "</if>" +
+                "<if test = \" jssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &lt;=#{jssj} " +
+                "</if>" +
         "GROUP BY "+
-        "dbo.b_sbcw.eq_id ";
+        "dbo.b_sbcw.eq_id order by  eqNum" +
+                "</script>"
+               ;
+
 
 
         return sql;
@@ -50,7 +59,7 @@ public class CwProvider {
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n "
                 );
 
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
@@ -80,14 +89,14 @@ public class CwProvider {
         }*/
 
 
-            sql.append("GROUP BY " +
-                               "dbo.b_sbcw.eq_id ");
+            sql.append("GROUP BY \n" +
+                               "dbo.b_sbcw.eq_id order by  eqNum");
 
         return sql.toString();
     }
 
     public String listJjcb(){
-        String sql = "SELECT "+
+        String sql = "<script>SELECT "+
         "Max(dbo.b_sbcw.bm_name) as bmName, "+
         "Max(dbo.b_sbcw.eq_name) as eqName, "+
         "Max(dbo.eq_info.eq_sbbh) AS eqNum, "+
@@ -101,14 +110,20 @@ public class CwProvider {
                 "dbo.eq_info "+
 
         "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "+
-        "GROUP BY "+
-        "dbo.b_sbcw.eq_id ; ";
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n" +
+                "<if test=\" qssj!=null\">" +
+                " and dbo.b_sbcw.km_sj &gt;=#{qssj} " +
+                "</if>"+
+                "<if test=\" jssj!=null\">" +
+                " and dbo.b_sbcw.km_sj &lt;=#{jssj} " +
+                "</if>"+
+        " GROUP BY "+
+        "dbo.b_sbcw.eq_id  order by  eqNum</script> ";
         return sql;
     }
 
     public String listJjcbByX(CbMhVo cbMhVo){
-        StringBuffer sql = new StringBuffer("SELECT "+
+        StringBuffer sql = new StringBuffer("<script> SELECT "+
                 "Max(dbo.b_sbcw.bm_name) as bmName, "+
                 "Max(dbo.b_sbcw.eq_name) as eqName, "+
                 "Max(dbo.eq_info.eq_sbbh) AS eqNum, "+
@@ -122,9 +137,11 @@ public class CwProvider {
                 "dbo.eq_info "+
 
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n" +
+                "<if test=\" \">" +
+                "</if>");
 
-        if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
+        /*if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
         }
         if(StringUtils.isNotBlank(cbMhVo.getEqNameByx())){
@@ -139,7 +156,7 @@ public class CwProvider {
         }
         if(( cbMhVo.getKssj()!=null)&&( cbMhVo.getJssj()!=null)) {
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}");
-        }
+        }*/
         /*if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj())) && (StringUtils.isBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and dbo.b_sbcw.km_sj BETWEEN #{kssj} AND '3000-01-01'" );
         }
@@ -149,14 +166,14 @@ public class CwProvider {
         if((StringUtils.isNotBlank((CharSequence) cbMhVo.getKssj()))&&(StringUtils.isNotBlank((CharSequence) cbMhVo.getJssj()))){
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
         }*/
-        sql.append("GROUP BY " +
-                "dbo.b_sbcw.eq_id ");
+        sql.append(" GROUP BY " +
+                "dbo.b_sbcw.eq_id order by  eqNum </script>");
 
         return sql.toString();
     }
 
     public String listSr(){
-        String sql = "SELECT "+
+        String sql = "<script> SELECT "+
                 "Max(dbo.b_sbcw.bm_name) as bmName, "+
                 "Max(dbo.b_sbcw.eq_name) as eqName, "+
                 "Max(dbo.eq_info.eq_sbbh) AS eqNum, "+
@@ -172,9 +189,15 @@ public class CwProvider {
                 "dbo.eq_info "+
 
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh"+
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n"+
+                "<if test = \" qssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &gt;=#{qssj} " +
+                "</if>" +
+                "<if test = \" jssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &lt;=#{jssj} " +
+                "</if>" +
                 "GROUP BY "+
-                "dbo.b_sbcw.eq_id ; ";
+                "dbo.b_sbcw.eq_id  order by  eqNum </script> ";
         return sql;
     }
 
@@ -194,7 +217,7 @@ public class CwProvider {
                 "dbo.eq_info "+
 
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh ");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n");
         ;
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
@@ -221,13 +244,13 @@ public class CwProvider {
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
         }*/
         sql.append("GROUP BY " +
-                "dbo.b_sbcw.eq_id ");
+                "dbo.b_sbcw.eq_id order by  eqNum ");
 
         return sql.toString();
     }
 
     public String listXyFx(){
-        String sql = "SELECT "+
+        String sql = "<script>SELECT "+
         "Max(dbo.b_sbcw.bm_name) AS bmName, "+
         "Max(dbo.b_sbcw.eq_name) AS eqName, "+
         "Max(dbo.eq_info.eq_sbbh) AS eqNum, "+
@@ -241,10 +264,15 @@ public class CwProvider {
         "dbo.b_sbcw , "+
         "dbo.eq_info "+
         "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "+
-
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n " +
+                "<if test = \" qssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &gt;=#{qssj} " +
+                "</if>" +
+                "<if test = \" jssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &lt;=#{jssj} " +
+                "</if>" +
         "GROUP BY "+
-        "dbo.b_sbcw.eq_id ";
+        "dbo.b_sbcw.eq_id  order by  eqNum </script>";
         return sql;
     }
 
@@ -263,7 +291,7 @@ public class CwProvider {
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh ");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n");
 
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
@@ -290,13 +318,13 @@ public class CwProvider {
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
         }*/
         sql.append("GROUP BY " +
-                "dbo.b_sbcw.eq_id ");
+                "dbo.b_sbcw.eq_id  order by  eqNum");
 
         return sql.toString();
     }
 
     public String listXyPj(){
-        String sql = "SELECT "+
+        String sql = "<script>SELECT "+
         "Max(dbo.b_sbcw.bm_name) AS bmName, "+
         "Max(dbo.b_sbcw.eq_name) AS eqName, "+
         "Max(dbo.eq_info.eq_sbbh) AS eqNum, "+
@@ -309,10 +337,15 @@ public class CwProvider {
         "dbo.b_sbcw , "+
         "dbo.eq_info "+
         "WHERE "+
-        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh "+
-
+        "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh \n "+
+               /* "<if test = \" qssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &gt;=#{qssj} " +
+                "</if>" +
+                "<if test = \" jssj!=null \">" +
+                "and dbo.b_sbcw.km_sj &lt;=#{jssj} " +
+                "</if>" +*/
         "GROUP BY "+
-        "dbo.b_sbcw.eq_id ";
+        "dbo.b_sbcw.eq_id  order by  eqNum </script>";
         return sql;
     }
 
@@ -330,7 +363,7 @@ public class CwProvider {
                 "dbo.b_sbcw , "+
                 "dbo.eq_info "+
                 "WHERE "+
-                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh");
+                "dbo.b_sbcw.eq_id = dbo.eq_info.eq_zcbh  order by  eqNum\n");
 
         if(StringUtils.isNotBlank(cbMhVo.getBmNameByx())) {
             sql.append("and dbo.b_sbcw.bm_name Like '%'+ #{bmNameByx}+'%' ");
@@ -348,7 +381,7 @@ public class CwProvider {
             sql.append("and km_sj BETWEEN #{kssj} AND #{jssj}" );
         }*/
         sql.append("GROUP BY " +
-                "dbo.b_sbcw.eq_id ");
+                "dbo.b_sbcw.eq_id  order by  eqNum");
 
         return sql.toString();
     }
