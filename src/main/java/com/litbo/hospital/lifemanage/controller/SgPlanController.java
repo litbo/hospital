@@ -57,8 +57,6 @@ public class SgPlanController {
             @RequestParam(value = "pageSize",required = false,defaultValue="15") int pageSize)
     {
         PageInfo pageInfo = sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize);
-
-
         return Result.success(pageInfo);
     }
 

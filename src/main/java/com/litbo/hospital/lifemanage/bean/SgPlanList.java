@@ -13,7 +13,6 @@ public class SgPlanList {
 
     private  String fileStatus;
     private String checkStatus;
-
     private String bmName;
     private String id;
 
@@ -131,45 +130,6 @@ public class SgPlanList {
         this.checkStatus = checkStatus;
     }
 
-    public SgPlanList(String checkStatus, String bmName, String id, String userId, String bmId, String planName, Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
-        this.checkStatus = checkStatus;
-        this.bmName = bmName;
-        this.id = id;
-        this.userId = userId;
-        this.bmId = bmId;
-        this.planName = planName;
-        this.planDate = planDate;
-        this.allNum = allNum;
-        this.yiPanNum = yiPanNum;
-        this.panYingNum = panYingNum;
-        this.panKuiNum = panKuiNum;
-    }
-    public SgPlanList(String bmName, String id, String userId, String bmId, String planName, Date planDate) {
-        this.bmName = bmName;
-        this.id = id;
-        this.userId = userId;
-        this.bmId = bmId;
-        this.planName = planName;
-        this.planDate = planDate;
-    }
-
-    public SgPlanList() {
-    }
-
-    public SgPlanList(String bmName, String id, String userId, String bmId, String planName,
-                      Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
-        this.bmName = bmName;
-        this.id = id;
-        this.userId = userId;
-        this.bmId = bmId;
-        this.planName = planName;
-        this.planDate = planDate;
-        this.allNum = allNum;
-        this.yiPanNum = yiPanNum;
-        this.panYingNum = panYingNum;
-        this.panKuiNum = panKuiNum;
-    }
-
     public SgPlanList(String fileStatus, String checkStatus, String bmName, String id, String userId, String bmId, String planName, Date planDate, Integer allNum, Integer yiPanNum, Integer panYingNum, Integer panKuiNum) {
         this.fileStatus = fileStatus;
         this.checkStatus = checkStatus;
@@ -183,6 +143,9 @@ public class SgPlanList {
         this.yiPanNum = yiPanNum;
         this.panYingNum = panYingNum;
         this.panKuiNum = panKuiNum;
+    }
+
+    public SgPlanList() {
     }
 
     @Override
@@ -201,5 +164,13 @@ public class SgPlanList {
                 ", panYingNum=" + panYingNum +
                 ", panKuiNum=" + panKuiNum +
                 '}';
+    }
+
+    public String getFileStatus() {
+        return fileStatus;
+    }
+
+    public void setFileStatus(String fileStatus) {
+        this.fileStatus = fileStatus;
     }
 }

@@ -209,6 +209,7 @@ public class SgPlanServiceImpl implements SgPlanService {
 //                System.out.println("总共"+sgPlanLists);
 
             }
+            System.out.println("88888888"+sgPlanLists);
             PageHelper.startPage(pageNum, pageSize);
             return  new PageInfo(sgPlanLists);
         }
