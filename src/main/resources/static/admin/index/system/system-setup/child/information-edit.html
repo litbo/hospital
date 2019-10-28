@@ -69,11 +69,11 @@
                                     <label class="layui-form-label">台账类别</label>
                                     <div class="layui-input-block">
                                         <select name="eqTzlb" lay-filter="tzlb">
-                                            <option value="低值耐用品类">低值耐用品类</option>
-                                            <option value="固定资产类"  selected="selected">固定资产类</option>
-                                            <option value="基建类">基建类</option>
-                                            <option value="第三方类">第三方类</option>
-                                            <option value="试用类">试用类</option>
+                                            <option value="低值耐用账">低值耐用账</option>
+                                            <option value="固定资产账"  selected="selected">固定资产账</option>
+                                            <option value="基建账">基建账</option>
+                                            <option value="第三方账">第三方账</option>
+                                            <option value="试用账">试用账</option>
                                         </select>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用科室</label>
                                     <div class="layui-input-block">
-                                        <select name="eqBmid" lay-filter="bmList">
+                                        <select name="eqObmid" lay-filter="bmList">
                                             <option value="">选择科室</option>
                                         </select>
                                     </div>
@@ -496,7 +496,7 @@
                     contentType: "application/json",
                     data: ["eqName", "eqZcbh", "eqPmId", "eqGg", "eqXh", "zjlyId",
                         "eqJldwId", "eqPrice", "eqTzlb", "eqBxkssj", "eqBxjssj", "eqBxxysj",
-                        "eqBmid", "eqGlgk", "eqCxflId", "eqQysj", "eqZczmc", "eqZczbh", "eqPp", "eqScbh",
+                        "eqObmid", "eqGlgk", "eqCxflId", "eqQysj", "eqZczmc", "eqZczbh", "eqPp", "eqScbh",
                         "eqPz", "eqSynx", "eqHtbh", "eqCgrq", "eqSybmfzr", "eqAzrq", "eqAzwz",
                         "eqZblx", "eqZjl", "userName", "eqJdrq", "eqJzbh", "eqDabh", "eqYq", "eqSbzp",
                         "eqMpzp", "eqAzhjyq"],
@@ -740,7 +740,7 @@
                     },
                     {
                         filter: "bmList",
-                        ids: "bmId",
+                        ids: "obmId",
                         text: "bmName",
                         url: " /supervise/bmgl/listDelXks"
                     }
@@ -748,7 +748,7 @@
                 func: function (data, form) {
                     // console.log($.getUrlParam("eqId"));
                     $("select[name='zjlyId']").val(String(data["zjlyId"]).trim());
-                    $("select[name='eqBmid']").val(String(data["eqBmid"]).trim());
+                    $("select[name='eqObmid']").val(String(data["eqObmid"]).trim());
                     $("select[name='eqJldwId']").val(String(data["eqJldwId"]).trim());
                     $("select[name='eqCxflId']").val(String(data["eqCxflId"]).trim());
                     $("select[name='eqZblx']").val(String(data["eqZblx"]).trim());

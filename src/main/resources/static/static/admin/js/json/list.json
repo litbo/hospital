@@ -74,31 +74,37 @@
                 "url": "javascript:void;",
                 "icon": "network-wired",
                 "id": "2001",
-                "shiro": "YLWSZ",
+                "shiro": "KSTL",
                 "children": [
                   {
                     "title": "设备联网设置",
                     "url": "./dataCollection/page/main3.html",
                     "id": "20010",
-                    "shiro": "SBLWSZ"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "设备值班排班设置",
                     "url": "./dataCollection/page/main4.html",
                     "id": "20011",
-                    "shiro": "SBZBPBSZ"
+                    "shiro": "KSTL"
                   },
                   {
                     "title": "仪联网运行记录",
                     "url": "./dataCollection/page/main7.html",
                     "id": "20014",
-                    "shiro": "YLWYXJL"
+                    "shiro": "KSTL"
                   },
                   {
-                    "title": "仪联网原始记录",
+                    "title": "仪联网运行环境",
                     "url": "./dataCollection/page/main8.html",
                     "id": "20015",
-                    "shiro": "YLWYSJL"
+                    "shiro": "KSTL"
+                  },
+                  {
+                    "title": "仪联网运行时长",
+                    "url": "./dataCollection/page/main9.html",
+                    "id": "20016",
+                    "shiro": "KSTL"
                   }
                 ]
               }
