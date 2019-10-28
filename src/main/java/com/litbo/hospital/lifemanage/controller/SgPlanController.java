@@ -76,4 +76,16 @@ public class SgPlanController {
     public Result selectIdByName(@RequestBody SgPlanVO sgPlanVO){
         return Result.success(sgPlanService.selectIdByName(sgPlanVO));
     }
+
+    @RequestMapping("delPlan")
+    public Result delPlan(String planId){
+        String delId[] = null;
+        delId = planId.split(",");
+        for (int i=0; i<delId.length;i++){
+            String ids = delId[i];
+            sgPlanService.delPlan(ids);
+        }
+
+        return  Result.success();
+    }
 }

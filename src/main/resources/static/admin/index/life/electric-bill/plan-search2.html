@@ -23,10 +23,10 @@
     </div>
 </div>
 <script type="text/html" id="status">
-    {{#  if(d.checkStatus == "已审核"){ }}
-    <span class="layui-btn layui-btn-sm">{{d.checkStatus}}</span>
-    {{#  } else if(d.checkStatus == "未审核") { }}
-    <span class="layui-btn layui-btn-sm deli">{{d.checkStatus}}</span>
+    {{#  if(d.fileStatus == "已上传"){ }}
+    <span class="layui-btn layui-btn-sm">{{d.fileStatus}}</span>
+    {{#  } else if(d.fileStatus == "未上传") { }}
+    <span class="layui-btn layui-btn-sm deli">{{d.fileStatus}}</span>
     {{#  } }}
 </script>
 <script type="text/html" id="toolBar">
@@ -71,7 +71,7 @@
                 elem: "#table"
                 , height: 'full-75'
                 , cols: [[ //表头
-                    {field: 'checkStatus', title: '上传状态', minWidth: 100,templet:'#status'}
+                    {field: 'fileStatus', title: '上传状态', minWidth: 100,templet:'#status'}
                     ,{field: 'planName', title: '计划名称', minWidth: 100}
                     , {field: 'userId', title: '制定人',width: 100}
                     , {field: 'bmName', title: '科室',minWidth: 100}

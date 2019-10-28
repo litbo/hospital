@@ -237,4 +237,9 @@ public class SgPlanServiceImpl implements SgPlanService {
         String id=sgPlanMapper.selectIdByName(planName);
         return id;
     }
+
+    @Override
+    public void delPlan(String ids) {
+
+    }
 }

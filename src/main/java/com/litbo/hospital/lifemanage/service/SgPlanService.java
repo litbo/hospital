@@ -41,4 +41,6 @@ public interface SgPlanService {
     List<String> getplanName();
 
     String selectIdByName(SgPlanVO sgPlanVO);
+
+    void delPlan(String ids);
 }
