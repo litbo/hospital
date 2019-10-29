@@ -44,6 +44,10 @@
         </div>
         <button class="layui-btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>查询</button>
     </div>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-sm deli" lay-event="delAll"><i class="layui-icon"></i>删除</button>
+    </div>
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">账实核对</a>
@@ -57,12 +61,13 @@
                     elem: "#table"
                     , height: 'full-75'
                     , cols: [[ //表头
-                        {field: 'checkStatus', title: '审核状态', minWidth: 150,templet:'#status'}
+                        {type: 'checkbox', fixed: 'left'}
+                        ,{field: 'checkStatus', title: '审核状态', minWidth: 150,templet:'#status'}
                         ,{field: 'planName', title: '计划名称', minWidth: 300}
                         , {field: 'userId', title: '制定人', minWidth: 120}
                         , {field: 'bmName', title: '科室', minWidth: 150}
                         , {field: 'planDate', title: '制定日期', width: 120}
-                        , {fixed:'right',minWidth: 150,align:'center',toolbar: "#bar"}
+                        , {fixed:'right', title: '操作',minWidth: 150,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectPlan"
                     , method: "POST"
@@ -87,7 +92,22 @@
                                     event:"detail",
                                     type:2,
                                     content:"./purchase-check.html",
-                                    dataUrl:["id","bmId"]
+                                    dataUrl:["id","bmId","bmName"]
+                                },
+                                {
+                                    tool:"toolbar",
+                                    event:"delAll",
+                                    send:{
+                                        id:"table",
+                                        filter:"table1",
+                                        name:"ids",
+                                        event:"delAll",
+                                        url:"/lifeManage/delPlan",
+                                        type:"POST",
+                                        contentType:"application/json",
+                                        par:"planId",
+                                        reload:'parent'
+                                    }
                                 }
                             ]
                         })

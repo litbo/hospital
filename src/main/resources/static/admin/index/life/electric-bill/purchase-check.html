@@ -49,7 +49,8 @@
     var planId = $.getUrlParam("id");
     var eqId = $.getUrlParam("bmId");
     localStorage.setItem("planId",$.getUrlParam("id"));
-    localStorage.setItem("eqId",$.getUrlParam("id"));
+    localStorage.setItem("eqBmid",$.getUrlParam("bmId"));
+    localStorage.setItem("bmName",$.getUrlParam("bmName"));
 
     renderMod = {
         addTable: {

@@ -151,9 +151,11 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">使用科室</label>
                                     <div class="layui-input-block">
-                                        <select name="eqBmid" lay-filter="bmList">
-                                            <option value="">请选择...</option>
-                                        </select>
+<!--                                        <select name="eqBmid" lay-filter="bmList">-->
+<!--                                            <option value="">请选择...</option>-->
+<!--                                        </select>-->
+                                        <input type="text" autocomplete="off" class="layui-input bmName" readonly>
+                                        <input type="hidden" name="eqBmid" autocomplete="off" class="layui-input eqBmid">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -527,7 +529,10 @@
         $("#userId").val(emp.userId);
         $("#userXm").val(emp.userXm);
         var planId = localStorage.getItem("planId");
-        var eqId = localStorage.getItem("eqId");
+        var eqBmid = localStorage.getItem("eqBmid");
+        var bmName = localStorage.getItem("bmName");
+        $(".eqBmid").val(eqBmid);
+        $(".bmName").val(bmName);
 
         // console.log(planId);
         // console.log(eqId);
@@ -812,12 +817,12 @@
                         text: "eqCxflName",
                         url: "/eqdict/cxfl"
                     },
-                    {
-                        filter: "bmList",
-                        ids: "bmId",
-                        text: "bmName",
-                        url: "/supervise/bmgl/listBms2"
-                    }
+                    // {
+                    //     filter: "bmList",
+                    //     ids: "bmId",
+                    //     text: "bmName",
+                    //     url: "/supervise/bmgl/listBms2"
+                    // }
                 ]
             }
         },
