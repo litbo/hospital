@@ -34,8 +34,9 @@
 </div>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="kaohe">未到人员</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="kaohe">已到人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="YdRy">应到人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="SdRy">实到人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="WdRy">未到人员</a>
 </script>
 
 
@@ -50,12 +51,13 @@
                 toolbar: "#toolBar",
                 cols: [[ //应用培训表头
                    // {type: "checkbox"}
-                      {field: 'eqName', title: '设备培训计划', minWidth: 150}
-                    , {field: 'pxlx', title: '参加人数', minWidth: 150}
-                    , {field: 'pxfs', title: '实到人数', minWidth: 150}
-                    , {field: 'pxks', title: '培训率', minWidth: 150}
-                    , {field: 'pxnrlb', title: '合格率', minWidth: 150}
-                    , {fixed: 'right', width: 180, align: 'center', toolbar: "#bar"}
+                      {field: 'eqName', title: '设备名称', minWidth: 150}
+                    , {field: 'pxnrlb', title: '培训内容类别', minWidth: 150}
+                    , {field: 'pxlx', title: '培训性质', minWidth: 150}
+                    , {field: 'pxfs', title: '培训方式', minWidth: 150}
+                    , {field: 'pxl', title: '培训率', minWidth: 150}
+                    , {field: 'khhgl', title: '考核合格率', minWidth: 150}
+                    , {fixed: 'right', width: 270, align: 'center', toolbar: "#bar"}
                 ]],
                 url: "/px/findAllYyjh"
                 , request: {
@@ -75,27 +77,36 @@
                         toolFunc: [
                             {
                                 filter:"table1",
-                                event: "",
-                                title: "考核",
+                                event: "YdRy",
+                                title: "应到人员",
                                 area: ['90%', '90%'],
                                 type: 2,
-                                content: "./child/kaohe.html",
+                                content: "./child/YdRy.html",
+                                dataUrl: ["id"]
+                            },
+                            {
+                                filter:"table1",
+                                event: "SdRy",
+                                title: "实到人员",
+                                area: ['90%', '90%'],
+                                type: 2,
+                                content: "./child/SdRy.html",
+                                dataUrl: ["id"]
+                            },
+                            {
+                                filter:"table1",
+                                event: "WdRy",
+                                title: "未到人员",
+                                area: ['90%', '90%'],
+                                type: 2,
+                                content: "./child/WdRy.html",
                                 dataUrl: ["id"]
                             }
                         ]
                     })
                 }
             }
-        ],
-         reSet: [
-        {
-            url: "/px/selYyjh",
-            type: "reload",
-            tid: "tables",
-            data: ["name"],
-            method: "POST"
-        }
-     ]
+        ]
     }
 </script>
 </body>
