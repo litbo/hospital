@@ -16,7 +16,7 @@ public class KhZxinxiVo {
 
     private String userName;//多个
 
-   // private int LAY_TABLE_INDEX;//多个
+    private String pxjg;
 
     private String llcj;//多个
 

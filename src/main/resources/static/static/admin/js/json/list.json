@@ -1461,7 +1461,7 @@
               },
               {
                 "title": "查询统计",
-                "url": "./table.html",
+                "url": "./safe/application-training/plan-queryss.html",
                 "icon": "user-clock",
                 "id": "4202",
                 "shiro": "a"

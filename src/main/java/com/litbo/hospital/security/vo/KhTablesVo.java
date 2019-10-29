@@ -6,7 +6,7 @@ import lombok.Data;
 public class KhTablesVo {
     private String userName;//多个
 
-    private int LAY_TABLE_INDEX;//多个
+    private String pxjg;//多个
 
     private String llcj;//多个
 
