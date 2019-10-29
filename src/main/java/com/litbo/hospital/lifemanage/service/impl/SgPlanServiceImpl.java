@@ -171,7 +171,6 @@ public class SgPlanServiceImpl implements SgPlanService {
                     adllDate3.add(selectVO);
                 }
                 int num = adllDate3.size();
-
                 List<SgPlanList> sgPlanLists2= new ArrayList<>();
 
                 if (listNum==null){
@@ -215,7 +214,6 @@ public class SgPlanServiceImpl implements SgPlanService {
 
 //                System.out.println("总共"+sgPlanLists);
             }
-
 
 
 
