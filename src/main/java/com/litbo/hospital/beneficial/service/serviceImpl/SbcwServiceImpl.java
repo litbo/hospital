@@ -76,6 +76,15 @@ public class SbcwServiceImpl implements SbcwService {
     }
 
     @Override
+    public List<SrVo> SrBobiao(Date qs, Date js) {
+        List<SrVo> vos = sbcwDao.listSr(qs, js);
+        vos.forEach(item->{
+            item.setZj(item.getMzsr().add(item.getKjxmsr()).add(item.getZysr()).add(item.getQt()));
+        });
+        return vos;
+    }
+
+    @Override
     public PageInfo listSrByX(int pageNum, int pageSize, CbMhVo cbMhVo) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo(sbcwDao.listSrByX(cbMhVo));
@@ -120,6 +129,24 @@ public class SbcwServiceImpl implements SbcwService {
 //        }
         PageInfo info = new PageInfo(list1);
         return info;
+    }
+
+    @Override
+    public List<XyFxVo> XyfxBaobiao(Date qs, Date js) {
+        List<XyFxVo> vos = sbcwDao.listXyFx(qs, js);
+        vos.forEach(xyFxVo->{
+            xyFxVo.setSy(xyFxVo.getSr().subtract(xyFxVo.getCb()));
+            if(xyFxVo.getQjlc()!=0) {
+                xyFxVo.setZcsr(xyFxVo.getSr().divide(BigDecimal.valueOf(xyFxVo.getQjlc()), 4, RoundingMode.HALF_UP));
+                xyFxVo.setZccb(xyFxVo.getCb().divide(BigDecimal.valueOf(xyFxVo.getQjlc()), 4, RoundingMode.HALF_UP));
+            }else {
+                xyFxVo.setQjlc(0);
+                xyFxVo.setZcsr(xyFxVo.getSr());
+                xyFxVo.setZccb(xyFxVo.getCb());
+            }
+            xyFxVo.setZcsy(xyFxVo.getZcsr().subtract(xyFxVo.getZccb()));
+        });
+        return vos;
     }
 
     public PageInfo listXyFxByX(int pageNum, int pageSize, CbMhVo cbMhVo) {
