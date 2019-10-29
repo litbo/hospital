@@ -22,6 +22,13 @@ public class SbcwServiceImpl implements SbcwService {
     public PageInfo listZjcb(int pageNum, int pageSize,Date kssj,Date jssj) {
         PageHelper.startPage(pageNum,pageSize);
         List<ZjcbVo> list = sbcwDao.listZjcb(kssj, jssj);
+        list.forEach(item->{
+             if(item.getYlsbzjf()!=null){
+                 item.setGdzczjf(item.getYlsbzjf().add(item.getGdzczjf()));
+             }
+             item.setZj(item.getRyjf().add(item.getWsclf()).add(item.getYpf()).
+                     add(item.getGdzczjf()).add(item.getWxzctxf()).add(item.getYlfxf()).add(item.getQt()));
+        });
         PageInfo<ZjcbVo> info = new PageInfo<>(list);
         return info;
     }
@@ -41,6 +48,9 @@ public class SbcwServiceImpl implements SbcwService {
     public PageInfo listJjcb(int pageNum, int pageSize,Date qs,Date js) {
         PageHelper.startPage(pageNum,pageSize);
         List<JjcbVo> list = sbcwDao.listJjcb(qs, js);
+        list.forEach(item->{
+            item.setZj(item.getFzkscb().add(item.getGlfy()).add(item.getQt()));
+        });
         PageInfo<JjcbVo> info = new PageInfo<>(list);
         return info;
     }
@@ -58,7 +68,11 @@ public class SbcwServiceImpl implements SbcwService {
     @Override
     public PageInfo listSr(int pageNum, int pageSize,Date qs,Date js) {
         PageHelper.startPage(pageNum,pageSize);
-        return new PageInfo(sbcwDao.listSr(qs,js));
+        List<SrVo> list = sbcwDao.listSr(qs, js);
+        list.forEach(item->{
+            item.setZj(item.getMzsr().add(item.getKjxmsr()).add(item.getZysr()).add(item.getQt()));
+        });
+        return new PageInfo(list);
     }
 
     @Override

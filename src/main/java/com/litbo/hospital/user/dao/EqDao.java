@@ -98,8 +98,8 @@ public interface EqDao {
     List<EqShowVo> listWFlEqByX(SelectFlEqVo selectFlEqVo);
     @Select("SELECT top 1  bm_id FROM s_bm WHERE bm_name =#{bmName}")
     String getBmIdByName(String bmName);
-    @Select("SELECT top 1  obm_id FROM s_bm WHERE bm_name =#{bmName}")
-    String getOBmIdByName(String bmName);
+    @Select("SELECT top 1  bm_id FROM s_bm WHERE obm_id =#{obmid}")
+    String getBmIdByobmID(String obmid);
     @Select("SELECT eq_jldw_id FROM eq_jldw WHERE eq_jldw_name =#{eqJldwName}")
     String getJldwId(String eqJldwName);
     @Select("SELECT eq_cxfl_id FROM eq_cxfl WHERE eq_cxfl_name =#{eqCxflName}")

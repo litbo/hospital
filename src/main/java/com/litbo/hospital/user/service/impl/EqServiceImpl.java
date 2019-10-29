@@ -356,9 +356,9 @@ public class EqServiceImpl implements EqService {
                         eqInfo.setEqBz(s);
                     } else if (k == 28) {
                         if (s != null) {
-                            eqInfo.setEqBmid(eqDao.getOBmIdByName(s));
+//                            eqInfo.setEqBmid(eqDao.getBmIdByName(s));
+                        eqInfo.setEqBmid(eqDao.getBmIdByobmID(s));
                         }
-//                        eqInfo.setEqBmid(eqDao.getNewBmId(s));
                     } else if (k == 29) {
                         if (s != null) {
                             eqInfo.setEqJldwId(eqDao.getJldwId(s));

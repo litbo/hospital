@@ -17,6 +17,7 @@ public class JjcbVo {
     private String eqXh;
 
     private BigDecimal glfy;
+    private BigDecimal qt;
 
     private BigDecimal fzkscb;
 

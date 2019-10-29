@@ -63,38 +63,13 @@
                         <input type="text" name="qssj" class="layui-input" id="date" placeholder="点击选择日期">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules"  lay-search="">
-                            <option value="">设备名称</option>
-                            <option value="1">脉搏碳氧血氧测量仪</option>
-                            <option value="2">光疗设备</option>
-                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
-                            <option value="4">设备柜</option>
-                            <option value="5">监护仪(母婴监护系统主机)</option>
+                        <select name="select" id="select"  lay-filter="select" lay-search=""  onchange="teset(this.value)">
+                            <option value="">请选择科室</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules"  lay-search="">
-                            <option value="">科室名称</option>
-                            <option value="1">病案室</option>
-                            <option value="2">病案质控室</option>
-                            <option value="3">B超室</option>
-                            <option value="4">病房临床检验室</option>
-                            <option value="5">病房消化内镜室</option>
-                            <option value="6">保健科全科医学病区</option>
-                            <option value="7">保健科门诊</option>
-                            <option value="8">病理科</option>
-                            <option value="9">变态反应（哮喘）门诊</option>
-                            <option value="10">保卫处</option>
-                            <option value="11">肠道检验室</option>
-                            <option value="12">病房消化内镜室</option>
-                            <option value="13">产房</option>
-                            <option value="14">产科二病区</option>
-                            <option value="15">产科门诊</option>
-                            <option value="16">产科三病区</option>
-                            <option value="17">产科一病区</option>
-                            <option value="18">产前筛查实验室</option>
-                            <option value="19">CT室</option>
-                            <option value="20">创伤骨科病房</option>
+                        <select name="eqSName" id="eqSName" lay-search="">
+                            <option value="">请选择设备</option>
                         </select>
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
@@ -107,15 +82,46 @@
 </script>
 
 <script>
+    function b(){
+        layui.use(['layer', 'jquery', 'form'], function () {
+            var layer = layui.layer,
+                $ = layui.jquery,
+                form = layui.form;
+            form.on('select(select)', function(data){
+                if(data.value == 1){
+                    alert(" 123")
+                }else{
+                    var type =$('#select option:selected').val();//选中的值
+                    console.log("选中的值："+type)
+                    $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){
+                        console.log(data)
+                        var eqSName = data.data;
+                        // console.log("从后端获得的数据："+eqSName);
+                        // 将数据分割：
+                        // eqSName = eqSName.toString().split(',');
+                        $("#eqSName").empty()
+                        for(var i in eqSName){
+                            $("#eqSName").append("<option value=\""+eqSName[i].eqName+"\">"+eqSName[i].eqName+"</option>")
+                        }
+                        layui.form.render("select");
+                    });
+                }
+            });
+        });
+    }
+    b();
+
+</script>
+<script>
     renderMod = {
         table:{
             table:{
                 cols: [[ //表头
                     {field: 'bmName', title: '科室名称', minWidth: 120}
                     , {field: 'eqName', title: '设备名称', minWidth: 120}
-                    , {field: 'eqNum', title: '院内编号', minWidth: 180}
+                    , {field: 'eqNum', title: '资产编号', minWidth: 180}
                     , {field: 'eqXh', title: '设备型号', minWidth: 130}
-                    , {field: 'fzksft', title: '辅助科室分摊', minWidth: 130,sort:true}
+                    , {field: 'fzkscb', title: '辅助科室分摊', minWidth: 130,sort:true}
                     , {field: 'glfy', title: '管理费用', minWidth: 100,sort:true}
                     , {field: 'qt', title: '其他支出', minWidth: 120,sort:true}
                     , {field: 'zj', title: '总计', minWidth: 120,sort:true}
@@ -149,12 +155,23 @@
             },reSet:{
                 url:"/benefical/sbcw/listJjcb",
                 type:"search",
-                data:["qssj"]
+                data:["qssj","select","eqSName"]
                 // data:["bmNameByx","eqNameByx"],
                 // dat:["#date","kssj","jssj"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
             }
         },
         form:{
+            val: {
+                filter: "select",
+                select: [
+                    {
+                        filter: "select",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listDelXks"
+                    }
+                ]
+            },
             date:{
                 elem:"#date",
                 value: false,
