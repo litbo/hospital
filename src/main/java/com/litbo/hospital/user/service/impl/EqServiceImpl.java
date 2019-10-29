@@ -286,7 +286,7 @@ public class EqServiceImpl implements EqService {
                 List<Object> objects = lists.get(i);
 
                 String o = (String) objects.get(0);
-                if (StringUtils.isBlank(o)) {
+                if (StringUtils.isBlank(o)|| o.contains("*")) {
                     return 1;
                 }
                 int size2 = objects.size();
