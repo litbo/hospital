@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class KhTablesVo {
+    private String bmName;
+
     private String userName;//多个
 
     private String pxjg;//多个

@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,17 +23,17 @@ public class KhServiceImpl implements KhService{
     KhDao khDao;
 
     @Override
-    public ListCanJiaVo findByPxjgIs() {
-        return khDao.findByPxjgIs();
+    public ListCanJiaVo findByPxjgIs(String id) {
+        return khDao.findByPxjgIs(id);
     }
 
     @Override
-    public void updateLv(@Param("pxl") String pxl,@Param("khhgl") String khhgl,@Param("jh_id") String jh_id) {
+    public void updateLv(@Param("pxl") String pxl,@Param("hgl") String khhgl,@Param("jh_id") String jh_id) {
         khDao.updateLv(pxl,khhgl,jh_id);
     }
 
     @Override
-    public void insertLv(@Param("hegelv") String khhgl, @Param("chuqinlv") String pxl, String jh_id) {
+    public void insertLv(@Param("hgl") String khhgl, @Param("pxl") String pxl, String jh_id) {
         String id = UUID.randomUUID().toString();
         khDao.insertLv(id,khhgl,pxl,jh_id);
     }
@@ -43,13 +44,18 @@ public class KhServiceImpl implements KhService{
     }
 
     @Override
-    public ListJiGeVo findByKhjgJg() {
-        return khDao.findByKhjgJg();
+    public ListJiGeVo findByKhjgJg(String id) {
+        return khDao.findByKhjgJg(id);
     }
 
     @Override
     public LvJcVos getPxlAndKhl(String jh_id) {
         return khDao.getPxlAndKhl(jh_id);
+    }
+
+    @Override
+    public NumVos getNum() {
+        return khDao.getNum();
     }
 
     @Override
@@ -61,6 +67,16 @@ public class KhServiceImpl implements KhService{
     @Override
     public PageInfo findInfo(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
+//        NumVos numVos = khDao.getNum();
+//        List<ListCheckLvVos> list = khDao.findInfo();
+//        List<ListCheckLvVos> vos = new ArrayList<>();
+//        for(ListCheckLvVos l:list){
+//            l.setSdNum(numVos.getSdNum());
+//            l.setYdNum(numVos.getYdNum());
+//            l.setWdNum(numVos.getWdNum());
+//            l.setHgNum(numVos.getHgNum());
+//            vos.add(l);
+//        }
         PageInfo pageInfo = new PageInfo(khDao.findInfo());
         return pageInfo;
     }
@@ -76,6 +92,13 @@ public class KhServiceImpl implements KhService{
     public List<RenYuanVo> getSdRen(int pageNum, int pageSize, String id) {
         PageHelper.startPage(pageNum,pageSize);
         List<RenYuanVo> renYuanVos =  khDao.getSdRen(id);
+        return renYuanVos;
+    }
+
+    @Override
+    public List<RenYuanVo> getHgRen(int pageNum, int pageSize, String id) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<RenYuanVo> renYuanVos =  khDao.getHgRen(id);
         return renYuanVos;
     }
 
