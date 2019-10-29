@@ -1,6 +1,9 @@
 package com.litbo.hospital.lifemanage.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
 

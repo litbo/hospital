@@ -94,4 +94,11 @@
        where  e.eq_id = #{id}
     </select>
 
+
+    <delete id="delPlan" parameterType="String">
+        DELETE  from sg_plan where id=#{ids}
+    </delete>
+    <delete id="delPd" parameterType="String">
+        DELETE  from sg_pd where id=#{ids}
+    </delete>
 </mapper>

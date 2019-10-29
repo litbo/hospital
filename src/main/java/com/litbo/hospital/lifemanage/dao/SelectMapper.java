@@ -32,5 +32,8 @@ public interface SelectMapper {
 
     ListNum getListNum(String planId);
 
+    void delPlan(String ids);
+
+    void delPd(String ids);
 }
 

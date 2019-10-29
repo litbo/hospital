@@ -17,6 +17,7 @@ import com.litbo.hospital.supervise.service.EmpService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,9 +87,8 @@ public class SgPlanServiceImpl implements SgPlanService {
      * @return PageInfo<SgPlan>
      */
     @Override
-    public PageInfo selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgPlanList> selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize) {
 
-//        System.out.println(PageHelper.startPage(pageNum, pageSize));
         // 把空字符串 转换为null
         if (StringUtils.isBlank(planName)) {
             planName = null;
@@ -126,10 +126,10 @@ public class SgPlanServiceImpl implements SgPlanService {
                 System.out.println("出错");
             }
             List<SgPlan> sgPlan = sgPlanMapper.selectPlan(planName, date, userId);
+
             List<SgPlanList> sgPlanLists= new ArrayList<>();
             ListNum listNum = new ListNum();
             SgPlanList sgList = new SgPlanList();
-
 
 
             for (SgPlan sg:sgPlan){
@@ -149,13 +149,18 @@ public class SgPlanServiceImpl implements SgPlanService {
                     System.out.println(listCheck.get(i).getChecks());
 
                 }
-                if (!checksNum.equals(null)){
-                    if (checksNum[0]!=null){
-                        checkStatus = "已审核";
+                if (checksNum.length==0){
+                    checkStatus = "未审核";
+                }
+                if (checksNum.length>0){
+                    if (!checksNum.equals(null)){
+                        if (checksNum[0]!=null){
+                            checkStatus = "已审核";
 //                        System.out.println("已审核");
-                    }else{
-                        checkStatus = "未审核";
+                        }else{
+                            checkStatus = "未审核";
 //                        System.out.println("未审核");
+                        }
                     }
                 }
                 //aa
@@ -166,7 +171,9 @@ public class SgPlanServiceImpl implements SgPlanService {
                     adllDate3.add(selectVO);
                 }
                 int num = adllDate3.size();
+
                 List<SgPlanList> sgPlanLists2= new ArrayList<>();
+
                 if (listNum==null){
                     fileStatus = "未上传";
                     sgList.setAllNum(adllDate3.size());
@@ -176,7 +183,7 @@ public class SgPlanServiceImpl implements SgPlanService {
 //                    SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
 //                            sg.getPlanDate(),0, 0,
 //                            0,0);
-                    System.out.println(sgList1);
+//                    System.out.println(sgList1);
                     sgPlanLists2.add(sgList1);
                 }
                 sgPlanLists.addAll(sgPlanLists2);
@@ -190,7 +197,7 @@ public class SgPlanServiceImpl implements SgPlanService {
 //                        SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
 //                                sg.getPlanDate(),0, 0,
 //                                0,0);
-                        System.out.println(sgList1);
+//                        System.out.println(sgList1);
                         sgPlanLists2.add(sgList1);
                     }
                     sgPlanLists.addAll(sgPlanLists2);
@@ -199,7 +206,7 @@ public class SgPlanServiceImpl implements SgPlanService {
                         SgPlanList sgList1 = new SgPlanList(fileStatus,checkStatus, sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
                                 sg.getPlanDate(),listNum.getAllNum(), listNum.getYiPanNum(),
                                 listNum.getPanYingNum(),listNum.getPanKuiNum());
-                        System.out.println(sgList1);
+//                        System.out.println(sgList1);
 
                         sgPlanLists.add(sgList1);
 //                        System.out.println("部位空"+sgList1);
@@ -207,11 +214,12 @@ public class SgPlanServiceImpl implements SgPlanService {
                 }
 
 //                System.out.println("总共"+sgPlanLists);
-
             }
-            System.out.println("88888888"+sgPlanLists);
-            PageHelper.startPage(pageNum, pageSize);
-            return  new PageInfo(sgPlanLists);
+
+
+
+
+            return  new PageInfo<>(sgPlanLists);
         }
     }
 
@@ -240,6 +248,11 @@ public class SgPlanServiceImpl implements SgPlanService {
 
     @Override
     public void delPlan(String ids) {
-
+         selectMapper.delPlan(ids);
+         try{
+            selectMapper.delPd(ids);
+         }catch (Exception e){
+             e.printStackTrace();
+         }
     }
 }
