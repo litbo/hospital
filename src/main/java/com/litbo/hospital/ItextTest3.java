@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -130,13 +131,14 @@ public class ItextTest3 {
         // 在指定目录下创建一个文件
         response.setHeader("content-Type", "application/vnd.ms-pdf");
         //下载文件的默认名称
-        response.setHeader("Content-Disposition", "attachment;filename=666.pdf");
         //设置中文
+        response.addHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("医疗设备成本效益分析报表.pdf", "UTF-8"));
+
         BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 
-        File file = new File("C:\\Users\\Administrator\\Desktop\\test.pdf");
+//        File file = new File("C:\\Users\\Administrator\\Desktop\\test.pdf");
         try {
-            file.createNewFile();
+//            file.createNewFile();
 
             // 建立一个Document对象
             Document document = new Document();
@@ -169,18 +171,18 @@ public class ItextTest3 {
             document.add(elements);
             document.add(new Paragraph("\n"));
 
-            PdfPTable table = createTable(11);
+            PdfPTable table = createTable(12);
             //第一行内容
             //table.addCell(createCell("客户维修派工单", headfont, Element.ALIGN_CENTER, 6, true));
             PdfPCell cell1 = createCell("设备项", textfont);
             cell1.setColspan(4);
             table.addCell(cell1);
             PdfPCell cell2 = createCell("分析项", textfont);
-            cell2.setColspan(7);
+            cell2.setColspan(8);
             table.addCell(cell2);
 
             //第二行内容
-            PdfPCell cell = createCell("所属科室", textfont);
+            PdfPCell cell = createCell("科室名称", textfont);
 //            cell.setRowspan(1);
             table.addCell(cell);
 //            cell.setRowspan(2);
@@ -192,13 +194,14 @@ public class ItextTest3 {
             table.addCell(createCell("资产编号", textfont));
             table.addCell(createCell("设备名称", textfont));
             table.addCell(createCell("规格型号", textfont));
-            table.addCell(createCell("收入", textfont));
-            table.addCell(createCell("成本", textfont));
-            table.addCell(createCell("收益", textfont));
-            table.addCell(createCell("期间例次", textfont));
-            table.addCell(createCell("诊疗收入", textfont));
-            table.addCell(createCell("诊疗成本", textfont));
-            table.addCell(createCell("诊疗收益", textfont));
+            table.addCell(createCell("原值", textfont));
+            table.addCell(createCell("诊疗次数", textfont));
+            table.addCell(createCell("回本期", textfont));
+            table.addCell(createCell("期间收入", textfont));
+            table.addCell(createCell("期间支出", textfont));
+            table.addCell(createCell("期间收益", textfont));
+            table.addCell(createCell("年化收益", textfont));
+            table.addCell(createCell("年化收益率", textfont));
 //            table.addCell(createCell(k_jbr, textfont));
 
             JSONArray array = JSONArray.parseArray(json);
@@ -208,17 +211,18 @@ public class ItextTest3 {
                 String o = String.valueOf(object.get("bmName"));
                 String o1 = String.valueOf(object.get("eqNum"));
                 String o2 = String.valueOf(object.get("eqName"));
-                String o3 = String.valueOf(object.get("eqXh"));
+                String o3 = String.valueOf(object.get("eqGgxh"));
                 if("null".equals(o3)|| StringUtils.isBlank(o3)){
                     o3="";
                 }
-                String o4 = String.valueOf(object.get("sr"));
-                String o6 = String.valueOf(object.get("cb"));
-                String o5 = String.valueOf(object.get("sy"));
-                String o7 = String.valueOf(object.get("qjlc"));
-                String o8 = String.valueOf(object.get("zcsr"));
-                String o9 = String.valueOf(object.get("zccb"));
-                String o10 = String.valueOf(object.get("zcsy"));
+                String o4 = String.valueOf(object.get("eqPrice"));
+                String o6 = String.valueOf(object.get("zlcs"));
+                String o5 = String.valueOf(object.get("hbq"));
+                String o7 = String.valueOf(object.get("qjsr"));
+                String o8 = String.valueOf(object.get("qjzc"));
+                String o9 = String.valueOf(object.get("qjsy"));
+                String o10 = String.valueOf(object.get("nhsy"));
+                String o11 = String.valueOf(object.get("nhsyl"));
                 table.addCell(createCell(o,textfont));
                 table.addCell(createCell(o1,textfont));
                 table.addCell(createCell(o2,textfont));
@@ -230,6 +234,7 @@ public class ItextTest3 {
                 table.addCell(createCell(o8,textfont));
                 table.addCell(createCell(o9,textfont));
                 table.addCell(createCell(o10,textfont));
+                table.addCell(createCell(o11,textfont));
 
             }
 
@@ -252,7 +257,7 @@ public class ItextTest3 {
     @RequestMapping("/xyfxbb")
     public void  sss(HttpServletResponse response,@RequestParam(required = false,defaultValue = "") String qssj) throws IOException, DocumentException, ParseException {
 
-        Result result = controller.listXyfxBobiao(qssj);
+        Result result = controller.listXyfxBobiao(qssj,null,null);
         Object o = result.getData();
         String string = JSON.toJSONString(o);
         JSONArray array = JSONArray.parseArray(string);

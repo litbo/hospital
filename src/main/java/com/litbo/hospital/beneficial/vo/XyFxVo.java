@@ -17,7 +17,8 @@ public class XyFxVo {
     private String eqNum;
 
     private String eqXh;
-
+    private String eqGg;
+    private String eqGgxh;
     private BigDecimal sr;
 
     private BigDecimal cb;

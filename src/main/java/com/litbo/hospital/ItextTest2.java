@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,10 +33,11 @@ public class ItextTest2 {
     private static Font headfont;// 设置字体大小
     private static Font keyfont;// 设置字体大小
     private static Font textfont;// 设置字体大小
-   private static List<BigDecimal> list = new ArrayList();
-@Autowired
-SbcwController controller;
+    private static List<BigDecimal> list = new ArrayList();
+    @Autowired
+    SbcwController controller;
     private static int maxWidth = 520;
+
     static {
         BaseFont bfChinese;
         try {
@@ -69,12 +71,14 @@ SbcwController controller;
         }
         return table;
     }
+
     /**
      * 一般用于创建表格标题
-     * @param value  单元格内容
-     * @param font	字体大小
-     * @param align 垂直方向对齐方式 (ALIGN_CENTER, ALIGN_LEFT, ALIGN_MIDDLE,ALIGN_RIGHT)
-     * @param colspan 所占列宽
+     *
+     * @param value     单元格内容
+     * @param font      字体大小
+     * @param align     垂直方向对齐方式 (ALIGN_CENTER, ALIGN_LEFT, ALIGN_MIDDLE,ALIGN_RIGHT)
+     * @param colspan   所占列宽
      * @param boderFlag 是否设置padding
      * @return
      */
@@ -92,31 +96,35 @@ SbcwController controller;
         }
         return cell;
     }
+
     /**
      * 一般用于创建表格标题行
+     *
      * @param value 单元格内容
      * @param font  字体大小
      * @param align 垂直方向对齐方式 (ALIGN_CENTER, ALIGN_LEFT, ALIGN_MIDDLE,ALIGN_RIGHT)
      * @return
      */
-    public static PdfPCell createCell(String value, Font font, int align){
+    public static PdfPCell createCell(String value, Font font, int align) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(align);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         return cell;
     }
+
     /**
      * 一般用于创建表格正文内容
+     *
      * @param value 单元格内容
      * @param font  字体大小
      * @return
      */
-    public static PdfPCell createCell(String value,Font font){
+    public static PdfPCell createCell(String value, Font font) {
         PdfPCell cell = new PdfPCell();
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setPhrase(new Phrase(value,font));
+        cell.setPhrase(new Phrase(value, font));
         cell.setPadding(6.0f);
         return cell;
     }
@@ -130,14 +138,17 @@ SbcwController controller;
     public void CreatePGDpdf(String json, HttpServletResponse response) throws IOException, DocumentException {
         // 在指定目录下创建一个文件
         response.setHeader("content-Type", "application/vnd.ms-pdf");
+      /*  response.addHeader("Content-Disposition",
+                " attachment;filename=" + new String("医疗设备收入统计表.pdf".getBytes(),"utf-8"));*/
         //下载文件的默认名称
-        response.setHeader("Content-Disposition", "attachment;filename=666.pdf");
+        response.addHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("医疗设备收入统计表.pdf", "UTF-8"));
+//        response.setHeader("Content-Disposition", "attachment;filename=医疗设备收入统计表.pdf");
         //设置中文
         BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 
-        File file = new File("C:\\Users\\Administrator\\Desktop\\test.pdf");
+//        File file = new File("C:\\Users\\Administrator\\Desktop\\test.pdf");
         try {
-            file.createNewFile();
+//            file.createNewFile();
 
             // 建立一个Document对象
             Document document = new Document();
@@ -148,9 +159,8 @@ SbcwController controller;
             document.open();
 
 
-
             // 向文档中添加内容
-            Paragraph paragraph = new Paragraph("医疗设备收入统计表",headfont);
+            Paragraph paragraph = new Paragraph("医疗设备收入统计表", headfont);
             paragraph.setAlignment(1);
             document.add(paragraph);
             document.add(new Paragraph("\n"));
@@ -159,11 +169,11 @@ SbcwController controller;
             String table_up = "填报单位 : 医学工程处";
 //                    "日期 : "+k_bxtime+"                             "+
 //                    "单号 : "+k_recordsnum;
-            paragraph = new Paragraph(table_up,textfont);
+            paragraph = new Paragraph(table_up, textfont);
             SimpleDateFormat date = new SimpleDateFormat("yyyy-MM");
             String s = date.format(new Date());
             String[] split = s.split("-");
-            Paragraph elements = new Paragraph("填报日期 :    "+split[0]+"  年  "+split[1]+" 月 ", textfont);
+            Paragraph elements = new Paragraph("填报日期 :    " + split[0] + "  年  " + split[1] + " 月 ", textfont);
             elements.setAlignment(2);
 //            paragraph.setAlignment(1);
             document.add(paragraph);
@@ -208,38 +218,38 @@ SbcwController controller;
                 String o1 = String.valueOf(object.get("eqNum"));
                 String o2 = String.valueOf(object.get("eqName"));
                 String o3 = String.valueOf(object.get("eqXh"));
-                if("null".equals(o3)|| StringUtils.isBlank(o3)){
-                    o3="";
+                if ("null".equals(o3) || StringUtils.isBlank(o3)) {
+                    o3 = "";
                 }
                 String o4 = String.valueOf(object.get("mzsr"));
                 String o6 = String.valueOf(object.get("zysr"));
                 String o5 = String.valueOf(object.get("kjxmsr"));
                 String o7 = String.valueOf(object.get("qt"));
                 String o8 = String.valueOf(object.get("zj"));
-              list.add(new BigDecimal(o8));
+                list.add(new BigDecimal(o8));
 
-                table.addCell(createCell(o,textfont));
-                table.addCell(createCell(o1,textfont));
-                table.addCell(createCell(o2,textfont));
-                table.addCell(createCell(o3,textfont));
-                table.addCell(createCell(o4,textfont));
-                table.addCell(createCell(o5,textfont));
-                table.addCell(createCell(o6,textfont));
-                table.addCell(createCell(o7,textfont));
-                table.addCell(createCell(o8,textfont));
+                table.addCell(createCell(o, textfont));
+                table.addCell(createCell(o1, textfont));
+                table.addCell(createCell(o2, textfont));
+                table.addCell(createCell(o3, textfont));
+                table.addCell(createCell(o4, textfont));
+                table.addCell(createCell(o5, textfont));
+                table.addCell(createCell(o6, textfont));
+                table.addCell(createCell(o7, textfont));
+                table.addCell(createCell(o8, textfont));
 
             }
             PdfPCell cell3 = createCell("共合计: ", textfont);
-cell3.setVerticalAlignment(Element.ALIGN_RIGHT);
+            cell3.setVerticalAlignment(Element.ALIGN_RIGHT);
 
             cell3.setColspan(8);
             table.addCell(cell3);
             int i = list.size();
-            BigDecimal total=new BigDecimal("0.00");
+            BigDecimal total = new BigDecimal("0.00");
             for (int k = 0; k < i; k++) {
-                total= total.add(list.get(k));
+                total = total.add(list.get(k));
             }
-            table.addCell(createCell(String.valueOf(total),textfont));
+            table.addCell(createCell(String.valueOf(total), textfont));
 
             document.add(table);
 
@@ -249,7 +259,7 @@ cell3.setVerticalAlignment(Element.ALIGN_RIGHT);
 
             // 关闭文档
             document.close();
-            list=new ArrayList<>();
+            list = new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
@@ -264,16 +274,17 @@ cell3.setVerticalAlignment(Element.ALIGN_RIGHT);
         ItextTest printTest = new ItextTest();
         printTest.CreatePGDpdf(json);*/
     }
-    @RequestMapping("/srbb")
-    public void ss(HttpServletResponse response,@RequestParam(required = false,defaultValue = "") String qssj) throws IOException, DocumentException, ParseException {
 
-        Result result = controller.listSrbaobiao(qssj);
+    @RequestMapping("/srbb")
+    public void ss(HttpServletResponse response, @RequestParam(required = false, defaultValue = "") String qssj) throws IOException, DocumentException, ParseException {
+
+        Result result = controller.listSrbaobiao(qssj, null, null);
         Object o = result.getData();
         String string = JSON.toJSONString(o);
         JSONArray array = JSONArray.parseArray(string);
         String s = array.toString();
         ItextTest2 printTest = new ItextTest2();
-        printTest.CreatePGDpdf(s,response);
+        printTest.CreatePGDpdf(s, response);
     }
 
 }

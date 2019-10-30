@@ -45,8 +45,8 @@ public class SbcwController {
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
            if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -66,25 +66,7 @@ public class SbcwController {
 
 
         }
-        PageInfo info = sbcwService.listZjcb(pageNum, pageSize, qs, js);
-        List<ZjcbVo> list = info.getList();
-
-        if(StringUtils.isNotBlank(select) && StringUtils.isNotBlank(eqSName)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select)||!item.getEqName().equals(eqSName))
-                    return true;
-                else
-                    return false;
-            });
-        }
-       else if(StringUtils.isNotBlank(select)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select))
-                return true;
-                else
-                    return false;
-            });
-        }
+        PageInfo info = sbcwService.listZjcb(pageNum, pageSize, qs, js,select,eqSName);
 
         return Result.success(info);
     }
@@ -125,8 +107,8 @@ public class SbcwController {
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -146,25 +128,7 @@ public class SbcwController {
 
 
         }
-        PageInfo info = sbcwService.listJjcb(pageNum, pageSize, qs, js);
-        List<JjcbVo> list = info.getList();
-
-        if(StringUtils.isNotBlank(select) && StringUtils.isNotBlank(eqSName)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select)||!item.getEqName().equals(eqSName))
-                    return true;
-                else
-                    return false;
-            });
-        }
-        else if(StringUtils.isNotBlank(select)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select))
-                    return true;
-                else
-                    return false;
-            });
-        }
+        PageInfo info = sbcwService.listJjcb(pageNum, pageSize, qs, js,select,eqSName);
 
         return Result.success(info);
     }
@@ -194,14 +158,17 @@ public class SbcwController {
 
     //生成效益分析报表
     @RequestMapping(value = "/listXyfxBobiao")
-    public Result listXyfxBobiao(@RequestParam(required = false) String qssj) throws ParseException {
+    public Result listXyfxBobiao(@RequestParam(required = false) String qssj,
+           @RequestParam(required = false) String select,
+                                 @RequestParam(required = false) String eqSName
+    ) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -221,7 +188,7 @@ public class SbcwController {
 
 
         }
-        List<XyFxVo> list = sbcwService.XyfxBaobiao(qs,js);
+        List<XyPjVo> list = sbcwService.NewXyfxBaobiao(qs,js,select,eqSName);
 
         return Result.success(list);
     }
@@ -229,14 +196,17 @@ public class SbcwController {
 
     //生成收入报表
     @RequestMapping(value = "/listSrBobiao")
-    public Result listSrbaobiao(@RequestParam(required = false) String qssj) throws ParseException {
+    public Result listSrbaobiao(@RequestParam(required = false) String qssj,
+                                @RequestParam(required = false)String bmName,
+                                @RequestParam(required = false)String eqName
+                                ) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -256,7 +226,7 @@ public class SbcwController {
 
 
         }
-        List<SrVo> list = sbcwService.SrBobiao(qs,js);
+        List<SrVo> list = sbcwService.SrBobiao(qs,js,bmName,eqName);
 
         return Result.success(list);
     }
@@ -274,8 +244,8 @@ public class SbcwController {
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -295,25 +265,7 @@ public class SbcwController {
 
 
         }
-        PageInfo info = sbcwService.listSr(pageNum, pageSize, qs, js);
-        List<SrVo> list = info.getList();
-
-        if(StringUtils.isNotBlank(select) && StringUtils.isNotBlank(eqSName)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select)||!item.getEqName().equals(eqSName))
-                    return true;
-                else
-                    return false;
-            });
-        }
-        else if(StringUtils.isNotBlank(select)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select))
-                    return true;
-                else
-                    return false;
-            });
-        }
+        PageInfo info = sbcwService.listSr(pageNum, pageSize, qs, js,select,eqSName);
 
         return Result.success(info);
     }
@@ -354,8 +306,8 @@ public class SbcwController {
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -375,25 +327,7 @@ public class SbcwController {
 
 
         }
-        PageInfo info = sbcwService.listXyFx(pageNum, pageSize, qs, js);
-        List<XyFxVo> list = info.getList();
-
-        if(StringUtils.isNotBlank(select) && StringUtils.isNotBlank(eqSName)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select)||!item.getEqName().equals(eqSName))
-                    return true;
-                else
-                    return false;
-            });
-        }
-        else if(StringUtils.isNotBlank(select)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select))
-                    return true;
-                else
-                    return false;
-            });
-        }
+        PageInfo info = sbcwService.listXyFx(pageNum, pageSize, qs, js,select,eqSName);
 
         return Result.success(info);
     }
@@ -433,8 +367,8 @@ public class SbcwController {
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -454,25 +388,7 @@ public class SbcwController {
 
 
         }
-        PageInfo info = sbcwService.listXyPj(pageNum, pageSize, qs, js);
-        List<XyPjVo> list = info.getList();
-
-        if(StringUtils.isNotBlank(select) && StringUtils.isNotBlank(eqSName)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select)||!item.getEqName().equals(eqSName))
-                    return true;
-                else
-                    return false;
-            });
-        }
-        else if(StringUtils.isNotBlank(select)){
-            list.removeIf(item->{
-                if(!item.getBmName().equals(select))
-                    return true;
-                else
-                    return false;
-            });
-        }
+        PageInfo info = sbcwService.listXyPj(pageNum, pageSize, qs, js,select,eqSName);
 
         return Result.success(info);
     }

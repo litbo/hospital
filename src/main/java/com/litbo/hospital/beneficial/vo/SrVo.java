@@ -15,7 +15,8 @@ public class SrVo {
     private String eqNum;
 
     private String eqXh;
-
+    private String eqGg;
+    private String eqGgxh;
     private BigDecimal mzsr;
 
     private BigDecimal kjxmsr;

@@ -51,8 +51,8 @@
             <li class=""><a href="./analysis-evaluation.html">直接成本统计</a></li>
             <li class="layui-this"><a href="./indirect-cost.html">间接成本统计</a></li>
             <li class=""><a href="./cevenue-statistics.html">收入统计</a></li>
-            <li class=""><a href="./benefit-analysis.html">效益分析表</a></li>
-            <li class=""><a href="./benefit-statistics.html">效益评价表</a></li>
+            <li class=""><a href="./benefit-statistics.html">效益分析表</a></li>
+            <li class=""><a href="./benefit-analysis.html">效益统计表</a></li>
         </ul>
     </div>
     <div class="hidden-xs" id="hideXs">
@@ -68,9 +68,7 @@
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="eqSName" id="eqSName" lay-search="">
-                            <option value="">请选择设备</option>
-                        </select>
+                            <input type="text" name="eqSName" class="layui-input"  placeholder="请输入设备名称" >
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -80,8 +78,31 @@
         </div>
     </div>
 </script>
-
 <script>
+
+
+    Date.prototype.format = function(fmt) {
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "h+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+        for(var k in o) {
+            if(new RegExp("("+ k +")").test(fmt)){
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+</script>
+<!--<script>
     function b(){
         layui.use(['layer', 'jquery', 'form'], function () {
             var layer = layui.layer,
@@ -111,16 +132,35 @@
     }
     b();
 
-</script>
+</script>-->
 <script>
+    function CurrentMonthFirst(){
+        var date=new Date();
+        date.setDate(1);
+        return date;
+    }
+
+    function CurrentMonthLast(){
+        var date=new Date();
+        var currentMonth=date.getMonth();
+        var nextMonth=++currentMonth;
+        var nextMonthFirstDay=new Date(date.getFullYear(),nextMonth,1);
+        var oneDay=1000*60*60*24;
+        return new Date(nextMonthFirstDay-oneDay);
+    }
+
+    var time1 = CurrentMonthFirst().format("yyyy-MM-dd");
+    var time2 = CurrentMonthLast().format("yyyy-MM-dd");
+
     renderMod = {
         table:{
             table:{
                 cols: [[ //表头
                     {field: 'bmName', title: '科室名称', minWidth: 120}
-                    , {field: 'eqName', title: '设备名称', minWidth: 120}
                     , {field: 'eqNum', title: '资产编号', minWidth: 180}
-                    , {field: 'eqXh', title: '设备型号', minWidth: 130}
+                    , {field: 'eqName', title: '设备名称', minWidth: 120}
+
+                    , {field: 'eqGgxh', title: '规格型号', minWidth: 130}
                     , {field: 'fzkscb', title: '辅助科室分摊', minWidth: 130,sort:true}
                     , {field: 'glfy', title: '管理费用', minWidth: 100,sort:true}
                     , {field: 'qt', title: '其他支出', minWidth: 120,sort:true}
@@ -174,10 +214,11 @@
             },
             date:{
                 elem:"#date",
-                value: false,
+                value: time1+' ~ '+time2,
                 type:"date",
                 format:"yyyy-MM-dd",
-                range:true
+                range:true,
+                btns: ['confirm']
             }
         }
     }

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.beneficial.dao.SbcwDao;
 import com.litbo.hospital.beneficial.service.SbcwService;
 import com.litbo.hospital.beneficial.vo.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +20,22 @@ public class SbcwServiceImpl implements SbcwService {
     private SbcwDao sbcwDao;
 
     @Override
-    public PageInfo listZjcb(int pageNum, int pageSize,Date kssj,Date jssj) {
+    public PageInfo listZjcb(int pageNum, int pageSize,Date kssj,Date jssj,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<ZjcbVo> list = sbcwDao.listZjcb(kssj, jssj);
+        List<ZjcbVo> list = sbcwDao.listZjcb(kssj, jssj,bmName,eqName);
         list.forEach(item->{
              if(item.getYlsbzjf()!=null){
                  item.setGdzczjf(item.getYlsbzjf().add(item.getGdzczjf()));
              }
-             item.setZj(item.getRyjf().add(item.getWsclf()).add(item.getYpf()).
-                     add(item.getGdzczjf()).add(item.getWxzctxf()).add(item.getYlfxf()).add(item.getQt()));
+            item.setZj(item.getRyjf().add(item.getWsclf()).add(item.getYpf()).
+                    add(item.getGdzczjf()).add(item.getWxzctxf()).add(item.getYlfxf()).add(item.getQt()));
+             if(StringUtils.isBlank(item.getEqGg())){
+                 item.setEqGg("");
+             }
+            if(StringUtils.isBlank(item.getEqXh())){
+                item.setEqXh("");
+            }
+             item.setEqGgxh(item.getEqGg()+"  "+item.getEqXh());
         });
         PageInfo<ZjcbVo> info = new PageInfo<>(list);
         return info;
@@ -45,11 +53,18 @@ public class SbcwServiceImpl implements SbcwService {
     }
 
     @Override
-    public PageInfo listJjcb(int pageNum, int pageSize,Date qs,Date js) {
+    public PageInfo listJjcb(int pageNum, int pageSize,Date qs,Date js,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<JjcbVo> list = sbcwDao.listJjcb(qs, js);
+        List<JjcbVo> list = sbcwDao.listJjcb(qs, js,bmName,eqName);
         list.forEach(item->{
             item.setZj(item.getFzkscb().add(item.getGlfy()).add(item.getQt()));
+            if(StringUtils.isBlank(item.getEqGg())){
+                item.setEqGg("");
+            }
+            if(StringUtils.isBlank(item.getEqXh())){
+                item.setEqXh("");
+            }
+            item.setEqGgxh(item.getEqGg()+"  "+item.getEqXh());
         });
         PageInfo<JjcbVo> info = new PageInfo<>(list);
         return info;
@@ -66,20 +81,34 @@ public class SbcwServiceImpl implements SbcwService {
     }
 
     @Override
-    public PageInfo listSr(int pageNum, int pageSize,Date qs,Date js) {
+    public PageInfo listSr(int pageNum, int pageSize,Date qs,Date js,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<SrVo> list = sbcwDao.listSr(qs, js);
+        List<SrVo> list = sbcwDao.listSr(qs, js,bmName,eqName);
         list.forEach(item->{
             item.setZj(item.getMzsr().add(item.getKjxmsr()).add(item.getZysr()).add(item.getQt()));
+            if(StringUtils.isBlank(item.getEqGg())){
+                item.setEqGg("");
+            }
+            if(StringUtils.isBlank(item.getEqXh())){
+                item.setEqXh("");
+            }
+            item.setEqGgxh(item.getEqGg()+"  "+item.getEqXh());
         });
         return new PageInfo(list);
     }
 
     @Override
-    public List<SrVo> SrBobiao(Date qs, Date js) {
-        List<SrVo> vos = sbcwDao.listSr(qs, js);
+    public List<SrVo> SrBobiao(Date qs, Date js,String bmName,String eqName) {
+        List<SrVo> vos = sbcwDao.listSr(qs, js,bmName,eqName);
         vos.forEach(item->{
             item.setZj(item.getMzsr().add(item.getKjxmsr()).add(item.getZysr()).add(item.getQt()));
+            if(StringUtils.isBlank(item.getEqGg())){
+                item.setEqGg("");
+            }
+            if(StringUtils.isBlank(item.getEqXh())){
+                item.setEqXh("");
+            }
+            item.setEqGgxh(item.getEqGg()+"  "+item.getEqXh());
         });
         return vos;
     }
@@ -96,12 +125,20 @@ public class SbcwServiceImpl implements SbcwService {
     }
 
     @Override
-    public PageInfo listXyFx(int pageNum, int pageSize,Date qs,Date js) {
+    public PageInfo listXyFx(int pageNum, int pageSize,Date qs,Date js,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<XyFxVo> list1 = sbcwDao.listXyFx(qs,js);
+        List<XyFxVo> list1 = sbcwDao.listXyFx(qs,js,bmName,eqName);
 //        List<XyFxVo> list2 = new ArrayList<XyFxVo>();
 //        Iterator it = list1.iterator();
         list1.forEach(xyFxVo->{
+
+            if(StringUtils.isBlank(xyFxVo.getEqGg())){
+                xyFxVo.setEqGg("");
+            }
+            if(StringUtils.isBlank(xyFxVo.getEqXh())){
+                xyFxVo.setEqXh("");
+            }
+            xyFxVo.setEqGgxh(xyFxVo.getEqGg()+"  "+xyFxVo.getEqXh());
             xyFxVo.setSy(xyFxVo.getSr().subtract(xyFxVo.getCb()));
             if(xyFxVo.getQjlc()!=0) {
                 xyFxVo.setZcsr(xyFxVo.getSr().divide(BigDecimal.valueOf(xyFxVo.getQjlc()), 4, RoundingMode.HALF_UP));
@@ -112,6 +149,7 @@ public class SbcwServiceImpl implements SbcwService {
                 xyFxVo.setZccb(xyFxVo.getCb());
             }
             xyFxVo.setZcsy(xyFxVo.getZcsr().subtract(xyFxVo.getZccb()));
+
         });
 //        while (it.hasNext()){
 //            XyFxVo xyFxVo = (XyFxVo)it.next();
@@ -132,19 +170,30 @@ public class SbcwServiceImpl implements SbcwService {
     }
 
     @Override
-    public List<XyFxVo> XyfxBaobiao(Date qs, Date js) {
-        List<XyFxVo> vos = sbcwDao.listXyFx(qs, js);
-        vos.forEach(xyFxVo->{
-            xyFxVo.setSy(xyFxVo.getSr().subtract(xyFxVo.getCb()));
-            if(xyFxVo.getQjlc()!=0) {
-                xyFxVo.setZcsr(xyFxVo.getSr().divide(BigDecimal.valueOf(xyFxVo.getQjlc()), 4, RoundingMode.HALF_UP));
-                xyFxVo.setZccb(xyFxVo.getCb().divide(BigDecimal.valueOf(xyFxVo.getQjlc()), 4, RoundingMode.HALF_UP));
-            }else {
-                xyFxVo.setQjlc(0);
-                xyFxVo.setZcsr(xyFxVo.getSr());
-                xyFxVo.setZccb(xyFxVo.getCb());
+    public List<XyPjVo> NewXyfxBaobiao(Date qs, Date js,String bmName,String eqSName) {
+        List<XyPjVo> vos = sbcwDao.listXyPj(qs,js,bmName,eqSName);
+        vos.forEach(item->{
+            if(item.getQjsy().intValue()>0){
+                item.setHbq(item.getEqPrice().intValue()/item.getQjsy().intValue());
             }
-            xyFxVo.setZcsy(xyFxVo.getZcsr().subtract(xyFxVo.getZccb()));
+            else {
+                item.setHbq(9999);
+            }
+            long days=(js.getTime()-qs.getTime())/86400000;
+            item.setNhsy(item.getQjsy().multiply(new BigDecimal(days)));
+            BigDecimal sylXs = item.getNhsy().divide(item.getEqPrice(), 4, RoundingMode.HALF_UP);
+            BigDecimal  b =sylXs.setScale(2, RoundingMode.HALF_UP);
+            //将收益率转化为百分数
+            NumberFormat percent = NumberFormat.getPercentInstance();
+            percent.setMaximumFractionDigits(2);
+            item.setNhsyl(percent.format(b.doubleValue()));
+            if(StringUtils.isBlank(item.getEqGg())){
+                item.setEqGg("");
+            }
+            if(StringUtils.isBlank(item.getEqXh())){
+                item.setEqXh("");
+            }
+            item.setEqGgxh(item.getEqGg()+"  "+item.getEqXh());
         });
         return vos;
     }
@@ -177,13 +226,44 @@ public class SbcwServiceImpl implements SbcwService {
     }
 
     @Override
-    public PageInfo listXyPj(int pageNum, int pageSize,Date qs,Date js) {
+    public PageInfo listXyPj(int pageNum, int pageSize,Date qs,Date js,String bmName,String eqName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<XyPjVo> list1 = sbcwDao.listXyPj(qs,js);
-        list1.forEach(xyPjVo->{
+        List<XyPjVo> list1 = sbcwDao.listXyPj(qs,js,bmName,eqName);
+        list1.forEach(item->{
+            if(item.getQjsy().intValue()>0){
+                item.setHbq(item.getEqPrice().intValue()/item.getQjsy().intValue());
+            }
+            else {
+                item.setHbq(9999);
+            }
+            long days=(js.getTime()-qs.getTime())/86400000;
+            item.setNhsy(item.getQjsy().multiply(new BigDecimal(days)));
+            BigDecimal sylXs = item.getNhsy().divide(item.getEqPrice(), 4, RoundingMode.HALF_UP);
+            BigDecimal  b =sylXs.setScale(2, RoundingMode.HALF_UP);
+            //将收益率转化为百分数
+            NumberFormat percent = NumberFormat.getPercentInstance();
+            percent.setMaximumFractionDigits(2);
+            item.setNhsyl(percent.format(b.doubleValue()));
+            if(StringUtils.isBlank(item.getEqGg())){
+                item.setEqGg("");
+            }
+            if(StringUtils.isBlank(item.getEqXh())){
+                item.setEqXh("");
+            }
+            item.setEqGgxh(item.getEqGg()+"  "+item.getEqXh());
+        });
+        /*list1.forEach(xyPjVo->{
+            if(StringUtils.isBlank(xyPjVo.getEqGg())){
+                xyPjVo.setEqGg("");
+            }
+            if(StringUtils.isBlank(xyPjVo.getEqXh())){
+                xyPjVo.setEqXh("");
+            }
+            xyPjVo.setEqGgxh(xyPjVo.getEqGg()+"  "+xyPjVo.getEqXh());
+
             if (xyPjVo.getEqPrice() != BigDecimal.valueOf(0)) {
                 //求收益率
-                BigDecimal sylXs = xyPjVo.getSy().divide(xyPjVo.getEqPrice(), 4, RoundingMode.HALF_UP);
+                BigDecimal sylXs = xyPjVo.getQjsy().divide(xyPjVo.getEqPrice(), 4, RoundingMode.HALF_UP);
                 //将收益率转化为两位小数
                 BigDecimal  b =sylXs.setScale(2, RoundingMode.HALF_UP);
                 //将收益率转化为百分数
@@ -210,51 +290,11 @@ public class SbcwServiceImpl implements SbcwService {
             //使用多少年
             int y = Integer.parseInt(year) - Integer.parseInt(year1) + 1;
             //年收益
-            int nsy = (xyPjVo.getSy().intValue())/y;
+            int nsy = (xyPjVo.getQjsy().intValue())/y;
             if(nsy!=0)
                 xyPjVo.setHbq(xyPjVo.getEqPrice().intValue() / nsy);
             else     xyPjVo.setHbq(0);
-        });
-//        List<XyPjVo> list2 = new ArrayList<XyPjVo>();
-//        Iterator it = list1.iterator();
-//        while (it.hasNext()) {
-//            XyPjVo xyPjVo = (XyPjVo) it.next();
-//            if (xyPjVo.getEqPrice() != BigDecimal.valueOf(0)) {
-//                //求收益率
-//                BigDecimal sylXs = xyPjVo.getSy().divide(xyPjVo.getEqPrice(), 4, RoundingMode.HALF_UP);
-//                //将收益率转化为两位小数
-//                BigDecimal  b =sylXs.setScale(2, RoundingMode.HALF_UP);
-//                //将收益率转化为百分数
-//                NumberFormat percent = NumberFormat.getPercentInstance();
-//                percent.setMaximumFractionDigits(2);
-//                xyPjVo.setSyl(percent.format(b.doubleValue()));
-//            } else {
-//                xyPjVo.setSyl("0");
-//            }
-//
-//            //获取当前年份
-//            Calendar date = Calendar.getInstance();
-//            String year = String.valueOf(date.get(Calendar.YEAR));
-//            //获取启用年份
-//            Date qyDate = xyPjVo.getEqQysj();
-//            Calendar calendar = Calendar.getInstance();
-//            if(qyDate==null){
-//                calendar.setTime(new Date());
-//            }
-//            else {
-//                calendar.setTime(qyDate);
-//            }
-//            String year1 = String.valueOf(calendar.get(Calendar.YEAR));
-//            //使用多少年
-//            int y = Integer.parseInt(year) - Integer.parseInt(year1) + 1;
-//            //年收益
-//            int nsy = (xyPjVo.getSy().intValue())/y;
-//            if(nsy!=0)
-//                xyPjVo.setHbq(xyPjVo.getEqPrice().intValue() / nsy);
-//            else     xyPjVo.setHbq(0);
-//
-//            list2.add(xyPjVo);
-//        }
+        });*/
         PageInfo info = new PageInfo(list1);
         return info;
     }
@@ -269,7 +309,7 @@ public class SbcwServiceImpl implements SbcwService {
             XyPjVo xyPjVo = (XyPjVo) it.next();
             if (xyPjVo.getEqPrice() != BigDecimal.valueOf(0)) {
                 //求收益率
-                BigDecimal sylXs = xyPjVo.getSy().divide(xyPjVo.getEqPrice(), 4, RoundingMode.HALF_UP);
+                BigDecimal sylXs = xyPjVo.getQjsy().divide(xyPjVo.getEqPrice(), 4, RoundingMode.HALF_UP);
                 //将收益率转化为两位小数
                 BigDecimal  b =sylXs.setScale(2, RoundingMode.HALF_UP);
                 //将收益率转化为百分数
@@ -296,7 +336,7 @@ public class SbcwServiceImpl implements SbcwService {
             //使用多少年
             int y = Integer.parseInt(year) - Integer.parseInt(year1) + 1;
             //年收益
-            int nsy = xyPjVo.getSy().intValue()/y;
+            int nsy = xyPjVo.getQjsy().intValue()/y;
 
             xyPjVo.setHbq(xyPjVo.getEqPrice().intValue()/nsy);
             list2.add(xyPjVo);

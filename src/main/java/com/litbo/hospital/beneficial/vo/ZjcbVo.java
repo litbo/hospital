@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 /*
 * 直接成本VO
 * */
-
+@Data
 public class ZjcbVo {
 
     private String bmName;
@@ -16,7 +16,8 @@ public class ZjcbVo {
     private String eqNum;
 
     private String eqXh;
-
+    private String eqGg;
+    private String eqGgxh;
     private BigDecimal ryjf;
 
     private BigDecimal wsclf;
