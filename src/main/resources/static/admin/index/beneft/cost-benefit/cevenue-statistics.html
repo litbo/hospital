@@ -54,7 +54,7 @@
             <div class="col-xs-12" style="padding:0">
                 <form class="layui-form layui-form-pane maxCont" action="">
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <input type="text" name="qssj" class="layui-input" id="date" placeholder="点击选择日期">
+                        <input type="text"  name="qssj"  class="layui-input" id="date" placeholder="点击选择日期">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <select name="select" id="select"  lay-filter="select" lay-search=""  onchange="teset(this.value)">
@@ -70,10 +70,38 @@
 
                         <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
                     </div>
+                    <input class="layui-btn "  type="button" value="生成报表" id="srbb"></input>
                 </form>
             </div>
         </div>
     </div>
+</script>
+<script>
+
+        layui.use('layer', function(){
+            var $ = layui.jquery
+                ,layer = layui.layer //弹层
+
+            //弹出登录页面
+            $(document).on('click', '#srbb', function () {
+                // $("#aa").click()
+                // $('#aa').trigger('click') ;
+                window.location.href='/srbb'+"?qssj="+$("#date").val()
+                /*$.ajax({
+                    url: "/srbb",
+                    data: {qssj: $("#qssj").val()},
+                    type: "get",
+                    // dataType: "json",
+                    success: function(data) {
+                        // data = jQuery.parseJSON(data);  //dataType指明了返回数据为json类型，故不需要再反序列化
+                    layer.alert("下载成功!")
+                    }
+                });*/
+
+            });
+
+        });
+
 </script>
 <script>
     renderMod.addTable ={
