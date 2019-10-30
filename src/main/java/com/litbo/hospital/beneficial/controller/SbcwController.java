@@ -229,7 +229,7 @@ public class SbcwController {
 
     //生成收入报表
     @RequestMapping(value = "/listSrBobiao")
-    public Result listSr(@RequestParam(required = false) String qssj) throws ParseException {
+    public Result listSrbaobiao(@RequestParam(required = false) String qssj) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
