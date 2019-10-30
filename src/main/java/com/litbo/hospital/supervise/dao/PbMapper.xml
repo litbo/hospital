@@ -2,14 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.litbo.hospital.supervise.dao.PbMapper">
 
-    <insert id="addPbPlan" parameterType="com.litbo.hospital.supervise.bean.PbJhVO">
-          INSERT INTO pb_jh(pb_jhid,bm_id,user_id,pb_date)
-          VALUES(#{pb_jhid},#bm_id},#{user_id},#{pb_date})
-    </insert>
+    <insert id="addPbPlan">
 
-    <select id="getPbPlanVos" resultType="com.litbo.hospital.supervise.vo.getPbPlanVos">
-          SELECT j.pb_jhid,j.pb_date,b.bm_name FROM pb_jh AS j
-          INNER JOIN s_bm AS b ON j.bm_id=b.bm_id
-    </select>
+    </insert>
 
 </mapper>

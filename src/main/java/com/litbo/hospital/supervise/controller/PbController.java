@@ -21,7 +21,6 @@ public class PbController {
     private PbService pbService;
     @RequestMapping("pbPlan")
     public Result pbPlan(@RequestBody PbJhVO pbJhVO){
-
         pbService.addPbPlan(pbJhVO);
         return Result.success();
     }
