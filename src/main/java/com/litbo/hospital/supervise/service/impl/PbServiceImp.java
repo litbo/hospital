@@ -26,12 +26,14 @@ public class PbServiceImp implements PbService {
     @Override
     public void addPbPlan(PbJhVO pbJhVO) {
         try{
+            String pbJhid = UUID.randomUUID().toString();
             String ids[] = pbJhVO.getUserId().split(",");
             for(int i=0; i<ids.length; i++){
-                pbJhVO.setPbJhid(UUID.randomUUID().toString());
-
+                pbJhVO.setUserId(ids[i]);
+                pbJhVO.setPbJhid(pbJhid);
+                System.out.println(pbJhVO);
+                pbMapper.addPbPlan(pbJhVO);
             }
-            pbMapper.addPbPlan(pbJhVO);
         }catch (Exception e){
             e.printStackTrace();
         }
