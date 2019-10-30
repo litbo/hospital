@@ -25,6 +25,7 @@ public class PbServiceImp implements PbService {
     @Override
     public void addPbPlan(PbJhVO pbJhVO) {
         System.out.println("hahahahhhhhhhhhhhhhhhhhhhhhhhhh");
+        System.out.println("hahahahhhhhhhhhhhhhhhhhhhhhhhhh1111111111111111111111122");
         pbMapper.addPbPlan(pbJhVO);
     }
 }
