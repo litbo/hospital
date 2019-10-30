@@ -28,12 +28,13 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class ItextTest3 {
+public class ItextTest2 {
     private static Font headfont;// 设置字体大小
     private static Font keyfont;// 设置字体大小
     private static Font textfont;// 设置字体大小
-    @Autowired
-    SbcwController controller;
+   private static List<BigDecimal> list = new ArrayList();
+@Autowired
+SbcwController controller;
     private static int maxWidth = 520;
     static {
         BaseFont bfChinese;
@@ -149,7 +150,7 @@ public class ItextTest3 {
 
 
             // 向文档中添加内容
-            Paragraph paragraph = new Paragraph("医疗设备成本效益分析报表",headfont);
+            Paragraph paragraph = new Paragraph("医疗设备收入统计表",headfont);
             paragraph.setAlignment(1);
             document.add(paragraph);
             document.add(new Paragraph("\n"));
@@ -162,21 +163,21 @@ public class ItextTest3 {
             SimpleDateFormat date = new SimpleDateFormat("yyyy-MM");
             String s = date.format(new Date());
             String[] split = s.split("-");
-            Paragraph elements = new Paragraph("填报日期 :    "+split[0]+"  年  "+split[1]+"  月  ", textfont);
+            Paragraph elements = new Paragraph("填报日期 :    "+split[0]+"  年  "+split[1]+" 月 ", textfont);
             elements.setAlignment(2);
 //            paragraph.setAlignment(1);
             document.add(paragraph);
             document.add(elements);
             document.add(new Paragraph("\n"));
 
-            PdfPTable table = createTable(11);
+            PdfPTable table = createTable(9);
             //第一行内容
             //table.addCell(createCell("客户维修派工单", headfont, Element.ALIGN_CENTER, 6, true));
             PdfPCell cell1 = createCell("设备项", textfont);
             cell1.setColspan(4);
             table.addCell(cell1);
-            PdfPCell cell2 = createCell("分析项", textfont);
-            cell2.setColspan(7);
+            PdfPCell cell2 = createCell("收入项", textfont);
+            cell2.setColspan(5);
             table.addCell(cell2);
 
             //第二行内容
@@ -192,13 +193,11 @@ public class ItextTest3 {
             table.addCell(createCell("资产编号", textfont));
             table.addCell(createCell("设备名称", textfont));
             table.addCell(createCell("规格型号", textfont));
-            table.addCell(createCell("收入", textfont));
-            table.addCell(createCell("成本", textfont));
-            table.addCell(createCell("收益", textfont));
-            table.addCell(createCell("期间例次", textfont));
-            table.addCell(createCell("诊疗收入", textfont));
-            table.addCell(createCell("诊疗成本", textfont));
-            table.addCell(createCell("诊疗收益", textfont));
+            table.addCell(createCell("门诊", textfont));
+            table.addCell(createCell("住院", textfont));
+            table.addCell(createCell("科教", textfont));
+            table.addCell(createCell("其他", textfont));
+            table.addCell(createCell("合计", textfont));
 //            table.addCell(createCell(k_jbr, textfont));
 
             JSONArray array = JSONArray.parseArray(json);
@@ -212,13 +211,13 @@ public class ItextTest3 {
                 if("null".equals(o3)|| StringUtils.isBlank(o3)){
                     o3="";
                 }
-                String o4 = String.valueOf(object.get("sr"));
-                String o6 = String.valueOf(object.get("cb"));
-                String o5 = String.valueOf(object.get("sy"));
-                String o7 = String.valueOf(object.get("qjlc"));
-                String o8 = String.valueOf(object.get("zcsr"));
-                String o9 = String.valueOf(object.get("zccb"));
-                String o10 = String.valueOf(object.get("zcsy"));
+                String o4 = String.valueOf(object.get("mzsr"));
+                String o6 = String.valueOf(object.get("zysr"));
+                String o5 = String.valueOf(object.get("kjxmsr"));
+                String o7 = String.valueOf(object.get("qt"));
+                String o8 = String.valueOf(object.get("zj"));
+              list.add(new BigDecimal(o8));
+
                 table.addCell(createCell(o,textfont));
                 table.addCell(createCell(o1,textfont));
                 table.addCell(createCell(o2,textfont));
@@ -228,10 +227,19 @@ public class ItextTest3 {
                 table.addCell(createCell(o6,textfont));
                 table.addCell(createCell(o7,textfont));
                 table.addCell(createCell(o8,textfont));
-                table.addCell(createCell(o9,textfont));
-                table.addCell(createCell(o10,textfont));
 
             }
+            PdfPCell cell3 = createCell("共合计: ", textfont);
+cell3.setVerticalAlignment(Element.ALIGN_RIGHT);
+
+            cell3.setColspan(8);
+            table.addCell(cell3);
+            int i = list.size();
+            BigDecimal total=new BigDecimal("0.00");
+            for (int k = 0; k < i; k++) {
+                total= total.add(list.get(k));
+            }
+            table.addCell(createCell(String.valueOf(total),textfont));
 
             document.add(table);
 
@@ -241,6 +249,7 @@ public class ItextTest3 {
 
             // 关闭文档
             document.close();
+            list=new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
@@ -249,15 +258,21 @@ public class ItextTest3 {
 
     }
 
-    @RequestMapping("/xyfxbb")
-    public void  sss(HttpServletResponse response,@RequestParam(required = false,defaultValue = "") String qssj) throws IOException, DocumentException, ParseException {
+    public static void main(String[] args) {
+       /* String json = "{\"paigong\":{\"RECORDS_NUM\":\"201801070001\",\"BXTIME\":\"2018-01-07 10:25:32\",\"BXADRESS\":\"国务院A栋 1层 A102\",\"LOCATION\":\"\",\"YYSJ\":\"\",\"BXR\":\"\",\"LXR\":\"vicky\",\"LXDH\":\"18888888888\",\"BXLB\":\"空调\",\"WXXM\":\"\",\"JBR\":\"张三\",\"WBDW\":\"\",\"BXCONTEXT\":\"空调维修\",\"PGTIME\":\"2018-01-07 11:06:41\",\"PGR\":\"李四\",\"WXR\":\"李军\",\"DCTIME\":\"2018-01-07 09:30:00\",\"WGTIME\":\"2018-01-07 10:30:00\",\"FWLX\":\"收费\",\"WXJG\":\"完成\",\"WXPJ\":\"满意\",\"WXCONTENT\":\"\",\"CLFY\":\"22\",\"RGFY\":\"28\",\"ZFY\":\"50\",\"KF_NAME\":\"一园项目物料库房\",\"wxclmx\":[{\"CK_NAME\":\"一园项目物料库房\",\"WL_NAME\":\"A4复印纸\",\"SL\":\"2\",\"DJ\":\"11\",\"JE\":\"22\",\"JLDW\":\"包\"}]}}";
 
-        Result result = controller.listXyfxBobiao(qssj);
+        ItextTest printTest = new ItextTest();
+        printTest.CreatePGDpdf(json);*/
+    }
+    @RequestMapping("/srbb")
+    public void ss(HttpServletResponse response,@RequestParam(required = false,defaultValue = "") String qssj) throws IOException, DocumentException, ParseException {
+
+        Result result = controller.listSrbaobiao(qssj);
         Object o = result.getData();
         String string = JSON.toJSONString(o);
         JSONArray array = JSONArray.parseArray(string);
         String s = array.toString();
-        ItextTest3 printTest = new ItextTest3();
+        ItextTest2 printTest = new ItextTest2();
         printTest.CreatePGDpdf(s,response);
     }
 
