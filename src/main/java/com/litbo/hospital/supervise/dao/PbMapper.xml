@@ -4,7 +4,7 @@
 
     <insert id="addPbPlan" parameterType="com.litbo.hospital.supervise.bean.PbJhVO">
             insert into pb_jh (pb_jhid,bm_id,user_id,pb_date) values(
-        pb_jhid=#{pbJhid},bm_id=#{bmId},user_id=#{userId},pb_date=#{pbDate}
+        #{pbJhid},#{bmId},#{userId},#{pbDate}
         )
     </insert>
 

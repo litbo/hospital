@@ -10,17 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("pb")
+@ResponseBody
+@RequestMapping("/pb")
 public class PbController {
 
     @Autowired
     private PbService pbService;
-    @RequestMapping("pbPlan")
-    public Result pbPlan(@RequestBody PbJhVO pbJhVO){
+    @RequestMapping("/pbPlan")
+    public Result pbPlan( PbJhVO pbJhVO){
         pbService.addPbPlan(pbJhVO);
         return Result.success();
     }
