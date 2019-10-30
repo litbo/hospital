@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.litbo.hospital.supervise.dao.PbMapper">
 
-    <insert id="addPbPlan">
-
+    <insert id="addPbPlan" parameterType="com.litbo.hospital.supervise.bean.PbJhVO">
+            insert into pb_jh (pb_jhid,bm_id,user_id,pb_date) values(
+        pb_jhid=#{pbJhid},bm_id=#{bmId},user_id=#{userId},pb_date=#{pbDate}
+        )
     </insert>
 
 </mapper>

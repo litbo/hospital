@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PbServiceImp implements PbService {
@@ -25,12 +26,14 @@ public class PbServiceImp implements PbService {
     @Override
     public void addPbPlan(PbJhVO pbJhVO) {
         try{
+            String ids[] = pbJhVO.getUserId().split(",");
+            for(int i=0; i<ids.length; i++){
+                pbJhVO.setPbJhid(UUID.randomUUID().toString());
 
+            }
+            pbMapper.addPbPlan(pbJhVO);
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println("hahahahhhhhhhhhhhhhhhhhhhhhhhhh");
-        System.out.println("hahahahhhhhhhhhhhhhhhhhhhhhhhhh1111111111111111111111122");
-        pbMapper.addPbPlan(pbJhVO);
     }
 }
