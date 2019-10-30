@@ -268,7 +268,9 @@ public class EmpServiceImpl implements EmpService {
 
 
                 String userId = row.getCell(0).getStringCellValue();   emp.setUserId(userId);
-                if(userId.contains("*"))  return 1;
+
+                    if(userId.contains("*"))  return 1;
+
                 String userXm = row.getCell(1).getStringCellValue();    emp.setUserXm(userXm);
                 String sfzh = row.getCell(2).getStringCellValue();      emp.setSfzh(sfzh);
                 String jtzz = row.getCell(3).getStringCellValue();      emp.setJtzz(jtzz);
@@ -277,8 +279,9 @@ public class EmpServiceImpl implements EmpService {
                 String byyx = row.getCell(6).getStringCellValue();     emp.setByyx(byyx);
                 String obmid = row.getCell(7).getStringCellValue();
                 SBm bm = bmDao.getBmByOid(obmid);
-                if(bm!=null)
-                    emp.setBmId(obmid);
+                if(bm!=null) {
+                    emp.setBmId(bm.getBmId());
+                }
                 emp.setStatus("0");
 
                 if(empDao.saveEmp(emp)<=0){

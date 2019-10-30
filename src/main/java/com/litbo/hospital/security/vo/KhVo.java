@@ -8,4 +8,6 @@ public class KhVo {
     private String userName;
 
     private String userId;
+
+    private String bmName;
 }

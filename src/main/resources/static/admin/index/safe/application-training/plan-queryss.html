@@ -37,6 +37,7 @@
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="YdRy">应到人员</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="SdRy">实到人员</a>
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="WdRy">未到人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="HgRy">合格人员</a>
 </script>
 
 
@@ -51,15 +52,15 @@
                 toolbar: "#toolBar",
                 cols: [[ //应用培训表头
                    // {type: "checkbox"}
-                      {field: 'eqName', title: '设备名称', minWidth: 150}
-                    , {field: 'pxnrlb', title: '培训内容类别', minWidth: 150}
-                    , {field: 'pxlx', title: '培训性质', minWidth: 150}
-                    , {field: 'pxfs', title: '培训方式', minWidth: 150}
-                    , {field: 'pxl', title: '培训率', minWidth: 150}
-                    , {field: 'khhgl', title: '考核合格率', minWidth: 150}
-                    , {fixed: 'right', width: 270, align: 'center', toolbar: "#bar"}
+                      {field: 'eqName', title: '设备名称', minWidth: 100}
+                    , {field: 'pxnrlb', title: '培训内容类别', minWidth: 100}
+                    , {field: 'pxlx', title: '培训性质', minWidth: 100}
+                    , {field: 'pxfs', title: '培训方式', minWidth: 100}
+                    , {field: 'pxl', title: '培训率', minWidth: 100}
+                    , {field: 'khhgl', title: '考核合格率', minWidth: 100}
+                    , {fixed: 'right', width: 400, align: 'center', toolbar: "#bar"}
                 ]],
-                url: "/px/findAllYyjh"
+                url: "/px/findInfo"
                 , request: {
                     pageName: 'pageNum',
                     limitName: 'pageSize'
@@ -100,6 +101,15 @@
                                 area: ['90%', '90%'],
                                 type: 2,
                                 content: "./child/WdRy.html",
+                                dataUrl: ["id"]
+                            },
+                            {
+                                filter:"table1",
+                                event: "HgRy",
+                                title: "合格人员",
+                                area: ['90%', '90%'],
+                                type: 2,
+                                content: "./child/HgRy.html",
                                 dataUrl: ["id"]
                             }
                         ]

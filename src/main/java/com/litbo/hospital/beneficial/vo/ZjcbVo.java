@@ -1,9 +1,12 @@
 package com.litbo.hospital.beneficial.vo;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 /*
 * 直接成本VO
 * */
+
 public class ZjcbVo {
 
     private String bmName;
@@ -21,6 +24,7 @@ public class ZjcbVo {
     private BigDecimal ypf;
 
     private BigDecimal gdzczjf;
+    private BigDecimal ylsbzjf;
 
     private BigDecimal wxzctxf;
 
@@ -127,4 +131,11 @@ public class ZjcbVo {
         this.zj = zj;
     }
 
+    public BigDecimal getYlsbzjf() {
+        return ylsbzjf;
+    }
+
+    public void setYlsbzjf(BigDecimal ylsbzjf) {
+        this.ylsbzjf = ylsbzjf;
+    }
 }
