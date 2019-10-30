@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class SgPlanList {
 
 
@@ -176,4 +178,6 @@ public class SgPlanList {
     public void setFileStatus(String fileStatus) {
         this.fileStatus = fileStatus;
     }
+
+
 }

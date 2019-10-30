@@ -210,12 +210,12 @@ public class SgPlanServiceImpl implements SgPlanService {
                         sgPlanLists.add(sgList1);
 //                        System.out.println("部位空"+sgList1);
                     }
+
+
                 }
 
 //                System.out.println("总共"+sgPlanLists);
             }
-
-
 
             return  new PageInfo<>(sgPlanLists);
         }

@@ -1,6 +1,5 @@
 package com.litbo.hospital.lifemanage.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.DelVO;
 import com.litbo.hospital.lifemanage.bean.ListNum;
@@ -58,8 +57,10 @@ public class SgPlanController {
             @RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
             @RequestParam(value = "pageSize",required = false,defaultValue="15") int pageSize)
     {
-//        PageInfo pageInfo = sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize);
-        return Result.success(sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize));
+        PageInfo pageInfo = sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize);
+
+        return Result.success(pageInfo);
+
     }
 
     /**

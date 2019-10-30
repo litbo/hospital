@@ -2,7 +2,6 @@ package com.litbo.hospital.lifemanage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
-import com.litbo.hospital.lifemanage.bean.SgPlanList;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,9 +30,9 @@ public interface SgPlanService {
      * @param pageSize 每页记录数
      * @return PageInfo<SgPlan>
      */
-    PageInfo<SgPlanList> selectPlan(@Param("planName") String planName, @Param("planDate")
+    PageInfo selectPlan(@Param("planName") String planName, @Param("planDate")
             String planDate, @Param("userName") String userName, @Param("pageNum") Integer pageNum,
-                                    @Param("pageSize") Integer pageSize);
+                                @Param("pageSize") Integer pageSize);
 
     /**
      * 查询所有的计划名字
