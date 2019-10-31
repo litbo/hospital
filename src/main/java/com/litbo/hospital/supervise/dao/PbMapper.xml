@@ -9,7 +9,21 @@
     </insert>
 
     <select id="getPbPlanVos" resultType="com.litbo.hospital.supervise.vo.getPbPlanVos">
-        SELECT j.pb_jhid,j.pb_date,b.bm_name FROM pb_jh AS j
+        SELECT DISTINCT j.pb_jhid,j.pb_date,j.pbJs_date,b.bm_name FROM pb_jh AS j
         INNER JOIN s_bm AS b ON j.bm_id=b.bm_id
     </select>
+
+    <select id="getPbPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyVos">
+        SELECT e.user_id,e.user_xm AS userName FROM pb_jh AS p
+        INNER JOIN s_emp AS e ON p.user_id=e.user_id
+        WHERE pb_jhid=#{id}
+    </select>
+
+    <select id="ghPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyVos">
+        SELECT user_id,user_xm AS userName FROM s_emp
+        WHERE user_id NOT IN(
+            SELECT user_id FROM pb_jh WHERE pb_jhid=#{sid}
+        )
+    </select>
+
 </mapper>

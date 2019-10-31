@@ -27,8 +27,12 @@ public class PxDelAndSelController {
                             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
         @RequestParam("rName") String rName,HttpSession session){
         String id=session.getAttribute("jh_id").toString();
-        PageInfo pageInfo = pxDelAndSelService.selByName(pageNum,pageSize,rName,id);
-        return Result.success(pageInfo);
+        if(id!=null){
+            PageInfo pageInfo = pxDelAndSelService.selByName(pageNum,pageSize,rName,id);
+            return Result.success(pageInfo);
+        }else{
+            return Result.success();
+        }
     }
 
     @RequestMapping("/delYyjh")

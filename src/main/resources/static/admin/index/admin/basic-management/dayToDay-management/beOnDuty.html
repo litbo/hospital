@@ -36,7 +36,7 @@
     <div class=" hidden-xs" id="hideXs">
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
-                <input class="layui-input" name="name" placeholder="排班日期" autocomplete="off">
+                <input class="layui-input" name="name" placeholder="值班日期" autocomplete="off">
             </div>
             <div class="layui-input-inline xs-100 mar10-0 pad0-10">
                 <button class="layui-btn"  data-type="reload"><i
@@ -67,7 +67,9 @@
                 cols: [[
                     {type: "checkbox"}
                     , {field: 'bmName', title: '所在科室', minWidth: 150}
-                    , {field: 'pbDate', title: '排班日期', minWidth: 150}
+                    , {field: 'pbJhid', title: '排班id', minWidth: 150}
+                    , {field: 'pbDate', title: '值班开始日期', minWidth: 150}
+                    , {field: 'pbJsDate', title: '值班结束日期', minWidth: 150}
                     , {fixed: 'right', width: 180, align: 'center', toolbar: "#bar"}
                 ]],
                 where:{id:aa},

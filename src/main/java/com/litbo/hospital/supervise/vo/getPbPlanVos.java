@@ -14,4 +14,6 @@ public class getPbPlanVos {
 
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date pbDate;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date pbJsDate;
 }

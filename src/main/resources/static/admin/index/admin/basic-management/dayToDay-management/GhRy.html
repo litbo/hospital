@@ -18,15 +18,15 @@
 <body  style="background-color: #f2f2f2;">
 
 <!--<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">-->
-    <!--<div class="layui-tab-content" style="height: 100px;">-->
-        <!--<div class="layui-tab-item layui-show">-->
-            <!--<div class="layui-row">-->
-                <!--<div class="col-xs-12 padRight">-->
-                    <!--<table id="table" lay-filter="table1"></table>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+<!--<div class="layui-tab-content" style="height: 100px;">-->
+<!--<div class="layui-tab-item layui-show">-->
+<!--<div class="layui-row">-->
+<!--<div class="col-xs-12 padRight">-->
+<!--<table id="table" lay-filter="table1"></table>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 <div class="layui-row">
 
@@ -42,7 +42,7 @@
     <form action="" style="float: right;margin-top: -5px;">
         <!--模板名称-->
         <div class="layui-input-inline" style="width: 160px;">
-            <input type="text" name="rName" autocomplete="off" placeholder="值班人员" class="layui-input">
+            <input type="text" name="rName" autocomplete="off" placeholder="人员姓名" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn"  data-type="reload"><i
@@ -53,12 +53,13 @@
 </script>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">确定</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="ghry">更换</a>
+    <form action="/pb/bc">
+        <button class="layui-btn"  data-type="reload">确定</button>
+    </form>
 </script>
 
 <script>
-    var aa=$.getUrlParam("pbJhid");
+   // var aa=$.getUrlParam("pbJhid");
 
     renderMod = {
         addTable: {
@@ -67,13 +68,13 @@
                 // elem: "#table",
                 cols: [[ //表头
                     //{type: "checkbox"}
-                   // , {field: 'bmName', title: '科室', sort: true}
+                    // , {field: 'bmName', title: '科室', sort: true}
                     {field: 'userId', title: '人员id'}
                     , {field: 'userName', title: '人员姓名'}
-                    , {fixed: 'right', width: 280, align: 'center', toolbar: "#bar"}
+                    , {fixed: 'right', width: 180, align: 'center', toolbar: "#bar"}
                 ]]
-                , url: "/pb/getPbPeople"
-                ,where:{pbJhid:aa}
+                , url: "/pb/ghPeople"
+               // ,where:{pbJhid:aa}
                 , method: "POST"
                 , page: true
                 , request: {
@@ -100,33 +101,15 @@
                                 content: '2.html',
                                 area: ['90%', '90%'],
                                 dataUrl: ["machineNumber"]
-                            },
-                            {
-                                filter:"table1",
-                                event: "jhxq",
-                                title: "确定",
-                                area: ['90%', '90%'],
-                                type: 2,
-                                //content: "./child/personnel-xqinput.html",
-                                dataUrl: ["id"]
-                            },
-                            {
-                                filter:"table1",
-                                event: "ghry",
-                                title: "更换",
-                                area: ['90%', '90%'],
-                                type: 2,
-                                content: "./GhRy.html",
-                                dataUrl: ["id"]
                             }
-                        ]
+                         ]
                     })
                 }
             }
             , reSet: [
                 {
-                    url: "/px/selByName",
-                    type: "reload",
+                   // url: "/px/selByName",
+                    type: "rload",
                     tid: "idTest",
                     data: ["rName"],
                     method: "POST"
