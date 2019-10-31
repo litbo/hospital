@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 public class PbServiceImp implements PbService {
 
-    @Autowired
+    @Autowired(required = false)
     private PbMapper pbMapper;
 
     @Override
