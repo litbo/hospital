@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.litbo.hospital.supervise.dao.PbMapper">
 
+    <resultMap id="Map1" type="com.litbo.hospital.supervise.vo.RyVos">
+        <id column="user_id" property="userId"></id>
+        <result property="userName" column="user_xm"></result>
+    </resultMap>
     <insert id="addPbPlan" parameterType="com.litbo.hospital.supervise.bean.PbJhVO">
             insert into pb_jh (pb_jhid,bm_id,user_id,pb_date,pbJs_date) values(
         #{pbJhid},#{bmId},#{userId},#{pbDate},#{pbJsDate}
@@ -26,4 +30,8 @@
         )
     </select>
 
+    <select id="getBmpeople" parameterType="String" resultMap="Map1">
+        select user_id, user_xm from s_emp
+        where bm_id=#{bmId}
+    </select>
 </mapper>
