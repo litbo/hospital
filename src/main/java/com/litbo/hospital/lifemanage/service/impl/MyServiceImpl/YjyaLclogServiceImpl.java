@@ -73,12 +73,10 @@ public class YjyaLclogServiceImpl implements YjyaLclogService {
                         service.updateYjyaZd(zdVO);
                     }
             }
-
             }
 
         }
-
-        vos.removeIf(item -> item.getYjyaShr() == null || item.getYjyaShrq() == null);
+//        vos.removeIf(item -> item.getYjyaShr() == null || item.getYjyaShrq() == null);
         return new PageInfo(vos);
     }
 

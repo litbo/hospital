@@ -325,7 +325,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public PageInfo getEstablishJd(int pageNum, int pageSize,String tdName,String bmName) {
         PageHelper.startPage(pageNum,pageSize);
-        List<GroupKSJDVO> groupKSJDVOS = groupDao.getEstablishJd();
+        List<GroupKSJDVO> groupKSJDVOS = groupDao.getEstablishJd(bmName,tdName);
         for(GroupKSJDVO groupKSJDVO:groupKSJDVOS){
             String status = groupKSJDVO.getStatus();
 
@@ -337,12 +337,7 @@ public class GroupServiceImpl implements GroupService {
                 groupKSJDVO.setStatus("已退回");
             }
         }
-        if(StringUtils.isNotBlank(bmName)){
-            groupKSJDVOS.removeIf(item->!bmName.equals(item.getBmName()));
-        }
-        if(StringUtils.isNotBlank(tdName)){
-            groupKSJDVOS.removeIf(item->!item.getGroupName().contains(tdName));
-        }
+
 
         return new PageInfo(groupKSJDVOS);
     }

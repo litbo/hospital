@@ -45,8 +45,9 @@ public interface YjyaLclogMapper {
             "  from yjya_lclog l " +
             "  inner join yjya_zd y on l.yjya_bh=y.yjya_bh\n" +
             "<where>" +
+            " l.yiya_shrq is not null and l.yjya_shr is not null\n" +
             " <if test=\"zt != null\">\n" +
-            " y.yjya_zt = #{zt}" +
+            " and  y.yjya_zt = #{zt}" +
             "</if>" +
             " <if test=\"qssj != null\">\n" +
             " and l.yjya_shrq &gt;= #{qssj,jdbcType=DATE} " +

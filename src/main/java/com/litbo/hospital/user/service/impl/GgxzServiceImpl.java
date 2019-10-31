@@ -65,10 +65,8 @@ public class GgxzServiceImpl implements GgxzService {
     @Override
     public PageInfo listWaits(int pageNum, int pageSize,String wjmc) {
         PageHelper.startPage(pageNum,pageSize);
-        List<SysGgxz> list = ggxzDao.listWaits();
-        if(StringUtils.isNotBlank(wjmc)){
-            list.removeIf(sysGgxz -> !sysGgxz.getWjmc().contains(wjmc));
-        }
+        List<SysGgxz> list = ggxzDao.listWaits(wjmc);
+
         return new PageInfo(list);
     }
 

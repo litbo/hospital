@@ -565,12 +565,12 @@ public class EqTjServiceImpl implements EqTjService {
     public PageInfo selectWsdYsd(Integer pageNum,Integer pageSize,String lx) {
 
         PageHelper.startPage(pageNum,pageSize);
-        List<EqTjDpdVO> vos = mapper.selectWsdDpd();
+        List<EqTjDpdVO> vos = mapper.selectWsdDpd(lx);
         for (int i = 0; i < vos.size(); i++) {
             vos.get(i).setZbSdks(mapper.selectKsNameByID(vos.get(i).getZbSdks()));
         }
 
-        vos.removeIf(item->!lx.equals(item.getTjDclx()));
+
 
         return new PageInfo(vos);
     }
@@ -579,11 +579,10 @@ public class EqTjServiceImpl implements EqTjService {
     @Override
     public PageInfo selectYsdYsd(Integer pageNum,Integer pageSize,String lx) {
 
-        List<EqTjDpdVO> vos = mapper.selectYsdDpd();
+        List<EqTjDpdVO> vos = mapper.selectYsdDpd(lx);
         for (int i = 0; i < vos.size(); i++) {
             vos.get(i).setZbSdks(mapper.selectKsNameByID(vos.get(i).getZbSdks()));
         }
-        vos.removeIf(item->!lx.equals(item.getTjDclx()));
         return new PageInfo(vos);
     }
 
