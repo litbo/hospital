@@ -31,6 +31,8 @@ import java.util.List;
 public class operationRecordController {
     @Autowired
     private InspectdetailService inspectdetailService;
+
+    private static int reduce=0;
     @Autowired
     private InspectdetailbackService inspectdetailbackService;
 
@@ -373,6 +375,7 @@ public class operationRecordController {
             @RequestParam( name = "qssj",defaultValue = "") String qssj
 
                                    ) {
+
         SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
         SimpleDateFormat ym = new SimpleDateFormat("yyyy-MM");
         if(time.equals("年")){
@@ -412,7 +415,7 @@ public class operationRecordController {
                 }
             }
         }
-
+         pageSize=100000000;
         PageInfo info = inspectdetailService.showOnelYlxYxjl2(pageNum, pageSize, lwybh,time);
         List<WorkTimeVO> list = info.getList();
         Date qs2=qs;
@@ -427,6 +430,7 @@ public class operationRecordController {
                } catch (Exception e) {
                    e.printStackTrace();
                }
+               reduce++;
                return true;
 
            });
@@ -441,10 +445,16 @@ public class operationRecordController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                reduce++;
                 return true;
 
             });
         }
+
+       if(reduce!=0){
+           info.setTotal(info.getTotal()-reduce);
+       }
+       reduce=0;
         return Result.success(info);
     }
 

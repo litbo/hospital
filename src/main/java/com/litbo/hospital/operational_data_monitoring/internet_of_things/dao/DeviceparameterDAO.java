@@ -218,5 +218,7 @@ public interface DeviceparameterDAO {
             "      HardCloseFlag = #{hardCloseFlag,jdbcType=VARCHAR}\n" +
             "    where MachineNumber = #{machineNumber,jdbcType=VARCHAR}")
     int  updateOneLwxByLwyBh(Deviceparameter deviceparameter);
+    @Select("select top 1 eq_zcbh from eq_info where eq_id=#{eqid}")
+    String selectZcbByEqId(int eqid);
 
 }

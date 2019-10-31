@@ -11,6 +11,7 @@ import java.util.Date;
  */
 @Data
 public class Deviceparameter {
+    private int eqId;
     private String deviceCode;
 
     private String inspectType;

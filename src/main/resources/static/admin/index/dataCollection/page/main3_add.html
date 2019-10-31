@@ -29,10 +29,10 @@
 <form class="layui-form layui-form-pane" action="" lay-filter="forms">
     <div class="col-xs-12 col-sm-6 ">
         <div class="layui-form-item col-sm-12">
-            <label class="layui-form-label">设备编号</label>
+            <label class="layui-form-label">资产编号</label>
             <div class="layui-input-block">
                 <input type="hidden" name="deviceCode" id="deviceCode" class="layui-input col-sm-10" autocomplete="off">
-                <input type="text" name="eqId" id="eqId" class="layui-input col-sm-10" autocomplete="off"  readonly>
+                <input type="hidden" name="eqId"  id="eqId" class="layui-input col-sm-10" autocomplete="off"  readonly>
                 <button class="layui-btn col-sm-2" id="selectEmp" style="margin: 0">选择</button>
             </div>
         </div>
@@ -253,7 +253,7 @@
 
 <script>
     $("#machineNumber").val($.getUrlParam("machineNumber"));
-    $("#eqId").val($("input[ name='deviceCode' ]").val());
+    // $("#eqId").val($("input[ name='deviceCode' ]").val());
     var machineNumber = $.getUrlParam("machineNumber")
     var formData = {};
     renderMod = {
@@ -285,11 +285,11 @@
                     url:"/deviceparameter/updateOneLwxByLwyBh",
                     type:"POST",
                     contentType: "application/json",
-                    data:["machineNumber","deviceCode","inspectType","startElectic","inDistance","imageStart","weightStart","pECounting","heartTime","repairRemind","waitPower","voltage","maxCurrent","minCurrent","keepTime","endElectic","outDistance","imageEnd","weightEnd","errorRate","repeatInterval","maintainRemind","workPower","maxElectic"],
+                    data:["machineNumber","eqId","deviceCode","inspectType","startElectic","inDistance","imageStart","weightStart","pECounting","heartTime","repairRemind","waitPower","voltage","maxCurrent","minCurrent","keepTime","endElectic","outDistance","imageEnd","weightEnd","errorRate","repeatInterval","maintainRemind","workPower","maxElectic"],
                     reload:"parent"
                 },
                 before:function(){
-                    $("#deviceCode").val($("input[ name='eqId' ]").val());
+                      $("#deviceCode").val($("input[ name='eqId' ]").val());
                     return true;
                 },
             }

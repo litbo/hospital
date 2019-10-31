@@ -81,7 +81,7 @@ public class SelectController {
                     "{field: 'eqXh', title: '型号'},"+
                     "{field: 'eqGg', title: '规格'},"+
                     "{field: 'bmName', title: '所属科室'},"+
-                    "{field: 'bmSyzt', title: '使用状态'},"+
+                    "{field: 'eqSyzt', title: '使用状态'},"+
                     "]";
 
             JSONArray myJsonArray = JSONObject.parseArray(jsonMessage);

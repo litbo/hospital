@@ -235,6 +235,8 @@ public class DeviceparameterController {
 
     @RequestMapping("/updateOneLwxByLwyBh")
     public Result updateOneLwxByLwyBh(@RequestBody Deviceparameter deviceparameter){
+        String s = dao.selectZcbByEqId(deviceparameter.getEqId());
+        deviceparameter.setDeviceCode(s);
         int i = service.updateOneLwxByLwyBh(deviceparameter);
         if(i==1){
             return Result.success();
