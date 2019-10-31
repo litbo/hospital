@@ -31,7 +31,8 @@
         <div class="layui-form-item col-sm-12">
             <label class="layui-form-label">设备编号</label>
             <div class="layui-input-block">
-                <input type="text" name="deviceCode" class="layui-input col-sm-10" autocomplete="off"  >
+                <input type="hidden" name="deviceCode" id="deviceCode" class="layui-input col-sm-10" autocomplete="off">
+                <input type="text" name="eqName" class="layui-input col-sm-10" autocomplete="off"  readonly>
                 <button class="layui-btn col-sm-2" id="selectEmp" style="margin: 0">选择</button>
             </div>
         </div>
@@ -144,7 +145,7 @@
     <div class="col-xs-12 col-sm-6 ">
 
         <div class="layui-form-item col-sm-12 ">
-            <input type="text" name="machineNumber" id="machineNumber" style="border: 0;background-color: #ffffff" disabled class="layui-input-block">
+            <input type="text" name="machineNumber" id="machineNumber" style="color: #FFFFFF;border: 0;background-color: #ffffff" disabled class="layui-input-block">
         </div>
         <div class="layui-form-item col-sm-12">
             <label class="layui-form-label">保持时间</label>
@@ -252,21 +253,24 @@
 
 <script>
     $("#machineNumber").val($.getUrlParam("machineNumber"));
-    var machineNumber = $.getUrlParam("machineNumber")
 
+    var machineNumber = $.getUrlParam("machineNumber")
+    var formData = {};
     renderMod = {
-      /*  btn:{
-        layer.open({
-            type: 2,
-            title: '选择',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['1000px', '90%'],
-            content: 'child/choose2.html'
-            // content: 'child/modern-list-child.html'
-        });
-    });
-        }*/
+      bind: {
+            selectItem: [
+                {
+                    elem: "#selectEmp",
+                    cb: "/benefical/select/listSelectCols",
+                    db: "/benefical/select/listSelect",
+                    name: "dtdt",
+                    key: "eq",
+                    se:"/eq/eqSe",
+                    data:formData,
+                },
+
+            ]
+        },
         form:{
             val:{
                 filter:"forms",
@@ -274,7 +278,6 @@
                     url:"/deviceparameter/showOneLwxByLwyBh",
                     type:"POST",
                     data:{lwybh:machineNumber},
-                    // dat:["deviceCode","inspectType","startElectic","inDistance","imageStart","weightStart","pECounting","heartTime","repairRemind","waitPower","voltage","maxCurrent","minCurrent","keepTime","endElectic","outDistance","imageEnd","weightEnd","errorRate","repeatInterval","maintainRemind","workPower","maxElectic"]
                 },
             },
             submit:{
@@ -284,18 +287,11 @@
                     contentType: "application/json",
                     data:["machineNumber","deviceCode","inspectType","startElectic","inDistance","imageStart","weightStart","pECounting","heartTime","repairRemind","waitPower","voltage","maxCurrent","minCurrent","keepTime","endElectic","outDistance","imageEnd","weightEnd","errorRate","repeatInterval","maintainRemind","workPower","maxElectic"],
                     reload:"parent"
-                    // done:function(res){
-                    //     if(res.code === 0){
-                    //         layer.alert("提交成功",function () {
-                    //             var index = parent.layer.getFrameIndex(window.name);
-                    //             parent.layer.close(index); //再执行关闭
-                    //             parent.location.reload();
-                    //         })
-                    //     }else {
-                    //         layer.alert("编号重复")
-                    //     }
-                    // }
-                }
+                },
+                before:function(){
+                    $("#deviceCode").val($("input[ name='eqName' ]").val());
+                    return true;
+                },
             }
         }
     };
