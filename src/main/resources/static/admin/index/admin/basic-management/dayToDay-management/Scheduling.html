@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>排班</title>
     <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
-
     <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
     <!--[if IE 8]>
     <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
@@ -28,6 +31,10 @@
         .text_box{
             padding: 15px !important;
         }
+        .layui-table, .layui-table-view {
+            margin: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -37,20 +44,41 @@
         <div class="layui-col-md6">
             <!-- <blockquote class="layui-elem-quote">基于layui的日历记事本</blockquote>-->
             <div class="layui-inline" id="test-n2" ></div>
+
         </div>
-        <div class="layui-col-md6">
-            <div class="layui-inline"  style="width: 400px;height: 100%;background:red;"></div>
+        <div class="layui-col-md6" id="but">
+            <div class="layui-inline"  style="width:100%;min-height: 545px ;">
+                <table  id="table" lay-filter="table1" ></table>
+            </div>
         </div>
     </div>
     </div>
 </div>
+<script type="text/html" id="toolBar">
+    <form class="layui-form" >
+        <div class="layui-inline" >
+            <select name="eqBmid" lay-filter="bmList">
+                <option value="">请选择科室</option>
+            </select>
+        </div>
+        <div class="layui-input-inline" lay-event="increase" >
+            <button type="button" class="layui-inline  layui-btn "  data-type="search" > <i class="layui-icon layui-icon-add-1"></i>添加人员</button>
+        </div>
+
+    </form>
+    <hr class="devideHr">
+    <div class="addBtn">
+        <button class="layui-btn layui-btn-sm" lay-event="delete" style="background: #CC0033">  <i class="layui-icon layui-icon-delete"></i>删除</button>
+    </div>
+</script>
 <script>
 
 
-    layui.use(['layer', 'form','jquery','laydate'], function() {
+    layui.use(['layer', 'form','table','jquery','laydate'], function() {
         var layer = layui.layer,
             $ = layui.jquery,
             laydate = layui.laydate,
+            table = layui.table,
             form = layui.form;
 
         //定义json
@@ -87,6 +115,142 @@
             });
         }
 
+        renderMod = {
+            form:{
+                val:{
+                    filter:"form",
+                    select:[
+                        {
+                            filter: "bmList",
+                            ids: "bmId",
+                            text: "bmName",
+                            url: "/supervise/bmgl/listDelXks"
+                        }
+                    ]
+                }
+             /*   date:[
+                    {
+                        elem:"#date1",
+                        value:false,
+                        type: "date",
+                        format: "yyyy-MM-dd",
+                        range: true
+                    },
+                    {
+                        elem:"#date3",
+                        value:today,
+                        type: "date",
+                        format: "yyyy-MM-dd",
+                    }
+                ],*/
+           /*     submit:{
+                    before:function(){
+                        var val=$("#date1").val()
+                        console.log(val);
+                        var arr = val.split(' ~ ');
+                        $("#kssj").val(arr[0]);
+                        $("#jssj").val(arr[1]);
+                        return true
+                    },
+                    form:{//或者写作up
+                        url:"/gg/addGg",
+                        type:"POST",
+                        contentType:"application/json",
+                        data:["ngr","ggbt","ngsj","ggnr","gglxId","bmId","kssj","jssj"],
+
+                        reload:'parent',
+                    },
+                }*/
+            },
+            addTable: {
+                table: {
+                    elem: '#table'
+                    , url: ''//接口
+                    , method: "GET"
+                    , toolbar: '#toolBar'
+                    , sort: true
+                    , height: 'full-110'
+                    , cols: [[
+                        {type: 'checkbox', fixed: 'left', field: 'table1'}
+                        , {field: 'inspPlStandardName', title: '编号', minWidth: 150}
+                        , {field: 'inspPlStandardDescription', title: '科室', minWidth: 200}
+                        , {field: 'inspPlStandardDescription', title: '名字', minWidth: 200}
+
+                    ]]
+                    , page: true//开启分页
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
+                    , id: 'table'
+                    , text: {
+                        none: "尚未添加人员，请点击上方添加按钮添加人员！"
+                     }
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "count": res.data.total,//页面的所有数据数
+                            "data": res.data.list //解析数据列表
+                        };
+                    }
+                    , done: function (res, curr, count) {
+
+                    }
+                }
+            }
+        };
+        table.on('toolbar(table1)', function(obj){
+            var $ = layui.$;
+            switch(obj.event){
+                //删除
+                case 'delete':
+
+                    var checkStatus = table.checkStatus('table');
+                    var data = checkStatus.data;
+                    if (data.length === 0) {
+                        layer.msg("尚未选择");
+                        return;
+                    }
+                    var inspPlStandardIds = [];
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            inspPlStandardIds.push(data[i].inspPlStandardId);
+                        }
+                    }
+                    layer.confirm("确定要删除吗？", function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/inspection/inspPlStandard/deleteInspStandard",
+                            async: false,/*同步传输*/
+                            contentType:'application/json' ,
+                            dataType: 'json',
+                            data:JSON.stringify(inspPlStandardIds),
+                            success: function (data) {
+                                layer.closeAll('loading');
+                                /*  console.log(data.code);*/
+                                if(data.code === 0){
+                                    layer.msg("删除成功！", {icon:1, time: 2000, shade: 0.2});
+                                    location.reload(true);
+                                }else{
+                                    layer.msg("删除失败！", {icon:2, time: 3000, shade: 0.2})
+                                }
+                            }
+
+                        });
+                    });
+                    break;
+                //新增
+                case 'increase':
+                    layui.layer.open({
+                        title : "人员",
+                        type : 2,
+                        content : "./child/Scheduling-staff.html" ,//弹出层页面
+                        area: ['85%', '90%']//弹出层的长宽
+                    });
+                    break;
+            }
+        });
 
 /*
 
