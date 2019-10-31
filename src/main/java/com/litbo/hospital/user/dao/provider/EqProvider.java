@@ -126,7 +126,30 @@ public class EqProvider {
         return SQL;
 
     }
+    public String selectEqByX(SelectEqVo selectEqVo){
+        StringBuffer sql = new StringBuffer("SELECT\n" +
+                "\te.eq_id,\n" +
+                "\te.eq_sbbh,\n" +
+                "\te.eq_zcbh,\n" +
+                "  e.eq_name," +
+                "\tp.eq_pm_name,\n" +
+                "\te.eq_gg,\n" +
+                "\te.eq_xh,\n" +
+                "\te.eq_qysj,\n" +
+                "   e.eq_syzt,e.eq_price,e.eq_pp," +
+                "\tb.bm_name \n" +
+                "FROM\n" +
+                "\tdbo.eq_info AS e\n" +
+                "\tLEFT JOIN dbo.eq_pm AS p ON e.eq_pm_id = p.eq_pm_id\n" +
+                "\tLEFT JOIN dbo.s_bm AS b ON e.eq_bmid = b.bm_id\n" +
+                "WHERE 1=1" );
+        if(StringUtils.isNotBlank(selectEqVo.getBmName()))sql.append(" and bm_name Like #{bmName}");
+        if(StringUtils.isNotBlank(selectEqVo.getEqPym())) sql.append(" and eq_pym Like #{eqPym}");
+        if(StringUtils.isNotBlank(selectEqVo.getEqSbbh()))sql.append(" and eq_sbbh LIKE #{eqSbbh}" );
+        if(StringUtils.isNotBlank(selectEqVo.getEqZcbh()))sql.append(" and eq_zcbh Like #{eqZcbh}");
+        return sql.toString();
 
+    }
     public String updateEq(EqInfoVo eqInfo) {
         return new SQL() {
             {

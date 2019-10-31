@@ -18,7 +18,7 @@ public interface EqService {
     List<EqVo> getAllEq();
 
     PageInfo listShowEqs(int pageNum, int pageSize);
-
+    PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo);
     int addEq(EqInfoVo eqInfo);
 
     Integer importEq(MultipartFile file) ;

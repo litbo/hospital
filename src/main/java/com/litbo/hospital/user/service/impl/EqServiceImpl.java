@@ -196,6 +196,21 @@ public class EqServiceImpl implements EqService {
     }
 
     @Override
+    public PageInfo listEqByX(int pageNum, int pageSize, SelectEqVo selectEqVo) {
+        PageHelper.startPage(pageNum,pageSize);
+        if(StringUtils.isNotBlank(selectEqVo.getBmName()))
+            selectEqVo.setBmName("%"+selectEqVo.getBmName()+"%");
+        if(StringUtils.isNotBlank(selectEqVo.getEqPym()))
+            selectEqVo.setEqPym("%"+selectEqVo.getEqPym()+"%");
+        if(StringUtils.isNotBlank(selectEqVo.getEqSbbh()))
+            selectEqVo.setEqSbbh("%"+selectEqVo.getEqSbbh()+"%");
+        if(StringUtils.isNotBlank(selectEqVo.getEqZcbh()))
+            selectEqVo.setEqZcbh("%"+selectEqVo.getEqZcbh()+"%");
+
+        return new PageInfo(eqDao.listEqByX(selectEqVo));
+    }
+
+    @Override
     public PageInfo listEqNameByX(int pageNum, int pageSize, String ccname) {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo(eqDao.listEqNameByX(ccname));

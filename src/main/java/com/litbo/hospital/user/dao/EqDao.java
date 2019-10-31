@@ -14,7 +14,8 @@ public interface EqDao {
 
     @SelectProvider(type = EqProvider.class , method ="selectAllEq")
     List<EqVo> getAllEq();
-
+    @SelectProvider(type = EqProvider.class , method = "selectEqByX")
+    List<EqShowVo> listEqByX(SelectEqVo selectEqVo);
     @SelectProvider(type = EqProvider.class , method = "selectShowEq")
     List<EqShowVo> listShowEqs();
 
