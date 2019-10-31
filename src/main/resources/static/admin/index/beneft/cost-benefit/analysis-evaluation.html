@@ -45,8 +45,8 @@
             <li class="layui-this"><a href="./analysis-evaluation.html">直接成本统计</a></li>
             <li class=""><a href="./indirect-cost.html">间接成本统计</a></li>
             <li class=""><a href="./cevenue-statistics.html">收入统计</a></li>
-            <li class=""><a href="./benefit-analysis.html">效益分析表</a></li>
-            <li class=""><a href="./benefit-statistics.html">效益评价表</a></li>
+            <li class=""><a href="./benefit-statistics.html">效益分析表</a></li>
+            <li class=""><a href="./benefit-analysis.html">效益统计表</a></li>
         </ul>
     </div>
     <div class="hidden-xs" id="hideXs">
@@ -56,21 +56,14 @@
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
                         <input type="text" name="qssj" class="layui-input" id="date" placeholder="点击选择日期" readonly="readonly">
                     </div>
+
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="eqNameByx" lay-search="">
-                            <option value="">设备名称</option>
-                            <option value="1">脉搏碳氧血氧测量仪</option>
-                            <option value="2">光疗设备</option>
-                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
-                            <option value="4">设备柜</option>
-                            <option value="5">监护仪(母婴监护系统主机)</option>
+                        <select name="select" id="select"  lay-filter="select" lay-search=""  onchange="teset(this.value)">
+                            <option value="">请选择科室</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-
-                        <select name="bmNameByx" lay-filter="bmId">
-                            <option value="">全部科室</option>
-                        </select>
+                        <input type="text" name="eqSName" class="layui-input"  placeholder="请输入设备名称" >
 
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
@@ -81,16 +74,92 @@
         </div>
     </div>
 </script>
+<!--<script>-->
+<!--    function b(){-->
+<!--        layui.use(['layer', 'jquery', 'form'], function () {-->
+<!--            var layer = layui.layer,-->
+<!--                $ = layui.jquery,-->
+<!--                form = layui.form;-->
+<!--            form.on('select(select)', function(data){-->
+<!--                if(data.value == 1){-->
+<!--                    alert(" 123")-->
+<!--                }else{-->
+<!--                    var type =$('#select option:selected').val();//选中的值-->
+<!--                    console.log("选中的值："+type)-->
+<!--                    $.get("/eq/selectEqInfoByBmName?bmName="+type,function(data,status){-->
+<!--                        console.log(data)-->
+<!--                        var eqSName = data.data;-->
+<!--                        // console.log("从后端获得的数据："+eqSName);-->
+<!--                        // 将数据分割：-->
+<!--                        // eqSName = eqSName.toString().split(',');-->
+<!--                        $("#eqSName").empty()-->
+<!--                        for(var i in eqSName){-->
+<!--                            $("#eqSName").append("<option value=\""+eqSName[i].eqName+"\">"+eqSName[i].eqName+"</option>")-->
+<!--                        }-->
+<!--                        layui.form.render("select");-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    }-->
+<!--    b();-->
+
+<!--</script>-->
+
 
 <script>
+
+
+    Date.prototype.format = function(fmt) {
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "h+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+        for(var k in o) {
+            if(new RegExp("("+ k +")").test(fmt)){
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+</script>
+
+<script>
+   function CurrentMonthFirst(){
+        var date=new Date();
+        date.setDate(1);
+        return date;
+    }
+
+  function CurrentMonthLast(){
+       var date=new Date();
+       var currentMonth=date.getMonth();
+       var nextMonth=++currentMonth;
+       var nextMonthFirstDay=new Date(date.getFullYear(),nextMonth,1);
+       var oneDay=1000*60*60*24;
+       return new Date(nextMonthFirstDay-oneDay);
+   }
+
+   var time1 = CurrentMonthFirst().format("yyyy-MM-dd");
+   var time2 = CurrentMonthLast().format("yyyy-MM-dd");
+
+
     renderMod = {
         table :{
             table:{
                 cols: [[ //表头
                     {field: 'bmName', title: '科室名称', minWidth: 100}
+                    , {field: 'eqNum', title: '资产编号', minWidth: 180}
                     , {field: 'eqName', title: '设备名称', minWidth: 100}
-                    , {field: 'eqNum', title: '院内编号', minWidth: 180}
-                    , {field: 'eqXh', title: '设备型号', minWidth: 120}
+                    , {field: 'eqGgxh', title: '规格型号', minWidth: 120}
                     , {field: 'ryjf', title: '人员经费', minWidth: 100,sort:true}
                     , {field: 'wsclf', title: '卫生材料费', minWidth: 120,sort:true}
                     , {field: 'ypf', title: '药品费', minWidth: 100,sort:true}
@@ -121,17 +190,17 @@
             },reSet:{
                 url:"/benefical/sbcw/listZjcb",
                 type:"search",
-                data:["qssj"],
+                data:["qssj","select","eqSName"]
                 // date:["#date","kssj","jssj"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
             }
         },
         form:{
             val: {
-                filter: "forms",
+                filter: "select",
                 select: [
                     {
-                        filter: "bmId",
-                        ids: "bmId",
+                        filter: "select",
+                        ids: "bmName",
                         text: "bmName",
                         url: "/supervise/bmgl/listDelXks"
                     }
@@ -139,14 +208,19 @@
             },
             date:{
                 elem:"#date",
-                value: false,
+                value: time1+' ~ '+time2,
                 type:"date",
                 format:"yyyy-MM-dd",
-                range:true
+                range:true,
+                btns: ['confirm']
             }
         }
     };
+
+
+
 </script>
+
 </body>
 
 </html>

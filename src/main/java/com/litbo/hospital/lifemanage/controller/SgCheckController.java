@@ -72,6 +72,7 @@ public class SgCheckController {
 
             LiveEmpVo emp = (LiveEmpVo) SecurityUtils.getSubject().getSession().getAttribute("emp");
             sgCheckService.updateSgCheckByIds(ids.getIds(), emp.getUserId(), "1");
+
         }catch (Exception e){
             e.printStackTrace();
         }

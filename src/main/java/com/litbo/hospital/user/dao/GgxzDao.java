@@ -19,7 +19,7 @@ public interface GgxzDao {
     @DeleteProvider(type = GgxzProvider.class , method = "ggxzFail")
     int ggxzFail(Integer id);
     @SelectProvider(type = GgxzProvider.class , method = "listWaits")
-    List<SysGgxz> listWaits();
+    List<SysGgxz> listWaits(String wjmc);
 
     @SelectProvider(type = GgxzProvider.class , method = "getGgxzById")
     SysGgxz getGgxzById(Integer id);

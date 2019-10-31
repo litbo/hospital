@@ -69,14 +69,33 @@ public class EqServiceImpl implements EqService {
         String time = time1.substring(2, 4) + time1.substring(5, time1.length());
         EqPm pm = pmDao.getPmById(pmId);
         //初始化分类号
-        String LastSbbh = eqDao.getEqSbbhByPmid(pmId);
+        /*String LastSbbh = eqDao.getEqSbbhByPmid(pmId);
         if (StringUtils.isNotBlank(LastSbbh)) {
             String Lastflbm = LastSbbh.substring(13, LastSbbh.length());
-            Integer flbmInt = Integer.parseInt(Lastflbm) + 1;
+            Integer flbmInt = Integer.parseInt(Lastflbm);
+            String s = LastSbbh.substring(4, LastSbbh.length());
+            List<String> list = eqDao.getEqSbbhsByPmId(pmId);
+            int size = list.size();
+            for (int i = 0; i < size; i++) {
+                if(list.get(i).contains(s)){
+                    flbmInt+=1;
+                }
+            }
             String flbm = flbmInt.toString().substring(2);
             String sbbh = time + pm.getEqPmId() + pm.getGlh() + flbm;
+
             return sbbh;
-        } else {
+        }*/
+        List<String> id = eqDao.getEqSbbhsByPmId(pmId);
+        if(id!=null&&id.size()>0){
+            int size = id.size();
+            int p=100001+size;
+            String s = String.valueOf(p);
+            String sbbh =time+pm.getEqPmId()+pm.getGlh()+ s.substring(1, s.length());
+            return sbbh;
+
+        }
+        else {
             String flbm1 = "00001";
             String sbbh = time + pm.getEqPmId() + pm.getGlh() + flbm1;
             return sbbh;
@@ -267,7 +286,7 @@ public class EqServiceImpl implements EqService {
                 List<Object> objects = lists.get(i);
 
                 String o = (String) objects.get(0);
-                if (StringUtils.isBlank(o)) {
+                if (StringUtils.isBlank(o)|| o.contains("*")) {
                     return 1;
                 }
                 int size2 = objects.size();
@@ -356,9 +375,9 @@ public class EqServiceImpl implements EqService {
                         eqInfo.setEqBz(s);
                     } else if (k == 28) {
                         if (s != null) {
-                            eqInfo.setEqBmid(eqDao.getOBmIdByName(s));
+//                            eqInfo.setEqBmid(eqDao.getBmIdByName(s));
+                        eqInfo.setEqBmid(eqDao.getBmIdByobmID(s));
                         }
-//                        eqInfo.setEqBmid(eqDao.getNewBmId(s));
                     } else if (k == 29) {
                         if (s != null) {
                             eqInfo.setEqJldwId(eqDao.getJldwId(s));

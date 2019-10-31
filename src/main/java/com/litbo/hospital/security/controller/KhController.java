@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/px")
@@ -26,7 +28,13 @@ public class KhController {
     @RequestMapping("/findInfo")
     public Result findInfo(@RequestParam(value = "pageNum",required = false, defaultValue = "1") int pageNum,
                            @RequestParam(value = "pageSize",required = false, defaultValue = "15") int pageSize){
+//        List<Object> objects = new ArrayList<>();
+//        NumVos list = khService.getNum();
+//        if(list!=null){
+//            objects.add(list);
+//        }
         PageInfo pageInfo = khService.findInfo(pageNum,pageSize);
+     //   objects.add(pageInfo);
         return Result.success(pageInfo);
     }
 
@@ -35,7 +43,7 @@ public class KhController {
                      @RequestParam(value = "pageSize",required = false, defaultValue = "15") int pageSize,
                      @RequestParam("id") String id, HttpSession session){
         session.setAttribute("gl_id",id);
-        System.out.println("传送的计划id"+session.getAttribute("gl_id").toString());
+       // System.out.println("传送的计划id"+session.getAttribute("gl_id").toString());
         PageInfo pageInfo = khService.kh(pageNum,pageSize,id);
         return Result.success(pageInfo);
     }
@@ -50,16 +58,20 @@ public class KhController {
        // System.out.println("进去之前:"+ks.toString());
         if(listT != null&&listT.length>0){
             for(KhTablesVo k:listT){
-                if(k.getLlcj()==null&&k.getSjcz()==null&&k.getKhjg()==null){
+                if(k.getLlcj()==null&&k.getSjcz()==null){
                     continue;
                 }
                 String pxjg = k.getPxjg();
-                ks.setPxjg(pxjg);
-                if(pxjg.equals("是")){
-                    pxjgCount++;
+                if(pxjg==null){
+                    ks.setPxjg("否");
+                }else{
+                    ks.setPxjg(pxjg);
+                    if(pxjg.equals("是")){
+                        pxjgCount++;
+                    }
                 }
                 String khjg = k.getKhjg();
-                if(khjg.equals("及格")){
+                if(khjg.equals("合格")){
                     khjgCount++;
                 }
                 ks.setKhjg(khjg);
@@ -69,49 +81,52 @@ public class KhController {
                 ks.setSjcz(sjcz);
                 String username = k.getUserName();
                 ks.setUserName(username);
+                ks.setBmName(k.getBmName());
                 ks.setPxry(khVos.getPxry());
                 ks.setKsry(khVos.getKsry());
                 ks.setKhry(khVos.getKhry());
                 ks.setPjyj(khVos.getPjyj());
                 ks.setJhId(session.getAttribute("gl_id").toString());
-//                boolean bool = khService.khBc(ks);
-//                if (bool==false){
-//                    if(pxjg.equals("是")){
-//                        pxjgCount--;
-//                    }
-//
-//                    if(khjg.equals("及格")){
-//                        khjgCount--;
-//                    }
-//                }
-                System.out.println("进去之后:"+ks.toString());
+                boolean bool = khService.khBc(ks);
+                if (bool==false){
+                    if(pxjg.equals("是")){
+                        pxjgCount--;
+                    }
+
+                    if(khjg.equals("合格")){
+                        khjgCount--;
+                    }
+                }
+               // System.out.println("进去之后:"+ks.toString());
             }
-            System.out.println("培训人数:"+pxjgCount+"考核及格人数:"+khjgCount);
+           // System.out.println("培训人数:"+pxjgCount+"考核及格人数:"+khjgCount);
 
         }
 
-        ListJiGeVo jiGeVo = khService.findByKhjgJg();//查询数据库中及格总人数
-        double AllkhjgCount = khjgCount+jiGeVo.getJige();
-        System.out.println("总及格人数:"+AllkhjgCount);
+        double AllkhjgCount = 0.0;
+        double AllpxjgCount = 0.0;
+        ListJiGeVo jiGeVo = khService.findByKhjgJg(session.getAttribute("gl_id").toString());//查询数据库中及格总人数
+        if(jiGeVo!=null){
+            AllkhjgCount = jiGeVo.getJige();
+        }
 
-        ListCanJiaVo canJiaVo = khService.findByPxjgIs();//数据库中出勤总人数+刚刚保存的出勤人数
-        double AllpxjgCount = pxjgCount+canJiaVo.getCanjia();
-        System.out.println("总出勤人数:"+AllpxjgCount);
-     //   System.out.println(khVos.toString());
+        //System.out.println("数据库中查询总及格人数:"+AllkhjgCount);
+
+        ListCanJiaVo canJiaVo = khService.findByPxjgIs(session.getAttribute("gl_id").toString());//数据库中出勤总人数+刚刚保存的出勤人数
+        if(canJiaVo!=null){
+            AllpxjgCount = canJiaVo.getCanjia();
+        }
+       // System.out.println("数据库中查询总出勤人数:"+AllpxjgCount);
 
         //该计划中所有应到人数
         ListSumRenVo sumRenVo = khService.findsumRen(session.getAttribute("gl_id").toString());
         double sumRen = sumRenVo.getSumRen();
-        System.out.println("应到人数"+sumRen);
+       // System.out.println("应到人数"+sumRen);
         if(sumRen!=0.0){
             //将结果保留四位小数
             DecimalFormat d = new DecimalFormat("0.0000");
             String chuqinlv = d.format(AllpxjgCount/sumRen);
             String hegelv = d.format(AllkhjgCount/sumRen);
-            //String hegelv = d.format(AllpxjgCount/sumRen);
-//            System.out.println("合格率"+hegelv);
-//            System.out.println("出勤率"+chuqinlv);
-            //Double.parseDouble(hegelv);
 
             //将结果转化为百分制
             DecimalFormat df = new DecimalFormat("0.00%");
@@ -155,6 +170,15 @@ public class KhController {
             ,@RequestParam("id") String id)
     {
         PageInfo pageInfo = new PageInfo(khService.getWdRen(pageNum,pageSize,id));
+        return Result.success(pageInfo);
+    }
+
+    @RequestMapping("/getHgRy")
+    public Result getHgRy(@RequestParam(value = "pageNum",required = false, defaultValue = "1") int pageNum,
+                          @RequestParam(value = "pageSize",required = false, defaultValue = "15") int pageSize
+            ,@RequestParam("id") String id)
+    {
+        PageInfo pageInfo = new PageInfo(khService.getHgRen(pageNum,pageSize,id));
         return Result.success(pageInfo);
     }
 

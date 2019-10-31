@@ -1,6 +1,7 @@
 package com.litbo.hospital.lifemanage.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.lifemanage.bean.DelVO;
 import com.litbo.hospital.lifemanage.bean.ListNum;
 import com.litbo.hospital.lifemanage.bean.SgPlan;
 import com.litbo.hospital.lifemanage.bean.vo.SgPlanVO;
@@ -57,7 +58,9 @@ public class SgPlanController {
             @RequestParam(value = "pageSize",required = false,defaultValue="15") int pageSize)
     {
         PageInfo pageInfo = sgPlanService.selectPlan(planName, planDate, userName, pageNum, pageSize);
+
         return Result.success(pageInfo);
+
     }
 
     /**
@@ -78,14 +81,12 @@ public class SgPlanController {
     }
 
     @RequestMapping("delPlan")
-    public Result delPlan(String planId){
-        String delId[] = null;
-        delId = planId.split(",");
-        for (int i=0; i<delId.length;i++){
-            String ids = delId[i];
-            sgPlanService.delPlan(ids);
+    public Result delPlan(@RequestBody DelVO ids){
+        String planId [] =ids.getIds();
+        for (int i=0; i<ids.getIds().length; i++){
+            sgPlanService.delPlan(planId[i]);
+//            System.out.println(planId[i]);
         }
-
         return  Result.success();
     }
 }

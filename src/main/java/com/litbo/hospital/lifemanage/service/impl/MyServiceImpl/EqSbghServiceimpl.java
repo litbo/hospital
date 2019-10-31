@@ -65,7 +65,13 @@ public class EqSbghServiceimpl implements EqSbghService {
         PageHelper.startPage(pageNum, pageSize);
         EqSbghExample example = new EqSbghExample();
         EqSbghExample.Criteria criteria = example.createCriteria();
-
+        if(StringUtils.isNotBlank(bmid))
+        {
+             criteria.andEqGhksEqualTo(bmid);
+        }
+        if(StringUtils.isNotBlank(lx)){
+            criteria.andEqGhlxEqualTo(lx);
+        }
         if (qssj != null) {
             criteria.andEqGhrqGreaterThanOrEqualTo(qssj);
         }
@@ -76,11 +82,7 @@ public class EqSbghServiceimpl implements EqSbghService {
         vos.forEach(item -> item.setEqGhksName(tjsqMapper.selectBmNameByBmid(item.getEqGhks())));
         vos.forEach(item -> item.setEqJsksName(tjsqMapper.selectBmNameByBmid(item.getEqJsks())));
 
-        if (StringUtils.isNotBlank(bmid)) {
-            vos.removeIf(item -> !item.getEqGhksName().contains(bmid));
-        }
 
-        vos.removeIf(item -> !item.getEqGhlx().equals(lx));
 
 
         return new PageInfo(vos);

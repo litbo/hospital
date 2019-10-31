@@ -159,20 +159,30 @@ public interface EqTjsqMapper {
     EqTjZbdcVO selectTjjd(@Param("dcksid") String dcksid, @Param("sqtjid") String sqtjid, @Param("zhz") String zhz);
 
     /*查询所有未送达验收单,点替换之后装备状态变成待借出,未送达调配单+1，别人将无法查询到*/
-    @Select("select  t.id, t.tj_dpsj,t.tj_zhz,s.bm_name ,e.tj_sqks as zbSdks,tj_dclx \n" +
+    @Select("<script>select  t.id, t.tj_dpsj,t.tj_zhz,s.bm_name ,e.tj_sqks as zbSdks,t.tj_dclx \n" +
             "    from  tj_zbdc t \n " +
             "    inner join eq_tjsq e on e.id=t.tj_sqtj " +
             "    inner join s_bm s on t.tj_dcks= s.bm_id" +
-            "    where tj_dcjd = '0' order by t.tj_dpsj")
-    List<EqTjDpdVO> selectWsdDpd();
+            "    where tj_dcjd = '0'" +
+            "<if test =\" lx!=null and lx!='' \">" +
+            "  and t.tj_dclx= #{lx}" +
+            "</if>" +
+            " order by t.tj_dpsj" +
+            "</script>")
+    List<EqTjDpdVO> selectWsdDpd(String lx);
 
     /*查询所有验收单已送达*/
-    @Select("select t.id, t.tj_dpsj,t.tj_zhz,s.bm_name  ,e.tj_sqks as zbSdks,tj_dclx\n" +
+    @Select("<script> select t.id, t.tj_dpsj,t.tj_zhz,s.bm_name  ,e.tj_sqks as zbSdks,tj_dclx\n" +
             "    from  tj_zbdc t \n " +
             "    inner join eq_tjsq e on e.id=t.tj_sqtj " +
             "    inner join s_bm s on t.tj_dcks= s.bm_id" +
-            "    where tj_dcjd = '1' order by t.tj_dpsj")
-    List<EqTjDpdVO> selectYsdDpd();
+            "    where tj_dcjd = '1' " +
+            "<if test =\" lx!=null and lx!='' \">" +
+            "  and t.tj_dclx= #{lx}" +
+            "</if>" +
+            " order by t.tj_dpsj" +
+            "</script>" )
+    List<EqTjDpdVO> selectYsdDpd(String lx);
 
     /*科室id查询科室名字*/
     @Select("select  bm_name as zbSdks from s_bm where bm_id=#{ksid} ")

@@ -51,8 +51,8 @@
             <li class=""><a href="./analysis-evaluation.html">直接成本统计</a></li>
             <li class=""><a href="./indirect-cost.html">间接成本统计</a></li>
             <li class=""><a href="./cevenue-statistics.html">收入统计</a></li>
-            <li class="layui-this"><a href="./benefit-analysis.html">效益分析表</a></li>
-            <li class=""><a href="./benefit-statistics.html">效益评价表</a></li>
+            <li class=""><a href="./benefit-statistics.html">效益分析表</a></li>
+            <li class="layui-this"><a href="./benefit-analysis.html">效益统计表</a></li>
         </ul>
     </div>
     <div class="hidden-xs" id="hideXs">
@@ -63,68 +63,97 @@
                         <input type="text" name="qssj" class="layui-input" id="date" placeholder="点击选择日期">
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules"  lay-search="">
-                            <option value="">设备名称</option>
-                            <option value="1">脉搏碳氧血氧测量仪</option>
-                            <option value="2">光疗设备</option>
-                            <option value="3">耳鼻喉综合治疗台(豪华)</option>
-                            <option value="4">设备柜</option>
-                            <option value="5">监护仪(母婴监护系统主机)</option>
+                        <select name="select" id="select"  lay-filter="select" lay-search=""  onchange="teset(this.value)">
+                            <option value="">请选择科室</option>
                         </select>
                     </div>
                     <div class="layui-inline xs-100 mar10-0 pad0-10">
-                        <select name="modules"  lay-search="">
-                            <option value="">科室名称</option>
-                            <option value="1">病案室</option>
-                            <option value="2">病案质控室</option>
-                            <option value="3">B超室</option>
-                            <option value="4">病房临床检验室</option>
-                            <option value="5">病房消化内镜室</option>
-                            <option value="6">保健科全科医学病区</option>
-                            <option value="7">保健科门诊</option>
-                            <option value="8">病理科</option>
-                            <option value="9">变态反应（哮喘）门诊</option>
-                            <option value="10">保卫处</option>
-                            <option value="11">肠道检验室</option>
-                            <option value="12">病房消化内镜室</option>
-                            <option value="13">产房</option>
-                            <option value="14">产科二病区</option>
-                            <option value="15">产科门诊</option>
-                            <option value="16">产科三病区</option>
-                            <option value="17">产科一病区</option>
-                            <option value="18">产前筛查实验室</option>
-                            <option value="19">CT室</option>
-                            <option value="20">创伤骨科病房</option>
-                        </select>
+                            <input type="text" name="eqSName" class="layui-input"  placeholder="请输入设备名称" >
                     </div>
                     <div class="layui-input-inline  xs-100 mar10-0 pad0-10">
                         <button class="layui-btn layui-btn-fluid" lay-submit="" data-type="search"><i class="layui-icon layui-icon-search"></i>查询</button>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </script>
+<script>
+
+
+    Date.prototype.format = function(fmt) {
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "h+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+        for(var k in o) {
+            if(new RegExp("("+ k +")").test(fmt)){
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+</script>
 
 <script>
+    function CurrentMonthFirst(){
+        var date=new Date();
+        date.setDate(1);
+        return date;
+    }
+
+    function CurrentMonthLast(){
+        var date=new Date();
+        var currentMonth=date.getMonth();
+        var nextMonth=++currentMonth;
+        var nextMonthFirstDay=new Date(date.getFullYear(),nextMonth,1);
+        var oneDay=1000*60*60*24;
+        return new Date(nextMonthFirstDay-oneDay);
+    }
+
+    var time1 = CurrentMonthFirst().format("yyyy-MM-dd");
+    var time2 = CurrentMonthLast().format("yyyy-MM-dd");
+
     renderMod = {
         formAction: {
+            val: {
+                filter: "select",
+                select: [
+                    {
+                        filter: "select",
+                        ids: "bmName",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listDelXks"
+                    }
+                ]
+            },
             date: {
                 elem:"#date",
-                value: false,
+                value: time1+' ~ '+time2 ,
                 type:"date",
                 format:"yyyy-MM-dd",
-                range:true
-            },
+                range:true,
+                btns: ['confirm']
+            }
 
         },
         addTable :{
             table:{
                 cols: [[ //表头
                     {field: 'bmName', title: '科室名称', minWidth: 120}
+                    , {field: 'eqNum', title: '资产编号', minWidth: 180}
                     , {field: 'eqName', title: '设备名称', minWidth: 120}
-                    , {field: 'eqNum', title: '院内编号', minWidth: 180}
-                    , {field: 'eqXh', title: '设备型号', minWidth: 120}
+
+                    , {field: 'eqGgxh', title: '规格型号', minWidth: 120}
                     , {field: 'sr', title: '收入', minWidth: 100,sort:true}
                     , {field: 'cb', title: '成本', minWidth: 100,sort:true}
                     , {field: 'sy', title: '收益', minWidth: 100,sort:true}
@@ -162,11 +191,11 @@
             },reSet:{
                 url:"/benefical/sbcw/listXyFx",
                 type:"search",
-                data:["qssj"]
+                data:["qssj","select","eqSName"]
                 // data:["bmNameByx","eqNameByx"],
                 // dat:["#date","kssj","jssj"]//日期元素 开始时间名 结束时间名 分隔符（均可空，默认值： #date bTime eTime ~ ）
             }
-        },
+        }
 
     }
 

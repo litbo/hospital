@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ListCheckLvVos {
-    private String jh_id;
+    private String id;
 
     private String eqName;
 
@@ -17,4 +17,12 @@ public class ListCheckLvVos {
     private String pxl;
 
     private String khhgl;
+
+    private int YdNum;
+
+    private int SdNum;
+
+    private int WdNum;
+
+    private int HgNum;
 }

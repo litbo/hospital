@@ -13,6 +13,7 @@ import com.litbo.hospital.lifemanage.dao.MyMapper.EqSbghMapper;
 import com.litbo.hospital.lifemanage.dao.MyMapper.EqTjsqMapper;
 import com.litbo.hospital.lifemanage.dao.MyMapper.TjjjMapper;
 import com.litbo.hospital.lifemanage.service.MyService.EqTjjjService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,9 @@ public class EqTjjjServiceimpl implements EqTjjjService {
         PageHelper.startPage(pageNum, pageSize);
         EqTjjjExample example = new EqTjjjExample();
         EqTjjjExample.Criteria criteria = example.createCriteria();
+        if(StringUtils.isNotBlank(vo.getTjjjJllx())){
+            criteria.andTjjjJllxEqualTo(vo.getTjjjJllx());
+        }
         Date qssj = vo.getTjjjQssj();
         Date jssj = vo.getTjjjJssj();
         if (qssj != null) {
@@ -92,7 +96,6 @@ public class EqTjjjServiceimpl implements EqTjjjService {
             }
         }
 
-  vos.removeIf(item->!vo.getTjjjJllx().equals(item.getTjjjJllx()));
         return new PageInfo(vos);
     }
 

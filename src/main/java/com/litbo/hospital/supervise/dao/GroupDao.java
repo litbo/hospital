@@ -127,8 +127,19 @@ public interface GroupDao {
 
     @Delete("delete from s_group_users where group_id=#{groupId}")
     void deleteUsersByGid(Integer groupId);
-    @Select("select bm.bm_name, gp.group_name,gp.sh_flag as status from s_group gp left join s_bm bm on(gp.bm_id=bm.bm_id)")
-    List<GroupKSJDVO> getEstablishJd();
+    @Select("<script>" +
+            " select bm.bm_name, gp.group_name,gp.sh_flag as status from s_group gp left join s_bm bm " +
+            "on (gp.bm_id=bm.bm_id) " +
+            "<where>" +
+            "<if test=\"bmName!=null and bmName！='' \"> " +
+            " bm.bm_name = #{bmName} " +
+            "</if>" +
+            "<if test=\"tdName!=null and tdName！='' \"> " +
+            " and gp.group_name like  CONCAT('%',#{tdName},'%')" +
+            "</if>" +
+            "</where>" +
+            "</script>")
+    List<GroupKSJDVO> getEstablishJd(@Param("bmName") String bmName,@Param("tdName") String tdname);
 
 
 

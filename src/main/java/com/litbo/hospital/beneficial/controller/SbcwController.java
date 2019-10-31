@@ -1,5 +1,6 @@
 package com.litbo.hospital.beneficial.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.beneficial.service.SbcwService;
 import com.litbo.hospital.beneficial.vo.*;
 import com.litbo.hospital.common.utils.poi.ExcelData;
@@ -35,14 +36,17 @@ public class SbcwController {
     @RequestMapping(value = "/listZjcb")
     public Result listZjcb(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                           @RequestParam(required = false) String qssj) throws ParseException {
+                           @RequestParam(required = false) String qssj,
+                           @RequestParam(required = false) String select,
+                           @RequestParam(required = false) String eqSName
+                           ) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
            if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -62,8 +66,9 @@ public class SbcwController {
 
 
         }
+        PageInfo info = sbcwService.listZjcb(pageNum, pageSize, qs, js,select,eqSName);
 
-        return Result.success(sbcwService.listZjcb(pageNum, pageSize,qs,js));
+        return Result.success(info);
     }
 
     //查询设备直接成本列表根据条件查询
@@ -93,14 +98,17 @@ public class SbcwController {
     @RequestMapping(value = "/listJjcb")
     public Result listJjcb(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                           @RequestParam(name = "qssj",required = false) String qssj) throws ParseException {
+                           @RequestParam(name = "qssj",required = false) String qssj,
+                           @RequestParam(required = false) String select,
+                           @RequestParam(required = false) String eqSName
+                           ) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -120,7 +128,9 @@ public class SbcwController {
 
 
         }
-        return Result.success(sbcwService.listJjcb(pageNum,pageSize,qs,js));
+        PageInfo info = sbcwService.listJjcb(pageNum, pageSize, qs, js,select,eqSName);
+
+        return Result.success(info);
     }
 
     //查询设备直接成本列表根据条件查询
@@ -146,19 +156,19 @@ public class SbcwController {
         }
     }
 
-    //查询设备财务收入信息列表
-    @RequestMapping(value = "/listSr")
-    public Result listSr(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
-                           @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                           @RequestParam(required = false) String qssj
-                         ) throws ParseException {
+    //生成效益分析报表
+    @RequestMapping(value = "/listXyfxBobiao")
+    public Result listXyfxBobiao(@RequestParam(required = false) String qssj,
+           @RequestParam(required = false) String select,
+                                 @RequestParam(required = false) String eqSName
+    ) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -178,7 +188,86 @@ public class SbcwController {
 
 
         }
-        return Result.success(sbcwService.listSr(pageNum,pageSize,qs,js));
+        List<XyPjVo> list = sbcwService.NewXyfxBaobiao(qs,js,select,eqSName);
+
+        return Result.success(list);
+    }
+
+
+    //生成收入报表
+    @RequestMapping(value = "/listSrBobiao")
+    public Result listSrbaobiao(@RequestParam(required = false) String qssj,
+                                @RequestParam(required = false)String bmName,
+                                @RequestParam(required = false)String eqName
+                                ) throws ParseException {
+        Date qs=null;
+        Date js=null;
+        if(StringUtils.isNotBlank(qssj)){
+            String[] split = qssj.split("~");
+            if(split.length==2){
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
+            }
+        }
+        else{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+            qs=calendar.getTime();
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTime(new Date());
+            calendar2.set(Calendar.DAY_OF_MONTH, calendar2.getActualMaximum(Calendar.DAY_OF_MONTH));
+            js=calendar2.getTime();
+            String s = sdf.format(qs);
+            qs=sdf.parse(s);
+            String s2 = sdf.format(js);
+            js=sdf.parse(s2);
+
+
+        }
+        List<SrVo> list = sbcwService.SrBobiao(qs,js,bmName,eqName);
+
+        return Result.success(list);
+    }
+
+    //查询设备财务收入信息列表
+    @RequestMapping(value = "/listSr")
+    public Result listSr(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                         @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
+                         @RequestParam(required = false) String qssj,
+                         @RequestParam(required = false) String select,
+                         @RequestParam(required = false) String eqSName
+    ) throws ParseException {
+        Date qs=null;
+        Date js=null;
+        if(StringUtils.isNotBlank(qssj)){
+            String[] split = qssj.split("~");
+            if(split.length==2){
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
+            }
+        }
+        else{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+            qs=calendar.getTime();
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTime(new Date());
+            calendar2.set(Calendar.DAY_OF_MONTH, calendar2.getActualMaximum(Calendar.DAY_OF_MONTH));
+            js=calendar2.getTime();
+            String s = sdf.format(qs);
+            qs=sdf.parse(s);
+            String s2 = sdf.format(js);
+            js=sdf.parse(s2);
+
+
+        }
+        PageInfo info = sbcwService.listSr(pageNum, pageSize, qs, js,select,eqSName);
+
+        return Result.success(info);
     }
 
     //查询设备直收入信息列表根据条件查询
@@ -208,15 +297,17 @@ public class SbcwController {
     @RequestMapping(value = "/listXyFx")
     public Result listXyFx(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                          @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                         @RequestParam(required = false) String qssj
+                         @RequestParam(required = false) String qssj,
+                         @RequestParam(required = false) String select,
+                         @RequestParam(required = false) String eqSName
                            ) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -236,7 +327,9 @@ public class SbcwController {
 
 
         }
-        return Result.success(sbcwService.listXyFx(pageNum,pageSize,qs,js));
+        PageInfo info = sbcwService.listXyFx(pageNum, pageSize, qs, js,select,eqSName);
+
+        return Result.success(info);
     }
 
     //查询设备效益分析列表根据条件查询
@@ -265,15 +358,17 @@ public class SbcwController {
     @RequestMapping(value = "/listXyPj")
     public Result listXyPj(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
                            @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize,
-                           @RequestParam(required = false) String qssj
+                           @RequestParam(required = false) String qssj,
+                           @RequestParam(required = false) String select,
+                           @RequestParam(required = false) String eqSName
                            ) throws ParseException {
         Date qs=null;
         Date js=null;
         if(StringUtils.isNotBlank(qssj)){
             String[] split = qssj.split("~");
             if(split.length==2){
-                qs= String2DateUtil.StringtoDateOnlyYear(split[0]);
-                js= String2DateUtil.StringtoDateOnlyYear(split[1]);
+                qs= String2DateUtil.StringtoDate(split[0]);
+                js= String2DateUtil.StringtoDate(split[1]);
             }
         }
         else{
@@ -293,7 +388,9 @@ public class SbcwController {
 
 
         }
-        return Result.success(sbcwService.listXyPj(pageNum,pageSize,qs,js));
+        PageInfo info = sbcwService.listXyPj(pageNum, pageSize, qs, js,select,eqSName);
+
+        return Result.success(info);
     }
 
     //查询设备评价信息列表根据条件查询

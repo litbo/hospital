@@ -42,9 +42,13 @@ public class GgxzProvider {
                 "WHERE id = #{id}";
         return sql;
     }
-    public String listWaits(Integer id){
-        String sql = "SELECT * FROM sys_ggxz " +
-                "WHERE status = 0";
+    public String listWaits(String wjmc){
+        String sql = "<script>SELECT * FROM sys_ggxz " +
+                "WHERE status = 0 \n" +
+                "<if test=\" wjmc!=null and wjmc!=''\">" +
+                " and wjmc like CONCAT('%',#{wjmc},'%') " +
+                "</if>" +
+                "</script>";
         return sql;
     }
 

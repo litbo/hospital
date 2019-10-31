@@ -14,6 +14,8 @@ public class KhZxinxiVo {
 
     private String pjyj;
 
+    private String bmName;
+
     private String userName;//多个
 
     private String pxjg;

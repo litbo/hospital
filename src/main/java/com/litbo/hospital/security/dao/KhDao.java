@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface KhDao {
 
-    @Select("SELECT user_id AS userId,user_name AS userName FROM jh_tjry WHERE jh_id = #{id} " +
+    @Select("SELECT bm_name,user_id AS userId,user_name AS userName FROM jh_tjry WHERE jh_id = #{id} " +
             "AND user_name NOT IN (SELECT user_name FROM jh_khlr WHERE jh_id = #{id})")
     List<KhVo> kh(@Param("id") String id);
 
@@ -17,7 +17,7 @@ public interface KhDao {
             "INSERT INTO dbo.jh_lv(id,pxl,khhgl,jh_id) " +
                     "VALUES(#{id},#{pxl},#{khhgl},#{jh_id})"
     })
-    void insertLv(@Param("id") String id,@Param("pxl") String pxl,@Param("khhgl") String khhgl,@Param("jh_id") String jh_id);
+    void insertLv(@Param("id") String id,@Param("khhgl") String khhgl,@Param("pxl") String pxl,@Param("jh_id") String jh_id);
 
     @Update({"<script>",
             "UPDATE dbo.jh_lv",
@@ -33,8 +33,8 @@ public interface KhDao {
     LvJcVos getPxlAndKhl(String jh_id);
 
     @Insert({
-            "INSERT INTO jh_khlr(id,user_name,pxjg,llcj,sjcz,khjg,pxry,ksry,khry,pjyj,jh_id)" +
-             "VALUES(#{id,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{pxjg,jdbcType=VARCHAR}," +
+            "INSERT INTO jh_khlr(id,bm_name,user_name,pxjg,llcj,sjcz,khjg,pxry,ksry,khry,pjyj,jh_id)" +
+             "VALUES(#{id,jdbcType=VARCHAR},#{bmName,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{pxjg,jdbcType=VARCHAR}," +
                     "#{llcj,jdbcType=VARCHAR},#{sjcz,jdbcType=VARCHAR},#{khjg,jdbcType=VARCHAR}" +
                     ",#{pxry,jdbcType=VARCHAR},#{ksry,jdbcType=VARCHAR},#{khry,jdbcType=VARCHAR}," +
                     "#{pjyj,jdbcType=VARCHAR},#{jhId,jdbcType=VARCHAR})"
@@ -43,17 +43,17 @@ public interface KhDao {
 
     @Select({
             "SELECT \n" +
-            "  SUM(CASE khjg WHEN '及格' THEN 1 ELSE 0 END) AS \"jige\"    \n" +
-            "FROM dbo.jh_khlr"
+            "  SUM(CASE khjg WHEN '合格' THEN 1 ELSE 0 END) AS \"jige\"    \n" +
+            "FROM dbo.jh_khlr WHERE jh_id=#{id}"
     })
-    ListJiGeVo findByKhjgJg();
+    ListJiGeVo findByKhjgJg(String id);
 
     @Select({
             "SELECT \n" +
             "   SUM(CASE pxjg WHEN '是' THEN 1 ELSE 0 END) AS \"canjia\"    \n" +
-            "FROM dbo.jh_khlr"
+            "FROM dbo.jh_khlr WHERE jh_id=#{id}"
     })
-    ListCanJiaVo findByPxjgIs();
+    ListCanJiaVo findByPxjgIs(String id);
 
     @Select({
             "SELECT count(user_name) AS sumRen FROM dbo.jh_tjry " +
@@ -70,20 +70,36 @@ public interface KhDao {
     })
     List<ListCheckLvVos> findInfo();
 
+    @Select({
+        "SELECT \n" +
+                "     SUM(CASE khjg WHEN '合格' THEN 1 ELSE 0 END) AS 'HgNum',\n" +
+                "\t\t SUM(CASE pxjg WHEN '是' THEN 1 ELSE 0 END) AS 'SdNum',\n" +
+                "\t\t SUM(CASE pxjg WHEN '否' THEN 1 ELSE 0 END) AS 'WdNum',\n" +
+                "\t\t SUM(CASE pxjg WHEN '否' THEN 1 ELSE 0 END) + SUM(CASE pxjg WHEN '是' THEN 1 ELSE 0 END) AS 'YdNum'\n" +
+          "FROM dbo.jh_khlr"
+    })
+    NumVos getNum();
+
     @Select({"SELECT bm_name,user_name FROM dbo.jh_tjry WHERE jh_id = #{id}"})
     List<RenYuanVo> getYdRen(@Param("id") String id);
 
     @Select({
-            "SELECT t.user_id, t.bm_name,k.user_name FROM jh_tjry AS t\n" +
-                    "INNER JOIN jh_khlr AS k ON t.jh_id = k.jh_id\n" +
-                    "WHERE k.pxjg = '是' AND k.jh_id=#{id}"
+            "SELECT bm_name,user_name FROM jh_khlr WHERE khjg = '合格' AND jh_id=#{id}"
+    })
+    List<RenYuanVo> getHgRen(@Param("id") String id);
+
+    @Select({
+            "SELECT bm_name,user_name FROM jh_khlr WHERE pxjg = '是' AND jh_id=#{id}"
     })
     List<RenYuanVo> getSdRen(@Param("id") String id);
 
     @Select({
-            "SELECT t.user_id, t.bm_name,k.user_name FROM jh_tjry AS t\n" +
-                    "INNER JOIN jh_khlr AS k ON t.jh_id = k.jh_id\n" +
-                    "WHERE k.pxjg = '否' AND k.jh_id=#{id}"
+            "SELECT bm_name,user_name FROM jh_khlr WHERE pxjg != '是' AND jh_id=#{id}"
     })
     List<RenYuanVo> getWdRen(@Param("id") String id);
+
+    @Select({
+            "SELECT bm_name,user_name FROM jh_khlr WHERE khjg = '及格' AND jh_id=#{id}"
+    })
+    List<RenYuanVo> getKhTgRen(@Param("id") String id);
 }

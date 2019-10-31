@@ -14,6 +14,8 @@ public interface KhService {
 
     boolean khBc(KhZxinxiVo ks);
 
+    NumVos getNum();
+
     PageInfo findInfo(int pageNum,int pageSize);
 
     List<RenYuanVo> getYdRen(int pageNum, int pageSize, String id);
@@ -22,16 +24,18 @@ public interface KhService {
 
     List<RenYuanVo> getWdRen(int pageNum, int pageSize, String id);
 
-    ListCanJiaVo findByPxjgIs();
+    List<RenYuanVo> getHgRen(int pageNum, int pageSize, String id);
 
-    ListJiGeVo findByKhjgJg();
+    ListCanJiaVo findByPxjgIs(String id);
+
+    ListJiGeVo findByKhjgJg(String id);
 
     ListSumRenVo findsumRen(String id);
 
     LvJcVos getPxlAndKhl(String jh_id);
 
-    void insertLv(@Param("hegelv") String khhgl,@Param("chuqinlv") String pxl, String jh_id);
+    void insertLv(@Param("hgl") String khhgl,@Param("pxl") String pxl, String jh_id);
 
-    void updateLv(@Param("pxl") String pxl,@Param("khhgl") String khhgl,@Param("jh_id") String jh_id);
+    void updateLv(@Param("pxl") String pxl,@Param("hgl") String khhgl,@Param("jh_id") String jh_id);
 
 }

@@ -112,4 +112,6 @@ public interface SgCheckMapper {
      */
     @SelectProvider(type = SgCheckSqlProvider.class, method = "getListByX")
     List<SgCheckListVO> getListByX(@Param("planId") String planId, @Param("check") String check, @Param("checkDate") String checkDate, @Param("checkUser") String checkUser, @Param("planDate") String planDate, @Param("planUser") String planUser);
+
+
 }

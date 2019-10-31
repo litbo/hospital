@@ -98,8 +98,8 @@ public interface EqDao {
     List<EqShowVo> listWFlEqByX(SelectFlEqVo selectFlEqVo);
     @Select("SELECT top 1  bm_id FROM s_bm WHERE bm_name =#{bmName}")
     String getBmIdByName(String bmName);
-    @Select("SELECT top 1  obm_id FROM s_bm WHERE bm_name =#{bmName}")
-    String getOBmIdByName(String bmName);
+    @Select("SELECT top 1  bm_id FROM s_bm WHERE obm_id =#{obmid}")
+    String getBmIdByobmID(String obmid);
     @Select("SELECT eq_jldw_id FROM eq_jldw WHERE eq_jldw_name =#{eqJldwName}")
     String getJldwId(String eqJldwName);
     @Select("SELECT eq_cxfl_id FROM eq_cxfl WHERE eq_cxfl_name =#{eqCxflName}")
@@ -111,10 +111,12 @@ public interface EqDao {
     String getZjlyId(String eqZjlyName);
     @Select("select * from eq_pm where eq_pm_id = #{eqPmId}")
     EqPm getPmById(String eqPmId);
+
     @Select("SELECT top 1  eq_sbbh FROM eq_info WHERE eq_sbbh in (SELECT eq_sbbh FROM eq_info WHERE eq_pm_id = #{eqPmId}) " +
             "ORDER BY eq_sbbh desc")
     String getEqSbbhByPmid(String eqPmId);
-
+    @Select("select eq_sbbh from eq_info where eq_pm_id=#{pmid}")
+    List<String> getEqSbbhsByPmId(String pmid);
     @Select("SELECT sbcs_name FROM eq_cs WHERE sbcs_id =#{sbcsId}")
     String getCsById(String sbcsId);
 

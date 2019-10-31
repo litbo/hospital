@@ -98,7 +98,7 @@ public class BmController {
 
     @RequestMapping("/listDelXks")
     public Result listDelXks() {
-        PageInfo date = bmService.listInitBms(1, 1000);
+        PageInfo date = bmService.listInitBms(1, 10000);
         List list = date.getList();
         return Result.success(list);
     }
