@@ -13,14 +13,8 @@ public class PbJhVO {
     private String userId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pbDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date pbJsDate;
 
-    public PbJhVO() {
-    }
 
-    public PbJhVO(String pbJhid, String bmId, String userId, Date pbDate) {
-        this.pbJhid = pbJhid;
-        this.bmId = bmId;
-        this.userId = userId;
-        this.pbDate = pbDate;
-    }
 }

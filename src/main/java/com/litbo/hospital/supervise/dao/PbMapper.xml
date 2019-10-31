@@ -3,8 +3,8 @@
 <mapper namespace="com.litbo.hospital.supervise.dao.PbMapper">
 
     <insert id="addPbPlan" parameterType="com.litbo.hospital.supervise.bean.PbJhVO">
-            insert into pb_jh (pb_jhid,bm_id,user_id,pb_date) values(
-        #{pbJhid},#{bmId},#{userId},#{pbDate}
+            insert into pb_jh (pb_jhid,bm_id,user_id,pb_date,pbJs_date) values(
+        #{pbJhid},#{bmId},#{userId},#{pbDate},#{pbJsDate}
         )
     </insert>
 
