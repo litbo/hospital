@@ -18,4 +18,6 @@ public interface PbMapper {
     List<RyVos> getPbPeople(@Param("id") String id);
 
     List<RyVos> ghPeople(@Param("sid")String sid);
+
+    List<RyVos> getBmpeople(String bmId);
 }

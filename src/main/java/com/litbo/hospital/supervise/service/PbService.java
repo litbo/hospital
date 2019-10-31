@@ -17,4 +17,6 @@ public interface PbService {
     List<RyVos> getPbPeople(int pageNum,int pageSize,String id);
 
     List<RyVos> ghPeople(int pageNum,int pageSize,String sid);
+
+    List<RyVos> getBmpeople(String bmId);
 }

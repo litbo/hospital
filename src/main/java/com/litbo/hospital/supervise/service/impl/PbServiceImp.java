@@ -25,6 +25,11 @@ public class PbServiceImp implements PbService {
     }
 
     @Override
+    public List<RyVos> getBmpeople(String bmId) {
+        return (pbMapper.getBmpeople(bmId));
+    }
+
+    @Override
     public List<RyVos> ghPeople(int pageNum, int pageSize, String sid) {
         PageHelper.startPage(pageNum,pageSize);
         return pbMapper.ghPeople(sid);
