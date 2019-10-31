@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>排班</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/admin.css"/>
+    <script src="/static/admin/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/admin/layui/layui.js"></script>
+    <!--[if IE 8]>
+    <script type="text/javascript" src="/static/admin/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script src="/static/admin/js/basic.js"></script>
+    <style>
+        .layui-form-label{
+            padding: 8px 10px!important;
+        }
+        .layui-form-item{
+            margin-bottom:30px;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form layui-form-pane" style="margin-top: 20px;" action="">
+    <div class="layui-row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">起始日期</label>
+                <div class="layui-input-block">
+                    <input type="text" id="date1" name="dateqs" autocomplete="off" class="layui-input">
+                    <input type="hidden" id="pbDate" name="pbDate" autocomplete="off" class="layui-input">
+                    <input type="hidden" id="pbJsDate" name="pbJsDate" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">使用科室</label>
+                <div class="layui-input-block">
+                    <select name="eqBmid" lay-filter="bmList">
+                        <option value="">请选择...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">人员</label>
+                <div class="layui-input-block">
+                    <select name="eqBmid" lay-filter="bmList">
+                        <option value="">请选择...</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item" style="float:right;margin-right: 5%">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-lg"  lay-submit="" lay-filter="submit">提交</button>
+                <button id="close" class="layui-btn layui-btn-lg">取消</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div id="tips">
+</div>
+<script>
+    $(function() {
+        var emp =  tempValue("rl","emp",false);
+        $("#userId").val(emp.userId);
+        $("#userXm").val(emp.userXm);
+        $("#bmName").val(emp.bmName);
+        $("#bmId").val(emp.bmId);
+
+    });
+
+    formData = {};
+    renderMod= {
+        form:{
+            val:{
+                filter: "bmList",
+                filter:"form",
+                select:[
+                    {
+                        filter:"gglx",
+                        ids:"gglxId",
+                        text:"gglxName",
+                        url:"/eqdict/gglx"
+                    },
+                    {
+                        filter: "bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listDelXks"
+                    }
+                    ]
+            },
+            date:[
+                {
+                    elem:"#date1",
+                    value:false,
+                    type: "date",
+                    format: "yyyy-MM-dd",
+                    range: true
+                },
+                {
+                    elem:"#date3",
+                    value:today,
+                    type: "date",
+                    format: "yyyy-MM-dd",
+                }
+            ],
+            submit:{
+                before:function(){
+                    var val=$("#date1").val()
+                    console.log(val);
+                    var arr = val.split(' ~ ');
+                    $("#pbDate").val(arr[0]);
+                    $("#pbJsDate").val(arr[1]);
+                    return true
+                },
+                form:{//或者写作up
+                    url:"/pb/pbPlan ",
+                    type:"POST",
+                    contentType:"application/json",
+                    data:["ngr","ggbt","ngsj","ggnr","gglxId","bmId","pbDate","pbJsDate"],
+
+                    reload:'parent',
+                },
+        }
+        },
+        bind:{
+            selectItem: {
+                elem: "#layerBtn",
+                data:formData,
+                cb:"/supervise/bmgl/listSelectBmsCols",
+                db:"/supervise/bmgl/listBms",
+                key:"radio",
+                name:"dtdt"
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

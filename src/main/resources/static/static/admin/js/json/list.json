@@ -2925,7 +2925,7 @@
                 "children": [
                   {
                     "title": "排班",
-                    "url": "./admin/basic-management/dayToDay-management/Scheduling.html",
+                    "url": "./admin/basic-management/dayToDay-management/000.html",
                     "id": "604040",
                     "shiro": "PBGL"
                   },
