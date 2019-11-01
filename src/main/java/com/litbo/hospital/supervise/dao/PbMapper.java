@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.dao;
 
+import com.litbo.hospital.supervise.bean.KaoqinVO;
 import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.vo.RyVos;
 import com.litbo.hospital.supervise.vo.getPbPlanVos;
@@ -20,4 +21,6 @@ public interface PbMapper {
     List<RyVos> ghPeople(@Param("sid")String sid);
 
     List<RyVos> getBmpeople(String bmId);
+
+    void insertKaoqin(KaoqinVO kaoqinVO);
 }

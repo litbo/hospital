@@ -34,4 +34,10 @@
         select user_id, user_xm from s_emp
         where bm_id=#{bmId}
     </select>
+
+    <insert id="insertKaoqin" parameterType="com.litbo.hospital.supervise.bean.KaoqinVO">
+        insert into pb_kaoqin values (
+        #{userId},#{userName},#{kaoQin}
+        )
+    </insert>
 </mapper>

@@ -2951,8 +2951,8 @@
                 "shiro": "KQGL",
                 "children": [
                   {
-                    "title": "签到",
-                    "url": "./admin/basic-management/dayToDay-management/signDesk.html",
+                    "title": "导入文件",
+                    "url": "./admin/basic-management/dayToDay-management/ImportExcle.html",
                     "id": "60410",
                     "shiro": "KQGL"
                   },
