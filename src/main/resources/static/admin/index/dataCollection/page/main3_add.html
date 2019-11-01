@@ -32,9 +32,9 @@
             <label class="layui-form-label">资产编号</label>
             <div class="layui-input-block">
                 <input type="hidden" name="deviceCode" id="deviceCode" class="layui-input col-sm-10" autocomplete="off">
-                <input type="text" name="eqId" id="eqId" class="layui-input col-sm-10" autocomplete="off"  readonly>
-                <input type="hidden" name="eqZcbh" id="eqZcbh" class="layui-input col-sm-10" autocomplete="off"  readonly>
-                <button class="layui-btn col-sm-2" id="selectEmp" style="margin: 0">选择</button>x
+                <input type="hidden" name="eqId" id="eqId" class="layui-input col-sm-10" autocomplete="off"  readonly>
+                <input type="text" name="eqZcbh" id="mul" class="layui-input col-sm-10" autocomplete="off"  readonly>
+                <button class="layui-btn col-sm-2" id="selectEmp" style="margin: 0">选择</button>
             </div>
         </div>
 
@@ -267,7 +267,7 @@
                     name: "dtdt",
                     key: "eq",
                     se:"/eq/eqSe",
-                    data:formData,eqZcbh,
+                    data:formData,mul,
 
                 },
 

@@ -778,7 +778,7 @@ function render(renderParam){
                                                         //判断DOM是否存在
                                                         if ($dom.length > 0) {
                                                             $dom.val(res[i][key]);
-                                                            if(!item.eqZcbh){return true}
+                                                            if(!item.mul){return true}
                                                         }
                                                     }
                                                 }
