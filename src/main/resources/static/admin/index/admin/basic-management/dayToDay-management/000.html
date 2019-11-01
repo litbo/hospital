@@ -30,7 +30,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">起始日期</label>
                 <div class="layui-input-block">
-                    <input type="text" id="date1" name="dateqs" autocomplete="off" class="layui-input">
+                    <input type="text" id="date1" name="dateqs"   autocomplete="off" class="layui-input">
                     <input type="hidden" id="pbDate" name="pbDate" autocomplete="off" class="layui-input">
                     <input type="hidden" id="pbJsDate" name="pbJsDate" autocomplete="off" class="layui-input">
                 </div>
@@ -38,7 +38,8 @@
 
           <!--  <div class="layui-form-item">-->
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-lg"  id="peoPle">选择排班人员</button>
+                    <input type="hidden" id="userId" name="userId"  autocomplete="off" class="layui-input">
+                    <button type="button" class="layui-btn layui-btn-lg"  id="peoPle">选择排班人员</button>
                 </div>
            <!-- </div>-->
         </div>
@@ -57,96 +58,20 @@
         </div>
     </div>
     <div class="layui-row">
-        <div class="layui-form-item" style="float:right;margin-right: 5%">
-            <div class="layui-input-block">
-                <button class="layui-btn layui-btn-lg"  lay-submit="" lay-filter="submit">提交</button>
-                <button id="close" class="layui-btn layui-btn-lg">取消</button>
+        <div class="layui-form-item" >
+            <div class="layui-input-block" style="float:right;margin-right: 5%">
+                <a class="layui-btn " id="sumBer">提 交</a>
+                <button  type="reset"   class="layui-btn layui-btn-lg">取消</button>
             </div>
         </div>
     </div>
 </form>
-<div id="tips">
-</div>
 <script>
-    $(function() {
-        var emp =  tempValue("rl","emp",false);
-        $("#userId").val(emp.userId);
-        $("#userXm").val(emp.userXm);
-        $("#bmName").val(emp.bmName);
-        $("#bmId").val(emp.bmId);
+    var  uerId = null;
 
-    });
-
-    formData = {};
-    renderMod= {
-        form:{
-            val:{
-                filter: "bmList",
-                filter:"form",
-                select:[
-                    {
-                        filter:"gglx",
-                        ids:"gglxId",
-                        text:"gglxName",
-                        url:"/eqdict/gglx"
-                    },
-                    {
-                        filter: "bmList",
-                        ids: "bmId",
-                        text: "bmName",
-                        url: "/supervise/bmgl/listDelXks"
-                    }
-                    ]
-            },
-            date:[
-                {
-                    elem:"#date1",
-                    value:false,
-                    type: "date",
-                    format: "yyyy-MM-dd",
-                    range: true
-                },
-                {
-                    elem:"#date3",
-                    value:today,
-                    type: "date",
-                    format: "yyyy-MM-dd",
-                }
-            ],
-            submit:{
-                before:function(){
-                    var val=$("#date1").val()
-                    console.log(val);
-                    var arr = val.split(' ~ ');
-                    $("#pbDate").val(arr[0]);
-                    $("#pbJsDate").val(arr[1]);
-                    return true
-                },
-                form:{//或者写作up
-                    url:"/pb/pbPlan ",
-                    type:"POST",
-                    contentType:"application/json",
-                    data:["ngr","ggbt","ngsj","ggnr","gglxId","bm_id","pbDate","pbJsDate"],
-
-                   /* reload:'parent',*/
-                },
-        }
-        },
-        bind:{
-            selectItem: {
-                elem: "#layerBtn",
-                data:formData,
-                cb:"/supervise/bmgl/listSelectBmsCols",
-                db:"/supervise/bmgl/listBms",
-                key:"radio",
-                name:"dtdt"
-            }
-        }
-    };
     layui.use('layer', function() {
         var $ = layui.jquery,
             layer = layui.layer;
-
 
         $("#peoPle").off("click").on("click",function(){
             var bmId = $("#bm_id").val();
@@ -162,10 +87,91 @@
                     content : "./child/Scheduling-staff.html" ,//弹出层页面
                     area: ['85%', '90%']//弹出层的长宽
                 });
+                 uerId = window.localStorage.getItem("usId");
 
             }
         });
-    })
+
+    });
+
+    renderMod= {
+        form:{
+            val:{
+                select:[{
+                        filter: "bmList",
+                        ids: "bmId",
+                        text: "bmName",
+                        url: "/supervise/bmgl/listDelXks"
+                    }]
+            },
+            date:[
+                {
+                    elem:"#date1",
+                    value:false,
+                    type: "date",
+                    format: "yyyy-MM-dd",
+                    range: true
+                },
+                {
+                    elem:"#date3",
+                    value:today,
+                    type: "date",
+                    format: "yyyy-MM-dd"
+                }
+            ]
+
+        }
+
+    };
+
+   $("#sumBer").off("click").on("click",function(){
+
+       layui.use('layer',function() {
+           var layer = layui.layer;
+           var val=$("#date1").val()
+           var arr = val.split(' ~ ');
+           $("#pbDate").val(arr[0]);
+           $("#pbJsDate").val(arr[1]);
+           $("#userId").val(uerId);
+           if( val == "" ){
+               layer.msg("起始日期尚未选择", {icon: 2});
+               return;
+           }
+           }if( $("#userId").val() == "" ){
+               layer.msg("人员尚未选择", {icon: 2});
+               return;
+           }
+           var suJu = {};
+           suJu["pbDate"] = arr[0];
+           suJu["pbJsDate"] = arr[1];
+           suJu["userId"] = uerId;
+           suJu["bm_id"] = $("#bm_id").val();
+           console.log(suJu);
+
+             $.ajax({
+                 url: '/pb/pbPlan',
+                 type:"POST",
+                 async: false,/*同步传输*/
+                 data:JSON.stringify(suJu),
+                 dataType:'JSON',
+                 contentType:'application/json' ,
+                 success: function(res){
+                     if(res.code == 1 ){
+                         layer.msg("请求发送成功！",{icon: 6,time:3000});
+                         layer.location.reload();
+                     }else{
+                         alert(res.msg);
+                     }
+                 },
+                 error:function (data) {
+                     alert(data);
+                 }
+             }) ;
+       });
+       return false;
+
+   })
+
 </script>
 </body>
 
