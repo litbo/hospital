@@ -53,71 +53,89 @@
 </script>
 
 <script type="text/html" id="bar">
-    <form action="/pb/bc">
-        <button class="layui-btn"  data-type="reload">确定</button>
-    </form>
+    <a class="layui-btn layui-btn-sm" lay-event="entering"  data-type="queding">确定</a>
 </script>
 
 <script>
    // var aa=$.getUrlParam("pbJhid");
+   layui.use('table', function() {
+       var table = layui.table;
+       var $ = layui.$;
 
-    renderMod = {
-        addTable: {
-            table: {
-                id:"idTest",
-                // elem: "#table",
-                cols: [[ //表头
-                    //{type: "checkbox"}
-                    // , {field: 'bmName', title: '科室', sort: true}
-                    {field: 'userId', title: '人员id'}
-                    , {field: 'userName', title: '人员姓名'}
-                    , {fixed: 'right', width: 180, align: 'center', toolbar: "#bar"}
-                ]]
-                , url: "/pb/ghPeople"
-               // ,where:{pbJhid:aa}
-                , method: "POST"
-                , page: true
-                , request: {
-                    pageName: 'pageNum',
-                    limitName: 'pageSize'
-                }
+        renderMod = {
+            addTable: {
+                table: {
+                    id:"idTest",
+                    // elem: "#table",
+                    cols: [[ //表头
+                        //{type: "checkbox"}
+                        // , {field: 'bmName', title: '科室', sort: true}
+                        {field: 'userId', title: '人员id'}
+                        , {field: 'userName', title: '人员姓名'}
+                        , {fixed: 'right', width: 180, align: 'center', toolbar: "#bar"}
+                    ]]
+                    , url: "/pb/ghPeople"
+                    , method: "POST"
+                    , page: true
+                    , request: {
+                        pageName: 'pageNum',
+                        limitName: 'pageSize'
+                    }
 
-                , parseData: function (res) { //res 即为原始返回的数据
-                    return {
-                        "code": res.code, //解析接口状态
-                        "msg": res.msg, //解析提示文本
-                        "count": res.data.total,//页面显示的数据条数
-                        "data": res.data.list //解析数据列表
+                    , parseData: function (res) { //res 即为原始返回的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "count": res.data.total,//页面显示的数据条数
+                            "data": res.data.list //解析数据列表
+                        }
+                    }
+
+                    , done: function (obj) {
+                     /*   tableFunc({
+                            toolFunc: [
+                                {
+                                    title: "table1",
+                                    event: 'entering',
+                                    type: 2,
+                                    content: '2.html',
+                                    area: ['90%', '90%'],
+                                    dataUrl: ["machineNumber"]
+                                }
+                             ]
+                        })*/
                     }
                 }
-
-                , done: function (obj) {
-                    tableFunc({
-                        toolFunc: [
-                            {
-                                title: "table1",
-                                event: 'edit',
-                                type: 2,
-                                content: '2.html',
-                                area: ['90%', '90%'],
-                                dataUrl: ["machineNumber"]
-                            }
-                         ]
-                    })
-                }
+                , reSet: [
+                    {
+                       // url: "/px/selByName",
+                        type: "rload",
+                        tid: "idTest",
+                        data: ["rName"],
+                        method: "POST"
+                    }
+                ]
             }
-            , reSet: [
-                {
-                   // url: "/px/selByName",
-                    type: "rload",
-                    tid: "idTest",
-                    data: ["rName"],
-                    method: "POST"
-                }
-            ]
-        }
 
-    };
+        };
+
+        table.on('tool(table1)', function (obj) {
+           var data = obj.data;
+           if (obj.event === 'entering') {
+                 console.log(data.userId);
+               $.ajax({
+                   url : "/pb/tjPbRy",
+                   type : 'POST',
+                   data : {"userId": data.userId},
+                   success : function(data){
+
+                   },
+                   error:function (data) {
+                   }
+               });
+           }
+       })
+   })
 
 
 

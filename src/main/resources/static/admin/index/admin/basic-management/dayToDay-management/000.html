@@ -35,6 +35,12 @@
                     <input type="hidden" id="pbJsDate" name="pbJsDate" autocomplete="off" class="layui-input">
                 </div>
             </div>
+
+          <!--  <div class="layui-form-item">-->
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-lg"  id="peoPle">选择排班人员</button>
+                </div>
+           <!-- </div>-->
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -46,12 +52,7 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">人员</label>
-                <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-lg"  id="peoPle">提交</button>
-                </div>
-            </div>
+
 
         </div>
     </div>
@@ -149,10 +150,11 @@
 
         $("#peoPle").off("click").on("click",function(){
             var bmId = $("#bm_id").val();
-            var bI = JSON.stringify(bmId);
-            if (bI === ""){
+            console.log( bmId.length);
+            if (bmId.length === 0){
                 layer.msg("尚未选择科室，请先选择科室再选择人员");
             }else{
+                var bI = JSON.stringify(bmId);
                 window.localStorage.setItem('bM',bI);
                 layui.layer.open({
                     title : "人员",
@@ -160,10 +162,8 @@
                     content : "./child/Scheduling-staff.html" ,//弹出层页面
                     area: ['85%', '90%']//弹出层的长宽
                 });
+
             }
-
-
-
         });
     })
 </script>
