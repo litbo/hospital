@@ -1,6 +1,7 @@
 package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.dao.PbMapper;
 import com.litbo.hospital.supervise.service.PbService;
@@ -25,8 +26,9 @@ public class PbServiceImp implements PbService {
     }
 
     @Override
-    public List<RyVos> getBmpeople(String bmId) {
-        return (pbMapper.getBmpeople(bmId));
+    public PageInfo<RyVos> getBmpeople(String bmId,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo<>(pbMapper.getBmpeople(bmId));
     }
 
     @Override

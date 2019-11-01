@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.service;
 
+import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.vo.RyVos;
 import com.litbo.hospital.supervise.vo.getPbPlanVos;
@@ -18,5 +19,5 @@ public interface PbService {
 
     List<RyVos> ghPeople(int pageNum,int pageSize,String sid);
 
-    List<RyVos> getBmpeople(String bmId);
+    PageInfo<RyVos> getBmpeople(String bmId,int pageNum,int pageSize);
 }

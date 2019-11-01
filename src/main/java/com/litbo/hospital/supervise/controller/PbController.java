@@ -1,5 +1,6 @@
 package com.litbo.hospital.supervise.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.KaoqinVO;
@@ -17,6 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -35,7 +37,12 @@ public class PbController {
     private PbService pbService;
     @RequestMapping("/pbPlan")
     public Result pbPlan( PbJhVO pbJhVO){
-        pbService.addPbPlan(pbJhVO);
+        if (pbJhVO.getUserId()==null){
+            return Result.error("人員為空");
+        }else {
+            pbService.addPbPlan(pbJhVO);
+
+        }
         return Result.success();
     }
 
@@ -51,8 +58,13 @@ public class PbController {
     }
 
     @RequestMapping("/getBmPeople")
-    public Result getBmpeople(String bmId){
-            return Result.success(pbService.getBmpeople(bmId));
+    public Result getBmpeople(@RequestParam("bmId") String bmId,
+                                @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                @RequestParam(value = "pageSize", required = false, defaultValue = "15") int pageSize){
+        System.out.println(bmId);
+        String str = bmId.replaceAll("\\\"", "");
+        return  Result.success(pbService.getBmpeople(str,pageNum,pageSize));
+
     }
 
     @RequestMapping("/getPbPeople")
@@ -96,13 +108,13 @@ public class PbController {
 
     @RequestMapping(value = "/importKaoqin",method = RequestMethod.POST)
     @ResponseBody
-    public Result importUsers(@RequestParam CommonsMultipartFile file, HttpServletRequest request) throws IOException {
+    public Result importUsers(@RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
         System.out.println("调用成功");
         List<KaoqinVO> list = new ArrayList<KaoqinVO>();
         XSSFWorkbook workbook =null;
 
         //把MultipartFile转化为File
-        CommonsMultipartFile cmf= (CommonsMultipartFile)file;
+        CommonsMultipartFile cmf= (CommonsMultipartFile) file;
         DiskFileItem dfi=(DiskFileItem) cmf.getFileItem();
         File fo=dfi.getStoreLocation();
 
@@ -136,14 +148,8 @@ public class PbController {
                     userName.setCellType(Cell.CELL_TYPE_STRING);
                     kaoqin.setUserName((userName.getStringCellValue()));
                 }
-//
-//                XSSFCell post = row.getCell(2);//职位
-//                if(post!=null){
-//                    post.setCellType(Cell.CELL_TYPE_STRING);
-//                    kaoqin.setPost((post.getStringCellValue()));
-//                }
-
                 list.add(kaoqin);
+                System.out.println(list);
             }
             //usersMapper.insert(list);//往数据库插入数据
         } catch (Exception e) {
