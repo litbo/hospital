@@ -41,17 +41,17 @@
 <div class="layui-container" style="padding: 15px;">
     <div class="layui-row">
         <div class="col-xs-12">
-        <div class="layui-col-md6">
-            <!-- <blockquote class="layui-elem-quote">基于layui的日历记事本</blockquote>-->
-            <div class="layui-inline" id="test-n2" ></div>
+            <div class="layui-col-md6">
+                <!-- <blockquote class="layui-elem-quote">基于layui的日历记事本</blockquote>-->
+                <div class="layui-inline" id="test-n2" ></div>
 
-        </div>
-        <div class="layui-col-md6" id="but">
-            <div class="layui-inline"  style="width:100%;min-height: 545px ;">
-                <table  id="table" lay-filter="table1" ></table>
+            </div>
+            <div class="layui-col-md6" id="but">
+                <div class="layui-inline"  style="width:100%;min-height: 545px ;">
+                    <table  id="table" lay-filter="table1" ></table>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
 <script type="text/html" id="toolBar">
@@ -128,39 +128,39 @@
                         }
                     ]
                 }
-             /*   date:[
-                    {
-                        elem:"#date1",
-                        value:false,
-                        type: "date",
-                        format: "yyyy-MM-dd",
-                        range: true
-                    },
-                    {
-                        elem:"#date3",
-                        value:today,
-                        type: "date",
-                        format: "yyyy-MM-dd",
-                    }
-                ],*/
-           /*     submit:{
-                    before:function(){
-                        var val=$("#date1").val()
-                        console.log(val);
-                        var arr = val.split(' ~ ');
-                        $("#kssj").val(arr[0]);
-                        $("#jssj").val(arr[1]);
-                        return true
-                    },
-                    form:{//或者写作up
-                        url:"/gg/addGg",
-                        type:"POST",
-                        contentType:"application/json",
-                        data:["ngr","ggbt","ngsj","ggnr","gglxId","bmId","kssj","jssj"],
+                /*   date:[
+                       {
+                           elem:"#date1",
+                           value:false,
+                           type: "date",
+                           format: "yyyy-MM-dd",
+                           range: true
+                       },
+                       {
+                           elem:"#date3",
+                           value:today,
+                           type: "date",
+                           format: "yyyy-MM-dd",
+                       }
+                   ],*/
+                /*     submit:{
+                         before:function(){
+                             var val=$("#date1").val()
+                             console.log(val);
+                             var arr = val.split(' ~ ');
+                             $("#kssj").val(arr[0]);
+                             $("#jssj").val(arr[1]);
+                             return true
+                         },
+                         form:{//或者写作up
+                             url:"/gg/addGg",
+                             type:"POST",
+                             contentType:"application/json",
+                             data:["ngr","ggbt","ngsj","ggnr","gglxId","bmId","kssj","jssj"],
 
-                        reload:'parent',
-                    },
-                }*/
+                             reload:'parent',
+                         },
+                     }*/
             },
             addTable: {
                 table: {
@@ -185,7 +185,7 @@
                     , id: 'table'
                     , text: {
                         none: "尚未添加人员，请点击上方添加按钮添加人员！"
-                     }
+                    }
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -252,75 +252,75 @@
             }
         });
 
-/*
+        /*
 
-        //获取隐藏的弹出层内容
-        var date_choebox = $('.date_box').html();
+                //获取隐藏的弹出层内容
+                var date_choebox = $('.date_box').html();
 
-        //定义弹出层方法
-        function date_chose(obj_date,data){
-            var index = layer.open({
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                title:'添加记录',
-                area: ['400px', 'auto'], //宽高
-                btn:['确定','撤销','取消'],
-                content: '<div class="text_box">'+
-                    '<form class="layui-form" action="">'+
-                    '<div class="layui-form-item layui-form-text">'+
-                    ' <textarea id="text_book" placeholder="请输入内容"  class="layui-textarea"></textarea>'+
-                    '</div>'+
-                    '</form>'+
-                    '</div>'
-                ,success:function(){
-                    $('#text_book').val(data[obj_date])
+                //定义弹出层方法
+                function date_chose(obj_date,data){
+                    var index = layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        title:'添加记录',
+                        area: ['400px', 'auto'], //宽高
+                        btn:['确定','撤销','取消'],
+                        content: '<div class="text_box">'+
+                            '<form class="layui-form" action="">'+
+                            '<div class="layui-form-item layui-form-text">'+
+                            ' <textarea id="text_book" placeholder="请输入内容"  class="layui-textarea"></textarea>'+
+                            '</div>'+
+                            '</form>'+
+                            '</div>'
+                        ,success:function(){
+                            $('#text_book').val(data[obj_date])
+                        }
+                        ,yes:function (){
+                            //调用添加/编辑标注方法
+                            if($('#text_book').val()!=''){
+                                chose_moban(obj_date,data);
+                                layer.close(index);
+                            }else{
+                                layer.msg('不能为空', {icon: 2});
+                            }
+
+                        },btn2:function (){
+                            chexiao(obj_date,data);
+                        }
+                    });
                 }
-                ,yes:function (){
-                    //调用添加/编辑标注方法
-                    if($('#text_book').val()!=''){
-                        chose_moban(obj_date,data);
-                        layer.close(index);
-                    }else{
-                        layer.msg('不能为空', {icon: 2});
-                    }
 
-                },btn2:function (){
-                    chexiao(obj_date,data);
+
+
+
+
+                //定义添加/编辑标注方法
+                function chose_moban(obj_date,markJson){
+                    //获取弹出层val
+                    var chose_moban_val = $('#text_book').val();
+
+                    $('#test-n2').html('');//重要！由于插件是嵌套指定容器，再次调用前需要清空原日历控件
+                    //添加属性
+                    markJson[obj_date] = chose_moban_val;
+                    console.log(JSON.stringify(markJson));
+
+                    //再次调用日历控件，
+                    loding_date(obj_date,markJson);//重要！，再标注一个日期后会刷新当前日期变为初始值，所以必须调用当前选定日期。
+
                 }
-            });
-        }
 
 
+                //撤销选择
+                function chexiao(obj_date,markJson){
+                    //删除指定日期标注
+                    delete markJson[obj_date];
+                    console.log(JSON.stringify(markJson));
+                    //原理同添加一致
+                    $('#test-n2').html('');
+                    loding_date(obj_date,markJson);
 
-
-
-        //定义添加/编辑标注方法
-        function chose_moban(obj_date,markJson){
-            //获取弹出层val
-            var chose_moban_val = $('#text_book').val();
-
-            $('#test-n2').html('');//重要！由于插件是嵌套指定容器，再次调用前需要清空原日历控件
-            //添加属性
-            markJson[obj_date] = chose_moban_val;
-            console.log(JSON.stringify(markJson));
-
-            //再次调用日历控件，
-            loding_date(obj_date,markJson);//重要！，再标注一个日期后会刷新当前日期变为初始值，所以必须调用当前选定日期。
-
-        }
-
-
-        //撤销选择
-        function chexiao(obj_date,markJson){
-            //删除指定日期标注
-            delete markJson[obj_date];
-            console.log(JSON.stringify(markJson));
-            //原理同添加一致
-            $('#test-n2').html('');
-            loding_date(obj_date,markJson);
-
-        }
-*/
+                }
+        */
 
 
     });

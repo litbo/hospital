@@ -41,7 +41,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">使用科室</label>
                 <div class="layui-input-block">
-                    <select name="eqBmid" lay-filter="bmList">
+                    <select name="bm_id" lay-filter="bmList" id="bm_id">
                         <option value="">请选择...</option>
                     </select>
                 </div>
@@ -49,9 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">人员</label>
                 <div class="layui-input-block">
-                    <select name="eqBmid" lay-filter="bmList">
-                        <option value="">请选择...</option>
-                    </select>
+                    <button class="layui-btn layui-btn-lg"  id="peoPle">提交</button>
                 </div>
             </div>
 
@@ -127,9 +125,9 @@
                     url:"/pb/pbPlan ",
                     type:"POST",
                     contentType:"application/json",
-                    data:["ngr","ggbt","ngsj","ggnr","gglxId","bmId","pbDate","pbJsDate"],
+                    data:["ngr","ggbt","ngsj","ggnr","gglxId","bm_id","pbDate","pbJsDate"],
 
-                    reload:'parent',
+                   /* reload:'parent',*/
                 },
         }
         },
@@ -143,7 +141,31 @@
                 name:"dtdt"
             }
         }
-    }
+    };
+    layui.use('layer', function() {
+        var $ = layui.jquery,
+            layer = layui.layer;
+
+
+        $("#peoPle").off("click").on("click",function(){
+            var bmId = $("#bm_id").val();
+            var bI = JSON.stringify(bmId);
+            if (bI === ""){
+                layer.msg("尚未选择科室，请先选择科室再选择人员");
+            }else{
+                window.localStorage.setItem('bM',bI);
+                layui.layer.open({
+                    title : "人员",
+                    type : 2,
+                    content : "./child/Scheduling-staff.html" ,//弹出层页面
+                    area: ['85%', '90%']//弹出层的长宽
+                });
+            }
+
+
+
+        });
+    })
 </script>
 </body>
 

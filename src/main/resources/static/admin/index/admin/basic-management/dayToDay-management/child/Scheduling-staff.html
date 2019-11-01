@@ -48,31 +48,21 @@
         var $ = layui.$;
 
 
-
-        renderMod = {
-          /*  form: {
-                val: {
-                    /!* filter: "forms",*!/
-                    select: [
-                        {
-                            filter: "bmName",
-                            ids: "bmName",
-                            text: "bmName",
-                            url: "/supervise/bmgl/listDelXks"
-                        }
-                    ]
-                }
-            },*/
-            addTable: {
+        var dem = window.localStorage.getItem("bM");
+        console.log(dem);
+        renderMod.addTable = {
                 table: {
-                    elem: '#test'
-                    , url: ''
+                    elem: '#table'
+                    , url: '/pb/getBmPeople '
                     , toolbar: '#toolBar'
                     , cols: [[
                         {type:'checkbox'}
-                        , {field: 'bmId', title: 'ID', minWidth: 130}
-                        , {field: 'tel', title: '名字', minWidth: 130}
+                        , {field: 'userId', title: 'ID', minWidth: 130}
+                        , {field: 'userName', title: '名字', minWidth: 130}
                     ]]
+                    ,where:{
+                        bmId: dem
+                    }
                     , page: true
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
@@ -86,15 +76,15 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                },
-                reSet: {
+                }
+               /* reSet: {
                     url: "/specialEq/selectSpEqBmInfoByName",
                     type: "search",
                     data: ["bmName"],
                     method: "POST"
-                }
-            }
-        };
+                }*/
+            };
+
 
         //确定键
         table.on('toolbar(test)', function(obj){
