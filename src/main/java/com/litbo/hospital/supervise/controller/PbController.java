@@ -1,16 +1,22 @@
 package com.litbo.hospital.supervise.controller;
 
+
+import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.litbo.hospital.common.utils.poi.ImportExcelUtil;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.KaoqinVO;
 import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.service.PbService;
 import com.litbo.hospital.supervise.vo.RyVos;
 import com.litbo.hospital.supervise.vo.getPbPlanVos;
+import com.litbo.hospital.user.bean.EqFj;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -23,10 +29,15 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.io.*;
+import java.lang.reflect.Method;
+import java.util.*;
+
+import static com.litbo.hospital.common.utils.poi.ListToListMap.listToMap;
+import static com.litbo.hospital.common.utils.poi.ListToListMap.parseMap2Object;
 
 @Controller
 @ResponseBody
@@ -98,68 +109,56 @@ public class PbController {
     }
 
 
-    /**
-     * 导入学员清单
-     * @param
-     * @param
-     * @return
-     * @throws IOException
-     */
 
-    @RequestMapping(value = "/importKaoqin",method = RequestMethod.POST)
-    @ResponseBody
-    public Result importUsers(@RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
-        System.out.println("调用成功");
-        List<KaoqinVO> list = new ArrayList<KaoqinVO>();
-        XSSFWorkbook workbook =null;
-
-        //把MultipartFile转化为File
-        CommonsMultipartFile cmf= (CommonsMultipartFile) file;
-        DiskFileItem dfi=(DiskFileItem) cmf.getFileItem();
-        File fo=dfi.getStoreLocation();
-
-        //创建Excel，读取文件内容
-        workbook = new XSSFWorkbook(FileUtils.openInputStream(fo));
-
-        //获取第一个工作表
-        XSSFSheet sheet = workbook.getSheet("学员信息");
-
-        //获取sheet中第一行行号
-        int firstRowNum = sheet.getFirstRowNum();
-        //获取sheet中最后一行行号
-        int lastRowNum = sheet.getLastRowNum();
+    @PostMapping(value = "/importKaoqin")
+    public Integer importExcel(@RequestParam("file") MultipartFile file) {
+        Workbook workbook = null;
+        InputStream inputStream = null;
+        List<Integer> ids = new ArrayList<>();
 
         try {
-            //循环插入数据
-            for(int i=firstRowNum+1;i<=lastRowNum;i++){
-                XSSFRow row = sheet.getRow(i);
+            inputStream = new ByteArrayInputStream(file.getBytes());
+            workbook = WorkbookFactory.create(inputStream);
+            inputStream.close();
+            //工作表对象
+            Sheet sheetAt = workbook.getSheetAt(0);
+            Row row = sheetAt.getRow(0);
+            int startRow = 1;
+            int rowNum = sheetAt.getLastRowNum() + 1;
+            short cellNum = row.getLastCellNum();
+            /*int rowIsNull = getRowIsNull(row, rowNum);
+            System.out.println(rowIsNull);*/
+            List<String> list = ImportExcelUtil.readTitlesToExcel(workbook, sheetAt, row, cellNum);
+            List<List<Object>> lists = ImportExcelUtil.readRowsToExcel(workbook, sheetAt, row, rowNum, ids, startRow);
 
-                KaoqinVO kaoqin = new KaoqinVO();
-//                kaoqin.setStatus(true);//默认为启用状态
+            List<Map<String, Object>> mapList = listToMap(lists, list);
+            for (Map<String, Object> map : mapList) {
 
-                XSSFCell userId = row.getCell(0);//人员id
-                if(userId!=null){
-                    userId.setCellType(Cell.CELL_TYPE_STRING);
-                    kaoqin.setUserId((userId.getStringCellValue()));
+                List<String> resultList = new ArrayList<>(); //存放excle表中一行的数据
+                for (Map.Entry<String, Object> en : map.entrySet()) {
+                    resultList.add(en.getValue().toString());
+//                    System.out.println("Key = " + en.getKey() + ", Value = " + en.getValue());
+                    System.out.println(en.getValue());
                 }
 
-                XSSFCell userName = row.getCell(1);//人员姓名
-                if(userName!=null){
-                    userName.setCellType(Cell.CELL_TYPE_STRING);
-                    kaoqin.setUserName((userName.getStringCellValue()));
-                }
-                list.add(kaoqin);
-                System.out.println(list);
+                KaoqinVO kaoqinVO1 = new KaoqinVO();  //考勤表从excle一行的值读入，对象设置属性
+                kaoqinVO1.setUserId(resultList.get(0));
+                kaoqinVO1.setUserName(resultList.get(1));
+                kaoqinVO1.setKaoQin(resultList.get(2));
+
+                System.out.println("aaaaabnn");
+                System.out.println(kaoqinVO1);
+                pbService.insertKaoqin(kaoqinVO1);
             }
-            //usersMapper.insert(list);//往数据库插入数据
+
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            workbook.close();
+            return -1;
         }
-
-        System.out.println("文件上传成功");
-        return Result.success();
-
+        return 1;
     }
+
+
+
 }
