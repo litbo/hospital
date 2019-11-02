@@ -14,9 +14,7 @@ public interface KhService {
 
     boolean khBc(KhZxinxiVo ks);
 
-    NumVos getNum();
-
-    PageInfo findInfo(int pageNum,int pageSize);
+    List<ListJhVos> findInfo(int pageNum,int pageSize);
 
     List<RenYuanVo> getYdRen(int pageNum, int pageSize, String id);
 

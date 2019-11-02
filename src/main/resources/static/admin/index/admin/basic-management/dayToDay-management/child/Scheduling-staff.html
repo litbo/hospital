@@ -18,7 +18,7 @@
 <body>
 <div class="layui-row">
     <div class="col-xs-12">
-        <table  id="table" lay-filter="table1" ></table>
+        <table  id="table"  lay-filter="table1" ></table>
     </div>
 </div>
 <script type="text/html" id="toolBar">
@@ -76,6 +76,7 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
+
                 }
                /* reSet: {
                     url: "/specialEq/selectSpEqBmInfoByName",
@@ -87,20 +88,32 @@
 
 
         //确定键
-        table.on('toolbar(test)', function(obj){
+        table.on('toolbar(table1)', function(obj){
+           var uI = [];
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'getCheckData':
                     var data = checkStatus.data;
                     if (data.length === 0) {
-                        layer.alert("尚未选择");
-                        return;
-                    }
-                    /* console.log(data);
-                     console.log(data);*/
+                        layer.msg("尚未选择");
 
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);
+                    }else{
+                        for(var i = 0; i < data.length; i++){
+                            uI.push( data[i].userId);
+                        }
+                        console.log(uI);
+                        var sI = uI.join(",");
+                        console.log(sI);
+                       /* var suI = JSON.stringify(sI);*/
+
+                        window.localStorage.setItem('usId',sI);
+
+                        var index = parent.layer.getFrameIndex(window.name);
+                       /* parent.location.reload();*/
+                        parent.layer.close(index);
+
+                    }
+
                     break;
             }
         });

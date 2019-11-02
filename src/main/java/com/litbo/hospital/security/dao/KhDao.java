@@ -76,9 +76,9 @@ public interface KhDao {
                 "\t\t SUM(CASE pxjg WHEN '是' THEN 1 ELSE 0 END) AS 'SdNum',\n" +
                 "\t\t SUM(CASE pxjg WHEN '否' THEN 1 ELSE 0 END) AS 'WdNum',\n" +
                 "\t\t SUM(CASE pxjg WHEN '否' THEN 1 ELSE 0 END) + SUM(CASE pxjg WHEN '是' THEN 1 ELSE 0 END) AS 'YdNum'\n" +
-          "FROM dbo.jh_khlr"
+          "FROM dbo.jh_khlr WHERE jh_id = #{id}"
     })
-    NumVos getNum();
+    NumVos getNum(String id);
 
     @Select({"SELECT bm_name,user_name FROM dbo.jh_tjry WHERE jh_id = #{id}"})
     List<RenYuanVo> getYdRen(@Param("id") String id);
