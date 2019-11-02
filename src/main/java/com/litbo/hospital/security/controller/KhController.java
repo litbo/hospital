@@ -33,9 +33,11 @@ public class KhController {
 //        if(list!=null){
 //            objects.add(list);
 //        }
-        PageInfo pageInfo = khService.findInfo(pageNum,pageSize);
-     //   objects.add(pageInfo);
-        return Result.success(pageInfo);
+        List<ListJhVos> list = khService.findInfo(pageNum,pageSize);
+        for(ListJhVos j:list){
+            System.out.println(j);
+        }
+        return Result.success(new PageInfo(list));
     }
 
     @RequestMapping("/kh")
@@ -181,21 +183,6 @@ public class KhController {
         PageInfo pageInfo = new PageInfo(khService.getHgRen(pageNum,pageSize,id));
         return Result.success(pageInfo);
     }
-
-    @Test
-    public void test(){
-
-        double result1=0.67;
-        DecimalFormat df = new DecimalFormat("0.00%");
-        String r = df.format(result1);
-        System.out.println("第二种"+r);
-        
-        double b = 6;
-        double a = 2;
-        DecimalFormat d = new DecimalFormat("0.0000");
-        String r1 = d.format(a/b);
-        System.out.println(r1);
-     }
 
 
 
