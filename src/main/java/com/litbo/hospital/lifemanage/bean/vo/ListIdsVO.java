@@ -12,4 +12,5 @@ import java.util.List;
 @Data
 public class ListIdsVO {
     List<String> ids;
+    String id;
 }

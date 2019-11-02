@@ -35,5 +35,9 @@ public interface SelectMapper {
     void delPlan(String ids);
 
     void delPd(String ids);
+
+    void delPdzt(String ids);
+
+    void delCheck(String ids);
 }
 

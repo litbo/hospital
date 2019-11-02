@@ -24,10 +24,10 @@
     </div>
 </div>
 <script type="text/html" id="status">
-    {{#  if(d.checkStatus == "已审核"){ }}
-    <span class="layui-btn layui-btn-sm">{{d.checkStatus}}</span>
-    {{#  } else if(d.checkStatus == "未审核") { }}
-    <span class="layui-btn layui-btn-sm deli">{{d.checkStatus}}</span>
+    {{#  if(d.planCheck == "已审核"){ }}
+    <span class="layui-btn layui-btn-sm">{{d.planCheck}}</span>
+    {{#  } else if(d.planCheck == "未审核") { }}
+    <span class="layui-btn layui-btn-sm deli">{{d.planCheck}}</span>
     {{#  } }}
 </script>
 <script type="text/html" id="toolBar">
@@ -62,7 +62,7 @@
                     , height: 'full-75'
                     , cols: [[ //表头
                         {type: 'checkbox', fixed: 'left'}
-                        ,{field: 'checkStatus', title: '审核状态', minWidth: 150,templet:'#status'}
+                        ,{field: 'planCheck', title: '审核状态', minWidth: 150,templet:'#status'}
                         ,{field: 'planName', title: '计划名称', minWidth: 300}
                         , {field: 'userId', title: '制定人', minWidth: 120}
                         , {field: 'bmName', title: '科室', minWidth: 150}

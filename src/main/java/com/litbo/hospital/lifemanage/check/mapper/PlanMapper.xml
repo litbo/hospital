@@ -12,8 +12,8 @@
 
     </resultMap>
     <insert id="insertPlan1" parameterType="com.litbo.hospital.lifemanage.check.pojo.Plan">
-        insert into sg_plan(id,user_id,bm_id,plan_name,plan_date) values (
-        #{id},#{user_id},#{bm_id},#{plan_name},#{plan_date}
+        insert into sg_plan(id,user_id,bm_id,plan_name,plan_date,plan_sum,panying_sum,pankui_sum,yipan_sum,plan_check,plan_file) values (
+        #{id},#{user_id},#{bm_id},#{plan_name},#{plan_date},#{plan_sum},#{panying_sum},#{pankui_sum},#{yipan_sum},#{plan_check},#{plan_file}
         )
     </insert>
 
@@ -24,4 +24,50 @@
         insert into sg_check (id,eq_id,date,checks,plan_id)
         values (#{id},#{eq_id},#{date},#{checks},#{plan_id})
     </insert>
+    <update id="updatetPlanSum" parameterType="int">
+      update sg_plan
+        <set>
+            <if test="plan_sum != null and plan_sum != ''">
+                plan_sum = #{plan_sum}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="updataPlanCheck" parameterType="String">
+        update sg_plan
+        <set>
+            <if test="plan_check != null and plan_check != ''">
+                plan_check = #{plan_check}
+            </if>
+        </set>
+        where id=#{plan_id}
+    </update>
+    <update id="updataOtherNum" parameterType="String">
+        update sg_plan
+        <set>
+            <if test="yipan_sum != null and yipan_sum != ''">
+                yipan_sum = #{yipan_sum},
+            </if>
+            <if test="panying_sum != null and panying_sum != ''">
+                panying_sum = #{panying_sum},
+            </if>
+            <if test="pankui_sum != null and pankui_sum != ''">
+                pankui_sum = #{pankui_sum},
+            </if>
+            <if test="plan_file != null and plan_file != ''">
+                plan_file = #{plan_file}
+            </if>
+        </set>
+
+        where id=#{pdJhid}
+    </update>
+    <select id="findPlanId" parameterType="String" resultType="String" >
+        select plan_id from sg_check where id=#{id}
+    </select>
+
+
+    <select id="fileStatus" parameterType="String" resultType="String">
+        select plan_file from sg_plan where id=#{plan_id}
+    </select>
 </mapper>
