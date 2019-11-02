@@ -51,11 +51,11 @@
 
 <script type="text/html" id="barDemo">
     {{#if (d.operationId === "01") { }}
-    <input type="checkbox" name="taskResult" class="qq" lay-skin="switch" lay-text="正&nbsp;&nbsp;常|不正常" lay-filter="taskResult">
+    <input type="checkbox" name="taskResult" value="{{d.LAY_TABLE_INDEX}}" class="qq" lay-skin="switch" lay-text="正&nbsp;&nbsp;常|不正常" lay-filter="taskResult" {{d.taskResult == null ? "checked" : ""}}>
     {{# }else if(d.operationId === "02"){ }}
-    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="进&nbsp;&nbsp;行|未进行" lay-filter="taskResult" >
+    <input type="checkbox" class="taskResult" value="{{d.LAY_TABLE_INDEX}}" name="taskResult" lay-skin="switch" lay-text="进&nbsp;&nbsp;行|未进行" lay-filter="taskResult" {{d.taskResult == null ? "checked" : ""}}>
     {{# }else{ }}
-    <input type="checkbox" class="taskResult" name="taskResult" lay-skin="switch" lay-text="处&nbsp;&nbsp;理|未处理" lay-filter="taskResult" >
+    <input type="checkbox" class="taskResult" value="{{d.LAY_TABLE_INDEX}}" name="taskResult" lay-skin="switch" lay-text="处&nbsp;&nbsp;理|未处理" lay-filter="taskResult" {{d.taskResult == null ? "checked" : ""}} >
     {{# } }}
 </script>
 
@@ -64,7 +64,6 @@
 <!--</script>-->
 
 <script>
-    // console.log($.getUrlParam("eqSbbh"));
     renderMod = {
         addTable: {
             table: {
@@ -97,52 +96,50 @@
                 ,page:false
                 ,done: function(obj){
                     // console.log(obj.data);
-                    layui.form.render();
-                    var tra = obj.data;
-
-                    for (var i = 0; i < tra.length; i++){
-                        if(tra[i].taskResult == null){
-                            tra[i]["taskResult"] = 1;
+                    var tData = getTableValue('table');
+                    for (var i = 0; i < tData.length; i++){
+                        if(tData[i].taskResult == null){
+                            tData[i]["taskResult"] = 1;
                         }else{
-                            tra = tra;
+                            window.tData = tData;
                         }
                     }
-                   localStorage.setItem("tableData",JSON.stringify(tra));
 
                     layui.form.on('switch(taskResult)', function(obj){
-
-                        for (var i = 0; i < tra.length; i++){
-                            // console.log(obj.elem.checked);
-                            console.log($("input[name='taskResult']"));
-                            console.log(tra);
-                            if(tra[i].taskResult == true){
-
-                                localStorage.setItem("tableData",'');
-
-                                // console.log(i);
-                                tra[i].taskResult = 1;
-                                layui.form.render();
-                                // console.log(1);
-                                localStorage.setItem("tableData",JSON.stringify(tra));
-                            }else if(obj.elem.checked == false){
-                                localStorage.setItem("tableData",'');
-                                // console.log(localStorage.getItem("tableData"));
-                                // console.log(i);
-
-                                tra[i].taskResult = 0;
-                                // console.log(2);
-                                layui.form.render();
-                                localStorage.setItem("tableData",JSON.stringify(tra));
-                                // console.log(tra);
-
-                            }
-
+                        var tValue = this.value;
+                        var ch = obj.elem.checked;
+                        if( ch === true){
+                            tData[tValue].taskResult = 1;
+                        }else{
+                            tData[tValue].taskResult = 0;
                         }
-                        // console.log($(".taskResult").val());
-                        // console.log(tra[0].taskResult);
-                        // console.log(tra[1].taskResult);
-                        // console.log(obj.);
+                        window.tData = tData;
 
+                    });
+
+                    layui.form.on('submit(demo1)', function(data){
+
+                        // layer.alert(JSON.stringify(tData), {
+                        //     title: '最终的提交信息'
+                        // });
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: 'json',
+                            url: '/lifeManage/saveTaskResult',
+                            data: JSON.stringify(tData),
+                            contentType: 'application/json; charset=UTF-8',
+                            success: function(result) {
+                                layui.layer.alert('提交成功!');
+                                window.parent.location.reload();
+
+                            },
+                            error:function(){
+
+                                alert("error");
+                            }
+                        });
+                        return false;
                     });
 
                     tableFunc({
@@ -199,61 +196,43 @@
     };
 
     // 表单
-    layui.use(['form','table'], function(){
-
-        var form = layui.form
-            ,layer = layui.layer
-            ,table = layui.table;
-
-        // form.on('switch(taskResult)', function(obj){
-        //     console.log(obj.elem.checked);
-        //     if(obj.elem.checked == true){
-        //         $(".taskResult").val(1);
-        //     }else{
-        //         $(".taskResult").val(0);
-        //     }
-        //     console.log($(".taskResult").val());
-        // });
-
-
-        form.on('submit(demo1)', function(data){
-
-            var data1 = form.val("forms");
-            // console.log(data1);
-            var tableData = localStorage.getItem("tableData");
-            console.log(tableData);
-            // layer.alert(JSON.str ingify(tableData), {
-            //     title: '最终的提交信息'
-            // });
-            layer.alert(tableData, {
-                title: '最终的提交信息'
-            });
-
-            // $.ajax({
-            //     type: "POST",
-            //     dataType: 'json',
-            //     url: '/lifeManage/saveTaskResult',
-            //     data: JSON.stringify(dataObj),
-            //     contentType: 'application/json; charset=UTF-8',
-            //     success: function(result) {
-            //         console.log(JSON.stringify(dataObj))
-            //         layui.layer.alert('提交成功!');
-            //         setTimeout(function () {
-            //             window.parent.location.reload();
-            //         },1000)
-            //
-            //     },
-            //     error:function(){
-            //         layer.alert(JSON.stringify(dataObj), {
-            //             title: '最终的提交信息'
-            //         });
-            //         alert("error");
-            //     }
-            // });
-            return false;
-        });
-
-    });
+    // layui.use(['form','table'], function(){
+    //
+    //     var form = layui.form
+    //         ,layer = layui.layer
+    //         ,table = layui.table;
+    //
+    //     form.on('submit(demo1)', function(data){
+    //
+    //         layer.alert(JSON.stringify(tData), {
+    //             title: '最终的提交信息'
+    //         });
+    //
+    //         // $.ajax({
+    //         //     type: "POST",
+    //         //     dataType: 'json',
+    //         //     url: '/lifeManage/saveTaskResult',
+    //         //     data: JSON.stringify(dataObj),
+    //         //     contentType: 'application/json; charset=UTF-8',
+    //         //     success: function(result) {
+    //         //         console.log(JSON.stringify(dataObj))
+    //         //         layui.layer.alert('提交成功!');
+    //         //         setTimeout(function () {
+    //         //             window.parent.location.reload();
+    //         //         },1000)
+    //         //
+    //         //     },
+    //         //     error:function(){
+    //         //         layer.alert(JSON.stringify(dataObj), {
+    //         //             title: '最终的提交信息'
+    //         //         });
+    //         //         alert("error");
+    //         //     }
+    //         // });
+    //         return false;
+    //     });
+    //
+    // });
 
 </script>
 </body>
