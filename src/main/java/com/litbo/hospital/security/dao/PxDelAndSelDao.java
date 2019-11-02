@@ -53,7 +53,4 @@ public interface PxDelAndSelDao {
             "AND s.bm_name LIKE '%${rName}%'")
     List<TjRyVo> selByName(@Param("rName") String rName,@Param("id") String id);
 
-    @Select("SELECT DISTINCT user_id AS userId FROM dbo.jh_tjry")
-    List<RyIdVo> findUserId();
-
 }
