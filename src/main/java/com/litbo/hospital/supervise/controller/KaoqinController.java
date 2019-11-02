@@ -87,6 +87,7 @@ public class KaoqinController {
     @RequestMapping("listKaoqin")  //考勤列表
     public Result listKaoqin(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                              @RequestParam(value = "pageSize", required = false, defaultValue = "15") int pageSize){
+        System.out.println("调用列表");
         return Result.success( kaoqinService.listKaoqin(pageNum,pageSize));
     }
 }
