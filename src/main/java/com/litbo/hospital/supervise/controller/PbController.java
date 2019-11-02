@@ -11,6 +11,7 @@ import com.litbo.hospital.supervise.bean.KaoqinVO;
 import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.service.PbService;
 import com.litbo.hospital.supervise.vo.RyVos;
+import com.litbo.hospital.supervise.vo.TjPbRyVos;
 import com.litbo.hospital.supervise.vo.getPbPlanVos;
 import com.litbo.hospital.user.bean.EqFj;
 import org.apache.commons.collections.MapUtils;
@@ -91,6 +92,13 @@ public class PbController {
         }else{
             return Result.error("没有值班人员,请添加!");
         }
+    }
+
+    @RequestMapping("/BcKqRy")
+    public Result BcKqRy(@RequestBody TjPbRyVos[] pbRyVos,HttpSession session){
+        System.out.println("点击保存按钮时的id"+session.getAttribute("pb_id").toString());
+        pbService.BcKqRy(pbRyVos,session.getAttribute("pb_id").toString());
+        return Result.success();
     }
 
     @RequestMapping("/ghPeople")
