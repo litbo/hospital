@@ -15,8 +15,6 @@ import java.util.List;
 public interface PbService {
 
 
-    Result insertKaoqin(KaoqinVO kaoqinVO);
-
     void addPbPlan(PbJhVO pbJhVO);
 
     List<getPbPlanVos> getPbPlan(int pageNum,int pageSize);

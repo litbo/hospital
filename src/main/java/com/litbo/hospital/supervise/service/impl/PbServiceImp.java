@@ -68,6 +68,7 @@ public class PbServiceImp implements PbService {
                 pbJhVO.setUserId(ids[i]);
                 pbJhVO.setPbJhid(pbJhid);
                 pbJhVO.setBmId(pbJhVO.getBmId());
+                pbJhVO.setPbCheck("未审核");
                 System.out.println(pbJhVO);
                 pbMapper.addPbPlan(pbJhVO);
             }
@@ -77,9 +78,5 @@ public class PbServiceImp implements PbService {
     }
 
 
-    public Result insertKaoqin(KaoqinVO kaoqinVO) {
-        pbMapper.insertKaoqin(kaoqinVO);
-        return Result.success();
-    }
 
 }

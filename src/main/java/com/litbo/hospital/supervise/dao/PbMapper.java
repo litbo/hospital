@@ -22,5 +22,4 @@ public interface PbMapper {
 
     List<RyVos> getBmpeople(String bmId);
 
-    void insertKaoqin(KaoqinVO kaoqinVO);
 }
