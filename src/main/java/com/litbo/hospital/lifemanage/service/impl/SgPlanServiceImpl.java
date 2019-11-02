@@ -52,29 +52,6 @@ public class SgPlanServiceImpl implements SgPlanService {
     private SelectService selectService;
     @Autowired
     private SgCheckService sgCheckService;
-    /**
-     * 计划制定
-     *
-     * @param sgPlan 计划内容
-     */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
-    @Override
-    public void insertPlan(SgPlan sgPlan) {
-        String planId = UUID.randomUUID().toString();
-        sgPlan.setId(planId);
-        sgPlan.setPlanDate(new Date());
-        sgPlanMapper.insert(sgPlan);
-        //查询科室的设备列表
-        List<String> eqList = sgPlanMapper.getEqIdByBmId(sgPlan.getBmId());
-        // 把计划核对的设备添加进核对表
-        SgCheck sgCheck = new SgCheck();
-        for (String eqId : eqList) {
-            sgCheck.setEqId(eqId);
-            sgCheck.setPlanId(planId);
-            sgCheck.setId(UUID.randomUUID().toString());
-            sgCheckMapper.insertSelective(sgCheck);
-        }
-    }
 
     /**
      * 计划列表
@@ -87,8 +64,9 @@ public class SgPlanServiceImpl implements SgPlanService {
      * @return PageInfo<SgPlan>
      */
     @Override
-    public PageInfo<SgPlanList> selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize) {
+    public PageInfo<SgPlan> selectPlan(String planName, String planDate, String userName, Integer pageNum, Integer pageSize) {
 
+        PageHelper.startPage(pageNum,pageSize);
         // 把空字符串 转换为null
         if (StringUtils.isBlank(planName)) {
             planName = null;
@@ -122,104 +100,109 @@ public class SgPlanServiceImpl implements SgPlanService {
         }else{
             try {
                 List<SgPlan> str = sgPlanMapper.selectPlan(planName, date, userId);
+                System.out.println("盘点计划详情"+str);
+                return  new PageInfo<>(str);
             }catch (Exception e){
                 System.out.println("出错");
             }
-            List<SgPlan> sgPlan = sgPlanMapper.selectPlan(planName, date, userId);
-
-            List<SgPlanList> sgPlanLists= new ArrayList<>();
-            ListNum listNum = new ListNum();
-            SgPlanList sgList = new SgPlanList();
-
-
-            for (SgPlan sg:sgPlan){
-                String fileStatus = null;
-                listNum = selectMapper.getListNum(sg.getId());
-                List<SelectVO> adllDate3 = new ArrayList<>();
-                String BmId = sg.getBmId();
-                String getAllBmName = selectMapper.getBmName(BmId); //对应planid下的部门
-                String planId = sg.getId();
-
-                ///aa审核状态的添加
-                List<SgCheckVO> listCheck = sgCheckMapper.getListByPlanId(planId);
-                String checksNum[] = new String[listCheck.size()];
-                String checkStatus = null ; //盘点核实的状态
-                for (int i=0 ; i<listCheck.size(); i++){
-                    checksNum[i]  = listCheck.get(i).getChecks();
-                    System.out.println(listCheck.get(i).getChecks());
-
-                }
-                if (checksNum.length==0){
-                    checkStatus = "未审核";
-                }
-                if (checksNum.length>0){
-                    if (!checksNum.equals(null)){
-                        if (checksNum[0]!=null){
-                            checkStatus = "已审核";
-//                        System.out.println("已审核");
-                        }else{
-                            checkStatus = "未审核";
-//                        System.out.println("未审核");
-                        }
-                    }
-                }
-                //aa
-                List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(planId);
-//                System.out.println(adllDate4);
-                for (SgCheckVO s1:adllDate4){
-                    SelectVO selectVO = new SelectVO(s1.getEqZcbh(),s1.getEqName(),getAllBmName);
-                    adllDate3.add(selectVO);
-                }
-                int num = adllDate3.size();
-                List<SgPlanList> sgPlanLists2= new ArrayList<>();
-
-                if (listNum==null){
-                    fileStatus = "未上传";
-                    sgList.setAllNum(adllDate3.size());
-                    SgPlanList sgList1 = new SgPlanList(fileStatus,checkStatus,sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-                            sg.getPlanDate(),num, 0,
-                            0,0);
-//                    SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-//                            sg.getPlanDate(),0, 0,
-//                            0,0);
-//                    System.out.println(sgList1);
-                    sgPlanLists2.add(sgList1);
-                }
-                sgPlanLists.addAll(sgPlanLists2);
-                if (listNum != null) {
-                    if  (listNum.getYiPanNum() ==0 ){
-                        fileStatus = "未上传";
-                        sgList.setAllNum(adllDate3.size());
-                        SgPlanList sgList1 = new SgPlanList(fileStatus, checkStatus,sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-                                sg.getPlanDate(),num, 0,
-                                0,0);
-//                        SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-//                                sg.getPlanDate(),0, 0,
-//                                0,0);
-//                        System.out.println(sgList1);
-                        sgPlanLists2.add(sgList1);
-                    }
-                    sgPlanLists.addAll(sgPlanLists2);
-                    if (listNum.getYiPanNum()>0){
-                        fileStatus = "已上传";
-                        SgPlanList sgList1 = new SgPlanList(fileStatus,checkStatus, sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
-                                sg.getPlanDate(),listNum.getAllNum(), listNum.getYiPanNum(),
-                                listNum.getPanYingNum(),listNum.getPanKuiNum());
-//                        System.out.println(sgList1);
-
-                        sgPlanLists.add(sgList1);
-//                        System.out.println("部位空"+sgList1);
-                    }
-
-
-                }
-
-//                System.out.println("总共"+sgPlanLists);
-            }
-
-            return  new PageInfo<>(sgPlanLists);
         }
+        return null;
     }
+
+//            List<SgPlan> sgPlan = sgPlanMapper.selectPlan(planName, date, userId);
+//
+//            List<SgPlanList> sgPlanLists= new ArrayList<>();
+//            ListNum listNum = new ListNum();
+//            SgPlanList sgList = new SgPlanList();
+//
+//
+//            for (SgPlan sg:sgPlan){
+//                String fileStatus = null;
+//                listNum = selectMapper.getListNum(sg.getId());
+//                List<SelectVO> adllDate3 = new ArrayList<>();
+//                String BmId = sg.getBmId();
+//                String getAllBmName = selectMapper.getBmName(BmId); //对应planid下的部门
+//                String planId = sg.getId();
+//
+//                ///aa审核状态的添加
+//                List<SgCheckVO> listCheck = sgCheckMapper.getListByPlanId(planId);
+//                String checksNum[] = new String[listCheck.size()];
+//                String checkStatus = null ; //盘点核实的状态
+//                for (int i=0 ; i<listCheck.size(); i++){
+//                    checksNum[i]  = listCheck.get(i).getChecks();
+//                    System.out.println(listCheck.get(i).getChecks());
+//
+//                }
+//                if (checksNum.length==0){
+//                    checkStatus = "未审核";
+//                }
+//                if (checksNum.length>0){
+//                    if (!checksNum.equals(null)){
+//                        if (checksNum[0]!=null){
+//                            checkStatus = "已审核";
+////                        System.out.println("已审核");
+//                        }else{
+//                            checkStatus = "未审核";
+////                        System.out.println("未审核");
+//                        }
+//                    }
+//                }
+//                //aa
+//                List<SgCheckVO> adllDate4  =sgCheckMapper.getListByPlanId(planId);
+////                System.out.println(adllDate4);
+//                for (SgCheckVO s1:adllDate4){
+//                    SelectVO selectVO = new SelectVO(s1.getEqZcbh(),s1.getEqName(),getAllBmName);
+//                    adllDate3.add(selectVO);
+//                }
+//                int num = adllDate3.size();
+//                List<SgPlanList> sgPlanLists2= new ArrayList<>();
+//
+//                if (listNum==null){
+//                    fileStatus = "未上传";
+//                    sgList.setAllNum(adllDate3.size());
+//                    SgPlanList sgList1 = new SgPlanList(fileStatus,checkStatus,sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+//                            sg.getPlanDate(),num, 0,
+//                            0,0);
+////                    SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+////                            sg.getPlanDate(),0, 0,
+////                            0,0);
+////                    System.out.println(sgList1);
+//                    sgPlanLists2.add(sgList1);
+//                }
+//                sgPlanLists.addAll(sgPlanLists2);
+//                if (listNum != null) {
+//                    if  (listNum.getYiPanNum() ==0 ){
+//                        fileStatus = "未上传";
+//                        sgList.setAllNum(adllDate3.size());
+//                        SgPlanList sgList1 = new SgPlanList(fileStatus, checkStatus,sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+//                                sg.getPlanDate(),num, 0,
+//                                0,0);
+////                        SgPlanList sgList1 = new SgPlanList( sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+////                                sg.getPlanDate(),0, 0,
+////                                0,0);
+////                        System.out.println(sgList1);
+//                        sgPlanLists2.add(sgList1);
+//                    }
+//                    sgPlanLists.addAll(sgPlanLists2);
+//                    if (listNum.getYiPanNum()>0){
+//                        fileStatus = "已上传";
+//                        SgPlanList sgList1 = new SgPlanList(fileStatus,checkStatus, sg.getBmName(), sg.getId(), sg.getUserId(), sg.getBmId(),sg.getPlanName(),
+//                                sg.getPlanDate(),listNum.getAllNum(), listNum.getYiPanNum(),
+//                                listNum.getPanYingNum(),listNum.getPanKuiNum());
+////                        System.out.println(sgList1);
+//
+//                        sgPlanLists.add(sgList1);
+////                        System.out.println("部位空"+sgList1);
+//                    }
+//
+//
+//                }
+//
+////                System.out.println("总共"+sgPlanLists);
+//            }
+
+//        }
+//    }
 
     /**
      * 查询所有的计划名字
@@ -249,6 +232,8 @@ public class SgPlanServiceImpl implements SgPlanService {
          selectMapper.delPlan(ids);
          try{
             selectMapper.delPd(ids);
+            selectMapper.delPdzt(ids);
+            selectMapper.delCheck(ids);
          }catch (Exception e){
              e.printStackTrace();
          }

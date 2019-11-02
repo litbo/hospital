@@ -25,10 +25,18 @@ public class PlanServiceImp implements PlanService {
             String planId = UUID.randomUUID().toString();
             plan.setId(planId);
             plan.setPlan_date(new Date());
-            planMapper.insertPlan1(plan);
-//            System.out.println(plan.getBm_id());
+
             //查询科室的设备列表
             List<String> eqList = planMapper.getEqIdByBmId(plan.getBm_id());
+            plan.setPlan_sum(eqList.size());
+            plan.setYipan_sum(0);
+            plan.setPankui_sum(0);
+            plan.setPanying_sum(0);
+            plan.setPlan_check("未审核");
+            plan.setPlan_file("未上传");
+
+            planMapper.insertPlan1(plan);
+//            System.out.println(plan.getBm_id());
             // 把计划核对的设备添加进核对表Check表
             Check check = new Check();
             for (String eqId : eqList) {

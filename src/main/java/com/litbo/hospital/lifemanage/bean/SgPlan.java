@@ -36,15 +36,12 @@ public class SgPlan {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date planDate;
 
-    @Override
-    public String toString() {
-        return "SgPlan{" +
-                "bmName='" + bmName + '\'' +
-                ", id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", bmId='" + bmId + '\'' +
-                ", planName='" + planName + '\'' +
-                ", planDate=" + planDate +
-                '}';
-    }
+    private int planSum;
+
+    private int yipanSum;
+    private int panyingSum;
+    private int pankuiSum;
+    private String planCheck;
+    private String planFile;
+
 }

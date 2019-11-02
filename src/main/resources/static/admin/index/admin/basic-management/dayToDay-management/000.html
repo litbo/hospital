@@ -48,7 +48,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">使用科室</label>
                 <div class="layui-input-block">
-                    <select name="bm_id" lay-filter="bmList" id="bm_id">
+                    <select name="bmId" lay-filter="bmList" id="bm_id">
                         <option value="">请选择...</option>
                     </select>
                 </div>
@@ -137,7 +137,7 @@
                layer.msg("起始日期尚未选择", {icon: 2});
                return;
            }
-           }if( $("#userId").val() == "" ){
+           if( $("#userId").val() == "" ){
                layer.msg("人员尚未选择", {icon: 2});
                return;
            }
@@ -145,7 +145,7 @@
            suJu["pbDate"] = arr[0];
            suJu["pbJsDate"] = arr[1];
            suJu["userId"] = uerId;
-           suJu["bm_id"] = $("#bm_id").val();
+           suJu["bmId"] = $("#bm_id").val();
            console.log(suJu);
 
              $.ajax({

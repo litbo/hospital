@@ -25,18 +25,6 @@ public class SgPlanController {
     private SelectService selectService;
     @Autowired
     private SgPlanService sgPlanService;
-    /**
-     * 计划制定
-     *
-     * @param sgPlan 计划内容
-     * @return Result
-     */
-    @PostMapping("/insertPlan")
-    public Result insertPlan(SgPlan sgPlan) {
-        sgPlanService.insertPlan(sgPlan);
-
-        return Result.success();
-    }
 
     /**
      * 计划列表
@@ -80,7 +68,7 @@ public class SgPlanController {
         return Result.success(sgPlanService.selectIdByName(sgPlanVO));
     }
 
-    @RequestMapping("delPlan")
+    @RequestMapping("delPlan") //删除计划
     public Result delPlan(@RequestBody DelVO ids){
         String planId [] =ids.getIds();
         for (int i=0; i<ids.getIds().length; i++){

@@ -67,6 +67,7 @@ public class PbServiceImp implements PbService {
             for(int i=0; i<ids.length; i++){
                 pbJhVO.setUserId(ids[i]);
                 pbJhVO.setPbJhid(pbJhid);
+                pbJhVO.setBmId(pbJhVO.getBmId());
                 System.out.println(pbJhVO);
                 pbMapper.addPbPlan(pbJhVO);
             }
