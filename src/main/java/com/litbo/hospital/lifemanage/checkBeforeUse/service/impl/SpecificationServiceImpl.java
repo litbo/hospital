@@ -191,7 +191,14 @@ public class SpecificationServiceImpl implements SpecificationService {
             if ("同类设备".equals(standardVO.getApplicableEquipment())){
                 System.out.println(eqInfo);
                 eqInfos.forEach(System.out::println);
-                eqInfos.removeIf(a->!a.getEqSbbh().substring(4,14).equals(eqInfo.getEqSbbh().substring(4,14)));
+                eqInfos.removeIf(a->{
+                    if (a.getEqSbbh() == null)
+                        return true;
+                    if(a.getEqSbbh().substring(4,14).equals(eqInfo.getEqSbbh().substring(4,14)))
+                        return false;
+                    else
+                        return true;
+                });
             }else if ("同厂家同型号".equals(standardVO.getApplicableEquipment())){
                 eqInfos.removeIf(a->{
                     if (a.getSbcsIdScs() == null || a.getEqGg() == null || a.getEqXh() == null || eqInfo == null)
