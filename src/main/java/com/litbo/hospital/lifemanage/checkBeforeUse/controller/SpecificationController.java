@@ -200,7 +200,7 @@ public class SpecificationController {
 
 
     @PostMapping("saveStandardTaskResult")
-    public Result saveStandardTaskResult(@RequestBody SaveStandardTaskResult saveStandardTaskResult){
+    public Result saveStandardTaskResult(SaveStandardTaskResult saveStandardTaskResult){
         System.out.println(saveStandardTaskResult);
         String operatorNumber = saveStandardTaskResult.getOperatorNumber();
         Integer taskId = saveStandardTaskResult.getTaskId();
@@ -276,12 +276,12 @@ public class SpecificationController {
     }
 
     @PostMapping("saveTaskResult")
-    public Result saveTaskResult(@RequestBody ResultList list){
+    public Result saveTaskResult(@RequestBody List<SearchStandardTaskVO> list){
 
-        list.getList().forEach(a->{
+        list.forEach(a->{
             System.out.println(a.getTaskId() + "----" + a.getOperatorNumber() +"----" + a.getUserXm()+ "----" + a.getTaskResult());
         });
-        specificationService.saveTaskResult(list.getList());
+        specificationService.saveTaskResult(list);
         return Result.success();
     }
 
