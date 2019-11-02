@@ -58,7 +58,7 @@ public class PbController {
         }
     }
 
-    @RequestMapping("getPbPlan")
+    @RequestMapping("/getPbPlan")
     public Result getPbPlan(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
                             @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize){
         List<getPbPlanVos> pbPlanVosList = pbService.getPbPlan(pageNum,pageSize);

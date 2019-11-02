@@ -13,7 +13,7 @@
     </insert>
 
     <select id="getPbPlanVos" resultType="com.litbo.hospital.supervise.vo.getPbPlanVos">
-        SELECT DISTINCT j.pb_jhid,j.pb_date,j.pbJs_date,b.bm_name FROM pb_jh AS j
+        SELECT DISTINCT j.pb_jhid,j.pb_check,j.pb_date,j.pbJs_date,b.bm_name FROM pb_jh AS j
         INNER JOIN s_bm AS b ON j.bm_id=b.bm_id
     </select>
 
