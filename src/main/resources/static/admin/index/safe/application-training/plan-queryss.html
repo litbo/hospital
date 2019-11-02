@@ -34,10 +34,10 @@
 </div>
 
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="YdRy">应到人员:{{d.pxnrlb}}</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="SdRy">实到人员</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="WdRy">未到人员</a>
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="HgRy">合格人员</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="YdRy">应到人员:{{d.ydNum}}</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="SdRy">实到人员:{{d.sdNum}}</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="WdRy">未到人员:{{d.wdNum}}</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="HgRy">合格人员:{{d.hgNum}}</a>
 </script>
 
 
@@ -74,6 +74,7 @@
                     }
                 }
                 , done: function (obj) {
+                    console.log(obj);
                     tableFunc({
                         toolFunc: [
                             {
