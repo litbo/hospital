@@ -60,7 +60,7 @@
     <div class="layui-row">
         <div class="layui-form-item" >
             <div class="layui-input-block" style="float:right;margin-right: 5%">
-                <a class="layui-btn " id="sumBer">提 交</a>
+                <a class="layui-btn layui-btn-lg" id="sumBer">提 交</a>
                 <button  type="reset"   class="layui-btn layui-btn-lg">取消</button>
             </div>
         </div>
@@ -137,7 +137,7 @@
                layer.msg("起始日期尚未选择", {icon: 2});
                return;
            }
-           }if( $("#userId").val() == "" ){
+           if( $("#userId").val() == "" ){
                layer.msg("人员尚未选择", {icon: 2});
                return;
            }
@@ -157,8 +157,11 @@
                  contentType:'application/json' ,
                  success: function(res){
                      if(res.code == 1 ){
-                         layer.msg("请求发送成功！",{icon: 6,time:3000});
-                         layer.location.reload();
+                         layer.msg("请求发送成功！",{icon: 6,time:2000}, function(){
+                             window.localStorage.clear();
+                             window.location.reload();
+                         });
+
                      }else{
                          alert(res.msg);
                      }

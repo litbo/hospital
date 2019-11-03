@@ -128,7 +128,15 @@
                    type : 'POST',
                    data : {"userId": data.userId},
                    success : function(data){
+                       if(data.code == 1 ){
+                           layer.msg("请求发送成功！",{icon: 6,time:2000}, function(){
+                               parent.location.reload();
+                           });
 
+                       }else{
+                           console.log("code返回可能不对");
+                           alert(data.msg);
+                       }
                    },
                    error:function (data) {
                    }

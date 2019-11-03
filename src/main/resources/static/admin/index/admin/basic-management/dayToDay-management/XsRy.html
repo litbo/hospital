@@ -32,10 +32,18 @@
 
     <div class="col-xs-12">
         <table id="table" lay-data="{id: 'idTest'}" lay-filter="table1"></table>
+        <div class="layui-input-block" style="float:right;margin:20px 5% 20px 0">
+            <a class="layui-btn  layui-btn-lg" id="sumBer">保存</a>
+        </div>
     </div>
+
 </div>
 
 <script type="text/html" id="toolBar">
+
+    <div class=" layui-inline" >
+        <button class="layui-btn Bm" id="Bm" lay-event="getCheckData">确定</button>
+    </div>
     <!-- 查询区域 -->
     <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData" id="transmit" style="float: left;">确定</button>-->
 
@@ -52,13 +60,16 @@
     </form>
 </script>
 
+
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">确定</a>
+
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="ghry">更换</a>
+    <!-- <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add">确定</a>-->
 </script>
 
 <script>
     var aa=$.getUrlParam("pbJhid");
+    var  pbRyVos = null;
 
     renderMod = {
         addTable: {
@@ -66,9 +77,9 @@
                 id:"idTest",
                 // elem: "#table",
                 cols: [[ //表头
-                    //{type: "checkbox"}
+                   {type: "checkbox"}
                    // , {field: 'bmName', title: '科室', sort: true}
-                    {field: 'userId', title: '人员id'}
+                   ,{field: 'userId', title: '人员id'}
                     , {field: 'userName', title: '人员姓名'}
                     , {fixed: 'right', width: 280, align: 'center', toolbar: "#bar"}
                 ]]
@@ -91,25 +102,13 @@
                 }
 
                 , done: function (obj) {
+                    console.log(layui.table.cache["idTest"]);
+                    pbRyVos = layui.table.cache["idTest"];
+                    for (var i = 0;  i<  pbRyVos.length; i++){
+                        pbRyVos[i]["isKq"] = "0";
+                    }
                     tableFunc({
                         toolFunc: [
-                            {
-                                title: "table1",
-                                event: 'edit',
-                                type: 2,
-                                content: '2.html',
-                                area: ['90%', '90%'],
-                                dataUrl: ["machineNumber"]
-                            },
-                            {
-                                filter:"table1",
-                                event: "jhxq",
-                                title: "确定",
-                                area: ['90%', '90%'],
-                                type: 2,
-                                //content: "./child/personnel-xqinput.html",
-                                dataUrl: ["id"]
-                            },
                             {
                                 filter:"table1",
                                 event: "ghry",
@@ -135,7 +134,72 @@
         }
 
     };
+    layui.use(['table', 'jquery'], function() {
+        var table = layui.table;
+        var $ = layui.$;
 
+        table.on('toolbar(table1)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    if (data.length === 0) {
+                        layer.alert("尚未选择");
+                        return;
+                    }else{
+                        for (var i = 0; i < pbRyVos.length; i++){
+                            for (var j = 0; j < data.length; j++){
+                                if (pbRyVos[i].userId === data[j].userId){
+                                    console.log(pbRyVos[i].userId);
+                                    pbRyVos[i]["isKq"] = "1";
+                                }
+                            }
+                        }
+                    }
+                    console.log(pbRyVos);
+                    console.log(data);
+
+                   /* parent.layui.$('#bmId').val(data[0].bmName);
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);*/
+                    break;
+            }
+        });
+
+        $("#sumBer").off("click").on("click",function(){
+            for (var i = 0;  i<  pbRyVos.length; i++){
+               delete pbRyVos[i]["LAY_TABLE_INDEX"];
+                delete pbRyVos[i]["LAY_CHECKED"];
+            }
+
+            layui.use('layer',function() {
+                $.ajax({
+                    url: '/pb/BcKqRy',
+                    type:"POST",
+                    async: false,/*同步传输*/
+                    data:{"pbRyVos":JSON.stringify(pbRyVos)},
+                    dataType:'JSON',
+                   /* contentType:'application/json' ,*/
+                    success: function(res){
+                        if(res.code == 1 ){
+                            layer.msg("请求发送成功！",{icon: 6,time:2000}, function(){
+                                parent.location.reload();
+                            });
+
+                        }else{
+                            console.log("code返回可能不对");
+                            alert(res.msg);
+                        }
+                    },
+                    error:function (data) {
+                        alert(data);
+                    }
+                }) ;
+            });
+            return false;
+
+        })
+    });
 
 
 
