@@ -657,12 +657,14 @@ public interface SpecificationDao {
             "dbo.s_bm.bm_id,\n" +
             "dbo.eq_info.eq_gg,\n" +
             "dbo.eq_info.eq_xh,\n" +
-            "dbo.eq_info.eq_pp\n" +
+            "dbo.eq_info.eq_pp," +
+            "a.b\n" +
             "\n" +
             "FROM\n" +
             "dbo.eq_info ,\n" +
             "dbo.standard_task ,\n" +
-            "dbo.s_bm\n" +
+            "dbo.s_bm," +
+            "(select '未完成' as b) as a\n" +
             "WHERE\n" +
             "dbo.eq_info.eq_sbbh = dbo.standard_task.equipment_number AND\n" +
             "dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
@@ -682,12 +684,14 @@ public interface SpecificationDao {
             "dbo.s_bm.bm_id,\n" +
             "dbo.eq_info.eq_gg,\n" +
             "dbo.eq_info.eq_xh,\n" +
-            "dbo.eq_info.eq_pp\n" +
+            "dbo.eq_info.eq_pp," +
+            "a.b\n" +
             "\n" +
             "FROM\n" +
             "dbo.eq_info ,\n" +
             "dbo.standard_task ,\n" +
-            "dbo.s_bm\n" +
+            "dbo.s_bm," +
+            "(select '已完成' as b) as a\n" +
             "WHERE\n" +
             "dbo.eq_info.eq_sbbh = dbo.standard_task.equipment_number AND\n" +
             "dbo.eq_info.eq_bmid = dbo.s_bm.bm_id AND\n" +
