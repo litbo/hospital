@@ -2,7 +2,6 @@ package com.litbo.hospital.lifemanage.checkBeforeUse.service;
 
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.*;
-import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqInfoVO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -51,6 +50,8 @@ public interface SpecificationService {
     int saveTaskResult(List<SearchStandardTaskVO> list);
 
     List<BmTaskEqVO> searchBmTaskEqsByDay();
+
+    PageInfo<BmTaskEqVO> searchBmTaskEqsByDay(int pageNum, int pageSize);
 
     List<BmTaskEqVO> searchUseForBmEqByDate(LocalDate startDate, LocalDate endDate,String bmId,String bmName);
 }

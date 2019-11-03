@@ -6,7 +6,6 @@ import com.litbo.hospital.lifemanage.checkBeforeUse.dao.SpecificationDao;
 import com.litbo.hospital.lifemanage.checkBeforeUse.service.SpecificationService;
 import com.litbo.hospital.lifemanage.checkBeforeUse.vo.*;
 import com.litbo.hospital.operational_data_monitoring.software_interface.dao.EqInfoDAO;
-import com.litbo.hospital.operational_data_monitoring.software_interface.vo.EqInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -450,6 +449,23 @@ public class SpecificationServiceImpl implements SpecificationService {
         return list;
     }
 
+    @Override
+    public PageInfo<BmTaskEqVO> searchBmTaskEqsByDay(int pageNum, int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<BmTaskEqVO> list = specificationDao.searchAllTaskBm();
+        list.forEach(bte->{
+            bte.setDate(LocalDate.now().minusDays(1));
+            int eqTotal = specificationDao.searchEqTotal(bte.getBmId(),LocalDate.now().minusDays(1));
+            bte.setTotalEqs(eqTotal);
+            int notDoneTotal = specificationDao.searchNotDoneEqTotal(bte.getBmId(),LocalDate.now().minusDays(1));
+            bte.setDoneEqs(eqTotal - notDoneTotal);
+            bte.setEnforced((eqTotal-notDoneTotal)*1.0/eqTotal);
+        });
+
+        PageInfo<BmTaskEqVO> pageInfo = new PageInfo<>(list);
+
+        return pageInfo;
+    }
 
     @Override
     public List<BmTaskEqVO> searchUseForBmEqByDate(LocalDate startDate, LocalDate endDate,String bmId,String bmName) {

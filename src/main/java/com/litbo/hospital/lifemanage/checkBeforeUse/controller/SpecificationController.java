@@ -291,9 +291,9 @@ public class SpecificationController {
      * @return 检查情况
      */
     @GetMapping("searchUseForBmEq")
-    public Result searchUseForBmEq(){
-        List<BmTaskEqVO> bmTaskEqVOS = specificationService.searchBmTaskEqsByDay();
-        bmTaskEqVOS.forEach(System.out::println);
+    public Result searchUseForBmEq(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                   @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo<BmTaskEqVO> bmTaskEqVOS = specificationService.searchBmTaskEqsByDay(pageNum,pageSize);
         return Result.success(bmTaskEqVOS);
 
     }
