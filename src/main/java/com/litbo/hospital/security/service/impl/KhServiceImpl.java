@@ -54,31 +54,44 @@ public class KhServiceImpl implements KhService{
     }
 
     @Override
-    public NumVos getNum() {
-        return khDao.getNum();
-    }
-
-    @Override
     public boolean khBc(KhZxinxiVo ks) {
         ks.setId(UUID.randomUUID().toString());
         return khDao.khBc(ks);
     }
 
     @Override
-    public PageInfo findInfo(int pageNum,int pageSize) {
+    public List<ListJhVos> findInfo(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-//        NumVos numVos = khDao.getNum();
-//        List<ListCheckLvVos> list = khDao.findInfo();
-//        List<ListCheckLvVos> vos = new ArrayList<>();
-//        for(ListCheckLvVos l:list){
-//            l.setSdNum(numVos.getSdNum());
-//            l.setYdNum(numVos.getYdNum());
-//            l.setWdNum(numVos.getWdNum());
-//            l.setHgNum(numVos.getHgNum());
-//            vos.add(l);
-//        }
-        PageInfo pageInfo = new PageInfo(khDao.findInfo());
-        return pageInfo;
+        NumVos numVos;
+        List<ListJhVos> listJhVos = new ArrayList<>();
+
+       // ListJhVos jhVos = new ListJhVos();
+
+        List<ListCheckLvVos> vos = khDao.findInfo();
+
+        for(ListCheckLvVos os:vos){
+            ListJhVos jhVos = new ListJhVos();
+            System.out.println(os.getId());
+            numVos = khDao.getNum(os.getId());
+            System.out.println("合格人数："+numVos.getHgNum());
+            System.out.println("未到人数"+numVos.getWdNum());
+            System.out.println("实到人数"+numVos.getSdNum());
+            System.out.println("应到人数"+numVos.getYdNum());
+            jhVos.setId(os.getId());
+            jhVos.setEqName(os.getEqName());
+            jhVos.setPxnrlb(os.getPxnrlb());
+            jhVos.setPxlx(os.getPxlx());
+            jhVos.setPxfs(os.getPxfs());
+            jhVos.setPxl(os.getPxl());
+            jhVos.setKhhgl(os.getKhhgl());
+            jhVos.setYdNum(numVos.getYdNum());
+            jhVos.setSdNum(numVos.getSdNum());
+            jhVos.setWdNum(numVos.getWdNum());
+            jhVos.setHgNum(numVos.getHgNum());
+
+            listJhVos.add(jhVos);
+        }
+        return listJhVos;
     }
 
     @Override

@@ -7,13 +7,13 @@
         <result property="userName" column="user_xm"></result>
     </resultMap>
     <insert id="addPbPlan" parameterType="com.litbo.hospital.supervise.bean.PbJhVO">
-            insert into pb_jh (pb_jhid,bm_id,user_id,pb_date,pbJs_date) values(
-        #{pbJhid},#{bmId},#{userId},#{pbDate},#{pbJsDate}
+            insert into pb_jh (pb_jhid,bm_id,user_id,pb_date,pbJs_date,pb_check) values(
+        #{pbJhid},#{bmId},#{userId},#{pbDate},#{pbJsDate},#{pbCheck}
         )
     </insert>
 
     <select id="getPbPlanVos" resultType="com.litbo.hospital.supervise.vo.getPbPlanVos">
-        SELECT DISTINCT j.pb_jhid,j.pb_date,j.pbJs_date,b.bm_name FROM pb_jh AS j
+        SELECT DISTINCT j.pb_jhid,j.pb_check,j.pb_date,j.pbJs_date,b.bm_name FROM pb_jh AS j
         INNER JOIN s_bm AS b ON j.bm_id=b.bm_id
     </select>
 

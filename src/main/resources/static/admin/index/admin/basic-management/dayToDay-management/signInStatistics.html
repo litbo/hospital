@@ -35,15 +35,16 @@
             table: {
                 cols: [[ //表头
                     {type:"checkbox"}
-                    , {field: 'bianHao', title: '编号', minWidth: 200}
-                    , {field: 'name', title: '名字', minWidth: 200}
+                    , {field: 'userId', title: '人员编号', minWidth: 200}
+                    , {field: 'userName', title: '人员姓名', minWidth: 200}
+                    , {field: 'kaoQin', title: '考勤状态', minWidth: 200}
                     , {field: 'name', title: '出勤次数', minWidth: 200, sort: true}
                     , {field: 'name', title: '迟到次数', minWidth: 200, sort: true}
                     , {field: 'name', title: '请假次数', minWidth: 200, sort: true}
                     , {field: 'name', title: '早退次数', minWidth: 200, sort: true}
 
                 ]]
-                /*   , url: "/supervise/gwgl/listGws"*/
+                   , url: "/kaoqin/listKaoqin"
                 ,id:"table"
                 , request: {
                     pageName: 'pageNum',

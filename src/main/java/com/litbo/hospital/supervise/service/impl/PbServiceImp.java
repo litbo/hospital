@@ -9,6 +9,7 @@ import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.dao.PbMapper;
 import com.litbo.hospital.supervise.service.PbService;
 import com.litbo.hospital.supervise.vo.RyVos;
+import com.litbo.hospital.supervise.vo.TjPbRyVos;
 import com.litbo.hospital.supervise.vo.getPbPlanVos;
 import com.litbo.hospital.user.bean.EqFj;
 import org.apache.poi.ss.usermodel.Row;
@@ -48,6 +49,13 @@ public class PbServiceImp implements PbService {
     }
 
     @Override
+    public void BcKqRy(TjPbRyVos[] pbRyVos,String id) {
+        for(TjPbRyVos vos:pbRyVos){
+
+        }
+    }
+
+    @Override
     public List<RyVos> ghPeople(int pageNum, int pageSize, String sid) {
         PageHelper.startPage(pageNum,pageSize);
         return pbMapper.ghPeople(sid);
@@ -67,6 +75,8 @@ public class PbServiceImp implements PbService {
             for(int i=0; i<ids.length; i++){
                 pbJhVO.setUserId(ids[i]);
                 pbJhVO.setPbJhid(pbJhid);
+                pbJhVO.setBmId(pbJhVO.getBmId());
+                pbJhVO.setPbCheck("未审核");
                 System.out.println(pbJhVO);
                 pbMapper.addPbPlan(pbJhVO);
             }
@@ -76,9 +86,5 @@ public class PbServiceImp implements PbService {
     }
 
 
-    public Result insertKaoqin(KaoqinVO kaoqinVO) {
-        pbMapper.insertKaoqin(kaoqinVO);
-        return Result.success();
-    }
 
 }

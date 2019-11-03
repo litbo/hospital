@@ -13,12 +13,6 @@ import java.util.List;
  * @author Administrator on 2018-12-29
  */
 public interface SgPlanService {
-    /**
-     * 计划制定
-     *
-     * @param sgPlan 计划内容
-     */
-    void insertPlan(SgPlan sgPlan);
 
     /**
      * 计划列表

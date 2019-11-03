@@ -9,6 +9,7 @@ import com.litbo.hospital.common.utils.DbUtil.IDFormat;
 import com.litbo.hospital.lifemanage.bean.*;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgPdVO;
+import com.litbo.hospital.lifemanage.check.mapper.PlanMapper;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.dao.SgPdMapper;
@@ -35,6 +36,8 @@ public class SgPdServiceImpl implements SgPdSeverice {
     @Autowired
     SgCheckMapper sgCheckMapper;
 
+    @Autowired
+    PlanMapper planMapper;
 //    /**
 //     * 插入盘点的计划id和操作人id
 //     * @param record
@@ -76,7 +79,7 @@ public class SgPdServiceImpl implements SgPdSeverice {
 //                    continue;
 //                }
 
-            sgPd.setPdScsj(pdScsj);
+                sgPd.setPdScsj(pdScsj);
             }
             sgPd.setPdId(IDFormat.getIdByIDAndTime("sg_pd", "pd_id"));
             sgPd.setPdScanId(pdScanId);
@@ -164,35 +167,34 @@ public class SgPdServiceImpl implements SgPdSeverice {
             selectMapper.insertZt(sgPdZt);
         }
 
-//        System.out.println("3");
 
-        List<SgPdZt> listPankui = selectMapper.findPankui(pdJhid,"");
+//        List<SgPdZt> listPankui = selectMapper.findPankui(pdJhid,"");
 //        System.out.println("盘亏+++"+listPankui.size()+listPankui);
-        List<SelectVO> lisSbbh = new ArrayList<>(); //现存盘亏的
-        for (SgPdZt sgPdZt1 :listPankui){
-            SelectVO selectVO = new SelectVO(sgPdZt1.getEqSbbh(),sgPdZt1.getEqName(),sgPdZt1.getBmName());
-            lisSbbh.add(selectVO);
-        }
+//        List<SelectVO> lisSbbh = new ArrayList<>(); //现存盘亏的
+//        for (SgPdZt sgPdZt1 :listPankui){
+//            SelectVO selectVO = new SelectVO(sgPdZt1.getEqSbbh(),sgPdZt1.getEqName(),sgPdZt1.getBmName());
+//            lisSbbh.add(selectVO);
+//        }
 //        System.out.println("插入的"+adllDate2.size()+adllDate2);
-//        adllDate2.addAll(lisSbbh);
-//        System.out.println("盘亏的jia"+adllDate2.size());
+////        adllDate2.addAll(lisSbbh);
+////        System.out.println("盘亏的jia"+adllDate2.size());
+//
+//
+//        List<SelectVO> listAll = new ArrayList();
+//        List<SelectVO> resultList= new ArrayList();
+//        listAll.addAll(lisSbbh);
+//        listAll.addAll(adllDate2);
+//        for (int i = 0; i < listAll.size(); i++) {
+//            if(adllDate2.contains(listAll.get(i))&&lisSbbh.contains(listAll.get(i))){
+//                continue;
+//            }else{
+//                resultList.add(listAll.get(i));
+//            }
+//        }
+//        System.out.println("更新后的"+resultList.size()+resultList);
 
 
-        List<SelectVO> listAll = new ArrayList();
-        List<SelectVO> resultList= new ArrayList();
-        listAll.addAll(lisSbbh);
-        listAll.addAll(adllDate2);
-        for (int i = 0; i < listAll.size(); i++) {
-            if(adllDate2.contains(listAll.get(i))&&lisSbbh.contains(listAll.get(i))){
-                continue;
-            }else{
-                resultList.add(listAll.get(i));
-            }
-        }
-//        System.out.println("genxinhoude"+resultList.size()+resultList);
-
-
-        for (SelectVO sgPd :resultList){
+        for (SelectVO sgPd :adllDate2){
 
             sgPdZt.setBmName(sgPd.getBmName());
             sgPdZt.setEqSbbh(sgPd.getEqSbbh());
@@ -201,24 +203,12 @@ public class SgPdServiceImpl implements SgPdSeverice {
             // int size = userList.size(); 此处一定不要在这里将size写死，因为size是一直在变的
             selectMapper.insertZt(sgPdZt);
         }
-//        System.out.println("4");
 
 
-//        System.out.println("盘点计划的"+adllDate3);
-//        for (SelectVO sgPd :adllDate3){
-//            if (allDate3.contains(adllDate2)||allDate3.contains(listTemp)){
-//                adllDate3.remove(adllDate2);
-//                allDate3.remove(listTemp);
-//                sgPdZt.setBmName(sgPd.getBmName());
-//                sgPdZt.setEqSbbh(sgPd.getEqSbbh());
-//                sgPdZt.setEqName(sgPd.getEqName());
-//                sgPdZt.setPdZt("正常");
-//                selectMapper.insertZt(sgPdZt);
-//            }
-//        }
-//        System.out.println("1");
-
-
+        ListNum listNum = selectMapper.getListNum(pdJhid);
+        String fileStatus = "已上传";
+        planMapper.updataOtherNum(listNum.getYiPanNum(),listNum.getPanYingNum(),listNum.getPanKuiNum(),fileStatus,pdJhid);
+        System.out.println("已上传"+listNum.getYiPanNum()+listNum.getPanYingNum()+listNum.getPanKuiNum());
 
 
     }

@@ -23,10 +23,10 @@
     </div>
 </div>
 <script type="text/html" id="status">
-    {{#  if(d.fileStatus == "已上传"){ }}
-    <span class="layui-btn layui-btn-sm">{{d.fileStatus}}</span>
-    {{#  } else if(d.fileStatus == "未上传") { }}
-    <span class="layui-btn layui-btn-sm deli">{{d.fileStatus}}</span>
+    {{#  if(d.planFile == "已上传"){ }}
+    <span class="layui-btn layui-btn-sm">{{d.planFile}}</span>
+    {{#  } else if(d.planFile == "未上传") { }}
+    <span class="layui-btn layui-btn-sm deli">{{d.planFile}}</span>
     {{#  } }}
 </script>
 <script type="text/html" id="toolBar">
@@ -42,19 +42,19 @@
 <script type="text/html" id="bar">
     {{#  { }}
     <div class="layui-inline">
-        <a lay-event="allP" class="layui-btn layui-btn-sm">盘点计划:{{d.allNum}}</a>
+        <a lay-event="allP" class="layui-btn layui-btn-sm">盘点计划:{{d.planSum}}</a>
     </div>
 
     <div class="layui-inline">
-        <a lay-event="haveP" class="layui-btn layui-btn-sm editi">已盘:{{d.yiPanNum}}</a>
+        <a lay-event="haveP" class="layui-btn layui-btn-sm editi">已盘:{{d.yipanSum}}</a>
     </div>
 
     <div class="layui-inline">
-        <a lay-event="another" class="layui-btn layui-btn-sm addi">盘盈：{{d.panYingNum}}</a>
+        <a lay-event="another" class="layui-btn layui-btn-sm addi">盘盈：{{d.panyingSum}}</a>
     </div>
 
     <div class="layui-inline">
-        <a lay-event="notnull" class="layui-btn layui-btn-sm deli">盘亏：{{d.panKuiNum}}</a>
+        <a lay-event="notnull" class="layui-btn layui-btn-sm deli">盘亏：{{d.pankuiSum}}</a>
     </div>
     {{#  } }}
 </script>
@@ -71,7 +71,7 @@
                 elem: "#table"
                 , height: 'full-75'
                 , cols: [[ //表头
-                    {field: 'fileStatus', title: '上传状态', minWidth: 100,templet:'#status'}
+                    {field: 'planFile', title: '上传状态', minWidth: 100,templet:'#status'}
                     ,{field: 'planName', title: '计划名称', minWidth: 100}
                     , {field: 'userId', title: '制定人',width: 100}
                     , {field: 'bmName', title: '科室',minWidth: 100}

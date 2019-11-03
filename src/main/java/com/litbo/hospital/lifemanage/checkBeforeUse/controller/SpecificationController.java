@@ -200,7 +200,7 @@ public class SpecificationController {
 
 
     @PostMapping("saveStandardTaskResult")
-    public Result saveStandardTaskResult(@RequestBody SaveStandardTaskResult saveStandardTaskResult){
+    public Result saveStandardTaskResult(SaveStandardTaskResult saveStandardTaskResult){
         System.out.println(saveStandardTaskResult);
         String operatorNumber = saveStandardTaskResult.getOperatorNumber();
         Integer taskId = saveStandardTaskResult.getTaskId();
@@ -276,12 +276,12 @@ public class SpecificationController {
     }
 
     @PostMapping("saveTaskResult")
-    public Result saveTaskResult(@RequestBody ResultList list){
+    public Result saveTaskResult(@RequestBody List<SearchStandardTaskVO> list){
 
-        list.getList().forEach(a->{
+        list.forEach(a->{
             System.out.println(a.getTaskId() + "----" + a.getOperatorNumber() +"----" + a.getUserXm()+ "----" + a.getTaskResult());
         });
-        specificationService.saveTaskResult(list.getList());
+        specificationService.saveTaskResult(list);
         return Result.success();
     }
 
@@ -291,9 +291,9 @@ public class SpecificationController {
      * @return 检查情况
      */
     @GetMapping("searchUseForBmEq")
-    public Result searchUseForBmEq(){
-        List<BmTaskEqVO> bmTaskEqVOS = specificationService.searchBmTaskEqsByDay();
-        bmTaskEqVOS.forEach(System.out::println);
+    public Result searchUseForBmEq(@RequestParam(value = "pageNum" ,required = false,defaultValue="1") int pageNum,
+                                   @RequestParam(value = "pageSize",required = false,defaultValue="10") int pageSize){
+        PageInfo<BmTaskEqVO> bmTaskEqVOS = specificationService.searchBmTaskEqsByDay(pageNum,pageSize);
         return Result.success(bmTaskEqVOS);
 
     }

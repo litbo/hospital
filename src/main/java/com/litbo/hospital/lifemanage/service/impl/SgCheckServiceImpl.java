@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.lifemanage.bean.SgCheck;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckListVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
+import com.litbo.hospital.lifemanage.check.mapper.PlanMapper;
 import com.litbo.hospital.lifemanage.dao.AddMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.enums.StateEnum;
@@ -34,6 +35,8 @@ public class SgCheckServiceImpl implements SgCheckService {
     private EmpDao empDao;
 
     @Autowired
+    private PlanMapper planMapper;
+    @Autowired
     private AddMapper addMapper;
 
     /**
@@ -60,6 +63,7 @@ public class SgCheckServiceImpl implements SgCheckService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public void updateSgCheckByIds(List<String> ids, String userId, String check) {
+
         //通过人员id获取用户姓名
 //        System.out.println("改改");
 //        System.out.println("改改");
@@ -72,7 +76,13 @@ public class SgCheckServiceImpl implements SgCheckService {
             sgCheck.setChecks(StateEnum.getMessageByCode(Integer.parseInt(check)));
 //            System.out.println("改改");
             sgCheckMapper.updateByPrimaryKeySelective(sgCheck);
+            String plan_id = planMapper.findPlanId(id);//通过check表的id查找planId
+            String plan_check = "已审核";
+            System.out.println("审核"+plan_id);
+            planMapper.updataPlanCheck(plan_check,plan_id);
         }
+
+
     }
 
     /**
@@ -105,6 +115,8 @@ public class SgCheckServiceImpl implements SgCheckService {
             String planId = UUID.randomUUID().toString();
             sgCheck.setId(planId);
             addMapper.addOther(sgCheck);
+
+
 //            sgCheck.setEqId(sgCheck.getChecks());
         }catch (Exception e){
             e.printStackTrace();

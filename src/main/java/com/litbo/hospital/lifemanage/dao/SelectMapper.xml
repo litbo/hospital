@@ -101,4 +101,10 @@
     <delete id="delPd" parameterType="String">
         DELETE  from sg_pd where pd_jhid=#{ids}
     </delete>
+    <delete id="delPdzt" parameterType="String">
+        DELETE  from sg_pdzt where pd_jhid=#{ids}
+    </delete>
+    <delete id="delCheck" parameterType="String">
+        DELETE  from sg_check where plan_id=#{ids}
+    </delete>
 </mapper>

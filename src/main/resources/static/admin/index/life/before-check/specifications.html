@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">适用设备</label>
+                <label class="layui-form-label">适用设备<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <select name="applicableEquipment" lay-verify="required">
                         <option value="同厂家同型号">同厂家同型号</option>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">审核人</label>
+                <label class="layui-form-label">审核人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="userXm" placeholder="请选择" autocomplete="off" disabled lay-verify="required" class="layui-input col-sm-10">
                     <button class="layui-btn col-sm-2" style="margin: 0" id="selectShr">选择</button>
@@ -68,20 +68,20 @@
         </div>
         <div class="col-xs-12 col-sm-6">
             <div class="layui-form-item">
-                <label class="layui-form-label">周期(天)</label>
+                <label class="layui-form-label">周期(天)<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" min="1" name="cycle" lay-verify="number|required" id="cycle" placeholder="" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">制订人</label>
+                <label class="layui-form-label">制订人<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" id="designerName" placeholder="" autocomplete="off" class="layui-input">
                     <input type="hidden" name="designerNumber" id="designerNumber" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">制订时间</label>
+                <label class="layui-form-label">制订时间<span class="sign">*</span></label>
                 <div class="layui-input-block">
                     <input type="text" name="date" id="date" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                 </div>

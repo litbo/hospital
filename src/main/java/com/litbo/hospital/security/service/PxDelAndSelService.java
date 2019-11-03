@@ -24,5 +24,4 @@ public interface PxDelAndSelService {
 
     PageInfo findAllRy(int pageNum,int pageSize,String id);
 
-    List<RyIdVo> findUserId();
 }

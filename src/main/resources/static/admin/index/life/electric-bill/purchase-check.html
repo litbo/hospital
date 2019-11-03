@@ -66,6 +66,7 @@
                         , {field: 'date', title: '审核日期', minWidth: 200, sort: true}
                         , {field: 'userId', title: '审核人', minWidth: 150}
                         , {field: 'checks', title: '是否存在', minWidth: 150}
+
                     ]]
                     , url: "/lifeManage/selectSgCheck"
                     , method: "POST"
@@ -136,7 +137,7 @@
             reSet: {
                 url: "/lifeManage/findListByEqName",
                 type: "reload",
-                data: ["eqName", "planDate", "userId"]
+                data: ["eqName", "planDate", "userId","id"]
             },
             // form: {
             //     val: {

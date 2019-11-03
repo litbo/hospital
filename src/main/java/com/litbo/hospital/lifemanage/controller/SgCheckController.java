@@ -1,10 +1,12 @@
 package com.litbo.hospital.lifemanage.controller;
 
+import com.litbo.hospital.lifemanage.bean.ListNum;
 import com.litbo.hospital.lifemanage.bean.SelectVO;
 import com.litbo.hospital.lifemanage.bean.SgCheck;
 import com.litbo.hospital.lifemanage.bean.SgPdZt;
 import com.litbo.hospital.lifemanage.bean.vo.ListIdsVO;
 import com.litbo.hospital.lifemanage.bean.vo.SgCheckVO;
+import com.litbo.hospital.lifemanage.check.mapper.PlanMapper;
 import com.litbo.hospital.lifemanage.dao.SelectMapper;
 import com.litbo.hospital.lifemanage.dao.SgCheckMapper;
 import com.litbo.hospital.lifemanage.service.SgCheckService;
@@ -33,6 +35,8 @@ public class SgCheckController {
     @Autowired
     EqService es;
 
+    @Autowired
+    PlanMapper planMapper;
     @Autowired
     SelectMapper selectMapper;
     @Autowired
@@ -145,14 +149,37 @@ public class SgCheckController {
 
 //            sgPdService.insetStatus(pdJhid,bmId);
             try{
-                String eqName = selectMapper.listBmName(eqInfo.getEqId());
-                SgPdZt sgPdZt = new SgPdZt();
-                sgPdZt.setPdJhid(eqInfo.getPlanId());
-                sgPdZt.setBmName(eqName);
-                sgPdZt.setEqSbbh(eqInfo.getEqZcbh());
-                sgPdZt.setEqName(eqInfo.getEqName());
-                sgPdZt.setPdZt("盘亏");
-                selectMapper.insertZt(sgPdZt);
+                System.out.println(planMapper.fileStatus(eqInfo.getPlanId()));
+                System.out.println("aaaaaaaaaaaa");
+                System.out.println("aaaaaaaaaaaa");
+                System.out.println("aaaaaaaaaaaa");
+                if (planMapper.fileStatus(eqInfo.getPlanId()).equals("已上传")){
+                    String eqName = selectMapper.listBmName(eqInfo.getEqId());
+                    SgPdZt sgPdZt = new SgPdZt();
+                    sgPdZt.setPdJhid(eqInfo.getPlanId());
+                    sgPdZt.setBmName(eqName);
+                    sgPdZt.setEqSbbh(eqInfo.getEqZcbh());
+                    sgPdZt.setEqName(eqInfo.getEqName());
+                    sgPdZt.setPdZt("盘亏");
+                    selectMapper.insertZt(sgPdZt);
+                }
+
+                //查询科室的设备列表
+                List<String> eqList = planMapper.getEqIdByBmId(eqInfo.getEqBmid());
+                int plan_sum = eqList.size();
+                String id = eqInfo.getPlanId();
+                planMapper.updatetPlanSum(plan_sum,id); //改变plansum的数字
+
+                //下面是更新数据状态
+                ListNum listNum = selectMapper.getListNum(eqInfo.getPlanId());
+//                if (listNum.getPanYingNum()>0||listNum.getYiPanNum()>0){
+                    String fileStatus = "已上传";
+                    planMapper.updataOtherNum(listNum.getYiPanNum(),listNum.getPanYingNum(),listNum.getPanKuiNum(),fileStatus,eqInfo.getPlanId());
+                    System.out.println("已上传"+listNum.getYiPanNum()+listNum.getPanYingNum()+listNum.getPanKuiNum());
+
+//                }
+
+
             }catch (Exception e){
                 e.printStackTrace();
             }
