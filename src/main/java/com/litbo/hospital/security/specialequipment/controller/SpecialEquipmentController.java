@@ -5,13 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.security.specialequipment.bean.SpecialEquipment;
 import com.litbo.hospital.security.specialequipment.bean.vo.AgreeApplys;
-import com.litbo.hospital.security.specialequipment.bean.vo.DeleteSpeqsVo;
 import com.litbo.hospital.security.specialequipment.bean.vo.SpecialEquipmentEmployeeVo;
 import com.litbo.hospital.security.specialequipment.bean.vo.UserVo;
 import com.litbo.hospital.security.specialequipment.service.SpecialEquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
@@ -19,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.net.URLDecoder;
+
 
 
 @RestController

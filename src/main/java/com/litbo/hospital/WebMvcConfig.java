@@ -17,6 +17,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("classpath:/globel/")
+                .addResourceLocations("classpath:/jasperreport/")
                 .addResourceLocations("classpath:/phantomjs/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/zdhtml/")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/emp/")
