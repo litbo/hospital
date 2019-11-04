@@ -73,10 +73,10 @@ public class KhServiceImpl implements KhService{
             ListJhVos jhVos = new ListJhVos();
             System.out.println(os.getId());
             numVos = khDao.getNum(os.getId());
-            System.out.println("合格人数："+numVos.getHgNum());
-            System.out.println("未到人数"+numVos.getWdNum());
-            System.out.println("实到人数"+numVos.getSdNum());
-            System.out.println("应到人数"+numVos.getYdNum());
+//            System.out.println("合格人数："+numVos.getHgNum());
+//            System.out.println("未到人数"+numVos.getWdNum());
+//            System.out.println("实到人数"+numVos.getSdNum());
+//            System.out.println("应到人数"+numVos.getYdNum());
             jhVos.setId(os.getId());
             jhVos.setEqName(os.getEqName());
             jhVos.setPxnrlb(os.getPxnrlb());

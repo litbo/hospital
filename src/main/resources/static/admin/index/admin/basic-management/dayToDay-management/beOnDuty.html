@@ -56,7 +56,7 @@
 </script>
 
 <script>
-    var aa=$.getUrlParam("jhId");
+    //var aa=$.getUrlParam("jhId");
     renderMod.addTable = {
         table: [
             {
@@ -72,7 +72,7 @@
                     , {field: 'pbJsDate', title: '值班结束日期', minWidth: 150}
                     , {fixed: 'right', width: 180, align: 'center', toolbar: "#bar"}
                 ]],
-                where:{id:aa},
+                //where:{id:aa},
                 url: "/pb/getPbPlan"
                 , request: {
                     pageName: 'pageNum',

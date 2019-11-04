@@ -1,9 +1,7 @@
 package com.litbo.hospital.supervise.dao;
 
-import com.litbo.hospital.supervise.bean.KaoqinVO;
 import com.litbo.hospital.supervise.bean.PbJhVO;
-import com.litbo.hospital.supervise.vo.RyVos;
-import com.litbo.hospital.supervise.vo.getPbPlanVos;
+import com.litbo.hospital.supervise.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,4 +20,19 @@ public interface PbMapper {
 
     List<RyVos> getBmpeople(String bmId);
 
+    void BcKqRy(KqRyVos kq);
+
+    void updatePbCheck(@Param("id")String id);
+
+    void addPbPlanRy(pbJhRyVo ryVo);
+
+    List<UserIdVo> getUidByKqYd(String id);
+
+    List<UserIdVo> getUidByKqWd(String id);
+
+    void updateRyZtYd(@Param("uid") String uid,@Param("jid") String jid);
+
+    void updateRyZtWd(@Param("uid")String uid, @Param("jid")String jid);
+
+    void insertGhRy(pbJhRyVo JhRyVo);
 }

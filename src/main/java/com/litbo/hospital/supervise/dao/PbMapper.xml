@@ -6,19 +6,58 @@
         <id column="user_id" property="userId"></id>
         <result property="userName" column="user_xm"></result>
     </resultMap>
+
     <insert id="addPbPlan" parameterType="com.litbo.hospital.supervise.bean.PbJhVO">
-            insert into pb_jh (pb_jhid,bm_id,user_id,pb_date,pbJs_date,pb_check) values(
-        #{pbJhid},#{bmId},#{userId},#{pbDate},#{pbJsDate},#{pbCheck}
+            insert into pb_jh (pb_jhid,bm_id,pb_date,pbJs_date,pb_check) values(
+        #{pbJhid},#{bmId},#{pbDate},#{pbJsDate},#{pbCheck}
         )
     </insert>
+
+    <insert id="addPbPlanRy" parameterType="com.litbo.hospital.supervise.vo.pbJhRyVo">
+            insert into pb_ydry (u_id,user_id,user_zt,pb_jhid) values(
+        #{uId},#{userId},#{userZt},#{pbJhid}
+        )
+    </insert>
+
+    <insert id="BcKqRy" parameterType="com.litbo.hospital.supervise.vo.KqRyVos">
+        INSERT INTO pb_zbry(id,user_id,user_name,is_kq,pb_jhid)
+        VALUES (#{id},#{userId},#{userName},#{isKq},#{pbJhid})
+    </insert>
+
+    <update id="updatePbCheck" parameterType="String">
+        UPDATE dbo.pb_jh SET pb_check='已审核' WHERE pb_jhid=#{id}
+    </update>
+
+    <update id="updateRyZtYd" parameterType="String">
+        UPDATE dbo.pb_ydry SET user_zt='已到' WHERE pb_jhid=#{jid} AND user_id=#{uid}
+    </update>
+
+    <update id="updateRyZtWd" parameterType="String">
+        UPDATE dbo.pb_ydry SET user_zt='未到' WHERE pb_jhid=#{jid} AND user_id=#{uid}
+    </update>
+
+
+    <select id="getUidByKqYd" resultType="com.litbo.hospital.supervise.vo.UserIdVo">
+        SELECT user_id FROM pb_zbry WHERE pb_jhid = #{id} AND is_kq='1'
+    </select>
+
+    <select id="getUidByKqWd" resultType="com.litbo.hospital.supervise.vo.UserIdVo">
+        SELECT user_id FROM pb_zbry WHERE pb_jhid = #{id} AND is_kq='0'
+    </select>
 
     <select id="getPbPlanVos" resultType="com.litbo.hospital.supervise.vo.getPbPlanVos">
         SELECT DISTINCT j.pb_jhid,j.pb_check,j.pb_date,j.pbJs_date,b.bm_name FROM pb_jh AS j
         INNER JOIN s_bm AS b ON j.bm_id=b.bm_id
     </select>
 
-    <select id="getPbPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyVos">
-        SELECT e.user_id,e.user_xm AS userName FROM pb_jh AS p
+    <insert id="insertGhRy" parameterType="com.litbo.hospital.supervise.vo.pbJhRyVo">
+         INSERT INTO pb_ydry (u_id,user_id,user_zt,pb_jhid) VALUES (
+        #{uId},#{userId},#{userZt},#{pbJhid}
+        )
+    </insert>
+
+    <select id="getPbPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyZtVos">
+        SELECT p.user_zt,e.user_id,e.user_xm AS userName FROM pb_ydry AS p
         INNER JOIN s_emp AS e ON p.user_id=e.user_id
         WHERE pb_jhid=#{id}
     </select>
@@ -26,7 +65,7 @@
     <select id="ghPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyVos">
         SELECT user_id,user_xm AS userName FROM s_emp
         WHERE user_id NOT IN(
-            SELECT user_id FROM pb_jh WHERE pb_jhid=#{sid}
+            SELECT user_id FROM pb_ydry WHERE pb_jhid=#{sid}
         )
     </select>
 

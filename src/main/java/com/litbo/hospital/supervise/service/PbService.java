@@ -4,9 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.result.Result;
 import com.litbo.hospital.supervise.bean.KaoqinVO;
 import com.litbo.hospital.supervise.bean.PbJhVO;
-import com.litbo.hospital.supervise.vo.RyVos;
-import com.litbo.hospital.supervise.vo.TjPbRyVos;
-import com.litbo.hospital.supervise.vo.getPbPlanVos;
+import com.litbo.hospital.supervise.vo.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,5 +25,7 @@ public interface PbService {
 
     PageInfo<RyVos> getBmpeople(String bmId,int pageNum,int pageSize);
 
-    void BcKqRy(TjPbRyVos[] pbRyVos,String id);
+    void BcKqRy(List<KqRyVos> pbRyVos, String id);
+
+    void insertGhRy(@Param("uid") String uid,@Param("sid") String sid,@Param("gid") String gid);
 }

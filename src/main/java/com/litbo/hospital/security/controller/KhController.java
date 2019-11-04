@@ -28,15 +28,8 @@ public class KhController {
     @RequestMapping("/findInfo")
     public Result findInfo(@RequestParam(value = "pageNum",required = false, defaultValue = "1") int pageNum,
                            @RequestParam(value = "pageSize",required = false, defaultValue = "15") int pageSize){
-//        List<Object> objects = new ArrayList<>();
-//        NumVos list = khService.getNum();
-//        if(list!=null){
-//            objects.add(list);
-//        }
         List<ListJhVos> list = khService.findInfo(pageNum,pageSize);
-        for(ListJhVos j:list){
-            System.out.println(j);
-        }
+
         return Result.success(new PageInfo(list));
     }
 

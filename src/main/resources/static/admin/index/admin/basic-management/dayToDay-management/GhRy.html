@@ -57,11 +57,12 @@
 </script>
 
 <script>
-   // var aa=$.getUrlParam("pbJhid");
-   layui.use('table', function() {
+    var bb=$.getUrlParam("userId");
+    // console.log($.getUrlParam("userId"));
+    console.log(bb);
+    layui.use('table', function() {
        var table = layui.table;
        var $ = layui.$;
-
         renderMod = {
             addTable: {
                 table: {
@@ -75,6 +76,7 @@
                         , {fixed: 'right', width: 180, align: 'center', toolbar: "#bar"}
                     ]]
                     , url: "/pb/ghPeople"
+                    ,where:{id:bb}
                     , method: "POST"
                     , page: true
                     , request: {
@@ -126,7 +128,7 @@
                $.ajax({
                    url : "/pb/tjPbRy",
                    type : 'POST',
-                   data : {"userId": data.userId},
+                   data : {"userId": data.userId,"userName":data.userName},
                    success : function(data){
                        if(data.code == 1 ){
                            layer.msg("请求发送成功！",{icon: 6,time:2000}, function(){

@@ -79,6 +79,7 @@
                 cols: [[ //表头
                    {type: "checkbox"}
                    // , {field: 'bmName', title: '科室', sort: true}
+                   ,{field: 'userZt', title: '状态'}
                    ,{field: 'userId', title: '人员id'}
                     , {field: 'userName', title: '人员姓名'}
                     , {fixed: 'right', width: 280, align: 'center', toolbar: "#bar"}
@@ -116,7 +117,7 @@
                                 area: ['90%', '90%'],
                                 type: 2,
                                 content: "./GhRy.html",
-                                dataUrl: ["id"]
+                                dataUrl: ["userId"]
                             }
                         ]
                     })
@@ -177,9 +178,10 @@
                     url: '/pb/BcKqRy',
                     type:"POST",
                     async: false,/*同步传输*/
-                    data:{"pbRyVos":JSON.stringify(pbRyVos)},
+                    //data:{"pbRyVos":JSON.stringify(pbRyVos)},
+                    data:JSON.stringify(pbRyVos),
                     dataType:'JSON',
-                   /* contentType:'application/json' ,*/
+                    contentType:'application/json' ,
                     success: function(res){
                         if(res.code == 1 ){
                             layer.msg("请求发送成功！",{icon: 6,time:2000}, function(){
