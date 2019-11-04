@@ -19,7 +19,13 @@ public class PbServiceImp implements PbService {
     private PbMapper pbMapper;
 
     @Override
-    public List<RyVos> getPbPeople(int pageNum,int pageSize,String id) {
+    public List<RyZtVos> getZbPeople(int pageNum, int pageSize, String id) {
+        PageHelper.startPage(pageNum,pageSize);
+        return pbMapper.getZbPeople(id);
+    }
+
+    @Override
+    public List<RyZtVos> getPbPeople(int pageNum,int pageSize,String id) {
         PageHelper.startPage(pageNum,pageSize);
         return pbMapper.getPbPeople(id);
     }
@@ -28,6 +34,17 @@ public class PbServiceImp implements PbService {
     public PageInfo<RyVos> getBmpeople(String bmId,int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(pbMapper.getBmpeople(bmId));
+    }
+
+    @Override
+    public void insertZbRy(@Param("uid") String uid, @Param("sid") String sid,@Param("uName")  String uName) {
+        KqRyVos kqRyVos = new KqRyVos();
+        kqRyVos.setIsKq("2");
+        kqRyVos.setUserName(uName);
+        kqRyVos.setPbJhid(sid);
+        kqRyVos.setUserId(uid);
+        kqRyVos.setId(UUID.randomUUID().toString());
+        pbMapper.BcKqRy(kqRyVos);
     }
 
     @Override

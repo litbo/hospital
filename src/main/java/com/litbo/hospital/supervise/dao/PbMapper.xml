@@ -59,6 +59,14 @@
     <select id="getPbPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyZtVos">
         SELECT p.user_zt,e.user_id,e.user_xm AS userName FROM pb_ydry AS p
         INNER JOIN s_emp AS e ON p.user_id=e.user_id
+        WHERE pb_jhid=#{id} AND p.user_id NOT IN (
+            SELECT user_id FROM pb_zbry WHERE pb_jhid=#{id}
+        )
+    </select>
+
+    <select id="getZbPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyZtVos">
+        SELECT p.user_zt,e.user_id,e.user_xm AS userName FROM pb_ydry AS p
+        INNER JOIN s_emp AS e ON p.user_id=e.user_id
         WHERE pb_jhid=#{id}
     </select>
 

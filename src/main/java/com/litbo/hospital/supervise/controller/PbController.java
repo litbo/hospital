@@ -7,6 +7,7 @@ import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.service.PbService;
 import com.litbo.hospital.supervise.vo.KqRyVos;
 import com.litbo.hospital.supervise.vo.RyVos;
+import com.litbo.hospital.supervise.vo.RyZtVos;
 import com.litbo.hospital.supervise.vo.getPbPlanVos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,11 +58,25 @@ public class PbController {
     {
         session.setAttribute("pb_id",id);
         //System.out.println("点击考勤是的id"+session.getAttribute("pb_id").toString());
-        List<RyVos> ryVos = pbService.getPbPeople(pageNum,pageSize,id);
+        List<RyZtVos> ryVos = pbService.getPbPeople(pageNum,pageSize,id);
         if(ryVos!=null){
             return Result.success(new PageInfo(ryVos));
         }else{
             return Result.error("没有值班人员,请添加!");
+        }
+    }
+
+    @RequestMapping("/getZbPeople")
+    public Result getZbPeople(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                              @RequestParam("pbJhid") String id)
+    {
+
+        List<RyZtVos> ryVos = pbService.getZbPeople(pageNum,pageSize,id);
+        if(ryVos!=null){
+            return Result.success(new PageInfo(ryVos));
+        }else{
+            return Result.error("未考勤!");
         }
     }
 
@@ -95,13 +110,15 @@ public class PbController {
 
 
     @RequestMapping("/tjPbRy")
-    public Result tjPbRy(@RequestParam("userId") String uid,HttpSession session){
+    public Result tjPbRy(@RequestParam("userId") String uid,@RequestParam("userName") String uName,HttpSession session){
         //uid表示准备更换的人id,gid代表未到人员的id,sid表示未到人员的所在计划id
 
         String gid=session.getAttribute("user_id").toString();
         String sid = session.getAttribute("pb_id").toString();
 
-        pbService.insertGhRy(uid,sid,gid);
+        pbService.insertGhRy(uid,sid,gid);//将更换的人员插入到该计划的应到人员表中
+
+        pbService.insertZbRy(uid,sid,uName);//将更换的人员插入到值班人员表中
 
        // System.out.println("点击更换弹出页面确定按钮时的人员id"+session.getAttribute("user_id").toString());
         return Result.success();

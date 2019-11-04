@@ -19,7 +19,7 @@ public interface PbService {
 
     List<getPbPlanVos> getPbPlan(int pageNum,int pageSize);
 
-    List<RyVos> getPbPeople(int pageNum,int pageSize,String id);
+    List<RyZtVos> getPbPeople(int pageNum,int pageSize,String id);
 
     List<RyVos> ghPeople(int pageNum,int pageSize,String sid);
 
@@ -28,4 +28,8 @@ public interface PbService {
     void BcKqRy(List<KqRyVos> pbRyVos, String id);
 
     void insertGhRy(@Param("uid") String uid,@Param("sid") String sid,@Param("gid") String gid);
+
+    void insertZbRy(@Param("uid") String uid, @Param("sid") String sid,@Param("uName")  String uName);
+
+    List<RyZtVos> getZbPeople(int pageNum, int pageSize, String id);
 }

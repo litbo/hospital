@@ -14,7 +14,7 @@ public interface PbMapper {
 
     List<getPbPlanVos> getPbPlanVos();
 
-    List<RyVos> getPbPeople(@Param("id") String id);
+    List<RyZtVos> getPbPeople(@Param("id") String id);
 
     List<RyVos> ghPeople(@Param("sid")String sid);
 
@@ -35,4 +35,6 @@ public interface PbMapper {
     void updateRyZtWd(@Param("uid")String uid, @Param("jid")String jid);
 
     void insertGhRy(pbJhRyVo JhRyVo);
+
+    List<RyZtVos> getZbPeople(@Param("id") String id);
 }

@@ -53,6 +53,7 @@
 </script>
 <script type="text/html" id="bar">
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="kq">考勤</a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="ck">查看</a>
 </script>
 
 <script>
@@ -97,6 +98,15 @@
                                 area: ['90%', '90%'],
                                 type: 2,
                                 content: "./XsRy.html",
+                                dataUrl: ["pbJhid"]
+                            },
+                            {
+                                filter:"table1",
+                                event: "ck",
+                                title: "查看",
+                                area: ['90%', '90%'],
+                                type: 2,
+                                content: "./CkRy.html",
                                 dataUrl: ["pbJhid"]
                             }
                         ]
