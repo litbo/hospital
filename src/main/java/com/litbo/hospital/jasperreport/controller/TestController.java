@@ -3,16 +3,19 @@ package com.litbo.hospital.jasperreport.controller;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.litbo.hospital.jasperreport.domain.Product;
+import com.litbo.hospital.beneficial.controller.SbcwController;
+import com.litbo.hospital.result.Result;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.type.OrientationEnum;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -21,29 +24,30 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class TestController {
-
-	public List<Product> getProductList() {
-		List<Product> list = new ArrayList<>();
-		for (int i = 1; i <= 20; i++) {
-			list.add(new Product(String.valueOf(i), "名称" + i));
+    @Autowired
+    SbcwController sbcwcontroller;
+	public List getProductList() {
+		/*List list = new ArrayList<>();
+		for (int i = 1; i <= 200; i++) {
+			list.add(new Product(String.valueOf(i),String.valueOf(i)));
 		}
-		return list;
+		return list;*/
+		return null;
 	}
 
 	@RequestMapping(path = "/htmlPreview", method = RequestMethod.GET)
 	public void reportHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		JRDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(getProductList());
 		Map params = new HashMap();
-		params.put("Parameter1", "hello 你好");
+//		params.put("Parameter1", "hello 你好");
 		// 编译jrxml文件，生成jasper文件
-		URL url = this.getClass().getClassLoader().getResource("jasperreport/test.jrxml");
+		URL url = this.getClass().getClassLoader().getResource("jasperreport/tongji.jrxml");
 		JasperCompileManager.compileReportToFile(url.getPath());
 		File jasperFile = ResourceUtils.getFile("classpath:jasperreport/test.jasper");
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperFile);
@@ -54,14 +58,21 @@ public class TestController {
 	}
 
 	@RequestMapping(path = "/pdfExport", method = RequestMethod.GET)
-	public String pdfExport(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		JRDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(getProductList());
+	public String pdfExport(HttpServletRequest request, HttpServletResponse response,
+                            @RequestParam(required = false) String qssj,
+                            @RequestParam(required = false) String select,
+                            @RequestParam(required = false) String eqSName
+                            ) throws Exception {
+
+        Result result = sbcwcontroller.listZjcb(1, 100000000, "2019-10-01~2019-10-20", select, eqSName);
+
+        JRDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource((List)result.getData());
 		Map params = new HashMap();
-		params.put("Parameter1", "hello 你好");
+//		params.put("Parameter1", "hello 你好");
 		// 编译jrxml文件，生成jasper文件
-        String path = this.getClass().getClassLoader().getResource("jasperreport/test.jrxml").getPath();
+        String path = this.getClass().getClassLoader().getResource("jasperreport/tongji.jrxml").getPath();
         JasperCompileManager.compileReportToFile(path);
-		File jasperFile = ResourceUtils.getFile("classpath:jasperreport/test.jasper");
+		File jasperFile = ResourceUtils.getFile("classpath:jasperreport/tongji.jasper");
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperFile);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, jrBeanCollectionDataSource);
 		JRPdfExporter pdf = new JRPdfExporter();

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.3.1.final using JasperReports Library version 6.8.1-3d4b87119c827be13776e451fb3738062f84a87d  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tongji" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="66c75968-25fa-4d39-b155-5be65f7452a6">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <style name="myStyle" isDefault="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="bmName" class="java.lang.String"/>
+    <field name="eqNum" class="java.lang.String"/>
+    <field name="eqName" class="java.lang.String"/>
+    <field name="eqGgxh" class="java.lang.String"/>
+    <field name="ryjf" class="java.math.BigDecimal"/>
+    <field name="wsclf" class="java.math.BigDecimal"/>
+    <field name="ypf" class="java.math.BigDecimal"/>
+    <field name="gdzczjf" class="java.math.BigDecimal"/>
+    <field name="ylsbzjf" class="java.math.BigDecimal"/>
+    <field name="wxzctxf" class="java.math.BigDecimal"/>
+    <field name="ylfxf" class="java.math.BigDecimal"/>
+    <field name="qt" class="java.math.BigDecimal"/>
+    <field name="zj" class="java.math.BigDecimal"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <columnHeader>
+        <band height="61" splitType="Stretch">
+            <textField>
+                <reportElement x="10" y="0" width="180" height="20" uuid="587d8be2-c3fb-4333-b516-0a0a7e31f108">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["填报单位：烟台毓璜顶医院 "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="610" y="0" width="180" height="20" uuid="5cffdca6-796c-4535-811a-5d3114b124b4">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["填报日期：   年   月  "]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="320" y="20" width="480" height="20" backcolor="#FFFFFF" uuid="70501850-6352-4d6d-bf5f-65a4741c0eac"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[分析项]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="20" width="320" height="20" backcolor="#FFFFFF" uuid="e653447a-f83f-48ba-9566-079f99dcec4b">
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[设备项]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="190" y="0" width="180" height="20" uuid="737b75c8-2348-46c9-9549-5b3ec67aa8ea">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["填报科室：医学工程处 "]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="320" y="40" width="100" height="20" backcolor="#FFFFFF" uuid="2af8a678-799f-4f24-bca1-65955f064147">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[门诊收入]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="420" y="40" width="100" height="20" backcolor="#FFFFFF" uuid="9aaf350e-d72c-4667-a78a-7ae40623051d">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[科教项目收入]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="600" y="40" width="100" height="20" backcolor="#FFFFFF" uuid="48b3fe03-5e04-486e-a6ec-80dc41f91ef7">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[其他收入]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="70" y="40" width="80" height="20" backcolor="#FFFFFF" uuid="1ccc7e63-3318-42e5-863c-36b1a9c38ef7">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[资产编号]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="700" y="40" width="100" height="20" backcolor="#FFFFFF" uuid="9e4f882b-bf5b-4014-90db-4e64c579b2ce">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[合计]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="40" width="70" height="20" backcolor="#FFFFFF" uuid="0e62711a-4c53-4343-9600-cce5409da28d">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[所属科室]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="150" y="40" width="90" height="20" backcolor="#FFFFFF" uuid="8549ffb7-8496-48cb-8d8f-cde80e64e72b">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[设备名称]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="240" y="40" width="80" height="20" backcolor="#FFFFFF" uuid="c6210d43-72fa-4611-8e16-786194a0a5e1">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[规格型号]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="520" y="41" width="80" height="20" backcolor="#FFFFFF" uuid="e4acbe97-1101-4a37-bc4b-0a16aeea778b">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[住院收入]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20" splitType="Stretch">
+            <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <textField>
+                <reportElement x="0" y="0" width="70" height="20" uuid="aa1f5830-18ee-4e24-99d6-afc8544e9935">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="61453adc-a515-4954-bc49-44fc1e3bb7af"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{bmName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="70" y="0" width="80" height="20" uuid="044b5282-c04a-484b-aa9c-ea6962915e39">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca782c79-9b07-4fea-a287-ea10cbc71409"/>
+                </reportElement>
+                <box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{eqNum}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="0" width="90" height="20" uuid="aa4821ad-ea27-445b-bea2-2997a5db14ed">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f87355eb-c5cd-4d35-bf52-738a1f3e1af6"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{eqName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="240" y="0" width="80" height="20" uuid="60c6e914-4bda-4ec0-bb45-9a7e11bcd61a">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f87355eb-c5cd-4d35-bf52-738a1f3e1af6"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{eqGgxh}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="600" y="0" width="100" height="20" uuid="6cd008f3-6b1f-4a48-a0b9-c3a82f6507cb">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f87355eb-c5cd-4d35-bf52-738a1f3e1af6"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{qt}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="700" y="0" width="100" height="20" uuid="845f0f17-9839-4fcb-839e-bf072ae4ed09">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f87355eb-c5cd-4d35-bf52-738a1f3e1af6"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{zj}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="320" y="0" width="100" height="20" uuid="ad7452a1-1475-4f83-bf54-2f42b55f23d7">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f87355eb-c5cd-4d35-bf52-738a1f3e1af6"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+            </textField>
+            <textField>
+                <reportElement x="420" y="0" width="100" height="20" uuid="9f78124b-d23f-4369-a622-9d4923678a02">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f87355eb-c5cd-4d35-bf52-738a1f3e1af6"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+            </textField>
+            <textField>
+                <reportElement x="520" y="0" width="80" height="20" uuid="1ad848b9-5046-43a2-9a7f-5fbccb613033">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f87355eb-c5cd-4d35-bf52-738a1f3e1af6"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="40" splitType="Stretch">
+            <textField>
+                <reportElement x="330" y="21" width="60" height="19" uuid="eec1f280-ce82-4cb3-9b4b-cd04d642c60b"/>
+                <textElement textAlignment="Right">
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["第"+$V{PAGE_NUMBER}+"页/"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="390" y="21" width="50" height="19" uuid="28ac243a-240e-4a8a-8968-1d173c881ff8"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["共"+$V{PAGE_NUMBER}+"页"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="660" y="0" width="140" height="20" uuid="c83eacc6-72d8-4f23-ba77-87e1c701ba44">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["申报人： "]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnFooter>
+</jasperReport>
