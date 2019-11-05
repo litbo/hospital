@@ -37,4 +37,6 @@ public interface PbMapper {
     void insertGhRy(pbJhRyVo JhRyVo);
 
     List<RyZtVos> getZbPeople(@Param("id") String id);
+
+    String getName(String gid);
 }

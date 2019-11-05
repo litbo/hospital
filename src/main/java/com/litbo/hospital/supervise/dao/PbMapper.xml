@@ -64,6 +64,9 @@
         )
     </select>
 
+    <select id="getName" resultType="String" parameterType="String">
+        SELECT user_xm FROM s_emp WHERE user_id=#{gid};
+    </select>
     <select id="getZbPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyZtVos">
         SELECT p.user_zt,e.user_id,e.user_xm AS userName FROM pb_ydry AS p
         INNER JOIN s_emp AS e ON p.user_id=e.user_id

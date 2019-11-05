@@ -50,7 +50,8 @@ public class PbServiceImp implements PbService {
     @Override
     public void insertGhRy(@Param("uid") String uid, @Param("sid") String sid, @Param("gid") String gid) {
         pbJhRyVo JhRyVo = new pbJhRyVo();
-        String zt = "代替"+gid;
+        String sname = pbMapper.getName(gid);//未到人员的姓名
+        String zt = "代替:"+gid+"-"+sname;
         JhRyVo.setUId(UUID.randomUUID().toString());
         JhRyVo.setUserZt(zt);
         JhRyVo.setPbJhid(sid);
