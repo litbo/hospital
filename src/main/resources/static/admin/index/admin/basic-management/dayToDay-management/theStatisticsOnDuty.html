@@ -34,14 +34,14 @@
         addTable: {
             table: {
                 cols: [[ //表头
-                    {type:"checkbox"}
-                    , {field: 'bianHao', title: '编号', minWidth: 200}
-                    , {field: 'name', title: '名字', minWidth: 200}
-                    , {field: 'name', title: '排班次数', minWidth: 200, sort: true}
-                    , {field: 'name', title: '值班次数', minWidth: 200, sort: true}
-                    , {field: 'name', title: '加班次数', minWidth: 200, sort: true}
+                   // {type:"checkbox"}
+                      {field: 'userId', title: '编号', minWidth: 200}
+                    , {field: 'userName', title: '名字', minWidth: 200}
+                    , {field: 'pbcs', title: '排班次数', minWidth: 200, sort: true}
+                    , {field: 'zbcs', title: '值班次数', minWidth: 200, sort: true}
+                   // , {field: 'name', title: '加班次数', minWidth: 200, sort: true}
                 ]]
-                /*   , url: "/supervise/gwgl/listGws"*/
+                , url: "/pb/getInfo"
                 ,id:"table"
                 , request: {
                     pageName: 'pageNum',
