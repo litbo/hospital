@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.litbo.hospital.supervise.bean.PbJhVO;
 import com.litbo.hospital.supervise.dao.PbMapper;
+import com.litbo.hospital.supervise.dao.TjDao;
 import com.litbo.hospital.supervise.service.PbService;
 import com.litbo.hospital.supervise.vo.*;
 import org.apache.ibatis.annotations.Param;
@@ -17,6 +18,7 @@ public class PbServiceImp implements PbService {
 
     @Autowired(required = false)
     private PbMapper pbMapper;
+
 
     @Override
     public List<RyZtVos> getZbPeople(int pageNum, int pageSize, String id) {
@@ -61,7 +63,6 @@ public class PbServiceImp implements PbService {
 
     @Override
     public void BcKqRy(List<KqRyVos> pbRyVos,String jid) {//id代表排班计划pb_jhid
-
        // System.out.println(jid);
 
        for(KqRyVos k:pbRyVos){
@@ -74,7 +75,7 @@ public class PbServiceImp implements PbService {
            pbMapper.BcKqRy(kq);
        }
 
-       List<UserIdVo> userIdVos = pbMapper.getUidByKqYd(jid);
+       List<UserIdVo> userIdVos = pbMapper.getUidByKqYd(jid);//
        if(userIdVos.size()>0){
            for(UserIdVo u:userIdVos){
                String uid = u.getUserId();

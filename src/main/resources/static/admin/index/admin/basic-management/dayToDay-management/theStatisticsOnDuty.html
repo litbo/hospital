@@ -30,6 +30,7 @@
     </div>
 </script>
 <script>
+    var aa=$.getUrlParam("pbJhid");
     renderMod = {
         addTable: {
             table: {
@@ -42,6 +43,7 @@
                    // , {field: 'name', title: '加班次数', minWidth: 200, sort: true}
                 ]]
                 , url: "/pb/getInfo"
+                ,where:{id:aa}
                 ,id:"table"
                 , request: {
                     pageName: 'pageNum',

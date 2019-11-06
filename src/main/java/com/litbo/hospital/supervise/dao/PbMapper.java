@@ -39,4 +39,6 @@ public interface PbMapper {
     List<RyZtVos> getZbPeople(@Param("id") String id);
 
     String getName(String gid);
+
+    String getBmidByJid(String jid);
 }

@@ -2,11 +2,11 @@ package com.litbo.hospital.supervise.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.litbo.hospital.security.vo.TjRyVo;
 import com.litbo.hospital.supervise.dao.TjDao;
 import com.litbo.hospital.supervise.service.TjService;
 import com.litbo.hospital.supervise.vo.RyVos;
 import com.litbo.hospital.supervise.vo.TjRyVos;
+import com.litbo.hospital.supervise.vo.getPbPlanVos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class TjServiceImpl implements TjService {
     @Override
     public PageInfo getInfo(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<RyVos> Rylist = tjDao.getInfo();
+        List<RyVos> Rylist = tjDao.getInfo();//该计划中所有人员
         List<TjRyVos> tjs = new ArrayList<>();
         if(Rylist.size()>0){
             for(RyVos r:Rylist){
@@ -48,5 +48,11 @@ public class TjServiceImpl implements TjService {
         }else{
             return new PageInfo();
         }
+    }
+
+    @Override
+    public List<getPbPlanVos> getPbPlan(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        return tjDao.getPbPlanVos();
     }
 }

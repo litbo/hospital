@@ -36,6 +36,9 @@
         UPDATE dbo.pb_ydry SET user_zt='未到' WHERE pb_jhid=#{jid} AND user_id=#{uid}
     </update>
 
+    <select id="getBmidByJid" resultType="String" parameterType="String">
+        SELECT bm_id FROM pb_jh WHERE pb_jhid=#{jid};
+    </select>
 
     <select id="getUidByKqYd" resultType="com.litbo.hospital.supervise.vo.UserIdVo">
         SELECT user_id FROM pb_zbry WHERE pb_jhid = #{id} AND is_kq='1'
@@ -67,6 +70,7 @@
     <select id="getName" resultType="String" parameterType="String">
         SELECT user_xm FROM s_emp WHERE user_id=#{gid};
     </select>
+
     <select id="getZbPeople" parameterType="String" resultType="com.litbo.hospital.supervise.vo.RyZtVos">
         SELECT p.user_zt,e.user_id,e.user_xm AS userName FROM pb_ydry AS p
         INNER JOIN s_emp AS e ON p.user_id=e.user_id
