@@ -54,7 +54,6 @@
                 </div>
             </div>
         </div>
-
         <div class="layui-row">
             <div class="col-xs-12">
                 <div class="layui-form-item" pane   style="margin-bottom:-10px;">
@@ -82,7 +81,7 @@
                     type: "POST",
                     // parse:"empList",
                     // tableId:"table",
-                    data: {id: $.getUrlParam("id")},
+                    data: {id: $.getUrlParam("id")}
                 }
             },
             date: [
@@ -112,7 +111,7 @@
                 ,where:{id:aa}
                 , request: {
                     pageName: 'pageNum',
-                    limitName: 'pageSize',
+                    limitName: 'pageSize'
                 }
                 , parseData: function (res) { //res 即为原始返回的数据
                     return {

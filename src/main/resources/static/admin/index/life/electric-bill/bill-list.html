@@ -105,11 +105,13 @@
 
     </div>
 </script>
-<script type="text/html" id="bar">
+<!--<script type="text/html" id="bar">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="eqCard">设备卡</a>
-<!--    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="eqCard">附件信息</a>-->
-</script>
+&lt;!&ndash;    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="eqCard">附件信息</a>&ndash;&gt;
+</script>-->
 <script>
+    layui.use('table', function () {
+        var table = layui.table
     renderMod = {
         addTable: {
             table: [
@@ -119,17 +121,15 @@
                     , cols: [[ //表头
                         {type: "checkbox"},
                         {type: "numbers", title: '序号' }
-                        , {field: 'eqSbbh', title: '设备编号', minWidth: 180}
-                        , {field: 'eqName', title: '设备名称', minWidth: 200}
                         , {field: 'eqYq', title: '院内编码', minWidth: 100}
-                        , {field: 'eqGg', title: '规格', minWidth: 30}
-                        , {field: 'eqXh', title: '型号', minWidth: 30}
+                        , {field: 'eqName', title: '设备名称', minWidth: 200}
+                        , {field: 'eqSbbh', title: '设备编号', width: 200}
+                        , {field: 'eqGg', title: '规格型号', minWidth: 30}
+                        // , {field: 'eqXh', title: '型号', minWidth: 30}
                         , {field: 'eqBmName', title: '所在科室', minWidth: 170}
-                        , {field: 'eqTzlb', title: '台账类别', minWidth: 130}
                         , {field: 'eqQysj', title: '设备启用时间', minWidth: 130}
-                        , {field: 'eqSynx', title: '使用年限', minWidth: 50}
-                        , {field: 'state', title: '是否在用状态', minWidth: 130}
-                        , {fixed:'',minWidth: 180,align:'center',toolbar: "#bar"}
+                        , {field: 'state', title: '状态', width: 80}
+                        // , {fixed:'',minWidth: 180,align:'center',toolbar: "#bar"}
                     ]]
                     , url: "/lifeManage/selectEquipmentAccount"
                     , method: "POST"
@@ -137,7 +137,6 @@
                         pageName: 'pageNum',
                         limitName: 'pageSize'
                     }
-                    , where: {}
                     , parseData: function (res) { //res 即为原始返回的数据
                         return {
                             "code": res.code, //解析接口状态
@@ -147,7 +146,7 @@
                         }
                     }
                     , done: function (obj) {
-                        tableFunc({
+                        /*tableFunc({
                             tools:[
                                 {
                                     event:"qrcode",
@@ -185,7 +184,7 @@
                                     }
                                 }
                             ]
-                        })
+                        })*/
                     }
                 }
             ]
@@ -210,6 +209,23 @@
             }
         }
     }
+
+        table.on('rowDouble(table1)', function(obj){
+            console.log(obj.tr) //得到当前行元素对象
+            console.log(obj.data.eqId) //得到当前行数据
+            var id=obj.data.eqId;
+            layer.open({
+                type: 2,
+                title: '选择',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['100%', '100%'],
+                content: 'child/bill-list-child.html',
+                // dataUrl: [id]
+                // content: 'child/modern-list-child.html'
+            });
+        });
+    });
 </script>
 </body>
 
