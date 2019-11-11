@@ -12,4 +12,6 @@ public interface KaoqinService {
    Result insertKaoqin(KaoqinVO kaoqinVO);
 
    PageInfo<KaoqinVO> listKaoqin(int pageNum, int pageSize);
+
+   void delKaoqin();
 }

@@ -11,4 +11,7 @@
     <select id="listKaoqin" resultType="com.litbo.hospital.supervise.bean.KaoqinVO">
         select * from pb_kaoqin
     </select>
+    <delete id="delKaoqin">
+        delete from pb_kaoqin;
+    </delete>
 </mapper>

@@ -34,6 +34,7 @@ public class KaoqinController {
 
     @PostMapping(value = "/importKaoqin")  //导入考勤excle表
     public Integer importExcel(@RequestParam("file") MultipartFile file) {
+        kaoqinService.delKaoqin();
         Workbook workbook = null;
         InputStream inputStream = null;
         List<Integer> ids = new ArrayList<>();
@@ -126,4 +127,6 @@ public class KaoqinController {
         System.out.println("调用列表");
         return Result.success( kaoqinService.listKaoqin(pageNum,pageSize));
     }
+
+
 }

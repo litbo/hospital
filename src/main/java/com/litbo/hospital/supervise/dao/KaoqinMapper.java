@@ -10,4 +10,6 @@ public interface KaoqinMapper {
     void insertKaoqin(KaoqinVO kaoqinVO) ;
 
     List<KaoqinVO> listKaoqin();
+
+    void delKaoqin();
 }

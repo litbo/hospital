@@ -25,4 +25,9 @@ public class KaoqinServiceImp implements KaoqinService {
 
         return new PageInfo<>(kaoqinMapper.listKaoqin());
     }
+
+    @Override
+    public void delKaoqin() {
+        kaoqinMapper.delKaoqin();
+    }
 }
