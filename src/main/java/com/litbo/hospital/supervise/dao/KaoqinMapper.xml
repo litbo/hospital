@@ -3,8 +3,8 @@
 <mapper namespace="com.litbo.hospital.supervise.dao.KaoqinMapper">
 
     <insert id="insertKaoqin" parameterType="com.litbo.hospital.supervise.bean.KaoqinVO">
-        insert into pb_kaoqin (user_id,user_name,kao_qin)values (
-        #{userId},#{userName},#{kaoQin}
+        insert into pb_kaoqin (user_id,user_name,kao_qin,zheng_chang,que_qin)values (
+        #{userId},#{userName},#{kaoQin},#{zhengChang},#{queQin}
         )
     </insert>
 
