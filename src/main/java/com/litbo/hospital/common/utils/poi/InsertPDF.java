@@ -28,13 +28,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * <ul>
- * <li>功能说明：</li>
- * <li>作者：tal on 2018/4/4 0004 13:44 </li>
- * <li>邮箱：houxiangxiang@cibfintech.com</li>
- * </ul>
- */
 
 public class InsertPDF {
     private static final String TEMPLATE_PATH="C:\\Users\\97304\\Desktop\\template.pdf";
